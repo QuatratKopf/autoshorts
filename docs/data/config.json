@@ -57,7 +57,7 @@
    "voice_rate": "-4%",
    "voice_pitch": "-4Hz",
    "voice_instructions": "Leise, langsam und unheimlich, mit Spannung in der Stimme.",
-   "enabled": true,
+   "enabled": false,
    "trends": false
   },
   {
