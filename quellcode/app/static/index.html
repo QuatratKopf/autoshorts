@@ -443,7 +443,8 @@ let CFG = null, ST = {}, VIDS = [], STATS = {v: {}, ch: {}}, TRENDS = {items: []
 let SECRETS = null, RUNS = [], PENDING = null, LOADERR = "", CANCEL_NEXT = 0, CANCELING = new Set();
 let TAB = (location.hash || "#dashboard").slice(1);
 if (!["dashboard", "kalender", "studio", "einstellungen"].includes(TAB)) TAB = "dashboard";
-const DEF = {trend_mode: "half", make_thumbnail: true, youtube_thumbnail: true};
+const DEF = {trend_mode: "half", make_thumbnail: true, youtube_thumbnail: true, trend_regions: "US,DE",
+  audience: "Gen Z (16–25) in Deutschland, die TikTok und YouTube Shorts schauen: Internet-Kultur, Memes, virale Trends, Gaming, Musik, Serien, Filme, Creator, Tech, Lifestyle. Lockere Sprache wie unter Freunden, schnell auf den Punkt, kein Lehrer- oder Kinder-Ton."};
 const S_ = k => { const v = (CFG && CFG.settings || {})[k]; return v === undefined ? DEF[k] : v; };
 const cat = slug => (CFG && CFG.categories || []).find(c => c.slug === slug);
 
@@ -842,7 +843,7 @@ function viewStudio() {
   </section>
   <section class="panel in" style="--i:1" id="trendBox">
     <div class="section-h"><div><h2>Aktuell im Trend</h2><p class="hint">Was Deutschland gerade sucht und liest${TRENDS.updated ? " · Stand " + fmtTs(TRENDS.updated) : ""}. Die KI macht daraus ein passendes, sicheres Thema.</p></div>
-      <div class="inline"><div class="seg" id="tSeg">${["Alle", "Google Trends", "Wikipedia", "YouTube"].map(k => `<button type="button" data-v="${k}" aria-pressed="${TSRC === k}">${k === "Google Trends" ? "Google" : k}</button>`).join("")}</div><button class="btn" id="tRef">${icon(I.reload)}Aktualisieren</button></div></div>
+      <div class="inline"><div class="seg" id="tSeg">${["Alle", "TikTok", "YouTube", "Reddit", "Google", "Wikipedia"].map(k => `<button type="button" data-v="${k}" aria-pressed="${TSRC === k}">${k}</button>`).join("")}</div><button class="btn" id="tRef">${icon(I.reload)}Aktualisieren</button></div></div>
     <div class="trends" id="tList"></div>
   </section>
   <div class="grid2">
@@ -872,9 +873,9 @@ function viewStudio() {
 let TSRC = "Alle", TOPIC_TREND = null;
 function drawTrends() {
   const el = $("#tList"); if (!el) return;
-  const items = (TRENDS.items || []).filter(t => TSRC === "Alle" || t.source === TSRC).slice(0, 18);
+  const items = (TRENDS.items || []).filter(t => TSRC === "Alle" || t.source.replace("Google Trends", "Google").startsWith(TSRC)).slice(0, TSRC === "Alle" ? 30 : 24);
   if (!items.length) { el.innerHTML = `<div class="empty">${TRENDS.updated ? "In dieser Quelle gerade nichts." : "Noch keine Trends geholt. Tippe auf „Aktualisieren“, das dauert etwa eine Minute."}</div>`; return; }
-  el.innerHTML = items.map(t => `<div class="trend"><div class="tt"><div><span class="chip ${t.source === "Google Trends" ? "acc" : "mute"}">${esc(t.source === "Google Trends" ? "Google" : t.source)}</span>${t.traffic ? ` <span class="hint">${esc(t.traffic)}</span>` : ""}</div>
+  el.innerHTML = items.map(t => `<div class="trend"><div class="tt"><div><span class="chip ${t.source.startsWith("TikTok") ? "acc" : "mute"}">${esc(t.source === "Google Trends" ? "Google" : t.source)}</span>${t.region ? ` <span class="hint">${{US: "🇺🇸", DE: "🇩🇪", GB: "🇬🇧", AT: "🇦🇹", CH: "🇨🇭"}[t.region] || esc(t.region)}</span>` : ""}${t.traffic ? ` <span class="hint">${esc(t.traffic)}</span>` : ""}</div>
       <b>${esc(t.title)}</b>${(t.news || [])[0] ? `<small>${esc(t.news[0].title)}${t.news[0].source ? " · " + esc(t.news[0].source) : ""}</small>` : t.summary ? `<small>${esc(t.summary.slice(0, 140))}</small>` : ""}</div>
     <div class="inline"><button class="btn sm primary" data-tuse="${esc(t.id)}">Als Thema</button><button class="btn sm" data-tq="${esc(t.id)}">Einplanen</button></div></div>`).join("");
   const find = id => (TRENDS.items || []).find(t => t.id === id);
@@ -957,7 +958,9 @@ function viewSettings() {
     ${fld("upload_times", "Upload-Zeiten", "Deutsche Zeit. Mehrere mit Komma, z. B. 12:00, 18:30. GitHub startet manchmal bis zu einer Stunde später.")}
     ${fld("target_seconds", "Ziel-Länge in Sekunden", "TikTok zahlt im Creator-Programm nur für Videos über 1 Minute.", 'type="number" min="20" max="170"')}`)}
   ${sec("trend", I.spark, "Trends & Thumbnail", `Trend-Themen ${{off: "aus", half: "jedes 2. Video", always: "immer"}[S_("trend_mode") || "half"]} · Thumbnail ${S_("make_thumbnail") !== false ? "an" : "aus"}`, "", `
-    ${sel("trend_mode", "Aktuelle Trend-Themen", "Der Autopilot schaut bei Google Trends, Wikipedia und YouTube, was gerade gefragt ist, und macht daraus ein passendes Thema. Tragische Nachrichten, Politik und Klatsch werden ausgelassen. Welche Video-Arten Trends nutzen, stellst du im Studio unter „Bearbeiten“ ein.", [["half", "Jedes zweite Video"], ["always", "Immer, wenn ein Trend passt"], ["off", "Aus – nur zeitlose Themen"]])}
+    ${sel("trend_mode", "Aktuelle Trend-Themen", "Der Autopilot schaut bei TikTok, YouTube, Reddit, Google Trends und Wikipedia, was gerade läuft, und macht daraus ein passendes Thema für deine Zielgruppe. Tragische Nachrichten, Politik und Klatsch werden ausgelassen. Welche Video-Arten Trends nutzen, stellst du im Studio unter „Bearbeiten“ ein.", [["half", "Jedes zweite Video"], ["always", "Immer, wenn ein Trend passt"], ["off", "Aus – nur zeitlose Themen"]])}
+    ${sel("trend_regions", "Trends aus", "Woher die Trends kommen. US-Trends schwappen oft ein paar Tage später nach Deutschland – ideal, um früh dran zu sein.", [["US,DE", "USA und Deutschland"], ["DE,US", "Vor allem Deutschland, dazu USA"], ["DE", "Nur Deutschland"], ["US", "Nur USA"], ["US,DE,GB", "USA, Deutschland und UK"]])}
+    <div class="row"><label for="f_audience">Zielgruppe<small>Für wen die Videos sind. Danach wählt die KI Trends und Themen aus und passt Sprache und Ton an.</small></label><textarea id="f_audience" data-k="audience" rows="3">${esc(S_("audience"))}</textarea></div>
     ${tgl("make_thumbnail", "Eigenes Thumbnail gestalten", "Ein eigenes KI-Bild mit großem Text passend zum Thema. Wird bei TikTok als Titelbild gesetzt.")}
     ${tgl("youtube_thumbnail", "Thumbnail auf YouTube hochladen", "Geht erst, wenn dein Kanal per Telefon bestätigt ist (youtube.com/verify). Bei Shorts zeigt YouTube es vor allem in Suche und Kanalseite.")}`)}
   ${sec("plattform", I.plug, "Plattformen", `YouTube ${con.youtube ? "verbunden" : "nicht verbunden"} · TikTok ${con.tiktok ? "verbunden" : "nicht verbunden"}`, con.youtube && con.tiktok ? '<span class="chip good">beide</span>' : '<span class="chip warn">offen</span>', `

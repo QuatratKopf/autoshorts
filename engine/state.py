@@ -46,7 +46,7 @@ DEFAULT_CHARACTER = (
 
 PRESET_CATEGORIES = [
     dict(slug="fakten", name="Fakten", emoji="💡",
-         description="Verblüffende Fakten, kindgerecht und witzig erklärt.",
+         description="Verblüffende Fakten, frech und witzig erklärt.",
          script_style="Erkläre einen überraschenden, wahren Fakt Schritt für Schritt wie eine kleine Geschichte. "
                       "Nutze konkrete Zahlen und Vergleiche aus dem Alltag. Nur belegbare, korrekte Fakten – nichts erfinden. "
                       "Locker, frech, mit einem kleinen Witz zwischendurch.",
@@ -71,7 +71,7 @@ PRESET_CATEGORIES = [
     dict(slug="lustig", name="Lustige Geschichten", emoji="😂",
          description="Absurde, lustige Alltagsgeschichten und kuriose Vorfälle.",
          script_style="Erzähle eine absurde, lustige Geschichte mit Situationskomik und einer Pointe am Ende. "
-                      "Übertreibe charmant, spiele mit Erwartungen. Familienfreundlich.",
+                      "Übertreibe charmant, spiele mit Erwartungen. Ohne Beleidigungen oder Anzüglichkeiten.",
          image_mood="bright saturated colors, exaggerated funny facial expressions, slapstick poses",
          voice="de-DE-FlorianMultilingualNeural", voice_rate="+10%", voice_pitch="+2Hz",
          voice_instructions="Fröhlich, verschmitzt, mit hörbarem Grinsen."),
@@ -120,6 +120,10 @@ DEFAULT_SETTINGS = {
     "tiktok_privacy": "SELF_ONLY",
     "tiktok_client_key": "",
     "ai_label": True,
+    "audience": "Gen Z (16–25) in Deutschland, die TikTok und YouTube Shorts schauen: Internet-Kultur, Memes, virale Trends, "
+                "Gaming, Musik, Serien, Filme, Creator, Tech, Lifestyle. Lockere Sprache wie unter Freunden, schnell auf den Punkt, "
+                "kein Lehrer- oder Kinder-Ton.",
+    "trend_regions": "US,DE",      # Länder für die Trendsuche (Reihenfolge = Gewichtung)
     "trend_mode": "half",          # off | half | always – wie oft der Autopilot ein aktuelles Trend-Thema nimmt
     "make_thumbnail": True,
     "youtube_thumbnail": True,
@@ -166,6 +170,9 @@ for k, v in DEFAULT_SETTINGS.items():
     CONFIG["settings"].setdefault(k, v)
 CONFIG.setdefault("categories", default_config()["categories"])
 CONFIG.setdefault("queue", [])
+for _c in CONFIG["categories"]:   # alte Vorgabe ersetzen: Zielgruppe ist Gen Z, nicht Kinder
+    if _c.get("description") == "Verblüffende Fakten, kindgerecht und witzig erklärt.":
+        _c["description"] = "Verblüffende Fakten, frech und witzig erklärt."
 
 STATE = load("state.json", DEFAULT_STATE)
 for k, v in DEFAULT_STATE.items():
