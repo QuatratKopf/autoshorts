@@ -335,26 +335,26 @@ def install_update(data, sha=None):
 
 
 def restart():
+    """Startet AutoShorts neu: direkt mit Python (ohne Umweg über cmd), die neue Instanz wartet, bis der Port frei ist."""
     import subprocess
     try:
         if SRV:
             SRV.server_close()
+        env = dict(os.environ, AS_LAUNCHER=LAUNCHER, AS_DATA=DATA, AS_NO_BROWSER="1")
+        args = [windowless_python() if sys.platform.startswith("win") else sys.executable, LAUNCHER, "--hintergrund"]
+        log(f"Neustart: {' '.join(args)}")
         if sys.platform.startswith("win"):
-            helper = os.path.join(DATA, "neustart.cmd")
-            with open(helper, "w", encoding="ascii", errors="replace") as f:
-                f.write("@echo off\r\nrem Startet AutoShorts nach einem Update neu\r\nping -n 3 127.0.0.1 >nul\r\n"
-                        f'call "{LAUNCHER}" --hintergrund\r\n')
-            flags = 0x08000000 | 0x00000200
+            base = 0x00000008 | 0x00000200   # DETACHED_PROCESS | CREATE_NEW_PROCESS_GROUP
             try:
-                subprocess.Popen(["cmd.exe", "/c", helper], creationflags=flags | 0x01000000,
-                                 cwd=os.path.dirname(LAUNCHER), close_fds=True)
+                subprocess.Popen(args, cwd=os.path.dirname(LAUNCHER), env=env, close_fds=True, creationflags=base | 0x01000000)
             except OSError:
-                subprocess.Popen(["cmd.exe", "/c", helper], creationflags=flags, cwd=os.path.dirname(LAUNCHER), close_fds=True)
+                subprocess.Popen(args, cwd=os.path.dirname(LAUNCHER), env=env, close_fds=True, creationflags=base)
         else:
-            subprocess.Popen([sys.executable, LAUNCHER, "--hintergrund"], cwd=os.path.dirname(LAUNCHER),
-                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
+            subprocess.Popen(args, cwd=os.path.dirname(LAUNCHER), env=env, stdout=subprocess.DEVNULL,
+                             stderr=subprocess.DEVNULL, start_new_session=True)
+        time.sleep(0.5)
     except Exception as e:  # noqa: BLE001
-        print(f"Neustart fehlgeschlagen: {e}", flush=True)
+        log(f"Neustart fehlgeschlagen: {e}", "error")
     finally:
         os._exit(0)
 

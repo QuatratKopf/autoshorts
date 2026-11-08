@@ -1043,7 +1043,7 @@ async function runUpdate() {
   const t0 = Date.now();
   const poll = async () => {
     try { const r = await fetch("/api/version", {cache: "no-store"}); if (r.ok) { const j = await r.json(); if (j.version !== before) { location.reload(); return; } } } catch (e) {}
-    if (Date.now() - t0 > 40000) { msg("Update installiert ✓", `Version <b>${esc(res.version)}</b> ist installiert.<br>Schließ dieses Fenster und starte AutoShorts über das <b>Desktop-Symbol</b>.`, '<button class="btn" onclick="location.reload()">Erneut verbinden</button>'); return; }
+    if (Date.now() - t0 > 60000) { msg("Update installiert ✓", `Version <b>${esc(res.version)}</b> ist installiert.<br>Schließ dieses Fenster und starte AutoShorts über das <b>Desktop-Symbol</b>.`, '<button class="btn" onclick="location.reload()">Erneut verbinden</button>'); return; }
     setTimeout(poll, 1000);
   };
   setTimeout(poll, 2000);

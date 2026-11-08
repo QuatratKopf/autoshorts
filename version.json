@@ -1,6 +1,6 @@
 {
-  "version": "1.1.5",
-  "file": "releases/AutoShorts-1.1.5.cmd",
-  "sha256": "d9ed7ac7a1455ad381bb1bbef5e58d2ba767e801f37604d080a48e8361c9414c",
-  "notes": "TikTok: Videozahlen wieder mit video.list"
+  "version": "1.1.6",
+  "file": "releases/AutoShorts-1.1.6.cmd",
+  "sha256": "ee09b3d4223804a1f7135d5974b717d53ed9054676972da76c5e3fc622aee530",
+  "notes": "Neustart nach Updates zuverlässiger"
 }
