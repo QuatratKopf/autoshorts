@@ -6,35 +6,16 @@ jobs:
     steps:
       - run: |
           python3 - <<'PY'
-          import requests, re, json
-          import xml.etree.ElementTree as ET
+          import requests, re, time
           B={"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36","Accept-Language":"en-US,en;q=0.9"}
-          for gl in ("US","DE"):
-              r=requests.get(f"https://www.youtube.com/feed/trending?gl={gl}&hl=en",headers=B,timeout=25)
-              m=re.search(r"var ytInitialData = (\{.*?\});</script>",r.text,re.S)
-              print("### yt",gl,r.status_code,bool(m))
-              if m:
-                  s=m.group(1); titles=re.findall(r'"videoRenderer":\{"videoId":"[^"]+".*?"title":\{"runs":\[\{"text":"(.*?)"\}',s)
-                  print(len(titles), titles[:12])
-                  if not titles: print(re.findall(r'"title":\{"runs":\[\{"text":"(.*?)"',s)[:15]); print(s[:600])
-          r=requests.get("https://www.tiktok.com/discover",headers=B,timeout=25)
-          for sid in ("__UNIVERSAL_DATA_FOR_REHYDRATION__","SIGI_STATE","__NEXT_DATA__"):
-              m=re.search(r'<script id="%s"[^>]*>(.*?)</script>'%sid,r.text,re.S)
-              if m:
-                  print("### tiktok discover",sid,len(m.group(1))); d=json.loads(m.group(1)); print(json.dumps(d)[:300])
-                  print(re.findall(r'"(?:keyword|title|desc|hashtagName|challengeName)":"(.*?)"',m.group(1))[:40])
-          for path in ("us","de"):
-              r=requests.get(f"https://kworb.net/charts/tiktok/{path}.html",headers=B,timeout=25)
-              rows=re.findall(r"<td class=\"text mp\"><div>(.*?)</div></td>",r.text)
-              print("### kworb",path,r.status_code,len(rows),[re.sub("<.*?>","",x) for x in rows[:10]])
-              if not rows: print(r.text[3000:4500])
-          for sub in ("popular","GenZ","TikTokCringe","OutOfTheLoop","popculturechat","de","ich_iel","Finanzen"):
-              r=requests.get(f"https://www.reddit.com/r/{sub}/top/.rss?t=day&limit=8",headers=B,timeout=25)
-              try:
-                  root=ET.fromstring(r.content); ns={"a":"http://www.w3.org/2005/Atom"}
-                  print("### reddit",sub,r.status_code,[e.findtext("a:title",namespaces=ns) for e in root.findall("a:entry",ns)][:8])
-              except Exception as e: print("### reddit",sub,r.status_code,e)
-          for g in ("US","DE"):
-              r=requests.get(f"https://trends.google.com/trending/rss?geo={g}",headers={"User-Agent":"AutoShorts/1.0 (github.com/QuatratKopf/autoshorts)"},timeout=25)
-              print("### google",g,r.status_code,re.findall(r"<item>\s*<title>(.*?)</title>",r.text)[:12])
+          r=requests.get("https://kworb.net/charts/tiktok/us.html",headers=B,timeout=25); t=r.text
+          i=t.find("<table"); print("### kworb table", t[i:i+2500])
+          r=requests.get("https://tokchart.com/",headers=B,timeout=25); t=r.text
+          i=t.find("1.</"); j=t.find("song"); print("### tokchart", t[t.find("<main"):t.find("<main")+3500])
+          time.sleep(8)
+          r=requests.get("https://www.reddit.com/r/GenZ+TikTokCringe+OutOfTheLoop+popculturechat+gaming/top/.rss?t=day&limit=25",headers=B,timeout=25)
+          print("### reddit multi", r.status_code, re.findall(r"<title>(.*?)</title>", r.text)[:15])
+          time.sleep(8)
+          r=requests.get("https://www.reddit.com/r/de+ich_iel+germany/top/.rss?t=day&limit=15",headers=B,timeout=25)
+          print("### reddit de", r.status_code, re.findall(r"<title>(.*?)</title>", r.text)[:15])
           PY
