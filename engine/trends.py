@@ -2,7 +2,7 @@
 standardmäßig USA und Deutschland (Einstellung trend_regions).
 
 - TikTok: angesagte Sounds des Tages (kworb.net, je Land)
-- YouTube: angesagte Videos aus Gaming, Musik, Unterhaltung, Comedy (je Land, wenn YouTube verbunden ist)
+- (YouTube-Daten werden bewusst NICHT genutzt: die YouTube API dient nur dem Hochladen und den eigenen Zahlen)
 - Reddit: was in Gen-Z-nahen Communities heute oben steht (USA: r/GenZ, r/OutOfTheLoop …; DE: r/de, r/ich_iel …)
 - Google Trends: Suchbegriffe, die heute stark steigen (je Land)
 - Wikipedia (englisch/deutsch): meistgelesene Artikel von gestern
@@ -195,7 +195,6 @@ def refresh():
     log("Sammle Trends (" + ", ".join(COUNTRY.get(r, r) for r in regions()) + ") …")
     items, counts = [], {}
     for name, fn in [("TikTok", lambda: [x for r in regions() for x in tiktok_songs(r)]),
-                     ("YouTube", lambda: [x for r in regions() for x in youtube_trending(r)]),
                      ("Reddit", lambda: [x for r in regions() for x in reddit_trending(r)]),
                      ("Google", lambda: [x for r in regions() for x in google_trends(r)]),
                      ("Wikipedia", lambda: [x for r in regions() if r in ("US", "DE") for x in wikipedia_mostread("en" if r == "US" else "de")])]:

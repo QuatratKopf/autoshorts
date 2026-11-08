@@ -843,7 +843,7 @@ function viewStudio() {
   </section>
   <section class="panel in" style="--i:1" id="trendBox">
     <div class="section-h"><div><h2>Aktuell im Trend</h2><p class="hint">Was Deutschland gerade sucht und liest${TRENDS.updated ? " · Stand " + fmtTs(TRENDS.updated) : ""}. Die KI macht daraus ein passendes, sicheres Thema.</p></div>
-      <div class="inline"><div class="seg" id="tSeg">${["Alle", "TikTok", "YouTube", "Reddit", "Google", "Wikipedia"].map(k => `<button type="button" data-v="${k}" aria-pressed="${TSRC === k}">${k}</button>`).join("")}</div><button class="btn" id="tRef">${icon(I.reload)}Aktualisieren</button></div></div>
+      <div class="inline"><div class="seg" id="tSeg">${["Alle", "TikTok", "Reddit", "Google", "Wikipedia"].map(k => `<button type="button" data-v="${k}" aria-pressed="${TSRC === k}">${k}</button>`).join("")}</div><button class="btn" id="tRef">${icon(I.reload)}Aktualisieren</button></div></div>
     <div class="trends" id="tList"></div>
   </section>
   <div class="grid2">
@@ -959,7 +959,7 @@ function viewSettings() {
     ${fld("upload_times", "Upload-Zeiten", "Deutsche Zeit. Mehrere mit Komma, z. B. 12:00, 18:30. GitHub startet manchmal bis zu einer Stunde später.")}
     ${fld("target_seconds", "Ziel-Länge in Sekunden", "TikTok zahlt im Creator-Programm nur für Videos über 1 Minute.", 'type="number" min="20" max="170"')}`)}
   ${sec("trend", I.spark, "Trends & Thumbnail", `Trend-Themen ${{off: "aus", half: "jedes 2. Video", always: "immer"}[S_("trend_mode") || "half"]} · Thumbnail ${S_("make_thumbnail") !== false ? "an" : "aus"}`, "", `
-    ${sel("trend_mode", "Aktuelle Trend-Themen", "Der Autopilot schaut bei TikTok, YouTube, Reddit, Google Trends und Wikipedia, was gerade läuft, und macht daraus ein passendes Thema für deine Zielgruppe. Tragische Nachrichten, Politik und Klatsch werden ausgelassen. Welche Video-Arten Trends nutzen, stellst du im Studio unter „Bearbeiten“ ein.", [["half", "Jedes zweite Video"], ["always", "Immer, wenn ein Trend passt"], ["off", "Aus – nur zeitlose Themen"]])}
+    ${sel("trend_mode", "Aktuelle Trend-Themen", "Der Autopilot schaut bei TikTok, Reddit, Google Trends und Wikipedia, was gerade läuft, und macht daraus ein passendes Thema für deine Zielgruppe. Tragische Nachrichten, Politik und Klatsch werden ausgelassen. Welche Video-Arten Trends nutzen, stellst du im Studio unter „Bearbeiten“ ein.", [["half", "Jedes zweite Video"], ["always", "Immer, wenn ein Trend passt"], ["off", "Aus – nur zeitlose Themen"]])}
     ${sel("trend_regions", "Trends aus", "Woher die Trends kommen. US-Trends schwappen oft ein paar Tage später nach Deutschland – ideal, um früh dran zu sein.", [["US,DE", "USA und Deutschland"], ["DE,US", "Vor allem Deutschland, dazu USA"], ["DE", "Nur Deutschland"], ["US", "Nur USA"], ["US,DE,GB", "USA, Deutschland und UK"]])}
     <div class="row"><label for="f_audience">Zielgruppe<small>Für wen die Videos sind. Danach wählt die KI Trends und Themen aus und passt Sprache und Ton an.</small></label><textarea id="f_audience" data-k="audience" rows="3">${esc(S_("audience"))}</textarea></div>
     ${tgl("make_thumbnail", "Eigenes Thumbnail gestalten", "Ein eigenes KI-Bild mit großem Text passend zum Thema. Wird bei TikTok als Titelbild gesetzt.")}

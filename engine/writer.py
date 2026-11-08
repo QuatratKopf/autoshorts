@@ -76,7 +76,7 @@ def trend_topic(cat: dict):
     user = (f"Heute ist {dt.date.today():%d.%m.%Y}. Kategorie: {cat['name']} – {cat['description']}\n"
             f"Stilvorgabe: {cat['script_style']}\n"
             + (f"Zielgruppe: {audience()}\n" if audience() else "")
-            + "\nDas ist gerade in den USA und in Deutschland im Trend (TikTok-Sounds, YouTube, Reddit, "
+            + "\nDas ist gerade in den USA und in Deutschland im Trend (TikTok-Sounds, Reddit, "
             "Google-Suchen, Wikipedia):\n"
             f"{trends.as_prompt_list(items)}\n\n"
             "Wähle EINEN Trend, über den die Zielgruppe gerade redet, und mach daraus ein Short in dieser Kategorie, "
