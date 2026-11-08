@@ -574,6 +574,7 @@ def oauth_begin(h):
 @route("GET", r"/oauth/?")
 def oauth_cb(h):
     params = dict(urllib.parse.parse_qsl(urllib.parse.urlsplit(h.path).query))
+    p = ""
     try:
         p = oauth_finish(params)
         title, msg, ok = ("YouTube" if p == "youtube" else "TikTok") + " verbunden", "Die App holt jetzt die ersten Zahlen. Du wirst gleich zurückgeleitet.", True
@@ -584,8 +585,14 @@ def oauth_cb(h):
 <style>body{{margin:0;min-height:100vh;display:grid;place-items:center;background:#efeef2;color:#121215;font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}}
 .c{{background:#fff;border:1px solid #e8e7ed;border-radius:22px;padding:30px;max-width:420px;box-shadow:0 10px 30px -14px rgba(18,18,21,.2);display:flex;flex-direction:column;gap:10px}}
 h1{{margin:0;font-size:22px;letter-spacing:-.02em;color:{'#13a052' if ok else '#e5484d'}}}p{{margin:0;color:#86858f}}a{{color:#121215;font-weight:600}}</style></head>
-<body><div class="c"><h1>{_h.escape(title)}</h1><p>{_h.escape(msg)}</p><p><a href="/#einstellungen">Zurück zur App</a></p></div>
-{'<script>setTimeout(()=>location.href="/#einstellungen",2500)</script>' if ok else ''}</body></html>"""
+<body><div class="c"><h1>{_h.escape(title)}</h1><p>{_h.escape(msg)}</p><p><a href="/#einstellungen" onclick="if(window.opener){{window.close();return false}}">Fenster schließen</a></p></div>
+<script>
+const res = {{as_oauth: true, ok: {'true' if ok else 'false'}, platform: {json.dumps(p if ok else "")}, title: {json.dumps(title)}, msg: {json.dumps(msg)}}};
+if (window.opener && !window.opener.closed) {{
+  try {{ window.opener.postMessage(res, location.origin); }} catch (e) {{}}
+  setTimeout(() => window.close(), res.ok ? 1200 : 6000);
+}} else if (res.ok) {{ setTimeout(() => location.href = "/#einstellungen", 2500); }}
+</script></body></html>"""
     h._send(200, page.encode(), "text/html; charset=utf-8")
 
 

@@ -1,6 +1,6 @@
 {
-  "version": "1.1.8",
-  "file": "releases/AutoShorts-1.1.8.cmd",
-  "sha256": "c20207eaa0b90a92525630014b1d04eb4a8cd46434fac226ef027613a4846019",
-  "notes": "Client-Secret direkt bei YouTube und TikTok eintragen"
+  "version": "1.1.9",
+  "file": "releases/AutoShorts-1.1.9.cmd",
+  "sha256": "ab9d38a275b6eee73aa97eae3ef1e5f8c021a2e79d3f3e50030a7a0627de2389",
+  "notes": "Anmeldung bei YouTube und TikTok im eigenen Popup-Fenster"
 }

@@ -1022,7 +1022,12 @@ function viewSettings() {
   document.querySelectorAll("[data-oauth]").forEach(b => b.onclick = async () => {
     if (DIRTY) return toast("Bitte zuerst die Einstellungen speichern.", true);
     const p = b.dataset.oauth;
-    try { const r = await api("/api/oauth/start", {platform: p, client_id: S_(p === "youtube" ? "youtube_client_id" : "tiktok_client_key"), mode: S_("tiktok_mode") || "direct"}); location.href = r.url; }
+    try {
+      const r = await api("/api/oauth/start", {platform: p, client_id: S_(p === "youtube" ? "youtube_client_id" : "tiktok_client_key"), mode: S_("tiktok_mode") || "direct"});
+      const w = 520, hh = 720, left = Math.max(0, screenX + (outerWidth - w) / 2), top = Math.max(0, screenY + (outerHeight - hh) / 2);
+      const pop = window.open(r.url, "as_oauth", `popup=yes,width=${w},height=${hh},left=${left},top=${top}`);
+      if (!pop) location.href = r.url; else { pop.focus(); toast("Anmeldung im neuen Fenster …"); }
+    }
     catch (e) { toast(e.message, true); }
   });
   $("#ghOut").onclick = () => armed($("#ghOut"), "Sicher? Nochmal tippen", async () => { await api("/api/github/logout", {}); S = await api("/api/state"); render(); });
@@ -1037,6 +1042,14 @@ function viewSettings() {
   $("#quit").onclick = () => armed($("#quit"), "Wirklich beenden?", async () => { await api("/api/quit", {}); document.body.innerHTML = `<div class="login"><div class="panel" style="max-width:420px"><h2>AutoShorts ist beendet</h2><p class="hint">Du kannst dieses Fenster schließen. Die Videos macht GitHub weiter.</p></div></div>`; });
 }
 function armed(btn, q, fn) { if (btn.dataset.sure === "1") return fn(); btn.dataset.sure = "1"; const t = btn.textContent; btn.textContent = q; setTimeout(() => { btn.dataset.sure = ""; btn.textContent = t; }, 4000); }
+
+addEventListener("message", async e => {
+  if (e.origin !== location.origin || !e.data || !e.data.as_oauth) return;
+  if (!e.data.ok) return toast(e.data.title + ": " + e.data.msg, true);
+  toast(e.data.title + ". Die Zahlen kommen in etwa einer Minute.");
+  ST.connected = ST.connected || {}; if (e.data.platform) ST.connected[e.data.platform] = ST.connected[e.data.platform] || {name: ""};
+  S = await api("/api/state"); render(); pollRuns();
+});
 
 /* ═════════════════ Updates ═════════════════ */
 async function runUpdate() {
