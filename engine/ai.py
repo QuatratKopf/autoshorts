@@ -11,6 +11,7 @@ import asyncio
 import base64
 import io
 import json
+import os
 import re
 import subprocess
 import time
@@ -87,11 +88,21 @@ def _pollinations_text(system, user, temperature):
         time.sleep(wait)
     for attempt in range(3):
         _last_poll_text = time.time()
-        r = requests.post("https://text.pollinations.ai/openai",
-                          json={"messages": [{"role": "system", "content": system + "\nAntworte nur mit JSON."},
-                                             {"role": "user", "content": user}],
-                                "temperature": temperature},
-                          timeout=TIMEOUT)
+        try:
+            r = requests.post("https://text.pollinations.ai/openai",
+                              json={"messages": [{"role": "system", "content": system + "\nAntworte nur mit JSON."},
+                                                 {"role": "user", "content": user}],
+                                    "temperature": temperature},
+                              timeout=90)
+        except requests.RequestException as e:   # Zeitüberschreitung/Verbindung: kurz warten, neu versuchen
+            if attempt == 2:
+                raise ProviderError(f"Pollinations-Text nicht erreichbar ({type(e).__name__})") from e
+            log("Pollinations antwortet nicht, neuer Versuch …")
+            time.sleep(20)
+            continue
+        if r.status_code >= 500 and attempt < 2:
+            time.sleep(20)
+            continue
         if r.status_code in (402, 429) and attempt < 2:
             time.sleep(int(r.headers.get("Retry-After", "35")) + 1)
             continue
@@ -113,7 +124,9 @@ def chat_json(system: str, user: str, temperature: float = 0.9) -> tuple[dict, s
         except Exception as e:  # noqa: BLE001
             errors.append(f"{p}: {e}")
             log(f"Text über {p} fehlgeschlagen, versuche nächsten Anbieter …")
-    raise ProviderError("Kein Text-Anbieter erreichbar. " + " | ".join(errors))
+    hint = " Tipp: Gemini-Schlüssel in der App unter Einstellungen → Zugangsdaten speichern." \
+        if not os.environ.get("GEMINI_API_KEY") else ""
+    raise ProviderError("Kein Text-Anbieter erreichbar. " + " | ".join(errors) + hint)
 
 
 # ---------------------------------------------------------------- Stimme
