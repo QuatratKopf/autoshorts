@@ -1,429 +1,763 @@
 {
- "updated": 1794155711.9804666,
+ "updated": 1794158650.2535484,
+ "regions": [
+  "US",
+  "DE"
+ ],
  "items": [
   {
    "source": "Google Trends",
+   "region": "US",
    "news": [
     {
-     "title": "Von TV-Serien zu Großfamilie: Sven Martineks außergewöhnliches Privatleben",
-     "url": "https://www.joyn.de/bts/themen/stars/morden-im-norden-sven-martineks-patchwork-familie-mit-elf-kindern-8040",
-     "source": "Joyn"
+     "title": "Preview: Bruins look to extend streak against Panthers",
+     "url": "https://www.stanleycupofchowder.com/26-27-game-coverage/59682/preview-bruins-look-to-extend-streak-against-panthers",
+     "source": "Stanley Cup of Chowder"
     },
     {
-     "title": "Kölner Hundetrainer Martin Rütter: Ex-Frau liebt bekannten TV-Star",
-     "url": "https://koeln.t-online.de/region/koeln/id_101481452/martin-ruetter-aus-koeln-ex-von-hundetrainer-liebt-jetzt-bekannten-tv-star.html",
-     "source": "t-online – Köln"
-    },
-    {
-     "title": "Martin Rütters Ex-Frau ist mit bekanntem TV-Star liiert",
-     "url": "https://web.de/magazine/unterhaltung/stars/martin-ruetters-ex-bekanntem-tv-star-liiert-42898684",
-     "source": "WEB.DE"
-    }
-   ],
-   "title": "sven martinek",
-   "traffic": "500+",
-   "date": "Sun, 8 Nov 2026 08:20:00 -0800",
-   "id": "t1794155711-0"
-  },
-  {
-   "source": "Google Trends",
-   "news": [
-    {
-     "title": "Marek Papszun: Potrzebujemy wzmocnień i świeżej krwi",
-     "url": "https://legia.net/news/marek-papszun-potrzebujemy-wzmocnien-i-swiezej-krwi/105721",
-     "source": "Legia.Net"
-    },
-    {
-     "title": "Legia - Raków: transmisja na żywo. Gdzie oglądać w TV i online? (08.11.2026)",
-     "url": "https://sportowefakty.wp.pl/bukmacherzy/1282620/legia-rakow-transmisja-na-zywo-gdzie-ogladac-w-tv-i-online-08112026",
-     "source": "SportoweFakty"
-    },
-    {
-     "title": "Legia Warszawa - Raków Częstochowa: typy i kursy na Ekstraklasę (8.11.26)",
-     "url": "https://www.meczyki.pl/newsy/pilka-nozna/legia-warszawa-rakow-czestochowa-typy-i-kursy-na-ekstraklase-8-11-26/317421",
-     "source": "Meczyki.pl"
-    }
-   ],
-   "title": "legia warszawa – raków częstochowa",
-   "traffic": "200+",
-   "date": "Sun, 8 Nov 2026 08:20:00 -0800",
-   "id": "t1794155711-1"
-  },
-  {
-   "source": "Google Trends",
-   "news": [
-    {
-     "title": "Inter Milan vs Como: Italian Serie A stats & head-to-head",
-     "url": "https://www.bbc.com/sport/football/live/cq5ynmk4lpy5t",
-     "source": "BBC"
-    },
-    {
-     "title": "Serie A line-ups: Inter vs. Como",
-     "url": "https://sports.yahoo.com/articles/serie-line-ups-inter-vs-160100190.html",
+     "title": "Panthers vs Bruins Prediction, Picks, NHL Odds for Sunday, November 8",
+     "url": "https://sports.yahoo.com/articles/panthers-vs-bruins-prediction-picks-151243441.html",
      "source": "Yahoo Sports"
     },
     {
-     "title": "Inter",
-     "url": "https://www.flashscore.com/match/football/como-ttyLthOA/inter-Iw7eKK25/summary/lineups/avg-rating/?mid=UugSM0CD",
-     "source": "Flashscore.com"
+     "title": "PREVIEW: Panthers take on Bruins in Atlantic Division battle",
+     "url": "https://www.nhl.com/panthers/news/preview-panthers-take-on-bruins-in-atlantic-division-battle",
+     "source": "NHL.com"
     }
    ],
-   "title": "inter – como",
+   "title": "panthers vs bruins",
    "traffic": "1000+",
-   "date": "Sun, 8 Nov 2026 08:10:00 -0800",
-   "id": "t1794155711-2"
+   "date": "Sun, 8 Nov 2026 09:10:00 -0800",
+   "id": "t1794158650-0"
   },
   {
    "source": "Google Trends",
+   "region": "US",
    "news": [
     {
-     "title": "Martinsmarkt in Meiningen: Tausende bummeln durch die Innenstadt",
-     "url": "https://www.insuedthueringen.de/inhalt.martinsmarkt-in-meiningen-tausende-bummeln-durch-die-innenstadt.15120d4f-9ed2-4386-9937-d0127a0d4b35.html",
-     "source": "inSüdthüringen"
+     "title": "NWSL quarterfinal preview: Seattle Reign vs. Gotham FC",
+     "url": "https://www.sounderatheart.com/2026/11/nwsl-quarterfinal-preview-seattle-reign-vs-gotham-fc/",
+     "source": "Sounder at Heart"
     },
     {
-     "title": "Martinsmarkt am 08.11.2026",
-     "url": "https://www.gemeinde-fuerth.de/gemeinde/bekanntmachungen-buergerinformation/martinsmarkt-am-08-11-2026/",
-     "source": "Gemeinde Fürth"
+     "title": "What to know as the Reign open NWSL playoffs",
+     "url": "https://www.seattletimes.com/sports/reign/reign-fc-face-top-seeded-gotham-in-nwsl-playoffs-sunday-heres-what-to-know/",
+     "source": "The Seattle Times"
     },
     {
-     "title": "HEUTE – Martinsmarkt mit verkaufsoffenem Sonntag in Meiningen 8.11.26",
-     "url": "https://rhoenkanal.de/2026/11/martinsmarkt-mit-verkaufsoffenem-sonntag-in-meiningen-8-11-26/",
-     "source": "Rhönkanal"
+     "title": "Gotham FC sells 3,000 playoff tickets in 24 hours through Mamdani promotion",
+     "url": "https://www.sportsbusinessjournal.com/Articles/2026/11/06/gotham-fc-sells-3000-playoff-tickets-in-24-hours-through-mamdani-promotion/",
+     "source": "Sports Business Journal"
     }
    ],
-   "title": "meiningen",
-   "traffic": "200+",
-   "date": "Sun, 8 Nov 2026 08:10:00 -0800",
-   "id": "t1794155711-3"
+   "title": "seattle reign fc vs gotham",
+   "traffic": "500+",
+   "date": "Sun, 8 Nov 2026 09:10:00 -0800",
+   "id": "t1794158650-1"
   },
   {
    "source": "Google Trends",
+   "region": "US",
    "news": [
     {
-     "title": "Bild \"Eventuell heuer letzte Nahrungssuche\" - Fotoblog Schöne Heimat auf SN.at",
-     "url": "https://www.sn.at/fotoblog/schoene-heimat/eventuell-heuer-letzte-nahrungssuche-blog-237106/",
-     "source": "Salzburger Nachrichten"
+     "title": "MBB Preview: Arkansas vs Virginia in the Capital Showcase",
+     "url": "https://arkansasrazorbacks.com/mbb-preview-arkansas-vs-virginia-in-the-capital-showcase/",
+     "source": "Arkansas Razorbacks"
     },
     {
-     "title": "Schüsse in Krakau: Mindestens fünf Tote und zehn Verletzte",
-     "url": "https://www.salzburg24.at/fotos/schuesse-in-krakau-mindestens-fuenf-tote-und-zehn-verletzte-mga-50465/",
-     "source": "salzburg24"
+     "title": "No. 9 Virginia Battles No. 12 Arkansas in Skyscanner Capital Showcase",
+     "url": "https://virginiasports.com/news/2026/11/7/no-9-virginia-battles-no-12-arkansas-in-skyscanner-capital-showcase",
+     "source": "Virginia Sports"
     },
     {
-     "title": "Bild \"Herbstlicher Sternenzauber am Zeller See\" - Fotoblog Schöne Heimat auf SN.at",
-     "url": "https://www.sn.at/fotoblog/schoene-heimat/herbstlicher-sternenzauber-am-zeller-see-blog-237038/",
-     "source": "Salzburger Nachrichten"
+     "title": "Arkansas basketball vs. Virginia in Washington, D.C.: How to watch, betting line, what to know",
+     "url": "https://www.wholehogsports.com/news/2026/nov/07/arkansas-basketball-vs-virginia-in-washington-dc-how-to-watch-betting-line-what-to-know/",
+     "source": "Whole Hog Sports"
     }
    ],
-   "title": "sturm graz – rb salzburg",
-   "traffic": "200+",
-   "date": "Sun, 8 Nov 2026 08:10:00 -0800",
-   "id": "t1794155711-4"
+   "title": "arkansas basketball",
+   "traffic": "500+",
+   "date": "Sun, 8 Nov 2026 09:10:00 -0800",
+   "id": "t1794158650-2"
   },
   {
    "source": "Google Trends",
+   "region": "US",
    "news": [
     {
-     "title": "SpVgg Bayern Hof: PK eskaliert - Tumult auf der Grünen Au",
-     "url": "https://www.frankenpost.de/inhalt.spvgg-bayern-hof-pk-eskaliert-tumult-auf-der-gruenen-au.8f89975e-5ef0-4abb-84ff-5f91bdd07a98.html",
-     "source": "Frankenpost"
+     "title": "Purdue coach Barry Odom' doesn't get credit for firing his questionable hire. Proof is in results",
+     "url": "https://www.indystar.com/story/sports/college/purdue/2026/11/08/purdue-football-coach-barry-odom-fires-kevin-kane-defensive-coordinator-hire-transfer-portal/92675115007/",
+     "source": "IndyStar"
     },
     {
-     "title": "Chamer Titel-Ansage: Hof erlebt »Bruchlandung«",
-     "url": "https://www.fupa.net/news/chamer-titel-ansage-hof-erlebt-bruchlandung-3230080",
-     "source": "FuPa ⚽️"
+     "title": "Kevin Kane fired as Purdue football defensive coordinator. What we know",
+     "url": "https://sports.yahoo.com/articles/kevin-kane-fired-purdue-football-165501985.html",
+     "source": "Yahoo Sports"
     },
     {
-     "title": "Fußball-Bayernliga: Hofer Systemausfall gegen den Spitzenreiter",
-     "url": "https://www.frankenpost.de/inhalt.fussball-bayernliga-hofer-systemausfall-gegen-den-spitzenreiter.a0cf0070-6e6f-460e-818a-7c0b62440c11.html",
-     "source": "Frankenpost"
+     "title": "Purdue parts ways with DC Kevin Kane",
+     "url": "https://www.on3.com/teams/purdue-boilermakers/news/purdue-parts-ways-with-dc-kevin-kane/",
+     "source": "On3"
     }
    ],
-   "title": "spvgg bayern hof",
-   "traffic": "200+",
-   "date": "Sun, 8 Nov 2026 08:10:00 -0800",
-   "id": "t1794155711-5"
+   "title": "kevin kane",
+   "traffic": "500+",
+   "date": "Sun, 8 Nov 2026 09:10:00 -0800",
+   "id": "t1794158650-3"
   },
   {
    "source": "Google Trends",
+   "region": "US",
+   "news": [
+    {
+     "title": "‘It really hurts me’: Louisiana native, country music star Sammy Kershaw says CMA denied red carpet request two weeks before show",
+     "url": "https://www.kalb.com/2026/11/06/it-really-hurts-me-louisiana-native-country-music-star-sammy-kershaw-says-cma-denied-red-carpet-request-two-weeks-before-show/",
+     "source": "KALB | News Channel 5"
+    },
+    {
+     "title": "Country music star rips CMA Awards after ‘extremely hurtful’ decision",
+     "url": "https://www.pennlive.com/entertainment/2026/11/country-music-star-rips-cma-awards-after-extremely-hurtful-decision.html",
+     "source": "PennLive.com"
+    },
+    {
+     "title": "Sammy Kershaw says CMA Awards denied his red carpet request. 'It's extremely hurtful'",
+     "url": "https://www.tennessean.com/story/entertainment/music/2026/11/06/sammy-kershaw-cma-awards-denied-red-carpet-request/92640335007/",
+     "source": "The Tennessean"
+    }
+   ],
+   "title": "sammy kershaw cma awards snub",
+   "traffic": "2000+",
+   "date": "Sun, 8 Nov 2026 09:00:00 -0800",
+   "id": "t1794158650-4"
+  },
+  {
+   "source": "Google Trends",
+   "region": "US",
+   "news": [
+    {
+     "title": "Celta Vigo vs Levante: Spanish La Liga stats & head-to-head",
+     "url": "https://www.bbc.com/sport/football/live/cmz98zw15ldxt",
+     "source": "BBC"
+    },
+    {
+     "title": "Celta Vigo vs Levante: Lineups, Prediction, Betting Tips & Odds",
+     "url": "https://www.oddschecker.com/tips/football/spanish-primera-division/cng101-20261108-celta-vigo-vs-levante-predictions-bet-builder-tips-lineups-odds",
+     "source": "Oddschecker"
+    },
+    {
+     "title": "How to get Celta Vigo vs Levante tickets: LaLiga prices, fixture information, last-minute sales & more",
+     "url": "https://www.goal.com/en-om/tickets-travel/match/celta-vigo-levante-tickets/A~blt740740d5bec7f6e2",
+     "source": "Goal.com"
+    }
+   ],
+   "title": "celta vs levante",
+   "traffic": "200+",
+   "date": "Sun, 8 Nov 2026 09:00:00 -0800",
+   "id": "t1794158650-5"
+  },
+  {
+   "source": "Google Trends",
+   "region": "US",
+   "news": [
+    {
+     "title": "NC State working to finalize deal with school legend, former NFL QB Philip Rivers",
+     "url": "https://www.on3.com/news/nc-state-working-to-finalize-deal-with-school-legend-former-nfl-qb-philip-rivers/",
+     "source": "On3"
+    },
+    {
+     "title": "Philip Rivers ‘working to finalize deal’ as N.C. State football coach, report says",
+     "url": "https://www.al.com/highschoolsports/south/2026/11/philip-rivers-working-to-finalize-deal-with-nc-state-report-says.html",
+     "source": "AL.com"
+    },
+    {
+     "title": "Ex-NFL QB Russell Wilson interviews with NC State for head coaching job",
+     "url": "https://www.espn.com/college-football/story/_/id/50373951/russell-wilson-interviews-nc-state-head-coaching-job",
+     "source": "ESPN"
+    }
+   ],
+   "title": "philip rivers",
+   "traffic": "2000+",
+   "date": "Sun, 8 Nov 2026 08:50:00 -0800",
+   "id": "t1794158650-6"
+  },
+  {
+   "source": "Google Trends",
+   "region": "US",
+   "news": [
+    {
+     "title": "Villarreal vs Getafe: Spanish La Liga stats & head-to-head",
+     "url": "https://www.bbc.com/sport/football/live/cre3x08kv7dqt",
+     "source": "BBC"
+    },
+    {
+     "title": "Villarreal v Getafe LIVE 08/11/2026 | Football",
+     "url": "https://www.flashscore.com/match/football/getafe-dboeiWOt/villarreal-lUatW5jE/standings/live-standings/?mid=xts7rDX9",
+     "source": "Flashscore.com"
+    },
+    {
+     "title": "Villarreal Vs Getafe: Villarreal must steady themselves after PSG collapse as Getafe arrive with no away goals",
+     "url": "https://twaslnews1.twaslnews.com/7328874/",
+     "source": "شبكة تواصل الإخبارية"
+    }
+   ],
+   "title": "villarreal vs getafe",
+   "traffic": "1000+",
+   "date": "Sun, 8 Nov 2026 08:50:00 -0800",
+   "id": "t1794158650-7"
+  },
+  {
+   "source": "Google Trends",
+   "region": "US",
+   "news": [
+    {
+     "title": "Dark Matter Officially Overtakes Apple TV’s Best Sci-Fi Show of All Time",
+     "url": "https://www.imdb.com/news/ni66089245/?ref_=ttnw_art_perm",
+     "source": "IMDb"
+    },
+    {
+     "title": "7 Apple TV Sci-Fi Shows With No Bad Seasons, Ranked",
+     "url": "https://collider.com/apple-tv-sci-fi-shows-no-bad-seasons-ranked/",
+     "source": "Collider"
+    },
+    {
+     "title": "7 Apple TV Sci-Fi Shows With Flawless Worldbuilding",
+     "url": "https://screenrant.com/apple-tv-shows-with-flawless-worldbuilding/",
+     "source": "ScreenRant"
+    }
+   ],
+   "title": "apple tv",
+   "traffic": "2000+",
+   "date": "Sun, 8 Nov 2026 08:50:00 -0800",
+   "id": "t1794158650-8"
+  },
+  {
+   "source": "Google Trends",
+   "region": "US",
+   "news": [
+    {
+     "title": "NFL fines Falcons star Drake London for penalty vs. Buccaneers",
+     "url": "https://sports.yahoo.com/articles/nfl-fines-falcons-star-drake-123729164.html",
+     "source": "Yahoo Sports"
+    },
+    {
+     "title": "Drake London fined big by NFL for unnecessary roughness vs. Bucs",
+     "url": "https://www.thefalcoholic.com/atlanta-falcons-roster/98190/drake-london-fined-unnecessary-roughness-week-8-vs-buccaneers",
+     "source": "The Falcoholic"
+    },
+    {
+     "title": "Two 49ers Players Were Fined on Saturday for Incidents During Loss to Falcons",
+     "url": "https://www.aol.com/articles/two-49ers-players-were-fined-020545000.html",
+     "source": "AOL.com"
+    }
+   ],
+   "title": "drake london",
+   "traffic": "2000+",
+   "date": "Sun, 8 Nov 2026 08:50:00 -0800",
+   "id": "t1794158650-9"
+  },
+  {
+   "source": "Google Trends",
+   "region": "DE",
+   "news": [
+    {
+     "title": "\"Remembrance Sunday\" in London: Soldat bricht vor Gedenkfeier mit Royals zusammen",
+     "url": "https://www.n-tv.de/leute/Soldat-bricht-vor-Gedenkfeier-mit-Royals-zusammen-id31509090.html",
+     "source": "n-tv.de"
+    },
+    {
+     "title": "Schreckmoment bei Gedenkfeier: Soldat bricht vor dem Cenotaph zusammen",
+     "url": "https://de.nachrichten.yahoo.com/schreckmoment-gedenkfeier-soldat-bricht-cenotaph-132256117.html",
+     "source": "Yahoo Nachrichten"
+    },
+    {
+     "title": "Schreckmoment bei Auftritt der Royals: Soldat bricht zusammen",
+     "url": "https://web.de/magazine/unterhaltung/adel/britische-royals/schreckmoment-auftritt-royals-soldat-bricht-42924780",
+     "source": "WEB.DE"
+    }
+   ],
+   "title": "remembrance sunday",
+   "traffic": "500+",
+   "date": "Sun, 8 Nov 2026 09:10:00 -0800",
+   "id": "t1794158650-10"
+  },
+  {
+   "source": "Google Trends",
+   "region": "DE",
+   "news": [
+    {
+     "title": "Jets facing uphill Arrowhead battle against Chiefs in important ‘get right’ game",
+     "url": "https://nypost.com/2026/11/07/sports/jets-facing-uphill-battle-against-chiefs-in-important-get-right-game/",
+     "source": "New York Post"
+    },
+    {
+     "title": "Why Demario Davis Is Worried About Kenneth Walker III Ahead Of Kansas City Chiefs-New York Jets Clash",
+     "url": "https://sports.ndtv.com/us/nfl/why-demario-davis-is-worried-about-kenneth-walker-iii-ahead-of-kansas-city-chiefs-new-york-jets-clash-12298869",
+     "source": "NDTV Sports"
+    },
+    {
+     "title": "Polymarket NFL Invite Code GRIDS for Week 9: Trade $10, Get $25 for Jets at Chiefs on Sunday, November 8th",
+     "url": "https://www.sportsgrid.com/prediction-market/polymarket-nfl-invite-code-trade-10-get-25-bonus-for-jets-at-chiefs",
+     "source": "SportsGrid"
+    }
+   ],
+   "title": "chiefs – jets",
+   "traffic": "200+",
+   "date": "Sun, 8 Nov 2026 09:10:00 -0800",
+   "id": "t1794158650-11"
+  },
+  {
+   "source": "Google Trends",
+   "region": "DE",
+   "news": [
+    {
+     "title": "Bei Bernkastel-Kues: Vier Verletzte nach schwerem Unfall – Polizei erklärt, was passiert ist",
+     "url": "https://www.volksfreund.de/blaulicht/schwerer-verkehrsunfall-bei-bernkastel-kues-vier-verletzte_aid-157968805",
+     "source": "Volksfreund"
+    },
+    {
+     "title": "Verkehrsunfall mit vier Verletzten - neue Details bekannt",
+     "url": "https://www.welt.de/regionales/rheinland-pfalz-saarland/article6af084c2a389bc337cfca2df/verkehrsunfall-mit-vier-verletzten-neue-details-bekannt.html",
+     "source": "WELT"
+    },
+    {
+     "title": "Folgepressemeldung: Nachtrag zu schwerem Verkehrsunfall am 06.11.2026 auf der L47, Bernkastel-Wehlen",
+     "url": "https://www.rhein-zeitung.de/blaulicht/polizeimeldungen-kreis-cochem-zell/folgepressemeldung-nachtrag-zu-schwerem-verkehrsunfall-am-06-11-2026-auf-der-l47-bernkastel-wehlen_arid-4168588.html",
+     "source": "Rhein-Zeitung"
+    }
+   ],
+   "title": "bernkastel-kues",
+   "traffic": "500+",
+   "date": "Sun, 8 Nov 2026 09:00:00 -0800",
+   "id": "t1794158650-12"
+  },
+  {
+   "source": "Google Trends",
+   "region": "DE",
    "news": [],
-   "title": "шахтар – динамо київ",
-   "traffic": "200+",
-   "date": "Sun, 8 Nov 2026 08:10:00 -0800",
-   "id": "t1794155711-6"
+   "title": "nk varaždin – dinamo",
+   "traffic": "500+",
+   "date": "Sun, 8 Nov 2026 09:00:00 -0800",
+   "id": "t1794158650-13"
   },
   {
    "source": "Google Trends",
+   "region": "DE",
    "news": [
     {
-     "title": "Enger Zweikampf beim FC: Wagner erklärt die kniffligste Position in seiner Elf",
-     "url": "https://www.ksta.de/sport/1-fc-koeln/1-fc-koeln-das-ist-fuer-wagner-die-kniffligste-position-1411135",
-     "source": "Kölner Stadt-Anzeiger"
+     "title": "Nationalmannschaft: BVB-Star muss Klopp absagen",
+     "url": "https://www.bild.de/sport/fussball/nationalmannschaft-bvb-star-muss-klopp-absagen-6af09269d487d5232edf0ff9",
+     "source": "BILD"
     },
     {
-     "title": "1. FC Köln: René Wagner erklärt die Situation von Gideon Mensah",
-     "url": "https://come-on-fc.com/profis/gideon-mensah-borna-sosa-1-fc-koeln-wagner/",
-     "source": "come-on-fc.com"
+     "title": "Muskuläre Probleme bei Anton: Jürgen Klopp nominiert Ridle Baku nach",
+     "url": "https://www.sportschau.de/fussball/nationalmannschaft/juergen-klopp-nominiert-ridle-baku-nach,anton-raus-baku-rein-100.html",
+     "source": "sportschau.de"
     },
     {
-     "title": "Last-Minute-Transfer verdrängt WM-Star: \"Bin sehr zufrieden\"",
-     "url": "https://geissblog.koeln/2026/11/last-minute-transfer-verdraengt-wm-star-bin-sehr-zufrieden/",
-     "source": "geissblog"
+     "title": "DFB: BVB-Star fällt für Länderspiele aus – Klopp nominiert nach",
+     "url": "https://www.t-online.de/sport/fussball/nationalmannschaft-deutschland/id_101518758/dfb-bvb-star-faellt-fuer-laenderspiele-aus-klopp-nominiert-nach.html",
+     "source": "T-Online"
     }
    ],
-   "title": "borna sosa",
+   "title": "sportschau.de",
    "traffic": "200+",
-   "date": "Sun, 8 Nov 2026 08:10:00 -0800",
-   "id": "t1794155711-7"
+   "date": "Sun, 8 Nov 2026 09:00:00 -0800",
+   "id": "t1794158650-14"
   },
   {
    "source": "Google Trends",
+   "region": "DE",
    "news": [
     {
-     "title": "Pretty Woman's jewelry box snap was a prank on Julia Roberts, and her real laugh made the final cut",
-     "url": "https://3dvf.com/en/pretty-woman-s-jewelry-box-snap-was-a-prank-on-julia-roberts-and-her-real-laugh-made-the-final-cut/",
-     "source": "3DVF"
+     "title": "Villarreal vs Getafe: horario y dónde ver hoy por TV y online el partido de LaLiga 2026/27 a través de DAZN",
+     "url": "https://www.dazn.com/es-ES/news/futbol/villarreal-vs-getafe-horario-donde-ver-hoy-tv-online-partido-laliga-2026-2027/rweg9fw7a4hi1bu5pqv2cferc",
+     "source": "DAZN"
     },
     {
-     "title": "Matthew Perry: Neue Doku führt die Streaming-Charts an",
-     "url": "https://www.stern.de/kultur/matthew-perry--neue-doku-fuehrt-die-streaming-charts-an-38509884.html",
-     "source": "STERN.de"
+     "title": "Celta - Levante en directo - La Liga: Resultados y resúmenes de Fútbol - 08/11/2026",
+     "url": "https://www.eurosport.es/futbol/la-liga/2026-2027/live-celta-levante_mtc21891316/live.shtml",
+     "source": "Eurosport"
     },
     {
-     "title": "Matthew Perry verließ Julia Roberts aus Verlustangst – und starb an ihrem Geburtstag",
-     "url": "https://www.tvmovie.de/news/the-one-about-matthew-perry-netflix-beziehung-mit-julia-roberts-trennungsgrund-wie-lange-zusammen-todestag-162404",
-     "source": "TV Movie"
+     "title": "Moleiro y Mikautadze regresan a la titularidad ante un Getafe con Ünal en punta",
+     "url": "https://www.infobae.com/espana/agencias/2026/11/08/moleiro-y-mikautadze-regresan-a-la-titularidad-ante-un-getafe-con-unal-en-punta/",
+     "source": "Infobae"
     }
    ],
-   "title": "julia roberts",
+   "title": "villarreal – getafe",
    "traffic": "200+",
-   "date": "Sun, 8 Nov 2026 08:10:00 -0800",
-   "id": "t1794155711-8"
+   "date": "Sun, 8 Nov 2026 09:00:00 -0800",
+   "id": "t1794158650-15"
   },
   {
    "source": "Google Trends",
+   "region": "DE",
    "news": [
     {
-     "title": "Экс-игрок сборной Украины объяснил, почему потери Динамо не повлияют на Классическое",
-     "url": "https://www.ua-football.com/ukrainian/high/1794148239-yeks-igrok-sbornoy-ukrainy-obyasnil-pochemu-poteri-dinamo-ne-povliyayut-na-klassicheskoe.html",
-     "source": "UA-Football"
+     "title": "Natascha Ochsenknecht offenbart im Gespräch mit Ex Umut Kekilli: \"Ja, ich date jemanden!\"",
+     "url": "https://mail.freenet.de/unterhaltung/medien/natascha-ochsenknecht-offenbart-im-gespraech-mit-ex-umut-kekilli-ja-ich-date-jemanden-40522212.html",
+     "source": "freenet Mail"
     },
     {
-     "title": "Туран и Кендзерек определились с выбором. Составы на матч Шахтер – Динамо",
-     "url": "https://sport.ua/news/923162-turan-i-kendzerek-opredelilis-s-vyborom-sostavy-na-match-shahter-dinamo",
-     "source": "Sport.ua"
+     "title": "Neun Jahre nach Aus - Natascha Ochsenknecht: Zoff um 20.000 Euro von Ex!",
+     "url": "https://www.krone.at/4358939",
+     "source": "Kronen Zeitung"
     },
     {
-     "title": "Шахтер Динамо Киев – онлайн-трансляция и составы на Классическое в 12 туре УПЛ – Футбол 24",
-     "url": "https://football24.ua/ru/news/shahter-dinamo-kiev-onlajn-transljacija-i-sostavi-na-klassicheskoe-v-12-ture-upl-974635",
-     "source": "Футбол 24"
+     "title": "Natascha Ochsenknecht rechnet mit Ex-Partner ab",
+     "url": "https://web.de/magazine/unterhaltung/tv-shows/natascha-ochsenknecht-rechnet-ex-partner-42905218",
+     "source": "WEB.DE"
     }
    ],
-   "title": "шахтёр донецк – динамо киев",
+   "title": "natascha ochsenknecht",
    "traffic": "200+",
-   "date": "Sun, 8 Nov 2026 08:00:00 -0800",
-   "id": "t1794155711-9"
+   "date": "Sun, 8 Nov 2026 09:00:00 -0800",
+   "id": "t1794158650-16"
+  },
+  {
+   "source": "Google Trends",
+   "region": "DE",
+   "news": [
+    {
+     "title": "Leiche von vermisster 13-Jähriger aus Berlin gefunden",
+     "url": "https://web.de/magazine/panorama/verbrechen-vermisste/leiche-vermisster-13-jaehriger-berlin-gefunden-42925318",
+     "source": "WEB.DE"
+    },
+    {
+     "title": "Polizei findet Leiche: Vermisste 13-jährige Lisa aus Berlin ist tot - Mann gefasst",
+     "url": "https://www.n-tv.de/panorama/Vermisste-13-jaehrige-Lisa-aus-Berlin-ist-tot-Mann-gefasst-id31509340.html",
+     "source": "n-tv.de"
+    },
+    {
+     "title": "Vermisste 13-Jährige aus Marzahn in Brandenburg tot gefunden",
+     "url": "https://www.rbb24.de/panorama/beitrag/2026/11/berlin-marzahn-vermisstes-maedchen-tot-brandenburg-bad-freienwalde.html",
+     "source": "rbb24.de"
+    }
+   ],
+   "title": "vermisstes mädchen berlin",
+   "traffic": "10000+",
+   "date": "Sun, 8 Nov 2026 08:50:00 -0800",
+   "id": "t1794158650-17"
+  },
+  {
+   "source": "Google Trends",
+   "region": "DE",
+   "news": [
+    {
+     "title": "Kretzschmar über neue Löwen-Führung: \"Ein Family-Office\"",
+     "url": "https://www.handball-world.news/artikel/kretzschmar-ueber-neue-loewen-fuehrung-ein-family-office-1268977",
+     "source": "Handball-World"
+    },
+    {
+     "title": "Handball: Kretzschmar landet in der Notaufnahme! Als Papa zuschaut",
+     "url": "https://sportbild.bild.de/sportmix/handball/ausgerechnet-als-papa-zuschaut-kretzschmar-junior-landet-in-der-notaufnahme-6af0817f80d3a1c6aa66d480",
+     "source": "Sport Bild"
+    },
+    {
+     "title": "Stefan Kretzschmar irrte sich: Wie Simon Möller der SG Flensburg-Handewitt hilft",
+     "url": "https://www.shz.de/sport/sg-flensburg-handewitt/artikel/sg-neuzugang-simon-moeller-ist-eine-der-positiven-ueberraschungen-51709838",
+     "source": "shz.de"
+    }
+   ],
+   "title": "stefan kretzschmar",
+   "traffic": "200+",
+   "date": "Sun, 8 Nov 2026 08:50:00 -0800",
+   "id": "t1794158650-18"
+  },
+  {
+   "source": "Google Trends",
+   "region": "DE",
+   "news": [
+    {
+     "title": "Andere Sportarten Diverse Männer, Schweiz - Dänemark (So 08.11.2026 16:00) - Livestream & Ticker – Resultate",
+     "url": "https://www.srf.ch/sport/resultcenter/live/generic/1854422",
+     "source": "SRF"
+    },
+    {
+     "title": "Schweizer verlieren vor Rekordkulisse gegen den Olympiasieger",
+     "url": "https://www.radiocentral.ch/news/schweiz/schweizer-verlieren-vor-rekordkulisse-gegen-den-olympiasieger-165948029",
+     "source": "Radio Central"
+    },
+    {
+     "title": "Handball-Nati verliert Startspiel im EHF Euro Cup in Portugal",
+     "url": "https://www.blick.ch/sport/handball/ehf-euro-cup-schweizer-handball-nati-verliert-in-portugal/9mytees",
+     "source": "Blick"
+    }
+   ],
+   "title": "srf",
+   "traffic": "200+",
+   "date": "Sun, 8 Nov 2026 08:50:00 -0800",
+   "id": "t1794158650-19"
   },
   {
    "source": "Wikipedia",
+   "region": "US",
+   "title": "Ramayana: Part 1",
+   "traffic": "785.245 Aufrufe",
+   "summary": "2026 Indian film by Nitesh Tiwari – Ramayana: Part 1 is a 2026 Indian Hindi-language epic mythological film directed by Nitesh Tiwari, who co-wrote the screenplay with Shridhar Raghavan. Produced by Namit Malhotra and Yash, the film is based on the Hindu epic Ramayana by Valmiki. It is the first of a two-part film,",
+   "news": [],
+   "id": "t1794158650-20"
+  },
+  {
+   "source": "Wikipedia",
+   "region": "US",
+   "title": "Russell Brand",
+   "traffic": "507.816 Aufrufe",
+   "summary": "English former comedian and actor (born 1975) – Russell Edward Brand is an English former comedian, actor and media personality. He rose to prominence as the host of Big Brother's Big Mouth, a spin-off of the reality television series Big Brother broadcast on E4. He had his first major film role in the British comedy St Trinia",
+   "news": [],
+   "id": "t1794158650-21"
+  },
+  {
+   "source": "Wikipedia",
+   "region": "US",
+   "title": "Abdul El-Sayed",
+   "traffic": "437.069 Aufrufe",
+   "summary": "American epidemiologist and politician (born 1984) – Abdulrahman Mohamed El-Sayed is an American politician and epidemiologist who is the United States senator-elect from Michigan.",
+   "news": [],
+   "id": "t1794158650-22"
+  },
+  {
+   "source": "Wikipedia",
+   "region": "US",
+   "title": "Stephen Miller",
+   "traffic": "220.230 Aufrufe",
+   "summary": "American political advisor (born 1985) – Stephen N. Miller is an American political advisor who has served as the White House deputy chief of staff for policy and the homeland security advisor since 2025. He previously served as senior advisor to the president and director of speechwriting from 2017 to 2021 during the f",
+   "news": [],
+   "id": "t1794158650-23"
+  },
+  {
+   "source": "Wikipedia",
+   "region": "US",
+   "title": "2026 United States elections",
+   "traffic": "219.097 Aufrufe",
+   "summary": " – Elections in the United States were held on November 3, 2026. In these midterm elections, which occurred during the non-consecutive second term of incumbent Republican president Donald Trump, all 435 seats in the U.S. House of Representatives and 35 of the 100 seats in the U.S. S",
+   "news": [],
+   "id": "t1794158650-24"
+  },
+  {
+   "source": "Wikipedia",
+   "region": "US",
+   "title": "Jon Ossoff",
+   "traffic": "211.594 Aufrufe",
+   "summary": "American politician (born 1987) – Thomas Jonathan Ossoff is an American politician who has served since 2021 as the senior United States senator from Georgia. A member of the Democratic Party, he is the youngest incumbent U.S. senator.",
+   "news": [],
+   "id": "t1794158650-25"
+  },
+  {
+   "source": "Wikipedia",
+   "region": "US",
+   "title": ".xyz",
+   "traffic": "209.858 Aufrufe",
+   "summary": "Internet top-level domain – .xyz is a top-level domain name introduced through ICANN's new generic top-level domain (gTLD) Program. Its name consists of the last three letters of the Latin-script alphabet. XYZ.com and CentralNic are the registries for the domain, which was created by entrepreneur Daniel Neg",
+   "news": [],
+   "id": "t1794158650-26"
+  },
+  {
+   "source": "Wikipedia",
+   "region": "US",
+   "title": "Nithya Raman",
+   "traffic": "184.633 Aufrufe",
+   "summary": "American politician (born 1981) – Nithya Varsha Raman is an American politician and urban planner who is the mayor-elect of Los Angeles. A member of the Democratic Party and the Democratic Socialists of America, Raman has served as the Los Angeles city councilmember for the 4th district since 2020.",
+   "news": [],
+   "id": "t1794158650-27"
+  },
+  {
+   "source": "Wikipedia",
+   "region": "US",
+   "title": "James Talarico",
+   "traffic": "171.286 Aufrufe",
+   "summary": "American politician (born 1989) – James Dell Talarico is an American politician and educator who is the United States senator-elect from Texas. A member of the Democratic Party, he has served since 2018 as a member of the Texas House of Representatives.",
+   "news": [],
+   "id": "t1794158650-28"
+  },
+  {
+   "source": "Wikipedia",
+   "region": "US",
+   "title": "Scene (2026 film)",
+   "traffic": "159.862 Aufrufe",
+   "summary": "2026 Indian film by Jithu Madhavan – Scene is a 2026 Indian Tamil-language action comedy film written and directed by Jithu Madhavan. Produced by Suriya and Jyothika's 2D Entertainment and the newly established Zhagaram Studios, the film stars Suriya, Naslen and Nazriya Nazim. It revolves around a police officer bei",
+   "news": [],
+   "id": "t1794158650-29"
+  },
+  {
+   "source": "Wikipedia",
+   "region": "US",
+   "title": "Joe Fagnano",
+   "traffic": "149.695 Aufrufe",
+   "summary": "American football player (born 2001) – Joseph Fagnano is an American professional football quarterback for the Baltimore Ravens of the National Football League (NFL). He played college football for the Maine Black Bears and UConn Huskies.",
+   "news": [],
+   "id": "t1794158650-30"
+  },
+  {
+   "source": "Wikipedia",
+   "region": "US",
+   "title": "Gina Hinojosa",
+   "traffic": "138.504 Aufrufe",
+   "summary": "Governor-elect of Texas (born 1973) – Regina Inez Hinojosa is an American politician and lawyer who is the governor-elect of Texas. A member of the Democratic Party, she has represented the 49th district in the Texas House of Representatives since 2017. Upon taking office, she is expected to become Texas's first Lati",
+   "news": [],
+   "id": "t1794158650-31"
+  },
+  {
+   "source": "Wikipedia",
+   "region": "US",
+   "title": "Godzilla Minus Zero",
+   "traffic": "122.560 Aufrufe",
+   "summary": "2026 Japanese film by Takashi Yamazaki – Godzilla Minus Zero  is a 2026 Japanese epic kaiju film written, directed, and with visual effects supervised by Takashi Yamazaki. A sequel to Godzilla Minus One (2023), it is the 39th film in the Godzilla franchise, the 34th film produced by Toho, and the sixth installment in th",
+   "news": [],
+   "id": "t1794158650-32"
+  },
+  {
+   "source": "Wikipedia",
+   "region": "US",
+   "title": "Joran van der Sloot",
+   "traffic": "114.800 Aufrufe",
+   "summary": "Dutch murderer (born 1987) – Joran Andreas Petrus van der Sloot is a Dutch murderer, extortionist, con man, and drug trafficker who was convicted in the 2010 killing of Stephany Flores Ramírez in Lima, Peru. He first came to public attention as the prime suspect in the disappearance of Natalee Holloway in 20",
+   "news": [],
+   "id": "t1794158650-33"
+  },
+  {
+   "source": "Wikipedia",
+   "region": "US",
+   "title": "2026 United States Senate elections",
+   "traffic": "101.863 Aufrufe",
+   "summary": " – The 2026 United States Senate elections were held on November 3, 2026, with 33 of the 100 seats in the Senate being contested in regular elections. In these elections, voters elected candidates to six-year terms that begin on January 3, 2027, and expire on January 3, 2033. The Se",
+   "news": [],
+   "id": "t1794158650-34"
+  },
+  {
+   "source": "Wikipedia",
+   "region": "DE",
    "title": "Ilse Aigner",
    "traffic": "203.577 Aufrufe",
    "summary": "deutsche Politikerin (CSU), MdL, MdB, Bundesministerin – Ilse Aigner ist eine deutsche Politikerin (CSU) und seit November 2018 Präsidentin des Bayerischen Landtags, dessen Mitglied sie seit 2013 ist. Außerdem ist sie seit 2011 Vorsitzende des größten CSU-Bezirksverbandes Oberbayern.",
    "news": [],
-   "id": "t1794155711-10"
+   "id": "t1794158650-35"
   },
   {
    "source": "Wikipedia",
+   "region": "DE",
    "title": "Hubert Aiwanger",
    "traffic": "108.895 Aufrufe",
    "summary": "deutscher Politiker (Freie Wähler), MdL, bayerischer Wirtschaftsminister (1971–2026) – Hubert Aiwanger war ein deutscher Politiker. Er war von 2018 bis zu seinem Tod stellvertretender bayerischer Ministerpräsident sowie Staatsminister für Wirtschaft, Landesentwicklung und Energie. Ebenso war er Bundesvorsitzender sowie bayerischer Landesvorsitzender der Freien Wähl",
    "news": [],
-   "id": "t1794155711-11"
+   "id": "t1794158650-36"
   },
   {
    "source": "Wikipedia",
+   "region": "DE",
    "title": "Tanja Schweiger",
    "traffic": "48.651 Aufrufe",
    "summary": "deutsche Politikerin (Freie Wähler), MdL – Tanja Schweiger ist eine deutsche Kommunal- und Landespolitikerin und seit Mai 2014 Landrätin des Landkreises Regensburg. Seit 2018 ist sie Mitglied im Bezirkstag der Oberpfalz. Von 2008 bis 2014 gehörte sie als Abgeordnete dem Bayerischen Landtag an.",
    "news": [],
-   "id": "t1794155711-12"
+   "id": "t1794158650-37"
   },
   {
    "source": "Wikipedia",
+   "region": "DE",
    "title": "Leonard Cohen",
    "traffic": "35.698 Aufrufe",
    "summary": "kanadischer Sänger und Dichter (1934–2016) – Leonard Norman Cohen [lɛnərd ˈnɔː(r)mən ˈkoʊən] CC, GOQ war ein kanadischer Singer-Songwriter, Schriftsteller, Dichter und Maler.",
    "news": [],
-   "id": "t1794155711-13"
+   "id": "t1794158650-38"
   },
   {
    "source": "Wikipedia",
+   "region": "DE",
    "title": "Zwei zu eins",
    "traffic": "33.506 Aufrufe",
    "summary": "Film von Natja Brunckhorst (2024) – Zwei zu eins ist eine Filmkomödie von Natja Brunckhorst. In dem auf realen Begebenheiten beruhenden Film spielen Sandra Hüller, Max Riemelt und Ronald Zehrfeld Freunde, die kurz nach dem Mauerfall Millionen DDR-Mark finden und versuchen, sie in Westmark umzutauschen. Zwei zu eins",
    "news": [],
-   "id": "t1794155711-14"
+   "id": "t1794158650-39"
   },
   {
    "source": "Wikipedia",
+   "region": "DE",
    "title": "Reinhold Messner",
    "traffic": "30.213 Aufrufe",
    "summary": "italienischer Extrembergsteiger, Abenteurer, Politiker (Verdi Grüne Vërc), MdEP (* 1944) – Reinhold Andreas Messner ist ein italienischer Extrembergsteiger, Abenteurer, Buchautor, Museumsgründer und ehemaliges Mitglied des Europäischen Parlaments aus Südtirol.",
    "news": [],
-   "id": "t1794155711-15"
+   "id": "t1794158650-40"
   },
   {
    "source": "Wikipedia",
+   "region": "DE",
    "title": "Russell Brand",
    "traffic": "28.393 Aufrufe",
    "summary": "britischer Komiker, Moderator, Sänger, Schauspieler, Autor, politischer Aktivist, Verschwörungstheoretiker – Russell Edward Brand ist ein britischer Komiker, Moderator, Sänger, Schauspieler, Autor, politischer Aktivist und Verschwörungstheoretiker. Brand erhielt immer wieder viel mediale Aufmerksamkeit für seine Promiskuität, Drogenkonsum, politischen Ansichten, provokatives Verhalten, ",
    "news": [],
-   "id": "t1794155711-16"
+   "id": "t1794158650-41"
   },
   {
    "source": "Wikipedia",
+   "region": "DE",
    "title": "Melanie Raabe",
    "traffic": "28.011 Aufrufe",
    "summary": "deutsche Schriftstellerin – Melanie Raabe ist eine deutsche Schriftstellerin. Sie wurde ab 2015 mit Romanen wie Die Falle, Die Wahrheit oder Der Schatten bekannt.",
    "news": [],
-   "id": "t1794155711-17"
+   "id": "t1794158650-42"
   },
   {
    "source": "Wikipedia",
+   "region": "DE",
    "title": "Vanessa Emde",
    "traffic": "24.108 Aufrufe",
    "summary": "deutsche Regisseurin, Autorin und Politikerin (Die Linke), MdA – Vanessa „Vedi“ Emde ist eine deutsche Politikerin, Regisseurin und Autorin. Bei der Wahl zum Abgeordnetenhaus von Berlin 2026 wurde sie ins Landesparlament gewählt.",
    "news": [],
-   "id": "t1794155711-18"
+   "id": "t1794158650-43"
   },
   {
    "source": "Wikipedia",
+   "region": "DE",
    "title": "Matthias Brandt",
    "traffic": "23.214 Aufrufe",
    "summary": "deutscher Schauspieler – Matthias Frederik Brandt ist ein deutscher Schauspieler, Hörspiel- und Hörbuchsprecher sowie Autor. Seit 1989 trat er in über 80 Film- und Fernsehproduktionen vor die Kamera und wirkte in zahlreichen Theaterstücken. Einem breiten Fernsehpublikum wurde er unter anderem als Münchne",
    "news": [],
-   "id": "t1794155711-19"
+   "id": "t1794158650-44"
   },
   {
    "source": "Wikipedia",
+   "region": "DE",
    "title": "Janosch",
    "traffic": "20.031 Aufrufe",
    "summary": "deutscher Illustrator und Schriftsteller (1931–2026) – Janosch war ein deutscher Illustrator und Schriftsteller. Er war vor allem für seine illustrierten Kindergeschichten wie Oh, wie schön ist Panama, Post für den Tiger und Ich mach dich gesund, sagte der Bär bekannt, die zum Teil als Janoschs Traumstunde verfilmt wurden. Außerdem i",
    "news": [],
-   "id": "t1794155711-20"
+   "id": "t1794158650-45"
   },
   {
    "source": "Wikipedia",
+   "region": "DE",
    "title": "Sarah Tacke",
    "traffic": "18.363 Aufrufe",
    "summary": "deutsche Journalistin und Fernsehmoderatorin – Sarah Céline Tacke ist eine deutsche Fernsehmoderatorin und Journalistin.",
    "news": [],
-   "id": "t1794155711-21"
+   "id": "t1794158650-46"
   },
   {
    "source": "Wikipedia",
+   "region": "DE",
    "title": "Abdul El-Sayed",
    "traffic": "16.824 Aufrufe",
    "summary": "US-amerikanischer Politiker – Abdulrahman Mohamed „Abdul“ El-Sayed ist ein US-amerikanischer Epidemiologe, Politiker der Demokratischen Partei und ehemaliger Beamter des öffentlichen Gesundheitswesens. Nach erfolgloser Bewerbung um das Gouverneursamt von Michigan im Jahr 2018 gewann El-Sayed im November 2026 ",
    "news": [],
-   "id": "t1794155711-22"
+   "id": "t1794158650-47"
   },
   {
    "source": "Wikipedia",
+   "region": "DE",
    "title": "Die weiße Rose (Film)",
    "traffic": "16.296 Aufrufe",
    "summary": "Film von Michael Verhoeven (1982) – Die weiße Rose, ein deutscher Spielfilm des Regisseurs Michael Verhoeven über die gleichnamige Widerstandsgruppe gegen das NS-Regime, war die erfolgreichste deutsche Kinoproduktion des Jahres 1982.",
    "news": [],
-   "id": "t1794155711-23"
+   "id": "t1794158650-48"
   },
   {
    "source": "Wikipedia",
+   "region": "DE",
    "title": "Benjamin von Stuckrad-Barre",
    "traffic": "15.962 Aufrufe",
    "summary": "deutscher Schriftsteller – Benjamin von Stuckrad-Barre ist ein deutscher Schriftsteller, Journalist und Moderator. Seine literarischen Werke werden zumeist der Popliteratur zugerechnet.",
    "news": [],
-   "id": "t1794155711-24"
-  },
-  {
-   "source": "Wikipedia",
-   "title": "Bettina Zimmermann",
-   "traffic": "15.711 Aufrufe",
-   "summary": "deutsche Schauspielerin und Model – Bettina Zimmermann ist eine deutsche Schauspielerin und Synchronsprecherin.",
-   "news": [],
-   "id": "t1794155711-25"
-  },
-  {
-   "source": "Wikipedia",
-   "title": "Glass (2019)",
-   "traffic": "15.439 Aufrufe",
-   "summary": "Film von M. Night Shyamalan (2019) – Glass ist ein Thriller von M. Night Shyamalan. Es handelt sich bei dem Film um eine Fortsetzung von Split aus dem Jahr 2016, der eine eigenständige Fortsetzung von Unbreakable – Unzerbrechlich aus dem Jahr 2000 ist. Der Film kam am 17. Januar 2019 in die deutschen und am 18. Janu",
-   "news": [],
-   "id": "t1794155711-26"
-  },
-  {
-   "source": "Wikipedia",
-   "title": "Maria Innocentia Hummel",
-   "traffic": "14.205 Aufrufe",
-   "summary": "deutsche Franziskanerin, Zeichnerin und Malerin – Maria Innocentia Hummel OSF war eine deutsche Franziskanerin, Zeichnerin und Malerin. Weltweit berühmt wurde sie durch ihre Kinderbilder und die nach ihren Entwürfen gefertigten Hummel-Figuren aus Keramik.",
-   "news": [],
-   "id": "t1794155711-27"
-  },
-  {
-   "source": "Wikipedia",
-   "title": "Christian Freuding",
-   "traffic": "13.587 Aufrufe",
-   "summary": "deutscher General – Christian Freuding ist ein Generalleutnant der Bundeswehr, seit dem 1. Oktober 2025 Inspekteur des Heeres und der designierte 18. Generalinspekteur der Bundeswehr.",
-   "news": [],
-   "id": "t1794155711-28"
-  },
-  {
-   "source": "Wikipedia",
-   "title": "Kariba-Talsperre",
-   "traffic": "13.185 Aufrufe",
-   "summary": "Talsperre in Afrika – Die Kariba-Talsperre ist eine große Talsperre in der Kariba-Schlucht des Sambesi entlang der Grenze von Sambia und Simbabwe im südlichen Afrika. Die Anlage wird von einer binationalen Behörde, der Zambezi River Authority, verwaltet.",
-   "news": [],
-   "id": "t1794155711-29"
-  },
-  {
-   "source": "Wikipedia",
-   "title": "Sandra Hüller",
-   "traffic": "12.868 Aufrufe",
-   "summary": "deutsche Schauspielerin – Sandra Hüller ist eine deutsche Theater- und Filmschauspielerin und -dozentin. 2024 wurde sie von der National Society of Film Critics für ihre Rollen in Anatomie eines Falls und The Zone of Interest als beste Schauspielerin ausgezeichnet. Für ihre Rolle in Anatomie eines Falls w",
-   "news": [],
-   "id": "t1794155711-30"
-  },
-  {
-   "source": "Wikipedia",
-   "title": "Martin Schneider",
-   "traffic": "12.861 Aufrufe",
-   "summary": "deutscher Komiker und Schauspieler – Martin Rudolf „Maddin“ Schneider ist ein deutscher Komiker, Schauspieler, Sänger und Autor.",
-   "news": [],
-   "id": "t1794155711-31"
-  },
-  {
-   "source": "Wikipedia",
-   "title": "Salpetersäure",
-   "traffic": "12.348 Aufrufe",
-   "summary": "anorganische Säure – Salpetersäure (HNO3), genannt auch Scheidewasser, ist die bekannteste und stabilste Sauerstoffsäure des Stickstoffs. Die Säure wird seit 1908 großtechnisch im Ostwald-Verfahren durch katalytische Oxidation von Ammoniak hergestellt. Das Ammoniak wird zuvor mit dem Haber-Bosch-Verf",
-   "news": [],
-   "id": "t1794155711-32"
-  },
-  {
-   "source": "Wikipedia",
-   "title": "Bundespräsident (Deutschland)",
-   "traffic": "11.694 Aufrufe",
-   "summary": "Staatsoberhaupt der Bundesrepublik Deutschland – Der Bundespräsident ist das Staatsoberhaupt der Bundesrepublik Deutschland und protokollarisch ihr höchstes Verfassungsorgan.",
-   "news": [],
-   "id": "t1794155711-33"
-  },
-  {
-   "source": "Wikipedia",
-   "title": "6. November",
-   "traffic": "11.569 Aufrufe",
-   "summary": "Datum – Der 6. November ist der 310. Tag des gregorianischen Kalenders, somit bleiben 55 Tage bis zum Jahresende.",
-   "news": [],
-   "id": "t1794155711-34"
+   "id": "t1794158650-49"
   }
  ]
 }
