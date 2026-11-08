@@ -27,7 +27,7 @@
   "tiktok_privacy": "SELF_ONLY",
   "tiktok_client_key": "",
   "ai_label": true,
-  "trend_mode": "half",
+  "trend_mode": "always",
   "make_thumbnail": true,
   "youtube_thumbnail": true
  },
