@@ -50,8 +50,14 @@ def yt_upload(v, path):
     h = {"Authorization": "Bearer " + _yt_access()}
     tags = v.get("hashtags") or []
     desc = (v.get("description") or "") + "\n\n" + " ".join(tags)
+    kw = (v.get("tags") or []) + [t.lstrip("#") for t in tags if t.lower() != "#shorts"]
+    keep, n = [], 0
+    for k in kw:   # YouTube erlaubt zusammen max. 500 Zeichen
+        if k and k not in keep and n + len(k) + 1 < 480:
+            keep.append(k)
+            n += len(k) + 1
     meta = {"snippet": {"title": v["title"][:100], "description": desc[:4900],
-                        "tags": [t.lstrip("#") for t in tags][:15],
+                        "tags": keep,
                         "categoryId": str(cfg("youtube_category") or "24"),
                         "defaultLanguage": "de", "defaultAudioLanguage": "de"},
             "status": {"privacyStatus": cfg("youtube_privacy") or "public",
@@ -69,6 +75,19 @@ def yt_upload(v, path):
     if r2.status_code >= 400:
         raise RuntimeError(f"YouTube-Upload {r2.status_code}: {r2.text[:400]}")
     js = r2.json()
+    cover = path.parent / f"{v['id']}-cover.jpg"
+    if cfg("youtube_thumbnail") and cover.exists():
+        try:
+            with open(cover, "rb") as f:
+                r3 = requests.post("https://www.googleapis.com/upload/youtube/v3/thumbnails/set", params={"videoId": js["id"], "uploadType": "media"},
+                                   headers={**h, "Content-Type": "image/jpeg"}, data=f, timeout=120)
+            if r3.status_code >= 400:
+                log("YouTube-Thumbnail nicht gesetzt (eigene Thumbnails gehen erst, wenn der Kanal per Telefon "
+                    f"bestätigt ist: youtube.com/verify): {r3.text[:160]}")
+            else:
+                log("YouTube-Thumbnail gesetzt")
+        except Exception as e:  # noqa: BLE001
+            log(f"YouTube-Thumbnail: {e}")
     return js["id"], js.get("status", {}).get("privacyStatus", "")
 
 
@@ -148,6 +167,7 @@ def tt_upload(v, path):
         body = {"post_info": {"title": caption, "privacy_level": privacy, "disable_comment": False,
                               "disable_duet": False, "disable_stitch": False,
                               "is_aigc": bool(cfg("ai_label")),
+                              **({"video_cover_timestamp_ms": int(v["cover_ms"])} if v.get("cover_ms") else {}),
                               "brand_content_toggle": False, "brand_organic_toggle": False},
                 "source_info": source}
         data = _tt_ok(requests.post(TT_API + "/post/publish/video/init/", headers=h, json=body, timeout=T), "Init")

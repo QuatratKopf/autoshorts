@@ -281,9 +281,18 @@ svg text{fill:var(--muted);font-family:var(--f-body);font-size:11px}
 .make{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:12px;align-items:end}
 @media (max-width:700px){.make{grid-template-columns:1fr}}
 .make label{display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:var(--muted)}
+.make label.check{flex-direction:row;align-items:center;font-size:13.5px;color:var(--fg);padding-bottom:10px}
 .check{display:flex;gap:8px;align-items:center;font-size:13.5px;white-space:nowrap}
 .qrow{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
 .qrow:last-child{border-bottom:0}
+.trends{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px}
+.trend{display:flex;justify-content:space-between;gap:12px;align-items:center;border:1px solid var(--line);border-radius:var(--r-s);background:var(--raise);padding:12px 14px;min-width:0;transition:border-color .2s}
+.trend:hover{border-color:var(--line2)}
+.trend .tt{display:flex;flex-direction:column;gap:3px;min-width:0}
+.trend .tt b{font-weight:600;font-size:14px}
+.trend .tt small{font-size:12px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.trend .inline{flex:none;flex-direction:column;align-items:stretch}
+#topicTrend{color:var(--accent)}
 
 /* ── Einstellungen ── */
 .settings-wrap{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:12px;width:100%}
@@ -430,16 +439,18 @@ const MONTHS = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "A
 
 /* ═════════════════ Zustand ═════════════════ */
 let S = null;                                   // App (lokal)
-let CFG = null, ST = {}, VIDS = [], STATS = {v: {}, ch: {}};   // Daten aus dem Repository
+let CFG = null, ST = {}, VIDS = [], STATS = {v: {}, ch: {}}, TRENDS = {items: []};   // Daten aus dem Repository
 let SECRETS = null, RUNS = [], PENDING = null, LOADERR = "";
 let TAB = (location.hash || "#dashboard").slice(1);
 if (!["dashboard", "kalender", "studio", "einstellungen"].includes(TAB)) TAB = "dashboard";
-const S_ = k => (CFG && CFG.settings || {})[k];
+const DEF = {trend_mode: "half", make_thumbnail: true, youtube_thumbnail: true};
+const S_ = k => { const v = (CFG && CFG.settings || {})[k]; return v === undefined ? DEF[k] : v; };
 const cat = slug => (CFG && CFG.categories || []).find(c => c.slug === slug);
 
 async function loadData() {
   try {
-    const [c, s, v, st] = await Promise.all(["config", "state", "videos", "stats"].map(f => gh("GET", `/contents/docs/data/${f}.json?ref=main`, null, true)));
+    const [c, s, v, st, tr] = await Promise.all(["config", "state", "videos", "stats", "trends"].map(f => gh("GET", `/contents/docs/data/${f}.json?ref=main`, null, true).catch(e => { if (f === "trends") return {items: []}; throw e; })));
+    TRENDS = tr && tr.items ? tr : {items: []};
     CFG = typeof c === "string" ? JSON.parse(c) : c; ST = s || {}; VIDS = v || []; STATS = st || {v: {}, ch: {}};
     CFG.settings = CFG.settings || {}; CFG.categories = CFG.categories || []; CFG.queue = CFG.queue || [];
     LOADERR = "";
@@ -470,7 +481,7 @@ async function dispatch(inputs, label) {
 
 /* ═════════════════ Läufe auf GitHub ═════════════════ */
 let runTimer = null, wasActive = false;
-const RUNLABEL = {make: "Video wird erstellt", upload: "Upload läuft", stats: "Zahlen werden geholt", auto: "Autopilot läuft"};
+const RUNLABEL = {make: "Video wird erstellt", upload: "Upload läuft", stats: "Zahlen werden geholt", trends: "Trends werden gesammelt", auto: "Autopilot läuft"};
 function runName(r) { if (r.event === "schedule") return "Autopilot"; const a = (r.display_title || "").trim().split(/\s+/)[0]; return RUNLABEL[a] || r.display_title || "Auftrag"; }
 const isLive = r => r.status !== "completed" && (r.event !== "schedule" || Date.now() - new Date(r.run_started_at || r.created_at) > 90000);
 async function pollRuns() {
@@ -536,6 +547,7 @@ function nextRun() {
 }
 const STATUS = {rendering: ["In Arbeit", "warn"], rendered: ["Fertig, nicht hochgeladen", "mute"], published: ["Veröffentlicht", "good"], partial: ["Teilweise", "warn"], error: ["Fehler", "bad"]};
 const thumb = v => v.thumb ? `<img class="thumb" loading="lazy" alt="" src="https://raw.githubusercontent.com/${esc(S.owner)}/${esc(S.repo)}/main/docs/thumbs/${v.id}.jpg" onerror="this.style.visibility='hidden'">` : `<span class="thumb"></span>`;
+const trendChip = v => v.trend ? `<span class="chip acc" title="${esc(v.trend.source)}: ${esc(v.trend.title)}">🔥 Trend</span>` : "";
 const mp4 = v => `https://github.com/${S.owner}/${S.repo}/releases/download/videos/${v.id}.mp4`;
 
 /* ═════════════════ Gerüst ═════════════════ */
@@ -690,7 +702,7 @@ function viewDash() {
   <section class="panel in" style="--i:6"><div class="section-h"><div><h2>Alle Videos</h2><p class="hint">Neueste zuerst. Fehlgeschlagene Uploads kannst du hier wiederholen.</p></div></div>
     <div class="scroll">${rows.length ? `<table><thead><tr><th class="t">Video</th><th>Erstellt</th><th class="t">Status</th><th>YT Aufrufe</th><th>TT Aufrufe</th><th>Likes</th><th></th></tr></thead><tbody>
     ${rows.map(v => { const st = STATUS[v.status] || [v.status, "mute"], c = cat(v.category);
-      return `<tr><td class="t w" style="min-width:260px"><div class="vrow">${thumb(v)}<div class="tt"><b>${esc(v.title || v.topic || "…")}</b><div><span class="chip">${esc(c?.emoji || "")} ${esc(c?.name || v.category)}</span>${v.yt_id ? `<a class="chip mute" href="https://youtube.com/shorts/${esc(v.yt_id)}" target="_blank" rel="noopener">YouTube ↗</a>` : ""}${v.tt_post_id ? `<span class="chip mute">TikTok ✓</span>` : ""}</div></div></div></td>
+      return `<tr><td class="t w" style="min-width:260px"><div class="vrow">${thumb(v)}<div class="tt"><b>${esc(v.title || v.topic || "…")}</b><div><span class="chip">${esc(c?.emoji || "")} ${esc(c?.name || v.category)}</span>${trendChip(v)}${v.yt_id ? `<a class="chip mute" href="https://youtube.com/shorts/${esc(v.yt_id)}" target="_blank" rel="noopener">YouTube ↗</a>` : ""}${v.tt_post_id ? `<span class="chip mute">TikTok ✓</span>` : ""}</div></div></div></td>
         <td>${fmtTs(v.created)}</td>
         <td class="t w" style="min-width:150px"><span class="chip ${st[1]}">${st[0]}</span>${v.yt_status && v.yt_status !== "public" ? `<div class="hint">YT: ${esc(v.yt_status)}</div>` : ""}${v.tt_status ? `<div class="hint">TT: ${esc(v.tt_status)}</div>` : ""}${v.error ? `<div class="hint neg">${esc(v.error.slice(0, 160))}</div>` : ""}</td>
         <td>${v.st.youtube ? fmtN(v.st.youtube.views) : "–"}</td><td>${v.st.tiktok ? fmtN(v.st.tiktok.views) : "–"}</td><td>${fmtN(v.likes)}</td>
@@ -781,7 +793,7 @@ function openDay(k) {
         <div><span class="l">Kommentare</span><b>${fmtN(x.comments)}</b></div><div><span class="l">Shares</span><b>${fmtN(x.shares)}</b></div><div><span class="l">Neue Follower</span><b>${x.f_youtube == null && x.f_tiktok == null ? "–" : "+" + fmtN((x.f_youtube || 0) + (x.f_tiktok || 0))}</b></div>
       </div>
       <div class="drw-list"><span class="l">An diesem Tag erstellt</span>${made.length ? made.map(v => { const c = cat(v.category), st = STATUS[v.status] || [v.status, "mute"];
-        return `<div class="tr">${thumb(v)}<div class="tt"><b>${esc(v.title || v.topic)}</b><small>${esc(c?.emoji || "")} ${esc(c?.name || v.category)} · ${new Date(v.created * 1000).toLocaleTimeString("de-DE", {hour: "2-digit", minute: "2-digit"})} Uhr</small><div><span class="chip ${st[1]}">${st[0]}</span></div></div>${v.mp4 ? `<a class="btn sm" href="${esc(mp4(v))}" target="_blank" rel="noopener">MP4</a>` : ""}</div>`; }).join("") : `<div class="empty">Kein Video an diesem Tag erstellt.</div>`}</div>
+        return `<div class="tr">${thumb(v)}<div class="tt"><b>${esc(v.title || v.topic)}</b><small>${esc(c?.emoji || "")} ${esc(c?.name || v.category)} · ${new Date(v.created * 1000).toLocaleTimeString("de-DE", {hour: "2-digit", minute: "2-digit"})} Uhr</small><div><span class="chip ${st[1]}">${st[0]}</span> ${trendChip(v)}</div></div>${v.mp4 ? `<a class="btn sm" href="${esc(mp4(v))}" target="_blank" rel="noopener">MP4</a>` : ""}</div>`; }).join("") : `<div class="empty">Kein Video an diesem Tag erstellt.</div>`}</div>
       <div class="drw-list"><span class="l">Woher die Aufrufe kamen</span>${gains.length ? gains.map(g => `<div class="tr">${thumb(g.v)}<div class="tt"><b>${esc(g.v.title || g.v.topic)}</b><small>♥ ${fmtN(g.likes)} neue Likes</small></div><span class="gain">+${fmtN(g.views)}</span></div>`).join("") : `<div class="empty">Für diesen Tag gibt es noch keine Zahlen.</div>`}</div>
     </div></aside></div>`);
   $("#dayDrw").onclick = e => { if (e.target.id === "dayDrw") closeDay(); };
@@ -807,14 +819,19 @@ function viewStudio() {
       </div>`).join("")}
       <button class="cat" type="button" id="newCat" style="align-items:center;justify-content:center;border-style:dashed;box-shadow:none;min-height:150px"><span class="e">${icon(I.plus)}</span><b>Neue Video-Art</b><span class="hint">z. B. Weltraum oder Geschichte</span></button>
     </div>
-    <div class="make"><label>Thema (optional)<input id="topic" maxlength="300" placeholder="Leer lassen, dann sucht die KI ein Thema aus"></label>
+    <div class="make"><label>Thema (optional)<input id="topic" maxlength="300" placeholder="Leer lassen, dann sucht die KI ein Thema aus (bei Trend-Kategorien oft ein aktuelles)"><span class="hint" id="topicTrend" hidden></span></label>
       <label class="check"><input type="checkbox" id="upl" checked> direkt hochladen</label>
       <button class="btn accent" id="mk" style="padding:11px 20px">${icon(I.spark)}Video erstellen</button></div>
   </section>
+  <section class="panel in" style="--i:1" id="trendBox">
+    <div class="section-h"><div><h2>Aktuell im Trend</h2><p class="hint">Was Deutschland gerade sucht und liest${TRENDS.updated ? " · Stand " + fmtTs(TRENDS.updated) : ""}. Die KI macht daraus ein passendes, sicheres Thema.</p></div>
+      <div class="inline"><div class="seg" id="tSeg">${["Alle", "Google Trends", "Wikipedia", "YouTube"].map(k => `<button type="button" data-v="${k}" aria-pressed="${TSRC === k}">${k === "Google Trends" ? "Google" : k}</button>`).join("")}</div><button class="btn" id="tRef">${icon(I.reload)}Aktualisieren</button></div></div>
+    <div class="trends" id="tList"></div>
+  </section>
   <div class="grid2">
-    <section class="panel in" style="--i:1"><div><h2>Themen-Warteschlange</h2><p class="hint">Der Autopilot nimmt diese Themen der Reihe nach, bevor er selbst welche sucht.</p></div>
-      <div>${queue.length ? queue.map(q => `<div class="qrow"><div><span class="chip">${esc(cat(q.category)?.emoji || "")} ${esc(cat(q.category)?.name || q.category)}</span> ${esc(q.text)}</div><button class="ibtn" data-delq="${esc(q.id)}" aria-label="Entfernen">${icon(I.x)}</button></div>`).join("") : `<div class="empty">Leer – die KI denkt sich passende Themen selbst aus.</div>`}</div></section>
-    <section class="panel in" style="--i:2"><div><h2>Themen einplanen</h2><p class="hint">Für die nächsten Tage vormerken, eins pro Zeile.</p></div>
+    <section class="panel in" style="--i:2"><div><h2>Themen-Warteschlange</h2><p class="hint">Der Autopilot nimmt diese Themen der Reihe nach, bevor er selbst welche sucht.</p></div>
+      <div>${queue.length ? queue.map(q => `<div class="qrow"><div><span class="chip">${esc(cat(q.category)?.emoji || "")} ${esc(cat(q.category)?.name || q.category)}</span>${q.trend ? ' <span class="chip acc">🔥 Trend</span>' : ""} ${esc(q.text)}</div><button class="ibtn" data-delq="${esc(q.id)}" aria-label="Entfernen">${icon(I.x)}</button></div>`).join("") : `<div class="empty">Leer – die KI denkt sich passende Themen selbst aus.</div>`}</div></section>
+    <section class="panel in" style="--i:3"><div><h2>Themen einplanen</h2><p class="hint">Für die nächsten Tage vormerken, eins pro Zeile.</p></div>
       <select id="qcat" aria-label="Kategorie">${CFG.categories.map(c => `<option value="${esc(c.slug)}">${esc(c.emoji)} ${esc(c.name)}</option>`).join("")}</select>
       <textarea id="qtext" placeholder="Was passiert, wenn man nie schläft?&#10;Die Legende vom Klabautermann"></textarea>
       <div><button class="btn primary" id="qadd">Zur Warteschlange</button></div></section>
@@ -825,11 +842,32 @@ function viewStudio() {
   document.querySelectorAll("[data-edit]").forEach(b => b.onclick = () => catModal(+b.dataset.edit));
   document.querySelectorAll("[data-delq]").forEach(b => b.onclick = () => { CFG.queue = CFG.queue.filter(q => q.id !== b.dataset.delq); persist("Thema entfernt", b); });
   $("#newCat").onclick = () => catModal(-1);
+  drawTrends();
+  document.querySelectorAll("#tSeg button").forEach(b => b.onclick = () => { TSRC = b.dataset.v; document.querySelectorAll("#tSeg button").forEach(x => x.setAttribute("aria-pressed", x === b)); drawTrends(); });
+  $("#tRef").onclick = () => dispatch({action: "trends"}, "Trends werden gesammelt");
+  $("#topic").addEventListener("input", () => { if (TOPIC_TREND) { TOPIC_TREND = null; $("#topicTrend").hidden = true; } });
   $("#mk").onclick = async () => { const b = $("#mk"); b.disabled = true;
-    const ok = await dispatch({action: "make", category: SEL || "", topic: $("#topic").value.trim(), upload: $("#upl").checked ? "1" : "0"}, "Video wird erstellt");
-    b.disabled = false; if (ok) { $("#topic").value = ""; toast("Auftrag gesendet. Oben siehst du den Fortschritt."); scrollTo({top: 0, behavior: "smooth"}); } };
+    const ok = await dispatch({action: "make", category: SEL || "", topic: $("#topic").value.trim(), upload: $("#upl").checked ? "1" : "0", trend: TOPIC_TREND ? TOPIC_TREND.id : ""}, "Video wird erstellt");
+    b.disabled = false; if (ok) { $("#topic").value = ""; TOPIC_TREND = null; $("#topicTrend").hidden = true; toast("Auftrag gesendet. Oben siehst du den Fortschritt."); scrollTo({top: 0, behavior: "smooth"}); } };
   $("#qadd").onclick = () => { const t = $("#qtext").value.split("\n").map(s => s.trim()).filter(Boolean); if (!t.length) return toast("Bitte mindestens ein Thema eingeben.", true);
     const now = Date.now() / 1000; t.forEach((x, i) => CFG.queue.push({id: "q" + Math.random().toString(36).slice(2, 10), category: $("#qcat").value, text: x.slice(0, 300), created: now + i})); persist("Themen eingeplant", $("#qadd")); };
+}
+let TSRC = "Alle", TOPIC_TREND = null;
+function drawTrends() {
+  const el = $("#tList"); if (!el) return;
+  const items = (TRENDS.items || []).filter(t => TSRC === "Alle" || t.source === TSRC).slice(0, 18);
+  if (!items.length) { el.innerHTML = `<div class="empty">${TRENDS.updated ? "In dieser Quelle gerade nichts." : "Noch keine Trends geholt. Tippe auf „Aktualisieren“, das dauert etwa eine Minute."}</div>`; return; }
+  el.innerHTML = items.map(t => `<div class="trend"><div class="tt"><div><span class="chip ${t.source === "Google Trends" ? "acc" : "mute"}">${esc(t.source === "Google Trends" ? "Google" : t.source)}</span>${t.traffic ? ` <span class="hint">${esc(t.traffic)}</span>` : ""}</div>
+      <b>${esc(t.title)}</b>${(t.news || [])[0] ? `<small>${esc(t.news[0].title)}${t.news[0].source ? " · " + esc(t.news[0].source) : ""}</small>` : t.summary ? `<small>${esc(t.summary.slice(0, 140))}</small>` : ""}</div>
+    <div class="inline"><button class="btn sm primary" data-tuse="${esc(t.id)}">Als Thema</button><button class="btn sm" data-tq="${esc(t.id)}">Einplanen</button></div></div>`).join("");
+  const find = id => (TRENDS.items || []).find(t => t.id === id);
+  el.querySelectorAll("[data-tuse]").forEach(b => b.onclick = () => { const t = find(b.dataset.tuse); TOPIC_TREND = t;
+    $("#topic").value = t.title; $("#topicTrend").hidden = false; $("#topicTrend").textContent = "🔥 Aktueller Anlass – die KI macht daraus ein passendes Thema für die gewählte Video-Art.";
+    $("#topic").scrollIntoView({behavior: "smooth", block: "center"}); });
+  el.querySelectorAll("[data-tq]").forEach(b => b.onclick = () => { const t = find(b.dataset.tq);
+    CFG.queue.push({id: "q" + Math.random().toString(36).slice(2, 10), category: SEL || CFG.categories[0].slug, text: t.title, created: Date.now() / 1000,
+      trend: {title: t.title, source: t.source, news: (t.news || []).slice(0, 3), summary: t.summary || ""}});
+    persist("Trend eingeplant: " + t.title, b); });
 }
 function catModal(i) {
   const c = i >= 0 ? CFG.categories[i] : {emoji: "🎬", name: "", description: "", script_style: "", image_mood: "", voice: "de-DE-FlorianMultilingualNeural", voice_rate: "+6%", voice_pitch: "+0Hz", voice_instructions: ""};
@@ -842,6 +880,7 @@ function catModal(i) {
     <div style="display:grid;grid-template-columns:1fr 90px 90px;gap:10px"><select id="cv" aria-label="Stimme">${VOICES.map(([v, l]) => `<option value="${v}" ${c.voice === v ? "selected" : ""}>${l}</option>`).join("")}</select>
       <input id="cr" value="${esc(c.voice_rate || "+0%")}" aria-label="Tempo" title="Tempo"><input id="cp" value="${esc(c.voice_pitch || "+0Hz")}" aria-label="Tonhöhe" title="Tonhöhe"></div>
     <input id="ci" value="${esc(c.voice_instructions || "")}" placeholder="Sprechweise für die OpenAI-Stimme (Premium)" aria-label="Sprechweise">
+    <label class="check"><input type="checkbox" id="ctr" ${("trends" in c ? c.trends : ["fakten", "storys", "mysterien", "tiere"].includes(c.slug)) ? "checked" : ""}> Aktuelle Trends für diese Video-Art nutzen</label>
     <div class="actions"><button class="btn primary" id="cmS">Speichern</button>${i >= 0 ? `<button class="btn danger" id="cmD">Löschen</button>` : ""}<button class="btn" id="cmX">Abbrechen</button></div>
   </div></div>`);
   $("#cn").focus();
@@ -850,7 +889,7 @@ function catModal(i) {
   if ($("#cmD")) $("#cmD").onclick = () => { const b = $("#cmD"); if (b.dataset.sure !== "1") { b.dataset.sure = "1"; b.textContent = "Wirklich löschen?"; return; }
     CFG.categories.splice(i, 1); $("#cm").remove(); persist("Video-Art gelöscht"); };
   $("#cmS").onclick = () => {
-    const v = id => $(id).value.trim(), n = {emoji: v("#ce") || "🎬", name: v("#cn"), description: v("#cd"), script_style: v("#cs"), image_mood: v("#cmo"), voice: v("#cv"), voice_rate: v("#cr") || "+0%", voice_pitch: v("#cp") || "+0Hz", voice_instructions: v("#ci")};
+    const v = id => $(id).value.trim(), n = {emoji: v("#ce") || "🎬", name: v("#cn"), description: v("#cd"), script_style: v("#cs"), image_mood: v("#cmo"), voice: v("#cv"), voice_rate: v("#cr") || "+0%", voice_pitch: v("#cp") || "+0Hz", voice_instructions: v("#ci"), trends: $("#ctr").checked};
     if (!n.name) return toast("Bitte einen Namen eingeben.", true);
     if (i >= 0) Object.assign(CFG.categories[i], n);
     else { let slug = n.name.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "").slice(0, 18) || "art"; while (cat(slug)) slug += "2"; CFG.categories.push({slug, ...n, enabled: true}); SEL = slug; }
@@ -898,6 +937,10 @@ function viewSettings() {
     ${tgl("autopilot", "Autopilot", "Jeden Tag automatisch ein Video erstellen und hochladen. Läuft auf GitHub, auch wenn dieser PC aus ist.")}
     ${fld("upload_times", "Upload-Zeiten", "Deutsche Zeit. Mehrere mit Komma, z. B. 12:00, 18:30. GitHub startet manchmal bis zu einer Stunde später.")}
     ${fld("target_seconds", "Ziel-Länge in Sekunden", "TikTok zahlt im Creator-Programm nur für Videos über 1 Minute.", 'type="number" min="20" max="170"')}`)}
+  ${sec("trend", I.spark, "Trends & Thumbnail", `Trend-Themen ${{off: "aus", half: "jedes 2. Video", always: "immer"}[S_("trend_mode") || "half"]} · Thumbnail ${S_("make_thumbnail") !== false ? "an" : "aus"}`, "", `
+    ${sel("trend_mode", "Aktuelle Trend-Themen", "Der Autopilot schaut bei Google Trends, Wikipedia und YouTube, was gerade gefragt ist, und macht daraus ein passendes Thema. Tragische Nachrichten, Politik und Klatsch werden ausgelassen. Welche Video-Arten Trends nutzen, stellst du im Studio unter „Bearbeiten“ ein.", [["half", "Jedes zweite Video"], ["always", "Immer, wenn ein Trend passt"], ["off", "Aus – nur zeitlose Themen"]])}
+    ${tgl("make_thumbnail", "Eigenes Thumbnail gestalten", "Ein eigenes KI-Bild mit großem Text passend zum Thema. Wird bei TikTok als Titelbild gesetzt.")}
+    ${tgl("youtube_thumbnail", "Thumbnail auf YouTube hochladen", "Geht erst, wenn dein Kanal per Telefon bestätigt ist (youtube.com/verify). Bei Shorts zeigt YouTube es vor allem in Suche und Kanalseite.")}`)}
   ${sec("plattform", I.plug, "Plattformen", `YouTube ${con.youtube ? "verbunden" : "nicht verbunden"} · TikTok ${con.tiktok ? "verbunden" : "nicht verbunden"}`, con.youtube && con.tiktok ? '<span class="chip good">beide</span>' : '<span class="chip warn">offen</span>', `
     ${platBlock("youtube", "YouTube Shorts", "youtube_client_id", "GOOGLE_CLIENT_SECRET", "Google Client-ID", "Google Cloud: OAuth-Client vom Typ „Desktop-App“ anlegen. Die Anleitung steht im Repository (README).")}
     ${tgl("youtube_enabled", "Auf YouTube hochladen")}

@@ -1,6 +1,6 @@
 {
-  "version": "1.0.0",
-  "file": "releases/AutoShorts-1.0.0.cmd",
-  "sha256": "9977be341f5ff5bec8191c8028a43892a67179fc7ee0653777c4d42c92d79f0c",
-  "notes": "Erste Version: Dashboard, Kalender, Studio, Einstellungen, Updates"
+  "version": "1.1.0",
+  "file": "releases/AutoShorts-1.1.0.cmd",
+  "sha256": "bca9660f9a4139fe5181b1234b3575390632492f7ad45cb1bc43b33f2eefb003",
+  "notes": "Trends: aktuelle Themen aus Google Trends, Wikipedia und YouTube · eigenes Thumbnail mit Text · bessere Beschreibung und Tags"
 }

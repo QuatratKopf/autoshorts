@@ -16,9 +16,9 @@ import time
 
 from PIL import Image
 
-from . import ai, render, uploaders, writer
+from . import ai, render, thumbnail, trends, uploaders, writer
 from .schedule import due_slot, stats_due
-from .state import CONFIG, OUT, STATE, THUMBS, VIDEOS, WORK, category, cfg, log, save_all, video
+from .state import load, CONFIG, OUT, STATE, THUMBS, VIDEOS, WORK, cat_trends, category, cfg, log, save_all, video
 
 RELEASE = "videos"
 
@@ -37,7 +37,7 @@ def publish_mp4(path):
         if _gh("release", "view", RELEASE, check=False).returncode != 0:
             _gh("release", "create", RELEASE, "--title", "Videos", "--latest=false",
                 "--notes", "Fertige Videos von AutoShorts. Wird automatisch befüllt.")
-        _gh("release", "upload", RELEASE, str(path), "--clobber")
+        _gh("release", "upload", RELEASE, *[str(p) for p in ([path] if not isinstance(path, list) else path)], "--clobber")
         return True
     except subprocess.CalledProcessError as e:
         log(f"MP4 konnte nicht gespeichert werden: {e.stderr[-300:]}")
@@ -48,7 +48,18 @@ def fetch_mp4(vid):
     path = OUT / f"{vid}.mp4"
     if not path.exists():
         _gh("release", "download", RELEASE, "-p", f"{vid}.mp4", "-D", str(OUT), "--clobber")
+        _gh("release", "download", RELEASE, "-p", f"{vid}-cover.jpg", "-D", str(OUT), "--clobber", check=False)
     return path
+
+
+def want_trend(cat):
+    mode = cfg("trend_mode") or "half"
+    if mode == "off" or not cat_trends(cat):
+        return False
+    if mode == "always":
+        return True
+    STATE["trend_flip"] = not STATE.get("trend_flip", False)   # jedes zweite Video
+    return STATE["trend_flip"]
 
 
 # ---------------------------------------------------------------- Auswahl
@@ -59,25 +70,34 @@ def pick(category_slug=None, topic=None):
         cat = category(category_slug)
         if not cat:
             raise RuntimeError(f"Kategorie '{category_slug}' gibt es nicht.")
-        return cat, topic, None
+        return cat, topic, None, None
     used = set(STATE["used_queue"])
     queue = sorted((q for q in CONFIG["queue"] if q.get("id") not in used and category(q.get("category"))),
                    key=lambda q: q.get("created", 0))
     if queue:
         q = queue[0]
-        return category(q["category"]), q["text"], q["id"]
+        return category(q["category"]), q["text"], q["id"], q.get("trend")
     cats = [c for c in CONFIG["categories"] if c.get("enabled")]
     if not cats:
         raise RuntimeError("Keine Kategorie aktiv – bitte im Studio mindestens eine einschalten.")
     slugs = [c["slug"] for c in cats]
     last = STATE.get("last_category")
-    return (cats[(slugs.index(last) + 1) % len(cats)] if last in slugs else cats[0]), None, None
+    return (cats[(slugs.index(last) + 1) % len(cats)] if last in slugs else cats[0]), None, None, None
 
 
 # ---------------------------------------------------------------- Video bauen
 
-def make(category_slug=None, topic=None, upload=True):
-    cat, topic, qid = pick(category_slug, topic)
+def find_trend(trend_id):
+    if not trend_id:
+        return None
+    for it in load("trends.json", {"items": []}).get("items", []):
+        if it.get("id") == trend_id:
+            return {"title": it["title"], "source": it["source"], "news": it.get("news", [])[:3], "summary": it.get("summary", "")}
+    return None
+
+
+def make(category_slug=None, topic=None, upload=True, trend_id=None):
+    cat, topic, qid, qtrend = pick(category_slug, topic)
     STATE["last_category"] = cat["slug"]
     vid = max([int(STATE.get("next_id") or 1)] + [int(v["id"]) + 1 for v in VIDEOS])
     STATE["next_id"] = vid + 1
@@ -88,20 +108,35 @@ def make(category_slug=None, topic=None, upload=True):
     work.mkdir(parents=True)
     final = OUT / f"{vid}.mp4"
     used = {}
+    trend = qtrend or find_trend(trend_id)
+    if trend:
+        v["trend"] = {"title": trend["title"], "source": trend["source"]}
     log(f"Kategorie: {cat['emoji']} {cat['name']}")
     try:
+        if not topic and want_trend(cat):
+            log("Schaue, was gerade im Trend ist …")
+            try:
+                topic, trend = writer.trend_topic(cat)
+            except Exception as e:  # noqa: BLE001
+                log(f"Trend-Auswahl fehlgeschlagen ({e}) – nehme ein zeitloses Thema")
+            if trend:
+                log(f"Trend: {trend['title']} ({trend['source']})")
+                v["trend"] = {"title": trend["title"], "source": trend["source"]}
+            else:
+                log("Kein passender Trend für diese Kategorie – nehme ein zeitloses Thema")
         if not topic:
             log("Suche ein neues Thema …")
             topic = writer.new_topic(cat)
-            v["topic"] = topic
+        v["topic"] = topic
         if qid:
             STATE["used_queue"].append(qid)
         log(f"Thema: {topic}")
 
         log("Schreibe Drehbuch …")
-        script, used["text"] = writer.write_script(cat, topic)
+        script, used["text"] = writer.write_script(cat, topic, trend)
         scenes = script["scenes"]
-        v.update(title=script["title"], description=script["description"], hashtags=script["hashtags"])
+        v.update(title=script["title"], description=script["description"], hashtags=script["hashtags"],
+                 tags=script.get("tags", []), thumb_text=script["thumbnail"]["text"])
         log(f"Titel: {script['title']} · {len(scenes)} Szenen")
 
         log("Spreche Text ein …")
@@ -125,14 +160,26 @@ def make(category_slug=None, topic=None, upload=True):
                 shutil.copy(work / f"img{i - 1:02d}.jpg", out)
         used["images"] = ", ".join(sorted(img_used))
 
+        cover = None
+        if cfg("make_thumbnail"):
+            log("Gestalte Thumbnail …")
+            raw = work / "cover_raw.jpg"
+            try:
+                ai.image(writer.image_prompt({"image": script["thumbnail"]["image"]}, cat), raw, seed + 999)
+            except Exception as e:  # noqa: BLE001
+                log(f"Thumbnail-Bild fehlgeschlagen ({e}) – nehme das erste Szenenbild")
+                shutil.copy(work / "img00.jpg", raw)
+            cover = OUT / f"{vid}-cover.jpg"
+            thumbnail.make_thumbnail(raw, script["thumbnail"]["text"] or script["title"], cover)
+
         log("Schneide Video …")
         ass = work / "subs.ass"
         render.build_ass(words, scenes, times, ass, bool(cfg("subtitles_lowercase")))
-        render.render(work, scenes, times, voice, ass, final, render.pick_music(cat["slug"]),
-                      float(cfg("music_volume") or 0.1))
-        Image.open(work / "img00.jpg").resize((360, 640)).save(THUMBS / f"{vid}.jpg", quality=82)
+        v["cover_ms"] = render.render(work, scenes, times, voice, ass, final, render.pick_music(cat["slug"]),
+                                      float(cfg("music_volume") or 0.1), cover)
+        Image.open(cover or (work / "img00.jpg")).resize((360, 640)).save(THUMBS / f"{vid}.jpg", quality=82)
         v.update(status="rendered", duration=round(total + 0.35, 1), providers=used, thumb=True)
-        v["mp4"] = publish_mp4(final)
+        v["mp4"] = publish_mp4([final, cover] if cover else final)
         log(f"Video {vid} fertig")
     except Exception as e:
         v.update(status="error", error=str(e)[:900])
@@ -163,6 +210,7 @@ def main(argv=None):
     ap.add_argument("--topic", default="")
     ap.add_argument("--upload", default="1")
     ap.add_argument("--id", default="")
+    ap.add_argument("--trend", default="")
     a = ap.parse_args(argv)
     failed = False
     try:
@@ -179,12 +227,19 @@ def main(argv=None):
                     log(f"FEHLER: {e}")
             if stats_due(STATE):
                 uploaders.refresh_stats()
+                try:
+                    trends.refresh()
+                except Exception as e:  # noqa: BLE001
+                    log(f"Trends: {e}")
         elif a.action == "make":
-            make(a.category.strip() or None, a.topic.strip() or None, a.upload != "0")
+            make(a.category.strip() or None, a.topic.strip() or None, a.upload != "0", a.trend.strip() or None)
         elif a.action == "upload":
             upload(int(a.id))
         elif a.action == "stats":
             uploaders.refresh_stats()
+            trends.refresh()
+        elif a.action == "trends":
+            trends.refresh()
         else:
             raise SystemExit(f"Unbekannte Aktion: {a.action}")
     except Exception as e:  # noqa: BLE001

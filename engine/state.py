@@ -120,7 +120,16 @@ DEFAULT_SETTINGS = {
     "tiktok_privacy": "SELF_ONLY",
     "tiktok_client_key": "",
     "ai_label": True,
+    "trend_mode": "half",          # off | half | always – wie oft der Autopilot ein aktuelles Trend-Thema nimmt
+    "make_thumbnail": True,
+    "youtube_thumbnail": True,
 }
+
+TREND_DEFAULT = ("fakten", "storys", "mysterien", "tiere")
+
+
+def cat_trends(cat):
+    return bool(cat.get("trends", cat.get("slug") in TREND_DEFAULT))
 
 
 def default_config():

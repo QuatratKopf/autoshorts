@@ -119,7 +119,8 @@ def pick_music(slug):
     return None
 
 
-def render(work: Path, scenes, times, voice, ass, out, music=None, music_volume=0.10):
+def render(work: Path, scenes, times, voice, ass, out, music=None, music_volume=0.10, cover=None):
+    """Gibt die Stelle (ms) zurück, an der das Cover-Bild im Video steht (für TikTok), sonst None."""
     clips = []
     for i, (sc, (s, e)) in enumerate(zip(scenes, times)):
         clip = work / f"clip{i:02d}.mp4"
@@ -127,6 +128,14 @@ def render(work: Path, scenes, times, voice, ass, out, music=None, music_volume=
         kenburns(work / f"img{i:02d}.jpg", dur, clip, i)
         clips.append(clip)
         log(f"Szene {i + 1}/{len(scenes)} geschnitten")
+    cover_ms, extra = None, 0.0
+    if cover:   # Cover als letztes kurzes Standbild: TikTok nimmt es als Titelbild, im Loop fällt es kaum auf
+        cclip = work / "clipzz.mp4"
+        ff(["-loop", "1", "-i", str(cover), "-t", "0.2", "-vf", f"scale={W}:{H},format=yuv420p", "-r", str(FPS),
+            "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", str(cclip)])
+        clips.append(cclip)
+        extra = 0.2
+        cover_ms = int((times[-1][1] + 0.35 + 0.1) * 1000)
     (work / "list.txt").write_text("".join(f"file '{c.name}'\n" for c in clips))
     ff(["-f", "concat", "-safe", "0", "-i", "list.txt", "-c", "copy", "video.mp4"], cwd=work)
 
@@ -135,11 +144,12 @@ def render(work: Path, scenes, times, voice, ass, out, music=None, music_volume=
     vf = f"[0:v]ass={Path(ass).name}:fontsdir={fonts}[v]"
     if music:
         args += ["-stream_loop", "-1", "-i", str(music)]
-        af = (f"[2:a]volume={music_volume},afade=t=in:d=1[m];[1:a]apad=pad_dur=0.4[vo];"
+        af = (f"[2:a]volume={music_volume},afade=t=in:d=1[m];[1:a]apad=pad_dur=0.8[vo];"
               f"[vo][m]amix=inputs=2:duration=first:dropout_transition=0:normalize=0,loudnorm=I=-14:TP=-1.5[a]")
     else:
-        af = "[1:a]apad=pad_dur=0.4,loudnorm=I=-14:TP=-1.5[a]"
-    total = times[-1][1] + 0.35
+        af = "[1:a]apad=pad_dur=0.8,loudnorm=I=-14:TP=-1.5[a]"
+    total = times[-1][1] + 0.35 + extra
     ff([*args, "-filter_complex", f"{vf};{af}", "-map", "[v]", "-map", "[a]", "-t", f"{total:.2f}",
         "-c:v", "libx264", "-preset", "veryfast", "-crf", "21", "-pix_fmt", "yuv420p",
         "-c:a", "aac", "-b:a", "160k", "-ar", "44100", "-movflags", "+faststart", str(out)], cwd=work)
+    return cover_ms

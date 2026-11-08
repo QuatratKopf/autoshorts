@@ -26,7 +26,10 @@
   "tiktok_mode": "direct",
   "tiktok_privacy": "SELF_ONLY",
   "tiktok_client_key": "",
-  "ai_label": true
+  "ai_label": true,
+  "trend_mode": "half",
+  "make_thumbnail": true,
+  "youtube_thumbnail": true
  },
  "categories": [
   {
@@ -40,7 +43,8 @@
    "voice_rate": "+8%",
    "voice_pitch": "+0Hz",
    "voice_instructions": "Begeistert, locker und schnell, wie ein Freund, der etwas Verrücktes erzählt.",
-   "enabled": true
+   "enabled": true,
+   "trends": true
   },
   {
    "slug": "grusel",
@@ -53,7 +57,8 @@
    "voice_rate": "-4%",
    "voice_pitch": "-4Hz",
    "voice_instructions": "Leise, langsam und unheimlich, mit Spannung in der Stimme.",
-   "enabled": true
+   "enabled": true,
+   "trends": false
   },
   {
    "slug": "storys",
@@ -66,7 +71,8 @@
    "voice_rate": "+4%",
    "voice_pitch": "+0Hz",
    "voice_instructions": "Spannend und mitreißend, wie ein Erzähler in einer Doku.",
-   "enabled": true
+   "enabled": true,
+   "trends": true
   },
   {
    "slug": "lustig",
@@ -79,7 +85,8 @@
    "voice_rate": "+10%",
    "voice_pitch": "+2Hz",
    "voice_instructions": "Fröhlich, verschmitzt, mit hörbarem Grinsen.",
-   "enabled": true
+   "enabled": true,
+   "trends": false
   },
   {
    "slug": "mysterien",
@@ -92,7 +99,8 @@
    "voice_rate": "+0%",
    "voice_pitch": "-2Hz",
    "voice_instructions": "Ruhig, geheimnisvoll, neugierig.",
-   "enabled": false
+   "enabled": false,
+   "trends": true
   },
   {
    "slug": "tiere",
@@ -105,7 +113,8 @@
    "voice_rate": "+6%",
    "voice_pitch": "+0Hz",
    "voice_instructions": "Warm, neugierig und begeistert.",
-   "enabled": false
+   "enabled": false,
+   "trends": true
   }
  ],
  "queue": []

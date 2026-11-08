@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       action:
-        description: "auto | make | upload | stats"
+        description: "auto | make | upload | stats | trends"
         default: "make"
         type: string
       category:
@@ -23,6 +23,9 @@ on:
         default: "1"
         type: string
       video_id:
+        default: ""
+        type: string
+      trend:
         default: ""
         type: string
 
@@ -43,6 +46,7 @@ jobs:
       IN_TOPIC: ${{ inputs.topic }}
       IN_UPLOAD: ${{ inputs.upload || '1' }}
       IN_ID: ${{ inputs.video_id }}
+      IN_TREND: ${{ inputs.trend }}
     steps:
       - uses: actions/checkout@v4
 
@@ -87,14 +91,14 @@ jobs:
         run: |
           python -m engine.main "$IN_ACTION" \
             --category "$IN_CATEGORY" --topic "$IN_TOPIC" --upload "$IN_UPLOAD" \
-            --id "$IN_ID"
+            --id "$IN_ID" --trend "$IN_TREND"
 
       - name: Ergebnis speichern
         if: always() && steps.check.outputs.run == '1'
         run: |
           git config user.name "autoshorts-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/data/state.json docs/data/videos.json docs/data/stats.json docs/thumbs tokens
+          git add docs/data/state.json docs/data/videos.json docs/data/stats.json docs/data/trends.json docs/thumbs tokens
           if git diff --cached --quiet; then echo "Nichts zu speichern"; exit 0; fi
           git commit -q -m "AutoShorts: $IN_ACTION"
           for i in 1 2 3 4 5; do
