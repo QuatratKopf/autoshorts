@@ -7,11 +7,12 @@ docs/data/stats.json    gehört dem Motor (Zahlen je Tag)
 tokens/*.enc            verschlüsselte Anmeldungen bei YouTube/TikTok
 """
 import base64
-import hashlib
 import json
 import os
 import time
 from pathlib import Path
+
+from . import naclpure
 
 ROOT = Path(os.environ.get("AUTOSHORTS_ROOT") or Path(__file__).resolve().parent.parent)
 DATA = ROOT / "docs" / "data"
@@ -189,15 +190,14 @@ def save_all():
 
 
 # ---------------------------------------------------------------- Anmeldungen (verschlüsselt)
-# Schlüssel = aus dem Client-Secret der Plattform abgeleitet, das nur in den GitHub-Secrets liegt.
+# Schlüssel = aus dem Client-Secret der Plattform abgeleitet, das nur in den GitHub-Secrets
+# (und auf deinem PC in der App) liegt. Gleiches Verfahren wie in der App (naclpure).
 
-def _fernet(platform):
-    from cryptography.fernet import Fernet
+def _key(platform):
     sec = secret("GOOGLE_CLIENT_SECRET" if platform == "youtube" else "TIKTOK_CLIENT_SECRET")
     if not sec:
         raise RuntimeError(f"Secret für {platform} fehlt")
-    key = base64.urlsafe_b64encode(hashlib.sha256(("autoshorts:" + platform + ":" + sec).encode()).digest())
-    return Fernet(key)
+    return naclpure.derive_key("autoshorts", platform, sec)
 
 
 def load_token(platform):
@@ -205,13 +205,14 @@ def load_token(platform):
     if not p.exists():
         return None
     try:
-        return json.loads(_fernet(platform).decrypt(p.read_bytes()))
+        return json.loads(naclpure.decrypt(base64.b64decode(p.read_bytes()), _key(platform)))
     except Exception:  # noqa: BLE001 – Secret geändert oder Datei kaputt
         return None
 
 
 def save_token(platform, tok):
-    (TOKENS / f"{platform}.enc").write_bytes(_fernet(platform).encrypt(json.dumps(tok).encode()))
+    blob = naclpure.encrypt(json.dumps(tok).encode(), _key(platform))
+    (TOKENS / f"{platform}.enc").write_bytes(base64.b64encode(blob))
 
 
 def drop_token(platform):

@@ -1,88 +1,73 @@
 # AutoShorts
 
-Erstellt jeden Tag automatisch ein KI-Short im Cartoon-Erklärstil und lädt es auf **YouTube Shorts** und **TikTok** hoch. Gesteuert wird alles über eine einfache App:
+Erstellt jeden Tag automatisch ein KI-Short im Cartoon-Erklärstil und lädt es auf **YouTube Shorts** und **TikTok** hoch. Gesteuert wird alles über die App **AutoShorts** auf deinem PC: Dashboard, Kalender, Studio und Einstellungen.
 
-**👉 https://quatratkopf.github.io/autoshorts/**
+Die Videos baut der Motor kostenlos auf GitHub Actions, auch wenn dein PC aus ist.
 
-- **Dashboard:** Aufrufe pro Tag, Likes, Kommentare, Abos und Follower, beste Kategorie, alle Videos
-- **Studio:** Kategorie antippen (Fakten, Grusel, Spannende Storys, Lustige Geschichten, Mysterien, Tierwelt oder eigene), Thema eingeben oder leer lassen, „Video erstellen“
-- **Einstellungen:** Upload-Zeit, Plattformen, KI-Anbieter (kostenlos oder Premium)
+## Starten
 
-Kein Server nötig: Die Videos baut GitHub Actions kostenlos, die App läuft über GitHub Pages.
+1. **AutoShorts.cmd** herunterladen (oben auf die Datei klicken → Download-Symbol).
+2. Am besten in einen festen Ordner legen, z. B. Dokumente.
+3. Doppelklick. Fehlt Python, wird es einmalig automatisch installiert.
+4. Die App öffnet sich in einem eigenen Fenster und legt ein Symbol **AutoShorts** auf dem Desktop an.
 
----
+Mac/Linux: `python3 AutoShorts.cmd`
 
-## Einrichtung (einmalig, ca. 20 Minuten)
+## Updates
 
-### 1. App einschalten
-Im Repository auf **Settings → Pages** gehen.
-Unter „Build and deployment“: Source **Deploy from a branch**, Branch **main**, Ordner **/docs** → **Save**.
-Nach 1–2 Minuten ist die App unter dem Link oben erreichbar.
+Beim Start prüft die App, ob hier eine neue Version liegt, und fragt **„Jetzt aktualisieren?“**. In **Einstellungen → App & Updates** gibt es zusätzlich den Knopf **„Nach Updates suchen“** und den Schalter für automatische Updates. Einstellungen bleiben erhalten (Ordner `AutoShorts-Daten` neben der Datei).
 
-### 2. App mit GitHub verbinden
-App öffnen. Sie führt dich durch das Erstellen eines Zugangsschlüssels (Fine-grained token, nur für dieses Repository, Rechte: Actions + Contents lesen/schreiben, Secrets lesen). Auf dem Handy: **Teilen → Zum Home-Bildschirm**, dann hast du AutoShorts mit eigenem Icon.
+| Datei | Zweck |
+|---|---|
+| `AutoShorts.cmd` | Die komplette App in einer Datei |
+| `version.json` | Versionsnummer und Prüfsumme für das Update |
+| `releases/` | Jede Version als eigene Datei (Quelle für Updates) |
+| `quellcode/` | Quellcode der App (`python3 quellcode/build_onefile.py 1.1.0 "Notiz"`) |
+| `engine/` | Der Motor, der auf GitHub die Videos baut |
+| `docs/data/` | Einstellungen, Videos und Zahlen (schreiben App und Motor) |
 
-### 3. Kostenlose KI-Schlüssel
-In der App unter **Einstellungen → Zugangsdaten** jeweils „Eintragen“ tippen:
+## Einrichtung (einmalig)
 
-| Name | Woher | Kosten |
+### 1. App mit GitHub verbinden
+Die App führt dich beim ersten Start durch das Erstellen eines Zugangsschlüssels:
+[github.com/settings/personal-access-tokens/new](https://github.com/settings/personal-access-tokens/new) → Fine-grained token → nur dieses Repository → Berechtigungen **Actions**, **Contents** und **Secrets** auf *Read and write*.
+
+### 2. Kostenlose KI-Schlüssel
+In der App unter **Einstellungen → Zugangsdaten** einfügen und „Speichern“ tippen. Die App verschlüsselt sie und legt sie als GitHub-Secret ab.
+
+| Schlüssel | Woher | Kosten |
 |---|---|---|
-| `GEMINI_API_KEY` | aistudio.google.com → „Get API key“ | Gratis-Kontingent |
-| `CLOUDFLARE_ACCOUNT_ID` | dash.cloudflare.com → Workers AI (Account-ID steht dort) | – |
-| `CLOUDFLARE_API_TOKEN` | dash.cloudflare.com → Profil → API-Tokens → Vorlage „Workers AI“ | Gratis-Kontingent |
+| Gemini API-Key | aistudio.google.com → „Get API key“ | Gratis-Kontingent |
+| Cloudflare Account-ID | dash.cloudflare.com → Workers AI | – |
+| Cloudflare API-Token | dash.cloudflare.com → Profil → API-Tokens → Vorlage „Workers AI“ | Gratis-Kontingent |
 
-Der Sprecher (Microsoft-Edge-Stimmen) braucht keinen Schlüssel. Ohne Gemini/Cloudflare springt AutoShorts auf Pollinations (kostenlos, ohne Anmeldung, aber langsamer).
+Der Sprecher (Microsoft-Edge-Stimmen) braucht keinen Schlüssel.
 
-**Test:** Im Studio „direkt hochladen“ ausschalten und „Video erstellen“ tippen. Nach etwa 10 Minuten steht das Video im Dashboard, mit Knopf „MP4“ zum Ansehen.
+**Test:** Im Studio „direkt hochladen“ ausschalten und „Video erstellen“ tippen. Nach etwa 10 Minuten steht das Video im Dashboard, mit Knopf „MP4“.
 
-### 4. YouTube verbinden
-1. **console.cloud.google.com** → neues Projekt.
-2. „APIs & Dienste“ → Bibliothek → **YouTube Data API v3** aktivieren.
-3. **OAuth-Zustimmungsbildschirm** → Extern → App-Name und deine E-Mail → Bereiche `youtube.upload` und `youtube.readonly`.
-4. **Wichtig:** Veröffentlichungsstatus auf **„In Produktion“** stellen, sonst läuft die Anmeldung nach 7 Tagen ab. Die Warnung „App nicht überprüft“ beim Verbinden mit „Erweitert → Weiter“ bestätigen.
-5. **Anmeldedaten → OAuth-Client-ID → Webanwendung**. Weiterleitungs-URI:
-   `https://quatratkopf.github.io/autoshorts/callback.html`
-6. Client-ID in der App unter Plattformen eintragen und speichern, Client-Secret als `GOOGLE_CLIENT_SECRET` hinterlegen → **Mit YouTube verbinden**.
+### 3. YouTube verbinden
+1. **console.cloud.google.com** → neues Projekt → „APIs & Dienste“ → Bibliothek → **YouTube Data API v3** aktivieren.
+2. **OAuth-Zustimmungsbildschirm**: Extern, App-Name, deine E-Mail, Bereiche `youtube.upload` und `youtube.readonly`. Veröffentlichungsstatus auf **„In Produktion“** stellen (sonst läuft die Anmeldung nach 7 Tagen ab).
+3. **Anmeldedaten → OAuth-Client-ID → Desktop-App**. Eine Weiterleitungs-URL musst du nicht eintragen.
+4. In der App: Client-ID unter **Plattformen** eintragen und speichern, Client-Secret unter **Zugangsdaten** speichern → **Verbinden**. Die Warnung „App nicht überprüft“ mit „Erweitert → Weiter“ bestätigen.
 
-Solange Google dein Projekt nicht geprüft hat, landen API-Uploads auf **„Privat“**. Für öffentliche Uploads das kostenlose Formular „YouTube API Services – Audit and Quota Extension“ ausfüllen; bis dahin im YouTube Studio auf „Öffentlich“ stellen.
+Bis Google dein Projekt geprüft hat, landen API-Uploads auf **„Privat“** (Formular „YouTube API Services – Audit and Quota Extension“, kostenlos).
 
-### 5. TikTok verbinden
-1. **developers.tiktok.com** → App erstellen.
-2. Produkte **Login Kit** und **Content Posting API** (mit „Direct Post“) hinzufügen.
-3. Scopes: `user.info.basic`, `user.info.stats`, `video.publish`, `video.upload`, `video.list`.
-4. Redirect-URI: `https://quatratkopf.github.io/autoshorts/callback.html`
-5. Als Website/Datenschutz/Nutzungsbedingungen kannst du die App-Adresse angeben. Zur Prüfung einreichen; zum Testen vorher den Sandbox-Modus mit deinem Konto als Testnutzer nutzen.
-6. Client Key in der App eintragen und speichern, Client Secret als `TIKTOK_CLIENT_SECRET` hinterlegen → **Mit TikTok verbinden**.
+### 4. TikTok verbinden
+1. **developers.tiktok.com** → App erstellen → Produkte **Login Kit** (Plattform **Desktop**) und **Content Posting API** (mit „Direct Post“).
+2. Scopes: `user.info.basic`, `user.info.stats`, `video.publish`, `video.upload`, `video.list`.
+3. Redirect-URI: `http://127.0.0.1:8791/oauth/`
+4. In der App: Client Key unter **Plattformen**, Client Secret unter **Zugangsdaten** → **Verbinden**.
 
-Bis TikTok die App geprüft hat, sind API-Uploads nur als **„Nur ich“** erlaubt. Alternative: Upload-Art **„Als Entwurf in die TikTok-App“** – dann tippst du in der App einmal auf Posten.
-
----
+Bis TikTok die App geprüft hat, sind API-Uploads nur als **„Nur ich“** erlaubt. Alternative: Upload-Art **„Als Entwurf in die TikTok-App“**.
 
 ## Später upgraden
-
-In **Einstellungen → KI-Anbieter** jeden Schritt einzeln umstellen (OpenAI für Text, Stimme und Bilder, ElevenLabs für die Stimme). Den passenden Schlüssel unter Zugangsdaten hinterlegen. Die App zeigt die Kosten pro Video. Fällt ein bezahlter Dienst aus, nimmt der Motor automatisch den kostenlosen.
-
-## Hintergrundmusik
-
-Lizenzfreie MP3s in den Ordner `music/` hochladen (auf GitHub: „Add file → Upload files“), pro Kategorie optional in Unterordner wie `music/grusel/`. Quelle z. B. YouTube Studio → Audio-Mediathek.
+**Einstellungen → KI-Anbieter**: Skript, Stimme und Bilder einzeln auf OpenAI oder ElevenLabs umstellen und den Schlüssel unter Zugangsdaten speichern. Die App zeigt die Kosten pro Video. Fällt ein bezahlter Dienst aus, nimmt der Motor automatisch den kostenlosen.
 
 ## Gut zu wissen
-
-- **TikTok Creator Rewards** zahlt nur für Videos über 1 Minute – Ziel-Länge steht deshalb auf 70 Sekunden.
-- **YouTube** schließt sehr gleichförmige Massenvideos von der Monetarisierung aus. Kategorien wechseln und die Themen-Warteschlange pflegen hilft.
+- **TikTok Creator Rewards** zahlt nur für Videos über 1 Minute, daher 70 Sekunden Ziel-Länge.
+- **YouTube** schließt sehr gleichförmige Massenvideos von der Monetarisierung aus. Kategorien wechseln und Themen pflegen hilft.
 - Die **KI-Kennzeichnung** ist standardmäßig an.
-- GitHub startet geplante Läufe manchmal bis zu einer Stunde später als eingestellt.
-- Das Repository ist öffentlich: Code und Statistiken sind sichtbar, deine Schlüssel nicht (die liegen in den GitHub-Secrets, Anmeldungen verschlüsselt).
-- Fertige Videos liegen unter **Releases → videos**.
-
-## Aufbau
-
-```
-docs/                 die App (GitHub Pages) + Daten (docs/data/*.json) + Vorschaubilder
-engine/ai.py          KI-Anbieter mit automatischem Ausweichen
-engine/writer.py      Themenfindung und Drehbuch
-engine/render.py      Schnitt mit ffmpeg: Kamerafahrten, Untertitel, Infokarten, Musik
-engine/uploaders.py   YouTube- und TikTok-API, Statistik
-engine/main.py        Ablauf (auto, make, upload, stats, connect)
-.github/workflows/    stündliche Prüfung + Start aus der App
-```
+- GitHub startet geplante Läufe manchmal bis zu einer Stunde später.
+- Das Repository ist öffentlich: Code und Zahlen sind sichtbar, deine Schlüssel nicht (GitHub-Secrets; Anmeldungen liegen verschlüsselt in `tokens/`).
+- Hintergrundmusik: lizenzfreie MP3s in `music/` hochladen, pro Kategorie optional in Unterordner wie `music/grusel/`.

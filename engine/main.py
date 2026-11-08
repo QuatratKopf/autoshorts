@@ -4,7 +4,6 @@ python -m engine.main auto                          Zeitplan prüfen, ggf. Video
 python -m engine.main make --category grusel --topic "…" [--upload 0]
 python -m engine.main upload --id 12                Upload wiederholen
 python -m engine.main stats                         Zahlen holen
-python -m engine.main connect --platform youtube --code … --redirect …
 """
 import argparse
 import json
@@ -164,9 +163,6 @@ def main(argv=None):
     ap.add_argument("--topic", default="")
     ap.add_argument("--upload", default="1")
     ap.add_argument("--id", default="")
-    ap.add_argument("--platform", default="")
-    ap.add_argument("--code", default="")
-    ap.add_argument("--redirect", default="")
     a = ap.parse_args(argv)
     failed = False
     try:
@@ -189,8 +185,6 @@ def main(argv=None):
             upload(int(a.id))
         elif a.action == "stats":
             uploaders.refresh_stats()
-        elif a.action == "connect":
-            uploaders.connect(a.platform, a.code.strip(), a.redirect.strip())
         else:
             raise SystemExit(f"Unbekannte Aktion: {a.action}")
     except Exception as e:  # noqa: BLE001

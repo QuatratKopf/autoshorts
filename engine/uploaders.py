@@ -26,20 +26,6 @@ def _yt_client():
     return cfg("youtube_client_id") or secret("GOOGLE_CLIENT_ID"), secret("GOOGLE_CLIENT_SECRET")
 
 
-def yt_connect(code, redirect):
-    cid, csec = _yt_client()
-    r = requests.post("https://oauth2.googleapis.com/token", data={
-        "code": code, "client_id": cid, "client_secret": csec,
-        "redirect_uri": redirect, "grant_type": "authorization_code"}, timeout=T)
-    if r.status_code >= 400:
-        raise RuntimeError(f"Google-Anmeldung fehlgeschlagen: {r.text[:300]}")
-    js = r.json()
-    if "refresh_token" not in js:
-        raise RuntimeError("Google hat keinen Refresh-Token geliefert – bitte erneut verbinden.")
-    js["expires_at"] = time.time() + js.get("expires_in", 3600) - 60
-    save_token("youtube", js)
-
-
 def _yt_access():
     tok = load_token("youtube")
     if not tok:
@@ -122,10 +108,6 @@ def _tt_token(data):
         raise RuntimeError(f"TikTok-Anmeldung: {js}")
     js["expires_at"] = time.time() + js.get("expires_in", 86400) - 120
     save_token("tiktok", js)
-
-
-def tt_connect(code, redirect):
-    _tt_token({"code": code, "grant_type": "authorization_code", "redirect_uri": redirect})
 
 
 def _tt_h():
@@ -222,12 +204,6 @@ def tt_user():
 
 
 # ================================================================ Gemeinsam
-
-def connect(platform, code, redirect):
-    (yt_connect if platform == "youtube" else tt_connect)(code, redirect)
-    log(f"{platform} verbunden")
-    refresh_stats()
-
 
 def upload_video(v, path):
     errors = []

@@ -1,5 +1,5 @@
 name: AutoShorts
-run-name: "${{ github.event_name == 'schedule' && 'Stündliche Prüfung' || format('{0} {1} {2}', inputs.action, inputs.category, inputs.platform) }}"
+run-name: "${{ github.event_name == 'schedule' && 'Stündliche Prüfung' || format('{0} {1}', inputs.action, inputs.category) }}"
 
 on:
   schedule:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       action:
-        description: "auto | make | upload | stats | connect"
+        description: "auto | make | upload | stats"
         default: "make"
         type: string
       category:
@@ -23,15 +23,6 @@ on:
         default: "1"
         type: string
       video_id:
-        default: ""
-        type: string
-      platform:
-        default: ""
-        type: string
-      code:
-        default: ""
-        type: string
-      redirect:
         default: ""
         type: string
 
@@ -52,9 +43,6 @@ jobs:
       IN_TOPIC: ${{ inputs.topic }}
       IN_UPLOAD: ${{ inputs.upload || '1' }}
       IN_ID: ${{ inputs.video_id }}
-      IN_PLATFORM: ${{ inputs.platform }}
-      IN_CODE: ${{ inputs.code }}
-      IN_REDIRECT: ${{ inputs.redirect }}
     steps:
       - uses: actions/checkout@v4
 
@@ -99,7 +87,7 @@ jobs:
         run: |
           python -m engine.main "$IN_ACTION" \
             --category "$IN_CATEGORY" --topic "$IN_TOPIC" --upload "$IN_UPLOAD" \
-            --id "$IN_ID" --platform "$IN_PLATFORM" --code "$IN_CODE" --redirect "$IN_REDIRECT"
+            --id "$IN_ID"
 
       - name: Ergebnis speichern
         if: always() && steps.check.outputs.run == '1'
