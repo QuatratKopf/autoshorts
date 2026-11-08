@@ -1,8 +1,10 @@
 {
  "last_category": "fakten",
- "done_slots": [],
+ "done_slots": [
+  "2026-11-08 18:00"
+ ],
  "used_queue": [],
  "last_stats": 0,
- "next_id": 2,
+ "next_id": 3,
  "connected": {}
 }

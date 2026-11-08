@@ -10,5 +10,17 @@
    "source": "Google Trends"
   },
   "error": "Kein Text-Anbieter erreichbar. gemini: kein GEMINI_API_KEY | pollinations: HTTPSConnectionPool(host='text.pollinations.ai', port=443): Read timed out. (read timeout=180)"
+ },
+ {
+  "id": 2,
+  "category": "fakten",
+  "topic": "Warum der Sound \"Moulaga – Sped Up\" 8.282-mal auf TikTok gerockt hat – ein echter Zahlen‑Wahnsinn",
+  "status": "error",
+  "created": 1794162218.6177602,
+  "trend": {
+   "title": "Moulaga - Sped up",
+   "source": "TikTok Song"
+  },
+  "error": "Kein Text-Anbieter erreichbar. gemini: kein GEMINI_API_KEY | pollinations: Antwort enthält kein JSON Tipp: Gemini-Schlüssel in der App unter Einstellungen → Zugangsdaten speichern."
  }
 ]
