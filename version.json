@@ -1,6 +1,6 @@
 {
-  "version": "1.2.6",
-  "file": "releases/AutoShorts-1.2.6.cmd",
-  "sha256": "e79a44ed26a173917b64018dfb0f0e549ae9cfce24aeda102440a5aabd5544ba",
-  "notes": "YouTube/TikTok trennen (löscht Anmeldung und Zahlen)"
+  "version": "1.2.7",
+  "file": "releases/AutoShorts-1.2.7.cmd",
+  "sha256": "82a6a65349ab088771b3c538356aa41b2f51afecd29a1bafd72a035fb5f4d9b4",
+  "notes": "Trennen-Knopf, Trends ohne YouTube-Daten"
 }
