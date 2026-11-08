@@ -1,6 +1,6 @@
 {
-  "version": "1.2.1",
-  "file": "releases/AutoShorts-1.2.1.cmd",
-  "sha256": "51852e36c1290aeaa76c51e01cf60b322a3812a9967a459b389ca5c240c5c578",
-  "notes": "Laufende Video-Erstellung kann abgebrochen werden"
+  "version": "1.2.2",
+  "file": "releases/AutoShorts-1.2.2.cmd",
+  "sha256": "519c7170d9a4cfc88daf3bbed98a7ed4019c535864bfdb5977f047e4b415a89f",
+  "notes": "Kein Fehlerbild mehr beim Neustart nach Updates"
 }

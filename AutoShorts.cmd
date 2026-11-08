@@ -288,7 +288,23 @@ MANIFEST = {
 SERVICE_WORKER = """// Macht AutoShorts installierbar. Es wird nichts zwischengespeichert.
 self.addEventListener('install', e => self.skipWaiting());
 self.addEventListener('activate', e => e.waitUntil(self.clients.claim()));
-self.addEventListener('fetch', e => e.respondWith(fetch(e.request)));
+// Ist die App kurz nicht erreichbar (z. B. Neustart nach einem Update), erscheint statt einer Fehlerseite
+// eine Warteseite, die sich selbst neu lädt, sobald AutoShorts wieder antwortet.
+const WAIT = `<!doctype html><html lang="de"><meta charset="utf-8"><title>AutoShorts</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>html,body{height:100%;margin:0}body{background:#0b0b0d;color:#f2f2f3;font:15px system-ui,Segoe UI,sans-serif;display:grid;place-items:center;text-align:center;padding:16px}
+.s{width:26px;height:26px;border:3px solid #333;border-top-color:#f25c3c;border-radius:50%;animation:r .8s linear infinite;margin:0 auto 14px}@keyframes r{to{transform:rotate(1turn)}}
+p{color:#9a9aa3;max-width:380px;line-height:1.5}button{margin-top:10px;background:#1c1c20;color:#f2f2f3;border:1px solid #333;border-radius:10px;padding:9px 16px;font:inherit;cursor:pointer}</style>
+<div><div class="s" id="s"></div><h2 id="t">AutoShorts startet …</h2><p id="m">Einen Moment, die App ist gleich wieder da.</p><button onclick="location.reload()">Erneut versuchen</button></div>
+<script>const t0=Date.now();async function p(){try{const r=await fetch('/api/version',{cache:'no-store'});if(r.ok){location.reload();return}}catch(e){}
+if(Date.now()-t0>60000){document.getElementById('s').style.display='none';document.getElementById('t').textContent='AutoShorts läuft nicht';
+document.getElementById('m').innerHTML='Schließ dieses Fenster und starte AutoShorts über das <b>Desktop-Symbol</b>.'}setTimeout(p,1500)}setTimeout(p,1500)</script></html>`;
+self.addEventListener('fetch', e => {
+  const req = e.request;
+  e.respondWith(fetch(req).catch(() => req.mode === 'navigate'
+    ? new Response(WAIT, {status: 503, headers: {'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store'}})
+    : new Response('{"error":"AutoShorts ist gerade nicht erreichbar"}', {status: 503, headers: {'Content-Type': 'application/json'}})));
+});
 """
 
 
@@ -418,7 +434,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 
 
-APP_VERSION = "1.2.1"   # wird beim Bauen der Ein-Datei-Version gesetzt
+APP_VERSION = "1.2.2"   # wird beim Bauen der Ein-Datei-Version gesetzt
 ROOT = os.path.dirname(os.path.abspath(__file__))
 HOST = "127.0.0.1"
 PORT = int(os.environ.get("AS_PORT", "8791"))
