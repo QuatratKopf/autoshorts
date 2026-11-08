@@ -85,7 +85,7 @@
    "voice_rate": "+10%",
    "voice_pitch": "+2Hz",
    "voice_instructions": "Fröhlich, verschmitzt, mit hörbarem Grinsen.",
-   "enabled": true,
+   "enabled": false,
    "trends": false
   },
   {
