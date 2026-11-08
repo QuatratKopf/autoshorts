@@ -1,6 +1,6 @@
 {
-  "version": "1.2.3",
-  "file": "releases/AutoShorts-1.2.3.cmd",
-  "sha256": "5afc3b6d4ce45e10a6971627d04c56586cc8da8cde183e9ba4d3b6579f9dfd49",
-  "notes": "Neustart nach Updates mit Kontrolle und Ersatzwegen"
+  "version": "1.2.4",
+  "file": "releases/AutoShorts-1.2.4.cmd",
+  "sha256": "77b3213c001c2a5bc50689e3b250dc9bf10c8b93e514c4c0cdb53afbf8feb22c",
+  "notes": "Neustart nach Updates unter Windows repariert"
 }

@@ -80,6 +80,15 @@ def log(msg, level="info"):
         pass
 
 
+def _log_crash(kind, exc_type, exc, tb):
+    import traceback
+    log(f"{kind}: " + "".join(traceback.format_exception(exc_type, exc, tb))[-1500:], "error")
+
+
+sys.excepthook = lambda t, e, tb: _log_crash("Absturz", t, e, tb)
+threading.excepthook = lambda a: _log_crash(f"Absturz im Faden {a.thread.name if a.thread else ''}", a.exc_type, a.exc_value, a.exc_traceback)
+
+
 # ───────────────────────── Internet ─────────────────────────
 def http(method, url, body=None, headers=None, form=None, timeout=40):
     """Gibt (Status, Bytes) zurück, auch bei Fehlern."""
@@ -305,11 +314,14 @@ def install_update(data, sha=None):
                          "Liegt sie in einem geschützten Ordner? Verschieb AutoShorts.cmd z. B. nach Dokumente und versuch es erneut.") from e
     log(f"Update installiert: Version {APP_VERSION} → {new_version}. App startet neu.")
     print(f"Update {APP_VERSION} -> {new_version}: Datei ersetzt, Neustart folgt", flush=True)
-    threading.Timer(0.8, restart).start()
+    t = threading.Timer(0.8, restart)
+    t.daemon = False   # sonst beendet Python diesen Neustart-Faden, sobald der Hauptfaden endet
+    t.start()
     return new_version
 
 
 RESTART_FLAG = os.path.join(DATA, "neustart.txt")
+RESTARTING = False
 
 
 def _answers(timeout):
@@ -332,8 +344,16 @@ def restart():
     wird der nächste versucht: 1) direkt mit demselben Python, 2) über den Windows-Explorer wie ein
     Doppelklick (unabhängig von diesem Prozess), 3) Prozess durch die neue Version ersetzen."""
     import subprocess
+    global RESTARTING
+    RESTARTING = True
+    log("Neustart beginnt")
     try:
         if SRV:
+            # erst den Webserver sauber anhalten, dann den Port freigeben (unter Windows reißt ein direktes
+            # Schließen sonst den Hauptfaden mit Fehler ab und Python beendet den Neustart mittendrin)
+            done = threading.Event()
+            threading.Thread(target=lambda: (SRV.shutdown(), done.set()), daemon=True).start()
+            done.wait(5)
             SRV.server_close()
         with open(RESTART_FLAG, "w", encoding="utf-8") as f:   # neue Instanz: kein zweites Fenster öffnen
             f.write(str(time.time()))
@@ -823,6 +843,11 @@ def main():
         srv.serve_forever()
     except KeyboardInterrupt:
         print("\n  Beendet.")
+    except Exception as e:  # noqa: BLE001
+        if not RESTARTING:
+            log(f"Webserver beendet: {e}", "error")
+    while RESTARTING:   # der Neustart läuft in einem eigenen Faden und beendet den Prozess selbst
+        time.sleep(1)
 
 
 if __name__ == "__main__":
