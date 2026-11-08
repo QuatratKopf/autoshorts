@@ -8,6 +8,10 @@ header{display:flex;align-items:center;gap:12px;font-weight:700} header img{widt
 <body><main><header><img src="icon.svg" alt="">AutoShorts</header><h1>Privacy Policy – AutoShorts</h1>
 <p><em>Last updated: 8 November 2026 · Deutsche Fassung unten</em></p>
 <p>AutoShorts is a private tool that its owner uses to create short videos and publish them to the owner's <strong>own</strong> YouTube and TikTok accounts. It is not offered to other users.</p>
+<h2>YouTube API Services</h2>
+<p>AutoShorts uses the <strong>YouTube API Services</strong> to upload videos to the owner's YouTube channel and to read the statistics of the channel's own videos.
+By connecting a YouTube account you agree to be bound by the <a href="https://www.youtube.com/t/terms">YouTube Terms of Service</a>.
+Google's handling of data is described in the <a href="https://policies.google.com/privacy">Google Privacy Policy</a>.</p>
 <h2>What data AutoShorts accesses</h2>
 <p>When the owner connects an account, AutoShorts receives access tokens from Google (YouTube) and TikTok with the permissions the owner approves. It uses them only to:
 - upload videos to the connected account,
@@ -21,8 +25,14 @@ header{display:flex;align-items:center;gap:12px;font-weight:700} header img{widt
 </ul>
 <h2>Sharing</h2>
 <p>No data is sold or shared with third parties. Video scripts, voice-overs and images are generated through AI services chosen by the owner (e.g. Google Gemini, Cloudflare Workers AI, Microsoft Edge text-to-speech, OpenAI); only the video topic and generated text are sent to these services, no account data.</p>
-<h2>Deleting data</h2>
-<p>The owner can disconnect an account at any time in the app, revoke access in the Google or TikTok account settings, and delete the repository.</p>
+<h2>Cookies and devices</h2>
+<p>AutoShorts does not set cookies and does not store or read information on users' devices, apart from the app's own settings file on the owner's computer.</p>
+<h2>Data retention and deletion</h2>
+<ul>
+<li>Revoke AutoShorts' access to YouTube at any time on the <a href="https://security.google.com/settings/security/permissions">Google security settings page</a>, or disconnect YouTube in the app (Settings → Platforms).</li>
+<li>Stored YouTube API data (video statistics) is refreshed at least every 30 days. When access is revoked or the account is disconnected, the stored token and the YouTube statistics are deleted within 7 days.</li>
+<li>Deletion requests: open an issue at <a href="https://github.com/QuatratKopf/autoshorts/issues">github.com/QuatratKopf/autoshorts/issues</a>; data is deleted within 7 days.</li>
+</ul>
 <h2>Contact</h2>
 <p>Questions: open an issue at https://github.com/QuatratKopf/autoshorts/issues</p>
 <hr />
@@ -32,5 +42,7 @@ header{display:flex;align-items:center;gap:12px;font-weight:700} header img{widt
 <p><strong>Welche Daten:</strong> Nach der Verbindung erhält AutoShorts Zugangstokens von Google und TikTok mit den Rechten, die der Inhaber freigibt. Sie werden nur genutzt, um Videos auf das verbundene Konto hochzuladen, Basis-Profilangaben (Anzeigename, Follower) zu lesen und Aufrufe, Likes, Kommentare und Shares der eigenen Videos für das Dashboard abzurufen.</p>
 <p><strong>Speicherung:</strong> Tokens liegen <strong>verschlüsselt</strong> im eigenen GitHub-Repository des Inhabers; der Schlüssel liegt in den GitHub-Secrets und auf dem PC des Inhabers. Statistiken liegen unter <code>docs/data/</code>. Über andere Nutzer oder Zuschauer werden keine Daten erhoben.</p>
 <p><strong>Weitergabe:</strong> Keine Weitergabe oder Verkauf an Dritte. An die genutzten KI-Dienste gehen nur Thema und erzeugte Texte, keine Kontodaten.</p>
-<p><strong>Löschen:</strong> Konto in der App trennen, Zugriff in den Google- bzw. TikTok-Einstellungen widerrufen, Repository löschen.</p>
+<p><strong>YouTube API-Dienste:</strong> AutoShorts nutzt die YouTube API-Dienste, um Videos auf den eigenen Kanal hochzuladen und die Zahlen der eigenen Videos abzurufen. Mit der Verbindung eines YouTube-Kontos gelten die <a href="https://www.youtube.com/t/terms">YouTube-Nutzungsbedingungen</a>. Für Google gilt die <a href="https://policies.google.com/privacy">Datenschutzerklärung von Google</a>.</p>
+<p><strong>Cookies:</strong> AutoShorts setzt keine Cookies und speichert keine Daten auf fremden Geräten.</p>
+<p><strong>Löschen:</strong> Zugriff jederzeit in den <a href="https://security.google.com/settings/security/permissions">Google-Sicherheitseinstellungen</a> widerrufen oder YouTube in der App trennen. Gespeicherte YouTube-Daten werden spätestens alle 30 Tage aktualisiert und nach dem Widerruf innerhalb von 7 Tagen gelöscht. Löschanfragen über GitHub-Issues.</p>
 <p><strong>Kontakt:</strong> https://github.com/QuatratKopf/autoshorts/issues</p></main></body></html>
