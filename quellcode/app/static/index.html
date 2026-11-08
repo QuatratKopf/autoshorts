@@ -929,8 +929,10 @@ function viewSettings() {
     return `<div class="lbl">${name}</div>
     <div class="row"><label>Status<small>${con[p] ? "Verbunden" + (con[p].name ? " mit „" + esc(con[p].name) + "“" : "") + ". Der Autopilot lädt hier automatisch hoch." : help}</small></label>
       <div class="inline">${con[p] ? '<span class="chip good">verbunden</span>' : '<span class="chip mute">nicht verbunden</span>'}<button class="btn ${con[p] ? "" : "primary"}" type="button" data-oauth="${p}" ${ready ? "" : "disabled"}>${con[p] ? "Neu verbinden" : "Verbinden"}</button></div></div>
-    ${ready ? "" : `<p class="hint">Zum Verbinden: ${idLabel} hier eintragen und speichern, außerdem <b>${secName}</b> unter „Zugangsdaten“ auf diesem PC eintragen.</p>`}
-    ${fld(idKey, idLabel, "", 'placeholder="eintragen"')}`;
+    ${ready ? "" : `<p class="hint">Zum Verbinden: ${idLabel} und Client-Secret hier unten eintragen. Die ID mit der schwarzen Leiste unten speichern, das Secret mit seinem eigenen „Speichern“-Knopf.</p>`}
+    ${fld(idKey, idLabel, "", 'placeholder="eintragen"')}
+    <div class="row"><label for="sv2_${secName}">${p === "youtube" ? "Google Client-Secret" : "TikTok Client Secret"}<small>${S.local_secrets[p] ? "Auf diesem PC hinterlegt. Zum Ändern neu eintragen." : (p === "youtube" ? "Der Clientschlüssel (beginnt mit GOCSPX-) aus der Google Cloud." : "Das Client secret von deiner TikTok-App (beim Sandbox-Test das aus der Sandbox).")}</small></label>
+      <div class="inline" style="flex-wrap:nowrap"><input type="password" autocomplete="off" id="sv2_${secName}" placeholder="${S.local_secrets[p] ? "✓ hinterlegt" : "einfügen"}"><button class="btn sm primary" type="button" data-secret2="${secName}">Speichern</button></div></div>`;
   };
   $("#main").innerHTML = `<div class="settings-wrap">
   ${sec("zeit", I.clock, "Zeitplan", `${S_("autopilot") ? "Autopilot an · " + esc(S_("upload_times")) + " Uhr" : "Autopilot aus"} · ${S_("target_seconds")} Sekunden`, S_("autopilot") ? '<span class="chip good">an</span>' : '<span class="chip warn">aus</span>', `
@@ -1008,6 +1010,13 @@ function viewSettings() {
     b.disabled = true;
     try { await api("/api/secret", {name: n, value: inp.value}); inp.value = ""; toast("Gespeichert: " + n); OPEN.add("keys");
       if (SECRETS instanceof Set) SECRETS.add(n); S = await api("/api/state"); viewSettings(); }
+    catch (e) { toast(e.message, true); b.disabled = false; }
+  });
+  document.querySelectorAll("[data-secret2]").forEach(b => b.onclick = async () => {
+    const n = b.dataset.secret2, inp = $("#sv2_" + n); if (!inp.value.trim()) return toast("Bitte zuerst das Secret einfügen.", true);
+    b.disabled = true;
+    try { await api("/api/secret", {name: n, value: inp.value}); inp.value = ""; toast("Gespeichert"); OPEN.add("plattform");
+      if (SECRETS instanceof Set) SECRETS.add(n); S = await api("/api/state"); if (!DIRTY) viewSettings(); else b.disabled = false; }
     catch (e) { toast(e.message, true); b.disabled = false; }
   });
   document.querySelectorAll("[data-oauth]").forEach(b => b.onclick = async () => {

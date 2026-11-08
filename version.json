@@ -1,6 +1,6 @@
 {
-  "version": "1.1.7",
-  "file": "releases/AutoShorts-1.1.7.cmd",
-  "sha256": "bdbddbf8729c21607ccb71afd6c20eab1b079dd0ca8c6160c8cb7e208440be02",
-  "notes": "Updates wie beim FVG Trader: alte Instanzen werden sauber abgelöst"
+  "version": "1.1.8",
+  "file": "releases/AutoShorts-1.1.8.cmd",
+  "sha256": "c20207eaa0b90a92525630014b1d04eb4a8cd46434fac226ef027613a4846019",
+  "notes": "Client-Secret direkt bei YouTube und TikTok eintragen"
 }
