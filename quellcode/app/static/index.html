@@ -1013,7 +1013,7 @@ function viewSettings() {
   document.querySelectorAll("[data-oauth]").forEach(b => b.onclick = async () => {
     if (DIRTY) return toast("Bitte zuerst die Einstellungen speichern.", true);
     const p = b.dataset.oauth;
-    try { const r = await api("/api/oauth/start", {platform: p, client_id: S_(p === "youtube" ? "youtube_client_id" : "tiktok_client_key")}); location.href = r.url; }
+    try { const r = await api("/api/oauth/start", {platform: p, client_id: S_(p === "youtube" ? "youtube_client_id" : "tiktok_client_key"), mode: S_("tiktok_mode") || "direct"}); location.href = r.url; }
     catch (e) { toast(e.message, true); }
   });
   $("#ghOut").onclick = () => armed($("#ghOut"), "Sicher? Nochmal tippen", async () => { await api("/api/github/logout", {}); S = await api("/api/state"); render(); });

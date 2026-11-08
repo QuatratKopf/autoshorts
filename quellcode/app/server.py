@@ -165,7 +165,7 @@ def dispatch(inputs):
 OAUTH = {}   # state -> {platform, client_id, verifier, t}
 
 
-def oauth_start(platform, client_id):
+def oauth_start(platform, client_id, mode="direct"):
     client_id = (client_id or "").strip()
     if not client_id:
         raise ValueError("Bitte zuerst die Client-ID eintragen und speichern.")
@@ -183,7 +183,8 @@ def oauth_start(platform, client_id):
              "access_type": "offline", "prompt": "consent", "state": state,
              "code_challenge": ch, "code_challenge_method": "S256"}
         return "https://accounts.google.com/o/oauth2/v2/auth?" + urllib.parse.urlencode(q)
-    q = {"client_key": client_id, "scope": "user.info.basic,user.info.stats,video.publish,video.upload,video.list",
+    scopes = "user.info.basic,user.info.stats,video.list," + ("video.upload" if mode == "inbox" else "video.publish")
+    q = {"client_key": client_id, "scope": scopes,
          "response_type": "code", "redirect_uri": REDIRECT, "state": state,
          "code_challenge": hashlib.sha256(verifier.encode()).hexdigest(), "code_challenge_method": "S256"}
     return "https://www.tiktok.com/v2/auth/authorize/?" + urllib.parse.urlencode(q)
@@ -585,7 +586,7 @@ def set_secret(h):
 @route("POST", r"/api/oauth/start")
 def oauth_begin(h):
     b = h._json()
-    h._send(200, {"url": oauth_start(b.get("platform"), b.get("client_id"))})
+    h._send(200, {"url": oauth_start(b.get("platform"), b.get("client_id"), b.get("mode") or "direct")})
 
 
 @route("GET", r"/oauth/?")
