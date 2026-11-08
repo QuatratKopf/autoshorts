@@ -1,6 +1,6 @@
 {
-  "version": "1.1.1",
-  "file": "releases/AutoShorts-1.1.1.cmd",
-  "sha256": "1cf1b1b07aefa07eb3116a4d9280a78ce4f40520deab756d48cea57675c8eb57",
-  "notes": "Updates funktionieren jetzt überall: die App installiert sich in einen eigenen Ordner"
+  "version": "1.1.2",
+  "file": "releases/AutoShorts-1.1.2.cmd",
+  "sha256": "3a182398b0ea3a02c9c7424f5bdc063cdf6180fdf81d6cb442a68b935b06cf9a",
+  "notes": "Update klappt auch, wenn die App direkt aus der ZIP gestartet wurde"
 }

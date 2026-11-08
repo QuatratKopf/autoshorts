@@ -416,7 +416,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 
 
-APP_VERSION = "1.1.1"   # wird beim Bauen der Ein-Datei-Version gesetzt
+APP_VERSION = "1.1.2"   # wird beim Bauen der Ein-Datei-Version gesetzt
 ROOT = os.path.dirname(os.path.abspath(__file__))
 HOST = "127.0.0.1"
 PORT = int(os.environ.get("AS_PORT", "8791"))
@@ -666,9 +666,24 @@ def _validate_build(data, sha=None):
 
 
 def install_update(data, sha=None):
-    if not LAUNCHER.lower().endswith(".cmd") or not os.path.exists(LAUNCHER):
-        raise ValueError("Updates funktionieren nur mit der Ein-Datei-Version (AutoShorts.cmd).")
+    global LAUNCHER
     new_version = _validate_build(data, sha)
+    if not LAUNCHER.lower().endswith(".cmd") or not os.path.exists(LAUNCHER):
+        # z. B. direkt aus der ZIP gestartet: Windows hat die Datei schon wieder weggeräumt → in den eigenen Ordner installieren
+        d = install_dir()
+        if not d:
+            raise ValueError("Bitte AutoShorts.cmd erst aus der ZIP entpacken und von dort starten.")
+        os.makedirs(os.path.join(d, "AutoShorts-Daten"), exist_ok=True)
+        import shutil
+        if os.path.exists(SET_FILE) and not os.path.exists(os.path.join(d, "AutoShorts-Daten", "einstellungen.json")):
+            shutil.copy2(SET_FILE, os.path.join(d, "AutoShorts-Daten", "einstellungen.json"))
+        LAUNCHER = os.path.join(d, "AutoShorts.cmd")
+        if not os.path.exists(LAUNCHER):
+            with open(LAUNCHER, "wb") as f:
+                f.write(data)
+            log(f"Update als Neuinstallation nach {d}")
+            threading.Timer(0.8, restart).start()
+            return new_version
     backup_dir = os.path.join(DATA, "backup")
     os.makedirs(backup_dir, exist_ok=True)
     with open(LAUNCHER, "rb") as f:
