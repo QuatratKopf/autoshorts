@@ -310,31 +310,31 @@ def install_update(data, sha=None):
 
 
 def restart():
-    """Startet AutoShorts neu. Unter Windows über ein kleines Hilfsskript, das unabhängig von diesem Prozess läuft."""
+    """Startet AutoShorts neu: der neue Prozess wird direkt mit demselben Python gestartet, mit dem die App gerade läuft
+    (kein Umweg über cmd/Batch/py-Launcher). Er wartet selbst, bis der Port frei ist."""
     import subprocess
     try:
         if SRV:
             SRV.server_close()
+        exe = sys.executable
+        if sys.platform.startswith("win") and exe.lower().endswith("python.exe"):
+            cand = os.path.join(os.path.dirname(exe), "pythonw.exe")
+            exe = cand if os.path.exists(cand) else exe
+        args = [exe, LAUNCHER, "--hintergrund"]
+        env = dict(os.environ, AS_LAUNCHER=LAUNCHER, AS_DATA=DATA, AS_NO_BROWSER="1")
+        log(f"Neustart: {exe}")
         if sys.platform.startswith("win"):
-            helper = os.path.join(DATA, "neustart.cmd")
-            with open(helper, "w", encoding="ascii", errors="replace") as f:
-                f.write("@echo off\r\n"
-                        "rem Startet AutoShorts nach einem Update neu (unsichtbar, ohne Konsolenfenster)\r\n"
-                        "ping -n 3 127.0.0.1 >nul\r\n"
-                        f'call "{LAUNCHER}" --hintergrund\r\n')
-            flags = 0x08000000 | 0x00000200   # kein Fenster, eigene Prozessgruppe
+            base = 0x00000008 | 0x00000200 | 0x08000000   # DETACHED_PROCESS | NEW_PROCESS_GROUP | NO_WINDOW
             try:
-                subprocess.Popen(["cmd.exe", "/c", helper], creationflags=flags | 0x01000000,   # aus dem Job lösen
-                                 cwd=os.path.dirname(LAUNCHER), close_fds=True)
+                subprocess.Popen(args, cwd=os.path.dirname(LAUNCHER), env=env, close_fds=True, creationflags=base | 0x01000000)
             except OSError:
-                subprocess.Popen(["cmd.exe", "/c", helper], creationflags=flags, cwd=os.path.dirname(LAUNCHER), close_fds=True)
+                subprocess.Popen(args, cwd=os.path.dirname(LAUNCHER), env=env, close_fds=True, creationflags=base)
         else:
-            subprocess.Popen([sys.executable, LAUNCHER, "--hintergrund"], cwd=os.path.dirname(LAUNCHER),
-                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True,
-                             env=dict(os.environ, AS_NO_BROWSER="1"))
-        print("Neustart angestoßen", flush=True)
+            subprocess.Popen(args, cwd=os.path.dirname(LAUNCHER), env=env, stdout=subprocess.DEVNULL,
+                             stderr=subprocess.DEVNULL, start_new_session=True)
+        time.sleep(0.4)
     except Exception as e:  # noqa: BLE001
-        print(f"Neustart fehlgeschlagen: {e}", flush=True)
+        log(f"Neustart fehlgeschlagen: {e}", "error")
     finally:
         os._exit(0)
 
@@ -743,8 +743,10 @@ def main():
             print(f"AutoShorts {rv} läuft bereits, das Fenster wird geöffnet.", flush=True)
             open_app_window(url)
             return
-        print(f"Start: laufende Instanz = {rv or 'keine'}", flush=True)
+        log(f"Start {APP_VERSION}{' (Neustart)' if BACKGROUND else ''}: laufende Instanz = {rv or 'keine'}")
+        t0 = time.time()
         killed = _kill_port_owners() + _kill_other_instances()   # ältere oder hängende Instanzen ablösen
+        log(f"Aufräumen fertig nach {time.time() - t0:.1f} s" + (f", beendet: {', '.join(sorted(set(killed)))}" if killed else ""))
         if killed:
             print(f"Ältere AutoShorts-Prozesse beendet: {', '.join(sorted(set(killed)))}", flush=True)
             time.sleep(1.5)

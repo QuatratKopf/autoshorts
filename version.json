@@ -1,6 +1,6 @@
 {
-  "version": "1.1.9",
-  "file": "releases/AutoShorts-1.1.9.cmd",
-  "sha256": "ab9d38a275b6eee73aa97eae3ef1e5f8c021a2e79d3f3e50030a7a0627de2389",
-  "notes": "Anmeldung bei YouTube und TikTok im eigenen Popup-Fenster"
+  "version": "1.2.0",
+  "file": "releases/AutoShorts-1.2.0.cmd",
+  "sha256": "1b6042286897de6864caffc6d18593c94cefa19c6b81a0b298d1114cd008de4e",
+  "notes": "Automatischer Neustart nach Updates repariert"
 }
