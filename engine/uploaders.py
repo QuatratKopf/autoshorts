@@ -291,7 +291,11 @@ def refresh_stats():
             log(f"YouTube-Statistik: {e}")
     if connected("tiktok"):
         try:
-            remote = tt_videos()
+            _put_channel("tiktok", *tt_user())
+        except Exception as e:  # noqa: BLE001
+            log(f"TikTok-Profil: {e}")
+        try:
+            remote = tt_videos()   # braucht den Scope video.list (nicht bei jeder App verfügbar)
             by_id = {str(x["id"]): x for x in remote}
             for v in [v for v in VIDEOS if v.get("tt_publish_id")]:
                 x = by_id.get(str(v.get("tt_post_id") or ""))
@@ -303,8 +307,7 @@ def refresh_stats():
                 if x:
                     _put(v["id"], "tiktok", {"views": x.get("view_count", 0), "likes": x.get("like_count", 0),
                                              "comments": x.get("comment_count", 0), "shares": x.get("share_count", 0)})
-            _put_channel("tiktok", *tt_user())
         except Exception as e:  # noqa: BLE001
-            log(f"TikTok-Statistik: {e}")
+            log(f"TikTok-Videozahlen nicht verfügbar (Scope video.list fehlt?): {e}")
     STATS["updated"] = time.time()
     STATE["last_stats"] = time.time()

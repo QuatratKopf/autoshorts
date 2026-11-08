@@ -55,7 +55,7 @@ Bis Google dein Projekt geprüft hat, landen API-Uploads auf **„Privat“** (F
 
 ### 4. TikTok verbinden
 1. **developers.tiktok.com** → App erstellen → Produkte **Login Kit** (Plattform **Desktop**) und **Content Posting API** (mit „Direct Post“).
-2. Scopes: `user.info.stats`, `video.list` und `video.publish` (`user.info.basic` ist bei Login Kit automatisch dabei; `video.upload` nur für die Upload-Art „Als Entwurf“).
+2. Scopes: `user.info.stats` dazu; `user.info.basic` kommt mit Login Kit, `video.publish` und `video.upload` mit der Content Posting API. `video.list` ist optional (falls verfügbar: Aufrufe je Video).
 3. Redirect-URI: `http://127.0.0.1:8791/oauth/`
 4. In der App: Client Key unter **Plattformen**, Client Secret unter **Zugangsdaten** → **Verbinden**.
 
