@@ -1038,7 +1038,7 @@ async function runUpdate() {
   const msg = (t, m, act) => { $("#updT").textContent = t; $("#updMsg").innerHTML = m; $("#updAct").innerHTML = act || ""; };
   let res;
   try { res = await api("/api/update/apply", {}); } catch (e) {
-    msg("Update fehlgeschlagen", esc(e.message), '<button class="btn" id="updClose">Schließen</button>'); $("#updClose").onclick = () => $("#updOv").remove(); return; }
+    $("#updOv .spin").remove(); msg("Update fehlgeschlagen", esc(e.message), '<button class="btn" id="updClose">Schließen</button>'); $("#updClose").onclick = () => $("#updOv").remove(); return; }
   msg("Neustart …", `Version <b>${esc(res.version)}</b> ist installiert. AutoShorts startet neu, das dauert ein paar Sekunden.`);
   const t0 = Date.now();
   const poll = async () => {

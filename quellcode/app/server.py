@@ -23,7 +23,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "engine"))
 from naclpure import derive_key, encrypt, sealed_box  # noqa: E402
-from appshell import MANIFEST, SERVICE_WORKER, ensure_desktop_shortcut, icon_png, open_app_window  # noqa: E402
+from appshell import MANIFEST, SERVICE_WORKER, ensure_desktop_shortcut, icon_png, open_app_window, windowless_python  # noqa: E402,E501
 
 APP_VERSION = "dev"   # wird beim Bauen der Ein-Datei-Version gesetzt
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -287,12 +287,32 @@ def install_update(data, sha=None):
     tmp = LAUNCHER + ".neu"
     with open(tmp, "wb") as f:
         f.write(data)
-    try:
-        os.replace(tmp, LAUNCHER)
-    except OSError as e:
-        os.remove(tmp)
-        raise ValueError(f"Die App-Datei konnte nicht ersetzt werden ({e.strerror or e}). "
-                         "Verschieb AutoShorts.cmd z. B. nach Dokumente und versuch es erneut.") from e
+    err = None
+    for attempt in range(6):   # Virenscanner oder OneDrive halten die Datei manchmal kurz fest
+        try:
+            os.replace(tmp, LAUNCHER)
+            err = None
+            break
+        except OSError as e:
+            err = e
+            try:   # zweiter Weg: alte Datei beiseite schieben, neue an ihren Platz
+                old_path = LAUNCHER + ".alt"
+                if os.path.exists(old_path):
+                    os.remove(old_path)
+                os.rename(LAUNCHER, old_path)
+                os.rename(tmp, LAUNCHER)
+                err = None
+                break
+            except OSError:
+                time.sleep(1)
+    if err is not None:
+        try:
+            os.remove(tmp)
+        except OSError:
+            pass
+        raise ValueError(f"Windows lässt die App-Datei nicht ersetzen ({err.strerror or err}). "
+                         "Lade AutoShorts einmal neu herunter und starte es – danach installiert es sich in einen eigenen Ordner, "
+                         "in dem Updates immer funktionieren.") from err
     log(f"Update installiert: Version {APP_VERSION} → {new_version}. App startet neu.")
     threading.Timer(0.8, restart).start()
     return new_version
@@ -472,7 +492,7 @@ def sw(h):
 
 @route("GET", r"/api/version")
 def version(h):
-    h._send(200, {"app": "AutoShorts", "version": APP_VERSION, "pid": os.getpid()})
+    h._send(200, {"app": "AutoShorts", "version": APP_VERSION, "pid": os.getpid(), "launcher": LAUNCHER})
 
 
 @route("GET", r"/api/state")
@@ -628,28 +648,93 @@ def show_log(h):
 
 
 # ───────────────────────── Start ─────────────────────────
-def _running_version():
-    s, b = 0, b""
+def _running():
     try:
         with urllib.request.urlopen(f"http://127.0.0.1:{PORT}/api/version", timeout=2) as r:
-            s, b = r.status, r.read()
+            j = json.loads(r.read())
     except Exception:  # noqa: BLE001
         return None
+    return j if j.get("app") == "AutoShorts" else {"version": "fremd"}
+
+
+def _stop_other():
     try:
-        j = json.loads(b)
-        return j.get("version") if j.get("app") == "AutoShorts" else "fremd"
-    except ValueError:
-        return "fremd"
+        req = urllib.request.Request(f"http://127.0.0.1:{PORT}/api/quit", data=b"{}", method="POST",
+                                     headers={"X-AS": "1", "Content-Type": "application/json"})
+        urllib.request.urlopen(req, timeout=3).read()
+    except Exception:  # noqa: BLE001
+        pass
+    time.sleep(1.5)
+
+
+# ───────────────────────── Selbst-Installation (Windows) ─────────────────────────
+# Die App kopiert sich beim ersten Start nach %LOCALAPPDATA%\AutoShorts. Dort sperrt kein Download-Ordner,
+# OneDrive oder ZIP-Fenster die Datei, deshalb klappen Updates zuverlässig.
+def install_dir():
+    base = os.environ.get("LOCALAPPDATA")
+    return os.path.join(base, "AutoShorts") if base else None
+
+
+def self_install():
+    """Gibt True zurück, wenn die installierte Kopie gestartet wurde und dieser Prozess enden soll."""
+    if not sys.platform.startswith("win") or not LAUNCHER.lower().endswith(".cmd") or os.environ.get("AS_NO_INSTALL"):
+        return False
+    target_dir = install_dir()
+    if not target_dir:
+        return False
+    target = os.path.join(target_dir, "AutoShorts.cmd")
+    if os.path.normcase(os.path.abspath(LAUNCHER)) == os.path.normcase(os.path.abspath(target)):
+        return False
+    import shutil
+    import subprocess
+    try:
+        os.makedirs(target_dir, exist_ok=True)
+        with open(LAUNCHER, "rb") as f:
+            mine = f.read()
+        inst_ver = None
+        if os.path.exists(target):
+            with open(target, "rb") as f:
+                m = re.search(rb'^APP_VERSION = "([0-9.]+)"', f.read(), re.M)
+                inst_ver = m.group(1).decode() if m else None
+        if inst_ver is None or _vtuple(APP_VERSION) >= _vtuple(inst_ver):
+            tmp = target + ".neu"
+            with open(tmp, "wb") as f:
+                f.write(mine)
+            os.replace(tmp, target)
+        # Einstellungen vom alten Ort mitnehmen (Zugangsschlüssel, Client-Secrets)
+        new_data = os.path.join(target_dir, "AutoShorts-Daten")
+        old_set = os.path.join(DATA, "einstellungen.json")
+        if os.path.exists(old_set) and not os.path.exists(os.path.join(new_data, "einstellungen.json")):
+            os.makedirs(new_data, exist_ok=True)
+            shutil.copy2(old_set, os.path.join(new_data, "einstellungen.json"))
+        try:   # Desktop-Symbol soll ab jetzt auf die installierte Kopie zeigen
+            os.remove(os.path.join(new_data, "verknuepfung.txt"))
+        except OSError:
+            pass
+        env = dict(os.environ, AS_LAUNCHER=target, AS_DATA=new_data)
+        args = [windowless_python(), target] + [a for a in sys.argv[1:]]
+        subprocess.Popen(args, cwd=target_dir, env=env, close_fds=True, creationflags=0x00000008 | 0x00000200)
+        print(f"AutoShorts wurde nach {target_dir} installiert und dort gestartet.", flush=True)
+        return True
+    except Exception as e:  # noqa: BLE001
+        print(f"Installation in eigenen Ordner nicht möglich ({e}) – starte von hier.", flush=True)
+        return False
 
 
 def main():
     global SRV
-    url = f"http://127.0.0.1:{PORT}"
-    rv = _running_version()
-    if rv and rv != "fremd" and (_vtuple(rv) >= _vtuple(APP_VERSION) or APP_VERSION == "dev") and not BACKGROUND:
-        print(f"AutoShorts {rv} läuft bereits, das Fenster wird geöffnet.", flush=True)
-        open_app_window(url)
+    if self_install():
         return
+    url = f"http://127.0.0.1:{PORT}"
+    other = _running()
+    if other and other.get("version") != "fremd":
+        same_file = os.path.normcase(other.get("launcher") or "") == os.path.normcase(LAUNCHER)
+        if same_file and not BACKGROUND and (_vtuple(other["version"]) >= _vtuple(APP_VERSION) or APP_VERSION == "dev"):
+            print(f"AutoShorts {other['version']} läuft bereits, das Fenster wird geöffnet.", flush=True)
+            open_app_window(url)
+            return
+        print(f"Andere AutoShorts-Instanz ({other.get('version')}, {other.get('launcher')}) wird beendet.", flush=True)
+        _stop_other()
     srv = None
     for attempt in range(30):   # nach einem Update ist der Port kurz noch belegt
         try:

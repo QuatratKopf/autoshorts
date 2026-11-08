@@ -9,13 +9,13 @@ Die Videos baut der Motor kostenlos auf GitHub Actions, auch wenn dein PC aus is
 1. **AutoShorts.cmd** herunterladen (oben auf die Datei klicken → Download-Symbol).
 2. Am besten in einen festen Ordner legen, z. B. Dokumente.
 3. Doppelklick. Fehlt Python, wird es einmalig automatisch installiert.
-4. Die App öffnet sich in einem eigenen Fenster und legt ein Symbol **AutoShorts** auf dem Desktop an.
+4. Die App installiert sich selbst nach `%LOCALAPPDATA%\AutoShorts`, öffnet sich in einem eigenen Fenster und legt ein Symbol **AutoShorts** auf dem Desktop an. Die heruntergeladene Datei kannst du danach löschen und startest künftig über das Desktop-Symbol.
 
 Mac/Linux: `python3 AutoShorts.cmd`
 
 ## Updates
 
-Beim Start prüft die App, ob hier eine neue Version liegt, und fragt **„Jetzt aktualisieren?“**. In **Einstellungen → App & Updates** gibt es zusätzlich den Knopf **„Nach Updates suchen“** und den Schalter für automatische Updates. Einstellungen bleiben erhalten (Ordner `AutoShorts-Daten` neben der Datei).
+Beim Start prüft die App, ob hier eine neue Version liegt, und fragt **„Jetzt aktualisieren?“**. In **Einstellungen → App & Updates** gibt es zusätzlich den Knopf **„Nach Updates suchen“** und den Schalter für automatische Updates. Einstellungen bleiben erhalten (Ordner `%LOCALAPPDATA%\AutoShorts\AutoShorts-Daten`).
 
 | Datei | Zweck |
 |---|---|

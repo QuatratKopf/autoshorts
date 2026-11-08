@@ -1,6 +1,6 @@
 {
-  "version": "1.1.0",
-  "file": "releases/AutoShorts-1.1.0.cmd",
-  "sha256": "bca9660f9a4139fe5181b1234b3575390632492f7ad45cb1bc43b33f2eefb003",
-  "notes": "Trends: aktuelle Themen aus Google Trends, Wikipedia und YouTube · eigenes Thumbnail mit Text · bessere Beschreibung und Tags"
+  "version": "1.1.1",
+  "file": "releases/AutoShorts-1.1.1.cmd",
+  "sha256": "1cf1b1b07aefa07eb3116a4d9280a78ce4f40520deab756d48cea57675c8eb57",
+  "notes": "Updates funktionieren jetzt überall: die App installiert sich in einen eigenen Ordner"
 }
