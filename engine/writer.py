@@ -76,7 +76,7 @@ def trend_topic(cat: dict):
     user = (f"Heute ist {dt.date.today():%d.%m.%Y}. Kategorie: {cat['name']} – {cat['description']}\n"
             f"Stilvorgabe: {cat['script_style']}\n"
             + (f"Zielgruppe: {audience()}\n" if audience() else "")
-            + "\nDas ist gerade in den USA und in Deutschland im Trend (TikTok-Hashtags und -Songs, YouTube, Reddit, "
+            + "\nDas ist gerade in den USA und in Deutschland im Trend (TikTok-Sounds, YouTube, Reddit, "
             "Google-Suchen, Wikipedia):\n"
             f"{trends.as_prompt_list(items)}\n\n"
             "Wähle EINEN Trend, über den die Zielgruppe gerade redet, und mach daraus ein Short in dieser Kategorie, "
@@ -84,7 +84,7 @@ def trend_topic(cat: dict):
             "TikTok-Trends, Internet-Kultur und Memes, Gaming, Musik und Artists, Serien und Filme, Creator, Tech und Apps, "
             "virale Momente aus den USA, die in Deutschland noch neu sind. "
             "Meide Lokalnachrichten (Stadtfeste, Regionales), Börse, Wetter, Randsportarten und alles, was nur ältere Leute interessiert. "
-            "Ein Hashtag oder Song ist nur geeignet, wenn klar ist, worum es geht – sonst lieber einen anderen Trend. "
+            "Ein TikTok-Sound ist nur geeignet, wenn du den Song, den Artist oder den Trend dazu sicher kennst – sonst lieber einen anderen Trend. "
             "Am besten: ein überraschender Fakt, die Geschichte dahinter oder eine Erklärung, warum alle gerade darüber reden, "
             "die auch in ein paar Tagen noch stimmt. " + UNSUITABLE + "\n"
             "Diese Themen gab es schon:\n- " + ("\n- ".join(past) if past else "(noch keine)") + "\n"

@@ -1,9 +1,9 @@
 """Was gerade im Trend ist – aus kostenlosen Quellen, ohne Schlüssel. Ausgerichtet auf die Gen-Z-/TikTok-Bubble,
 standardmäßig USA und Deutschland (Einstellung trend_regions).
 
-- TikTok Creative Center: angesagte Hashtags und Songs auf TikTok (je Land)
+- TikTok: angesagte Sounds des Tages (kworb.net, je Land)
 - YouTube: angesagte Videos aus Gaming, Musik, Unterhaltung, Comedy (je Land, wenn YouTube verbunden ist)
-- Reddit: was in r/popular und Gen-Z-Communities gerade abgeht (USA/international)
+- Reddit: was in Gen-Z-nahen Communities heute oben steht (USA: r/GenZ, r/OutOfTheLoop …; DE: r/de, r/ich_iel …)
 - Google Trends: Suchbegriffe, die heute stark steigen (je Land)
 - Wikipedia (englisch/deutsch): meistgelesene Artikel von gestern
 
@@ -68,7 +68,7 @@ def google_trends(geo="DE"):
             if out:
                 break
         except Exception as e:  # noqa: BLE001
-            log(f"Google Trends: {e}")
+            log(f"Google Trends ({geo}): {e}")
     return out[:20]
 
 
@@ -132,88 +132,71 @@ def youtube_trending(region="DE"):
     return out[:20]
 
 
-def _next_data(url):
-    r = requests.get(url, headers=BROWSER, timeout=T)
-    if r.status_code != 200:
-        return None
-    m = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', r.text, re.S)
-    if not m:
-        return None
-    import json
-    return json.loads(m.group(1))
-
-
-def _find_lists(obj, key_hint):
-    """Sucht in verschachtelten Daten Listen von Einträgen, die das Feld key_hint haben."""
-    if isinstance(obj, list):
-        if obj and isinstance(obj[0], dict) and key_hint in obj[0]:
-            yield obj
-        for x in obj:
-            yield from _find_lists(x, key_hint)
-    elif isinstance(obj, dict):
-        for v in obj.values():
-            yield from _find_lists(v, key_hint)
-
-
-def tiktok_creative_center(region="US"):
-    """Angesagte TikTok-Hashtags und -Songs aus dem öffentlichen TikTok Creative Center."""
-    out = []
-    pages = [("hashtag", "hashtag_name", "TikTok Hashtag"), ("music", "title", "TikTok Song")]
-    for kind, field, label in pages:
-        try:
-            data = _next_data(f"https://ads.tiktok.com/business/creativecenter/inspiration/popular/{kind}/pc/en"
-                              f"?region={region}&period=7")
-            if not data:
+def tiktok_songs(region="US"):
+    """Angesagte TikTok-Sounds (Tageschart von kworb.net, je Land)."""
+    try:
+        r = requests.get(f"https://kworb.net/charts/tiktok/{region.lower()}.html", headers=BROWSER, timeout=T)
+        if r.status_code != 200:
+            log(f"TikTok-Songs ({region}): HTTP {r.status_code}")
+            return []
+        page = r.content.decode("utf-8", "replace")
+        out = []
+        for pos, move, name in re.findall(r"<tr><td>(\d+)</td><td>([^<]*)</td><td class=\"mp text\"><div>(.*?)</div>", page)[:12]:
+            name = html.unescape(re.sub(r"<.*?>", "", name)).strip()
+            if not name:
                 continue
-            rows = next(_find_lists(data, field), [])
-            for row in rows[:15 if kind == "hashtag" else 8]:
-                name = str(row.get(field) or "").strip()
-                if not name:
-                    continue
-                extra = []
-                if row.get("industry_info", {}).get("value") if isinstance(row.get("industry_info"), dict) else None:
-                    extra.append(row["industry_info"]["value"])
-                if row.get("author"):
-                    extra.append("von " + str(row["author"]))
-                posts = row.get("publish_cnt") or row.get("video_views") or row.get("user_cnt")
-                out.append({"source": label, "region": region, "title": ("#" + name) if kind == "hashtag" else name,
-                            "traffic": (f"{int(posts):,}".replace(",", ".") + (" Posts" if row.get("publish_cnt") else " Aufrufe"))
-                            if str(posts or "").isdigit() else "",
-                            "summary": ", ".join(extra), "news": []})
-        except Exception as e:  # noqa: BLE001
-            log(f"TikTok-Trends ({kind}, {region}): {e}")
-    return out
+            artist, _, title = name.partition(" - ")
+            out.append({"source": "TikTok Song", "region": region, "title": title or name,
+                        "traffic": f"Platz {pos}" + (" · neu" if move == "NEW" else f" ({move})" if move not in ("=", "") else ""),
+                        "summary": f"Sound von {artist}" if title else "", "news": []})
+        return out
+    except Exception as e:  # noqa: BLE001
+        log(f"TikTok-Songs ({region}): {e}")
+        return []
 
 
-REDDIT_SUBS = ("popular", "GenZ", "TikTokCringe", "OutOfTheLoop", "gaming", "popculturechat")
+REDDIT = {"US": "GenZ+TikTokCringe+OutOfTheLoop+popculturechat+gaming+movies+television+Music",
+          "DE": "de+ich_iel+germany+gaming_de"}
 
 
-def reddit_trending():
-    out = []
-    for sub in REDDIT_SUBS:
+def reddit_trending(region="US"):
+    """Meistgelesene Beiträge des Tages aus Gen-Z-nahen Communities (über den öffentlichen RSS-Feed)."""
+    subs = REDDIT.get(region)
+    if not subs:
+        return []
+    url = f"https://www.reddit.com/r/{subs}/top/.rss?t=day&limit=20"
+    for attempt in range(3):
         try:
-            r = requests.get(f"https://www.reddit.com/r/{sub}/top.json", params={"t": "day", "limit": 8},
-                             headers={"User-Agent": "AutoShorts/1.0 (trend research)"}, timeout=T)
+            r = requests.get(url, headers=BROWSER, timeout=T)
+            if r.status_code == 429:   # Reddit erlaubt ohne Anmeldung nur wenige Abrufe kurz hintereinander
+                time.sleep(30)
+                continue
             if r.status_code != 200:
-                continue
-            for ch in r.json().get("data", {}).get("children", []):
-                d = ch.get("data", {})
-                if d.get("over_18") or d.get("stickied") or not d.get("title"):
-                    continue
-                out.append({"source": f"Reddit r/{d.get('subreddit') or sub}", "region": "US", "title": d["title"][:200],
-                            "traffic": f"{int(d.get('ups', 0)):,}".replace(",", ".") + " Upvotes",
-                            "summary": (d.get("selftext") or "")[:200], "news": []})
+                log(f"Reddit ({region}): HTTP {r.status_code}")
+                return []
+            ns = {"a": "http://www.w3.org/2005/Atom"}
+            out = []
+            for e in ET.fromstring(r.content).findall("a:entry", ns):
+                title = html.unescape(e.findtext("a:title", "", ns) or "").strip()
+                cat = e.find("a:category", ns)
+                sub = cat.get("label", "") if cat is not None else ""
+                if title and not re.search(r"nsfw|\bnsfl\b", title, re.I):
+                    out.append({"source": "Reddit " + (sub or "r/" + subs.split("+")[0]), "region": region,
+                                "title": title[:200], "traffic": "", "summary": "", "news": []})
+            return out[:15]
         except Exception as e:  # noqa: BLE001
-            log(f"Reddit-Trends (r/{sub}): {e}")
-    return out[:25]
+            log(f"Reddit ({region}): {e}")
+            return []
+    log(f"Reddit ({region}): zu viele Abrufe, übersprungen")
+    return []
 
 
 def refresh():
     log("Sammle Trends (" + ", ".join(COUNTRY.get(r, r) for r in regions()) + ") …")
     items, counts = [], {}
-    for name, fn in [("TikTok", lambda: [x for r in regions() for x in tiktok_creative_center(r)]),
+    for name, fn in [("TikTok", lambda: [x for r in regions() for x in tiktok_songs(r)]),
                      ("YouTube", lambda: [x for r in regions() for x in youtube_trending(r)]),
-                     ("Reddit", reddit_trending),
+                     ("Reddit", lambda: [x for r in regions() for x in reddit_trending(r)]),
                      ("Google", lambda: [x for r in regions() for x in google_trends(r)]),
                      ("Wikipedia", lambda: [x for r in regions() if r in ("US", "DE") for x in wikipedia_mostread("en" if r == "US" else "de")])]:
         got = fn()
