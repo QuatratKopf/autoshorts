@@ -1,6 +1,6 @@
 {
-  "version": "1.2.2",
-  "file": "releases/AutoShorts-1.2.2.cmd",
-  "sha256": "519c7170d9a4cfc88daf3bbed98a7ed4019c535864bfdb5977f047e4b415a89f",
-  "notes": "Kein Fehlerbild mehr beim Neustart nach Updates"
+  "version": "1.2.3",
+  "file": "releases/AutoShorts-1.2.3.cmd",
+  "sha256": "5afc3b6d4ce45e10a6971627d04c56586cc8da8cde183e9ba4d3b6579f9dfd49",
+  "notes": "Neustart nach Updates mit Kontrolle und Ersatzwegen"
 }

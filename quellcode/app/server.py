@@ -309,30 +309,71 @@ def install_update(data, sha=None):
     return new_version
 
 
+RESTART_FLAG = os.path.join(DATA, "neustart.txt")
+
+
+def _answers(timeout):
+    """Wartet, bis auf dem App-Port wieder eine AutoShorts-Instanz antwortet."""
+    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+    end = time.time() + timeout
+    while time.time() < end:
+        try:
+            with opener.open(f"http://127.0.0.1:{PORT}/api/version", timeout=2) as r:
+                if json.loads(r.read().decode()).get("app") == "AutoShorts":
+                    return True
+        except Exception:  # noqa: BLE001
+            pass
+        time.sleep(1)
+    return False
+
+
 def restart():
-    """Startet AutoShorts neu: der neue Prozess wird direkt mit demselben Python gestartet, mit dem die App gerade läuft
-    (kein Umweg über cmd/Batch/py-Launcher). Er wartet selbst, bis der Port frei ist."""
+    """Startet AutoShorts neu und prüft, ob die neue Version wirklich antwortet. Klappt ein Weg nicht,
+    wird der nächste versucht: 1) direkt mit demselben Python, 2) über den Windows-Explorer wie ein
+    Doppelklick (unabhängig von diesem Prozess), 3) Prozess durch die neue Version ersetzen."""
     import subprocess
     try:
         if SRV:
             SRV.server_close()
+        with open(RESTART_FLAG, "w", encoding="utf-8") as f:   # neue Instanz: kein zweites Fenster öffnen
+            f.write(str(time.time()))
         exe = sys.executable
-        if sys.platform.startswith("win") and exe.lower().endswith("python.exe"):
+        win = sys.platform.startswith("win")
+        if win and exe.lower().endswith("python.exe"):
             cand = os.path.join(os.path.dirname(exe), "pythonw.exe")
             exe = cand if os.path.exists(cand) else exe
         args = [exe, LAUNCHER, "--hintergrund"]
+        cwd = os.path.dirname(LAUNCHER)
         env = dict(os.environ, AS_LAUNCHER=LAUNCHER, AS_DATA=DATA, AS_NO_BROWSER="1")
-        log(f"Neustart: {exe}")
-        if sys.platform.startswith("win"):
-            base = 0x00000008 | 0x00000200 | 0x08000000   # DETACHED_PROCESS | NEW_PROCESS_GROUP | NO_WINDOW
+
+        def direct():
+            if win:
+                base = 0x00000008 | 0x00000200 | 0x08000000   # DETACHED_PROCESS | NEW_PROCESS_GROUP | NO_WINDOW
+                try:
+                    subprocess.Popen(args, cwd=cwd, env=env, close_fds=True, creationflags=base | 0x01000000)  # + BREAKAWAY_FROM_JOB
+                except OSError:
+                    subprocess.Popen(args, cwd=cwd, env=env, close_fds=True, creationflags=base)
+            else:
+                subprocess.Popen(args, cwd=cwd, env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
+
+        def explorer():
+            subprocess.Popen([os.path.join(os.environ.get("SystemRoot", r"C:\Windows"), "explorer.exe"), LAUNCHER], cwd=cwd)
+
+        ways = [("direkt", direct)] + ([("Explorer", explorer)] if win else [])
+        for name, start in ways:
             try:
-                subprocess.Popen(args, cwd=os.path.dirname(LAUNCHER), env=env, close_fds=True, creationflags=base | 0x01000000)
-            except OSError:
-                subprocess.Popen(args, cwd=os.path.dirname(LAUNCHER), env=env, close_fds=True, creationflags=base)
-        else:
-            subprocess.Popen(args, cwd=os.path.dirname(LAUNCHER), env=env, stdout=subprocess.DEVNULL,
-                             stderr=subprocess.DEVNULL, start_new_session=True)
-        time.sleep(0.4)
+                log(f"Neustart ({name}): {exe if name == 'direkt' else LAUNCHER}")
+                start()
+            except Exception as e:  # noqa: BLE001
+                log(f"Neustart ({name}) nicht möglich: {e}", "warn")
+                continue
+            if _answers(25):
+                log("Neustart erfolgreich")
+                return
+            log(f"Neustart ({name}): neue Version antwortet nicht, nächster Versuch", "warn")
+        log("Neustart: ersetze den laufenden Prozess durch die neue Version", "warn")
+        os.environ.update(env)
+        os.execv(sys.executable, [sys.executable, LAUNCHER, "--hintergrund"])
     except Exception as e:  # noqa: BLE001
         log(f"Neustart fehlgeschlagen: {e}", "error")
     finally:
@@ -767,7 +808,13 @@ def main():
         return
     log(f"AutoShorts {APP_VERSION} gestartet ({LAUNCHER})")
     print(f"\n  AutoShorts läuft:  {url}\n  Dieses Fenster darf geschlossen oder minimiert werden.\n", flush=True)
-    if os.environ.get("AS_NO_BROWSER") != "1" and not BACKGROUND:
+    restarted = False
+    try:   # nach einem Update-Neustart (auch über den Explorer) kein zweites Fenster öffnen
+        restarted = time.time() - os.path.getmtime(RESTART_FLAG) < 180
+        os.remove(RESTART_FLAG)
+    except OSError:
+        pass
+    if os.environ.get("AS_NO_BROWSER") != "1" and not BACKGROUND and not restarted:
         threading.Timer(1.0, lambda: open_app_window(url)).start()
     threading.Thread(target=ensure_desktop_shortcut, args=(LAUNCHER, DATA, log), daemon=True).start()
     threading.Thread(target=_update_loop, daemon=True).start()
