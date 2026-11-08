@@ -1,6 +1,6 @@
 {
-  "version": "1.1.4",
-  "file": "releases/AutoShorts-1.1.4.cmd",
-  "sha256": "c2aa26ceefdb66aec8a1b943229fed1f89f27b5bc0477a9fb35ce584c523e660",
-  "notes": "TikTok-Verbindung ohne video.list"
+  "version": "1.1.5",
+  "file": "releases/AutoShorts-1.1.5.cmd",
+  "sha256": "d9ed7ac7a1455ad381bb1bbef5e58d2ba767e801f37604d080a48e8361c9414c",
+  "notes": "TikTok: Videozahlen wieder mit video.list"
 }

@@ -416,7 +416,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 
 
-APP_VERSION = "1.1.4"   # wird beim Bauen der Ein-Datei-Version gesetzt
+APP_VERSION = "1.1.5"   # wird beim Bauen der Ein-Datei-Version gesetzt
 ROOT = os.path.dirname(os.path.abspath(__file__))
 HOST = "127.0.0.1"
 PORT = int(os.environ.get("AS_PORT", "8791"))
@@ -574,7 +574,7 @@ def oauth_start(platform, client_id, mode="direct"):
              "access_type": "offline", "prompt": "consent", "state": state,
              "code_challenge": ch, "code_challenge_method": "S256"}
         return "https://accounts.google.com/o/oauth2/v2/auth?" + urllib.parse.urlencode(q)
-    scopes = "user.info.basic,user.info.stats," + ("video.upload" if mode == "inbox" else "video.publish")
+    scopes = "user.info.basic,user.info.stats,video.list," + ("video.upload" if mode == "inbox" else "video.publish")
     q = {"client_key": client_id, "scope": scopes,
          "response_type": "code", "redirect_uri": REDIRECT, "state": state,
          "code_challenge": hashlib.sha256(verifier.encode()).hexdigest(), "code_challenge_method": "S256"}
