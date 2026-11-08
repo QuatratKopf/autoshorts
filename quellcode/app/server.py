@@ -237,11 +237,18 @@ def _vtuple(v):
 
 
 def _fetch(url, limit=10_000_000):
-    url += ("&" if "?" in url else "?") + f"t={int(time.time())}"
-    s, b = http("GET", url, headers={"Cache-Control": "no-cache"}, timeout=60)
-    if s != 200:
-        raise ValueError(f"Download fehlgeschlagen ({s})")
-    return b[:limit]
+    url += ("&" if "?" in url else "?") + f"t={int(time.time())}"   # GitHub-Zwischenspeicher umgehen
+    req = urllib.request.Request(url, headers={"User-Agent": UA, "Cache-Control": "no-cache"})
+    try:
+        with urllib.request.urlopen(req, timeout=25) as r:
+            return r.read(limit + 1)[:limit]
+    except Exception:
+        import shutil
+        import subprocess
+        if shutil.which("curl"):   # z. B. fehlende Zertifikate bei Python auf dem Mac
+            return subprocess.run(["curl", "-fsSL", "-H", "Cache-Control: no-cache", url], capture_output=True,
+                                  check=True, timeout=90).stdout[:limit]
+        raise
 
 
 def check_update():
@@ -276,24 +283,10 @@ def _validate_build(data, sha=None):
 
 
 def install_update(data, sha=None):
-    global LAUNCHER
-    new_version = _validate_build(data, sha)
     if not LAUNCHER.lower().endswith(".cmd") or not os.path.exists(LAUNCHER):
-        # z. B. direkt aus der ZIP gestartet: Windows hat die Datei schon wieder weggeräumt → in den eigenen Ordner installieren
-        d = install_dir()
-        if not d:
-            raise ValueError("Bitte AutoShorts.cmd erst aus der ZIP entpacken und von dort starten.")
-        os.makedirs(os.path.join(d, "AutoShorts-Daten"), exist_ok=True)
-        import shutil
-        if os.path.exists(SET_FILE) and not os.path.exists(os.path.join(d, "AutoShorts-Daten", "einstellungen.json")):
-            shutil.copy2(SET_FILE, os.path.join(d, "AutoShorts-Daten", "einstellungen.json"))
-        LAUNCHER = os.path.join(d, "AutoShorts.cmd")
-        if not os.path.exists(LAUNCHER):
-            with open(LAUNCHER, "wb") as f:
-                f.write(data)
-            log(f"Update als Neuinstallation nach {d}")
-            threading.Timer(0.8, restart).start()
-            return new_version
+        raise ValueError("Updates funktionieren nur mit der Ein-Datei-Version (AutoShorts.cmd). "
+                         "Wurde die App direkt aus der ZIP gestartet? Dann bitte erst entpacken.")
+    new_version = _validate_build(data, sha)
     backup_dir = os.path.join(DATA, "backup")
     os.makedirs(backup_dir, exist_ok=True)
     with open(LAUNCHER, "rb") as f:
@@ -303,63 +296,51 @@ def install_update(data, sha=None):
     tmp = LAUNCHER + ".neu"
     with open(tmp, "wb") as f:
         f.write(data)
-    err = None
-    for attempt in range(6):   # Virenscanner oder OneDrive halten die Datei manchmal kurz fest
-        try:
-            os.replace(tmp, LAUNCHER)
-            err = None
-            break
-        except OSError as e:
-            err = e
-            try:   # zweiter Weg: alte Datei beiseite schieben, neue an ihren Platz
-                old_path = LAUNCHER + ".alt"
-                if os.path.exists(old_path):
-                    os.remove(old_path)
-                os.rename(LAUNCHER, old_path)
-                os.rename(tmp, LAUNCHER)
-                err = None
-                break
-            except OSError:
-                time.sleep(1)
-    if err is not None:
-        try:
-            os.remove(tmp)
-        except OSError:
-            pass
-        raise ValueError(f"Windows lässt die App-Datei nicht ersetzen ({err.strerror or err}). "
-                         "Lade AutoShorts einmal neu herunter und starte es – danach installiert es sich in einen eigenen Ordner, "
-                         "in dem Updates immer funktionieren.") from err
+    try:
+        os.replace(tmp, LAUNCHER)
+    except OSError as e:
+        os.remove(tmp)
+        log(f"Update: Datei konnte nicht ersetzt werden: {e}", "error")
+        raise ValueError(f"Die App-Datei konnte nicht ersetzt werden ({e.strerror or e}). "
+                         "Liegt sie in einem geschützten Ordner? Verschieb AutoShorts.cmd z. B. nach Dokumente und versuch es erneut.") from e
     log(f"Update installiert: Version {APP_VERSION} → {new_version}. App startet neu.")
+    print(f"Update {APP_VERSION} -> {new_version}: Datei ersetzt, Neustart folgt", flush=True)
     threading.Timer(0.8, restart).start()
     return new_version
 
 
 def restart():
-    """Startet AutoShorts neu: direkt mit Python (ohne Umweg über cmd), die neue Instanz wartet, bis der Port frei ist."""
+    """Startet AutoShorts neu. Unter Windows über ein kleines Hilfsskript, das unabhängig von diesem Prozess läuft."""
     import subprocess
     try:
         if SRV:
             SRV.server_close()
-        env = dict(os.environ, AS_LAUNCHER=LAUNCHER, AS_DATA=DATA, AS_NO_BROWSER="1")
-        args = [windowless_python() if sys.platform.startswith("win") else sys.executable, LAUNCHER, "--hintergrund"]
-        log(f"Neustart: {' '.join(args)}")
         if sys.platform.startswith("win"):
-            base = 0x00000008 | 0x00000200   # DETACHED_PROCESS | CREATE_NEW_PROCESS_GROUP
+            helper = os.path.join(DATA, "neustart.cmd")
+            with open(helper, "w", encoding="ascii", errors="replace") as f:
+                f.write("@echo off\r\n"
+                        "rem Startet AutoShorts nach einem Update neu (unsichtbar, ohne Konsolenfenster)\r\n"
+                        "ping -n 3 127.0.0.1 >nul\r\n"
+                        f'call "{LAUNCHER}" --hintergrund\r\n')
+            flags = 0x08000000 | 0x00000200   # kein Fenster, eigene Prozessgruppe
             try:
-                subprocess.Popen(args, cwd=os.path.dirname(LAUNCHER), env=env, close_fds=True, creationflags=base | 0x01000000)
+                subprocess.Popen(["cmd.exe", "/c", helper], creationflags=flags | 0x01000000,   # aus dem Job lösen
+                                 cwd=os.path.dirname(LAUNCHER), close_fds=True)
             except OSError:
-                subprocess.Popen(args, cwd=os.path.dirname(LAUNCHER), env=env, close_fds=True, creationflags=base)
+                subprocess.Popen(["cmd.exe", "/c", helper], creationflags=flags, cwd=os.path.dirname(LAUNCHER), close_fds=True)
         else:
-            subprocess.Popen(args, cwd=os.path.dirname(LAUNCHER), env=env, stdout=subprocess.DEVNULL,
-                             stderr=subprocess.DEVNULL, start_new_session=True)
-        time.sleep(0.5)
+            subprocess.Popen([sys.executable, LAUNCHER, "--hintergrund"], cwd=os.path.dirname(LAUNCHER),
+                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True,
+                             env=dict(os.environ, AS_NO_BROWSER="1"))
+        print("Neustart angestoßen", flush=True)
     except Exception as e:  # noqa: BLE001
-        log(f"Neustart fehlgeschlagen: {e}", "error")
+        print(f"Neustart fehlgeschlagen: {e}", flush=True)
     finally:
         os._exit(0)
 
 
 def _download_install():
+    """Neue Version laden und einspielen (mit Wiederholung, falls GitHub kurz eine alte Datei liefert)."""
     for attempt in range(3):
         data = _fetch(UPDATE["file"])
         try:
@@ -367,6 +348,7 @@ def _download_install():
         except ValueError as e:
             if "Prüfsumme" not in str(e) or attempt == 2:
                 raise
+            log("Update: Prüfsumme passt noch nicht, lade erneut …", "warn")
             time.sleep(4)
             check_update()
 
@@ -508,7 +490,7 @@ def sw(h):
 
 @route("GET", r"/api/version")
 def version(h):
-    h._send(200, {"app": "AutoShorts", "version": APP_VERSION, "pid": os.getpid(), "launcher": LAUNCHER})
+    h._send(200, {"app": "AutoShorts", "version": APP_VERSION, "pid": os.getpid()})
 
 
 @route("GET", r"/api/state")
@@ -647,6 +629,13 @@ def shortcut(h):
     h._send(200, {"ok": True})
 
 
+@route("POST", r"/api/shutdown")
+def shutdown(h):
+    log("App beendet")
+    h._send(200, {"ok": True})
+    threading.Timer(0.6, lambda: os._exit(0)).start()
+
+
 @route("POST", r"/api/quit")
 def quit_app(h):
     h._send(200, {"ok": True})
@@ -664,110 +653,113 @@ def show_log(h):
 
 
 # ───────────────────────── Start ─────────────────────────
-def _running():
+class AppServer(ThreadingHTTPServer):
+    """Belegt den Port exklusiv. Unter Windows erlaubt Python sonst, dass mehrere Instanzen denselben Port teilen –
+    dann laufen unbemerkt alte Versionen weiter."""
+    daemon_threads = True
+    allow_reuse_address = not sys.platform.startswith("win")
+
+    def server_bind(self):
+        import socket
+        if sys.platform.startswith("win") and hasattr(socket, "SO_EXCLUSIVEADDRUSE"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
+        super().server_bind()
+
+
+def _running_version():
+    """Fragt eine eventuell laufende Instanz nach ihrer Version. None = nichts läuft, "alt" = ältere Version ohne Abfrage."""
+    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
     try:
-        with urllib.request.urlopen(f"http://127.0.0.1:{PORT}/api/version", timeout=2) as r:
-            j = json.loads(r.read())
+        with opener.open(f"http://127.0.0.1:{PORT}/api/version", timeout=2) as r:
+            return json.loads(r.read()).get("version") or "alt"
+    except urllib.error.HTTPError:
+        return "alt"
     except Exception:  # noqa: BLE001
         return None
-    return j if j.get("app") == "AutoShorts" else {"version": "fremd"}
 
 
-def _stop_other():
-    try:
-        req = urllib.request.Request(f"http://127.0.0.1:{PORT}/api/quit", data=b"{}", method="POST",
-                                     headers={"X-AS": "1", "Content-Type": "application/json"})
-        urllib.request.urlopen(req, timeout=3).read()
-    except Exception:  # noqa: BLE001
-        pass
-    time.sleep(1.5)
-
-
-# ───────────────────────── Selbst-Installation (Windows) ─────────────────────────
-# Die App kopiert sich beim ersten Start nach %LOCALAPPDATA%\AutoShorts. Dort sperrt kein Download-Ordner,
-# OneDrive oder ZIP-Fenster die Datei, deshalb klappen Updates zuverlässig.
-def install_dir():
-    base = os.environ.get("LOCALAPPDATA")
-    return os.path.join(base, "AutoShorts") if base else None
-
-
-def self_install():
-    """Gibt True zurück, wenn die installierte Kopie gestartet wurde und dieser Prozess enden soll."""
-    if not sys.platform.startswith("win") or not LAUNCHER.lower().endswith(".cmd") or os.environ.get("AS_NO_INSTALL"):
-        return False
-    target_dir = install_dir()
-    if not target_dir:
-        return False
-    target = os.path.join(target_dir, "AutoShorts.cmd")
-    if os.path.normcase(os.path.abspath(LAUNCHER)) == os.path.normcase(os.path.abspath(target)):
-        return False
-    import shutil
+def _port_owners():
+    """Windows: Prozess-IDs, die den App-Port belegen (netstat, unabhängig von der Systemsprache)."""
     import subprocess
     try:
-        os.makedirs(target_dir, exist_ok=True)
-        with open(LAUNCHER, "rb") as f:
-            mine = f.read()
-        inst_ver = None
-        if os.path.exists(target):
-            with open(target, "rb") as f:
-                m = re.search(rb'^APP_VERSION = "([0-9.]+)"', f.read(), re.M)
-                inst_ver = m.group(1).decode() if m else None
-        if inst_ver is None or _vtuple(APP_VERSION) >= _vtuple(inst_ver):
-            tmp = target + ".neu"
-            with open(tmp, "wb") as f:
-                f.write(mine)
-            os.replace(tmp, target)
-        # Einstellungen vom alten Ort mitnehmen (Zugangsschlüssel, Client-Secrets)
-        new_data = os.path.join(target_dir, "AutoShorts-Daten")
-        old_set = os.path.join(DATA, "einstellungen.json")
-        if os.path.exists(old_set) and not os.path.exists(os.path.join(new_data, "einstellungen.json")):
-            os.makedirs(new_data, exist_ok=True)
-            shutil.copy2(old_set, os.path.join(new_data, "einstellungen.json"))
-        try:   # Desktop-Symbol soll ab jetzt auf die installierte Kopie zeigen
-            os.remove(os.path.join(new_data, "verknuepfung.txt"))
-        except OSError:
-            pass
-        env = dict(os.environ, AS_LAUNCHER=target, AS_DATA=new_data)
-        args = [windowless_python(), target] + [a for a in sys.argv[1:]]
-        subprocess.Popen(args, cwd=target_dir, env=env, close_fds=True, creationflags=0x00000008 | 0x00000200)
-        print(f"AutoShorts wurde nach {target_dir} installiert und dort gestartet.", flush=True)
-        return True
+        out = subprocess.run(["netstat", "-ano", "-p", "tcp"], capture_output=True, text=True, errors="replace",
+                             timeout=20, creationflags=0x08000000).stdout
+    except Exception:  # noqa: BLE001
+        return set()
+    pids = set()
+    for line in out.splitlines():
+        t = line.split()
+        if len(t) >= 5 and t[1].endswith(f":{PORT}") and t[2] in ("0.0.0.0:0", "[::]:0") and t[-1].isdigit():
+            if int(t[-1]) not in (0, os.getpid()):
+                pids.add(int(t[-1]))
+    return pids
+
+
+def _kill_port_owners():
+    import subprocess
+    killed = []
+    for _ in range(5):
+        pids = _port_owners()
+        if not pids:
+            break
+        for pid in pids:
+            subprocess.run(["taskkill", "/F", "/T", "/PID", str(pid)], capture_output=True, timeout=20, creationflags=0x08000000)
+            killed.append(str(pid))
+        time.sleep(1)
+    return killed
+
+
+def _kill_other_instances():
+    """Windows: alle anderen AutoShorts-Prozesse beenden (alte Versionen, andere Kopien der Datei)."""
+    import subprocess
+    if not sys.platform.startswith("win"):
+        return []
+    ps = ("Get-CimInstance Win32_Process | Where-Object { $_.Name -match '^(python|pythonw|py|pyw)\\.exe$' -and "
+          "$_.CommandLine -like '*AutoShorts*' -and $_.ProcessId -ne %d -and $_.ProcessId -ne %d } | "
+          "ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue; $_.ProcessId }") % (os.getpid(), os.getppid())
+    try:
+        out = subprocess.run(["powershell", "-NoProfile", "-Command", ps], capture_output=True, text=True,
+                             timeout=40, creationflags=0x08000000).stdout
+        return [x for x in out.split() if x.isdigit()]
     except Exception as e:  # noqa: BLE001
-        print(f"Installation in eigenen Ordner nicht möglich ({e}) – starte von hier.", flush=True)
-        return False
+        print(f"Aufräumen alter Instanzen fehlgeschlagen: {e}", flush=True)
+        return []
 
 
 def main():
     global SRV
-    if self_install():
-        return
+    srv = None
     url = f"http://127.0.0.1:{PORT}"
-    other = _running()
-    if other and other.get("version") != "fremd":
-        same_file = os.path.normcase(other.get("launcher") or "") == os.path.normcase(LAUNCHER)
-        if same_file and not BACKGROUND and (_vtuple(other["version"]) >= _vtuple(APP_VERSION) or APP_VERSION == "dev"):
-            print(f"AutoShorts {other['version']} läuft bereits, das Fenster wird geöffnet.", flush=True)
+    if sys.platform.startswith("win"):
+        rv = _running_version()
+        if rv and rv != "alt" and _vtuple(rv) >= _vtuple(APP_VERSION) and not BACKGROUND:
+            print(f"AutoShorts {rv} läuft bereits, das Fenster wird geöffnet.", flush=True)
             open_app_window(url)
             return
-        print(f"Andere AutoShorts-Instanz ({other.get('version')}, {other.get('launcher')}) wird beendet.", flush=True)
-        _stop_other()
-    srv = None
-    for attempt in range(30):   # nach einem Update ist der Port kurz noch belegt
+        print(f"Start: laufende Instanz = {rv or 'keine'}", flush=True)
+        killed = _kill_port_owners() + _kill_other_instances()   # ältere oder hängende Instanzen ablösen
+        if killed:
+            print(f"Ältere AutoShorts-Prozesse beendet: {', '.join(sorted(set(killed)))}", flush=True)
+            time.sleep(1.5)
+    for attempt in range(60):   # nach einem Update kann der Port noch kurz von der alten Version belegt sein
         try:
-            srv = ThreadingHTTPServer((HOST, PORT), Handler)
+            srv = AppServer((HOST, PORT), Handler)
             break
         except OSError:
-            if attempt < 29:
+            if (BACKGROUND or (sys.platform.startswith("win") and attempt < 15)) and attempt < 59:
                 time.sleep(1)
+                continue
+            srv = None
+            break
+    SRV = srv
     if srv is None:
-        print(f"Port {PORT} ist belegt. Läuft AutoShorts schon? Dann einfach das Fenster nutzen.", flush=True)
+        print("\n  AutoShorts läuft bereits, das Fenster wird geöffnet.\n")
         open_app_window(url)
         return
-    SRV = srv
     log(f"AutoShorts {APP_VERSION} gestartet ({LAUNCHER})")
     print(f"\n  AutoShorts läuft:  {url}\n  Dieses Fenster darf geschlossen oder minimiert werden.\n", flush=True)
     if os.environ.get("AS_NO_BROWSER") != "1" and not BACKGROUND:
-        threading.Timer(0.8, lambda: open_app_window(url)).start()
+        threading.Timer(1.0, lambda: open_app_window(url)).start()
     threading.Thread(target=ensure_desktop_shortcut, args=(LAUNCHER, DATA, log), daemon=True).start()
     threading.Thread(target=_update_loop, daemon=True).start()
     threading.Thread(target=_idle_loop, daemon=True).start()

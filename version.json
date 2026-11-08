@@ -1,6 +1,6 @@
 {
-  "version": "1.1.6",
-  "file": "releases/AutoShorts-1.1.6.cmd",
-  "sha256": "ee09b3d4223804a1f7135d5974b717d53ed9054676972da76c5e3fc622aee530",
-  "notes": "Neustart nach Updates zuverlässiger"
+  "version": "1.1.7",
+  "file": "releases/AutoShorts-1.1.7.cmd",
+  "sha256": "bdbddbf8729c21607ccb71afd6c20eab1b079dd0ca8c6160c8cb7e208440be02",
+  "notes": "Updates wie beim FVG Trader: alte Instanzen werden sauber abgelöst"
 }
