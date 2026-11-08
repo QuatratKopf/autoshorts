@@ -1,0 +1,10 @@
+Hier lizenzfreie Hintergrundmusik (MP3) ablegen.
+
+music/            → wird für alle Kategorien genutzt
+music/grusel/     → nur für Grusel-Videos
+music/fakten/     → nur für Fakten-Videos
+music/storys/  music/lustig/  music/mysterien/  music/tiere/
+
+Pro Video wird zufällig ein Titel gewählt und leise unter die Stimme gelegt.
+Gute kostenlose Quelle: YouTube Studio → Audio-Mediathek (Lizenz „keine Namensnennung erforderlich“).
+Ohne Dateien hier laufen die Videos einfach ohne Musik.

@@ -1,0 +1,219 @@
+"""Zustand von AutoShorts: alles liegt als JSON-Dateien im Repository.
+
+docs/data/config.json   gehört der App (Einstellungen, Kategorien, Themen-Warteschlange)
+docs/data/state.json    gehört dem Motor (Zeitplan, benutzte Themen, Verbindungen)
+docs/data/videos.json   gehört dem Motor (alle Videos)
+docs/data/stats.json    gehört dem Motor (Zahlen je Tag)
+tokens/*.enc            verschlüsselte Anmeldungen bei YouTube/TikTok
+"""
+import base64
+import hashlib
+import json
+import os
+import time
+from pathlib import Path
+
+ROOT = Path(os.environ.get("AUTOSHORTS_ROOT") or Path(__file__).resolve().parent.parent)
+DATA = ROOT / "docs" / "data"
+THUMBS = ROOT / "docs" / "thumbs"
+TOKENS = ROOT / "tokens"
+WORK = ROOT / ".work"
+OUT = ROOT / ".out"
+MUSIC = ROOT / "music"
+FONTS = Path(os.environ.get("FONTS_DIR") or ROOT / ".fonts")
+TIMEZONE = "Europe/Berlin"
+
+for d in (DATA, THUMBS, TOKENS, WORK, OUT):
+    d.mkdir(parents=True, exist_ok=True)
+
+
+def log(msg):
+    print(time.strftime("%H:%M:%S ") + str(msg), flush=True)
+
+
+# Bildstil angelehnt an flache 2D-Cartoon-Erklärvideos (dicke Konturen, ruhige Farben, niedliche Figuren)
+DEFAULT_STYLE = (
+    "flat 2D vector cartoon illustration, clean thick dark outlines, soft muted warm colors, "
+    "simple cute characters with big round white eyes and expressive faces, minimalist cozy background "
+    "with simple shapes, explainer animation style, vertical 9:16 composition, main subject centered "
+    "in the middle of the frame, no text, no letters, no words, no watermark"
+)
+DEFAULT_CHARACTER = (
+    "a cheerful little character with a round yellow head, big round eyes, a small smile "
+    "and a simple green bean-shaped body with thin stick arms and legs"
+)
+
+PRESET_CATEGORIES = [
+    dict(slug="fakten", name="Fakten", emoji="💡",
+         description="Verblüffende Fakten, kindgerecht und witzig erklärt.",
+         script_style="Erkläre einen überraschenden, wahren Fakt Schritt für Schritt wie eine kleine Geschichte. "
+                      "Nutze konkrete Zahlen und Vergleiche aus dem Alltag. Nur belegbare, korrekte Fakten – nichts erfinden. "
+                      "Locker, frech, mit einem kleinen Witz zwischendurch.",
+         image_mood="bright friendly daylight, cheerful colors, clear infographic-like scenes",
+         voice="de-DE-FlorianMultilingualNeural", voice_rate="+8%", voice_pitch="+0Hz",
+         voice_instructions="Begeistert, locker und schnell, wie ein Freund, der etwas Verrücktes erzählt."),
+    dict(slug="grusel", name="Grusel", emoji="👻",
+         description="Gänsehaut-Geschichten und unheimliche Legenden.",
+         script_style="Erzähle eine unheimliche Gruselgeschichte oder Legende mit langsam steigender Spannung. "
+                      "Kurze Sätze, Pausen durch Punkte, ein Schockmoment oder eine Wendung am Ende. Kein Blut, keine Gewalt-Details. "
+                      "Wenn es eine wahre Legende ist, sag das; sonst kennzeichne sie als Geschichte.",
+         image_mood="dark moonlit night, eerie fog, deep blue and purple palette, spooky but still cartoonish, soft glow",
+         voice="de-DE-ConradNeural", voice_rate="-4%", voice_pitch="-4Hz",
+         voice_instructions="Leise, langsam und unheimlich, mit Spannung in der Stimme."),
+    dict(slug="storys", name="Spannende Storys", emoji="🔥",
+         description="Wahre Geschichten mit Wendungen: Rettungen, Rekorde, Coups.",
+         script_style="Erzähle eine wahre, spannende Geschichte mit Hook, Aufbau, Höhepunkt und überraschender Auflösung. "
+                      "Nur reale, belegbare Ereignisse. Jede Szene endet so, dass man weiter zuhören will.",
+         image_mood="cinematic lighting, dramatic composition, warm and cool contrast",
+         voice="de-DE-KillianNeural", voice_rate="+4%", voice_pitch="+0Hz",
+         voice_instructions="Spannend und mitreißend, wie ein Erzähler in einer Doku."),
+    dict(slug="lustig", name="Lustige Geschichten", emoji="😂",
+         description="Absurde, lustige Alltagsgeschichten und kuriose Vorfälle.",
+         script_style="Erzähle eine absurde, lustige Geschichte mit Situationskomik und einer Pointe am Ende. "
+                      "Übertreibe charmant, spiele mit Erwartungen. Familienfreundlich.",
+         image_mood="bright saturated colors, exaggerated funny facial expressions, slapstick poses",
+         voice="de-DE-FlorianMultilingualNeural", voice_rate="+10%", voice_pitch="+2Hz",
+         voice_instructions="Fröhlich, verschmitzt, mit hörbarem Grinsen."),
+    dict(slug="mysterien", name="Mysterien & Rätsel", emoji="🕵️",
+         description="Ungelöste Rätsel, seltsame Orte, mysteriöse Funde.",
+         script_style="Stelle ein echtes, ungelöstes Rätsel vor: was passiert ist, welche Erklärungen es gibt, was bis heute offen ist. "
+                      "Trenne klar Belegtes von Spekulation.",
+         image_mood="mysterious fog, teal and amber palette, flashlight beams, old maps and clues",
+         voice="de-DE-ConradNeural", voice_rate="+0%", voice_pitch="-2Hz",
+         voice_instructions="Ruhig, geheimnisvoll, neugierig."),
+    dict(slug="tiere", name="Tierwelt", emoji="🐾",
+         description="Unglaubliche Tiere und ihre Superkräfte.",
+         script_style="Erkläre eine erstaunliche Fähigkeit oder Eigenschaft eines Tieres, aus Sicht des Tieres oder als Mini-Story. "
+                      "Wissenschaftlich korrekt, mit Vergleichen zum Menschen.",
+         image_mood="lush nature settings, friendly cute animal characters, soft sunlight",
+         voice="de-DE-SeraphinaMultilingualNeural", voice_rate="+6%", voice_pitch="+0Hz",
+         voice_instructions="Warm, neugierig und begeistert."),
+]
+
+
+DEFAULT_SETTINGS = {
+    "autopilot": True,
+    "upload_times": "18:00",
+    "target_seconds": 70,
+    "text_provider": "gemini",
+    "tts_provider": "edge",
+    "image_provider": "cloudflare",
+    "gemini_model": "gemini-flash-latest",
+    "openai_text_model": "gpt-4.1-mini",
+    "openai_image_model": "gpt-image-1",
+    "openai_image_quality": "low",
+    "openai_tts_model": "gpt-4o-mini-tts",
+    "openai_voice": "ash",
+    "elevenlabs_voice_id": "",
+    "image_style": DEFAULT_STYLE,
+    "main_character": DEFAULT_CHARACTER,
+    "use_main_character": True,
+    "subtitles_lowercase": True,
+    "music_volume": 0.10,
+    "youtube_enabled": True,
+    "youtube_privacy": "public",
+    "youtube_category": "24",
+    "youtube_client_id": "",
+    "tiktok_enabled": True,
+    "tiktok_mode": "direct",
+    "tiktok_privacy": "SELF_ONLY",
+    "tiktok_client_key": "",
+    "ai_label": True,
+}
+
+
+def default_config():
+    cats = []
+    for i, p in enumerate(PRESET_CATEGORIES):
+        cats.append({**p, "enabled": i < 4})
+    return {"settings": dict(DEFAULT_SETTINGS), "categories": cats, "queue": []}
+
+
+DEFAULT_STATE = {"last_category": "", "done_slots": [], "used_queue": [], "last_stats": 0,
+                 "next_id": 1, "connected": {}}
+
+
+# ---------------------------------------------------------------- Dateien
+
+def load(name, default):
+    p = DATA / name
+    try:
+        return json.loads(p.read_text(encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError):
+        return json.loads(json.dumps(default))
+
+
+def save(name, obj):
+    p = DATA / name
+    tmp = p.with_suffix(".tmp")
+    tmp.write_text(json.dumps(obj, ensure_ascii=False, indent=1), encoding="utf-8")
+    tmp.replace(p)
+
+
+CONFIG = load("config.json", default_config())
+CONFIG.setdefault("settings", {})
+for k, v in DEFAULT_SETTINGS.items():
+    CONFIG["settings"].setdefault(k, v)
+CONFIG.setdefault("categories", default_config()["categories"])
+CONFIG.setdefault("queue", [])
+
+STATE = load("state.json", DEFAULT_STATE)
+for k, v in DEFAULT_STATE.items():
+    STATE.setdefault(k, json.loads(json.dumps(v)))
+VIDEOS = load("videos.json", [])
+STATS = load("stats.json", {"v": {}, "ch": {}, "updated": 0})
+
+
+def cfg(key):
+    return CONFIG["settings"].get(key, DEFAULT_SETTINGS.get(key))
+
+
+def secret(name):
+    return (os.environ.get(name) or "").strip()
+
+
+def category(slug):
+    return next((c for c in CONFIG["categories"] if c["slug"] == slug), None)
+
+
+def video(vid):
+    return next((v for v in VIDEOS if int(v["id"]) == int(vid)), None)
+
+
+def save_all():
+    STATE["used_queue"] = STATE["used_queue"][-500:]
+    STATE["done_slots"] = STATE["done_slots"][-60:]
+    save("state.json", STATE)
+    save("videos.json", VIDEOS)
+    save("stats.json", STATS)
+
+
+# ---------------------------------------------------------------- Anmeldungen (verschlüsselt)
+# Schlüssel = aus dem Client-Secret der Plattform abgeleitet, das nur in den GitHub-Secrets liegt.
+
+def _fernet(platform):
+    from cryptography.fernet import Fernet
+    sec = secret("GOOGLE_CLIENT_SECRET" if platform == "youtube" else "TIKTOK_CLIENT_SECRET")
+    if not sec:
+        raise RuntimeError(f"Secret für {platform} fehlt")
+    key = base64.urlsafe_b64encode(hashlib.sha256(("autoshorts:" + platform + ":" + sec).encode()).digest())
+    return Fernet(key)
+
+
+def load_token(platform):
+    p = TOKENS / f"{platform}.enc"
+    if not p.exists():
+        return None
+    try:
+        return json.loads(_fernet(platform).decrypt(p.read_bytes()))
+    except Exception:  # noqa: BLE001 – Secret geändert oder Datei kaputt
+        return None
+
+
+def save_token(platform, tok):
+    (TOKENS / f"{platform}.enc").write_bytes(_fernet(platform).encrypt(json.dumps(tok).encode()))
+
+
+def drop_token(platform):
+    (TOKENS / f"{platform}.enc").unlink(missing_ok=True)
+    STATE["connected"].pop(platform, None)

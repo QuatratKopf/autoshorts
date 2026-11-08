@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AutoShorts</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#2f5bd3">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="AutoShorts">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout wie FVG-Bot: Kopfzeile → Kennzahlenleiste → großer Verlauf → Raster aus Auswertungen → Liste */
+:root{
+  --bg:#f3f4f7; --surface:#ffffff; --line:#d9dce5; --fg:#161a24; --muted:#5d6475;
+  --accent:#2f5bd3; --pos:#0f8a72; --neg:#d2493f; --warn:#c77700; --fill:rgba(47,91,211,.10);
+  --yt:#d2493f; --tt:#0f8a9a; --onaccent:#ffffff;
+  --f-display:"Archivo","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Public Sans",system-ui,-apple-system,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#10131b; --surface:#171b26; --line:#2a3040; --fg:#e7e9ef; --muted:#9097a8;
+  --accent:#7b9cff; --pos:#3cc4a4; --neg:#f2766b; --warn:#f0a43a; --fill:rgba(123,156,255,.14);
+  --yt:#f2766b; --tt:#4cc9d6; --onaccent:#0d1222; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10131b; --surface:#171b26; --line:#2a3040; --fg:#e7e9ef; --muted:#9097a8;
+  --accent:#7b9cff; --pos:#3cc4a4; --neg:#f2766b; --warn:#f0a43a; --fill:rgba(123,156,255,.14);
+  --yt:#f2766b; --tt:#4cc9d6; --onaccent:#0d1222; color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:14px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-top:max(16px,env(safe-area-inset-top,0px));padding-bottom:calc(48px + env(safe-area-inset-bottom,0px))}
+a{color:var(--accent)}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+.top{display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+.brand img{width:34px;height:34px;border-radius:9px}
+.brand b{font-family:var(--f-display);font-weight:800;font-size:18px;letter-spacing:-.01em}
+header.h{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(26px,4vw,36px);letter-spacing:-.01em;margin:0;line-height:1.05;text-wrap:balance}
+.sub{color:var(--muted);margin:6px 0 0;max-width:62ch}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.tag{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:12px;padding:3px 8px;border-radius:4px;border:1px solid var(--line);color:var(--muted);max-width:100%}
+.tag.pos{border-color:var(--pos);color:var(--pos)} .tag.neg{border-color:var(--neg);color:var(--neg)} .tag.warn{border-color:var(--warn);color:var(--warn)}
+.dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+.btn{font:600 14px var(--f-body);background:var(--accent);color:var(--onaccent);border:0;border-radius:6px;padding:9px 14px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.btn:disabled{opacity:.5;cursor:default}
+.btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.btn.sm{font-size:12.5px;padding:5px 10px}
+.btn.danger{background:transparent;color:var(--neg);border:1px solid var(--line)}
+.btn:focus-visible,.seg a:focus-visible,.seg button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--surface)}
+.seg a,.seg button{font:500 13px var(--f-body);background:transparent;color:var(--muted);border:0;padding:7px 12px;cursor:pointer;text-decoration:none}
+.seg [aria-current="page"],.seg button[aria-pressed="true"]{background:var(--fill);color:var(--accent)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.kpi{background:var(--surface);padding:14px 16px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.kpi .l{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.kpi .v{font-family:var(--f-mono);font-size:22px;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kpi .d{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.pos{color:var(--pos)} .neg{color:var(--neg)} .warn{color:var(--warn)} .muted{color:var(--muted)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;min-width:0}
+.panel h2{font-family:var(--f-display);font-weight:700;font-size:16px;margin:0 0 4px}
+.panel .hint{color:var(--muted);font-size:12.5px;margin:0 0 12px}
+.ph{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+@media (max-width:780px){.grid{grid-template-columns:1fr}}
+svg{display:block;width:100%;height:auto}
+svg text{fill:var(--muted);font-family:var(--f-mono);font-size:11px}
+.gridl{stroke:var(--line);stroke-width:1}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:600;text-align:right;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{font-family:var(--f-mono);font-size:12.5px;text-align:right;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:middle}
+th:first-child,td:first-child{text-align:left}
+td.lbl{font-family:var(--f-body);font-size:13px;white-space:normal}
+.chip{display:inline-block;font-family:var(--f-mono);font-size:11px;padding:1px 6px;border-radius:3px;background:var(--fill);color:var(--accent);white-space:nowrap;text-decoration:none}
+.chip.pos{background:transparent;border:1px solid var(--pos);color:var(--pos)}
+.chip.neg{background:transparent;border:1px solid var(--neg);color:var(--neg)}
+.chip.warn{background:transparent;border:1px solid var(--warn);color:var(--warn)}
+.chip.muted{background:transparent;border:1px solid var(--line);color:var(--muted)}
+.legend{display:flex;gap:14px;font-size:12px;color:var(--muted);flex-wrap:wrap}
+.legend i{display:inline-block;width:10px;height:3px;border-radius:2px;margin-right:6px;vertical-align:middle}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--muted);min-width:0}
+input[type=text],input[type=password],input[type=number],select,textarea{font:14px var(--f-body);color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px 10px;width:100%;min-width:0}
+textarea{resize:vertical;min-height:70px;font-size:13px}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.check{display:flex;gap:8px;align-items:flex-start;font-size:13.5px;color:var(--fg)}
+.check input{margin-top:3px;accent-color:var(--accent)}
+code{font-family:var(--f-mono);font-size:12px;background:var(--bg);border:1px solid var(--line);padding:1px 5px;border-radius:4px;word-break:break-all}
+.runbar{border:1px solid var(--accent);background:var(--fill);border-radius:8px;padding:12px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.runbar.ok{border-color:var(--pos)} .runbar.fail{border-color:var(--neg)}
+.spin{width:14px;height:14px;border:2px solid var(--accent);border-top-color:transparent;border-radius:50%;animation:s 1s linear infinite;flex:none}
+@keyframes s{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation:none}}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:8px;font-weight:500;z-index:20;max-width:calc(100% - 32px);box-shadow:0 6px 24px rgba(0,0,0,.25)}
+/* Studio */
+.cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.cat{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:14px;display:flex;flex-direction:column;gap:8px;position:relative;cursor:pointer}
+.cat.off{opacity:.62}
+.cat.sel{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset;background:var(--fill)}
+.cat .e{font-size:26px;line-height:1}
+.cat h3{font-family:var(--f-display);font-weight:700;font-size:16px;margin:0}
+.cat p{margin:0;color:var(--muted);font-size:13px}
+.cat .row{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:auto}
+details summary{cursor:pointer;color:var(--accent);font-size:12.5px}
+details[open]{background:var(--surface);border-radius:6px;padding:10px;margin-top:4px;cursor:default}
+details form{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.qrow{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.qrow:last-child{border-bottom:0}
+/* Einstellungen */
+.prov{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
+.prov label{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:8px;padding:10px 12px;cursor:pointer;background:var(--bg)}
+.prov label:has(input:checked){border-color:var(--accent);background:var(--fill)}
+.prov input{margin-top:3px;accent-color:var(--accent)}
+.prov b{display:block;font-weight:600}
+.prov small{color:var(--muted);font-size:12px}
+.stage{display:flex;flex-direction:column;gap:8px;min-width:0}
+.stage h3{font:600 12px var(--f-body);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:6px 0 0}
+.srow{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.srow:last-child{border-bottom:0}
+.steps{margin:0;padding-left:20px;display:grid;gap:8px}
+.steps li::marker{font-family:var(--f-mono);color:var(--accent)}
+.savebar{position:sticky;bottom:calc(12px + env(safe-area-inset-bottom,0px));display:flex;justify-content:flex-end}
+.savebar .btn{box-shadow:0 4px 16px rgba(0,0,0,.18)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="brand" href="#dashboard"><img src="icon.svg" alt=""><b>AutoShorts</b></a>
+    <nav class="seg" aria-label="Bereiche">
+      <a href="#dashboard" data-nav="dashboard">Dashboard</a>
+      <a href="#studio" data-nav="studio">Studio</a>
+      <a href="#einstellungen" data-nav="einstellungen">Einstellungen</a>
+    </nav>
+  </div>
+  <div id="runbar" hidden></div>
+  <main id="view"><div class="panel"><p class="hint" style="margin:0">Lade Daten …</p></div></main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script>
+/* ===================================================== Grundlagen */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const LS={get(k,d=""){try{return localStorage.getItem(k)??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
+function detectRepo(){
+  const h=location.hostname, parts=location.pathname.split("/").filter(Boolean);
+  if(h.endsWith(".github.io")) return {owner:h.split(".")[0], repo:parts[0]||h};
+  return {owner:"QuatratKopf", repo:"autoshorts"};
+}
+let GH={...detectRepo(), ...(()=>{try{return JSON.parse(LS.get("as_repo","{}"))}catch(e){return {}}})()};
+let TOKEN=LS.get("as_token");
+let CFG=null, ST={}, VIDS=[], STATS={v:{},ch:{}}, SECRETS=null, RUNS=[];
+const BASE=location.origin+location.pathname.replace(/[^/]*$/,"");
+const REDIRECT=BASE+"callback.html";
+
+function toast(msg){const t=$("#toast");t.textContent=msg;t.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>t.hidden=true,4200)}
+
+async function gh(path,opts={}){
+  const r=await fetch("https://api.github.com"+path,{...opts,headers:{"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28",
+    ...(TOKEN?{"Authorization":"Bearer "+TOKEN}:{}),...(opts.headers||{})},cache:"no-store"});
+  if(!r.ok){let m="";try{m=(await r.json()).message}catch(e){}
+    const err=new Error(r.status===401?"Der GitHub-Zugangsschlüssel ist ungültig oder abgelaufen.":r.status===403||r.status===404?`Keine Berechtigung (${m||r.status}). Prüfe die Rechte des Zugangsschlüssels.`:`GitHub meldet ${r.status}: ${m}`);
+    err.status=r.status; throw err}
+  return r.status===204?null:(opts.raw?r.text():r.json());
+}
+const R=()=>`/repos/${GH.owner}/${GH.repo}`;
+async function readData(file){
+  if(TOKEN) return JSON.parse(await gh(`${R()}/contents/docs/data/${file}?ref=main`,{raw:true,headers:{"Accept":"application/vnd.github.raw+json"}}));
+  const r=await fetch(`data/${file}?t=${Date.now()}`,{cache:"no-store"}); if(!r.ok) throw new Error(file+" fehlt"); return r.json();
+}
+function b64utf8(s){const bytes=new TextEncoder().encode(s);let bin="";for(let i=0;i<bytes.length;i+=8192)bin+=String.fromCharCode(...bytes.subarray(i,i+8192));return btoa(bin)}
+async function saveConfig(msg){
+  if(!TOKEN){toast("Zum Speichern erst die App mit GitHub verbinden.");location.hash="#start";throw new Error("kein Token")}
+  const used=new Set(ST.used_queue||[]);
+  CFG.queue=(CFG.queue||[]).filter(q=>!used.has(q.id));
+  const meta=await gh(`${R()}/contents/docs/data/config.json?ref=main`);
+  await gh(`${R()}/contents/docs/data/config.json`,{method:"PUT",body:JSON.stringify({message:"App: "+msg,content:b64utf8(JSON.stringify(CFG,null,1)),sha:meta.sha,branch:"main"})});
+}
+async function dispatch(inputs,label){
+  if(!TOKEN){toast("Dafür erst die App mit GitHub verbinden.");location.hash="#start";return false}
+  try{
+    await gh(`${R()}/actions/workflows/autoshorts.yml/dispatches`,{method:"POST",body:JSON.stringify({ref:"main",inputs})});
+    PENDING={label,at:Date.now()}; renderRunbar(); setTimeout(pollRuns,4000); return true;
+  }catch(e){toast(e.message);return false}
+}
+
+/* ===================================================== Daten */
+async function loadAll(){
+  const [c,s,v,st]=await Promise.all(["config.json","state.json","videos.json","stats.json"].map(f=>readData(f).catch(()=>null)));
+  CFG=c||CFG||{settings:{},categories:[],queue:[]}; ST=s||{}; VIDS=v||[]; STATS=st||{v:{},ch:{}};
+  CFG.settings=CFG.settings||{}; CFG.categories=CFG.categories||[]; CFG.queue=CFG.queue||[];
+}
+async function loadSecrets(){
+  if(!TOKEN) return SECRETS=null;
+  try{const j=await gh(`${R()}/actions/secrets?per_page=100`);SECRETS=new Set(j.secrets.map(s=>s.name))}catch(e){SECRETS="err"}
+}
+
+/* ===================================================== Läufe (GitHub Actions) */
+let PENDING=null, runTimer=null, lastActive=false;
+async function pollRuns(){
+  clearTimeout(runTimer);
+  try{
+    const j=await gh(`${R()}/actions/workflows/autoshorts.yml/runs?per_page=8`);
+    RUNS=j.workflow_runs||[];
+  }catch(e){}
+  const active=RUNS.some(r=>r.status!=="completed"&&r.event!=="schedule")||RUNS.some(r=>r.status==="in_progress"&&r.event==="schedule"&&Date.now()-new Date(r.run_started_at)>90000);
+  if(PENDING&&RUNS.some(r=>r.event==="workflow_dispatch"&&new Date(r.created_at).getTime()>PENDING.at-60000)) PENDING=null;
+  if(lastActive&&!active){await loadAll();render()}
+  lastActive=active;
+  renderRunbar();
+  runTimer=setTimeout(pollRuns,active||PENDING?8000:60000);
+}
+const RUNLABEL={make:"Video wird erstellt",upload:"Upload läuft",stats:"Zahlen werden geholt",connect:"Konto wird verbunden",auto:"Autopilot läuft"};
+function runName(r){
+  if(r.event==="schedule") return "Autopilot";
+  const a=(r.display_title||"").trim().split(/\s+/)[0];
+  return RUNLABEL[a]||r.display_title||"Auftrag";
+}
+function renderRunbar(){
+  const el=$("#runbar");
+  const live=RUNS.filter(r=>r.status!=="completed"&&(r.event!=="schedule"||Date.now()-new Date(r.run_started_at||r.created_at)>90000));
+  const recent=RUNS.find(r=>r.status==="completed"&&r.event!=="schedule"&&Date.now()-new Date(r.updated_at)<20*60000);
+  if(PENDING&&!live.length){el.hidden=false;el.className="runbar";el.innerHTML=`<span class="spin"></span><b>${esc(PENDING.label)}</b><span class="muted">Auftrag an GitHub gesendet, startet gleich …</span>`;return}
+  if(live.length){const r=live[0];el.hidden=false;el.className="runbar";
+    el.innerHTML=`<span class="spin"></span><b>${esc(runName(r))} …</b><span class="muted">${r.status==="queued"?"wartet auf einen freien Rechner":"läuft seit "+mins(r.run_started_at)}</span><a href="${esc(r.html_url)}" target="_blank" rel="noopener">Protokoll ansehen ↗</a>`;return}
+  if(recent){el.hidden=false;const ok=recent.conclusion==="success";el.className="runbar "+(ok?"ok":"fail");
+    el.innerHTML=`<b class="${ok?"pos":"neg"}">${ok?"Fertig":"Fehlgeschlagen"}:</b><span>${esc(runName(recent))}</span><a href="${esc(recent.html_url)}" target="_blank" rel="noopener">Protokoll ↗</a>`;return}
+  el.hidden=true;
+}
+function mins(t){const m=Math.max(0,Math.round((Date.now()-new Date(t))/60000));return m<1?"wenigen Sekunden":m+" Min."}
+
+/* ===================================================== Hilfen */
+const fmtN=v=>{v=Math.round(v||0);return v>=1e6?(v/1e6).toFixed(1).replace(".",",")+" Mio":v>=1e4?(v/1e3).toFixed(1).replace(".",",")+" Tsd":v.toLocaleString("de-DE")};
+const pct=v=>isFinite(v)?v.toFixed(1).replace(".",",")+" %":"–";
+const fmtTs=t=>t?new Date(t*1000).toLocaleString("de-DE",{day:"2-digit",month:"2-digit",year:"2-digit",hour:"2-digit",minute:"2-digit"}):"–";
+const dayKey=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+const S=k=>CFG.settings[k];
+const cat=slug=>CFG.categories.find(c=>c.slug===slug);
+const STATUS={rendering:["In Arbeit","warn"],rendered:["Fertig, nicht hochgeladen","muted"],published:["Veröffentlicht","pos"],partial:["Teilweise","warn"],error:["Fehler","neg"]};
+
+function latest(id){const s=STATS.v?.[id]||{},o={};for(const p in s){const r=s[p][s[p].length-1];if(r)o[p]={views:r[1],likes:r[2],comments:r[3],shares:r[4]}}return o}
+function daily(days){
+  const today=new Date(), labels=[];
+  for(let i=days-1;i>=0;i--){const d=new Date(today);d.setDate(d.getDate()-i);labels.push(dayKey(d))}
+  const acc={youtube:{},tiktok:{},likes:{}};
+  for(const id in (STATS.v||{})) for(const p in STATS.v[id]){
+    let pv=0,pl=0; for(const r of STATS.v[id][p]){acc[p]&&(acc[p][r[0]]=(acc[p][r[0]]||0)+Math.max(0,r[1]-pv));acc.likes[r[0]]=(acc.likes[r[0]]||0)+Math.max(0,r[2]-pl);pv=r[1];pl=r[2]}}
+  return {labels,youtube:labels.map(d=>acc.youtube[d]||0),tiktok:labels.map(d=>acc.tiktok[d]||0),likes:labels.map(d=>acc.likes[d]||0)};
+}
+function followers(p){const rows=STATS.ch?.[p];if(!rows||!rows.length)return null;const last=rows[rows.length-1];
+  const d=new Date();d.setDate(d.getDate()-7);const k=dayKey(d);const old=[...rows].reverse().find(r=>r[0]<=k)||rows[0];return {n:last[1],week:last[1]-old[1]}}
+function nextUp(){
+  const used=new Set(ST.used_queue||[]);
+  const q=(CFG.queue||[]).filter(x=>!used.has(x.id)&&cat(x.category)).sort((a,b)=>a.created-b.created)[0];
+  if(q) return {c:cat(q.category),topic:q.text};
+  const cs=CFG.categories.filter(c=>c.enabled); if(!cs.length) return null;
+  const i=cs.findIndex(c=>c.slug===ST.last_category); return {c:cs[(i+1)%cs.length],topic:null};
+}
+function nextRun(){
+  if(!S("autopilot")) return null;
+  const times=String(S("upload_times")||"18:00").split(/[,;]/).map(t=>t.trim()).filter(Boolean).map(t=>t.split(":").map(Number)).filter(([h,m])=>h>=0&&h<24).sort((a,b)=>a[0]-b[0]||(a[1]||0)-(b[1]||0));
+  const now=new Date();
+  for(let add=0;add<2;add++) for(const [h,m] of times){const d=new Date(now);d.setDate(d.getDate()+add);d.setHours(h,m||0,0,0);if(d>now) return d}
+  return null;
+}
+function nice(max){const r=max||1,st=Math.pow(10,Math.floor(Math.log10(r/4)));const m=[1,2,2.5,5,10].find(x=>r/(x*st)<=5)*st;return {hi:Math.ceil(max/m)*m||m,step:m}}
+const kN=v=>v>=10000?(v/1000).toFixed(v%1000?1:0).replace(".",",")+"k":String(v);
+function lineChart(labels,series){
+  const W=900,H=260,L=52,R0=12,T=12,B=26,n=labels.length;
+  const sc=nice(Math.max(1,...series.flatMap(s=>s.v)));
+  const x=i=>L+(W-L-R0)*i/Math.max(1,n-1), y=v=>T+(H-T-B)*(1-v/sc.hi);
+  let g="";
+  for(let v=0;v<=sc.hi+1e-9;v+=sc.step) g+=`<line class="gridl" x1="${L}" x2="${W-R0}" y1="${y(v)}" y2="${y(v)}"/><text x="${L-8}" y="${y(v)+4}" text-anchor="end">${kN(v)}</text>`;
+  const every=Math.ceil(n/8);
+  labels.forEach((d,i)=>{if((i%every===0&&n-1-i>=every*.6)||i===n-1){const [,mm,dd]=d.split("-");g+=`<text x="${x(i)}" y="${H-6}" text-anchor="${i===0?"start":i===n-1?"end":"middle"}">${dd}.${mm}.</text>`}});
+  const paths=series.map(s=>{const d=s.v.map((v,i)=>`${i?"L":"M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join("");
+    return `<path d="${d}L${x(n-1)},${y(0)}L${x(0)},${y(0)}Z" fill="${s.c}" fill-opacity=".08"/><path d="${d}" fill="none" stroke="${s.c}" stroke-width="2" stroke-linejoin="round"/><circle cx="${x(n-1)}" cy="${y(s.v[n-1])}" r="3.5" fill="${s.c}"/>`}).join("");
+  const hits=labels.map((d,i)=>`<rect x="${x(i)-(W-L-R0)/n/2}" y="${T}" width="${(W-L-R0)/n}" height="${H-T-B}" fill="transparent"><title>${d.split("-").reverse().join(".")}: ${series.map(s=>s.name+" "+s.v[i].toLocaleString("de-DE")).join(" · ")}</title></rect>`).join("");
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Aufrufe pro Tag">${g}${paths}${hits}</svg>`;
+}
+function barChart(labels,vals){
+  const W=440,H=200,L=44,R0=8,T=10,B=24,n=labels.length,sc=nice(Math.max(1,...vals));
+  const y=v=>T+(H-T-B)*(1-v/sc.hi), bw=(W-L-R0)/n; let g="";
+  for(let v=0;v<=sc.hi+1e-9;v+=sc.step) g+=`<line class="gridl" x1="${L}" x2="${W-R0}" y1="${y(v)}" y2="${y(v)}"/><text x="${L-6}" y="${y(v)+4}" text-anchor="end">${kN(v)}</text>`;
+  const every=Math.ceil(n/7);
+  g+=vals.map((v,i)=>{const x0=L+i*bw+bw*.15,w=bw*.7,[,mm,dd]=labels[i].split("-");
+    return `<rect x="${x0}" y="${y(v)}" width="${w}" height="${Math.max(v?1:0,y(0)-y(v))}" rx="1.5" fill="var(--accent)"><title>${dd}.${mm}.: ${v.toLocaleString("de-DE")} Likes</title></rect>`+(i%every===0?`<text x="${x0+w/2}" y="${H-6}" text-anchor="middle">${dd}.${mm}.</text>`:"")}).join("");
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Likes pro Tag">${g}</svg>`;
+}
+
+/* ===================================================== Ansicht: Start (Verbinden) */
+function viewStart(){
+  return `
+  <header class="h"><div><h1>Willkommen bei AutoShorts</h1>
+    <p class="sub">Damit die App Videos starten und Einstellungen speichern darf, braucht sie einmalig einen GitHub-Zugangsschlüssel. Er bleibt nur auf diesem Gerät gespeichert.</p></div></header>
+  <section class="panel">
+    <h2>Mit GitHub verbinden</h2>
+    <ol class="steps" style="margin-top:10px">
+      <li><a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Neuen Zugangsschlüssel erstellen ↗</a> (Fine-grained token).</li>
+      <li>Name z. B. <code>AutoShorts App</code>, Ablauf <b>1 Jahr</b> (oder „No expiration“).</li>
+      <li>Repository access: <b>Only select repositories</b> → <code>${esc(GH.owner)}/${esc(GH.repo)}</code>.</li>
+      <li>Permissions → Repository permissions: <b>Actions</b>: Read and write · <b>Contents</b>: Read and write · <b>Secrets</b>: Read-only.</li>
+      <li>„Generate token“ klicken, Schlüssel kopieren und hier einfügen:</li>
+    </ol>
+    <div class="fields" style="margin-top:12px;grid-template-columns:minmax(0,1fr) auto;align-items:end">
+      <label class="f" for="tok">Zugangsschlüssel<input type="password" id="tok" autocomplete="off" placeholder="github_pat_…"></label>
+      <button class="btn" type="button" onclick="connectGitHub()">Verbinden</button>
+    </div>
+    <details style="margin-top:12px"><summary>Anderes Repository</summary>
+      <div class="fields" style="margin-top:8px"><label class="f" for="rowner">Besitzer<input type="text" id="rowner" value="${esc(GH.owner)}"></label>
+      <label class="f" for="rrepo">Repository<input type="text" id="rrepo" value="${esc(GH.repo)}"></label></div></details>
+  </section>
+  <p class="hint muted" style="margin:0">Ohne Schlüssel kannst du das Dashboard trotzdem ansehen: <a href="#dashboard">zum Dashboard</a>.</p>`;
+}
+async function connectGitHub(){
+  const t=$("#tok").value.trim(); if(!t) return toast("Bitte den Schlüssel einfügen.");
+  const o=$("#rowner").value.trim()||GH.owner, r=$("#rrepo").value.trim()||GH.repo;
+  TOKEN=t; GH={owner:o,repo:r};
+  try{
+    const repo=await gh(`/repos/${o}/${r}`);
+    if(!repo.permissions?.push) throw new Error("Der Schlüssel hat keine Schreibrechte für dieses Repository.");
+    LS.set("as_token",t); LS.set("as_repo",JSON.stringify(GH));
+    toast("Verbunden."); await boot(); location.hash="#einstellungen";
+  }catch(e){TOKEN=LS.get("as_token");toast(e.message)}
+}
+
+/* ===================================================== Ansicht: Dashboard */
+let PLAT="all", RANGE=30;
+function viewDashboard(){
+  const rows=[...VIDS].reverse().map(v=>({...v,st:latest(v.id)}));
+  const tot={views:0,likes:0,comments:0,shares:0}, plat={youtube:{views:0},tiktok:{views:0}}, byCat={};
+  for(const v of rows){
+    v.views=0;v.likes=0;
+    for(const p in v.st){const s=v.st[p];for(const k in tot)tot[k]+=s[k]||0;plat[p]&&(plat[p].views+=s.views);v.views+=s.views;v.likes+=s.likes}
+    if(["published","partial"].includes(v.status)){const c=cat(v.category);const k=c?c.emoji+" "+c.name:v.category;
+      const b=byCat[k]||(byCat[k]={name:k,videos:0,views:0,likes:0});b.videos++;b.views+=v.views;b.likes+=v.likes}
+  }
+  const published=rows.filter(v=>["published","partial"].includes(v.status)).length;
+  const cats=Object.values(byCat).map(c=>({...c,avg:c.views/c.videos,rate:c.views?c.likes/c.views*100:0})).sort((a,b)=>b.avg-a.avg);
+  const top=rows.filter(v=>v.views).sort((a,b)=>b.views-a.views).slice(0,5);
+  const fy=followers("youtube"), ft=followers("tiktok"), nx=nextUp(), nr=nextRun();
+  const con=ST.connected||{};
+  return `
+  <header class="h"><div>
+    <h1>Kanäle · Übersicht</h1>
+    <p class="sub">Aufrufe, Likes und Follower deiner automatisch erstellten Shorts. Zahlen werden alle 3 Stunden abgeholt${STATS.updated?", zuletzt "+fmtTs(STATS.updated):""}.</p>
+    <div class="tags">
+      ${S("autopilot")?`<span class="tag pos"><span class="dot"></span>Autopilot an${nr?" · nächstes Video "+nr.toLocaleString("de-DE",{weekday:"short",day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):""}</span>`:`<span class="tag warn"><span class="dot"></span>Autopilot aus</span>`}
+      <span class="tag ${con.youtube?"pos":"neg"}">YouTube ${con.youtube?"verbunden":"nicht verbunden"}</span>
+      <span class="tag ${con.tiktok?"pos":"neg"}">TikTok ${con.tiktok?"verbunden":"nicht verbunden"}</span>
+    </div></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn ghost" type="button" onclick="dispatch({action:'stats'},'Zahlen werden geholt')">Zahlen aktualisieren</button>
+      <a class="btn" href="#studio">Video erstellen</a></div>
+  </header>
+  ${!TOKEN?`<div class="runbar warn" style="border-color:var(--warn)"><b class="warn">Nur Ansicht.</b><span>Zum Steuern die App einmal <a href="#start">mit GitHub verbinden</a>.</span></div>`:""}
+  <section class="kpis" aria-label="Kennzahlen">
+    <div class="kpi"><span class="l">Aufrufe gesamt</span><span class="v">${fmtN(tot.views)}</span><span class="d">YT ${fmtN(plat.youtube.views)} · TT ${fmtN(plat.tiktok.views)}</span></div>
+    <div class="kpi"><span class="l">Likes</span><span class="v">${fmtN(tot.likes)}</span><span class="d">${pct(tot.views?tot.likes/tot.views*100:NaN)} der Aufrufe</span></div>
+    <div class="kpi"><span class="l">Kommentare</span><span class="v">${fmtN(tot.comments)}</span><span class="d">Shares ${fmtN(tot.shares)}</span></div>
+    <div class="kpi"><span class="l">YouTube-Abos</span><span class="v">${fmtN(fy?.n||0)}</span><span class="d ${fy&&fy.week>0?"pos":""}">${fy?(fy.week>=0?"+":"")+fy.week+" in 7 Tagen":"–"}</span></div>
+    <div class="kpi"><span class="l">TikTok-Follower</span><span class="v">${fmtN(ft?.n||0)}</span><span class="d ${ft&&ft.week>0?"pos":""}">${ft?(ft.week>=0?"+":"")+ft.week+" in 7 Tagen":"–"}</span></div>
+    <div class="kpi"><span class="l">Videos online</span><span class="v">${published}</span><span class="d">Ø ${fmtN(published?tot.views/published:0)} Aufrufe</span></div>
+  </section>
+  <section class="panel">
+    <div class="ph"><div><h2>Aufrufe pro Tag</h2><p class="hint">Neue Aufrufe je Tag über alle Videos, getrennt nach Plattform.</p></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <div class="seg" role="group" aria-label="Plattform">${[["all","Beide"],["youtube","YouTube"],["tiktok","TikTok"]].map(([k,l])=>`<button type="button" aria-pressed="${PLAT===k}" onclick="PLAT='${k}';drawCharts()">${l}</button>`).join("")}</div>
+        <div class="seg" role="group" aria-label="Zeitraum">${[7,30,90].map(d=>`<button type="button" aria-pressed="${RANGE===d}" onclick="RANGE=${d};drawCharts()">${d} T</button>`).join("")}</div>
+      </div></div>
+    <div id="views"></div>
+    <div class="legend"><span><i style="background:var(--yt)"></i>YouTube</span><span><i style="background:var(--tt)"></i>TikTok</span></div>
+  </section>
+  <div class="grid">
+    <section class="panel"><h2>Nach Kategorie</h2><p class="hint">Welche Video-Art läuft am besten? Sortiert nach Ø Aufrufen.</p><div class="scroll">
+      ${cats.length?`<table><thead><tr><th>Kategorie</th><th>Videos</th><th>Aufrufe</th><th>Ø Aufrufe</th><th>Like-Rate</th></tr></thead><tbody>
+      ${cats.map(c=>`<tr><td class="lbl">${esc(c.name)}</td><td>${c.videos}</td><td>${fmtN(c.views)}</td><td>${fmtN(c.avg)}</td><td>${pct(c.rate)}</td></tr>`).join("")}</tbody></table>`:`<p class="hint" style="margin:0">Noch keine veröffentlichten Videos.</p>`}</div></section>
+    <section class="panel"><h2>Top-Videos</h2><p class="hint">Die fünf meistgesehenen Shorts.</p><div class="scroll">
+      ${top.length?`<table><thead><tr><th>Titel</th><th>Aufrufe</th><th>Likes</th></tr></thead><tbody>
+      ${top.map(v=>`<tr><td class="lbl">${esc(cat(v.category)?.emoji||"")} ${esc(v.title)}</td><td>${fmtN(v.views)}</td><td>${fmtN(v.likes)}</td></tr>`).join("")}</tbody></table>`:`<p class="hint" style="margin:0">Sobald Zahlen da sind, erscheinen hier die besten Videos.</p>`}</div></section>
+    <section class="panel"><h2>Likes pro Tag</h2><p class="hint">Neue Likes je Tag, beide Plattformen zusammen.</p><div id="likes"></div></section>
+    <section class="panel"><h2>Als Nächstes</h2><p class="hint">Was der Autopilot beim nächsten Lauf erstellt.</p>
+      ${nx?`<p style="margin:0 0 6px"><span class="chip">${esc(nx.c.emoji)} ${esc(nx.c.name)}</span></p><p style="margin:0 0 12px">${esc(nx.topic||"Thema sucht die KI selbst aus (keine Wiederholungen).")}</p>`:`<p class="hint">Keine Kategorie aktiv.</p>`}
+      <p class="hint" style="margin:0">${nr?"Geplant: "+nr.toLocaleString("de-DE",{weekday:"long",hour:"2-digit",minute:"2-digit"})+" Uhr.":"Autopilot ist aus."} Kategorien und Themen steuerst du im <a href="#studio">Studio</a>.</p></section>
+  </div>
+  <section class="panel" id="videos"><h2>Alle Videos</h2><p class="hint">Neueste zuerst. Fehlgeschlagene Uploads kannst du hier wiederholen.</p><div class="scroll">
+    ${rows.length?`<table><thead><tr><th>Video</th><th>Erstellt</th><th>Status</th><th>YT Aufrufe</th><th>YT Likes</th><th>TT Aufrufe</th><th>TT Likes</th><th></th></tr></thead><tbody>
+    ${rows.map(v=>{const st=STATUS[v.status]||[v.status,"muted"],c=cat(v.category),mp4=`https://github.com/${GH.owner}/${GH.repo}/releases/download/videos/${v.id}.mp4`;
+      return `<tr><td class="lbl" style="min-width:250px"><div style="display:flex;gap:10px;align-items:center">
+        ${v.thumb?`<img src="https://raw.githubusercontent.com/${esc(GH.owner)}/${esc(GH.repo)}/main/docs/thumbs/${v.id}.jpg" alt="" width="36" height="64" loading="lazy" style="border-radius:4px;object-fit:cover;display:block;flex:none;background:var(--fill)" onerror="this.style.visibility='hidden'">`:`<span style="width:36px;height:64px;border-radius:4px;background:var(--fill);flex:none"></span>`}
+        <div style="min-width:0"><div>${esc(v.title||v.topic||"…")}</div>
+          <span class="chip">${esc(c?.emoji||"")} ${esc(c?.name||v.category)}</span>
+          ${v.yt_id?`<a class="chip muted" href="https://youtube.com/shorts/${esc(v.yt_id)}" target="_blank" rel="noopener">YouTube ↗</a>`:""}
+          ${v.tt_post_id?`<span class="chip muted">TikTok ✓</span>`:""}</div></div></td>
+        <td>${fmtTs(v.created)}</td>
+        <td><span class="chip ${st[1]}" ${v.error?`title="${esc(v.error)}"`:""}>${st[0]}</span>
+          ${v.yt_status&&v.yt_status!=="public"?`<div class="muted" style="font-size:11px">YT: ${esc(v.yt_status)}</div>`:""}
+          ${v.tt_status?`<div class="muted" style="font-size:11px">TT: ${esc(v.tt_status)}</div>`:""}
+          ${v.error?`<div class="neg" style="font-size:11px;white-space:normal;max-width:240px;text-align:left">${esc(v.error.slice(0,160))}</div>`:""}</td>
+        <td>${v.st.youtube?fmtN(v.st.youtube.views):"–"}</td><td>${v.st.youtube?fmtN(v.st.youtube.likes):"–"}</td>
+        <td>${v.st.tiktok?fmtN(v.st.tiktok.views):"–"}</td><td>${v.st.tiktok?fmtN(v.st.tiktok.likes):"–"}</td>
+        <td><div style="display:flex;gap:6px;justify-content:flex-end">
+          ${v.mp4&&["rendered","partial","error"].includes(v.status)?`<button class="btn sm ghost" type="button" onclick="dispatch({action:'upload',video_id:'${v.id}'},'Upload läuft')">Hochladen</button>`:""}
+          ${v.mp4?`<a class="btn sm ghost" href="${mp4}" target="_blank" rel="noopener">MP4</a>`:""}</div></td></tr>`}).join("")}
+    </tbody></table>`:`<p class="hint" style="margin:0">Noch keine Videos. Im <a href="#studio">Studio</a> kannst du sofort das erste erstellen.</p>`}</div></section>`;
+}
+function drawCharts(){
+  if(!$("#views")) return;
+  const D=daily(90), s=90-RANGE, lab=D.labels.slice(s), ser=[];
+  if(PLAT!=="tiktok") ser.push({name:"YouTube",c:"var(--yt)",v:D.youtube.slice(s)});
+  if(PLAT!=="youtube") ser.push({name:"TikTok",c:"var(--tt)",v:D.tiktok.slice(s)});
+  $("#views").innerHTML=lineChart(lab,ser); $("#likes").innerHTML=barChart(lab,D.likes.slice(s));
+  document.querySelectorAll('[aria-label="Plattform"] button').forEach((b,i)=>b.setAttribute("aria-pressed",["all","youtube","tiktok"][i]===PLAT));
+  document.querySelectorAll('[aria-label="Zeitraum"] button').forEach((b,i)=>b.setAttribute("aria-pressed",[7,30,90][i]===RANGE));
+}
+
+/* ===================================================== Ansicht: Studio */
+let SEL=null;
+const VOICES=[["de-DE-FlorianMultilingualNeural","Florian · locker, männlich"],["de-DE-ConradNeural","Conrad · tief, männlich"],["de-DE-KillianNeural","Killian · Erzähler, männlich"],["de-DE-SeraphinaMultilingualNeural","Seraphina · warm, weiblich"],["de-DE-KatjaNeural","Katja · klar, weiblich"],["de-DE-AmalaNeural","Amala · jung, weiblich"]];
+function catForm(c,i){
+  return `<form onsubmit="return saveCat(event,${i})">
+    <div class="fields" style="grid-template-columns:70px 1fr"><label class="f">Emoji<input type="text" name="emoji" id="ce${i}" value="${esc(c.emoji)}"></label>
+      <label class="f">Name<input type="text" name="name" id="cn${i}" value="${esc(c.name)}" required></label></div>
+    <label class="f">Kurzbeschreibung<input type="text" name="description" id="cd${i}" value="${esc(c.description)}"></label>
+    <label class="f">Anweisung fürs Skript<textarea name="script_style" id="cs${i}">${esc(c.script_style)}</textarea></label>
+    <label class="f">Bild-Stimmung (Englisch)<textarea name="image_mood" id="cm${i}">${esc(c.image_mood)}</textarea></label>
+    <label class="f">Stimme (kostenlos)<select name="voice" id="cv${i}">${VOICES.map(([v,l])=>`<option value="${v}" ${c.voice===v?"selected":""}>${l}</option>`).join("")}</select></label>
+    <div class="fields" style="grid-template-columns:1fr 1fr"><label class="f">Tempo<input type="text" name="voice_rate" id="cr${i}" value="${esc(c.voice_rate||"+0%")}"></label>
+      <label class="f">Tonhöhe<input type="text" name="voice_pitch" id="cp${i}" value="${esc(c.voice_pitch||"+0Hz")}"></label></div>
+    <label class="f">Sprechweise (für OpenAI-Stimme)<input type="text" name="voice_instructions" id="ci${i}" value="${esc(c.voice_instructions||"")}"></label>
+    <div style="display:flex;gap:8px;justify-content:space-between;flex-wrap:wrap"><button class="btn sm" type="submit">Speichern</button>
+      ${i>=0?`<button class="btn sm danger" type="button" onclick="delCat(${i},this)">Löschen</button>`:""}</div></form>`;
+}
+function viewStudio(){
+  const used=new Set(ST.used_queue||[]);
+  const queue=(CFG.queue||[]).filter(q=>!used.has(q.id)).sort((a,b)=>a.created-b.created);
+  const counts={}; VIDS.forEach(v=>counts[v.category]=(counts[v.category]||0)+1);
+  if(!SEL||!cat(SEL)) SEL=CFG.categories[0]?.slug;
+  return `
+  <header class="h"><div><h1>Studio</h1>
+    <p class="sub">Wähle eine Video-Art, gib optional ein Thema vor und lass das Video sofort bauen. Der Autopilot wechselt täglich zwischen den eingeschalteten Kategorien und nimmt Themen aus der Warteschlange zuerst.</p></div></header>
+  <section class="panel">
+    <h2>Neues Video</h2><p class="hint">Kategorie antippen, Thema eingeben oder leer lassen, dann erstellen. Dauert etwa 5–15 Minuten.</p>
+    <div class="cats" role="radiogroup" aria-label="Kategorie">
+    ${CFG.categories.map((c,i)=>`
+      <div class="cat ${c.enabled?"":"off"} ${SEL===c.slug?"sel":""}" role="radio" aria-checked="${SEL===c.slug}" tabindex="0"
+           onclick="if(!event.target.closest('details,button,form'))pickCat('${esc(c.slug)}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();pickCat('${esc(c.slug)}')}">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px"><span class="e" aria-hidden="true">${esc(c.emoji)}</span>
+          <span class="chip ${c.enabled?"pos":"muted"}">${c.enabled?"im Autopilot":"pausiert"}</span></div>
+        <h3>${esc(c.name)}</h3><p>${esc(c.description)}</p>
+        <div class="row"><span class="chip muted">${counts[c.slug]||0} Videos</span>
+          <button class="btn sm ghost" type="button" onclick="toggleCat(${i},this)">${c.enabled?"Pausieren":"In Autopilot"}</button></div>
+        <details><summary>Bearbeiten</summary>${catForm(c,i)}</details>
+      </div>`).join("")}
+    </div>
+    <div class="fields" style="margin-top:14px;grid-template-columns:minmax(0,1fr) auto;align-items:end">
+      <label class="f" for="topic">Thema (optional – leer lassen, dann sucht die KI eins aus)
+        <input type="text" id="topic" maxlength="300" placeholder="z. B. Warum Hauswinkelspinnen im Herbst ins Haus kommen"></label>
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <label class="check"><input type="checkbox" id="upl" checked> direkt hochladen</label>
+        <button class="btn" type="button" onclick="makeNow(this)">Video erstellen</button></div>
+    </div>
+  </section>
+  <div class="grid">
+    <section class="panel" id="queue"><h2>Themen-Warteschlange</h2>
+      <p class="hint">Der Autopilot nimmt diese Themen der Reihe nach, bevor er selbst welche sucht.</p>
+      ${queue.length?queue.map(q=>`<div class="qrow"><div><span class="chip">${esc(cat(q.category)?.emoji||"")} ${esc(cat(q.category)?.name||q.category)}</span> ${esc(q.text)}</div>
+        <button class="btn sm danger" type="button" aria-label="Entfernen" onclick="delTopic('${esc(q.id)}',this)">✕</button></div>`).join(""):`<p class="hint" style="margin:0">Leer – die KI denkt sich passende Themen selbst aus.</p>`}
+    </section>
+    <section class="panel"><h2>Themen einplanen</h2><p class="hint">Für die nächsten Tage vormerken, eins pro Zeile.</p>
+      <form onsubmit="return addTopics(event)" style="display:flex;flex-direction:column;gap:10px">
+        <label class="f" for="qcat">Kategorie<select id="qcat">${CFG.categories.map(c=>`<option value="${esc(c.slug)}">${esc(c.emoji)} ${esc(c.name)}</option>`).join("")}</select></label>
+        <label class="f" for="qtext">Themen<textarea id="qtext" required placeholder="Was passiert, wenn man nie schläft?&#10;Die Legende vom Klabautermann"></textarea></label>
+        <div><button class="btn" type="submit">Zur Warteschlange</button></div></form></section>
+    <section class="panel"><h2>Neue Kategorie</h2><p class="hint">Eigene Video-Art anlegen, z. B. „Weltraum“ oder „Geschichte in 60 Sekunden“.</p>
+      ${catForm({emoji:"🎬",name:"",description:"",script_style:"",image_mood:"",voice:"de-DE-FlorianMultilingualNeural",voice_rate:"+6%",voice_pitch:"+0Hz"},-1)}</section>
+  </div>`;
+}
+function pickCat(s){SEL=s;document.querySelectorAll(".cat").forEach((el,i)=>{const on=CFG.categories[i]?.slug===s;el.classList.toggle("sel",on);el.setAttribute("aria-checked",on)})}
+async function makeNow(btn){
+  btn.disabled=true;
+  const ok=await dispatch({action:"make",category:SEL||"",topic:$("#topic").value.trim(),upload:$("#upl").checked?"1":"0"},"Video wird erstellt");
+  btn.disabled=false; if(ok){$("#topic").value="";toast("Auftrag gesendet. Oben siehst du den Fortschritt.");scrollTo({top:0,behavior:"smooth"})}
+}
+async function persist(msg,btn){
+  if(btn) btn.disabled=true;
+  try{await saveConfig(msg);toast("Gespeichert.");render()}catch(e){if(e.message!=="kein Token")toast(e.message)}finally{if(btn)btn.disabled=false}
+}
+function toggleCat(i,btn){CFG.categories[i].enabled=!CFG.categories[i].enabled;persist("Kategorie "+CFG.categories[i].name,btn)}
+function delCat(i,btn){
+  if(btn.dataset.sure!=="1"){btn.dataset.sure="1";btn.textContent="Wirklich löschen?";return}
+  const n=CFG.categories[i].name;CFG.categories.splice(i,1);persist("Kategorie gelöscht: "+n,btn)
+}
+function saveCat(e,i){
+  e.preventDefault();const f=e.target, g=n=>f.elements[n].value.trim();
+  const c={emoji:g("emoji")||"🎬",name:g("name"),description:g("description"),script_style:g("script_style"),image_mood:g("image_mood"),
+    voice:g("voice"),voice_rate:g("voice_rate")||"+0%",voice_pitch:g("voice_pitch")||"+0Hz",voice_instructions:g("voice_instructions")};
+  if(i>=0) Object.assign(CFG.categories[i],c);
+  else{let slug=c.name.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g,"").slice(0,18)||"kategorie";while(cat(slug))slug+="2";CFG.categories.push({slug,...c,enabled:true})}
+  persist("Kategorie "+c.name,f.querySelector("button[type=submit]"));return false;
+}
+function addTopics(e){
+  e.preventDefault();const c=$("#qcat").value, now=Date.now()/1000;
+  $("#qtext").value.split("\n").map(t=>t.trim()).filter(Boolean).forEach((t,i)=>CFG.queue.push({id:"q"+Math.random().toString(36).slice(2,10),category:c,text:t.slice(0,300),created:now+i}));
+  persist("Themen eingeplant",e.target.querySelector("button"));return false;
+}
+function delTopic(id,btn){CFG.queue=CFG.queue.filter(q=>q.id!==id);persist("Thema entfernt",btn)}
+
+/* ===================================================== Ansicht: Einstellungen */
+const SECRET_LIST=[
+  ["GEMINI_API_KEY","Gemini API-Key","Skripte, kostenlos","https://aistudio.google.com/apikey"],
+  ["CLOUDFLARE_ACCOUNT_ID","Cloudflare Account-ID","Bilder, kostenlos","https://dash.cloudflare.com/?to=/:account/ai/workers-ai"],
+  ["CLOUDFLARE_API_TOKEN","Cloudflare API-Token","Vorlage „Workers AI“","https://dash.cloudflare.com/profile/api-tokens"],
+  ["GOOGLE_CLIENT_SECRET","Google Client-Secret","für YouTube","https://console.cloud.google.com/apis/credentials"],
+  ["TIKTOK_CLIENT_SECRET","TikTok Client-Secret","für TikTok","https://developers.tiktok.com/apps"],
+  ["OPENAI_API_KEY","OpenAI API-Key","nur Premium","https://platform.openai.com/api-keys"],
+  ["ELEVENLABS_API_KEY","ElevenLabs API-Key","nur Premium","https://elevenlabs.io/app/settings/api-keys"]];
+function hasSecret(n){return SECRETS instanceof Set?SECRETS.has(n):null}
+function cost(){
+  const q={low:.016,medium:.063,high:.25}[S("openai_image_quality")]||.016, n=Math.max(6,Math.round((S("target_seconds")||70)/5));
+  const t={openai:.003}[S("text_provider")]||0, v={openai:.021,elevenlabs:.16}[S("tts_provider")]||0, i=S("image_provider")==="openai"?q*n:0;
+  return t+v+i;
+}
+const radio=(name,opts)=>`<div class="prov">${opts.map(([v,b,s])=>`<label><input type="radio" name="${name}" value="${v}" ${S(name)===v?"checked":""}><span><b>${b}</b><small>${s}</small></span></label>`).join("")}</div>`;
+const sel=(name,opts)=>`<select name="${name}" id="s_${name}">${opts.map(([v,l])=>`<option value="${v}" ${String(S(name))===v?"selected":""}>${l}</option>`).join("")}</select>`;
+const chk=(name,label)=>`<label class="check"><input type="checkbox" name="${name}" id="s_${name}" ${S(name)?"checked":""}> ${label}</label>`;
+function viewSettings(){
+  const con=ST.connected||{}, c=cost();
+  const ytReady=S("youtube_client_id")&&hasSecret("GOOGLE_CLIENT_SECRET")!==false, ttReady=S("tiktok_client_key")&&hasSecret("TIKTOK_CLIENT_SECRET")!==false;
+  return `
+  <header class="h"><div><h1>Einstellungen</h1>
+    <p class="sub">Zeitplan, Plattformen und KI-Anbieter. Starte kostenlos und schalte einzelne Schritte auf Premium um, sobald die Kanäle Geld einbringen.</p></div></header>
+  <form id="sform" onsubmit="return saveSettings(event)" style="display:flex;flex-direction:column;gap:20px">
+  <section class="panel"><h2>Zeitplan</h2><p class="hint">Uhrzeiten deutscher Zeit. Mehrere Videos pro Tag mit Komma trennen, z. B. <code>12:00, 18:30</code>. GitHub startet manchmal bis zu einer Stunde später.</p>
+    <div class="fields">${chk("autopilot","Autopilot: jeden Tag automatisch erstellen und hochladen")}
+      <label class="f" for="s_upload_times">Upload-Zeiten<input type="text" name="upload_times" id="s_upload_times" value="${esc(S("upload_times"))}"></label>
+      <label class="f" for="s_target_seconds">Ziel-Länge in Sekunden<input type="number" name="target_seconds" id="s_target_seconds" min="20" max="170" value="${esc(S("target_seconds"))}"></label></div></section>
+
+  <section class="panel" id="plattformen"><h2>Plattformen</h2><p class="hint">Einmal verbinden, danach lädt der Autopilot selbstständig hoch.</p>
+    <div class="grid">
+      <div class="stage"><h3>YouTube Shorts</h3>
+        ${con.youtube?`<p style="margin:0"><span class="chip pos">verbunden${con.youtube.name?" · "+esc(con.youtube.name):""}</span></p>`:""}
+        <label class="f" for="s_youtube_client_id">Google OAuth Client-ID<input type="text" name="youtube_client_id" id="s_youtube_client_id" value="${esc(S("youtube_client_id"))}" placeholder="…apps.googleusercontent.com"></label>
+        <button class="btn ${con.youtube?"ghost":""}" type="button" style="align-self:flex-start" ${ytReady?"":"disabled"} onclick="oauth('youtube')">${con.youtube?"Neu verbinden":"Mit YouTube verbinden"}</button>
+        ${ytReady?"":`<p class="hint" style="margin:0">Erst Client-ID eintragen und speichern sowie <code>GOOGLE_CLIENT_SECRET</code> unten hinterlegen.</p>`}
+        ${chk("youtube_enabled","Auf YouTube hochladen")}
+        <div class="fields"><label class="f" for="s_youtube_privacy">Sichtbarkeit${sel("youtube_privacy",[["public","Öffentlich"],["unlisted","Nicht gelistet"],["private","Privat"]])}</label>
+          <label class="f" for="s_youtube_category">Kategorie${sel("youtube_category",[["24","Unterhaltung"],["27","Bildung"],["22","Menschen & Blogs"],["28","Wissenschaft & Technik"],["15","Tiere"],["23","Comedy"]])}</label></div>
+        <p class="hint" style="margin:0">Bis Google dein Projekt geprüft hat, setzt YouTube API-Uploads auf „Privat“.</p></div>
+      <div class="stage"><h3>TikTok</h3>
+        ${con.tiktok?`<p style="margin:0"><span class="chip pos">verbunden${con.tiktok.name?" · "+esc(con.tiktok.name):""}</span></p>`:""}
+        <label class="f" for="s_tiktok_client_key">TikTok Client Key<input type="text" name="tiktok_client_key" id="s_tiktok_client_key" value="${esc(S("tiktok_client_key"))}"></label>
+        <button class="btn ${con.tiktok?"ghost":""}" type="button" style="align-self:flex-start" ${ttReady?"":"disabled"} onclick="oauth('tiktok')">${con.tiktok?"Neu verbinden":"Mit TikTok verbinden"}</button>
+        ${ttReady?"":`<p class="hint" style="margin:0">Erst Client Key eintragen und speichern sowie <code>TIKTOK_CLIENT_SECRET</code> unten hinterlegen.</p>`}
+        ${chk("tiktok_enabled","Auf TikTok hochladen")}
+        <div class="fields"><label class="f" for="s_tiktok_mode">Art des Uploads${sel("tiktok_mode",[["direct","Direkt veröffentlichen"],["inbox","Als Entwurf in die TikTok-App"]])}</label>
+          <label class="f" for="s_tiktok_privacy">Sichtbarkeit${sel("tiktok_privacy",[["PUBLIC_TO_EVERYONE","Öffentlich (nach TikTok-Prüfung)"],["MUTUAL_FOLLOW_FRIENDS","Freunde"],["FOLLOWER_OF_CREATOR","Follower"],["SELF_ONLY","Nur ich"]])}</label></div>
+        <p class="hint" style="margin:0">Ohne TikTok-Prüfung ist nur „Nur ich“ erlaubt. Mit „Als Entwurf“ tippst du in der App einmal auf Posten.</p></div>
+    </div>
+    <div style="margin-top:12px">${chk("ai_label","Videos als KI-generiert kennzeichnen (TikTok „AI-generated“, YouTube „Synthetische Inhalte“)")}</div>
+    <p class="hint" style="margin:10px 0 0">Weiterleitungs-URL für die Google- und TikTok-Konsole: <code>${esc(REDIRECT)}</code></p>
+  </section>
+
+  <section class="panel" id="ki"><div class="ph"><div><h2>KI-Anbieter</h2><p class="hint">Fällt ein Anbieter aus, springt der Motor automatisch auf die kostenlose Alternative.</p></div>
+      <span class="tag ${c?"warn":"pos"}">Kosten pro Video: ${c?"≈ "+c.toFixed(2).replace(".",",")+" $":"gratis"}</span></div>
+    <div class="stage"><h3>Skript</h3>${radio("text_provider",[["gemini","Google Gemini","Kostenlos im Gratis-Kontingent · gute Texte"],["pollinations","Pollinations","Kostenlos ohne Anmeldung · einfacher, langsamer"],["openai","OpenAI · Premium","≈ 0,3 Cent pro Video · sehr zuverlässig"]])}
+      <h3>Stimme</h3>${radio("tts_provider",[["edge","Microsoft Edge-Stimmen","Kostenlos · Stimme je Kategorie im Studio"],["openai","OpenAI · Premium","≈ 2 Cent pro Video · Sprechweise steuerbar"],["elevenlabs","ElevenLabs · Premium","Beste Stimmen · Abo ab ca. 5 $/Monat"]])}
+      <h3>Bilder</h3>${radio("image_provider",[["cloudflare","Cloudflare FLUX","Kostenlos (Tageskontingent reicht für mehrere Videos)"],["pollinations","Pollinations","Kostenlos ohne Anmeldung · niedrigere Auflösung"],["openai","OpenAI · Premium","Beste Qualität · ≈ 20 Cent bis 3 $ pro Video"]])}</div>
+    <details style="margin-top:12px"><summary>Modelle im Detail</summary><div class="fields" style="margin-top:10px">
+      ${[["gemini_model","Gemini-Modell"],["openai_text_model","OpenAI Text-Modell"],["openai_image_model","OpenAI Bild-Modell"],["openai_tts_model","OpenAI Stimm-Modell"],["openai_voice","OpenAI Stimme"],["elevenlabs_voice_id","ElevenLabs Voice-ID"]].map(([k,l])=>`<label class="f" for="s_${k}">${l}<input type="text" name="${k}" id="s_${k}" value="${esc(S(k))}"></label>`).join("")}
+      <label class="f" for="s_openai_image_quality">OpenAI Bildqualität${sel("openai_image_quality",[["low","low"],["medium","medium"],["high","high"]])}</label></div></details>
+  </section>
+
+  <section class="panel"><h2>Video-Stil</h2><p class="hint">Gilt für alle Kategorien. Die Stimmung pro Kategorie stellst du im Studio ein.</p>
+    <div class="fields" style="grid-template-columns:1fr">
+      <label class="f" for="s_image_style">Bildstil (Englisch)<textarea name="image_style" id="s_image_style" rows="3">${esc(S("image_style"))}</textarea></label>
+      ${chk("use_main_character","Wiederkehrende Hauptfigur verwenden (Wiedererkennung für den Kanal)")}
+      <label class="f" for="s_main_character">Hauptfigur (Englisch)<textarea name="main_character" id="s_main_character" rows="2">${esc(S("main_character"))}</textarea></label></div>
+    <div class="fields" style="margin-top:12px">${chk("subtitles_lowercase","Untertitel kleingeschrieben (wie im Beispielvideo)")}
+      <label class="f" for="s_music_volume">Musik-Lautstärke (0–0,3)<input type="text" name="music_volume" id="s_music_volume" value="${esc(S("music_volume"))}"></label></div>
+    <p class="hint" style="margin:8px 0 0">Hintergrundmusik: lizenzfreie MP3s im Repository in den Ordner <code>music/</code> hochladen, pro Kategorie optional in Unterordner wie <code>music/grusel/</code>.</p></section>
+  <div class="savebar"><button class="btn" type="submit">Einstellungen speichern</button></div>
+  </form>
+
+  <section class="panel" id="schluessel"><h2>Zugangsdaten (GitHub-Secrets)</h2>
+    <p class="hint">Schlüssel liegen sicher in den Secrets deines Repositorys, nicht in der App. So trägst du einen ein: Name kopieren → „Eintragen“ → Name und Wert einfügen → „Add secret“.</p>
+    ${SECRET_LIST.map(([n,l,h,u])=>{const has=hasSecret(n);return `<div class="srow"><div style="min-width:0">
+      <div><b style="font-weight:600">${l}</b> <span class="muted" style="font-size:12px">· ${h} · <a href="${u}" target="_blank" rel="noopener">holen ↗</a></span></div>
+      <code>${n}</code> <button class="btn sm ghost" type="button" onclick="copy('${n}')">Name kopieren</button></div>
+      <div style="display:flex;gap:8px;align-items:center">${has===true?`<span class="chip pos">✓ hinterlegt</span>`:has===false?`<span class="chip muted">fehlt</span>`:""}
+      <a class="btn sm ${has?"ghost":""}" href="https://github.com/${esc(GH.owner)}/${esc(GH.repo)}/settings/secrets/actions/new" target="_blank" rel="noopener">${has?"Ändern":"Eintragen"} ↗</a></div></div>`}).join("")}
+    ${SECRETS==="err"?`<p class="hint" style="margin:10px 0 0">Ob ein Schlüssel hinterlegt ist, kann die App nicht sehen: Dem Zugangsschlüssel fehlt die Berechtigung „Secrets: Read-only“.</p>`:""}
+    <div class="srow"><span class="muted">Nach dem Eintragen</span><button class="btn sm ghost" type="button" onclick="loadSecrets().then(render)">Neu prüfen</button></div>
+  </section>
+
+  <section class="panel"><h2>Diese App</h2>
+    <p class="hint">Verbunden mit <code>${esc(GH.owner)}/${esc(GH.repo)}</code>${TOKEN?"":" (nur Ansicht)"}. Auf dem Handy über „Teilen → Zum Home-Bildschirm“ als App ablegen.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">${TOKEN?`<button class="btn sm danger" type="button" onclick="logout(this)">Zugangsschlüssel auf diesem Gerät löschen</button>`:`<a class="btn sm" href="#start">Mit GitHub verbinden</a>`}
+      <a class="btn sm ghost" href="https://github.com/${esc(GH.owner)}/${esc(GH.repo)}/actions" target="_blank" rel="noopener">Alle Läufe ansehen ↗</a></div></section>`;
+}
+function copy(t){navigator.clipboard?.writeText(t).then(()=>toast("Kopiert: "+t),()=>toast(t))}
+function logout(btn){if(btn.dataset.sure!=="1"){btn.dataset.sure="1";btn.textContent="Sicher? Nochmal tippen";return}LS.del("as_token");TOKEN="";toast("Abgemeldet.");boot()}
+function saveSettings(e){
+  e.preventDefault();const f=e.target;
+  for(const k of ["autopilot","youtube_enabled","tiktok_enabled","ai_label","subtitles_lowercase","use_main_character"]) CFG.settings[k]=!!f.elements[k]?.checked;
+  for(const k of ["upload_times","text_provider","tts_provider","image_provider","gemini_model","openai_text_model","openai_image_model","openai_image_quality","openai_tts_model","openai_voice","elevenlabs_voice_id","image_style","main_character","youtube_privacy","youtube_category","tiktok_mode","tiktok_privacy","youtube_client_id","tiktok_client_key"])
+    if(f.elements[k]) CFG.settings[k]=(f.elements[k].value??"").trim();
+  CFG.settings.target_seconds=Math.min(170,Math.max(20,parseInt(f.elements.target_seconds.value)||70));
+  CFG.settings.music_volume=Math.min(.3,Math.max(0,parseFloat(String(f.elements.music_volume.value).replace(",","."))||0));
+  persist("Einstellungen",f.querySelector(".savebar button"));return false;
+}
+function oauth(p){
+  const state=Math.random().toString(36).slice(2)+Date.now().toString(36);
+  LS.set("as_oauth",JSON.stringify({state,platform:p,at:Date.now()}));
+  if(p==="youtube"){
+    location.href="https://accounts.google.com/o/oauth2/v2/auth?"+new URLSearchParams({client_id:S("youtube_client_id"),redirect_uri:REDIRECT,response_type:"code",
+      scope:"https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube.readonly",access_type:"offline",prompt:"consent",state});
+  }else{
+    location.href="https://www.tiktok.com/v2/auth/authorize/?"+new URLSearchParams({client_key:S("tiktok_client_key"),scope:"user.info.basic,user.info.stats,video.publish,video.upload,video.list",
+      response_type:"code",redirect_uri:REDIRECT,state});
+  }
+}
+
+/* ===================================================== Router */
+function render(){
+  let v=(location.hash||"#dashboard").slice(1);
+  if(!["dashboard","studio","einstellungen","start"].includes(v)) v="dashboard";
+  if(!TOKEN&&(v==="studio"||v==="einstellungen")) v="start";
+  document.querySelectorAll("[data-nav]").forEach(a=>{if(a.dataset.nav===v)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+  $("#view").innerHTML=`<div class="wrap" style="max-width:none">${v==="start"?viewStart():v==="studio"?viewStudio():v==="einstellungen"?viewSettings():viewDashboard()}</div>`;
+  if(v==="dashboard") drawCharts();
+}
+addEventListener("hashchange",()=>{render();scrollTo(0,0)});
+async function boot(){
+  try{await loadAll()}catch(e){toast(e.message)}
+  await loadSecrets();
+  const msg=LS.get("as_msg"); if(msg){LS.del("as_msg");setTimeout(()=>toast(msg),300)}
+  if(!TOKEN&&!location.hash) location.hash="#start";
+  render(); pollRuns();
+}
+boot();
+</script>
+</body>
+</html>

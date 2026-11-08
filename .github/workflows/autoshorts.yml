@@ -1,0 +1,116 @@
+name: AutoShorts
+run-name: "${{ github.event_name == 'schedule' && 'Stündliche Prüfung' || format('{0} {1} {2}', inputs.action, inputs.category, inputs.platform) }}"
+
+on:
+  schedule:
+    - cron: "17 * * * *"   # stündlich; der Motor entscheidet selbst, ob ein Video fällig ist
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "auto | make | upload | stats | connect"
+        default: "make"
+        type: string
+      category:
+        description: "Kategorie (leer = Autopilot-Auswahl)"
+        default: ""
+        type: string
+      topic:
+        description: "Thema (leer = KI sucht eins aus)"
+        default: ""
+        type: string
+      upload:
+        description: "Direkt hochladen (1/0)"
+        default: "1"
+        type: string
+      video_id:
+        default: ""
+        type: string
+      platform:
+        default: ""
+        type: string
+      code:
+        default: ""
+        type: string
+      redirect:
+        default: ""
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: autoshorts
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      IN_ACTION: ${{ inputs.action || 'auto' }}
+      IN_CATEGORY: ${{ inputs.category }}
+      IN_TOPIC: ${{ inputs.topic }}
+      IN_UPLOAD: ${{ inputs.upload || '1' }}
+      IN_ID: ${{ inputs.video_id }}
+      IN_PLATFORM: ${{ inputs.platform }}
+      IN_CODE: ${{ inputs.code }}
+      IN_REDIRECT: ${{ inputs.redirect }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ist etwas zu tun?
+        id: check
+        run: python3 -m engine.schedule >> "$GITHUB_OUTPUT"
+
+      - name: Python einrichten
+        if: steps.check.outputs.run == '1'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: engine/requirements.txt
+
+      - name: Pakete installieren
+        if: steps.check.outputs.run == '1'
+        run: pip install -q -r engine/requirements.txt
+
+      - name: ffmpeg und Schrift installieren
+        if: steps.check.outputs.media == '1'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg > /dev/null
+          mkdir -p .fonts
+          for w in Bold ExtraBold; do
+            curl -fsSL -o .fonts/Poppins-$w.ttf https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-$w.ttf
+          done
+
+      - name: AutoShorts ausführen
+        if: steps.check.outputs.run == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FONTS_DIR: ${{ github.workspace }}/.fonts
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+        run: |
+          python -m engine.main "$IN_ACTION" \
+            --category "$IN_CATEGORY" --topic "$IN_TOPIC" --upload "$IN_UPLOAD" \
+            --id "$IN_ID" --platform "$IN_PLATFORM" --code "$IN_CODE" --redirect "$IN_REDIRECT"
+
+      - name: Ergebnis speichern
+        if: always() && steps.check.outputs.run == '1'
+        run: |
+          git config user.name "autoshorts-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data/state.json docs/data/videos.json docs/data/stats.json docs/thumbs tokens
+          if git diff --cached --quiet; then echo "Nichts zu speichern"; exit 0; fi
+          git commit -q -m "AutoShorts: $IN_ACTION"
+          for i in 1 2 3 4 5; do
+            git pull -q --rebase origin main && git push -q origin HEAD:main && exit 0
+            sleep $((i * 5))
+          done
+          exit 1
