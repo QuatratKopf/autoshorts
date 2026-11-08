@@ -21,7 +21,7 @@
   "youtube_enabled": true,
   "youtube_privacy": "public",
   "youtube_category": "27",
-  "youtube_client_id": "563975677156-7b4ougo62spf48d0qrp91pd9hokqpg1k.apps.googleusercontent.com",
+  "youtube_client_id": "563975677156-nhv1rl5em9tkcklvmoqvuotksmnfbh7o.apps.googleusercontent.com",
   "tiktok_enabled": true,
   "tiktok_mode": "direct",
   "tiktok_privacy": "SELF_ONLY",
@@ -29,7 +29,9 @@
   "ai_label": true,
   "trend_mode": "always",
   "make_thumbnail": true,
-  "youtube_thumbnail": true
+  "youtube_thumbnail": true,
+  "trend_regions": "US,DE",
+  "audience": "Gen Z (16–25) in Deutschland, die TikTok und YouTube Shorts schauen: Internet-Kultur, Memes, virale Trends, Gaming, Musik, Serien, Filme, Creator, Tech, Lifestyle. Lockere Sprache wie unter Freunden, schnell auf den Punkt, kein Lehrer- oder Kinder-Ton."
  },
  "categories": [
   {
