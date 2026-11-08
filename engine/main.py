@@ -18,7 +18,7 @@ from PIL import Image
 
 from . import ai, render, thumbnail, trends, uploaders, writer
 from .schedule import due_slot, stats_due
-from .state import load, CONFIG, OUT, STATE, THUMBS, VIDEOS, WORK, cat_trends, category, cfg, log, save_all, video
+from .state import load, CONFIG, OUT, STATE, THUMBS, VIDEOS, WORK, cat_trends, category, cfg, drop_token, log, save_all, video
 
 RELEASE = "videos"
 
@@ -238,6 +238,12 @@ def main(argv=None):
         elif a.action == "stats":
             uploaders.refresh_stats()
             trends.refresh()
+        elif a.action == "disconnect":   # Plattform trennen: Anmeldung und abgerufene Zahlen löschen
+            plat = a.category.strip()
+            if plat not in ("youtube", "tiktok"):
+                raise SystemExit("Plattform fehlt")
+            drop_token(plat)
+            log(f"{plat} getrennt, Anmeldung und Zahlen gelöscht")
         elif a.action == "trends":
             trends.refresh()
         else:

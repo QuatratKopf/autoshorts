@@ -232,5 +232,9 @@ def save_token(platform, tok):
 
 
 def drop_token(platform):
+    """Anmeldung entfernen und die über diese Plattform abgerufenen Zahlen löschen (Datenschutz-Zusage)."""
     (TOKENS / f"{platform}.enc").unlink(missing_ok=True)
     STATE["connected"].pop(platform, None)
+    STATS.get("ch", {}).pop(platform, None)
+    for rows in STATS.get("v", {}).values():
+        rows.pop(platform, None)

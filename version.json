@@ -1,6 +1,6 @@
 {
-  "version": "1.2.5",
-  "file": "releases/AutoShorts-1.2.5.cmd",
-  "sha256": "430740b58595e4eff28c4531f97629f5f311cb34215775a98bef9d11bbfb2cac",
-  "notes": "Trends für die Gen-Z-TikTok-Bubble aus USA und Deutschland"
+  "version": "1.2.6",
+  "file": "releases/AutoShorts-1.2.6.cmd",
+  "sha256": "e79a44ed26a173917b64018dfb0f0e549ae9cfce24aeda102440a5aabd5544ba",
+  "notes": "YouTube/TikTok trennen (löscht Anmeldung und Zahlen)"
 }
