@@ -1,1 +1,14 @@
-[]
+[
+ {
+  "id": 1,
+  "category": "fakten",
+  "topic": "Der Martinsmarkt in Meiningen: 300 Jahre, 200 Stände und 50.000 Besucher – ein verrückter Überblick für Kinder",
+  "status": "error",
+  "created": 1794155710.4778557,
+  "trend": {
+   "title": "meiningen",
+   "source": "Google Trends"
+  },
+  "error": "Kein Text-Anbieter erreichbar. gemini: kein GEMINI_API_KEY | pollinations: HTTPSConnectionPool(host='text.pollinations.ai', port=443): Read timed out. (read timeout=180)"
+ }
+]
