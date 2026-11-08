@@ -94,7 +94,7 @@ jobs:
             --id "$IN_ID" --trend "$IN_TREND"
 
       - name: Ergebnis speichern
-        if: always() && steps.check.outputs.run == '1'
+        if: ${{ !cancelled() && steps.check.outputs.run == '1' }}
         run: |
           git config user.name "autoshorts-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

@@ -1,6 +1,6 @@
 {
-  "version": "1.2.0",
-  "file": "releases/AutoShorts-1.2.0.cmd",
-  "sha256": "1b6042286897de6864caffc6d18593c94cefa19c6b81a0b298d1114cd008de4e",
-  "notes": "Automatischer Neustart nach Updates repariert"
+  "version": "1.2.1",
+  "file": "releases/AutoShorts-1.2.1.cmd",
+  "sha256": "51852e36c1290aeaa76c51e01cf60b322a3812a9967a459b389ca5c240c5c578",
+  "notes": "Laufende Video-Erstellung kann abgebrochen werden"
 }

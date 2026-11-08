@@ -200,7 +200,7 @@ svg text{fill:var(--muted);font-family:var(--f-body);font-size:11px}
 .vrow .tt b{font-weight:600;white-space:normal}
 .vrow .tt div{display:flex;gap:4px;flex-wrap:wrap}
 .runs{display:flex;flex-direction:column}
-.runs div{display:grid;grid-template-columns:18px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px}
+.runs div{display:grid;grid-template-columns:18px minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px}
 .runs div:last-child{border-bottom:0}
 
 /* ── Kalender ── */
@@ -440,7 +440,7 @@ const MONTHS = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "A
 /* ═════════════════ Zustand ═════════════════ */
 let S = null;                                   // App (lokal)
 let CFG = null, ST = {}, VIDS = [], STATS = {v: {}, ch: {}}, TRENDS = {items: []};   // Daten aus dem Repository
-let SECRETS = null, RUNS = [], PENDING = null, LOADERR = "";
+let SECRETS = null, RUNS = [], PENDING = null, LOADERR = "", CANCEL_NEXT = 0, CANCELING = new Set();
 let TAB = (location.hash || "#dashboard").slice(1);
 if (!["dashboard", "kalender", "studio", "einstellungen"].includes(TAB)) TAB = "dashboard";
 const DEF = {trend_mode: "half", make_thumbnail: true, youtube_thumbnail: true};
@@ -489,19 +489,36 @@ async function pollRuns() {
   try { const j = await gh("GET", "/actions/workflows/autoshorts.yml/runs?per_page=10"); RUNS = j.workflow_runs || []; } catch (e) {}
   const active = RUNS.some(isLive);
   if (PENDING && RUNS.some(r => r.event === "workflow_dispatch" && new Date(r.created_at).getTime() > PENDING.at - 60000)) PENDING = null;
+  if (CANCEL_NEXT) {   // Abbrechen wurde gedrückt, bevor GitHub den Auftrag angelegt hatte
+    const r = RUNS.find(r => r.status !== "completed" && r.event === "workflow_dispatch" && new Date(r.created_at).getTime() > CANCEL_NEXT - 60000);
+    if (r) { CANCEL_NEXT = 0; cancelRun(r.id, true); }
+    else if (Date.now() - CANCEL_NEXT > 3 * 60000) CANCEL_NEXT = 0;
+  }
   if (wasActive && !active) { await loadData(); render(); }
   wasActive = active;
   banner();
   if (TAB === "dashboard" && $("#runsBox")) $("#runsBox").innerHTML = runsList();
   runTimer = setTimeout(pollRuns, active || PENDING ? 8000 : 45000);
 }
+async function cancelRun(id, quiet) {
+  if (!id) { CANCEL_NEXT = Date.now(); PENDING = null; banner(); toast("Wird abgebrochen, sobald GitHub den Auftrag angelegt hat …"); setTimeout(pollRuns, 3000); return; }
+  if (!quiet && !confirm("Diesen Auftrag wirklich abbrechen? Das angefangene Video wird verworfen.")) return;
+  CANCELING.add(id); banner();
+  try { await gh("POST", `/actions/runs/${id}/cancel`); toast("Auftrag wird abgebrochen …"); }
+  catch (e) {
+    try { await gh("POST", `/actions/runs/${id}/force-cancel`); toast("Auftrag wird abgebrochen …"); }
+    catch (e2) { CANCELING.delete(id); toast(e.message, true); }
+  }
+  banner(); setTimeout(pollRuns, 4000);
+}
 const mins = t => { const m = Math.max(0, Math.round((Date.now() - new Date(t)) / 60000)); return m < 1 ? "wenigen Sekunden" : m + " Min."; };
 function banner() {
   const el = $("#banner"); if (!el) return;
   let h = "";
   const live = RUNS.filter(isLive), recent = RUNS.find(r => r.status === "completed" && r.event !== "schedule" && Date.now() - new Date(r.updated_at) < 15 * 60000);
-  if (PENDING && !live.length) h += `<div class="banner run"><span class="spin"></span><b>${esc(PENDING.label)}</b><span class="muted">Auftrag an GitHub gesendet, startet gleich …</span></div>`;
-  else if (live.length) { const r = live[0]; h += `<div class="banner run"><span class="spin"></span><b>${esc(runName(r))} …</b><span class="muted">${r.status === "queued" ? "wartet auf einen freien Rechner" : "läuft seit " + mins(r.run_started_at)}</span><a href="${esc(r.html_url)}" target="_blank" rel="noopener">Protokoll ↗</a></div>`; }
+  if (PENDING && !live.length) h += `<div class="banner run"><span class="spin"></span><b>${esc(PENDING.label)}</b><span class="muted">Auftrag an GitHub gesendet, startet gleich …</span><button class="btn sm" style="margin-left:auto" onclick="cancelRun(0)">Abbrechen</button></div>`;
+  else if (live.length) { const r = live[0]; h += `<div class="banner run"><span class="spin"></span><b>${esc(runName(r))} …</b><span class="muted">${CANCELING.has(r.id) ? "wird abgebrochen …" : r.status === "queued" ? "wartet auf einen freien Rechner" : "läuft seit " + mins(r.run_started_at)}</span><a href="${esc(r.html_url)}" target="_blank" rel="noopener">Protokoll ↗</a>${CANCELING.has(r.id) ? "" : `<button class="btn sm" style="margin-left:auto" onclick="cancelRun(${Number(r.id)})">Abbrechen</button>`}</div>`; }
+  else if (recent && recent.conclusion === "cancelled") h += `<div class="banner run"><b>Abgebrochen:</b><span>${esc(runName(recent))}</span></div>`;
   else if (recent) { const ok = recent.conclusion === "success"; h += `<div class="banner ${ok ? "ok" : "bad"}"><b class="${ok ? "pos" : "neg"}">${ok ? "Fertig" : "Fehlgeschlagen"}:</b><span>${esc(runName(recent))}</span><a href="${esc(recent.html_url)}" target="_blank" rel="noopener">Protokoll ↗</a></div>`; }
   if (S && S.update && S.update.available) h += `<div class="banner">Update verfügbar: Version <b>${esc(S.update.version)}</b>${S.update.notes ? ` · ${esc(S.update.notes)}` : ""}<button class="btn primary sm" style="margin-left:auto" onclick="runUpdate()">Jetzt aktualisieren</button></div>`;
   if (LOADERR) h += `<div class="banner bad">Daten konnten nicht geladen werden: ${esc(LOADERR)}</div>`;
@@ -715,7 +732,7 @@ function viewDash() {
 function runsList() {
   const rs = RUNS.filter(r => r.event !== "schedule" || r.conclusion !== "success" || isLive(r)).slice(0, 5);
   if (!rs.length) return `<p class="hint">Noch keine Aufträge.</p>`;
-  return rs.map(r => `<div><span class="dot ${r.status !== "completed" ? "warn" : r.conclusion === "success" ? "ok" : "bad"}"></span><a href="${esc(r.html_url)}" target="_blank" rel="noopener" style="text-decoration:none">${esc(runName(r))}</a><span class="hint">${new Date(r.created_at).toLocaleString("de-DE", {day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit"})}</span></div>`).join("");
+  return rs.map(r => `<div><span class="dot ${r.status !== "completed" ? "warn" : r.conclusion === "success" ? "ok" : r.conclusion === "cancelled" ? "" : "bad"}"></span><a href="${esc(r.html_url)}" target="_blank" rel="noopener" style="text-decoration:none">${esc(runName(r))}${r.conclusion === "cancelled" ? " (abgebrochen)" : ""}</a>${isLive(r) && !CANCELING.has(r.id) ? `<button class="btn sm" style="margin-left:auto" onclick="cancelRun(${Number(r.id)})">Abbrechen</button>` : ""}<span class="hint">${new Date(r.created_at).toLocaleString("de-DE", {day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit"})}</span></div>`).join("");
 }
 function nice(max) { const r = max || 1, st = Math.pow(10, Math.floor(Math.log10(r / 4))); const m = [1, 2, 2.5, 5, 10].find(x => r / (x * st) <= 5) * st; return {hi: Math.ceil(max / m) * m || m, step: m}; }
 function drawChart() {
