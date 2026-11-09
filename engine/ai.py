@@ -51,16 +51,29 @@ def _gemini(system, user, temperature):
     if not key:
         raise ProviderError("kein GEMINI_API_KEY")
     model = cfg("gemini_model") or "gemini-flash-latest"
-    r = requests.post(
-        f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
-        headers={"x-goog-api-key": key},
-        json={"systemInstruction": {"parts": [{"text": system}]},
-              "contents": [{"role": "user", "parts": [{"text": user}]}],
-              "generationConfig": {"temperature": temperature, "responseMimeType": "application/json"}},
-        timeout=TIMEOUT)
-    _check(r, "Gemini")
-    parts = r.json()["candidates"][0]["content"]["parts"]
-    return "".join(p.get("text", "") for p in parts)
+    body = {"systemInstruction": {"parts": [{"text": system}]},
+            "contents": [{"role": "user", "parts": [{"text": user}]}],
+            "generationConfig": {"temperature": temperature, "responseMimeType": "application/json"}}
+    # 1. Versuch: eingestelltes Modell. Denkt es zu lange (Zeitüberschreitung) oder ist es überlastet,
+    # 2. Versuch: gemini-2.5-flash ohne Denkphase – schnell und für Skripte völlig ausreichend.
+    tries = [(model, body, 240), ("gemini-2.5-flash",
+             {**body, "generationConfig": {**body["generationConfig"], "thinkingConfig": {"thinkingBudget": 0}}}, 180)]
+    last = None
+    for m, b, to in tries:
+        try:
+            r = requests.post(f"https://generativelanguage.googleapis.com/v1beta/models/{m}:generateContent",
+                              headers={"x-goog-api-key": key}, json=b, timeout=to)
+            if r.status_code in (429, 500, 503) and m != tries[-1][0]:
+                last = ProviderError(f"Gemini {m}: HTTP {r.status_code}")
+                log(f"Gemini {m} überlastet (HTTP {r.status_code}), nehme gemini-2.5-flash")
+                continue
+            _check(r, "Gemini")
+            parts = r.json()["candidates"][0]["content"]["parts"]
+            return "".join(p.get("text", "") for p in parts if not p.get("thought"))
+        except requests.Timeout as e:
+            last = e
+            log(f"Gemini {m} antwortet nicht rechtzeitig, nehme ein schnelleres Modell")
+    raise ProviderError(f"Gemini: {last}")
 
 
 def _openai_text(system, user, temperature):

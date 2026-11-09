@@ -20,6 +20,8 @@ Regeln für die Sprechertexte:
 - Ton für eine junge TikTok-Zielgruppe: locker, direkt, selbstbewusst, gern mit aktueller Umgangssprache, aber nicht cringe
   oder übertrieben jugendlich. Nie belehrend, nie wie für Kinder.
 - Keine Beleidigungen, nichts Anzügliches, keine echten Privatpersonen, keine Marken- oder Filmfiguren im Bild.
+- Baue Themen nie um urheberrechtlich geschützte Figuren, Filme, Serien, Spiele oder Marken (z. B. Godzilla, Pokémon,
+  Marvel, Disney, Minecraft). Nimm stattdessen eigene, namenlose Wesen oder echte Natur/Wissenschaft (z. B. 'ein 100 Meter großes Monster').
 Regeln für die Bild-Prompts (Englisch):
 - Beschreibe exakt eine Szene: wer/was, Pose, Gesichtsausdruck, Ort, Blickwinkel. Hauptmotiv mittig.
 - Keine Schrift im Bild. Keine bekannten Figuren, Marken oder realen Personen (auch nicht bei Trend-Themen: stelle sie symbolisch dar).
@@ -42,7 +44,7 @@ FORMAT = """Gib JSON in genau diesem Format zurück:
 }"""
 
 UNSUITABLE = ("Ungeeignet sind: Todesfälle, Unglücke, Verbrechen, Krieg, Terror, Krankheiten einzelner Personen, "
-              "Parteipolitik und Wahlen, Klatsch über Privatleben, Glücksspiel, reine Sport-Ergebnisse ohne Hintergrundgeschichte "
+              "Parteipolitik und Wahlen, Klatsch über Privatleben, Glücksspiel, geschützte Film-/Spielfiguren und Marken als Hauptthema, reine Sport-Ergebnisse ohne Hintergrundgeschichte "
               "und alles, was ohne Belege Spekulation wäre.")
 
 
