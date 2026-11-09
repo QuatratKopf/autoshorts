@@ -89,6 +89,15 @@ PRESET_CATEGORIES = [
          image_mood="lush nature settings, friendly cute animal characters, soft sunlight",
          voice="de-DE-SeraphinaMultilingualNeural", voice_rate="+6%", voice_pitch="+0Hz",
          voice_instructions="Warm, neugierig und begeistert."),
+    dict(slug="whatif", name="What If", emoji="🤯",
+         description="Was wäre wenn …? Verrückte Gedankenexperimente, wissenschaftlich durchgespielt.",
+         script_style="Starte mit einer verrückten Was-wäre-wenn-Frage (z. B. 'Was wäre, wenn die Erde aufhört sich zu drehen?'). "
+                      "Spiele die Folgen Schritt für Schritt durch: erst Sekunden, dann Tage, dann Jahre – jede Stufe krasser als die davor. "
+                      "Stütze dich auf echte Physik, Biologie und Zahlen; sag klar, wo es Schätzung ist. "
+                      "Ende mit einem überraschenden Twist oder einer Frage an die Zuschauer.",
+         image_mood="epic dramatic scale, glowing sci-fi colors, before/after contrast, planets, explosions in cartoon style",
+         voice="de-DE-KillianNeural", voice_rate="+6%", voice_pitch="+0Hz",
+         voice_instructions="Staunend und mitreißend, wird mit jeder Stufe aufgeregter."),
 ]
 
 
@@ -129,7 +138,7 @@ DEFAULT_SETTINGS = {
     "youtube_thumbnail": True,
 }
 
-TREND_DEFAULT = ("fakten", "storys", "mysterien", "tiere")
+TREND_DEFAULT = ("fakten", "storys", "mysterien", "tiere", "whatif")
 
 
 def cat_trends(cat):
@@ -170,6 +179,10 @@ for k, v in DEFAULT_SETTINGS.items():
     CONFIG["settings"].setdefault(k, v)
 CONFIG.setdefault("categories", default_config()["categories"])
 CONFIG.setdefault("queue", [])
+_have = {c.get("slug") for c in CONFIG["categories"]}
+for _p in PRESET_CATEGORIES:   # neue Video-Arten automatisch ergänzen (eingeschaltet)
+    if _p["slug"] not in _have:
+        CONFIG["categories"].append({**_p, "enabled": True})
 for _c in CONFIG["categories"]:   # alte Vorgabe ersetzen: Zielgruppe ist Gen Z, nicht Kinder
     if _c.get("description") == "Verblüffende Fakten, kindgerecht und witzig erklärt.":
         _c["description"] = "Verblüffende Fakten, frech und witzig erklärt."

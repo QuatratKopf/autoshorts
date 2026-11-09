@@ -117,6 +117,19 @@
    "voice_instructions": "Warm, neugierig und begeistert.",
    "enabled": false,
    "trends": true
+  },
+  {
+   "slug": "whatif",
+   "name": "What If",
+   "emoji": "🤯",
+   "description": "Was wäre wenn …? Verrückte Gedankenexperimente, wissenschaftlich durchgespielt.",
+   "script_style": "Starte mit einer verrückten Was-wäre-wenn-Frage (z. B. 'Was wäre, wenn die Erde aufhört sich zu drehen?'). Spiele die Folgen Schritt für Schritt durch: erst Sekunden, dann Tage, dann Jahre – jede Stufe krasser als die davor. Stütze dich auf echte Physik, Biologie und Zahlen; sag klar, wo es Schätzung ist. Ende mit einem überraschenden Twist oder einer Frage an die Zuschauer.",
+   "image_mood": "epic dramatic scale, glowing sci-fi colors, before/after contrast, planets, explosions in cartoon style",
+   "voice": "de-DE-KillianNeural",
+   "voice_rate": "+6%",
+   "voice_pitch": "+0Hz",
+   "voice_instructions": "Staunend und mitreißend, wird mit jeder Stufe aufgeregter.",
+   "enabled": true
   }
  ],
  "queue": []
