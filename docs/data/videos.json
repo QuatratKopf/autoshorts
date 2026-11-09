@@ -126,5 +126,44 @@
   },
   "thumb": true,
   "mp4": true
+ },
+ {
+  "id": 7,
+  "category": "whatif",
+  "topic": "Was wäre, wenn du nachts aufwachst und alle Menschen verschwunden sind?",
+  "status": "rendered",
+  "created": 1794267697.8068166,
+  "title": "Alle Menschen weg: Was passiert wirklich?",
+  "description": "Was wäre, wenn du nachts aufwachst und plötzliche alle Menschen verschwunden sind? Wir spielen die physikalischen und biologischen Folgen Schritt für Schritt durch. Was würdest du als Erstes tun?",
+  "hashtags": [
+   "#shorts",
+   "#whatif",
+   "#gedankenspiel",
+   "#wissenschaft",
+   "#zukunft",
+   "#fyp",
+   "#viral",
+   "#deutsch"
+  ],
+  "tags": [
+   "alle menschen verschwunden",
+   "was wäre wenn",
+   "welt ohne menschen",
+   "apokalypse",
+   "gedankenspiel",
+   "physik",
+   "biologie",
+   "zukunft der erde"
+  ],
+  "thumb_text": "ALLE WEG?!",
+  "cover_ms": 96978,
+  "duration": 96.9,
+  "providers": {
+   "text": "gemini",
+   "voice": "edge",
+   "images": "cloudflare"
+  },
+  "thumb": true,
+  "mp4": true
  }
 ]
