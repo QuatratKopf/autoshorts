@@ -292,7 +292,7 @@ def _cloudflare(prompt, seed):
         raise ProviderError("Cloudflare-Zugang fehlt")
     r = requests.post(f"https://api.cloudflare.com/client/v4/accounts/{acct}/ai/run/@cf/black-forest-labs/flux-1-schnell",
                       headers={"Authorization": f"Bearer {tok}"},
-                      json={"prompt": prompt[:2000], "steps": 6, "seed": seed}, timeout=TIMEOUT)
+                      json={"prompt": prompt[:2000], "steps": 8}, timeout=TIMEOUT)
     _check(r, "Cloudflare")
     return Image.open(io.BytesIO(base64.b64decode(r.json()["result"]["image"])))
 

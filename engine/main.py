@@ -174,9 +174,11 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None):
 
         log("Schneide Video …")
         ass = work / "subs.ass"
-        render.build_ass(words, scenes, times, ass, bool(cfg("subtitles_lowercase")))
+        render.build_ass(words, scenes, times, ass, bool(cfg("subtitles_lowercase")),
+                         script.get("hud"), script.get("countdown"))
         v["cover_ms"] = render.render(work, scenes, times, voice, ass, final, render.pick_music(cat["slug"]),
-                                      float(cfg("music_volume") or 0.1), cover)
+                                      float(cfg("music_volume") or 0.1), cover,
+                                      float(cfg("sfx_volume") if cfg("sfx_volume") is not None else 0.35))
         Image.open(cover or (work / "img00.jpg")).resize((360, 640)).save(THUMBS / f"{vid}.jpg", quality=82)
         v.update(status="rendered", duration=round(total + 0.35, 1), providers=used, thumb=True)
         v["mp4"] = publish_mp4([final, cover] if cover else final)

@@ -25,7 +25,9 @@ Regeln für die Sprechertexte:
 Regeln für die Bild-Prompts (Englisch):
 - Beschreibe exakt eine Szene: wer/was, Pose, Gesichtsausdruck, Ort, Blickwinkel. Hauptmotiv mittig.
 - Keine Schrift im Bild. Keine bekannten Figuren, Marken oder realen Personen (auch nicht bei Trend-Themen: stelle sie symbolisch dar).
-- Wiederkehrende Figuren in jeder Szene gleich beschreiben, damit sie konsistent aussehen.
+- Lege wiederkehrende Figuren in "cast" und wiederkehrende Orte in "places" EINMAL genau fest und nutze sie in vielen Szenen –
+  so sieht das Video aus wie aus einem Guss (gleiche Figur, gleiches Zimmer). Wenige Orte (1–3), wenige Figuren (1–2).
+- Erzählstil wie erfolgreiche Erklär-Shorts: oft aus Sicht einer Figur oder in Du-Perspektive ('Du wachst auf …'), mit Spannung.
 Antworte ausschließlich mit JSON."""
 
 FORMAT = """Gib JSON in genau diesem Format zurück:
@@ -36,12 +38,30 @@ FORMAT = """Gib JSON in genau diesem Format zurück:
   "tags": ["8–15 Suchbegriffe ohne #, z. B. 'spinnen im haus', 'tierfakten'"],
   "thumbnail": {"image": "English prompt for ONE eye-catching cover image: the most surprising moment of the story, close-up, exaggerated facial expression, bold simple composition, strong contrast, empty space in the upper third for text",
                 "text": "2–4 Wörter Cover-Text in GROSSBUCHSTABEN, macht neugierig, verrät die Auflösung nicht"},
+  "cast": {"held": "English description of each recurring character (species/body, colors, clothes, face) – identical in every scene"},
+  "places": {"zimmer": "English description of each recurring location (room/landscape, colors, key objects)"},
+  "hud": "optional: kurze Orts-/Zeitangabe oben links für Geschichten, z. B. 'TAG 1 · 3:12 UHR' – sonst leerer String",
+  "countdown": "optional: nur bei Wettlauf gegen die Zeit {\"label\": \"EINSCHLAG IN\", \"seconds\": 900}, sonst null",
   "scenes": [
     {"text": "Sprechertext dieser Szene (1–2 kurze Sätze)",
-     "image": "English image prompt for this scene",
-     "overlay": "optional: 1–3 Wörter Infokarte in GROSSBUCHSTABEN wie 'VERBOTEN', '22 °C', '8 BEINE' – sonst leerer String"}
+     "image": "English: ONLY action, pose, facial expression and camera framing of this scene (who/where comes from cast/places)",
+     "who": ["held"],
+     "place": "zimmer",
+     "camera": "zoom_in | zoom_out | pan_left | pan_right | pan_up | shake | still",
+     "sfx": "whoosh | pop | boom | ding | tick | none",
+     "highlight": ["1–2 Schlüsselwörter aus dem Sprechertext, die in den Untertiteln gelb leuchten"],
+     "hud": "optional: neue Orts-/Zeitangabe ab dieser Szene, sonst weglassen",
+     "overlay": null}
   ]
-}"""
+}
+Einblendungen (overlay) – nutze sie in etwa jeder zweiten Szene, passend zum Inhalt, sonst null:
+- {"type": "card", "text": "1–3 WÖRTER"}  große Infokarte: Zahl, Fakt, Warnung (z. B. "VIERMAL HELLER", "-80 °C")
+- {"type": "note", "title": "REGEL #2", "text": "kurzer Merksatz"}  Notizzettel für Regeln, Tipps, Merksätze
+- {"type": "phone", "title": "3:12", "items": ["Mama: Wo bist du??", "Warnung: Bleib drinnen"]}  Handy mit Nachrichten/Alarmen
+- {"type": "checklist", "title": "SPEISEKARTE", "items": [["Motten", true], ["Fliegen", true], ["Käfer", false]]}  Listen, Vergleiche
+- {"type": "bar", "label": "WASSER", "value": 24}  Füllstand/Prozent/Energie
+- {"type": "choice", "a": "Im Bunker bleiben", "b": "Zu Mama rennen"}  NUR in der letzten Szene von Geschichten: Was würdest du tun?
+Kamera: 'shake' bei Schreck/Aufprall (mit sfx 'boom'), sonst ruhige Fahrten; sfx sparsam (nicht in jeder Szene)."""
 
 UNSUITABLE = ("Ungeeignet sind: Todesfälle, Unglücke, Verbrechen, Krieg, Terror, Krankheiten einzelner Personen, "
               "Parteipolitik und Wahlen, Klatsch über Privatleben, Glücksspiel, geschützte Film-/Spielfiguren und Marken als Hauptthema, reine Sport-Ergebnisse ohne Hintergrundgeschichte "
@@ -120,15 +140,28 @@ def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
             + (f"Zielgruppe: {audience()}\n" if audience() else "")
             + f"Länge: ca. {words} Wörter gesprochen (≈ {secs} Sekunden), aufgeteilt auf {scenes} Szenen.\n"
             + (f"Wiederkehrende Hauptfigur (nur wenn passend einbauen, in den Bild-Prompts immer gleich beschreiben): {char}\n" if char else "")
-            + "Nutze Infokarten (overlay) sparsam, in etwa jeder dritten Szene.\n" + FORMAT)
+            + FORMAT)
     js, provider = ai.chat_json(SYSTEM, user, 0.9)
     sc = [s for s in js.get("scenes", []) if str(s.get("text", "")).strip()]
     if len(sc) < 3:
         raise ai.ProviderError("Drehbuch hat zu wenige Szenen")
+    cast = {str(k): str(v) for k, v in (js.get("cast") or {}).items() if v} if isinstance(js.get("cast"), dict) else {}
+    places = {str(k): str(v) for k, v in (js.get("places") or {}).items() if v} if isinstance(js.get("places"), dict) else {}
     for s in sc:
         s["text"] = " ".join(str(s["text"]).split())
         s["image"] = str(s.get("image") or s["text"])
-        s["overlay"] = str(s.get("overlay") or "").strip()[:24]
+        ov = s.get("overlay")
+        if isinstance(ov, str):   # altes Format: nur Text
+            ov = {"type": "card", "text": ov} if ov.strip() else None
+        s["overlay"] = ov if isinstance(ov, dict) and ov.get("type") else None
+        who = s.get("who") or []
+        who = [who] if isinstance(who, str) else who
+        s["who_desc"] = "; ".join(cast[w] for w in who if w in cast)
+        s["place_desc"] = places.get(str(s.get("place") or ""), "")
+        s["highlight"] = [str(h) for h in (s.get("highlight") or []) if str(h).strip()][:3]
+        s["camera"] = str(s.get("camera") or "")
+        s["sfx"] = str(s.get("sfx") or "")
+        s["hud"] = str(s.get("hud") or "").strip()
     tags = [t if str(t).startswith("#") else "#" + str(t) for t in js.get("hashtags", [])]
     tags = [t.replace(" ", "") for t in tags if len(t) > 1]
     if "#shorts" not in [t.lower() for t in tags]:
@@ -137,9 +170,12 @@ def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
     return {"title": str(js.get("title") or topic)[:95], "description": str(js.get("description") or ""),
             "hashtags": tags[:10], "tags": [str(t).strip("# ")[:60] for t in js.get("tags", []) if str(t).strip("# ")][:15],
             "thumbnail": {"image": str(th.get("image") or sc[0]["image"]), "text": str(th.get("text") or "").strip()[:40]},
-            "scenes": sc}, provider
+            "scenes": sc, "hud": str(js.get("hud") or "").strip()[:28],
+            "countdown": js.get("countdown") if isinstance(js.get("countdown"), dict) else None}, provider
 
 
 def image_prompt(scene: dict, cat: dict) -> str:
     style = cfg("image_style")
-    return f"{scene['image']}. Mood: {cat.get('image_mood') or ''}. Style: {style}"
+    who = f" Characters: {scene['who_desc']}." if scene.get("who_desc") else ""
+    where = f" Setting: {scene['place_desc']}." if scene.get("place_desc") else ""
+    return f"{scene['image']}.{who}{where} Mood: {cat.get('image_mood') or ''}. Style: {style}"

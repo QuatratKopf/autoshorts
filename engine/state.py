@@ -33,11 +33,18 @@ def log(msg):
 
 
 # Bildstil angelehnt an flache 2D-Cartoon-Erklärvideos (dicke Konturen, ruhige Farben, niedliche Figuren)
-DEFAULT_STYLE = (
+OLD_STYLES = (
     "flat 2D vector cartoon illustration, clean thick dark outlines, soft muted warm colors, "
     "simple cute characters with big round white eyes and expressive faces, minimalist cozy background "
     "with simple shapes, explainer animation style, vertical 9:16 composition, main subject centered "
-    "in the middle of the frame, no text, no letters, no words, no watermark"
+    "in the middle of the frame, no text, no letters, no words, no watermark",
+)
+DEFAULT_STYLE = (
+    "flat 2D vector illustration like a modern animated explainer short, solid flat colors, no gradients, "
+    "no 3D, no realistic rendering, clean bold dark outlines, simple geometric shapes, cute minimal characters "
+    "with simple round heads and big expressive white eyes, detailed but simple flat background (room, street or landscape) "
+    "with a few clear objects, cinematic lighting with flat shading, vertical 9:16 composition, main subject in the "
+    "lower middle of the frame, upper third calm and uncluttered, no text, no letters, no words, no watermark"
 )
 DEFAULT_CHARACTER = (
     "a cheerful little character with a round yellow head, big round eyes, a small smile "
@@ -120,6 +127,7 @@ DEFAULT_SETTINGS = {
     "use_main_character": True,
     "subtitles_lowercase": True,
     "music_volume": 0.10,
+    "sfx_volume": 0.35,
     "youtube_enabled": True,
     "youtube_privacy": "public",
     "youtube_category": "24",
@@ -179,6 +187,8 @@ for k, v in DEFAULT_SETTINGS.items():
     CONFIG["settings"].setdefault(k, v)
 CONFIG.setdefault("categories", default_config()["categories"])
 CONFIG.setdefault("queue", [])
+if CONFIG["settings"].get("image_style") in OLD_STYLES:   # alte Standard-Vorgabe → neuer, flacherer Stil
+    CONFIG["settings"]["image_style"] = DEFAULT_STYLE
 _have = {c.get("slug") for c in CONFIG["categories"]}
 for _p in PRESET_CATEGORIES:   # neue Video-Arten automatisch ergänzen (eingeschaltet)
     if _p["slug"] not in _have:
