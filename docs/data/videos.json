@@ -34,5 +34,17 @@
    "source": "Wikipedia"
   },
   "error": "Kein Text-Anbieter erreichbar. gemini: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=180) | pollinations: Pollinations-Text HTTP 400: {\"success\":false,\"error\":{\"message\":\"The model exhausted its output token limit before producing an answer. Increase the token limit or reduce reasoning effort.\",\"code\":\"output_token_limit_exceeded\",\"timestamp\":\"2026-11-09T22:53:59.538Z\",\"details\":{\"name\":\"UpstreamError\",\"upstreamHost\":\"portkey.myce"
+ },
+ {
+  "id": 4,
+  "category": "whatif",
+  "topic": "Was wäre, wenn alle 20 Billiarden Ameisen der Erde sich verbünden und die Menschheit angreifen?",
+  "status": "error",
+  "created": 1794264913.5063558,
+  "trend": {
+   "title": "ich🐜iel",
+   "source": "Reddit r/ich_iel"
+  },
+  "error": "Kein Text-Anbieter erreichbar. gemini: Gemini HTTP 404: {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://aistudio.google.com/docs/get- | pollinations: Pollinations-Text HTTP 400: {\"success\":false,\"error\":{\"message\":\"The model exhausted its output token limit before producing an answer. Increase the token limit or reduce reasoning effort.\",\"code\":\"output_token_limit_exceeded\",\"timestamp\":\"2026-11-09T23:03:17.934Z\",\"details\":{\"name\":\"UpstreamError\",\"upstreamHost\":\"portkey.myce"
  }
 ]
