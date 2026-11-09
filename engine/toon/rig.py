@@ -72,140 +72,165 @@ class Pose:
 
 
 # ------------------------------------------------------------------ Zeichnen
+# Stil: Mischung aus Strichmännchen und niedlichem Cartoon – großer runder Kopf mit großen Augen und roten Wangen,
+# kleiner Bohnen-Körper in Farbe, dünne Strich-Arme und -Beine, überall kräftige dunkle Umrisse.
 
-def _limb(d, p0, a1, l1, a2, l2, w, col):
-    """Zwei Segmente (Ober-/Unterteil) mit runden Gelenken. Winkel in Grad ab senkrecht nach unten."""
-    x0, y0 = p0
-    x1 = x0 + math.sin(math.radians(a1)) * l1
-    y1 = y0 + math.cos(math.radians(a1)) * l1
-    x2 = x1 + math.sin(math.radians(a1 + a2)) * l2
-    y2 = y1 + math.cos(math.radians(a1 + a2)) * l2
-    for (ax, ay), (bx, by) in (((x0, y0), (x1, y1)), ((x1, y1), (x2, y2))):
-        d.line((ax, ay, bx, by), fill=col, width=int(w))
-    for (cx, cy) in ((x0, y0), (x1, y1), (x2, y2)):
-        r = w / 2
-        d.ellipse((cx - r, cy - r, cx + r, cy + r), fill=col)
-    return x2, y2
+OUT = 7          # Umriss-Stärke (px bei Maßstab 1)
+CHEEK = (255, 150, 150)
 
 
-def _eye(d, cx, cy, r, kind, look, flip):
-    white = (250, 250, 248)
-    if kind == "closed":
-        d.arc((cx - r, cy - r * 0.4, cx + r, cy + r * 0.9), 200, 340, fill=white, width=int(r * 0.32))
+def _pt(p0, ang, ln):
+    return p0[0] + math.sin(math.radians(ang)) * ln, p0[1] + math.cos(math.radians(ang)) * ln
+
+
+def _stroke(d, pts, w, col):
+    for a, b in zip(pts, pts[1:]):
+        d.line((a[0], a[1], b[0], b[1]), fill=col, width=int(w))
+    for x, y in pts:
+        d.ellipse((x - w / 2, y - w / 2, x + w / 2, y + w / 2), fill=col)
+
+
+def _blob(d, box, fill, o):
+    x0, y0, x1, y1 = box
+    d.ellipse((x0 - o, y0 - o, x1 + o, y1 + o), fill=INK)
+    d.ellipse(box, fill=fill)
+
+
+def _eye(d, cx, cy, r, kind, look):
+    white = (255, 255, 255)
+    if kind in ("closed", "happy"):
+        box = (cx - r, cy - r * 0.5, cx + r, cy + r * 1.1)
+        if kind == "happy":
+            d.arc(box, 200, 340, fill=INK, width=int(r * 0.42))
+        else:
+            d.arc((cx - r, cy - r * 1.1, cx + r, cy + r * 0.5), 20, 160, fill=INK, width=int(r * 0.38))
         return
-    if kind == "happy":
-        d.arc((cx - r, cy - r * 0.2, cx + r, cy + r * 1.6), 200, 340, fill=white, width=int(r * 0.38))
-        return
-    rx, ry = r, r * 1.18
-    if kind == "wide":
-        rx, ry = r * 1.18, r * 1.4
+    rx, ry = (r * 1.15, r * 1.4) if kind == "wide" else (r, r * 1.2)
+    d.ellipse((cx - rx - r * 0.22, cy - ry - r * 0.22, cx + rx + r * 0.22, cy + ry + r * 0.22), fill=INK)
     d.ellipse((cx - rx, cy - ry, cx + rx, cy + ry), fill=white)
-    pr = r * (0.34 if kind == "wide" else 0.5)
-    px = cx + look * r * 0.38 * flip
-    py = cy + (r * 0.15 if kind in ("sad", "worried") else r * 0.05)
+    pr = r * (0.42 if kind == "wide" else 0.66)
+    px = cx + look * (rx - pr) * 0.8
+    py = cy + (ry - pr) * (0.5 if kind in ("sad", "worried") else 0.15)
     d.ellipse((px - pr, py - pr, px + pr, py + pr), fill=INK)
-    d.ellipse((px - pr * 0.35 + pr * 0.3, py - pr * 0.7, px + pr * 0.1 + pr * 0.3, py - pr * 0.25), fill=white)
+    hr = pr * 0.38
+    d.ellipse((px + pr * 0.15, py - pr * 0.7, px + pr * 0.15 + hr * 2, py - pr * 0.7 + hr * 2), fill=white)
 
 
 def draw(look: Look, pose: Pose, facing=1, scale=1.0):
     """Zeichnet die Figur und gibt (RGBA-Bild, Fußpunkt-x, Fußpunkt-y) im Maßstab 1 zurück."""
     k = SS * scale * look.size
-    W, H = int(520 * k), int(760 * k)
+    W, H = int(600 * k), int(740 * k)
     im = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(im)
-    foot_x, foot_y = W / 2, H - 40 * k
-    hip = (foot_x, foot_y - 220 * k * pose.squash - pose.lift * k)
-    leg_w, arm_w = 26 * k, 24 * k
-    shirt, dark = look.shirt, tuple(max(0, int(c * 0.78)) for c in look.shirt)
-    f = facing
+    f, o = facing, OUT * k
+    foot_x, foot_y = W / 2, H - 36 * k
+    leg1, leg2, arm1, arm2 = 62 * k, 62 * k, 58 * k, 54 * k
+    lw = 15 * k
+    hip = (foot_x, foot_y - (leg1 + leg2) * pose.squash - pose.lift * k)
+    lean = pose.lean * f
+    bh, bw = 128 * k * pose.squash, 104 * k
+    top = _pt(hip, 180 - lean, bh)                       # Hals
+    shoulder = _pt(hip, 180 - lean, bh * 0.74)
+    skin = look.skin if look.skin != SKINS["schwarz"] else (252, 250, 244)   # heller Kopf wirkt freundlicher
+    dark = tuple(max(0, int(c * 0.8)) for c in look.shirt)
 
-    # Beine (hinteres zuerst)
-    for a, kn, col in ((pose.leg_l, pose.knee_l, tuple(int(c * 0.82) for c in look.pants)), (pose.leg_r, pose.knee_r, look.pants)):
-        end = _limb(d, (hip[0] + (-10 if a > 0 else 10) * k * f * 0, hip[1]), a * f, 108 * k, -kn * f, 112 * k, leg_w, col)
-        sx, sy = end
-        d.rounded_rectangle((sx - 18 * k + 14 * k * f, sy - 10 * k, sx + 22 * k + 14 * k * f, sy + 16 * k), 10 * k, fill=INK)
+    def limb(p0, a1, l1, a2, l2, hand=None, shoe=False):
+        p1 = _pt(p0, a1, l1)
+        p2 = _pt(p1, a1 + a2, l2)
+        _stroke(d, [p0, p1, p2], lw, INK)
+        if hand:
+            r = 15 * k
+            _blob(d, (p2[0] - r, p2[1] - r, p2[0] + r, p2[1] + r), hand, o * 0.7)
+        if shoe:
+            d.rounded_rectangle((p2[0] - 16 * k + 12 * k * f, p2[1] - 12 * k, p2[0] + 22 * k + 12 * k * f, p2[1] + 14 * k), 12 * k, fill=INK)
+        return p2
 
-    # Rumpf
-    lean = math.radians(pose.lean * f)
-    th = 190 * k * pose.squash
-    neck = (hip[0] + math.sin(lean) * th, hip[1] - math.cos(lean) * th)
-    shoulder = (hip[0] + math.sin(lean) * th * 0.86, hip[1] - math.cos(lean) * th * 0.86)
+    # hinterer Arm, Beine
+    limb(shoulder, pose.arm_l * f + lean, arm1, pose.fore_l * f, arm2, hand=skin)
+    hl = (hip[0] - 20 * k, hip[1] - 8 * k)
+    hr_ = (hip[0] + 20 * k, hip[1] - 8 * k)
+    limb(hl, pose.leg_l * f, leg1, -pose.knee_l * f, leg2, shoe=True)
+    limb(hr_, pose.leg_r * f, leg1, -pose.knee_r * f, leg2, shoe=True)
 
-    # hinterer Arm (hinter dem Körper)
-    _limb(d, shoulder, pose.arm_l * f + pose.lean * f, 92 * k, pose.fore_l * f, 88 * k, arm_w, dark)
-    # Rumpf als Kapsel (dicke Linie mit runden Enden) plus Kapuzenkragen
-    bw = 104 * k
-    top = (hip[0] + math.sin(lean) * (th - bw * 0.35), hip[1] - math.cos(lean) * (th - bw * 0.35))
-    bot = (hip[0] + math.sin(lean) * bw * 0.2, hip[1] - math.cos(lean) * bw * 0.2)
-    d.line((bot[0], bot[1], top[0], top[1]), fill=shirt, width=int(bw))
-    for cx, cy in (top, bot):
-        d.ellipse((cx - bw / 2, cy - bw / 2, cx + bw / 2, cy + bw / 2), fill=shirt)
-    d.ellipse((neck[0] - 50 * k, neck[1] - 6 * k, neck[0] + 50 * k, neck[1] + 34 * k), fill=dark)
+    # Bohnen-Körper (Kapsel mit Umriss), unten etwas breiter
+    b0 = _pt(hip, 180 - lean, bw * 0.42)
+    b1 = _pt(hip, 180 - lean, bh - bw * 0.40)
+    _stroke(d, [b0, b1], bw + 2 * o, INK)
+    _stroke(d, [b0, b1], bw, look.shirt)
+    belly = _pt(hip, 180 - lean, bw * 0.40)
+    d.ellipse((belly[0] - bw * 0.30 + 8 * k * f, belly[1] - bw * 0.26, belly[0] + bw * 0.30 + 8 * k * f, belly[1] + bw * 0.30),
+              fill=tuple(min(255, int(c * 1.14 + 10)) for c in look.shirt))   # heller Bauchfleck
 
     # Kopf
-    hr = 74 * k
-    ha = math.radians(pose.head * f) + lean
-    hc = (neck[0] + math.sin(ha) * hr * 1.0, neck[1] - math.cos(ha) * hr * 1.0)
+    hr = 98 * k
+    ha = pose.head * f + lean
+    hc = _pt(top, 180 - ha, hr * 0.82)
     if look.hair == "long":
-        d.rounded_rectangle((hc[0] - hr * 1.05, hc[1] - hr * 0.6, hc[0] + hr * 1.05, hc[1] + hr * 1.25), hr * 0.5, fill=(60, 40, 30))
-    d.ellipse((hc[0] - hr, hc[1] - hr, hc[0] + hr, hc[1] + hr), fill=look.skin)
+        d.rounded_rectangle((hc[0] - hr * 1.08 - o, hc[1] - hr * 0.5, hc[0] + hr * 1.08 + o, hc[1] + hr * 1.3 + o), hr * 0.5, fill=INK)
+        d.rounded_rectangle((hc[0] - hr * 1.08, hc[1] - hr * 0.5, hc[0] + hr * 1.08, hc[1] + hr * 1.3), hr * 0.5, fill=(96, 62, 44))
     if look.hair == "bun":
-        d.ellipse((hc[0] - hr * 0.35, hc[1] - hr * 1.45, hc[0] + hr * 0.35, hc[1] - hr * 0.8), fill=(60, 40, 30))
-    # Augen
-    ex = hc[0] + 14 * k * f
-    ey = hc[1] - 6 * k
-    er = 17 * k
-    for dx in (-24 * k, 24 * k):
-        _eye(d, ex + dx, ey, er, pose.eyes, pose.look if pose.look else 0.6 * f, 1)
-    # Augenbrauen bei Gefühlen
+        _blob(d, (hc[0] - hr * 0.4, hc[1] - hr * 1.5, hc[0] + hr * 0.4, hc[1] - hr * 0.8), (96, 62, 44), o)
+    _blob(d, (hc[0] - hr, hc[1] - hr * 0.94, hc[0] + hr, hc[1] + hr * 0.94), skin, o)
+    if look.hair in ("long", "bun"):
+        d.chord((hc[0] - hr, hc[1] - hr * 0.94, hc[0] + hr, hc[1] + hr * 0.5), 185, 355, fill=(96, 62, 44))
+    # Gesicht (leicht in Blickrichtung versetzt)
+    ex, ey, er = hc[0] + 16 * k * f, hc[1] + 2 * k, 23 * k
+    lk = pose.look if pose.look else 0.45 * f
+    for sgn in (-1, 1):
+        _eye(d, ex + sgn * 36 * k, ey, er, pose.eyes, lk)
+        cx, cy = ex + sgn * 62 * k, ey + 40 * k
+        d.ellipse((cx - 17 * k, cy - 10 * k, cx + 17 * k, cy + 10 * k), fill=CHEEK)
     if pose.eyes in ("angry", "sad", "worried"):
-        light = (250, 250, 248)
-        for s in (-1, 1):
-            x0 = ex + s * 24 * k
-            if pose.eyes == "angry":
-                d.line((x0 - 16 * k, ey - 34 * k - s * 6 * k, x0 + 16 * k, ey - 34 * k + s * 6 * k), fill=light, width=int(6 * k))
-            else:
-                d.line((x0 - 16 * k, ey - 32 * k + s * 6 * k, x0 + 16 * k, ey - 32 * k - s * 6 * k), fill=light, width=int(6 * k))
-    # Mund
-    mx, my = ex, hc[1] + 36 * k
-    mcol = (250, 250, 248) if look.skin == SKINS["schwarz"] else INK
+        for sgn in (-1, 1):
+            x0, y0 = ex + sgn * 36 * k, ey - 44 * k
+            dy = (8 if pose.eyes == "angry" else -8) * k * sgn
+            d.line((x0 - 20 * k, y0 - dy, x0 + 20 * k, y0 + dy), fill=INK, width=int(8 * k))
+    mx, my = ex, ey + 46 * k
     if pose.mouth > 0.08:
-        mh = 6 * k + pose.mouth * 22 * k
-        d.ellipse((mx - 12 * k, my - mh / 2, mx + 12 * k, my + mh / 2), fill=mcol)
-    elif pose.smile > 0.2:
-        d.arc((mx - 18 * k, my - 16 * k, mx + 18 * k, my + 8 * k), 20, 160, fill=mcol, width=int(5 * k))
+        mh = 8 * k + pose.mouth * 26 * k
+        d.ellipse((mx - 15 * k, my - mh / 2, mx + 15 * k, my + mh / 2), fill=INK)
+        d.ellipse((mx - 8 * k, my + mh * 0.05, mx + 8 * k, my + mh * 0.42), fill=(240, 110, 110))
     elif pose.smile < -0.2:
-        d.arc((mx - 16 * k, my - 2 * k, mx + 16 * k, my + 22 * k), 200, 340, fill=mcol, width=int(5 * k))
+        d.arc((mx - 16 * k, my - 4 * k, mx + 16 * k, my + 20 * k), 200, 340, fill=INK, width=int(6 * k))
+    else:
+        wdt = (20 + 8 * max(0, pose.smile)) * k
+        d.arc((mx - wdt, my - 22 * k, mx + wdt, my + 8 * k), 25, 155, fill=INK, width=int(6 * k))
     if look.glasses:
-        for dx in (-24 * k, 24 * k):
-            d.ellipse((ex + dx - 24 * k, ey - 24 * k, ex + dx + 24 * k, ey + 24 * k), outline=(250, 250, 248), width=int(4 * k))
-        d.line((ex - 2 * k, ey, ex + 2 * k, ey), fill=(250, 250, 248), width=int(4 * k))
+        for sgn in (-1, 1):
+            d.ellipse((ex + sgn * 36 * k - 34 * k, ey - 36 * k, ex + sgn * 36 * k + 34 * k, ey + 36 * k), outline=INK, width=int(6 * k))
     # Kopfbedeckung
-    hcx, top = hc[0], hc[1] - hr
-    if look.hat == "cap":
-        d.chord((hcx - hr * 0.98, top - 6 * k, hcx + hr * 0.98, top + hr * 1.1), 180, 360, fill=look.hat_color)
-        d.rounded_rectangle((hcx + (10 if f > 0 else -110) * k, top + hr * 0.42, hcx + (110 if f > 0 else -10) * k, top + hr * 0.58), 6 * k, fill=look.hat_color)
-    elif look.hat == "helmet":
-        d.chord((hcx - hr * 1.04, top - 10 * k, hcx + hr * 1.04, top + hr * 1.2), 180, 360, fill=(236, 128, 44))
-        d.ellipse((hcx + 30 * k * f - 14 * k, top + 6 * k, hcx + 30 * k * f + 14 * k, top + 34 * k), fill=(255, 240, 160))
-    elif look.hat == "beanie":
-        d.chord((hcx - hr * 1.0, top - 16 * k, hcx + hr * 1.0, top + hr * 1.1), 180, 360, fill=look.hat_color)
-        d.ellipse((hcx - 14 * k, top - 34 * k, hcx + 14 * k, top - 6 * k), fill=look.hat_color)
+    hcx, ty = hc[0], hc[1] - hr * 0.94
+    hat_box = (hcx - hr * 1.02, ty - 10 * k, hcx + hr * 1.02, ty + hr * 1.25)
+    if look.hat in ("cap", "helmet", "beanie"):
+        col = (242, 140, 40) if look.hat == "helmet" else look.hat_color
+        d.chord((hat_box[0] - o, hat_box[1] - o, hat_box[2] + o, hat_box[3] + o), 180, 360, fill=INK)
+        d.chord(hat_box, 180, 360, fill=col)
+        base = ty + hr * 0.60
+        if look.hat == "cap":
+            x0, x1 = (hcx, hcx + 150 * k) if f > 0 else (hcx - 150 * k, hcx)
+            d.rounded_rectangle((x0, base - 12 * k - o, x1, base + 12 * k), 12 * k, fill=INK)
+            d.rounded_rectangle((x0 + o, base - 12 * k, x1 - o, base + 12 * k - o), 10 * k, fill=col)
+        elif look.hat == "helmet":
+            _blob(d, (hcx + 40 * k * f - 17 * k, ty + 8 * k, hcx + 40 * k * f + 17 * k, ty + 42 * k), (255, 242, 150), o * 0.6)
+        else:
+            _blob(d, (hcx - 20 * k, ty - 44 * k, hcx + 20 * k, ty - 4 * k), col, o * 0.8)
     elif look.hat == "bow":
-        bx, by = hcx - 40 * k * f, top + 14 * k
-        d.polygon([(bx, by), (bx - 30 * k, by - 22 * k), (bx - 30 * k, by + 22 * k)], fill=look.hat_color)
-        d.polygon([(bx, by), (bx + 30 * k, by - 22 * k), (bx + 30 * k, by + 22 * k)], fill=look.hat_color)
+        bx, by = hcx - 56 * k * f, ty + 18 * k
+        for sgn in (-1, 1):
+            d.polygon([(bx, by), (bx + sgn * 44 * k, by - 30 * k), (bx + sgn * 44 * k, by + 30 * k)], fill=INK)
+            d.polygon([(bx + sgn * 6 * k, by), (bx + sgn * 38 * k, by - 20 * k), (bx + sgn * 38 * k, by + 20 * k)], fill=look.hat_color)
     elif look.hat == "crown":
-        y0 = top + 4 * k
-        d.polygon([(hcx - 46 * k, y0), (hcx - 46 * k, y0 - 44 * k), (hcx - 22 * k, y0 - 20 * k), (hcx, y0 - 52 * k),
-                   (hcx + 22 * k, y0 - 20 * k), (hcx + 46 * k, y0 - 44 * k), (hcx + 46 * k, y0)], fill=(246, 196, 40))
+        y0 = ty + 14 * k
+        pts = [(hcx - 56 * k, y0), (hcx - 56 * k, y0 - 54 * k), (hcx - 28 * k, y0 - 26 * k), (hcx, y0 - 64 * k),
+               (hcx + 28 * k, y0 - 26 * k), (hcx + 56 * k, y0 - 54 * k), (hcx + 56 * k, y0)]
+        d.polygon(pts, fill=(250, 200, 40), outline=INK, width=int(o))
 
     # vorderer Arm
-    _limb(d, shoulder, pose.arm_r * f + pose.lean * f, 92 * k, pose.fore_r * f, 88 * k, arm_w, shirt)
+    limb(shoulder, pose.arm_r * f + lean, arm1, pose.fore_r * f, arm2, hand=skin)
 
     if pose.lying:
         im = im.rotate(90 * f, expand=True, resample=Image.BICUBIC)
-        foot_x, foot_y = im.width / 2, im.height - 60 * k
+        foot_x, foot_y = im.width / 2, im.height / 2 + 120 * k
     out = im.resize((max(1, im.width // SS), max(1, im.height // SS)), Image.LANCZOS)
     return out, foot_x / SS, foot_y / SS
 
@@ -239,7 +264,7 @@ def pose_at(action, t, dur, emotion="", mouth=0.0, seed=0):
         p.lift = abs(s(ph)) * (8 if a == "walk" else 18)
         p.lean = 4 if a == "walk" else 14
     elif a == "wave":
-        p.arm_r, p.fore_r = 125, 35 + 30 * s(t * 9)
+        p.arm_r, p.fore_r = 118, 30 + 30 * s(t * 9)
         p.smile = 0.8
         p.head = 4 * s(t * 3)
     elif a == "point":
@@ -248,7 +273,7 @@ def pose_at(action, t, dur, emotion="", mouth=0.0, seed=0):
     elif a in ("shocked", "scared"):
         j = max(0.0, 1 - t / 0.35)
         p.lift = 60 * s(min(1, t / 0.35) * math.pi) if t < 0.35 else 0
-        p.arm_l, p.fore_l, p.arm_r, p.fore_r = 140, 40, 140, -40
+        p.arm_l, p.fore_l, p.arm_r, p.fore_r = -130, -30, 130, 30
         p.eyes = "wide"
         p.lean = -6 + 3 * s(t * 30) * (0.3 + j)
         p.leg_l, p.leg_r = 10, -10
@@ -260,7 +285,7 @@ def pose_at(action, t, dur, emotion="", mouth=0.0, seed=0):
     elif a in ("jump", "happy", "cheer"):
         ph = (t * 2.2) % 1.0
         p.lift = 70 * s(ph * math.pi)
-        p.arm_l, p.fore_l, p.arm_r, p.fore_r = 160, -20, 160, 20
+        p.arm_l, p.fore_l, p.arm_r, p.fore_r = -140, -15, 140, 15
         p.leg_l, p.knee_l, p.leg_r, p.knee_r = 20 * (1 - s(ph * math.pi)), 40 * s(ph * math.pi), -10, 30 * s(ph * math.pi)
         p.eyes, p.smile = "happy", 1
     elif a == "think":
@@ -271,7 +296,7 @@ def pose_at(action, t, dur, emotion="", mouth=0.0, seed=0):
         p.extra["dots"] = int(t * 2.5) % 4
     elif a == "sit":
         p.leg_l, p.knee_l, p.leg_r, p.knee_r = 80, -80, 76, -80
-        p.lift = -95
+        p.lift = -60
         p.arm_r, p.fore_r = 40, 30
     elif a == "sleep":
         p.lying = True
