@@ -126,7 +126,7 @@ def trend_topic(cat: dict):
 
 def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
     secs = int(cfg("target_seconds") or 60)
-    words = round(secs * 2.5)
+    words = round(secs * 2.2)
     scenes = max(6, round(secs / 5))
     char = cfg("main_character") if cfg("use_main_character") else ""
     ctx = ""
@@ -138,7 +138,8 @@ def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
                + "Nutze den Anlass im Hook, erkläre dann den zeitlosen, belegbaren Hintergrund.\n")
     user = (f"Kategorie: {cat['name']}\nStil: {cat['script_style']}\nThema: {topic}\n{ctx}"
             + (f"Zielgruppe: {audience()}\n" if audience() else "")
-            + f"Länge: ca. {words} Wörter gesprochen (≈ {secs} Sekunden), aufgeteilt auf {scenes} Szenen.\n"
+            + f"Länge: HÖCHSTENS {words} Wörter gesprochen insgesamt (≈ {secs} Sekunden) – zähle nach und kürze, wenn es mehr sind. "
+            f"Aufgeteilt auf {scenes} Szenen, also etwa {round(words / scenes)} Wörter pro Szene.\n"
             + (f"Wiederkehrende Hauptfigur (nur wenn passend einbauen, in den Bild-Prompts immer gleich beschreiben): {char}\n" if char else "")
             + FORMAT)
     js, provider = ai.chat_json(SYSTEM, user, 0.9)
