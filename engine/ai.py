@@ -54,25 +54,35 @@ def _gemini(system, user, temperature):
     body = {"systemInstruction": {"parts": [{"text": system}]},
             "contents": [{"role": "user", "parts": [{"text": user}]}],
             "generationConfig": {"temperature": temperature, "responseMimeType": "application/json"}}
-    # 1. Versuch: eingestelltes Modell. Denkt es zu lange (Zeitüberschreitung) oder ist es überlastet,
-    # 2. Versuch: gemini-2.5-flash ohne Denkphase – schnell und für Skripte völlig ausreichend.
-    tries = [(model, body, 240), ("gemini-2.5-flash",
-             {**body, "generationConfig": {**body["generationConfig"], "thinkingConfig": {"thinkingBudget": 0}}}, 180)]
-    last = None
-    for m, b, to in tries:
+    # 1. Versuch: eingestelltes Modell mit kurzer Denkphase (thinkingLevel low) – ohne diese Vorgabe denken
+    #    die neuen Flash-Modelle oft mehrere Minuten. Kennt das Modell die Vorgabe nicht, ohne sie.
+    # 2. Versuch: gemini-flash-lite-latest – sehr schnell, reicht notfalls für Skripte.
+    gc = body["generationConfig"]
+    tries = [(model, {**body, "generationConfig": {**gc, "thinkingConfig": {"thinkingLevel": "low"}}}, 150),
+             (model, body, 150),
+             ("gemini-flash-lite-latest", body, 120)]
+    last, skip_plain = None, True
+    for n, (m, b, to) in enumerate(tries):
+        if n == 1 and skip_plain:
+            continue   # nur nötig, wenn das Modell thinkingLevel ablehnt
         try:
             r = requests.post(f"https://generativelanguage.googleapis.com/v1beta/models/{m}:generateContent",
                               headers={"x-goog-api-key": key}, json=b, timeout=to)
-            if r.status_code in (429, 500, 503) and m != tries[-1][0]:
+            if n == 0 and r.status_code == 400 and "think" in r.text.lower():
+                skip_plain = False
+                continue
+            if r.status_code in (404, 429, 500, 503) and n < len(tries) - 1:
                 last = ProviderError(f"Gemini {m}: HTTP {r.status_code}")
-                log(f"Gemini {m} überlastet (HTTP {r.status_code}), nehme gemini-2.5-flash")
+                log(f"Gemini {m}: HTTP {r.status_code}, versuche Ersatzmodell")
+                skip_plain = True
                 continue
             _check(r, "Gemini")
             parts = r.json()["candidates"][0]["content"]["parts"]
             return "".join(p.get("text", "") for p in parts if not p.get("thought"))
         except requests.Timeout as e:
             last = e
-            log(f"Gemini {m} antwortet nicht rechtzeitig, nehme ein schnelleres Modell")
+            skip_plain = True
+            log(f"Gemini {m} antwortet nicht rechtzeitig, versuche Ersatzmodell")
     raise ProviderError(f"Gemini: {last}")
 
 
