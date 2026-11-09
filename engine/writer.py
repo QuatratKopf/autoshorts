@@ -1,5 +1,6 @@
 """Themenfindung (auch aus aktuellen Trends) und Drehbuch mit Titel, Beschreibung, Tags und Thumbnail-Idee."""
 import datetime as dt
+import os
 
 from . import ai, trends
 from .state import VIDEOS, cfg
@@ -62,6 +63,22 @@ Einblendungen (overlay) – nutze sie in etwa jeder zweiten Szene, passend zum I
 - {"type": "bar", "label": "WASSER", "value": 24}  Füllstand/Prozent/Energie
 - {"type": "choice", "a": "Im Bunker bleiben", "b": "Zu Mama rennen"}  NUR in der letzten Szene von Geschichten: Was würdest du tun?
 Kamera: 'shake' bei Schreck/Aufprall (mit sfx 'boom'), sonst ruhige Fahrten; sfx sparsam (nicht in jeder Szene)."""
+
+TOON = """
+EIGENE ANIMATION: Das Video wird mit fertigen Cartoon-Figuren und festen Orten animiert. Fülle deshalb zusätzlich aus:
+- "cast": Aussehen je Figur als Objekt, z. B. {"mia": {"shirt": "blau", "hat": "", "hair": "long", "glasses": false, "skin": "weiß"}}
+  shirt/hat_color: blau, rot, grün, gelb, orange, lila, pink, türkis, grau, braun · hat: cap, helmet, beanie, bow, crown oder ""
+  hair: long, bun oder "" · skin: weiß, hell, mittel, dunkel · höchstens 3 Figuren, jede klar unterscheidbar.
+- In jeder Szene:
+  "place": einer von bedroom, livingroom, street, basement, park, space, lab, classroom (nur diese!)
+  "time": "day" oder "night"
+  "actors": 1–2 Figuren, z. B. [{"id": "mia", "action": "run", "emotion": "scared", "pos": "offleft", "to": "center", "speaks": true}]
+     action: idle, talk, walk, run, wave, point, shocked, sad, jump, think, sit, sleep, dance, look_around
+     emotion: happy, sad, angry, scared, worried, shocked oder ""
+     pos / to: left, center, right, offleft, offright ("to" nur wenn die Figur sich bewegt)
+     speaks: true bei der Figur, die in dieser Szene „spricht“ bzw. um die es geht
+- Schreibe die Geschichte so, dass sie mit diesen Orten und Aktionen gezeigt werden kann. Erklärendes (Zahlen, Listen, Regeln)
+  kommt in die Einblendungen (overlay). "image" trotzdem kurz auf Englisch ausfüllen (wird fürs Titelbild genutzt)."""
 
 UNSUITABLE = ("Ungeeignet sind: Todesfälle, Unglücke, Verbrechen, Krieg, Terror, Krankheiten einzelner Personen, "
               "Parteipolitik und Wahlen, Klatsch über Privatleben, Glücksspiel, geschützte Film-/Spielfiguren und Marken als Hauptthema, reine Sport-Ergebnisse ohne Hintergrundgeschichte "
@@ -128,7 +145,8 @@ def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
     secs = int(cfg("target_seconds") or 60)
     words = round(secs * 2.2)
     scenes = max(6, round(secs / 5))
-    char = cfg("main_character") if cfg("use_main_character") else ""
+    toon = str(os.environ.get("AS_VISUAL") or cfg("visual_mode") or "ai") == "toon"
+    char = cfg("main_character") if cfg("use_main_character") and not toon else ""
     ctx = ""
     if trend:
         heads = "\n".join(f"- {n['title']} ({n.get('source', '')})" for n in trend.get("news", []))
@@ -141,12 +159,13 @@ def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
             + f"Länge: HÖCHSTENS {words} Wörter gesprochen insgesamt (≈ {secs} Sekunden) – zähle nach und kürze, wenn es mehr sind. "
             f"Aufgeteilt auf {scenes} Szenen, also etwa {round(words / scenes)} Wörter pro Szene.\n"
             + (f"Wiederkehrende Hauptfigur (nur wenn passend einbauen, in den Bild-Prompts immer gleich beschreiben): {char}\n" if char else "")
-            + FORMAT)
+            + FORMAT + (TOON if toon else ""))
     js, provider = ai.chat_json(SYSTEM, user, 0.9)
     sc = [s for s in js.get("scenes", []) if str(s.get("text", "")).strip()]
     if len(sc) < 3:
         raise ai.ProviderError("Drehbuch hat zu wenige Szenen")
-    cast = {str(k): str(v) for k, v in (js.get("cast") or {}).items() if v} if isinstance(js.get("cast"), dict) else {}
+    raw_cast = js.get("cast") if isinstance(js.get("cast"), dict) else {}
+    cast = {str(k): (str(v) if not isinstance(v, dict) else "") for k, v in raw_cast.items() if v}
     places = {str(k): str(v) for k, v in (js.get("places") or {}).items() if v} if isinstance(js.get("places"), dict) else {}
     for s in sc:
         s["text"] = " ".join(str(s["text"]).split())
@@ -171,6 +190,7 @@ def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
     return {"title": str(js.get("title") or topic)[:95], "description": str(js.get("description") or ""),
             "hashtags": tags[:10], "tags": [str(t).strip("# ")[:60] for t in js.get("tags", []) if str(t).strip("# ")][:15],
             "thumbnail": {"image": str(th.get("image") or sc[0]["image"]), "text": str(th.get("text") or "").strip()[:40]},
+            "toon": toon, "cast": {str(k): v for k, v in raw_cast.items() if isinstance(v, dict)},
             "scenes": sc, "hud": str(js.get("hud") or "").strip()[:28],
             "countdown": js.get("countdown") if isinstance(js.get("countdown"), dict) else None}, provider
 

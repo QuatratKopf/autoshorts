@@ -128,6 +128,7 @@ DEFAULT_SETTINGS = {
     "subtitles_lowercase": True,
     "music_volume": 0.10,
     "sfx_volume": 0.35,
+    "visual_mode": "ai",           # ai = KI-Bilder · toon = eigene Animations-Engine (Figuren + Orte)
     "youtube_enabled": True,
     "youtube_privacy": "public",
     "youtube_category": "24",

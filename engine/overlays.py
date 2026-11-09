@@ -15,6 +15,7 @@ RED = (226, 58, 52)
 GREEN = (52, 168, 83)
 NOTE = (255, 224, 102)
 BLUE = (37, 99, 235)
+TALL = ("phone", "checklist", "note")   # hohe Einblendungen: Figuren werden dafür kleiner gezeichnet
 
 
 def font(size, weight="ExtraBold"):

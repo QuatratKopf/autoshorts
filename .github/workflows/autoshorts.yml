@@ -28,6 +28,9 @@ on:
       trend:
         default: ""
         type: string
+      visual:
+        description: "Bildmodus nur für diesen Lauf: ai | toon (leer = Einstellung)"
+        required: false
 
 permissions:
   contents: write
@@ -47,6 +50,7 @@ jobs:
       IN_UPLOAD: ${{ inputs.upload || '1' }}
       IN_ID: ${{ inputs.video_id }}
       IN_TREND: ${{ inputs.trend }}
+      AS_VISUAL: ${{ inputs.visual }}
     steps:
       - uses: actions/checkout@v4
 

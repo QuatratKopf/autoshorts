@@ -148,7 +148,16 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None):
 
         seed = random.randint(1, 10_000_000)
         img_used = set()
-        for i, sc in enumerate(scenes):
+        toon = bool(script.get("toon"))
+        if toon:
+            from .toon import stage
+            log("Animiere Szenen …")
+            for i, (sc, (s0, e0)) in enumerate(zip(scenes, times)):
+                d = (e0 - s0) + (0.35 if i == len(scenes) - 1 else 0.25)
+                stage.render_scene(sc, script.get("cast") or {}, d, work / f"toon{i:02d}.mp4", words, s0, work / f"img{i:02d}.jpg")
+                log(f"Szene {i + 1}/{len(scenes)} animiert")
+            img_used.add("toon")
+        for i, sc in enumerate([] if toon else scenes):
             out = work / f"img{i:02d}.jpg"
             try:
                 img_used.add(ai.image(writer.image_prompt(sc, cat), out, seed + i * 7))
@@ -165,9 +174,12 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None):
             log("Gestalte Thumbnail …")
             raw = work / "cover_raw.jpg"
             try:
+                if toon:
+                    raise RuntimeError("eigene Animation")
                 ai.image(writer.image_prompt({"image": script["thumbnail"]["image"]}, cat), raw, seed + 999)
             except Exception as e:  # noqa: BLE001
-                log(f"Thumbnail-Bild fehlgeschlagen ({e}) – nehme das erste Szenenbild")
+                if not toon:
+                    log(f"Thumbnail-Bild fehlgeschlagen ({e}) – nehme das erste Szenenbild")
                 shutil.copy(work / "img00.jpg", raw)
             cover = OUT / f"{vid}-cover.jpg"
             thumbnail.make_thumbnail(raw, script["thumbnail"]["text"] or script["title"], cover)
@@ -175,7 +187,7 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None):
         log("Schneide Video …")
         ass = work / "subs.ass"
         render.build_ass(words, scenes, times, ass, bool(cfg("subtitles_lowercase")),
-                         script.get("hud"), script.get("countdown"))
+                         script.get("hud"), script.get("countdown"), 480 if toon else 560)
         v["cover_ms"] = render.render(work, scenes, times, voice, ass, final, render.pick_music(cat["slug"]),
                                       float(cfg("music_volume") or 0.1), cover,
                                       float(cfg("sfx_volume") if cfg("sfx_volume") is not None else 0.35))

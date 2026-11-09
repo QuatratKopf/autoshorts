@@ -52,7 +52,7 @@ def _clean(w, lower):
     return w.lower() if lower else w.upper()
 
 
-def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None):
+def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, margin=560):
     # Wörter zu kurzen Häppchen (1–2 Wörter, max. 14 Zeichen) zusammenfassen
     chunks, cur = [], []
     for w, s, e in words:
@@ -122,7 +122,7 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Cap,{FONT},{86 if lower else 92},&H00FFFFFF,&H00FFFFFF,&H00141414,&H96000000,-1,0,0,0,100,100,{0 if lower else 2},0,1,8,4,2,60,60,560,1
+Style: Cap,{FONT},{86 if lower else 92},&H00FFFFFF,&H00FFFFFF,&H00141414,&H96000000,-1,0,0,0,100,100,{0 if lower else 2},0,1,8,4,2,60,60,{margin},1
 Style: Hud,{FONT},54,&H00FFFFFF,&H00FFFFFF,&H00141414,&H64000000,-1,0,0,0,100,100,1,0,1,5,2,7,60,60,190,1
 Style: Cnt,{FONT},76,&H003FD2FF,&H003FD2FF,&H00141414,&H64000000,-1,0,0,0,100,100,1,0,1,6,2,9,60,60,170,1
 
@@ -137,7 +137,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 MOTIONS = ("zoom_in", "zoom_out", "pan_left", "pan_right", "pan_up", "zoom_in")
 
 
-def scene_clip(img, dur, out, idx, motion=None, ov=None, work=None):
+def scene_clip(img, dur, out, idx, motion=None, ov=None, work=None, video=False):
     """Bild → bewegter Clip: Kamerafahrt + leichtes „Atmen“, optional Wackeln, darüber die Einblendung."""
     f = max(2, round(dur * FPS))
     motion = motion if motion in ("zoom_in", "zoom_out", "pan_left", "pan_right", "pan_up", "shake", "still") \
@@ -156,7 +156,11 @@ def scene_clip(img, dur, out, idx, motion=None, ov=None, work=None):
     elif motion == "shake":   # kräftig am Anfang, klingt ab
         x = f"iw/2-iw/zoom/2+38*sin(on*2.3)*max(0,1-on/14)"
         y = f"ih/2-ih/zoom/2+30*cos(on*2.9)*max(0,1-on/14)"
-    vf = (f"scale={W * 2}:{H * 2}:flags=lanczos,zoompan=z='{z}+{breath}':x='{x}':y='{y}':d={f}:s={W}x{H}:fps={FPS}")
+    if video:   # fertig animierte Szene: nur sanfte Kamerafahrt darüber (kleinerer Zoom, damit nichts abgeschnitten wird)
+        z = {"zoom_in": f"1+0.07*on/{f}", "zoom_out": f"1.07-0.07*on/{f}", "shake": "1.05", "still": "1"}.get(motion, "1.05")
+        vf = f"zoompan=z='{z}':x='{x}':y='{y}':d=1:s={W}x{H}:fps={FPS}"
+    else:
+        vf = (f"scale={W * 2}:{H * 2}:flags=lanczos,zoompan=z='{z}+{breath}':x='{x}':y='{y}':d={f}:s={W}x{H}:fps={FPS}")
     args = ["-i", str(img)]
     fc = f"[0:v]{vf},format=yuv420p[bg]"
     last = "bg"
@@ -165,8 +169,16 @@ def scene_clip(img, dur, out, idx, motion=None, ov=None, work=None):
         if res:
             pattern, cy, ow, oh = res
             args += ["-framerate", str(FPS), "-i", pattern]
-            ox, oy = (W - ow) // 2, max(140, min(H - oh - 520, cy - oh // 2))
-            fc += f";[1:v]format=rgba,setpts=PTS+0.18/TB[ov];[bg][ov]overlay={ox}:{oy}:eof_action=repeat:format=auto[vo]"
+            scale = ""
+            if video:   # animierte Szene: Einblendung in den freien Bereich über den Figuren einpassen
+                limit = 560 if str(ov.get("type")) in overlays.TALL else 330
+                k = min(1.0, limit / oh)
+                ow, oh = int(ow * k) // 2 * 2, int(oh * k) // 2 * 2
+                scale = f"scale={ow}:{oh}:flags=lanczos,"
+                ox, oy = (W - ow) // 2, 285
+            else:
+                ox, oy = (W - ow) // 2, max(140, min(H - oh - 520, cy - oh // 2))
+            fc += f";[1:v]format=rgba,{scale}setpts=PTS+0.18/TB[ov];[bg][ov]overlay={ox}:{oy}:eof_action=repeat:format=auto[vo]"
             last = "vo"
     ff([*args, "-filter_complex", fc + f";[{last}]setsar=1,format=yuv420p[out]", "-map", "[out]", "-frames:v", str(f),
         "-c:v", "libx264", "-preset", "veryfast", "-crf", "19", "-r", str(FPS), str(out)])
@@ -218,7 +230,11 @@ def render(work: Path, scenes, times, voice, ass, out, music=None, music_volume=
     for i, sc in enumerate(scenes):
         clip = work / f"clip{i:02d}.mp4"
         extra = XF if i < n - 1 else 0          # Überlappung für den Übergang zur nächsten Szene
-        scene_clip(work / f"img{i:02d}.jpg", durs[i] + extra, clip, i, sc.get("camera"), sc.get("overlay"), work)
+        toon = work / f"toon{i:02d}.mp4"
+        if toon.exists():
+            scene_clip(toon, durs[i] + extra, clip, i, sc.get("camera"), sc.get("overlay"), work, video=True)
+        else:
+            scene_clip(work / f"img{i:02d}.jpg", durs[i] + extra, clip, i, sc.get("camera"), sc.get("overlay"), work)
         clips.append(clip)
         log(f"Szene {i + 1}/{n} geschnitten")
 
