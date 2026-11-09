@@ -58,8 +58,8 @@ def _gemini(system, user, temperature):
     #    die neuen Flash-Modelle oft mehrere Minuten. Kennt das Modell die Vorgabe nicht, ohne sie.
     # 2. Versuch: gemini-flash-lite-latest – sehr schnell, reicht notfalls für Skripte.
     gc = body["generationConfig"]
-    tries = [(model, {**body, "generationConfig": {**gc, "thinkingConfig": {"thinkingLevel": "low"}}}, 150),
-             (model, body, 150),
+    tries = [(model, {**body, "generationConfig": {**gc, "thinkingConfig": {"thinkingLevel": "low"}}}, 75),
+             (model, body, 75),
              ("gemini-flash-lite-latest", body, 120)]
     last, skip_plain = None, True
     for n, (m, b, to) in enumerate(tries):
@@ -333,6 +333,9 @@ def _openai_img(prompt, seed):
 IMAGE_PROVIDERS = {"cloudflare": _cloudflare, "pollinations": _pollinations_img, "openai": _openai_img}
 
 
+_img_warned = set()
+
+
 def image(prompt: str, out, seed: int) -> str:
     chosen = cfg("image_provider") or "cloudflare"
     order = [chosen] + [p for p in ("cloudflare", "pollinations") if p != chosen]
@@ -344,6 +347,9 @@ def image(prompt: str, out, seed: int) -> str:
                 return p
             except Exception as e:  # noqa: BLE001
                 err = str(e)
+                if p not in _img_warned:   # einmal pro Lauf zeigen, warum ein Anbieter ausfällt
+                    _img_warned.add(p)
+                    log(f"Bilder über {p} fehlgeschlagen: {err[:300]}")
                 if "fehlt" in err or "kein " in err:
                     break
         errors.append(f"{p}: {err}")
