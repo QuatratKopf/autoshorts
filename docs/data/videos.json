@@ -87,5 +87,44 @@
   },
   "thumb": true,
   "mp4": true
+ },
+ {
+  "id": 6,
+  "category": "fakten",
+  "topic": "Warum Flamingos rosa sind",
+  "status": "rendered",
+  "created": 1794266464.5832949,
+  "title": "Flamingos: Warum diese Vögel rosa sind",
+  "description": "Wusstest du eigentlich, dass Flamingos nicht als rosa Vögel zur Welt kommen? Wir erklären dir den echten Grund für ihre knallige Farbe und warum das ziemlich verrückt ist. Schreib uns in die Kommentare, welche Tierfarbe dich am meisten überrascht hat!",
+  "hashtags": [
+   "#shorts",
+   "#tierfakten",
+   "#wissen",
+   "#fy",
+   "#foryou",
+   "#viral",
+   "#animals",
+   "#tiktokdeutschland"
+  ],
+  "tags": [
+   "tierfakten",
+   "flamingos",
+   "wissen",
+   "biologie",
+   "tiere",
+   "farben",
+   "natur",
+   "interessant"
+  ],
+  "thumb_text": "FARB-SCHOCK",
+  "cover_ms": 46026,
+  "duration": 45.9,
+  "providers": {
+   "text": "gemini",
+   "voice": "edge",
+   "images": "pollinations"
+  },
+  "thumb": true,
+  "mp4": true
  }
 ]
