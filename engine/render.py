@@ -116,8 +116,10 @@ def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, 
     total = times[-1][1] + 0.4
     # Ecke oben links: Ort/Zeit-Angabe der Geschichte (z. B. „TAG 1 · 3:12 UHR“), je Szene änderbar
     if hud:
+        cur_hud = hud
         for sc, (s, e) in zip(scenes, times):
-            lab = str(sc.get("hud") or hud or "").replace("{", "").replace("}", "").upper()[:28]
+            cur_hud = sc.get("hud") if isinstance(sc.get("hud"), str) and sc.get("hud").strip() else cur_hud   # gilt weiter, bis eine neue Angabe kommt
+            lab = str(cur_hud or "").replace("{", "").replace("}", "").upper()[:28]
             if lab:
                 lines.append(f"Dialogue: 3,{_ts(s)},{_ts(e)},Hud,,0,0,0,,{lab}")
     # Countdown oben rechts: läuft sichtbar herunter, wird zum Ende hin rot

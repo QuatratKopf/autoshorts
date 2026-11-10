@@ -142,16 +142,28 @@ def checklist(title, items, n_checked=None):
     return _shadow(im)
 
 
+def _short(text, n):
+    """Kürzt an einer Wortgrenze statt mitten im Wort."""
+    text = " ".join(str(text or "").split())
+    if len(text) <= n:
+        return text
+    cut = text[:n + 1].rsplit(" ", 1)[0]
+    return cut if len(cut) >= n * 0.4 else text[:n]
+
+
 def bar(label, value, shown=None):
     v = max(0, min(100, int(value)))
     s = v if shown is None else shown
+    label = _short(label, 28).upper()
     fl, fv = font(46), font(44)
-    w, h = 820, 120
+    w, h = 900, 120
     im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     dr = ImageDraw.Draw(im)
+    while dr.textlength(label, font=fl) > w * 0.55 and fl.size > 24:      # lange Beschriftung: kleiner statt abgeschnitten
+        fl = font(fl.size - 3)
     dr.rounded_rectangle((0, 0, w - 1, h - 1), 26, fill=WHITE, outline=INK, width=6)
-    lw = dr.textlength(label.upper(), font=fl) + 50
-    dr.text((26, 30), label.upper(), font=fl, fill=INK)
+    lw = dr.textlength(label, font=fl) + 50
+    dr.text((26, (h - fl.size) / 2 - 6), label, font=fl, fill=INK)
     x0, x1 = lw + 10, w - 30
     dr.rounded_rectangle((x0, 32, x1, h - 32), 26, fill=(230, 230, 232), outline=INK, width=4)
     fx = x0 + (x1 - x0) * s / 100
@@ -240,9 +252,9 @@ def frames_for(ov: dict):
     t = str(ov.get("type") or "").lower()
     try:
         if t == "card" and ov.get("text"):
-            return _pop(card(str(ov["text"])[:30])), 420
+            return _pop(card(_short(ov["text"], 30))), 420
         if t == "note" and ov.get("text"):
-            return _pop(note(str(ov.get("title") or "")[:20], str(ov["text"])[:80])), 560
+            return _pop(note(_short(ov.get("title") or "", 20), _short(ov["text"], 80))), 560
         if t == "phone" and ov.get("items"):
             items = ov["items"]
             fr = _pop(phone(str(ov.get("title") or "")[:8], items, 0))
@@ -258,8 +270,8 @@ def frames_for(ov: dict):
             return fr, 640
         if t == "bar" and ov.get("label") is not None:
             v = int(float(ov.get("value") or 0))
-            fr = _pop(bar(str(ov["label"])[:12], v, 0), 6)
-            fr += [bar(str(ov["label"])[:12], v, v * k / 24) for k in range(1, 25)]   # Balken füllt sich
+            fr = _pop(bar(str(ov["label"]), v, 0), 6)
+            fr += [bar(str(ov["label"]), v, v * k / 24) for k in range(1, 25)]   # Balken füllt sich
             return fr, 300
         if t == "counter" and ov.get("value") is not None:
             lab, unit, sub = str(ov.get("label") or "")[:26], str(ov.get("unit") or "")[:16], str(ov.get("sub") or "")[:30]
@@ -276,7 +288,7 @@ def frames_for(ov: dict):
             fr += [counter(lab, v, unit, None, sub)] * 2
             return fr, 330
         if t == "choice" and ov.get("a") and ov.get("b"):
-            return _pop(choice(str(ov["a"])[:40], str(ov["b"])[:40])), 640
+            return _pop(choice(_short(ov["a"], 40), _short(ov["b"], 40))), 640
     except Exception:  # noqa: BLE001
         return None
     return None

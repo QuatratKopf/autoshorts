@@ -650,6 +650,16 @@ def direct(scenes, times, topic=""):
                     sc["shot"] = "close"
                 elif same % 3 == 1 and str(acts[0].get("action") or "") in ("", "idle"):
                     acts[0]["action"] = "look_around"
+        # --- Großaufnahme nur von Dingen, die etwas erzählen: kein leerer Tisch, nichts unter hohen Einblendungen
+        if sc.get("shot") == "insert":
+            ov_t0 = str((sc.get("overlay") or {}).get("type") or "")
+            keep = [q for q in (sc.get("props") or []) if extras.PROP_ALIASES.get(q["type"].lower(), q["type"].lower()) not in DULL]
+            if not keep or ov_t0 in TALL_OV or ov_t0 == "choice":
+                sc["shot"] = ""
+                if not [a for a in (sc.get("actors") or []) if isinstance(a, dict)] and last_id and places.resolve(backdrop(sc)) not in MAPS:
+                    sc["actors"] = [{"id": last_id, "action": "talk", "speaks": True}]
+            else:
+                sc["props"] = keep
         # --- mindestens jede zweite Szene zeigt das Geschehen statt der redenden Figur
         acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
         ov_t = str((sc.get("overlay") or {}).get("type") or "")
@@ -657,7 +667,8 @@ def direct(scenes, times, topic=""):
         last = i == len(scenes) - 1
         rp2 = places.resolve(backdrop(sc))
         if lone and fig_prev and not sc.get("shot") and not last and ov_t not in TALL_OV and ov_t != "choice" and rp2 not in MAPS:
-            things = [q for q in (sc.get("props") or []) if extras.prop_fit(q.get("type"))]
+            things = [q for q in (sc.get("props") or []) if extras.prop_fit(q.get("type"))
+                      and extras.PROP_ALIASES.get(q["type"].lower(), q["type"].lower()) not in DULL]
             if things and inserts < 4:
                 sc["shot"], inserts = "insert", inserts + 1
             elif rp2 in places.OUTDOOR:
@@ -748,6 +759,7 @@ MOOD_HINTS = [
 ]
 INDOOR = ("bedroom", "livingroom", "kitchen", "office", "classroom", "lab", "hospital", "basement", "cave", "underwater", "space")
 MAPS = ("germany", "worldmap")
+DULL = ("table", "shelf", "streetlamp", "rock", "box")          # allein als Großaufnahme langweilig
 INDOOR_THINGS = ("faucet", "glass", "candle", "cans", "clock", "door", "fridge", "tv", "computer", "shelf", "cart", "table", "money")
 TEXT_PROPS = [(r"zucker|\bsalz\b", "pile"), (r"\bsand\b", "sandpile"), (r"\bmüll|abfall|plastik", "trash"), (r"wasserhahn|trinkwasser|leitungswasser", "faucet"),
               (r"\bglas\b|\bgläser|trinken|getränk|\bdurst", "glass"), (r"kerze", "candle"), (r"konserve|vorrät|dosen", "cans"), (r"benzin|kanister|sprit", "canister"),
