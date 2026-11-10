@@ -43,46 +43,59 @@ def _parse_json(txt: str) -> dict:
     a, b = txt.find("{"), txt.rfind("}")
     if a < 0 or b < 0:
         raise ProviderError("Antwort enthält kein JSON")
-    return json.loads(txt[a:b + 1])
+    try:
+        js = json.loads(txt)
+        if isinstance(js, list) and js and isinstance(js[0], dict):   # manche Modelle packen das Objekt in eine Liste
+            return js[0]
+        if isinstance(js, dict):
+            return js
+    except ValueError:
+        pass
+    js = json.loads(txt[a:b + 1])
+    if not isinstance(js, dict):
+        raise ProviderError("Antwort ist kein JSON-Objekt")
+    return js
+
+
+GEMINI_TEXT = ("gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-flash-lite-latest")
 
 
 def _gemini(system, user, temperature):
+    """Schnelle Flash-Modelle mit kurzer Denkphase; liefert eines kein gültiges JSON oder antwortet nicht, kommt das nächste.
+    (Gemessen: gemini-3.5-flash ≈ 6 s, die „latest“-Modelle brauchen oft über 2 Minuten oder sind überlastet.)"""
     key = secret("GEMINI_API_KEY")
     if not key:
         raise ProviderError("kein GEMINI_API_KEY")
-    model = cfg("gemini_model") or "gemini-flash-latest"
-    body = {"systemInstruction": {"parts": [{"text": system}]},
-            "contents": [{"role": "user", "parts": [{"text": user}]}],
-            "generationConfig": {"temperature": temperature, "responseMimeType": "application/json"}}
-    # 1. Versuch: eingestelltes Modell mit kurzer Denkphase (thinkingLevel low) – ohne diese Vorgabe denken
-    #    die neuen Flash-Modelle oft mehrere Minuten. Kennt das Modell die Vorgabe nicht, ohne sie.
-    # 2. Versuch: gemini-flash-lite-latest – sehr schnell, reicht notfalls für Skripte.
-    gc = body["generationConfig"]
-    tries = [(model, {**body, "generationConfig": {**gc, "thinkingConfig": {"thinkingLevel": "low"}}}, 75),
-             (model, body, 75),
-             ("gemini-flash-lite-latest", body, 120)]
-    last, skip_plain = None, True
-    for n, (m, b, to) in enumerate(tries):
-        if n == 1 and skip_plain:
-            continue   # nur nötig, wenn das Modell thinkingLevel ablehnt
-        try:
-            r = requests.post(f"https://generativelanguage.googleapis.com/v1beta/models/{m}:generateContent",
-                              headers={"x-goog-api-key": key}, json=b, timeout=to)
-            if n == 0 and r.status_code == 400 and "think" in r.text.lower():
-                skip_plain = False
-                continue
-            if r.status_code in (404, 429, 500, 503) and n < len(tries) - 1:
-                last = ProviderError(f"Gemini {m}: HTTP {r.status_code}")
-                log(f"Gemini {m}: HTTP {r.status_code}, versuche Ersatzmodell")
-                skip_plain = True
-                continue
-            _check(r, "Gemini")
-            parts = r.json()["candidates"][0]["content"]["parts"]
-            return "".join(p.get("text", "") for p in parts if not p.get("thought"))
-        except requests.Timeout as e:
-            last = e
-            skip_plain = True
-            log(f"Gemini {m} antwortet nicht rechtzeitig, versuche Ersatzmodell")
+    chosen = cfg("gemini_model") or GEMINI_TEXT[0]
+    if chosen in ("gemini-flash-latest", "gemini-pro-latest"):
+        chosen = GEMINI_TEXT[0]
+    models = [chosen] + [m for m in GEMINI_TEXT if m != chosen]
+    gc = {"temperature": temperature, "responseMimeType": "application/json", "maxOutputTokens": 8192}
+    body = {"systemInstruction": {"parts": [{"text": system}]}, "contents": [{"role": "user", "parts": [{"text": user}]}]}
+    last = None
+    for m in models:
+        for think in ({"thinkingLevel": "low"}, None):
+            cfg_ = {**gc, "thinkingConfig": think} if think else gc
+            try:
+                r = requests.post(f"https://generativelanguage.googleapis.com/v1beta/models/{m}:generateContent",
+                                  headers={"x-goog-api-key": key}, json={**body, "generationConfig": cfg_}, timeout=70)
+            except requests.RequestException as e:
+                last = f"{m}: {type(e).__name__}"
+                break
+            if r.status_code == 400 and think:
+                continue                      # Modell kennt die Denk-Vorgabe nicht → ohne
+            if r.status_code != 200:
+                last = f"{m}: HTTP {r.status_code}"
+                break
+            try:
+                parts = r.json()["candidates"][0]["content"]["parts"]
+                txt = "".join(p.get("text", "") for p in parts if not p.get("thought"))
+                _parse_json(txt)
+                return txt
+            except Exception as e:  # noqa: BLE001
+                last = f"{m}: ungültige Antwort ({str(e)[:60]})"
+                break
+        log(f"Gemini {last} – versuche Ersatzmodell")
     raise ProviderError(f"Gemini: {last}")
 
 

@@ -175,11 +175,16 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None):
             raw = work / "cover_raw.jpg"
             try:
                 if toon:
-                    raise RuntimeError("eigene Animation")
-                ai.image(writer.image_prompt({"image": script["thumbnail"]["image"]}, cat), raw, seed + 999)
+                    th = dict(script["thumbnail"])
+                    if not th.get("place"):      # kein eigener Vorschlag → die Szene mit der stärksten Einblendung/erste Szene
+                        base = scenes[0]
+                        th.update(place=base.get("place"), time=base.get("time"),
+                                  actor=(base.get("actors") or [{}])[0].get("id"))
+                    stage.cover(th, script.get("cast") or {}, raw)
+                else:
+                    ai.image(writer.image_prompt({"image": script["thumbnail"]["image"]}, cat), raw, seed + 999)
             except Exception as e:  # noqa: BLE001
-                if not toon:
-                    log(f"Thumbnail-Bild fehlgeschlagen ({e}) – nehme das erste Szenenbild")
+                log(f"Thumbnail-Bild fehlgeschlagen ({e}) – nehme das erste Szenenbild")
                 shutil.copy(work / "img00.jpg", raw)
             cover = OUT / f"{vid}-cover.jpg"
             thumbnail.make_thumbnail(raw, script["thumbnail"]["text"] or script["title"], cover)

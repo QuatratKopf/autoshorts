@@ -65,20 +65,33 @@ Einblendungen (overlay) – nutze sie in etwa jeder zweiten Szene, passend zum I
 Kamera: 'shake' bei Schreck/Aufprall (mit sfx 'boom'), sonst ruhige Fahrten; sfx sparsam (nicht in jeder Szene)."""
 
 TOON = """
-EIGENE ANIMATION: Das Video wird mit fertigen Cartoon-Figuren und festen Orten animiert. Fülle deshalb zusätzlich aus:
-- "cast": Aussehen je Figur als Objekt, z. B. {"mia": {"shirt": "blau", "hat": "", "hair": "long", "glasses": false, "skin": "weiß"}}
-  shirt/hat_color: blau, rot, grün, gelb, orange, lila, pink, türkis, grau, braun · hat: cap, helmet, beanie, bow, crown oder ""
-  hair: long, bun oder "" · skin: weiß, hell, mittel, dunkel · höchstens 3 Figuren, jede klar unterscheidbar.
+EIGENE ANIMATION: Das Video wird mit fertigen Cartoon-Figuren, Tieren, Orten und Requisiten animiert (keine KI-Bilder).
+Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
+- "cast": Aussehen je Figur, z. B. {"mia": {"shirt": "blau", "hat": "", "hair": "long", "glasses": false, "skin": "weiß"},
+                                   "rex": {"kind": "dino"}}
+  Menschen: shirt/hat_color: blau, rot, grün, gelb, orange, lila, pink, türkis, grau, braun · hat: cap, helmet, beanie, bow, crown oder ""
+            hair: long, bun oder "" · skin: weiß, hell, mittel, dunkel
+  Tiere/Wesen statt Mensch: "kind": cat, dog, spider, ghost, alien, robot, bird, dino, monster, fish, shark
+  Höchstens 3 Figuren, jede klar unterscheidbar. Bei Du-Geschichten ist die Hauptfigur „du“.
 - In jeder Szene:
-  "place": einer von bedroom, livingroom, street, basement, park, space, lab, classroom (nur diese!)
+  "place": bedroom, livingroom, kitchen, office, classroom, lab, hospital, basement, street, park, forest, beach, desert,
+           snow, mountain, cave, underwater, space
   "time": "day" oder "night"
-  "actors": 1–2 Figuren, z. B. [{"id": "mia", "action": "run", "emotion": "scared", "pos": "offleft", "to": "center", "speaks": true}]
-     action: idle, talk, walk, run, wave, point, shocked, sad, jump, think, sit, sleep, dance, look_around
+  "weather": rain, storm, snow, wind, heat, dark oder "" (nur wenn es zur Szene passt)
+  "props": 0–2 Requisiten aus: tree, rock, box, car, fire, tv, computer, money, rocket, ufo, meteor, explosion, earth, sun,
+           moon, tornado, wave, ice, volcano   (meteor fällt und schlägt ein, rocket startet, wave steigt)
+  "actors": 1–2 Figuren, z. B. [{"id": "mia", "action": "run", "emotion": "scared", "emote": "!", "pos": "offleft", "to": "center", "speaks": true}]
+     action: idle, talk, walk, run, wave, point, shocked, sad, jump, think, sit, sleep, dance, look_around, fall
      emotion: happy, sad, angry, scared, worried, shocked oder ""
+     emote (Symbol über dem Kopf, sparsam): "!", "?", heart, idea, sweat, anger, music oder ""
      pos / to: left, center, right, offleft, offright ("to" nur wenn die Figur sich bewegt)
-     speaks: true bei der Figur, die in dieser Szene „spricht“ bzw. um die es geht
-- Schreibe die Geschichte so, dass sie mit diesen Orten und Aktionen gezeigt werden kann. Erklärendes (Zahlen, Listen, Regeln)
-  kommt in die Einblendungen (overlay). "image" trotzdem kurz auf Englisch ausfüllen (wird fürs Titelbild genutzt)."""
+     speaks: true bei der Figur, um die es in dieser Szene geht
+- Wechsle Orte, Aktionen und Requisiten ab: nicht zweimal hintereinander dieselbe Kombination; jede Szene zeigt sichtbar,
+  wovon der Sprecher gerade redet (Bewegung statt Herumstehen: reinkommen, rennen, erschrecken, zeigen, springen).
+- Erklärendes (Zahlen, Listen, Regeln) kommt in die Einblendungen (overlay).
+- "thumbnail": {"text": "2–4 WÖRTER", "place": "...", "time": "day|night", "actor": "id aus cast", "action": "shocked",
+                "emotion": "shocked", "props": ["meteor"], "weather": ""}  – der spannendste Moment als Titelbild.
+- "image" je Szene darf leer bleiben."""
 
 UNSUITABLE = ("Ungeeignet sind: Todesfälle, Unglücke, Verbrechen, Krieg, Terror, Krankheiten einzelner Personen, "
               "Parteipolitik und Wahlen, Klatsch über Privatleben, Glücksspiel, geschützte Film-/Spielfiguren und Marken als Hauptthema, reine Sport-Ergebnisse ohne Hintergrundgeschichte "
@@ -186,10 +199,10 @@ def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
     tags = [t.replace(" ", "") for t in tags if len(t) > 1]
     if "#shorts" not in [t.lower() for t in tags]:
         tags.insert(0, "#shorts")
-    th = js.get("thumbnail") or {}
+    th = js.get("thumbnail") if isinstance(js.get("thumbnail"), dict) else {}
     return {"title": str(js.get("title") or topic)[:95], "description": str(js.get("description") or ""),
             "hashtags": tags[:10], "tags": [str(t).strip("# ")[:60] for t in js.get("tags", []) if str(t).strip("# ")][:15],
-            "thumbnail": {"image": str(th.get("image") or sc[0]["image"]), "text": str(th.get("text") or "").strip()[:40]},
+            "thumbnail": {**th, "image": str(th.get("image") or sc[0]["image"]), "text": str(th.get("text") or "").strip()[:40]},
             "toon": toon, "cast": {str(k): v for k, v in raw_cast.items() if isinstance(v, dict)},
             "scenes": sc, "hud": str(js.get("hud") or "").strip()[:28],
             "countdown": js.get("countdown") if isinstance(js.get("countdown"), dict) else None}, provider

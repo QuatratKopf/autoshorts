@@ -331,5 +331,5 @@ def pose_at(action, t, dur, emotion="", mouth=0.0, seed=0):
         p.smile = {"happy": 0.8, "sad": -0.8, "angry": -0.6, "worried": -0.4}.get(emo, p.smile)
     if p.eyes not in ("closed", "happy") and _blink(t, seed):
         p.eyes = "closed"
-    p.mouth = mouth
+    p.mouth = max(mouth, 0.75) if a in ("shocked", "scared", "fall") or emo in ("shocked", "scared") else mouth
     return p, prog

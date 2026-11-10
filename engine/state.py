@@ -116,7 +116,7 @@ DEFAULT_SETTINGS = {
     "tts_provider": "gemini",        # gemini = natürliche Erzählerstimme (kostenloses Kontingent), sonst edge
     "gemini_voice": "",              # leer = passende Stimme je Video-Art
     "image_provider": "cloudflare",
-    "gemini_model": "gemini-flash-latest",
+    "gemini_model": "gemini-3.5-flash",
     "openai_text_model": "gpt-4.1-mini",
     "openai_image_model": "gpt-image-1",
     "openai_image_quality": "low",
@@ -129,7 +129,7 @@ DEFAULT_SETTINGS = {
     "subtitles_lowercase": True,
     "music_volume": 0.10,
     "sfx_volume": 0.35,
-    "visual_mode": "ai",           # ai = KI-Bilder · toon = eigene Animations-Engine (Figuren + Orte)
+    "visual_mode": "toon",           # ai = KI-Bilder · toon = eigene Animations-Engine (Figuren + Orte)
     "youtube_enabled": True,
     "youtube_privacy": "public",
     "youtube_category": "24",
@@ -192,6 +192,11 @@ CONFIG.setdefault("queue", [])
 if CONFIG["settings"].get("tts_provider") == "edge" and not CONFIG["settings"].get("tts_checked"):
     CONFIG["settings"]["tts_provider"] = "gemini"   # einmalig auf die natürlichere Stimme umstellen (Edge bleibt Ersatz)
 CONFIG["settings"]["tts_checked"] = True
+if CONFIG["settings"].get("gemini_model") in ("gemini-flash-latest", "gemini-pro-latest"):
+    CONFIG["settings"]["gemini_model"] = "gemini-3.5-flash"
+if not CONFIG["settings"].get("toon_checked"):          # einmalig: alles läuft über die eigene Animations-Engine
+    CONFIG["settings"]["visual_mode"] = "toon"
+    CONFIG["settings"]["toon_checked"] = True
 if CONFIG["settings"].get("image_style") in OLD_STYLES:   # alte Standard-Vorgabe → neuer, flacherer Stil
     CONFIG["settings"]["image_style"] = DEFAULT_STYLE
 _have = {c.get("slug") for c in CONFIG["categories"]}
