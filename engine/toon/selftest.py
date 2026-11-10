@@ -35,6 +35,15 @@ def frame(scene, cast=None, t=1.3):
 
 
 def main():
+    try:                                                       # gelernte Gegenstände mitprüfen
+        import json
+        from pathlib import Path
+        from . import library
+        f = Path(__file__).resolve().parents[2] / "docs" / "data" / "shapes.json"
+        if f.exists():
+            print("Bibliothek:", library.load_all(json.loads(f.read_text(encoding="utf-8"))), "Gegenstände")
+    except Exception as e:  # noqa: BLE001
+        errors.append(f"Bibliothek laden: {e}")
     all_places = sorted(set(places.PLACES) | set(places.OUTDOOR_SPECS))
     for pl in all_places:
         for night, dark in ((False, False), (True, False), (True, True)):

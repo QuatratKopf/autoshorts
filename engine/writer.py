@@ -152,12 +152,24 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
                 "emotion": "shocked", "props": ["meteor"], "weather": ""}  – der spannendste Moment als Titelbild,
                 am besten mit dem Ereignis (Requisite) groß im Bild.
 - "image" je Szene darf leer bleiben.
-- "wishes": Liste (deutsch, je 1–3 Wörter) von Dingen, die du für dieses Video gebraucht hättest, die es aber in den Listen
-  oben nicht gibt (z. B. "Krebs", "Windrad", "Wasserfall"). Leere Liste, wenn alles da war."""
+- "wishes": Liste von einzelnen, greifbaren Gegenständen (deutsch, ein Wort, Einzahl, z. B. "Wasserturm", "Mikroskop"), die
+  dieses Video braucht, die aber in den Listen oben fehlen. Die Engine zeichnet sie automatisch nach: Trage das Wort deshalb
+  zusätzlich in "props" der passenden Szene ein (genau gleich geschrieben). Keine Orte, kein Wetter, keine Personen, keine Marken.
+  Leere Liste, wenn alles da war."""
 
 UNSUITABLE = ("Ungeeignet sind: Themen, die sich um einzelne echte Personen drehen (Promis, Musiker, Sportler, Politiker, Creator), Todesfälle, Unglücke, Verbrechen, Krieg, Terror, Krankheiten einzelner Personen, "
               "Parteipolitik und Wahlen, Klatsch über Privatleben, Glücksspiel, geschützte Film-/Spielfiguren und Marken als Hauptthema, reine Sport-Ergebnisse ohne Hintergrundgeschichte "
               "und alles, was ohne Belege Spekulation wäre.")
+
+
+def _learned():
+    """Gegenstände aus der lernenden Bibliothek – stehen dem Drehbuch wie eingebaute Requisiten zur Verfügung."""
+    try:
+        from .state import load
+        names = sorted(k for k in load("shapes.json", {}) if isinstance(k, str))[:150]
+    except Exception:  # noqa: BLE001
+        names = []
+    return ("\n- Zusätzlich gelernte Requisiten (in \"props\" mit genau diesem Wort nutzbar): " + ", ".join(names)) if names else ""
 
 
 def _past(cat):
@@ -238,7 +250,7 @@ def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
             + f"Länge: zwischen {round(words * 0.85)} und {words} Wörter gesprochen insgesamt (≈ {secs} Sekunden) – zähle nach; nicht kürzer, nicht länger. "
             f"Aufgeteilt auf {scenes} Szenen, also etwa {round(words / scenes)} Wörter pro Szene.\n"
             + (f"Wiederkehrende Hauptfigur (nur wenn passend einbauen, in den Bild-Prompts immer gleich beschreiben): {char}\n" if char else "")
-            + FORMAT + (TOON if toon else ""))
+            + FORMAT + (TOON + _learned() if toon else ""))
     js, provider = ai.chat_json(SYSTEM, user, 0.9)
     n_words = sum(len(str(x.get("text", "")).split()) for x in js.get("scenes", []) if isinstance(x, dict))
     if n_words > words * 1.25:       # zu lang geraten → einmal straffen lassen

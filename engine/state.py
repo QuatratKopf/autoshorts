@@ -129,6 +129,7 @@ DEFAULT_SETTINGS = {
     "main_character": DEFAULT_CHARACTER,
     "use_main_character": True,
     "subtitles_lowercase": True,
+    "auto_learn": True,             # fehlende Gegenstände automatisch zeichnen lassen und in der Bibliothek behalten
     "caption_style": "impact",      # impact = schmale fette Großbuchstaben, orange Schlüsselwörter · classic = runde Schrift
     "music_volume": 0.10,
     "sfx_volume": 0.35,

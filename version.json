@@ -1,6 +1,6 @@
 {
-  "version": "1.3.3",
-  "file": "releases/AutoShorts-1.3.3.cmd",
-  "sha256": "a5c6483d4096ee086e48e2b70e5b09a5ceb0e839ae7f30fd99facecc74bd4b01",
-  "notes": "Neue Untertitel (schmal, fett, orange), lebendigere Stimme, Zähler-Einblendung, mehr Orte und Gegenstände"
+  "version": "1.3.4",
+  "file": "releases/AutoShorts-1.3.4.cmd",
+  "sha256": "d82a2d1d13b81d31a4ed6f27120746be68d389b9d02701e84c1db201ed9ac09c",
+  "notes": "Lernende Bibliothek: fehlende Gegenstände werden automatisch nachgebaut; Untertitel mit farbigem gesprochenem Wort"
 }

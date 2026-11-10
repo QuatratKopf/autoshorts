@@ -467,6 +467,14 @@ def find_figure(text):
     return {"type": "counter", "label": "", "value": best[1], "unit": best[2]}
 
 
+def _lib_props():
+    try:
+        from . import library
+        return library.text_props()
+    except Exception:  # noqa: BLE001
+        return []
+
+
 def direct(scenes, times, topic=""):
     """Kleine Regie über das ganze Video: sorgt für Abwechslung, wenn das Drehbuch mehrmals hintereinander dieselbe
     Einstellung vorgibt (gleicher Ort, gleiche Figur, nur Reden) – andere Position, Nahaufnahme oder Hereinkommen."""
@@ -477,11 +485,16 @@ def direct(scenes, times, topic=""):
     maps_used = 0
     used = {}
     fig_prev, inserts, counters = False, 0, 0
-    topic_things = [k for pat, k in TEXT_PROPS if _re0.search(pat, str(topic or "").lower()) and extras.prop_fit(k)][:2]
+    topic_things = [k for pat, k in _lib_props() + TEXT_PROPS if _re0.search(pat, str(topic or "").lower()) and extras.prop_fit(k)][:2]
     for i, (sc, (s0, e0)) in enumerate(zip(scenes, times)):
         sanitize(sc)
+        sc["props"] = [q for q in sc["props"] if (lambda k: k in extras.PROPS or k in extras.PROP_ALIASES or k in extras.HELD)(q["type"].lower())]
         acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
         place = places.resolve(sc.get("place"))
+        if place in MAPS:                                 # Karte höchstens zweimal pro Video
+            maps_used += 1
+            if maps_used > 2:
+                sc["place"] = place = "street"
         has_bd = isinstance(sc.get("backdrop"), dict) and (sc["backdrop"].get("elements") or sc["backdrop"].get("ground"))
         hint = None if has_bd else _hint(sc.get("text"))
         used[place] = used.get(place, 0) + 1
@@ -505,7 +518,7 @@ def direct(scenes, times, topic=""):
         txt0 = str(sc.get("text") or "").lower()
         if len(sc.get("props") or []) < 2 and str(sc.get("shot") or "") != "close" and places.resolve(sc.get("place")) not in MAPS:       # was der Satz nennt, ist auch zu sehen
             have = {extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) for q in (sc.get("props") or [])}
-            for pat, kind in TEXT_PROPS:
+            for pat, kind in _lib_props() + TEXT_PROPS:
                 if kind not in have and _re0.search(pat, txt0):
                     if kind in INDOOR_THINGS and (places.resolve(backdrop(sc)) in places.OUTDOOR):
                         if used.get(place, 0) < 3 or sc.get("overlay") or sc.get("shot"):

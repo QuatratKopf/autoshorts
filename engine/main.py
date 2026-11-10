@@ -146,6 +146,19 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None):
                 wl[k] = {"n": wl.get(k, {}).get("n", 0) + 1, "last": script["title"]}
             save("wishes.json", wl)
             log("Der Engine fehlte: " + ", ".join(script["wishes"]))
+        if script.get("toon"):          # lernende Bibliothek: Gelerntes laden, Fehlendes für dieses Video nachzeichnen lassen
+            try:
+                from .state import load, save
+                from .toon import library
+                shapes = load("shapes.json", {})
+                library.load_all(shapes)
+                if cfg("auto_learn") is not False and script.get("wishes"):
+                    new = library.learn(script["wishes"], ai.chat_json, shapes, log)
+                    if new:
+                        shapes.update(new)
+                        save("shapes.json", shapes)
+            except Exception as e:  # noqa: BLE001 – die Bibliothek darf nie ein Video verhindern
+                log(f"Bibliothek übersprungen ({type(e).__name__}: {e})")
 
         log("Spreche Text ein …")
         voice = work / "voice.mp3"
