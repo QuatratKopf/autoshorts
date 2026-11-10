@@ -130,8 +130,9 @@ def _pollinations_text(system, user, temperature):
             r = requests.post("https://text.pollinations.ai/openai",
                               json={"messages": [{"role": "system", "content": system + "\nAntworte nur mit JSON."},
                                                  {"role": "user", "content": user}],
-                                    "temperature": temperature},
-                              timeout=90)
+                                    "temperature": temperature, "max_tokens": 12000,
+                                    **({"reasoning_effort": "low"} if attempt == 0 else {"model": "openai-fast"})},
+                              timeout=120)
         except requests.RequestException as e:   # Zeitüberschreitung/Verbindung: kurz warten, neu versuchen
             if attempt == 2:
                 raise ProviderError(f"Pollinations-Text nicht erreichbar ({type(e).__name__})") from e
@@ -140,6 +141,9 @@ def _pollinations_text(system, user, temperature):
             continue
         if r.status_code >= 500 and attempt < 2:
             time.sleep(20)
+            continue
+        if r.status_code == 400 and attempt < 2:          # z. B. Antwort-Limit beim Nachdenk-Modell: mit dem schnellen Modell noch einmal
+            time.sleep(5)
             continue
         if r.status_code in (402, 429) and attempt < 2:
             time.sleep(int(r.headers.get("Retry-After", "35")) + 1)
