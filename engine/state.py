@@ -131,6 +131,7 @@ DEFAULT_SETTINGS = {
     "main_character": DEFAULT_CHARACTER,
     "use_main_character": True,
     "subtitles_lowercase": True,
+    "look": "cartoon",              # cartoon = hell und bunt · neon = dunkle Motion-Grafik-Stimmung (violette Nacht, Lichtpunkte)
     "stats_minutes": 30,            # wie oft die Zahlen der Videos geholt werden
     "plan_ahead": True,             # Thema und Drehbuch am Vortag festlegen, damit Fehlendes vor dem Video gebaut werden kann
     "hold_missing": True,           # nicht hochladen, solange der Engine für das Video noch etwas fehlt

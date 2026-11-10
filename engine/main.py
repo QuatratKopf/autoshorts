@@ -310,7 +310,7 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None):
         if toon:
             from .toon import stage
             log("Animiere Szenen …")
-            stage.direct(scenes, times, f"{v.get('topic') or ''} {script.get('title') or ''}", cat["slug"])
+            stage.direct(scenes, times, f"{v.get('topic') or ''} {script.get('title') or ''}", cat["slug"], os.environ.get("AS_LOOK") or cat.get("look") or cfg("look") or "")
             for i, (sc, (s0, e0)) in enumerate(zip(scenes, times)):
                 d = (e0 - s0) + (0.35 if i == len(scenes) - 1 else 0.25)
                 try:

@@ -1,6 +1,6 @@
 {
-  "version": "1.3.8",
-  "file": "releases/AutoShorts-1.3.8.cmd",
-  "sha256": "13d71750218434788def7f034527eca25ccd9dcdef20f8288236bb2461b0a413",
-  "notes": "Zahlen alle 30 Minuten (auch über Zernio), bessere Videobeschreibungen, TikTok-Titelbild über Zernio"
+  "version": "1.3.9",
+  "file": "releases/AutoShorts-1.3.9.cmd",
+  "sha256": "daf7d28b8d77202bd1d5191c0fa6e53ca3b3e0ff160ba2a1fcb60391057eb09c",
+  "notes": "Bewegte Grafiken (Zahlen, Countdown, Kalender, Fragezeichen, Häuserreihen) und neuer Bildstil Neon-Nacht"
 }

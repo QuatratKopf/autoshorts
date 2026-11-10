@@ -7,7 +7,7 @@ from pathlib import Path
 
 from PIL import Image, ImageChops, ImageDraw
 
-from . import extras, places, rig
+from . import extras, graphics, places, rig
 
 W, H, FPS = 1080, 1920, 30
 SCALE = 1.08            # Figuren bewusst kleiner: die Szene steht im Mittelpunkt
@@ -62,7 +62,10 @@ def sanitize(sc):
     sc["text"] = sc.get("text") if isinstance(sc.get("text"), str) else ""
     for k in ("time", "weather", "crowd", "mood", "shot"):
         sc[k] = word(sc.get(k)).lower()
-    if sc["shot"] not in ("event", "close", "insert"):
+    sc["graphic"] = graphics.clean(sc.get("graphic"))
+    if sc["shot"] == "graphic" and not sc["graphic"]:
+        sc["shot"] = ""
+    if sc["shot"] not in ("event", "close", "insert", "graphic"):
         sc["shot"] = ""                                   # "wide" und Unbekanntes = normale Einstellung
     if not isinstance(sc.get("place"), str):
         sc["place"] = ""
@@ -487,6 +490,11 @@ def _number(word):
         return float(w.replace(".", "").replace(",", "."))
     if w in ("halbe", "halb"):
         return 0.5
+    if w.endswith("tausend") and w != "tausend":             # „fünfundvierzigtausend“
+        base = _number(w[:-7])
+        return base * 1000 if base else None
+    if w == "tausend":
+        return 1000
     total = 0
     if "hundert" in w:
         h, w = w.split("hundert", 1)
@@ -531,6 +539,44 @@ def find_figure(text):
     return {"type": "counter", "label": "", "value": best[1], "unit": best[2]}
 
 
+def _fmt_num(v):
+    if abs(v - round(v)) < 1e-9:
+        v = int(round(v))
+        return f"{v:,}".replace(",", ".") if v >= 10000 else str(v)
+    return f"{v:.1f}".replace(".", ",")
+
+
+def auto_graphic(text, hud=""):
+    """Erkennt im Satz, was sich als bewegte Grafik zeigen lässt: Warum-Frage, Zahl mit Einheit, Frist, Haushalte."""
+    import re as _re
+    raw = str(text or "").strip()
+    low = raw.lower()
+    kick = str(hud or "")[:36]
+    if "?" in raw and _re.search(r"\b(warum|wieso|weshalb)\b", low):
+        return {"type": "question", "text": _re.search(r"\b(warum|wieso|weshalb)\b", low).group(1).upper() + "?"}
+    fig = find_figure(raw)
+    if not fig:
+        if raw.endswith("?") and len(raw.split()) <= 5 and len(raw) <= 26:
+            return {"type": "question", "text": raw.upper()}
+        return None
+    v, unit = float(fig["value"]), str(fig["unit"])
+    parts = unit.split()
+    scale = parts[0] if parts and parts[0] in _SCALE.values() else ""
+    noun = " ".join(parts[1:] if scale else parts)
+    whole = abs(v - round(v)) < 1e-9
+    if not scale and noun == "STUNDEN" and whole and 1 <= v <= 999 and _re.search(r"countdown|zeit läuft|bleiben dir|nur noch|auf dich allein|allein|ohne hilfe|frist", low):
+        return {"type": "timer", "value": f"{int(v):02d}:00:00", "kicker": kick}
+    if not scale and noun in ("TAGE", "WOCHEN", "MONATE", "JAHRE") and whole and 1 <= v <= 999:
+        return {"type": "calendar", "value": str(int(v)), "label": noun, "kicker": kick}
+    val = (_fmt_num(v) + (" " + scale if scale else "")).strip()
+    if _re.search(r"haushalt|häuser|wohnung|gebäude|familien", low):
+        return {"type": "houses", "value": val, "label": noun or "HAUSHALTE", "kicker": kick,
+                "dark": bool(_re.search(r"ohne strom|stromausfall|dunkel|ohne licht|abgeschnitten", low))}
+    if noun == "%":
+        val, noun = val + " %", ""
+    return {"type": "number", "value": val, "label": noun, "kicker": kick}
+
+
 def has_ov0(sc):
     return isinstance(sc.get("overlay"), dict) and str(sc["overlay"].get("type") or "") in TALL_OV + ("choice",)
 
@@ -543,7 +589,7 @@ def _lib_props():
         return []
 
 
-def direct(scenes, times, topic="", style=""):
+def direct(scenes, times, topic="", style="", look=""):
     """Kleine Regie über das ganze Video: sorgt für Abwechslung, wenn das Drehbuch mehrmals hintereinander dieselbe
     Einstellung vorgibt (gleicher Ort, gleiche Figur, nur Reden) – andere Position, Nahaufnahme oder Hereinkommen."""
     prev_place, same, changes, prev_bd = None, 0, 0, None
@@ -556,7 +602,9 @@ def direct(scenes, times, topic="", style=""):
     fig_prev, inserts, counters = False, 0, 0
     topic_things = [k for pat, k in _lib_props() + TEXT_PROPS if _re0.search(pat, str(topic or "").lower()) and extras.prop_fit(k)][:2]
     topic_any = [k for pat, k in _lib_props() + TEXT_PROPS if _re0.search(pat, str(topic or "").lower())][:2]   # auch Himmel/Natur
-    stale, topic_ins = 0, 0
+    stale, topic_ins, gfx = 0, 0, 0
+    neon = str(look or "").lower() == "neon"
+    cur_hud = ""
     for i, (sc, (s0, e0)) in enumerate(zip(scenes, times)):
         sanitize(sc)
         if spooky:                                        # Grusel und Rätsel spielen im Dunkeln; Stimmung unheimlich, keine Passanten
@@ -760,7 +808,21 @@ def direct(scenes, times, topic="", style=""):
         last = i == len(scenes) - 1
         rp2 = places.resolve(backdrop(sc))
         window_scene = rp2 in places.WINDOWS and any(extras.PROP_ALIASES.get(q["type"].lower(), q["type"].lower()) in extras.SKY for q in (sc.get("props") or []))
-        if lone and fig_prev and not window_scene and not sc.get("shot") and not last and ov_t not in TALL_OV and ov_t != "choice" and rp2 not in MAPS:
+        cur_hud = sc.get("hud") if isinstance(sc.get("hud"), str) and sc.get("hud").strip() else cur_hud
+        if neon:
+            sc["look"], sc["time"] = "neon", "night"
+        g_auto = None
+        if sc.get("shot") == "graphic":
+            gfx += 1
+        elif (lone or not acts) and (fig_prev or neon or (i and scenes[i - 1].get("shot") == "graphic")) and sc.get("shot") in ("", "close") \
+                and not sc.get("overlay") and not last and i > 0 and gfx < (6 if neon else 4) and not window_scene and rp2 not in MAPS:
+            g_auto = graphics.clean(auto_graphic(sc.get("text"), cur_hud))
+            prev_g = scenes[i - 1].get("graphic") if scenes[i - 1].get("shot") == "graphic" else None
+            if g_auto and prev_g and (prev_g.get("type") == g_auto["type"] or (i > 1 and scenes[i - 2].get("shot") == "graphic")):
+                g_auto = None                            # nie dieselbe Grafik-Art zweimal hintereinander, nie drei Grafiken am Stück
+        if g_auto:                                       # Zahl, Frist oder Warum-Frage als bewegte Grafik statt redender Figur
+            sc["shot"], sc["graphic"], gfx = "graphic", g_auto, gfx + 1
+        elif lone and fig_prev and not window_scene and not sc.get("shot") and not last and ov_t not in TALL_OV and ov_t != "choice" and rp2 not in MAPS:
             things = [q for q in (sc.get("props") or []) if extras.prop_fit(q.get("type"))
                       and extras.PROP_ALIASES.get(q["type"].lower(), q["type"].lower()) not in DULL]
             if things and inserts < 4:
@@ -793,9 +855,11 @@ def direct(scenes, times, topic="", style=""):
                     acts[0].update(action="walk", pos="offright" if stale % 8 < 4 else "offleft", to="center")
         if topic_any and rp2 in places.OUTDOOR and not sc.get("props") and sc.get("shot") != "close" and i % 2 == 0 and not last:
             sc["props"] = [{"type": topic_any[0]}]        # das Thema bleibt im Bild (z. B. die Drohne über der Straße)
-        fig_prev = bool([a for a in (sc.get("actors") or []) if isinstance(a, dict)]) and sc.get("shot") != "insert"
+        fig_prev = bool([a for a in (sc.get("actors") or []) if isinstance(a, dict)]) and sc.get("shot") not in ("insert", "graphic")
         # --- beeindruckende Zahl im Satz → Zähler, wenn das Drehbuch keine Einblendung vorsieht
-        if not sc.get("overlay") and counters < 3 and not last:
+        if sc.get("shot") == "graphic":
+            sc["overlay"] = None if str((sc.get("overlay") or {}).get("type") or "") in ("counter", "bar", "card") else sc.get("overlay")
+        elif not sc.get("overlay") and counters < 3 and not last:
             fig = find_figure(sc.get("text"))
             if fig:
                 sc["overlay"] = fig
@@ -979,6 +1043,8 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     moving = any(a["x0"] != a["x1"] for a in actors)
     big = 1.5 if shot == "event" else 1.15
     ins = [k for k, _ in props if extras.PROP_ALIASES.get(k, k) in extras.PROPS][:2] if shot == "insert" else []
+    gfx = graphics.clean(scene.get("graphic")) if shot == "graphic" else None
+    neon_look = str(scene.get("look") or "") == "neon"
     shot = "close" if shot == "close" and not has_ov and not moving and not props and actors else ""
     ff = subprocess.Popen(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24",
                            "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-preset", "veryfast",
@@ -986,8 +1052,11 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     try:
         for fidx in range(n_frames):
             t = fidx / FPS
-            if ins:
-                frame = _insert_frame(ins, t, dur, str(scene.get("mood") or "").lower(), bool(has_ov))
+            if gfx or ins:
+                frame = (graphics.frame(gfx, t, dur, str(scene.get("mood") or "").lower()) if gfx
+                         else _insert_frame(ins, t, dur, str(scene.get("mood") or "").lower(), bool(has_ov)))
+                if neon_look and not gfx:
+                    frame = graphics.neon(frame, t)
                 if still is not None and fidx == min(n_frames - 1, FPS):
                     frame.save(still, quality=92)
                 ff.stdin.write(frame.tobytes())
@@ -995,6 +1064,8 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
             frame = _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, place == "bedroom", shot, big,
                            {"crowd": scene.get("crowd"), "mood": str(scene.get("mood") or "").lower(), "spec": places.spec_of(backdrop(scene)), "sky": sky_m, "win": scene.get("_win"), "count": scene.get("_count"),
                             "no_traffic": bool(scene.get("no_traffic") or scene.get("dark_city"))})
+            if neon_look:
+                frame = graphics.neon(frame, t)
             if still is not None and fidx == min(n_frames - 1, FPS):
                 frame.save(still, quality=92)
             ff.stdin.write(frame.tobytes())

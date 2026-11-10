@@ -31,6 +31,9 @@ on:
       visual:
         description: "Bildmodus nur für diesen Lauf: ai | toon (leer = Einstellung)"
         required: false
+      look:
+        description: "Bildstil nur für diesen Lauf: cartoon | neon (leer = Einstellung)"
+        required: false
 
 permissions:
   contents: write
@@ -51,6 +54,7 @@ jobs:
       IN_ID: ${{ inputs.video_id }}
       IN_TREND: ${{ inputs.trend }}
       AS_VISUAL: ${{ inputs.visual }}
+      AS_LOOK: ${{ inputs.look }}
     steps:
       - uses: actions/checkout@v4
         with:

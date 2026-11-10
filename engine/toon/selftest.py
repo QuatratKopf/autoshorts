@@ -5,7 +5,7 @@ import random
 import sys
 import traceback
 
-from . import extras, places, rig, stage
+from . import extras, graphics, places, rig, stage
 from .. import overlays
 
 errors = []
@@ -29,10 +29,17 @@ def frame(scene, cast=None, t=1.3):
            "sky": places.sky_mask(bd, night, bool(scene.get("dark_city"))), "no_traffic": bool(scene.get("no_traffic")),
            "win": scene.get("_win"), "count": scene.get("_count")}
     shot = str(scene.get("shot") or "")
+    if shot == "graphic" and graphics.clean(scene.get("graphic")):
+        return graphics.frame(graphics.clean(scene["graphic"]), t, 3.0, opt["mood"])
     if shot == "insert":
         return stage._insert_frame([k for k, _ in props][:2], t, 3.0, opt["mood"])
     return stage._frame(bg, place, night, scale, actors, props, weather, t, 3.0, (), 0.0, place == "bedroom",
                         shot if shot == "close" else "", 1.5 if shot == "event" else 1.15, opt)
+
+
+texts_gfx = ["Warum ist das so?", "Fünf Millionen Haushalte bekommen Post.", "Du bist zweiundsiebzig Stunden auf dich allein gestellt.",
+             "Vorrat für drei Tage.", "Fünfundvierzigtausend Haushalte ohne Strom.", "Neunzig Prozent fallen aus.", "Und jetzt?", "", None, 5,
+             "Ein Hund läuft.", "Achtzig Milliarden Liter Wasser."]
 
 
 def main():
@@ -104,6 +111,18 @@ def main():
            {"type": "unbekannt"}, {"type": "card"}, {"type": "phone", "items": []}, {}]
     for ov in ovs:
         check(f"Einblendung {ov}", lambda: overlays.frames_for(ov))
+    gs = [{"type": "number", "kicker": "Schweden · Nov. 2024", "value": "5 MIO.", "label": "Haushalte", "sub": "x" * 80}, {"type": "number", "value": 45000},
+          {"type": "number", "value": "1,2 Mrd."}, {"type": "number", "value": "abc"}, {"type": "timer", "value": "72:00:00"}, {"type": "timer", "value": "quatsch"},
+          {"type": "calendar", "value": "3", "label": "Tage", "kicker": "Vorrat für"}, {"type": "calendar", "value": "x" * 60}, {"type": "question"},
+          {"type": "question", "text": "Warum eigentlich so lange?"}, {"type": "houses", "value": "45.000", "label": "Haushalte", "dark": True},
+          {"type": "houses", "value": "5"}, {"type": "badge", "text": "72 Stunden", "kicker": "mind."}, {"type": "badge"}, {"type": "x"}, {}, None, "x"]
+    for g in gs:
+        for m in ("", "panic", "scary", "x"):
+            for t in (0.0, 0.2, 1.0, 3.5):
+                check(f"Grafik {g} {m} t={t}", lambda: frame({"shot": "graphic", "graphic": g, "mood": m, "place": "park"}, t=t))
+    for txt in texts_gfx:
+        check(f"Grafik aus Text: {txt}", lambda: graphics.clean(stage.auto_graphic(txt, "TAG 1")))
+    check("Neon-Look", lambda: graphics.neon(frame({"place": "street", "crowd": "walk"}), 1.0))
     # Regie mit zufälligen und kaputten Drehbüchern
     rnd = random.Random(1)
     junk = [None, "", 0, 3.5, [], {}, "xyz", ["a"], {"type": None}, {"elements": None}, {"elements": ["forest", 3, None]}, True]
@@ -128,10 +147,10 @@ def main():
                                          "emote": rnd.choice(["!", "", None, 3]), "pos": rnd.choice(["left", "x", None, 300]), "to": rnd.choice([None, "right", "x"]),
                                          "speaks": rnd.choice([True, False, None, "ja"]), "hold": rnd.choice([None, "handy", "x", 2])} for _ in range(rnd.randint(0, 4))],
                              "crowd": rnd.choice(["panic", "walk", "worried", "x"]), "mood": rnd.choice(["panic", "tense", "calm", "x"]),
-                             "shot": rnd.choice(["event", "close", "insert", "wide", "x"]), "overlay": rnd.choice(ovs), "hud": "TAG 1", "highlight": ["a"]}[k]
+                             "shot": rnd.choice(["event", "close", "insert", "wide", "graphic", "x"]), "overlay": rnd.choice(ovs), "hud": "TAG 1", "highlight": ["a"]}[k]
             scenes.append(sc)
         times = [(i * 3.0, i * 3.0 + 3.0) for i in range(len(scenes))]
-        if check(f"Regie Drehbuch {n}", lambda: stage.direct(scenes, times) or True):
+        if check(f"Regie Drehbuch {n}", lambda: stage.direct(scenes, times, "Drohnen überwachen", rnd.choice(["", "grusel"]), rnd.choice(["", "neon"])) or True):
             for i, sc in enumerate(scenes):
                 check(f"Regie Drehbuch {n} Szene {i}: {str(sc)[:300]}", lambda: frame(sc, t=rnd.choice((0.0, 1.0, 2.9))))
     check("Titelbild", lambda: stage.cover({"place": "street", "props": ["meteor"], "actor": "du"}, {"du": {}}, "/tmp/_selftest_cover.jpg"))

@@ -138,13 +138,20 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
   Kein leeres Standbild.
   "shot": "event" = Ereignis-Einstellung: das Geschehen (Requisiten, Wetter, Ort) füllt das Bild, "actors" ist [] oder
           höchstens eine kleine Figur am Rand, die zuschaut · "close" = Nahaufnahme einer Figur (selten, nur bei starker
-          Reaktion) · "insert" = ein einzelner Gegenstand aus "props" groß und allein im Bild, wenn der Satz genau von
+          Reaktion) · "graphic" = bewegte Grafik (siehe unten) · "insert" = ein einzelner Gegenstand aus "props" groß und allein im Bild, wenn der Satz genau von
           diesem Ding handelt (z. B. Kühlschrank, Kerze, Konserven) · sonst "wide"
 - WICHTIG – das Thema zeigen, nicht die Figur: Die Figuren sind Nebensache und klein im Bild. Immer wenn der Sprecher über
   Natur, Wetter, Weltall, Katastrophen, Tiere oder ein Phänomen redet, nimm "shot": "event" mit passenden Requisiten, Wetter
   und Ort (z. B. Vulkanausbruch: place mountain, props ["volcano","smoke"], weather "ash", actors []). Bei Natur-,
   Wissens- und What-If-Themen ist mindestens jede zweite Szene eine Ereignis-Einstellung. Figuren zeigen nur kurz die
   Reaktion oder die Folgen für Menschen.
+- BEWEGTE GRAFIKEN ("shot": "graphic" plus "graphic": {...}, ohne Figuren) für Zahlen, Fristen und Fragen – 2 bis 4 pro Video:
+    {"type": "number", "kicker": "SCHWEDEN · NOV. 2024", "value": "5 MIO.", "label": "HAUSHALTE"}   große Zahl läuft hoch
+    {"type": "timer", "value": "72:00:00", "kicker": "SO LANGE BIST DU ALLEIN"}                      Countdown läuft herunter
+    {"type": "calendar", "kicker": "VORRAT FÜR", "value": "3", "label": "TAGE"}                      Kalenderblatt
+    {"type": "question", "text": "WARUM?"}                                                           großes Fragezeichen mit Strahlen
+    {"type": "houses", "value": "45.000", "label": "HAUSHALTE", "dark": true}                        Häuserreihen, Fenster gehen aus (dark) oder an
+    {"type": "badge", "kicker": "MIND.", "text": "72 STUNDEN"}                                       Plakette im Sternenkranz
 - ABWECHSLUNG WIE IN VIRALEN ERKLÄRVIDEOS: Höchstens jede zweite Szene zeigt eine redende Figur. Die anderen Szenen zeigen
   das Geschehen ("shot": "event", actors []), einen Gegenstand groß ("shot": "insert" mit einem Ding aus "props") oder eine
   Zahl als Zähler (overlay "counter"). Das Ding, um das sich das Video dreht, ist mindestens zweimal groß im Bild.
