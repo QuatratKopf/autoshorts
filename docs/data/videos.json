@@ -204,5 +204,13 @@
   },
   "thumb": true,
   "mp4": true
+ },
+ {
+  "id": 9,
+  "category": "whatif",
+  "topic": "Was wäre, wenn die Sonne morgen einfach ausgeht?",
+  "status": "error",
+  "created": 1794268998.5544224,
+  "error": "Kein Text-Anbieter erreichbar. gemini: Expecting value: line 5 column 5 (char 258) | pollinations: Pollinations-Text HTTP 400: {\"success\":false,\"error\":{\"message\":\"The model exhausted its output token limit before producing an answer. Increase the token limit or reduce reasoning effort.\",\"code\":\"output_token_limit_exceeded\",\"timestamp\":\"2026-11-10T00:05:47.351Z\",\"details\":{\"name\":\"UpstreamError\",\"upstreamHost\":\"portkey.myce"
  }
 ]
