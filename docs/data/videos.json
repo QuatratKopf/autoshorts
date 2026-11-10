@@ -486,5 +486,44 @@
   },
   "thumb": true,
   "mp4": true
+ },
+ {
+  "id": 20,
+  "category": "whatif",
+  "topic": "Was wäre, wenn es ein Jahr lang nicht mehr regnet?",
+  "status": "rendered",
+  "created": 1794286446.3453486,
+  "title": "Was wäre, wenn ein Jahr lang kein Regen fällt?",
+  "description": "Erlebe die schockierenden Folgen einer globalen Dürre von Tag eins bis zum Ende des Jahres. Finde heraus, wie die Erde austrocknet und ob wir überleben können. Schreib deine Meinung in die Kommentare.",
+  "hashtags": [
+   "#shorts",
+   "#fyp",
+   "#viral",
+   "#wissen",
+   "#experiment",
+   "#erde",
+   "#natur",
+   "#zukunft"
+  ],
+  "tags": [
+   "was wäre wenn",
+   "dürre",
+   "kein regen",
+   "erdkunde",
+   "wetter",
+   "klima",
+   "wissenschaft",
+   "experiment"
+  ],
+  "thumb_text": "EIN JAHR KEIN REGEN",
+  "cover_ms": 92322,
+  "duration": 92.2,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "mp4": true
  }
 ]
