@@ -336,5 +336,47 @@
   },
   "thumb": true,
   "mp4": true
+ },
+ {
+  "id": 13,
+  "category": "storys",
+  "topic": "Wie Paul McCartney offiziell zum Milliardär wurde",
+  "status": "rendered",
+  "created": 1794272521.8503172,
+  "trend": {
+   "title": "Paul McCartney Becomes a Billionaire, Making Him the World’s Third-Richest Musician",
+   "source": "Reddit r/Music"
+  },
+  "title": "Paul McCartney: Wie der Ex-Beatle Milliardär wurde",
+  "description": "Paul McCartney ist offiziell der erste britische Musik-Milliardär. Wie hat er das nach dem Ende der Beatles geschafft? Erfahre die wahre Geschichte über weise Investments und Musikrechte. Hättest du deine eigenen Songrechte verkauft?",
+  "hashtags": [
+   "#shorts",
+   "#paulmccartney",
+   "#beatles",
+   "#musik",
+   "#geld",
+   "#fyp",
+   "#viral",
+   "#wissen"
+  ],
+  "tags": [
+   "paul mccartney",
+   "beatles",
+   "milliardär",
+   "reichtum",
+   "musikrechte",
+   "michael jackson",
+   "finanzen"
+  ],
+  "thumb_text": "ERSTER MUSIK MILLIARDÄR",
+  "cover_ms": 74611,
+  "duration": 74.5,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "mp4": true
  }
 ]
