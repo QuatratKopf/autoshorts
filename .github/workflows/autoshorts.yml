@@ -103,6 +103,7 @@ jobs:
           for w in SemiBold Bold ExtraBold; do
             curl -fsSL --retry 3 --max-time 60 -o .fonts/Poppins-$w.ttf https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-$w.ttf
           done
+          curl -fsSL --retry 3 --max-time 60 -o .fonts/Anton-Regular.ttf https://github.com/google/fonts/raw/main/ofl/anton/Anton-Regular.ttf || echo "Anton nicht geladen – Untertitel in Poppins"
 
       - name: AutoShorts ausführen
         if: steps.check.outputs.run == '1'

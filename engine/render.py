@@ -52,13 +52,20 @@ def _clean(w, lower):
     return w.lower() if lower else w.upper()
 
 
-def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, margin=560):
+def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, margin=560, style="impact"):
+    """style "impact": schmale, fette GROSSBUCHSTABEN mit orangem Schlüsselwort (wie in viralen Erklärvideos);
+    "classic": runde Schrift, wahlweise klein geschrieben."""
+    impact = str(style or "impact").lower() != "classic"
+    cap_font = "Anton" if impact and (Path(str(FONTS_DIR)) / "Anton-Regular.ttf").exists() else FONT
+    if impact:
+        lower = False
+    key_col = r"{\c&H001F8AFF&}" if impact else r"{\c&H003FD2FF&}"
     # Wörter zu kurzen Häppchen (1–2 Wörter, max. 14 Zeichen) zusammenfassen
     chunks, cur = [], []
     for w, s, e in words:
         cur.append((w, s, e))
         txt = " ".join(x[0] for x in cur)
-        if len(cur) >= 2 or len(txt) >= 12 or re.search(r"[.!?,;:]$", w):
+        if len(cur) >= (3 if impact else 2) or len(txt) >= (13 if impact else 12) or re.search(r"[.!?,;:]$", w):
             chunks.append(cur)
             cur = []
     if cur:
@@ -88,7 +95,7 @@ def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, 
             c = _clean(w, lower)
             if not c:
                 continue
-            parts.append(r"{\c&H003FD2FF&}" + c + r"{\c&H00FFFFFF&}" if is_key(w, s) else c)
+            parts.append(key_col + c + r"{\c&H00FFFFFF&}" if is_key(w, s) else c)
         text = " ".join(parts).strip()
         if text:
             lines.append(f"Dialogue: 1,{_ts(start)},{_ts(end)},Cap,,0,0,0,,{pop}{text}")
@@ -122,7 +129,7 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Cap,{FONT},{86 if lower else 92},&H00FFFFFF,&H00FFFFFF,&H00141414,&H96000000,-1,0,0,0,100,100,{0 if lower else 2},0,1,8,4,2,60,60,{margin},1
+Style: Cap,{cap_font},{(124 if cap_font == "Anton" else 96) if impact else (86 if lower else 92)},&H00FFFFFF,&H00FFFFFF,&H00141414,&H96000000,{0 if cap_font == "Anton" else -1},0,0,0,100,100,{2 if impact else (0 if lower else 2)},0,1,{6 if impact else 8},{5 if impact else 4},2,60,60,{margin},1
 Style: Hud,{FONT},54,&H00FFFFFF,&H00FFFFFF,&H00141414,&H64000000,-1,0,0,0,100,100,1,0,1,5,2,7,60,60,190,1
 Style: Cnt,{FONT},76,&H003FD2FF,&H003FD2FF,&H00141414,&H64000000,-1,0,0,0,100,100,1,0,1,6,2,9,60,60,170,1
 

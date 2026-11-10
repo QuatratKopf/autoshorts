@@ -70,6 +70,8 @@ Einblendungen (overlay) – nutze sie in etwa jeder zweiten Szene, passend zum I
 - {"type": "phone", "title": "3:12", "items": ["Mama: Wo bist du??", "Warnung: Bleib drinnen"]}  Handy mit Nachrichten/Alarmen
 - {"type": "checklist", "title": "SPEISEKARTE", "items": [["Motten", true], ["Fliegen", true], ["Käfer", false]]}  Listen, Vergleiche
 - {"type": "bar", "label": "WASSER", "value": 24}  Füllstand/Prozent/Energie
+- {"type": "counter", "label": "ZUCKER IM SEE", "value": 4.4, "unit": "MRD. TONNEN", "sub": "= 23 JAHRE WELTPRODUKTION"}
+  großer Zähler, der hochläuft – für jede beeindruckende Zahl (Menge, Jahre, Grad, Euro, Menschen); "sub" ist optional
 - {"type": "choice", "a": "Im Bunker bleiben", "b": "Zu Mama rennen"}  NUR in der letzten Szene von Geschichten: Was würdest du tun?
 Kamera: 'shake' bei Schreck/Aufprall (mit sfx 'boom'), sonst ruhige Fahrten; sfx sparsam (nicht in jeder Szene)."""
 

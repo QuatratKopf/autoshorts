@@ -437,7 +437,7 @@ def _gemini_tts(text, out, cat):
     key = secret("GEMINI_API_KEY")
     if not key:
         raise ProviderError("kein GEMINI_API_KEY")
-    voice = cfg("gemini_voice") or GEMINI_VOICES.get(cat.get("slug"), "Charon")
+    voice = cfg("gemini_voice") or GEMINI_VOICES.get(cat.get("slug"), "Puck")
     style = (cfg("voice_style") or cat.get("voice_instructions") or "Ruhig und natürlich.").strip()
     speed = max(0.8, min(1.15, float(cfg("voice_speed") or 1.0)))
     # kurze Regieanweisung: lange Anweisungen liest das Modell manchmal mit vor

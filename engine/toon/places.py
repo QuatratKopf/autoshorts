@@ -866,7 +866,24 @@ def _mid_graves(p, rnd):
         p.line((x, y - h * 0.8, x, y - h * 0.45), w=5); p.line((x - w * 0.2, y - h * 0.68, x + w * 0.2, y - h * 0.68), w=5)
 
 
-MID = {"forest": _mid_forest, "trees": _mid_trees, "deadtrees": _mid_deadtrees, "palms": _mid_palms, "cactus": _mid_cactus,
+def _mid_church(p, rnd):
+    y = 1000
+    m = px(1.0, y)
+    cx = 700
+    col = (86, 80, 96) if not p.night else (40, 40, 60)
+    p.rect((cx - m * 3.2, y - m * 5.2, cx + m * 3.2, y), col)
+    p.poly([(cx - m * 3.4, y - m * 5.2), (cx, y - m * 7.4), (cx + m * 3.4, y - m * 5.2)], _mix(col, 0.2, (0, 0, 0)))
+    for sx in (-1, 1):
+        tx = cx + sx * m * 2.2
+        p.rect((tx - m * 0.9, y - m * 9.0, tx + m * 0.9, y), col)
+        p.poly([(tx - m * 1.0, y - m * 9.0), (tx, y - m * 13.0), (tx + m * 1.0, y - m * 9.0)], _mix(col, 0.2, (0, 0, 0)))
+        for k in range(3):
+            p.rect((tx - m * 0.3, y - m * (8.0 - k * 2.0), tx + m * 0.3, y - m * (6.9 - k * 2.0)), (255, 214, 120) if p.night and not p.dark else (150, 190, 230), r=int(m * 0.3), o=4, glow=p.night and not p.dark)
+    p.oval((cx - m * 0.9, y - m * 4.4, cx + m * 0.9, y - m * 2.6), (240, 180, 90) if p.night and not p.dark else (150, 190, 230), o=5, glow=p.night and not p.dark)
+    p.rect((cx - m * 0.6, y - m * 1.9, cx + m * 0.6, y), (60, 44, 40), r=int(m * 0.5), o=5)
+
+
+MID = {"church": _mid_church, "forest": _mid_forest, "trees": _mid_trees, "deadtrees": _mid_deadtrees, "palms": _mid_palms, "cactus": _mid_cactus,
        "street": _mid_street, "powerlines": _mid_powerlines, "windturbines": _mid_windturbines, "gasstation": _mid_gasstation,
        "powerplant": _mid_powerplant, "bridge": _mid_bridge, "camp": _mid_camp, "graves": _mid_graves}
 
@@ -882,10 +899,10 @@ EL_ALIASES = {"berge": "mountains", "hügel": "hills", "dünen": "dunes", "wald"
               "läden": "street", "geschäfte": "street", "shops": "street", "strommasten": "powerlines", "stromleitung": "powerlines",
               "windräder": "windturbines", "windrad": "windturbines", "tankstelle": "gasstation", "kraftwerk": "powerplant",
               "atomkraftwerk": "powerplant", "brücke": "bridge", "zelte": "camp", "lager": "camp", "friedhof": "graves", "gräber": "graves",
-              "skyline": "city", "hochhäuser": "city", "tote bäume": "deadtrees", "ocean": "sea", "mountain": "mountains", "tree": "trees"}
+              "skyline": "city", "kirche": "church", "dom": "church", "kathedrale": "church", "hochhäuser": "city", "tote bäume": "deadtrees", "ocean": "sea", "mountain": "mountains", "tree": "trees"}
 
 
-MID_ORDER = ("windturbines", "powerplant", "bridge", "street", "gasstation", "powerlines", "graves", "camp", "cactus", "palms",
+MID_ORDER = ("church", "windturbines", "powerplant", "bridge", "street", "gasstation", "powerlines", "graves", "camp", "cactus", "palms",
              "deadtrees", "trees", "forest")
 
 
@@ -987,6 +1004,11 @@ OUTDOOR_SPECS = {
     "ruins": {"ground": "road", "sky": "red", "elements": ["ruins"]},
     "camp": {"ground": "grass", "elements": ["forest", "camp"]},
     "moon": {"ground": "moon", "sky": "night", "elements": ["rocks"]},
+    "church": {"ground": "road", "elements": ["church", "city"]},
+    "lake": {"ground": "grass", "elements": ["mountains", "hills", "lake", "trees"]},
+    "river": {"ground": "grass", "elements": ["hills", "river", "trees"]},
+    "fields": {"ground": "soil", "elements": ["fields", "hills", "windturbines"]},
+    "landfill": {"ground": "soil", "sky": "haze", "elements": ["hills", "factory"]},
 }
 
 
@@ -1097,6 +1119,46 @@ def restaurant(night):
     return p.vignette()
 
 
+GERMANY = [(0.45, 0.02), (0.52, 0.06), (0.58, 0.03), (0.66, 0.07), (0.78, 0.09), (0.86, 0.14), (0.9, 0.24), (0.88, 0.33), (0.93, 0.42),
+           (0.9, 0.5), (0.8, 0.56), (0.72, 0.6), (0.76, 0.7), (0.84, 0.78), (0.78, 0.86), (0.8, 0.94), (0.66, 0.96), (0.56, 0.99), (0.44, 0.95),
+           (0.34, 0.98), (0.22, 0.96), (0.24, 0.86), (0.14, 0.78), (0.08, 0.68), (0.12, 0.58), (0.06, 0.48), (0.1, 0.38), (0.16, 0.3),
+           (0.2, 0.2), (0.3, 0.16), (0.32, 0.08), (0.4, 0.08)]
+
+
+def _map(night, pts, title_col=(120, 150, 255)):
+    """Kartenbild: dunkler Grund, leuchtender Umriss – für „in ganz Deutschland“, „weltweit“ und Zahlen pro Land."""
+    p = P(False)
+    for y in range(0, H, 8):
+        f = y / H
+        p.d.rectangle((0, y, W, y + 8), fill=(int(10 + 8 * f), int(14 + 10 * f), int(34 + 20 * f)))
+    x0, y0, w, h = 190, 380, 700, 900
+    poly = [(x0 + a * w, y0 + b * h) for a, b in pts]
+    p.d.polygon(poly, fill=(22, 30, 66))
+    p.d.line(poly + [poly[0]], fill=(60, 80, 170), width=14, joint="curve")
+    p.d.line(poly + [poly[0]], fill=title_col, width=5, joint="curve")
+    return p.im
+
+
+def germany(night):
+    return _map(night, GERMANY)
+
+
+def worldmap(night):
+    p = P(False)
+    for y in range(0, H, 8):
+        f = y / H
+        p.d.rectangle((0, y, W, y + 8), fill=(int(10 + 8 * f), int(14 + 10 * f), int(34 + 20 * f)))
+    cx, cy, r = 540, 820, 430
+    p.d.ellipse((cx - r - 16, cy - r - 16, cx + r + 16, cy + r + 16), fill=(40, 60, 130))
+    p.d.ellipse((cx - r, cy - r, cx + r, cy + r), fill=(36, 96, 170))
+    for pts in (((-0.62, -0.5), (-0.3, -0.62), (-0.12, -0.4), (-0.3, -0.1), (-0.2, 0.2), (-0.36, 0.56), (-0.5, 0.2), (-0.7, -0.1)),
+                ((0.0, -0.6), (0.4, -0.66), (0.72, -0.4), (0.6, -0.1), (0.3, -0.16), (0.24, 0.3), (0.06, 0.5), (0.0, 0.1), (-0.06, -0.3)),
+                ((0.44, 0.3), (0.66, 0.26), (0.7, 0.46), (0.5, 0.5))):
+        p.d.polygon([(cx + a * r, cy + b * r) for a, b in pts], fill=(70, 150, 96), outline=(20, 40, 60), width=5)
+    p.d.ellipse((cx - r, cy - r, cx + r, cy + r), outline=(120, 150, 255), width=6)
+    return p.im
+
+
 def plain(night):
     p = P(night)
     p.room((244, 226, 190), (210, 170, 120))
@@ -1107,7 +1169,7 @@ PLACES = {"bedroom": bedroom, "livingroom": livingroom, "street": street, "basem
           "space": space, "lab": lab, "classroom": classroom, "plain": plain, "kitchen": kitchen, "office": office,
           "beach": beach, "desert": desert, "snow": snow, "forest": forest, "underwater": underwater,
           "mountain": mountain, "hospital": hospital, "cave": cave, "supermarket": supermarket,
-          "supermarket_empty": supermarket_empty, "bathroom": bathroom, "station": station, "restaurant": restaurant}
+          "supermarket_empty": supermarket_empty, "bathroom": bathroom, "station": station, "restaurant": restaurant, "germany": germany, "worldmap": worldmap}
 OUTDOOR = tuple(OUTDOOR_SPECS) + ("custom",)
 ALIASES = {"schlafzimmer": "bedroom", "zimmer": "bedroom", "wohnzimmer": "livingroom", "straße": "street", "stadt": "street",
            "city": "street", "keller": "basement", "bunker": "basement", "wald": "forest", "natur": "park", "garten": "park",
@@ -1116,10 +1178,11 @@ ALIASES = {"schlafzimmer": "bedroom", "zimmer": "bedroom", "wohnzimmer": "living
            "berg": "mountain", "berge": "mountain", "krankenhaus": "hospital", "höhle": "cave", "arctic": "snow",
            "weltraum": "space", "mond": "moon", "labor": "lab", "schule": "classroom", "klassenzimmer": "classroom",
            "home": "livingroom", "house": "livingroom", "outside": "park", "school": "classroom",
-           "supermarkt": "supermarket", "laden": "supermarket", "geschäft": "supermarket", "shop": "supermarket", "store": "supermarket",
+           "deutschland": "germany", "deutschlandkarte": "germany", "karte": "germany", "map": "germany", "weltkarte": "worldmap",
+           "welt": "worldmap", "world": "worldmap", "globus": "worldmap", "supermarkt": "supermarket", "laden": "supermarket", "geschäft": "supermarket", "shop": "supermarket", "store": "supermarket",
            "leerer supermarkt": "supermarket_empty", "bad": "bathroom", "badezimmer": "bathroom", "bahnhof": "station",
            "u-bahn": "station", "zug": "station", "restaurant": "restaurant", "café": "restaurant", "cafe": "restaurant",
-           "bauernhof": "farm", "dorf": "village", "tankstelle": "gasstation", "kraftwerk": "powerplant", "friedhof": "graveyard",
+           "bauernhof": "farm", "dorf": "village", "tankstelle": "gasstation", "kraftwerk": "powerplant", "friedhof": "graveyard", "kirche": "church", "dom": "church", "see": "lake", "fluss": "river", "müllhalde": "landfill", "deponie": "landfill",
            "ruinen": "ruins", "zeltlager": "camp", "lager": "camp", "feld": "farm", "felder": "farm", "mondoberfläche": "moon"}
 
 
@@ -1142,6 +1205,11 @@ def sky_mask(place, night=False, dark=False):
 def background(place, night=False, dark=False):
     """dark = Stromausfall: Fenster und Lampen bleiben aus."""
     DARK[0] = bool(dark)
+    if len(_cache) > 24:                                  # Speicher begrenzen (jedes Bild ist mehrere MB groß)
+        _cache.clear()
+        last = _masks.get("last")
+        _masks.clear()
+        _masks["last"] = last
     try:
         if not isinstance(place, dict) and resolve(place) in OUTDOOR_SPECS:
             place = OUTDOOR_SPECS[resolve(place)]

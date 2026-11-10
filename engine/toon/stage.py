@@ -53,7 +53,53 @@ def _zzz(d, pose, hx, hy, t):
             d.ellipse((hx + 150 + i * 46, hy - 170, hx + 180 + i * 46, hy - 140), fill=(255, 255, 255, 255), outline=rig.INK, width=4)
 
 
+def sanitize(sc):
+    """Bringt eine Szene aus dem Drehbuch in saubere Form – egal, was die Text-KI geliefert hat (falsche Typen, Unsinn)."""
+    if not isinstance(sc, dict):
+        return {}
+    def word(v):
+        return v.strip() if isinstance(v, str) else ""
+    sc["text"] = sc.get("text") if isinstance(sc.get("text"), str) else ""
+    for k in ("time", "weather", "crowd", "mood", "shot"):
+        sc[k] = word(sc.get(k)).lower()
+    if not isinstance(sc.get("place"), str):
+        sc["place"] = ""
+    b = sc.get("backdrop")
+    if isinstance(b, dict):
+        els = b.get("elements") if isinstance(b.get("elements"), (list, tuple)) else []
+        b = {"sky": word(b.get("sky")), "ground": word(b.get("ground")), "elements": [e for e in els if isinstance(e, str) and e.strip()]}
+        sc["backdrop"] = b if (b["elements"] or b["ground"] or b["sky"]) else None
+    else:
+        sc["backdrop"] = None
+    props = []
+    for q in (sc.get("props") if isinstance(sc.get("props"), (list, tuple)) else []):
+        if isinstance(q, str) and q.strip():
+            props.append({"type": q.strip()})
+        elif isinstance(q, dict) and isinstance(q.get("type"), str) and q["type"].strip():
+            props.append({"type": q["type"].strip(), **({"pos": q["pos"]} if isinstance(q.get("pos"), (str, int, float)) and not isinstance(q.get("pos"), bool) else {})})
+    sc["props"] = props
+    if "actors" in sc:
+        acts = []
+        for a in (sc.get("actors") if isinstance(sc.get("actors"), (list, tuple)) else []):
+            if not isinstance(a, dict):
+                continue
+            c = {"id": str(a.get("id")) if isinstance(a.get("id"), (str, int)) and not isinstance(a.get("id"), bool) else "held",
+                 "speaks": a.get("speaks") is True}
+            for k in ("action", "emotion", "emote", "kind", "hold", "facing"):
+                c[k] = word(a.get(k)) if k == "emote" else word(a.get(k)).lower()
+            for k in ("pos", "to"):
+                v = a.get(k)
+                if (isinstance(v, str) and v.strip()) or (isinstance(v, (int, float)) and not isinstance(v, bool)):
+                    c[k] = v
+            acts.append(c)
+        sc["actors"] = acts
+    sc["overlay"] = sc.get("overlay") if isinstance(sc.get("overlay"), dict) else None
+    return sc
+
+
 def _prepare(scene, cast):
+    scene = sanitize(scene)
+    cast = cast if isinstance(cast, dict) else {}
     place = places.resolve(backdrop(scene))
     night = str(scene.get("time") or "").lower() in ("night", "nacht", "abend", "evening")
     ov = scene.get("overlay") if isinstance(scene.get("overlay"), dict) else {}
@@ -62,6 +108,8 @@ def _prepare(scene, cast):
     raw = [a for a in (scene.get("actors") or []) if isinstance(a, dict)]
     if "actors" not in scene and not event:
         raw = [{"id": next(iter(cast), "held"), "action": "talk", "speaks": True}]
+    if place in ("germany", "worldmap"):       # auf der Karte stehen keine Figuren
+        raw = []
     if event:            # Ereignis-Einstellung: das Geschehen groß, höchstens eine kleine Figur am Rand als Zuschauer
         raw = raw[:1]
         for a in raw:
@@ -360,7 +408,10 @@ def direct(scenes, times):
     prev_place, same, changes, prev_bd = None, 0, 0, None
     power_out = False
     last_id = None
+    maps_used = 0
+    import re as _re0
     for i, (sc, (s0, e0)) in enumerate(zip(scenes, times)):
+        sanitize(sc)
         acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
         place = places.resolve(sc.get("place"))
         has_bd = isinstance(sc.get("backdrop"), dict) and (sc["backdrop"].get("elements") or sc["backdrop"].get("ground"))
@@ -371,6 +422,16 @@ def direct(scenes, times):
                     sc["backdrop"] = hint
             elif hint != place:
                 sc["place"] = place = hint
+        if hint is None and not has_bd and (place in GENERIC) and maps_used < 2 and not acts[1:]:
+            for pat, target in MAP_HINTS:                       # „in ganz Deutschland“, „weltweit“ → Kartenbild (höchstens zweimal)
+                if _re0.search(pat, str(sc.get("text") or "").lower()):
+                    sc["place"] = place = target
+                    maps_used += 1
+                    break
+        if places.resolve(sc.get("place")) in MAPS and not has_bd:   # auf der Karte stehen keine Figuren und Dinge
+            sc["actors"], sc["props"], sc["crowd"], sc["weather"] = [], [], "", ""
+            sc["shot"] = "" if str(sc.get("shot") or "") in ("close", "insert", "event") else sc.get("shot")
+            acts = []
         home = {"shelf": "supermarket", "cart": "supermarket", "fridge": "kitchen", "tv": "livingroom", "computer": "office"}
         for q in (sc.get("props") or []):
             k = str(q.get("type") if isinstance(q, dict) else q).lower().strip()
@@ -515,6 +576,8 @@ HINTS = [
     (r"\bzelt|camping|flüchtlingslager|notunterk", "camp"),
     (r"bauernhof|\bstall\b|\bkühe|\bvieh", "farm"),
     (r"mondoberfläche|auf dem mond|mondlandung", "moon"),
+    (r"kirche|\bdom\b|kathedrale", "church"),
+    (r"müllhalde|müllberg|deponie|\bmüll\b", "landfill"),
     (r"regenwald|dschungel|\bwald|wälder|bäume", {"elements": ["forest"]}),
     (r"ausgetrocknet|dürre|vertrocknet|trocknen aus|staubtrocken", {"ground": "dry", "sky": "haze", "elements": ["deadtrees", "dryriver"]}),
     (r"\bfluss|flüsse|\bbach|strom fließt", {"elements": ["hills", "river"]}),
@@ -552,6 +615,9 @@ MOOD_HINTS = [
     (r"staunen|beobachten|schauen zu|zuschauer", ("", "watch")),
 ]
 INDOOR = ("bedroom", "livingroom", "kitchen", "office", "classroom", "lab", "hospital", "basement", "cave", "underwater", "space")
+MAPS = ("germany", "worldmap")
+MAP_HINTS = ((r"ganz deutschland|in deutschland|deutschlandweit|bundesweit|bundesländer|jeder deutsche|alle deutschen", "germany"),
+             (r"weltweit|auf der ganzen welt|alle länder|rund um den globus|weltbevölkerung|alle kontinente|die ganze erde|die ganze welt", "worldmap"))
 PUBLIC_INDOOR = ("supermarket", "supermarket_empty", "station", "hospital", "office", "classroom", "restaurant")
 MOOD_EMOTION = {"panic": "scared", "tense": "worried", "scary": "scared", "sad": "sad", "happy": "happy"}
 EMOTION_OK = {"panic": ("scared", "shocked", "worried"), "tense": ("worried", "scared", "shocked", "angry", ""),

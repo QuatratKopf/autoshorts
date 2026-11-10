@@ -484,6 +484,95 @@ def p_ship(d, x, t, s=1.0):
     _r(d, (x - 110, y - 130, x + 60, y - 60), (240, 240, 244), 6)
     _r(d, (x - 20, y - 200, x + 20, y - 130), (214, 70, 60), 4)
 
+def p_door(d, x, t, s=1.0):
+    _r(d, (x - 130, GROUND - 500, x + 130, GROUND), (96, 66, 46), 6)
+    _r(d, (x - 110, GROUND - 480, x + 110, GROUND), (150, 100, 64), 4, 5)
+    for y0, y1 in ((-450, -270), (-240, -40)):
+        d.rounded_rectangle((x - 80, GROUND + y0, x + 80, GROUND + y1), 6, outline=(110, 72, 46), width=6)
+    _o(d, (x + 64, GROUND - 250, x + 92, GROUND - 222), (240, 200, 90), 4)
+    d.polygon([(x - 120, GROUND), (x + 120, GROUND), (x + 190, GROUND + 60), (x - 190, GROUND + 60)], fill=(255, 210, 120, 70))
+
+
+def p_clock(d, x, t, s=1.0):
+    cy = GROUND - 200
+    _o(d, (x - 190, cy - 190, x + 190, cy + 190), (250, 250, 246))
+    for i in range(12):
+        a = i / 12 * math.tau
+        d.line((x + math.cos(a) * 150, cy + math.sin(a) * 150, x + math.cos(a) * 172, cy + math.sin(a) * 172), fill=INK, width=8)
+    for spd, ln, wd, col in ((0.9, 150, 8, (220, 60, 50)), (0.075, 130, 12, INK), (0.00625, 90, 16, INK)):
+        a = t * spd * math.tau - math.pi / 2
+        d.line((x, cy, x + math.cos(a) * ln, cy + math.sin(a) * ln), fill=col, width=wd)
+    _o(d, (x - 14, cy - 14, x + 14, cy + 14), INK, 2)
+
+
+def p_pile(d, x, t, s=1.0, col=(244, 244, 248)):
+    g = _pop(t, 0.1, 1.6)                                    # Haufen wächst
+    hgt, wd = 420 * (0.25 + 0.75 * g), 520 * (0.4 + 0.6 * g)
+    d.polygon([(x - wd, GROUND), (x - wd * 0.2, GROUND - hgt * 0.9), (x, GROUND - hgt), (x + wd * 0.25, GROUND - hgt * 0.88), (x + wd, GROUND)],
+              fill=col, outline=INK, width=O)
+    rnd = random.Random(4)
+    for _ in range(26):
+        fx, fy = rnd.uniform(-0.8, 0.8), rnd.uniform(0.05, 0.85)
+        if abs(fx) < (1 - fy) * 0.9:
+            d.ellipse((x + fx * wd - 5, GROUND - fy * hgt - 5, x + fx * wd + 5, GROUND - fy * hgt + 5), fill=tuple(max(0, c - 40) for c in col))
+    for i in range(5):                                       # es rieselt nach
+        ph = (t * 0.9 + i / 5) % 1
+        d.ellipse((x + (i - 2) * 16 - 6, GROUND - hgt - 260 + ph * 260 - 6, x + (i - 2) * 16 + 6, GROUND - hgt - 260 + ph * 260 + 6), fill=col + (int(255 * (1 - ph * 0.3)),))
+
+
+def p_sandpile(d, x, t, s=1.0):
+    p_pile(d, x, t, s, (236, 196, 120))
+
+
+def p_trash(d, x, t, s=1.0):
+    for i, (dx, dy, col) in enumerate(((-150, 0, (60, 60, 68)), (20, 0, (70, 110, 80)), (160, 0, (60, 60, 68)), (-60, -120, (80, 80, 90)), (90, -130, (60, 60, 68)))):
+        _o(d, (x + dx - 100, GROUND + dy - 170, x + dx + 100, GROUND + dy), col)
+        d.polygon([(x + dx - 26, GROUND + dy - 160), (x + dx, GROUND + dy - 210), (x + dx + 26, GROUND + dy - 160)], fill=col, outline=INK, width=5)
+    for i in range(3):
+        ph = (t * 0.5 + i / 3) % 1
+        d.arc((x - 120 + i * 110, GROUND - 330 - ph * 120, x - 80 + i * 110, GROUND - 250 - ph * 120), 90, 270, fill=(120, 150, 90, int(220 * (1 - ph))), width=7)
+
+
+def p_faucet(d, x, t, s=1.0):
+    y = GROUND - 520
+    _r(d, (x - 200, y - 40, x + 40, y + 30), (170, 176, 188), 14)
+    _r(d, (x - 20, y - 40, x + 60, y + 130), (170, 176, 188), 14)
+    _r(d, (x - 150, y - 110, x - 110, y - 40), (150, 156, 168), 6, 5)
+    _r(d, (x - 190, y - 130, x - 70, y - 100), (214, 70, 60), 10, 5)
+    wob = math.sin(t * 20) * 4
+    d.rectangle((x + 4 + wob, y + 130, x + 36 + wob, GROUND - 150), fill=(110, 190, 250))
+    d.polygon([(x - 120, GROUND - 190), (x + 160, GROUND - 190), (x + 120, GROUND), (x - 80, GROUND)], fill=(210, 236, 250, 150), outline=INK, width=O)
+    lvl = 30 + 130 * min(1.0, t / 2.5)
+    d.polygon([(x - 84 - lvl * 0.2, GROUND - lvl), (x + 124 + lvl * 0.2, GROUND - lvl), (x + 116, GROUND - 6), (x - 76, GROUND - 6)], fill=(110, 190, 250))
+
+
+def p_glass(d, x, t, s=1.0):
+    d.polygon([(x - 120, GROUND - 330), (x + 120, GROUND - 330), (x + 90, GROUND), (x - 90, GROUND)], fill=(214, 236, 250, 140), outline=INK, width=O)
+    lvl = 60 + 220 * min(1.0, t / 2.5)
+    k = lvl / 330
+    d.polygon([(x - 90 - 30 * k + 6, GROUND - lvl), (x + 90 + 30 * k - 6, GROUND - lvl), (x + 84, GROUND - 6), (x - 84, GROUND - 6)], fill=(110, 190, 250))
+    for i in range(4):
+        ph = (t * 0.7 + i / 4) % 1
+        d.ellipse((x - 50 + i * 30 - 7, GROUND - 20 - ph * (lvl - 30) - 7, x - 50 + i * 30 + 7, GROUND - 20 - ph * (lvl - 30) + 7), outline=(240, 250, 255), width=3)
+
+
+def p_barrel(d, x, t, s=1.0):
+    _r(d, (x - 110, GROUND - 300, x + 110, GROUND), (70, 110, 170), 30)
+    for y in (-230, -150, -70):
+        d.line((x - 110, GROUND + y, x + 110, GROUND + y), fill=INK, width=6)
+    _o(d, (x - 30, GROUND - 216, x + 30, GROUND - 164), (250, 200, 60), 5)
+
+
+def p_solarpanel(d, x, t, s=1.0):
+    d.line((x, GROUND, x, GROUND - 170), fill=INK, width=18)
+    d.polygon([(x - 260, GROUND - 120), (x + 200, GROUND - 330), (x + 260, GROUND - 250), (x - 200, GROUND - 40)], fill=(50, 80, 150), outline=INK, width=O)
+    for k in range(1, 4):
+        d.line((x - 260 + k * 115, GROUND - 120 - k * 52.5, x - 200 + k * 115, GROUND - 40 - k * 52.5), fill=(170, 200, 240), width=4)
+    d.line((x - 230, GROUND - 80, x + 230, GROUND - 290), fill=(170, 200, 240), width=4)
+    gl = (t * 0.5) % 1
+    d.line((x - 240 + gl * 440, GROUND - 110 - gl * 200, x - 200 + gl * 440, GROUND - 60 - gl * 200), fill=(255, 255, 255, 170), width=10)
+
+
 
 PROPS = {"cloud": p_cloud, "stormcloud": p_stormcloud, "lightning": p_lightning, "crack": p_crack, "flood": p_flood, "smoke": p_smoke, "aurora": p_aurora,
          "eclipse": p_eclipse, "sprout": p_sprout, "tree": p_tree, "rock": p_rock, "box": p_box, "car": p_car, "fire": p_fire, "tv": p_tv, "computer": p_computer,
@@ -491,6 +580,8 @@ PROPS = {"cloud": p_cloud, "stormcloud": p_stormcloud, "lightning": p_lightning,
          "sun": p_bigsun, "moon": p_bigmoon, "tornado": p_tornado, "wave": p_wave, "ice": p_ice, "volcano": p_volcano,
          "cart": p_cart, "candle": p_candle, "bus": p_bus, "truck": p_truck, "house": p_house, "trafficlight": p_trafficlight,
          "canister": p_canister, "cans": p_cans, "generator": p_generator, "bike": p_bike, "shelf": p_shelf, "table": p_table,
+         "door": p_door, "clock": p_clock, "pile": p_pile, "sandpile": p_sandpile, "trash": p_trash, "faucet": p_faucet,
+         "glass": p_glass, "barrel": p_barrel, "solarpanel": p_solarpanel,
          "fridge": p_fridge, "tent": p_tent, "streetlamp": p_streetlamp, "plane": p_plane, "satellite": p_satellite, "ship": p_ship}
 PROP_ALIASES = {"baum": "tree", "stein": "rock", "kiste": "box", "auto": "car", "feuer": "fire", "fernseher": "tv", "pc": "computer",
                 "laptop": "computer", "geld": "money", "rakete": "rocket", "asteroid": "meteor", "erde": "earth", "sonne": "sun",
@@ -502,7 +593,11 @@ PROP_ALIASES = {"baum": "tree", "stein": "rock", "kiste": "box", "auto": "car", 
                 "aggregat": "generator", "fahrrad": "bike", "regal": "shelf", "tisch": "table", "kühlschrank": "fridge", "zelt": "tent",
                 "laterne": "streetlamp", "straßenlaterne": "streetlamp", "flugzeug": "plane", "satellit": "satellite", "schiff": "ship",
                 "boot": "ship", "paket": "box", "karton": "box", "geldstapel": "money", "bildschirm": "tv", "lagerfeuer": "fire",
-                "pflanze": "sprout", "plant": "sprout", "comet": "meteor", "komet": "meteor", "welle": "wave", "eisberg": "ice", "vulkan": "volcano", "bigsun": "sun"}
+                "tür": "door", "uhr": "clock", "wanduhr": "clock", "haufen": "pile", "zucker": "pile", "salz": "pile", "zuckerberg": "pile",
+                "schneehaufen": "pile", "sandhaufen": "sandpile", "sand": "sandpile", "müll": "trash", "müllberg": "trash", "garbage": "trash",
+                "wasserhahn": "faucet", "tap": "faucet", "hahn": "faucet", "glas": "glass", "wasserglas": "glass", "getränk": "glass",
+                "fass": "barrel", "tonne": "barrel", "ölfass": "barrel", "solar": "solarpanel", "solaranlage": "solarpanel",
+                "solarzelle": "solarpanel", "pflanze": "sprout", "plant": "sprout", "comet": "meteor", "komet": "meteor", "welle": "wave", "eisberg": "ice", "vulkan": "volcano", "bigsun": "sun"}
 FRONT = ("wave", "flood", "eclipse")
 BEHIND = ("sun", "moon", "earth", "cloud", "stormcloud", "aurora")      # stehen am Himmel hinter Häusern, Bergen und Bäumen
 SKY = ("earth", "sun", "moon", "ufo", "meteor", "aurora", "eclipse", "lightning", "cloud", "stormcloud", "plane", "satellite")     # werden vor den Figuren gezeichnet
@@ -514,7 +609,8 @@ SIZES = {"car": (1.5, 1150), "bus": (3.0, 1100), "truck": (3.3, 1100), "house": 
          "box": (0.5, 1262), "fire": (1.1, 1250), "tv": (1.2, 1245), "computer": (1.3, 1245), "money": (0.45, 1262), "sprout": (0.5, 1262),
          "cart": (1.0, 1262), "candle": (0.9, 1262), "trafficlight": (3.4, 1225), "canister": (0.5, 1262), "cans": (0.5, 1262),
          "generator": (0.8, 1255), "bike": (1.05, 1255), "shelf": (1.9, 1238), "table": (0.78, 1250), "fridge": (1.85, 1238),
-         "tent": (1.8, 1180), "streetlamp": (4.6, 1225), "rocket": (14.0, 1010)}
+         "tent": (1.8, 1180), "door": (2.1, 1236), "clock": (0.6, 1262), "pile": (3.2, 1160), "sandpile": (3.2, 1160),
+         "trash": (1.6, 1200), "faucet": (1.6, 1255), "glass": (0.9, 1262), "barrel": (0.95, 1255), "solarpanel": (1.8, 1200), "streetlamp": (4.6, 1225), "rocket": (14.0, 1010)}
 HELD = {"phone": "phone", "handy": "phone", "smartphone": "phone", "flashlight": "flashlight", "taschenlampe": "flashlight",
         "bag": "bag", "tasche": "bag", "einkaufstüte": "bag", "tüte": "bag", "bottle": "bottle", "flasche": "bottle",
         "wasserflasche": "bottle", "umbrella": "umbrella", "regenschirm": "umbrella", "schild": "sign", "sign": "sign",
@@ -834,6 +930,27 @@ def draw_mood(layer, mood, t):
             d.rectangle((x - 7, y - 4, x + 7, y + 4), fill=(*colr, 235))
 
 
+_mp = {}
+
+
+def _map_pts(place):
+    if place not in _mp:
+        from . import places as pl
+        rnd = random.Random(9)
+        m = Image.new("L", (W, H), 0)
+        if place == "germany":
+            ImageDraw.Draw(m).polygon([(190 + a * 700, 380 + b * 900) for a, b in pl.GERMANY], fill=255)
+        else:
+            ImageDraw.Draw(m).ellipse((540 - 400, 820 - 400, 540 + 400, 820 + 400), fill=255)
+        pts = []
+        while len(pts) < 46:
+            x, y = rnd.randint(150, 930), rnd.randint(400, 1280)
+            if m.getpixel((x, y)) and all((x - a) ** 2 + (y - b) ** 2 > 50 ** 2 for a, b in pts):
+                pts.append((x, y))
+        _mp[place] = pts
+    return _mp[place]
+
+
 def draw_ambient(layer, place, night, t):
     """Kleine Bewegung im Hintergrund, damit kein Bild stillsteht."""
     d = ImageDraw.Draw(layer, "RGBA")
@@ -875,6 +992,17 @@ def draw_ambient(layer, place, night, t):
     if place == "station":                                        # Anzeige blinkt
         if int(t * 1.5) % 2:
             d.rectangle((700, 478, 800, 500), fill=(30, 40, 70, 255))
+    if place in ("germany", "worldmap"):                          # Punkte leuchten nach und nach auf der Karte auf
+        cols = ((250, 200, 70), (240, 110, 90), (120, 200, 250), (140, 220, 140))
+        for i, (x, y) in enumerate(_map_pts(place)):
+            k = _pop(t, 0.2 + i * 0.05, 0.3)
+            if k <= 0:
+                continue
+            pul = 1 + 0.25 * math.sin(t * 3 + i)
+            r = 9 * k
+            d.ellipse((x - r * 2.4 * pul, y - r * 2.4 * pul, x + r * 2.4 * pul, y + r * 2.4 * pul), fill=cols[i % 4] + (50,))
+            d.ellipse((x - r, y - r, x + r, y + r), fill=cols[i % 4] + (255,))
+        return
     if place not in OUTDOOR and place not in ("space", "underwater"):   # Staub tanzt im Licht – nichts steht ganz still
         for i, (a, b, c) in enumerate(_DROPS[40:54]):
             x = (a * W + math.sin(t * 0.7 + i) * 40 + t * 12 * (c - 0.5)) % W
@@ -1008,6 +1136,17 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0):
         d.ellipse((cx - 90 * k, by - 60 * k, cx + 90 * k, by + 60 * k), fill=(90, 160, 240), outline=INK, width=o)
         d.polygon([(cx + facing * 80 * k, by - 10 * k), (cx + facing * 140 * k, by + 6 * k), (cx + facing * 80 * k, by + 22 * k)], fill=(250, 180, 50), outline=INK, width=int(5 * k))
         eye(cx + facing * 40 * k, by - 12 * k, 20 * k)
+    elif kind in ("bee", "biene", "wasp", "wespe"):
+        fly = True
+        by = gy - 360 * k + bob * 2.5 + math.sin(t * 6) * 14 * k
+        fl = math.sin(t * 40) * 18 * k
+        for sx in (-30, 20):
+            d.ellipse((cx + sx * k - 46 * k, by - 110 * k - fl, cx + sx * k + 46 * k, by - 30 * k), fill=(220, 240, 255, 210), outline=INK, width=int(4 * k))
+        d.polygon([(cx - facing * 96 * k, by - 12 * k), (cx - facing * 130 * k, by), (cx - facing * 96 * k, by + 12 * k)], fill=INK)
+        d.ellipse((cx - 100 * k, by - 62 * k, cx + 100 * k, by + 62 * k), fill=(250, 200, 50), outline=INK, width=o)
+        for sx in (-44, 4):
+            d.rectangle((cx + sx * k * facing - 16 * k, by - 56 * k, cx + sx * k * facing + 16 * k, by + 56 * k), fill=INK)
+        eye(cx + facing * 62 * k, by - 12 * k, 18 * k)
     elif kind in ("dino", "dinosaurier", "monster"):
         col = (110, 190, 110) if kind != "monster" else (150, 110, 200)
         d.polygon([(cx - 100 * k * facing, gy - 120 * k), (cx - 300 * k * facing, gy - 20 * k), (cx - 80 * k * facing, gy - 40 * k)], fill=col, outline=INK, width=o)
@@ -1046,4 +1185,4 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0):
     return out, cx / S, gy / S, fly
 
 
-CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark")
+CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp")

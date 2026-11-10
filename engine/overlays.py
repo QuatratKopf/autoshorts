@@ -182,6 +182,44 @@ def choice(a, b):
 
 # ------------------------------------------------------------------ Animation
 
+def _cfont(size):
+    """Schmale fette Schrift (Anton) für große Zahlen – sonst Poppins."""
+    for pth in (FONTS / "Anton-Regular.ttf", Path("/usr/share/fonts/truetype/google-fonts/Anton-Regular.ttf")):
+        if pth.exists():
+            return ImageFont.truetype(str(pth), size)
+    return font(int(size * 0.8))
+
+
+def _num(v, decimals):
+    txt = f"{v:,.{decimals}f}".replace(",", "X").replace(".", ",").replace("X", ".")
+    return txt
+
+
+def counter(label, value, unit, shown=None, sub=""):
+    """Großer Zähler wie in Erklärvideos: kleine Zeile, darunter die hochlaufende Zahl mit Einheit."""
+    try:
+        v = float(str(value).replace(",", "."))
+    except ValueError:
+        v = 0.0
+    decimals = 0 if abs(v - round(v)) < 1e-9 else (1 if abs(v * 10 - round(v * 10)) < 1e-9 else 2)
+    cur = v if shown is None else shown
+    fl, fn, fs = font(34, "Bold"), _cfont(150), font(40, "Bold")
+    txt = (_num(cur, decimals) + (" " + unit.upper() if unit else "")).strip()
+    w, h = 980, 330
+    im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    dr = ImageDraw.Draw(im)
+    while dr.textlength(_num(v, decimals) + (" " + unit.upper() if unit else ""), font=fn) > w - 60 and fn.size > 70:
+        fn = _cfont(fn.size - 10)
+    lab = "  ".join(label.upper())[:60] if len(label) <= 22 else label.upper()
+    dr.text(((w - dr.textlength(lab, font=fl)) / 2, 6), lab, font=fl, fill=(235, 235, 235), stroke_width=5, stroke_fill=INK)
+    tw = dr.textlength(txt, font=fn)
+    dr.text(((w - tw) / 2 + 6, 62 + 8), txt, font=fn, fill=(0, 0, 0, 150))
+    dr.text(((w - tw) / 2, 62), txt, font=fn, fill=WHITE, stroke_width=7, stroke_fill=INK)
+    if sub:
+        dr.text(((w - dr.textlength(sub.upper(), font=fs)) / 2, 62 + fn.size + 34), sub.upper(), font=fs, fill=(255, 138, 31), stroke_width=5, stroke_fill=INK)
+    return im
+
+
 def _pop(final, n=9):
     """Pop-in: klein → etwas zu groß → normal, mit Einblenden."""
     curve = [0.55, 0.75, 0.92, 1.06, 1.1, 1.06, 1.02, 1.0, 1.0][:n]
@@ -223,6 +261,20 @@ def frames_for(ov: dict):
             fr = _pop(bar(str(ov["label"])[:12], v, 0), 6)
             fr += [bar(str(ov["label"])[:12], v, v * k / 24) for k in range(1, 25)]   # Balken füllt sich
             return fr, 300
+        if t == "counter" and ov.get("value") is not None:
+            lab, unit, sub = str(ov.get("label") or "")[:26], str(ov.get("unit") or "")[:16], str(ov.get("sub") or "")[:30]
+            try:
+                v = float(str(ov["value"]).replace(",", "."))
+                v0 = float(str(ov.get("from") or 0).replace(",", "."))
+            except ValueError:
+                return None
+            fr = _pop(counter(lab, v, unit, v0, ""), 5)
+            n = 34
+            for k in range(1, n + 1):                              # Zahl läuft hoch, am Ende langsamer
+                f = 1 - (1 - k / n) ** 2.4
+                fr.append(counter(lab, v, unit, v0 + (v - v0) * f, ""))
+            fr += [counter(lab, v, unit, None, sub)] * 2
+            return fr, 330
         if t == "choice" and ov.get("a") and ov.get("b"):
             return _pop(choice(str(ov["a"])[:40], str(ov["b"])[:40])), 640
     except Exception:  # noqa: BLE001

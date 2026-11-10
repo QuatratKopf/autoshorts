@@ -163,7 +163,16 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None):
             stage.direct(scenes, times)
             for i, (sc, (s0, e0)) in enumerate(zip(scenes, times)):
                 d = (e0 - s0) + (0.35 if i == len(scenes) - 1 else 0.25)
-                stage.render_scene(sc, script.get("cast") or {}, d, work / f"toon{i:02d}.mp4", words, s0, work / f"img{i:02d}.jpg")
+                try:
+                    stage.render_scene(sc, script.get("cast") or {}, d, work / f"toon{i:02d}.mp4", words, s0, work / f"img{i:02d}.jpg")
+                except Exception as e:  # noqa: BLE001 – eine Szene darf nie das ganze Video kosten
+                    log(f"Szene {i + 1} ließ sich nicht wie geplant zeichnen ({type(e).__name__}: {e}) – vereinfachte Fassung")
+                    safe = {"text": sc.get("text"), "place": sc.get("place") if isinstance(sc.get("place"), str) else "park",
+                            "time": sc.get("time"), "overlay": sc.get("overlay"), "crowd": "walk"}
+                    try:
+                        stage.render_scene(safe, script.get("cast") or {}, d, work / f"toon{i:02d}.mp4", words, s0, work / f"img{i:02d}.jpg")
+                    except Exception:  # noqa: BLE001
+                        stage.render_scene({"place": "park"}, {}, d, work / f"toon{i:02d}.mp4", words, s0, work / f"img{i:02d}.jpg")
                 log(f"Szene {i + 1}/{len(scenes)} animiert")
             img_used.add("toon")
         for i, sc in enumerate([] if toon else scenes):
@@ -201,7 +210,8 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None):
         log("Schneide Video …")
         ass = work / "subs.ass"
         render.build_ass(words, scenes, times, ass, bool(cfg("subtitles_lowercase")),
-                         script.get("hud"), script.get("countdown"), 480 if toon else 560)
+                         script.get("hud"), script.get("countdown"), 480 if toon else 560,
+                         cfg("caption_style") or "impact")
         v["cover_ms"] = render.render(work, scenes, times, voice, ass, final, render.pick_music(cat["slug"]),
                                       float(cfg("music_volume") or 0.1), cover,
                                       float(cfg("sfx_volume") if cfg("sfx_volume") is not None else 0.35), cat["slug"])

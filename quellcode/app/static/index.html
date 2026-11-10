@@ -443,7 +443,7 @@ let CFG = null, ST = {}, VIDS = [], STATS = {v: {}, ch: {}}, TRENDS = {items: []
 let SECRETS = null, RUNS = [], PENDING = null, LOADERR = "", CANCEL_NEXT = 0, CANCELING = new Set();
 let TAB = (location.hash || "#dashboard").slice(1);
 if (!["dashboard", "kalender", "studio", "einstellungen"].includes(TAB)) TAB = "dashboard";
-const DEF = {voice_speed: 1, voice_style: "Natürlich und entspannt in normalem Sprechtempo – wie ein guter Erzähler, flüssig und nicht aufgeregt.", tts_provider: "gemini", gemini_voice: "", sfx_volume: 0.35, trend_mode: "half", make_thumbnail: true, youtube_thumbnail: true, trend_regions: "US,DE",
+const DEF = {voice_speed: 1, voice_style: "Lebendig und mitreißend mit klarer Betonung – wie der Sprecher eines viralen Erklärvideos, flüssig und natürlich.", caption_style: "impact", tts_provider: "gemini", gemini_voice: "", sfx_volume: 0.35, trend_mode: "half", make_thumbnail: true, youtube_thumbnail: true, trend_regions: "US,DE",
   audience: "Gen Z (16–25) in Deutschland, die TikTok und YouTube Shorts schauen: Internet-Kultur, Memes, virale Trends, Gaming, Musik, Serien, Filme, Creator, Tech, Lifestyle. Lockere Sprache wie unter Freunden, schnell auf den Punkt, kein Lehrer- oder Kinder-Ton."};
 const S_ = k => { const v = (CFG && CFG.settings || {})[k]; return v === undefined ? DEF[k] : v; };
 const cat = slug => (CFG && CFG.categories || []).find(c => c.slug === slug);
@@ -987,7 +987,8 @@ function viewSettings() {
     ${fld("openai_tts_model", "OpenAI Stimm-Modell")}${fld("openai_voice", "OpenAI Stimme", "z. B. ash, coral, onyx, sage")}${fld("elevenlabs_voice_id", "ElevenLabs Voice-ID")}`)}
   ${sec("stil", I.brush, "Video-Stil", "Eigene Animation · Untertitel, Soundeffekte, Musik", "", `
     <p class="hint">Alle Videos entstehen mit der AutoShorts-Engine: niedliche Cartoon-Figuren und Tiere, feste Orte und ein Landschafts-Baukasten (Wald, Fluss, Felder, Berge, Meer …), Requisiten, Wetter und animierte Einblendungen. Welche Figuren und Orte vorkommen, entscheidet das Drehbuch je Video.</p>
-    ${tgl("subtitles_lowercase", "Untertitel kleingeschrieben", "Aus = GROSSBUCHSTABEN.")}
+    ${sel("caption_style", "Untertitel-Stil", "", [["impact", "Schmal, fett, GROSS – Schlüsselwort orange"], ["classic", "Rund und weich – Schlüsselwort gelb"]])}
+    ${tgl("subtitles_lowercase", "Untertitel kleingeschrieben", "Gilt nur beim runden Stil. Aus = GROSSBUCHSTABEN.")}
     ${fld("sfx_volume", "Soundeffekte-Lautstärke", "0 bis 1 · 0 = aus (Whoosh, Pop, Boom an Szenenwechseln).")}
     ${fld("music_volume", "Musik-Lautstärke", "0 bis 0,3. Musik-Dateien legst du im Repository in den Ordner music/.")}`)}
   ${sec("keys", I.key, "Zugangsdaten", "Schlüssel werden verschlüsselt in GitHub gespeichert", missing ? `<span class="chip warn">${missing} fehlen</span>` : SECRETS === "err" ? '<span class="chip mute">?</span>' : '<span class="chip good">vollständig</span>', `
