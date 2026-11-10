@@ -301,7 +301,7 @@ def direct(scenes, times):
             sc["crowd"] = "panic"
         import re as _re
         txt = str(sc.get("text") or "").lower()
-        if _re.search(r"stromausfall|\\bstrom\\b.{0,40}\\b(aus|weg|zusammen)\\b|ohne strom|kein strom|blackout|lichter gehen aus|stockdunkel|finsternis|dunkelheit", txt):
+        if _re.search(r"stromausfall|\bstrom\b.{0,40}\b(aus|weg|zusammen)\b|ohne strom|kein strom|blackout|lichter gehen aus|stockdunkel|finsternis|dunkelheit", txt):
             sc["time"] = "night"                      # ohne Strom / Dunkelheit → Nacht
             sc["dark_city"] = True
             sc["mood"] = sc.get("mood") or "scary"
