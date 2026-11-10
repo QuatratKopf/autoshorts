@@ -38,7 +38,7 @@ FORMAT = """Gib JSON in genau diesem Format zurück:
   "hashtags": ["#shorts", "… 5–8 passende Hashtags: was auf TikTok gerade läuft (auch englische wie #fyp oder #viral, wenn passend) plus spezifische deutsche"],
   "tags": ["8–15 Suchbegriffe ohne #, z. B. 'spinnen im haus', 'tierfakten'"],
   "thumbnail": {"image": "English prompt for ONE eye-catching cover image: the most surprising moment of the story, close-up, exaggerated facial expression, bold simple composition, strong contrast, empty space in the upper third for text",
-                "text": "2–4 Wörter Cover-Text in GROSSBUCHSTABEN, macht neugierig, verrät die Auflösung nicht"},
+                "text": "2–4 deutsche Wörter Cover-Text in GROSSBUCHSTABEN, macht neugierig, verrät die Auflösung nicht"},
   "cast": {"held": "English description of each recurring character (species/body, colors, clothes, face) – identical in every scene"},
   "places": {"zimmer": "English description of each recurring location (room/landscape, colors, key objects)"},
   "hud": "optional: kurze Orts-/Zeitangabe oben links für Geschichten, z. B. 'TAG 1 · 3:12 UHR' – sonst leerer String",
@@ -86,10 +86,11 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
      emote (Symbol über dem Kopf, sparsam): "!", "?", heart, idea, sweat, anger, music oder ""
      pos / to: left, center, right, offleft, offright ("to" nur wenn die Figur sich bewegt)
      speaks: true bei der Figur, um die es in dieser Szene geht
+  "shot": "close" für eine Nahaufnahme des Gesichts (bei Gefühlen, Schreck, Pointe – etwa jede dritte Szene), sonst "wide"
 - Wechsle Orte, Aktionen und Requisiten ab: nicht zweimal hintereinander dieselbe Kombination; jede Szene zeigt sichtbar,
   wovon der Sprecher gerade redet (Bewegung statt Herumstehen: reinkommen, rennen, erschrecken, zeigen, springen).
 - Erklärendes (Zahlen, Listen, Regeln) kommt in die Einblendungen (overlay).
-- "thumbnail": {"text": "2–4 WÖRTER", "place": "...", "time": "day|night", "actor": "id aus cast", "action": "shocked",
+- "thumbnail": {"text": "2–4 deutsche WÖRTER", "place": "...", "time": "day|night", "actor": "id aus cast", "action": "shocked",
                 "emotion": "shocked", "props": ["meteor"], "weather": ""}  – der spannendste Moment als Titelbild.
 - "image" je Szene darf leer bleiben."""
 
@@ -156,7 +157,7 @@ def trend_topic(cat: dict):
 
 def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
     secs = int(cfg("target_seconds") or 60)
-    words = round(secs * 2.2)
+    words = round(secs * (1.85 if str(cfg("tts_provider") or "") == "gemini" else 2.2))   # Gemini-Erzähler spricht ruhiger
     scenes = max(6, round(secs / 5))
     toon = str(os.environ.get("AS_VISUAL") or cfg("visual_mode") or "ai") == "toon"
     char = cfg("main_character") if cfg("use_main_character") and not toon else ""

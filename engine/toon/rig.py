@@ -307,8 +307,21 @@ def pose_at(action, t, dur, emotion="", mouth=0.0, seed=0):
         p.squash = 1 + 0.03 * s(t * 1.5)
         p.extra["zzz"] = True
     elif a == "talk":
-        p.arm_r, p.fore_r = 40 + 20 * s(t * 3.1 + seed), 50 + 20 * s(t * 4.3)
-        p.head = 3 * s(t * 2.7)
+        g = int((t + seed * 0.7) / 1.7) % 4                 # alle ~1,7 s eine andere Geste
+        if g == 0:
+            p.arm_r, p.fore_r = 46 + 16 * s(t * 3.1), 60 + 22 * s(t * 4.3)
+        elif g == 1:
+            p.arm_r, p.fore_r = 70 + 10 * s(t * 3.4), 30 + 18 * s(t * 5.0)
+            p.arm_l, p.fore_l = -60 - 10 * s(t * 3.4), -30 - 18 * s(t * 5.0)
+        elif g == 2:
+            p.arm_l, p.fore_l = -50 - 16 * s(t * 3.0), -70 - 20 * s(t * 4.1)
+        else:
+            p.arm_r, p.fore_r = 110, 20 + 14 * s(t * 6)
+        p.head = 4 * s(t * 2.7)
+        p.lean = 2.5 * s(t * 1.9 + seed)
+        p.lift = 5 * abs(s(t * 3.8)) + mouth * 4
+        if emotion in ("", "happy"):
+            p.smile = 0.6
     elif a == "look_around":
         p.look = s(t * 1.8)
         p.head = 6 * s(t * 1.8)

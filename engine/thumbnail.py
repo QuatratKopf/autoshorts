@@ -48,7 +48,7 @@ def make_thumbnail(src, text, out):
         while size > 70:
             f = _font(size)
             lines = _wrap(words, f, d, W - 140)
-            if len(lines) <= 3:
+            if len(lines) <= 3 and max(d.textlength(w, font=f) for w in words) <= W - 150:
                 break
             size -= 10
         f = _font(size)

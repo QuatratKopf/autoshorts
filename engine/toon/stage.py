@@ -93,16 +93,15 @@ def _prepare(scene, cast):
     return place, night, scale, actors, props, str(scene.get("weather") or "").lower()
 
 
-def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, in_bed):
+def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, in_bed, shot=""):
     frame = bg.copy()
-    back = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    extras.draw_ambient(back, place, night, t)
+    extras.draw_ambient(frame, place, night, t)
     for kind, x in props:
         if extras.PROP_ALIASES.get(kind, kind) not in extras.FRONT:
-            extras.draw_prop(back, kind, x, t)
-    frame.paste(back, (0, 0), back)
-    over = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    od = ImageDraw.Draw(over)
+            extras.draw_prop(frame, kind, x, t)
+    over = frame
+    od = ImageDraw.Draw(frame, "RGBA")
+    focus = 540.0
     for a in sorted(actors, key=lambda q: q["speaks"]):
         moving = a["x1"] != a["x0"]
         speed = 360 if a["action"] == "walk" else 680
@@ -149,12 +148,16 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
             _zzz(od, pose, x, head_y, t)
         if a["emote"]:
             extras.draw_emote(over, a["emote"], x, head_y, t)
+        if a["speaks"] or len(actors) == 1:
+            focus = x
     for kind, x in props:
         if extras.PROP_ALIASES.get(kind, kind) in extras.FRONT:
             extras.draw_prop(over, kind, x, t)
-    if weather:
+    if weather and not (night and weather in ("dark", "dunkel", "blackout")):
         extras.draw_weather(over, weather, t)
-    frame.paste(over, (0, 0), over)
+    if shot == "close":       # Nahaufnahme: Ausschnitt um die Hauptfigur, folgt ihr weich
+        cx = max(360, min(W - 360, focus))
+        frame = frame.crop((int(cx - 360), places.GROUND - 900, int(cx + 360), places.GROUND + 380)).resize((W, H), Image.BICUBIC)
     return frame
 
 
@@ -164,13 +167,17 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     place, night, scale, actors, props, weather = _prepare(scene, cast)
     bg = places.background(place, night)
     n_frames = max(2, round(dur * FPS))
+    shot = str(scene.get("shot") or "").lower()
+    has_ov = isinstance(scene.get("overlay"), dict) and scene["overlay"].get("type")
+    moving = any(a["x0"] != a["x1"] for a in actors)
+    shot = "close" if shot == "close" and not has_ov and not moving and not props else ""
     ff = subprocess.Popen(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24",
                            "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-preset", "veryfast",
                            "-crf", "17", "-pix_fmt", "yuv420p", str(out)], stdin=subprocess.PIPE, stderr=subprocess.PIPE)
     try:
         for fidx in range(n_frames):
             t = fidx / FPS
-            frame = _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, place == "bedroom")
+            frame = _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, place == "bedroom", shot)
             if still is not None and fidx == min(n_frames - 1, FPS):
                 frame.save(still, quality=92)
             ff.stdin.write(frame.tobytes())

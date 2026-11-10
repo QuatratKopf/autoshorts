@@ -117,10 +117,8 @@ def p_rocket(d, x, t, s=1.0):
 def p_ufo(d, x, t, s=1.0):
     y = 560 + math.sin(t * 2.2) * 26
     xx = x + math.sin(t * 1.1) * 40
-    beam = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    ImageDraw.Draw(beam).polygon([(xx - 60, y + 40), (xx + 60, y + 40), (xx + 200, GROUND), (xx - 200, GROUND)],
-                                 fill=(190, 255, 190, 70 + int(30 * math.sin(t * 6))))
-    d._image.alpha_composite(beam)
+    d.polygon([(xx - 60, y + 40), (xx + 60, y + 40), (xx + 200, GROUND), (xx - 200, GROUND)],
+              fill=(190, 255, 190, 70 + int(30 * math.sin(t * 6))))
     d.chord((xx - 100, y - 130, xx + 100, y + 50), 180, 360, fill=(170, 230, 250), outline=INK, width=O)
     _o(d, (xx - 230, y - 50, xx + 230, y + 50), (170, 176, 190))
     for i in range(5):
@@ -233,8 +231,7 @@ def draw_prop(layer, kind, x, t):
     kind = PROP_ALIASES.get(str(kind).lower(), str(kind).lower())
     fn = PROPS.get(kind)
     if fn:
-        d = ImageDraw.Draw(layer)
-        fn(d, x, t)
+        fn(ImageDraw.Draw(layer, "RGBA"), x, t)
 
 
 # ------------------------------------------------------------------ Gefühls-Symbole über dem Kopf
@@ -243,7 +240,7 @@ def draw_emote(layer, kind, x, y, t):
     k = _pop(t, 0.15)
     if k <= 0:
         return
-    d = ImageDraw.Draw(layer)
+    d = ImageDraw.Draw(layer, "RGBA")
     kind = str(kind).lower().strip()
     bob = math.sin(t * 5) * 6
     s = k
@@ -289,7 +286,7 @@ _DROPS = [(_rnd.random(), _rnd.random(), _rnd.random()) for _ in range(140)]
 
 
 def draw_weather(layer, kind, t):
-    d = ImageDraw.Draw(layer)
+    d = ImageDraw.Draw(layer, "RGBA")
     kind = str(kind or "").lower()
     if kind in ("rain", "regen", "storm", "sturm", "gewitter"):
         for a, b, c in _DROPS:
@@ -314,12 +311,12 @@ def draw_weather(layer, kind, t):
     elif kind in ("heat", "hitze"):
         d.rectangle((0, 0, W, H), fill=(255, 120, 40, 34 + int(14 * math.sin(t * 2))))
     elif kind in ("dark", "dunkel", "blackout"):
-        d.rectangle((0, 0, W, H), fill=(4, 6, 20, 150))
+        d.rectangle((0, 0, W, H), fill=(4, 6, 20, 110))
 
 
 def draw_ambient(layer, place, night, t):
     """Kleine Bewegung im Hintergrund, damit kein Bild stillsteht."""
-    d = ImageDraw.Draw(layer)
+    d = ImageDraw.Draw(layer, "RGBA")
     from .places import OUTDOOR
     if place in OUTDOOR and not night:
         cx = (t * 22 + 300) % (W + 400) - 200                    # ziehende Wolke
