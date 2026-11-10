@@ -1,6 +1,7 @@
 """Themenfindung (auch aus aktuellen Trends) und Drehbuch mit Titel, Beschreibung, Tags und Thumbnail-Idee."""
 import datetime as dt
 import os
+import re
 
 from . import ai, trends
 from .state import VIDEOS, cfg
@@ -23,6 +24,7 @@ Regeln für die Sprechertexte:
 - Erfundene Geschichten (Grusel, Lustiges) klar als Geschichte erzählen ('Stell dir vor …', 'Eine Legende erzählt …'):
   keine erfundenen 'echten' Ereignisse, Trends, Apps, Studien oder Personen als Tatsache ausgeben, und keine Titel wie 'Die Wahrheit über …' dafür.
 - Keine Videos über einzelne echte Personen (auch keine Promis): nimm das allgemeine Thema dahinter.
+- Schreibe immer echte Umlaute und ß (ä, ö, ü, ß) – niemals ae, oe, ue oder ss als Ersatz, auch nicht in GROSSBUCHSTABEN.
 - ALLES auf Deutsch: Sprechertext, Titel, Beschreibung, Titelbild-Text, Orts-/Zeitangaben und jeder Text in Einblendungen
   (Karten, Notizen, Listen, Handy, Balken, A/B-Frage). Keine englischen Wörter oder Gaming-Begriffe wie "Inventory", "Level",
   "Boss", "Respawn", "Fact" – nimm das deutsche Wort (Liste, Stufe, Chef, Fakt). Erlaubt sind nur Eigennamen und Wörter,
@@ -87,7 +89,7 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
 - In jeder Szene:
   "place": drinnen: bedroom, livingroom, kitchen, bathroom, office, classroom, lab, hospital, basement, supermarket,
            supermarket_empty (leergekaufte Regale), station (Bahnhof), restaurant, cave, underwater, space,
-           germany (Deutschlandkarte), worldmap (Weltkugel)
+           germany (Deutschlandkarte), worldmap (Weltkugel), hallway (Flur mit Türen: Hotel, Wohnhaus), attic (Dachboden)
            draußen: street (Häuserzeile mit Läden und Straße), park, forest, beach, desert, snow, mountain, farm, village,
            gasstation, powerplant, graveyard, ruins, camp (Zelte), moon, church, lake, river, fields, landfill (Müllhalde)
            (genau eines dieser Wörter – jede Szene braucht einen Ort aus dieser Liste, auch Ereignis-Einstellungen)
@@ -170,6 +172,43 @@ def _learned():
     except Exception:  # noqa: BLE001
         names = []
     return ("\n- Zusätzlich gelernte Requisiten (in \"props\" mit genau diesem Wort nutzbar): " + ", ".join(names)) if names else ""
+
+
+_UML = [("fuenf", "fünf"), ("zwoelf", "zwölf"), ("dreissig", "dreißig"), ("fuer", "für"), ("ueber", "über"), ("tuer", "tür"), ("oeffn", "öffn"),
+        ("waer", "wär"), ("koenn", "könn"), ("moecht", "möcht"), ("muess", "müss"), ("wuerd", "würd"), ("hoer", "hör"), ("schoen", "schön"),
+        ("gruen", "grün"), ("frueh", "früh"), ("spaet", "spät"), ("naechst", "nächst"), ("zurueck", "zurück"), ("glueck", "glück"),
+        ("stueck", "stück"), ("kuehl", "kühl"), ("fuehl", "fühl"), ("fuehr", "führ"), ("natuerlich", "natürlich"), ("ploetzlich", "plötzlich"),
+        ("moeglich", "möglich"), ("gefaehr", "gefähr"), ("erklaer", "erklär"), ("haett", "hätt"), ("laesst", "lässt"), ("faellt", "fällt"),
+        ("haelt", "hält"), ("traeg", "träg"), ("schlaef", "schläf"), ("zaehl", "zähl"), ("waehrend", "während"), ("aehnlich", "ähnlich"),
+        ("aender", "änder"), ("maedchen", "mädchen"), ("raeum", "räum"), ("geraeusch", "geräusch"), ("schluessel", "schlüssel"),
+        ("kueche", "küche"), ("buero", "büro"), ("strasse", "straße"), ("draussen", "draußen"), ("gross", "groß"), ("weiss", "weiß"),
+        ("heiss", "heiß"), ("fuss", "fuß"), ("spass", "spaß"), ("naemlich", "nämlich"), ("spuer", "spür"), ("geoeffnet", "geöffnet"),
+        ("verschwaend", "verschwänd"), ("taeglich", "täglich"), ("naecht", "nächt"), ("waend", "wänd"), ("haend", "händ"), ("zaehn", "zähn"),
+        ("koerper", "körper"), ("groess", "größ"), ("hoeh", "höh"), ("loes", "lös"), ("stoer", "stör"), ("toet", "töt"), ("boes", "bös"),
+        ("muede", "müde"), ("kuenst", "künst"), ("wuensch", "wünsch"), ("duenn", "dünn"), ("fluester", "flüster"), ("luege", "lüge"),
+        ("pruef", "prüf"), ("rueck", "rück"), ("stuerz", "stürz"), ("schuetz", "schütz"), ("nuetz", "nütz"), ("drueck", "drück"), ("tuerm", "türm")]
+
+
+def fix_umlauts(js):
+    """Manche Ersatz-Modelle schreiben „fuer“, „Tuer“, „oeffnen“. Wenn im ganzen Drehbuch kein einziger Umlaut steht,
+    werden die häufigen Wörter zurückverwandelt (nur bekannte Wortstämme, damit „neue“ oder „Feuer“ heil bleiben)."""
+    text = " ".join(str(sc.get("text") or "") for sc in js.get("scenes", []) if isinstance(sc, dict))
+    if len(text) < 150 or re.search(r"[äöüßÄÖÜ]", text) or not re.search(r"(?i)\b(fuer|ueber|waer|koenn|muess|wuerd|tuer|oeffn)", text):
+        return js
+
+    def conv(v):
+        for a, b in _UML:
+            v = re.sub(a, lambda m, b=b: (b.upper().replace("ß".upper(), "SS") if m.group(0).isupper() else b.capitalize() if m.group(0)[0].isupper() else b), v, flags=re.I)
+        return v
+
+    def walk(o, key=""):
+        if isinstance(o, dict):
+            return {k: (walk(v, k) if k not in ("place", "backdrop", "hashtags", "tags", "props", "actors", "cast", "sfx", "camera", "shot", "mood", "crowd", "time", "weather", "type") else v) for k, v in o.items()}
+        if isinstance(o, list):
+            return [walk(v, key) for v in o]
+        return conv(o) if isinstance(o, str) else o
+    ai.log("Drehbuch kam ohne Umlaute – häufige Wörter korrigiert")
+    return walk(js)
 
 
 def _past(cat):
@@ -282,6 +321,10 @@ def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
                 js = js2
         except Exception as e:  # noqa: BLE001
             ai.log(f"Verlängern nicht möglich ({e}) – nehme den ersten Entwurf")
+    try:
+        js = fix_umlauts(js)
+    except Exception:  # noqa: BLE001
+        pass
     sc = [s for s in js.get("scenes", []) if isinstance(s, dict) and str(s.get("text", "")).strip()]
     if len(sc) < 3:
         raise ai.ProviderError("Drehbuch hat zu wenige Szenen")

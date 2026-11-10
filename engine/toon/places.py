@@ -1159,6 +1159,52 @@ def worldmap(night):
     return p.im
 
 
+def hallway(night):
+    """Flur mit Türen (Hotel, Wohnhaus, Schule): Türen in echter Größe, Wandlampen, Läufer in Perspektive."""
+    p = P(night)
+    p.room((206, 190, 170), (120, 92, 76))
+    p.rect((-10, GROUND - 330, W + 10, GROUND - 78), (176, 156, 136), o=0)                # Sockelzone
+    p.line((0, GROUND - 330, W, GROUND - 330), w=5)
+    for i, x in enumerate((70, 420, 770)):                                                    # Türen
+        p.rect((x - 16, 726, x + 256, GROUND - 40), (84, 58, 44), r=6)
+        p.rect((x, 742, x + 240, GROUND - 40), (132, 90, 60), r=4, o=5)
+        for y0, y1 in ((770, 960), (990, 1190)):
+            p.d.rounded_rectangle((x + 30, y0, x + 210, y1), 6, outline=p.c((100, 66, 44)), width=6)
+        p.oval((x + 196, 990, x + 222, 1016), (240, 200, 90), o=4, glow=True)
+        p.rect((x + 84, 690, x + 156, 724), (240, 232, 210), r=6, o=4)
+        if night and not p.dark and i == 1:                                                   # Licht unter einer Tür
+            p.rect((x + 6, GROUND - 52, x + 234, GROUND - 40), (255, 220, 130), o=0, glow=True)
+    for x in (360, 710):                                                                      # Wandlampen
+        p.rect((x - 8, 560, x + 8, 620), (90, 80, 70), o=4)
+        p.poly([(x - 44, 560), (x + 44, 560), (x + 26, 500), (x - 26, 500)], (255, 226, 150) if not p.dark else (120, 110, 100), o=5, glow=not p.dark)
+    p.poly([(330, GROUND - 40), (750, GROUND - 40), (1000, H), (80, H)], (140, 44, 50), o=5)   # Läufer
+    p.line((372, GROUND - 40, 170, H), p.c((196, 150, 90)), 8)
+    p.line((708, GROUND - 40, 910, H), p.c((196, 150, 90)), 8)
+    p.lamp_glow(360, 560, 330)
+    p.lamp_glow(710, 560, 330)
+    return p.vignette()
+
+
+def attic(night):
+    p = P(night)
+    p.room((150, 118, 92), (112, 84, 62))
+    p.poly([(0, 0), (W, 0), (W, 520), (540, 180), (0, 520)], (96, 72, 54))                   # Dachschräge
+    for x in (140, 340, 740, 940):
+        p.line((x, 0, x + (60 if x < 540 else -60), 520 - abs(540 - x) * 0.63), p.c((70, 50, 38)), 22)
+    p.oval((440, 300, 640, 500), (30, 36, 86) if night else (150, 212, 255))                  # rundes Fenster
+    p.line((540, 300, 540, 500)); p.line((440, 400, 640, 400))
+    p.rect((60, 1040, 330, 1232), (150, 110, 70), r=8)                                        # Truhe
+    p.rect((60, 1040, 330, 1100), (120, 84, 54), r=8)
+    p.rect((180, 1076, 210, 1120), (240, 200, 90), r=4, o=4)
+    for bx, by, bw in ((760, 1100, 250), (800, 960, 190)):                                   # Kartons
+        p.rect((bx, by, bx + bw, by + 140), (196, 156, 104), r=6)
+        p.line((bx, by + 40, bx + bw, by + 40), w=5)
+    p.line((540, 0, 540, 150), w=5)
+    p.oval((512, 150, 568, 214), (255, 236, 150) if not p.dark else (110, 104, 90), o=5, glow=not p.dark)
+    p.lamp_glow(540, 190, 420)
+    return p.vignette()
+
+
 def plain(night):
     p = P(night)
     p.room((244, 226, 190), (210, 170, 120))
@@ -1169,7 +1215,7 @@ PLACES = {"bedroom": bedroom, "livingroom": livingroom, "street": street, "basem
           "space": space, "lab": lab, "classroom": classroom, "plain": plain, "kitchen": kitchen, "office": office,
           "beach": beach, "desert": desert, "snow": snow, "forest": forest, "underwater": underwater,
           "mountain": mountain, "hospital": hospital, "cave": cave, "supermarket": supermarket,
-          "supermarket_empty": supermarket_empty, "bathroom": bathroom, "station": station, "restaurant": restaurant, "germany": germany, "worldmap": worldmap}
+          "supermarket_empty": supermarket_empty, "bathroom": bathroom, "station": station, "restaurant": restaurant, "germany": germany, "worldmap": worldmap, "hallway": hallway, "attic": attic}
 OUTDOOR = tuple(OUTDOOR_SPECS) + ("custom",)
 ALIASES = {"schlafzimmer": "bedroom", "zimmer": "bedroom", "wohnzimmer": "livingroom", "straße": "street", "stadt": "street",
            "city": "street", "keller": "basement", "bunker": "basement", "wald": "forest", "natur": "park", "garten": "park",
@@ -1178,7 +1224,7 @@ ALIASES = {"schlafzimmer": "bedroom", "zimmer": "bedroom", "wohnzimmer": "living
            "berg": "mountain", "berge": "mountain", "krankenhaus": "hospital", "höhle": "cave", "arctic": "snow",
            "weltraum": "space", "mond": "moon", "labor": "lab", "schule": "classroom", "klassenzimmer": "classroom",
            "home": "livingroom", "house": "livingroom", "outside": "park", "school": "classroom",
-           "deutschland": "germany", "deutschlandkarte": "germany", "karte": "germany", "map": "germany", "weltkarte": "worldmap",
+           "flur": "hallway", "gang": "hallway", "korridor": "hallway", "treppenhaus": "hallway", "hotel": "hallway", "hotelflur": "hallway", "corridor": "hallway", "hausflur": "hallway", "hotelzimmer": "bedroom", "hotel room": "bedroom", "dachboden": "attic", "speicher": "attic", "deutschland": "germany", "deutschlandkarte": "germany", "karte": "germany", "map": "germany", "weltkarte": "worldmap",
            "welt": "worldmap", "world": "worldmap", "globus": "worldmap", "supermarkt": "supermarket", "laden": "supermarket", "geschäft": "supermarket", "shop": "supermarket", "store": "supermarket",
            "leerer supermarkt": "supermarket_empty", "bad": "bathroom", "badezimmer": "bathroom", "bahnhof": "station",
            "u-bahn": "station", "zug": "station", "restaurant": "restaurant", "café": "restaurant", "cafe": "restaurant",
@@ -1189,8 +1235,14 @@ ALIASES = {"schlafzimmer": "bedroom", "zimmer": "bedroom", "wohnzimmer": "living
 def resolve(place):
     if isinstance(place, dict):
         return "custom"
-    key = ALIASES.get(str(place or "").lower().strip(), str(place or "").lower().strip())
-    return key if (key in PLACES or key in OUTDOOR_SPECS) else "plain"
+    raw = str(place or "").lower().strip()
+    key = ALIASES.get(raw, raw)
+    if key in PLACES or key in OUTDOOR_SPECS:
+        return key
+    for name in sorted(list(ALIASES) + list(PLACES) + list(OUTDOOR_SPECS), key=len, reverse=True):   # „dunkler Hotelflur“ → Flur
+        if len(name) >= 4 and name in raw:
+            return ALIASES.get(name, name)
+    return "plain"
 _cache = {}
 _masks = {}
 _last_p = []

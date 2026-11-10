@@ -262,7 +262,7 @@ def _crowd(frame, kind, t, night, lo=0, hi=9999, road=False, traffic=True, indoo
 ON_TABLE = ("cans", "candle", "money", "canister")           # Kleines steht drinnen auf einem Tisch, damit man es sieht
 PLACE_HAS = {"kitchen": ("fridge", "table"), "office": ("computer", "table"), "supermarket": ("shelf",), "supermarket_empty": ("shelf",),
              "livingroom": ("tv",), "forest": ("tree",), "park": ("tree",), "camp": ("tent", "fire"), "street": ("streetlamp", "house"),
-             "village": ("house",), "restaurant": ("table",)}
+             "village": ("house",), "restaurant": ("table",), "hallway": ()}
 
 
 def _prop(frame, kind, x, t, big, table=False):
@@ -479,7 +479,7 @@ def _lib_props():
         return []
 
 
-def direct(scenes, times, topic=""):
+def direct(scenes, times, topic="", style=""):
     """Kleine Regie über das ganze Video: sorgt für Abwechslung, wenn das Drehbuch mehrmals hintereinander dieselbe
     Einstellung vorgibt (gleicher Ort, gleiche Figur, nur Reden) – andere Position, Nahaufnahme oder Hereinkommen."""
     prev_place, same, changes, prev_bd = None, 0, 0, None
@@ -487,11 +487,19 @@ def direct(scenes, times, topic=""):
     power_out = False
     last_id = None
     maps_used = 0
+    spooky = str(style or "").lower() in ("grusel", "mysterien", "horror")
     used = {}
     fig_prev, inserts, counters = False, 0, 0
     topic_things = [k for pat, k in _lib_props() + TEXT_PROPS if _re0.search(pat, str(topic or "").lower()) and extras.prop_fit(k)][:2]
     for i, (sc, (s0, e0)) in enumerate(zip(scenes, times)):
         sanitize(sc)
+        if spooky:                                        # Grusel und Rätsel spielen im Dunkeln; Stimmung unheimlich, keine Passanten
+            if not _re0.search(r"tagsüber|am tag\b|mittags|sonnenschein|am nächsten morgen|am morgen", sc["text"].lower()):
+                sc["time"] = "night"
+            if sc["mood"] in ("", "calm", "happy"):
+                sc["mood"] = "scary"
+            if sc["crowd"] in ("walk", "cheer"):
+                sc["crowd"] = ""
         sc["props"] = [q for q in sc["props"] if (lambda k: k in extras.PROPS or k in extras.PROP_ALIASES or k in extras.HELD)(q["type"].lower())]
         acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
         place = places.resolve(sc.get("place"))
@@ -509,7 +517,7 @@ def direct(scenes, times, topic=""):
             elif hint != place:
                 sc["place"] = place = hint
         lone0 = len(acts) <= 1 and all(str(a.get("action") or "talk").lower() in ("talk", "idle", "", "point", "think") for a in acts)
-        if not has_bd and maps_used < 2 and lone0 and str(sc.get("shot") or "") != "insert" and (hint is None or place not in MAPS):
+        if not has_bd and not spooky and maps_used < 2 and lone0 and str(sc.get("shot") or "") != "insert" and (hint is None or place not in MAPS):
             for pat, target in MAP_HINTS:                       # „in ganz Deutschland“, „weltweit“ → Kartenbild (höchstens zweimal)
                 if _re0.search(pat, str(sc.get("text") or "").lower()):
                     sc["place"] = place = target
@@ -535,6 +543,14 @@ def direct(scenes, times, topic=""):
                     have.add(kind)
                     if len(sc["props"]) >= 2:
                         break
+        for pat, item in ((r"handy|smartphone|display|bildschirm leuchtet|nachricht", "phone"), (r"taschenlampe", "flashlight"), (r"regenschirm", "umbrella"),
+                          (r"landkarte|stadtplan", "map"), (r"\bradio\b|funkgerät", "radio"), (r"einkaufstüte|\btasche\b|rucksack", "bag")):
+            if _re0.search(pat, txt0):                   # was die Figur laut Satz in der Hand hat
+                for a in acts:
+                    if not a.get("kind") and not a.get("hold"):
+                        a["hold"] = item
+                        break
+                break
         if _re0.search(r"wespe|biene|insekten", txt0) and len(acts) < 2 and not any(a.get("kind") for a in acts) and "actors" in sc:
             sc["actors"] = acts = acts + [{"id": "_biene", "kind": "bee", "action": "idle", "pos": "right", "speaks": False}]
         if places.resolve(backdrop(sc)) == "underwater":          # unter Wasser schwimmen Fische, keine Menschen
@@ -561,7 +577,7 @@ def direct(scenes, times, topic=""):
                 sc["backdrop"] = prev_bd
                 place = prev_place
             else:
-                place = prev_place if (prev_place and not str(prev_place).startswith("custom")) else "park"
+                place = prev_place if (prev_place and not str(prev_place).startswith("custom")) else ("bedroom" if spooky else "park")
                 sc["place"] = place
         prev_bd = sc.get("backdrop") if isinstance(sc.get("backdrop"), dict) else None
         import re as _re
@@ -684,6 +700,8 @@ def direct(scenes, times, topic=""):
             elif rp2 in PUBLIC_INDOOR:
                 sc["actors"] = []
                 sc["crowd"] = sc.get("crowd") or {"panic": "panic", "tense": "worried", "sad": "sad", "happy": "cheer"}.get(str(sc.get("mood") or ""), "walk")
+            elif spooky and not (i and scenes[i - 1].get("shot") == "close"):
+                sc["shot"] = "close"                    # Grusel: Nahaufnahme des erschrockenen Gesichts statt Totale
             elif topic_things and inserts < 4:          # das Ding, um das sich das Video dreht, groß im Bild
                 sc["props"] = [{"type": topic_things[inserts % len(topic_things)]}]
                 sc["shot"], inserts = "insert", inserts + 1
@@ -725,6 +743,11 @@ HINTS = [
     (r"mondoberfläche|auf dem mond|mondlandung", "moon"),
     (r"wasserwerk|klärwerk|talsperre|staudamm|wasserversorgung|wasserspeicher", {"elements": ["factory", "river", "hills"]}),
     (r"feuerwehr|löschen|\bbrände", "street"),
+    (r"\bflur\b|korridor|\bgang\b|treppenhaus|hotel|vor der tür|an der tür|türklinke|klopft|zimmernummer", "hallway"),
+    (r"dachboden|speicher\b", "attic"),
+    (r"\bbett\b|schlafzimmer|wachst auf|aufwach|einschlaf|schläfst|decke über", "bedroom"),
+    (r"spiegel|waschbecken", "bathroom"),
+    (r"\bkeller|kellertreppe|bunker", "basement"),
     (r"kirche|\bdom\b|kathedrale", "church"),
     (r"müllhalde|müllberg|deponie|\bmüll\b", "landfill"),
     (r"regenwald|dschungel|\bwald|wälder|bäume", {"elements": ["forest"]}),
@@ -774,11 +797,11 @@ TEXT_PROPS = [(r"zucker|\bsalz\b", "pile"), (r"\bsand\b", "sandpile"), (r"\bmül
               (r"\bglas\b|\bgläser|trinken|getränk|\bdurst", "glass"), (r"kerze", "candle"), (r"konserve|vorrät|dosen", "cans"), (r"benzin|kanister|sprit", "canister"),
               (r"\bautos?\b|\bstau\b", "car"), (r"\bbus\b|busse", "bus"), (r"lkw|lastwagen|lieferung|lieferkette", "truck"), (r"flugzeug|flieger|\bflüge", "plane"),
               (r"satellit|\bgps\b", "satellite"), (r"rakete", "rocket"), (r"\bgeld|\beuro\b|kosten|teuer|preise|milliarden euro|bezahl", "money"),
-              (r"solar", "solarpanel"), (r"generator|notstrom|aggregat", "generator"), (r"\bfeuer|\bbrenn|\bbrand|flammen", "fire"), (r"\brauch\b|qualm", "smoke"),
+              (r"solar", "solarpanel"), (r"generator|notstrom|aggregat", "generator"), (r"\bfeuer\b|flammen|\bbrand\b|in brand|lichterloh|waldbr[aä]nd|\bbrände", "fire"), (r"\brauch\b|qualm", "smoke"),
               (r"vulkan|lava", "volcano"), (r"meteor|asteroid|komet", "meteor"), (r"tornado|wirbelsturm", "tornado"), (r"gewitter|\bblitz", "lightning"),
               (r"überschwemm|\bflut|hochwasser", "flood"), (r"erdbeben|boden reißt", "crack"), (r"tsunami|riesenwelle", "wave"), (r"explo", "explosion"),
               (r"\bufo|außerirdisch", "ufo"), (r"polarlicht", "aurora"), (r"eisberg|\beis schmilzt", "ice"), (r"\bschiff|\bboot", "ship"),
-              (r"fahrrad", "bike"), (r"kühlschrank", "fridge"), (r"einkaufswagen", "cart"), (r"\btür\b|klopft", "door"), (r"\buhr\b|uhrzeit", "clock"),
+              (r"fahrrad", "bike"), (r"kühlschrank", "fridge"), (r"einkaufswagen", "cart"), (r"tür\b|türen\b|klopft", "door"), (r"\buhr\b|uhrzeit", "clock"),
               (r"\bfass|fässer|\böl\b", "barrel"), (r"\bzelt", "tent"), (r"ampel", "trafficlight"), (r"fernseh|nachrichten", "tv"), (r"computer|internet|server", "computer"),
               (r"pflanze[n]? wachs|keim|\bsaat", "sprout")]
 MAP_HINTS = ((r"ganz deutschland|in deutschland|deutschlandweit|bundesweit|bundesländer|jeder deutsche|alle deutschen", "germany"),
