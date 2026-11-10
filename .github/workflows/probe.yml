@@ -1,0 +1,35 @@
+name: probe
+on: workflow_dispatch
+jobs:
+  p:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          K: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          pip -q install requests edge-tts >/dev/null
+          python3 - <<'PY'
+          import os, requests, base64, json, asyncio
+          k=os.environ["K"]; B="https://generativelanguage.googleapis.com/v1beta"
+          r=requests.get(B+"/models?pageSize=200",headers={"x-goog-api-key":k},timeout=60)
+          ms=[m["name"].split("/")[1] for m in r.json().get("models",[])]
+          print("ALL", [m for m in ms if "embed" not in m])
+          tts=[m for m in ms if "tts" in m]
+          print("TTS", tts)
+          text="Du wachst um drei Uhr nachts auf. Irgendwas stimmt nicht. Draußen ist es still, viel zu still. Und dann siehst du es."
+          for m in tts[:4]:
+              body={"contents":[{"parts":[{"text":"Lies als ruhiger, fesselnder deutscher Erzähler, flüssig und natürlich: "+text}]}],
+                    "generationConfig":{"responseModalities":["AUDIO"],"speechConfig":{"voiceConfig":{"prebuiltVoiceConfig":{"voiceName":"Charon"}}}}}
+              r=requests.post(f"{B}/models/{m}:generateContent",headers={"x-goog-api-key":k},json=body,timeout=180)
+              print("###",m,r.status_code)
+              if r.status_code==200:
+                  p=r.json()["candidates"][0]["content"]["parts"][0]["inlineData"]
+                  print(p["mimeType"], len(base64.b64decode(p["data"])), json.dumps(r.json().get("usageMetadata"))[:300])
+              else: print(r.text[:500])
+          import edge_tts
+          async def v():
+              vs=await edge_tts.list_voices()
+              print("EDGE", [x["ShortName"] for x in vs if x["Locale"].startswith("de-") ])
+              print("EDGE-ML", [x["ShortName"] for x in vs if "Multilingual" in x["ShortName"]])
+          asyncio.run(v())
+          PY
