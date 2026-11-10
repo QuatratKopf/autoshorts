@@ -1,6 +1,6 @@
 {
-  "version": "1.3.5",
-  "file": "releases/AutoShorts-1.3.5.cmd",
-  "sha256": "874a2f6b92245a5e59db90b653d190fe3dbe120b8735ad2b449506ab3bf15e52",
-  "notes": "Mindest-Länge: Videos werden sicher länger als eine Minute"
+  "version": "1.3.6",
+  "file": "releases/AutoShorts-1.3.6.cmd",
+  "sha256": "bc94e3b0f8ce2ab457cd56ddb1486796d1f34b07607182dcefa87043243bea86",
+  "notes": "Hochladen über Zernio möglich (ein API-Key für YouTube und TikTok); Handy-Einblendung schneidet den Titel nicht mehr ab"
 }

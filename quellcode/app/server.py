@@ -39,7 +39,7 @@ UPDATE_URL = "https://raw.githubusercontent.com/QuatratKopf/autoshorts/main/vers
 REDIRECT = f"http://127.0.0.1:{PORT}/oauth/"
 UA = f"AutoShorts/{APP_VERSION}"
 SECRET_NAMES = ["GEMINI_API_KEY", "CLOUDFLARE_ACCOUNT_ID", "CLOUDFLARE_API_TOKEN", "OPENAI_API_KEY",
-                "ELEVENLABS_API_KEY", "GOOGLE_CLIENT_SECRET", "TIKTOK_CLIENT_SECRET"]
+                "ELEVENLABS_API_KEY", "GOOGLE_CLIENT_SECRET", "TIKTOK_CLIENT_SECRET", "ZERNIO_API_KEY"]
 LOCAL_SECRET = {"GOOGLE_CLIENT_SECRET": "youtube", "TIKTOK_CLIENT_SECRET": "tiktok"}
 
 INDEX_HTML = None   # beim Bauen eingebettet

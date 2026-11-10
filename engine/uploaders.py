@@ -225,7 +225,128 @@ def tt_user():
 
 # ================================================================ Gemeinsam
 
+# ================================================================ Zernio (ein Zugang für YouTube + TikTok)
+# Offizielle Schnittstelle des Dienstes: https://docs.zernio.com – das Video wird über seine öffentliche Adresse
+# (GitHub-Release) übergeben; Zernio lädt es über seine eigenen, von den Plattformen zugelassenen Apps hoch.
+
+ZERNIO = "https://zernio.com/api/v1"
+
+
+def zernio_ready():
+    return (cfg("upload_via") or "direct") == "zernio" and bool(secret("ZERNIO_API_KEY"))
+
+
+def _z(method, path, **kw):
+    r = requests.request(method, ZERNIO + path, headers={"Authorization": "Bearer " + secret("ZERNIO_API_KEY")}, timeout=T, **kw)
+    try:
+        data = r.json()
+    except ValueError:
+        data = {"raw": r.text[:300]}
+    if r.status_code >= 300:
+        msg = (data.get("error") or data.get("message") or data) if isinstance(data, dict) else data
+        raise RuntimeError(f"Zernio HTTP {r.status_code}: {str(msg)[:300]}")
+    return data
+
+
+def zernio_accounts():
+    """Verbundene Konten: {plattform: Konto-ID} (erstes Konto je Plattform)."""
+    data = _z("GET", "/accounts")
+    rows = data if isinstance(data, list) else next((data[k] for k in ("accounts", "data", "items") if isinstance(data.get(k), list)), [])
+    out = {}
+    for a in rows:
+        if isinstance(a, dict) and a.get("platform") and (a.get("_id") or a.get("id")):
+            out.setdefault(str(a["platform"]).lower(), str(a.get("_id") or a.get("id")))
+    return out
+
+
+def zernio_upload(v):
+    """Ein Auftrag für alle eingeschalteten Plattformen. Gibt {plattform: (status, adresse)} zurück."""
+    repo = os.environ.get("GITHUB_REPOSITORY") or "QuatratKopf/autoshorts"
+    base = f"https://github.com/{repo}/releases/download/videos/"
+    acc = zernio_accounts()
+    tags = v.get("hashtags") or []
+    kw, n = [], 0
+    for k in (v.get("tags") or []) + [t.lstrip("#") for t in tags if t.lower() != "#shorts"]:
+        if k and k not in kw and n + len(k) + 1 < 480:
+            kw.append(k)
+            n += len(k) + 1
+    media = {"type": "video", "url": base + f"{v['id']}.mp4"}
+    if cfg("make_thumbnail") and v.get("thumb"):
+        media["thumbnail"] = base + f"{v['id']}-cover.jpg"
+    plats = []
+    if cfg("youtube_enabled") and acc.get("youtube") and not v.get("yt_id"):
+        plats.append({"platform": "youtube", "accountId": acc["youtube"],
+                      "platformSpecificData": {"title": v["title"][:100], "visibility": cfg("youtube_privacy") or "public",
+                                               "categoryId": str(cfg("youtube_category") or "24"), "madeForKids": False}})
+    if cfg("tiktok_enabled") and acc.get("tiktok") and not v.get("tt_publish_id"):
+        plats.append({"platform": "tiktok", "accountId": acc["tiktok"]})
+    if not plats:
+        raise RuntimeError("Bei Zernio ist kein passendes Konto verbunden (YouTube/TikTok) – verbinde die Konten auf zernio.com.")
+    body = {"content": ((v.get("description") or v["title"]) + "\n\n" + " ".join(tags))[:2100], "tags": kw, "mediaItems": [media],
+            "platforms": plats, "publishNow": True}
+    if any(p["platform"] == "tiktok" for p in plats):
+        body["tiktokSettings"] = {"privacy_level": cfg("tiktok_privacy") or "PUBLIC_TO_EVERYONE", "allow_comment": True, "allow_duet": True,
+                                  "allow_stitch": True, "content_preview_confirmed": True, "express_consent_given": True,
+                                  "draft": (cfg("tiktok_mode") or "direct") == "inbox"}
+        if media.get("thumbnail"):
+            body["tiktokSettings"]["video_cover_image_url"] = media["thumbnail"]
+    data = _z("POST", "/posts", json=body)
+    post = data.get("post") if isinstance(data.get("post"), dict) else data
+    pid = post.get("_id") or post.get("id")
+    v["zernio_id"] = pid
+    for _ in range(18):                                   # bis zu drei Minuten auf das Ergebnis warten
+        rows = post.get("platforms") or []
+        if rows and all(str(r.get("status") or "").lower() in ("published", "failed", "error") for r in rows if isinstance(r, dict)):
+            break
+        if not pid:
+            break
+        time.sleep(10)
+        try:
+            d2 = _z("GET", f"/posts/{pid}")
+            post = d2.get("post") if isinstance(d2.get("post"), dict) else d2
+        except Exception:  # noqa: BLE001 – Abfrage nicht möglich: mit dem letzten Stand weiter
+            break
+    out = {}
+    for r in post.get("platforms") or []:
+        if isinstance(r, dict) and r.get("platform"):
+            out[str(r["platform"]).lower()] = (str(r.get("status") or "unbekannt").lower(), r.get("platformPostUrl") or "",
+                                               str(r.get("errorMessage") or r.get("error") or "")[:200])
+    return out
+
+
+def _upload_zernio(v):
+    errors = []
+    try:
+        log("Übergebe das Video an Zernio …")
+        res = zernio_upload(v)
+        for plat, (status, url, err) in res.items():
+            ok = status not in ("failed", "error")
+            if plat == "youtube":
+                v["yt_status"] = ("Zernio: " + status) if ok else "Fehler"
+                if ok:
+                    v["yt_id"] = (url.rstrip("/").split("/")[-1].split("=")[-1] if url else "") or f"zernio:{v.get('zernio_id')}"
+            elif plat == "tiktok":
+                v["tt_status"] = ("Zernio: " + status) if ok else "Fehler"
+                if ok:
+                    v["tt_publish_id"] = f"zernio:{v.get('zernio_id')}"
+            log(f"Zernio · {plat}: {status}" + (f" · {url}" if url else "") + (f" · {err}" if err else ""))
+            if not ok:
+                errors.append(f"{plat} (Zernio): {err or status}")
+        if not res:
+            log("Zernio hat den Auftrag angenommen; das Ergebnis je Plattform steht in deinem Zernio-Konto.")
+            v["yt_status"] = v["tt_status"] = "Zernio: angenommen"
+            v["tt_publish_id"] = v["tt_publish_id"] if v.get("tt_publish_id") else f"zernio:{v.get('zernio_id')}"
+    except Exception as e:  # noqa: BLE001
+        errors.append(f"Zernio: {e}")
+        log(f"Zernio-Fehler: {e}")
+    done = bool(v.get("yt_id")) or bool(v.get("tt_publish_id"))
+    v["status"] = "published" if done and not errors else ("partial" if done else ("error" if errors else "rendered"))
+    v["error"] = "\n".join(errors)[:900] or None
+
+
 def upload_video(v, path):
+    if zernio_ready():
+        return _upload_zernio(v)
     errors = []
     if cfg("youtube_enabled") and connected("youtube") and not v.get("yt_id"):
         try:

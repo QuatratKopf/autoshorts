@@ -117,6 +117,7 @@ jobs:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+          ZERNIO_API_KEY: ${{ secrets.ZERNIO_API_KEY }}
         run: |
           python -m engine.main "$IN_ACTION" \
             --category "$IN_CATEGORY" --topic "$IN_TOPIC" --upload "$IN_UPLOAD" \

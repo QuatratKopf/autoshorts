@@ -97,9 +97,11 @@ def phone(title, items, n_visible=None):
     dr.rounded_rectangle((18, 18, w - 19, h - 19), 56, fill=(58, 64, 140))
     dr.rounded_rectangle((w // 2 - 80, 34, w // 2 + 80, 70), 18, fill=(20, 20, 24))
     fc, ft = font(150, "Bold"), font(36, "SemiBold")
-    clock = title or "3:12"
+    clock = (title or "3:12").strip()
+    while dr.textlength(clock, font=fc) > w - 110 and fc.size > 44:      # „UNBEKANNT“ statt Uhrzeit: kleiner statt abgeschnitten
+        fc = font(fc.size - 8, "Bold")
     tw = dr.textlength(clock, font=fc)
-    dr.text(((w - tw) / 2, 110), clock, font=fc, fill=WHITE)
+    dr.text(((w - tw) / 2, 110 + (150 - fc.size) / 2), clock, font=fc, fill=WHITE)
     fi, fs = font(34, "Bold"), font(28, "SemiBold")
     y = 340
     for i, it in enumerate(items[:n]):
@@ -108,7 +110,7 @@ def phone(title, items, n_visible=None):
         bh = 76 + 36 * len(lines)
         dr.rounded_rectangle((44, y, w - 45, y + bh), 26, fill=(246, 246, 248))
         dr.ellipse((66, y + 20, 110, y + 64), fill=RED if i == 0 else (90, 90, 96))
-        dr.text((128, y + 18), head.strip()[:26], font=fi, fill=INK)
+        dr.text((128, y + 18), _short(head.strip(), 26), font=fi, fill=INK)
         for k, l in enumerate(lines):
             dr.text((128, y + 62 + k * 36), l, font=fs, fill=(80, 80, 88))
         y += bh + 18
@@ -133,7 +135,7 @@ def checklist(title, items, n_checked=None):
     done = 0
     for i, (t, c) in enumerate(rows):
         y = 160 + i * 96
-        dr.text((60, y), t[:22], font=fi, fill=INK)
+        dr.text((60, y), _short(t, 22), font=fi, fill=INK)
         bx = w - 140
         dr.rounded_rectangle((bx, y + 6, bx + 64, y + 70), 10, outline=INK, width=6, fill=WHITE)
         if c and done < n:
@@ -257,16 +259,16 @@ def frames_for(ov: dict):
             return _pop(note(_short(ov.get("title") or "", 20), _short(ov["text"], 80))), 560
         if t == "phone" and ov.get("items"):
             items = ov["items"]
-            fr = _pop(phone(str(ov.get("title") or "")[:8], items, 0))
+            fr = _pop(phone(_short(ov.get("title") or "", 16), items, 0))
             for k in range(1, min(4, len(items)) + 1):   # Nachrichten erscheinen nacheinander
-                fr += [phone(str(ov.get("title") or "")[:8], items, k)] * 10
+                fr += [phone(_short(ov.get("title") or "", 16), items, k)] * 10
             return fr, 760
         if t == "checklist" and ov.get("items"):
             items = ov["items"]
-            fr = _pop(checklist(str(ov.get("title") or "")[:18], items, 0))
+            fr = _pop(checklist(_short(ov.get("title") or "", 18), items, 0))
             n = sum(1 for it in items[:5] if not isinstance(it, (list, tuple)) or len(it) < 2 or it[1])
             for k in range(1, n + 1):   # Haken nacheinander setzen
-                fr += [checklist(str(ov.get("title") or "")[:18], items, k)] * 9
+                fr += [checklist(_short(ov.get("title") or "", 18), items, k)] * 9
             return fr, 640
         if t == "bar" and ov.get("label") is not None:
             v = int(float(ov.get("value") or 0))

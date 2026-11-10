@@ -111,6 +111,7 @@ PRESET_CATEGORIES = [
 DEFAULT_SETTINGS = {
     "autopilot": True,
     "upload_times": "18:00",
+    "upload_via": "direct",         # direct = eigene Google-/TikTok-App · zernio = über den Dienst Zernio (ein API-Schlüssel)
     "target_seconds": 70,
     "min_seconds": 62,              # Videos sollen sicher über einer Minute liegen (TikTok-Creator-Programm)
     "text_provider": "gemini",

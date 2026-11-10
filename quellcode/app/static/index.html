@@ -443,7 +443,7 @@ let CFG = null, ST = {}, VIDS = [], STATS = {v: {}, ch: {}}, TRENDS = {items: []
 let SECRETS = null, RUNS = [], PENDING = null, LOADERR = "", CANCEL_NEXT = 0, CANCELING = new Set();
 let TAB = (location.hash || "#dashboard").slice(1);
 if (!["dashboard", "kalender", "studio", "einstellungen"].includes(TAB)) TAB = "dashboard";
-const DEF = {voice_speed: 1, voice_style: "Lebendig und mitreißend mit klarer Betonung – wie der Sprecher eines viralen Erklärvideos, flüssig und natürlich.", caption_style: "impact", auto_learn: true, min_seconds: 62, tts_provider: "gemini", gemini_voice: "", sfx_volume: 0.35, trend_mode: "half", make_thumbnail: true, youtube_thumbnail: true, trend_regions: "US,DE",
+const DEF = {voice_speed: 1, voice_style: "Lebendig und mitreißend mit klarer Betonung – wie der Sprecher eines viralen Erklärvideos, flüssig und natürlich.", caption_style: "impact", auto_learn: true, upload_via: "direct", min_seconds: 62, tts_provider: "gemini", gemini_voice: "", sfx_volume: 0.35, trend_mode: "half", make_thumbnail: true, youtube_thumbnail: true, trend_regions: "US,DE",
   audience: "Gen Z (16–25) in Deutschland, die TikTok und YouTube Shorts schauen: Internet-Kultur, Memes, virale Trends, Gaming, Musik, Serien, Filme, Creator, Tech, Lifestyle. Lockere Sprache wie unter Freunden, schnell auf den Punkt, kein Lehrer- oder Kinder-Ton."};
 const S_ = k => { const v = (CFG && CFG.settings || {})[k]; return v === undefined ? DEF[k] : v; };
 const cat = slug => (CFG && CFG.categories || []).find(c => c.slug === slug);
@@ -922,6 +922,7 @@ const SECRET_LIST = [
   ["GEMINI_API_KEY", "Gemini API-Key", "Skript und Stimme · kostenlos", "https://aistudio.google.com/apikey"],
   ["GOOGLE_CLIENT_SECRET", "Google Client-Secret", "für YouTube", "https://console.cloud.google.com/apis/credentials"],
   ["TIKTOK_CLIENT_SECRET", "TikTok Client-Secret", "für TikTok", "https://developers.tiktok.com/apps"],
+  ["ZERNIO_API_KEY", "Zernio API-Key", "Upload über Zernio statt eigener Apps", "https://zernio.com"],
   ["OPENAI_API_KEY", "OpenAI API-Key", "nur Premium", "https://platform.openai.com/api-keys"],
   ["ELEVENLABS_API_KEY", "ElevenLabs API-Key", "nur Premium", "https://elevenlabs.io/app/settings/api-keys"]];
 const hasSecret = n => SECRETS instanceof Set ? SECRETS.has(n) : null;
@@ -964,6 +965,8 @@ function viewSettings() {
     ${tgl("make_thumbnail", "Eigenes Thumbnail gestalten", "Titelbild aus der Animations-Engine mit großem Text passend zum Thema. Wird bei TikTok als Titelbild gesetzt.")}
     ${tgl("youtube_thumbnail", "Thumbnail auf YouTube hochladen", "Geht erst, wenn dein Kanal per Telefon bestätigt ist (youtube.com/verify). Bei Shorts zeigt YouTube es vor allem in Suche und Kanalseite.")}`)}
   ${sec("plattform", I.plug, "Plattformen", `YouTube ${con.youtube ? "verbunden" : "nicht verbunden"} · TikTok ${con.tiktok ? "verbunden" : "nicht verbunden"}`, con.youtube && con.tiktok ? '<span class="chip good">beide</span>' : '<span class="chip warn">offen</span>', `
+    ${sel("upload_via", "Hochladen über", "Zernio lädt über seine eigenen, von YouTube und TikTok zugelassenen Apps hoch: Konten auf zernio.com verbinden, API-Key unten bei den Zugangsdaten speichern. Die eigenen Verbindungen darunter werden dann nicht gebraucht.", [["direct", "Eigene Google- und TikTok-App"], ["zernio", "Zernio (ein API-Key für beide)"]])}
+    <div class="sep"></div>
     ${platBlock("youtube", "YouTube Shorts", "youtube_client_id", "GOOGLE_CLIENT_SECRET", "Google Client-ID", "Google Cloud: OAuth-Client vom Typ „Desktop-App“ anlegen. Die Anleitung steht im Repository (README).")}
     ${tgl("youtube_enabled", "Auf YouTube hochladen")}
     ${sel("youtube_privacy", "Sichtbarkeit", "Bis Google dein Projekt geprüft hat, setzt YouTube API-Uploads auf „Privat“.", [["public", "Öffentlich"], ["unlisted", "Nicht gelistet"], ["private", "Privat"]])}
