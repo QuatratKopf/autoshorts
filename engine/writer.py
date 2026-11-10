@@ -204,10 +204,10 @@ def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
         ai.log(f"Drehbuch hat {n_words} Wörter statt {words} – lasse es kürzen")
         try:
             js2, provider = ai.chat_json(SYSTEM, user + f"\n\nACHTUNG: Dein letzter Entwurf hatte {n_words} Wörter Sprechertext. "
-                                         f"Schreibe das Drehbuch neu mit HÖCHSTENS {words} Wörtern insgesamt – höchstens "
-                                         f"{max(6, round(words / scenes))} Wörter pro Szene, ein kurzer Satz je Szene.", 0.7)
+                                         f"Schreibe das Drehbuch neu mit {round(words * 0.9)} bis {words} Wörtern insgesamt (nicht weniger!), "
+                                         f"etwa {max(6, round(words / scenes))} Wörter pro Szene, gleiche Szenenzahl.", 0.7)
             n2 = sum(len(str(x.get("text", "")).split()) for x in js2.get("scenes", []) if isinstance(x, dict))
-            if 0 < n2 < n_words:
+            if words * 0.75 <= n2 < n_words:
                 js = js2
         except Exception as e:  # noqa: BLE001
             ai.log(f"Kürzen nicht möglich ({e}) – nehme den ersten Entwurf")
