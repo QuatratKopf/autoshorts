@@ -174,7 +174,7 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0):
         _blob(d, (hc[0] - hr * 0.4, hc[1] - hr * 1.5, hc[0] + hr * 0.4, hc[1] - hr * 0.8), (96, 62, 44), o)
     _blob(d, (hc[0] - hr, hc[1] - hr * 0.94, hc[0] + hr, hc[1] + hr * 0.94), skin, o)
     if look.hair in ("long", "bun"):
-        d.chord((hc[0] - hr, hc[1] - hr * 0.94, hc[0] + hr, hc[1] + hr * 0.5), 185, 355, fill=(96, 62, 44))
+        d.chord((hc[0] - hr, hc[1] - hr * 0.94, hc[0] + hr, hc[1] - hr * 0.05), 180, 360, fill=(96, 62, 44))
     # Gesicht (leicht in Blickrichtung versetzt)
     ex, ey, er = hc[0] + 16 * k * f, hc[1] + 2 * k, 23 * k
     lk = pose.look if pose.look else 0.45 * f
