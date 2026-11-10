@@ -564,7 +564,7 @@ def auto_graphic(text, hud=""):
     scale = parts[0] if parts and parts[0] in _SCALE.values() else ""
     noun = " ".join(parts[1:] if scale else parts)
     whole = abs(v - round(v)) < 1e-9
-    if not scale and noun == "STUNDEN" and whole and 1 <= v <= 999 and _re.search(r"countdown|zeit läuft|bleiben dir|nur noch|auf dich allein|allein|ohne hilfe|frist", low):
+    if not scale and noun == "STUNDEN" and whole and 1 <= v <= 999 and _re.search(r"countdown|zeit läuft|bleiben dir|nur noch|auf dich allein|allein|ohne hilfe|frist|eigenständ|durchhalten|überstehen|autark|auf sich gestellt|selbst versorgen", low):
         return {"type": "timer", "value": f"{int(v):02d}:00:00", "kicker": kick}
     if not scale and noun in ("TAGE", "WOCHEN", "MONATE", "JAHRE") and whole and 1 <= v <= 999:
         return {"type": "calendar", "value": str(int(v)), "label": noun, "kicker": kick}
@@ -676,6 +676,14 @@ def direct(scenes, times, topic="", style="", look=""):
             for a in acts:
                 if not a.get("kind"):
                     a["kind"] = "fish"
+        for a in acts:                                    # geschlafen wird im Bett oder auf dem Sofa, nicht auf der Straße
+            if str(a.get("action") or "").lower() == "sleep" and places.resolve(backdrop(sc)) not in ("bedroom", "livingroom", "hospital", "camp", "attic"):
+                if len(acts) == 1 and not has_bd and (place in GENERIC or places.resolve(backdrop(sc)) in places.OUTDOOR):
+                    sc["place"] = place = "bedroom"
+                    sc["backdrop"] = None
+                    sc["crowd"], sc["props"] = "", []
+                else:
+                    a["action"] = "sit"
         home = {"shelf": "supermarket", "cart": "supermarket", "fridge": "kitchen", "tv": "livingroom", "computer": "office"}
         for q in (sc.get("props") or []):
             k = str(q.get("type") if isinstance(q, dict) else q).lower().strip()
@@ -814,14 +822,19 @@ def direct(scenes, times, topic="", style="", look=""):
         g_auto = None
         if sc.get("shot") == "graphic":
             gfx += 1
-        elif (lone or not acts) and (fig_prev or neon or (i and scenes[i - 1].get("shot") == "graphic")) and sc.get("shot") in ("", "close") \
-                and not sc.get("overlay") and not last and i > 0 and gfx < (6 if neon else 4) and not window_scene and rp2 not in MAPS:
-            g_auto = graphics.clean(auto_graphic(sc.get("text"), cur_hud))
+        elif (lone or not acts) and (fig_prev or neon or (i and scenes[i - 1].get("shot") == "graphic")) and sc.get("shot") in ("", "close", "event") \
+                and ov_t in ("", "card", "counter", "bar") and not last and i > 0 and gfx < (6 if neon else 4) and not window_scene and rp2 not in MAPS:
+            ov0 = sc.get("overlay") or {}                 # Zahl aus der Einblendung („72 STUNDEN“) oder aus dem Satz
+            ov_txt = " ".join(str(ov0.get(k) or "") for k in ("text", "value", "unit", "label")) if ov_t in ("card", "counter") else ""
+            g_auto = graphics.clean(auto_graphic((ov_txt + ". " if ov_txt.strip() else "") + str(sc.get("text") or ""), cur_hud)) if ov_t != "bar" else None
+            if g_auto is None and ov_t:
+                pass                                      # Einblendung bleibt, wie sie ist
             prev_g = scenes[i - 1].get("graphic") if scenes[i - 1].get("shot") == "graphic" else None
             if g_auto and prev_g and (prev_g.get("type") == g_auto["type"] or (i > 1 and scenes[i - 2].get("shot") == "graphic")):
                 g_auto = None                            # nie dieselbe Grafik-Art zweimal hintereinander, nie drei Grafiken am Stück
         if g_auto:                                       # Zahl, Frist oder Warum-Frage als bewegte Grafik statt redender Figur
             sc["shot"], sc["graphic"], gfx = "graphic", g_auto, gfx + 1
+            sc["overlay"] = None
         elif lone and fig_prev and not window_scene and not sc.get("shot") and not last and ov_t not in TALL_OV and ov_t != "choice" and rp2 not in MAPS:
             things = [q for q in (sc.get("props") or []) if extras.prop_fit(q.get("type"))
                       and extras.PROP_ALIASES.get(q["type"].lower(), q["type"].lower()) not in DULL]
@@ -999,7 +1012,7 @@ INSERT_BG = {"panic": ((96, 26, 30), (30, 10, 16)), "tense": ((104, 62, 30), (30
 _ins_bg = {}
 
 
-def _insert_frame(kinds, t, dur, mood, low=False):
+def _insert_frame(kinds, t, dur, mood, low=False, neon=False):
     """Einschub: ein Gegenstand groß und allein im Bild (wie eine Nahaufnahme), ruhiger Verlauf als Hintergrund."""
     mood = mood if mood in INSERT_BG else ""
     if mood not in _ins_bg:
@@ -1009,7 +1022,7 @@ def _insert_frame(kinds, t, dur, mood, low=False):
         from PIL import ImageFilter
         g = g.filter(ImageFilter.GaussianBlur(26)).resize((W, H), Image.BILINEAR)
         _ins_bg[mood] = Image.composite(Image.new("RGB", (W, H), c0), Image.new("RGB", (W, H), c1), g)
-    frame = _ins_bg[mood].copy()
+    frame = graphics.background(t, mood) if neon else _ins_bg[mood].copy()
     d = ImageDraw.Draw(frame, "RGBA")
     n = len(kinds)
     for i, kind in enumerate(kinds):
@@ -1054,9 +1067,7 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
             t = fidx / FPS
             if gfx or ins:
                 frame = (graphics.frame(gfx, t, dur, str(scene.get("mood") or "").lower()) if gfx
-                         else _insert_frame(ins, t, dur, str(scene.get("mood") or "").lower(), bool(has_ov)))
-                if neon_look and not gfx:
-                    frame = graphics.neon(frame, t)
+                         else _insert_frame(ins, t, dur, str(scene.get("mood") or "").lower(), bool(has_ov), neon_look))
                 if still is not None and fidx == min(n_frames - 1, FPS):
                     frame.save(still, quality=92)
                 ff.stdin.write(frame.tobytes())

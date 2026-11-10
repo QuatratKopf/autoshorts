@@ -431,6 +431,7 @@ def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
     if "#shorts" not in [t.lower() for t in tags]:
         tags.insert(0, "#shorts")
     th = js.get("thumbnail") if isinstance(js.get("thumbnail"), dict) else {}
+    js["description"] = "\n".join(l.strip() for l in str(js.get("description") or "").replace("\\n", "\n").split("\n") if l.strip())
     return {"title": str(js.get("title") or topic)[:95], "description": str(js.get("description") or ""),
             "hashtags": tags[:10], "tags": [str(t).strip("# ")[:60] for t in js.get("tags", []) if str(t).strip("# ")][:15],
             "thumbnail": {**th, "image": str(th.get("image") or sc[0]["image"]), "text": str(th.get("text") or "").strip()[:40]},
