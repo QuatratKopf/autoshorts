@@ -1,0 +1,22 @@
+{
+ "updated": 1794345622.2692752,
+ "enough": false,
+ "counted": 0,
+ "total": 1,
+ "needed": 6,
+ "categories": [],
+ "weights": {
+  "fakten": 1.0,
+  "storys": 1.0,
+  "mysterien": 1.0,
+  "tiere": 1.0,
+  "whatif": 1.0
+ },
+ "advice": [
+  "Noch zu wenig Daten: 0 von 6 Videos sind alt genug zum Vergleichen. Bis dahin läuft alles im normalen Wechsel."
+ ],
+ "words_good": [],
+ "words_bad": [],
+ "top": [],
+ "flop": []
+}
