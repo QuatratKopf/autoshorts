@@ -1253,5 +1253,45 @@
   },
   "thumb": true,
   "mp4": true
+ },
+ {
+  "id": 41,
+  "category": "fakten",
+  "topic": "72 Stunden auf dich allein gestellt: Warum Europa seinen Bürgern rät, Vorräte für drei Tage anzulegen",
+  "status": "rendered",
+  "created": 1794339295.484891,
+  "title": "Darum rät dir der Staat zu drei Tagen Vorrat",
+  "description": "Was machst du, wenn plötzlich alles dunkel bleibt?\nWir schauen uns an, warum Notfallvorräte für jeden wichtig sind.\nVorräte anlegen oder lieber unvorbereitet bleiben?",
+  "hashtags": [
+   "#shorts",
+   "#foryou",
+   "#viral",
+   "#wissen",
+   "#vorrat",
+   "#prepping",
+   "#deutschland",
+   "#lifestyle"
+  ],
+  "tags": [
+   "notvorrat",
+   "krisenvorsorge",
+   "stromausfall",
+   "fakten",
+   "wissen",
+   "zukunft",
+   "sicherheit",
+   "haushalt"
+  ],
+  "thumb_text": "DREI TAGE OHNE ALLES",
+  "missing": null,
+  "cover_ms": 65233,
+  "duration": 65.1,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "mp4": true
  }
 ]
