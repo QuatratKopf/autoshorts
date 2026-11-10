@@ -1174,5 +1174,44 @@
   "tt_status": "Zernio: published",
   "tt_publish_id": "zernio:6af35f19a7a2d73f3700cdb8",
   "error": null
+ },
+ {
+  "id": 39,
+  "category": "whatif",
+  "topic": "Was wäre, wenn wir alle von Drohnen im Alltag überwacht werden?",
+  "status": "rendered",
+  "created": 1794335552.521716,
+  "title": "Was wenn Drohnen uns überall überwachen",
+  "description": "Was würde passieren, wenn Drohnen rund um die Uhr unseren Alltag kontrollieren? Wir spielen die schockierenden Folgen von den ersten Sekunden bis in fünf Jahre durch. Würdest du in so einer Welt leben wollen?",
+  "hashtags": [
+   "#shorts",
+   "#whatif",
+   "#drohnen",
+   "#überwachung",
+   "#zukunft",
+   "#tech",
+   "#fyp",
+   "#viral"
+  ],
+  "tags": [
+   "drohnen",
+   "überwachung",
+   "zukunft",
+   "ki",
+   "technologie",
+   "was wäre wenn",
+   "privatsphäre",
+   "scifi"
+  ],
+  "thumb_text": "ÜBERWACHUNG ÜBERALL",
+  "cover_ms": 64894,
+  "duration": 64.8,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "mp4": true
  }
 ]
