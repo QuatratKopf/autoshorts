@@ -447,7 +447,7 @@ def _car(d, x, y, col, facing, t):
     d.ellipse((x + facing * 96 - 9, y - 58 + b, x + facing * 96 + 9, y - 40 + b), fill=(255, 236, 150))
 
 
-def draw_landscape_motion(layer, spec, place, night, t):
+def draw_landscape_motion(layer, spec, place, night, t, traffic=True):
     """Bewegung passend zur Landschaft: fließendes Wasser, Wellen, fahrende Autos, Rauch, wehendes Korn, Staub, Glut."""
     d = ImageDraw.Draw(layer, "RGBA")
     base = GROUND - 60
@@ -486,7 +486,7 @@ def draw_landscape_motion(layer, spec, place, night, t):
                 g = int(150 - ph * 50)
                 d.ellipse((cx + ph * 220 - r, base - 660 - ph * 520 - r, cx + ph * 220 + r, base - 660 - ph * 520 + r), fill=(g, g, g + 6, int(220 * (1 - ph))))
     if "city" in els or place == "street" or ground == "road":    # Autos fahren durch
-        if "ruins" not in els:
+        if "ruins" not in els and traffic:
             cols = ((214, 80, 70), (70, 130, 210), (240, 196, 70), (240, 240, 244))
             for i in range(3):
                 spd = 420 + i * 130
@@ -494,6 +494,9 @@ def draw_landscape_motion(layer, spec, place, night, t):
                 x = ((t * spd + i * 700) % (W + 900)) - 450
                 x = x if direction > 0 else W - x
                 _car(d, x, base + 200 + i * 150, cols[(i + int(t / 9)) % 4], direction, t)
+    if ("city" in els or place == "street" or ground == "road") and not traffic and "ruins" not in els:
+        for i, x in enumerate((230, 640, 900)):            # Autos stehen still
+            _car(d, x, base + 200 + (i % 2) * 170, ((214, 80, 70), (70, 130, 210), (240, 196, 70))[i], 1 if i % 2 else -1, 0)
     if "ruins" in els or ground == "lava":                        # Glut und Rauch steigen auf
         for i, (a, b, c) in enumerate(_DROPS[:26]):
             ph = (t * (0.18 + c * 0.2) + b) % 1

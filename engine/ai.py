@@ -441,7 +441,8 @@ def _gemini_tts(text, out, cat):
     style = (cfg("voice_style") or cat.get("voice_instructions") or "Ruhig und natürlich.").strip()
     speed = max(0.8, min(1.15, float(cfg("voice_speed") or 1.0)))
     # kurze Regieanweisung: lange Anweisungen liest das Modell manchmal mit vor
-    prompt = f"Lies als deutscher Erzähler vor ({style} Flüssig, natürlich, jedes Wort deutlich):\n\n{text}"
+    short = style.split("–")[0].split(".")[0].strip()[:60]
+    prompt = f"Sprich {short[0].lower() + short[1:] if short else 'ruhig'}, deutlich:\n\n{text}"
     last = None
     for model in [m for m in (cfg("gemini_tts_model"), "gemini-3.8-flash-tts", "gemini-3.8-flash-tts",
                               "gemini-3.1-flash-tts-preview", "gemini-2.5-flash-preview-tts") if m]:

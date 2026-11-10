@@ -194,7 +194,7 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
         dx, dy = int(math.sin(t * 31) * 7), int(math.cos(t * 27) * 5)
         frame = frame.transform(frame.size, Image.AFFINE, (1, 0, dx, 0, 1, dy), resample=Image.NEAREST)
     extras.draw_ambient(frame, place, night, t)
-    extras.draw_landscape_motion(frame, opt.get("spec"), place, night, t)
+    extras.draw_landscape_motion(frame, opt.get("spec"), place, night, t, not opt.get("no_traffic"))
     for kind, x in props:
         if extras.PROP_ALIASES.get(kind, kind) not in extras.FRONT:
             _prop(frame, kind, x, t, big)
@@ -299,7 +299,24 @@ def direct(scenes, times):
             sc["crowd"] = ""
         if str(sc.get("mood") or "") == "panic" and outdoor and not sc.get("crowd"):
             sc["crowd"] = "panic"
+        import re as _re
+        txt = str(sc.get("text") or "").lower()
+        if _re.search(r"stromausfall|\\bstrom\\b.{0,40}\\b(aus|weg|zusammen)\\b|ohne strom|kein strom|blackout|lichter gehen aus|stockdunkel|finsternis|dunkelheit", txt):
+            sc["time"] = "night"                      # ohne Strom / Dunkelheit → Nacht
+            sc["dark_city"] = True
+            sc["mood"] = sc.get("mood") or "scary"
+        if _re.search(r"\bstill\b|stillstand|steht still|stehen still|bleiben stehen|bleibt stehen|kein benzin|verkehr bricht|lahmgelegt|menschenleer|niemand mehr", txt):
+            sc["no_traffic"] = True
+            if sc.get("crowd") == "walk":
+                sc["crowd"] = ""
         acts_now = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        # Erzählt das Drehbuch alles mit einer redenden Figur in der Mitte, zeigt jede zweite passende Szene stattdessen das Geschehen
+        if (len(acts_now) == 1 and str(acts_now[0].get("action") or "talk").lower() in ("talk", "idle", "") and outdoor
+                and (sc.get("crowd") or sc.get("props") or isinstance(sc.get("backdrop"), dict)) and i % 2 == 1
+                and not sc.get("shot")):
+            sc["actors"] = []
+            sc["shot"] = "event"
+            acts_now = []
         if outdoor and not acts_now and not sc.get("props") and not sc.get("crowd") and not sc.get("weather") \
                 and str(sc.get("mood") or "") != "scary":
             sc["crowd"] = "walk"            # nie ein Bild, in dem gar nichts passiert
@@ -416,7 +433,8 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
         for fidx in range(n_frames):
             t = fidx / FPS
             frame = _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, place == "bedroom", shot, big,
-                           {"crowd": scene.get("crowd"), "mood": str(scene.get("mood") or "").lower(), "spec": backdrop(scene)})
+                           {"crowd": scene.get("crowd"), "mood": str(scene.get("mood") or "").lower(), "spec": backdrop(scene),
+                            "no_traffic": bool(scene.get("no_traffic") or scene.get("dark_city"))})
             if still is not None and fidx == min(n_frames - 1, FPS):
                 frame.save(still, quality=92)
             ff.stdin.write(frame.tobytes())
