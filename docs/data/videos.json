@@ -1090,5 +1090,40 @@
   },
   "thumb": true,
   "mp4": true
+ },
+ {
+  "id": 37,
+  "category": "grusel",
+  "topic": "Die 'Phantom-Benachrichtigung' – Warum tausende Leute seit Tagen exakt dieselbe stumme Push-Nachricht ohne Absender auf ihrem Handy bekommen und was passiert, wenn du auf das leere Display starrst.",
+  "status": "rendered",
+  "created": 1794309701.9382782,
+  "title": "Die stumme Handynachricht",
+  "description": "Tausende Menschen bekommen exakt dieselbe leere Push-Nachricht. Was passiert, wenn du auf das Display starrst? Schreib es in die Kommentare.",
+  "hashtags": [
+   "#shorts",
+   "#grusel",
+   "#creepypasta",
+   "#handy",
+   "#tech",
+   "#fy",
+   "#viral"
+  ],
+  "tags": [
+   "phantom benachrichtigung",
+   "gruselgeschichte",
+   "handy fehler",
+   "creepy",
+   "urban legends"
+  ],
+  "thumb_text": "DIE STUMME NACHRICHT",
+  "cover_ms": 63431,
+  "duration": 63.3,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "mp4": true
  }
 ]
