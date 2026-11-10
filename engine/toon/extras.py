@@ -5,7 +5,7 @@ import random
 
 from PIL import Image, ImageDraw
 
-from .places import GROUND, W, H
+from .places import GROUND, W, H, FAR, depth, px
 
 INK = (22, 22, 26)
 O = 7
@@ -326,17 +326,255 @@ def p_sprout(d, x, t, s=1.0):
         d.ellipse((px - 16, py - 16, px + 16, py + 16), fill=(250, 210, 70), outline=INK, width=3)
 
 
+def p_cart(d, x, t, s=1.0):
+    d.line((x - 150, GROUND - 250, x - 110, GROUND - 230, x - 80, GROUND - 60, x + 110, GROUND - 60), fill=INK, width=12, joint="curve")
+    d.polygon([(x - 104, GROUND - 210), (x + 150, GROUND - 210), (x + 120, GROUND - 90), (x - 84, GROUND - 90)], fill=(200, 206, 216), outline=INK, width=O)
+    for k in range(1, 5):
+        d.line((x - 104 + k * 50, GROUND - 210, x - 84 + k * 42, GROUND - 90), fill=INK, width=4)
+    d.line((x - 96, GROUND - 150, x + 136, GROUND - 150), fill=INK, width=4)
+    for wx in (-60, 96):
+        _o(d, (x + wx - 22, GROUND - 44, x + wx + 22, GROUND), (60, 60, 66), 5)
+
+
+def p_candle(d, x, t, s=1.0):
+    _r(d, (x - 26, GROUND - 130, x + 26, GROUND), (250, 244, 226), 6)
+    d.line((x, GROUND - 130, x, GROUND - 150), fill=INK, width=5)
+    fl = 1 + 0.15 * math.sin(t * 12)
+    tip = x + math.sin(t * 7) * 8
+    d.ellipse((x - 64, GROUND - 270, x + 64, GROUND - 120), fill=(255, 220, 120, 60))
+    d.polygon([(x - 22, GROUND - 160), (tip, GROUND - 160 - 80 * fl), (x + 22, GROUND - 160), (x, GROUND - 140)], fill=(250, 170, 50), outline=INK, width=4)
+
+
+def p_bus(d, x, t, s=1.0):
+    _r(d, (x - 420, GROUND - 330, x + 420, GROUND - 50), (240, 190, 60), 30)
+    for i in range(5):
+        _r(d, (x - 390 + i * 150, GROUND - 300, x - 270 + i * 150, GROUND - 190), (170, 220, 250), 10, 5)
+    _r(d, (x + 300, GROUND - 180, x + 380, GROUND - 60), (200, 160, 50), 6, 5)
+    for wx in (-270, 250):
+        _o(d, (x + wx - 56, GROUND - 106, x + wx + 56, GROUND + 6), (40, 40, 46))
+        _o(d, (x + wx - 20, GROUND - 70, x + wx + 20, GROUND - 30), (190, 190, 196), 4)
+
+
+def p_truck(d, x, t, s=1.0):
+    _r(d, (x - 420, GROUND - 380, x + 150, GROUND - 60), (236, 236, 240), 10)
+    _r(d, (x + 160, GROUND - 280, x + 400, GROUND - 60), (70, 130, 200), 24)
+    _r(d, (x + 250, GROUND - 250, x + 380, GROUND - 160), (170, 220, 250), 10, 5)
+    for wx in (-300, -180, 290):
+        _o(d, (x + wx - 56, GROUND - 106, x + wx + 56, GROUND + 6), (40, 40, 46))
+        _o(d, (x + wx - 20, GROUND - 70, x + wx + 20, GROUND - 30), (190, 190, 196), 4)
+
+
+def p_house(d, x, t, s=1.0):
+    _r(d, (x - 220, GROUND - 330, x + 220, GROUND), (236, 214, 180), 4)
+    d.polygon([(x - 260, GROUND - 330), (x, GROUND - 520), (x + 260, GROUND - 330)], fill=(190, 84, 70), outline=INK, width=O)
+    _r(d, (x - 40, GROUND - 170, x + 50, GROUND), (120, 80, 50), 6, 5)
+    for wx in (-170, 100):
+        _r(d, (x + wx, GROUND - 260, x + wx + 80, GROUND - 170), (150, 200, 240), 4, 5)
+
+
+def p_trafficlight(d, x, t, s=1.0):
+    _r(d, (x - 10, GROUND - 330, x + 10, GROUND), (70, 70, 78), 2, 5)
+    _r(d, (x - 44, GROUND - 560, x + 44, GROUND - 320), (50, 50, 58), 14)
+    on = int(t / 1.6) % 3
+    for i, col in enumerate(((230, 70, 60), (250, 200, 60), (90, 200, 110))):
+        _o(d, (x - 26, GROUND - 540 + i * 72, x + 26, GROUND - 488 + i * 72), col if i == on else (90, 90, 96), 4)
+
+
+def p_canister(d, x, t, s=1.0):
+    _r(d, (x - 80, GROUND - 190, x + 80, GROUND), (214, 70, 60), 14)
+    _r(d, (x + 20, GROUND - 230, x + 60, GROUND - 190), (60, 60, 66), 6, 5)
+    d.line((x - 50, GROUND - 150, x + 50, GROUND - 40), fill=INK, width=6)
+    d.line((x + 50, GROUND - 150, x - 50, GROUND - 40), fill=INK, width=6)
+
+
+def p_cans(d, x, t, s=1.0):
+    for i, (dx, dy) in enumerate(((-70, 0), (0, 0), (70, 0), (-35, -92), (35, -92), (0, -184))):
+        col = ((220, 90, 70), (240, 196, 70), (90, 160, 110))[i % 3]
+        _r(d, (x + dx - 32, GROUND + dy - 90, x + dx + 32, GROUND + dy), col, 8, 5)
+        d.rectangle((x + dx - 28, GROUND + dy - 60, x + dx + 28, GROUND + dy - 34), fill=(250, 250, 246))
+
+
+def p_generator(d, x, t, s=1.0):
+    b = math.sin(t * 40) * 3
+    _r(d, (x - 150, GROUND - 190 + b, x + 150, GROUND - 30 + b), (240, 170, 50), 16)
+    _r(d, (x - 120, GROUND - 160 + b, x - 10, GROUND - 70 + b), (60, 60, 66), 8, 5)
+    for i in range(3):
+        d.line((x + 30, GROUND - 150 + i * 34 + b, x + 120, GROUND - 150 + i * 34 + b), fill=INK, width=6)
+    d.line((x - 170, GROUND - 210, x + 170, GROUND - 210), fill=INK, width=12)
+    for wx in (-150, 150):
+        d.line((x + wx, GROUND - 210, x + wx, GROUND), fill=INK, width=12)
+    for k in range(3):
+        ph = (t * 0.8 + k / 3) % 1
+        r = 20 + ph * 40
+        d.ellipse((x + 170 + ph * 80 - r, GROUND - 140 - ph * 160 - r, x + 170 + ph * 80 + r, GROUND - 140 - ph * 160 + r), fill=(150, 150, 156, int(200 * (1 - ph))))
+
+
+def p_bike(d, x, t, s=1.0):
+    for wx in (-120, 120):
+        d.ellipse((x + wx - 90, GROUND - 180, x + wx + 90, GROUND), outline=INK, width=14)
+    d.line((x - 120, GROUND - 90, x - 20, GROUND - 230, x + 80, GROUND - 230, x + 120, GROUND - 90), fill=(214, 70, 60), width=14, joint="curve")
+    d.line((x - 20, GROUND - 230, x + 20, GROUND - 90, x - 120, GROUND - 90), fill=(214, 70, 60), width=14, joint="curve")
+    d.line((x - 50, GROUND - 250, x + 10, GROUND - 250), fill=INK, width=14)
+    d.line((x + 80, GROUND - 230, x + 70, GROUND - 290, x + 110, GROUND - 300), fill=INK, width=12, joint="curve")
+
+
+def p_shelf(d, x, t, s=1.0):
+    _r(d, (x - 200, GROUND - 440, x + 200, GROUND), (226, 228, 234), 6)
+    rnd = random.Random(int(x))
+    for k in range(4):
+        y1 = GROUND - 440 + (k + 1) * 110
+        d.line((x - 200, y1, x + 200, y1), fill=INK, width=6)
+        xx = x - 186
+        while xx < x + 150:
+            w, hgt = rnd.randint(30, 50), rnd.randint(50, 84)
+            _r(d, (xx, y1 - hgt - 4, xx + w, y1 - 4), ((220, 90, 70), (240, 196, 70), (90, 160, 110), (70, 130, 200))[rnd.randint(0, 3)], 5, 4)
+            xx += w + 8
+
+
+def p_table(d, x, t, s=1.0):
+    _r(d, (x - 200, GROUND - 190, x + 200, GROUND - 160), (176, 118, 76), 6)
+    for lx in (-170, 150):
+        _r(d, (x + lx, GROUND - 160, x + lx + 22, GROUND), (130, 86, 54), 4, 5)
+
+
+def p_fridge(d, x, t, s=1.0):
+    _r(d, (x - 110, GROUND - 440, x + 110, GROUND), (236, 240, 244), 16)
+    d.line((x - 110, GROUND - 290, x + 110, GROUND - 290), fill=INK, width=O)
+    _r(d, (x + 70, GROUND - 400, x + 88, GROUND - 320), (150, 156, 166), 6, 4)
+    _r(d, (x + 70, GROUND - 260, x + 88, GROUND - 150), (150, 156, 166), 6, 4)
+
+
+def p_tent(d, x, t, s=1.0):
+    d.polygon([(x - 300, GROUND), (x, GROUND - 380), (x + 300, GROUND)], fill=(230, 150, 70), outline=INK, width=O)
+    d.polygon([(x - 40, GROUND), (x, GROUND - 240), (x + 40, GROUND)], fill=(50, 44, 50), outline=INK, width=5)
+
+
+def p_streetlamp(d, x, t, s=1.0):
+    _r(d, (x - 10, GROUND - 660, x + 10, GROUND), (60, 60, 66), 2, 5)
+    _r(d, (x - 70, GROUND - 690, x + 70, GROUND - 650), (60, 60, 66), 12, 5)
+    _o(d, (x - 40, GROUND - 654, x + 40, GROUND - 600), (255, 236, 150), 5)
+
+
+def p_plane(d, x, t, s=1.0):
+    y = 420 + math.sin(t * 1.5) * 14
+    xx = x + (t * 60) % 200 - 100
+    d.polygon([(xx - 40, y - 10), (xx - 150, y - 120), (xx - 100, y - 120), (xx + 60, y - 10)], fill=(200, 206, 216), outline=INK, width=O)
+    d.rounded_rectangle((xx - 260, y - 40, xx + 250, y + 40), 40, fill=(244, 246, 250), outline=INK, width=O)
+    d.polygon([(xx - 250, y - 20), (xx - 320, y - 130), (xx - 260, y - 130), (xx - 180, y - 30)], fill=(214, 70, 60), outline=INK, width=O)
+    d.polygon([(xx - 30, y + 10), (xx - 170, y + 130), (xx - 110, y + 130), (xx + 80, y + 10)], fill=(200, 206, 216), outline=INK, width=O)
+    for i in range(6):
+        d.ellipse((xx - 150 + i * 56, y - 18, xx - 124 + i * 56, y + 8), fill=(120, 190, 240), outline=INK, width=3)
+
+
+def p_satellite(d, x, t, s=1.0):
+    y = 380 + math.sin(t * 1.2) * 16
+    for sx in (-1, 1):
+        d.rectangle((x + sx * 60 - (130 if sx < 0 else 0), y - 40, x + sx * 60 + (130 if sx > 0 else 0), y + 40), fill=(70, 110, 200), outline=INK, width=O)
+        d.line((x + sx * 125, y - 40, x + sx * 125, y + 40), fill=INK, width=4)
+    _r(d, (x - 60, y - 60, x + 60, y + 60), (220, 222, 230), 12)
+    d.line((x, y + 60, x, y + 110), fill=INK, width=8)
+    d.chord((x - 50, y + 90, x + 50, y + 170), 180, 360, fill=(240, 240, 246), outline=INK, width=O)
+    if int(t * 2) % 2:
+        d.ellipse((x - 10, y - 10, x + 10, y + 10), fill=(250, 80, 70))
+
+
+def p_ship(d, x, t, s=1.0):
+    y = FAR - 30 + math.sin(t * 1.4) * 6
+    d.polygon([(x - 200, y - 60), (x + 220, y - 60), (x + 170, y), (x - 160, y)], fill=(60, 70, 96), outline=INK, width=O)
+    _r(d, (x - 110, y - 130, x + 60, y - 60), (240, 240, 244), 6)
+    _r(d, (x - 20, y - 200, x + 20, y - 130), (214, 70, 60), 4)
+
+
 PROPS = {"cloud": p_cloud, "stormcloud": p_stormcloud, "lightning": p_lightning, "crack": p_crack, "flood": p_flood, "smoke": p_smoke, "aurora": p_aurora,
          "eclipse": p_eclipse, "sprout": p_sprout, "tree": p_tree, "rock": p_rock, "box": p_box, "car": p_car, "fire": p_fire, "tv": p_tv, "computer": p_computer,
          "money": p_money, "rocket": p_rocket, "ufo": p_ufo, "meteor": p_meteor, "explosion": p_explosion, "earth": p_earth,
-         "sun": p_bigsun, "moon": p_bigmoon, "tornado": p_tornado, "wave": p_wave, "ice": p_ice, "volcano": p_volcano}
+         "sun": p_bigsun, "moon": p_bigmoon, "tornado": p_tornado, "wave": p_wave, "ice": p_ice, "volcano": p_volcano,
+         "cart": p_cart, "candle": p_candle, "bus": p_bus, "truck": p_truck, "house": p_house, "trafficlight": p_trafficlight,
+         "canister": p_canister, "cans": p_cans, "generator": p_generator, "bike": p_bike, "shelf": p_shelf, "table": p_table,
+         "fridge": p_fridge, "tent": p_tent, "streetlamp": p_streetlamp, "plane": p_plane, "satellite": p_satellite, "ship": p_ship}
 PROP_ALIASES = {"baum": "tree", "stein": "rock", "kiste": "box", "auto": "car", "feuer": "fire", "fernseher": "tv", "pc": "computer",
                 "laptop": "computer", "geld": "money", "rakete": "rocket", "asteroid": "meteor", "erde": "earth", "sonne": "sun",
                 "mond": "moon", "wolke": "cloud", "gewitterwolke": "stormcloud", "regenwolke": "stormcloud", "tsunami": "wave", "blitz": "lightning", "erdbeben": "crack", "earthquake": "crack", "riss": "crack",
                 "überschwemmung": "flood", "flut": "flood", "rauch": "smoke", "polarlicht": "aurora", "sonnenfinsternis": "eclipse",
+                "einkaufswagen": "cart", "kerze": "candle", "kerzen": "candle", "lkw": "truck", "lastwagen": "truck", "haus": "house",
+                "ampel": "trafficlight", "kanister": "canister", "benzin": "canister", "wasserkanister": "canister", "konserven": "cans",
+                "dosen": "cans", "vorräte": "cans", "essen": "cans", "lebensmittel": "cans", "food": "cans", "notstromaggregat": "generator",
+                "aggregat": "generator", "fahrrad": "bike", "regal": "shelf", "tisch": "table", "kühlschrank": "fridge", "zelt": "tent",
+                "laterne": "streetlamp", "straßenlaterne": "streetlamp", "flugzeug": "plane", "satellit": "satellite", "schiff": "ship",
+                "boot": "ship", "paket": "box", "karton": "box", "geldstapel": "money", "bildschirm": "tv", "lagerfeuer": "fire",
                 "pflanze": "sprout", "plant": "sprout", "comet": "meteor", "komet": "meteor", "welle": "wave", "eisberg": "ice", "vulkan": "volcano", "bigsun": "sun"}
 FRONT = ("wave", "flood", "eclipse")
-SKY = ("earth", "sun", "moon", "ufo", "meteor", "aurora", "eclipse", "lightning", "cloud", "stormcloud")     # werden vor den Figuren gezeichnet
+SKY = ("earth", "sun", "moon", "ufo", "meteor", "aurora", "eclipse", "lightning", "cloud", "stormcloud", "plane", "satellite")     # werden vor den Figuren gezeichnet
+
+
+# Echte Größe (Höhe in Metern) und Tiefe (Fußlinie im Bild) – daraus ergibt sich der Maßstab passend zu den Menschen.
+# Was hier fehlt (Naturereignisse, Himmelskörper), wird als Schaubild frei gezeichnet.
+SIZES = {"car": (1.5, 1150), "bus": (3.0, 1100), "truck": (3.3, 1100), "house": (7.5, 1010), "tree": (7.5, 1130), "rock": (0.8, 1262),
+         "box": (0.5, 1262), "fire": (1.1, 1250), "tv": (1.2, 1245), "computer": (1.3, 1245), "money": (0.45, 1262), "sprout": (0.5, 1262),
+         "cart": (1.0, 1262), "candle": (0.9, 1262), "trafficlight": (3.4, 1225), "canister": (0.5, 1262), "cans": (0.5, 1262),
+         "generator": (0.8, 1255), "bike": (1.05, 1255), "shelf": (1.9, 1238), "table": (0.78, 1250), "fridge": (1.85, 1238),
+         "tent": (1.8, 1180), "streetlamp": (4.6, 1225), "rocket": (14.0, 1010)}
+HELD = {"phone": "phone", "handy": "phone", "smartphone": "phone", "flashlight": "flashlight", "taschenlampe": "flashlight",
+        "bag": "bag", "tasche": "bag", "einkaufstüte": "bag", "tüte": "bag", "bottle": "bottle", "flasche": "bottle",
+        "wasserflasche": "bottle", "umbrella": "umbrella", "regenschirm": "umbrella", "schild": "sign", "sign": "sign",
+        "map": "map", "karte": "map", "radio": "radio"}
+_nat = {}
+
+
+def prop_fit(kind):
+    """(Faktor, Fußlinie) für eine Requisite mit echter Größe – oder None für frei gezeichnete Schaubilder."""
+    key = PROP_ALIASES.get(str(kind).lower(), str(kind).lower())
+    if key not in SIZES or key not in PROPS:
+        return None
+    if key not in _nat:
+        lay = Image.new("RGBA", (W * 2, H), (0, 0, 0, 0))
+        PROPS[key](ImageDraw.Draw(lay, "RGBA"), W, 0.37)
+        box = lay.getbbox()
+        _nat[key] = max(40, GROUND - box[1]) if box else 200
+    meters, y = SIZES[key]
+    return px(meters, y) / _nat[key], y
+
+
+def draw_held(layer, kind, x, y, facing, t, k=1.0, night=False):
+    """Gegenstand in der Hand (x, y = Handpunkt)."""
+    d = ImageDraw.Draw(layer, "RGBA")
+    f = facing
+    if kind == "phone":
+        d.rounded_rectangle((x - 20 * k, y - 62 * k, x + 20 * k, y + 8 * k), 7 * k, fill=(30, 32, 40), outline=INK, width=4)
+        d.rounded_rectangle((x - 14 * k, y - 54 * k, x + 14 * k, y, ), 4 * k, fill=(150, 210, 255))
+        if night:
+            d.ellipse((x - 90 * k, y - 120 * k, x + 90 * k, y + 60 * k), fill=(150, 210, 255, 40))
+    elif kind == "flashlight":
+        tip = (x + f * 64 * k, y - 10 * k)
+        d.polygon([tip, (x + f * 620 * k, y - 190 * k), (x + f * 620 * k, y + 150 * k)], fill=(255, 240, 170, 90 if night else 50))
+        d.line((x - f * 14 * k, y, tip[0], tip[1]), fill=INK, width=int(30 * k))
+        d.line((x - f * 10 * k, y, tip[0] - f * 4 * k, tip[1]), fill=(90, 96, 110), width=int(18 * k))
+        d.ellipse((tip[0] - 12 * k, tip[1] - 20 * k, tip[0] + 12 * k, tip[1] + 20 * k), fill=(255, 244, 190), outline=INK, width=4)
+    elif kind == "bag":
+        d.arc((x - 30 * k, y - 20 * k, x + 30 * k, y + 50 * k), 180, 360, fill=INK, width=int(7 * k))
+        d.rounded_rectangle((x - 54 * k, y + 14 * k, x + 54 * k, y + 130 * k), 8 * k, fill=(214, 170, 110), outline=INK, width=5)
+    elif kind == "bottle":
+        d.rounded_rectangle((x - 18 * k, y - 70 * k, x + 18 * k, y + 30 * k), 8 * k, fill=(130, 200, 250), outline=INK, width=4)
+        d.rectangle((x - 9 * k, y - 92 * k, x + 9 * k, y - 70 * k), fill=(60, 110, 200), outline=INK, width=3)
+    elif kind == "umbrella":
+        d.line((x, y + 20 * k, x, y - 260 * k), fill=INK, width=int(8 * k))
+        d.chord((x - 190 * k, y - 400 * k, x + 190 * k, y - 120 * k), 180, 360, fill=(214, 70, 60), outline=INK, width=O)
+    elif kind == "sign":
+        d.line((x, y + 20 * k, x, y - 150 * k), fill=(130, 86, 54), width=int(14 * k))
+        d.rounded_rectangle((x - 110 * k, y - 300 * k, x + 110 * k, y - 150 * k), 8 * k, fill=(250, 250, 246), outline=INK, width=O)
+        d.line((x - 70 * k, y - 250 * k, x + 70 * k, y - 250 * k), fill=INK, width=int(8 * k))
+        d.line((x - 70 * k, y - 205 * k, x + 30 * k, y - 205 * k), fill=INK, width=int(8 * k))
+    elif kind == "map":
+        d.polygon([(x - 70 * k, y - 60 * k), (x + 70 * k, y - 76 * k), (x + 70 * k, y + 20 * k), (x - 70 * k, y + 36 * k)], fill=(244, 232, 196), outline=INK, width=5)
+        d.line((x - 40 * k, y - 20 * k, x, y - 40 * k, x + 40 * k, y - 10 * k), fill=(214, 70, 60), width=int(6 * k), joint="curve")
+    elif kind == "radio":
+        d.rounded_rectangle((x - 50 * k, y - 50 * k, x + 50 * k, y + 20 * k), 8 * k, fill=(90, 96, 110), outline=INK, width=5)
+        d.ellipse((x - 36 * k, y - 36 * k, x + 4 * k, y + 4 * k), fill=(40, 40, 46))
+        d.line((x + 30 * k, y - 50 * k, x + 60 * k, y - 130 * k), fill=INK, width=int(6 * k))
+        for i in range(2):
+            ph = (t * 1.2 + i / 2) % 1
+            r = (30 + ph * 70) * k
+            d.arc((x + 60 * k - r, y - 130 * k - r, x + 60 * k + r, y - 130 * k + r), 200, 320, fill=(255, 255, 255, int(230 * (1 - ph))), width=5)
 
 
 def draw_prop(layer, kind, x, t):
@@ -437,32 +675,44 @@ def draw_weather(layer, kind, t):
         d.rectangle((0, 0, W, H), fill=(4, 6, 20, 110))
 
 
-def _car(d, x, y, col, facing, t):
-    b = math.sin(t * 9 + x * 0.01) * 2
-    d.rounded_rectangle((x - 105, y - 74 + b, x + 105, y - 18 + b), 16, fill=col, outline=INK, width=5)
-    d.rounded_rectangle((x - 62, y - 120 + b, x + 54, y - 68 + b), 18, fill=col, outline=INK, width=5)
-    d.rounded_rectangle((x - 50, y - 110 + b, x + 42, y - 76 + b), 8, fill=(170, 220, 250))
-    for wx in (-60, 60):
-        d.ellipse((x + wx - 24, y - 44, x + wx + 24, y + 4), fill=(40, 40, 46), outline=INK, width=4)
-    d.ellipse((x + facing * 96 - 9, y - 58 + b, x + facing * 96 + 9, y - 40 + b), fill=(255, 236, 150))
+def _car(d, x, y, col, facing, t, moving=True):
+    """Auto in richtiger Größe für die Tiefe y (rund 1,45 m hoch, etwas niedriger als ein Mensch)."""
+    u = px(1.45, y) / 120
+    b = math.sin(t * 9 + x * 0.01) * 2 * u if moving else 0
+    w = max(3, int(3.2 * u))
+    d.ellipse((x - 130 * u, y - 14 * u, x + 130 * u, y + 12 * u), fill=(0, 0, 0, 60))
+    d.rounded_rectangle((x - 125 * u, y - 76 * u + b, x + 125 * u, y - 18 * u + b), 18 * u, fill=col, outline=INK, width=w)
+    d.rounded_rectangle((x - 72 * u, y - 120 * u + b, x + 62 * u, y - 68 * u + b), 20 * u, fill=col, outline=INK, width=w)
+    d.rounded_rectangle((x - 60 * u, y - 110 * u + b, x - 8 * u, y - 76 * u + b), 8 * u, fill=(170, 220, 250))
+    d.rounded_rectangle((x + 2 * u, y - 110 * u + b, x + 50 * u, y - 76 * u + b), 8 * u, fill=(170, 220, 250))
+    for wx in (-74, 74):
+        d.ellipse((x + wx * u - 25 * u, y - 46 * u, x + wx * u + 25 * u, y + 4 * u), fill=(40, 40, 46), outline=INK, width=w)
+        d.ellipse((x + wx * u - 9 * u, y - 30 * u, x + wx * u + 9 * u, y - 12 * u), fill=(190, 190, 196))
+    d.ellipse((x + facing * 116 * u - 9 * u, y - 60 * u + b, x + facing * 116 * u + 9 * u, y - 40 * u + b), fill=(255, 236, 150))
+
+
+LANES = ((1108, 1), (1192, -1))       # Fahrspuren: Fußlinie und Fahrtrichtung
+PARK_Y = 1078                         # hier stehen Autos, wenn nichts mehr fährt
+
+
+def has_road(spec, place=""):
+    return isinstance(spec, dict) and spec.get("ground") == "road" and "ruins" not in (spec.get("elements") or [])
 
 
 def draw_landscape_motion(layer, spec, place, night, t, traffic=True):
     """Bewegung passend zur Landschaft: fließendes Wasser, Wellen, fahrende Autos, Rauch, wehendes Korn, Staub, Glut."""
     d = ImageDraw.Draw(layer, "RGBA")
-    base = GROUND - 60
-    els = [str(e).lower() for e in ((spec or {}).get("elements") or [])] if isinstance(spec, dict) else []
-    ground = str((spec or {}).get("ground") or "").lower() if isinstance(spec, dict) else ""
-    if "river" in els:                                           # Lichtreflexe wandern den Fluss hinunter
-        for i in range(7):
-            ph = (t * 0.35 + i / 7) % 1
-            y = base + 30 + ph * (H - base - 260)
-            wdt = 60 + ph * 260
-            cx = 490 + ph * 90 + math.sin(t * 2 + i) * 14
-            d.arc((cx - wdt / 2, y, cx + wdt / 2, y + 26 + ph * 20), 180, 360, fill=(226, 244, 255, 230), width=int(5 + ph * 5))
-    if "sea" in els or place == "beach" or ground == "water":     # Wellen laufen
-        y0 = base - 190 if ("sea" in els or place == "beach") else base + 40
-        y1 = base - 20 if ("sea" in els or place == "beach") else H - 240
+    base = FAR
+    els = list((spec or {}).get("elements") or []) if isinstance(spec, dict) else []
+    ground = str((spec or {}).get("ground") or "") if isinstance(spec, dict) else ""
+    if "river" in els:                                           # Lichtreflexe treiben den Fluss entlang
+        for i in range(9):
+            ph = (t * 0.16 + i / 9) % 1
+            x = -100 + ph * (W + 200)
+            y = 995 + (i * 37) % 86
+            d.arc((x, y, x + 90 + (i % 3) * 30, y + 22), 180, 360, fill=(226, 244, 255, 230), width=5)
+    if "sea" in els or ground == "water":                         # Wellen laufen
+        y0, y1 = (base - 200, base - 16) if "sea" in els else (base + 40, H - 240)
         for y in range(int(y0), int(y1), 46):
             sh = (t * 60 + y * 3) % 160
             for x in range(-160, W + 160, 160):
@@ -470,13 +720,13 @@ def draw_landscape_motion(layer, spec, place, night, t, traffic=True):
     if "lake" in els:
         for i in range(4):
             ph = (t * 0.5 + i / 4) % 1
-            cx, cy = 360 + i * 130, base + 190 + (i % 2) * 70
-            d.ellipse((cx - 30 - ph * 60, cy - 8 - ph * 16, cx + 30 + ph * 60, cy + 8 + ph * 16), outline=(226, 244, 255, int(230 * (1 - ph))), width=4)
+            cx, cy = 300 + i * 150, 1030 + (i % 2) * 50
+            d.ellipse((cx - 24 - ph * 60, cy - 6 - ph * 12, cx + 24 + ph * 60, cy + 6 + ph * 12), outline=(226, 244, 255, int(230 * (1 - ph))), width=4)
     if "fields" in els:                                           # Wind streicht durchs Korn
         for i in range(5):
             ph = (t * 0.28 + i / 5) % 1
             x = -200 + ph * (W + 400)
-            y = base + 80 + i * 90
+            y = base + 60 + i * 60
             d.arc((x, y, x + 240, y + 40), 190, 340, fill=(250, 236, 170, 200), width=6)
     if "factory" in els and traffic:                              # steht alles still, rauchen auch die Schlote nicht
         for cx in (820, 940):
@@ -485,45 +735,63 @@ def draw_landscape_motion(layer, spec, place, night, t, traffic=True):
                 r = 40 + ph * 110
                 g = int(150 - ph * 50)
                 d.ellipse((cx + ph * 220 - r, base - 660 - ph * 520 - r, cx + ph * 220 + r, base - 660 - ph * 520 + r), fill=(g, g, g + 6, int(220 * (1 - ph))))
-    if "city" in els or place == "street" or ground == "road":    # Autos fahren durch
-        if "ruins" not in els and traffic:
-            cols = ((214, 80, 70), (70, 130, 210), (240, 196, 70), (240, 240, 244))
-            for i in range(3):
-                spd = 420 + i * 130
-                direction = 1 if i % 2 == 0 else -1
-                x = ((t * spd + i * 700) % (W + 900)) - 450
-                x = x if direction > 0 else W - x
-                _car(d, x, base + 200 + i * 150, cols[(i + int(t / 9)) % 4], direction, t)
-    if ("city" in els or place == "street" or ground == "road") and not traffic and "ruins" not in els:
-        for i, x in enumerate((230, 640, 900)):            # Autos stehen still
-            _car(d, x, base + 200 + (i % 2) * 170, ((214, 80, 70), (70, 130, 210), (240, 196, 70))[i], 1 if i % 2 else -1, 0)
+    if "powerplant" in els and traffic:                           # Dampf aus den Kühltürmen
+        for cx, top in ((260, 400), (620, 320)):
+            for k in range(5):
+                ph = (t * 0.22 + k / 5) % 1
+                r = 60 + ph * 120
+                d.ellipse((cx + ph * 160 - r, top - ph * 360 - r, cx + ph * 160 + r, top - ph * 360 + r), fill=(250, 250, 252, int(210 * (1 - ph))))
+    if "windturbines" in els:                                     # Rotoren drehen sich
+        for x, y in ((220, 940), (700, 925), (960, 960)):
+            h = 380 + (x % 3) * 40
+            for k in range(3):
+                a = t * (1.6 if traffic else 0.0) + k * 2.094 + x
+                ex, ey = x + math.cos(a) * 150, y - h + math.sin(a) * 150
+                d.line((x, y - h, ex, ey), fill=INK, width=18)
+                d.line((x, y - h, ex, ey), fill=(244, 246, 250), width=10)
+            d.ellipse((x - 14, y - h - 14, x + 14, y - h + 14), fill=(200, 204, 212), outline=INK, width=4)
+    if has_road(spec):
+        cols = ((214, 80, 70), (70, 130, 210), (240, 196, 70), (240, 240, 244), (90, 160, 120))
+        if traffic:                                               # Autos fahren durch, hinten langsamer als vorn
+            for i, (y, direction) in enumerate(LANES):
+                period = 5.2 + i * 1.7
+                n = int((t + i * 2.3) / period)
+                ph = ((t + i * 2.3) % period) / 2.6
+                if ph < 1:
+                    x = -400 + ph * (W + 800)
+                    _car(d, x if direction > 0 else W - x, y, cols[(n + i * 2) % 5], direction, t)
+        else:                                                     # alles steht
+            for i, x in enumerate((210, 760)):
+                _car(d, x, PARK_Y, cols[i * 2], 1 if i else -1, 0, False)
     if "ruins" in els or ground == "lava":                        # Glut und Rauch steigen auf
         for i, (a, b, c) in enumerate(_DROPS[:26]):
             ph = (t * (0.18 + c * 0.2) + b) % 1
             x = a * W + math.sin(t * 1.5 + i) * 30
-            y = base + 100 - ph * 1100
+            y = base + 300 - ph * 1100
             r = 4 + c * 5
             d.ellipse((x - r, y - r, x + r, y + r), fill=(255, 150 + int(80 * c), 60, int(240 * (1 - ph))))
-    if ground == "dry" or "deadtrees" in els or "dunes" in els or place == "desert":   # Staub weht, Steppenläufer rollt
+    if ground == "dry" or "dunes" in els:                         # Staub weht, Steppenläufer rollt
         for i, (a, b, c) in enumerate(_DROPS[:10]):
             x = (a * (W + 600) + t * (300 + c * 300)) % (W + 600) - 300
-            y = base - 200 + b * 700
+            y = base - 100 + b * 500
             d.arc((x, y, x + 300, y + 40), 190, 330, fill=(240, 220, 170, 150), width=7)
         tx = (t * 260) % (W + 300) - 150
-        ty = base + 150 - abs(math.sin(t * 5)) * 40
+        ty = 1150 - abs(math.sin(t * 5)) * 40
         d.ellipse((tx - 34, ty - 34, tx + 34, ty + 34), outline=(120, 90, 60, 255), width=6)
         d.arc((tx - 24, ty - 24, tx + 24, ty + 24), int(t * 300) % 360, int(t * 300) % 360 + 200, fill=(120, 90, 60, 255), width=5)
-    if "forest" in els or "trees" in els or place in ("forest", "park"):   # Blätter fallen
+    if "forest" in els or "trees" in els:                         # Blätter fallen
         for i, (a, b, c) in enumerate(_DROPS[:9]):
             ph = (t * (0.12 + c * 0.1) + b) % 1
             x = a * W + math.sin(t * 2 + i * 1.7) * 50
-            y = base - 520 + ph * 700
+            y = 300 + ph * 900
             d.ellipse((x - 10, y - 6, x + 10, y + 6), fill=(110, 180, 90, int(255 * (1 - ph * 0.6))))
     if "glacier" in els or ground in ("snow", "ice"):
         for i, (a, b, c) in enumerate(_DROPS[:40]):
             x = (a * W + math.sin(t * 1.2 + c * 9) * 30) % W
             y = (b * H + t * (90 + c * 80)) % H
             d.ellipse((x - 4, y - 4, x + 4, y + 4), fill=(255, 255, 255, 220))
+    if "camp" in els:                                             # Lagerfeuer zwischen den Zelten
+        p_fire(d, 560, t, 0.5)
 
 
 MOODS = {"panic": (255, 60, 40), "tense": (255, 120, 40), "scary": (10, 10, 40), "sad": (40, 70, 130), "happy": (255, 220, 120),
@@ -588,6 +856,24 @@ def draw_ambient(layer, place, night, t):
             y = (b * H - t * (90 + c * 90)) % GROUND
             r = 8 + c * 14
             d.ellipse((x - r, y - r, x + r, y + r), outline=(230, 250, 255, 220), width=4)
+    if place == "kitchen":                                        # Dampf über dem Topf
+        for k in range(4):
+            ph = (t * 0.5 + k / 4) % 1
+            r = 16 + ph * 30
+            d.ellipse((630 + math.sin(t * 2 + k) * 14 - r, 870 - ph * 200 - r, 630 + math.sin(t * 2 + k) * 14 + r, 870 - ph * 200 + r), fill=(255, 255, 255, int(170 * (1 - ph))))
+    if place == "office" and not night:                           # Text läuft über den Bildschirm
+        for i in range(4):
+            wdt = 50 + (int(t * 5 + i * 2) % 5) * 34
+            d.rectangle((656, 836 + i * 30, 656 + wdt, 848 + i * 30), fill=(250, 250, 255, 255))
+    if place == "station":                                        # Anzeige blinkt
+        if int(t * 1.5) % 2:
+            d.rectangle((700, 478, 800, 500), fill=(30, 40, 70, 255))
+    if place not in OUTDOOR and place not in ("space", "underwater"):   # Staub tanzt im Licht – nichts steht ganz still
+        for i, (a, b, c) in enumerate(_DROPS[40:54]):
+            x = (a * W + math.sin(t * 0.7 + i) * 40 + t * 12 * (c - 0.5)) % W
+            y = (b * 1100 + 200 - t * (8 + c * 14)) % 1200 + 100
+            r = 3 + c * 4
+            d.ellipse((x - r, y - r, x + r, y + r), fill=(255, 250, 230, int(70 + 60 * math.sin(t * 1.3 + i) ** 2)))
     if place in ("basement", "cave"):
         fl = int(18 + 16 * math.sin(t * 9) * math.sin(t * 2.3))    # flackerndes Licht
         d.rectangle((0, 0, W, H), fill=(0, 0, 0, max(0, fl)))

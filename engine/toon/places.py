@@ -7,6 +7,19 @@ from PIL import Image, ImageDraw, ImageFilter
 
 W, H = 1080, 1920
 GROUND = 1270
+HORIZON = 830             # Augenhöhe der Kamera: dort liegen die Köpfe aller stehenden Menschen
+FAR = 900                 # Fußlinie der fernen Kulisse (Skyline, Berge, Waldrand)
+PX_M = 246                # Bildpunkte pro Meter bei Maßstab 1 (eine Figur ist rund 1,75 m groß)
+
+
+def depth(y):
+    """Maßstab für alles, was mit den Füßen auf Bildhöhe y steht: vorn groß, hinten klein (eine Perspektive für alles)."""
+    return max(0.12, 1.08 * (y - HORIZON) / (GROUND + 18 - HORIZON))
+
+
+def px(meters, y):
+    """Meter → Bildpunkte in der Tiefe y. Damit haben Autos, Häuser, Bäume und Menschen überall das richtige Verhältnis."""
+    return meters * PX_M * depth(y)
 INK = (22, 22, 26)
 O = 7
 
@@ -509,7 +522,7 @@ def cave(night):
 GROUNDS = {"grass": (104, 180, 96), "sand": (240, 206, 132), "snow": (240, 246, 252), "road": (88, 90, 100),
            "rock": (140, 136, 140), "soil": (150, 104, 66), "dry": (206, 170, 110), "water": (60, 150, 220),
            "ice": (210, 234, 248), "lava": (90, 50, 44), "moon": (124, 128, 144)}
-BASE = GROUND - 60        # Horizontlinie
+BASE = FAR               # Fußlinie der fernen Kulisse; davor liegt der Boden bis zu den Figuren
 
 
 def _el_mountains(p, rnd):
@@ -634,31 +647,39 @@ def _el_glacier(p, rnd):
 
 
 def _fg_fields(p, rnd):
-    for i in range(-6, 14):                         # Ackerfurchen in Perspektive
-        p.d.line((W / 2 + i * 40, BASE, W / 2 + i * 210, H), fill=p.c((110, 150, 70)), width=10)
-    for y in (BASE + 70, BASE + 190, BASE + 360):
-        for x in range(20, W, 70):
-            p.d.line((x, y, x - 8, y - 30), fill=p.c((226, 190, 80)), width=6)
-            p.d.line((x, y, x + 8, y - 30), fill=p.c((226, 190, 80)), width=6)
+    for i in range(-8, 16):                         # Ackerfurchen in Perspektive
+        p.d.line((W / 2 + i * 70, BASE, W / 2 + i * 300, H), fill=p.c((110, 150, 70)), width=8)
+    for y in (BASE + 40, BASE + 110, BASE + 210, BASE + 330):
+        k = depth(y)
+        for x in range(20, W, max(30, int(110 * k))):
+            p.d.line((x, y, x - 8 * k, y - 60 * k), fill=p.c((226, 190, 80)), width=max(3, int(8 * k)))
+            p.d.line((x, y, x + 8 * k, y - 60 * k), fill=p.c((226, 190, 80)), width=max(3, int(8 * k)))
+
+
+RIVER = (975, 1105)       # Fluss quert das Bild hinter den Figuren
+
+
+def _river_band(p, col):
+    top = [(x, RIVER[0] + 14 * math.sin(x / 170)) for x in range(-20, W + 40, 40)]
+    bot = [(x, RIVER[1] + 18 * math.sin(x / 210 + 1)) for x in range(W + 20, -40, -40)]
+    p.d.polygon(top + bot, fill=p.c(col), outline=INK, width=5)
 
 
 def _fg_river(p, rnd):
-    pts = [(420, BASE), (560, BASE), (760, BASE + 220), (1000, H), (160, H), (360, BASE + 220)]
-    p.d.polygon(pts, fill=p.c((70, 156, 226)), outline=INK, width=5)
-    for y in range(BASE + 60, H - 200, 110):
-        p.d.arc((440 + (y - BASE) * 0.1, y, 560 + (y - BASE) * 0.1, y + 30), 180, 360, fill=p.c((206, 234, 252)), width=5)
+    _river_band(p, (70, 156, 226))
 
 
 def _fg_dryriver(p, rnd):
-    pts = [(420, BASE), (560, BASE), (760, BASE + 220), (1000, H), (160, H), (360, BASE + 220)]
-    p.d.polygon(pts, fill=p.c((176, 140, 96)), outline=INK, width=5)
-    _fg_cracks(p, rnd, (300, 800))
+    _river_band(p, (176, 140, 96))
+    for _ in range(9):
+        x, y = rnd.randint(0, W), rnd.randint(RIVER[0] + 20, RIVER[1] - 30)
+        p.d.line((x, y, x + rnd.randint(-50, 50), y + 24, x + rnd.randint(-70, 70), y + 44), fill=p.c((120, 90, 60)), width=5)
 
 
 def _fg_lake(p, rnd):
-    p.d.ellipse((120, BASE + 50, 960, BASE + 420), fill=p.c((70, 156, 226)), outline=INK, width=O)
-    for x, y in ((320, BASE + 170), (600, BASE + 260), (480, BASE + 120)):
-        p.d.arc((x, y, x + 110, y + 30), 180, 360, fill=p.c((206, 234, 252)), width=5)
+    p.d.ellipse((90, 950, 990, 1150), fill=p.c((70, 156, 226)), outline=INK, width=O)
+    for x, y in ((320, 1010), (600, 1060), (480, 985)):
+        p.d.arc((x, y, x + 110, y + 26), 180, 360, fill=p.c((206, 234, 252)), width=5)
 
 
 def _fg_cracks(p, rnd, xr=(0, W)):
@@ -684,6 +705,167 @@ def _fg_flowers(p, rnd):
         p.d.ellipse((x - 10, y - 44, x + 10, y - 24), fill=p.c(rnd.choice(((250, 120, 150), (250, 220, 90), (250, 250, 250)))))
 
 
+def tree_at(p, x, y, kind=0, col=(62, 140, 84)):
+    """Baum in richtiger Größe für die Tiefe y (rund 8 m hoch); vorn ragen die Stämme aus dem Bild."""
+    h, tw = px(8.0, y), px(0.55, y)
+    o = max(3, int(O * min(1.0, depth(y) + 0.3)))
+    p.rect((x - tw / 2, y - h * 0.5, x + tw / 2, y), (112, 76, 48), o=o)
+    if kind % 3 == 0:
+        for dx, dy, r in ((0, -0.74, 0.24), (-0.17, -0.58, 0.19), (0.17, -0.58, 0.19), (0, -0.48, 0.2)):
+            p.oval((x + dx * h - r * h, y + dy * h - r * h, x + dx * h + r * h, y + dy * h + r * h), col, o=o)
+    else:
+        for k in range(4):
+            yy = y - h * 0.22 - k * h * 0.19
+            wd = h * (0.24 - k * 0.045)
+            p.poly([(x - wd, yy), (x, yy - h * 0.3), (x + wd, yy)], col, o=o)
+
+
+def _mid_forest(p, rnd):
+    for i, (x, y) in enumerate(((330, 960), (760, 950), (90, 1000), (560, 990), (990, 1010), (210, 1070), (880, 1090), (-20, 1190), (1100, 1210))):
+        tree_at(p, x, y, i, ((52, 118, 74), (62, 140, 84), (74, 156, 92))[i % 3])
+
+
+def _mid_trees(p, rnd):
+    tree_at(p, 110, 1040, 0)
+    tree_at(p, 990, 1090, 0, (74, 156, 92))
+
+
+def _mid_deadtrees(p, rnd):
+    for x, y in ((150, 1010), (900, 1060), (520, 960)):
+        h = px(6.0, y)
+        w = max(8, int(px(0.4, y)))
+        p.line((x, y, x, y - h), INK, w + 10)
+        p.line((x, y, x, y - h), p.c((110, 84, 64)), w)
+        for dx, dy, y0 in ((-0.3, -0.25, 0.5), (0.34, -0.3, 0.65), (-0.2, -0.22, 0.85)):
+            yy = y - h * y0
+            p.line((x, yy, x + dx * h, yy + dy * h), INK, int(w * 0.6) + 8)
+            p.line((x, yy, x + dx * h, yy + dy * h), p.c((110, 84, 64)), int(w * 0.6))
+
+
+def _mid_palms(p, rnd):
+    for x, y in ((120, 1060), (960, 1120)):
+        h, w = px(7.0, y), max(10, int(px(0.35, y)))
+        top = (x + h * 0.12, y - h)
+        p.line((x, y, x + h * 0.05, y - h * 0.5, top[0], top[1]), INK, w + 10)
+        p.line((x, y, x + h * 0.05, y - h * 0.5, top[0], top[1]), p.c((150, 110, 70)), w)
+        for a in (-150, -110, -60, -20, 200, 240):
+            ex, ey = top[0] + math.cos(math.radians(a)) * h * 0.36, top[1] + math.sin(math.radians(a)) * h * 0.2 + h * 0.08
+            p.poly([top, ((top[0] + ex) / 2, top[1] - h * 0.1), (ex, ey), ((top[0] + ex) / 2, top[1] + h * 0.03)], (70, 160, 84), o=5)
+
+
+def _mid_cactus(p, rnd):
+    for x, y in ((170, 1050), (930, 1120)):
+        h, w = px(3.0, y), px(0.5, y)
+        p.rect((x - w / 2, y - h, x + w / 2, y), (84, 150, 90), r=int(w / 2), o=5)
+        p.rect((x - w * 1.6, y - h * 0.62, x - w * 0.9, y - h * 0.3), (84, 150, 90), r=int(w / 3), o=5)
+        p.rect((x - w * 1.6, y - h * 0.42, x, y - h * 0.3), (84, 150, 90), r=int(w / 4), o=5)
+        p.rect((x + w * 0.9, y - h * 0.8, x + w * 1.6, y - h * 0.45), (84, 150, 90), r=int(w / 3), o=5)
+        p.rect((x, y - h * 0.57, x + w * 1.6, y - h * 0.45), (84, 150, 90), r=int(w / 4), o=5)
+
+
+def _mid_street(p, rnd):
+    """Häuserzeile in echter Größe hinter der Straße: Läden im Erdgeschoss, Türen so hoch wie ein Mensch plus etwas."""
+    y = 1000
+    m = px(1.0, y)
+    x = -60
+    cols = ((214, 150, 120), (150, 176, 214), (224, 200, 140), (170, 200, 172), (196, 160, 190), (208, 190, 170))
+    i = 0
+    while x < W:
+        w, floors = rnd.randint(int(m * 3.6), int(m * 5.0)), rnd.randint(2, 3)
+        h = m * (3.4 + floors * 3.0)
+        col = cols[(i * 2 + rnd.randint(0, 1)) % 6]
+        p.rect((x, y - h, x + w, y), col)
+        p.rect((x - 6, y - h - 14, x + w + 6, y - h + 10), _mix(col, 0.25, (40, 30, 30)), o=5)
+        gf = y - m * 3.2                                        # Erdgeschoss: Schaufenster + Tür
+        p.rect((x + m * 0.3, gf + m * 0.5, x + w - m * 1.5, y - m * 0.5), (255, 232, 150) if p.night and i % 2 else (150, 204, 236), r=4, o=5, glow=p.night and i % 2 == 1)
+        p.rect((x + w - m * 1.25, y - m * 2.1, x + w - m * 0.3, y), (104, 70, 48), r=4, o=5)
+        aw = ((214, 80, 70), (70, 130, 190), (240, 190, 70), (90, 160, 110))[i % 4]
+        p.poly([(x + m * 0.15, gf + m * 0.45), (x + w - m * 0.15, gf + m * 0.45), (x + w, gf + m * 0.05), (x, gf + m * 0.05)], aw, o=5)
+        for fl in range(floors):
+            wy = gf - m * (2.6 + fl * 3.0)
+            for wx in (x + w * 0.2, x + w * 0.6):
+                lit = p.night and rnd.random() < 0.5
+                p.rect((wx, wy, wx + m * 0.9, wy + m * 1.4), (255, 226, 120) if lit else (126, 168, 214), r=4, o=5, glow=lit)
+        x += w
+        i += 1
+
+
+def _mid_powerlines(p, rnd):
+    y = 1010
+    h = px(9.0, y)
+    pts = []
+    for x in (120, 620, 1120):
+        p.line((x, y, x, y - h), p.c((96, 76, 60)), 14)
+        p.line((x - 60, y - h + 30, x + 60, y - h + 30), p.c((96, 76, 60)), 10)
+        pts.append((x, y - h + 30))
+    for dx in (-56, 56):
+        for (x0, y0), (x1, y1) in zip(pts, pts[1:]):
+            p.d.line([(x0 + dx + (x1 - x0) * k / 10, y0 + 46 * math.sin(k / 10 * math.pi)) for k in range(11)], fill=INK, width=4)
+        p.d.line([(-200 + dx + (pts[0][0] + 200) * k / 10, pts[0][1] + 46 * math.sin(k / 10 * math.pi)) for k in range(11)], fill=INK, width=4)
+
+
+def _mid_windturbines(p, rnd):
+    for x, y in ((220, 940), (700, 925), (960, 960)):
+        h = 380 + (x % 3) * 40
+        p.poly([(x - 9, y), (x - 4, y - h), (x + 4, y - h), (x + 9, y)], (240, 242, 246), o=4)
+
+
+def _mid_gasstation(p, rnd):
+    y = 1030
+    m = px(1.0, y)
+    p.rect((90, y - m * 4.6, 90 + m * 8.5, y - m * 4.0), (220, 60, 56), r=8)                 # Dach
+    for x in (90 + m * 0.8, 90 + m * 7.5):
+        p.rect((x, y - m * 4.0, x + m * 0.3, y), (200, 200, 206), o=5)
+    for x in (90 + m * 2.6, 90 + m * 5.2):                                                   # Zapfsäulen
+        p.rect((x, y - m * 1.7, x + m * 0.8, y), (240, 240, 244), r=8)
+        p.rect((x + m * 0.12, y - m * 1.5, x + m * 0.68, y - m * 1.0), (60, 70, 90), r=4, o=4)
+        p.line((x + m * 0.8, y - m * 1.2, x + m * 1.1, y - m * 0.7, x + m * 0.9, y - m * 0.3), INK, 6)
+    p.rect((780, y - m * 3.2, 1100, y), (236, 228, 214))                                     # Shop
+    p.rect((810, y - m * 2.2, 960, y - m * 0.8), (255, 232, 150) if p.night else (150, 204, 236), r=4, o=5, glow=p.night)
+    p.rect((985, y - m * 2.1, 1060, y), (104, 70, 48), r=4, o=5)
+
+
+def _mid_powerplant(p, rnd):
+    y = 960
+    for cx, w, h in ((260, 300, 560), (620, 340, 640)):                                       # Kühltürme
+        p.poly([(cx - w / 2, y), (cx - w * 0.3, y - h * 0.6), (cx - w * 0.38, y - h), (cx + w * 0.38, y - h),
+                (cx + w * 0.3, y - h * 0.6), (cx + w / 2, y)], (206, 206, 212))
+    p.rect((820, y - 260, 1060, y), (160, 164, 176))
+    p.rect((900, y - 520, 950, y - 260), (170, 110, 96))
+
+
+def _mid_bridge(p, rnd):
+    y = 1010
+    p.rect((-20, y - 150, W + 20, y - 110), (150, 150, 160))
+    for x in (160, 540, 920):
+        p.rect((x - 30, y - 110, x + 30, y + 30), (130, 130, 142))
+    for x in (350, 730):
+        p.rect((x - 16, y - 520, x + 16, y - 150), (176, 80, 70))
+        for k in range(1, 8):
+            p.d.line((x, y - 520, x - k * 46, y - 150), fill=INK, width=4)
+            p.d.line((x, y - 520, x + k * 46, y - 150), fill=INK, width=4)
+
+
+def _mid_camp(p, rnd):
+    for x, y, col in ((230, 1080, (230, 150, 70)), (880, 1120, (90, 150, 190))):
+        h, w = px(1.9, y), px(3.0, y)
+        p.poly([(x - w / 2, y), (x, y - h), (x + w / 2, y)], col)
+        p.poly([(x - w * 0.12, y), (x, y - h * 0.62), (x + w * 0.12, y)], (50, 44, 50), o=5)
+
+
+def _mid_graves(p, rnd):
+    for i, (x, y) in enumerate(((160, 1010), (420, 1050), (700, 1000), (930, 1080), (300, 1140), (820, 1170))):
+        h, w = px(1.1, y), px(0.7, y)
+        p.rect((x - w / 2, y - h, x + w / 2, y), (160, 160, 170), r=int(w / 2.2), o=5)
+        p.rect((x - w / 2, y - h * 0.45, x + w / 2, y), (160, 160, 170), o=0)
+        p.line((x - w / 2, y - h * 0.5, x - w / 2, y)); p.line((x + w / 2, y - h * 0.5, x + w / 2, y))
+        p.line((x, y - h * 0.8, x, y - h * 0.45), w=5); p.line((x - w * 0.2, y - h * 0.68, x + w * 0.2, y - h * 0.68), w=5)
+
+
+MID = {"forest": _mid_forest, "trees": _mid_trees, "deadtrees": _mid_deadtrees, "palms": _mid_palms, "cactus": _mid_cactus,
+       "street": _mid_street, "powerlines": _mid_powerlines, "windturbines": _mid_windturbines, "gasstation": _mid_gasstation,
+       "powerplant": _mid_powerplant, "bridge": _mid_bridge, "camp": _mid_camp, "graves": _mid_graves}
+
 BACK = {"mountains": _el_mountains, "hills": _el_hills, "dunes": _el_dunes, "forest": _el_forest, "trees": _el_trees,
         "deadtrees": _el_deadtrees, "city": _el_city, "village": _el_village, "ruins": _el_ruins, "factory": _el_factory,
         "farm": _el_farm, "sea": _el_sea, "glacier": _el_glacier}
@@ -692,51 +874,216 @@ FRONT_EL = {"fields": _fg_fields, "river": _fg_river, "dryriver": _fg_dryriver, 
 EL_ALIASES = {"berge": "mountains", "hügel": "hills", "dünen": "dunes", "wald": "forest", "bäume": "trees", "stadt": "city",
               "dorf": "village", "ruinen": "ruins", "fabrik": "factory", "bauernhof": "farm", "meer": "sea", "gletscher": "glacier",
               "felder": "fields", "feld": "fields", "fluss": "river", "see": "lake", "risse": "cracks", "steine": "rocks",
-              "blumen": "flowers", "tote bäume": "deadtrees", "ocean": "sea", "mountain": "mountains", "tree": "trees"}
+              "blumen": "flowers", "palmen": "palms", "kaktus": "cactus", "kakteen": "cactus", "straße": "street", "häuser": "street",
+              "läden": "street", "geschäfte": "street", "shops": "street", "strommasten": "powerlines", "stromleitung": "powerlines",
+              "windräder": "windturbines", "windrad": "windturbines", "tankstelle": "gasstation", "kraftwerk": "powerplant",
+              "atomkraftwerk": "powerplant", "brücke": "bridge", "zelte": "camp", "lager": "camp", "friedhof": "graves", "gräber": "graves",
+              "skyline": "city", "hochhäuser": "city", "tote bäume": "deadtrees", "ocean": "sea", "mountain": "mountains", "tree": "trees"}
+
+
+MID_ORDER = ("windturbines", "powerplant", "bridge", "street", "gasstation", "powerlines", "graves", "camp", "cactus", "palms",
+             "deadtrees", "trees", "forest")
+
+
+def norm_spec(spec):
+    els = [EL_ALIASES.get(str(e).lower().strip(), str(e).lower().strip()) for e in (spec.get("elements") or [])][:6]
+    ground = str(spec.get("ground") or "").lower()
+    if ground not in GROUNDS:
+        ground = ("sand" if ("dunes" in els or "palms" in els or "cactus" in els) else "snow" if "glacier" in els
+                  else "road" if any(e in els for e in ("city", "ruins", "street", "gasstation")) else "soil" if "fields" in els else "grass")
+    return {"sky": str(spec.get("sky") or "").lower(), "ground": ground, "elements": els}
 
 
 def compose(spec: dict, night=False):
     """Landschaft aus Einzelteilen: {"sky": day|night|sunset|storm|red|haze, "ground": grass|sand|snow|…,
-    "elements": [mountains, forest, river, …]} – hinten nach vorn in sinnvoller Reihenfolge gezeichnet."""
-    sky = str(spec.get("sky") or "").lower()
+    "elements": [mountains, forest, river, street, …]}. Hinten die ferne Kulisse (Fußlinie FAR), davor der Boden,
+    auf dem Dinge je nach Tiefe in richtiger Größe stehen, ganz vorn die Figuren."""
+    spec = norm_spec(spec)
+    sky, ground, els = spec["sky"], spec["ground"], spec["elements"]
     p = P(night or sky == "night")
     p.mood = sky if sky in ("sunset", "storm", "red", "haze") else ""
-    p.sky()
-    els = [EL_ALIASES.get(str(e).lower().strip(), str(e).lower().strip()) for e in (spec.get("elements") or [])][:5]
-    rnd = random.Random(hash(tuple(els)) % 1000 + 3)
-    order = ["sea", "glacier", "mountains", "hills", "dunes", "city", "ruins", "factory", "forest", "deadtrees", "village", "farm", "trees"]
-    for name in order:
+    p.sky(BASE + 10)
+    rnd = random.Random(sum(ord(c) for c in ",".join(els)) % 1000 + 3)
+    if "street" in els and "city" not in els and "ruins" not in els:
+        els = els + ["city"]
+    for name in ["sea", "glacier", "mountains", "hills", "dunes", "city", "ruins", "factory", "forest", "village", "farm"]:
         if name in els:
             BACK[name](p, rnd)
-    ground = str(spec.get("ground") or "").lower()
-    if ground not in GROUNDS:
-        ground = ("sand" if "dunes" in els else "snow" if "glacier" in els else "road" if ("city" in els or "ruins" in els)
-                  else "soil" if "fields" in els else "grass")
+    if ("trees" in els or "deadtrees" in els) and not any(e in els for e in ("mountains", "hills", "dunes", "city", "forest", "sea", "glacier")):
+        _el_hills(p, rnd) if ground in ("grass", "soil") else None
     col = GROUNDS[ground]
-    p.d.rectangle((0, BASE, W, H), fill=p.c(col))
+    for y in range(BASE, H, 10):                                  # Boden: hinten etwas heller (Luftperspektive)
+        f = max(0.0, 0.22 * (1 - (y - BASE) / 420))
+        p.d.rectangle((0, y, W, y + 10), fill=p.c(_mix(col, f, (255, 255, 255))))
     p.d.line((0, BASE, W, BASE), fill=INK, width=5)
     if ground == "road":
-        p.rect((-10, BASE, W + 10, BASE + 90), (196, 196, 200))
-        for x in range(40, W, 240):
-            p.rect((x, BASE + 310, x + 130, BASE + 336), (250, 240, 200), r=4, o=0)
+        p.d.rectangle((0, BASE, W, 1040), fill=p.c((188, 188, 194)))                      # ferner Gehweg / Platz
+        p.d.rectangle((0, 1040, W, 1222), fill=p.c((84, 86, 96)))                         # Fahrbahn
+        p.d.line((0, 1040, W, 1040), fill=INK, width=5)
+        for x in range(-40, W, 300):
+            p.rect((x, 1136, x + 170, 1150), (250, 240, 200), r=4, o=0)
+        p.d.rectangle((0, 1222, W, H), fill=p.c((200, 200, 206)))                         # Gehweg vorn
+        p.rect((-10, 1222, W + 10, 1240), (160, 160, 168), o=4)
+        for i in range(-5, 12):
+            p.d.line((W / 2 + (i - 3) * 190, 1240, W / 2 + (i - 3) * 330, H), fill=p.c((176, 176, 184)), width=4)
+        for y in (1330, 1470, 1680):
+            p.d.line((0, y, W, y), fill=p.c((176, 176, 184)), width=4)
     elif ground == "grass":
-        for _ in range(26):
-            x, y = rnd.randint(0, W), rnd.randint(BASE + 50, H - 300)
-            p.line((x, y, x - 8, y - 26), p.c((60, 130, 66)), 5)
-            p.line((x, y, x + 10, y - 22), p.c((60, 130, 66)), 5)
+        for _ in range(40):
+            x, y = rnd.randint(0, W), rnd.randint(BASE + 30, H - 300)
+            k = depth(y)
+            p.line((x, y, x - 8 * k, y - 30 * k), p.c((60, 130, 66)), max(3, int(6 * k)))
+            p.line((x, y, x + 10 * k, y - 26 * k), p.c((60, 130, 66)), max(3, int(6 * k)))
     elif ground == "dry":
         _fg_cracks(p, rnd)
+    elif ground in ("sand", "snow", "moon", "rock", "soil", "ice"):
+        dark = _mix(col, 0.12, (60, 50, 40))
+        for _ in range(16):
+            x, y = rnd.randint(0, W), rnd.randint(BASE + 40, H - 300)
+            k = depth(y)
+            p.d.arc((x, y, x + 240 * k, y + 40 * k), 190, 350, fill=p.c(dark), width=max(3, int(6 * k)))
     elif ground == "water":
-        for y in range(BASE + 40, H - 200, 70):
-            for x in range(-60 + (y % 140), W, 190):
-                p.d.arc((x, y, x + 100, y + 30), 180, 360, fill=p.c((200, 232, 250)), width=5)
+        for y in range(BASE + 30, H - 200, 60):
+            k = depth(y)
+            for x in range(-60 + (y % 140), W, int(120 + 160 * k)):
+                p.d.arc((x, y, x + 110 * k + 30, y + 30 * k + 6), 180, 360, fill=p.c((200, 232, 250)), width=5)
     elif ground == "lava":
-        for _ in range(12):
+        for _ in range(14):
             x, y = rnd.randint(0, W), rnd.randint(BASE + 40, H - 260)
             p.d.ellipse((x, y, x + rnd.randint(80, 220), y + rnd.randint(16, 40)), fill=(250, 130, 40))
     for name in ("fields", "river", "dryriver", "lake", "cracks", "rocks", "flowers"):
         if name in els:
             FRONT_EL[name](p, rnd)
+    for name in MID_ORDER:
+        if name in els:
+            MID[name](p, rnd)
+    return p.vignette()
+
+
+# Feste Außen-Orte sind fertige Baukasten-Landschaften – so gilt überall dieselbe Perspektive und derselbe Maßstab.
+OUTDOOR_SPECS = {
+    "street": {"ground": "road", "elements": ["street"]},
+    "park": {"ground": "grass", "elements": ["hills", "trees", "flowers"]},
+    "beach": {"ground": "sand", "elements": ["sea", "palms"]},
+    "desert": {"ground": "sand", "elements": ["dunes", "cactus"]},
+    "snow": {"ground": "snow", "elements": ["mountains", "glacier"]},
+    "forest": {"ground": "grass", "elements": ["forest"]},
+    "mountain": {"ground": "rock", "elements": ["mountains", "rocks"]},
+    "farm": {"ground": "soil", "elements": ["farm", "fields", "hills"]},
+    "village": {"ground": "grass", "elements": ["village", "hills", "trees"]},
+    "gasstation": {"ground": "road", "elements": ["gasstation", "city"]},
+    "powerplant": {"ground": "grass", "elements": ["powerplant", "powerlines"]},
+    "graveyard": {"ground": "grass", "sky": "haze", "elements": ["graves", "deadtrees", "hills"]},
+    "ruins": {"ground": "road", "sky": "red", "elements": ["ruins"]},
+    "camp": {"ground": "grass", "elements": ["forest", "camp"]},
+    "moon": {"ground": "moon", "sky": "night", "elements": ["rocks"]},
+}
+
+
+def spec_of(place):
+    """Baukasten-Beschreibung eines Hintergrunds (oder None bei Innenräumen und Sonder-Orten)."""
+    if isinstance(place, dict):
+        return norm_spec(place)
+    key = resolve(place)
+    return norm_spec(OUTDOOR_SPECS[key]) if key in OUTDOOR_SPECS else None
+
+
+def _shelf(p, x0, x1, top, bottom, full, rnd):
+    p.rect((x0, top, x1, bottom), (226, 228, 234), r=6)
+    n = 4
+    for k in range(n):
+        y1 = top + (k + 1) * (bottom - top) / n
+        p.line((x0, y1, x1, y1), w=6)
+        if not full and rnd.random() < 0.8:
+            if rnd.random() < 0.3:                                 # ein einsames Teil bleibt liegen
+                xx = rnd.randint(int(x0 + 20), int(x1 - 60))
+                p.rect((xx, y1 - 44, xx + 34, y1 - 4), (220, 90, 70), r=4, o=4)
+            continue
+        xx = x0 + 14
+        while xx < x1 - 40:
+            w = rnd.randint(30, 52)
+            hgt = rnd.randint(50, int((bottom - top) / n) - 26)
+            col = ((220, 90, 70), (240, 196, 70), (90, 160, 110), (70, 130, 200), (236, 150, 90), (190, 120, 190))[rnd.randint(0, 5)]
+            p.rect((xx, y1 - hgt - 4, xx + w, y1 - 4), col, r=5, o=4)
+            xx += w + rnd.randint(4, 10)
+
+
+def _supermarket(night, full):
+    p = P(night)
+    p.room((236, 238, 232), (214, 216, 222), stripe=False)
+    rnd = random.Random(5)
+    for x in range(120, W, 300):                                                # Deckenlampen
+        p.rect((x, 300, x + 180, 326), (255, 250, 220) if (full or not night) else (120, 120, 130), r=8, o=5, glow=not night)
+    p.rect((300, 420, 780, 520), (214, 70, 60), r=14)                           # Schild
+    p.rect((340, 452, 740, 488), (250, 250, 246), r=8, o=0)
+    _shelf(p, 20, 500, 760, 1225, full, rnd)
+    _shelf(p, 580, 1060, 760, 1225, full, rnd)
+    if not full:
+        p.rect((420, 1250, 520, 1290), (214, 170, 110), r=6, o=5)              # umgekippter Karton
+    return p.vignette()
+
+
+def supermarket(night):
+    return _supermarket(night, True)
+
+
+def supermarket_empty(night):
+    return _supermarket(night, False)
+
+
+def bathroom(night):
+    p = P(night)
+    p.room((206, 232, 238), (190, 200, 210), stripe=False)
+    for y in range(0, GROUND - 80, 110):
+        p.d.line((0, y, W, y), fill=p.c((180, 214, 224)), width=3)
+    for x in range(0, W, 110):
+        p.d.line((x, 0, x, GROUND - 80), fill=p.c((180, 214, 224)), width=3)
+    p.rect((90, 560, 400, 880), (200, 230, 244), r=10)                          # Spiegel
+    p.line((140, 820, 240, 620), p.c((240, 250, 255)), 8)
+    p.rect((110, 1010, 380, 1070), (250, 250, 250), r=20)                       # Waschbecken
+    p.rect((210, 1070, 280, 1230), (240, 240, 244), o=5)
+    p.rect((232, 950, 258, 1010), (170, 176, 186), r=6, o=5)
+    p.rect((560, 1040, 1040, 1235), (250, 250, 250), r=40)                      # Badewanne
+    p.rect((540, 1020, 1060, 1060), (240, 240, 246), r=16)
+    p.rect((960, 760, 980, 1020), (170, 176, 186), o=5)                         # Dusche
+    p.rect((900, 740, 980, 770), (170, 176, 186), r=8, o=5)
+    p.lamp_glow(540, 500, 520)
+    return p.vignette()
+
+
+def station(night):
+    p = P(night)
+    p.room((196, 204, 214), (176, 176, 184), stripe=False)
+    p.rect((-10, 240, W + 10, 300), (90, 96, 110), o=5)                         # Dachträger
+    for x in (140, 540, 940):
+        p.rect((x - 16, 300, x + 16, 1230), (110, 116, 130), o=5)
+    p.rect((250, 420, 830, 560), (30, 40, 70), r=10)                            # Anzeigetafel
+    for i in range(3):
+        p.rect((280, 440 + i * 38, 620 - i * 40, 462 + i * 38), (250, 200, 80), r=4, o=0, glow=True)
+        p.rect((700, 440 + i * 38, 800, 462 + i * 38), (250, 120, 90) if i == 1 else (140, 220, 140), r=4, o=0, glow=True)
+    p.rect((-20, 760, W + 20, 1180), (210, 60, 56), r=30)                       # Zug
+    p.rect((-20, 1120, W + 20, 1180), (60, 60, 70), o=5)
+    for x in range(40, W, 260):
+        p.rect((x, 820, x + 180, 980), (255, 236, 160) if night else (170, 214, 240), r=14, o=5, glow=night)
+    p.rect((470, 800, 610, 1120), (230, 230, 236), r=10)
+    p.line((540, 800, 540, 1120))
+    p.rect((-10, 1210, W + 10, 1236), (250, 220, 70), o=4)                      # Bahnsteigkante
+    return p.vignette()
+
+
+def restaurant(night):
+    p = P(night)
+    p.room((236, 214, 190), (150, 104, 76))
+    p.window((90, 420, 480, 800))
+    p.rect((600, 430, 980, 700), (60, 70, 66), r=10)                            # Tafel
+    for i in range(4):
+        p.line((640, 480 + i * 50, 940 - (i % 2) * 90, 480 + i * 50), (240, 240, 230), 6)
+    for cx in (270, 810):                                                       # Tische
+        p.rect((cx - 170, 1050, cx + 170, 1080), (250, 250, 246), r=6)
+        p.rect((cx - 14, 1080, cx + 14, 1235), (110, 80, 60), o=5)
+        p.oval((cx - 60, 1030, cx + 60, 1056), (240, 240, 244), o=5)
+        p.rect((cx + 90, 990, cx + 120, 1050), (200, 60, 60), r=6, o=5)
+    p.lamp_glow(540, 520, 560)
     return p.vignette()
 
 
@@ -749,26 +1096,34 @@ def plain(night):
 PLACES = {"bedroom": bedroom, "livingroom": livingroom, "street": street, "basement": basement, "park": park,
           "space": space, "lab": lab, "classroom": classroom, "plain": plain, "kitchen": kitchen, "office": office,
           "beach": beach, "desert": desert, "snow": snow, "forest": forest, "underwater": underwater,
-          "mountain": mountain, "hospital": hospital, "cave": cave}
-OUTDOOR = ("street", "park", "beach", "desert", "snow", "forest", "mountain", "custom")
+          "mountain": mountain, "hospital": hospital, "cave": cave, "supermarket": supermarket,
+          "supermarket_empty": supermarket_empty, "bathroom": bathroom, "station": station, "restaurant": restaurant}
+OUTDOOR = tuple(OUTDOOR_SPECS) + ("custom",)
 ALIASES = {"schlafzimmer": "bedroom", "zimmer": "bedroom", "wohnzimmer": "livingroom", "straße": "street", "stadt": "street",
            "city": "street", "keller": "basement", "bunker": "basement", "wald": "forest", "natur": "park", "garten": "park",
            "küche": "kitchen", "büro": "office", "strand": "beach", "meer": "beach", "wüste": "desert", "schnee": "snow",
            "arktis": "snow", "eis": "snow", "ozean": "underwater", "unterwasser": "underwater", "ocean": "underwater",
            "berg": "mountain", "berge": "mountain", "krankenhaus": "hospital", "höhle": "cave", "arctic": "snow",
-           "weltraum": "space", "mond": "space", "labor": "lab", "schule": "classroom", "klassenzimmer": "classroom",
-           "home": "livingroom", "house": "livingroom", "outside": "park", "school": "classroom"}
+           "weltraum": "space", "mond": "moon", "labor": "lab", "schule": "classroom", "klassenzimmer": "classroom",
+           "home": "livingroom", "house": "livingroom", "outside": "park", "school": "classroom",
+           "supermarkt": "supermarket", "laden": "supermarket", "geschäft": "supermarket", "shop": "supermarket", "store": "supermarket",
+           "leerer supermarkt": "supermarket_empty", "bad": "bathroom", "badezimmer": "bathroom", "bahnhof": "station",
+           "u-bahn": "station", "zug": "station", "restaurant": "restaurant", "café": "restaurant", "cafe": "restaurant",
+           "bauernhof": "farm", "dorf": "village", "tankstelle": "gasstation", "kraftwerk": "powerplant", "friedhof": "graveyard",
+           "ruinen": "ruins", "zeltlager": "camp", "lager": "camp", "feld": "farm", "felder": "farm", "mondoberfläche": "moon"}
 
 
 def resolve(place):
     if isinstance(place, dict):
         return "custom"
     key = ALIASES.get(str(place or "").lower().strip(), str(place or "").lower().strip())
-    return key if key in PLACES else "plain"
+    return key if (key in PLACES or key in OUTDOOR_SPECS) else "plain"
 _cache = {}
 
 
 def background(place, night=False):
+    if not isinstance(place, dict) and resolve(place) in OUTDOOR_SPECS:
+        place = OUTDOOR_SPECS[resolve(place)]
     if isinstance(place, dict):                       # Baukasten-Landschaft
         key = ("c", str(place.get("sky")), str(place.get("ground")), tuple(str(e) for e in (place.get("elements") or [])), bool(night))
         if key not in _cache:

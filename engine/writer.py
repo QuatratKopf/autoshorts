@@ -83,13 +83,16 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
   Tiere/Wesen statt Mensch: "kind": cat, dog, spider, ghost, alien, robot, bird, dino, monster, fish, shark
   Höchstens 3 Figuren, jede klar unterscheidbar. Bei Du-Geschichten ist die Hauptfigur „du“.
 - In jeder Szene:
-  "place": bedroom, livingroom, kitchen, office, classroom, lab, hospital, basement, street, park, forest, beach, desert,
-           snow, mountain, cave, underwater, space
+  "place": drinnen: bedroom, livingroom, kitchen, bathroom, office, classroom, lab, hospital, basement, supermarket,
+           supermarket_empty (leergekaufte Regale), station (Bahnhof), restaurant, cave, underwater, space
+           draußen: street (Häuserzeile mit Läden und Straße), park, forest, beach, desert, snow, mountain, farm, village,
+           gasstation, powerplant, graveyard, ruins, camp (Zelte), moon
            (genau eines dieser Wörter – jede Szene braucht einen Ort aus dieser Liste, auch Ereignis-Einstellungen)
   "backdrop": für Landschaften draußen statt "place" – ein Baukasten, mit dem JEDE Umgebung passend gebaut wird:
            {"sky": "day|night|sunset|storm|red|haze", "ground": "grass|sand|snow|road|rock|soil|dry|water|ice|lava",
-            "elements": [bis zu 4 aus: mountains, hills, dunes, forest, trees, deadtrees, city, village, ruins, factory, farm,
-                         sea, glacier, fields, river, dryriver, lake, cracks, rocks, flowers]}
+            "elements": [bis zu 4 aus: mountains, hills, dunes, forest, trees, deadtrees, palms, cactus, city (Skyline),
+                         street (Häuserzeile), village, ruins, factory, powerplant, farm, gasstation, bridge, powerlines,
+                         windturbines, camp, graves, sea, glacier, fields, river, dryriver, lake, cracks, rocks, flowers]}
            Beispiele: Wald mit Fluss = {"elements": ["forest", "river"]} · Dürre = {"sky": "haze", "ground": "dry",
            "elements": ["deadtrees", "dryriver"]} · Bauernhof = {"elements": ["farm", "fields"]} · zerstörte Stadt =
            {"sky": "red", "ground": "road", "elements": ["ruins"]} · Bergsee = {"elements": ["mountains", "lake", "flowers"]}
@@ -98,25 +101,36 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
   Wechsle den Hintergrund, sobald der Text den Schauplatz wechselt.
   "time": "day" oder "night"
   "weather": rain, storm, snow, wind, heat, dark, ash (Ascheregen), quake (Erdbeben: Bild wackelt) oder ""
-  "props": 0–2 Requisiten aus: tree, rock, box, car, fire, tv, computer, money, rocket, ufo, meteor, explosion, earth, sun,
-           moon, tornado, wave, flood, ice, volcano, cloud, stormcloud, lightning, crack, smoke, aurora, eclipse, sprout
+  "props": 0–2 Requisiten. Alle Dinge erscheinen automatisch in echter Größe im Verhältnis zu den Menschen.
+           Dinge: car, bus, truck, bike, house, tree, rock, box, cart (Einkaufswagen), shelf (Regal), fridge, table, tv, computer,
+                  money, cans (Konserven), canister, candle, generator, tent, fire, streetlamp, trafficlight, rocket, sprout
+           Himmel/Natur (Schaubilder, groß): plane, satellite, ship, ufo, meteor, explosion, earth, sun, moon, tornado, wave,
+                  flood, ice, volcano, cloud, stormcloud, lightning, crack, smoke, aurora, eclipse
            (meteor fällt und schlägt ein, rocket startet, wave/flood steigen, crack reißt den Boden auf, eclipse verdunkelt
             die Sonne, sprout wächst zur Blume, volcano spuckt Lava)
+           Nimm nur Requisiten, die an diesen Ort gehören (kein Karton mitten auf der Straße als Ersatz für einen Supermarkt –
+           dafür gibt es den Ort "supermarket").
   "actors": 1–2 Figuren, z. B. [{"id": "mia", "action": "run", "emotion": "scared", "emote": "!", "pos": "offleft", "to": "center", "speaks": true}]
      action: idle, talk, walk, run, wave, point, shocked, sad, jump, think, sit, sleep, dance, look_around, fall
      emotion: happy, sad, angry, scared, worried, shocked oder ""
      emote (Symbol über dem Kopf, sparsam): "!", "?", heart, idea, sweat, anger, music oder ""
      pos / to: left, center, right, offleft, offright ("to" nur wenn die Figur sich bewegt)
      speaks: true bei der Figur, um die es in dieser Szene geht
-  "crowd": Menschen im Hintergrund, die die Stimmung zeigen (nur draußen): "panic" (rennen in Panik durcheinander),
-           "walk" (Alltag, Leute gehen vorbei), "cheer" (jubeln), "sad" (stehen gebeugt), "watch" (staunen, zeigen) oder ""
-  "mood": Stimmung der Szene als Farbe/Wirkung: "panic", "tense", "scary", "sad", "happy" oder "calm"
-          – setze sie passend zum Satz, damit man die Stimmung SIEHT (Panik = rote, zitternde Szene mit rennenden Menschen).
+     hold (optional, Gegenstand in der Hand): phone, flashlight, bag, bottle, umbrella, sign, map, radio
+     Die Gefühle müssen zum Satz passen: niemand ist erschrocken oder panisch, wenn der Satz ruhig oder sachlich ist.
+  "crowd": Menschen im Bild, die die Stimmung zeigen (draußen und in Supermarkt, Bahnhof, Krankenhaus, Büro, Schule):
+           "walk" (Alltag, Leute gehen vorbei), "worried" (stehen unruhig, sehen sich besorgt um), "panic" (rennen in Panik
+           durcheinander – NUR wenn der Satz wirklich von Panik, Flucht oder Schreien handelt), "cheer" (jubeln),
+           "sad" (stehen gebeugt), "watch" (staunen, zeigen) oder ""
+  "mood": Stimmung der Szene als Farbe/Wirkung: "calm", "tense", "panic", "scary", "sad" oder "happy" – genau so stark wie
+          der Satz. Die meisten Szenen sind "calm" oder "tense"; "panic" höchstens in ein bis zwei Szenen am Höhepunkt.
+          Sachliche Erklärungen sind "calm".
   JEDE SZENE BRAUCHT SICHTBARE BEWEGUNG: Figur, die etwas tut, eine Menschenmenge, animierte Requisite oder Wetter.
   Kein leeres Standbild.
   "shot": "event" = Ereignis-Einstellung: das Geschehen (Requisiten, Wetter, Ort) füllt das Bild, "actors" ist [] oder
           höchstens eine kleine Figur am Rand, die zuschaut · "close" = Nahaufnahme einer Figur (selten, nur bei starker
-          Reaktion) · sonst "wide"
+          Reaktion) · "insert" = ein einzelner Gegenstand aus "props" groß und allein im Bild, wenn der Satz genau von
+          diesem Ding handelt (z. B. Kühlschrank, Kerze, Konserven) · sonst "wide"
 - WICHTIG – das Thema zeigen, nicht die Figur: Die Figuren sind Nebensache und klein im Bild. Immer wenn der Sprecher über
   Natur, Wetter, Weltall, Katastrophen, Tiere oder ein Phänomen redet, nimm "shot": "event" mit passenden Requisiten, Wetter
   und Ort (z. B. Vulkanausbruch: place mountain, props ["volcano","smoke"], weather "ash", actors []). Bei Natur-,
@@ -199,7 +213,7 @@ def trend_topic(cat: dict):
 
 def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
     secs = int(cfg("target_seconds") or 60)
-    words = round(secs * (1.4 if str(cfg("tts_provider") or "") == "gemini" else 2.2))   # Gemini-Erzähler spricht ruhiger
+    words = round(secs * (1.7 if str(cfg("tts_provider") or "") == "gemini" else 2.2))   # Gemini-Erzähler spricht ruhiger
     scenes = max(6, round(secs / 5))
     toon = str(os.environ.get("AS_VISUAL") or cfg("visual_mode") or "ai") == "toon"
     char = cfg("main_character") if cfg("use_main_character") and not toon else ""

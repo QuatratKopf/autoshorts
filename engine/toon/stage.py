@@ -82,6 +82,7 @@ def _prepare(scene, cast):
         if action in ("walk", "run") and x1 == x0:       # ohne Ziel: von außen hereinkommen
             x0 = -260 if x0 <= 540 else 1340
         actors.append({"look": rig.Look.from_spec(spec), "kind": kind if kind in extras.CREATURES else "",
+                       "hold": extras.HELD.get(str(a.get("hold") or "").lower().strip(), ""),
                        "action": action, "emotion": str(a.get("emotion") or "").lower(), "emote": a.get("emote") or "",
                        "x0": x0, "x1": x1, "speaks": bool(a.get("speaks")), "seed": i * 5 + len(aid), "face": a.get("facing")})
     for i, a in enumerate(actors):     # zwei Figuren nie auf derselben Stelle
@@ -100,10 +101,23 @@ def _prepare(scene, cast):
     for i, p in enumerate((scene.get("props") or [])[:3]):
         if isinstance(p, str):
             p = {"type": p}
+        if isinstance(p, dict) and str(p.get("type")).lower().strip() in extras.HELD:      # Handy, Taschenlampe …: gehört in die Hand
+            for a in actors:
+                if not a["kind"] and not a["hold"]:
+                    a["hold"] = extras.HELD[str(p["type"]).lower().strip()]
+                    break
+            continue
+        if isinstance(p, dict) and str(scene.get("shot") or "") != "insert" and \
+                extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in PLACE_HAS.get(place, ()):
+            continue                                              # steht an diesem Ort schon
         if isinstance(p, dict) and p.get("type"):
             taken = [q["x1"] for q in actors] + [q[1] for q in props]
             free = [c for c in (830, 250, 540, 990, 90) if all(abs(c - tx) > 230 for tx in taken)] or [830]
-            props.append((str(p["type"]).lower(), _x(p.get("pos"), free[0]) if p.get("pos") else free[0]))
+            kind = str(p["type"]).lower().strip()
+            fit = extras.prop_fit(kind)
+            if fit and fit[1] < 1200 and not p.get("pos"):      # Großes (Auto, Haus, Baum) steht weiter hinten und darf mittig stehen
+                free = [c for c in (760, 320, 540) if all(abs(c - q[1]) > 300 for q in props)] or [760]
+            props.append((kind, _x(p.get("pos"), free[0]) if p.get("pos") else free[0]))
             p_given.append(bool(p.get("pos")))
     if event:
         props = [(k, 600 if (i == 0 and not p_given[i]) else x) for i, (k, x) in enumerate(props)]
@@ -111,33 +125,45 @@ def _prepare(scene, cast):
 
 
 CROWD_SHIRTS = ("blau", "rot", "grün", "gelb", "orange", "lila", "türkis", "grau", "braun", "pink")
-CROWD_KINDS = {"panic": "panic", "panik": "panic", "flee": "panic", "flucht": "panic", "run": "panic",
+CROWD_KINDS = {"worried": "worried", "besorgt": "worried", "nervous": "worried", "tense": "worried", "unruhig": "worried",
+               "wait": "worried", "queue": "worried", "panic": "panic", "panik": "panic", "flee": "panic", "flucht": "panic", "run": "panic",
                "walk": "walk", "gehen": "walk", "busy": "walk", "cheer": "cheer", "jubel": "cheer", "party": "cheer",
                "sad": "sad", "traurig": "sad", "watch": "watch", "staunen": "watch", "gather": "watch"}
 
 
-def _crowd(frame, kind, t, night):
-    """Menschen im Hintergrund, die die Stimmung zeigen: Panik (rennen kreuz und quer), Alltag (gehen),
-    Jubel (springen), Trauer (stehen gebeugt), Staunen (stehen und zeigen)."""
+def _crowd(frame, kind, t, night, lo=0, hi=9999, road=False, traffic=True, indoor=False):
+    """Menschen im Bild, die die Stimmung zeigen: Panik (rennen kreuz und quer), Alltag (gehen), Sorge (stehen unruhig,
+    sehen sich um), Jubel (springen), Trauer (stehen gebeugt), Staunen (stehen und zeigen). Jeder Mensch ist so groß,
+    wie es zu seiner Tiefe im Bild passt; gezeichnet werden nur die mit Fußlinie zwischen lo und hi."""
     kind = CROWD_KINDS.get(str(kind or "").lower())
     if not kind:
         return
     import random
     rnd = random.Random(11)
-    n = {"panic": 7, "walk": 5, "cheer": 6, "sad": 5, "watch": 5}[kind]
+    n = {"panic": 8, "walk": 5, "cheer": 6, "sad": 5, "watch": 5, "worried": 5}[kind]
+    if indoor:
+        n = min(n, 3 if kind != "panic" else 5)
     people = []
     for i in range(n):
-        depth = rnd.random()                                   # 0 = hinten/klein, 1 = vorn/größer
+        if indoor:
+            gy = 1240 + rnd.random() * 36
+        elif road and traffic:                                   # Gehwege: hinten oder vorn, nie auf der Fahrbahn
+            gy = (1004 + rnd.random() * 30) if i % 2 else (1236 + rnd.random() * 40)
+        elif road:
+            gy = (1004 + rnd.random() * 30) if i % 3 == 0 else (1110 + rnd.random() * 160)
+        else:
+            gy = 1000 + (rnd.random() ** 0.8) * 270
         look = rig.Look.from_spec({"shirt": CROWD_SHIRTS[(i * 3 + 1) % len(CROWD_SHIRTS)], "hat": ("", "", "cap", "beanie", "")[i % 5],
                                    "hat_color": CROWD_SHIRTS[(i * 7) % len(CROWD_SHIRTS)], "hair": ("", "long", "", "bun")[i % 4],
                                    "skin": ("weiß", "hell", "mittel", "dunkel")[i % 4]})
-        people.append((depth, look, rnd.random(), rnd.choice((-1, 1)), i))
-    for depth, look, ph, direction, i in sorted(people):
-        sc = 0.5 + depth * 0.28
-        gy = places.GROUND - 46 + depth * 150
+        people.append((gy, look, rnd.random(), rnd.choice((-1, 1)), i))
+    for gy, look, ph, direction, i in sorted(people, key=lambda q: q[0]):
+        if not (lo <= gy < hi):
+            continue
+        sc = places.depth(gy) * (0.97 + 0.06 * ((i * 7) % 3) / 2)
         emote = ""
         if kind == "panic":
-            speed = 420 + ph * 380
+            speed = (420 + ph * 380) * sc
             span = W + 500
             x = ((t * speed + ph * span) % span) - 250
             x = x if direction > 0 else W - x
@@ -146,7 +172,7 @@ def _crowd(frame, kind, t, night):
             facing = direction
             emote = "!" if i % 3 == 0 else ("sweat" if i % 3 == 1 else "")
         elif kind == "walk":
-            speed = 110 + ph * 90
+            speed = (150 + ph * 110) * sc
             span = W + 400
             x = ((t * speed + ph * span) % span) - 200
             x = x if direction > 0 else W - x
@@ -159,22 +185,52 @@ def _crowd(frame, kind, t, night):
                 pose, _ = rig.pose_at("jump", t + ph, 9, "happy", 0.6, i)
             elif kind == "sad":
                 pose, _ = rig.pose_at("sad", t + ph, 9, "sad", 0.0, i)
+            elif kind == "worried":
+                pose, _ = rig.pose_at("look_around" if i % 2 else "think", t + ph * 2, 9, "worried", 0.0, i)
+                x += math.sin(t * 0.8 + i * 1.9) * 26                      # unruhig von einem Fuß auf den anderen
+                emote = "?" if i % 3 == 0 else ("sweat" if i % 3 == 1 else "")
             else:
                 pose, _ = rig.pose_at("point" if i % 2 else "shocked", t + ph + 1.0, 9, "shocked", 0.5, i)
                 emote = "!" if i % 2 == 0 else ""
-        im, fx, fy = rig.draw(look, pose, facing, sc, ss=1)
-        if night:
-            im = Image.composite(Image.new("RGBA", im.size, (20, 24, 60, 255)), im, im.split()[-1].point(lambda v: v * 90 // 255)) if False else im
+        im, fx, fy = rig.draw(look, pose, facing, sc, ss=1 if sc < 0.7 else 2)
         _shadow(frame, int(x), int(gy), int(60 * sc))
         frame.paste(im, (int(x - fx), int(gy - fy)), im)
-        if emote:
-            extras.draw_emote(frame, emote, x - 60, gy - 430 * sc, t + ph)
+        if emote and sc > 0.3:
+            extras.draw_emote(frame, emote, x - 60 * sc, gy - 470 * sc, t + ph)
 
 
-def _prop(frame, kind, x, t, big):
-    """Requisite zeichnen; big > 1 vergrößert sie um ihren Standpunkt (Boden bzw. Himmel)."""
+ON_TABLE = ("cans", "candle", "money", "canister")           # Kleines steht drinnen auf einem Tisch, damit man es sieht
+PLACE_HAS = {"kitchen": ("fridge", "table"), "office": ("computer", "table"), "supermarket": ("shelf",), "supermarket_empty": ("shelf",),
+             "livingroom": ("tv",), "forest": ("tree",), "park": ("tree",), "camp": ("tent", "fire"), "street": ("streetlamp", "house"),
+             "village": ("house",), "restaurant": ("table",)}
+
+
+def _prop(frame, kind, x, t, big, table=False):
+    """Requisite zeichnen. Dinge mit echter Größe (Auto, Regal, Haus …) stehen in ihrer Tiefe im richtigen Verhältnis
+    zu den Menschen; Naturereignisse und Himmelskörper sind Schaubilder und dürfen groß sein (big)."""
     key = extras.PROP_ALIASES.get(kind, kind)
-    if big <= 1.01 or key in ("aurora", "lightning", "crack", "flood", "wave", "eclipse"):
+    fit = extras.prop_fit(key)
+    if fit:
+        f, gy = fit
+        if table and key in ON_TABLE:
+            _prop(frame, "table", x, t, big)
+            tf, ty = extras.prop_fit("table")
+            gy = ty - int(places.px(0.78, ty)) + 6
+        layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        nx = max(260, min(W - 260, x))                    # in der Mitte zeichnen, damit beim Vergrößern nichts abgeschnitten wird
+        extras.draw_prop(layer, kind, nx, t)
+        box = layer.getbbox()
+        if not box:
+            return
+        cut = layer.crop(box)
+        cut = cut.resize((max(1, int(cut.width * f)), max(1, int(cut.height * f))), Image.BILINEAR)
+        px0 = x + (box[0] - nx) * f
+        py0 = gy + (box[1] - places.GROUND) * f
+        if not (table and key in ON_TABLE):
+            _shadow(frame, int(x), int(gy), int(cut.width * 0.42))
+        frame.paste(cut, (int(px0), int(py0)), cut)
+        return
+    if big <= 1.01 or key in ("aurora", "lightning", "crack", "flood", "wave", "eclipse", "ship"):
         extras.draw_prop(frame, kind, x, t)
         return
     layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
@@ -194,12 +250,18 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
         dx, dy = int(math.sin(t * 31) * 7), int(math.cos(t * 27) * 5)
         frame = frame.transform(frame.size, Image.AFFINE, (1, 0, dx, 0, 1, dy), resample=Image.NEAREST)
     extras.draw_ambient(frame, place, night, t)
-    extras.draw_landscape_motion(frame, opt.get("spec"), place, night, t, not opt.get("no_traffic"))
-    for kind, x in props:
-        if extras.PROP_ALIASES.get(kind, kind) not in extras.FRONT:
-            _prop(frame, kind, x, t, big)
+    spec = opt.get("spec")
+    road, traffic = extras.has_road(spec), not opt.get("no_traffic")
+    indoor = place not in places.OUTDOOR
+    ckw = dict(road=road, traffic=traffic, indoor=indoor)
     if opt.get("crowd"):
-        _crowd(frame, opt["crowd"], t, night)
+        _crowd(frame, opt["crowd"], t, night, 0, 1090, **ckw)           # Menschen hinter der Fahrbahn zuerst
+    extras.draw_landscape_motion(frame, spec, place, night, t, traffic)
+    for kind, x in sorted(props, key=lambda q: (extras.prop_fit(q[0]) or (0, 0))[1]):
+        if extras.PROP_ALIASES.get(kind, kind) not in extras.FRONT:
+            _prop(frame, kind, x, t, big, indoor)
+    if opt.get("crowd"):
+        _crowd(frame, opt["crowd"], t, night, 1090, 9999, **ckw)
     over = frame
     od = ImageDraw.Draw(frame, "RGBA")
     focus = 540.0
@@ -238,6 +300,10 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
             elif action == "idle" and a["speaks"]:
                 action = "talk"
             pose, _ = rig.pose_at(action, tt, dur, a["emotion"], mouth, a["seed"])
+            if a.get("hold") and action not in ("run", "sleep", "fall", "jump", "dance", "wave") and not pose.lying:
+                pose.arm_r, pose.fore_r = (62, 50) if a["hold"] in ("phone", "map", "flashlight", "radio", "bottle") else (8, 4)
+                if a["hold"] in ("umbrella", "sign"):
+                    pose.arm_r, pose.fore_r = 40, 100
             if 0 <= t - move_t < 0.18 and arrived:           # kleines Abfedern beim Ankommen
                 pose.squash *= 1 - 0.08 * math.sin((t - move_t) / 0.18 * math.pi)
             im, fx, fy = rig.draw(a["look"], pose, facing, scale)
@@ -245,6 +311,9 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                 x, gy = 300, places.GROUND - 150
             _shadow(frame, int(x), gy, int(72 * scale * (1 - min(0.5, max(0, pose.lift) / 200))))
             frame.paste(im, (int(x - fx), int(gy - fy)), im)
+            if a.get("hold") and not pose.lying and "hand" in pose.extra:
+                hx, hy = pose.extra["hand"]
+                extras.draw_held(frame, a["hold"], x - fx + hx, gy - fy + hy, facing, t, scale, night)
             head_y = gy - (430 + max(0, pose.lift)) * scale * a["look"].size
             _zzz(od, pose, x, head_y, t)
         if a["emote"]:
@@ -269,6 +338,7 @@ def direct(scenes, times):
     Einstellung vorgibt (gleicher Ort, gleiche Figur, nur Reden) – andere Position, Nahaufnahme oder Hereinkommen."""
     prev_place, same, changes, prev_bd = None, 0, 0, None
     power_out = False
+    last_id = None
     for i, (sc, (s0, e0)) in enumerate(zip(scenes, times)):
         acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
         place = places.resolve(sc.get("place"))
@@ -290,16 +360,42 @@ def direct(scenes, times):
                 place = prev_place if (prev_place and not str(prev_place).startswith("custom")) else "park"
                 sc["place"] = place
         prev_bd = sc.get("backdrop") if isinstance(sc.get("backdrop"), dict) else None
-        m_hint, c_hint = _mood_hint(sc.get("text"))
-        if not sc.get("mood") and m_hint:
-            sc["mood"] = m_hint
-        outdoor = places.resolve(backdrop(sc)) not in INDOOR
-        if not sc.get("crowd") and c_hint and outdoor and not (c_hint == "walk" and str(sc.get("mood") or "") in ("scary", "sad")):
+        import re as _re
+        txt = str(sc.get("text") or "").lower()
+        m_hint, c_hint = _mood_hint(txt)
+        mood = str(sc.get("mood") or "").lower()
+        crowd_in = CROWD_KINDS.get(str(sc.get("crowd") or "").lower(), "")
+        # Stimmung muss zum Satz passen: Panik nur, wenn der Text wirklich von Panik/Flucht redet – sonst Sorge statt Rennen
+        if (mood == "panic" or crowd_in == "panic") and not _re.search(PANIC_RE, txt):
+            mood = m_hint if m_hint and m_hint != "panic" else ("tense" if mood == "panic" else mood)
+            crowd_in = "worried" if crowd_in == "panic" else crowd_in
+        if _re.search(CALM_RE, txt) and not m_hint:
+            mood = "" if mood in ("panic", "tense", "scary") else mood
+            crowd_in = "" if crowd_in in ("panic", "worried") else crowd_in
+        if m_hint and mood in ("", "calm"):
+            mood = m_hint
+        sc["mood"], sc["crowd"] = mood, crowd_in
+        rp = places.resolve(backdrop(sc))
+        outdoor = rp in places.OUTDOOR
+        public = rp in PUBLIC_INDOOR
+        if not sc.get("crowd") and c_hint and (outdoor or public) and not (c_hint == "walk" and mood in ("scary", "sad")):
             sc["crowd"] = c_hint
-        if sc.get("crowd") and not outdoor:
+        if sc.get("crowd") and not (outdoor or public):
             sc["crowd"] = ""
-        if str(sc.get("mood") or "") == "panic" and outdoor and not sc.get("crowd"):
+        if mood == "panic" and (outdoor or public) and not sc.get("crowd"):
             sc["crowd"] = "panic"
+        if sc.get("crowd") == "walk" and mood in ("tense", "panic"):
+            sc["crowd"] = "worried" if mood == "tense" else "panic"
+        for a in acts:                                    # Gefühle der Figuren passen zur Stimmung der Szene
+            emo = str(a.get("emotion") or "").lower()
+            if emo not in EMOTION_OK.get(mood, EMOTION_OK[""]):
+                a["emotion"] = MOOD_EMOTION.get(mood, "")
+                if str(a.get("emote") or "") in ("!", "sweat", "anger") and mood in ("", "calm", "happy"):
+                    a["emote"] = ""
+            if str(a.get("action") or "").lower() in ("shocked", "fall") and mood in ("", "calm", "happy") and not _re.search(r"plötzlich|schock|erschr|auf einmal|unglaublich|krass|wow", txt):
+                a["action"] = "talk" if a.get("speaks") else "idle"
+            if str(a.get("action") or "").lower() in ("dance", "jump") and mood in ("panic", "tense", "scary", "sad"):
+                a["action"] = "look_around"
         import re as _re
         txt = str(sc.get("text") or "").lower()
         if _re.search(r"stromausfall|\bstrom\b.{0,40}\b(aus|weg|zusammen)\b|ohne strom|kein strom|blackout|lichter gehen aus|stockdunkel|finsternis|dunkelheit", txt):
@@ -311,7 +407,7 @@ def direct(scenes, times):
             sc["dark_city"] = True                    # der Strom bleibt weg: kein Verkehr, keine rauchenden Schlote
         else:
             power_out = False
-        if _re.search(r"\bstill\b|stillstand|steht still|stehen still|bleiben stehen|bleibt stehen|kein benzin|verkehr bricht|lahmgelegt|menschenleer|niemand mehr", txt):
+        if _re.search(r"\bstill\b|stillstand|steht still|stehen still|bleiben stehen|bleibt stehen|kein benzin|verkehr bricht|lahmgelegt|menschenleer|\bniemand\b|keine menschenseele", txt):
             sc["no_traffic"] = True
             if sc.get("crowd") == "walk":
                 sc["crowd"] = ""
@@ -327,6 +423,20 @@ def direct(scenes, times):
                 and str(sc.get("mood") or "") != "scary":
             sc["crowd"] = "walk"            # nie ein Bild, in dem gar nichts passiert
         has_ov = isinstance(sc.get("overlay"), dict) and sc["overlay"].get("type")
+        if acts:
+            last_id = acts[0].get("id") or last_id
+        if not outdoor and "actors" in sc and not acts_now and str(sc.get("shot") or "") != "insert":
+            if public and not sc.get("crowd"):            # leerer öffentlicher Raum: Menschen passend zur Stimmung
+                sc["crowd"] = {"panic": "panic", "tense": "worried", "sad": "sad", "happy": "cheer"}.get(mood, "walk")
+            elif not public and last_id and rp not in ("space", "underwater", "cave"):
+                sc["actors"] = acts = [{"id": last_id, "action": "walk", "pos": "offleft", "to": "center",
+                                        "emotion": MOOD_EMOTION.get(mood, "")}]
+        # Gegenstand groß zeigen statt dritter Rede-Szene im selben Zimmer
+        things = [q for q in (sc.get("props") or []) if extras.prop_fit(q.get("type") if isinstance(q, dict) else q)]
+        if (not outdoor and things and not has_ov and not sc.get("shot") and len(acts) <= 1
+                and all(str(a.get("action") or "talk").lower() in ("talk", "idle", "") for a in acts)
+                and not (i and str(scenes[i - 1].get("shot") or "") == "insert")):
+            sc["shot"] = "insert"
         lone = len(acts) == 1 and str(acts[0].get("action") or "talk").lower() in ("talk", "idle", "") and not acts[0].get("to")
         if place != prev_place:
             same = 0
@@ -356,6 +466,20 @@ def backdrop(scene):
 
 # Wörter im Sprechertext → passender Hintergrund (greift nur, wenn das Drehbuch einen unpassenden Allerwelts-Ort nennt)
 HINTS = [
+    (r"leergekauft|leere regale|leeren regale|regale sind leer|regale leer|hamsterk|ausverkauft|geplündert", "supermarket_empty"),
+    (r"supermarkt|supermärkte|einkaufen|einkauf\b|lebensmittelladen|geschäfte|\bläden", "supermarket"),
+    (r"tankstelle|zapfsäule|tanken|benzin", "gasstation"),
+    (r"kraftwerk|atomkraft|reaktor|stromnetz", "powerplant"),
+    (r"strommast|stromleitung|hochspannung", {"elements": ["powerlines", "hills"]}),
+    (r"windrad|windräder|windkraft", {"elements": ["windturbines", "fields"]}),
+    (r"bahnhof|\bzug\b|\bzüge|u-bahn|s-bahn|bahnsteig", "station"),
+    (r"friedhof|\bgrab\b|gräber", "graveyard"),
+    (r"restaurant|café|kellner", "restaurant"),
+    (r"badezimmer|dusche|badewanne|toilette|wasserhahn|leitungswasser", "bathroom"),
+    (r"brücke", {"elements": ["bridge", "river", "city"]}),
+    (r"\bzelt|camping|flüchtlingslager|notunterk", "camp"),
+    (r"bauernhof|\bstall\b|\bkühe|\bvieh", "farm"),
+    (r"mondoberfläche|auf dem mond|mondlandung", "moon"),
     (r"regenwald|dschungel|\bwald|wälder|bäume", {"elements": ["forest"]}),
     (r"ausgetrocknet|dürre|vertrocknet|trocknen aus|staubtrocken", {"ground": "dry", "sky": "haze", "elements": ["deadtrees", "dryriver"]}),
     (r"\bfluss|flüsse|\bbach|strom fließt", {"elements": ["hills", "river"]}),
@@ -369,9 +493,9 @@ HINTS = [
     (r"vulkan|gebirge|\bberg|gipfel", "mountain"),
     (r"weltall|weltraum|galaxie|planet|umlaufbahn|astronaut|\bmond\b|sonnensystem", "space"),
     (r"höhle", "cave"),
-    (r"fabrik|industrie|kraftwerk|abgase", {"sky": "haze", "elements": ["factory", "city"]}),
-    (r"\bdorf|dörfer", {"elements": ["village", "hills"]}),
-    (r"ruinen|zerstört|trümmer|apokalypse", {"sky": "red", "ground": "road", "elements": ["ruins"]}),
+    (r"fabrik|industrie|abgase|produktion", {"sky": "haze", "elements": ["factory", "city"]}),
+    (r"\bdorf|dörfer", "village"),
+    (r"ruinen|zerstört|trümmer|apokalypse", "ruins"),
     (r"\bstadt|städte|straße|verkehr|hochhaus|hochhäuser", "street"),
     (r"krankenhaus|\barzt|ärzte|klinik", "hospital"),
     (r"\bschule|unterricht|klasse", "classroom"),
@@ -380,16 +504,24 @@ HINTS = [
     (r"küche|kochen|kühlschrank", "kitchen"),
 ]
 GENERIC = ("street", "park", "plain", "livingroom")
+PANIC_RE = r"panik|flieh|flücht|rennen (weg|davon|los|um)|rennt (weg|davon|los)|schrei|stürmen|plünder|todesangst|rette sich"
+CALM_RE = r"\bruhig|friedlich|entspannt|gemütlich|ganz normal|wie immer|alltag|idyll|\bstille\b"
 MOOD_HINTS = [
-    (r"panik|chaos|flieh|flücht|rennen um|katastrophe|ausnahmezustand|alarm|schreien", ("panic", "panic")),
-    (r"feiern|jubel|freude|party|gewinn|gerettet|endlich wieder", ("happy", "cheer")),
-    (r"verhunger|hunger|sterben|\btod\b|trauer|verzweifel|leiden|elend|verlieren alles", ("sad", "sad")),
+    (PANIC_RE, ("panic", "panic")),
+    (r"feiern|jubel|freude|party|gewinn|gerettet|endlich wieder|erleichter|glücklich", ("happy", "cheer")),
+    (r"verhunger|sterben|\btod\b|trauer|verzweifel|leiden|elend|verlieren alles|einsam|vermiss", ("sad", "sad")),
     (r"unheimlich|grusel|\bangst|dunkelheit|finster|schatten|lauert|monster|geist", ("scary", "")),
-    (r"gefahr|bedroh|warnung|knapp|kritisch|kollabier|zusammenbr", ("tense", "")),
-    (r"menschen|leute|bevölkerung|einwohner|alle rennen|millionen|milliarden|gesellschaft", ("", "walk")),
+    (r"chaos|katastrophe|ausnahmezustand|alarm|gefahr|bedroh|warnung|knapp|kritisch|kollabier|zusammenbr|sorge|nervös|unsicher|"
+     r"leergekauft|schlange stehen|warteschlange|hunger|engpass|notfall|notstand", ("tense", "worried")),
+    (r"menschen|leute|bevölkerung|einwohner|millionen|milliarden|gesellschaft", ("", "walk")),
     (r"staunen|beobachten|schauen zu|zuschauer", ("", "watch")),
 ]
 INDOOR = ("bedroom", "livingroom", "kitchen", "office", "classroom", "lab", "hospital", "basement", "cave", "underwater", "space")
+PUBLIC_INDOOR = ("supermarket", "supermarket_empty", "station", "hospital", "office", "classroom", "restaurant")
+MOOD_EMOTION = {"panic": "scared", "tense": "worried", "scary": "scared", "sad": "sad", "happy": "happy"}
+EMOTION_OK = {"panic": ("scared", "shocked", "worried"), "tense": ("worried", "scared", "shocked", "angry", ""),
+              "scary": ("scared", "worried", "shocked"), "sad": ("sad", "worried", ""), "happy": ("happy", ""),
+              "": ("", "happy", "worried", "shocked", "sad", "angry"), "calm": ("", "happy")}
 
 
 def _mood_hint(text):
@@ -421,6 +553,43 @@ def _hint(text):
     return first
 
 
+INSERT_BG = {"panic": ((96, 26, 30), (30, 10, 16)), "tense": ((104, 62, 30), (30, 18, 14)), "scary": ((30, 34, 70), (8, 8, 20)),
+             "sad": ((44, 64, 104), (14, 18, 36)), "happy": ((250, 200, 110), (214, 130, 70)), "": ((52, 70, 120), (16, 20, 44))}
+_ins_bg = {}
+
+
+def _insert_frame(kinds, t, dur, mood):
+    """Einschub: ein Gegenstand groß und allein im Bild (wie eine Nahaufnahme), ruhiger Verlauf als Hintergrund."""
+    mood = mood if mood in INSERT_BG else ""
+    if mood not in _ins_bg:
+        c0, c1 = INSERT_BG[mood]
+        g = Image.new("L", (W // 8, H // 8), 0)
+        ImageDraw.Draw(g).ellipse((-20, 10, W // 8 + 20, H // 8 - 60), fill=255)
+        from PIL import ImageFilter
+        g = g.filter(ImageFilter.GaussianBlur(26)).resize((W, H), Image.BILINEAR)
+        _ins_bg[mood] = Image.composite(Image.new("RGB", (W, H), c0), Image.new("RGB", (W, H), c1), g)
+    frame = _ins_bg[mood].copy()
+    d = ImageDraw.Draw(frame, "RGBA")
+    n = len(kinds)
+    for i, kind in enumerate(kinds):
+        layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        extras.draw_prop(layer, kind, 540, t)
+        box = layer.getbbox()
+        if not box:
+            continue
+        cut = layer.crop(box)
+        tw, th = (760, 820) if n == 1 else (460, 560)
+        f = min(tw / cut.width, th / cut.height) * (0.9 + 0.1 * extras._pop(t, 0.05 + i * 0.25, 0.4)) * (1 + 0.04 * t / max(dur, 1))
+        if t < 0.05 + i * 0.25:
+            continue
+        cut = cut.resize((max(1, int(cut.width * f)), max(1, int(cut.height * f))), Image.BILINEAR)
+        cx = 540 if n == 1 else (290 + i * 500)
+        cy = 780 + math.sin(t * 1.6 + i) * 12
+        d.ellipse((cx - cut.width * 0.45, cy + cut.height * 0.5 + 10, cx + cut.width * 0.45, cy + cut.height * 0.5 + 50), fill=(0, 0, 0, 80))
+        frame.paste(cut, (int(cx - cut.width / 2), int(cy - cut.height / 2)), cut)
+    return frame
+
+
 def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.0, still: Path = None):
     """scene: {"place", "time", "weather", "props", "actors": [{"id", "action", "emotion", "emote", "pos", "to", "speaks"}]}.
     words: [(wort, start, ende)] der ganzen Sprecherspur; t0 = Startzeit der Szene darin."""
@@ -431,6 +600,7 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     has_ov = isinstance(scene.get("overlay"), dict) and scene["overlay"].get("type")
     moving = any(a["x0"] != a["x1"] for a in actors)
     big = 1.5 if shot == "event" else 1.15
+    ins = [k for k, _ in props if extras.PROP_ALIASES.get(k, k) in extras.PROPS][:2] if shot == "insert" else []
     shot = "close" if shot == "close" and not has_ov and not moving and not props and actors else ""
     ff = subprocess.Popen(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24",
                            "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-preset", "veryfast",
@@ -438,8 +608,14 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     try:
         for fidx in range(n_frames):
             t = fidx / FPS
+            if ins:
+                frame = _insert_frame(ins, t, dur, str(scene.get("mood") or "").lower())
+                if still is not None and fidx == min(n_frames - 1, FPS):
+                    frame.save(still, quality=92)
+                ff.stdin.write(frame.tobytes())
+                continue
             frame = _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, place == "bedroom", shot, big,
-                           {"crowd": scene.get("crowd"), "mood": str(scene.get("mood") or "").lower(), "spec": backdrop(scene),
+                           {"crowd": scene.get("crowd"), "mood": str(scene.get("mood") or "").lower(), "spec": places.spec_of(backdrop(scene)),
                             "no_traffic": bool(scene.get("no_traffic") or scene.get("dark_city"))})
             if still is not None and fidx == min(n_frames - 1, FPS):
                 frame.save(still, quality=92)
@@ -462,7 +638,7 @@ def cover(spec: dict, cast: dict, out: Path):
                          "emote": " ", "pos": "center"}]}
     place, night, _, actors, props, weather = _prepare(scene, cast)
     frame = _frame(places.background(backdrop(scene), night), place, night, 1.25, actors, props, weather, 1.4, 3.0, (), 0.0, False, "", 1.35,
-                   {"crowd": spec.get("crowd"), "mood": "", "spec": backdrop(scene)})
+                   {"crowd": spec.get("crowd"), "mood": "", "spec": places.spec_of(backdrop(scene))})
     # so beschneiden, dass die Figur groß in der unteren Bildhälfte sitzt und das obere Drittel für den Text frei bleibt
     frame = frame.crop((135, 0, 945, 1440)).resize((W, H), Image.LANCZOS)
     frame.save(out, quality=93)

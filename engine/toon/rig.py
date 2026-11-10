@@ -232,7 +232,8 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
         d.polygon(pts, fill=(250, 200, 40), outline=INK, width=int(o))
 
     # vorderer Arm
-    limb(sh_f, pose.arm_r * f + lean, arm1, pose.fore_r * f, arm2, hand=skin, col=look.shirt)
+    hp = limb(sh_f, pose.arm_r * f + lean, arm1, pose.fore_r * f, arm2, hand=skin, col=look.shirt)
+    pose.extra["hand"] = (hp[0] / SS, hp[1] / SS)          # Handpunkt im fertigen Bild (für Gegenstände in der Hand)
 
     if pose.lying:
         im = im.rotate(90 * f, expand=True, resample=Image.BICUBIC)

@@ -114,8 +114,8 @@ DEFAULT_SETTINGS = {
     "target_seconds": 70,
     "text_provider": "gemini",
     "tts_provider": "gemini",        # gemini = natürliche Erzählerstimme (kostenloses Kontingent), sonst edge
-    "voice_style": "Ruhig, langsam und entspannt – eine gelassene, warme Erzählstimme mit kleinen Pausen. Nicht aufgeregt.",
-    "voice_speed": 0.94,            # 1 = normal · kleiner = langsamer
+    "voice_style": "Natürlich und entspannt in normalem Sprechtempo – wie ein guter Erzähler, flüssig und nicht aufgeregt.",
+    "voice_speed": 1.0,             # 1 = normal · kleiner = langsamer
     "gemini_voice": "",              # leer = passende Stimme je Video-Art
     "image_provider": "cloudflare",
     "gemini_model": "gemini-3.5-flash",
@@ -189,6 +189,10 @@ CONFIG = load("config.json", default_config())
 CONFIG.setdefault("settings", {})
 for k, v in DEFAULT_SETTINGS.items():
     CONFIG["settings"].setdefault(k, v)
+if CONFIG["settings"].get("voice_speed") == 0.94:            # war zu langsam: zurück auf normales Tempo
+    CONFIG["settings"]["voice_speed"] = 1.0
+if "langsam und entspannt" in str(CONFIG["settings"].get("voice_style") or ""):
+    CONFIG["settings"]["voice_style"] = 'Natürlich und entspannt in normalem Sprechtempo – wie ein guter Erzähler, flüssig und nicht aufgeregt.'
 CONFIG.setdefault("categories", default_config()["categories"])
 CONFIG.setdefault("queue", [])
 if CONFIG["settings"].get("tts_provider") == "edge" and not CONFIG["settings"].get("tts_checked"):
