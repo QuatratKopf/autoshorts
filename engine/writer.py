@@ -83,7 +83,7 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
   "time": "day" oder "night"
   "weather": rain, storm, snow, wind, heat, dark, ash (Ascheregen), quake (Erdbeben: Bild wackelt) oder ""
   "props": 0–2 Requisiten aus: tree, rock, box, car, fire, tv, computer, money, rocket, ufo, meteor, explosion, earth, sun,
-           moon, tornado, wave, flood, ice, volcano, lightning, crack, smoke, aurora, eclipse, sprout
+           moon, tornado, wave, flood, ice, volcano, cloud, stormcloud, lightning, crack, smoke, aurora, eclipse, sprout
            (meteor fällt und schlägt ein, rocket startet, wave/flood steigen, crack reißt den Boden auf, eclipse verdunkelt
             die Sonne, sprout wächst zur Blume, volcano spuckt Lava)
   "actors": 1–2 Figuren, z. B. [{"id": "mia", "action": "run", "emotion": "scared", "emote": "!", "pos": "offleft", "to": "center", "speaks": true}]

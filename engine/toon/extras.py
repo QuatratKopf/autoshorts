@@ -218,6 +218,31 @@ def p_volcano(d, x, t, s=1.0):
         d.ellipse((px - 18, py - 18, px + 18, py + 18), fill=(250, 160, 50), outline=INK, width=4)
 
 
+def p_cloud(d, x, t, s=1.0, dark=False):
+    cy = 430 + math.sin(t * 1.2) * 10
+    xx = x + math.sin(t * 0.5) * 30
+    col = (92, 98, 116) if dark else (250, 250, 252)
+    blobs = ((0, 0, 120), (130, 30, 96), (-130, 34, 90), (60, -50, 100), (-60, -40, 92), (0, 50, 110))
+    for dx, dy, r in blobs:
+        d.ellipse((xx + dx - r - O, cy + dy - r - O, xx + dx + r + O, cy + dy + r + O), fill=INK)
+    for dx, dy, r in blobs:
+        d.ellipse((xx + dx - r, cy + dy - r, xx + dx + r, cy + dy + r), fill=col)
+    if dark:
+        for i in range(12):                     # Regen aus der Wolke
+            ph = (t * 1.8 + i / 12) % 1
+            rx = xx - 190 + i * 34
+            d.line((rx, cy + 130 + ph * 420, rx - 10, cy + 170 + ph * 420), fill=(170, 210, 255, int(255 * (1 - ph))), width=6)
+
+
+def p_stormcloud(d, x, t, s=1.0):
+    p_cloud(d, x, t, s, True)
+    if (t % 1.5) < 0.35:
+        cy = 430
+        pts = [(x + 10, cy + 110), (x - 40, cy + 330), (x + 20, cy + 350), (x - 30, GROUND)]
+        d.line(pts, fill=(255, 255, 255, 255), width=22, joint="curve")
+        d.line(pts, fill=(255, 236, 120, 255), width=10, joint="curve")
+
+
 def p_lightning(d, x, t, s=1.0):
     ph = t % 1.3
     if ph < 0.5:
@@ -301,17 +326,17 @@ def p_sprout(d, x, t, s=1.0):
         d.ellipse((px - 16, py - 16, px + 16, py + 16), fill=(250, 210, 70), outline=INK, width=3)
 
 
-PROPS = {"lightning": p_lightning, "crack": p_crack, "flood": p_flood, "smoke": p_smoke, "aurora": p_aurora,
+PROPS = {"cloud": p_cloud, "stormcloud": p_stormcloud, "lightning": p_lightning, "crack": p_crack, "flood": p_flood, "smoke": p_smoke, "aurora": p_aurora,
          "eclipse": p_eclipse, "sprout": p_sprout, "tree": p_tree, "rock": p_rock, "box": p_box, "car": p_car, "fire": p_fire, "tv": p_tv, "computer": p_computer,
          "money": p_money, "rocket": p_rocket, "ufo": p_ufo, "meteor": p_meteor, "explosion": p_explosion, "earth": p_earth,
          "sun": p_bigsun, "moon": p_bigmoon, "tornado": p_tornado, "wave": p_wave, "ice": p_ice, "volcano": p_volcano}
 PROP_ALIASES = {"baum": "tree", "stein": "rock", "kiste": "box", "auto": "car", "feuer": "fire", "fernseher": "tv", "pc": "computer",
                 "laptop": "computer", "geld": "money", "rakete": "rocket", "asteroid": "meteor", "erde": "earth", "sonne": "sun",
-                "mond": "moon", "tsunami": "wave", "blitz": "lightning", "erdbeben": "crack", "earthquake": "crack", "riss": "crack",
+                "mond": "moon", "wolke": "cloud", "gewitterwolke": "stormcloud", "regenwolke": "stormcloud", "tsunami": "wave", "blitz": "lightning", "erdbeben": "crack", "earthquake": "crack", "riss": "crack",
                 "überschwemmung": "flood", "flut": "flood", "rauch": "smoke", "polarlicht": "aurora", "sonnenfinsternis": "eclipse",
                 "pflanze": "sprout", "plant": "sprout", "comet": "meteor", "komet": "meteor", "welle": "wave", "eisberg": "ice", "vulkan": "volcano", "bigsun": "sun"}
 FRONT = ("wave", "flood", "eclipse")
-SKY = ("earth", "sun", "moon", "ufo", "meteor", "aurora", "eclipse", "lightning")     # werden vor den Figuren gezeichnet
+SKY = ("earth", "sun", "moon", "ufo", "meteor", "aurora", "eclipse", "lightning", "cloud", "stormcloud")     # werden vor den Figuren gezeichnet
 
 
 def draw_prop(layer, kind, x, t):
