@@ -324,6 +324,84 @@ def align_words(text, path):
     return out or _even_words(text, total)
 
 
+def _norm_word(w):
+    return re.sub(r"[^a-z0-9äöüß]", "", w.lower())
+
+
+_whisper = None
+
+
+def listen(path):
+    """Hört die Aufnahme ab (lokales Spracherkennungs-Modell) und gibt die erkannten Wörter mit Zeiten zurück – oder None."""
+    global _whisper
+    try:
+        from faster_whisper import WhisperModel
+        if _whisper is None:
+            _whisper = WhisperModel("small", device="cpu", compute_type="int8")
+        segs, _ = _whisper.transcribe(str(path), language="de", word_timestamps=True, beam_size=2,
+                                      condition_on_previous_text=False, vad_filter=False)
+        heard = []
+        for sg in segs:
+            for w in (sg.words or []):
+                for part in w.word.split():
+                    if _norm_word(part):
+                        heard.append((part, float(w.start), float(w.end)))
+        return heard or None
+    except Exception as e:  # noqa: BLE001
+        log(f"Sprach-Abgleich nicht möglich ({str(e)[:120]}) – Zeiten werden geschätzt")
+        return None
+
+
+def match_words(text, heard, total):
+    """Legt die Drehbuch-Wörter auf die gehörten Wörter. Gibt (Wort-Zeiten, Trefferquote 0..1) zurück."""
+    import difflib
+    words = text.split()
+    a = [_norm_word(w) for w in words]
+    b = [_norm_word(h[0]) for h in heard]
+    times = [None] * len(words)
+    hit = 0
+    for blk in difflib.SequenceMatcher(None, a, b, autojunk=False).get_matching_blocks():
+        for k in range(blk.size):
+            times[blk.a + k] = (heard[blk.b + k][1], heard[blk.b + k][2])
+            hit += 1
+    # zusammengezogene/getrennte Wörter: „supervulkan“ ↔ „super vulkan“ zählen als gehört
+    ratio = hit / max(1, len(words))
+    # Lücken zwischen sicheren Wörtern gleichmäßig nach Wortlänge füllen
+    known = [(-1, 0.0, 0.0)] + [(i, t[0], t[1]) for i, t in enumerate(times) if t] + [(len(words), total, total)]
+    for (i0, _, e0), (i1, s1, _) in zip(known, known[1:]):
+        gap = list(range(i0 + 1, i1))
+        if not gap:
+            continue
+        span = max(0.05 * len(gap), s1 - e0)
+        wsum = sum(len(a[g]) + 2 for g in gap)
+        t = e0
+        for g in gap:
+            d = span * (len(a[g]) + 2) / wsum
+            times[g] = (t, t + d * 0.92)
+            t += d
+    out, last = [], 0.0
+    for w, (s0, e0) in zip(words, times):      # Zeiten streng aufsteigend halten
+        s0 = max(s0, last)
+        e0 = max(e0, s0 + 0.06)
+        out.append((w, s0, e0))
+        last = s0 + 0.01
+    return out, ratio
+
+
+def spoken_words(text, path):
+    """Wort-Zeiten für eine Aufnahme ohne Zeitstempel: abhören und abgleichen; weicht die Aufnahme stark vom Text ab,
+    gilt sie als misslungen (der Anbieter hat etwas anderes gesprochen)."""
+    heard = listen(path)
+    if not heard:
+        return align_words(text, path)
+    words, ratio = match_words(text, heard, audio_duration(path))
+    log(f"Sprach-Abgleich: {round(ratio * 100)} % der Wörter erkannt")
+    n_text, n_heard = len(text.split()), len(heard)
+    if ratio < 0.7 or n_heard > n_text * 1.25 or n_heard < n_text * 0.7:
+        raise ProviderError(f"Aufnahme weicht vom Text ab ({round(ratio * 100)} % Treffer, {n_heard} statt {n_text} Wörter)")
+    return words
+
+
 GEMINI_VOICES = {"grusel": "Enceladus", "lustig": "Puck", "tiere": "Sulafat", "mysterien": "Algenib"}
 
 
@@ -336,7 +414,9 @@ def _gemini_tts(text, out, cat):
     prompt = ("Sprich den folgenden deutschen Text als professioneller Erzähler für ein Kurzvideo. "
               f"Stil: {style} Flüssig und natürlich wie ein Mensch, der eine Geschichte erzählt – mit Betonung, "
               "kleinen Pausen an den Satzenden und lebendigem Tempo, nicht abgehackt, nicht vorgelesen. "
-              "Sprich nur den Text, nichts davor oder danach:\n\n" + text)
+              "Sprich jedes Wort deutlich und vollständig aus, ziehe keine Wörter zusammen und verschlucke keine Silben. "
+              "Sprich GENAU diesen Text Wort für Wort – nichts weglassen, nichts hinzufügen, nichts umformulieren, "
+              "nichts davor oder danach:\n\n" + text)
     last = None
     for model in [m for m in (cfg("gemini_tts_model"), "gemini-3.8-flash-tts", "gemini-3.1-flash-tts-preview",
                               "gemini-2.5-flash-preview-tts") if m]:
@@ -369,7 +449,12 @@ def _gemini_tts(text, out, cat):
             if audio_duration(out) < max(3.0, len(text.split()) / 6):   # deutlich zu kurz → abgebrochen
                 last = f"{model}: Aufnahme unvollständig"
                 continue
-            return align_words(text, out)
+            try:
+                return spoken_words(text, out)
+            except ProviderError as e:
+                last = f"{model}: {e}"
+                log(f"Gemini-Stimme {last} – neuer Versuch")
+                continue
         except requests.RequestException as e:
             last = f"{model}: {type(e).__name__}"
     raise ProviderError(f"Gemini-Stimme: {last}")

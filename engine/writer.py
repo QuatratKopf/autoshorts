@@ -23,6 +23,12 @@ Regeln für die Sprechertexte:
 - Erfundene Geschichten (Grusel, Lustiges) klar als Geschichte erzählen ('Stell dir vor …', 'Eine Legende erzählt …'):
   keine erfundenen 'echten' Ereignisse, Trends, Apps, Studien oder Personen als Tatsache ausgeben, und keine Titel wie 'Die Wahrheit über …' dafür.
 - Keine Videos über einzelne echte Personen (auch keine Promis): nimm das allgemeine Thema dahinter.
+- ALLES auf Deutsch: Sprechertext, Titel, Beschreibung, Titelbild-Text, Orts-/Zeitangaben und jeder Text in Einblendungen
+  (Karten, Notizen, Listen, Handy, Balken, A/B-Frage). Keine englischen Wörter oder Gaming-Begriffe wie "Inventory", "Level",
+  "Boss", "Respawn", "Fact" – nimm das deutsche Wort (Liste, Stufe, Chef, Fakt). Erlaubt sind nur Eigennamen und Wörter,
+  die im Deutschen ganz normal sind (Handy, Internet, App). Deutsche Einheiten und Schreibweise (Liter, Meter, Grad).
+- Sprechertext zum Vorlesen schreiben: Zahlen und Einheiten ausschreiben ("dreißigtausend Grad", "zwanzig Prozent"),
+  keine Abkürzungen, Klammern, Emojis oder Sonderzeichen; kurze, klare Sätze. In Einblendungen dürfen Ziffern stehen.
 - Keine Beleidigungen, nichts Anzügliches, keine echten Privatpersonen, keine Marken- oder Filmfiguren im Bild.
 - Baue Themen nie um urheberrechtlich geschützte Figuren, Filme, Serien, Spiele oder Marken (z. B. Godzilla, Pokémon,
   Marvel, Disney, Minecraft). Nimm stattdessen eigene, namenlose Wesen oder echte Natur/Wissenschaft (z. B. 'ein 100 Meter großes Monster').

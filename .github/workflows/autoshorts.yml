@@ -72,6 +72,17 @@ jobs:
         if: steps.check.outputs.run == '1'
         run: pip install -q -r engine/requirements.txt
 
+      - name: Sprach-Abgleich installieren (Untertitel exakt zur Stimme)
+        if: steps.check.outputs.media == '1'
+        run: pip install -q faster-whisper || echo "Sprach-Abgleich nicht verfügbar – es wird geschätzt"
+
+      - name: Sprachmodell zwischenspeichern
+        if: steps.check.outputs.media == '1'
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: whisper-small-v1
+
       - name: ffmpeg und Schrift installieren
         if: steps.check.outputs.media == '1'
         run: |
