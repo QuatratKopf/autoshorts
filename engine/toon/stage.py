@@ -78,7 +78,8 @@ def sanitize(sc):
         if isinstance(q, str) and q.strip():
             props.append({"type": q.strip()})
         elif isinstance(q, dict) and isinstance(q.get("type"), str) and q["type"].strip():
-            props.append({"type": q["type"].strip(), **({"pos": q["pos"]} if isinstance(q.get("pos"), (str, int, float)) and not isinstance(q.get("pos"), bool) else {})})
+            props.append({"type": q["type"].strip(), **({"pos": q["pos"]} if isinstance(q.get("pos"), (str, int, float)) and not isinstance(q.get("pos"), bool) else {}),
+                          **({"count": max(1, min(7, int(q["count"])))} if isinstance(q.get("count"), (int, float)) and not isinstance(q.get("count"), bool) else {})})
     sc["props"] = props
     if "actors" in sc:
         acts = []
@@ -148,7 +149,11 @@ def _prepare(scene, cast):
             a["emote"] = {"shocked": "!", "scared": "!", "think": "?", "angry": "anger"}.get(a["action"]) or \
                          {"angry": "anger", "scared": "sweat", "worried": "sweat"}.get(a["emotion"], "")
     props, p_given = [], []
+    win, counts = [], {}
+    scene["_win"], scene["_count"] = win, counts
     for i, p in enumerate((scene.get("props") or [])[:3]):
+        if isinstance(p, dict) and isinstance(p.get("count"), int) and p["count"] > 1:
+            counts[extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower())] = p["count"]
         if isinstance(p, str):
             p = {"type": p}
         if isinstance(p, dict) and str(p.get("type")).lower().strip() in extras.HELD:      # Handy, Taschenlampe …: gehört in die Hand
@@ -162,7 +167,9 @@ def _prepare(scene, cast):
             continue                                              # steht an diesem Ort schon
         if isinstance(p, dict) and place not in places.OUTDOOR and place not in ("space", "plain") and \
                 extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in extras.SKY and str(scene.get("shot") or "") != "insert":
-            continue                                              # Sonne, Mond, Wolken gibt es nicht im Zimmer
+            if place in places.WINDOWS and len(win) < 2:          # was am Himmel passiert, sieht man drinnen durchs Fenster
+                win.append(extras.PROP_ALIASES.get(str(p["type"]).lower(), str(p["type"]).lower()))
+            continue                                              # Sonne, Mond, Wolken stehen nicht im Zimmer
         if isinstance(p, dict) and place not in places.OUTDOOR and place not in ("space", "plain", "cave", "underwater") and \
                 extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in ("fire", "volcano", "tornado", "car", "bus", "truck", "house", "tree", "meteor", "wave") \
                 and str(scene.get("shot") or "") != "insert":
@@ -300,6 +307,50 @@ def _prop(frame, kind, x, t, big, table=False):
     frame.paste(big_l, (int(x - x * big), int(ay - ay * big)), big_l)
 
 
+INK = (22, 22, 26)
+_wv = {}
+
+
+def _window_view(frame, box, kind, t):
+    """Zeichnet ein Himmels-Ding (Drohne, Mond, Flugzeug, Blitz …) hinter die Fensterscheibe – begrenzt auf das Fenster."""
+    x0, y0, x1, y1 = box
+    key = extras.PROP_ALIASES.get(kind, kind)
+    lay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    extras.draw_prop(lay, key, 540, t)
+    if key not in _wv:                                       # fester Ausschnitt (aus einer ruhigen Messung), damit nichts zittert
+        m = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        extras.draw_prop(m, key, 540, 1.0)
+        bb = m.getbbox() or (340, 400, 740, 800)
+        side = max(bb[2] - bb[0], 200) + 120
+        cx = (bb[0] + bb[2]) // 2
+        _wv[key] = (cx - side // 2, bb[1] - 50, cx + side // 2, bb[1] - 50 + int(side * (y1 - y0) / (x1 - x0)))
+    cut = lay.crop(_wv[key]).resize((x1 - x0 - 8, y1 - y0 - 8), Image.BILINEAR)
+    frame.paste(cut, (x0 + 4, y0 + 4), cut)
+    d = ImageDraw.Draw(frame)
+    d.line(((x0 + x1) // 2, y0, (x0 + x1) // 2, y1), fill=INK, width=7)       # Fensterkreuz wieder darüber
+    d.line((x0, (y0 + y1) // 2, x1, (y0 + y1) // 2), fill=INK, width=7)
+    d.rectangle((x0, y0, x1, y1), outline=INK, width=7)
+
+
+SWARM = ((0, 0, 1.0), (-330, -150, 0.6), (310, -200, 0.5), (-190, 150, 0.72), (250, 110, 0.8), (-420, 40, 0.45), (420, -40, 0.55))
+
+
+def _prop_many(frame, kind, x, t, big, n, table=False):
+    """Mehrere gleiche Himmels-Dinge (Schwarm): versetzt, verschieden groß, leicht zeitversetzt."""
+    if n <= 1 or extras.prop_fit(kind):
+        return _prop(frame, kind, x, t, big, table)
+    for i, (dx, dy, sc) in enumerate(SWARM[:n]):
+        lay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        extras.draw_prop(lay, kind, 540, t + i * 0.9)
+        bb = lay.getbbox()
+        if not bb:
+            continue
+        cut = lay.crop(bb)
+        f = sc * min(big, 1.2)
+        cut = cut.resize((max(1, int(cut.width * f)), max(1, int(cut.height * f))), Image.BILINEAR)
+        frame.paste(cut, (int(x + dx + (bb[0] - 540) * f), int(bb[1] + dy + (1 - f) * 120)), cut)
+
+
 def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, in_bed, shot="", big=1.0, fx=None):
     frame = bg.copy()
     if weather in ("quake", "erdbeben"):      # Erdbeben: das ganze Bild wackelt
@@ -309,6 +360,8 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
     if opt.get("mood") == "panic" and weather not in ("quake", "erdbeben"):      # Panik: die Kamera zittert leicht
         dx, dy = int(math.sin(t * 31) * 7), int(math.cos(t * 27) * 5)
         frame = frame.transform(frame.size, Image.AFFINE, (1, 0, dx, 0, 1, dy), resample=Image.NEAREST)
+    for wi, box in enumerate(places.WINDOWS.get(place, []) if opt.get("win") else []):     # Blick aus dem Fenster
+        _window_view(frame, box, opt["win"][wi % len(opt["win"])], t + wi * 0.7)
     sky = opt.get("sky")
     behind = [(k, x) for k, x in props if extras.PROP_ALIASES.get(k, k) in extras.BEHIND]
     if sky is not None:                                # Wolken, Vögel, Sterne, Sonne, Mond: nur dort, wo Himmel zu sehen ist
@@ -334,7 +387,7 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
     extras.draw_landscape_motion(frame, spec, place, night, t, traffic)
     for kind, x in sorted(props, key=lambda q: (extras.prop_fit(q[0]) or (0, 0))[1]):
         if extras.PROP_ALIASES.get(kind, kind) not in extras.FRONT:
-            _prop(frame, kind, x, t, big, indoor)
+            _prop_many(frame, kind, x, t, big, (opt.get("count") or {}).get(extras.PROP_ALIASES.get(kind, kind), 1), indoor)
     if opt.get("crowd"):
         _crowd(frame, opt["crowd"], t, night, 1090, 9999, **ckw)
     over = frame
@@ -381,6 +434,13 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                     pose.arm_r, pose.fore_r = 40, 100
             if 0 <= t - move_t < 0.18 and arrived:           # kleines Abfedern beim Ankommen
                 pose.squash *= 1 - 0.08 * math.sin((t - move_t) / 0.18 * math.pi)
+            if action == "sit" and not pose.lying:               # niemand sitzt in der Luft: Hocker unter die Figur
+                sw, sh = 62 * scale, 74 * scale
+                d0 = ImageDraw.Draw(frame, "RGBA")
+                sx = x - facing * 6 * scale
+                d0.rounded_rectangle((sx - sw, gy - sh, sx + sw, gy + 4), 14 * scale, fill=(150, 104, 70) if not night else (86, 70, 80), outline=INK, width=6)
+                d0.rounded_rectangle((sx - sw - 8, gy - sh - 16 * scale, sx + sw + 8, gy - sh + 8 * scale), 12 * scale,
+                                     fill=(214, 90, 80) if not night else (120, 70, 86), outline=INK, width=6)
             im, fx, fy = rig.draw(a["look"], pose, facing, scale)
             if pose.lying and in_bed:                          # im Schlafzimmer liegt die Figur im Bett
                 x, gy = 300, places.GROUND - 150
@@ -538,8 +598,9 @@ def direct(scenes, times, topic="", style=""):
             have = {extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) for q in (sc.get("props") or [])}
             for pat, kind in _lib_props() + TEXT_PROPS:
                 if kind not in have and _re0.search(pat, txt0):
-                    if kind in OUTDOOR_THINGS and places.resolve(backdrop(sc)) not in places.OUTDOOR:
-                        continue                           # Feuer, Autos, Naturgewalten erscheinen nicht im Zimmer
+                    if kind in OUTDOOR_THINGS and places.resolve(backdrop(sc)) not in places.OUTDOOR and not (
+                            kind in extras.SKY and places.resolve(backdrop(sc)) in places.WINDOWS):
+                        continue                           # Feuer, Autos, Naturgewalten erscheinen nicht im Zimmer (Himmelsdinge: im Fenster)
                     if kind in INDOOR_THINGS and (places.resolve(backdrop(sc)) in places.OUTDOOR):
                         if used.get(place, 0) < 3 or sc.get("overlay") or sc.get("shot"):
                             continue                       # Zimmer-Dinge stehen nicht in der Landschaft …
@@ -549,6 +610,10 @@ def direct(scenes, times, topic="", style=""):
                     have.add(kind)
                     if len(sc["props"]) >= 2:
                         break
+        if _re0.search(r"jede[mnrs]? |überall|millionen|tausende|hunderte|schwarm|schwärme|unzählige|der ganze himmel|am himmel wimmel", txt0):
+            for q in sc.get("props") or []:              # „vor jedem Fenster“, „Millionen Drohnen“ → mehrere davon im Bild
+                if extras.PROP_ALIASES.get(q["type"].lower(), q["type"].lower()) in ("drone", "plane", "ufo", "satellite", "meteor") and not q.get("count"):
+                    q["count"] = 5
         for pat, item in ((r"handy|smartphone|display|bildschirm leuchtet|nachricht", "phone"), (r"taschenlampe", "flashlight"), (r"regenschirm", "umbrella"),
                           (r"landkarte|stadtplan", "map"), (r"\bradio\b|funkgerät", "radio"), (r"einkaufstüte|\btasche\b|rucksack", "bag")):
             if _re0.search(pat, txt0):                   # was die Figur laut Satz in der Hand hat
@@ -694,7 +759,8 @@ def direct(scenes, times, topic="", style=""):
         lone = len(acts) == 1 and str(acts[0].get("action") or "talk").lower() in ("talk", "idle", "", "look_around") and not acts[0].get("to") and not acts[0].get("kind")
         last = i == len(scenes) - 1
         rp2 = places.resolve(backdrop(sc))
-        if lone and fig_prev and not sc.get("shot") and not last and ov_t not in TALL_OV and ov_t != "choice" and rp2 not in MAPS:
+        window_scene = rp2 in places.WINDOWS and any(extras.PROP_ALIASES.get(q["type"].lower(), q["type"].lower()) in extras.SKY for q in (sc.get("props") or []))
+        if lone and fig_prev and not window_scene and not sc.get("shot") and not last and ov_t not in TALL_OV and ov_t != "choice" and rp2 not in MAPS:
             things = [q for q in (sc.get("props") or []) if extras.prop_fit(q.get("type"))
                       and extras.PROP_ALIASES.get(q["type"].lower(), q["type"].lower()) not in DULL]
             if things and inserts < 4:
@@ -927,7 +993,7 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
                 ff.stdin.write(frame.tobytes())
                 continue
             frame = _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, place == "bedroom", shot, big,
-                           {"crowd": scene.get("crowd"), "mood": str(scene.get("mood") or "").lower(), "spec": places.spec_of(backdrop(scene)), "sky": sky_m,
+                           {"crowd": scene.get("crowd"), "mood": str(scene.get("mood") or "").lower(), "spec": places.spec_of(backdrop(scene)), "sky": sky_m, "win": scene.get("_win"), "count": scene.get("_count"),
                             "no_traffic": bool(scene.get("no_traffic") or scene.get("dark_city"))})
             if still is not None and fidx == min(n_frames - 1, FPS):
                 frame.save(still, quality=92)

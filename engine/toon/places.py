@@ -1243,6 +1243,11 @@ def resolve(place):
         if len(name) >= 4 and name in raw:
             return ALIASES.get(name, name)
     return "plain"
+# Fenster der Innenräume (x0, y0, x1, y1) – dort ist zu sehen, was draußen am Himmel passiert
+WINDOWS = {"bedroom": [(600, 420, 960, 800)], "livingroom": [(120, 400, 460, 760)], "kitchen": [(90, 430, 400, 760)],
+           "office": [(70 + i * 330, 380, 350 + i * 330, 800) for i in range(3)], "hospital": [(640, 420, 980, 780)],
+           "restaurant": [(90, 420, 480, 800)]}
+
 _cache = {}
 _masks = {}
 _last_p = []

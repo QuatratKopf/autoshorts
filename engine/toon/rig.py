@@ -303,8 +303,8 @@ def pose_at(action, t, dur, emotion="", mouth=0.0, seed=0):
         p.eyes = "normal"
         p.extra["dots"] = int(t * 2.5) % 4
     elif a == "sit":
-        p.leg_l, p.knee_l, p.leg_r, p.knee_r = 80, -80, 76, -80
-        p.lift = -60
+        p.leg_l, p.knee_l, p.leg_r, p.knee_r = 84, -84, 78, -78
+        p.lift = -80                 # Hüfte auf Sitzhöhe, Füße stehen auf dem Boden (die Bühne stellt einen Hocker darunter)
         p.arm_r, p.fore_r = 40, 30
     elif a == "sleep":
         p.lying = True

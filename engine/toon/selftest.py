@@ -26,7 +26,8 @@ def frame(scene, cast=None, t=1.3):
     bd = stage.backdrop(scene)
     bg = places.background(bd, night, bool(scene.get("dark_city")))
     opt = {"crowd": scene.get("crowd"), "mood": str(scene.get("mood") or "").lower(), "spec": places.spec_of(bd),
-           "sky": places.sky_mask(bd, night, bool(scene.get("dark_city"))), "no_traffic": bool(scene.get("no_traffic"))}
+           "sky": places.sky_mask(bd, night, bool(scene.get("dark_city"))), "no_traffic": bool(scene.get("no_traffic")),
+           "win": scene.get("_win"), "count": scene.get("_count")}
     shot = str(scene.get("shot") or "")
     if shot == "insert":
         return stage._insert_frame([k for k, _ in props][:2], t, 3.0, opt["mood"])
