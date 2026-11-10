@@ -44,26 +44,27 @@ def _pop(t, start=0.0, dur=0.35):
     return 1 + 0.22 * math.sin(k * math.pi) * (1 - k) if k >= 1 else (1 - (1 - k) ** 3) * (1 + 0.18 * math.sin(k * math.pi))
 
 
-def _sprite(r, col):
-    key = (r, col)
+def _sprite(r, col, alpha=0.34):
+    key = (r, col, alpha)
     if key not in _spr:
         im = Image.new("L", (r * 4, r * 4), 0)
         ImageDraw.Draw(im).ellipse((r, r, r * 3, r * 3), fill=255)
         im = im.filter(ImageFilter.GaussianBlur(r * 0.35))
         rgba = Image.new("RGBA", im.size, col + (0,))
-        rgba.putalpha(im.point(lambda v: int(v * 0.34)))
+        rgba.putalpha(im.point(lambda v: int(v * alpha)))
         _spr[key] = rgba
     return _spr[key]
 
 
 def bokeh(frame, t, strength=1.0):
     """Weiche Lichtpunkte, die langsam treiben (gibt jedem Bild Tiefe)."""
-    for i, (a, b, c) in enumerate(_BOK[: int(8 + 6 * min(1.0, strength))]):
-        r = int(60 + c * 130)
+    soft = strength < 0.6                                      # über normalen Szenen: wenige, zarte Punkte – das Bild bleibt klar
+    for i, (a, b, c) in enumerate(_BOK[: (5 if soft else 14)]):
+        r = int((40 + c * 70) if soft else (60 + c * 130))
         x = (a * (W + 400) + t * (10 + c * 22) * (1 if i % 2 else -1)) % (W + 400) - 200
         y = (b * H + math.sin(t * 0.3 + i) * 40) % H
         col = ((255, 190, 120), (170, 140, 255), (120, 170, 255), (255, 150, 200))[i % 4]
-        sp = _sprite(r, col)
+        sp = _sprite(r, col, 0.16 if soft else 0.34)
         frame.paste(sp, (int(x - sp.width / 2), int(y - sp.height / 2)), sp)
 
 
