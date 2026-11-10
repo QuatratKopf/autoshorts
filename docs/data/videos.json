@@ -648,5 +648,42 @@
   },
   "thumb": true,
   "mp4": true
+ },
+ {
+  "id": 24,
+  "category": "whatif",
+  "topic": "Was wäre, wenn morgen überall der Strom ausfällt?",
+  "status": "rendered",
+  "created": 1794291421.36902,
+  "title": "Was passiert, wenn morgen der Strom ausfällt?",
+  "description": "Erfahre Schritt für Schritt, was bei einem weltweiten Blackout passiert. Von den ersten Minuten bis zu den Jahren danach. Was würdest du als Erstes tun?",
+  "hashtags": [
+   "#shorts",
+   "#fyp",
+   "#blackout",
+   "#science",
+   "#whatif",
+   "#wissen",
+   "#zukunft"
+  ],
+  "tags": [
+   "stromausfall",
+   "blackout",
+   "was wäre wenn",
+   "physik",
+   "gesellschaft",
+   "überleben",
+   "technik"
+  ],
+  "thumb_text": "ALLES TOT",
+  "cover_ms": 56770,
+  "duration": 56.7,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "mp4": true
  }
 ]
