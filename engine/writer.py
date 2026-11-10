@@ -213,7 +213,7 @@ def trend_topic(cat: dict):
 
 def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
     secs = int(cfg("target_seconds") or 60)
-    words = round(secs * (1.7 if str(cfg("tts_provider") or "") == "gemini" else 2.2))   # Gemini-Erzähler spricht ruhiger
+    words = round(secs * (2.05 if str(cfg("tts_provider") or "") == "gemini" else 2.2))   # Gemini-Erzähler spricht ruhiger
     scenes = max(6, round(secs / 5))
     toon = str(os.environ.get("AS_VISUAL") or cfg("visual_mode") or "ai") == "toon"
     char = cfg("main_character") if cfg("use_main_character") and not toon else ""

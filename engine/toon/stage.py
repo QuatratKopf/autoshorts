@@ -350,6 +350,15 @@ def direct(scenes, times):
                     sc["backdrop"] = hint
             elif hint != place:
                 sc["place"] = place = hint
+        home = {"shelf": "supermarket", "cart": "supermarket", "fridge": "kitchen", "tv": "livingroom", "computer": "office"}
+        for q in (sc.get("props") or []):
+            k = str(q.get("type") if isinstance(q, dict) else q).lower().strip()
+            k = extras.PROP_ALIASES.get(k, k)
+            if k in home and (places.resolve(backdrop(sc)) in places.OUTDOOR or place == "plain"):
+                sc["place"] = place = home[k]            # Regal, Kühlschrank, Fernseher stehen nicht auf der Straße
+                sc.pop("backdrop", None)
+                has_bd = False
+                break
         if has_bd or isinstance(sc.get("backdrop"), dict):
             place = "custom:" + ",".join(str(e) for e in (sc["backdrop"].get("elements") or [sc["backdrop"].get("ground")]))
         if place == "plain":      # unbekannter Ort im Drehbuch → beim letzten Ort bleiben (draußen: Park), nie ein leerer Raum
@@ -467,6 +476,7 @@ def backdrop(scene):
 # Wörter im Sprechertext → passender Hintergrund (greift nur, wenn das Drehbuch einen unpassenden Allerwelts-Ort nennt)
 HINTS = [
     (r"leergekauft|leere regale|leeren regale|regale sind leer|regale leer|hamsterk|ausverkauft|geplündert", "supermarket_empty"),
+    (r"vorräte.{0,30}(neige|knapp|leer|aus)|lebensmittel.{0,30}(knapp|leer|aus)|nichts mehr zu kaufen", "supermarket_empty"),
     (r"supermarkt|supermärkte|einkaufen|einkauf\b|lebensmittelladen|geschäfte|\bläden", "supermarket"),
     (r"tankstelle|zapfsäule|tanken|benzin", "gasstation"),
     (r"kraftwerk|atomkraft|reaktor|stromnetz", "powerplant"),
@@ -594,7 +604,7 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     """scene: {"place", "time", "weather", "props", "actors": [{"id", "action", "emotion", "emote", "pos", "to", "speaks"}]}.
     words: [(wort, start, ende)] der ganzen Sprecherspur; t0 = Startzeit der Szene darin."""
     place, night, scale, actors, props, weather = _prepare(scene, cast)
-    bg = places.background(backdrop(scene), night)
+    bg = places.background(backdrop(scene), night, bool(scene.get("dark_city")))
     n_frames = max(2, round(dur * FPS))
     shot = str(scene.get("shot") or "").lower()
     has_ov = isinstance(scene.get("overlay"), dict) and scene["overlay"].get("type")

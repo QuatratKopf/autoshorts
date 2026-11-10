@@ -529,6 +529,7 @@ def prop_fit(kind):
     if key not in _nat:
         lay = Image.new("RGBA", (W * 2, H), (0, 0, 0, 0))
         PROPS[key](ImageDraw.Draw(lay, "RGBA"), W, 0.37)
+        PROPS[key](ImageDraw.Draw(lay, "RGBA"), W, 6.0)        # auch ausgewachsen/ausgefahren messen
         box = lay.getbbox()
         _nat[key] = max(40, GROUND - box[1]) if box else 200
     meters, y = SIZES[key]

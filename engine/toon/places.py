@@ -28,11 +28,15 @@ def _mix(c, f, to=(14, 16, 40)):
     return tuple(int(c[i] * (1 - f) + to[i] * f) for i in range(3))
 
 
+DARK = [False]
+
+
 class P:
     """Zeichenhilfe: Formen mit dunklem Umriss; bei Nacht werden alle Farben abgedunkelt/bläulich."""
 
     def __init__(self, night):
         self.night = night
+        self.dark = DARK[0]           # Stromausfall: keine erleuchteten Fenster, keine Lampen
         self.im = Image.new("RGB", (W, H), (0, 0, 0))
         self.d = ImageDraw.Draw(self.im)
 
@@ -124,7 +128,7 @@ class P:
         self.d.line((0, GROUND - 40, W, GROUND - 40), fill=INK, width=5)
 
     def lamp_glow(self, cx, cy, r=420):
-        if not self.night:
+        if not self.night or self.dark:
             return
         g = Image.new("L", (W, H), 0)
         ImageDraw.Draw(g).ellipse((cx - r, cy - r, cx + r, cy + r), fill=120)
@@ -191,7 +195,7 @@ def street(night):
         p.rect((x, GROUND - 60 - h, x + w, GROUND - 60), col)
         for wy in range(GROUND - 60 - h + 50, GROUND - 200, 120):
             for wx in range(x + 34, x + w - 60, 84):
-                lit = night and rnd.random() < 0.55
+                lit = night and not p.dark and rnd.random() < 0.55
                 p.rect((wx, wy, wx + 50, wy + 66), (255, 226, 120) if lit else (120, 170, 220), r=4, o=5, glow=lit)
         p.rect((x + w // 2 - 36, GROUND - 180, x + w // 2 + 36, GROUND - 60), (110, 70, 44), r=6)
         x += w
@@ -581,7 +585,7 @@ def _el_city(p, rnd):
         p.rect((x, BASE - h, x + w, BASE), cols[rnd.randint(0, 4)])
         for wy in range(BASE - h + 46, BASE - 150, 116):
             for wx in range(x + 32, x + w - 58, 82):
-                lit = p.night and rnd.random() < 0.55
+                lit = p.night and not p.dark and rnd.random() < 0.55
                 p.rect((wx, wy, wx + 48, wy + 64), (255, 226, 120) if lit else (126, 168, 214), r=4, o=5, glow=lit)
         x += w
 
@@ -777,14 +781,14 @@ def _mid_street(p, rnd):
         p.rect((x, y - h, x + w, y), col)
         p.rect((x - 6, y - h - 14, x + w + 6, y - h + 10), _mix(col, 0.25, (40, 30, 30)), o=5)
         gf = y - m * 3.2                                        # Erdgeschoss: Schaufenster + Tür
-        p.rect((x + m * 0.3, gf + m * 0.5, x + w - m * 1.5, y - m * 0.5), (255, 232, 150) if p.night and i % 2 else (150, 204, 236), r=4, o=5, glow=p.night and i % 2 == 1)
+        p.rect((x + m * 0.3, gf + m * 0.5, x + w - m * 1.5, y - m * 0.5), (255, 232, 150) if (p.night and not p.dark and i % 2) else (150, 204, 236), r=4, o=5, glow=p.night and not p.dark and i % 2 == 1)
         p.rect((x + w - m * 1.25, y - m * 2.1, x + w - m * 0.3, y), (104, 70, 48), r=4, o=5)
         aw = ((214, 80, 70), (70, 130, 190), (240, 190, 70), (90, 160, 110))[i % 4]
         p.poly([(x + m * 0.15, gf + m * 0.45), (x + w - m * 0.15, gf + m * 0.45), (x + w, gf + m * 0.05), (x, gf + m * 0.05)], aw, o=5)
         for fl in range(floors):
             wy = gf - m * (2.6 + fl * 3.0)
             for wx in (x + w * 0.2, x + w * 0.6):
-                lit = p.night and rnd.random() < 0.5
+                lit = p.night and not p.dark and rnd.random() < 0.5
                 p.rect((wx, wy, wx + m * 0.9, wy + m * 1.4), (255, 226, 120) if lit else (126, 168, 214), r=4, o=5, glow=lit)
         x += w
         i += 1
@@ -821,7 +825,7 @@ def _mid_gasstation(p, rnd):
         p.rect((x + m * 0.12, y - m * 1.5, x + m * 0.68, y - m * 1.0), (60, 70, 90), r=4, o=4)
         p.line((x + m * 0.8, y - m * 1.2, x + m * 1.1, y - m * 0.7, x + m * 0.9, y - m * 0.3), INK, 6)
     p.rect((780, y - m * 3.2, 1100, y), (236, 228, 214))                                     # Shop
-    p.rect((810, y - m * 2.2, 960, y - m * 0.8), (255, 232, 150) if p.night else (150, 204, 236), r=4, o=5, glow=p.night)
+    p.rect((810, y - m * 2.2, 960, y - m * 0.8), (255, 232, 150) if (p.night and not p.dark) else (150, 204, 236), r=4, o=5, glow=p.night and not p.dark)
     p.rect((985, y - m * 2.1, 1060, y), (104, 70, 48), r=4, o=5)
 
 
@@ -1121,15 +1125,20 @@ def resolve(place):
 _cache = {}
 
 
-def background(place, night=False):
-    if not isinstance(place, dict) and resolve(place) in OUTDOOR_SPECS:
-        place = OUTDOOR_SPECS[resolve(place)]
-    if isinstance(place, dict):                       # Baukasten-Landschaft
-        key = ("c", str(place.get("sky")), str(place.get("ground")), tuple(str(e) for e in (place.get("elements") or [])), bool(night))
-        if key not in _cache:
-            _cache[key] = compose(place, bool(night)).convert("RGB")
-        return _cache[key]
-    key = resolve(place)
-    if (key, bool(night)) not in _cache:
-        _cache[(key, bool(night))] = PLACES[key](bool(night)).convert("RGB")
-    return _cache[(key, bool(night))]
+def background(place, night=False, dark=False):
+    """dark = Stromausfall: Fenster und Lampen bleiben aus."""
+    DARK[0] = bool(dark)
+    try:
+        if not isinstance(place, dict) and resolve(place) in OUTDOOR_SPECS:
+            place = OUTDOOR_SPECS[resolve(place)]
+        if isinstance(place, dict):                       # Baukasten-Landschaft
+            key = ("c", str(place.get("sky")), str(place.get("ground")), tuple(str(e) for e in (place.get("elements") or [])), bool(night), bool(dark))
+            if key not in _cache:
+                _cache[key] = compose(place, bool(night)).convert("RGB")
+            return _cache[key]
+        key = resolve(place)
+        if (key, bool(night), bool(dark)) not in _cache:
+            _cache[(key, bool(night), bool(dark))] = PLACES[key](bool(night)).convert("RGB")
+        return _cache[(key, bool(night), bool(dark))]
+    finally:
+        DARK[0] = False
