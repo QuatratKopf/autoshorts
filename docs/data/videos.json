@@ -212,5 +212,48 @@
   "status": "error",
   "created": 1794268998.5544224,
   "error": "Kein Text-Anbieter erreichbar. gemini: Expecting value: line 5 column 5 (char 258) | pollinations: Pollinations-Text HTTP 400: {\"success\":false,\"error\":{\"message\":\"The model exhausted its output token limit before producing an answer. Increase the token limit or reduce reasoning effort.\",\"code\":\"output_token_limit_exceeded\",\"timestamp\":\"2026-11-10T00:05:47.351Z\",\"details\":{\"name\":\"UpstreamError\",\"upstreamHost\":\"portkey.myce"
+ },
+ {
+  "id": 10,
+  "category": "whatif",
+  "topic": "Was wäre, wenn der Rhein komplett austrocknet?",
+  "status": "rendered",
+  "created": 1794270841.877378,
+  "trend": {
+   "title": "Einfach keine Erholung: Rheinpegel in Köln fällt auf 54 Zentimeter",
+   "source": "Reddit r/de"
+  },
+  "title": "Was passiert wenn der Rhein komplett austrocknet?",
+  "description": "Der Rheinpegel sinkt dramatisch. Was passieren würde, wenn Deutschlands wichtigster Fluss komplett austrocknet, erfährst du in diesem Video. Welches Schiff auf dem Trockenen würde dich am meisten schockieren?",
+  "hashtags": [
+   "#shorts",
+   "#whatif",
+   "#rhein",
+   "#klima",
+   "#wissen",
+   "#deutschland",
+   "#fyp",
+   "#viral"
+  ],
+  "tags": [
+   "rhein austrocknen",
+   "was wäre wenn",
+   "rheinpegel köln",
+   "fluss trocken",
+   "klimawandel deutschland",
+   "schifffahrt rhein",
+   "wissen shorts",
+   "experiment"
+  ],
+  "thumb_text": "RHEIN COMPLETELY DRY?",
+  "cover_ms": 87333,
+  "duration": 87.2,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "mp4": true
  }
 ]
