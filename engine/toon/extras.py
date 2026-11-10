@@ -478,7 +478,7 @@ def draw_landscape_motion(layer, spec, place, night, t, traffic=True):
             x = -200 + ph * (W + 400)
             y = base + 80 + i * 90
             d.arc((x, y, x + 240, y + 40), 190, 340, fill=(250, 236, 170, 200), width=6)
-    if "factory" in els:
+    if "factory" in els and traffic:                              # steht alles still, rauchen auch die Schlote nicht
         for cx in (820, 940):
             for k in range(5):
                 ph = (t * 0.3 + k / 5) % 1

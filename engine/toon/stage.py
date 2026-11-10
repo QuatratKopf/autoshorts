@@ -268,6 +268,7 @@ def direct(scenes, times):
     """Kleine Regie über das ganze Video: sorgt für Abwechslung, wenn das Drehbuch mehrmals hintereinander dieselbe
     Einstellung vorgibt (gleicher Ort, gleiche Figur, nur Reden) – andere Position, Nahaufnahme oder Hereinkommen."""
     prev_place, same, changes, prev_bd = None, 0, 0, None
+    power_out = False
     for i, (sc, (s0, e0)) in enumerate(zip(scenes, times)):
         acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
         place = places.resolve(sc.get("place"))
@@ -305,6 +306,11 @@ def direct(scenes, times):
             sc["time"] = "night"                      # ohne Strom / Dunkelheit → Nacht
             sc["dark_city"] = True
             sc["mood"] = sc.get("mood") or "scary"
+            power_out = True
+        elif power_out and not _re.search(r"strom (ist|kommt) (wieder|zurück)|wieder strom|lichter gehen (wieder )?an", txt):
+            sc["dark_city"] = True                    # der Strom bleibt weg: kein Verkehr, keine rauchenden Schlote
+        else:
+            power_out = False
         if _re.search(r"\bstill\b|stillstand|steht still|stehen still|bleiben stehen|bleibt stehen|kein benzin|verkehr bricht|lahmgelegt|menschenleer|niemand mehr", txt):
             sc["no_traffic"] = True
             if sc.get("crowd") == "walk":
