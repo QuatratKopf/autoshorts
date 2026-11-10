@@ -253,49 +253,6 @@
   "mp4": true
  },
  {
-  "id": 11,
-  "category": "fakten",
-  "topic": "Wie Sir Paul McCartney offiziell zum Musik-Milliardär wurde – die verrückten Zahlen dahinter",
-  "status": "rendered",
-  "created": 1794271827.1006799,
-  "trend": {
-   "title": "Paul McCartney Becomes a Billionaire, Making Him the World’s Third-Richest Musician",
-   "source": "Reddit r/Music"
-  },
-  "title": "Paul McCartney: Der erste Musik-Milliardär Großbritanniens",
-  "description": "Wie wurde der berühmte Musiker Paul McCartney offiziell zum Milliardär? Wir erklären die krassen Zahlen hinter seinem Vermögen. Würdest du dein Geld auch so investieren?",
-  "hashtags": [
-   "#shorts",
-   "#fyp",
-   "#viral",
-   "#fakten",
-   "#finanzen",
-   "#musik",
-   "#milliardär",
-   "#wissen"
-  ],
-  "tags": [
-   "paul mccartney",
-   "milliardär",
-   "geld",
-   "vermögen",
-   "musikfakten",
-   "beatles",
-   "reich",
-   "business"
-  ],
-  "thumb_text": "ERSTER MUSIK MILLIARDÄR",
-  "cover_ms": 74768,
-  "duration": 74.7,
-  "providers": {
-   "text": "gemini",
-   "voice": "gemini",
-   "images": "toon"
-  },
-  "thumb": true,
-  "mp4": true
- },
- {
   "id": 12,
   "category": "whatif",
   "topic": "Was wäre, wenn das gesamte Wasser der Erdozene und Flüsse von heute auf morgen komplett verdampft?",
@@ -332,48 +289,6 @@
   "providers": {
    "text": "gemini",
    "voice": "edge",
-   "images": "toon"
-  },
-  "thumb": true,
-  "mp4": true
- },
- {
-  "id": 13,
-  "category": "storys",
-  "topic": "Wie Paul McCartney offiziell zum Milliardär wurde",
-  "status": "rendered",
-  "created": 1794272521.8503172,
-  "trend": {
-   "title": "Paul McCartney Becomes a Billionaire, Making Him the World’s Third-Richest Musician",
-   "source": "Reddit r/Music"
-  },
-  "title": "Paul McCartney: Wie der Ex-Beatle Milliardär wurde",
-  "description": "Paul McCartney ist offiziell der erste britische Musik-Milliardär. Wie hat er das nach dem Ende der Beatles geschafft? Erfahre die wahre Geschichte über weise Investments und Musikrechte. Hättest du deine eigenen Songrechte verkauft?",
-  "hashtags": [
-   "#shorts",
-   "#paulmccartney",
-   "#beatles",
-   "#musik",
-   "#geld",
-   "#fyp",
-   "#viral",
-   "#wissen"
-  ],
-  "tags": [
-   "paul mccartney",
-   "beatles",
-   "milliardär",
-   "reichtum",
-   "musikrechte",
-   "michael jackson",
-   "finanzen"
-  ],
-  "thumb_text": "ERSTER MUSIK MILLIARDÄR",
-  "cover_ms": 74611,
-  "duration": 74.5,
-  "providers": {
-   "text": "gemini",
-   "voice": "gemini",
    "images": "toon"
   },
   "thumb": true,

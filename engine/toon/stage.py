@@ -76,6 +76,12 @@ def _prepare(scene, cast):
         actors.append({"look": rig.Look.from_spec(spec), "kind": kind if kind in extras.CREATURES else "",
                        "action": action, "emotion": str(a.get("emotion") or "").lower(), "emote": a.get("emote") or "",
                        "x0": x0, "x1": x1, "speaks": bool(a.get("speaks")), "seed": i * 5 + len(aid), "face": a.get("facing")})
+    for i, a in enumerate(actors):     # zwei Figuren nie auf derselben Stelle
+        for b in actors[:i]:
+            if abs(a["x1"] - b["x1"]) < 200:
+                a["x1"] = b["x1"] + (300 if b["x1"] < 600 else -300)
+                if a["x0"] == b["x0"] or abs(a["x0"] - b["x1"]) < 200:
+                    a["x0"] = a["x1"]
     if actors and not any(a["speaks"] for a in actors):
         actors[0]["speaks"] = len(actors) == 1
     for a in actors:   # passende Symbole automatisch, wenn das Drehbuch keine nennt
