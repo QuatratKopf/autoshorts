@@ -42,7 +42,7 @@ concurrency:
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 30
     env:
       IN_ACTION: ${{ inputs.action || 'auto' }}
       IN_CATEGORY: ${{ inputs.category }}
@@ -86,11 +86,22 @@ jobs:
       - name: ffmpeg und Schrift installieren
         if: steps.check.outputs.media == '1'
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq ffmpeg > /dev/null
+          # ffmpeg: erst der Paketdienst mit kurzer Geduld (hing schon einmal 20 Minuten), sonst ein fertiges Paket von GitHub
+          APT="-o Acquire::Retries=2 -o Acquire::http::Timeout=15 -o Acquire::ForceIPv4=true"
+          if ! command -v ffmpeg >/dev/null; then
+            (timeout 120 sudo apt-get $APT update -qq && timeout 180 sudo apt-get $APT install -y -qq ffmpeg > /dev/null) \
+              || echo "Paketdienst zu langsam – nehme das fertige ffmpeg-Paket"
+          fi
+          if ! command -v ffmpeg >/dev/null; then
+            curl -fsSL --retry 3 --max-time 240 -o /tmp/ffmpeg.tar.xz \
+              https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz
+            mkdir -p /tmp/ffmpeg && tar -xJf /tmp/ffmpeg.tar.xz -C /tmp/ffmpeg --strip-components=1
+            sudo cp /tmp/ffmpeg/bin/ffmpeg /tmp/ffmpeg/bin/ffprobe /usr/local/bin/
+          fi
+          ffmpeg -hide_banner -version | head -1
           mkdir -p .fonts
           for w in SemiBold Bold ExtraBold; do
-            curl -fsSL -o .fonts/Poppins-$w.ttf https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-$w.ttf
+            curl -fsSL --retry 3 --max-time 60 -o .fonts/Poppins-$w.ttf https://github.com/google/fonts/raw/main/ofl/poppins/Poppins-$w.ttf
           done
 
       - name: AutoShorts ausführen
