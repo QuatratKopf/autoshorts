@@ -587,6 +587,44 @@ def p_solarpanel(d, x, t, s=1.0):
     d.line((x - 240 + gl * 440, GROUND - 110 - gl * 200, x - 200 + gl * 440, GROUND - 60 - gl * 200), fill=(255, 255, 255, 170), width=10)
 
 
+def p_drone(d, x, t, s=1.0):
+    """Drohne: schwebt, Rotoren drehen sich, die Kamera blinkt und tastet mit einem Lichtkegel den Boden ab."""
+    y = 600 + math.sin(t * 2.0) * 22
+    xx = x + math.sin(t * 0.9) * 70
+    sw = math.sin(t * 1.3) * 90
+    d.polygon([(xx - 16, y + 58), (xx + 16, y + 58), (xx + sw + 150, GROUND - 30), (xx + sw - 150, GROUND - 30)], fill=(255, 90, 80, 46))
+    for sx in (-1, 1):                                                     # Ausleger + Rotoren
+        d.line((xx, y - 6, xx + sx * 150, y - 30), fill=INK, width=20)
+        d.line((xx, y - 6, xx + sx * 150, y - 30), fill=(70, 76, 90), width=10)
+        _r(d, (xx + sx * 150 - 14, y - 60, xx + sx * 150 + 14, y - 22), (50, 54, 64), 6, 5)
+        w = 86 * (0.35 + 0.65 * abs(math.sin(t * 34 + sx)))
+        d.ellipse((xx + sx * 150 - w, y - 74, xx + sx * 150 + w, y - 58), fill=(210, 216, 228, 190), outline=INK, width=4)
+    _r(d, (xx - 74, y - 40, xx + 74, y + 26), (236, 238, 244), 24)         # Rumpf
+    _r(d, (xx - 30, y + 20, xx + 30, y + 58), (50, 54, 64), 10, 5)         # Kamera
+    _o(d, (xx - 17, y + 30, xx + 17, y + 64), (30, 32, 40), 5)
+    d.ellipse((xx - 8, y + 39, xx + 8, y + 55), fill=(120, 190, 250))
+    if int(t * 3) % 2:
+        d.ellipse((xx + 40, y - 26, xx + 56, y - 10), fill=(240, 60, 50))
+    for sx in (-1, 1):                                                     # Landekufen
+        d.line((xx + sx * 50, y + 24, xx + sx * 70, y + 70), fill=INK, width=8)
+
+
+def p_cctv(d, x, t, s=1.0):
+    """Überwachungskamera am Mast, schwenkt langsam, rotes Licht blinkt."""
+    _r(d, (x - 10, GROUND - 520, x + 10, GROUND), (90, 96, 110), 2, 5)
+    d.line((x, GROUND - 500, x + 70, GROUND - 500), fill=INK, width=18)
+    a = math.sin(t * 1.2) * 0.25 + 0.35
+    cx, cy = x + 70, GROUND - 500
+    ex, ey = cx + math.cos(a) * 150, cy + math.sin(a) * 150
+    nx, ny = -math.sin(a) * 34, math.cos(a) * 34
+    d.polygon([(ex, ey), (ex + math.cos(a) * 520 + nx * 5, ey + math.sin(a) * 520 + ny * 5), (ex + math.cos(a) * 520 - nx * 5, ey + math.sin(a) * 520 - ny * 5)], fill=(255, 90, 80, 40))
+    d.polygon([(cx + nx, cy + ny), (ex + nx, ey + ny), (ex - nx, ey - ny), (cx - nx, cy - ny)], fill=(236, 238, 244), outline=INK, width=O)
+    d.ellipse((ex - 26, ey - 26, ex + 26, ey + 26), fill=(30, 32, 40), outline=INK, width=5)
+    d.ellipse((ex - 10, ey - 10, ex + 10, ey + 10), fill=(120, 190, 250))
+    if int(t * 2.5) % 2:
+        d.ellipse((cx + nx * 0.2 - 8, cy - ny - 20, cx + nx * 0.2 + 8, cy - ny - 4), fill=(240, 60, 50))
+
+
 
 PROPS = {"cloud": p_cloud, "stormcloud": p_stormcloud, "lightning": p_lightning, "crack": p_crack, "flood": p_flood, "smoke": p_smoke, "aurora": p_aurora,
          "eclipse": p_eclipse, "sprout": p_sprout, "tree": p_tree, "rock": p_rock, "box": p_box, "car": p_car, "fire": p_fire, "tv": p_tv, "computer": p_computer,
@@ -594,7 +632,7 @@ PROPS = {"cloud": p_cloud, "stormcloud": p_stormcloud, "lightning": p_lightning,
          "sun": p_bigsun, "moon": p_bigmoon, "tornado": p_tornado, "wave": p_wave, "ice": p_ice, "volcano": p_volcano,
          "cart": p_cart, "candle": p_candle, "bus": p_bus, "truck": p_truck, "house": p_house, "trafficlight": p_trafficlight,
          "canister": p_canister, "cans": p_cans, "generator": p_generator, "bike": p_bike, "shelf": p_shelf, "table": p_table,
-         "door": p_door, "clock": p_clock, "pile": p_pile, "sandpile": p_sandpile, "trash": p_trash, "faucet": p_faucet,
+         "drone": p_drone, "cctv": p_cctv, "door": p_door, "clock": p_clock, "pile": p_pile, "sandpile": p_sandpile, "trash": p_trash, "faucet": p_faucet,
          "glass": p_glass, "barrel": p_barrel, "solarpanel": p_solarpanel,
          "fridge": p_fridge, "tent": p_tent, "streetlamp": p_streetlamp, "plane": p_plane, "satellite": p_satellite, "ship": p_ship}
 PROP_ALIASES = {"baum": "tree", "stein": "rock", "kiste": "box", "auto": "car", "feuer": "fire", "fernseher": "tv", "pc": "computer",
@@ -607,6 +645,7 @@ PROP_ALIASES = {"baum": "tree", "stein": "rock", "kiste": "box", "auto": "car", 
                 "aggregat": "generator", "fahrrad": "bike", "regal": "shelf", "tisch": "table", "kühlschrank": "fridge", "zelt": "tent",
                 "laterne": "streetlamp", "straßenlaterne": "streetlamp", "flugzeug": "plane", "satellit": "satellite", "schiff": "ship",
                 "boot": "ship", "paket": "box", "karton": "box", "geldstapel": "money", "bildschirm": "tv", "lagerfeuer": "fire",
+                "drohne": "drone", "drohnen": "drone", "quadcopter": "drone", "kamera": "cctv", "überwachungskamera": "cctv", "camera": "cctv",
                 "tür": "door", "uhr": "clock", "wanduhr": "clock", "haufen": "pile", "zucker": "pile", "salz": "pile", "zuckerberg": "pile",
                 "schneehaufen": "pile", "sandhaufen": "sandpile", "sand": "sandpile", "müll": "trash", "müllberg": "trash", "garbage": "trash",
                 "wasserhahn": "faucet", "tap": "faucet", "hahn": "faucet", "glas": "glass", "wasserglas": "glass", "getränk": "glass",
@@ -614,7 +653,7 @@ PROP_ALIASES = {"baum": "tree", "stein": "rock", "kiste": "box", "auto": "car", 
                 "solarzelle": "solarpanel", "pflanze": "sprout", "plant": "sprout", "comet": "meteor", "komet": "meteor", "welle": "wave", "eisberg": "ice", "vulkan": "volcano", "bigsun": "sun"}
 FRONT = ("wave", "flood", "eclipse")
 BEHIND = ("sun", "moon", "earth", "cloud", "stormcloud", "aurora")      # stehen am Himmel hinter Häusern, Bergen und Bäumen
-SKY = ("earth", "sun", "moon", "ufo", "meteor", "aurora", "eclipse", "lightning", "cloud", "stormcloud", "plane", "satellite")     # werden vor den Figuren gezeichnet
+SKY = ("drone", "earth", "sun", "moon", "ufo", "meteor", "aurora", "eclipse", "lightning", "cloud", "stormcloud", "plane", "satellite")     # werden vor den Figuren gezeichnet
 
 
 # Echte Größe (Höhe in Metern) und Tiefe (Fußlinie im Bild) – daraus ergibt sich der Maßstab passend zu den Menschen.
@@ -623,7 +662,7 @@ SIZES = {"car": (1.5, 1150), "bus": (3.0, 1100), "truck": (3.3, 1100), "house": 
          "box": (0.5, 1262), "fire": (1.1, 1250), "tv": (1.2, 1245), "computer": (1.3, 1245), "money": (0.45, 1262), "sprout": (0.5, 1262),
          "cart": (1.0, 1262), "candle": (0.9, 1262), "trafficlight": (3.4, 1225), "canister": (0.5, 1262), "cans": (0.5, 1262),
          "generator": (0.8, 1255), "bike": (1.05, 1255), "shelf": (1.9, 1238), "table": (0.78, 1250), "fridge": (1.85, 1238),
-         "tent": (1.8, 1180), "door": (2.1, 1236), "clock": (0.6, 1262), "pile": (3.2, 1160), "sandpile": (3.2, 1160),
+         "cctv": (3.6, 1228), "tent": (1.8, 1180), "door": (2.1, 1236), "clock": (0.6, 1262), "pile": (3.2, 1160), "sandpile": (3.2, 1160),
          "trash": (1.6, 1200), "faucet": (1.6, 1255), "glass": (0.9, 1262), "barrel": (0.95, 1255), "solarpanel": (1.8, 1200), "streetlamp": (4.6, 1225), "rocket": (14.0, 1010)}
 HELD = {"phone": "phone", "handy": "phone", "smartphone": "phone", "flashlight": "flashlight", "taschenlampe": "flashlight",
         "bag": "bag", "tasche": "bag", "einkaufstüte": "bag", "tüte": "bag", "bottle": "bottle", "flasche": "bottle",

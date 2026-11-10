@@ -24,6 +24,8 @@ Regeln für die Sprechertexte:
 - Erfundene Geschichten (Grusel, Lustiges) klar als Geschichte erzählen ('Stell dir vor …', 'Eine Legende erzählt …'):
   keine erfundenen 'echten' Ereignisse, Trends, Apps, Studien oder Personen als Tatsache ausgeben, und keine Titel wie 'Die Wahrheit über …' dafür.
 - Keine Videos über einzelne echte Personen (auch keine Promis): nimm das allgemeine Thema dahinter.
+- Nenne im Sprechertext, in Titel, Beschreibung und Einblendungen KEINE Marken-, Firmen-, Produkt- oder App-Namen, auch nicht als
+  Beispiel. Umschreibe sie allgemein („ein großer Online-Händler“, „ein Videoportal“, „ein bekannter Autobauer“, „ein Chatbot“).
 - Schreibe immer echte Umlaute und ß (ä, ö, ü, ß) – niemals ae, oe, ue oder ss als Ersatz, auch nicht in GROSSBUCHSTABEN.
 - ALLES auf Deutsch: Sprechertext, Titel, Beschreibung, Titelbild-Text, Orts-/Zeitangaben und jeder Text in Einblendungen
   (Karten, Notizen, Listen, Handy, Balken, A/B-Frage). Keine englischen Wörter oder Gaming-Begriffe wie "Inventory", "Level",
@@ -110,8 +112,8 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
            Dinge: car, bus, truck, bike, house, tree, rock, box, cart (Einkaufswagen), shelf (Regal), fridge, table, tv, computer,
                   money, cans (Konserven), canister, candle, generator, tent, fire, streetlamp, trafficlight, rocket, sprout,
                   door, clock, pile (wachsender Haufen: Zucker, Salz, Schnee), sandpile, trash, faucet (Wasserhahn), glass, barrel,
-                  solarpanel
-           Himmel/Natur (Schaubilder, groß): plane, satellite, ship, ufo, meteor, explosion, earth, sun, moon, tornado, wave,
+                  solarpanel, cctv (Überwachungskamera am Mast)
+           Himmel/Natur (Schaubilder, groß): drone (Drohne mit Kamera), plane, satellite, ship, ufo, meteor, explosion, earth, sun, moon, tornado, wave,
                   flood, ice, volcano, cloud, stormcloud, lightning, crack, smoke, aurora, eclipse
            (meteor fällt und schlägt ein, rocket startet, wave/flood steigen, crack reißt den Boden auf, eclipse verdunkelt
             die Sonne, sprout wächst zur Blume, volcano spuckt Lava)
@@ -187,6 +189,48 @@ _UML = [("fuenf", "fünf"), ("zwoelf", "zwölf"), ("dreissig", "dreißig"), ("fu
         ("koerper", "körper"), ("groess", "größ"), ("hoeh", "höh"), ("loes", "lös"), ("stoer", "stör"), ("toet", "töt"), ("boes", "bös"),
         ("muede", "müde"), ("kuenst", "künst"), ("wuensch", "wünsch"), ("duenn", "dünn"), ("fluester", "flüster"), ("luege", "lüge"),
         ("pruef", "prüf"), ("rueck", "rück"), ("stuerz", "stürz"), ("schuetz", "schütz"), ("nuetz", "nütz"), ("drueck", "drück"), ("tuerm", "türm")]
+
+
+BRANDS = {"amazon": "ein großer Online-Händler", "google": "eine Suchmaschine", "apple": "ein Handy-Hersteller", "microsoft": "ein Software-Riese",
+          "facebook": "ein soziales Netzwerk", "instagram": "eine Foto-App", "tiktok": "eine Video-App", "youtube": "ein Videoportal",
+          "netflix": "ein Streamingdienst", "tesla": "ein E-Auto-Hersteller", "spacex": "eine Raumfahrtfirma", "samsung": "ein Handy-Hersteller",
+          "nike": "ein Sportartikel-Hersteller", "adidas": "ein Sportartikel-Hersteller", "mcdonald's": "eine Burgerkette", "mcdonalds": "eine Burgerkette",
+          "coca-cola": "ein Limonadenhersteller", "openai": "eine KI-Firma", "chatgpt": "ein Chatbot", "whatsapp": "ein Messenger",
+          "snapchat": "eine Foto-App", "twitter": "ein Kurznachrichtendienst", "uber": "ein Fahrdienst", "disney": "ein Filmstudio",
+          "ikea": "ein Möbelhaus", "dhl": "ein Paketdienst", "paypal": "ein Bezahldienst", "ebay": "ein Online-Marktplatz", "spotify": "ein Musikdienst",
+          "playstation": "eine Spielkonsole", "xbox": "eine Spielkonsole", "nintendo": "ein Spielehersteller", "iphone": "ein Smartphone",
+          "bmw": "ein Autobauer", "mercedes": "ein Autobauer", "audi": "ein Autobauer", "volkswagen": "ein Autobauer", "porsche": "ein Autobauer",
+          "aldi": "ein Discounter", "lidl": "ein Discounter", "rewe": "ein Supermarkt", "edeka": "ein Supermarkt", "starbucks": "eine Kaffeekette",
+          "red bull": "ein Energydrink", "temu": "ein Online-Shop", "shein": "ein Online-Shop", "zalando": "ein Online-Shop", "twitch": "ein Streamingportal"}
+_BRAND_RE = re.compile(r"(?i)(?<![\wäöüß])(?:giganten wie |firmen wie |konzerne wie |unternehmen wie |wie )?(" + "|".join(re.escape(b) for b in sorted(BRANDS, key=len, reverse=True)) + r")(?:s)?(?![\wäöüß])")
+
+
+def strip_brands(js):
+    """Marken- und Firmennamen aus allem Gesprochenen und Eingeblendeten entfernen (allgemeine Umschreibung statt Name)."""
+    hit = set()
+
+    def conv(v):
+        def rep(m):
+            hit.add(m.group(1).lower())
+            pre = m.group(0)[:m.start(1) - m.start(0)]
+            gen = BRANDS[m.group(1).lower()]
+            if pre.lower().endswith("wie "):                      # „Giganten wie X“ → „große Tech-Konzerne“ / „… wie <Umschreibung>“
+                return "große Konzerne" if pre.lower() != "wie " else "wie " + gen
+            if m.start(0) == 0 or m.string[:m.start(0)].rstrip()[-1:] in ".!?":
+                gen = gen[0].upper() + gen[1:]
+            return gen.upper() if m.group(0).isupper() and len(m.group(0)) > 3 else gen
+        return _BRAND_RE.sub(rep, v)
+
+    def walk(o):
+        if isinstance(o, dict):
+            return {k: (walk(v) if k not in ("place", "backdrop", "props", "actors", "cast", "sfx", "camera", "shot", "mood", "crowd", "time", "weather", "type", "wishes", "hashtags", "tags") else v) for k, v in o.items()}
+        if isinstance(o, list):
+            return [walk(v) for v in o]
+        return conv(o) if isinstance(o, str) else o
+    out = walk(js)
+    if hit:
+        ai.log("Markennamen im Drehbuch umschrieben: " + ", ".join(sorted(hit)))
+    return out
 
 
 def fix_umlauts(js):
@@ -323,6 +367,24 @@ def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
             ai.log(f"Verlängern nicht möglich ({e}) – nehme den ersten Entwurf")
     try:
         js = fix_umlauts(js)
+        found = sorted({m.group(1) for sc_ in js.get("scenes", []) if isinstance(sc_, dict) for m in _BRAND_RE.finditer(str(sc_.get("text") or ""))}
+                       | {m.group(1) for m in _BRAND_RE.finditer(str(js.get("title") or ""))})
+        if found:                                        # sauber neu formulieren lassen; das Ersetzen unten ist nur das Sicherheitsnetz
+            ai.log("Drehbuch nennt Marken (" + ", ".join(found) + ") – lasse es ohne Markennamen neu formulieren")
+            try:
+                n0 = sum(len(str(x.get("text", "")).split()) for x in js.get("scenes", []) if isinstance(x, dict))
+                js2, provider = ai.chat_json(SYSTEM, user + "\n\nACHTUNG: Dein letzter Entwurf nannte diese Marken-/Firmennamen: " + ", ".join(found)
+                                             + ". Schreibe das Drehbuch neu, gleich lang, OHNE jeden Marken-, Firmen-, Produkt- oder App-Namen – "
+                                             "umschreibe sie allgemein und grammatisch sauber (auch in Titel, Beschreibung, Hashtags und Einblendungen).", 0.7)
+                n2 = sum(len(str(x.get("text", "")).split()) for x in js2.get("scenes", []) if isinstance(x, dict))
+                if n2 >= n0 * 0.85:
+                    js = fix_umlauts(js2)
+            except Exception as e:  # noqa: BLE001
+                ai.log(f"Neu formulieren nicht möglich ({e})")
+        js = strip_brands(js)
+        for k in ("hashtags", "tags"):                  # Marken-Hashtags fliegen ganz raus
+            if isinstance(js.get(k), list):
+                js[k] = [t for t in js[k] if isinstance(t, str) and not _BRAND_RE.search(t.replace("#", " "))]
     except Exception:  # noqa: BLE001
         pass
     sc = [s for s in js.get("scenes", []) if isinstance(s, dict) and str(s.get("text", "")).strip()]

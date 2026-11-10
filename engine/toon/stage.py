@@ -471,6 +471,10 @@ def find_figure(text):
     return {"type": "counter", "label": "", "value": best[1], "unit": best[2]}
 
 
+def has_ov0(sc):
+    return isinstance(sc.get("overlay"), dict) and str(sc["overlay"].get("type") or "") in TALL_OV + ("choice",)
+
+
 def _lib_props():
     try:
         from . import library
@@ -491,6 +495,8 @@ def direct(scenes, times, topic="", style=""):
     used = {}
     fig_prev, inserts, counters = False, 0, 0
     topic_things = [k for pat, k in _lib_props() + TEXT_PROPS if _re0.search(pat, str(topic or "").lower()) and extras.prop_fit(k)][:2]
+    topic_any = [k for pat, k in _lib_props() + TEXT_PROPS if _re0.search(pat, str(topic or "").lower())][:2]   # auch Himmel/Natur
+    stale, topic_ins = 0, 0
     for i, (sc, (s0, e0)) in enumerate(zip(scenes, times)):
         sanitize(sc)
         if spooky:                                        # Grusel und Rätsel spielen im Dunkeln; Stimmung unheimlich, keine Passanten
@@ -702,9 +708,25 @@ def direct(scenes, times, topic="", style=""):
                 sc["crowd"] = sc.get("crowd") or {"panic": "panic", "tense": "worried", "sad": "sad", "happy": "cheer"}.get(str(sc.get("mood") or ""), "walk")
             elif spooky and not (i and scenes[i - 1].get("shot") == "close"):
                 sc["shot"] = "close"                    # Grusel: Nahaufnahme des erschrockenen Gesichts statt Totale
-            elif topic_things and inserts < 4:          # das Ding, um das sich das Video dreht, groß im Bild
-                sc["props"] = [{"type": topic_things[inserts % len(topic_things)]}]
-                sc["shot"], inserts = "insert", inserts + 1
+            elif not has_ov0(sc):                       # Wohnraum ohne eigenen Gegenstand: reihum Abwechslung
+                stale += 1
+                step = stale % 4
+                prev_close = bool(i and scenes[i - 1].get("shot") == "close")
+                if step == 1 and topic_any and topic_ins < 2:                 # das Ding, um das sich das Video dreht, groß im Bild
+                    sc["props"] = [{"type": topic_any[topic_ins % len(topic_any)]}]
+                    sc["shot"], topic_ins = "insert", topic_ins + 1
+                elif step == 2:                                                # Blick nach draußen: Straße, Menschen, das Thema am Himmel
+                    sc["place"], sc["backdrop"] = "street", None
+                    sc["actors"], sc["shot"] = [], "event"
+                    sc["props"] = [{"type": k} for k in topic_any[:1]]
+                    sc["crowd"] = {"panic": "panic", "tense": "worried", "sad": "sad", "happy": "cheer", "scary": ""}.get(str(sc.get("mood") or ""), "walk")
+                    place = "street"
+                elif step in (1, 3) and not prev_close:
+                    sc["shot"] = "close"
+                else:
+                    acts[0].update(action="walk", pos="offright" if stale % 8 < 4 else "offleft", to="center")
+        if topic_any and rp2 in places.OUTDOOR and not sc.get("props") and sc.get("shot") != "close" and i % 2 == 0 and not last:
+            sc["props"] = [{"type": topic_any[0]}]        # das Thema bleibt im Bild (z. B. die Drohne über der Straße)
         fig_prev = bool([a for a in (sc.get("actors") or []) if isinstance(a, dict)]) and sc.get("shot") != "insert"
         # --- beeindruckende Zahl im Satz → Zähler, wenn das Drehbuch keine Einblendung vorsieht
         if not sc.get("overlay") and counters < 3 and not last:
@@ -788,12 +810,12 @@ MOOD_HINTS = [
 ]
 INDOOR = ("bedroom", "livingroom", "kitchen", "office", "classroom", "lab", "hospital", "basement", "cave", "underwater", "space")
 MAPS = ("germany", "worldmap")
-OUTDOOR_THINGS = ("fire", "smoke", "volcano", "meteor", "tornado", "lightning", "flood", "crack", "wave", "explosion", "car", "bus", "truck",
+OUTDOOR_THINGS = ("drone", "cctv", "fire", "smoke", "volcano", "meteor", "tornado", "lightning", "flood", "crack", "wave", "explosion", "car", "bus", "truck",
                   "plane", "satellite", "rocket", "ufo", "aurora", "ice", "ship", "bike", "tent", "trafficlight", "house", "tree", "solarpanel",
                   "pile", "sandpile", "trash", "barrel", "generator")
 DULL = ("table", "shelf", "streetlamp", "rock", "box")          # allein als Großaufnahme langweilig
 INDOOR_THINGS = ("faucet", "glass", "candle", "cans", "clock", "door", "fridge", "tv", "computer", "shelf", "cart", "table", "money")
-TEXT_PROPS = [(r"zucker|\bsalz\b", "pile"), (r"\bsand\b", "sandpile"), (r"\bmüll|abfall|plastik", "trash"), (r"wasserhahn|trinkwasser|leitungswasser", "faucet"),
+TEXT_PROPS = [(r"drohne", "drone"), (r"überwachungskamera|kameras? (erfass|film|beobacht)|überwacht|überwachung", "cctv"), (r"zucker|\bsalz\b", "pile"), (r"\bsand\b", "sandpile"), (r"\bmüll|abfall|plastik", "trash"), (r"wasserhahn|trinkwasser|leitungswasser", "faucet"),
               (r"\bglas\b|\bgläser|trinken|getränk|\bdurst", "glass"), (r"kerze", "candle"), (r"konserve|vorrät|dosen", "cans"), (r"benzin|kanister|sprit", "canister"),
               (r"\bautos?\b|\bstau\b", "car"), (r"\bbus\b|busse", "bus"), (r"lkw|lastwagen|lieferung|lieferkette", "truck"), (r"flugzeug|flieger|\bflüge", "plane"),
               (r"satellit|\bgps\b", "satellite"), (r"rakete", "rocket"), (r"\bgeld|\beuro\b|kosten|teuer|preise|milliarden euro|bezahl", "money"),
