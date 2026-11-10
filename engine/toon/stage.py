@@ -62,6 +62,8 @@ def sanitize(sc):
     sc["text"] = sc.get("text") if isinstance(sc.get("text"), str) else ""
     for k in ("time", "weather", "crowd", "mood", "shot"):
         sc[k] = word(sc.get(k)).lower()
+    if sc["shot"] not in ("event", "close", "insert"):
+        sc["shot"] = ""                                   # "wide" und Unbekanntes = normale Einstellung
     if not isinstance(sc.get("place"), str):
         sc["place"] = ""
     b = sc.get("backdrop")
@@ -409,6 +411,7 @@ def direct(scenes, times):
     power_out = False
     last_id = None
     maps_used = 0
+    used = {}
     import re as _re0
     for i, (sc, (s0, e0)) in enumerate(zip(scenes, times)):
         sanitize(sc)
@@ -416,7 +419,8 @@ def direct(scenes, times):
         place = places.resolve(sc.get("place"))
         has_bd = isinstance(sc.get("backdrop"), dict) and (sc["backdrop"].get("elements") or sc["backdrop"].get("ground"))
         hint = None if has_bd else _hint(sc.get("text"))
-        if hint is not None and (place in GENERIC or str(sc.get("shot") or "") == "event"):
+        used[place] = used.get(place, 0) + 1
+        if hint is not None and (place in GENERIC or str(sc.get("shot") or "") == "event" or used[place] >= 3):   # ab dem dritten Mal am selben Ort darf der Text den Schauplatz wechseln
             if isinstance(hint, dict):               # passende Landschaft aus dem Baukasten
                 if place != "custom":
                     sc["backdrop"] = hint
@@ -432,6 +436,26 @@ def direct(scenes, times):
             sc["actors"], sc["props"], sc["crowd"], sc["weather"] = [], [], "", ""
             sc["shot"] = "" if str(sc.get("shot") or "") in ("close", "insert", "event") else sc.get("shot")
             acts = []
+        txt0 = str(sc.get("text") or "").lower()
+        if len(sc.get("props") or []) < 2 and str(sc.get("shot") or "") != "close":       # was der Satz nennt, ist auch zu sehen
+            have = {extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) for q in (sc.get("props") or [])}
+            for pat, kind in TEXT_PROPS:
+                if kind not in have and _re0.search(pat, txt0):
+                    if kind in INDOOR_THINGS and (places.resolve(backdrop(sc)) in places.OUTDOOR):
+                        if used.get(place, 0) < 3 or sc.get("overlay") or sc.get("shot"):
+                            continue                       # Zimmer-Dinge stehen nicht in der Landschaft …
+                        sc["shot"] = "insert"              # … aber als Großaufnahme lockern sie einen oft gezeigten Ort auf
+                        sc["props"] = []
+                    sc["props"] = (sc.get("props") or []) + [{"type": kind}]
+                    have.add(kind)
+                    if len(sc["props"]) >= 2:
+                        break
+        if _re0.search(r"wespe|biene|insekten", txt0) and len(acts) < 2 and not any(a.get("kind") for a in acts) and "actors" in sc:
+            sc["actors"] = acts = acts + [{"id": "_biene", "kind": "bee", "action": "idle", "pos": "right", "speaks": False}]
+        if places.resolve(backdrop(sc)) == "underwater":          # unter Wasser schwimmen Fische, keine Menschen
+            for a in acts:
+                if not a.get("kind"):
+                    a["kind"] = "fish"
         home = {"shelf": "supermarket", "cart": "supermarket", "fridge": "kitchen", "tv": "livingroom", "computer": "office"}
         for q in (sc.get("props") or []):
             k = str(q.get("type") if isinstance(q, dict) else q).lower().strip()
@@ -528,7 +552,7 @@ def direct(scenes, times):
                                         "emotion": MOOD_EMOTION.get(mood, "")}]
         # Gegenstand groß zeigen statt dritter Rede-Szene im selben Zimmer
         things = [q for q in (sc.get("props") or []) if extras.prop_fit(q.get("type") if isinstance(q, dict) else q)]
-        if (not outdoor and things and not has_ov and not sc.get("shot") and not sc.get("crowd") and len(acts) <= 1
+        if ((not outdoor or used.get(place, 0) >= 3) and things and not has_ov and not sc.get("shot") and (outdoor or not sc.get("crowd")) and len(acts) <= 1
                 and all(str(a.get("action") or "talk").lower() in ("talk", "idle", "") for a in acts)
                 and not (i and str(scenes[i - 1].get("shot") or "") == "insert")):
             sc["shot"] = "insert"
@@ -586,7 +610,7 @@ HINTS = [
     (r"gletscher|eiszeit|arktis|antarktis|polkappe|\beis\b", {"ground": "snow", "elements": ["glacier", "mountains"]}),
     (r"\bschnee|\bwinter", "snow"),
     (r"\bmeer|ozean|küste|strand|wellen", "beach"),
-    (r"tiefsee|unter wasser|meeresgrund|korallen", "underwater"),
+    (r"tiefsee|unter wasser|meeresgrund|korallen|\bfisch|unter der oberfläche|im wasser leb|tauch", "underwater"),
     (r"wüste|sahara|sanddüne", "desert"),
     (r"vulkan|gebirge|\bberg|gipfel", "mountain"),
     (r"weltall|weltraum|galaxie|planet|umlaufbahn|astronaut|\bmond\b|sonnensystem", "space"),
@@ -616,6 +640,18 @@ MOOD_HINTS = [
 ]
 INDOOR = ("bedroom", "livingroom", "kitchen", "office", "classroom", "lab", "hospital", "basement", "cave", "underwater", "space")
 MAPS = ("germany", "worldmap")
+INDOOR_THINGS = ("faucet", "glass", "candle", "cans", "clock", "door", "fridge", "tv", "computer", "shelf", "cart", "table", "money")
+TEXT_PROPS = [(r"zucker|\bsalz\b", "pile"), (r"\bsand\b", "sandpile"), (r"\bmüll|abfall|plastik", "trash"), (r"wasserhahn|trinkwasser|leitungswasser", "faucet"),
+              (r"\bglas\b|\bgläser|trinken|getränk|\bdurst", "glass"), (r"kerze", "candle"), (r"konserve|vorrät|dosen", "cans"), (r"benzin|kanister|sprit", "canister"),
+              (r"\bautos?\b|\bstau\b", "car"), (r"\bbus\b|busse", "bus"), (r"lkw|lastwagen|lieferung|lieferkette", "truck"), (r"flugzeug|flieger|\bflüge", "plane"),
+              (r"satellit|\bgps\b", "satellite"), (r"rakete", "rocket"), (r"\bgeld|\beuro\b|kosten|teuer|preise|milliarden euro|bezahl", "money"),
+              (r"solar", "solarpanel"), (r"generator|notstrom|aggregat", "generator"), (r"\bfeuer|\bbrenn|\bbrand|flammen", "fire"), (r"\brauch\b|qualm", "smoke"),
+              (r"vulkan|lava", "volcano"), (r"meteor|asteroid|komet", "meteor"), (r"tornado|wirbelsturm", "tornado"), (r"gewitter|\bblitz", "lightning"),
+              (r"überschwemm|\bflut|hochwasser", "flood"), (r"erdbeben|boden reißt", "crack"), (r"tsunami|riesenwelle", "wave"), (r"explo", "explosion"),
+              (r"\bufo|außerirdisch", "ufo"), (r"polarlicht", "aurora"), (r"eisberg|\beis schmilzt", "ice"), (r"\bschiff|\bboot", "ship"),
+              (r"fahrrad", "bike"), (r"kühlschrank", "fridge"), (r"einkaufswagen", "cart"), (r"\btür\b|klopft", "door"), (r"\buhr\b|uhrzeit", "clock"),
+              (r"\bfass|fässer|\böl\b", "barrel"), (r"\bzelt", "tent"), (r"ampel", "trafficlight"), (r"fernseh|nachrichten", "tv"), (r"computer|internet|server", "computer"),
+              (r"pflanze[n]? wachs|keim|\bsaat", "sprout")]
 MAP_HINTS = ((r"ganz deutschland|in deutschland|deutschlandweit|bundesweit|bundesländer|jeder deutsche|alle deutschen", "germany"),
              (r"weltweit|auf der ganzen welt|alle länder|rund um den globus|weltbevölkerung|alle kontinente|die ganze erde|die ganze welt", "worldmap"))
 PUBLIC_INDOOR = ("supermarket", "supermarket_empty", "station", "hospital", "office", "classroom", "restaurant")
