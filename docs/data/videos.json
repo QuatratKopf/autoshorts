@@ -408,5 +408,44 @@
   },
   "thumb": true,
   "mp4": true
+ },
+ {
+  "id": 18,
+  "category": "fakten",
+  "topic": "Wie ein Gewitter entsteht und warum Blitze so heiß sind",
+  "status": "rendered",
+  "created": 1794284474.414197,
+  "title": "Gewitter erklärt: Warum Blitze heisser als die Sonne sind",
+  "description": "Erfahre in siebzig Sekunden, wie ein Gewitter entsteht und warum ein einziger Blitz unfassbar heiß wird. Wir schauen uns die Physik hinter Krach und Lichtschlag an. Wovor hast du bei Gewitter am meisten Angst?",
+  "hashtags": [
+   "#shorts",
+   "#wissen",
+   "#fakten",
+   "#physik",
+   "#gewitter",
+   "#fyp",
+   "#viral",
+   "#lernen"
+  ],
+  "tags": [
+   "gewitter",
+   "blitz",
+   "donner",
+   "wie entsteht ein gewitter",
+   "physik fakten",
+   "wissenschaft",
+   "blitz temperatur",
+   "naturphänomene"
+  ],
+  "thumb_text": "HEISSER ALS SONNE",
+  "cover_ms": 79183,
+  "duration": 79.1,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "mp4": true
  }
 ]
