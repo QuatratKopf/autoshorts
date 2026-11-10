@@ -369,5 +369,44 @@
   },
   "thumb": true,
   "mp4": true
+ },
+ {
+  "id": 17,
+  "category": "whatif",
+  "topic": "Was wäre, wenn ein Supervulkan morgen ausbricht?",
+  "status": "rendered",
+  "created": 1794284079.7972896,
+  "title": "Supervulkan bricht aus: Was passiert wirklich?",
+  "description": "Was passiert, wenn ein Supervulkan ausbricht? Von den ersten Sekunden bis zum nuklearen Winter. Schreib in die Kommentare, ob du bereit wärst!",
+  "hashtags": [
+   "#shorts",
+   "#fyp",
+   "#viral",
+   "#wissenschaft",
+   "#vulkan",
+   "#natur",
+   "#fakten",
+   "#earth"
+  ],
+  "tags": [
+   "supervulkan",
+   "vulkanausbruch",
+   "erdkunde",
+   "wissenschaft",
+   "naturkatastrophe",
+   "physik",
+   "geologie",
+   "erde"
+  ],
+  "thumb_text": "SUPERVULKAN AUSBRUCH",
+  "cover_ms": 72704,
+  "duration": 72.6,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "mp4": true
  }
 ]
