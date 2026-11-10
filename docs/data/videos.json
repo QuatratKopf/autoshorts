@@ -1049,5 +1049,46 @@
   },
   "thumb": true,
   "mp4": true
+ },
+ {
+  "id": 36,
+  "category": "grusel",
+  "topic": "Das 'Offline-Zimmer' in Hotel 404 – Eine Urban Legend über einen Raum in bekannten deutschen Hotels, den kein Navi kennt und in dem dein Handy plötzlich Fotos zeigt, die du nie gemacht hast.",
+  "status": "rendered",
+  "created": 1794308716.3609612,
+  "title": "Das Offline Zimmer in Hotel 404",
+  "description": "Eine unheimliche Urban Legend über ein verstecktes Zimmer in deutschen Hotels, das kein Navi findet. Warum zeigt dein Handy dort plötzlich Fotos, die du nie gemacht hast? Schreib es in die Kommentare.",
+  "hashtags": [
+   "#shorts",
+   "#fyp",
+   "#viral",
+   "#grusel",
+   "#urbanlegend",
+   "#hotel404",
+   "#kreepytok",
+   "#geheimnis"
+  ],
+  "tags": [
+   "hotel 404",
+   "offline zimmer",
+   "urban legend",
+   "gruselgeschichte",
+   "versteckter raum",
+   "handy fotos",
+   "deutschland",
+   "gruselig",
+   "mysterium",
+   "creepypasta"
+  ],
+  "thumb_text": "KEIN WEG ZURÜCK",
+  "cover_ms": 74141,
+  "duration": 74.0,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "mp4": true
  }
 ]
