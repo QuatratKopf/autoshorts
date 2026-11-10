@@ -195,7 +195,7 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None):
                          script.get("hud"), script.get("countdown"), 480 if toon else 560)
         v["cover_ms"] = render.render(work, scenes, times, voice, ass, final, render.pick_music(cat["slug"]),
                                       float(cfg("music_volume") or 0.1), cover,
-                                      float(cfg("sfx_volume") if cfg("sfx_volume") is not None else 0.35))
+                                      float(cfg("sfx_volume") if cfg("sfx_volume") is not None else 0.35), cat["slug"])
         Image.open(cover or (work / "img00.jpg")).resize((360, 640)).save(THUMBS / f"{vid}.jpg", quality=82)
         v.update(status="rendered", duration=round(total + 0.35, 1), providers=used, thumb=True)
         v["mp4"] = publish_mp4([final, cover] if cover else final)

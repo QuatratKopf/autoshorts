@@ -207,6 +207,45 @@ def make_sfx(work: Path):
     return out
 
 
+NOTE = {"C": 261.63, "D": 293.66, "E": 329.63, "F": 349.23, "G": 392.0, "A": 440.0, "B": 493.88}
+MOODS = {   # Akkordfolge (je 4 s), Tempo der Melodietöne, Klangfarbe
+    "hell": ([("C", "E", "G"), ("G", "B", "D"), ("A", "C", "E"), ("F", "A", "C")], 0.5),
+    "spannend": ([("A", "C", "E"), ("F", "A", "C"), ("C", "E", "G"), ("G", "B", "D")], 0.5),
+    "dunkel": ([("A", "C", "E"), ("D", "F", "A"), ("A", "C", "E"), ("E", "G", "B")], 0.0),
+}
+MOOD_OF = {"grusel": "dunkel", "mysterien": "dunkel", "whatif": "spannend", "storys": "spannend"}
+
+
+def synth_music(work: Path, slug: str):
+    """Erzeugt eine dezente, lizenzfreie Hintergrundmusik (weiche Akkorde + leise Melodietöne), wenn keine Datei da ist."""
+    chords, step = MOODS[MOOD_OF.get(slug, "hell")]
+    dark = step == 0.0
+    terms = []
+    for i, ch in enumerate(chords):
+        gate = f"eq(floor(mod(t,16)/4),{i})*(0.5-0.5*cos(2*PI*mod(t,4)/4))"
+        for n in ch:
+            f = NOTE[n] / (4 if dark else 2)
+            terms.append(f"0.11*sin(2*PI*{f:.2f}*t)*{gate}")
+            terms.append(f"0.04*sin(2*PI*{f * 2:.2f}*t)*{gate}")
+    if step:
+        k = 0
+        for i, ch in enumerate(chords):
+            for j in range(8):
+                f = NOTE[ch[(j * 2 + i) % 3]] * (2 if j % 4 == 3 else 1)
+                terms.append(f"0.07*sin(2*PI*{f:.2f}*t)*eq(floor(mod(t,16)/{step}),{k})*exp(-7*mod(t,{step}))")
+                k += 1
+    else:
+        terms.append("0.10*sin(2*PI*55*t)*(0.6+0.4*sin(2*PI*0.11*t))")
+    out = work / "music.wav"
+    try:
+        ff(["-f", "lavfi", "-i", f"aevalsrc='{'+'.join(terms)}':s=44100:d=16",
+            "-af", "lowpass=f=2400,aecho=0.8:0.7:90|180:0.35|0.2,volume=2.2", "-ac", "2", str(out)])
+        return out
+    except RuntimeError as e:
+        log(f"Hintergrundmusik übersprungen: {e}")
+        return None
+
+
 def pick_music(slug):
     for d in (MUSIC_DIR / slug, MUSIC_DIR):
         if d.is_dir():
@@ -221,7 +260,7 @@ def pick_music(slug):
 TRANSITIONS = ("fade", "slideleft", "fade", "smoothup", "fade", "slideright", "circleopen")
 
 
-def render(work: Path, scenes, times, voice, ass, out, music=None, music_volume=0.10, cover=None, sfx_volume=0.35):
+def render(work: Path, scenes, times, voice, ass, out, music=None, music_volume=0.10, cover=None, sfx_volume=0.35, slug=""):
     """Gibt die Stelle (ms) zurück, an der das Cover-Bild im Video steht (für TikTok), sonst None."""
     n = len(scenes)
     durs = [(e - s) for s, e in times]
@@ -269,6 +308,8 @@ def render(work: Path, scenes, times, voice, ass, out, music=None, music_volume=
     parts, mix = [], ["[vo]"]
     parts.append("[1:a]apad=pad_dur=0.8[vo]")
     idx = 2
+    if not music and music_volume > 0:
+        music = synth_music(work, slug)
     if music:
         args += ["-stream_loop", "-1", "-i", str(music)]
         parts.append(f"[{idx}:a]volume={music_volume},afade=t=in:d=1[m]")
