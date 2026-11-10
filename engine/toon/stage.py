@@ -201,6 +201,9 @@ def direct(scenes, times):
     for i, (sc, (s0, e0)) in enumerate(zip(scenes, times)):
         acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
         place = places.resolve(sc.get("place"))
+        if place == "plain":      # unbekannter Ort im Drehbuch → beim letzten Ort bleiben (draußen: Park), nie ein leerer Raum
+            place = prev_place or "park"
+            sc["place"] = place
         has_ov = isinstance(sc.get("overlay"), dict) and sc["overlay"].get("type")
         lone = len(acts) == 1 and str(acts[0].get("action") or "talk").lower() in ("talk", "idle", "") and not acts[0].get("to")
         if place != prev_place:

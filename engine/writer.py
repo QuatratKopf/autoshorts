@@ -79,6 +79,7 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
 - In jeder Szene:
   "place": bedroom, livingroom, kitchen, office, classroom, lab, hospital, basement, street, park, forest, beach, desert,
            snow, mountain, cave, underwater, space
+           (genau eines dieser Wörter – jede Szene braucht einen Ort aus dieser Liste, auch Ereignis-Einstellungen)
   "time": "day" oder "night"
   "weather": rain, storm, snow, wind, heat, dark, ash (Ascheregen), quake (Erdbeben: Bild wackelt) oder ""
   "props": 0–2 Requisiten aus: tree, rock, box, car, fire, tv, computer, money, rocket, ufo, meteor, explosion, earth, sun,
