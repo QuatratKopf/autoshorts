@@ -973,5 +973,42 @@
   "status": "error",
   "created": 1794305800.1761105,
   "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-flash-lite-latest: HTTP 503 | pollinations: Pollinations-Text HTTP 400: {\"success\":false,\"error\":{\"message\":\"The model exhausted its output token limit before producing an answer. Increase the token limit or reduce reasoning effort.\",\"code\":\"output_token_limit_exceeded\",\"timestamp\":\"2026-11-10T10:17:37.592Z\",\"details\":{\"name\":\"UpstreamError\",\"upstreamHost\":\"portkey.myce"
+ },
+ {
+  "id": 34,
+  "category": "whatif",
+  "topic": "Was wäre, wenn es auf der Erde keine Bienen mehr gäbe?",
+  "status": "rendered",
+  "created": 1794306062.251252,
+  "title": "Was wenn alle Bienen plötzlich verschwinden?",
+  "description": "Was würde passieren, wenn von heute auf morgen alle Bienen auf der Erde aussterben? Wir spielen die katastrophalen Folgen für unsere Nahrung und das Ökosystem durch. Würdest du ohne Schokolade überleben?",
+  "hashtags": [
+   "#shorts",
+   "#whatif",
+   "#bienen",
+   "#wissen",
+   "#fakten",
+   "#fyp",
+   "#viral"
+  ],
+  "tags": [
+   "bienen aussterben",
+   "what if deutsch",
+   "naturfakten",
+   "umwelt",
+   "zukunft",
+   "wissenschaft",
+   "bienensterben"
+  ],
+  "thumb_text": "KEINE BIENEN MEHR?",
+  "cover_ms": 78425,
+  "duration": 78.3,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "mp4": true
  }
 ]
