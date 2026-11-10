@@ -22,6 +22,7 @@ Regeln für die Sprechertexte:
   oder übertrieben jugendlich. Nie belehrend, nie wie für Kinder.
 - Erfundene Geschichten (Grusel, Lustiges) klar als Geschichte erzählen ('Stell dir vor …', 'Eine Legende erzählt …'):
   keine erfundenen 'echten' Ereignisse, Trends, Apps, Studien oder Personen als Tatsache ausgeben, und keine Titel wie 'Die Wahrheit über …' dafür.
+- Keine Videos über einzelne echte Personen (auch keine Promis): nimm das allgemeine Thema dahinter.
 - Keine Beleidigungen, nichts Anzügliches, keine echten Privatpersonen, keine Marken- oder Filmfiguren im Bild.
 - Baue Themen nie um urheberrechtlich geschützte Figuren, Filme, Serien, Spiele oder Marken (z. B. Godzilla, Pokémon,
   Marvel, Disney, Minecraft). Nimm stattdessen eigene, namenlose Wesen oder echte Natur/Wissenschaft (z. B. 'ein 100 Meter großes Monster').
@@ -96,7 +97,7 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
                 "emotion": "shocked", "props": ["meteor"], "weather": ""}  – der spannendste Moment als Titelbild.
 - "image" je Szene darf leer bleiben."""
 
-UNSUITABLE = ("Ungeeignet sind: Todesfälle, Unglücke, Verbrechen, Krieg, Terror, Krankheiten einzelner Personen, "
+UNSUITABLE = ("Ungeeignet sind: Themen, die sich um einzelne echte Personen drehen (Promis, Musiker, Sportler, Politiker, Creator), Todesfälle, Unglücke, Verbrechen, Krieg, Terror, Krankheiten einzelner Personen, "
               "Parteipolitik und Wahlen, Klatsch über Privatleben, Glücksspiel, geschützte Film-/Spielfiguren und Marken als Hauptthema, reine Sport-Ergebnisse ohne Hintergrundgeschichte "
               "und alles, was ohne Belege Spekulation wäre.")
 
