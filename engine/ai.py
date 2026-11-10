@@ -338,7 +338,11 @@ def listen(path):
         from faster_whisper import WhisperModel
         if _whisper is None:
             _whisper = WhisperModel("small", device="cpu", compute_type="int8")
-        segs, _ = _whisper.transcribe(str(path), language="de", word_timestamps=True, beam_size=2,
+        import numpy as np
+        raw = subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-i", str(path), "-f", "f32le", "-ac", "1",
+                              "-ar", "16000", "-"], capture_output=True, check=True).stdout
+        audio = np.frombuffer(raw, dtype=np.float32)      # selbst dekodieren: unabhängig von der Audio-Bibliothek des Modells
+        segs, _ = _whisper.transcribe(audio, language="de", word_timestamps=True, beam_size=2,
                                       condition_on_previous_text=False, vad_filter=False)
         heard = []
         for sg in segs:
