@@ -56,6 +56,34 @@ def due_slot(config=None, state=None, now=None):
     return None
 
 
+def plan_slot(config=None, state=None, now=None, force=False):
+    """Nächster Termin, für den schon jetzt Thema und Drehbuch vorbereitet werden sollen (bis 26 Stunden vorher) – so bleibt
+    Zeit, fehlende Dinge nachzubauen, bevor das Video entsteht. Gibt '2026-11-11 18:00' zurück oder None."""
+    config = config if config is not None else _load("config.json")
+    state = state if state is not None else _load("state.json")
+    settings = config.get("settings", {})
+    if not settings.get("autopilot", True) and not force:
+        return None
+    if settings.get("plan_ahead") is False and not force:
+        return None
+    now = now or dt.datetime.now(TZ)
+    done = set(state.get("done_slots", []))
+    best = None
+    for day in (now.date(), now.date() + dt.timedelta(days=1), now.date() + dt.timedelta(days=2)):
+        for h, m in parse_times(settings.get("upload_times", "18:00")):
+            slot = dt.datetime(day.year, day.month, day.day, h, m, tzinfo=TZ)
+            sid = slot.strftime("%Y-%m-%d %H:%M")
+            if slot > now and sid not in done and (force or slot - now <= dt.timedelta(hours=26)):
+                if best is None or sid < best:
+                    best = sid
+    return best
+
+
+def plan_due():
+    sid = plan_slot()
+    return bool(sid) and sid not in _load("plans.json")
+
+
 def stats_due(state=None):
     state = state if state is not None else _load("state.json")
     has_tokens = any((ROOT / "tokens").glob("*.enc"))
@@ -66,7 +94,7 @@ def main():
     action = (os.environ.get("IN_ACTION") or "auto").strip() or "auto"
     if action == "auto":
         slot = due_slot()
-        run, media = (1, 1) if slot else ((1, 0) if stats_due() else (0, 0))
+        run, media = (1, 1) if slot else ((1, 0) if (stats_due() or plan_due()) else (0, 0))
     else:
         run, media = 1, 1 if action == "make" else 0
     print(f"run={run}")

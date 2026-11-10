@@ -17,7 +17,7 @@ import time
 from PIL import Image
 
 from . import ai, render, thumbnail, trends, uploaders, writer
-from .schedule import due_slot, stats_due
+from .schedule import due_slot, plan_slot, stats_due
 from .state import load, CONFIG, OUT, STATE, THUMBS, VIDEOS, WORK, cat_trends, category, cfg, drop_token, log, save_all, video
 
 RELEASE = "videos"
@@ -96,8 +96,112 @@ def find_trend(trend_id):
     return None
 
 
-def make(category_slug=None, topic=None, upload=True, trend_id=None):
-    cat, topic, qid, qtrend = pick(category_slug, topic)
+def known_thing(word):
+    """Kann die Engine das zeichnen? (Requisite, Gegenstand in der Hand, Wesen, Ort, Landschafts-Baustein, gelernte Bibliothek)"""
+    from .toon import extras, places, stage
+    w = str(word or "").lower().strip()
+    if len(w) < 3:
+        return True
+    pool = (set(extras.PROPS) | set(extras.PROP_ALIASES) | set(extras.HELD) | set(extras.CREATURES) | set(places.PLACES) | set(places.ALIASES)
+            | set(places.OUTDOOR_SPECS) | set(places.EL_ALIASES) | set(places.BACK) | set(places.MID) | set(places.FRONT_EL)
+            | {"mensch", "menschen", "leute", "person", "personen", "figur", "mann", "frau", "kind", "kinder", "menge", "familie",
+               "katze", "hund", "spinne", "geist", "roboter", "vogel", "vögel", "dinosaurier", "fisch", "fische", "hai", "biene", "bienen",
+               "wespe", "himmel", "boden", "licht", "dunkelheit", "nacht", "regen", "schnee", "sturm", "wind", "nebel", "erdbeben", "hitze"})
+    forms = {w, w.rstrip("n"), w.rstrip("en"), w.rstrip("e"), w.rstrip("s"), w + "e", w + "n", w + "en"}
+    if forms & pool:
+        return True
+    if any(len(k) >= 4 and (k in w or (len(w) >= 5 and w in k)) for k in pool):
+        return True
+    import re as _re
+    return any(_re.search(pat, w) for pat, _ in stage.TEXT_PROPS + stage._lib_props()) or any(_re.search(pat, w) for pat, _ in stage.HINTS)
+
+
+def missing_things(script, topic):
+    """Was braucht dieses Video, das die Engine (noch) nicht zeichnen kann? Wünsche des Drehbuchs + Gegenprobe zum Thema."""
+    from .state import load
+    from .toon import library
+    library.load_all(load("shapes.json", {}))
+    words = [w for w in (script.get("wishes") or []) if isinstance(w, str)]
+    try:
+        words += writer.needed_things(topic, script)
+    except Exception as e:  # noqa: BLE001
+        log(f"Gegenprobe zum Thema nicht möglich ({e})")
+    out = []
+    for w in words:
+        k = w.strip().lower()
+        if k and k not in out and not known_thing(k):
+            out.append(k)
+    return out[:6]
+
+
+def draft(cat, topic, trend, v=None):
+    """Thema finden und Drehbuch schreiben (ohne Ton und Bild)."""
+    v = v if v is not None else {}
+    if not topic and want_trend(cat):
+        log("Schaue, was gerade im Trend ist …")
+        try:
+            topic, trend = writer.trend_topic(cat)
+        except Exception as e:  # noqa: BLE001
+            log(f"Trend-Auswahl fehlgeschlagen ({e}) – nehme ein zeitloses Thema")
+        if trend:
+            log(f"Trend: {trend['title']} ({trend['source']})")
+            v["trend"] = {"title": trend["title"], "source": trend["source"]}
+        else:
+            log("Kein passender Trend für diese Kategorie – nehme ein zeitloses Thema")
+    if not topic:
+        log("Suche ein neues Thema …")
+        topic = writer.new_topic(cat)
+    v["topic"] = topic
+    log(f"Thema: {topic}")
+    log("Schreibe Drehbuch …")
+    script, provider = writer.write_script(cat, topic, trend)
+    return topic, trend, script, provider
+
+
+def note_wishes(words, title):
+    from .state import load, save
+    wl = load("wishes.json", {})
+    for w in words:
+        k = w.strip().lower()
+        if k:
+            wl[k] = {"n": wl.get(k, {}).get("n", 0) + 1, "last": title}
+    save("wishes.json", wl)
+
+
+def prepare(slot):
+    """Vorproduktion: Thema und Drehbuch für den nächsten Termin schon jetzt festlegen und aufschreiben, was der Engine dafür
+    fehlt – so kann es bis zum Termin nachgebaut werden, bevor das Video entsteht und hochgeladen wird."""
+    from .state import load, save
+    plans = load("plans.json", {})
+    if slot in plans:
+        return plans[slot]
+    cat, topic, qid, qtrend = pick(None, None)
+    log(f"Vorproduktion für {slot}: {cat['emoji']} {cat['name']}")
+    topic, trend, script, provider = draft(cat, topic, qtrend)
+    if qid:
+        STATE["used_queue"].append(qid)
+    STATE["last_category"] = cat["slug"]
+    needs = missing_things(script, topic) if script.get("toon") else []
+    plans[slot] = {"category": cat["slug"], "topic": topic, "trend": trend, "script": script, "provider": provider,
+                   "needs": needs, "title": script.get("title"), "created": time.time()}
+    for k in sorted(plans)[:-4]:                          # nur die letzten Pläne aufheben
+        plans.pop(k, None)
+    save("plans.json", plans)
+    if needs:
+        note_wishes(needs, script.get("title") or topic)
+        log("Für dieses Video muss noch gebaut werden: " + ", ".join(needs))
+    else:
+        log("Für dieses Video ist alles vorhanden.")
+    return plans[slot]
+
+
+def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None):
+    plan = plan or {}
+    if plan.get("script") and category(plan.get("category")):
+        cat, topic, qid, qtrend = category(plan["category"]), plan.get("topic"), None, plan.get("trend")
+    else:
+        plan = {}
+        cat, topic, qid, qtrend = pick(category_slug, topic)
     STATE["last_category"] = cat["slug"]
     vid = max([int(STATE.get("next_id") or 1)] + [int(v["id"]) + 1 for v in VIDEOS])
     STATE["next_id"] = vid + 1
@@ -113,39 +217,28 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None):
         v["trend"] = {"title": trend["title"], "source": trend["source"]}
     log(f"Kategorie: {cat['emoji']} {cat['name']}")
     try:
-        if not topic and want_trend(cat):
-            log("Schaue, was gerade im Trend ist …")
-            try:
-                topic, trend = writer.trend_topic(cat)
-            except Exception as e:  # noqa: BLE001
-                log(f"Trend-Auswahl fehlgeschlagen ({e}) – nehme ein zeitloses Thema")
-            if trend:
-                log(f"Trend: {trend['title']} ({trend['source']})")
-                v["trend"] = {"title": trend["title"], "source": trend["source"]}
-            else:
-                log("Kein passender Trend für diese Kategorie – nehme ein zeitloses Thema")
-        if not topic:
-            log("Suche ein neues Thema …")
-            topic = writer.new_topic(cat)
-        v["topic"] = topic
-        if qid:
-            STATE["used_queue"].append(qid)
-        log(f"Thema: {topic}")
-
-        log("Schreibe Drehbuch …")
-        script, used["text"] = writer.write_script(cat, topic, trend)
+        if plan.get("script"):                           # vorbereitetes Drehbuch (am Vortag geplant, Fehlendes inzwischen nachgebaut)
+            script, used["text"] = plan["script"], plan.get("provider") or "Plan"
+            v["topic"] = topic
+            log(f"Thema (vorbereitet): {topic}")
+        else:
+            topic, trend, script, used["text"] = draft(cat, topic, trend, v)
+            if qid:
+                STATE["used_queue"].append(qid)
         scenes = script["scenes"]
         v.update(title=script["title"], description=script["description"], hashtags=script["hashtags"],
                  tags=script.get("tags", []), thumb_text=script["thumbnail"]["text"])
         log(f"Titel: {script['title']} · {len(scenes)} Szenen")
-        if script.get("wishes"):       # was der Engine für dieses Video gefehlt hat → Wunschliste für den nächsten Ausbau
-            from .state import load, save
-            wl = load("wishes.json", {})
-            for w in script["wishes"]:
-                k = w.strip().lower()
-                wl[k] = {"n": wl.get(k, {}).get("n", 0) + 1, "last": script["title"]}
-            save("wishes.json", wl)
-            log("Der Engine fehlte: " + ", ".join(script["wishes"]))
+        needs = []
+        if script.get("toon"):          # was fehlt der Engine für dieses Video (noch)?
+            needs = [w for w in (plan.get("needs") or []) if not known_thing(w)] if plan else missing_things(script, topic)
+            if needs and not plan:
+                note_wishes(needs, script["title"])
+            if needs:
+                log("Der Engine fehlt für dieses Video: " + ", ".join(needs))
+                script["wishes"] = needs
+            else:
+                script["wishes"] = []
         if script.get("toon"):          # lernende Bibliothek: Gelerntes laden, Fehlendes für dieses Video nachzeichnen lassen
             try:
                 from .state import load, save
@@ -159,6 +252,8 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None):
                         save("shapes.json", shapes)
             except Exception as e:  # noqa: BLE001 – die Bibliothek darf nie ein Video verhindern
                 log(f"Bibliothek übersprungen ({type(e).__name__}: {e})")
+            needs = [w for w in needs if not known_thing(w)]
+        v["missing"] = needs or None
 
         log("Spreche Text ein …")
         voice = work / "voice.mp3"
@@ -253,7 +348,12 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None):
         shutil.rmtree(work, ignore_errors=True)
         save_all()
 
-    if upload:
+    if upload and v.get("missing") and cfg("hold_missing") is not False:
+        v["status"] = "rendered"
+        v["error"] = "Nicht hochgeladen: Der Engine fehlt noch " + ", ".join(v["missing"]) + ". Nach dem Ausbau neu erstellen oder trotzdem von Hand hochladen."
+        log(v["error"])
+        save_all()
+    elif upload:
         uploaders.upload_video(v, final)
         save_all()
     return v
@@ -318,10 +418,16 @@ def main(argv=None):
                 save_all()
                 log(f"Autopilot: Video für {slot}")
                 try:
-                    make()
+                    make(plan=load("plans.json", {}).get(slot))
                 except Exception as e:  # noqa: BLE001
                     failed = True
                     log(f"FEHLER: {e}")
+            nxt = plan_slot(CONFIG, STATE)
+            if nxt and cfg("plan_ahead") is not False and nxt not in load("plans.json", {}):
+                try:
+                    prepare(nxt)
+                except Exception as e:  # noqa: BLE001 – ohne Plan wird das Video am Termin wie bisher frisch geschrieben
+                    log(f"Vorproduktion nicht möglich ({e})")
             if stats_due(STATE):
                 uploaders.refresh_stats()
                 try:
@@ -341,6 +447,10 @@ def main(argv=None):
                 raise SystemExit("Plattform fehlt")
             drop_token(plat)
             log(f"{plat} getrennt, Anmeldung und Zahlen gelöscht")
+        elif a.action == "prepare":      # nächsten Termin jetzt schon vorbereiten
+            nxt = plan_slot(CONFIG, STATE, force=True)
+            if nxt:
+                prepare(nxt)
         elif a.action == "learn":        # Gegenstände gezielt nachbauen lassen: --topic "Router, Mikroskop, Leiter"
             learn([w.strip() for w in a.topic.split(",") if w.strip()])
         elif a.action == "trends":

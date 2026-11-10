@@ -233,6 +233,17 @@ def strip_brands(js):
     return out
 
 
+def needed_things(topic, script):
+    """Gegenprobe: Welche greifbaren Dinge muss man für dieses Thema im Bild sehen? (kurze Liste deutscher Hauptwörter)"""
+    text = " ".join(str(sc.get("text") or "") for sc in script.get("scenes", []) if isinstance(sc, dict))[:1500]
+    js, _ = ai.chat_json(
+        "Du planst die Bilder für ein kurzes Cartoon-Erklärvideo. Antworte NUR mit JSON: {\"things\": [..]}.",
+        f"Thema: {topic}\nSprechertext: {text}\n\nNenne die 3 bis 6 wichtigsten greifbaren Dinge, Tiere oder Orte, die man in diesem Video "
+        "unbedingt sehen muss, damit das Thema erkennbar ist – jeweils ein deutsches Hauptwort in der Einzahl (z. B. \"Drohne\", "
+        "\"Wasserturm\", \"Mikroskop\"). Keine Gefühle, keine Vorgänge, keine Eigenschaften, keine Menschen, keine Marken.", 0.2)
+    return [w.strip() for w in (js.get("things") or []) if isinstance(w, str) and 2 < len(w.strip()) < 30][:6]
+
+
 def fix_umlauts(js):
     """Manche Ersatz-Modelle schreiben „fuer“, „Tuer“, „oeffnen“. Wenn im ganzen Drehbuch kein einziger Umlaut steht,
     werden die häufigen Wörter zurückverwandelt (nur bekannte Wortstämme, damit „neue“ oder „Feuer“ heil bleiben)."""

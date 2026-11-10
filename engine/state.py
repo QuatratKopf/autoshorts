@@ -131,6 +131,8 @@ DEFAULT_SETTINGS = {
     "main_character": DEFAULT_CHARACTER,
     "use_main_character": True,
     "subtitles_lowercase": True,
+    "plan_ahead": True,             # Thema und Drehbuch am Vortag festlegen, damit Fehlendes vor dem Video gebaut werden kann
+    "hold_missing": True,           # nicht hochladen, solange der Engine für das Video noch etwas fehlt
     "auto_learn": True,             # fehlende Gegenstände automatisch zeichnen lassen und in der Bibliothek behalten
     "caption_style": "impact",      # impact = schmale fette Großbuchstaben, orange Schlüsselwörter · classic = runde Schrift
     "music_volume": 0.10,
