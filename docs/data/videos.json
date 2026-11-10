@@ -1125,5 +1125,54 @@
   },
   "thumb": true,
   "mp4": true
+ },
+ {
+  "id": 38,
+  "category": "whatif",
+  "topic": "Was wäre, wenn wir alle von Drohnen im Alltag überwacht werden?",
+  "status": "published",
+  "created": 1794334099.7421703,
+  "trend": {
+   "title": "amazon ring drone camera",
+   "source": "Google Trends"
+  },
+  "title": "Was passiert, wenn Drohnen deinen Alltag komplett überwachen?",
+  "description": "Erfahre, wie autonome Überwachungsdrohnen zu Hause unseren Alltag verändern könnten. Wir blicken auf echte Techniktrends von Amazon und fragen: Wie viel Privatsphäre bleibt?",
+  "hashtags": [
+   "#shorts",
+   "#fyp",
+   "#viral",
+   "#tech",
+   "#zukunft",
+   "#überwachung",
+   "#drohne",
+   "#wissen"
+  ],
+  "tags": [
+   "drohnen im alltag",
+   "amazon ring",
+   "sicherheitstechnik",
+   "überwachung",
+   "zukunft",
+   "smarthome",
+   "privatsphäre",
+   "robotik"
+  ],
+  "thumb_text": "ÜBERWACHT AB JETZT",
+  "cover_ms": 64319,
+  "duration": 64.2,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "mp4": true,
+  "zernio_id": "6af35f19a7a2d73f3700cdb8",
+  "yt_status": "Zernio: published",
+  "yt_id": "SNHXqdsZAIU",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6af35f19a7a2d73f3700cdb8",
+  "error": null
  }
 ]

@@ -1,16 +1,16 @@
 {
- "last_category": "grusel",
+ "last_category": "whatif",
  "done_slots": [
   "2026-11-08 18:00"
  ],
  "used_queue": [],
  "last_stats": 1794317430.9254057,
- "next_id": 38,
+ "next_id": 39,
  "connected": {
   "youtube": {
    "name": "Wissens Wert 💬",
    "since": "2026-11-10"
   }
  },
- "voice_wps": 2.778
+ "voice_wps": 2.814
 }
