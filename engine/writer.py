@@ -199,7 +199,19 @@ def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
             + (f"Wiederkehrende Hauptfigur (nur wenn passend einbauen, in den Bild-Prompts immer gleich beschreiben): {char}\n" if char else "")
             + FORMAT + (TOON if toon else ""))
     js, provider = ai.chat_json(SYSTEM, user, 0.9)
-    sc = [s for s in js.get("scenes", []) if str(s.get("text", "")).strip()]
+    n_words = sum(len(str(x.get("text", "")).split()) for x in js.get("scenes", []) if isinstance(x, dict))
+    if n_words > words * 1.25:       # zu lang geraten → einmal straffen lassen
+        ai.log(f"Drehbuch hat {n_words} Wörter statt {words} – lasse es kürzen")
+        try:
+            js2, provider = ai.chat_json(SYSTEM, user + f"\n\nACHTUNG: Dein letzter Entwurf hatte {n_words} Wörter Sprechertext. "
+                                         f"Schreibe das Drehbuch neu mit HÖCHSTENS {words} Wörtern insgesamt – höchstens "
+                                         f"{max(6, round(words / scenes))} Wörter pro Szene, ein kurzer Satz je Szene.", 0.7)
+            n2 = sum(len(str(x.get("text", "")).split()) for x in js2.get("scenes", []) if isinstance(x, dict))
+            if 0 < n2 < n_words:
+                js = js2
+        except Exception as e:  # noqa: BLE001
+            ai.log(f"Kürzen nicht möglich ({e}) – nehme den ersten Entwurf")
+    sc = [s for s in js.get("scenes", []) if isinstance(s, dict) and str(s.get("text", "")).strip()]
     if len(sc) < 3:
         raise ai.ProviderError("Drehbuch hat zu wenige Szenen")
     raw_cast = js.get("cast") if isinstance(js.get("cast"), dict) else {}

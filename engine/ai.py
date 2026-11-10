@@ -393,16 +393,39 @@ def match_words(text, heard, total):
 
 
 def spoken_words(text, path):
-    """Wort-Zeiten für eine Aufnahme ohne Zeitstempel: abhören und abgleichen; weicht die Aufnahme stark vom Text ab,
-    gilt sie als misslungen (der Anbieter hat etwas anderes gesprochen)."""
+    """Wort-Zeiten für eine Aufnahme ohne Zeitstempel: abhören und abgleichen. Spricht der Anbieter davor oder danach
+    etwas Zusätzliches (z. B. die Regieanweisung), wird das weggeschnitten; weicht die Aufnahme sonst stark vom Text ab,
+    gilt sie als misslungen."""
     heard = listen(path)
     if not heard:
         return align_words(text, path)
-    words, ratio = match_words(text, heard, audio_duration(path))
+    total = audio_duration(path)
+    words, ratio = match_words(text, heard, total)
+    n_text = len(text.split())
+    # erster/letzter sicher erkannter Textteil → alles davor und danach abschneiden
+    import difflib
+    a = [_norm_word(w) for w in text.split()]
+    b = [_norm_word(h[0]) for h in heard]
+    blocks = [m for m in difflib.SequenceMatcher(None, a, b, autojunk=False).get_matching_blocks() if m.size >= 2]
+    if blocks:
+        first, last = blocks[0], blocks[-1]
+        lead_extra = first.b - first.a                       # gehörte Wörter vor dem Textanfang
+        tail_extra = (len(b) - (last.b + last.size)) - (len(a) - (last.a + last.size))
+        t0 = heard[first.b][1] - 0.12 if lead_extra > 3 else 0.0
+        t1 = heard[last.b + last.size - 1][2] + 0.35 if tail_extra > 3 else total
+        if t0 > 0.5 or t1 < total - 0.8:
+            tmp = str(path) + ".cut.mp3"
+            p = subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(path), "-ss", f"{max(0, t0):.2f}",
+                                "-to", f"{t1:.2f}", "-b:a", "160k", tmp], capture_output=True, text=True)
+            if p.returncode == 0:
+                os.replace(tmp, str(path))
+                log(f"Aufnahme zugeschnitten (vorn {max(0, t0):.1f} s, hinten {total - t1:.1f} s zusätzlich Gesprochenes entfernt)")
+                heard = [(w, s0 - max(0, t0), e0 - max(0, t0)) for w, s0, e0 in heard if s0 >= t0 - 0.05 and e0 <= t1 + 0.05]
+                total = audio_duration(path)
+                words, ratio = match_words(text, heard, total)
     log(f"Sprach-Abgleich: {round(ratio * 100)} % der Wörter erkannt")
-    n_text, n_heard = len(text.split()), len(heard)
-    if ratio < 0.7 or n_heard > n_text * 1.25 or n_heard < n_text * 0.7:
-        raise ProviderError(f"Aufnahme weicht vom Text ab ({round(ratio * 100)} % Treffer, {n_heard} statt {n_text} Wörter)")
+    if ratio < 0.7 or len(heard) > n_text * 1.2 or len(heard) < n_text * 0.7:
+        raise ProviderError(f"Aufnahme weicht vom Text ab ({round(ratio * 100)} % Treffer, {len(heard)} statt {n_text} Wörter)")
     return words
 
 
@@ -415,15 +438,11 @@ def _gemini_tts(text, out, cat):
         raise ProviderError("kein GEMINI_API_KEY")
     voice = cfg("gemini_voice") or GEMINI_VOICES.get(cat.get("slug"), "Charon")
     style = (cat.get("voice_instructions") or "Fesselnd und natürlich.").strip()
-    prompt = ("Sprich den folgenden deutschen Text als professioneller Erzähler für ein Kurzvideo. "
-              f"Stil: {style} Flüssig und natürlich wie ein Mensch, der eine Geschichte erzählt – mit Betonung, "
-              "kleinen Pausen an den Satzenden und lebendigem Tempo, nicht abgehackt, nicht vorgelesen. "
-              "Sprich jedes Wort deutlich und vollständig aus, ziehe keine Wörter zusammen und verschlucke keine Silben. "
-              "Sprich GENAU diesen Text Wort für Wort – nichts weglassen, nichts hinzufügen, nichts umformulieren, "
-              "nichts davor oder danach:\n\n" + text)
+    # kurze Regieanweisung: lange Anweisungen liest das Modell manchmal mit vor
+    prompt = f"Lies als deutscher Erzähler vor ({style} Flüssig, natürlich, jedes Wort deutlich):\n\n{text}"
     last = None
-    for model in [m for m in (cfg("gemini_tts_model"), "gemini-3.8-flash-tts", "gemini-3.1-flash-tts-preview",
-                              "gemini-2.5-flash-preview-tts") if m]:
+    for model in [m for m in (cfg("gemini_tts_model"), "gemini-3.8-flash-tts", "gemini-3.8-flash-tts",
+                              "gemini-3.1-flash-tts-preview", "gemini-2.5-flash-preview-tts") if m]:
         try:
             r = requests.post(f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
                               headers={"x-goog-api-key": key},
@@ -459,8 +478,9 @@ def _gemini_tts(text, out, cat):
                 last = f"{model}: {e}"
                 log(f"Gemini-Stimme {last} – neuer Versuch")
                 continue
-        except requests.RequestException as e:
-            last = f"{model}: {type(e).__name__}"
+        except Exception as e:  # noqa: BLE001  (Netzfehler, leere Antwort ohne Ton …)
+            last = f"{model}: {type(e).__name__} {str(e)[:80]}"
+            log(f"Gemini-Stimme {last} – neuer Versuch")
     raise ProviderError(f"Gemini-Stimme: {last}")
 
 
