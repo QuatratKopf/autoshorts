@@ -447,5 +447,44 @@
   },
   "thumb": true,
   "mp4": true
+ },
+ {
+  "id": 19,
+  "category": "fakten",
+  "topic": "Wie ein Gewitter entsteht und warum Blitze so heiß sind",
+  "status": "rendered",
+  "created": 1794285990.154579,
+  "title": "Wie heiß ist ein Blitz wirklich",
+  "description": "Erfahre, wie ein Gewitter entsteht und warum Blitze so heiß sind wie die Oberfläche der Sonne. Lass uns gemeinsam staunen und schreib in die Kommentare, ob du Angst vor Gewittern hast.",
+  "hashtags": [
+   "#shorts",
+   "#fyp",
+   "#viral",
+   "#wissen",
+   "#gewitter",
+   "#fakten",
+   "#natur",
+   "#wissenschaft"
+  ],
+  "tags": [
+   "gewitter",
+   "blitze",
+   "wetter",
+   "wissen",
+   "fakten",
+   "sonne",
+   "hitze",
+   "physik"
+  ],
+  "thumb_text": "FÜNFFACH HEISSER",
+  "cover_ms": 61236,
+  "duration": 61.1,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "mp4": true
  }
 ]
