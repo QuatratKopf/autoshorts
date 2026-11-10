@@ -1,0 +1,343 @@
+{
+ "2026-11-11 18:00": {
+  "category": "whatif",
+  "topic": "Was wäre, wenn autonome Drohnen lückenlos unsere Wohnungen und Städte überwachen?",
+  "trend": {
+   "title": "amazon ring drone camera",
+   "source": "Google Trends",
+   "news": [
+    {
+     "title": "Amazon's Ring unveils flying drone and robot to patrol homes and businesses",
+     "url": "https://www.cnbc.com/2026/11/10/amazons-ring-unveils-flying-drone-robot-to-patrol-homes-businesses.html",
+     "source": "CNBC"
+    },
+    {
+     "title": "Ring announces Ring Robotics, ushering in a new era of security",
+     "url": "https://www.aboutamazon.com/news/devices/ring-drone-cam-rover-cam-security-robot",
+     "source": "About Amazon"
+    },
+    {
+     "title": "Amazon's Ring launches flying camera, autonomous security robot",
+     "url": "https://www.reuters.com/technology/amazons-ring-launches-flying-camera-autonomous-security-robot-2026-11-10/",
+     "source": "Reuters"
+    }
+   ],
+   "summary": ""
+  },
+  "script": {
+   "title": "Was wäre, wenn autonome Drohnen jede Straße überwachen?",
+   "description": "Erfahre, wie autonome Überwachungsdrohnen Schritt für Schritt unseren Alltag verändern würden. Von den ersten Sekunden bis zu jahrelangen Folgen in Städten. Würdest du dich dabei noch sicher fühlen?",
+   "hashtags": [
+    "#shorts",
+    "#technik",
+    "#zukunft",
+    "#überwachung",
+    "#wissenschaft",
+    "#viral",
+    "#foryou",
+    "#deutsch"
+   ],
+   "tags": [
+    "autonome drohnen",
+    "überwachung",
+    "zukunft",
+    "smart city",
+    "sicherheit",
+    "technik",
+    "was wäre wenn"
+   ],
+   "thumbnail": {
+    "image": "Close up of a scary futuristic flying security drone with blinking red light against a dark city background, dramatic lighting, empty upper space",
+    "text": "ÜBERWACHTE STADT",
+    "place": "street",
+    "time": "night",
+    "actor": "du",
+    "action": "look_around",
+    "emotion": "scared",
+    "props": [
+     "drone",
+     "cctv"
+    ],
+    "weather": ""
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "schwarz",
+     "hat": "",
+     "hair": "long",
+     "glasses": false,
+     "skin": "hell"
+    }
+   },
+   "scenes": [
+    {
+     "text": "Was wäre, wenn kleine autonome Drohnen lückenlos jede Straße und jede Wohnung überwachen?",
+     "image": "A swarm of small flying security drones patrolling above a city street at night",
+     "who": [],
+     "place": "street",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "autonome Drohnen",
+      "lückenlos überwachen"
+     ],
+     "hud": "",
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "A modern city street with tall buildings and glowing streetlights at night"
+    },
+    {
+     "text": "In den ersten Sekunden starten tausende fliegende Kameras automatisch von ihren Dächern.",
+     "image": "Small security drones lifting off from rooftops against a dusk sky",
+     "who": [],
+     "place": "street",
+     "camera": "pan_up",
+     "sfx": "whoosh",
+     "highlight": [
+      "erste Sekunden",
+      "automatisch"
+     ],
+     "hud": "SEKUNDE NULL",
+     "overlay": {
+      "type": "counter",
+      "label": "DROHNEN IN DER LUFT",
+      "value": 100000,
+      "unit": "STÜCK"
+     },
+     "who_desc": "",
+     "place_desc": "A modern city street with tall buildings and glowing streetlights at night"
+    },
+    {
+     "text": "Sie scannen Kennzeichen, Gesichter und registrieren jede kleinste Bewegung auf dem Gehweg.",
+     "image": "A drone pointing a scanning beam down at the sidewalk",
+     "who": [],
+     "place": "street",
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "scannen",
+      "jede Bewegung"
+     ],
+     "hud": "",
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "A modern city street with tall buildings and glowing streetlights at night"
+    },
+    {
+     "text": "Nach wenigen Tagen gibt es auf den Straßen keine Anonymität mehr auf Schritt und Tritt.",
+     "image": "A person walking nervously down a street watched by multiple overhead drones",
+     "who": [
+      "du"
+     ],
+     "place": "street",
+     "camera": "shake",
+     "sfx": "none",
+     "highlight": [
+      "keine Anonymität",
+      "Schritt und Tritt"
+     ],
+     "hud": "TAG DREI",
+     "overlay": {
+      "type": "card",
+      "text": "NULL ANONYMITÄT"
+     },
+     "who_desc": "",
+     "place_desc": "A modern city street with tall buildings and glowing streetlights at night"
+    },
+    {
+     "text": "Jeder Bürger wird sofort erkannt und sein Weg lückenlos in zentralen Datenbanken gespeichert.",
+     "image": "A digital city map lighting up with tracking points all over Germany",
+     "who": [],
+     "place": "germany",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "sofort erkannt",
+      "Datenbanken"
+     ],
+     "hud": "",
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "A stylized map of Germany with glowing nodes"
+    },
+    {
+     "text": "Selbst vor deinen eigenen vier Wänden machen die fliegenden Kameras keinen Halt mehr.",
+     "image": "A small security drone peering directly through a living room window",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "zoom_in",
+     "sfx": "pop",
+     "highlight": [
+      "eigenen vier Wänden",
+      "keinen Halt"
+     ],
+     "hud": "",
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "A cozy modern living room with a couch and a large window"
+    },
+    {
+     "text": "Durch offene Fenster blicken sie direkt in dein Wohnzimmer und prüfen deinen Alltag.",
+     "image": "A person looking shocked at a drone hovering outside the window",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "offene Fenster",
+      "prüfen deinen Alltag"
+     ],
+     "hud": "",
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "A cozy modern living room with a couch and a large window"
+    },
+    {
+     "text": "Nach einem Jahr sinkt die Kriminalitätsrate auf den Straßen drastisch auf ein Minimum.",
+     "image": "An empty, perfectly peaceful city street at night under heavy drone watch",
+     "who": [],
+     "place": "street",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "nach einem Jahr",
+      "Kriminalitätsrate"
+     ],
+     "hud": "JAHR EINS",
+     "overlay": {
+      "type": "bar",
+      "label": "KRIMINALITÄT",
+      "value": 5
+     },
+     "who_desc": "",
+     "place_desc": "A modern city street with tall buildings and glowing streetlights at night"
+    },
+    {
+     "text": "Statistiken zeigen einen Rückgang von Einbrüchen um fast neunzig Prozent in Großstädten.",
+     "image": "A large digital statistics graph showing a steep downward trend",
+     "who": [],
+     "place": "city",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "Rückgang von Einbrüchen",
+      "neunzig Prozent"
+     ],
+     "hud": "",
+     "overlay": {
+      "type": "card",
+      "text": "-90 PROZENT EINBRÜCHE"
+     },
+     "who_desc": "",
+     "place_desc": "A dense urban area with skyscrapers and streets"
+    },
+    {
+     "text": "Doch gleichzeitig verändert sich das Verhalten der Menschen in der gesamten Gesellschaft spürbar.",
+     "image": "People walking outside with their heads down, looking extremely tense",
+     "who": [],
+     "place": "street",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Verhalten der Menschen",
+      "spürbar"
+     ],
+     "hud": "",
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "A modern city street with tall buildings and glowing streetlights at night"
+    },
+    {
+     "text": "Niemand wagt es mehr, die Regeln zu brechen, aus Angst vor sofortigen automatischen Strafen.",
+     "image": "A person stopping abruptly before crossing an empty street on red",
+     "who": [
+      "du"
+     ],
+     "place": "street",
+     "camera": "shake",
+     "sfx": "none",
+     "highlight": [
+      "Regeln zu brechen",
+      "automatischen Strafen"
+     ],
+     "hud": "",
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "A modern city street with tall buildings and glowing streetlights at night"
+    },
+    {
+     "text": "Nach fünf Jahren ist ständige Überwachung für alle Generationen völlig normaler Alltag geworden.",
+     "image": "People casually walking under a sky filled with routine security drones",
+     "who": [],
+     "place": "street",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "fünf Jahren",
+      "normaler Alltag"
+     ],
+     "hud": "JAHR FÜNF",
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "A modern city street with tall buildings and glowing streetlights at night"
+    },
+    {
+     "text": "Die absolute Sicherheit hat uns die Freiheit gekostet, unbemerkt und unbeobachtet zu leben.",
+     "image": "A single person looking up at the sky filled with glowing red camera lenses",
+     "who": [
+      "du"
+     ],
+     "place": "street",
+     "camera": "zoom_in",
+     "sfx": "boom",
+     "highlight": [
+      "absolute Sicherheit",
+      "Freiheit gekostet"
+     ],
+     "hud": "",
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "A modern city street with tall buildings and glowing streetlights at night"
+    },
+    {
+     "text": "Wäre dir absolute Sicherheit diesen hohen Preis im Alltag wirklich wert oder lieber nicht?",
+     "image": "A close up of a person thinking deeply with question marks above their head",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "hohen Preis",
+      "wirklich wert"
+     ],
+     "hud": "",
+     "overlay": {
+      "type": "choice",
+      "a": "Ja, absolut sicher",
+      "b": "Nein, niemals"
+     },
+     "who_desc": "",
+     "place_desc": "A cozy modern living room with a couch and a large window"
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "needs": [
+   "dach",
+   "fenster",
+   "datenbank"
+  ],
+  "title": "Was wäre, wenn autonome Drohnen jede Straße überwachen?",
+  "created": 1794336266.9364421
+ }
+}
