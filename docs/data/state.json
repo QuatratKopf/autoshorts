@@ -4,7 +4,12 @@
   "2026-11-08 18:00"
  ],
  "used_queue": [],
- "last_stats": 0,
+ "last_stats": 1794286333.2504282,
  "next_id": 20,
- "connected": {}
+ "connected": {
+  "youtube": {
+   "name": "Wissens Wert 💬",
+   "since": "2026-11-10"
+  }
+ }
 }
