@@ -27,7 +27,7 @@ def frame(scene, cast=None, t=1.3):
     bg = places.background(bd, night, bool(scene.get("dark_city")))
     opt = {"crowd": scene.get("crowd"), "mood": str(scene.get("mood") or "").lower(), "spec": places.spec_of(bd),
            "sky": places.sky_mask(bd, night, bool(scene.get("dark_city"))), "no_traffic": bool(scene.get("no_traffic")),
-           "win": scene.get("_win"), "count": scene.get("_count")}
+           "win": scene.get("_win"), "count": scene.get("_count"), "neon": scene.get("look") == "neon"}
     shot = str(scene.get("shot") or "")
     if shot == "graphic" and graphics.clean(scene.get("graphic")):
         return graphics.frame(graphics.clean(scene["graphic"]), t, 3.0, opt["mood"])
@@ -39,7 +39,7 @@ def frame(scene, cast=None, t=1.3):
 
 texts_gfx = ["Warum ist das so?", "Fünf Millionen Haushalte bekommen Post.", "Du bist zweiundsiebzig Stunden auf dich allein gestellt.",
              "Vorrat für drei Tage.", "Fünfundvierzigtausend Haushalte ohne Strom.", "Neunzig Prozent fallen aus.", "Und jetzt?", "", None, 5,
-             "Ein Hund läuft.", "Achtzig Milliarden Liter Wasser."]
+             "Ein Hund läuft.", "Achtzig Milliarden Liter Wasser.", "Ganz Europa warnt, auch Schweden.", "Die ganze Stadt ist ohne Strom."]
 
 
 def main():
@@ -115,7 +115,9 @@ def main():
           {"type": "number", "value": "1,2 Mrd."}, {"type": "number", "value": "abc"}, {"type": "timer", "value": "72:00:00"}, {"type": "timer", "value": "quatsch"},
           {"type": "calendar", "value": "3", "label": "Tage", "kicker": "Vorrat für"}, {"type": "calendar", "value": "x" * 60}, {"type": "question"},
           {"type": "question", "text": "Warum eigentlich so lange?"}, {"type": "houses", "value": "45.000", "label": "Haushalte", "dark": True},
-          {"type": "houses", "value": "5"}, {"type": "badge", "text": "72 Stunden", "kicker": "mind."}, {"type": "badge"}, {"type": "x"}, {}, None, "x"]
+          {"type": "houses", "value": "5"}, {"type": "badge", "text": "72 Stunden", "kicker": "mind."}, {"type": "badge"}, {"type": "x"}, {}, None, "x",
+          {"type": "map", "text": "72 Stunden allein", "value": "sweden,germany,quatsch"}, {"type": "map"}, {"type": "map", "value": 5},
+          {"type": "city", "kicker": "Berlin", "text": "45.000 ohne Strom", "dark": True}, {"type": "city"}]
     for g in gs:
         for m in ("", "panic", "scary", "x"):
             for t in (0.0, 0.2, 1.0, 3.5):
@@ -123,6 +125,7 @@ def main():
     for txt in texts_gfx:
         check(f"Grafik aus Text: {txt}", lambda: graphics.clean(stage.auto_graphic(txt, "TAG 1")))
     check("Neon-Look", lambda: graphics.neon(frame({"place": "street", "crowd": "walk"}), 1.0))
+    check("Neon-Kulisse", lambda: graphics.tint(places.background("street", True)))
     # Regie mit zufälligen und kaputten Drehbüchern
     rnd = random.Random(1)
     junk = [None, "", 0, 3.5, [], {}, "xyz", ["a"], {"type": None}, {"elements": None}, {"elements": ["forest", 3, None]}, True]

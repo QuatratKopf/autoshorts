@@ -439,19 +439,19 @@ const MONTHS = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "A
 
 /* ═════════════════ Zustand ═════════════════ */
 let S = null;                                   // App (lokal)
-let CFG = null, ST = {}, VIDS = [], STATS = {v: {}, ch: {}}, TRENDS = {items: []};   // Daten aus dem Repository
+let CFG = null, ST = {}, VIDS = [], STATS = {v: {}, ch: {}}, TRENDS = {items: []}, INS = {};   // Daten aus dem Repository
 let SECRETS = null, RUNS = [], PENDING = null, LOADERR = "", CANCEL_NEXT = 0, CANCELING = new Set();
 let TAB = (location.hash || "#dashboard").slice(1);
 if (!["dashboard", "kalender", "studio", "einstellungen"].includes(TAB)) TAB = "dashboard";
-const DEF = {voice_speed: 1, voice_style: "Lebendig und mitreißend mit klarer Betonung – wie der Sprecher eines viralen Erklärvideos, flüssig und natürlich.", caption_style: "impact", look: "cartoon", stats_minutes: 30, plan_ahead: true, hold_missing: true, auto_learn: true, upload_via: "direct", min_seconds: 62, tts_provider: "gemini", gemini_voice: "", sfx_volume: 0.35, trend_mode: "half", make_thumbnail: true, youtube_thumbnail: true, trend_regions: "US,DE",
+const DEF = {voice_speed: 1, voice_style: "Lebendig und mitreißend mit klarer Betonung – wie der Sprecher eines viralen Erklärvideos, flüssig und natürlich.", caption_style: "impact", auto_optimize: true, look: "cartoon", stats_minutes: 30, plan_ahead: true, hold_missing: true, auto_learn: true, upload_via: "direct", min_seconds: 62, tts_provider: "gemini", gemini_voice: "", sfx_volume: 0.35, trend_mode: "half", make_thumbnail: true, youtube_thumbnail: true, trend_regions: "US,DE",
   audience: "Gen Z (16–25) in Deutschland, die TikTok und YouTube Shorts schauen: Internet-Kultur, Memes, virale Trends, Gaming, Musik, Serien, Filme, Creator, Tech, Lifestyle. Lockere Sprache wie unter Freunden, schnell auf den Punkt, kein Lehrer- oder Kinder-Ton."};
 const S_ = k => { const v = (CFG && CFG.settings || {})[k]; return v === undefined ? DEF[k] : v; };
 const cat = slug => (CFG && CFG.categories || []).find(c => c.slug === slug);
 
 async function loadData() {
   try {
-    const [c, s, v, st, tr] = await Promise.all(["config", "state", "videos", "stats", "trends"].map(f => gh("GET", `/contents/docs/data/${f}.json?ref=main`, null, true).catch(e => { if (f === "trends") return {items: []}; throw e; })));
-    TRENDS = tr && tr.items ? tr : {items: []};
+    const [c, s, v, st, tr, ins] = await Promise.all(["config", "state", "videos", "stats", "trends", "insights"].map(f => gh("GET", `/contents/docs/data/${f}.json?ref=main`, null, true).catch(e => { if (f === "trends") return {items: []}; if (f === "insights") return {}; throw e; })));
+    TRENDS = tr && tr.items ? tr : {items: []}; INS = (typeof ins === "string" ? JSON.parse(ins) : ins) || {};
     CFG = typeof c === "string" ? JSON.parse(c) : c; ST = s || {}; VIDS = v || []; STATS = st || {v: {}, ch: {}};
     CFG.settings = CFG.settings || {}; CFG.categories = CFG.categories || []; CFG.queue = CFG.queue || [];
     LOADERR = "";
@@ -662,6 +662,21 @@ function renderSetup() {
 
 /* ═════════════════ Dashboard ═════════════════ */
 let RANGE = 30, PLAT = "all";
+function insightPanel() {
+  const a = INS || {}, on = S_("auto_optimize") !== false;
+  if (!a.updated) return `<section class="panel in" style="--i:3"><div class="section-h"><div><h2>Analyse</h2><p class="hint">Sobald Zahlen da sind, steht hier, was am besten läuft – und der Autopilot macht mehr davon.</p></div></div><div class="empty">Noch keine Auswertung. Sie entsteht automatisch beim nächsten Abruf der Zahlen.</div></section>`;
+  const w = a.weights || {}, wmax = Math.max(1, ...Object.values(w));
+  const wl = Object.entries(w).sort((x, y) => y[1] - x[1]).map(([slug, x]) => { const c = cat(slug);
+    return `<div class="hbar"><div class="hbar-l"><b>${esc(c ? c.emoji + " " + c.name : slug)}</b><small>${x > 1.15 ? "kommt öfter dran" : x < 0.85 ? "kommt seltener dran" : "normaler Wechsel"}</small></div><div class="hbar-t"><i style="width:${x / wmax * 100}%"></i></div><span>×${Number(x).toFixed(1).replace(".", ",")}</span></div>`; }).join("");
+  const row = r => `<tr><td class="t w"><b>${esc(r.title)}</b></td><td>${fmtN(r.views)}</td><td>${fmtN(r.likes)}</td><td>${fmtN(r.comments)}</td></tr>`;
+  return `<section class="panel in" style="--i:3"><div class="section-h"><div><h2>Analyse</h2><p class="hint">${a.enough ? `Ausgewertet: ${a.counted} Videos. ${on ? "Der Autopilot richtet sich danach." : "Die automatische Steuerung ist ausgeschaltet."}` : `Noch ${Math.max(0, (a.needed || 6) - (a.counted || 0))} Videos, bis genug Daten zum Steuern da sind.`} Stand: ${fmtTs(a.updated)}</p></div>
+      <label class="hint" style="display:flex;gap:8px;align-items:center;cursor:pointer"><input type="checkbox" ${on ? "checked" : ""} onchange="CFG.settings.auto_optimize=this.checked;saveConfig('Analyse-Steuerung gespeichert')"> Erfolgreiches öfter machen</label></div>
+    <ul class="hint" style="margin:0 0 12px 18px;line-height:1.7;font-size:13.5px">${(a.advice || []).map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+    ${a.enough ? `<div class="grid3" style="align-items:start"><div><h2 style="font-size:14px;margin-bottom:8px">Gewichtung der Kategorien</h2><div class="hbars">${wl}</div></div>
+      <div style="grid-column:span 2"><h2 style="font-size:14px;margin-bottom:8px">Stärkste Videos</h2><div class="scroll"><table><thead><tr><th class="t">Titel</th><th>Aufrufe</th><th>Likes</th><th>Kommentare</th></tr></thead><tbody>${(a.top || []).map(row).join("")}</tbody></table></div>
+      ${(a.flop || []).length ? `<h2 style="font-size:14px;margin:14px 0 8px">Schwächste Videos</h2><div class="scroll"><table><tbody>${a.flop.map(row).join("")}</tbody></table></div>` : ""}</div></div>` : ""}
+  </section>`;
+}
 function viewDash() {
   const D = dayMap(), last14 = lastDays(14), last7 = lastDays(7), prev7 = lastDays(14).slice(0, 7);
   const sum = (keys, f) => keys.reduce((a, k) => a + (D[k] ? f(D[k]) : 0), 0);
@@ -710,6 +725,7 @@ function viewDash() {
     <div id="chart"></div>
     <div class="legend"><span><i style="background:var(--yt)"></i>YouTube</span><span><i style="background:var(--tt)"></i>TikTok</span></div>
   </section>
+  ${insightPanel()}
   <div class="grid3">
     <section class="panel in" style="--i:4"><div class="section-h"><div><h2>Nach Kategorie</h2><p class="hint">Ø Aufrufe pro Video. Mehr von dem, was läuft.</p></div></div>
       ${cats.length ? `<div class="hbars">${cats.map(c => `<div class="hbar"><div class="hbar-l"><b>${esc(c.name)}</b><small>${c.videos} Videos · ${pct(c.views ? c.likes / c.views * 100 : NaN)} Likes</small></div><div class="hbar-t"><i style="width:${c.avg / cmax * 100}%"></i></div><span>${fmtN(c.avg)}</span></div>`).join("")}</div>` : `<div class="empty">Noch keine veröffentlichten Videos.</div>`}</section>

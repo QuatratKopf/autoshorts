@@ -356,6 +356,8 @@ def _prop_many(frame, kind, x, t, big, n, table=False):
 
 def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, in_bed, shot="", big=1.0, fx=None):
     frame = bg.copy()
+    if (fx or {}).get("neon"):                # Lichtpunkte liegen hinter den Figuren
+        graphics.bokeh(frame, t, 0.4)
     if weather in ("quake", "erdbeben"):      # Erdbeben: das ganze Bild wackelt
         dx, dy = int(math.sin(t * 47) * 16), int(math.cos(t * 39) * 12)
         frame = frame.transform(frame.size, Image.AFFINE, (1, 0, dx, 0, 1, dy), resample=Image.NEAREST)
@@ -554,7 +556,12 @@ def auto_graphic(text, hud=""):
     kick = str(hud or "")[:36]
     if "?" in raw and _re.search(r"\b(warum|wieso|weshalb)\b", low):
         return {"type": "question", "text": _re.search(r"\b(warum|wieso|weshalb)\b", low).group(1).upper() + "?"}
+    if _re.search(r"ganz europa|in europa|europaweit|europäisch|\beu\b|eu-staaten|quer durch europa", low):
+        hot = sorted({v for k, v in graphics.REGION_WORDS.items() if k in low})
+        return {"type": "map", "value": ",".join(hot), "text": kick}
     fig = find_figure(raw)
+    if not fig and _re.search(r"ganze stadt|stadtviertel|von oben|häuserblock|stadtweit|ganze viertel|millionenstadt|in der stadt", low):
+        return {"type": "city", "kicker": kick, "dark": bool(_re.search(r"ohne strom|stromausfall|dunkel|ohne licht|lichter gehen aus", low))}
     if not fig:
         if raw.endswith("?") and len(raw.split()) <= 5 and len(raw) <= 26:
             return {"type": "question", "text": raw.upper()}
@@ -870,6 +877,13 @@ def direct(scenes, times, topic="", style="", look=""):
             sc["props"] = [{"type": topic_any[0]}]        # das Thema bleibt im Bild (z. B. die Drohne über der Straße)
         fig_prev = bool([a for a in (sc.get("actors") or []) if isinstance(a, dict)]) and sc.get("shot") not in ("insert", "graphic")
         # --- beeindruckende Zahl im Satz → Zähler, wenn das Drehbuch keine Einblendung vorsieht
+        if not [a for a in (sc.get("actors") or []) if isinstance(a, dict)] and not sc.get("crowd") and not sc.get("props") and not sc.get("weather") \
+                and sc.get("shot") not in ("graphic", "insert") and places.resolve(backdrop(sc)) not in MAPS:
+            if last_id:                                   # nie ein leeres Bild: die Figur kommt herein und sieht sich um
+                sc["actors"] = [{"id": last_id, "action": "walk", "pos": "offleft", "to": "center", "emotion": MOOD_EMOTION.get(str(sc.get("mood") or ""), "")}]
+                sc["shot"] = ""
+            elif not spooky:
+                sc["crowd"] = "walk"
         if sc.get("shot") == "graphic":
             sc["overlay"] = None if str((sc.get("overlay") or {}).get("type") or "") in ("counter", "bar", "card") else sc.get("overlay")
         elif not sc.get("overlay") and counters < 3 and not last:
@@ -1058,6 +1072,8 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     ins = [k for k, _ in props if extras.PROP_ALIASES.get(k, k) in extras.PROPS][:2] if shot == "insert" else []
     gfx = graphics.clean(scene.get("graphic")) if shot == "graphic" else None
     neon_look = str(scene.get("look") or "") == "neon"
+    if neon_look:                             # Neon-Nacht: nur die Kulisse wird violett getönt – Figuren und Dinge bleiben kräftig
+        bg = graphics.tint(bg)
     shot = "close" if shot == "close" and not has_ov and not moving and not props and actors else ""
     ff = subprocess.Popen(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24",
                            "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-preset", "veryfast",
@@ -1073,10 +1089,8 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
                 ff.stdin.write(frame.tobytes())
                 continue
             frame = _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, place == "bedroom", shot, big,
-                           {"crowd": scene.get("crowd"), "mood": str(scene.get("mood") or "").lower(), "spec": places.spec_of(backdrop(scene)), "sky": sky_m, "win": scene.get("_win"), "count": scene.get("_count"),
+                           {"crowd": scene.get("crowd"), "mood": str(scene.get("mood") or "").lower(), "spec": places.spec_of(backdrop(scene)), "sky": sky_m, "win": scene.get("_win"), "count": scene.get("_count"), "neon": neon_look,
                             "no_traffic": bool(scene.get("no_traffic") or scene.get("dark_city"))})
-            if neon_look:
-                frame = graphics.neon(frame, t)
             if still is not None and fidx == min(n_frames - 1, FPS):
                 frame.save(still, quality=92)
             ff.stdin.write(frame.tobytes())

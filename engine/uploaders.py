@@ -468,3 +468,10 @@ def refresh_stats():
             log(f"TikTok-Videozahlen nicht verfügbar (Scope video.list fehlt?): {e}")
     STATS["updated"] = time.time()
     STATE["last_stats"] = time.time()
+    try:                                                  # Auswertung: was läuft am besten?
+        from . import insights
+        ins = insights.build()
+        if ins.get("advice"):
+            log("Analyse: " + ins["advice"][0])
+    except Exception as e:  # noqa: BLE001
+        log(f"Analyse: {e}")

@@ -80,6 +80,14 @@ def pick(category_slug=None, topic=None):
     cats = [c for c in CONFIG["categories"] if c.get("enabled")]
     if not cats:
         raise RuntimeError("Keine Kategorie aktiv – bitte im Studio mindestens eine einschalten.")
+    try:                                                  # Analyse: was besser läuft, kommt öfter dran
+        from . import insights
+        best = insights.pick_category(cats, STATE)
+        if best:
+            log(f"Analyse: {best['name']} ist dran (läuft überdurchschnittlich oder wird ausprobiert)")
+            return best, None, None, None
+    except Exception as e:  # noqa: BLE001
+        log(f"Analyse übersprungen ({e})")
     slugs = [c["slug"] for c in cats]
     last = STATE.get("last_category")
     return (cats[(slugs.index(last) + 1) % len(cats)] if last in slugs else cats[0]), None, None, None
@@ -366,7 +374,8 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None):
                                       float(cfg("music_volume") or 0.1), cover,
                                       float(cfg("sfx_volume") if cfg("sfx_volume") is not None else 0.35), cat["slug"])
         Image.open(cover or (work / "img00.jpg")).resize((360, 640)).save(THUMBS / f"{vid}.jpg", quality=82)
-        v.update(status="rendered", duration=round(total + 0.35, 1), providers=used, thumb=True)
+        v.update(status="rendered", duration=round(total + 0.35, 1), providers=used, thumb=True,
+                 look=(os.environ.get("AS_LOOK") or cat.get("look") or cfg("look") or "cartoon") if script.get("toon") else "ki")
         v["mp4"] = publish_mp4([final, cover] if cover else final)
         log(f"Video {vid} fertig")
     except Exception as e:

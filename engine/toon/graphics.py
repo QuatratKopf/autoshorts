@@ -8,6 +8,8 @@ Eine Grafik-Szene hat "shot": "graphic" und "graphic": {"type": ..., ...}:
   question {"text": "WARUM?"}                                                                Fragezeichen mit Strahlen
   houses   {"value": "45.000", "label": "HAUSHALTE", "dark": true}                            Häuserreihen, Fenster gehen an (oder aus)
   badge    {"kicker": "MIND.", "text": "72 STUNDEN"}                                          Plakette im Sternenkranz
+  map      {"text": "72 STUNDEN ALLEIN", "value": "sweden,germany"}                           Europakarte, Länder leuchten auf (value = betroffene)
+  city     {"kicker": "BERLIN · JANUAR", "text": "45.000 OHNE STROM", "dark": true}           Stadt von oben, Fenster gehen aus
 Dazu der Look "neon": dieselbe Lichtstimmung (Nachtblau/Violett, Lichtpunkte) über normalen Szenen."""
 import math
 import random
@@ -26,7 +28,7 @@ ORANGE = (255, 138, 31)
 THEMES = {"": ((58, 40, 150), (14, 10, 46)), "scary": ((40, 30, 96), (6, 6, 22)), "panic": ((120, 34, 70), (26, 8, 30)),
           "tense": ((110, 60, 120), (22, 10, 40)), "sad": ((40, 60, 130), (10, 14, 40)), "happy": ((90, 70, 190), (30, 16, 80)),
           "calm": ((58, 40, 150), (14, 10, 46))}
-TYPES = ("number", "timer", "calendar", "question", "houses", "badge")
+TYPES = ("number", "timer", "calendar", "question", "houses", "badge", "map", "city")
 
 _bg, _spr = {}, {}
 _BOK = [(random.Random(i).random(), random.Random(i + 50).random(), random.Random(i + 99).random()) for i in range(14)]
@@ -96,6 +98,15 @@ def neon(frame, t):
     out = Image.blend(out, frame.convert("RGB"), 0.3)
     bokeh(out, t, 0.4)
     return out
+
+
+def tint(bg):
+    """Kulisse für den Neon-Look: dunkler und violett, Lichter bleiben erhalten."""
+    t = _bg.get("_tint")
+    if t is None:
+        t = _bg["_tint"] = Image.new("RGB", (W, H), (150, 132, 236))
+    out = ImageChops.multiply(bg.convert("RGB"), t)
+    return Image.blend(out, bg.convert("RGB"), 0.16)
 
 
 def _center(d, y, text, f, fill=WHITE, stroke=0, shadow=True, spacing=0):
@@ -318,7 +329,122 @@ def _g_badge(frame, g, t, dur):
     frame.paste(lay, (int(cx - lay.width / 2), int(cy - lay.height / 2)), lay)
 
 
-DRAW = {"number": _g_number, "timer": _g_timer, "calendar": _g_calendar, "question": _g_question, "houses": _g_houses, "badge": _g_badge}
+# Europa, stark vereinfacht (Raster 0–100): große Flächen statt genauer Grenzen – erkennbar, nicht kartengenau
+EUROPE = {
+    "iberia": [(8, 70), (26, 66), (30, 74), (27, 86), (14, 90), (7, 84)],
+    "france": [(26, 50), (38, 46), (44, 54), (42, 66), (30, 70), (24, 62)],
+    "uk": [(24, 24), (30, 22), (33, 34), (30, 44), (22, 44), (24, 34)],
+    "ireland": [(14, 32), (20, 30), (21, 40), (15, 42)],
+    "benelux": [(38, 40), (44, 38), (45, 46), (39, 46)],
+    "germany": [(44, 36), (56, 34), (58, 44), (55, 54), (46, 54), (44, 46)],
+    "alps": [(44, 54), (58, 54), (60, 60), (46, 62)],
+    "italy": [(46, 62), (54, 62), (62, 76), (68, 86), (62, 88), (54, 76), (48, 70)],
+    "poland": [(57, 34), (72, 33), (74, 46), (58, 46)],
+    "czech": [(57, 46), (74, 46), (72, 54), (58, 54)],
+    "balkans": [(60, 56), (76, 54), (80, 70), (72, 80), (64, 72)],
+    "denmark": [(46, 26), (51, 24), (52, 33), (47, 34)],
+    "norway": [(44, 6), (54, 0), (58, 4), (52, 14), (49, 24), (43, 20)],
+    "sweden": [(54, 4), (62, 2), (64, 14), (58, 28), (53, 24), (55, 14)],
+    "finland": [(66, 2), (76, 4), (76, 20), (68, 22), (65, 12)],
+    "baltics": [(68, 24), (78, 23), (79, 33), (70, 33)],
+    "east": [(76, 34), (96, 30), (98, 56), (78, 56), (75, 46)],
+}
+REGION_WORDS = {"deutsch": "germany", "frankreich": "france", "franz": "france", "spanien": "iberia", "portugal": "iberia", "italien": "italy",
+                "schweden": "sweden", "norwegen": "norway", "finnland": "finland", "dänemark": "denmark", "polen": "poland", "england": "uk",
+                "großbritannien": "uk", "brit": "uk", "irland": "ireland", "niederlande": "benelux", "belgien": "benelux", "österreich": "alps",
+                "schweiz": "alps", "tschechien": "czech", "balkan": "balkans", "griechenland": "balkans", "baltikum": "baltics", "ukraine": "east"}
+
+
+def _g_map(frame, g, t, dur):
+    """Europakarte: Länder leuchten nacheinander auf, Ringe pulsieren, Ausrufezeichen markieren betroffene Länder."""
+    d = ImageDraw.Draw(frame, "RGBA")
+    x0, y0, k = 60, 330, 9.6
+    hot = [h for h in str(g.get("value") or "").lower().split(",") if h in EUROPE]
+    names = list(EUROPE)
+    for i, name in enumerate(names):
+        pts = [(x0 + a * k, y0 + b * k) for a, b in EUROPE[name]]
+        on = _pop(t, 0.15 + i * 0.07, 0.3) > 0
+        lit = on and (not hot or name in hot)
+        d.polygon([(a + 8, b + 10) for a, b in pts], fill=(0, 0, 0, 70))
+        d.polygon(pts, fill=(250, 150, 40) if lit else (70, 56, 150), outline=(255, 210, 120) if lit else (110, 96, 200), width=5)
+    marks = hot or names[::3]
+    for j, name in enumerate(marks[:6]):
+        pts = EUROPE[name]
+        cx = x0 + sum(a for a, _ in pts) / len(pts) * k
+        cy = y0 + sum(b for _, b in pts) / len(pts) * k
+        st = 0.9 + j * 0.25
+        if t < st:
+            continue
+        ph = ((t - st) * 0.7) % 1
+        r = 50 + ph * 70
+        d.ellipse((cx - r, cy - r, cx + r, cy + r), outline=(255, 226, 150, int(230 * (1 - ph))), width=7)
+        pk = min(1.0, _pop(t, st, 0.3))
+        d.rounded_rectangle((cx - 22 * pk, cy - 34 * pk, cx + 22 * pk, cy + 26 * pk), 10, fill=(250, 248, 255), outline=INK, width=4)
+        f = _font(int(46 * pk) or 1)
+        d.text((cx - d.textlength("!", font=f) / 2, cy - 36 * pk), "!", font=f, fill=(214, 60, 50))
+    txt = str(g.get("text") or "").upper()[:30]
+    if txt and t > 0.4:
+        lay = Image.new("RGBA", (980, 150), (0, 0, 0, 0))
+        ld = ImageDraw.Draw(lay)
+        f = _fit(ld, txt, 86, 900, "ExtraBold")
+        w = ld.textlength(txt, font=f)
+        ld.rounded_rectangle((490 - w / 2 - 34, 14, 490 + w / 2 + 34, 136), 26, fill=(250, 240, 214), outline=INK, width=7)
+        ld.text((490 - w / 2, 75 - f.size * 0.62), txt, font=f, fill=(40, 30, 60))
+        lay = lay.rotate(-3, resample=Image.BICUBIC, expand=True)
+        frame.paste(lay, (int(W / 2 - lay.width / 2), 190), lay)
+
+
+_city = {}
+
+
+def _g_city(frame, g, t, dur):
+    """Stadt von oben: Häuserblöcke, Straßen, Bäume; Fenster gehen aus (dark) – ein Ring markiert den wichtigen Ort."""
+    if "base" not in _city:
+        rnd = random.Random(12)
+        im = Image.new("RGB", (W, H + 400), (20, 14, 56))
+        d0 = ImageDraw.Draw(im)
+        wins = []
+        y = 0
+        while y < H + 400:
+            bh = rnd.choice((150, 190, 230))
+            x = -20
+            while x < W:
+                bw = rnd.choice((150, 190, 240, 290))
+                if rnd.random() < 0.16:                                   # Park mit Bäumen
+                    d0.rounded_rectangle((x + 10, y + 10, x + bw - 10, y + bh - 10), 18, fill=(26, 60, 70))
+                    for _ in range(5):
+                        tx, ty = rnd.randint(x + 30, x + bw - 30), rnd.randint(y + 30, y + bh - 30)
+                        d0.ellipse((tx - 22, ty - 22, tx + 22, ty + 22), fill=(40, 120, 100), outline=(16, 40, 50), width=4)
+                else:
+                    col = rnd.choice(((70, 52, 150), (84, 60, 170), (60, 46, 130), (96, 70, 180)))
+                    d0.rounded_rectangle((x + 10, y + 10, x + bw - 10, y + bh - 10), 12, fill=col, outline=(30, 20, 76), width=5)
+                    d0.rounded_rectangle((x + 26, y + 26, x + bw - 26, y + bh - 26), 8, outline=tuple(min(255, c + 26) for c in col), width=4)
+                    for wy in range(y + 44, y + bh - 50, 44):
+                        for wx in range(x + 44, x + bw - 56, 46):
+                            wins.append((wx, wy, rnd.random()))
+                x += bw
+            y += bh
+        _city["base"], _city["wins"] = im, wins
+    off = int((t * 26) % 400)
+    view = _city["base"].crop((0, off, W, off + H))
+    frame.paste(Image.blend(frame, view, 0.86), (0, 0))
+    d = ImageDraw.Draw(frame, "RGBA")
+    dark = bool(g.get("dark"))
+    for wx, wy, r in _city["wins"]:
+        yy = wy - off
+        if -30 < yy < H:
+            on = (t < 0.5 + r * max(1.0, dur - 1.5)) if dark else (r < 0.55 or t > 0.4 + r * 2)
+            d.rectangle((wx, yy, wx + 22, yy + 20), fill=(255, 214, 110) if on else (36, 28, 84))
+    cx, cy = W / 2 + math.sin(t * 0.5) * 30, 820
+    _ring(d, cx, cy, 190, t, (120, 200, 255) if not dark else (255, 110, 120), 10)
+    _kicker(d, 380, g.get("kicker"), t, 0.0)
+    txt = str(g.get("text") or g.get("value") or "").upper()[:26]
+    if txt and t > 0.4:
+        f = _fit(d, txt, 150, 960)
+        _center(d, 430, txt, f, stroke=8)
+
+
+DRAW = {"map": _g_map, "city": _g_city, "number": _g_number, "timer": _g_timer, "calendar": _g_calendar, "question": _g_question, "houses": _g_houses, "badge": _g_badge}
 
 
 def clean(g):
@@ -331,7 +457,8 @@ def clean(g):
         if isinstance(v, (str, int, float)) and not isinstance(v, bool) and str(v).strip():
             out[k] = str(v).strip()[:44]
     out["dark"] = g.get("dark") is True
-    need = {"number": "value", "timer": "value", "calendar": "value", "houses": "value", "badge": "text", "question": None}[out["type"]]
+    need = {"number": "value", "timer": "value", "calendar": "value", "houses": "value", "badge": "text", "question": None,
+            "map": None, "city": None}[out["type"]]
     if need and need not in out:
         return None
     return out

@@ -152,6 +152,9 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
     {"type": "question", "text": "WARUM?"}                                                           großes Fragezeichen mit Strahlen
     {"type": "houses", "value": "45.000", "label": "HAUSHALTE", "dark": true}                        Häuserreihen, Fenster gehen aus (dark) oder an
     {"type": "badge", "kicker": "MIND.", "text": "72 STUNDEN"}                                       Plakette im Sternenkranz
+    {"type": "map", "text": "72 STUNDEN ALLEIN", "value": "sweden,germany"}                          Europakarte; value = betroffene Länder aus:
+        iberia, france, uk, ireland, benelux, germany, alps, italy, poland, czech, balkans, denmark, norway, sweden, finland, baltics, east
+    {"type": "city", "kicker": "BERLIN · JANUAR", "text": "45.000 OHNE STROM", "dark": true}         Stadt von oben, Fenster gehen aus (dark)
 - ABWECHSLUNG WIE IN VIRALEN ERKLÄRVIDEOS: Höchstens jede zweite Szene zeigt eine redende Figur. Die anderen Szenen zeigen
   das Geschehen ("shot": "event", actors []), einen Gegenstand groß ("shot": "insert" mit einem Ding aus "props") oder eine
   Zahl als Zähler (overlay "counter"). Das Ding, um das sich das Video dreht, ist mindestens zweimal groß im Bild.
@@ -273,6 +276,15 @@ def fix_umlauts(js):
     return walk(js)
 
 
+def _insight(cat):
+    """Was laut Analyse beim Publikum gut ankommt (leer, solange zu wenig Daten da sind oder die Steuerung aus ist)."""
+    try:
+        from . import insights
+        return insights.hint(cat)
+    except Exception:  # noqa: BLE001
+        return ""
+
+
 def _past(cat):
     return [v["topic"] for v in VIDEOS if v.get("category") == cat["slug"] and v.get("topic")][-60:]
 
@@ -286,6 +298,7 @@ def new_topic(cat: dict) -> str:
             "und bei dieser Zielgruppe auf TikTok funktioniert (Thema, über das man in der Bubble redet, oder das man sofort teilen will).\n"
             "Diese Themen gab es schon (nicht wiederholen, auch nicht sehr ähnlich):\n- "
             + ("\n- ".join(past) if past else "(noch keine)")
+            + _insight(cat)
             + '\nAntworte als JSON: {"topic": "…"}')
     js, _ = ai.chat_json("Du bist Redakteur für virale deutsche Kurzvideos. Antworte nur mit JSON.", user, 1.0)
     topic = str(js.get("topic", "")).strip()
@@ -316,6 +329,7 @@ def trend_topic(cat: dict):
             "die auch in ein paar Tagen noch stimmt. " + UNSUITABLE + "\n"
             "WICHTIG: Das Thema muss wirklich zur Kategorie passen (z. B. Tierwelt = ein echtes Tier steht im Mittelpunkt; "
             "Grusel = eine Gruselgeschichte). Passt kein Trend sauber, antworte mit {\"index\": null} – lieber kein Trend als ein unpassender. "
+            + _insight(cat).replace("\n", " ") +
             "Marken, Spiele, Filme, Serien und Apps dürfen nur der Anlass sein, nie das Thema selbst: mach daraus das allgemeine Thema "
             "dahinter (statt eines Spiels z. B. 'Warum wir Nostalgie lieben').\n"
             "Diese Themen gab es schon:\n- " + ("\n- ".join(past) if past else "(noch keine)") + "\n"
