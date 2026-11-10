@@ -443,7 +443,7 @@ let CFG = null, ST = {}, VIDS = [], STATS = {v: {}, ch: {}}, TRENDS = {items: []
 let SECRETS = null, RUNS = [], PENDING = null, LOADERR = "", CANCEL_NEXT = 0, CANCELING = new Set();
 let TAB = (location.hash || "#dashboard").slice(1);
 if (!["dashboard", "kalender", "studio", "einstellungen"].includes(TAB)) TAB = "dashboard";
-const DEF = {voice_speed: 1, voice_style: "Lebendig und mitreißend mit klarer Betonung – wie der Sprecher eines viralen Erklärvideos, flüssig und natürlich.", caption_style: "impact", auto_learn: true, tts_provider: "gemini", gemini_voice: "", sfx_volume: 0.35, trend_mode: "half", make_thumbnail: true, youtube_thumbnail: true, trend_regions: "US,DE",
+const DEF = {voice_speed: 1, voice_style: "Lebendig und mitreißend mit klarer Betonung – wie der Sprecher eines viralen Erklärvideos, flüssig und natürlich.", caption_style: "impact", auto_learn: true, min_seconds: 62, tts_provider: "gemini", gemini_voice: "", sfx_volume: 0.35, trend_mode: "half", make_thumbnail: true, youtube_thumbnail: true, trend_regions: "US,DE",
   audience: "Gen Z (16–25) in Deutschland, die TikTok und YouTube Shorts schauen: Internet-Kultur, Memes, virale Trends, Gaming, Musik, Serien, Filme, Creator, Tech, Lifestyle. Lockere Sprache wie unter Freunden, schnell auf den Punkt, kein Lehrer- oder Kinder-Ton."};
 const S_ = k => { const v = (CFG && CFG.settings || {})[k]; return v === undefined ? DEF[k] : v; };
 const cat = slug => (CFG && CFG.categories || []).find(c => c.slug === slug);
@@ -955,7 +955,8 @@ function viewSettings() {
   ${sec("zeit", I.clock, "Zeitplan", `${S_("autopilot") ? "Autopilot an · " + esc(S_("upload_times")) + " Uhr" : "Autopilot aus"} · ${S_("target_seconds")} Sekunden`, S_("autopilot") ? '<span class="chip good">an</span>' : '<span class="chip warn">aus</span>', `
     ${tgl("autopilot", "Autopilot", "Jeden Tag automatisch ein Video erstellen und hochladen. Läuft auf GitHub, auch wenn dieser PC aus ist.")}
     ${fld("upload_times", "Upload-Zeiten", "Deutsche Zeit. Mehrere mit Komma, z. B. 12:00, 18:30. GitHub startet manchmal bis zu einer Stunde später.")}
-    ${fld("target_seconds", "Ziel-Länge in Sekunden", "TikTok zahlt im Creator-Programm nur für Videos über 1 Minute.", 'type="number" min="20" max="170"')}`)}
+    ${fld("target_seconds", "Ziel-Länge in Sekunden", "TikTok zahlt im Creator-Programm nur für Videos über 1 Minute.", 'type="number" min="20" max="170"')}
+    ${fld("min_seconds", "Mindest-Länge in Sekunden", "Kürzer wird kein Video: Das Drehbuch wird verlängert, notfalls spricht der Erzähler etwas ruhiger. 0 = aus.", 'type="number" min="0" max="170"')}`)}
   ${sec("trend", I.spark, "Trends & Thumbnail", `Trend-Themen ${{off: "aus", half: "jedes 2. Video", always: "immer"}[S_("trend_mode") || "half"]} · Thumbnail ${S_("make_thumbnail") !== false ? "an" : "aus"}`, "", `
     ${sel("trend_mode", "Aktuelle Trend-Themen", "Der Autopilot schaut bei TikTok, Reddit, Google Trends und Wikipedia, was gerade läuft, und macht daraus ein passendes Thema für deine Zielgruppe. Tragische Nachrichten, Politik und Klatsch werden ausgelassen. Welche Video-Arten Trends nutzen, stellst du im Studio unter „Bearbeiten“ ein.", [["half", "Jedes zweite Video"], ["always", "Immer, wenn ein Trend passt"], ["off", "Aus – nur zeitlose Themen"]])}
     ${sel("trend_regions", "Trends aus", "Woher die Trends kommen. US-Trends schwappen oft ein paar Tage später nach Deutschland – ideal, um früh dran zu sein.", [["US,DE", "USA und Deutschland"], ["DE,US", "Vor allem Deutschland, dazu USA"], ["DE", "Nur Deutschland"], ["US", "Nur USA"], ["US,DE,GB", "USA, Deutschland und UK"]])}

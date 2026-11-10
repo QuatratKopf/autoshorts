@@ -234,7 +234,13 @@ def trend_topic(cat: dict):
 
 def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
     secs = int(cfg("target_seconds") or 60)
-    words = round(secs * (2.05 if str(cfg("tts_provider") or "") == "gemini" else 2.2))   # Gemini-Erzähler spricht ruhiger
+    from .state import STATE
+    wps = float(STATE.get("voice_wps") or 0)             # gemessenes Sprechtempo der letzten Videos (Wörter pro Sekunde)
+    if not 1.6 <= wps <= 3.6:
+        wps = 2.6 if str(cfg("tts_provider") or "") == "gemini" else 2.4
+    min_secs = float(cfg("min_seconds") or 0)
+    secs = max(secs, int(min_secs + 6)) if min_secs else secs     # Ziel mit Abstand über der Mindestlänge
+    words = round(secs * wps)
     scenes = max(6, round(secs / 5))
     toon = str(os.environ.get("AS_VISUAL") or cfg("visual_mode") or "ai") == "toon"
     char = cfg("main_character") if cfg("use_main_character") and not toon else ""
@@ -264,6 +270,18 @@ def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
                 js = js2
         except Exception as e:  # noqa: BLE001
             ai.log(f"Kürzen nicht möglich ({e}) – nehme den ersten Entwurf")
+    elif n_words < words * 0.88:     # zu kurz geraten → einmal verlängern lassen (Video soll sicher über der Mindestlänge liegen)
+        ai.log(f"Drehbuch hat nur {n_words} Wörter statt {words} – lasse es verlängern")
+        try:
+            js2, provider = ai.chat_json(SYSTEM, user + f"\n\nACHTUNG: Dein letzter Entwurf hatte nur {n_words} Wörter Sprechertext – das Video wird zu kurz. "
+                                         f"Schreibe das Drehbuch neu mit {round(words * 0.95)} bis {round(words * 1.05)} Wörtern insgesamt: mehr konkrete Folgen, "
+                                         f"Zahlen und Beispiele, keine Füllsätze. Etwa {max(8, round(words / scenes))} Wörter pro Szene, "
+                                         f"{scenes} bis {scenes + 2} Szenen.", 0.8)
+            n2 = sum(len(str(x.get("text", "")).split()) for x in js2.get("scenes", []) if isinstance(x, dict))
+            if n_words < n2 <= words * 1.3:
+                js = js2
+        except Exception as e:  # noqa: BLE001
+            ai.log(f"Verlängern nicht möglich ({e}) – nehme den ersten Entwurf")
     sc = [s for s in js.get("scenes", []) if isinstance(s, dict) and str(s.get("text", "")).strip()]
     if len(sc) < 3:
         raise ai.ProviderError("Drehbuch hat zu wenige Szenen")

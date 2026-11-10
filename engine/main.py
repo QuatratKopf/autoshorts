@@ -164,6 +164,20 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None):
         voice = work / "voice.mp3"
         words, used["voice"] = ai.speak(" ".join(s["text"] for s in scenes), voice, cat)
         total = ai.audio_duration(voice)
+        n_spoken = sum(len(s["text"].split()) for s in scenes)
+        if total > 20 and n_spoken > 40:                 # Sprechtempo merken → nächstes Drehbuch trifft die Länge genauer
+            STATE["voice_wps"] = round(0.5 * float(STATE.get("voice_wps") or n_spoken / total) + 0.5 * n_spoken / total, 3)
+        min_s = float(cfg("min_seconds") or 0)
+        if min_s and total < min_s + 0.5:                # zu kurz: etwas ruhiger sprechen lassen, Rest als Ausklang am Ende
+            f = max(0.9, total / (min_s + 1.0))
+            slow = work / "voice_slow.mp3"
+            subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(voice), "-af",
+                            f"atempo={f:.4f},apad=pad_dur={max(0.0, min(8.0, min_s + 1.0 - total / f)):.2f}", str(slow)], check=True)
+            shutil.move(str(slow), str(voice))
+            words = [(w, s0 / f, e0 / f) for w, s0, e0 in words]
+            new_total = ai.audio_duration(voice)
+            log(f"Video wäre {total:.0f} s kurz gewesen – auf {new_total:.0f} s gebracht (Tempo ×{f:.2f}, Ausklang {max(0.0, new_total - total / f):.1f} s)")
+            total = new_total
         times = render.scene_times(scenes, words, total)
         log(f"Sprecher fertig ({total:.0f} s)")
 

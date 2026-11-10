@@ -112,6 +112,7 @@ DEFAULT_SETTINGS = {
     "autopilot": True,
     "upload_times": "18:00",
     "target_seconds": 70,
+    "min_seconds": 62,              # Videos sollen sicher über einer Minute liegen (TikTok-Creator-Programm)
     "text_provider": "gemini",
     "tts_provider": "gemini",        # gemini = natürliche Erzählerstimme (kostenloses Kontingent), sonst edge
     "voice_style": "Lebendig und mitreißend mit klarer Betonung – wie der Sprecher eines viralen Erklärvideos, flüssig und natürlich.",
