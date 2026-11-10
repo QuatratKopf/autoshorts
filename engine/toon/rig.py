@@ -51,10 +51,10 @@ class Look:
 @dataclass
 class Pose:
     # Winkel in Grad, 0 = nach unten hängend, positiv = nach vorne (in Blickrichtung)
-    arm_l: float = 8          # Schulter hinten
-    fore_l: float = 10
-    arm_r: float = -8         # Schulter vorne
-    fore_r: float = -10
+    arm_l: float = -10        # Schulter hinten
+    fore_l: float = -6
+    arm_r: float = 10         # Schulter vorne
+    fore_r: float = 6
     leg_l: float = 4
     knee_l: float = 0
     leg_r: float = -4
@@ -146,7 +146,9 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0):
         return p2
 
     # hinterer Arm, Beine
-    limb(shoulder, pose.arm_l * f + lean, arm1, pose.fore_l * f, arm2, hand=skin)
+    sh_b = (shoulder[0] - 44 * k * f, shoulder[1] + 6 * k)      # hintere / vordere Schulter (leicht frontal gezeichnet)
+    sh_f = (shoulder[0] + 44 * k * f, shoulder[1] + 6 * k)
+    limb(sh_b, pose.arm_l * f + lean, arm1, pose.fore_l * f, arm2, hand=skin)
     hl = (hip[0] - 20 * k, hip[1] - 8 * k)
     hr_ = (hip[0] + 20 * k, hip[1] - 8 * k)
     limb(hl, pose.leg_l * f, leg1, -pose.knee_l * f, leg2, shoe=True)
@@ -226,7 +228,7 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0):
         d.polygon(pts, fill=(250, 200, 40), outline=INK, width=int(o))
 
     # vorderer Arm
-    limb(shoulder, pose.arm_r * f + lean, arm1, pose.fore_r * f, arm2, hand=skin)
+    limb(sh_f, pose.arm_r * f + lean, arm1, pose.fore_r * f, arm2, hand=skin)
 
     if pose.lying:
         im = im.rotate(90 * f, expand=True, resample=Image.BICUBIC)
@@ -249,8 +251,8 @@ def pose_at(action, t, dur, emotion="", mouth=0.0, seed=0):
     s = math.sin
     prog = min(1.0, t / max(0.3, dur))
     p.squash = 1 + 0.012 * s(t * 2.4 + seed)
-    p.arm_l = 8 + 3 * s(t * 1.6 + seed)
-    p.arm_r = -8 - 3 * s(t * 1.6 + seed + 1)
+    p.arm_l = -12 - 3 * s(t * 1.6 + seed)
+    p.arm_r = 12 + 3 * s(t * 1.6 + seed + 1)
     a = (action or "idle").lower()
 
     if a in ("walk", "run"):
@@ -264,7 +266,7 @@ def pose_at(action, t, dur, emotion="", mouth=0.0, seed=0):
         p.lift = abs(s(ph)) * (8 if a == "walk" else 18)
         p.lean = 4 if a == "walk" else 14
     elif a == "wave":
-        p.arm_r, p.fore_r = 118, 30 + 30 * s(t * 9)
+        p.arm_r, p.fore_r = 150, 10 + 28 * s(t * 9)
         p.smile = 0.8
         p.head = 4 * s(t * 3)
     elif a == "point":
@@ -273,23 +275,24 @@ def pose_at(action, t, dur, emotion="", mouth=0.0, seed=0):
     elif a in ("shocked", "scared"):
         j = max(0.0, 1 - t / 0.35)
         p.lift = 60 * s(min(1, t / 0.35) * math.pi) if t < 0.35 else 0
-        p.arm_l, p.fore_l, p.arm_r, p.fore_r = -130, -30, 130, 30
+        p.arm_l, p.fore_l, p.arm_r, p.fore_r = -150, 20, 150, -20
         p.eyes = "wide"
         p.lean = -6 + 3 * s(t * 30) * (0.3 + j)
         p.leg_l, p.leg_r = 10, -10
     elif a == "sad":
         p.head, p.lean = 18, 10
-        p.arm_l, p.arm_r = 2, -2
+        p.arm_l, p.arm_r = -4, 4
         p.eyes, p.smile = "sad", -0.8
         p.squash = 0.96
     elif a in ("jump", "happy", "cheer"):
         ph = (t * 2.2) % 1.0
         p.lift = 70 * s(ph * math.pi)
-        p.arm_l, p.fore_l, p.arm_r, p.fore_r = -140, -15, 140, 15
+        p.arm_l, p.fore_l, p.arm_r, p.fore_r = -155, 10, 155, -10
         p.leg_l, p.knee_l, p.leg_r, p.knee_r = 20 * (1 - s(ph * math.pi)), 40 * s(ph * math.pi), -10, 30 * s(ph * math.pi)
         p.eyes, p.smile = "happy", 1
     elif a == "think":
-        p.arm_r, p.fore_r = 40, 120
+        p.arm_r, p.fore_r = 20, 150
+        p.arm_l, p.fore_l = 30, 80
         p.head = -8
         p.look = 0.0
         p.eyes = "normal"
@@ -312,11 +315,11 @@ def pose_at(action, t, dur, emotion="", mouth=0.0, seed=0):
     elif a == "fall":
         p.lean = min(90, t * 260)
         p.eyes = "wide"
-        p.arm_l, p.arm_r = 160, 160
+        p.arm_l, p.arm_r = -160, 160
     elif a == "dance":
         p.lift = 14 * abs(s(t * 6))
-        p.arm_l, p.fore_l = 120 + 40 * s(t * 6), 40
-        p.arm_r, p.fore_r = 120 - 40 * s(t * 6), -40
+        p.arm_l, p.fore_l = -120 - 40 * s(t * 6), -40
+        p.arm_r, p.fore_r = 120 - 40 * s(t * 6), 40
         p.leg_l, p.leg_r = 18 * s(t * 6), -18 * s(t * 6)
         p.lean = 8 * s(t * 3)
         p.eyes, p.smile = "happy", 1

@@ -113,7 +113,8 @@ DEFAULT_SETTINGS = {
     "upload_times": "18:00",
     "target_seconds": 70,
     "text_provider": "gemini",
-    "tts_provider": "edge",
+    "tts_provider": "gemini",        # gemini = natürliche Erzählerstimme (kostenloses Kontingent), sonst edge
+    "gemini_voice": "",              # leer = passende Stimme je Video-Art
     "image_provider": "cloudflare",
     "gemini_model": "gemini-flash-latest",
     "openai_text_model": "gpt-4.1-mini",
@@ -188,6 +189,9 @@ for k, v in DEFAULT_SETTINGS.items():
     CONFIG["settings"].setdefault(k, v)
 CONFIG.setdefault("categories", default_config()["categories"])
 CONFIG.setdefault("queue", [])
+if CONFIG["settings"].get("tts_provider") == "edge" and not CONFIG["settings"].get("tts_checked"):
+    CONFIG["settings"]["tts_provider"] = "gemini"   # einmalig auf die natürlichere Stimme umstellen (Edge bleibt Ersatz)
+CONFIG["settings"]["tts_checked"] = True
 if CONFIG["settings"].get("image_style") in OLD_STYLES:   # alte Standard-Vorgabe → neuer, flacherer Stil
     CONFIG["settings"]["image_style"] = DEFAULT_STYLE
 _have = {c.get("slug") for c in CONFIG["categories"]}

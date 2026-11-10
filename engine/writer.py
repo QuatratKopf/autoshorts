@@ -156,7 +156,7 @@ def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
                + "Nutze den Anlass im Hook, erkläre dann den zeitlosen, belegbaren Hintergrund.\n")
     user = (f"Kategorie: {cat['name']}\nStil: {cat['script_style']}\nThema: {topic}\n{ctx}"
             + (f"Zielgruppe: {audience()}\n" if audience() else "")
-            + f"Länge: HÖCHSTENS {words} Wörter gesprochen insgesamt (≈ {secs} Sekunden) – zähle nach und kürze, wenn es mehr sind. "
+            + f"Länge: zwischen {round(words * 0.85)} und {words} Wörter gesprochen insgesamt (≈ {secs} Sekunden) – zähle nach; nicht kürzer, nicht länger. "
             f"Aufgeteilt auf {scenes} Szenen, also etwa {round(words / scenes)} Wörter pro Szene.\n"
             + (f"Wiederkehrende Hauptfigur (nur wenn passend einbauen, in den Bild-Prompts immer gleich beschreiben): {char}\n" if char else "")
             + FORMAT + (TOON if toon else ""))

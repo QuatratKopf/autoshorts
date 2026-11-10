@@ -260,7 +260,108 @@ def _elevenlabs(text, out, cat):
     return words or _even_words(text, audio_duration(out))
 
 
-TTS_PROVIDERS = {"edge": _edge, "openai": _openai_tts, "elevenlabs": _elevenlabs}
+def _silences(path, noise="-34dB", dur=0.16):
+    """Sprechpausen in der Tonspur: Liste (start, ende)."""
+    p = subprocess.run(["ffmpeg", "-hide_banner", "-i", str(path), "-af", f"silencedetect=noise={noise}:d={dur}",
+                        "-f", "null", "-"], capture_output=True, text=True)
+    st = [float(x) for x in re.findall(r"silence_start: ([\d.]+)", p.stderr)]
+    en = [float(x) for x in re.findall(r"silence_end: ([\d.]+)", p.stderr)]
+    return list(zip(st, en))
+
+
+def align_words(text, path):
+    """Wort-Zeiten ohne Zeitstempel vom Anbieter: Wörter nach Länge verteilen, Satzenden auf echte Sprechpausen legen."""
+    total = audio_duration(path)
+    words = text.split()
+    if not words:
+        return []
+    sil = _silences(path)
+    lead = sil[0][1] if sil and sil[0][0] < 0.05 else 0.0
+    tail = sil[-1][0] if sil and sil[-1][1] > total - 0.08 else total
+    gaps = [(a, b) for a, b in sil if a > lead + 0.05 and b < tail - 0.05]
+    weight = [len(re.sub(r"\W", "", w)) + 2.0 for w in words]
+    pause = [0.9 if re.search(r"[.!?…:]$", w) else 0.35 if re.search(r"[,;–-]$", w) else 0.0 for w in words]
+    gap_total = sum(b - a for a, b in gaps)
+    speech = max(0.5, (tail - lead) - gap_total)
+    per = speech / sum(weight)
+    # 1. Schätzung: Wörter nacheinander, Pausen proportional zu den gemessenen Pausen
+    psum = sum(pause) or 1.0
+    t, est = lead, []
+    for w, wt, pz in zip(words, weight, pause):
+        est.append([w, t, t + wt * per])
+        t += wt * per + pz / psum * gap_total
+    # 2. Satzenden auf die nächste echte Pause schieben und die Wörter dazwischen strecken/stauchen
+    anchors = [(0, lead, lead)]          # (Wortindex, Ende des vorigen Satzes, Start des nächsten)
+    for i, pz in enumerate(pause[:-1]):
+        if pz >= 0.9 and gaps:
+            a, b = min(gaps, key=lambda g: abs(g[0] - est[i][2]))
+            if abs(a - est[i][2]) < 2.5 and i + 1 > anchors[-1][0] and a > anchors[-1][2] + 0.2:
+                anchors.append((i + 1, a, b))
+                gaps = [g for g in gaps if g[0] > a]
+    anchors.append((len(words), tail, tail))
+    out = []
+    for (i0, _, t0), (i1, end, _) in zip(anchors, anchors[1:]):
+        seg = est[i0:i1]
+        if not seg:
+            continue
+        e0, e1 = seg[0][1], seg[-1][2]
+        k = (end - t0) / max(0.01, e1 - e0)
+        for w, a, b in seg:
+            out.append((w, t0 + (a - e0) * k, t0 + (b - e0) * k))
+    return out or _even_words(text, total)
+
+
+GEMINI_VOICES = {"grusel": "Enceladus", "lustig": "Puck", "tiere": "Sulafat", "mysterien": "Algenib"}
+
+
+def _gemini_tts(text, out, cat):
+    key = secret("GEMINI_API_KEY")
+    if not key:
+        raise ProviderError("kein GEMINI_API_KEY")
+    voice = cfg("gemini_voice") or GEMINI_VOICES.get(cat.get("slug"), "Charon")
+    style = (cat.get("voice_instructions") or "Fesselnd und natürlich.").strip()
+    prompt = ("Sprich den folgenden deutschen Text als professioneller Erzähler für ein Kurzvideo. "
+              f"Stil: {style} Flüssig und natürlich wie ein Mensch, der eine Geschichte erzählt – mit Betonung, "
+              "kleinen Pausen an den Satzenden und lebendigem Tempo, nicht abgehackt, nicht vorgelesen. "
+              "Sprich nur den Text, nichts davor oder danach:\n\n" + text)
+    last = None
+    for model in [m for m in (cfg("gemini_tts_model"), "gemini-3.8-flash-tts", "gemini-3.1-flash-tts-preview",
+                              "gemini-2.5-flash-preview-tts") if m]:
+        try:
+            r = requests.post(f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
+                              headers={"x-goog-api-key": key},
+                              json={"contents": [{"parts": [{"text": prompt}]}],
+                                    "generationConfig": {"responseModalities": ["AUDIO"], "speechConfig": {
+                                        "voiceConfig": {"prebuiltVoiceConfig": {"voiceName": voice}}}}},
+                              timeout=240)
+            if r.status_code != 200:
+                last = f"{model}: HTTP {r.status_code} {r.text[:160]}"
+                continue
+            part = r.json()["candidates"][0]["content"]["parts"][0]["inlineData"]
+            raw = base64.b64decode(part["data"])
+            mime = str(part.get("mimeType", "")).lower()
+            tmp = str(out) + (".wav" if "wav" in mime else ".pcm")
+            with open(tmp, "wb") as f:
+                f.write(raw)
+            rate = (re.search(r"rate=(\d+)", mime) or [0, "24000"])[1]
+            src = ["-i", tmp] if tmp.endswith(".wav") else ["-f", "s16le", "-ar", rate, "-ac", "1", "-i", tmp]
+            p = subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", *src,
+                                "-af", "silenceremove=start_periods=1:start_threshold=-45dB,highpass=f=70",
+                                "-ar", "44100", "-b:a", "160k", str(out)], capture_output=True, text=True)
+            os.remove(tmp)
+            if p.returncode != 0:
+                last = f"{model}: {p.stderr[-160:]}"
+                continue
+            if audio_duration(out) < max(3.0, len(text.split()) / 6):   # deutlich zu kurz → abgebrochen
+                last = f"{model}: Aufnahme unvollständig"
+                continue
+            return align_words(text, out)
+        except requests.RequestException as e:
+            last = f"{model}: {type(e).__name__}"
+    raise ProviderError(f"Gemini-Stimme: {last}")
+
+
+TTS_PROVIDERS = {"edge": _edge, "openai": _openai_tts, "elevenlabs": _elevenlabs, "gemini": _gemini_tts}
 
 
 def speak(text: str, out, cat: dict) -> tuple[list, str]:
