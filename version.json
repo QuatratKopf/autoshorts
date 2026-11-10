@@ -1,6 +1,6 @@
 {
-  "version": "1.3.1",
-  "file": "releases/AutoShorts-1.3.1.cmd",
-  "sha256": "c26e814269de2603dbc2301ea778ffc0fa3dae6cdf95dfe7989e378298e43c5a",
-  "notes": "Sprechtempo und Sprechstil einstellbar, passendere Hintergründe"
+  "version": "1.3.2",
+  "file": "releases/AutoShorts-1.3.2.cmd",
+  "sha256": "8f43d106b154bd92aaca40518d4bd859270fc8723bb63bd26bd6def77fd10e33",
+  "notes": "Stimme in normalem Tempo; Engine mit echten Größenverhältnissen, neuen Orten und passender Stimmung"
 }
