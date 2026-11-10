@@ -607,5 +607,46 @@
   },
   "thumb": true,
   "mp4": true
+ },
+ {
+  "id": 23,
+  "category": "whatif",
+  "topic": "Was wäre, wenn alle Wälder der Erde verschwinden?",
+  "status": "rendered",
+  "created": 1794290013.6707036,
+  "title": "Was wäre, wenn alle Wälder plötzlich verschwinden?",
+  "description": "Erfahre, was mit der Erde passieren würde, wenn schlagartig alle Wälder verschwinden. Von der Sauerstoffkrise bis zum totalen Kollaps der Natur. Was denkst du, wie lange wir ohne Bäume überleben würden?",
+  "hashtags": [
+   "#shorts",
+   "#foryou",
+   "#viral",
+   "#wissenschaft",
+   "#erde",
+   "#wissen",
+   "#natur",
+   "#whatif"
+  ],
+  "tags": [
+   "waelder",
+   "erde",
+   "physik",
+   "biologie",
+   "sauerstoff",
+   "klima",
+   "katastrophe",
+   "zukunft",
+   "umwelt",
+   "fakt"
+  ],
+  "thumb_text": "ALLE WÄLDER WEG",
+  "cover_ms": 61000,
+  "duration": 60.9,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "mp4": true
  }
 ]
