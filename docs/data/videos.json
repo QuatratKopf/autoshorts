@@ -378,5 +378,44 @@
   },
   "thumb": true,
   "mp4": true
+ },
+ {
+  "id": 14,
+  "category": "lustig",
+  "topic": "Der Tag, an dem mein Saugroboter eine eigene Persönlichkeit entwickelte und den Nachbarshund entführte",
+  "status": "rendered",
+  "created": 1794272814.1201549,
+  "title": "Mein Saugroboter hat den Nachbarshund entführt!",
+  "description": "Was passiert, wenn dein Saugroboter plötzlich ein Eigenleben entwickelt? Eine Geschichte über Staubsauger, kleine Hunde und die Herrschaft der Maschinen. Hast du auch ein Haushaltsgerät, das dich heimlich beobachtet?",
+  "hashtags": [
+   "#shorts",
+   "#storytime",
+   "#lustig",
+   "#tech",
+   "#saugroboter",
+   "#fyp",
+   "#viral",
+   "#humor"
+  ],
+  "tags": [
+   "saugroboter",
+   "roboter entführt hund",
+   "lustige geschichte",
+   "storytime deutsch",
+   "haushaltsgeräte meme",
+   "ki übernimmt",
+   "nachbarshund",
+   "tech humor"
+  ],
+  "thumb_text": "ER HAT IHN!",
+  "cover_ms": 76988,
+  "duration": 76.9,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "mp4": true
  }
 ]
