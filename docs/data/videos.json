@@ -685,5 +685,44 @@
   },
   "thumb": true,
   "mp4": true
+ },
+ {
+  "id": 25,
+  "category": "whatif",
+  "topic": "Was wäre, wenn morgen überall der Strom ausfällt?",
+  "status": "rendered",
+  "created": 1794291803.463015,
+  "title": "Stromausfall weltweit: Was passiert wirklich?",
+  "description": "Was passiert, wenn auf der ganzen Welt plötzlich der Strom ausfällt? Wir spielen die Folgen von Sekunden bis Tagen durch. Wie lange würdest du ohne Strom überleben?",
+  "hashtags": [
+   "#shorts",
+   "#whatif",
+   "#fakten",
+   "#wissen",
+   "#fyp",
+   "#viral",
+   "#deutschland",
+   "#science"
+  ],
+  "tags": [
+   "stromausfall",
+   "blackout",
+   "was wäre wenn",
+   "science fakten",
+   "zukunft",
+   "überleben",
+   "katastrophe",
+   "technik"
+  ],
+  "thumb_text": "WELTWEITER BLACKOUT",
+  "cover_ms": 64162,
+  "duration": 64.1,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "mp4": true
  }
 ]
