@@ -1010,5 +1010,44 @@
   },
   "thumb": true,
   "mp4": true
+ },
+ {
+  "id": 35,
+  "category": "whatif",
+  "topic": "Was wäre, wenn die Erde plötzlich aufhört, sich zu drehen?",
+  "status": "rendered",
+  "created": 1794307105.4913955,
+  "title": "Erde stoppt plötzlich: Das passiert in den ersten 60 Sekunden",
+  "description": "Was würde passieren, wenn die Erde von einer Sekunde auf die andere aufhört, sich zu drehen? Physik-Experten haben das durchgerechnet und die Folgen sind extrem. Überlebst du das?",
+  "hashtags": [
+   "#shorts",
+   "#whatif",
+   "#wissenschaft",
+   "#physik",
+   "#weltall",
+   "#erde",
+   "#viral",
+   "#fyp"
+  ],
+  "tags": [
+   "was wäre wenn",
+   "erde stoppt",
+   "erdrotation",
+   "physik fakten",
+   "katastrophe",
+   "weltall fakten",
+   "wissenschaft einfach",
+   "zukunft"
+  ],
+  "thumb_text": "ERDE STOPPT PLÖTZLICH",
+  "cover_ms": 73958,
+  "duration": 73.9,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "mp4": true
  }
 ]
