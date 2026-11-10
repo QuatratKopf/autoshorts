@@ -348,7 +348,8 @@ def _gemini_tts(text, out, cat):
                                         "voiceConfig": {"prebuiltVoiceConfig": {"voiceName": voice}}}}},
                               timeout=240)
             if r.status_code != 200:
-                last = f"{model}: HTTP {r.status_code} {r.text[:160]}"
+                last = f"{model}: HTTP {r.status_code} {' '.join(r.text.split())[:200]}"
+                log(f"Gemini-Stimme {last}")
                 continue
             part = r.json()["candidates"][0]["content"]["parts"][0]["inlineData"]
             raw = base64.b64decode(part["data"])
@@ -386,7 +387,7 @@ def speak(text: str, out, cat: dict) -> tuple[list, str]:
             return TTS_PROVIDERS[p](text, out, cat), p
         except Exception as e:  # noqa: BLE001
             errors.append(f"{p}: {e}")
-            log(f"Stimme über {p} fehlgeschlagen, versuche nächsten Anbieter …")
+            log(f"Stimme über {p} fehlgeschlagen ({str(e)[:260]}), versuche nächsten Anbieter …")
     raise ProviderError("Keine Stimme verfügbar. " + " | ".join(errors))
 
 
