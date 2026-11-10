@@ -255,17 +255,31 @@ def p_lightning(d, x, t, s=1.0):
 
 
 def p_crack(d, x, t, s=1.0):
-    k = min(1.0, t / 1.4)
-    pts = [(x - 420, GROUND + 260), (x - 250, GROUND + 150), (x - 120, GROUND + 190), (x, GROUND + 60), (x + 110, GROUND + 120),
-           (x + 260, GROUND + 20), (x + 420, GROUND + 70)]
-    n = max(2, int(len(pts) * k) + 1)
-    wdt = int(14 + 40 * k)
-    d.line(pts[:n], fill=INK, width=wdt + 12, joint="curve")
-    d.line(pts[:n], fill=(60, 30, 20), width=wdt, joint="curve")
-    for i in range(6):                     # aufgewirbelte Steine
-        ph = (t * 1.6 + i / 6) % 1
-        px, py = x - 300 + i * 120, GROUND + 60 - ph * 220 + 260 * ph * ph
-        d.rectangle((px - 12, py - 12, px + 12, py + 12), fill=(130, 110, 100), outline=INK, width=3)
+    """Riss im Boden: eine dunkle Spalte, die sich quer durchs Bild öffnet (liegt flach auf dem Boden, hinter den Figuren)."""
+    k = min(1.0, max(0.05, t / 1.3))
+    rnd = random.Random(21)
+    y0 = GROUND - 120
+    n = 15
+    half = 520 * k
+    mid = [(x - half + 2 * half * i / (n - 1), y0 + (rnd.random() - 0.5) * 46 + 16 * math.sin(i * 1.3)) for i in range(n)]
+    wid = [26 * k * math.sin(math.pi * i / (n - 1)) ** 0.7 * (0.6 + 0.8 * rnd.random()) + 2 for i in range(n)]
+    top = [(px_, py - w * 0.55) for (px_, py), w in zip(mid, wid)]
+    bot = [(px_, py + w) for (px_, py), w in zip(mid, wid)][::-1]
+    d.polygon([(a, b_ + 7) for a, b_ in top] + [(a, b_ + 9) for a, b_ in bot], fill=(0, 0, 0, 70))      # Schattenkante
+    d.polygon(top + bot, fill=(26, 18, 20), outline=INK, width=5)
+    d.line([(a, b_ + 3) for a, b_ in top], fill=(96, 74, 62), width=5, joint="curve")                # helle Bruchkante
+    for i in (3, 6, 9, 12):                                        # feine Seitenrisse
+        if i / n > k + 0.1:
+            continue
+        px_, py = mid[i]
+        up = -1 if i % 2 else 1
+        ln = (50 + 40 * rnd.random()) * k
+        d.line((px_, py + up * wid[i] * 0.6, px_ + 26 * up, py + up * ln * 0.55, px_ + 8 * up, py + up * ln), fill=INK, width=5, joint="curve")
+    for i in range(5):                                             # Staub steigt aus der Spalte
+        ph = (t * 0.7 + i / 5) % 1
+        px_ = x - half * 0.8 + i * half * 0.4
+        r = 14 + ph * 34
+        d.ellipse((px_ - r, y0 - 10 - ph * 120 - r, px_ + r, y0 - 10 - ph * 120 + r), fill=(190, 176, 160, int(150 * (1 - ph))))
 
 
 def p_flood(d, x, t, s=1.0):

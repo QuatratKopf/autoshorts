@@ -163,6 +163,10 @@ def _prepare(scene, cast):
         if isinstance(p, dict) and place not in places.OUTDOOR and place not in ("space", "plain") and \
                 extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in extras.SKY and str(scene.get("shot") or "") != "insert":
             continue                                              # Sonne, Mond, Wolken gibt es nicht im Zimmer
+        if isinstance(p, dict) and place not in places.OUTDOOR and place not in ("space", "plain", "cave", "underwater") and \
+                extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in ("fire", "volcano", "tornado", "car", "bus", "truck", "house", "tree", "meteor", "wave") \
+                and str(scene.get("shot") or "") != "insert":
+            continue                                              # gehört nach draußen, nicht ins Zimmer
         if isinstance(p, dict) and p.get("type"):
             taken = [q["x1"] for q in actors] + [q[1] for q in props]
             free = [c for c in (830, 250, 540, 990, 90) if all(abs(c - tx) > 230 for tx in taken)] or [830]
@@ -520,6 +524,8 @@ def direct(scenes, times, topic=""):
             have = {extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) for q in (sc.get("props") or [])}
             for pat, kind in _lib_props() + TEXT_PROPS:
                 if kind not in have and _re0.search(pat, txt0):
+                    if kind in OUTDOOR_THINGS and places.resolve(backdrop(sc)) not in places.OUTDOOR:
+                        continue                           # Feuer, Autos, Naturgewalten erscheinen nicht im Zimmer
                     if kind in INDOOR_THINGS and (places.resolve(backdrop(sc)) in places.OUTDOOR):
                         if used.get(place, 0) < 3 or sc.get("overlay") or sc.get("shot"):
                             continue                       # Zimmer-Dinge stehen nicht in der Landschaft …
@@ -759,6 +765,9 @@ MOOD_HINTS = [
 ]
 INDOOR = ("bedroom", "livingroom", "kitchen", "office", "classroom", "lab", "hospital", "basement", "cave", "underwater", "space")
 MAPS = ("germany", "worldmap")
+OUTDOOR_THINGS = ("fire", "smoke", "volcano", "meteor", "tornado", "lightning", "flood", "crack", "wave", "explosion", "car", "bus", "truck",
+                  "plane", "satellite", "rocket", "ufo", "aurora", "ice", "ship", "bike", "tent", "trafficlight", "house", "tree", "solarpanel",
+                  "pile", "sandpile", "trash", "barrel", "generator")
 DULL = ("table", "shelf", "streetlamp", "rock", "box")          # allein als Großaufnahme langweilig
 INDOOR_THINGS = ("faucet", "glass", "candle", "cans", "clock", "door", "fridge", "tv", "computer", "shelf", "cart", "table", "money")
 TEXT_PROPS = [(r"zucker|\bsalz\b", "pile"), (r"\bsand\b", "sandpile"), (r"\bmüll|abfall|plastik", "trash"), (r"wasserhahn|trinkwasser|leitungswasser", "faucet"),
