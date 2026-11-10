@@ -3,7 +3,7 @@ auf der die Figuren stehen. Alle Orte gibt es bei Tag und bei Nacht."""
 import math
 import random
 
-from PIL import Image, ImageDraw, ImageFilter
+from PIL import Image, ImageChops, ImageDraw, ImageFilter
 
 W, H = 1080, 1920
 GROUND = 1270
@@ -907,6 +907,7 @@ def compose(spec: dict, night=False):
     p = P(night or sky == "night")
     p.mood = sky if sky in ("sunset", "storm", "red", "haze") else ""
     p.sky(BASE + 10)
+    sky0 = p.im.copy()
     rnd = random.Random(sum(ord(c) for c in ",".join(els)) % 1000 + 3)
     if "street" in els and "city" not in els and "ruins" not in els:
         els = els + ["city"]
@@ -961,6 +962,11 @@ def compose(spec: dict, night=False):
     for name in MID_ORDER:
         if name in els:
             MID[name](p, rnd)
+    _last_p.append(p)
+    r, g, bl = ImageChops.difference(p.im, sky0).split()          # wo noch Himmel zu sehen ist (für Sonne, Wolken, Sterne dahinter)
+    m = ImageChops.lighter(ImageChops.lighter(r, g), bl).point(lambda v: 255 if v == 0 else 0)
+    m.paste(0, (0, BASE + 10, W, H))
+    p.skymask = m.filter(ImageFilter.MinFilter(5))
     return p.vignette()
 
 
@@ -1123,6 +1129,14 @@ def resolve(place):
     key = ALIASES.get(str(place or "").lower().strip(), str(place or "").lower().strip())
     return key if (key in PLACES or key in OUTDOOR_SPECS) else "plain"
 _cache = {}
+_masks = {}
+_last_p = []
+
+
+def sky_mask(place, night=False, dark=False):
+    """Maske des sichtbaren Himmels zum Hintergrund (None bei Innenräumen und Sonder-Orten)."""
+    background(place, night, dark)
+    return _masks.get("last")
 
 
 def background(place, night=False, dark=False):
@@ -1134,11 +1148,15 @@ def background(place, night=False, dark=False):
         if isinstance(place, dict):                       # Baukasten-Landschaft
             key = ("c", str(place.get("sky")), str(place.get("ground")), tuple(str(e) for e in (place.get("elements") or [])), bool(night), bool(dark))
             if key not in _cache:
+                _last_p.clear()
                 _cache[key] = compose(place, bool(night)).convert("RGB")
+                _masks[key] = _last_p[0].skymask if _last_p else None
+            _masks["last"] = _masks.get(key)
             return _cache[key]
         key = resolve(place)
         if (key, bool(night), bool(dark)) not in _cache:
             _cache[(key, bool(night), bool(dark))] = PLACES[key](bool(night)).convert("RGB")
+        _masks["last"] = None
         return _cache[(key, bool(night), bool(dark))]
     finally:
         DARK[0] = False

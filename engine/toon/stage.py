@@ -5,7 +5,7 @@ import math
 import subprocess
 from pathlib import Path
 
-from PIL import Image, ImageDraw
+from PIL import Image, ImageChops, ImageDraw
 
 from . import extras, places, rig
 
@@ -110,6 +110,9 @@ def _prepare(scene, cast):
         if isinstance(p, dict) and str(scene.get("shot") or "") != "insert" and \
                 extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in PLACE_HAS.get(place, ()):
             continue                                              # steht an diesem Ort schon
+        if isinstance(p, dict) and place not in places.OUTDOOR and place not in ("space", "plain") and \
+                extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in extras.SKY and str(scene.get("shot") or "") != "insert":
+            continue                                              # Sonne, Mond, Wolken gibt es nicht im Zimmer
         if isinstance(p, dict) and p.get("type"):
             taken = [q["x1"] for q in actors] + [q[1] for q in props]
             free = [c for c in (830, 250, 540, 990, 90) if all(abs(c - tx) > 230 for tx in taken)] or [830]
@@ -131,7 +134,7 @@ CROWD_KINDS = {"worried": "worried", "besorgt": "worried", "nervous": "worried",
                "sad": "sad", "traurig": "sad", "watch": "watch", "staunen": "watch", "gather": "watch"}
 
 
-def _crowd(frame, kind, t, night, lo=0, hi=9999, road=False, traffic=True, indoor=False):
+def _crowd(frame, kind, t, night, lo=0, hi=9999, road=False, traffic=True, indoor=False, avoid=()):
     """Menschen im Bild, die die Stimmung zeigen: Panik (rennen kreuz und quer), Alltag (gehen), Sorge (stehen unruhig,
     sehen sich um), Jubel (springen), Trauer (stehen gebeugt), Staunen (stehen und zeigen). Jeder Mensch ist so groß,
     wie es zu seiner Tiefe im Bild passt; gezeichnet werden nur die mit Fußlinie zwischen lo und hi."""
@@ -180,6 +183,9 @@ def _crowd(frame, kind, t, night, lo=0, hi=9999, road=False, traffic=True, indoo
             facing = direction
         else:
             x = 110 + (i + 0.5) * (W - 220) / n + math.sin(i * 2.3) * 30
+            for ax in avoid:                                   # nicht hinter einer Hauptfigur verstecken
+                if abs(x - ax) < 150:
+                    x = ax + (170 if x >= ax else -170)
             facing = 1 if x < W / 2 else -1
             if kind == "cheer":
                 pose, _ = rig.pose_at("jump", t + ph, 9, "happy", 0.6, i)
@@ -196,7 +202,7 @@ def _crowd(frame, kind, t, night, lo=0, hi=9999, road=False, traffic=True, indoo
         _shadow(frame, int(x), int(gy), int(60 * sc))
         frame.paste(im, (int(x - fx), int(gy - fy)), im)
         if emote and sc > 0.3:
-            extras.draw_emote(frame, emote, x - 60 * sc, gy - 470 * sc, t + ph)
+            extras.draw_emote(frame, emote, x, gy - (505 + max(0, pose.lift)) * sc, t + ph, sc)
 
 
 ON_TABLE = ("cans", "candle", "money", "canister")           # Kleines steht drinnen auf einem Tisch, damit man es sieht
@@ -249,11 +255,26 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
     if opt.get("mood") == "panic" and weather not in ("quake", "erdbeben"):      # Panik: die Kamera zittert leicht
         dx, dy = int(math.sin(t * 31) * 7), int(math.cos(t * 27) * 5)
         frame = frame.transform(frame.size, Image.AFFINE, (1, 0, dx, 0, 1, dy), resample=Image.NEAREST)
-    extras.draw_ambient(frame, place, night, t)
+    sky = opt.get("sky")
+    behind = [(k, x) for k, x in props if extras.PROP_ALIASES.get(k, k) in extras.BEHIND]
+    if sky is not None:                                # Wolken, Vögel, Sterne, Sonne, Mond: nur dort, wo Himmel zu sehen ist
+        lay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        extras.draw_ambient(lay, place, night, t)
+        for kind, x in behind:
+            if extras.PROP_ALIASES.get(kind, kind) in ("sun", "moon", "earth"):      # hoch am Himmel, über den Dächern
+                tmp = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+                _prop(tmp, kind, x, t, 1.0)
+                lay.alpha_composite(tmp, (0, 0), (0, 230))
+            else:
+                _prop(lay, kind, x, t, min(big, 1.2))
+        frame.paste(lay, (0, 0), ImageChops.multiply(lay.getchannel("A"), sky))
+        props = [q for q in props if q not in behind]
+    else:
+        extras.draw_ambient(frame, place, night, t)
     spec = opt.get("spec")
     road, traffic = extras.has_road(spec), not opt.get("no_traffic")
     indoor = place not in places.OUTDOOR
-    ckw = dict(road=road, traffic=traffic, indoor=indoor)
+    ckw = dict(road=road, traffic=traffic, indoor=indoor, avoid=[a["x1"] for a in actors])
     if opt.get("crowd"):
         _crowd(frame, opt["crowd"], t, night, 0, 1090, **ckw)           # Menschen hinter der Fahrbahn zuerst
     extras.draw_landscape_motion(frame, spec, place, night, t, traffic)
@@ -281,7 +302,7 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
         else:
             facing = 1 if (x < 600 or len(actors) == 1) else -1
         gy = places.GROUND + (18 if a["speaks"] else 0)
-        head_y = gy - 430 * scale
+        head_y = gy - 505 * scale
         if a["kind"]:
             hop = abs(math.sin(t * 9)) * 16 if (moving and not arrived) else 0
             res = extras.creature(a["kind"], t + a["seed"], facing, mouth, a["emotion"] or
@@ -291,7 +312,7 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                 if not fly:
                     _shadow(frame, int(x), gy, int(120 * scale))
                 frame.paste(im, (int(x - fx), int(gy - fy - hop)), im)
-                head_y = gy - 400 * scale
+                head_y = gy - 430 * scale
         else:
             action = a["action"]
             tt = t
@@ -314,10 +335,10 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
             if a.get("hold") and not pose.lying and "hand" in pose.extra:
                 hx, hy = pose.extra["hand"]
                 extras.draw_held(frame, a["hold"], x - fx + hx, gy - fy + hy, facing, t, scale, night)
-            head_y = gy - (430 + max(0, pose.lift)) * scale * a["look"].size
-            _zzz(od, pose, x, head_y, t)
+            head_y = gy - (505 + max(0, pose.lift)) * scale * a["look"].size
+            _zzz(od, pose, x, head_y + 75 * scale, t)
         if a["emote"]:
-            extras.draw_emote(over, a["emote"], x, head_y, t)
+            extras.draw_emote(over, a["emote"], x, head_y, t, scale)
         if a["speaks"] or len(actors) == 1:
             focus = x
     for kind, x in props:
@@ -359,6 +380,10 @@ def direct(scenes, times):
                 sc.pop("backdrop", None)
                 has_bd = False
                 break
+        celestial = any(extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(), str(q.get("type") if isinstance(q, dict) else q).lower())
+                        in extras.SKY for q in (sc.get("props") or []))
+        if celestial and not has_bd and places.resolve(sc.get("place")) == "street":
+            sc["backdrop"] = {"ground": "road", "elements": ["city"]}      # Skyline mit freiem Himmel statt Häuserwand
         if has_bd or isinstance(sc.get("backdrop"), dict):
             place = "custom:" + ",".join(str(e) for e in (sc["backdrop"].get("elements") or [sc["backdrop"].get("ground")]))
         if place == "plain":      # unbekannter Ort im Drehbuch → beim letzten Ort bleiben (draußen: Park), nie ein leerer Raum
@@ -442,7 +467,7 @@ def direct(scenes, times):
                                         "emotion": MOOD_EMOTION.get(mood, "")}]
         # Gegenstand groß zeigen statt dritter Rede-Szene im selben Zimmer
         things = [q for q in (sc.get("props") or []) if extras.prop_fit(q.get("type") if isinstance(q, dict) else q)]
-        if (not outdoor and things and not has_ov and not sc.get("shot") and len(acts) <= 1
+        if (not outdoor and things and not has_ov and not sc.get("shot") and not sc.get("crowd") and len(acts) <= 1
                 and all(str(a.get("action") or "talk").lower() in ("talk", "idle", "") for a in acts)
                 and not (i and str(scenes[i - 1].get("shot") or "") == "insert")):
             sc["shot"] = "insert"
@@ -605,6 +630,7 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     words: [(wort, start, ende)] der ganzen Sprecherspur; t0 = Startzeit der Szene darin."""
     place, night, scale, actors, props, weather = _prepare(scene, cast)
     bg = places.background(backdrop(scene), night, bool(scene.get("dark_city")))
+    sky_m = places.sky_mask(backdrop(scene), night, bool(scene.get("dark_city")))
     n_frames = max(2, round(dur * FPS))
     shot = str(scene.get("shot") or "").lower()
     has_ov = isinstance(scene.get("overlay"), dict) and scene["overlay"].get("type")
@@ -625,7 +651,7 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
                 ff.stdin.write(frame.tobytes())
                 continue
             frame = _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, place == "bedroom", shot, big,
-                           {"crowd": scene.get("crowd"), "mood": str(scene.get("mood") or "").lower(), "spec": places.spec_of(backdrop(scene)),
+                           {"crowd": scene.get("crowd"), "mood": str(scene.get("mood") or "").lower(), "spec": places.spec_of(backdrop(scene)), "sky": sky_m,
                             "no_traffic": bool(scene.get("no_traffic") or scene.get("dark_city"))})
             if still is not None and fidx == min(n_frames - 1, FPS):
                 frame.save(still, quality=92)
@@ -648,7 +674,8 @@ def cover(spec: dict, cast: dict, out: Path):
                          "emote": " ", "pos": "center"}]}
     place, night, _, actors, props, weather = _prepare(scene, cast)
     frame = _frame(places.background(backdrop(scene), night), place, night, 1.25, actors, props, weather, 1.4, 3.0, (), 0.0, False, "", 1.35,
-                   {"crowd": spec.get("crowd"), "mood": "", "spec": places.spec_of(backdrop(scene))})
+                   {"crowd": spec.get("crowd"), "mood": "", "spec": places.spec_of(backdrop(scene)),
+                    "sky": places.sky_mask(backdrop(scene), night)})
     # so beschneiden, dass die Figur groß in der unteren Bildhälfte sitzt und das obere Drittel für den Text frei bleibt
     frame = frame.crop((135, 0, 945, 1440)).resize((W, H), Image.LANCZOS)
     frame.save(out, quality=93)

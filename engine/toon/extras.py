@@ -504,6 +504,7 @@ PROP_ALIASES = {"baum": "tree", "stein": "rock", "kiste": "box", "auto": "car", 
                 "boot": "ship", "paket": "box", "karton": "box", "geldstapel": "money", "bildschirm": "tv", "lagerfeuer": "fire",
                 "pflanze": "sprout", "plant": "sprout", "comet": "meteor", "komet": "meteor", "welle": "wave", "eisberg": "ice", "vulkan": "volcano", "bigsun": "sun"}
 FRONT = ("wave", "flood", "eclipse")
+BEHIND = ("sun", "moon", "earth", "cloud", "stormcloud", "aurora")      # stehen am Himmel hinter Häusern, Bergen und Bäumen
 SKY = ("earth", "sun", "moon", "ufo", "meteor", "aurora", "eclipse", "lightning", "cloud", "stormcloud", "plane", "satellite")     # werden vor den Figuren gezeichnet
 
 
@@ -587,47 +588,52 @@ def draw_prop(layer, kind, x, t):
 
 # ------------------------------------------------------------------ Gefühls-Symbole über dem Kopf
 
-def draw_emote(layer, kind, x, y, t):
+def draw_emote(layer, kind, x, y, t, sc=1.0):
+    """Symbol mittig über dem Kopf (x = Kopfmitte, y = Oberkante Kopf); sc = Maßstab der Figur."""
     k = _pop(t, 0.15)
     if k <= 0:
         return
     d = ImageDraw.Draw(layer, "RGBA")
     kind = str(kind).lower().strip()
-    bob = math.sin(t * 5) * 6
-    s = k
-    cx, cy = x + 120, y - 30 + bob
+    s = k * max(0.35, sc)
+    bob = math.sin(t * 5) * 6 * s
+    cx, cy = x, y - 84 * s + bob
+    w = max(3, int(O * min(1.0, s)))
     if kind in ("!", "alarm", "exclaim"):
-        _r(d, (cx - 16 * s, cy - 110 * s, cx + 16 * s, cy - 24 * s), (240, 70, 60), 10)
-        _o(d, (cx - 18 * s, cy - 12 * s, cx + 18 * s, cy + 24 * s), (240, 70, 60))
+        _r(d, (cx - 16 * s, cy - 110 * s, cx + 16 * s, cy - 24 * s), (240, 70, 60), 10 * s, w)
+        _o(d, (cx - 18 * s, cy - 12 * s, cx + 18 * s, cy + 24 * s), (240, 70, 60), w)
     elif kind in ("?", "question"):
         d.arc((cx - 40 * s, cy - 110 * s, cx + 40 * s, cy - 30 * s), 180, 90, fill=INK, width=int(30 * s))
         d.arc((cx - 40 * s, cy - 110 * s, cx + 40 * s, cy - 30 * s), 180, 90, fill=(80, 150, 250), width=int(18 * s))
-        _o(d, (cx - 16 * s, cy - 6 * s, cx + 16 * s, cy + 26 * s), (80, 150, 250))
+        d.line((cx, cy - 34 * s, cx, cy - 18 * s), fill=INK, width=int(30 * s))
+        d.line((cx, cy - 36 * s, cx, cy - 22 * s), fill=(80, 150, 250), width=int(18 * s))
+        _o(d, (cx - 16 * s, cy - 6 * s, cx + 16 * s, cy + 26 * s), (80, 150, 250), w)
     elif kind in ("heart", "love", "herz"):
         r = 34 * s * (1 + 0.1 * math.sin(t * 8))
         for dx in (-r * 0.5, r * 0.5):
-            d.ellipse((cx + dx - r * 0.62, cy - 80 - r * 0.62, cx + dx + r * 0.62, cy - 80 + r * 0.62), fill=(240, 70, 100))
-        d.polygon([(cx - r * 1.06, cy - 70), (cx + r * 1.06, cy - 70), (cx, cy - 80 + r * 1.3)], fill=(240, 70, 100))
+            d.ellipse((cx + dx - r * 0.62, cy - 50 * s - r * 0.62, cx + dx + r * 0.62, cy - 50 * s + r * 0.62), fill=(240, 70, 100))
+        d.polygon([(cx - r * 1.06, cy - 40 * s), (cx + r * 1.06, cy - 40 * s), (cx, cy - 50 * s + r * 1.3)], fill=(240, 70, 100))
     elif kind in ("idea", "idee", "bulb"):
-        _o(d, (cx - 40 * s, cy - 130 * s, cx + 40 * s, cy - 50 * s), (255, 226, 90))
-        _r(d, (cx - 20 * s, cy - 54 * s, cx + 20 * s, cy - 26 * s), (150, 156, 166), 4, 5)
+        _o(d, (cx - 40 * s, cy - 110 * s, cx + 40 * s, cy - 30 * s), (255, 226, 90), w)
+        _r(d, (cx - 20 * s, cy - 34 * s, cx + 20 * s, cy - 6 * s), (150, 156, 166), 4, max(3, int(5 * s)))
         for a in (-150, -90, -30):
-            d.line((cx + math.cos(math.radians(a)) * 56 * s, cy - 90 * s + math.sin(math.radians(a)) * 56 * s,
-                    cx + math.cos(math.radians(a)) * 84 * s, cy - 90 * s + math.sin(math.radians(a)) * 84 * s), fill=(255, 226, 90), width=8)
-    elif kind in ("sweat", "schweiß"):
+            d.line((cx + math.cos(math.radians(a)) * 56 * s, cy - 70 * s + math.sin(math.radians(a)) * 56 * s,
+                    cx + math.cos(math.radians(a)) * 84 * s, cy - 70 * s + math.sin(math.radians(a)) * 84 * s), fill=(255, 226, 90), width=max(3, int(8 * s)))
+    elif kind in ("sweat", "schweiß"):                     # Schweißtropfen läuft an der Schläfe herunter
         ph = (t * 1.2) % 1
-        d.polygon([(cx - 40, cy - 40 + ph * 60), (cx - 62, cy + 6 + ph * 60), (cx - 18, cy + 6 + ph * 60)], fill=(130, 200, 250), outline=INK, width=4)
-        d.chord((cx - 62, cy - 16 + ph * 60, cx - 18, cy + 28 + ph * 60), 0, 180, fill=(130, 200, 250), outline=INK, width=4)
+        sx, sy = x + 86 * s, y + (40 + ph * 50) * s
+        d.polygon([(sx, sy - 34 * s), (sx - 17 * s, sy), (sx + 17 * s, sy)], fill=(130, 200, 250), outline=INK, width=max(2, int(4 * s)))
+        d.chord((sx - 17 * s, sy - 17 * s, sx + 17 * s, sy + 17 * s), 0, 180, fill=(130, 200, 250), outline=INK, width=max(2, int(4 * s)))
     elif kind in ("anger", "wut"):
         for a in (0, 90):
             dx, dy = math.cos(math.radians(a + 45)) * 40 * s, math.sin(math.radians(a + 45)) * 40 * s
-            d.line((cx - dx, cy - 80 - dy, cx + dx, cy - 80 + dy), fill=(230, 60, 50), width=int(16 * s))
+            d.line((cx - dx, cy - 50 * s - dy, cx + dx, cy - 50 * s + dy), fill=(230, 60, 50), width=int(16 * s))
     elif kind in ("music", "musik"):
         for i in range(2):
             ph = (t * 0.8 + i * 0.5) % 1
-            nx, ny = cx + i * 50 + math.sin(t * 4 + i) * 10, cy - 30 - ph * 150
-            d.ellipse((nx - 16, ny - 12, nx + 16, ny + 12), fill=INK)
-            d.line((nx + 14, ny, nx + 14, ny - 60), fill=INK, width=7)
+            nx, ny = cx - 25 * s + i * 50 * s + math.sin(t * 4 + i) * 10 * s, cy - ph * 150 * s
+            d.ellipse((nx - 16 * s, ny - 12 * s, nx + 16 * s, ny + 12 * s), fill=INK)
+            d.line((nx + 14 * s, ny, nx + 14 * s, ny - 60 * s), fill=INK, width=max(3, int(7 * s)))
 
 
 # ------------------------------------------------------------------ Wetter und Hintergrund-Leben
