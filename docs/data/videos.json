@@ -763,5 +763,43 @@
   },
   "thumb": true,
   "mp4": true
+ },
+ {
+  "id": 27,
+  "category": "whatif",
+  "topic": "Was wäre, wenn es ein Jahr lang nicht mehr regnet?",
+  "status": "rendered",
+  "created": 1794294654.4856896,
+  "title": "Was wäre wenn es ein Jahr lang nicht mehr regnet",
+  "description": "Was passiert mit unserem Planeten, wenn ein ganzes Jahr kein einziger Tropfen Regen fällt? Wir spielen die globale Trockenheit Schritt für Schritt durch. Wie lange würde deine Stadt überleben?",
+  "hashtags": [
+   "#shorts",
+   "#whatif",
+   "#wissen",
+   "#dürre",
+   "#zukunft",
+   "#fyp",
+   "#viral"
+  ],
+  "tags": [
+   "was wäre wenn",
+   "regen",
+   "dürre",
+   "klimawandel",
+   "wasserknappheit",
+   "erde",
+   "wissenschaft",
+   "überleben"
+  ],
+  "thumb_text": "KEIN REGEN MEHR",
+  "cover_ms": 62130,
+  "duration": 62.0,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "mp4": true
  }
 ]
