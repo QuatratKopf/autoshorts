@@ -53,7 +53,7 @@
    "voice_rate": "+8%",
    "voice_pitch": "+0Hz",
    "voice_instructions": "Begeistert, locker und schnell, wie ein Freund, der etwas Verrücktes erzählt.",
-   "enabled": false,
+   "enabled": true,
    "trends": true
   },
   {
