@@ -294,5 +294,47 @@
   },
   "thumb": true,
   "mp4": true
+ },
+ {
+  "id": 12,
+  "category": "whatif",
+  "topic": "Was wäre, wenn das gesamte Wasser der Erdozene und Flüsse von heute auf morgen komplett verdampft?",
+  "status": "rendered",
+  "created": 1794272200.3487206,
+  "trend": {
+   "title": "Einfach keine Erholung: Rheinpegel in Köln fällt auf 54 Zentimeter",
+   "source": "Reddit r/de"
+  },
+  "title": "Was wenn ALLES Wasser auf der Erde verdampft?",
+  "description": "Der Rhein trocknet aus, aber was passiert, wenn wirklich das gesamte Wasser der Erde schlagartig verdampft? Wir spielen die Folgen von Minuten bis Jahren durch. Schreib deine Meinung in die Kommentare!",
+  "hashtags": [
+   "#shorts",
+   "#whatif",
+   "#wissen",
+   "#wissenschaft",
+   "#erde",
+   "#klima",
+   "#fyp",
+   "#viral"
+  ],
+  "tags": [
+   "was wäre wenn",
+   "wasser verdampft",
+   "ozean austrocknen",
+   "rheinpegel",
+   "wissenschaft einfach erklärt",
+   "physik fakten",
+   "erde ohne wasser"
+  ],
+  "thumb_text": "KEIN WASSER MEHR",
+  "cover_ms": 55290,
+  "duration": 55.2,
+  "providers": {
+   "text": "gemini",
+   "voice": "edge",
+   "images": "toon"
+  },
+  "thumb": true,
+  "mp4": true
  }
 ]
