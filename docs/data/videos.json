@@ -724,5 +724,44 @@
   },
   "thumb": true,
   "mp4": true
+ },
+ {
+  "id": 26,
+  "category": "whatif",
+  "topic": "Was wäre, wenn morgen überall der Strom ausfällt?",
+  "status": "rendered",
+  "created": 1794294096.6631992,
+  "title": "Was passiert, wenn morgen weltweit der Strom ausfällt?",
+  "description": "Was wäre, wenn ohne Vorwarnung weltweit der Strom ausfällt? Wir spielen die Folgen von den ersten Sekunden bis zu den Jahren danach durch. Schreib deine Meinung in die Kommentare!",
+  "hashtags": [
+   "#shorts",
+   "#whatif",
+   "#stromausfall",
+   "#blackout",
+   "#physik",
+   "#zukunft",
+   "#foryou",
+   "#viral"
+  ],
+  "tags": [
+   "stromausfall",
+   "blackout",
+   "was wäre wenn",
+   "physik",
+   "survival",
+   "zukunft",
+   "katastrophe",
+   "energie"
+  ],
+  "thumb_text": "KEIN STROM MEHR",
+  "cover_ms": 55926,
+  "duration": 55.8,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "mp4": true
  }
 ]
