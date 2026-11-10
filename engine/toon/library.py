@@ -215,5 +215,6 @@ def learn(wishes, chat_json, known, log=print, limit=3):
             continue
         register(item)
         new[item["name"]] = json.loads(json.dumps({k: v for k, v in item.items() if k not in ("shift", "mid")}))
+        new[item["name"]]["auto"] = True          # vorläufige KI-Zeichnung – wird beim nächsten Ausbau geprüft und ersetzt
         log(f"Bibliothek: „{item['name']}“ neu gelernt ({len(item['shapes'])} Formen, {item['height_m']:g} m)")
     return new
