@@ -54,7 +54,7 @@ def _zzz(d, pose, hx, hy, t):
 
 
 def _prepare(scene, cast):
-    place = places.resolve(scene.get("place"))
+    place = places.resolve(backdrop(scene))
     night = str(scene.get("time") or "").lower() in ("night", "nacht", "abend", "evening")
     ov = scene.get("overlay") if isinstance(scene.get("overlay"), dict) else {}
     scale = 0.9 if str(ov.get("type")) in TALL_OV else SCALE
@@ -197,13 +197,28 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
 def direct(scenes, times):
     """Kleine Regie über das ganze Video: sorgt für Abwechslung, wenn das Drehbuch mehrmals hintereinander dieselbe
     Einstellung vorgibt (gleicher Ort, gleiche Figur, nur Reden) – andere Position, Nahaufnahme oder Hereinkommen."""
-    prev_place, same, changes = None, 0, 0
+    prev_place, same, changes, prev_bd = None, 0, 0, None
     for i, (sc, (s0, e0)) in enumerate(zip(scenes, times)):
         acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
         place = places.resolve(sc.get("place"))
+        has_bd = isinstance(sc.get("backdrop"), dict) and (sc["backdrop"].get("elements") or sc["backdrop"].get("ground"))
+        hint = None if has_bd else _hint(sc.get("text"))
+        if hint is not None and (place in GENERIC or str(sc.get("shot") or "") == "event"):
+            if isinstance(hint, dict):               # passende Landschaft aus dem Baukasten
+                if place != "custom":
+                    sc["backdrop"] = hint
+            elif hint != place:
+                sc["place"] = place = hint
+        if has_bd or isinstance(sc.get("backdrop"), dict):
+            place = "custom:" + ",".join(str(e) for e in (sc["backdrop"].get("elements") or [sc["backdrop"].get("ground")]))
         if place == "plain":      # unbekannter Ort im Drehbuch → beim letzten Ort bleiben (draußen: Park), nie ein leerer Raum
-            place = prev_place or "park"
-            sc["place"] = place
+            if prev_bd is not None:
+                sc["backdrop"] = prev_bd
+                place = prev_place
+            else:
+                place = prev_place if (prev_place and not str(prev_place).startswith("custom")) else "park"
+                sc["place"] = place
+        prev_bd = sc.get("backdrop") if isinstance(sc.get("backdrop"), dict) else None
         has_ov = isinstance(sc.get("overlay"), dict) and sc["overlay"].get("type")
         lone = len(acts) == 1 and str(acts[0].get("action") or "talk").lower() in ("talk", "idle", "") and not acts[0].get("to")
         if place != prev_place:
@@ -224,11 +239,56 @@ def direct(scenes, times):
     return scenes
 
 
+def backdrop(scene):
+    """Was als Hintergrund gezeichnet wird: Baukasten-Landschaft (backdrop) oder ein fester Ort."""
+    b = scene.get("backdrop")
+    if isinstance(b, dict) and (b.get("elements") or b.get("ground") or b.get("sky")):
+        return b
+    return scene.get("place")
+
+
+# Wörter im Sprechertext → passender Hintergrund (greift nur, wenn das Drehbuch einen unpassenden Allerwelts-Ort nennt)
+HINTS = [
+    (r"regenwald|dschungel|\bwald|wälder|bäume", {"elements": ["forest"]}),
+    (r"ausgetrocknet|dürre|vertrocknet|trocknen aus|staubtrocken", {"ground": "dry", "sky": "haze", "elements": ["deadtrees", "dryriver"]}),
+    (r"\bfluss|flüsse|\bbach|strom fließt", {"elements": ["hills", "river"]}),
+    (r"\bsee\b|\bseen\b|teich", {"elements": ["hills", "lake"]}),
+    (r"ernte|landwirt|bauern|\bfeld|felder|acker|getreide", {"elements": ["farm", "fields"]}),
+    (r"gletscher|eiszeit|arktis|antarktis|polkappe|\beis\b", {"ground": "snow", "elements": ["glacier", "mountains"]}),
+    (r"\bschnee|\bwinter", "snow"),
+    (r"\bmeer|ozean|küste|strand|wellen", "beach"),
+    (r"tiefsee|unter wasser|meeresgrund|korallen", "underwater"),
+    (r"wüste|sahara|sanddüne", "desert"),
+    (r"vulkan|gebirge|\bberg|gipfel", "mountain"),
+    (r"weltall|weltraum|galaxie|planet|umlaufbahn|astronaut|\bmond\b|sonnensystem", "space"),
+    (r"höhle", "cave"),
+    (r"fabrik|industrie|kraftwerk|abgase", {"sky": "haze", "elements": ["factory", "city"]}),
+    (r"\bdorf|dörfer", {"elements": ["village", "hills"]}),
+    (r"ruinen|zerstört|trümmer|apokalypse", {"sky": "red", "ground": "road", "elements": ["ruins"]}),
+    (r"\bstadt|städte|straße|verkehr|hochhaus|hochhäuser", "street"),
+    (r"krankenhaus|\barzt|ärzte|klinik", "hospital"),
+    (r"\bschule|unterricht|klasse", "classroom"),
+    (r"\blabor|forscher|wissenschaftler|experiment", "lab"),
+    (r"\bbüro|\barbeit\b|\bchef", "office"),
+    (r"küche|kochen|kühlschrank", "kitchen"),
+]
+GENERIC = ("street", "park", "plain", "livingroom")
+
+
+def _hint(text):
+    import re as _re
+    t = str(text or "").lower()
+    for pat, target in HINTS:
+        if _re.search(pat, t):
+            return target
+    return None
+
+
 def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.0, still: Path = None):
     """scene: {"place", "time", "weather", "props", "actors": [{"id", "action", "emotion", "emote", "pos", "to", "speaks"}]}.
     words: [(wort, start, ende)] der ganzen Sprecherspur; t0 = Startzeit der Szene darin."""
     place, night, scale, actors, props, weather = _prepare(scene, cast)
-    bg = places.background(place, night)
+    bg = places.background(backdrop(scene), night)
     n_frames = max(2, round(dur * FPS))
     shot = str(scene.get("shot") or "").lower()
     has_ov = isinstance(scene.get("overlay"), dict) and scene["overlay"].get("type")
@@ -256,13 +316,13 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
 
 def cover(spec: dict, cast: dict, out: Path):
     """Titelbild im Stil der Engine: Ort + große Figur mit starkem Gefühl + optional Requisite. Text kommt später darüber."""
-    scene = {"place": spec.get("place") or "plain", "time": spec.get("time"), "weather": spec.get("weather"),
+    scene = {"place": spec.get("place") or "park", "backdrop": spec.get("backdrop"), "time": spec.get("time"), "weather": spec.get("weather"),
              "props": spec.get("props") or [],
              "actors": [{"id": spec.get("actor") or next(iter(cast), "held"), "kind": spec.get("kind") or "",
                          "action": spec.get("action") or "shocked", "emotion": spec.get("emotion") or "shocked",
                          "emote": " ", "pos": "center"}]}
     place, night, _, actors, props, weather = _prepare(scene, cast)
-    frame = _frame(places.background(place, night), place, night, 1.25, actors, props, weather, 1.4, 3.0, (), 0.0, False, "", 1.35)
+    frame = _frame(places.background(backdrop(scene), night), place, night, 1.25, actors, props, weather, 1.4, 3.0, (), 0.0, False, "", 1.35)
     # so beschneiden, dass die Figur groß in der unteren Bildhälfte sitzt und das obere Drittel für den Text frei bleibt
     frame = frame.crop((135, 0, 945, 1440)).resize((W, H), Image.LANCZOS)
     frame.save(out, quality=93)

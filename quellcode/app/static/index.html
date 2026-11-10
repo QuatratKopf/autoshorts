@@ -443,7 +443,7 @@ let CFG = null, ST = {}, VIDS = [], STATS = {v: {}, ch: {}}, TRENDS = {items: []
 let SECRETS = null, RUNS = [], PENDING = null, LOADERR = "", CANCEL_NEXT = 0, CANCELING = new Set();
 let TAB = (location.hash || "#dashboard").slice(1);
 if (!["dashboard", "kalender", "studio", "einstellungen"].includes(TAB)) TAB = "dashboard";
-const DEF = {tts_provider: "gemini", gemini_voice: "", sfx_volume: 0.35, trend_mode: "half", make_thumbnail: true, youtube_thumbnail: true, trend_regions: "US,DE",
+const DEF = {voice_speed: 0.94, voice_style: "Ruhig, langsam und entspannt – eine gelassene, warme Erzählstimme mit kleinen Pausen. Nicht aufgeregt.", tts_provider: "gemini", gemini_voice: "", sfx_volume: 0.35, trend_mode: "half", make_thumbnail: true, youtube_thumbnail: true, trend_regions: "US,DE",
   audience: "Gen Z (16–25) in Deutschland, die TikTok und YouTube Shorts schauen: Internet-Kultur, Memes, virale Trends, Gaming, Musik, Serien, Filme, Creator, Tech, Lifestyle. Lockere Sprache wie unter Freunden, schnell auf den Punkt, kein Lehrer- oder Kinder-Ton."};
 const S_ = k => { const v = (CFG && CFG.settings || {})[k]; return v === undefined ? DEF[k] : v; };
 const cat = slug => (CFG && CFG.categories || []).find(c => c.slug === slug);
@@ -980,11 +980,13 @@ function viewSettings() {
     <div class="lbl">Skript</div>${radio("text_provider", [["gemini", "Google Gemini", "Kostenlos · gute Texte"], ["pollinations", "Pollinations", "Kostenlos ohne Anmeldung · einfacher"], ["openai", "OpenAI · Premium", "≈ 0,3 Cent pro Video"]])}
     <div class="lbl">Stimme</div>${radio("tts_provider", [["gemini", "Gemini-Erzähler", "Kostenlos · natürliche, flüssige Erzählerstimme"], ["edge", "Microsoft Edge-Stimmen", "Kostenlos · Ersatz, klingt mehr nach Computer"], ["openai", "OpenAI · Premium", "≈ 2 Cent pro Video"], ["elevenlabs", "ElevenLabs · Premium", "Beste Stimmen · Abo ab ca. 5 $"]])}
     ${sel("gemini_voice", "Gemini-Stimme", "Leer = passend zur Video-Art.", [["", "Automatisch je Video-Art"], ["Charon", "Charon · ruhig, erklärend"], ["Algenib", "Algenib · tief, rau"], ["Enceladus", "Enceladus · leise, geheimnisvoll"], ["Puck", "Puck · fröhlich, frech"], ["Fenrir", "Fenrir · aufgeregt"], ["Orus", "Orus · fest, klar"], ["Kore", "Kore · weiblich, bestimmt"], ["Sulafat", "Sulafat · weiblich, warm"], ["Aoede", "Aoede · weiblich, locker"]])}
+    ${fld("voice_speed", "Sprechtempo", "1 = normal · 0,94 = etwas langsamer · 0,88 = deutlich langsamer.")}
+    <div class="row"><label for="f_voice_style">Sprechstil<small>So soll der Erzähler klingen. Gilt für alle Video-Arten.</small></label><textarea id="f_voice_style" data-k="voice_style" rows="2">${esc(S_("voice_style"))}</textarea></div>
     <div class="sep"></div>
     ${fld("gemini_model", "Gemini-Modell")}${fld("openai_text_model", "OpenAI Text-Modell")}
     ${fld("openai_tts_model", "OpenAI Stimm-Modell")}${fld("openai_voice", "OpenAI Stimme", "z. B. ash, coral, onyx, sage")}${fld("elevenlabs_voice_id", "ElevenLabs Voice-ID")}`)}
   ${sec("stil", I.brush, "Video-Stil", "Eigene Animation · Untertitel, Soundeffekte, Musik", "", `
-    <p class="hint">Alle Videos entstehen mit der AutoShorts-Engine: niedliche Cartoon-Figuren und Tiere, 18 Orte bei Tag und Nacht, Requisiten, Wetter und animierte Einblendungen. Welche Figuren und Orte vorkommen, entscheidet das Drehbuch je Video.</p>
+    <p class="hint">Alle Videos entstehen mit der AutoShorts-Engine: niedliche Cartoon-Figuren und Tiere, feste Orte und ein Landschafts-Baukasten (Wald, Fluss, Felder, Berge, Meer …), Requisiten, Wetter und animierte Einblendungen. Welche Figuren und Orte vorkommen, entscheidet das Drehbuch je Video.</p>
     ${tgl("subtitles_lowercase", "Untertitel kleingeschrieben", "Aus = GROSSBUCHSTABEN.")}
     ${fld("sfx_volume", "Soundeffekte-Lautstärke", "0 bis 1 · 0 = aus (Whoosh, Pop, Boom an Szenenwechseln).")}
     ${fld("music_volume", "Musik-Lautstärke", "0 bis 0,3. Musik-Dateien legst du im Repository in den Ordner music/.")}`)}

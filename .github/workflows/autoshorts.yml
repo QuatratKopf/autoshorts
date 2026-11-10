@@ -127,6 +127,7 @@ jobs:
           git config user.name "autoshorts-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add docs/data/state.json docs/data/videos.json docs/data/stats.json docs/data/trends.json docs/thumbs tokens
+          git add docs/data/wishes.json 2>/dev/null || true
           if git diff --cached --quiet; then echo "Nichts zu speichern"; exit 0; fi
           git commit -q -m "AutoShorts: $IN_ACTION"
           for i in 1 2 3 4 5; do

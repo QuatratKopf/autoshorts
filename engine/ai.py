@@ -189,7 +189,8 @@ def _edge(text, out, cat):
     import edge_tts
 
     async def go():
-        kw = dict(rate=cat.get("voice_rate") or "+0%", pitch=cat.get("voice_pitch") or "+0Hz")
+        sp = float(cfg("voice_speed") or 1.0)
+        kw = dict(rate=f"{round((sp - 1) * 100):+d}%" if abs(sp - 1) > 0.01 else "+0%", pitch=cat.get("voice_pitch") or "+0Hz")
         try:
             comm = edge_tts.Communicate(text, cat.get("voice") or "de-DE-ConradNeural", boundary="WordBoundary", **kw)
         except TypeError:  # ältere edge-tts-Version
@@ -437,7 +438,8 @@ def _gemini_tts(text, out, cat):
     if not key:
         raise ProviderError("kein GEMINI_API_KEY")
     voice = cfg("gemini_voice") or GEMINI_VOICES.get(cat.get("slug"), "Charon")
-    style = (cat.get("voice_instructions") or "Fesselnd und natürlich.").strip()
+    style = (cfg("voice_style") or cat.get("voice_instructions") or "Ruhig und natürlich.").strip()
+    speed = max(0.8, min(1.15, float(cfg("voice_speed") or 1.0)))
     # kurze Regieanweisung: lange Anweisungen liest das Modell manchmal mit vor
     prompt = f"Lies als deutscher Erzähler vor ({style} Flüssig, natürlich, jedes Wort deutlich):\n\n{text}"
     last = None
@@ -463,7 +465,8 @@ def _gemini_tts(text, out, cat):
             rate = (re.search(r"rate=(\d+)", mime) or [0, "24000"])[1]
             src = ["-i", tmp] if tmp.endswith(".wav") else ["-f", "s16le", "-ar", rate, "-ac", "1", "-i", tmp]
             p = subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", *src,
-                                "-af", "silenceremove=start_periods=1:start_threshold=-45dB,highpass=f=70",
+                                "-af", "silenceremove=start_periods=1:start_threshold=-45dB,highpass=f=70"
+                                + (f",atempo={speed:.2f}" if abs(speed - 1) > 0.01 else ""),
                                 "-ar", "44100", "-b:a", "160k", str(out)], capture_output=True, text=True)
             os.remove(tmp)
             if p.returncode != 0:

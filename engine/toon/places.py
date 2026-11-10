@@ -48,7 +48,16 @@ class P:
 
     # --- Bausteine
     def sky(self, y1=GROUND):
+        mood = getattr(self, "mood", "")
         top, bot = ((18, 22, 56), (44, 52, 110)) if self.night else ((120, 196, 250), (206, 236, 255))
+        if mood == "sunset":
+            top, bot = (70, 60, 130), (250, 170, 110)
+        elif mood == "storm":
+            top, bot = (70, 78, 96), (150, 158, 172)
+        elif mood == "red":
+            top, bot = (90, 30, 30), (230, 120, 70)
+        elif mood == "haze":
+            top, bot = (200, 190, 150), (240, 226, 190)
         for y in range(0, y1, 8):
             f = y / y1
             self.d.rectangle((0, y, W, y + 8), fill=tuple(int(top[i] * (1 - f) + bot[i] * f) for i in range(3)))
@@ -60,8 +69,13 @@ class P:
             self.oval((760, 250, 920, 410), (250, 244, 200), glow=True)
             self.d.ellipse((800, 290, 835, 325), fill=(226, 218, 170))
             self.d.ellipse((850, 340, 885, 372), fill=(226, 218, 170))
+        elif mood in ("storm", "red"):
+            for cx, cy, sc in ((260, 330, 1.3), (700, 420, 1.1), (980, 300, 0.9)):
+                for dx, dy, r in ((0, 0, 80), (80, 20, 64), (-80, 24, 58), (20, 40, 70)):
+                    col = (86, 92, 108) if mood == "storm" else (120, 60, 50)
+                    self.d.ellipse((cx + dx * sc - r * sc, cy + dy * sc - r * sc, cx + dx * sc + r * sc, cy + dy * sc + r * sc), fill=col)
         else:
-            self.oval((770, 240, 930, 400), (255, 214, 70), glow=True)
+            self.oval((770, 240, 930, 400), (255, 150, 70) if mood == "sunset" else (255, 214, 70), glow=True)
             for cx, cy, s in ((240, 380, 1.0), (640, 560, 0.7)):
                 for dx, dy, r in ((0, 0, 70), (70, 20, 56), (-70, 24, 50), (20, 36, 60)):
                     self.d.ellipse((cx + dx * s - r * s, cy + dy * s - r * s, cx + dx * s + r * s, cy + dy * s + r * s), fill=(255, 255, 255))
@@ -489,6 +503,243 @@ def cave(night):
     return p.vignette()
 
 
+# ------------------------------------------------------------------ Baukasten: Landschaft aus Einzelteilen
+# Damit passt der Hintergrund zu jedem Thema: Himmel + Boden + beliebige Elemente dahinter.
+
+GROUNDS = {"grass": (104, 180, 96), "sand": (240, 206, 132), "snow": (240, 246, 252), "road": (88, 90, 100),
+           "rock": (140, 136, 140), "soil": (150, 104, 66), "dry": (206, 170, 110), "water": (60, 150, 220),
+           "ice": (210, 234, 248), "lava": (90, 50, 44), "moon": (124, 128, 144)}
+BASE = GROUND - 60        # Horizontlinie
+
+
+def _el_mountains(p, rnd):
+    for cx, hgt, w, col in ((180, 560, 520, (150, 160, 184)), (640, 720, 600, (128, 138, 164)), (1000, 500, 460, (150, 160, 184))):
+        p.poly([(cx - w // 2, BASE), (cx, BASE - hgt), (cx + w // 2, BASE)], col)
+        p.poly([(cx - w // 9, BASE - hgt * 0.76), (cx, BASE - hgt), (cx + w // 9, BASE - hgt * 0.76),
+                (cx + w // 24, BASE - hgt * 0.7), (cx - w // 24, BASE - hgt * 0.73)], (250, 252, 255), o=5)
+
+
+def _el_hills(p, rnd):
+    p.d.ellipse((-320, BASE - 300, 640, BASE + 260), fill=p.c((126, 196, 112)), outline=INK, width=5)
+    p.d.ellipse((380, BASE - 240, 1420, BASE + 300), fill=p.c((112, 184, 102)), outline=INK, width=5)
+
+
+def _el_dunes(p, rnd):
+    p.d.ellipse((-300, BASE - 260, 700, BASE + 300), fill=p.c((236, 190, 110)), outline=INK, width=5)
+    p.d.ellipse((460, BASE - 200, 1500, BASE + 300), fill=p.c((226, 176, 96)), outline=INK, width=5)
+
+
+def _el_forest(p, rnd):
+    for layer, col, base, step in ((0, (46, 104, 70), BASE - 90, 110), (1, (58, 132, 80), BASE, 135)):
+        for tx in range(-70, W + 100, step):
+            h = rnd.randint(420, 640) if layer else rnd.randint(360, 520)
+            p.rect((tx + 46, base - h * 0.36, tx + 74, base), (104, 70, 44), o=5)
+            if (tx // step + layer) % 3 == 0:      # Laubbaum
+                for dx, dy, r in ((0, -0.62, 0.2), (-0.13, -0.5, 0.16), (0.13, -0.5, 0.16), (0, -0.42, 0.17)):
+                    p.oval((tx + 60 + dx * h - r * h, base + dy * h - r * h, tx + 60 + dx * h + r * h, base + dy * h + r * h), col)
+            else:                                  # Tanne
+                for k in range(3):
+                    y = base - h * 0.26 - k * h * 0.2
+                    p.poly([(tx + 60 - (128 - k * 26), y), (tx + 60, y - h * 0.3), (tx + 60 + (128 - k * 26), y)], col)
+
+
+def _el_trees(p, rnd):
+    for tx, sc in ((150, 1.0), (930, 1.2)):
+        p.rect((tx - 24 * sc, BASE - 320 * sc, tx + 24 * sc, BASE), (130, 86, 54))
+        for dx, dy, r in ((0, -400, 150), (-110, -330, 110), (110, -330, 110), (0, -290, 120)):
+            p.oval((tx + dx * sc - r * sc, BASE + dy * sc - r * sc, tx + dx * sc + r * sc, BASE + dy * sc + r * sc), (70, 160, 84))
+
+
+def _el_deadtrees(p, rnd):
+    for tx, sc in ((170, 1.0), (560, 0.8), (920, 1.15)):
+        p.line((tx, BASE, tx, BASE - 330 * sc), INK, int(34 * sc))
+        p.line((tx, BASE, tx, BASE - 330 * sc), p.c((110, 84, 64)), int(22 * sc))
+        for dx, dy, y0 in ((-110, -90, 0.5), (120, -110, 0.65), (-70, -80, 0.85), (60, -70, 0.95)):
+            y = BASE - 330 * sc * y0
+            p.line((tx, y, tx + dx * sc, y + dy * sc), INK, int(20 * sc))
+            p.line((tx, y, tx + dx * sc, y + dy * sc), p.c((110, 84, 64)), int(11 * sc))
+
+
+def _el_city(p, rnd):
+    x = -40
+    cols = ((214, 150, 120), (150, 176, 214), (224, 200, 140), (170, 200, 172), (196, 160, 190))
+    while x < W:
+        w, h = rnd.randint(190, 290), rnd.randint(360, 740)
+        p.rect((x, BASE - h, x + w, BASE), cols[rnd.randint(0, 4)])
+        for wy in range(BASE - h + 46, BASE - 150, 116):
+            for wx in range(x + 32, x + w - 58, 82):
+                lit = p.night and rnd.random() < 0.55
+                p.rect((wx, wy, wx + 48, wy + 64), (255, 226, 120) if lit else (126, 168, 214), r=4, o=5, glow=lit)
+        x += w
+
+
+def _el_village(p, rnd):
+    for hx, w, h, col in ((90, 250, 190, (236, 214, 180)), (430, 220, 160, (220, 196, 170)), (760, 260, 200, (240, 222, 190))):
+        p.rect((hx, BASE - h, hx + w, BASE), col)
+        p.poly([(hx - 26, BASE - h), (hx + w / 2, BASE - h - 130), (hx + w + 26, BASE - h)], (190, 84, 70))
+        p.rect((hx + w / 2 - 28, BASE - 96, hx + w / 2 + 28, BASE), (120, 80, 50), r=6, o=5)
+        p.rect((hx + 30, BASE - h + 40, hx + 86, BASE - h + 96), (255, 226, 120) if p.night else (150, 200, 240), r=4, o=5, glow=p.night)
+
+
+def _el_ruins(p, rnd):
+    x = -20
+    while x < W:
+        w, h = rnd.randint(170, 260), rnd.randint(240, 600)
+        top = [(x, BASE - h + rnd.randint(0, 120)), (x + w * 0.3, BASE - h + rnd.randint(40, 160)), (x + w * 0.55, BASE - h),
+               (x + w * 0.8, BASE - h + rnd.randint(60, 200)), (x + w, BASE - h + rnd.randint(0, 100))]
+        p.poly([(x, BASE)] + top + [(x + w, BASE)], (120, 116, 122))
+        for wy in range(BASE - h + 210, BASE - 120, 120):
+            for wx in range(int(x + 30), int(x + w - 50), 84):
+                p.rect((wx, wy, wx + 44, wy + 60), (40, 40, 48), r=3, o=4)
+        x += w + rnd.randint(10, 60)
+
+
+def _el_factory(p, rnd):
+    p.rect((120, BASE - 300, 760, BASE), (150, 150, 160))
+    for i in range(4):
+        p.poly([(120 + i * 160, BASE - 300), (120 + i * 160, BASE - 400), (280 + i * 160, BASE - 300)], (130, 130, 142))
+    for cx in (820, 940):
+        p.rect((cx - 36, BASE - 620, cx + 36, BASE), (170, 110, 96))
+        p.rect((cx - 44, BASE - 640, cx + 44, BASE - 600), (140, 84, 74), r=6, o=5)
+        for k in range(4):
+            r = 46 + k * 22
+            g = 150 - k * 14
+            p.d.ellipse((cx + k * 44 - r, BASE - 700 - k * 100 - r, cx + k * 44 + r, BASE - 700 - k * 100 + r), fill=(g, g, g + 6))
+
+
+def _el_farm(p, rnd):
+    p.rect((90, BASE - 260, 430, BASE), (190, 70, 60))
+    p.poly([(70, BASE - 260), (260, BASE - 400), (450, BASE - 260)], (150, 50, 44))
+    p.rect((210, BASE - 150, 310, BASE), (250, 240, 226), r=4, o=5)
+    p.line((210, BASE - 150, 310, BASE))
+    p.line((310, BASE - 150, 210, BASE))
+    p.rect((520, BASE - 330, 610, BASE), (220, 220, 226), r=40)          # Silo
+    for fx in range(660, W + 40, 90):                                     # Zaun
+        p.rect((fx, BASE - 90, fx + 16, BASE), (176, 130, 86), o=4)
+    p.rect((650, BASE - 76, W + 20, BASE - 60), (176, 130, 86), o=4)
+
+
+def _el_sea(p, rnd):
+    p.d.rectangle((0, BASE - 220, W, BASE), fill=p.c((60, 150, 220)))
+    for y in range(BASE - 190, BASE - 20, 46):
+        for x in range(-60 + (y % 92), W, 160):
+            p.d.arc((x, y, x + 90, y + 30), 180, 360, fill=p.c((200, 232, 250)), width=5)
+    p.d.line((0, BASE - 220, W, BASE - 220), fill=INK, width=5)
+
+
+def _el_glacier(p, rnd):
+    p.poly([(-40, BASE), (60, BASE - 380), (300, BASE - 460), (520, BASE - 330), (760, BASE - 520), (1000, BASE - 400), (W + 40, BASE - 440), (W + 40, BASE)], (206, 232, 250))
+    for x in (200, 470, 830):
+        p.line((x, BASE - 300, x + 30, BASE - 60), p.c((150, 200, 235)), 6)
+
+
+def _fg_fields(p, rnd):
+    for i in range(-6, 14):                         # Ackerfurchen in Perspektive
+        p.d.line((W / 2 + i * 40, BASE, W / 2 + i * 210, H), fill=p.c((110, 150, 70)), width=10)
+    for y in (BASE + 70, BASE + 190, BASE + 360):
+        for x in range(20, W, 70):
+            p.d.line((x, y, x - 8, y - 30), fill=p.c((226, 190, 80)), width=6)
+            p.d.line((x, y, x + 8, y - 30), fill=p.c((226, 190, 80)), width=6)
+
+
+def _fg_river(p, rnd):
+    pts = [(420, BASE), (560, BASE), (760, BASE + 220), (1000, H), (160, H), (360, BASE + 220)]
+    p.d.polygon(pts, fill=p.c((70, 156, 226)), outline=INK, width=5)
+    for y in range(BASE + 60, H - 200, 110):
+        p.d.arc((440 + (y - BASE) * 0.1, y, 560 + (y - BASE) * 0.1, y + 30), 180, 360, fill=p.c((206, 234, 252)), width=5)
+
+
+def _fg_dryriver(p, rnd):
+    pts = [(420, BASE), (560, BASE), (760, BASE + 220), (1000, H), (160, H), (360, BASE + 220)]
+    p.d.polygon(pts, fill=p.c((176, 140, 96)), outline=INK, width=5)
+    _fg_cracks(p, rnd, (300, 800))
+
+
+def _fg_lake(p, rnd):
+    p.d.ellipse((120, BASE + 50, 960, BASE + 420), fill=p.c((70, 156, 226)), outline=INK, width=O)
+    for x, y in ((320, BASE + 170), (600, BASE + 260), (480, BASE + 120)):
+        p.d.arc((x, y, x + 110, y + 30), 180, 360, fill=p.c((206, 234, 252)), width=5)
+
+
+def _fg_cracks(p, rnd, xr=(0, W)):
+    for _ in range(16):
+        x, y = rnd.randint(*xr), rnd.randint(BASE + 40, H - 260)
+        pts = [(x, y)]
+        for _k in range(3):
+            x, y = x + rnd.randint(-70, 70), y + rnd.randint(20, 60)
+            pts.append((x, y))
+        p.d.line(pts, fill=p.c((120, 90, 60)), width=6, joint="curve")
+
+
+def _fg_rocks(p, rnd):
+    for _ in range(7):
+        x, y, w = rnd.randint(0, W), rnd.randint(BASE + 10, H - 300), rnd.randint(70, 170)
+        p.d.chord((x, y - w * 0.4, x + w, y + w * 0.4), 180, 360, fill=p.c((150, 150, 158)), outline=INK, width=5)
+
+
+def _fg_flowers(p, rnd):
+    for _ in range(26):
+        x, y = rnd.randint(0, W), rnd.randint(BASE + 30, H - 260)
+        p.d.line((x, y, x, y - 30), fill=p.c((60, 130, 66)), width=5)
+        p.d.ellipse((x - 10, y - 44, x + 10, y - 24), fill=p.c(rnd.choice(((250, 120, 150), (250, 220, 90), (250, 250, 250)))))
+
+
+BACK = {"mountains": _el_mountains, "hills": _el_hills, "dunes": _el_dunes, "forest": _el_forest, "trees": _el_trees,
+        "deadtrees": _el_deadtrees, "city": _el_city, "village": _el_village, "ruins": _el_ruins, "factory": _el_factory,
+        "farm": _el_farm, "sea": _el_sea, "glacier": _el_glacier}
+FRONT_EL = {"fields": _fg_fields, "river": _fg_river, "dryriver": _fg_dryriver, "lake": _fg_lake, "cracks": _fg_cracks,
+            "rocks": _fg_rocks, "flowers": _fg_flowers}
+EL_ALIASES = {"berge": "mountains", "hügel": "hills", "dünen": "dunes", "wald": "forest", "bäume": "trees", "stadt": "city",
+              "dorf": "village", "ruinen": "ruins", "fabrik": "factory", "bauernhof": "farm", "meer": "sea", "gletscher": "glacier",
+              "felder": "fields", "feld": "fields", "fluss": "river", "see": "lake", "risse": "cracks", "steine": "rocks",
+              "blumen": "flowers", "tote bäume": "deadtrees", "ocean": "sea", "mountain": "mountains", "tree": "trees"}
+
+
+def compose(spec: dict, night=False):
+    """Landschaft aus Einzelteilen: {"sky": day|night|sunset|storm|red|haze, "ground": grass|sand|snow|…,
+    "elements": [mountains, forest, river, …]} – hinten nach vorn in sinnvoller Reihenfolge gezeichnet."""
+    sky = str(spec.get("sky") or "").lower()
+    p = P(night or sky == "night")
+    p.mood = sky if sky in ("sunset", "storm", "red", "haze") else ""
+    p.sky()
+    els = [EL_ALIASES.get(str(e).lower().strip(), str(e).lower().strip()) for e in (spec.get("elements") or [])][:5]
+    rnd = random.Random(hash(tuple(els)) % 1000 + 3)
+    order = ["sea", "glacier", "mountains", "hills", "dunes", "city", "ruins", "factory", "forest", "deadtrees", "village", "farm", "trees"]
+    for name in order:
+        if name in els:
+            BACK[name](p, rnd)
+    ground = str(spec.get("ground") or "").lower()
+    if ground not in GROUNDS:
+        ground = ("sand" if "dunes" in els else "snow" if "glacier" in els else "road" if ("city" in els or "ruins" in els)
+                  else "soil" if "fields" in els else "grass")
+    col = GROUNDS[ground]
+    p.d.rectangle((0, BASE, W, H), fill=p.c(col))
+    p.d.line((0, BASE, W, BASE), fill=INK, width=5)
+    if ground == "road":
+        p.rect((-10, BASE, W + 10, BASE + 90), (196, 196, 200))
+        for x in range(40, W, 240):
+            p.rect((x, BASE + 310, x + 130, BASE + 336), (250, 240, 200), r=4, o=0)
+    elif ground == "grass":
+        for _ in range(26):
+            x, y = rnd.randint(0, W), rnd.randint(BASE + 50, H - 300)
+            p.line((x, y, x - 8, y - 26), p.c((60, 130, 66)), 5)
+            p.line((x, y, x + 10, y - 22), p.c((60, 130, 66)), 5)
+    elif ground == "dry":
+        _fg_cracks(p, rnd)
+    elif ground == "water":
+        for y in range(BASE + 40, H - 200, 70):
+            for x in range(-60 + (y % 140), W, 190):
+                p.d.arc((x, y, x + 100, y + 30), 180, 360, fill=p.c((200, 232, 250)), width=5)
+    elif ground == "lava":
+        for _ in range(12):
+            x, y = rnd.randint(0, W), rnd.randint(BASE + 40, H - 260)
+            p.d.ellipse((x, y, x + rnd.randint(80, 220), y + rnd.randint(16, 40)), fill=(250, 130, 40))
+    for name in ("fields", "river", "dryriver", "lake", "cracks", "rocks", "flowers"):
+        if name in els:
+            FRONT_EL[name](p, rnd)
+    return p.vignette()
+
+
 def plain(night):
     p = P(night)
     p.room((244, 226, 190), (210, 170, 120))
@@ -499,7 +750,7 @@ PLACES = {"bedroom": bedroom, "livingroom": livingroom, "street": street, "basem
           "space": space, "lab": lab, "classroom": classroom, "plain": plain, "kitchen": kitchen, "office": office,
           "beach": beach, "desert": desert, "snow": snow, "forest": forest, "underwater": underwater,
           "mountain": mountain, "hospital": hospital, "cave": cave}
-OUTDOOR = ("street", "park", "beach", "desert", "snow", "forest", "mountain")
+OUTDOOR = ("street", "park", "beach", "desert", "snow", "forest", "mountain", "custom")
 ALIASES = {"schlafzimmer": "bedroom", "zimmer": "bedroom", "wohnzimmer": "livingroom", "straße": "street", "stadt": "street",
            "city": "street", "keller": "basement", "bunker": "basement", "wald": "forest", "natur": "park", "garten": "park",
            "küche": "kitchen", "büro": "office", "strand": "beach", "meer": "beach", "wüste": "desert", "schnee": "snow",
@@ -510,14 +761,20 @@ ALIASES = {"schlafzimmer": "bedroom", "zimmer": "bedroom", "wohnzimmer": "living
 
 
 def resolve(place):
+    if isinstance(place, dict):
+        return "custom"
     key = ALIASES.get(str(place or "").lower().strip(), str(place or "").lower().strip())
     return key if key in PLACES else "plain"
 _cache = {}
 
 
 def background(place, night=False):
-    key = ALIASES.get(str(place or "").lower().strip(), str(place or "").lower().strip())
-    key = key if key in PLACES else "plain"
+    if isinstance(place, dict):                       # Baukasten-Landschaft
+        key = ("c", str(place.get("sky")), str(place.get("ground")), tuple(str(e) for e in (place.get("elements") or [])), bool(night))
+        if key not in _cache:
+            _cache[key] = compose(place, bool(night)).convert("RGB")
+        return _cache[key]
+    key = resolve(place)
     if (key, bool(night)) not in _cache:
         _cache[(key, bool(night))] = PLACES[key](bool(night)).convert("RGB")
     return _cache[(key, bool(night))]

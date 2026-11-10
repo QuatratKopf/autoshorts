@@ -1,6 +1,6 @@
 {
-  "version": "1.3.0",
-  "file": "releases/AutoShorts-1.3.0.cmd",
-  "sha256": "ce4376d36586b6656ecc850ea785f456d81e8f6d7f06270ec56408325b22cddd",
-  "notes": "Eigene Animations-Engine statt KI-Bildern, natürliche Erzählerstimme, Trennen-Knopf"
+  "version": "1.3.1",
+  "file": "releases/AutoShorts-1.3.1.cmd",
+  "sha256": "c26e814269de2603dbc2301ea778ffc0fa3dae6cdf95dfe7989e378298e43c5a",
+  "notes": "Sprechtempo und Sprechstil einstellbar, passendere Hintergründe"
 }

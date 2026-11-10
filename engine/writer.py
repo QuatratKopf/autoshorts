@@ -86,6 +86,16 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
   "place": bedroom, livingroom, kitchen, office, classroom, lab, hospital, basement, street, park, forest, beach, desert,
            snow, mountain, cave, underwater, space
            (genau eines dieser Wörter – jede Szene braucht einen Ort aus dieser Liste, auch Ereignis-Einstellungen)
+  "backdrop": für Landschaften draußen statt "place" – ein Baukasten, mit dem JEDE Umgebung passend gebaut wird:
+           {"sky": "day|night|sunset|storm|red|haze", "ground": "grass|sand|snow|road|rock|soil|dry|water|ice|lava",
+            "elements": [bis zu 4 aus: mountains, hills, dunes, forest, trees, deadtrees, city, village, ruins, factory, farm,
+                         sea, glacier, fields, river, dryriver, lake, cracks, rocks, flowers]}
+           Beispiele: Wald mit Fluss = {"elements": ["forest", "river"]} · Dürre = {"sky": "haze", "ground": "dry",
+           "elements": ["deadtrees", "dryriver"]} · Bauernhof = {"elements": ["farm", "fields"]} · zerstörte Stadt =
+           {"sky": "red", "ground": "road", "elements": ["ruins"]} · Bergsee = {"elements": ["mountains", "lake", "flowers"]}
+  DER HINTERGRUND MUSS ZUM SATZ PASSEN: Redet der Sprecher vom Wald, ist ein Wald zu sehen; bei Flüssen ein Fluss, bei Ernte
+  ein Feld, beim Meer das Meer. Nimm "street" nur, wenn es wirklich um die Stadt geht – nie als Verlegenheitslösung.
+  Wechsle den Hintergrund, sobald der Text den Schauplatz wechselt.
   "time": "day" oder "night"
   "weather": rain, storm, snow, wind, heat, dark, ash (Ascheregen), quake (Erdbeben: Bild wackelt) oder ""
   "props": 0–2 Requisiten aus: tree, rock, box, car, fire, tv, computer, money, rocket, ufo, meteor, explosion, earth, sun,
@@ -112,7 +122,9 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
 - "thumbnail": {"text": "2–4 deutsche WÖRTER", "place": "...", "time": "day|night", "actor": "id aus cast", "action": "shocked",
                 "emotion": "shocked", "props": ["meteor"], "weather": ""}  – der spannendste Moment als Titelbild,
                 am besten mit dem Ereignis (Requisite) groß im Bild.
-- "image" je Szene darf leer bleiben."""
+- "image" je Szene darf leer bleiben.
+- "wishes": Liste (deutsch, je 1–3 Wörter) von Dingen, die du für dieses Video gebraucht hättest, die es aber in den Listen
+  oben nicht gibt (z. B. "Krebs", "Windrad", "Wasserfall"). Leere Liste, wenn alles da war."""
 
 UNSUITABLE = ("Ungeeignet sind: Themen, die sich um einzelne echte Personen drehen (Promis, Musiker, Sportler, Politiker, Creator), Todesfälle, Unglücke, Verbrechen, Krieg, Terror, Krankheiten einzelner Personen, "
               "Parteipolitik und Wahlen, Klatsch über Privatleben, Glücksspiel, geschützte Film-/Spielfiguren und Marken als Hauptthema, reine Sport-Ergebnisse ohne Hintergrundgeschichte "
@@ -181,7 +193,7 @@ def trend_topic(cat: dict):
 
 def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
     secs = int(cfg("target_seconds") or 60)
-    words = round(secs * (1.6 if str(cfg("tts_provider") or "") == "gemini" else 2.2))   # Gemini-Erzähler spricht ruhiger
+    words = round(secs * (1.4 if str(cfg("tts_provider") or "") == "gemini" else 2.2))   # Gemini-Erzähler spricht ruhiger
     scenes = max(6, round(secs / 5))
     toon = str(os.environ.get("AS_VISUAL") or cfg("visual_mode") or "ai") == "toon"
     char = cfg("main_character") if cfg("use_main_character") and not toon else ""
@@ -240,6 +252,7 @@ def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
     return {"title": str(js.get("title") or topic)[:95], "description": str(js.get("description") or ""),
             "hashtags": tags[:10], "tags": [str(t).strip("# ")[:60] for t in js.get("tags", []) if str(t).strip("# ")][:15],
             "thumbnail": {**th, "image": str(th.get("image") or sc[0]["image"]), "text": str(th.get("text") or "").strip()[:40]},
+            "wishes": [str(w)[:40] for w in (js.get("wishes") or []) if str(w).strip()][:8] if isinstance(js.get("wishes"), list) else [],
             "toon": toon, "cast": {str(k): v for k, v in raw_cast.items() if isinstance(v, dict)},
             "scenes": sc, "hud": str(js.get("hud") or "").strip()[:28],
             "countdown": js.get("countdown") if isinstance(js.get("countdown"), dict) else None}, provider

@@ -138,6 +138,14 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None):
         v.update(title=script["title"], description=script["description"], hashtags=script["hashtags"],
                  tags=script.get("tags", []), thumb_text=script["thumbnail"]["text"])
         log(f"Titel: {script['title']} · {len(scenes)} Szenen")
+        if script.get("wishes"):       # was der Engine für dieses Video gefehlt hat → Wunschliste für den nächsten Ausbau
+            from .state import load, save
+            wl = load("wishes.json", {})
+            for w in script["wishes"]:
+                k = w.strip().lower()
+                wl[k] = {"n": wl.get(k, {}).get("n", 0) + 1, "last": script["title"]}
+            save("wishes.json", wl)
+            log("Der Engine fehlte: " + ", ".join(script["wishes"]))
 
         log("Spreche Text ein …")
         voice = work / "voice.mp3"
