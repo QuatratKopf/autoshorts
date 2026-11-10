@@ -443,7 +443,7 @@ let CFG = null, ST = {}, VIDS = [], STATS = {v: {}, ch: {}}, TRENDS = {items: []
 let SECRETS = null, RUNS = [], PENDING = null, LOADERR = "", CANCEL_NEXT = 0, CANCELING = new Set();
 let TAB = (location.hash || "#dashboard").slice(1);
 if (!["dashboard", "kalender", "studio", "einstellungen"].includes(TAB)) TAB = "dashboard";
-const DEF = {trend_mode: "half", make_thumbnail: true, youtube_thumbnail: true, trend_regions: "US,DE",
+const DEF = {tts_provider: "gemini", gemini_voice: "", sfx_volume: 0.35, trend_mode: "half", make_thumbnail: true, youtube_thumbnail: true, trend_regions: "US,DE",
   audience: "Gen Z (16–25) in Deutschland, die TikTok und YouTube Shorts schauen: Internet-Kultur, Memes, virale Trends, Gaming, Musik, Serien, Filme, Creator, Tech, Lifestyle. Lockere Sprache wie unter Freunden, schnell auf den Punkt, kein Lehrer- oder Kinder-Ton."};
 const S_ = k => { const v = (CFG && CFG.settings || {})[k]; return v === undefined ? DEF[k] : v; };
 const cat = slug => (CFG && CFG.categories || []).find(c => c.slug === slug);
@@ -919,9 +919,7 @@ function catModal(i) {
 const OPEN = new Set(["zeit"]);
 let DIRTY = false;
 const SECRET_LIST = [
-  ["GEMINI_API_KEY", "Gemini API-Key", "Skripte · kostenlos", "https://aistudio.google.com/apikey"],
-  ["CLOUDFLARE_ACCOUNT_ID", "Cloudflare Account-ID", "Bilder · kostenlos", "https://dash.cloudflare.com/?to=/:account/ai/workers-ai"],
-  ["CLOUDFLARE_API_TOKEN", "Cloudflare API-Token", "Vorlage „Workers AI“", "https://dash.cloudflare.com/profile/api-tokens"],
+  ["GEMINI_API_KEY", "Gemini API-Key", "Skript und Stimme · kostenlos", "https://aistudio.google.com/apikey"],
   ["GOOGLE_CLIENT_SECRET", "Google Client-Secret", "für YouTube", "https://console.cloud.google.com/apis/credentials"],
   ["TIKTOK_CLIENT_SECRET", "TikTok Client-Secret", "für TikTok", "https://developers.tiktok.com/apps"],
   ["OPENAI_API_KEY", "OpenAI API-Key", "nur Premium", "https://platform.openai.com/api-keys"],
@@ -929,7 +927,7 @@ const SECRET_LIST = [
 const hasSecret = n => SECRETS instanceof Set ? SECRETS.has(n) : null;
 function cost() {
   const q = {low: .016, medium: .063, high: .25}[S_("openai_image_quality")] || .016, n = Math.max(6, Math.round((S_("target_seconds") || 70) / 5));
-  return ({openai: .003}[S_("text_provider")] || 0) + ({openai: .021, elevenlabs: .16}[S_("tts_provider")] || 0) + (S_("image_provider") === "openai" ? q * n : 0);
+  return ({openai: .003}[S_("text_provider")] || 0) + ({openai: .021, elevenlabs: .16}[S_("tts_provider")] || 0) ;
 }
 function sec(id, ic, title, sub, chip, body) {
   return `<details class="set-sec in" id="s-${id}" ${OPEN.has(id) ? "open" : ""}><summary><span class="s-ic">${icon(ic)}</span><span class="s-t"><b>${title}</b><span class="hint">${sub}</span></span><span class="s-chip">${chip || ""}</span></summary><div class="set-b">${body}</div></details>`;
@@ -941,7 +939,7 @@ const radio = (k, opts) => `<div class="prov">${opts.map(([v, b, s]) => `<label>
 function viewSettings() {
   const con = ST.connected || {}, c = cost(), U = S.update || {};
   const updChip = U.available ? `<span class="chip warn">Version ${esc(U.version)} verfügbar</span>` : U.error && U.checked ? `<span class="chip bad">Prüfung fehlgeschlagen</span>` : `<span class="chip good">aktuell</span>`;
-  const missing = ["GEMINI_API_KEY", "CLOUDFLARE_ACCOUNT_ID", "CLOUDFLARE_API_TOKEN"].filter(n => hasSecret(n) === false).length;
+  const missing = ["GEMINI_API_KEY"].filter(n => hasSecret(n) === false).length;
   const platBlock = (p, name, idKey, secName, idLabel, help) => {
     const ready = S_(idKey) && S.local_secrets[p];
     return `<div class="lbl">${name}</div>
@@ -962,7 +960,7 @@ function viewSettings() {
     ${sel("trend_mode", "Aktuelle Trend-Themen", "Der Autopilot schaut bei TikTok, Reddit, Google Trends und Wikipedia, was gerade läuft, und macht daraus ein passendes Thema für deine Zielgruppe. Tragische Nachrichten, Politik und Klatsch werden ausgelassen. Welche Video-Arten Trends nutzen, stellst du im Studio unter „Bearbeiten“ ein.", [["half", "Jedes zweite Video"], ["always", "Immer, wenn ein Trend passt"], ["off", "Aus – nur zeitlose Themen"]])}
     ${sel("trend_regions", "Trends aus", "Woher die Trends kommen. US-Trends schwappen oft ein paar Tage später nach Deutschland – ideal, um früh dran zu sein.", [["US,DE", "USA und Deutschland"], ["DE,US", "Vor allem Deutschland, dazu USA"], ["DE", "Nur Deutschland"], ["US", "Nur USA"], ["US,DE,GB", "USA, Deutschland und UK"]])}
     <div class="row"><label for="f_audience">Zielgruppe<small>Für wen die Videos sind. Danach wählt die KI Trends und Themen aus und passt Sprache und Ton an.</small></label><textarea id="f_audience" data-k="audience" rows="3">${esc(S_("audience"))}</textarea></div>
-    ${tgl("make_thumbnail", "Eigenes Thumbnail gestalten", "Ein eigenes KI-Bild mit großem Text passend zum Thema. Wird bei TikTok als Titelbild gesetzt.")}
+    ${tgl("make_thumbnail", "Eigenes Thumbnail gestalten", "Titelbild aus der Animations-Engine mit großem Text passend zum Thema. Wird bei TikTok als Titelbild gesetzt.")}
     ${tgl("youtube_thumbnail", "Thumbnail auf YouTube hochladen", "Geht erst, wenn dein Kanal per Telefon bestätigt ist (youtube.com/verify). Bei Shorts zeigt YouTube es vor allem in Suche und Kanalseite.")}`)}
   ${sec("plattform", I.plug, "Plattformen", `YouTube ${con.youtube ? "verbunden" : "nicht verbunden"} · TikTok ${con.tiktok ? "verbunden" : "nicht verbunden"}`, con.youtube && con.tiktok ? '<span class="chip good">beide</span>' : '<span class="chip warn">offen</span>', `
     ${platBlock("youtube", "YouTube Shorts", "youtube_client_id", "GOOGLE_CLIENT_SECRET", "Google Client-ID", "Google Cloud: OAuth-Client vom Typ „Desktop-App“ anlegen. Die Anleitung steht im Repository (README).")}
@@ -977,20 +975,18 @@ function viewSettings() {
     ${sel("tiktok_privacy", "Sichtbarkeit", "Ohne TikTok-Prüfung ist nur „Nur ich“ erlaubt.", [["PUBLIC_TO_EVERYONE", "Öffentlich (nach Prüfung)"], ["MUTUAL_FOLLOW_FRIENDS", "Freunde"], ["FOLLOWER_OF_CREATOR", "Follower"], ["SELF_ONLY", "Nur ich"]])}
     <div class="sep"></div>
     ${tgl("ai_label", "Als KI-generiert kennzeichnen", "TikTok „AI-generated“ und YouTube „Synthetische Inhalte“.")}`)}
-  ${sec("ki", I.spark, "KI-Anbieter", `Skript ${S_("text_provider")} · Stimme ${S_("tts_provider")} · Bilder ${S_("image_provider")}`, c ? `<span class="chip warn">≈ ${c.toFixed(2).replace(".", ",")} $ / Video</span>` : '<span class="chip good">gratis</span>', `
-    <p class="hint">Starte kostenlos. Sobald Geld reinkommt, schaltest du einzelne Schritte auf Premium. Fällt ein Anbieter aus, nimmt der Motor automatisch den kostenlosen.</p>
+  ${sec("ki", I.spark, "Skript & Stimme", `Skript ${S_("text_provider")} · Stimme ${{gemini: "Gemini-Erzähler", edge: "Edge", openai: "OpenAI", elevenlabs: "ElevenLabs"}[S_("tts_provider")] || S_("tts_provider")} · Bild: eigene Animation`, c ? `<span class="chip warn">≈ ${c.toFixed(2).replace(".", ",")} $ / Video</span>` : '<span class="chip good">gratis</span>', `
+    <p class="hint">Bild und Animation macht die eingebaute AutoShorts-Engine: Figuren, Orte, Requisiten und Titelbild entstehen ohne Bild-KI und kosten nichts. Die KI schreibt nur das Drehbuch und spricht den Text.</p>
     <div class="lbl">Skript</div>${radio("text_provider", [["gemini", "Google Gemini", "Kostenlos · gute Texte"], ["pollinations", "Pollinations", "Kostenlos ohne Anmeldung · einfacher"], ["openai", "OpenAI · Premium", "≈ 0,3 Cent pro Video"]])}
-    <div class="lbl">Stimme</div>${radio("tts_provider", [["edge", "Microsoft Edge-Stimmen", "Kostenlos · je Video-Art einstellbar"], ["openai", "OpenAI · Premium", "≈ 2 Cent pro Video"], ["elevenlabs", "ElevenLabs · Premium", "Beste Stimmen · Abo ab ca. 5 $"]])}
-    <div class="lbl">Bilder</div>${radio("image_provider", [["cloudflare", "Cloudflare FLUX", "Kostenlos · Tageskontingent"], ["pollinations", "Pollinations", "Kostenlos · niedrigere Auflösung"], ["openai", "OpenAI · Premium", "Beste Qualität · ab ≈ 20 Cent"]])}
+    <div class="lbl">Stimme</div>${radio("tts_provider", [["gemini", "Gemini-Erzähler", "Kostenlos · natürliche, flüssige Erzählerstimme"], ["edge", "Microsoft Edge-Stimmen", "Kostenlos · Ersatz, klingt mehr nach Computer"], ["openai", "OpenAI · Premium", "≈ 2 Cent pro Video"], ["elevenlabs", "ElevenLabs · Premium", "Beste Stimmen · Abo ab ca. 5 $"]])}
+    ${sel("gemini_voice", "Gemini-Stimme", "Leer = passend zur Video-Art.", [["", "Automatisch je Video-Art"], ["Charon", "Charon · ruhig, erklärend"], ["Algenib", "Algenib · tief, rau"], ["Enceladus", "Enceladus · leise, geheimnisvoll"], ["Puck", "Puck · fröhlich, frech"], ["Fenrir", "Fenrir · aufgeregt"], ["Orus", "Orus · fest, klar"], ["Kore", "Kore · weiblich, bestimmt"], ["Sulafat", "Sulafat · weiblich, warm"], ["Aoede", "Aoede · weiblich, locker"]])}
     <div class="sep"></div>
-    ${fld("gemini_model", "Gemini-Modell")}${fld("openai_text_model", "OpenAI Text-Modell")}${fld("openai_image_model", "OpenAI Bild-Modell")}
-    ${sel("openai_image_quality", "OpenAI Bildqualität", "", [["low", "low"], ["medium", "medium"], ["high", "high"]])}
+    ${fld("gemini_model", "Gemini-Modell")}${fld("openai_text_model", "OpenAI Text-Modell")}
     ${fld("openai_tts_model", "OpenAI Stimm-Modell")}${fld("openai_voice", "OpenAI Stimme", "z. B. ash, coral, onyx, sage")}${fld("elevenlabs_voice_id", "ElevenLabs Voice-ID")}`)}
-  ${sec("stil", I.brush, "Video-Stil", "Cartoon-Bildstil, Hauptfigur, Untertitel, Musik", "", `
-    <label class="hint">Bildstil (Englisch)<textarea data-k="image_style" rows="3">${esc(S_("image_style"))}</textarea></label>
-    ${tgl("use_main_character", "Wiederkehrende Hauptfigur", "Gibt dem Kanal ein Gesicht und Wiedererkennung.")}
-    <label class="hint">Hauptfigur (Englisch)<textarea data-k="main_character" rows="2">${esc(S_("main_character"))}</textarea></label>
-    ${tgl("subtitles_lowercase", "Untertitel kleingeschrieben", "Wie im Beispielvideo.")}
+  ${sec("stil", I.brush, "Video-Stil", "Eigene Animation · Untertitel, Soundeffekte, Musik", "", `
+    <p class="hint">Alle Videos entstehen mit der AutoShorts-Engine: niedliche Cartoon-Figuren und Tiere, 18 Orte bei Tag und Nacht, Requisiten, Wetter und animierte Einblendungen. Welche Figuren und Orte vorkommen, entscheidet das Drehbuch je Video.</p>
+    ${tgl("subtitles_lowercase", "Untertitel kleingeschrieben", "Aus = GROSSBUCHSTABEN.")}
+    ${fld("sfx_volume", "Soundeffekte-Lautstärke", "0 bis 1 · 0 = aus (Whoosh, Pop, Boom an Szenenwechseln).")}
     ${fld("music_volume", "Musik-Lautstärke", "0 bis 0,3. Musik-Dateien legst du im Repository in den Ordner music/.")}`)}
   ${sec("keys", I.key, "Zugangsdaten", "Schlüssel werden verschlüsselt in GitHub gespeichert", missing ? `<span class="chip warn">${missing} fehlen</span>` : SECRETS === "err" ? '<span class="chip mute">?</span>' : '<span class="chip good">vollständig</span>', `
     <p class="hint">Eintragen und auf „Speichern“ tippen. Die App verschlüsselt den Schlüssel und legt ihn direkt in deinem Repository ab; man kann ihn danach nicht mehr auslesen.</p>

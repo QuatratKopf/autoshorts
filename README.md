@@ -1,6 +1,6 @@
 # AutoShorts
 
-Erstellt jeden Tag automatisch ein KI-Short im Cartoon-Erklärstil und lädt es auf **YouTube Shorts** und **TikTok** hoch. Gesteuert wird alles über die App **AutoShorts** auf deinem PC: Dashboard, Kalender, Studio und Einstellungen.
+Erstellt jeden Tag automatisch ein animiertes Cartoon-Short mit eigener Animations-Engine und lädt es auf **YouTube Shorts** und **TikTok** hoch. Gesteuert wird alles über die App **AutoShorts** auf deinem PC: Dashboard, Kalender, Studio und Einstellungen.
 
 Die Videos baut der Motor kostenlos auf GitHub Actions, auch wenn dein PC aus ist.
 
@@ -38,10 +38,8 @@ In der App unter **Einstellungen → Zugangsdaten** einfügen und „Speichern�
 | Schlüssel | Woher | Kosten |
 |---|---|---|
 | Gemini API-Key | aistudio.google.com → „Get API key“ | Gratis-Kontingent |
-| Cloudflare Account-ID | dash.cloudflare.com → Workers AI | – |
-| Cloudflare API-Token | dash.cloudflare.com → Profil → API-Tokens → Vorlage „Workers AI“ | Gratis-Kontingent |
 
-Der Sprecher (Microsoft-Edge-Stimmen) braucht keinen Schlüssel.
+Mit dem Gemini-Schlüssel entstehen Drehbuch und Erzählerstimme. Bild und Animation macht die eingebaute Engine (Figuren, Tiere, 18 Orte, Requisiten, Wetter) ohne Bild-KI.
 
 **Test:** Im Studio „direkt hochladen“ ausschalten und „Video erstellen“ tippen. Nach etwa 10 Minuten steht das Video im Dashboard, mit Knopf „MP4“.
 
@@ -62,7 +60,7 @@ Bis Google dein Projekt geprüft hat, landen API-Uploads auf **„Privat“** (F
 Bis TikTok die App geprüft hat, sind API-Uploads nur als **„Nur ich“** erlaubt. Alternative: Upload-Art **„Als Entwurf in die TikTok-App“**.
 
 ## Später upgraden
-**Einstellungen → KI-Anbieter**: Skript, Stimme und Bilder einzeln auf OpenAI oder ElevenLabs umstellen und den Schlüssel unter Zugangsdaten speichern. Die App zeigt die Kosten pro Video. Fällt ein bezahlter Dienst aus, nimmt der Motor automatisch den kostenlosen.
+**Einstellungen → Skript & Stimme**: Skript und Stimme einzeln auf OpenAI oder ElevenLabs umstellen und den Schlüssel unter Zugangsdaten speichern. Die App zeigt die Kosten pro Video. Fällt ein bezahlter Dienst aus, nimmt der Motor automatisch den kostenlosen.
 
 ## Gut zu wissen
 - **TikTok Creator Rewards** zahlt nur für Videos über 1 Minute, daher 70 Sekunden Ziel-Länge.

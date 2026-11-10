@@ -1,6 +1,6 @@
 {
-  "version": "1.2.7",
-  "file": "releases/AutoShorts-1.2.7.cmd",
-  "sha256": "82a6a65349ab088771b3c538356aa41b2f51afecd29a1bafd72a035fb5f4d9b4",
-  "notes": "Trennen-Knopf, Trends ohne YouTube-Daten"
+  "version": "1.3.0",
+  "file": "releases/AutoShorts-1.3.0.cmd",
+  "sha256": "ce4376d36586b6656ecc850ea785f456d81e8f6d7f06270ec56408325b22cddd",
+  "notes": "Eigene Animations-Engine statt KI-Bildern, natürliche Erzählerstimme, Trennen-Knopf"
 }
