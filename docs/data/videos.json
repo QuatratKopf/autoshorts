@@ -965,5 +965,13 @@
   },
   "thumb": true,
   "mp4": true
+ },
+ {
+  "id": 33,
+  "category": "whatif",
+  "topic": "Was wäre, wenn es auf der Erde keine Bienen mehr gäbe?",
+  "status": "error",
+  "created": 1794305800.1761105,
+  "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-flash-lite-latest: HTTP 503 | pollinations: Pollinations-Text HTTP 400: {\"success\":false,\"error\":{\"message\":\"The model exhausted its output token limit before producing an answer. Increase the token limit or reduce reasoning effort.\",\"code\":\"output_token_limit_exceeded\",\"timestamp\":\"2026-11-10T10:17:37.592Z\",\"details\":{\"name\":\"UpstreamError\",\"upstreamHost\":\"portkey.myce"
  }
 ]
