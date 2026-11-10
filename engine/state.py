@@ -66,14 +66,14 @@ PRESET_CATEGORIES = [
                       "Kurze Sätze, Pausen durch Punkte, ein Schockmoment oder eine Wendung am Ende. Kein Blut, keine Gewalt-Details. "
                       "Wenn es eine wahre Legende ist, sag das; sonst kennzeichne sie als Geschichte.",
          image_mood="dark moonlit night, eerie fog, deep blue and purple palette, spooky but still cartoonish, soft glow",
-         voice="de-DE-ConradNeural", voice_rate="-4%", voice_pitch="-4Hz",
+         voice="de-DE-FlorianMultilingualNeural", voice_rate="-4%", voice_pitch="-4Hz",
          voice_instructions="Leise, langsam und unheimlich, mit Spannung in der Stimme."),
     dict(slug="storys", name="Spannende Storys", emoji="🔥",
          description="Wahre Geschichten mit Wendungen: Rettungen, Rekorde, Coups.",
          script_style="Erzähle eine wahre, spannende Geschichte mit Hook, Aufbau, Höhepunkt und überraschender Auflösung. "
                       "Nur reale, belegbare Ereignisse. Jede Szene endet so, dass man weiter zuhören will.",
          image_mood="cinematic lighting, dramatic composition, warm and cool contrast",
-         voice="de-DE-KillianNeural", voice_rate="+4%", voice_pitch="+0Hz",
+         voice="de-DE-FlorianMultilingualNeural", voice_rate="+4%", voice_pitch="+0Hz",
          voice_instructions="Spannend und mitreißend, wie ein Erzähler in einer Doku."),
     dict(slug="lustig", name="Lustige Geschichten", emoji="😂",
          description="Absurde, lustige Alltagsgeschichten und kuriose Vorfälle.",
@@ -87,7 +87,7 @@ PRESET_CATEGORIES = [
          script_style="Stelle ein echtes, ungelöstes Rätsel vor: was passiert ist, welche Erklärungen es gibt, was bis heute offen ist. "
                       "Trenne klar Belegtes von Spekulation.",
          image_mood="mysterious fog, teal and amber palette, flashlight beams, old maps and clues",
-         voice="de-DE-ConradNeural", voice_rate="+0%", voice_pitch="-2Hz",
+         voice="de-DE-FlorianMultilingualNeural", voice_rate="+0%", voice_pitch="-2Hz",
          voice_instructions="Ruhig, geheimnisvoll, neugierig."),
     dict(slug="tiere", name="Tierwelt", emoji="🐾",
          description="Unglaubliche Tiere und ihre Superkräfte.",
@@ -103,7 +103,7 @@ PRESET_CATEGORIES = [
                       "Stütze dich auf echte Physik, Biologie und Zahlen; sag klar, wo es Schätzung ist. "
                       "Ende mit einem überraschenden Twist oder einer Frage an die Zuschauer.",
          image_mood="epic dramatic scale, glowing sci-fi colors, before/after contrast, planets, explosions in cartoon style",
-         voice="de-DE-KillianNeural", voice_rate="+6%", voice_pitch="+0Hz",
+         voice="de-DE-FlorianMultilingualNeural", voice_rate="+6%", voice_pitch="+0Hz",
          voice_instructions="Staunend und mitreißend, wird mit jeder Stufe aufgeregter."),
 ]
 
@@ -192,6 +192,9 @@ CONFIG.setdefault("queue", [])
 if CONFIG["settings"].get("tts_provider") == "edge" and not CONFIG["settings"].get("tts_checked"):
     CONFIG["settings"]["tts_provider"] = "gemini"   # einmalig auf die natürlichere Stimme umstellen (Edge bleibt Ersatz)
 CONFIG["settings"]["tts_checked"] = True
+for _c in CONFIG["categories"]:   # ältere, künstlicher klingende Ersatzstimmen → die natürlichere mehrsprachige Stimme
+    if _c.get("voice") in ("de-DE-ConradNeural", "de-DE-KillianNeural"):
+        _c["voice"] = "de-DE-FlorianMultilingualNeural"
 if CONFIG["settings"].get("gemini_model") in ("gemini-flash-latest", "gemini-pro-latest"):
     CONFIG["settings"]["gemini_model"] = "gemini-3.5-flash"
 if not CONFIG["settings"].get("toon_checked"):          # einmalig: alles läuft über die eigene Animations-Engine
