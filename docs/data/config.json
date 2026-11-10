@@ -31,7 +31,15 @@
   "make_thumbnail": true,
   "youtube_thumbnail": true,
   "trend_regions": "US,DE",
-  "audience": "Gen Z (16–25) in Deutschland, die TikTok und YouTube Shorts schauen: Internet-Kultur, Memes, virale Trends, Gaming, Musik, Serien, Filme, Creator, Tech, Lifestyle. Lockere Sprache wie unter Freunden, schnell auf den Punkt, kein Lehrer- oder Kinder-Ton."
+  "audience": "Gen Z (16–25) in Deutschland, die TikTok und YouTube Shorts schauen: Internet-Kultur, Memes, virale Trends, Gaming, Musik, Serien, Filme, Creator, Tech, Lifestyle. Lockere Sprache wie unter Freunden, schnell auf den Punkt, kein Lehrer- oder Kinder-Ton.",
+  "auto_learn": true,
+  "min_seconds": "62",
+  "upload_via": "zernio",
+  "gemini_voice": "",
+  "voice_speed": "1",
+  "voice_style": "Lebendig und mitreißend mit klarer Betonung – wie der Sprecher eines viralen Erklärvideos, flüssig und natürlich.",
+  "caption_style": "impact",
+  "sfx_volume": "0.35"
  },
  "categories": [
   {
