@@ -108,6 +108,12 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
      emote (Symbol über dem Kopf, sparsam): "!", "?", heart, idea, sweat, anger, music oder ""
      pos / to: left, center, right, offleft, offright ("to" nur wenn die Figur sich bewegt)
      speaks: true bei der Figur, um die es in dieser Szene geht
+  "crowd": Menschen im Hintergrund, die die Stimmung zeigen (nur draußen): "panic" (rennen in Panik durcheinander),
+           "walk" (Alltag, Leute gehen vorbei), "cheer" (jubeln), "sad" (stehen gebeugt), "watch" (staunen, zeigen) oder ""
+  "mood": Stimmung der Szene als Farbe/Wirkung: "panic", "tense", "scary", "sad", "happy" oder "calm"
+          – setze sie passend zum Satz, damit man die Stimmung SIEHT (Panik = rote, zitternde Szene mit rennenden Menschen).
+  JEDE SZENE BRAUCHT SICHTBARE BEWEGUNG: Figur, die etwas tut, eine Menschenmenge, animierte Requisite oder Wetter.
+  Kein leeres Standbild.
   "shot": "event" = Ereignis-Einstellung: das Geschehen (Requisiten, Wetter, Ort) füllt das Bild, "actors" ist [] oder
           höchstens eine kleine Figur am Rand, die zuschaut · "close" = Nahaufnahme einer Figur (selten, nur bei starker
           Reaktion) · sonst "wide"

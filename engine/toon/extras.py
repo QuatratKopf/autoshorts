@@ -437,6 +437,125 @@ def draw_weather(layer, kind, t):
         d.rectangle((0, 0, W, H), fill=(4, 6, 20, 110))
 
 
+def _car(d, x, y, col, facing, t):
+    b = math.sin(t * 9 + x * 0.01) * 2
+    d.rounded_rectangle((x - 105, y - 74 + b, x + 105, y - 18 + b), 16, fill=col, outline=INK, width=5)
+    d.rounded_rectangle((x - 62, y - 120 + b, x + 54, y - 68 + b), 18, fill=col, outline=INK, width=5)
+    d.rounded_rectangle((x - 50, y - 110 + b, x + 42, y - 76 + b), 8, fill=(170, 220, 250))
+    for wx in (-60, 60):
+        d.ellipse((x + wx - 24, y - 44, x + wx + 24, y + 4), fill=(40, 40, 46), outline=INK, width=4)
+    d.ellipse((x + facing * 96 - 9, y - 58 + b, x + facing * 96 + 9, y - 40 + b), fill=(255, 236, 150))
+
+
+def draw_landscape_motion(layer, spec, place, night, t):
+    """Bewegung passend zur Landschaft: fließendes Wasser, Wellen, fahrende Autos, Rauch, wehendes Korn, Staub, Glut."""
+    d = ImageDraw.Draw(layer, "RGBA")
+    base = GROUND - 60
+    els = [str(e).lower() for e in ((spec or {}).get("elements") or [])] if isinstance(spec, dict) else []
+    ground = str((spec or {}).get("ground") or "").lower() if isinstance(spec, dict) else ""
+    if "river" in els:                                           # Lichtreflexe wandern den Fluss hinunter
+        for i in range(7):
+            ph = (t * 0.35 + i / 7) % 1
+            y = base + 30 + ph * (H - base - 260)
+            wdt = 60 + ph * 260
+            cx = 490 + ph * 90 + math.sin(t * 2 + i) * 14
+            d.arc((cx - wdt / 2, y, cx + wdt / 2, y + 26 + ph * 20), 180, 360, fill=(226, 244, 255, 230), width=int(5 + ph * 5))
+    if "sea" in els or place == "beach" or ground == "water":     # Wellen laufen
+        y0 = base - 190 if ("sea" in els or place == "beach") else base + 40
+        y1 = base - 20 if ("sea" in els or place == "beach") else H - 240
+        for y in range(int(y0), int(y1), 46):
+            sh = (t * 60 + y * 3) % 160
+            for x in range(-160, W + 160, 160):
+                d.arc((x + sh, y + math.sin(t * 2 + y) * 4, x + sh + 90, y + 30 + math.sin(t * 2 + y) * 4), 180, 360, fill=(226, 244, 255, 235), width=5)
+    if "lake" in els:
+        for i in range(4):
+            ph = (t * 0.5 + i / 4) % 1
+            cx, cy = 360 + i * 130, base + 190 + (i % 2) * 70
+            d.ellipse((cx - 30 - ph * 60, cy - 8 - ph * 16, cx + 30 + ph * 60, cy + 8 + ph * 16), outline=(226, 244, 255, int(230 * (1 - ph))), width=4)
+    if "fields" in els:                                           # Wind streicht durchs Korn
+        for i in range(5):
+            ph = (t * 0.28 + i / 5) % 1
+            x = -200 + ph * (W + 400)
+            y = base + 80 + i * 90
+            d.arc((x, y, x + 240, y + 40), 190, 340, fill=(250, 236, 170, 200), width=6)
+    if "factory" in els:
+        for cx in (820, 940):
+            for k in range(5):
+                ph = (t * 0.3 + k / 5) % 1
+                r = 40 + ph * 110
+                g = int(150 - ph * 50)
+                d.ellipse((cx + ph * 220 - r, base - 660 - ph * 520 - r, cx + ph * 220 + r, base - 660 - ph * 520 + r), fill=(g, g, g + 6, int(220 * (1 - ph))))
+    if "city" in els or place == "street" or ground == "road":    # Autos fahren durch
+        if "ruins" not in els:
+            cols = ((214, 80, 70), (70, 130, 210), (240, 196, 70), (240, 240, 244))
+            for i in range(3):
+                spd = 420 + i * 130
+                direction = 1 if i % 2 == 0 else -1
+                x = ((t * spd + i * 700) % (W + 900)) - 450
+                x = x if direction > 0 else W - x
+                _car(d, x, base + 200 + i * 150, cols[(i + int(t / 9)) % 4], direction, t)
+    if "ruins" in els or ground == "lava":                        # Glut und Rauch steigen auf
+        for i, (a, b, c) in enumerate(_DROPS[:26]):
+            ph = (t * (0.18 + c * 0.2) + b) % 1
+            x = a * W + math.sin(t * 1.5 + i) * 30
+            y = base + 100 - ph * 1100
+            r = 4 + c * 5
+            d.ellipse((x - r, y - r, x + r, y + r), fill=(255, 150 + int(80 * c), 60, int(240 * (1 - ph))))
+    if ground == "dry" or "deadtrees" in els or "dunes" in els or place == "desert":   # Staub weht, Steppenläufer rollt
+        for i, (a, b, c) in enumerate(_DROPS[:10]):
+            x = (a * (W + 600) + t * (300 + c * 300)) % (W + 600) - 300
+            y = base - 200 + b * 700
+            d.arc((x, y, x + 300, y + 40), 190, 330, fill=(240, 220, 170, 150), width=7)
+        tx = (t * 260) % (W + 300) - 150
+        ty = base + 150 - abs(math.sin(t * 5)) * 40
+        d.ellipse((tx - 34, ty - 34, tx + 34, ty + 34), outline=(120, 90, 60, 255), width=6)
+        d.arc((tx - 24, ty - 24, tx + 24, ty + 24), int(t * 300) % 360, int(t * 300) % 360 + 200, fill=(120, 90, 60, 255), width=5)
+    if "forest" in els or "trees" in els or place in ("forest", "park"):   # Blätter fallen
+        for i, (a, b, c) in enumerate(_DROPS[:9]):
+            ph = (t * (0.12 + c * 0.1) + b) % 1
+            x = a * W + math.sin(t * 2 + i * 1.7) * 50
+            y = base - 520 + ph * 700
+            d.ellipse((x - 10, y - 6, x + 10, y + 6), fill=(110, 180, 90, int(255 * (1 - ph * 0.6))))
+    if "glacier" in els or ground in ("snow", "ice"):
+        for i, (a, b, c) in enumerate(_DROPS[:40]):
+            x = (a * W + math.sin(t * 1.2 + c * 9) * 30) % W
+            y = (b * H + t * (90 + c * 80)) % H
+            d.ellipse((x - 4, y - 4, x + 4, y + 4), fill=(255, 255, 255, 220))
+
+
+MOODS = {"panic": (255, 60, 40), "tense": (255, 120, 40), "scary": (10, 10, 40), "sad": (40, 70, 130), "happy": (255, 220, 120),
+         "calm": None}
+
+
+def draw_mood(layer, mood, t):
+    """Stimmung über das ganze Bild: farbiger Schleier/Rand, bei Panik pulsierend."""
+    col = MOODS.get(str(mood or "").lower())
+    if not col:
+        return
+    d = ImageDraw.Draw(layer, "RGBA")
+    m = str(mood).lower()
+    if m == "panic":
+        a = 26 + int(22 * (0.5 + 0.5 * math.sin(t * 9)))
+        d.rectangle((0, 0, W, H), fill=(*col, a))
+        for i in range(10):                                        # Rand pulsiert rot
+            d.rectangle((i * 6, i * 6, W - i * 6, H - i * 6), outline=(*col, int((10 - i) * (5 + 4 * math.sin(t * 9)))), width=6)
+    elif m == "tense":
+        d.rectangle((0, 0, W, H), fill=(*col, 22))
+    elif m == "scary":
+        d.rectangle((0, 0, W, H), fill=(*col, 90))
+        for i in range(12):
+            d.rectangle((i * 10, i * 10, W - i * 10, H - i * 10), outline=(0, 0, 0, (12 - i) * 6), width=10)
+    elif m == "sad":
+        d.rectangle((0, 0, W, H), fill=(*col, 56))
+    elif m == "happy":
+        d.rectangle((0, 0, W, H), fill=(*col, 26))
+        for i, (a, b, c) in enumerate(_DROPS[:30]):               # Konfetti
+            x = (a * W + math.sin(t * 2 + i) * 40) % W
+            y = (b * H + t * (240 + c * 200)) % H
+            colr = ((250, 90, 90), (90, 170, 250), (250, 210, 80), (120, 220, 140))[i % 4]
+            d.rectangle((x - 7, y - 4, x + 7, y + 4), fill=(*colr, 235))
+
+
 def draw_ambient(layer, place, night, t):
     """Kleine Bewegung im Hintergrund, damit kein Bild stillsteht."""
     d = ImageDraw.Draw(layer, "RGBA")

@@ -116,8 +116,9 @@ def _eye(d, cx, cy, r, kind, look):
     d.ellipse((px + pr * 0.15, py - pr * 0.7, px + pr * 0.15 + hr * 2, py - pr * 0.7 + hr * 2), fill=white)
 
 
-def draw(look: Look, pose: Pose, facing=1, scale=1.0):
+def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
     """Zeichnet die Figur und gibt (RGBA-Bild, Fußpunkt-x, Fußpunkt-y) im Maßstab 1 zurück."""
+    SS = ss or globals()["SS"]
     k = SS * scale * look.size
     W, H = int(600 * k), int(740 * k)
     im = Image.new("RGBA", (W, H), (0, 0, 0, 0))
