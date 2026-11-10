@@ -171,7 +171,7 @@ def scene_clip(img, dur, out, idx, motion=None, ov=None, work=None, video=False)
             args += ["-framerate", str(FPS), "-i", pattern]
             scale = ""
             if video:   # animierte Szene: Einblendung in den freien Bereich über den Figuren einpassen
-                limit = 560 if str(ov.get("type")) in overlays.TALL else 330
+                limit = 600 if str(ov.get("type")) in overlays.TALL else 440
                 k = min(1.0, limit / oh)
                 ow, oh = int(ow * k) // 2 * 2, int(oh * k) // 2 * 2
                 scale = f"scale={ow}:{oh}:flags=lanczos,"
@@ -333,7 +333,8 @@ def render(work: Path, scenes, times, voice, ass, out, music=None, music_volume=
                      "loudnorm=I=-14:TP=-1.5[a]")
     else:
         parts.append("[vo]loudnorm=I=-14:TP=-1.5[a]")
-    vf = f"[0:v]ass={Path(ass).name}:fontsdir={fonts}[v]"
+    # leichte Farbkorrektur (etwas weniger bunt, etwas mehr Kontrast) für einen ruhigeren, hochwertigeren Look
+    vf = f"[0:v]eq=saturation=0.92:contrast=1.04,ass={Path(ass).name}:fontsdir={fonts}[v]"
     ff([*args, "-filter_complex", vf + ";" + ";".join(parts), "-map", "[v]", "-map", "[a]", "-t", f"{total:.2f}",
         "-c:v", "libx264", "-preset", "veryfast", "-crf", "21", "-pix_fmt", "yuv420p",
         "-c:a", "aac", "-b:a", "160k", "-ar", "44100", "-movflags", "+faststart", str(out)], cwd=work)

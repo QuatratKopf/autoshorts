@@ -10,7 +10,7 @@ from PIL import Image, ImageDraw
 from . import extras, places, rig
 
 W, H, FPS = 1080, 1920, 30
-SCALE = 1.45
+SCALE = 1.08            # Figuren bewusst kleiner: die Szene steht im Mittelpunkt
 POS = {"left": 250, "center": 540, "right": 830, "offleft": -260, "offright": 1340,
        "links": 250, "mitte": 540, "rechts": 830}
 TALL_OV = ("phone", "checklist", "note")
@@ -57,11 +57,19 @@ def _prepare(scene, cast):
     place = places.resolve(scene.get("place"))
     night = str(scene.get("time") or "").lower() in ("night", "nacht", "abend", "evening")
     ov = scene.get("overlay") if isinstance(scene.get("overlay"), dict) else {}
-    scale = 1.0 if str(ov.get("type")) in TALL_OV else SCALE
-    raw = [a for a in (scene.get("actors") or []) if isinstance(a, dict)] or \
-        [{"id": next(iter(cast), "held"), "action": "talk", "speaks": True}]
+    scale = 0.9 if str(ov.get("type")) in TALL_OV else SCALE
+    event = str(scene.get("shot") or "").lower() == "event"
+    raw = [a for a in (scene.get("actors") or []) if isinstance(a, dict)]
+    if "actors" not in scene and not event:
+        raw = [{"id": next(iter(cast), "held"), "action": "talk", "speaks": True}]
+    if event:            # Ereignis-Einstellung: das Geschehen groß, höchstens eine kleine Figur am Rand als Zuschauer
+        raw = raw[:1]
+        for a in raw:
+            a.setdefault("pos", "left")
+            a["pos"] = "left" if a["pos"] in ("center", "mitte") else a["pos"]
+        scale = 0.8
     actors = []
-    default_x = {1: (540,), 2: (330, 750), 3: (200, 540, 880)}[min(3, len(raw))]
+    default_x = {0: (540,), 1: (540,), 2: (330, 750), 3: (200, 540, 880)}[min(3, len(raw))]
     for i, a in enumerate(raw[:3]):
         aid = str(a.get("id") or f"a{i}")
         spec = cast.get(aid) if isinstance(cast.get(aid), dict) else {}
@@ -88,7 +96,7 @@ def _prepare(scene, cast):
         if not a["emote"]:
             a["emote"] = {"shocked": "!", "scared": "!", "think": "?", "angry": "anger"}.get(a["action"]) or \
                          {"angry": "anger", "scared": "sweat", "worried": "sweat"}.get(a["emotion"], "")
-    props = []
+    props, p_given = [], []
     for i, p in enumerate((scene.get("props") or [])[:3]):
         if isinstance(p, str):
             p = {"type": p}
@@ -96,15 +104,34 @@ def _prepare(scene, cast):
             taken = [q["x1"] for q in actors] + [q[1] for q in props]
             free = [c for c in (830, 250, 540, 990, 90) if all(abs(c - tx) > 230 for tx in taken)] or [830]
             props.append((str(p["type"]).lower(), _x(p.get("pos"), free[0]) if p.get("pos") else free[0]))
+            p_given.append(bool(p.get("pos")))
+    if event:
+        props = [(k, 600 if (i == 0 and not p_given[i]) else x) for i, (k, x) in enumerate(props)]
     return place, night, scale, actors, props, str(scene.get("weather") or "").lower()
 
 
-def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, in_bed, shot=""):
+def _prop(frame, kind, x, t, big):
+    """Requisite zeichnen; big > 1 vergrößert sie um ihren Standpunkt (Boden bzw. Himmel)."""
+    key = extras.PROP_ALIASES.get(kind, kind)
+    if big <= 1.01 or key in ("aurora", "lightning", "crack", "flood", "wave", "eclipse"):
+        extras.draw_prop(frame, kind, x, t)
+        return
+    layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    extras.draw_prop(layer, kind, x, t)
+    ay = 520 if key in extras.SKY else places.GROUND
+    big_l = layer.resize((int(W * big), int(H * big)), Image.BILINEAR)
+    frame.paste(big_l, (int(x - x * big), int(ay - ay * big)), big_l)
+
+
+def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, in_bed, shot="", big=1.0):
     frame = bg.copy()
+    if weather in ("quake", "erdbeben"):      # Erdbeben: das ganze Bild wackelt
+        dx, dy = int(math.sin(t * 47) * 16), int(math.cos(t * 39) * 12)
+        frame = frame.transform(frame.size, Image.AFFINE, (1, 0, dx, 0, 1, dy), resample=Image.NEAREST)
     extras.draw_ambient(frame, place, night, t)
     for kind, x in props:
         if extras.PROP_ALIASES.get(kind, kind) not in extras.FRONT:
-            extras.draw_prop(frame, kind, x, t)
+            _prop(frame, kind, x, t, big)
     over = frame
     od = ImageDraw.Draw(frame, "RGBA")
     focus = 540.0
@@ -148,7 +175,7 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
             im, fx, fy = rig.draw(a["look"], pose, facing, scale)
             if pose.lying and in_bed:                          # im Schlafzimmer liegt die Figur im Bett
                 x, gy = 300, places.GROUND - 150
-            _shadow(frame, int(x), gy, int(95 * scale * (1 - min(0.5, max(0, pose.lift) / 200))))
+            _shadow(frame, int(x), gy, int(72 * scale * (1 - min(0.5, max(0, pose.lift) / 200))))
             frame.paste(im, (int(x - fx), int(gy - fy)), im)
             head_y = gy - (430 + max(0, pose.lift)) * scale * a["look"].size
             _zzz(od, pose, x, head_y, t)
@@ -158,12 +185,12 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
             focus = x
     for kind, x in props:
         if extras.PROP_ALIASES.get(kind, kind) in extras.FRONT:
-            extras.draw_prop(over, kind, x, t)
+            _prop(over, kind, x, t, 1.0)
     if weather and not (night and weather in ("dark", "dunkel", "blackout")):
         extras.draw_weather(over, weather, t)
     if shot == "close":       # Nahaufnahme: Ausschnitt um die Hauptfigur, folgt ihr weich
-        cx = max(360, min(W - 360, focus))
-        frame = frame.crop((int(cx - 360), places.GROUND - 900, int(cx + 360), places.GROUND + 380)).resize((W, H), Image.BICUBIC)
+        cx = max(330, min(W - 330, focus))
+        frame = frame.crop((int(cx - 330), places.GROUND - 780, int(cx + 330), places.GROUND + 393)).resize((W, H), Image.BICUBIC)
     return frame
 
 
@@ -186,7 +213,7 @@ def direct(scenes, times):
             if lone:
                 if not acts[0].get("pos"):
                     acts[0]["pos"] = ("center", "left", "right", "center")[same % 4]
-                if same % 3 == 2 and not has_ov and not sc.get("shot"):
+                if same % 4 == 3 and not has_ov and not sc.get("shot"):
                     sc["shot"] = "close"
                 elif same % 3 == 1 and str(acts[0].get("action") or "") in ("", "idle"):
                     acts[0]["action"] = "look_around"
@@ -203,14 +230,15 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     shot = str(scene.get("shot") or "").lower()
     has_ov = isinstance(scene.get("overlay"), dict) and scene["overlay"].get("type")
     moving = any(a["x0"] != a["x1"] for a in actors)
-    shot = "close" if shot == "close" and not has_ov and not moving and not props else ""
+    big = 1.5 if shot == "event" else 1.15
+    shot = "close" if shot == "close" and not has_ov and not moving and not props and actors else ""
     ff = subprocess.Popen(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24",
                            "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-preset", "veryfast",
                            "-crf", "17", "-pix_fmt", "yuv420p", str(out)], stdin=subprocess.PIPE, stderr=subprocess.PIPE)
     try:
         for fidx in range(n_frames):
             t = fidx / FPS
-            frame = _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, place == "bedroom", shot)
+            frame = _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, place == "bedroom", shot, big)
             if still is not None and fidx == min(n_frames - 1, FPS):
                 frame.save(still, quality=92)
             ff.stdin.write(frame.tobytes())
@@ -231,7 +259,7 @@ def cover(spec: dict, cast: dict, out: Path):
                          "action": spec.get("action") or "shocked", "emotion": spec.get("emotion") or "shocked",
                          "emote": " ", "pos": "center"}]}
     place, night, _, actors, props, weather = _prepare(scene, cast)
-    frame = _frame(places.background(place, night), place, night, 1.5, actors, props, weather, 1.0, 3.0, (), 0.0, False)
+    frame = _frame(places.background(place, night), place, night, 1.25, actors, props, weather, 1.4, 3.0, (), 0.0, False, "", 1.35)
     # so beschneiden, dass die Figur groß in der unteren Bildhälfte sitzt und das obere Drittel für den Text frei bleibt
     frame = frame.crop((135, 0, 945, 1440)).resize((W, H), Image.LANCZOS)
     frame.save(out, quality=93)

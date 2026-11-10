@@ -80,21 +80,31 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
   "place": bedroom, livingroom, kitchen, office, classroom, lab, hospital, basement, street, park, forest, beach, desert,
            snow, mountain, cave, underwater, space
   "time": "day" oder "night"
-  "weather": rain, storm, snow, wind, heat, dark oder "" (nur wenn es zur Szene passt)
+  "weather": rain, storm, snow, wind, heat, dark, ash (Ascheregen), quake (Erdbeben: Bild wackelt) oder ""
   "props": 0–2 Requisiten aus: tree, rock, box, car, fire, tv, computer, money, rocket, ufo, meteor, explosion, earth, sun,
-           moon, tornado, wave, ice, volcano   (meteor fällt und schlägt ein, rocket startet, wave steigt)
+           moon, tornado, wave, flood, ice, volcano, lightning, crack, smoke, aurora, eclipse, sprout
+           (meteor fällt und schlägt ein, rocket startet, wave/flood steigen, crack reißt den Boden auf, eclipse verdunkelt
+            die Sonne, sprout wächst zur Blume, volcano spuckt Lava)
   "actors": 1–2 Figuren, z. B. [{"id": "mia", "action": "run", "emotion": "scared", "emote": "!", "pos": "offleft", "to": "center", "speaks": true}]
      action: idle, talk, walk, run, wave, point, shocked, sad, jump, think, sit, sleep, dance, look_around, fall
      emotion: happy, sad, angry, scared, worried, shocked oder ""
      emote (Symbol über dem Kopf, sparsam): "!", "?", heart, idea, sweat, anger, music oder ""
      pos / to: left, center, right, offleft, offright ("to" nur wenn die Figur sich bewegt)
      speaks: true bei der Figur, um die es in dieser Szene geht
-  "shot": "close" für eine Nahaufnahme des Gesichts (bei Gefühlen, Schreck, Pointe – etwa jede dritte Szene), sonst "wide"
+  "shot": "event" = Ereignis-Einstellung: das Geschehen (Requisiten, Wetter, Ort) füllt das Bild, "actors" ist [] oder
+          höchstens eine kleine Figur am Rand, die zuschaut · "close" = Nahaufnahme einer Figur (selten, nur bei starker
+          Reaktion) · sonst "wide"
+- WICHTIG – das Thema zeigen, nicht die Figur: Die Figuren sind Nebensache und klein im Bild. Immer wenn der Sprecher über
+  Natur, Wetter, Weltall, Katastrophen, Tiere oder ein Phänomen redet, nimm "shot": "event" mit passenden Requisiten, Wetter
+  und Ort (z. B. Vulkanausbruch: place mountain, props ["volcano","smoke"], weather "ash", actors []). Bei Natur-,
+  Wissens- und What-If-Themen ist mindestens jede zweite Szene eine Ereignis-Einstellung. Figuren zeigen nur kurz die
+  Reaktion oder die Folgen für Menschen.
 - Wechsle Orte, Aktionen und Requisiten ab: nicht zweimal hintereinander dieselbe Kombination; jede Szene zeigt sichtbar,
   wovon der Sprecher gerade redet (Bewegung statt Herumstehen: reinkommen, rennen, erschrecken, zeigen, springen).
 - Erklärendes (Zahlen, Listen, Regeln) kommt in die Einblendungen (overlay).
 - "thumbnail": {"text": "2–4 deutsche WÖRTER", "place": "...", "time": "day|night", "actor": "id aus cast", "action": "shocked",
-                "emotion": "shocked", "props": ["meteor"], "weather": ""}  – der spannendste Moment als Titelbild.
+                "emotion": "shocked", "props": ["meteor"], "weather": ""}  – der spannendste Moment als Titelbild,
+                am besten mit dem Ereignis (Requisite) groß im Bild.
 - "image" je Szene darf leer bleiben."""
 
 UNSUITABLE = ("Ungeeignet sind: Themen, die sich um einzelne echte Personen drehen (Promis, Musiker, Sportler, Politiker, Creator), Todesfälle, Unglücke, Verbrechen, Krieg, Terror, Krankheiten einzelner Personen, "

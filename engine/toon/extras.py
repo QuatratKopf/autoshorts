@@ -218,13 +218,100 @@ def p_volcano(d, x, t, s=1.0):
         d.ellipse((px - 18, py - 18, px + 18, py + 18), fill=(250, 160, 50), outline=INK, width=4)
 
 
-PROPS = {"tree": p_tree, "rock": p_rock, "box": p_box, "car": p_car, "fire": p_fire, "tv": p_tv, "computer": p_computer,
+def p_lightning(d, x, t, s=1.0):
+    ph = t % 1.3
+    if ph < 0.5:
+        pts = [(x + 40, 0), (x - 30, 380), (x + 30, 400), (x - 60, 760), (x + 10, 790), (x - 40, GROUND)]
+        d.line(pts, fill=(255, 255, 255, 255), width=26, joint="curve")
+        d.line(pts, fill=(255, 236, 120, 255), width=12, joint="curve")
+        if ph < 0.1:
+            d.rectangle((0, 0, W, H), fill=(255, 255, 255, 120))
+        d.ellipse((x - 150, GROUND - 40, x + 70, GROUND + 30), fill=(255, 240, 170, 200))
+
+
+def p_crack(d, x, t, s=1.0):
+    k = min(1.0, t / 1.4)
+    pts = [(x - 420, GROUND + 260), (x - 250, GROUND + 150), (x - 120, GROUND + 190), (x, GROUND + 60), (x + 110, GROUND + 120),
+           (x + 260, GROUND + 20), (x + 420, GROUND + 70)]
+    n = max(2, int(len(pts) * k) + 1)
+    wdt = int(14 + 40 * k)
+    d.line(pts[:n], fill=INK, width=wdt + 12, joint="curve")
+    d.line(pts[:n], fill=(60, 30, 20), width=wdt, joint="curve")
+    for i in range(6):                     # aufgewirbelte Steine
+        ph = (t * 1.6 + i / 6) % 1
+        px, py = x - 300 + i * 120, GROUND + 60 - ph * 220 + 260 * ph * ph
+        d.rectangle((px - 12, py - 12, px + 12, py + 12), fill=(130, 110, 100), outline=INK, width=3)
+
+
+def p_flood(d, x, t, s=1.0):
+    k = min(1.0, t / 5.0)
+    top = GROUND + 120 - 420 * k
+    pts = [(0, H)] + [(i, top + math.sin(i * 0.014 + t * 2.4) * 18) for i in range(0, W + 60, 60)] + [(W, H)]
+    d.polygon(pts, fill=(60, 140, 220, 215), outline=INK, width=O)
+    for i in range(0, W, 180):
+        y = top + 70 + (i % 360) * 0.3
+        d.arc((i + math.sin(t * 2 + i) * 20, y, i + 110 + math.sin(t * 2 + i) * 20, y + 34), 180, 360, fill=(210, 236, 255, 255), width=6)
+
+
+def p_smoke(d, x, t, s=1.0):
+    for i in range(9):
+        ph = (t * 0.35 + i / 9) % 1
+        r = 50 + ph * 150
+        cx, cy = x + math.sin(i * 2.1 + t) * 40 + ph * 120, GROUND - 80 - ph * 900
+        g = int(70 + ph * 60)
+        d.ellipse((cx - r, cy - r, cx + r, cy + r), fill=(g, g, g + 6, int(230 * (1 - ph))))
+
+
+def p_aurora(d, x, t, s=1.0):
+    for b, col in enumerate(((90, 240, 170), (110, 200, 250), (190, 130, 250))):
+        pts_top = [(i, 260 + b * 70 + math.sin(i * 0.006 + t * 0.8 + b) * 70) for i in range(0, W + 60, 60)]
+        pts = pts_top + [(i, y + 190) for i, y in reversed(pts_top)]
+        d.polygon(pts, fill=(*col, 90))
+
+
+def p_eclipse(d, x, t, s=1.0):
+    cy, r = 520, 170
+    k = min(1.0, t / 2.2)
+    d.rectangle((0, 0, W, H), fill=(6, 8, 30, int(150 * k)))
+    for i in range(14):
+        a = i / 14 * math.tau + t * 0.3
+        d.line((x + math.cos(a) * (r + 10), cy + math.sin(a) * (r + 10), x + math.cos(a) * (r + 70 + 20 * math.sin(t * 3 + i)),
+                cy + math.sin(a) * (r + 70 + 20 * math.sin(t * 3 + i))), fill=(255, 220, 130, 255), width=12)
+    _o(d, (x - r, cy - r, x + r, cy + r), (255, 214, 70))
+    mx = x + 2 * r * (1 - k)
+    d.ellipse((mx - r, cy - r, mx + r, cy + r), fill=(20, 20, 30, 255))
+
+
+def p_sprout(d, x, t, s=1.0):
+    k = min(1.0, t / 2.5)
+    hgt = 30 + 330 * k
+    pts = [(x + math.sin(i * 0.9) * 14 * k, GROUND - hgt * i / 8) for i in range(9)]
+    d.line(pts, fill=INK, width=24, joint="curve")
+    d.line(pts, fill=(80, 170, 90), width=14, joint="curve")
+    for i, sgn in ((3, -1), (5, 1), (7, -1)):
+        if k > i / 9:
+            px, py = pts[i]
+            lw = 70 * min(1.0, (k - i / 9) * 4)
+            d.ellipse((px + (0 if sgn > 0 else -lw), py - 22, px + (lw if sgn > 0 else 0), py + 14), fill=(96, 190, 104), outline=INK, width=4)
+    if k >= 1.0:
+        px, py = pts[-1]
+        for a in range(0, 360, 60):
+            d.ellipse((px + math.cos(math.radians(a)) * 30 - 20, py + math.sin(math.radians(a)) * 30 - 20,
+                       px + math.cos(math.radians(a)) * 30 + 20, py + math.sin(math.radians(a)) * 30 + 20), fill=(250, 190, 210), outline=INK, width=3)
+        d.ellipse((px - 16, py - 16, px + 16, py + 16), fill=(250, 210, 70), outline=INK, width=3)
+
+
+PROPS = {"lightning": p_lightning, "crack": p_crack, "flood": p_flood, "smoke": p_smoke, "aurora": p_aurora,
+         "eclipse": p_eclipse, "sprout": p_sprout, "tree": p_tree, "rock": p_rock, "box": p_box, "car": p_car, "fire": p_fire, "tv": p_tv, "computer": p_computer,
          "money": p_money, "rocket": p_rocket, "ufo": p_ufo, "meteor": p_meteor, "explosion": p_explosion, "earth": p_earth,
          "sun": p_bigsun, "moon": p_bigmoon, "tornado": p_tornado, "wave": p_wave, "ice": p_ice, "volcano": p_volcano}
 PROP_ALIASES = {"baum": "tree", "stein": "rock", "kiste": "box", "auto": "car", "feuer": "fire", "fernseher": "tv", "pc": "computer",
                 "laptop": "computer", "geld": "money", "rakete": "rocket", "asteroid": "meteor", "erde": "earth", "sonne": "sun",
-                "mond": "moon", "tsunami": "wave", "welle": "wave", "eisberg": "ice", "vulkan": "volcano", "bigsun": "sun"}
-FRONT = ("wave",)     # werden vor den Figuren gezeichnet
+                "mond": "moon", "tsunami": "wave", "blitz": "lightning", "erdbeben": "crack", "earthquake": "crack", "riss": "crack",
+                "überschwemmung": "flood", "flut": "flood", "rauch": "smoke", "polarlicht": "aurora", "sonnenfinsternis": "eclipse",
+                "pflanze": "sprout", "plant": "sprout", "comet": "meteor", "komet": "meteor", "welle": "wave", "eisberg": "ice", "vulkan": "volcano", "bigsun": "sun"}
+FRONT = ("wave", "flood", "eclipse")
+SKY = ("earth", "sun", "moon", "ufo", "meteor", "aurora", "eclipse", "lightning")     # werden vor den Figuren gezeichnet
 
 
 def draw_prop(layer, kind, x, t):
@@ -308,6 +395,17 @@ def draw_weather(layer, kind, t):
             d.arc((x, y, x + 260, y + 50), 180, 320, fill=(255, 255, 255, 190), width=6)
             if i < 7:   # Blätter
                 d.ellipse((x + 300, y + math.sin(t * 6 + i) * 30, x + 326, y + 14 + math.sin(t * 6 + i) * 30), fill=(220, 140, 60, 255))
+    elif kind in ("ash", "asche"):
+        d.rectangle((0, 0, W, H), fill=(120, 40, 20, 46))
+        for a, b, c in _DROPS[:70]:
+            x = (a * W + math.sin(t * 0.9 + c * 9) * 60) % W
+            y = (b * H + t * (110 + c * 90)) % H
+            d.ellipse((x - 5, y - 4, x + 5, y + 4), fill=(60, 56, 56, 230))
+    elif kind in ("quake", "erdbeben"):
+        for a, b, c in _DROPS[:24]:
+            y = (b * 600 + t * (500 + c * 400)) % 700
+            x = a * W
+            d.rectangle((x - 6, GROUND - 700 + y, x + 6, GROUND - 688 + y), fill=(120, 104, 96, 220))
     elif kind in ("heat", "hitze"):
         d.rectangle((0, 0, W, H), fill=(255, 120, 40, 34 + int(14 * math.sin(t * 2))))
     elif kind in ("dark", "dunkel", "blackout"):

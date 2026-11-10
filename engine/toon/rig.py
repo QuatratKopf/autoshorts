@@ -12,10 +12,10 @@ SS = 2
 INK = (22, 22, 26)
 
 COLORS = {
-    "blau": (46, 110, 220), "rot": (214, 64, 56), "grün": (70, 150, 80), "gelb": (240, 196, 50),
-    "orange": (236, 128, 44), "lila": (128, 82, 190), "pink": (232, 112, 160), "türkis": (40, 170, 170),
-    "grau": (120, 124, 132), "weiß": (236, 236, 232), "schwarz": (30, 30, 34), "braun": (130, 86, 54),
-    "beige": (214, 190, 150), "oliv": (128, 140, 70),
+    "blau": (58, 104, 190), "rot": (196, 72, 66), "grün": (74, 138, 92), "gelb": (224, 180, 66),
+    "orange": (220, 126, 60), "lila": (118, 88, 170), "pink": (206, 110, 150), "türkis": (52, 150, 152),
+    "grau": (112, 118, 128), "weiß": (230, 230, 226), "schwarz": (40, 42, 50), "braun": (126, 90, 62),
+    "beige": (204, 184, 150), "oliv": (122, 132, 78),
 }
 SKINS = {"schwarz": (22, 22, 26), "hell": (246, 214, 186), "mittel": (210, 160, 118), "dunkel": (124, 84, 58),
          "weiß": (244, 244, 240), "gelb": (250, 214, 70), "grün": (120, 190, 90)}
@@ -75,7 +75,7 @@ class Pose:
 # Stil: Mischung aus Strichmännchen und niedlichem Cartoon – großer runder Kopf mit großen Augen und roten Wangen,
 # kleiner Bohnen-Körper in Farbe, dünne Strich-Arme und -Beine, überall kräftige dunkle Umrisse.
 
-OUT = 7          # Umriss-Stärke (px bei Maßstab 1)
+OUT = 5          # Umriss-Stärke (px bei Maßstab 1)
 CHEEK = (255, 150, 150)
 
 
@@ -106,9 +106,9 @@ def _eye(d, cx, cy, r, kind, look):
             d.arc((cx - r, cy - r * 1.1, cx + r, cy + r * 0.5), 20, 160, fill=INK, width=int(r * 0.38))
         return
     rx, ry = (r * 1.15, r * 1.4) if kind == "wide" else (r, r * 1.2)
-    d.ellipse((cx - rx - r * 0.22, cy - ry - r * 0.22, cx + rx + r * 0.22, cy + ry + r * 0.22), fill=INK)
+    d.ellipse((cx - rx - r * 0.17, cy - ry - r * 0.17, cx + rx + r * 0.17, cy + ry + r * 0.17), fill=INK)
     d.ellipse((cx - rx, cy - ry, cx + rx, cy + ry), fill=white)
-    pr = r * (0.42 if kind == "wide" else 0.66)
+    pr = r * (0.38 if kind == "wide" else 0.6)
     px = cx + look * (rx - pr) * 0.8
     py = cy + (ry - pr) * (0.5 if kind in ("sad", "worried") else 0.15)
     d.ellipse((px - pr, py - pr, px + pr, py + pr), fill=INK)
@@ -124,47 +124,51 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0):
     d = ImageDraw.Draw(im)
     f, o = facing, OUT * k
     foot_x, foot_y = W / 2, H - 36 * k
-    leg1, leg2, arm1, arm2 = 62 * k, 62 * k, 58 * k, 54 * k
-    lw = 15 * k
+    leg1, leg2, arm1, arm2 = 80 * k, 78 * k, 66 * k, 60 * k
+    lw = 21 * k
     hip = (foot_x, foot_y - (leg1 + leg2) * pose.squash - pose.lift * k)
     lean = pose.lean * f
-    bh, bw = 128 * k * pose.squash, 104 * k
+    bh, bw = 150 * k * pose.squash, 90 * k
     top = _pt(hip, 180 - lean, bh)                       # Hals
     shoulder = _pt(hip, 180 - lean, bh * 0.74)
-    skin = look.skin if look.skin != SKINS["schwarz"] else (252, 250, 244)   # heller Kopf wirkt freundlicher
+    skin = look.skin if look.skin != SKINS["schwarz"] else (250, 244, 232)
     dark = tuple(max(0, int(c * 0.8)) for c in look.shirt)
 
-    def limb(p0, a1, l1, a2, l2, hand=None, shoe=False):
+    def limb(p0, a1, l1, a2, l2, hand=None, shoe=False, col=INK):
         p1 = _pt(p0, a1, l1)
         p2 = _pt(p1, a1 + a2, l2)
-        _stroke(d, [p0, p1, p2], lw, INK)
+        _stroke(d, [p0, p1, p2], lw + 2 * o, INK)
+        _stroke(d, [p0, p1, p2], lw, col)
         if hand:
-            r = 15 * k
+            r = 13 * k
             _blob(d, (p2[0] - r, p2[1] - r, p2[0] + r, p2[1] + r), hand, o * 0.7)
         if shoe:
             d.rounded_rectangle((p2[0] - 16 * k + 12 * k * f, p2[1] - 12 * k, p2[0] + 22 * k + 12 * k * f, p2[1] + 14 * k), 12 * k, fill=INK)
         return p2
 
     # hinterer Arm, Beine
-    sh_b = (shoulder[0] - 44 * k * f, shoulder[1] + 6 * k)      # hintere / vordere Schulter (leicht frontal gezeichnet)
-    sh_f = (shoulder[0] + 44 * k * f, shoulder[1] + 6 * k)
-    limb(sh_b, pose.arm_l * f + lean, arm1, pose.fore_l * f, arm2, hand=skin)
-    hl = (hip[0] - 20 * k, hip[1] - 8 * k)
-    hr_ = (hip[0] + 20 * k, hip[1] - 8 * k)
-    limb(hl, pose.leg_l * f, leg1, -pose.knee_l * f, leg2, shoe=True)
-    limb(hr_, pose.leg_r * f, leg1, -pose.knee_r * f, leg2, shoe=True)
+    sh_b = (shoulder[0] - 34 * k * f, shoulder[1] + 6 * k)      # hintere / vordere Schulter (leicht frontal gezeichnet)
+    sh_f = (shoulder[0] + 34 * k * f, shoulder[1] + 6 * k)
+    limb(sh_b, pose.arm_l * f + lean, arm1, pose.fore_l * f, arm2, hand=skin, col=dark)
+    hl = (hip[0] - 18 * k, hip[1] - 8 * k)
+    hr_ = (hip[0] + 18 * k, hip[1] - 8 * k)
+    limb(hl, pose.leg_l * f, leg1, -pose.knee_l * f, leg2, shoe=True, col=tuple(int(c * 0.85) for c in look.pants))
+    limb(hr_, pose.leg_r * f, leg1, -pose.knee_r * f, leg2, shoe=True, col=look.pants)
 
     # Bohnen-Körper (Kapsel mit Umriss), unten etwas breiter
     b0 = _pt(hip, 180 - lean, bw * 0.42)
     b1 = _pt(hip, 180 - lean, bh - bw * 0.40)
     _stroke(d, [b0, b1], bw + 2 * o, INK)
     _stroke(d, [b0, b1], bw, look.shirt)
-    belly = _pt(hip, 180 - lean, bw * 0.40)
-    d.ellipse((belly[0] - bw * 0.30 + 8 * k * f, belly[1] - bw * 0.26, belly[0] + bw * 0.30 + 8 * k * f, belly[1] + bw * 0.30),
-              fill=tuple(min(255, int(c * 1.14 + 10)) for c in look.shirt))   # heller Bauchfleck
+    hood = _pt(hip, 180 - lean, bh - 8 * k)                                   # Kapuze im Nacken + Reißverschluss + Tasche
+    d.ellipse((hood[0] - 46 * k, hood[1] - 22 * k, hood[0] + 46 * k, hood[1] + 26 * k), fill=dark, outline=INK, width=int(o))
+    z0, z1 = _pt(hip, 180 - lean, bh - 20 * k), _pt(hip, 180 - lean, bw * 0.2)
+    d.line((z0[0] + 4 * k * f, z0[1], z1[0] + 4 * k * f, z1[1]), fill=dark, width=int(4 * k))
+    pk = _pt(hip, 180 - lean, bw * 0.46)
+    d.rounded_rectangle((pk[0] - 26 * k, pk[1] - 12 * k, pk[0] + 26 * k, pk[1] + 14 * k), 8 * k, fill=dark)
 
     # Kopf
-    hr = 98 * k
+    hr = 72 * k
     ha = pose.head * f + lean
     hc = _pt(top, 180 - ha, hr * 0.82)
     if look.hair == "long":
@@ -175,60 +179,59 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0):
     _blob(d, (hc[0] - hr, hc[1] - hr * 0.94, hc[0] + hr, hc[1] + hr * 0.94), skin, o)
     if look.hair in ("long", "bun"):
         d.chord((hc[0] - hr, hc[1] - hr * 0.94, hc[0] + hr, hc[1] - hr * 0.05), 180, 360, fill=(96, 62, 44))
+    u = k * 0.76
     # Gesicht (leicht in Blickrichtung versetzt)
-    ex, ey, er = hc[0] + 16 * k * f, hc[1] + 2 * k, 23 * k
+    ex, ey, er = hc[0] + 16 * u * f, hc[1] + 2 * u, 19 * u
     lk = pose.look if pose.look else 0.45 * f
     for sgn in (-1, 1):
-        _eye(d, ex + sgn * 36 * k, ey, er, pose.eyes, lk)
-        cx, cy = ex + sgn * 62 * k, ey + 40 * k
-        d.ellipse((cx - 17 * k, cy - 10 * k, cx + 17 * k, cy + 10 * k), fill=CHEEK)
+        _eye(d, ex + sgn * 36 * u, ey, er, pose.eyes, lk)
     if pose.eyes in ("angry", "sad", "worried"):
         for sgn in (-1, 1):
-            x0, y0 = ex + sgn * 36 * k, ey - 44 * k
-            dy = (-9 if pose.eyes == "angry" else 8) * k * sgn      # wütend: innen tiefer · traurig/besorgt: innen höher
-            d.line((x0 - 20 * k, y0 - dy, x0 + 20 * k, y0 + dy), fill=INK, width=int(8 * k))
-    mx, my = ex, ey + 46 * k
+            x0, y0 = ex + sgn * 36 * u, ey - 44 * u
+            dy = (-9 if pose.eyes == "angry" else 8) * u * sgn      # wütend: innen tiefer · traurig/besorgt: innen höher
+            d.line((x0 - 20 * u, y0 - dy, x0 + 20 * u, y0 + dy), fill=INK, width=int(8 * u))
+    mx, my = ex, ey + 46 * u
     if pose.mouth > 0.08:
-        mh = 8 * k + pose.mouth * 26 * k
-        d.ellipse((mx - 15 * k, my - mh / 2, mx + 15 * k, my + mh / 2), fill=INK)
-        d.ellipse((mx - 8 * k, my + mh * 0.05, mx + 8 * k, my + mh * 0.42), fill=(240, 110, 110))
+        mh = 8 * u + pose.mouth * 26 * u
+        d.ellipse((mx - 15 * u, my - mh / 2, mx + 15 * u, my + mh / 2), fill=INK)
+        d.ellipse((mx - 8 * u, my + mh * 0.05, mx + 8 * u, my + mh * 0.42), fill=(240, 110, 110))
     elif pose.smile < -0.2:
-        d.arc((mx - 16 * k, my - 4 * k, mx + 16 * k, my + 20 * k), 200, 340, fill=INK, width=int(6 * k))
+        d.arc((mx - 16 * u, my - 4 * u, mx + 16 * u, my + 20 * u), 200, 340, fill=INK, width=int(6 * u))
     else:
-        wdt = (20 + 8 * max(0, pose.smile)) * k
-        d.arc((mx - wdt, my - 22 * k, mx + wdt, my + 8 * k), 25, 155, fill=INK, width=int(6 * k))
+        wdt = (20 + 8 * max(0, pose.smile)) * u
+        d.arc((mx - wdt, my - 22 * u, mx + wdt, my + 8 * u), 25, 155, fill=INK, width=int(6 * u))
     if look.glasses:
         for sgn in (-1, 1):
-            d.ellipse((ex + sgn * 36 * k - 34 * k, ey - 36 * k, ex + sgn * 36 * k + 34 * k, ey + 36 * k), outline=INK, width=int(6 * k))
+            d.ellipse((ex + sgn * 36 * u - 30 * u, ey - 31 * u, ex + sgn * 36 * u + 30 * u, ey + 31 * u), outline=INK, width=int(5 * u))
     # Kopfbedeckung
     hcx, ty = hc[0], hc[1] - hr * 0.94
-    hat_box = (hcx - hr * 1.02, ty - 10 * k, hcx + hr * 1.02, ty + hr * 1.25)
+    hat_box = (hcx - hr * 1.02, ty - 10 * u, hcx + hr * 1.02, ty + hr * 1.25)
     if look.hat in ("cap", "helmet", "beanie"):
         col = (242, 140, 40) if look.hat == "helmet" else look.hat_color
         d.chord((hat_box[0] - o, hat_box[1] - o, hat_box[2] + o, hat_box[3] + o), 180, 360, fill=INK)
         d.chord(hat_box, 180, 360, fill=col)
         base = ty + hr * 0.60
         if look.hat == "cap":
-            x0, x1 = (hcx, hcx + 150 * k) if f > 0 else (hcx - 150 * k, hcx)
-            d.rounded_rectangle((x0, base - 12 * k - o, x1, base + 12 * k), 12 * k, fill=INK)
-            d.rounded_rectangle((x0 + o, base - 12 * k, x1 - o, base + 12 * k - o), 10 * k, fill=col)
+            x0, x1 = (hcx, hcx + 150 * u) if f > 0 else (hcx - 150 * u, hcx)
+            d.rounded_rectangle((x0, base - 12 * u - o, x1, base + 12 * u), 12 * u, fill=INK)
+            d.rounded_rectangle((x0 + o, base - 12 * u, x1 - o, base + 12 * u - o), 10 * u, fill=col)
         elif look.hat == "helmet":
-            _blob(d, (hcx + 40 * k * f - 17 * k, ty + 8 * k, hcx + 40 * k * f + 17 * k, ty + 42 * k), (255, 242, 150), o * 0.6)
+            _blob(d, (hcx + 40 * u * f - 17 * u, ty + 8 * u, hcx + 40 * u * f + 17 * u, ty + 42 * u), (255, 242, 150), o * 0.6)
         else:
-            _blob(d, (hcx - 20 * k, ty - 44 * k, hcx + 20 * k, ty - 4 * k), col, o * 0.8)
+            _blob(d, (hcx - 20 * u, ty - 44 * u, hcx + 20 * u, ty - 4 * u), col, o * 0.8)
     elif look.hat == "bow":
-        bx, by = hcx - 56 * k * f, ty + 18 * k
+        bx, by = hcx - 56 * u * f, ty + 18 * u
         for sgn in (-1, 1):
-            d.polygon([(bx, by), (bx + sgn * 44 * k, by - 30 * k), (bx + sgn * 44 * k, by + 30 * k)], fill=INK)
-            d.polygon([(bx + sgn * 6 * k, by), (bx + sgn * 38 * k, by - 20 * k), (bx + sgn * 38 * k, by + 20 * k)], fill=look.hat_color)
+            d.polygon([(bx, by), (bx + sgn * 44 * u, by - 30 * u), (bx + sgn * 44 * u, by + 30 * u)], fill=INK)
+            d.polygon([(bx + sgn * 6 * u, by), (bx + sgn * 38 * u, by - 20 * u), (bx + sgn * 38 * u, by + 20 * u)], fill=look.hat_color)
     elif look.hat == "crown":
-        y0 = ty + 14 * k
-        pts = [(hcx - 56 * k, y0), (hcx - 56 * k, y0 - 54 * k), (hcx - 28 * k, y0 - 26 * k), (hcx, y0 - 64 * k),
-               (hcx + 28 * k, y0 - 26 * k), (hcx + 56 * k, y0 - 54 * k), (hcx + 56 * k, y0)]
+        y0 = ty + 14 * u
+        pts = [(hcx - 56 * u, y0), (hcx - 56 * u, y0 - 54 * u), (hcx - 28 * u, y0 - 26 * u), (hcx, y0 - 64 * u),
+               (hcx + 28 * u, y0 - 26 * u), (hcx + 56 * u, y0 - 54 * u), (hcx + 56 * u, y0)]
         d.polygon(pts, fill=(250, 200, 40), outline=INK, width=int(o))
 
     # vorderer Arm
-    limb(sh_f, pose.arm_r * f + lean, arm1, pose.fore_r * f, arm2, hand=skin)
+    limb(sh_f, pose.arm_r * f + lean, arm1, pose.fore_r * f, arm2, hand=skin, col=look.shirt)
 
     if pose.lying:
         im = im.rotate(90 * f, expand=True, resample=Image.BICUBIC)
