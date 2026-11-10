@@ -134,6 +134,24 @@ def missing_things(script, topic):
     return out[:6]
 
 
+def _stems(text):
+    import re as _re
+    return {w[:6] for w in _re.findall(r"[a-zäöüß]{5,}", str(text or "").lower())
+            if w not in ("wäre", "würde", "passiert", "plötzlich", "morgen", "menschen", "alles", "unsere", "wirklich", "komplett", "einfach")}
+
+
+def too_similar(topic, trend=None):
+    """Gab es dieses Thema in den letzten Videos schon (fast) genauso? Vergleicht die tragenden Wörter."""
+    a = _stems(topic)
+    for old in VIDEOS[-40:]:
+        if trend and old.get("trend") and old["trend"].get("title") == trend.get("title"):
+            return old.get("title") or old.get("topic")
+        b = _stems(f"{old.get('topic') or ''} {old.get('title') or ''}")
+        if a and b and len(a & b) >= max(2, round(0.5 * len(a))):
+            return old.get("title") or old.get("topic")
+    return None
+
+
 def draft(cat, topic, trend, v=None):
     """Thema finden und Drehbuch schreiben (ohne Ton und Bild)."""
     v = v if v is not None else {}
@@ -143,6 +161,10 @@ def draft(cat, topic, trend, v=None):
             topic, trend = writer.trend_topic(cat)
         except Exception as e:  # noqa: BLE001
             log(f"Trend-Auswahl fehlgeschlagen ({e}) – nehme ein zeitloses Thema")
+        dup = too_similar(topic, trend) if topic else None
+        if dup:                                           # derselbe Trend wie neulich → lieber etwas Neues
+            log(f"Das Trend-Thema gab es gerade erst („{dup}“) – nehme ein anderes")
+            topic, trend = None, None
         if trend:
             log(f"Trend: {trend['title']} ({trend['source']})")
             v["trend"] = {"title": trend["title"], "source": trend["source"]}
@@ -151,6 +173,12 @@ def draft(cat, topic, trend, v=None):
     if not topic:
         log("Suche ein neues Thema …")
         topic = writer.new_topic(cat)
+        for _ in range(2):
+            dup = too_similar(topic)
+            if not dup:
+                break
+            log(f"Zu ähnlich zu „{dup}“ – suche noch einmal")
+            topic = writer.new_topic(cat)
     v["topic"] = topic
     log(f"Thema: {topic}")
     log("Schreibe Drehbuch …")
