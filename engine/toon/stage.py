@@ -161,6 +161,33 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
     return frame
 
 
+def direct(scenes, times):
+    """Kleine Regie über das ganze Video: sorgt für Abwechslung, wenn das Drehbuch mehrmals hintereinander dieselbe
+    Einstellung vorgibt (gleicher Ort, gleiche Figur, nur Reden) – andere Position, Nahaufnahme oder Hereinkommen."""
+    prev_place, same, changes = None, 0, 0
+    for i, (sc, (s0, e0)) in enumerate(zip(scenes, times)):
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        place = places.resolve(sc.get("place"))
+        has_ov = isinstance(sc.get("overlay"), dict) and sc["overlay"].get("type")
+        lone = len(acts) == 1 and str(acts[0].get("action") or "talk").lower() in ("talk", "idle", "") and not acts[0].get("to")
+        if place != prev_place:
+            same = 0
+            changes += 1
+            if i > 0 and lone and changes % 2 == 0 and (e0 - s0) > 2.6:     # bei jedem zweiten Ortswechsel hereinkommen
+                acts[0].update(action="walk", pos="offleft" if changes % 4 else "offright", to=acts[0].get("pos") or "center")
+        else:
+            same += 1
+            if lone:
+                if not acts[0].get("pos"):
+                    acts[0]["pos"] = ("center", "left", "right", "center")[same % 4]
+                if same % 3 == 2 and not has_ov and not sc.get("shot"):
+                    sc["shot"] = "close"
+                elif same % 3 == 1 and str(acts[0].get("action") or "") in ("", "idle"):
+                    acts[0]["action"] = "look_around"
+        prev_place = place
+    return scenes
+
+
 def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.0, still: Path = None):
     """scene: {"place", "time", "weather", "props", "actors": [{"id", "action", "emotion", "emote", "pos", "to", "speaks"}]}.
     words: [(wort, start, ende)] der ganzen Sprecherspur; t0 = Startzeit der Szene darin."""

@@ -152,6 +152,7 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None):
         if toon:
             from .toon import stage
             log("Animiere Szenen …")
+            stage.direct(scenes, times)
             for i, (sc, (s0, e0)) in enumerate(zip(scenes, times)):
                 d = (e0 - s0) + (0.35 if i == len(scenes) - 1 else 0.25)
                 stage.render_scene(sc, script.get("cast") or {}, d, work / f"toon{i:02d}.mp4", words, s0, work / f"img{i:02d}.jpg")
