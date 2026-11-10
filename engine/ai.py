@@ -70,10 +70,12 @@ def _gemini(system, user, temperature):
     if chosen in ("gemini-flash-latest", "gemini-pro-latest"):
         chosen = GEMINI_TEXT[0]
     models = [chosen] + [m for m in GEMINI_TEXT if m != chosen]
-    gc = {"temperature": temperature, "responseMimeType": "application/json", "maxOutputTokens": 8192}
+    gc = {"temperature": temperature, "responseMimeType": "application/json", "maxOutputTokens": 16384}
     body = {"systemInstruction": {"parts": [{"text": system}]}, "contents": [{"role": "user", "parts": [{"text": user}]}]}
     last = None
-    for m in models:
+    for m in models + models:          # zweite Runde nach kurzer Pause: Überlastung (503) ist meist nach Sekunden vorbei
+        if m == models[0] and last is not None:
+            time.sleep(25)
         for think in ({"thinkingLevel": "low"}, None):
             cfg_ = {**gc, "thinkingConfig": think} if think else gc
             try:
