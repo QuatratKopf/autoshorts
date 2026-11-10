@@ -165,5 +165,44 @@
   },
   "thumb": true,
   "mp4": true
+ },
+ {
+  "id": 8,
+  "category": "whatif",
+  "topic": "Was wäre, wenn du nachts aufwachst und alle Menschen verschwunden sind?",
+  "status": "rendered",
+  "created": 1794268633.9098134,
+  "title": "Was wäre, wenn alle Menschen plötzlich verschwunden sind?",
+  "description": "Erlebe Schritt für Schritt, was passiert, wenn du nachts aufwachst und alle Menschen weg sind. Von stillen Straßen bis zum Blackout. Was würdest du als Erstes tun?",
+  "hashtags": [
+   "#shorts",
+   "#fyp",
+   "#viral",
+   "#whatif",
+   "#storytime",
+   "#zukunft",
+   "#gedanken",
+   "#creepystory"
+  ],
+  "tags": [
+   "alle menschen weg",
+   "what if deutsch",
+   "was wäre wenn",
+   "geisterstadt",
+   "apokalypse",
+   "gedankenexperiment",
+   "verlassene welt",
+   "gen z"
+  ],
+  "thumb_text": "ALLE WEG?",
+  "cover_ms": 45186,
+  "duration": 45.1,
+  "providers": {
+   "text": "gemini",
+   "voice": "edge",
+   "images": "toon"
+  },
+  "thumb": true,
+  "mp4": true
  }
 ]
