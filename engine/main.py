@@ -254,6 +254,38 @@ def upload(vid):
 
 # ---------------------------------------------------------------- Einstieg
 
+def learn(words):
+    """Lässt Gegenstände für die Bibliothek zeichnen und legt ein Übersichtsbild aller gelernten Dinge ab."""
+    from .state import load, save
+    from .toon import extras, library
+    shapes = load("shapes.json", {})
+    library.load_all(shapes)
+    new = library.learn(words, ai.chat_json, shapes, log, limit=6)
+    if new:
+        shapes.update(new)
+        save("shapes.json", shapes)
+    log(f"Bibliothek: {len(new)} neu, {len(shapes)} insgesamt")
+    names = library.names()[-24:]
+    if names:
+        from PIL import ImageDraw
+        cols = min(6, len(names))
+        rows = (len(names) + cols - 1) // cols
+        sheet = Image.new("RGB", (cols * 300, rows * 340), (36, 52, 96))
+        dr = ImageDraw.Draw(sheet)
+        for i, nm in enumerate(names):
+            lay = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
+            extras.draw_prop(lay, nm, 540, 1.0)
+            box = lay.getbbox()
+            if box:
+                cut = lay.crop(box)
+                f = min(260 / cut.width, 260 / cut.height)
+                cut = cut.resize((max(1, int(cut.width * f)), max(1, int(cut.height * f))))
+                sheet.paste(cut, ((i % cols) * 300 + 150 - cut.width // 2, (i // cols) * 340 + 150 - cut.height // 2), cut)
+            dr.text(((i % cols) * 300 + 16, (i // cols) * 340 + 304), nm[:26], fill=(255, 255, 255))
+        THUMBS.mkdir(parents=True, exist_ok=True)
+        sheet.save(THUMBS / "bibliothek.jpg", quality=88)
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("action", nargs="?", default="auto")
@@ -295,6 +327,8 @@ def main(argv=None):
                 raise SystemExit("Plattform fehlt")
             drop_token(plat)
             log(f"{plat} getrennt, Anmeldung und Zahlen gelöscht")
+        elif a.action == "learn":        # Gegenstände gezielt nachbauen lassen: --topic "Router, Mikroskop, Leiter"
+            learn([w.strip() for w in a.topic.split(",") if w.strip()])
         elif a.action == "trends":
             trends.refresh()
         else:
