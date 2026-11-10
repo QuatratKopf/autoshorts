@@ -809,5 +809,45 @@
   "status": "error",
   "created": 1794297125.2256668,
   "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-flash-lite-latest: HTTP 503 | pollinations: Pollinations-Text HTTP 400: {\"success\":false,\"error\":{\"message\":\"The model exhausted its output token limit before producing an answer. Increase the token limit or reduce reasoning effort.\",\"code\":\"output_token_limit_exceeded\",\"timestamp\":\"2026-11-10T07:53:12.063Z\",\"details\":{\"name\":\"UpstreamError\",\"upstreamHost\":\"portkey.myce"
+ },
+ {
+  "id": 29,
+  "category": "whatif",
+  "topic": "Was wäre, wenn der Bodensee komplett aus Cola bestehen würde?",
+  "status": "rendered",
+  "created": 1794298812.415981,
+  "title": "Was wäre, wenn der Bodensee aus Cola besteht?",
+  "description": "Was passiert, wenn der Bodensee komplett zu Cola wird? Wir spielen die absurden physikalischen und biologischen Folgen durch. Schreib deine Meinung in die Kommentare!",
+  "hashtags": [
+   "#shorts",
+   "#bodensee",
+   "#cola",
+   "#whatif",
+   "#physics",
+   "#foryou",
+   "#viral",
+   "#deutsch"
+  ],
+  "tags": [
+   "bodensee",
+   "cola",
+   "was wäre wenn",
+   "experiment",
+   "physik",
+   "biologie",
+   "see",
+   "wasser",
+   "zucker"
+  ],
+  "thumb_text": "GANZER SEE AUS COLA",
+  "cover_ms": 51310,
+  "duration": 51.2,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "mp4": true
  }
 ]
