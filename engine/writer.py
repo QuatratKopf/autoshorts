@@ -143,6 +143,10 @@ def trend_topic(cat: dict):
             "Ein TikTok-Sound ist nur geeignet, wenn du den Song, den Artist oder den Trend dazu sicher kennst – sonst lieber einen anderen Trend. "
             "Am besten: ein überraschender Fakt, die Geschichte dahinter oder eine Erklärung, warum alle gerade darüber reden, "
             "die auch in ein paar Tagen noch stimmt. " + UNSUITABLE + "\n"
+            "WICHTIG: Das Thema muss wirklich zur Kategorie passen (z. B. Tierwelt = ein echtes Tier steht im Mittelpunkt; "
+            "Grusel = eine Gruselgeschichte). Passt kein Trend sauber, antworte mit {\"index\": null} – lieber kein Trend als ein unpassender. "
+            "Marken, Spiele, Filme, Serien und Apps dürfen nur der Anlass sein, nie das Thema selbst: mach daraus das allgemeine Thema "
+            "dahinter (statt eines Spiels z. B. 'Warum wir Nostalgie lieben').\n"
             "Diese Themen gab es schon:\n- " + ("\n- ".join(past) if past else "(noch keine)") + "\n"
             'Antworte als JSON: {"index": Nummer des Trends, "topic": "konkretes Video-Thema auf Deutsch", "why": "kurz, warum es passt"} '
             'oder {"index": null}, wenn keiner passt.')
