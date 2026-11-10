@@ -185,7 +185,7 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0):
     if pose.eyes in ("angry", "sad", "worried"):
         for sgn in (-1, 1):
             x0, y0 = ex + sgn * 36 * k, ey - 44 * k
-            dy = (8 if pose.eyes == "angry" else -8) * k * sgn
+            dy = (-9 if pose.eyes == "angry" else 8) * k * sgn      # wütend: innen tiefer · traurig/besorgt: innen höher
             d.line((x0 - 20 * k, y0 - dy, x0 + 20 * k, y0 + dy), fill=INK, width=int(8 * k))
     mx, my = ex, ey + 46 * k
     if pose.mouth > 0.08:
