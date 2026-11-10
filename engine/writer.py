@@ -59,7 +59,7 @@ FORMAT = """Gib JSON in genau diesem Format zurück:
      "place": "zimmer",
      "camera": "zoom_in | zoom_out | pan_left | pan_right | pan_up | shake | still",
      "sfx": "whoosh | pop | boom | ding | tick | none",
-     "highlight": ["1–2 Schlüsselwörter aus dem Sprechertext, die in den Untertiteln gelb leuchten"],
+     "highlight": ["1–2 Schlüsselwörter aus dem Sprechertext, die wichtig sind"],
      "hud": "optional: neue Orts-/Zeitangabe ab dieser Szene, sonst weglassen",
      "overlay": null}
   ]
@@ -82,13 +82,14 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
                                    "rex": {"kind": "dino"}}
   Menschen: shirt/hat_color: blau, rot, grün, gelb, orange, lila, pink, türkis, grau, braun · hat: cap, helmet, beanie, bow, crown oder ""
             hair: long, bun oder "" · skin: weiß, hell, mittel, dunkel
-  Tiere/Wesen statt Mensch: "kind": cat, dog, spider, ghost, alien, robot, bird, dino, monster, fish, shark
+  Tiere/Wesen statt Mensch: "kind": cat, dog, spider, ghost, alien, robot, bird, dino, monster, fish, shark, bee, wasp
   Höchstens 3 Figuren, jede klar unterscheidbar. Bei Du-Geschichten ist die Hauptfigur „du“.
 - In jeder Szene:
   "place": drinnen: bedroom, livingroom, kitchen, bathroom, office, classroom, lab, hospital, basement, supermarket,
-           supermarket_empty (leergekaufte Regale), station (Bahnhof), restaurant, cave, underwater, space
+           supermarket_empty (leergekaufte Regale), station (Bahnhof), restaurant, cave, underwater, space,
+           germany (Deutschlandkarte), worldmap (Weltkugel)
            draußen: street (Häuserzeile mit Läden und Straße), park, forest, beach, desert, snow, mountain, farm, village,
-           gasstation, powerplant, graveyard, ruins, camp (Zelte), moon
+           gasstation, powerplant, graveyard, ruins, camp (Zelte), moon, church, lake, river, fields, landfill (Müllhalde)
            (genau eines dieser Wörter – jede Szene braucht einen Ort aus dieser Liste, auch Ereignis-Einstellungen)
   "backdrop": für Landschaften draußen statt "place" – ein Baukasten, mit dem JEDE Umgebung passend gebaut wird:
            {"sky": "day|night|sunset|storm|red|haze", "ground": "grass|sand|snow|road|rock|soil|dry|water|ice|lava",
@@ -105,7 +106,9 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
   "weather": rain, storm, snow, wind, heat, dark, ash (Ascheregen), quake (Erdbeben: Bild wackelt) oder ""
   "props": 0–2 Requisiten. Alle Dinge erscheinen automatisch in echter Größe im Verhältnis zu den Menschen.
            Dinge: car, bus, truck, bike, house, tree, rock, box, cart (Einkaufswagen), shelf (Regal), fridge, table, tv, computer,
-                  money, cans (Konserven), canister, candle, generator, tent, fire, streetlamp, trafficlight, rocket, sprout
+                  money, cans (Konserven), canister, candle, generator, tent, fire, streetlamp, trafficlight, rocket, sprout,
+                  door, clock, pile (wachsender Haufen: Zucker, Salz, Schnee), sandpile, trash, faucet (Wasserhahn), glass, barrel,
+                  solarpanel
            Himmel/Natur (Schaubilder, groß): plane, satellite, ship, ufo, meteor, explosion, earth, sun, moon, tornado, wave,
                   flood, ice, volcano, cloud, stormcloud, lightning, crack, smoke, aurora, eclipse
            (meteor fällt und schlägt ein, rocket startet, wave/flood steigen, crack reißt den Boden auf, eclipse verdunkelt
@@ -138,6 +141,10 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
   und Ort (z. B. Vulkanausbruch: place mountain, props ["volcano","smoke"], weather "ash", actors []). Bei Natur-,
   Wissens- und What-If-Themen ist mindestens jede zweite Szene eine Ereignis-Einstellung. Figuren zeigen nur kurz die
   Reaktion oder die Folgen für Menschen.
+- ABWECHSLUNG WIE IN VIRALEN ERKLÄRVIDEOS: Höchstens jede zweite Szene zeigt eine redende Figur. Die anderen Szenen zeigen
+  das Geschehen ("shot": "event", actors []), einen Gegenstand groß ("shot": "insert" mit einem Ding aus "props") oder eine
+  Zahl als Zähler (overlay "counter"). Das Ding, um das sich das Video dreht, ist mindestens zweimal groß im Bild.
+  Für „in ganz Deutschland“ gibt es den Ort "germany" (Karte mit aufleuchtenden Punkten), für „weltweit“ den Ort "worldmap".
 - Wechsle Orte, Aktionen und Requisiten ab: nicht zweimal hintereinander dieselbe Kombination; jede Szene zeigt sichtbar,
   wovon der Sprecher gerade redet (Bewegung statt Herumstehen: reinkommen, rennen, erschrecken, zeigen, springen).
 - Erklärendes (Zahlen, Listen, Regeln) kommt in die Einblendungen (overlay).

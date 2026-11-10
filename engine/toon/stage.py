@@ -404,15 +404,80 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
     return frame
 
 
-def direct(scenes, times):
+_ONES = {"null": 0, "ein": 1, "eine": 1, "einen": 1, "einem": 1, "einer": 1, "eins": 1, "zwei": 2, "drei": 3, "vier": 4, "fünf": 5, "sechs": 6,
+         "sieben": 7, "acht": 8, "neun": 9, "zehn": 10, "elf": 11, "zwölf": 12, "dreizehn": 13, "vierzehn": 14, "fünfzehn": 15,
+         "sechzehn": 16, "siebzehn": 17, "achtzehn": 18, "neunzehn": 19}
+_TENS = {"zwanzig": 20, "dreißig": 30, "vierzig": 40, "fünfzig": 50, "sechzig": 60, "siebzig": 70, "achtzig": 80, "neunzig": 90}
+_SCALE = {"tausend": "TSD.", "million": "MIO.", "millionen": "MIO.", "milliarde": "MRD.", "milliarden": "MRD.", "billion": "BIO.", "billionen": "BIO."}
+_UNITS = {"prozent": "%", "grad": "GRAD", "liter": "LITER", "tonnen": "TONNEN", "kilo": "KILO", "kilogramm": "KILO", "jahre": "JAHRE", "jahren": "JAHRE",
+          "tage": "TAGE", "tagen": "TAGE", "stunden": "STUNDEN", "minuten": "MINUTEN", "sekunden": "SEKUNDEN", "wochen": "WOCHEN", "monate": "MONATE",
+          "monaten": "MONATE", "kilometer": "KM", "meter": "METER", "euro": "EURO", "dollar": "DOLLAR", "menschen": "MENSCHEN", "liter pro": "LITER",
+          "haushalte": "HAUSHALTE", "tiere": "TIERE", "autos": "AUTOS", "bäume": "BÄUME", "kalorien": "KALORIEN", "stundenkilometer": "KM/H",
+          "watt": "WATT", "kilowattstunden": "KWH", "mal": "MAL"}
+
+
+def _number(word):
+    """Deutsches Zahlwort (bis 999) → Zahl, sonst None."""
+    w = word.lower().strip(".,;:!?")
+    if w.replace(",", "").replace(".", "").isdigit():
+        return float(w.replace(".", "").replace(",", "."))
+    if w in ("halbe", "halb"):
+        return 0.5
+    total = 0
+    if "hundert" in w:
+        h, w = w.split("hundert", 1)
+        if h and h not in _ONES:
+            return None
+        total += (_ONES.get(h, 1) or 1) * 100
+        if not w:
+            return total
+    if w in _ONES:
+        return total + _ONES[w]
+    if w in _TENS:
+        return total + _TENS[w]
+    if "und" in w:
+        a, b = w.split("und", 1)
+        if a in _ONES and b in _TENS:
+            return total + _ONES[a] + _TENS[b]
+    return None
+
+
+def find_figure(text):
+    """Sucht im Satz eine beeindruckende Zahl mit Einheit („achtzig Millionen Menschen“) → Zähler-Einblendung oder None."""
+    ws = str(text or "").replace("-", " ").split()
+    best = None
+    for i, w in enumerate(ws):
+        v = _number(w)
+        if v is None or (w.lower().strip(".,") in ("ein", "eine", "einen", "einem", "einer") and
+                         (i + 1 >= len(ws) or ws[i + 1].lower().strip(".,;:!?") not in _SCALE)):
+            continue
+        j, unit = i + 1, []
+        if j < len(ws) and ws[j].lower().strip(".,;:!?") in _SCALE:
+            unit.append(_SCALE[ws[j].lower().strip(".,;:!?")])
+            j += 1
+        if j < len(ws) and ws[j].lower().strip(".,;:!?") in _UNITS:
+            unit.append(_UNITS[ws[j].lower().strip(".,;:!?")])
+        if not unit:
+            continue
+        score = (2 if len(unit) == 2 else 1) + (1 if unit[0] in _SCALE.values() else 0)
+        if best is None or score > best[0]:
+            best = (score, v, " ".join(unit))
+    if not best:
+        return None
+    return {"type": "counter", "label": "", "value": best[1], "unit": best[2]}
+
+
+def direct(scenes, times, topic=""):
     """Kleine Regie über das ganze Video: sorgt für Abwechslung, wenn das Drehbuch mehrmals hintereinander dieselbe
     Einstellung vorgibt (gleicher Ort, gleiche Figur, nur Reden) – andere Position, Nahaufnahme oder Hereinkommen."""
     prev_place, same, changes, prev_bd = None, 0, 0, None
+    import re as _re0
     power_out = False
     last_id = None
     maps_used = 0
     used = {}
-    import re as _re0
+    fig_prev, inserts, counters = False, 0, 0
+    topic_things = [k for pat, k in TEXT_PROPS if _re0.search(pat, str(topic or "").lower()) and extras.prop_fit(k)][:2]
     for i, (sc, (s0, e0)) in enumerate(zip(scenes, times)):
         sanitize(sc)
         acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
@@ -426,7 +491,8 @@ def direct(scenes, times):
                     sc["backdrop"] = hint
             elif hint != place:
                 sc["place"] = place = hint
-        if hint is None and not has_bd and (place in GENERIC) and maps_used < 2 and not acts[1:]:
+        lone0 = len(acts) <= 1 and all(str(a.get("action") or "talk").lower() in ("talk", "idle", "", "point", "think") for a in acts)
+        if not has_bd and maps_used < 2 and lone0 and str(sc.get("shot") or "") != "insert" and (hint is None or place not in MAPS):
             for pat, target in MAP_HINTS:                       # „in ganz Deutschland“, „weltweit“ → Kartenbild (höchstens zweimal)
                 if _re0.search(pat, str(sc.get("text") or "").lower()):
                     sc["place"] = place = target
@@ -437,7 +503,7 @@ def direct(scenes, times):
             sc["shot"] = "" if str(sc.get("shot") or "") in ("close", "insert", "event") else sc.get("shot")
             acts = []
         txt0 = str(sc.get("text") or "").lower()
-        if len(sc.get("props") or []) < 2 and str(sc.get("shot") or "") != "close":       # was der Satz nennt, ist auch zu sehen
+        if len(sc.get("props") or []) < 2 and str(sc.get("shot") or "") != "close" and places.resolve(sc.get("place")) not in MAPS:       # was der Satz nennt, ist auch zu sehen
             have = {extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) for q in (sc.get("props") or [])}
             for pat, kind in TEXT_PROPS:
                 if kind not in have and _re0.search(pat, txt0):
@@ -552,7 +618,7 @@ def direct(scenes, times):
                                         "emotion": MOOD_EMOTION.get(mood, "")}]
         # Gegenstand groß zeigen statt dritter Rede-Szene im selben Zimmer
         things = [q for q in (sc.get("props") or []) if extras.prop_fit(q.get("type") if isinstance(q, dict) else q)]
-        if ((not outdoor or used.get(place, 0) >= 3) and things and not has_ov and not sc.get("shot") and (outdoor or not sc.get("crowd")) and len(acts) <= 1
+        if ((not outdoor or used.get(place, 0) >= 3) and rp not in MAPS and things and not has_ov and not sc.get("shot") and (outdoor or not sc.get("crowd")) and len(acts) <= 1
                 and all(str(a.get("action") or "talk").lower() in ("talk", "idle", "") for a in acts)
                 and not (i and str(scenes[i - 1].get("shot") or "") == "insert")):
             sc["shot"] = "insert"
@@ -571,6 +637,33 @@ def direct(scenes, times):
                     sc["shot"] = "close"
                 elif same % 3 == 1 and str(acts[0].get("action") or "") in ("", "idle"):
                     acts[0]["action"] = "look_around"
+        # --- mindestens jede zweite Szene zeigt das Geschehen statt der redenden Figur
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        ov_t = str((sc.get("overlay") or {}).get("type") or "")
+        lone = len(acts) == 1 and str(acts[0].get("action") or "talk").lower() in ("talk", "idle", "", "look_around") and not acts[0].get("to") and not acts[0].get("kind")
+        last = i == len(scenes) - 1
+        rp2 = places.resolve(backdrop(sc))
+        if lone and fig_prev and not sc.get("shot") and not last and ov_t not in TALL_OV and ov_t != "choice" and rp2 not in MAPS:
+            things = [q for q in (sc.get("props") or []) if extras.prop_fit(q.get("type"))]
+            if things and inserts < 4:
+                sc["shot"], inserts = "insert", inserts + 1
+            elif rp2 in places.OUTDOOR:
+                sc["actors"], sc["shot"] = [], "event"
+                if not sc.get("crowd") and not sc.get("props") and not sc.get("weather"):
+                    sc["crowd"] = {"panic": "panic", "tense": "worried", "sad": "sad", "happy": "cheer", "scary": ""}.get(str(sc.get("mood") or ""), "walk")
+            elif rp2 in PUBLIC_INDOOR:
+                sc["actors"] = []
+                sc["crowd"] = sc.get("crowd") or {"panic": "panic", "tense": "worried", "sad": "sad", "happy": "cheer"}.get(str(sc.get("mood") or ""), "walk")
+            elif topic_things and inserts < 4:          # das Ding, um das sich das Video dreht, groß im Bild
+                sc["props"] = [{"type": topic_things[inserts % len(topic_things)]}]
+                sc["shot"], inserts = "insert", inserts + 1
+        fig_prev = bool([a for a in (sc.get("actors") or []) if isinstance(a, dict)]) and sc.get("shot") != "insert"
+        # --- beeindruckende Zahl im Satz → Zähler, wenn das Drehbuch keine Einblendung vorsieht
+        if not sc.get("overlay") and counters < 3 and not last:
+            fig = find_figure(sc.get("text"))
+            if fig:
+                sc["overlay"] = fig
+                counters += 1
         prev_place = place
     return scenes
 
@@ -600,6 +693,8 @@ HINTS = [
     (r"\bzelt|camping|flüchtlingslager|notunterk", "camp"),
     (r"bauernhof|\bstall\b|\bkühe|\bvieh", "farm"),
     (r"mondoberfläche|auf dem mond|mondlandung", "moon"),
+    (r"wasserwerk|klärwerk|talsperre|staudamm|wasserversorgung|wasserspeicher", {"elements": ["factory", "river", "hills"]}),
+    (r"feuerwehr|löschen|\bbrände", "street"),
     (r"kirche|\bdom\b|kathedrale", "church"),
     (r"müllhalde|müllberg|deponie|\bmüll\b", "landfill"),
     (r"regenwald|dschungel|\bwald|wälder|bäume", {"elements": ["forest"]}),
@@ -619,7 +714,7 @@ HINTS = [
     (r"\bdorf|dörfer", "village"),
     (r"ruinen|zerstört|trümmer|apokalypse", "ruins"),
     (r"\bstadt|städte|straße|verkehr|hochhaus|hochhäuser", "street"),
-    (r"krankenhaus|\barzt|ärzte|klinik", "hospital"),
+    (r"krankenh[aä]us|\barzt|ärzte|klinik|notaufnahme", "hospital"),
     (r"\bschule|unterricht|klasse", "classroom"),
     (r"\blabor|forscher|wissenschaftler|experiment", "lab"),
     (r"\bbüro|\barbeit\b|\bchef", "office"),
@@ -695,7 +790,7 @@ INSERT_BG = {"panic": ((96, 26, 30), (30, 10, 16)), "tense": ((104, 62, 30), (30
 _ins_bg = {}
 
 
-def _insert_frame(kinds, t, dur, mood):
+def _insert_frame(kinds, t, dur, mood, low=False):
     """Einschub: ein Gegenstand groß und allein im Bild (wie eine Nahaufnahme), ruhiger Verlauf als Hintergrund."""
     mood = mood if mood in INSERT_BG else ""
     if mood not in _ins_bg:
@@ -715,13 +810,13 @@ def _insert_frame(kinds, t, dur, mood):
         if not box:
             continue
         cut = layer.crop(box)
-        tw, th = (760, 820) if n == 1 else (460, 560)
+        tw, th = ((760, 820) if n == 1 else (460, 560)) if not low else ((620, 600) if n == 1 else (420, 460))
         f = min(tw / cut.width, th / cut.height) * (0.9 + 0.1 * extras._pop(t, 0.05 + i * 0.25, 0.4)) * (1 + 0.04 * t / max(dur, 1))
         if t < 0.05 + i * 0.25:
             continue
         cut = cut.resize((max(1, int(cut.width * f)), max(1, int(cut.height * f))), Image.BILINEAR)
         cx = 540 if n == 1 else (290 + i * 500)
-        cy = 780 + math.sin(t * 1.6 + i) * 12
+        cy = (780 if not low else 960) + math.sin(t * 1.6 + i) * 12
         d.ellipse((cx - cut.width * 0.45, cy + cut.height * 0.5 + 10, cx + cut.width * 0.45, cy + cut.height * 0.5 + 50), fill=(0, 0, 0, 80))
         frame.paste(cut, (int(cx - cut.width / 2), int(cy - cut.height / 2)), cut)
     return frame
@@ -747,7 +842,7 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
         for fidx in range(n_frames):
             t = fidx / FPS
             if ins:
-                frame = _insert_frame(ins, t, dur, str(scene.get("mood") or "").lower())
+                frame = _insert_frame(ins, t, dur, str(scene.get("mood") or "").lower(), bool(has_ov))
                 if still is not None and fidx == min(n_frames - 1, FPS):
                     frame.save(still, quality=92)
                 ff.stdin.write(frame.tobytes())

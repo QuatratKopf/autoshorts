@@ -56,6 +56,7 @@ def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, 
     """style "impact": schmale, fette GROSSBUCHSTABEN mit orangem Schlüsselwort (wie in viralen Erklärvideos);
     "classic": runde Schrift, wahlweise klein geschrieben."""
     impact = str(style or "impact").lower() != "classic"
+    karaoke = True
     cap_font = "Anton" if impact and (Path(str(FONTS_DIR)) / "Anton-Regular.ttf").exists() else FONT
     if impact:
         lower = False
@@ -90,15 +91,27 @@ def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, 
         start = ch[0][1]
         end = chunks[i + 1][0][1] if i + 1 < len(chunks) else ch[-1][2] + 0.4
         end = min(end, ch[-1][2] + 0.6)
-        parts = []
-        for w, s, _ in ch:
-            c = _clean(w, lower)
-            if not c:
-                continue
-            parts.append(key_col + c + r"{\c&H00FFFFFF&}" if is_key(w, s) else c)
-        text = " ".join(parts).strip()
-        if text:
+        shown = [(w, s, _clean(w, lower)) for w, s, _ in ch]
+        shown = [x for x in shown if x[2]]
+        if not shown:
+            continue
+        if not karaoke:
+            text = " ".join(key_col + c + r"{\c&H00FFFFFF&}" if is_key(w, s) else c for w, s, c in shown)
             lines.append(f"Dialogue: 1,{_ts(start)},{_ts(end)},Cap,,0,0,0,,{pop}{text}")
+            continue
+        # Mitlese-Untertitel: das Wort, das gerade gesprochen wird, leuchtet farbig; Schlüsselwörter bleiben danach farbig
+        for j, (w, s, c) in enumerate(shown):
+            t0 = start if j == 0 else max(start, s)
+            t1 = end if j == len(shown) - 1 else max(t0 + 0.04, shown[j + 1][1])
+            if t1 - t0 < 0.03:
+                continue
+            parts = []
+            for k, (w2, s2, c2) in enumerate(shown):
+                if k == j:
+                    parts.append(key_col + c2 + r"{\c&H00FFFFFF&}")
+                else:
+                    parts.append(c2)
+            lines.append(f"Dialogue: 1,{_ts(t0)},{_ts(t1)},Cap,,0,0,0,,{pop if j == 0 else ''}{' '.join(parts)}")
 
     total = times[-1][1] + 0.4
     # Ecke oben links: Ort/Zeit-Angabe der Geschichte (z. B. „TAG 1 · 3:12 UHR“), je Szene änderbar
