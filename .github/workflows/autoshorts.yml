@@ -3,7 +3,7 @@ run-name: "${{ github.event_name == 'schedule' && 'Stündliche Prüfung' || form
 
 on:
   schedule:
-    - cron: "17 * * * *"   # stündlich; der Motor entscheidet selbst, ob ein Video fällig ist
+    - cron: "17,47 * * * *"   # alle 30 Minuten; der Motor entscheidet selbst, ob ein Video oder neue Zahlen fällig sind
   workflow_dispatch:
     inputs:
       action:

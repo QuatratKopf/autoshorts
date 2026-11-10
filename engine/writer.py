@@ -47,7 +47,7 @@ Antworte ausschließlich mit JSON."""
 FORMAT = """Gib JSON in genau diesem Format zurück:
 {
   "title": "kurzer, neugierig machender Titel mit dem wichtigsten Suchbegriff vorne (max. 70 Zeichen, ohne Hashtags, ohne Clickbait-Lügen)",
-  "description": "2–3 Sätze: worum es geht (mit Suchbegriffen), was man lernt, und am Ende eine Frage an die Zuschauer für die Kommentare",
+  "description": "Beschreibung wie bei erfolgreichen Shorts, in Du-Form, 3 kurze Zeilen mit \\n getrennt: Zeile 1 = starker Aufhänger (Frage oder verblüffende Behauptung, höchstens 90 Zeichen, enthält den wichtigsten Suchbegriff, 1 passendes Emoji) · Zeile 2 = was im Video passiert, konkret und spannend, ohne die Auflösung zu verraten · Zeile 3 = eine einfache Entweder-oder-Frage für die Kommentare. Verboten sind lahme Einstiege wie 'Erfahre', 'In diesem Video', 'Wir blicken auf', 'Wir zeigen' und jedes Wir.",
   "hashtags": ["#shorts", "… 5–8 passende Hashtags: was auf TikTok gerade läuft (auch englische wie #fyp oder #viral, wenn passend) plus spezifische deutsche"],
   "tags": ["8–15 Suchbegriffe ohne #, z. B. 'spinnen im haus', 'tierfakten'"],
   "thumbnail": {"image": "English prompt for ONE eye-catching cover image: the most surprising moment of the story, close-up, exaggerated facial expression, bold simple composition, strong contrast, empty space in the upper third for text",

@@ -86,8 +86,13 @@ def plan_due():
 
 def stats_due(state=None):
     state = state if state is not None else _load("state.json")
-    has_tokens = any((ROOT / "tokens").glob("*.enc"))
-    return has_tokens and time.time() - float(state.get("last_stats") or 0) >= STATS_EVERY * 0.95
+    settings = _load("config.json").get("settings", {})
+    has_tokens = any((ROOT / "tokens").glob("*.enc")) or settings.get("upload_via") == "zernio"
+    try:
+        every = max(15, float(settings.get("stats_minutes") or 30)) * 60
+    except (TypeError, ValueError):
+        every = STATS_EVERY
+    return has_tokens and time.time() - float(state.get("last_stats") or 0) >= every * 0.9
 
 
 def main():

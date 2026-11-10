@@ -282,14 +282,15 @@ def zernio_upload(v):
         plats.append({"platform": "tiktok", "accountId": acc["tiktok"]})
     if not plats:
         raise RuntimeError("Bei Zernio ist kein passendes Konto verbunden (YouTube/TikTok) – verbinde die Konten auf zernio.com.")
-    body = {"content": ((v.get("description") or v["title"]) + "\n\n" + " ".join(tags))[:2100], "tags": kw, "mediaItems": [media],
+    foot = str(cfg("description_footer") or "").strip()
+    body = {"content": ((v.get("description") or v["title"]) + ("\n\n" + foot if foot else "") + "\n\n" + " ".join(tags))[:2100], "tags": kw, "mediaItems": [media],
             "platforms": plats, "publishNow": True}
     if any(p["platform"] == "tiktok" for p in plats):
         body["tiktokSettings"] = {"privacy_level": cfg("tiktok_privacy") or "PUBLIC_TO_EVERYONE", "allow_comment": True, "allow_duet": True,
                                   "allow_stitch": True, "content_preview_confirmed": True, "express_consent_given": True,
                                   "draft": (cfg("tiktok_mode") or "direct") == "inbox"}
-        if media.get("thumbnail"):
-            body["tiktokSettings"]["video_cover_image_url"] = media["thumbnail"]
+        if v.get("cover_ms"):                              # Titelbild = das eigens gestaltete Standbild am Ende des Videos
+            body["tiktokSettings"]["video_cover_timestamp_ms"] = int(v["cover_ms"])
     data = _z("POST", "/posts", json=body)
     post = data.get("post") if isinstance(data.get("post"), dict) else data
     pid = post.get("_id") or post.get("id")
@@ -392,8 +393,43 @@ def _put_channel(plat, n, name):
     STATE["connected"][plat] = {"name": name, "since": STATE["connected"].get(plat, {}).get("since") or today()}
 
 
+def zernio_stats():
+    """Zahlen der über Zernio veröffentlichten Videos (Aufrufe, Likes, Kommentare, Geteilt) je Plattform."""
+    vids = [v for v in VIDEOS if v.get("zernio_id")][-40:]
+    n = 0
+    for v in vids:
+        try:
+            data = _z("GET", "/analytics", params={"postId": v["zernio_id"]})
+        except Exception as e:  # noqa: BLE001
+            if "analytics_addon_required" in str(e) or "HTTP 402" in str(e):
+                log("Zernio-Statistik: Dein Zernio-Tarif enthält keine Analytics (Zusatzpaket nötig).")
+                return n
+            if "HTTP 429" in str(e):
+                log("Zernio-Statistik: Abruf-Grenze erreicht – der Rest folgt beim nächsten Mal.")
+                return n
+            log(f"Zernio-Statistik für Video {v['id']}: {e}")
+            continue
+        for row in data.get("platformAnalytics") or []:
+            a = row.get("analytics") if isinstance(row, dict) else None
+            plat = str(row.get("platform") or "").lower() if isinstance(row, dict) else ""
+            if plat in ("youtube", "tiktok") and isinstance(a, dict):
+                _put(v["id"], plat, {k: a.get(k) or 0 for k in ("views", "likes", "comments", "shares")})
+                n += 1
+                url = row.get("platformPostUrl") or ""
+                if plat == "tiktok" and url and not v.get("tt_url"):
+                    v["tt_url"] = url
+                if plat == "youtube" and url and str(v.get("yt_id") or "").startswith("zernio:"):
+                    v["yt_id"] = url.rstrip("/").split("/")[-1].split("=")[-1]
+    return n
+
+
 def refresh_stats():
     log("Hole Statistiken …")
+    if (cfg("upload_via") or "direct") == "zernio" and secret("ZERNIO_API_KEY"):
+        try:
+            log(f"Zernio: {zernio_stats()} Zahlenreihen aktualisiert")
+        except Exception as e:  # noqa: BLE001
+            log(f"Zernio-Statistik: {e}")
     for p in ("youtube", "tiktok"):
         if not connected(p):
             STATE["connected"].pop(p, None)

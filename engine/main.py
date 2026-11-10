@@ -459,7 +459,9 @@ def main(argv=None):
             if stats_due(STATE):
                 uploaders.refresh_stats()
                 try:
-                    trends.refresh()
+                    if time.time() - float(STATE.get("last_trends") or 0) > 3 * 3600:      # Trends nur alle drei Stunden neu sammeln
+                        STATE["last_trends"] = time.time()
+                        trends.refresh()
                 except Exception as e:  # noqa: BLE001
                     log(f"Trends: {e}")
         elif a.action == "make":
