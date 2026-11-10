@@ -20,6 +20,8 @@ Regeln für die Sprechertexte:
   Zitate oder Zahlen. Lieber den zeitlosen Hintergrund erklären als Gerüchte wiedergeben.
 - Ton für eine junge TikTok-Zielgruppe: locker, direkt, selbstbewusst, gern mit aktueller Umgangssprache, aber nicht cringe
   oder übertrieben jugendlich. Nie belehrend, nie wie für Kinder.
+- Erfundene Geschichten (Grusel, Lustiges) klar als Geschichte erzählen ('Stell dir vor …', 'Eine Legende erzählt …'):
+  keine erfundenen 'echten' Ereignisse, Trends, Apps, Studien oder Personen als Tatsache ausgeben, und keine Titel wie 'Die Wahrheit über …' dafür.
 - Keine Beleidigungen, nichts Anzügliches, keine echten Privatpersonen, keine Marken- oder Filmfiguren im Bild.
 - Baue Themen nie um urheberrechtlich geschützte Figuren, Filme, Serien, Spiele oder Marken (z. B. Godzilla, Pokémon,
   Marvel, Disney, Minecraft). Nimm stattdessen eigene, namenlose Wesen oder echte Natur/Wissenschaft (z. B. 'ein 100 Meter großes Monster').

@@ -53,6 +53,8 @@ jobs:
       AS_VISUAL: ${{ inputs.visual }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main          # immer der neueste Stand – wartende Läufe würden sonst mit alten Daten arbeiten und Videos überschreiben
 
       - name: Ist etwas zu tun?
         id: check
