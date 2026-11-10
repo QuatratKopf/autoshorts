@@ -1,1 +1,327 @@
-{}
+{
+ "2026-11-11 18:00": {
+  "category": "whatif",
+  "topic": "Was wäre, wenn die Schwerkraft der Erde für nur 5 Sekunden exakt auf Null sinken würde?",
+  "trend": null,
+  "script": {
+   "title": "Was passiert bei null Schwerkraft für fünf Sekunden?",
+   "description": "Erlebe die physikalischen Folgen, wenn die Schwerkraft auf der Erde für fünf Sekunden komplett verschwindet. Wir erklären dir Schritt für Schritt, was das für uns bedeutet. Hättest du diesen Moment überlebt?",
+   "hashtags": [
+    "#shorts",
+    "#fyp",
+    "#viral",
+    "#wissenschaft",
+    "#physik",
+    "#experiment",
+    "#lernenmitiktok",
+    "#deutsch"
+   ],
+   "tags": [
+    "schwerkraft",
+    "physik",
+    "erde",
+    "naturgesetz",
+    "experiment",
+    "weltall",
+    "wissenschaft",
+    "waswaerewenn",
+    "zukunft",
+    "katastrophe"
+   ],
+   "thumbnail": {
+    "image": "Close-up of a person floating in the air with shocked facial expression, living room setting, empty space in upper third",
+    "text": "NULL SCHWERKRAFT"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "blau",
+     "hat": "",
+     "hair": "long",
+     "glasses": false,
+     "skin": "hell"
+    }
+   },
+   "scenes": [
+    {
+     "text": "Stell dir vor, die Schwerkraft der Erde fällt für genau fünf Sekunden komplett weg.",
+     "image": "A person standing in a living room looking up with a confused expression, wide angle view",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "Schwerkraft",
+      "fünf Sekunden"
+     ],
+     "hud": "",
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "English description of a modern living room with sofa, table and large window"
+    },
+    {
+     "text": "In der ersten Sekunde verliert alles den Halt und beginnt augenblicklich leicht nach oben zu schweben.",
+     "image": "Objects floating in the air inside a room, chairs and books drifting upwards slowly",
+     "who": [],
+     "place": "livingroom",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "ersten Sekunde",
+      "schweben"
+     ],
+     "hud": "",
+     "overlay": {
+      "type": "card",
+      "text": "SEKUNDE EINS"
+     },
+     "who_desc": "",
+     "place_desc": "English description of a modern living room with sofa, table and large window"
+    },
+    {
+     "text": "Dein Kaffebecher, dein Handy und lose Gegenstände lösen sich vom Tisch und driften frei im Raum herum.",
+     "image": "A smartphone and a cup floating in mid air inside an office room, soft lighting",
+     "who": [],
+     "place": "room",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "Kaffeebecher",
+      "Handy"
+     ],
+     "hud": "",
+     "overlay": {
+      "type": "phone",
+      "title": "ALARM",
+      "items": [
+       "Schwerkraft: 0 %",
+       "Achtung: festhalten"
+      ]
+     },
+     "who_desc": "",
+     "place_desc": "English description of a simple indoor room with white walls and a desk"
+    },
+    {
+     "text": "Auch du hebst ab, weil dein Körper nicht mehr fest auf den Boden gedrückt wird.",
+     "image": "A person floating slightly above the floor with arms spread in surprise, living room",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "shake",
+     "sfx": "pop",
+     "highlight": [
+      "hebst ab",
+      "Boden"
+     ],
+     "hud": "",
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "English description of a modern living room with sofa, table and large window"
+    },
+    {
+     "text": "Nach zwei Sekunden bemerkst du den enormen Druckunterschied, denn die Atmosphäre dehnt sich sofort explosionsartig aus.",
+     "image": "Air particles expanding rapidly across a wide open landscape with stormy sky",
+     "who": [],
+     "place": "street",
+     "camera": "zoom_out",
+     "sfx": "boom",
+     "highlight": [
+      "zwei Sekunden",
+      "Druckunterschied"
+     ],
+     "hud": "",
+     "overlay": {
+      "type": "bar",
+      "label": "DRUCK",
+      "value": 0
+     },
+     "who_desc": "",
+     "place_desc": "English description of a typical german street with houses and asphalt"
+    },
+    {
+     "text": "Ein weltweiter Orkan entsteht, weil Luftmassen schlagartig mit dreihundert Stundenkilometern nach außen schießen.",
+     "image": "Strong wind bending trees violently in a large forest, gray stormy sky",
+     "who": [],
+     "place": "street",
+     "camera": "pan_right",
+     "sfx": "whoosh",
+     "highlight": [
+      "Orkan",
+      "dreihundert Stundenkilometern"
+     ],
+     "hud": "",
+     "overlay": {
+      "type": "card",
+      "text": "300 KM H"
+     },
+     "who_desc": "",
+     "place_desc": "English description of a typical german street with houses and asphalt"
+    },
+    {
+     "text": "Nach drei Sekunden reißen die Fundamente von Häusern und Straßen ab, weil der Boden keinen festen Halt mehr hat.",
+     "image": "Asphalt road cracking open widely with dust rising into the air, sunny day",
+     "who": [],
+     "place": "street",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "drei Sekunden",
+      "Fundamente"
+     ],
+     "hud": "",
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "English description of a typical german street with houses and asphalt"
+    },
+    {
+     "text": "Millionen ungesicherte Autos fliegen unkontrolliert durch die Luft wie kleine Spielzeugmodelle im Wind.",
+     "image": "Cars lifting off the ground and floating in the air above a city street",
+     "who": [],
+     "place": "street",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "Autos",
+      "Luft"
+     ],
+     "hud": "",
+     "overlay": {
+      "type": "counter",
+      "label": "FAHRZEUGE IN DER LUFT",
+      "value": 45,
+      "unit": "MILLIONEN",
+      "sub": "WELTWEIT"
+     },
+     "who_desc": "",
+     "place_desc": "English description of a typical german street with houses and asphalt"
+    },
+    {
+     "text": "Nach vier Sekunden beginnt der Ozean zu kochen, da der Luftdruck schlagartig auf null sinkt.",
+     "image": "Ocean water bubbling and rising violently under a stormy red sky",
+     "who": [],
+     "place": "worldmap",
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "vier Sekunden",
+      "Ozean"
+     ],
+     "hud": "",
+     "overlay": {
+      "type": "card",
+      "text": "WASSER KOCHT"
+     },
+     "who_desc": "",
+     "place_desc": "English description of a glowing digital world map showing continents"
+    },
+    {
+     "text": "Riesige Wasserwelle schießen in den Himmel und regnen als gigantische Tropfen wieder herab.",
+     "image": "Huge wall of water rising up into the atmosphere above the sea, dramatic lighting",
+     "who": [],
+     "place": "worldmap",
+     "camera": "pan_up",
+     "sfx": "whoosh",
+     "highlight": [
+      "Wasserwelle",
+      "Himmel"
+     ],
+     "hud": "",
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "English description of a glowing digital world map showing continents"
+    },
+    {
+     "text": "Nach fünf Sekunden schaltet sich die Schwerkraft abrupt wieder ein und alles kracht ungebremst auf den Boden.",
+     "image": "Objects and debris falling down heavily onto the broken ground inside a room",
+     "who": [],
+     "place": "livingroom",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "fünf Sekunden",
+      "Schwerkraft"
+     ],
+     "hud": "",
+     "overlay": {
+      "type": "card",
+      "text": "AUFPRALL"
+     },
+     "who_desc": "",
+     "place_desc": "English description of a modern living room with sofa, table and large window"
+    },
+    {
+     "text": "Die Erdkruste bricht weltweit auf und gigantische Erdbeben zerstören Städte in wenigen Augenblicken.",
+     "image": "Deep cracks spreading across a global map graphic with red warning flashes",
+     "who": [],
+     "place": "worldmap",
+     "camera": "zoom_in",
+     "sfx": "boom",
+     "highlight": [
+      "Erdkruste",
+      "Erdbeben"
+     ],
+     "hud": "",
+     "overlay": {
+      "type": "counter",
+      "label": "ERDBEBEN STÄRKE",
+      "value": 9.9,
+      "unit": "RICHTERSKALA",
+      "sub": "GLOBAL"
+     },
+     "who_desc": "",
+     "place_desc": "English description of a glowing digital world map showing continents"
+    },
+    {
+     "text": "Niemand von uns würde diesen absoluten Albtraum überleben, weil unsere Atmosphäre komplett zerstört wäre.",
+     "image": "A desolate landscape under a dark red sky with thick smoke clouds",
+     "who": [],
+     "place": "street",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Albtraum",
+      "Atmosphäre"
+     ],
+     "hud": "",
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "English description of a typical german street with houses and asphalt"
+    },
+    {
+     "text": "Wäre das dein Ende oder würdest du es irgendwie schaffen? Folg für mehr Fakten.",
+     "image": "A person looking thoughtful in a room with a question mark floating above",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Ende",
+      "Folg für mehr"
+     ],
+     "hud": "",
+     "overlay": {
+      "type": "choice",
+      "a": "Sofort vorbei",
+      "b": "Glücklich überlebt"
+     },
+     "who_desc": "",
+     "place_desc": "English description of a modern living room with sofa, table and large window"
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "needs": [
+   "kaffeetasse"
+  ],
+  "title": "Was passiert bei null Schwerkraft für fünf Sekunden?",
+  "created": 1794336394.4234135
+ }
+}
