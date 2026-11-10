@@ -332,5 +332,49 @@
   },
   "thumb": true,
   "mp4": true
+ },
+ {
+  "id": 15,
+  "category": "tiere",
+  "topic": "World of Warcraft Classic: Warum plötzlich alle wieder 2004-Vibes schieben und Server sprengen",
+  "status": "rendered",
+  "created": 1794273547.9442585,
+  "trend": {
+   "title": "World of Warcraft: Forever brought back a record number of lapsed players, and has the biggest concurrent player launch in the MMO's history",
+   "source": "Reddit r/gaming"
+  },
+  "title": "WoW Classic Boom: Warum 2004 plötzlich wieder am Start ist",
+  "description": "Erfahre, warum ein zwanzig Jahre altes Online-Game wieder sämtliche Rekorde bricht. Wir erklären dir den Psychologie-Effekt hinter Nostalgie und Gamer-Sucht. Welches alte Spiel würdest du sofort wieder zocken?",
+  "hashtags": [
+   "#shorts",
+   "#gaming",
+   "#wowclassic",
+   "#worldofwarcraft",
+   "#nostalgie",
+   "#gamer",
+   "#fyp",
+   "#viral"
+  ],
+  "tags": [
+   "world of warcraft",
+   "wow classic",
+   "gaming spiele",
+   "nostalgie gaming",
+   "mmo rekord",
+   "server ansturm",
+   "zocken damals",
+   "2004 vibes",
+   "hype gaming"
+  ],
+  "thumb_text": "WARUM ALLE ZOCKEN",
+  "cover_ms": 76440,
+  "duration": 76.3,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "mp4": true
  }
 ]
