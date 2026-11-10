@@ -1213,5 +1213,45 @@
   },
   "thumb": true,
   "mp4": true
+ },
+ {
+  "id": 40,
+  "category": "fakten",
+  "topic": "72 Stunden auf dich allein gestellt: Warum Europa seinen Bürgern rät, Vorräte für drei Tage anzulegen",
+  "status": "rendered",
+  "created": 1794338606.550372,
+  "title": "Drei Tage auf dich allein gestellt: Warum das jetzt wichtig ist",
+  "description": "Was machst du, wenn plötzlich Strom und Wasser weg sind? \n Ein Blick darauf, warum Europa empfiehlt, Vorräte anzulegen \n Bist du auf den Ernstfall vorbereitet oder völlig aufgeschmissen?",
+  "hashtags": [
+   "#shorts",
+   "#foryou",
+   "#viral",
+   "#wissen",
+   "#fakten",
+   "#deutschland",
+   "#prepping"
+  ],
+  "tags": [
+   "notvorrat",
+   "krisenvorsorge",
+   "fakten",
+   "wissen",
+   "europa",
+   "stromausfall",
+   "wasser",
+   "alltag",
+   "zukunft"
+  ],
+  "thumb_text": "DREI TAGE OHNE ALLES",
+  "missing": null,
+  "cover_ms": 63352,
+  "duration": 63.3,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "mp4": true
  }
 ]

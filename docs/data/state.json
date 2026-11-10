@@ -1,16 +1,16 @@
 {
- "last_category": "whatif",
+ "last_category": "fakten",
  "done_slots": [
   "2026-11-08 18:00"
  ],
  "used_queue": [],
  "last_stats": 1794337440.8574886,
- "next_id": 40,
+ "next_id": 41,
  "connected": {
   "youtube": {
    "name": "Wissens Wert 💬",
    "since": "2026-11-10"
   }
  },
- "voice_wps": 2.811
+ "voice_wps": 2.765
 }
