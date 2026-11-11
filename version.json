@@ -1,6 +1,6 @@
 {
-  "version": "1.4.1",
-  "file": "releases/AutoShorts-1.4.1.cmd",
-  "sha256": "755820b235b5f37d3fc6555475397ee4159529ad0d3bac386867bc293d013981",
-  "notes": "Behebt „AutoShorts ist gerade nicht erreichbar“: Die App beendet sich nicht mehr, solange das Fenster offen ist (auch bei getrennter Fernsitzung), und verbindet sich von selbst neu."
+  "version": "1.4.2",
+  "file": "releases/AutoShorts-1.4.2.cmd",
+  "sha256": "ec09639fd3b2fbd9f7eba2991e2afb3457c61a970c63f4730dceb2b45f466f10",
+  "notes": "Live-Zahlen: Die App holt die Zahlen selbst alle paar Minuten, solange sie offen ist, und weckt den Autopiloten pünktlich."
 }

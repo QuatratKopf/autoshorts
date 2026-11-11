@@ -443,7 +443,7 @@ let CFG = null, ST = {}, VIDS = [], STATS = {v: {}, ch: {}}, TRENDS = {items: []
 let SECRETS = null, RUNS = [], PENDING = null, LOADERR = "", CANCEL_NEXT = 0, CANCELING = new Set();
 let TAB = (location.hash || "#dashboard").slice(1);
 if (!["dashboard", "kalender", "studio", "einstellungen"].includes(TAB)) TAB = "dashboard";
-const DEF = {voice_speed: 1, voice_style: "Lebendig und mitreißend mit klarer Betonung – wie der Sprecher eines viralen Erklärvideos, flüssig und natürlich.", caption_style: "impact", auto_optimize: true, look: "cartoon", stats_minutes: 30, plan_ahead: true, hold_missing: true, auto_learn: true, upload_via: "direct", min_seconds: 62, tts_provider: "gemini", gemini_voice: "", sfx_volume: 0.35, trend_mode: "half", make_thumbnail: true, youtube_thumbnail: true, trend_regions: "US,DE",
+const DEF = {voice_speed: 1, voice_style: "Lebendig und mitreißend mit klarer Betonung – wie der Sprecher eines viralen Erklärvideos, flüssig und natürlich.", caption_style: "impact", auto_optimize: true, stats_live: 5, look: "cartoon", stats_minutes: 30, plan_ahead: true, hold_missing: true, auto_learn: true, upload_via: "direct", min_seconds: 62, tts_provider: "gemini", gemini_voice: "", sfx_volume: 0.35, trend_mode: "half", make_thumbnail: true, youtube_thumbnail: true, trend_regions: "US,DE",
   audience: "Gen Z (16–25) in Deutschland, die TikTok und YouTube Shorts schauen: Internet-Kultur, Memes, virale Trends, Gaming, Musik, Serien, Filme, Creator, Tech, Lifestyle. Lockere Sprache wie unter Freunden, schnell auf den Punkt, kein Lehrer- oder Kinder-Ton."};
 const S_ = k => { const v = (CFG && CFG.settings || {})[k]; return v === undefined ? DEF[k] : v; };
 const cat = slug => (CFG && CFG.categories || []).find(c => c.slug === slug);
@@ -495,10 +495,28 @@ async function dispatch(inputs, label) {
 let runTimer = null, wasActive = false;
 const RUNLABEL = {make: "Video wird erstellt", upload: "Upload läuft", stats: "Zahlen werden geholt", trends: "Trends werden gesammelt", auto: "Autopilot läuft", disconnect: "Plattform wird getrennt"};
 function runName(r) { if (r.event === "schedule") return "Autopilot"; const a = (r.display_title || "").trim().split(/\s+/)[0]; return RUNLABEL[a] || r.display_title || "Auftrag"; }
-const isLive = r => r.status !== "completed" && (r.event !== "schedule" || Date.now() - new Date(r.run_started_at || r.created_at) > 90000);
+/* Taktgeber: Solange die App läuft, stößt sie die Läufe selbst an – GitHubs eigener Zeitplan kommt oft Stunden zu spät.
+   Im Vordergrund holt sie die Zahlen alle paar Minuten („live“), im Hintergrund weckt sie alle 15 Minuten den Autopiloten. */
+let QUIET_AT = 0, TICK_AT = 0, quietWas = false; const QUIET = new Set();
+const isQuiet = r => QUIET.has(r.id);
+async function tick() {
+  if (!CFG || !S || !S.connected || PENDING || RUNS.some(r => r.status !== "completed") || Date.now() - QUIET_AT < 150000) return;
+  const now = Date.now(), live = Number(S_("stats_live")), age = now - Number(ST.last_stats || 0) * 1000;
+  let action = "";
+  if (!document.hidden && live > 0 && age > live * 60000 && (VIDS || []).some(v => v.status === "published" || v.status === "partial")) action = "stats";
+  else if (now - TICK_AT > 15 * 60000) action = "auto";
+  if (!action) return;
+  QUIET_AT = now; if (action === "auto") TICK_AT = now;
+  try { await gh("POST", "/actions/workflows/autoshorts.yml/dispatches", {ref: "main", inputs: {action}}); setTimeout(pollRuns, 5000); } catch (e) {}
+}
+const isLive = r => r.status !== "completed" && !isQuiet(r) && (r.event !== "schedule" || Date.now() - new Date(r.run_started_at || r.created_at) > 90000);
 async function pollRuns() {
   clearTimeout(runTimer);
   try { const j = await gh("GET", "/actions/workflows/autoshorts.yml/runs?per_page=10"); RUNS = j.workflow_runs || []; } catch (e) {}
+  for (const r of RUNS) if (r.event === "workflow_dispatch" && /^(stats|auto)\b/.test((r.display_title || "").trim())) { const c = new Date(r.created_at).getTime(); if (QUIET_AT && c > QUIET_AT - 10000 && c < QUIET_AT + 150000) QUIET.add(r.id); }
+  const quietNow = RUNS.some(r => isQuiet(r) && r.status !== "completed");
+  if (quietWas && !quietNow) { await loadData(); if (!$("#dayDrw") && !$(".modal-bg") && !DIRTY) render(); }   // stille Läufe: Zahlen ohne Hinweis nachladen
+  quietWas = quietNow;
   const active = RUNS.some(isLive);
   if (PENDING && RUNS.some(r => r.event === "workflow_dispatch" && new Date(r.created_at).getTime() > PENDING.at - 60000)) PENDING = null;
   if (CANCEL_NEXT) {   // Abbrechen wurde gedrückt, bevor GitHub den Auftrag angelegt hatte
@@ -510,7 +528,7 @@ async function pollRuns() {
   wasActive = active;
   banner();
   if (TAB === "dashboard" && $("#runsBox")) $("#runsBox").innerHTML = runsList();
-  runTimer = setTimeout(pollRuns, active || PENDING ? 8000 : 45000);
+  runTimer = setTimeout(pollRuns, active || PENDING || quietNow || Date.now() - QUIET_AT < 60000 ? 8000 : 45000);
 }
 async function cancelRun(id, quiet) {
   if (!id) { CANCEL_NEXT = Date.now(); PENDING = null; banner(); toast("Wird abgebrochen, sobald GitHub den Auftrag angelegt hat …"); setTimeout(pollRuns, 3000); return; }
@@ -985,6 +1003,7 @@ function viewSettings() {
     ${fld("upload_times", "Upload-Zeiten", "Deutsche Zeit. Mehrere mit Komma, z. B. 12:00, 18:30. GitHub startet manchmal bis zu einer Stunde später.")}
     ${fld("target_seconds", "Ziel-Länge in Sekunden", "TikTok zahlt im Creator-Programm nur für Videos über 1 Minute.", 'type="number" min="20" max="170"')}
     ${sel("stats_minutes", "Zahlen der Videos holen", "Aufrufe, Likes und Kommentare. GitHub startet geplante Läufe manchmal einige Minuten verspätet.", [["30", "alle 30 Minuten"], ["60", "stündlich"], ["180", "alle 3 Stunden"]])}
+    ${sel("stats_live", "Live-Zahlen", "Solange die App offen im Vordergrund ist, holt sie die Zahlen selbst in kurzen Abständen. Ein Abruf dauert etwa eine Minute.", [["2", "alle 2 Minuten"], ["5", "alle 5 Minuten"], ["10", "alle 10 Minuten"], ["0", "aus"]])}
     ${fld("min_seconds", "Mindest-Länge in Sekunden", "Kürzer wird kein Video: Das Drehbuch wird verlängert, notfalls spricht der Erzähler etwas ruhiger. 0 = aus.", 'type="number" min="0" max="170"')}`)}
   ${sec("trend", I.spark, "Trends & Thumbnail", `Trend-Themen ${{off: "aus", half: "jedes 2. Video", always: "immer"}[S_("trend_mode") || "half"]} · Thumbnail ${S_("make_thumbnail") !== false ? "an" : "aus"}`, "", `
     ${sel("trend_mode", "Aktuelle Trend-Themen", "Der Autopilot schaut bei TikTok, Reddit, Google Trends und Wikipedia, was gerade läuft, und macht daraus ein passendes Thema für deine Zielgruppe. Tragische Nachrichten, Politik und Klatsch werden ausgelassen. Welche Video-Arten Trends nutzen, stellst du im Studio unter „Bearbeiten“ ein.", [["half", "Jedes zweite Video"], ["always", "Immer, wenn ein Trend passt"], ["off", "Aus – nur zeitlose Themen"]])}
@@ -1174,6 +1193,7 @@ async function startupUpdatePrompt() {
   render(true); pollRuns();
   setTimeout(startupUpdatePrompt, 1500);
   setInterval(async () => { if (document.hidden) return; await loadData(); if (!$("#dayDrw") && !$(".modal-bg") && !DIRTY) render(); }, 5 * 60000);
+  setInterval(tick, 60000); setTimeout(tick, 20000);
   // Fenster kommt wieder nach vorn (z. B. nach einer getrennten Fernsitzung): sofort frische Daten holen
   let lastWake = Date.now();
   const wake = () => { if (!document.hidden && Date.now() - lastWake > 60000) { lastWake = Date.now(); refreshNow(); } };
