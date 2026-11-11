@@ -455,7 +455,18 @@ async function loadData() {
     CFG = typeof c === "string" ? JSON.parse(c) : c; ST = s || {}; VIDS = v || []; STATS = st || {v: {}, ch: {}};
     CFG.settings = CFG.settings || {}; CFG.categories = CFG.categories || []; CFG.queue = CFG.queue || [];
     LOADERR = "";
-  } catch (e) { LOADERR = e.message; }
+  } catch (e) { LOADERR = e.message; if (/nicht erreichbar|Failed to fetch|NetworkError/i.test(LOADERR)) { LOADERR = "AutoShorts antwortet gerade nicht – es wird automatisch neu versucht. Kommt es nicht zurück, starte AutoShorts über das Desktop-Symbol."; retrySoon(); } }
+}
+let retryTimer = 0;
+function retrySoon() {   // App kurz weg (Neustart, Update): alle paar Sekunden prüfen und von selbst weitermachen
+  clearTimeout(retryTimer);
+  retryTimer = setTimeout(async () => {
+    try { await api("/api/version"); } catch (e) { return retrySoon(); }
+    await refreshNow();
+  }, 4000);
+}
+async function refreshNow() {
+  await loadData(); if (!$("#dayDrw") && !$(".modal-bg") && !DIRTY) render(); pollRuns();
 }
 async function loadSecrets() {
   try { const j = await gh("GET", "/actions/secrets?per_page=100"); SECRETS = new Set(j.secrets.map(s => s.name)); } catch (e) { SECRETS = "err"; }
@@ -1163,6 +1174,12 @@ async function startupUpdatePrompt() {
   render(true); pollRuns();
   setTimeout(startupUpdatePrompt, 1500);
   setInterval(async () => { if (document.hidden) return; await loadData(); if (!$("#dayDrw") && !$(".modal-bg") && !DIRTY) render(); }, 5 * 60000);
+  // Fenster kommt wieder nach vorn (z. B. nach einer getrennten Fernsitzung): sofort frische Daten holen
+  let lastWake = Date.now();
+  const wake = () => { if (!document.hidden && Date.now() - lastWake > 60000) { lastWake = Date.now(); refreshNow(); } };
+  document.addEventListener("visibilitychange", wake); window.addEventListener("focus", wake); window.addEventListener("online", wake);
+  // verhindert, dass der Browser das Fenster im Hintergrund schlafen legt
+  if (navigator.locks) navigator.locks.request("autoshorts-wach", () => new Promise(() => {})).catch(() => {});
 })();
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(() => {});
 </script>

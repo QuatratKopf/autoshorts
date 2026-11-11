@@ -437,10 +437,30 @@ LAST_UI = time.time()
 IDLE_EXIT = 45 * 60
 
 
+def _window_open():
+    """Windows: Ist noch ein AutoShorts-Fenster offen? Ein Fenster im Hintergrund (minimiert, getrennte
+    Fernsitzung) wird vom Browser schlafen gelegt und meldet sich dann nicht mehr – offen ist es trotzdem."""
+    if not sys.platform.startswith("win"):
+        return False
+    import subprocess
+    ps = ("@(Get-CimInstance Win32_Process | Where-Object { $_.Name -match '^(msedge|chrome)\\.exe$' -and "
+          "$_.CommandLine -like '*--app=http://127.0.0.1:%d*' }).Count") % PORT
+    try:
+        out = subprocess.run(["powershell", "-NoProfile", "-Command", ps], capture_output=True, text=True,
+                             timeout=40, creationflags=0x08000000).stdout.strip()
+        return out.isdigit() and int(out) > 0
+    except Exception:  # noqa: BLE001
+        return False
+
+
 def _idle_loop():
+    global LAST_UI
     while True:
         time.sleep(60)
         if time.time() - LAST_UI > IDLE_EXIT and not UPDATE.get("busy"):
+            if _window_open():
+                LAST_UI = time.time()   # Fenster ist noch da, nur eingeschlafen: weiterlaufen
+                continue
             log("Kein Fenster mehr offen – AutoShorts beendet sich (die Videos macht weiter GitHub).")
             os._exit(0)
 

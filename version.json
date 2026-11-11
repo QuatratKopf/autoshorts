@@ -1,6 +1,6 @@
 {
-  "version": "1.4.0",
-  "file": "releases/AutoShorts-1.4.0.cmd",
-  "sha256": "099018519e08655163b7bf35a46c200a25f27013a7a43ad8b5b3655eace344b2",
-  "notes": "Analyse: wertet aus, was am besten läuft, und macht mehr davon; Europakarte, Stadt von oben, besserer Neon-Stil"
+  "version": "1.4.1",
+  "file": "releases/AutoShorts-1.4.1.cmd",
+  "sha256": "755820b235b5f37d3fc6555475397ee4159529ad0d3bac386867bc293d013981",
+  "notes": "Behebt „AutoShorts ist gerade nicht erreichbar“: Die App beendet sich nicht mehr, solange das Fenster offen ist (auch bei getrennter Fernsitzung), und verbindet sich von selbst neu."
 }
