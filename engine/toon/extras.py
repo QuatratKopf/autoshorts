@@ -737,6 +737,26 @@ def draw_prop(layer, kind, x, t):
 
 # ------------------------------------------------------------------ Gefühls-Symbole über dem Kopf
 
+def draw_bubble(layer, text, x, y, t, sc=1.0):
+    """Kleine Sprechblase über dem Kopf (x = Kopfmitte, y = Oberkante Kopf) für ein, zwei kurze Wörter."""
+    from ..overlays import font
+    k = _pop(t, 0.2)
+    text = str(text or "").strip().upper()[:16]
+    if k <= 0 or not text:
+        return
+    d = ImageDraw.Draw(layer, "RGBA")
+    s = max(0.6, min(1.3, sc)) * min(1.0, k)
+    f = font(max(18, int(58 * s)), "ExtraBold")
+    w = d.textlength(text, font=f)
+    bw, bh = w + 56 * s, f.size + 40 * s
+    cx = min(W - 30 - bw / 2, max(30 + bw / 2, x + 70 * s))
+    top = max(250, y - 70 * s - bh) + math.sin(t * 4) * 4
+    d.polygon([(x + 6 * s, y - 20 * s), (cx - 26 * s, top + bh - 6), (cx + 14 * s, top + bh - 6)], fill=(250, 248, 244), outline=INK)
+    d.rounded_rectangle((cx - bw / 2, top, cx + bw / 2, top + bh), int(26 * s), fill=(250, 248, 244), outline=INK, width=max(3, int(6 * s)))
+    d.polygon([(x + 10 * s, y - 30 * s), (cx - 20 * s, top + bh - 8), (cx + 8 * s, top + bh - 8)], fill=(250, 248, 244))
+    d.text((cx - w / 2, top + 16 * s), text, font=f, fill=INK)
+
+
 def draw_emote(layer, kind, x, y, t, sc=1.0):
     """Symbol mittig über dem Kopf (x = Kopfmitte, y = Oberkante Kopf); sc = Maßstab der Figur."""
     k = _pop(t, 0.15)
@@ -744,7 +764,7 @@ def draw_emote(layer, kind, x, y, t, sc=1.0):
         return
     d = ImageDraw.Draw(layer, "RGBA")
     kind = str(kind).lower().strip()
-    s = k * max(0.35, sc)
+    s = k * max(0.35, sc) * 0.8                             # etwas kleiner: die Zeichen sollen die Figur nicht übertönen
     bob = math.sin(t * 5) * 6 * s
     cx, cy = x, y - 84 * s + bob
     w = max(3, int(O * min(1.0, s)))

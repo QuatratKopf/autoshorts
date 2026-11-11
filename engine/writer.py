@@ -65,6 +65,7 @@ FORMAT = """Gib JSON in genau diesem Format zurück:
      "sfx": "whoosh | pop | boom | ding | tick | none",
      "highlight": ["1–2 Schlüsselwörter aus dem Sprechertext, die wichtig sind"],
      "hud": "optional: neue Orts-/Zeitangabe ab dieser Szene, sonst weglassen",
+     "status": "optional, nur bei Geschichten ohne countdown: Zustands-Anzeige oben rechts als 'WORT: WERT', z. B. 'SEIL: LÄUFT', später 'SEIL: STEHT' oder 'WIND: 96 KM/H' – gilt weiter bis zur nächsten Angabe",
      "overlay": null}
   ]
 }
@@ -123,6 +124,7 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
      action: idle, talk, walk, run, wave, point, shocked, sad, jump, think, sit, sleep, dance, look_around, fall
      emotion: happy, sad, angry, scared, worried, shocked oder ""
      emote (Symbol über dem Kopf, sparsam): "!", "?", heart, idea, sweat, anger, music oder ""
+     say (optional, selten): Sprechblase mit ein, zwei Wörtern, die die Figur gerade sagt, z. B. "PSST." oder "LAUF!" – höchstens 14 Zeichen
      pos / to: left, center, right, offleft, offright ("to" nur wenn die Figur sich bewegt)
      speaks: true bei der Figur, um die es in dieser Szene geht
      hold (optional, Gegenstand in der Hand): phone, flashlight, bag, bottle, umbrella, sign, map, radio
@@ -158,6 +160,11 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
     {"type": "share", "value": "1 VON 7", "label": "TRÄUMT DAVON"}                                   Reihe von Menschen, der Anteil leuchtet auf (höchstens „von 12“)
     {"type": "compare", "left": "DOSE", "right": "KAFFEE", "value": "80 mg", "sub": "180 mg"}        zwei Balken wachsen um die Wette (value links, sub rechts)
     {"type": "podium", "kicker": "KÖRPERTEILE", "text": "FUSS", "left": "HAND", "right": "BEIN"}     Siegertreppchen: text = Platz 1, left = Platz 2, right = Platz 3
+    {"type": "news", "kicker": "TALBLATT", "text": "GONDEL 7 ABGESTÜRZT", "sub": "Unglück im Nebel"}  Zeitungsseite fliegt herein – für Rückblicke und
+                                                                                                     Enthüllungen; kicker = erfundener Zeitungsname, nie eine echte Zeitung
+    {"type": "pulse", "value": "1", "label": "EINE SEKUNDE"}                                         Herzschlag-Linie mit rotem Pochen – der Moment, in dem alles stillsteht
+    {"type": "radio", "kicker": "FUNK · KANAL 4", "text": "BERGWACHT"}                               Funkspruch oder Durchsage mit Wellenform
+    {"type": "distance", "value": "100 m", "left": "IHR", "right": "ZIEL"}                           Entfernung als Messlinie zwischen zwei Punkten
     {"type": "versus", "left": "ENERGY", "right": "KAFFEE", "kicker": "5 RUNDEN"}                    Duell-Bild mit großem VS
     {"type": "round", "kicker": "RUNDE 1", "text": "KOFFEIN"}                                        Banner kündigt die nächste Runde an
     {"type": "score", "left": "ENERGY", "right": "KAFFEE", "value": "0:2", "kicker": "RUNDE 3/5"}    Punktestand nach einer Runde
@@ -449,6 +456,7 @@ def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
         s["camera"] = str(s.get("camera") or "")
         s["sfx"] = str(s.get("sfx") or "")
         s["hud"] = str(s.get("hud") or "").strip()
+        s["status"] = str(s.get("status") or "").strip()[:30] if isinstance(s.get("status"), str) else ""
     tags = [t if str(t).startswith("#") else "#" + str(t) for t in js.get("hashtags", [])]
     tags = [t.replace(" ", "") for t in tags if len(t) > 1]
     if "#shorts" not in [t.lower() for t in tags]:

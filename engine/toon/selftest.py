@@ -123,7 +123,10 @@ def main():
           {"type": "round", "text": "x" * 60}, {"type": "score", "left": "Energy", "right": "Kaffee", "value": "0:2", "kicker": "Runde 3/5"}, {"type": "score", "value": "abc"},
           {"type": "score", "value": "3-3"}, {"type": "compare", "left": "Dose", "right": "Kaffee", "value": "80 mg", "sub": "180 mg"}, {"type": "compare", "value": "0", "sub": "0"},
           {"type": "compare", "value": "viel", "sub": "3"}, {"type": "podium", "kicker": "Körperteile", "text": "Fuß", "left": "Hand", "right": "Bein"}, {"type": "podium", "text": "x"},
-          {"type": "share", "value": "1 von 7", "label": "träumt davon"}, {"type": "share", "value": "12 von 12"}, {"type": "share", "value": "9 von 3"}, {"type": "share", "value": "x"}]
+          {"type": "share", "value": "1 von 7", "label": "träumt davon"}, {"type": "share", "value": "12 von 12"}, {"type": "share", "value": "9 von 3"}, {"type": "share", "value": "x"},
+          {"type": "news", "kicker": "Talblatt", "text": "Gondel 7 abgestürzt", "sub": "Unglück im Nebel"}, {"type": "news", "text": "Donaudampfschifffahrtsgesellschaft " * 3},
+          {"type": "news"}, {"type": "pulse", "value": "1", "label": "Eine Sekunde"}, {"type": "pulse", "value": "x" * 30}, {"type": "radio", "kicker": "Funk · Kanal 4", "text": "Bergwacht"},
+          {"type": "radio", "text": "x", "sub": "y" * 80}, {"type": "distance", "value": "100 m", "left": "Ihr", "right": "Ziel"}, {"type": "distance", "value": "weit"}]
     for g in gs:
         for m in ("", "panic", "scary", "x"):
             for t in (0.0, 0.2, 1.0, 3.5):

@@ -16,6 +16,10 @@ Eine Grafik-Szene hat "shot": "graphic" und "graphic": {"type": ..., ...}:
   compare  {"left": "DOSE", "right": "KAFFEE", "value": "80 mg", "sub": "180 mg"}             zwei Balken wachsen (value links, sub rechts)
   podium   {"kicker": "KÖRPERTEILE", "text": "FUSS", "left": "HAND", "right": "BEIN"}         Siegertreppchen im Scheinwerfer
   share    {"value": "1 VON 7", "label": "TRÄUMT DAVON"}                                      Reihe von Menschen, der Anteil leuchtet auf
+  news     {"kicker": "TALBLATT", "text": "GONDEL 7 ABGESTÜRZT", "sub": "Unglück im Nebel"}  Zeitungsseite fliegt herein
+  pulse    {"value": "1", "label": "EINE SEKUNDE", "kicker": "..."}                           Herzschlag-Linie, rotes Pochen
+  radio    {"kicker": "FUNK · KANAL 4", "text": "BERGWACHT", "sub": "..."}                    Funkspruch mit Wellenform
+  distance {"value": "100 m", "left": "IHR", "right": "ZIEL", "label": "..."}                 Messlinie zwischen zwei Punkten
 Dazu der Look "neon": dieselbe Lichtstimmung (Nachtblau/Violett, Lichtpunkte) über normalen Szenen."""
 import math
 import random
@@ -34,7 +38,7 @@ ORANGE = (255, 138, 31)
 THEMES = {"": ((58, 40, 150), (14, 10, 46)), "scary": ((40, 30, 96), (6, 6, 22)), "panic": ((120, 34, 70), (26, 8, 30)),
           "tense": ((110, 60, 120), (22, 10, 40)), "sad": ((40, 60, 130), (10, 14, 40)), "happy": ((90, 70, 190), (30, 16, 80)),
           "calm": ((58, 40, 150), (14, 10, 46))}
-TYPES = ("number", "timer", "calendar", "question", "houses", "badge", "map", "city", "versus", "round", "score", "compare", "podium", "share")
+TYPES = ("number", "timer", "calendar", "question", "houses", "badge", "map", "city", "versus", "round", "score", "compare", "podium", "share", "news", "pulse", "radio", "distance")
 LEFT, RIGHT = (150, 110, 255), (255, 150, 40)                # Farben der beiden Seiten im Duell
 GREEN = (120, 230, 90)
 
@@ -668,8 +672,173 @@ def _g_share(frame, g, t, dur):
             d.ellipse((x - 90 * s, base - 300 * s - hop, x + 90 * s, base - 110 * s - hop), fill=(255, 214, 110, 60))
         _person(d, x, base - hop - (1 - min(1.0, kk)) * 60, s, GOLD if hot else (110, 96, 190), WHITE if hot else (204, 198, 236))
 
+def _g_news(frame, g, t, dur):
+    """Zeitungsseite fliegt herein und bleibt leicht schräg liegen (Fantasie-Blatt, keine echte Zeitung)."""
+    k = _pop(t, 0.0, 0.45)
+    if k <= 0:
+        return
+    pw, ph = 860, 1080
+    paper = Image.new("RGBA", (pw, ph), (236, 224, 196, 255))
+    d = ImageDraw.Draw(paper)
+    rnd = random.Random(11)
+    for _ in range(500):                                        # Papierkörnung
+        x, y = rnd.randrange(pw), rnd.randrange(ph)
+        d.point((x, y), fill=(206, 192, 160, 255))
+    d.rectangle((0, 0, pw - 1, ph - 1), outline=(120, 104, 80), width=6)
+    name = str(g.get("kicker") or "TAGESBLATT").upper()[:18]
+    f = _fit(d, name, 120, pw - 120)
+    d.text((pw / 2 - d.textlength(name, font=f) / 2, 40), name, font=f, fill=(40, 34, 30))
+    d.line([(50, 190), (pw - 50, 190)], fill=(40, 34, 30), width=8)
+    d.line([(50, 206), (pw - 50, 206)], fill=(40, 34, 30), width=3)
+    head = str(g.get("text") or "").upper()[:40]
+    words, rows, cur = head.split(), [], ""
+    for w in words:                                             # Schlagzeile auf höchstens drei Zeilen
+        if cur and len(cur) + len(w) + 1 > 14:
+            rows.append(cur); cur = w
+        else:
+            cur = (cur + " " + w).strip()
+    rows = (rows + [cur])[:3]
+    y = 236
+    for r in rows:
+        fr = _fit(d, r, 150, pw - 110)
+        d.text((pw / 2 - d.textlength(r, font=fr) / 2, y), r, font=fr, fill=(30, 26, 24))
+        y += fr.size + 16
+    sub = str(g.get("sub") or "")[:44]
+    if sub:
+        fs = _fit(d, sub, 46, pw - 120, "SemiBold")
+        d.text((pw / 2 - d.textlength(sub, font=fs) / 2, y + 6), sub, font=fs, fill=(90, 78, 66))
+        y += 70
+    d.rectangle((60, y + 20, pw - 60, y + 300), fill=(176, 160, 130), outline=(40, 34, 30), width=5)   # „Foto“
+    d.polygon([(60, y + 300), (260, y + 140), (400, y + 240), (560, y + 100), (pw - 60, y + 300)], fill=(120, 106, 86))
+    d.ellipse((pw - 220, y + 50, pw - 150, y + 120), fill=(226, 212, 180))
+    yy = y + 330
+    while yy < ph - 40:                                         # Textspalten als Linien
+        for cx in (60, pw / 2 + 15):
+            d.line([(cx, yy), (cx + pw / 2 - 75 - rnd.randrange(0, 60), yy)], fill=(130, 116, 96), width=7)
+        yy += 26
+    ang = 60 * (1 - min(1.0, k)) - 4
+    scale = 0.5 + 0.5 * min(1.0, k)
+    im = paper.resize((int(pw * scale), int(ph * scale)), Image.LANCZOS).rotate(ang, resample=Image.BICUBIC, expand=True)
+    sh = Image.new("RGBA", im.size, (0, 0, 0, 0))
+    sh.paste((0, 0, 0, 120), (0, 0), im.split()[3])
+    frame.paste(sh, (int(W / 2 - im.width / 2 + 14), int(800 - im.height / 2 + 20)), sh)
+    frame.paste(im, (int(W / 2 - im.width / 2), int(800 - im.height / 2)), im)
 
-DRAW = {"versus": _g_versus, "round": _g_round, "score": _g_score, "compare": _g_compare, "podium": _g_podium, "share": _g_share,
+
+def _beat(u):
+    """Eine Herzschlag-Zacke, u = 0…1 innerhalb eines Schlags."""
+    if 0.30 < u < 0.36:
+        return -0.25 * math.sin((u - 0.30) / 0.06 * math.pi)
+    if 0.40 < u < 0.46:
+        return (u - 0.40) / 0.06 * 1.0
+    if 0.46 <= u < 0.52:
+        return 1.0 - (u - 0.46) / 0.06 * 1.6
+    if 0.52 <= u < 0.58:
+        return -0.6 + (u - 0.52) / 0.06 * 0.6
+    if 0.66 < u < 0.80:
+        return 0.18 * math.sin((u - 0.66) / 0.14 * math.pi)
+    return 0.0
+
+
+def _g_pulse(frame, g, t, dur):
+    """Herzschlag-Linie läuft durchs Bild, darüber eine große Zahl – für den Moment, in dem alles stillsteht."""
+    red = (255, 70, 100)
+    lay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    ld = ImageDraw.Draw(lay)
+    beat = (t * 1.5) % 1.0
+    ld.rectangle((0, 0, W, H), fill=(200, 20, 50, int(46 + 40 * max(0.0, 1 - beat * 3))))
+    frame.paste(lay, (0, 0), lay)
+    d = ImageDraw.Draw(frame, "RGBA")
+    _kicker(d, 330, g.get("kicker"), t, 0.0)
+    val = str(g.get("value") or "").upper()[:8]
+    k = _pop(t, 0.1, 0.35)
+    if val and k > 0:
+        f = _fit(d, val, int(440 * min(1.08, k) * (1 + 0.05 * max(0.0, 1 - beat * 3))), 900)
+        w = d.textlength(val, font=f)
+        d.text((W / 2 - w / 2, 640 - f.size / 2), val, font=f, fill=WHITE, stroke_width=10, stroke_fill=red)
+    lab = str(g.get("label") or "").upper()[:26]
+    if lab and t > 0.5:
+        _pill(d, W / 2, 900, lab, _fit(d, lab, 60, 860, "Bold"), red + (255,), WHITE)
+    cy, amp, head = 1140, 150, min(1.0, t / 0.9)
+    pts = []
+    for x in range(0, int(W * head) + 1, 6):
+        u = (x / 360.0 - t * 1.5) % 1.0
+        pts.append((x, cy - _beat(u) * amp))
+    if len(pts) > 1:
+        d.line(pts, fill=red + (90,), width=26, joint="curve")
+        d.line(pts, fill=(255, 190, 200), width=8, joint="curve")
+        d.ellipse((pts[-1][0] - 16, pts[-1][1] - 16, pts[-1][0] + 16, pts[-1][1] + 16), fill=WHITE)
+
+
+def _g_radio(frame, g, t, dur):
+    """Funkspruch: Gerät mit Kanal-Anzeige, die Wellenform schlägt im Sprechtakt aus."""
+    d = ImageDraw.Draw(frame, "RGBA")
+    k = _pop(t, 0.0, 0.4)
+    if k <= 0:
+        return
+    cx, cy = W / 2, 760
+    w, h = 880 * min(1.03, k), 560
+    d.rounded_rectangle((cx - w / 2 + 10, cy - h / 2 + 16, cx + w / 2 + 10, cy + h / 2 + 16), 50, fill=(0, 0, 0, 110))
+    d.rounded_rectangle((cx - w / 2, cy - h / 2, cx + w / 2, cy + h / 2), 50, fill=(18, 26, 40), outline=GREEN, width=10)
+    kick = str(g.get("kicker") or "FUNK").upper()[:22]
+    fk = _fit(d, kick, 46, 640, "Bold")
+    d.text((cx - w / 2 + 110, cy - h / 2 + 44), kick, font=fk, fill=(150, 226, 150))
+    for i in range(3):                                          # Sendesymbol
+        r = 16 + i * 14
+        if (t * 3) % 3 >= i:
+            d.arc((cx - w / 2 + 56 - r, cy - h / 2 + 68 - r, cx - w / 2 + 56 + r, cy - h / 2 + 68 + r), -50, 50, fill=GREEN, width=6)
+    d.ellipse((cx - w / 2 + 48, cy - h / 2 + 60, cx - w / 2 + 64, cy - h / 2 + 76), fill=GREEN)
+    txt = str(g.get("text") or "").upper()[:16]
+    f = _fit(d, txt, 150, 760)
+    d.text((cx - d.textlength(txt, font=f) / 2, cy - 150), txt, font=f, fill=WHITE, stroke_width=4, stroke_fill=INK)
+    rnd = random.Random(5)
+    n = 34
+    for i in range(n):
+        ph = rnd.random() * 6.28
+        a = abs(math.sin(t * (5 + rnd.random() * 5) + ph)) * (0.35 + 0.65 * abs(math.sin(t * 2.2 + i * 0.4)))
+        bh = 14 + a * 120
+        x = cx - 360 + i * (720 / (n - 1))
+        d.rounded_rectangle((x - 7, cy + 130 - bh, x + 7, cy + 130 + bh), 7, fill=GREEN if i % 5 else GOLD)
+    sub = str(g.get("sub") or "").upper()[:30]
+    if sub and t > 0.5:
+        _pill(d, cx, cy + h / 2 + 40, sub, _fit(d, sub, 54, 820, "Bold"), GOLD + (255,))
+
+
+def _g_distance(frame, g, t, dur):
+    """Entfernung: zwei Punkte, dazwischen wächst die Messlinie, darüber die Strecke."""
+    d = ImageDraw.Draw(frame, "RGBA")
+    _kicker(d, 400, g.get("kicker"), t, 0.0)
+    y, x0, x1 = 980, 130, W - 130
+    grow = 0.0 if t < 0.2 else min(1.0, (t - 0.2) / 0.9)
+    grow = 1 - (1 - grow) ** 3
+    xe = x0 + (x1 - x0) * grow
+    for x in range(int(x0), int(xe), 44):
+        d.line([(x, y), (min(xe, x + 26), y)], fill=WHITE, width=10)
+    for x in (x0, xe):
+        d.line([(x, y - 44), (x, y + 44)], fill=WHITE, width=10)
+    for i, (key, x, col) in enumerate((("left", x0, LEFT), ("right", x1, RIGHT))):
+        if i == 1 and grow < 1:
+            continue
+        _ring(d, x, y, 90, max(0.0, t - (0.0 if i == 0 else 1.1)), col, 8)
+        d.ellipse((x - 30, y - 30, x + 30, y + 30), fill=col, outline=INK, width=6)
+        name = str(g.get(key) or "").upper()[:10]
+        if name:
+            fn = _fit(d, name, 60, 300, "Bold")
+            cx = min(W - 60 - d.textlength(name, font=fn) / 2 - 28, max(60 + d.textlength(name, font=fn) / 2 + 28, x))
+            _pill(d, cx, y + 90, name, fn, col + (255,))
+    val = str(g.get("value") or "")
+    cur = _count(val, t, 0.2, 0.9).upper()
+    f = _fit(d, val.upper(), 260, 940)
+    w = d.textlength(cur, font=f)
+    d.text((W / 2 - w / 2, 560), cur, font=f, fill=GOLD, stroke_width=8, stroke_fill=INK)
+    lab = str(g.get("label") or "").upper()[:30]
+    if lab and t > 1.1:
+        fl = _fit(d, lab, 64, 900, "Bold")
+        d.text((W / 2 - d.textlength(lab, font=fl) / 2, 560 + f.size + 30), lab, font=fl, fill=WHITE)
+
+
+DRAW = {"news": _g_news, "pulse": _g_pulse, "radio": _g_radio, "distance": _g_distance,
+        "versus": _g_versus, "round": _g_round, "score": _g_score, "compare": _g_compare, "podium": _g_podium, "share": _g_share,
         "map": _g_map, "city": _g_city, "number": _g_number, "timer": _g_timer, "calendar": _g_calendar, "question": _g_question, "houses": _g_houses, "badge": _g_badge}
 
 
@@ -685,7 +854,7 @@ def clean(g):
     out["dark"] = g.get("dark") is True
     need = {"number": "value", "timer": "value", "calendar": "value", "houses": "value", "badge": "text", "question": None,
             "map": None, "city": None, "versus": "left", "round": "text", "score": "value", "compare": "value", "podium": "text",
-            "share": "value"}[out["type"]]
+            "share": "value", "news": "text", "pulse": "value", "radio": "text", "distance": "value"}[out["type"]]
     if need and need not in out:
         return None
     if out["type"] == "versus" and "right" not in out:

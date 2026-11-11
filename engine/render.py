@@ -122,6 +122,18 @@ def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, 
             lab = str(cur_hud or "").replace("{", "").replace("}", "").upper()[:28]
             if lab:
                 lines.append(f"Dialogue: 3,{_ts(s)},{_ts(e)},Hud,,0,0,0,,{lab}")
+    # Ecke oben rechts: Zustands-Anzeige der Geschichte („SEIL: LÄUFT“ → „SEIL: STEHT“), gilt weiter bis zur nächsten Angabe
+    if not (countdown and countdown.get("seconds")):
+        cur = ""
+        for sc, (s, e) in zip(scenes, times):
+            cur = sc.get("status") if isinstance(sc.get("status"), str) and sc.get("status").strip() else cur
+            lab, _, val = str(cur or "").replace("{", "").replace("}", "").replace("\\", "").upper().partition(":")
+            lab, val = (lab.strip()[:14], val.strip()[:12]) if val.strip() else ("", lab.strip()[:12])
+            if val:
+                bad = val.startswith("!") or re.search(r"STEHT|AUS\b|TOT|WEG\b|STOPP|KEIN|ALARM|GEFAHR|LEER|OFFLINE|VERLOREN|DEFEKT", val)
+                col = "&H005A46FF" if bad else "&H003FD2FF"
+                head = ("{\\fs34\\c&H00FFFFFF&}" + lab + "\\N") if lab else ""
+                lines.append(f"Dialogue: 3,{_ts(s)},{_ts(e)},Cnt,,0,0,0,,{head}{{\\fs70\\c{col}&}}{val.lstrip('!')}")
     # Countdown oben rechts: läuft sichtbar herunter, wird zum Ende hin rot
     if countdown and countdown.get("seconds"):
         start_v = max(10, int(countdown["seconds"]))

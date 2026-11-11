@@ -93,6 +93,8 @@ def sanitize(sc):
                  "speaks": a.get("speaks") is True}
             for k in ("action", "emotion", "emote", "kind", "hold", "facing"):
                 c[k] = word(a.get(k)) if k == "emote" else word(a.get(k)).lower()
+            say = a.get("say")
+            c["say"] = "".join(ch for ch in say if ch not in "{}<>\\").strip()[:16] if isinstance(say, str) else ""
             for k in ("pos", "to"):
                 v = a.get(k)
                 if (isinstance(v, str) and v.strip()) or (isinstance(v, (int, float)) and not isinstance(v, bool)):
@@ -137,7 +139,7 @@ def _prepare(scene, cast):
             x0 = -260 if x0 <= 540 else 1340
         actors.append({"look": rig.Look.from_spec(spec), "kind": kind if kind in extras.CREATURES else "",
                        "hold": extras.HELD.get(str(a.get("hold") or "").lower().strip(), ""),
-                       "action": action, "emotion": str(a.get("emotion") or "").lower(), "emote": a.get("emote") or "",
+                       "action": action, "emotion": str(a.get("emotion") or "").lower(), "emote": a.get("emote") or "", "say": str(a.get("say") or "") if isinstance(a.get("say"), str) else "",
                        "x0": x0, "x1": x1, "speaks": bool(a.get("speaks")), "seed": i * 5 + len(aid), "face": a.get("facing")})
     for i, a in enumerate(actors):     # zwei Figuren nie auf derselben Stelle
         for b in actors[:i]:
@@ -463,7 +465,9 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                 extras.draw_held(frame, a["hold"], x - fx + hx, gy - fy + hy, facing, t, scale, night)
             head_y = gy - (505 + max(0, pose.lift)) * scale * a["look"].size
             _zzz(od, pose, x, head_y + 75 * scale, t)
-        if a["emote"]:
+        if a.get("say"):
+            extras.draw_bubble(over, a["say"], x, head_y, t, scale)
+        elif a["emote"]:
             extras.draw_emote(over, a["emote"], x, head_y, t, scale)
         if a["speaks"] or len(actors) == 1:
             focus = x
