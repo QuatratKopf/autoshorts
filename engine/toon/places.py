@@ -1176,7 +1176,31 @@ def _mid_church(p, rnd):
     p.rect((cx - m * 0.6, y - m * 1.9, cx + m * 0.6, y), (60, 44, 40), r=int(m * 0.5), o=5)
 
 
-MID = {"church": _mid_church, "forest": _mid_forest, "trees": _mid_trees, "deadtrees": _mid_deadtrees, "palms": _mid_palms, "cactus": _mid_cactus,
+def _mid_tower(p, rnd):
+    """Firmenzentrale: gläserner Büroturm mit Vorplatz, überragt die Stadt – ohne Schriftzug und ohne Logo."""
+    y = 1000
+    m = px(1.0, y) * 0.6                                       # steht weit hinten am Platz: ganz im Bild, auch bei herangezoomter Kamera
+    cx = 600
+    lit = p.night and not p.dark
+    glass, frame = (120, 196, 226), (70, 92, 124)
+    p.rect((cx - m * 4.6, y - m * 3.2, cx + m * 4.6, y), frame)                                  # Sockel
+    for i in range(6):
+        x0 = cx - m * 4.2 + i * m * 1.42
+        p.rect((x0, y - m * 2.7, x0 + m * 1.1, y - m * 0.9), (255, 226, 120) if lit else glass, r=4, o=4, glow=lit)
+    p.rect((cx - m * 0.9, y - m * 1.9, cx + m * 0.9, y), (44, 52, 70), r=6, o=5)                # Eingang
+    p.rect((cx - m * 3.0, y - m * 11.6, cx + m * 3.0, y - m * 3.2), frame)                      # Turm
+    for r_ in range(6):
+        for c_ in range(4):
+            x0 = cx - m * 2.6 + c_ * m * 1.36
+            y0 = y - m * 11.1 + r_ * m * 1.3
+            on = lit and rnd.random() < 0.6
+            p.rect((x0, y0, x0 + m * 1.12, y0 + m * 0.95), (255, 226, 120) if on else (glass if (r_ + c_) % 3 else (160, 220, 240)), r=3, o=3, glow=on)
+    p.poly([(cx - m * 3.0, y - m * 11.6), (cx - m * 1.6, y - m * 12.7), (cx + m * 1.6, y - m * 12.7), (cx + m * 3.0, y - m * 11.6)], (56, 74, 104))
+    p.line((cx, y - m * 12.7, cx, y - m * 14.4), w=6)                                            # Antenne
+    p.oval((cx - 9, y - m * 14.4 - 9, cx + 9, y - m * 14.4 + 9), (240, 80, 70), o=4, glow=True)
+
+
+MID = {"tower": _mid_tower, "church": _mid_church, "forest": _mid_forest, "trees": _mid_trees, "deadtrees": _mid_deadtrees, "palms": _mid_palms, "cactus": _mid_cactus,
        "street": _mid_street, "powerlines": _mid_powerlines, "windturbines": _mid_windturbines, "gasstation": _mid_gasstation,
        "powerplant": _mid_powerplant, "bridge": _mid_bridge, "camp": _mid_camp, "graves": _mid_graves}
 
@@ -1192,10 +1216,11 @@ EL_ALIASES = {"berge": "mountains", "hügel": "hills", "dünen": "dunes", "wald"
               "läden": "street", "geschäfte": "street", "shops": "street", "strommasten": "powerlines", "stromleitung": "powerlines",
               "windräder": "windturbines", "windrad": "windturbines", "tankstelle": "gasstation", "kraftwerk": "powerplant",
               "atomkraftwerk": "powerplant", "brücke": "bridge", "zelte": "camp", "lager": "camp", "friedhof": "graves", "gräber": "graves",
-              "skyline": "city", "kirche": "church", "dom": "church", "kathedrale": "church", "hochhäuser": "city", "tote bäume": "deadtrees", "ocean": "sea", "mountain": "mountains", "tree": "trees"}
+              "skyline": "city", "hochhaus": "tower", "wolkenkratzer": "tower", "firmenzentrale": "tower", "zentrale": "tower", "konzern": "tower",
+              "büroturm": "tower", "skyscraper": "tower", "headquarters": "tower", "kirche": "church", "dom": "church", "kathedrale": "church", "hochhäuser": "city", "tote bäume": "deadtrees", "ocean": "sea", "mountain": "mountains", "tree": "trees"}
 
 
-MID_ORDER = ("church", "windturbines", "powerplant", "bridge", "street", "gasstation", "powerlines", "graves", "camp", "cactus", "palms",
+MID_ORDER = ("tower", "church", "windturbines", "powerplant", "bridge", "street", "gasstation", "powerlines", "graves", "camp", "cactus", "palms",
              "deadtrees", "trees", "forest")
 
 
@@ -1308,6 +1333,7 @@ OUTDOOR_SPECS = {
     "river": {"ground": "grass", "elements": ["hills", "river", "trees"]},
     "fields": {"ground": "soil", "elements": ["fields", "hills", "windturbines"]},
     "landfill": {"ground": "soil", "sky": "haze", "elements": ["hills", "factory"]},
+    "headquarters": {"ground": "road", "elements": ["city", "tower"]},
 }
 
 
@@ -1564,6 +1590,34 @@ def attic(night):
     return p.vignette()
 
 
+SERVER_RACKS = [(30 + i * 262, 250 + i * 262) for i in range(4)]       # Schränke im Rechenzentrum (x0, x1)
+SERVER_ROWS = list(range(410, 1140, 66))                               # Einschübe je Schrank (y)
+
+
+def serverroom(night):
+    """Rechenzentrum / Serverraum: Reihe hoher Serverschränke mit Lämpchen, kühles Licht, Kabelkanal an der Decke."""
+    p = P(False)                                                # immer kunstlichtbeleuchtet – kein Fenster, keine Tageszeit
+    p.room((52, 62, 92), (118, 126, 146), stripe=False)
+    p.rect((-10, 250, W + 10, 300), (88, 96, 122), o=5)                         # Kabelkanal
+    for x in range(40, W, 130):
+        p.d.line((x, 300, x, 330), fill=(240, 196, 70), width=8)
+    for x0, x1 in SERVER_RACKS:
+        p.rect((x0, 350, x1, GROUND - 60), (30, 34, 48), r=10)
+        p.rect((x0 + 14, 366, x1 - 14, 398), (58, 66, 92), r=6, o=0)
+        for y in SERVER_ROWS:
+            p.rect((x0 + 16, y, x1 - 16, y + 50), (66, 74, 100), r=6, o=4)
+            for k in range(4):
+                p.d.line((x0 + 96 + k * 22, y + 14, x0 + 96 + k * 22, y + 36), fill=(36, 40, 58), width=6)   # Lüftungsschlitze
+            p.d.ellipse((x0 + 30, y + 16, x0 + 48, y + 34), fill=(110, 230, 140))
+            p.d.ellipse((x0 + 56, y + 16, x0 + 74, y + 34), fill=(90, 170, 250))
+    g = Image.new("L", (W, H), 0)                                               # kühler Lichtschein von den Schränken
+    ImageDraw.Draw(g).rectangle((0, 380, W, GROUND - 60), fill=70)
+    g = g.filter(ImageFilter.GaussianBlur(140))
+    p.im.paste(Image.new("RGB", (W, H), (120, 190, 255)), (0, 0), g)
+    p.d = ImageDraw.Draw(p.im)
+    return p.vignette()
+
+
 def plain(night):
     p = P(night)
     p.room((244, 226, 190), (210, 170, 120))
@@ -1579,7 +1633,8 @@ PLACES = {"bedroom": bedroom, "livingroom": livingroom, "street": street, "basem
           "space": space, "lab": lab, "classroom": classroom, "plain": plain, "kitchen": kitchen, "office": office,
           "beach": beach, "desert": desert, "snow": snow, "forest": forest, "underwater": underwater,
           "mountain": mountain, "hospital": hospital, "cave": cave, "supermarket": supermarket,
-          "supermarket_empty": supermarket_empty, "bathroom": bathroom, "station": station, "restaurant": restaurant, "germany": germany, "worldmap": worldmap, "hallway": hallway, "attic": attic}
+          "supermarket_empty": supermarket_empty, "bathroom": bathroom, "station": station, "restaurant": restaurant, "germany": germany, "worldmap": worldmap, "hallway": hallway, "attic": attic,
+          "serverroom": serverroom}
 OUTDOOR = tuple(OUTDOOR_SPECS) + ("custom",)
 ALIASES = {"schlafzimmer": "bedroom", "zimmer": "bedroom", "wohnzimmer": "livingroom", "straße": "street", "stadt": "street",
            "city": "street", "keller": "basement", "bunker": "basement", "wald": "forest", "natur": "park", "garten": "park",
@@ -1593,6 +1648,10 @@ ALIASES = {"schlafzimmer": "bedroom", "zimmer": "bedroom", "wohnzimmer": "living
            "leerer supermarkt": "supermarket_empty", "bad": "bathroom", "badezimmer": "bathroom", "bahnhof": "station",
            "u-bahn": "station", "zug": "station", "restaurant": "restaurant", "café": "restaurant", "cafe": "restaurant",
            "bauernhof": "farm", "dorf": "village", "tankstelle": "gasstation", "kraftwerk": "powerplant", "friedhof": "graveyard", "kirche": "church", "dom": "church", "see": "lake", "fluss": "river", "müllhalde": "landfill", "deponie": "landfill",
+           "rechenzentrum": "serverroom", "serverraum": "serverroom", "serverfarm": "serverroom", "datacenter": "serverroom", "data center": "serverroom",
+           "server room": "serverroom", "server": "serverroom", "datenzentrum": "serverroom",
+           "firmenzentrale": "headquarters", "konzernzentrale": "headquarters", "hauptsitz": "headquarters", "firmensitz": "headquarters",
+           "wolkenkratzer": "headquarters", "hochhaus": "headquarters", "konzern": "headquarters", "firma": "headquarters", "hq": "headquarters",
            "ruinen": "ruins", "zeltlager": "camp", "lager": "camp", "feld": "farm", "felder": "farm", "mondoberfläche": "moon"}
 
 

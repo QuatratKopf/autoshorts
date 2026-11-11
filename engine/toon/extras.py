@@ -1132,6 +1132,15 @@ def draw_ambient(layer, place, night, t):
         for i in range(4):
             wdt = 50 + (int(t * 5 + i * 2) % 5) * 34
             d.rectangle((656, 836 + i * 30, 656 + wdt, 848 + i * 30), fill=(250, 250, 255, 255))
+    if place == "serverroom":                                     # Lämpchen der Server flackern
+        from .places import SERVER_RACKS, SERVER_ROWS
+        for i, (x0, _x1) in enumerate(SERVER_RACKS):
+            for j, y in enumerate(SERVER_ROWS):
+                a, b = _DROPS[(i * 13 + j * 7) % 140][0], _DROPS[(i * 5 + j * 11) % 140][1]
+                if math.sin(t * (5 + a * 9) + b * 40) > 0.2:
+                    d.ellipse((x0 + 30, y + 16, x0 + 48, y + 34), fill=(24, 60, 40, 255))
+                if math.sin(t * (3 + b * 7) + a * 40) > 0.55:
+                    d.ellipse((x0 + 56, y + 16, x0 + 74, y + 34), fill=(250, 200, 80, 255))
     if place == "station":                                        # Anzeige blinkt
         if int(t * 1.5) % 2:
             d.rectangle((700, 478, 800, 500), fill=(30, 40, 70, 255))

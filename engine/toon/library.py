@@ -160,7 +160,8 @@ def text_props():
     out = []
     for name, item in LIB.items():
         words = [name] + item["aliases"]
-        pat = "|".join(r"\b" + re.escape(w.replace("-", " ")).replace(r"\ ", r"[ -]?") for w in words if len(w) > 2)
+        # ganzes Wort (mit Beugungsendung): „Ball“ steckt nicht in „Ballerspiele“, „Chip“ nicht in „Chipstüte“
+        pat = "|".join(r"\b" + re.escape(w.replace("-", " ")).replace(r"\ ", r"[ -]?") + r"(?:e?s|e?n|e)?\b" for w in words if len(w) > 2)
         if pat:
             out.append((pat, item["key"]))
     return out

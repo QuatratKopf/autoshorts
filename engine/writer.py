@@ -127,8 +127,9 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
 - In jeder Szene:
   "place": drinnen: bedroom, livingroom, kitchen, bathroom, office, classroom, lab, hospital, basement, supermarket,
            supermarket_empty (leergekaufte Regale), station (Bahnhof), restaurant, cave, underwater, space,
-           germany (Deutschlandkarte), worldmap (Weltkugel), hallway (Flur mit Türen: Hotel, Wohnhaus), attic (Dachboden)
-           draußen: street (Häuserzeile mit Läden und Straße), park, forest, beach, desert, snow, mountain, farm, village,
+           germany (Deutschlandkarte), worldmap (Weltkugel), hallway (Flur mit Türen: Hotel, Wohnhaus), attic (Dachboden),
+           serverroom (Rechenzentrum mit Serverschränken – für Internet, Cloud, KI, Rechenleistung)
+           draußen: headquarters (Büroturm einer großen Firma in der Stadt – für Konzerne, Firmensitze; ohne Logo), street (Häuserzeile mit Läden und Straße), park, forest, beach, desert, snow, mountain, farm, village,
            gasstation, powerplant, graveyard, ruins, camp (Zelte), moon, church, lake, river, fields, landfill (Müllhalde)
            (genau eines dieser Wörter – jede Szene braucht einen Ort aus dieser Liste, auch Ereignis-Einstellungen)
   "backdrop": für Landschaften draußen statt "place" – ein Baukasten, mit dem JEDE Umgebung passend gebaut wird:
@@ -204,6 +205,8 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
                                                                                                      Enthüllungen; kicker = erfundener Zeitungsname, nie eine echte Zeitung
     {"type": "pulse", "value": "1", "label": "EINE SEKUNDE"}                                         Herzschlag-Linie mit rotem Pochen – der Moment, in dem alles stillsteht
     {"type": "radio", "kicker": "FUNK · KANAL 4", "text": "BERGWACHT"}                               Funkspruch oder Durchsage mit Wellenform
+    {"type": "chart", "kicker": "AKTIENKURS", "value": "3 BIO.", "label": "DOLLAR"}                   Kurve schießt nach oben ("dark": true = stürzt ab) – für Kurse,
+                                                                                                     Umsatz, Wachstum, Nachfrage; value/label nur, wenn der Sprecher die Zahl nennt
     {"type": "distance", "value": "100 m", "left": "IHR", "right": "ZIEL"}                           Entfernung als Messlinie zwischen zwei Punkten
     {"type": "days", "text": "30 TAGE ÜBERLEBEN", "value": "1", "sub": "30", "label": "NOCH 2 MINUTEN"}  Monatskalender: heute ist Tag "value" von "sub" (höchstens 35),
                                                                                                      vergangene Tage werden abgehakt – ideal für Geschichten über mehrere Tage, gern mehrmals im Video
@@ -222,6 +225,11 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
   das Geschehen ("shot": "event", actors []), einen Gegenstand groß ("shot": "insert" mit einem Ding aus "props") oder eine
   Zahl als Zähler (overlay "counter"). Das Ding, um das sich das Video dreht, ist mindestens zweimal groß im Bild.
   Für „in ganz Deutschland“ gibt es den Ort "germany" (Karte mit aufleuchtenden Punkten), für „weltweit“ den Ort "worldmap".
+- FIRMEN- UND TECHNIK-GESCHICHTEN: Zeig die Stationen der Geschichte, nicht fünfmal dasselbe Büro: Anfang im Zimmer oder Restaurant,
+  Firmensitz ("headquarters"), Rechenzentrum ("serverroom"), Kurs oder Wachstum als Grafik ("chart"), das Produkt groß ("shot": "insert").
+  Spricht der Satz von mehreren Menschen („drei Gründer“, „zwei Freunde“), stehen so viele Figuren in "actors". Der Weltraum ("space")
+  kommt nur vor, wenn der Satz vom Weltall handelt. Keine Firmenlogos, keine echten Personen – Gründer sind neutrale Figuren.
+  Zahlen in Einblendungen und Grafiken müssen im Sprechertext derselben Szene vorkommen.
 - Wechsle Orte, Aktionen und Requisiten ab: nicht zweimal hintereinander dieselbe Kombination; jede Szene zeigt sichtbar,
   wovon der Sprecher gerade redet (Bewegung statt Herumstehen: reinkommen, rennen, erschrecken, zeigen, springen).
 - Erklärendes (Zahlen, Listen, Regeln) kommt in die Einblendungen (overlay).

@@ -21,6 +21,7 @@ Eine Grafik-Szene hat "shot": "graphic" und "graphic": {"type": ..., ...}:
   radio    {"kicker": "FUNK · KANAL 4", "text": "BERGWACHT", "sub": "..."}                    Funkspruch mit Wellenform
   distance {"value": "100 m", "left": "IHR", "right": "ZIEL", "label": "..."}                 Messlinie zwischen zwei Punkten
   days     {"text": "30 TAGE ÜBERLEBEN", "value": "1", "sub": "30", "label": "NOCH 2 MIN"}    Monatskalender: Tag value von sub, vergangene abgehakt
+  chart    {"kicker": "AKTIENKURS", "value": "3 BIO.", "label": "DOLLAR", "dark": false}          Kurve schießt nach oben (dark = stürzt ab)
   phone    {"mode": "alert|lock|chat", "kicker": "...", "text": "...", "value": "...", ...}   Handy in der Hand (Eilmeldung, Sperrbildschirm, Nachrichten)
 Dazu der Look "neon": dieselbe Lichtstimmung (Nachtblau/Violett, Lichtpunkte) über normalen Szenen."""
 import math
@@ -40,7 +41,7 @@ ORANGE = (255, 138, 31)
 THEMES = {"": ((58, 40, 150), (14, 10, 46)), "scary": ((40, 30, 96), (6, 6, 22)), "panic": ((120, 34, 70), (26, 8, 30)),
           "tense": ((110, 60, 120), (22, 10, 40)), "sad": ((40, 60, 130), (10, 14, 40)), "happy": ((90, 70, 190), (30, 16, 80)),
           "calm": ((58, 40, 150), (14, 10, 46))}
-TYPES = ("number", "timer", "calendar", "question", "houses", "badge", "map", "city", "versus", "round", "score", "compare", "podium", "share", "news", "pulse", "radio", "distance", "days", "phone")
+TYPES = ("number", "timer", "calendar", "question", "houses", "badge", "map", "city", "versus", "round", "score", "compare", "podium", "share", "news", "pulse", "radio", "distance", "days", "phone", "chart")
 LEFT, RIGHT = (150, 110, 255), (255, 150, 40)                # Farben der beiden Seiten im Duell
 GREEN = (120, 230, 90)
 
@@ -1008,6 +1009,64 @@ def _g_phone(frame, g, t, dur):
     frame.paste(im, (int(W / 2 - im.width / 2), int(330 + (1 - min(1.0, k)) * 900)), im)
 
 
+def _g_chart(frame, g, t, dur):
+    """Kurs-/Wachstumskurve: Gitter, Linie zeichnet sich von links nach rechts und schießt am Ende steil nach oben (dark: stürzt ab)."""
+    d = ImageDraw.Draw(frame, "RGBA")
+    down = bool(g.get("dark"))
+    col = (255, 96, 86) if down else GREEN
+    _kicker(d, 430, g.get("kicker"), t, 0.0)
+    x0, x1, y0, y1 = 110, 970, 540, 1130
+    d.rounded_rectangle((x0 - 40, y0 - 40, x1 + 40, y1 + 40), 34, fill=(10, 8, 34, 150), outline=(255, 255, 255, 46), width=4)
+    for i in range(5):                                        # Gitterlinien
+        y = y0 + (y1 - y0) * i / 4
+        d.line((x0, y, x1, y), fill=(255, 255, 255, 30), width=3)
+    for i in range(1, 6):
+        x = x0 + (x1 - x0) * i / 6
+        d.line((x, y0, x, y1), fill=(255, 255, 255, 16), width=3)
+    rnd = random.Random(11)
+    n = 44
+    pts = []
+    for i in range(n + 1):
+        u = i / n
+        base = 0.06 + 0.1 * u + 0.84 * u ** 4.2            # lange flach, dann steil
+        wob = (rnd.random() - 0.5) * 0.07 * (0.4 + u) + 0.03 * math.sin(u * 19)
+        v = max(0.02, min(0.98, base + wob))
+        if i == n:
+            v = 0.97
+        if down:
+            v = 1.0 - v * 0.94
+        pts.append((x0 + (x1 - x0) * u, y1 - (y1 - y0) * v))
+    k = 0.0 if t < 0.15 else min(1.0, (t - 0.15) / min(1.9, max(1.0, dur * 0.55)))
+    k = k * k * (3 - 2 * k)
+    m = max(1, int(round(k * n)))
+    shown = pts[:m + 1]
+    if len(shown) >= 2:
+        d.polygon(shown + [(shown[-1][0], y1), (x0, y1)], fill=col + (46,))
+        d.line(shown, fill=col + (255,), width=14, joint="curve")
+        hx, hy = shown[-1]
+        pr = 20 + 5 * math.sin(t * 7)
+        d.ellipse((hx - pr * 2.2, hy - pr * 2.2, hx + pr * 2.2, hy + pr * 2.2), fill=col + (50,))
+        d.ellipse((hx - pr, hy - pr, hx + pr, hy + pr), fill=WHITE + (255,), outline=col + (255,), width=7)
+        if k >= 1.0:                                          # Pfeil in Kursrichtung
+            a = _pop(t - 0.15 - min(1.9, max(1.0, dur * 0.55)), 0.0, 0.3)
+            if a > 0:
+                s_ = 64 * min(1.1, a)
+                dy = 1 if down else -1
+                ax, ay = min(hx, x1 - 30), hy + dy * 34
+                d.polygon([(ax, ay + dy * s_), (ax - s_ * 0.72, ay), (ax + s_ * 0.72, ay)], fill=col + (255,), outline=INK + (255,), width=5)
+    d.line((x0, y0 - 10, x0, y1, x1 + 10, y1), fill=(255, 255, 255, 150), width=6)
+    val = str(g.get("value") or "").strip()
+    y = y1 + 110
+    if val and t > 0.5:
+        kk = _pop(t, 0.5, 0.4)
+        f = _fit(d, val.upper(), int(170 * min(1.06, kk)), 940)
+        _center(d, y + (170 - f.size) / 2, _count(val, t, 0.5, 1.4).upper(), f, fill=WHITE)
+        y += 200
+    if g.get("label") and t > 0.7:
+        f = _fit(d, str(g["label"]).upper(), 60, 940, "Bold")
+        _center(d, y, str(g["label"]).upper()[:40], f, fill=ORANGE if not down else (255, 150, 140))
+
+
 def _lines(d, text, f, max_w):
     out, cur = [], ""
     for w in str(text).split():
@@ -1018,7 +1077,7 @@ def _lines(d, text, f, max_w):
     return out + ([cur] if cur else [])
 
 
-DRAW = {"days": _g_days, "phone": _g_phone,
+DRAW = {"days": _g_days, "phone": _g_phone, "chart": _g_chart,
         "news": _g_news, "pulse": _g_pulse, "radio": _g_radio, "distance": _g_distance,
         "versus": _g_versus, "round": _g_round, "score": _g_score, "compare": _g_compare, "podium": _g_podium, "share": _g_share,
         "map": _g_map, "city": _g_city, "number": _g_number, "timer": _g_timer, "calendar": _g_calendar, "question": _g_question, "houses": _g_houses, "badge": _g_badge}
@@ -1036,7 +1095,7 @@ def clean(g):
     out["dark"] = g.get("dark") is True
     need = {"number": "value", "timer": "value", "calendar": "value", "houses": "value", "badge": "text", "question": None,
             "map": None, "city": None, "versus": "left", "round": "text", "score": "value", "compare": "value", "podium": "text",
-            "share": "value", "news": "text", "pulse": "value", "radio": "text", "distance": "value", "days": "value", "phone": "text"}[out["type"]]
+            "share": "value", "news": "text", "pulse": "value", "radio": "text", "distance": "value", "days": "value", "phone": "text", "chart": None}[out["type"]]
     mode = str(g.get("mode") or "").lower()
     if out["type"] == "phone":
         out["mode"] = mode if mode in ("alert", "lock", "chat") else "alert"

@@ -131,6 +131,7 @@ def main():
           {"type": "days", "text": "30 Tage überleben", "value": "1", "sub": "30", "label": "Noch 2 Min"}, {"type": "days", "value": "99", "sub": "999"}, {"type": "days", "value": "x"},
           {"type": "days", "value": "7", "sub": "7"}, {"type": "phone", "mode": "alert", "kicker": "Live", "text": "Fang ihn", "value": "10.000.000 €", "label": "Ich hab ihn gesehen"},
           {"type": "phone", "mode": "lock", "value": "07:49", "kicker": "Unbekannt", "text": "Wir wissen, wo du bist und kommen jetzt."}, {"type": "phone", "mode": "quatsch", "text": "x"},
+          {"type": "chart", "kicker": "Aktienkurs", "value": "3 BIO.", "label": "Dollar"}, {"type": "chart", "dark": True}, {"type": "chart", "value": "x" * 60},
           {"type": "phone", "mode": "chat", "kicker": "Oma", "text": "Junge, stimmt das mit den 10 Millionen?", "sub": "Oma, bitte nicht.", "label": "Doch."}, {"type": "phone"}]
     for g in gs:
         for m in ("", "panic", "scary", "x"):
@@ -152,6 +153,26 @@ def main():
                 for sc_ in scs:
                     frame(sc_, t=1.2)
             check(f"Regie Schweben: {txt} in {pl}", _flo)
+    def _firm():                                                 # Firmengeschichte: Gründer-Gruppe, Firmensitz, Rechenzentrum, Kurve – kein Schreibtisch im All
+        scs = stage.direct([{"text": "Stell dir vor, du zockst den ganzen Tag.", "place": "bedroom", "actors": [{"id": "du", "action": "sit"}]},
+                            {"text": "Drei Gründer bauten Grafikchips in einer Garage.", "place": "office", "actors": [{"id": "du", "action": "point", "pos": "center"}]},
+                            {"text": "Heute ist die Bude der wertvollste Konzern der Welt.", "place": "street", "props": ["house"], "shot": "event", "crowd": "walk"},
+                            {"text": "Jeder brauchte plötzlich diese Rechenleistung.", "place": "powerplant", "props": ["computer"], "shot": "event", "crowd": "worried"},
+                            {"text": "Dann explodierte der Aktienkurs völlig.", "place": "office", "props": ["money"], "actors": [{"id": "du", "action": "shocked"}],
+                             "overlay": {"type": "counter", "label": "MARKTWERT", "value": 3.0, "unit": "BILLIONEN DOLLAR"}},
+                            {"text": "Das ist das Fundament des gesamten Internets.", "place": "space", "time": "night", "props": ["satellite", "computer"], "shot": "event"},
+                            {"text": "Folg für mehr.", "place": "office", "actors": [{"id": "du"}]}],
+                           [(k * 4.0, k * 4.0 + 4.0) for k in range(7)], "Wie eine Gaming-Bude zum Tech-Giganten wurde", "fakten")
+        assert len([a for a in scs[1]["actors"] if not a.get("kind")]) == 3, "Drei Gründer: es stehen nicht drei Figuren im Bild"
+        assert stage.places.resolve(stage.backdrop(scs[2])) == "headquarters", f"Konzern: Ort ist {scs[2].get('place')}"
+        assert stage.places.resolve(stage.backdrop(scs[3])) == "serverroom" and not scs[3].get("crowd"), f"Rechenleistung: Ort ist {scs[3].get('place')}"
+        assert scs[4].get("shot") == "graphic" and scs[4]["graphic"]["type"] == "chart" and "value" not in scs[4]["graphic"], "Aktienkurs: keine Kurve"
+        assert stage.places.resolve(stage.backdrop(scs[5])) != "space", "Internet-Satz spielt im Weltall"
+        assert scs[3].get("actors") and scs[5].get("actors"), "Rechenzentrum ohne Menschen: leeres Bild"
+        for sc_ in scs:
+            for t in (0.3, 2.0):
+                frame(sc_, {"leo": {"shirt": "grün", "hair": "long"}}, t=t)
+    check("Regie Firmengeschichte", _firm)
     def _sit():                                                  # Sitzen: Unterschenkel zeigen nach unten, die Füße stehen unter den Knien – nicht über dem Kopf
         for t in (0.0, 1.0, 2.5):
             p, _ = rig.pose_at("sit", t, 3.0)

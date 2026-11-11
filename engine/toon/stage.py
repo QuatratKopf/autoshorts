@@ -14,6 +14,7 @@ SCALE = 1.08            # Figuren bewusst kleiner: die Szene steht im Mittelpunk
 POS = {"left": 250, "center": 540, "right": 830, "offleft": -260, "offright": 1340,
        "links": 250, "mitte": 540, "rechts": 830}
 TALL_OV = ("phone", "checklist", "note")
+MAIN_IDS = ("du", "ich", "held", "hero", "main", "erzähler", "narrator", "a0")
 
 
 def _x(v, default):
@@ -94,6 +95,8 @@ def sanitize(sc):
                  "speaks": a.get("speaks") is True}
             for k in ("action", "emotion", "emote", "kind", "hold", "facing"):
                 c[k] = word(a.get(k)) if k == "emote" else word(a.get(k)).lower()
+            if isinstance(a.get("look"), dict):               # Nebenfiguren der Regie bringen ihr Aussehen mit
+                c["look"] = {k: v for k, v in a["look"].items() if k in ("shirt", "hair", "hat", "glasses", "skin") and isinstance(v, (str, bool))}
             say = a.get("say")
             c["say"] = "".join(ch for ch in say if ch not in "{}<>\\").strip()[:16] if isinstance(say, str) else ""
             for k in ("pos", "to"):
@@ -130,6 +133,12 @@ def _prepare(scene, cast):
     for i, a in enumerate(raw[:3]):
         aid = str(a.get("id") or f"a{i}")
         spec = cast.get(aid) if isinstance(cast.get(aid), dict) else {}
+        if not spec and isinstance(a.get("look"), dict):
+            spec = a["look"]
+        elif not spec and not a.get("kind") and aid.lower() in MAIN_IDS:
+            humans = [v for v in cast.values() if isinstance(v, dict) and not v.get("kind")]
+            if len(humans) == 1:                          # Bildplan sagt „du“, Besetzung nennt die Hauptfigur beim Namen: dieselbe Figur
+                spec = humans[0]
         kind = str(a.get("kind") or spec.get("kind") or "").lower()
         x0 = _x(a.get("pos"), default_x[i])
         x1 = _x(a.get("to"), x0) if a.get("to") else x0
@@ -280,7 +289,8 @@ def _on_table(key):
     return key in ON_TABLE or (key.startswith("lib_") and extras.SIZES.get(key, (9,))[0] <= 0.5)
 PLACE_HAS = {"kitchen": ("fridge", "table"), "office": ("computer", "table"), "supermarket": ("shelf",), "supermarket_empty": ("shelf",),
              "livingroom": ("tv",), "forest": ("tree",), "park": ("tree",), "camp": ("tent", "fire"), "street": ("streetlamp", "house"),
-             "village": ("house",), "restaurant": ("table",), "hallway": ()}
+             "village": ("house",), "restaurant": ("table",), "hallway": (), "serverroom": ("computer", "shelf"),
+             "headquarters": ("house", "streetlamp")}
 
 
 def _float_lift(mode, t, seed=0.0, top=300.0, aloft=False):
@@ -685,6 +695,24 @@ def auto_graphic(text, hud=""):
     return {"type": "number", "value": val, "label": noun, "kicker": kick}
 
 
+def spoken_number(value, text):
+    """Kommt die Zahl einer Einblendung im gesprochenen Satz vor (als Ziffer oder Zahlwort)?"""
+    try:
+        v = float(str(value).replace(".", "").replace(",", ".")) if isinstance(value, str) else float(value)
+    except (TypeError, ValueError):
+        return True                                       # keine Zahl (Text-Zähler): nicht zu prüfen
+    nums = []
+    for w in str(text or "").replace("-", " ").split():
+        n = _number(w)
+        if n is not None:
+            nums.append(n)
+    if not nums:
+        return False
+    if "komma" in str(text or "").lower() and float(int(v)) in nums:
+        return True                                       # „vier Komma vier Milliarden“
+    return any(abs(n - v) < 1e-6 or abs(n * 1000 - v) < 1e-6 or abs(n * 1e6 - v) < 1e-3 or abs(n * 1e9 - v) < 1 for n in nums)
+
+
 def has_ov0(sc):
     return isinstance(sc.get("overlay"), dict) and str(sc["overlay"].get("type") or "") in TALL_OV + ("choice",)
 
@@ -711,6 +739,7 @@ def direct(scenes, times, topic="", style="", look=""):
     topic_things = [k for pat, k in _lib_props() + TEXT_PROPS if _re0.search(pat, str(topic or "").lower()) and extras.prop_fit(k)][:2]
     topic_any = [k for pat, k in _lib_props() + TEXT_PROPS if _re0.search(pat, str(topic or "").lower())][:2]   # auch Himmel/Natur
     stale, topic_ins, gfx = 0, 0, 0
+    charts = 0
     neon = str(look or "").lower() == "neon"
     cur_hud = ""
     for i, (sc, (s0, e0)) in enumerate(zip(scenes, times)):
@@ -734,6 +763,11 @@ def direct(scenes, times, topic="", style="", look=""):
             sc["weather"] = ""                            # Dunkelheit nur, wenn der Satz davon spricht – sonst erkennt man das Bild nicht
         acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
         place = places.resolve(sc.get("place"))
+        if place in ("space", "moon") and not isinstance(sc.get("backdrop"), dict) and not _re0.search(SPACE_RE, low0) \
+                and not _re0.search(SPACE_RE, str(topic or "").lower()):
+            sc["place"] = place = "street"                # der Satz spielt nicht im All (z. B. „das Internet“): Ort aus dem Satz, sonst die Stadt
+            sc["time"] = "" if sc.get("time") == "night" and not _re0.search(r"nacht|dunkel|abend", low0) else sc.get("time")
+            sc["props"] = [q for q in sc["props"] if extras.PROP_ALIASES.get(q["type"].lower(), q["type"].lower()) not in extras.SKY]
         if place in MAPS and not isinstance(sc.get("backdrop"), dict) and _hint(sc.get("text")) is not None \
                 and not any(_re0.search(pat, sc["text"].lower()) for pat, _ in MAP_HINTS):
             sc["place"] = place = "park"                  # der Satz nennt einen Schauplatz (Ozean, Wald, Stadt …), nicht die ganze Welt: dort spielt die Szene
@@ -741,6 +775,9 @@ def direct(scenes, times, topic="", style="", look=""):
             maps_used += 1
             if maps_used > 2:
                 sc["place"] = place = "street"
+        ov_c = sc.get("overlay") if isinstance(sc.get("overlay"), dict) else None
+        if ov_c and str(ov_c.get("type") or "") == "counter" and not spoken_number(ov_c.get("value"), sc["text"]):
+            sc["overlay"] = None                          # Zahl in der Einblendung, die der Sprecher gar nicht nennt: weg damit
         has_bd = isinstance(sc.get("backdrop"), dict) and (sc["backdrop"].get("elements") or sc["backdrop"].get("ground"))
         hint = None if has_bd else _hint(sc.get("text"))
         used[place] = used.get(place, 0) + 1
@@ -769,6 +806,10 @@ def direct(scenes, times, topic="", style="", look=""):
                     if kind in OUTDOOR_THINGS and places.resolve(backdrop(sc)) not in places.OUTDOOR and not (
                             kind in extras.SKY and places.resolve(backdrop(sc)) in places.WINDOWS):
                         continue                           # Feuer, Autos, Naturgewalten erscheinen nicht im Zimmer (Himmelsdinge: im Fenster)
+                    if places.resolve(backdrop(sc)) == "bedroom" and sc.get("props"):
+                        break                              # im Schlafzimmer ist neben Bett und Tisch nur Platz für ein Ding
+                    if kind in INDOOR_THINGS and places.resolve(backdrop(sc)) in ("space", "underwater", "cave"):
+                        continue                           # kein Schreibtisch im All, kein Kühlschrank am Meeresgrund
                     if kind in INDOOR_THINGS and (places.resolve(backdrop(sc)) in places.OUTDOOR):
                         if used.get(place, 0) < 3 or sc.get("overlay") or sc.get("shot"):
                             continue                       # Zimmer-Dinge stehen nicht in der Landschaft …
@@ -818,6 +859,30 @@ def direct(scenes, times, topic="", style="", look=""):
                     sc["crowd"], sc["props"] = "", []
                 else:
                     a["action"] = "sit"
+        if places.resolve(backdrop(sc)) in ("space", "underwater", "cave"):
+            sc["props"] = [q for q in (sc.get("props") or []) if extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) not in INDOOR_THINGS]
+        # „Drei Gründer“, „zwei Freunde“: so viele Menschen stehen auch im Bild – nicht einer allein
+        mg = _re0.search(GROUP_RE, txt0)
+        humans = [a for a in acts if not a.get("kind")]
+        if mg and "actors" in sc and len(humans) <= 1 and len(acts) <= 1 and places.resolve(sc.get("place")) not in MAPS \
+                and places.resolve(backdrop(sc)) not in ("underwater",) and str(sc.get("shot") or "") in ("", "event") \
+                and str((sc.get("overlay") or {}).get("type") or "") not in TALL_OV:
+            n = max(2, min(3, int(_number(mg.group(1)) or 3)))
+            first = humans[0] if humans else {"id": last_id or "du", "action": "talk", "speaks": True, "emotion": MOOD_EMOTION.get(str(sc.get("mood") or ""), "")}
+            first.pop("to", None)
+            if str(first.get("action") or "") in ("walk", "run", "sit", "sleep", ""):
+                first["action"] = "talk"
+            xs = (300, 760) if n == 2 else (210, 540, 870)
+            first["pos"] = xs[n // 2] if n == 3 else xs[0]
+            team = [first]
+            for k in range(n - 1):
+                team.append({"id": f"_team{k + 1}", "action": ("point", "think")[k % 2] if first.get("action") != "point" else ("talk", "think")[k % 2],
+                             "emotion": first.get("emotion") or "", "emote": "", "speaks": False, "look": GROUP_LOOKS[(i + k) % len(GROUP_LOOKS)],
+                             "pos": [x for x in xs if x != first["pos"]][k], "facing": "", "kind": "", "hold": "", "say": ""})
+            sc["actors"] = acts = team
+            sc["crowd"] = ""
+            if sc.get("shot") == "event":
+                sc["shot"] = ""
         home = {"shelf": "supermarket", "cart": "supermarket", "fridge": "kitchen", "tv": "livingroom", "computer": "office"}
         for q in (sc.get("props") or []):
             k = str(q.get("type") if isinstance(q, dict) else q).lower().strip()
@@ -959,6 +1024,21 @@ def direct(scenes, times, topic="", style="", look=""):
         if neon:
             sc["look"], sc["time"] = "neon", "night"
         g_auto = None
+        low_c = str(sc.get("text") or "").lower()
+        if _re0.search(CHART_RE, low_c) and sc.get("shot") != "graphic" and charts < 2 and i > 0 and not last and ov_t not in TALL_OV and ov_t != "choice" \
+                and not sc.get("float") and not (scenes[i - 1].get("shot") == "graphic" and (scenes[i - 1].get("graphic") or {}).get("type") == "chart"):
+            fig_c = find_figure(sc.get("text"))             # nur Zahlen, die der Sprecher auch sagt
+            g_c = {"type": "chart", "dark": bool(_re0.search(CHART_DOWN_RE, low_c)),
+                   "kicker": next((k for pat, k in CHART_KICKERS if _re0.search(pat, low_c)), "KURS")}
+            if fig_c:
+                parts_c = str(fig_c["unit"]).split()
+                sc_c = parts_c[0] if parts_c and parts_c[0] in _SCALE.values() else ""
+                g_c["value"] = (_fmt_num(float(fig_c["value"])) + (" " + sc_c if sc_c else "")).strip()
+                g_c["label"] = " ".join(parts_c[1:] if sc_c else parts_c)
+            sc["shot"], sc["graphic"] = "graphic", graphics.clean(g_c)
+            sc["actors"], sc["props"], sc["crowd"], sc["overlay"], sc["weather"] = [], [], "", None, ""
+            acts, lone = [], False
+            charts += 1
         if sc.get("shot") == "graphic":
             gfx += 1
         elif (lone or not acts) and (fig_prev or neon or (i and scenes[i - 1].get("shot") == "graphic")) and sc.get("shot") in ("", "close", "event") \
@@ -1139,7 +1219,7 @@ def direct(scenes, times, topic="", style="", look=""):
         people = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and (giant or str(a.get("kind") or "").lower() not in CREATURE_SIZE)]
         acts = people if sc.get("shot") != "insert" else [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
         small = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and a not in people]
-        big = [k for k in keys if k in extras.SKY or (extras.SIZES.get(k) or (9, 0))[0] >= 0.6]
+        big = [k for k in keys if (k in extras.SKY or (extras.SIZES.get(k) or (9, 0))[0] >= 0.6) and k not in PLACE_HAS.get(rp, ())]   # was der Ort schon hat, füllt kein Bild
         if sc.get("shot") != "insert" and not acts and not sc.get("crowd") and not big and not sc.get("weather"):
             # leerer Raum, leere Wiese: Die Hauptfigur erlebt, wovon der Satz spricht – nie ein Bild, in dem niemand ist und nichts passiert
             mood = str(sc.get("mood") or "")
@@ -1169,6 +1249,8 @@ def backdrop(scene):
 
 # Wörter im Sprechertext → passender Hintergrund (greift nur, wenn das Drehbuch einen unpassenden Allerwelts-Ort nennt)
 HINTS = [
+    (r"rechenzentr|serverfarm|serverraum|serverräume|\bserver\b|\bservern\b|rechenleistung|rechenpower|ki-modell|supercomputer|datenzentr|des (gesamten |ganzen )?internets|datenström", "serverroom"),
+    (r"konzern|firmenzentrale|hauptsitz|hauptquartier|firmensitz|tech-gigant|tech-riese|techriese|wolkenkratzer|weltfirma|weltmarktführer|milliardenfirma|billionenfirma", "headquarters"),
     (r"leergekauft|leere regale|leeren regale|regale sind leer|regale leer|hamsterk|ausverkauft|geplündert", "supermarket_empty"),
     (r"vorräte.{0,30}(neige|knapp|leer|aus)|lebensmittel.{0,30}(knapp|leer|aus)|nichts mehr zu kaufen", "supermarket_empty"),
     (r"supermarkt|supermärkte|einkaufen|einkauf\b|lebensmittelladen|geschäfte|\bläden", "supermarket"),
@@ -1217,6 +1299,22 @@ HINTS = [
     (r"küche|kochen|kühlschrank", "kitchen"),
 ]
 GENERIC = ("street", "park", "plain", "livingroom")
+SPACE_RE = (r"weltall|weltraum|\ball\b|galaxi|planet|umlaufbahn|orbit|astronaut|\bmond|sonnensystem|\bstern|satellit|rakete|raumschiff|raumstation|\biss\b|"
+            r"kosmos|universum|schwarze\w* l[oö]ch|\berde\b|\bsonne\b|meteor|asteroid|komet|außerirdisch|alien|\bufo|raumfahrt|schwerelos|mars\b|jupiter|saturn|milchstraße")
+GROUP_RE = (r"\b(zwei|drei|vier|fünf) (?:\w+ )?(gründer\w*|freund\w*|forscher\w*|wissenschaftler\w*|student\w*|brüder\w*|schwestern|kolleg\w*|ingenieur\w*|"
+            r"entwickler\w*|tüftler\w*|erfinder\w*|männer\w*|frauen|jungs|kumpel\w*|nerds|programmierer\w*|unternehmer\w*|geschwister\w*|typen|partner\w*|"
+            r"schüler\w*|mitarbeiter\w*|expert\w*|bastler\w*|teenager\w*|jugendliche\w*)\b")
+GROUP_LOOKS = ({"shirt": "rot", "hair": "bun", "glasses": True}, {"shirt": "orange", "hat": "cap"}, {"shirt": "lila", "hair": "long"}, {"shirt": "türkis", "glasses": True})
+# Sätze über Kurse, Umsatz, Marktwert → Kurve als bewegte Grafik (steigt oder stürzt ab)
+CHART_RE = (r"aktienkurs|börsenkurs|börsenwert|marktwert|börsengang|aktie\w*\b.{0,50}(steig|stieg|explod|schieß|schoss|kletter|verdoppel|verzehnfach|fiel|fällt|stürz|brach|bricht|crash|rakete|durch die decke)|"
+            r"\bkurs\w*\b.{0,30}(steig|stieg|explod|schieß|schoss|fällt|fiel|stürz|brach|bricht|durch die decke)|"
+            r"(umsatz|umsätze|gewinn|gewinne|verkaufszahlen|nutzerzahlen|nachfrage)\b.{0,40}(steig|stieg|explod|wächst|wuchs|verdoppel|verzehnfach|schieß|schoss|bricht|brach|stürz|durch die decke)|"
+            r"(explodier|steig|stieg|schieß|schoss|wächst|wuchs)\w*\b.{0,30}(aktienkurs|\bkurs\b|aktie|umsatz|umsätze|gewinn|verkaufszahlen|nutzerzahlen|nachfrage|marktwert)")
+CHART_DOWN_RE = r"fällt|fiel|stürz|brach\b|bricht|crash|einbr|\bsinkt|\bsank|halbier|verlier|verlor|in den keller|abwärts"
+CHART_KICKERS = ((r"aktie|börsenkurs|\bkurs", "AKTIENKURS"), (r"marktwert|börsenwert", "MARKTWERT"), (r"umsatz|umsätze", "UMSATZ"), (r"gewinn", "GEWINN"),
+                 (r"verkaufszahlen", "VERKÄUFE"), (r"nutzerzahlen", "NUTZER"), (r"nachfrage", "NACHFRAGE"), (r"börsengang", "BÖRSE"))
+# Wörter, die die Engine als Grafik zeigt (für die Gegenprobe „kann die Engine das?“)
+GRAPHIC_WORDS = [(r"aktien|börse|kurve|chart|diagramm|kursverlauf|wachstumskurve", "chart")]
 # Schwerelosigkeit: Sätze, in denen etwas schwebt / abhebt / durch die Luft treibt – und Sätze, in denen alles wieder herunterkracht
 FLOAT_RE = (r"schwerelos|(ohne|keine|null) (schwerkraft|gravitation|erdanziehung)|(schwerkraft|gravitation|erdanziehung\w*)\w* .{0,60}(\bweg\b|null|verschw|\baus\b|\bab\b|fehlt|abgeschaltet|nicht mehr|pause|verlier|verlor)|verlier\w* .{0,40}(schwerkraft|gravitation|erdanziehung)|"
             r"schweb(?!\w* in (lebens|großer )?gefahr)|hebs?t [^,.;:!?]{0,60}\bab\b|heben [^,.;:!?]{0,60}\bab\b|durch die luft|in der luft (treib|häng|schweb|steh)|"
@@ -1259,7 +1357,7 @@ TEXT_PROPS = [(r"drohne", "drone"), (r"überwachungskamera|kameras? (erfass|film
               (r"überschwemm|\bflut|hochwasser", "flood"), (r"erdbeben|boden reißt|erdkruste|fundament|reiß\w* .{0,40}\b(ab|auf)\b|bricht .{0,20}\bauf\b|\brisse\b|spalte", "crack"), (r"tsunami|riesenwelle|wasserwelle|wasserwand|wassermassen|flutwelle|monsterwelle|riesige\w* welle", "wave"), (r"orkan|hurrikan|\bsturm\b", "stormcloud"), (r"explo", "explosion"),
               (r"\bufo|außerirdisch", "ufo"), (r"polarlicht", "aurora"), (r"eisberg|\beis schmilzt", "ice"), (r"\bschiff|\bboot", "ship"),
               (r"fahrrad", "bike"), (r"kühlschrank", "fridge"), (r"einkaufswagen", "cart"), (r"tür\b|türen\b|klopft", "door"), (r"\buhr\b|uhrzeit", "clock"),
-              (r"\bfass|fässer|\böl\b", "barrel"), (r"\bzelt", "tent"), (r"ampel", "trafficlight"), (r"fernseh|nachrichten", "tv"), (r"computer|internet|server", "computer"),
+              (r"\bfass|fässer|\böl\b", "barrel"), (r"\bzelt", "tent"), (r"ampel", "trafficlight"), (r"fernseh|nachrichten", "tv"), (r"computer|internet|server|zock|gaming|videospiel|ballerspiel|\bgamer|\bpc\b|laptop", "computer"),
               (r"pflanze[n]? wachs|keim|\bsaat", "sprout")]
 MAP_HINTS = ((r"ganz deutschland|in deutschland|deutschlandweit|bundesweit|bundesländer|jeder deutsche|alle deutschen", "germany"),
              (r"weltweit|auf der ganzen welt|alle länder|rund um den globus|weltbevölkerung|alle kontinente|die ganze erde|die ganze welt", "worldmap"))
@@ -1267,7 +1365,7 @@ MAP_HINTS = ((r"ganz deutschland|in deutschland|deutschlandweit|bundesweit|bunde
 CREATURE_SIZE = {"spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.3, "bee": 0.45, "wasp": 0.45}
 GIANT_RE = r"riesen|riesig|gigant|monströs|so groß wie|meterhoh|haushoh|mutier"
 # Nur hier laufen Passanten durchs Bild – auf dem Feld, im Wald, im Keller ist niemand unterwegs
-CROWD_PLACES = ("street", "park", "village", "beach", "gasstation", "station", "supermarket", "supermarket_empty", "hospital", "office",
+CROWD_PLACES = ("headquarters", "street", "park", "village", "beach", "gasstation", "station", "supermarket", "supermarket_empty", "hospital", "office",
                 "classroom", "restaurant", "church")
 CROWD_ELEMENTS = ("city", "village", "street", "houses")
 
