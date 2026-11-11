@@ -93,6 +93,8 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
   Schreib das als erstes Feld "see" auf (ein deutscher Satz: wer, wo, was passiert) und fülle Ort, Requisiten und Figuren danach genau so aus.
   Das Bild zeigt immer das, wovon der Satz handelt – nicht bloß das Thema des Videos. Redet der Satz von Kellern, sieht man einen Keller
   (ohne Passanten); redet er von Panik, rennen Menschen; redet er von einer Zahl, kommt eine Grafik.
+- KEIN LEERES BILD: In mindestens jeder zweiten Szene steht eine Figur in "actors", die erlebt, wovon der Satz spricht. Ein leeres Zimmer
+  oder eine leere Wiese ist nie eine Szene. Auch bei Tier- und Naturthemen gibt es eine menschliche Hauptfigur (z. B. "du"), die reagiert.
 - Tiere erscheinen in echter Größe: Eine Spinne, Biene oder Katze ist neben Menschen klein. Soll man sie gut sehen, zeig sie als
   "shot": "insert" groß und allein. Setz dasselbe Tier nicht in jede Szene in die Mitte – zeig, was es auslöst.
 - Passanten ("crowd") gibt es nur dort, wo wirklich Menschen unterwegs sind: Stadt, Dorf, Park, Strand, Bahnhof, Supermarkt, Krankenhaus,
@@ -389,7 +391,7 @@ def fix_description(js, topic):
     def keys(text):
         return {w[:6] for w in re.findall(r"[a-zäöüß]{5,}", str(text or "").lower())} - {"passie", "würde", "plötzl", "deutsc", "wirkli", "komple"}
     lines = [l for l in str(js.get("description") or "").split("\n") if l.strip()]
-    want = keys(js.get("title")) | keys(topic)
+    want = keys(js.get("title")) | keys(topic) | keys(" ".join(str(t) for t in (js.get("tags") or []) + (js.get("hashtags") or [])))
     if lines and want and not (keys(lines[0]) & want):
         ai.log(f"Beschreibung passt nicht zum Thema („{lines[0][:60]}“) – erste Zeile aus dem Titel gebaut")
         lines[0] = str(js.get("title") or topic).strip()
@@ -404,6 +406,9 @@ Unten steht jede Szene mit Sprechertext und dem, was dazu gezeigt werden soll. P
 3. Ist der Ort glaubwürdig? Keine Menschenmenge im Keller, auf dem Feld oder im Wald; kein Meer, wenn es nicht ums Meer geht.
 4. Steht dasselbe Tier oder Ding in zu vielen Szenen einfach in der Mitte? Dann zeig stattdessen, was der Satz beschreibt:
    die Folgen, die Menschen, den Ort, eine Zahl als Grafik.
+6. Kein leeres Bild: In mindestens jeder zweiten Szene ist eine Figur ("actors") zu sehen, die erlebt, was der Satz beschreibt
+   (erschrickt, schaut sich um, zeigt, rennt, hält etwas). Leere Zimmer und leere Wiesen sind verboten.
+7. Erfinde keine Requisite, die mit dem Satz nichts zu tun hat. Gibt es kein passendes Ding, zeig eine Figur mit passender Reaktion.
 5. Kleine Tiere (Spinne, Biene, Vogel, Katze) sind klein. Soll man sie gut sehen, nimm "shot": "insert" (groß und allein im Bild).
 Gib NUR die Szenen zurück, die du verbesserst, als JSON:
 {"fixes": [{"i": 3, "why": "kurz", "place": "...", "backdrop": {...} oder null, "time": "day", "weather": "", "props": [...], "actors": [...],

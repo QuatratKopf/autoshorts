@@ -758,7 +758,7 @@ def direct(scenes, times, topic="", style="", look=""):
                 sc["place"] = place
         prev_bd = sc.get("backdrop") if isinstance(sc.get("backdrop"), dict) else None
         import re as _re
-        txt = str(sc.get("text") or "").lower()
+        txt = _re.sub(r"\b(keine|ohne|kein grund zur|statt) (panik|angst|sorge|gefahr)\b", " ", str(sc.get("text") or "").lower())   # „Keine Panik“ ist keine Panik
         m_hint, c_hint = _mood_hint(txt)
         mood = str(sc.get("mood") or "").lower()
         crowd_in = CROWD_KINDS.get(str(sc.get("crowd") or "").lower(), "")
@@ -936,13 +936,45 @@ def direct(scenes, times, topic="", style="", look=""):
                 counters += 1
         prev_place = place
     giant = bool(_re0.search(GIANT_RE, str(topic or "").lower()))
-    for sc in scenes:
+    main_id = next((a.get("id") for sc in scenes if isinstance(sc, dict) for a in (sc.get("actors") or [])
+                    if isinstance(a, dict) and a.get("id") and not a.get("kind")), None) or "du"
+    pats = _lib_props() + TEXT_PROPS
+    filled = 0
+    for i, sc in enumerate(scenes):
         if not isinstance(sc, dict):
             continue
         if giant:
             sc["giant"] = True
         if sc.get("crowd") and not crowd_ok(sc):          # Feld, Wald, Keller: dort läuft niemand herum
             sc["crowd"] = ""
+        txt = str(sc.get("text") or "").lower()
+        rp = places.resolve(backdrop(sc))
+        if sc.get("shot") == "graphic" or rp in MAPS:
+            continue
+        keys = [extras.PROP_ALIASES.get(str(p.get("type") if isinstance(p, dict) else p).lower(), str(p.get("type") if isinstance(p, dict) else p).lower())
+                for p in (sc.get("props") or [])]
+        if sc.get("shot") == "insert" and keys:           # Großaufnahme nur von Dingen, von denen der Satz (oder das Thema) wirklich handelt
+            named = any(k == keys[0] and (_re0.search(pat, txt) or _re0.search(pat, str(topic or "").lower())) for pat, k in pats)
+            if not named and keys[0] not in txt:
+                sc["shot"], sc["props"], keys = "", [], []
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        big = [k for k in keys if k in extras.SKY or (extras.SIZES.get(k) or (9, 0))[0] >= 0.6]
+        if sc.get("shot") != "insert" and not acts and not sc.get("crowd") and not big and not sc.get("weather"):
+            # leerer Raum, leere Wiese: Die Hauptfigur erlebt, wovon der Satz spricht – nie ein Bild, in dem niemand ist und nichts passiert
+            mood = str(sc.get("mood") or "")
+            action, emotion = {"scary": ("shocked", "scared"), "panic": ("run", "scared"), "tense": ("look_around", "worried"), "sad": ("sad", "sad"),
+                               "happy": ("wave", "happy")}.get(mood, ("look_around" if filled % 2 == 0 else "think", ""))
+            if _re0.search(r"albtr|erschr|schreck|\bangst", txt):
+                action, emotion = "shocked", "scared"
+            elif _re0.search(r"aufpassen|vorsicht|abstand|ausweich", txt):
+                action, emotion = "look_around", "worried"
+            elif _re0.search(r"\bweh\b|schmerz|\bbiss\b|stich|verletz", txt):
+                action, emotion = "sad", "sad"
+            sc["actors"] = [{"id": main_id, "action": action, "emotion": emotion, "pos": "left" if keys else "center",
+                             "emote": {"shocked": "!", "look_around": "?"}.get(action, "")}]
+            if sc.get("shot") == "event":
+                sc["shot"] = ""
+            filled += 1
     return scenes
 
 
@@ -1037,7 +1069,7 @@ TEXT_PROPS = [(r"drohne", "drone"), (r"überwachungskamera|kameras? (erfass|film
 MAP_HINTS = ((r"ganz deutschland|in deutschland|deutschlandweit|bundesweit|bundesländer|jeder deutsche|alle deutschen", "germany"),
              (r"weltweit|auf der ganzen welt|alle länder|rund um den globus|weltbevölkerung|alle kontinente|die ganze erde|die ganze welt", "worldmap"))
 # Tiere neben Menschen: Größe im Verhältnis zur Figur (1.0 = menschengroß). „Riesen…“-Themen heben das auf (giant).
-CREATURE_SIZE = {"spider": 0.3, "cat": 0.42, "dog": 0.55, "bird": 0.3, "bee": 0.45, "wasp": 0.45}
+CREATURE_SIZE = {"spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.3, "bee": 0.45, "wasp": 0.45}
 GIANT_RE = r"riesen|riesig|gigant|monströs|so groß wie|meterhoh|haushoh|mutier"
 # Nur hier laufen Passanten durchs Bild – auf dem Feld, im Wald, im Keller ist niemand unterwegs
 CROWD_PLACES = ("street", "park", "village", "beach", "gasstation", "station", "supermarket", "supermarket_empty", "hospital", "office",
