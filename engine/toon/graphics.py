@@ -264,11 +264,14 @@ def _g_calendar(frame, g, t, dur):
         fk = _fit(d, kick, 36, w - 60, "Bold")
         d.text((cx - d.textlength(kick, font=fk) / 2, cy - h / 2 + 34), kick, font=fk, fill=WHITE)
     val = _count(str(g.get("value", "")), t, 0.3, 0.8)
-    fv = _fit(d, str(g.get("value", "")), 300, w - 80)
-    d.text((cx - d.textlength(val, font=fv) / 2, cy - 150), val, font=fv, fill=(40, 30, 60))
     lab = str(g.get("label") or "").upper()[:14]
-    fl = _fit(d, lab, 96, w - 80)
-    d.text((cx - d.textlength(lab, font=fl) / 2, cy + 160), lab, font=fl, fill=(40, 30, 60))
+    fv = _fit(d, str(g.get("value", "")), 270 if lab else 300, w - 80)
+    bb = d.textbbox((0, 0), str(g.get("value", "")) or "0", font=fv)          # Unterkante der Ziffern messen: die Zahl endet über der Beschriftung
+    d.text((cx - d.textlength(val, font=fv) / 2, cy + (128 if lab else 190) - bb[3]), val, font=fv, fill=(40, 30, 60))
+    fl = _fit(d, lab, 84, w - 80)
+    if lab:
+        bl = d.textbbox((0, 0), lab, font=fl)
+        d.text((cx - d.textlength(lab, font=fl) / 2, cy + 158 - bl[1]), lab, font=fl, fill=(40, 30, 60))
 
 
 def _g_question(frame, g, t, dur):
