@@ -355,7 +355,8 @@ def _prop(frame, kind, x, t, big, table=False, lift=0.0, rot=0.0):
 
 INK = (22, 22, 26)
 FLOAT_TOPS = (300.0, 170.0, 390.0)                 # Schwebehöhen (px über der Fußlinie) für mehrere Dinge im Zimmer …
-FLOAT_TOPS_OUT = (310.0, 250.0, 70.0)              # … und draußen (Autos): nebeneinander oben, eines tiefer in der Mitte
+FLOAT_TOPS_OUT = (310.0, 250.0, 70.0)
+FLOAT_LOW = (110.0, 70.0, 90.0)                    # unter hohen Einblendungen und für Busse: nur knapp über dem Boden             # … und draußen (Autos): nebeneinander oben, eines tiefer in der Mitte
 _wv = {}
 
 
@@ -440,10 +441,10 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
     for pi, (kind, x) in enumerate(sorted(props, key=lambda q: (extras.prop_fit(q[0]) or (0, 0))[1])):
         if extras.PROP_ALIASES.get(kind, kind) not in extras.FRONT:
             if flo and extras.prop_fit(kind):                # schwerelos: Tasse, Stuhl, Auto treiben gekippt in der Luft
-                top = (FLOAT_TOPS if indoor else FLOAT_TOPS_OUT)[pi % 3]
+                top = (FLOAT_TOPS if indoor else (FLOAT_LOW if opt.get("low") else FLOAT_TOPS_OUT))[pi % 3]
                 lift, hit = _float_lift(flo, t, pi * 2.1 + 1, top, aloft)
                 landed = hit if hit is not None and (landed is None or hit > landed) else landed
-                rot = (16 + 5 * pi) * math.sin(t * (0.9 + 0.2 * pi) + pi * 1.9) * (1 if pi % 2 else -1)
+                rot = (16 + 5 * pi) * math.sin(t * (0.9 + 0.2 * pi) + pi * 1.9) * (1 if pi % 2 else -1) * (0.35 if kind in ("bus", "truck") else 1)
                 rot = rot * min(1.0, lift / 120) if hit is None else (9 if pi % 2 else -7) * (0 if kind in ("car", "bus", "truck") else 1)
                 _prop(frame, kind, x, t, big, False, max(lift, 0.01), rot)
                 continue
@@ -1027,13 +1028,14 @@ def direct(scenes, times, topic="", style="", look=""):
                 fl = "float"
             elif zero_g and i < len(scenes) - 1:
                 fl, kept = "float", True                  # die Schwerkraft ist noch weg: wer im Bild ist, schwebt weiter
+        seen_before = float_seen
         if fl == "drop":
             zero_g = False
         elif fl == "float" and not kept:
             float_seen, zero_g = True, zero_topic
         if fl:
             sc["float"] = fl
-            sc["aloft"] = fl == "drop" or bool(i and isinstance(scenes[i - 1], dict) and scenes[i - 1].get("float") == "float")
+            sc["aloft"] = fl == "drop" or kept or (zero_topic and seen_before) or bool(i and isinstance(scenes[i - 1], dict) and scenes[i - 1].get("float") == "float")
             sc["crowd"], sc["no_traffic"] = "", True
             if sc.get("shot") in ("insert", "close"):
                 sc["shot"] = ""
@@ -1057,7 +1059,13 @@ def direct(scenes, times, topic="", style="", look=""):
                 pool = (["car", "car", "car"] if road_f else []) if outdoor_f else ((pool[i % len(pool):] + pool[:i % len(pool)]) if pool else [])
                 if not acts_f and not (outdoor_f and road_f):
                     acts_f = [{"id": main_id, "action": "float", "emotion": "scared" if fl == "drop" else "shocked", "emote": "!", "speaks": False}]
-                room = 1 if tall else (2 if acts_f else 3)
+                room = (2 if outdoor_f and not acts_f else 1) if tall else (2 if acts_f else 3)
+                if outdoor_f:                             # ein schwebender Bus füllt das ganze Bild: neben Autos weglassen, allein nur einer
+                    cars = [p for p in have if str(p.get("type")).lower() == "car"]
+                    have = cars + [p for p in have if p not in cars and str(p.get("type")).lower() not in ("bus", "truck")] if (cars or tall) else have[:1]
+                    named = [k for k in named if k not in ("bus", "truck")] if (cars or tall or "car" in named) else named
+                    if have and str(have[0].get("type")).lower() in ("bus", "truck"):
+                        room = 1
                 for k in named + pool:
                     if len(have) >= room:
                         break
@@ -1072,15 +1080,23 @@ def direct(scenes, times, topic="", style="", look=""):
                 elif acts_f:
                     xs = (540, 120, 960)
                 else:
-                    xs = (270, 810, 540)
+                    xs = (270, 810, 540) if len(have) > 1 else (540,)
                 for n, p in enumerate(have):
                     p["pos"] = xs[n % len(xs)]
                 sc["actors"] = acts_f
-                sc["props"] = have + [p for p in rest if extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in extras.SKY][:1]
+                sc["low"] = bool(tall and outdoor_f) or bool(have and str(have[0].get("type")).lower() in ("bus", "truck"))
+                sc["props"] = have + [p for p in rest if not extras.prop_fit(p.get("type"))][:max(0, 3 - len(have))][:2]   # Welle, Riss, Wolke bleiben im Bild
                 floats += 1
                 continue
         if sc.get("crowd") and not crowd_ok(sc):          # Feld, Wald, Keller: dort läuft niemand herum
             sc["crowd"] = ""
+        if fl and not acts_f and sc.get("shot") != "insert" and not [
+                p for p in (sc.get("props") or []) if isinstance(p, dict) and extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower())
+                not in PLACE_HAS.get(rp_f, ())]:
+            sc["actors"] = [{"id": main_id, "action": "float", "emotion": "scared", "emote": "!", "pos": "center", "speaks": False}]   # die Schwerkraft ist weg: kein leeres Bild
+            if sc.get("shot") == "event":
+                sc["shot"] = ""
+            continue
         txt = str(sc.get("text") or "").lower()
         rp = places.resolve(backdrop(sc))
         if rp in MAPS and sc.get("shot") != "graphic":
@@ -1179,13 +1195,13 @@ HINTS = [
 ]
 GENERIC = ("street", "park", "plain", "livingroom")
 # Schwerelosigkeit: Sätze, in denen etwas schwebt / abhebt / durch die Luft treibt – und Sätze, in denen alles wieder herunterkracht
-FLOAT_RE = (r"schwerelos|ohne schwerkraft|keine schwerkraft|(schwerkraft|gravitation)\w* .{0,60}(\bweg\b|null|verschw|\baus\b|fehlt|abgeschaltet|nicht mehr|pause)|"
+FLOAT_RE = (r"schwerelos|(ohne|keine|null) (schwerkraft|gravitation|erdanziehung)|(schwerkraft|gravitation|erdanziehung\w*)\w* .{0,60}(\bweg\b|null|verschw|\baus\b|\bab\b|fehlt|abgeschaltet|nicht mehr|pause)|"
             r"schweb(?!\w* in (lebens|großer )?gefahr)|hebs?t (\w+ )?ab\b|heben (\w+ )?ab\b|durch die luft|in der luft (treib|häng|schweb|steh)|"
-            r"treib\w* .{0,24}(durch den raum|im raum|zur decke|nach oben)|\bdrifte|verlier\w* (\w+ )?den halt|verlier\w* (\w+ )?die bodenhaftung")
-DROP_RE = (r"kracht|krachen|aufprall|prall\w* .{0,30}(boden|erde|\bauf\b)|knall\w* .{0,30}(boden|erde)|\b(schlägt|schlagen) .{0,30}(boden|\bauf\b)|"
-           r"(fällt|fällst|fallen|stürzt|stürzen) .{0,50}(boden|herunter|herab|hinab|zurück|\bab\b)|plumps")
-GRAVITY_BACK_RE = r"(schwerkraft|gravitation)\w* .{0,60}(wieder|zurück|setzt .{0,12}ein|schaltet sich .{0,12}ein|kehrt)"
-ZERO_G_TOPIC = r"schwerkraft|schwerelos|gravitation"
+            r"treib\w* .{0,24}(durch den raum|im raum|zur decke|nach oben)|flieg\w* (\w+ )?(los|davon|nach oben)\b|steig\w* .{0,30}(in den himmel|in die luft|nach oben)|\bdrifte|verlier\w* (\w+ )?den halt|verlier\w* (\w+ )?die bodenhaftung")
+DROP_RE = (r"kracht|krachen|aufprall|prall\w* .{0,30}(boden|erde|asphalt|straße|\bauf\b)|knall\w* .{0,30}(boden|erde|asphalt|straße|pflaster)|"
+           r"\b(schlägt|schlagen) .{0,30}(boden|asphalt|\bauf\b)|(fällt|fällst|fallen|stürzt|stürzen) .{0,50}(boden|herunter|herab|hinab|zurück|\bab\b)|plumps")
+GRAVITY_BACK_RE = r"(schwerkraft|gravitation|erdanziehung\w*)\w* .{0,60}(wieder|zurück|setzt .{0,12}ein|schaltet sich .{0,12}ein|kehrt)"
+ZERO_G_TOPIC = r"schwerkraft|schwerelos|gravitation|erdanziehung"
 FLOAT_THINGS = ("lib_stuhl", "lib_kaffeetasse", "box", "clock", "lib_schuh", "glass")       # was in einem Zimmer herumtreibt, wenn nichts Bestimmtes genannt ist
 DISASTER_RE = (r"zerstör|vernicht|verwüst|reiß\w* .{0,40}\b(ab|auf|ein|mit|weg)\b|br[ie]ch\w* .{0,30}\b(auf|ein|zusammen)\b|stürz\w* ein|orkan|hurrikan|erdbeben|"
                r"tsunami|flutwelle|explodier|explosion|verglüh|tödlich|albtraum|weltuntergang|trümmer|kracht|krachen|aufprall|schleuder|druckwelle")
@@ -1345,7 +1361,7 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
                 continue
             frame = _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, place == "bedroom", shot, big,
                            {"crowd": scene.get("crowd") if crowd_ok(scene) else "", "mood": str(scene.get("mood") or "").lower(), "spec": places.spec_of(backdrop(scene)), "sky": sky_m, "win": scene.get("_win"), "count": scene.get("_count"), "neon": neon_look,
-                            "float": str(scene.get("float") or ""), "aloft": bool(scene.get("aloft")),
+                            "float": str(scene.get("float") or ""), "aloft": bool(scene.get("aloft")), "low": bool(scene.get("low")),
                             "no_traffic": bool(scene.get("no_traffic") or scene.get("dark_city"))})
             if still is not None and fidx == min(n_frames - 1, FPS):
                 frame.save(still, quality=92)

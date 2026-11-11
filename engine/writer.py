@@ -36,7 +36,8 @@ Regeln für die Sprechertexte:
   wirklich ergeben, in der richtigen Größenordnung und im genannten Zeitraum (in fünf Sekunden kocht kein Ozean und zerbricht keine
   Erdkruste). Lieber wenige, richtig erklärte und überraschende Folgen mit Ursache („weil …“) als erfundenes Weltuntergangs-Spektakel.
   Keine ausgedachten Zahlen: Nenne eine Zahl nur, wenn sie stimmt oder sich einfach nachrechnen lässt – auch in Einblendungen und Zählern.
-  Ist etwas unsicher oder umstritten, sag das („vermutlich“, „Forscher schätzen“).
+  Ist etwas unsicher, sag das offen („vermutlich“, „wahrscheinlich“). Erfinde keine Studien, Forscher-Aussagen, Schadenssummen oder Opferzahlen.
+  Einblendungen und Grafiken zeigen genau die Zahl und Aussage des Satzes, zu dem sie gehören – nichts anderes.
 - Sauberes Deutsch: Jeder Satz wird vor der Abgabe auf Rechtschreibung und Grammatik geprüft (Einzahl/Mehrzahl, Fälle, keine Tippfehler).
 - Ton für eine junge TikTok-Zielgruppe: locker, direkt, selbstbewusst, gern mit aktueller Umgangssprache, aber nicht cringe
   oder übertrieben jugendlich. Nie belehrend, nie wie für Kinder.
@@ -517,6 +518,53 @@ def review_scenes(js, topic):
     ai.log(f"Regie-Prüfung: {n} von {len(scenes)} Szenen verbessert")
     return js
 
+def _foreign(text):
+    """Schriftzeichen, die in einem deutschen Text nichts verloren haben (Ausrutscher der Text-KI wie „Erダンziehungskraft“)."""
+    import unicodedata
+    out = []
+    for ch in str(text or ""):
+        if ord(ch) > 0x24F and ch.isalpha():
+            try:
+                if not unicodedata.name(ch).startswith("LATIN"):
+                    out.append(ch)
+            except ValueError:
+                out.append(ch)
+    return out
+
+
+def foreign_in(js):
+    """Fremde Schriftzeichen im Sprechertext, Titel, in der Beschreibung oder in Einblendungen? Gibt die betroffenen Texte zurück."""
+    bad = []
+
+    def walk(o, key=""):
+        if isinstance(o, str):
+            if key not in ("image",) and _foreign(o):
+                bad.append(o[:80])
+        elif isinstance(o, dict):
+            for k, v in o.items():
+                if k not in ("cast", "places", "thumbnail_image"):
+                    walk(v, str(k))
+        elif isinstance(o, (list, tuple)):
+            for v in o:
+                walk(v, key)
+    walk({k: js.get(k) for k in ("title", "description", "hashtags", "tags", "hud", "scenes")})
+    walk((js.get("thumbnail") or {}).get("text") if isinstance(js.get("thumbnail"), dict) else "")
+    return bad
+
+
+def strip_foreign(js):
+    """Letztes Sicherheitsnetz: fremde Schriftzeichen aus allen Texten entfernen."""
+    def conv(o, key=""):
+        if isinstance(o, str):
+            return "".join(ch for ch in o if ch not in set(_foreign(o))) if key != "image" else o
+        if isinstance(o, dict):
+            return {k: conv(v, str(k)) for k, v in o.items()}
+        if isinstance(o, list):
+            return [conv(v, key) for v in o]
+        return o
+    return conv(js)
+
+
 def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
     secs = int(cfg("target_seconds") or 60)
     from .state import STATE
@@ -567,6 +615,23 @@ def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
                 js = js2
         except Exception as e:  # noqa: BLE001
             ai.log(f"Verlängern nicht möglich ({e}) – nehme den ersten Entwurf")
+    for attempt in range(2):                             # fremde Schriftzeichen mitten im Wort: das Drehbuch ist verdorben → neu schreiben lassen
+        bad = foreign_in(js)
+        if not bad:
+            break
+        ai.log("Drehbuch enthält fremde Schriftzeichen (" + " | ".join(bad[:3]) + ") – lasse es neu schreiben")
+        try:
+            js2, provider = ai.chat_json(SYSTEM, user + "\n\nACHTUNG: Dein letzter Entwurf enthielt fremde Schriftzeichen mitten in deutschen Wörtern. "
+                                         "Schreibe das Drehbuch neu – ausschließlich mit deutschen Buchstaben, jedes Wort korrekt ausgeschrieben.", 0.7)
+            n2 = sum(len(str(x.get("text", "")).split()) for x in js2.get("scenes", []) if isinstance(x, dict))
+            if n2 >= words * 0.75 and len(foreign_in(js2)) < len(bad):
+                js = js2
+        except Exception as e:  # noqa: BLE001
+            ai.log(f"Neu schreiben nicht möglich ({e})")
+            break
+    if any(_foreign(str(s_.get("text") or "")) for s_ in js.get("scenes", []) if isinstance(s_, dict)):
+        raise ai.ProviderError("Drehbuch enthält verstümmelte Wörter (fremde Schriftzeichen im Sprechertext)")
+    js = strip_foreign(js)
     try:
         js = fix_umlauts(js)
         found = sorted({m.group(1) for sc_ in js.get("scenes", []) if isinstance(sc_, dict) for m in _BRAND_RE.finditer(str(sc_.get("text") or ""))}
