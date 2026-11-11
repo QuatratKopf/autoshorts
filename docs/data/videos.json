@@ -1755,7 +1755,7 @@
   "id": 56,
   "category": "fakten",
   "topic": "Wie Nvidia von einer Gaming-Bude zum wertvollsten Tech-Giganten wurde",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1794421904.924362,
   "title": "Wie aus einer Gaming-Bude ein Tech-Gigant wurde",
   "description": "Wie wurde ein kleiner Grafikkarten-Hersteller plötzlich wertvoller als fast alle Konzerne?\nSchau dir den steilen Aufstieg und den genialen Moment an, der alles veränderte.\nWer hätte diesen unglaublichen Erfolg damals vorhergesehen?",
@@ -1790,6 +1790,7 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Untertitel mit Jahreszahl am Rand abgeschnitten, Kurs-Grafik mit nicht gesprochener Zahl überdeckt die Untertitel, zwei gleiche Nebenfiguren"
  }
 ]
