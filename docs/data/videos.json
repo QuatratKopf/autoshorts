@@ -1704,7 +1704,7 @@
   "id": 55,
   "category": "fakten",
   "topic": "Wie Nvidia von einer Gaming-Bude zum wertvollsten Tech-Giganten wurde",
-  "status": "review",
+  "status": "discarded",
   "created": 1794420631.6607423,
   "trend": {
    "title": "Nvidia",
@@ -1748,6 +1748,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-11 21:00",
-  "review_at": 1794420879.0656264
+  "review_at": 1794420879.0656264,
+  "error": "Bei der Prüfung verworfen: Ladenstraße statt Firmensitz, ein Gründer statt drei, Büro statt Rechenzentrum, keine Kurskurve, Schreibtisch im Weltall"
  }
 ]
