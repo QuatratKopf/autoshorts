@@ -1483,5 +1483,50 @@
   "tt_status": "Zernio: published",
   "tt_publish_id": "zernio:6af45743e6815d798572891e",
   "error": null
+ },
+ {
+  "id": 47,
+  "category": "whatif",
+  "topic": "Was wäre, wenn die Schwerkraft der Erde für nur 5 Sekunden exakt auf Null sinken würde?",
+  "status": "review",
+  "created": 1794410033.7877734,
+  "title": "Was passiert bei null Schwerkraft für fünf Sekunden?",
+  "description": "Erlebe die physikalischen Folgen, wenn die Schwerkraft auf der Erde für fünf Sekunden komplett verschwindet. Wir erklären dir Schritt für Schritt, was das für uns bedeutet. Hättest du diesen Moment überlebt?",
+  "hashtags": [
+   "#shorts",
+   "#fyp",
+   "#viral",
+   "#wissenschaft",
+   "#physik",
+   "#experiment",
+   "#lernenmitiktok",
+   "#deutsch"
+  ],
+  "tags": [
+   "schwerkraft",
+   "physik",
+   "erde",
+   "naturgesetz",
+   "experiment",
+   "weltall",
+   "wissenschaft",
+   "waswaerewenn",
+   "zukunft",
+   "katastrophe"
+  ],
+  "thumb_text": "NULL SCHWERKRAFT",
+  "missing": null,
+  "cover_ms": 73850,
+  "duration": 73.8,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-11 18:00",
+  "review_at": 1794410244.9664245
  }
 ]
