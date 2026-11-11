@@ -1588,5 +1588,13 @@
   "status": "error",
   "created": 1794413015.1504803,
   "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-flash-lite-latest: ReadTimeout | pollinations: Expecting ',' delimiter: line 164 column 6 (char 4815)"
+ },
+ {
+  "id": 51,
+  "category": "whatif",
+  "topic": "Was wäre, wenn die Schwerkraft der Erde für nur 5 Sekunden exakt auf Null sinken würde?",
+  "status": "error",
+  "created": 1794413387.375641,
+  "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-flash-lite-latest: HTTP 503 | pollinations: Expecting ',' delimiter: line 164 column 6 (char 4815)"
  }
 ]
