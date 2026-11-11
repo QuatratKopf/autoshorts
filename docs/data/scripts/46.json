@@ -1,0 +1,392 @@
+{
+ "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
+ "scenes": [
+  {
+   "text": "Was wäre, wenn Südrussische Taranteln plötzlich ganz Deutschland erobern?",
+   "see": "Du stehst im Zimmer und schaust erschrocken auf eine riesige Spinne am Boden.",
+   "place": "bedroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "tarantel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary",
+   "status": "TAG 1: ANKUNFT"
+  },
+  {
+   "text": "Mit vier Zentimetern Körperlänge ist sie die größte Spinne Europas.",
+   "see": "Nahaufnahme der gewaltigen Spinne auf dem Holzboden.",
+   "place": "bedroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "tarantel"
+    }
+   ],
+   "shot": "insert",
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "4 CM KÖRPER"
+   }
+  },
+  {
+   "text": "Tag eins: Milde Winter führen dazu, dass sich Millionen Tiere rasant ausbreiten.",
+   "see": "Eine Deutschlandkarte leuchtet rot auf.",
+   "place": "germany",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "map",
+    "value": "germany",
+    "text": "INVASION",
+    "dark": false
+   }
+  },
+  {
+   "text": "Nach einer Woche graben die Spinnen bis zu vierzig Zentimeter tiefe Wohnhöhlen in deinen Garten.",
+   "see": "Du gehst vorsichtig in den dunklen Keller und leuchtest mit einer Taschenlampe.",
+   "place": "cave",
+   "time": "night",
+   "weather": "dark",
+   "props": [
+    {
+     "type": "sprout"
+    },
+    {
+     "type": "lib_tarantel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary",
+   "overlay": {
+    "type": "card",
+    "text": "40 CM TIEF"
+   },
+   "status": "TAG 7: HÖHLENBAU"
+  },
+  {
+   "text": "Schuhe draußen stehen lassen? Keine gute Idee mehr, denn dort lauern sie bevorzugt.",
+   "see": "Ein Schuh wird von einer Figur panisch ausgeschüttelt.",
+   "place": "hallway",
+   "time": "day",
+   "props": [
+    {
+     "type": "schuh"
+    },
+    {
+     "type": "tarantel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "shocked",
+     "emote": "",
+     "kind": "",
+     "hold": "schuh",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Nach einem Monat gibt es geschätzt fünfzig Millionen Taranteln im ganzen Land.",
+   "see": "Eine Statistikgrafik zeigt die sprunghaft steigende Population.",
+   "place": "germany",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "number",
+    "kicker": "POPULATION",
+    "value": "50 MIO.",
+    "label": "TARANTELN IN DEUTSCHLAND",
+    "dark": false
+   },
+   "status": "MONAT 1: 50 MIO."
+  },
+  {
+   "text": "Die Mückenspray-Vorräte in den Supermärkten sind innerhalb von Stunden komplett ausverkauft.",
+   "see": "Menschen rennen auf einer Einkaufsstraße panisch durch die Gegend.",
+   "place": "supermarket_empty",
+   "time": "day",
+   "props": [
+    {
+     "type": "shelf"
+    },
+    {
+     "type": "cans"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "crowd": "worried",
+   "overlay": {
+    "type": "note",
+    "title": "WARNUNG",
+    "text": "Insektenspray ausverkauft"
+   }
+  },
+  {
+   "text": "Ein Biss ist zwar giftig, schmerzt aber glücklicherweise nur wie ein Bienenstich.",
+   "see": "Ein Handy zeigt einen Schmerz-Vergleich per Eilmeldung.",
+   "place": "bedroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_biene",
+     "kind": "bee",
+     "action": "idle",
+     "pos": "right",
+     "speaks": false
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Nach einem Jahr passiert etwas Überraschendes: Die Schädlinge in der Landwirtschaft gehen drastisch zurück.",
+   "see": "Ein üppiger Garten mit vielen blühenden Pflanzen und Insekten.",
+   "place": "fields",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "fields",
+     "farm"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "sprout"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "look_around",
+     "emotion": "",
+     "pos": "left",
+     "emote": "?"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "WENIGER SCHÄDLINGE"
+   },
+   "status": "JAHR 1: BALANCE"
+  },
+  {
+   "text": "Taranteln fressen Unmengen an Käfern, Maulwurfsgrillen und schädlichen Insekten.",
+   "see": "Eine Checkliste zeigt, was Taranteln alles fressen.",
+   "place": "bedroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_tarantel"
+    },
+    {
+     "type": "lib_insekt"
+    }
+   ],
+   "actors": [
+    {
+     "id": "_biene",
+     "kind": "bee",
+     "action": "idle",
+     "pos": "right",
+     "speaks": false
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "badge",
+    "kicker": "NÜTZLINGE",
+    "text": "JÄGER DER NACHT",
+    "dark": false
+   },
+   "overlay": {
+    "type": "checklist",
+    "title": "SPEISEKARTE",
+    "items": [
+     [
+      "Käfer",
+      true
+     ],
+     [
+      "Grillen",
+      true
+     ],
+     [
+      "Mücken",
+      true
+     ]
+    ]
+   }
+  },
+  {
+   "text": "Die Ernteerträge steigen um geschätzte fünfzehn Prozent, weil Pestizide überflüssig werden.",
+   "see": "Eine Nachrichten-Grafik fliegt ins Bild.",
+   "place": "bedroom",
+   "backdrop": {
+    "elements": [
+     "farm",
+     "fields"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_tarantel"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "happy",
+   "graphic": {
+    "type": "news",
+    "kicker": "UMWELT NEWS",
+    "sub": "Spinnen ersetzen Chemie",
+    "text": "ERNTE STEIGT UM 15%",
+    "dark": false
+   }
+  },
+  {
+   "text": "Die Natur kommt wieder ins Gleichgewicht und das Ökosystem erholt sich spürbar.",
+   "see": "Du stehst entspannt auf dem Rasen im Garten und beobachtest die Natur.",
+   "place": "park",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "trees",
+     "flowers"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "wave",
+     "emotion": "happy",
+     "pos": "center",
+     "emote": ""
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Die gruseligsten Tiere sind manchmal also unsere nützlichsten Helfer.",
+   "see": "Du sitzt auf dem Bett im Schlafzimmer und denkst nach.",
+   "place": "bedroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "scared",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary"
+  },
+  {
+   "text": "Würdest du trotzdem sofort auswandern oder bleibst du hier? Schreib es in die Kommentare und folg für mehr!",
+   "see": "Du schaust direkt in die Kamera mit einer A/B-Entscheidungskarte.",
+   "place": "bedroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "choice",
+    "a": "Sofort auswandern!",
+    "b": "Taranteln behalten!"
+   }
+  }
+ ]
+}
