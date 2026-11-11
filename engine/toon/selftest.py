@@ -27,7 +27,8 @@ def frame(scene, cast=None, t=1.3):
     bg = places.background(bd, night, bool(scene.get("dark_city")))
     opt = {"crowd": scene.get("crowd"), "mood": str(scene.get("mood") or "").lower(), "spec": places.spec_of(bd),
            "sky": places.sky_mask(bd, night, bool(scene.get("dark_city"))), "no_traffic": bool(scene.get("no_traffic")),
-           "win": scene.get("_win"), "count": scene.get("_count"), "neon": scene.get("look") == "neon"}
+           "win": scene.get("_win"), "count": scene.get("_count"), "neon": scene.get("look") == "neon",
+           "float": str(scene.get("float") or ""), "aloft": bool(scene.get("aloft"))}
     shot = str(scene.get("shot") or "")
     if shot == "graphic" and graphics.clean(scene.get("graphic")):
         return graphics.frame(graphics.clean(scene["graphic"]), t, 3.0, opt["mood"])
@@ -92,7 +93,7 @@ def main():
             for nt in (False, True):
                 check(f"Menge {c} in {pl}", lambda: frame({"place": pl if isinstance(pl, str) else None, "backdrop": None if isinstance(pl, str) else pl,
                                                            "crowd": c, "actors": [{"id": "du"}], "no_traffic": nt}))
-    for w in ("rain", "storm", "snow", "wind", "ash", "quake", "heat", "dark", "unbekannt"):
+    for w in ("rain", "storm", "snow", "wind", "ash", "quake", "heat", "dark", "steam", "unbekannt"):
         for pl in ("street", "forest", "office"):
             check(f"Wetter {w} in {pl}", lambda: frame({"place": pl, "weather": w, "time": "night" if w == "dark" else "day", "actors": [{"id": "du"}]}))
     for m in ("panic", "tense", "scary", "sad", "happy", "calm", "unbekannt"):
@@ -137,6 +138,19 @@ def main():
                 check(f"Grafik {g} {m} t={t}", lambda: frame({"shot": "graphic", "graphic": g, "mood": m, "place": "park"}, t=t))
     for txt in texts_gfx:
         check(f"Grafik aus Text: {txt}", lambda: graphics.clean(stage.auto_graphic(txt, "TAG 1")))
+    for fl in ("float", "drop", "unbekannt"):                   # Schwerelosigkeit: Figuren, Tiere und Dinge schweben und krachen herunter
+        for pl in ("livingroom", "street", "park", "kitchen"):
+            for t in (0.0, 0.4, 0.9, 1.6, 2.9):
+                check(f"Schweben {fl} in {pl} t={t}", lambda: frame({"place": pl, "float": fl, "aloft": t > 1, "props": ["car", "lib_kaffeetasse", "box"],
+                                                                     "actors": [{"id": "du", "action": "float", "hold": "phone"}, {"id": "rex"}], "overlay": {"type": "card", "text": "X"}}, t=t))
+    for txt in ("Alles schwebt plötzlich durch die Luft.", "Auch du hebst ab.", "Dann kracht alles auf den Boden.", "Die Schwerkraft ist wieder da und alles kracht herunter."):
+        for pl in ("livingroom", "street", "forest", "worldmap"):
+            def _flo(txt=txt, pl=pl):
+                scs = stage.direct([{"text": txt, "place": pl, "actors": [{"id": "du"}], "crowd": "walk"}, {"text": txt, "place": pl},
+                                    {"text": "Schluss.", "place": pl}], [(0, 3), (3, 6), (6, 9)], "Was wäre ohne Schwerkraft?")
+                for sc_ in scs:
+                    frame(sc_, t=1.2)
+            check(f"Regie Schweben: {txt} in {pl}", _flo)
     check("Neon-Look", lambda: graphics.neon(frame({"place": "street", "crowd": "walk"}), 1.0))
     check("Neon-Kulisse", lambda: graphics.tint(places.background("street", True)))
     # Regie mit zufälligen und kaputten Drehbüchern

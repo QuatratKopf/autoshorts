@@ -62,6 +62,7 @@ def sanitize(sc):
     sc["text"] = sc.get("text") if isinstance(sc.get("text"), str) else ""
     for k in ("time", "weather", "crowd", "mood", "shot"):
         sc[k] = word(sc.get(k)).lower()
+    sc["float"] = sc.get("float") if sc.get("float") in ("float", "drop") else ""      # Schwerelosigkeit (setzt die Regie)
     sc["graphic"] = graphics.clean(sc.get("graphic"))
     if sc["shot"] == "graphic" and not sc["graphic"]:
         sc["shot"] = ""
@@ -282,11 +283,44 @@ PLACE_HAS = {"kitchen": ("fridge", "table"), "office": ("computer", "table"), "s
              "village": ("house",), "restaurant": ("table",), "hallway": ()}
 
 
-def _prop(frame, kind, x, t, big, table=False):
+def _float_lift(mode, t, seed=0.0, top=300.0, aloft=False):
+    """Höhe über dem Boden (px) für alles, was schwerelos ist: hebt sanft ab und treibt wippend in der Luft. Bei "drop"
+    hängt es noch kurz oben und kracht dann ungebremst herunter. Gibt (Höhe, Sekunden seit dem Aufschlag oder None) zurück."""
+    bob = math.sin(t * 1.7 + seed * 1.3) * 20
+    if mode == "drop":
+        hold = 0.5 + (seed % 3) * 0.07
+        if t < hold:
+            return top + bob, None
+        h = top + bob - 2400 * (t - hold) ** 2
+        if h > 0:
+            return h, None
+        return 0.0, t - hold - math.sqrt(max(0.0, top) / 2400)
+    k = 1.0 if aloft else _ease(t / 1.8)
+    return (top + bob) * k, None
+
+
+def _prop(frame, kind, x, t, big, table=False, lift=0.0, rot=0.0):
     """Requisite zeichnen. Dinge mit echter Größe (Auto, Regal, Haus …) stehen in ihrer Tiefe im richtigen Verhältnis
-    zu den Menschen; Naturereignisse und Himmelskörper sind Schaubilder und dürfen groß sein (big)."""
+    zu den Menschen; Naturereignisse und Himmelskörper sind Schaubilder und dürfen groß sein (big).
+    lift/rot: das Ding schwebt so viele Pixel über dem Boden und ist dabei gekippt (Schwerelosigkeit)."""
     key = extras.PROP_ALIASES.get(kind, kind)
     fit = extras.prop_fit(key)
+    if fit and (lift or rot):
+        f, gy = fit
+        if key.startswith("lib_") or extras.SIZES.get(key, (9,))[0] <= 0.6:      # Kleines leicht überzeichnen, sonst erkennt man es in der Luft nicht
+            f *= max(1.0, 0.62 / max(0.05, extras.SIZES[key][0]))
+        layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        extras.draw_prop(layer, kind, 540, t)
+        box = layer.getbbox()
+        if not box:
+            return
+        cut = layer.crop(box)
+        cut = cut.resize((max(1, int(cut.width * f)), max(1, int(cut.height * f))), Image.BILINEAR)
+        if rot:
+            cut = cut.rotate(rot, expand=True, resample=Image.BICUBIC)
+        _shadow(frame, int(x), int(gy), int(cut.width * 0.42 * max(0.35, 1 - lift / 900)))
+        frame.paste(cut, (int(x - cut.width / 2), int(gy - lift - cut.height)), cut)
+        return
     if fit:
         f, gy = fit
         if table and _on_table(key):
@@ -320,6 +354,8 @@ def _prop(frame, kind, x, t, big, table=False):
 
 
 INK = (22, 22, 26)
+FLOAT_TOPS = (300.0, 170.0, 390.0)                 # Schwebehöhen (px über der Fußlinie) für mehrere Dinge im Zimmer …
+FLOAT_TOPS_OUT = (310.0, 250.0, 70.0)              # … und draußen (Autos): nebeneinander oben, eines tiefer in der Mitte
 _wv = {}
 
 
@@ -398,9 +434,19 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
     ckw = dict(road=road, traffic=traffic, indoor=indoor, avoid=[a["x1"] for a in actors])
     if opt.get("crowd"):
         _crowd(frame, opt["crowd"], t, night, 0, 1090, **ckw)           # Menschen hinter der Fahrbahn zuerst
-    extras.draw_landscape_motion(frame, spec, place, night, t, traffic)
-    for kind, x in sorted(props, key=lambda q: (extras.prop_fit(q[0]) or (0, 0))[1]):
+    flo, aloft = str(opt.get("float") or ""), bool(opt.get("aloft"))
+    landed = None
+    extras.draw_landscape_motion(frame, spec, place, night, t, traffic, not flo)
+    for pi, (kind, x) in enumerate(sorted(props, key=lambda q: (extras.prop_fit(q[0]) or (0, 0))[1])):
         if extras.PROP_ALIASES.get(kind, kind) not in extras.FRONT:
+            if flo and extras.prop_fit(kind):                # schwerelos: Tasse, Stuhl, Auto treiben gekippt in der Luft
+                top = (FLOAT_TOPS if indoor else FLOAT_TOPS_OUT)[pi % 3]
+                lift, hit = _float_lift(flo, t, pi * 2.1 + 1, top, aloft)
+                landed = hit if hit is not None and (landed is None or hit > landed) else landed
+                rot = (16 + 5 * pi) * math.sin(t * (0.9 + 0.2 * pi) + pi * 1.9) * (1 if pi % 2 else -1)
+                rot = rot * min(1.0, lift / 120) if hit is None else (9 if pi % 2 else -7) * (0 if kind in ("car", "bus", "truck") else 1)
+                _prop(frame, kind, x, t, big, False, max(lift, 0.01), rot)
+                continue
             _prop_many(frame, kind, x, t, big, (opt.get("count") or {}).get(extras.PROP_ALIASES.get(kind, kind), 1), indoor)
     if opt.get("crowd"):
         _crowd(frame, opt["crowd"], t, night, 1090, 9999, **ckw)
@@ -423,6 +469,8 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
         else:
             facing = 1 if (x < 600 or len(actors) == 1) else -1
         gy = places.GROUND + (18 if a["speaks"] else 0)
+        a_lift, a_hit = _float_lift(flo, t, a["seed"], 190.0, aloft) if flo else (0.0, None)
+        landed = a_hit if a_hit is not None and (landed is None or a_hit > landed) else landed
         head_y = gy - 505 * scale
         if a["kind"]:
             hop = abs(math.sin(t * 9)) * 16 if (moving and not arrived) else 0
@@ -433,8 +481,8 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                 im, fx, fy, fly = res
                 if not fly:
                     _shadow(frame, int(x), gy, int(120 * scale * ksz))
-                frame.paste(im, (int(x - fx), int(gy - fy - hop * ksz)), im)
-                head_y = gy - 430 * scale * ksz
+                frame.paste(im, (int(x - fx), int(gy - fy - hop * ksz - a_lift)), im)
+                head_y = gy - 430 * scale * ksz - a_lift
         else:
             action = a["action"]
             tt = t
@@ -442,6 +490,8 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                 action, tt = ("talk" if a["speaks"] else "idle"), t - move_t
             elif action == "idle" and a["speaks"]:
                 action = "talk"
+            if flo:                                           # schwerelos treiben – nach dem Absturz liegt die Figur am Boden
+                action, tt = ("fall", a_hit) if a_hit is not None else ("float", t)
             pose, _ = rig.pose_at(action, tt, dur, a["emotion"], mouth, a["seed"])
             if a.get("hold") and action not in ("run", "sleep", "fall", "jump", "dance", "wave", "shake") and not pose.lying:
                 pose.arm_r, pose.fore_r = (62, 50) if a["hold"] in ("phone", "map", "flashlight", "radio", "bottle") else (8, 4)
@@ -459,7 +509,8 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
             im, fx, fy = rig.draw(a["look"], pose, facing, scale)
             if pose.lying and in_bed:                          # im Schlafzimmer liegt die Figur im Bett
                 x, gy = 300, places.GROUND - 150
-            _shadow(frame, int(x), gy, int(72 * scale * (1 - min(0.5, max(0, pose.lift) / 200))))
+            _shadow(frame, int(x), gy, int(72 * scale * (1 - min(0.5, max(0, pose.lift + a_lift) / 400))))
+            gy0, gy = gy, gy - int(a_lift)
             frame.paste(im, (int(x - fx), int(gy - fy)), im)
             if a.get("hold") and not pose.lying and "hand" in pose.extra:
                 hx, hy = pose.extra["hand"]
@@ -468,6 +519,9 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                 else:
                     extras.draw_held(frame, a["hold"], x - fx + hx, gy - fy + hy, facing, t, scale, night)
             head_y = gy - (505 + max(0, pose.lift)) * scale * a["look"].size
+            gy = gy0
+            if pose.lean > 60:                               # liegt am Boden: Zeichen neben statt weit über der Figur
+                head_y = gy - 300 * scale
             _zzz(od, pose, x, head_y + 75 * scale, t)
         if a.get("say"):
             extras.draw_bubble(over, a["say"], x, head_y, t, scale)
@@ -482,6 +536,10 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
         extras.draw_weather(over, weather, t)
     if opt.get("mood"):
         extras.draw_mood(over, opt["mood"], t)
+    if landed is not None and landed < 0.5:      # Aufschlag: das Bild wackelt kurz
+        k = 1 - landed / 0.5
+        dx, dy = int(math.sin(t * 61) * 22 * k), int(math.cos(t * 53) * 26 * k)
+        frame = frame.transform(frame.size, Image.AFFINE, (1, 0, dx, 0, 1, dy), resample=Image.NEAREST)
     if shot == "close":       # Nahaufnahme: Ausschnitt um die Hauptfigur, folgt ihr weich
         cx = max(330, min(W - 330, focus))
         frame = frame.crop((int(cx - 330), places.GROUND - 780, int(cx + 330), places.GROUND + 393)).resize((W, H), Image.BICUBIC)
@@ -653,6 +711,9 @@ def direct(scenes, times, topic="", style="", look=""):
         sc["props"] = [q for q in sc["props"] if (lambda k: k in extras.PROPS or k in extras.PROP_ALIASES or k in extras.HELD)(q["type"].lower())]
         acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
         place = places.resolve(sc.get("place"))
+        if place in MAPS and not isinstance(sc.get("backdrop"), dict) and _hint(sc.get("text")) is not None \
+                and not any(_re0.search(pat, sc["text"].lower()) for pat, _ in MAP_HINTS):
+            sc["place"] = place = "park"                  # der Satz nennt einen Schauplatz (Ozean, Wald, Stadt …), nicht die ganze Welt: dort spielt die Szene
         if place in MAPS:                                 # Karte höchstens zweimal pro Video
             maps_used += 1
             if maps_used > 2:
@@ -775,6 +836,11 @@ def direct(scenes, times, topic="", style="", look=""):
         rp = places.resolve(backdrop(sc))
         outdoor = rp in places.OUTDOOR
         public = rp in PUBLIC_INDOOR
+        if outdoor and not sc.get("weather") and rp not in MAPS:
+            for pat, wth in WEATHER_HINTS:                # Orkan, Erdbeben, kochendes Meer: das Wetter zeigt, wovon der Satz spricht
+                if _re.search(pat, txt):
+                    sc["weather"] = wth
+                    break
         if not sc.get("crowd") and c_hint and (outdoor or public) and not (c_hint == "walk" and mood in ("scary", "sad")):
             sc["crowd"] = c_hint
         if sc.get("crowd") and not (outdoor or public):
@@ -818,7 +884,7 @@ def direct(scenes, times, topic="", style="", look=""):
             acts_now = []
         if outdoor and not acts_now and not sc.get("props") and not sc.get("crowd") and not sc.get("weather") \
                 and str(sc.get("mood") or "") != "scary":
-            sc["crowd"] = "walk"            # nie ein Bild, in dem gar nichts passiert
+            sc["crowd"] = {"panic": "panic", "tense": "worried", "sad": "sad"}.get(str(sc.get("mood") or ""), "walk")   # nie ein Bild, in dem gar nichts passiert
         has_ov = isinstance(sc.get("overlay"), dict) and sc["overlay"].get("type")
         if acts:
             last_id = acts[0].get("id") or last_id
@@ -940,11 +1006,79 @@ def direct(scenes, times, topic="", style="", look=""):
                     if isinstance(a, dict) and a.get("id") and not a.get("kind")), None) or "du"
     pats = _lib_props() + TEXT_PROPS
     filled = 0
+    zero_topic = bool(_re0.search(ZERO_G_TOPIC, str(topic or "").lower()))
+    zero_g, float_seen, floats = False, False, 0
     for i, sc in enumerate(scenes):
         if not isinstance(sc, dict):
             continue
         if giant:
             sc["giant"] = True
+        if sc.get("crowd") == "walk" and (str(sc.get("mood") or "") in ("tense", "panic") or _re0.search(DISASTER_RE, str(sc.get("text") or "").lower())):
+            sc["crowd"] = "worried"                       # niemand schlendert gemütlich durch eine Katastrophe
+        # --- Schwerelosigkeit: was der Satz schweben lässt, schwebt auch im Bild (Figur, Dinge, Autos) – und kracht wieder herunter
+        txt_f = str(sc.get("text") or "").lower()
+        rp_f = places.resolve(backdrop(sc))
+        acts_f = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        fl, kept = "", False
+        if rp_f not in MAPS and rp_f not in ("space", "underwater") and sc.get("shot") != "graphic":
+            if _re0.search(DROP_RE, txt_f) and (float_seen or _re0.search(GRAVITY_BACK_RE, txt_f)):
+                fl = "drop"
+            elif _re0.search(FLOAT_RE, txt_f) or any(str(a.get("action") or "") in ("float", "schweben") for a in acts_f):
+                fl = "float"
+            elif zero_g and i < len(scenes) - 1:
+                fl, kept = "float", True                  # die Schwerkraft ist noch weg: wer im Bild ist, schwebt weiter
+        if fl == "drop":
+            zero_g = False
+        elif fl == "float" and not kept:
+            float_seen, zero_g = True, zero_topic
+        if fl:
+            sc["float"] = fl
+            sc["aloft"] = fl == "drop" or bool(i and isinstance(scenes[i - 1], dict) and scenes[i - 1].get("float") == "float")
+            sc["crowd"], sc["no_traffic"] = "", True
+            if sc.get("shot") in ("insert", "close"):
+                sc["shot"] = ""
+            if sc.get("weather") in ("rain", "snow"):
+                sc["weather"] = ""
+            for a in acts_f:
+                a["action"] = "float"
+                a.pop("to", None)
+                if str(a.get("pos") or "") in ("offleft", "offright"):
+                    a["pos"] = "center"
+                a["emotion"] = "scared" if fl == "drop" else (a.get("emotion") or "shocked")
+                a["emote"] = a.get("emote") if a.get("emote") in ("!", "?", "sweat") else "!"
+            if not kept:
+                outdoor_f = rp_f in places.OUTDOOR
+                road_f = extras.has_road(places.spec_of(backdrop(sc)))
+                tall = str((sc.get("overlay") or {}).get("type") or "") in TALL_OV if isinstance(sc.get("overlay"), dict) else False
+                have = [p for p in (sc.get("props") or []) if isinstance(p, dict) and extras.prop_fit(p.get("type"))]
+                rest = [p for p in (sc.get("props") or []) if isinstance(p, dict) and p not in have]
+                named = [k for pat, k in pats if extras.prop_fit(k) and _re0.search(pat, txt_f)]
+                pool = [k for k in FLOAT_THINGS if k in extras.PROPS]
+                pool = (["car", "car", "car"] if road_f else []) if outdoor_f else ((pool[i % len(pool):] + pool[:i % len(pool)]) if pool else [])
+                if not acts_f and not (outdoor_f and road_f):
+                    acts_f = [{"id": main_id, "action": "float", "emotion": "scared" if fl == "drop" else "shocked", "emote": "!", "speaks": False}]
+                room = 1 if tall else (2 if acts_f else 3)
+                for k in named + pool:
+                    if len(have) >= room:
+                        break
+                    if (k in ("car", "bus", "truck") and not outdoor_f) or (k != "car" and any(str(p.get("type")).lower() == k for p in have)):
+                        continue
+                    have.append({"type": k})
+                have = have[:room]
+                flip = floats % 2 == 1                    # von Szene zu Szene die Seiten tauschen, damit nicht viermal dasselbe Bild kommt
+                if len(acts_f) == 1 and have:             # Figur an der Seite, die treibenden Dinge daneben – nichts verdeckt sich
+                    acts_f[0]["pos"] = (910 if flip else 170) if tall else (840 if flip else 240)
+                    xs = ((150,) if flip else (930,)) if tall else ((500, 250) if flip else (650, 930))
+                elif acts_f:
+                    xs = (540, 120, 960)
+                else:
+                    xs = (270, 810, 540)
+                for n, p in enumerate(have):
+                    p["pos"] = xs[n % len(xs)]
+                sc["actors"] = acts_f
+                sc["props"] = have + [p for p in rest if extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in extras.SKY][:1]
+                floats += 1
+                continue
         if sc.get("crowd") and not crowd_ok(sc):          # Feld, Wald, Keller: dort läuft niemand herum
             sc["crowd"] = ""
         txt = str(sc.get("text") or "").lower()
@@ -1027,7 +1161,7 @@ HINTS = [
     (r"ernte|landwirt|bauern|\bfeld|felder|acker|getreide", {"elements": ["farm", "fields"]}),
     (r"gletscher|eiszeit|arktis|antarktis|polkappe|\beis\b", {"ground": "snow", "elements": ["glacier", "mountains"]}),
     (r"\bschnee|\bwinter", "snow"),
-    (r"\bmeer|ozean|küste|strand|wellen", "beach"),
+    (r"\bmeer|ozean|küste|strand|wellen|welle\b", "beach"),
     (r"tiefsee|unter wasser|meeresgrund|korallen|\bfisch|unter der oberfläche|im wasser leb|\\btauch(?!t (plötzlich )?auf)|taucher", "underwater"),
     (r"wüste|sahara|sanddüne", "desert"),
     (r"vulkan|gebirge|\bberg|gipfel", "mountain"),
@@ -1044,6 +1178,19 @@ HINTS = [
     (r"küche|kochen|kühlschrank", "kitchen"),
 ]
 GENERIC = ("street", "park", "plain", "livingroom")
+# Schwerelosigkeit: Sätze, in denen etwas schwebt / abhebt / durch die Luft treibt – und Sätze, in denen alles wieder herunterkracht
+FLOAT_RE = (r"schwerelos|ohne schwerkraft|keine schwerkraft|(schwerkraft|gravitation)\w* .{0,60}(\bweg\b|null|verschw|\baus\b|fehlt|abgeschaltet|nicht mehr|pause)|"
+            r"schweb(?!\w* in (lebens|großer )?gefahr)|hebs?t (\w+ )?ab\b|heben (\w+ )?ab\b|durch die luft|in der luft (treib|häng|schweb|steh)|"
+            r"treib\w* .{0,24}(durch den raum|im raum|zur decke|nach oben)|\bdrifte|verlier\w* (\w+ )?den halt|verlier\w* (\w+ )?die bodenhaftung")
+DROP_RE = (r"kracht|krachen|aufprall|prall\w* .{0,30}(boden|erde|\bauf\b)|knall\w* .{0,30}(boden|erde)|\b(schlägt|schlagen) .{0,30}(boden|\bauf\b)|"
+           r"(fällt|fällst|fallen|stürzt|stürzen) .{0,50}(boden|herunter|herab|hinab|zurück|\bab\b)|plumps")
+GRAVITY_BACK_RE = r"(schwerkraft|gravitation)\w* .{0,60}(wieder|zurück|setzt .{0,12}ein|schaltet sich .{0,12}ein|kehrt)"
+ZERO_G_TOPIC = r"schwerkraft|schwerelos|gravitation"
+FLOAT_THINGS = ("lib_stuhl", "lib_kaffeetasse", "box", "clock", "lib_schuh", "glass")       # was in einem Zimmer herumtreibt, wenn nichts Bestimmtes genannt ist
+DISASTER_RE = (r"zerstör|vernicht|verwüst|reiß\w* .{0,40}\b(ab|auf|ein|mit|weg)\b|br[ie]ch\w* .{0,30}\b(auf|ein|zusammen)\b|stürz\w* ein|orkan|hurrikan|erdbeben|"
+               r"tsunami|flutwelle|explodier|explosion|verglüh|tödlich|albtraum|weltuntergang|trümmer|kracht|krachen|aufprall|schleuder|druckwelle")
+WEATHER_HINTS = [(r"erdbeben|\bbebt\b|erschütter", "quake"), (r"orkan|hurrikan|sturmböe|\bsturm\b|stürmt|windböe|luftmassen|druckwelle", "wind"),
+                 (r"\bkocht|zu kochen|brodel|verdampf|verdunste", "steam"), (r"ascheregen|\basche\b", "ash")]
 PANIC_RE = r"panik|flieh|flücht|rennen (weg|davon|los|um)|rennt (weg|davon|los)|schrei|stürmen|plünder|todesangst|rette sich"
 CALM_RE = r"\bruhig|friedlich|entspannt|gemütlich|ganz normal|wie immer|alltag|idyll|\bstille\b"
 MOOD_HINTS = [
@@ -1051,6 +1198,7 @@ MOOD_HINTS = [
     (r"feiern|jubel|freude|party|gewinn|gerettet|endlich wieder|erleichter|glücklich", ("happy", "cheer")),
     (r"verhunger|sterben|\btod\b|trauer|verzweifel|leiden|elend|verlieren alles|einsam|vermiss", ("sad", "sad")),
     (r"unheimlich|grusel|\bangst|dunkelheit|finster|schatten|lauert|monster|geist", ("scary", "")),
+    (DISASTER_RE, ("tense", "worried")),
     (r"chaos|katastrophe|ausnahmezustand|alarm|gefahr|bedroh|warnung|knapp|kritisch|kollabier|zusammenbr|sorge|nervös|unsicher|"
      r"leergekauft|schlange stehen|warteschlange|hunger|engpass|notfall|notstand", ("tense", "worried")),
     (r"menschen|leute|bevölkerung|einwohner|millionen|milliarden|gesellschaft", ("", "walk")),
@@ -1069,7 +1217,7 @@ TEXT_PROPS = [(r"drohne", "drone"), (r"überwachungskamera|kameras? (erfass|film
               (r"satellit|\bgps\b", "satellite"), (r"rakete", "rocket"), (r"\bgeld|\beuro\b|kosten|teuer|preise|milliarden euro|bezahl", "money"),
               (r"solar", "solarpanel"), (r"generator|notstrom|aggregat", "generator"), (r"\bfeuer\b|flammen|\bbrand\b|in brand|lichterloh|waldbr[aä]nd|\bbrände", "fire"), (r"\brauch\b|qualm", "smoke"),
               (r"vulkan|lava", "volcano"), (r"meteor|asteroid|komet", "meteor"), (r"tornado|wirbelsturm", "tornado"), (r"gewitter|\bblitz", "lightning"),
-              (r"überschwemm|\bflut|hochwasser", "flood"), (r"erdbeben|boden reißt", "crack"), (r"tsunami|riesenwelle", "wave"), (r"explo", "explosion"),
+              (r"überschwemm|\bflut|hochwasser", "flood"), (r"erdbeben|boden reißt|erdkruste|fundament|reiß\w* .{0,40}\b(ab|auf)\b|bricht .{0,20}\bauf\b|\brisse\b|spalte", "crack"), (r"tsunami|riesenwelle|wasserwelle|wasserwand|wassermassen|flutwelle|monsterwelle|riesige\w* welle", "wave"), (r"orkan|hurrikan|\bsturm\b", "stormcloud"), (r"explo", "explosion"),
               (r"\bufo|außerirdisch", "ufo"), (r"polarlicht", "aurora"), (r"eisberg|\beis schmilzt", "ice"), (r"\bschiff|\bboot", "ship"),
               (r"fahrrad", "bike"), (r"kühlschrank", "fridge"), (r"einkaufswagen", "cart"), (r"tür\b|türen\b|klopft", "door"), (r"\buhr\b|uhrzeit", "clock"),
               (r"\bfass|fässer|\böl\b", "barrel"), (r"\bzelt", "tent"), (r"ampel", "trafficlight"), (r"fernseh|nachrichten", "tv"), (r"computer|internet|server", "computer"),
@@ -1181,7 +1329,7 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     neon_look = str(scene.get("look") or "") == "neon"
     if neon_look:                             # Neon-Nacht: nur die Kulisse wird violett getönt – Figuren und Dinge bleiben kräftig
         bg = graphics.tint(bg)
-    shot = "close" if shot == "close" and not has_ov and not moving and not props and actors else ""
+    shot = "close" if shot == "close" and not has_ov and not moving and not props and actors and not scene.get("float") else ""
     ff = subprocess.Popen(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24",
                            "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-preset", "veryfast",
                            "-crf", "17", "-pix_fmt", "yuv420p", str(out)], stdin=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -1197,6 +1345,7 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
                 continue
             frame = _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, place == "bedroom", shot, big,
                            {"crowd": scene.get("crowd") if crowd_ok(scene) else "", "mood": str(scene.get("mood") or "").lower(), "spec": places.spec_of(backdrop(scene)), "sky": sky_m, "win": scene.get("_win"), "count": scene.get("_count"), "neon": neon_look,
+                            "float": str(scene.get("float") or ""), "aloft": bool(scene.get("aloft")),
                             "no_traffic": bool(scene.get("no_traffic") or scene.get("dark_city"))})
             if still is not None and fidx == min(n_frames - 1, FPS):
                 frame.save(still, quality=92)

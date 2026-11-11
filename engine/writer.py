@@ -32,6 +32,12 @@ Regeln für die Sprechertexte:
 - Inhaltlich korrekt bleiben: nichts als Tatsache ausgeben, was erfunden ist. Bei aktuellen Themen nur das verwenden,
   was in den mitgelieferten Schlagzeilen steht oder allgemein bekanntes Hintergrundwissen ist; keine erfundenen Details,
   Zitate oder Zahlen. Lieber den zeitlosen Hintergrund erklären als Gerüchte wiedergeben.
+- GEDANKENSPIELE („Was wäre, wenn …“) bleiben echte Wissenschaft: Beschreibe nur Folgen, die sich aus Physik, Biologie oder Technik
+  wirklich ergeben, in der richtigen Größenordnung und im genannten Zeitraum (in fünf Sekunden kocht kein Ozean und zerbricht keine
+  Erdkruste). Lieber wenige, richtig erklärte und überraschende Folgen mit Ursache („weil …“) als erfundenes Weltuntergangs-Spektakel.
+  Keine ausgedachten Zahlen: Nenne eine Zahl nur, wenn sie stimmt oder sich einfach nachrechnen lässt – auch in Einblendungen und Zählern.
+  Ist etwas unsicher oder umstritten, sag das („vermutlich“, „Forscher schätzen“).
+- Sauberes Deutsch: Jeder Satz wird vor der Abgabe auf Rechtschreibung und Grammatik geprüft (Einzahl/Mehrzahl, Fälle, keine Tippfehler).
 - Ton für eine junge TikTok-Zielgruppe: locker, direkt, selbstbewusst, gern mit aktueller Umgangssprache, aber nicht cringe
   oder übertrieben jugendlich. Nie belehrend, nie wie für Kinder.
 - Erfundene Geschichten (Grusel, Lustiges) klar als Geschichte erzählen ('Stell dir vor …', 'Eine Legende erzählt …'):
@@ -131,7 +137,7 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
   ein Feld, beim Meer das Meer. Nimm "street" nur, wenn es wirklich um die Stadt geht – nie als Verlegenheitslösung.
   Wechsle den Hintergrund, sobald der Text den Schauplatz wechselt.
   "time": "day" oder "night"
-  "weather": rain, storm, snow, wind, heat, dark, ash (Ascheregen), quake (Erdbeben: Bild wackelt) oder ""
+  "weather": rain, storm, snow, wind (Sturm, Orkan), heat, dark, ash (Ascheregen), quake (Erdbeben: Bild wackelt), steam (Dampf steigt auf) oder ""
   "props": 0–2 Requisiten. Alle Dinge erscheinen automatisch in echter Größe im Verhältnis zu den Menschen.
            Dinge: car, bus, truck, bike, house, tree, rock, box, cart (Einkaufswagen), shelf (Regal), fridge, table, tv, computer,
                   money, cans (Konserven), canister, candle, generator, tent, fire, streetlamp, trafficlight, rocket, sprout,
@@ -144,7 +150,8 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
            Nimm nur Requisiten, die an diesen Ort gehören (kein Karton mitten auf der Straße als Ersatz für einen Supermarkt –
            dafür gibt es den Ort "supermarket").
   "actors": 1–2 Figuren, z. B. [{"id": "mia", "action": "run", "emotion": "scared", "emote": "!", "pos": "offleft", "to": "center", "speaks": true}]
-     action: idle, talk, walk, run, wave, point, shocked, sad, jump, think, sit, sleep, dance, look_around, fall, shake (schüttelt aus, was sie hält)
+     action: idle, talk, walk, run, wave, point, shocked, sad, jump, think, sit, sleep, dance, look_around, fall, shake (schüttelt aus, was sie hält),
+             float (schwebt schwerelos in der Luft – dann schweben auch die Dinge aus "props" mit; für Sätze über Schweben, Abheben, fehlende Schwerkraft)
      hold (optional): was die Figur in der Hand hält – phone, flashlight, bag, bottle, umbrella, sign, map, radio oder jeder kleine Gegenstand
           aus "props"/"wishes" (z. B. "schuh", "glass", "candle")
      HANDLUNG STATT GEGENSTAND: Beschreibt der Satz, dass jemand etwas mit einem Ding tut (Schuhe ausschütteln, Kerze halten, Glas heben),
@@ -430,6 +437,54 @@ Nenne in einem Fix nur die Felder, die sich ändern. Benutze ausschließlich Wer
 """
 
 
+STORYBOARD = """Du bist der Regisseur eines animierten Kurzvideos. Das Drehbuch unten hat Sprechertexte, aber noch keinen Bildplan.
+Lege für JEDE Szene fest, was der Zuschauer sieht, während der Satz gesprochen wird – genau das, wovon der Satz handelt
+(richtiger Ort, richtige Dinge, eine Figur, die es erlebt oder tut). Keine Verlegenheitsbilder: keine herumstehende, redende Figur,
+wenn der Satz ein Ereignis beschreibt; keine Passanten, die gemütlich gehen, wenn der Satz von einer Katastrophe handelt.
+Wechsle Orte, Einstellungen und Aktionen ab. Gib JSON zurück:
+{"cast": {"du": {"shirt": "blau", "hair": "long", "skin": "hell"}},
+ "thumbnail": {"place": "...", "time": "day", "actor": "du", "action": "shocked", "emotion": "shocked", "props": ["..."], "weather": ""},
+ "scenes": [{"i": 0, "see": "deutscher Satz: wer, wo, was passiert", "place": "...", "backdrop": null, "time": "day", "weather": "", "props": [],
+             "actors": [{"id": "du", "action": "...", "emotion": "...", "emote": "", "pos": "center", "speaks": true}], "crowd": "", "mood": "calm", "shot": "wide"}]}
+Eine Szene je Sprechertext, gleiche Reihenfolge, "i" = Nummer der Szene. Benutze ausschließlich Werte aus dieser Liste:
+"""
+_PLAN_KEYS = ("see", "place", "backdrop", "time", "weather", "props", "actors", "shot", "mood", "crowd", "graphic")
+
+
+def has_storyboard(js):
+    """Hat die Text-KI den Bildplan ausgefüllt? (Mindestens jede zweite Szene nennt Figuren, Requisiten, Einstellung oder Landschaft.)"""
+    scenes = [s for s in js.get("scenes", []) if isinstance(s, dict)]
+    n = sum(1 for s in scenes if any(s.get(k) not in (None, "", [], {}) for k in ("actors", "props", "shot", "backdrop", "see", "graphic")))
+    return bool(scenes) and n * 2 >= len(scenes)
+
+
+def storyboard(js, topic):
+    """Fehlt der Bildplan (nur Sprechertext und Ort geliefert), wird er in einem eigenen Durchgang nachgeholt – sonst stünde in
+    jeder Szene bloß die Hauptfigur herum, egal wovon der Satz handelt."""
+    import json
+    scenes = [s for s in js.get("scenes", []) if isinstance(s, dict)]
+    user = (f"Thema: {topic}\nTitel: {js.get('title')}\n\nSPRECHERTEXTE:\n"
+            + "\n".join(json.dumps({"i": i, "text": s.get("text"), **({"overlay": (s.get("overlay") or {}).get("type")} if isinstance(s.get("overlay"), dict) else {})},
+                                    ensure_ascii=False) for i, s in enumerate(scenes))
+            + "\n\nERLAUBTE WERTE:\n" + TOON + _learned())
+    out, _ = ai.chat_json(STORYBOARD, user, 0.5)
+    n = 0
+    for f in (out.get("scenes") or []) if isinstance(out, dict) else []:
+        if not isinstance(f, dict) or isinstance(f.get("i"), bool) or not isinstance(f.get("i"), int) or not 0 <= f["i"] < len(scenes):
+            continue
+        for k in _PLAN_KEYS:
+            if k in f and f[k] not in (None, ""):
+                scenes[f["i"]][k] = f[k]
+        n += 1
+    if isinstance(out, dict) and isinstance(out.get("cast"), dict) and out["cast"] and not any(isinstance(v, dict) for v in (js.get("cast") or {}).values()):
+        js["cast"] = out["cast"]
+    if isinstance(out, dict) and isinstance(out.get("thumbnail"), dict):
+        th = js.get("thumbnail") if isinstance(js.get("thumbnail"), dict) else {}
+        js["thumbnail"] = {**{k: v for k, v in out["thumbnail"].items() if k not in ("text", "image")}, **th}
+    ai.log(f"Bildplan nachgeholt: {n} von {len(scenes)} Szenen bebildert")
+    return js
+
+
 def review_scenes(js, topic):
     """Zweiter Blick vor dem Dreh: Die Text-KI prüft als Regisseur, ob jedes Bild zum Satz passt, und bessert nach."""
     import json
@@ -538,6 +593,12 @@ def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
         js = fix_description(js, topic)
     except Exception:  # noqa: BLE001
         pass
+    if toon and not has_storyboard(js):
+        ai.log("Drehbuch kam ohne Bildplan – lasse ihn eigens ausarbeiten")
+        try:
+            js = storyboard(js, topic)
+        except Exception as e:  # noqa: BLE001
+            ai.log(f"Bildplan nicht möglich ({e}) – die Regie bebildert nach dem Sprechertext")
     if toon and cfg("review_script") is not False:
         try:
             js = review_scenes(js, topic)

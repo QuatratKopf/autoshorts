@@ -895,6 +895,13 @@ def draw_weather(layer, kind, t):
             y = (b * 600 + t * (500 + c * 400)) % 700
             x = a * W
             d.rectangle((x - 6, GROUND - 700 + y, x + 6, GROUND - 688 + y), fill=(120, 104, 96, 220))
+    elif kind in ("steam", "dampf"):                       # Dampfschwaden steigen auf (kochendes Wasser, Verdampfen)
+        for i, (a, b, c) in enumerate(_DROPS[:26]):
+            ph = (t * (0.22 + c * 0.2) + b) % 1
+            x = a * W + math.sin(t * 1.3 + i) * 40
+            y = GROUND + 120 - ph * 900
+            r = 34 + ph * 70 + c * 20
+            d.ellipse((x - r, y - r, x + r, y + r), fill=(250, 250, 252, int(170 * (1 - ph))))
     elif kind in ("heat", "hitze"):
         d.rectangle((0, 0, W, H), fill=(255, 120, 40, 34 + int(14 * math.sin(t * 2))))
     elif kind in ("dark", "dunkel", "blackout"):
@@ -925,7 +932,7 @@ def has_road(spec, place=""):
     return isinstance(spec, dict) and spec.get("ground") == "road" and "ruins" not in (spec.get("elements") or [])
 
 
-def draw_landscape_motion(layer, spec, place, night, t, traffic=True):
+def draw_landscape_motion(layer, spec, place, night, t, traffic=True, parked=True):
     """Bewegung passend zur Landschaft: fließendes Wasser, Wellen, fahrende Autos, Rauch, wehendes Korn, Staub, Glut."""
     d = ImageDraw.Draw(layer, "RGBA")
     base = FAR
@@ -986,7 +993,7 @@ def draw_landscape_motion(layer, spec, place, night, t, traffic=True):
                 if ph < 1:
                     x = -400 + ph * (W + 800)
                     _car(d, x if direction > 0 else W - x, y, cols[(n + i * 2) % 5], direction, t)
-        else:                                                     # alles steht
+        elif parked:                                              # alles steht (schwebt alles, steht auch am Straßenrand nichts mehr)
             for i, x in enumerate((210, 760)):
                 _car(d, x, PARK_Y, cols[i * 2], 1 if i else -1, 0, False)
     if "ruins" in els or ground == "lava":                        # Glut und Rauch steigen auf

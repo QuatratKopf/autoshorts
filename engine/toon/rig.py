@@ -334,6 +334,14 @@ def pose_at(action, t, dur, emotion="", mouth=0.0, seed=0):
     elif a == "look_around":
         p.look = s(t * 1.8)
         p.head = 6 * s(t * 1.8)
+    elif a in ("float", "schweben"):                       # schwerelos: treibt mit ausgebreiteten Armen, Beine angewinkelt, kippt langsam hin und her
+        p.arm_l, p.fore_l = -118 + 14 * s(t * 1.7 + seed), -26 + 10 * s(t * 2.3)
+        p.arm_r, p.fore_r = 118 + 14 * s(t * 1.9 + seed + 1), 26 + 10 * s(t * 2.1)
+        p.leg_l, p.knee_l = 26 + 10 * s(t * 1.5 + seed), 34 + 12 * s(t * 1.8)
+        p.leg_r, p.knee_r = -22 + 10 * s(t * 1.3 + seed + 2), 24 + 12 * s(t * 1.6 + 1)
+        p.lean = 16 * s(t * 1.1 + seed)
+        p.head = 6 * s(t * 1.4)
+        p.eyes = "wide"
     elif a == "fall":
         p.lean = min(90, t * 260)
         p.eyes = "wide"
@@ -353,5 +361,5 @@ def pose_at(action, t, dur, emotion="", mouth=0.0, seed=0):
         p.smile = {"happy": 0.8, "sad": -0.8, "angry": -0.6, "worried": -0.4}.get(emo, p.smile)
     if p.eyes not in ("closed", "happy") and _blink(t, seed):
         p.eyes = "closed"
-    p.mouth = max(mouth, 0.75) if a in ("shocked", "scared", "fall") or emo in ("shocked", "scared") else mouth
+    p.mouth = max(mouth, 0.75) if a in ("shocked", "scared", "fall", "float", "schweben") or emo in ("shocked", "scared") else mouth
     return p, prog

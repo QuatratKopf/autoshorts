@@ -224,7 +224,11 @@ def counter(label, value, unit, shown=None, sub=""):
     dr = ImageDraw.Draw(im)
     while dr.textlength(_num(v, decimals) + (" " + unit.upper() if unit else ""), font=fn) > w - 60 and fn.size > 70:
         fn = _cfont(fn.size - 10)
-    lab = "  ".join(label.upper())[:60] if len(label) <= 22 else label.upper()
+    lab = "  ".join(label.upper()) if len(label) <= 22 else label.upper()
+    if dr.textlength(lab, font=fl) > w - 40:              # lange Zeile: ohne Sperrung und notfalls kleiner – nie abgeschnitten
+        lab = label.upper()
+        while dr.textlength(lab, font=fl) > w - 40 and fl.size > 20:
+            fl = font(fl.size - 2, "Bold")
     dr.text(((w - dr.textlength(lab, font=fl)) / 2, 6), lab, font=fl, fill=(235, 235, 235), stroke_width=5, stroke_fill=INK)
     tw = dr.textlength(txt, font=fn)
     dr.text(((w - tw) / 2 + 6, 62 + 8), txt, font=fn, fill=(0, 0, 0, 150))
@@ -254,7 +258,9 @@ def frames_for(ov: dict):
     t = str(ov.get("type") or "").lower()
     try:
         if t == "card" and ov.get("text"):
-            return _pop(card(_short(ov["text"], 30))), 420
+            import re
+            txt = re.sub(r"(?i)\bkm\s+h\b", "KM/H", str(ov["text"]))        # „300 KM H“ → „300 KM/H“
+            return _pop(card(_short(txt, 30))), 420
         if t == "note" and ov.get("text"):
             return _pop(note(_short(ov.get("title") or "", 20), _short(ov["text"], 80))), 560
         if t == "phone" and ov.get("items"):
