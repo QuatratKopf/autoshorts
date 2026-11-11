@@ -1797,7 +1797,7 @@
   "id": 57,
   "category": "fakten",
   "topic": "Wie Nvidia von einer Gaming-Bude zum wertvollsten Tech-Giganten wurde",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1794423472.2591004,
   "title": "Wie dieser Zockerschuppen das wertvollste Tech-Unternehmen der Welt wurde",
   "description": "Wie aus einer kleinen Gaming-Bude ein gigantischer Tech-Riese wurde\nDie verrückte Reise vom Nischen-Grafikchip zum unverzichtbaren KI-Monopol\nErfahre alles über den kometenhaften Aufstieg",
@@ -1834,7 +1834,8 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Markenname in der Einblendung, gelerntes Diner-Gebäude im Restaurant, Computer-Tisch auf der Straße; ersetzt durch Video 58"
  },
  {
   "id": 58,
