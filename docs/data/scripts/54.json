@@ -1,0 +1,348 @@
+{
+ "title": "Was passiert, wenn die Schwerkraft für fünf Sekunden verschwindet?",
+ "scenes": [
+  {
+   "text": "Was wäre, wenn die Erde für genau fünf Sekunden ihre Schwerkraft verliert?",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 5,
+    "unit": "SEKUNDEN"
+   }
+  },
+  {
+   "text": "Nach einer Sekunde fangen alle ungefangenen Gegenstände sofort an zu schweben.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "glass",
+     "pos": 650
+    },
+    {
+     "type": "lib_kaffeetasse",
+     "pos": 930
+    }
+   ],
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "float",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 240
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "SEKUNDE 1"
+   }
+  },
+  {
+   "text": "Du hebst langsam vom Boden ab, weil dein Körper keine Verbindung mehr hat.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "box",
+     "pos": 500
+    },
+    {
+     "type": "clock",
+     "pos": 250
+    }
+   ],
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "float",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 840
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Nach zwei Sekunden verliert jeder Mensch den Halt und stolpert ins Leere.",
+   "place": "street",
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "float",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "SEKUNDE 2"
+   }
+  },
+  {
+   "text": "Autos rollen unkontrolliert weiter, weil der Reifenkontakt zum Asphalt nachlässt.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "car"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense"
+  },
+  {
+   "text": "Nach drei Sekunden schießen ungesicherte Dinge an die Decke wie in der Raumstation.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "box"
+    }
+   ],
+   "actors": [
+    {
+     "id": "held",
+     "action": "float",
+     "pos": "center",
+     "emotion": "worried",
+     "emote": "!"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "SEKUNDE 3"
+   }
+  },
+  {
+   "text": "Der Luftdruck in der Atmosphäre beginnt sich leicht auszudehnen und erzeugt Wind.",
+   "place": "park",
+   "backdrop": {
+    "sky": "storm",
+    "ground": "grass",
+    "elements": [
+     "trees"
+    ]
+   },
+   "time": "day",
+   "weather": "wind",
+   "actors": [
+    {
+     "id": "held",
+     "action": "float",
+     "emotion": "scared",
+     "emote": "!",
+     "pos": "center",
+     "speaks": false
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Nach vier Sekunden prallen alle frei schwebenden Objekte hart gegen Wände.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "box",
+     "pos": 650
+    },
+    {
+     "type": "lib_kaffeetasse",
+     "pos": 930
+    }
+   ],
+   "actors": [
+    {
+     "id": "held",
+     "action": "float",
+     "pos": 240,
+     "emotion": "worried",
+     "emote": "!"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "SEKUNDE 4"
+   }
+  },
+  {
+   "text": "Niemand kann sich mehr festhalten, weil die Wucht jeden mitreißt.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "float",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Nach fünf Sekunden schaltet sich die Schwerkraft plötzlich wieder voll ein.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "action": "float",
+     "pos": "center",
+     "emotion": "worried",
+     "emote": "!"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "SEKUNDE 5"
+   }
+  },
+  {
+   "text": "Alle stürzen aus wenigen Zentimetern Höhe hart auf den harten Boden zurück.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_schuh",
+     "pos": 500
+    },
+    {
+     "type": "glass",
+     "pos": 250
+    }
+   ],
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "float",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 840
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Unzählige Gegenstände zerbrechen, und überall herrscht völliges Chaos.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "sad",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "sad"
+  },
+  {
+   "text": "Wäre das für dich ein kurzer Spaß oder der pure Albtraum?",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense",
+   "overlay": {
+    "type": "choice",
+    "a": "Kurzer Spaß",
+    "b": "Purer Albtraum"
+   }
+  },
+  {
+   "text": "Folg für mehr verrückte Experimente.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  }
+ ]
+}

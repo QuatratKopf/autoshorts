@@ -81,5 +81,9 @@
  "möbel": {
   "n": 1,
   "last": "Was passiert, wenn die Schwerkraft für 5 Sekunden fehlt?"
+ },
+ "ball": {
+  "n": 1,
+  "last": "Was passiert, wenn die Schwerkraft für fünf Sekunden verschwindet?"
  }
 }
