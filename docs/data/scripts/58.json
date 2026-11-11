@@ -1,0 +1,410 @@
+{
+ "title": "Wie aus einer Gaming-Bude der wertvollste Tech-Gigant wurde",
+ "scenes": [
+  {
+   "text": "Drei Visionäre saßen im Jahr neunzehnhundertdreiundneunzig in einem billigen Restaurant.",
+   "see": "Drei Gründer sitzen in einem billigen Restaurant an einem Tisch und diskutieren.",
+   "place": "restaurant",
+   "time": "day",
+   "props": [
+    {
+     "type": "table"
+    }
+   ],
+   "actors": [
+    {
+     "id": "founder1",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "founder2",
+     "speaks": false,
+     "action": "sit",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    },
+    {
+     "id": "founder3",
+     "speaks": false,
+     "action": "sit",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Ihr Ziel war verrückt, denn sie wollten Videospiele lebendig machen.",
+   "see": "Nahaufnahme eines Computers im Schlafzimmer mit einem bunten Spiel auf dem Bildschirm.",
+   "place": "bedroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "founder1",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Damals lachten alle über die winzigen Pixel auf dem Bildschirm.",
+   "see": "Pixelige Aufnahmen eines alten Computer-Bildschirms.",
+   "place": "bedroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "founder1",
+     "action": "talk",
+     "emotion": "",
+     "pos": "center",
+     "speaks": true
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "NUR PIXEL"
+   }
+  },
+  {
+   "text": "Aber die Gründer bauten einen speziellen Grafikchip für rasante dreidimensionale Welten.",
+   "see": "Ein Mikrochip liegt auf dem Tisch in einem Labor.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "mikrochip"
+    },
+    {
+     "type": "table"
+    }
+   ],
+   "actors": [
+    {
+     "id": "founder1",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Jedes Jahr steigerten sie die Leistung ihrer Prozessoren massiv.",
+   "see": "Ein Aktien-Chart zeigt die steil steigende Leistung der Prozessoren.",
+   "place": "office",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "happy",
+   "graphic": {
+    "type": "chart",
+    "kicker": "LEISTUNG",
+    "label": "PROZESSOREN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Zuerst feierten nur Gamer diese extrem teuren Grafikkarten im Rechner.",
+   "see": "Ein Gamer freut sich extrem über seine neue teure Grafikkarte im Computer.",
+   "place": "bedroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "founder2",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Plötzlich merkten Forscher, dass diese Chips noch etwas viel besser konnten.",
+   "see": "Ein Forscher blickt überrascht auf einen Mikrochip im Labor.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "mikrochip"
+    },
+    {
+     "type": "mikroskop"
+    }
+   ],
+   "actors": [
+    {
+     "id": "founder3",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Sie rechneten mathematische Probleme tausendmal schneller als normale Prozessoren.",
+   "see": "Ein Vergleichs-Balkendiagramm zwischen normalen CPUs und den Grafikchips.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_mikrochip"
+    }
+   ],
+   "actors": [
+    {
+     "id": "founder3",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "compare",
+    "value": "1x",
+    "sub": "1000x",
+    "left": "NORMAL",
+    "right": "GRAFIKCHIP",
+    "dark": false
+   }
+  },
+  {
+   "text": "Das war der exakte Treibstoff für Künstliche Intelligenz und neuronale Netze.",
+   "see": "Riesige Serverschränke in einem Rechenzentrum leuchten auf.",
+   "place": "serverroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "founder3",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "event",
+   "mood": "calm"
+  },
+  {
+   "text": "Plötzlich wollte absolut jedes große Tech-Unternehmen genau diese Hardware haben.",
+   "see": "Manager großer Tech-Firmen stehen vor einem Büroturm und jubeln.",
+   "place": "headquarters",
+   "time": "day",
+   "actors": [
+    {
+     "id": "founder1",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "crowd": "cheer"
+  },
+  {
+   "text": "Die Nachfrage explodierte innerhalb von wenigen Monaten weltweit rasant.",
+   "see": "Eine Weltkugel zeigt die weltweit explodierende Nachfrage.",
+   "place": "worldmap",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "chart",
+    "kicker": "NACHFRAGE",
+    "dark": false
+   }
+  },
+  {
+   "text": "Fabriken kamen mit der Produktion kaum noch hinterher und liefen Tag und Nacht.",
+   "see": "Eine Fabrik arbeitet bei Nacht unter Hochdruck mit rauchenden Schornsteinen.",
+   "place": "office",
+   "backdrop": {
+    "sky": "night",
+    "ground": "road",
+    "elements": [
+     "factory"
+    ]
+   },
+   "time": "night",
+   "weather": "steam",
+   "shot": "event",
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "24/7 PRODUKTION"
+   }
+  },
+  {
+   "text": "Der Börsenwert schoss daraufhin durch die Decke und brach alle Rekorde.",
+   "see": "Eine Grafik zeigt den Börsenwert, der alle Rekorde bricht.",
+   "place": "office",
+   "time": "day",
+   "mood": "happy",
+   "crowd": "cheer"
+  },
+  {
+   "text": "Aus der kleinen Gaming-Bude wurde kurzzeitig das wertvollste Unternehmen der Erde.",
+   "see": "Ein riesiger Büroturm symbolisiert das wertvollste Unternehmen der Erde.",
+   "place": "headquarters",
+   "time": "day",
+   "actors": [
+    {
+     "id": "founder1",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "crowd": "watch"
+  },
+  {
+   "text": "Über dreißig Jahre harte Arbeit stecken hinter diesem unglaublichen Erfolg.",
+   "see": "Ein Kalenderblatt veranschaulicht 30 Jahre Entwicklung.",
+   "place": "office",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "calm",
+   "crowd": "walk",
+   "graphic": {
+    "type": "calendar",
+    "kicker": "HARTE ARBEIT",
+    "value": "30",
+    "label": "JAHRE",
+    "dark": false
+   }
+  },
+  {
+   "text": "Wer damals Aktien kaufte, ist heute vermutlich reicher als im Traum.",
+   "see": "Ein Investor freut sich riesig über einen großen Koffer voller Geld.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "money"
+    },
+    {
+     "type": "box"
+    }
+   ],
+   "actors": [
+    {
+     "id": "founder2",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Deshalb lohnt es sich wohl doch, verdammt lange Zocker zu bleiben.",
+   "see": "Ein Gamer sitzt gemütlich am Computer und zockt zufrieden.",
+   "place": "bedroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "computer"
+    },
+    {
+     "type": "table"
+    }
+   ],
+   "actors": [
+    {
+     "id": "founder1",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  }
+ ]
+}

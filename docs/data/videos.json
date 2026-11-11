@@ -1835,5 +1835,47 @@
   "thumb": true,
   "look": "cartoon",
   "mp4": true
+ },
+ {
+  "id": 58,
+  "category": "fakten",
+  "topic": "Wie Nvidia von einer Gaming-Bude zum wertvollsten Tech-Giganten wurde",
+  "status": "rendered",
+  "created": 1794424969.5583222,
+  "title": "Wie aus einer Gaming-Bude der wertvollste Tech-Gigant wurde",
+  "description": "Wie wurde eine kleine Gaming-Firma zum wertvollsten Konzern der Welt?\nErlebe den Aufstieg des Tech-Giganten hautnah und kompakt.\nWelche Firma knackt wohl als Nächstes die Vier-Billionen-Marke?",
+  "hashtags": [
+   "#shorts",
+   "#fyp",
+   "#tech",
+   "#gaming",
+   "#ki",
+   "#aktien",
+   "#wissen"
+  ],
+  "tags": [
+   "tech gigant",
+   "ki chips",
+   "gaming",
+   "aktien",
+   "geschichte",
+   "unternehmen",
+   "erfolg",
+   "zukunft"
+  ],
+  "thumb_text": "VOM GAMER ZUM MILLIARDÄR",
+  "missing": [
+   "aktie"
+  ],
+  "cover_ms": 76589,
+  "duration": 76.5,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
