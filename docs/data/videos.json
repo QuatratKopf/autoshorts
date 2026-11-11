@@ -1391,5 +1391,51 @@
   "tt_status": "Zernio: published",
   "tt_publish_id": "zernio:6af4507181ff3504893836a2",
   "error": null
+ },
+ {
+  "id": 45,
+  "category": "whatif",
+  "topic": "Was wäre, wenn Südrussische Taranteln ganz Deutschland erobern?",
+  "status": "rendered",
+  "created": 1794397020.3376179,
+  "title": "Was passiert, wenn Südrussische Taranteln ganz Deutschland erobern?",
+  "description": "Was passiert, wenn Südrussische Taranteln ganz Deutschland erobern?\nWir spielen das Szenario von der ersten Sichtung bis zur Invasion durch.\nWürdest du auswandern oder den Flammenwerfer holen?",
+  "hashtags": [
+   "#shorts",
+   "#fyp",
+   "#viral",
+   "#spinnen",
+   "#tiere",
+   "#fakten",
+   "#deutschland",
+   "#whatif"
+  ],
+  "tags": [
+   "suedrussische tarantel",
+   "spinnen in deutschland",
+   "tierfakten",
+   "klimawandel",
+   "insekten",
+   "natur",
+   "biologie",
+   "wissenschaft",
+   "was waere wenn",
+   "angst vor spinnen",
+   "gifttiere"
+  ],
+  "thumb_text": "SPINNEN IN DEUTSCHLAND",
+  "missing": [
+   "rasen"
+  ],
+  "cover_ms": 63447,
+  "duration": 63.3,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
