@@ -1529,5 +1529,13 @@
   "slot": "2026-11-11 18:00",
   "review_at": 1794410244.9664245,
   "error": "Bei der Prüfung verworfen: Nichts schwebt, Figur steht nur herum, Spaziergänger in der Katastrophe, Autos fahren statt zu fliegen, Inhalt physikalisch falsch"
+ },
+ {
+  "id": 48,
+  "category": "whatif",
+  "topic": "Was wäre, wenn die Schwerkraft der Erde für nur 5 Sekunden exakt auf Null sinken würde?",
+  "status": "error",
+  "created": 1794411424.9681127,
+  "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-flash-lite-latest: HTTP 503 | pollinations: Antwort enthält kein JSON"
  }
 ]
