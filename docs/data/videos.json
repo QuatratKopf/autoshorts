@@ -1442,7 +1442,7 @@
   "id": 46,
   "category": "whatif",
   "topic": "Was wäre, wenn Südrussische Taranteln ganz Deutschland erobern?",
-  "status": "rendered",
+  "status": "published",
   "created": 1794397673.2557032,
   "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
   "description": "Was passiert, wenn Millionen Riesenspinnen Deutschland erobern? 🕷️\nVon milden Wintern bis zur absoluten Massenpanik im eigenen Keller.\nWürdest du im Land bleiben oder sofort auswandern?",
@@ -1476,6 +1476,12 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "zernio_id": "6af45743e6815d798572891e",
+  "yt_status": "Zernio: published",
+  "yt_id": "cY-Hc1kIV7s",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6af45743e6815d798572891e",
+  "error": null
  }
 ]
