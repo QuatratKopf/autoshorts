@@ -297,7 +297,7 @@ def _on_table(key):
 PLACE_HAS = {"kitchen": ("fridge", "table"), "office": ("computer", "table"), "supermarket": ("shelf",), "supermarket_empty": ("shelf",),
              "livingroom": ("tv",), "forest": ("tree",), "park": ("tree",), "camp": ("tent", "fire"), "street": ("streetlamp", "house"),
              "village": ("house",), "restaurant": ("table",), "hallway": (), "serverroom": ("computer", "shelf"),
-             "headquarters": ("house", "streetlamp")}
+             "headquarters": ("house", "streetlamp"), "cinema": ("tv",)}
 
 
 def _float_lift(mode, t, seed=0.0, top=300.0, aloft=False):
@@ -314,6 +314,10 @@ def _float_lift(mode, t, seed=0.0, top=300.0, aloft=False):
         return 0.0, t - hold - math.sqrt(max(0.0, top) / 2400)
     k = 1.0 if aloft else _ease(t / 1.8)
     return (top + bob) * k, None
+
+
+MIN_PROP_PX = 120      # Mindesthöhe (Bildpunkte) eines Gegenstands am Boden; ein Mensch ist etwa 590 hoch
+MIN_TABLE_PX = 95      # … und auf dem Tisch
 
 
 def _prop(frame, kind, x, t, big, table=False, lift=0.0, rot=0.0, grow=1.0):
@@ -342,6 +346,9 @@ def _prop(frame, kind, x, t, big, table=False, lift=0.0, rot=0.0, grow=1.0):
         return
     if fit:
         f, gy = fit
+        nat = extras._nat.get(key)
+        if nat and not (table and _on_table(key)) and nat * f < MIN_PROP_PX:
+            f = MIN_PROP_PX / nat                         # Kleines (Spinne, Chip, Schuh) erkennbar groß – sonst ist das Thema nur ein Punkt
         f *= grow                                         # Auftritt: das Ding springt mit kleinem Überschwingen ins Bild
         if table and _on_table(key):
             _prop(frame, "table", x, t, big)
@@ -349,6 +356,8 @@ def _prop(frame, kind, x, t, big, table=False, lift=0.0, rot=0.0, grow=1.0):
             gy = ty - int(places.px(0.78, ty)) + 6
             if key.startswith("lib_"):                    # sehr Kleines (Tasse, Router) leicht überzeichnen, sonst erkennt man es nicht
                 f *= max(1.0, 0.32 / max(0.05, extras.SIZES[key][0]))
+            if nat and nat * f < MIN_TABLE_PX:            # auch auf dem Tisch nie nur ein Punkt
+                f = MIN_TABLE_PX / nat
         layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
         nx = max(260, min(W - 260, x))                    # in der Mitte zeichnen, damit beim Vergrößern nichts abgeschnitten wird
         extras.draw_prop(layer, kind, nx, t)
@@ -872,6 +881,8 @@ def direct(scenes, times, topic="", style="", look=""):
     fig_prev, inserts, counters = False, 0, 0
     topic_things = [k for pat, k in _lib_props() + TEXT_PROPS if _re0.search(pat, str(topic or "").lower()) and extras.prop_fit(k)][:2]
     topic_any = [k for pat, k in _lib_props() + TEXT_PROPS if _re0.search(pat, str(topic or "").lower())][:2]   # auch Himmel/Natur
+    topic_place = _hint(topic)
+    topic_place = topic_place if isinstance(topic_place, str) and topic_place in TOPIC_PLACES else None
     stale, topic_ins, gfx = 0, 0, 0
     charts = 0
     neon = str(look or "").lower() == "neon"
@@ -923,6 +934,17 @@ def direct(scenes, times, topic="", style="", look=""):
             sc["overlay"] = None                          # Zahl in der Einblendung, die der Sprecher gar nicht nennt: weg damit
         has_bd = isinstance(sc.get("backdrop"), dict) and (sc["backdrop"].get("elements") or sc["backdrop"].get("ground"))
         hint = None if has_bd else _hint(sc.get("text"))
+        said = None if has_bd or place in MAPS else _said_place(sc.get("text"))
+        if not said and hint is None and topic_place and place == "livingroom" and not sc.get("props") and topic_place != place \
+                and not (i and isinstance(scenes[i - 1], dict) and places.resolve(scenes[i - 1].get("place")) == topic_place):
+            said = topic_place                            # ortlose Szene im Allerwelts-Wohnzimmer: dort spielen, wovon das Video handelt (Hollywood → Kino)
+        if said:                                          # der Satz nennt den Ort selbst („in deinen Garten“, „im Keller“): das gilt
+            if isinstance(hint, str) and (hint.startswith(said) or said.startswith(hint)):
+                said = hint                               # genauere Fassung aus den Hinweisen (leerer statt voller Supermarkt)
+            if places.resolve(said) != places.resolve(place):
+                sc["place"], sc["backdrop"] = said, None
+                place = said
+            hint = None
         used[place] = used.get(place, 0) + 1
         if hint is not None and (place in GENERIC or str(sc.get("shot") or "") == "event" or used[place] >= 3):   # ab dem dritten Mal am selben Ort darf der Text den Schauplatz wechseln
             if isinstance(hint, dict):               # passende Landschaft aus dem Baukasten
@@ -1009,8 +1031,9 @@ def direct(scenes, times, topic="", style="", look=""):
         # „Drei Gründer“, „zwei Freunde“: so viele Menschen stehen auch im Bild – nicht einer allein
         mg = _re0.search(GROUP_RE, txt0)
         humans = [a for a in acts if not a.get("kind")]
-        if mg and "actors" in sc and len(humans) <= 1 and len(acts) <= 1 and places.resolve(sc.get("place")) not in MAPS \
-                and places.resolve(backdrop(sc)) not in ("underwater",) and str(sc.get("shot") or "") in ("", "event") \
+        dead_gfx = str(sc.get("shot") or "") == "graphic" and not graphics.clean(sc.get("graphic"))   # Grafik-Szene ohne Grafik
+        if mg and ("actors" in sc or "who" in sc or not acts) and len(humans) <= 1 and len(acts) <= 1 and places.resolve(sc.get("place")) not in MAPS \
+                and places.resolve(backdrop(sc)) not in ("underwater",) and (str(sc.get("shot") or "") in ("", "event") or dead_gfx) \
                 and str((sc.get("overlay") or {}).get("type") or "") not in TALL_OV:
             n = max(2, min(3, int(_number(mg.group(1)) or 3)))
             first = humans[0] if humans else {"id": last_id or "du", "action": "talk", "speaks": True, "emotion": MOOD_EMOTION.get(str(sc.get("mood") or ""), "")}
@@ -1026,6 +1049,8 @@ def direct(scenes, times, topic="", style="", look=""):
                              "pos": [x for x in xs if x != first["pos"]][k], "facing": "", "kind": "", "hold": "", "say": ""})
             sc["actors"] = acts = team
             sc["crowd"] = ""
+            if dead_gfx:
+                sc["shot"] = ""
             if sc.get("shot") == "event":
                 sc["shot"] = ""
         home = {"shelf": "supermarket", "cart": "supermarket", "fridge": "kitchen", "tv": "livingroom", "computer": "office"}
@@ -1243,9 +1268,12 @@ def direct(scenes, times, topic="", style="", look=""):
                     sc["shot"] = "close"
                 else:
                     acts[0].update(action="walk", pos="offright" if stale % 8 < 4 else "offleft", to="center")
-        topic_out = [k for k in topic_any if k not in INDOOR_THINGS and not (k.startswith("lib_") and extras.SIZES.get(k, (9,))[0] <= 0.5)]
-        if topic_out and rp2 in places.OUTDOOR and not sc.get("props") and sc.get("shot") != "close" and i % 2 == 0 and not last:
-            sc["props"] = [{"type": topic_out[0]}]        # das Thema bleibt im Bild (z. B. die Drohne über der Straße)
+        outdoor2 = rp2 in places.OUTDOOR
+        topic_out = [k for k in topic_any if (k not in INDOOR_THINGS if outdoor2 else (k not in extras.SKY and extras.prop_fit(k)))]
+        named = [k for pat, k in _lib_props() + TEXT_PROPS if k in topic_out and _re0.search(pat, str(sc.get("text") or "").lower())]
+        if topic_out and not sc.get("props") and sc.get("shot") not in ("close", "graphic", "insert") and rp2 not in MAPS and not last \
+                and (named or i % 2 == 0):
+            sc["props"] = [{"type": (named or topic_out)[0]}]        # das Thema bleibt im Bild (die Drohne über der Straße, die Spinne im Zimmer)
         fig_prev = bool([a for a in (sc.get("actors") or []) if isinstance(a, dict)]) and sc.get("shot") not in ("insert", "graphic")
         # --- beeindruckende Zahl im Satz → Zähler, wenn das Drehbuch keine Einblendung vorsieht
         if not [a for a in (sc.get("actors") or []) if isinstance(a, dict)] and not sc.get("crowd") and not sc.get("props") and not sc.get("weather") \
@@ -1484,6 +1512,7 @@ HINTS = [
     (r"\bfluss|flüsse|\bbach|strom fließt", {"elements": ["hills", "river"]}),
     (r"\bsee\b|\bseen\b|teich", {"elements": ["hills", "lake"]}),
     (r"ernte|landwirt|bauern|\bfeld|felder|acker|getreide", {"elements": ["farm", "fields"]}),
+    (r"\bgarten|gärten|\bwiese|\brasen\b|käfer|insekten|maulwurf|regenwurm|schnecken", "park"),
     (r"gletscher|eiszeit|arktis|antarktis|polkappe|\beis\b", {"ground": "snow", "elements": ["glacier", "mountains"]}),
     (r"\bschnee|\bwinter", "snow"),
     (r"\bmeer|ozean|küste|strand|wellen|welle\b", "beach"),
@@ -1491,7 +1520,8 @@ HINTS = [
     (r"wüste|sahara|sanddüne", "desert"),
     (r"vulkan|gebirge|\bberg|gipfel", "mountain"),
     (r"weltall|weltraum|galaxie|planet|umlaufbahn|astronaut|\bmond\b|sonnensystem", "space"),
-    (r"höhle", "cave"),
+    (r"(?<![a-zäöüß])höhle|tropfstein", "cave"),
+    (r"\bkino|kinosaal|leinwand|hollywood|blockbuster|\bfilme?\b|\bfilmen\b|filmszene|regisseur|kinofilm", "cinema"),
     (r"fabrik|industrie|abgase|produktion", {"sky": "haze", "elements": ["factory", "city"]}),
     (r"\bdorf|dörfer", "village"),
     (r"ruinen|zerstört|trümmer|apokalypse", "ruins"),
@@ -1545,7 +1575,7 @@ MOOD_HINTS = [
     (r"menschen|leute|bevölkerung|einwohner|millionen|milliarden|gesellschaft", ("", "walk")),
     (r"staunen|beobachten|schauen zu|zuschauer", ("", "watch")),
 ]
-INDOOR = ("bedroom", "livingroom", "kitchen", "office", "classroom", "lab", "hospital", "basement", "cave", "underwater", "space")
+INDOOR = ("bedroom", "livingroom", "kitchen", "office", "classroom", "lab", "hospital", "basement", "cave", "underwater", "space", "cinema")
 MAPS = ("germany", "worldmap")
 OUTDOOR_THINGS = ("drone", "cctv", "fire", "smoke", "volcano", "meteor", "tornado", "lightning", "flood", "crack", "wave", "explosion", "car", "bus", "truck",
                   "plane", "satellite", "rocket", "ufo", "aurora", "ice", "ship", "bike", "tent", "trafficlight", "house", "tree", "solarpanel",
@@ -1597,6 +1627,28 @@ def _mood_hint(text):
         if _re.search(pat, t):
             mood, crowd = mood or m, crowd or c
     return mood, crowd
+
+
+TOPIC_PLACES = ("cinema", "restaurant", "hospital", "supermarket", "station", "serverroom", "lab", "classroom", "office", "beach", "forest",
+                "snow", "desert", "mountain", "underwater", "space", "farm", "village")   # Orte, die ein ganzes Video tragen können
+SAID_SKIP = {"gang", "welt", "world", "karte", "map", "deutschland", "deutschlandkarte", "eis", "home", "house", "outside", "server", "zug",
+             "natur", "laden", "geschäft", "firma", "konzern", "stadt", "city"}
+SAID_RE = (r"\b(?:im|ins|am|zum|zur|beim|vom|aus dem|aus der|auf dem|auf der|in (?:der|die|den|dem|das|einem|einer|einen|deinen|deinem|deiner|"
+           r"deine|eurem|eurer|unserem|unserer|seinem|seiner|ihrem|ihrer))\s+(?:[a-zäöüß]+(?:e|en|er|es|em)\s+)?([a-zäöüß-]+)")
+
+
+def _said_place(text):
+    """Ort, den der Satz ausdrücklich nennt („in deinen Garten“, „im dunklen Keller“, „am Strand“) – oder None."""
+    import re as _re
+    t = str(text or "").lower()
+    for m in _re.finditer(SAID_RE, t):
+        w = m.group(1)
+        for form in (w, w[:-1], w[:-2], w[:-3], w.replace("ä", "a").replace("ö", "o").replace("ü", "u")):
+            if len(form) >= 3 and form in places.ALIASES and form not in SAID_SKIP:
+                return places.ALIASES[form]
+            if form in places.PLACES and form not in SAID_SKIP:
+                return form
+    return None
 
 
 def _hint(text):

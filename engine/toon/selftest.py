@@ -204,6 +204,20 @@ def main():
         assert scs[0]["overlay"] == {"type": "tag", "text": "24. DEZEMBER 1914"}, scs[0].get("overlay")
         assert (scs[1].get("overlay") or {}).get("type") != "tag", "zwei Schilder hintereinander"
     check("Beschriftungs-Schilder", _tags)
+    def _places_said():                                          # der Satz bestimmt den Ort; Teilwörter lösen keinen falschen Ort aus
+        assert stage._said_place("Sie graben Wohnhöhlen in deinen Garten.") == "park"
+        assert stage._hint("Sie graben Wohnhöhlen in deinen Garten.") != "cave"
+        assert stage._said_place("Du gehst in den dunklen Keller.") == "basement"
+        assert stage._said_place("Das ist gerade im Gang.") is None
+        assert stage._said_place("Schließlich wollen wir im Kino kein Lehrbuch sehen.") == "cinema"
+        scs = stage.direct([{"text": "Nach einer Woche graben sie Wohnhöhlen in deinen Garten.", "place": "cave", "actors": [{"id": "du"}]},
+                            {"text": "Jeder Coup fühlt sich an wie ein Sieg.", "place": "livingroom", "actors": [{"id": "du"}]},
+                            {"text": "Im Jahr 1993 saßen drei Gründer zusammen.", "place": "lab", "who": [], "shot": "graphic"},
+                            {"text": "Schluss.", "place": "livingroom"}], [(i * 3, i * 3 + 3) for i in range(4)], "Hollywood Heist Filme")
+        assert stage.places.resolve(stage.backdrop(scs[0])) == "park", scs[0].get("place")
+        assert scs[1].get("place") == "cinema", scs[1].get("place")
+        assert len([a for a in scs[2].get("actors") or [] if not a.get("kind")]) == 3, "drei Gründer"
+    check("Ort aus dem Satz", _places_said)
     check("Neon-Look", lambda: graphics.neon(frame({"place": "street", "crowd": "walk"}), 1.0))
     check("Neon-Kulisse", lambda: graphics.tint(places.background("street", True)))
     # Regie mit zufälligen und kaputten Drehbüchern

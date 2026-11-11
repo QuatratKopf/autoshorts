@@ -1448,22 +1448,82 @@ def station(night):
 
 
 def restaurant(night):
+    """Restaurant/Imbiss: Theke mit Kaffeemaschine, Menütafel mit Bildern, gedeckte Tische mit Essen, Stühle, Hängelampen."""
     p = P(night)
     p.room((236, 214, 190), (150, 104, 76))
-    p.window((90, 420, 480, 800))
-    p.rect((600, 430, 980, 700), (60, 70, 66), r=10)                            # Tafel
-    for i in range(4):
-        p.line((640, 480 + i * 50, 940 - (i % 2) * 90, 480 + i * 50), (240, 240, 230), 6)
+    p.window((70, 430, 420, 790), curtain=(200, 70, 60))
+    p.rect((560, 420, 1010, 720), (52, 44, 40), r=12)                           # Menütafel mit Gerichten und Preisen
+    p.rect((580, 440, 990, 490), (200, 60, 54), r=8, o=0)
+    for fx, col in ((640, (232, 170, 70)), (775, (226, 120, 60)), (910, (120, 170, 90))):
+        p.oval((fx - 42, 520, fx + 42, 590), col, o=4)
+        p.rect((fx - 44, 610, fx + 44, 626), (240, 236, 220), o=0)
+        p.rect((fx - 26, 640, fx + 26, 656), (250, 210, 90), o=0)
     for lx in (270, 810):                                                       # Hängelampen
         p.line((lx, 0, lx, 300), INK, 6)
         p.poly([(lx - 80, 380), (lx + 80, 380), (lx + 40, 300), (lx - 40, 300)], (236, 190, 90), glow=True)
-    p.plant(560, 1250, 1.0, (120, 84, 60))
-    for cx in (270, 810):                                                       # Tische
+    p.rect((600, 860, 1080, 1010), (170, 90, 60), r=8)                          # Theke mit Kaffeemaschine und Kasse
+    p.rect((600, 860, 1080, 884), (220, 150, 100), o=0)
+    p.rect((660, 760, 760, 860), (170, 176, 188), r=10)
+    p.rect((690, 790, 730, 820), (60, 60, 66), r=4, o=3)
+    p.rect((900, 790, 1010, 860), (60, 64, 76), r=8)
+    p.rect((915, 800, 995, 830), (130, 220, 160), r=4, o=0)
+    for cx in (230, 620):                                                       # Tische mit Essen und Stühlen
+        for sx in (-1, 1):
+            p.rect((cx + sx * 190 - 30, 990, cx + sx * 190 + 30, 1100), (120, 70, 50), r=10)         # Stuhllehne
+            p.rect((cx + sx * 190 - 40, 1090, cx + sx * 190 + 40, 1112), (150, 92, 64), r=6)
+            p.rect((cx + sx * 190 - 30, 1112, cx + sx * 190 - 18, 1235), (110, 70, 50), o=4)
         p.rect((cx - 170, 1050, cx + 170, 1080), (250, 250, 246), r=6)
-        p.rect((cx - 14, 1080, cx + 14, 1235), (110, 80, 60), o=5)
-        p.oval((cx - 60, 1030, cx + 60, 1056), (240, 240, 244), o=5)
-        p.rect((cx + 90, 990, cx + 120, 1050), (200, 60, 60), r=6, o=5)
+        p.d.polygon([(cx - 170, 1080), (cx + 170, 1080), (cx + 150, 1130), (cx - 150, 1130)], fill=p.c((228, 70, 64)))   # Tischdecke
+        p.rect((cx - 14, 1130, cx + 14, 1235), (110, 80, 60), o=5)
+        p.oval((cx - 90, 1026, cx - 10, 1056), (244, 244, 248), o=4)            # Teller mit Burger
+        p.oval((cx - 76, 1006, cx - 24, 1034), (214, 150, 70), o=4)
+        p.rect((cx - 76, 1020, cx - 24, 1028), (110, 70, 40), o=0)
+        p.oval((cx + 10, 1030, cx + 90, 1056), (244, 244, 248), o=4)            # Teller mit Pommes
+        for k in range(5):
+            p.rect((cx + 24 + k * 11, 1004 - (k % 2) * 8, cx + 31 + k * 11, 1040), (250, 206, 70), o=0)
+        p.rect((cx + 110, 990, cx + 140, 1050), (200, 60, 60), r=6, o=5)       # Becher
     p.lamp_glow(540, 520, 560)
+    return p.vignette()
+
+
+def cinema(night):
+    """Kinosaal: riesige Leinwand mit Filmszene, rote Vorhänge, Lichtkegel des Projektors, Sitzreihen mit Zuschauern."""
+    p = P(False)
+    p.grad((0, 0, W, H), (40, 20, 44), (14, 8, 20), raw=True)
+    p.veil((40, 80, W - 40, 900), (120, 150, 230), 60, 80)                     # Schein der Leinwand
+    p.grad((100, 200, 980, 720), (250, 150, 80), (120, 60, 140), raw=True)      # Leinwand: Filmszene im Sonnenuntergang
+    p.d.ellipse((640, 300, 820, 480), fill=(255, 214, 120))
+    p.d.polygon([(100, 720), (100, 560), (300, 440), (470, 600), (640, 500), (980, 640), (980, 720)], fill=(60, 30, 70))
+    p.d.polygon([(330, 720), (350, 560), (380, 520), (410, 560), (420, 720)], fill=(30, 16, 40))   # Silhouette des Helden
+    p.d.ellipse((355, 470, 405, 525), fill=(30, 16, 40))
+    p.d.rectangle((90, 190, 990, 730), outline=INK, width=O)
+    for sx in (-1, 1):                                                          # rote Samtvorhänge mit Falten
+        x0 = 0 if sx < 0 else W - 150
+        p.d.rectangle((x0, 120, x0 + 150, 1000), fill=(170, 30, 40))
+        for k in range(4):
+            fx = x0 + 18 + k * 36
+            p.d.rectangle((fx, 120, fx + 10, 1000), fill=(120, 18, 30))
+        ex = x0 + 150 if sx < 0 else x0
+        p.d.line((ex, 120, ex, 1000), fill=INK, width=O)
+    p.d.rectangle((0, 100, W, 150), fill=(150, 24, 34), outline=INK, width=O)  # Vorhangschiene
+    p.veil([(520, H), (560, H), (990, 730), (90, 730)], (220, 230, 255), 26, 30, kind="poly")   # Projektorstrahl
+    p.d.rectangle((0, 1000, W, H), fill=(44, 22, 34))                           # Teppich
+    p.fade((0, 1000, W, 1300), (90, 60, 110), 60, 0)
+    for row, (y, s, sh) in enumerate(((1010, 0.62, 0.0), (1090, 0.78, 0.5))):  # Sitzreihen hinter den Figuren, mit Zuschauern
+        n = int(W / (120 * s)) + 2
+        for i in range(n):
+            cx = (i + sh) * 120 * s
+            if (i * 7 + row * 3) % 4 != 0:
+                p.d.ellipse((cx - 26 * s, y - 110 * s, cx + 26 * s, y - 50 * s), fill=(24, 14, 26))
+            p.d.rounded_rectangle((cx - 50 * s, y - 70 * s, cx + 50 * s, y + 40 * s), int(18 * s), fill=(186, 34, 48), outline=INK, width=4)
+            p.d.rounded_rectangle((cx - 40 * s, y - 60 * s, cx + 30 * s, y - 40 * s), 8, fill=(214, 60, 72))
+    for row, (y, s) in enumerate(((1450, 1.25), (1700, 1.6))):                  # Sitzreihen im Vordergrund (unter den Füßen)
+        n = int(W / (120 * s)) + 2
+        for i in range(n):
+            cx = (i + 0.3 * row) * 120 * s
+            p.d.rounded_rectangle((cx - 52 * s, y - 70 * s, cx + 52 * s, y + 60 * s), int(20 * s), fill=(160, 28, 42), outline=INK, width=5)
+            p.d.rounded_rectangle((cx - 42 * s, y - 60 * s, cx + 30 * s, y - 40 * s), 10, fill=(196, 50, 64))
+    p.fade((0, 1300, W, H), (10, 6, 12), 0, 150)
     return p.vignette()
 
 
@@ -1645,9 +1705,10 @@ PLACES = {"bedroom": bedroom, "livingroom": livingroom, "street": street, "basem
           "beach": beach, "desert": desert, "snow": snow, "forest": forest, "underwater": underwater,
           "mountain": mountain, "hospital": hospital, "cave": cave, "supermarket": supermarket,
           "supermarket_empty": supermarket_empty, "bathroom": bathroom, "station": station, "restaurant": restaurant, "germany": germany, "worldmap": worldmap, "hallway": hallway, "attic": attic,
-          "serverroom": serverroom}
+          "serverroom": serverroom, "cinema": cinema}
 OUTDOOR = tuple(OUTDOOR_SPECS) + ("custom",)
-ALIASES = {"schlafzimmer": "bedroom", "zimmer": "bedroom", "wohnzimmer": "livingroom", "straße": "street", "stadt": "street",
+ALIASES = {"kino": "cinema", "kinosaal": "cinema", "kinos": "cinema", "leinwand": "cinema", "kinoleinwand": "cinema",
+           "lichtspielhaus": "cinema", "filmpalast": "cinema", "schlafzimmer": "bedroom", "zimmer": "bedroom", "wohnzimmer": "livingroom", "straße": "street", "stadt": "street",
            "city": "street", "keller": "basement", "bunker": "basement", "wald": "forest", "natur": "park", "garten": "park",
            "küche": "kitchen", "büro": "office", "strand": "beach", "meer": "beach", "wüste": "desert", "schnee": "snow",
            "arktis": "snow", "eis": "snow", "ozean": "underwater", "unterwasser": "underwater", "ocean": "underwater",
