@@ -137,6 +137,12 @@ def main():
         for m in ("", "panic", "scary", "x"):
             for t in (0.0, 0.2, 1.0, 3.5):
                 check(f"Grafik {g} {m} t={t}", lambda: frame({"shot": "graphic", "graphic": g, "mood": m, "place": "park"}, t=t))
+    from .. import hyper                                        # HyperFrames-Seiten (HTML/GSAP) für jede Grafik bauen – ohne Chrome
+    for g in gs:
+        cg = graphics.clean(g)
+        if cg and cg["type"] in hyper.TYPES:
+            for m in ("", "panic", "x"):
+                check(f"HyperFrames-Seite {g} {m}", lambda: hyper.page(cg, 3.0, m) or True)
     for txt in texts_gfx:
         check(f"Grafik aus Text: {txt}", lambda: graphics.clean(stage.auto_graphic(txt, "TAG 1")))
     for fl in ("float", "drop", "unbekannt"):                   # Schwerelosigkeit: Figuren, Tiere und Dinge schweben und krachen herunter

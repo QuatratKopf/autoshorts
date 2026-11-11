@@ -11,12 +11,71 @@ INK = (22, 22, 26)
 O = 7
 
 
-def _o(d, box, col, w=O):
-    d.ellipse(box, fill=col, outline=INK, width=w)
+def _dk(col, a=0.24):
+    """Dunklere Schattenseite einer Farbe (wie rig._dark); Deckkraft bleibt erhalten."""
+    c = tuple(int(col[i] * (1 - a) + (20, 16, 40)[i] * a) for i in range(3))
+    return c + tuple(col[3:4])
 
 
-def _r(d, box, col, r=10, w=O):
-    d.rounded_rectangle(box, r, fill=col, outline=INK, width=w)
+def _lt(col, a=0.3):
+    c = tuple(int(col[i] * (1 - a) + 255 * a) for i in range(3))
+    return c + tuple(col[3:4])
+
+
+def _box(box):
+    x0, y0, x1, y1 = box
+    return min(x0, x1), min(y0, y1), max(x0, x1), max(y0, y1)
+
+
+def _o(d, box, col, w=O, shade=True):
+    """Ellipse im Stil der Figuren: Umriss, dunklere Schattenseite unten rechts, helle Fläche, kleiner Glanz oben links."""
+    x0, y0, x1, y1 = box = _box(box)
+    bw, bh = x1 - x0, y1 - y0
+    if not shade or min(bw, bh) < 18 or col == INK:
+        d.ellipse(box, fill=col, outline=INK, width=w)
+        return
+    d.ellipse(box, fill=_dk(col), outline=INK, width=w)
+    d.ellipse((x0 + w * 0.6, y0 + w * 0.6, x1 - bw * 0.14, y1 - bh * 0.16), fill=col)
+    if min(bw, bh) >= 50:
+        d.ellipse((x0 + bw * 0.2, y0 + bh * 0.16, x0 + bw * 0.38, y0 + bh * 0.3), fill=_lt(col, 0.45))
+
+
+def _r(d, box, col, r=10, w=O, shade=True):
+    """Abgerundetes Rechteck im Stil der Figuren: Umriss, Schattenkante rechts und unten, helle Fläche, Glanzstreifen."""
+    x0, y0, x1, y1 = box = _box(box)
+    bw, bh = x1 - x0, y1 - y0
+    if not shade or min(bw, bh) < 18 or col == INK:
+        d.rounded_rectangle(box, r, fill=col, outline=INK, width=w)
+        return
+    r = max(0, min(r, bw / 2 - 1, bh / 2 - 1))
+    d.rounded_rectangle(box, r, fill=_dk(col), outline=INK, width=w)
+    sx, sy = min(bw * 0.12, 26), min(bh * 0.12, 26)
+    d.rounded_rectangle((x0 + w * 0.6, y0 + w * 0.6, x1 - max(sx, w), y1 - max(sy, w)), max(0, r - 2), fill=col)
+    if bw >= 50 and bh >= 50:
+        d.rounded_rectangle((x0 + w + bw * 0.06, y0 + w + bh * 0.06, x0 + w + bw * 0.06 + max(6, bw * 0.06), y1 - max(sy, w) - bh * 0.12),
+                            3, fill=_lt(col, 0.4))
+
+
+def _poly(d, pts, col, w=O, shade=0.14):
+    """Fläche aus Punkten mit Umriss und dunklerer Schattenseite (unten rechts)."""
+    d.polygon(pts, fill=_dk(col), outline=INK, width=w)
+    if shade:
+        xs, ys = [p[0] for p in pts], [p[1] for p in pts]
+        mx, my = sum(xs) / len(xs), sum(ys) / len(ys)
+        sz = max(max(xs) - min(xs), max(ys) - min(ys))
+        d.polygon([(mx + (x - mx) * (1 - shade) - sz * shade * 0.3, my + (y - my) * (1 - shade) - sz * shade * 0.3) for x, y in pts], fill=col)
+
+
+def _blobs(d, circles, col, w=O):
+    """Mehrere Kreise als eine Form (Baumkrone, Wolke, Busch): gemeinsamer Umriss, Schatten unten, Licht oben."""
+    for cx, cy, r in circles:
+        d.ellipse((cx - r - w, cy - r - w, cx + r + w, cy + r + w), fill=INK)
+    for cx, cy, r in circles:
+        d.ellipse((cx - r, cy - r, cx + r, cy + r), fill=_dk(col, 0.26))
+    for cx, cy, r in circles:
+        d.ellipse((cx - r * 0.86 - r * 0.1, cy - r * 0.9 - r * 0.12, cx + r * 0.86 - r * 0.1, cy + r * 0.72 - r * 0.12), fill=col)
+    for cx, cy, r in circles[:3]:
+        d.ellipse((cx - r * 0.5, cy - r * 0.62, cx + r * 0.1, cy - r * 0.18), fill=_lt(col, 0.22))
 
 
 def _pop(t, at=0.0, d=0.28):
@@ -34,14 +93,24 @@ def _pop(t, at=0.0, d=0.28):
 
 def p_tree(d, x, t, s=1.0):
     sway = math.sin(t * 1.3 + x) * 6
-    _r(d, (x - 24 * s, GROUND - 300 * s, x + 24 * s, GROUND), (130, 86, 54), 6)
-    for dx, dy, r in ((0, -380, 130), (-90, -310, 96), (90, -310, 96), (0, -270, 104)):
-        _o(d, (x + dx * s + sway - r * s, GROUND + dy * s - r * s, x + dx * s + sway + r * s, GROUND + dy * s + r * s), (70, 160, 84))
+    d.polygon([(x - 34 * s, GROUND), (x - 22 * s, GROUND - 300 * s), (x + 22 * s, GROUND - 300 * s), (x + 34 * s, GROUND)], fill=(104, 68, 44), outline=INK, width=O)
+    d.polygon([(x - 28 * s, GROUND - 4), (x - 18 * s, GROUND - 300 * s), (x + 8 * s, GROUND - 300 * s), (x + 12 * s, GROUND - 4)], fill=(134, 90, 58))
+    d.line((x - 4 * s, GROUND - 230 * s, x - 44 * s, GROUND - 300 * s), fill=INK, width=int(22 * s))       # Ast
+    d.line((x - 4 * s, GROUND - 230 * s, x - 44 * s, GROUND - 300 * s), fill=(120, 80, 52), width=int(10 * s))
+    _blobs(d, [(x + dx * s + sway, GROUND + dy * s, r * s) for dx, dy, r in
+               ((0, -400, 128), (-96, -320, 100), (96, -326, 104), (-30, -282, 96), (60, -268, 92), (-110, -400, 80), (104, -420, 84))], (88, 168, 92))
+    for dx, dy in ((-60, -350), (40, -300), (80, -400), (-20, -440)):                                      # Früchte/Blüten-Tupfer
+        d.ellipse((x + dx * s + sway - 9, GROUND + dy * s - 9, x + dx * s + sway + 9, GROUND + dy * s + 9), fill=(120, 196, 110))
 
 
 def p_rock(d, x, t, s=1.0):
-    d.chord((x - 120 * s, GROUND - 110 * s, x + 120 * s, GROUND + 110 * s), 180, 360, fill=(150, 150, 158), outline=INK, width=O)
-    d.line((x - 120 * s, GROUND, x + 120 * s, GROUND), fill=INK, width=O)
+    pts = [(x - 130 * s, GROUND), (x - 112 * s, GROUND - 62 * s), (x - 60 * s, GROUND - 108 * s), (x + 10 * s, GROUND - 118 * s),
+           (x + 78 * s, GROUND - 90 * s), (x + 124 * s, GROUND - 40 * s), (x + 132 * s, GROUND)]
+    d.polygon(pts, fill=(118, 116, 128), outline=INK, width=O)
+    d.polygon([(x - 120 * s, GROUND - 6), (x - 104 * s, GROUND - 60 * s), (x - 56 * s, GROUND - 100 * s), (x + 8 * s, GROUND - 110 * s),
+               (x + 60 * s, GROUND - 84 * s), (x + 30 * s, GROUND - 40 * s), (x - 20 * s, GROUND - 22 * s)], fill=(156, 154, 166))
+    d.polygon([(x - 70 * s, GROUND - 86 * s), (x - 20 * s, GROUND - 104 * s), (x - 40 * s, GROUND - 76 * s)], fill=(186, 184, 196))     # Glanzkante
+    d.line((x + 20 * s, GROUND - 60 * s, x + 50 * s, GROUND - 30 * s, x + 44 * s, GROUND - 6), fill=(90, 88, 100), width=5)        # Riss
 
 
 def p_box(d, x, t, s=1.0):
@@ -103,6 +172,8 @@ def p_tv(d, x, t, s=1.0):
     flick = 200 + int(40 * math.sin(t * 13))
     d.rounded_rectangle((x - 176, GROUND - 376, x + 176, GROUND - 144), 8, fill=(110, flick, 250))
     d.rectangle((x - 176, GROUND - 200, x + 176, GROUND - 160), fill=(226, 58, 52))
+    d.rectangle((x - 150, GROUND - 192, x - 20, GROUND - 168), fill=(250, 250, 250))                          # Laufschrift-Balken
+    d.polygon([(x - 176, GROUND - 300), (x - 96, GROUND - 376), (x - 40, GROUND - 376), (x - 176, GROUND - 240)], fill=(255, 255, 255, 70))   # Spiegelung
 
 
 def p_computer(d, x, t, s=1.0):
@@ -301,8 +372,11 @@ def p_wave(d, x, t, s=1.0):
 
 def p_ice(d, x, t, s=1.0):
     d.polygon([(x - 200, GROUND), (x - 120, GROUND - 260), (x - 20, GROUND - 180), (x + 60, GROUND - 380), (x + 200, GROUND)],
-              fill=(200, 232, 250), outline=INK, width=O)
-    d.line((x - 20, GROUND - 180, x + 10, GROUND - 40), fill=(150, 200, 235), width=6)
+              fill=(150, 200, 236), outline=INK, width=O)
+    d.polygon([(x - 190, GROUND - 4), (x - 120, GROUND - 250), (x - 20, GROUND - 172), (x + 58, GROUND - 368), (x + 40, GROUND - 4)], fill=(206, 236, 252))
+    d.polygon([(x + 60, GROUND - 368), (x + 30, GROUND - 200), (x + 10, GROUND - 230)], fill=(246, 252, 255))     # Glanzkante
+    d.line((x - 20, GROUND - 180, x + 10, GROUND - 40), fill=(130, 186, 228), width=6)
+    d.rounded_rectangle((x - 240, GROUND - 16, x + 240, GROUND + 10), 12, fill=(110, 170, 220, 160))          # Wasserlinie
 
 
 def p_volcano(d, x, t, s=1.0):
@@ -336,12 +410,10 @@ def p_volcano(d, x, t, s=1.0):
 def p_cloud(d, x, t, s=1.0, dark=False):
     cy = 430 + math.sin(t * 1.2) * 10
     xx = x + math.sin(t * 0.5) * 30
-    col = (92, 98, 116) if dark else (250, 250, 252)
-    blobs = ((0, 0, 120), (130, 30, 96), (-130, 34, 90), (60, -50, 100), (-60, -40, 92), (0, 50, 110))
-    for dx, dy, r in blobs:
-        d.ellipse((xx + dx - r - O, cy + dy - r - O, xx + dx + r + O, cy + dy + r + O), fill=INK)
-    for dx, dy, r in blobs:
-        d.ellipse((xx + dx - r, cy + dy - r, xx + dx + r, cy + dy + r), fill=col)
+    col = (104, 110, 130) if dark else (252, 252, 255)
+    blobs = ((60, -50, 100), (-60, -40, 92), (0, 0, 120), (130, 30, 96), (-130, 34, 90), (0, 50, 110))
+    _blobs(d, [(xx + dx, cy + dy, r) for dx, dy, r in blobs], col)
+    d.rounded_rectangle((xx - 200, cy + 96, xx + 200, cy + 136), 20, fill=_dk(col, 0.18))                       # flache, schattige Unterseite
     if dark:
         for i in range(12):                     # Regen aus der Wolke
             ph = (t * 1.8 + i / 12) % 1
@@ -506,11 +578,26 @@ def p_truck(d, x, t, s=1.0):
 
 
 def p_house(d, x, t, s=1.0):
-    _r(d, (x - 220, GROUND - 330, x + 220, GROUND), (236, 214, 180), 4)
-    d.polygon([(x - 260, GROUND - 330), (x, GROUND - 520), (x + 260, GROUND - 330)], fill=(190, 84, 70), outline=INK, width=O)
-    _r(d, (x - 40, GROUND - 170, x + 50, GROUND), (120, 80, 50), 6, 5)
-    for wx in (-170, 100):
-        _r(d, (x + wx, GROUND - 260, x + wx + 80, GROUND - 170), (150, 200, 240), 4, 5)
+    _r(d, (x + 110, GROUND - 520, x + 160, GROUND - 400), (150, 96, 80), 4)                                   # Schornstein
+    _r(d, (x - 220, GROUND - 340, x + 220, GROUND), (236, 214, 180), 4)
+    d.rectangle((x - 214, GROUND - 330, x + 214, GROUND - 304), fill=(196, 172, 140))                          # Schatten unter dem Dach
+    d.polygon([(x - 262, GROUND - 330), (x, GROUND - 530), (x + 262, GROUND - 330)], fill=(160, 66, 58), outline=INK, width=O)
+    d.polygon([(x - 240, GROUND - 338), (x - 4, GROUND - 516), (x + 60, GROUND - 466), (x - 150, GROUND - 338)], fill=(196, 88, 72))
+    for i in range(1, 4):                                                                                        # Ziegelreihen
+        y = GROUND - 330 - i * 48
+        hw = 262 * (1 - i * 48 / 200)
+        d.line((x - hw + 8, y, x + hw - 8, y), fill=(140, 56, 50), width=4)
+    _r(d, (x - 44, GROUND - 180, x + 50, GROUND), (124, 82, 52), 8, 6)                                         # Tür mit Klinke und Stufe
+    d.ellipse((x + 26, GROUND - 96, x + 40, GROUND - 82), fill=(240, 200, 90), outline=INK, width=3)
+    d.rectangle((x - 64, GROUND - 14, x + 70, GROUND), fill=(170, 160, 150), outline=INK, width=4)
+    for wx in (-180, 100):
+        _r(d, (x + wx, GROUND - 270, x + wx + 84, GROUND - 170), (160, 210, 246), 4, 6, shade=False)
+        d.polygon([(x + wx + 10, GROUND - 262), (x + wx + 34, GROUND - 262), (x + wx + 14, GROUND - 178), (x + wx + 6, GROUND - 178)], fill=(226, 242, 255))
+        d.line((x + wx + 42, GROUND - 270, x + wx + 42, GROUND - 170), fill=INK, width=5)
+        d.line((x + wx, GROUND - 220, x + wx + 84, GROUND - 220), fill=INK, width=5)
+        d.rectangle((x + wx - 8, GROUND - 172, x + wx + 92, GROUND - 160), fill=(250, 246, 236), outline=INK, width=4)      # Fensterbank
+    _o(d, (x - 230, GROUND - 70, x - 120, GROUND + 4), (96, 170, 96))                                           # Busch vor dem Haus
+    _o(d, (x + 120, GROUND - 60, x + 236, GROUND + 4), (96, 170, 96))
 
 
 def p_trafficlight(d, x, t, s=1.0):
@@ -586,8 +673,14 @@ def p_fridge(d, x, t, s=1.0):
 
 
 def p_tent(d, x, t, s=1.0):
-    d.polygon([(x - 300, GROUND), (x, GROUND - 380), (x + 300, GROUND)], fill=(230, 150, 70), outline=INK, width=O)
-    d.polygon([(x - 40, GROUND), (x, GROUND - 240), (x + 40, GROUND)], fill=(50, 44, 50), outline=INK, width=5)
+    d.polygon([(x - 300, GROUND), (x, GROUND - 380), (x + 300, GROUND)], fill=(186, 112, 52), outline=INK, width=O)
+    d.polygon([(x - 286, GROUND - 6), (x, GROUND - 368), (x + 40, GROUND - 6)], fill=(232, 152, 72))           # Licht auf der vorderen Bahn
+    d.polygon([(x - 90, GROUND), (x, GROUND - 250), (x + 70, GROUND)], fill=(52, 40, 44), outline=INK, width=5)  # offener Eingang
+    d.polygon([(x - 90, GROUND), (x, GROUND - 250), (x - 30, GROUND)], fill=(246, 178, 96), outline=INK, width=4)   # zurückgeschlagene Plane
+    d.line((x, GROUND - 380, x, GROUND - 430), fill=INK, width=8)                                               # Stange mit Wimpel
+    d.polygon([(x, GROUND - 430), (x + 50, GROUND - 416 + math.sin(t * 5) * 6), (x, GROUND - 400)], fill=(220, 70, 60), outline=INK, width=3)
+    for sx in (-1, 1):                                                                                          # Spannleinen
+        d.line((x + sx * 150, GROUND - 190, x + sx * 360, GROUND), fill=(80, 70, 60), width=3)
 
 
 def p_streetlamp(d, x, t, s=1.0):
@@ -599,10 +692,10 @@ def p_streetlamp(d, x, t, s=1.0):
 def p_plane(d, x, t, s=1.0):
     y = 420 + math.sin(t * 1.5) * 14
     xx = x + (t * 60) % 200 - 100
-    d.polygon([(xx - 40, y - 10), (xx - 150, y - 120), (xx - 100, y - 120), (xx + 60, y - 10)], fill=(200, 206, 216), outline=INK, width=O)
-    d.rounded_rectangle((xx - 260, y - 40, xx + 250, y + 40), 40, fill=(244, 246, 250), outline=INK, width=O)
+    d.polygon([(xx - 40, y - 10), (xx - 150, y - 120), (xx - 100, y - 120), (xx + 60, y - 10)], fill=(176, 182, 196), outline=INK, width=O)
+    _r(d, (xx - 260, y - 40, xx + 250, y + 40), (244, 246, 250), 40)
     d.polygon([(xx - 250, y - 20), (xx - 320, y - 130), (xx - 260, y - 130), (xx - 180, y - 30)], fill=(214, 70, 60), outline=INK, width=O)
-    d.polygon([(xx - 30, y + 10), (xx - 170, y + 130), (xx - 110, y + 130), (xx + 80, y + 10)], fill=(200, 206, 216), outline=INK, width=O)
+    _poly(d, [(xx - 30, y + 10), (xx - 170, y + 130), (xx - 110, y + 130), (xx + 80, y + 10)], (210, 216, 228))
     for i in range(6):
         d.ellipse((xx - 150 + i * 56, y - 18, xx - 124 + i * 56, y + 8), fill=(120, 190, 240), outline=INK, width=3)
 
@@ -621,9 +714,12 @@ def p_satellite(d, x, t, s=1.0):
 
 def p_ship(d, x, t, s=1.0):
     y = FAR - 30 + math.sin(t * 1.4) * 6
-    d.polygon([(x - 200, y - 60), (x + 220, y - 60), (x + 170, y), (x - 160, y)], fill=(60, 70, 96), outline=INK, width=O)
-    _r(d, (x - 110, y - 130, x + 60, y - 60), (240, 240, 244), 6)
-    _r(d, (x - 20, y - 200, x + 20, y - 130), (214, 70, 60), 4)
+    _r(d, (x - 20, y - 200, x + 20, y - 124), (214, 70, 60), 4)
+    _r(d, (x - 110, y - 132, x + 60, y - 56), (240, 240, 244), 6)
+    for i in range(4):
+        d.ellipse((x - 94 + i * 38, y - 110, x - 74 + i * 38, y - 90), fill=(120, 190, 240), outline=INK, width=3)
+    _poly(d, [(x - 200, y - 60), (x + 220, y - 60), (x + 170, y), (x - 160, y)], (60, 74, 110))
+    d.line((x - 196, y - 44, x + 214, y - 44), fill=(214, 70, 60), width=8)
 
 def p_door(d, x, t, s=1.0):
     _r(d, (x - 130, GROUND - 500, x + 130, GROUND), (96, 66, 46), 6)
@@ -650,7 +746,8 @@ def p_pile(d, x, t, s=1.0, col=(244, 244, 248)):
     g = _pop(t, 0.1, 1.6)                                    # Haufen wächst
     hgt, wd = 420 * (0.25 + 0.75 * g), 520 * (0.4 + 0.6 * g)
     d.polygon([(x - wd, GROUND), (x - wd * 0.2, GROUND - hgt * 0.9), (x, GROUND - hgt), (x + wd * 0.25, GROUND - hgt * 0.88), (x + wd, GROUND)],
-              fill=col, outline=INK, width=O)
+              fill=_dk(col, 0.18), outline=INK, width=O)
+    d.polygon([(x - wd + O * 2, GROUND - O), (x - wd * 0.2, GROUND - hgt * 0.9 + O), (x - 4, GROUND - hgt + O * 1.5), (x + wd * 0.1, GROUND - O)], fill=col)
     rnd = random.Random(4)
     for _ in range(26):
         fx, fy = rnd.uniform(-0.8, 0.8), rnd.uniform(0.05, 0.85)
@@ -879,19 +976,33 @@ def draw_held(layer, kind, x, y, facing, t, k=1.0, night=False):
         d.line((x - f * 10 * k, y, tip[0] - f * 4 * k, tip[1]), fill=(90, 96, 110), width=int(18 * k))
         d.ellipse((tip[0] - 12 * k, tip[1] - 20 * k, tip[0] + 12 * k, tip[1] + 20 * k), fill=(255, 244, 190), outline=INK, width=4)
     elif kind == "bag":
-        d.arc((x - 30 * k, y - 20 * k, x + 30 * k, y + 50 * k), 180, 360, fill=INK, width=int(7 * k))
-        d.rounded_rectangle((x - 54 * k, y + 14 * k, x + 54 * k, y + 130 * k), 8 * k, fill=(214, 170, 110), outline=INK, width=5)
+        d.arc((x - 30 * k, y - 10 * k, x + 30 * k, y + 50 * k), 180, 360, fill=INK, width=max(3, int(9 * k)))
+        _r(d, (x - 54 * k, y + 14 * k, x + 54 * k, y + 130 * k), (214, 170, 110), 8 * k, 5)
+        d.line((x - 54 * k, y + 34 * k, x + 54 * k, y + 34 * k), fill=(176, 134, 84), width=max(2, int(5 * k)))      # Falz
+        for sx in (-1, 1):                                                                                          # Gemüse schaut heraus
+            d.ellipse((x + sx * 24 * k - 16 * k, y - 4 * k, x + sx * 24 * k + 16 * k, y + 26 * k), fill=(110, 186, 96) if sx < 0 else (232, 120, 60), outline=INK, width=4)
     elif kind == "bottle":
-        d.rounded_rectangle((x - 18 * k, y - 70 * k, x + 18 * k, y + 30 * k), 8 * k, fill=(130, 200, 250), outline=INK, width=4)
+        _r(d, (x - 18 * k, y - 70 * k, x + 18 * k, y + 30 * k), (130, 200, 250), 8 * k, 4)
+        d.rectangle((x - 17 * k, y - 34 * k, x + 17 * k, y - 10 * k), fill=(250, 250, 246))
         d.rectangle((x - 9 * k, y - 92 * k, x + 9 * k, y - 70 * k), fill=(60, 110, 200), outline=INK, width=3)
     elif kind == "umbrella":
-        d.line((x, y + 20 * k, x, y - 260 * k), fill=INK, width=int(8 * k))
-        d.chord((x - 190 * k, y - 400 * k, x + 190 * k, y - 120 * k), 180, 360, fill=(214, 70, 60), outline=INK, width=O)
+        d.line((x, y + 20 * k, x, y - 270 * k), fill=INK, width=max(3, int(8 * k)))
+        d.arc((x - 30 * k, y + 4 * k, x, y + 40 * k), 0, 180, fill=INK, width=max(3, int(8 * k)))                   # Griff
+        cy, r = y - 270 * k, 170 * k
+        pts = [(x + math.cos(math.radians(a)) * r, cy + math.sin(math.radians(a)) * r * 0.8) for a in range(180, 361, 10)]
+        sc = [(x + r - i * r / 3, cy + (10 * k if i % 2 else 0)) for i in range(7)]                                  # gewellter Saum
+        d.polygon(pts + sc[1:-1], fill=(170, 50, 46), outline=INK, width=O)
+        d.polygon([(x + (px_ - x) * 0.94 - 8 * k, cy + (py_ - cy) * 0.94) for px_, py_ in pts[:12]] + [(x - 10 * k, cy)], fill=(222, 74, 62))
+        for a in (-0.5, 0.0, 0.5):                                                                                  # Speichen
+            d.line((x, cy - r * 0.8, x + a * r * 1.2, cy + 4 * k), fill=(140, 40, 40), width=max(2, int(4 * k)))
+        d.ellipse((x - 8 * k, cy - r * 0.8 - 14 * k, x + 8 * k, cy - r * 0.8 + 2 * k), fill=INK)
     elif kind == "sign":
-        d.line((x, y + 20 * k, x, y - 150 * k), fill=(130, 86, 54), width=int(14 * k))
-        d.rounded_rectangle((x - 110 * k, y - 300 * k, x + 110 * k, y - 150 * k), 8 * k, fill=(250, 250, 246), outline=INK, width=O)
-        d.line((x - 70 * k, y - 250 * k, x + 70 * k, y - 250 * k), fill=INK, width=int(8 * k))
-        d.line((x - 70 * k, y - 205 * k, x + 30 * k, y - 205 * k), fill=INK, width=int(8 * k))
+        bx, top = x + f * 50 * k, y - 470 * k                                                                    # über dem Kopf, nicht davor
+        d.line((x, y + 20 * k, bx, top + 150 * k), fill=INK, width=max(3, int(20 * k)))
+        d.line((x, y + 20 * k, bx, top + 150 * k), fill=(150, 100, 64), width=max(2, int(11 * k)))
+        _r(d, (bx - 110 * k, top, bx + 110 * k, top + 150 * k), (250, 248, 238), 8 * k)
+        d.line((bx - 70 * k, top + 50 * k, bx + 70 * k, top + 50 * k), fill=INK, width=max(2, int(8 * k)))
+        d.line((bx - 70 * k, top + 95 * k, bx + 30 * k, top + 95 * k), fill=INK, width=max(2, int(8 * k)))
     elif kind == "map":
         d.polygon([(x - 70 * k, y - 60 * k), (x + 70 * k, y - 76 * k), (x + 70 * k, y + 20 * k), (x - 70 * k, y + 36 * k)], fill=(244, 232, 196), outline=INK, width=5)
         d.line((x - 40 * k, y - 20 * k, x, y - 40 * k, x + 40 * k, y - 10 * k), fill=(214, 70, 60), width=int(6 * k), joint="curve")
@@ -1295,169 +1406,474 @@ def draw_ambient(layer, place, night, t):
 
 # ------------------------------------------------------------------ Tiere und Wesen
 
+def _leaf(x0, y0, x1, y1, w):
+    """Schmale Blatt-/Flügelform von (x0, y0) nach (x1, y1) mit größter Breite w."""
+    dx, dy = x1 - x0, y1 - y0
+    ln = math.hypot(dx, dy) or 1.0
+    nx, ny = -dy / ln, dx / ln
+    pts = []
+    for i in range(9):
+        u = i / 8
+        pts.append((x0 + dx * u + nx * w * math.sin(u * math.pi), y0 + dy * u + ny * w * math.sin(u * math.pi)))
+    for i in range(7, 0, -1):
+        u = i / 8
+        pts.append((x0 + dx * u - nx * w * 0.6 * math.sin(u * math.pi), y0 + dy * u - ny * w * 0.6 * math.sin(u * math.pi)))
+    return pts
+
+
 def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0):
-    """Zeichnet ein Wesen; gibt (Bild, Fußpunkt-x, Fußpunkt-y, schwebt) zurück."""
+    """Zeichnet ein Wesen; gibt (Bild, Fußpunkt-x, Fußpunkt-y, schwebt) zurück.
+    Stil wie die Figuren (rig.py): kräftiger Umriss, jede Farbfläche mit dunklerer Schattenseite (hinten/unten),
+    Augen mit Glanzpunkten, Wangenrot. Gezeichnet wird nach rechts blickend in Wesen-Koordinaten (x nach vorn,
+    y nach unten, Boden bei y = 0) und bei facing = -1 gespiegelt."""
+    from .rig import _eye, _stroke, _dark, _light
     S = 2
     k = S * scale
     im = Image.new("RGBA", (int(620 * k), int(620 * k)), (0, 0, 0, 0))
-    d = ImageDraw.Draw(im)
+    d = ImageDraw.Draw(im, "RGBA")
     cx, gy = im.width / 2, im.height - 30 * k
-    o = int(O * k)
-    bob = math.sin(t * 4) * 8 * k
+    f = 1 if facing >= 0 else -1
+    o = max(2, int(6 * k))
+    bob = math.sin(t * 4) * 8
     blink = (t % 3.1) < 0.12
     wide = mood in ("shocked", "scared")
+    eyekind = "closed" if blink and not wide else "wide" if wide else "sad" if mood == "sad" else "angry" if mood == "angry" else ""
 
-    def eye(x, y, r):
-        if blink and not wide:
-            d.arc((x - r, y - r * 0.4, x + r, y + r), 200, 340, fill=INK, width=int(r * 0.4))
+    def P(x, y):
+        return cx + x * k * f, gy + y * k
+
+    def B(x0, y0, x1, y1):
+        a, b = cx + x0 * k * f, cx + x1 * k * f
+        return min(a, b), gy + y0 * k, max(a, b), gy + y1 * k
+
+    def ell(x0, y0, x1, y1, col, shade=0.14, line=True):
+        bx = B(x0, y0, x1, y1)
+        if line:
+            d.ellipse((bx[0] - o, bx[1] - o, bx[2] + o, bx[3] + o), fill=INK)
+        if shade:
+            d.ellipse(bx, fill=_dark(col, 0.24))
+            d.ellipse(B(x0 + (x1 - x0) * shade, y0, x1, y1 - (y1 - y0) * shade * 0.7), fill=col)
+        else:
+            d.ellipse(bx, fill=col)
+
+    def rr(x0, y0, x1, y1, r, col, shade=0.14, line=True):
+        bx = B(x0, y0, x1, y1)
+        if line:
+            d.rounded_rectangle((bx[0] - o, bx[1] - o, bx[2] + o, bx[3] + o), r * k + o, fill=INK)
+        if shade:
+            d.rounded_rectangle(bx, r * k, fill=_dark(col, 0.24))
+            d.rounded_rectangle(B(x0 + (x1 - x0) * shade, y0, x1, y1 - (y1 - y0) * shade * 0.7), r * k, fill=col)
+        else:
+            d.rounded_rectangle(bx, r * k, fill=col)
+
+    def poly(pts, col, shade=0.13, line=True):
+        q = [P(x, y) for x, y in pts]
+        d.polygon(q, fill=_dark(col, 0.24) if shade else col, outline=INK if line else None, width=o if line else 0)
+        if shade:
+            mx, my = sum(p[0] for p in pts) / len(pts), sum(p[1] for p in pts) / len(pts)
+            sz = max(max(p[0] for p in pts) - min(p[0] for p in pts), max(p[1] for p in pts) - min(p[1] for p in pts))
+            d.polygon([P(mx + (x - mx) * (1 - shade) + sz * shade * 0.35, my + (y - my) * (1 - shade) - sz * shade * 0.3) for x, y in pts], fill=col)
+
+    def stroke(pts, w, col):
+        q = [P(x, y) for x, y in pts]
+        _stroke(d, q, w * k + 2 * o, INK)
+        _stroke(d, q, w * k, col)
+
+    def eye(x, y, r, kind=None):
+        px_, py_ = P(x, y)
+        _eye(d, px_, py_, r * k, eyekind if kind is None else kind, 0.6 * f)
+
+    def brow(x, y, r, inner):                       # inner = +1: das innere Ende liegt vorn
+        if mood not in ("sad", "angry", "worried", "scared"):
             return
-        rr = r * (1.25 if wide else 1.0)
-        d.ellipse((x - rr - 4 * k, y - rr - 4 * k, x + rr + 4 * k, y + rr + 4 * k), fill=INK)
-        d.ellipse((x - rr, y - rr, x + rr, y + rr), fill=(255, 255, 255))
-        pr = rr * (0.4 if wide else 0.6)
-        d.ellipse((x + facing * rr * 0.25 - pr, y - pr, x + facing * rr * 0.25 + pr, y + pr), fill=INK)
+        dy = 8 if mood == "angry" else -8
+        d.line((*P(x - r, y - dy * inner), *P(x + r, y + dy * inner)), fill=INK, width=max(2, int(7 * k)))
+
+    def cheek(x, y, r):
+        d.ellipse(B(x - r, y - r * 0.6, x + r, y + r * 0.6), fill=(255, 120, 130, 90))
 
     def mouthf(x, y, w):
         if mouth > 0.1:
-            d.ellipse((x - w * 0.6, y - 6 * k - mouth * 12 * k, x + w * 0.6, y + 6 * k + mouth * 12 * k), fill=INK)
-        elif mood == "sad":
-            d.arc((x - w, y, x + w, y + 24 * k), 200, 340, fill=INK, width=int(6 * k))
+            h = 8 + mouth * 16
+            d.ellipse((*P(x - w * 0.7, y - h * 0.4)[:1], P(0, y - h * 0.4)[1], *P(x + w * 0.7, 0)[:1], P(0, y + h)[1]) if False else B(x - w * 0.7, y - h * 0.4, x + w * 0.7, y + h),
+                      fill=(110, 36, 46), outline=INK, width=max(2, int(4 * k)))
+            d.chord(B(x - w * 0.45, y + h * 0.2, x + w * 0.45, y + h * 1.1), 180, 360, fill=(240, 120, 130))
+        elif mood in ("sad", "worried"):
+            d.arc(B(x - w, y, x + w, y + 22), 205, 335, fill=INK, width=max(2, int(6 * k)))
+        elif wide:
+            d.ellipse(B(x - w * 0.35, y - 4, x + w * 0.35, y + 14), fill=(110, 36, 46), outline=INK, width=max(2, int(4 * k)))
         else:
-            d.arc((x - w, y - 20 * k, x + w, y + 6 * k), 25, 155, fill=INK, width=int(6 * k))
+            d.arc(B(x - w, y - 18, x + w, y + 6), 25, 155, fill=INK, width=max(2, int(6 * k)))
+
+    def band(x0, y0, x1, y1, a, b, col):            # Querstreifen [a, b] (x) genau in der Ellipse (x0..x1, y0..y1)
+        mx, my, rx, ry = (x0 + x1) / 2, (y0 + y1) / 2, (x1 - x0) / 2, (y1 - y0) / 2
+        xs = [a + (b - a) * i / 8 for i in range(9)]
+        hy = [ry * math.sqrt(max(0.0, 1 - ((xx - mx) / rx) ** 2)) for xx in xs]
+        poly([(xx, my - h) for xx, h in zip(xs, hy)] + [(xx, my + h) for xx, h in reversed(list(zip(xs, hy)))], col, shade=0, line=False)
 
     kind = str(kind).lower()
     fly = False
     if kind in ("cat", "katze", "dog", "hund"):
         dog = kind in ("dog", "hund")
         col = (214, 160, 100) if dog else (240, 160, 80)
-        wag = math.sin(t * (12 if dog else 3)) * 30
-        tx = cx - 110 * k * facing
-        d.line((tx, gy - 110 * k, tx - facing * 60 * k, gy - (200 + wag) * k), fill=INK, width=int(34 * k))
-        d.line((tx, gy - 110 * k, tx - facing * 60 * k, gy - (200 + wag) * k), fill=col, width=int(20 * k))
-        for lx in (-70, 60):
-            d.rounded_rectangle((cx + lx * k, gy - 70 * k, cx + (lx + 34) * k, gy), int(14 * k), fill=col, outline=INK, width=o)
-        d.rounded_rectangle((cx - 120 * k, gy - 170 * k, cx + 110 * k, gy - 40 * k), int(60 * k), fill=col, outline=INK, width=o)
-        hx, hy = cx + 90 * k * facing, gy - 220 * k + bob * 0.5
+        wag = math.sin(t * (12 if dog else 3)) * (26 if dog else 14)
+        belly = _light(col, 0.55)
+        tail = [(-110, -120), (-150, -150), (-165, -205 - wag * 0.5), (-150 + wag, -250)] if not dog else [(-110, -125), (-150, -160), (-170 + wag, -215)]
+        stroke(tail, 22, _dark(col, 0.1))
+        if not dog:
+            stroke(tail[-1:] + [(tail[-1][0] + 2, tail[-1][1] - 4)], 22, _dark(col, 0.35))
+        for lx in (-85, 45):                                                       # Beine auf der abgewandten Seite
+            rr(lx, -80, lx + 30, 0, 13, _dark(col, 0.18), shade=0)
+        ell(-128, -170, 112, -45, col)
+        ell(-60, -110, 70, -52, belly, shade=0, line=False)
+        if not dog:                                                                # Tigerstreifen auf dem Rücken
+            for sx in (-70, -30, 10):
+                d.line((*P(sx, -166), *P(sx + 10, -135)), fill=_dark(col, 0.32), width=max(2, int(10 * k)))
+        for lx in (-65, 65):
+            rr(lx, -80, lx + 32, 0, 13, col, shade=0.25)
+            ell(lx - 4, -18, lx + 40, 4, belly, shade=0)
+        hx, hy = 92, -218 + bob * 0.5
         if dog:
-            for s in (-1, 1):
-                d.ellipse((hx + s * 70 * k - 30 * k, hy - 60 * k, hx + s * 70 * k + 30 * k, hy + 50 * k), fill=(150, 100, 60), outline=INK, width=o)
+            ell(hx - 92, hy - 52, hx - 36, hy + 50, (150, 100, 60), shade=0)       # Ohr hinten
         else:
-            for s in (-1, 1):
-                d.polygon([(hx + s * 80 * k, hy - 30 * k), (hx + s * 70 * k, hy - 120 * k), (hx + s * 20 * k, hy - 70 * k)], fill=col, outline=INK, width=o)
-        d.ellipse((hx - 95 * k, hy - 85 * k, hx + 95 * k, hy + 85 * k), fill=col, outline=INK, width=o)
-        eye(hx - 34 * k, hy - 8 * k, 20 * k)
-        eye(hx + 34 * k, hy - 8 * k, 20 * k)
-        d.ellipse((hx - 12 * k, hy + 22 * k, hx + 12 * k, hy + 40 * k), fill=INK if dog else (240, 120, 130))
-        mouthf(hx, hy + 54 * k, 16 * k)
+            for ex in (-1, 1):
+                ox = hx + ex * 50
+                poly([(ox - 34, hy - 52), (ox + ex * 12, hy - 120), (ox + 34, hy - 52)], col if ex > 0 else _dark(col, 0.2), shade=0)
+                poly([(ox - 16, hy - 62), (ox + ex * 8, hy - 100), (ox + 16, hy - 62)], (250, 160, 170), shade=0, line=False)
+        ell(hx - 88, hy - 82, hx + 88, hy + 78, col)
+        if dog:
+            ell(hx + 18, hy - 2, hx + 128, hy + 64, belly, shade=0.1)              # Schnauze
+            ell(hx + 96, hy + 2, hx + 136, hy + 30, INK, shade=0, line=False)
+            d.ellipse(B(hx + 104, hy + 6, hx + 116, hy + 14), fill=(255, 255, 255, 200))
+            mouthf(hx + 84, hy + 44, 18)
+            ell(hx - 52, hy - 46, hx - 6, hy + 52, (150, 100, 60), shade=0.2)      # Schlappohr vorn
+            rr(hx - 70, hy + 66, hx + 50, hy + 86, 9, (214, 70, 60), shade=0)      # Halsband mit Marke
+            ell(hx - 4, hy + 78, hx + 20, hy + 102, (250, 206, 80), shade=0)
+            eye(hx + 22, hy - 22, 15)
+            eye(hx + 70, hy - 22, 15)
+            brow(hx + 22, hy - 48, 14, 1)
+            brow(hx + 70, hy - 48, 14, -1)
+            cheek(hx + 6, hy + 22, 16)
+        else:
+            ell(hx + 20, hy + 6, hx + 100, hy + 54, belly, shade=0, line=False)
+            poly([(hx + 54, hy + 12), (hx + 70, hy + 12), (hx + 62, hy + 24)], (240, 110, 130), shade=0)
+            for sy in (-6, 8):                                                     # Schnurrhaare
+                d.line((*P(hx + 86, hy + 26), *P(hx + 140, hy + 26 + sy)), fill=INK, width=max(2, int(3 * k)))
+                d.line((*P(hx + 36, hy + 26), *P(hx - 18, hy + 26 + sy)), fill=INK, width=max(2, int(3 * k)))
+            mouthf(hx + 62, hy + 38, 14)
+            eye(hx + 30, hy - 18, 16)
+            eye(hx + 86, hy - 18, 16)
+            brow(hx + 30, hy - 44, 14, 1)
+            brow(hx + 86, hy - 44, 14, -1)
+            cheek(hx + 14, hy + 26, 14)
     elif kind in ("spider", "spinne"):
-        by = gy - 150 * k + bob * 0.4
-        for s in (-1, 1):
-            for i in range(4):
-                a = 20 + i * 22 + math.sin(t * 8 + i * 1.5 + s) * 6
-                kx, ky = cx + s * (80 + i * 26) * k, by - (70 - i * 16) * k
-                d.line((cx + s * 40 * k, by, kx, ky, cx + s * (130 + i * 34) * k, gy), fill=INK, width=int(16 * k), joint="curve")
-                d.line((cx + s * 40 * k, by, kx, ky, cx + s * (130 + i * 34) * k, gy), fill=(120, 78, 50), width=int(7 * k), joint="curve")
-        d.ellipse((cx - 110 * k, by - 90 * k, cx + 110 * k, by + 90 * k), fill=(120, 78, 50), outline=INK, width=o)
-        d.ellipse((cx - 60 * k, by - 70 * k, cx + 60 * k, by - 10 * k), fill=(150, 104, 70))
-        eye(cx - 36 * k, by + 6 * k, 24 * k)
-        eye(cx + 36 * k, by + 6 * k, 24 * k)
-        mouthf(cx, by + 58 * k, 16 * k)
+        col = (110, 74, 52)
+        by = -150 + bob * 0.4
+        for back in (True, False):                                                 # hintere Beine dunkler
+            for s in (-1, 1):
+                for i in ((3, 1) if back else (2, 0)):
+                    a = math.sin(t * 8 + i * 1.5 + s) * 6
+                    knee = (s * (95 + i * 26), by - (88 - i * 20) - a)
+                    stroke([(s * 40, by), knee, (s * (135 + i * 36), 0)], 14, _dark(col, 0.25) if back else col)
+                    ell(knee[0] - 9, knee[1] - 9, knee[0] + 9, knee[1] + 9, _light(col, 0.15), shade=0, line=False)
+        ell(-112, by - 96, 112, by + 92, col)
+        ell(-62, by - 82, 30, by - 30, _light(col, 0.2), shade=0, line=False)         # Glanz auf dem Rücken
+        for s in (-1, 1):                                                          # Kieferklauen
+            poly([(s * 14, by + 60), (s * 34, by + 60), (s * 22, by + 92)], (60, 40, 32), shade=0)
+        eye(-36, by - 2, 21)
+        eye(36, by - 2, 21)
+        for s in (-1, 1):                                                          # zwei kleine Nebenaugen
+            ell(s * 30 - 8, by - 50, s * 30 + 8, by - 34, INK, shade=0, line=False)
+        brow(-36, by - 32, 18, 1)
+        brow(36, by - 32, 18, -1)
+        cheek(-66, by + 30, 14)
+        cheek(66, by + 30, 14)
+        mouthf(0, by + 46, 14)
     elif kind in ("ghost", "geist"):
         fly = True
-        by = gy - 330 * k + bob * 2
-        pts = [(cx - 110 * k, by + 170 * k)]
-        for i in range(7):
-            pts.append((cx - 110 * k + i * 36.6 * k, by + (170 + (26 if i % 2 else 0) + math.sin(t * 6 + i) * 8) * k))
-        pts.append((cx + 110 * k, by + 170 * k))
-        d.chord((cx - 110 * k, by - 110 * k, cx + 110 * k, by + 110 * k), 180, 360, fill=(248, 248, 255), outline=INK, width=o)
-        d.polygon([(cx - 110 * k, by)] + pts[1:-1] + [(cx + 110 * k, by)], fill=(248, 248, 255))
-        d.line([(cx - 110 * k, by)] + pts[1:-1] + [(cx + 110 * k, by)], fill=INK, width=o, joint="curve")
-        eye(cx - 38 * k, by - 10 * k, 22 * k)
-        eye(cx + 38 * k, by - 10 * k, 22 * k)
-        d.ellipse((cx - 16 * k, by + 40 * k, cx + 16 * k, by + (70 + mouth * 20) * k), fill=INK)
+        by = -330 + bob * 2
+        d.ellipse(B(-170, by - 170, 170, by + 230), fill=(220, 230, 255, 40))     # Schimmer
+        def body(sh):
+            pts = [(math.cos(math.radians(a)) * 110 * sh, by + math.sin(math.radians(a)) * 110 * sh) for a in range(180, 361, 15)]
+            pts.append((110 * sh, by + 150 * sh))
+            for i in range(7, -1, -1):
+                xx = -110 * sh + i * 220 * sh / 7
+                pts.append((xx, by + (150 + (26 if i % 2 else 0) + math.sin(t * 6 + i) * 8) * sh))
+            return pts
+        pa = body(1.0)
+        d.polygon([P(x, y) for x, y in pa], fill=(198, 204, 232), outline=INK, width=o)
+        d.polygon([P(x * 0.86 + 14, by + (y - by) * 0.9 - 6) for x, y in pa], fill=(248, 248, 255))
+        for s in (-1, 1):                                                          # Ärmchen
+            wv = math.sin(t * 5 + s) * 10
+            poly([(s * 104, by + 20), (s * 150, by + 46 + wv), (s * 104, by + 74)], (236, 238, 250), shade=0)
+        eye(-34, by - 14, 19)
+        eye(42, by - 14, 19)
+        brow(-34, by - 44, 16, 1)
+        brow(42, by - 44, 16, -1)
+        cheek(-62, by + 26, 15)
+        cheek(72, by + 26, 15)
+        h = 22 + mouth * 22
+        d.ellipse(B(-10, by + 34, 26, by + 34 + h), fill=(70, 70, 96), outline=INK, width=max(2, int(4 * k)))
     elif kind in ("alien", "außerirdischer"):
-        col = (120, 210, 120)
-        for lx in (-40, 20):
-            d.rounded_rectangle((cx + lx * k, gy - 90 * k, cx + (lx + 24) * k, gy), int(10 * k), fill=col, outline=INK, width=o)
-        d.rounded_rectangle((cx - 70 * k, gy - 220 * k, cx + 70 * k, gy - 70 * k), int(50 * k), fill=col, outline=INK, width=o)
-        hy = gy - 300 * k + bob * 0.5
+        col = (120, 206, 120)
+        for lx in (-38, 18):
+            stroke([(lx + 10, -100), (lx + 10, -14)], 24, _dark(col, 0.12) if lx < 0 else col)
+            ell(lx - 10, -24, lx + 34, 4, _dark(col, 0.3), shade=0)
+        wv = math.sin(t * 3) * 12
+        stroke([(-58, -196), (-86, -146), (-80, -100)], 18, _dark(col, 0.18))      # Arm hinten
+        rr(-62, -224, 62, -84, 46, col)
+        ell(-26, -180, 26, -128, (190, 240, 255), shade=0.2)                       # leuchtender Knopf
+        stroke([(52, -196), (92, -160 - wv), (118, -186 - wv)], 18, col)           # Arm vorn winkt
+        for a in (-30, 0, 30):
+            r_ = math.radians(a - 40)
+            d.line((*P(118, -186 - wv), *P(118 + math.cos(r_) * 22, -186 - wv + math.sin(r_) * 22)), fill=INK, width=max(2, int(9 * k)))
+        stroke([(0, -230), (0, -258)], 30, _dark(col, 0.15))
+        hy = -350 + bob * 0.5
         for s in (-1, 1):
-            d.line((cx + s * 50 * k, hy - 80 * k, cx + s * 90 * k, hy - 160 * k), fill=INK, width=int(12 * k))
-            d.ellipse((cx + s * 90 * k - 18 * k, hy - 178 * k, cx + s * 90 * k + 18 * k, hy - 142 * k), fill=(250, 220, 90), outline=INK, width=int(5 * k))
-        d.ellipse((cx - 130 * k, hy - 100 * k, cx + 130 * k, hy + 90 * k), fill=col, outline=INK, width=o)
-        for s in (-1, 1):
-            d.ellipse((cx + s * 54 * k - 38 * k, hy - 44 * k, cx + s * 54 * k + 38 * k, hy + 30 * k), fill=INK)
-            d.ellipse((cx + s * 54 * k - 4 * k, hy - 30 * k, cx + s * 54 * k + 14 * k, hy - 12 * k), fill=(255, 255, 255))
-        mouthf(cx, hy + 60 * k, 14 * k)
+            stroke([(s * 46, hy - 80), (s * 70, hy - 130), (s * 86, hy - 150)], 8, _dark(col, 0.2))
+            glow = 0.6 + 0.4 * math.sin(t * 5 + s)
+            d.ellipse(B(s * 86 - 30, hy - 180, s * 86 + 30, hy - 120), fill=(255, 236, 120, int(80 * glow)))
+            ell(s * 86 - 16, hy - 166, s * 86 + 16, hy - 134, (250, 220, 90), shade=0.2)
+        ell(-130, hy - 100, 130, hy + 94, col)
+        for s in (-1, 1):                                                          # große Mandelaugen
+            ex = s * 52 + 6
+            if blink and not wide:
+                d.arc(B(ex - 34, hy - 30, ex + 34, hy + 20), 20, 160, fill=INK, width=max(2, int(8 * k)))
+                continue
+            sc_ = 1.15 if wide else 1.0
+            d.ellipse(B(ex - 36 * sc_, hy - 44 * sc_, ex + 36 * sc_, hy + 28 * sc_), fill=INK)
+            d.ellipse(B(ex + 6, hy - 32, ex + 22, hy - 16), fill=(255, 255, 255))
+            d.ellipse(B(ex - 16, hy + 2, ex - 6, hy + 12), fill=(255, 255, 255, 200))
+        brow(-46, hy - 58, 22, 1)
+        brow(58, hy - 58, 22, -1)
+        cheek(-82, hy + 36, 16)
+        cheek(94, hy + 36, 16)
+        mouthf(6, hy + 54, 14)
     elif kind in ("robot", "roboter"):
-        col = (170, 180, 196)
-        for lx in (-50, 20):
-            d.rectangle((cx + lx * k, gy - 90 * k, cx + (lx + 30) * k, gy), fill=(120, 128, 142), outline=INK, width=o)
-        d.rounded_rectangle((cx - 90 * k, gy - 250 * k, cx + 90 * k, gy - 80 * k), int(16 * k), fill=col, outline=INK, width=o)
+        col = (176, 186, 202)
+        for lx in (-52, 22):
+            rr(lx, -96, lx + 30, -16, 6, (120, 128, 142) if lx > 0 else (100, 106, 120), shade=0.2)
+            rr(lx - 10, -24, lx + 44, 0, 8, (84, 90, 104), shade=0.15)
+        wv = math.sin(t * 3) * 10
+        stroke([(-90, -226), (-116, -170), (-110, -124)], 20, (120, 128, 142))     # Arm hinten
+        rr(-92, -258, 92, -86, 18, col)
+        rr(-58, -220, 58, -122, 10, (70, 78, 94), shade=0)                         # Brust-Anzeige
         lit = int(t * 4) % 3
         for i in range(3):
-            d.ellipse((cx - 50 * k + i * 36 * k, gy - 150 * k, cx - 26 * k + i * 36 * k, gy - 126 * k),
-                      fill=(110, 240, 150) if i == lit else (90, 100, 112), outline=INK, width=int(4 * k))
-        hy = gy - 330 * k + bob * 0.3
-        d.line((cx, hy - 70 * k, cx, hy - 120 * k), fill=INK, width=int(10 * k))
-        d.ellipse((cx - 16 * k, hy - 146 * k, cx + 16 * k, hy - 114 * k), fill=(240, 80, 70), outline=INK, width=int(5 * k))
-        d.rounded_rectangle((cx - 110 * k, hy - 70 * k, cx + 110 * k, hy + 70 * k), int(24 * k), fill=col, outline=INK, width=o)
+            ell(-42 + i * 30, -164, -22 + i * 30, -144, (110, 240, 150) if i == lit else (96, 104, 118), shade=0, line=False)
+        d.line((*P(-40, -194), *P(40, -194)), fill=(110, 220, 255), width=max(2, int(6 * k)))
+        for sx in (-78, 72):                                                       # Nieten
+            for sy in (-244, -104):
+                d.ellipse(B(sx - 5, sy - 5, sx + 5, sy + 5), fill=_dark(col, 0.35))
+        stroke([(88, -226), (122, -180 - wv), (130, -130 - wv)], 20, (150, 158, 172))   # Arm vorn mit Greifer
+        ell(110, -200 - wv, 134, -176 - wv, (120, 128, 142), shade=0)
+        d.arc(B(108, -146 - wv, 154, -104 - wv), 300, 120, fill=INK, width=max(2, int(9 * k)))
+        rr(-22, -282, 22, -254, 6, (120, 128, 142), shade=0.2)                     # Hals
+        hy = -352 + bob * 0.3
+        stroke([(0, hy - 72), (0, hy - 118)], 8, (90, 96, 110))
+        blinkon = int(t * 2) % 2
+        d.ellipse(B(-26, hy - 152, 26, hy - 100), fill=(255, 90, 70, 70 if blinkon else 0))
+        ell(-15, hy - 141, 15, hy - 111, (240, 80, 70) if blinkon else (160, 70, 66), shade=0.2)
+        rr(-114, hy - 74, 114, hy + 72, 26, col)
+        for s in (-1, 1):                                                          # Ohren-Schrauben
+            rr(s * 114 - 14, hy - 26, s * 114 + 14, hy + 26, 6, (130, 138, 152), shade=0)
+        rr(-86, hy - 46, 92, hy + 14, 22, (40, 46, 58), shade=0)                   # Gesichtsfeld
         for s in (-1, 1):
-            d.ellipse((cx + s * 44 * k - 26 * k, hy - 34 * k, cx + s * 44 * k + 26 * k, hy + 18 * k), fill=(40, 44, 54))
-            if not blink:
-                d.ellipse((cx + s * 44 * k - 14 * k, hy - 22 * k, cx + s * 44 * k + 14 * k, hy + 6 * k), fill=(110, 220, 255))
-        d.rectangle((cx - 40 * k, hy + 34 * k, cx + 40 * k, hy + (42 + mouth * 14) * k), fill=INK)
+            ex = s * 42 + 4
+            if blink and not wide:
+                d.line((*P(ex - 20, hy - 16), *P(ex + 20, hy - 16)), fill=(110, 220, 255), width=max(2, int(8 * k)))
+            else:
+                r_ = 22 if wide else 17
+                d.ellipse(B(ex - r_ - 8, hy - 16 - r_ - 8, ex + r_ + 8, hy - 16 + r_ + 8), fill=(110, 220, 255, 60))
+                ell(ex - r_, hy - 16 - r_, ex + r_, hy - 16 + r_, (130, 230, 255), shade=0, line=False)
+                d.ellipse(B(ex + 2, hy - 30, ex + 10, hy - 22), fill=(255, 255, 255))
+        mh = 10 + mouth * 16
+        rr(-38, hy + 30, 42, hy + 30 + mh, 4, (40, 46, 58), shade=0)
+        for i in range(1, 4):
+            d.line((*P(-38 + i * 20, hy + 30), *P(-38 + i * 20, hy + 30 + mh)), fill=(150, 158, 172), width=max(2, int(3 * k)))
+        cheek(-78, hy + 34, 14)
+        cheek(86, hy + 34, 14)
     elif kind in ("bird", "vogel"):
         fly = True
-        by = gy - 380 * k + bob * 2.5
-        fl = math.sin(t * 14) * 50 * k
-        d.polygon([(cx - 20 * k, by), (cx - 60 * k, by - 40 * k - fl), (cx + 40 * k, by - 10 * k)], fill=(60, 120, 210), outline=INK, width=o)
-        d.ellipse((cx - 90 * k, by - 60 * k, cx + 90 * k, by + 60 * k), fill=(90, 160, 240), outline=INK, width=o)
-        d.polygon([(cx + facing * 80 * k, by - 10 * k), (cx + facing * 140 * k, by + 6 * k), (cx + facing * 80 * k, by + 22 * k)], fill=(250, 180, 50), outline=INK, width=int(5 * k))
-        eye(cx + facing * 40 * k, by - 12 * k, 20 * k)
+        by = -380 + bob * 2.5
+        col, breast = (120, 106, 96), (236, 120, 70)
+        fl = math.sin(t * 14)
+        poly([(-70, by - 6), (-150, by - 34), (-156, by + 2), (-150, by + 26), (-70, by + 18)], _dark(col, 0.1))   # Schwanzfedern
+        poly([(-10, by - 14), (-70 - 30 * fl, by - 74 - 60 * fl), (-110, by - 40 - 20 * fl), (40, by - 4)], _dark(col, 0.22), shade=0)   # Flügel hinten
+        ell(-92, by - 64, 84, by + 62, col)
+        ell(-10, by - 20, 84, by + 60, breast, shade=0.12, line=False)
+        poly([(76, by - 18), (130, by - 2), (78, by + 8)], (250, 186, 60))         # Schnabel
+        poly([(78, by + 8), (118, by + 4), (78, by + 22)], (226, 150, 40), shade=0)
+        poly([(-30, by - 10), (-20 - 40 * fl, by - 90 - 60 * fl), (-80 - 30 * fl, by - 60 - 30 * fl), (-60, by + 10)], col)   # Flügel vorn
+        for lx in (-20, 6):                                                        # angelegte Beinchen
+            stroke([(lx, by + 58), (lx - 8, by + 82)], 6, (226, 150, 40))
+        eye(44, by - 22, 14)
+        cheek(30, by + 12, 12)
     elif kind in ("bee", "biene", "wasp", "wespe"):
         fly = True
-        by = gy - 360 * k + bob * 2.5 + math.sin(t * 6) * 14 * k
-        fl = math.sin(t * 40) * 18 * k
-        for sx in (-30, 20):
-            d.ellipse((cx + sx * k - 46 * k, by - 110 * k - fl, cx + sx * k + 46 * k, by - 30 * k), fill=(220, 240, 255, 210), outline=INK, width=int(4 * k))
-        d.polygon([(cx - facing * 96 * k, by - 12 * k), (cx - facing * 130 * k, by), (cx - facing * 96 * k, by + 12 * k)], fill=INK)
-        d.ellipse((cx - 100 * k, by - 62 * k, cx + 100 * k, by + 62 * k), fill=(250, 200, 50), outline=INK, width=o)
-        for sx in (-44, 4):
-            d.rectangle((cx + sx * k * facing - 16 * k, by - 56 * k, cx + sx * k * facing + 16 * k, by + 56 * k), fill=INK)
-        eye(cx + facing * 62 * k, by - 12 * k, 18 * k)
-    elif kind in ("dino", "dinosaurier", "monster"):
-        col = (110, 190, 110) if kind != "monster" else (150, 110, 200)
-        d.polygon([(cx - 100 * k * facing, gy - 120 * k), (cx - 300 * k * facing, gy - 20 * k), (cx - 80 * k * facing, gy - 40 * k)], fill=col, outline=INK, width=o)
-        for lx in (-60, 40):
-            d.rounded_rectangle((cx + lx * k, gy - 90 * k, cx + (lx + 44) * k, gy), int(16 * k), fill=col, outline=INK, width=o)
-        d.ellipse((cx - 130 * k, gy - 280 * k, cx + 130 * k, gy - 50 * k), fill=col, outline=INK, width=o)
-        hx, hy = cx + 110 * k * facing, gy - 350 * k + bob
-        d.rounded_rectangle((hx - 110 * k, hy - 80 * k, hx + 130 * k, hy + 70 * k), int(60 * k), fill=col, outline=INK, width=o)
-        eye(hx - 10 * k, hy - 20 * k, 24 * k)
-        eye(hx + 60 * k, hy - 20 * k, 24 * k)
-        for i in range(4):
-            tx = hx - 40 * k + i * 40 * k
-            d.polygon([(tx, hy + 40 * k), (tx + 14 * k, hy + (64 + mouth * 20) * k), (tx + 28 * k, hy + 40 * k)], fill=(255, 255, 255), outline=INK, width=int(3 * k))
-        for i in range(4):
-            sx = cx - 80 * k + i * 50 * k
-            d.polygon([(sx, gy - 268 * k), (sx + 22 * k, gy - 330 * k), (sx + 44 * k, gy - 268 * k)], fill=(70, 150, 80), outline=INK, width=int(5 * k))
+        wasp = kind in ("wasp", "wespe")
+        by = -360 + bob * 2.5 + math.sin(t * 6) * 14
+        fl = math.sin(t * 40) * 16
+        yel = (250, 206, 40) if wasp else (250, 196, 60)
+        blk = (34, 30, 34)
+        for i, sx in enumerate((-40, 6)):                                          # Flügel hinten
+            if wasp:
+                poly(_leaf(sx, by - 34, sx - 140, by - 110 - fl, 22), (220, 236, 255, 200), shade=0)
+            else:
+                d.ellipse(B(sx - 50, by - 124 - fl, sx + 40, by - 34), fill=(220, 240, 255, 200), outline=INK, width=max(2, int(4 * k)))
+        if wasp:
+            poly([(-196, by + 6), (-174, by - 6), (-174, by + 18)], blk, shade=0)  # Stachel
+            ab = (-180, by - 46, -20, by + 58)                                     # schlanker Hinterleib, Wespentaille
+            ell(*ab, yel)
+            for a in (-150, -110, -70):
+                band(*ab, a, a + 22, blk)
+            d.ellipse(B(*ab), outline=INK, width=o)
+            ell(-30, by - 40, 52, by + 34, blk, shade=0.12)
+            for lx in (-6, 18, 40):
+                stroke([(lx, by + 26), (lx - 6, by + 54), (lx - 16, by + 68)], 4, blk)
+            hx = 92
+            ell(hx - 44, by - 50, hx + 46, by + 36, yel)
+            d.chord(B(hx - 44, by - 50, hx + 46, by + 36), 200, 340, fill=blk)
+            for s in (0, 16):
+                stroke([(hx - 4 + s, by - 44), (hx + 6 + s, by - 90), (hx + 30 + s, by - 104)], 6, blk)
+            eye(hx + 18, by - 10, 13, "angry" if eyekind == "" else None)
+            d.line((*P(hx - 4, by - 34), *P(hx + 38, by - 22)), fill=INK, width=max(2, int(7 * k)))
+            mouthf(hx + 20, by + 18, 10)
+        else:
+            poly([(-120, by - 10), (-150, by + 2), (-120, by + 14)], blk, shade=0)
+            ab = (-122, by - 64, 70, by + 64)
+            ell(*ab, yel)
+            for a in (-70, -14):
+                band(*ab, a, a + 30, blk)
+            d.ellipse(B(*ab), outline=INK, width=o)
+            for lx in (-30, 0, 30):
+                stroke([(lx, by + 60), (lx - 8, by + 82)], 6, blk)
+            hx = 96
+            for s in (0, 18):
+                stroke([(hx - 10 + s, by - 40), (hx + s, by - 92)], 6, blk)
+                ell(hx + s - 9, by - 104, hx + s + 9, by - 86, blk, shade=0, line=False)
+            ell(hx - 52, by - 50, hx + 52, by + 50, yel)
+            eye(hx + 16, by - 12, 14)
+            cheek(hx + 2, by + 22, 12)
+            mouthf(hx + 22, by + 20, 12)
+        for i, sx in enumerate((-20,)):                                            # Flügel vorn (durchscheinend)
+            if wasp:
+                poly(_leaf(sx + 26, by - 30, sx - 92, by - 132 + fl, 26), (230, 244, 255, 170), shade=0)
+            else:
+                d.ellipse(B(sx - 40, by - 130 + fl, sx + 50, by - 40), fill=(230, 244, 255, 170), outline=INK, width=max(2, int(4 * k)))
+    elif kind in ("dino", "dinosaurier"):
+        col = (110, 186, 104)
+        spike = (236, 150, 70)
+        sw = math.sin(t * 2.5) * 14
+        poly([(-70, -210), (-310, -60 + sw), (-300, -36 + sw), (-40, -110)], col)                 # Schwanz
+        for i in range(4):                                                         # Zacken auf Schwanz
+            fx = -110 - i * 45
+            fy = -186 + i * 32 + sw * i / 4
+            poly([(fx + 14, fy + 4), (fx, fy - 32), (fx - 14, fy + 10)], spike, shade=0)
+        rr(-46, -120, 4, -8, 18, _dark(col, 0.2), shade=0)                        # Bein hinten
+        ell(-64, -22, 12, 4, _dark(col, 0.3), shade=0)
+        for i in range(4):                                                         # Rückenzacken
+            a = math.radians(205 + i * 22)
+            sx, sy = -10 + math.cos(a) * 120, -180 + math.sin(a) * 110
+            poly([(sx - 18, sy + 10), (sx + math.cos(a) * 36, sy + math.sin(a) * 36), (sx + 18, sy + 10)], spike, shade=0)
+        ell(-130, -292, 110, -70, col)
+        ell(-40, -232, 100, -86, (226, 230, 170), shade=0.08, line=False)       # heller Bauch
+        stroke([(40, -210), (96, -300)], 86, col)                                  # Hals
+        stroke([(82, -190), (118, -164), (132, -178)], 14, _dark(col, 0.1))        # Ärmchen
+        ell(-90, -170, 14, -54, col, shade=0.2)                                    # Oberschenkel vorn
+        rr(-56, -92, -8, -8, 18, col, shade=0.25)
+        ell(-74, -24, 6, 4, _dark(col, 0.1), shade=0)
+        for tx in (-64, -40, -16):
+            d.ellipse(B(tx - 6, -10, tx + 6, 2), fill=(250, 250, 240))
+        hx, hy = 140, -360 + bob
+        jaw = mouth * 26
+        rr(hx - 60, hy + 6 + jaw, hx + 104, hy + 52 + jaw, 22, _dark(col, 0.08))  # Unterkiefer
+        rr(hx - 90, hy - 74, hx + 110, hy + 30, 50, col)
+        for i in range(5):                                                         # Zähne
+            tx = hx - 20 + i * 24
+            poly([(tx, hy + 26), (tx + 10, hy + 44 + jaw * 0.3), (tx + 20, hy + 26)], (252, 252, 244), shade=0, line=False)
+        d.line((*P(hx - 30, hy + 26), *P(hx + 104, hy + 26)), fill=INK, width=max(2, int(5 * k)))
+        ell(hx + 80, hy - 40, hx + 94, hy - 26, INK, shade=0, line=False)          # Nasenloch
+        for i in range(3):                                                         # Zacken am Hinterkopf
+            poly([(hx - 74 + i * 26, hy - 60), (hx - 82 + i * 26, hy - 100), (hx - 50 + i * 26, hy - 66)], spike, shade=0)
+        eye(hx + 14, hy - 30, 20)
+        brow(hx + 14, hy - 58, 20, 1)
+        cheek(hx - 10, hy + 2, 16)
+    elif kind == "monster":
+        col = (150, 106, 206)
+        fur = _dark(col, 0.3)
+        for s in (-1, 1):                                                          # große Füße mit Krallen
+            ell(s * 70 - 54, -42, s * 70 + 54, 6, _dark(col, 0.15) if s < 0 else col, shade=0.15)
+            for c in (-26, 0, 26):
+                poly([(s * 70 + c - 8, -2), (s * 70 + c, 16), (s * 70 + c + 8, -2)], (250, 246, 230), shade=0)
+        cy_ = -196 + bob * 0.5
+        def furpts(r, n=40):
+            return [(math.cos(i / n * math.tau) * r * (1 if i % 2 else 0.92) * 1.05, cy_ + math.sin(i / n * math.tau) * r * (1 if i % 2 else 0.92)) for i in range(n)]
+        d.polygon([P(x, y) for x, y in furpts(176)], fill=fur, outline=INK, width=o)
+        d.polygon([P(x + 20, y - 12) for x, y in furpts(150)], fill=col)
+        ell(-60, cy_ + 20, 90, cy_ + 150, _light(col, 0.3), shade=0, line=False)  # Bauchfell
+        for s in (-1, 1):                                                          # Hörner
+            poly([(s * 70 - 22, cy_ - 140), (s * 120, cy_ - 230), (s * 76 + 20, cy_ - 150)], (246, 236, 200))
+        wv = math.sin(t * 4) * 16
+        for s in (-1, 1):                                                          # Arme mit Krallen, drohend erhoben
+            stroke([(s * 160, cy_ + 10), (s * 214, cy_ - 50 - wv), (s * 220, cy_ - 110 - wv)], 34, col if s > 0 else _dark(col, 0.15))
+            for c in (-18, 0, 18):
+                poly([(s * 220 + c - 7, cy_ - 118 - wv), (s * 220 + c, cy_ - 146 - wv), (s * 220 + c + 7, cy_ - 118 - wv)], (250, 246, 230), shade=0)
+        ex, ey = 20, cy_ - 60                                                      # ein großes Auge
+        eye(ex, ey, 40)
+        brow(ex, ey - 64, 40, 1)
+        mh = 34 + mouth * 40 + (16 if wide else 0)
+        d.chord(B(-70, cy_ - 10 - mh * 0.3, 110, cy_ + 30 + mh), 0, 180, fill=(96, 30, 50), outline=INK, width=o)
+        d.line((*P(-70, cy_ + 10), *P(110, cy_ + 10)), fill=INK, width=o)
+        for i in range(5):                                                         # Zähne
+            tx = -56 + i * 34
+            poly([(tx, cy_ + 10), (tx + 12, cy_ + 34), (tx + 24, cy_ + 10)], (252, 252, 244), shade=0, line=False)
+        cheek(-90, cy_ - 10, 18)
+        cheek(130, cy_ - 10, 18)
     elif kind in ("fish", "fisch", "shark", "hai"):
         fly = True
         shark = kind in ("shark", "hai")
-        col = (120, 140, 160) if shark else (250, 150, 60)
-        by = gy - 330 * k + bob * 2
-        wag = math.sin(t * 9) * 26 * k
-        d.polygon([(cx - 120 * k * facing, by), (cx - 220 * k * facing, by - 70 * k + wag), (cx - 220 * k * facing, by + 70 * k + wag)], fill=col, outline=INK, width=o)
-        d.ellipse((cx - 150 * k, by - 80 * k, cx + 150 * k, by + 80 * k), fill=col, outline=INK, width=o)
-        d.polygon([(cx - 30 * k, by - 70 * k), (cx + 10 * k, by - 150 * k), (cx + 50 * k, by - 70 * k)], fill=col, outline=INK, width=o)
-        eye(cx + facing * 80 * k, by - 16 * k, 20 * k)
+        by = -330 + bob * 2
+        wag = math.sin(t * 9) * 26
         if shark:
+            col, belly = (110, 132, 158), (240, 244, 248)
+            poly([(-150, by), (-250, by - 100 + wag), (-216, by + wag * 0.5), (-240, by + 74 + wag), (-140, by + 12)], _dark(col, 0.05))
+            poly([(-20, by - 70), (30, by - 170), (60, by - 66)], col)                                        # Rückenflosse
+            xs = [-170 + i * 22 for i in range(18)]
+            top = [(x, by - 76 * math.sqrt(max(0.0, 1 - ((x - 10) / 190) ** 2)) ** 0.8) for x in xs]
+            bot = [(x, by + 66 * math.sqrt(max(0.0, 1 - ((x - 10) / 190) ** 2)) ** 0.8) for x in xs]
+            d.polygon([P(*p) for p in top + bot[::-1]], fill=_dark(col, 0.2), outline=INK, width=o)
+            d.polygon([P(x + 10, y + 4) for x, y in top[1:]] + [P(x + 10, by + 10) for x, _ in top[:0:-1]], fill=col)
+            d.polygon([P(x, by + 18 + (y - by - 18) * 0.95) for x, y in bot[2:]] + [P(xs[-1], by + 18), P(xs[2], by + 18)], fill=belly)
+            for gx in (60, 78, 96):                                                                           # Kiemen
+                d.arc(B(gx - 12, by - 24, gx + 12, by + 24), 290, 70, fill=_dark(col, 0.4), width=max(2, int(4 * k)))
+            poly([(40, by + 30), (-20, by + 104), (90, by + 40)], _dark(col, 0.1))                           # Brustflosse
+            eye(130, by - 22, 12)
+            brow(130, by - 44, 14, 1)
+            jaw = mouth * 22
+            d.chord(B(110, by + 14, 196, by + 44 + jaw), 0, 180, fill=(110, 36, 46), outline=INK, width=max(2, int(4 * k)))
             for i in range(4):
-                tx = cx + facing * (40 + i * 22) * k
-                d.polygon([(tx, by + 30 * k), (tx + 10 * k * facing, by + 52 * k), (tx + 20 * k * facing, by + 30 * k)], fill=(255, 255, 255), outline=INK, width=int(3 * k))
+                tx = 120 + i * 18
+                poly([(tx, by + 28), (tx + 8, by + 42), (tx + 16, by + 28)], (252, 252, 244), shade=0, line=False)
         else:
-            mouthf(cx + facing * 100 * k, by + 34 * k, 12 * k)
+            col = (250, 146, 56)
+            poly([(-120, by), (-220, by - 74 + wag), (-196, by + wag * 0.3), (-220, by + 74 + wag)], col)
+            for s in (-30, 30):
+                d.line((*P(-150, by + s * 0.3), *P(-200, by + s * 1.6 + wag)), fill=_dark(col, 0.3), width=max(2, int(4 * k)))
+            poly([(-60, by - 66), (-20, by - 140), (60, by - 120), (50, by - 70)], col)                      # Rückenflosse
+            ell(-150, by - 82, 150, by + 82, col)
+            ell(-80, by + 10, 120, by + 76, _light(col, 0.4), shade=0, line=False)
+            band(-150, by - 82, 150, by + 82, 34, 62, (252, 250, 246))                                         # weißer Streifen
+            d.ellipse(B(-150, by - 82, 150, by + 82), outline=INK, width=o)
+            for sx in (-70, -30, 10):                                                                         # Schuppen
+                for sy in (-30, 10):
+                    d.arc(B(sx - 16, by + sy - 14, sx + 16, by + sy + 14), 270, 90, fill=_dark(col, 0.25), width=max(2, int(4 * k)))
+            fl = math.sin(t * 7) * 14
+            poly([(0, by + 20), (-40, by + 70 + fl), (30, by + 56)], _dark(col, 0.08))
+            eye(100, by - 18, 18)
+            brow(100, by - 46, 16, 1)
+            cheek(96, by + 22, 14)
+            mouthf(138, by + 22, 12)
     else:
         return None
     out = im.resize((im.width // S, im.height // S), Image.LANCZOS)

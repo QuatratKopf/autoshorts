@@ -462,7 +462,17 @@ def park(night):
     return p.vignette()
 
 
-def space(night):
+_bare = {}
+
+
+def space_bare(night=False):
+    """Weltall ohne die beiden Deko-Planeten – für Szenen, in denen Sonne, Mond oder Erde groß im Bild stehen."""
+    if night not in _bare:
+        _bare[night] = space(night, planets=False).convert("RGB")
+    return _bare[night]
+
+
+def space(night, planets=True):
     p = P(True)
     for y in range(0, H, 8):
         f = y / H
@@ -471,9 +481,10 @@ def space(night):
     for _ in range(170):
         x, y, r = rnd.randint(0, W), rnd.randint(0, H), rnd.choice((2, 2, 3, 3, 5))
         p.d.ellipse((x - r, y - r, x + r, y + r), fill=rnd.choice(((255, 255, 240), (200, 220, 255), (255, 220, 200))))
-    p.oval((640, 240, 980, 580), (236, 150, 90), glow=True)                    # Planet mit Ring
-    p.d.arc((560, 350, 1060, 480), 10, 170, fill=(250, 220, 160), width=14)
-    p.oval((110, 520, 250, 660), (150, 190, 240), glow=True)
+    if planets:
+        p.oval((640, 240, 980, 580), (236, 150, 90), glow=True)                # Planet mit Ring
+        p.d.arc((560, 350, 1060, 480), 10, 170, fill=(250, 220, 160), width=14)
+        p.oval((110, 520, 250, 660), (150, 190, 240), glow=True)
     p.d.ellipse((-200, GROUND - 60, W + 200, H + 500), fill=(120, 124, 140), outline=INK, width=O)   # Mondboden
     for cx, cy, r in ((220, GROUND + 180, 70), (700, GROUND + 120, 50), (900, GROUND + 330, 90), (430, GROUND + 420, 60)):
         p.d.ellipse((cx - r, cy - r * 0.4, cx + r, cy + r * 0.4), fill=(96, 100, 116), outline=INK, width=5)

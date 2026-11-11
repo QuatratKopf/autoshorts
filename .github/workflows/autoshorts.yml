@@ -109,6 +109,16 @@ jobs:
           done
           curl -fsSL --retry 3 --max-time 60 -o .fonts/Anton-Regular.ttf https://github.com/google/fonts/raw/main/ofl/anton/Anton-Regular.ttf || echo "Anton nicht geladen – Untertitel in Poppins"
 
+      - name: Node für HyperFrames einrichten
+        if: steps.check.outputs.media == '1'
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: HyperFrames installieren (Grafik-Einschübe als HTML-Animation)
+        if: steps.check.outputs.media == '1'
+        run: timeout 240 npm install -g --no-fund --no-audit hyperframes@0.9.34 || echo "HyperFrames nicht verfügbar – Grafiken werden wie bisher gezeichnet"
+
       - name: AutoShorts ausführen
         if: steps.check.outputs.run == '1'
         env:

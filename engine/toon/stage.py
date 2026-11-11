@@ -8,6 +8,7 @@ from pathlib import Path
 from PIL import Image, ImageChops, ImageDraw
 
 from . import extras, graphics, places, rig
+from .. import hyper
 
 W, H, FPS = 1080, 1920, 30
 SCALE = 1.08            # Figuren bewusst kleiner: die Szene steht im Mittelpunkt
@@ -420,7 +421,37 @@ def _prop_many(frame, kind, x, t, big, n, table=False, grow=1.0):
         frame.paste(cut, (int(x + dx + (bb[0] - 540) * f), int(bb[1] + dy + (1 - f) * 120)), cut)
 
 
+_osx = {}
+
+
+def _open_sky_x(sky, x, cy, max_up=0, half=170):
+    """Lage für ein Himmels-Ding (Sonne, Mond, Wolke …), an der es auch zu sehen ist: bleibt, wo es ist, wenn dort genug Himmel
+    frei ist – sonst rückt es zur nächsten offenen Stelle zwischen Bäumen und Häusern (Wolken auch bis max_up px höher).
+    Gibt (x, Anhebung) zurück."""
+    from PIL import ImageStat
+    key = (id(sky), sky.size, int(x), cy, max_up)
+    if key in _osx:
+        return _osx[key]
+
+    def free(cx, up=0):
+        y = cy - up
+        box = (int(max(0, cx - half)), max(0, y - half), int(min(W, cx + half)), min(H, y + half))
+        return ImageStat.Stat(sky.crop(box)).mean[0] / 255.0 if box[2] > box[0] and box[3] > box[1] else 0.0
+    best = (x, 0)
+    if free(x) < 0.6:
+        cands = [(cx, up) for cx in range(220, W - 219, 30) for up in range(0, max_up + 1, 50)]
+        best = max(cands, key=lambda c: free(*c) - abs(c[0] - x) / 2400.0 - c[1] / 4000.0)
+        if free(*best) <= free(x):
+            best = (x, 0)
+    if len(_osx) > 400:
+        _osx.clear()
+    _osx[key] = best
+    return best
+
+
 def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, in_bed, shot="", big=1.0, fx=None):
+    if place == "space" and any(extras.PROP_ALIASES.get(k, k) in ("sun", "moon", "earth") for k, _ in props):
+        bg = places.space_bare(night)                 # großer Himmelskörper im Bild: die Deko-Planeten treten zurück, nichts steckt ineinander
     frame = bg.copy()
     if (fx or {}).get("neon"):                # Lichtpunkte liegen hinter den Figuren
         graphics.bokeh(frame, t, 0.4)
@@ -439,7 +470,13 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
         lay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
         extras.draw_ambient(lay, place, night, t)
         for kind, x in behind:
-            if extras.PROP_ALIASES.get(kind, kind) in ("sun", "moon", "earth"):      # hoch am Himmel, über den Dächern
+            high = extras.PROP_ALIASES.get(kind, kind) in ("sun", "moon", "earth")
+            x, up = _open_sky_x(sky, x, 290 if high else 430, 0 if high else 200)    # nicht hinter Baumkronen oder Fassaden verstecken
+            if up:                                           # Wolke rückt höher in den freien Himmel
+                tmp = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+                _prop(tmp, kind, x, t, min(big, 1.2))
+                lay.alpha_composite(tmp, (0, 0), (0, up))
+            elif high:                                       # hoch am Himmel, über den Dächern
                 tmp = Image.new("RGBA", (W, H), (0, 0, 0, 0))
                 _prop(tmp, kind, x, t, 1.0)
                 lay.alpha_composite(tmp, (0, 0), (0, 230))
@@ -1411,7 +1448,7 @@ TEXT_PROPS = [(r"drohne", "drone"), (r"überwachungskamera|kameras? (erfass|film
 MAP_HINTS = ((r"ganz deutschland|in deutschland|deutschlandweit|bundesweit|bundesländer|jeder deutsche|alle deutschen", "germany"),
              (r"weltweit|auf der ganzen welt|alle länder|rund um den globus|weltbevölkerung|alle kontinente|die ganze erde|die ganze welt", "worldmap"))
 # Tiere neben Menschen: Größe im Verhältnis zur Figur (1.0 = menschengroß). „Riesen…“-Themen heben das auf (giant).
-CREATURE_SIZE = {"spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.3, "bee": 0.45, "wasp": 0.45}
+CREATURE_SIZE = {"spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45}
 GIANT_RE = r"riesen|riesig|gigant|monströs|so groß wie|meterhoh|haushoh|mutier"
 # Nur hier laufen Passanten durchs Bild – auf dem Feld, im Wald, im Keller ist niemand unterwegs
 CROWD_PLACES = ("headquarters", "street", "park", "village", "beach", "gasstation", "station", "supermarket", "supermarket_empty", "hospital", "office",
@@ -1544,6 +1581,8 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     big = 1.5 if shot == "event" else 1.15
     ins = [k for k, _ in props if extras.PROP_ALIASES.get(k, k) in extras.PROPS][:2] if shot == "insert" else []
     gfx = graphics.clean(scene.get("graphic")) if shot == "graphic" else None
+    if gfx and hyper.handles(gfx) and hyper.render(gfx, dur, out, str(scene.get("mood") or "").lower(), still):
+        return                                # Grafik von HyperFrames (HTML/GSAP) gerendert – sonst zeichnet graphics.py sie unten wie bisher
     neon_look = str(scene.get("look") or "") == "neon"
     if neon_look:                             # Neon-Nacht: nur die Kulisse wird violett getönt – Figuren und Dinge bleiben kräftig
         bg = graphics.tint(bg)
