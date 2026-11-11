@@ -1,5 +1,5 @@
 {
- "updated": 1794431033.0376651,
+ "updated": 1794431543.5320344,
  "enough": false,
  "counted": 1,
  "total": 5,
@@ -9,10 +9,10 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 1,
-   "avg_views": 1084,
+   "avg_views": 1095,
    "avg_likes": 18.0,
-   "like_rate": 1.66,
-   "avg_score": 1384
+   "like_rate": 1.64,
+   "avg_score": 1395
   }
  ],
  "weights": {
@@ -32,11 +32,11 @@
    "id": 38,
    "title": "Was passiert, wenn Drohnen deinen Alltag komplett überwachen?",
    "category": "whatif",
-   "views": 1084,
+   "views": 1095,
    "likes": 18,
    "comments": 1,
    "shares": 0,
-   "score": 1384
+   "score": 1395
   }
  ],
  "flop": []
