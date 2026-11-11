@@ -1341,5 +1341,55 @@
   "thumb": true,
   "look": "cartoon",
   "mp4": true
+ },
+ {
+  "id": 44,
+  "category": "whatif",
+  "topic": "Was wäre, wenn Südrussische Taranteln ganz Deutschland erobern?",
+  "status": "published",
+  "created": 1794395859.8291402,
+  "trend": {
+   "title": "südrussische tarantel",
+   "source": "Google Trends"
+  },
+  "title": "Was wäre, wenn Taranteln Deutschland erobern?",
+  "description": "Was passiert, wenn giftige Riesenratten ganz Deutschland fluten?\nWir spielen das Szenario Schritt für Schritt durch\nWürdest du das überleben oder sofort auswandern?",
+  "hashtags": [
+   "#shorts",
+   "#tarantel",
+   "#tierfakten",
+   "#whatif",
+   "#natur",
+   "#deutschland",
+   "#fy",
+   "#viral"
+  ],
+  "tags": [
+   "spinnen",
+   "tarantel",
+   "giftspinne",
+   "tiere in deutschland",
+   "what if",
+   "natur dokumentation",
+   "krabbeltiere"
+  ],
+  "thumb_text": "SPINNEN IN DEUTSCHLAND",
+  "missing": null,
+  "cover_ms": 63432,
+  "duration": 63.3,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "zernio_id": "6af4507181ff3504893836a2",
+  "yt_status": "Zernio: published",
+  "yt_id": "r0-npvYctUU",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6af4507181ff3504893836a2",
+  "error": null
  }
 ]
