@@ -1601,7 +1601,7 @@
   "id": 52,
   "category": "whatif",
   "topic": "Was wäre, wenn die Schwerkraft der Erde für nur 5 Sekunden exakt auf Null sinken würde?",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1794413635.5394292,
   "title": "Was passiert, wenn die Schwerkraft für 5 Sekunden fehlt?",
   "description": "Was passiert, wenn die Schwerkraft für 5 Sekunden erlischt? 😱\nIn diesem Gedankenexperiment hebst du ab und die Welt gerät völlig aus den Fugen.\nWürdest du versuchen, dich drinnen oder draußen festzuhalten?",
@@ -1640,6 +1640,7 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Absturz-Szene zeigt stehende Passanten, Decke-Szene lässt Figur fallen statt schweben, Rakete als Vergleich im Bild, erfundene Forscher-Aussage, sinnloses Wort in Grafik"
  }
 ]
