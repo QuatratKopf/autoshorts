@@ -94,7 +94,7 @@ def sanitize(sc):
             if not isinstance(a, dict):
                 continue
             c = {"id": str(a.get("id")) if isinstance(a.get("id"), (str, int)) and not isinstance(a.get("id"), bool) else "held",
-                 "speaks": a.get("speaks") is True}
+                 "speaks": a.get("speaks") is True, **({"hero": True} if a.get("hero") is True else {})}
             for k in ("action", "emotion", "emote", "kind", "hold", "facing"):
                 c[k] = word(a.get(k)) if k == "emote" else word(a.get(k)).lower()
             if isinstance(a.get("look"), dict):               # Nebenfiguren der Regie bringen ihr Aussehen mit
@@ -153,7 +153,7 @@ def _prepare(scene, cast):
             x0 = -260 if x0 <= 540 else 1340
         actors.append({"look": rig.Look.from_spec(spec, aid, list(cast).index(aid) if aid in cast else None), "kind": kind if kind in extras.CREATURES else "",
                        "hold": extras.held_key(a.get("hold")),
-                       "action": action, "emotion": str(a.get("emotion") or "").lower(), "emote": a.get("emote") or "", "giant": bool(scene.get("giant")), "say": str(a.get("say") or "") if isinstance(a.get("say"), str) else "",
+                       "action": action, "emotion": str(a.get("emotion") or "").lower(), "emote": a.get("emote") or "", "giant": bool(scene.get("giant")), "hero": bool(a.get("hero")), "say": str(a.get("say") or "") if isinstance(a.get("say"), str) else "",
                        "x0": x0, "x1": x1, "speaks": bool(a.get("speaks")), "seed": i * 5 + len(aid), "face": a.get("facing")})
     for i, a in enumerate(actors):     # zwei Figuren nie auf derselben Stelle
         for b in actors[:i]:
@@ -625,7 +625,7 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
         head_y = gy - 505 * scale
         if a["kind"]:
             hop = abs(math.sin(t * 9)) * 16 if (moving and not arrived) else 0
-            ksz = 1.0 if a.get("giant") else CREATURE_SIZE.get(a["kind"], 1.0)      # Tiere in echter Größe neben den Menschen
+            ksz = 1.0 if a.get("giant") else HERO_SIZE.get(a["kind"], 0.8) if a.get("hero") else CREATURE_SIZE.get(a["kind"], 1.0)   # Tiere in echter Größe – als Hauptfigur des Videos groß
             res = extras.creature(a["kind"], t + a["seed"], facing, mouth, a["emotion"] or
                                   ("shocked" if a["action"] in ("shocked", "scared") else ""), scale * 0.9 * ksz)
             if res:
@@ -1438,11 +1438,54 @@ def direct(scenes, times, topic="", style="", look=""):
             if sc.get("shot") == "event":
                 sc["shot"] = ""
             filled += 1
+    _topic_creature(scenes, topic)
     for i in range(1, len(scenes)):                  # nie zweimal dieselbe Großaufnahme hintereinander
         if isinstance(scenes[i], dict) and isinstance(scenes[i - 1], dict) and scenes[i].get("shot") == "close" == scenes[i - 1].get("shot"):
             scenes[i]["shot"] = ""
     _auto_tags(scenes)
     return scenes
+
+
+# Tier/Wesen im Titel → es wird die Hauptfigur des Videos (wie in den Vorbild-Shorts: die Spinne ist fast in jeder Szene, mit Gefühl)
+TOPIC_CREATURES = [(r"spinne|tarantel|vogelspinne|weberknecht|kreuzspinne", "spider"), (r"katze|kater|kätzchen", "cat"), (r"\bhund|hunde|welpe", "dog"),
+                   (r"biene", "bee"), (r"wespe|hornisse", "wasp"), (r"\bhai\b|haie|weißer hai", "shark"), (r"\bfisch|goldfisch", "fish"),
+                   (r"\bvogel|vögel|spatz|taube|amsel", "bird"), (r"\bgeist|gespenst", "ghost"), (r"roboter|\bki\b|künstliche intelligenz", "robot"),
+                   (r"außerirdisch|alien|\bufo", "alien"), (r"dinosaurier|\bdino|t-rex", "dino"), (r"monster|ungeheuer", "monster")]
+HERO_SIZE = {"spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9}   # Hauptfigur: etwa halb so hoch wie ein Mensch
+
+
+def _topic_creature(scenes, topic):
+    """Handelt das Video von einem Tier oder Wesen, das die Engine als Figur kennt, ist es die Hauptfigur: groß, mit Gefühl passend zur
+    Stimmung, neben dem Menschen – statt als kleiner Gegenstand am Boden. Nicht in Grafiken, Einschüben, Karten und Großaufnahmen."""
+    import re as _re
+    low = str(topic or "").lower()
+    hit = next(((pat, k) for pat, k in TOPIC_CREATURES if _re.search(pat, low)), None)
+    if not hit:
+        return
+    pat, kind = hit
+    for sc in scenes:
+        if not isinstance(sc, dict) or sc.get("shot") in ("graphic", "insert", "close") or places.resolve(backdrop(sc)) in MAPS:
+            continue
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        mine = [a for a in acts if str(a.get("kind") or "").lower() == kind]
+        for a in mine:
+            a["hero"] = True
+        humans = [a for a in acts if not a.get("kind")]
+        drop = [q for q in (sc.get("props") or []) if not (isinstance(q, dict) and _re.search(pat, str(q.get("type") or "").lower()))]
+        if mine:
+            sc["props"] = drop                            # das Tier steht als Figur im Bild – nicht zusätzlich als Gegenstand
+            continue
+        if len(humans) >= 2 or len(acts) >= 2 or (acts and not humans):   # kein Gedränge: neben höchstens einem Menschen, nie neben einem anderen Tier
+            continue
+        sc["props"] = drop
+        mood = str(sc.get("mood") or "")
+        if humans:
+            for h in humans[:1]:
+                if str(h.get("pos") or "center") in ("center", "", "None", "right"):
+                    h["pos"] = 300
+        sc["actors"] = acts + [{"id": "_thema", "kind": kind, "hero": True, "speaks": False, "action": "idle",
+                                "emotion": MOOD_EMOTION.get(mood, "happy" if mood == "happy" else ""),
+                                "pos": 760 if humans else "center", "emote": "", "say": "", "hold": "", "facing": ""}]
 
 
 _MONTHS = "januar|februar|märz|april|mai|juni|juli|august|september|oktober|november|dezember"

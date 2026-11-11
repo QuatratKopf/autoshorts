@@ -218,6 +218,18 @@ def main():
         assert scs[1].get("place") == "cinema", scs[1].get("place")
         assert len([a for a in scs[2].get("actors") or [] if not a.get("kind")]) == 3, "drei Gründer"
     check("Ort aus dem Satz", _places_said)
+    def _hero():                                                 # Tier im Titel wird Hauptfigur: groß, mit Gefühl, nicht doppelt als Gegenstand
+        scs = stage.direct([{"text": "Die Spinne sitzt in deinem Zimmer.", "place": "bedroom", "props": ["lib_tarantel"], "actors": [{"id": "du", "action": "shocked"}]},
+                            {"text": "Sie frisst Käfer.", "place": "park", "props": ["lib_tarantel"], "actors": [{"id": "du"}, {"id": "b", "kind": "bee"}]},
+                            {"text": "Schluss.", "place": "bedroom"}], [(i * 3, i * 3 + 3) for i in range(3)], "Was wäre, wenn Taranteln Deutschland erobern?")
+        heroes = [sc_ for sc_ in scs if any(a.get("kind") == "spider" and a.get("hero") for a in (sc_.get("actors") or []))]
+        assert heroes, "Spinne nie als Hauptfigur"
+        assert not any(q.get("type") == "lib_tarantel" for sc_ in heroes for q in sc_.get("props") or []), "Spinne doppelt"
+        assert scs[1]["props"], "Spinne fehlt neben der Biene"
+        for sc_ in scs:
+            frame(sc_, t=1.0)
+        frame({"place": "park", "actors": [{"id": "x", "kind": "spider", "hero": True}], "shot": "close"})
+    check("Tier als Hauptfigur", _hero)
     check("Neon-Look", lambda: graphics.neon(frame({"place": "street", "crowd": "walk"}), 1.0))
     check("Neon-Kulisse", lambda: graphics.tint(places.background("street", True)))
     # Regie mit zufälligen und kaputten Drehbüchern
