@@ -89,6 +89,14 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
             hair: long, bun oder "" · skin: weiß, hell, mittel, dunkel
   Tiere/Wesen statt Mensch: "kind": cat, dog, spider, ghost, alien, robot, bird, dino, monster, fish, shark, bee, wasp
   Höchstens 3 Figuren, jede klar unterscheidbar. Bei Du-Geschichten ist die Hauptfigur „du“.
+- BILDPLAN ZUERST: Überlege bei jeder Szene, bevor du sie ausfüllst: Was genau sieht der Zuschauer, während dieser Satz gesprochen wird?
+  Schreib das als erstes Feld "see" auf (ein deutscher Satz: wer, wo, was passiert) und fülle Ort, Requisiten und Figuren danach genau so aus.
+  Das Bild zeigt immer das, wovon der Satz handelt – nicht bloß das Thema des Videos. Redet der Satz von Kellern, sieht man einen Keller
+  (ohne Passanten); redet er von Panik, rennen Menschen; redet er von einer Zahl, kommt eine Grafik.
+- Tiere erscheinen in echter Größe: Eine Spinne, Biene oder Katze ist neben Menschen klein. Soll man sie gut sehen, zeig sie als
+  "shot": "insert" groß und allein. Setz dasselbe Tier nicht in jede Szene in die Mitte – zeig, was es auslöst.
+- Passanten ("crowd") gibt es nur dort, wo wirklich Menschen unterwegs sind: Stadt, Dorf, Park, Strand, Bahnhof, Supermarkt, Krankenhaus,
+  Büro, Schule. Nicht auf dem Feld, im Wald, im Keller oder in der Wüste.
 - In jeder Szene:
   "place": drinnen: bedroom, livingroom, kitchen, bathroom, office, classroom, lab, hospital, basement, supermarket,
            supermarket_empty (leergekaufte Regale), station (Bahnhof), restaurant, cave, underwater, space,
@@ -121,7 +129,11 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
            Nimm nur Requisiten, die an diesen Ort gehören (kein Karton mitten auf der Straße als Ersatz für einen Supermarkt –
            dafür gibt es den Ort "supermarket").
   "actors": 1–2 Figuren, z. B. [{"id": "mia", "action": "run", "emotion": "scared", "emote": "!", "pos": "offleft", "to": "center", "speaks": true}]
-     action: idle, talk, walk, run, wave, point, shocked, sad, jump, think, sit, sleep, dance, look_around, fall
+     action: idle, talk, walk, run, wave, point, shocked, sad, jump, think, sit, sleep, dance, look_around, fall, shake (schüttelt aus, was sie hält)
+     hold (optional): was die Figur in der Hand hält – phone, flashlight, bag, bottle, umbrella, sign, map, radio oder jeder kleine Gegenstand
+          aus "props"/"wishes" (z. B. "schuh", "glass", "candle")
+     HANDLUNG STATT GEGENSTAND: Beschreibt der Satz, dass jemand etwas mit einem Ding tut (Schuhe ausschütteln, Kerze halten, Glas heben),
+     dann zeig eine Figur, die genau das tut ("hold" plus passende "action") – nicht den Gegenstand allein als "insert".
      emotion: happy, sad, angry, scared, worried, shocked oder ""
      emote (Symbol über dem Kopf, sparsam): "!", "?", heart, idea, sweat, anger, music oder ""
      say (optional, selten): Sprechblase mit ein, zwei Wörtern, die die Figur gerade sagt, z. B. "PSST." oder "LAUF!" – höchstens 14 Zeichen
@@ -165,6 +177,13 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
     {"type": "pulse", "value": "1", "label": "EINE SEKUNDE"}                                         Herzschlag-Linie mit rotem Pochen – der Moment, in dem alles stillsteht
     {"type": "radio", "kicker": "FUNK · KANAL 4", "text": "BERGWACHT"}                               Funkspruch oder Durchsage mit Wellenform
     {"type": "distance", "value": "100 m", "left": "IHR", "right": "ZIEL"}                           Entfernung als Messlinie zwischen zwei Punkten
+    {"type": "days", "text": "30 TAGE ÜBERLEBEN", "value": "1", "sub": "30", "label": "NOCH 2 MINUTEN"}  Monatskalender: heute ist Tag "value" von "sub" (höchstens 35),
+                                                                                                     vergangene Tage werden abgehakt – ideal für Geschichten über mehrere Tage, gern mehrmals im Video
+    {"type": "phone", "mode": "alert", "kicker": "LIVE · GANZ DEUTSCHLAND", "text": "FANG IHN", "value": "10.000.000 €", "label": "ICH HAB IHN GESEHEN"}
+                                                                                                     Handy in der Hand mit Eilmeldung: Schlagwort, Betrag zählt hoch, Knopf
+    {"type": "phone", "mode": "lock", "value": "07:49", "kicker": "UNBEKANNT", "text": "Wir wissen, wo du bist."}   Sperrbildschirm mit Uhrzeit, eine Nachricht rutscht herein
+    {"type": "phone", "mode": "chat", "kicker": "Oma", "text": "Junge, stimmt das mit den 10 Millionen?", "sub": "Oma, bitte nicht."}
+                                                                                                     Nachrichten-Verlauf: text = Nachricht der anderen Person, sub = eigene Antwort
     {"type": "versus", "left": "ENERGY", "right": "KAFFEE", "kicker": "5 RUNDEN"}                    Duell-Bild mit großem VS
     {"type": "round", "kicker": "RUNDE 1", "text": "KOFFEIN"}                                        Banner kündigt die nächste Runde an
     {"type": "score", "left": "ENERGY", "right": "KAFFEE", "value": "0:2", "kicker": "RUNDE 3/5"}    Punktestand nach einer Runde
@@ -363,6 +382,68 @@ def trend_topic(cat: dict):
     return topic, {"title": tr["title"], "source": tr["source"], "news": tr.get("news", [])[:3], "summary": tr.get("summary", "")}
 
 
+
+def fix_description(js, topic):
+    """Die erste Zeile der Beschreibung muss vom Thema des Videos handeln – sonst wird sie aus dem Titel gebaut."""
+    import re
+    def keys(text):
+        return {w[:6] for w in re.findall(r"[a-zäöüß]{5,}", str(text or "").lower())} - {"passie", "würde", "plötzl", "deutsc", "wirkli", "komple"}
+    lines = [l for l in str(js.get("description") or "").split("\n") if l.strip()]
+    want = keys(js.get("title")) | keys(topic)
+    if lines and want and not (keys(lines[0]) & want):
+        ai.log(f"Beschreibung passt nicht zum Thema („{lines[0][:60]}“) – erste Zeile aus dem Titel gebaut")
+        lines[0] = str(js.get("title") or topic).strip()
+        js["description"] = "\n".join(lines)
+    return js
+
+
+REVIEW = """Du bist der Regisseur eines animierten Kurzvideos und prüfst den Bildplan, bevor gedreht wird.
+Unten steht jede Szene mit Sprechertext und dem, was dazu gezeigt werden soll. Prüfe Szene für Szene streng:
+1. Zeigt das Bild genau das, wovon der Satz redet (richtiger Ort, richtige Dinge, richtige Handlung)?
+2. Passt die Stimmung? Panik und rennende Menschen nur, wenn der Satz von Panik oder Flucht spricht – und dann auch wirklich.
+3. Ist der Ort glaubwürdig? Keine Menschenmenge im Keller, auf dem Feld oder im Wald; kein Meer, wenn es nicht ums Meer geht.
+4. Steht dasselbe Tier oder Ding in zu vielen Szenen einfach in der Mitte? Dann zeig stattdessen, was der Satz beschreibt:
+   die Folgen, die Menschen, den Ort, eine Zahl als Grafik.
+5. Kleine Tiere (Spinne, Biene, Vogel, Katze) sind klein. Soll man sie gut sehen, nimm "shot": "insert" (groß und allein im Bild).
+Gib NUR die Szenen zurück, die du verbesserst, als JSON:
+{"fixes": [{"i": 3, "why": "kurz", "place": "...", "backdrop": {...} oder null, "time": "day", "weather": "", "props": [...], "actors": [...],
+            "shot": "", "mood": "", "crowd": ""}]}
+Nenne in einem Fix nur die Felder, die sich ändern. Benutze ausschließlich Werte aus dieser Liste:
+"""
+
+
+def review_scenes(js, topic):
+    """Zweiter Blick vor dem Dreh: Die Text-KI prüft als Regisseur, ob jedes Bild zum Satz passt, und bessert nach."""
+    import json
+    scenes = [s for s in js.get("scenes", []) if isinstance(s, dict)]
+    keys = ("place", "backdrop", "time", "weather", "props", "actors", "shot", "mood", "crowd")
+    plan = [{"i": i, "text": s.get("text"), **{k: s.get(k) for k in keys if s.get(k) not in (None, "", [])},
+             **({"graphic": (s.get("graphic") or {}).get("type")} if isinstance(s.get("graphic"), dict) else {}),
+             **({"overlay": (s.get("overlay") or {}).get("type")} if isinstance(s.get("overlay"), dict) else {})} for i, s in enumerate(scenes)]
+    user = (f"Thema: {topic}\nTitel: {js.get('title')}\nFiguren: {json.dumps(js.get('cast'), ensure_ascii=False)}\n\nBILDPLAN:\n"
+            + "\n".join(json.dumps(p, ensure_ascii=False) for p in plan) + "\n\nERLAUBTE WERTE:\n" + TOON)
+    out, _ = ai.chat_json(REVIEW, user, 0.3)
+    n = 0
+    for f in (out.get("fixes") or [])[:len(scenes)]:
+        if not isinstance(f, dict) or not isinstance(f.get("i"), int) or not 0 <= f["i"] < len(scenes):
+            continue
+        s = scenes[f["i"]]
+        if isinstance(s.get("graphic"), dict) and "shot" not in f:      # Grafik-Szenen bleiben, wie sie sind
+            continue
+        changed = False
+        for k in keys:
+            if k in f and f[k] != s.get(k):
+                if k == "backdrop" and f[k] is None:
+                    s.pop("backdrop", None)
+                else:
+                    s[k] = f[k]
+                changed = True
+        if changed:
+            n += 1
+            ai.log(f"Regie-Prüfung Szene {f['i'] + 1}: {str(f.get('why') or '')[:120]}")
+    ai.log(f"Regie-Prüfung: {n} von {len(scenes)} Szenen verbessert")
+    return js
+
 def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
     secs = int(cfg("target_seconds") or 60)
     from .state import STATE
@@ -435,6 +516,15 @@ def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
                 js[k] = [t for t in js[k] if isinstance(t, str) and not _BRAND_RE.search(t.replace("#", " "))]
     except Exception:  # noqa: BLE001
         pass
+    try:
+        js = fix_description(js, topic)
+    except Exception:  # noqa: BLE001
+        pass
+    if toon and cfg("review_script") is not False:
+        try:
+            js = review_scenes(js, topic)
+        except Exception as e:  # noqa: BLE001
+            ai.log(f"Regie-Prüfung nicht möglich ({e}) – nehme den Bildplan, wie er ist")
     sc = [s for s in js.get("scenes", []) if isinstance(s, dict) and str(s.get("text", "")).strip()]
     if len(sc) < 3:
         raise ai.ProviderError("Drehbuch hat zu wenige Szenen")

@@ -319,6 +319,16 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None):
             from .toon import stage
             log("Animiere Szenen …")
             stage.direct(scenes, times, f"{v.get('topic') or ''} {script.get('title') or ''}", cat["slug"], os.environ.get("AS_LOOK") or cat.get("look") or cfg("look") or "")
+            try:                                          # Bildplan aufheben: so lässt sich später nachsehen, warum eine Szene so aussah
+                from .state import DATA
+                (DATA / "scripts").mkdir(exist_ok=True)
+                (DATA / "scripts" / f"{v['id']}.json").write_text(json.dumps({"title": script.get("title"), "scenes": [
+                    {k: sc_.get(k) for k in ("text", "see", "place", "backdrop", "time", "weather", "props", "actors", "shot", "mood", "crowd", "graphic", "overlay", "hud", "status")
+                     if sc_.get(k) not in (None, "", [])} for sc_ in scenes]}, ensure_ascii=False, indent=1), encoding="utf-8")
+                for old_f in sorted((DATA / "scripts").glob("*.json"), key=lambda f: f.stat().st_mtime)[:-20]:
+                    old_f.unlink()
+            except Exception:  # noqa: BLE001
+                pass
             for i, (sc, (s0, e0)) in enumerate(zip(scenes, times)):
                 d = (e0 - s0) + (0.35 if i == len(scenes) - 1 else 0.25)
                 try:

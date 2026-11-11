@@ -138,8 +138,8 @@ def _prepare(scene, cast):
         if action in ("walk", "run") and x1 == x0:       # ohne Ziel: von außen hereinkommen
             x0 = -260 if x0 <= 540 else 1340
         actors.append({"look": rig.Look.from_spec(spec), "kind": kind if kind in extras.CREATURES else "",
-                       "hold": extras.HELD.get(str(a.get("hold") or "").lower().strip(), ""),
-                       "action": action, "emotion": str(a.get("emotion") or "").lower(), "emote": a.get("emote") or "", "say": str(a.get("say") or "") if isinstance(a.get("say"), str) else "",
+                       "hold": extras.held_key(a.get("hold")),
+                       "action": action, "emotion": str(a.get("emotion") or "").lower(), "emote": a.get("emote") or "", "giant": bool(scene.get("giant")), "say": str(a.get("say") or "") if isinstance(a.get("say"), str) else "",
                        "x0": x0, "x1": x1, "speaks": bool(a.get("speaks")), "seed": i * 5 + len(aid), "face": a.get("facing")})
     for i, a in enumerate(actors):     # zwei Figuren nie auf derselben Stelle
         for b in actors[:i]:
@@ -426,14 +426,15 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
         head_y = gy - 505 * scale
         if a["kind"]:
             hop = abs(math.sin(t * 9)) * 16 if (moving and not arrived) else 0
+            ksz = 1.0 if a.get("giant") else CREATURE_SIZE.get(a["kind"], 1.0)      # Tiere in echter Größe neben den Menschen
             res = extras.creature(a["kind"], t + a["seed"], facing, mouth, a["emotion"] or
-                                  ("shocked" if a["action"] in ("shocked", "scared") else ""), scale * 0.9)
+                                  ("shocked" if a["action"] in ("shocked", "scared") else ""), scale * 0.9 * ksz)
             if res:
                 im, fx, fy, fly = res
                 if not fly:
-                    _shadow(frame, int(x), gy, int(120 * scale))
-                frame.paste(im, (int(x - fx), int(gy - fy - hop)), im)
-                head_y = gy - 430 * scale
+                    _shadow(frame, int(x), gy, int(120 * scale * ksz))
+                frame.paste(im, (int(x - fx), int(gy - fy - hop * ksz)), im)
+                head_y = gy - 430 * scale * ksz
         else:
             action = a["action"]
             tt = t
@@ -442,7 +443,7 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
             elif action == "idle" and a["speaks"]:
                 action = "talk"
             pose, _ = rig.pose_at(action, tt, dur, a["emotion"], mouth, a["seed"])
-            if a.get("hold") and action not in ("run", "sleep", "fall", "jump", "dance", "wave") and not pose.lying:
+            if a.get("hold") and action not in ("run", "sleep", "fall", "jump", "dance", "wave", "shake") and not pose.lying:
                 pose.arm_r, pose.fore_r = (62, 50) if a["hold"] in ("phone", "map", "flashlight", "radio", "bottle") else (8, 4)
                 if a["hold"] in ("umbrella", "sign"):
                     pose.arm_r, pose.fore_r = 40, 100
@@ -462,7 +463,10 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
             frame.paste(im, (int(x - fx), int(gy - fy)), im)
             if a.get("hold") and not pose.lying and "hand" in pose.extra:
                 hx, hy = pose.extra["hand"]
-                extras.draw_held(frame, a["hold"], x - fx + hx, gy - fy + hy, facing, t, scale, night)
+                if a["hold"].startswith("prop:"):
+                    extras.draw_held_prop(frame, a["hold"][5:], x - fx + hx, gy - fy + hy, facing, t, scale, action == "shake")
+                else:
+                    extras.draw_held(frame, a["hold"], x - fx + hx, gy - fy + hy, facing, t, scale, night)
             head_y = gy - (505 + max(0, pose.lift)) * scale * a["look"].size
             _zzz(od, pose, x, head_y + 75 * scale, t)
         if a.get("say"):
@@ -702,6 +706,20 @@ def direct(scenes, times, topic="", style="", look=""):
                         a["hold"] = item
                         break
                 break
+        # Der Satz beschreibt eine Handlung mit einem Ding (ausschütteln, ausklopfen …): eine Figur tut es – nicht bloß das Ding zeigen
+        if _re0.search(r"schüttel|ausschütt|ausklopf|ausleer", txt0):
+            things = [p.get("type") if isinstance(p, dict) else p for p in (sc.get("props") or [])]
+            things += [k for pat, k in _lib_props() + TEXT_PROPS if _re0.search(pat, txt0)]
+            thing = next((str(x) for x in things if extras.held_key(x).startswith("prop:")), "")
+            if thing:
+                who = next((a for a in acts if not a.get("kind")), None)
+                if who is None:
+                    who = {"id": last_id or "du", "pos": "center"}
+                    sc["actors"] = acts = [who]
+                who.update({"action": "shake", "hold": thing, "to": None})
+                sc["props"] = [p for p in (sc.get("props") or []) if (p.get("type") if isinstance(p, dict) else p) != thing]
+                if sc.get("shot") in ("insert", "event"):
+                    sc["shot"] = ""
         if _re0.search(r"wespe|biene|insekten", txt0) and len(acts) < 2 and not any(a.get("kind") for a in acts) and "actors" in sc:
             sc["actors"] = acts = acts + [{"id": "_biene", "kind": "bee", "action": "idle", "pos": "right", "speaks": False}]
         if places.resolve(backdrop(sc)) == "underwater":          # unter Wasser schwimmen Fische, keine Menschen
@@ -917,6 +935,14 @@ def direct(scenes, times, topic="", style="", look=""):
                 sc["overlay"] = fig
                 counters += 1
         prev_place = place
+    giant = bool(_re0.search(GIANT_RE, str(topic or "").lower()))
+    for sc in scenes:
+        if not isinstance(sc, dict):
+            continue
+        if giant:
+            sc["giant"] = True
+        if sc.get("crowd") and not crowd_ok(sc):          # Feld, Wald, Keller: dort läuft niemand herum
+            sc["crowd"] = ""
     return scenes
 
 
@@ -962,7 +988,7 @@ HINTS = [
     (r"gletscher|eiszeit|arktis|antarktis|polkappe|\beis\b", {"ground": "snow", "elements": ["glacier", "mountains"]}),
     (r"\bschnee|\bwinter", "snow"),
     (r"\bmeer|ozean|küste|strand|wellen", "beach"),
-    (r"tiefsee|unter wasser|meeresgrund|korallen|\bfisch|unter der oberfläche|im wasser leb|tauch", "underwater"),
+    (r"tiefsee|unter wasser|meeresgrund|korallen|\bfisch|unter der oberfläche|im wasser leb|\\btauch(?!t (plötzlich )?auf)|taucher", "underwater"),
     (r"wüste|sahara|sanddüne", "desert"),
     (r"vulkan|gebirge|\bberg|gipfel", "mountain"),
     (r"weltall|weltraum|galaxie|planet|umlaufbahn|astronaut|\bmond\b|sonnensystem", "space"),
@@ -1010,6 +1036,22 @@ TEXT_PROPS = [(r"drohne", "drone"), (r"überwachungskamera|kameras? (erfass|film
               (r"pflanze[n]? wachs|keim|\bsaat", "sprout")]
 MAP_HINTS = ((r"ganz deutschland|in deutschland|deutschlandweit|bundesweit|bundesländer|jeder deutsche|alle deutschen", "germany"),
              (r"weltweit|auf der ganzen welt|alle länder|rund um den globus|weltbevölkerung|alle kontinente|die ganze erde|die ganze welt", "worldmap"))
+# Tiere neben Menschen: Größe im Verhältnis zur Figur (1.0 = menschengroß). „Riesen…“-Themen heben das auf (giant).
+CREATURE_SIZE = {"spider": 0.3, "cat": 0.42, "dog": 0.55, "bird": 0.3, "bee": 0.45, "wasp": 0.45}
+GIANT_RE = r"riesen|riesig|gigant|monströs|so groß wie|meterhoh|haushoh|mutier"
+# Nur hier laufen Passanten durchs Bild – auf dem Feld, im Wald, im Keller ist niemand unterwegs
+CROWD_PLACES = ("street", "park", "village", "beach", "gasstation", "station", "supermarket", "supermarket_empty", "hospital", "office",
+                "classroom", "restaurant", "church")
+CROWD_ELEMENTS = ("city", "village", "street", "houses")
+
+
+def crowd_ok(scene):
+    b = backdrop(scene)
+    if isinstance(b, dict):
+        return any(str(e) in CROWD_ELEMENTS for e in (b.get("elements") or []))
+    return places.resolve(b) in CROWD_PLACES
+
+
 PUBLIC_INDOOR = ("supermarket", "supermarket_empty", "station", "hospital", "office", "classroom", "restaurant")
 MOOD_EMOTION = {"panic": "scared", "tense": "worried", "scary": "scared", "sad": "sad", "happy": "happy"}
 EMOTION_OK = {"panic": ("scared", "shocked", "worried"), "tense": ("worried", "scared", "shocked", "angry", ""),
@@ -1114,7 +1156,7 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
                 ff.stdin.write(frame.tobytes())
                 continue
             frame = _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, place == "bedroom", shot, big,
-                           {"crowd": scene.get("crowd"), "mood": str(scene.get("mood") or "").lower(), "spec": places.spec_of(backdrop(scene)), "sky": sky_m, "win": scene.get("_win"), "count": scene.get("_count"), "neon": neon_look,
+                           {"crowd": scene.get("crowd") if crowd_ok(scene) else "", "mood": str(scene.get("mood") or "").lower(), "spec": places.spec_of(backdrop(scene)), "sky": sky_m, "win": scene.get("_win"), "count": scene.get("_count"), "neon": neon_look,
                             "no_traffic": bool(scene.get("no_traffic") or scene.get("dark_city"))})
             if still is not None and fidx == min(n_frames - 1, FPS):
                 frame.save(still, quality=92)

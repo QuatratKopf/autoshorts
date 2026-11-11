@@ -274,6 +274,10 @@ def pose_at(action, t, dur, emotion="", mouth=0.0, seed=0):
         p.arm_r, p.fore_r = 150, 10 + 28 * s(t * 9)
         p.smile = 0.8
         p.head = 4 * s(t * 3)
+    elif a in ("shake", "schütteln"):                      # hält etwas am ausgestreckten Arm und schüttelt es kräftig aus
+        p.arm_r, p.fore_r = 78 + 10 * s(t * 16), 18 + 16 * s(t * 16 + 1)
+        p.lean = 6
+        p.head = 5
     elif a == "point":
         p.arm_r, p.fore_r = 95, 0
         p.lean = 4

@@ -20,6 +20,8 @@ Eine Grafik-Szene hat "shot": "graphic" und "graphic": {"type": ..., ...}:
   pulse    {"value": "1", "label": "EINE SEKUNDE", "kicker": "..."}                           Herzschlag-Linie, rotes Pochen
   radio    {"kicker": "FUNK · KANAL 4", "text": "BERGWACHT", "sub": "..."}                    Funkspruch mit Wellenform
   distance {"value": "100 m", "left": "IHR", "right": "ZIEL", "label": "..."}                 Messlinie zwischen zwei Punkten
+  days     {"text": "30 TAGE ÜBERLEBEN", "value": "1", "sub": "30", "label": "NOCH 2 MIN"}    Monatskalender: Tag value von sub, vergangene abgehakt
+  phone    {"mode": "alert|lock|chat", "kicker": "...", "text": "...", "value": "...", ...}   Handy in der Hand (Eilmeldung, Sperrbildschirm, Nachrichten)
 Dazu der Look "neon": dieselbe Lichtstimmung (Nachtblau/Violett, Lichtpunkte) über normalen Szenen."""
 import math
 import random
@@ -38,7 +40,7 @@ ORANGE = (255, 138, 31)
 THEMES = {"": ((58, 40, 150), (14, 10, 46)), "scary": ((40, 30, 96), (6, 6, 22)), "panic": ((120, 34, 70), (26, 8, 30)),
           "tense": ((110, 60, 120), (22, 10, 40)), "sad": ((40, 60, 130), (10, 14, 40)), "happy": ((90, 70, 190), (30, 16, 80)),
           "calm": ((58, 40, 150), (14, 10, 46))}
-TYPES = ("number", "timer", "calendar", "question", "houses", "badge", "map", "city", "versus", "round", "score", "compare", "podium", "share", "news", "pulse", "radio", "distance")
+TYPES = ("number", "timer", "calendar", "question", "houses", "badge", "map", "city", "versus", "round", "score", "compare", "podium", "share", "news", "pulse", "radio", "distance", "days", "phone")
 LEFT, RIGHT = (150, 110, 255), (255, 150, 40)                # Farben der beiden Seiten im Duell
 GREEN = (120, 230, 90)
 
@@ -836,8 +838,163 @@ def _g_distance(frame, g, t, dur):
         fl = _fit(d, lab, 64, 900, "Bold")
         d.text((W / 2 - d.textlength(lab, font=fl) / 2, 560 + f.size + 30), lab, font=fl, fill=WHITE)
 
+def _g_days(frame, g, t, dur):
+    """Monatskalender: vergangene Tage werden abgehakt, der heutige leuchtet, der letzte ist das Ziel."""
+    d = ImageDraw.Draw(frame, "RGBA")
+    k = _pop(t, 0.0, 0.4)
+    if k <= 0:
+        return
+    total = int(max(2, min(35, _num(g.get("sub")) or 30)))
+    today = int(max(1, min(total, _num(g.get("value")) or 1)))
+    cols = 6 if total <= 30 else 7
+    rows = -(-total // cols)
+    cell, gap = 132, 12
+    w = cols * cell + (cols - 1) * gap + 80
+    h = 150 + rows * (cell + gap) + 60
+    cx, top = W / 2, 760 - h / 2 + (1 - min(1.0, k)) * 200
+    x0 = cx - w / 2
+    d.rounded_rectangle((x0 + 10, top + 16, x0 + w + 10, top + h + 16), 40, fill=(0, 0, 0, 110))
+    d.rounded_rectangle((x0, top, x0 + w, top + h), 40, fill=(26, 34, 70), outline=INK, width=8)
+    d.rounded_rectangle((x0, top, x0 + w, top + 130), 40, fill=(255, 150, 40), outline=INK, width=8)
+    d.rectangle((x0 + 4, top + 90, x0 + w - 4, top + 130), fill=(255, 150, 40))
+    for dx in (-w / 2 + 110, w / 2 - 110):
+        d.rounded_rectangle((cx + dx - 14, top - 34, cx + dx + 14, top + 40), 10, fill=(60, 56, 80), outline=INK, width=5)
+    head = str(g.get("text") or g.get("kicker") or f"{total} TAGE").upper()[:26]
+    fh = _fit(d, head, 76, w - 240)
+    d.text((cx - d.textlength(head, font=fh) / 2, top + 65 - fh.size / 2), head, font=fh, fill=WHITE, stroke_width=3, stroke_fill=INK)
+    fn = _font(62)
+    done = (today - 1) * min(1.0, max(0.0, (t - 0.5) / 1.0))            # Haken laufen der Reihe nach durch
+    for i in range(total):
+        r, c = divmod(i, cols)
+        x = x0 + 40 + c * (cell + gap)
+        y = top + 160 + r * (cell + gap)
+        n = i + 1
+        is_today = n == today and t > 0.5 + 1.0 * (today > 1)
+        last = n == total
+        fill = (255, 214, 110) if last else ((60, 76, 140) if is_today else (38, 48, 96))
+        if is_today:
+            p = 6 + 4 * math.sin(t * 5)
+            d.rounded_rectangle((x - p, y - p, x + cell + p, y + cell + p), 26, outline=WHITE, width=7)
+        d.rounded_rectangle((x, y, x + cell, y + cell), 20, fill=fill)
+        s = str(n)
+        d.text((x + cell / 2 - d.textlength(s, font=fn) / 2, y + 28), s, font=fn, fill=INK if last else (WHITE if n >= today else (120, 132, 180)))
+        if n <= done:                                                    # abgehakt
+            d.line([(x + 30, y + 70), (x + 56, y + 98), (x + 104, y + 36)], fill=GREEN, width=14, joint="curve")
+    lab = str(g.get("label") or "").upper()[:30]
+    if lab and t > 0.7:
+        _pill(d, cx, top + h + 30, lab, _fit(d, lab, 54, 820, "Bold"), (255, 70, 100, 255), WHITE)
 
-DRAW = {"news": _g_news, "pulse": _g_pulse, "radio": _g_radio, "distance": _g_distance,
+
+def _g_phone(frame, g, t, dur):
+    """Handy in der Hand, groß im Bild. mode: alert (Eilmeldung mit Betrag), lock (Sperrbildschirm mit Nachricht), chat (Nachrichten)."""
+    k = _pop(t, 0.0, 0.45)
+    if k <= 0:
+        return
+    mode = str(g.get("mode") or "alert").lower()
+    pw, ph = 620, 1160
+    lay = Image.new("RGBA", (pw + 240, ph + 300), (0, 0, 0, 0))
+    d = ImageDraw.Draw(lay)
+    ox, oy = 120, 20
+    skin = (240, 200, 160)
+    d.rounded_rectangle((ox - 70, oy + 620, ox + 40, oy + 1010), 50, fill=skin, outline=INK, width=8)             # Handfläche links
+    d.rounded_rectangle((ox + 60, oy + ph - 60, ox + pw - 60, oy + ph + 280), 60, fill=skin, outline=INK, width=8)   # Arm
+    d.rounded_rectangle((ox + 8, oy + 14, ox + pw + 8, oy + ph + 14), 80, fill=(0, 0, 0, 110))
+    d.rounded_rectangle((ox, oy, ox + pw, oy + ph), 80, fill=(16, 16, 24), outline=INK, width=8)
+    sx0, sy0, sx1, sy1 = ox + 26, oy + 26, ox + pw - 26, oy + ph - 26
+    scr = {"alert": (24, 12, 20), "lock": (30, 44, 96), "chat": (236, 232, 224)}.get(mode, (24, 12, 20))
+    d.rounded_rectangle((sx0, sy0, sx1, sy1), 58, fill=scr)
+    d.rounded_rectangle((ox + pw / 2 - 80, oy + 44, ox + pw / 2 + 80, oy + 84), 20, fill=(0, 0, 0))
+    cx = ox + pw / 2
+    sw = sx1 - sx0 - 60
+    kick = str(g.get("kicker") or "").upper()[:24]
+    if mode == "lock":
+        for i in range(6):                                              # weiches Hintergrundbild
+            d.ellipse((sx0 + 40 + i * 90, sy1 - 420 + (i % 2) * 60, sx0 + 300 + i * 90, sy1 - 120), fill=(60 + i * 12, 70 + i * 6, 150))
+        d.rounded_rectangle((sx0, sy1 - 200, sx1, sy1), 58, fill=(24, 34, 80))
+        tm = str(g.get("value") or "07:49")[:6]
+        ft = _fit(d, tm, 190, sw)
+        d.text((cx - d.textlength(tm, font=ft) / 2, sy0 + 130), tm, font=ft, fill=WHITE)
+        kk = _pop(t, 0.6, 0.35)
+        if kk > 0:                                                      # Nachricht rutscht herein
+            y = sy0 + 440 + (1 - min(1.0, kk)) * 80
+            d.rounded_rectangle((sx0 + 24, y, sx1 - 24, y + 230), 36, fill=(250, 248, 244), outline=INK, width=5)
+            d.ellipse((sx0 + 48, y + 26, sx0 + 108, y + 86), fill=GREEN, outline=INK, width=4)
+            fk = _fit(d, kick or "NACHRICHT", 44, sw - 130, "Bold")
+            d.text((sx0 + 124, y + 30), kick or "NACHRICHT", font=fk, fill=INK)
+            msg = str(g.get("text") or "")[:44]
+            lines = _lines(d, msg, _font(44, "SemiBold"), sw - 40)[:2]
+            for i, ln in enumerate(lines):
+                d.text((sx0 + 48, y + 104 + i * 54), ln, font=_font(44, "SemiBold"), fill=(50, 50, 60))
+    elif mode == "chat":
+        d.rounded_rectangle((sx0, sy0, sx1, sy0 + 190), 58, fill=(250, 248, 244))
+        d.rectangle((sx0, sy0 + 120, sx1, sy0 + 190), fill=(250, 248, 244))
+        d.ellipse((sx0 + 30, sy0 + 84, sx0 + 116, sy0 + 170), fill=(200, 170, 230), outline=INK, width=4)
+        name = (kick or "CHAT").title()
+        d.text((sx0 + 134, sy0 + 100), name, font=_fit(d, name, 54, sw - 130, "Bold"), fill=INK)
+        y = sy0 + 240
+        for i, (key, mine) in enumerate((("text", False), ("sub", True), ("label", False))):
+            msg = str(g.get(key) or "")[:44]
+            kk = _pop(t, 0.4 + i * 0.7, 0.3)
+            if not msg or kk <= 0:
+                continue
+            f = _font(46, "SemiBold")
+            lines = _lines(d, msg, f, sw - 150)[:3]
+            bw = max(d.textlength(ln, font=f) for ln in lines) + 56
+            bh = len(lines) * 58 + 40
+            bx = (sx1 - 30 - bw) if mine else sx0 + 30
+            yy = y + (1 - min(1.0, kk)) * 40
+            d.rounded_rectangle((bx, yy, bx + bw, yy + bh), 30, fill=(150, 226, 150) if mine else WHITE, outline=INK, width=5)
+            for j, ln in enumerate(lines):
+                d.text((bx + 28, yy + 18 + j * 58), ln, font=f, fill=INK)
+            y += bh + 26
+    else:
+        red = (255, 70, 90)
+        if kick:
+            fk = _fit(d, kick, 34, sw, "Bold")
+            d.ellipse((cx - d.textlength(kick, font=fk) / 2 - 34, sy0 + 96, cx - d.textlength(kick, font=fk) / 2 - 14, sy0 + 116), fill=red if (t * 2) % 1 < 0.6 else scr)
+            d.text((cx - d.textlength(kick, font=fk) / 2, sy0 + 86), kick, font=fk, fill=WHITE)
+        bx0, by0, bx1, by1 = cx - 150, sy0 + 160, cx + 150, sy0 + 500                                     # Steckbrief-Bild: Umriss im Fadenkreuz
+        d.rounded_rectangle((bx0, by0, bx1, by1), 26, fill=(250, 232, 220), outline=red, width=8)
+        d.ellipse((cx - 70, by0 + 60, cx + 70, by0 + 200), fill=(90, 80, 110))
+        d.pieslice((cx - 120, by0 + 210, cx + 120, by0 + 470), 180, 360, fill=(90, 80, 110))
+        r = 110 + 10 * math.sin(t * 4)
+        d.ellipse((cx - r, by0 + 150 - r, cx + r, by0 + 150 + r), outline=red, width=6)
+        d.line([(cx - r - 20, by0 + 150), (cx + r + 20, by0 + 150)], fill=red, width=4)
+        d.line([(cx, by0 + 150 - r - 20), (cx, by0 + 150 + r + 20)], fill=red, width=4)
+        txt = str(g.get("text") or "").upper()[:16]
+        f = _fit(d, txt, 150, sw)
+        d.text((cx - d.textlength(txt, font=f) / 2, sy0 + 540), txt, font=f, fill=red)
+        val = str(g.get("value") or "")
+        if val:
+            cur = _count(val, t, 0.4, 1.0).upper()
+            fv = _fit(d, val.upper(), 110, sw)
+            d.text((cx - d.textlength(cur, font=fv) / 2, sy0 + 720), cur, font=fv, fill=WHITE)
+        btn = str(g.get("label") or "").upper()[:22]
+        if btn:
+            fb = _fit(d, btn, 44, sw - 80, "Bold")
+            d.rounded_rectangle((sx0 + 50, sy0 + 880, sx1 - 50, sy0 + 980), 50, fill=(255, 150, 40), outline=INK, width=5)
+            d.text((cx - d.textlength(btn, font=fb) / 2, sy0 + 930 - fb.size / 2 - 4), btn, font=fb, fill=INK)
+    for i in range(4):                                                  # Finger rechts greifen ums Gerät
+        y = oy + 600 + i * 104
+        d.rounded_rectangle((ox + pw - 34, y, ox + pw + 62, y + 84), 40, fill=skin, outline=INK, width=8)
+    d.rounded_rectangle((ox - 80, oy + 520, ox + 30, oy + 640), 50, fill=skin, outline=INK, width=8)   # Daumen
+    ang = math.sin(t * 1.6) * 1.5 - 2
+    im = lay.rotate(ang, resample=Image.BICUBIC)
+    frame.paste(im, (int(W / 2 - im.width / 2), int(330 + (1 - min(1.0, k)) * 900)), im)
+
+
+def _lines(d, text, f, max_w):
+    out, cur = [], ""
+    for w in str(text).split():
+        if cur and d.textlength(cur + " " + w, font=f) > max_w:
+            out.append(cur); cur = w
+        else:
+            cur = (cur + " " + w).strip()
+    return out + ([cur] if cur else [])
+
+
+DRAW = {"days": _g_days, "phone": _g_phone,
+        "news": _g_news, "pulse": _g_pulse, "radio": _g_radio, "distance": _g_distance,
         "versus": _g_versus, "round": _g_round, "score": _g_score, "compare": _g_compare, "podium": _g_podium, "share": _g_share,
         "map": _g_map, "city": _g_city, "number": _g_number, "timer": _g_timer, "calendar": _g_calendar, "question": _g_question, "houses": _g_houses, "badge": _g_badge}
 
@@ -854,7 +1011,10 @@ def clean(g):
     out["dark"] = g.get("dark") is True
     need = {"number": "value", "timer": "value", "calendar": "value", "houses": "value", "badge": "text", "question": None,
             "map": None, "city": None, "versus": "left", "round": "text", "score": "value", "compare": "value", "podium": "text",
-            "share": "value", "news": "text", "pulse": "value", "radio": "text", "distance": "value"}[out["type"]]
+            "share": "value", "news": "text", "pulse": "value", "radio": "text", "distance": "value", "days": "value", "phone": "text"}[out["type"]]
+    mode = str(g.get("mode") or "").lower()
+    if out["type"] == "phone":
+        out["mode"] = mode if mode in ("alert", "lock", "chat") else "alert"
     if need and need not in out:
         return None
     if out["type"] == "versus" and "right" not in out:

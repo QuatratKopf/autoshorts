@@ -686,6 +686,54 @@ def prop_fit(kind):
     return px(meters, y) / _nat[key], y
 
 
+_held_sprites = {}
+
+
+def held_key(name):
+    """Was eine Figur in die Hand nehmen kann: feste Hand-Gegenstände oder jede kleine Requisite (auch gelernte) bis etwa 1 m."""
+    n = str(name or "").lower().strip()
+    if n in HELD:
+        return HELD[n]
+    key = PROP_ALIASES.get(n, n)
+    if key in PROPS and key in SIZES and SIZES[key][0] <= 1.0 and key not in SKY:
+        return "prop:" + key
+    return ""
+
+
+def _held_sprite(key):
+    if key not in _held_sprites:
+        lay = Image.new("RGBA", (900, H), (0, 0, 0, 0))
+        PROPS[key](ImageDraw.Draw(lay, "RGBA"), 450, 0.0)
+        box = lay.getbbox()
+        _held_sprites[key] = lay.crop(box) if box else None
+    return _held_sprites[key]
+
+
+def draw_held_prop(layer, key, x, y, facing, t, k=1.0, shake=False):
+    """Beliebige kleine Requisite in der Hand; beim Ausschütteln kopfüber, wackelnd, mit herausfallenden Krümeln."""
+    spr = _held_sprite(key)
+    if spr is None:
+        return
+    size = max(70.0, min(210.0, SIZES.get(key, (0.3, 0))[0] * 520)) * k        # etwas größer als echt, damit man es erkennt
+    f = size / max(spr.width, spr.height)
+    im = spr.resize((max(2, int(spr.width * f)), max(2, int(spr.height * f))), Image.LANCZOS)
+    if facing < 0:
+        im = im.transpose(Image.FLIP_LEFT_RIGHT)
+    ang = (150 + 22 * math.sin(t * 16)) * (1 if facing > 0 else -1) if shake else 6 * math.sin(t * 2)
+    im = im.rotate(ang, resample=Image.BICUBIC, expand=True)
+    cx, cy = x + facing * 10 * k, y + (30 * k if shake else -size * 0.3)
+    if shake:
+        d = ImageDraw.Draw(layer, "RGBA")
+        rnd = random.Random(7)
+        for i in range(9):                                   # was herausfällt
+            ph = (t * 1.6 + rnd.random()) % 1.0
+            px_ = cx + (rnd.random() - 0.5) * 70 * k + facing * ph * 20 * k
+            py_ = cy + size * 0.45 + ph * 330 * k
+            r = (5 + rnd.random() * 6) * k
+            d.ellipse((px_ - r, py_ - r, px_ + r, py_ + r), fill=(120, 90, 60, int(255 * (1 - ph))))
+    layer.paste(im, (int(cx - im.width / 2), int(cy - im.height / 2)), im)
+
+
 def draw_held(layer, kind, x, y, facing, t, k=1.0, night=False):
     """Gegenstand in der Hand (x, y = Handpunkt)."""
     d = ImageDraw.Draw(layer, "RGBA")
