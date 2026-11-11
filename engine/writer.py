@@ -282,6 +282,8 @@ BRANDS = {"amazon": "ein großer Online-Händler", "google": "eine Suchmaschine"
           "playstation": "eine Spielkonsole", "xbox": "eine Spielkonsole", "nintendo": "ein Spielehersteller", "iphone": "ein Smartphone",
           "bmw": "ein Autobauer", "mercedes": "ein Autobauer", "audi": "ein Autobauer", "volkswagen": "ein Autobauer", "porsche": "ein Autobauer",
           "aldi": "ein Discounter", "lidl": "ein Discounter", "rewe": "ein Supermarkt", "edeka": "ein Supermarkt", "starbucks": "eine Kaffeekette",
+          "nvidia": "ein Chip-Hersteller", "geforce": "eine neue Grafikkarte", "intel": "ein Chip-Hersteller", "amd": "ein Chip-Hersteller", "sega": "ein Spielehersteller",
+          "denny's": "ein Diner", "dennys": "ein Diner", "fortnite": "ein Videospiel", "minecraft": "ein Videospiel", "huawei": "ein Handy-Hersteller", "sony": "ein Elektronik-Riese",
           "red bull": "ein Energydrink", "temu": "ein Online-Shop", "shein": "ein Online-Shop", "zalando": "ein Online-Shop", "twitch": "ein Streamingportal"}
 _BRAND_RE = re.compile(r"(?i)(?<![\wäöüß])(?:giganten wie |firmen wie |konzerne wie |unternehmen wie |wie )?(" + "|".join(re.escape(b) for b in sorted(BRANDS, key=len, reverse=True)) + r")(?:s)?(?![\wäöüß])")
 

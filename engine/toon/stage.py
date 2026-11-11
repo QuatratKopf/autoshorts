@@ -14,6 +14,7 @@ SCALE = 1.08            # Figuren bewusst kleiner: die Szene steht im Mittelpunk
 POS = {"left": 250, "center": 540, "right": 830, "offleft": -260, "offright": 1340,
        "links": 250, "mitte": 540, "rechts": 830}
 TALL_OV = ("phone", "checklist", "note")
+NO_FURNITURE = ("restaurant", "bathroom", "hallway", "supermarket", "supermarket_empty", "station", "basement", "attic", "hospital", "serverroom")
 MAIN_IDS = ("du", "ich", "held", "hero", "main", "erzähler", "narrator", "a0")
 
 
@@ -191,6 +192,9 @@ def _prepare(scene, cast):
                 extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in ("fire", "volcano", "tornado", "car", "bus", "truck", "house", "tree", "meteor", "wave") \
                 and str(scene.get("shot") or "") != "insert":
             continue                                              # gehört nach draußen, nicht ins Zimmer
+        if isinstance(p, dict) and place not in places.OUTDOOR and str(p.get("type")).lower().startswith("lib_") \
+                and extras.REAL_M.get(str(p.get("type")).lower(), extras.SIZES.get(str(p.get("type")).lower(), (0,))[0]) > 2.6 and str(scene.get("shot") or "") != "insert":
+            continue                                              # Gelerntes, das höher ist als ein Zimmer (Turm, Gebäude), steht nicht im Raum
         if isinstance(p, dict) and p.get("type"):
             taken = [q["x1"] for q in actors] + [q[1] for q in props]
             free = [c for c in (830, 250, 540, 990, 90) if all(abs(c - tx) > 230 for tx in taken)] or [830]
@@ -823,6 +827,8 @@ def direct(scenes, times, topic="", style="", look=""):
                     if kind in OUTDOOR_THINGS and places.resolve(backdrop(sc)) not in places.OUTDOOR and not (
                             kind in extras.SKY and places.resolve(backdrop(sc)) in places.WINDOWS):
                         continue                           # Feuer, Autos, Naturgewalten erscheinen nicht im Zimmer (Himmelsdinge: im Fenster)
+                    if kind in ("computer", "tv", "fridge", "shelf", "cart") and places.resolve(backdrop(sc)) in NO_FURNITURE:
+                        continue                           # „zocken“ im Diner stellt keinen Schreibtisch ins Restaurant
                     if places.resolve(backdrop(sc)) == "bedroom" and sc.get("props"):
                         break                              # im Schlafzimmer ist neben Bett und Tisch nur Platz für ein Ding
                     if kind in INDOOR_THINGS and places.resolve(backdrop(sc)) in ("space", "underwater", "cave"):
@@ -904,6 +910,9 @@ def direct(scenes, times, topic="", style="", look=""):
         for q in (sc.get("props") or []):
             k = str(q.get("type") if isinstance(q, dict) else q).lower().strip()
             k = extras.PROP_ALIASES.get(k, k)
+            if k in home and not has_bd and places.resolve(sc.get("place")) in ("headquarters", "gasstation", "powerplant", "church", "graveyard", "farm", "camp"):
+                sc["props"] = [q2 for q2 in sc["props"] if q2 is not q]   # der Ort ist bewusst gewählt: das Zimmer-Ding entfällt, der Ort bleibt
+                break
             if k in home and (places.resolve(backdrop(sc)) in places.OUTDOOR or place == "plain"):
                 sc["place"] = place = home[k]            # Regal, Kühlschrank, Fernseher stehen nicht auf der Straße
                 sc.pop("backdrop", None)
@@ -1109,8 +1118,9 @@ def direct(scenes, times, topic="", style="", look=""):
                     sc["shot"] = "close"
                 else:
                     acts[0].update(action="walk", pos="offright" if stale % 8 < 4 else "offleft", to="center")
-        if topic_any and rp2 in places.OUTDOOR and not sc.get("props") and sc.get("shot") != "close" and i % 2 == 0 and not last:
-            sc["props"] = [{"type": topic_any[0]}]        # das Thema bleibt im Bild (z. B. die Drohne über der Straße)
+        topic_out = [k for k in topic_any if k not in INDOOR_THINGS and not (k.startswith("lib_") and extras.SIZES.get(k, (9,))[0] <= 0.5)]
+        if topic_out and rp2 in places.OUTDOOR and not sc.get("props") and sc.get("shot") != "close" and i % 2 == 0 and not last:
+            sc["props"] = [{"type": topic_out[0]}]        # das Thema bleibt im Bild (z. B. die Drohne über der Straße)
         fig_prev = bool([a for a in (sc.get("actors") or []) if isinstance(a, dict)]) and sc.get("shot") not in ("insert", "graphic")
         # --- beeindruckende Zahl im Satz → Zähler, wenn das Drehbuch keine Einblendung vorsieht
         if not [a for a in (sc.get("actors") or []) if isinstance(a, dict)] and not sc.get("crowd") and not sc.get("props") and not sc.get("weather") \
@@ -1135,6 +1145,7 @@ def direct(scenes, times, topic="", style="", look=""):
     filled = 0
     zero_topic = bool(_re0.search(ZERO_G_TOPIC, str(topic or "").lower()))
     zero_g, float_seen, floats = False, False, 0
+    inserts_seen = set()
     for i, sc in enumerate(scenes):
         if not isinstance(sc, dict):
             continue
@@ -1231,9 +1242,23 @@ def direct(scenes, times, topic="", style="", look=""):
         keys = [extras.PROP_ALIASES.get(str(p.get("type") if isinstance(p, dict) else p).lower(), str(p.get("type") if isinstance(p, dict) else p).lower())
                 for p in (sc.get("props") or [])]
         if sc.get("shot") == "insert" and keys:           # Großaufnahme nur von Dingen, von denen der Satz (oder das Thema) wirklich handelt
-            named = any(k == keys[0] and (_re0.search(pat, txt) or _re0.search(pat, str(topic or "").lower())) for pat, k in pats)
-            if not named and keys[0] not in txt:
-                sc["shot"], sc["props"], keys = "", [], []
+            in_txt = [k for k in keys if k in txt or any(k2 == k and _re0.search(pat, txt) for pat, k2 in pats)]
+            in_topic = [k for k in keys if any(k2 == k and _re0.search(pat, str(topic or "").lower()) for pat, k2 in pats)]
+            good = in_txt or [k for k in keys[:1] if k in in_topic]
+            if good and tuple(good[:2]) not in inserts_seen:
+                inserts_seen.add(tuple(good[:2]))
+                if good != keys:                          # das genannte Ding nach vorn (Grafikkarte statt Schreibtisch)
+                    sc["props"] = [p for k in good for p in (sc.get("props") or []) if isinstance(p, dict)
+                                   and extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) == k][:2]
+                    keys = good[:2]
+            else:                                         # nichts Genanntes oder dieselbe Großaufnahme gab es schon: normale Szene mit Figur
+                sc["shot"] = ""
+                sc["props"] = [p for p in (sc.get("props") or []) if isinstance(p, dict)
+                               and extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in good]
+                keys = [k for k in keys if k in good]
+                if not [a for a in (sc.get("actors") or []) if isinstance(a, dict)] and rp not in ("space", "underwater", "cave"):
+                    sc["actors"] = [{"id": main_id, "action": "point" if keys else "talk", "emotion": MOOD_EMOTION.get(str(sc.get("mood") or ""), ""),
+                                     "pos": "left" if keys else "center", "speaks": True}]
         ov_t = str((sc.get("overlay") or {}).get("type") or "") if isinstance(sc.get("overlay"), dict) else ""
         if isinstance(sc.get("graphic"), dict) and ov_t in ("checklist", "phone", "note", "choice"):
             sc.pop("graphic", None)                       # Liste und Grafik zugleich überdecken sich: die Liste bleibt, die Grafik geht
@@ -1284,7 +1309,7 @@ HINTS = [
     (r"windrad|windräder|windkraft", {"elements": ["windturbines", "fields"]}),
     (r"bahnhof|\bzug\b|\bzüge|u-bahn|s-bahn|bahnsteig", "station"),
     (r"friedhof|\bgrab\b|gräber", "graveyard"),
-    (r"restaurant|café|kellner", "restaurant"),
+    (r"restaurant|café|kellner|\bdiner\b|burgerladen|imbiss|kneipe|pizzeria|gaststätte", "restaurant"),
     (r"badezimmer|dusche|badewanne|toilette|wasserhahn|leitungswasser", "bathroom"),
     (r"brücke", {"elements": ["bridge", "river", "city"]}),
     (r"\bzelt|camping|flüchtlingslager|notunterk", "camp"),
