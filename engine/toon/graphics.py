@@ -564,7 +564,7 @@ def _g_compare(frame, g, t, dur):
     _kicker(d, 330, g.get("kicker"), t, 0.0)
     va, vb = _num(g.get("value")), _num(g.get("sub"))
     top = max(va or 0, vb or 0) or 1
-    base, full = 1180, 620
+    base, full = 1040, 560
     grow = 0.0 if t < 0.25 else min(1.0, (t - 0.25) / 1.0)
     grow = 1 - (1 - grow) ** 3
     for i, (key, val, cx, col) in enumerate((("value", va, 270, LEFT), ("sub", vb, 810, RIGHT))):
