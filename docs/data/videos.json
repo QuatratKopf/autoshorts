@@ -1699,5 +1699,55 @@
   "tt_status": "Zernio: published",
   "tt_publish_id": "zernio:6af49b45e2f854aee09c9656",
   "error": null
+ },
+ {
+  "id": 55,
+  "category": "fakten",
+  "topic": "Wie Nvidia von einer Gaming-Bude zum wertvollsten Tech-Giganten wurde",
+  "status": "review",
+  "created": 1794420631.6607423,
+  "trend": {
+   "title": "Nvidia",
+   "source": "Wikipedia"
+  },
+  "title": "Wie Nvidia zum wertvollsten Tech-Giganten wurde",
+  "description": "Nvidia war mal nur für Gamer da\nWie eine kleine Grafikkarten-Bude plötzlich die ganze Welt erobert hat\nWärst du damals eingestiegen",
+  "hashtags": [
+   "#shorts",
+   "#nvidia",
+   "#tech",
+   "#gaming",
+   "#aktien",
+   "#wissen",
+   "#viral",
+   "#foryou"
+  ],
+  "tags": [
+   "nvidia",
+   "grafikkarte",
+   "tech gigant",
+   "geschichte",
+   "aktien",
+   "ki",
+   "gpu",
+   "silicon valley",
+   "erfolg"
+  ],
+  "thumb_text": "VON NULL ZU BILLIONEN",
+  "missing": [
+   "aktienchart"
+  ],
+  "cover_ms": 63432,
+  "duration": 63.3,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-11 21:00",
+  "review_at": 1794420879.0656264
  }
 ]
