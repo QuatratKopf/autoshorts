@@ -52,26 +52,49 @@ def p_box(d, x, t, s=1.0):
 
 def p_car(d, x, t, s=1.0):
     b = math.sin(t * 9) * 3
-    _r(d, (x - 210, GROUND - 150 + b, x + 210, GROUND - 40 + b), (226, 70, 60), 30)
-    d.rounded_rectangle((x - 120, GROUND - 240 + b, x + 110, GROUND - 140 + b), 34, fill=(226, 70, 60), outline=INK, width=O)
+    col, dark = (226, 70, 60), (184, 50, 48)
+    d.ellipse((x - 230, GROUND - 22, x + 230, GROUND + 18), fill=(0, 0, 0, 60))
+    _r(d, (x - 210, GROUND - 150 + b, x + 210, GROUND - 40 + b), col, 30)
+    d.rounded_rectangle((x - 120, GROUND - 240 + b, x + 110, GROUND - 140 + b), 34, fill=col, outline=INK, width=O)
+    d.rounded_rectangle((x - 204, GROUND - 84 + b, x + 204, GROUND - 46 + b), 18, fill=dark)                 # Schattenkante unten
+    d.rounded_rectangle((x - 190, GROUND - 144 + b, x + 60, GROUND - 128 + b), 8, fill=(244, 110, 96))       # Glanz
     _r(d, (x - 96, GROUND - 220 + b, x - 6, GROUND - 150 + b), (170, 220, 250), 14, 5)
     _r(d, (x + 8, GROUND - 220 + b, x + 90, GROUND - 150 + b), (170, 220, 250), 14, 5)
+    for wx0 in (-90, 14):
+        d.polygon([(x + wx0 + 8, GROUND - 214 + b), (x + wx0 + 30, GROUND - 214 + b), (x + wx0 + 14, GROUND - 156 + b), (x + wx0 + 2, GROUND - 156 + b)], fill=(220, 240, 255))
+    d.line((x - 2, GROUND - 140 + b, x - 2, GROUND - 52 + b), fill=INK, width=4)                             # Türfuge und Griff
+    d.rounded_rectangle((x + 14, GROUND - 124 + b, x + 50, GROUND - 112 + b), 5, fill=INK)
     for wx in (-120, 120):
         _o(d, (x + wx - 48, GROUND - 90, x + wx + 48, GROUND + 6), (40, 40, 46))
-        _o(d, (x + wx - 18, GROUND - 60, x + wx + 18, GROUND - 24), (190, 190, 196), 4)
+        _o(d, (x + wx - 20, GROUND - 62, x + wx + 20, GROUND - 22), (200, 200, 206), 4)
+        d.ellipse((x + wx - 7, GROUND - 49, x + wx + 7, GROUND - 35), fill=(120, 120, 128))
     _o(d, (x + 180, GROUND - 120 + b, x + 214, GROUND - 90 + b), (255, 236, 150), 4)
+    _o(d, (x - 214, GROUND - 118 + b, x - 192, GROUND - 92 + b), (230, 60, 60), 4)
+    d.rounded_rectangle((x - 222, GROUND - 70 + b, x - 196, GROUND - 52 + b), 6, fill=(90, 92, 100))         # Stoßstangen
+    d.rounded_rectangle((x + 196, GROUND - 70 + b, x + 222, GROUND - 52 + b), 6, fill=(90, 92, 100))
 
 
 def p_fire(d, x, t, s=1.0):
+    d.ellipse((x - 190 * s, GROUND - 150 * s, x + 190 * s, GROUND + 30), fill=(255, 190, 80, 46))            # Feuerschein
     for dx in (-60, 40):
-        d.line((x + dx - 50, GROUND - 16, x + dx + 60, GROUND - 40), fill=(110, 70, 44), width=26)
-    for i, (col, sc) in enumerate((((240, 90, 40), 1.0), ((250, 170, 50), 0.68), ((255, 236, 140), 0.38))):
-        fl = 1 + 0.12 * math.sin(t * 11 + i * 2)
-        hgt, wd = 230 * sc * fl * s, 110 * sc * s
-        tip = x + math.sin(t * 7 + i) * 18 * sc
-        d.polygon([(x - wd, GROUND - 40), (x - wd * 0.7, GROUND - 40 - hgt * 0.5), (tip, GROUND - 40 - hgt),
-                   (x + wd * 0.7, GROUND - 40 - hgt * 0.5), (x + wd, GROUND - 40), (x, GROUND - 20)],
-                  fill=col, outline=INK if i == 0 else None, width=O)
+        d.line((x + dx - 50, GROUND - 16, x + dx + 60, GROUND - 40), fill=INK, width=34)
+        d.line((x + dx - 50, GROUND - 16, x + dx + 60, GROUND - 40), fill=(118, 76, 48), width=22)
+    for i, (col, sc) in enumerate((((236, 84, 40), 1.0), ((250, 150, 44), 0.72), ((255, 214, 90), 0.46), ((255, 246, 190), 0.24))):
+        for j, off in enumerate((-0.42, 0.0, 0.42)):                                                     # drei Zungen je Farbschicht
+            fl = 1 + 0.16 * math.sin(t * 11 + i * 2 + j * 1.7)
+            hgt, wd = 240 * sc * fl * s * (1.0 if j == 1 else 0.68), 62 * sc * s
+            cx = x + off * 120 * sc * s
+            tip = cx + math.sin(t * 7 + i + j * 2) * 22 * sc
+            pts = [(cx - wd, GROUND - 40), (cx - wd * 0.8, GROUND - 40 - hgt * 0.45), (tip, GROUND - 40 - hgt),
+                   (cx + wd * 0.8, GROUND - 40 - hgt * 0.45), (cx + wd, GROUND - 40), (cx, GROUND - 22)]
+            if i == 0:
+                d.polygon(pts, fill=col, outline=INK, width=O)
+            else:
+                d.polygon(pts, fill=col)
+    for k in range(6):                                                                                   # Funken
+        ph = (t * 0.9 + k / 6) % 1
+        fx, fy = x + math.sin(k * 2.3 + t * 2) * 90 * s, GROUND - 120 * s - ph * 380 * s
+        d.ellipse((fx - 6, fy - 6, fx + 6, fy + 6), fill=(255, 220, 110, int(255 * (1 - ph))))
 
 
 def p_tv(d, x, t, s=1.0):
@@ -141,28 +164,63 @@ def p_meteor(d, x, t, s=1.0):
 
 
 def p_explosion(d, x, t, s=1.0):
+    """Explosion: Druckwelle, Feuerball mit hellem Kern, Rauchballen am Rand und fliegende Funken."""
     k = min(1.0, max(0.0, t) / 0.5)
     if t < 0:
         return
-    r = 60 + 300 * k
-    for i, col in enumerate(((240, 90, 40), (250, 170, 50), (255, 240, 170))):
-        rr = r * (1 - i * 0.28)
+    cy = GROUND - 240
+    r = 70 + 300 * k
+    w = max(0.0, t - 0.05)                                                           # Druckwelle läuft schnell nach außen
+    rw = 120 + 900 * w
+    if w < 0.8:
+        d.ellipse((x - rw, cy - rw * 0.9, x + rw, cy + rw * 0.9), outline=(255, 255, 255, int(210 * (1 - w / 0.8))), width=int(22 * (1 - w / 0.8)) + 4)
+    for j in range(9):                                                               # dunkle Rauchballen hinter dem Feuer
+        a = j / 9 * math.tau + 0.3
+        m = r * (0.95 + 0.12 * math.sin(t * 3 + j))
+        px_, py_ = x + math.cos(a) * m, cy + math.sin(a) * m * 0.9
+        rr = r * (0.34 + 0.06 * (j % 3))
+        d.ellipse((px_ - rr - 5, py_ - rr - 5, px_ + rr + 5, py_ + rr + 5), fill=INK)
+        d.ellipse((px_ - rr, py_ - rr, px_ + rr, py_ + rr), fill=(86, 80, 92))
+        d.ellipse((px_ - rr * 0.8, py_ - rr * 0.9, px_ + rr * 0.5, py_ + rr * 0.3), fill=(112, 106, 118))
+    for i, col in enumerate(((228, 76, 38), (248, 140, 44), (255, 204, 84), (255, 246, 196))):
+        rr = r * (1 - i * 0.22)
         pts = []
-        for j in range(20):
-            a = j / 20 * math.tau
-            m = rr * (1.0 if j % 2 else 0.7) * (1 + 0.06 * math.sin(t * 20 + j))
-            pts.append((x + math.cos(a) * m, GROUND - 220 + math.sin(a) * m))
+        n = 22
+        for j in range(n):
+            a = j / n * math.tau
+            m = rr * (1.0 if j % 2 else 0.74) * (1 + 0.07 * math.sin(t * 22 + j * 1.3 + i))
+            pts.append((x + math.cos(a) * m, cy + math.sin(a) * m * 0.94))
         d.polygon(pts, fill=col, outline=INK if i == 0 else None, width=O)
+    for j in range(14):                                                              # Funken und Trümmer fliegen im Bogen
+        a = j / 14 * math.tau + 0.2
+        dist = (240 + 520 * min(1.0, t / 0.9)) * (0.7 + 0.3 * ((j * 7) % 5) / 4)
+        fx, fy = x + math.cos(a) * dist, cy + math.sin(a) * dist * 0.8 + 260 * t * t
+        al = int(255 * max(0.0, 1 - t / 1.6))
+        if j % 3:
+            d.ellipse((fx - 9, fy - 9, fx + 9, fy + 9), fill=(255, 214, 96, al))
+        else:
+            d.rectangle((fx - 12, fy - 9, fx + 12, fy + 9), fill=(70, 64, 72, al))
 
 
 def p_earth(d, x, t, s=1.0):
-    cy, r = 520, 190
-    _o(d, (x - r, cy - r, x + r, cy + r), (70, 150, 230))
-    sh = (t * 30) % (r * 2)
-    for dx, dy, rw, rh in ((-90, -60, 80, 60), (30, 40, 90, 70), (60, -100, 50, 36), (-40, 90, 60, 40)):
+    """Erdkugel mit Atmosphäre, Kontinenten, ziehenden Wolken und Schattenseite."""
+    from .places import CONTINENTS
+    cy, r = 520, 200
+    for k in range(5):
+        d.ellipse((x - r - 44 + k * 8, cy - r - 44 + k * 8, x + r + 44 - k * 8, cy + r + 44 - k * 8), fill=(110, 170, 255, 22 + k * 6))
+    _o(d, (x - r, cy - r, x + r, cy + r), (44, 116, 204))
+    d.ellipse((x - r * 0.9, cy - r * 0.95, x + r * 0.55, cy + r * 0.5), fill=(60, 136, 220))
+    for pts in CONTINENTS:
+        q = [(x + a * r * 0.985, cy + b * r * 0.985) for a, b in pts if a * a + b * b <= 1.0]
+        if len(q) >= 3:
+            d.polygon(q, fill=(98, 180, 112), outline=(30, 70, 60), width=4)
+    sh = (t * 26) % (r * 2)
+    for dx, dy, rw in ((-120, -90, 70), (40, 60, 80), (-30, 130, 56), (90, -40, 60)):                    # Wolken ziehen
         cx = x + ((dx + sh + r) % (2 * r)) - r
-        if abs(cx - x) < r - rw * 0.6:
-            d.ellipse((cx - rw, cy + dy - rh, cx + rw, cy + dy + rh), fill=(90, 190, 110))
+        if abs(cx - x) < r - rw * 0.9 and abs(dy) < r * 0.8:
+            d.rounded_rectangle((cx - rw, cy + dy - 11, cx + rw, cy + dy + 11), 11, fill=(255, 255, 255, 190))
+    d.pieslice((x - r, cy - r, x + r, cy + r), -62, 100, fill=(10, 14, 50, 70))                          # Schattenseite
+    d.ellipse((x - r * 0.72, cy - r * 0.78, x - r * 0.2, cy - r * 0.34), fill=(255, 255, 255, 60))        # Glanz
     d.ellipse((x - r, cy - r, x + r, cy + r), outline=INK, width=O)
 
 
@@ -183,23 +241,62 @@ def p_bigmoon(d, x, t, s=1.0):
 
 
 def p_tornado(d, x, t, s=1.0):
-    for i in range(9):
-        wdt = 40 + i * 34
-        y = GROUND - 30 - i * 90
-        ox = math.sin(t * 5 + i * 0.7) * (20 + i * 6)
-        d.ellipse((x + ox - wdt, y - 40, x + ox + wdt, y + 40), fill=(150, 156, 170, 230), outline=INK, width=5)
+    """Wirbelsturm: breiter Trichter aus der Wolke, der sich windet, mit umlaufenden Bändern und mitgerissenen Trümmern."""
+    n = 12
+    rows = []
+    for i in range(n + 1):
+        f = i / n                                            # 0 = Boden, 1 = Wolke
+        y = GROUND - 20 - f * 860
+        wdt = 46 + (f ** 1.5) * 330
+        ox = math.sin(t * 3.2 + f * 4.5) * (70 * (1 - f) + 18)
+        rows.append((x + ox, y, wdt))
+    left = [(cx - w, y) for cx, y, w in rows]
+    right = [(cx + w, y) for cx, y, w in reversed(rows)]
+    d.polygon(left + right, fill=(132, 138, 156, 240), outline=INK, width=O)
+    d.polygon([(cx - w * 0.2, y) for cx, y, w in rows] + right, fill=(104, 110, 130, 240))               # Schattenseite
+    for i, (cx, y, w) in enumerate(rows[1:-1]):                                                           # umlaufende Bänder
+        ph = (t * 2.2 + i * 0.37) % 1
+        d.arc((cx - w, y - w * 0.16, cx + w, y + w * 0.16), int(ph * 360), int(ph * 360) + 150, fill=(226, 230, 240, 230), width=7)
+        d.arc((cx - w, y - w * 0.16, cx + w, y + w * 0.16), int(ph * 360) + 190, int(ph * 360) + 260, fill=(84, 88, 106, 230), width=6)
+    cx, y, w = rows[-1]
+    for dx, r in ((-0.9, 150), (-0.4, 190), (0.2, 200), (0.8, 160)):                                      # Wolke oben
+        d.ellipse((cx + dx * w - r - O, y - r * 0.8 - O, cx + dx * w + r + O, y + r * 0.6 + O), fill=INK)
+    for dx, r in ((-0.9, 150), (-0.4, 190), (0.2, 200), (0.8, 160)):
+        d.ellipse((cx + dx * w - r, y - r * 0.8, cx + dx * w + r, y + r * 0.6), fill=(96, 102, 122))
+    for k in range(9):                                                                                    # Trümmer kreisen um den Fuß
+        a = t * 5 + k * 0.7
+        rr = 110 + k * 26
+        px_, py_ = rows[0][0] + math.cos(a) * rr, GROUND - 60 - k * 46 + math.sin(a) * 22
+        if math.sin(a) > -0.2:
+            d.rectangle((px_ - 12, py_ - 8, px_ + 12, py_ + 8), fill=((120, 84, 54), (90, 96, 110), (190, 70, 60))[k % 3], outline=INK, width=3)
+    d.ellipse((rows[0][0] - 190, GROUND - 46, rows[0][0] + 190, GROUND + 26), fill=(170, 160, 150, 150))  # Staub am Boden
 
 
 def p_wave(d, x, t, s=1.0):
+    """Riesenwelle: türmt sich auf, mit überschlagendem Kamm, Gischt und helleren Streifen im Wasser."""
     k = min(1.0, t / 4.0)
     top = GROUND - 120 - 330 * k
-    pts = [(0, H)]
-    for i in range(0, W + 60, 60):
-        pts.append((i, top + math.sin(i * 0.012 + t * 3) * 50 - (W - i) * 0.25 * k))
-    pts.append((W, H))
-    d.polygon(pts, fill=(50, 140, 220, 235), outline=INK, width=O)
+    def ridge(i, off=0.0):
+        return top + off + math.sin(i * 0.012 + t * 3) * 50 - (W - i) * 0.25 * k
+    pts = [(0, H)] + [(i, ridge(i)) for i in range(0, W + 60, 60)] + [(W, H)]
+    d.polygon(pts, fill=(36, 112, 196, 240), outline=INK, width=O)
+    d.polygon([(0, H)] + [(i, ridge(i, 90 + 40 * k)) for i in range(0, W + 60, 60)] + [(W, H)], fill=(52, 140, 220, 240))
+    d.polygon([(0, H)] + [(i, ridge(i, 240 + 90 * k)) for i in range(0, W + 60, 60)] + [(W, H)], fill=(76, 164, 236, 240))
+    for i in range(0, W + 60, 60):                                                                        # Gischt auf dem Kamm
+        y = ridge(i)
+        r = 26 + 12 * math.sin(i * 0.05 + t * 5)
+        d.ellipse((i - r, y - r * 0.9, i + r, y + r * 0.7), fill=(240, 250, 255, 245))
+    cx, cy = 150, ridge(150)                                                                              # Kamm kippt links nach vorn
+    d.pieslice((cx - 150, cy - 60, cx + 170, cy + 200), 180, 320, fill=(240, 250, 255, 235))
+    d.pieslice((cx - 110, cy - 20, cx + 130, cy + 180), 180, 320, fill=(52, 140, 220, 240))
     for i in range(0, W, 120):
-        d.arc((i, top + 40 + math.sin(i + t * 3) * 20, i + 100, top + 100 + math.sin(i + t * 3) * 20), 180, 360, fill=(220, 240, 255), width=8)
+        yy = ridge(i, 150) + math.sin(i + t * 3) * 20
+        d.arc((i, yy, i + 100, yy + 60), 180, 360, fill=(200, 232, 252), width=8)
+    for j in range(10):                                                                                   # Tropfen spritzen
+        ph = (t * 1.3 + j / 10) % 1
+        sx = (j * 131) % W
+        sy = ridge(sx) - 30 - ph * 150 + 160 * ph * ph
+        d.ellipse((sx - 8, sy - 8, sx + 8, sy + 8), fill=(226, 244, 255, int(255 * (1 - ph))))
 
 
 def p_ice(d, x, t, s=1.0):
@@ -209,13 +306,31 @@ def p_ice(d, x, t, s=1.0):
 
 
 def p_volcano(d, x, t, s=1.0):
-    d.polygon([(x - 300, GROUND), (x - 80, GROUND - 480), (x + 80, GROUND - 480), (x + 300, GROUND)], fill=(110, 84, 80), outline=INK, width=O)
-    d.polygon([(x - 80, GROUND - 480), (x + 80, GROUND - 480), (x + 40, GROUND - 380), (x - 10, GROUND - 300), (x - 50, GROUND - 400)], fill=(244, 110, 40))
-    for i in range(7):
-        ph = (t * 0.9 + i / 7) % 1
-        a = -math.pi / 2 + (i - 3) * 0.28
-        px, py = x + math.cos(a) * 420 * ph, GROUND - 480 + math.sin(a) * 420 * ph + 380 * ph * ph
-        d.ellipse((px - 18, py - 18, px + 18, py + 18), fill=(250, 160, 50), outline=INK, width=4)
+    """Vulkan: Kegel mit Schattenseite, glühender Krater, Lavaströme, Rauchsäule und Lavabrocken."""
+    top = GROUND - 480
+    for k in range(7):                                                                                    # Rauchsäule
+        ph = (t * 0.3 + k / 7) % 1
+        r = 60 + ph * 170
+        cx, cy = x + math.sin(k * 1.9 + t * 0.8) * 50 + ph * 140, top - 40 - ph * 760
+        g = int(84 + ph * 50)
+        d.ellipse((cx - r, cy - r, cx + r, cy + r), fill=(g, g - 4, g + 8, int(220 * (1 - ph))))
+    d.ellipse((x - 190, top - 150, x + 190, top + 110), fill=(255, 150, 60, 70))                          # Glut über dem Krater
+    d.polygon([(x - 320, GROUND), (x - 84, top), (x + 84, top), (x + 320, GROUND)], fill=(116, 88, 84), outline=INK, width=O)
+    d.polygon([(x + 10, top + O), (x + 84 - O, top + O), (x + 320 - O * 2, GROUND - O), (x + 120, GROUND - O)], fill=(92, 68, 70))     # Schattenseite
+    d.polygon([(x - 320 + 30, GROUND - O), (x - 200, GROUND - 190), (x - 150, GROUND - 60)], fill=(134, 104, 98))                       # Felsrippe
+    d.polygon([(x - 84, top), (x + 84, top), (x + 46, top + 100), (x - 6, top + 190), (x - 52, top + 90)], fill=(250, 120, 40))
+    for sx, ln in ((-40, 330), (36, 250)):                                                                # Lavaströme laufen den Hang hinab
+        pts = [(x + sx + math.sin(i * 0.9 + sx) * 16 + i * (sx / 9), top + 60 + i * ln / 8) for i in range(9)]
+        d.line(pts, fill=INK, width=30, joint="curve")
+        d.line(pts, fill=(246, 120, 40), width=20, joint="curve")
+        d.line(pts, fill=(255, 196, 80), width=8, joint="curve")
+    d.ellipse((x - 84, top - 22, x + 84, top + 22), fill=(255, 196, 80), outline=INK, width=5)
+    for i in range(8):
+        ph = (t * 0.9 + i / 8) % 1
+        a = -math.pi / 2 + (i - 3.5) * 0.26
+        px, py = x + math.cos(a) * 440 * ph, top + math.sin(a) * 440 * ph + 400 * ph * ph
+        d.ellipse((px - 20, py - 20, px + 20, py + 20), fill=(250, 150, 50), outline=INK, width=4)
+        d.ellipse((px - 10, py - 12, px + 4, py + 2), fill=(255, 226, 130))
 
 
 def p_cloud(d, x, t, s=1.0, dark=False):
@@ -360,22 +475,34 @@ def p_candle(d, x, t, s=1.0):
 
 
 def p_bus(d, x, t, s=1.0):
+    d.ellipse((x - 440, GROUND - 24, x + 440, GROUND + 20), fill=(0, 0, 0, 60))
     _r(d, (x - 420, GROUND - 330, x + 420, GROUND - 50), (240, 190, 60), 30)
+    d.rounded_rectangle((x - 414, GROUND - 120, x + 414, GROUND - 56), 20, fill=(210, 156, 44))              # Schattenkante
+    d.rectangle((x - 414, GROUND - 176, x + 414, GROUND - 164), fill=(250, 250, 246))                        # Zierstreifen
     for i in range(5):
         _r(d, (x - 390 + i * 150, GROUND - 300, x - 270 + i * 150, GROUND - 190), (170, 220, 250), 10, 5)
+        d.polygon([(x - 380 + i * 150, GROUND - 294), (x - 356 + i * 150, GROUND - 294), (x - 372 + i * 150, GROUND - 196), (x - 386 + i * 150, GROUND - 196)], fill=(220, 240, 255))
     _r(d, (x + 300, GROUND - 180, x + 380, GROUND - 60), (200, 160, 50), 6, 5)
+    _o(d, (x + 392, GROUND - 130, x + 420, GROUND - 100), (255, 236, 150), 4)
     for wx in (-270, 250):
         _o(d, (x + wx - 56, GROUND - 106, x + wx + 56, GROUND + 6), (40, 40, 46))
-        _o(d, (x + wx - 20, GROUND - 70, x + wx + 20, GROUND - 30), (190, 190, 196), 4)
+        _o(d, (x + wx - 22, GROUND - 72, x + wx + 22, GROUND - 28), (200, 200, 206), 4)
 
 
 def p_truck(d, x, t, s=1.0):
+    d.ellipse((x - 440, GROUND - 24, x + 420, GROUND + 20), fill=(0, 0, 0, 60))
     _r(d, (x - 420, GROUND - 380, x + 150, GROUND - 60), (236, 236, 240), 10)
+    d.rectangle((x - 414, GROUND - 130, x + 144, GROUND - 66), fill=(206, 208, 216))                         # Schattenkante
+    for lx in (-280, -140, 0):
+        d.line((x + lx, GROUND - 372, x + lx, GROUND - 68), fill=(196, 198, 208), width=5)                    # Planken des Aufbaus
     _r(d, (x + 160, GROUND - 280, x + 400, GROUND - 60), (70, 130, 200), 24)
+    d.rounded_rectangle((x + 166, GROUND - 120, x + 394, GROUND - 66), 16, fill=(52, 104, 170))
     _r(d, (x + 250, GROUND - 250, x + 380, GROUND - 160), (170, 220, 250), 10, 5)
+    d.polygon([(x + 262, GROUND - 244), (x + 290, GROUND - 244), (x + 272, GROUND - 166), (x + 256, GROUND - 166)], fill=(220, 240, 255))
+    _o(d, (x + 376, GROUND - 130, x + 402, GROUND - 100), (255, 236, 150), 4)
     for wx in (-300, -180, 290):
         _o(d, (x + wx - 56, GROUND - 106, x + wx + 56, GROUND + 6), (40, 40, 46))
-        _o(d, (x + wx - 20, GROUND - 70, x + wx + 20, GROUND - 30), (190, 190, 196), 4)
+        _o(d, (x + wx - 22, GROUND - 72, x + wx + 22, GROUND - 28), (200, 200, 206), 4)
 
 
 def p_house(d, x, t, s=1.0):

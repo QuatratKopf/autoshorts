@@ -32,10 +32,13 @@ Repo: `QuatratKopf/autoshorts`, Branch `main`. Antworten und Berichte auf Deutsc
    - Tag/Nacht, Wetter, innen/außen stimmen (keine Sonne im Zimmer, kein Feuer im Haus ohne Grund).
    - Titel, Beschreibung und Hashtags handeln vom Thema des Videos; echte Umlaute; keine Marken, keine echten Personen.
    - Länge über 60 Sekunden; Untertitel laufen bis zum Schluss mit.
+   - Fesselnd? Alle drei bis vier Sekunden ein neues Bild, Kamera springt auf das Schlüsselwort, keine zwei Szenen hintereinander mit
+     demselben Aufbau, kein Satz ohne neuen Inhalt. Der Fortschrittsbalken oben läuft bis zum Ende durch.
 5. Etwas passt nicht → Ursache in der Engine beheben (meist `engine/toon/stage.py` Regie-Regeln, `engine/writer.py` Drehbuch-Vorgaben,
    `extras.py`/`places.py`/`graphics.py` Zeichnung), nicht nur dieses eine Video flicken. Den Bildplan mit
    `stage.direct(...)` und `engine.toon.selftest.frame(...)` lokal nachstellen und das Ergebnis ansehen.
-   `FONTS_DIR=/usr/share/fonts/truetype/google-fonts python3 -m engine.toon.selftest` muss mit 0 Fehlern enden. Committen
+   `FONTS_DIR=/usr/share/fonts/truetype/google-fonts python3 -m engine.toon.selftest` muss mit 0 Fehlern enden (dauert seit dem
+   Umbau der Animation rund 15 Minuten – im Hintergrund starten und inzwischen weiterarbeiten). Committen
    (`Prüfung: …`), `git pull --rebase`, pushen.
    Dann die alte Fassung verwerfen (`-f 'inputs[action]=discard' -f 'inputs[video_id]=<id>' -f 'inputs[topic]=<Grund>'`) und mit demselben
    Thema und derselben Kategorie neu bauen: `-f 'inputs[action]=make' -f 'inputs[category]=<slug>' -f 'inputs[upload]=0' -f 'inputs[topic]=<Thema>'`.
