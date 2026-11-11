@@ -710,6 +710,15 @@ def direct(scenes, times, topic="", style="", look=""):
             if sc["crowd"] in ("walk", "cheer"):
                 sc["crowd"] = ""
         sc["props"] = [q for q in sc["props"] if (lambda k: k in extras.PROPS or k in extras.PROP_ALIASES or k in extras.HELD)(q["type"].lower())]
+        low0 = sc["text"].lower()
+        simile = sc["_simile"] = []
+        for pat, k in TEXT_PROPS:                         # „wie ein Raketenstart“, „wie ein Vulkan“: ein Vergleich, kein Ding im Bild
+            m = _re0.search(r"\bwie (?:bei |in |auf |von )?(?:ein\w* |der |die |das |dem |den )?(?:\w+ )?(?:" + pat + ")", low0)
+            if m and not _re0.search(pat, low0[:m.start()] + " " + low0[m.end():]):
+                simile.append(k)
+                sc["props"] = [q for q in sc["props"] if extras.PROP_ALIASES.get(q["type"].lower(), q["type"].lower()) != k]
+        if sc["weather"] in ("dark", "dunkel", "blackout") and not _re0.search(r"dunkel|finster|nacht|schwarz|\bstrom|licht|blackout|sonne", low0):
+            sc["weather"] = ""                            # Dunkelheit nur, wenn der Satz davon spricht – sonst erkennt man das Bild nicht
         acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
         place = places.resolve(sc.get("place"))
         if place in MAPS and not isinstance(sc.get("backdrop"), dict) and _hint(sc.get("text")) is not None \
@@ -743,7 +752,7 @@ def direct(scenes, times, topic="", style="", look=""):
         if len(sc.get("props") or []) < 2 and str(sc.get("shot") or "") != "close" and places.resolve(sc.get("place")) not in MAPS:       # was der Satz nennt, ist auch zu sehen
             have = {extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) for q in (sc.get("props") or [])}
             for pat, kind in _lib_props() + TEXT_PROPS:
-                if kind not in have and _re0.search(pat, txt0):
+                if kind not in have and kind not in simile and _re0.search(pat, txt0):
                     if kind in OUTDOOR_THINGS and places.resolve(backdrop(sc)) not in places.OUTDOOR and not (
                             kind in extras.SKY and places.resolve(backdrop(sc)) in places.WINDOWS):
                         continue                           # Feuer, Autos, Naturgewalten erscheinen nicht im Zimmer (Himmelsdinge: im Fenster)
@@ -1022,8 +1031,9 @@ def direct(scenes, times, topic="", style="", look=""):
         acts_f = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
         fl, kept = "", False
         if rp_f not in MAPS and rp_f not in ("space", "underwater") and sc.get("shot") != "graphic":
-            if _re0.search(DROP_RE, txt_f) and (float_seen or _re0.search(GRAVITY_BACK_RE, txt_f)):
-                fl = "drop"
+            floats_now = bool(_re0.search(FLOAT_RE, txt_f))
+            if _re0.search(DROP_RE, txt_f) and (_re0.search(GRAVITY_BACK_RE, txt_f) or (float_seen and not floats_now)):
+                fl = "drop"                               # „… während Möbel schwerelos durcheinanderfliegen“ ist noch kein Absturz
             elif _re0.search(FLOAT_RE, txt_f) or any(str(a.get("action") or "") in ("float", "schweben") for a in acts_f):
                 fl = "float"
             elif zero_g and i < len(scenes) - 1:
@@ -1054,7 +1064,7 @@ def direct(scenes, times, topic="", style="", look=""):
                 tall = str((sc.get("overlay") or {}).get("type") or "") in TALL_OV if isinstance(sc.get("overlay"), dict) else False
                 have = [p for p in (sc.get("props") or []) if isinstance(p, dict) and extras.prop_fit(p.get("type"))]
                 rest = [p for p in (sc.get("props") or []) if isinstance(p, dict) and p not in have]
-                named = [k for pat, k in pats if extras.prop_fit(k) and _re0.search(pat, txt_f)]
+                named = [k for pat, k in pats if extras.prop_fit(k) and k not in (sc.get("_simile") or []) and _re0.search(pat, txt_f)]
                 pool = [k for k in FLOAT_THINGS if k in extras.PROPS]
                 pool = (["car", "car", "car"] if road_f else []) if outdoor_f else ((pool[i % len(pool):] + pool[:i % len(pool)]) if pool else [])
                 if not acts_f and not (outdoor_f and road_f):
@@ -1196,9 +1206,9 @@ HINTS = [
 GENERIC = ("street", "park", "plain", "livingroom")
 # Schwerelosigkeit: Sätze, in denen etwas schwebt / abhebt / durch die Luft treibt – und Sätze, in denen alles wieder herunterkracht
 FLOAT_RE = (r"schwerelos|(ohne|keine|null) (schwerkraft|gravitation|erdanziehung)|(schwerkraft|gravitation|erdanziehung\w*)\w* .{0,60}(\bweg\b|null|verschw|\baus\b|\bab\b|fehlt|abgeschaltet|nicht mehr|pause)|"
-            r"schweb(?!\w* in (lebens|großer )?gefahr)|hebs?t (\w+ )?ab\b|heben (\w+ )?ab\b|durch die luft|in der luft (treib|häng|schweb|steh)|"
+            r"schweb(?!\w* in (lebens|großer )?gefahr)|hebs?t [^,.;:!?]{0,60}\bab\b|heben [^,.;:!?]{0,60}\bab\b|durch die luft|in der luft (treib|häng|schweb|steh)|"
             r"treib\w* .{0,24}(durch den raum|im raum|zur decke|nach oben)|flieg\w* (\w+ )?(los|davon|nach oben)\b|steig\w* .{0,30}(in den himmel|in die luft|nach oben)|\bdrifte|verlier\w* (\w+ )?den halt|verlier\w* (\w+ )?die bodenhaftung")
-DROP_RE = (r"kracht|krachen|aufprall|prall\w* .{0,30}(boden|erde|asphalt|straße|\bauf\b)|knall\w* .{0,30}(boden|erde|asphalt|straße|pflaster)|"
+DROP_RE = (r"kracht|krachen|aufprall|prall\w* .{0,70}(boden|erde|asphalt|straße|\bauf\b)|knall\w* .{0,70}(boden|erde|asphalt|straße|pflaster)|"
            r"\b(schlägt|schlagen) .{0,30}(boden|asphalt|\bauf\b)|(fällt|fällst|fallen|stürzt|stürzen) .{0,50}(boden|herunter|herab|hinab|zurück|\bab\b)|plumps")
 GRAVITY_BACK_RE = r"(schwerkraft|gravitation|erdanziehung\w*)\w* .{0,60}(wieder|zurück|setzt .{0,12}ein|schaltet sich .{0,12}ein|kehrt)"
 ZERO_G_TOPIC = r"schwerkraft|schwerelos|gravitation|erdanziehung"

@@ -438,6 +438,63 @@ Nenne in einem Fix nur die Felder, die sich ändern. Benutze ausschließlich Wer
 """
 
 
+PROOF = """Du bist Lektor und Faktenprüfer für ein deutsches Wissens-Kurzvideo. Unten stehen je Szene der Sprechertext ("text") und die
+Texte der Einblendungen und Grafiken ("labels"). Prüfe streng und verbessere NUR, was falsch ist:
+1. Rechtschreibung, Grammatik, verstümmelte oder erfundene Wörter – auch in Einblendungen.
+2. Erfundene Quellen: „Forscher schätzen …“, „Studien zeigen …“, „Experten warnen …“ ohne allgemein bekannte Grundlage. Formuliere solche Sätze
+   als eigene Überlegung um („vermutlich“, „wahrscheinlich“) oder ersetze sie durch eine nachvollziehbare Folge. Keine erfundenen Opferzahlen,
+   Schadenssummen oder Prozentwerte.
+3. Sachlich Falsches oder maßlos Übertriebenes (falsche Größenordnung, unmöglicher Zeitraum, falsche Ursache): ersetze es durch die richtige,
+   anschauliche Aussage. Bei Gedankenspielen („Was wäre, wenn …“) zählt, was nach heutigem Wissen wirklich folgen würde.
+4. Einblendung oder Grafik passt nicht zum Satz (andere Zahl, anderes Thema, sinnloses Wort): korrigiere ihren Text.
+5. Es ist ein Video: Der Zuschauer schaut zu, er „liest“ nicht.
+Jeder verbesserte Satz bleibt etwa gleich lang (höchstens 20 % kürzer oder länger), im selben lockeren Ton, Zahlen ausgeschrieben, ohne Marken,
+und passt weiter zu den Sätzen davor und danach. Gib NUR Änderungen zurück, als JSON:
+{"fixes": [{"i": 3, "why": "kurz", "text": "neuer Sprechertext", "labels": {"alter Text der Einblendung": "neuer Text"}}]}
+"text" und "labels" nur angeben, wenn sie sich ändern. Leere Liste, wenn alles stimmt."""
+_LABEL_KEYS = ("text", "title", "label", "kicker", "sub", "unit", "a", "b", "left", "right")
+
+
+def proofread(js, topic):
+    """Lektorat vor dem Dreh: Die Text-KI prüft Sprechertexte und Einblendungen auf Tippfehler, verstümmelte Wörter, erfundene
+    Quellen und sachlich Falsches und bessert einzelne Sätze nach – Länge und Reihenfolge bleiben."""
+    import json
+    scenes = [s for s in js.get("scenes", []) if isinstance(s, dict)]
+
+    def labels(s):
+        out = []
+        for box in (s.get("overlay"), s.get("graphic")):
+            if isinstance(box, dict):
+                out += [box[k] for k in _LABEL_KEYS if isinstance(box.get(k), str) and box[k].strip()]
+                out += [str(it[0] if isinstance(it, (list, tuple)) and it else it) for it in (box.get("items") or []) if it] if isinstance(box.get("items"), list) else []
+        return out
+    user = (f"Thema: {topic}\nTitel: {js.get('title')}\n\n"
+            + "\n".join(json.dumps({"i": i, "text": s.get("text"), **({"labels": labels(s)} if labels(s) else {})}, ensure_ascii=False) for i, s in enumerate(scenes)))
+    out, _ = ai.chat_json(PROOF, user, 0.2)
+    n = 0
+    for f in ((out.get("fixes") or []) if isinstance(out, dict) else [])[:len(scenes)]:
+        if not isinstance(f, dict) or isinstance(f.get("i"), bool) or not isinstance(f.get("i"), int) or not 0 <= f["i"] < len(scenes):
+            continue
+        s, changed = scenes[f["i"]], False
+        new = " ".join(str(f.get("text") or "").split())
+        old_n = len(str(s.get("text") or "").split())
+        if new and new != s.get("text") and old_n and 0.6 <= len(new.split()) / old_n <= 1.5 and not _foreign(new) and not any(c in new for c in "{}[]<>"):
+            s["text"], changed = new, True
+        for old, rep_ in (f.get("labels") or {}).items() if isinstance(f.get("labels"), dict) else []:
+            if not isinstance(rep_, str) or not rep_.strip() or len(rep_) > 60 or _foreign(rep_):
+                continue
+            for box in (s.get("overlay"), s.get("graphic")):
+                if isinstance(box, dict):
+                    for k in _LABEL_KEYS:
+                        if box.get(k) == old:
+                            box[k], changed = rep_.strip(), True
+        if changed:
+            n += 1
+            ai.log(f"Lektorat Szene {f['i'] + 1}: {str(f.get('why') or '')[:120]}")
+    ai.log(f"Lektorat: {n} von {len(scenes)} Szenen verbessert")
+    return js
+
+
 STORYBOARD = """Du bist der Regisseur eines animierten Kurzvideos. Das Drehbuch unten hat Sprechertexte, aber noch keinen Bildplan.
 Lege für JEDE Szene fest, was der Zuschauer sieht, während der Satz gesprochen wird – genau das, wovon der Satz handelt
 (richtiger Ort, richtige Dinge, eine Figur, die es erlebt oder tut). Keine Verlegenheitsbilder: keine herumstehende, redende Figur,
@@ -658,6 +715,11 @@ def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
         js = fix_description(js, topic)
     except Exception:  # noqa: BLE001
         pass
+    if cfg("proofread") is not False:
+        try:
+            js = proofread(js, topic)
+        except Exception as e:  # noqa: BLE001
+            ai.log(f"Lektorat nicht möglich ({e}) – nehme den Text, wie er ist")
     if toon and not has_storyboard(js):
         ai.log("Drehbuch kam ohne Bildplan – lasse ihn eigens ausarbeiten")
         try:
