@@ -1655,7 +1655,7 @@
   "id": 54,
   "category": "whatif",
   "topic": "Was wäre, wenn die Schwerkraft der Erde für nur 5 Sekunden exakt auf Null sinken würde?",
-  "status": "rendered",
+  "status": "published",
   "created": 1794414928.24504,
   "title": "Was passiert, wenn die Schwerkraft für fünf Sekunden verschwindet?",
   "description": "Was wäre, wenn du plötzlich für fünf Sekunden abhebst?\nWir spielen das gefährlichste Physik-Experiment durch.\nHättest du Angst oder würdest du es feiern?",
@@ -1692,6 +1692,12 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "zernio_id": "6af49b45e2f854aee09c9656",
+  "yt_status": "Zernio: published",
+  "yt_id": "e_sivrJ-C3E",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6af49b45e2f854aee09c9656",
+  "error": null
  }
 ]
