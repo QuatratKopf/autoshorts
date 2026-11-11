@@ -1203,5 +1203,630 @@
   ],
   "title": "Wie Nvidia zum wertvollsten Tech-Giganten wurde",
   "created": 1794419510.8974802
+ },
+ "2026-11-12 13:00": {
+  "category": "storys",
+  "topic": "Warum Hollywood-Heist-Filme wie 'Now You See Me' physikalisch komplett wild sind und trotzdem süchtig machen",
+  "trend": {
+   "title": "Now You See Me is the most stupid and insane big budget movie I’ve ever seen",
+   "source": "Reddit r/movies",
+   "news": [],
+   "summary": ""
+  },
+  "script": {
+   "title": "Hollywood Heist Filme sind physikalisch wild",
+   "description": "Warum Hollywood Heist Filme komplett wild sind\nMan glaubt jeden genialen Trick sofort\nWelcher Film hat den krassesten Twist",
+   "hashtags": [
+    "#shorts",
+    "#hollywood",
+    "#film",
+    "#trending",
+    "#foryou",
+    "#filme",
+    "#hinterdenkulissen"
+   ],
+   "tags": [
+    "hollywood",
+    "heist filme",
+    "physik",
+    "magie",
+    "zaubertricks",
+    "kino"
+   ],
+   "thumbnail": {
+    "place": "livingroom",
+    "time": "day",
+    "actor": "du",
+    "action": "shocked",
+    "emotion": "shocked",
+    "props": [
+     "tv"
+    ],
+    "weather": "",
+    "image": "Close-up of a magician casting cards in front of a glowing digital city skyline, exaggerated shocked expression, dark background with neon lights, bold simple composition, strong contrast, empty space in the upper third for text",
+    "text": "KOMPLETT WILD"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "schwarz",
+     "hat": "",
+     "hair": "",
+     "hair_color": "schwarz",
+     "skin": "hell"
+    }
+   },
+   "scenes": [
+    {
+     "text": "Hollywood Heist Filme sind physikalisch komplett wild.",
+     "image": "A person sitting on a sofa watching a big screen with flashy magical effects, wide shot",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "physikalisch",
+      "wild"
+     ],
+     "hud": "",
+     "overlay": null,
+     "see": "Eine Person sitzt geschockt vor einem Fernseher auf der Couch.",
+     "time": "day",
+     "props": [
+      "tv"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "status": ""
+    },
+    {
+     "text": "Auf der Leinwand sieht jeder Zaubertrick sofort logisch aus.",
+     "image": "A theater stage with bright spotlights and floating cards in the air, event shot",
+     "who": [],
+     "place": "livingroom",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Zaubertrick",
+      "logisch"
+     ],
+     "overlay": null,
+     "see": "Eine Person steht im Wohnzimmer und gestikuliert fasziniert wie ein Magier.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "wave",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Aber im echten Leben scheitert fast jeder davon.",
+     "image": "A person looking at a broken gadget on a table with a worried face, close shot",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "echten Leben",
+      "scheitert"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "NULL PROZENT"
+     },
+     "see": "Nahaufnahme: Ein Stuhl stolpert oder fällt symbolisch um.",
+     "time": "day",
+     "props": [
+      "stuhl"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "fall",
+       "emotion": "scared",
+       "emote": "sweat",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Regisseure ignorieren einfach jede echte physikalische Gesetzmäßigkeit.",
+     "image": "A giant explosion on a movie set with cameras around, event shot",
+     "who": [],
+     "place": "lab",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "ignorieren",
+      "Physik"
+     ],
+     "overlay": null,
+     "see": "In einem Film-Labor schüttelt die Figur wütend den Kopf.",
+     "time": "day",
+     "props": [
+      "generator"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Wasserströme biegen sich plötzlich im perfekten rechten Winkel ab.",
+     "image": "Water flowing in impossible sharp angles through a futuristic room, event shot",
+     "who": [],
+     "place": "bathroom",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Wasserströme",
+      "Winkel"
+     ],
+     "overlay": {
+      "type": "bar",
+      "label": "PHYSIK",
+      "value": 0
+     },
+     "see": "Ein Bild eines defekten Wasserrohrs, das unlogisch spritzt.",
+     "time": "day",
+     "weather": "steam",
+     "props": [
+      "faucet",
+      "wave"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Menschen fliegen durch die Luft wie Superhelden im Wind.",
+     "image": "A person floating weightless in a glowing room, action shot",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "zoom_out",
+     "sfx": "whoosh",
+     "highlight": [
+      "fliegen",
+      "Superhelden"
+     ],
+     "overlay": null,
+     "see": "Eine Figur schwebt schwerelos durch das Wohnzimmer.",
+     "time": "day",
+     "props": [
+      "box"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "float",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Dazu kommt der berühmte digitale Kartenregen.",
+     "image": "Thousands of playing cards falling down from the sky like rain, event shot",
+     "who": [],
+     "place": "office",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "Kartenregen"
+     ],
+     "overlay": {
+      "type": "counter",
+      "label": "KARTEN",
+      "value": 10000,
+      "unit": "STÜCK"
+     },
+     "see": "Zähler-Grafik für den digitalen Kartenregen.",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "calm",
+     "graphic": {
+      "type": "number",
+      "kicker": "KARTENREGEN",
+      "value": "1.000.000",
+      "label": "DIGITALE KARTEN"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Niemand würde Millionen Dollar so leicht auf der Straße verteilen.",
+     "image": "Money flying out of a bag on a busy city street with amazed people, event shot",
+     "who": [],
+     "place": "street",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Millionen",
+      "Strasse"
+     ],
+     "overlay": null,
+     "see": "Geld liegthaufenweise mitten auf der Straße.",
+     "time": "day",
+     "props": [
+      "money"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "tense",
+     "crowd": "watch",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Dennoch saugen uns diese Szenen jedes Mal komplett ein.",
+     "image": "A person staring hypnotized at a bright television screen in a dark room, close shot",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "saugen",
+      "komplett"
+     ],
+     "overlay": null,
+     "see": "Figur blickt wie hypnotisiert mit offenen Augen nach vorne.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "close",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Unser Gehirn liebt das Gefühl von perfekter Kontrolle.",
+     "image": "A glowing brain graphic pulsing with electric signals, graphic shot",
+     "who": [],
+     "place": "lab",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Gehirn",
+      "Kontrolle"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "DOPAMIN"
+     },
+     "see": "Grafik zum Gefühl von perfekter Kontrolle im Gehirn.",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "calm",
+     "graphic": {
+      "type": "badge",
+      "kicker": "GEHIRN-EFFECT",
+      "text": "100% KONTROLLE"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Jeder raffinierte Coup fühlt sich an wie ein eigener Sieg.",
+     "image": "A person smiling widely while raising both fists in victory, medium shot",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "Coup",
+      "Sieg"
+     ],
+     "overlay": null,
+     "see": "Figur jubelt begeistert im Wohnzimmer.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "jump",
+       "emotion": "happy",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "happy",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Dabei vergessen wir schnell die Logik dahinter.",
+     "image": "A question mark glowing and dissolving into tiny digital particles, graphic shot",
+     "who": [],
+     "place": "livingroom",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "vergessen",
+      "Logik"
+     ],
+     "overlay": null,
+     "see": "Figur zuckt ratlos mit den Schultern.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Schließlich wollen wir im Kino kein Lehrbuch sehen.",
+     "image": "A heavy school book snapping shut and turning into sparkling dust, event shot",
+     "who": [],
+     "place": "classroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Kino",
+      "Lehrbuch"
+     ],
+     "overlay": null,
+     "see": "Ein großes Physik-Lehrbuch liegt symbolisch auf dem Tisch.",
+     "time": "day",
+     "props": [
+      "table"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "angry",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Sondern pure Magie auf der riesigen Leinwand.",
+     "image": "A massive cinema screen glowing brightly in a dark hall, wide shot",
+     "who": [],
+     "place": "livingroom",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "pure Magie"
+     ],
+     "overlay": null,
+     "see": "Riesige Kino-Leinwand leuchtet Magie aus.",
+     "time": "night",
+     "props": [
+      "tv"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "happy",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Am Ende gewinnen immer die Diebe.",
+     "image": "A person walking away into the sunset with a big bag of money over the shoulder, wide shot",
+     "who": [
+      "du"
+     ],
+     "place": "street",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "Ende",
+      "Diebe"
+     ],
+     "overlay": null,
+     "see": "Ein Fluchtwagen saust mit Geld davon.",
+     "time": "night",
+     "props": [
+      "car",
+      "money"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "happy",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Ausser bei dem einen großen Fehler am Schluss.",
+     "image": "A close-up of a hand dropping a single playing card on the ground, close shot",
+     "who": [
+      "du"
+     ],
+     "place": "office",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Fehler",
+      "Schluss"
+     ],
+     "overlay": null,
+     "see": "Ein Überwachungs-System entlarvt einen Coup.",
+     "time": "day",
+     "props": [
+      "cctv",
+      "computer"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "right",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Folg für mehr verrückte Filmfakten.",
+     "image": "A person pointing directly at the camera with a wide smile, close shot",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Folg",
+      "Filmfakten"
+     ],
+     "overlay": {
+      "type": "choice",
+      "a": "Sofort glauben",
+      "b": "Physik prüfen"
+     },
+     "see": "Handy-Benachrichtigung mit Aufforderung zu folgen.",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "calm",
+     "graphic": {
+      "type": "phone",
+      "mode": "alert",
+      "kicker": "MEHR FILMAKTE",
+      "text": "FOLGEN FÜR MEHR",
+      "value": "PLUS",
+      "label": "JETZT ABONNIEREN"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "needs": [
+   "kinoleinwand",
+   "wasserstrom",
+   "gesetzbuch"
+  ],
+  "title": "Hollywood Heist Filme sind physikalisch wild",
+  "created": 1794421580.7361093
  }
 }
