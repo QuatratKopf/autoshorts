@@ -323,5 +323,357 @@
   ],
   "title": "Was passiert bei null Schwerkraft für fünf Sekunden?",
   "created": 1794336394.4234135
+ },
+ "2026-11-12 18:00": {
+  "category": "fakten",
+  "topic": "Wie Nvidia von einer kleinen Gaming-Bude zum wertvollsten Tech-Giganten wurde",
+  "trend": {
+   "title": "Nvidia",
+   "source": "Wikipedia",
+   "news": [],
+   "summary": "American multinational technology company – Nvidia Corporation is an American multinational technology company headquartered in Santa Clara, California. The company develops graphics processing units (GPUs), systems on chips (SoCs), and application programming interfaces (APIs) for data science, high-performance computing,"
+  },
+  "script": {
+   "title": "Wie eine Gaming Bude die Welt veränderte",
+   "description": "Wie wurde aus einer kleinen Grafikkarte eine Milliardenfirma? · Der erstaunliche Weg eines Tech Giganten · Chipgigant oder Zockerbude?",
+   "hashtags": [
+    "#shorts",
+    "#tech",
+    "#gaming",
+    "#nvidia",
+    "#fakten",
+    "#wissen",
+    "#viral",
+    "#foryou"
+   ],
+   "tags": [
+    "nvidia",
+    "geschichte",
+    "grafikkarte",
+    "tech",
+    "gigant",
+    "ki",
+    "wirtschaft",
+    "fakten",
+    "erfolg"
+   ],
+   "thumbnail": {
+    "image": "Close-up of a young person looking shocked at a glowing computer chip in a dark room, dramatic lighting, high contrast",
+    "text": "MILLIARDEN AUS CHIPS"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "blau",
+     "hat": "",
+     "hair": "long",
+     "glasses": false,
+     "skin": "hell"
+    }
+   },
+   "scenes": [
+    {
+     "text": "Stell dir vor eine kleine Firma startet in einem Restaurant und wird plötzlich das wertvollste Unternehmen der Welt.",
+     "image": "Two people sitting at a diner table drawing circuit boards on paper",
+     "who": [
+      "du"
+     ],
+     "place": "restaurant",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "wertvollste Unternehmen"
+     ],
+     "overlay": null,
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "happy",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "crowd": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Das ist die wahre Geschichte hinter einem Giganten den heute jeder kennt aber damals ausgelacht hat.",
+     "image": "Computer hardware pieces on a messy desk with old screens",
+     "who": [],
+     "place": "office",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "ausgelacht"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "Modern startup office with computers and desks",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Im Jahr neunzehnhundertunddreiundneunzig saßen drei Gründer in Kalifornien und wollten nur eines.",
+     "image": "Three people working on early computer chips with magnifying glasses",
+     "who": [],
+     "place": "lab",
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "neunzehnhundertunddreiundneunzig"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "1993 START"
+     },
+     "shot": "graphic",
+     "who_desc": "",
+     "place_desc": "High tech laboratory with screens and servers",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Sie wollten Computerspiele schneller und realistischer machen weil die damalige Grafik einfach schrecklich aussah.",
+     "image": "Old pixelated video game screen showing a blocky character",
+     "who": [],
+     "place": "office",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "grafik"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "Modern startup office with computers and desks",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Also bauten sie spezielle Chips für dreidimensionale Welten obwohl kaum jemand an diesen Markt glaubte.",
+     "image": "A modern graphics card glowing with green light on a workbench",
+     "who": [],
+     "place": "lab",
+     "camera": "pan_right",
+     "sfx": "pop",
+     "highlight": [
+      "dreidimensionale Welten"
+     ],
+     "overlay": null,
+     "time": "day",
+     "props": [
+      "computer"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "crowd": "",
+     "who_desc": "",
+     "place_desc": "High tech laboratory with screens and servers",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Jahrelang standen sie kurz vor der Pleite und ihre ersten Produkte floppten gewaltig auf dem Markt.",
+     "image": "A person looking worried at a stack of unpaid bills and a computer",
+     "who": [
+      "du"
+     ],
+     "place": "office",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "kurz vor der Pleite"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "Modern startup office with computers and desks",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Aber dann passierte die Rettung durch eine verrückte Idee die eigentlich für Gamer gedacht war.",
+     "image": "A computer screen showing complex mathematical equations and 3D models",
+     "who": [],
+     "place": "lab",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "verrückte Idee"
+     ],
+     "overlay": null,
+     "time": "day",
+     "props": [
+      "tv"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "idea",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "crowd": "",
+     "who_desc": "",
+     "place_desc": "High tech laboratory with screens and servers",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Die Grafikkarten konnten nämlich nicht nur Spiele rendern sondern tausend Rechenoperationen gleichzeitig ausführen.",
+     "image": "Rows of powerful computer servers flashing with blue lights",
+     "who": [],
+     "place": "lab",
+     "camera": "pan_left",
+     "sfx": "tick",
+     "highlight": [
+      "gleichzeitig ausführen"
+     ],
+     "overlay": {
+      "type": "counter",
+      "label": "RECHENKRAFT",
+      "value": 1000,
+      "unit": "FACH"
+     },
+     "who_desc": "",
+     "place_desc": "High tech laboratory with screens and servers",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Forscher und Entwickler merkten plötzlich dass diese Chips perfekt für künstliche Intelligenz geeignet sind.",
+     "image": "A massive data center with glowing server racks stretching into the distance",
+     "who": [],
+     "place": "lab",
+     "camera": "zoom_out",
+     "sfx": "ding",
+     "highlight": [
+      "künstliche Intelligenz"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "High tech laboratory with screens and servers",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Plötzlich wollte die gesamte Techwelt genau diese Hardware haben um ihre gigantischen Modelle zu trainieren.",
+     "image": "Delivery boxes stacked high in a modern warehouse",
+     "who": [],
+     "place": "office",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "gesamte Techwelt"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "Modern startup office with computers and desks",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Der Umsatz explodierte in astronomische Höhen und übertraf selbst die wildesten Träume der Gründer.",
+     "image": "A stock market chart shooting straight up into the air",
+     "who": [],
+     "place": "office",
+     "camera": "zoom_in",
+     "sfx": "boom",
+     "highlight": [
+      "Umsatz explodierte"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "MILLIARDEN GEWINN"
+     },
+     "shot": "graphic",
+     "who_desc": "",
+     "place_desc": "Modern startup office with computers and desks",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Heute ist das Unternehmen mehr wert als so mancher europäischer Staat zusammengerechnet.",
+     "image": "A glowing globe with digital connections lighting up different continents",
+     "who": [],
+     "place": "lab",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "mehr wert"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "High tech laboratory with screens and servers",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Und das alles nur weil ein paar Nerds unbedingt schöner zocken wollten.",
+     "image": "A young person smiling while playing a high end video game on a huge screen",
+     "who": [
+      "du"
+     ],
+     "place": "office",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "schöner zocken"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "Modern startup office with computers and desks",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Deshalb gilt die goldene Regel folg für mehr Fakten die deinen Kopf sprengen.",
+     "image": "A person pointing up with a surprised and happy facial expression",
+     "who": [
+      "du"
+     ],
+     "place": "office",
+     "camera": "zoom_in",
+     "sfx": "pop",
+     "highlight": [
+      "folg für mehr"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "Modern startup office with computers and desks",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "needs": [
+   "chip"
+  ],
+  "title": "Wie eine Gaming Bude die Welt veränderte",
+  "created": 1794410496.7208724
  }
 }
