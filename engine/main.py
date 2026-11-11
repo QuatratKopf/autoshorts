@@ -17,7 +17,7 @@ import time
 from PIL import Image
 
 from . import ai, render, thumbnail, trends, uploaders, writer
-from .schedule import due_slot, plan_slot, stats_due
+from .schedule import due_slot, plan_slot, review_slot, review_stale, stats_due
 from .state import load, CONFIG, OUT, STATE, THUMBS, VIDEOS, WORK, cat_trends, category, cfg, drop_token, log, save_all, video
 
 RELEASE = "videos"
@@ -366,7 +366,11 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None):
                         base = scenes[0]
                         th.update(place=base.get("place"), time=base.get("time"),
                                   actor=(base.get("actors") or [{}])[0].get("id"))
-                    stage.cover(th, script.get("cast") or {}, raw)
+                    try:                                  # eigens gestaltetes Titelbild – kein Ausschnitt aus dem Video
+                        stage.poster(th, script.get("cast") or {}, raw, f"{script.get('title') or ''} {v.get('topic') or ''}")
+                    except Exception as e:  # noqa: BLE001
+                        log(f"Titelbild-Gestaltung fehlgeschlagen ({e}) – nehme eine Szene")
+                        stage.cover(th, script.get("cast") or {}, raw)
                 else:
                     ai.image(writer.image_prompt({"image": script["thumbnail"]["image"]}, cat), raw, seed + 999)
             except Exception as e:  # noqa: BLE001
@@ -469,6 +473,12 @@ def main(argv=None):
                 except Exception as e:  # noqa: BLE001
                     failed = True
                     log(f"FEHLER: {e}")
+            for vid in review_stale():                  # wartet seit Stunden auf die Prüfung: nicht liegen lassen
+                try:
+                    log(f"Video {vid} wurde nicht geprüft – lade es jetzt hoch")
+                    upload(int(vid))
+                except Exception as e:  # noqa: BLE001
+                    log(f"FEHLER beim Hochladen von {vid}: {e}")
             nxt = plan_slot(CONFIG, STATE)
             if nxt and cfg("plan_ahead") is not False and nxt not in load("plans.json", {}):
                 try:
@@ -485,6 +495,22 @@ def main(argv=None):
                     log(f"Trends: {e}")
         elif a.action == "make":
             make(a.category.strip() or None, a.topic.strip() or None, a.upload != "0", a.trend.strip() or None)
+        elif a.action == "review_make":  # Video für den nächsten Termin bauen, aber erst nach der Prüfung hochladen
+            slot = review_slot(CONFIG, STATE)
+            if not slot:
+                log("Prüf-Video: kein Termin in den nächsten Stunden offen")
+            else:
+                STATE["done_slots"].append(slot)
+                save_all()
+                log(f"Prüf-Video für {slot}")
+                v = make(plan=load("plans.json", {}).get(slot), upload=False)
+                v.update(status="review", slot=slot, review_at=time.time())
+                save_all()
+        elif a.action == "discard":      # verworfene Fassung: wird nie hochgeladen
+            v = video(int(a.id))
+            if v and v.get("status") in ("review", "rendered"):
+                v.update(status="discarded", error="Bei der Prüfung verworfen" + (": " + a.topic.strip()[:300] if a.topic.strip() else ""))
+                save_all()
         elif a.action == "upload":
             upload(int(a.id))
         elif a.action == "stats":

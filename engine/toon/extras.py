@@ -687,6 +687,7 @@ def prop_fit(kind):
 
 
 _held_sprites = {}
+REAL_M = {}            # echte Höhe gelernter Gegenstände (die Anzeige am Boden ist nach unten begrenzt)
 
 
 def held_key(name):
@@ -714,7 +715,8 @@ def draw_held_prop(layer, key, x, y, facing, t, k=1.0, shake=False):
     spr = _held_sprite(key)
     if spr is None:
         return
-    size = max(70.0, min(210.0, SIZES.get(key, (0.3, 0))[0] * 520)) * k        # etwas größer als echt, damit man es erkennt
+    real = REAL_M.get(key) or SIZES.get(key, (0.3, 0))[0]                       # echte Höhe in Metern
+    size = max(46.0, min(190.0, real * 290 * 1.5)) * k                         # Mensch ≈ 290 Bildpunkte je Meter; leicht vergrößert, damit man es erkennt
     f = size / max(spr.width, spr.height)
     im = spr.resize((max(2, int(spr.width * f)), max(2, int(spr.height * f))), Image.LANCZOS)
     if facing < 0:

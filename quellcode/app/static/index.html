@@ -592,7 +592,7 @@ function nextRun() {
   for (let add = 0; add < 2; add++) for (const [h, m] of times) { const d = new Date(now); d.setDate(d.getDate() + add); d.setHours(h, m || 0, 0, 0); if (d > now && (!best || d < best)) best = d; }
   return best;
 }
-const STATUS = {rendering: ["In Arbeit", "warn"], rendered: ["Fertig, nicht hochgeladen", "mute"], published: ["Veröffentlicht", "good"], partial: ["Teilweise", "warn"], error: ["Fehler", "bad"]};
+const STATUS = {rendering: ["In Arbeit", "warn"], rendered: ["Fertig, nicht hochgeladen", "mute"], review: ["Wird geprüft", "warn"], discarded: ["Verworfen", "mute"], published: ["Veröffentlicht", "good"], partial: ["Teilweise", "warn"], error: ["Fehler", "bad"]};
 const thumb = v => v.thumb ? `<img class="thumb" loading="lazy" alt="" src="https://raw.githubusercontent.com/${esc(S.owner)}/${esc(S.repo)}/main/docs/thumbs/${v.id}.jpg" onerror="this.style.visibility='hidden'">` : `<span class="thumb"></span>`;
 const trendChip = v => v.trend ? `<span class="chip acc" title="${esc(v.trend.source)}: ${esc(v.trend.title)}">🔥 Trend</span>` : "";
 const mp4 = v => `https://github.com/${S.owner}/${S.repo}/releases/download/videos/${v.id}.mp4`;
@@ -769,7 +769,7 @@ function viewDash() {
         <td>${fmtTs(v.created)}</td>
         <td class="t w" style="min-width:150px"><span class="chip ${st[1]}">${st[0]}</span>${v.yt_status && v.yt_status !== "public" ? `<div class="hint">YT: ${esc(v.yt_status)}</div>` : ""}${v.tt_status ? `<div class="hint">TT: ${esc(v.tt_status)}</div>` : ""}${v.error ? `<div class="hint neg">${esc(v.error.slice(0, 160))}</div>` : ""}</td>
         <td>${v.st.youtube ? fmtN(v.st.youtube.views) : "–"}</td><td>${v.st.tiktok ? fmtN(v.st.tiktok.views) : "–"}</td><td>${fmtN(v.likes)}</td>
-        <td><div class="inline">${v.mp4 && ["rendered", "partial", "error"].includes(v.status) ? `<button class="btn sm" onclick="dispatch({action:'upload',video_id:'${v.id}'},'Upload läuft')">Hochladen</button>` : ""}${v.mp4 ? `<a class="btn sm" href="${esc(mp4(v))}" target="_blank" rel="noopener">MP4</a>` : ""}</div></td></tr>`; }).join("")}
+        <td><div class="inline">${v.mp4 && ["rendered", "partial", "error", "review", "discarded"].includes(v.status) ? `<button class="btn sm" onclick="dispatch({action:'upload',video_id:'${v.id}'},'Upload läuft')">Hochladen</button>` : ""}${v.mp4 ? `<a class="btn sm" href="${esc(mp4(v))}" target="_blank" rel="noopener">MP4</a>` : ""}</div></td></tr>`; }).join("")}
     </tbody></table>` : `<div class="empty">Noch keine Videos. Im Studio kannst du sofort das erste erstellen.</div>`}</div></section>`;
   const segs = (id, fn) => document.querySelectorAll(`#${id} button`).forEach(b => b.onclick = () => { document.querySelectorAll(`#${id} button`).forEach(x => x.setAttribute("aria-pressed", x === b)); fn(b.dataset.v); drawChart(); });
   segs("pSeg", v => PLAT = v); segs("rSeg", v => RANGE = +v);

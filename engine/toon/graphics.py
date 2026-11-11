@@ -344,58 +344,83 @@ def _g_badge(frame, g, t, dur):
 
 
 # Europa, stark vereinfacht (Raster 0–100): große Flächen statt genauer Grenzen – erkennbar, nicht kartengenau
-EUROPE = {
-    "iberia": [(8, 70), (26, 66), (30, 74), (27, 86), (14, 90), (7, 84)],
-    "france": [(26, 50), (38, 46), (44, 54), (42, 66), (30, 70), (24, 62)],
-    "uk": [(24, 24), (30, 22), (33, 34), (30, 44), (22, 44), (24, 34)],
-    "ireland": [(14, 32), (20, 30), (21, 40), (15, 42)],
-    "benelux": [(38, 40), (44, 38), (45, 46), (39, 46)],
-    "germany": [(44, 36), (56, 34), (58, 44), (55, 54), (46, 54), (44, 46)],
-    "alps": [(44, 54), (58, 54), (60, 60), (46, 62)],
-    "italy": [(46, 62), (54, 62), (62, 76), (68, 86), (62, 88), (54, 76), (48, 70)],
-    "poland": [(57, 34), (72, 33), (74, 46), (58, 46)],
-    "czech": [(57, 46), (74, 46), (72, 54), (58, 54)],
-    "balkans": [(60, 56), (76, 54), (80, 70), (72, 80), (64, 72)],
-    "denmark": [(46, 26), (51, 24), (52, 33), (47, 34)],
-    "norway": [(44, 6), (54, 0), (58, 4), (52, 14), (49, 24), (43, 20)],
-    "sweden": [(54, 4), (62, 2), (64, 14), (58, 28), (53, 24), (55, 14)],
-    "finland": [(66, 2), (76, 4), (76, 20), (68, 22), (65, 12)],
-    "baltics": [(68, 24), (78, 23), (79, 33), (70, 33)],
-    "east": [(76, 34), (96, 30), (98, 56), (78, 56), (75, 46)],
-}
+REGIONS = {"iberia": ("esp", "prt"), "france": ("fra",), "uk": ("gbr",), "ireland": ("irl",), "benelux": ("nld", "bel", "lux"), "germany": ("deu",),
+           "alps": ("aut", "che"), "italy": ("ita",), "poland": ("pol",), "czech": ("cze", "svk"), "denmark": ("dnk",), "norway": ("nor",),
+           "sweden": ("swe",), "finland": ("fin",), "baltics": ("est", "lva", "ltu"), "east": ("ukr", "blr", "mda"),
+           "balkans": ("grc", "hrv", "srb", "bih", "alb", "mkd", "bgr", "rou", "svn", "mne", "kos", "hun")}
+EUROPE = REGIONS                                             # alte Bezeichnung: Regionen, die das Drehbuch nennen darf
 REGION_WORDS = {"deutsch": "germany", "frankreich": "france", "franz": "france", "spanien": "iberia", "portugal": "iberia", "italien": "italy",
                 "schweden": "sweden", "norwegen": "norway", "finnland": "finland", "dänemark": "denmark", "polen": "poland", "england": "uk",
                 "großbritannien": "uk", "brit": "uk", "irland": "ireland", "niederlande": "benelux", "belgien": "benelux", "österreich": "alps",
                 "schweiz": "alps", "tschechien": "czech", "balkan": "balkans", "griechenland": "balkans", "baltikum": "baltics", "ukraine": "east"}
+_europe = {}
+
+
+def _countries():
+    """Ländergrenzen Europas (Natural Earth, gemeinfrei), vereinfacht – {kürzel: [[(x, y), …], …]}."""
+    if not _europe:
+        import json
+        from pathlib import Path
+        try:
+            raw = json.loads((Path(__file__).with_name("europe.json")).read_text(encoding="utf-8"))
+            _europe.update({k: [[tuple(q) for q in poly] for poly in v["polys"]] for k, v in raw.items()})
+        except Exception:  # noqa: BLE001 – ohne Datei bleibt die Karte leer statt abzustürzen
+            _europe["_"] = []
+    return _europe
 
 
 def _g_map(frame, g, t, dur):
-    """Europakarte: Länder leuchten nacheinander auf, Ringe pulsieren, Ausrufezeichen markieren betroffene Länder."""
+    """Europakarte mit echten Ländergrenzen: Die betroffenen Länder leuchten auf, die Karte fährt auf sie zu, Ringe pulsieren."""
     d = ImageDraw.Draw(frame, "RGBA")
-    x0, y0, k = 60, 330, 9.6
-    hot = [h for h in str(g.get("value") or "").lower().split(",") if h in EUROPE]
-    names = list(EUROPE)
-    for i, name in enumerate(names):
-        pts = [(x0 + a * k, y0 + b * k) for a, b in EUROPE[name]]
-        on = _pop(t, 0.15 + i * 0.07, 0.3) > 0
-        lit = on and (not hot or name in hot)
-        d.polygon([(a + 8, b + 10) for a, b in pts], fill=(0, 0, 0, 70))
-        d.polygon(pts, fill=(250, 150, 40) if lit else (70, 56, 150), outline=(255, 210, 120) if lit else (110, 96, 200), width=5)
-    marks = hot or names[::3]
-    for j, name in enumerate(marks[:6]):
-        pts = EUROPE[name]
-        cx = x0 + sum(a for a, _ in pts) / len(pts) * k
-        cy = y0 + sum(b for _, b in pts) / len(pts) * k
-        st = 0.9 + j * 0.25
-        if t < st:
+    lands = _countries()
+    hot_regions = [h for h in str(g.get("value") or "").lower().split(",") if h in REGIONS]
+    hot = [c for r in hot_regions for c in REGIONS[r] if c in lands]
+    pts_all = [q for k, polys in lands.items() for poly in polys for q in poly]
+    if not pts_all:
+        return
+    focus = [q for c in hot for poly in lands[c] for q in poly] or pts_all
+    fx0, fx1 = min(q[0] for q in focus), max(q[0] for q in focus)
+    fy0, fy1 = min(q[1] for q in focus), max(q[1] for q in focus)
+    cx, cy = (fx0 + fx1) / 2, (fy0 + fy1) / 2
+    span = max(fx1 - fx0, (fy1 - fy0) * 0.9, 9.0) * (2.3 if hot else 1.04)       # Nachbarländer bleiben sichtbar
+    ax0, ax1 = min(q[0] for q in pts_all), max(q[0] for q in pts_all)
+    ay0, ay1 = min(q[1] for q in pts_all), max(q[1] for q in pts_all)
+    full = max(ax1 - ax0, (ay1 - ay0) * 0.9) * 1.04
+    z = min(1.0, max(0.0, (t - 0.2) / 1.2))
+    z = 1 - (1 - z) ** 3                                                         # von ganz Europa auf die Länder zufahren
+    span = full + (min(span, full) - full) * z
+    cx = (ax0 + ax1) / 2 + (cx - (ax0 + ax1) / 2) * z
+    cy = (ay0 + ay1) / 2 + (cy - (ay0 + ay1) / 2) * z
+    k = 980 / span
+    ox, oy = W / 2 - cx * k, 800 - cy * k
+
+    def P(q):
+        return (ox + q[0] * k, oy + q[1] * k)
+    order = sorted(lands, key=lambda c: c in hot)                                # betroffene Länder zuletzt, damit ihr Rand oben liegt
+    for i, c in enumerate(order):
+        lit = c in hot and t > 0.5 + hot.index(c) * 0.12
+        glow = 0.5 + 0.5 * math.sin(t * 4) if lit else 0
+        for poly in lands[c]:
+            pp = [P(q) for q in poly]
+            if max(a for a, _ in pp) < -50 or min(a for a, _ in pp) > W + 50 or max(b for _, b in pp) < 150 or min(b for _, b in pp) > 1500:
+                continue
+            d.polygon(pp, fill=(255, int(150 + 30 * glow), 40) if lit else (66, 54, 150), outline=(255, 226, 150) if lit else (120, 106, 210), width=5 if lit else 3)
+    marks = hot[:6] or [c for c in ("deu", "fra", "esp", "ita", "pol", "swe") if c in lands]
+    for j, c in enumerate(marks):
+        big = max(lands[c], key=len)
+        mx, my = P((sum(q[0] for q in big) / len(big), sum(q[1] for q in big) / len(big)))
+        st = 1.0 + j * 0.22
+        if t < st or not (60 < mx < W - 60 and 260 < my < 1400):
             continue
         ph = ((t - st) * 0.7) % 1
-        r = 50 + ph * 70
-        d.ellipse((cx - r, cy - r, cx + r, cy + r), outline=(255, 226, 150, int(230 * (1 - ph))), width=7)
+        r = 50 + ph * 80
+        d.ellipse((mx - r, my - r, mx + r, my + r), outline=(255, 240, 190, int(230 * (1 - ph))), width=7)
         pk = min(1.0, _pop(t, st, 0.3))
-        d.rounded_rectangle((cx - 22 * pk, cy - 34 * pk, cx + 22 * pk, cy + 26 * pk), 10, fill=(250, 248, 255), outline=INK, width=4)
-        f = _font(int(46 * pk) or 1)
-        d.text((cx - d.textlength("!", font=f) / 2, cy - 36 * pk), "!", font=f, fill=(214, 60, 50))
+        if pk < 0.15:
+            continue
+        d.rounded_rectangle((mx - 24 * pk, my - 36 * pk, mx + 24 * pk, my + 28 * pk), 10, fill=(250, 248, 255), outline=INK, width=4)
+        f = _font(int(50 * pk) or 1)
+        d.text((mx - d.textlength("!", font=f) / 2, my - 38 * pk), "!", font=f, fill=(214, 60, 50))
     txt = str(g.get("text") or "").upper()[:30]
     if txt and t > 0.4:
         lay = Image.new("RGBA", (980, 150), (0, 0, 0, 0))

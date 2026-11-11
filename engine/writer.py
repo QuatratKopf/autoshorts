@@ -16,6 +16,19 @@ Regeln für die Sprechertexte:
 - Gesprochene, einfache Sprache, kurze Sätze, Du-Ansprache erlaubt. Zahlen ausschreiben, wie man sie spricht.
 - Keine Emojis, keine Regieanweisungen, keine Klammern im Sprechertext.
 - Der letzte Satz ist eine Pointe oder Wendung, gern mit kurzer Aufforderung wie "Folg für mehr".
+- AUFBAU WIE BEI ERFOLGREICHEN SHORTS – durchdacht, nicht aneinandergereiht:
+  1. Hook in höchstens drei Sekunden: ein einziger kurzer Satz, der auch ohne Ton verständlich bebildert werden kann und ein
+     Versprechen macht, das erst der Schluss einlöst („… und der letzte Punkt überrascht fast jeden“).
+  2. Roter Faden mit „aber“ und „also“: Jede Szene folgt aus der vorigen – Problem, Folge, neue Wendung. Keine losen Fakten
+     hintereinander („und dann … und außerdem …“). Der Zuschauer soll bei jedem Satz wissen wollen, was als Nächstes passiert.
+  3. Höhepunkt in der Mitte: die verblüffendste Zahl, der größte Schreck oder der beste Witz – danach kurz Luft holen lassen.
+  4. Schluss löst das Versprechen aus dem Hook ein (Auflösung, Pointe) – kurz, ohne Zusammenfassung. Am besten passt der letzte
+     Satz so, dass das Video von vorn wieder Sinn ergibt.
+- Lehrreich UND unterhaltsam: In jedem Video stecken mindestens drei handfeste, überprüfbare Dinge, die man danach weiß
+  (Zahl, Ursache, Vergleich aus dem Alltag: „so schwer wie zwei Autos“). Kein Füllsatz, keine Wiederholung, keine Floskel.
+- So wenige Wörter wie möglich: ein Gedanke pro Satz. Was das Bild zeigt, muss der Sprecher nicht beschreiben – das Bild erzählt
+  dazu, was der Satz nicht sagt (Reaktion, Folge, Größenvergleich).
+- Alle drei bis fünf Sekunden ändert sich sichtbar etwas: neue Einstellung, neue Handlung, Grafik oder Großaufnahme.
 - Inhaltlich korrekt bleiben: nichts als Tatsache ausgeben, was erfunden ist. Bei aktuellen Themen nur das verwenden,
   was in den mitgelieferten Schlagzeilen steht oder allgemein bekanntes Hintergrundwissen ist; keine erfundenen Details,
   Zitate oder Zahlen. Lieber den zeitlosen Hintergrund erklären als Gerüchte wiedergeben.

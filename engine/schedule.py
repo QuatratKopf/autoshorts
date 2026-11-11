@@ -79,6 +79,28 @@ def plan_slot(config=None, state=None, now=None, force=False):
     return best
 
 
+def review_slot(config=None, state=None, now=None, hours=4):
+    """Termin, für den jetzt ein Video zur Prüfung gebaut wird: gerade fällig oder in den nächsten Stunden."""
+    config = config if config is not None else _load("config.json")
+    state = state if state is not None else _load("state.json")
+    now = now or dt.datetime.now(TZ)
+    done = set(state.get("done_slots", []))
+    for day in (now.date() - dt.timedelta(days=1), now.date(), now.date() + dt.timedelta(days=1)):
+        for h, m in parse_times(config.get("settings", {}).get("upload_times", "18:00")):
+            slot = dt.datetime(day.year, day.month, day.day, h, m, tzinfo=TZ)
+            sid = slot.strftime("%Y-%m-%d %H:%M")
+            if slot - dt.timedelta(hours=hours) <= now < slot + dt.timedelta(hours=3) and sid not in done:
+                return sid
+    return None
+
+
+def review_stale(hours=3):
+    """Videos, die auf die Prüfung warten, aber seit Stunden niemand freigegeben hat – der Autopilot lädt sie dann selbst hoch."""
+    vids = _load("videos.json")
+    vids = vids if isinstance(vids, list) else vids.get("videos", [])
+    return [v["id"] for v in vids if v.get("status") == "review" and time.time() - float(v.get("review_at") or 0) > hours * 3600]
+
+
 def plan_due():
     sid = plan_slot()
     return bool(sid) and sid not in _load("plans.json")
@@ -99,9 +121,9 @@ def main():
     action = (os.environ.get("IN_ACTION") or "auto").strip() or "auto"
     if action == "auto":
         slot = due_slot()
-        run, media = (1, 1) if slot else ((1, 0) if (stats_due() or plan_due()) else (0, 0))
+        run, media = (1, 1) if slot else ((1, 0) if (stats_due() or plan_due() or review_stale()) else (0, 0))
     else:
-        run, media = 1, 1 if action == "make" else 0
+        run, media = 1, 1 if action in ("make", "review_make") else 0
     print(f"run={run}")
     print(f"media={media}")
 

@@ -1,6 +1,6 @@
 {
-  "version": "1.4.2",
-  "file": "releases/AutoShorts-1.4.2.cmd",
-  "sha256": "ec09639fd3b2fbd9f7eba2991e2afb3457c61a970c63f4730dceb2b45f466f10",
-  "notes": "Live-Zahlen: Die App holt die Zahlen selbst alle paar Minuten, solange sie offen ist, und weckt den Autopiloten pünktlich."
+  "version": "1.4.3",
+  "file": "releases/AutoShorts-1.4.3.cmd",
+  "sha256": "a9fc4d26fb9704d9e0d2d77a3afd681f8d0fe7cf97bf8b7032e68772d50dedb1",
+  "notes": "Neue Zustände „Wird geprüft“ und „Verworfen“: Videos werden vor dem Upload geprüft."
 }

@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       action:
-        description: "auto | make | upload | stats | trends"
+        description: "auto | make | review_make | upload | discard | stats | trends"
         default: "make"
         type: string
       category:

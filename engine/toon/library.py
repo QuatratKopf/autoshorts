@@ -135,6 +135,7 @@ def register(item):
         from .places import PX_M, depth
         y = _depth_y(item["height_m"]) if item["height_m"] <= 10 else 935
         extras.SIZES[key] = (max(0.3, min(item["height_m"], 1050 / (PX_M * depth(y)))), y)   # sehr Hohes bleibt im Bild, Winziges bleibt erkennbar
+    extras.REAL_M[key] = item["height_m"]
     LIB[name] = dict(item, key=key)
     return key
 

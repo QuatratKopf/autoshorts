@@ -949,7 +949,7 @@ def direct(scenes, times, topic="", style="", look=""):
             sc["crowd"] = ""
         txt = str(sc.get("text") or "").lower()
         rp = places.resolve(backdrop(sc))
-        if sc.get("shot") == "graphic" or rp in MAPS:
+        if rp in MAPS and sc.get("shot") != "graphic":
             continue
         keys = [extras.PROP_ALIASES.get(str(p.get("type") if isinstance(p, dict) else p).lower(), str(p.get("type") if isinstance(p, dict) else p).lower())
                 for p in (sc.get("props") or [])]
@@ -957,7 +957,15 @@ def direct(scenes, times, topic="", style="", look=""):
             named = any(k == keys[0] and (_re0.search(pat, txt) or _re0.search(pat, str(topic or "").lower())) for pat, k in pats)
             if not named and keys[0] not in txt:
                 sc["shot"], sc["props"], keys = "", [], []
-        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        ov_t = str((sc.get("overlay") or {}).get("type") or "") if isinstance(sc.get("overlay"), dict) else ""
+        if isinstance(sc.get("graphic"), dict) and ov_t in ("checklist", "phone", "note", "choice"):
+            sc.pop("graphic", None)                       # Liste und Grafik zugleich überdecken sich: die Liste bleibt, die Grafik geht
+            sc["shot"] = ""
+        if sc.get("shot") == "graphic":
+            continue
+        people = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and (giant or str(a.get("kind") or "").lower() not in CREATURE_SIZE)]
+        acts = people if sc.get("shot") != "insert" else [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        small = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and a not in people]
         big = [k for k in keys if k in extras.SKY or (extras.SIZES.get(k) or (9, 0))[0] >= 0.6]
         if sc.get("shot") != "insert" and not acts and not sc.get("crowd") and not big and not sc.get("weather"):
             # leerer Raum, leere Wiese: Die Hauptfigur erlebt, wovon der Satz spricht – nie ein Bild, in dem niemand ist und nichts passiert
@@ -970,8 +978,8 @@ def direct(scenes, times, topic="", style="", look=""):
                 action, emotion = "look_around", "worried"
             elif _re0.search(r"\bweh\b|schmerz|\bbiss\b|stich|verletz", txt):
                 action, emotion = "sad", "sad"
-            sc["actors"] = [{"id": main_id, "action": action, "emotion": emotion, "pos": "left" if keys else "center",
-                             "emote": {"shocked": "!", "look_around": "?"}.get(action, "")}]
+            sc["actors"] = [{"id": main_id, "action": action, "emotion": emotion, "pos": "left" if (keys or small) else "center",
+                             "emote": {"shocked": "!", "look_around": "?"}.get(action, "")}] + [dict(a, pos="right") for a in small[:1]]
             if sc.get("shot") == "event":
                 sc["shot"] = ""
             filled += 1
@@ -1200,6 +1208,78 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     finally:
         if ff.poll() is None:
             ff.kill()
+
+
+def poster(spec: dict, cast: dict, out: Path, topic=""):
+    """Eigens gestaltetes Titelbild (kein Bild aus dem Video): Strahlen-Hintergrund, das Ding des Videos riesig als Aufkleber,
+    darunter die Hauptfigur groß im Anschnitt mit starkem Gefühl. Der Text kommt danach ins obere Drittel."""
+    import re as _re
+    from PIL import ImageFilter
+    dark = str(spec.get("time") or "").lower() in ("night", "nacht") or str(spec.get("mood") or "").lower() in ("scary", "panic")
+    c0, c1, glow = (((70, 40, 150), (38, 20, 96), (190, 150, 255)) if dark else ((255, 205, 60), (250, 160, 40), (255, 250, 220)))
+    frame = Image.new("RGB", (W, H), c1)
+    d = ImageDraw.Draw(frame, "RGBA")
+    cx, cy = 600, 960
+    for i in range(18):                                   # Strahlen
+        a0, a1 = math.radians(i * 20 - 4), math.radians(i * 20 + 6)
+        d.polygon([(cx, cy), (cx + math.cos(a0) * 2600, cy + math.sin(a0) * 2600), (cx + math.cos(a1) * 2600, cy + math.sin(a1) * 2600)], fill=c0)
+    halo = Image.new("L", (W // 6, H // 6), 0)
+    ImageDraw.Draw(halo).ellipse((cx / 6 - 90, cy / 6 - 90, cx / 6 + 90, cy / 6 + 90), fill=200)
+    halo = halo.filter(ImageFilter.GaussianBlur(26)).resize((W, H), Image.BILINEAR)
+    frame = Image.composite(Image.new("RGB", (W, H), glow), frame, halo)
+    vig = Image.new("L", (W // 6, H // 6), 150)
+    ImageDraw.Draw(vig).ellipse((-40, -10, W // 6 + 40, H // 6 + 10), fill=0)
+    frame = Image.composite(Image.new("RGB", (W, H), (20, 10, 40)), frame, vig.filter(ImageFilter.GaussianBlur(40)).resize((W, H), Image.BILINEAR))
+
+    def sticker(im, max_w, max_h, x, y, tilt=0):
+        f = min(max_w / im.width, max_h / im.height)
+        im = im.resize((max(2, int(im.width * f)), max(2, int(im.height * f))), Image.LANCZOS)
+        pad = 60
+        big = Image.new("RGBA", (im.width + pad * 2, im.height + pad * 2), (0, 0, 0, 0))
+        big.paste(im, (pad, pad), im)
+        edge = big.split()[3].filter(ImageFilter.MaxFilter(31))
+        st = Image.new("RGBA", big.size, (0, 0, 0, 0))
+        st.paste((255, 255, 255, 255), (0, 0), edge)
+        st.paste(big, (0, 0), big)
+        st = st.rotate(tilt, resample=Image.BICUBIC, expand=True)
+        sh = Image.new("RGBA", st.size, (0, 0, 0, 0))
+        sh.paste((0, 0, 0, 120), (0, 0), st.split()[3])
+        frame.paste(sh, (int(x - st.width / 2 + 18), int(y - st.height / 2 + 26)), sh)
+        frame.paste(st, (int(x - st.width / 2), int(y - st.height / 2)), st)
+
+    # 1) das Ding, um das es geht
+    hero = None
+    kind = str(spec.get("kind") or "").lower()
+    cast_kind = next((str(v.get("kind")).lower() for v in (cast or {}).values() if isinstance(v, dict) and v.get("kind")), "")
+    low = str(topic or "").lower()
+    keys = [extras.PROP_ALIASES.get(str(p.get("type") if isinstance(p, dict) else p).lower(), str(p.get("type") if isinstance(p, dict) else p).lower())
+            for p in (spec.get("props") or [])]
+    keys += [k for pat, k in _lib_props() + TEXT_PROPS if _re.search(pat, low)]
+    for k in keys:
+        if k in extras.PROPS:
+            lay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+            extras.draw_prop(lay, k, 540, 1.2)
+            box = lay.getbbox()
+            if box:
+                hero = lay.crop(box)
+                break
+    if hero is None and (kind in extras.CREATURES or cast_kind in extras.CREATURES):
+        res = extras.creature(kind if kind in extras.CREATURES else cast_kind, 0.4, 1, 0.6, "", 1.6)
+        if res and res[0].getbbox():
+            hero = res[0].crop(res[0].getbbox())
+    # 2) die Hauptfigur, groß im Anschnitt
+    aid = spec.get("actor") if isinstance((cast or {}).get(spec.get("actor")), dict) and not cast[spec.get("actor")].get("kind") else \
+        next((k for k, v in (cast or {}).items() if isinstance(v, dict) and not v.get("kind")), None)
+    look = rig.Look.from_spec((cast or {}).get(aid) if aid else {})
+    pose, _ = rig.pose_at("shocked", 1.0, 3.0, str(spec.get("emotion") or "shocked"), 0.8, 3)
+    pose.lift = 0
+    fig, fx, fy = rig.draw(look, pose, 1, 2.3)
+    if hero is not None:
+        sticker(hero, 700, 640, 640, 930, -6)
+        frame.paste(fig, (int(250 - fx), int(2330 - fy)), fig)
+    else:
+        frame.paste(fig, (int(540 - fx), int(2200 - fy)), fig)
+    frame.save(out, quality=93)
 
 
 def cover(spec: dict, cast: dict, out: Path):
