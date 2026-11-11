@@ -1792,5 +1792,48 @@
   "look": "cartoon",
   "mp4": true,
   "error": "Bei der Prüfung verworfen: Untertitel mit Jahreszahl am Rand abgeschnitten, Kurs-Grafik mit nicht gesprochener Zahl überdeckt die Untertitel, zwei gleiche Nebenfiguren"
+ },
+ {
+  "id": 57,
+  "category": "fakten",
+  "topic": "Wie Nvidia von einer Gaming-Bude zum wertvollsten Tech-Giganten wurde",
+  "status": "rendered",
+  "created": 1794423472.2591004,
+  "title": "Wie dieser Zockerschuppen das wertvollste Tech-Unternehmen der Welt wurde",
+  "description": "Wie aus einer kleinen Gaming-Bude ein gigantischer Tech-Riese wurde\nDie verrückte Reise vom Nischen-Grafikchip zum unverzichtbaren KI-Monopol\nErfahre alles über den kometenhaften Aufstieg",
+  "hashtags": [
+   "#shorts",
+   "#fyp",
+   "#viral",
+   "#tech",
+   "#aktien",
+   "#nvidia",
+   "#gaming",
+   "#geld"
+  ],
+  "tags": [
+   "nvidia",
+   "geschichte",
+   "tech gigant",
+   "künstliche intelligenz",
+   "aktien",
+   "gaming",
+   "erfolg",
+   "wirtschaft",
+   "zukunft",
+   "grafikkarte"
+  ],
+  "thumb_text": "VOM GAMER ZUM GIGA-BOSS",
+  "missing": null,
+  "cover_ms": 63433,
+  "duration": 63.3,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]

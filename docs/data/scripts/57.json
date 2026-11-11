@@ -1,0 +1,470 @@
+{
+ "title": "Wie dieser Zockerschuppen das wertvollste Tech-Unternehmen der Welt wurde",
+ "scenes": [
+  {
+   "text": "Drei Typen in einem Diner wollten das Zocken für immer verändern.",
+   "see": "Drei Personen sitzen im Restaurant und besprechen Pläne.",
+   "place": "restaurant",
+   "time": "day",
+   "props": [
+    {
+     "type": "table"
+    },
+    {
+     "type": "lib_diner"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 540
+    },
+    {
+     "id": "_team1",
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "speaks": false,
+     "look": {
+      "shirt": "rot",
+      "hair": "bun",
+      "glasses": true
+     },
+     "pos": 210,
+     "facing": "",
+     "kind": "",
+     "hold": "",
+     "say": ""
+    },
+    {
+     "id": "_team2",
+     "action": "think",
+     "emotion": "happy",
+     "emote": "",
+     "speaks": false,
+     "look": {
+      "shirt": "orange",
+      "hat": "cap"
+     },
+     "pos": 870,
+     "facing": "",
+     "kind": "",
+     "hold": "",
+     "say": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Ihr Ziel war es, dreidimensionale Grafik auf jeden PC zu bringen.",
+   "see": "Eine Person sitzt vor einem alten Computer mit dreidimensionaler Grafik.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "shot": "insert",
+   "mood": "calm"
+  },
+  {
+   "text": "Im Jahr neunzehnhundertdreiundneunzig gründeten sie eine kleine Firma.",
+   "see": "Eine Person gründet eine Firma in einem kleinen Büro.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "box"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "1993"
+   }
+  },
+  {
+   "text": "Aber der erste Versuch war ein kompletter Reinfall.",
+   "see": "Eine Person schaut traurig auf einen kaputten Computer.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sad",
+     "emotion": "sad",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "sad"
+  },
+  {
+   "text": "Das Produkt verkaufte sich kaum und das Geld wurde knapp.",
+   "see": "Das Geld wird knapp und Kisten stapeln sich im Büro.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "insert",
+   "mood": "tense",
+   "crowd": "worried",
+   "overlay": {
+    "type": "bar",
+    "label": "KAPITAL",
+    "value": 5
+   }
+  },
+  {
+   "text": "Fast wären sie pleitegegangen, doch dann kam der Rettungsanker.",
+   "see": "Eine Person findet neuen Mut an ihrem Schreibtisch.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Sie bauten eine Grafikkarte, die die Spielewelt revolutionierte.",
+   "see": "Ein Mikrochip liegt groß und leuchtend im Bild.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "shot": "insert",
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "GEFORCE"
+   }
+  },
+  {
+   "text": "Millionen Spieler wollten plötzlich genau diesen einen Chip haben.",
+   "see": "Spieler jubeln vor dem Computer.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "tv"
+    },
+    {
+     "type": "lib_mikrochip"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Also verdienten sie zum ersten Mal richtig viel Geld.",
+   "see": "Geldstapel wachsen auf dem Tisch.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "center"
+    }
+   ],
+   "shot": "insert",
+   "mood": "happy"
+  },
+  {
+   "text": "Doch die Gründer merkten, dass ihre Chips noch viel mehr konnten.",
+   "see": "Eine Person denkt nach über neue Möglichkeiten vor dem Computer.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    },
+    {
+     "type": "lib_mikrochip"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Sie berechneten nicht nur Pixel, sondern verarbeiteten gigantische Datenmengen.",
+   "see": "Serverraum mit blinkenden Lampen und gigantischen Datenmengen.",
+   "place": "serverroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Genau das brauchte plötzlich die gesamte Welt für künstliche Intelligenz.",
+   "see": "Ein Mikrochip leuchtet in einem großen Serverraum.",
+   "place": "serverroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "shot": "insert",
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "KI-BOOM"
+   }
+  },
+  {
+   "text": "Jedes große Tech-Unternehmen rannte ihnen die Bude ein.",
+   "see": "Viele Menschen rennen in ein großes Firmengebäude.",
+   "place": "headquarters",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "run",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "mood": "tense",
+   "crowd": "worried"
+  },
+  {
+   "text": "Innerhalb weniger Jahre explodierte der Aktienkurs ins Unermessliche.",
+   "see": "Aktienkurs schießt rasant nach oben.",
+   "place": "office",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "happy",
+   "graphic": {
+    "type": "chart",
+    "kicker": "AKTIENKURS",
+    "dark": false
+   }
+  },
+  {
+   "text": "Heute ist die ehemalige Zockerbude mehr wert als so mancher Staat.",
+   "see": "Ein riesiger moderner Büroturm ragt in den Himmel.",
+   "place": "headquarters",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "center"
+    }
+   ],
+   "mood": "happy",
+   "crowd": "watch"
+  },
+  {
+   "text": "Aus Spaß am Gaming wurde das wertvollste Unternehmen der Welt.",
+   "see": "Eine Person jubelt im modernen Büro vor glänzenden Bildschirmen.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "money"
+    },
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Wer hätte gedacht, dass Ballerspiele einmal die Wirtschaft regieren.",
+   "see": "Eine Person staunt vor einer großen Weltkarte.",
+   "place": "worldmap",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "choice",
+    "a": "Aktien kaufen",
+    "b": "Weiter zocken"
+   }
+  }
+ ]
+}
