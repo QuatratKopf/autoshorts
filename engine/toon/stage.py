@@ -272,7 +272,7 @@ def _crowd(frame, kind, t, night, lo=0, hi=9999, road=False, traffic=True, indoo
             extras.draw_emote(frame, emote, x, gy - (505 + max(0, pose.lift)) * sc, t + ph, sc)
 
 
-ON_TABLE = ("cans", "candle", "money", "canister")           # Kleines steht drinnen auf einem Tisch, damit man es sieht
+ON_TABLE = ("cans", "candle", "money", "canister", "glass")           # Kleines steht drinnen auf einem Tisch, damit man es sieht
 
 
 def _on_table(key):
@@ -299,7 +299,7 @@ def _float_lift(mode, t, seed=0.0, top=300.0, aloft=False):
     return (top + bob) * k, None
 
 
-def _prop(frame, kind, x, t, big, table=False, lift=0.0, rot=0.0):
+def _prop(frame, kind, x, t, big, table=False, lift=0.0, rot=0.0, grow=1.0):
     """Requisite zeichnen. Dinge mit echter Größe (Auto, Regal, Haus …) stehen in ihrer Tiefe im richtigen Verhältnis
     zu den Menschen; Naturereignisse und Himmelskörper sind Schaubilder und dürfen groß sein (big).
     lift/rot: das Ding schwebt so viele Pixel über dem Boden und ist dabei gekippt (Schwerelosigkeit)."""
@@ -325,6 +325,7 @@ def _prop(frame, kind, x, t, big, table=False, lift=0.0, rot=0.0):
         return
     if fit:
         f, gy = fit
+        f *= grow                                         # Auftritt: das Ding springt mit kleinem Überschwingen ins Bild
         if table and _on_table(key):
             _prop(frame, "table", x, t, big)
             tf, ty = extras.prop_fit("table")
@@ -358,7 +359,7 @@ def _prop(frame, kind, x, t, big, table=False, lift=0.0, rot=0.0):
 INK = (22, 22, 26)
 FLOAT_TOPS = (300.0, 170.0, 390.0)                 # Schwebehöhen (px über der Fußlinie) für mehrere Dinge im Zimmer …
 FLOAT_TOPS_OUT = (310.0, 250.0, 70.0)
-FLOAT_SHRINK = {"glass": 0.5, "candle": 0.5, "faucet": 0.6}
+FLOAT_SHRINK = {"candle": 0.5, "faucet": 0.6}
 FLOAT_LOW = (110.0, 70.0, 90.0)                    # unter hohen Einblendungen und für Busse: nur knapp über dem Boden             # … und draußen (Autos): nebeneinander oben, eines tiefer in der Mitte
 _wv = {}
 
@@ -387,10 +388,10 @@ def _window_view(frame, box, kind, t):
 SWARM = ((0, 0, 1.0), (-330, -150, 0.6), (310, -200, 0.5), (-190, 150, 0.72), (250, 110, 0.8), (-420, 40, 0.45), (420, -40, 0.55))
 
 
-def _prop_many(frame, kind, x, t, big, n, table=False):
+def _prop_many(frame, kind, x, t, big, n, table=False, grow=1.0):
     """Mehrere gleiche Himmels-Dinge (Schwarm): versetzt, verschieden groß, leicht zeitversetzt."""
     if n <= 1 or extras.prop_fit(kind):
-        return _prop(frame, kind, x, t, big, table)
+        return _prop(frame, kind, x, t, big, table, grow=grow)
     for i, (dx, dy, sc) in enumerate(SWARM[:n]):
         lay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
         extras.draw_prop(lay, kind, 540, t + i * 0.9)
@@ -451,7 +452,8 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                 rot = rot * min(1.0, lift / 120) if hit is None else (9 if pi % 2 else -7) * (0 if kind in ("car", "bus", "truck") else 1)
                 _prop(frame, kind, x, t, big, False, max(lift, 0.01), rot)
                 continue
-            _prop_many(frame, kind, x, t, big, (opt.get("count") or {}).get(extras.PROP_ALIASES.get(kind, kind), 1), indoor)
+            _prop_many(frame, kind, x, t, big, (opt.get("count") or {}).get(extras.PROP_ALIASES.get(kind, kind), 1), indoor,
+                       grow=max(0.02, extras._pop(t, 0.06 + 0.12 * pi, 0.32)) if opt.get("pop_in", True) else 1.0)
     if opt.get("crowd"):
         _crowd(frame, opt["crowd"], t, night, 1090, 9999, **ckw)
     over = frame
@@ -505,6 +507,10 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                     pose.arm_r, pose.fore_r = 40, 100
             if 0 <= t - move_t < 0.18 and arrived:           # kleines Abfedern beim Ankommen
                 pose.squash *= 1 - 0.08 * math.sin((t - move_t) / 0.18 * math.pi)
+            elif not moving and t < 0.3 and not pose.lying:  # Szenenbeginn: die Figur federt kurz – nichts steht steif da
+                pose.squash *= 1 + 0.07 * math.sin(t / 0.3 * math.pi) * (1 - t / 0.3)
+            if action in ("shocked", "scared") and t < 0.45:  # Schreck: Strahlen um den Kopf
+                extras.draw_burst(frame, x, gy - 420 * scale, t / 0.45, scale)
             if action == "sit" and not pose.lying:               # niemand sitzt in der Luft: Hocker unter die Figur
                 sw, sh = 62 * scale, 74 * scale
                 d0 = ImageDraw.Draw(frame, "RGBA")
@@ -515,6 +521,8 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
             im, fx, fy = rig.draw(a["look"], pose, facing, scale)
             if pose.lying and in_bed:                          # im Schlafzimmer liegt die Figur im Bett
                 x, gy = 300, places.GROUND - 150
+            elif pose.lying:                                   # sonst liegt sie auf dem Boden auf, nicht darüber
+                fy -= 62 * scale
             _shadow(frame, int(x), gy, int(72 * scale * (1 - min(0.5, max(0, pose.lift + a_lift) / 400))))
             gy0, gy = gy, gy - int(a_lift)
             frame.paste(im, (int(x - fx), int(gy - fy)), im)
@@ -526,7 +534,7 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                     extras.draw_held(frame, a["hold"], x - fx + hx, gy - fy + hy, facing, t, scale, night)
             head_y = gy - (505 + max(0, pose.lift)) * scale * a["look"].size
             gy = gy0
-            if pose.lean > 60:                               # liegt am Boden: Zeichen neben statt weit über der Figur
+            if pose.lean > 60 or pose.lying:                 # liegt am Boden: Zeichen knapp über statt weit über der Figur
                 head_y = gy - 300 * scale
             _zzz(od, pose, x, head_y + 75 * scale, t)
         if a.get("say"):
@@ -1344,7 +1352,39 @@ def _insert_frame(kinds, t, dur, mood, low=False, neon=False):
     return frame
 
 
-def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.0, still: Path = None):
+def _camera(frame, t, dur, cam):
+    """Lebendige Kamera für jede Szene: etwas näher an den Figuren, langsame Fahrt, ein kurzer Ruck beim Schnitt und – wenn
+    das Schlüsselwort fällt – ein schneller Sprung auf die Hauptfigur (wie in geschnittenen Kurzvideos)."""
+    k = t / max(dur, 0.1)
+    z = (1.0 if cam.get("flat") else 1.06) + 0.035 * (k if cam.get("drift", 1) > 0 else 1 - k)
+    ax, ay = 540.0, 1010.0
+    pt = cam.get("punch")
+    if pt is not None and t >= pt:
+        e = _ease(min(1.0, (t - pt) / 0.14))
+        z += 0.14 * e
+        ax += (float(cam.get("fx", 540)) - 540) * e
+        ay -= 90 * e
+    if t < 0.22:                                          # Schnitt: kurzer Ruck hinein und zur Seite
+        e = (1 - t / 0.22) ** 2
+        z += 0.08 * e
+        ax += cam.get("dir", 1) * 70 * e
+    ax = max(0.0, min(float(W), ax))
+    w, h = W / z, H / z
+    x0, y0 = ax - (ax / W) * w, ay - (ay / H) * h
+    return frame.transform((W, H), Image.EXTENT, (x0, y0, x0 + w, y0 + h), Image.BILINEAR)
+
+
+def _punch_time(scene, words, t0, dur):
+    """Zeitpunkt (s ab Szenenbeginn) für den Kamerasprung: wenn das erste Schlüsselwort gesprochen wird, sonst zur Szenenmitte."""
+    keys = [str(h).lower().strip(" .,!?") for h in (scene.get("highlight") or []) if str(h).strip()]
+    first = {k.split()[0] for k in keys if k.split()}
+    for w, s0, _e in words or ():
+        if t0 + 0.5 <= s0 <= t0 + dur - 0.9 and str(w).lower().strip(" .,!?„“\"") in first:
+            return s0 - t0
+    return dur * 0.5 if dur >= 3.2 else None
+
+
+def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.0, still: Path = None, index=0):
     """scene: {"place", "time", "weather", "props", "actors": [{"id", "action", "emotion", "emote", "pos", "to", "speaks"}]}.
     words: [(wort, start, ende)] der ganzen Sprecherspur; t0 = Startzeit der Szene darin."""
     place, night, scale, actors, props, weather = _prepare(scene, cast)
@@ -1361,6 +1401,12 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     if neon_look:                             # Neon-Nacht: nur die Kulisse wird violett getönt – Figuren und Dinge bleiben kräftig
         bg = graphics.tint(bg)
     shot = "close" if shot == "close" and not has_ov and not moving and not props and actors and not scene.get("float") else ""
+    ov_tall = str((scene.get("overlay") or {}).get("type") or "") in TALL_OV if has_ov else False
+    lead = next((a for a in actors if a["speaks"]), actors[0] if actors else None)
+    cam = {"dir": 1 if index % 2 == 0 else -1, "drift": 1 if index % 3 != 2 else -1,
+           "fx": (lead["x1"] if lead else (props[0][1] if props else 540)),
+           "punch": None if (shot == "close" or moving or ov_tall or place in MAPS or not (actors or props)) else _punch_time(scene, words, t0, dur)}
+    cam_flat = {"flat": True, "dir": cam["dir"], "drift": cam["drift"]}
     ff = subprocess.Popen(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24",
                            "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-preset", "veryfast",
                            "-crf", "17", "-pix_fmt", "yuv420p", str(out)], stdin=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -1372,7 +1418,7 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
                          else _insert_frame(ins, t, dur, str(scene.get("mood") or "").lower(), bool(has_ov), neon_look))
                 if still is not None and fidx == min(n_frames - 1, FPS):
                     frame.save(still, quality=92)
-                ff.stdin.write(frame.tobytes())
+                ff.stdin.write(_camera(frame.convert("RGB"), t, dur, cam_flat).tobytes())
                 continue
             frame = _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, place == "bedroom", shot, big,
                            {"crowd": scene.get("crowd") if crowd_ok(scene) else "", "mood": str(scene.get("mood") or "").lower(), "spec": places.spec_of(backdrop(scene)), "sky": sky_m, "win": scene.get("_win"), "count": scene.get("_count"), "neon": neon_look,
@@ -1380,7 +1426,7 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
                             "no_traffic": bool(scene.get("no_traffic") or scene.get("dark_city"))})
             if still is not None and fidx == min(n_frames - 1, FPS):
                 frame.save(still, quality=92)
-            ff.stdin.write(frame.tobytes())
+            ff.stdin.write(_camera(frame.convert("RGB"), t, dur, cam_flat if shot == "close" else cam).tobytes())
         ff.stdin.close()
         err = ff.stderr.read().decode()[-500:]
         if ff.wait() != 0:

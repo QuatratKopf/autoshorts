@@ -663,7 +663,7 @@ SIZES = {"car": (1.5, 1150), "bus": (3.0, 1100), "truck": (3.3, 1100), "house": 
          "cart": (1.0, 1262), "candle": (0.9, 1262), "trafficlight": (3.4, 1225), "canister": (0.5, 1262), "cans": (0.5, 1262),
          "generator": (0.8, 1255), "bike": (1.05, 1255), "shelf": (1.9, 1238), "table": (0.78, 1250), "fridge": (1.85, 1238),
          "cctv": (3.6, 1228), "tent": (1.8, 1180), "door": (2.1, 1236), "clock": (0.6, 1262), "pile": (3.2, 1160), "sandpile": (3.2, 1160),
-         "trash": (1.6, 1200), "faucet": (1.6, 1255), "glass": (0.9, 1262), "barrel": (0.95, 1255), "solarpanel": (1.8, 1200), "streetlamp": (4.6, 1225), "rocket": (14.0, 1010)}
+         "trash": (1.6, 1200), "faucet": (1.6, 1255), "glass": (0.36, 1262), "barrel": (0.95, 1255), "solarpanel": (1.8, 1200), "streetlamp": (4.6, 1225), "rocket": (14.0, 1010)}
 HELD = {"phone": "phone", "handy": "phone", "smartphone": "phone", "flashlight": "flashlight", "taschenlampe": "flashlight",
         "bag": "bag", "tasche": "bag", "einkaufstüte": "bag", "tüte": "bag", "bottle": "bottle", "flasche": "bottle",
         "wasserflasche": "bottle", "umbrella": "umbrella", "regenschirm": "umbrella", "schild": "sign", "sign": "sign",
@@ -1029,6 +1029,19 @@ def draw_landscape_motion(layer, spec, place, night, t, traffic=True, parked=Tru
 
 MOODS = {"panic": (255, 60, 40), "tense": (255, 120, 40), "scary": (10, 10, 40), "sad": (40, 70, 130), "happy": (255, 220, 120),
          "calm": None}
+
+
+def draw_burst(layer, x, y, k, sc=1.0):
+    """Schreck-/Aufprall-Strahlen: kurze Keile, die vom Punkt nach außen schießen (k = 0..1 Fortschritt)."""
+    d = ImageDraw.Draw(layer, "RGBA")
+    a = int(255 * (1 - k) ** 0.7)
+    for i in range(12):
+        ang = i * math.pi / 6 + 0.26
+        r0, r1 = (150 + 150 * k) * sc, (230 + 260 * k) * sc
+        wdt = (0.10 if i % 2 else 0.06)
+        pts = [(x + math.cos(ang - wdt) * r0, y + math.sin(ang - wdt) * r0 * 0.9), (x + math.cos(ang) * r1, y + math.sin(ang) * r1 * 0.9),
+               (x + math.cos(ang + wdt) * r0, y + math.sin(ang + wdt) * r0 * 0.9)]
+        d.polygon(pts, fill=(255, 255, 255, a) if i % 2 else (255, 214, 80, a))
 
 
 def draw_mood(layer, mood, t):

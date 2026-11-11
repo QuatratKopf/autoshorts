@@ -39,9 +39,75 @@ class P:
         self.dark = DARK[0]           # Stromausfall: keine erleuchteten Fenster, keine Lampen
         self.im = Image.new("RGB", (W, H), (0, 0, 0))
         self.d = ImageDraw.Draw(self.im)
+        self.indoor = False           # setzt room(): Zimmer bekommen Fensterlicht, Deckenschatten und Bodenglanz
+        self.outdoor = False          # setzt compose(): Landschaften bekommen Dunst am Horizont
+        self.windows = []             # Fenster des Zimmers (für die Lichtbahnen)
+        self.sun = None               # Mittelpunkt der Sonne / des Mondes (für den Lichtschein)
+
+    # --- weiche Flächen (Verläufe, Lichtschein, Schatten) – geben dem flachen Stil Tiefe
+    def grad(self, box, top, bot, raw=False):
+        """Senkrechter Farbverlauf in einem Rechteck."""
+        x0, y0, x1, y1 = [int(v) for v in box]
+        if x1 <= x0 or y1 <= y0:
+            return
+        m = Image.linear_gradient("L").resize((x1 - x0, y1 - y0))
+        a, b = (top, bot) if raw else (self.c(top), self.c(bot))
+        self.im.paste(Image.composite(Image.new("RGB", (x1 - x0, y1 - y0), b), Image.new("RGB", (x1 - x0, y1 - y0), a), m), (x0, y0))
+        self.d = ImageDraw.Draw(self.im)
+
+    def veil(self, shape, col, alpha, blur=0, kind="ellipse"):
+        """Halbtransparente Fläche (Lichtschein, Schatten, Dunst): shape = Rechteck oder Punktliste."""
+        m = Image.new("L", (W, H), 0)
+        md = ImageDraw.Draw(m)
+        if kind == "ellipse":
+            md.ellipse(shape, fill=alpha)
+        elif kind == "rect":
+            md.rectangle(shape, fill=alpha)
+        else:
+            md.polygon(shape, fill=alpha)
+        if blur:
+            m = m.filter(ImageFilter.GaussianBlur(blur))
+        self.im.paste(Image.new("RGB", (W, H), col), (0, 0), m)
+        self.d = ImageDraw.Draw(self.im)
+
+    def fade(self, box, col, a0, a1):
+        """Farbschleier über ein Rechteck, dessen Stärke von oben (a0) nach unten (a1) verläuft (0–255)."""
+        x0, y0, x1, y1 = [int(v) for v in box]
+        if x1 <= x0 or y1 <= y0:
+            return
+        m = Image.linear_gradient("L").resize((x1 - x0, y1 - y0)).point(lambda v: int(a0 + (a1 - a0) * v / 255))
+        self.im.paste(Image.new("RGB", (x1 - x0, y1 - y0), col), (x0, y0), m)
+        self.d = ImageDraw.Draw(self.im)
+
+    def blobs(self, parts, col, o=O, hi=0.14, lo=0.16):
+        """Mehrere Kreise als EINE Form (Baumkrone, Busch, Wolke): gemeinsamer Umriss, Schatten unten, Licht oben."""
+        col = self.c(col)
+        if o:
+            for cx, cy, r in parts:
+                self.d.ellipse((cx - r - o, cy - r - o, cx + r + o, cy + r + o), fill=INK)
+        if lo:
+            for cx, cy, r in parts:
+                self.d.ellipse((cx - r, cy - r, cx + r, cy + r), fill=_mix(col, lo, (10, 20, 50)))
+            for cx, cy, r in parts:
+                self.d.ellipse((cx - r, cy - r - r * 0.16, cx + r, cy + r - r * 0.16), fill=col) if r > 12 else None
+        else:
+            for cx, cy, r in parts:
+                self.d.ellipse((cx - r, cy - r, cx + r, cy + r), fill=col)
+        if hi:
+            for cx, cy, r in parts:
+                self.d.ellipse((cx - r * 0.62, cy - r * 0.78, cx + r * 0.18, cy - r * 0.1), fill=_mix(col, hi, (255, 255, 235)))
+
+    def cloud(self, cx, cy, s=1.0, col=(255, 255, 255), shade=(214, 228, 246)):
+        parts = [(cx + dx * s, cy + dy * s, r * s) for dx, dy, r in ((-96, 14, 46), (-48, -14, 62), (14, -30, 74), (76, -6, 58), (120, 18, 40))]
+        for x, y, r in parts:
+            self.d.ellipse((x - r, y - r + 12 * s, x + r, y + r + 12 * s), fill=shade)
+        for x, y, r in parts:
+            self.d.ellipse((x - r, y - r, x + r, y + r), fill=col)
+        self.d.rounded_rectangle((cx - 140 * s, cy + 14 * s, cx + 158 * s, cy + 58 * s), 22 * s, fill=shade)
+        self.d.rounded_rectangle((cx - 140 * s, cy + 6 * s, cx + 158 * s, cy + 46 * s), 22 * s, fill=col)
 
     def c(self, col, glow=False):
-        return col if (glow or not self.night) else _mix(col, 0.55)
+        return col if (glow or not self.night) else _mix(col, 0.5, (22, 26, 66))
 
     def rect(self, box, col, r=0, o=O, glow=False):
         if r:
@@ -66,81 +132,196 @@ class P:
     # --- Bausteine
     def sky(self, y1=GROUND):
         mood = getattr(self, "mood", "")
-        top, bot = ((18, 22, 56), (44, 52, 110)) if self.night else ((120, 196, 250), (206, 236, 255))
+        top, bot = ((14, 18, 52), (58, 60, 128)) if self.night else ((84, 168, 246), (196, 232, 255))
         if mood == "sunset":
-            top, bot = (70, 60, 130), (250, 170, 110)
+            top, bot = (64, 58, 132), (255, 176, 112)
         elif mood == "storm":
-            top, bot = (70, 78, 96), (150, 158, 172)
+            top, bot = (62, 70, 90), (150, 158, 174)
         elif mood == "red":
-            top, bot = (90, 30, 30), (230, 120, 70)
+            top, bot = (84, 26, 30), (234, 124, 70)
         elif mood == "haze":
-            top, bot = (200, 190, 150), (240, 226, 190)
-        for y in range(0, y1, 8):
-            f = y / y1
-            self.d.rectangle((0, y, W, y + 8), fill=tuple(int(top[i] * (1 - f) + bot[i] * f) for i in range(3)))
+            top, bot = (196, 186, 148), (242, 228, 192)
+        self.grad((0, 0, W, y1), top, bot, raw=True)
+        glow = {"sunset": (255, 214, 150), "red": (255, 170, 110), "storm": (190, 196, 208), "haze": (255, 244, 214)}.get(mood, (110, 96, 170) if self.night else (240, 250, 255))
+        self.fade((0, y1 - 330, W, y1), glow, 0, 150)                       # heller Schein über dem Horizont
         rnd = random.Random(7)
         if self.night:
-            for _ in range(70):
-                x, y, r = rnd.randint(0, W), rnd.randint(0, y1 - 200), rnd.choice((2, 2, 3, 4))
-                self.d.ellipse((x - r, y - r, x + r, y + r), fill=(255, 255, 230))
-            self.oval((760, 250, 920, 410), (250, 244, 200), glow=True)
-            self.d.ellipse((800, 290, 835, 325), fill=(226, 218, 170))
-            self.d.ellipse((850, 340, 885, 372), fill=(226, 218, 170))
+            for _ in range(110):
+                x, y, r = rnd.randint(0, W), rnd.randint(0, y1 - 160), rnd.choice((1, 2, 2, 2, 3, 4))
+                self.d.ellipse((x - r, y - r, x + r, y + r), fill=(255, 255, 230) if r > 1 else (200, 206, 240))
+            self.veil((640, 130, 1040, 530), (150, 160, 230), 90, 60)        # Hof um den Mond
+            self.d.ellipse((760, 250, 920, 410), fill=(250, 244, 204))
+            for cx, cy, r in ((812, 306, 20), (866, 356, 15), (838, 372, 9), (880, 296, 8)):
+                self.d.ellipse((cx - r, cy - r, cx + r, cy + r), fill=(228, 220, 176))
+            self.sun = (840, 330)
         elif mood in ("storm", "red"):
-            for cx, cy, sc in ((260, 330, 1.3), (700, 420, 1.1), (980, 300, 0.9)):
-                for dx, dy, r in ((0, 0, 80), (80, 20, 64), (-80, 24, 58), (20, 40, 70)):
-                    col = (86, 92, 108) if mood == "storm" else (120, 60, 50)
-                    self.d.ellipse((cx + dx * sc - r * sc, cy + dy * sc - r * sc, cx + dx * sc + r * sc, cy + dy * sc + r * sc), fill=col)
+            dark, mid = ((70, 76, 94), (104, 110, 128)) if mood == "storm" else ((104, 48, 42), (150, 78, 60))
+            for cx, cy, sc in ((230, 300, 1.5), (720, 400, 1.25), (1010, 250, 1.0), (470, 560, 0.8)):
+                self.cloud(cx, cy, sc, mid, dark)
         else:
-            self.oval((770, 240, 930, 400), (255, 150, 70) if mood == "sunset" else (255, 214, 70), glow=True)
-            for cx, cy, s in ((240, 380, 1.0), (640, 560, 0.7)):
-                for dx, dy, r in ((0, 0, 70), (70, 20, 56), (-70, 24, 50), (20, 36, 60)):
-                    self.d.ellipse((cx + dx * s - r * s, cy + dy * s - r * s, cx + dx * s + r * s, cy + dy * s + r * s), fill=(255, 255, 255))
+            sun = (255, 150, 70) if mood == "sunset" else (255, 220, 84)
+            self.veil((610, 80, 1090, 560), (255, 244, 200), 120, 70)        # Sonnenhof
+            self.veil((726, 196, 974, 444), (255, 250, 220), 150, 18)
+            self.d.ellipse((770, 240, 930, 400), fill=sun)
+            self.d.ellipse((786, 252, 900, 366), fill=_mix(sun, 0.3, (255, 255, 255)))
+            self.sun = (850, 320)
+            for cx, cy, sc in ((240, 380, 1.0), (640, 560, 0.62), (1010, 640, 0.42), (90, 690, 0.36)):
+                self.cloud(cx, cy, sc, (255, 255, 255) if mood != "haze" else (250, 244, 226), (214, 228, 246) if mood != "haze" else (226, 214, 186))
 
-    def window(self, box):
+    def window(self, box, curtain=None):
+        """Fenster mit Rahmen, Fensterbank und Blick nach draußen; curtain = Farbe der Vorhänge (None = keine)."""
         x0, y0, x1, y1 = box
+        self.windows.append(box)
+        if curtain:                                                           # Vorhangstange
+            self.rect((x0 - 96, y0 - 64, x1 + 96, y0 - 46), (120, 84, 56), r=8, o=5)
         self.rect((x0 - 18, y0 - 18, x1 + 18, y1 + 18), (250, 250, 246), r=8)
-        sky = (30, 36, 86) if self.night else (150, 212, 255)
-        self.d.rectangle((x0, y0, x1, y1), fill=sky)
         if self.night:
+            self.grad((x0, y0, x1, y1), (20, 24, 70), (52, 56, 120), raw=True)
             self.d.ellipse((x1 - 110, y0 + 30, x1 - 40, y0 + 100), fill=(250, 244, 200))
             for i in range(9):
                 x, y = x0 + 30 + (i * 67) % (x1 - x0 - 60), y0 + 30 + (i * 41) % (y1 - y0 - 120)
                 self.d.ellipse((x - 3, y - 3, x + 3, y + 3), fill=(255, 255, 230))
+            self.d.polygon([(x0, y1), (x0, y1 - 50), (x0 + (x1 - x0) * 0.3, y1 - 86), (x0 + (x1 - x0) * 0.62, y1 - 54), (x1, y1 - 92), (x1, y1)], fill=(24, 40, 54))
         else:
-            self.d.ellipse((x0 + 30, y0 + 50, x0 + 150, y0 + 120), fill=(255, 255, 255))
-            self.d.ellipse((x0 + 90, y0 + 30, x0 + 210, y0 + 110), fill=(255, 255, 255))
-            self.d.rectangle((x0, y1 - 70, x1, y1), fill=(110, 190, 90))
+            self.grad((x0, y0, x1, y1), (120, 196, 252), (212, 238, 255), raw=True)
+            for cx, cy, r in ((x0 + 86, y0 + 92, 36), (x0 + 130, y0 + 74, 46), (x0 + 180, y0 + 96, 34)):
+                self.d.ellipse((cx - r, cy - r, cx + r, cy + r), fill=(255, 255, 255))
+            w, hh = x1 - x0, y1 - y0
+            pane = Image.new("RGBA", (w, hh), (0, 0, 0, 0))                    # Hügel und Spiegelung: nur innerhalb der Scheibe
+            pd = ImageDraw.Draw(pane)
+            pd.ellipse((-w * 0.3, hh - 130, w * 0.75, hh + 150), fill=(150, 206, 122, 255))
+            pd.ellipse((w * 0.3, hh - 96, w * 1.4, hh + 130), fill=(118, 190, 100, 255))
+            pd.rectangle((0, hh - 24, w, hh), fill=(104, 180, 92, 255))
+            pd.polygon([(w * 0.14, 0), (w * 0.30, 0), (w * 0.10, hh), (-w * 0.06, hh)], fill=(255, 255, 255, 90))
+            pd.polygon([(w * 0.36, 0), (w * 0.42, 0), (w * 0.22, hh), (w * 0.16, hh)], fill=(255, 255, 255, 70))
+            self.im.paste(pane, (int(x0), int(y0)), pane)
+            self.d = ImageDraw.Draw(self.im)
         self.d.rectangle((x0, y0, x1, y1), outline=INK, width=O)
         self.line(((x0 + x1) // 2, y0, (x0 + x1) // 2, y1))
         self.line((x0, (y0 + y1) // 2, x1, (y0 + y1) // 2))
+        self.rect((x0 - 34, y1 + 14, x1 + 34, y1 + 40), (236, 232, 222), r=6, o=5)                            # Fensterbank
+        if curtain:
+            dark = _mix(curtain, 0.22, (40, 20, 30))
+            for sx, a, b_ in ((x0 - 78, x0 - 78, x0 + 34), (x1 - 34, x1 - 34, x1 + 78)):
+                self.rect((a, y0 - 50, b_, y1 + 70), curtain, r=18, o=6)
+                for k in range(1, 4):                                         # Falten
+                    xx = a + (b_ - a) * k / 4
+                    self.d.line((xx, y0 - 36, xx, y1 + 56), fill=self.c(dark), width=6)
 
-    def room(self, wall, floor, stripe=True):
-        self.d.rectangle((0, 0, W, GROUND - 60), fill=self.c(wall))
+    def room(self, wall, floor, stripe=True, panel=True):
+        """Zimmer: Wand mit feinem Streifenmuster und Sockelzone, Fußleiste, Dielenboden in Perspektive."""
+        self.indoor = True
+        base = GROUND - 60
+        self.grad((0, 0, W, base), _mix(wall, 0.10, (20, 20, 50)), _mix(wall, 0.05, (255, 255, 255)))
         if stripe:
-            self.stripes((0, 0, W, GROUND - 60), wall)
+            for x in range(0, W, 120):
+                self.d.rectangle((x, 0, x + 60, base), fill=self.c(_mix(wall, 0.028, (255, 255, 255))))
+        if panel:                                                             # Sockelzone: dunklerer Wandstreifen mit Leiste
+            pc = _mix(wall, 0.16, (60, 40, 50))
+            self.d.rectangle((0, base - 210, W, base), fill=self.c(pc))
+            for x in range(40, W, 200):
+                self.d.rounded_rectangle((x, base - 180, x + 160, base - 34), 8, outline=self.c(_mix(pc, 0.16, (20, 14, 30))), width=5)
+            self.rect((-10, base - 226, W + 10, base - 204), _mix(wall, 0.3, (255, 255, 255)), o=5)
         self.rect((-10, GROUND - 78, W + 10, GROUND - 40), (250, 248, 240), o=5)
-        self.d.rectangle((0, GROUND - 40, W, H), fill=self.c(floor))
-        for i in range(-4, 12):   # Dielen in Perspektive
-            self.d.line((W / 2 + i * 60, GROUND - 40, W / 2 + i * 190, H), fill=self.c(_mix(floor, 0.22, (40, 24, 10))), width=4)
-        for y in (GROUND + 80, GROUND + 230, GROUND + 430):
-            self.d.line((0, y, W, y), fill=self.c(_mix(floor, 0.22, (40, 24, 10))), width=4)
-        self.d.line((0, GROUND - 40, W, GROUND - 40), fill=INK, width=5)
+        y0 = GROUND - 40
+        self.grad((0, y0, W, H), _mix(floor, 0.10, (255, 240, 210)), _mix(floor, 0.20, (40, 20, 20)))
+        seam = _mix(floor, 0.30, (40, 24, 10))
+        xs = [(W / 2 + i * 60, W / 2 + i * 190) for i in range(-10, 12)]
+        for i, ((a0, a1), (b0, b1)) in enumerate(zip(xs, xs[1:])):            # Dielen: jede zweite leicht heller
+            if i % 2:
+                m = Image.new("L", (W, H), 0)
+                ImageDraw.Draw(m).polygon([(a0, y0), (b0, y0), (b1, H), (a1, H)], fill=26)
+                self.im.paste(Image.new("RGB", (W, H), (255, 244, 220)), (0, 0), m)
+        self.d = ImageDraw.Draw(self.im)
+        for a0, a1 in xs:
+            self.d.line((a0, y0, a1, H), fill=self.c(seam), width=4)
+        for k, y in enumerate((GROUND + 30, GROUND + 130, GROUND + 290, GROUND + 520)):   # Stöße der Dielen, versetzt
+            for i, ((a0, a1), (b0, b1)) in enumerate(zip(xs, xs[1:])):
+                if (i + k) % 3 == 0:
+                    f = (y - y0) / (H - y0)
+                    self.d.line((a0 + (a1 - a0) * f, y, b0 + (b1 - b0) * f, y), fill=self.c(seam), width=4)
+        self.d.line((0, y0, W, y0), fill=INK, width=5)
+
+    def rug(self, box, col):
+        """Teppich als flaches Oval mit Rand."""
+        x0, y0, x1, y1 = box
+        self.d.ellipse((x0 - 5, y0 - 4, x1 + 5, y1 + 5), fill=self.c(_mix(col, 0.5, (30, 20, 30))))
+        self.d.ellipse(box, fill=self.c(col))
+        self.d.ellipse((x0 + (x1 - x0) * 0.07, y0 + (y1 - y0) * 0.12, x1 - (x1 - x0) * 0.07, y1 - (y1 - y0) * 0.12), outline=self.c(_mix(col, 0.25, (255, 255, 255))), width=6)
+
+    def books(self, x0, y, x1, h=74, seed=1):
+        """Wandbrett mit Büchern (y = Oberkante des Bretts)."""
+        rnd = random.Random(seed)
+        cols = ((206, 84, 76), (76, 128, 196), (232, 190, 84), (92, 160, 112), (150, 104, 170), (236, 232, 222), (224, 132, 70))
+        x = x0 + 14
+        while x < x1 - 40:
+            w, hh = rnd.randint(18, 34), rnd.randint(int(h * 0.7), h)
+            if rnd.random() < 0.14:                                           # Lücke mit kleiner Vase
+                self.oval((x + 4, y - 40, x + 36, y - 2), (120, 190, 180), o=4)
+                x += 48
+                continue
+            self.rect((x, y - hh, x + w, y), cols[rnd.randint(0, 6)], r=3, o=4)
+            x += w + 2
+        self.rect((x0, y, x1, y + 20), (150, 100, 64), r=6, o=5)
+        self.d.rectangle((x0 + 8, y + 22, x1 - 8, y + 30), fill=self.c((0, 0, 0)) if False else self.c(_mix((150, 100, 64), 0.6, (20, 10, 20))))
+
+    def floor_lamp(self, x, top=600):
+        self.rect((x - 8, top + 70, x + 8, GROUND - 46), (86, 88, 98), o=5)
+        self.oval((x - 60, GROUND - 62, x + 60, GROUND - 36), (86, 88, 98), o=5)
+        self.poly([(x - 84, top + 96), (x + 84, top + 96), (x + 54, top), (x - 54, top)], (255, 232, 150), glow=True)
+        if self.night and not self.dark:
+            self.lamp_glow(x, top + 80, 360)
+
+    def plant(self, x, y=GROUND - 20, s=1.0, pot=(220, 130, 80)):
+        """Zimmerpflanze im Topf (y = Unterkante des Topfs)."""
+        self.rect((x - 12 * s, y - 150 * s, x + 12 * s, y - 60 * s), (120, 84, 54), o=5)
+        self.blobs([(x + dx * s, y - 150 * s + dy * s, r * s) for dx, dy, r in ((-58, -30, 50), (0, -94, 58), (58, -30, 50), (-26, 14, 44), (32, 20, 42))], (80, 170, 96), o=6)
+        self.poly([(x - 70 * s, y - 84 * s), (x + 70 * s, y - 84 * s), (x + 54 * s, y), (x - 54 * s, y)], pot)
+        self.rect((x - 78 * s, y - 96 * s, x + 78 * s, y - 70 * s), _mix(pot, 0.14, (255, 255, 255)), r=6, o=5)
 
     def lamp_glow(self, cx, cy, r=420):
         if not self.night or self.dark:
             return
         g = Image.new("L", (W, H), 0)
-        ImageDraw.Draw(g).ellipse((cx - r, cy - r, cx + r, cy + r), fill=120)
+        ImageDraw.Draw(g).ellipse((cx - r, cy - r, cx + r, cy + r), fill=74)
         g = g.filter(ImageFilter.GaussianBlur(120))
-        self.im.paste(Image.new("RGB", (W, H), (255, 220, 140)), (0, 0), g)
+        light = Image.composite(Image.new("RGB", (W, H), (255, 214, 130)), Image.new("RGB", (W, H), (0, 0, 0)), g)
+        self.im = ImageChops.screen(self.im, light)        # Licht hellt auf, ohne die Farben zu vernebeln
         self.d = ImageDraw.Draw(self.im)
 
     def vignette(self):
+        """Abschluss für jeden Hintergrund: Licht und Schatten, Dunst, leichte Weichzeichnung (die Figuren davor bleiben
+        gestochen scharf und heben sich ab), feine Körnung und dunkle Ecken."""
+        night = self.night
+        if self.indoor:
+            self.fade((0, 0, W, 420), (20, 16, 44), 70 if night else 60, 0)                       # Schatten unter der Decke
+            self.fade((0, GROUND - 150, W, GROUND - 78), (30, 20, 40), 0, 46)                     # Wand wird zum Boden hin dunkler
+            self.fade((0, GROUND - 40, W, GROUND + 26), (24, 14, 20), 70, 0)                      # Schatten der Fußleiste auf dem Boden
+            if not self.dark:
+                for x0, y0, x1, y1 in self.windows:                                               # Lichtbahn vom Fenster auf den Boden
+                    w = x1 - x0
+                    sh = 260 if (x0 + x1) / 2 < W / 2 else -260
+                    col, al = ((150, 170, 255), 34) if night else ((255, 246, 214), 58)
+                    self.veil([(x0, y1), (x1, y1), (x1 + sh + w * 0.5, GROUND + 300), (x0 + sh - w * 0.2, GROUND + 300)], col, al, 34, kind="poly")
+                    self.veil([(x0 + sh * 0.6, GROUND - 30), (x1 + sh * 0.6 + w * 0.2, GROUND - 30), (x1 + sh * 1.25 + w * 0.7, GROUND + 420), (x0 + sh * 1.25 - w * 0.3, GROUND + 420)],
+                              col, al, 44, kind="poly")
+        if self.outdoor:
+            self.fade((0, GROUND + 60, W, H), (16, 20, 44), 0, 84)                                # Vordergrund wird nach unten dunkler
+            if self.sun and not night:
+                self.veil((self.sun[0] - 520, self.sun[1] - 520, self.sun[0] + 520, self.sun[1] + 520), (255, 240, 200), 44, 150)
+        soft = self.im.filter(ImageFilter.GaussianBlur(1.6))
+        self.im = Image.blend(self.im, soft, 0.6)
+        self.im = self.im.point(lambda v: int(v * 0.93 + 13))                                     # Schwarz leicht anheben: Umrisse der Kulisse treten zurück
+        try:
+            noise = Image.effect_noise((W, H), 9)
+            self.im = ImageChops.soft_light(self.im, Image.merge("RGB", (noise, noise, noise)))
+        except Exception:  # noqa: BLE001 – Körnung ist nur Zierde
+            pass
         v = Image.new("L", (W, H), 0)
-        ImageDraw.Draw(v).ellipse((-260, -100, W + 260, H + 100), fill=255)
-        v = v.filter(ImageFilter.GaussianBlur(220)).point(lambda x: 255 - int((255 - x) * (0.55 if self.night else 0.22)))
-        self.im = Image.composite(self.im, Image.new("RGB", (W, H), (8, 8, 20)), v)
+        ImageDraw.Draw(v).ellipse((-300, -160, W + 300, H + 160), fill=255)
+        v = v.filter(ImageFilter.GaussianBlur(240)).point(lambda x: 255 - int((255 - x) * (0.46 if night else 0.36)))
+        self.im = Image.composite(self.im, Image.new("RGB", (W, H), (10, 8, 26)), v)
+        self.d = ImageDraw.Draw(self.im)
         return self.im
 
 
@@ -149,15 +330,23 @@ class P:
 def bedroom(night):
     p = P(night)
     p.room((190, 208, 236), (196, 140, 92))
-    p.window((600, 420, 960, 800))
-    p.rect((120, 470, 360, 700), (246, 214, 120), r=6)                         # Poster
-    p.oval((190, 520, 290, 620), (240, 110, 90), o=5)
+    p.window((600, 420, 960, 800), curtain=(240, 196, 110))
+    p.rect((120, 440, 360, 670), (246, 214, 120), r=6)                         # Poster
+    p.oval((190, 490, 290, 590), (240, 110, 90), o=5)
+    p.d.arc((150, 560, 330, 700), 200, 340, fill=p.c((230, 150, 70)), width=10)
+    p.books(90, 800, 430, seed=9)                                              # Wandbrett
+    p.rug((420, GROUND + 10, 1000, GROUND + 180), (226, 170, 120))
     p.rect((40, 1010, 520, 1250), (150, 96, 60), r=14)                         # Bett
     p.rect((30, 880, 110, 1250), (130, 80, 48), r=14)
     p.rect((70, 1040, 520, 1190), (96, 132, 220), r=30)
+    p.d.rounded_rectangle((250, 1052, 508, 1100), 20, fill=p.c((120, 156, 236)))             # Lichtkante der Decke
+    p.rect((240, 1040, 300, 1190), (236, 240, 250), r=10, o=5)                 # umgeschlagene Decke
     p.rect((90, 980, 250, 1070), (250, 250, 246), r=30)
     p.rect((820, 1050, 1020, 1250), (150, 96, 60), r=10)                       # Nachttisch
-    p.rect((850, 1100, 990, 1150), (176, 118, 76), r=6, o=5)
+    p.rect((850, 1080, 990, 1130), (176, 118, 76), r=6, o=5)
+    p.rect((850, 1150, 990, 1200), (176, 118, 76), r=6, o=5)
+    p.oval((910, 1096, 930, 1116), (236, 200, 110), o=3)
+    p.oval((910, 1166, 930, 1186), (236, 200, 110), o=3)
     p.rect((900, 950, 940, 1050), (90, 90, 96), o=5)
     p.poly([(850, 950), (990, 950), (960, 860), (880, 860)], (255, 226, 130), glow=True)
     p.lamp_glow(920, 920)
@@ -167,19 +356,26 @@ def bedroom(night):
 def livingroom(night):
     p = P(night)
     p.room((248, 226, 170), (206, 150, 96))
-    p.window((120, 400, 460, 760))
-    p.rect((640, 470, 940, 660), (250, 250, 246), r=6)                         # Bild
-    p.poly([(670, 640), (760, 520), (820, 600), (870, 560), (910, 640)], (110, 180, 120), o=5)
+    p.window((120, 400, 460, 760), curtain=(120, 160, 200))
+    p.rect((640, 430, 940, 620), (250, 250, 246), r=6)                         # Bild
+    p.d.rectangle((660, 450, 920, 600), fill=p.c((190, 226, 250)))
+    p.poly([(662, 600), (752, 490), (812, 566), (862, 524), (918, 600)], (110, 180, 120), o=5)
+    p.oval((850, 462, 890, 502), (255, 220, 110), o=0)
+    p.books(610, 760, 990, seed=4)                                             # Bücherbrett
+    p.floor_lamp(1010, 640)
+    p.rug((170, GROUND + 6, 900, GROUND + 190), (120, 150, 190))
+    p.d.ellipse((500, 1236, 1080, 1280), fill=p.c((150, 100, 66)))             # Schatten unter dem Sofa
     p.rect((540, 1030, 1040, 1250), (214, 84, 76), r=40)                       # Sofa
+    p.d.rounded_rectangle((552, 1042, 1028, 1090), 30, fill=p.c((228, 104, 94)))
     p.rect((520, 1090, 600, 1250), (190, 66, 60), r=30)
     p.rect((980, 1090, 1060, 1250), (190, 66, 60), r=30)
     p.rect((620, 1060, 800, 1170), (240, 120, 110), r=26, o=5)
     p.rect((810, 1060, 990, 1170), (240, 120, 110), r=26, o=5)
-    p.rect((90, 1120, 150, 1250), (150, 96, 60), o=6)                          # Pflanze
-    p.rect((50, 1170, 190, 1250), (220, 130, 80), r=14)
-    for dx, dy in ((-60, -90), (0, -150), (60, -90), (-30, -40), (40, -30)):
-        p.oval((120 + dx - 50, 1100 + dy - 60, 120 + dx + 50, 1100 + dy + 60), (80, 170, 96))
-    p.lamp_glow(540, 700, 520)
+    p.rect((596, 1170, 984, 1236), (224, 96, 88), r=20, o=5)                   # Sitzfläche
+    p.poly([(650, 1150), (720, 1090), (776, 1150), (716, 1196)], (250, 214, 110), o=5)      # Kissen
+    p.rect((560, 1236, 584, 1262), (110, 70, 46), o=4)
+    p.rect((996, 1236, 1020, 1262), (110, 70, 46), o=4)
+    p.plant(120, 1250)
     return p.vignette()
 
 
@@ -300,6 +496,14 @@ def lab(night):
         p.poly([(x + 20, 870), (x + 60, 870), (x + 60, 920), (x + 100, 1000), (x - 20, 1000), (x + 20, 920)], (236, 244, 250), o=5)
         p.poly([(x + 8, 950), (x + 72, 950), (x + 100, 1000), (x - 20, 1000)], col, o=0, glow=True)
         p.d.polygon([(x + 20, 870), (x + 60, 870), (x + 60, 920), (x + 100, 1000), (x - 20, 1000), (x + 20, 920)], outline=INK, width=5)
+    p.window((640, 400, 980, 700))
+    p.books(90, 880, 520, 66, seed=21)                                          # Regal mit Ordnern und Gläsern
+    p.rect((90, 1010, 420, 1250), (226, 232, 238), r=10)                        # Laborschrank
+    p.line((255, 1010, 255, 1250))
+    p.oval((222, 1110, 244, 1132), (150, 156, 166), o=4)
+    p.oval((266, 1110, 288, 1132), (150, 156, 166), o=4)
+    p.rect((120, 930, 200, 1010), (60, 64, 76), r=8)                            # Mikroskop-Kasten
+    p.rect((150, 890, 176, 936), (90, 96, 110), r=6, o=5)
     p.lamp_glow(540, 500, 600)
     return p.vignette()
 
@@ -313,6 +517,15 @@ def classroom(night):
     p.line((200, 580, 560, 580), (240, 240, 230), 6)
     p.d.ellipse((680, 500, 860, 680), outline=(240, 240, 230), width=6)
     p.rect((120, 800, 960, 830), (150, 96, 60), r=4, o=5)
+    p.rect((180, 806, 250, 822), (250, 250, 246), r=4, o=3)                     # Kreide und Schwamm
+    p.rect((300, 800, 380, 824), (236, 200, 90), r=6, o=4)
+    p.oval((930, 250, 1050, 370), (250, 250, 246), o=7)                         # Wanduhr
+    p.line((990, 310, 990, 272), INK, 6)
+    p.line((990, 310, 1020, 322), INK, 6)
+    p.rect((30, 200, 330, 380), (190, 226, 250), r=6)                           # Weltkarte als Poster
+    for bx, by, bw, bh in ((60, 240, 70, 60), (150, 230, 60, 90), (230, 250, 70, 50)):
+        p.oval((bx, by, bx + bw, by + bh), (120, 190, 120), o=3)
+    p.plant(1010, 1250, 0.8)
     for x in (80, 760):
         p.rect((x, 1090, x + 250, 1130), (200, 150, 96), r=6)
         p.rect((x + 20, 1130, x + 44, 1250), (110, 110, 118), o=5)
@@ -327,7 +540,18 @@ def kitchen(night):
         p.d.line((0, y, W, y), fill=p.c((196, 222, 206)), width=3)
     for x in range(0, W, 90):
         p.d.line((x, 0, x, GROUND - 80), fill=p.c((196, 222, 206)), width=3)
-    p.window((90, 430, 400, 760))
+    p.window((90, 430, 400, 760), curtain=(250, 214, 120))
+    p.rect((520, 700, 1010, 980), (236, 244, 240), o=0)                         # Fliesenspiegel
+    for yy in range(700, 980, 56):
+        p.d.line((520, yy, 1010, yy), fill=p.c((200, 220, 214)), width=3)
+    for xx in range(520, 1010, 70):
+        p.d.line((xx, 700, xx, 980), fill=p.c((200, 220, 214)), width=3)
+    for hx, hc in ((560, (120, 124, 132)), (610, (200, 80, 70)), (660, (120, 124, 132))):   # Kellen an der Leiste
+        p.line((hx, 720, hx, 800), INK, 8)
+        p.oval((hx - 16, 790, hx + 16, 830), hc, o=5)
+    p.rect((540, 712, 700, 724), (150, 156, 166), r=4, o=4)
+    p.rect((880, 880, 980, 980), (250, 250, 246), r=10)                         # Wasserkocher
+    p.rect((900, 860, 960, 884), (90, 96, 110), r=6, o=5)
     p.rect((520, 420, 1010, 640), (236, 150, 90), r=10)                         # Hängeschränke
     p.line((765, 420, 765, 640))
     p.oval((720, 520, 746, 546), (250, 250, 246), o=5)
@@ -360,6 +584,12 @@ def office(night):
     p.rect((200, 950, 330, 1020), (250, 250, 246), r=4, o=5)                    # Papierstapel
     p.rect((210, 930, 340, 960), (250, 250, 246), r=4, o=5)
     p.rect((420, 960, 480, 1020), (220, 80, 70), r=8, o=5)                      # Tasse
+    p.rect((560, 1060, 720, 1250), (150, 100, 66), r=6)                         # Rollcontainer
+    for yy in (1090, 1150, 1210):
+        p.rect((580, yy, 700, yy + 36), (176, 118, 76), r=4, o=4)
+    p.oval((300, 1130, 420, 1250), (70, 74, 86), o=6)                           # Bürostuhl (Rücken)
+    p.rect((330, 1040, 390, 1150), (70, 74, 86), r=18)
+    p.plant(1010, 1250, 0.9)
     p.lamp_glow(760, 880, 420)
     return p.vignette()
 
@@ -500,6 +730,13 @@ def hospital(night):
     p.rect((800, 900, 990, 1060), (40, 44, 54), r=10)                            # Monitor mit Herzlinie
     p.line([(820, 990), (860, 990), (880, 940), (900, 1030), (920, 990), (970, 990)], (110, 230, 150), 6)
     p.rect((880, 1060, 910, 1250), (150, 156, 166), o=5)
+    p.rect((300, 500, 560, 520), (150, 156, 166), r=6, o=4)                     # Vorhangschiene mit Vorhang
+    p.rect((440, 520, 560, 1040), (170, 214, 220), r=18, o=6)
+    for xx in (470, 500, 530):
+        p.d.line((xx, 536, xx, 1024), fill=p.c((140, 190, 198)), width=6)
+    p.rect((596, 880, 620, 1250), (150, 156, 166), o=5)                         # Infusionsständer
+    p.rect((574, 860, 642, 950), (230, 244, 250), r=14, o=5)
+    p.rect((60, 1110, 560, 1150), (190, 214, 236), r=10, o=5)                   # Bettdecke
     return p.vignette()
 
 
@@ -530,15 +767,24 @@ BASE = FAR               # Fußlinie der fernen Kulisse; davor liegt der Boden b
 
 
 def _el_mountains(p, rnd):
-    for cx, hgt, w, col in ((180, 560, 520, (150, 160, 184)), (640, 720, 600, (128, 138, 164)), (1000, 500, 460, (150, 160, 184))):
+    for cx, hgt, w, col in ((420, 430, 560, (176, 188, 214)), (860, 380, 520, (184, 196, 220))):          # ferne, blassere Kette
+        p.poly([(cx - w // 2, BASE), (cx, BASE - hgt), (cx + w // 2, BASE)], col, o=4)
+    for cx, hgt, w, col in ((180, 560, 520, (146, 158, 186)), (640, 720, 600, (124, 136, 166)), (1000, 500, 460, (146, 158, 186))):
         p.poly([(cx - w // 2, BASE), (cx, BASE - hgt), (cx + w // 2, BASE)], col)
+        p.poly([(cx, BASE - hgt), (cx + w // 2, BASE), (cx + w * 0.08, BASE), (cx + w * 0.02, BASE - hgt * 0.5)], _mix(col, 0.18, (30, 30, 70)), o=0)   # Schattenseite
         p.poly([(cx - w // 9, BASE - hgt * 0.76), (cx, BASE - hgt), (cx + w // 9, BASE - hgt * 0.76),
                 (cx + w // 24, BASE - hgt * 0.7), (cx - w // 24, BASE - hgt * 0.73)], (250, 252, 255), o=5)
+        p.poly([(cx - w // 2, BASE), (cx, BASE - hgt), (cx + w // 2, BASE)], None, o=O) if False else None
 
 
 def _el_hills(p, rnd):
+    p.d.ellipse((200, BASE - 380, 1000, BASE + 300), fill=p.c((158, 212, 150)), outline=INK, width=4)           # ferner Hügel, blasser
     p.d.ellipse((-320, BASE - 300, 640, BASE + 260), fill=p.c((126, 196, 112)), outline=INK, width=5)
+    p.d.ellipse((-260, BASE - 276, 520, BASE + 240), fill=p.c((138, 206, 122)))
     p.d.ellipse((380, BASE - 240, 1420, BASE + 300), fill=p.c((112, 184, 102)), outline=INK, width=5)
+    p.d.ellipse((470, BASE - 216, 1300, BASE + 300), fill=p.c((124, 194, 112)))
+    for bx, by, r in ((90, BASE - 150, 30), (150, BASE - 160, 38), (760, BASE - 170, 34), (820, BASE - 150, 26), (560, BASE - 60, 30)):   # Büsche auf den Kuppen
+        p.blobs([(bx, by, r), (bx + r * 0.9, by + r * 0.3, r * 0.7), (bx - r * 0.9, by + r * 0.3, r * 0.7)], (84, 158, 92), o=4)
 
 
 def _el_dunes(p, rnd):
@@ -552,19 +798,19 @@ def _el_forest(p, rnd):
             h = rnd.randint(420, 640) if layer else rnd.randint(360, 520)
             p.rect((tx + 46, base - h * 0.36, tx + 74, base), (104, 70, 44), o=5)
             if (tx // step + layer) % 3 == 0:      # Laubbaum
-                for dx, dy, r in ((0, -0.62, 0.2), (-0.13, -0.5, 0.16), (0.13, -0.5, 0.16), (0, -0.42, 0.17)):
-                    p.oval((tx + 60 + dx * h - r * h, base + dy * h - r * h, tx + 60 + dx * h + r * h, base + dy * h + r * h), col)
+                p.blobs([(tx + 60 + dx * h, base + dy * h, r * h) for dx, dy, r in ((0, -0.62, 0.2), (-0.13, -0.5, 0.16), (0.13, -0.5, 0.16), (0, -0.42, 0.17))], col, o=5)
             else:                                  # Tanne
                 for k in range(3):
                     y = base - h * 0.26 - k * h * 0.2
                     p.poly([(tx + 60 - (128 - k * 26), y), (tx + 60, y - h * 0.3), (tx + 60 + (128 - k * 26), y)], col)
+                    p.poly([(tx + 60, y - h * 0.3), (tx + 60 + (128 - k * 26), y), (tx + 60 + 10, y)], _mix(col, 0.18, (10, 30, 50)), o=0)
 
 
 def _el_trees(p, rnd):
     for tx, sc in ((150, 1.0), (930, 1.2)):
         p.rect((tx - 24 * sc, BASE - 320 * sc, tx + 24 * sc, BASE), (130, 86, 54))
-        for dx, dy, r in ((0, -400, 150), (-110, -330, 110), (110, -330, 110), (0, -290, 120)):
-            p.oval((tx + dx * sc - r * sc, BASE + dy * sc - r * sc, tx + dx * sc + r * sc, BASE + dy * sc + r * sc), (70, 160, 84))
+        p.d.rectangle((tx + 4 * sc, BASE - 314 * sc, tx + 18 * sc, BASE - 6), fill=p.c((104, 66, 44)))
+        p.blobs([(tx + dx * sc, BASE + dy * sc, r * sc) for dx, dy, r in ((0, -400, 150), (-110, -330, 110), (110, -330, 110), (0, -290, 120))], (70, 160, 84))
 
 
 def _el_deadtrees(p, rnd):
@@ -580,13 +826,23 @@ def _el_deadtrees(p, rnd):
 def _el_city(p, rnd):
     x = -40
     cols = ((214, 150, 120), (150, 176, 214), (224, 200, 140), (170, 200, 172), (196, 160, 190))
+    x2 = -90
+    while x2 < W:                                                                # ganz hinten: blasse Silhouetten
+        w, h = rnd.randint(150, 260), rnd.randint(520, 900)
+        p.rect((x2, BASE - h, x2 + w, BASE), _mix(cols[rnd.randint(0, 4)], 0.62, (206, 222, 246)), o=0)
+        x2 += w + rnd.randint(-10, 60)
     while x < W:
         w, h = rnd.randint(190, 290), rnd.randint(360, 740)
-        p.rect((x, BASE - h, x + w, BASE), cols[rnd.randint(0, 4)])
+        col = _mix(cols[rnd.randint(0, 4)], 0.22, (206, 222, 246))
+        p.rect((x, BASE - h, x + w, BASE), col, o=5)
+        p.d.rectangle((x + w - 34, BASE - h + 5, x + w - 5, BASE), fill=p.c(_mix(col, 0.14, (30, 30, 70))))      # Schattenseite
+        p.rect((x - 6, BASE - h - 12, x + w + 6, BASE - h + 8), _mix(col, 0.2, (40, 30, 50)), o=4)              # Dachkante
         for wy in range(BASE - h + 46, BASE - 150, 116):
             for wx in range(x + 32, x + w - 58, 82):
                 lit = p.night and not p.dark and rnd.random() < 0.55
-                p.rect((wx, wy, wx + 48, wy + 64), (255, 226, 120) if lit else (126, 168, 214), r=4, o=5, glow=lit)
+                p.rect((wx, wy, wx + 48, wy + 64), (255, 226, 120) if lit else (150, 188, 226), r=4, o=4, glow=lit)
+                if not lit:
+                    p.d.polygon([(wx + 8, wy + 6), (wx + 22, wy + 6), (wx + 10, wy + 58), (wx + 6, wy + 58)], fill=p.c((190, 216, 240)))
         x += w
 
 
@@ -714,14 +970,20 @@ def tree_at(p, x, y, kind=0, col=(62, 140, 84)):
     h, tw = px(8.0, y), px(0.55, y)
     o = max(3, int(O * min(1.0, depth(y) + 0.3)))
     p.rect((x - tw / 2, y - h * 0.5, x + tw / 2, y), (112, 76, 48), o=o)
+    p.d.rectangle((x + tw * 0.08, y - h * 0.5 + o, x + tw / 2 - o, y - o), fill=p.c((88, 58, 40)))             # Schattenseite des Stamms
+    p.d.ellipse((x - tw * 1.6, y - tw * 0.3, x + tw * 1.6, y + tw * 0.3), fill=p.c(_mix(col, 0.45, (20, 50, 40))))   # Schatten am Fuß
+    p.rect((x - tw / 2, y - h * 0.2, x + tw / 2, y), (112, 76, 48), o=0)
+    p.d.rectangle((x + tw * 0.08, y - h * 0.2, x + tw / 2 - o, y), fill=p.c((88, 58, 40)))
+    p.d.line((x - tw / 2, y - h * 0.2, x - tw / 2, y), fill=INK, width=o)
+    p.d.line((x + tw / 2, y - h * 0.2, x + tw / 2, y), fill=INK, width=o)
     if kind % 3 == 0:
-        for dx, dy, r in ((0, -0.74, 0.24), (-0.17, -0.58, 0.19), (0.17, -0.58, 0.19), (0, -0.48, 0.2)):
-            p.oval((x + dx * h - r * h, y + dy * h - r * h, x + dx * h + r * h, y + dy * h + r * h), col, o=o)
+        p.blobs([(x + dx * h, y + dy * h, r * h) for dx, dy, r in ((0, -0.74, 0.24), (-0.17, -0.58, 0.19), (0.17, -0.58, 0.19), (0, -0.48, 0.2))], col, o=o)
     else:
         for k in range(4):
             yy = y - h * 0.22 - k * h * 0.19
             wd = h * (0.24 - k * 0.045)
             p.poly([(x - wd, yy), (x, yy - h * 0.3), (x + wd, yy)], col, o=o)
+            p.poly([(x, yy - h * 0.3 + o), (x + wd - o * 2, yy - o), (x + wd * 0.1, yy - o)], _mix(col, 0.2, (10, 30, 50)), o=0)
 
 
 def _mid_forest(p, rnd):
@@ -768,7 +1030,8 @@ def _mid_cactus(p, rnd):
 
 
 def _mid_street(p, rnd):
-    """Häuserzeile in echter Größe hinter der Straße: Läden im Erdgeschoss, Türen so hoch wie ein Mensch plus etwas."""
+    """Häuserzeile in echter Größe hinter der Straße: Läden im Erdgeschoss mit Markisen und Schaufenstern, Fenster mit
+    Rahmen und Fensterbank, Dachgesims – Türen so hoch wie ein Mensch plus etwas."""
     y = 1000
     m = px(1.0, y)
     x = -60
@@ -778,18 +1041,48 @@ def _mid_street(p, rnd):
         w, floors = rnd.randint(int(m * 3.6), int(m * 5.0)), rnd.randint(2, 3)
         h = m * (3.4 + floors * 3.0)
         col = cols[(i * 2 + rnd.randint(0, 1)) % 6]
+        dark = _mix(col, 0.2, (40, 30, 50))
         p.rect((x, y - h, x + w, y), col)
-        p.rect((x - 6, y - h - 14, x + w + 6, y - h + 10), _mix(col, 0.25, (40, 30, 30)), o=5)
-        gf = y - m * 3.2                                        # Erdgeschoss: Schaufenster + Tür
-        p.rect((x + m * 0.3, gf + m * 0.5, x + w - m * 1.5, y - m * 0.5), (255, 232, 150) if (p.night and not p.dark and i % 2) else (150, 204, 236), r=4, o=5, glow=p.night and not p.dark and i % 2 == 1)
-        p.rect((x + w - m * 1.25, y - m * 2.1, x + w - m * 0.3, y), (104, 70, 48), r=4, o=5)
+        p.d.rectangle((x + w - m * 0.35, y - h + O, x + w - O, y - O), fill=p.c(_mix(col, 0.1, (40, 30, 60))))      # Schattenkante
+        p.rect((x - 8, y - h - 22, x + w + 8, y - h + 12), dark, r=4, o=5)                                          # Dachgesims
+        p.d.rectangle((x + O, y - h + 14, x + w - O, y - h + 26), fill=p.c(_mix(col, 0.18, (30, 30, 60))))
+        gf = y - m * 3.2                                        # Erdgeschoss: Sockel, Schaufenster, Tür
+        p.d.rectangle((x + O, gf + m * 0.1, x + w - O, y - O), fill=p.c(_mix(col, 0.16, (60, 50, 60))))
+        lit = p.night and not p.dark and i % 2 == 1
+        sx0, sy0, sx1, sy1 = x + m * 0.3, gf + m * 0.6, x + w - m * 1.5, y - m * 0.5
+        p.rect((sx0 - 8, sy0 - 8, sx1 + 8, sy1 + 8), (244, 240, 230), r=4, o=5)
+        p.rect((sx0, sy0, sx1, sy1), (255, 232, 150) if lit else (150, 204, 236), r=2, o=4, glow=lit)
+        if not lit:                                             # Spiegelung im Schaufenster
+            p.d.polygon([(sx0 + 14, sy0 + 6), (sx0 + 44, sy0 + 6), (sx0 + 22, sy1 - 6), (sx0 + 8, sy1 - 6)], fill=p.c((198, 228, 246)))
+            p.d.polygon([(sx0 + 58, sy0 + 6), (sx0 + 70, sy0 + 6), (sx0 + 48, sy1 - 6), (sx0 + 40, sy1 - 6)], fill=p.c((198, 228, 246)))
+        p.rect((sx0 - 14, sy1 + 4, sx1 + 14, sy1 + 16), (224, 220, 212), r=3, o=4)
+        dx0, dx1 = x + w - m * 1.25, x + w - m * 0.3              # Tür mit Oberlicht und Griff
+        p.rect((dx0, y - m * 2.2, dx1, y), (104, 70, 48), r=4, o=5)
+        p.rect((dx0 + 8, y - m * 2.1, dx1 - 8, y - m * 1.5), (150, 204, 236) if not lit else (255, 232, 150), r=3, o=3, glow=lit)
+        p.oval((dx0 + 10, y - m * 1.05, dx0 + 22, y - m * 0.93), (236, 200, 110), o=2)
         aw = ((214, 80, 70), (70, 130, 190), (240, 190, 70), (90, 160, 110))[i % 4]
-        p.poly([(x + m * 0.15, gf + m * 0.45), (x + w - m * 0.15, gf + m * 0.45), (x + w, gf + m * 0.05), (x, gf + m * 0.05)], aw, o=5)
+        a0, a1 = x + m * 0.1, x + w - m * 0.1
+        p.poly([(a0, gf + m * 0.62), (a1, gf + m * 0.62), (a1 - m * 0.12, gf + m * 0.02), (a0 + m * 0.12, gf + m * 0.02)], aw, o=5)
+        n = max(4, int((a1 - a0) / (m * 0.42)))
+        for k in range(0, n, 2):                                # gestreifte Markise
+            x0s, x1s = a0 + (a1 - a0) * k / n, a0 + (a1 - a0) * (k + 1) / n
+            p.d.polygon([(x0s + 4, gf + m * 0.58), (x1s, gf + m * 0.58), (x1s - 2, gf + m * 0.08), (x0s + 6, gf + m * 0.08)], fill=p.c((250, 246, 236)))
+        p.d.line((a0, gf + m * 0.62, a1, gf + m * 0.62), fill=INK, width=5)
         for fl in range(floors):
             wy = gf - m * (2.6 + fl * 3.0)
-            for wx in (x + w * 0.2, x + w * 0.6):
-                lit = p.night and not p.dark and rnd.random() < 0.5
-                p.rect((wx, wy, wx + m * 0.9, wy + m * 1.4), (255, 226, 120) if lit else (126, 168, 214), r=4, o=5, glow=lit)
+            for wx in (x + w * 0.16, x + w * 0.58):
+                lit2 = p.night and not p.dark and rnd.random() < 0.5
+                p.rect((wx - 7, wy - 7, wx + m * 0.9 + 7, wy + m * 1.4 + 7), (246, 242, 232), r=4, o=4)
+                p.rect((wx, wy, wx + m * 0.9, wy + m * 1.4), (255, 226, 120) if lit2 else (126, 168, 214), r=2, o=4, glow=lit2)
+                p.d.line((wx + m * 0.45, wy, wx + m * 0.45, wy + m * 1.4), fill=INK, width=3)
+                if not lit2:
+                    p.d.polygon([(wx + 5, wy + 5), (wx + 16, wy + 5), (wx + 8, wy + m * 1.4 - 5), (wx + 4, wy + m * 1.4 - 5)], fill=p.c((176, 206, 236)))
+                p.rect((wx - 12, wy + m * 1.4 + 5, wx + m * 0.9 + 12, wy + m * 1.4 + 15), (226, 222, 214), r=3, o=3)
+                if (i + fl) % 3 == 0:                           # Blumenkasten
+                    p.rect((wx - 6, wy + m * 1.4 - 8, wx + m * 0.9 + 6, wy + m * 1.4 + 8), (150, 96, 64), r=3, o=3)
+                    for k in range(4):
+                        cx = wx + 6 + k * m * 0.26
+                        p.d.ellipse((cx - 9, wy + m * 1.4 - 22, cx + 9, wy + m * 1.4 - 4), fill=p.c(((226, 90, 110), (250, 200, 80))[k % 2]))
         x += w
         i += 1
 
@@ -922,7 +1215,10 @@ def compose(spec: dict, night=False):
     spec = norm_spec(spec)
     sky, ground, els = spec["sky"], spec["ground"], spec["elements"]
     p = P(night or sky == "night")
+    p.outdoor = True
     p.mood = sky if sky in ("sunset", "storm", "red", "haze") else ""
+    if p.mood:
+        p.haze_col = {"sunset": (255, 200, 150), "storm": (150, 158, 174), "red": (214, 120, 84), "haze": (240, 228, 196)}[p.mood]
     p.sky(BASE + 10)
     sky0 = p.im.copy()
     rnd = random.Random(sum(ord(c) for c in ",".join(els)) % 1000 + 3)
@@ -976,6 +1272,9 @@ def compose(spec: dict, night=False):
     for name in ("fields", "river", "dryriver", "lake", "cracks", "rocks", "flowers"):
         if name in els:
             FRONT_EL[name](p, rnd)
+    hz = getattr(p, "haze_col", (60, 64, 120) if p.night else (206, 222, 250))
+    p.fade((0, BASE - 260, W, BASE + 10), hz, 0, 60 if p.night else 84)                           # Dunst vor der fernen Kulisse …
+    p.fade((0, BASE + 10, W, BASE + 150), hz, 50 if p.night else 70, 0)                           # … Bäume und Häuser davor bleiben klar
     for name in MID_ORDER:
         if name in els:
             MID[name](p, rnd)
@@ -1079,6 +1378,14 @@ def bathroom(night):
     p.rect((540, 1020, 1060, 1060), (240, 240, 246), r=16)
     p.rect((960, 760, 980, 1020), (170, 176, 186), o=5)                         # Dusche
     p.rect((900, 740, 980, 770), (170, 176, 186), r=8, o=5)
+    p.rect((70, 540, 420, 900), (236, 240, 244), r=14)                          # Spiegelrahmen
+    p.rect((90, 560, 400, 880), (200, 230, 244), r=10, o=4)
+    p.d.polygon([(140, 600), (190, 600), (130, 860), (104, 860)], fill=p.c((228, 244, 252)))
+    p.rect((600, 800, 800, 820), (150, 156, 166), r=6, o=4)                     # Handtuchstange
+    p.rect((630, 812, 760, 960), (250, 170, 130), r=10, o=5)
+    p.rug((180, GROUND + 10, 520, GROUND + 130), (120, 190, 200))
+    p.rect((470, 960, 520, 1010), (120, 190, 180), r=8, o=4)                    # Seife und Becher
+    p.plant(480, 1250, 0.7, (236, 240, 244))
     p.lamp_glow(540, 500, 520)
     return p.vignette()
 
@@ -1110,6 +1417,10 @@ def restaurant(night):
     p.rect((600, 430, 980, 700), (60, 70, 66), r=10)                            # Tafel
     for i in range(4):
         p.line((640, 480 + i * 50, 940 - (i % 2) * 90, 480 + i * 50), (240, 240, 230), 6)
+    for lx in (270, 810):                                                       # Hängelampen
+        p.line((lx, 0, lx, 300), INK, 6)
+        p.poly([(lx - 80, 380), (lx + 80, 380), (lx + 40, 300), (lx - 40, 300)], (236, 190, 90), glow=True)
+    p.plant(560, 1250, 1.0, (120, 84, 60))
     for cx in (270, 810):                                                       # Tische
         p.rect((cx - 170, 1050, cx + 170, 1080), (250, 250, 246), r=6)
         p.rect((cx - 14, 1080, cx + 14, 1235), (110, 80, 60), o=5)
@@ -1128,12 +1439,15 @@ GERMANY = [(0.45, 0.02), (0.52, 0.06), (0.58, 0.03), (0.66, 0.07), (0.78, 0.09),
 def _map(night, pts, title_col=(120, 150, 255)):
     """Kartenbild: dunkler Grund, leuchtender Umriss – für „in ganz Deutschland“, „weltweit“ und Zahlen pro Land."""
     p = P(False)
-    for y in range(0, H, 8):
-        f = y / H
-        p.d.rectangle((0, y, W, y + 8), fill=(int(10 + 8 * f), int(14 + 10 * f), int(34 + 20 * f)))
+    p.grad((0, 0, W, H), (8, 10, 30), (22, 26, 66), raw=True)
+    for gx in range(0, W, 90):                                                 # feines Kartennetz
+        p.d.line((gx, 0, gx, H), fill=(20, 26, 58), width=2)
+    for gy in range(0, H, 90):
+        p.d.line((0, gy, W, gy), fill=(20, 26, 58), width=2)
     x0, y0, w, h = 190, 380, 700, 900
     poly = [(x0 + a * w, y0 + b * h) for a, b in pts]
-    p.d.polygon(poly, fill=(22, 30, 66))
+    p.veil([(x + 0, y + 0) for x, y in poly], (70, 100, 220), 150, 40, kind="poly")       # Leuchten um das Land
+    p.d.polygon(poly, fill=(26, 36, 82))
     p.d.line(poly + [poly[0]], fill=(60, 80, 170), width=14, joint="curve")
     p.d.line(poly + [poly[0]], fill=title_col, width=5, joint="curve")
     return p.im
@@ -1143,19 +1457,64 @@ def germany(night):
     return _map(night, GERMANY)
 
 
+CONTINENTS = (   # grobe Umrisse auf der Einheitskugel (Blick auf Europa/Afrika), x nach rechts, y nach unten
+    ((-0.12, -0.72), (0.02, -0.80), (0.20, -0.78), (0.30, -0.66), (0.22, -0.56), (0.28, -0.48), (0.14, -0.44), (0.06, -0.50), (-0.02, -0.44),
+     (-0.12, -0.46), (-0.22, -0.42), (-0.26, -0.52), (-0.14, -0.58), (-0.20, -0.66)),                                   # Europa
+    ((-0.30, -0.36), (-0.10, -0.42), (0.10, -0.38), (0.26, -0.36), (0.34, -0.22), (0.46, -0.08), (0.36, 0.06), (0.30, 0.30), (0.20, 0.52),
+     (0.10, 0.64), (0.02, 0.56), (-0.02, 0.30), (-0.06, 0.10), (-0.22, 0.06), (-0.38, -0.02), (-0.40, -0.20)),         # Afrika
+    ((0.30, -0.66), (0.50, -0.74), (0.72, -0.60), (0.88, -0.38), (0.98, -0.14), (0.84, -0.02), (0.70, -0.10), (0.62, 0.08), (0.52, -0.06),
+     (0.44, -0.22), (0.36, -0.34), (0.30, -0.46)),                                                                     # Asien
+    ((-0.98, 0.08), (-0.78, 0.02), (-0.66, 0.14), (-0.62, 0.34), (-0.74, 0.56), (-0.84, 0.72), (-0.92, 0.52), (-1.0, 0.30)),   # Südamerika
+    ((-0.52, -0.86), (-0.34, -0.92), (-0.26, -0.76), (-0.42, -0.66)),                                                  # Grönland
+    ((0.38, 0.34), (0.45, 0.32), (0.46, 0.46), (0.40, 0.50)),                                                          # Madagaskar
+)
+
+
+def _starfield(p, seed=11, n=140):
+    p.grad((0, 0, W, H), (8, 10, 30), (22, 26, 66), raw=True)
+    rnd = random.Random(seed)
+    for _ in range(n):
+        x, y, r = rnd.randint(0, W), rnd.randint(0, H), rnd.choice((1, 1, 2, 2, 3))
+        p.d.ellipse((x - r, y - r, x + r, y + r), fill=(236, 240, 255) if r > 1 else (150, 160, 210))
+
+
 def worldmap(night):
+    """Weltkugel mit erkennbaren Kontinenten, Tag-/Nachtseite, Glanz und Atmosphäre – vor Sternen."""
     p = P(False)
-    for y in range(0, H, 8):
-        f = y / H
-        p.d.rectangle((0, y, W, y + 8), fill=(int(10 + 8 * f), int(14 + 10 * f), int(34 + 20 * f)))
+    _starfield(p)
     cx, cy, r = 540, 820, 430
-    p.d.ellipse((cx - r - 16, cy - r - 16, cx + r + 16, cy + r + 16), fill=(40, 60, 130))
-    p.d.ellipse((cx - r, cy - r, cx + r, cy + r), fill=(36, 96, 170))
-    for pts in (((-0.62, -0.5), (-0.3, -0.62), (-0.12, -0.4), (-0.3, -0.1), (-0.2, 0.2), (-0.36, 0.56), (-0.5, 0.2), (-0.7, -0.1)),
-                ((0.0, -0.6), (0.4, -0.66), (0.72, -0.4), (0.6, -0.1), (0.3, -0.16), (0.24, 0.3), (0.06, 0.5), (0.0, 0.1), (-0.06, -0.3)),
-                ((0.44, 0.3), (0.66, 0.26), (0.7, 0.46), (0.5, 0.5))):
-        p.d.polygon([(cx + a * r, cy + b * r) for a, b in pts], fill=(70, 150, 96), outline=(20, 40, 60), width=5)
-    p.d.ellipse((cx - r, cy - r, cx + r, cy + r), outline=(120, 150, 255), width=6)
+    p.veil((cx - r - 70, cy - r - 70, cx + r + 70, cy + r + 70), (90, 150, 255), 150, 34)             # Atmosphäre leuchtet
+    ball = Image.new("RGBA", (r * 2, r * 2), (0, 0, 0, 0))
+    bd = ImageDraw.Draw(ball)
+    bd.ellipse((0, 0, r * 2, r * 2), fill=(36, 104, 190, 255))
+    bd.ellipse((-r * 0.2, -r * 0.3, r * 1.5, r * 1.4), fill=(48, 124, 208, 255))                      # hellere Meeresseite
+    for pts in CONTINENTS:
+        q = [(r + a * r, r + b * r) for a, b in pts]
+        bd.polygon([(x + 5, y + 7) for x, y in q], fill=(28, 84, 150, 255))                           # Küstenschatten
+        bd.polygon(q, fill=(96, 176, 110, 255), outline=(30, 70, 60, 255), width=5)
+        m = (sum(x for x, _ in q) / len(q), sum(y for _, y in q) / len(q))
+        bd.polygon([(m[0] + (x - m[0]) * 0.55, m[1] + (y - m[1]) * 0.55) for x, y in q], fill=(124, 196, 122, 255))
+    bd.polygon([(r + a * r, r + b * r) for a, b in ((-0.36, -0.30), (0.20, -0.30), (0.30, -0.16), (0.0, -0.10), (-0.34, -0.12))], fill=(226, 200, 130, 255))   # Sahara
+    for k in (-0.5, 0.0, 0.5):                                                                        # Breitenkreise
+        hh = r * abs(k)
+        w2 = r * math.sqrt(1 - k * k)
+        bd.arc((r - w2, r + k * r - 26, r + w2, r + k * r + 26), 0, 180, fill=(150, 200, 255, 90), width=3)
+    for cxx, cyy, s_ in ((-0.3, -0.56, 1.0), (0.5, 0.2, 0.8), (-0.5, 0.36, 0.9), (0.1, 0.78, 0.7)):   # Wolkenbänder
+        bd.rounded_rectangle((r + cxx * r - 90 * s_, r + cyy * r - 12 * s_, r + cxx * r + 90 * s_, r + cyy * r + 12 * s_), 12, fill=(255, 255, 255, 170))
+        bd.rounded_rectangle((r + cxx * r - 40 * s_, r + cyy * r - 28 * s_, r + cxx * r + 60 * s_, r + cyy * r - 6 * s_), 12, fill=(255, 255, 255, 150))
+    mask = Image.new("L", (r * 2, r * 2), 0)
+    ImageDraw.Draw(mask).ellipse((0, 0, r * 2, r * 2), fill=255)
+    shade = Image.new("L", (r * 2, r * 2), 0)                                                         # Nachtseite rechts unten
+    ImageDraw.Draw(shade).ellipse((r * 0.5, r * 0.4, r * 2.9, r * 2.8), fill=150)
+    shade = shade.filter(ImageFilter.GaussianBlur(70))
+    ball.paste(Image.new("RGBA", (r * 2, r * 2), (8, 10, 40, 255)), (0, 0), shade)
+    hi = Image.new("L", (r * 2, r * 2), 0)                                                            # Glanzlicht links oben
+    ImageDraw.Draw(hi).ellipse((r * 0.18, r * 0.12, r * 0.95, r * 0.8), fill=80)
+    hi = hi.filter(ImageFilter.GaussianBlur(60))
+    ball.paste(Image.new("RGBA", (r * 2, r * 2), (255, 255, 255, 255)), (0, 0), hi)
+    p.im.paste(ball, (cx - r, cy - r), mask)
+    p.d = ImageDraw.Draw(p.im)
+    p.d.ellipse((cx - r, cy - r, cx + r, cy + r), outline=(150, 190, 255), width=6)
     return p.im
 
 
@@ -1208,6 +1567,11 @@ def attic(night):
 def plain(night):
     p = P(night)
     p.room((244, 226, 190), (210, 170, 120))
+    p.rect((380, 430, 700, 660), (250, 250, 246), r=6)                          # Bild und Pflanze: kein kahler Raum
+    p.d.rectangle((400, 450, 680, 640), fill=p.c((250, 220, 170)))
+    p.oval((480, 480, 600, 600), (240, 150, 90), o=5)
+    p.plant(960, 1250, 1.0)
+    p.rug((250, GROUND + 10, 830, GROUND + 170), (200, 130, 100))
     return p.vignette()
 
 

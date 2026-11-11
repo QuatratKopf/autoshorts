@@ -190,9 +190,8 @@ def scene_clip(img, dur, out, idx, motion=None, ov=None, work=None, video=False)
     elif motion == "shake":   # kräftig am Anfang, klingt ab
         x = f"iw/2-iw/zoom/2+38*sin(on*2.3)*max(0,1-on/14)"
         y = f"ih/2-ih/zoom/2+30*cos(on*2.9)*max(0,1-on/14)"
-    if video:   # fertig animierte Szene: nur sanfte Kamerafahrt darüber (kleinerer Zoom, damit nichts abgeschnitten wird)
-        z = {"zoom_in": f"1+0.07*on/{f}", "zoom_out": f"1.07-0.07*on/{f}", "shake": "1.05", "still": "1"}.get(motion, "1.05")
-        vf = f"zoompan=z='{z}':x='{x}':y='{y}':d=1:s={W}x{H}:fps={FPS}"
+    if video:   # fertig animierte Szene: die Kamera (Fahrt, Ruck beim Schnitt, Sprung aufs Schlüsselwort) steckt schon im Clip – hier nur noch Wackeln
+        vf = f"zoompan=z='1.05':x='{x}':y='{y}':d=1:s={W}x{H}:fps={FPS}" if motion == "shake" else f"fps={FPS},scale={W}:{H}"
     else:
         vf = (f"scale={W * 2}:{H * 2}:flags=lanczos,zoompan=z='{z}+{breath}':x='{x}':y='{y}':d={f}:s={W}x{H}:fps={FPS}")
     args = ["-i", str(img)]
@@ -226,6 +225,7 @@ SFX = {
     "ding": "sine=f=1318:d=0.7,afade=t=out:st=0:d=0.7,volume=0.6",
     "boom": "sine=f=52:d=0.9,afade=t=out:st=0.05:d=0.85,volume=2.2",
     "tick": "sine=f=2000:d=0.03,afade=t=out:st=0:d=0.03,volume=0.5",
+    "swish": "anoisesrc=d=0.26:c=pink:a=0.32,highpass=f=700,lowpass=f=3400,afade=t=in:d=0.1,afade=t=out:st=0.1:d=0.16",   # leiser Luftzug bei jedem Schnitt
 }
 
 
@@ -292,6 +292,7 @@ def pick_music(slug):
 # ---------------------------------------------------------------- Zusammenbau
 
 TRANSITIONS = ("fade", "slideleft", "fade", "smoothup", "fade", "slideright", "circleopen")
+TOON_TRANSITIONS = ("hblur", "slideleft", "zoomin", "smoothup", "hblur", "slideright", "smoothleft", "zoomin", "smoothright")   # schnell und mit Zug – kein müdes Überblenden
 
 
 def render(work: Path, scenes, times, voice, ass, out, music=None, music_volume=0.10, cover=None, sfx_volume=0.35, slug=""):
@@ -300,6 +301,7 @@ def render(work: Path, scenes, times, voice, ass, out, music=None, music_volume=
     durs = [(e - s) for s, e in times]
     durs[-1] += 0.35
     clips = []
+    is_toon = (work / "toon00.mp4").exists()
     for i, sc in enumerate(scenes):
         clip = work / f"clip{i:02d}.mp4"
         extra = XF if i < n - 1 else 0          # Überlappung für den Übergang zur nächsten Szene
@@ -316,7 +318,7 @@ def render(work: Path, scenes, times, voice, ass, out, music=None, music_volume=
     for c in clips:
         inputs += ["-i", c.name]
     for k in range(1, n):
-        tr = "slideleft" if scenes[k].get("sfx") == "whoosh" else TRANSITIONS[k % len(TRANSITIONS)]
+        tr = "slideleft" if scenes[k].get("sfx") == "whoosh" else (TOON_TRANSITIONS[k % len(TOON_TRANSITIONS)] if is_toon else TRANSITIONS[k % len(TRANSITIONS)])
         off = sum(durs[:k])
         fc.append(f"[{prev}][{k}:v]xfade=transition={tr}:duration={XF}:offset={off:.3f}[x{k}]")
         prev = f"x{k}"
@@ -354,6 +356,8 @@ def render(work: Path, scenes, times, voice, ass, out, music=None, music_volume=
         name = str(sc.get("sfx") or "").lower()
         if name in sfx:
             events.append((s, name))
+        elif i and is_toon and "swish" in sfx:
+            events.append((max(0.0, s - 0.08), "swish"))
         if isinstance(sc.get("overlay"), dict) and sc["overlay"].get("type") and name != "pop" and "pop" in sfx:
             events.append((s + 0.2, "pop"))
     for k, (t, name) in enumerate(events[:40]):
@@ -368,7 +372,10 @@ def render(work: Path, scenes, times, voice, ass, out, music=None, music_volume=
     else:
         parts.append("[vo]loudnorm=I=-14:TP=-1.5[a]")
     # leichte Farbkorrektur (etwas weniger bunt, etwas mehr Kontrast) für einen ruhigeren, hochwertigeren Look
-    vf = f"[0:v]eq=saturation=0.92:contrast=1.04,ass={Path(ass).name}:fontsdir={fonts}[v]"
+    # Fortschrittsbalken am oberen Rand: zeigt, wie weit das Video ist – hält Zuschauer nachweislich länger dran
+    args += ["-f", "lavfi", "-i", f"color=c=0xFF8A1F:s={W}x12:r={FPS}:d={total + 1:.2f}"]
+    vf = (f"[0:v]eq=saturation={'1.04' if is_toon else '0.92'}:contrast=1.04,ass={Path(ass).name}:fontsdir={fonts}[v0];"
+          f"[v0][{idx}:v]overlay=x='-main_w+main_w*t/{max(1.0, total):.2f}':y=0:eof_action=pass[v]")
     ff([*args, "-filter_complex", vf + ";" + ";".join(parts), "-map", "[v]", "-map", "[a]", "-t", f"{total:.2f}",
         "-c:v", "libx264", "-preset", "veryfast", "-crf", "21", "-pix_fmt", "yuv420p",
         "-c:a", "aac", "-b:a", "160k", "-ar", "44100", "-movflags", "+faststart", str(out)], cwd=work)

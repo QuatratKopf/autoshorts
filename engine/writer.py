@@ -28,7 +28,11 @@ Regeln für die Sprechertexte:
   (Zahl, Ursache, Vergleich aus dem Alltag: „so schwer wie zwei Autos“). Kein Füllsatz, keine Wiederholung, keine Floskel.
 - So wenige Wörter wie möglich: ein Gedanke pro Satz. Was das Bild zeigt, muss der Sprecher nicht beschreiben – das Bild erzählt
   dazu, was der Satz nicht sagt (Reaktion, Folge, Größenvergleich).
-- Alle drei bis fünf Sekunden ändert sich sichtbar etwas: neue Einstellung, neue Handlung, Grafik oder Großaufnahme.
+- Alle drei bis vier Sekunden ändert sich sichtbar etwas: neue Einstellung, neue Handlung, Grafik oder Großaufnahme.
+  Jede Szene ist EIN kurzer Satz (höchstens 14 Wörter). Kein Satz darf ein Bild brauchen, das länger als fünf Sekunden steht.
+- NIEMAND DARF SICH LANGWEILEN: Jede Szene bringt etwas Neues (Zahl, Wendung, Folge, Witz) – keine Wiederholung, keine Überleitung
+  ohne Inhalt („Aber das ist noch nicht alles“ ist verboten). Offene Fragen und kleine Ankündigungen halten die Spannung
+  („… und dann wird es richtig seltsam“), aber höchstens zweimal pro Video. "highlight" nennt das Wort, bei dem die Kamera auf die Figur springt.
 - Inhaltlich korrekt bleiben: nichts als Tatsache ausgeben, was erfunden ist. Bei aktuellen Themen nur das verwenden,
   was in den mitgelieferten Schlagzeilen steht oder allgemein bekanntes Hintergrundwissen ist; keine erfundenen Details,
   Zitate oder Zahlen. Lieber den zeitlosen Hintergrund erklären als Gerüchte wiedergeben.
@@ -106,7 +110,8 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
 - "cast": Aussehen je Figur, z. B. {"mia": {"shirt": "blau", "hat": "", "hair": "long", "glasses": false, "skin": "weiß"},
                                    "rex": {"kind": "dino"}}
   Menschen: shirt/hat_color: blau, rot, grün, gelb, orange, lila, pink, türkis, grau, braun · hat: cap, helmet, beanie, bow, crown oder ""
-            hair: long, bun oder "" · skin: weiß, hell, mittel, dunkel
+            hair: long, bun oder "" (kurz) · hair_color: braun, dunkelbraun, schwarz, blond, rot, grau · skin: weiß, hell, mittel, dunkel
+            (gib jeder Figur eine andere Kombination aus Pulli-, Haarfarbe und Frisur, damit man sie sofort auseinanderhält)
   Tiere/Wesen statt Mensch: "kind": cat, dog, spider, ghost, alien, robot, bird, dino, monster, fish, shark, bee, wasp
   Höchstens 3 Figuren, jede klar unterscheidbar. Bei Du-Geschichten ist die Hauptfigur „du“.
 - BILDPLAN ZUERST: Überlege bei jeder Szene, bevor du sie ausfüllst: Was genau sieht der Zuschauer, während dieser Satz gesprochen wird?
@@ -637,7 +642,7 @@ def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
     min_secs = float(cfg("min_seconds") or 0)
     secs = max(secs, int(min_secs + 6)) if min_secs else secs     # Ziel mit Abstand über der Mindestlänge
     words = round(secs * wps)
-    scenes = max(6, round(secs / 5))
+    scenes = max(8, round(secs / 4.2))                   # kurze Szenen: alle rund vier Sekunden ein neues Bild
     toon = str(os.environ.get("AS_VISUAL") or cfg("visual_mode") or "ai") == "toon"
     char = cfg("main_character") if cfg("use_main_character") and not toon else ""
     ctx = ""
