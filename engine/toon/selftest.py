@@ -185,6 +185,13 @@ def main():
             for leg, knee in ((p.leg_l, p.knee_l), (p.leg_r, p.knee_r)):
                 assert abs(leg - knee) < 30, f"Sitzhaltung verdreht: Bein {leg}, Knie {knee}"
     check("Sitzhaltung", _sit)
+    def _cam():                                                  # Halbnahe: Kamera mit Zoom auf die Gruppe, Lichtkegel bei Anspannung
+        fr = frame({"place": "livingroom", "mood": "tense", "actors": [{"id": "du", "pos": "left"}, {"id": "tom", "pos": "right"}], "props": ["tv"]})
+        for t in (0.0, 0.1, 1.5, 2.9):
+            for cam in ({"tight": True, "zt": 1.42, "fx": 900, "punch": 1.0}, {"tight": True, "zt": 1.0, "fx": 0}, {"flat": True}, {}):
+                im = stage._camera(fr, t, 3.0, cam)
+                assert im.size == (1080, 1920)
+    check("Kamera Halbnahe", _cam)
     check("Neon-Look", lambda: graphics.neon(frame({"place": "street", "crowd": "walk"}), 1.0))
     check("Neon-Kulisse", lambda: graphics.tint(places.background("street", True)))
     # Regie mit zufälligen und kaputten Drehbüchern

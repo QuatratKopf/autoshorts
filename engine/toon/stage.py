@@ -374,6 +374,44 @@ def _prop(frame, kind, x, t, big, table=False, lift=0.0, rot=0.0, grow=1.0):
 
 
 INK = (22, 22, 26)
+_lights = {}
+
+
+def _light_kind(place, night, mood, xs):
+    """Lichtführung der Szene: "spot" (Dunkelheit, Lichtkegel auf den Figuren) bei unheimlicher, angespannter oder trauriger
+    Stimmung und nachts in Innenräumen – sonst "floor" (der Boden unten läuft weich ins Dunkle, der Blick bleibt bei den Figuren)."""
+    if xs and (str(mood or "") in ("scary", "tense", "sad") or (night and place not in places.OUTDOOR)):
+        return "spot"
+    return "floor"
+
+
+def _light(frame, kind, xs):
+    """Legt Licht und Schatten über das fertige Bild (Maske in kleiner Auflösung, weich, zwischengespeichert)."""
+    from PIL import ImageFilter
+    key = (kind, tuple(sorted(int(x) // 30 for x in xs)) if kind == "spot" else ())
+    if key not in _lights:
+        if len(_lights) > 60:
+            _lights.clear()
+        f = 6
+        m = Image.new("L", (W // f, H // f), 255 if kind == "floor" else 104)
+        d = ImageDraw.Draw(m)
+        g = places.GROUND // f
+        for y in range(g, H // f):                                   # Boden läuft zum unteren Rand ins Dunkle
+            k = (y - g) / max(1, H // f - g)
+            d.line((0, y, W // f, y), fill=int((255 if kind == "floor" else 104) * (1 - 0.34 * k ** 1.3)))
+        if kind == "spot":
+            for x in xs:
+                xx = x / f
+                d.polygon([(xx - 8, 0), (xx + 8, 0), (xx + 50, g + 6), (xx - 50, g + 6)], fill=170)     # Lichtkegel von oben
+                d.ellipse((xx - 44, g - 105, xx + 44, g + 14), fill=255)                                 # die Figur steht im Licht
+                d.ellipse((xx - 60, g - 4, xx + 60, g + 16), fill=215)                                   # Lichtfleck am Boden
+            m = m.filter(ImageFilter.GaussianBlur(9))
+        else:
+            m = m.filter(ImageFilter.GaussianBlur(3))
+        _lights[key] = Image.merge("RGB", [m.resize((W, H), Image.BILINEAR)] * 3)
+    return ImageChops.multiply(frame.convert("RGB"), _lights[key])
+
+
 FLOAT_TOPS = (300.0, 170.0, 390.0)                 # Schwebehöhen (px über der Fußlinie) für mehrere Dinge im Zimmer …
 FLOAT_TOPS_OUT = (310.0, 250.0, 70.0)
 FLOAT_SHRINK = {"candle": 0.5, "faucet": 0.6}
@@ -512,12 +550,14 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
     over = frame
     od = ImageDraw.Draw(frame, "RGBA")
     focus = 540.0
+    xs_now = []
     for a in sorted(actors, key=lambda q: q["speaks"]):
         moving = a["x1"] != a["x0"]
         speed = 360 if a["action"] == "walk" else 680
         move_t = min(dur * 0.7, abs(a["x1"] - a["x0"]) / speed) if moving else 0
         arrived = moving and t >= move_t
         x = a["x1"] if arrived else (a["x0"] + (a["x1"] - a["x0"]) * _ease(t / move_t) if moving else a["x0"])
+        xs_now.append(x)
         mouth = _mouth(t0 + t, words) if a["speaks"] else 0.0
         if moving and not arrived:
             facing = 1 if a["x1"] > a["x0"] else -1
@@ -603,6 +643,7 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
         extras.draw_weather(over, weather, t)
     if opt.get("mood"):
         extras.draw_mood(over, opt["mood"], t)
+    frame = _light(frame, _light_kind(place, night, opt.get("mood"), xs_now), xs_now)
     if landed is not None and landed < 0.5:      # Aufschlag: das Bild wackelt kurz
         k = 1 - landed / 0.5
         dx, dy = int(math.sin(t * 61) * 22 * k), int(math.cos(t * 53) * 26 * k)
@@ -1536,12 +1577,17 @@ def _insert_frame(kinds, t, dur, mood, low=False, neon=False):
     return frame
 
 
+TIGHT_Z, TIGHT_AY = 1.3, 300.0            # Halbnahe: Zoom und Fixpunkt (oben) – wie in Erklär-Shorts füllen die Figuren das Bild
+
+
 def _camera(frame, t, dur, cam):
     """Lebendige Kamera für jede Szene: etwas näher an den Figuren, langsame Fahrt, ein kurzer Ruck beim Schnitt und – wenn
     das Schlüsselwort fällt – ein schneller Sprung auf die Hauptfigur (wie in geschnittenen Kurzvideos)."""
     k = t / max(dur, 0.1)
-    z = (1.0 if cam.get("flat") else 1.06) + 0.035 * (k if cam.get("drift", 1) > 0 else 1 - k)
-    ax, ay = 540.0, 1010.0
+    z = (1.0 if cam.get("flat") else cam.get("zt", TIGHT_Z) if cam.get("tight") else 1.06) + 0.035 * (k if cam.get("drift", 1) > 0 else 1 - k)
+    ax, ay = 540.0, (TIGHT_AY if cam.get("tight") else 1010.0)
+    if cam.get("tight"):                                  # nah dran: Figuren füllen das Bild, der leere Boden unten fällt weg
+        ax += (float(cam.get("fx", 540)) - 540) * 0.6
     pt = cam.get("punch")
     if pt is not None and t >= pt:
         e = _ease(min(1.0, (t - pt) / 0.14))
@@ -1592,6 +1638,11 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     cam = {"dir": 1 if index % 2 == 0 else -1, "drift": 1 if index % 3 != 2 else -1,
            "fx": (lead["x1"] if lead else (props[0][1] if props else 540)),
            "punch": None if (shot == "close" or moving or ov_tall or place in MAPS or not (actors or props)) else _punch_time(scene, words, t0, dur)}
+    if actors and shot != "close" and not ov_tall and place not in MAPS and not scene.get("float") and str(scene.get("shot") or "") != "event":
+        xs = [a["x1"] for a in actors] + [a["x0"] for a in actors if -100 < a["x0"] < W + 100]
+        xs += [x for k, x in props if extras.prop_fit(k) and 0 <= x <= W]   # auch der Gegenstand, von dem der Satz spricht, bleibt ganz im Bild
+        span = max(xs) - min(xs) + 420                                  # Breite der Gruppe samt Armen
+        cam.update(tight=True, zt=max(1.0, min(1.42, W / span)), fx=(max(xs) + min(xs)) / 2)
     cam_flat = {"flat": True, "dir": cam["dir"], "drift": cam["drift"]}
     ff = subprocess.Popen(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24",
                            "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-preset", "veryfast",
