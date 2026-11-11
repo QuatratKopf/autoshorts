@@ -758,6 +758,7 @@ def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
     places = {str(k): str(v) for k, v in (js.get("places") or {}).items() if v} if isinstance(js.get("places"), dict) else {}
     for s in sc:
         s["text"] = " ".join(str(s["text"]).split())
+        s["text"] = re.sub(r"hundert[ -]?und[ -]?(?=(?:ein|zwei|drei|vier|fünf|sechs|sieben|acht|neun)und|zehn|elf|zwölf|\w+zehn\b)", "hundert", s["text"])   # „neunzehnhundertunddreiundneunzig“
         s["image"] = str(s.get("image") or s["text"])
         ov = s.get("overlay")
         if isinstance(ov, str):   # altes Format: nur Text

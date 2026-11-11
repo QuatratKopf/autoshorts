@@ -135,6 +135,8 @@ def _prepare(scene, cast):
         spec = cast.get(aid) if isinstance(cast.get(aid), dict) else {}
         if not spec and isinstance(a.get("look"), dict):
             spec = a["look"]
+        elif not spec and not a.get("kind") and aid.lower() not in MAIN_IDS and i > 0:
+            spec = GROUP_LOOKS[(i + len(aid)) % len(GROUP_LOOKS)]   # Nebenfigur ohne Besetzung: kein Zwilling der Hauptfigur
         elif not spec and not a.get("kind") and aid.lower() in MAIN_IDS:
             humans = [v for v in cast.values() if isinstance(v, dict) and not v.get("kind")]
             if len(humans) == 1:                          # Bildplan sagt „du“, Besetzung nennt die Hauptfigur beim Namen: dieselbe Figur
@@ -713,6 +715,12 @@ def spoken_number(value, text):
     return any(abs(n - v) < 1e-6 or abs(n * 1000 - v) < 1e-6 or abs(n * 1e6 - v) < 1e-3 or abs(n * 1e9 - v) < 1 for n in nums)
 
 
+def _lead_number(value):
+    import re as _re
+    m = _re.search(r"\d[\d.]*(?:,\d+)?", str(value))
+    return m.group(0) if m else str(value)
+
+
 def has_ov0(sc):
     return isinstance(sc.get("overlay"), dict) and str(sc["overlay"].get("type") or "") in TALL_OV + ("choice",)
 
@@ -776,6 +784,15 @@ def direct(scenes, times, topic="", style="", look=""):
             if maps_used > 2:
                 sc["place"] = place = "street"
         ov_c = sc.get("overlay") if isinstance(sc.get("overlay"), dict) else None
+        if ov_c and str(ov_c.get("type") or "").lower() in graphics.TYPES and str(ov_c.get("type") or "").lower() != "phone":
+            if not sc.get("graphic") and graphics.clean(ov_c):   # Grafik stand versehentlich als Einblendung im Drehbuch: als Grafik zeigen
+                sc["graphic"], sc["shot"] = graphics.clean(ov_c), "graphic"
+            sc["overlay"] = ov_c = None
+        g0 = sc.get("graphic") if isinstance(sc.get("graphic"), dict) else None
+        if g0 and g0.get("type") == "chart" and g0.get("value") and not spoken_number(_lead_number(g0["value"]), sc["text"]):
+            g0.pop("value", None)                         # Kurve ja – aber keine Zahl, die der Sprecher nicht nennt
+            if _re0.search(r"dollar|euro|%|prozent|mio|mrd|bio", str(g0.get("label") or "").lower()):
+                g0.pop("label", None)
         if ov_c and str(ov_c.get("type") or "") == "counter" and not spoken_number(ov_c.get("value"), sc["text"]):
             sc["overlay"] = None                          # Zahl in der Einblendung, die der Sprecher gar nicht nennt: weg damit
         has_bd = isinstance(sc.get("backdrop"), dict) and (sc["backdrop"].get("elements") or sc["backdrop"].get("ground"))
@@ -1025,7 +1042,14 @@ def direct(scenes, times, topic="", style="", look=""):
             sc["look"], sc["time"] = "neon", "night"
         g_auto = None
         low_c = str(sc.get("text") or "").lower()
-        if _re0.search(CHART_RE, low_c) and sc.get("shot") != "graphic" and charts < 2 and i > 0 and not last and ov_t not in TALL_OV and ov_t != "choice" \
+        if sc.get("shot") == "graphic" and (sc.get("graphic") or {}).get("type") == "chart":
+            if charts >= 2 or (i and scenes[i - 1].get("shot") == "graphic" and (scenes[i - 1].get("graphic") or {}).get("type") == "chart"):
+                sc["shot"], sc["graphic"] = "", None        # höchstens zwei Kurven, nie zwei hintereinander
+            else:
+                charts += 1
+                sc["actors"], sc["props"], sc["crowd"], sc["weather"] = [], [], "", ""
+                acts, lone = [], False
+        elif _re0.search(CHART_RE, low_c) and sc.get("shot") != "graphic" and charts < 2 and i > 0 and not last and ov_t not in TALL_OV and ov_t != "choice" \
                 and not sc.get("float") and not (scenes[i - 1].get("shot") == "graphic" and (scenes[i - 1].get("graphic") or {}).get("type") == "chart"):
             fig_c = find_figure(sc.get("text"))             # nur Zahlen, die der Sprecher auch sagt
             g_c = {"type": "chart", "dark": bool(_re0.search(CHART_DOWN_RE, low_c)),
@@ -1308,11 +1332,11 @@ GROUP_LOOKS = ({"shirt": "rot", "hair": "bun", "glasses": True}, {"shirt": "oran
 # Sätze über Kurse, Umsatz, Marktwert → Kurve als bewegte Grafik (steigt oder stürzt ab)
 CHART_RE = (r"aktienkurs|börsenkurs|börsenwert|marktwert|börsengang|aktie\w*\b.{0,50}(steig|stieg|explod|schieß|schoss|kletter|verdoppel|verzehnfach|fiel|fällt|stürz|brach|bricht|crash|rakete|durch die decke)|"
             r"\bkurs\w*\b.{0,30}(steig|stieg|explod|schieß|schoss|fällt|fiel|stürz|brach|bricht|durch die decke)|"
-            r"(umsatz|umsätze|gewinn|gewinne|verkaufszahlen|nutzerzahlen|nachfrage)\b.{0,40}(steig|stieg|explod|wächst|wuchs|verdoppel|verzehnfach|schieß|schoss|bricht|brach|stürz|durch die decke)|"
-            r"(explodier|steig|stieg|schieß|schoss|wächst|wuchs)\w*\b.{0,30}(aktienkurs|\bkurs\b|aktie|umsatz|umsätze|gewinn|verkaufszahlen|nutzerzahlen|nachfrage|marktwert)")
+            r"(umsatz|umsätze|gewinn|gewinne|verkaufszahlen|nutzerzahlen|nachfrage|bedarf)\b.{0,40}(steig|stieg|explod|wächst|wuchs|verdoppel|verzehnfach|schieß|schoss|bricht|brach|stürz|durch die decke)|"
+            r"(explodier|steig|stieg|schieß|schoss|wächst|wuchs)\w*\b.{0,30}(aktienkurs|\bkurs\b|aktie|umsatz|umsätze|gewinn|verkaufszahlen|nutzerzahlen|nachfrage|bedarf|marktwert)")
 CHART_DOWN_RE = r"fällt|fiel|stürz|brach\b|bricht|crash|einbr|\bsinkt|\bsank|halbier|verlier|verlor|in den keller|abwärts"
 CHART_KICKERS = ((r"aktie|börsenkurs|\bkurs", "AKTIENKURS"), (r"marktwert|börsenwert", "MARKTWERT"), (r"umsatz|umsätze", "UMSATZ"), (r"gewinn", "GEWINN"),
-                 (r"verkaufszahlen", "VERKÄUFE"), (r"nutzerzahlen", "NUTZER"), (r"nachfrage", "NACHFRAGE"), (r"börsengang", "BÖRSE"))
+                 (r"verkaufszahlen", "VERKÄUFE"), (r"nutzerzahlen", "NUTZER"), (r"nachfrage", "NACHFRAGE"), (r"bedarf", "BEDARF"), (r"börsengang", "BÖRSE"))
 # Wörter, die die Engine als Grafik zeigt (für die Gegenprobe „kann die Engine das?“)
 GRAPHIC_WORDS = [(r"aktien|börse|kurve|chart|diagramm|kursverlauf|wachstumskurve", "chart")]
 # Schwerelosigkeit: Sätze, in denen etwas schwebt / abhebt / durch die Luft treibt – und Sätze, in denen alles wieder herunterkracht

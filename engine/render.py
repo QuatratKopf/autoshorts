@@ -95,9 +95,13 @@ def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, 
         shown = [x for x in shown if x[2]]
         if not shown:
             continue
+        n_chars = len(" ".join(c for _, _, c in shown))
+        fit = ""                                          # überlange Wörter (Jahreszahlen als Wort) kleiner setzen statt am Rand abschneiden
+        if impact and n_chars > 24:
+            fit = "{\\fs" + str(max(48, int((124 if cap_font == "Anton" else 96) * 24 / n_chars))) + "}"
         if not karaoke:
             text = " ".join(key_col + c + r"{\c&H00FFFFFF&}" if is_key(w, s) else c for w, s, c in shown)
-            lines.append(f"Dialogue: 1,{_ts(start)},{_ts(end)},Cap,,0,0,0,,{pop}{text}")
+            lines.append(f"Dialogue: 1,{_ts(start)},{_ts(end)},Cap,,0,0,0,,{fit}{pop}{text}")
             continue
         # Mitlese-Untertitel: das Wort, das gerade gesprochen wird, leuchtet farbig; Schlüsselwörter bleiben danach farbig
         for j, (w, s, c) in enumerate(shown):
@@ -111,7 +115,7 @@ def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, 
                     parts.append(key_col + c2 + r"{\c&H00FFFFFF&}")
                 else:
                     parts.append(c2)
-            lines.append(f"Dialogue: 1,{_ts(t0)},{_ts(t1)},Cap,,0,0,0,,{pop if j == 0 else ''}{' '.join(parts)}")
+            lines.append(f"Dialogue: 1,{_ts(t0)},{_ts(t1)},Cap,,0,0,0,,{fit}{pop if j == 0 else ''}{' '.join(parts)}")
 
     total = times[-1][1] + 0.4
     # Ecke oben links: Ort/Zeit-Angabe der Geschichte (z. B. „TAG 1 · 3:12 UHR“), je Szene änderbar
