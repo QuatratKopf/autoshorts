@@ -147,7 +147,7 @@ def _prepare(scene, cast):
             action = "walk"
         if action in ("walk", "run") and x1 == x0:       # ohne Ziel: von außen hereinkommen
             x0 = -260 if x0 <= 540 else 1340
-        actors.append({"look": rig.Look.from_spec(spec), "kind": kind if kind in extras.CREATURES else "",
+        actors.append({"look": rig.Look.from_spec(spec, aid, list(cast).index(aid) if aid in cast else None), "kind": kind if kind in extras.CREATURES else "",
                        "hold": extras.held_key(a.get("hold")),
                        "action": action, "emotion": str(a.get("emotion") or "").lower(), "emote": a.get("emote") or "", "giant": bool(scene.get("giant")), "say": str(a.get("say") or "") if isinstance(a.get("say"), str) else "",
                        "x0": x0, "x1": x1, "speaks": bool(a.get("speaks")), "seed": i * 5 + len(aid), "face": a.get("facing")})
@@ -1594,7 +1594,7 @@ def poster(spec: dict, cast: dict, out: Path, topic=""):
     # 2) die Hauptfigur, groß im Anschnitt
     aid = spec.get("actor") if isinstance((cast or {}).get(spec.get("actor")), dict) and not cast[spec.get("actor")].get("kind") else \
         next((k for k, v in (cast or {}).items() if isinstance(v, dict) and not v.get("kind")), None)
-    look = rig.Look.from_spec((cast or {}).get(aid) if aid else {})
+    look = rig.Look.from_spec((cast or {}).get(aid) if aid else {}, aid or "", list(cast).index(aid) if aid and aid in (cast or {}) else None)
     pose, _ = rig.pose_at("shocked", 1.0, 3.0, str(spec.get("emotion") or "shocked"), 0.8, 3)
     pose.lift = 0
     fig, fx, fy = rig.draw(look, pose, 1, 2.3)

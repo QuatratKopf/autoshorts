@@ -40,13 +40,15 @@ class Look:
     hair_color: tuple = None
 
     @staticmethod
-    def from_spec(spec: dict):
+    def from_spec(spec: dict, name: str = "", nth: int = None):
+        """name/nth = Kennung der Figur und ihr Platz in der Besetzung: Fehlt die Haarfarbe, bekommt jede Figur verlässlich ihre eigene."""
         spec = spec or {}
         return Look(shirt=color(spec.get("shirt"), COLORS["blau"]), pants=color(spec.get("pants"), (40, 40, 48)),
                     skin=SKINS.get(str(spec.get("skin") or "").lower(), SKINS["hell"]),
                     hat=str(spec.get("hat") or "").lower(), hat_color=color(spec.get("hat_color"), COLORS["rot"]),
                     glasses=bool(spec.get("glasses")), hair=str(spec.get("hair") or "").lower(),
-                    hair_color=HAIRS.get(str(spec.get("hair_color") or "").lower().strip()),
+                    hair_color=HAIRS.get(str(spec.get("hair_color") or "").lower().strip())
+                    or (HAIRS[_HAIR_AUTO[(nth if nth is not None else sum(ord(c) for c in str(name))) % len(_HAIR_AUTO)]] if (name or nth is not None) else None),
                     size=max(0.6, min(1.3, float(spec.get("size") or 1.0))))
 
 

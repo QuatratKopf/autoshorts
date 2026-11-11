@@ -1014,8 +1014,8 @@ def _g_chart(frame, g, t, dur):
     d = ImageDraw.Draw(frame, "RGBA")
     down = bool(g.get("dark"))
     col = (255, 96, 86) if down else GREEN
-    _kicker(d, 430, g.get("kicker"), t, 0.0)
-    x0, x1, y0, y1 = 110, 970, 540, 1130
+    _kicker(d, 400, g.get("kicker"), t, 0.0)
+    x0, x1, y0, y1 = 110, 970, 500, 950                      # endet über den Untertiteln (die stehen bei etwa 1310–1440)
     d.rounded_rectangle((x0 - 40, y0 - 40, x1 + 40, y1 + 40), 34, fill=(10, 8, 34, 150), outline=(255, 255, 255, 46), width=4)
     for i in range(5):                                        # Gitterlinien
         y = y0 + (y1 - y0) * i / 4
@@ -1056,12 +1056,12 @@ def _g_chart(frame, g, t, dur):
                 d.polygon([(ax, ay + dy * s_), (ax - s_ * 0.72, ay), (ax + s_ * 0.72, ay)], fill=col + (255,), outline=INK + (255,), width=5)
     d.line((x0, y0 - 10, x0, y1, x1 + 10, y1), fill=(255, 255, 255, 150), width=6)
     val = str(g.get("value") or "").strip()
-    y = y1 + 110
+    y = y1 + 64
     if val and t > 0.5:
         kk = _pop(t, 0.5, 0.4)
-        f = _fit(d, val.upper(), int(170 * min(1.06, kk)), 940)
-        _center(d, y + (170 - f.size) / 2, _count(val, t, 0.5, 1.4).upper(), f, fill=WHITE)
-        y += 200
+        f = _fit(d, val.upper(), int(150 * min(1.06, kk)), 940)
+        _center(d, y + (150 - f.size) / 2, _count(val, t, 0.5, 1.4).upper(), f, fill=WHITE)
+        y += 168
     if g.get("label") and t > 0.7:
         f = _fit(d, str(g["label"]).upper(), 60, 940, "Bold")
         _center(d, y, str(g["label"]).upper()[:40], f, fill=ORANGE if not down else (255, 150, 140))
