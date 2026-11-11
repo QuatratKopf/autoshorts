@@ -451,7 +451,9 @@ Texte der Einblendungen und Grafiken ("labels"). Prüfe streng und verbessere NU
 Jeder verbesserte Satz bleibt etwa gleich lang (höchstens 20 % kürzer oder länger), im selben lockeren Ton, Zahlen ausgeschrieben, ohne Marken,
 und passt weiter zu den Sätzen davor und danach. Gib NUR Änderungen zurück, als JSON:
 {"fixes": [{"i": 3, "why": "kurz", "text": "neuer Sprechertext", "labels": {"alter Text der Einblendung": "neuer Text"}}]}
-"text" und "labels" nur angeben, wenn sie sich ändern. Leere Liste, wenn alles stimmt."""
+"text" und "labels" nur angeben, wenn sie sich ändern. Leere Liste, wenn alles stimmt.
+Steht in der Beschreibung ein „Wir“/„uns“, ein Tippfehler oder etwas am Thema vorbei, gib zusätzlich "description" mit der verbesserten Fassung zurück
+(drei kurze Zeilen in Du-Form, mit \n getrennt, gleiche Länge)."""
 _LABEL_KEYS = ("text", "title", "label", "kicker", "sub", "unit", "a", "b", "left", "right")
 
 
@@ -468,10 +470,14 @@ def proofread(js, topic):
                 out += [box[k] for k in _LABEL_KEYS if isinstance(box.get(k), str) and box[k].strip()]
                 out += [str(it[0] if isinstance(it, (list, tuple)) and it else it) for it in (box.get("items") or []) if it] if isinstance(box.get("items"), list) else []
         return out
-    user = (f"Thema: {topic}\nTitel: {js.get('title')}\n\n"
+    user = (f"Thema: {topic}\nTitel: {js.get('title')}\nBeschreibung: {json.dumps(str(js.get('description') or ''), ensure_ascii=False)}\n\n"
             + "\n".join(json.dumps({"i": i, "text": s.get("text"), **({"labels": labels(s)} if labels(s) else {})}, ensure_ascii=False) for i, s in enumerate(scenes)))
     out, _ = ai.chat_json(PROOF, user, 0.2)
     n = 0
+    desc = out.get("description") if isinstance(out, dict) else None
+    if isinstance(desc, str) and 40 <= len(desc.strip()) <= 400 and not _foreign(desc) and len(desc.strip()) >= 0.5 * len(str(js.get("description") or "")):
+        js["description"] = desc.strip()
+        ai.log("Lektorat: Beschreibung verbessert")
     for f in ((out.get("fixes") or []) if isinstance(out, dict) else [])[:len(scenes)]:
         if not isinstance(f, dict) or isinstance(f.get("i"), bool) or not isinstance(f.get("i"), int) or not 0 <= f["i"] < len(scenes):
             continue

@@ -308,7 +308,9 @@ def _prop(frame, kind, x, t, big, table=False, lift=0.0, rot=0.0):
     if fit and (lift or rot):
         f, gy = fit
         if key.startswith("lib_") or extras.SIZES.get(key, (9,))[0] <= 0.6:      # Kleines leicht überzeichnen, sonst erkennt man es in der Luft nicht
-            f *= max(1.0, 0.62 / max(0.05, extras.SIZES[key][0]))
+            f *= max(1.0, 0.5 / max(0.05, extras.SIZES[key][0]))
+        elif key in FLOAT_SHRINK:                         # als Standbild groß gezeichnete Kleinigkeiten (Glas, Kerze) neben einem schwebenden Menschen nicht riesig
+            f *= FLOAT_SHRINK[key] / extras.SIZES[key][0]
         layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
         extras.draw_prop(layer, kind, 540, t)
         box = layer.getbbox()
@@ -356,6 +358,7 @@ def _prop(frame, kind, x, t, big, table=False, lift=0.0, rot=0.0):
 INK = (22, 22, 26)
 FLOAT_TOPS = (300.0, 170.0, 390.0)                 # Schwebehöhen (px über der Fußlinie) für mehrere Dinge im Zimmer …
 FLOAT_TOPS_OUT = (310.0, 250.0, 70.0)
+FLOAT_SHRINK = {"glass": 0.5, "candle": 0.5, "faucet": 0.6}
 FLOAT_LOW = (110.0, 70.0, 90.0)                    # unter hohen Einblendungen und für Busse: nur knapp über dem Boden             # … und draußen (Autos): nebeneinander oben, eines tiefer in der Mitte
 _wv = {}
 

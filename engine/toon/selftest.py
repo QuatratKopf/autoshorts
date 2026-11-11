@@ -152,6 +152,12 @@ def main():
                 for sc_ in scs:
                     frame(sc_, t=1.2)
             check(f"Regie Schweben: {txt} in {pl}", _flo)
+    def _sit():                                                  # Sitzen: Unterschenkel zeigen nach unten, die Füße stehen unter den Knien – nicht über dem Kopf
+        for t in (0.0, 1.0, 2.5):
+            p, _ = rig.pose_at("sit", t, 3.0)
+            for leg, knee in ((p.leg_l, p.knee_l), (p.leg_r, p.knee_r)):
+                assert abs(leg - knee) < 30, f"Sitzhaltung verdreht: Bein {leg}, Knie {knee}"
+    check("Sitzhaltung", _sit)
     check("Neon-Look", lambda: graphics.neon(frame({"place": "street", "crowd": "walk"}), 1.0))
     check("Neon-Kulisse", lambda: graphics.tint(places.background("street", True)))
     # Regie mit zufälligen und kaputten Drehbüchern

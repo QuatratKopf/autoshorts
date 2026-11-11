@@ -23,6 +23,8 @@ Repo: `QuatratKopf/autoshorts`, Branch `main`. Antworten und Berichte auf Deutsc
    - Zeigt das Bild genau das, wovon der Satz spricht (Ort, Dinge, Handlung)? Kein Verlegenheitsbild, kein falscher Gegenstand.
    - Beschreibt der Satz eine Handlung, tut eine Figur genau das (nicht bloß ein Gegenstand im Bild).
    - Größenverhältnisse stimmen (Tiere, Autos, Dinge neben Menschen). Nichts schwebt, nichts steckt ineinander, nichts ist abgeschnitten.
+   - Körperhaltung stimmt: Sitzen, Liegen, Fallen, Schweben sehen anatomisch richtig aus (Beine unten, nichts verdreht). Dafür jede
+     Einstellung mit Figur mindestens einmal groß ansehen (Einzelbild in halber Auflösung) – in der kleinen Übersicht fällt das nicht auf.
    - Stimmung passt: Panik/Rennen nur bei Panik im Satz; Gefühle und Zeichen über den Köpfen passen.
    - Menschen nur dort, wo sie hingehören (keine Passanten im Keller, auf dem Feld, im Wald). Kein leeres Bild, in dem nichts passiert.
    - Einblendungen lesbar, nicht abgeschnitten, überdecken sich nicht und nicht die Untertitel; Zahlen stimmen mit dem Sprechertext überein.
@@ -43,6 +45,12 @@ Repo: `QuatratKopf/autoshorts`, Branch `main`. Antworten und Berichte auf Deutsc
 7. Nach 3 Neubauten immer noch grobe Fehler (falscher Inhalt, Unsinn im Bild): NICHT hochladen, letzte Fassung verwerfen und berichten,
    was nicht zu beheben war. Nur noch Kleinigkeiten offen: die beste Fassung hochladen und die Kleinigkeiten im Bericht nennen.
 8. Kurzer Bericht am Ende: Titel, Link (`https://www.youtube.com/watch?v=<yt_id>`), was gefunden und behoben wurde, was offen ist.
+
+## Auftrag des Inhabers: alles selbst beheben
+Alles, was bei der Prüfung auffällt – auch Kleinigkeiten und Dinge, die nicht in der Prüfliste stehen –, wird ohne Rückfrage sofort in der
+Engine behoben (Ursache, nicht nur dieses Video), mit Selbsttest geprüft, committet und gepusht. Das gilt auch, wenn das Video schon
+hochgeladen ist oder die drei Neubauten verbraucht sind: Dann wird der Fehler für die nächsten Videos behoben und im Bericht genannt.
+Meldet der Inhaber selbst einen Fehler, gilt dasselbe – beheben, ansehen, pushen, berichten.
 
 ## Grenzen
 - Nichts an Zugangsdaten, `tokens/`, Upload-Code (`engine/uploaders.py`), Workflow-Zeitplan oder App-Einstellungen ändern.
