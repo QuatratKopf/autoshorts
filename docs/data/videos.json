@@ -1301,5 +1301,45 @@
   "status": "error",
   "created": 1794340465.3340945,
   "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-flash-lite-latest: HTTP 503 | pollinations: Pollinations-Text HTTP 400: {\"success\":false,\"error\":{\"message\":\"The model exhausted its output token limit before producing an answer. Increase the token limit or reduce reasoning effort.\",\"code\":\"output_token_limit_exceeded\",\"timestamp\":\"2026-11-10T19:55:32.700Z\",\"details\":{\"name\":\"UpstreamError\",\"upstreamHost\":\"portkey.myce"
+ },
+ {
+  "id": 43,
+  "category": "fakten",
+  "topic": "Energydrink oder Kaffee: Was ist wirklich besser? Das Duell in fünf Runden",
+  "status": "rendered",
+  "created": 1794384876.582438,
+  "title": "Kaffee oder Energydrink: Was ist wirklich besser? Das Duell",
+  "description": "Kaffee oder Energydrink: Welches Getränk gewinnt den ultimativen Wachmacher-Test? ☕⚡\nWir vergleichen Koffein, Zucker und Wirkung in fünf schnellen Runden.\nWelches Team bist du: Kaffee oder Energy? Schreib es in die Kommentare!",
+  "hashtags": [
+   "#shorts",
+   "#kaffee",
+   "#energydrink",
+   "#fakten",
+   "#wissen",
+   "#duell",
+   "#gesundheit",
+   "#fyp"
+  ],
+  "tags": [
+   "kaffee oder energydrink",
+   "koffein vergleich",
+   "welcher wachmacher ist besser",
+   "kaffee wirkung",
+   "energydrink zucker",
+   "duell kaffee vs energy",
+   "gesunde wachmacher"
+  ],
+  "thumb_text": "WER GEWINNT?",
+  "missing": null,
+  "cover_ms": 80408,
+  "duration": 80.3,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
