@@ -469,6 +469,8 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
             facing = 1
         else:
             facing = 1 if (x < 600 or len(actors) == 1) else -1
+        if flo and not (moving and not arrived):          # wer schwebt oder abstürzt, kippt zur Bildmitte – der Kopf landet nie außerhalb des Bildes
+            facing = 1 if x < 600 else -1
         gy = places.GROUND + (18 if a["speaks"] else 0)
         a_lift, a_hit = _float_lift(flo, t, a["seed"], 190.0, aloft) if flo else (0.0, None)
         landed = a_hit if a_hit is not None and (landed is None or a_hit > landed) else landed
@@ -1205,7 +1207,7 @@ HINTS = [
 ]
 GENERIC = ("street", "park", "plain", "livingroom")
 # Schwerelosigkeit: Sätze, in denen etwas schwebt / abhebt / durch die Luft treibt – und Sätze, in denen alles wieder herunterkracht
-FLOAT_RE = (r"schwerelos|(ohne|keine|null) (schwerkraft|gravitation|erdanziehung)|(schwerkraft|gravitation|erdanziehung\w*)\w* .{0,60}(\bweg\b|null|verschw|\baus\b|\bab\b|fehlt|abgeschaltet|nicht mehr|pause)|"
+FLOAT_RE = (r"schwerelos|(ohne|keine|null) (schwerkraft|gravitation|erdanziehung)|(schwerkraft|gravitation|erdanziehung\w*)\w* .{0,60}(\bweg\b|null|verschw|\baus\b|\bab\b|fehlt|abgeschaltet|nicht mehr|pause|verlier|verlor)|verlier\w* .{0,40}(schwerkraft|gravitation|erdanziehung)|"
             r"schweb(?!\w* in (lebens|großer )?gefahr)|hebs?t [^,.;:!?]{0,60}\bab\b|heben [^,.;:!?]{0,60}\bab\b|durch die luft|in der luft (treib|häng|schweb|steh)|"
             r"treib\w* .{0,24}(durch den raum|im raum|zur decke|nach oben)|flieg\w* (\w+ )?(los|davon|nach oben)\b|steig\w* .{0,30}(in den himmel|in die luft|nach oben)|\bdrifte|verlier\w* (\w+ )?den halt|verlier\w* (\w+ )?die bodenhaftung")
 DROP_RE = (r"kracht|krachen|aufprall|prall\w* .{0,70}(boden|erde|asphalt|straße|\bauf\b)|knall\w* .{0,70}(boden|erde|asphalt|straße|pflaster)|"
