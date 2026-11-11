@@ -85,5 +85,9 @@
  "ball": {
   "n": 1,
   "last": "Was passiert, wenn die Schwerkraft für fünf Sekunden verschwindet?"
+ },
+ "aktienchart": {
+  "n": 1,
+  "last": "Wie Nvidia zum wertvollsten Tech-Giganten wurde"
  }
 }

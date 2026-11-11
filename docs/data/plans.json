@@ -675,5 +675,533 @@
   ],
   "title": "Wie eine Gaming Bude die Welt veränderte",
   "created": 1794410496.7208724
+ },
+ "2026-11-11 21:00": {
+  "category": "fakten",
+  "topic": "Wie Nvidia von einer Gaming-Bude zum wertvollsten Tech-Giganten wurde",
+  "trend": {
+   "title": "Nvidia",
+   "source": "Wikipedia",
+   "news": [],
+   "summary": "American multinational technology company – Nvidia Corporation is an American multinational technology company headquartered in Santa Clara, California. The company develops graphics processing units (GPUs), systems on chips (SoCs), and application programming interfaces (APIs) for data science, high-performance computing,"
+  },
+  "script": {
+   "title": "Wie Nvidia zum wertvollsten Tech-Giganten wurde",
+   "description": "Nvidia war mal nur für Gamer da\nWie eine kleine Grafikkarten-Bude plötzlich die ganze Welt erobert hat\nWärst du damals eingestiegen",
+   "hashtags": [
+    "#shorts",
+    "#nvidia",
+    "#tech",
+    "#gaming",
+    "#aktien",
+    "#wissen",
+    "#viral",
+    "#foryou"
+   ],
+   "tags": [
+    "nvidia",
+    "grafikkarte",
+    "tech gigant",
+    "geschichte",
+    "aktien",
+    "ki",
+    "gpu",
+    "silicon valley",
+    "erfolg"
+   ],
+   "thumbnail": {
+    "place": "office",
+    "time": "day",
+    "actor": "du",
+    "action": "shocked",
+    "emotion": "shocked",
+    "props": [
+     "computer"
+    ],
+    "weather": "",
+    "image": "Close-up of a young man looking shocked at a glowing computer chip in a dark room, neon green light, exaggerated expression, bold simple composition",
+    "text": "VON NULL ZU BILLIONEN"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "leo": {
+     "shirt": "grün",
+     "hat": "",
+     "hair": "long",
+     "glasses": false,
+     "skin": "hell"
+    }
+   },
+   "scenes": [
+    {
+     "text": "Stell dir vor, du gründest eine Firma für Grafikchips, weil du einfach nur verdammt gut zocken willst.",
+     "image": "Leo sitting in a dark room playing video games on a glowing computer",
+     "who": [
+      "leo"
+     ],
+     "place": "bedroom",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Grafikchips",
+      "zocken"
+     ],
+     "overlay": null,
+     "see": "Du sitzt an einem Computer in deinem Zimmer und spielst ein Spiel.",
+     "time": "day",
+     "props": [
+      "computer"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "sit",
+       "emotion": "happy",
+       "emote": "idea",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Genau das war der Plan, aber heute ist diese Bude der wertvollste Tech-Konzern der Welt.",
+     "image": "Graphic showing a huge market value growth over time",
+     "who": [],
+     "place": "street",
+     "camera": "zoom_out",
+     "sfx": "ding",
+     "highlight": [
+      "wertvollste Tech-Konzern"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "NUMMER EINS"
+     },
+     "see": "Eine große Firmenzentrale in einer modernen Stadt bei Tag.",
+     "time": "day",
+     "props": [
+      "house"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "calm",
+     "crowd": "walk",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Alles fing im Jahr neunzehnhundertdreiundneunzig in einem kleinen Restaurant in Kalifornien an.",
+     "image": "Leo sitting at a diner table with a notebook and coffee",
+     "who": [
+      "leo"
+     ],
+     "place": "restaurant",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "neunzehnhundertdreiundneunzig",
+      "Kalifornien"
+     ],
+     "overlay": null,
+     "see": "Du stehst in einem kleinen gemütlichen Restaurant in Kalifornien.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Drei Gründer wollten Computerspiele realistischer machen und bauten Grafikprozessoren.",
+     "image": "Close-up of a computer chip with glowing green lines",
+     "who": [],
+     "place": "office",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "Grafikprozessoren"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "NEUE CHIPS"
+     },
+     "see": "Drei Gründer sitzen im Büro und betrachten Mikrochips am Computer.",
+     "time": "day",
+     "props": [
+      "computer"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "idea",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "A messy startup office with glowing computers and cardboard boxes on the floor, green and dark blue tones",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Das Problem war nur, dass anfangs kaum jemand diese speziellen Chips haben wollte.",
+     "image": "Leo looking worried at an empty shelf in a warehouse",
+     "who": [
+      "leo"
+     ],
+     "place": "office",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "kaum jemand"
+     ],
+     "overlay": null,
+     "see": "Du schaust traurig auf leere Regale voller unverkaufter Grafikchips.",
+     "time": "day",
+     "props": [
+      "shelf"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "sad",
+       "emotion": "sad",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "sad",
+     "who_desc": "",
+     "place_desc": "A messy startup office with glowing computers and cardboard boxes on the floor, green and dark blue tones",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Fast wären sie pleitegegangen, aber sie haben stur weiterentwickelt.",
+     "image": "Leo working late at night with stacks of paper and a glowing screen",
+     "who": [
+      "leo"
+     ],
+     "place": "office",
+     "camera": "zoom_in",
+     "sfx": "tick",
+     "highlight": [
+      "fast pleite"
+     ],
+     "overlay": null,
+     "see": "Du arbeitest motiviert bis spät in die Nacht am Computer.",
+     "time": "night",
+     "props": [
+      "computer"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "worried",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "A messy startup office with glowing computers and cardboard boxes on the floor, green and dark blue tones",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Der echte Durchbruch kam durch eine völlig unerwartete Richtung.",
+     "image": "A massive server room with rows of flashing blue and green lights",
+     "who": [],
+     "place": "lab",
+     "camera": "pan_right",
+     "sfx": "ding",
+     "highlight": [
+      "echte Durchbruch"
+     ],
+     "overlay": null,
+     "see": "Eine Glühbirne leuchtet auf als plötzlicher Geistesblitz im Labor.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "jump",
+       "emotion": "happy",
+       "emote": "idea",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Forscher merkten, dass diese Grafikchips perfekt für künstliche Intelligenz geeignet sind.",
+     "image": "A large digital brain glowing on a computer screen in a lab",
+     "who": [],
+     "place": "lab",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "künstliche Intelligenz"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "PERFEKT FÜR KI"
+     },
+     "see": "Forscher untersuchen neuronale Netze auf einem Bildschirm.",
+     "time": "day",
+     "props": [
+      "computer"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Weil plötzlich alle Welt KI-Modelle trainieren wollte, brauchte jeder genau diese Rechenleistung.",
+     "image": "Leo surrounded by dozens of boxes and shipping containers",
+     "who": [
+      "leo"
+     ],
+     "place": "powerplant",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "Rechenleistung"
+     ],
+     "overlay": null,
+     "see": "Serverfarmen und Computer rattern in einem riesigen Rechenzentrum.",
+     "time": "day",
+     "props": [
+      "computer"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Innerhalb von wenigen Jahren explodierte der Aktienkurs völlig.",
+     "image": "A stock market chart shooting straight up into the air",
+     "who": [],
+     "place": "office",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Aktienkurs explodierte"
+     ],
+     "overlay": {
+      "type": "counter",
+      "label": "MARKTWERT",
+      "value": 3.0,
+      "unit": "BILLIONEN DOLLAR"
+     },
+     "see": "Eine Börsenkurve schießt rasant nach oben.",
+     "time": "day",
+     "props": [
+      "money"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "A messy startup office with glowing computers and cardboard boxes on the floor, green and dark blue tones",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Mittlerweile ist das Unternehmen mehr wert als manche großen europäischen Länder zusammen.",
+     "image": "A glowing earth globe spinning with a green digital overlay",
+     "who": [],
+     "place": "worldmap",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "mehr wert"
+     ],
+     "overlay": null,
+     "see": "Die Weltkugel dreht sich und zeigt das globale Imperium.",
+     "time": "day",
+     "props": [
+      "earth"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Aus einer kleinen Gaming-Bude wurde das Fundament für die Zukunft des gesamten Internets.",
+     "image": "Leo smiling proudly in front of a wall of glowing computer screens",
+     "who": [
+      "leo"
+     ],
+     "place": "space",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "Zukunft des Internets"
+     ],
+     "overlay": null,
+     "see": "Leuchtende Datenströme fließen durch das weltweite Internet.",
+     "time": "night",
+     "props": [
+      "satellite"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Wer hätte gedacht, dass Ballerspiele einmal die Welt regieren.",
+     "image": "Leo holding a game controller and laughing",
+     "who": [
+      "leo"
+     ],
+     "place": "bedroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Welt regieren"
+     ],
+     "overlay": null,
+     "see": "Du spielst wieder an deinem Computer und lächelst stolz.",
+     "time": "day",
+     "props": [
+      "computer"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "happy",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Hättest du damals in die Firma investiert, folg für mehr.",
+     "image": "Leo pointing at the camera with a grin",
+     "who": [
+      "leo"
+     ],
+     "place": "office",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "investiert"
+     ],
+     "overlay": {
+      "type": "choice",
+      "a": "Sofort gekauft",
+      "b": "Nie geglaubt"
+     },
+     "see": "Du streckst den Daumen nach oben und forderst zum Investieren auf.",
+     "time": "day",
+     "props": [
+      "money"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "wave",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "happy",
+     "who_desc": "",
+     "place_desc": "A messy startup office with glowing computers and cardboard boxes on the floor, green and dark blue tones",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "needs": [
+   "aktienchart"
+  ],
+  "title": "Wie Nvidia zum wertvollsten Tech-Giganten wurde",
+  "created": 1794419510.8974802
  }
 }
