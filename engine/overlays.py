@@ -69,6 +69,22 @@ def card(text, color=RED):
     return _shadow(im.rotate(-3, expand=True, resample=Image.BICUBIC))
 
 
+def tag(text):
+    """Kleines Beschriftungs-Schild (Ort, Zeit, Ding): farbiges Etikett, leicht schräg – wie in Erklär-Shorts."""
+    text = text.upper()
+    col = (RED, (238, 150, 30), GREEN, BLUE, (150, 80, 210))[sum(map(ord, text)) % 5]
+    f = font(58)
+    d = ImageDraw.Draw(Image.new("L", (1, 1)))
+    w = int(d.textlength(text, font=f)) + 64
+    h = 92
+    im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    dr = ImageDraw.Draw(im)
+    dr.rounded_rectangle((0, 0, w - 1, h - 1), 22, fill=col, outline=INK, width=7)
+    dr.rounded_rectangle((10, 8, w - 11, 22), 7, fill=tuple(min(255, c + 50) for c in col))         # Glanzkante
+    dr.text((32, 12), text, font=f, fill=WHITE)
+    return _shadow(im.rotate(4, expand=True, resample=Image.BICUBIC), 8, 10, 120)
+
+
 def note(title, text):
     ft, fb = font(44, "Bold"), font(64)
     lines = _wrap(text.upper(), fb, 600)[:4]
@@ -261,6 +277,8 @@ def frames_for(ov: dict):
             import re
             txt = re.sub(r"(?i)\bkm\s+h\b", "KM/H", str(ov["text"]))        # „300 KM H“ → „300 KM/H“
             return _pop(card(_short(txt, 30))), 420
+        if t == "tag" and ov.get("text"):
+            return _pop(tag(_short(str(ov["text"]), 22))), 300
         if t == "note" and ov.get("text"):
             return _pop(note(_short(ov.get("title") or "", 20), _short(ov["text"], 80))), 560
         if t == "phone" and ov.get("items"):

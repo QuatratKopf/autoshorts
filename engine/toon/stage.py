@@ -5,7 +5,7 @@ import math
 import subprocess
 from pathlib import Path
 
-from PIL import Image, ImageChops, ImageDraw
+from PIL import Image, ImageChops, ImageDraw, ImageFilter
 
 from . import extras, graphics, places, rig
 from .. import hyper
@@ -382,13 +382,14 @@ def _light_kind(place, night, mood, xs):
     Stimmung und nachts in Innenräumen – sonst "floor" (der Boden unten läuft weich ins Dunkle, der Blick bleibt bei den Figuren)."""
     if xs and (str(mood or "") in ("scary", "tense", "sad") or (night and place not in places.OUTDOOR)):
         return "spot"
+    if night and place in places.OUTDOOR:
+        return "night"
     return "floor"
 
 
 def _light(frame, kind, xs):
     """Legt Licht und Schatten über das fertige Bild (Maske in kleiner Auflösung, weich, zwischengespeichert)."""
-    from PIL import ImageFilter
-    key = (kind, tuple(sorted(int(x) // 30 for x in xs)) if kind == "spot" else ())
+    key = (kind, tuple(sorted(int(x) // 30 for x in xs)) if kind in ("spot", "night") else ())
     if key not in _lights:
         if len(_lights) > 60:
             _lights.clear()
@@ -399,6 +400,22 @@ def _light(frame, kind, xs):
         for y in range(g, H // f):                                   # Boden läuft zum unteren Rand ins Dunkle
             k = (y - g) / max(1, H // f - g)
             d.line((0, y, W // f, y), fill=int((255 if kind == "floor" else 104) * (1 - 0.34 * k ** 1.3)))
+        if kind == "night":                                          # Nacht draußen: alles dunkelblau, die Figuren im warmen Lichtfleck
+            m = Image.new("L", (W // f, H // f), 0)
+            d = ImageDraw.Draw(m)
+            for y in range(H // f):
+                d.line((0, y, W // f, y), fill=int(150 - 40 * min(1.0, max(0.0, (y - 100) / (H // f - 100)))))
+            for x in xs:
+                xx = x / f
+                d.ellipse((xx - 52, g - 120, xx + 52, g + 10), fill=255)
+                d.ellipse((xx - 70, g - 8, xx + 70, g + 18), fill=225)
+            m = m.filter(ImageFilter.GaussianBlur(10))
+            tint = Image.new("RGB", m.size, (150, 165, 235))                                   # Mondlicht-Blau, im Lichtfleck warm
+            warm = Image.new("RGB", m.size, (255, 236, 200))
+            mm = Image.composite(warm, tint, m.point(lambda v: max(0, (v - 150) * 2.4)))
+            lum = Image.merge("RGB", [m] * 3)
+            _lights[key] = ImageChops.multiply(lum, mm).resize((W, H), Image.BILINEAR)
+            return _night_windows(frame.convert("RGB"), _lights[key])
         if kind == "spot":
             for x in xs:
                 xx = x / f
@@ -409,7 +426,19 @@ def _light(frame, kind, xs):
         else:
             m = m.filter(ImageFilter.GaussianBlur(3))
         _lights[key] = Image.merge("RGB", [m.resize((W, H), Image.BILINEAR)] * 3)
+    if kind == "night":
+        return _night_windows(frame.convert("RGB"), _lights[key])
     return ImageChops.multiply(frame.convert("RGB"), _lights[key])
+
+
+def _night_windows(frame, light):
+    """Nacht: Bild abdunkeln, aber erleuchtete Fenster (warmes Gelb) bleiben hell und strahlen weich in die Umgebung."""
+    r, g, b = frame.split()
+    win = ImageChops.multiply(ImageChops.multiply(r.point(lambda v: 255 if v > 205 else 0), g.point(lambda v: 255 if v > 165 else 0)),
+                              b.point(lambda v: 255 if v < 150 else 0))
+    out = Image.composite(frame, ImageChops.multiply(frame, light), win)
+    small = win.resize((W // 6, H // 6), Image.BILINEAR).filter(ImageFilter.GaussianBlur(5)).resize((W, H), Image.BILINEAR)
+    return Image.composite(Image.new("RGB", (W, H), (255, 206, 120)), out, small.point(lambda v: int(v * 0.55)))
 
 
 FLOAT_TOPS = (300.0, 170.0, 390.0)                 # Schwebehöhen (px über der Fußlinie) für mehrere Dinge im Zimmer …
@@ -547,6 +576,16 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                        grow=max(0.02, extras._pop(t, 0.06 + 0.12 * pi, 0.32)) if opt.get("pop_in", True) else 1.0)
     if opt.get("crowd"):
         _crowd(frame, opt["crowd"], t, night, 1090, 9999, **ckw)
+    close = shot == "close" and bool(actors)
+    if close:              # Großaufnahme: Kulisse vergrößert und leicht unscharf (Tiefenschärfe), die Figur scharf und groß davor
+        lead = next((a for a in actors if a["speaks"]), actors[0])
+        hw = CLOSE_BG / 2
+        c_x = max(hw, min(W - hw, lead["x1"]))
+        top = places.GROUND - 780
+        frame = frame.crop((int(c_x - hw), top, int(c_x + hw), top + int(CLOSE_BG * H / W))).resize((W, H), Image.BILINEAR)
+        frame = frame.filter(ImageFilter.GaussianBlur(3))
+        frame = _light(frame, _light_kind(place, night, opt.get("mood"), [540]), [540])
+        scale = scale * CLOSE_ZOOM
     over = frame
     od = ImageDraw.Draw(frame, "RGBA")
     focus = 540.0
@@ -557,6 +596,8 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
         move_t = min(dur * 0.7, abs(a["x1"] - a["x0"]) / speed) if moving else 0
         arrived = moving and t >= move_t
         x = a["x1"] if arrived else (a["x0"] + (a["x1"] - a["x0"]) * _ease(t / move_t) if moving else a["x0"])
+        if close:                                      # die Hauptfigur steht mittig, andere im selben Abstand daneben
+            x = 540 + (x - lead["x1"]) * W / CLOSE_BG
         xs_now.append(x)
         mouth = _mouth(t0 + t, words) if a["speaks"] else 0.0
         if moving and not arrived:
@@ -569,7 +610,7 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
             facing = 1 if (x < 600 or len(actors) == 1) else -1
         if flo and not (moving and not arrived):          # wer schwebt oder abstürzt, kippt zur Bildmitte – der Kopf landet nie außerhalb des Bildes
             facing = 1 if x < 600 else -1
-        gy = places.GROUND + (18 if a["speaks"] else 0)
+        gy = ((H - 70 if a["kind"] else CLOSE_FOOT) if close else places.GROUND) + (18 if a["speaks"] and not close else 0)   # Tiere sind niedrig: ganz im Bild
         a_lift, a_hit = _float_lift(flo, t, a["seed"], 190.0, aloft) if flo else (0.0, None)
         landed = a_hit if a_hit is not None and (landed is None or a_hit > landed) else landed
         head_y = gy - 505 * scale
@@ -611,8 +652,8 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                 d0.rounded_rectangle((sx - sw, gy - sh, sx + sw, gy + 4), 14 * scale, fill=(150, 104, 70) if not night else (86, 70, 80), outline=INK, width=6)
                 d0.rounded_rectangle((sx - sw - 8, gy - sh - 16 * scale, sx + sw + 8, gy - sh + 8 * scale), 12 * scale,
                                      fill=(214, 90, 80) if not night else (120, 70, 86), outline=INK, width=6)
-            im, fx, fy = rig.draw(a["look"], pose, facing, scale)
-            if pose.lying and in_bed:                          # im Schlafzimmer liegt die Figur im Bett
+            im, fx, fy = rig.draw(a["look"], pose, facing, scale, ss=1 if close else None)
+            if pose.lying and in_bed and not close:                          # im Schlafzimmer liegt die Figur im Bett
                 x, gy = 300, places.GROUND - 150
             elif pose.lying:                                   # sonst liegt sie auf dem Boden auf, nicht darüber
                 fy -= 62 * scale
@@ -631,9 +672,9 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                 head_y = gy - 300 * scale
             _zzz(od, pose, x, head_y + 75 * scale, t)
         if a.get("say"):
-            extras.draw_bubble(over, a["say"], x, head_y, t, scale)
+            extras.draw_bubble(over, a["say"], x, head_y, t, min(scale, 1.4))
         elif a["emote"]:
-            extras.draw_emote(over, a["emote"], x, head_y, t, scale)
+            extras.draw_emote(over, a["emote"], x, head_y, t, min(scale, 1.6))
         if a["speaks"] or len(actors) == 1:
             focus = x
     for kind, x in props:
@@ -643,15 +684,18 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
         extras.draw_weather(over, weather, t)
     if opt.get("mood"):
         extras.draw_mood(over, opt["mood"], t)
-    frame = _light(frame, _light_kind(place, night, opt.get("mood"), xs_now), xs_now)
+    if not close:
+        frame = _light(frame, _light_kind(place, night, opt.get("mood"), xs_now), xs_now)
     if landed is not None and landed < 0.5:      # Aufschlag: das Bild wackelt kurz
         k = 1 - landed / 0.5
         dx, dy = int(math.sin(t * 61) * 22 * k), int(math.cos(t * 53) * 26 * k)
         frame = frame.transform(frame.size, Image.AFFINE, (1, 0, dx, 0, 1, dy), resample=Image.NEAREST)
-    if shot == "close":       # Nahaufnahme: Ausschnitt um die Hauptfigur, folgt ihr weich
-        cx = max(330, min(W - 330, focus))
-        frame = frame.crop((int(cx - 330), places.GROUND - 780, int(cx + 330), places.GROUND + 393)).resize((W, H), Image.BICUBIC)
     return frame
+
+
+CLOSE_BG = 660         # Großaufnahme: Breite des Kulissen-Ausschnitts (Zoom 1,6) …
+CLOSE_ZOOM = 2.6       # … die Figur selbst wird 2,6-mal so groß gezeichnet (scharf, nicht hochgerechnet) …
+CLOSE_FOOT = H + 230   # … und steht unterhalb des Bildrands: Kopf und Oberkörper füllen das Bild
 
 
 _ONES = {"null": 0, "ein": 1, "eine": 1, "einen": 1, "einem": 1, "einer": 1, "eins": 1, "zwei": 2, "drei": 3, "vier": 4, "fünf": 5, "sechs": 6,
@@ -1107,6 +1151,9 @@ def direct(scenes, times, topic="", style="", look=""):
                     sc["shot"] = "close"
                 elif same % 3 == 1 and str(acts[0].get("action") or "") in ("", "idle"):
                     acts[0]["action"] = "look_around"
+        if lone and acts and not acts[0].get("to") and not has_ov and not sc.get("shot") and not things and i < len(scenes) - 1 \
+                and str(acts[0].get("emotion") or "").lower() in STRONG_FEELINGS and not (i and str(scenes[i - 1].get("shot") or "") == "close"):
+            sc["shot"] = "close"                      # starkes Gefühl: Großaufnahme des Gesichts (wie in den Vorbild-Shorts)
         # --- Großaufnahme nur von Dingen, die etwas erzählen: kein leerer Tisch, nichts unter hohen Einblendungen
         if sc.get("shot") == "insert":
             ov_t0 = str((sc.get("overlay") or {}).get("type") or "")
@@ -1209,7 +1256,7 @@ def direct(scenes, times, topic="", style="", look=""):
             elif not spooky:
                 sc["crowd"] = "walk"
         if sc.get("shot") == "graphic":
-            sc["overlay"] = None if str((sc.get("overlay") or {}).get("type") or "") in ("counter", "bar", "card") else sc.get("overlay")
+            sc["overlay"] = None if str((sc.get("overlay") or {}).get("type") or "") in ("counter", "bar", "card", "tag") else sc.get("overlay")
         elif not sc.get("overlay") and counters < 3 and not last:
             fig = find_figure(sc.get("text"))
             if fig:
@@ -1363,7 +1410,37 @@ def direct(scenes, times, topic="", style="", look=""):
             if sc.get("shot") == "event":
                 sc["shot"] = ""
             filled += 1
+    for i in range(1, len(scenes)):                  # nie zweimal dieselbe Großaufnahme hintereinander
+        if isinstance(scenes[i], dict) and isinstance(scenes[i - 1], dict) and scenes[i].get("shot") == "close" == scenes[i - 1].get("shot"):
+            scenes[i]["shot"] = ""
+    _auto_tags(scenes)
     return scenes
+
+
+_MONTHS = "januar|februar|märz|april|mai|juni|juli|august|september|oktober|november|dezember"
+TAG_RE = (r"(\b\d{1,2}\.\s?(?:" + _MONTHS + r")(?:\s(?:1[5-9]|20)\d{2})?\b"            # „24. Dezember 1914“
+          r"|\b(?:" + _MONTHS + r")\s(?:1[5-9]|20)\d{2}\b"                                # „August 1914“
+          r"|\b(?:heiligabend|silvester|neujahr|mitternacht|weihnachten|ostern)\b"
+          r"|\b(?:1[5-9]|20)\d{2}\b(?=\s*(?:$|[.,!?;:]|\s[a-zäöüß])))")                   # Jahreszahl, nicht „1500 Menschen“
+
+
+def _auto_tags(scenes):
+    """Beschriftungs-Schild wie in den Vorbild-Shorts: nennt der Satz ein Datum, eine Jahreszahl oder einen Anlass, steht es als kleines
+    Etikett oben im Bild – nur ohne andere Einblendung, nie in zwei Szenen hintereinander und nicht in Grafik-Szenen."""
+    import re as _re
+    prev = False
+    for sc in scenes:
+        if not isinstance(sc, dict):
+            prev = False
+            continue
+        has = isinstance(sc.get("overlay"), dict) and sc["overlay"].get("type")
+        if not has and not prev and sc.get("shot") not in ("graphic", "insert") and isinstance(sc.get("text"), str):
+            m = _re.search(TAG_RE, sc["text"], _re.I)
+            if m:
+                sc["overlay"] = {"type": "tag", "text": m.group(1).upper()}
+                prev = True
+                continue
+        prev = bool(has and str(sc["overlay"].get("type")) == "tag")
 
 
 def backdrop(scene):
@@ -1505,6 +1582,7 @@ def crowd_ok(scene):
 
 
 PUBLIC_INDOOR = ("supermarket", "supermarket_empty", "station", "hospital", "office", "classroom", "restaurant")
+STRONG_FEELINGS = ("shocked", "scared", "sad", "angry", "worried")
 MOOD_EMOTION = {"panic": "scared", "tense": "worried", "scary": "scared", "sad": "sad", "happy": "happy"}
 EMOTION_OK = {"panic": ("scared", "shocked", "worried"), "tense": ("worried", "scared", "shocked", "angry", ""),
               "scary": ("scared", "worried", "shocked"), "sad": ("sad", "worried", ""), "happy": ("happy", ""),

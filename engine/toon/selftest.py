@@ -110,6 +110,7 @@ def main():
            {"type": "counter", "label": "ZUCKER IM SEE", "value": 4.4, "unit": "MRD. TONNEN", "sub": "= 23 Jahre"},
            {"type": "counter", "label": "JAHRE", "value": "48", "unit": ""}, {"type": "counter", "value": "abc"},
            {"type": "counter", "label": "x" * 80, "value": 1234567.5, "unit": "y" * 40}, {"type": "bar", "label": None, "value": "x"},
+           {"type": "tag", "text": "AUGUST 1914"}, {"type": "tag", "text": "x" * 60}, {"type": "tag"},
            {"type": "unbekannt"}, {"type": "card"}, {"type": "phone", "items": []}, {}]
     for ov in ovs:
         check(f"Einblendung {ov}", lambda: overlays.frames_for(ov))
@@ -192,6 +193,17 @@ def main():
                 im = stage._camera(fr, t, 3.0, cam)
                 assert im.size == (1080, 1920)
     check("Kamera Halbnahe", _cam)
+    for pl in ("street", "park", "village", "livingroom"):           # Nachtlicht, Großaufnahme bei Nacht, Tier in Großaufnahme
+        for kind in ("", "dog", "ghost"):
+            check(f"Nacht {pl} {kind}", lambda: frame({"place": pl, "time": "night", "actors": [{"id": "x", "kind": kind, "speaks": True}], "crowd": "walk"}))
+            check(f"Großaufnahme Nacht {pl} {kind}", lambda: frame({"place": pl, "time": "night", "shot": "close", "mood": "scary",
+                                                                     "actors": [{"id": "x", "kind": kind, "emotion": "scared", "emote": "!", "say": "HILFE"}]}))
+    def _tags():
+        scs = stage.direct([{"text": "Am 24. Dezember 1914 passiert es.", "place": "street"}, {"text": "Im August 1914 auch.", "place": "street"},
+                            {"text": "1500 Menschen.", "place": "park"}, {"text": "Das war 2024.", "place": "park"}], [(i * 3, i * 3 + 3) for i in range(4)], "Test")
+        assert scs[0]["overlay"] == {"type": "tag", "text": "24. DEZEMBER 1914"}, scs[0].get("overlay")
+        assert (scs[1].get("overlay") or {}).get("type") != "tag", "zwei Schilder hintereinander"
+    check("Beschriftungs-Schilder", _tags)
     check("Neon-Look", lambda: graphics.neon(frame({"place": "street", "crowd": "walk"}), 1.0))
     check("Neon-Kulisse", lambda: graphics.tint(places.background("street", True)))
     # Regie mit zufälligen und kaputten Drehbüchern
