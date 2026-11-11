@@ -1580,5 +1580,13 @@
   "look": "cartoon",
   "mp4": true,
   "error": "Bei der Prüfung verworfen: Verstümmeltes Wort im Sprechertext und in der Beschreibung (fremde Schriftzeichen), leeres Straßenbild, Bus verdeckt Einblendung, erfundene Forscher-Aussage"
+ },
+ {
+  "id": 50,
+  "category": "whatif",
+  "topic": "Was wäre, wenn die Schwerkraft der Erde für nur 5 Sekunden exakt auf Null sinken würde?",
+  "status": "error",
+  "created": 1794413015.1504803,
+  "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-flash-lite-latest: ReadTimeout | pollinations: Expecting ',' delimiter: line 164 column 6 (char 4815)"
  }
 ]
