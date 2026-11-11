@@ -155,6 +155,15 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
     {"type": "map", "text": "72 STUNDEN ALLEIN", "value": "sweden,germany"}                          Europakarte; value = betroffene Länder aus:
         iberia, france, uk, ireland, benelux, germany, alps, italy, poland, czech, balkans, denmark, norway, sweden, finland, baltics, east
     {"type": "city", "kicker": "BERLIN · JANUAR", "text": "45.000 OHNE STROM", "dark": true}         Stadt von oben, Fenster gehen aus (dark)
+    {"type": "share", "value": "1 VON 7", "label": "TRÄUMT DAVON"}                                   Reihe von Menschen, der Anteil leuchtet auf (höchstens „von 12“)
+    {"type": "compare", "left": "DOSE", "right": "KAFFEE", "value": "80 mg", "sub": "180 mg"}        zwei Balken wachsen um die Wette (value links, sub rechts)
+    {"type": "podium", "kicker": "KÖRPERTEILE", "text": "FUSS", "left": "HAND", "right": "BEIN"}     Siegertreppchen: text = Platz 1, left = Platz 2, right = Platz 3
+    {"type": "versus", "left": "ENERGY", "right": "KAFFEE", "kicker": "5 RUNDEN"}                    Duell-Bild mit großem VS
+    {"type": "round", "kicker": "RUNDE 1", "text": "KOFFEIN"}                                        Banner kündigt die nächste Runde an
+    {"type": "score", "left": "ENERGY", "right": "KAFFEE", "value": "0:2", "kicker": "RUNDE 3/5"}    Punktestand nach einer Runde
+- DUELL-FORMAT: Vergleicht das Thema zwei Dinge („X oder Y“, „X gegen Y“, „Was ist besser/gesünder/schneller?“), bau das Video als Duell:
+  zuerst "versus", dann 3 bis 5 Runden – jede beginnt mit "round", zeigt den Vergleich (gern "compare" mit echten Zahlen) und endet mit
+  "score". Am Schluss steht der Sieger fest. Bei „Top 3“ oder „Platz 1“ passt "podium".
 - ABWECHSLUNG WIE IN VIRALEN ERKLÄRVIDEOS: Höchstens jede zweite Szene zeigt eine redende Figur. Die anderen Szenen zeigen
   das Geschehen ("shot": "event", actors []), einen Gegenstand groß ("shot": "insert" mit einem Ding aus "props") oder eine
   Zahl als Zähler (overlay "counter"). Das Ding, um das sich das Video dreht, ist mindestens zweimal groß im Bild.

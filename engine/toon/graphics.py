@@ -10,6 +10,12 @@ Eine Grafik-Szene hat "shot": "graphic" und "graphic": {"type": ..., ...}:
   badge    {"kicker": "MIND.", "text": "72 STUNDEN"}                                          Plakette im Sternenkranz
   map      {"text": "72 STUNDEN ALLEIN", "value": "sweden,germany"}                           Europakarte, Länder leuchten auf (value = betroffene)
   city     {"kicker": "BERLIN · JANUAR", "text": "45.000 OHNE STROM", "dark": true}           Stadt von oben, Fenster gehen aus
+  versus   {"left": "ENERGY", "right": "KAFFEE", "kicker": "5 RUNDEN"}                        Duell: zwei Seiten, großes VS
+  round    {"kicker": "RUNDE 1", "text": "KOFFEIN"}                                           schräges Banner fährt durchs Bild
+  score    {"left": "ENERGY", "right": "KAFFEE", "value": "0:2", "kicker": "RUNDE 3/5"}       Punktestand-Tafel
+  compare  {"left": "DOSE", "right": "KAFFEE", "value": "80 mg", "sub": "180 mg"}             zwei Balken wachsen (value links, sub rechts)
+  podium   {"kicker": "KÖRPERTEILE", "text": "FUSS", "left": "HAND", "right": "BEIN"}         Siegertreppchen im Scheinwerfer
+  share    {"value": "1 VON 7", "label": "TRÄUMT DAVON"}                                      Reihe von Menschen, der Anteil leuchtet auf
 Dazu der Look "neon": dieselbe Lichtstimmung (Nachtblau/Violett, Lichtpunkte) über normalen Szenen."""
 import math
 import random
@@ -28,7 +34,9 @@ ORANGE = (255, 138, 31)
 THEMES = {"": ((58, 40, 150), (14, 10, 46)), "scary": ((40, 30, 96), (6, 6, 22)), "panic": ((120, 34, 70), (26, 8, 30)),
           "tense": ((110, 60, 120), (22, 10, 40)), "sad": ((40, 60, 130), (10, 14, 40)), "happy": ((90, 70, 190), (30, 16, 80)),
           "calm": ((58, 40, 150), (14, 10, 46))}
-TYPES = ("number", "timer", "calendar", "question", "houses", "badge", "map", "city")
+TYPES = ("number", "timer", "calendar", "question", "houses", "badge", "map", "city", "versus", "round", "score", "compare", "podium", "share")
+LEFT, RIGHT = (150, 110, 255), (255, 150, 40)                # Farben der beiden Seiten im Duell
+GREEN = (120, 230, 90)
 
 _bg, _spr = {}, {}
 _BOK = [(random.Random(i).random(), random.Random(i + 50).random(), random.Random(i + 99).random()) for i in range(14)]
@@ -443,8 +451,226 @@ def _g_city(frame, g, t, dur):
         f = _fit(d, txt, 150, 960)
         _center(d, 430, txt, f, stroke=8)
 
+def _split(frame, t, k=1.0):
+    """Zweigeteiltes Bild fürs Duell: rechte Hälfte warm, schräge Kante, leuchtende Trennlinie."""
+    lay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    d = ImageDraw.Draw(lay)
+    off = (1 - min(1.0, k)) * 700
+    top, bot = 640 + off, 440 + off
+    d.polygon([(top, 0), (W, 0), (W, H), (bot, H)], fill=(255, 140, 30, 165))
+    d.line([(top, 0), (bot, H)], fill=(255, 236, 190, 230), width=10)
+    frame.paste(lay, (0, 0), lay)
 
-DRAW = {"map": _g_map, "city": _g_city, "number": _g_number, "timer": _g_timer, "calendar": _g_calendar, "question": _g_question, "houses": _g_houses, "badge": _g_badge}
+
+def _pill(d, cx, y, text, f, fill, ink=INK, pad=28):
+    w = d.textlength(text, font=f)
+    box = (cx - w / 2 - pad, y, cx + w / 2 + pad, y + f.size + 26)
+    d.rounded_rectangle((box[0] + 5, box[1] + 8, box[2] + 5, box[3] + 8), 26, fill=(0, 0, 0, 100))
+    d.rounded_rectangle(box, 26, fill=fill, outline=INK, width=6)
+    d.text((cx - w / 2, y + 9), text, font=f, fill=ink)
+
+
+def _side_names(d, g, t, y=560, start=0.15):
+    for i, (key, cx, col) in enumerate((("left", 270, LEFT), ("right", 810, RIGHT))):
+        txt = str(g.get(key) or "").upper()[:14]
+        k = _pop(t, start + i * 0.12, 0.35)
+        if txt and k > 0:
+            f = _fit(d, txt, 84, 440)
+            dx = (1 - min(1.0, k)) * (-300 if i == 0 else 300)
+            _pill(d, cx + dx, y, txt, f, col + (255,))
+
+
+def _g_versus(frame, g, t, dur):
+    _split(frame, t, _pop(t, 0.0, 0.4))
+    d = ImageDraw.Draw(frame, "RGBA")
+    _kicker(d, 420, g.get("kicker"), t, 0.5)
+    _side_names(d, g, t, 1060, 0.2)
+    k = _pop(t, 0.35, 0.4)
+    if k > 0:
+        cx, cy = W / 2, 780
+        _ring(d, cx, cy, 250, max(0.0, t - 0.3), (255, 90, 110), 12)
+        f = _font(int(330 * min(1.12, k)))
+        w = d.textlength("VS", font=f)
+        sh = math.sin(t * 30) * 6 * max(0.0, 1 - (t - 0.35) * 2)   # kurzes Zittern beim Einschlag
+        d.text((cx - w / 2 + 10 + sh, cy - f.size * 0.6 + 12), "VS", font=f, fill=(90, 10, 30))
+        d.text((cx - w / 2 + sh, cy - f.size * 0.6), "VS", font=f, fill=WHITE, stroke_width=10, stroke_fill=(230, 50, 80))
+
+
+def _g_round(frame, g, t, dur):
+    k = _pop(t, 0.05, 0.35)
+    if k <= 0:
+        return
+    kick, txt = str(g.get("kicker") or "").upper()[:20], str(g.get("text") or "").upper()[:20]
+    lay = Image.new("RGBA", (1500, 560), (0, 0, 0, 0))
+    ld = ImageDraw.Draw(lay)
+    ld.rectangle((0, 44, 1500, 544), fill=(0, 0, 0, 90))
+    ld.rectangle((0, 20, 1500, 520), fill=GREEN + (255,), outline=INK, width=10)
+    for x in range(-40, 1540, 90):                              # laufende Streifen am Rand
+        xx = x + (t * 120) % 90
+        ld.polygon([(xx, 20), (xx + 40, 20), (xx + 10, 60), (xx - 30, 60)], fill=(20, 60, 20, 90))
+        ld.polygon([(xx, 480), (xx + 40, 480), (xx + 10, 520), (xx - 30, 520)], fill=(20, 60, 20, 90))
+    if kick:
+        fk = _fit(ld, kick, 110, 900)
+        ld.text((750 - ld.textlength(kick, font=fk) / 2, 90), kick, font=fk, fill=INK)
+    f = _fit(ld, txt, 230 if kick else 300, 960)
+    ld.text((750 - ld.textlength(txt, font=f) / 2, (200 if kick else 120) + (230 - f.size) / 2), txt, font=f, fill=WHITE, stroke_width=8, stroke_fill=INK)
+    lay = lay.rotate(7, resample=Image.BICUBIC, expand=True)
+    slide = (1 - min(1.0, k)) * -1400
+    frame.paste(lay, (int(W / 2 - lay.width / 2 + slide), int(780 - lay.height / 2)), lay)
+
+
+def _g_score(frame, g, t, dur):
+    _split(frame, t)
+    d = ImageDraw.Draw(frame, "RGBA")
+    k = _pop(t, 0.05, 0.4)
+    if k <= 0:
+        return
+    m = re.match(r"^\s*(\d{1,3})\s*[:\-–]\s*(\d{1,3})\s*$", str(g.get("value") or ""))
+    a, b = (m.group(1), m.group(2)) if m else ("0", "0")
+    cy = 760
+    w, h = 900 * min(1.04, k), 520
+    d.rounded_rectangle((W / 2 - w / 2 + 10, cy - h / 2 + 16, W / 2 + w / 2 + 10, cy + h / 2 + 16), 44, fill=(0, 0, 0, 110))
+    d.rounded_rectangle((W / 2 - w / 2, cy - h / 2, W / 2 + w / 2, cy + h / 2), 44, fill=(22, 16, 50), outline=GOLD, width=10)
+    kick = str(g.get("kicker") or "").upper()[:24]
+    if kick:
+        fk = _fit(d, kick, 48, 600, "Bold")
+        _pill(d, W / 2, cy - h / 2 - 44, kick, fk, GOLD + (255,))
+    fn = _font(300)
+    win = int(a) - int(b)
+    for i, (val, cx, col) in enumerate(((a, W / 2 - 230, LEFT), (b, W / 2 + 230, RIGHT))):
+        lead = (win > 0 and i == 0) or (win < 0 and i == 1)
+        bump = 1 + (0.08 * abs(math.sin(t * 3)) if lead and t > 0.6 else 0)
+        f = _font(int(300 * bump))
+        cur = _count(val, t, 0.3, 0.6)
+        d.text((cx - d.textlength(cur, font=f) / 2, cy - 140 - (f.size - 300) / 2), cur, font=f, fill=col if not lead else WHITE, stroke_width=6, stroke_fill=col)
+        name = str(g.get("left" if i == 0 else "right") or "").upper()[:14]
+        if name:
+            fl = _fit(d, name, 50, 380, "Bold")
+            d.text((cx - d.textlength(name, font=fl) / 2, cy - h / 2 + 34), name, font=fl, fill=col)
+    d.text((W / 2 - d.textlength(":", font=fn) / 2, cy - 160), ":", font=fn, fill=WHITE)
+
+
+def _num(s):
+    m = re.search(r"\d[\d.]*(?:,\d+)?", str(s or ""))
+    try:
+        return float(m.group(0).replace(".", "").replace(",", ".")) if m else None
+    except ValueError:
+        return None
+
+
+def _g_compare(frame, g, t, dur):
+    _split(frame, t)
+    d = ImageDraw.Draw(frame, "RGBA")
+    _kicker(d, 330, g.get("kicker"), t, 0.0)
+    va, vb = _num(g.get("value")), _num(g.get("sub"))
+    top = max(va or 0, vb or 0) or 1
+    base, full = 1180, 620
+    grow = 0.0 if t < 0.25 else min(1.0, (t - 0.25) / 1.0)
+    grow = 1 - (1 - grow) ** 3
+    for i, (key, val, cx, col) in enumerate((("value", va, 270, LEFT), ("sub", vb, 810, RIGHT))):
+        hgt = max(40, full * ((val or 0) / top)) * grow
+        d.rounded_rectangle((cx - 120 + 8, base - hgt + 12, cx + 120 + 8, base + 12), 26, fill=(0, 0, 0, 100))
+        d.rounded_rectangle((cx - 120, base - hgt, cx + 120, base), 26, fill=col + (255,), outline=INK, width=8)
+        txt = _count(str(g.get(key) or ""), t, 0.25, 1.0).upper()[:12]
+        if txt and t > 0.25:
+            f = _fit(d, str(g.get(key) or "").upper()[:12], 120, 460)
+            w = d.textlength(txt, font=f)
+            d.text((cx - w / 2, base - hgt - f.size - 40), txt, font=f, fill=WHITE, stroke_width=6, stroke_fill=INK)
+        if val is not None and val == top and va != vb and grow >= 1:      # der Größere bekommt eine Krone
+            y = base - hgt - 260 + math.sin(t * 3) * 8
+            d.polygon([(cx - 70, y + 70), (cx - 80, y), (cx - 36, y + 34), (cx, y - 16), (cx + 36, y + 34), (cx + 80, y), (cx + 70, y + 70)], fill=GOLD, outline=INK)
+    d.rectangle((60, base, W - 60, base + 10), fill=WHITE)
+    _side_names(d, g, t, base + 50, 0.1)
+
+
+def _g_podium(frame, g, t, dur):
+    cx = W / 2
+    lay = Image.new("RGBA", (W, H), (0, 0, 0, 0))               # Scheinwerferkegel von oben
+    ld = ImageDraw.Draw(lay)
+    sw = math.sin(t * 0.8) * 60
+    ld.polygon([(cx - 60 + sw, 0), (cx + 60 + sw, 0), (cx + 330, 1160), (cx - 330, 1160)], fill=(255, 240, 200, 46))
+    frame.paste(lay, (0, 0), lay)
+    d = ImageDraw.Draw(frame, "RGBA")
+    kick = str(g.get("kicker") or "").upper()[:24]
+    if kick and t > 0.1:
+        _pill(d, cx, 330, kick, _fit(d, kick, 56, 700, "Bold"), WHITE + (255,))
+    base = 1240
+    for i, (num, x, hgt, col, key, st) in enumerate((("2", cx - 300, 240, (200, 206, 224), "left", 0.25), ("3", cx + 300, 170, (214, 150, 96), "right", 0.4),
+                                                    ("1", cx, 360, GOLD, "text", 0.6))):
+        k = _pop(t, st - 0.2, 0.35)
+        if k <= 0:
+            continue
+        hh = hgt * min(1.0, k)
+        d.rectangle((x - 150, base - hh, x + 150, base), fill=col, outline=INK, width=8)
+        f = _font(int(min(170, hgt * 0.7)))
+        if hh > hgt * 0.8:
+            d.text((x - d.textlength(num, font=f) / 2, base - hh + 14), num, font=f, fill=INK)
+        name = str(g.get(key) or "").upper()[:12] or "?"
+        kk = _pop(t, st, 0.35)
+        if kk > 0:
+            fn = _fit(d, name, int((120 if key == "text" else 84) * min(1.1, kk)), 290 if key != "text" else 420)
+            w = d.textlength(name, font=fn)
+            y = base - hh - fn.size - 50 + (math.sin(t * 3) * 8 if key == "text" else 0)
+            d.text((x - w / 2, y), name, font=fn, fill=WHITE if key == "text" else (214, 208, 255), stroke_width=6, stroke_fill=INK)
+    if t > 0.9:                                                 # Konfetti für den Sieger
+        rnd = random.Random(3)
+        for i in range(40):
+            x = rnd.random() * W
+            y = ((t - 0.9) * (260 + rnd.random() * 300) + rnd.random() * 900) % 1250
+            c = (GOLD, (255, 90, 130), (120, 200, 255), GREEN)[i % 4]
+            d.rectangle((x, y, x + 16, y + 10), fill=c + (230,))
+    d.rectangle((0, base, W, base + 12), fill=(30, 24, 70))
+
+
+def share_parts(value):
+    """„1 VON 7“ → (1, 7); höchstens 12 Menschen in der Reihe."""
+    m = re.match(r"^\s*(\d{1,2})\s*(?:VON|/|AUS)\s*(\d{1,2})\s*$", str(value or "").upper())
+    if not m:
+        return None
+    a, b = int(m.group(1)), int(m.group(2))
+    return (a, b) if 1 <= a <= b <= 12 and b >= 2 else None
+
+
+def _person(d, x, y, s, col, face=WHITE):
+    d.ellipse((x - 34 * s, y - 6 * s, x + 34 * s, y + 8 * s), fill=(0, 0, 0, 70))
+    d.line([(x - 14 * s, y - 70 * s), (x - 16 * s, y)], fill=INK, width=max(3, int(9 * s)))
+    d.line([(x + 14 * s, y - 70 * s), (x + 16 * s, y)], fill=INK, width=max(3, int(9 * s)))
+    d.rounded_rectangle((x - 36 * s, y - 160 * s, x + 36 * s, y - 60 * s), int(26 * s), fill=col, outline=INK, width=max(3, int(7 * s)))
+    d.ellipse((x - 46 * s, y - 250 * s, x + 46 * s, y - 158 * s), fill=face, outline=INK, width=max(3, int(7 * s)))
+    for dx in (-16, 16):
+        d.ellipse((x + (dx - 6) * s, y - 214 * s, x + (dx + 6) * s, y - 198 * s), fill=INK)
+
+
+def _g_share(frame, g, t, dur):
+    d = ImageDraw.Draw(frame, "RGBA")
+    a, b = share_parts(g.get("value")) or (1, 2)
+    _kicker(d, 400, g.get("kicker"), t, 0.0)
+    k = _pop(t, 0.1, 0.4)
+    if k > 0:
+        txt = f"{a} VON {b}"
+        f = _fit(d, txt, int(250 * min(1.06, k)), 980)
+        _center(d, 460, txt, f)
+    lab = str(g.get("label") or "").upper()[:30]
+    if lab and t > 0.5:
+        _pill(d, W / 2, 770, lab, _fit(d, lab, 60, 860, "Bold"), (255, 90, 130, 255), WHITE)
+    s = min(1.0, 7.6 / b) * 1.15
+    gap = min(150, 960 / b)
+    base = 1260
+    d.rectangle((0, base, W, base + 12), fill=(30, 24, 70))
+    for i in range(b):
+        x = W / 2 + (i - (b - 1) / 2) * gap
+        kk = _pop(t, 0.3 + i * 0.07, 0.3)
+        if kk <= 0:
+            continue
+        hot = i >= b - a and t > 0.9 + 0.07 * b
+        hop = abs(math.sin((t - 0.9) * 5)) * 26 * s if hot else 0
+        if hot:
+            d.ellipse((x - 90 * s, base - 300 * s - hop, x + 90 * s, base - 110 * s - hop), fill=(255, 214, 110, 60))
+        _person(d, x, base - hop - (1 - min(1.0, kk)) * 60, s, GOLD if hot else (110, 96, 190), WHITE if hot else (204, 198, 236))
+
+
+DRAW = {"versus": _g_versus, "round": _g_round, "score": _g_score, "compare": _g_compare, "podium": _g_podium, "share": _g_share,
+        "map": _g_map, "city": _g_city, "number": _g_number, "timer": _g_timer, "calendar": _g_calendar, "question": _g_question, "houses": _g_houses, "badge": _g_badge}
 
 
 def clean(g):
@@ -452,14 +678,23 @@ def clean(g):
     if not isinstance(g, dict) or str(g.get("type") or "").lower() not in TYPES:
         return None
     out = {"type": str(g["type"]).lower()}
-    for k in ("kicker", "value", "label", "sub", "text"):
+    for k in ("kicker", "value", "label", "sub", "text", "left", "right"):
         v = g.get(k)
         if isinstance(v, (str, int, float)) and not isinstance(v, bool) and str(v).strip():
             out[k] = str(v).strip()[:44]
     out["dark"] = g.get("dark") is True
     need = {"number": "value", "timer": "value", "calendar": "value", "houses": "value", "badge": "text", "question": None,
-            "map": None, "city": None}[out["type"]]
+            "map": None, "city": None, "versus": "left", "round": "text", "score": "value", "compare": "value", "podium": "text",
+            "share": "value"}[out["type"]]
     if need and need not in out:
+        return None
+    if out["type"] == "versus" and "right" not in out:
+        return None
+    if out["type"] == "compare" and (_num(out.get("value")) is None or _num(out.get("sub")) is None):
+        return None
+    if out["type"] == "score" and not re.match(r"^\s*\d{1,3}\s*[:\-–]\s*\d{1,3}\s*$", out["value"]):
+        return None
+    if out["type"] == "share" and not share_parts(out["value"]):
         return None
     return out
 

@@ -566,6 +566,20 @@ def auto_graphic(text, hud=""):
     if _re.search(r"ganz europa|in europa|europaweit|europäisch|\beu\b|eu-staaten|quer durch europa", low):
         hot = sorted({v for k, v in graphics.REGION_WORDS.items() if k in low})
         return {"type": "map", "value": ",".join(hot), "text": kick}
+    m = _re.search(r"\b(\w+) von (\w+)\b", low) if _re.search(r"\b(jede[rs]?|menschen|deutschen?|leuten?|personen|kinder|erwachsenen?|von ihnen|von uns)\b", low) else None
+    if m:
+        a, b = _number(m.group(1)), _number(m.group(2))
+        if m.group(1) in ("einer", "eine", "eines", "jeder", "jede"):
+            a = 1.0
+        if a and b and a == int(a) and b == int(b) and 1 <= a < b <= 12:
+            return {"type": "share", "value": f"{int(a)} VON {int(b)}", "kicker": kick}
+    m = _re.search(r"\bjede[rs]? (zweite|dritte|vierte|fünfte|sechste|siebte|achte|neunte|zehnte)\b", low)
+    if m:
+        n = ("zweite", "dritte", "vierte", "fünfte", "sechste", "siebte", "achte", "neunte", "zehnte").index(m.group(1)) + 2
+        return {"type": "share", "value": f"1 VON {n}", "kicker": kick}
+    m = _re.search(r"\brunde (\w+)\b[:,.]?\s*(?:der |die |das |den )?([a-zäöüß\-]{3,18})?", low)
+    if m and _number(m.group(1)) and len(raw.split()) <= 6:
+        return {"type": "round", "kicker": f"RUNDE {int(_number(m.group(1)))}", "text": (m.group(2) or "LOS").upper()}
     fig = find_figure(raw)
     if not fig and _re.search(r"ganze stadt|stadtviertel|von oben|häuserblock|stadtweit|ganze viertel|millionenstadt|in der stadt", low):
         return {"type": "city", "kicker": kick, "dark": bool(_re.search(r"ohne strom|stromausfall|dunkel|ohne licht|lichter gehen aus", low))}
