@@ -1,0 +1,465 @@
+{
+ "title": "Wie aus einer Gaming-Bude ein Tech-Gigant wurde",
+ "scenes": [
+  {
+   "text": "Drei Typen saßen in einem Burgerladen und wollten nur bessere Grafik für Videospiele.",
+   "see": "Drei Personen sitzen im Restaurant und sprechen über Grafik",
+   "place": "restaurant",
+   "time": "day",
+   "props": [
+    {
+     "type": "table"
+    },
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "mia",
+     "speaks": false,
+     "action": "sit",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    },
+    {
+     "id": "jan",
+     "speaks": false,
+     "action": "sit",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Damals lachten alle über die winzigen bunten Pixel und die ruckligen Monster.",
+   "see": "Monster Pixel Grafik auf dem Fernseher",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "tv"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Doch im Jahr neunzehnhundertunddreiundneunzig gründeten sie eine kleine Bude für Grafikchips.",
+   "see": "Gründung im kleinen Büro",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    },
+    {
+     "type": "lib_mikrochip"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "insert",
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "1993 GEGRÜNDET"
+   }
+  },
+  {
+   "text": "Niemand ahnte, dass diese Idee einmal die gesamte Welt verändern würde.",
+   "see": "Weltkugel zeigt globale Veränderung",
+   "place": "worldmap",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Monatelang bauten sie an ihrem ersten großen Chip, aber er floppte komplett.",
+   "see": "Chip kaputt am Computer",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "mikrochip"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Fast war das Geld alle und die Firma stand vor dem sofortigen Aus.",
+   "see": "Leere Kasse und Geldsorgen",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sad",
+     "emotion": "sad",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "sad",
+   "overlay": {
+    "type": "card",
+    "text": "FAST PLEITE"
+   }
+  },
+  {
+   "text": "Also rettete ein einziger Großauftrag im letzten Moment die ganze Firma.",
+   "see": "Großer Auftrag rettet die Firma",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "box"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Jetzt lief das Geschäft mit den Spielern weltweit endlich richtig stabil an.",
+   "see": "Spieler weltweit spielen an Computern",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "mia",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Aber der wahre Geniestreich war eine völlig verrückte und teure Wette.",
+   "see": "Idee für eine neue Wette im Labor",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "mikrochip"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Sie bauten Chips so um, dass sie nicht nur schöne Spiele, sondern auch Mathe konnten.",
+   "see": "Chips rechnen mathematische Aufgaben",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    },
+    {
+     "type": "lib_mikrochip"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "insert",
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "NEUE CHIPS"
+   }
+  },
+  {
+   "text": "Jahrelang schien das völlig nutzlos zu sein und kostete Unsummen an Geld.",
+   "see": "Geld verbrennt nutzlos im Büro",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sad",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Dann explodierte plötzlich der weltweite Bedarf an künstlicher Intelligenz.",
+   "see": "Künstliche Intelligenz explodiert im Rechenzentrum",
+   "place": "worldmap",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "chart",
+    "kicker": "KI-BOOM",
+    "value": "100%",
+    "label": "BEDARF"
+   }
+  },
+  {
+   "text": "Und genau diese alten Gaming-Chips waren plötzlich der absolute Generalschlüssel dafür.",
+   "see": "Gaming-Chips als Generalschlüssel im Rechenzentrum",
+   "place": "serverroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "mikrochip"
+    },
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Plötzlich wollte jede große Tech-Firma genau diese speziellen Super-Prozessoren haben.",
+   "see": "Tech-Firmen wollen Super-Prozessoren haben",
+   "place": "headquarters",
+   "time": "day",
+   "props": [
+    {
+     "type": "box"
+    }
+   ],
+   "shot": "event",
+   "mood": "happy",
+   "crowd": "watch"
+  },
+  {
+   "text": "Der Aktienkurs schoss durch die Decke und brach alle jemals dagewesenen Rekorde.",
+   "see": "Aktienkurs schießt durch die Decke",
+   "place": "office",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "happy",
+   "crowd": "cheer",
+   "graphic": {
+    "type": "chart",
+    "kicker": "AKTIENKURS",
+    "value": "3 BIO.",
+    "label": "DOLLAR",
+    "dark": false
+   },
+   "overlay": {
+    "type": "chart",
+    "kicker": "AKTIENKURS",
+    "value": "3 BIO.",
+    "label": "DOLLAR"
+   }
+  },
+  {
+   "text": "Heute ist die ehemalige Burgerladen-Bude mehr wert als fast alle anderen Tech-Giganten.",
+   "see": "Wertvollster Tech-Gigant im Headquarters",
+   "place": "headquarters",
+   "time": "day",
+   "props": [
+    {
+     "type": "house"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "wave",
+     "emotion": "happy",
+     "pos": "left",
+     "emote": ""
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Wer hätte gedacht, dass ein bisschen Zocken zu so einem Imperium führt? Folg für mehr.",
+   "see": "Imperium aus Gaming und Zocken",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "tv"
+    },
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  }
+ ]
+}

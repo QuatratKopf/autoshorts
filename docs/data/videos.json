@@ -1750,5 +1750,46 @@
   "slot": "2026-11-11 21:00",
   "review_at": 1794420879.0656264,
   "error": "Bei der Prüfung verworfen: Ladenstraße statt Firmensitz, ein Gründer statt drei, Büro statt Rechenzentrum, keine Kurskurve, Schreibtisch im Weltall"
+ },
+ {
+  "id": 56,
+  "category": "fakten",
+  "topic": "Wie Nvidia von einer Gaming-Bude zum wertvollsten Tech-Giganten wurde",
+  "status": "rendered",
+  "created": 1794421904.924362,
+  "title": "Wie aus einer Gaming-Bude ein Tech-Gigant wurde",
+  "description": "Wie wurde ein kleiner Grafikkarten-Hersteller plötzlich wertvoller als fast alle Konzerne?\nSchau dir den steilen Aufstieg und den genialen Moment an, der alles veränderte.\nWer hätte diesen unglaublichen Erfolg damals vorhergesehen?",
+  "hashtags": [
+   "#shorts",
+   "#fyp",
+   "#tech",
+   "#gaming",
+   "#nvidia",
+   "#erklärung",
+   "#wissen",
+   "#geschichte"
+  ],
+  "tags": [
+   "nvidia",
+   "tech gigant",
+   "grafikkarte",
+   "künstliche intelligenz",
+   "geschichte",
+   "unternehmertum",
+   "gaming",
+   "chips"
+  ],
+  "thumb_text": "VOM GAMER ZUM MILLIARDÄR",
+  "missing": null,
+  "cover_ms": 72786,
+  "duration": 72.7,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
