@@ -67,11 +67,19 @@
   "last": "Wie eine Gaming Bude die Welt veränderte"
  },
  "gebäude": {
-  "n": 1,
-  "last": "Erde ohne Schwerkraft für 5 Sekunden: Was passiert wirklich?"
+  "n": 2,
+  "last": "Was passiert, wenn die Schwerkraft für 5 Sekunden fehlt?"
  },
  "asphalt": {
   "n": 1,
   "last": "Erde ohne Schwerkraft für 5 Sekunden: Was passiert wirklich?"
+ },
+ "luftdruck": {
+  "n": 1,
+  "last": "Was passiert, wenn die Schwerkraft für 5 Sekunden fehlt?"
+ },
+ "möbel": {
+  "n": 1,
+  "last": "Was passiert, wenn die Schwerkraft für 5 Sekunden fehlt?"
  }
 }

@@ -1,0 +1,358 @@
+{
+ "title": "Was passiert, wenn die Schwerkraft für 5 Sekunden fehlt?",
+ "scenes": [
+  {
+   "text": "Was wäre, wenn die Schwerkraft der Erde für genau fünf Sekunden auf Null sinkt?",
+   "see": "Ein Jugendlicher im Zimmer hebt überrascht vom Stuhl ab.",
+   "place": "bedroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "chair",
+     "pos": 650
+    },
+    {
+     "type": "lib_stuhl",
+     "pos": 930
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "float",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 240
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 5,
+    "unit": "SEKUNDEN"
+   }
+  },
+  {
+   "text": "Die Antwort klingt harmlos, aber das Ergebnis ist ein absolut gigantischer Albtraum.",
+   "see": "Auf einer Straße schweben Autos, Mülleimer und Menschen langsam in die Luft.",
+   "place": "street",
+   "time": "day",
+   "weather": "wind",
+   "props": [
+    {
+     "type": "car"
+    },
+    {
+     "type": "trash"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "0 GRAVITATION"
+   }
+  },
+  {
+   "text": "In der allerersten Sekunde merkst du sofort, wie deine Füße den Halt verlieren.",
+   "see": "Die Füße der Hauptfigur heben langsam vom Boden ab.",
+   "place": "bedroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "box",
+     "pos": 500
+    },
+    {
+     "type": "clock",
+     "pos": 250
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "float",
+     "emotion": "scared",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 840
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Weil die Erde sich mit sechzehnhundert Kilometern pro Stunde dreht, fliegt alles weiter.",
+   "see": "Eine bewegte Grafik zeigt die rotierende Erde mit einer Geschwindigkeitsanzeige.",
+   "place": "worldmap",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "number",
+    "kicker": "ROTATIONSGESCHWINDIGKEIT",
+    "value": "1.670",
+    "label": "KM/H AM ÄQUATOR",
+    "dark": false
+   }
+  },
+  {
+   "text": "Bist du im Freien, hebst du ungebremst wie ein Raketenstart in die Höhe ab.",
+   "see": "Die Hauptfigur schwebt im Freien hoch über den Dächern der Stadt.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "house",
+     "pos": 650
+    },
+    {
+     "type": "rocket",
+     "pos": 930
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "float",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 240
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Nach drei Sekunden löst sich sogar die komplette Luftatmosphäre der Erde spürbar auf.",
+   "see": "Im Weltall sieht man, wie sich die Gashülle der Erde schlagartig ausdehnt.",
+   "place": "space",
+   "time": "night",
+   "props": [
+    {
+     "type": "earth"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "scary",
+   "graphic": {
+    "type": "number",
+    "value": "3",
+    "label": "SEKUNDEN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Der plötzliche Druckabfall lässt deine Ohren explodieren und Ozeane bilden gigantische Blasen.",
+   "see": "Am Strand steigt das Meerwasser in riesigen, schwebenden Wasserblasen auf.",
+   "place": "beach",
+   "backdrop": {
+    "sky": "day",
+    "ground": "sand",
+    "elements": [
+     "sea"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "wave"
+    },
+    {
+     "type": "trash"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense"
+  },
+  {
+   "text": "Milliarden Tonnen Wasser heben gleichzeitig ab und verwandeln Landschaften in schwimmendes Chaos.",
+   "see": "Grafik zeigt einen Zähler für aufsteigende Wassermassen.",
+   "place": "lake",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "float",
+     "emotion": "shocked",
+     "emote": "!",
+     "speaks": false
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "In Gebäude kracht die Decke, während Möbel, Autos und Tiere schwerelos durcheinanderfliegen.",
+   "see": "Im Wohnzimmer schweben Sofa und Fernseher, während man sich am Türrahmen festhält.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "table",
+     "pos": 930
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "float",
+     "emotion": "scared",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "door",
+     "facing": "",
+     "say": "",
+     "pos": 170
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "note",
+    "title": "CHAOS",
+    "text": "ALLES FLIEGT"
+   }
+  },
+  {
+   "text": "Aber nach genau fünf Sekunden schaltet sich die Gravitation schlagartig wieder ein.",
+   "see": "Grafik zeigt eine Pulslinie, die nach 5 Sekunden ausschlägt.",
+   "place": "germany",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "pulse",
+    "value": "5",
+    "label": "SEKUNDEN UMBREICHEN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Jetzt knallt alles aus mehreren Metern Höhe ungebremst zurück auf den harten Boden.",
+   "see": "Autos und Trümmer stürzen aus der Luft zurück auf die Straße.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "car"
+    },
+    {
+     "type": "house"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "crowd": "worried"
+  },
+  {
+   "text": "Einstürzende Häuser, gigantische Flutwellen und globale Zerstörung treffen die Menschheit in einer Sekunde.",
+   "see": "Eine zerstörte Stadt mit brennenden Ruinen und aufgerissener Straße.",
+   "place": "ruins",
+   "backdrop": {
+    "sky": "storm",
+    "ground": "road",
+    "elements": [
+     "ruins",
+     "cracks"
+    ]
+   },
+   "time": "day",
+   "weather": "dark",
+   "props": [
+    {
+     "type": "smoke"
+    },
+    {
+     "type": "crack"
+    }
+   ],
+   "shot": "event",
+   "mood": "scary",
+   "overlay": {
+    "type": "card",
+    "text": "GLOBALE KATASTROPHE"
+   }
+  },
+  {
+   "text": "Forscher schätzen, dass fast die Hälfte aller Menschen dieses Desaster nicht überleben würde.",
+   "see": "Grafik zeigt das Verhältnis der Überlebenden zur Weltbevölkerung.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "sad"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "sad",
+   "graphic": {
+    "type": "share",
+    "value": "1 VON 2",
+    "label": "MENSCHEN IN GEFAHR",
+    "dark": false
+   }
+  },
+  {
+   "text": "Warst du beim Lesen drinnen oder draußen, und hättest du überlebt? Folg für mehr!",
+   "see": "Der Jugendliche sitzt erleichtert am Schreibtisch und blickt in die Kamera.",
+   "place": "bedroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "choice",
+    "a": "Drinnen gewesen",
+    "b": "Draußen geflogen"
+   }
+  }
+ ]
+}

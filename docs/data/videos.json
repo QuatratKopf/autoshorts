@@ -1596,5 +1596,50 @@
   "status": "error",
   "created": 1794413387.375641,
   "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-flash-lite-latest: HTTP 503 | pollinations: Expecting ',' delimiter: line 164 column 6 (char 4815)"
+ },
+ {
+  "id": 52,
+  "category": "whatif",
+  "topic": "Was wäre, wenn die Schwerkraft der Erde für nur 5 Sekunden exakt auf Null sinken würde?",
+  "status": "rendered",
+  "created": 1794413635.5394292,
+  "title": "Was passiert, wenn die Schwerkraft für 5 Sekunden fehlt?",
+  "description": "Was passiert, wenn die Schwerkraft für 5 Sekunden erlischt? 😱\nIn diesem Gedankenexperiment hebst du ab und die Welt gerät völlig aus den Fugen.\nWürdest du versuchen, dich drinnen oder draußen festzuhalten?",
+  "hashtags": [
+   "#shorts",
+   "#whatif",
+   "#physik",
+   "#wissenschaft",
+   "#fakten",
+   "#wissen",
+   "#fyp",
+   "#viral"
+  ],
+  "tags": [
+   "schwerkraft",
+   "was wäre wenn",
+   "erde",
+   "physik fakten",
+   "gedankenexperiment",
+   "schwerelosigkeit",
+   "wissenschaft einfach erklärt",
+   "weltall"
+  ],
+  "thumb_text": "SCHWERKRAFT AUF NULL",
+  "missing": [
+   "luftdruck",
+   "gebäude",
+   "möbel"
+  ],
+  "cover_ms": 70325,
+  "duration": 70.2,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
