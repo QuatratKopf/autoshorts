@@ -270,6 +270,11 @@ def _crowd(frame, kind, t, night, lo=0, hi=9999, road=False, traffic=True, indoo
 
 
 ON_TABLE = ("cans", "candle", "money", "canister")           # Kleines steht drinnen auf einem Tisch, damit man es sieht
+
+
+def _on_table(key):
+    """Auch kleine gelernte Gegenstände (Tasse, Router, Mikroskop …) stehen drinnen auf dem Tisch statt auf dem Boden."""
+    return key in ON_TABLE or (key.startswith("lib_") and extras.SIZES.get(key, (9,))[0] <= 0.5)
 PLACE_HAS = {"kitchen": ("fridge", "table"), "office": ("computer", "table"), "supermarket": ("shelf",), "supermarket_empty": ("shelf",),
              "livingroom": ("tv",), "forest": ("tree",), "park": ("tree",), "camp": ("tent", "fire"), "street": ("streetlamp", "house"),
              "village": ("house",), "restaurant": ("table",), "hallway": ()}
@@ -282,10 +287,12 @@ def _prop(frame, kind, x, t, big, table=False):
     fit = extras.prop_fit(key)
     if fit:
         f, gy = fit
-        if table and key in ON_TABLE:
+        if table and _on_table(key):
             _prop(frame, "table", x, t, big)
             tf, ty = extras.prop_fit("table")
             gy = ty - int(places.px(0.78, ty)) + 6
+            if key.startswith("lib_"):                    # sehr Kleines (Tasse, Router) leicht überzeichnen, sonst erkennt man es nicht
+                f *= max(1.0, 0.32 / max(0.05, extras.SIZES[key][0]))
         layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
         nx = max(260, min(W - 260, x))                    # in der Mitte zeichnen, damit beim Vergrößern nichts abgeschnitten wird
         extras.draw_prop(layer, kind, nx, t)
@@ -296,7 +303,7 @@ def _prop(frame, kind, x, t, big, table=False):
         cut = cut.resize((max(1, int(cut.width * f)), max(1, int(cut.height * f))), Image.BILINEAR)
         px0 = x + (box[0] - nx) * f
         py0 = gy + (box[1] - places.GROUND) * f
-        if not (table and key in ON_TABLE):
+        if not (table and _on_table(key)):
             _shadow(frame, int(x), int(gy), int(cut.width * 0.42))
         frame.paste(cut, (int(px0), int(py0)), cut)
         return
