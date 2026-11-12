@@ -730,6 +730,8 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
         if a["kind"]:
             hop = abs(math.sin(t * 9)) * 16 if (moving and not arrived) else 0
             ksz = 1.0 if a.get("giant") else HERO_SIZE.get(a["kind"], 0.8) if a.get("hero") else CREATURE_SIZE.get(a["kind"], 1.0)   # Tiere in echter Größe – als Hauptfigur des Videos groß
+            if close and a["kind"] == "brain":
+                ksz = 1.15                                 # Großaufnahme: das Gehirn füllt das Bild, wird aber nicht angeschnitten
             res = extras.creature(a["kind"], t + a["seed"], facing, mouth, a["emotion"] or
                                   ("shocked" if a["action"] in ("shocked", "scared") else ""), scale * 0.9 * ksz)
             if res:
@@ -1090,6 +1092,14 @@ def direct(scenes, times, topic="", style="", look=""):
                     sc["backdrop"] = hint
             elif hint != place:
                 sc["place"] = place = hint
+        if places.resolve(sc.get("place")) == "bedroom" and not acts and str(sc.get("shot") or "") in ("", "event") \
+                and _re0.search(r"schlaf|weck|\bwach|\bbett\b|träum", str(sc.get("text") or "").lower()):
+            woke = bool(_re0.search(r"weck|\bwach|schreck|zuck|reißt", str(sc.get("text") or "").lower()))
+            who = next((str(a.get("id")) for s2 in scenes if isinstance(s2, dict) for a in (s2.get("actors") or [])
+                        if isinstance(a, dict) and str(a.get("id") or "").lower() in MAIN_IDS), "du")       # der Mensch – nicht das Gehirn oder ein Tier
+            sc["actors"] = acts = [{"id": who, "action": "shocked" if woke else "sleep", "emotion": "shocked" if woke else "",
+                                    "emote": "!" if woke else "", "pos": "center", "speaks": False, "keep": True}]
+            sc["crowd"], sc["shot"] = "", ""              # Schlafen und Aufwachen passiert im Bett – nicht auf der Straße zwischen Passanten
         lone0 = len(acts) <= 1 and all(str(a.get("action") or "talk").lower() in ("talk", "idle", "", "point", "think") for a in acts)
         if not has_bd and not spooky and maps_used < 2 and lone0 and str(sc.get("shot") or "") != "insert" and (hint is None or place not in MAPS):
             for pat, target in MAP_HINTS:                       # „in ganz Deutschland“, „weltweit“ → Kartenbild (höchstens zweimal)
@@ -1303,7 +1313,7 @@ def direct(scenes, times, topic="", style="", look=""):
                 and all(str(a.get("action") or "talk").lower() in ("talk", "idle", "") for a in acts)
                 and not (i and str(scenes[i - 1].get("shot") or "") == "insert")):
             sc["shot"] = "insert"
-        lone = len(acts) == 1 and str(acts[0].get("action") or "talk").lower() in ("talk", "idle", "") and not acts[0].get("to")
+        lone = len(acts) == 1 and str(acts[0].get("action") or "talk").lower() in ("talk", "idle", "") and not acts[0].get("to") and not acts[0].get("keep")
         if place != prev_place:
             same = 0
             changes += 1
@@ -1408,7 +1418,7 @@ def direct(scenes, times, topic="", style="", look=""):
                     place = "street"
                 elif step in (1, 3) and not prev_close:
                     sc["shot"] = "close"
-                else:
+                elif not acts[0].get("keep"):
                     acts[0].update(action="walk", pos="offright" if stale % 8 < 4 else "offleft", to="center")
         outdoor2 = rp2 in places.OUTDOOR
         topic_out = [k for k in topic_any if (k not in INDOOR_THINGS if outdoor2 else (k not in extras.SKY and extras.prop_fit(k)))]
@@ -1610,7 +1620,7 @@ PLURAL = {"agent": r"agenten|\bbots\b|assistenten", "virus": r"\bviren|bakterien
           "spider": r"spinnen|taranteln", "bee": r"bienen", "wasp": r"wespen", "cat": r"katzen", "dog": r"\bhunde\b", "bird": r"vögel",
           "fish": r"fische", "shark": r"\bhaie", "ghost": r"geister|gespenster", "robot": r"roboter\b", "alien": r"außerirdische|aliens",
           "dino": r"dinosaurier", "monster": r"monster"}
-HERO_SIZE = {"agent": 0.8, "brain": 0.8, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9}   # Hauptfigur: etwa halb so hoch wie ein Mensch
+HERO_SIZE = {"agent": 0.8, "brain": 1.6, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9}   # Hauptfigur: etwa halb so hoch wie ein Mensch
 
 
 def _topic_creature(scenes, topic):
@@ -1918,7 +1928,7 @@ HINTS = [
     (r"feuerwehr|löschen|\bbrände", "street"),
     (r"\bflur\b|korridor|\bgang\b|treppenhaus|hotel|vor der tür|an der tür|türklinke|klopft|zimmernummer", "hallway"),
     (r"dachboden|speicher\b", "attic"),
-    (r"\bbett\b|schlafzimmer|wachst auf|aufwach|einschlaf|schläfst|decke über", "bedroom"),
+    (r"\bbett\b|schlafzimmer|wachst auf|aufwach|einschlaf|schläfst|decke über|schlafen (zu )?(lassen|gehen|legen)|weckt (er |es |sie |das )?(dich|mich)|(dich|mich) (auf)?weck", "bedroom"),
     (r"spiegel|waschbecken", "bathroom"),
     (r"\bkeller|kellertreppe|bunker", "basement"),
     (r"kirche|\bdom\b|kathedrale", "church"),
@@ -2014,7 +2024,7 @@ TEXT_PROPS = [(r"drohne", "drone"), (r"überwachungskamera|kameras? (erfass|film
 MAP_HINTS = ((r"ganz deutschland|in deutschland|deutschlandweit|bundesweit|bundesländer|jeder deutsche|alle deutschen", "germany"),
              (r"weltweit|auf der ganzen welt|alle länder|rund um den globus|weltbevölkerung|alle kontinente|die ganze erde|die ganze welt", "worldmap"))
 # Tiere neben Menschen: Größe im Verhältnis zur Figur (1.0 = menschengroß). „Riesen…“-Themen heben das auf (giant).
-CREATURE_SIZE = {"brain": 1.25, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45}
+CREATURE_SIZE = {"brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45}
 GIANT_RE = r"riesen|riesig|gigant|monströs|so groß wie|meterhoh|haushoh|mutier"
 # Nur hier laufen Passanten durchs Bild – auf dem Feld, im Wald, im Keller ist niemand unterwegs
 CROWD_PLACES = ("headquarters", "street", "park", "village", "beach", "gasstation", "station", "supermarket", "supermarket_empty", "hospital", "office",

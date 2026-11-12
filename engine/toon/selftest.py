@@ -323,6 +323,14 @@ def main():
         for sc_ in scs:
             frame(sc_)
     check("Gehirn-Figur, Fachbegriff, genannte Dinge", _brain)
+    def _bed():                                                  # Schlafen/Wecken spielt im Schlafzimmer mit der Hauptfigur – nicht auf der Straße
+        scs = stage.direct([{"text": "Dein Gehirn schlägt Alarm.", "place": "zimmer", "actors": [{"id": "du"}]},
+                            {"text": "Statt dich friedlich schlafen zu lassen, weckt er dich auf.", "place": "street", "time": "night", "shot": "event", "crowd": "walk"}],
+                           [(0, 3.6), (3.6, 7.2)], "Drei Macken deines Gehirns")
+        assert places.resolve(scs[1]["place"]) == "bedroom" and not scs[1].get("crowd"), scs[1]
+        assert [a.get("id") for a in scs[1]["actors"]] == ["du"] and scs[1]["actors"][0].get("action") != "walk", scs[1]["actors"]
+        frame(scs[1])
+    check("Schlafen und Wecken im Schlafzimmer", _bed)
     def _hook():                                                 # Einstieg: schwache Anfänge erkannt, erstes Bild mit Reaktion und Ruck
         from .. import writer
         assert writer.hook_weak({"title": "Was passiert ohne Schwerkraft?", "scenes": [{"text": "Was wäre, wenn die Schwerkraft verschwindet?"}]})

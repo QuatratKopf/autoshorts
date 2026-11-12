@@ -1803,7 +1803,7 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0):
         # Das Gehirn als Figur („dein Gehirn schlägt Alarm“): rosa, zwei Hälften mit Windungen, großes Augenpaar, Ärmchen und Beinchen
         col = (240, 150, 172)
         hop = abs(math.sin(t * 5)) * 10 if mood in ("happy",) else 0
-        by = -168 - hop
+        by = -250 - hop                                                          # lange Beine: das Gesicht liegt über den Untertiteln
         for lx in (-46, 46):                                                     # Beinchen mit Schuhen
             stroke([(lx, by + 80), (lx + 4, -14 - hop * 0.3)], 18, _dark(col, 0.22) if lx < 0 else _dark(col, 0.1))
             ell(lx - 18, -26, lx + 30, 2, (70, 80, 120), shade=0)
