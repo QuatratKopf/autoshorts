@@ -97,6 +97,8 @@ Einblendungen (overlay) – nutze sie in etwa jeder zweiten Szene, passend zum I
 - {"type": "card", "text": "1–3 WÖRTER"}  große Infokarte: Zahl, Fakt, Warnung (z. B. "VIERMAL HELLER", "-80 °C")
 - {"type": "tag", "text": "HEILIGABEND"}  kleines Schild, das Ort, Zeit oder das Ding der Szene benennt (1–3 Wörter, z. B. "AUGUST 1914",
   "DER GRUND", "100 METER", "POST AUS DER HEIMAT") – gern alle 2–3 Szenen, wenn keine andere Einblendung passt
+- {"type": "thermo", "value": 22}  Thermometer mit Gradzahl – bei jeder Temperatur (auch minus)
+- {"type": "stamp", "text": "VERBOTEN", "color": "red|green|orange|purple"}  Stempel für ein Urteil: VERBOTEN, GIFTIG, GRATIS, PLEITE, REKORD …
 - {"type": "note", "title": "REGEL #2", "text": "kurzer Merksatz"}  Notizzettel für Regeln, Tipps, Merksätze
 - {"type": "phone", "title": "3:12", "items": ["Mama: Wo bist du??", "Warnung: Bleib drinnen"]}  Handy mit Nachrichten/Alarmen
 - {"type": "checklist", "title": "SPEISEKARTE", "items": [["Motten", true], ["Fliegen", true], ["Käfer", false]]}  Listen, Vergleiche

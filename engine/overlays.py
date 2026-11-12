@@ -85,6 +85,59 @@ def tag(text):
     return _shadow(im.rotate(4, expand=True, resample=Image.BICUBIC), 8, 10, 120)
 
 
+def thermo(value, shown=None):
+    """Thermometer mit steigender Säule und großer Gradzahl: rot bei Hitze, blau bei Kälte."""
+    v = float(value)
+    s = v if shown is None else float(shown)
+    col = (226, 58, 52) if v >= 25 else (37, 99, 235) if v <= 5 else (238, 150, 30)
+    w, h = 470, 420
+    im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    dr = ImageDraw.Draw(im)
+    tx, top, bot = 90, 20, 330                                    # Röhre
+    dr.rounded_rectangle((tx - 34, top, tx + 34, bot), 34, fill=WHITE, outline=INK, width=8)
+    dr.ellipse((tx - 66, bot - 30, tx + 66, bot + 92), fill=col, outline=INK, width=8)
+    lo, hi = min(-30.0, v - 10), max(45.0, v + 10)              # Skala reicht immer über den Wert hinaus
+    k = max(0.0, min(1.0, (s - lo) / (hi - lo)))
+    y = bot - 10 - (bot - top - 40) * k
+    dr.rounded_rectangle((tx - 18, y, tx + 18, bot + 20), 18, fill=col)
+    for i in range(1, 6):                                         # Skalenstriche
+        yy = top + 30 + i * (bot - top - 60) / 6
+        dr.line((tx + 36, yy, tx + 58, yy), fill=INK, width=5)
+    dr.ellipse((tx - 40, bot - 6, tx - 10, bot + 24), fill=(255, 255, 255, 110))          # Glanz
+    f = _cfont(150)
+    txt = (f"{s:.0f}" if abs(v) >= 10 or v == int(v) else f"{s:.1f}".replace(".", ",")) + "°C"
+    while dr.textlength(txt, font=f) > w - 180 and f.size > 60:
+        f = _cfont(f.size - 8)
+    dr.text((180, 150 - f.size / 2), txt, font=f, fill=col, stroke_width=8, stroke_fill=INK)
+    return _shadow(im)
+
+
+def stamp(text, color=RED):
+    """Stempel („VERBOTEN“, „GIFTIG“, „GRATIS“): doppelter Rahmen, schräg, in kräftiger Farbe."""
+    text = text.upper()
+    f = font(84)
+    d = ImageDraw.Draw(Image.new("L", (1, 1)))
+    w = int(d.textlength(text, font=f)) + 110
+    h = 170
+    im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    dr = ImageDraw.Draw(im)
+    dr.rounded_rectangle((4, 4, w - 5, h - 5), 22, fill=(255, 255, 255, 215), outline=color, width=12)
+    dr.rounded_rectangle((22, 22, w - 23, h - 23), 14, outline=color, width=5)
+    dr.text((55, (h - f.size) / 2 - 12), text, font=f, fill=color)
+    return _shadow(im.rotate(-7, expand=True, resample=Image.BICUBIC), 6, 8, 90)
+
+
+def _slam(final, n=7):
+    """Stempel-Auftritt: kommt groß herein und knallt auf seine Größe (umgekehrt zum Pop-in)."""
+    frames = []
+    for k, sc in enumerate((1.9, 1.55, 1.25, 0.94, 1.03, 1.0, 1.0)[:n]):
+        im = final.resize((max(2, int(final.width * sc)), max(2, int(final.height * sc))), Image.BICUBIC)
+        if k < 2:
+            im.putalpha(im.split()[-1].point(lambda v, f=(k + 1) / 3: int(v * f)))
+        frames.append(im)
+    return frames
+
+
 def note(title, text):
     ft, fb = font(44, "Bold"), font(64)
     lines = _wrap(text.upper(), fb, 600)[:4]
@@ -277,6 +330,18 @@ def frames_for(ov: dict):
             import re
             txt = re.sub(r"(?i)\bkm\s+h\b", "KM/H", str(ov["text"]))        # „300 KM H“ → „300 KM/H“
             return _pop(card(_short(txt, 30))), 420
+        if t == "thermo" and ov.get("value") is not None:
+            v = float(str(ov["value"]).replace(",", "."))
+            fr = _pop(thermo(v, min(v, -30.0 if v > -30 else v)), 5)
+            n = 22
+            for k in range(1, n + 1):                              # Säule steigt (oder fällt) auf den Wert
+                f = 1 - (1 - k / n) ** 2.2
+                start = min(0.0, v)
+                fr.append(thermo(v, start + (v - start) * f))
+            return fr, 330
+        if t == "stamp" and ov.get("text"):
+            col = {"red": RED, "green": GREEN, "orange": (238, 130, 20), "purple": (130, 60, 190)}.get(str(ov.get("color") or "red"), RED)
+            return _slam(stamp(_short(str(ov["text"]), 16), col)), 360
         if t == "tag" and ov.get("text"):
             return _pop(tag(_short(str(ov["text"]), 22))), 300
         if t == "note" and ov.get("text"):

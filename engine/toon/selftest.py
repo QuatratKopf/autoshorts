@@ -111,6 +111,8 @@ def main():
            {"type": "counter", "label": "JAHRE", "value": "48", "unit": ""}, {"type": "counter", "value": "abc"},
            {"type": "counter", "label": "x" * 80, "value": 1234567.5, "unit": "y" * 40}, {"type": "bar", "label": None, "value": "x"},
            {"type": "tag", "text": "AUGUST 1914"}, {"type": "tag", "text": "x" * 60}, {"type": "tag"},
+           {"type": "thermo", "value": 22}, {"type": "thermo", "value": -80}, {"type": "thermo", "value": "x"}, {"type": "thermo", "value": 999},
+           {"type": "stamp", "text": "VERBOTEN"}, {"type": "stamp", "text": "GRATIS", "color": "green"}, {"type": "stamp", "text": "x" * 50, "color": 3},
            {"type": "unbekannt"}, {"type": "card"}, {"type": "phone", "items": []}, {}]
     for ov in ovs:
         check(f"Einblendung {ov}", lambda: overlays.frames_for(ov))
@@ -230,6 +232,23 @@ def main():
             frame(sc_, t=1.0)
         frame({"place": "park", "actors": [{"id": "x", "kind": "spider", "hero": True}], "shot": "close"})
     check("Tier als Hauptfigur", _hero)
+    def _explain():                                              # Erklär-Einblendungen aus dem Satz
+        T = ["Taranteln fressen Unmengen an Käfern, Maulwurfsgrillen und schädlichen Insekten.", "Bei zweiundzwanzig Grad fühlt sie sich wohl.",
+             "In der Antarktis hat es minus achtzig Grad.", "Der Akku hat nur noch elf Prozent.", "Das ist nicht giftig.", "Das ist streng verboten.",
+             "Mit Würfeln, Kugeln und Steinen."]
+        scs = stage.direct([{"text": t, "place": "park", "actors": [{"id": "du"}]} for t in T], [(i * 3, i * 3 + 3) for i in range(len(T))], "Test")
+        ov = [sc_.get("overlay") or {} for sc_ in scs]
+        assert ov[0] == {"type": "checklist", "title": "SPEISEKARTE", "items": [["Käfer", True], ["Maulwurfsgrillen", True], ["Insekten", True]]}, ov[0]
+        assert ov[1] == {"type": "thermo", "value": 22.0}, ov[1]
+        assert ov[2] == {"type": "thermo", "value": -80.0}, ov[2]
+        assert ov[3] == {"type": "bar", "label": "AKKU", "value": 11.0}, ov[3]
+        assert ov[4].get("type") != "stamp", "verneinter Stempel"
+        assert ov[5] == {"type": "stamp", "text": "VERBOTEN", "color": "red"}, ov[5]
+        assert ov[6]["items"][1][0] == "Kugeln", ov[6]
+        for o in ov:
+            if o:
+                assert overlays.frames_for(o), o
+    check("Erklär-Einblendungen", _explain)
     check("Neon-Look", lambda: graphics.neon(frame({"place": "street", "crowd": "walk"}), 1.0))
     check("Neon-Kulisse", lambda: graphics.tint(places.background("street", True)))
     # Regie mit zufälligen und kaputten Drehbüchern

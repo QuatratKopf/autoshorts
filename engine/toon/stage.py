@@ -198,7 +198,7 @@ def _prepare(scene, cast):
             continue                                              # Gelerntes, das höher ist als ein Zimmer (Turm, Gebäude), steht nicht im Raum
         if isinstance(p, dict) and p.get("type"):
             taken = [q["x1"] for q in actors] + [q[1] for q in props]
-            free = [c for c in (830, 250, 540, 990, 90) if all(abs(c - tx) > 230 for tx in taken)] or [830]
+            free = [c for c in (830, 250, 540, 930, 150) if all(abs(c - tx) > 200 for tx in taken)] or [830]   # nie am Rand: Dinge haben eine Mindestgröße
             kind = str(p["type"]).lower().strip()
             fit = extras.prop_fit(kind)
             if fit and fit[1] < 1200 and not p.get("pos"):      # Großes (Auto, Haus, Baum) steht weiter hinten und darf mittig stehen
@@ -1438,6 +1438,7 @@ def direct(scenes, times, topic="", style="", look=""):
             if sc.get("shot") == "event":
                 sc["shot"] = ""
             filled += 1
+    _auto_explain(scenes)
     _topic_creature(scenes, topic)
     for i in range(1, len(scenes)):                  # nie zweimal dieselbe Großaufnahme hintereinander
         if isinstance(scenes[i], dict) and isinstance(scenes[i - 1], dict) and scenes[i].get("shot") == "close" == scenes[i - 1].get("shot"):
@@ -1486,6 +1487,113 @@ def _topic_creature(scenes, topic):
         sc["actors"] = acts + [{"id": "_thema", "kind": kind, "hero": True, "speaks": False, "action": "idle",
                                 "emotion": MOOD_EMOTION.get(mood, "happy" if mood == "happy" else ""),
                                 "pos": 760 if humans else "center", "emote": "", "say": "", "hold": "", "facing": ""}]
+
+
+# Erklär-Einblendungen aus dem Satz (wie in den Vorbild-Shorts: Thermometer, Füllstand, Speisekarte, Stempel)
+STAMPS = [(r"\bverboten|nicht erlaubt|\billegal|strafbar|untersagt", "VERBOTEN", "red"), (r"lebensgefährlich|\btödlich", "TÖDLICH", "red"),
+          (r"(?<!un)giftig", "GIFTIG", "purple"), (r"(?<!un)gefährlich|\bgefahr\b", "GEFAHR", "orange"), (r"\bgratis|kostenlos|umsonst\b", "GRATIS", "green"),
+          (r"\berlaubt\b|\blegal\b", "ERLAUBT", "green"), (r"ausverkauft|leergekauft", "AUSVERKAUFT", "red"), (r"\bpleite|bankrott|insolvent", "PLEITE", "red"),
+          (r"streng geheim|\bgeheim\b", "GEHEIM", "red"), (r"\bfake\b|\bgefälscht", "FAKE", "red"), (r"\brekord", "REKORD", "green")]
+LIST_TITLES = [(r"\bfr[ie]?ss|\bfraß|\bfressen|\bisst\b|\bessen\b|\baß\b|\bernähr", "SPEISEKARTE"), (r"einpack|mitnehm|\bpack|vorrat|kaufen|besorg", "CHECKLISTE")]
+_NOUN = r"(?:[a-zäöüß]+\s+)?[A-ZÄÖÜ][a-zäöüß-]{2,}"
+LIST_RE = r"(" + _NOUN + r"(?:,\s+" + _NOUN + r")+,?\s+(?:und|oder|sowie)\s+" + _NOUN + r")"
+BAR_STOP = {"Prozent", "Jahr", "Jahre", "Jahren", "Tag", "Tage", "Woche", "Monat", "Stunde", "Stunden", "Minute", "Minuten", "Mal", "Ende", "Anfang"}
+
+
+def _list_items(text):
+    """„… fressen Käfer, Maulwurfsgrillen und schädliche Insekten“ → ["Käfer", "Maulwurfsgrillen", "Insekten"] (ab drei Dingen)."""
+    import re as _re
+    m = _re.search(LIST_RE, str(text or ""))
+    if not m:
+        return []
+    items = _re.findall(r"[A-ZÄÖÜ][a-zäöüß-]{2,}", m.group(1))
+    items = [w[:-1] if _re.search(r"[^aeiouäöü]ern$", w) else w for w in items]       # Dativ-Plural: „Käfern“ → „Käfer“ („Kugeln“ bleibt)
+    return items if 3 <= len(items) <= 5 and all(len(w) <= 18 for w in items) else []
+
+
+def _bar_label(text, number_word):
+    """Wovon der Prozentwert handelt: das Hauptwort vor der Zahl („Der Akku hat noch elf Prozent“ → AKKU), sonst None."""
+    import re as _re
+    words = str(text or "").split()
+    pos = next((k for k, w in enumerate(words) if w.lower().strip(".,;:!?") == number_word.lower()), None)
+    if pos is None:
+        return None
+    clean = [w.strip(".,;:!?„“\"") for w in words[1:pos]]
+    nouns = [w for w in clean if _re.match(r"^[A-ZÄÖÜ][a-zäöüß-]{2,}$", w) and w not in BAR_STOP]
+    return nouns[-1].upper()[:16] if nouns else None
+
+
+def _stamp_for(low, prev=""):
+    """Passender Stempel für den Satz (nicht verneint, nicht derselbe wie eben) → (Wort, Farbe) oder None."""
+    import re as _re
+    for pat, word, col in STAMPS:
+        m = _re.search(pat, low)
+        if m and not _re.search(r"(?:nicht|kein\w*|nie)\s+(?:\w+\s+)?" + _re.escape(m.group(0)), low) and word != prev:
+            return word, col
+    return None
+
+
+def _auto_explain(scenes):
+    """Ohne Einblendung im Drehbuch erklärt ein einfaches Bild den Satz: Aufzählung → Liste mit Haken (bei Fressen „Speisekarte“),
+    Temperatur → Thermometer, Prozent mit Bezug → Füllstand, Signalwort → Stempel. Aus einem nackten Grad- oder Prozent-Zähler wird
+    ebenfalls Thermometer bzw. Füllstand. Nicht in Grafik-Szenen und Einschüben, derselbe Stempel nie zweimal hintereinander."""
+    import re as _re
+    prev_stamp = ""
+    for sc in scenes:
+        if not isinstance(sc, dict):
+            prev_stamp = ""
+            continue
+        g = sc.get("graphic") if isinstance(sc.get("graphic"), dict) else {}
+        if sc.get("shot") == "graphic" and g.get("type") == "number" and (str(g.get("label") or "").upper() == "GRAD" or "%" in str(g.get("value") or "")) \
+                and (sc.get("actors") or sc.get("props") or sc.get("place")):
+            sc["shot"], sc["graphic"] = "", None           # Temperatur/Anteil: lieber Thermometer bzw. Füllstand über der Szene als eine nackte Zahl
+        if sc.get("shot") == "graphic" or (sc.get("shot") == "insert" and not _stamp_for(str(sc.get("text") or "").lower(), prev_stamp)):
+            prev_stamp = ""
+            continue
+        txt = str(sc.get("text") or "")
+        low = txt.lower()
+        ov = sc.get("overlay") if isinstance(sc.get("overlay"), dict) else None
+        if sc.get("shot") == "insert":                     # Großaufnahme eines Dings: höchstens ein Stempel darüber („AUSVERKAUFT“)
+            if not ov:
+                word, col = _stamp_for(low, prev_stamp)
+                sc["overlay"] = {"type": "stamp", "text": word, "color": col}
+                prev_stamp = word
+            continue
+        fig = ov if ov and ov.get("type") == "counter" else (None if ov else find_figure(txt))
+        if fig and fig.get("unit") in ("GRAD", "%"):
+            try:
+                v = float(fig.get("value") or 0)
+            except (TypeError, ValueError):
+                v = None
+            if v is not None and fig["unit"] == "GRAD" and -90 <= v <= 120 \
+                    and not _re.search(r"grad (?:celsius )?(?:mehr|wärmer|kälter|weniger)|grad (?:steig|sink|fäll)|um \S+ grad", low):
+                if _re.search(r"minus\s+\S+\s+grad|-\s?\d+\s*grad|unter null", low):
+                    v = -abs(v)
+                sc["overlay"] = {"type": "thermo", "value": v}
+                prev_stamp = ""
+                continue
+            if v is not None and fig["unit"] == "%" and 0 <= v <= 100:
+                word = next((w for w in txt.split() if _number(w) == v), "")
+                label = _bar_label(txt, word.strip(".,;:!?")) if word else None
+                if label:
+                    sc["overlay"] = {"type": "bar", "label": label, "value": v}
+                    prev_stamp = ""
+                    continue
+        if ov:
+            prev_stamp = ""
+            continue
+        items = _list_items(txt)
+        if items:
+            title = next((tt for pat, tt in LIST_TITLES if _re.search(pat, low)), "LISTE")
+            sc["overlay"] = {"type": "checklist", "title": title, "items": [[w, True] for w in items]}
+            prev_stamp = ""
+            continue
+        st = _stamp_for(low, prev_stamp)
+        if st:
+            sc["overlay"] = {"type": "stamp", "text": st[0], "color": st[1]}
+            prev_stamp = st[0]
+        else:
+            prev_stamp = ""
 
 
 _MONTHS = "januar|februar|märz|april|mai|juni|juli|august|september|oktober|november|dezember"
