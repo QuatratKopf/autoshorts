@@ -1,0 +1,407 @@
+{
+ "title": "3 Sinnlose Gehirn-Macks im Alltag erklärt",
+ "scenes": [
+  {
+   "text": "Dein Handy vibriert in der Tasche, obwohl keine Nachricht da ist.",
+   "see": "Du greifst in deine Hosentasche, weil dein Handy angeblich vibriert hat.",
+   "place": "zimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "PHANTOM-VIBRATION"
+   }
+  },
+  {
+   "text": "Warum interpretiert dein Nervensystem harmlose Muskelzuckungen plötzlich als Alarm?",
+   "see": "Ein Gehirn-Bot drückt hektisch auf Knöpfe.",
+   "place": "zimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "gehirn_bot",
+     "speaks": true,
+     "action": "run",
+     "emotion": "worried",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Dein Gehirn ist so auf Empfang getrimmt, dass es kleine Muskelzuckungen falsch interpretiert.",
+   "see": "Das Gehirn hält jede kleine Hautreibung für einen Anruf.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Oder du gehst in einen Raum und vergisst sofort, was du dort eigentlich wolltest.",
+   "see": "Du gehst durch eine Tür in den Flur und bleibst ratlos stehen.",
+   "place": "flur",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "shocked",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "TÜRRAHMEN-EFFEKT"
+   }
+  },
+  {
+   "text": "Das ist der sogenannte Türrahmen-Effekt.",
+   "see": "Eine Notiz zeigt die Regel über den Speicher-Reset an.",
+   "place": "flur",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "note",
+    "title": "GEHIRN-UPDATE",
+    "text": "Neue Tür = Speicher geleert"
+   }
+  },
+  {
+   "text": "Beim Durchschreiten einer Tür schließt das Gehirn einen Raum ab, wodurch der Abruf alter Gedanken erschwert wird.",
+   "see": "Du gehst durch den Rahmen und Akten fliegen gedanklich weg.",
+   "place": "flur",
+   "time": "day",
+   "props": [
+    {
+     "type": "door"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "mood": "panic"
+  },
+  {
+   "text": "Also stehst du da wie ein Statist ohne Drehbuch.",
+   "see": "Du stehst ratlos im Raum und schaust dumm aus der Wäsche.",
+   "place": "flur",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Doch am schlimmsten ist das plötzliche Zusammenzucken kurz vor dem Einschlafen.",
+   "see": "Du liegst im Bett und fängst kurz vor dem Einschlafen an zu zucken.",
+   "place": "schlafzimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sleep",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "EINSCHLAF-ZUCKEN"
+   }
+  },
+  {
+   "text": "Du träumst, du fällst, und dein ganzer Körper zuckt extrem zusammen.",
+   "see": "Du schreckst im Bett hoch mit weiten Augen.",
+   "place": "schlafzimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense"
+  },
+  {
+   "text": "Das nennt sich hypnagoger Zuckungsimpuls.",
+   "see": "Grafik mit einer Pulskurve, die plötzlich ausschlägt.",
+   "place": "schlafzimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Wenn deine Muskeln zu schnell entspannen, interpretiert das Gehirn das fälschlicherweise als Sturz.",
+   "see": "Ein Gehirn-Bot schlägt Alarm am Schaltpult.",
+   "place": "zimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "gehirn_bot",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "stamp",
+    "text": "ALARM",
+    "color": "red"
+   }
+  },
+  {
+   "text": "Es schickt also einen Notfall-Stromstoß durch deinen Körper.",
+   "see": "Der Gehirn-Bot sendet ein Strom-Signal ab.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn_bot",
+     "speaks": true,
+     "action": "point",
+     "emotion": "angry",
+     "emote": "anger",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Danke für die Rettung, du weckst mich nur mitten in der Nacht auf.",
+   "see": "Du schreckst schnaufend im Bett auf.",
+   "place": "schlafzimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Dein Kopf meint es eigentlich nur gut mit dir.",
+   "see": "Du schüttelst ungläubig den Kopf im Bett.",
+   "place": "schlafzimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Aber seine Methoden sind gelinde gesagt gewöhnungsbedürftig.",
+   "see": "Der Gehirn-Bot winkt übertrieben stolz.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn_bot",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Jetzt suchst du wahrscheinlich dein Handy, obwohl du es in der Hand hältst.",
+   "see": "Du stehst im Flur und suchst dein Handy, das du in der Hand hältst.",
+   "place": "flur",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Folg für mehr wahnwitzige Fakten über deinen Körper.",
+   "see": "Du schaust grinsend in die Kamera.",
+   "place": "flur",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "card",
+    "text": "FOLGEN FÜR MEHR"
+   }
+  }
+ ]
+}
