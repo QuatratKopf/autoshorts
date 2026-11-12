@@ -1,5 +1,5 @@
 {
- "updated": 1794481962.4716535,
+ "updated": 1794482742.7878466,
  "enough": false,
  "counted": 3,
  "total": 5,
@@ -9,10 +9,10 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 3,
-   "avg_views": 1133,
+   "avg_views": 1120,
    "avg_likes": 24.0,
-   "like_rate": 2.12,
-   "avg_score": 1503
+   "like_rate": 2.14,
+   "avg_score": 1490
   }
  ],
  "weights": {
@@ -33,11 +33,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2302,
+   "views": 2262,
    "likes": 54,
    "comments": 0,
    "shares": 0,
-   "score": 3112
+   "score": 3072
   },
   {
    "id": 38,
