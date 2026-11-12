@@ -1,0 +1,405 @@
+{
+ "title": "Hollywood Heist Filme sind physikalisch wild",
+ "scenes": [
+  {
+   "text": "Hollywood Heist Filme sind physikalisch komplett wild.",
+   "see": "Eine Person sitzt geschockt vor einem Fernseher auf der Couch.",
+   "place": "cinema",
+   "time": "day",
+   "props": [
+    {
+     "type": "tv"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Auf der Leinwand sieht jeder Zaubertrick sofort logisch aus.",
+   "see": "Eine Person steht im Wohnzimmer und gestikuliert fasziniert wie ein Magier.",
+   "place": "cinema",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Aber im echten Leben scheitert fast jeder davon.",
+   "see": "Nahaufnahme: Ein Stuhl stolpert oder fällt symbolisch um.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "stuhl"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "fall",
+     "emotion": "scared",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "NULL PROZENT"
+   }
+  },
+  {
+   "text": "Regisseure ignorieren einfach jede echte physikalische Gesetzmäßigkeit.",
+   "see": "In einem Film-Labor schüttelt die Figur wütend den Kopf.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "generator"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Wasserströme biegen sich plötzlich im perfekten rechten Winkel ab.",
+   "see": "Ein Bild eines defekten Wasserrohrs, das unlogisch spritzt.",
+   "place": "bathroom",
+   "time": "day",
+   "weather": "steam",
+   "props": [
+    {
+     "type": "faucet"
+    },
+    {
+     "type": "wave"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "overlay": {
+    "type": "bar",
+    "label": "PHYSIK",
+    "value": 0
+   }
+  },
+  {
+   "text": "Menschen fliegen durch die Luft wie Superhelden im Wind.",
+   "see": "Eine Figur schwebt schwerelos durch das Wohnzimmer.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "box",
+     "pos": 650
+    },
+    {
+     "type": "glass",
+     "pos": 930
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "float",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 240
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Dazu kommt der berühmte digitale Kartenregen.",
+   "see": "Zähler-Grafik für den digitalen Kartenregen.",
+   "place": "office",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "calm",
+   "crowd": "walk",
+   "graphic": {
+    "type": "number",
+    "kicker": "KARTENREGEN",
+    "value": "1.000.000",
+    "label": "DIGITALE KARTEN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Niemand würde Millionen Dollar so leicht auf der Straße verteilen.",
+   "see": "Geld liegthaufenweise mitten auf der Straße.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "crowd": "watch"
+  },
+  {
+   "text": "Dennoch saugen uns diese Szenen jedes Mal komplett ein.",
+   "see": "Figur blickt wie hypnotisiert mit offenen Augen nach vorne.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Unser Gehirn liebt das Gefühl von perfekter Kontrolle.",
+   "see": "Grafik zum Gefühl von perfekter Kontrolle im Gehirn.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "badge",
+    "kicker": "GEHIRN-EFFECT",
+    "text": "100% KONTROLLE",
+    "dark": false
+   }
+  },
+  {
+   "text": "Jeder raffinierte Coup fühlt sich an wie ein eigener Sieg.",
+   "see": "Figur jubelt begeistert im Wohnzimmer.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Dabei vergessen wir schnell die Logik dahinter.",
+   "see": "Figur zuckt ratlos mit den Schultern.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Schließlich wollen wir im Kino kein Lehrbuch sehen.",
+   "see": "Ein großes Physik-Lehrbuch liegt symbolisch auf dem Tisch.",
+   "place": "cinema",
+   "time": "day",
+   "props": [
+    {
+     "type": "table"
+    },
+    {
+     "type": "lib_gesetzbuch"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Sondern pure Magie auf der riesigen Leinwand.",
+   "see": "Riesige Kino-Leinwand leuchtet Magie aus.",
+   "place": "cinema",
+   "time": "night",
+   "props": [
+    {
+     "type": "tv"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "happy"
+    }
+   ],
+   "shot": "event",
+   "mood": "happy"
+  },
+  {
+   "text": "Am Ende gewinnen immer die Diebe.",
+   "see": "Ein Fluchtwagen saust mit Geld davon.",
+   "place": "street",
+   "time": "night",
+   "props": [
+    {
+     "type": "car"
+    },
+    {
+     "type": "money"
+    }
+   ],
+   "shot": "event",
+   "mood": "happy",
+   "crowd": "cheer"
+  },
+  {
+   "text": "Ausser bei dem einen großen Fehler am Schluss.",
+   "see": "Ein Überwachungs-System entlarvt einen Coup.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "cctv"
+    },
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Folg für mehr verrückte Filmfakten.",
+   "see": "Handy-Benachrichtigung mit Aufforderung zu folgen.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "choice",
+    "a": "Sofort glauben",
+    "b": "Physik prüfen"
+   }
+  }
+ ]
+}
