@@ -1892,7 +1892,7 @@
   "id": 59,
   "category": "storys",
   "topic": "Warum Hollywood-Heist-Filme wie 'Now You See Me' physikalisch komplett wild sind und trotzdem süchtig machen",
-  "status": "review",
+  "status": "discarded",
   "created": 1794478231.5033045,
   "trend": {
    "title": "Now You See Me is the most stupid and insane big budget movie I’ve ever seen",
@@ -1930,6 +1930,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-12 13:00",
-  "review_at": 1794478585.9150727
+  "review_at": 1794478585.9150727,
+  "error": "Bei der Prüfung verworfen: Drehbuch zu kurz (9 s stummes Standbild am Ende), erfundene Zahlen in Grafiken, Gesetzbuch statt Lehrbuch, Figur am Bildrand abgeschnitten, wenig Inhalt"
  }
 ]
