@@ -2109,5 +2109,13 @@
   "slot": "2026-11-12 18:00",
   "review_at": 1794496909.9915397,
   "error": "Bei der Prüfung verworfen: Tippfehler im Titel (Gehirn-Macks), leeres Bild mit Schreibtisch, Kästchen statt Gehirn"
+ },
+ {
+  "id": 64,
+  "category": "fakten",
+  "topic": "3 bizarre Reaktionen unseres Gehirns im Alltag, die null Sinn ergeben, aber jeder von uns hat",
+  "status": "error",
+  "created": 1794498252.3772142,
+  "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-flash-lite-latest: HTTP 503 | pollinations: Antwort enthält kein JSON"
  }
 ]
