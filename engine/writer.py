@@ -986,10 +986,15 @@ def write_script(cat: dict, topic: str, trend=None, source=None) -> tuple[dict, 
         pass
     if toon and not has_storyboard(js):
         ai.log("Drehbuch kam ohne Bildplan – lasse ihn eigens ausarbeiten")
-        try:
-            js = storyboard(js, topic)
-        except Exception as e:  # noqa: BLE001
-            ai.log(f"Bildplan nicht möglich ({e}) – die Regie bebildert nach dem Sprechertext")
+        for attempt in (1, 2):
+            try:
+                js = storyboard(js, topic)
+                break
+            except Exception as e:  # noqa: BLE001
+                ai.log(f"Bildplan nicht möglich ({e})" + (" – zweiter Versuch" if attempt == 1 else ""))
+        if not has_storyboard(js):
+            # Ohne Bildplan steht in fast jeder Szene dieselbe Figur im selben Zimmer – so ein Video sieht billig aus. Lieber keins als das.
+            raise ai.ProviderError("Kein Bildplan zu bekommen (Text-KI nicht erreichbar) – Video wird nicht gebaut")
     if toon and cfg("review_script") is not False:
         try:
             js = review_scenes(js, topic)
