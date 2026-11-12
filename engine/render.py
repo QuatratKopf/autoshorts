@@ -352,7 +352,7 @@ def render(work: Path, scenes, times, voice, ass, out, music=None, music_volume=
         music = synth_music(work, slug)
     if music:
         args += ["-stream_loop", "-1", "-i", str(music)]
-        parts.append(f"[{idx}:a]volume={music_volume},afade=t=in:d=1[m]")
+        parts.append(f"[{idx}:a]volume={music_volume},afade=t=in:d=0.15[m]")         # Musik ist ab dem ersten Bild da (kein langsames Einblenden)
         mix.append("[m]")
         idx += 1
     events = []
@@ -360,6 +360,8 @@ def render(work: Path, scenes, times, voice, ass, out, music=None, music_volume=
         name = str(sc.get("sfx") or "").lower()
         if name in sfx:
             events.append((s, name))
+        elif i == 0 and is_toon and "whoosh" in sfx:      # Start mit hörbarem Auftakt: das Video beginnt nicht in der Stille
+            events.append((0.0, "whoosh"))
         elif i and is_toon and "swish" in sfx:
             events.append((max(0.0, s - 0.08), "swish"))
         if isinstance(sc.get("overlay"), dict) and sc["overlay"].get("type") and name != "pop" and "pop" in sfx:

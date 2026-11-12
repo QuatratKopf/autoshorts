@@ -72,3 +72,9 @@ Die App lädt ein Vorlagen-Video in das Release `inbox` und startet `-f 'inputs[
 `engine/remake.py` hört es an (Spracherkennung), schickt zehn Einzelbilder mit dem Text an die Text-KI (Ablauf, Thema, Video-Art) und
 `writer.write_script(..., source=…)` schreibt daraus ein eigenes Drehbuch: gleiche Idee und gleiches Tempo, eigene Worte, keine Namen,
 Marken oder Figuren der Vorlage. Danach wird die Vorlage aus `inbox` gelöscht. Kategorie `comedy`: absurde Ich-Geschichten mit Humor.
+
+## Einstieg (erste drei Sekunden)
+`writer.sharpen_hook` schärft nach jedem Drehbuch die ersten zwei Sätze (Satz 1 höchstens zehn Wörter, mitten in der Handlung, keine
+Floskel wie „Was wäre, wenn“/„Stell dir vor“, nicht der Titel noch einmal; Satz 2 öffnet eine Frage) – übernommen wird nur, was die
+Prüfung besteht. `stage._opening`: im ersten Bild reagiert die Hauptfigur sichtbar; die Kamera ruckt kräftig ins Bild (`opener`), Musik und
+ein Auftakt-Ton sind ab der ersten Sekunde da.

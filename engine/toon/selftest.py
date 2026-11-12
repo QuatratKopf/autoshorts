@@ -302,6 +302,17 @@ def main():
             for i, sc_ in enumerate(scs):
                 stage.render_scene(sc_, {}, 2.8, Path(tmp) / f"c{i}.mp4", index=i)
     check("Schnitt im Satz und Gruppen", _cuts)
+    def _hook():                                                 # Einstieg: schwache Anfänge erkannt, erstes Bild mit Reaktion und Ruck
+        from .. import writer
+        assert writer.hook_weak({"title": "Was passiert ohne Schwerkraft?", "scenes": [{"text": "Was wäre, wenn die Schwerkraft verschwindet?"}]})
+        assert not writer.hook_weak({"title": "KI-Agenten", "scenes": [{"text": "Mein Laptop hat gerade gekündigt."}]})
+        scs = stage.direct([{"text": "Dein Auto fliegt gleich davon.", "place": "street", "actors": [{"id": "du"}]},
+                            {"text": "Weiter.", "place": "street"}, {"text": "Schluss.", "place": "street"}], [(0, 3), (3, 6), (6, 9)], "Test")
+        assert scs[0]["actors"][0]["emotion"], scs[0]["actors"]
+        fr = frame(scs[0], t=0.1)
+        for t in (0.0, 0.2, 0.49, 0.6):
+            assert stage._camera(fr.convert("RGB"), t, 3.0, {"opener": True}).size == (1080, 1920)
+    check("Einstieg", _hook)
     check("Neon-Look", lambda: graphics.neon(frame({"place": "street", "crowd": "walk"}), 1.0))
     check("Neon-Kulisse", lambda: graphics.tint(places.background("street", True)))
     # Regie mit zufälligen und kaputten Drehbüchern

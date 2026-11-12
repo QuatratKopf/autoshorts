@@ -1480,6 +1480,7 @@ def direct(scenes, times, topic="", style="", look=""):
                 sc["shot"] = ""
             filled += 1
     _time_weather(scenes)
+    _opening(scenes)
     _auto_explain(scenes)
     _topic_creature(scenes, topic)
     for i in range(1, len(scenes)):                  # nie zweimal dieselbe Großaufnahme hintereinander
@@ -1544,6 +1545,23 @@ def _topic_creature(scenes, topic):
         sc["actors"] = acts + [{"id": "_thema", "kind": kind, "hero": True, "speaks": False, "action": "idle",
                                 "emotion": MOOD_EMOTION.get(mood, "happy" if mood == "happy" else ""),
                                 "pos": 760 if humans else "center", "emote": "", "say": "", "hold": "", "facing": ""}]
+
+
+def _opening(scenes):
+    """Das erste Bild packt: keine Grafik, keine Karte und kein leerer Ort – die Hauptfigur reagiert sichtbar (Gefühl passend zur
+    Stimmung, Ausrufezeichen) und steht mittig. Der Schnitt mitten im Satz und der Kamera-Ruck zum Start erledigen den Rest."""
+    sc = scenes[0] if scenes and isinstance(scenes[0], dict) else None
+    if not sc or sc.get("shot") == "graphic" or places.resolve(backdrop(sc)) in MAPS or sc.get("float"):
+        return
+    acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+    humans = [a for a in acts if not a.get("kind")]
+    if len(humans) == 1 and not humans[0].get("to") and str(humans[0].get("action") or "") in ("", "idle", "talk", "look_around"):
+        h = humans[0]
+        mood = str(sc.get("mood") or "")
+        h["emotion"] = h.get("emotion") or {"scary": "scared", "panic": "scared", "tense": "worried", "sad": "sad"}.get(mood, "shocked")
+        h["action"] = "shocked" if h["emotion"] in ("shocked", "scared") else "talk"
+        h["emote"] = h.get("emote") or ("!" if h["emotion"] in ("shocked", "scared") else "")
+        h["speaks"] = True
 
 
 # Tageszeit und Wetter, die der Satz nennt („nachts“, „es regnet in Strömen“) – Tag/Nacht und Wetter müssen zum Satz passen
@@ -1995,7 +2013,10 @@ def _camera(frame, t, dur, cam):
         z += 0.14 * e
         ax += (float(cam.get("fx", 540)) - 540) * e
         ay -= 90 * e
-    if t < 0.22:                                          # Schnitt: kurzer Ruck hinein und zur Seite
+    if cam.get("opener") and t < 0.5:                     # allererstes Bild: kräftiger Ruck ins Bild – sofort Bewegung
+        e = (1 - t / 0.5) ** 3
+        z += 0.2 * e
+    elif t < 0.22:                                        # Schnitt: kurzer Ruck hinein und zur Seite
         e = (1 - t / 0.22) ** 2
         z += 0.08 * e
         ax += cam.get("dir", 1) * 70 * e
@@ -2070,7 +2091,8 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
                 cam["punch"] = None                                         # kein Sprung auf den Kopf – der läge dann am Bildrand
         span = max(xs) - min(xs) + 420                                  # Breite der Gruppe samt Armen
         cam.update(tight=True, zt=max(1.0, min(1.42, W / span)), fx=(max(xs) + min(xs)) / 2)
-    cam_flat = {"flat": True, "dir": cam["dir"], "drift": cam["drift"]}
+    cam["opener"] = index == 0
+    cam_flat = {"flat": True, "dir": cam["dir"], "drift": cam["drift"], "opener": index == 0}
     cut_t, cut_kind, named = _cut_plan(scene, shot, gfx or ins, moving, ov_tall, place, actors, props, dur, cam, index)
     mood_s = str(scene.get("mood") or "").lower()
     fx_opt = {"crowd": scene.get("crowd") if crowd_ok(scene) else "", "mood": mood_s, "spec": places.spec_of(backdrop(scene)), "sky": sky_m,
