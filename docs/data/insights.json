@@ -1,5 +1,5 @@
 {
- "updated": 1794502306.8940303,
+ "updated": 1794502852.3353982,
  "enough": false,
  "counted": 5,
  "total": 6,
@@ -10,18 +10,18 @@
    "name": "🤯 What If",
    "n": 4,
    "avg_views": 1250,
-   "avg_likes": 27.8,
-   "like_rate": 2.22,
-   "avg_score": 1674
+   "avg_likes": 27.5,
+   "like_rate": 2.2,
+   "avg_score": 1670
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 1,
-   "avg_views": 525,
+   "avg_views": 522,
    "avg_likes": 14.0,
-   "like_rate": 2.67,
-   "avg_score": 735
+   "like_rate": 2.68,
+   "avg_score": 732
   }
  ],
  "weights": {
@@ -42,11 +42,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2353,
+   "views": 2349,
    "likes": 54,
    "comments": 0,
    "shares": 0,
-   "score": 3163
+   "score": 3159
   },
   {
    "id": 54,
@@ -63,20 +63,20 @@
    "title": "Was passiert, wenn Drohnen deinen Alltag komplett überwachen?",
    "category": "whatif",
    "views": 1113,
-   "likes": 18,
+   "likes": 17,
    "comments": 1,
    "shares": 0,
-   "score": 1413
+   "score": 1398
   },
   {
    "id": 58,
    "title": "Wie aus einer Gaming-Bude der wertvollste Tech-Gigant wurde",
    "category": "fakten",
-   "views": 525,
+   "views": 522,
    "likes": 14,
    "comments": 0,
    "shares": 0,
-   "score": 735
+   "score": 732
   },
   {
    "id": 44,
