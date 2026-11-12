@@ -1,0 +1,453 @@
+{
+ "title": "3 Tierfähigkeiten, die wie echte Superkräfte wirken",
+ "scenes": [
+  {
+   "text": "Ein kleiner Krebs erzeugt unter Wasser extreme Hitze.",
+   "see": "Du sitzt am Schreibtisch und starrst geschockt auf dein Handy.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "shrimp",
+     "hold": "phone",
+     "facing": "right",
+     "say": "",
+     "pos": "center",
+     "hero": true
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "EXTREME HITZE Unter Wasser"
+   }
+  },
+  {
+   "text": "Wie entsteht dieser tödliche Schuss aus reiner Hitze?",
+   "see": "Ein Pistolenkrebs schnallt mit seiner großen Schere unter Wasser.",
+   "place": "unterwasser",
+   "time": "day",
+   "actors": [
+    {
+     "id": "krebs",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "angry",
+     "emote": "",
+     "kind": "shrimp",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": 400,
+     "hero": true
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "stamp",
+    "text": "TÖDLICH",
+    "color": "red"
+   }
+  },
+  {
+   "text": "Beim Implodieren erreicht diese Blase kurz viertausendviershundert Grad.",
+   "see": "Die erzeugte Blase implodiert extrem schnell und leuchtet auf.",
+   "place": "unterwasser",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_blase"
+    }
+   ],
+   "actors": [
+    {
+     "id": "_meer",
+     "kind": "shrimp",
+     "action": "idle",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": "worried",
+     "hero": true,
+     "pos": 400
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Der dabei entstehende Knall ist zweihundertachtzig Dezibel laut.",
+   "see": "Eine verblüffende Grafik vergleicht den Pistolenkrebs mit einem Düsenjet.",
+   "place": "unterwasser",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "number",
+    "kicker": "LAUTSTÄRKE",
+    "value": "280 dB",
+    "label": "LAUTER ALS EIN DÜSENJET",
+    "dark": false
+   }
+  },
+  {
+   "text": "Das betäubt kleine Fische im Umkreis sofort.",
+   "see": "Du hältst dir im Zimmer erschrocken die Ohren zu.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "fish",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense"
+  },
+  {
+   "text": "Aber das ist noch gar nichts gegen das ewige Leben.",
+   "see": "Eine kleine transparente Qualle schwebt friedlich durch das blaue Meer.",
+   "place": "unterwasser",
+   "time": "day",
+   "actors": [
+    {
+     "id": "qualle",
+     "speaks": true,
+     "action": "idle",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "shrimp",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": "center",
+     "hero": true
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "KANDIDAT 2"
+   }
+  },
+  {
+   "text": "Die Qualle Turritopsis dohrnii kann ihr Alter einfach zurücksetzen.",
+   "see": "Grafik einer Zeitleiste, die zurückspult.",
+   "place": "unterwasser",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "badge",
+    "kicker": "SUPERKRAFT",
+    "text": "UNSTERBLICH",
+    "dark": false
+   }
+  },
+  {
+   "text": "Wenn sie alt oder krank wird, verwandelt sie sich zurück in ein Baby.",
+   "see": "Die Qualle schrumpft zusammen und wird wieder zu einem kleinen Polypen.",
+   "place": "unterwasser",
+   "time": "day",
+   "actors": [
+    {
+     "id": "qualle",
+     "speaks": true,
+     "action": "think",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "shrimp",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": 400,
+     "hero": true
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Dieser Vorgang heißt Transdifferenzierung und ist theoretisch unendlich wiederholbar.",
+   "see": "Du sitzt nachdenklich im Zimmer und schaust verwirrt.",
+   "place": "zimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "table"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "happy",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "note",
+    "title": "BIOLOGIE",
+    "text": "Biologisch unsterblich!"
+   }
+  },
+  {
+   "text": "Sie stirbt also nur, wenn sie gefressen wird.",
+   "see": "Ein Stempel mit dem Wort UNSTERBLICH knallt ins Bild.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "stamp",
+    "text": "UNSTERBLICH",
+    "color": "green"
+   }
+  },
+  {
+   "text": "Der Fangschreckenkrebs schlägt dagegen lieber selbst zu.",
+   "see": "Ein bunt schillernder Fangschreckenkrebs taucht am Meeresboden auf.",
+   "place": "unterwasser",
+   "time": "day",
+   "actors": [
+    {
+     "id": "fangschrecke",
+     "speaks": true,
+     "action": "idle",
+     "emotion": "angry",
+     "emote": "",
+     "kind": "mantis",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": "center",
+     "hero": true
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "KANDIDAT 3"
+   }
+  },
+  {
+   "text": "Seine Keulen beschleunigen schneller als eine Kugel aus einer Pistole.",
+   "see": "Der Fangschreckenkrebs schlägt blitzschnell mit seinen Keulen aus.",
+   "place": "unterwasser",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_keule",
+     "pos": 860
+    }
+   ],
+   "actors": [
+    {
+     "id": "fangschrecke",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "angry",
+     "emote": "!",
+     "kind": "mantis",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": 400,
+     "hero": true
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Mit achtzig Kilometer pro Stunde zertrümmert er mühelos dicke Aquarienscheiben.",
+   "see": "Eine Grafik vergleicht die Beschleunigung in einer Skala.",
+   "place": "underwater",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "number",
+    "kicker": "KREBS",
+    "value": "80 km/h",
+    "label": ""
+   }
+  },
+  {
+   "text": "Das Wasser kocht an der Einschlagstelle kurz auf.",
+   "see": "Eine Glasscheibe unter Wasser Zerspringt in viele kleine Teile.",
+   "place": "unterwasser",
+   "time": "day",
+   "weather": "steam",
+   "props": [
+    {
+     "type": "glasscheibe",
+     "pos": 860
+    }
+   ],
+   "actors": [
+    {
+     "id": "_meer",
+     "kind": "mantis",
+     "action": "idle",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": "angry",
+     "hero": true,
+     "pos": 400
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Zusätzlich hat er sechzehn Farbkanäle in den Augen.",
+   "see": "Großaufnahme von den faszinierenden, bunten Augen des Krebses.",
+   "place": "unterwasser",
+   "time": "day",
+   "actors": [
+    {
+     "id": "fangschrecke",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "mantis",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": "center",
+     "hero": true
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Wir Menschen haben im Vergleich dazu nur mickrige drei.",
+   "see": "Du schaust ungläubig in dein Buch am Schreibtisch.",
+   "place": "zimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "lehrbuch"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sad",
+     "emotion": "sad",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "sad"
+  },
+  {
+   "text": "Er sieht also Farben, die wir uns nicht einmal vorstellen können.",
+   "see": "Erstaunte Siegerehrung-Grafik für das krasseste Tier.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "happy"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "happy",
+   "graphic": {
+    "type": "podium",
+    "kicker": "BESTE AUGEN",
+    "text": "KREBS",
+    "left": "ADLER",
+    "right": "MENSCH",
+    "dark": false
+   }
+  },
+  {
+   "text": "Welche dieser drei Superkräfte hättest du am liebsten im Alltag?",
+   "see": "Du grinst in die Kamera und deutest nach unten.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Schreib es in die Kommentare und folg für mehr Fakten.",
+   "see": "Du nickst überzeugt und zeigst einen Daumen hoch.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "choice",
+    "a": "Ewige Jugend",
+    "b": "Super-Schlag"
+   }
+  }
+ ]
+}

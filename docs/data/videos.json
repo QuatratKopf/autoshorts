@@ -2337,5 +2337,45 @@
   "slot": "2026-11-12 21:00",
   "review_at": 1794508566.4303672,
   "error": "Bei der Prüfung verworfen: Kein einziges der drei Tiere ist zu sehen (Mensch unter Wasser, leere Wüste), Thermometer mit nicht gesprochener Zahl, Markenname im Text"
+ },
+ {
+  "id": 74,
+  "category": "fakten",
+  "topic": "3 seltsame Tierfähigkeiten, die wie Superkräfte wirken: Pistolenkrebs, unsterbliche Qualle und Fangschreckenkrebs",
+  "status": "rendered",
+  "created": 1794509724.5706158,
+  "title": "3 Tierfähigkeiten, die wie echte Superkräfte wirken",
+  "description": "Entdecke drei Tiere mit echten Superkräften!\nWir zeigen, was Pistolenkrebs und Co. können.\nWelche Kraft hättest du am liebsten?",
+  "hashtags": [
+   "#shorts",
+   "#tierfakten",
+   "#wissen",
+   "#fyp",
+   "#viral",
+   "#biologie",
+   "#fakten"
+  ],
+  "tags": [
+   "tierfakten",
+   "pistolenkrebs",
+   "fangschreckenkrebs",
+   "unsterbliche qualle",
+   "superkräfte",
+   "biologie fakten",
+   "tiere",
+   "lustige tierfakten"
+  ],
+  "thumb_text": "ECHTE SUPERKRÄFTE",
+  "missing": null,
+  "cover_ms": 69479,
+  "duration": 69.4,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
