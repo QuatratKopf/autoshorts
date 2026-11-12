@@ -2,7 +2,7 @@
  "settings": {
   "autopilot": true,
   "upload_times": "13:00, 18:00, 21:00",
-  "target_seconds": 130,
+  "target_seconds": 80,
   "text_provider": "gemini",
   "tts_provider": "edge",
   "image_provider": "cloudflare",
@@ -33,7 +33,7 @@
   "trend_regions": "US,DE",
   "audience": "Gen Z (16–25) in Deutschland, die TikTok und YouTube Shorts schauen: Internet-Kultur, Memes, virale Trends, Gaming, Musik, Serien, Filme, Creator, Tech, Lifestyle. Lockere Sprache wie unter Freunden, schnell auf den Punkt, kein Lehrer- oder Kinder-Ton.",
   "auto_learn": true,
-  "min_seconds": "90",
+  "min_seconds": "65",
   "upload_via": "zernio",
   "gemini_voice": "",
   "voice_speed": "1",
