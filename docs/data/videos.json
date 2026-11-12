@@ -2342,7 +2342,7 @@
   "id": 74,
   "category": "fakten",
   "topic": "3 seltsame Tierfähigkeiten, die wie Superkräfte wirken: Pistolenkrebs, unsterbliche Qualle und Fangschreckenkrebs",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1794509724.5706158,
   "title": "3 Tierfähigkeiten, die wie echte Superkräfte wirken",
   "description": "Entdecke drei Tiere mit echten Superkräften!\nWir zeigen, was Pistolenkrebs und Co. können.\nWelche Kraft hättest du am liebsten?",
@@ -2376,6 +2376,7 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Qualle wird als Krebs gezeigt, Tippfehler viertausendviershundert, 280 Dezibel sachlich falsch, Untertitel über dem Tier"
  }
 ]
