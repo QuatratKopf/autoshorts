@@ -1,5 +1,5 @@
 {
- "updated": 1794471874.6190512,
+ "updated": 1794473740.9680548,
  "enough": false,
  "counted": 3,
  "total": 5,
@@ -9,10 +9,10 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 3,
-   "avg_views": 1118,
+   "avg_views": 1119,
    "avg_likes": 24.0,
    "like_rate": 2.15,
-   "avg_score": 1488
+   "avg_score": 1489
   }
  ],
  "weights": {
@@ -20,7 +20,8 @@
   "storys": 1.0,
   "mysterien": 1.0,
   "tiere": 1.0,
-  "whatif": 1.0
+  "whatif": 1.0,
+  "comedy": 1.0
  },
  "advice": [
   "Noch zu wenig Daten: 3 von 6 Videos sind alt genug zum Vergleichen. Bis dahin läuft alles im normalen Wechsel."
@@ -32,11 +33,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2259,
+   "views": 2260,
    "likes": 54,
    "comments": 0,
    "shares": 0,
-   "score": 3069
+   "score": 3070
   },
   {
    "id": 38,
