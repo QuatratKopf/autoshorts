@@ -2295,7 +2295,7 @@
   "id": 73,
   "category": "fakten",
   "topic": "3 seltsame Tierfähigkeiten, die wie Superkräfte wirken",
-  "status": "review",
+  "status": "discarded",
   "created": 1794507075.8179758,
   "title": "Tierfähigkeiten: 3 Tiere mit echten Superkräften",
   "description": "Welches Tier hat die verrückteste Superkraft im Alltags-Test?\nEntdecke drei Tiere mit Fähigkeiten wie aus einem Science-Fiction-Film.\nPistolenkrebs oder Axolotl: Welche Fähigkeit hättest du am liebsten?",
@@ -2335,6 +2335,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-12 21:00",
-  "review_at": 1794508566.4303672
+  "review_at": 1794508566.4303672,
+  "error": "Bei der Prüfung verworfen: Kein einziges der drei Tiere ist zu sehen (Mensch unter Wasser, leere Wüste), Thermometer mit nicht gesprochener Zahl, Markenname im Text"
  }
 ]
