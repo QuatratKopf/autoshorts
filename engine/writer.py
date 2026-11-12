@@ -429,6 +429,7 @@ def polish(js):
     for k in ("title", "description"):
         if isinstance(js.get(k), str):
             js[k] = fix_eszett(js[k])
+            js[k] = re.sub(r"[ \t]*[\U0001F000-\U0001FAFF\u2600-\u27BF\uFE0F\u200D]+", "", js[k]).strip()      # keine Emojis in Titel und Beschreibung
     for sc in js.get("scenes", []):
         if not isinstance(sc, dict):
             continue
@@ -579,6 +580,9 @@ Texte der Einblendungen und Grafiken ("labels"). Prüfe streng und verbessere NU
    Schadenssummen oder Prozentwerte.
 3. Sachlich Falsches oder maßlos Übertriebenes (falsche Größenordnung, unmöglicher Zeitraum, falsche Ursache): ersetze es durch die richtige,
    anschauliche Aussage. Bei Gedankenspielen („Was wäre, wenn …“) zählt, was nach heutigem Wissen wirklich folgen würde.
+   Prüfe jede Temperatur, Geschwindigkeit, Masse und Zeitspanne gegen das, was allgemein bekannt ist (ein Schweißbrenner hat rund dreitausend Grad,
+   nicht zehntausend; Thermit gut zweitausend) – im Zweifel die Zahl weglassen und anschaulich umschreiben („heißer als Lava“).
+   Ein Satz, der in sich keinen Sinn ergibt oder sich selbst widerspricht, wird durch eine klare, richtige Aussage zum selben Punkt ersetzt.
 4. Einblendung oder Grafik passt nicht zum Satz (andere Zahl, anderes Thema, sinnloses Wort): korrigiere ihren Text.
 5. Es ist ein Video: Der Zuschauer schaut zu, er „liest“ nicht.
 Jeder verbesserte Satz bleibt etwa gleich lang (höchstens 20 % kürzer oder länger), im selben lockeren Ton, Zahlen ausgeschrieben, ohne Marken,
