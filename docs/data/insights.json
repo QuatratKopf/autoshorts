@@ -1,5 +1,5 @@
 {
- "updated": 1794498432.0275617,
+ "updated": 1794500246.2411208,
  "enough": false,
  "counted": 5,
  "total": 6,
@@ -9,10 +9,10 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 4,
-   "avg_views": 1240,
-   "avg_likes": 27.5,
-   "like_rate": 2.22,
-   "avg_score": 1660
+   "avg_views": 1245,
+   "avg_likes": 27.8,
+   "like_rate": 2.23,
+   "avg_score": 1668
   },
   {
    "slug": "fakten",
@@ -52,11 +52,11 @@
    "id": 54,
    "title": "Was passiert, wenn die Schwerkraft für fünf Sekunden verschwindet?",
    "category": "whatif",
-   "views": 1513,
-   "likes": 38,
+   "views": 1534,
+   "likes": 39,
    "comments": 0,
    "shares": 0,
-   "score": 2083
+   "score": 2119
   },
   {
    "id": 38,
