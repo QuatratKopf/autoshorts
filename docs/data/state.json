@@ -1,5 +1,5 @@
 {
- "last_category": "fakten",
+ "last_category": "whatif",
  "done_slots": [
   "2026-11-08 18:00",
   "2026-11-11 18:00",
@@ -9,9 +9,10 @@
   "2026-11-12 21:00"
  ],
  "used_queue": [
-  "qkv0cbgez"
+  "qkv0cbgez",
+  "q14gkcy2d"
  ],
- "last_stats": 1794505251.2511408,
+ "last_stats": 1794508909.053172,
  "next_id": 74,
  "connected": {
   "youtube": {
@@ -20,6 +21,6 @@
   }
  },
  "voice_wps": 2.781,
- "last_trends": 1794497369.7871087,
+ "last_trends": 1794508909.0558472,
  "tiktok_handle": "wissens..wert"
 }
