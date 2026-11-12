@@ -1,329 +1,4 @@
 {
- "2026-11-11 18:00": {
-  "category": "whatif",
-  "topic": "Was wäre, wenn die Schwerkraft der Erde für nur 5 Sekunden exakt auf Null sinken würde?",
-  "trend": null,
-  "script": {
-   "title": "Was passiert bei null Schwerkraft für fünf Sekunden?",
-   "description": "Erlebe die physikalischen Folgen, wenn die Schwerkraft auf der Erde für fünf Sekunden komplett verschwindet. Wir erklären dir Schritt für Schritt, was das für uns bedeutet. Hättest du diesen Moment überlebt?",
-   "hashtags": [
-    "#shorts",
-    "#fyp",
-    "#viral",
-    "#wissenschaft",
-    "#physik",
-    "#experiment",
-    "#lernenmitiktok",
-    "#deutsch"
-   ],
-   "tags": [
-    "schwerkraft",
-    "physik",
-    "erde",
-    "naturgesetz",
-    "experiment",
-    "weltall",
-    "wissenschaft",
-    "waswaerewenn",
-    "zukunft",
-    "katastrophe"
-   ],
-   "thumbnail": {
-    "image": "Close-up of a person floating in the air with shocked facial expression, living room setting, empty space in upper third",
-    "text": "NULL SCHWERKRAFT"
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "blau",
-     "hat": "",
-     "hair": "long",
-     "glasses": false,
-     "skin": "hell"
-    }
-   },
-   "scenes": [
-    {
-     "text": "Stell dir vor, die Schwerkraft der Erde fällt für genau fünf Sekunden komplett weg.",
-     "image": "A person standing in a living room looking up with a confused expression, wide angle view",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "still",
-     "sfx": "tick",
-     "highlight": [
-      "Schwerkraft",
-      "fünf Sekunden"
-     ],
-     "hud": "",
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "English description of a modern living room with sofa, table and large window"
-    },
-    {
-     "text": "In der ersten Sekunde verliert alles den Halt und beginnt augenblicklich leicht nach oben zu schweben.",
-     "image": "Objects floating in the air inside a room, chairs and books drifting upwards slowly",
-     "who": [],
-     "place": "livingroom",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "ersten Sekunde",
-      "schweben"
-     ],
-     "hud": "",
-     "overlay": {
-      "type": "card",
-      "text": "SEKUNDE EINS"
-     },
-     "who_desc": "",
-     "place_desc": "English description of a modern living room with sofa, table and large window"
-    },
-    {
-     "text": "Dein Kaffebecher, dein Handy und lose Gegenstände lösen sich vom Tisch und driften frei im Raum herum.",
-     "image": "A smartphone and a cup floating in mid air inside an office room, soft lighting",
-     "who": [],
-     "place": "room",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "Kaffeebecher",
-      "Handy"
-     ],
-     "hud": "",
-     "overlay": {
-      "type": "phone",
-      "title": "ALARM",
-      "items": [
-       "Schwerkraft: 0 %",
-       "Achtung: festhalten"
-      ]
-     },
-     "who_desc": "",
-     "place_desc": "English description of a simple indoor room with white walls and a desk"
-    },
-    {
-     "text": "Auch du hebst ab, weil dein Körper nicht mehr fest auf den Boden gedrückt wird.",
-     "image": "A person floating slightly above the floor with arms spread in surprise, living room",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "shake",
-     "sfx": "pop",
-     "highlight": [
-      "hebst ab",
-      "Boden"
-     ],
-     "hud": "",
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "English description of a modern living room with sofa, table and large window"
-    },
-    {
-     "text": "Nach zwei Sekunden bemerkst du den enormen Druckunterschied, denn die Atmosphäre dehnt sich sofort explosionsartig aus.",
-     "image": "Air particles expanding rapidly across a wide open landscape with stormy sky",
-     "who": [],
-     "place": "street",
-     "camera": "zoom_out",
-     "sfx": "boom",
-     "highlight": [
-      "zwei Sekunden",
-      "Druckunterschied"
-     ],
-     "hud": "",
-     "overlay": {
-      "type": "bar",
-      "label": "DRUCK",
-      "value": 0
-     },
-     "who_desc": "",
-     "place_desc": "English description of a typical german street with houses and asphalt"
-    },
-    {
-     "text": "Ein weltweiter Orkan entsteht, weil Luftmassen schlagartig mit dreihundert Stundenkilometern nach außen schießen.",
-     "image": "Strong wind bending trees violently in a large forest, gray stormy sky",
-     "who": [],
-     "place": "street",
-     "camera": "pan_right",
-     "sfx": "whoosh",
-     "highlight": [
-      "Orkan",
-      "dreihundert Stundenkilometern"
-     ],
-     "hud": "",
-     "overlay": {
-      "type": "card",
-      "text": "300 KM H"
-     },
-     "who_desc": "",
-     "place_desc": "English description of a typical german street with houses and asphalt"
-    },
-    {
-     "text": "Nach drei Sekunden reißen die Fundamente von Häusern und Straßen ab, weil der Boden keinen festen Halt mehr hat.",
-     "image": "Asphalt road cracking open widely with dust rising into the air, sunny day",
-     "who": [],
-     "place": "street",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "drei Sekunden",
-      "Fundamente"
-     ],
-     "hud": "",
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "English description of a typical german street with houses and asphalt"
-    },
-    {
-     "text": "Millionen ungesicherte Autos fliegen unkontrolliert durch die Luft wie kleine Spielzeugmodelle im Wind.",
-     "image": "Cars lifting off the ground and floating in the air above a city street",
-     "who": [],
-     "place": "street",
-     "camera": "zoom_out",
-     "sfx": "none",
-     "highlight": [
-      "Autos",
-      "Luft"
-     ],
-     "hud": "",
-     "overlay": {
-      "type": "counter",
-      "label": "FAHRZEUGE IN DER LUFT",
-      "value": 45,
-      "unit": "MILLIONEN",
-      "sub": "WELTWEIT"
-     },
-     "who_desc": "",
-     "place_desc": "English description of a typical german street with houses and asphalt"
-    },
-    {
-     "text": "Nach vier Sekunden beginnt der Ozean zu kochen, da der Luftdruck schlagartig auf null sinkt.",
-     "image": "Ocean water bubbling and rising violently under a stormy red sky",
-     "who": [],
-     "place": "worldmap",
-     "camera": "still",
-     "sfx": "tick",
-     "highlight": [
-      "vier Sekunden",
-      "Ozean"
-     ],
-     "hud": "",
-     "overlay": {
-      "type": "card",
-      "text": "WASSER KOCHT"
-     },
-     "who_desc": "",
-     "place_desc": "English description of a glowing digital world map showing continents"
-    },
-    {
-     "text": "Riesige Wasserwelle schießen in den Himmel und regnen als gigantische Tropfen wieder herab.",
-     "image": "Huge wall of water rising up into the atmosphere above the sea, dramatic lighting",
-     "who": [],
-     "place": "worldmap",
-     "camera": "pan_up",
-     "sfx": "whoosh",
-     "highlight": [
-      "Wasserwelle",
-      "Himmel"
-     ],
-     "hud": "",
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "English description of a glowing digital world map showing continents"
-    },
-    {
-     "text": "Nach fünf Sekunden schaltet sich die Schwerkraft abrupt wieder ein und alles kracht ungebremst auf den Boden.",
-     "image": "Objects and debris falling down heavily onto the broken ground inside a room",
-     "who": [],
-     "place": "livingroom",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "fünf Sekunden",
-      "Schwerkraft"
-     ],
-     "hud": "",
-     "overlay": {
-      "type": "card",
-      "text": "AUFPRALL"
-     },
-     "who_desc": "",
-     "place_desc": "English description of a modern living room with sofa, table and large window"
-    },
-    {
-     "text": "Die Erdkruste bricht weltweit auf und gigantische Erdbeben zerstören Städte in wenigen Augenblicken.",
-     "image": "Deep cracks spreading across a global map graphic with red warning flashes",
-     "who": [],
-     "place": "worldmap",
-     "camera": "zoom_in",
-     "sfx": "boom",
-     "highlight": [
-      "Erdkruste",
-      "Erdbeben"
-     ],
-     "hud": "",
-     "overlay": {
-      "type": "counter",
-      "label": "ERDBEBEN STÄRKE",
-      "value": 9.9,
-      "unit": "RICHTERSKALA",
-      "sub": "GLOBAL"
-     },
-     "who_desc": "",
-     "place_desc": "English description of a glowing digital world map showing continents"
-    },
-    {
-     "text": "Niemand von uns würde diesen absoluten Albtraum überleben, weil unsere Atmosphäre komplett zerstört wäre.",
-     "image": "A desolate landscape under a dark red sky with thick smoke clouds",
-     "who": [],
-     "place": "street",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Albtraum",
-      "Atmosphäre"
-     ],
-     "hud": "",
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "English description of a typical german street with houses and asphalt"
-    },
-    {
-     "text": "Wäre das dein Ende oder würdest du es irgendwie schaffen? Folg für mehr Fakten.",
-     "image": "A person looking thoughtful in a room with a question mark floating above",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Ende",
-      "Folg für mehr"
-     ],
-     "hud": "",
-     "overlay": {
-      "type": "choice",
-      "a": "Sofort vorbei",
-      "b": "Glücklich überlebt"
-     },
-     "who_desc": "",
-     "place_desc": "English description of a modern living room with sofa, table and large window"
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "needs": [
-   "kaffeetasse"
-  ],
-  "title": "Was passiert bei null Schwerkraft für fünf Sekunden?",
-  "created": 1794336394.4234135
- },
  "2026-11-12 18:00": {
   "category": "fakten",
   "topic": "Wie Nvidia von einer kleinen Gaming-Bude zum wertvollsten Tech-Giganten wurde",
@@ -1828,5 +1503,644 @@
   ],
   "title": "Hollywood Heist Filme sind physikalisch wild",
   "created": 1794421580.7361093
+ },
+ "2026-11-12 21:00": {
+  "category": "fakten",
+  "topic": "3 seltsame Tierfähigkeiten, die wie Superkräfte wirken",
+  "trend": null,
+  "script": {
+   "title": "3 Tier-Superkräfte, die unmöglich wirken",
+   "description": "Welche Tier-Superkraft hättest du am liebsten?\nHier siehst du drei absolut verrückte Fähigkeiten aus dem Tierreich.\nPistolenkrebs oder Qualle: Was findest du cooler?",
+   "hashtags": [
+    "#shorts",
+    "#tierfakten",
+    "#wissen",
+    "#fakten",
+    "#biologie",
+    "#fyp",
+    "#viral"
+   ],
+   "tags": [
+    "tierfakten",
+    "superkräfte",
+    "tierreich",
+    "pistolenkrebs",
+    "qualle",
+    "fangschreckenkrebs",
+    "biologie fakten",
+    "interessant"
+   ],
+   "thumbnail": {
+    "image": "A dramatic close-up of a tiny colorful shrimp punch creating a glowing shockwave under water, high contrast, cinematic cartoon style, clear upper third.",
+    "text": "TIERE MIT SUPERKRÄFTEN"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "blau",
+     "hat": "",
+     "hair": "kurz",
+     "hair_color": "braun",
+     "glasses": false,
+     "skin": "hell"
+    },
+    "krebs": {
+     "kind": "monster"
+    },
+    "qualle": {
+     "kind": "fish"
+    }
+   },
+   "scenes": [
+    {
+     "see": "Du sitzt am Schreibtisch und starrst geschockt auf dein Handy.",
+     "text": "Ein winziger Krebs erzeugt unter Wasser rund viertausendfünfhundert Grad.",
+     "image": "Ein winziger Krebs erzeugt unter Wasser rund viertausendfünfhundert Grad.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "computer"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "close",
+     "camera": "zoom_in",
+     "sfx": "boom",
+     "highlight": [
+      "vierundvierzigtausend Grad"
+     ],
+     "overlay": {
+      "type": "thermo",
+      "value": 44000
+     },
+     "who_desc": "",
+     "place_desc": "Modern teenager bedroom with gaming desk, cozy lighting, shelves",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Unter Wasser erzeugt eine Krebsschere eine riesige Hitzewelle.",
+     "text": "Aber die tödliche Gefahr entsteht erst durch seinen Knall.",
+     "image": "Aber die tödliche Gefahr entsteht erst durch seinen Knall.",
+     "who": [],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "explosion"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "event",
+     "camera": "still",
+     "sfx": "whoosh",
+     "highlight": [
+      "Knall"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "PISTOLENKREBS"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Pistolenkrebs schnappt mit der Schere zu und erzeugt eine Blase.",
+     "text": "Der Pistolenkrebs knallt seine Schere so schnell zu, dass Wasser verdampft.",
+     "image": "Der Pistolenkrebs knallt seine Schere so schnell zu, dass Wasser verdampft.",
+     "who": [
+      "krebs"
+     ],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "explosion"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "event",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "verdampft"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Zahlen-Grafik zeigt die Lautstärke von zweihundertachtundzwanzig Dezibel.",
+     "text": "Dabei entsteht eine Schockwelle mit zweihundertachtundzwanzig Dezibel Lautstärke.",
+     "image": "Dabei entsteht eine Schockwelle mit zweihundertachtundzwanzig Dezibel Lautstärke.",
+     "who": [],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "graphic",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "zweihundertachtundzwanzig Dezibel"
+     ],
+     "overlay": null,
+     "graphic": {
+      "type": "number",
+      "kicker": "LAUTSTÄRKE",
+      "value": "228 dB",
+      "label": "LAUTER ALS EIN DÜSENJET"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du hältst dir im Zimmer erschrocken die Ohren zu.",
+     "text": "Das ist lauter als ein startendes Flugzeug direkt neben dir.",
+     "image": "Das ist lauter als ein startendes Flugzeug direkt neben dir.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "plane"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "panic",
+     "shot": "wide",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Flugzeug"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "EXTREM LAUT"
+     },
+     "who_desc": "",
+     "place_desc": "Modern teenager bedroom with gaming desk, cozy lighting, shelves",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Infokarte kündigt Kraft Nummer zwei an.",
+     "text": "Also Kraft Nummer zwei, die noch verrückter wirkt.",
+     "image": "Also Kraft Nummer zwei, die noch verrückter wirkt.",
+     "who": [],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "camera": "still",
+     "sfx": "whoosh",
+     "highlight": [
+      "verrückter"
+     ],
+     "overlay": null,
+     "graphic": {
+      "type": "badge",
+      "kicker": "KRAFT #2",
+      "text": "EWIGES LEBEN"
+     },
+     "who_desc": "",
+     "place_desc": "Modern teenager bedroom with gaming desk, cozy lighting, shelves",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine kleine durchsichtige Qualle schwimmt ruhig im tiefen Meer.",
+     "text": "Die unsterbliche Qualle altert rückwärts, sobald sie Stress bekommt.",
+     "image": "Die unsterbliche Qualle altert rückwärts, sobald sie Stress bekommt.",
+     "who": [
+      "qualle"
+     ],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "wave"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "event",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "rückwärts"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "UNSTERBLICH",
+      "color": "green"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Qualle wandelt sich von einer ausgewachsenen Qualle in ein kleines Polyp-Stadium.",
+     "text": "Sie verwandelt ihre ausgewachsenen Zellen einfach wieder in Baby-Zellen zurück.",
+     "image": "Sie verwandelt ihre ausgewachsenen Zellen einfach wieder in Baby-Zellen zurück.",
+     "who": [
+      "qualle"
+     ],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "qualle",
+       "action": "jump",
+       "emotion": "happy",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "insert",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "Baby-Zellen"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du schaust ungläubig in deinen Ausweis auf dem Schreibtisch.",
+     "text": "Das wäre so, als würdest du mit achtzig Jahren wieder zum Baby werden.",
+     "image": "Das wäre so, als würdest du mit achtzig Jahren wieder zum Baby werden.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "table"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "achtzig Jahren"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "RESET-KNOPF"
+     },
+     "who_desc": "",
+     "place_desc": "Modern teenager bedroom with gaming desk, cozy lighting, shelves",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Hochleistungs-Boxhandschuh trifft einen Stein und zertrümmert ihn.",
+     "text": "Und dann wird es bei der dritten Fähigkeit richtig heftig.",
+     "image": "Und dann wird es bei der dritten Fähigkeit richtig heftig.",
+     "who": [],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "rock"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "event",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "heftig"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "KRAFT #3"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein bunter Fangschreckenkrebs steht in Habachtstellung im Riff.",
+     "text": "Der Fangschreckenkrebs boxt mit der Beschleunigung einer Gewehrkugel.",
+     "image": "Der Fangschreckenkrebs boxt mit der Beschleunigung einer Gewehrkugel.",
+     "who": [
+      "krebs"
+     ],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "rock"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "event",
+     "camera": "still",
+     "sfx": "whoosh",
+     "highlight": [
+      "Gewehrkugel"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik vergleicht die Schlaggeschwindigkeit mit einer Kugel.",
+     "text": "Sein Schlag erreicht achtzig Kilometer pro Stunde im dichten Wasser.",
+     "image": "Sein Schlag erreicht achtzig Kilometer pro Stunde im dichten Wasser.",
+     "who": [],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "achtzig Kilometer"
+     ],
+     "overlay": null,
+     "graphic": {
+      "type": "compare",
+      "left": "KREBS-SCHLAG",
+      "right": "SCHNEIDEN",
+      "value": "80 km/h",
+      "sub": "80 km/h"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Unter Wasser bricht ein Aquarium-Glas mit Rissen auseinander.",
+     "text": "Damit zertrümmert er mühelos dicke Aquarienscheiben aus Glas.",
+     "image": "Damit zertrümmert er mühelos dicke Aquarienscheiben aus Glas.",
+     "who": [],
+     "place": "underwater",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "glasscheibe"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "event",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Aquarienscheiben"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "GEBROCHEN",
+      "color": "red"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du stehst schockiert vor einem kaputten Aquarium.",
+     "text": "Mein eigener Goldfisch schaut mich seitdem sehr verdächtig an.",
+     "image": "Mein eigener Goldfisch schaut mich seitdem sehr verdächtig an.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "glass"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "panic",
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Goldfisch"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "Modern teenager bedroom with gaming desk, cozy lighting, shelves",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik fasst die drei Superkräfte als Checkliste zusammen.",
+     "text": "Hitze, Unsterblichkeit und Superkraft stecken also wirklich in der Natur.",
+     "image": "Hitze, Unsterblichkeit und Superkraft stecken also wirklich in der Natur.",
+     "who": [],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Natur"
+     ],
+     "overlay": null,
+     "graphic": {
+      "type": "podium",
+      "kicker": "TOP KRAFT",
+      "text": "UNSTERBLICH",
+      "left": "KNALL",
+      "right": "SCHLAG"
+     },
+     "who_desc": "",
+     "place_desc": "Modern teenager bedroom with gaming desk, cozy lighting, shelves",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du überlegst neugierig und deutest auf den Zuschauer.",
+     "text": "Welche dieser drei Superkräfte würdest du im Alltag am ehesten nutzen?",
+     "image": "Welche dieser drei Superkräfte würdest du im Alltag am ehesten nutzen?",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Alltag"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "Modern teenager bedroom with gaming desk, cozy lighting, shelves",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du winkst fröhlich in die Kamera und zeigst nach oben.",
+     "text": "Schreib es in die Kommentare und folg für mehr Verrücktes.",
+     "image": "Schreib es in die Kommentare und folg für mehr Verrücktes.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "wave",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "happy",
+     "shot": "close",
+     "camera": "zoom_out",
+     "sfx": "pop",
+     "highlight": [
+      "folg für mehr"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "Modern teenager bedroom with gaming desk, cozy lighting, shelves",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "needs": [
+   "pistolenkrebs",
+   "qualle",
+   "fangschreckenkrebs",
+   "aquarium"
+  ],
+  "title": "3 Tier-Superkräfte, die unmöglich wirken",
+  "created": 1794497365.9041817
  }
 }

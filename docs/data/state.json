@@ -7,8 +7,10 @@
   "2026-11-12 13:00",
   "2026-11-12 18:00"
  ],
- "used_queue": [],
- "last_stats": 1794494922.320764,
+ "used_queue": [
+  "qkv0cbgez"
+ ],
+ "last_stats": 1794497369.783706,
  "next_id": 64,
  "connected": {
   "youtube": {
@@ -17,6 +19,6 @@
   }
  },
  "voice_wps": 2.732,
- "last_trends": 1794484749.0616252,
+ "last_trends": 1794497369.7871087,
  "tiktok_handle": "wissens..wert"
 }
