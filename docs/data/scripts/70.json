@@ -1,0 +1,453 @@
+{
+ "title": "3 bizarre Reaktionen unseres Gehirns im Alltag",
+ "scenes": [
+  {
+   "text": "Plötzlich läufst du ins Zimmer und vergisst deinen Plan.",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "shocked",
+     "emotion": "shocked",
+     "pos": "center",
+     "emote": "?",
+     "speaks": true
+    }
+   ],
+   "overlay": {
+    "type": "tag",
+    "text": "FEHLER IM SYSTEM"
+   }
+  },
+  {
+   "text": "Solche peinlichen Aussetzer passieren uns allen ständig, aber warum schaltet unser Kopf einfach ab?",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "think",
+     "emotion": "",
+     "pos": "center",
+     "emote": ""
+    }
+   ]
+  },
+  {
+   "text": "Nummer eins: Du liest ein Schild zweimal, weil du es beim ersten Mal ignorierst.",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "look_around",
+     "emotion": "",
+     "pos": "center",
+     "emote": "?"
+    }
+   ],
+   "overlay": {
+    "type": "card",
+    "text": "SCHILD #1"
+   }
+  },
+  {
+   "text": "Dein Kopf schaltet einfach ab und tut so, als wäre nichts passiert.",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "think",
+     "emotion": "",
+     "pos": "center",
+     "emote": ""
+    }
+   ]
+  },
+  {
+   "text": "Aber warum machen wir das überhaupt?",
+   "place": "livingroom",
+   "shot": "graphic",
+   "graphic": {
+    "type": "question",
+    "text": "WARUM?",
+    "dark": false
+   }
+  },
+  {
+   "text": "Weil dein Denkorgan Energie sparen will, selbst bei fünf Wörtern.",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "look_around",
+     "emotion": "",
+     "pos": "center",
+     "emote": "?"
+    }
+   ],
+   "overlay": {
+    "type": "bar",
+    "label": "ENERGIE",
+    "value": 10
+   }
+  },
+  {
+   "text": "Es filtert die Info weg, bevor sie überhaupt ankommt.",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "think",
+     "emotion": "",
+     "pos": "center",
+     "emote": ""
+    }
+   ]
+  },
+  {
+   "text": "Ziemlich faul für ein Organ, das den ganzen Tag arbeitet.",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "look_around",
+     "emotion": "",
+     "pos": "center",
+     "emote": "?"
+    }
+   ],
+   "overlay": {
+    "type": "stamp",
+    "text": "FAUL",
+    "color": "orange"
+   }
+  },
+  {
+   "text": "Kommen wir zu Nummer zwei, die dich garantiert nervt.",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "think",
+     "emotion": "",
+     "pos": "center",
+     "emote": ""
+    }
+   ]
+  },
+  {
+   "text": "Du vergisst sofort, was du gerade in diesem Raum wolltest.",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "look_around",
+     "emotion": "",
+     "pos": "center",
+     "emote": "?"
+    }
+   ],
+   "overlay": {
+    "type": "tag",
+    "text": "BLACKOUT"
+   }
+  },
+  {
+   "text": "Kaum gehst du durch eine Tür, löscht dein Kopf das Gedächtnis.",
+   "place": "livingroom",
+   "props": [
+    {
+     "type": "door"
+    }
+   ],
+   "shot": "insert"
+  },
+  {
+   "text": "Das Phänomen nennt sich Tür-Effekt und betrifft absolut jeden.",
+   "place": "livingroom",
+   "props": [
+    {
+     "type": "door"
+    }
+   ],
+   "overlay": {
+    "type": "tag",
+    "text": "TÜR-EFFEKT"
+   }
+  },
+  {
+   "text": "Sobald sich die Umgebung ändert, zieht das Gehirn einen Schlussstrich.",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "think",
+     "emotion": "",
+     "pos": "center",
+     "emote": ""
+    }
+   ]
+  },
+  {
+   "text": "Alte Gedanken werden sofort durch neue visuelle Reize ersetzt.",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "look_around",
+     "emotion": "",
+     "pos": "center",
+     "emote": "?"
+    }
+   ]
+  },
+  {
+   "text": "Deshalb stehst du nutzlos in der Küche und starrst an die Wand.",
+   "place": "kitchen",
+   "actors": [
+    {
+     "id": "du",
+     "action": "think",
+     "emotion": "",
+     "pos": "center",
+     "emote": ""
+    }
+   ],
+   "overlay": {
+    "type": "stamp",
+    "text": "FEHLER",
+    "color": "red"
+   }
+  },
+  {
+   "text": "Das fühlt sich an wie ein verbuggtes Videospiel im realen Leben.",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "look_around",
+     "emotion": "",
+     "pos": "center",
+     "emote": "?"
+    }
+   ]
+  },
+  {
+   "text": "Kommen wir nun zur dritten Reaktion, die komplett absurd ist.",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "think",
+     "emotion": "",
+     "pos": "center",
+     "emote": ""
+    }
+   ]
+  },
+  {
+   "text": "Du hörst ein seltsames Geräusch und wirst sofort extrem misstrauisch.",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "look_around",
+     "emotion": "",
+     "pos": "center",
+     "emote": "?"
+    }
+   ],
+   "overlay": {
+    "type": "tag",
+    "text": "ALARM"
+   }
+  },
+  {
+   "text": "Plötzlich rechnest du nachts im Bett mit einem Monsterangriff.",
+   "place": "bedroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "sleep",
+     "emotion": "scared",
+     "emote": "",
+     "pos": "center",
+     "speaks": false,
+     "keep": true
+    }
+   ],
+   "mood": "scary"
+  },
+  {
+   "text": "Dabei ist es nur der Kühlschrank, der leise vor sich hin brummt.",
+   "place": "kitchen",
+   "props": [
+    {
+     "type": "fridge"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "think",
+     "emotion": "",
+     "pos": "left",
+     "emote": ""
+    }
+   ],
+   "overlay": {
+    "type": "card",
+    "text": "NUR EIN GERÄUSCH"
+   }
+  },
+  {
+   "text": "Unser Verstand stammt eben noch aus der Steinzeit.",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ]
+  },
+  {
+   "text": "Damals bedeutete ein Rascheln im Gebüsch eben pure Lebensgefahr.",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Heute bedeutet es meistens nur eine heruntergefallene Gabel.",
+   "place": "livingroom",
+   "props": [
+    {
+     "type": "lib_gabel"
+    }
+   ],
+   "shot": "insert"
+  },
+  {
+   "text": "Trotzdem schaltet dein Körper sofort in den Panikmodus.",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "scared"
+    }
+   ],
+   "mood": "panic"
+  },
+  {
+   "text": "Evolution ist eben manchmal einfach richtig anstrengend.",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ]
+  },
+  {
+   "text": "Dein Kopf will dich schützen und nervt dich stattdessen zu Tode.",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ]
+  },
+  {
+   "text": "Drei völlig sinnlose Macken, die wirklich jeder Mensch besitzt.",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "overlay": {
+    "type": "card",
+    "text": "ALLE HABEN ES"
+   }
+  },
+  {
+   "text": "Das nächste Mal bedankst du dich einfach bei deinem Kopf.",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ]
+  },
+  {
+   "text": "Oder du ignorierst ihn, genau wie das Schild am Eingang.",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ]
+  },
+  {
+   "text": "Welcher dieser Bugs passiert dir eigentlich am häufigsten?",
+   "place": "livingroom",
+   "props": [
+    {
+     "type": "lib_insekt"
+    }
+   ],
+   "shot": "graphic",
+   "graphic": {
+    "type": "question",
+    "text": "WELCHER BUG?",
+    "dark": false
+   }
+  },
+  {
+   "text": "Schreib es in die Kommentare und folg für mehr verrückte Fakten.",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "scared"
+    }
+   ],
+   "mood": "panic"
+  }
+ ]
+}

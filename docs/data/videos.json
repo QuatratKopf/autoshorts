@@ -2225,5 +2225,53 @@
   "status": "error",
   "created": 1794503239.7592854,
   "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-flash-lite-latest: HTTP 503 | pollinations: Antwort enthält kein JSON"
+ },
+ {
+  "id": 70,
+  "category": "fakten",
+  "topic": "3 bizarre Reaktionen unseres Gehirns im Alltag, die null Sinn ergeben, aber jeder von uns hat",
+  "status": "rendered",
+  "created": 1794503664.3213348,
+  "title": "3 bizarre Reaktionen unseres Gehirns im Alltag",
+  "description": "Dein Gehirn macht manchmal komplett seltsame Dinge\nWir zeigen dir drei alltägliche Reaktionen, die keinen Sinn ergeben\nWelcher dieser Momente passiert dir auch ständig",
+  "hashtags": [
+   "#shorts",
+   "#psychologie",
+   "#gehirn",
+   "#fakten",
+   "#alltag",
+   "#wissen",
+   "#fyp",
+   "#viral"
+  ],
+  "tags": [
+   "gehirn fakten",
+   "alltag",
+   "psychologie",
+   "seltsames verhalten",
+   "wissen",
+   "meme",
+   "menschen",
+   "reaktionen",
+   "bizarre fakten",
+   "lustiges wissen",
+   "gen z",
+   "verstand",
+   "gedanken",
+   "wissenschaft",
+   "clever"
+  ],
+  "thumb_text": "GEHIRN MACHT SACHEN",
+  "missing": null,
+  "cover_ms": 102878,
+  "duration": 102.8,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
