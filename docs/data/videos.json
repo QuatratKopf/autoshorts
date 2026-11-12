@@ -2378,5 +2378,46 @@
   "look": "cartoon",
   "mp4": true,
   "error": "Bei der Prüfung verworfen: Qualle wird als Krebs gezeigt, Tippfehler viertausendviershundert, 280 Dezibel sachlich falsch, Untertitel über dem Tier"
+ },
+ {
+  "id": 75,
+  "category": "fakten",
+  "topic": "3 seltsame Tierfähigkeiten, die wie Superkräfte wirken: Pistolenkrebs (Knallblase kurz rund 4700 Grad heiß, Knall rund 210 Dezibel), unsterbliche Qualle (verjüngt sich zurück zum Polypen) und Fangschreckenkrebs (Schlag rund 80 km/h, 12 bis 16 Farbrezeptoren)",
+  "status": "rendered",
+  "created": 1794512074.517483,
+  "title": "3 Tier-Superkräfte, die unmöglich wirken!",
+  "description": "3 Tier-Superkräfte, die unmöglich wirken!\nVom Laser-Knall bis zur unendlichen Verjüngung.\nWelche Kraft hättest du am liebsten?",
+  "hashtags": [
+   "#shorts",
+   "#tierfakten",
+   "#wissen",
+   "#superkräfte",
+   "#natur",
+   "#fyp",
+   "#viral"
+  ],
+  "tags": [
+   "tierfakten",
+   "pistolenkrebs",
+   "qualle",
+   "fangschreckenkrebs",
+   "superkräfte",
+   "naturwunder",
+   "meeresbiologie"
+  ],
+  "thumb_text": "ECHTE SUPERKRÄFTE ENTDECKT",
+  "missing": [
+   "polyp"
+  ],
+  "cover_ms": 75749,
+  "duration": 75.6,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]

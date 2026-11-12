@@ -220,5 +220,13 @@
  "auge": {
   "n": 1,
   "last": "3 Tierfähigkeiten, die wie echte Superkräfte wirken"
+ },
+ "krebs": {
+  "n": 1,
+  "last": "3 Tier-Superkräfte, die unmöglich wirken!"
+ },
+ "polyp": {
+  "n": 1,
+  "last": "3 Tier-Superkräfte, die unmöglich wirken!"
  }
 }
