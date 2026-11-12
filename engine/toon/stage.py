@@ -850,7 +850,7 @@ def spoken_number(value, text):
     return any(abs(n - v) < 1e-6 or abs(n * 1000 - v) < 1e-6 or abs(n * 1e6 - v) < 1e-3 or abs(n * 1e9 - v) < 1 for n in nums)
 
 
-FIGURE_GFX = ("number", "badge", "houses", "share", "compare", "distance", "days", "pulse", "calendar", "timer")
+FIGURE_GFX = ("number", "badge", "houses", "share", "compare", "distance", "days", "pulse", "calendar", "timer", "phone")
 _FIG_WORDS = set(_SCALE) | {"prozent", "hundert", "tausend"}
 
 
@@ -1349,10 +1349,14 @@ def direct(scenes, times, topic="", style="", look=""):
         acts_f = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
         fl, kept = "", False
         if rp_f not in MAPS and rp_f not in ("space", "underwater") and sc.get("shot") != "graphic":
-            floats_now = bool(_re0.search(FLOAT_RE, txt_f))
+            m_fl = _re0.search(FLOAT_RE, txt_f)
+            if m_fl and m_fl.group(0) in ("durch die luft", "in der luft") and _re0.search(NOT_BODIES_RE, txt_f) \
+                    and not _re0.search(FLOAT_RE, txt_f.replace("durch die luft", " ").replace("in der luft", " ")):
+                m_fl = None                               # Laser, Licht, Rauch, Schall „durch die Luft“: da schwebt kein Mensch und kein Möbel
+            floats_now = bool(m_fl)
             if _re0.search(DROP_RE, txt_f) and (_re0.search(GRAVITY_BACK_RE, txt_f) or (float_seen and not floats_now)):
                 fl = "drop"                               # „… während Möbel schwerelos durcheinanderfliegen“ ist noch kein Absturz
-            elif _re0.search(FLOAT_RE, txt_f) or ((zero_topic or zero_g) and any(str(a.get("action") or "") in ("float", "schweben") for a in acts_f)):
+            elif floats_now or ((zero_topic or zero_g) and any(str(a.get("action") or "") in ("float", "schweben") for a in acts_f)):
                 fl = "float"
             elif zero_g and i < len(scenes) - 1:
                 fl, kept = "float", True                  # die Schwerkraft ist noch weg: wer im Bild ist, schwebt weiter
@@ -1842,6 +1846,7 @@ GRAPHIC_WORDS = [(r"aktien|börse|kurve|chart|diagramm|kursverlauf|wachstumskurv
 FLOAT_RE = (r"schwerelos|(ohne|keine|null) (schwerkraft|gravitation|erdanziehung)|(schwerkraft|gravitation|erdanziehung\w*)\w* .{0,60}(\bweg\b|null|verschw|\baus\b|\bab\b|fehlt|abgeschaltet|nicht mehr|pause|verlier|verlor)|verlier\w* .{0,40}(schwerkraft|gravitation|erdanziehung)|"
             r"schweb(?!\w* in (lebens|großer )?gefahr)|hebs?t [^,.;:!?]{0,60}\bab\b|heben [^,.;:!?]{0,60}\bab\b|durch die luft|in der luft (treib|häng|schweb|steh)|"
             r"treib\w* .{0,24}(durch den raum|im raum|zur decke|nach oben)|flieg\w* (\w+ )?(los|davon|nach oben)\b|steig\w* .{0,30}(in den himmel|in die luft|nach oben)|\bdrifte|verlier\w* (\w+ )?den halt|verlier\w* (\w+ )?die bodenhaftung")
+NOT_BODIES_RE = r"laser|\blicht|strahl|leucht|schall|geräusch|\bton\b|töne|geruch|\bduft|rauch|qualm|staub|funk|signal|viren|virus|keime|pollen|wellen\b"
 DROP_RE = (r"kracht|krachen|aufprall|prall\w* .{0,70}(boden|erde|asphalt|straße|\bauf\b)|knall\w* .{0,70}(boden|erde|asphalt|straße|pflaster)|"
            r"\b(schlägt|schlagen) .{0,30}(boden|asphalt|\bauf\b)|(fällt|fällst|fallen|stürzt|stürzen) .{0,50}(boden|herunter|herab|hinab|zurück|\bab\b)|plumps")
 GRAVITY_BACK_RE = r"(schwerkraft|gravitation|erdanziehung\w*)\w* .{0,60}(wieder|zurück|setzt .{0,12}ein|schaltet sich .{0,12}ein|kehrt)"

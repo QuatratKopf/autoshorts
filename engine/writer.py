@@ -398,6 +398,31 @@ def fix_eszett(text, upper_ss=False):
     return _ESZETT_RE.sub(rep, str(text))
 
 
+def _near(a, b):
+    """Unterscheiden sich zwei Wörter nur um einen Buchstaben (eingefügt, gelöscht oder vertauscht)?"""
+    if a == b or abs(len(a) - len(b)) > 1:
+        return False
+    if len(a) == len(b):
+        return sum(x != y for x, y in zip(a, b)) == 1
+    lo, hi = (a, b) if len(a) < len(b) else (b, a)
+    return any(hi[:i] + hi[i + 1:] == lo for i in range(len(hi)))
+
+
+def fix_label_typos(label, sentence):
+    """Wort einer Einblendung, das sich nur um einen Buchstaben von einem Wort des gesprochenen Satzes unterscheidet („TAGEELANG“ zu
+    „tagelang“), ist ein Tippfehler: das Wort aus dem Satz gilt. Echte Beugungen (Tag/Tage, heiß/heißt) bleiben."""
+    said = {w.lower() for w in re.findall(r"[A-Za-zÄÖÜäöüß]{6,}", str(sentence or ""))}
+
+    def rep(m):
+        w = m.group(0)
+        low = w.lower()
+        if low in said or low.replace("ss", "ß") in said:
+            return w
+        hit = [x for x in said if _near(low, x) and x[:3] == low[:3] and x[-2:] == low[-2:]]   # Anfang und Endung gleich: kein anderer Fall, kein anderes Wort
+        return _case_like(w, hit[0]) if len(hit) == 1 else w
+    return re.sub(r"[A-Za-zÄÖÜäöüß]{6,}", rep, str(label))
+
+
 def polish(js):
     """Letzter Schliff ohne Text-KI: ß in Sprechertext, Titel und Beschreibung; englische Wörter in Einblendungen und Grafiken
     („GEHIRN-EFFECT“) werden deutsch."""
@@ -409,12 +434,14 @@ def polish(js):
             continue
         if isinstance(sc.get("text"), str):
             sc["text"] = fix_eszett(sc["text"])
+            sc["text"] = re.sub(r"(?i)\b([a-zäöüß]{4,}) \1\b", r"\1", sc["text"])      # „reine reine Fantasie“: versehentlich doppeltes Wort
         for box in (sc.get("overlay"), sc.get("graphic")):
             if isinstance(box, dict):
                 for k in _LABEL_KEYS:
                     if isinstance(box.get(k), str):
                         v = re.sub(r"(?i)(?<=[a-zäöü]-)(effects?|facts?)\b", lambda m: _case_like(m.group(0), _DENGLISH[m.group(0).lower()]), box[k])
                         box[k] = fix_eszett(_DENGLISH_RE.sub(lambda m: _case_like(m.group(0), _DENGLISH[m.group(0).lower()]), v), upper_ss=True)
+                        box[k] = fix_label_typos(box[k], sc.get("text"))
     th = js.get("thumbnail")
     if isinstance(th, dict) and isinstance(th.get("text"), str):
         th["text"] = _DENGLISH_RE.sub(lambda m: _case_like(m.group(0), _DENGLISH[m.group(0).lower()]), th["text"])
@@ -919,6 +946,10 @@ def write_script(cat: dict, topic: str, trend=None, source=None) -> tuple[dict, 
             js = review_scenes(js, topic)
         except Exception as e:  # noqa: BLE001
             ai.log(f"Regie-Prüfung nicht möglich ({e}) – nehme den Bildplan, wie er ist")
+    try:
+        js = polish(js)                                  # noch einmal: Bildplan und Regie-Prüfung können neue Einblendungen gebracht haben
+    except Exception:  # noqa: BLE001
+        pass
     sc = [s for s in js.get("scenes", []) if isinstance(s, dict) and str(s.get("text", "")).strip()]
     if len(sc) < 3:
         raise ai.ProviderError("Drehbuch hat zu wenige Szenen")

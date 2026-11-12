@@ -216,7 +216,12 @@ def main():
         assert not fs[0].get("float") and fs[0]["actors"][0]["action"] != "float", "Figur schwebt, obwohl der Satz nicht davon spricht"
         if any(k == "lib_tresor" for _p, k in stage._lib_props()):
             assert [q["type"] for q in fs[1]["props"]] == ["lib_tresor"], f"Tresor im Satz, aber im Bild: {fs[1]['props']}"
+        ls = [{"text": "Im Film leuchten die Laser rot und wabern wild durch die Luft.", "place": "hallway", "actors": [{"id": "du", "action": "float", "speaks": True}]}]
+        stage.direct(ls, [(0, 3.5)], "Filme", "fakten", "")
+        assert not ls[0].get("float"), "Laser in der Luft lässt die Figur schweben"
         from .. import writer
+        assert writer.fix_label_typos("TAGEELANG", "Das dauert oft tagelang.") == "TAGELANG"
+        assert writer.polish({"scenes": [{"text": "Das ist reine reine Fantasie."}]})["scenes"][0]["text"] == "Das ist reine Fantasie."
         assert writer.fix_eszett("Ausser der Masse auf der Strasse") == "Außer der Masse auf der Straße"
         js = writer.polish({"scenes": [{"text": "x", "graphic": {"type": "badge", "kicker": "GEHIRN-EFFECT", "text": "KONTROLLE"}}]})
         assert js["scenes"][0]["graphic"]["kicker"] == "GEHIRN-EFFEKT"
