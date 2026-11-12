@@ -2,6 +2,7 @@
 Figuren bewegen sich (gehen, rennen, springen …), blinzeln und bewegen den Mund passend zur Sprecherstimme;
 dazu Wetter, Gefühls-Symbole und kleine Bewegungen im Hintergrund."""
 import math
+import re
 import subprocess
 from pathlib import Path
 
@@ -25,14 +26,107 @@ def _x(v, default):
     return float(POS.get(str(v or "").lower().strip(), default))
 
 
+_VOWEL = re.compile(r"ie|ei|ai|au|eu|äu|[aeiouäöüy]")
+_SYL = {}
+
+
+def _syllables(word, dur):
+    """Mundformen eines Wortes: je Silbe (Vokalgruppe) a = offen, o = rund, e = breit."""
+    key = (word, round(dur, 2))
+    if key not in _SYL:
+        groups = _VOWEL.findall(str(word).lower())
+        if not groups:                                     # Zahlen, Abkürzungen: Silben aus der Sprechdauer schätzen
+            groups = ["a", "e", "o"] * 8
+            groups = groups[:max(1, round(dur / 0.17))]
+        _SYL[key] = ["o" if g in ("eu", "äu") or g[0] in "ouöü" else "e" if g in ("ie",) or g[0] in "eiy" else "a" for g in groups]
+    return _SYL[key]
+
+
+OPEN = {"a": 0.95, "o": 0.62, "e": 0.5}
+
+
 def _mouth(t_abs, words):
-    """Mund-Öffnung 0..1: während eines gesprochenen Wortes auf/zu, sonst geschlossen."""
-    for _, s, e in words:
+    """(Öffnung 0..1, Mundform) passend zum gesprochenen Wort: jede Silbe öffnet den Mund in der Form ihres Vokals und schließt
+    ihn wieder; zwischen Wörtern und in Pausen ist er zu – kein gleichmäßiges Auf und Zu."""
+    for w, s, e in words:
         if s <= t_abs <= e:
-            return 0.25 + 0.75 * abs(math.sin((t_abs - s) * 17))
+            syl = _syllables(w, e - s)
+            n = len(syl)
+            seg = (e - s) / n
+            i = min(n - 1, int((t_abs - s) / max(1e-3, seg)))
+            x = (t_abs - s - i * seg) / max(1e-3, seg)
+            amp = OPEN[syl[i]] * (0.6 if seg < 0.07 else 1.0) * (1.0 if i == 0 else 0.85)
+            return amp * math.sin(math.pi * min(1.0, max(0.0, x))) ** 0.6, syl[i]
         if s > t_abs:
             break
-    return 0.0
+    return 0.0, "a"
+
+
+_LIPS = re.compile(r"\b(ich|mir|mich|mein\w*|wir|uns|unser\w*)\b|[„“\"»«]", re.I)
+
+
+def lips(text):
+    """Bewegt die Figur die Lippen zum Text? Nur wenn sie selbst spricht (Ich-/Wir-Erzählung, wörtliche Rede).
+    Erzählt die Stimme über sie („Du wachst auf …“, Fakten), hört sie zu und spielt mit Mimik und Gesten."""
+    return bool(_LIPS.search(str(text or "")))
+
+
+# Gesten zum Inhalt: (Name, Wörter) – höhere Zeile hat Vorrang
+CUES = [
+    ("shock", r"plötzlich|explo\w*|tot|tödlich\w*|gefährlich\w*|katastroph\w*|panik|schrei\w*|unglaublich\w*|krass\w*|wahnsinn\w*|achtung|vorsicht|horror"),
+    ("shrug", r""),                                       # Frage: Wort mit „?“
+    ("no", r"nicht|nie|niemals|kein|keine[nmrs]?|nein|nichts|falsch|verboten|niemand"),
+    ("wide", r"riesig\w*|gigantisch\w*|enorm\w*|millionen?|milliarden?|tausende?|unendlich\w*|überall|größte[nmrs]?|komplett|gewaltig\w*"),
+    ("sad", r"leider|traurig\w*|verloren|verliert|stirbt|starb|einsam\w*|vermiss\w*|weint|weinen"),
+    ("happy", r"toll\w*|genial\w*|super|endlich|glück\w*|gewinn\w*|lustig\w*|freu\w*|perfekt\w*|cool\w*|lieblings\w*"),
+    ("think", r"vielleicht|eigentlich|warum|wieso|weshalb|überleg\w*|nachdenk\w*|rätsel\w*|theorie|angeblich|geheimnis\w*"),
+    ("count", r"erstens|zweitens|drittens|zuerst|nummer|schritt"),
+    ("nod", r"ja|genau|richtig|stimmt|tatsächlich|wirklich"),
+    ("self", r"ich|mir|mich|mein\w*"),
+    ("you", r"du|dich|dein\w*"),
+]
+_CUE_RE = [(n, re.compile(r"^(?:" + rx + r")$")) for n, rx in CUES if rx]
+GAP = 1.1                       # Sekunden Ruhe zwischen zwei Gesten (so lang wie eine Geste: nichts springt mitten hinein)
+
+
+def gesture_plan(scene_words, t0, talking):
+    """Wann die Figur welche Geste macht: passend zum Wort, das gerade fällt (Frage → Schultern hoch, „nie“ → Kopfschütteln,
+    „riesig“ → Arme weit, „plötzlich“ → Hände an den Kopf …). Zwischen zwei Gesten mindestens GAP Sekunden Ruhe.
+    talking: Figur spricht selbst (dann auch ich/du-Gesten und Betonungen); sonst nur Reaktionen auf den Inhalt."""
+    prio = {n: i for i, (n, _) in enumerate(CUES)}
+    cand = []
+    for w, s, e in scene_words:
+        raw = str(w)
+        low = raw.lower().strip(".,;:!?…\"'„“»«()–-")
+        if raw.rstrip("\"'“»)").endswith("?"):
+            cand.append((prio["shrug"], s - t0, "shrug"))
+            continue
+        for n, rx in _CUE_RE:
+            if n in ("self", "you") and not talking:
+                continue
+            if rx.match(low):
+                cand.append((prio[n], s - t0 - 0.12, n))
+                break
+    plan = []
+    for _, st, n in sorted(cand):
+        if all(abs(st - q) >= GAP for q, _ in plan):
+            plan.append((max(0.0, st), n))
+    if talking:                                            # wer spricht, betont lange Wörter mit der Hand – aber nicht ununterbrochen
+        for w, s, e in sorted(scene_words, key=lambda x: -len(str(x[0]))):
+            st = s - t0 - 0.1
+            if len(str(w).strip(".,!?")) >= 7 and all(abs(st - q) >= GAP * 1.6 for q, _ in plan):
+                plan.append((max(0.0, st), "beat"))
+    return sorted(plan)
+
+
+def _gest_at(plan, t):
+    cur = None
+    for st, n in plan or ():
+        if st <= t:
+            cur = (n, t - st)
+        else:
+            break
+    return cur
 
 
 def _ease(x):
@@ -163,6 +257,9 @@ def _prepare(scene, cast):
                     a["x0"] = a["x1"]
     if actors and not any(a["speaks"] for a in actors):
         actors[0]["speaks"] = len(actors) == 1
+    talk = lips(scene.get("text"))
+    for a in actors:                  # Lippen nur, wenn die Figur selbst spricht – sonst hört sie zu und reagiert
+        a["lips"] = a["speaks"] and talk
     for a in actors:   # passende Symbole automatisch, wenn das Drehbuch keine nennt
         if not a["emote"]:
             a["emote"] = {"shocked": "!", "scared": "!", "think": "?", "angry": "anger"}.get(a["action"]) or \
@@ -608,7 +705,7 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
         if close:                                      # die Hauptfigur steht mittig, andere im selben Abstand daneben
             x = 540 + (x - lead["x1"]) * W / CLOSE_BG
         xs_now.append(x)
-        mouth = _mouth(t0 + t, words) if a["speaks"] else 0.0
+        mouth, shape = _mouth(t0 + t, words) if a["speaks"] and a.get("lips", True) else (0.0, "a")
         if moving and not arrived:
             facing = 1 if a["x1"] > a["x0"] else -1
         elif a["face"] in ("left", "links"):
@@ -643,7 +740,8 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                 action = "talk"
             if flo:                                           # schwerelos treiben – nach dem Absturz liegt die Figur am Boden
                 action, tt = ("fall", a_hit) if a_hit is not None else ("float", t)
-            pose, _ = rig.pose_at(action, tt, dur, a["emotion"], mouth, a["seed"])
+            pose, _ = rig.pose_at(action, tt, dur, a["emotion"], mouth, a["seed"],
+                                  _gest_at(a.get("gplan"), t) if action in ("talk", "idle") and not a.get("hold") else None, shape)
             if a.get("hold") and action not in ("run", "sleep", "fall", "jump", "dance", "wave", "shake") and not pose.lying:
                 pose.arm_r, pose.fore_r = (62, 50) if a["hold"] in ("phone", "map", "flashlight", "radio", "bottle") else (8, 4)
                 if a["hold"] in ("umbrella", "sign"):
@@ -2084,6 +2182,8 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     shot = "close" if shot == "close" and not has_ov and not moving and not props and actors and not scene.get("float") else ""
     ov_tall = str((scene.get("overlay") or {}).get("type") or "") in TALL_OV if has_ov else False
     lead = next((a for a in actors if a["speaks"]), actors[0] if actors else None)
+    if lead and not lead["kind"]:     # Gesten der Hauptfigur passend zu den Wörtern dieser Szene
+        lead["gplan"] = gesture_plan([w for w in words if t0 - 0.05 <= w[1] < t0 + dur], t0, lead.get("lips"))
     cam = {"dir": 1 if index % 2 == 0 else -1, "drift": 1 if index % 3 != 2 else -1,
            "fx": (lead["x1"] if lead else (props[0][1] if props else 540)),
            "punch": None if (shot == "close" or moving or ov_tall or place in MAPS or not (actors or props)) else _punch_time(scene, words, t0, dur)}

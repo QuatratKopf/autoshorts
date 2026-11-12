@@ -318,6 +318,26 @@ def main():
         for t in (0.0, 0.2, 0.49, 0.6):
             assert stage._camera(fr.convert("RGB"), t, 3.0, {"opener": True}).size == (1080, 1920)
     check("Einstieg", _hook)
+    def _mimik():                                                # Lippen nur beim Selbst-Sprechen, Mundform je Silbe, Gesten zum Inhalt
+        assert stage.lips("Ich habe mir gedacht …") and stage.lips('Er ruft: „Lauf!“') and not stage.lips("Du wachst auf und alles ist weg.")
+        w = [("Warum", 0.0, 0.4), ("nie?", 0.4, 0.8), ("Plötzlich", 2.0, 2.6), ("explodiert", 2.6, 3.2)]
+        assert stage._mouth(1.4, w)[0] == 0.0                     # Pause: Mund zu
+        assert stage._mouth(0.0, w)[0] == 0.0 and stage._mouth(0.1, w)[1] == "a" and stage._mouth(0.6, w)[1] == "e"
+        assert max(stage._mouth(x / 100, w)[0] for x in range(0, 80)) > 0.6
+        plan = stage.gesture_plan(w, 0.0, False)
+        assert ("shock" in [n for _, n in plan]) and all(b - a >= stage.GAP - 1e-6 for (a, _), (b, _) in zip(plan, plan[1:])), plan
+        assert "shrug" in [n for _, n in stage.gesture_plan([("Wer", 0, 0.3), ("war", 0.3, 0.6), ("das?", 0.6, 1.0)], 0.0, False)]
+        assert not [n for _, n in stage.gesture_plan([("du", 0, 0.3)], 0.0, False)]          # Erzähler sagt „du“: kein Zeigen
+        sc_ = {"text": "Du wachst auf.", "place": "bedroom", "actors": [{"id": "du", "action": "talk", "speaks": True}]}
+        assert not stage._prepare(dict(sc_), {})[3][0]["lips"]
+        for name in rig.GESTURES:
+            p, _ = rig.pose_at("talk", 0.6, 3.0, "", 0.0, 1, (name, 0.5))
+            assert rig.draw(rig.Look.from_spec({}, "du", 0), p, 1, 1.0)[0].size[0] > 10, name
+        for shp in ("a", "o", "e"):
+            p, _ = rig.pose_at("talk", 0.6, 3.0, "", 0.8, 1, None, shp)
+            assert p.shape == shp and p.mouth == 0.8
+            rig.draw(rig.Look.from_spec({}, "du", 0), p, 1, 1.0)
+    check("Mimik und Gesten", _mimik)
     check("Neon-Look", lambda: graphics.neon(frame({"place": "street", "crowd": "walk"}), 1.0))
     check("Neon-Kulisse", lambda: graphics.tint(places.background("street", True)))
     # Regie mit zufälligen und kaputten Drehbüchern

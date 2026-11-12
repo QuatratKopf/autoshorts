@@ -70,6 +70,8 @@ class Pose:
     eyes: str = "normal"      # normal | wide | happy | sad | angry | closed | worried
     look: float = 0.0         # Blickrichtung der Pupillen -1..1
     mouth: float = 0.0        # 0 zu … 1 weit offen
+    shape: str = "a"          # Mundform beim Sprechen: a (offen) | o (rund) | e (breit) – aus den Vokalen des Wortes
+    brow: float = 0.0         # Augenbrauen zusätzlich: + hochgezogen (Frage, Staunen), − zusammengezogen
     smile: float = 0.0        # -1 traurig … 1 Lächeln
     lying: bool = False
     extra: dict = field(default_factory=dict)
@@ -276,7 +278,7 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
         _eye(d, ex + sgn * 37 * u, ey, er, pose.eyes, lk)
     # Augenbrauen: tragen den Ausdruck (hoch = erstaunt, innen tief = wütend, innen hoch = traurig/besorgt)
     brow = _mix(hair_d, INK, 0.55) if not mask else INK
-    lift_b = {"wide": 20, "happy": 12, "closed": 4, "angry": -4, "sad": 4, "worried": 6}.get(pose.eyes, 8) * u
+    lift_b = ({"wide": 20, "happy": 12, "closed": 4, "angry": -4, "sad": 4, "worried": 6}.get(pose.eyes, 8) + 12 * pose.brow) * u
     tilt = {"angry": -11, "sad": 10, "worried": 9, "wide": -2}.get(pose.eyes, -3) * u
     for sgn in (-1, 1):
         x0, y0 = ex + sgn * 37 * u, ey - 36 * u - lift_b * 0.8
@@ -285,9 +287,13 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
     if not mask:                                          # Nase: kleiner Haken in Blickrichtung
         d.arc((ex + 2 * u * f - 9 * u, ey + 12 * u, ex + 2 * u * f + 9 * u, ey + 30 * u), 300 if f > 0 else 150, 90 if f > 0 else 240, fill=_dark(skin, 0.35), width=max(2, int(5 * u)))
     mx, my = ex, ey + 50 * u
-    if pose.mouth > 0.08:                                 # offener Mund mit Zähnen und Zunge
+    if pose.mouth > 0.08:                                 # offener Mund mit Zähnen und Zunge; Form nach dem gesprochenen Vokal
         mh = 10 * u + pose.mouth * 30 * u
         mw = (19 - 4 * pose.mouth) * u if pose.eyes == "wide" else 19 * u
+        if pose.shape == "o":                             # o/u: kleiner runder Mund
+            mw, mh = 12 * u + pose.mouth * 3 * u, 12 * u + pose.mouth * 24 * u
+        elif pose.shape == "e":                           # e/i: breit und flach
+            mw, mh = 24 * u, 8 * u + pose.mouth * 16 * u
         d.rounded_rectangle((mx - mw - 3 * u, my - mh / 2 - 3 * u, mx + mw + 3 * u, my + mh / 2 + 3 * u), min(mw, mh / 2 + 3 * u), fill=INK)
         d.rounded_rectangle((mx - mw, my - mh / 2, mx + mw, my + mh / 2), min(mw, mh / 2), fill=(96, 30, 44))
         if mh > 16 * u:
@@ -359,8 +365,66 @@ def _blink(t, seed):
     return ph < 0.12
 
 
-def pose_at(action, t, dur, emotion="", mouth=0.0, seed=0):
-    """Pose für Aktion zum Zeitpunkt t (Sekunden seit Szenenbeginn). Gibt (Pose, Fortschritt 0..1 der Bewegung)."""
+GESTURES = {
+    # Name: Ziel-Haltung (Arme/Kopf) und Gesicht – wird weich ein- und ausgeblendet (gest = (Name, Sekunden seit Beginn))
+    "beat": {"arm_r": 52, "fore_r": 78, "head": 5},                                       # Betonung: Hand geht auf das Wort runter
+    "shrug": {"arm_l": -48, "fore_l": -78, "arm_r": 48, "fore_r": 78, "head": 9, "brow": 1.0, "lift": 6},   # Frage: Handflächen hoch
+    "wide": {"arm_l": -112, "fore_l": -16, "arm_r": 112, "fore_r": 16, "brow": 0.8, "eyes": "wide"},       # riesig, unglaublich viel
+    "no": {"arm_r": 72, "fore_r": 34, "brow": -0.4, "smile": -0.3},                       # nein/nie: Zeigefinger wackelt, Kopf schüttelt
+    "self": {"arm_r": 14, "fore_r": 118, "head": -4},                                     # ich: Hand an die Brust
+    "you": {"arm_r": 92, "fore_r": 4, "lean": 4, "brow": 0.3},                            # du: zeigt nach vorn
+    "count": {"arm_r": 142, "fore_r": 4, "brow": 0.4},                                    # Aufzählung/erstens: Finger hoch
+    "shock": {"arm_l": -150, "fore_l": 22, "arm_r": 150, "fore_r": -22, "eyes": "wide", "brow": 1.0, "open": 0.55},  # Hände an den Kopf
+    "think": {"arm_r": 22, "fore_r": 148, "arm_l": 28, "fore_l": 82, "head": -8, "brow": -0.3},              # Hand ans Kinn
+    "nod": {"arm_r": 30, "fore_r": 50, "smile": 0.6},                                     # ja/genau: Nicken
+    "happy": {"arm_r": 60, "fore_r": 90, "arm_l": -60, "fore_l": -90, "eyes": "happy", "smile": 1.0, "lift": 8},   # Freude
+    "sad": {"arm_r": 6, "fore_r": 4, "arm_l": -6, "fore_l": -4, "head": 12, "eyes": "sad", "smile": -0.8},          # leider/traurig
+}
+GEST_LEN = {"shock": 1.0, "nod": 0.9, "beat": 0.8}         # sonst 1,1 s (= stage.GAP)
+
+
+def _gest_env(lt, n):
+    """Weiches Ein-/Ausblenden einer Geste: 0 → 1 in 0,22 s, halten, in 0,3 s zurück."""
+    if lt < 0 or lt > n:
+        return 0.0
+    x = min(1.0, lt / 0.22, (n - lt) / 0.3)
+    return x * x * (3 - 2 * x)
+
+
+def apply_gesture(p, gest, t):
+    """Legt eine Geste (Name, Sekunden seit Beginn) über die Grundhaltung."""
+    if not gest or gest[0] not in GESTURES:
+        return p
+    name, lt = gest
+    w = _gest_env(lt, GEST_LEN.get(name, 1.1))
+    if w <= 0:
+        return p
+    g = GESTURES[name]
+    for k in ("arm_l", "fore_l", "arm_r", "fore_r", "head", "lean", "lift", "brow"):
+        if k in g:
+            setattr(p, k, getattr(p, k) + (g[k] - getattr(p, k)) * w)
+    if "smile" in g:
+        p.smile += (g["smile"] - p.smile) * w
+    if w > 0.5 and "eyes" in g:
+        p.eyes = g["eyes"]
+    if name == "beat":                                    # Hand schlägt auf das Wort
+        p.fore_r -= 30 * math.sin(min(1.0, lt / 0.45) * math.pi) * w
+    elif name == "no":
+        p.fore_r += 22 * math.sin(lt * 15) * w
+        p.look = 0.7 * math.sin(lt * 11) * w
+        p.head += 5 * math.sin(lt * 11) * w
+    elif name == "nod":
+        p.head += 9 * math.sin(lt * 10) * w
+    elif name == "count":
+        p.fore_r += 6 * math.sin(lt * 6) * w
+    if "open" in g:
+        p.extra["open"] = max(p.extra.get("open", 0.0), g["open"] * w)
+    return p
+
+
+def pose_at(action, t, dur, emotion="", mouth=0.0, seed=0, gest=None, shape="a"):
+    """Pose für Aktion zum Zeitpunkt t (Sekunden seit Szenenbeginn). Gibt (Pose, Fortschritt 0..1 der Bewegung).
+    gest: (Gesten-Name, Sekunden seit ihrem Beginn) – passende Geste zum gerade gesprochenen Wort; shape: Mundform des Vokals."""
     p = Pose()
     s = math.sin
     prog = min(1.0, t / max(0.3, dur))
@@ -424,22 +488,14 @@ def pose_at(action, t, dur, emotion="", mouth=0.0, seed=0):
         p.eyes = "closed"
         p.squash = 1 + 0.03 * s(t * 1.5)
         p.extra["zzz"] = True
-    elif a == "talk":
-        g = int((t + seed * 0.7) / 1.7) % 4                 # alle ~1,7 s eine andere Geste
-        if g == 0:
-            p.arm_r, p.fore_r = 46 + 16 * s(t * 3.1), 60 + 22 * s(t * 4.3)
-        elif g == 1:
-            p.arm_r, p.fore_r = 70 + 10 * s(t * 3.4), 30 + 18 * s(t * 5.0)
-            p.arm_l, p.fore_l = -60 - 10 * s(t * 3.4), -30 - 18 * s(t * 5.0)
-        elif g == 2:
-            p.arm_l, p.fore_l = -50 - 16 * s(t * 3.0), -70 - 20 * s(t * 4.1)
-        else:
-            p.arm_r, p.fore_r = 110, 20 + 14 * s(t * 6)
-        p.head = 4 * s(t * 2.7)
-        p.lean = 2.5 * s(t * 1.9 + seed)
-        p.lift = 5 * abs(s(t * 3.8)) + mouth * 4
+    elif a == "talk":                                       # Grundhaltung beim Reden/Zuhören: ruhig – Gesten kommen gezielt aus dem Satz (gest)
+        p.arm_r, p.fore_r = 16 + 3 * s(t * 1.3 + seed), 24 + 4 * s(t * 1.7 + seed)
+        p.arm_l, p.fore_l = -12 - 3 * s(t * 1.2 + seed), -14
+        p.head = 2 * s(t * 1.1 + seed) + mouth * 3       # beim Sprechen geht der Kopf leicht mit
+        p.lean = 1.5 * s(t * 0.9 + seed)
+        p.lift = mouth * 3
         if emotion in ("", "happy"):
-            p.smile = 0.6
+            p.smile = 0.5
     elif a == "look_around":
         p.look = s(t * 1.8)
         p.head = 6 * s(t * 1.8)
@@ -474,7 +530,12 @@ def pose_at(action, t, dur, emotion="", mouth=0.0, seed=0):
         p.eyes = {"happy": "happy", "shocked": "wide", "scared": "wide", "sad": "sad", "angry": "angry",
                   "worried": "worried", "tired": "closed"}.get(emo, p.eyes)
         p.smile = {"happy": 0.8, "sad": -0.8, "angry": -0.6, "worried": -0.4}.get(emo, p.smile)
+    if gest and a in ("talk", "idle", "point"):
+        apply_gesture(p, gest, t)
     if p.eyes not in ("closed", "happy") and _blink(t, seed):
         p.eyes = "closed"
     p.mouth = max(mouth, 0.75) if a in ("shocked", "scared", "fall", "float", "schweben") or emo in ("shocked", "scared") else mouth
+    if p.extra.get("open", 0) > p.mouth:                 # Staunen: Mund bleibt offen (rund), auch wenn die Figur nicht spricht
+        p.mouth, shape = p.extra["open"], "o"
+    p.shape = shape if mouth >= p.mouth - 1e-6 or p.extra.get("open") else "a"
     return p, prog
