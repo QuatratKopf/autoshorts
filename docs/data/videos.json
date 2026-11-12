@@ -2200,5 +2200,13 @@
   "thumb": true,
   "look": "cartoon",
   "mp4": true
+ },
+ {
+  "id": 67,
+  "category": "comedy",
+  "topic": "Uebernahme des Alltags durch sich selbst vermehrende KI-Agenten",
+  "status": "error",
+  "created": 1794502113.7457888,
+  "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-flash-lite-latest: HTTP 503 | pollinations: Expecting ',' delimiter: line 1 column 5280 (char 5279)"
  }
 ]
