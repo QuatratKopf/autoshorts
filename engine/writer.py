@@ -17,13 +17,15 @@ Regeln für die Sprechertexte:
 - Keine Emojis, keine Regieanweisungen, keine Klammern im Sprechertext.
 - Der letzte Satz ist eine Pointe oder Wendung, gern mit kurzer Aufforderung wie "Folg für mehr".
 - AUFBAU WIE BEI ERFOLGREICHEN SHORTS – durchdacht, nicht aneinandergereiht:
-  1. Hook in höchstens drei Sekunden: ein einziger kurzer Satz (höchstens zehn Wörter), der auch ohne Ton verständlich bebildert
-     werden kann und ein Versprechen macht, das erst der Schluss einlöst. Er wiederholt NICHT den Titel und beginnt nicht mit
-     „Was wäre, wenn“, „Stell dir vor“, „Heute“ oder „In diesem Video“. Gute Einstiege: mitten in der Handlung („Mein Laptop hat
-     gerade gekündigt.“), eine konkrete Folge („In fünf Sekunden fliegt dein Auto davon.“), ein Widerspruch („Diese Spinne ist
-     giftig – und trotzdem willst du sie im Garten.“) oder etwas, das auf dem Spiel steht („Du hast genau zweiundsiebzig Stunden.“).
-     Der zweite Satz öffnet eine Frage, die erst später beantwortet wird („Aber das eigentliche Problem kommt erst danach.“) –
-     natürlich formuliert, nicht marktschreierisch, keine falschen Versprechen.
+  1. Hook in höchstens drei Sekunden – IMMER das Thema kurz und spannend nennen, mit Cliffhanger:
+     Satz 1 (höchstens zwölf Wörter) sagt, worum es geht, und macht es unwiderstehlich: was daran unmöglich, verboten, gefährlich,
+     verrückt oder überraschend ist. Beispiele: „Drei Tier-Superkräfte, die eigentlich unmöglich sind.“ · „Dieses Tier überlebt
+     sogar im Weltall.“ · „Was passiert, wenn du eine Woche nicht schläfst?“ · „Mein KI-Agent hat gerade gekündigt.“ (Ich-Geschichte).
+     Bei Listen die Anzahl nennen. Nicht den Titel wörtlich vorlesen, nicht mit „Was wäre, wenn“, „Stell dir vor“, „Heute“,
+     „In diesem Video“ oder „Wusstest du“ beginnen.
+     Satz 2 ist der Cliffhanger: ein offenes Versprechen, das erst später eingelöst wird („Und die letzte kann dir sogar das Leben
+     retten.“ · „Aber ab Tag drei wird es richtig gefährlich.“) – bei Listen kommt das Beste zuletzt. Natürlich formuliert, nicht
+     marktschreierisch, keine falschen Versprechen: Was der Einstieg verspricht, kommt im Video auch vor.
   2. Roter Faden mit „aber“ und „also“: Jede Szene folgt aus der vorigen – Problem, Folge, neue Wendung. Keine losen Fakten
      hintereinander („und dann … und außerdem …“). Der Zuschauer soll bei jedem Satz wissen wollen, was als Nächstes passiert.
   3. Höhepunkt in der Mitte: die verblüffendste Zahl, der größte Schreck oder der beste Witz – danach kurz Luft holen lassen.
@@ -609,26 +611,32 @@ _LABEL_KEYS = ("text", "title", "label", "kicker", "sub", "unit", "a", "b", "lef
 
 
 HOOK = """Du bist Redakteur für virale deutsche Kurzvideos. Verbessere NUR den Einstieg: die ersten zwei Sätze.
-Ziel: Wer die ersten drei Sekunden sieht, will wissen, wie es weitergeht – spannend, aber nicht übertrieben und ohne Lüge.
-Satz 1: höchstens zehn Wörter, mitten in der Handlung, eine konkrete Folge, ein Widerspruch oder etwas, das auf dem Spiel steht.
-Er wiederholt nicht den Titel und beginnt nicht mit „Was wäre, wenn“, „Stell dir vor“, „Heute“, „In diesem Video“ oder „Wusstest du“.
-Satz 2: höchstens sechzehn Wörter, öffnet eine Frage, die das Video erst später beantwortet, und passt nahtlos zu Satz 3.
+Ziel: Wer die ersten drei Sekunden sieht, weiß, worum es geht, und will unbedingt das Ende sehen – spannend, aber nicht übertrieben und ohne Lüge.
+Satz 1: höchstens zwölf Wörter. Nennt das Thema kurz und macht es unwiderstehlich (was ist unmöglich, gefährlich, verrückt, überraschend?).
+Muster: „Drei Tier-Superkräfte, die eigentlich unmöglich sind.“ · „Dieses Tier überlebt sogar im Weltall.“ · „Was passiert, wenn du eine
+Woche nicht schläfst?“ · bei Ich-Geschichten mitten hinein („Mein KI-Agent hat gerade gekündigt.“). Bei Listen die Anzahl nennen.
+Er liest nicht den Titel wörtlich vor und beginnt nicht mit „Was wäre, wenn“, „Stell dir vor“, „Heute“, „In diesem Video“ oder „Wusstest du“.
+Satz 2: höchstens sechzehn Wörter, der Cliffhanger: ein offenes Versprechen, das erst das Ende einlöst („Und die letzte kann dir sogar das
+Leben retten.“) und das im Video wirklich vorkommt. Er passt nahtlos zu Satz 3.
 Gleicher Inhalt und gleiche Fakten wie vorher – nichts erfinden, keine Marken, echte Umlaute, Zahlen ausgeschrieben.
-Ist der Einstieg schon stark, gib ihn unverändert zurück. Antworte nur mit JSON: {"s0": "…", "s1": "…"}"""
+Ist der Einstieg schon so, gib ihn unverändert zurück. Antworte nur mit JSON: {"s0": "…", "s1": "…"}"""
 WEAK_START = r"^(was wäre,? wenn|stell dir (mal )?vor|heute|in diesem video|wusstest du|hast du dich (schon mal|jemals) gefragt|hallo|hey leute)"
 
 
 def hook_weak(js):
-    """Schwacher Einstieg? (zu lang, Floskel am Anfang oder fast nur der Titel noch einmal)"""
+    """Schwacher Einstieg? (zu lang, Floskel am Anfang, der Titel wörtlich vorgelesen, oder das Thema kommt gar nicht vor)"""
     import re as _re
     sc = [s for s in js.get("scenes", []) if isinstance(s, dict)]
     if not sc:
         return False
     t0 = str(sc[0].get("text") or "").strip()
     words = _re.findall(r"[a-zäöüß]+", t0.lower())
-    title = set(_re.findall(r"[a-zäöüß]{4,}", str(js.get("title") or "").lower()))
-    overlap = len([w for w in words if len(w) >= 4 and w in title]) / max(1, len([w for w in words if len(w) >= 4]))
-    return len(words) > 12 or bool(_re.search(WEAK_START, t0.lower())) or overlap >= 0.6
+    title_s = " ".join(_re.findall(r"[a-zäöüß0-9]+", str(js.get("title") or "").lower()))
+    title = set(_re.findall(r"[a-zäöüß]{4,}", title_s))
+    verbatim = bool(title_s) and " ".join(_re.findall(r"[a-zäöüß0-9]+", t0.lower())) == title_s
+    stems = {w[:5] for w in title}
+    names_topic = not title or any(w[:5] in stems for w in words if len(w) >= 4)
+    return len(words) > 13 or bool(_re.search(WEAK_START, t0.lower())) or verbatim or not names_topic
 
 
 def sharpen_hook(js, topic):
@@ -640,14 +648,18 @@ def sharpen_hook(js, topic):
         return js
     user = (f"Thema: {topic}\nTitel: {js.get('title')}\n"
             + "\n".join(f"Satz {i + 1}: {_json.dumps(str(s.get('text') or ''), ensure_ascii=False)}" for i, s in enumerate(sc[:4])))
-    out, _ = ai.chat_json(HOOK, user, 0.7)
-    s0, s1 = (" ".join(str((out or {}).get(k) or "").split()) for k in ("s0", "s1"))
-    ok0 = s0 and len(s0.split()) <= 12 and not _re.search(WEAK_START, s0.lower()) and not _foreign(s0) and not any(c in s0 for c in "{}[]<>()")
-    ok1 = s1 and len(s1.split()) <= 18 and not _foreign(s1) and not any(c in s1 for c in "{}[]<>()")
-    if ok0 and ok1:
-        if (s0, s1) != (sc[0].get("text"), sc[1].get("text")):
-            ai.log(f"Einstieg geschärft: „{s0}“ / „{s1}“")
-        sc[0]["text"], sc[1]["text"] = s0, s1
+    for attempt in range(2):                              # zweiter Versuch mit Hinweis, wenn Satz 1 das Thema nicht nennt
+        out, _ = ai.chat_json(HOOK, user + ("\nACHTUNG: Satz 1 muss das Thema nennen (Wörter aus dem Titel), kurz und spannend."
+                                             if attempt else ""), 0.7)
+        s0, s1 = (" ".join(str((out or {}).get(k) or "").split()) for k in ("s0", "s1"))
+        ok0 = s0 and len(s0.split()) <= 13 and not _re.search(WEAK_START, s0.lower()) and not _foreign(s0) and not any(c in s0 for c in "{}[]<>()")
+        ok0 = ok0 and not hook_weak({"title": js.get("title"), "scenes": [{"text": s0}]})   # nennt das Thema, liest nicht den Titel vor
+        ok1 = s1 and len(s1.split()) <= 18 and not _foreign(s1) and not any(c in s1 for c in "{}[]<>()")
+        if ok0 and ok1:
+            if (s0, s1) != (sc[0].get("text"), sc[1].get("text")):
+                ai.log(f"Einstieg geschärft: „{s0}“ / „{s1}“")
+            sc[0]["text"], sc[1]["text"] = s0, s1
+            break
     return js
 
 

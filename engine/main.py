@@ -354,6 +354,10 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, 
             from .toon import stage
             log("Animiere Szenen …")
             stage.direct(scenes, times, f"{v.get('topic') or ''} {script.get('title') or ''}", cat["slug"], os.environ.get("AS_LOOK") or cat.get("look") or cfg("look") or "")
+            kick = " ".join(str(script.get("thumb") or "").split())[:28]
+            if kick and scenes and isinstance(scenes[0], dict) and scenes[0].get("shot") != "graphic" and \
+                    str((scenes[0].get("overlay") or {}).get("type") or "tag") == "tag":
+                scenes[0]["overlay"] = {"type": "tag", "text": kick}   # erstes Bild: Thema als Schild („3 TIER-SUPERKRÄFTE“)
             try:                                          # Bildplan aufheben: so lässt sich später nachsehen, warum eine Szene so aussah
                 from .state import DATA
                 (DATA / "scripts").mkdir(exist_ok=True)

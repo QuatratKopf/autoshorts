@@ -89,9 +89,11 @@ bekommt der Lauf den Link als `video_id`, `remake.download` versucht es dort, un
 Titel/Beschreibung (oEmbed). Kategorie `comedy`: absurde Ich-Geschichten mit Humor.
 
 ## Einstieg (erste drei Sekunden)
-`writer.sharpen_hook` schärft nach jedem Drehbuch die ersten zwei Sätze (Satz 1 höchstens zehn Wörter, mitten in der Handlung, keine
-Floskel wie „Was wäre, wenn“/„Stell dir vor“, nicht der Titel noch einmal; Satz 2 öffnet eine Frage) – übernommen wird nur, was die
-Prüfung besteht. `stage._opening`: im ersten Bild reagiert die Hauptfigur sichtbar; die Kamera ruckt kräftig ins Bild (`opener`), Musik und
+`writer.sharpen_hook` schärft nach jedem Drehbuch die ersten zwei Sätze: Satz 1 nennt IMMER das Thema kurz und spannend (höchstens zwölf
+Wörter, z. B. „Drei Tier-Superkräfte, die eigentlich unmöglich sind.“; bei Listen die Anzahl; nicht den Titel wörtlich, keine Floskel wie
+„Was wäre, wenn“/„Stell dir vor“), Satz 2 ist der Cliffhanger, den erst das Ende einlöst („Und die letzte kann dir das Leben retten.“) –
+übernommen wird nur, was die Prüfung (`hook_weak`: Thema genannt, kurz, ohne Floskel) besteht. Im ersten Bild steht der Titelbild-Text als
+Schild (`tag`). `stage._opening`: im ersten Bild reagiert die Hauptfigur sichtbar; die Kamera ruckt kräftig ins Bild (`opener`), Musik und
 ein Auftakt-Ton sind ab der ersten Sekunde da.
 
 ## Zahlen und Kanal-Analyse

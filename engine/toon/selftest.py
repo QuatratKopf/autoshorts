@@ -374,7 +374,9 @@ def main():
     def _hook():                                                 # Einstieg: schwache Anfänge erkannt, erstes Bild mit Reaktion und Ruck
         from .. import writer
         assert writer.hook_weak({"title": "Was passiert ohne Schwerkraft?", "scenes": [{"text": "Was wäre, wenn die Schwerkraft verschwindet?"}]})
-        assert not writer.hook_weak({"title": "KI-Agenten", "scenes": [{"text": "Mein Laptop hat gerade gekündigt."}]})
+        assert not writer.hook_weak({"title": "KI-Agenten", "scenes": [{"text": "Mein KI-Agent hat gerade gekündigt."}]})
+        assert writer.hook_weak({"title": "KI-Agenten", "scenes": [{"text": "Mein Laptop hat gerade gekündigt."}]})          # Thema fehlt
+        assert not writer.hook_weak({"title": "3 Tier-Superkräfte, die unmöglich wirken", "scenes": [{"text": "Drei Tier-Superkräfte, die eigentlich unmöglich sind."}]})
         scs = stage.direct([{"text": "Dein Auto fliegt gleich davon.", "place": "street", "actors": [{"id": "du"}]},
                             {"text": "Weiter.", "place": "street"}, {"text": "Schluss.", "place": "street"}], [(0, 3), (3, 6), (6, 9)], "Test")
         assert scs[0]["actors"][0]["emotion"], scs[0]["actors"]
