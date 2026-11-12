@@ -60,6 +60,11 @@ Regeln für die Sprechertexte:
 - Keine Beleidigungen, nichts Anzügliches, keine echten Privatpersonen, keine Marken- oder Filmfiguren im Bild.
 - Baue Themen nie um urheberrechtlich geschützte Figuren, Filme, Serien, Spiele oder Marken (z. B. Godzilla, Pokémon,
   Marvel, Disney, Minecraft). Nimm stattdessen eigene, namenlose Wesen oder echte Natur/Wissenschaft (z. B. 'ein 100 Meter großes Monster').
+HUMOR – jedes Video ist auch unterhaltsam (in Comedy und Lustigem stark, in Grusel und ernsten Storys nur ein Augenzwinkern):
+- Mindestens zwei Lacher pro Video: trockene Untertreibung („Das war … suboptimal.“), Übertreibung mit Zahl („achtundvierzig Tabs“),
+  ein Running Gag, der zweimal wiederkommt und beim dritten Mal kippt, oder eine Figur/ein Ding, das plötzlich Gefühle hat.
+- Pointe kommt am Satzende, kurz und ohne Erklärung. Kein Witz auf Kosten von Gruppen, keine Beleidigungen, nichts Anzügliches.
+- Bild und Text spielen zusammen: Der Satz sagt das eine, die Figur reagiert sichtbar (Gefühl, Symbol, Sprechblase mit 1–2 Wörtern).
 Regeln für die Bild-Prompts (Englisch):
 - Beschreibe exakt eine Szene: wer/was, Pose, Gesichtsausdruck, Ort, Blickwinkel. Hauptmotiv mittig.
 - Keine Schrift im Bild. Keine bekannten Figuren, Marken oder realen Personen (auch nicht bei Trend-Themen: stelle sie symbolisch dar).
@@ -117,6 +122,8 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
             hair: long, bun oder "" (kurz) · hair_color: braun, dunkelbraun, schwarz, blond, rot, grau · skin: weiß, hell, mittel, dunkel
             (gib jeder Figur eine andere Kombination aus Pulli-, Haarfarbe und Frisur, damit man sie sofort auseinanderhält)
   Tiere/Wesen statt Mensch: "kind": cat, dog, spider, ghost, alien, robot, bird, dino, monster, fish, shark, bee, wasp
+  sowie Begriffe als Figur mit Gesicht: agent (KI, Bot, Assistent – oranges Kästchen), virus (Virus, Bakterie, Erreger), cell (Zelle).
+  Für Comedy: Dinge und Begriffe als Figuren mit eigenem Willen einsetzen, die reagieren, streiken, sich freuen oder beleidigt sind
   Höchstens 3 Figuren, jede klar unterscheidbar. Bei Du-Geschichten ist die Hauptfigur „du“.
 - BILDPLAN ZUERST: Überlege bei jeder Szene, bevor du sie ausfüllst: Was genau sieht der Zuschauer, während dieser Satz gesprochen wird?
   Schreib das als erstes Feld "see" auf (ein deutscher Satz: wer, wo, was passiert) und fülle Ort, Requisiten und Figuren danach genau so aus.
@@ -648,7 +655,7 @@ def strip_foreign(js):
     return conv(js)
 
 
-def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
+def write_script(cat: dict, topic: str, trend=None, source=None) -> tuple[dict, str]:
     secs = int(cfg("target_seconds") or 60)
     from .state import STATE
     wps = float(STATE.get("voice_wps") or 0)             # gemessenes Sprechtempo der letzten Videos (Wörter pro Sekunde)
@@ -667,6 +674,12 @@ def write_script(cat: dict, topic: str, trend=None) -> tuple[dict, str]:
                + (f"Schlagzeilen dazu:\n{heads}\n" if heads else "")
                + (f"Hintergrund: {trend['summary']}\n" if trend.get("summary") else "")
                + "Nutze den Anlass im Hook, erkläre dann den zeitlosen, belegbaren Hintergrund.\n")
+    if source:                                       # Vorlage aus einem eingeschickten Video: in unserem Stil neu aufbauen
+        ctx += ("VORLAGE – ein Video, das nachgebaut werden soll. Übernimm Idee, Ablauf, Tempo und Art der Witze, aber schreibe ALLES "
+                "in eigenen Worten neu (keinen Satz wörtlich), in unserem Stil und mit unseren Figuren und Orten. Keine Namen von Kanälen, "
+                "Personen, Marken oder Figuren aus der Vorlage. Stimmen Fakten der Vorlage nicht, korrigiere sie.\n"
+                f"Gesprochener Text der Vorlage:\n{str(source.get('transcript') or '')[:3500]}\n"
+                + (f"Was im Bild passiert (Ablauf):\n{str(source.get('visuals') or '')[:2000]}\n" if source.get("visuals") else ""))
     user = (f"Kategorie: {cat['name']}\nStil: {cat['script_style']}\nThema: {topic}\n{ctx}"
             + (f"Zielgruppe: {audience()}\n" if audience() else "")
             + f"Länge: zwischen {round(words * 0.85)} und {words} Wörter gesprochen insgesamt (≈ {secs} Sekunden) – zähle nach; nicht kürzer, nicht länger. "

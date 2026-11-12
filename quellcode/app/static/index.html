@@ -493,7 +493,7 @@ async function dispatch(inputs, label) {
 
 /* ═════════════════ Läufe auf GitHub ═════════════════ */
 let runTimer = null, wasActive = false;
-const RUNLABEL = {make: "Video wird erstellt", upload: "Upload läuft", stats: "Zahlen werden geholt", trends: "Trends werden gesammelt", auto: "Autopilot läuft", disconnect: "Plattform wird getrennt"};
+const RUNLABEL = {remake: "Video wird nachgebaut", make: "Video wird erstellt", upload: "Upload läuft", stats: "Zahlen werden geholt", trends: "Trends werden gesammelt", auto: "Autopilot läuft", disconnect: "Plattform wird getrennt"};
 function runName(r) { if (r.event === "schedule") return "Autopilot"; const a = (r.display_title || "").trim().split(/\s+/)[0]; return RUNLABEL[a] || r.display_title || "Auftrag"; }
 /* Taktgeber: Solange die App läuft, stößt sie die Läufe selbst an – GitHubs eigener Zeitplan kommt oft Stunden zu spät.
    Im Vordergrund holt sie die Zahlen alle paar Minuten („live“), im Hintergrund weckt sie alle 15 Minuten den Autopiloten. */
@@ -886,6 +886,14 @@ function viewStudio() {
       <label class="check"><input type="checkbox" id="upl" checked> direkt hochladen</label>
       <button class="btn accent" id="mk" style="padding:11px 20px">${icon(I.spark)}Video erstellen</button></div>
   </section>
+  <section class="panel in" style="--i:1" id="remakeBox">
+    <div class="section-h"><div><h2>Video nachbauen</h2><p class="hint">Schick ein Video rein, das dir gefällt. AutoShorts hört und schaut es an und baut daraus ein eigenes Video in unserem Stil – gleiche Idee und gleiches Tempo, aber eigene Worte, Figuren und Orte. Nimm nur Videos, die du als Vorlage nutzen darfst.</p></div></div>
+    <div class="make"><label>Video-Datei (MP4, MOV oder WebM, bis 300 MB)<input type="file" id="rmFile" accept="video/mp4,video/quicktime,video/webm"></label>
+      <label>Video-Art<select id="rmCat" aria-label="Video-Art für den Nachbau"><option value="">automatisch erkennen</option>${CFG.categories.map(c => `<option value="${esc(c.slug)}">${esc(c.emoji)} ${esc(c.name)}</option>`).join("")}</select></label>
+      <label class="check"><input type="checkbox" id="rmUpl"> direkt hochladen</label>
+      <button class="btn accent" id="rmGo" style="padding:11px 20px">${icon(I.spark)}Nachbauen</button></div>
+    <p class="hint" id="rmState" hidden></p>
+  </section>
   <section class="panel in" style="--i:1" id="trendBox">
     <div class="section-h"><div><h2>Aktuell im Trend</h2><p class="hint">Was Deutschland gerade sucht und liest${TRENDS.updated ? " · Stand " + fmtTs(TRENDS.updated) : ""}. Die KI macht daraus ein passendes, sicheres Thema.</p></div>
       <div class="inline"><div class="seg" id="tSeg">${["Alle", "TikTok", "Reddit", "Google", "Wikipedia"].map(k => `<button type="button" data-v="${k}" aria-pressed="${TSRC === k}">${k}</button>`).join("")}</div><button class="btn" id="tRef">${icon(I.reload)}Aktualisieren</button></div></div>
@@ -912,6 +920,18 @@ function viewStudio() {
   $("#mk").onclick = async () => { const b = $("#mk"); b.disabled = true;
     const ok = await dispatch({action: "make", category: SEL || "", topic: $("#topic").value.trim(), upload: $("#upl").checked ? "1" : "0", trend: TOPIC_TREND ? TOPIC_TREND.id : ""}, "Video wird erstellt");
     b.disabled = false; if (ok) { $("#topic").value = ""; TOPIC_TREND = null; $("#topicTrend").hidden = true; toast("Auftrag gesendet. Oben siehst du den Fortschritt."); scrollTo({top: 0, behavior: "smooth"}); } };
+  $("#rmGo").onclick = async () => { const f = $("#rmFile").files[0], b = $("#rmGo"), st = $("#rmState");
+    if (!f) return toast("Bitte zuerst eine Videodatei wählen.", true);
+    if (f.size > 300e6) return toast("Das Video ist größer als 300 MB.", true);
+    b.disabled = true; st.hidden = false; st.textContent = `Lade „${f.name}“ hoch (${Math.round(f.size / 1e6)} MB) …`;
+    try {
+      const r = await fetch(`/api/remake?category=${encodeURIComponent($("#rmCat").value)}&upload=${$("#rmUpl").checked ? 1 : 0}`,
+        {method: "POST", headers: {"Content-Type": f.type || "video/mp4", "X-AS": "1"}, body: f});
+      const j = await r.json().catch(() => ({})); if (!r.ok) throw new Error(j.error || `Fehler ${r.status}`);
+      st.textContent = "Hochgeladen. Der Nachbau läuft jetzt auf GitHub (etwa 10 Minuten) – das neue Video erscheint danach in der Liste.";
+      $("#rmFile").value = ""; PENDING = {label: "Video wird nachgebaut", at: Date.now()}; banner(); setTimeout(pollRuns, 4000);
+    } catch (e) { st.textContent = ""; st.hidden = true; toast(e.message, true); }
+    b.disabled = false; };
   $("#qadd").onclick = () => { const t = $("#qtext").value.split("\n").map(s => s.trim()).filter(Boolean); if (!t.length) return toast("Bitte mindestens ein Thema eingeben.", true);
     const now = Date.now() / 1000; t.forEach((x, i) => CFG.queue.push({id: "q" + Math.random().toString(36).slice(2, 10), category: $("#qcat").value, text: x.slice(0, 300), created: now + i})); persist("Themen eingeplant", $("#qadd")); };
 }

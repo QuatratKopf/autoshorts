@@ -628,6 +628,51 @@ def gh_proxy(h):
     h._send(200, {"status": s, "data": data})
 
 
+REMAKE_MAX = 300_000_000      # Vorlagen-Video höchstens 300 MB
+
+
+def _inbox_release():
+    """Release „inbox“ (Eingang für Vorlagen-Videos) holen oder anlegen; gibt seine ID zurück."""
+    s_, b_ = gh("GET", repo_path("/releases/tags/inbox"))
+    if s_ == 200:
+        return json.loads(b_)["id"]
+    rel = gh_json("POST", "/releases", {"tag_name": "inbox", "name": "Eingang: Videos zum Nachbauen", "prerelease": True,
+                                        "body": "Hier landen Videos aus der App, die AutoShorts in eigenem Stil nachbauen soll. "
+                                                "Sie werden nach dem Nachbauen gelöscht."})
+    return rel["id"]
+
+
+@route("POST", r"/api/remake")
+def remake_upload(h):
+    """Video aus der App annehmen, in den Eingang hochladen und den Nachbau starten (Datei kommt roh im Körper der Anfrage)."""
+    q = urllib.parse.parse_qs(urllib.parse.urlsplit(h.path).query)
+    n = int(h.headers.get("Content-Length") or 0)
+    if n <= 0 or n > REMAKE_MAX:
+        raise ValueError("Das Video ist leer oder größer als 300 MB.")
+    ctype = (h.headers.get("Content-Type") or "video/mp4").split(";")[0].strip()
+    if not ctype.startswith("video/"):
+        raise ValueError("Bitte eine Videodatei wählen (MP4, MOV oder WebM).")
+    data = h.rfile.read(n)
+    ext = {"video/quicktime": "mov", "video/webm": "webm"}.get(ctype, "mp4")
+    name = f"vorlage-{int(time.time())}.{ext}"
+    rid = _inbox_release()
+    hd = {"Accept": "application/vnd.github+json", "Authorization": "Bearer " + SET.get("token", ""), "Content-Type": ctype,
+          "User-Agent": UA, "X-GitHub-Api-Version": "2022-11-28"}
+    url = f"https://uploads.github.com/repos/{SET['owner']}/{SET['repo']}/releases/{rid}/assets?name={name}"
+    req = urllib.request.Request(url, data=data, method="POST", headers=hd)
+    try:
+        with urllib.request.urlopen(req, timeout=600) as r:
+            st = r.status
+    except urllib.error.HTTPError as e:
+        st = e.code
+    if st not in (200, 201):
+        raise ValueError(f"Hochladen zu GitHub fehlgeschlagen ({st}).")
+    cat = re.sub(r"[^a-z0-9_-]", "", (q.get("category") or [""])[0].lower())[:40]
+    dispatch({"action": "remake", "video_id": name, "category": cat, "upload": "1" if (q.get("upload") or ["0"])[0] == "1" else "0"})
+    log(f"Vorlage {name} hochgeladen ({n // 1_000_000} MB), Nachbau gestartet")
+    h._send(200, {"ok": True, "name": name})
+
+
 @route("POST", r"/api/secret")
 def set_secret(h):
     b = h._json()

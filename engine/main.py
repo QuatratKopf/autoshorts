@@ -160,10 +160,10 @@ def too_similar(topic, trend=None):
     return None
 
 
-def draft(cat, topic, trend, v=None):
+def draft(cat, topic, trend, v=None, source=None):
     """Thema finden und Drehbuch schreiben (ohne Ton und Bild)."""
     v = v if v is not None else {}
-    if not topic and want_trend(cat):
+    if not topic and not source and want_trend(cat):
         log("Schaue, was gerade im Trend ist …")
         try:
             topic, trend = writer.trend_topic(cat)
@@ -190,7 +190,7 @@ def draft(cat, topic, trend, v=None):
     v["topic"] = topic
     log(f"Thema: {topic}")
     log("Schreibe Drehbuch …")
-    script, provider = writer.write_script(cat, topic, trend)
+    script, provider = writer.write_script(cat, topic, trend, source)
     return topic, trend, script, provider
 
 
@@ -231,7 +231,7 @@ def prepare(slot):
     return plans[slot]
 
 
-def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None):
+def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, source=None):
     plan = plan or {}
     if plan.get("script") and category(plan.get("category")):
         cat, topic, qid, qtrend = category(plan["category"]), plan.get("topic"), None, plan.get("trend")
@@ -258,7 +258,9 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None):
             v["topic"] = topic
             log(f"Thema (vorbereitet): {topic}")
         else:
-            topic, trend, script, used["text"] = draft(cat, topic, trend, v)
+            topic, trend, script, used["text"] = draft(cat, topic, trend, v, source)
+            if source:
+                v["remake"] = True
             if qid:
                 STATE["used_queue"].append(qid)
         scenes = script["scenes"]
@@ -513,6 +515,15 @@ def main(argv=None):
                 save_all()
         elif a.action == "upload":
             upload(int(a.id))
+        elif a.action == "remake":       # eingeschicktes Video in unserem Stil neu aufbauen (--id = Dateiname im Release „inbox“)
+            from . import remake
+            src = remake.analyze(remake.fetch(a.id.strip()))
+            log(f"Vorlage erkannt: {src['topic']} ({src['category'] or 'ohne Kategorie'})")
+            slug = a.category.strip() or (src["category"] if category(src["category"]) else "comedy")
+            try:
+                make(slug if category(slug) else None, src["topic"], a.upload != "0", None, source=src)
+            finally:
+                remake.cleanup(a.id.strip())
         elif a.action == "stats":
             uploaders.refresh_stats()
             trends.refresh()

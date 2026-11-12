@@ -123,7 +123,7 @@ def main():
         slot = due_slot()
         run, media = (1, 1) if slot else ((1, 0) if (stats_due() or plan_due() or review_stale()) else (0, 0))
     else:
-        run, media = 1, 1 if action in ("make", "review_make") else 0
+        run, media = 1, 1 if action in ("make", "review_make", "remake") else 0
     print(f"run={run}")
     print(f"media={media}")
 

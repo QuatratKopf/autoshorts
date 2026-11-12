@@ -96,6 +96,16 @@ PRESET_CATEGORIES = [
          image_mood="lush nature settings, friendly cute animal characters, soft sunlight",
          voice="de-DE-SeraphinaMultilingualNeural", voice_rate="+6%", voice_pitch="+0Hz",
          voice_instructions="Warm, neugierig und begeistert."),
+    dict(slug="comedy", name="Comedy", emoji="🤪",
+         description="Absurde Ich-Geschichten mit trockenem Humor: Was passiert, wenn man es wirklich macht?",
+         script_style="Erzähle in der Ich-Form eine absurde, aber nachvollziehbare Alltags-Geschichte, die völlig eskaliert "
+                      "(Beispiel: 'Ich hab mir KI-Agenten geholt, die mein Leben organisieren' – erst praktisch, dann übernehmen sie alles). "
+                      "Trockener, selbstironischer Ton, kurze Sätze, schnelle Wendungen. Mindestens drei Lacher: Übertreibung, "
+                      "ein Running Gag, der wiederkommt und am Ende kippt, und eine überraschende Schlusspointe. Dinge und Begriffe "
+                      "werden zu Figuren mit eigenem Willen. Echte Hintergründe dürfen vorkommen, Erfundenes ist klar als Geschichte erkennbar.",
+         image_mood="bright warm colors, expressive faces, cozy desk and room settings, funny reactions",
+         voice="de-DE-FlorianMultilingualNeural", voice_rate="+8%", voice_pitch="+0Hz",
+         voice_instructions="Trocken, leicht genervt und selbstironisch, wie jemand, der seine eigene Geschichte nicht fassen kann."),
     dict(slug="whatif", name="What If", emoji="🤯",
          description="Was wäre wenn …? Verrückte Gedankenexperimente, wissenschaftlich durchgespielt.",
          script_style="Starte mit einer verrückten Was-wäre-wenn-Frage (z. B. 'Was wäre, wenn die Erde aufhört sich zu drehen?'). "

@@ -66,3 +66,9 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
 - Nichts an Zugangsdaten, `tokens/`, Upload-Code, Workflow-Zeitplan oder App-Einstellungen ändern. Keine Videos hochladen.
 - Die App (`quellcode/`, `AutoShorts.cmd`) nur anfassen, wenn ein Ausbau ohne das nicht funktioniert.
 - Schlägt der Selbsttest fehl und lässt sich das nicht beheben: nichts pushen, sondern berichten.
+
+## Video nachbauen (Aktion `remake`)
+Die App lädt ein Vorlagen-Video in das Release `inbox` und startet `-f 'inputs[action]=remake' -f 'inputs[video_id]=<Dateiname>'`.
+`engine/remake.py` hört es an (Spracherkennung), schickt zehn Einzelbilder mit dem Text an die Text-KI (Ablauf, Thema, Video-Art) und
+`writer.write_script(..., source=…)` schreibt daraus ein eigenes Drehbuch: gleiche Idee und gleiches Tempo, eigene Worte, keine Namen,
+Marken oder Figuren der Vorlage. Danach wird die Vorlage aus `inbox` gelöscht. Kategorie `comedy`: absurde Ich-Geschichten mit Humor.
