@@ -1981,7 +1981,7 @@
   "id": 61,
   "category": "storys",
   "topic": "Warum Hollywood-Heist-Filme physikalisch komplett wild sind und trotzdem süchtig machen",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1794482237.52176,
   "title": "Warum Hollywood-Heist-Filme physikalisch komplett wild sind",
   "description": "Was in Action-Filmen im Tresor passiert, ist purer Wahnsinn.\nDu prüfst hier die verrücktesten Hollywood-Diebstähle.\nTresor knacken oder Laserbarriere überwinden?",
@@ -2018,7 +2018,8 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Tippfehler TAGEELANG in der Einblendung, doppeltes Wort, Dieb schwebt bei den Lasern, Untertitel über der Handy-Grafik; ersetzt durch Video 62"
  },
  {
   "id": 62,
