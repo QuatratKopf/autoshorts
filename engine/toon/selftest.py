@@ -251,6 +251,32 @@ def main():
         assert scs[1].get("place") == "cinema", scs[1].get("place")
         assert len([a for a in scs[2].get("actors") or [] if not a.get("kind")]) == 3, "drei Gründer"
     check("Ort aus dem Satz", _places_said)
+    def _sea():                                                  # Meerestiere: das genannte Tier ist die Figur, allein und unter Wasser
+        T = [("Ein winziger Krebs erzeugt unter Wasser rund viertausendfünfhundert Grad.", "livingroom", [{"id": "du", "action": "shocked", "hold": "phone"}], ["computer"], "close"),
+             ("Der Pistolenkrebs knallt seine Schere zu.", "underwater", [], ["explosion"], "event"),
+             ("Die unsterbliche Qualle altert rückwärts.", "underwater", [], ["wave"], "event"),
+             ("Sie verwandelt ihre Zellen zurück.", "underwater", [{"id": "qualle", "kind": "fish", "action": "jump"}], [], "insert"),
+             ("Und jetzt Kraft Nummer drei.", "underwater", [], ["rock"], "event"),
+             ("Der Fangschreckenkrebs boxt wie eine Gewehrkugel.", "underwater", [{"id": "krebs", "kind": "monster"}], ["rock"], "event"),
+             ("Damit zertrümmert er dicke Aquarienscheiben aus Glas.", "underwater", [], [], "event"),
+             ("Mein Goldfisch schaut mich seitdem verdächtig an.", "livingroom", [{"id": "du"}], ["glass"], ""),
+             ("Mein Onkel hat Krebs besiegt.", "livingroom", [{"id": "du"}], [], "")]
+        scs = stage.direct([{"text": t_, "place": pl_, "actors": a_, "props": pr_, "shot": sh_, "overlay": {"type": "thermo", "value": 44000} if not n_ else None}
+                            for n_, (t_, pl_, a_, pr_, sh_) in enumerate(T)], [(n_ * 3, n_ * 3 + 3) for n_ in range(len(T))], "3 Tier-Superkräfte")
+        want = ["shrimp", "shrimp", "jelly", "jelly", "mantis", "mantis", "mantis"]
+        for n_, k_ in enumerate(want):
+            ks = [a.get("kind") for a in scs[n_].get("actors") or []]
+            assert ks == [k_], f"Meerestier Szene {n_}: {ks} statt {k_}"
+            assert places.resolve(stage.backdrop(scs[n_])) == "underwater", f"Meerestier Szene {n_} nicht unter Wasser"
+            assert not any(q.get("type") in ("explosion", "wave") for q in scs[n_].get("props") or []), "Explosion/Welle unter Wasser"
+            frame(scs[n_], {"du": {"shirt": "blau"}})
+        assert scs[0].get("overlay") is None, "Thermometer mit nicht gesprochener Zahl"
+        assert [q.get("type") for q in scs[7].get("props") or []] == ["aquarium"], "Goldfisch ohne Aquarium"
+        assert not any(a.get("kind") for a in scs[8].get("actors") or []) and places.resolve(stage.backdrop(scs[8])) != "underwater", "Krankheit Krebs als Tier"
+        g = stage.direct([{"text": "Sein Schlag erreicht achtzig Kilometer pro Stunde.", "place": "underwater", "shot": "graphic",
+                           "graphic": {"type": "compare", "left": "SCHLAG", "right": "SCHNEIDEN", "value": "80 km/h", "sub": "80 km/h"}}], [(0, 3)], "Tiere")
+        assert (g[0].get("graphic") or {}).get("type") != "compare", "Vergleich mit zweimal derselben Zahl"
+    check("Meerestiere", _sea)
     def _hero():                                                 # Tier im Titel wird Hauptfigur: groß, mit Gefühl, nicht doppelt als Gegenstand
         scs = stage.direct([{"text": "Die Spinne sitzt in deinem Zimmer.", "place": "bedroom", "props": ["lib_tarantel"], "actors": [{"id": "du", "action": "shocked"}]},
                             {"text": "Sie frisst Käfer.", "place": "park", "props": ["lib_tarantel"], "actors": [{"id": "du"}, {"id": "b", "kind": "bee"}]},

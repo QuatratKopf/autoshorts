@@ -127,6 +127,8 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
             hair: long, bun oder "" (kurz) · hair_color: braun, dunkelbraun, schwarz, blond, rot, grau · skin: weiß, hell, mittel, dunkel
             (gib jeder Figur eine andere Kombination aus Pulli-, Haarfarbe und Frisur, damit man sie sofort auseinanderhält)
   Tiere/Wesen statt Mensch: "kind": cat, dog, spider, ghost, alien, robot, bird, dino, monster, fish, shark, bee, wasp
+  Meerestiere: shrimp (Pistolenkrebs, Garnele, Krebs – die Knallschere schnappt zu), mantis (Fangschreckenkrebs – schlägt mit der Keule), jelly (Qualle).
+  Sie spielen am Ort underwater; nie monster oder fish als Ersatz für ein Tier nehmen, das es hier gibt.
   sowie Begriffe als Figur mit Gesicht: agent (KI, Bot, Assistent – oranges Kästchen), virus (Virus, Bakterie, Erreger), cell (Zelle),
   brain (das Gehirn als rosa Figur – für Sätze wie „dein Gehirn schlägt Alarm“; Kennung z. B. "gehirn").
   Für Comedy: Dinge und Begriffe als Figuren mit eigenem Willen einsetzen, die reagieren, streiken, sich freuen oder beleidigt sind
@@ -302,7 +304,9 @@ BRANDS = {"amazon": "ein großer Online-Händler", "google": "eine Suchmaschine"
           "aldi": "ein Discounter", "lidl": "ein Discounter", "rewe": "ein Supermarkt", "edeka": "ein Supermarkt", "starbucks": "eine Kaffeekette",
           "nvidia": "ein Chip-Hersteller", "geforce": "eine neue Grafikkarte", "intel": "ein Chip-Hersteller", "amd": "ein Chip-Hersteller", "sega": "ein Spielehersteller",
           "denny's": "ein Diner", "dennys": "ein Diner", "fortnite": "ein Videospiel", "minecraft": "ein Videospiel", "huawei": "ein Handy-Hersteller", "sony": "ein Elektronik-Riese",
-          "red bull": "ein Energydrink", "temu": "ein Online-Shop", "shein": "ein Online-Shop", "zalando": "ein Online-Shop", "twitch": "ein Streamingportal"}
+          "red bull": "ein Energydrink", "temu": "ein Online-Shop", "shein": "ein Online-Shop", "zalando": "ein Online-Shop", "twitch": "ein Streamingportal",
+          "marvel": "ein Superhelden-Comic", "pixar": "ein Trickfilmstudio", "pokémon": "ein Sammelspiel", "pokemon": "ein Sammelspiel",
+          "lego": "ein Bausteine-Hersteller", "star wars": "ein Weltraum-Film", "harry potter": "ein Zauberer-Film"}
 _BRAND_RE = re.compile(r"(?i)(?<![\wäöüß])(?:giganten wie |firmen wie |konzerne wie |unternehmen wie |wie )?(" + "|".join(re.escape(b) for b in sorted(BRANDS, key=len, reverse=True)) + r")(?:s)?(?![\wäöüß])")
 
 

@@ -176,6 +176,45 @@ def p_tv(d, x, t, s=1.0):
     d.polygon([(x - 176, GROUND - 300), (x - 96, GROUND - 376), (x - 40, GROUND - 376), (x - 176, GROUND - 240)], fill=(255, 255, 255, 70))   # Spiegelung
 
 
+def p_aquarium(d, x, t, s=1.0):
+    """Aquarium auf einem Schränkchen: Wasser, Kies, Pflanze, Luftblasen und ein Goldfisch, der hin und her schwimmt."""
+    _r(d, (x - 190, GROUND - 190, x + 190, GROUND), (150, 104, 70), 10)                          # Schränkchen
+    _r(d, (x - 150, GROUND - 150, x - 14, GROUND - 30), (176, 124, 84), 8, 5)
+    _r(d, (x + 14, GROUND - 150, x + 150, GROUND - 30), (176, 124, 84), 8, 5)
+    for kx in (-36, 36):
+        d.ellipse((x + kx - 9, GROUND - 100, x + kx + 9, GROUND - 82), fill=(250, 214, 110), outline=INK, width=3)
+    top, bot = GROUND - 470, GROUND - 190
+    d.rounded_rectangle((x - 176, top, x + 176, bot), 14, fill=(150, 214, 240), outline=INK, width=O)   # Becken
+    d.rectangle((x - 170, top + 34, x + 170, bot - 6), fill=(96, 184, 232))
+    wv = [(x - 170 + i * 20, top + 34 + math.sin(t * 3 + i * 0.9) * 4) for i in range(18)]
+    d.polygon(wv + [(x + 170, top + 52), (x - 170, top + 52)], fill=(190, 232, 248))               # Wasserlinie
+    d.rectangle((x - 170, bot - 40, x + 170, bot - 6), fill=(226, 196, 140))                       # Kies
+    for i in range(9):
+        d.ellipse((x - 160 + i * 37, bot - 46 + (i % 2) * 6, x - 134 + i * 37, bot - 28 + (i % 2) * 6), fill=(204, 170, 118))
+    for i, (px_, hgt) in enumerate(((-120, 130), (-96, 90), (124, 110))):                           # Wasserpflanzen
+        pts = [(x + px_ + math.sin(t * 2 + j * 0.8 + i) * (4 + j * 2), bot - 30 - j * hgt / 6) for j in range(7)]
+        d.line(pts, fill=(40, 150, 96), width=12, joint="curve")
+    for i in range(3):                                                                             # Luftblasen
+        by_ = bot - 50 - ((t * 70 + i * 60) % 170)
+        d.ellipse((x + 96 + i * 12 - 7, by_ - 7, x + 96 + i * 12 + 7, by_ + 7), outline=(236, 250, 255), width=3)
+    sw = math.sin(t * 1.3)
+    fx, fy = x + sw * 70, top + 150 + math.sin(t * 2.4) * 12
+    fd = 1 if math.cos(t * 1.3) >= 0 else -1                                                       # schwimmt in Blickrichtung
+    wag = math.sin(t * 10) * 10
+    gold = (250, 150, 50)
+    d.polygon([(fx - fd * 44, fy), (fx - fd * 92, fy - 34 + wag), (fx - fd * 80, fy + wag * 0.3), (fx - fd * 92, fy + 34 + wag)], fill=gold, outline=INK, width=5)
+    d.polygon([(fx - fd * 20, fy - 30), (fx, fy - 60), (fx + fd * 24, fy - 30)], fill=_dk(gold), outline=INK, width=5)
+    d.ellipse((fx - 56, fy - 38, fx + 56, fy + 38), fill=_dk(gold), outline=INK, width=5)
+    d.ellipse((fx - 50, fy - 34, fx + 44, fy + 26), fill=gold)
+    ex = fx + fd * 28
+    d.ellipse((ex - 15, fy - 22, ex + 15, fy + 8), fill=(255, 255, 255), outline=INK, width=4)
+    d.ellipse((ex - 7 + fd * 5, fy - 13, ex + 7 + fd * 5, fy + 1), fill=INK)
+    d.arc((ex - 4, fy + 6, ex + 20, fy + 24), 20, 150, fill=INK, width=4)
+    d.polygon([(x - 170, top + 110), (x - 100, top + 40), (x - 56, top + 40), (x - 170, top + 170)], fill=(255, 255, 255, 60))   # Spiegelung im Glas
+    d.rounded_rectangle((x - 176, top, x + 176, bot), 14, outline=INK, width=O)
+    _r(d, (x - 186, top - 22, x + 186, top + 8), (60, 64, 76), 8, 5)                               # Deckel
+
+
 def p_computer(d, x, t, s=1.0):
     _r(d, (x - 220, GROUND - 230, x + 220, GROUND - 200), (176, 118, 76), 6)
     for lx in (-190, 170):
@@ -858,7 +897,7 @@ PROPS = {"cloud": p_cloud, "stormcloud": p_stormcloud, "lightning": p_lightning,
          "canister": p_canister, "cans": p_cans, "generator": p_generator, "bike": p_bike, "shelf": p_shelf, "table": p_table,
          "drone": p_drone, "cctv": p_cctv, "door": p_door, "clock": p_clock, "pile": p_pile, "sandpile": p_sandpile, "trash": p_trash, "faucet": p_faucet,
          "glass": p_glass, "barrel": p_barrel, "solarpanel": p_solarpanel,
-         "fridge": p_fridge, "tent": p_tent, "streetlamp": p_streetlamp, "plane": p_plane, "satellite": p_satellite, "ship": p_ship}
+         "fridge": p_fridge, "tent": p_tent, "streetlamp": p_streetlamp, "plane": p_plane, "satellite": p_satellite, "ship": p_ship, "aquarium": p_aquarium}
 PROP_ALIASES = {"baum": "tree", "stein": "rock", "kiste": "box", "auto": "car", "feuer": "fire", "fernseher": "tv", "pc": "computer",
                 "laptop": "computer", "geld": "money", "rakete": "rocket", "asteroid": "meteor", "erde": "earth", "sonne": "sun",
                 "mond": "moon", "wolke": "cloud", "gewitterwolke": "stormcloud", "regenwolke": "stormcloud", "tsunami": "wave", "blitz": "lightning", "erdbeben": "crack", "earthquake": "crack", "riss": "crack",
@@ -874,7 +913,8 @@ PROP_ALIASES = {"baum": "tree", "stein": "rock", "kiste": "box", "auto": "car", 
                 "schneehaufen": "pile", "sandhaufen": "sandpile", "sand": "sandpile", "müll": "trash", "müllberg": "trash", "garbage": "trash",
                 "wasserhahn": "faucet", "tap": "faucet", "hahn": "faucet", "gebäude": "house", "möbel": "shelf", "aktie": "money", "aktien": "money", "wasserstrom": "faucet", "wasserströme": "faucet", "wasserstrahl": "faucet", "glas": "glass", "wasserglas": "glass", "getränk": "glass",
                 "fass": "barrel", "tonne": "barrel", "ölfass": "barrel", "solar": "solarpanel", "solaranlage": "solarpanel",
-                "solarzelle": "solarpanel", "pflanze": "sprout", "plant": "sprout", "comet": "meteor", "komet": "meteor", "welle": "wave", "eisberg": "ice", "vulkan": "volcano", "bigsun": "sun"}
+                "solarzelle": "solarpanel", "pflanze": "sprout", "plant": "sprout", "comet": "meteor", "komet": "meteor", "welle": "wave", "eisberg": "ice", "vulkan": "volcano", "bigsun": "sun",
+                "fischglas": "aquarium", "goldfischglas": "aquarium", "aquarien": "aquarium", "fischbecken": "aquarium", "fish tank": "aquarium", "fishtank": "aquarium"}
 FRONT = ("wave", "flood", "eclipse")
 BEHIND = ("sun", "moon", "earth", "cloud", "stormcloud", "aurora")      # stehen am Himmel hinter Häusern, Bergen und Bäumen
 SKY = ("drone", "earth", "sun", "moon", "ufo", "meteor", "aurora", "eclipse", "lightning", "cloud", "stormcloud", "plane", "satellite")     # werden vor den Figuren gezeichnet
@@ -887,7 +927,7 @@ SIZES = {"car": (1.5, 1150), "bus": (3.0, 1100), "truck": (3.3, 1100), "house": 
          "cart": (1.0, 1262), "candle": (0.9, 1262), "trafficlight": (3.4, 1225), "canister": (0.5, 1262), "cans": (0.5, 1262),
          "generator": (0.8, 1255), "bike": (1.05, 1255), "shelf": (1.9, 1238), "table": (0.78, 1250), "fridge": (1.85, 1238),
          "cctv": (3.6, 1228), "tent": (1.8, 1180), "door": (2.1, 1236), "clock": (0.6, 1262), "pile": (3.2, 1160), "sandpile": (3.2, 1160),
-         "trash": (1.6, 1200), "faucet": (1.6, 1255), "glass": (0.36, 1262), "barrel": (0.95, 1255), "solarpanel": (1.8, 1200), "streetlamp": (4.6, 1225), "rocket": (14.0, 1010)}
+         "trash": (1.6, 1200), "faucet": (1.6, 1255), "glass": (0.36, 1262), "barrel": (0.95, 1255), "solarpanel": (1.8, 1200), "streetlamp": (4.6, 1225), "rocket": (14.0, 1010), "aquarium": (1.3, 1245)}
 HELD = {"phone": "phone", "handy": "phone", "smartphone": "phone", "flashlight": "flashlight", "taschenlampe": "flashlight",
         "bag": "bag", "tasche": "bag", "einkaufstüte": "bag", "tüte": "bag", "bottle": "bottle", "flasche": "bottle",
         "wasserflasche": "bottle", "umbrella": "umbrella", "regenschirm": "umbrella", "schild": "sign", "sign": "sign",
@@ -1432,6 +1472,7 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0):
     im = Image.new("RGBA", (int(620 * k), int(620 * k)), (0, 0, 0, 0))
     d = ImageDraw.Draw(im, "RGBA")
     cx, gy = im.width / 2, im.height - 30 * k
+    ax = cx                                                                      # Fußpunkt (bleibt, auch wenn ein Wesen seine Zeichnung verschiebt)
     f = 1 if facing >= 0 else -1
     o = max(2, int(6 * k))
     bob = math.sin(t * 4) * 8
@@ -1957,10 +1998,126 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0):
             brow(100, by - 46, 16, 1)
             cheek(96, by + 22, 14)
             mouthf(138, by + 22, 12)
+    elif kind in ("shrimp", "mantis"):
+        # Krebstiere von der Seite: Pistolenkrebs (eine riesige Knallschere, die zuschnappt und eine Blase abschießt) und
+        # Fangschreckenkrebs (bunt, Stielaugen, zwei Keulen, die blitzschnell zuschlagen). Schwimmt knapp über dem Grund.
+        fly = True
+        mantis = kind == "mantis"
+        k = k * 0.84                                                             # der lange Körper samt Schere passt ganz auf die Zeichenfläche
+        cx -= 52 * k * f
+        by = -250 + bob * 1.4
+        col = (70, 176, 124) if mantis else (238, 112, 70)
+        belly = _light(col, 0.5)
+        edge = (240, 150, 60) if mantis else _dark(col, 0.18)
+        sway = math.sin(t * 3) * 14
+        for i, (fx_, fy_, fc) in enumerate(((-232, 150, 1), (-214, 186, 0), (-180, 196, 1))):       # Schwanzfächer
+            fcol = ((60, 130, 220) if fc else (226, 80, 70)) if mantis else (_dark(col, 0.12) if fc else col)
+            poly(_leaf(-176, by + 128, fx_, by + fy_ + sway * 0.3, 26), fcol, shade=0)
+        segs = [(-28, 10, 66), (-76, 26, 60), (-120, 52, 53), (-152, 88, 45), (-170, 124, 36)]
+        for j, (sx, sy, r_) in reversed(list(enumerate(segs))):                   # Hinterleib aus überlappenden Ringen, von hinten nach vorn
+            ell(sx - r_ * 0.72, by + sy - r_, sx + r_ * 0.72, by + sy + r_, col)
+            d.arc(B(sx - r_ * 0.72, by + sy - r_, sx + r_ * 0.72, by + sy + r_), *((250, 20) if f > 0 else (160, 290)), fill=edge, width=max(2, int(9 * k)))
+            if j:
+                pad = math.sin(t * 9 + j) * 6                                    # Schwimmbeinchen paddeln
+                stroke([(sx + 6, by + sy + r_ - 6), (sx - 4 + pad, by + sy + r_ + 22)], 7, _dark(col, 0.28))
+        for lx in (-6, 26, 58):                                                  # Laufbeine
+            a_ = math.sin(t * 7 + lx) * 6
+            stroke([(lx, by + 52), (lx - 10 + a_, by + 96), (lx + 6 + a_, by + 122)], 8, _dark(col, 0.25))
+        for an, ln in ((0, 150), (1, 118)):                                      # Fühler
+            stroke([(112, by - 44), (150 + an * 34, by - 110 - sway * 0.4), (118 + an * 80, by - 110 - ln + sway)], 5, _dark(col, 0.3))
+        ell(-58, by - 72, 136, by + 64, col)                                     # Panzer
+        ell(-20, by + 4, 112, by + 58, belly, shade=0, line=False)
+        poly([(108, by - 46), (178, by - 58), (126, by - 14)], _dark(col, 0.1), shade=0)             # Stirnspitze
+        if mantis:
+            for sx in (-30, 10, 50):                                             # bunte Flecken auf dem Panzer
+                ell(sx - 12, by - 52, sx + 12, by - 30, (250, 206, 80), shade=0, line=False)
+            poly(_leaf(96, by - 20, 170, by + 4, 20), (250, 206, 80), shade=0)   # Fühlerschuppe
+        for ex, er in ((64, 23), (118, 21)):                                     # Stielaugen
+            stroke([(ex + 4, by - 52), (ex, by - 92)], 13, (150, 110, 200) if mantis else col)
+            eye(ex, by - 108, er + (3 if mantis else 0))
+            brow(ex, by - 108 - er - 18, er, 1 if ex < 100 else -1)
+        cheek(96, by + 4, 13)
+        mouthf(124, by + 24, 11)
+        if mantis:                                                               # Schlag: Keule holt aus und schnellt nach vorn
+            ph = (t * 0.9) % 1.0
+            ext = 1.0 if ph > 0.8 else max(0.0, (ph - 0.6) / 0.2) * -0.25
+            for far in (True, False):
+                oy = -16 if far else 12
+                ccol = _dark((232, 84, 60), 0.2) if far else (232, 84, 60)
+                elbow = (150 + 20 * ext, by + 78 + oy - 10 * ext)
+                fist = (150 + 118 * ext + (0 if ext > 0 else 20), by + 40 + oy - 6 * max(0.0, ext))
+                stroke([(92, by + 40 + oy), elbow, fist], 17, _dark(col, 0.15) if far else col)
+                ell(fist[0] - 30, fist[1] - 28, fist[0] + 34, fist[1] + 28, ccol, shade=0.2)
+                ell(fist[0] - 4, fist[1] - 16, fist[0] + 10, fist[1] - 4, (255, 255, 255, 190), shade=0, line=False)
+            if ph > 0.8:                                                         # Einschlag: Stern und Druckwelle
+                hx_, hy_ = 322, by + 46
+                g = (ph - 0.8) / 0.2
+                pts = []
+                for i in range(16):
+                    a_ = i / 16 * math.tau
+                    r_ = (44 if i % 2 else 20) * (0.7 + 0.5 * g)
+                    pts.append((hx_ + math.cos(a_) * r_, hy_ + math.sin(a_) * r_))
+                d.polygon([P(x, y) for x, y in pts], fill=(255, 236, 120), outline=INK, width=max(2, int(4 * k)))
+                d.arc(B(hx_ - 40 - 30 * g, hy_ - 70 - 30 * g, hx_ + 40 + 30 * g, hy_ + 70 + 30 * g), *((300, 60) if f > 0 else (120, 240)),
+                      fill=(255, 255, 255, int(220 * (1 - g))), width=max(2, int(8 * k)))
+        else:                                                                    # Knallschere: öffnet sich langsam, schnappt zu, Blase schießt heraus
+            ph = (t * 0.75) % 1.0
+            gap = min(1.0, ph / 0.7) if ph < 0.78 else 0.0
+            stroke([(96, by + 36), (150, by + 84), (196, by + 44)], 18, col)
+            stroke([(80, by + 44), (118, by + 96), (150, by + 104)], 10, _dark(col, 0.15))           # kleine zweite Schere
+            poly([(150, by + 96), (182, by + 92), (156, by + 116)], _dark(col, 0.1), shade=0)
+            ccol = _light(col, 0.12)
+            poly([(236, by + 36), (352, by + 52), (346, by + 66), (236, by + 84)], _dark(ccol, 0.12), shade=0)   # fester Finger
+            piv = (240, by - 2)
+            a_ = math.radians(6 + 40 * gap)
+            ca, sa = math.cos(a_), math.sin(a_)
+            def rot(dx, dy):                                                     # Punkt des beweglichen Fingers um das Gelenk drehen
+                return piv[0] + dx * ca + dy * sa, piv[1] + 30 - dx * sa + dy * ca
+            poly([rot(-6, -34), rot(60, -30), rot(112, 0), rot(60, 6), rot(-6, 10)], ccol, shade=0)
+            ell(160, by - 40, 262, by + 88, ccol)                                # dicke Scherenhand
+            ell(186, by - 22, 222, by + 4, _light(ccol, 0.4), shade=0, line=False)
+            if ph >= 0.78:                                                       # Knall: Blase und Druckringe vor der Schere
+                g = (ph - 0.78) / 0.22
+                bx_, by_ = 366 + 8 * g, by + 40
+                for r_, al in ((30 + 22 * g, 150), (16 + 10 * g, 230)):
+                    d.ellipse(B(bx_ - r_, by_ - r_, bx_ + r_, by_ + r_), outline=(255, 255, 255, int(al * (1 - g * 0.7))), width=max(2, int(7 * k)))
+                d.ellipse(B(bx_ - 12, by_ - 12, bx_ + 12, by_ + 12), fill=(255, 244, 170, int(255 * (1 - g))))
+    elif kind in ("jelly", "qualle"):
+        # Qualle: durchscheinender Schirm, der pulsiert, Fransen und wehende Tentakel; freundliches Gesicht auf dem Schirm
+        fly = True
+        col = (236, 150, 206)
+        pul = math.sin(t * 3.2)
+        by = -350 + bob * 2 - pul * 8
+        w, h = 128 * (1 - 0.07 * pul), 136 * (1 + 0.06 * pul)
+        for i, tx in enumerate((-84, -44, 0, 44, 84)):                           # Tentakel (hinter dem Schirm)
+            pts = [(tx * (1 - 0.07 * pul) + math.sin(t * 2.6 + i * 1.3 + j * 0.45) * (5 + j * 1.6), by + 30 + j * 17) for j in range(14)]
+            stroke(pts, 9, _dark(col, 0.12) if i % 2 else _light(col, 0.25))
+        for s_ in (-1, 1):                                                       # Mundarme: kurz und kraus
+            pts = [(s_ * 22 + math.sin(t * 3 + j * 0.5 + s_) * 9, by + 36 + j * 12) for j in range(10)]
+            stroke(pts, 20, _light(col, 0.45))
+        dome = [(math.cos(math.radians(a)) * w, by + math.sin(math.radians(a)) * h) for a in range(180, 361, 10)]
+        n = 6
+        low = []
+        for i in range(n * 4 + 1):                                               # gewellter Saum
+            u = i / (n * 4)
+            low.append((w - u * 2 * w, by + 26 + abs(math.sin(u * n * math.pi)) * 24))
+        shape = dome + low
+        d.polygon([P(x, y) for x, y in shape], fill=(*_dark(col, 0.2), 235), outline=INK, width=o)
+        d.polygon([P(x * 0.86 + 12, by + (y - by) * 0.86 - 4) for x, y in shape], fill=(*col, 235))
+        ell(-70, by - 112, -6, by - 78, _light(col, 0.55), shade=0, line=False)                   # Glanz
+        ell(-4, by - 104, 40, by - 66, (226, 104, 110), shade=0, line=False)                        # roter Magen schimmert durch (typisch für die „unsterbliche Qualle“)
+        ell(8, by - 96, 28, by - 78, (244, 150, 150), shade=0, line=False)
+        eye(-40, by - 12, 21)
+        eye(44, by - 12, 21)
+        brow(-40, by - 44, 18, 1)
+        brow(44, by - 44, 18, -1)
+        cheek(-78, by + 12, 14)
+        cheek(84, by + 12, 14)
+        mouthf(2, by + 14, 13)
     else:
         return None
     out = im.resize((im.width // S, im.height // S), Image.LANCZOS)
-    return out, cx / S, gy / S, fly
+    return out, ax / S, gy / S, fly
 
 
-CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain")
+CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly")

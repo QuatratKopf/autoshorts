@@ -263,7 +263,7 @@ def _prepare(scene, cast):
     for a in actors:                  # Lippen nur, wenn die Figur selbst spricht – sonst hört sie zu und reagiert
         a["lips"] = a["speaks"] and talk
     for a in actors:   # passende Symbole automatisch, wenn das Drehbuch keine nennt
-        if not a["emote"]:
+        if not a["emote"] and a["kind"] not in ("shrimp", "mantis", "jelly"):
             a["emote"] = {"shocked": "!", "scared": "!", "think": "?", "angry": "anger"}.get(a["action"]) or \
                          {"angry": "anger", "scared": "sweat", "worried": "sweat"}.get(a["emotion"], "")
     props, p_given = [], []
@@ -1021,8 +1021,11 @@ def direct(scenes, times, topic="", style="", look=""):
     charts = 0
     neon = str(look or "").lower() == "neon"
     cur_hud = ""
+    sea_last = None
+    sea_topic = bool(_re0.search(SEA_TOPIC_RE, str(topic or "").lower() + " " + " ".join(str(x.get("text") or "") for x in scenes if isinstance(x, dict)).lower()))
     for i, (sc, (s0, e0)) in enumerate(zip(scenes, times)):
         sanitize(sc)
+        under0 = places.resolve(backdrop(sc)) == "underwater"
         if spooky:                                        # Grusel und Rätsel spielen im Dunkeln; Stimmung unheimlich, keine Passanten
             if not _re0.search(r"tagsüber|am tag\b|mittags|sonnenschein|am nächsten morgen|am morgen", sc["text"].lower()):
                 sc["time"] = "night"
@@ -1066,6 +1069,13 @@ def direct(scenes, times, topic="", style="", look=""):
                 g0.pop("label", None)
         if ov_c and str(ov_c.get("type") or "") == "counter" and not spoken_number(ov_c.get("value"), sc["text"]):
             sc["overlay"] = None                          # Zahl in der Einblendung, die der Sprecher gar nicht nennt: weg damit
+        if ov_c and str(ov_c.get("type") or "") == "thermo" and (not spoken_number(ov_c.get("value"), sc["text"])
+                                                                  or not -90 <= (graphics._num(str(ov_c.get("value"))) or 0) <= 120):
+            sc["overlay"] = ov_c = None                   # Thermometer mit einer Zahl, die niemand sagt (44000 statt 4500), oder jenseits der Skala
+        if g0 and g0.get("type") == "compare" and graphics._num(g0.get("value")) is not None \
+                and graphics._num(g0.get("value")) == graphics._num(g0.get("sub")):
+            sc["graphic"] = g0 = {"type": "number", "kicker": str(g0.get("left") or ""), "value": str(g0.get("value")),   # „Vergleich“ mit zweimal derselben
+                                  "label": ""}                                                                             # Zahl: als eine große Zahl zeigen
         said_c = sc["text"] + " " + (str(scenes[i - 1].get("text") or "") if i and isinstance(scenes[i - 1], dict) else "")
         if g0 and g0.get("type") in FIGURE_GFX and unspoken_figures(g0, said_c):
             sc["graphic"], g0 = None, None                # Grafik mit einer Zahl, die niemand sagt („1.000.000 KARTEN“, „100 % KONTROLLE“): erfunden – weg
@@ -1166,10 +1176,56 @@ def direct(scenes, times, topic="", style="", look=""):
                     sc["shot"] = ""
         if _re0.search(r"wespe|biene|insekten", txt0) and len(acts) < 2 and not any(a.get("kind") for a in acts) and "actors" in sc:
             sc["actors"] = acts = acts + [{"id": "_biene", "kind": "bee", "action": "idle", "pos": "right", "speaks": False}]
-        if places.resolve(backdrop(sc)) == "underwater":          # unter Wasser schwimmen Fische, keine Menschen
+        # Meerestiere: Nennt der Satz Pistolenkrebs, Fangschreckenkrebs oder Qualle, ist das Tier die Figur der Szene – groß, unter Wasser,
+        # mit seiner Bewegung (Schere knallt, Keule schlägt, Schirm pulsiert). Folgesätze („Sie verwandelt …“, „Sein Schlag …“) bleiben bei ihm.
+        shot_s = str(sc.get("shot") or "")
+        sea_now = None if shot_s == "graphic" and graphics.clean(sc.get("graphic")) else _sea_kind(txt0, sea_topic or places.resolve(backdrop(sc)) == "underwater")
+        if sea_now is None and _re0.search(SEA_NEXT_RE, txt0) and not (shot_s == "graphic" and graphics.clean(sc.get("graphic"))):
+            nxt_s = scenes[i + 1] if i + 1 < len(scenes) and isinstance(scenes[i + 1], dict) else None
+            sea_tease = _sea_kind(str(nxt_s.get("text") or "").lower(), True) if nxt_s else None      # „Kraft Nummer drei“: schon das nächste Tier zeigen
+            sea_last = sea_tease or sea_last
+        if sea_now:
+            sea_last = sea_now
+            if not has_bd and places.resolve(backdrop(sc)) != "underwater" and (place in GENERIC or not [a for a in acts if not a.get("kind")]) \
+                    and not _re0.search(r"aquarium|\bbecken\b|\bzoo\b|teller|restaurant|\bküche", txt0):
+                sc["place"], sc["backdrop"] = "underwater", None          # das Tier lebt im Meer – nicht im Wohnzimmer
+                place = "underwater"
+                sc["crowd"], sc["weather"], sc["time"] = "", "", "day"
+                sc["props"] = [q for q in (sc.get("props") or []) if extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) not in INDOOR_THINGS]
+                sc["actors"] = acts = []
+                if shot_s == "close":
+                    sc["shot"] = shot_s = ""
+        if under0 and (sea_now or sea_last) and places.resolve(backdrop(sc)) != "underwater":
+            sc["place"], sc["backdrop"] = "underwater", None      # das Tier schlägt unter Wasser zu – „zertrümmert“ macht daraus keine Ruinenstadt
+            place = "underwater"
+        if any(extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) == "aquarium" for q in (sc.get("props") or [])):
+            sc["props"] = [q for q in sc["props"] if extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) != "glass"]   # Aquarium statt Trinkglas
+        if places.resolve(backdrop(sc)) == "underwater":          # unter Wasser schwimmen Meerestiere, keine Menschen
+            sea_k = sea_now or (sea_last if not _re0.search(r"\bfisch|\bhai", txt0) else None)
             for a in acts:
-                if not a.get("kind"):
+                aid_s = str(a.get("id") or "").lower()
+                if sea_k and (not a.get("kind") or _re0.search(r"krebs|garnele|qualle|shrimp|jelly", aid_s) or str(a.get("kind")).lower() in ("monster", "fish")):
+                    a["kind"] = sea_k
+                elif not a.get("kind"):
                     a["kind"] = "fish"
+            if sea_k and shot_s in ("", "event", "insert", "close", "wide") and not (shot_s == "insert" and [q for q in (sc.get("props") or [])]):
+                mine_s = [a for a in acts if str(a.get("kind") or "").lower() == sea_k]
+                if not mine_s:
+                    mine_s = [{"id": "_meer", "kind": sea_k, "action": "idle", "speaks": False, "emote": "", "say": "", "hold": "", "facing": "",
+                               "emotion": "angry" if _re0.search(SEA_HIT_RE, txt0) else MOOD_EMOTION.get(str(sc.get("mood") or ""), "")}]
+                has_thing = bool(sc.get("props"))
+                for a in mine_s[:1]:
+                    a.update(hero=True, pos=400 if has_thing else "center", facing="right")
+                    a.pop("to", None)
+                    if str(a.get("action") or "") in ("walk", "run", "jump", "sit", "sleep", "fall"):
+                        a["action"] = "idle"
+                sc["actors"] = acts = mine_s[:1]
+                sc["_sea"] = True
+                for q in (sc.get("props") or [])[:1]:               # das Ding, auf das es zielt, steht vor ihm
+                    if isinstance(q, dict) and not q.get("pos"):
+                        q["pos"] = 860
+                sc["shot"] = "" if shot_s in ("event", "insert", "close") else sc.get("shot")
+                sc["crowd"] = ""
         for a in acts:                                    # geschlafen wird im Bett oder auf dem Sofa, nicht auf der Straße
             if str(a.get("action") or "").lower() == "sleep" and places.resolve(backdrop(sc)) not in ("bedroom", "livingroom", "hospital", "camp", "attic"):
                 if len(acts) == 1 and not has_bd and (place in GENERIC or places.resolve(backdrop(sc)) in places.OUTDOOR):
@@ -1554,7 +1610,7 @@ def direct(scenes, times, topic="", style="", look=""):
             continue
         keys = [extras.PROP_ALIASES.get(str(p.get("type") if isinstance(p, dict) else p).lower(), str(p.get("type") if isinstance(p, dict) else p).lower())
                 for p in (sc.get("props") or [])]
-        if sc.get("shot") == "insert" and keys:           # Großaufnahme nur von Dingen, von denen der Satz (oder das Thema) wirklich handelt
+        if sc.get("shot") == "insert" and keys and not sc.get("_sea"):           # Großaufnahme nur von Dingen, von denen der Satz (oder das Thema) wirklich handelt
             in_txt = [k for k in keys if k in txt or any(k2 == k and _re0.search(pat, txt) for pat, k2 in pats)]
             in_topic = [k for k in keys if any(k2 == k and _re0.search(pat, str(topic or "").lower()) for pat, k2 in pats)]
             good = in_txt or [k for k in keys[:1] if k in in_topic]
@@ -1606,6 +1662,30 @@ def direct(scenes, times, topic="", style="", look=""):
         if isinstance(scenes[i], dict) and isinstance(scenes[i - 1], dict) and scenes[i].get("shot") == "close" == scenes[i - 1].get("shot"):
             scenes[i]["shot"] = ""
     _auto_tags(scenes)
+    sea_run = (None, 0)
+    for sc in scenes:                                     # Meerestier-Szenen: Das Tier bleibt allein im Bild – kein Mensch auf dem Meeresgrund,
+        if not isinstance(sc, dict) or places.resolve(backdrop(sc)) != "underwater":      # keine Feuer-Explosion und keine Flutwelle unter Wasser
+            continue
+        acts_s = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        seas = [a for a in acts_s if str(a.get("kind") or "").lower() in ("shrimp", "mantis", "jelly")]
+        if not seas:
+            for a in acts_s:                              # spätere Regeln stellen gern die Hauptfigur dazu: am Meeresgrund steht kein Mensch im Pulli
+                if not a.get("kind"):
+                    a.update(kind="fish", hold="", emote="")
+                    if str(a.get("action") or "") in ("walk", "run", "sit", "sleep", "fall", "point", "wave", "think"):
+                        a["action"] = "idle"
+            continue
+        seas[0].update(hero=True)
+        sc["actors"] = seas[:1]
+        sc["props"] = [q for q in (sc.get("props") or []) if not (isinstance(q, dict) and extras.PROP_ALIASES.get(
+            str(q.get("type")).lower(), str(q.get("type")).lower()) in ("explosion", "wave", "fire", "flood", "smoke", "tornado", "lightning"))]
+        same_s = sea_run[1] + 1 if sea_run[0] == seas[0]["kind"] else 0
+        sea_run = (seas[0]["kind"], same_s)
+        if not sc["props"]:                               # mehrere Sätze über dasselbe Tier: jedes Mal anders im Bild (Mitte, links, rechts mit Blick zurück)
+            seas[0]["pos"] = ("center", 400, 680)[same_s % 3]
+            seas[0]["facing"] = "left" if same_s % 3 == 2 else "right"
+        if sc.get("shot") in ("event", "insert", "close"):
+            sc["shot"] = ""
     return scenes
 
 
@@ -1620,7 +1700,26 @@ PLURAL = {"agent": r"agenten|\bbots\b|assistenten", "virus": r"\bviren|bakterien
           "spider": r"spinnen|taranteln", "bee": r"bienen", "wasp": r"wespen", "cat": r"katzen", "dog": r"\bhunde\b", "bird": r"vögel",
           "fish": r"fische", "shark": r"\bhaie", "ghost": r"geister|gespenster", "robot": r"roboter\b", "alien": r"außerirdische|aliens",
           "dino": r"dinosaurier", "monster": r"monster"}
-HERO_SIZE = {"agent": 0.8, "brain": 1.6, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9}   # Hauptfigur: etwa halb so hoch wie ein Mensch
+# Meerestiere als Figur der Szene (Reihenfolge zählt: „Fangschreckenkrebs“ enthält „krebs“)
+SEA_CREATURES = [(r"fangschreckenkreb|heuschreckenkreb|mantis-?shrimp", "mantis"), (r"pistolenkreb|knallkreb|knallgarnele|\bgarnele|krabbe|\bhummer|flusskreb|krebstier|\bshrimp", "shrimp"),
+                 (r"qualle", "jelly")]
+SEA_TOPIC_RE = r"pistolenkreb|knallkreb|fangschreckenkreb|\bgarnele|krebstier|qualle|unter wasser|meerest|tiefsee|\bozean|\bmeer\b|\briff"
+SEA_NEXT_RE = r"nummer (zwei|drei|vier|fünf|\d)|(zweite|dritte|vierte|nächste|letzte)[nrs]? (fähigkeit|kraft|superkraft|tier|platz|kandidat)|platz (eins|zwei|drei|\d)"
+SEA_HIT_RE = r"schlag|schläg|boxt|zertrümmer|knall|zuschnapp|zerstör|\bangriff|greift an|tötet|betäub"
+
+
+def _sea_kind(low, sea):
+    """Welches Meerestier nennt der Satz? Ein bloßes „Krebs“ zählt nur, wenn es ums Meer geht (sonst ist die Krankheit gemeint)."""
+    import re as _re
+    for pat, k in SEA_CREATURES:
+        if _re.search(pat, low):
+            return k
+    if sea and _re.search(r"\bkrebs(e|es|en)?\b", low) and not _re.search(r"krank|tumor|diagnos|chemo|besieg|geheilt|heilung|\barzt|ärzt|patient|vorsorge|krebs (bekomm|hab|hat|hatte)", low):
+        return "shrimp"
+    return None
+
+
+HERO_SIZE = {"shrimp": 1.6, "mantis": 1.6, "jelly": 1.7, "agent": 0.8, "brain": 1.6, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9}   # Hauptfigur: etwa halb so hoch wie ein Mensch
 
 
 def _topic_creature(scenes, topic):
@@ -1942,7 +2041,7 @@ HINTS = [
     (r"gletscher|eiszeit|arktis|antarktis|polkappe|\beis\b", {"ground": "snow", "elements": ["glacier", "mountains"]}),
     (r"\bschnee|\bwinter", "snow"),
     (r"\bmeer|ozean|küste|strand|\bwellen\b|\bwelle\b", "beach"),
-    (r"tiefsee|unter wasser|meeresgrund|korallen|\bfisch|unter der oberfläche|im wasser leb|\\btauch(?!t (plötzlich )?auf)|taucher", "underwater"),
+    (r"tiefsee|unter wasser|meeresgrund|korallen|\bfisch|unter der oberfläche|im wasser leb|\btauch(?!t (plötzlich )?auf)|taucher", "underwater"),
     (r"wüste|sahara|sanddüne", "desert"),
     (r"vulkan|gebirge|\bberg|gipfel", "mountain"),
     (r"weltall|weltraum|galaxie|planet|umlaufbahn|astronaut|\bmond\b|sonnensystem", "space"),
@@ -2009,8 +2108,8 @@ OUTDOOR_THINGS = ("drone", "cctv", "fire", "smoke", "volcano", "meteor", "tornad
                   "plane", "satellite", "rocket", "ufo", "aurora", "ice", "ship", "bike", "tent", "trafficlight", "house", "tree", "solarpanel",
                   "pile", "sandpile", "trash", "barrel", "generator")
 DULL = ("table", "shelf", "streetlamp", "rock", "box")          # allein als Großaufnahme langweilig
-INDOOR_THINGS = ("faucet", "glass", "candle", "cans", "clock", "door", "fridge", "tv", "computer", "shelf", "cart", "table", "money")
-TEXT_PROPS = [(r"drohne", "drone"), (r"überwachungskamera|kameras? (erfass|film|beobacht)|überwacht|überwachung", "cctv"), (r"zucker|\bsalz\b", "pile"), (r"\bsand\b", "sandpile"), (r"\bmüll|abfall|plastik", "trash"), (r"wasserhahn|trinkwasser|leitungswasser", "faucet"),
+INDOOR_THINGS = ("faucet", "glass", "candle", "cans", "clock", "door", "fridge", "tv", "computer", "shelf", "cart", "table", "money", "aquarium")
+TEXT_PROPS = [(r"aquarium|aquarien(?!scheib|glas)|goldfisch|fischglas|fischbecken", "aquarium"), (r"drohne", "drone"), (r"überwachungskamera|kameras? (erfass|film|beobacht)|überwacht|überwachung", "cctv"), (r"zucker|\bsalz\b", "pile"), (r"\bsand\b", "sandpile"), (r"\bmüll|abfall|plastik", "trash"), (r"wasserhahn|trinkwasser|leitungswasser", "faucet"),
               (r"\bglas\b|\bgläser|trinken|getränk|\bdurst", "glass"), (r"kerze", "candle"), (r"konserve|vorrät|dosen", "cans"), (r"benzin|kanister|sprit", "canister"),
               (r"\bautos?\b|\bstau\b", "car"), (r"\bbus\b|busse", "bus"), (r"lkw|lastwagen|lieferung|lieferkette", "truck"), (r"flugzeug|flieger|\bflüge", "plane"),
               (r"satellit|\bgps\b", "satellite"), (r"rakete", "rocket"), (r"\bgeld|\beuro\b|kosten|teuer|preise|milliarden euro|bezahl", "money"),
@@ -2024,7 +2123,7 @@ TEXT_PROPS = [(r"drohne", "drone"), (r"überwachungskamera|kameras? (erfass|film
 MAP_HINTS = ((r"ganz deutschland|in deutschland|deutschlandweit|bundesweit|bundesländer|jeder deutsche|alle deutschen", "germany"),
              (r"weltweit|auf der ganzen welt|alle länder|rund um den globus|weltbevölkerung|alle kontinente|die ganze erde|die ganze welt", "worldmap"))
 # Tiere neben Menschen: Größe im Verhältnis zur Figur (1.0 = menschengroß). „Riesen…“-Themen heben das auf (giant).
-CREATURE_SIZE = {"brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45}
+CREATURE_SIZE = {"shrimp": 0.5, "mantis": 0.5, "jelly": 0.6, "brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45}
 GIANT_RE = r"riesen|riesig|gigant|monströs|so groß wie|meterhoh|haushoh|mutier"
 # Nur hier laufen Passanten durchs Bild – auf dem Feld, im Wald, im Keller ist niemand unterwegs
 CROWD_PLACES = ("headquarters", "street", "park", "village", "beach", "gasstation", "station", "supermarket", "supermarket_empty", "hospital", "office",
@@ -2198,7 +2297,7 @@ def _cut_plan(scene, shot, special, moving, ov_tall, place, actors, props, dur, 
     low = str(scene.get("text") or "").lower()
     named = [k for k, _ in props if extras.prop_fit(k) and extras.PROP_ALIASES.get(k, k) not in DULL
              and extras.PROP_ALIASES.get(k, k) not in PLACE_HAS.get(place, ()) and _said_prop(k, low)]
-    down = any(a.get("action") in ("fall", "sleep", "sit", "float") for a in actors)      # liegt, sitzt oder schwebt jemand, schneidet die Großaufnahme ihn an
+    down = any(a.get("action") in ("fall", "sleep", "sit", "float") or a.get("kind") in ("shrimp", "mantis") for a in actors)      # liegt, sitzt oder schwebt jemand, schneidet die Großaufnahme ihn an
     kind = "insert" if named and index % 2 == 0 else "close" if 0 < len(actors) <= 2 and not down else "insert" if named else ""   # Gruppen nicht anschneiden
     if not kind:
         return None, "", []
@@ -2237,6 +2336,10 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     if actors and shot != "close" and not ov_tall and place not in MAPS and not scene.get("float") and str(scene.get("shot") or "") != "event":
         xs = [a["x1"] for a in actors] + [a["x0"] for a in actors if -100 < a["x0"] < W + 100]
         xs += [x for k, x in props if extras.prop_fit(k) and 0 <= x <= W]   # auch der Gegenstand, von dem der Satz spricht, bleibt ganz im Bild
+        for a_l in actors:                                              # lange Tiere (Krebs samt Schere/Keule) ganz im Bild lassen
+            if a_l.get("kind") in ("shrimp", "mantis"):
+                xs += [a_l["x1"] - 190, a_l["x1"] + 190]
+                cam["punch"] = None
         for a_l in actors:                                              # wer umfällt oder liegt, ist so breit wie sonst hoch: ganz im Bild lassen
             if a_l.get("action") in ("fall", "sleep"):
                 xs += [a_l["x1"] - 200, a_l["x1"] + 60]
