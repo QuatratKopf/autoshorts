@@ -85,6 +85,25 @@ def tag(text):
     return _shadow(im.rotate(4, expand=True, resample=Image.BICUBIC), 8, 10, 120)
 
 
+def quote(head, text):
+    """Zitat-Karte („FORSCHER WARNEN“ + Aussage): weiße Karte, Rolle als Kopfzeile, großes rotes Anführungszeichen – ohne Namen."""
+    fh, ft, fq = font(40, "Bold"), font(52), _cfont(190)
+    lines = _wrap(text, ft, 640)[:3]
+    if len(_wrap(text, ft, 640)) > 3:
+        lines[-1] = lines[-1].rstrip(".,;: ") + " …"
+    w, h = 860, 150 + 66 * len(lines)
+    im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    dr = ImageDraw.Draw(im)
+    dr.rounded_rectangle((0, 0, w - 1, h - 1), 26, fill=WHITE, outline=INK, width=7)
+    hw = dr.textlength(head, font=fh)
+    dr.text(((w - hw) / 2, 26), head, font=fh, fill=RED)
+    dr.line(((w - hw) / 2, 78, (w + hw) / 2, 78), fill=RED, width=4)
+    dr.text((34, -30), "„", font=fq, fill=RED)                 # das deutsche Anführungszeichen sitzt tief: hochrücken zur ersten Zeile
+    for i, l in enumerate(lines):
+        dr.text((150, 104 + i * 66), l, font=ft, fill=INK)
+    return _shadow(im.rotate(-2, expand=True, resample=Image.BICUBIC))
+
+
 def thermo(value, shown=None):
     """Thermometer mit steigender Säule und großer Gradzahl: rot bei Hitze, blau bei Kälte."""
     v = float(value)
@@ -330,6 +349,8 @@ def frames_for(ov: dict):
             import re
             txt = re.sub(r"(?i)\bkm\s+h\b", "KM/H", str(ov["text"]))        # „300 KM H“ → „300 KM/H“
             return _pop(card(_short(txt, 30))), 420
+        if t == "quote" and ov.get("text"):
+            return _pop(quote(_short(str(ov.get("title") or "EXPERTEN").upper(), 26), _short(str(ov["text"]), 120))), 520
         if t == "thermo" and ov.get("value") is not None:
             v = float(str(ov["value"]).replace(",", "."))
             fr = _pop(thermo(v, min(v, -30.0 if v > -30 else v)), 5)

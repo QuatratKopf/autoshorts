@@ -872,7 +872,7 @@ PROP_ALIASES = {"baum": "tree", "stein": "rock", "kiste": "box", "auto": "car", 
                 "drohne": "drone", "drohnen": "drone", "quadcopter": "drone", "kamera": "cctv", "überwachungskamera": "cctv", "camera": "cctv",
                 "tür": "door", "uhr": "clock", "wanduhr": "clock", "haufen": "pile", "zucker": "pile", "salz": "pile", "zuckerberg": "pile",
                 "schneehaufen": "pile", "sandhaufen": "sandpile", "sand": "sandpile", "müll": "trash", "müllberg": "trash", "garbage": "trash",
-                "wasserhahn": "faucet", "tap": "faucet", "hahn": "faucet", "wasserstrom": "faucet", "wasserströme": "faucet", "wasserstrahl": "faucet", "glas": "glass", "wasserglas": "glass", "getränk": "glass",
+                "wasserhahn": "faucet", "tap": "faucet", "hahn": "faucet", "gebäude": "house", "möbel": "shelf", "aktie": "money", "aktien": "money", "wasserstrom": "faucet", "wasserströme": "faucet", "wasserstrahl": "faucet", "glas": "glass", "wasserglas": "glass", "getränk": "glass",
                 "fass": "barrel", "tonne": "barrel", "ölfass": "barrel", "solar": "solarpanel", "solaranlage": "solarpanel",
                 "solarzelle": "solarpanel", "pflanze": "sprout", "plant": "sprout", "comet": "meteor", "komet": "meteor", "welle": "wave", "eisberg": "ice", "vulkan": "volcano", "bigsun": "sun"}
 FRONT = ("wave", "flood", "eclipse")

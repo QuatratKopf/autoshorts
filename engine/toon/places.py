@@ -1739,7 +1739,7 @@ PLACES = {"bedroom": bedroom, "livingroom": livingroom, "street": street, "basem
           "supermarket_empty": supermarket_empty, "bathroom": bathroom, "station": station, "restaurant": restaurant, "germany": germany, "worldmap": worldmap, "hallway": hallway, "attic": attic,
           "serverroom": serverroom, "cinema": cinema}
 OUTDOOR = tuple(OUTDOOR_SPECS) + ("custom",)
-ALIASES = {"kino": "cinema", "kinosaal": "cinema", "kinos": "cinema", "leinwand": "cinema", "kinoleinwand": "cinema",
+ALIASES = {"asphalt": "street", "kino": "cinema", "kinosaal": "cinema", "kinos": "cinema", "leinwand": "cinema", "kinoleinwand": "cinema",
            "lichtspielhaus": "cinema", "filmpalast": "cinema", "schlafzimmer": "bedroom", "zimmer": "bedroom", "wohnzimmer": "livingroom", "straße": "street", "stadt": "street",
            "city": "street", "keller": "basement", "bunker": "basement", "wald": "forest", "natur": "park", "garten": "park",
            "küche": "kitchen", "büro": "office", "strand": "beach", "meer": "beach", "wüste": "desert", "schnee": "snow",

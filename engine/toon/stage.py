@@ -1438,6 +1438,7 @@ def direct(scenes, times, topic="", style="", look=""):
             if sc.get("shot") == "event":
                 sc["shot"] = ""
             filled += 1
+    _time_weather(scenes)
     _auto_explain(scenes)
     _topic_creature(scenes, topic)
     for i in range(1, len(scenes)):                  # nie zweimal dieselbe Großaufnahme hintereinander
@@ -1484,9 +1485,50 @@ def _topic_creature(scenes, topic):
             for h in humans[:1]:
                 if str(h.get("pos") or "center") in ("center", "", "None", "right"):
                     h["pos"] = 300
+                if h.get("to") and str(h.get("to")) in ("center", "mitte", "right", "rechts"):
+                    h["to"] = 300                          # wer hereinläuft, bleibt links neben dem Tier stehen
         sc["actors"] = acts + [{"id": "_thema", "kind": kind, "hero": True, "speaks": False, "action": "idle",
                                 "emotion": MOOD_EMOTION.get(mood, "happy" if mood == "happy" else ""),
                                 "pos": 760 if humans else "center", "emote": "", "say": "", "hold": "", "facing": ""}]
+
+
+# Tageszeit und Wetter, die der Satz nennt („nachts“, „es regnet in Strömen“) – Tag/Nacht und Wetter müssen zum Satz passen
+NIGHT_RE = (r"\bnachts\b|in der nacht|\bum mitternacht|mitten in der nacht|\babends\b|am abend|nachtaktiv|im dunkeln\b|bei nacht|heute nacht|"
+            r"jede nacht|die ganze nacht|nächtlich|in dieser nacht|sternenhimmel|im mondlicht")
+DAY_RE = r"\btagsüber\b|am morgen|\bmorgens\b|am tag\b|\bmittags\b|am nachmittag|bei tageslicht|sonnenaufgang|in der mittagssonne|bei sonnenschein"
+WEATHER_RE = [(r"gewitter|blitz und donner|\bunwetter|\bsturm\b|stürme|orkan|sturmböen|hurrikan", "storm"),
+              (r"\bregnet|\bregen\b|regenschauer|platzregen|wolkenbruch|in strömen|nieselregen|regentropfen", "rain"),
+              (r"\bschneit|schneefall|schneesturm|schneeflocken", "snow"), (r"\bwindig|\bwind\b|böen|weht", "wind"),
+              (r"hitze|brütend heiß|\bheiß\b|hitzewelle|glühend heiß|sengende", "heat"), (r"asche regnet|ascheregen|aschewolke", "ash")]
+
+
+def _time_weather(scenes):
+    """Nennt der Satz Nacht/Tag oder ein Wetter, stimmt das Bild: nachts wird es Nacht (drinnen mit Lichtkegel, draußen dunkelblau),
+    Regen, Schnee, Sturm, Wind und Hitze sieht man – Wetter nur draußen (drinnen regnet es nicht). Verneintes zählt nicht."""
+    import re as _re
+    for sc in scenes:
+        if not isinstance(sc, dict) or sc.get("shot") == "graphic":
+            continue
+        low = str(sc.get("text") or "").lower()
+        rp = places.resolve(backdrop(sc)) if not isinstance(backdrop(sc), dict) else "custom"
+        if rp in MAPS or rp in ("space", "underwater", "cave"):
+            continue
+        if _re.search(NIGHT_RE, low) and not _re.search(DAY_RE, low):
+            sc["time"] = "night"
+        elif _re.search(DAY_RE, low) and sc.get("time") == "night" and not _re.search(NIGHT_RE, low):
+            sc["time"] = "day"
+        outdoor = rp in places.OUTDOOR or rp == "custom"
+        if outdoor and not sc.get("weather"):
+            for pat, w in WEATHER_RE:
+                m = _re.search(pat, low)
+                if m and not _re.search(r"(?:kein\w*|nicht|ohne|nie)\s+(?:\w+\s+){0,2}" + _re.escape(m.group(0)), low) \
+                        and not _re.search(_re.escape(m.group(0)) + r"\w*\s+(?:\w+\s+)?(?:nicht|mehr)\b", low):
+                    sc["weather"] = w
+                    if w in ("rain", "storm"):             # bei Regen und Sturm ist der Himmel grau, nicht strahlend blau
+                        spec = places.spec_of(backdrop(sc)) or {}
+                        if spec and not spec.get("sky"):
+                            sc["backdrop"] = dict(spec, sky="storm")
+                    break
 
 
 # Erklär-Einblendungen aus dem Satz (wie in den Vorbild-Shorts: Thermometer, Füllstand, Speisekarte, Stempel)
@@ -1521,6 +1563,24 @@ def _bar_label(text, number_word):
     clean = [w.strip(".,;:!?„“\"") for w in words[1:pos]]
     nouns = [w for w in clean if _re.match(r"^[A-ZÄÖÜ][a-zäöüß-]{2,}$", w) and w not in BAR_STOP]
     return nouns[-1].upper()[:16] if nouns else None
+
+
+QUOTE_RE = (r"\b(experten|expertinnen|forscher\w*|wissenschaftler\w*|ärzte|ärztinnen|mediziner\w*|biologen|biologinnen|ingenieure|"
+            r"studien|eine studie|die studie|psychologen|polizei|feuerwehr|behörden|meteorologen|astronomen|ökonomen|fachleute)\s+"
+            r"(sagen|sagt|warnen|warnt|meinen|meint|erklären|erklärt|betonen|raten|rät|empfehlen|empfiehlt|zeigen|zeigt|schätzen|vermuten|glauben)"
+            r"\b[:,]?\s*(.{8,})$")
+
+
+def _quote_for(text):
+    """„Forscher warnen, dass es schlimmer wird.“ → Zitat-Karte {title: FORSCHER WARNEN, text: …} (nur Rolle, nie ein Name) oder None."""
+    import re as _re
+    m = _re.search(QUOTE_RE, str(text or "").strip(), _re.I)
+    if not m:
+        return None
+    who = m.group(1).upper().replace("EINE ", "").replace("DIE ", "")
+    body = m.group(3).strip().rstrip(".!") + "."
+    body = body if body[0].isupper() else "…" + body            # Nebensatz („dass es …“) bleibt vollständig, mit Auslassung davor
+    return {"type": "quote", "title": f"{who} {m.group(2).upper()}"[:26], "text": body}
 
 
 def _stamp_for(low, prev=""):
@@ -1580,6 +1640,11 @@ def _auto_explain(scenes):
                     prev_stamp = ""
                     continue
         if ov:
+            prev_stamp = ""
+            continue
+        q = _quote_for(txt)
+        if q:
+            sc["overlay"] = q
             prev_stamp = ""
             continue
         items = _list_items(txt)

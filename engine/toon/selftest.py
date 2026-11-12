@@ -111,6 +111,7 @@ def main():
            {"type": "counter", "label": "JAHRE", "value": "48", "unit": ""}, {"type": "counter", "value": "abc"},
            {"type": "counter", "label": "x" * 80, "value": 1234567.5, "unit": "y" * 40}, {"type": "bar", "label": None, "value": "x"},
            {"type": "tag", "text": "AUGUST 1914"}, {"type": "tag", "text": "x" * 60}, {"type": "tag"},
+           {"type": "quote", "title": "FORSCHER WARNEN", "text": "…dass es noch schlimmer wird."}, {"type": "quote", "text": "x" * 300}, {"type": "quote"},
            {"type": "thermo", "value": 22}, {"type": "thermo", "value": -80}, {"type": "thermo", "value": "x"}, {"type": "thermo", "value": 999},
            {"type": "stamp", "text": "VERBOTEN"}, {"type": "stamp", "text": "GRATIS", "color": "green"}, {"type": "stamp", "text": "x" * 50, "color": 3},
            {"type": "unbekannt"}, {"type": "card"}, {"type": "phone", "items": []}, {}]
@@ -249,6 +250,20 @@ def main():
             if o:
                 assert overlays.frames_for(o), o
     check("Erklär-Einblendungen", _explain)
+    def _tw():                                                   # Tageszeit, Wetter und Zitat aus dem Satz
+        T = ["Nachts wird es im Garten richtig kalt.", "Draußen regnet es in Strömen.", "Es regnet nicht mehr.", "Im Wohnzimmer hört man den Regen.",
+             "Forscher warnen, dass es noch schlimmer wird.", "Max sagt, dass er kommt."]
+        scs = stage.direct([{"text": t, "place": "livingroom" if "Wohnzimmer" in t else "park", "time": "day", "actors": [{"id": "du"}]} for t in T],
+                           [(i * 3, i * 3 + 3) for i in range(len(T))], "Test")
+        assert scs[0]["time"] == "night", scs[0]
+        assert scs[1].get("weather") == "rain", scs[1]
+        assert not scs[2].get("weather"), "verneinter Regen"
+        assert not scs[3].get("weather"), "Regen im Zimmer"
+        assert scs[4]["overlay"] == {"type": "quote", "title": "FORSCHER WARNEN", "text": "…dass es noch schlimmer wird."}, scs[4]["overlay"]
+        assert (scs[5].get("overlay") or {}).get("type") != "quote", "Zitat mit Namen"
+        for sc_ in scs:
+            frame(sc_, t=1.0)
+    check("Tageszeit, Wetter, Zitat", _tw)
     check("Neon-Look", lambda: graphics.neon(frame({"place": "street", "crowd": "walk"}), 1.0))
     check("Neon-Kulisse", lambda: graphics.tint(places.background("street", True)))
     # Regie mit zufälligen und kaputten Drehbüchern
