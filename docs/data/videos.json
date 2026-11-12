@@ -1937,7 +1937,7 @@
   "id": 60,
   "category": "storys",
   "topic": "Warum Hollywood-Heist-Filme physikalisch komplett wild sind und trotzdem süchtig machen",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1794480168.3735037,
   "title": "Hollywood-Heist-Filme: Warum die Physik komplett gelogen ist",
   "description": "Die größte Lüge in Hollywood-Einbruchsfilmen!\nLaserstrahlen, Tresore und Lautlosigkeit sind pure Physik-Fantasie.\nSchaust du lieber realistische Filme oder Hollywood-Action?",
@@ -1974,6 +1974,7 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Trinkglas statt Sicherheitsglas, Karton statt Tresor, Figur schwebt grundlos, Tippfehler im Titelbild-Text, Figur liegt im Bett am Bildrand"
  }
 ]
