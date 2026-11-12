@@ -1,5 +1,5 @@
 {
- "updated": 1794514960.4327147,
+ "updated": 1794516762.038919,
  "enough": false,
  "counted": 5,
  "total": 7,
@@ -9,19 +9,19 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 4,
-   "avg_views": 1260,
+   "avg_views": 1269,
    "avg_likes": 28.0,
-   "like_rate": 2.22,
-   "avg_score": 1688
+   "like_rate": 2.21,
+   "avg_score": 1696
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 1,
-   "avg_views": 533,
+   "avg_views": 569,
    "avg_likes": 15.0,
-   "like_rate": 2.81,
-   "avg_score": 758
+   "like_rate": 2.64,
+   "avg_score": 794
   }
  ],
  "weights": {
@@ -42,41 +42,41 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2383,
+   "views": 2408,
    "likes": 55,
    "comments": 0,
    "shares": 0,
-   "score": 3208
+   "score": 3233
   },
   {
    "id": 54,
    "title": "Was passiert, wenn die Schwerkraft für fünf Sekunden verschwindet?",
    "category": "whatif",
-   "views": 1544,
+   "views": 1550,
    "likes": 40,
    "comments": 0,
    "shares": 0,
-   "score": 2144
+   "score": 2150
   },
   {
    "id": 38,
    "title": "Was passiert, wenn Drohnen deinen Alltag komplett überwachen?",
    "category": "whatif",
-   "views": 1113,
+   "views": 1117,
    "likes": 17,
    "comments": 1,
    "shares": 0,
-   "score": 1398
+   "score": 1402
   },
   {
    "id": 58,
    "title": "Wie aus einer Gaming-Bude der wertvollste Tech-Gigant wurde",
    "category": "fakten",
-   "views": 533,
+   "views": 569,
    "likes": 15,
    "comments": 0,
    "shares": 0,
-   "score": 758
+   "score": 794
   },
   {
    "id": 44,
