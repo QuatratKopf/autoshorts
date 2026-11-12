@@ -2290,5 +2290,51 @@
   "status": "error",
   "created": 1794505374.3913538,
   "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-flash-lite-latest: HTTP 503 | pollinations: Antwort enthält kein JSON"
+ },
+ {
+  "id": 73,
+  "category": "fakten",
+  "topic": "3 seltsame Tierfähigkeiten, die wie Superkräfte wirken",
+  "status": "review",
+  "created": 1794507075.8179758,
+  "title": "Tierfähigkeiten: 3 Tiere mit echten Superkräften",
+  "description": "Welches Tier hat die verrückteste Superkraft im Alltags-Test?\nEntdecke drei Tiere mit Fähigkeiten wie aus einem Science-Fiction-Film.\nPistolenkrebs oder Axolotl: Welche Fähigkeit hättest du am liebsten?",
+  "hashtags": [
+   "#shorts",
+   "#tierfakten",
+   "#wissen",
+   "#biologie",
+   "#fakten",
+   "#fyp",
+   "#viral"
+  ],
+  "tags": [
+   "tierfähigkeiten",
+   "tierfakten",
+   "superkräfte",
+   "pistolenkrebs",
+   "axolotl",
+   "bärenkrebs",
+   "bärtierchen",
+   "biologie fakten"
+  ],
+  "thumb_text": "ECHTE TIER-SUPERKRÄFTE",
+  "missing": [
+   "pistolenkrebs",
+   "axolotl",
+   "bärtierchen"
+  ],
+  "cover_ms": 85157,
+  "duration": 85.1,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-12 21:00",
+  "review_at": 1794508566.4303672
  }
 ]

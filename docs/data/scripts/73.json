@@ -1,0 +1,439 @@
+{
+ "title": "Tierfähigkeiten: 3 Tiere mit echten Superkräften",
+ "scenes": [
+  {
+   "text": "Dieser winzige Krebs betäubt seine Beute mit einem ultraschnellen Schlag.",
+   "see": "Du stehst im Labor und ein kleiner Krebs schießt eine Druckwelle ab",
+   "place": "underwater",
+   "time": "day",
+   "props": [
+    {
+     "type": "wave"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "overlay": {
+    "type": "thermo",
+    "value": 4700
+   }
+  },
+  {
+   "text": "Wie eine unsichtbare Druckwelle kleine Fische sofort betäubt.",
+   "see": "Große Infografik mit der Schussgeschwindigkeit des Pistolenkrebses",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "look_around",
+     "emotion": "worried",
+     "pos": "center",
+     "emote": "?"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Beutefische werden durch diese gewaltige Druckwelle sofort betäubt, bevor sie überhaupt etwas merken.",
+   "see": "Eine Beute-Fisch-Figur wird von einer Unterwasser-Schockwelle getroffen",
+   "place": "underwater",
+   "time": "day",
+   "props": [
+    {
+     "type": "explosion"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "overlay": {
+    "type": "stamp",
+    "text": "KO-SCHLAG",
+    "color": "red"
+   }
+  },
+  {
+   "text": "Aber das war erst Superkraft Nummer eins von unserer heutigen drei Tier-Liste.",
+   "see": "Du stehst im Zimmer und hälst verblüfft eine Lupe auf ein Aquarium",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "table"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "KRAFT 1/3"
+   }
+  },
+  {
+   "text": "Kandidat Nummer zwei ist der Axolotl, ein mexikanischer Schwanzlurch mit echtem Wunder-Körper.",
+   "see": "Siegertreppchen Grafik kündigt das zweite Tier an",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "round",
+    "kicker": "KRAFT 2",
+    "text": "REGENERATION",
+    "dark": false
+   }
+  },
+  {
+   "text": "Verliert er ein Bein oder Teile seines Herzens, wachsen diese in wenigen Wochen komplett nach.",
+   "see": "Ein Axolotl schwimmt ruhig im Aquarium",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_herz"
+    }
+   ],
+   "actors": [
+    {
+     "id": "lurch",
+     "speaks": false,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "shot": "insert",
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "HEILT ALLES"
+   }
+  },
+  {
+   "text": "Sogar Rückenmark und Gehirngewebe regenerieren sich lückenlos ohne narbige Schäden am Organsystem.",
+   "see": "Du schaust ungläubig auf eine Notizkarte mit medizinischen Fakten",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "note",
+    "title": "REGEL #1",
+    "text": "Keine Narben nach Heilung"
+   }
+  },
+  {
+   "text": "Mediziner erforschen diesen Prozess intensiv, um menschliche Wundheilung in Zukunft zu revolutionieren.",
+   "see": "Vergleichs-Grafik zeigt die Regenerations-Dauer",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Doch das extremste Lebewesen unseres Planeten schlägt sie alle zusammen mühelos im Weltall.",
+   "see": "Du hältst dir überrascht den Kopf im Raumschiff-Ambiente",
+   "place": "space",
+   "time": "night",
+   "props": [
+    {
+     "type": "earth"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "worried",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "KRAFT 3/3"
+   }
+  },
+  {
+   "text": "Bärtierchen überleben extreme Kälte nahe dem absoluten Nullpunkt sowie kochende Hitze.",
+   "see": "Grafik mit Eislandschaft und extremer Temperaturanzeige",
+   "place": "kitchen",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "thermo",
+    "value": -272
+   }
+  },
+  {
+   "text": "Selbst das Vakuum im Weltraum und tödliche Strahlung machen den Winzlingen absolut gar nichts aus.",
+   "see": "Ein riesiger Eisberg im Ozean bei Schneesturm",
+   "place": "space",
+   "backdrop": {
+    "sky": "night",
+    "ground": "rock",
+    "elements": [
+     "craters"
+    ]
+   },
+   "time": "night",
+   "weather": "snow",
+   "props": [
+    {
+     "type": "meteor"
+    }
+   ],
+   "shot": "event",
+   "mood": "scary",
+   "overlay": {
+    "type": "stamp",
+    "text": "UNSTERBLICH",
+    "color": "purple"
+   }
+  },
+  {
+   "text": "Sie fahren ihren Stoffwechsel fast komplett runter und trocknen jahrelang ohne Wasser einfach aus.",
+   "see": "Tage-Zähler-Grafik zeigt dreißig Jahre ohne Wasser",
+   "place": "desert",
+   "backdrop": {
+    "sky": "day",
+    "ground": "sand",
+    "elements": [
+     "dunes"
+    ]
+   },
+   "time": "day",
+   "weather": "heat",
+   "mood": "calm"
+  },
+  {
+   "text": "In diesem Zustand überstehen sie jahrelang extreme Bedingungen ohne einen einzigen Tropfen Wasser.",
+   "see": "Eine trockene Wüste mit Rissen im Boden und glühender Sonne",
+   "place": "desert",
+   "backdrop": {
+    "sky": "haze",
+    "ground": "dry",
+    "elements": [
+     "cracks"
+    ]
+   },
+   "time": "day",
+   "weather": "heat",
+   "props": [
+    {
+     "type": "sun"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense"
+  },
+  {
+   "text": "Sobald wieder ein wenig Feuchtigkeit dazukommt, wachen sie auf und krabbeln einfach weiter.",
+   "see": "Du stehst im Labor und gießt symbolisch Wasser mit einer Kanne",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "table"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Also: Pistolen-Knall, Körper-Regeneration oder schlichte Unsterblichkeit im Weltall für deinen Alltag?",
+   "see": "Handy-Benachrichtigung mit einer Frage an den Zuschauer",
+   "place": "bedroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "phone",
+    "kicker": "FRAGE",
+    "sub": "Definitiv Unsterblichkeit!",
+    "text": "Welche Superkraft nimmst du?",
+    "dark": false,
+    "mode": "chat"
+   }
+  },
+  {
+   "text": "Ich persönlich würde ja den Knall nehmen, um endlich laute Nachbarn stummzuschalten.",
+   "see": "Du überlegst angestrengt mit einer Denkblase über dem Kopf",
+   "place": "bedroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Die Natur schlägt Marvel jedenfalls locker in Sachen Erfindungsreichtum und krassen Fähigkeiten.",
+   "see": "Checklisten-Grafik fasst die drei Gewinner-Kräfte zusammen",
+   "place": "bedroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "happy"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "happy",
+   "graphic": {
+    "type": "podium",
+    "kicker": "GEWINNER",
+    "text": "BÄRTIERCHEN",
+    "left": "AXOLOTL",
+    "right": "KREBS",
+    "dark": false
+   }
+  },
+  {
+   "text": "Schreib deine Wahl jetzt in die Kommentare und folg für mehr verrückte Naturfakten.",
+   "see": "Du deutest frech auf die Kamera im Zimmer",
+   "place": "bedroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Denn das nächste Tier-Rätsel wartet schon direkt auf dich.",
+   "see": "Entscheidungs-Grafik für das Endscreen-Engagement",
+   "place": "bedroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "choice",
+    "a": "Pistolenkrebs",
+    "b": "Axolotl"
+   }
+  }
+ ]
+}
