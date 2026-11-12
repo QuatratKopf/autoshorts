@@ -725,7 +725,7 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
             facing = 1 if x < 600 else -1
         gy = ((H - 70 if a["kind"] else CLOSE_FOOT) if close else places.GROUND) + (18 if a["speaks"] and not close else 0)   # Tiere sind niedrig: ganz im Bild
         a_lift, a_hit = _float_lift(flo, t, a["seed"], 190.0, aloft) if flo else (0.0, None)
-        if a["kind"] in SEA_KINDS and a.get("hero") and not close and not props:
+        if a["kind"] in SEA_KINDS and a["kind"] != "jelly" and a.get("hero") and not close and not props:
             a_lift += 150 * scale                          # Schwimmer treiben über dem Grund – frei von der Untertitel-Zeile
         landed = a_hit if a_hit is not None and (landed is None or a_hit > landed) else landed
         head_y = gy - 505 * scale
@@ -1245,7 +1245,7 @@ def direct(scenes, times, topic="", style="", look=""):
                     a["kind"] = sea_k
                 elif not a.get("kind"):
                     a["kind"] = "fish"
-            if sea_k and shot_s in ("", "event", "insert", "close", "wide") and not (shot_s == "insert" and [q for q in (sc.get("props") or [])]):
+            if sea_k and shot_s in ("", "event", "insert", "close", "wide"):      # auch statt der Großaufnahme eines Dings: das Tier trifft es
                 mine_s = [a for a in acts if str(a.get("kind") or "").lower() == sea_k]
                 if not mine_s:
                     mine_s = [{"id": "_meer", "kind": sea_k, "action": "idle", "speaks": False, "emote": "", "say": "", "hold": "", "facing": "",
@@ -1711,11 +1711,18 @@ def direct(scenes, times, topic="", style="", look=""):
             if sc.get("shot") in ("event", "insert", "close"):
                 sc["shot"] = ""
     sea_run = (None, 0)
+    sea_prev = None
     for sc in scenes:                                     # Meerestier-Szenen: Das Tier bleibt allein im Bild – kein Mensch auf dem Meeresgrund,
         if not isinstance(sc, dict) or places.resolve(backdrop(sc)) != "underwater":      # keine Feuer-Explosion und keine Flutwelle unter Wasser
             continue
         acts_s = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
         seas = [a for a in acts_s if str(a.get("kind") or "").lower() in SEA_KINDS]
+        low_s = str(sc.get("text") or "").lower()
+        if not seas and sea_prev and sc.get("shot") in ("", None, "close", "event", "wide") and len(acts_s) <= 1 \
+                and all(str(a.get("kind") or "fish").lower() == "fish" for a in acts_s) and not _re0.search(r"fisch|\bhai|beute|opfer", low_s):
+            keep_s = acts_s[0] if acts_s else {"id": "_meer", "action": "idle", "speaks": False, "say": "", "hold": "", "facing": ""}
+            keep_s.update(kind=sea_prev, hold="", pos="center")       # namenloser Fisch in einem Satz über das Tier von eben: das Tier selbst zeigen
+            sc["actors"] = seas = [keep_s]
         if not seas:
             for a in acts_s:                              # spätere Regeln stellen gern die Hauptfigur dazu: am Meeresgrund steht kein Mensch im Pulli
                 if not a.get("kind"):
@@ -1724,6 +1731,7 @@ def direct(scenes, times, topic="", style="", look=""):
                         a["action"] = "idle"
             continue
         seas[0].update(hero=True, emote="")
+        sea_prev = seas[0]["kind"]
         sc["actors"] = seas[:1]
         sc["props"] = [q for q in (sc.get("props") or []) if isinstance(q, dict) and extras.PROP_ALIASES.get(       # nur, worauf das Tier zielt (Stein, Scheibe) –
             str(q.get("type")).lower(), str(q.get("type")).lower()) in SEA_TARGETS][:1]                                # keine Explosion, Flutwelle, gelernten Notbehelfe
@@ -1774,7 +1782,7 @@ def _sea_kind(low, sea):
     return None
 
 
-HERO_SIZE = {"shrimp": 1.6, "mantis": 1.6, "jelly": 1.7, "axolotl": 1.6, "tardigrade": 1.5, "agent": 0.8, "brain": 1.6, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9}   # Hauptfigur: etwa halb so hoch wie ein Mensch
+HERO_SIZE = {"shrimp": 1.6, "mantis": 1.6, "jelly": 1.4, "axolotl": 1.6, "tardigrade": 1.5, "agent": 0.8, "brain": 1.6, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9}   # Hauptfigur: etwa halb so hoch wie ein Mensch
 
 
 def _topic_creature(scenes, topic):
