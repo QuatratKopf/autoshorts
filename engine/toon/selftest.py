@@ -264,6 +264,19 @@ def main():
         for sc_ in scs:
             frame(sc_, t=1.0)
     check("Tageszeit, Wetter, Zitat", _tw)
+    def _cuts():                                                 # neue Wesen, Gruppen und Schnitt mitten im Satz
+        import tempfile
+        from pathlib import Path
+        scs = stage.direct([{"text": "Ich hab mir einen KI-Agenten geholt.", "place": "office", "actors": [{"id": "du"}]},
+                            {"text": "Die Agenten arbeiten Tag und Nacht.", "place": "office", "actors": []},
+                            {"text": "Einer hat meinen Computer übernommen.", "place": "office", "props": ["computer"], "actors": [{"id": "du"}]}],
+                           [(i * 3.6, i * 3.6 + 3.6) for i in range(3)], "Ich hab mir KI-Agenten geholt")
+        assert any(a.get("kind") == "agent" for a in scs[0]["actors"]), scs[0]["actors"]
+        assert [a.get("kind") for a in scs[1]["actors"]] == ["agent"] * 3, scs[1]["actors"]
+        with tempfile.TemporaryDirectory() as tmp:
+            for i, sc_ in enumerate(scs):
+                stage.render_scene(sc_, {}, 2.8, Path(tmp) / f"c{i}.mp4", index=i)
+    check("Schnitt im Satz und Gruppen", _cuts)
     check("Neon-Look", lambda: graphics.neon(frame({"place": "street", "crowd": "walk"}), 1.0))
     check("Neon-Kulisse", lambda: graphics.tint(places.background("street", True)))
     # Regie mit zufälligen und kaputten Drehbüchern

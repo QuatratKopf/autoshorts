@@ -1799,6 +1799,48 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0):
         eye(hx + 14, hy - 30, 20)
         brow(hx + 14, hy - 58, 20, 1)
         cheek(hx - 10, hy + 2, 16)
+    elif kind in ("agent", "virus", "cell"):
+        # Personifizierte Begriffe (wie die KI-Agenten in den Vorbild-Shorts): ein Kästchen, eine Stachelkugel, eine Zelle –
+        # mit großen Augen, Augenbrauen, Mund, Ärmchen und Beinchen; Farbe je Begriff
+        col = {"agent": (240, 104, 56), "virus": (120, 196, 84), "cell": (238, 110, 130)}[kind]
+        hop = abs(math.sin(t * 5)) * 10 if mood in ("happy",) else 0
+        by = -150 - hop
+        for lx in (-60, -20, 20, 60):                                            # Beinchen
+            far = lx in (-20, 60)
+            stroke([(lx, by + 70), (lx + 4, -12 - hop * 0.3)], 16, _dark(col, 0.25) if far else _dark(col, 0.1))
+            ell(lx - 14, -22, lx + 18, 2, _dark(col, 0.35), shade=0)
+        sw = math.sin(t * 3) * 10
+        for s_ in (-1, 1):                                                       # Ärmchen
+            stroke([(s_ * 110, by + 10), (s_ * 150, by + 40 + s_ * sw), (s_ * 160, by + 70 + s_ * sw)], 14, _dark(col, 0.08))
+        if kind == "agent":
+            rr(-125, by - 100, 125, by + 85, 34, col)
+            d.rounded_rectangle(B(-110, by - 92, 60, by - 70), int(10 * k), fill=_light(col, 0.25))          # Glanzkante
+        else:
+            if kind == "virus":                                                  # Stacheln mit Knubbeln
+                for i in range(12):
+                    a_ = i / 12 * math.tau + 0.2
+                    x1_, y1_ = math.cos(a_) * 118, by + math.sin(a_) * 108
+                    x2_, y2_ = math.cos(a_) * 158, by + math.sin(a_) * 146
+                    stroke([(x1_, y1_), (x2_, y2_)], 12, _dark(col, 0.15))
+                    ell(x2_ - 16, y2_ - 16, x2_ + 16, y2_ + 16, (214, 90, 90), shade=0.2)
+            ell(-125, by - 115, 125, by + 105, col)
+            if kind == "cell":
+                ell(-70, by - 80, 10, by - 10, _dark(col, 0.2), shade=0, line=False)            # Zellkern
+            else:
+                for dx, dy, r_ in ((-70, by + 40, 12), (60, by + 60, 9), (80, by - 70, 10)):
+                    ell(dx - r_, dy - r_, dx + r_, dy + r_, _dark(col, 0.22), shade=0, line=False)
+        ex, ey = 10, by - 25                                                     # großes Augenpaar, nah beieinander
+        eye(ex - 40, ey, 26)
+        eye(ex + 40, ey, 26)
+        bm = mood if mood in ("sad", "angry", "worried", "scared") else ("angry" if kind == "virus" and not mood else "")
+        if bm:
+            dy = 10 if bm == "angry" else -10
+            for s_ in (-1, 1):
+                d.line((*P(ex + s_ * 40 - 26, ey - 46 - dy * s_ * -1 if False else ey - 46 + (dy if s_ < 0 else -dy) * (1 if bm == "angry" else -1)),
+                        *P(ex + s_ * 40 + 26, ey - 46 - (dy if s_ < 0 else -dy) * (1 if bm == "angry" else -1))), fill=INK, width=max(2, int(9 * k)))
+        cheek(ex - 78, ey + 34, 15)
+        cheek(ex + 82, ey + 34, 15)
+        mouthf(ex, ey + 56, 18)
     elif kind == "monster":
         col = (150, 106, 206)
         fur = _dark(col, 0.3)
@@ -1880,4 +1922,4 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0):
     return out, cx / S, gy / S, fly
 
 
-CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp")
+CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell")

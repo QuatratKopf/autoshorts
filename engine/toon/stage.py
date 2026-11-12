@@ -1449,11 +1449,17 @@ def direct(scenes, times, topic="", style="", look=""):
 
 
 # Tier/Wesen im Titel → es wird die Hauptfigur des Videos (wie in den Vorbild-Shorts: die Spinne ist fast in jeder Szene, mit Gefühl)
-TOPIC_CREATURES = [(r"spinne|tarantel|vogelspinne|weberknecht|kreuzspinne", "spider"), (r"katze|kater|kätzchen", "cat"), (r"\bhund|hunde|welpe", "dog"),
+TOPIC_CREATURES = [(r"ki-agent|\bagent|\bbots?\b|chatbot|\bassistent|\bki\b|künstliche intelligenz|\bclaude\b|chatgpt|sprachmodell", "agent"),
+                   (r"\bvirus|\bviren|bakterie|\bkeim|erreger|grippe|infektion", "virus"), (r"\bzelle|zellen|blutkörperchen|immunsystem", "cell"),
+                   (r"spinne|tarantel|vogelspinne|weberknecht|kreuzspinne", "spider"), (r"katze|kater|kätzchen", "cat"), (r"\bhund|hunde|welpe", "dog"),
                    (r"biene", "bee"), (r"wespe|hornisse", "wasp"), (r"\bhai\b|haie|weißer hai", "shark"), (r"\bfisch|goldfisch", "fish"),
-                   (r"\bvogel|vögel|spatz|taube|amsel", "bird"), (r"\bgeist|gespenst", "ghost"), (r"roboter|\bki\b|künstliche intelligenz", "robot"),
+                   (r"\bvogel|vögel|spatz|taube|amsel", "bird"), (r"\bgeist|gespenst", "ghost"), (r"roboter", "robot"),
                    (r"außerirdisch|alien|\bufo", "alien"), (r"dinosaurier|\bdino|t-rex", "dino"), (r"monster|ungeheuer", "monster")]
-HERO_SIZE = {"spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9}   # Hauptfigur: etwa halb so hoch wie ein Mensch
+PLURAL = {"agent": r"agenten|\bbots\b|assistenten", "virus": r"\bviren|bakterien|keime|erreger", "cell": r"zellen|blutkörperchen",
+          "spider": r"spinnen|taranteln", "bee": r"bienen", "wasp": r"wespen", "cat": r"katzen", "dog": r"\bhunde\b", "bird": r"vögel",
+          "fish": r"fische", "shark": r"\bhaie", "ghost": r"geister|gespenster", "robot": r"roboter\b", "alien": r"außerirdische|aliens",
+          "dino": r"dinosaurier", "monster": r"monster"}
+HERO_SIZE = {"agent": 0.8, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9}   # Hauptfigur: etwa halb so hoch wie ein Mensch
 
 
 def _topic_creature(scenes, topic):
@@ -1480,6 +1486,13 @@ def _topic_creature(scenes, topic):
         if len(humans) >= 2 or len(acts) >= 2 or (acts and not humans):   # kein Gedränge: neben höchstens einem Menschen, nie neben einem anderen Tier
             continue
         sc["props"] = drop
+        mood0 = str(sc.get("mood") or "")
+        if not humans and _re.search(PLURAL.get(kind, r"$^"), str(sc.get("text") or "").lower()):     # Mehrzahl ohne Menschen: eine Gruppe
+            emo = MOOD_EMOTION.get(mood0, "happy" if mood0 == "happy" else "")
+            sc["actors"] = [{"id": f"_thema{j}", "kind": kind, "hero": True, "speaks": False, "action": "idle", "emotion": emo,
+                             "pos": x, "emote": "", "say": "", "hold": "", "facing": ""} for j, x in enumerate((230, 540, 850))]
+            sc["crowd"] = ""                               # die Gruppe ist das Bild – keine Passanten dazwischen
+            continue
         mood = str(sc.get("mood") or "")
         if humans:
             for h in humans[:1]:
@@ -1961,6 +1974,27 @@ def _punch_time(scene, words, t0, dur):
     return dur * 0.5 if dur >= 3.2 else None
 
 
+CUT_MIN = 2.6        # ab dieser Szenenlänge (s) wird mitten im Satz geschnitten – wie in den Vorbild-Shorts etwa alle 1,8 Sekunden ein neues Bild
+
+
+def _cut_plan(scene, shot, special, moving, ov_tall, place, actors, props, dur, cam, index):
+    """Zweites Bild innerhalb einer Szene: beim Schlüsselwort (sonst zur Mitte) harter Schnitt auf den genannten Gegenstand groß
+    („insert“) oder auf die Großaufnahme der Hauptfigur bzw. des Tiers („close“). Jede dritte Szene bleibt ruhig ohne Schnitt.
+    Gibt (Schnittzeit oder None, Art, Gegenstände) zurück und schaltet den Kamerasprung ab, wenn geschnitten wird."""
+    if special or shot or moving or ov_tall or scene.get("float") or dur < CUT_MIN or place in MAPS or index % 3 == 2 \
+            or str(scene.get("shot") or "") in ("event", "insert", "graphic", "close"):
+        return None, "", []
+    named = [k for k, _ in props if extras.prop_fit(k) and extras.PROP_ALIASES.get(k, k) not in DULL
+             and extras.PROP_ALIASES.get(k, k) not in PLACE_HAS.get(place, ())]
+    kind = "insert" if named and index % 2 == 0 else "close" if 0 < len(actors) <= 2 else "insert" if named else ""   # Gruppen nicht anschneiden
+    if not kind:
+        return None, "", []
+    pt = cam.get("punch")
+    cut = min(max(pt if pt is not None else dur * 0.5, 1.1), dur - 1.0)
+    cam["punch"] = None
+    return cut, kind, named
+
+
 def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.0, still: Path = None, index=0):
     """scene: {"place", "time", "weather", "props", "actors": [{"id", "action", "emotion", "emote", "pos", "to", "speaks"}]}.
     words: [(wort, start, ende)] der ganzen Sprecherspur; t0 = Startzeit der Szene darin."""
@@ -1991,6 +2025,11 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
         span = max(xs) - min(xs) + 420                                  # Breite der Gruppe samt Armen
         cam.update(tight=True, zt=max(1.0, min(1.42, W / span)), fx=(max(xs) + min(xs)) / 2)
     cam_flat = {"flat": True, "dir": cam["dir"], "drift": cam["drift"]}
+    cut_t, cut_kind, named = _cut_plan(scene, shot, gfx or ins, moving, ov_tall, place, actors, props, dur, cam, index)
+    mood_s = str(scene.get("mood") or "").lower()
+    fx_opt = {"crowd": scene.get("crowd") if crowd_ok(scene) else "", "mood": mood_s, "spec": places.spec_of(backdrop(scene)), "sky": sky_m,
+              "win": scene.get("_win"), "count": scene.get("_count"), "neon": neon_look, "float": str(scene.get("float") or ""),
+              "aloft": bool(scene.get("aloft")), "low": bool(scene.get("low")), "no_traffic": bool(scene.get("no_traffic") or scene.get("dark_city"))}
     ff = subprocess.Popen(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24",
                            "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-preset", "veryfast",
                            "-crf", "17", "-pix_fmt", "yuv420p", str(out)], stdin=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -2004,10 +2043,15 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
                     frame.save(still, quality=92)
                 ff.stdin.write(_camera(frame.convert("RGB"), t, dur, cam_flat).tobytes())
                 continue
-            frame = _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, place == "bedroom", shot, big,
-                           {"crowd": scene.get("crowd") if crowd_ok(scene) else "", "mood": str(scene.get("mood") or "").lower(), "spec": places.spec_of(backdrop(scene)), "sky": sky_m, "win": scene.get("_win"), "count": scene.get("_count"), "neon": neon_look,
-                            "float": str(scene.get("float") or ""), "aloft": bool(scene.get("aloft")), "low": bool(scene.get("low")),
-                            "no_traffic": bool(scene.get("no_traffic") or scene.get("dark_city"))})
+            if cut_t is not None and t >= cut_t:            # Schnitt mitten im Satz: auf das genannte Ding oder die Großaufnahme der Figur
+                tc = t - cut_t
+                frame = (_insert_frame(named[:1], tc, dur - cut_t, mood_s, bool(has_ov), neon_look) if cut_kind == "insert"
+                         else _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, place == "bedroom", "close", big, fx_opt))
+                if still is not None and fidx == min(n_frames - 1, FPS):
+                    frame.save(still, quality=92)
+                ff.stdin.write(_camera(frame.convert("RGB"), tc, dur - cut_t, cam_flat).tobytes())
+                continue
+            frame = _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, place == "bedroom", shot, big, fx_opt)
             if still is not None and fidx == min(n_frames - 1, FPS):
                 frame.save(still, quality=92)
             ff.stdin.write(_camera(frame.convert("RGB"), t, dur, cam_flat if shot == "close" else cam).tobytes())
