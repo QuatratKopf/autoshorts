@@ -1,5 +1,5 @@
 {
- "updated": 1794491082.370107,
+ "updated": 1794491544.4030187,
  "enough": false,
  "counted": 4,
  "total": 6,
@@ -9,10 +9,10 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 4,
-   "avg_views": 1216,
+   "avg_views": 1228,
    "avg_likes": 27.5,
-   "like_rate": 2.26,
-   "avg_score": 1636
+   "like_rate": 2.24,
+   "avg_score": 1648
   }
  ],
  "weights": {
@@ -33,31 +33,31 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2262,
+   "views": 2302,
    "likes": 54,
    "comments": 0,
    "shares": 0,
-   "score": 3072
+   "score": 3112
   },
   {
    "id": 54,
    "title": "Was passiert, wenn die Schwerkraft für fünf Sekunden verschwindet?",
    "category": "whatif",
-   "views": 1508,
+   "views": 1513,
    "likes": 38,
    "comments": 0,
    "shares": 0,
-   "score": 2078
+   "score": 2083
   },
   {
    "id": 38,
    "title": "Was passiert, wenn Drohnen deinen Alltag komplett überwachen?",
    "category": "whatif",
-   "views": 1096,
+   "views": 1098,
    "likes": 18,
    "comments": 1,
    "shares": 0,
-   "score": 1396
+   "score": 1398
   },
   {
    "id": 44,
