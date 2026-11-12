@@ -1932,5 +1932,48 @@
   "slot": "2026-11-12 13:00",
   "review_at": 1794478585.9150727,
   "error": "Bei der Prüfung verworfen: Drehbuch zu kurz (9 s stummes Standbild am Ende), erfundene Zahlen in Grafiken, Gesetzbuch statt Lehrbuch, Figur am Bildrand abgeschnitten, wenig Inhalt"
+ },
+ {
+  "id": 60,
+  "category": "storys",
+  "topic": "Warum Hollywood-Heist-Filme physikalisch komplett wild sind und trotzdem süchtig machen",
+  "status": "rendered",
+  "created": 1794480168.3735037,
+  "title": "Hollywood-Heist-Filme: Warum die Physik komplett gelogen ist",
+  "description": "Die größte Lüge in Hollywood-Einbruchsfilmen!\nLaserstrahlen, Tresore und Lautlosigkeit sind pure Physik-Fantasie.\nSchaust du lieber realistische Filme oder Hollywood-Action?",
+  "hashtags": [
+   "#shorts",
+   "#filme",
+   "#kino",
+   "#hollywood",
+   "#heist",
+   "#physik",
+   "#fakten",
+   "#wissen"
+  ],
+  "tags": [
+   "hollywood heist",
+   "kino physik",
+   "filmfehler",
+   "laser laserfallen",
+   "tresor knacken",
+   "heist filme",
+   "wissen"
+  ],
+  "thumb_text": "ALLES NURS SHOW?",
+  "missing": [
+   "laserstrahl",
+   "saugnapf"
+  ],
+  "cover_ms": 86029,
+  "duration": 85.9,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
