@@ -1,0 +1,352 @@
+{
+ "title": "3 bizarre Reaktionen unseres Gehirns im Alltag",
+ "scenes": [
+  {
+   "text": "Dein Gehirn sabotiert dich gerade mit völlig absurden Macken.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_gehirn"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Warum schaust du auf die Uhr und weißt sofort nichts mehr?",
+   "place": "livingroom",
+   "props": [
+    {
+     "type": "clock"
+    }
+   ],
+   "shot": "graphic",
+   "graphic": {
+    "type": "question",
+    "text": "WARUM?",
+    "dark": false
+   }
+  },
+  {
+   "text": "Erstens, du schaust auf die Uhr, obwohl du gerade genau weißt, wie spät es ist.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "clock"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "stare",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "NUMMER EINS"
+   }
+  },
+  {
+   "text": "Zwei Sekunden später hast du keine Ahnung, wie viel Uhr es war.",
+   "place": "livingroom",
+   "shot": "graphic",
+   "graphic": {
+    "type": "number",
+    "value": "2",
+    "label": "SEKUNDEN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Dein Kopf hat die Information einfach direkt wieder gelöscht.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_gehirn"
+    }
+   ],
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "erase",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Zweitens, du gehst in einen Raum und vergisst sofort, was du eigentlich wolltest.",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "gehirn",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "overlay": {
+    "type": "tag",
+    "text": "NUMMER ZWEI"
+   }
+  },
+  {
+   "text": "Schuld daran ist eine biologische Hardwaresperre im Kopf.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_gehirn"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Das Überqueren einer Türschwelle wertet das Gehirn als neuen Abschnitt.",
+   "place": "beach",
+   "props": [
+    {
+     "type": "lib_gehirn"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "look_around",
+     "emotion": "",
+     "pos": "left",
+     "emote": "?"
+    }
+   ]
+  },
+  {
+   "text": "Deshalb wird der alte Gedanke im Arbeitsspeicher radikal überschrieben.",
+   "place": "attic",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_gehirn"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "scrunch_face",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "NEUER ABSCHNITT"
+   }
+  },
+  {
+   "text": "Drittens, du ziehst an einer Tür, obwohl groß drücken draufsteht.",
+   "place": "livingroom",
+   "props": [
+    {
+     "type": "door"
+    }
+   ],
+   "overlay": {
+    "type": "tag",
+    "text": "NUMMER DREI"
+   }
+  },
+  {
+   "text": "Und trotzdem drückst du jedes verdammte Mal zuerst dagegen.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_gehirn"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "pull",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "door",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Dein Verstand liebt eben Gewohnheiten mehr als Logik.",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ]
+  },
+  {
+   "text": "Zum Glück funktioniert dein Denkorgan meistens trotzdem ziemlich gut.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_gehirn"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "nod",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Manchmal macht es eben einfach was es will.",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ]
+  },
+  {
+   "text": "Welcher dieser Punkte passiert dir heute noch garantiert.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_gehirn"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "smile",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Schreib es direkt in die Kommentare.",
+   "place": "livingroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "scared"
+    }
+   ],
+   "mood": "panic"
+  },
+  {
+   "text": "Folg für mehr.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "choice",
+    "a": "Uhrzeit vergessen",
+    "b": "Tür falsch gedrückt"
+   }
+  }
+ ]
+}

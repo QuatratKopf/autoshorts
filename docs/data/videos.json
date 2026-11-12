@@ -2157,5 +2157,48 @@
   "look": "cartoon",
   "mp4": true,
   "error": "Bei der Prüfung verworfen: Straße mit Passanten beim Satz über Schlafen/Wecken, Untertitel über dem Gesicht der Gehirn-Figur"
+ },
+ {
+  "id": 66,
+  "category": "fakten",
+  "topic": "3 bizarre Reaktionen unseres Gehirns im Alltag, die null Sinn ergeben, aber jeder von uns hat",
+  "status": "rendered",
+  "created": 1794500519.6497996,
+  "title": "3 bizarre Reaktionen unseres Gehirns im Alltag",
+  "description": "Dein Gehirn macht manchmal Sachen, die absolut keinen Sinn ergeben.\nWir zeigen dir drei völlig bizarre Alltagsreaktionen, die jeder von uns kennt.\nWelcher dieser Momente passiert dir eigentlich am häufigsten?",
+  "hashtags": [
+   "#shorts",
+   "#fyp",
+   "#psychologie",
+   "#gehirn",
+   "#fakten",
+   "#alltag",
+   "#wissen",
+   "#viral"
+  ],
+  "tags": [
+   "gehirn fakten",
+   "psychologie",
+   "alltag",
+   "seltsames Verhalten",
+   "menschen",
+   "wissen",
+   "lustige fakten",
+   "gedanken"
+  ],
+  "thumb_text": "GEHIRN MACHT SACHEN",
+  "missing": [
+   "raum"
+  ],
+  "cover_ms": 63423,
+  "duration": 63.3,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
