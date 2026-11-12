@@ -486,6 +486,9 @@ def learn(words):
         sheet.save(THUMBS / "bibliothek.jpg", quality=88)
 
 
+SLOT_TRIES = 3                     # so oft wird ein Termin-Video versucht, bevor der Termin ausfällt
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("action", nargs="?", default="auto")
@@ -508,6 +511,13 @@ def main(argv=None):
                 except Exception as e:  # noqa: BLE001
                     failed = True
                     log(f"FEHLER: {e}")
+                    tries = STATE.setdefault("slot_tries", {})
+                    tries[slot] = tries.get(slot, 0) + 1
+                    for k in [k for k in tries if k < slot[:10]]:  # alte Zähler aufräumen
+                        tries.pop(k, None)
+                    if tries[slot] < SLOT_TRIES:          # Termin nicht verlieren: beim nächsten Lauf (30 min) neu versuchen
+                        STATE["done_slots"] = [d for d in STATE["done_slots"] if d != slot]
+                        log(f"Termin {slot} wird beim nächsten Lauf erneut versucht ({tries[slot]}/{SLOT_TRIES})")
             for vid in review_stale():                  # wartet seit Stunden auf die Prüfung: nicht liegen lassen
                 try:
                     log(f"Video {vid} wurde nicht geprüft – lade es jetzt hoch")

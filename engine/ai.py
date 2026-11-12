@@ -26,6 +26,14 @@ TIMEOUT = 180
 W, H = 1080, 1920
 
 
+_T0 = time.time()
+WAIT_BUDGET = 14 * 60          # so lange darf ein Lauf insgesamt auf gestörte Text-KIs warten (GitHub bricht nach 30 Minuten ab)
+
+
+def _may_wait():
+    return time.time() - _T0 < WAIT_BUDGET
+
+
 class ProviderError(Exception):
     pass
 
@@ -51,10 +59,49 @@ def _parse_json(txt: str) -> dict:
             return js
     except ValueError:
         pass
-    js = json.loads(txt[a:b + 1])
+    try:
+        js = json.loads(txt[a:b + 1])
+    except ValueError:
+        js = _repair_json(txt[a:])
     if not isinstance(js, dict):
         raise ProviderError("Antwort ist kein JSON-Objekt")
     return js
+
+
+def _repair_json(txt: str):
+    """Rettet typische Fehler freier Modelle: Komma vor } oder ], Zeilenumbrüche in Zeichenketten und – am häufigsten –
+    ungeschützte Anführungszeichen im Text (deutsch „Wort" mit geradem Schlusszeichen). Abgeschnittene Antworten werden NICHT
+    ergänzt (sonst entstünde ein zu kurzes Drehbuch): dann kommt der ursprüngliche Fehler und der Anbieter wird neu gefragt."""
+    t = re.sub(r",\s*([}\]])", r"\1", txt)
+    try:
+        return json.loads(t)
+    except ValueError as e:
+        first = e
+    out, in_str, esc, n = [], False, False, len(t)
+    for i, ch in enumerate(t):
+        if in_str:
+            if esc:
+                esc = False
+            elif ch == "\\":
+                esc = True
+            elif ch == '"':
+                j = i + 1
+                while j < n and t[j] in " \t\r\n":
+                    j += 1
+                if j < n and t[j] not in ",:}]":      # kein Ende der Zeichenkette, sondern ein Anführungszeichen im Text
+                    out.append('\\"')
+                    continue
+                in_str = False
+            elif ch == "\n":
+                out.append("\\n")
+                continue
+        elif ch == '"':
+            in_str = True
+        out.append(ch)
+    try:
+        return json.loads(re.sub(r",\s*([}\]])", r"\1", "".join(out)))
+    except ValueError:
+        raise first
 
 
 GEMINI_TEXT = ("gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-flash-lite-latest")
@@ -72,33 +119,66 @@ def _gemini(system, user, temperature):
     models = [chosen] + [m for m in GEMINI_TEXT if m != chosen]
     gc = {"temperature": temperature, "responseMimeType": "application/json", "maxOutputTokens": 16384}
     body = {"systemInstruction": {"parts": [{"text": system}]}, "contents": [{"role": "user", "parts": [{"text": user}]}]}
-    last = None
-    for m in models + models:          # zweite Runde nach kurzer Pause: Überlastung (503) ist meist nach Sekunden vorbei
-        if m == models[0] and last is not None:
-            time.sleep(25)
-        for think in ({"thinkingLevel": "low"}, None):
-            cfg_ = {**gc, "thinkingConfig": think} if think else gc
-            try:
-                r = requests.post(f"https://generativelanguage.googleapis.com/v1beta/models/{m}:generateContent",
-                                  headers={"x-goog-api-key": key}, json={**body, "generationConfig": cfg_}, timeout=70)
-            except requests.RequestException as e:
-                last = f"{m}: {type(e).__name__}"
+    last, busy = None, 0
+    waits = (0, 20, 45, 90)            # Überlastung (503) hält manchmal Minuten an: mehrere Runden mit wachsender Pause
+    for rnd, wait in enumerate(waits):
+        if rnd:
+            if not busy or not _may_wait():   # kein Überlastungs-Fehler (z. B. Schlüssel ungültig) oder Zeit aufgebraucht
                 break
-            if r.status_code == 400 and think:
-                continue                      # Modell kennt die Denk-Vorgabe nicht → ohne
-            if r.status_code != 200:
-                last = f"{m}: HTTP {r.status_code}"
-                break
-            try:
-                parts = r.json()["candidates"][0]["content"]["parts"]
-                txt = "".join(p.get("text", "") for p in parts if not p.get("thought"))
-                _parse_json(txt)
-                return txt
-            except Exception as e:  # noqa: BLE001
-                last = f"{m}: ungültige Antwort ({str(e)[:60]})"
-                break
-        log(f"Gemini {last} – versuche Ersatzmodell")
+            if rnd == 1:
+                models += [m for m in _gemini_more(key) if m not in models][:2]
+            log(f"Gemini ausgelastet – neuer Versuch in {wait} s (Runde {rnd + 1}/{len(waits)})")
+            time.sleep(wait)
+        busy = 0
+        for m in models:
+            for think in ({"thinkingLevel": "low"}, None):
+                cfg_ = {**gc, "thinkingConfig": think} if think else gc
+                try:
+                    r = requests.post(f"https://generativelanguage.googleapis.com/v1beta/models/{m}:generateContent",
+                                      headers={"x-goog-api-key": key}, json={**body, "generationConfig": cfg_}, timeout=70)
+                except requests.RequestException as e:
+                    last = f"{m}: {type(e).__name__}"
+                    busy += 1
+                    break
+                if r.status_code == 400 and think:
+                    continue                      # Modell kennt die Denk-Vorgabe nicht → ohne
+                if r.status_code != 200:
+                    last = f"{m}: HTTP {r.status_code}"
+                    busy += r.status_code in (429, 500, 502, 503, 504)
+                    break
+                try:
+                    parts = r.json()["candidates"][0]["content"]["parts"]
+                    txt = "".join(p.get("text", "") for p in parts if not p.get("thought"))
+                    _parse_json(txt)
+                    return txt
+                except Exception as e:  # noqa: BLE001
+                    last = f"{m}: ungültige Antwort ({str(e)[:60]})"
+                    busy += 1
+                    break
+            log(f"Gemini {last} – versuche Ersatzmodell")
     raise ProviderError(f"Gemini: {last}")
+
+
+_MORE = None
+
+
+def _gemini_more(key):
+    """Weitere Flash-Textmodelle, die der Schlüssel gerade kennt (falls die Standard-Modelle überlastet sind)."""
+    global _MORE
+    if _MORE is None:
+        _MORE = []
+        try:
+            r = requests.get("https://generativelanguage.googleapis.com/v1beta/models", headers={"x-goog-api-key": key},
+                             params={"pageSize": 200}, timeout=20)
+            for it in r.json().get("models", []) if r.status_code == 200 else []:
+                n = str(it.get("name", "")).split("/")[-1]
+                if ("flash" in n and "generateContent" in (it.get("supportedGenerationMethods") or [])
+                        and not re.search(r"tts|image|audio|live|embed|vision|exp|thinking", n)):
+                    _MORE.append(n)
+            _MORE.sort(key=lambda n: ("lite" in n, "preview" in n, n), reverse=False)
+        except Exception as e:  # noqa: BLE001
+            log(f"Gemini-Modellliste: {e}")
+    return _MORE
 
 
 def _openai_text(system, user, temperature):
@@ -157,15 +237,32 @@ TEXT_PROVIDERS = {"gemini": _gemini, "openai": _openai_text, "pollinations": _po
 
 
 def chat_json(system: str, user: str, temperature: float = 0.9) -> tuple[dict, str]:
+    """JSON von der Text-KI. Reihenfolge: gewählter Anbieter, dann die übrigen. Sind alle nur vorübergehend gestört
+    (überlastet, Zeitüberschreitung, kaputtes JSON), wird nach zwei Minuten noch eine Runde versucht."""
     chosen = cfg("text_provider") or "gemini"
     order = [chosen] + [p for p in ("gemini", "pollinations") if p != chosen]
     errors = []
-    for p in order:
-        try:
-            return _parse_json(TEXT_PROVIDERS[p](system, user, temperature)), p
-        except Exception as e:  # noqa: BLE001
-            errors.append(f"{p}: {e}")
+    for rnd in range(2):
+        errors = []
+        for p in order:
+            for attempt in range(2 if p == "pollinations" else 1):   # freies Modell: kaputtes JSON → noch einmal fragen
+                try:
+                    return _parse_json(TEXT_PROVIDERS[p](system, user, temperature)), p
+                except Exception as e:  # noqa: BLE001
+                    err = f"{p}: {e}"
+                    if attempt == 0 and p == "pollinations" and isinstance(e, ValueError):
+                        log("Pollinations lieferte ungültiges JSON – frage noch einmal")
+                        continue
+                    errors.append(err)
+                    break
             log(f"Text über {p} fehlgeschlagen, versuche nächsten Anbieter …")
+        temporary = all(re.search(r"HTTP (429|5\d\d)|Timeout|ConnectionError|JSON|delimiter|Expecting|Unterminated|ungültige Antwort|nicht erreichbar|Limit", e)
+                        for e in errors)
+        if rnd == 0 and temporary and secret("GEMINI_API_KEY") and _may_wait():
+            log("Alle Text-Anbieter gerade gestört – warte 2 Minuten und versuche es noch einmal")
+            time.sleep(120)
+            continue
+        break
     hint = " Tipp: Gemini-Schlüssel in der App unter Einstellungen → Zugangsdaten speichern." \
         if not os.environ.get("GEMINI_API_KEY") else ""
     raise ProviderError("Kein Text-Anbieter erreichbar. " + " | ".join(errors) + hint)
