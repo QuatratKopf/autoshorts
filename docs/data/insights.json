@@ -1,5 +1,5 @@
 {
- "updated": 1794504891.7516346,
+ "updated": 1794505251.2534566,
  "enough": false,
  "counted": 5,
  "total": 6,
@@ -9,19 +9,19 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 4,
-   "avg_views": 1249,
+   "avg_views": 1250,
    "avg_likes": 27.5,
    "like_rate": 2.2,
-   "avg_score": 1669
+   "avg_score": 1670
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 1,
-   "avg_views": 529,
+   "avg_views": 522,
    "avg_likes": 14.0,
-   "like_rate": 2.65,
-   "avg_score": 739
+   "like_rate": 2.68,
+   "avg_score": 732
   }
  ],
  "weights": {
@@ -42,11 +42,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2348,
+   "views": 2349,
    "likes": 54,
    "comments": 0,
    "shares": 0,
-   "score": 3158
+   "score": 3159
   },
   {
    "id": 54,
@@ -72,11 +72,11 @@
    "id": 58,
    "title": "Wie aus einer Gaming-Bude der wertvollste Tech-Gigant wurde",
    "category": "fakten",
-   "views": 529,
+   "views": 522,
    "likes": 14,
    "comments": 0,
    "shares": 0,
-   "score": 739
+   "score": 732
   },
   {
    "id": 44,
