@@ -2123,7 +2123,7 @@
   "id": 65,
   "category": "fakten",
   "topic": "3 bizarre Reaktionen unseres Gehirns im Alltag, die null Sinn ergeben, aber jeder von uns hat",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1794498576.03017,
   "title": "3 Gehirn-Macken: Warum macht dein Kopf das?",
   "description": "Dein Gehirn baut täglich richtig komischen Mist!\nVon Geister-Vibrationen bis zum schrecklichen Türschwellen-Effekt.\nWelche dieser drei Macken nervt dich am meisten?",
@@ -2155,6 +2155,7 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Straße mit Passanten beim Satz über Schlafen/Wecken, Untertitel über dem Gesicht der Gehirn-Figur"
  }
 ]
