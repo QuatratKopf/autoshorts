@@ -196,6 +196,25 @@ def main():
                 im = stage._camera(fr, t, 3.0, cam)
                 assert im.size == (1080, 1920)
     check("Kamera Halbnahe", _cam)
+    def _unspoken():                                             # erfundene Zahlen in Grafik/Einblendung fliegen raus, gesprochene bleiben; liegende Figur ohne Großaufnahme
+        scs = [{"text": "Dazu kommt der berühmte digitale Kartenregen.", "place": "office", "shot": "graphic",
+                "graphic": {"type": "number", "value": "1.000.000", "label": "DIGITALE KARTEN"}},
+               {"text": "Aber im echten Leben scheitert fast jeder davon.", "place": "livingroom", "mood": "tense", "overlay": {"type": "card", "text": "NULL PROZENT"},
+                "actors": [{"id": "du", "action": "fall", "emotion": "scared", "speaks": True}]},
+               {"text": "Du bist zweiundsiebzig Stunden auf dich allein gestellt.", "place": "livingroom", "shot": "graphic",
+                "graphic": {"type": "badge", "kicker": "MIND.", "text": "72 STUNDEN"}},
+               {"text": "Am Ende lernst du das im Lehrbuch.", "place": "classroom", "actors": [{"id": "du", "speaks": True}]}]
+        stage.direct(scs, [(i * 3.5, i * 3.5 + 3.5) for i in range(4)], "Test", "fakten", "")
+        assert not scs[0].get("graphic") and scs[0].get("shot") != "graphic", "ungesprochene Zahl blieb als Grafik stehen"
+        assert not scs[1].get("overlay"), "ungesprochene Zahl blieb als Einblendung stehen"
+        assert (scs[2].get("graphic") or {}).get("type") == "badge", "gesprochene Zahl wurde entfernt"
+        _pl, _n, _s, acts, props, _w = stage._prepare(scs[1], {"du": {}})
+        assert stage._cut_plan(scs[1], "", None, False, False, "livingroom", acts, props, 3.6, {"punch": 1.5}, 0)[1] != "close", "Großaufnahme schneidet die liegende Figur an"
+        from .. import writer
+        assert writer.fix_eszett("Ausser der Masse auf der Strasse") == "Außer der Masse auf der Straße"
+        js = writer.polish({"scenes": [{"text": "x", "graphic": {"type": "badge", "kicker": "GEHIRN-EFFECT", "text": "KONTROLLE"}}]})
+        assert js["scenes"][0]["graphic"]["kicker"] == "GEHIRN-EFFEKT"
+    check("Erfundene Zahlen, liegende Figur, ß", _unspoken)
     for pl in ("street", "park", "village", "livingroom"):           # Nachtlicht, Großaufnahme bei Nacht, Tier in Großaufnahme
         for kind in ("", "dog", "ghost"):
             check(f"Nacht {pl} {kind}", lambda: frame({"place": pl, "time": "night", "actors": [{"id": "x", "kind": kind, "speaks": True}], "crowd": "walk"}))

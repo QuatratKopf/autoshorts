@@ -253,6 +253,24 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, 
         v["trend"] = {"title": trend["title"], "source": trend["source"]}
     log(f"Kategorie: {cat['emoji']} {cat['name']}")
     try:
+        if plan.get("script"):                           # vorbereitetes Drehbuch: reicht es noch für die Mindestlänge?
+            wps_p = float(STATE.get("voice_wps") or 0)
+            wps_p = wps_p if 1.6 <= wps_p <= 3.6 else 2.5
+            n_plan = writer.spoken_words(plan["script"])
+            min_p = float(cfg("min_seconds") or 0)
+            if min_p and n_plan / wps_p < min_p - 5:      # viel zu kurz: sonst stünde am Ende sekundenlang ein stummes Standbild
+                log(f"Vorbereitetes Drehbuch ist zu kurz ({n_plan} Wörter ≈ {n_plan / wps_p:.0f} s) – schreibe es zum selben Thema neu")
+                try:
+                    _t, _tr, fresh, prov = draft(cat, topic, trend, v)
+                    if writer.spoken_words(fresh) > n_plan:
+                        plan = {**plan, "script": fresh, "provider": prov, "needs": missing_things(fresh, topic) if fresh.get("toon") else []}
+                except Exception as e:  # noqa: BLE001
+                    log(f"Neu schreiben nicht möglich ({e}) – nehme das vorbereitete Drehbuch")
+            else:
+                try:
+                    plan["script"] = writer.polish(plan["script"])       # ß und deutsche Einblendungen auch bei älteren Plänen
+                except Exception:  # noqa: BLE001
+                    pass
         if plan.get("script"):                           # vorbereitetes Drehbuch (am Vortag geplant, Fehlendes inzwischen nachgebaut)
             script, used["text"] = plan["script"], plan.get("provider") or "Plan"
             v["topic"] = topic

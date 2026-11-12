@@ -361,6 +361,65 @@ def fix_umlauts(js):
     return walk(js)
 
 
+_ESZETT = [("ausser", "außer"), ("draussen", "draußen"), ("schliesslich", "schließlich"), ("heiss", "heiß"), ("weiss", "weiß"), ("gross", "groß"),
+           ("grösst", "größt"), ("grösser", "größer"), ("strasse", "straße"), ("spass", "spaß"), ("fuss", "fuß"), ("füsse", "füße"), ("mass", "maß"),
+           ("regelmässig", "regelmäßig"), ("gemäss", "gemäß"), ("mässig", "mäßig"), ("fleissig", "fleißig"), ("süss", "süß"), ("stoss", "stoß"),
+           ("stösst", "stößt"), ("schliess", "schließ"), ("reiss", "reiß"), ("beiss", "beiß"), ("giess", "gieß"), ("fliess", "fließ"), ("geniess", "genieß"),
+           ("schiess", "schieß"), ("weisst", "weißt"), ("heisst", "heißt"), ("blos", "bloß"), ("gruss", "gruß"), ("grüss", "grüß"), ("dreissig", "dreißig")]
+_ESZETT_RE = re.compile(r"\b(?:" + "|".join(sorted({a for a, _ in _ESZETT if a != "blos" and a != "mass"}, key=len, reverse=True)) + r")\w*|\b(?:blos|mass)\b", re.I)
+_ESZETT_KEEP = re.compile(r"(?i)^(masse\w*|massiv\w*|massen\w*|massage\w*|grossist\w*|weissag\w*|fussel\w*|strasser|mässigen)$")
+_DENGLISH = {"effect": "Effekt", "effects": "Effekte", "fact": "Fakt", "facts": "Fakten", "physics": "Physik", "brain": "Gehirn", "control": "Kontrolle",
+             "magic": "Magie", "science": "Wissenschaft", "energy": "Energie", "danger": "Gefahr", "warning": "Warnung", "error": "Fehler",
+             "result": "Ergebnis", "the end": "Ende", "logic": "Logik"}
+_DENGLISH_RE = re.compile(r"(?<![\w-])(?:" + "|".join(sorted(map(re.escape, _DENGLISH), key=len, reverse=True)) + r")(?![\w])", re.I)
+
+
+def _case_like(src, rep):
+    return rep.upper().replace("ß".upper(), "ß") if src.isupper() and len(src) > 1 else rep.capitalize() if src[:1].isupper() else rep
+
+
+def fix_eszett(text, upper_ss=False):
+    """„Ausser“, „gross“, „Strasse“ → mit ß (häufige Wortstämme; „Masse“, „massiv“ bleiben). In GROSSBUCHSTABEN bleibt SS, wenn upper_ss."""
+    def rep(m):
+        w = m.group(0)
+        if _ESZETT_KEEP.match(w) or (w.isupper() and upper_ss):
+            return w
+        low = w.lower()
+        for a, b in sorted(_ESZETT, key=lambda ab: -len(ab[0])):
+            if low.startswith(a):
+                out = b + low[len(a):]
+                return out.upper().replace("SS", "SS") if w.isupper() else out.capitalize() if w[:1].isupper() else out
+        return w
+    return _ESZETT_RE.sub(rep, str(text))
+
+
+def polish(js):
+    """Letzter Schliff ohne Text-KI: ß in Sprechertext, Titel und Beschreibung; englische Wörter in Einblendungen und Grafiken
+    („GEHIRN-EFFECT“) werden deutsch."""
+    for k in ("title", "description"):
+        if isinstance(js.get(k), str):
+            js[k] = fix_eszett(js[k])
+    for sc in js.get("scenes", []):
+        if not isinstance(sc, dict):
+            continue
+        if isinstance(sc.get("text"), str):
+            sc["text"] = fix_eszett(sc["text"])
+        for box in (sc.get("overlay"), sc.get("graphic")):
+            if isinstance(box, dict):
+                for k in _LABEL_KEYS:
+                    if isinstance(box.get(k), str):
+                        v = re.sub(r"(?i)(?<=[a-zäöü]-)(effects?|facts?)\b", lambda m: _case_like(m.group(0), _DENGLISH[m.group(0).lower()]), box[k])
+                        box[k] = fix_eszett(_DENGLISH_RE.sub(lambda m: _case_like(m.group(0), _DENGLISH[m.group(0).lower()]), v), upper_ss=True)
+    th = js.get("thumbnail")
+    if isinstance(th, dict) and isinstance(th.get("text"), str):
+        th["text"] = _DENGLISH_RE.sub(lambda m: _case_like(m.group(0), _DENGLISH[m.group(0).lower()]), th["text"])
+    return js
+
+
+def spoken_words(js):
+    return sum(len(str(x.get("text", "")).split()) for x in js.get("scenes", []) if isinstance(x, dict))
+
+
 def _insight(cat):
     """Was laut Analyse beim Publikum gut ankommt (leer, solange zu wenig Daten da sind oder die Steuerung aus ist)."""
     try:
@@ -699,18 +758,22 @@ def write_script(cat: dict, topic: str, trend=None, source=None) -> tuple[dict, 
                 js = js2
         except Exception as e:  # noqa: BLE001
             ai.log(f"Kürzen nicht möglich ({e}) – nehme den ersten Entwurf")
-    elif n_words < words * 0.88:     # zu kurz geraten → einmal verlängern lassen (Video soll sicher über der Mindestlänge liegen)
-        ai.log(f"Drehbuch hat nur {n_words} Wörter statt {words} – lasse es verlängern")
-        try:
-            js2, provider = ai.chat_json(SYSTEM, user + f"\n\nACHTUNG: Dein letzter Entwurf hatte nur {n_words} Wörter Sprechertext – das Video wird zu kurz. "
-                                         f"Schreibe das Drehbuch neu mit {round(words * 0.95)} bis {round(words * 1.05)} Wörtern insgesamt: mehr konkrete Folgen, "
-                                         f"Zahlen und Beispiele, keine Füllsätze. Etwa {max(8, round(words / scenes))} Wörter pro Szene, "
-                                         f"{scenes} bis {scenes + 2} Szenen.", 0.8)
-            n2 = sum(len(str(x.get("text", "")).split()) for x in js2.get("scenes", []) if isinstance(x, dict))
-            if n_words < n2 <= words * 1.3:
-                js = js2
-        except Exception as e:  # noqa: BLE001
-            ai.log(f"Verlängern nicht möglich ({e}) – nehme den ersten Entwurf")
+    elif n_words < words * 0.88:     # zu kurz geraten → verlängern lassen (Video soll sicher über der Mindestlänge liegen, ohne stummen Ausklang)
+        for _try in range(2):        # bis zu zwei Anläufe: ein zu kurzes Drehbuch endet sonst mit sekundenlangem Standbild ohne Sprecher
+            ai.log(f"Drehbuch hat nur {n_words} Wörter statt {words} – lasse es verlängern")
+            try:
+                js2, provider = ai.chat_json(SYSTEM, user + f"\n\nACHTUNG: Dein letzter Entwurf hatte nur {n_words} Wörter Sprechertext – das Video wird zu kurz. "
+                                             f"Schreibe das Drehbuch neu mit {round(words * 0.95)} bis {round(words * 1.05)} Wörtern insgesamt: mehr konkrete Folgen, "
+                                             f"Zahlen und Beispiele, keine Füllsätze. Etwa {max(9, round(words / scenes) + _try)} Wörter pro Szene, "
+                                             f"{scenes} bis {scenes + 2} Szenen. Zähle die Wörter jeder Szene nach, bevor du antwortest.", 0.8)
+                n2 = sum(len(str(x.get("text", "")).split()) for x in js2.get("scenes", []) if isinstance(x, dict))
+                if n_words < n2 <= words * 1.3:
+                    js, n_words = js2, n2
+            except Exception as e:  # noqa: BLE001
+                ai.log(f"Verlängern nicht möglich ({e}) – nehme den bisherigen Entwurf")
+                break
+            if n_words >= words * 0.88:
+                break
     for attempt in range(2):                             # fremde Schriftzeichen mitten im Wort: das Drehbuch ist verdorben → neu schreiben lassen
         bad = foreign_in(js)
         if not bad:
@@ -759,6 +822,10 @@ def write_script(cat: dict, topic: str, trend=None, source=None) -> tuple[dict, 
             js = proofread(js, topic)
         except Exception as e:  # noqa: BLE001
             ai.log(f"Lektorat nicht möglich ({e}) – nehme den Text, wie er ist")
+    try:
+        js = polish(js)
+    except Exception:  # noqa: BLE001
+        pass
     if toon and not has_storyboard(js):
         ai.log("Drehbuch kam ohne Bildplan – lasse ihn eigens ausarbeiten")
         try:

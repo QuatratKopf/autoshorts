@@ -850,6 +850,33 @@ def spoken_number(value, text):
     return any(abs(n - v) < 1e-6 or abs(n * 1000 - v) < 1e-6 or abs(n * 1e6 - v) < 1e-3 or abs(n * 1e9 - v) < 1 for n in nums)
 
 
+FIGURE_GFX = ("number", "badge", "houses", "share", "compare", "distance", "days", "pulse", "calendar", "timer")
+_FIG_WORDS = set(_SCALE) | {"prozent", "hundert", "tausend"}
+
+
+def unspoken_figures(box, text):
+    """Steht in einer Grafik oder Einblendung eine Zahl (Ziffern oder Zahlwort wie „NULL PROZENT“), die der Sprecher im Satz
+    (oder im Satz davor) nicht nennt? Solche Zahlen hat die Text-KI erfunden – der Zuschauer hört sie nie."""
+    import re as _re
+    said = str(text or "")
+    low = said.lower()
+    for k in ("value", "text", "label", "sub", "kicker", "unit"):
+        v = box.get(k)
+        if isinstance(v, bool) or not isinstance(v, (str, int, float)):
+            continue
+        v = str(v)
+        for m in _re.finditer(r"\d[\d.]*(?:,\d+)?", v):
+            if not spoken_number(m.group(0), said) and not _re.search(r"(?<![\d.,])" + _re.escape(m.group(0)) + r"(?![\d])", said):
+                return True
+        ws = [w.lower().strip(".,;:!?%") for w in v.replace("-", " ").split()]
+        for j, w in enumerate(ws):
+            n = _number(w) if w not in ("ein", "eine", "einen", "einem", "einer", "eins", "acht", "halb", "halbe") else None
+            if n is not None and not w.replace(".", "").replace(",", "").isdigit() and (w == "null" or (j + 1 < len(ws) and (ws[j + 1] in _FIG_WORDS or ws[j + 1] in _UNITS))):
+                if w not in low and not spoken_number(n, said):
+                    return True
+    return False
+
+
 def _lead_number(value):
     import re as _re
     m = _re.search(r"\d[\d.]*(?:,\d+)?", str(value))
@@ -932,6 +959,12 @@ def direct(scenes, times, topic="", style="", look=""):
                 g0.pop("label", None)
         if ov_c and str(ov_c.get("type") or "") == "counter" and not spoken_number(ov_c.get("value"), sc["text"]):
             sc["overlay"] = None                          # Zahl in der Einblendung, die der Sprecher gar nicht nennt: weg damit
+        said_c = sc["text"] + " " + (str(scenes[i - 1].get("text") or "") if i and isinstance(scenes[i - 1], dict) else "")
+        if g0 and g0.get("type") in FIGURE_GFX and unspoken_figures(g0, said_c):
+            sc["graphic"], g0 = None, None                # Grafik mit einer Zahl, die niemand sagt („1.000.000 KARTEN“, „100 % KONTROLLE“): erfunden – weg
+            sc["shot"] = "" if sc.get("shot") == "graphic" else sc.get("shot")
+        if ov_c and sc.get("overlay") and str(ov_c.get("type") or "") in ("card", "counter", "note", "stamp") and unspoken_figures(ov_c, said_c):
+            sc["overlay"] = None
         has_bd = isinstance(sc.get("backdrop"), dict) and (sc["backdrop"].get("elements") or sc["backdrop"].get("ground"))
         hint = None if has_bd else _hint(sc.get("text"))
         said = None if has_bd or place in MAPS else _said_place(sc.get("text"))
@@ -1986,7 +2019,8 @@ def _cut_plan(scene, shot, special, moving, ov_tall, place, actors, props, dur, 
         return None, "", []
     named = [k for k, _ in props if extras.prop_fit(k) and extras.PROP_ALIASES.get(k, k) not in DULL
              and extras.PROP_ALIASES.get(k, k) not in PLACE_HAS.get(place, ())]
-    kind = "insert" if named and index % 2 == 0 else "close" if 0 < len(actors) <= 2 else "insert" if named else ""   # Gruppen nicht anschneiden
+    down = any(a.get("action") in ("fall", "sleep", "sit", "float") for a in actors)      # liegt, sitzt oder schwebt jemand, schneidet die Großaufnahme ihn an
+    kind = "insert" if named and index % 2 == 0 else "close" if 0 < len(actors) <= 2 and not down else "insert" if named else ""   # Gruppen nicht anschneiden
     if not kind:
         return None, "", []
     pt = cam.get("punch")
@@ -2022,6 +2056,10 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     if actors and shot != "close" and not ov_tall and place not in MAPS and not scene.get("float") and str(scene.get("shot") or "") != "event":
         xs = [a["x1"] for a in actors] + [a["x0"] for a in actors if -100 < a["x0"] < W + 100]
         xs += [x for k, x in props if extras.prop_fit(k) and 0 <= x <= W]   # auch der Gegenstand, von dem der Satz spricht, bleibt ganz im Bild
+        for a_l in actors:                                              # wer umfällt oder liegt, ist so breit wie sonst hoch: ganz im Bild lassen
+            if a_l.get("action") in ("fall", "sleep"):
+                xs += [a_l["x1"] - 200, a_l["x1"] + 60]
+                cam["punch"] = None                                         # kein Sprung auf den Kopf – der läge dann am Bildrand
         span = max(xs) - min(xs) + 420                                  # Breite der Gruppe samt Armen
         cam.update(tight=True, zt=max(1.0, min(1.42, W / span)), fx=(max(xs) + min(xs)) / 2)
     cam_flat = {"flat": True, "dir": cam["dir"], "drift": cam["drift"]}
