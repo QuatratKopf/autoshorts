@@ -2230,7 +2230,7 @@
   "id": 70,
   "category": "fakten",
   "topic": "3 bizarre Reaktionen unseres Gehirns im Alltag, die null Sinn ergeben, aber jeder von uns hat",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1794503664.3213348,
   "title": "3 bizarre Reaktionen unseres Gehirns im Alltag",
   "description": "Dein Gehirn macht manchmal komplett seltsame Dinge\nWir zeigen dir drei alltägliche Reaktionen, die keinen Sinn ergeben\nWelcher dieser Momente passiert dir auch ständig",
@@ -2272,6 +2272,7 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: fast nur dasselbe Wohnzimmer, Bild passt nicht zu den Sätzen, leeres Bild, 103 s – Text-KI ohne Bildplan"
  }
 ]
