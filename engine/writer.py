@@ -138,7 +138,8 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
            {"sky": "day|night|sunset|storm|red|haze", "ground": "grass|sand|snow|road|rock|soil|dry|water|ice|lava",
             "elements": [bis zu 4 aus: mountains, hills, dunes, forest, trees, deadtrees, palms, cactus, city (Skyline),
                          street (Häuserzeile), village, ruins, factory, powerplant, farm, gasstation, bridge, powerlines,
-                         windturbines, camp, graves, sea, glacier, fields, river, dryriver, lake, cracks, rocks, flowers]}
+                         windturbines, camp, graves, sea, glacier, fields, river, dryriver, lake, cracks, rocks, flowers,
+                         asphalt (aufgerissene Fahrbahn mit hochgedrückten Platten – für Asphalt, kaputte Straßen)]}
            Beispiele: Wald mit Fluss = {"elements": ["forest", "river"]} · Dürre = {"sky": "haze", "ground": "dry",
            "elements": ["deadtrees", "dryriver"]} · Bauernhof = {"elements": ["farm", "fields"]} · zerstörte Stadt =
            {"sky": "red", "ground": "road", "elements": ["ruins"]} · Bergsee = {"elements": ["mountains", "lake", "flowers"]}

@@ -963,6 +963,35 @@ def _fg_cracks(p, rnd, xr=(0, W)):
         p.d.line(pts, fill=p.c((120, 90, 60)), width=6, joint="curve")
 
 
+def _fg_asphalt(p, rnd):
+    """Aufgerissener Asphalt: Flickstellen, ein breiter Riss quer über die Fahrbahn, hochgedrückte Platten und Brocken."""
+    top, bot = 1046, 1216                                         # Fahrbahn des Bodens "road"
+    for _ in range(5):                                            # dunklere Flickstellen im Belag
+        x, y, w = rnd.randint(-40, W - 120), rnd.randint(top + 8, bot - 50), rnd.randint(120, 260)
+        p.rect((x, y, x + w, y + rnd.randint(26, 44)), (70, 72, 82), r=10, o=0)
+    x, pts = -20, []
+    while x < W + 60:                                             # Riss: Zickzack quer durchs Bild
+        pts.append((x, 1100 + rnd.randint(-34, 34)))
+        x += rnd.randint(70, 130)
+    gap = [(x, y - rnd.randint(8, 20)) for x, y in pts] + [(x, y + rnd.randint(10, 24)) for x, y in reversed(pts)]
+    p.poly(gap, (34, 32, 38), o=5)
+    p.d.line([(x, y + 4) for x, y in pts], fill=p.c((20, 18, 22)), width=6, joint="curve")
+    for x, y in pts[1:-1:2]:                                      # feine Seitenrisse
+        dx = rnd.choice((-1, 1)) * rnd.randint(40, 90)
+        s = rnd.choice((-1, 1))
+        p.d.line((x, y, x + dx * 0.5, y + s * 26, x + dx, y + s * rnd.randint(40, 62)), fill=p.c((40, 38, 46)), width=5, joint="curve")
+    for cx in (rnd.randint(150, 330), rnd.randint(690, 900)):     # hochgedrückte Platten mit heller Bruchkante
+        w, tilt = rnd.randint(150, 210), rnd.choice((-1, 1))
+        y0 = 1112
+        a, b = (cx - w / 2, y0 + (10 if tilt > 0 else -52)), (cx + w / 2, y0 + (-52 if tilt > 0 else 10))
+        p.poly([a, b, (b[0], b[1] + 30), (a[0], a[1] + 30)], (132, 122, 112), o=5)                  # Bruchkante (Schotter darunter)
+        p.poly([a, b, (b[0] + 26, b[1] - 22), (a[0] + 26, a[1] - 22)], (104, 106, 116), o=5)        # Oberseite der Platte
+        p.d.line((a[0] + 18, a[1] - 8, b[0] + 8, b[1] - 8), fill=p.c((250, 240, 200)), width=6)     # Rest der Mittellinie
+    for _ in range(9):                                            # Brocken
+        x, y, s = rnd.randint(0, W), rnd.randint(top + 20, bot - 16), rnd.randint(12, 26)
+        p.poly([(x, y), (x + s, y - s * 0.7), (x + s * 1.9, y - s * 0.2), (x + s * 1.6, y + s * 0.5), (x + s * 0.3, y + s * 0.5)], (96, 98, 108), o=4)
+
+
 def _fg_rocks(p, rnd):
     for _ in range(7):
         x, y, w = rnd.randint(0, W), rnd.randint(BASE + 10, H - 300), rnd.randint(70, 170)
@@ -1219,10 +1248,11 @@ BACK = {"mountains": _el_mountains, "hills": _el_hills, "dunes": _el_dunes, "for
         "deadtrees": _el_deadtrees, "city": _el_city, "village": _el_village, "ruins": _el_ruins, "factory": _el_factory,
         "farm": _el_farm, "sea": _el_sea, "glacier": _el_glacier}
 FRONT_EL = {"fields": _fg_fields, "river": _fg_river, "dryriver": _fg_dryriver, "lake": _fg_lake, "cracks": _fg_cracks,
-            "rocks": _fg_rocks, "flowers": _fg_flowers}
+            "rocks": _fg_rocks, "flowers": _fg_flowers, "asphalt": _fg_asphalt}
 EL_ALIASES = {"berge": "mountains", "hügel": "hills", "dünen": "dunes", "wald": "forest", "bäume": "trees", "stadt": "city",
               "dorf": "village", "ruinen": "ruins", "fabrik": "factory", "bauernhof": "farm", "meer": "sea", "gletscher": "glacier",
-              "felder": "fields", "feld": "fields", "fluss": "river", "see": "lake", "risse": "cracks", "steine": "rocks",
+              "felder": "fields", "feld": "fields", "fluss": "river", "see": "lake", "risse": "cracks", "steine": "rocks", "asphaltdecke": "asphalt",
+              "fahrbahn": "asphalt", "straßenbelag": "asphalt", "teer": "asphalt", "aufgerissene straße": "asphalt",
               "blumen": "flowers", "palmen": "palms", "kaktus": "cactus", "kakteen": "cactus", "straße": "street", "häuser": "street",
               "läden": "street", "geschäfte": "street", "shops": "street", "strommasten": "powerlines", "stromleitung": "powerlines",
               "windräder": "windturbines", "windrad": "windturbines", "tankstelle": "gasstation", "kraftwerk": "powerplant",
@@ -1241,6 +1271,8 @@ def norm_spec(spec):
     if ground not in GROUNDS:
         ground = ("sand" if ("dunes" in els or "palms" in els or "cactus" in els) else "snow" if "glacier" in els
                   else "road" if any(e in els for e in ("city", "ruins", "street", "gasstation")) else "soil" if "fields" in els else "grass")
+    if "asphalt" in els:
+        ground = "road"                                           # aufgerissener Asphalt liegt immer auf einer Fahrbahn
     return {"sky": str(spec.get("sky") or "").lower(), "ground": ground, "elements": els}
 
 
@@ -1305,7 +1337,7 @@ def compose(spec: dict, night=False):
         for _ in range(14):
             x, y = rnd.randint(0, W), rnd.randint(BASE + 40, H - 260)
             p.d.ellipse((x, y, x + rnd.randint(80, 220), y + rnd.randint(16, 40)), fill=(250, 130, 40))
-    for name in ("fields", "river", "dryriver", "lake", "cracks", "rocks", "flowers"):
+    for name in ("fields", "river", "dryriver", "lake", "cracks", "rocks", "flowers", "asphalt"):
         if name in els:
             FRONT_EL[name](p, rnd)
     hz = getattr(p, "haze_col", (60, 64, 120) if p.night else (206, 222, 250))

@@ -1567,6 +1567,7 @@ HINTS = [
     (r"\bkino|kinosaal|leinwand|hollywood|blockbuster|\bfilme?\b|\bfilmen\b|filmszene|regisseur|kinofilm", "cinema"),
     (r"fabrik|industrie|abgase|produktion", {"sky": "haze", "elements": ["factory", "city"]}),
     (r"\bdorf|dörfer", "village"),
+    (r"asphalt|fahrbahn|straßenbelag|straßendecke|\bteer\b|straßen? (reiß|brech|bricht|platz)|reißen .{0,40}straßen", {"ground": "road", "elements": ["street", "asphalt"]}),
     (r"ruinen|zerstört|trümmer|apokalypse", "ruins"),
     (r"\bstadt|städte|straße|verkehr|hochhaus|hochhäuser", "street"),
     (r"krankenh[aä]us|\barzt|ärzte|klinik|notaufnahme", "hospital"),

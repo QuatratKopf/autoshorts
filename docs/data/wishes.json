@@ -76,19 +76,23 @@
  },
  "gebäude": {
   "n": 2,
-  "last": "Was passiert, wenn die Schwerkraft für 5 Sekunden fehlt?"
+  "last": "Was passiert, wenn die Schwerkraft für 5 Sekunden fehlt?",
+  "done": true
  },
  "asphalt": {
   "n": 1,
-  "last": "Erde ohne Schwerkraft für 5 Sekunden: Was passiert wirklich?"
+  "last": "Erde ohne Schwerkraft für 5 Sekunden: Was passiert wirklich?",
+  "done": true
  },
  "luftdruck": {
   "n": 1,
-  "last": "Was passiert, wenn die Schwerkraft für 5 Sekunden fehlt?"
+  "last": "Was passiert, wenn die Schwerkraft für 5 Sekunden fehlt?",
+  "done": true
  },
  "möbel": {
   "n": 1,
-  "last": "Was passiert, wenn die Schwerkraft für 5 Sekunden fehlt?"
+  "last": "Was passiert, wenn die Schwerkraft für 5 Sekunden fehlt?",
+  "done": true
  },
  "ball": {
   "n": 1,
@@ -122,6 +126,7 @@
  },
  "aktie": {
   "n": 1,
-  "last": "Wie aus einer Gaming-Bude der wertvollste Tech-Gigant wurde"
+  "last": "Wie aus einer Gaming-Bude der wertvollste Tech-Gigant wurde",
+  "done": true
  }
 }
