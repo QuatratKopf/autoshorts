@@ -288,6 +288,8 @@ def main():
         assert kinds[3] == ["tardigrade"] and kinds[4] == ["tardigrade"] and kinds[5] == ["tardigrade"], f"Bärtierchen: {kinds[3:6]}"
         for sc_ in s2:
             frame(sc_, {"du": {"shirt": "blau"}})
+        assert not stage.spoken_number(700, "rund viertausend siebenhundert Grad") and stage.spoken_number(4700, "rund viertausend siebenhundert Grad"), "geteiltes Zahlwort"
+        assert stage.spoken_number(700, "siebenhundert Grad") and stage.spoken_number(3000, "dreitausend Menschen"), "Zahlwort"
     check("Meerestiere", _sea)
     def _hero():                                                 # Tier im Titel wird Hauptfigur: groß, mit Gefühl, nicht doppelt als Gegenstand
         scs = stage.direct([{"text": "Die Spinne sitzt in deinem Zimmer.", "place": "bedroom", "props": ["lib_tarantel"], "actors": [{"id": "du", "action": "shocked"}]},

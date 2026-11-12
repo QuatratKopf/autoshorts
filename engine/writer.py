@@ -446,6 +446,7 @@ def polish(js):
             sc["text"] = fix_eszett(sc["text"])
             sc["text"] = re.sub(r"(?i)\b([a-zäöüß]{4,}) \1\b", r"\1", sc["text"])      # „reine reine Fantasie“: versehentlich doppeltes Wort
             sc["text"] = re.sub(r"(?i)(zwei|drei|vier|fünf|sieben|acht|neun)s(hundert|tausend)", r"\1\2", sc["text"])   # „viertausendviershundert“
+            sc["text"] = re.sub(r"(?i)\b([a-zäöüß]*tausend) ((?:ein|zwei|drei|vier|fünf|sechs|sieben|acht|neun)hundert)", r"\1\2", sc["text"])   # „viertausend siebenhundert“: eine Zahl
         for box in (sc.get("overlay"), sc.get("graphic")):
             if isinstance(box, dict):
                 for k in _LABEL_KEYS:

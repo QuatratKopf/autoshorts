@@ -725,8 +725,8 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
             facing = 1 if x < 600 else -1
         gy = ((H - 70 if a["kind"] else CLOSE_FOOT) if close else places.GROUND) + (18 if a["speaks"] and not close else 0)   # Tiere sind niedrig: ganz im Bild
         a_lift, a_hit = _float_lift(flo, t, a["seed"], 190.0, aloft) if flo else (0.0, None)
-        if a["kind"] in SEA_KINDS and a["kind"] != "jelly" and a.get("hero") and not close and not props:
-            a_lift += 150 * scale                          # Schwimmer treiben über dem Grund – frei von der Untertitel-Zeile
+        if a["kind"] in SEA_KINDS and a.get("hero") and not close and not props:
+            a_lift += (70 if a["kind"] == "jelly" else 150) * scale                          # Schwimmer treiben über dem Grund – frei von der Untertitel-Zeile
         landed = a_hit if a_hit is not None and (landed is None or a_hit > landed) else landed
         head_y = gy - 505 * scale
         if a["kind"]:
@@ -948,10 +948,15 @@ def spoken_number(value, text):
     except (TypeError, ValueError):
         return True                                       # keine Zahl (Text-Zähler): nicht zu prüfen
     nums = []
+    prev_k = False
     for w in str(text or "").replace("-", " ").split():
         n = _number(w)
         if n is not None:
-            nums.append(n)
+            if prev_k and n < 1000 and nums:               # „viertausend siebenhundert“ ist eine Zahl (4700) – nicht 4000 und 700
+                nums[-1] += n
+            else:
+                nums.append(n)
+        prev_k = n is not None and w.lower().strip(".,;:!?").endswith("tausend")
     if not nums:
         return False
     if "komma" in str(text or "").lower() and float(int(v)) in nums:
