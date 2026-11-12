@@ -1,5 +1,5 @@
 {
- "updated": 1794523960.1335301,
+ "updated": 1794525766.0481415,
  "enough": false,
  "counted": 5,
  "total": 7,
@@ -9,7 +9,7 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 4,
-   "avg_views": 1273,
+   "avg_views": 1272,
    "avg_likes": 28.0,
    "like_rate": 2.2,
    "avg_score": 1700
@@ -18,10 +18,10 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 1,
-   "avg_views": 575,
+   "avg_views": 574,
    "avg_likes": 15.0,
    "like_rate": 2.61,
-   "avg_score": 800
+   "avg_score": 799
   }
  ],
  "weights": {
@@ -62,21 +62,21 @@
    "id": 38,
    "title": "Was passiert, wenn Drohnen deinen Alltag komplett überwachen?",
    "category": "whatif",
-   "views": 1118,
+   "views": 1117,
    "likes": 17,
    "comments": 1,
    "shares": 0,
-   "score": 1403
+   "score": 1402
   },
   {
    "id": 58,
    "title": "Wie aus einer Gaming-Bude der wertvollste Tech-Gigant wurde",
    "category": "fakten",
-   "views": 575,
+   "views": 574,
    "likes": 15,
    "comments": 0,
    "shares": 0,
-   "score": 800
+   "score": 799
   },
   {
    "id": 44,
