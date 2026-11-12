@@ -5855,9 +5855,12 @@
   "aliases": [
    "safe",
    "geldschrank",
+   "stahltresor",
+   "banksafe",
+   "banktresor",
    "panzerschrank"
   ],
-  "height_m": 1.2,
+  "height_m": 1.5,
   "sky": false,
   "anim": "none",
   "shapes": [
@@ -6067,8 +6070,7 @@
     ],
     "o": false
    }
-  ],
-  "auto": true
+  ]
  },
  "geländewagen": {
   "name": "geländewagen",
@@ -6560,5 +6562,327 @@
    }
   ],
   "auto": true
+ },
+ "glasscheibe": {
+  "name": "glasscheibe",
+  "aliases": [
+   "sicherheitsglas",
+   "panzerglas",
+   "fensterscheibe",
+   "scheibe",
+   "glasschneider",
+   "fensterglas"
+  ],
+  "height_m": 1.7,
+  "sky": false,
+  "anim": "none",
+  "shapes": [
+   {
+    "t": "rect",
+    "x": 70,
+    "y": 372,
+    "w": 260,
+    "h": 28,
+    "r": 8,
+    "c": "#5b6472"
+   },
+   {
+    "t": "rect",
+    "x": 86,
+    "y": 40,
+    "w": 228,
+    "h": 340,
+    "r": 10,
+    "c": "#6b7686"
+   },
+   {
+    "t": "rect",
+    "x": 102,
+    "y": 56,
+    "w": 196,
+    "h": 308,
+    "r": 4,
+    "c": "#bfe6f2"
+   },
+   {
+    "t": "poly",
+    "p": [
+     [
+      102,
+      56
+     ],
+     [
+      190,
+      56
+     ],
+     [
+      102,
+      190
+     ]
+    ],
+    "c": "#dff4fa",
+    "o": false
+   },
+   {
+    "t": "poly",
+    "p": [
+     [
+      230,
+      364
+     ],
+     [
+      298,
+      250
+     ],
+     [
+      298,
+      364
+     ]
+    ],
+    "c": "#a9d8e8",
+    "o": false
+   },
+   {
+    "t": "line",
+    "p": [
+     [
+      124,
+      96
+     ],
+     [
+      160,
+      60
+     ]
+    ],
+    "c": "#ffffff",
+    "w": 7
+   },
+   {
+    "t": "line",
+    "p": [
+     [
+      124,
+      130
+     ],
+     [
+      186,
+      66
+     ]
+    ],
+    "c": "#ffffff",
+    "w": 5
+   },
+   {
+    "t": "line",
+    "p": [
+     [
+      232,
+      330
+     ],
+     [
+      282,
+      276
+     ]
+    ],
+    "c": "#ffffff",
+    "w": 5
+   }
+  ]
+ },
+ "laserstrahl": {
+  "name": "laserstrahl",
+  "aliases": [
+   "laser",
+   "laserfalle",
+   "laserfallen",
+   "laserschranke",
+   "lichtschranke",
+   "laserlicht"
+  ],
+  "height_m": 1.7,
+  "sky": false,
+  "anim": "pulse",
+  "shapes": [
+   {
+    "t": "line",
+    "p": [
+     [
+      52,
+      84
+     ],
+     [
+      348,
+      150
+     ]
+    ],
+    "c": "#35e05a",
+    "w": 9,
+    "o": false
+   },
+   {
+    "t": "line",
+    "p": [
+     [
+      348,
+      214
+     ],
+     [
+      52,
+      268
+     ]
+    ],
+    "c": "#35e05a",
+    "w": 9,
+    "o": false
+   },
+   {
+    "t": "line",
+    "p": [
+     [
+      52,
+      330
+     ],
+     [
+      348,
+      84
+     ]
+    ],
+    "c": "#35e05a",
+    "w": 9,
+    "o": false
+   },
+   {
+    "t": "line",
+    "p": [
+     [
+      52,
+      84
+     ],
+     [
+      348,
+      150
+     ]
+    ],
+    "c": "#c8ffd2",
+    "w": 3,
+    "o": false
+   },
+   {
+    "t": "line",
+    "p": [
+     [
+      348,
+      214
+     ],
+     [
+      52,
+      268
+     ]
+    ],
+    "c": "#c8ffd2",
+    "w": 3,
+    "o": false
+   },
+   {
+    "t": "line",
+    "p": [
+     [
+      52,
+      330
+     ],
+     [
+      348,
+      84
+     ]
+    ],
+    "c": "#c8ffd2",
+    "w": 3,
+    "o": false
+   },
+   {
+    "t": "rect",
+    "x": 24,
+    "y": 40,
+    "w": 34,
+    "h": 360,
+    "r": 8,
+    "c": "#4a5260"
+   },
+   {
+    "t": "rect",
+    "x": 342,
+    "y": 40,
+    "w": 34,
+    "h": 360,
+    "r": 8,
+    "c": "#4a5260"
+   },
+   {
+    "t": "rect",
+    "x": 14,
+    "y": 380,
+    "w": 54,
+    "h": 20,
+    "r": 6,
+    "c": "#353b46"
+   },
+   {
+    "t": "rect",
+    "x": 332,
+    "y": 380,
+    "w": 54,
+    "h": 20,
+    "r": 6,
+    "c": "#353b46"
+   },
+   {
+    "t": "ellipse",
+    "cx": 52,
+    "cy": 84,
+    "rx": 12,
+    "ry": 12,
+    "c": "#8dffa3"
+   },
+   {
+    "t": "ellipse",
+    "cx": 52,
+    "cy": 268,
+    "rx": 12,
+    "ry": 12,
+    "c": "#8dffa3"
+   },
+   {
+    "t": "ellipse",
+    "cx": 52,
+    "cy": 330,
+    "rx": 12,
+    "ry": 12,
+    "c": "#8dffa3"
+   },
+   {
+    "t": "ellipse",
+    "cx": 348,
+    "cy": 150,
+    "rx": 12,
+    "ry": 12,
+    "c": "#8dffa3"
+   },
+   {
+    "t": "ellipse",
+    "cx": 348,
+    "cy": 214,
+    "rx": 12,
+    "ry": 12,
+    "c": "#8dffa3"
+   },
+   {
+    "t": "ellipse",
+    "cx": 348,
+    "cy": 84,
+    "rx": 12,
+    "ry": 12,
+    "c": "#8dffa3"
+   }
+  ]
  }
 }

@@ -539,7 +539,9 @@ und passt weiter zu den Sätzen davor und danach. Gib NUR Änderungen zurück, a
 {"fixes": [{"i": 3, "why": "kurz", "text": "neuer Sprechertext", "labels": {"alter Text der Einblendung": "neuer Text"}}]}
 "text" und "labels" nur angeben, wenn sie sich ändern. Leere Liste, wenn alles stimmt.
 Steht in der Beschreibung ein „Wir“/„uns“, ein Tippfehler oder etwas am Thema vorbei, gib zusätzlich "description" mit der verbesserten Fassung zurück
-(drei kurze Zeilen in Du-Form, mit \n getrennt, gleiche Länge)."""
+(drei kurze Zeilen in Du-Form, mit \n getrennt, gleiche Länge).
+Hat der Titel oder der Titelbild-Text einen Tippfehler oder ein verstümmeltes Wort („NURS“ statt „NUR“), gib zusätzlich "title" bzw. "thumb" mit der
+berichtigten Fassung zurück (gleiche Aussage, gleiche Länge; Titelbild-Text 2–4 Wörter in GROSSBUCHSTABEN)."""
 _LABEL_KEYS = ("text", "title", "label", "kicker", "sub", "unit", "a", "b", "left", "right")
 
 
@@ -556,7 +558,8 @@ def proofread(js, topic):
                 out += [box[k] for k in _LABEL_KEYS if isinstance(box.get(k), str) and box[k].strip()]
                 out += [str(it[0] if isinstance(it, (list, tuple)) and it else it) for it in (box.get("items") or []) if it] if isinstance(box.get("items"), list) else []
         return out
-    user = (f"Thema: {topic}\nTitel: {js.get('title')}\nBeschreibung: {json.dumps(str(js.get('description') or ''), ensure_ascii=False)}\n\n"
+    th0 = js.get("thumbnail") if isinstance(js.get("thumbnail"), dict) else {}
+    user = (f"Thema: {topic}\nTitel: {js.get('title')}\nTitelbild-Text: {th0.get('text') or ''}\nBeschreibung: {json.dumps(str(js.get('description') or ''), ensure_ascii=False)}\n\n"
             + "\n".join(json.dumps({"i": i, "text": s.get("text"), **({"labels": labels(s)} if labels(s) else {})}, ensure_ascii=False) for i, s in enumerate(scenes)))
     out, _ = ai.chat_json(PROOF, user, 0.2)
     n = 0
@@ -564,6 +567,17 @@ def proofread(js, topic):
     if isinstance(desc, str) and 40 <= len(desc.strip()) <= 400 and not _foreign(desc) and len(desc.strip()) >= 0.5 * len(str(js.get("description") or "")):
         js["description"] = desc.strip()
         ai.log("Lektorat: Beschreibung verbessert")
+    if isinstance(out, dict):
+        ti, tb = out.get("title"), out.get("thumb")
+        old_t = str(js.get("title") or "")
+        if isinstance(ti, str) and ti.strip() and ti.strip() != old_t and 0.6 <= len(ti.strip()) / max(1, len(old_t)) <= 1.4 and not _foreign(ti) and not _BRAND_RE.search(ti):
+            js["title"] = ti.strip()
+            ai.log("Lektorat: Titel berichtigt")
+        old_b = str(th0.get("text") or "")
+        if isinstance(tb, str) and tb.strip() and old_b and tb.strip() != old_b and 0.5 <= len(tb.strip()) / len(old_b) <= 1.5 and len(tb.split()) <= 5 \
+                and not _foreign(tb) and not _BRAND_RE.search(tb):
+            th0["text"] = tb.strip().upper()
+            ai.log("Lektorat: Titelbild-Text berichtigt")
     for f in ((out.get("fixes") or []) if isinstance(out, dict) else [])[:len(scenes)]:
         if not isinstance(f, dict) or isinstance(f.get("i"), bool) or not isinstance(f.get("i"), int) or not 0 <= f["i"] < len(scenes):
             continue

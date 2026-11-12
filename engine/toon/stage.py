@@ -662,7 +662,7 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                 d0.rounded_rectangle((sx - sw - 8, gy - sh - 16 * scale, sx + sw + 8, gy - sh + 8 * scale), 12 * scale,
                                      fill=(214, 90, 80) if not night else (120, 70, 86), outline=INK, width=6)
             im, fx, fy = rig.draw(a["look"], pose, facing, scale, ss=1 if close else None)
-            if pose.lying and in_bed and not close:                          # im Schlafzimmer liegt die Figur im Bett
+            if pose.lying and in_bed and not close and action == "sleep":    # im Schlafzimmer liegt die schlafende Figur im Bett – wer umfällt, liegt am Boden
                 x, gy = 300, places.GROUND - 150
             elif pose.lying:                                   # sonst liegt sie auf dem Boden auf, nicht darüber
                 fy -= 62 * scale
@@ -997,6 +997,10 @@ def direct(scenes, times, topic="", style="", look=""):
             sc["shot"] = "" if str(sc.get("shot") or "") in ("close", "insert", "event") else sc.get("shot")
             acts = []
         txt0 = str(sc.get("text") or "").lower()
+        if any(_re0.search(pat, txt0) for pat, _k in _lib_props()):   # der Satz nennt das Ding selbst (Tresor, Glasscheibe): der Notbehelf des Drehbuchs
+            sc["props"] = [p for p in (sc.get("props") or [])     # (Karton, Trinkglas) fliegt raus, wenn der Satz nicht auch davon spricht
+                           if not (isinstance(p, dict) and extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in ("box", "glass")
+                                   and not any(k2 == extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) and _re0.search(pat, txt0) for pat, k2 in TEXT_PROPS))]
         if len(sc.get("props") or []) < 2 and str(sc.get("shot") or "") != "close" and places.resolve(sc.get("place")) not in MAPS:       # was der Satz nennt, ist auch zu sehen
             have = {extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) for q in (sc.get("props") or [])}
             for pat, kind in _lib_props() + TEXT_PROPS:
@@ -1348,10 +1352,14 @@ def direct(scenes, times, topic="", style="", look=""):
             floats_now = bool(_re0.search(FLOAT_RE, txt_f))
             if _re0.search(DROP_RE, txt_f) and (_re0.search(GRAVITY_BACK_RE, txt_f) or (float_seen and not floats_now)):
                 fl = "drop"                               # „… während Möbel schwerelos durcheinanderfliegen“ ist noch kein Absturz
-            elif _re0.search(FLOAT_RE, txt_f) or any(str(a.get("action") or "") in ("float", "schweben") for a in acts_f):
+            elif _re0.search(FLOAT_RE, txt_f) or ((zero_topic or zero_g) and any(str(a.get("action") or "") in ("float", "schweben") for a in acts_f)):
                 fl = "float"
             elif zero_g and i < len(scenes) - 1:
                 fl, kept = "float", True                  # die Schwerkraft ist noch weg: wer im Bild ist, schwebt weiter
+        if not fl:                                        # das Drehbuch lässt die Figur schweben, der Satz handelt aber gar nicht davon: sie bleibt am Boden
+            for a_f in acts_f:
+                if str(a_f.get("action") or "") in ("float", "schweben"):
+                    a_f["action"] = "shocked" if str(a_f.get("emotion") or "") in ("scared", "shocked") else "talk"
         seen_before = float_seen
         if fl == "drop":
             zero_g = False
