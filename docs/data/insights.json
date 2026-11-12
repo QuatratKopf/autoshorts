@@ -1,18 +1,18 @@
 {
- "updated": 1794486578.5270228,
+ "updated": 1794487276.6069837,
  "enough": false,
- "counted": 3,
+ "counted": 4,
  "total": 6,
  "needed": 6,
  "categories": [
   {
    "slug": "whatif",
    "name": "🤯 What If",
-   "n": 3,
-   "avg_views": 1135,
-   "avg_likes": 24.0,
-   "like_rate": 2.11,
-   "avg_score": 1505
+   "n": 4,
+   "avg_views": 1230,
+   "avg_likes": 27.5,
+   "like_rate": 2.24,
+   "avg_score": 1650
   }
  ],
  "weights": {
@@ -24,7 +24,7 @@
   "comedy": 1.0
  },
  "advice": [
-  "Noch zu wenig Daten: 3 von 6 Videos sind alt genug zum Vergleichen. Bis dahin läuft alles im normalen Wechsel."
+  "Noch zu wenig Daten: 4 von 6 Videos sind alt genug zum Vergleichen. Bis dahin läuft alles im normalen Wechsel."
  ],
  "words_good": [],
  "words_bad": [],
@@ -38,6 +38,16 @@
    "comments": 0,
    "shares": 0,
    "score": 3114
+  },
+  {
+   "id": 54,
+   "title": "Was passiert, wenn die Schwerkraft für fünf Sekunden verschwindet?",
+   "category": "whatif",
+   "views": 1513,
+   "likes": 38,
+   "comments": 0,
+   "shares": 0,
+   "score": 2083
   },
   {
    "id": 38,
