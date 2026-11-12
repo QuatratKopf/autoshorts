@@ -2024,7 +2024,7 @@
   "id": 62,
   "category": "storys",
   "topic": "Warum Hollywood-Heist-Filme physikalisch komplett wild sind und trotzdem süchtig machen",
-  "status": "rendered",
+  "status": "published",
   "created": 1794485101.6571994,
   "title": "Hollywood Heists sind physikalisch komplett wild",
   "description": "Warum jeder Film-Coup in der Realität nach drei Sekunden scheitern würde 🚨\nWir zerlegen die absurdsten physikalischen Fehler in Blockbustern.\nLaserstrahlen ausweichen oder Tresore knacken?",
@@ -2059,6 +2059,12 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "zernio_id": "6af5adcfb7ef2c3dbb910511",
+  "yt_status": "Zernio: published",
+  "yt_id": "b8ledrTkmfQ",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6af5adcfb7ef2c3dbb910511",
+  "error": null
  }
 ]
