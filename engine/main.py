@@ -148,10 +148,20 @@ def _stems(text):
             if w not in ("wäre", "würde", "passiert", "plötzlich", "morgen", "menschen", "alles", "unsere", "wirklich", "komplett", "einfach")}
 
 
-def too_similar(topic, trend=None):
-    """Gab es dieses Thema in den letzten Videos schon (fast) genauso? Vergleicht die tragenden Wörter."""
+def too_similar(topic, trend=None, published_only=False, skip_slot=None):
+    """Gab es dieses Thema in den letzten Videos schon (fast) genauso? Vergleicht die tragenden Wörter.
+    Zählt auch, was für einen anderen Termin schon vorbereitet ist (plans.json) – sonst entsteht aus demselben Trend
+    an zwei Terminen hintereinander zweimal dasselbe Video. published_only: nur veröffentlichte Videos zählen."""
     a = _stems(topic)
-    for old in VIDEOS[-40:]:
+    olds = [o for o in VIDEOS[-40:] if not published_only or o.get("status") == "published"]
+    if not published_only:
+        try:
+            from .state import load
+            olds += [{"topic": pl.get("topic"), "title": pl.get("title"), "trend": pl.get("trend")}
+                     for k, pl in load("plans.json", {}).items() if k != skip_slot and isinstance(pl, dict)]
+        except Exception:  # noqa: BLE001
+            pass
+    for old in olds:
         if trend and old.get("trend") and old["trend"].get("title") == trend.get("title"):
             return old.get("title") or old.get("topic")
         b = _stems(f"{old.get('topic') or ''} {old.get('title') or ''}")
@@ -233,6 +243,11 @@ def prepare(slot):
 
 def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, source=None):
     plan = plan or {}
+    if plan.get("script") and category(plan.get("category")):
+        dup = too_similar(f"{plan.get('topic') or ''} {plan.get('title') or ''}", published_only=True)
+        if dup:                                           # derselbe Stoff ist inzwischen schon online: nicht noch einmal
+            log(f"Vorbereitetes Thema gab es gerade erst („{dup}“) – suche ein neues Thema")
+            category_slug, topic, plan = category_slug or plan.get("category"), None, {}
     if plan.get("script") and category(plan.get("category")):
         cat, topic, qid, qtrend = category(plan["category"]), plan.get("topic"), None, plan.get("trend")
     else:
