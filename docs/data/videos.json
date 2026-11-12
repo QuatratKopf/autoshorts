@@ -2072,7 +2072,7 @@
   "id": 63,
   "category": "fakten",
   "topic": "3 bizarre Reaktionen unseres Gehirns im Alltag, die null Sinn ergeben, aber jeder von uns hat",
-  "status": "review",
+  "status": "discarded",
   "created": 1794496430.7540934,
   "title": "3 Sinnlose Gehirn-Macks im Alltag erklärt",
   "description": "Warum macht dein Gehirn sowas eigentlich?\nDein Kopf spielt dir täglich diese drei Streiche, ohne dass du es merkst.\nWelcher dieser Gehirn-Fehler passiert dir am öftesten?",
@@ -2107,6 +2107,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-12 18:00",
-  "review_at": 1794496909.9915397
+  "review_at": 1794496909.9915397,
+  "error": "Bei der Prüfung verworfen: Tippfehler im Titel (Gehirn-Macks), leeres Bild mit Schreibtisch, Kästchen statt Gehirn"
  }
 ]
