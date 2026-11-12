@@ -2118,5 +2118,43 @@
   "status": "error",
   "created": 1794498252.3772142,
   "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-flash-lite-latest: HTTP 503 | pollinations: Antwort enthält kein JSON"
+ },
+ {
+  "id": 65,
+  "category": "fakten",
+  "topic": "3 bizarre Reaktionen unseres Gehirns im Alltag, die null Sinn ergeben, aber jeder von uns hat",
+  "status": "rendered",
+  "created": 1794498576.03017,
+  "title": "3 Gehirn-Macken: Warum macht dein Kopf das?",
+  "description": "Dein Gehirn baut täglich richtig komischen Mist!\nVon Geister-Vibrationen bis zum schrecklichen Türschwellen-Effekt.\nWelche dieser drei Macken nervt dich am meisten?",
+  "hashtags": [
+   "#shorts",
+   "#fakten",
+   "#psychologie",
+   "#gehirn",
+   "#wissen",
+   "#viral",
+   "#fyp"
+  ],
+  "tags": [
+   "gehirn macken",
+   "psychologie fakten",
+   "türschwelleneffekt",
+   "phantom vibration",
+   "alltagsfakten",
+   "wissen shorts"
+  ],
+  "thumb_text": "GEHIRN-PANNEN EXTREM",
+  "missing": null,
+  "cover_ms": 65509,
+  "duration": 65.4,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]

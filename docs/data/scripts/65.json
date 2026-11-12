@@ -1,0 +1,409 @@
+{
+ "title": "3 Gehirn-Macken: Warum macht dein Kopf das?",
+ "scenes": [
+  {
+   "text": "Deine Hosentasche vibriert, obwohl niemand dir geschrieben hat.",
+   "see": "Die Hauptfigur greift erschrocken an ihre leere Hosentasche.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "PHANTOM-VIBRATION"
+   }
+  },
+  {
+   "text": "Warum verwechselt dein Kopf harmlose Nervenreize mit einer Nachricht?",
+   "see": "Das kleine rosa Gehirn schlägt wild auf eine Alarmglocke.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "brain",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "NERVEN-REIZ"
+   }
+  },
+  {
+   "text": "Dein Gehirn verwechselt leichtes Muskelzucken einfach mit einem eingehenden Anruf.",
+   "see": "Eine vergrößerte Nervenzelle sendet helle Blitze aus.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "brain",
+     "speaks": true,
+     "action": "think",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Aber das echte Chaos beginnt erst, wenn du Räume wechselst.",
+   "see": "Die Hauptfigur geht motiviert durch eine offene Tür im Flur.",
+   "place": "hallway",
+   "time": "day",
+   "props": [
+    {
+     "type": "door"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "right"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "TÜRSCHWELLEN-EFFEKT"
+   }
+  },
+  {
+   "text": "Du gehst in die Küche und weißt plötzlich überhaupt nicht mehr warum.",
+   "see": "Die Hauptfigur steht verpeilt in der Küche und kratzt sich am Kopf.",
+   "place": "küche",
+   "time": "day",
+   "props": [
+    {
+     "type": "fridge"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Psychologen nennen das den Türschwellen-Effekt deines Kurzzeitgedächtnisses.",
+   "see": "Das kleine Gehirn löscht einen Ordner an einer virtuellen Wand.",
+   "place": "flur",
+   "time": "day",
+   "props": [
+    {
+     "type": "door"
+    }
+   ],
+   "actors": [
+    {
+     "id": "brain",
+     "speaks": true,
+     "action": "point",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "note",
+    "text": "NEUER RAUM",
+    "title": "GEDÄCHTNIS"
+   }
+  },
+  {
+   "text": "Jede Tür markiert einen Schnitt und blendet die alten Gedanken aus.",
+   "see": "Ein Notizbuch wird schnell zugeklappt und weggelegt.",
+   "place": "flur",
+   "time": "day",
+   "props": [
+    {
+     "type": "door"
+    }
+   ],
+   "actors": [
+    {
+     "id": "brain",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense"
+  },
+  {
+   "text": "Und kurz vorm Einschlafen fällt dein Körper gefühlt ins Nichts.",
+   "see": "Die Hauptfigur liegt nachts im Bett und schreckt plötzlich hoch.",
+   "place": "bedroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary",
+   "overlay": {
+    "type": "tag",
+    "text": "EINSCHLAF-ZUCKEN"
+   }
+  },
+  {
+   "text": "Dein Puls rast und deine Muskeln zucken extrem heftig zusammen.",
+   "see": "Die Hauptfigur schwebt verzweifelt über der Matratze im Raum.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "lib_herz"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Diese Einschlafzuckung betrifft die allermeisten Menschen im Laufe ihres Lebens.",
+   "see": "Grafik einer Herzschlag-Linie, die steil nach oben ausschlägt.",
+   "place": "bedroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Weil der Puls stark absinkt, interpretiert das Gehirn dies als Sturzgefahr.",
+   "see": "Das Gehirn schaut erschrocken auf eine schlafende Figur.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "lib_herz"
+    }
+   ],
+   "actors": [
+    {
+     "id": "brain",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "stamp",
+    "color": "red",
+    "text": "NOTFALL"
+   }
+  },
+  {
+   "text": "Also feuert es einen reflexartigen Impuls durch deinen ganzen Körper.",
+   "see": "Das Gehirn drückt hektisch einen großen roten Start-Knopf.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "brain",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "angry",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense"
+  },
+  {
+   "text": "Dieser ganze Rettungsversuch dauert weniger als eine einzige Sekunde.",
+   "see": "Eine große Wanduhr tickt extrem schnell im Zimmer.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "clock"
+    }
+   ],
+   "actors": [
+    {
+     "id": "brain",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Dein Kopf meint es gut, arbeitet aber extrem verwirrend.",
+   "see": "Das rosa Gehirn wischt sich erleichtert Schweiß von der Stirn.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "brain",
+     "speaks": true,
+     "action": "idle",
+     "emotion": "happy",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Statt dich friedlich schlafen zu lassen, weckt er dich auf.",
+   "see": "Die Hauptfigur liegt wach im Bett und schaut genervt zur Decke.",
+   "place": "street",
+   "time": "night",
+   "shot": "event",
+   "crowd": "walk"
+  },
+  {
+   "text": "Aber hey, wenigstens lebt dein Körper theoretisch immer noch.",
+   "see": "Das kleine Gehirn zuckt verlegen mit den Schultern und grinst.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "brain",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "stamp",
+    "color": "green",
+    "text": "ÜBERLEBT"
+   }
+  },
+  {
+   "text": "Welche dieser Gehirn-Pannen passiert dir am öftesten? Folg für mehr!",
+   "see": "Die Hauptfigur greift sich wieder fragend an die Hosentasche.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "happy",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "a": "Phantom-Vibration",
+    "b": "Einschlaf-Zucken",
+    "type": "choice"
+   }
+  }
+ ]
+}
