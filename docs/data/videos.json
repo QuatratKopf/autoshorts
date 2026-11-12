@@ -2274,5 +2274,13 @@
   "look": "cartoon",
   "mp4": true,
   "error": "Bei der Prüfung verworfen: fast nur dasselbe Wohnzimmer, Bild passt nicht zu den Sätzen, leeres Bild, 103 s – Text-KI ohne Bildplan"
+ },
+ {
+  "id": 71,
+  "category": "whatif",
+  "topic": "Eine absurde Verfolgungsjagd in den Tiefen des Ozeans",
+  "status": "error",
+  "created": 1794505096.4921806,
+  "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-flash-lite-latest: HTTP 503 | pollinations: Expecting ',' delimiter: line 40 column 106 (char 1177)"
  }
 ]
