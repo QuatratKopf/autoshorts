@@ -1,18 +1,18 @@
 {
- "updated": 1794467018.0660834,
+ "updated": 1794469119.4130518,
  "enough": false,
- "counted": 1,
+ "counted": 2,
  "total": 5,
  "needed": 6,
  "categories": [
   {
    "slug": "whatif",
    "name": "🤯 What If",
-   "n": 1,
-   "avg_views": 1096,
-   "avg_likes": 18.0,
+   "n": 2,
+   "avg_views": 548,
+   "avg_likes": 9.0,
    "like_rate": 1.64,
-   "avg_score": 1396
+   "avg_score": 698
   }
  ],
  "weights": {
@@ -23,7 +23,7 @@
   "whatif": 1.0
  },
  "advice": [
-  "Noch zu wenig Daten: 1 von 6 Videos sind alt genug zum Vergleichen. Bis dahin läuft alles im normalen Wechsel."
+  "Noch zu wenig Daten: 2 von 6 Videos sind alt genug zum Vergleichen. Bis dahin läuft alles im normalen Wechsel."
  ],
  "words_good": [],
  "words_bad": [],
@@ -37,6 +37,16 @@
    "comments": 1,
    "shares": 0,
    "score": 1396
+  },
+  {
+   "id": 44,
+   "title": "Was wäre, wenn Taranteln Deutschland erobern?",
+   "category": "whatif",
+   "views": 0,
+   "likes": 0,
+   "comments": 0,
+   "shares": 0,
+   "score": 0
   }
  ],
  "flop": []
