@@ -2217,5 +2217,13 @@
   "status": "error",
   "created": 1794502653.6535394,
   "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-flash-lite-latest: HTTP 503 | pollinations: Antwort enthält kein JSON"
+ },
+ {
+  "id": 69,
+  "category": "fakten",
+  "topic": "3 bizarre Reaktionen unseres Gehirns im Alltag, die null Sinn ergeben, aber jeder von uns hat",
+  "status": "error",
+  "created": 1794503239.7592854,
+  "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-flash-lite-latest: HTTP 503 | pollinations: Antwort enthält kein JSON"
  }
 ]
