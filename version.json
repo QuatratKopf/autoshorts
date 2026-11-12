@@ -1,6 +1,6 @@
 {
-  "version": "1.6.0",
-  "file": "releases/AutoShorts-1.6.0.cmd",
-  "sha256": "9929441407c64830c5972bf5cf929fe3cc371673be319d29c2000f0976a24131",
-  "notes": "TikTok-Follower live im Dashboard (TikTok-Name in den Einstellungen eintragen). Neu im Studio: „Was gerade gut läuft“ – erfolgreiche Themen anderer Kanäle deiner Video-Arten."
+  "version": "1.7.0",
+  "file": "releases/AutoShorts-1.7.0.cmd",
+  "sha256": "616228cda434dc7a7207791969ce8167b0e28683f6002b783d2eb610e2aa2b38",
+  "notes": "Video nachbauen per TikTok- oder YouTube-Link; Live-Zahlen im Dashboard: Abos/Follower, Aufrufe und Likes von YouTube und TikTok jede Minute"
 }

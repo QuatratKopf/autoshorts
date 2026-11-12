@@ -535,7 +535,13 @@ def main(argv=None):
             upload(int(a.id))
         elif a.action == "remake":       # eingeschicktes Video in unserem Stil neu aufbauen (--id = Dateiname im Release „inbox“)
             from . import remake
-            src = remake.analyze(remake.fetch(a.id.strip()))
+            try:
+                src = remake.analyze(remake.fetch(a.id.strip()))
+            except Exception as e:  # noqa: BLE001 – Link gesperrt (YouTube/TikTok blocken Server oft): nur aus Titel/Beschreibung
+                if not remake.is_link(a.id.strip()):
+                    raise
+                log(f"Video vom Link nicht ladbar ({str(e)[:160]}) – baue nach Titel und Beschreibung nach")
+                src = remake.analyze_link_text(a.id.strip())
             log(f"Vorlage erkannt: {src['topic']} ({src['category'] or 'ohne Kategorie'})")
             slug = a.category.strip() or (src["category"] if category(src["category"]) else "comedy")
             try:

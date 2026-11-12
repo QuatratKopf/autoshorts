@@ -460,6 +460,35 @@ def zernio_profile():
     return "", None
 
 
+def _num_text(txt):
+    """„1,23 Tsd. Abonnenten“, „12.345 Aufrufe“ → Zahl."""
+    m = re.search(r"([\d.,]+)\s*(tsd|mio|mrd|k|m|b)?\.?", str(txt or "").lower().replace("\xa0", " "))
+    if not m:
+        return 0
+    raw, unit = m.group(1), m.group(2)
+    if unit:
+        v = float(raw.replace(",", ".")) if raw.count(",") + raw.count(".") <= 1 else float(raw.replace(".", "").replace(",", "."))
+    else:
+        v = float(re.sub(r"[.,]", "", raw) or 0)
+    return int(v * {"tsd": 1e3, "k": 1e3, "mio": 1e6, "m": 1e6, "mrd": 1e9, "b": 1e9}.get(unit or "", 1))
+
+
+def yt_public(handle):
+    """Öffentliche YouTube-Kanalseite ohne Anmeldung: (Abonnenten, Name) – YouTube rundet die Abonnenten selbst."""
+    h = re.sub(r"[^A-Za-z0-9._-]", "", str(handle or "").lstrip("@"))
+    if not h:
+        return None
+    r = requests.get(f"https://www.youtube.com/@{h}/about", params={"hl": "de", "gl": "DE"}, timeout=T,
+                     headers={"User-Agent": UA_WEB, "Accept-Language": "de-DE,de;q=0.9"})
+    r.raise_for_status()
+    m = (re.search(r'"subscriberCountText"\s*:\s*(?:\{"simpleText"\s*:\s*)?"([^"]{1,60})"', r.text)
+         or re.search(r'"content"\s*:\s*"([\d.,\s]+(?:Tsd\.|Mio\.)?\s*Abonnent(?:en|in))"', r.text))
+    if not m:
+        raise RuntimeError("YouTube-Kanal: keine Abonnenten gefunden (Name richtig?)")
+    name = (re.search(r'<meta property="og:title" content="([^"]{1,80})"', r.text) or [0, "@" + h])[1]
+    return _num_text(m.group(1)), name
+
+
 def tiktok_followers_fallback():
     """TikTok ohne eigene Anmeldung (Upload über Zernio): Follower über Zernio, sonst über das öffentliche Profil."""
     handle = str(cfg("tiktok_handle") or "").lstrip("@").strip()
@@ -534,6 +563,14 @@ def refresh_stats():
                 log(f"TikTok-Follower: {n}")
         except Exception as e:  # noqa: BLE001
             log(f"TikTok-Follower: {e}")
+    if not connected("youtube") and cfg("youtube_handle"):   # Upload über Zernio: Abonnenten von der öffentlichen Kanalseite
+        try:
+            res = yt_public(cfg("youtube_handle"))
+            if res:
+                _put_channel("youtube", res[0], res[1], login=False)
+                log(f"YouTube-Abonnenten: {res[0]}")
+        except Exception as e:  # noqa: BLE001
+            log(f"YouTube-Abonnenten: {e}")
     STATS["updated"] = time.time()
     STATE["last_stats"] = time.time()
     try:                                                  # Auswertung: was läuft am besten?

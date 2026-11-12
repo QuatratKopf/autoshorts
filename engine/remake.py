@@ -64,8 +64,60 @@ def _look(frames, transcript):
     return js
 
 
+LINK_RE = re.compile(r"^https?://(?:(?:www|m|vm|vt)\.)?(?:youtube\.com/(?:shorts/|watch\?v=)|youtu\.be/|tiktok\.com/)[^\s\"'<>]{1,300}$", re.I)
+MAX_SECONDS = 600
+
+
+def is_link(name: str) -> bool:
+    """TikTok- oder YouTube-Link statt Dateiname?"""
+    return bool(LINK_RE.match(str(name or "").strip()))
+
+
+def download(url: str, work: Path) -> Path:
+    """Lädt ein Video von TikTok oder YouTube (yt-dlp, eine Datei ohne Zusammenfügen, höchstens 720p und 10 Minuten)."""
+    import yt_dlp
+    opts = {"format": "b[ext=mp4][height<=720]/b[height<=720]/b[ext=mp4]/b", "outtmpl": str(work / "vorlage.%(ext)s"),
+            "noplaylist": True, "quiet": True, "no_warnings": True, "max_filesize": 300_000_000, "socket_timeout": 30,
+            "match_filter": lambda info, *a, **k: "zu lang" if (info.get("duration") or 0) > MAX_SECONDS else None}
+    with yt_dlp.YoutubeDL(opts) as y:
+        info = y.extract_info(url, download=True)
+        path = Path(y.prepare_filename(info))
+    if not path.exists():
+        found = sorted(work.glob("vorlage.*"), key=lambda f: f.stat().st_mtime)
+        if not found:
+            raise RuntimeError("Video ließ sich nicht laden (zu lang oder gesperrt)")
+        path = found[-1]
+    return path
+
+
+def link_text(url: str) -> str:
+    """Ersatz, wenn das Video selbst nicht ladbar ist: Titel/Beschreibung über die öffentliche oEmbed-Schnittstelle."""
+    api = ("https://www.tiktok.com/oembed" if "tiktok.com" in url else "https://www.youtube.com/oembed")
+    r = requests.get(api, params={"url": url, "format": "json"}, timeout=25, headers={"User-Agent": "Mozilla/5.0"})
+    r.raise_for_status()
+    js = r.json()
+    return str(js.get("title") or "").strip()
+
+
+def analyze_link_text(url: str) -> dict:
+    """Nur Text (Titel/Bildunterschrift) – wenn die Plattform das Herunterladen gesperrt hat."""
+    text = link_text(url)
+    if not text.strip():
+        raise RuntimeError("Video nicht ladbar und kein Titel lesbar")
+    info = _look([], "(Nur Titel/Beschreibung des Videos, kein Ton:) " + text) or {}
+    topic = re.sub(r"\s+", " ", str(info.get("topic") or "")).strip()[:140]
+    if not topic:
+        raise RuntimeError("Aus dem Link ließ sich kein Thema erkennen")
+    return {"topic": topic, "category": str(info.get("category") or "").strip().lower(), "transcript": "",
+            "visuals": str(info.get("visuals") or "")[:2000], "tone": str(info.get("tone") or "")[:300]}
+
+
 def fetch(name: str) -> Path:
-    """Lädt das eingeschickte Video aus dem Release „inbox“."""
+    """Lädt das eingeschickte Video: aus dem Release „inbox“ (Datei aus der App) oder direkt von TikTok/YouTube (Link)."""
+    if is_link(name):
+        work = WORK / "remake"
+        work.mkdir(parents=True, exist_ok=True)
+        return download(name.strip(), work)
     if not re.fullmatch(r"[A-Za-z0-9._-]{1,120}", name or ""):
         raise RuntimeError("Ungültiger Dateiname für das Vorlagen-Video")
     work = WORK / "remake"
@@ -94,5 +146,5 @@ def analyze(path: Path) -> dict:
 
 def cleanup(name: str):
     """Vorlage nach dem Nachbauen aus dem Eingang entfernen (sie gehört nicht ins Repository)."""
-    if os.environ.get("GH_TOKEN"):
+    if os.environ.get("GH_TOKEN") and not is_link(name):
         subprocess.run(["gh", "release", "delete-asset", INBOX, name, "-y"], capture_output=True)

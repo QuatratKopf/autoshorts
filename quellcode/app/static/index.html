@@ -706,16 +706,45 @@ function insightPanel() {
       ${(a.flop || []).length ? `<h2 style="font-size:14px;margin:14px 0 8px">Schwächste Videos</h2><div class="scroll"><table><tbody>${a.flop.map(row).join("")}</tbody></table></div>` : ""}</div></div>` : ""}
   </section>`;
 }
-let LIVE_TT = null, liveTimer = null;
+let LIVE = null, liveTimer = null, liveBusy = false;
 function ttHandle() { return String((CFG && CFG.settings && CFG.settings.tiktok_handle) || ST.tiktok_handle || "").replace(/^@/, "").trim(); }
-async function liveTikTok() {
-  const h = ttHandle(); if (!h) return;
-  try { LIVE_TT = await api("/api/live/tiktok?u=" + encodeURIComponent(h));
-    const n = $("#ttN"), st = $("#ttS"); if (n) n.textContent = fmtN(LIVE_TT.followers);
-    if (st) st.innerHTML = `<em>${fmtN(LIVE_TT.likes)}</em> Likes · ${fmtN(LIVE_TT.videos)} Videos`;
-  } catch (e) { const st = $("#ttS"); if (st && !LIVE_TT) st.textContent = e.message; }
+function ytHandle() { return String((CFG && CFG.settings && CFG.settings.youtube_handle) || "").replace(/^@/, "").trim(); }
+function ttUrl(v) { return v.tt_url || (ttHandle() && v.tt_post_id ? `https://www.tiktok.com/@${ttHandle()}/video/${v.tt_post_id}` : ""); }
+async function liveAll() {
+  if (liveBusy) return; liveBusy = true;
+  try {
+    LIVE = await api("/api/live", {tt: ttHandle(), yt: ytHandle(), yt_cid: (CFG && CFG.settings && CFG.settings.youtube_client_id) || "",
+      yt_ids: VIDS.map(v => v.yt_id).filter(x => x && !String(x).startsWith("zernio:")), tt_urls: VIDS.map(ttUrl).filter(Boolean)});
+    applyLive();
+  } catch (e) { /* App-Server nicht erreichbar: es bleiben die gespeicherten Zahlen */ }
+  liveBusy = false;
 }
-function startLive() { if (liveTimer) return; liveTikTok(); liveTimer = setInterval(() => { if (document.visibilityState === "visible") liveTikTok(); }, 60000); }
+// Gesamtzahlen: live, wo es sie gibt – sonst der letzte gespeicherte Stand je Video
+function liveTotals() {
+  const yt = LIVE?.youtube, tt = LIVE?.tiktok, o = {yt: 0, tt: 0, ytLikes: 0, ttLikes: 0, live: {yt: !!yt, tt: !!tt}};
+  for (const v of VIDS) { const st = latest(v.id);
+    const lv = yt?.videos_live?.[v.yt_id], lt = tt?.videos_live?.[ttUrl(v)];
+    o.yt += lv ? lv.views : st.youtube?.views || 0; o.ytLikes += lv && lv.likes !== undefined ? lv.likes : st.youtube?.likes || 0;
+    o.tt += lt ? lt.views : st.tiktok?.views || 0; o.ttLikes += lt ? lt.likes : st.tiktok?.likes || 0; }
+  if (yt?.views) o.yt = Math.max(yt.src === "api" ? 0 : o.yt, yt.views);
+  if (yt?.src === "api" && yt.likes) o.ytLikes = Math.max(o.ytLikes, yt.likes);
+  if (tt?.views) o.tt = Math.max(o.tt, tt.views);
+  if (tt?.likes) o.ttLikes = Math.max(o.ttLikes, tt.likes);
+  return o;
+}
+function applyLive() {
+  if (!$("#totV")) return;
+  const t = liveTotals(), yt = LIVE?.youtube, tt = LIVE?.tiktok, er = LIVE?.errors || {};
+  const set = (id, v) => { const el = $(id); if (el) el.textContent = v; };
+  set("#totV", fmtN(t.yt + t.tt)); set("#totYT", fmtN(t.yt)); set("#totTT", fmtN(t.tt)); set("#totLk", fmtN(t.ytLikes + t.ttLikes));
+  const lv = $("#totLive"); if (lv) lv.hidden = !(t.live.yt || t.live.tt);
+  if (yt) { set("#ytN", fmtN(yt.followers)); const s = $("#ytS"); if (s) { s.innerHTML = `<em>▶ ${fmtN(t.yt)}</em> ♥ ${fmtN(t.ytLikes)}`; s.title = `${fmtN(t.yt)} Aufrufe, ${fmtN(t.ytLikes)} Likes, ${fmtN(yt.videos)} Videos`; } const c = $("#ytLive"); if (c) c.hidden = false; }
+  else if (er.youtube) { const s = $("#ytS"); if (s && /Einstellungen|Name/.test(er.youtube)) s.innerHTML = `${esc(er.youtube.split(" – ")[0])} · <a href="#" onclick="go('settings');return false">Kanal eintragen</a>`; }
+  if (tt) { set("#ttN", fmtN(tt.followers)); const s = $("#ttS"); if (s) { s.innerHTML = `<em>▶ ${fmtN(t.tt)}</em> ♥ ${fmtN(t.ttLikes)}`; s.title = `${fmtN(t.tt)} Aufrufe, ${fmtN(t.ttLikes)} Likes, ${fmtN(tt.videos)} Videos`; } const c = $("#ttLive"); if (c) c.hidden = false; }
+  else if (er.tiktok) { const s = $("#ttS"); if (s) s.textContent = er.tiktok; }
+  const at = $("#liveAt"); if (at && LIVE?.at) at.textContent = "live · " + new Date(LIVE.at * 1000).toLocaleTimeString("de-DE", {hour: "2-digit", minute: "2-digit", second: "2-digit"});
+}
+function startLive() { if (liveTimer) return; liveAll(); liveTimer = setInterval(() => { if (document.visibilityState === "visible") liveAll(); }, 60000); }
 function viewDash() {
   startLive();
   const D = dayMap(), last14 = lastDays(14), last7 = lastDays(7), prev7 = lastDays(14).slice(0, 7);
@@ -737,16 +766,17 @@ function viewDash() {
   $("#main").innerHTML = `
   <section class="hero">
     <div class="hero-card in" style="--i:0">
-      <div class="hc-top"><span>Aufrufe gesamt</span><small>alle Videos</small></div>
-      <div class="bal">${fmtN(tot.views)}</div>
+      <div class="hc-top"><span>Aufrufe gesamt <span class="chip acc" id="totLive" hidden title="YouTube und TikTok direkt abgefragt, jede Minute neu">live</span></span><small id="liveAt">alle Videos</small></div>
+      <div class="bal" id="totV">${fmtN(tot.views)}</div>
       <div class="delta"><b class="${chg === null ? "zero" : chg >= 0 ? "pos" : "neg"}">${chg === null ? "–" : (chg >= 0 ? "+" : "") + chg.toFixed(0) + " %"}</b> letzte 7 Tage zur Woche davor</div>
-      <div class="wal"><div><span><i style="background:var(--yt)"></i>YouTube</span><b>${fmtN(tot.yt)}</b></div><div><span><i style="background:var(--tt)"></i>TikTok</span><b>${fmtN(tot.tt)}</b></div><div><span><i style="background:var(--pos)"></i>Likes</span><b>${fmtN(tot.likes)}</b></div></div>
+      <div class="wal"><div><span><i style="background:var(--yt)"></i>YouTube</span><b id="totYT">${fmtN(tot.yt)}</b></div><div><span><i style="background:var(--tt)"></i>TikTok</span><b id="totTT">${fmtN(tot.tt)}</b></div><div><span><i style="background:var(--pos)"></i>Likes</span><b id="totLk">${fmtN(tot.likes)}</b></div></div>
       <div class="hb-act"><button class="btn primary" onclick="go('studio')">Video erstellen</button><button class="btn" onclick="dispatch({action:'stats'},'Zahlen werden geholt')">Zahlen holen</button></div>
     </div>
     <div class="tiles in" style="--i:1">
       <div class="tile hot"><div class="tile-h">Heute neu<i>${icon(I.eye)}</i></div><b>${fmtN(today.yt + today.tt)}</b><small><em>${fmtN(today.likes)}</em> Likes heute</small></div>
-      <div class="tile"><div class="tile-h">YouTube-Abos<i>${icon(I.user)}</i></div><b>${fmtN(fy?.n || 0)}</b><small><em class="${fy && fy.week > 0 ? "pos" : ""}">${fy ? (fy.week >= 0 ? "+" : "") + fy.week : "–"}</em> in 7 Tagen</small></div>
-      <div class="tile" id="ttTile"><div class="tile-h">TikTok-Follower${ttHandle() ? ' <span class="chip acc" title="Direkt vom öffentlichen Profil, jede Minute neu">live</span>' : ""}<i>${icon(I.heart)}</i></div><b id="ttN">${fmtN(LIVE_TT ? LIVE_TT.followers : ft?.n || 0)}</b><small id="ttS">${LIVE_TT ? `<em>${fmtN(LIVE_TT.likes)}</em> Likes · ${fmtN(LIVE_TT.videos)} Videos` : ttHandle() ? "wird geladen …" : `<em>${ft ? (ft.week >= 0 ? "+" : "") + ft.week : "–"}</em> in 7 Tagen · <a href="#" onclick="go('settings');return false">TikTok-Name eintragen</a>`}</small></div>
+      <div class="tile"><div class="tile-h">YouTube-Abos <span class="chip acc" id="ytLive" hidden title="Direkt von YouTube, jede Minute neu">live</span><i>${icon(I.user)}</i></div><b id="ytN">${fmtN(fy?.n || 0)}</b><small id="ytS"><em class="${fy && fy.week > 0 ? "pos" : ""}">${fy ? (fy.week >= 0 ? "+" : "") + fy.week : "–"}</em> in 7 Tagen</small></div>
+      <div class="tile" id="ttTile"><div class="tile-h">TikTok-Follower <span class="chip acc" id="ttLive" hidden title="Direkt vom öffentlichen Profil, jede Minute neu">live</span><i>${icon(I.heart)}</i></div><b id="ttN">${fmtN(ft?.n || 0)}</b><small id="ttS">${ttHandle() ? "wird geladen …" : `<em>${ft ? (ft.week >= 0 ? "+" : "") + ft.week : "–"}</em> in 7 Tagen · <a href="#" onclick="go('settings');return false">TikTok-Name eintragen</a>`}</small></div>
+
       <div class="tile"><div class="tile-h">Videos online<i>${icon(I.film)}</i></div><b>${published}</b><small><em>Ø ${fmtN(published ? tot.views / published : 0)}</em> Aufrufe</small></div>
     </div>
     <div class="hero-card in" style="--i:2">
@@ -779,12 +809,12 @@ function viewDash() {
       return `<tr><td class="t w" style="min-width:260px"><div class="vrow">${thumb(v)}<div class="tt"><b>${esc(v.title || v.topic || "…")}</b><div><span class="chip">${esc(c?.emoji || "")} ${esc(c?.name || v.category)}</span>${trendChip(v)}${v.yt_id ? `<a class="chip mute" href="https://youtube.com/shorts/${esc(v.yt_id)}" target="_blank" rel="noopener">YouTube ↗</a>` : ""}${v.tt_post_id ? `<span class="chip mute">TikTok ✓</span>` : ""}</div></div></div></td>
         <td>${fmtTs(v.created)}</td>
         <td class="t w" style="min-width:150px"><span class="chip ${st[1]}">${st[0]}</span>${v.yt_status && v.yt_status !== "public" ? `<div class="hint">YT: ${esc(v.yt_status)}</div>` : ""}${v.tt_status ? `<div class="hint">TT: ${esc(v.tt_status)}</div>` : ""}${v.error ? `<div class="hint neg">${esc(v.error.slice(0, 160))}</div>` : ""}</td>
-        <td>${v.st.youtube ? fmtN(v.st.youtube.views) : "–"}</td><td>${v.st.tiktok ? fmtN(v.st.tiktok.views) : "–"}</td><td>${fmtN(v.likes)}</td>
+        <td>${(x => x ? fmtN(x.views) : v.st.youtube ? fmtN(v.st.youtube.views) : "–")(LIVE?.youtube?.videos_live?.[v.yt_id])}</td><td>${(x => x ? fmtN(x.views) : v.st.tiktok ? fmtN(v.st.tiktok.views) : "–")(LIVE?.tiktok?.videos_live?.[ttUrl(v)])}</td><td>${fmtN(v.likes)}</td>
         <td><div class="inline">${v.mp4 && ["rendered", "partial", "error", "review", "discarded"].includes(v.status) ? `<button class="btn sm" onclick="dispatch({action:'upload',video_id:'${v.id}'},'Upload läuft')">Hochladen</button>` : ""}${v.mp4 ? `<a class="btn sm" href="${esc(mp4(v))}" target="_blank" rel="noopener">MP4</a>` : ""}</div></td></tr>`; }).join("")}
     </tbody></table>` : `<div class="empty">Noch keine Videos. Im Studio kannst du sofort das erste erstellen.</div>`}</div></section>`;
   const segs = (id, fn) => document.querySelectorAll(`#${id} button`).forEach(b => b.onclick = () => { document.querySelectorAll(`#${id} button`).forEach(x => x.setAttribute("aria-pressed", x === b)); fn(b.dataset.v); drawChart(); });
   segs("pSeg", v => PLAT = v); segs("rSeg", v => RANGE = +v);
-  drawChart();
+  drawChart(); applyLive();
 }
 function runsList() {
   const rs = RUNS.filter(r => r.event !== "schedule" || r.conclusion !== "success" || isLive(r)).slice(0, 5);
@@ -898,8 +928,9 @@ function viewStudio() {
       <button class="btn accent" id="mk" style="padding:11px 20px">${icon(I.spark)}Video erstellen</button></div>
   </section>
   <section class="panel in" style="--i:1" id="remakeBox">
-    <div class="section-h"><div><h2>Video nachbauen</h2><p class="hint">Schick ein Video rein, das dir gefällt. AutoShorts hört und schaut es an und baut daraus ein eigenes Video in unserem Stil – gleiche Idee und gleiches Tempo, aber eigene Worte, Figuren und Orte. Nimm nur Videos, die du als Vorlage nutzen darfst.</p></div></div>
-    <div class="make"><label>Video-Datei (MP4, MOV oder WebM, bis 300 MB)<input type="file" id="rmFile" accept="video/mp4,video/quicktime,video/webm"></label>
+    <div class="section-h"><div><h2>Video nachbauen</h2><p class="hint">Schick ein Video rein, das dir gefällt – als Link von TikTok oder YouTube oder als Datei. AutoShorts hört und schaut es an und baut daraus ein eigenes Video in unserem Stil – gleiche Idee und gleiches Tempo, aber eigene Worte, Figuren und Orte. Nimm nur Videos, die du als Vorlage nutzen darfst.</p></div></div>
+    <div class="make"><label>Link von TikTok oder YouTube<input type="url" id="rmLink" placeholder="https://www.tiktok.com/@… oder https://youtube.com/shorts/…" autocomplete="off"></label>
+      <label>oder Video-Datei (MP4, MOV oder WebM, bis 300 MB)<input type="file" id="rmFile" accept="video/mp4,video/quicktime,video/webm"></label>
       <label>Video-Art<select id="rmCat" aria-label="Video-Art für den Nachbau"><option value="">automatisch erkennen</option>${CFG.categories.map(c => `<option value="${esc(c.slug)}">${esc(c.emoji)} ${esc(c.name)}</option>`).join("")}</select></label>
       <label class="check"><input type="checkbox" id="rmUpl"> direkt hochladen</label>
       <button class="btn accent" id="rmGo" style="padding:11px 20px">${icon(I.spark)}Nachbauen</button></div>
@@ -932,16 +963,23 @@ function viewStudio() {
   $("#mk").onclick = async () => { const b = $("#mk"); b.disabled = true;
     const ok = await dispatch({action: "make", category: SEL || "", topic: $("#topic").value.trim(), upload: $("#upl").checked ? "1" : "0", trend: TOPIC_TREND ? TOPIC_TREND.id : ""}, "Video wird erstellt");
     b.disabled = false; if (ok) { $("#topic").value = ""; TOPIC_TREND = null; $("#topicTrend").hidden = true; toast("Auftrag gesendet. Oben siehst du den Fortschritt."); scrollTo({top: 0, behavior: "smooth"}); } };
-  $("#rmGo").onclick = async () => { const f = $("#rmFile").files[0], b = $("#rmGo"), st = $("#rmState");
-    if (!f) return toast("Bitte zuerst eine Videodatei wählen.", true);
-    if (f.size > 300e6) return toast("Das Video ist größer als 300 MB.", true);
-    b.disabled = true; st.hidden = false; st.textContent = `Lade „${f.name}“ hoch (${Math.round(f.size / 1e6)} MB) …`;
+  $("#rmGo").onclick = async () => { const f = $("#rmFile").files[0], link = $("#rmLink").value.trim(), b = $("#rmGo"), st = $("#rmState");
+    if (!f && !link) return toast("Bitte einen Link einfügen oder eine Videodatei wählen.", true);
+    if (link && !/(tiktok\.com|youtube\.com|youtu\.be)\//i.test(link)) return toast("Der Link muss von TikTok oder YouTube sein.", true);
+    if (!link && f.size > 300e6) return toast("Das Video ist größer als 300 MB.", true);
+    b.disabled = true; st.hidden = false;
+    st.textContent = link ? "Hole das Video vom Link … (beim ersten Mal richtet die App dafür einmalig ein Hilfsprogramm ein, das kann eine Minute dauern)" : `Lade „${f.name}“ hoch (${Math.round(f.size / 1e6)} MB) …`;
     try {
-      const r = await fetch(`/api/remake?category=${encodeURIComponent($("#rmCat").value)}&upload=${$("#rmUpl").checked ? 1 : 0}`,
-        {method: "POST", headers: {"Content-Type": f.type || "video/mp4", "X-AS": "1"}, body: f});
-      const j = await r.json().catch(() => ({})); if (!r.ok) throw new Error(j.error || `Fehler ${r.status}`);
-      st.textContent = "Hochgeladen. Der Nachbau läuft jetzt auf GitHub (etwa 10 Minuten) – das neue Video erscheint danach in der Liste.";
-      $("#rmFile").value = ""; PENDING = {label: "Video wird nachgebaut", at: Date.now()}; banner(); setTimeout(pollRuns, 4000);
+      let how = "datei";
+      if (link) { const j = await api("/api/remake/link", {url: link, category: $("#rmCat").value, upload: $("#rmUpl").checked}); how = j.how; }
+      else {
+        const r = await fetch(`/api/remake?category=${encodeURIComponent($("#rmCat").value)}&upload=${$("#rmUpl").checked ? 1 : 0}`,
+          {method: "POST", headers: {"Content-Type": f.type || "video/mp4", "X-AS": "1"}, body: f});
+        const j = await r.json().catch(() => ({})); if (!r.ok) throw new Error(j.error || `Fehler ${r.status}`);
+      }
+      st.textContent = how === "link" ? "Gestartet. Das Video ließ sich hier nicht laden – GitHub holt es selbst vom Link (klappt das nicht, wird nach Titel und Beschreibung nachgebaut). Das neue Video erscheint in etwa 10 Minuten in der Liste."
+        : "Gestartet. Der Nachbau läuft jetzt auf GitHub (etwa 10 Minuten) – das neue Video erscheint danach in der Liste.";
+      $("#rmFile").value = ""; $("#rmLink").value = ""; PENDING = {label: "Video wird nachgebaut", at: Date.now()}; banner(); setTimeout(pollRuns, 4000);
     } catch (e) { st.textContent = ""; st.hidden = true; toast(e.message, true); }
     b.disabled = false; };
   $("#qadd").onclick = () => { const t = $("#qtext").value.split("\n").map(s => s.trim()).filter(Boolean); if (!t.length) return toast("Bitte mindestens ein Thema eingeben.", true);
@@ -1069,7 +1107,8 @@ function viewSettings() {
     ${tgl("make_thumbnail", "Eigenes Thumbnail gestalten", "Titelbild aus der Animations-Engine mit großem Text passend zum Thema. Wird bei TikTok als Titelbild gesetzt.")}
     ${tgl("youtube_thumbnail", "Thumbnail auf YouTube hochladen", "Geht erst, wenn dein Kanal per Telefon bestätigt ist (youtube.com/verify). Bei Shorts zeigt YouTube es vor allem in Suche und Kanalseite.")}`)}
   ${sec("plattform", I.plug, "Plattformen", `YouTube ${con.youtube ? "verbunden" : "nicht verbunden"} · TikTok ${con.tiktok ? "verbunden" : "nicht verbunden"}`, con.youtube && con.tiktok ? '<span class="chip good">beide</span>' : '<span class="chip warn">offen</span>', `
-    ${fld("tiktok_handle", "Dein TikTok-Name", "Zum Beispiel @wissenswert. Damit zeigt das Dashboard deine Follower live (jede Minute, direkt vom öffentlichen Profil) – auch wenn du über Zernio hochlädst.", 'placeholder="@deinname" maxlength="40"')}
+    ${fld("tiktok_handle", "Dein TikTok-Name", "Zum Beispiel @wissenswert. Damit zeigt das Dashboard Follower, Likes und Aufrufe live (jede Minute, direkt vom öffentlichen Profil) – auch wenn du über Zernio hochlädst.", 'placeholder="@deinname" maxlength="40"')}
+    ${fld("youtube_handle", "Dein YouTube-Kanal", "Zum Beispiel @wissenswert. Nur nötig, wenn YouTube hier nicht verbunden ist (z. B. Upload über Zernio): dann kommen Abos und Aufrufe live von der öffentlichen Kanalseite. Mit Verbindung holt die App alles direkt von YouTube, inklusive Likes.", 'placeholder="@deinkanal" maxlength="60"')}
     ${sel("upload_via", "Hochladen über", "Zernio lädt über seine eigenen, von YouTube und TikTok zugelassenen Apps hoch: Konten auf zernio.com verbinden, API-Key unten bei den Zugangsdaten speichern. Die eigenen Verbindungen darunter werden dann nicht gebraucht.", [["direct", "Eigene Google- und TikTok-App"], ["zernio", "Zernio (ein API-Key für beide)"]])}
     <div class="sep"></div>
     ${platBlock("youtube", "YouTube Shorts", "youtube_client_id", "GOOGLE_CLIENT_SECRET", "Google Client-ID", "Google Cloud: OAuth-Client vom Typ „Desktop-App“ anlegen. Die Anleitung steht im Repository (README).")}

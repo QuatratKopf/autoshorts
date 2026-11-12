@@ -22,7 +22,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "engine"))
-from naclpure import derive_key, encrypt, sealed_box  # noqa: E402
+from naclpure import decrypt, derive_key, encrypt, sealed_box  # noqa: E402
 from appshell import MANIFEST, SERVICE_WORKER, ensure_desktop_shortcut, icon_png, open_app_window, windowless_python  # noqa: E402,E501
 
 APP_VERSION = "dev"   # wird beim Bauen der Ein-Datei-Version gesetzt
@@ -629,29 +629,253 @@ def gh_proxy(h):
 
 
 _LIVE = {}
+_LIVE_LOCK = threading.Lock()
+WEB_UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0 Safari/537.36",
+          "Accept-Language": "de-DE,de;q=0.9"}
 
 
-@route("GET", r"/api/live/tiktok")
-def live_tiktok(h):
-    """Live-Zahlen des öffentlichen TikTok-Profils (läuft auf deinem PC, ohne Anmeldung; höchstens einmal pro Minute abgefragt)."""
-    q = urllib.parse.parse_qs(urllib.parse.urlsplit(h.path).query)
-    handle = re.sub(r"[^A-Za-z0-9._]", "", (q.get("u") or [""])[0].lstrip("@"))[:40]
-    if not handle:
-        raise ValueError("TikTok-Name fehlt")
-    hit = _LIVE.get(handle)
-    if hit and time.time() - hit["at"] < 60:
-        return h._send(200, hit)
-    st, body = http("GET", f"https://www.tiktok.com/@{handle}", headers={
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0 Safari/537.36",
-        "Accept-Language": "de-DE,de;q=0.9"}, timeout=20)
+def _cached(key, ttl, fn):
+    """Ergebnis höchstens alle ttl Sekunden neu holen; ein Fehler liefert den letzten guten Stand (falls vorhanden)."""
+    hit = _LIVE.get(key)
+    if hit and time.time() - hit["at"] < ttl:
+        return hit
+    bad = _LIVE.get("fail:" + key)
+    if bad and not hit and time.time() - bad["at"] < max(600, ttl * 3):   # klappt gerade nicht: nicht jede Minute neu probieren
+        raise ValueError(bad["msg"])
+    try:
+        out = {**fn(), "at": time.time()}
+    except Exception as e:
+        _LIVE["fail:" + key] = {"at": time.time(), "msg": str(e)[:200]}
+        if hit:
+            return {**hit, "stale": True}
+        raise
+    _LIVE[key] = out
+    return out
+
+
+def _clean_handle(h):
+    return re.sub(r"[^A-Za-z0-9._-]", "", str(h or "").strip().lstrip("@"))[:60]
+
+
+def _num_text(txt):
+    """„1,23 Tsd. Abonnenten“, „12.345 Aufrufe“, „1.2M subscribers“ → Zahl."""
+    m = re.search(r"([\d.,]+)\s*(tsd|mio|mrd|k|m|b)?\.?", str(txt or "").lower().replace("\xa0", " "))
+    if not m:
+        return 0
+    raw, unit = m.group(1), m.group(2)
+    if unit:
+        v = float(raw.replace(",", ".")) if raw.count(",") + raw.count(".") <= 1 else float(raw.replace(".", "").replace(",", "."))
+    else:
+        v = float(re.sub(r"[.,]", "", raw) or 0)
+    return int(v * {"tsd": 1e3, "k": 1e3, "mio": 1e6, "m": 1e6, "mrd": 1e9, "b": 1e9}.get(unit or "", 1))
+
+
+def tt_profile(handle):
+    st, body = http("GET", f"https://www.tiktok.com/@{handle}", headers=WEB_UA, timeout=20)
     txt = body.decode("utf-8", "replace") if body else ""
     m = re.search(r'"followerCount"\s*:\s*(\d+)', txt)
     if st != 200 or not m:
         raise ValueError("TikTok-Profil nicht lesbar" + (f" (HTTP {st})" if st != 200 else " – Name richtig?"))
     g = lambda k: int((re.search(r'"' + k + r'"\s*:\s*(\d+)', txt) or [0, 0])[1])   # noqa: E731
-    out = {"handle": handle, "followers": int(m.group(1)), "likes": g("heartCount"), "videos": g("videoCount"), "at": time.time()}
-    _LIVE[handle] = out
-    h._send(200, out)
+    return {"handle": handle, "followers": int(m.group(1)), "likes": g("heartCount"), "videos": g("videoCount")}
+
+
+def tt_video(url):
+    """Aufrufe/Likes eines TikTok-Videos von seiner öffentlichen Seite."""
+    st, body = http("GET", url, headers=WEB_UA, timeout=20)
+    txt = body.decode("utf-8", "replace") if body else ""
+    m = re.search(r'"playCount"\s*:\s*(\d+)', txt)
+    if st != 200 or not m:
+        raise ValueError(f"TikTok-Video nicht lesbar ({st})")
+    lk = re.search(r'"diggCount"\s*:\s*(\d+)', txt)
+    return {"views": int(m.group(1)), "likes": int(lk.group(1)) if lk else 0}
+
+
+# ── yt-dlp (für Video-Links und Zahlen-Listen): wird bei Bedarf einmal für diesen Benutzer installiert ──
+_YTDLP = {"mod": None, "tried": 0.0, "busy": False}
+
+
+def ytdlp(wait=False):
+    """yt_dlp-Modul oder None. Fehlt es, wird es (höchstens einmal pro Stunde) per pip --user nachinstalliert."""
+    if _YTDLP["mod"]:
+        return _YTDLP["mod"]
+    try:
+        import yt_dlp
+        _YTDLP["mod"] = yt_dlp
+        return yt_dlp
+    except ImportError:
+        pass
+    if _YTDLP["busy"] or time.time() - _YTDLP["tried"] < 3600:
+        return None
+
+    def install():
+        import importlib
+        import site
+        import subprocess
+        _YTDLP["busy"], _YTDLP["tried"] = True, time.time()
+        try:
+            exe = sys.executable
+            if exe.lower().endswith("pythonw.exe") and os.path.exists(exe[:-5] + ".exe"):
+                exe = exe[:-5] + ".exe"
+            subprocess.run([exe, "-m", "pip", "install", "--user", "-q", "--disable-pip-version-check", "yt-dlp"], capture_output=True,
+                           timeout=300, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
+            site.addsitedir(site.getusersitepackages())
+            importlib.invalidate_caches()
+            import yt_dlp
+            _YTDLP["mod"] = yt_dlp
+            log("yt-dlp installiert (für Video-Links und Live-Zahlen)")
+        except Exception as e:  # noqa: BLE001
+            log(f"yt-dlp nicht installierbar: {e}", "warn")
+        finally:
+            _YTDLP["busy"] = False
+    if wait:
+        install()
+        return _YTDLP["mod"]
+    threading.Thread(target=install, daemon=True).start()
+    return None
+
+
+def _flat_counts(url):
+    """Alle Videos eines Profils/Kanals mit Aufrufen (yt-dlp-Liste ohne Herunterladen)."""
+    y = ytdlp()
+    if not y:
+        raise ValueError("yt-dlp wird gerade eingerichtet")
+    class Quiet:
+        def debug(self, m): pass
+        warning = info = error = debug
+    with y.YoutubeDL({"quiet": True, "no_warnings": True, "logger": Quiet(), "extract_flat": "in_playlist", "playlistend": 200, "socket_timeout": 20}) as d:
+        info = d.extract_info(url, download=False) or {}
+    rows = [e for e in (info.get("entries") or []) if isinstance(e, dict)]
+    views = [int(e.get("view_count") or 0) for e in rows]
+    if not rows or not any(views):
+        raise ValueError("keine Zahlen in der Liste")
+    return {"views": sum(views), "likes": sum(int(e.get("like_count") or 0) for e in rows), "count": len(rows),
+            "ids": {str(e.get("id")): int(e.get("view_count") or 0) for e in rows if e.get("id")}}
+
+
+def live_tiktok_all(handle, urls):
+    out = dict(_cached("tt:" + handle, 60, lambda: tt_profile(handle)))
+    try:                                                  # Aufrufe: ganze Videoliste (yt-dlp), sonst die bekannten Video-Seiten
+        fl = _cached("ttl:" + handle, 300, lambda: _flat_counts(f"https://www.tiktok.com/@{handle}"))
+        out.update(views=fl["views"], views_src="profil")
+    except Exception:  # noqa: BLE001
+        vids = {}
+        for u in urls[-15:]:
+            try:
+                vids[u] = _cached("ttv:" + u, 300, lambda u=u: tt_video(u))
+            except Exception:  # noqa: BLE001
+                pass
+        if vids:
+            out.update(videos_live={u: {"views": v["views"], "likes": v["likes"]} for u, v in vids.items()}, views_src="videos")
+    return out
+
+
+def _yt_token(cid):
+    """Zugang zum eigenen YouTube-Kanal: Anmeldung aus tokens/youtube.enc (wie die Engine), Zugriffsschlüssel hier frisch geholt."""
+    sec = SET.get("client_secrets", {}).get("youtube", "")
+    if not sec or not cid:
+        return None
+    hit = _LIVE.get("ytok")
+    if hit and time.time() < hit["exp"]:
+        return hit["access"]
+    st, body = gh("GET", repo_path("/contents/tokens/youtube.enc"), raw=True)
+    if st != 200:
+        return None
+    tok = json.loads(decrypt(base64.b64decode(body), derive_key("autoshorts", "youtube", sec)))
+    st, body = http("POST", "https://oauth2.googleapis.com/token", form={"client_id": cid, "client_secret": sec,
+                                                                        "refresh_token": tok["refresh_token"], "grant_type": "refresh_token"})
+    js = json.loads(body or b"{}")
+    if st != 200 or "access_token" not in js:
+        raise ValueError("YouTube-Anmeldung abgelaufen – bitte neu verbinden")
+    _LIVE["ytok"] = {"access": js["access_token"], "exp": time.time() + int(js.get("expires_in", 3600)) - 120, "at": time.time()}
+    return js["access_token"]
+
+
+def yt_api_live(token, ids):
+    h = {"Authorization": "Bearer " + token}
+    st, body = http("GET", "https://www.googleapis.com/youtube/v3/channels?part=statistics,snippet&mine=true", headers=h, timeout=20)
+    if st != 200:
+        raise ValueError(f"YouTube meldet {st}")
+    it = (json.loads(body).get("items") or [{}])[0]
+    s_ = it.get("statistics", {})
+    out = {"followers": int(s_.get("subscriberCount") or 0), "views": int(s_.get("viewCount") or 0), "videos": int(s_.get("videoCount") or 0),
+           "name": it.get("snippet", {}).get("title", ""), "src": "api"}
+    likes, vids = 0, {}
+    for i in range(0, len(ids), 50):
+        q = urllib.parse.urlencode({"part": "statistics", "id": ",".join(ids[i:i + 50])})
+        st, body = http("GET", "https://www.googleapis.com/youtube/v3/videos?" + q, headers=h, timeout=20)
+        if st == 200:
+            for v in json.loads(body).get("items", []):
+                x = v.get("statistics", {})
+                vids[v["id"]] = {"views": int(x.get("viewCount") or 0), "likes": int(x.get("likeCount") or 0)}
+                likes += vids[v["id"]]["likes"]
+    out.update(likes=likes, videos_live=vids)
+    return out
+
+
+def yt_public(handle):
+    """Öffentliche Kanal-Seite: Abonnenten, Aufrufe gesamt, Anzahl Videos (YouTube rundet Abonnenten selbst)."""
+    st, body = http("GET", f"https://www.youtube.com/@{handle}/about?hl=de&gl=DE", headers=WEB_UA, timeout=20)
+    txt = body.decode("utf-8", "replace") if body else ""
+    if st != 200:
+        raise ValueError(f"YouTube-Kanal nicht lesbar ({st})")
+    f = lambda k: (re.search(r'"' + k + r'"\s*:\s*(?:\{"simpleText"\s*:\s*)?"([^"]{1,60})"', txt) or [0, ""])[1]   # noqa: E731
+    subs = f("subscriberCountText") or (re.search(r'"content"\s*:\s*"([\d.,\s]+(?:Tsd\.|Mio\.)?\s*Abonnent(?:en|in))"', txt) or [0, ""])[1]
+    if not subs:
+        raise ValueError("YouTube-Kanal nicht gefunden – Name richtig?")
+    return {"followers": _num_text(subs), "views": _num_text(f("viewCountText")), "videos": _num_text(f("videoCountText")),
+            "name": (re.search(r'<meta property="og:title" content="([^"]{1,80})"', txt) or [0, "@" + handle])[1], "src": "public"}
+
+
+def live_youtube_all(handle, cid, ids):
+    try:
+        token = _yt_token(cid)
+    except Exception as e:  # noqa: BLE001
+        log(f"Live-Zahlen YouTube: {e}", "warn")
+        token = None
+    if token:                                             # genau, mit Likes (3 Einheiten Kontingent pro Abruf, daher alle 2 Minuten)
+        return _cached("yt:api", 120, lambda: yt_api_live(token, ids))
+    if not handle:
+        raise ValueError("YouTube nicht verbunden – Kanal-Namen in den Einstellungen eintragen")
+    out = dict(_cached("yt:" + handle, 120, lambda: yt_public(handle)))
+    try:                                                  # Likes/Aufrufe der Shorts aus der Kanal-Liste
+        fl = _cached("ytl:" + handle, 300, lambda: _flat_counts(f"https://www.youtube.com/@{handle}/shorts"))
+        out.setdefault("views", fl["views"])
+        out["videos_live"] = {k: {"views": v} for k, v in fl["ids"].items()}
+    except Exception:  # noqa: BLE001
+        pass
+    return out
+
+
+@route("POST", r"/api/live")
+def live_all(h):
+    """Live-Zahlen beider Plattformen (läuft auf deinem PC; die App fragt jede Minute)."""
+    b = h._json()
+    tt, yt = _clean_handle(b.get("tt")), _clean_handle(b.get("yt"))
+    ids = [str(x) for x in (b.get("yt_ids") or []) if re.fullmatch(r"[A-Za-z0-9_-]{6,20}", str(x))][:200]
+    urls = [str(x) for x in (b.get("tt_urls") or []) if re.match(r"^https://(www\.)?tiktok\.com/@[\w.-]+/video/\d+", str(x))][:60]
+    out, err = {}, {}
+    with _LIVE_LOCK:
+        if tt:
+            try:
+                out["tiktok"] = live_tiktok_all(tt, urls)
+            except Exception as e:  # noqa: BLE001
+                err["tiktok"] = str(e)
+        try:
+            out["youtube"] = live_youtube_all(yt, str(b.get("yt_cid") or ""), ids)
+        except Exception as e:  # noqa: BLE001
+            err["youtube"] = str(e)
+    h._send(200, {**out, "errors": err, "at": time.time()})
+
+
+@route("GET", r"/api/live/tiktok")
+def live_tiktok(h):
+    """Nur das TikTok-Profil (ältere App-Oberflächen)."""
+    q = urllib.parse.parse_qs(urllib.parse.urlsplit(h.path).query)
+    handle = _clean_handle((q.get("u") or [""])[0])
+    if not handle:
+        raise ValueError("TikTok-Name fehlt")
+    h._send(200, _cached("tt:" + handle, 60, lambda: tt_profile(handle)))
 
 
 REMAKE_MAX = 300_000_000      # Vorlagen-Video höchstens 300 MB
@@ -668,18 +892,8 @@ def _inbox_release():
     return rel["id"]
 
 
-@route("POST", r"/api/remake")
-def remake_upload(h):
-    """Video aus der App annehmen, in den Eingang hochladen und den Nachbau starten (Datei kommt roh im Körper der Anfrage)."""
-    q = urllib.parse.parse_qs(urllib.parse.urlsplit(h.path).query)
-    n = int(h.headers.get("Content-Length") or 0)
-    if n <= 0 or n > REMAKE_MAX:
-        raise ValueError("Das Video ist leer oder größer als 300 MB.")
-    ctype = (h.headers.get("Content-Type") or "video/mp4").split(";")[0].strip()
-    if not ctype.startswith("video/"):
-        raise ValueError("Bitte eine Videodatei wählen (MP4, MOV oder WebM).")
-    data = h.rfile.read(n)
-    ext = {"video/quicktime": "mov", "video/webm": "webm"}.get(ctype, "mp4")
+def _inbox_upload(data, ctype, ext):
+    """Datei in das Release „inbox“ hochladen, gibt den Dateinamen zurück."""
     name = f"vorlage-{int(time.time())}.{ext}"
     rid = _inbox_release()
     hd = {"Accept": "application/vnd.github+json", "Authorization": "Bearer " + SET.get("token", ""), "Content-Type": ctype,
@@ -693,6 +907,70 @@ def remake_upload(h):
         st = e.code
     if st not in (200, 201):
         raise ValueError(f"Hochladen zu GitHub fehlgeschlagen ({st}).")
+    return name
+
+
+LINK_RE = re.compile(r"^https?://(?:(?:www|m|vm|vt)\.)?(?:youtube\.com/(?:shorts/|watch\?v=)|youtu\.be/|tiktok\.com/)[^\s\"'<>]{1,300}$", re.I)
+
+
+@route("POST", r"/api/remake/link")
+def remake_link(h):
+    """TikTok-/YouTube-Link nachbauen: hier auf dem PC herunterladen (klappt von zu Hause zuverlässiger als auf GitHub) und in den
+    Eingang legen; geht das nicht, bekommt GitHub den Link und versucht es selbst."""
+    b = h._json()
+    url = str(b.get("url") or "").strip()
+    m = re.search(r"https?://\S+", url)
+    url = m.group(0).rstrip(").,;") if m else url        # aus geteiltem Text („Schau dir das an! https://vm.tiktok.com/…“)
+    if not LINK_RE.match(url):
+        raise ValueError("Bitte einen Link von TikTok oder YouTube einfügen.")
+    cat = re.sub(r"[^a-z0-9_-]", "", str(b.get("category") or "").lower())[:40]
+    upl = "1" if b.get("upload") else "0"
+    name, how = url, "link"
+    y = ytdlp(wait=True)
+    if y:
+        import tempfile
+        tmp = tempfile.mkdtemp(prefix="as-vorlage-")
+        try:
+            opts = {"format": "b[ext=mp4][height<=720]/b[height<=720]/b[ext=mp4]/b", "outtmpl": os.path.join(tmp, "v.%(ext)s"),
+                    "noplaylist": True, "quiet": True, "no_warnings": True, "max_filesize": REMAKE_MAX, "socket_timeout": 30}
+            with y.YoutubeDL(opts) as d:
+                info = d.extract_info(url, download=True)
+                if (info.get("duration") or 0) > 600:
+                    raise ValueError("Das Video ist länger als 10 Minuten.")
+                path = d.prepare_filename(info)
+            files = [os.path.join(tmp, f) for f in os.listdir(tmp)]
+            path = path if os.path.exists(path) else (files[0] if files else "")
+            if path and 0 < os.path.getsize(path) <= REMAKE_MAX:
+                ext = path.rsplit(".", 1)[-1].lower()
+                ext = ext if ext in ("mp4", "webm", "mov") else "mp4"
+                with open(path, "rb") as f:
+                    name = _inbox_upload(f.read(), {"webm": "video/webm", "mov": "video/quicktime"}.get(ext, "video/mp4"), ext)
+                how = "datei"
+        except ValueError:
+            raise
+        except Exception as e:  # noqa: BLE001
+            log(f"Link nicht ladbar ({str(e)[:160]}) – GitHub versucht es selbst", "warn")
+        finally:
+            import shutil
+            shutil.rmtree(tmp, ignore_errors=True)
+    dispatch({"action": "remake", "video_id": name, "category": cat, "upload": upl})
+    log(f"Nachbau gestartet ({'Video geladen' if how == 'datei' else 'nur Link'}): {url}")
+    h._send(200, {"ok": True, "how": how})
+
+
+@route("POST", r"/api/remake")
+def remake_upload(h):
+    """Video aus der App annehmen, in den Eingang hochladen und den Nachbau starten (Datei kommt roh im Körper der Anfrage)."""
+    q = urllib.parse.parse_qs(urllib.parse.urlsplit(h.path).query)
+    n = int(h.headers.get("Content-Length") or 0)
+    if n <= 0 or n > REMAKE_MAX:
+        raise ValueError("Das Video ist leer oder größer als 300 MB.")
+    ctype = (h.headers.get("Content-Type") or "video/mp4").split(";")[0].strip()
+    if not ctype.startswith("video/"):
+        raise ValueError("Bitte eine Videodatei wählen (MP4, MOV oder WebM).")
+    data = h.rfile.read(n)
+    ext = {"video/quicktime": "mov", "video/webm": "webm"}.get(ctype, "mp4")
+    name = _inbox_upload(data, ctype, ext)
     cat = re.sub(r"[^a-z0-9_-]", "", (q.get("category") or [""])[0].lower())[:40]
     dispatch({"action": "remake", "video_id": name, "category": cat, "upload": "1" if (q.get("upload") or ["0"])[0] == "1" else "0"})
     log(f"Vorlage {name} hochgeladen ({n // 1_000_000} MB), Nachbau gestartet")
