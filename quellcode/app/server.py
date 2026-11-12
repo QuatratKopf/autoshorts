@@ -628,6 +628,32 @@ def gh_proxy(h):
     h._send(200, {"status": s, "data": data})
 
 
+_LIVE = {}
+
+
+@route("GET", r"/api/live/tiktok")
+def live_tiktok(h):
+    """Live-Zahlen des öffentlichen TikTok-Profils (läuft auf deinem PC, ohne Anmeldung; höchstens einmal pro Minute abgefragt)."""
+    q = urllib.parse.parse_qs(urllib.parse.urlsplit(h.path).query)
+    handle = re.sub(r"[^A-Za-z0-9._]", "", (q.get("u") or [""])[0].lstrip("@"))[:40]
+    if not handle:
+        raise ValueError("TikTok-Name fehlt")
+    hit = _LIVE.get(handle)
+    if hit and time.time() - hit["at"] < 60:
+        return h._send(200, hit)
+    st, body = http("GET", f"https://www.tiktok.com/@{handle}", headers={
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0 Safari/537.36",
+        "Accept-Language": "de-DE,de;q=0.9"}, timeout=20)
+    txt = body.decode("utf-8", "replace") if body else ""
+    m = re.search(r'"followerCount"\s*:\s*(\d+)', txt)
+    if st != 200 or not m:
+        raise ValueError("TikTok-Profil nicht lesbar" + (f" (HTTP {st})" if st != 200 else " – Name richtig?"))
+    g = lambda k: int((re.search(r'"' + k + r'"\s*:\s*(\d+)', txt) or [0, 0])[1])   # noqa: E731
+    out = {"handle": handle, "followers": int(m.group(1)), "likes": g("heartCount"), "videos": g("videoCount"), "at": time.time()}
+    _LIVE[handle] = out
+    h._send(200, out)
+
+
 REMAKE_MAX = 300_000_000      # Vorlagen-Video höchstens 300 MB
 
 

@@ -557,8 +557,8 @@ def main(argv=None):
                 prepare(nxt)
         elif a.action == "learn":        # Gegenstände gezielt nachbauen lassen: --topic "Router, Mikroskop, Leiter"
             learn([w.strip() for w in a.topic.split(",") if w.strip()])
-        elif a.action == "trends":
-            trends.refresh()
+        elif a.action == "trends":       # „Aktualisieren“ in der App: Trends und Kanal-Analyse sofort neu
+            trends.refresh(force=True)
         else:
             raise SystemExit(f"Unbekannte Aktion: {a.action}")
     except Exception as e:  # noqa: BLE001

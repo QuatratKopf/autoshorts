@@ -706,7 +706,18 @@ function insightPanel() {
       ${(a.flop || []).length ? `<h2 style="font-size:14px;margin:14px 0 8px">Schwächste Videos</h2><div class="scroll"><table><tbody>${a.flop.map(row).join("")}</tbody></table></div>` : ""}</div></div>` : ""}
   </section>`;
 }
+let LIVE_TT = null, liveTimer = null;
+function ttHandle() { return String((CFG && CFG.settings && CFG.settings.tiktok_handle) || ST.tiktok_handle || "").replace(/^@/, "").trim(); }
+async function liveTikTok() {
+  const h = ttHandle(); if (!h) return;
+  try { LIVE_TT = await api("/api/live/tiktok?u=" + encodeURIComponent(h));
+    const n = $("#ttN"), st = $("#ttS"); if (n) n.textContent = fmtN(LIVE_TT.followers);
+    if (st) st.innerHTML = `<em>${fmtN(LIVE_TT.likes)}</em> Likes · ${fmtN(LIVE_TT.videos)} Videos`;
+  } catch (e) { const st = $("#ttS"); if (st && !LIVE_TT) st.textContent = e.message; }
+}
+function startLive() { if (liveTimer) return; liveTikTok(); liveTimer = setInterval(() => { if (document.visibilityState === "visible") liveTikTok(); }, 60000); }
 function viewDash() {
+  startLive();
   const D = dayMap(), last14 = lastDays(14), last7 = lastDays(7), prev7 = lastDays(14).slice(0, 7);
   const sum = (keys, f) => keys.reduce((a, k) => a + (D[k] ? f(D[k]) : 0), 0);
   const tot = {views: 0, likes: 0, comments: 0, shares: 0, yt: 0, tt: 0};
@@ -735,7 +746,7 @@ function viewDash() {
     <div class="tiles in" style="--i:1">
       <div class="tile hot"><div class="tile-h">Heute neu<i>${icon(I.eye)}</i></div><b>${fmtN(today.yt + today.tt)}</b><small><em>${fmtN(today.likes)}</em> Likes heute</small></div>
       <div class="tile"><div class="tile-h">YouTube-Abos<i>${icon(I.user)}</i></div><b>${fmtN(fy?.n || 0)}</b><small><em class="${fy && fy.week > 0 ? "pos" : ""}">${fy ? (fy.week >= 0 ? "+" : "") + fy.week : "–"}</em> in 7 Tagen</small></div>
-      <div class="tile"><div class="tile-h">TikTok-Follower<i>${icon(I.heart)}</i></div><b>${fmtN(ft?.n || 0)}</b><small><em>${ft ? (ft.week >= 0 ? "+" : "") + ft.week : "–"}</em> in 7 Tagen</small></div>
+      <div class="tile" id="ttTile"><div class="tile-h">TikTok-Follower${ttHandle() ? ' <span class="chip acc" title="Direkt vom öffentlichen Profil, jede Minute neu">live</span>' : ""}<i>${icon(I.heart)}</i></div><b id="ttN">${fmtN(LIVE_TT ? LIVE_TT.followers : ft?.n || 0)}</b><small id="ttS">${LIVE_TT ? `<em>${fmtN(LIVE_TT.likes)}</em> Likes · ${fmtN(LIVE_TT.videos)} Videos` : ttHandle() ? "wird geladen …" : `<em>${ft ? (ft.week >= 0 ? "+" : "") + ft.week : "–"}</em> in 7 Tagen · <a href="#" onclick="go('settings');return false">TikTok-Name eintragen</a>`}</small></div>
       <div class="tile"><div class="tile-h">Videos online<i>${icon(I.film)}</i></div><b>${published}</b><small><em>Ø ${fmtN(published ? tot.views / published : 0)}</em> Aufrufe</small></div>
     </div>
     <div class="hero-card in" style="--i:2">
@@ -895,8 +906,9 @@ function viewStudio() {
     <p class="hint" id="rmState" hidden></p>
   </section>
   <section class="panel in" style="--i:1" id="trendBox">
-    <div class="section-h"><div><h2>Aktuell im Trend</h2><p class="hint">Was Deutschland gerade sucht und liest${TRENDS.updated ? " · Stand " + fmtTs(TRENDS.updated) : ""}. Die KI macht daraus ein passendes, sicheres Thema.</p></div>
-      <div class="inline"><div class="seg" id="tSeg">${["Alle", "TikTok", "Reddit", "Google", "Wikipedia"].map(k => `<button type="button" data-v="${k}" aria-pressed="${TSRC === k}">${k}</button>`).join("")}</div><button class="btn" id="tRef">${icon(I.reload)}Aktualisieren</button></div></div>
+    <div class="section-h"><div><h2>Was gerade gut läuft</h2><p class="hint" id="tHint"></p></div>
+      <div class="inline"><div class="seg" id="tSeg">${["Andere Kanäle", "Alle Trends", "TikTok", "Reddit", "Google", "Wikipedia"].map(k => `<button type="button" data-v="${k}" aria-pressed="${TSRC === k}">${k}</button>`).join("")}</div><button class="btn" id="tRef">${icon(I.reload)}Aktualisieren</button></div></div>
+    <div class="seg" id="tCat" style="flex-wrap:wrap"></div>
     <div class="trends" id="tList"></div>
   </section>
   <div class="grid2">
@@ -935,10 +947,35 @@ function viewStudio() {
   $("#qadd").onclick = () => { const t = $("#qtext").value.split("\n").map(s => s.trim()).filter(Boolean); if (!t.length) return toast("Bitte mindestens ein Thema eingeben.", true);
     const now = Date.now() / 1000; t.forEach((x, i) => CFG.queue.push({id: "q" + Math.random().toString(36).slice(2, 10), category: $("#qcat").value, text: x.slice(0, 300), created: now + i})); persist("Themen eingeplant", $("#qadd")); };
 }
-let TSRC = "Alle", TOPIC_TREND = null;
+let TSRC = "Andere Kanäle", TCAT = "", TOPIC_TREND = null;
+function nicheItems() { return ((TRENDS.niche || {}).items || []).map(t => ({...t, source: "Kanäle"})); }
+function drawNiche(el) {
+  const items = nicheItems(), n = TRENDS.niche || {};
+  $("#tHint").textContent = "Die erfolgreichsten Shorts anderer Kanäle deiner Video-Arten aus den letzten zwei Wochen – bewertet nach Aufrufen pro Tag und danach, wie weit sie über der Größe ihres Kanals liegen. Die KI hat daraus ein eigenes Thema für dich gemacht." + (n.updated ? " Stand " + fmtTs(n.updated) + "." : "");
+  const cats = [...new Set(items.map(t => t.category))];
+  const tc = $("#tCat"); tc.hidden = cats.length < 2;
+  tc.innerHTML = [["", "Alle"], ...cats.map(c => [c, (cat(c)?.emoji || "") + " " + (cat(c)?.name || c)])].map(([v, l]) => `<button type="button" data-c="${esc(v)}" aria-pressed="${TCAT === v}">${esc(l)}</button>`).join("");
+  tc.querySelectorAll("button").forEach(b => b.onclick = () => { TCAT = b.dataset.c; drawTrends(); });
+  const list = items.filter(t => !TCAT || t.category === TCAT);
+  if (!list.length) { el.innerHTML = `<div class="empty">${n.updated ? "Für diese Video-Art gerade nichts gefunden." : "Noch keine Analyse. Tippe auf „Aktualisieren“ – das dauert ein, zwei Minuten."}</div>`; return; }
+  el.innerHTML = list.map(t => `<div class="trend"><div class="tt"><div><span class="chip">${esc(cat(t.category)?.emoji || "")} ${esc(cat(t.category)?.name || t.category)}</span> <span class="chip acc">${fmtN(t.per_day)} / Tag</span>${t.factor >= 2 ? ` <span class="chip good" title="Aufrufe im Verhältnis zu den Abonnenten des Kanals">${t.factor >= 20 ? "20+" : String(t.factor).replace(".", ",")}× über Kanal</span>` : ""}</div>
+      <b>${esc(t.title)}</b><small>Vorbild: „${esc(t.orig)}“${t.channel ? " · " + esc(t.channel) : ""} · ${fmtN(t.views)} Aufrufe${t.url ? ` · <a href="${esc(t.url)}" target="_blank" rel="noopener">ansehen</a>` : ""}</small>${t.summary ? `<small>${esc(t.summary)}</small>` : ""}</div>
+    <div class="inline"><button class="btn sm primary" data-nuse="${esc(t.id)}">Als Thema</button><button class="btn sm" data-nq="${esc(t.id)}">Einplanen</button></div></div>`).join("");
+  const find = id => items.find(t => t.id === id);
+  el.querySelectorAll("[data-nuse]").forEach(b => b.onclick = () => { const t = find(b.dataset.nuse); TOPIC_TREND = null;
+    const card = document.querySelector(`.cat[data-slug="${CSS.escape(t.category)}"]`); if (card) card.click();
+    $("#topic").value = t.title; $("#topicTrend").hidden = false; $("#topicTrend").textContent = "📈 Läuft gerade bei anderen Kanälen – Video-Art ist schon ausgewählt.";
+    $("#topic").scrollIntoView({behavior: "smooth", block: "center"}); });
+  el.querySelectorAll("[data-nq]").forEach(b => b.onclick = () => { const t = find(b.dataset.nq);
+    CFG.queue.push({id: "q" + Math.random().toString(36).slice(2, 10), category: cat(t.category) ? t.category : (SEL || CFG.categories[0].slug), text: t.title, created: Date.now() / 1000});
+    persist("Thema eingeplant: " + t.title, b); });
+}
 function drawTrends() {
   const el = $("#tList"); if (!el) return;
-  const items = (TRENDS.items || []).filter(t => TSRC === "Alle" || t.source.replace("Google Trends", "Google").startsWith(TSRC)).slice(0, TSRC === "Alle" ? 30 : 24);
+  if (TSRC === "Andere Kanäle") return drawNiche(el);
+  $("#tCat").hidden = true;
+  $("#tHint").textContent = "Was Deutschland und die USA gerade suchen und lesen" + (TRENDS.updated ? " · Stand " + fmtTs(TRENDS.updated) : "") + ". Die KI macht daraus ein passendes, sicheres Thema.";
+  const items = (TRENDS.items || []).filter(t => TSRC === "Alle Trends" || t.source.replace("Google Trends", "Google").startsWith(TSRC)).slice(0, TSRC === "Alle Trends" ? 30 : 24);
   if (!items.length) { el.innerHTML = `<div class="empty">${TRENDS.updated ? "In dieser Quelle gerade nichts." : "Noch keine Trends geholt. Tippe auf „Aktualisieren“, das dauert etwa eine Minute."}</div>`; return; }
   el.innerHTML = items.map(t => `<div class="trend"><div class="tt"><div><span class="chip ${t.source.startsWith("TikTok") ? "acc" : "mute"}">${esc(t.source === "Google Trends" ? "Google" : t.source)}</span>${t.region ? ` <span class="hint">${{US: "🇺🇸", DE: "🇩🇪", GB: "🇬🇧", AT: "🇦🇹", CH: "🇨🇭"}[t.region] || esc(t.region)}</span>` : ""}${t.traffic ? ` <span class="hint">${esc(t.traffic)}</span>` : ""}</div>
       <b>${esc(t.title)}</b>${(t.news || [])[0] ? `<small>${esc(t.news[0].title)}${t.news[0].source ? " · " + esc(t.news[0].source) : ""}</small>` : t.summary ? `<small>${esc(t.summary.slice(0, 140))}</small>` : ""}</div>
@@ -1032,6 +1069,7 @@ function viewSettings() {
     ${tgl("make_thumbnail", "Eigenes Thumbnail gestalten", "Titelbild aus der Animations-Engine mit großem Text passend zum Thema. Wird bei TikTok als Titelbild gesetzt.")}
     ${tgl("youtube_thumbnail", "Thumbnail auf YouTube hochladen", "Geht erst, wenn dein Kanal per Telefon bestätigt ist (youtube.com/verify). Bei Shorts zeigt YouTube es vor allem in Suche und Kanalseite.")}`)}
   ${sec("plattform", I.plug, "Plattformen", `YouTube ${con.youtube ? "verbunden" : "nicht verbunden"} · TikTok ${con.tiktok ? "verbunden" : "nicht verbunden"}`, con.youtube && con.tiktok ? '<span class="chip good">beide</span>' : '<span class="chip warn">offen</span>', `
+    ${fld("tiktok_handle", "Dein TikTok-Name", "Zum Beispiel @wissenswert. Damit zeigt das Dashboard deine Follower live (jede Minute, direkt vom öffentlichen Profil) – auch wenn du über Zernio hochlädst.", 'placeholder="@deinname" maxlength="40"')}
     ${sel("upload_via", "Hochladen über", "Zernio lädt über seine eigenen, von YouTube und TikTok zugelassenen Apps hoch: Konten auf zernio.com verbinden, API-Key unten bei den Zugangsdaten speichern. Die eigenen Verbindungen darunter werden dann nicht gebraucht.", [["direct", "Eigene Google- und TikTok-App"], ["zernio", "Zernio (ein API-Key für beide)"]])}
     <div class="sep"></div>
     ${platBlock("youtube", "YouTube Shorts", "youtube_client_id", "GOOGLE_CLIENT_SECRET", "Google Client-ID", "Google Cloud: OAuth-Client vom Typ „Desktop-App“ anlegen. Die Anleitung steht im Repository (README).")}

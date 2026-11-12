@@ -191,7 +191,7 @@ def reddit_trending(region="US"):
     return []
 
 
-def refresh():
+def refresh(force=False):
     log("Sammle Trends (" + ", ".join(COUNTRY.get(r, r) for r in regions()) + ") …")
     items, counts = [], {}
     for name, fn in [("TikTok", lambda: [x for r in regions() for x in tiktok_songs(r)]),
@@ -204,6 +204,13 @@ def refresh():
     for i, it in enumerate(items):
         it["id"] = f"t{int(time.time())}-{i}"
     data = {"updated": time.time(), "regions": regions(), "items": items}
+    try:                                                   # was bei anderen Kanälen derselben Art gerade gut läuft
+        from . import niche
+        data["niche"] = niche.refresh(force)
+        counts["Kanäle"] = len(data["niche"].get("items") or [])
+    except Exception as e:  # noqa: BLE001
+        log(f"Kanal-Analyse: {e}")
+        data["niche"] = load("trends.json", {}).get("niche") or {}
     save("trends.json", data)
     log(f"{len(items)} Trends gefunden (" + ", ".join(f"{k} {v}" for k, v in counts.items()) + ")")
     return data

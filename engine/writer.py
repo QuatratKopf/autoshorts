@@ -438,6 +438,20 @@ def _past(cat):
     return [v["topic"] for v in VIDEOS if v.get("category") == cat["slug"] and v.get("topic")][-60:]
 
 
+def _niche(cat):
+    """Was bei anderen Kanälen dieser Art gerade gut läuft – als Anregung für die Themenwahl (nicht kopieren)."""
+    try:
+        from . import niche
+        rows = niche.for_category(cat["slug"], 6)
+    except Exception:  # noqa: BLE001
+        return ""
+    if not rows:
+        return ""
+    return ("\nDiese Themen laufen gerade bei anderen Kanälen dieser Art besonders gut (Aufrufe pro Tag) – nimm eines davon oder ein "
+            "verwandtes, das dasselbe Interesse weckt, in eigener Umsetzung:\n- "
+            + "\n- ".join(f"{r['title']} ({r.get('per_day', 0)}/Tag)" for r in rows) + "\n")
+
+
 def new_topic(cat: dict) -> str:
     past = _past(cat)
     user = (f"Kategorie: {cat['name']} – {cat['description']}\n"
@@ -448,6 +462,7 @@ def new_topic(cat: dict) -> str:
             "Diese Themen gab es schon (nicht wiederholen, auch nicht sehr ähnlich):\n- "
             + ("\n- ".join(past) if past else "(noch keine)")
             + _insight(cat)
+            + _niche(cat)
             + '\nAntworte als JSON: {"topic": "…"}')
     js, _ = ai.chat_json("Du bist Redakteur für virale deutsche Kurzvideos. Antworte nur mit JSON.", user, 1.0)
     topic = str(js.get("topic", "")).strip()

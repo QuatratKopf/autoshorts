@@ -1,6 +1,6 @@
 {
-  "version": "1.5.0",
-  "file": "releases/AutoShorts-1.5.0.cmd",
-  "sha256": "6352407dfac09c5b9f34f6e07d7e25e806f97b0451f279c760ce7f67ec3b1c2e",
-  "notes": "Neu: „Video nachbauen“ – ein Video reinschicken, AutoShorts baut es in eigenem Stil nach. Neue Video-Art „Comedy“."
+  "version": "1.6.0",
+  "file": "releases/AutoShorts-1.6.0.cmd",
+  "sha256": "9929441407c64830c5972bf5cf929fe3cc371673be319d29c2000f0976a24131",
+  "notes": "TikTok-Follower live im Dashboard (TikTok-Name in den Einstellungen eintragen). Neu im Studio: „Was gerade gut läuft“ – erfolgreiche Themen anderer Kanäle deiner Video-Arten."
 }

@@ -78,3 +78,12 @@ Marken oder Figuren der Vorlage. Danach wird die Vorlage aus `inbox` gelöscht. 
 Floskel wie „Was wäre, wenn“/„Stell dir vor“, nicht der Titel noch einmal; Satz 2 öffnet eine Frage) – übernommen wird nur, was die
 Prüfung besteht. `stage._opening`: im ersten Bild reagiert die Hauptfigur sichtbar; die Kamera ruckt kräftig ins Bild (`opener`), Musik und
 ein Auftakt-Ton sind ab der ersten Sekunde da.
+
+## Zahlen und Kanal-Analyse
+- TikTok-Follower ohne eigene TikTok-Anmeldung (Upload über Zernio): `uploaders.tiktok_followers_fallback` – erst Zernio-Kontodaten,
+  sonst öffentliche Profilseite (`tiktok_handle` in den Einstellungen). Die App fragt das Profil zusätzlich jede Minute live ab (`/api/live/tiktok`).
+- `engine/niche.py`: je Video-Art die erfolgreichsten Shorts anderer Kanäle der letzten 14 Tage (YouTube-API, sonst öffentliche Suche),
+  bewertet nach Aufrufen pro Tag und Faktor Aufrufe/Abonnenten; die Text-KI macht daraus eigene Themen. Läuft mit den Trends (höchstens
+  alle 6 Stunden, „Aktualisieren“ in der App sofort), liegt in `trends.json` unter `niche` und fließt in `writer.new_topic` ein.
+  Eigene Suchbegriffe je Video-Art: Feld `niche_queries` in der Kategorie.
+

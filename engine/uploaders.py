@@ -1,6 +1,7 @@
 """YouTube- und TikTok-Anbindung: Anmeldung (OAuth), Upload, Statistiken."""
 import datetime as dt
 import os
+import re
 import time
 from zoneinfo import ZoneInfo
 
@@ -383,14 +384,15 @@ def _put(vid, plat, s):
         rows.append(point)
 
 
-def _put_channel(plat, n, name):
+def _put_channel(plat, n, name, login=True):
     rows = STATS["ch"].setdefault(plat, [])
     point = [today(), int(n)]
     if rows and rows[-1][0] == point[0]:
         rows[-1] = point
     else:
         rows.append(point)
-    STATE["connected"][plat] = {"name": name, "since": STATE["connected"].get(plat, {}).get("since") or today()}
+    if login:                                              # nur echte Anmeldung zählt als „verbunden“ (nicht die öffentlichen Zahlen)
+        STATE["connected"][plat] = {"name": name, "since": STATE["connected"].get(plat, {}).get("since") or today()}
 
 
 def zernio_stats():
@@ -421,6 +423,65 @@ def zernio_stats():
                 if plat == "youtube" and url and str(v.get("yt_id") or "").startswith("zernio:"):
                     v["yt_id"] = url.rstrip("/").split("/")[-1].split("=")[-1]
     return n
+
+
+UA_WEB = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0 Safari/537.36"
+
+
+def tt_public(handle):
+    """Öffentliche Profilzahlen ohne Anmeldung: (Follower, Likes, Videos, Name) aus der Profilseite – oder None."""
+    h = re.sub(r"[^A-Za-z0-9._]", "", str(handle or "").lstrip("@"))
+    if not h:
+        return None
+    r = requests.get(f"https://www.tiktok.com/@{h}", timeout=T, headers={"User-Agent": UA_WEB, "Accept-Language": "de-DE,de;q=0.9"})
+    if r.status_code != 200:
+        raise RuntimeError(f"TikTok-Profil HTTP {r.status_code}")
+    f = re.search(r'"followerCount"\s*:\s*(\d+)', r.text)
+    if not f:
+        raise RuntimeError("TikTok-Profil: keine Zahlen gefunden (Seite verändert oder gesperrt)")
+    g = lambda k: int((re.search(r'"' + k + r'"\s*:\s*(\d+)', r.text) or [0, 0])[1])   # noqa: E731
+    name = (re.search(r'"nickname"\s*:\s*"([^"]{1,60})"', r.text) or [0, "@" + h])[1]
+    return int(f.group(1)), g("heartCount"), g("videoCount"), name
+
+
+def zernio_profile():
+    """TikTok-Konto bei Zernio: (Benutzername, Follower oder None) – je nachdem, was Zernio mitliefert."""
+    data = _z("GET", "/accounts")
+    rows = data if isinstance(data, list) else next((data[k] for k in ("accounts", "data", "items") if isinstance(data.get(k), list)), [])
+    for a in rows:
+        if isinstance(a, dict) and str(a.get("platform") or "").lower() == "tiktok":
+            user = a.get("username") or a.get("handle") or (a.get("profile") or {}).get("username") or ""
+            n = None
+            for k in ("followers", "followersCount", "followerCount", "follower_count"):
+                for src in (a, a.get("profile") or {}, a.get("stats") or {}, a.get("metadata") or {}):
+                    if isinstance(src, dict) and isinstance(src.get(k), (int, float)) and not isinstance(src.get(k), bool):
+                        n = int(src[k])
+            return str(user).lstrip("@"), n
+    return "", None
+
+
+def tiktok_followers_fallback():
+    """TikTok ohne eigene Anmeldung (Upload über Zernio): Follower über Zernio, sonst über das öffentliche Profil."""
+    handle = str(cfg("tiktok_handle") or "").lstrip("@").strip()
+    zn = None
+    if zernio_ready():
+        try:
+            zh, zn = zernio_profile()
+            handle = handle or zh
+        except Exception as e:  # noqa: BLE001
+            log(f"Zernio-Konto: {e}")
+    if handle:
+        STATE.setdefault("connected", {})
+        STATE["tiktok_handle"] = handle
+    if zn is not None:
+        _put_channel("tiktok", zn, "@" + handle if handle else "TikTok", login=False)
+        return zn
+    if handle:
+        res = tt_public(handle)
+        if res:
+            _put_channel("tiktok", res[0], res[3], login=False)
+            return res[0]
+    return None
 
 
 def refresh_stats():
@@ -466,6 +527,13 @@ def refresh_stats():
                                              "comments": x.get("comment_count", 0), "shares": x.get("share_count", 0)})
         except Exception as e:  # noqa: BLE001
             log(f"TikTok-Videozahlen nicht verfügbar (Scope video.list fehlt?): {e}")
+    if not connected("tiktok"):
+        try:
+            n = tiktok_followers_fallback()
+            if n is not None:
+                log(f"TikTok-Follower: {n}")
+        except Exception as e:  # noqa: BLE001
+            log(f"TikTok-Follower: {e}")
     STATS["updated"] = time.time()
     STATE["last_stats"] = time.time()
     try:                                                  # Auswertung: was läuft am besten?
