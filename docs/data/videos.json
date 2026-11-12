@@ -2419,5 +2419,45 @@
   "thumb": true,
   "look": "cartoon",
   "mp4": true
+ },
+ {
+  "id": 76,
+  "category": "fakten",
+  "topic": "3 seltsame Tierfähigkeiten, die wie Superkräfte wirken: Pistolenkrebs (Knallblase kurz rund 4700 Grad heiß, Knall rund 210 Dezibel), unsterbliche Qualle (verjüngt sich zurück zum Polypen) und Fangschreckenkrebs (Schlag rund 80 km/h, 12 bis 16 Farbrezeptoren)",
+  "status": "rendered",
+  "created": 1794513708.0342937,
+  "title": "Drei tierische Superkräfte, die dich garantiert den Mund offen lassen",
+  "description": "Welches Tier hat wohl die krasseste Superkraft von allen?\nWir schauen uns drei absolut verrückte Fähigkeiten aus dem Tierreich an.\nWelche Fähigkeit würdest du sofort wählen?",
+  "hashtags": [
+   "#shorts",
+   "#tierfakten",
+   "#wissen",
+   "#fyp",
+   "#viral",
+   "#tiere",
+   "#lernen",
+   "#fakten"
+  ],
+  "tags": [
+   "tierfakten",
+   "superkräfte",
+   "pistolenkrebs",
+   "qualle",
+   "fangschreckenkrebs",
+   "biologie",
+   "wissen"
+  ],
+  "thumb_text": "KRASSE TIERFÄHIGKEITEN",
+  "missing": null,
+  "cover_ms": 70569,
+  "duration": 70.5,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]

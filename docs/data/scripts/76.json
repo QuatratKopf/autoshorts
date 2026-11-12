@@ -1,0 +1,484 @@
+{
+ "title": "Drei tierische Superkräfte, die dich garantiert den Mund offen lassen",
+ "scenes": [
+  {
+   "text": "Ein winziger Krebs schießt heißer als die Sonne.",
+   "see": "Ein winziger Krebs im Meer.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "shrimp",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": "center",
+     "hero": true
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "ECHTE SUPERKRÄFTE"
+   }
+  },
+  {
+   "text": "Seine Waffe kocht das Wasser sofort auf.",
+   "see": "Das Wasser kocht um den Krebs herum.",
+   "place": "underwater",
+   "time": "day",
+   "weather": "steam",
+   "actors": [
+    {
+     "id": "_meer",
+     "kind": "shrimp",
+     "action": "look_around",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": "worried",
+     "hero": true,
+     "pos": 400
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Seine Schere schnappt so brutal schnell zu, dass eine Schockwelle entsteht.",
+   "see": "Der Krebs schnappt mit der Schere zu.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_meer",
+     "kind": "shrimp",
+     "action": "idle",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "left",
+     "emotion": "worried",
+     "hero": true,
+     "pos": 680
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "BRUTAL SCHNELL"
+   }
+  },
+  {
+   "text": "Das Wasser darin kocht kurz auf und erreicht rund viertausend siebenhundert Grad.",
+   "see": "Eine heiße Blase entsteht unter Wasser.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_meer",
+     "kind": "shrimp",
+     "action": "idle",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": "worried",
+     "hero": true,
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 700,
+    "unit": "GRAD"
+   }
+  },
+  {
+   "text": "Das ist extrem nah an der Temperatur auf der Sonnenoberfläche.",
+   "see": "Die Sonne brennt am Himmel.",
+   "place": "desert",
+   "backdrop": {
+    "sky": "day",
+    "ground": "dry",
+    "elements": []
+   },
+   "time": "day",
+   "weather": "heat",
+   "props": [
+    {
+     "type": "sun"
+    }
+   ],
+   "shot": "event",
+   "mood": "calm"
+  },
+  {
+   "text": "Und der Knall erreicht unglaubliche zweihundertzehn Dezibel.",
+   "see": "Ein lauter Knall erschüttert das Wasser.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_meer",
+     "action": "walk",
+     "pos": 400,
+     "to": "center",
+     "emotion": "worried",
+     "kind": "shrimp",
+     "hold": "",
+     "hero": true,
+     "emote": "",
+     "facing": "right"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "LAUTER ALS JET"
+   }
+  },
+  {
+   "text": "Damit ist er lauter als ein startendes Flugzeug direkt neben dir.",
+   "see": "Ein Flugzeug startet am Himmel.",
+   "place": "street",
+   "backdrop": {
+    "sky": "day",
+    "ground": "road",
+    "elements": [
+     "city"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "plane"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense"
+  },
+  {
+   "text": "Nummer zwei bricht einfach das Gesetz des Alterns.",
+   "see": "Eine Qualle schwimmt im Ozean.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "jelly",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": "center",
+     "hero": true
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Die unsterbliche Qualle kann sich nach dem Erwachsenenalter komplett verjüngen.",
+   "see": "Die unsterbliche Qualle verjüngt sich.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_meer",
+     "kind": "jelly",
+     "action": "look_around",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": "",
+     "hero": true,
+     "pos": 400
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "UNSTERBLICH"
+   }
+  },
+  {
+   "text": "Sie wandert in ihrer Entwicklung einfach wieder zurück zum Polypen.",
+   "see": "Die Qualle wandert zurück zum Polypen.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_meer",
+     "kind": "jelly",
+     "action": "idle",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "left",
+     "emotion": "",
+     "hero": true,
+     "pos": 680
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Das ist so, als ob du als Opa beschließt, wieder als Baby zu starten.",
+   "see": "Ein alter Mann schaut verwundert.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Biologisch gesehen stirbt dieses Tier also niemals an Altersschwäche.",
+   "see": "Eine Qualle schwebt im blauen Ozean.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "center",
+     "to": "center",
+     "emotion": "",
+     "kind": "jelly",
+     "hold": "",
+     "hero": true,
+     "emote": "",
+     "facing": "right"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "stamp",
+    "text": "REKORD",
+    "color": "green"
+   }
+  },
+  {
+   "text": "Nummer drei ist der Fangschreckenkrebs mit einer echten Killermaschinen-Keule.",
+   "see": "Ein Fangschreckenkrebs zeigt seine Keule.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_meer",
+     "kind": "mantis",
+     "action": "look_around",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": "worried",
+     "hero": true,
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Sein Schlag beschleunigt mit rund achtzig Kilometern pro Stunde.",
+   "see": "Der Fangschreckenkrebs schlägt zu.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_meer",
+     "kind": "mantis",
+     "action": "idle",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": "angry",
+     "hero": true,
+     "pos": 400
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "counter",
+    "label": "SCHLAG",
+    "value": 80,
+    "unit": "KM/H"
+   }
+  },
+  {
+   "text": "Das geht so schnell, dass das Wasser um die Keule herum sofort kocht.",
+   "see": "Wasser kocht um die Keule herum.",
+   "place": "underwater",
+   "time": "day",
+   "weather": "steam",
+   "actors": [
+    {
+     "id": "_meer",
+     "kind": "mantis",
+     "action": "idle",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "left",
+     "emotion": "worried",
+     "hero": true,
+     "pos": 680
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Zusätzlich sieht er Farben, von denen wir Menschen nur träumen können.",
+   "see": "Bunte Farben leuchten im Wasser.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_meer",
+     "kind": "mantis",
+     "action": "look_around",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": "happy",
+     "hero": true,
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Während wir nur drei Rezeptoren haben, besitzt er bis zu sechzehn.",
+   "see": "Ein Auge sieht viele Farben.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_meer",
+     "kind": "mantis",
+     "action": "idle",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": "",
+     "hero": true,
+     "pos": 400
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "counter",
+    "label": "REZEPTOREN",
+    "value": 16,
+    "unit": "FARBEN"
+   }
+  },
+  {
+   "text": "Er sieht ultraviolettes Licht und sogar polarisiertes Licht ganz mühelos.",
+   "see": "Ultraviolettes Licht leuchtet auf.",
+   "place": "underwater",
+   "time": "night",
+   "actors": [
+    {
+     "id": "_meer",
+     "kind": "mantis",
+     "action": "idle",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "left",
+     "emotion": "worried",
+     "hero": true,
+     "pos": 680
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Die Natur ist eben oft krasser als jeder Superheldenfilm im Kino.",
+   "see": "Eine große Explosion im Weltall.",
+   "place": "space",
+   "backdrop": {
+    "sky": "night",
+    "ground": "rock",
+    "elements": []
+   },
+   "time": "night",
+   "props": [
+    {
+     "type": "explosion"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "overlay": {
+    "type": "stamp",
+    "text": "WAHNSINN",
+    "color": "orange"
+   }
+  },
+  {
+   "text": "Welches Tier würdest du als Haustier nehmen, folg für mehr.",
+   "see": "Du stehst im Zimmer und fragst.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "choice",
+    "a": "Pistolenkrebs",
+    "b": "Qualle"
+   }
+  }
+ ]
+}
