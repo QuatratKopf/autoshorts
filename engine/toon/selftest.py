@@ -307,6 +307,22 @@ def main():
             for i, sc_ in enumerate(scs):
                 stage.render_scene(sc_, {}, 2.8, Path(tmp) / f"c{i}.mp4", index=i)
     check("Schnitt im Satz und Gruppen", _cuts)
+    def _brain():                                                # Gehirn als Figur, Fachbegriff als Schild, Schnitt nur auf genannte Dinge
+        scs = stage.direct([{"text": "Dein Gehirn schlägt Alarm.", "place": "zimmer", "props": [{"type": "computer"}],
+                             "actors": [{"id": "gehirn_bot", "action": "shocked", "emotion": "shocked"}]},
+                            {"text": "Das nennt sich hypnagoger Zuckungsimpuls.", "place": "schlafzimmer", "time": "night", "actors": [{"id": "du"}]},
+                            {"text": "Das ist der sogenannte Türrahmen-Effekt.", "place": "flur", "actors": [{"id": "du"}]}],
+                           [(i * 3.6, i * 3.6 + 3.6) for i in range(3)], "Drei Macken deines Gehirns")
+        _pl, _n, _s, acts, props, _w = stage._prepare(scs[0], {"gehirn_bot": {"kind": "agent"}})
+        assert [a["kind"] for a in acts] == ["brain"], acts
+        assert not stage._said_prop("computer", scs[0]["text"].lower()) and stage._said_prop("computer", "am pc zocken")
+        assert (scs[1].get("overlay") or {}).get("text") == "HYPNAGOGER ZUCKUNGSIMPULS", scs[1].get("overlay")
+        assert stage._term("Das nennt sich Liebe.") is None and stage._term("Er nennt sich selbst König.") is None
+        for m in ("", "angry", "shocked", "sad", "happy"):
+            assert extras.creature("brain", 1.0, -1, 0.5, m, 1.0)
+        for sc_ in scs:
+            frame(sc_)
+    check("Gehirn-Figur, Fachbegriff, genannte Dinge", _brain)
     def _hook():                                                 # Einstieg: schwache Anfänge erkannt, erstes Bild mit Reaktion und Ruck
         from .. import writer
         assert writer.hook_weak({"title": "Was passiert ohne Schwerkraft?", "scenes": [{"text": "Was wäre, wenn die Schwerkraft verschwindet?"}]})

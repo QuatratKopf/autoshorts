@@ -238,6 +238,8 @@ def _prepare(scene, cast):
             if len(humans) == 1:                          # Bildplan sagt „du“, Besetzung nennt die Hauptfigur beim Namen: dieselbe Figur
                 spec = humans[0]
         kind = str(a.get("kind") or spec.get("kind") or "").lower()
+        if re.search(r"gehirn|hirn|brain", aid.lower()) and kind in ("", "agent", "robot", "cell"):
+            kind = "brain"                                # „gehirn_bot“, „dein_gehirn“: das Gehirn selbst als Figur, kein oranges KI-Kästchen
         x0 = _x(a.get("pos"), default_x[i])
         x1 = _x(a.get("to"), x0) if a.get("to") else x0
         action = str(a.get("action") or "idle").lower()
@@ -304,6 +306,11 @@ def _prepare(scene, cast):
             p_given.append(bool(p.get("pos")))
     if event:
         props = [(k, 600 if (i == 0 and not p_given[i]) else x) for i, (k, x) in enumerate(props)]
+    for a in actors:                  # wer schläft, hält nichts in der ausgestreckten Hand
+        if a["action"] == "sleep":
+            a["hold"] = ""
+        elif a["action"] in ("shake", "schütteln") and not a["hold"] and not a["kind"]:
+            a["action"] = "idle"      # „shake“ heißt ausschütteln, was man hält – mit leerer Hand (gemeint war Kopfschütteln) bliebe nur ein ausgestreckter Arm
     return place, night, scale, actors, props, str(scene.get("weather") or "").lower()
 
 
@@ -1603,7 +1610,7 @@ PLURAL = {"agent": r"agenten|\bbots\b|assistenten", "virus": r"\bviren|bakterien
           "spider": r"spinnen|taranteln", "bee": r"bienen", "wasp": r"wespen", "cat": r"katzen", "dog": r"\bhunde\b", "bird": r"vögel",
           "fish": r"fische", "shark": r"\bhaie", "ghost": r"geister|gespenster", "robot": r"roboter\b", "alien": r"außerirdische|aliens",
           "dino": r"dinosaurier", "monster": r"monster"}
-HERO_SIZE = {"agent": 0.8, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9}   # Hauptfigur: etwa halb so hoch wie ein Mensch
+HERO_SIZE = {"agent": 0.8, "brain": 0.8, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9}   # Hauptfigur: etwa halb so hoch wie ein Mensch
 
 
 def _topic_creature(scenes, topic):
@@ -1842,6 +1849,19 @@ TAG_RE = (r"(\b\d{1,2}\.\s?(?:" + _MONTHS + r")(?:\s(?:1[5-9]|20)\d{2})?\b"     
           r"|\b(?:1[5-9]|20)\d{2}\b(?=\s*(?:$|[.,!?;:]|\s[a-zäöüß])))")                   # Jahreszahl, nicht „1500 Menschen“
 
 
+TERM_RE = (r"(?:nennt (?:sich|man)(?: das| dies| es)?|sogenannten?|sogenannte[rs]?|fachbegriff (?:dafür )?(?:ist|lautet)|phänomen heißt|effekt heißt)\s+"
+           r"(?:(?:der|die|das|den|dem|einen|eine|ein)\s+)?(?:sogenannte[nrs]?\s+)?"
+           r"((?:[a-zäöüß]{4,}(?:e|er|es|en|em)\s)?[A-ZÄÖÜ][a-zäöüß]{2,}(?:-[A-ZÄÖÜa-zäöü][a-zäöüß]+)*)")
+
+
+def _term(text):
+    """Fachbegriff, den der Satz einführt („Das nennt sich Türrahmen-Effekt“, „der sogenannte Mandela-Effekt“) – oder None."""
+    import re as _re
+    m = _re.search(TERM_RE, str(text or ""))
+    term = m.group(1).strip() if m else ""
+    return term.upper() if 6 <= len(term) <= 30 and ("-" in term or " " in term or len(term) >= 10) else None
+
+
 def _auto_tags(scenes):
     """Beschriftungs-Schild wie in den Vorbild-Shorts: nennt der Satz ein Datum, eine Jahreszahl oder einen Anlass, steht es als kleines
     Etikett oben im Bild – nur ohne andere Einblendung, nie in zwei Szenen hintereinander und nicht in Grafik-Szenen."""
@@ -1856,6 +1876,12 @@ def _auto_tags(scenes):
             m = _re.search(TAG_RE, sc["text"], _re.I)
             if m:
                 sc["overlay"] = {"type": "tag", "text": m.group(1).upper()}
+                prev = True
+                continue
+            term = _term(sc["text"])                       # der Fachbegriff, den der Satz einführt, steht zum Mitlesen im Bild
+            if term and not any(isinstance(o, dict) and isinstance(o.get("overlay"), dict)
+                                and term in str(o["overlay"].get("text") or "").upper() for o in scenes):
+                sc["overlay"] = {"type": "tag", "text": term}
                 prev = True
                 continue
         prev = bool(has and str(sc["overlay"].get("type")) == "tag")
@@ -1988,7 +2014,7 @@ TEXT_PROPS = [(r"drohne", "drone"), (r"überwachungskamera|kameras? (erfass|film
 MAP_HINTS = ((r"ganz deutschland|in deutschland|deutschlandweit|bundesweit|bundesländer|jeder deutsche|alle deutschen", "germany"),
              (r"weltweit|auf der ganzen welt|alle länder|rund um den globus|weltbevölkerung|alle kontinente|die ganze erde|die ganze welt", "worldmap"))
 # Tiere neben Menschen: Größe im Verhältnis zur Figur (1.0 = menschengroß). „Riesen…“-Themen heben das auf (giant).
-CREATURE_SIZE = {"spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45}
+CREATURE_SIZE = {"brain": 1.25, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45}
 GIANT_RE = r"riesen|riesig|gigant|monströs|so groß wie|meterhoh|haushoh|mutier"
 # Nur hier laufen Passanten durchs Bild – auf dem Feld, im Wald, im Keller ist niemand unterwegs
 CROWD_PLACES = ("headquarters", "street", "park", "village", "beach", "gasstation", "station", "supermarket", "supermarket_empty", "hospital", "office",
@@ -2142,6 +2168,16 @@ def _punch_time(scene, words, t0, dur):
 CUT_MIN = 2.6        # ab dieser Szenenlänge (s) wird mitten im Satz geschnitten – wie in den Vorbild-Shorts etwa alle 1,8 Sekunden ein neues Bild
 
 
+def _said_prop(kind, low):
+    """Spricht der Satz von diesem Ding? Nur dann lohnt der harte Schnitt darauf – ein Schreibtisch allein vor leerem Grund, während
+    der Satz vom Gehirn handelt, ist ein Verlegenheitsbild."""
+    key = extras.PROP_ALIASES.get(str(kind).lower(), str(kind).lower())
+    if any(k2 == key and re.search(pat, low) for pat, k2 in _lib_props() + TEXT_PROPS):
+        return True
+    words = {key, str(kind).lower()} | {a for a, k2 in extras.PROP_ALIASES.items() if k2 == key}
+    return any(re.search(r"(?<![a-zäöüß])" + re.escape(w), low) for w in words if len(w) >= 3)
+
+
 def _cut_plan(scene, shot, special, moving, ov_tall, place, actors, props, dur, cam, index):
     """Zweites Bild innerhalb einer Szene: beim Schlüsselwort (sonst zur Mitte) harter Schnitt auf den genannten Gegenstand groß
     („insert“) oder auf die Großaufnahme der Hauptfigur bzw. des Tiers („close“). Jede dritte Szene bleibt ruhig ohne Schnitt.
@@ -2149,8 +2185,9 @@ def _cut_plan(scene, shot, special, moving, ov_tall, place, actors, props, dur, 
     if special or shot or moving or ov_tall or scene.get("float") or dur < CUT_MIN or place in MAPS or index % 3 == 2 \
             or str(scene.get("shot") or "") in ("event", "insert", "graphic", "close"):
         return None, "", []
+    low = str(scene.get("text") or "").lower()
     named = [k for k, _ in props if extras.prop_fit(k) and extras.PROP_ALIASES.get(k, k) not in DULL
-             and extras.PROP_ALIASES.get(k, k) not in PLACE_HAS.get(place, ())]
+             and extras.PROP_ALIASES.get(k, k) not in PLACE_HAS.get(place, ()) and _said_prop(k, low)]
     down = any(a.get("action") in ("fall", "sleep", "sit", "float") for a in actors)      # liegt, sitzt oder schwebt jemand, schneidet die Großaufnahme ihn an
     kind = "insert" if named and index % 2 == 0 else "close" if 0 < len(actors) <= 2 and not down else "insert" if named else ""   # Gruppen nicht anschneiden
     if not kind:

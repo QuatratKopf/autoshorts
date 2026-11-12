@@ -127,7 +127,8 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
             hair: long, bun oder "" (kurz) · hair_color: braun, dunkelbraun, schwarz, blond, rot, grau · skin: weiß, hell, mittel, dunkel
             (gib jeder Figur eine andere Kombination aus Pulli-, Haarfarbe und Frisur, damit man sie sofort auseinanderhält)
   Tiere/Wesen statt Mensch: "kind": cat, dog, spider, ghost, alien, robot, bird, dino, monster, fish, shark, bee, wasp
-  sowie Begriffe als Figur mit Gesicht: agent (KI, Bot, Assistent – oranges Kästchen), virus (Virus, Bakterie, Erreger), cell (Zelle).
+  sowie Begriffe als Figur mit Gesicht: agent (KI, Bot, Assistent – oranges Kästchen), virus (Virus, Bakterie, Erreger), cell (Zelle),
+  brain (das Gehirn als rosa Figur – für Sätze wie „dein Gehirn schlägt Alarm“; Kennung z. B. "gehirn").
   Für Comedy: Dinge und Begriffe als Figuren mit eigenem Willen einsetzen, die reagieren, streiken, sich freuen oder beleidigt sind
   Höchstens 3 Figuren, jede klar unterscheidbar. Bei Du-Geschichten ist die Hauptfigur „du“.
 - BILDPLAN ZUERST: Überlege bei jeder Szene, bevor du sie ausfüllst: Was genau sieht der Zuschauer, während dieser Satz gesprochen wird?
@@ -174,7 +175,7 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
            Nimm nur Requisiten, die an diesen Ort gehören (kein Karton mitten auf der Straße als Ersatz für einen Supermarkt –
            dafür gibt es den Ort "supermarket").
   "actors": 1–2 Figuren, z. B. [{"id": "mia", "action": "run", "emotion": "scared", "emote": "!", "pos": "offleft", "to": "center", "speaks": true}]
-     action: idle, talk, walk, run, wave, point, shocked, sad, jump, think, sit, sleep, dance, look_around, fall, shake (schüttelt aus, was sie hält),
+     action: idle, talk, walk, run, wave, point, shocked, sad, jump, think, sit, sleep, dance, look_around, fall, shake (schüttelt aus, was sie hält – NICHT für Kopfschütteln, dafür idle),
              float (schwebt schwerelos in der Luft – dann schweben auch die Dinge aus "props" mit; für Sätze über Schweben, Abheben, fehlende Schwerkraft)
      hold (optional): was die Figur in der Hand hält – phone, flashlight, bag, bottle, umbrella, sign, map, radio oder jeder kleine Gegenstand
           aus "props"/"wishes" (z. B. "schuh", "glass", "candle")
@@ -575,6 +576,7 @@ Nenne in einem Fix nur die Felder, die sich ändern. Benutze ausschließlich Wer
 PROOF = """Du bist Lektor und Faktenprüfer für ein deutsches Wissens-Kurzvideo. Unten stehen je Szene der Sprechertext ("text") und die
 Texte der Einblendungen und Grafiken ("labels"). Prüfe streng und verbessere NUR, was falsch ist:
 1. Rechtschreibung, Grammatik, verstümmelte oder erfundene Wörter – auch in Einblendungen.
+   Erfundene Fachbegriffe („hypnagoger Zuckungsimpuls“) durch den gebräuchlichen ersetzen („Einschlafzuckung“).
 2. Erfundene Quellen: „Forscher schätzen …“, „Studien zeigen …“, „Experten warnen …“ ohne allgemein bekannte Grundlage. Formuliere solche Sätze
    als eigene Überlegung um („vermutlich“, „wahrscheinlich“) oder ersetze sie durch eine nachvollziehbare Folge. Keine erfundenen Opferzahlen,
    Schadenssummen oder Prozentwerte.
@@ -636,6 +638,45 @@ def sharpen_hook(js, topic):
         if (s0, s1) != (sc[0].get("text"), sc[1].get("text")):
             ai.log(f"Einstieg geschärft: „{s0}“ / „{s1}“")
         sc[0]["text"], sc[1]["text"] = s0, s1
+    return js
+
+
+META = """Du bist Korrektor für ein deutsches Kurzvideo. Prüfe NUR Rechtschreibung und Wortwahl von Titel, Titelbild-Text und Suchbegriffen:
+verstümmelte, erfundene oder falsch geschriebene Wörter („Macks“ statt „Macken“, „körpersucken“ statt „körperzucken“), falsche Groß- und
+Kleinschreibung (Adjektive im Titel klein: „3 sinnlose Gehirn-Macken“), fehlende Umlaute. Aussage, Länge und Stil bleiben gleich; nichts
+hinzufügen, keine Marken, keine Emojis. Gib JSON zurück – nur die Felder, die sich ändern:
+{"title": "…", "thumb": "…", "tags": {"falsch geschriebener begriff": "richtiger begriff"}}
+Leeres Objekt {}, wenn alles stimmt."""
+
+
+def proof_meta(js, topic):
+    """Schlusskorrektur für das, was öffentlich über dem Video steht: Titel, Titelbild-Text und Suchbegriffe. Ein eigener, kurzer
+    Durchgang – im großen Lektorat gehen Tippfehler im Titel („Gehirn-Macks“) zwischen den Szenen unter."""
+    import json
+    th = js.get("thumbnail") if isinstance(js.get("thumbnail"), dict) else {}
+    tags = [t for t in (js.get("tags") or []) if isinstance(t, str)]
+    user = (f"Thema: {topic}\nTitel: {js.get('title')}\nTitelbild-Text: {th.get('text') or ''}\n"
+            f"Suchbegriffe: {json.dumps(tags, ensure_ascii=False)}")
+    out, _ = ai.chat_json(META, user, 0.1)
+    if not isinstance(out, dict):
+        return js
+    old_t, ti = str(js.get("title") or ""), out.get("title")
+    if isinstance(ti, str) and ti.strip() and ti.strip() != old_t and 0.7 <= len(ti.strip()) / max(1, len(old_t)) <= 1.3 \
+            and abs(len(ti.split()) - len(old_t.split())) <= 1 and not _foreign(ti) and not _BRAND_RE.search(ti):
+        js["title"] = ti.strip()
+        ai.log(f"Schlusskorrektur Titel: {old_t} → {js['title']}")
+    old_b, tb = str(th.get("text") or ""), out.get("thumb")
+    if isinstance(tb, str) and tb.strip() and old_b and tb.strip().upper() != old_b.upper() and 0.6 <= len(tb.strip()) / len(old_b) <= 1.4 \
+            and len(tb.split()) <= 5 and not _foreign(tb) and not _BRAND_RE.search(tb):
+        th["text"] = tb.strip().upper()
+        ai.log(f"Schlusskorrektur Titelbild-Text: {old_b} → {th['text']}")
+    fix = out.get("tags") if isinstance(out.get("tags"), dict) else {}
+    for i, t in enumerate(js.get("tags") or []):
+        new = fix.get(t)
+        if isinstance(t, str) and isinstance(new, str) and new.strip() and new.strip() != t and 0.6 <= len(new.strip()) / max(1, len(t)) <= 1.5 \
+                and not _foreign(new) and not _BRAND_RE.search(new):
+            js["tags"][i] = new.strip()
+            ai.log(f"Schlusskorrektur Suchbegriff: {t} → {new.strip()}")
     return js
 
 
@@ -935,6 +976,10 @@ def write_script(cat: dict, topic: str, trend=None, source=None) -> tuple[dict, 
             js = proofread(js, topic)
         except Exception as e:  # noqa: BLE001
             ai.log(f"Lektorat nicht möglich ({e}) – nehme den Text, wie er ist")
+        try:
+            js = proof_meta(js, topic)
+        except Exception as e:  # noqa: BLE001
+            ai.log(f"Schlusskorrektur nicht möglich ({e})")
     try:
         js = polish(js)
     except Exception:  # noqa: BLE001

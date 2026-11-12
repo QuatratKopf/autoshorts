@@ -1799,6 +1799,47 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0):
         eye(hx + 14, hy - 30, 20)
         brow(hx + 14, hy - 58, 20, 1)
         cheek(hx - 10, hy + 2, 16)
+    elif kind == "brain":
+        # Das Gehirn als Figur („dein Gehirn schlägt Alarm“): rosa, zwei Hälften mit Windungen, großes Augenpaar, Ärmchen und Beinchen
+        col = (240, 150, 172)
+        hop = abs(math.sin(t * 5)) * 10 if mood in ("happy",) else 0
+        by = -168 - hop
+        for lx in (-46, 46):                                                     # Beinchen mit Schuhen
+            stroke([(lx, by + 80), (lx + 4, -14 - hop * 0.3)], 18, _dark(col, 0.22) if lx < 0 else _dark(col, 0.1))
+            ell(lx - 18, -26, lx + 30, 2, (70, 80, 120), shade=0)
+        sw = math.sin(t * 3) * 10
+        for s_ in (-1, 1):                                                       # Ärmchen
+            stroke([(s_ * 128, by + 30), (s_ * 172, by + 56 + s_ * sw), (s_ * 184, by + 86 + s_ * sw)], 15, _dark(col, 0.1))
+            ell(s_ * 184 - 15, by + 76 + s_ * sw, s_ * 184 + 15, by + 106 + s_ * sw, col, shade=0)
+        bumps = [(-112, -40, 46), (-96, -86, 46), (-52, -116, 48), (0, -124, 48), (52, -116, 48), (96, -86, 46), (112, -40, 46),
+                 (118, 12, 42), (96, 58, 42), (-118, 12, 42), (-96, 58, 42), (-48, 78, 42), (0, 84, 42), (48, 78, 42)]
+        for bx_, by_, r_ in bumps:                                               # Umriss aus Wülsten …
+            ell(bx_ - r_, by + by_ - r_, bx_ + r_, by + by_ + r_, _dark(col, 0.24), shade=0)
+        for bx_, by_, r_ in bumps:                                               # … mit heller Oberseite
+            ell(bx_ - r_ + 12, by + by_ - r_, bx_ + r_, by + by_ + r_ - 10, col, shade=0, line=False)
+        ell(-118, by - 112, 118, by + 84, col, shade=0, line=False)
+        fold = _dark(col, 0.3)
+        wl = max(2, int(7 * k))
+        d.line([P(4, by - 168), P(-4, by - 120), P(6, by - 84)], fill=fold, width=wl, joint="curve")                # Furche zwischen den Hälften
+        for s_ in (-1, 1):                                                       # Windungen
+            d.arc(B(s_ * 26, by - 140, s_ * 96, by - 84), 180, 360, fill=fold, width=wl)
+            d.arc(B(s_ * 70, by - 96, s_ * 132, by - 44), 180, 360, fill=fold, width=wl)
+            d.arc(B(s_ * 36, by + 36, s_ * 100, by + 84), 0, 180, fill=fold, width=wl)
+        ex, ey = 8, by - 22                                                      # großes Augenpaar
+        eye(ex - 40, ey, 27)
+        eye(ex + 40, ey, 27)
+        if mood in ("sad", "angry", "worried", "scared"):
+            dy = 10 if mood == "angry" else -10
+            for s_ in (-1, 1):
+                d.line((*P(ex + s_ * 40 - 26, ey - 48 + dy * s_), *P(ex + s_ * 40 + 26, ey - 48 - dy * s_)), fill=INK, width=max(2, int(9 * k)))
+        cheek(ex - 80, ey + 34, 15)
+        cheek(ex + 84, ey + 34, 15)
+        if mouth > 0.1:
+            mouthf(ex, ey + 50, 18)
+        elif wide:                                                               # erschrocken: kleiner offener Mund
+            d.ellipse(B(ex - 12, ey + 40, ex + 12, ey + 68), fill=(110, 36, 46), outline=INK, width=max(2, int(4 * k)))
+        else:
+            d.arc(B(ex - 20, ey + 30, ex + 20, ey + 62), *((200, 340) if mood in ("sad", "worried", "scared", "angry") else (20, 160)), fill=INK, width=max(2, int(6 * k)))
     elif kind in ("agent", "virus", "cell"):
         # Personifizierte Begriffe (wie die KI-Agenten in den Vorbild-Shorts): ein Kästchen, eine Stachelkugel, eine Zelle –
         # mit großen Augen, Augenbrauen, Mund, Ärmchen und Beinchen; Farbe je Begriff
@@ -1922,4 +1963,4 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0):
     return out, cx / S, gy / S, fly
 
 
-CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell")
+CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain")
