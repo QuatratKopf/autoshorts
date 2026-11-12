@@ -1,5 +1,5 @@
 {
- "updated": 1794508909.0552738,
+ "updated": 1794511108.4131432,
  "enough": false,
  "counted": 5,
  "total": 6,
@@ -9,19 +9,19 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 4,
-   "avg_views": 1250,
-   "avg_likes": 27.5,
-   "like_rate": 2.2,
-   "avg_score": 1670
+   "avg_views": 1260,
+   "avg_likes": 28.0,
+   "like_rate": 2.22,
+   "avg_score": 1688
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 1,
-   "avg_views": 525,
-   "avg_likes": 14.0,
-   "like_rate": 2.67,
-   "avg_score": 735
+   "avg_views": 533,
+   "avg_likes": 15.0,
+   "like_rate": 2.81,
+   "avg_score": 758
   }
  ],
  "weights": {
@@ -42,21 +42,21 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2353,
-   "likes": 54,
+   "views": 2383,
+   "likes": 55,
    "comments": 0,
    "shares": 0,
-   "score": 3163
+   "score": 3208
   },
   {
    "id": 54,
    "title": "Was passiert, wenn die Schwerkraft für fünf Sekunden verschwindet?",
    "category": "whatif",
-   "views": 1536,
-   "likes": 39,
+   "views": 1544,
+   "likes": 40,
    "comments": 0,
    "shares": 0,
-   "score": 2121
+   "score": 2144
   },
   {
    "id": 38,
@@ -72,11 +72,11 @@
    "id": 58,
    "title": "Wie aus einer Gaming-Bude der wertvollste Tech-Gigant wurde",
    "category": "fakten",
-   "views": 525,
-   "likes": 14,
+   "views": 533,
+   "likes": 15,
    "comments": 0,
    "shares": 0,
-   "score": 735
+   "score": 758
   },
   {
    "id": 44,
