@@ -2114,10 +2114,81 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0):
         cheek(-78, by + 12, 14)
         cheek(84, by + 12, 14)
         mouthf(2, by + 14, 13)
+    elif kind == "axolotl":
+        # Axolotl: rosa Schwanzlurch mit breitem Lächeln und je drei gefiederten Kiemenästen; schwimmt
+        fly = True
+        col = (246, 176, 190)
+        gill = (226, 92, 120)
+        by = -300 + bob * 1.6
+        wag = math.sin(t * 5) * 22
+        tail = [(-90, by - 10), (-170, by - 30 + wag * 0.4), (-250, by - 14 + wag), (-282, by + 6 + wag), (-240, by + 34 + wag * 0.8), (-160, by + 40 + wag * 0.3), (-90, by + 40)]
+        poly(tail, col)                                                          # Ruderschwanz mit Flossensaum
+        d.line([P(x, y) for x, y in ((-100, by + 12), (-180, by + 6 + wag * 0.4), (-262, by + 10 + wag))], fill=_dark(col, 0.3), width=max(2, int(5 * k)))
+        for lx, far in ((-70, True), (40, True), (-50, False), (60, False)):     # vier kurze Beine mit Zehen
+            sw_ = math.sin(t * 5 + lx) * 8
+            c2 = _dark(col, 0.2) if far else col
+            stroke([(lx, by + 44), (lx + 10 + sw_, by + 82), (lx + 30 + sw_, by + 96)], 16, c2)
+            for tz in (-8, 4, 16):
+                stroke([(lx + 30 + sw_, by + 96), (lx + 44 + sw_, by + 96 + tz)], 5, c2)
+        ell(-120, by - 52, 96, by + 64, col)                                     # Rumpf
+        ell(-70, by + 10, 70, by + 60, _light(col, 0.5), shade=0, line=False)
+        hx = 122
+        for far in (True, False):                                                # je drei gefiederte Kiemenäste, fächerförmig nach hinten oben
+            for i, a_ in enumerate((158, 128, 98) if not far else (146, 116, 88)):
+                r_ = math.radians(a_ + math.sin(t * 3 + i) * 5)
+                ln = 84 if far else 104
+                bx_, by_ = (hx - 34, by - 44) if far else (hx - 62, by - 26)
+                tx_, ty_ = bx_ + math.cos(r_) * ln, by_ - math.sin(r_) * ln
+                stroke([(bx_, by_), (tx_, ty_)], 12 if far else 15, _dark(gill, 0.25) if far else gill)
+                if not far:
+                    for q in (0.5, 0.8):                                         # Fiederchen
+                        mx_, my_ = bx_ + (tx_ - bx_) * q, by_ + (ty_ - by_) * q
+                        nx_, ny_ = math.sin(r_) * 16, math.cos(r_) * 16
+                        d.line((*P(mx_ - nx_, my_ - ny_), *P(mx_ + nx_, my_ + ny_)), fill=_light(gill, 0.35), width=max(2, int(5 * k)))
+        ell(hx - 84, by - 70, hx + 96, by + 62, col)                             # breiter Kopf
+        eye(hx + 4, by - 20, 15)
+        eye(hx + 62, by - 20, 15)
+        brow(hx + 4, by - 44, 14, 1)
+        brow(hx + 62, by - 44, 14, -1)
+        cheek(hx - 22, by + 16, 15)
+        cheek(hx + 84, by + 12, 12)
+        if mouth > 0.1 or wide:
+            mouthf(hx + 36, by + 18, 14)
+        else:
+            d.arc(B(hx - 14, by - 14, hx + 86, by + 34), *((20, 160) if mood not in ("sad", "worried") else (200, 340)), fill=INK, width=max(2, int(6 * k)))
+    elif kind == "tardigrade":
+        # Bärtierchen: pralles, gegliedertes Körperchen auf acht Stummelbeinen mit Krallen, runder Rüssel-Mund
+        col = (214, 186, 150)
+        step = math.sin(t * 6)
+        by = -150 + bob * 0.3
+        segs = [(-150, 6, 70), (-80, -6, 88), (0, -10, 92), (78, -4, 82)]
+        for i, (sx, sy, r_) in enumerate(segs):                                  # Beine hinten (abgewandte Seite)
+            lift = step * 8 * (1 if i % 2 else -1)
+            stroke([(sx + 18, by + 60), (sx + 26, -22 - max(0, lift))], 30, _dark(col, 0.28))
+        for sx, sy, r_ in segs:                                                  # Körperringe
+            ell(sx - r_ * 0.78, by + sy - r_, sx + r_ * 0.78, by + sy + r_, col)
+        for sx, sy, r_ in segs[1:]:
+            d.arc(B(sx - r_ * 0.78, by + sy - r_, sx + r_ * 0.78, by + sy + r_), *((120, 240) if f > 0 else (300, 60)), fill=_dark(col, 0.3), width=max(2, int(6 * k)))
+        for i, (sx, sy, r_) in enumerate(segs):                                  # Beine vorn mit Krallen
+            lift = step * 8 * (-1 if i % 2 else 1)
+            fy_ = -18 - max(0, lift)
+            stroke([(sx - 16, by + 62), (sx - 10, fy_)], 34, col)
+            for cz in (-12, 0, 12):
+                poly([(sx - 10 + cz - 5, fy_ + 8), (sx - 10 + cz, fy_ + 26), (sx - 10 + cz + 5, fy_ + 8)], (90, 70, 56), shade=0, line=False)
+        hx = 150
+        ell(hx - 70, by - 74, hx + 70, by + 62, col)                             # Kopf
+        ell(hx + 40, by - 14, hx + 96, by + 36, _light(col, 0.3), shade=0.1)     # Rüssel
+        mh = 8 + mouth * 10
+        ell(hx + 62, by + 10 - mh, hx + 62 + 2 * mh, by + 10 + mh, (110, 60, 60), shade=0, line=False)
+        eye(hx - 14, by - 22, 14)
+        eye(hx + 30, by - 26, 14)
+        brow(hx - 14, by - 46, 13, 1)
+        brow(hx + 30, by - 50, 13, -1)
+        cheek(hx - 34, by + 14, 14)
     else:
         return None
     out = im.resize((im.width // S, im.height // S), Image.LANCZOS)
     return out, ax / S, gy / S, fly
 
 
-CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly")
+CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly", "axolotl", "tardigrade")

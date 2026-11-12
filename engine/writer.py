@@ -127,7 +127,8 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
             hair: long, bun oder "" (kurz) · hair_color: braun, dunkelbraun, schwarz, blond, rot, grau · skin: weiß, hell, mittel, dunkel
             (gib jeder Figur eine andere Kombination aus Pulli-, Haarfarbe und Frisur, damit man sie sofort auseinanderhält)
   Tiere/Wesen statt Mensch: "kind": cat, dog, spider, ghost, alien, robot, bird, dino, monster, fish, shark, bee, wasp
-  Meerestiere: shrimp (Pistolenkrebs, Garnele, Krebs – die Knallschere schnappt zu), mantis (Fangschreckenkrebs – schlägt mit der Keule), jelly (Qualle).
+  Meerestiere: shrimp (Pistolenkrebs, Garnele, Krebs – die Knallschere schnappt zu), mantis (Fangschreckenkrebs – schlägt mit der Keule), jelly (Qualle),
+  axolotl (rosa Schwanzlurch mit Kiemenästen) · überall: tardigrade (Bärtierchen).
   Sie spielen am Ort underwater; nie monster oder fish als Ersatz für ein Tier nehmen, das es hier gibt.
   sowie Begriffe als Figur mit Gesicht: agent (KI, Bot, Assistent – oranges Kästchen), virus (Virus, Bakterie, Erreger), cell (Zelle),
   brain (das Gehirn als rosa Figur – für Sätze wie „dein Gehirn schlägt Alarm“; Kennung z. B. "gehirn").
@@ -435,12 +436,16 @@ def polish(js):
         if isinstance(js.get(k), str):
             js[k] = fix_eszett(js[k])
             js[k] = re.sub(r"[ \t]*[\U0001F000-\U0001FAFF\u2600-\u27BF\uFE0F\u200D]+", "", js[k]).strip()      # keine Emojis in Titel und Beschreibung
+    if isinstance(js.get("description"), str):           # der Kanal spricht den Zuschauer an – kein „Wir zeigen dir“
+        js["description"] = re.sub(r"\bWir zeigen(?: dir| euch)?, ", "Hier siehst du, ", js["description"])
+        js["description"] = re.sub(r"\bWir zeigen(?: dir| euch)? ", "Hier siehst du ", js["description"])
     for sc in js.get("scenes", []):
         if not isinstance(sc, dict):
             continue
         if isinstance(sc.get("text"), str):
             sc["text"] = fix_eszett(sc["text"])
             sc["text"] = re.sub(r"(?i)\b([a-zäöüß]{4,}) \1\b", r"\1", sc["text"])      # „reine reine Fantasie“: versehentlich doppeltes Wort
+            sc["text"] = re.sub(r"(?i)(zwei|drei|vier|fünf|sieben|acht|neun)s(hundert|tausend)", r"\1\2", sc["text"])   # „viertausendviershundert“
         for box in (sc.get("overlay"), sc.get("graphic")):
             if isinstance(box, dict):
                 for k in _LABEL_KEYS:

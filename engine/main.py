@@ -121,7 +121,7 @@ def known_thing(word):
     if any(len(k) >= 4 and (k in w or (len(w) >= 5 and w in k)) for k in pool):
         return True
     import re as _re
-    return any(_re.search(pat, w) for pat, _ in stage.TEXT_PROPS + stage._lib_props() + stage.GRAPHIC_WORDS + stage.SEA_CREATURES) or any(_re.search(pat, w) for pat, _ in stage.HINTS)
+    return any(_re.search(pat, w) for pat, _ in stage.TEXT_PROPS + stage._lib_props() + stage.GRAPHIC_WORDS + stage.SEA_CREATURES + stage.ANY_CREATURES) or any(_re.search(pat, w) for pat, _ in stage.HINTS)
 
 
 def missing_things(script, topic):

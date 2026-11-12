@@ -276,6 +276,18 @@ def main():
         g = stage.direct([{"text": "Sein Schlag erreicht achtzig Kilometer pro Stunde.", "place": "underwater", "shot": "graphic",
                            "graphic": {"type": "compare", "left": "SCHLAG", "right": "SCHNEIDEN", "value": "80 km/h", "sub": "80 km/h"}}], [(0, 3)], "Tiere")
         assert (g[0].get("graphic") or {}).get("type") != "compare", "Vergleich mit zweimal derselben Zahl"
+        T2 = [("Kandidat Nummer zwei ist der Axolotl.", "lab", [{"id": "du"}], "graphic"), ("Sogar Rückenmark wächst lückenlos nach.", "lab", [{"id": "du", "action": "shocked"}], ""),
+              ("Mediziner erforschen das, um Menschen zu helfen.", "lab", [{"id": "du"}], ""), ("Bärtierchen überleben extreme Kälte.", "kitchen", [{"id": "du", "action": "walk"}], ""),
+              ("Sie trocknen jahrelang ohne Wasser einfach aus.", "desert", [], ""), ("Dann wachen sie auf und krabbeln einfach weiter.", "lab", [{"id": "du"}], ""),
+              ("Schreib deine Wahl in die Kommentare.", "bedroom", [{"id": "du"}], "")]
+        s2 = stage.direct([{"text": t_, "place": pl_, "actors": a_, "shot": sh_, "graphic": {"type": "round", "kicker": "KRAFT 2", "text": "REGENERATION"} if sh_ else None}
+                           for t_, pl_, a_, sh_ in T2], [(n_ * 3, n_ * 3 + 3) for n_ in range(len(T2))], "3 Tiere mit Superkräften")
+        kinds = [[a.get("kind") or "" for a in sc_.get("actors") or []] for sc_ in s2]
+        assert kinds[1] == ["axolotl"], f"Axolotl-Folgesatz: {kinds[1]}"
+        assert kinds[2] == [""] and kinds[6] == [""], f"Menschen-Sätze: {kinds[2]} {kinds[6]}"
+        assert kinds[3] == ["tardigrade"] and kinds[4] == ["tardigrade"] and kinds[5] == ["tardigrade"], f"Bärtierchen: {kinds[3:6]}"
+        for sc_ in s2:
+            frame(sc_, {"du": {"shirt": "blau"}})
     check("Meerestiere", _sea)
     def _hero():                                                 # Tier im Titel wird Hauptfigur: groß, mit Gefühl, nicht doppelt als Gegenstand
         scs = stage.direct([{"text": "Die Spinne sitzt in deinem Zimmer.", "place": "bedroom", "props": ["lib_tarantel"], "actors": [{"id": "du", "action": "shocked"}]},
