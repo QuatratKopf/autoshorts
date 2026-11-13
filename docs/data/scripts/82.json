@@ -1,0 +1,498 @@
+{
+ "title": "Was wenn alle Menschen gleichzeitig nett wären?",
+ "scenes": [
+  {
+   "text": "Alle acht Milliarden Menschen sind eine Minute lang nett.",
+   "see": "Ein Mann schaut überrascht auf seine schwebende Handuhr.",
+   "place": "zimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "clock"
+    }
+   ],
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "clock",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "8 MRD. MENSCHEN"
+   }
+  },
+  {
+   "text": "Und die Folgen verändern unseren Planeten für immer.",
+   "see": "Eine Weltkugel leuchtet hell auf.",
+   "place": "space",
+   "time": "night",
+   "props": [
+    {
+     "type": "earth"
+    }
+   ],
+   "shot": "event",
+   "mood": "calm"
+  },
+  {
+   "text": "In Sekunde eins stoppen weltweit alle sechzigtausend laufenden Kriege und Streitigkeiten schlagartig.",
+   "see": "Sekunde eins wird auf einem Puls-Bildschirm angezeigt.",
+   "place": "worldmap",
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "pulse",
+    "value": "1",
+    "label": "SEKUNDE EINS",
+    "dark": false
+   }
+  },
+  {
+   "text": "Autofahrer hupen nicht mehr, sondern lassen sich lächelnd gegenseitig den Vortritt.",
+   "see": "Menschen auf der Straße umarmen sich freundlich.",
+   "place": "street",
+   "backdrop": {
+    "sky": "day",
+    "ground": "road",
+    "elements": [
+     "street",
+     "city"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "car"
+    },
+    {
+     "type": "trafficlight"
+    }
+   ],
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "nachbar",
+     "speaks": false,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "happy",
+   "crowd": "cheer",
+   "overlay": {
+    "type": "tag",
+    "text": "SEKUNDE 10"
+   }
+  },
+  {
+   "text": "Nach zehn Sekunden sinkt weltweit der Stresspegel der Menschheit spürbar ab.",
+   "see": "Nach zehn Sekunden sinkt der Blutdruck sichtbar.",
+   "place": "hospital",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "calm",
+   "crowd": "walk",
+   "graphic": {
+    "type": "number",
+    "value": "10",
+    "label": "SEKUNDEN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Das entlastet in diesem Moment Millionen von Menschen körperlich und mental.",
+   "see": "Ein Herz schlägt ruhig im Bild.",
+   "place": "hospital",
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "think",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "crowd": "walk"
+  },
+  {
+   "text": "In Sekunde dreißig verschicken Menschen über zehn Milliarden freundliche Nachrichten an ihre Ex-Partner.",
+   "see": "Nach dreißig Sekunden tippen Leute nette Nachrichten ins Handy.",
+   "place": "zimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "tv"
+    }
+   ],
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "think",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "phone",
+    "title": "12:00",
+    "items": [
+     "Ex: Danke für alles!",
+     "Du: Dir auch nur das Beste ❤️"
+    ]
+   }
+  },
+  {
+   "text": "Die Server von großen Messenger-Diensten glühen beinahe durch wegen der Datenmenge.",
+   "see": "Serverzentren geraten ins Schwitzen.",
+   "place": "serverroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "held",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "DATEN-REKORD"
+   }
+  },
+  {
+   "text": "Im Büro teilt der Kollege plötzlich sein letztes Stück Kuchen ganz freiwillig.",
+   "see": "Ein Mann im Büro gibt seinem Kollegen den letzten Keks.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "table"
+    }
+   ],
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "nachbar",
+     "speaks": false,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Nach fünfzig Sekunden geht die weltweite Kriminalitätsrate drastisch zurück.",
+   "see": "Nach fünfzig Sekunden sinkt die Kriminalität auf Null.",
+   "place": "street",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "calm",
+   "crowd": "walk",
+   "graphic": {
+    "type": "number",
+    "value": "50",
+    "label": "SEKUNDEN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Einsatzkräfte weltweit haben für sechzig Sekunden absolut nichts mehr zu tun.",
+   "see": "Polizeiautos stehen ruhig an der Straße.",
+   "place": "street",
+   "backdrop": {
+    "sky": "day",
+    "ground": "road",
+    "elements": [
+     "street"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "car"
+    }
+   ],
+   "shot": "event",
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "NOTRUF: STILL"
+   }
+  },
+  {
+   "text": "Aber dann läuft die eine Minute ab und der Alltag kehrt zurück.",
+   "see": "Der Höhepunkt: Nach einer Minute endet die Zeit.",
+   "place": "zimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "clock"
+    }
+   ],
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "overlay": {
+    "type": "card",
+    "text": "60 SEKUNDEN UM"
+   }
+  },
+  {
+   "text": "Experten vermuten: Diese sechzig Sekunden sparen der Weltwirtschaft enorm viel Geld.",
+   "see": "Wirtschafts-Chart steigt steil nach oben.",
+   "place": "livingroom",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "happy",
+   "graphic": {
+    "type": "chart",
+    "kicker": "ERSPARNIS",
+    "label": "GELD GESPART",
+    "dark": false
+   }
+  },
+  {
+   "text": "Weil weniger Sachschäden entstehen und stundenlange Staus gar nicht erst passieren.",
+   "see": "Schäden an Autos und Gebäuden wurden vermieden.",
+   "place": "street",
+   "backdrop": {
+    "sky": "day",
+    "ground": "road",
+    "elements": [
+     "street",
+     "city"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "car"
+    }
+   ],
+   "shot": "event",
+   "mood": "calm",
+   "crowd": "walk"
+  },
+  {
+   "text": "Zusätzlich würde das allgemeine Vertrauen unter Menschen für Wochen extrem ansteigen.",
+   "see": "Ein kleines Pflanzgut sprießt am Wegesrand.",
+   "place": "park",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "trees"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "action": "talk",
+     "emotion": "",
+     "pos": "center",
+     "speaks": true
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Denn Erfahrungsgemäß wirkt echte Freundlichkeit ansteckend und hält oft tagelang an.",
+   "see": "Ein Kalender hakt verbleibende Tage ab.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "happy"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Also: Eine einzige Minute Freundlichkeit könnte wirklich die Welt ein Stück retten.",
+   "see": "Der Hauptdarsteller schaut fragend in die Kamera.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "happy",
+   "overlay": {
+    "type": "card",
+    "text": "DEINE MINUTE?"
+   }
+  },
+  {
+   "text": "Würdest du heute damit anfangen oder lieber deinen Nachbarn weiter ärgern?",
+   "see": "Zwei Nachbarn stehen nebeneinander.",
+   "place": "hallway",
+   "time": "day",
+   "props": [
+    {
+     "type": "door"
+    }
+   ],
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "nachbar",
+     "speaks": false,
+     "action": "look_around",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "choice",
+    "a": "Nett sein",
+    "b": "Weiter ärgern"
+   }
+  },
+  {
+   "text": "Schreib es in die Kommentare und folg für mehr Fakten!",
+   "see": "Schlussbild mit Aufforderung.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "tag",
+    "text": "FOLGEN FÜR MEHR"
+   }
+  }
+ ]
+}
