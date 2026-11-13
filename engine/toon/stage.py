@@ -1009,6 +1009,32 @@ def _lib_props():
         return []
 
 
+def topic_head(topic):
+    """Kern eines langen Themas (bis zum ersten Doppelpunkt, Gedankenstrich oder der ersten Klammer). Ein Thema mit ausführlichen
+    Vorgaben nennt viele Dinge – keines davon ist „das Ding des Themas“, das in jeder zweiten Szene im Bild steht."""
+    import re as _re
+    t = " ".join(str(topic or "").split())
+    return _re.split(r"\s[–—-]\s|:\s|\s\(", t)[0] if len(t) > 90 else t
+
+
+HEAP_RE = r"zucker|\bsalz|mehl|pulver|haufen|\bberg\b|berge\b|schnee|\bsand|kies|schutt|geröll|asche|staub|müll|abfall|schrott|plastik"
+NUM_LABEL_RE = r"(?i)\b(nummer|nr\.?|regel|fakt|punkt|platz|runde|tipp|grund|stufe|teil)\s*#?\s*(eins|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|\d{1,2})\b"
+_ORDINALS = {1: r"eins|erste|erstens", 2: r"zwei|zweite|zweitens", 3: r"drei|dritte|drittens", 4: r"vier|vierte|viertens", 5: r"fünf|fünfte|fünftens",
+             6: r"sechs|sechste", 7: r"sieben|siebte", 8: r"acht|achte", 9: r"neun|neunte", 10: r"zehn|zehnte"}
+
+
+def numbered_label_wrong(box, text):
+    """Schild „REGEL NUMMER EINS“ / „FAKT 2“ an einem Satz, der diese Nummer gar nicht nennt (z. B. beim Cliffhanger über die letzte Regel)."""
+    import re as _re
+    lab = " ".join(str(box.get(k) or "") for k in ("text", "title", "label", "kicker"))
+    m = _re.search(NUM_LABEL_RE, lab.replace("NUMMER", "").replace("Nummer", "").replace("  ", " ")) or _re.search(NUM_LABEL_RE, lab)
+    if not m:
+        return False
+    n = int(m.group(2)) if m.group(2).isdigit() else {"eins": 1, "zwei": 2, "drei": 3, "vier": 4, "fünf": 5, "sechs": 6, "sieben": 7, "acht": 8, "neun": 9, "zehn": 10}[m.group(2).lower()]
+    pat = _ORDINALS.get(n)
+    return bool(pat) and not _re.search(r"\b(?:" + pat + r")[rsnm]?\b", str(text or "").lower())
+
+
 def direct(scenes, times, topic="", style="", look=""):
     """Kleine Regie über das ganze Video: sorgt für Abwechslung, wenn das Drehbuch mehrmals hintereinander dieselbe
     Einstellung vorgibt (gleicher Ort, gleiche Figur, nur Reden) – andere Position, Nahaufnahme oder Hereinkommen."""
@@ -1043,6 +1069,15 @@ def direct(scenes, times, topic="", style="", look=""):
                 sc["crowd"] = ""
         sc["props"] = [q for q in sc["props"] if (lambda k: k in extras.PROPS or k in extras.PROP_ALIASES or k in extras.HELD)(q["type"].lower())]
         low0 = sc["text"].lower()
+        if not _re0.search(HEAP_RE, low0):                # weißer Haufen (Zucker/Salz), Sand- oder Müllberg nur, wenn der Satz davon spricht
+            sc["props"] = [q for q in sc["props"] if extras.PROP_ALIASES.get(q["type"].lower(), q["type"].lower()) not in ("pile", "sandpile", "trash")]
+        ov_n = sc.get("overlay") if isinstance(sc.get("overlay"), dict) else None
+        if ov_n and str(ov_n.get("type") or "").lower() in ("tag", "card", "note", "stamp") and numbered_label_wrong(ov_n, sc["text"]):
+            sc["overlay"] = None                          # „REGEL NUMMER EINS“ über einem Satz, der die Nummer nicht nennt
+        elif ov_n and str(ov_n.get("type") or "").lower() == "stamp":
+            st_w = [w for w in _re0.findall(r"[a-zäöüß]{4,}", str(ov_n.get("text") or "").lower())]
+            if st_w and not any(w[:5] in low0 for w in st_w) and not any(_re0.search(p_, low0) and lab_ == str(ov_n.get("text") or "").upper() for p_, lab_, _c in STAMPS):
+                sc["overlay"] = None                      # Stempel („GRATIS“, „PLEITE“) mit einem Wort, das im Satz gar nicht fällt
         simile = sc["_simile"] = []
         for pat, k in TEXT_PROPS:                         # „wie ein Raketenstart“, „wie ein Vulkan“: ein Vergleich, kein Ding im Bild
             m = _re0.search(r"\bwie (?:bei |in |auf |von )?(?:ein\w* |der |die |das |dem |den )?(?:\w+ )?(?:" + pat + ")", low0)
@@ -1704,6 +1739,7 @@ def direct(scenes, times, topic="", style="", look=""):
                 sc["shot"] = ""
             filled += 1
     _time_weather(scenes)
+    _carry_thing(scenes, main_id)
     _opening(scenes)
     _auto_explain(scenes)
     _topic_creature(scenes, topic)
@@ -1843,6 +1879,37 @@ def _topic_creature(scenes, topic):
         sc["actors"] = acts + [{"id": "_thema", "kind": kind, "hero": True, "speaks": False, "action": "idle",
                                 "emotion": MOOD_EMOTION.get(mood, "happy" if mood == "happy" else ""),
                                 "pos": 760 if humans else "center", "emote": "", "say": "", "hold": "", "facing": ""}]
+
+
+CARRY_RE = r"\b(diese[rnms]?|davon|damit|zusammen|sie alle|alle zusammen)\b"
+
+
+def _carry_thing(scenes, main_id=None):
+    """„Du steckst neunundneunzig Wassermelonen ein.“ – „Aber in echt wiegen diese Früchte zusammen fast eine Tonne.“: Der Folgesatz
+    meint dasselbe Ding, nennt es aber nicht. Statt eines leeren Bildes bleibt es stehen – bei einer großen Zahl gleich mehrfach."""
+    import re as _re
+    last = None
+    for i, sc in enumerate(scenes):
+        if not isinstance(sc, dict):
+            continue
+        low = str(sc.get("text") or "").lower()
+        named = [k for pat, k in _lib_props() + TEXT_PROPS if _re.search(pat, low) and extras.prop_fit(k) and k not in extras.SKY and k not in ("pile", "sandpile", "trash")]
+        many = any((_number(w) or 0) > 3 for w in _re.findall(r"[a-zäöüß]{4,}|\d+", low) if w != "acht")
+        if named:
+            last = (named[0], i, many)
+            continue
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        rp = places.resolve(backdrop(sc)) if not isinstance(backdrop(sc), dict) else "custom"
+        if not last or i - last[1] > 2 or not _re.search(CARRY_RE, low) or sc.get("props") or sc.get("float") or len(acts) > 1 \
+                or sc.get("shot") in ("graphic", "insert", "close") or rp in MAPS or rp in ("space", "underwater") or any(a.get("kind") for a in acts):
+            continue
+        sc["props"] = [{"type": last[0], "pos": p} for p in ((600, 770, 940) if last[2] else (800,))]
+        if sc.get("shot") == "event":
+            sc["shot"] = ""
+        if acts:
+            acts[0]["pos"] = "left"
+        elif main_id:
+            sc["actors"] = [{"id": main_id, "action": "shocked", "emotion": "shocked", "emote": "!", "pos": "left", "speaks": False}]
 
 
 def _opening(scenes):

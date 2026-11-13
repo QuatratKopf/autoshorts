@@ -499,6 +499,36 @@ def main():
         assert not sc[1].get("float"), sc[1]
         assert not any("insekt" in str(p_) for s_ in sc for p_ in (s_.get("props") or [])), sc
     check("Bugs: kein Käfer, keine Strichliste, Absturz", _bugs)
+    def _labels():                                               # Nummern-Schild nur beim Satz mit der Nummer, Stempel nur mit Wort aus dem Satz, kein Zuckerhaufen ohne Anlass
+        from .. import writer
+        sc = [{"text": "Drei verrückte Regeln, die im Alltag eskalieren würden.", "place": "street", "actors": [{"id": "du", "action": "talk"}]},
+              {"text": "Und die letzte Regel macht jede Prüfung unbesiegbar.", "place": "classroom", "actors": [{"id": "du", "action": "think"}],
+               "overlay": {"type": "tag", "text": "REGEL NUMMER EINS"}},
+              {"text": "Der normale Einkaufsbeutel wird dadurch völlig überflüssig.", "place": "supermarket", "actors": [{"id": "du", "action": "shake"}],
+               "overlay": {"type": "stamp", "text": "GRATIS", "color": "green"}},
+              {"text": "Aber in echt wiegen diese Früchte zusammen fast eine Tonne.", "place": "street", "actors": [{"id": "du", "action": "shocked"}], "props": ["pile"]},
+              {"text": "Zweitens: Das ist streng verboten.", "place": "street", "actors": [{"id": "du", "action": "talk"}], "overlay": {"type": "stamp", "text": "VERBOTEN", "color": "red"}},
+              {"text": "Folg für mehr.", "place": "livingroom", "actors": [{"id": "du", "action": "talk"}]}]
+        stage.direct(sc, [(i * 3, i * 3 + 3) for i in range(len(sc))], stage.topic_head("Regeln im Alltag – mit Einkaufsbeutel, Zucker und Apfel erklärt, jede Regel drei Sätze, bitte genau so und nicht anders"), "whatif")
+        assert "REGEL NUMMER EINS" not in str(sc[1].get("overlay")), sc[1].get("overlay")
+        assert "GRATIS" not in str(sc[2].get("overlay")), sc[2].get("overlay")
+        assert not any("pile" in str(q) for q in sc[3].get("props") or []), sc[3].get("props")
+        assert "VERBOTEN" in str(sc[4].get("overlay")), sc[4].get("overlay")
+        sc2 = [{"text": "Drei verrückte Regeln.", "place": "street", "actors": [{"id": "du", "action": "talk"}]},
+               {"text": "Du steckst einfach neunundneunzig schwere Wassermelonen in deine Hosentasche.", "place": "supermarket", "actors": [{"id": "du", "action": "talk"}]},
+               {"text": "Aber in echt wiegen diese Früchte zusammen fast eine ganze Tonne.", "place": "street", "actors": [], "props": ["pile"]},
+               {"text": "Ein kleiner Apfel lässt den blauen Fleck am Knie verschwinden.", "place": "livingroom", "actors": [{"id": "du", "action": "jump"}]},
+               {"text": "Folg für mehr.", "place": "livingroom", "actors": [{"id": "du", "action": "talk"}]}]
+        stage.direct(sc2, [(i * 4, i * 4 + 4) for i in range(len(sc2))], "Videospiel-Regeln im Alltag", "whatif")
+        if "lib_wassermelone" in extras.PROPS:                   # Folgesatz ohne das Wort: die Melonen bleiben im Bild, mit Figur
+            assert len([q for q in sc2[2]["props"] if q.get("type") == "lib_wassermelone"]) == 3 and sc2[2]["actors"], sc2[2]
+            frame(sc2[2])
+        if "lib_apfel" in extras.PROPS:
+            assert any(q.get("type") == "lib_apfel" for q in sc2[3]["props"]), sc2[3]["props"]
+            frame(sc2[3])
+        th = writer.polish({"thumbnail": {"text": "NEUNZIG MELONEN IN DER TASCHE"}, "scenes": [{"text": "Du steckst neunundneunzig Wassermelonen ein."}]})["thumbnail"]["text"]
+        assert th == "MELONEN IN DER TASCHE", th
+    check("Schilder, Stempel, Haufen, Titelbild-Zahl", _labels)
     check("Titelbild", lambda: stage.cover({"place": "street", "props": ["meteor"], "actor": "du"}, {"du": {}}, "/tmp/_selftest_cover.jpg"))
     check("Titelbild kaputt", lambda: stage.cover({"place": None, "props": [None, 3], "actor": None, "backdrop": "x"}, {}, "/tmp/_selftest_cover.jpg"))
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")

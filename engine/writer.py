@@ -447,6 +447,8 @@ def polish(js):
     if isinstance(js.get("description"), str):           # der Kanal spricht den Zuschauer an – kein „Wir zeigen dir“
         js["description"] = re.sub(r"\bWir zeigen(?: dir| euch)?, ", "Hier siehst du, ", js["description"])
         js["description"] = re.sub(r"\bWir zeigen(?: dir| euch)? ", "Hier siehst du ", js["description"])
+        js["description"] = re.sub(r"\bWir (?:testen|checken|prüfen|vergleichen|untersuchen|erklären|klären) ", "Hier siehst du ", js["description"])
+        js["description"] = re.sub(r"(?i)\b(welches|dein|das|ein) feature\b", lambda m: {"welches": "Welche", "dein": "Deine", "das": "Die", "ein": "Eine"}[m.group(1).lower()] + " Regel", js["description"])
     for sc in js.get("scenes", []):
         if not isinstance(sc, dict):
             continue
@@ -468,6 +470,20 @@ def polish(js):
     th = js.get("thumbnail")
     if isinstance(th, dict) and isinstance(th.get("text"), str):
         th["text"] = _DENGLISH_RE.sub(lambda m: _case_like(m.group(0), _DENGLISH[m.group(0).lower()]), th["text"])
+        try:                                             # Zahl im Titelbild, die im Video niemand sagt („NEUNZIG MELONEN“ bei neunundneunzig): Zahl weg
+            from .toon import stage as _st
+            said = " ".join(str(s.get("text") or "") for s in js.get("scenes", []) if isinstance(s, dict))
+            keep = []
+            for w in th["text"].split():
+                k = w.lower().strip(".,;:!?")
+                n = _st._number(k) if k not in ("ein", "eine", "einen", "einem", "einer", "eins", "acht") else None
+                if n is not None and not re.search(r"(?<![a-zäöüß])" + re.escape(k) + r"(?![a-zäöüß])", said.lower()) and not _st.spoken_number(n, said):
+                    continue
+                keep.append(w)
+            if keep and len(keep) < len(th["text"].split()):
+                th["text"] = " ".join(keep)
+        except Exception:  # noqa: BLE001
+            pass
     return js
 
 
