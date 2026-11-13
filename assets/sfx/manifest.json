@@ -849,6 +849,87 @@
    "license": "CC0 1.0",
    "url": "https://freesound.org/people/Kinoton/sounds/516566",
    "source": "freesound"
+  },
+  {
+   "what": "Musik (spannend)",
+   "title": "Cinematic Dramatic Buildup",
+   "creator": "BurghRecords",
+   "license": "CC0 1.0",
+   "url": "https://freesound.org/people/BurghRecords/sounds/456102",
+   "source": "freesound",
+   "file": "music/stimmung/spannend/openverse_93aae8a0.ogg"
+  },
+  {
+   "what": "Musik (spannend)",
+   "title": "Atmosphere Entry.wav",
+   "creator": "DeVern",
+   "license": "CC0 1.0",
+   "url": "https://freesound.org/people/DeVern/sounds/385078",
+   "source": "freesound",
+   "file": "music/stimmung/spannend/openverse_24ef191a.ogg"
+  },
+  {
+   "what": "Musik (spannend)",
+   "title": "Wide Cinematic Ambiet for Tension Effect",
+   "creator": "The-Sacha-Rush",
+   "license": "CC0 1.0",
+   "url": "https://freesound.org/people/The-Sacha-Rush/sounds/493741",
+   "source": "freesound",
+   "file": "music/stimmung/spannend/openverse_0f849cb9.ogg"
+  },
+  {
+   "what": "Musik (dunkel)",
+   "title": "Dark Ambient backgrounding 001",
+   "creator": "steaq",
+   "license": "CC0 1.0",
+   "url": "https://freesound.org/people/steaq/sounds/238251",
+   "source": "freesound",
+   "file": "music/stimmung/dunkel/openverse_17cd4cd6.ogg"
+  },
+  {
+   "what": "Musik (dunkel)",
+   "title": "Dark Ambient 1",
+   "creator": "strathamer",
+   "license": "CC0 1.0",
+   "url": "https://freesound.org/people/strathamer/sounds/415891",
+   "source": "freesound",
+   "file": "music/stimmung/dunkel/openverse_f3130afc.ogg"
+  },
+  {
+   "what": "Musik (dunkel)",
+   "title": "Dark Ambient 2",
+   "creator": "strathamer",
+   "license": "CC0 1.0",
+   "url": "https://freesound.org/people/strathamer/sounds/415890",
+   "source": "freesound",
+   "file": "music/stimmung/dunkel/openverse_bb9c593e.ogg"
+  },
+  {
+   "what": "Musik (hell)",
+   "title": "Blues Impro",
+   "creator": "kasa90",
+   "license": "CC0 1.0",
+   "url": "https://freesound.org/people/kasa90/sounds/162184",
+   "source": "freesound",
+   "file": "music/stimmung/hell/openverse_392f1136.ogg"
+  },
+  {
+   "what": "Musik (hell)",
+   "title": "Stepper - Piano Music with drums and a cow",
+   "creator": "supervanz",
+   "license": "CC0 1.0",
+   "url": "https://freesound.org/people/supervanz/sounds/434164",
+   "source": "freesound",
+   "file": "music/stimmung/hell/openverse_1fc2e8c9.ogg"
+  },
+  {
+   "what": "Musik (hell)",
+   "title": "Jazzy café ambience.wav",
+   "creator": "dersinnsspace",
+   "license": "CC0 1.0",
+   "url": "https://freesound.org/people/dersinnsspace/sounds/421647",
+   "source": "freesound",
+   "file": "music/stimmung/hell/openverse_8e984d24.ogg"
   }
  ],
  "amb": {
@@ -1009,5 +1090,5 @@
    }
   ]
  },
- "updated": 1794561010.1634793
+ "updated": 1794562710.6228466
 }
