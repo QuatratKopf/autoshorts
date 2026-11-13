@@ -436,8 +436,13 @@ def zernio_thumbnails():
     acc = None
     n = 0
     for v in [v for v in VIDEOS if v.get("zernio_id") and v.get("thumb")][-15:]:
-        if v.get("yt_thumb") == "gesetzt" or int(v.get("yt_thumb_tries") or 0) >= 3:
+        if v.get("yt_thumb") == "gesetzt":
             continue
+        no_perm = "permission" in str(v.get("yt_thumb") or "").lower()   # Kanal noch nicht bestätigt: täglich neu versuchen
+        if (no_perm and time.time() - float(v.get("yt_thumb_at") or 0) < 20 * 3600) or \
+                (not no_perm and int(v.get("yt_thumb_tries") or 0) >= 3):
+            continue
+        v["yt_thumb_at"] = time.time()
         yid = str(v.get("yt_id") or "")
         if yid.startswith("zernio:"):                     # echte YouTube-ID aus dem Zernio-Auftrag holen
             try:
