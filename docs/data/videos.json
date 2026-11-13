@@ -2519,7 +2519,7 @@
   "id": 78,
   "category": "whatif",
   "topic": "Wenn physische Spielregeln plötzlich in der Realität gelten würden",
-  "status": "review",
+  "status": "discarded",
   "created": 1794584220.488087,
   "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
   "description": "Was passiert, wenn du plötzlich durch Wände glitchen kannst?\nErlebe die verrücktesten physischen Spielregeln in der echten Welt.\nWürdest du lieber fliegen oder unendlich oft respawnen?",
@@ -2554,6 +2554,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-13 18:00",
-  "review_at": 1794584951.9502976
+  "review_at": 1794584951.9502976,
+  "error": "Bei der Prüfung verworfen: Marienkäfer in fast jeder Szene (Bug als Insekt verstanden), drei Bugs angekündigt aber neunzehn aufgezählt, Zähler 99 99 STÜCK, keine Melonen, Sätze ohne Sinn"
  }
 ]
