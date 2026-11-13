@@ -342,7 +342,7 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, 
             STATE["voice_wps"] = round(0.5 * float(STATE.get("voice_wps") or n_spoken / total) + 0.5 * n_spoken / total, 3)
         min_s = float(cfg("min_seconds") or 0)
         if min_s and total < min_s + 0.5:                # zu kurz: etwas ruhiger sprechen lassen, Rest als Ausklang am Ende
-            f = max(0.9, total / (min_s + 1.0))
+            f = max(0.96, total / (min_s + 1.0))          # Sprecher höchstens 4 % langsamer: langsames Sprechen kostet Zuschauer
             slow = work / "voice_slow.mp3"
             subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(voice), "-af",
                             f"atempo={f:.4f},apad=pad_dur={max(0.0, min(8.0, min_s + 1.0 - total / f)):.2f}", str(slow)], check=True)

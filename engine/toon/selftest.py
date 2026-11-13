@@ -447,6 +447,19 @@ def main():
             for pal in (0, 1):
                 stage.poster({"hero_kind": "jelly", "palette": pal}, {}, Path(tmp) / f"p{pal}.jpg", "Qualle")
     check("Titelbild-Motiv", _poster)
+    def _cold():                                                 # Vorgriff: erstes Bild zeigt das stärkste Bild statt herumstehender Leute
+        scs = [{"text": "Drei Regeln, die eskalieren.", "place": "street", "actors": [{"id": "du", "action": "talk"}]},
+               {"text": "Und die letzte rettet dich.", "place": "school", "actors": [{"id": "du", "action": "talk"}]},
+               {"text": "Du packst Melonen ein.", "place": "street", "actors": [{"id": "du", "action": "talk"}]},
+               {"text": "Deine Beine brechen.", "place": "street", "props": [{"type": "ball"}], "actors": [{"id": "du", "action": "fall"}]},
+               {"text": "Ende.", "place": "park", "actors": [{"id": "du"}]}, {"text": "Ende.", "place": "park", "actors": [{"id": "du"}]}]
+        stage._cold_open(scs)
+        assert scs[0].get("_cold_open") and scs[0]["actors"][0]["action"] == "fall" and scs[0]["text"].startswith("Drei"), scs[0]
+        busy = [{"text": "x", "place": "street", "props": [{"type": "ball"}, {"type": "lamp"}], "actors": [{"id": "du", "action": "run"}]}] + scs[1:]
+        stage._cold_open(busy)
+        assert not busy[0].get("_cold_open")                     # schon starkes erstes Bild: bleibt
+        frame(scs[0])
+    check("Vorgriff im ersten Bild", _cold)
     check("Neon-Look", lambda: graphics.neon(frame({"place": "street", "crowd": "walk"}), 1.0))
     check("Neon-Kulisse", lambda: graphics.tint(places.background("street", True)))
     # Regie mit zufälligen und kaputten Drehbüchern

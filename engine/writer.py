@@ -15,7 +15,9 @@ Regeln für die Sprechertexte:
 - Der erste Satz ist ein starker Hook (Frage, überraschende Behauptung oder Konflikt) – keine Begrüßung, kein "Heute erkläre ich".
 - Gesprochene, einfache Sprache, kurze Sätze, Du-Ansprache erlaubt. Zahlen ausschreiben, wie man sie spricht.
 - Keine Emojis, keine Regieanweisungen, keine Klammern im Sprechertext.
-- Der letzte Satz ist eine Pointe oder Wendung, gern mit kurzer Aufforderung wie "Folg für mehr".
+- Der letzte Satz ist eine Pointe oder Wendung OHNE Aufforderung („Folg für mehr“, „Schreib es in die Kommentare“ sind am Ende
+  verboten – wer das hört, wischt weg). Am besten führt er nahtlos zurück in den ersten Satz, sodass das Video in einer Schleife
+  weiterläuft und ein zweites Mal geschaut wird. Die Frage an die Zuschauer gehört in die Beschreibung, nicht ans Ende.
 - AUFBAU WIE BEI ERFOLGREICHEN SHORTS – durchdacht, nicht aneinandergereiht:
   1. Hook in höchstens drei Sekunden – IMMER das Thema kurz und spannend nennen, mit Cliffhanger:
      Satz 1 (höchstens zwölf Wörter) sagt, worum es geht, und macht es unwiderstehlich: was daran unmöglich, verboten, gefährlich,
@@ -29,8 +31,8 @@ Regeln für die Sprechertexte:
   2. Roter Faden mit „aber“ und „also“: Jede Szene folgt aus der vorigen – Problem, Folge, neue Wendung. Keine losen Fakten
      hintereinander („und dann … und außerdem …“). Der Zuschauer soll bei jedem Satz wissen wollen, was als Nächstes passiert.
   3. Höhepunkt in der Mitte: die verblüffendste Zahl, der größte Schreck oder der beste Witz – danach kurz Luft holen lassen.
-  4. Schluss löst das Versprechen aus dem Hook ein (Auflösung, Pointe) – kurz, ohne Zusammenfassung. Am besten passt der letzte
-     Satz so, dass das Video von vorn wieder Sinn ergibt.
+  4. Schluss löst das Versprechen aus dem Hook ein (Auflösung, Pointe) – kurz, ohne Zusammenfassung und ohne Aufforderung.
+     Der letzte Satz endet so, dass der erste Satz direkt danach wieder passt (Schleife: „… und genau deshalb –“ → Satz 1).
 - LISTEN („Drei Dinge, die …“): genau so viele Punkte wie im ersten Satz angekündigt, höchstens fünf. Jeder Punkt bekommt zwei bis
   vier Sätze: was passiert, warum, welche Folge oder welcher Witz daraus entsteht. Niemals zehn oder zwanzig Punkte mit je einem Satz
   herunterzählen. Nur der erste Satz eines Punkts darf mit „Nummer zwei“/„Zweitens“ beginnen – nicht jeder Satz mit „Erster …:“, „Zweiter …:“.
@@ -129,6 +131,10 @@ Kamera: 'shake' bei Schreck/Aufprall (mit sfx 'boom'), sonst ruhige Fahrten; sfx
 
 TOON = """
 EIGENE ANIMATION: Das Video wird mit fertigen Cartoon-Figuren, Tieren, Orten und Requisiten animiert (keine KI-Bilder).
+BILD, DAS STOPPT: Das erste Bild zeigt die verrückte Lage selbst in ihrer extremsten Form (die Melonen in der Hose, der Ozean ohne
+Wasser, die Spinne im Bett) – nicht Leute, die herumstehen. In jeder Szene TUT jemand etwas, das zum Satz passt (rennt, fällt,
+erschrickt, hält etwas, zeigt darauf, schwebt, tanzt); „talk“/„idle“ höchstens in jeder vierten Szene. Was der Satz an Dingen
+nennt, steht im Bild ("props").
 Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
 - "cast": Aussehen je Figur, z. B. {"mia": {"shirt": "blau", "hat": "", "hair": "long", "glasses": false, "skin": "weiß"},
                                    "rex": {"kind": "dino"}}

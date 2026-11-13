@@ -1780,6 +1780,7 @@ def direct(scenes, times, topic="", style="", look=""):
         if isinstance(scenes[i], dict) and isinstance(scenes[i - 1], dict) and scenes[i].get("shot") == "close" == scenes[i - 1].get("shot"):
             scenes[i]["shot"] = ""
     _auto_tags(scenes)
+    _cold_open(scenes)
     for sc in scenes:                                     # Tier als Figur der Szene: bleibt allein im Bild – spätere Regeln (Ereignis-Bild ohne
         if isinstance(sc, dict) and sc.get("_sea") and isinstance(sc.get("_keep"), dict):   # Figur, Hauptfigur dazustellen) gelten hier nicht
             kept = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and a.get("kind") == sc["_keep"].get("kind")][:1] or [dict(sc["_keep"])]
@@ -1951,6 +1952,38 @@ def _carry_thing(scenes, main_id=None):
             acts[0]["pos"] = "left"
         elif main_id:
             sc["actors"] = [{"id": main_id, "action": "shocked", "emotion": "shocked", "emote": "!", "pos": "left", "speaks": False}]
+
+
+def _scene_punch(sc):
+    """Wie viel passiert im Bild einer Szene? (Dinge, Tiere, Schwerelosigkeit, Ereignis-Einstellung, Wetter, starke Handlung)"""
+    if not isinstance(sc, dict) or sc.get("shot") in ("graphic", "insert") or places.resolve(backdrop(sc)) in MAPS:
+        return 0
+    acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+    return (2 * min(3, len(sc.get("props") or [])) + 3 * any(a.get("kind") for a in acts) + 4 * bool(sc.get("float"))
+            + 2 * (sc.get("shot") == "event") + bool(sc.get("weather"))
+            + 2 * any(str(a.get("action") or "") in ("shocked", "scared", "run", "fall", "jump", "dance", "shake") for a in acts))
+
+
+def _cold_open(scenes):
+    """Vorgriff im ersten Bild: Zeigt der erste Satz nur Menschen, die dastehen, kommt dort schon das stärkste Bild der ersten zwei
+    Drittel des Videos (die verrückteste Folge) – wer das sieht, will wissen, wie es dazu kommt. Der Satz bleibt, Schild und Ton auch."""
+    import copy
+    if len(scenes) < 4 or not isinstance(scenes[0], dict) or _scene_punch(scenes[0]) >= 3:
+        return
+    pool = [(i, _scene_punch(sc)) for i, sc in enumerate(scenes[2:max(3, len(scenes) * 2 // 3)], start=2)]
+    pool = [x for x in pool if x[1] >= 4]
+    if not pool:
+        return
+    best = scenes[max(pool, key=lambda x: (x[1], -x[0]))[0]]
+    sc0 = scenes[0]
+    for k in ("place", "backdrop", "time", "weather", "float", "aloft", "low", "props", "crowd", "_sea", "_keep", "dark_city", "no_traffic"):
+        if k in best:
+            sc0[k] = copy.deepcopy(best[k])
+        else:
+            sc0.pop(k, None)
+    sc0["actors"] = copy.deepcopy(best.get("actors") or [])
+    sc0["shot"] = "" if best.get("shot") == "close" else best.get("shot", "")
+    sc0["_cold_open"] = True
 
 
 def _opening(scenes):
