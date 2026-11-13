@@ -219,20 +219,33 @@ def build_earshot(man):
 
 
 def ov_search(q, category, lo, hi, n=8):
-    """Openverse-Suche: nur CC0 und Public Domain (keine Namensnennung nötig, kommerziell erlaubt), Länge lo..hi s."""
-    for attempt in range(3):
-        r = requests.get(OV, headers=UA, timeout=30,
-                         params={"q": q, "license": "cc0,pdm", "category": category, "page_size": 20, "mature": "false"})
-        if r.status_code == 429 and attempt < 2:
-            time.sleep(30)
+    """Openverse-Suche: nur CC0 und Public Domain (keine Namensnennung nötig, kommerziell erlaubt), Länge lo..hi s.
+    Erst mit Kategorie, dann ohne (viele Aufnahmen haben keine Kategorie)."""
+    out, seen = [], 0
+    for cat in (category, None):
+        params = {"q": q, "license": "cc0,pdm", "page_size": 20}
+        if cat:
+            params["category"] = cat
+        for attempt in range(3):
+            r = requests.get(OV, headers=UA, timeout=30, params=params)
+            if r.status_code == 429 and attempt < 2:
+                time.sleep(30)
+                continue
+            break
+        if r.status_code != 200:
+            log(f"Openverse „{q}“: HTTP {r.status_code} {r.text[:120]}")
             continue
-        r.raise_for_status()
-        break
-    out = []
-    for it in r.json().get("results", []):
-        dur = (it.get("duration") or 0) / 1000
-        if it.get("url") and lo <= dur <= hi and str(it.get("license") or "").lower() in ("cc0", "pdm"):
-            out.append(it)
+        res = r.json().get("results", [])
+        seen += len(res)
+        for it in res:
+            ms = it.get("duration")
+            dur = (ms or 0) / 1000
+            lic = str(it.get("license") or "").lower()
+            if it.get("url") and (ms is None or lo <= dur <= hi) and lic in ("cc0", "pdm") and it["id"] not in [o["id"] for o in out]:
+                out.append(it)
+        if len(out) >= n:
+            break
+    log(f"Openverse „{q}“: {seen} Treffer, {len(out)} passend")
     return out[:n]
 
 
