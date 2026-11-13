@@ -569,6 +569,11 @@ def main():
         assert places.resolve(sc2[1].get("place")) not in stage.MAPS and sc2[1]["actors"], sc2[1]      # nie zweimal hintereinander die Weltkugel
         assert sc2[3].get("shot") != "graphic", sc2[3]                                              # nie zwei Zahlen-Tafeln hintereinander
         frame(sc2[1])
+        sc3 = [{"text": "Im Büro teilt der Kollege sein Stück Kuchen.", "place": "office", "actors": [{"id": "du", "action": "talk"}, {"id": "tom", "action": "talk"}]},
+               {"text": "Wer Freundlichkeit erlebt, gibt diese positive Energie sofort weiter.", "place": "street", "actors": [{"id": "du", "action": "wave"}]},
+               {"text": "Folg für mehr.", "place": "livingroom", "actors": [{"id": "du", "action": "talk"}]}]
+        stage.direct(sc3, [(0, 4), (4, 8), (8, 10)], "Wenn alle nett wären", "whatif")
+        assert not any("kuchen" in str(q.get("type")) for q in sc3[1].get("props") or []), sc3[1].get("props")   # „diese Energie“ ist kein Ding
         assert overlays._short("SCHREIB ES IN DIE KOMMENTARE", 22) == "SCHREIB ES", overlays._short("SCHREIB ES IN DIE KOMMENTARE", 22)
         assert overlays.frames_for({"type": "tag", "text": "SCHREIB ES IN DIE KOMMENTARE"})
     check("Geben/Essen, Einsatzwagen, Schild-Zahl, Handy", _deeds)

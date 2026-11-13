@@ -1919,6 +1919,10 @@ GIVE_RE = r"\bteil\w*\b|schenk|überreich|\breicht\b|\bgibt\b.{0,40}\b(ab|weiter
 TAKE_RE = r"\bisst\b|\bisse?t\b|\besse\b|bei(ß|ss)t|\bnasch|\bhältst\b|\bhält\b|\bnimmst\b|\bnimmt\b|\bgreifst\b|\bgreift\b|\bhebst\b|in der hand|\bträgst\b"
 LYING_RE = r"\b(liegst|liegt|liegen)\b.{0,40}\b(platt|flach|am boden|auf dem boden|auf der straße|auf dem asphalt|auf dem gehweg)\b"
 CARRY_RE = r"\b(diese[rnms]?|davon|damit|zusammen|sie alle|alle zusammen)\b"
+# „diese positive Energie“, „diese Wirkung“ meinen kein Ding – sonst läge der Kuchen aus dem Büro im nächsten Satz auf der Straße
+CARRY_ABSTRACT_RE = (r"\bdiese[rnms]?\s+(?:[a-zäöüß]+\s+)?(energie|wirkung\w*|gefühl\w*|stimmung|reaktion\w*|minute\w*|sekunde\w*|moment\w*|zeit|idee\w*|regel\w*|"
+                     r"kraft|kräfte|art|weise|erfahrung\w*|freundlichkeit|geste\w*|effekt\w*|verhalten|welle|veränderung\w*|tatsache\w*|frage\w*|fähigkeit\w*|"
+                     r"entdeckung\w*|theorie\w*|zahl\w*|menschen|leute|person\w*)\b")
 
 
 def _carry_thing(scenes, main_id=None):
@@ -1937,7 +1941,7 @@ def _carry_thing(scenes, main_id=None):
             continue
         acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
         rp = places.resolve(backdrop(sc)) if not isinstance(backdrop(sc), dict) else "custom"
-        if not last or i - last[1] > 2 or not _re.search(CARRY_RE, low) or sc.get("props") or sc.get("float") or len(acts) > 1 \
+        if not last or i - last[1] > 2 or not _re.search(CARRY_RE, _re.sub(CARRY_ABSTRACT_RE, " ", low)) or sc.get("props") or sc.get("float") or len(acts) > 1 \
                 or sc.get("shot") in ("graphic", "insert", "close") or rp in MAPS or rp in ("space", "underwater") or any(a.get("kind") for a in acts):
             continue
         sc["props"] = [{"type": last[0], "pos": p} for p in ((600, 770, 940) if last[2] else (800,))]
