@@ -405,8 +405,13 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, 
                         base = scenes[0]
                         th.update(place=base.get("place"), time=base.get("time"),
                                   actor=(base.get("actors") or [{}])[0].get("id"))
+                    last = STATE.get("last_poster") or {}
+                    th_topic = f"{script.get('title') or ''} {v.get('topic') or ''}"
+                    th.setdefault("hero_kind", stage.poster_hero(th_topic, scenes, script.get("cast"), [last.get("hero")]))
+                    th["palette"] = (int(last.get("palette", -1)) + 1 + v["id"] % 2) % len(stage.POSTER_PALETTES)
+                    STATE["last_poster"] = {"hero": th["hero_kind"], "palette": th["palette"], "video": v["id"]}
                     try:                                  # eigens gestaltetes Titelbild – kein Ausschnitt aus dem Video
-                        stage.poster(th, script.get("cast") or {}, raw, f"{script.get('title') or ''} {v.get('topic') or ''}")
+                        stage.poster(th, script.get("cast") or {}, raw, th_topic)
                     except Exception as e:  # noqa: BLE001
                         log(f"Titelbild-Gestaltung fehlgeschlagen ({e}) – nehme eine Szene")
                         stage.cover(th, script.get("cast") or {}, raw)

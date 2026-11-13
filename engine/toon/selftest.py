@@ -435,6 +435,18 @@ def main():
             stage.render_scene(sc, {}, 1.2, Path(tmp) / "s.mp4", [("Plötzlich!", 0.1, 0.6)], 0.0)
         assert ("hit" in [r for _, r in sc["_sfx"]]) and ("pop" in [r for _, r in sc["_sfx"]]), sc["_sfx"]
     check("Klang-Platzierung", _sound)
+    def _poster():                                               # Titelbild: Motiv aus Titel/Szenen, nicht dasselbe wie beim letzten Video
+        import tempfile
+        from pathlib import Path
+        scs = [{"actors": [{"kind": "tardigrade"}]}, {"actors": [{"kind": "tardigrade"}, {"kind": "jelly"}]}, {"actors": [{"kind": "cheetah"}]}]
+        assert stage.poster_hero("Was wenn wir Tier-Gene kreuzen?", scs, {"x": {"kind": "shrimp"}}) == "tardigrade"
+        assert stage.poster_hero("Was wenn wir Tier-Gene kreuzen?", scs, {}, ["tardigrade"]) == "jelly"
+        assert stage.poster_hero("Die Spinne in deinem Bett", scs) == "spider"
+        assert stage.poster_hero("Warum wir schlafen", []) == ""
+        with tempfile.TemporaryDirectory() as tmp:
+            for pal in (0, 1):
+                stage.poster({"hero_kind": "jelly", "palette": pal}, {}, Path(tmp) / f"p{pal}.jpg", "Qualle")
+    check("Titelbild-Motiv", _poster)
     check("Neon-Look", lambda: graphics.neon(frame({"place": "street", "crowd": "walk"}), 1.0))
     check("Neon-Kulisse", lambda: graphics.tint(places.background("street", True)))
     # Regie mit zufälligen und kaputten Drehbüchern

@@ -2490,13 +2490,43 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
             ff.kill()
 
 
+def poster_hero(topic, scenes, cast=None, avoid=()):
+    """Welches Tier/Wesen gehört aufs Titelbild? Erst das, was der Titel/das Thema nennt, dann das Wesen, das in den Szenen am
+    häufigsten auftritt – die Besetzungsliste der Text-KI nur, wenn ihr Wesen auch wirklich in einer Szene vorkommt. Was schon
+    auf dem letzten Titelbild war (avoid), kommt nur, wenn es keine andere Wahl gibt."""
+    import re as _re
+    low = str(topic or "").lower()
+    named = [k for pat, k in TOPIC_CREATURES if _re.search(pat, low)]
+    sk = _sea_kind(low, bool(_re.search(SEA_TOPIC_RE, low)))
+    named += [sk] if sk else []
+    counts = {}
+    for sc in scenes or []:
+        for a in (sc.get("actors") or []) if isinstance(sc, dict) else []:
+            k = str((a or {}).get("kind") or "").lower() if isinstance(a, dict) else ""
+            if k in extras.CREATURES:
+                counts[k] = counts.get(k, 0) + 1
+    ranked = [k for k in named if k in extras.CREATURES] + sorted(counts, key=lambda k: -counts[k])
+    ranked = list(dict.fromkeys(ranked))
+    fresh = [k for k in ranked if k not in avoid]
+    return (fresh or ranked or [""])[0]
+
+
+POSTER_PALETTES = [((255, 205, 60), (250, 160, 40), (255, 250, 220)),     # Gelb-Orange
+                   ((70, 200, 255), (30, 120, 220), (220, 245, 255)),     # Himmelblau
+                   ((255, 110, 170), (200, 50, 140), (255, 225, 240)),    # Pink
+                   ((120, 230, 140), (30, 160, 110), (225, 255, 230)),    # Grün
+                   ((255, 140, 90), (220, 60, 60), (255, 230, 210))]      # Rot-Orange
+POSTER_DARK = [((70, 40, 150), (38, 20, 96), (190, 150, 255)), ((20, 70, 110), (10, 30, 60), (130, 220, 255))]
+
+
 def poster(spec: dict, cast: dict, out: Path, topic=""):
     """Eigens gestaltetes Titelbild (kein Bild aus dem Video): Strahlen-Hintergrund, das Ding des Videos riesig als Aufkleber,
     darunter die Hauptfigur groß im Anschnitt mit starkem Gefühl. Der Text kommt danach ins obere Drittel."""
     import re as _re
     from PIL import ImageFilter
     dark = str(spec.get("time") or "").lower() in ("night", "nacht") or str(spec.get("mood") or "").lower() in ("scary", "panic")
-    c0, c1, glow = (((70, 40, 150), (38, 20, 96), (190, 150, 255)) if dark else ((255, 205, 60), (250, 160, 40), (255, 250, 220)))
+    pal = int(spec.get("palette") or 0)                  # Farbwelt wechselt von Video zu Video (gleiches Bild zweimal fällt sonst auf)
+    c0, c1, glow = (POSTER_DARK[pal % len(POSTER_DARK)] if dark else POSTER_PALETTES[pal % len(POSTER_PALETTES)])
     frame = Image.new("RGB", (W, H), c1)
     d = ImageDraw.Draw(frame, "RGBA")
     cx, cy = 600, 960
@@ -2543,6 +2573,8 @@ def poster(spec: dict, cast: dict, out: Path, topic=""):
             if box:
                 hero = lay.crop(box)
                 break
+    if spec.get("hero_kind") is not None:                # von poster_hero gewählt (Titel/Szenen) – nicht blind die Besetzungsliste
+        cast_kind = str(spec.get("hero_kind") or "")
     if hero is None and (kind in extras.CREATURES or cast_kind in extras.CREATURES):
         res = extras.creature(kind if kind in extras.CREATURES else cast_kind, 0.4, 1, 0.6, "", 1.6)
         if res and res[0].getbbox():
@@ -2553,10 +2585,13 @@ def poster(spec: dict, cast: dict, out: Path, topic=""):
     look = rig.Look.from_spec((cast or {}).get(aid) if aid else {}, aid or "", list(cast).index(aid) if aid and aid in (cast or {}) else None)
     pose, _ = rig.pose_at("shocked", 1.0, 3.0, str(spec.get("emotion") or "shocked"), 0.8, 3)
     pose.lift = 0
-    fig, fx, fy = rig.draw(look, pose, 1, 2.3)
+    side = -1 if pal % 2 else 1                           # jedes zweite Titelbild gespiegelt: Figur rechts, Motiv links
+    fig, fx, fy = rig.draw(look, pose, side, 2.3)
     if hero is not None:
-        sticker(hero, 700, 640, 640, 930, -6)
-        frame.paste(fig, (int(250 - fx), int(2330 - fy)), fig)
+        if side < 0:
+            hero = hero.transpose(Image.FLIP_LEFT_RIGHT)
+        sticker(hero, 700, 640, 540 + 100 * side, 930, -6 * side)
+        frame.paste(fig, (int(540 - 290 * side - fx), int(2330 - fy)), fig)
     else:
         frame.paste(fig, (int(540 - fx), int(2200 - fy)), fig)
     frame.save(out, quality=93)
