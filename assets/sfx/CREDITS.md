@@ -3,3 +3,39 @@
 Alle Klänge sind frei nutzbar (MIT bzw. CC0/Public Domain). Automatisch erstellt.
 
 - Soundeffekte: earshot (Leon Lin) (MIT) https://github.com/Leonxlnx/earshot
+- Soundeffekte: earshot (Leon Lin) (MIT) https://github.com/Leonxlnx/earshot
+- Geräusch rain: Soft Rain Ambience edlarez vsnr.wav von visionear (CC0 1.0) https://freesound.org/people/visionear/sounds/573335
+- Geräusch rain: light rain ambience von seth-m (CC0 1.0) https://freesound.org/people/seth-m/sounds/270349
+- Geräusch storm: Thunderstorm with heavy rain2.wav von Audeption (CC0 1.0) https://freesound.org/people/Audeption/sounds/425173
+- Geräusch storm: Thunderstorm with heavy rain1.wav von Audeption (CC0 1.0) https://freesound.org/people/Audeption/sounds/425174
+- Geräusch wind: Wind Howling thru window crack.mp3 von DAVESTALKER (CC0 1.0) https://freesound.org/people/DAVESTALKER/sounds/331527
+- Geräusch wind: AE0027 Wind howling through cracks in a window 07-27-2009.flac von audible-edge (CC0 1.0) https://freesound.org/people/audible-edge/sounds/76454
+- Geräusch city: City Street Ambience Night [Florence - Italy] 01 von Skjor1 (CC0 1.0) https://freesound.org/people/Skjor1/sounds/321774
+- Geräusch city: City Street Ambience Daytime w/ Ambulance Siren Doppler [Florence - Italy] 02 von Skjor1 (CC0 1.0) https://freesound.org/people/Skjor1/sounds/321753
+- Geräusch forest: South Africa - St. Lucia Forest & Bird Ambience von EpicWizard (CC0 1.0) https://freesound.org/people/EpicWizard/sounds/394291
+- Geräusch forest: Birds In Spring (Scotland) von BurghRecords (CC0 1.0) https://freesound.org/people/BurghRecords/sounds/463903
+- Geräusch ocean: Zen Ocean Waves,Ocean Waves Ambience.mp3 von INNORECORDS (CC0 1.0) https://freesound.org/people/INNORECORDS/sounds/456899
+- Geräusch ocean: ocean waves 01 von rucisko (CC0 1.0) https://freesound.org/people/rucisko/sounds/164767
+- Geräusch night: Forest at night, crickets, cicadas and insects in the Sian Ka'an Biosphere Reserve von felix.blume (CC0 1.0) https://freesound.org/people/felix.blume/sounds/328293
+- Geräusch night: Countryside at the night crickets von Martin.Sadoux (CC0 1.0) https://freesound.org/people/Martin.Sadoux/sounds/422582
+- Geräusch office: office ambience von ninovisalli (CC0 1.0) https://freesound.org/people/ninovisalli/sounds/457258
+- Geräusch office: hungarian post office ambience - a busy day von Frigus_XIII (CC0 1.0) https://freesound.org/people/Frigus_XIII/sounds/460082
+- Geräusch crowd: Crowd Ambience von FlatHill (CC0 1.0) https://freesound.org/people/FlatHill/sounds/324757
+- Geräusch crowd: Large Crowd Ambience von deleted_user_7146007 (CC0 1.0) https://freesound.org/people/deleted_user_7146007/sounds/383768
+- Geräusch fire: Fire Crackling 01.wav von kingsrow (CC0 1.0) https://freesound.org/people/kingsrow/sounds/181563
+- Geräusch fire: fire crackles von florianreichelt (CC0 1.0) https://freesound.org/people/florianreichelt/sounds/563766
+- Geräusch space: archi_soundscape_space3.wav von ElanHickler (CC0 1.0) https://freesound.org/people/ElanHickler/sounds/38969
+- Geräusch space: spacedrone3.wav von Elektrocell (CC0 1.0) https://freesound.org/people/Elektrocell/sounds/20705
+- Geräusch underwater: Diving with whales.wav von KEVOY (CC0 1.0) https://freesound.org/people/KEVOY/sounds/82325
+- Geräusch underwater: Deep Sea Ambience von jhumbucker (CC0 1.0) https://freesound.org/people/jhumbucker/sounds/193822
+- Geräusch cave: Dripping water von Electroviolence (CC0 1.0) https://freesound.org/people/Electroviolence/sounds/234554
+- Geräusch cave: Dark Dungeon Ambience von Kinoton (CC0 1.0) https://freesound.org/people/Kinoton/sounds/516566
+- Musik (spannend): Thriller Documentary Pack #1 von dekstromoramid (CC0 1.0) https://freesound.org/people/dekstromoramid/sounds/435370
+- Musik (spannend): Cinematic Dramatic Buildup von BurghRecords (CC0 1.0) https://freesound.org/people/BurghRecords/sounds/456102
+- Musik (spannend): Risset Horror.wav von MrFossy (CC0 1.0) https://freesound.org/people/MrFossy/sounds/347865
+- Musik (dunkel): Dark Ambient backgrounding 001 von steaq (CC0 1.0) https://freesound.org/people/steaq/sounds/238251
+- Musik (dunkel): Dark Ambient 1 von strathamer (CC0 1.0) https://freesound.org/people/strathamer/sounds/415891
+- Musik (dunkel): Dark Ambient 2 von strathamer (CC0 1.0) https://freesound.org/people/strathamer/sounds/415890
+- Musik (hell): Blue Sky.mp3 von Sergmusic (CC0 1.0) https://freesound.org/people/Sergmusic/sounds/639933
+- Musik (hell): HAPPY BIRTHDAY TO YOU.mp3 von WKG-518 (CC0 1.0) https://freesound.org/people/WKG-518/sounds/574342
+- Musik (hell): overtherainbow_ukulele_120.wav von SymoneDB (CC0 1.0) https://freesound.org/people/SymoneDB/sounds/702599
