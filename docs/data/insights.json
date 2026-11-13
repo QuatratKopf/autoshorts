@@ -1,36 +1,36 @@
 {
- "updated": 1794600756.9308405,
+ "updated": 1794603046.1503334,
  "enough": true,
  "counted": 7,
- "total": 10,
+ "total": 11,
  "needed": 6,
  "categories": [
   {
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 1,
-   "avg_views": 1369,
+   "avg_views": 1365,
    "avg_likes": 53.0,
-   "like_rate": 3.87,
-   "avg_score": 2164
+   "like_rate": 3.88,
+   "avg_score": 2160
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 4,
-   "avg_views": 1336,
+   "avg_views": 1334,
    "avg_likes": 29.5,
    "like_rate": 2.21,
-   "avg_score": 1786
+   "avg_score": 1784
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 2,
-   "avg_views": 1002,
+   "avg_views": 998,
    "avg_likes": 30.5,
    "like_rate": 3.05,
-   "avg_score": 1474
+   "avg_score": 1471
   }
  ],
  "weights": {
@@ -42,9 +42,9 @@
   "comedy": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1369 Aufrufe, 3.87 % Likes).",
-  "Schwächste Kategorie: 💡 Fakten (Ø 1002 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2170 zu 703 Punkte)."
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1365 Aufrufe, 3.88 % Likes).",
+  "Schwächste Kategorie: 💡 Fakten (Ø 998 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2166 zu 703 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -53,41 +53,41 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2478,
+   "views": 2476,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3318
+   "score": 3316
   },
   {
    "id": 54,
    "title": "Was passiert, wenn die Schwerkraft für fünf Sekunden verschwindet?",
    "category": "whatif",
-   "views": 1743,
+   "views": 1739,
    "likes": 45,
    "comments": 0,
    "shares": 0,
-   "score": 2418
+   "score": 2414
   },
   {
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1369,
+   "views": 1365,
    "likes": 53,
    "comments": 0,
    "shares": 0,
-   "score": 2164
+   "score": 2160
   },
   {
    "id": 75,
    "title": "3 Tier-Superkräfte, die unmöglich wirken!",
    "category": "fakten",
-   "views": 1415,
+   "views": 1405,
    "likes": 45,
    "comments": 1,
    "shares": 0,
-   "score": 2120
+   "score": 2110
   },
   {
    "id": 38,
@@ -115,11 +115,11 @@
    "id": 58,
    "title": "Wie aus einer Gaming-Bude der wertvollste Tech-Gigant wurde",
    "category": "fakten",
-   "views": 588,
+   "views": 592,
    "likes": 16,
    "comments": 0,
    "shares": 0,
-   "score": 828
+   "score": 832
   },
   {
    "id": 44,
