@@ -1,5 +1,5 @@
 {
- "updated": 1794610306.5802975,
+ "updated": 1794612105.4255333,
  "enough": true,
  "counted": 7,
  "total": 11,
@@ -9,19 +9,19 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 1,
-   "avg_views": 1373,
+   "avg_views": 1375,
    "avg_likes": 53.0,
-   "like_rate": 3.86,
-   "avg_score": 2168
+   "like_rate": 3.85,
+   "avg_score": 2170
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 4,
-   "avg_views": 1335,
-   "avg_likes": 29.5,
-   "like_rate": 2.21,
-   "avg_score": 1785
+   "avg_views": 1338,
+   "avg_likes": 29.8,
+   "like_rate": 2.22,
+   "avg_score": 1792
   },
   {
    "slug": "fakten",
@@ -42,9 +42,9 @@
   "comedy": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1373 Aufrufe, 3.86 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1375 Aufrufe, 3.85 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1007 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2172 zu 703 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2178 zu 703 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -53,31 +53,31 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2476,
+   "views": 2485,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3316
+   "score": 3325
   },
   {
    "id": 54,
    "title": "Was passiert, wenn die Schwerkraft für fünf Sekunden verschwindet?",
    "category": "whatif",
-   "views": 1744,
-   "likes": 45,
+   "views": 1747,
+   "likes": 46,
    "comments": 0,
    "shares": 0,
-   "score": 2419
+   "score": 2437
   },
   {
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1373,
+   "views": 1375,
    "likes": 53,
    "comments": 0,
    "shares": 0,
-   "score": 2168
+   "score": 2170
   },
   {
    "id": 75,
