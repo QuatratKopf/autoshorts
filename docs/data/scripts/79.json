@@ -1,0 +1,456 @@
+{
+ "title": "Wenn Videospiel-Regeln plötzlich im echten Alltag gelten",
+ "scenes": [
+  {
+   "text": "Drei verrückte Videospiel-Regeln, die im echten Alltag völlig eskalieren würden.",
+   "see": "Drei verrückte Videospiel-Regeln, die im echten Alltag völlig eskalieren würden.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_einkaufsbeutel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "crowd": "walk"
+  },
+  {
+   "text": "Und die letzte Regel macht sogar jede Prüfung unbesiegbar.",
+   "see": "Und die letzte Regel macht sogar jede Prüfung unbesiegbar.",
+   "place": "classroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "REGEL NUMMER EINS"
+   }
+  },
+  {
+   "text": "Du steckst einfach neunundneunzig schwere Wassermelonen in deine Hosentasche.",
+   "see": "Du steckst einfach neunundneunzig schwere Wassermelonen in deine Hosentasche.",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "wassermelone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "insert",
+   "mood": "tense",
+   "crowd": "watch",
+   "overlay": {
+    "type": "card",
+    "text": "99 MELONEN"
+   }
+  },
+  {
+   "text": "Der normale Einkaufsbeutel wird dadurch natürlich völlig überflüssig.",
+   "see": "Der normale Einkaufsbeutel wird dadurch natürlich völlig überflüssig.",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "einkaufsbeutel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "stamp",
+    "text": "GRATIS",
+    "color": "green"
+   }
+  },
+  {
+   "text": "Aber in echt wiegen diese Früchte zusammen fast eine ganze Tonne.",
+   "see": "Aber in echt wiegen diese Früchte zusammen fast eine ganze Tonne.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "pile"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Deine Hose reißt sofort und du landest unsanft auf dem Boden.",
+   "see": "Deine Hose reißt sofort und du landest unsanft auf dem Boden.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "crack"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "fall",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "crowd": "watch"
+  },
+  {
+   "text": "Zweitens heilt dich jedes beliebige Essen sofort von jeder Verletzung.",
+   "see": "Zweitens heilt dich jedes beliebige Essen sofort von jeder Verletzung.",
+   "place": "kitchen",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_einkaufsbeutel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "note",
+    "title": "REGEL #2",
+    "text": "ESSEN HEILT"
+   }
+  },
+  {
+   "text": "Ein kleiner Apfel lässt den blauen Fleck am Knie augenblicklich verschwinden.",
+   "see": "Ein kleiner Apfel lässt den blauen Fleck am Knie augenblicklich verschwinden.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "In echt braucht der menschliche Körper für diese Heilung rund zwei Wochen.",
+   "see": "In echt braucht der menschliche Körper für diese Heilung rund zwei Wochen.",
+   "place": "hospital",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_einkaufsbeutel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "sad",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "sad",
+   "crowd": "sad",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 2,
+    "unit": "WOCHEN"
+   }
+  },
+  {
+   "text": "Die Krankenhäuser wären komplett leer und die Ärzte hätten plötzlich Urlaub.",
+   "see": "Die Krankenhäuser wären komplett leer und die Ärzte hätten plötzlich Urlaub.",
+   "place": "hospital",
+   "time": "day",
+   "shot": "event",
+   "mood": "calm",
+   "crowd": "walk",
+   "overlay": {
+    "type": "stamp",
+    "text": "PLEITE",
+    "color": "orange"
+   }
+  },
+  {
+   "text": "Drittens das Speichern und Neuladen vor jeder schweren Prüfung.",
+   "see": "Drittens das Speichern und Neuladen vor jeder schweren Prüfung.",
+   "place": "classroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lehrbuch"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "note",
+    "title": "REGEL #3",
+    "text": "NEuladen"
+   }
+  },
+  {
+   "text": "Du schreibst eine extrem schlechte Note in der Mathearbeit.",
+   "see": "Du schreibst eine extrem schlechte Note in der Mathearbeit.",
+   "place": "classroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lehrbuch"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sad",
+     "emotion": "worried",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "crowd": "panic"
+  },
+  {
+   "text": "Kein Problem, du lädst einfach den Spielstand von heute Morgen neu.",
+   "see": "Kein Problem, du lädst einfach den Spielstand von heute Morgen neu.",
+   "place": "bedroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_einkaufsbeutel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "tag",
+    "text": "LADE SPIELSTAND"
+   }
+  },
+  {
+   "text": "Du lernst die richtigen Antworten auswendig und schreibst die perfekte Eins.",
+   "see": "Du lernst die richtigen Antworten auswendig und schreibst die perfekte Eins.",
+   "place": "classroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lehrbuch"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "mood": "happy",
+   "crowd": "cheer",
+   "overlay": {
+    "type": "stamp",
+    "text": "REKORD",
+    "color": "green"
+   }
+  },
+  {
+   "text": "Aber das Leben verliert jeden Reiz, wenn du jeden Fehler sofort korrigierst.",
+   "see": "Aber das Leben verliert jeden Reiz, wenn du jeden Fehler sofort korrigierst.",
+   "place": "park",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_einkaufsbeutel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "sad",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "sad"
+  },
+  {
+   "text": "Ohne Risiko gibt es am Ende keinen echten Sieg mehr zu feiern.",
+   "see": "Ohne Risiko gibt es am Ende keinen echten Sieg mehr zu feiern.",
+   "place": "park",
+   "time": "day",
+   "shot": "event",
+   "mood": "happy",
+   "crowd": "cheer"
+  },
+  {
+   "text": "Deshalb bleibt die echte Welt vielleicht doch der beste Spielplatz.",
+   "see": "Deshalb bleibt die echte Welt vielleicht doch der beste Spielplatz.",
+   "place": "park",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_einkaufsbeutel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "crowd": "walk"
+  },
+  {
+   "text": "Welche Regel würdest du als Erstes in deinem Alltag aktivieren?",
+   "see": "Welche Regel würdest du als Erstes in deinem Alltag aktivieren?",
+   "place": "street",
+   "time": "day",
+   "shot": "event",
+   "mood": "calm",
+   "crowd": "walk",
+   "overlay": {
+    "type": "choice",
+    "a": "Inventar",
+    "b": "Neuladen"
+   }
+  }
+ ]
+}

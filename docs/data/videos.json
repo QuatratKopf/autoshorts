@@ -2556,5 +2556,45 @@
   "slot": "2026-11-13 18:00",
   "review_at": 1794584951.9502976,
   "error": "Bei der Prüfung verworfen: Marienkäfer in fast jeder Szene (Bug als Insekt verstanden), drei Bugs angekündigt aber neunzehn aufgezählt, Zähler 99 99 STÜCK, keine Melonen, Sätze ohne Sinn"
+ },
+ {
+  "id": 79,
+  "category": "whatif",
+  "topic": "Wenn Videospiel-Regeln plötzlich im echten Alltag gelten würden – genau drei Regeln, jede mit drei bis vier Sätzen erklärt und mit der echten Physik oder Biologie verglichen: Erstens das Inventar (du steckst neunundneunzig Wassermelonen in die Hosentasche, der Einkaufsbeutel wird überflüssig, aber in echt wiegen sie zusammen fast eine Tonne), zweitens Essen heilt sofort (ein Apfel und der blaue Fleck ist weg, in echt braucht der Körper dafür rund zwei Wochen), drittens Speichern und Neuladen (vor der Prüfung speichern, bei einer schlechten Note neu laden). Ohne die Wörter Bug und Glitch, ohne englische Gaming-Begriffe",
+  "status": "rendered",
+  "created": 1794586170.9449475,
+  "title": "Wenn Videospiel-Regeln plötzlich im echten Alltag gelten",
+  "description": "Wenn Videospiel-Regeln plötzlich im echten Alltag gelten.\nWir testen das Inventar, unendliche Heilung und das Neuladen.\nWelches Feature würdest du als Erstes ausprobieren?",
+  "hashtags": [
+   "#shorts",
+   "#gaming",
+   "#alltag",
+   "#whatif",
+   "#lustig",
+   "#viral",
+   "#fy"
+  ],
+  "tags": [
+   "videospiele im echten leben",
+   "gaming regeln",
+   "inventar",
+   "heilen",
+   "neuladen",
+   "was wäre wenn"
+  ],
+  "thumb_text": "NEUNZIG MELONEN IN DER TASCHE",
+  "missing": [
+   "prüfung"
+  ],
+  "cover_ms": 66809,
+  "duration": 66.7,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]

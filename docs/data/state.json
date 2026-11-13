@@ -17,14 +17,19 @@
   "qnqm93yzl"
  ],
  "last_stats": 1794585944.5139725,
- "next_id": 79,
+ "next_id": 80,
  "connected": {
   "youtube": {
    "name": "Wissens Wert 💬",
    "since": "2026-11-10"
   }
  },
- "voice_wps": 2.67,
+ "voice_wps": 2.736,
  "last_trends": 1794578262.4541512,
- "tiktok_handle": "wissens..wert"
+ "tiktok_handle": "wissens..wert",
+ "last_poster": {
+  "hero": "",
+  "palette": 1,
+  "video": 79
+ }
 }
