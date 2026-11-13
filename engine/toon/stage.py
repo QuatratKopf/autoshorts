@@ -735,7 +735,7 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
             if close and a["kind"] == "brain":
                 ksz = 1.15                                 # Großaufnahme: das Gehirn füllt das Bild, wird aber nicht angeschnitten
             res = extras.creature(a["kind"], t + a["seed"], facing, mouth, a["emotion"] or
-                                  ("shocked" if a["action"] in ("shocked", "scared") else ""), scale * 0.9 * ksz)
+                                  ("shocked" if a["action"] in ("shocked", "scared") else ""), scale * 0.9 * ksz, a["action"])
             if res:
                 im, fx, fy, fly = res
                 if not fly:
@@ -1193,7 +1193,7 @@ def direct(scenes, times, topic="", style="", look=""):
             any_last, any_age, sea_last = any_now, 0, None
         elif any_last and not gfx_s:
             any_age += 1
-            if other_s or sea_now or any_age > 3:
+            if other_s or sea_now or any_age > 3 or (any_last in LAND_KINDS and (any_age > 1 or not _re0.search(LAND_NEXT_RE, txt0))):
                 any_last = None
             else:
                 any_now = any_last                         # „Sie trocknen jahrelang aus“: der Satz handelt weiter vom selben Tier
@@ -1204,6 +1204,12 @@ def direct(scenes, times, topic="", style="", look=""):
             sc["props"] = [q for q in (sc.get("props") or []) if extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) in extras.SKY][:1]
             if shot_s in ("event", "insert", "close"):
                 sc["shot"] = shot_s = ""
+            if any_now == "cheetah" and _re0.search(r"\bjag|\brenn|sprint|\bläuf|\blauf|geschwindigkeit|km/h|kilometer\w* pro stunde|stundenkilometer|\bschnell", txt0):
+                acts[0].update(action="run", emotion="")   # der Gepard jagt im Galopp ins Bild – entschlossen, nicht besorgt
+            elif any_now == "flea" and _re0.search(r"spring|sprung|sprüng|hüpf", txt0):
+                acts[0]["action"] = "jump"                 # der Floh springt
+            if any_now in LAND_KINDS and not said and places.resolve(backdrop(sc)) == "underwater":
+                sc["place"], sc["backdrop"] = "fields", None
             sc["_sea"] = True
             sc["_keep"] = dict(acts[0])
         # Meerestiere: Nennt der Satz Pistolenkrebs, Fangschreckenkrebs, Qualle oder Axolotl, ist das Tier die Figur der Szene – groß, unter Wasser,
@@ -1709,7 +1715,10 @@ def direct(scenes, times, topic="", style="", look=""):
         if isinstance(sc, dict) and sc.get("_sea") and isinstance(sc.get("_keep"), dict):   # Figur, Hauptfigur dazustellen) gelten hier nicht
             kept = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and a.get("kind") == sc["_keep"].get("kind")][:1] or [dict(sc["_keep"])]
             kept[0].update(hero=True)
-            if str(kept[0].get("action") or "") in ("walk", "run", "sit", "sleep", "fall", "jump"):
+            if kept[0].get("kind") in LAND_KINDS:          # Galopp und Sprung gehören zum Tier und bleiben
+                kept[0].update(action=sc["_keep"].get("action") or "idle", pos=sc["_keep"].get("pos") or "center")
+                kept[0].pop("to", None)
+            elif str(kept[0].get("action") or "") in ("walk", "run", "sit", "sleep", "fall", "jump"):
                 kept[0].update(action="idle", pos=sc["_keep"].get("pos") or "center")
                 kept[0].pop("to", None)
             sc["actors"], sc["crowd"] = kept, ""
@@ -1753,7 +1762,7 @@ def direct(scenes, times, topic="", style="", look=""):
 # Tier/Wesen im Titel → es wird die Hauptfigur des Videos (wie in den Vorbild-Shorts: die Spinne ist fast in jeder Szene, mit Gefühl)
 TOPIC_CREATURES = [(r"ki-agent|\bagent|\bbots?\b|chatbot|\bassistent|\bki\b|künstliche intelligenz|\bclaude\b|chatgpt|sprachmodell", "agent"),
                    (r"\bvirus|\bviren|bakterie|\bkeim|erreger|grippe|infektion", "virus"), (r"\bzelle|zellen|blutkörperchen|immunsystem", "cell"),
-                   (r"spinne|tarantel|vogelspinne|weberknecht|kreuzspinne", "spider"), (r"katze|kater|kätzchen", "cat"), (r"\bhund|hunde|welpe", "dog"),
+                   (r"spinne|tarantel|vogelspinne|weberknecht|kreuzspinne", "spider"), (r"katze|kater|kätzchen", "cat"), (r"\bhund(e|es|en|chen)?\b|\bhunde(?!rt)\w|welpe", "dog"),
                    (r"biene", "bee"), (r"wespe|hornisse", "wasp"), (r"\bhai\b|haie|weißer hai", "shark"), (r"\bfisch|goldfisch", "fish"),
                    (r"\bvogel|vögel|spatz|taube|amsel", "bird"), (r"\bgeist|gespenst", "ghost"), (r"roboter", "robot"),
                    (r"außerirdisch|alien|\bufo", "alien"), (r"dinosaurier|\bdino|t-rex", "dino"), (r"monster|ungeheuer", "monster")]
@@ -1766,9 +1775,12 @@ SEA_CREATURES = [(r"fangschreckenkreb|heuschreckenkreb|mantis-?shrimp", "mantis"
                  (r"qualle", "jelly"), (r"axolotl", "axolotl")]
 SEA_KINDS = ("shrimp", "mantis", "jelly", "axolotl")
 SEA_TARGETS = ("rock", "lib_glasscheibe", "lib_tresor", "ship", "box", "barrel", "ice")
-LONG_KINDS = ("shrimp", "mantis", "axolotl", "tardigrade", "jelly")          # breiter als hoch: keine Großaufnahme, Kamera lässt sie ganz im Bild
+LONG_KINDS = ("shrimp", "mantis", "axolotl", "tardigrade", "jelly", "cheetah", "eagle", "flea")          # breiter als hoch: keine Großaufnahme, Kamera lässt sie ganz im Bild
 # Winzlinge, die überall vorkommen (Moos, Eis, Weltall): als Figur an dem Ort, von dem der Satz spricht
-ANY_CREATURES = [(r"bärtierchen|wasserbär|tardigrad", "tardigrade")]
+ANY_CREATURES = [(r"bärtierchen|wasserbär|tardigrad", "tardigrade"), (r"\bgepard", "cheetah"), (r"\badler|greifvogel|greifvögel", "eagle"), (r"\bfloh|\bflöhe", "flea")]
+# Landtiere und Vögel als Figur der Szene: bleiben nur einen Folgesatz, und nur, wenn er sichtbar weiter vom Tier handelt
+LAND_KINDS = ("cheetah", "eagle", "flea")
+LAND_NEXT_RE = r"^(er|sie|es|sein\w*|ihr\w*|damit|dabei)\b|\b(dieses|das) tier\b|\bdie raubkatze|\bder (vogel|springer)\b"
 HUMAN_RE = (r"\b(du|dein\w*|dir|dich|ich|mein\w*|mir|mich|wir|unser\w*|uns|euch|mensch\w*|forscher\w*|wissenschaftler\w*|mediziner\w*|ärzt\w*|arzt|"
             r"schreib\w*|folg\w*|kommentar\w*|abonnier\w*|stell dir|zuschauer)\b")
 SEA_TOPIC_RE = r"axolotl|pistolenkreb|knallkreb|fangschreckenkreb|\bgarnele|krebstier|qualle|unter wasser|meerest|tiefsee|\bozean|\bmeer\b|\briff"
@@ -1787,7 +1799,7 @@ def _sea_kind(low, sea):
     return None
 
 
-HERO_SIZE = {"shrimp": 1.6, "mantis": 1.6, "jelly": 1.4, "axolotl": 1.6, "tardigrade": 1.5, "agent": 0.8, "brain": 1.6, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9}   # Hauptfigur: etwa halb so hoch wie ein Mensch
+HERO_SIZE = {"cheetah": 1.45, "eagle": 1.5, "flea": 1.35, "shrimp": 1.6, "mantis": 1.6, "jelly": 1.4, "axolotl": 1.6, "tardigrade": 1.5, "agent": 0.8, "brain": 1.6, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9}   # Hauptfigur: etwa halb so hoch wie ein Mensch
 
 
 def _topic_creature(scenes, topic):
@@ -2191,7 +2203,7 @@ TEXT_PROPS = [(r"aquarium|aquarien(?!scheib|glas)|goldfisch|fischglas|fischbecke
 MAP_HINTS = ((r"ganz deutschland|in deutschland|deutschlandweit|bundesweit|bundesländer|jeder deutsche|alle deutschen", "germany"),
              (r"weltweit|auf der ganzen welt|alle länder|rund um den globus|weltbevölkerung|alle kontinente|die ganze erde|die ganze welt", "worldmap"))
 # Tiere neben Menschen: Größe im Verhältnis zur Figur (1.0 = menschengroß). „Riesen…“-Themen heben das auf (giant).
-CREATURE_SIZE = {"shrimp": 0.5, "mantis": 0.5, "jelly": 0.6, "axolotl": 0.5, "tardigrade": 0.5, "brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45}
+CREATURE_SIZE = {"cheetah": 1.0, "eagle": 0.8, "flea": 0.4, "shrimp": 0.5, "mantis": 0.5, "jelly": 0.6, "axolotl": 0.5, "tardigrade": 0.5, "brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45}
 GIANT_RE = r"riesen|riesig|gigant|monströs|so groß wie|meterhoh|haushoh|mutier"
 # Nur hier laufen Passanten durchs Bild – auf dem Feld, im Wald, im Keller ist niemand unterwegs
 CROWD_PLACES = ("headquarters", "street", "park", "village", "beach", "gasstation", "station", "supermarket", "supermarket_empty", "hospital", "office",

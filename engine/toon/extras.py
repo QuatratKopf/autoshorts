@@ -1461,7 +1461,7 @@ def _leaf(x0, y0, x1, y1, w):
     return pts
 
 
-def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0):
+def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
     """Zeichnet ein Wesen; gibt (Bild, Fußpunkt-x, Fußpunkt-y, schwebt) zurück.
     Stil wie die Figuren (rig.py): kräftiger Umriss, jede Farbfläche mit dunklerer Schattenseite (hinten/unten),
     Augen mit Glanzpunkten, Wangenrot. Gezeichnet wird nach rechts blickend in Wesen-Koordinaten (x nach vorn,
@@ -2185,10 +2185,148 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0):
         brow(hx - 14, by - 46, 13, 1)
         brow(hx + 30, by - 50, 13, -1)
         cheek(hx - 34, by + 14, 14)
+    elif kind in ("cheetah", "gepard"):
+        # Gepard: schlanke Raubkatze mit langen Beinen, Tupfen, Tränenstreifen und Ringelschwanz; action = "run": gestreckter Galopp
+        col = (236, 184, 96)
+        belly = _light(col, 0.6)
+        spot = (64, 46, 34)
+        run = action == "run"
+        ext = math.sin(t * 11) if run else 0.0                                   # +1 gestreckt, -1 Beine unter dem Bauch
+        oy = (-16 - 12 * ext) if run else bob * 0.25                             # im Galopp hebt der Körper ab
+        wag = math.sin(t * 3) * 12
+        tail = [(-168, -196 + oy), (-232, -176 + oy), (-272, -128 + oy + wag * 0.5), (-268 + wag * 0.4, -78 + oy + wag)] if not run else \
+               [(-168, -196 + oy), (-232, -206 + oy), (-272, -214 + oy - ext * 10), (-296, -196 + oy - ext * 18)]
+        stroke(tail, 20, col)
+        for q in (0.45, 0.7):                                                    # Ringe am Schwanz
+            a_, b_ = tail[2], tail[3]
+            mx_, my_ = a_[0] + (b_[0] - a_[0]) * q, a_[1] + (b_[1] - a_[1]) * q
+            stroke([(mx_ - 2, my_ - 3), (mx_ + 2, my_ + 3)], 20, spot)
+        stroke(tail[-1:] + [(tail[-1][0] + 1, tail[-1][1] + 3)], 20, spot)        # dunkle Spitze
+
+        def leg(front, e, c2):
+            if front:
+                top = (98, -150 + oy)
+                paw = (98 + 122 * e, -10 - 34 * abs(e) if run else -10)
+                knee = ((top[0] + paw[0]) / 2 + 16 - 10 * e, (top[1] + paw[1]) / 2 + 6)
+            else:
+                top = (-128, -150 + oy)
+                paw = (-128 - 118 * e, -10 - 30 * abs(e) if run else -10)
+                knee = ((top[0] + paw[0]) / 2 - 30 + 8 * e, (top[1] + paw[1]) / 2 + 14)
+            stroke([top, knee, paw], 24, c2)
+            ell(paw[0] - 14, paw[1] - 12, paw[0] + 26, paw[1] + 10, _light(c2, 0.35), shade=0)
+        for fr in (True, False):                                                 # Beine der abgewandten Seite (leicht versetzt im Takt)
+            leg(fr, math.sin(t * 11 - 0.7) if run else -0.22, _dark(col, 0.22))
+        ell(-190, -240 + oy, 60, -128 + oy, col)                                 # schlanker Rumpf mit tiefer Brust
+        ell(10, -256 + oy, 160, -112 + oy, col)
+        ell(-176, -234 + oy, 100, -134 + oy, col, shade=0, line=False)           # Naht zwischen Rumpf und Brust schließen
+        ell(-120, -176 + oy, 120, -124 + oy, belly, shade=0, line=False)
+        for sx, sy in ((-150, -206), (-112, -222), (-118, -186), (-74, -206), (-40, -224), (-36, -190), (4, -208), (40, -228), (48, -192), (88, -214), (112, -180), (-160, -172)):
+            ell(sx - 9, sy - 8 + oy, sx + 9, sy + 8 + oy, spot, shade=0, line=False)
+        for fr in (True, False):
+            leg(fr, ext if run else 0.0, col)
+        hx, hy = 186, -306 + oy + (bob * 0.3 if not run else 0)
+        stroke([(118, -214 + oy), (158, hy + 26)], 58, col)                      # Hals
+        for ex_ in (-34, 22):                                                    # kleine runde Ohren
+            ell(hx + ex_ - 18, hy - 76, hx + ex_ + 18, hy - 36, _dark(col, 0.2) if ex_ < 0 else col, shade=0)
+            ell(hx + ex_ - 8, hy - 66, hx + ex_ + 8, hy - 44, spot, shade=0, line=False)
+        ell(hx - 64, hy - 60, hx + 64, hy + 52, col)                             # Kopf
+        ell(hx + 6, hy + 2, hx + 78, hy + 50, belly, shade=0, line=False)        # helle Schnauze
+        for sx, sy in ((-34, -40), (-14, -50), (-44, -14)):                      # Tupfen auf der Stirn
+            ell(hx + sx - 5, hy + sy - 5, hx + sx + 5, hy + sy + 5, spot, shade=0, line=False)
+        for ex_ in (4, 46):                                                      # Tränenstreifen vom Auge zum Maul
+            d.line((*P(hx + ex_ + 6, hy - 4), *P(hx + ex_ + 12, hy + 16), *P(hx + ex_ + 8, hy + 36)), fill=spot, width=max(2, int(6 * k)), joint="curve")
+        poly([(hx + 46, hy + 6), (hx + 66, hy + 6), (hx + 56, hy + 19)], (60, 40, 40), shade=0)   # Nase
+        mouthf(hx + 54, hy + 32, 13)
+        eye(hx + 4, hy - 18, 14)
+        eye(hx + 46, hy - 18, 14)
+        brow(hx + 4, hy - 42, 13, 1)
+        brow(hx + 46, hy - 42, 13, -1)
+        cheek(hx - 24, hy + 20, 13)
+        if run:                                                                  # Fahrtstriche hinter dem Tier
+            for i, ly in enumerate((-250, -196, -140)):
+                lx = -250 - ((t * 520 + i * 37) % 50)
+                d.line((*P(lx, ly + oy), *P(lx - 46, ly + oy)), fill=(255, 255, 255, 170), width=max(2, int(7 * k)))
+    elif kind in ("eagle", "adler"):
+        # Adler: großer Greifvogel im Flug – dunkelbraun, weißer Kopf und Stoß, gelber Hakenschnabel, gelbe Fänge, strenger Blick
+        fly = True
+        col, white, yel = (112, 78, 54), (246, 242, 232), (248, 196, 60)
+        by = -292 + bob * 1.5
+        fl = math.sin(t * 5.5)
+        poly([(-104, by - 16), (-196, by - 40), (-222, by - 6), (-214, by + 30), (-190, by + 52), (-104, by + 30)], white)        # Stoß (Schwanzfedern)
+        for ty in (-14, 14):
+            d.line((*P(-130, by + 6 + ty * 0.4), *P(-206, by + 6 + ty * 1.6)), fill=_dark(white, 0.2), width=max(2, int(4 * k)))
+        wy = -46 * fl
+        poly([(40, by - 30), (10, by - 126 + wy), (-60, by - 180 + wy * 1.3), (-150, by - 180 + wy * 1.3), (-196, by - 126 + wy), (-110, by - 36)], _dark(col, 0.3), shade=0)   # Flügel hinten
+        for lx in (-34, 6):                                                      # Fänge
+            stroke([(lx, by + 52), (lx - 6, by + 84)], 12, yel)
+            for cz in (-16, 0, 16):
+                stroke([(lx - 6, by + 84), (lx - 6 + cz, by + 106)], 6, yel)
+                poly([(lx - 10 + cz, by + 104), (lx - 2 + cz, by + 104), (lx - 4 + cz * 1.2, by + 120)], (40, 34, 34), shade=0, line=False)
+        ell(-136, by - 62, 96, by + 64, col)                                     # Rumpf
+        for sx, sy in ((-60, 24), (-20, 34), (20, 26), (-40, 4), (0, 10)):       # Brustgefieder
+            d.arc(B(sx - 16, by + sy - 12, sx + 16, by + sy + 12), 20, 160, fill=_dark(col, 0.35), width=max(2, int(5 * k)))
+        hx, hy = 112, by - 44
+        ell(hx - 66, hy - 56, hx + 58, hy + 56, white)                           # weißer Kopf
+        ell(hx - 76, hy + 4, hx + 10, hy + 70, white, shade=0, line=False)       # weißer Nacken geht in die Brust über
+        poly([(hx + 44, hy - 20), (hx + 92, hy - 16), (hx + 112, hy + 6), (hx + 108, hy + 36), (hx + 92, hy + 20), (hx + 46, hy + 22)], yel)   # Hakenschnabel
+        d.line((*P(hx + 50, hy + 6), *P(hx + 92, hy + 6)), fill=_dark(yel, 0.4), width=max(2, int(4 * k)))
+        w2 = -52 * fl
+        wing = [(30, by - 22), (-10, by - 126 + w2), (-70, by - 195 + w2 * 1.3), (-108, by - 165 + w2 * 1.2), (-128, by - 198 + w2 * 1.3), (-160, by - 161 + w2 * 1.2),
+                (-186, by - 186 + w2 * 1.25), (-208, by - 141 + w2 * 1.1), (-236, by - 151 + w2 * 1.1), (-222, by - 87 + w2 * 0.7), (-130, by - 6)]
+        poly(wing, col, shade=0.08)                                              # Flügel vorn mit gefingerten Schwungfedern
+        for q in (0.3, 0.52, 0.74):                                              # Federreihen
+            d.line((*P(-10 - 120 * q, by - 40 - 120 * q + w2 * q), *P(-110 - 100 * q, by - 14 - 90 * q + w2 * q * 0.8)), fill=_dark(col, 0.35), width=max(2, int(5 * k)))
+        eye(hx + 16, hy - 12, 14, "angry" if eyekind == "" else None)
+        d.line((*P(hx - 6, hy - 38), *P(hx + 38, hy - 26)), fill=INK, width=max(2, int(7 * k)))      # strenge Braue
+        cheek(hx - 4, hy + 20, 11)
+    elif kind in ("flea", "floh"):
+        # Floh: hochgewölbter, rotbrauner Körper mit Ringen, winziger Kopf, Stechrüssel und riesige Sprungbeine; action = "jump": springt hoch
+        col = (168, 92, 56)
+        jump = action == "jump"
+        u = (t % 1.5) / 1.5
+        air = jump and 0.16 < u < 0.86
+        lift = math.sin((u - 0.16) / 0.7 * math.pi) * 240 if air else 0.0
+        crouch = (14 * math.sin(min(1.0, u / 0.16) * math.pi) if u <= 0.16 else 0.0) if jump else 0.0
+        by = -168 - lift + crouch + (0 if jump else bob * 0.3)
+        gyl = -lift                                                              # Fußlinie (in der Luft hängen die Beine)
+        def legs(far):
+            c2 = _dark(col, 0.28) if far else col
+            dx = -22 if far else 0
+            if air:
+                stroke([(-70 + dx, by + 40), (-150 + dx, by + 80), (-200 + dx, by + 190), (-224 + dx, by + 200)], 22 if not far else 18, c2)     # gestrecktes Sprungbein
+                for lx in (-6, 52):
+                    stroke([(lx + dx, by + 62), (lx + dx - 16, by + 112), (lx + dx - 34, by + 140)], 12, c2)
+            else:
+                stroke([(-70 + dx, by + 36), (-190 + dx, by - 40 + crouch), (-150 + dx, gyl - 14), (-106 + dx, gyl - 8)], 22 if not far else 18, c2)   # gefaltetes Sprungbein
+                for lx in (-6, 52):
+                    stroke([(lx + dx, by + 62), (lx + dx + 22, (by + 62 + gyl) / 2), (lx + dx + 12, gyl - 8), (lx + dx + 30, gyl - 6)], 12, c2)
+        legs(True)
+        for bx_ in (-120, -84, -46, -8):                                         # Borsten auf dem Rücken
+            poly([(bx_ - 8, by - 96), (bx_ - 26, by - 136), (bx_ + 8, by - 104)], _dark(col, 0.4), shade=0)
+        ell(-170, by - 118, 78, by + 84, col)                                    # Körper
+        for a_ in (-120, -72, -24, 24):                                          # Körperringe
+            band(-170, by - 118, 78, by + 84, a_, a_ + 9, _dark(col, 0.3))
+        ell(-110, by - 96, -30, by - 44, _light(col, 0.3), shade=0, line=False)  # Glanz
+        hx = 96
+        stroke([(hx + 40, by + 10), (hx + 58, by + 44), (hx + 52, by + 70)], 9, _dark(col, 0.4))      # Stechrüssel
+        for ax_ in (0, 22):                                                      # kurze Fühler
+            stroke([(hx + ax_, by - 62), (hx + ax_ + 18, by - 96)], 7, _dark(col, 0.35))
+            ell(hx + ax_ + 11, by - 106, hx + ax_ + 27, by - 90, _dark(col, 0.35), shade=0, line=False)
+        ell(hx - 58, by - 72, hx + 64, by + 44, _light(col, 0.12))               # Kopf
+        legs(False)
+        eye(hx - 4, by - 22, 15)
+        eye(hx + 36, by - 22, 15)
+        brow(hx - 4, by - 48, 13, 1)
+        brow(hx + 36, by - 48, 13, -1)
+        cheek(hx - 30, by + 12, 12)
+        mouthf(hx + 22, by + 14, 11)
+        if air and lift > 60:                                                    # Sprungstriche unter dem Tier
+            for lx in (-80, -30, 20):
+                d.line((*P(lx, gyl + 40), *P(lx, gyl + 40 + min(90, lift * 0.4))), fill=(255, 255, 255, 170), width=max(2, int(7 * k)))
     else:
         return None
     out = im.resize((im.width // S, im.height // S), Image.LANCZOS)
     return out, ax / S, gy / S, fly
 
 
-CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly", "axolotl", "tardigrade")
+CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly", "axolotl", "tardigrade", "cheetah", "eagle", "flea")

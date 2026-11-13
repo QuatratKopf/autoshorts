@@ -288,6 +288,17 @@ def main():
         assert kinds[3] == ["tardigrade"] and kinds[4] == ["tardigrade"] and kinds[5] == ["tardigrade"], f"Bärtierchen: {kinds[3:6]}"
         for sc_ in s2:
             frame(sc_, {"du": {"shirt": "blau"}})
+        T3 = [("Ein Gepard jagt mit hundertzwanzig Kilometern pro Stunde.", "fields", []), ("Er erreicht hundertzwanzig Kilometer pro Stunde.", "fields", []),
+              ("Das Problem ist die Landung.", "lab", [{"id": "du"}]), ("Der Adler sieht eine Maus aus drei Kilometern.", "mountain", []),
+              ("Ein Floh springt das Zweihundertfache seiner Länge.", "lab", [{"id": "du"}]), ("Naturgesetze gelten immer.", "lab", [{"id": "du"}])]
+        s3 = stage.direct([{"text": t_, "place": pl_, "actors": a_} for t_, pl_, a_ in T3], [(n_ * 3, n_ * 3 + 3) for n_ in range(len(T3))], "Was passiert, wenn wir Tiere kreuzen?")
+        k3 = [[(a.get("kind") or "", a.get("action") or "") for a in sc_.get("actors") or []] for sc_ in s3]
+        assert k3[0] == [("cheetah", "run")] and k3[1] == [("cheetah", "run")], f"Gepard: {k3[:2]}"
+        assert not any(k_ for k_, _a in k3[2]) and not any(k_ for k_, _a in k3[5]), f"Landtier bleibt zu lange: {k3[2]} {k3[5]}"
+        assert [k_ for k_, _a in k3[3]] == ["eagle"] and k3[4] == [("flea", "jump")], f"Adler/Floh: {k3[3:5]}"
+        for sc_ in s3:
+            for t_ in (0.2, 1.3):
+                frame(sc_, {"du": {"shirt": "blau"}}, t=t_)
         assert not stage.spoken_number(700, "rund viertausend siebenhundert Grad") and stage.spoken_number(4700, "rund viertausend siebenhundert Grad"), "geteiltes Zahlwort"
         assert stage.spoken_number(700, "siebenhundert Grad") and stage.spoken_number(3000, "dreitausend Menschen"), "Zahlwort"
     check("Meerestiere", _sea)
