@@ -577,6 +577,11 @@ def main(argv=None):
                 make(slug if category(slug) else None, src["topic"], a.upload != "0", None, source=src)
             finally:
                 remake.cleanup(a.id.strip())
+        elif a.action == "sounds":       # Klang-Bibliothek bauen: earshot-Soundeffekte + Openverse-Geräusche und -Musik
+            from . import sound
+            man = sound.build()
+            log(f"Klang-Bibliothek: {sum(len(v) for v in (man.get('sfx') or {}).values())} Soundeffekte, "
+                f"{sum(len(v) for v in (man.get('amb') or {}).values())} Hintergrund-Geräusche")
         elif a.action == "stats":
             uploaders.refresh_stats()
             trends.refresh()

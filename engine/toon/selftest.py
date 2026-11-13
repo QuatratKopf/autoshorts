@@ -415,6 +415,26 @@ def main():
             assert p.shape == shp and p.mouth == 0.8
             rig.draw(rig.Look.from_spec({}, "du", 0), p, 1, 1.0)
     check("Mimik und Gesten", _mimik)
+    def _sound():                                                # Klänge bildgenau: Whoosh-Spitze nach dem Schnitt, nichts doppelt
+        import tempfile
+        from pathlib import Path
+        from .. import sound
+        old = sound._LIB
+        try:
+            sound._LIB = {"sfx": {r: [{"file": f"{r}.ogg", "onset": 0.01, "peak": 0.2, "dur": 0.5}] for r in sound.GAIN}}
+            out = sound.place([(2.0, "whoosh"), (2.03, "tick"), (3.0, "pop"), (3.05, "pop"), (3.3, "pop"), (0.0, "whoosh")], 10)
+            starts = [round(t, 3) for t, _, _ in out]
+            assert abs(starts[1] - (2.0 + 0.037 - 0.2)) < 1e-6, out           # Whoosh am lautesten 37 ms nach dem Schnitt
+            assert len(out) == 4 and starts[0] == 0.0, out                     # Tick neben Whoosh weg, Pop-Abstand 114 ms
+            assert sound.ambience_for({"place": "street"}) == "city" and sound.ambience_for({"place": "kitchen"}) == ""
+            assert sound.ambience_for({"place": "forest", "time": "night"}) == "night"
+        finally:
+            sound._LIB = old
+        sc = {"text": "Plötzlich!", "place": "livingroom", "props": ["lamp"], "actors": [{"id": "du", "action": "shocked", "speaks": True}]}
+        with tempfile.TemporaryDirectory() as tmp:
+            stage.render_scene(sc, {}, 1.2, Path(tmp) / "s.mp4", [("Plötzlich!", 0.1, 0.6)], 0.0)
+        assert ("hit" in [r for _, r in sc["_sfx"]]) and ("pop" in [r for _, r in sc["_sfx"]]), sc["_sfx"]
+    check("Klang-Platzierung", _sound)
     check("Neon-Look", lambda: graphics.neon(frame({"place": "street", "crowd": "walk"}), 1.0))
     check("Neon-Kulisse", lambda: graphics.tint(places.background("street", True)))
     # Regie mit zufälligen und kaputten Drehbüchern

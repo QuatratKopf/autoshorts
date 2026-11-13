@@ -2429,6 +2429,29 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     cam["opener"] = index == 0
     cam_flat = {"flat": True, "dir": cam["dir"], "drift": cam["drift"], "opener": index == 0}
     cut_t, cut_kind, named = _cut_plan(scene, shot, gfx or ins, moving, ov_tall, place, actors, props, dur, cam, index)
+    sfx = []                                  # Ton-Ereignisse dieser Szene (Sekunden ab Szenenbeginn) für render.py / sound.py
+    if not (gfx or ins):
+        for pi, (k_p, _) in enumerate([p for p in props if extras.PROP_ALIASES.get(p[0], p[0]) not in extras.FRONT][:3]):
+            sfx.append((0.06 + 0.12 * pi, "pop"))           # Dinge springen ins Bild
+        for a_s in actors:
+            if a_s["action"] in ("shocked", "scared"):
+                sfx.append((0.04, "hit"))
+            elif a_s["action"] in ("jump", "happy", "cheer"):
+                sfx.append((0.1, "pop"))
+            elif a_s["action"] == "fall":
+                sfx.append((0.3, "boom"))
+        for st, gname in (lead.get("gplan") or []) if lead else []:
+            if gname == "shock":
+                sfx.append((st + 0.12, "hit"))
+            elif gname == "count":
+                sfx.append((st + 0.15, "tick"))
+            elif gname == "happy":
+                sfx.append((st + 0.1, "ding"))
+        if cut_t is not None:
+            sfx.append((cut_t, "shutter" if cut_kind == "insert" else "swish"))
+    elif gfx:
+        sfx.append((0.35, "ding" if str(gfx.get("type")) in ("number", "score", "round", "badge") else "pop"))
+    scene["_sfx"] = [(round(t_s, 3), r_s) for t_s, r_s in sfx if 0 <= t_s < dur]
     mood_s = str(scene.get("mood") or "").lower()
     fx_opt = {"crowd": scene.get("crowd") if crowd_ok(scene) else "", "mood": mood_s, "spec": places.spec_of(backdrop(scene)), "sky": sky_m,
               "win": scene.get("_win"), "count": scene.get("_count"), "neon": neon_look, "float": str(scene.get("float") or ""),

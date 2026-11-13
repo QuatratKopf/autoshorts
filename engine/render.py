@@ -343,35 +343,87 @@ def render(work: Path, scenes, times, voice, ass, out, music=None, music_volume=
 
     # Ton: Stimme + Musik + Soundeffekte an den Szenenwechseln / Einblendungen
     fonts = str(FONTS_DIR) if FONTS_DIR.is_dir() else "/usr/share/fonts"
-    sfx = make_sfx(work) if sfx_volume > 0 else {}
+    from . import sound as _snd
+    sfx = make_sfx(work) if sfx_volume > 0 and not _snd.library().get("sfx") else {}
     args = ["-i", "video.mp4", "-i", str(voice)]
     parts, mix = [], ["[vo]"]
-    parts.append("[1:a]apad=pad_dur=0.8[vo]")
+    parts.append("[1:a]apad=pad_dur=0.8,asplit=2[vo][vsc]")    # zweite Kopie steuert das Absenken der Musik unter der Stimme
     idx = 2
     if not music and music_volume > 0:
         music = synth_music(work, slug)
     if music:
         args += ["-stream_loop", "-1", "-i", str(music)]
-        parts.append(f"[{idx}:a]volume={music_volume},afade=t=in:d=0.15[m]")         # Musik ist ab dem ersten Bild da (kein langsames Einblenden)
+        parts.append(f"[{idx}:a]volume={music_volume * 1.5:.3f},afade=t=in:d=0.15[m0]")    # Musik ist ab dem ersten Bild da (kein langsames Einblenden)
+        parts.append("[m0][vsc]sidechaincompress=threshold=0.04:ratio=5:attack=25:release=350:makeup=1[m]")   # unter der Stimme leiser, in Pausen voller
         mix.append("[m]")
         idx += 1
-    events = []
-    for i, (sc, (s, _)) in enumerate(zip(scenes, times)):
-        name = str(sc.get("sfx") or "").lower()
-        if name in sfx:
-            events.append((s, name))
-        elif i == 0 and is_toon and "whoosh" in sfx:      # Start mit hörbarem Auftakt: das Video beginnt nicht in der Stille
-            events.append((0.0, "whoosh"))
-        elif i and is_toon and "swish" in sfx:
-            events.append((max(0.0, s - 0.08), "swish"))
-        if isinstance(sc.get("overlay"), dict) and sc["overlay"].get("type") and name != "pop" and "pop" in sfx:
-            events.append((s + 0.2, "pop"))
-    for k, (t, name) in enumerate(events[:40]):
-        args += ["-i", str(sfx[name])]
-        ms = int(t * 1000)
-        parts.append(f"[{idx}:a]volume={sfx_volume},adelay={ms}|{ms}[s{k}]")
-        mix.append(f"[s{k}]")
-        idx += 1
+    else:
+        parts.append("[vsc]anullsink")
+    from . import sound
+    lib = sound.library() if sfx_volume > 0 else {}
+    if lib.get("sfx"):
+        # Echte Klänge (earshot/Openverse), bildgenau nach den real-sfx-Regeln gesetzt
+        ov_role = {"stamp": "stamp", "quote": "knock", "tag": "shutter", "thermo": "tick", "bar": "tick", "counter": "tick",
+                   "list": "pop", "card": "pop"}
+        evs = []
+        for i, (sc, (s, _)) in enumerate(zip(scenes, times)):
+            name = str(sc.get("sfx") or "").lower()
+            if i == 0:
+                evs.append((0.0, "whoosh"))                      # Auftakt: das Video beginnt nicht in der Stille
+            elif name in ("whoosh", "boom", "ding", "pop", "tick"):
+                evs.append((s, name))
+            elif is_toon:
+                evs.append((s, "swish" if i % 3 else "whoosh"))   # jeder Schnitt hörbar, jeder dritte kräftiger
+            ov = sc.get("overlay") if isinstance(sc.get("overlay"), dict) else {}
+            if ov.get("type"):
+                evs.append((s + 0.2, ov_role.get(str(ov["type"]), "pop")))
+            for t_e, r_e in sc.get("_sfx") or []:
+                evs.append((s + float(t_e), str(r_e)))
+        placed = sound.place(evs, total, seed=len(scenes) * 7 + int(total))
+        for k, (t, path, g) in enumerate(placed[:48]):
+            args += ["-i", path]
+            ms = int(t * 1000)
+            parts.append(f"[{idx}:a]volume={g * sfx_volume / 0.35:.3f},adelay={ms}|{ms}[s{k}]")
+            mix.append(f"[s{k}]")
+            idx += 1
+        # Hintergrund-Geräusch passend zu Ort und Wetter (Regen, Stadt, Wald, Meer …), sehr leise unter allem
+        segs = []
+        for sc, (s, e) in zip(scenes, times):
+            role = sound.ambience_for(sc) if isinstance(sc, dict) else ""
+            if segs and segs[-1][0] == role and abs(segs[-1][2] - s) < 0.6:
+                segs[-1][2] = e
+            else:
+                segs.append([role, s, e])
+        rnd = random.Random(int(total * 10))
+        for role, s, e in [g for g in segs if g[0] and g[2] - g[1] >= 1.5][:3]:
+            tk = sound.take(role, rnd, "amb")
+            if not tk:
+                continue
+            ln = e - s + 0.4
+            args += ["-stream_loop", "-1", "-i", str(sound.LIB / tk["file"])]
+            ms = int(s * 1000)
+            parts.append(f"[{idx}:a]atrim=0:{ln:.2f},asetpts=PTS-STARTPTS,afade=t=in:d=0.4,afade=t=out:st={max(0.0, ln - 0.5):.2f}:d=0.5,"
+                         f"volume={sound.AMB_GAIN},adelay={ms}|{ms}[b{len(mix)}]")
+            mix.append(f"[b{len(mix)}]")
+            idx += 1
+    else:
+        events = []
+        for i, (sc, (s, _)) in enumerate(zip(scenes, times)):
+            name = str(sc.get("sfx") or "").lower()
+            if name in sfx:
+                events.append((s, name))
+            elif i == 0 and is_toon and "whoosh" in sfx:      # Start mit hörbarem Auftakt: das Video beginnt nicht in der Stille
+                events.append((0.0, "whoosh"))
+            elif i and is_toon and "swish" in sfx:
+                events.append((max(0.0, s - 0.08), "swish"))
+            if isinstance(sc.get("overlay"), dict) and sc["overlay"].get("type") and name != "pop" and "pop" in sfx:
+                events.append((s + 0.2, "pop"))
+        for k, (t, name) in enumerate(events[:40]):
+            args += ["-i", str(sfx[name])]
+            ms = int(t * 1000)
+            parts.append(f"[{idx}:a]volume={sfx_volume},adelay={ms}|{ms}[s{k}]")
+            mix.append(f"[s{k}]")
+            idx += 1
     if len(mix) > 1:
         parts.append(f"{''.join(mix)}amix=inputs={len(mix)}:duration=first:dropout_transition=0:normalize=0,"
                      "loudnorm=I=-14:TP=-1.5[a]")

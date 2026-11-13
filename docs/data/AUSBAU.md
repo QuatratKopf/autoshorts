@@ -107,3 +107,13 @@ ein Auftakt-Ton sind ab der ersten Sekunde da.
   alle 6 Stunden, „Aktualisieren“ in der App sofort), liegt in `trends.json` unter `niche` und fließt in `writer.new_topic` ein.
   Eigene Suchbegriffe je Video-Art: Feld `niche_queries` in der Kategorie.
 
+
+## Ton (earshot, Openverse, real-sfx)
+- `engine/sound.py`: Klang-Bibliothek in `assets/sfx/` (Liste `manifest.json`, Quellen `CREDITS.md`), gebaut mit der Aktion `sounds`:
+  earshot-Soundeffekte (MIT, im Code gebaut, je Rolle mehrere Takes mit gemessenem Einsatz/Spitze) und Openverse-Aufnahmen
+  (nur CC0/Public Domain) als Hintergrund-Geräusch je Ort/Wetter, dazu freie Musik in `music/<Video-Art>/`.
+- Platzierung nach real-sfx: Whoosh-Spitze 37 ms nach dem Schnitt, Pop 30 ms danach, Tick/Knock leicht davor; Mindestabstand je Rolle;
+  kleiner Klang neben großem fällt weg; Musik wird unter der Stimme abgesenkt (sidechain). Ereignisse kommen aus der Animation
+  (`scene["_sfx"]`: Dinge springen ins Bild → pop, Schreck → hit, Schnitt im Satz → swish/shutter, Geste „shock“ → hit …) und aus
+  Einblendungen (stamp → stamp, tag → shutter, thermo/bar → tick). Ohne Bibliothek bleiben die alten ffmpeg-Klänge.
+- Skills für Claude-Sitzungen liegen in `.claude/skills/` (earshot: Ton „hören“ und prüfen; real-sfx: Ton-Design echter Aufnahmen).

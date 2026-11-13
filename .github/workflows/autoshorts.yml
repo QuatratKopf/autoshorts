@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       action:
-        description: "auto | make | review_make | upload | discard | stats | trends"
+        description: "auto | make | review_make | upload | discard | stats | trends | sounds"
         default: "make"
         type: string
       category:
@@ -119,6 +119,13 @@ jobs:
         if: steps.check.outputs.media == '1'
         run: timeout 240 npm install -g --no-fund --no-audit hyperframes@0.9.34 || echo "HyperFrames nicht verfügbar – Grafiken werden wie bisher gezeichnet"
 
+      - name: Klang-Bibliothek einrichten (earshot, nur für die Aktion „sounds“)
+        if: steps.check.outputs.run == '1' && env.IN_ACTION == 'sounds'
+        run: |
+          # earshot (MIT) auf einem geprüften Stand; die Sound-Bank braucht nur numpy/scipy – keine KI-Modelle, kein torch
+          pip install -q numpy scipy soundfile soxr
+          pip install -q --no-deps "git+https://github.com/Leonxlnx/earshot@4ac3d2ac2b151e1c23376f9ce7f3047a17050013"
+
       - name: AutoShorts ausführen
         if: steps.check.outputs.run == '1'
         env:
@@ -144,6 +151,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add docs/data/state.json docs/data/videos.json docs/data/stats.json docs/data/trends.json docs/thumbs tokens
           git add docs/data/wishes.json docs/data/shapes.json docs/data/plans.json docs/data/insights.json docs/data/scripts 2>/dev/null || true
+          if [ "$IN_ACTION" = "sounds" ]; then git add assets/sfx music 2>/dev/null || true; fi
           if git diff --cached --quiet; then echo "Nichts zu speichern"; exit 0; fi
           git commit -q -m "AutoShorts: $IN_ACTION"
           for i in 1 2 3 4 5; do
