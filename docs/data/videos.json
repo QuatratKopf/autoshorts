@@ -2682,7 +2682,7 @@
   "id": 81,
   "category": "comedy",
   "topic": "Übernahme des Alltags durch völlig verselbstständigte und streitende KI-Agenten",
-  "status": "rendered",
+  "status": "published",
   "created": 1794590430.323054,
   "remake": true,
   "title": "Als meine KI-Agenten die Kontrolle übernahmen",
@@ -2721,7 +2721,13 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "zernio_id": "6af76fa72ff96e6c4d1ef4cd",
+  "yt_status": "Zernio: published",
+  "yt_id": "gFWqEaYjDac",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6af76fa72ff96e6c4d1ef4cd",
+  "error": null
  },
  {
   "id": 82,
