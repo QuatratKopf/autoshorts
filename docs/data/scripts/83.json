@@ -1,0 +1,434 @@
+{
+ "title": "Was wäre, wenn alle Menschen gleichzeitig nett wären?",
+ "scenes": [
+  {
+   "text": "Acht Milliarden Menschen sind plötzlich eine Minute lang absolut nett.",
+   "see": "Du stehst überrascht im Raum, als eine große Uhr sechzig Sekunden anzeigt.",
+   "place": "worldmap",
+   "time": "day",
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "8 MILLIARDEN"
+   }
+  },
+  {
+   "text": "Und das verändert im Körper von allen sofort schlagartig alles.",
+   "see": "Ein Countdown über einer Weltkarte läuft ab sechzig Sekunden rückwärts.",
+   "place": "worldmap",
+   "time": "day",
+   "mood": "calm"
+  },
+  {
+   "text": "Erstens passiert etwas Erstaunliches direkt in deinem eigenen Körper.",
+   "see": "Ein Herzschlag auf einem Monitor beruhigt sich sichtlich.",
+   "place": "hospital",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Sobald du freundlich reagierst, sinkt das Stresshormon Cortisol im Blut blitzschnell ab.",
+   "see": "Ein Diagramm zeigt, wie das Stresshormon Cortisol rapide nach unten fällt.",
+   "place": "lab",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "chart",
+    "kicker": "HORMONSPIEGEL",
+    "value": "CORTISOL",
+    "label": "SINKT RAPIDE",
+    "dark": true
+   }
+  },
+  {
+   "text": "Gleichzeitig steigt das Bindungshormon Oxytocin, was deinen Blutdruck sofort spürbar beruhigt.",
+   "see": "Eine Grafik zeigt das Bindungshormon Oxytocin, das stark ansteigt.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "OXYTOCIN STEIGT"
+   }
+  },
+  {
+   "text": "Dein Herz schlägt gleichmäßiger und dein gesamter Nervenstrang schaltet auf tiefe Erholung.",
+   "see": "Du sitzt entspannt im Zimmer und dein Puls sinkt hörbar.",
+   "place": "zimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "stuhl"
+    },
+    {
+     "type": "lib_herz"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Zweitens schüttet das Gehirn in genau diesem Moment mächtige Belohnungsstoffe aus.",
+   "see": "Das Cartoongehirn klatscht begeistert in die Hände.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_herz",
+     "pos": 800
+    }
+   ],
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Wenn du jemandem hilfst, feuert dein Belohnungszentrum genau wie beim Essen von Schokolade.",
+   "see": "Eine Gehirngrafik feuert Belohnungssignale ab.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_schokolade"
+    }
+   ],
+   "actors": [
+    {
+     "id": "gehirn",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "happy"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "happy",
+   "graphic": {
+    "type": "versus",
+    "kicker": "DOPAMIN-CHECK",
+    "left": "HELFEN",
+    "right": "SCHOKOLADE",
+    "dark": false
+   }
+  },
+  {
+   "text": "Der sonst so geizige Kollege im Büro teilt plötzlich sein letztes Stück Kuchen.",
+   "see": "Der Kollege hält dir im Büro ein leckeres Stück Kuchen hin.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "kuchen"
+    },
+    {
+     "type": "table"
+    }
+   ],
+   "actors": [
+    {
+     "id": "kollege",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "kuchen",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "center"
+    }
+   ],
+   "mood": "happy",
+   "crowd": "walk"
+  },
+  {
+   "text": "Du freust dich riesig und dein Gehirn belohnt dich sofort mit purem Glück.",
+   "see": "Du nimmst überrascht den Kuchen entgegen.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "kuchen"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "kuchen",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "happy",
+   "overlay": {
+    "type": "note",
+    "title": "GEHIRN-FAKT",
+    "text": "Geben macht glücklicher als Nehmen"
+   }
+  },
+  {
+   "text": "Drittens entsteht durch diese sechzig Sekunden eine Welle der weltweiten Ansteckung.",
+   "see": "Eine Kaskade von leuchtenden Verbindungslinien verbindet drei Menschen.",
+   "place": "beach",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "calm",
+   "crowd": "walk",
+   "graphic": {
+    "type": "number",
+    "value": "60",
+    "label": "SEKUNDEN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Wer echte Freundlichkeit erfährt, gibt sie in wissenschaftlichen Experimenten an bis zu drei Personen weiter.",
+   "see": "Grafik zeigt ein Netzwerk, das sich über drei Stufen ausbreitet.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "number",
+    "kicker": "EXPONENTIELLER EFFEKT",
+    "value": "3 PRO KETTE",
+    "label": "WEITERGABE",
+    "dark": false
+   }
+  },
+  {
+   "text": "Gestresste Autofahrer lassen sich an der Ampel entspannt und lächelnd den Vortritt.",
+   "see": "Ein Auto hält freundlich an der Ampel an und winkt andere vorbei.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "car"
+    },
+    {
+     "type": "trafficlight"
+    }
+   ],
+   "shot": "event",
+   "mood": "calm",
+   "crowd": "walk"
+  },
+  {
+   "text": "Der sonst so grummelige Nachbar hält dir im Flur hilfsbereit die schwere Tür auf.",
+   "see": "Ein Nachbar hält im Hausflur lächelnd die schwer beladene Tür auf.",
+   "place": "hallway",
+   "time": "day",
+   "props": [
+    {
+     "type": "door"
+    }
+   ],
+   "actors": [
+    {
+     "id": "kollege",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "tag",
+    "text": "ALLTAGS-HELDEN"
+   }
+  },
+  {
+   "text": "Kleine Gesten lösen überall auf der Straße unverzüglich ein riesiges Lächeln aus.",
+   "see": "Die Menschen auf der Straße winken sich gut gelaunt zu.",
+   "place": "street",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "music",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "center"
+    }
+   ],
+   "mood": "happy",
+   "crowd": "cheer"
+  },
+  {
+   "text": "Die eine Minute ist zwar schnell vorbei, aber die positive Wirkung bleibt bestehen.",
+   "see": "Eine Uhr zeigt, dass die eine Minute abgelaufen ist.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "badge",
+    "kicker": "FAZIT",
+    "text": "WIRKUNG BLEIBT",
+    "dark": false
+   }
+  },
+  {
+   "text": "Denn Freundlichkeit breitet sich wie ein schönes Lauffeuer in der ganzen Stadt aus.",
+   "see": "Menschen gehen in der Stadt weiterhin freundlich miteinander um.",
+   "place": "street",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "mood": "happy",
+   "crowd": "cheer"
+  },
+  {
+   "text": "Wann warst du das letzte Mal zu jemandem ohne Grund richtig nett?",
+   "see": "Du stehst lächelnd vor der Kamera und schaust neugierig.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "tag",
+    "text": "SCHREIB ES IN DIE KOMMENTARE"
+   }
+  },
+  {
+   "text": "Schreib es jetzt in die Kommentare und folg für mehr spannende Gedankenspiele.",
+   "see": "Du deutest mit beiden Daumen nach oben und lächelst freundlich.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "happy",
+   "overlay": {
+    "type": "choice",
+    "a": "Kuchen teilen",
+    "b": "Tür aufhalten"
+   }
+  }
+ ]
+}

@@ -2763,5 +2763,45 @@
   "slot": "2026-11-13 21:00",
   "review_at": 1794593775.435106,
   "error": "Bei der Prüfung verworfen: Erfundene Zahlen (60.000 Kriege, 10 Mrd. Nachrichten), kein Kuchen im Bild, rotes Auto statt Einsatzwagen, Schild SEKUNDE 10 am falschen Satz, Handy-Text unlesbar"
+ },
+ {
+  "id": 83,
+  "category": "whatif",
+  "topic": "Was wäre, wenn alle Menschen eine Minute lang gleichzeitig nett wären – genau drei Folgen, jede mit drei bis vier Sätzen und einem Alltagsbild, in dem jemand etwas tut: Erstens im Körper (Freundlichkeit senkt das Stresshormon Cortisol und lässt das Bindungshormon Oxytocin steigen, der Puls wird ruhiger), zweitens im Gehirn (wer hilft oder etwas abgibt, bei dem springt das Belohnungszentrum an, ähnlich wie bei Schokolade – Beispiel: der Kollege im Büro teilt sein letztes Stück Kuchen), drittens Ansteckung (wer Freundlichkeit erlebt, gibt sie weiter, in Experimenten bis zu drei Personen weit – Beispiele: Autofahrer lassen sich an der Ampel den Vortritt, der Nachbar hält dir die Tür auf). Schluss: Die Minute ist vorbei, aber die Wirkung bleibt, weil Freundlichkeit ansteckt. Einzige Zahlen im ganzen Video: acht Milliarden Menschen, eine Minute beziehungsweise sechzig Sekunden, drei Personen. Keine Zahlen über Kriege, Nachrichten, Kriminalität, Einsätze oder Geld, kein Experten vermuten, keine Zeitleiste Sekunde eins, Sekunde zehn. Jeder Satz nennt das Ding, um das es geht, beim Namen. Titel: Was wäre, wenn alle Menschen gleichzeitig nett wären? Titelbild-Text: EINE MINUTE NETT",
+  "status": "rendered",
+  "created": 1794595196.569361,
+  "title": "Was wäre, wenn alle Menschen gleichzeitig nett wären?",
+  "description": "Was passiert, wenn acht Milliarden Menschen nett sind?\nWir spielen die Folgen im Körper und Alltag durch.\nWürdest du deinem Kollegen Kuchen abgeben?",
+  "hashtags": [
+   "#shorts",
+   "#whatif",
+   "#wissenschaft",
+   "#psychologie",
+   "#fakten",
+   "#gesellschaft",
+   "#viral"
+  ],
+  "tags": [
+   "was wäre wenn",
+   "freundlichkeit",
+   "gehirn",
+   "stress",
+   "oxytocin",
+   "oxytocin",
+   "experiment",
+   "menschheit"
+  ],
+  "thumb_text": "EINE MINUTE NETT",
+  "missing": null,
+  "cover_ms": 86958,
+  "duration": 86.9,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
