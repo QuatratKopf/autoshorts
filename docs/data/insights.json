@@ -1,5 +1,5 @@
 {
- "updated": 1794536567.3754137,
+ "updated": 1794538369.9063785,
  "enough": false,
  "counted": 5,
  "total": 7,
@@ -12,16 +12,16 @@
    "avg_views": 1276,
    "avg_likes": 28.0,
    "like_rate": 2.19,
-   "avg_score": 1703
+   "avg_score": 1704
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 1,
-   "avg_views": 578,
+   "avg_views": 580,
    "avg_likes": 15.0,
-   "like_rate": 2.6,
-   "avg_score": 803
+   "like_rate": 2.59,
+   "avg_score": 805
   }
  ],
  "weights": {
@@ -52,11 +52,11 @@
    "id": 54,
    "title": "Was passiert, wenn die Schwerkraft für fünf Sekunden verschwindet?",
    "category": "whatif",
-   "views": 1552,
+   "views": 1553,
    "likes": 40,
    "comments": 0,
    "shares": 0,
-   "score": 2152
+   "score": 2153
   },
   {
    "id": 38,
@@ -72,11 +72,11 @@
    "id": 58,
    "title": "Wie aus einer Gaming-Bude der wertvollste Tech-Gigant wurde",
    "category": "fakten",
-   "views": 578,
+   "views": 580,
    "likes": 15,
    "comments": 0,
    "shares": 0,
-   "score": 803
+   "score": 805
   },
   {
    "id": 44,
