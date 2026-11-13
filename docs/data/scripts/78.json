@@ -1,0 +1,679 @@
+{
+ "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
+ "scenes": [
+  {
+   "text": "Drei Videospiel-Bugs, die unser Leben komplett ruinieren würden.",
+   "see": "Du stehst erschrocken auf der Straße, während rote Warnzeichen um dich herum flimmern.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_insekt"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary",
+   "overlay": {
+    "type": "card",
+    "text": "GLITCH IM SYSTEM"
+   }
+  },
+  {
+   "text": "Einer davon macht deinen Einkaufsbeutel absolut überflüssig.",
+   "see": "Im Supermarkt lässt du den Einkaufsbeutel fallen, weil Gegenstände von alleine hinter dir her schweben.",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "cart"
+    },
+    {
+     "type": "cans"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "bag",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "crowd": "watch",
+   "status": "BUG: AKTIV"
+  },
+  {
+   "text": "Zweiter Bug: Unsichtbare Mauern stoppen dich auf jedem Feldweg.",
+   "see": "Auf einem Feldweg läufst du gegen eine unsichtbare Wand und prallst ab.",
+   "place": "fields",
+   "backdrop": {
+    "sky": "day",
+    "ground": "soil",
+    "elements": [
+     "fields",
+     "trees"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_insekt"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "fall",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "KEIN DURCHGANG"
+   }
+  },
+  {
+   "text": "Dritter Bug: Dein Inventar fasst genau neunundneunzig Wassermelonen auf einmal.",
+   "see": "Nahaufnahme von riesigen Wassermelonen, die sich in deinem Inventar stapeln.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "pile"
+    },
+    {
+     "type": "lib_insekt"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "counter",
+    "label": "MELONEN",
+    "value": 99,
+    "unit": "99 STÜCK"
+   },
+   "status": "GEWICHT: 0 KG"
+  },
+  {
+   "text": "Vierter Bug: Essen heilt sofort jeden blauen Fleck am Knie.",
+   "see": "Du beißt in einen Apfel und der blaue Fleck an deinem Knie verschwindet augenblicklich.",
+   "place": "kitchen",
+   "time": "day",
+   "props": [
+    {
+     "type": "table"
+    },
+    {
+     "type": "lib_insekt"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Fünfter Bug: Du kannst Gegenstände in der Luft einfrieren und stapeln.",
+   "see": "Kisten schweben mitten im Raum in der Luft aufeinander gestapelt.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "barrel"
+    },
+    {
+     "type": "lib_insekt"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "PHYSIK DEAKTIVIERT"
+   }
+  },
+  {
+   "text": "Sechster Bug: Jeder Mensch läuft exakt die gleiche steife Standard-Animation.",
+   "see": "Mehrere Passanten in der Stadt laufen völlig steif und identisch wie in einer T-Pose.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_insekt"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "passant",
+     "speaks": false,
+     "action": "walk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "tense",
+   "crowd": "worried"
+  },
+  {
+   "text": "Siebter Bug: Nachts schaltet die Welt komplett auf dunkle Grafik um.",
+   "see": "Schlagartig wird es stockfinster und die Umgebung wechselt zu minimalistischer Vektorgrafik.",
+   "place": "park",
+   "backdrop": {
+    "sky": "night",
+    "ground": "grass",
+    "elements": [
+     "trees"
+    ]
+   },
+   "time": "night",
+   "weather": "dark",
+   "props": [
+    {
+     "type": "streetlamp"
+    },
+    {
+     "type": "lib_insekt"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "flashlight",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary",
+   "overlay": {
+    "type": "tag",
+    "text": "RENDER-FEHLER"
+   }
+  },
+  {
+   "text": "Achter Bug: Du hörst plötzlich immer dieselbe dreiminütige Hintergrundmusik in Dauerschleife.",
+   "see": "Du hältst dir genervt die Ohren zu, während Noten-Symbole über deinem Kopf schweben.",
+   "place": "bedroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_insekt"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "angry",
+     "emote": "music",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Neunter Bug: Du kannst mit NPC-Passanten nur drei vorgefertigte Sätze reden.",
+   "see": "Du sprichst mit einer Person im Park, über der drei vorgegebene Textboxen schweben.",
+   "place": "park",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_insekt"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "passant",
+     "speaks": false,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "HALLO! JA. NEIN.",
+     "pos": "right"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "checklist",
+    "title": "DIALOGE",
+    "items": [
+     [
+      "Hallo",
+      true
+     ],
+     [
+      "Schönes Wetter",
+      true
+     ],
+     [
+      "Hilfe",
+      false
+     ]
+    ]
+   }
+  },
+  {
+   "text": "Zehnter Bug: Speichern vor der Prüfung ist erlaubt.",
+   "see": "Vor einem Klassenzimmer drückst du auf ein schwebendes Speichern-Symbol.",
+   "place": "classroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "table"
+    },
+    {
+     "type": "lib_insekt"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "stamp",
+    "text": "ERLAUBT",
+    "color": "green"
+   },
+   "status": "STAND: GESPEICHERT"
+  },
+  {
+   "text": "Elfter Bug: Ein kleiner Fehler beim Speichern löscht dein ganzes Leben.",
+   "see": "Ein riesiges rotes Error-Fenster löscht den Hintergrund weg.",
+   "place": "attic",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_insekt"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "fall",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "SAVEGAME KORRUPT"
+   },
+   "status": "FEHLER 404"
+  },
+  {
+   "text": "Zwölfter Bug: Die Schwerkraft setzt kurz aus, wenn du laut niesen musst.",
+   "see": "Du musst niesen und schwebst dabei hilflos in der Luft nach oben.",
+   "place": "street",
+   "time": "day",
+   "weather": "wind",
+   "props": [
+    {
+     "type": "lib_insekt",
+     "pos": 650
+    },
+    {
+     "type": "car",
+     "pos": 930
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "float",
+     "emotion": "shocked",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 240
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Dreizehnter Bug: Jede Tür führt in denselben blauen Raum.",
+   "see": "Du öffnest eine Haustür und schaust in einen komplett leeren, blauen Raum.",
+   "place": "hallway",
+   "time": "day",
+   "props": [
+    {
+     "type": "door"
+    },
+    {
+     "type": "lib_insekt"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Vierzehnter Bug: Du kannst im Laden einfach den Spruch vom Händler überspringen.",
+   "see": "Im Supermarkt drückst du auf einen Skip-Button, um das Gerede des Kassierers abzubrechen.",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "cart"
+    },
+    {
+     "type": "lib_insekt"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "SKIP",
+     "pos": "left"
+    },
+    {
+     "id": "passant",
+     "speaks": false,
+     "action": "idle",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Fünfzehnter Bug: Dein Kontostand zeigt plötzlich unendlich viele Neunen.",
+   "see": "Du schaust ungläubig auf dein Smartphone, wo der Kontostand mit unzähligen Neunen überläuft.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "money"
+    },
+    {
+     "type": "lib_insekt"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Sechzehnter Bug: Das Spiel stürzt ab und du wachst in deinem Bett auf.",
+   "see": "Die Welt friert mit Glitch-Effekten ein und du schreckst im Bett auf.",
+   "place": "bedroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_insekt",
+     "pos": 500
+    },
+    {
+     "type": "lib_schuh",
+     "pos": 250
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "float",
+     "emotion": "scared",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 840
+    }
+   ],
+   "mood": "tense",
+   "status": "CRASH"
+  },
+  {
+   "text": "Siebzehnter Bug: Die Entwickler haben vergessen, die Weltgrenze zu sperren.",
+   "see": "Ein Zaun am Rande der Stadt ist durchbrochen und dahinter fehlt die Bodentextur.",
+   "place": "street",
+   "backdrop": {
+    "sky": "storm",
+    "ground": "rock",
+    "elements": [
+     "ruins"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_insekt"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "insert",
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "ENDE DER MAP"
+   }
+  },
+  {
+   "text": "Achtzehnter Bug: Dahinter wartet nur das pure Nichts.",
+   "see": "Blick in ein endloses graues Nichts ohne Boden und Himmel.",
+   "place": "street",
+   "props": [
+    {
+     "type": "lib_insekt"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "shocked",
+     "emotion": "scared",
+     "pos": "left",
+     "emote": "!"
+    }
+   ],
+   "mood": "scary"
+  },
+  {
+   "text": "Neunzehnter Bug: Du musst folgen, bevor dein Spiel komplett einfriert.",
+   "see": "Du zeigst dringend auf den Zuschauer, während hinter dir das Bild langsam einfriert.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "FOLGEN!",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense",
+   "overlay": {
+    "type": "choice",
+    "a": "Update laden",
+    "b": "Spiel beenden"
+   }
+  }
+ ]
+}

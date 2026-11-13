@@ -2514,5 +2514,46 @@
   "tt_status": "Zernio: published",
   "tt_publish_id": "zernio:6af71053c6c9cb4ba6dbb089",
   "error": null
+ },
+ {
+  "id": 78,
+  "category": "whatif",
+  "topic": "Wenn physische Spielregeln plötzlich in der Realität gelten würden",
+  "status": "review",
+  "created": 1794584220.488087,
+  "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
+  "description": "Was passiert, wenn du plötzlich durch Wände glitchen kannst?\nErlebe die verrücktesten physischen Spielregeln in der echten Welt.\nWürdest du lieber fliegen oder unendlich oft respawnen?",
+  "hashtags": [
+   "#shorts",
+   "#gaming",
+   "#whatif",
+   "#physik",
+   "#funny",
+   "#viral",
+   "#foryou"
+  ],
+  "tags": [
+   "spielregeln",
+   "physik",
+   "was wäre wenn",
+   "videospiele",
+   "glitch",
+   "alltag",
+   "lustig"
+  ],
+  "thumb_text": "SPIELREGELN IM ALLTAG",
+  "missing": null,
+  "cover_ms": 77169,
+  "duration": 77.1,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-13 18:00",
+  "review_at": 1794584951.9502976
  }
 ]
