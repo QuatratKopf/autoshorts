@@ -2285,7 +2285,27 @@ SPACE_RE = (r"weltall|weltraum|\ball\b|galaxi|planet|umlaufbahn|orbit|astronaut|
 GROUP_RE = (r"\b(zwei|drei|vier|fünf) (?:\w+ )?(gründer\w*|freund\w*|forscher\w*|wissenschaftler\w*|student\w*|brüder\w*|schwestern|kolleg\w*|ingenieur\w*|"
             r"entwickler\w*|tüftler\w*|erfinder\w*|männer\w*|frauen|jungs|kumpel\w*|nerds|programmierer\w*|unternehmer\w*|geschwister\w*|typen|partner\w*|"
             r"schüler\w*|mitarbeiter\w*|expert\w*|bastler\w*|teenager\w*|jugendliche\w*)\b")
-GROUP_LOOKS = ({"shirt": "rot", "hair": "bun", "glasses": True}, {"shirt": "orange", "hat": "cap"}, {"shirt": "lila", "hair": "long"}, {"shirt": "türkis", "glasses": True})
+GROUP_LOOKS = ({"shirt": "rot", "hair": "ponytail", "hair_color": "blond"}, {"shirt": "orange", "hat": "cap"}, {"shirt": "lila", "hair": "long"},
+               {"shirt": "türkis", "glasses": True}, {"shirt": "gelb", "hair": "curly", "hair_color": "schwarz", "skin": "dunkel"}, {"shirt": "grün", "hair": "bob", "hair_color": "rot"})
+FEM_LOOKS = ({"shirt": "lila", "hair": "ponytail", "hair_color": "blond", "gender": "w"}, {"shirt": "pink", "hair": "long", "hair_color": "braun", "gender": "w"},
+             {"shirt": "grün", "hair": "bob", "hair_color": "rot", "gender": "w"}, {"shirt": "türkis", "hair": "curly", "skin": "dunkel", "gender": "w"},
+             {"shirt": "gelb", "hair": "long", "hair_color": "schwarz", "skin": "mittel", "gender": "w"})
+
+
+def balance_cast(cast, seed=0):
+    """Mehr Frauen im Bild: Ist die Hauptfigur „du“ (der Zuschauer selbst) ohne Frauen in der Besetzung, wird sie bei jedem zweiten
+    Video eine Frau. Benannte Figuren („Tom“) und „ich“ (die Stimme erzählt selbst) bleiben, wie das Drehbuch sie meint;
+    Nebenfiguren ohne Besetzung sind über GROUP_LOOKS ohnehin gemischt."""
+    if not isinstance(cast, dict) or seed % 2:
+        return cast
+    humans = [k for k, v in cast.items() if isinstance(v, dict) and not v.get("kind")]
+    if any(rig.Look.from_spec(cast[k]).fem for k in humans) or "du" not in humans:
+        return cast
+    look = FEM_LOOKS[(seed // 2) % len(FEM_LOOKS)]
+    cast["du"] = {**{k: v for k, v in cast["du"].items() if k in ("glasses", "size")}, **look}
+    return cast
+
+
 # Sätze über Kurse, Umsatz, Marktwert → Kurve als bewegte Grafik (steigt oder stürzt ab)
 CHART_RE = (r"aktienkurs|börsenkurs|börsenwert|marktwert|börsengang|aktie\w*\b.{0,50}(steig|stieg|explod|schieß|schoss|kletter|verdoppel|verzehnfach|fiel|fällt|stürz|brach|bricht|crash|rakete|durch die decke)|"
             r"\bkurs\w*\b.{0,30}(steig|stieg|explod|schieß|schoss|fällt|fiel|stürz|brach|bricht|durch die decke)|"

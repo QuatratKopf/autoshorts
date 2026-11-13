@@ -15,6 +15,9 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
 ## Stil seit dem Umbau vom 11.11.2026 (bitte einhalten)
 - Figuren (`rig.py`): großer Kopf mit Frisur, Augenbrauen, Wangenrot; Kapuzenpulli mit Schattenkante, Jeans, Turnschuhe. Jede Farbfläche
   hat eine dunklere Schattenseite (`_dark`) – neue Kleidung/Kopfbedeckungen genauso zeichnen.
+- Frauenfiguren (`rig.py`): Frisuren long, bob (fließend mit runden Spitzen und Strähnen am Gesicht), ponytail, curly, bun; `fem`
+  (automatisch bei diesen Frisuren oder `gender: "w"`) gibt Wimpern, feinere Brauen, Lippenfarbe und einen eigenen Seitenscheitel-Pony.
+  `stage.balance_cast`: „du“ ist in jedem zweiten Video eine Frau (benannte Figuren und „ich“ bleiben); GROUP_LOOKS sind gemischt.
 - Hintergründe (`places.py`): weiche Bausteine `grad` (Verlauf), `veil`/`fade` (Licht, Schatten, Dunst), `blobs` (Kronen/Büsche als eine
   Form mit Licht und Schatten), `cloud`, `window(…, curtain=…)`, `rug`, `books`, `floor_lamp`, `plant`. Jeder Ort endet mit `p.vignette()`
   – das legt Fensterlicht, Dunst, leichte Weichzeichnung und Körnung darüber. Kein kahler Raum: mindestens Fenster oder Bild, ein Möbel,

@@ -27,6 +27,45 @@ def color(name, default):
     return COLORS.get(str(name or "").lower().strip(), default)
 
 
+FEM_HAIR = ("long", "bun", "ponytail", "bob", "curly")
+
+
+def _smooth(pts, n=6):
+    """Weiche Kurve durch die Punkte (Catmull-Rom), geschlossen – für fließende Haare statt eckiger Blöcke."""
+    out = []
+    m = len(pts)
+    for i in range(m):
+        p0, p1, p2, p3 = pts[i - 1], pts[i], pts[(i + 1) % m], pts[(i + 2) % m]
+        for j in range(n):
+            t = j / n
+            t2, t3 = t * t, t * t * t
+            out.append(tuple(0.5 * ((2 * p1[c]) + (-p0[c] + p2[c]) * t + (2 * p0[c] - 5 * p1[c] + 4 * p2[c] - p3[c]) * t2
+                                    + (-p0[c] + 3 * p1[c] - 3 * p2[c] + p3[c]) * t3) for c in (0, 1)))
+    return out
+
+
+def _hair_shape(d, pts, fill, shade, o, f, k, n=6, strands=0):
+    """Haarfläche: kräftiger Umriss, Füllung und – auf der lichtabgewandten Seite – eine dunklere Bahn; dazu ein paar Strähnen-Linien."""
+    sm = _smooth(pts, n)
+    d.polygon(sm, fill=INK)
+    cx = sum(x for x, _ in sm) / len(sm)
+    cy = sum(y for _, y in sm) / len(sm)
+    inset = []
+    for x, y in sm:                                       # Umriss nach innen versetzen (Abstand o)
+        dx, dy = x - cx, y - cy
+        ln = math.hypot(dx, dy) or 1.0
+        inset.append((x - dx / ln * o, y - dy / ln * o))
+    d.polygon(inset, fill=shade)
+    lit = [(x + 0.32 * (cx - x) * (1 if (x - cx) * f < 0 else 0) + 6 * k * f * 0, y) for x, y in inset]
+    d.polygon([(x if (x - cx) * f >= 0 else x + (cx - x) * 0.28, y) for x, y in lit], fill=fill)
+    for i in range(strands):                              # feine Strähnen in Fließrichtung
+        t = (i + 1) / (strands + 1)
+        x0 = min(x for x, _ in inset) + (max(x for x, _ in inset) - min(x for x, _ in inset)) * t
+        y0 = min(y for _, y in inset)
+        y1 = max(y for _, y in inset)
+        d.line((x0, y0 + (y1 - y0) * 0.45, x0 + 4 * k * f, y1 - (y1 - y0) * 0.08), fill=shade, width=max(2, int(3 * k)))
+
+
 @dataclass
 class Look:
     shirt: tuple = COLORS["blau"]
@@ -35,9 +74,10 @@ class Look:
     hat: str = ""            # cap | helmet | bow | beanie | crown | ""
     hat_color: tuple = COLORS["rot"]
     glasses: bool = False
-    hair: str = ""           # long | bun | "" (kurz)
+    hair: str = ""           # long | bun | ponytail | bob | curly | "" (kurz)
     size: float = 1.0
     hair_color: tuple = None
+    fem: bool = False        # weibliches Gesicht: Wimpern, feinere Brauen, Lippenfarbe, eigener Pony (automatisch bei Frauen-Frisuren)
 
     @staticmethod
     def from_spec(spec: dict, name: str = "", nth: int = None):
@@ -49,7 +89,9 @@ class Look:
                     glasses=bool(spec.get("glasses")), hair=str(spec.get("hair") or "").lower(),
                     hair_color=HAIRS.get(str(spec.get("hair_color") or "").lower().strip())
                     or (HAIRS[_HAIR_AUTO[(nth if nth is not None else sum(ord(c) for c in str(name))) % len(_HAIR_AUTO)]] if (name or nth is not None) else None),
-                    size=max(0.6, min(1.3, float(spec.get("size") or 1.0))))
+                    size=max(0.6, min(1.3, float(spec.get("size") or 1.0))),
+                    fem=str(spec.get("gender") or "").lower() in ("w", "f", "female", "frau", "weiblich", "girl", "mädchen")
+                    or str(spec.get("hair") or "").lower() in FEM_HAIR)
 
 
 @dataclass
@@ -241,11 +283,36 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
     hc = _pt(top, 180 - ha, hr * 0.86)
     rx, ry = hr * 1.04, hr * 0.96
     hairy = not mask and look.hat not in ("helmet",)
-    if hairy and look.hair == "long":                    # langes Haar fällt hinter dem Kopf bis auf die Schultern
-        d.rounded_rectangle((hc[0] - rx * 1.07 - o, hc[1] - ry * 0.6 - o, hc[0] + rx * 1.07 + o, hc[1] + ry * 1.42 + o), hr * 0.55, fill=INK)
-        d.rounded_rectangle((hc[0] - rx * 1.07, hc[1] - ry * 0.6, hc[0] + rx * 1.07, hc[1] + ry * 1.42), hr * 0.5, fill=hair_d)
-        d.rounded_rectangle((hc[0] - rx * 1.07 + (16 * k if f > 0 else 0), hc[1] - ry * 0.6, hc[0] + rx * 1.07 - (16 * k if f < 0 else 0), hc[1] + ry * 1.42),
-                            hr * 0.5, fill=hair)
+    fem = look.fem and not mask
+    if hairy and look.hair in ("long", "bob"):           # Haar hinten: fließt weich bis über die Schultern (bob: bis zum Kinn), runde Spitzen
+        low = ry * (1.55 if look.hair == "long" else 0.92)
+        wid = rx * (1.16 if look.hair == "long" else 1.12)
+        cx, cy = hc[0] - 4 * k * f, hc[1]
+        pts = [(cx - rx * 0.9, cy - ry * 0.75), (cx, cy - ry * 1.08), (cx + rx * 0.9, cy - ry * 0.75), (cx + wid, cy + ry * 0.1),
+               (cx + wid * 1.04, cy + low * 0.72), (cx + wid * 0.88, cy + low), (cx + wid * 0.55, cy + low * 0.9),
+               (cx + wid * 0.2, cy + low * 1.02), (cx - wid * 0.2, cy + low * 0.92), (cx - wid * 0.55, cy + low * 1.03),
+               (cx - wid * 0.88, cy + low * 0.94), (cx - wid * 1.04, cy + low * 0.7), (cx - wid, cy + ry * 0.1)]
+        _hair_shape(d, pts, hair, hair_d, o, f, k, strands=4 if look.hair == "long" else 2)
+    if hairy and look.hair == "curly":                   # Locken: runde Wolke aus vielen Kringeln um den Kopf
+        for i in range(14):
+            a = math.radians(-200 + i * 220 / 13)
+            bx, by = hc[0] + math.cos(a) * rx * 1.05, hc[1] - ry * 0.05 + math.sin(a) * ry * 1.02
+            r0 = hr * (0.36 + 0.05 * (i % 3))
+            d.ellipse((bx - r0 - o, by - r0 - o, bx + r0 + o, by + r0 + o), fill=INK)
+        for i in range(14):
+            a = math.radians(-200 + i * 220 / 13)
+            bx, by = hc[0] + math.cos(a) * rx * 1.05, hc[1] - ry * 0.05 + math.sin(a) * ry * 1.02
+            r0 = hr * (0.36 + 0.05 * (i % 3))
+            d.ellipse((bx - r0, by - r0, bx + r0, by + r0), fill=hair_d if math.cos(a) * f < 0 else hair)
+            d.arc((bx - r0 * 0.6, by - r0 * 0.6, bx + r0 * 0.6, by + r0 * 0.6), 200, 290, fill=hair_l, width=max(2, int(4 * k)))
+    if hairy and look.hair == "ponytail":                # Pferdeschwanz hinten, schwingt mit dem Kopf
+        sw = (pose.head + pose.lean) * 0.8
+        bx = hc[0] - rx * 0.95 * f
+        tip = (bx - 46 * k * f + sw * k, hc[1] + ry * 1.25)
+        pts = [(bx + 6 * k * f, hc[1] - ry * 0.55), (bx - 34 * k * f, hc[1] - ry * 0.2), (tip[0] - 10 * k * f, hc[1] + ry * 0.55),
+               tip, (tip[0] + 22 * k * f, hc[1] + ry * 0.7), (bx + 4 * k * f, hc[1] + ry * 0.05)]
+        _hair_shape(d, pts, hair, hair_d, o, f, k)
+        d.ellipse((bx - 12 * k, hc[1] - ry * 0.52 - 10 * k, bx + 12 * k, hc[1] - ry * 0.52 + 14 * k), fill=look.hat_color if look.hat == "bow" else (230, 80, 120), outline=INK, width=max(2, int(o * 0.7)))
     if hairy and look.hair == "bun":
         _blob(d, (hc[0] - hr * 0.44 - 10 * k * f, hc[1] - ry * 1.62, hc[0] + hr * 0.44 - 10 * k * f, hc[1] - ry * 0.82), hair, o)
         d.arc((hc[0] - hr * 0.3 - 10 * k * f, hc[1] - ry * 1.5, hc[0] + hr * 0.3 - 10 * k * f, hc[1] - ry * 0.95), 200, 300, fill=hair_l, width=max(2, int(6 * k)))
@@ -262,9 +329,21 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
         pts = [(hc[0] - rx - 4 * k, top_y), (hc[0] - rx * 0.99, hc[1] - ry * 0.12), (hc[0] - rx * 0.74, hc[1] - ry * 0.40),
                (hc[0] - rx * 0.30 * f, hc[1] - ry * 0.27), (hc[0] + rx * 0.22 * f, hc[1] - ry * 0.44), (hc[0] + rx * 0.72, hc[1] - ry * 0.31),
                (hc[0] + rx * 0.99, hc[1] - ry * 0.12), (hc[0] + rx + 4 * k, top_y)]
+        if fem:                                            # Pony für Frauen: weicher Seitenscheitel, eine Welle fällt in die Stirn
+            sw = [(-1.0, -0.02), (-0.82, -0.34), (-0.5, -0.5), (-0.05, -0.36), (0.4, -0.12), (0.78, -0.1), (0.98, 0.05)]
+            if f < 0:                                      # Welle fällt auf der Seite, in die die Figur blickt
+                sw = [(-x, y) for x, y in sw][::-1]
+            pts = [(hc[0] - rx - 4 * k, top_y)] + [(hc[0] + x * rx, hc[1] + y * ry) for x, y in sw] + [(hc[0] + rx + 4 * k, top_y)]
         d.polygon(pts, fill=INK)                           # Pony: schräg gekämmte Strähnen mit Umriss
         d.polygon([(x, y - (o * 0.9 if 0 < i < len(pts) - 1 else 0)) for i, (x, y) in enumerate(pts)], fill=hair)
         d.chord(hb, 180, 360, fill=hair)
+        if fem and look.hair in ("long", "bob"):           # Strähnen rahmen das Gesicht: schmal, liegen am Wangenrand an
+            for sgn in (-1, 1):
+                x0 = hc[0] + sgn * rx * 0.99
+                ln = ry * (1.0 if look.hair == "long" else 0.72)
+                lock = [(x0 + sgn * 6 * k, hc[1] - ry * 0.4), (x0 + sgn * 8 * k, hc[1] + ln * 0.5), (x0 + sgn * 2 * k, hc[1] + ln),
+                        (x0 - sgn * 12 * k, hc[1] + ln * 0.62), (x0 - sgn * 14 * k, hc[1] - ry * 0.05)]
+                _hair_shape(d, lock, hair, hair_d if sgn != f else hair, o * 0.8, f, k, 5)
         d.arc((hc[0] - rx * 0.6 + 18 * k * f, hc[1] - ry * 0.96, hc[0] + rx * 0.6 + 18 * k * f, hc[1] - ry * 0.2), 208, 300, fill=hair_l, width=max(2, int(9 * k)))
     u = k * 0.84
     # Gesicht (leicht in Blickrichtung versetzt)
@@ -276,6 +355,15 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
             d.ellipse((cxk - 17 * u, ey + 24 * u, cxk + 17 * u, ey + 44 * u), fill=_mix(skin, CHEEK, 0.55))
     for sgn in (-1, 1):
         _eye(d, ex + sgn * 37 * u, ey, er, pose.eyes, lk)
+    if fem and pose.eyes not in ("closed",):              # Wimpern: zwei kleine Striche am äußeren oberen Augenrand
+        for sgn in (-1, 1):
+            exx = ex + sgn * 37 * u
+            top_e = ey - er * (1.05 if pose.eyes != "happy" else 0.35)
+            for j, (ang, ln) in enumerate(((-50, 12), (-20, 11))):
+                a = math.radians(ang)
+                sx_ = exx + sgn * er * (0.55 + 0.25 * j)
+                sy_ = top_e + er * 0.12 * j
+                d.line((sx_, sy_, sx_ + sgn * math.cos(a) * ln * u, sy_ + math.sin(a) * ln * u), fill=INK, width=max(2, int(4 * u)))
     # Augenbrauen: tragen den Ausdruck (hoch = erstaunt, innen tief = wütend, innen hoch = traurig/besorgt)
     brow = _mix(hair_d, INK, 0.55) if not mask else INK
     lift_b = ({"wide": 20, "happy": 12, "closed": 4, "angry": -4, "sad": 4, "worried": 6}.get(pose.eyes, 8) + 12 * pose.brow) * u
@@ -283,7 +371,7 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
     for sgn in (-1, 1):
         x0, y0 = ex + sgn * 37 * u, ey - 36 * u - lift_b * 0.8
         dy = tilt * sgn
-        _stroke(d, [(x0 - 19 * u, y0 - dy), (x0 + 19 * u, y0 + dy)], 9 * u, brow)
+        _stroke(d, [(x0 - 19 * u, y0 - dy), (x0 + 19 * u, y0 + dy)], (6 if fem else 9) * u, brow)
     if not mask:                                          # Nase: kleiner Haken in Blickrichtung
         d.arc((ex + 2 * u * f - 9 * u, ey + 12 * u, ex + 2 * u * f + 9 * u, ey + 30 * u), 300 if f > 0 else 150, 90 if f > 0 else 240, fill=_dark(skin, 0.35), width=max(2, int(5 * u)))
     mx, my = ex, ey + 50 * u
@@ -303,6 +391,8 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
         d.arc((mx - 18 * u, my - 2 * u, mx + 18 * u, my + 24 * u), 200, 340, fill=INK, width=max(2, int(7 * u)))
     else:
         wdt = (20 + 10 * max(0, pose.smile)) * u
+        if fem:                                           # Lippen: zarter Rosaton unter dem Lächeln
+            d.arc((mx - wdt * 0.8, my - 22 * u, mx + wdt * 0.8, my + 10 * u), 30, 150, fill=(214, 96, 112), width=max(2, int(9 * u)))
         d.arc((mx - wdt, my - 26 * u, mx + wdt, my + 8 * u), 22, 158, fill=INK, width=max(2, int(7 * u)))
         if pose.smile > 0.5:                              # Grübchen
             for sgn in (-1, 1):

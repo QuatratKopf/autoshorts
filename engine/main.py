@@ -360,6 +360,9 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, 
         if toon:
             from .toon import stage
             log("Animiere Szenen …")
+            if not script.get("cast"):
+                script["cast"] = {"du": {}}
+            script["cast"] = stage.balance_cast(script["cast"], v["id"])   # „du“ ist in jedem zweiten Video eine Frau
             stage.direct(scenes, times, f"{stage.topic_head(v.get('topic'))} {script.get('title') or ''}", cat["slug"], os.environ.get("AS_LOOK") or cat.get("look") or cfg("look") or "")
             kick = " ".join(str(script.get("thumb") or "").split())[:28]
             if kick and scenes and isinstance(scenes[0], dict) and scenes[0].get("shot") != "graphic" and \

@@ -139,8 +139,10 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
 - "cast": Aussehen je Figur, z. B. {"mia": {"shirt": "blau", "hat": "", "hair": "long", "glasses": false, "skin": "weiß"},
                                    "rex": {"kind": "dino"}}
   Menschen: shirt/hat_color: blau, rot, grün, gelb, orange, lila, pink, türkis, grau, braun · hat: cap, helmet, beanie, bow, crown oder ""
-            hair: long, bun oder "" (kurz) · hair_color: braun, dunkelbraun, schwarz, blond, rot, grau · skin: weiß, hell, mittel, dunkel
+            hair: long, bun, ponytail, bob, curly oder "" (kurz) · gender: "w" für Frauen (auch mit kurzem Haar) · hair_color: braun, dunkelbraun, schwarz, blond, rot, grau · skin: weiß, hell, mittel, dunkel
             (gib jeder Figur eine andere Kombination aus Pulli-, Haarfarbe und Frisur, damit man sie sofort auseinanderhält)
+            Besetze Frauen und Männer etwa gleich oft – auch die Hauptfigur „du“ ist in ungefähr jedem zweiten Video eine Frau
+            (z. B. {"du": {"shirt": "lila", "hair": "ponytail", "hair_color": "blond", "gender": "w"}}); in Gruppen immer gemischt.
   Tiere/Wesen statt Mensch: "kind": cat, dog, spider, ghost, alien, robot, bird, dino, monster, fish, shark, bee, wasp
   Meerestiere: shrimp (Pistolenkrebs, Garnele, Krebs – die Knallschere schnappt zu), mantis (Fangschreckenkrebs – schlägt mit der Keule), jelly (Qualle),
   axolotl (rosa Schwanzlurch mit Kiemenästen) · überall: tardigrade (Bärtierchen).

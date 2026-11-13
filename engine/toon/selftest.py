@@ -460,6 +460,20 @@ def main():
         assert not busy[0].get("_cold_open")                     # schon starkes erstes Bild: bleibt
         frame(scs[0])
     check("Vorgriff im ersten Bild", _cold)
+    def _women():                                                # Frauenfiguren: alle Frisuren, beide Blickrichtungen, viele Posen
+        for hair in ("long", "bun", "ponytail", "bob", "curly", ""):
+            lk = rig.Look.from_spec({"hair": hair, "gender": "w", "glasses": hair == "bun"}, "x", 0)
+            assert lk.fem
+            for f in (1, -1):
+                for act in ("talk", "shocked", "walk", "sad", "jump", "sleep", "fall"):
+                    p, _ = rig.pose_at(act, 0.7, 3.0, "", 0.4, 2)
+                    im = rig.draw(lk, p, f, 1.0)[0]
+                    assert im.getbbox(), (hair, f, act)
+        assert not rig.Look.from_spec({"shirt": "blau"}).fem
+        assert stage.balance_cast({"du": {"shirt": "blau"}}, 4)["du"].get("gender") == "w"
+        assert stage.balance_cast({"du": {"shirt": "blau"}}, 5)["du"] == {"shirt": "blau"}
+        assert stage.balance_cast({"ich": {}}, 4) == {"ich": {}}
+    check("Frauenfiguren", _women)
     check("Neon-Look", lambda: graphics.neon(frame({"place": "street", "crowd": "walk"}), 1.0))
     check("Neon-Kulisse", lambda: graphics.tint(places.background("street", True)))
     # Regie mit zufälligen und kaputten Drehbüchern
