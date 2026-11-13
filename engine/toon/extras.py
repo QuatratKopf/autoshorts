@@ -1092,7 +1092,7 @@ def draw_emote(layer, kind, x, y, t, sc=1.0):
         return
     d = ImageDraw.Draw(layer, "RGBA")
     kind = str(kind).lower().strip()
-    s = k * max(0.35, sc) * 0.8                             # etwas kleiner: die Zeichen sollen die Figur nicht übertönen
+    s = k * max(0.35, sc) * (0.5 if kind in ("!", "alarm", "exclaim", "?", "question") else 0.8)   # klein: die Zeichen sollen die Figur nicht übertönen
     bob = math.sin(t * 5) * 6 * s
     cx, cy = x, y - 84 * s + bob
     w = max(3, int(O * min(1.0, s)))
