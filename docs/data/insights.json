@@ -1,5 +1,5 @@
 {
- "updated": 1794595842.6750927,
+ "updated": 1794597644.4813612,
  "enough": true,
  "counted": 7,
  "total": 9,
@@ -18,10 +18,10 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 4,
-   "avg_views": 1334,
+   "avg_views": 1335,
    "avg_likes": 29.2,
    "like_rate": 2.19,
-   "avg_score": 1780
+   "avg_score": 1781
   },
   {
    "slug": "fakten",
@@ -30,7 +30,7 @@
    "avg_views": 996,
    "avg_likes": 30.5,
    "like_rate": 3.06,
-   "avg_score": 1469
+   "avg_score": 1468
   }
  ],
  "weights": {
@@ -44,7 +44,7 @@
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1369 Aufrufe, 3.87 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 996 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2163 zu 703 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2164 zu 703 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -53,21 +53,21 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2474,
+   "views": 2475,
    "likes": 55,
    "comments": 0,
    "shares": 0,
-   "score": 3299
+   "score": 3300
   },
   {
    "id": 54,
    "title": "Was passiert, wenn die Schwerkraft für fünf Sekunden verschwindet?",
    "category": "whatif",
-   "views": 1740,
+   "views": 1743,
    "likes": 45,
    "comments": 0,
    "shares": 0,
-   "score": 2415
+   "score": 2418
   },
   {
    "id": 62,
@@ -83,11 +83,11 @@
    "id": 75,
    "title": "3 Tier-Superkräfte, die unmöglich wirken!",
    "category": "fakten",
-   "views": 1405,
+   "views": 1403,
    "likes": 45,
    "comments": 1,
    "shares": 0,
-   "score": 2110
+   "score": 2108
   },
   {
    "id": 38,
