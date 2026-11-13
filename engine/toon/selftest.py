@@ -535,6 +535,31 @@ def main():
         th = writer.polish({"thumbnail": {"text": "NEUNZIG MELONEN IN DER TASCHE"}, "scenes": [{"text": "Du steckst neunundneunzig Wassermelonen ein."}]})["thumbnail"]["text"]
         assert th == "MELONEN IN DER TASCHE", th
     check("Schilder, Stempel, Haufen, Titelbild-Zahl", _labels)
+
+    def _deeds():                                                 # Geben/Essen: Figur hält das Ding; Einsatzwagen; Schild mit fremder Zahl; Handy-Einblendung
+        sc = [{"text": "Alle sind eine Minute lang nett.", "place": "livingroom", "actors": [{"id": "du", "action": "talk"}]},
+              {"text": "Im Büro teilt der Kollege plötzlich sein letztes Stück Kuchen.", "place": "office", "props": ["table"],
+               "actors": [{"id": "du", "action": "talk", "pos": "left"}, {"id": "tom", "action": "talk", "pos": "right"}]},
+              {"text": "Einsatzkräfte haben plötzlich nichts mehr zu tun.", "place": "street", "shot": "event", "props": ["car"], "actors": []},
+              {"text": "Autofahrer lassen sich lächelnd den Vortritt.", "place": "street", "overlay": {"type": "tag", "text": "SEKUNDE 10"},
+               "actors": [{"id": "du", "action": "wave"}]},
+              {"text": "Du denkst zufrieden nach.", "place": "hospital", "mood": "happy", "actors": [{"id": "du", "action": "think", "emotion": "happy"}]},
+              {"text": "Folg für mehr.", "place": "livingroom", "actors": [{"id": "du", "action": "talk"}]}]
+        stage.direct(sc, [(i * 4, i * 4 + 4) for i in range(len(sc))], "Wenn alle nett wären", "whatif")
+        if "lib_kuchen" in extras.PROPS:
+            assert sc[1]["actors"][-1].get("hold") == "lib_kuchen", sc[1]["actors"]
+            frame(sc[1])
+        kinds = [q.get("type") for q in sc[2]["props"]]
+        assert "ambulance" in kinds and "car" not in kinds, kinds
+        frame(sc[2])
+        assert not sc[3].get("overlay"), sc[3].get("overlay")
+        _pl, _n, _s, acts, _p, _w = stage._prepare(sc[4], {"du": {}})
+        assert acts[0]["emote"] != "?", acts[0]["emote"]
+        frame({"place": "street", "props": ["police"], "actors": []})
+        from .. import overlays
+        fr = overlays.frames_for({"type": "phone", "title": "12:00", "items": ["Ex: Danke für alles!", "Du: Dir auch nur das Beste ❤️", "Mama", "Vier: zu viel"]})
+        assert fr and fr[0]
+    check("Geben/Essen, Einsatzwagen, Schild-Zahl, Handy", _deeds)
     check("Titelbild", lambda: stage.cover({"place": "street", "props": ["meteor"], "actor": "du"}, {"du": {}}, "/tmp/_selftest_cover.jpg"))
     check("Titelbild kaputt", lambda: stage.cover({"place": None, "props": [None, 3], "actor": None, "backdrop": "x"}, {}, "/tmp/_selftest_cover.jpg"))
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")

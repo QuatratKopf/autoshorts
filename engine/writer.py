@@ -52,6 +52,9 @@ Regeln für die Sprechertexte:
   Erdkruste). Lieber wenige, richtig erklärte und überraschende Folgen mit Ursache („weil …“) als erfundenes Weltuntergangs-Spektakel.
   Keine ausgedachten Zahlen: Nenne eine Zahl nur, wenn sie stimmt oder sich einfach nachrechnen lässt – auch in Einblendungen und Zählern.
   Ist etwas unsicher, sag das offen („vermutlich“, „wahrscheinlich“). Erfinde keine Studien, Forscher-Aussagen, Schadenssummen oder Opferzahlen.
+  Bei Gedankenspielen über Menschen und Gesellschaft (alle sind nett, niemand lügt, keiner schläft) gilt dasselbe: keine erfundenen Statistiken
+  (Zahl der Kriege, Nachrichten, Straftaten, gesparte Milliarden). Erkläre lieber, was Psychologie und Biologie dazu wirklich wissen
+  (Stresshormone, Belohnungszentrum, Ansteckung von Verhalten), und zeige es an Alltags-Bildern mit einer Handlung.
   Einblendungen und Grafiken zeigen genau die Zahl und Aussage des Satzes, zu dem sie gehören – nichts anderes.
 - Sauberes Deutsch: Jeder Satz wird vor der Abgabe auf Rechtschreibung und Grammatik geprüft (Einzahl/Mehrzahl, Fälle, keine Tippfehler).
 - Ton für eine junge TikTok-Zielgruppe: locker, direkt, selbstbewusst, gern mit aktueller Umgangssprache, aber nicht cringe
@@ -650,6 +653,9 @@ Texte der Einblendungen und Grafiken ("labels"). Prüfe streng und verbessere NU
    anschauliche Aussage. Bei Gedankenspielen („Was wäre, wenn …“) zählt, was nach heutigem Wissen wirklich folgen würde.
    Prüfe jede Temperatur, Geschwindigkeit, Masse und Zeitspanne gegen das, was allgemein bekannt ist (ein Schweißbrenner hat rund dreitausend Grad,
    nicht zehntausend; Thermit gut zweitausend) – im Zweifel die Zahl weglassen und anschaulich umschreiben („heißer als Lava“).
+   Dasselbe gilt für Zahlen über Menschen und Gesellschaft (Anzahl von Kriegen, Nachrichten, Straftaten, Einsätzen, gesparte Geldsummen):
+   Es gibt keine „sechzigtausend laufenden Kriege“ und niemand zählt „zehn Milliarden Nachrichten an Ex-Partner“. Ist eine solche Zahl nicht
+   allgemein bekannt und belegt, streiche sie und sag es ohne Zahl („fast alle Streitereien“, „unzählige Nachrichten“).
    Ein Satz, der in sich keinen Sinn ergibt oder sich selbst widerspricht, wird durch eine klare, richtige Aussage zum selben Punkt ersetzt.
 4. Einblendung oder Grafik passt nicht zum Satz (andere Zahl, anderes Thema, sinnloses Wort): korrigiere ihren Text.
 5. Es ist ein Video: Der Zuschauer schaut zu, er „liest“ nicht.

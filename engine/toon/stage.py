@@ -264,7 +264,7 @@ def _prepare(scene, cast):
         a["lips"] = a["speaks"] and talk
     for a in actors:   # passende Symbole automatisch, wenn das Drehbuch keine nennt
         if not a["emote"] and a["kind"] not in SEA_KINDS:
-            a["emote"] = {"shocked": "!", "scared": "!", "think": "?", "angry": "anger"}.get(a["action"]) or \
+            a["emote"] = {"shocked": "!", "scared": "!", "think": "" if a["emotion"] == "happy" else "?", "angry": "anger"}.get(a["action"]) or \
                          {"angry": "anger", "scared": "sweat", "worried": "sweat"}.get(a["emotion"], "")
     props, p_given = [], []
     win, counts = [], {}
@@ -280,6 +280,8 @@ def _prepare(scene, cast):
                     a["hold"] = extras.HELD[str(p["type"]).lower().strip()]
                     break
             continue
+        if isinstance(p, dict) and any(a["hold"] == "prop:" + extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) for a in actors):
+            continue                                              # hält die Figur schon in der Hand: nicht noch einmal auf den Boden stellen
         if isinstance(p, dict) and str(scene.get("shot") or "") != "insert" and \
                 extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in PLACE_HAS.get(place, ()):
             continue                                              # steht an diesem Ort schon
@@ -289,7 +291,7 @@ def _prepare(scene, cast):
                 win.append(extras.PROP_ALIASES.get(str(p["type"]).lower(), str(p["type"]).lower()))
             continue                                              # Sonne, Mond, Wolken stehen nicht im Zimmer
         if isinstance(p, dict) and place not in places.OUTDOOR and place not in ("space", "plain", "cave", "underwater") and \
-                extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in ("fire", "volcano", "tornado", "car", "bus", "truck", "house", "tree", "meteor", "wave") \
+                extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in ("fire", "volcano", "tornado", "car", "police", "ambulance", "bus", "truck", "house", "tree", "meteor", "wave") \
                 and str(scene.get("shot") or "") != "insert":
             continue                                              # gehört nach draußen, nicht ins Zimmer
         if isinstance(p, dict) and place not in places.OUTDOOR and str(p.get("type")).lower().startswith("lib_") \
@@ -754,7 +756,8 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
             pose, _ = rig.pose_at(action, tt, dur, a["emotion"], mouth, a["seed"],
                                   _gest_at(a.get("gplan"), t) if action in ("talk", "idle") and not a.get("hold") else None, shape)
             if a.get("hold") and action not in ("run", "sleep", "fall", "jump", "dance", "wave", "shake") and not pose.lying:
-                pose.arm_r, pose.fore_r = (62, 50) if a["hold"] in ("phone", "map", "flashlight", "radio", "bottle") else (8, 4)
+                small_h = a["hold"].startswith("prop:") and (extras.REAL_M.get(a["hold"][5:]) or extras.SIZES.get(a["hold"][5:], (9,))[0]) <= 0.3
+                pose.arm_r, pose.fore_r = (62, 50) if a["hold"] in ("phone", "map", "flashlight", "radio", "bottle") or small_h else (8, 4)   # Kleines (Apfel, Kuchen) hält man vor sich, nicht an der Hüfte
                 if a["hold"] in ("umbrella", "sign"):
                     pose.arm_r, pose.fore_r = 40, 100
             if 0 <= t - move_t < 0.18 and arrived:           # kleines Abfedern beim Ankommen
@@ -801,7 +804,7 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
     if weather and not (night and weather in ("dark", "dunkel", "blackout")):
         extras.draw_weather(over, weather, t)
     if opt.get("mood"):
-        extras.draw_mood(over, opt["mood"], t)
+        extras.draw_mood(over, opt["mood"], t, opt.get("confetti", False))
     if not close:
         frame = _light(frame, _light_kind(place, night, opt.get("mood"), xs_now), xs_now)
     if landed is not None and landed < 0.5:      # Aufschlag: das Bild wackelt kurz
@@ -1125,6 +1128,9 @@ def direct(scenes, times, topic="", style="", look=""):
             sc["shot"] = "" if sc.get("shot") == "graphic" else sc.get("shot")
         if ov_c and sc.get("overlay") and str(ov_c.get("type") or "") in ("card", "counter", "note", "stamp") and unspoken_figures(ov_c, said_c):
             sc["overlay"] = None
+        if ov_c and sc.get("overlay") and str(ov_c.get("type") or "") == "tag" and not _re0.search(r"\b(1[0-9]|20)\d{2}\b", str(ov_c.get("text") or "")) \
+                and unspoken_figures(ov_c, sc["text"]):
+            sc["overlay"] = None                          # Schild „SEKUNDE 10“ an einem Satz, der die Zahl nicht nennt (sie fällt erst im nächsten); Jahreszahlen bleiben
         has_bd = isinstance(sc.get("backdrop"), dict) and (sc["backdrop"].get("elements") or sc["backdrop"].get("ground"))
         hint = None if has_bd else _hint(sc.get("text"))
         said = None if has_bd or place in MAPS else _said_place(sc.get("text"))
@@ -1203,6 +1209,19 @@ def direct(scenes, times, topic="", style="", look=""):
                         a["hold"] = item
                         break
                 break
+        kinds_now = [extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) for p in (sc.get("props") or []) if isinstance(p, dict)]
+        if ("ambulance" in kinds_now or "police" in kinds_now) and "car" in kinds_now and not _re0.search(r"\bautos?\b|autofahrer|\bstau", txt0):
+            sc["props"] = [p for p in sc["props"] if not (isinstance(p, dict) and extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) == "car")]
+        if _re0.search(GIVE_RE + "|" + TAKE_RE, txt0) and str(sc.get("shot") or "") not in ("insert", "event", "graphic"):   # „teilt sein Stück Kuchen“: jemand hält es in der Hand
+            things_g = [k for pat, k in _lib_props() + TEXT_PROPS if _re0.search(pat, txt0)]
+            thing_g = next((str(x) for x in things_g if extras.held_key(x).startswith("prop:")), "")
+            humans_g = [a for a in acts if not a.get("kind")]
+            if thing_g and humans_g and not any(a.get("hold") for a in humans_g):
+                giver = humans_g[-1] if len(humans_g) > 1 and _re0.search(GIVE_RE, txt0) else humans_g[0]   # geben: der andere („der Kollege“); essen/nehmen: die Hauptfigur
+                giver["hold"] = thing_g
+                if str(giver.get("action") or "").lower() in ("", "idle", "think", "wave", "look_around", "walk"):
+                    giver["action"] = "talk"
+                sc["props"] = [p for p in (sc.get("props") or []) if (p.get("type") if isinstance(p, dict) else p) != thing_g]
         # Der Satz beschreibt eine Handlung mit einem Ding (ausschütteln, ausklopfen …): eine Figur tut es – nicht bloß das Ding zeigen
         if _re0.search(r"schüttel|ausschütt|ausklopf|ausleer", txt0):
             things = [p.get("type") if isinstance(p, dict) else p for p in (sc.get("props") or [])]
@@ -1884,6 +1903,9 @@ def _topic_creature(scenes, topic):
                                 "pos": 760 if humans else "center", "emote": "", "say": "", "hold": "", "facing": ""}]
 
 
+PARTY_RE = r"feier|\bparty|jubel|hurra|gewinn|gewonnen|\bsieg|glückwunsch|gratul|geburtstag|silvester|konfetti|geschafft|rekord|weltmeister|applaus"
+GIVE_RE = r"\bteil\w*\b|schenk|überreich|\breicht\b|\bgibt\b.{0,40}\b(ab|weiter|her)\b|bringt .{0,40}\bmit\b|bietet .{0,40}\ban\b|spendier"
+TAKE_RE = r"\bisst\b|\bisse?t\b|\besse\b|bei(ß|ss)t|\bnasch|\bhältst\b|\bhält\b|\bnimmst\b|\bnimmt\b|\bgreifst\b|\bgreift\b|\bhebst\b|in der hand|\bträgst\b"
 LYING_RE = r"\b(liegst|liegt|liegen)\b.{0,40}\b(platt|flach|am boden|auf dem boden|auf der straße|auf dem asphalt|auf dem gehweg)\b"
 CARRY_RE = r"\b(diese[rnms]?|davon|damit|zusammen|sie alle|alle zusammen)\b"
 
@@ -2257,13 +2279,14 @@ MOOD_HINTS = [
 ]
 INDOOR = ("bedroom", "livingroom", "kitchen", "office", "classroom", "lab", "hospital", "basement", "cave", "underwater", "space", "cinema")
 MAPS = ("germany", "worldmap")
-OUTDOOR_THINGS = ("drone", "cctv", "fire", "smoke", "volcano", "meteor", "tornado", "lightning", "flood", "crack", "wave", "explosion", "car", "bus", "truck",
+OUTDOOR_THINGS = ("drone", "cctv", "fire", "smoke", "volcano", "meteor", "tornado", "lightning", "flood", "crack", "wave", "explosion", "car", "police", "ambulance", "bus", "truck",
                   "plane", "satellite", "rocket", "ufo", "aurora", "ice", "ship", "bike", "tent", "trafficlight", "house", "tree", "solarpanel",
                   "pile", "sandpile", "trash", "barrel", "generator")
 DULL = ("table", "shelf", "streetlamp", "rock", "box")          # allein als Großaufnahme langweilig
 INDOOR_THINGS = ("faucet", "glass", "candle", "cans", "clock", "door", "fridge", "tv", "computer", "shelf", "cart", "table", "money", "aquarium")
 TEXT_PROPS = [(r"aquarium|aquarien(?!scheib|glas)|goldfisch|fischglas|fischbecken", "aquarium"), (r"drohne", "drone"), (r"überwachungskamera|kameras? (erfass|film|beobacht)|überwacht|überwachung", "cctv"), (r"zucker|\bsalz\b", "pile"), (r"\bsand\b", "sandpile"), (r"\bmüll|abfall|plastik", "trash"), (r"wasserhahn|trinkwasser|leitungswasser", "faucet"),
               (r"\bglas\b|\bgläser|trinken|getränk|\bdurst", "glass"), (r"kerze", "candle"), (r"konserve|vorrät|dosen", "cans"), (r"benzin|kanister|sprit", "canister"),
+              (r"krankenwagen|rettungswagen|notarzt|sanitäter|rettungsdienst|rettungskräfte|einsatzkräfte|\bnotruf", "ambulance"), (r"polizeiauto|polizeiwagen|streifenwagen|\bpolizei\b|polizist", "police"),
               (r"\bautos?\b|\bstau\b", "car"), (r"\bbus\b|busse", "bus"), (r"lkw|lastwagen|lieferung|lieferkette", "truck"), (r"flugzeug|flieger|\bflüge", "plane"),
               (r"satellit|\bgps\b", "satellite"), (r"rakete", "rocket"), (r"\bgeld|\beuro\b|kosten|teuer|preise|milliarden euro|bezahl", "money"),
               (r"solar", "solarpanel"), (r"generator|notstrom|aggregat", "generator"), (r"\bfeuer\b|flammen|\bbrand\b|in brand|lichterloh|waldbr[aä]nd|\bbrände", "fire"), (r"\brauch\b|qualm", "smoke"),
@@ -2530,7 +2553,8 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
         sfx.append((0.35, "ding" if str(gfx.get("type")) in ("number", "score", "round", "badge") else "pop"))
     scene["_sfx"] = [(round(t_s, 3), r_s) for t_s, r_s in sfx if 0 <= t_s < dur]
     mood_s = str(scene.get("mood") or "").lower()
-    fx_opt = {"crowd": scene.get("crowd") if crowd_ok(scene) else "", "mood": mood_s, "spec": places.spec_of(backdrop(scene)), "sky": sky_m,
+    party = bool(re.search(PARTY_RE, str(scene.get("text") or "").lower())) or (str(scene.get("crowd") or "") == "cheer" and crowd_ok(scene))
+    fx_opt = {"crowd": scene.get("crowd") if crowd_ok(scene) else "", "mood": mood_s, "confetti": party,   # Konfetti nur, wenn gefeiert wird – nicht in jeder fröhlichen Szene (Klinik, Büro) "spec": places.spec_of(backdrop(scene)), "sky": sky_m,
               "win": scene.get("_win"), "count": scene.get("_count"), "neon": neon_look, "float": str(scene.get("float") or ""),
               "aloft": bool(scene.get("aloft")), "low": bool(scene.get("low")), "no_traffic": bool(scene.get("no_traffic") or scene.get("dark_city"))}
     ff = subprocess.Popen(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24",

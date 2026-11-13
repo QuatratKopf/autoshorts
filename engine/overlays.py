@@ -176,7 +176,10 @@ def note(title, text):
 
 
 def phone(title, items, n_visible=None):
-    items = [str(x) for x in items][:4]
+    """Handy mit Nachrichten. Die Einblendung wird im Video auf rund 60 % verkleinert – deshalb große Schrift, höchstens drei Nachrichten."""
+    import re
+    items = [re.sub(r"[^\w\s.,;:!?…'\"„“()/%€+–-]", "", str(x)).strip() for x in items]      # Emojis kann die Schrift nicht (leeres Kästchen)
+    items = [x for x in items if x][:3]
     n = len(items) if n_visible is None else n_visible
     w, h = 640, 1000
     im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
@@ -184,23 +187,25 @@ def phone(title, items, n_visible=None):
     dr.rounded_rectangle((0, 0, w - 1, h - 1), 70, fill=(20, 20, 24))
     dr.rounded_rectangle((18, 18, w - 19, h - 19), 56, fill=(58, 64, 140))
     dr.rounded_rectangle((w // 2 - 80, 34, w // 2 + 80, 70), 18, fill=(20, 20, 24))
-    fc, ft = font(150, "Bold"), font(36, "SemiBold")
+    fc = font(104, "Bold")
     clock = (title or "3:12").strip()
     while dr.textlength(clock, font=fc) > w - 110 and fc.size > 44:      # „UNBEKANNT“ statt Uhrzeit: kleiner statt abgeschnitten
         fc = font(fc.size - 8, "Bold")
     tw = dr.textlength(clock, font=fc)
-    dr.text(((w - tw) / 2, 110 + (150 - fc.size) / 2), clock, font=fc, fill=WHITE)
-    fi, fs = font(34, "Bold"), font(28, "SemiBold")
-    y = 340
+    dr.text(((w - tw) / 2, 92 + (104 - fc.size) / 2), clock, font=fc, fill=WHITE)
+    fi, fs = font(40, "Bold"), font(44, "SemiBold")
+    y = 250
     for i, it in enumerate(items[:n]):
         head, _, body = it.partition(":")
-        lines = _wrap(body.strip() or head, fs, 470)[:2] if body else []
-        bh = 76 + 36 * len(lines)
-        dr.rounded_rectangle((44, y, w - 45, y + bh), 26, fill=(246, 246, 248))
-        dr.ellipse((66, y + 20, 110, y + 64), fill=RED if i == 0 else (90, 90, 96))
-        dr.text((128, y + 18), _short(head.strip(), 26), font=fi, fill=INK)
+        lines = _wrap(body.strip(), fs, 500)[:3] if body.strip() else []
+        bh = 74 + 54 * len(lines) + (10 if lines else 0)
+        if y + bh > h - 46:
+            break
+        dr.rounded_rectangle((40, y, w - 41, y + bh), 28, fill=(246, 246, 248))
+        dr.ellipse((60, y + 18, 100, y + 58), fill=RED if i == 0 else (90, 90, 96))
+        dr.text((116, y + 12), _short(head.strip(), 20), font=fi, fill=INK if lines else (60, 60, 68))
         for k, l in enumerate(lines):
-            dr.text((128, y + 62 + k * 36), l, font=fs, fill=(80, 80, 88))
+            dr.text((62, y + 68 + k * 54), l, font=fs, fill=(52, 52, 60))
         y += bh + 18
     return _shadow(im, off=14, blur=20)
 

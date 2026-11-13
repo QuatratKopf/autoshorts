@@ -65,6 +65,12 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   Nummern-Schilder und Stempel bleiben nur am Satz, der Nummer bzw. Wort nennt; `stage._carry_thing` lässt das zuvor genannte Ding im
   Folgesatz stehen („diese Früchte … eine Tonne“), bei großer Zahl dreifach.
 
+- Handlung mit einem kleinen Ding (`stage.GIVE_RE`, `TAKE_RE`): „teilt sein Stück Kuchen“, „schenkt“, „isst einen Apfel“ → eine Figur hält das genannte
+  Ding vor sich (beim Geben die zweite Figur, sonst die Hauptfigur) statt es nur auf den Boden zu stellen; Kleines in der Hand ist mindestens 84 px groß.
+  Einsatzfahrzeuge: `ambulance` (Rettungswagen; Einsatzkräfte, Notruf, Sanitäter) und `police` (Streifenwagen) – ersetzen das beliebige rote Auto.
+  Konfetti gibt es nur noch, wenn gefeiert wird (`PARTY_RE`) oder eine Menge jubelt, nicht in jeder fröhlichen Szene. Schilder (`tag`) mit einer Zahl,
+  die der Satz nicht nennt, entfallen (Jahreszahlen bleiben). Die Handy-Einblendung zeigt höchstens drei Nachrichten in großer Schrift, ohne Emojis.
+
 ## Was zu tun ist
 1. Offene Wünsche (ohne `"done": true`) und `"auto": true`-Einträge durchgehen, höchstens 8 pro Sitzung, häufigste zuerst.
 2. Einzelne Gegenstände: sauber als Eintrag in `docs/data/shapes.json` zeichnen (Format siehe Kopf von `engine/toon/library.py`:

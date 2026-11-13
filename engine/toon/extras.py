@@ -119,14 +119,18 @@ def p_box(d, x, t, s=1.0):
     _r(d, (x - 24, GROUND - 170, x + 24, GROUND - 100), (236, 204, 150), 4, 5)
 
 
-def p_car(d, x, t, s=1.0):
+def _p_car(d, x, t, col, dark, shine, stripe=None, light=False):
     b = math.sin(t * 9) * 3
-    col, dark = (226, 70, 60), (184, 50, 48)
     d.ellipse((x - 230, GROUND - 22, x + 230, GROUND + 18), fill=(0, 0, 0, 60))
     _r(d, (x - 210, GROUND - 150 + b, x + 210, GROUND - 40 + b), col, 30)
     d.rounded_rectangle((x - 120, GROUND - 240 + b, x + 110, GROUND - 140 + b), 34, fill=col, outline=INK, width=O)
     d.rounded_rectangle((x - 204, GROUND - 84 + b, x + 204, GROUND - 46 + b), 18, fill=dark)                 # Schattenkante unten
-    d.rounded_rectangle((x - 190, GROUND - 144 + b, x + 60, GROUND - 128 + b), 8, fill=(244, 110, 96))       # Glanz
+    d.rounded_rectangle((x - 190, GROUND - 144 + b, x + 60, GROUND - 128 + b), 8, fill=shine)       # Glanz
+    if stripe:                                                                                               # Streifenwagen: farbiges Band über die Seite
+        d.rectangle((x - 204, GROUND - 122 + b, x + 204, GROUND - 92 + b), fill=stripe)
+    if light:                                                                                                # Blaulicht auf dem Dach (ruhiges Pulsieren)
+        k = 0.5 + 0.5 * math.sin(t * 5)
+        _r(d, (x - 34, GROUND - 268 + b, x + 30, GROUND - 236 + b), (40 + int(60 * k), 120 + int(80 * k), 255), 10, 5)
     _r(d, (x - 96, GROUND - 220 + b, x - 6, GROUND - 150 + b), (170, 220, 250), 14, 5)
     _r(d, (x + 8, GROUND - 220 + b, x + 90, GROUND - 150 + b), (170, 220, 250), 14, 5)
     for wx0 in (-90, 14):
@@ -141,6 +145,38 @@ def p_car(d, x, t, s=1.0):
     _o(d, (x - 214, GROUND - 118 + b, x - 192, GROUND - 92 + b), (230, 60, 60), 4)
     d.rounded_rectangle((x - 222, GROUND - 70 + b, x - 196, GROUND - 52 + b), 6, fill=(90, 92, 100))         # Stoßstangen
     d.rounded_rectangle((x + 196, GROUND - 70 + b, x + 222, GROUND - 52 + b), 6, fill=(90, 92, 100))
+
+
+def p_car(d, x, t, s=1.0):
+    _p_car(d, x, t, (226, 70, 60), (184, 50, 48), (244, 110, 96))
+
+
+def p_police(d, x, t, s=1.0):
+    """Streifenwagen: helles Auto mit blauem Band und Blaulicht (ohne Wappen oder Schriftzug)."""
+    _p_car(d, x, t, (236, 238, 244), (198, 202, 214), (255, 255, 255), stripe=(52, 104, 190), light=True)
+
+
+def p_ambulance(d, x, t, s=1.0):
+    """Rettungswagen: weißer Kastenwagen mit rotem Band, Blaulicht und schlichtem Kreuz (kein Logo)."""
+    b = math.sin(t * 9) * 3
+    d.ellipse((x - 330, GROUND - 24, x + 330, GROUND + 20), fill=(0, 0, 0, 60))
+    _r(d, (x - 300, GROUND - 330 + b, x + 120, GROUND - 50 + b), (244, 244, 248), 16)                        # Aufbau
+    _r(d, (x + 110, GROUND - 250 + b, x + 300, GROUND - 50 + b), (244, 244, 248), 26)                        # Fahrerhaus
+    d.rectangle((x - 294, GROUND - 100 + b, x + 294, GROUND - 58 + b), fill=(208, 210, 220))                 # Schattenkante unten
+    d.rectangle((x - 294, GROUND - 172 + b, x + 294, GROUND - 128 + b), fill=(226, 70, 60))                  # rotes Band
+    _r(d, (x + 170, GROUND - 232 + b, x + 284, GROUND - 180 + b), (170, 220, 250), 10, 5)                    # Scheibe
+    d.polygon([(x + 184, GROUND - 226 + b), (x + 208, GROUND - 226 + b), (x + 194, GROUND - 186 + b), (x + 178, GROUND - 186 + b)], fill=(220, 240, 255))
+    _r(d, (x - 250, GROUND - 300 + b, x - 150, GROUND - 200 + b), (170, 220, 250), 10, 5)                    # Fenster im Aufbau
+    cx, cy = x - 40, GROUND - 250 + b                                                                        # schlichtes blaues Kreuz
+    d.rounded_rectangle((cx - 16, cy - 46, cx + 16, cy + 46), 6, fill=(52, 104, 190))
+    d.rounded_rectangle((cx - 46, cy - 16, cx + 46, cy + 16), 6, fill=(52, 104, 190))
+    k = 0.5 + 0.5 * math.sin(t * 5)
+    _r(d, (x - 120, GROUND - 362 + b, x - 50, GROUND - 326 + b), (40 + int(60 * k), 120 + int(80 * k), 255), 10, 5)   # Blaulicht
+    d.line((x + 112, GROUND - 240 + b, x + 112, GROUND - 60 + b), fill=INK, width=4)
+    for wx in (-190, 200):
+        _o(d, (x + wx - 52, GROUND - 98, x + wx + 52, GROUND + 6), (40, 40, 46))
+        _o(d, (x + wx - 21, GROUND - 67, x + wx + 21, GROUND - 25), (200, 200, 206), 4)
+    _o(d, (x + 276, GROUND - 130 + b, x + 304, GROUND - 100 + b), (255, 236, 150), 4)
 
 
 def p_fire(d, x, t, s=1.0):
@@ -890,7 +926,7 @@ def p_cctv(d, x, t, s=1.0):
 
 
 PROPS = {"cloud": p_cloud, "stormcloud": p_stormcloud, "lightning": p_lightning, "crack": p_crack, "flood": p_flood, "smoke": p_smoke, "aurora": p_aurora,
-         "eclipse": p_eclipse, "sprout": p_sprout, "tree": p_tree, "rock": p_rock, "box": p_box, "car": p_car, "fire": p_fire, "tv": p_tv, "computer": p_computer,
+         "eclipse": p_eclipse, "sprout": p_sprout, "tree": p_tree, "rock": p_rock, "box": p_box, "car": p_car, "police": p_police, "ambulance": p_ambulance, "fire": p_fire, "tv": p_tv, "computer": p_computer,
          "money": p_money, "rocket": p_rocket, "ufo": p_ufo, "meteor": p_meteor, "explosion": p_explosion, "earth": p_earth,
          "sun": p_bigsun, "moon": p_bigmoon, "tornado": p_tornado, "wave": p_wave, "ice": p_ice, "volcano": p_volcano,
          "cart": p_cart, "candle": p_candle, "bus": p_bus, "truck": p_truck, "house": p_house, "trafficlight": p_trafficlight,
@@ -898,7 +934,8 @@ PROPS = {"cloud": p_cloud, "stormcloud": p_stormcloud, "lightning": p_lightning,
          "drone": p_drone, "cctv": p_cctv, "door": p_door, "clock": p_clock, "pile": p_pile, "sandpile": p_sandpile, "trash": p_trash, "faucet": p_faucet,
          "glass": p_glass, "barrel": p_barrel, "solarpanel": p_solarpanel,
          "fridge": p_fridge, "tent": p_tent, "streetlamp": p_streetlamp, "plane": p_plane, "satellite": p_satellite, "ship": p_ship, "aquarium": p_aquarium}
-PROP_ALIASES = {"baum": "tree", "stein": "rock", "kiste": "box", "auto": "car", "feuer": "fire", "fernseher": "tv", "pc": "computer",
+PROP_ALIASES = {"krankenwagen": "ambulance", "rettungswagen": "ambulance", "notarzt": "ambulance", "polizeiauto": "police", "streifenwagen": "police", "polizei": "police", "police car": "police",
+                "baum": "tree", "stein": "rock", "kiste": "box", "auto": "car", "feuer": "fire", "fernseher": "tv", "pc": "computer",
                 "laptop": "computer", "geld": "money", "rakete": "rocket", "asteroid": "meteor", "erde": "earth", "sonne": "sun",
                 "mond": "moon", "wolke": "cloud", "gewitterwolke": "stormcloud", "regenwolke": "stormcloud", "tsunami": "wave", "blitz": "lightning", "erdbeben": "crack", "earthquake": "crack", "riss": "crack",
                 "überschwemmung": "flood", "flut": "flood", "rauch": "smoke", "polarlicht": "aurora", "sonnenfinsternis": "eclipse",
@@ -922,7 +959,7 @@ SKY = ("drone", "earth", "sun", "moon", "ufo", "meteor", "aurora", "eclipse", "l
 
 # Echte Größe (Höhe in Metern) und Tiefe (Fußlinie im Bild) – daraus ergibt sich der Maßstab passend zu den Menschen.
 # Was hier fehlt (Naturereignisse, Himmelskörper), wird als Schaubild frei gezeichnet.
-SIZES = {"car": (1.5, 1150), "bus": (3.0, 1100), "truck": (3.3, 1100), "house": (7.5, 1010), "tree": (7.5, 1130), "rock": (0.8, 1262),
+SIZES = {"car": (1.5, 1150), "police": (1.6, 1150), "ambulance": (2.5, 1130), "bus": (3.0, 1100), "truck": (3.3, 1100), "house": (7.5, 1010), "tree": (7.5, 1130), "rock": (0.8, 1262),
          "box": (0.5, 1262), "fire": (1.1, 1250), "tv": (1.2, 1245), "computer": (1.3, 1245), "money": (0.45, 1262), "sprout": (0.5, 1262),
          "cart": (1.0, 1262), "candle": (0.9, 1262), "trafficlight": (3.4, 1225), "canister": (0.5, 1262), "cans": (0.5, 1262),
          "generator": (0.8, 1255), "bike": (1.05, 1255), "shelf": (1.9, 1238), "table": (0.78, 1250), "fridge": (1.85, 1238),
@@ -980,7 +1017,7 @@ def draw_held_prop(layer, key, x, y, facing, t, k=1.0, shake=False):
     if spr is None:
         return
     real = REAL_M.get(key) or SIZES.get(key, (0.3, 0))[0]                       # echte Höhe in Metern
-    size = max(46.0, min(190.0, real * 290 * 1.5)) * k                         # Mensch ≈ 290 Bildpunkte je Meter; leicht vergrößert, damit man es erkennt
+    size = max(84.0, min(190.0, real * 290 * 1.5)) * k                         # Mensch ≈ 290 Bildpunkte je Meter; leicht vergrößert, damit man es erkennt
     f = size / max(spr.width, spr.height)
     im = spr.resize((max(2, int(spr.width * f)), max(2, int(spr.height * f))), Image.LANCZOS)
     if facing < 0:
@@ -1322,7 +1359,7 @@ def draw_burst(layer, x, y, k, sc=1.0):
         d.polygon(pts, fill=(255, 255, 255, a) if i % 2 else (255, 214, 80, a))
 
 
-def draw_mood(layer, mood, t):
+def draw_mood(layer, mood, t, confetti=False):
     """Stimmung über das ganze Bild: farbiger Schleier/Rand, bei Panik pulsierend."""
     col = MOODS.get(str(mood or "").lower())
     if not col:
@@ -1344,7 +1381,7 @@ def draw_mood(layer, mood, t):
         d.rectangle((0, 0, W, H), fill=(*col, 56))
     elif m == "happy":
         d.rectangle((0, 0, W, H), fill=(*col, 26))
-        for i, (a, b, c) in enumerate(_DROPS[:30]):               # Konfetti
+        for i, (a, b, c) in enumerate(_DROPS[:30] if confetti else ()):               # Konfetti (nur wenn gefeiert wird)
             x = (a * W + math.sin(t * 2 + i) * 40) % W
             y = (b * H + t * (240 + c * 200)) % H
             colr = ((250, 90, 90), (90, 170, 250), (250, 210, 80), (120, 220, 140))[i % 4]
