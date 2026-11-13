@@ -2676,5 +2676,50 @@
   "yt_thumb_at": 1794589561.9682188,
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":"
+ },
+ {
+  "id": 81,
+  "category": "comedy",
+  "topic": "Übernahme des Alltags durch völlig verselbstständigte und streitende KI-Agenten",
+  "status": "rendered",
+  "created": 1794590430.323054,
+  "remake": true,
+  "title": "Als meine KI-Agenten die Kontrolle übernahmen",
+  "description": "Als meine KI-Agenten die Kontrolle übernahmen\nJetzt diktieren künstliche Intelligenzen meinen Alltag\nWem würdest du die Kontrolle übergeben?",
+  "hashtags": [
+   "#shorts",
+   "#ki",
+   "#comedy",
+   "#alltag",
+   "#viral",
+   "#humor",
+   "#zukunft"
+  ],
+  "tags": [
+   "ki agenten",
+   "künstliche intelligenz",
+   "alltag",
+   "comedy",
+   "eskalation",
+   "technik",
+   "zukunft",
+   "steuerung",
+   "buero",
+   "automatisierung"
+  ],
+  "thumb_text": "KI ÜBERNIMMT ALLES",
+  "missing": [
+   "anwaltstitel"
+  ],
+  "cover_ms": 66440,
+  "duration": 66.3,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]

@@ -1,5 +1,5 @@
 {
- "last_category": "whatif",
+ "last_category": "comedy",
  "done_slots": [
   "2026-11-08 18:00",
   "2026-11-11 18:00",
@@ -17,19 +17,19 @@
   "qnqm93yzl"
  ],
  "last_stats": 1794590318.450712,
- "next_id": 81,
+ "next_id": 82,
  "connected": {
   "youtube": {
    "name": "Wissens Wert 💬",
    "since": "2026-11-10"
   }
  },
- "voice_wps": 2.767,
+ "voice_wps": 3.066,
  "last_trends": 1794589569.4786987,
  "tiktok_handle": "wissens..wert",
  "last_poster": {
-  "hero": "",
-  "palette": 2,
-  "video": 80
+  "hero": "agent",
+  "palette": 4,
+  "video": 81
  }
 }
