@@ -1,5 +1,5 @@
 {
- "updated": 1794603046.1503334,
+ "updated": 1794603829.2031257,
  "enough": true,
  "counted": 7,
  "total": 11,
@@ -9,10 +9,10 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 1,
-   "avg_views": 1365,
+   "avg_views": 1373,
    "avg_likes": 53.0,
-   "like_rate": 3.88,
-   "avg_score": 2160
+   "like_rate": 3.86,
+   "avg_score": 2168
   },
   {
    "slug": "whatif",
@@ -42,9 +42,9 @@
   "comedy": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1365 Aufrufe, 3.88 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1373 Aufrufe, 3.86 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 998 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2166 zu 703 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2168 zu 703 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -73,11 +73,11 @@
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1365,
+   "views": 1373,
    "likes": 53,
    "comments": 0,
    "shares": 0,
-   "score": 2160
+   "score": 2168
   },
   {
    "id": 75,
