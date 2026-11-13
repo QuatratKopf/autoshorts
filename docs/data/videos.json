@@ -2472,7 +2472,7 @@
   "id": 77,
   "category": "whatif",
   "topic": "Was passieren würde, wenn man die Biologie zweier Tiere kreuzen könnte",
-  "status": "review",
+  "status": "published",
   "created": 1794564739.0532742,
   "title": "Was wenn wir Tier-Gene kreuzen könnten?",
   "description": "Was wenn du Tier-Gene kreuzen könntest?\nDu spielst das Experiment durch: Von extremen Sinnen bis zur ewigen Jugend.\nWelche Tier-Kombi würdest du am liebsten ausprobieren?",
@@ -2507,6 +2507,12 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-13 13:00",
-  "review_at": 1794565203.770453
+  "review_at": 1794565203.770453,
+  "zernio_id": "6af71053c6c9cb4ba6dbb089",
+  "yt_status": "Zernio: pending",
+  "yt_id": "zernio:6af71053c6c9cb4ba6dbb089",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6af71053c6c9cb4ba6dbb089",
+  "error": null
  }
 ]
