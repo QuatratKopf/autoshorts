@@ -1,5 +1,5 @@
 {
- "updated": 1794556357.7034607,
+ "updated": 1794556717.4922502,
  "enough": false,
  "counted": 5,
  "total": 7,
@@ -9,10 +9,10 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 4,
-   "avg_views": 1276,
+   "avg_views": 1278,
    "avg_likes": 28.0,
    "like_rate": 2.19,
-   "avg_score": 1704
+   "avg_score": 1706
   },
   {
    "slug": "fakten",
@@ -42,21 +42,21 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2433,
+   "views": 2441,
    "likes": 55,
    "comments": 0,
    "shares": 0,
-   "score": 3258
+   "score": 3266
   },
   {
    "id": 54,
    "title": "Was passiert, wenn die Schwerkraft für fünf Sekunden verschwindet?",
    "category": "whatif",
-   "views": 1553,
+   "views": 1554,
    "likes": 40,
    "comments": 0,
    "shares": 0,
-   "score": 2153
+   "score": 2154
   },
   {
    "id": 38,
