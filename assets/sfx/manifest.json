@@ -1,0 +1,648 @@
+{
+ "sfx": {
+  "whoosh": [
+   {
+    "file": "earshot/whoosh_whoosh_fast_crisp_0.ogg",
+    "id": "whoosh_fast/crisp",
+    "onset": 0.02,
+    "peak": 0.13,
+    "dur": 1.056
+   },
+   {
+    "file": "earshot/whoosh_whoosh_fast_crisp_1.ogg",
+    "id": "whoosh_fast/crisp",
+    "onset": 0.005,
+    "peak": 0.15,
+    "dur": 1.091
+   },
+   {
+    "file": "earshot/whoosh_whoosh_fast_tight_0.ogg",
+    "id": "whoosh_fast/tight",
+    "onset": 0.045,
+    "peak": 0.15,
+    "dur": 0.533
+   },
+   {
+    "file": "earshot/whoosh_whoosh_fast_tight_1.ogg",
+    "id": "whoosh_fast/tight",
+    "onset": 0.035,
+    "peak": 0.165,
+    "dur": 0.548
+   },
+   {
+    "file": "earshot/whoosh_whoosh_fast_whip_0.ogg",
+    "id": "whoosh_fast/whip",
+    "onset": 0.005,
+    "peak": 0.11,
+    "dur": 0.933
+   },
+   {
+    "file": "earshot/whoosh_whoosh_fast_whip_1.ogg",
+    "id": "whoosh_fast/whip",
+    "onset": 0.015,
+    "peak": 0.075,
+    "dur": 0.927
+   },
+   {
+    "file": "earshot/whoosh_whoosh_big_thump_airy_0.ogg",
+    "id": "whoosh_big/thump_airy",
+    "onset": 0.015,
+    "peak": 0.145,
+    "dur": 0.912
+   },
+   {
+    "file": "earshot/whoosh_whoosh_big_thump_airy_1.ogg",
+    "id": "whoosh_big/thump_airy",
+    "onset": 0.05,
+    "peak": 0.235,
+    "dur": 0.927
+   }
+  ],
+  "swish": [
+   {
+    "file": "earshot/swish_swish_bright_0.ogg",
+    "id": "swish/bright",
+    "onset": 0.005,
+    "peak": 0.155,
+    "dur": 0.367
+   },
+   {
+    "file": "earshot/swish_swish_bright_1.ogg",
+    "id": "swish/bright",
+    "onset": 0.03,
+    "peak": 0.17,
+    "dur": 0.342
+   },
+   {
+    "file": "earshot/swish_swish_flick_0.ogg",
+    "id": "swish/flick",
+    "onset": 0.0,
+    "peak": 0.115,
+    "dur": 0.317
+   },
+   {
+    "file": "earshot/swish_swish_flick_1.ogg",
+    "id": "swish/flick",
+    "onset": 0.03,
+    "peak": 0.11,
+    "dur": 0.322
+   },
+   {
+    "file": "earshot/swish_swish_soft_0.ogg",
+    "id": "swish/soft",
+    "onset": 0.02,
+    "peak": 0.11,
+    "dur": 0.88
+   },
+   {
+    "file": "earshot/swish_swish_soft_1.ogg",
+    "id": "swish/soft",
+    "onset": 0.025,
+    "peak": 0.095,
+    "dur": 0.9
+   },
+   {
+    "file": "earshot/swish_fit_whoosh_short_bamboo_swish_0.ogg",
+    "id": "fit/whoosh.short/bamboo_swish",
+    "onset": 0.085,
+    "peak": 0.125,
+    "dur": 0.474
+   },
+   {
+    "file": "earshot/swish_fit_whoosh_short_bamboo_swish_1.ogg",
+    "id": "fit/whoosh.short/bamboo_swish",
+    "onset": 0.085,
+    "peak": 0.185,
+    "dur": 0.474
+   }
+  ],
+  "pop": [
+   {
+    "file": "earshot/pop_ui_pop_soft_0.ogg",
+    "id": "ui_pop/soft",
+    "onset": 0.0,
+    "peak": 0.04,
+    "dur": 0.202
+   },
+   {
+    "file": "earshot/pop_ui_pop_soft_1.ogg",
+    "id": "ui_pop/soft",
+    "onset": 0.0,
+    "peak": 0.03,
+    "dur": 0.173
+   },
+   {
+    "file": "earshot/pop_ui_pop_boop_0.ogg",
+    "id": "ui_pop/boop",
+    "onset": 0.0,
+    "peak": 0.025,
+    "dur": 0.192
+   },
+   {
+    "file": "earshot/pop_ui_pop_boop_1.ogg",
+    "id": "ui_pop/boop",
+    "onset": 0.0,
+    "peak": 0.025,
+    "dur": 0.193
+   },
+   {
+    "file": "earshot/pop_pro_pop_in_round_0.ogg",
+    "id": "pro_pop_in/round",
+    "onset": 0.0,
+    "peak": 0.02,
+    "dur": 0.169
+   },
+   {
+    "file": "earshot/pop_pro_pop_in_round_1.ogg",
+    "id": "pro_pop_in/round",
+    "onset": 0.0,
+    "peak": 0.02,
+    "dur": 0.169
+   },
+   {
+    "file": "earshot/pop_pro_pop_in_airy_0.ogg",
+    "id": "pro_pop_in/airy",
+    "onset": 0.0,
+    "peak": 0.015,
+    "dur": 0.167
+   },
+   {
+    "file": "earshot/pop_pro_pop_in_airy_1.ogg",
+    "id": "pro_pop_in/airy",
+    "onset": 0.0,
+    "peak": 0.02,
+    "dur": 0.167
+   },
+   {
+    "file": "earshot/pop_fit_pop_lip_pop_0.ogg",
+    "id": "fit/pop/lip_pop",
+    "onset": 0.005,
+    "peak": 0.01,
+    "dur": 0.218
+   },
+   {
+    "file": "earshot/pop_fit_pop_lip_pop_1.ogg",
+    "id": "fit/pop/lip_pop",
+    "onset": 0.005,
+    "peak": 0.005,
+    "dur": 0.218
+   }
+  ],
+  "hit": [
+   {
+    "file": "earshot/hit_cut_hit_punch_0.ogg",
+    "id": "cut_hit/punch",
+    "onset": 0.0,
+    "peak": 0.05,
+    "dur": 0.28
+   },
+   {
+    "file": "earshot/hit_cut_hit_punch_1.ogg",
+    "id": "cut_hit/punch",
+    "onset": 0.0,
+    "peak": 0.055,
+    "dur": 0.28
+   },
+   {
+    "file": "earshot/hit_cut_hit_kick_0.ogg",
+    "id": "cut_hit/kick",
+    "onset": 0.0,
+    "peak": 0.0,
+    "dur": 0.322
+   },
+   {
+    "file": "earshot/hit_cut_hit_kick_1.ogg",
+    "id": "cut_hit/kick",
+    "onset": 0.0,
+    "peak": 0.005,
+    "dur": 0.322
+   },
+   {
+    "file": "earshot/hit_cut_hit_sub_0.ogg",
+    "id": "cut_hit/sub",
+    "onset": 0.0,
+    "peak": 0.02,
+    "dur": 0.283
+   },
+   {
+    "file": "earshot/hit_cut_hit_sub_1.ogg",
+    "id": "cut_hit/sub",
+    "onset": 0.0,
+    "peak": 0.02,
+    "dur": 0.283
+   }
+  ],
+  "boom": [
+   {
+    "file": "earshot/boom_cut_hit_rumble_0.ogg",
+    "id": "cut_hit/rumble",
+    "onset": 0.0,
+    "peak": 0.07,
+    "dur": 1.4
+   },
+   {
+    "file": "earshot/boom_cut_hit_rumble_1.ogg",
+    "id": "cut_hit/rumble",
+    "onset": 0.0,
+    "peak": 0.04,
+    "dur": 1.4
+   },
+   {
+    "file": "earshot/boom_pro_sub_drop_quick_0.ogg",
+    "id": "pro_sub_drop/quick",
+    "onset": 0.0,
+    "peak": 0.23,
+    "dur": 0.997
+   },
+   {
+    "file": "earshot/boom_pro_sub_drop_quick_1.ogg",
+    "id": "pro_sub_drop/quick",
+    "onset": 0.0,
+    "peak": 0.245,
+    "dur": 0.997
+   },
+   {
+    "file": "earshot/boom_pro_impact_short_0.ogg",
+    "id": "pro_impact/short",
+    "onset": 0.0,
+    "peak": 0.18,
+    "dur": 0.664
+   },
+   {
+    "file": "earshot/boom_pro_impact_short_1.ogg",
+    "id": "pro_impact/short",
+    "onset": 0.0,
+    "peak": 0.295,
+    "dur": 0.664
+   }
+  ],
+  "ding": [
+   {
+    "file": "earshot/ding_mallet_glock_0.ogg",
+    "id": "mallet/glock",
+    "onset": 0.0,
+    "peak": 0.015,
+    "dur": 0.434
+   },
+   {
+    "file": "earshot/ding_mallet_glock_1.ogg",
+    "id": "mallet/glock",
+    "onset": 0.0,
+    "peak": 0.005,
+    "dur": 0.423
+   },
+   {
+    "file": "earshot/ding_mallet_celesta_0.ogg",
+    "id": "mallet/celesta",
+    "onset": 0.0,
+    "peak": 0.03,
+    "dur": 0.437
+   },
+   {
+    "file": "earshot/ding_mallet_celesta_1.ogg",
+    "id": "mallet/celesta",
+    "onset": 0.0,
+    "peak": 0.04,
+    "dur": 0.424
+   },
+   {
+    "file": "earshot/ding_pro_notify_ding_1930_0.ogg",
+    "id": "pro_notify/ding_1930",
+    "onset": 0.0,
+    "peak": 0.015,
+    "dur": 0.267
+   },
+   {
+    "file": "earshot/ding_pro_notify_ding_1930_1.ogg",
+    "id": "pro_notify/ding_1930",
+    "onset": 0.0,
+    "peak": 0.01,
+    "dur": 0.267
+   },
+   {
+    "file": "earshot/ding_notify_mid_tine_0.ogg",
+    "id": "notify/mid_tine",
+    "onset": 0.0,
+    "peak": 0.04,
+    "dur": 0.422
+   },
+   {
+    "file": "earshot/ding_notify_mid_tine_1.ogg",
+    "id": "notify/mid_tine",
+    "onset": 0.0,
+    "peak": 0.035,
+    "dur": 0.422
+   }
+  ],
+  "tick": [
+   {
+    "file": "earshot/tick_pro_hover_tick_soft_0.ogg",
+    "id": "pro_hover_tick/soft",
+    "onset": 0.0,
+    "peak": 0.0,
+    "dur": 0.045
+   },
+   {
+    "file": "earshot/tick_pro_hover_tick_soft_1.ogg",
+    "id": "pro_hover_tick/soft",
+    "onset": 0.0,
+    "peak": 0.0,
+    "dur": 0.045
+   },
+   {
+    "file": "earshot/tick_fit_tick_domino_0.ogg",
+    "id": "fit/tick/domino",
+    "onset": 0.0,
+    "peak": 0.005,
+    "dur": 0.136
+   },
+   {
+    "file": "earshot/tick_fit_tick_domino_1.ogg",
+    "id": "fit/tick/domino",
+    "onset": 0.0,
+    "peak": 0.005,
+    "dur": 0.136
+   },
+   {
+    "file": "earshot/tick_pro_click_tink_0.ogg",
+    "id": "pro_click/tink",
+    "onset": 0.0,
+    "peak": 0.0,
+    "dur": 0.034
+   },
+   {
+    "file": "earshot/tick_pro_click_tink_1.ogg",
+    "id": "pro_click/tink",
+    "onset": 0.0,
+    "peak": 0.0,
+    "dur": 0.034
+   }
+  ],
+  "shutter": [
+   {
+    "file": "earshot/shutter_shutter_quick_0.ogg",
+    "id": "shutter/quick",
+    "onset": 0.0,
+    "peak": 0.02,
+    "dur": 0.157
+   },
+   {
+    "file": "earshot/shutter_shutter_quick_1.ogg",
+    "id": "shutter/quick",
+    "onset": 0.0,
+    "peak": 0.02,
+    "dur": 0.141
+   },
+   {
+    "file": "earshot/shutter_shutter_snap_0.ogg",
+    "id": "shutter/snap",
+    "onset": 0.0,
+    "peak": 0.055,
+    "dur": 0.134
+   },
+   {
+    "file": "earshot/shutter_shutter_snap_1.ogg",
+    "id": "shutter/snap",
+    "onset": 0.015,
+    "peak": 0.055,
+    "dur": 0.134
+   }
+  ],
+  "knock": [
+   {
+    "file": "earshot/knock_knock_wood_0.ogg",
+    "id": "knock/wood",
+    "onset": 0.01,
+    "peak": 0.01,
+    "dur": 0.151
+   },
+   {
+    "file": "earshot/knock_knock_wood_1.ogg",
+    "id": "knock/wood",
+    "onset": 0.01,
+    "peak": 0.01,
+    "dur": 0.148
+   },
+   {
+    "file": "earshot/knock_knock_desk_0.ogg",
+    "id": "knock/desk",
+    "onset": 0.0,
+    "peak": 0.025,
+    "dur": 0.221
+   },
+   {
+    "file": "earshot/knock_knock_desk_1.ogg",
+    "id": "knock/desk",
+    "onset": 0.0,
+    "peak": 0.015,
+    "dur": 0.252
+   },
+   {
+    "file": "earshot/knock_fit_hit_bamboo_tok_0.ogg",
+    "id": "fit/hit/bamboo_tok",
+    "onset": 0.005,
+    "peak": 0.01,
+    "dur": 0.167
+   },
+   {
+    "file": "earshot/knock_fit_hit_bamboo_tok_1.ogg",
+    "id": "fit/hit/bamboo_tok",
+    "onset": 0.005,
+    "peak": 0.01,
+    "dur": 0.167
+   }
+  ],
+  "stamp": [
+   {
+    "file": "earshot/stamp_whoosh_big_thump_0.ogg",
+    "id": "whoosh_big/thump",
+    "onset": 0.045,
+    "peak": 0.16,
+    "dur": 1.03
+   },
+   {
+    "file": "earshot/stamp_whoosh_big_thump_1.ogg",
+    "id": "whoosh_big/thump",
+    "onset": 0.05,
+    "peak": 0.17,
+    "dur": 1.05
+   },
+   {
+    "file": "earshot/stamp_knock_double_0.ogg",
+    "id": "knock/double",
+    "onset": 0.0,
+    "peak": 0.0,
+    "dur": 0.153
+   },
+   {
+    "file": "earshot/stamp_knock_double_1.ogg",
+    "id": "knock/double",
+    "onset": 0.0,
+    "peak": 0.055,
+    "dur": 0.153
+   }
+  ],
+  "glitch": [
+   {
+    "file": "earshot/glitch_glitch_mid_0.ogg",
+    "id": "glitch/mid",
+    "onset": 0.03,
+    "peak": 0.035,
+    "dur": 0.242
+   },
+   {
+    "file": "earshot/glitch_glitch_mid_1.ogg",
+    "id": "glitch/mid",
+    "onset": 0.03,
+    "peak": 0.03,
+    "dur": 0.242
+   },
+   {
+    "file": "earshot/glitch_glitch_chirp_0.ogg",
+    "id": "glitch/chirp",
+    "onset": 0.07,
+    "peak": 0.07,
+    "dur": 0.405
+   },
+   {
+    "file": "earshot/glitch_glitch_chirp_1.ogg",
+    "id": "glitch/chirp",
+    "onset": 0.07,
+    "peak": 0.07,
+    "dur": 0.405
+   }
+  ],
+  "riser": [
+   {
+    "file": "earshot/riser_riser_snatch_0.ogg",
+    "id": "riser/snatch",
+    "onset": 0.0,
+    "peak": 0.385,
+    "dur": 0.632
+   },
+   {
+    "file": "earshot/riser_riser_snatch_1.ogg",
+    "id": "riser/snatch",
+    "onset": 0.0,
+    "peak": 0.44,
+    "dur": 0.632
+   },
+   {
+    "file": "earshot/riser_riser_dark_0.ogg",
+    "id": "riser/dark",
+    "onset": 0.21,
+    "peak": 0.695,
+    "dur": 0.948
+   },
+   {
+    "file": "earshot/riser_riser_dark_1.ogg",
+    "id": "riser/dark",
+    "onset": 0.165,
+    "peak": 0.69,
+    "dur": 0.948
+   }
+  ],
+  "swell": [
+   {
+    "file": "earshot/swell_reverse_swell_short_0.ogg",
+    "id": "reverse_swell/short",
+    "onset": 0.01,
+    "peak": 0.33,
+    "dur": 0.648
+   },
+   {
+    "file": "earshot/swell_reverse_swell_short_1.ogg",
+    "id": "reverse_swell/short",
+    "onset": 0.005,
+    "peak": 0.32,
+    "dur": 0.648
+   },
+   {
+    "file": "earshot/swell_reverse_swell_cymbal_0.ogg",
+    "id": "reverse_swell/cymbal",
+    "onset": 0.005,
+    "peak": 0.515,
+    "dur": 0.892
+   },
+   {
+    "file": "earshot/swell_reverse_swell_cymbal_1.ogg",
+    "id": "reverse_swell/cymbal",
+    "onset": 0.01,
+    "peak": 0.39,
+    "dur": 0.901
+   }
+  ],
+  "drip": [
+   {
+    "file": "earshot/drip_drip_drop_0.ogg",
+    "id": "drip/drop",
+    "onset": 0.005,
+    "peak": 0.06,
+    "dur": 0.356
+   },
+   {
+    "file": "earshot/drip_drip_drop_1.ogg",
+    "id": "drip/drop",
+    "onset": 0.005,
+    "peak": 0.06,
+    "dur": 0.31
+   },
+   {
+    "file": "earshot/drip_drip_plink_0.ogg",
+    "id": "drip/plink",
+    "onset": 0.0,
+    "peak": 0.025,
+    "dur": 0.254
+   },
+   {
+    "file": "earshot/drip_drip_plink_1.ogg",
+    "id": "drip/plink",
+    "onset": 0.0,
+    "peak": 0.03,
+    "dur": 0.251
+   }
+  ],
+  "type": [
+   {
+    "file": "earshot/type_pro_typing_run_soft_0.ogg",
+    "id": "pro_typing_run/soft",
+    "onset": 0.005,
+    "peak": 1.145,
+    "dur": 1.755
+   },
+   {
+    "file": "earshot/type_pro_typing_run_soft_1.ogg",
+    "id": "pro_typing_run/soft",
+    "onset": 0.005,
+    "peak": 0.94,
+    "dur": 1.722
+   }
+  ],
+  "bell": [
+   {
+    "file": "earshot/bell_fit_bell_small_bell_0.ogg",
+    "id": "fit/bell/small_bell",
+    "onset": 0.0,
+    "peak": 0.055,
+    "dur": 1.66
+   },
+   {
+    "file": "earshot/bell_fit_bell_small_bell_1.ogg",
+    "id": "fit/bell/small_bell",
+    "onset": 0.0,
+    "peak": 0.05,
+    "dur": 1.66
+   }
+  ]
+ },
+ "credits": [
+  {
+   "what": "Soundeffekte",
+   "source": "earshot (Leon Lin)",
+   "license": "MIT",
+   "url": "https://github.com/Leonxlnx/earshot"
+  }
+ ],
+ "amb": {},
+ "updated": 1794559361.956639
+}
