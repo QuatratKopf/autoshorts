@@ -1,5 +1,5 @@
 {
- "updated": 1794559420.8736537,
+ "updated": 1794561940.0922766,
  "enough": true,
  "counted": 6,
  "total": 7,
@@ -9,10 +9,10 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 1,
-   "avg_views": 1339,
+   "avg_views": 1341,
    "avg_likes": 52.0,
    "like_rate": 3.88,
-   "avg_score": 2119
+   "avg_score": 2121
   },
   {
    "slug": "whatif",
@@ -42,9 +42,9 @@
   "comedy": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1339 Aufrufe, 3.88 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1341 Aufrufe, 3.88 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 580 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2086 zu 702 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2087 zu 702 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -63,21 +63,21 @@
    "id": 54,
    "title": "Was passiert, wenn die Schwerkraft für fünf Sekunden verschwindet?",
    "category": "whatif",
-   "views": 1554,
+   "views": 1555,
    "likes": 40,
    "comments": 0,
    "shares": 0,
-   "score": 2154
+   "score": 2155
   },
   {
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1339,
+   "views": 1341,
    "likes": 52,
    "comments": 0,
    "shares": 0,
-   "score": 2119
+   "score": 2121
   },
   {
    "id": 38,
