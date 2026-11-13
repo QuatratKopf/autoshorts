@@ -2467,5 +2467,46 @@
   "look": "cartoon",
   "mp4": true,
   "error": "Bei der Prüfung verworfen: Titel grammatisch falsch, Zähler zeigt 700 GRAD statt 4700, heißer als die Sonne sachlich falsch – Fassung 75 wurde veröffentlicht"
+ },
+ {
+  "id": 77,
+  "category": "whatif",
+  "topic": "Was passieren würde, wenn man die Biologie zweier Tiere kreuzen könnte",
+  "status": "review",
+  "created": 1794564739.0532742,
+  "title": "Was wenn wir Tier-Gene kreuzen könnten?",
+  "description": "Was wenn du Tier-Gene kreuzen könntest?\nDu spielst das Experiment durch: Von extremen Sinnen bis zur ewigen Jugend.\nWelche Tier-Kombi würdest du am liebsten ausprobieren?",
+  "hashtags": [
+   "#shorts",
+   "#whatif",
+   "#biologie",
+   "#tiere",
+   "#wissenschaft",
+   "#fyp",
+   "#viral"
+  ],
+  "tags": [
+   "tier biologie",
+   "was wäre wenn",
+   "tierkräfte",
+   "genetik",
+   "bärtierchen",
+   "pistolenkrebs",
+   "qualle"
+  ],
+  "thumb_text": "GEN-EXPERIMENT GEHT SCHIEF",
+  "missing": null,
+  "cover_ms": 77469,
+  "duration": 77.4,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-13 13:00",
+  "review_at": 1794565203.770453
  }
 ]

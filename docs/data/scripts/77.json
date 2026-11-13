@@ -1,0 +1,457 @@
+{
+ "title": "Was wenn wir Tier-Gene kreuzen könnten?",
+ "scenes": [
+  {
+   "text": "Diese drei Tier-Superkräfte im Menschen verändern die Welt komplett.",
+   "see": "Der Hauptcharakter blickt schockiert auf seine Hand, während eine DNA-Doppelhelix im Raum schwebt.",
+   "place": "labor",
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "GEN-CROSSOVER"
+   }
+  },
+  {
+   "text": "Und die letzte Eigenschaft bringt uns sogar die ewige Jugend.",
+   "see": "Eine bedrohliche Schere eines Pistolenkrebses wird groß gezeigt.",
+   "place": "labor",
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "STUFE 1"
+   }
+  },
+  {
+   "text": "Kreuzen wir erstens die Schnelligkeit vom Gepard mit den Augen vom Adler.",
+   "see": "Die Hauptfigur rennt mit unglaublicher Geschwindigkeit durch ein Labor.",
+   "place": "fields",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "fields"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "cheetah",
+     "hero": true,
+     "action": "run",
+     "speaks": false,
+     "pos": "center",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Nach wenigen Sekunden rennst du über hundertzwanzig Kilometer pro Stunde schnell.",
+   "see": "Eine Hochgeschwindigkeitsanzeige schießt auf hundertzwanzig Kilometer pro Stunde hoch.",
+   "place": "labor",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "number",
+    "kicker": "TEMPO",
+    "value": "120 KM/H",
+    "label": "SPITZENFORTBEWEGUNG",
+    "dark": false
+   }
+  },
+  {
+   "text": "Aber deine Muskeln produzieren so viel Hitze dass du sofort kollabierst.",
+   "see": "Die Figur stolpert und fällt vor Hitze und Erschöpfung um.",
+   "place": "labor",
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "fall",
+     "emotion": "worried",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Der menschliche Schweiß reicht also gar nicht für diese Abkühlung aus.",
+   "see": "Ein Notizzettel erklärt das Problem der Überhitzung im menschlichen Körper.",
+   "place": "labor",
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "note",
+    "title": "PROBLEM #1",
+    "text": "Mensch überhitzt sofort"
+   }
+  },
+  {
+   "text": "Kombinieren wir zweitens die Widerstandskraft vom Bärtierchen mit dem Pistolenkrebs.",
+   "see": "Ein mikroskopisch kleines Bärtierchen steht witzig im Fokus.",
+   "place": "labor",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "tardigrade",
+     "hero": true,
+     "action": "idle",
+     "speaks": false,
+     "pos": "right",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Ein einziges Schnippen deiner Finger erzeugt fünftausend Grad heiße Blasen.",
+   "see": "Der Hauptcharakter schnippt mit den Fingern und erzeugt einen riesigen Knall.",
+   "place": "zimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "blase"
+    }
+   ],
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "5000 °C HEISS"
+   }
+  },
+  {
+   "text": "Damit fliegen alle Fensterscheiben in deiner Straße gleichzeitig auf einen Schlag weg.",
+   "see": "Die Zimmerfenster zerspringen symbolisch durch die Schallwelle.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "glasscheibe"
+    }
+   ],
+   "actors": [
+    {
+     "id": "held",
+     "speaks": false,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Der Druck erzeugt über zweihundert Dezibel was absolut jeden Gehörgang zerstört.",
+   "see": "Grafik vergleicht die Lautstärke des Schnippens mit einem Düsenjet.",
+   "place": "ruins",
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "action": "look_around",
+     "emotion": "worried",
+     "pos": "center",
+     "emote": "?"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Aber dank der Bärtierchen-Gene überlebst du das völlig schadlos im Tiefkühlfach.",
+   "see": "Das Bärtierchen lächelt unbeeindruckt im Eissturm.",
+   "place": "kitchen",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "tardigrade",
+     "hero": true,
+     "action": "idle",
+     "speaks": false,
+     "pos": "right",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Nach drei Wochen Dauerversuchen verändern sich deine Körperzellen vollkommen.",
+   "see": "Ein Kalender verstreicht über 30 Tage der Mutation.",
+   "place": "labor",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 3,
+    "unit": "WOCHEN"
+   }
+  },
+  {
+   "text": "Jetzt mischen wir drittens die unsterbliche Qualle in dein Erbgut ein.",
+   "see": "Die Hauptfigur schaut ungläubig in ein mikroskopisches Labor-Gerät.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_meer",
+     "kind": "jelly",
+     "action": "idle",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": "",
+     "hero": true,
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "DER CLOU"
+   }
+  },
+  {
+   "text": "Diese Tiere können ihre gealterten Zellen einfach wieder komplett verjüngen.",
+   "see": "Eine Zelle verjüngt sich grafisch und schrumpft in ihren Urzustand.",
+   "place": "labor",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_meer",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "event",
+   "mood": "calm",
+   "overlay": {
+    "type": "stamp",
+    "text": "UNSTERBLICH",
+    "color": "green"
+   }
+  },
+  {
+   "text": "Das bedeutet also du wirst bei jedem großen Stress einfach wieder zum Baby.",
+   "see": "Die Hauptfigur verwandelt sich plötzlich rückwärts in ein Baby.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense"
+  },
+  {
+   "text": "Theoretisch lebst du so unendlich lange ohne jemals richtig alt zu werden.",
+   "see": "Ein Smartphone zeigt eine Warnmeldung über unendliche Lebensdauer.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Biologisch ist so eine Kreuzung bei Säugetieren aber streng verboten und unmöglich.",
+   "see": "Ein Stempel mit der Aufschrift VERBOTEN knallt auf das Bild.",
+   "place": "labor",
+   "time": "day",
+   "props": [
+    {
+     "type": "gesetzbuch"
+    }
+   ],
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "stamp",
+    "text": "VERBOTEN",
+    "color": "red"
+   }
+  },
+  {
+   "text": "Du müsstest sonst nach jeder schwereren Prüfung wieder in den Kindergarten laufen.",
+   "see": "Die Hauptfigur steht verlegen da und kratzt sich am Kopf.",
+   "place": "village",
+   "backdrop": {
+    "sky": "day",
+    "ground": "road",
+    "elements": [
+     "village"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "run",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "right"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Welche zwei Tier-Superkräfte würdest du trotzdem kreuzen? Folg jetzt für mehr Wissens-Kicks.",
+   "see": "Eine interaktive Auswahlgrafik für die Zuschauer am Ende.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "happy"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "choice",
+    "a": "Gepard & Adler",
+    "b": "Qualle & Krebs"
+   }
+  }
+ ]
+}
