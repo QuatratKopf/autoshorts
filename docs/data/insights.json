@@ -1,5 +1,5 @@
 {
- "updated": 1794581811.8574917,
+ "updated": 1794583666.127761,
  "enough": true,
  "counted": 6,
  "total": 7,
@@ -18,10 +18,10 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 4,
-   "avg_views": 1281,
-   "avg_likes": 28.0,
-   "like_rate": 2.19,
-   "avg_score": 1709
+   "avg_views": 1282,
+   "avg_likes": 29.2,
+   "like_rate": 2.28,
+   "avg_score": 1728
   },
   {
    "slug": "fakten",
@@ -44,7 +44,7 @@
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1356 Aufrufe, 3.91 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 580 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2097 zu 702 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2116 zu 702 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -63,11 +63,11 @@
    "id": 54,
    "title": "Was passiert, wenn die Schwerkraft für fünf Sekunden verschwindet?",
    "category": "whatif",
-   "views": 1555,
-   "likes": 40,
+   "views": 1558,
+   "likes": 45,
    "comments": 0,
    "shares": 0,
-   "score": 2155
+   "score": 2233
   },
   {
    "id": 62,
