@@ -425,6 +425,59 @@ def zernio_stats():
     return n
 
 
+def zernio_thumbnails():
+    """Titelbild auf YouTube nachtragen (Zernio: POST /posts/{id}/update-metadata mit thumbnailUrl). Beim Veröffentlichen
+    übernimmt YouTube es oft nicht; sobald das Video eine echte YouTube-ID hat, wird es hier gesetzt – höchstens dreimal
+    versucht, das Ergebnis steht am Video (yt_thumb) und im Protokoll."""
+    if not (cfg("youtube_thumbnail") and cfg("make_thumbnail")):
+        return 0
+    repo = os.environ.get("GITHUB_REPOSITORY") or "QuatratKopf/autoshorts"
+    base = f"https://github.com/{repo}/releases/download/videos/"
+    acc = None
+    n = 0
+    for v in [v for v in VIDEOS if v.get("zernio_id") and v.get("thumb")][-15:]:
+        if v.get("yt_thumb") == "gesetzt" or int(v.get("yt_thumb_tries") or 0) >= 3:
+            continue
+        yid = str(v.get("yt_id") or "")
+        if yid.startswith("zernio:"):                     # echte YouTube-ID aus dem Zernio-Auftrag holen
+            try:
+                d = _z("GET", f"/posts/{v['zernio_id']}")
+                post = d.get("post") if isinstance(d.get("post"), dict) else d
+                for r in post.get("platforms") or []:
+                    if isinstance(r, dict) and str(r.get("platform") or "").lower() == "youtube":
+                        url_p = str(r.get("platformPostUrl") or "")
+                        st = str(r.get("status") or "").lower()
+                        if url_p:
+                            v["yt_id"] = yid = url_p.rstrip("/").split("/")[-1].split("=")[-1]
+                        if st:
+                            v["yt_status"] = "Zernio: " + st
+            except Exception as e:  # noqa: BLE001
+                log(f"Zernio-Auftrag {v['zernio_id']}: {str(e)[:120]}")
+        if not yid or yid.startswith("zernio:"):
+            continue
+        v["yt_thumb_tries"] = int(v.get("yt_thumb_tries") or 0) + 1
+        url = base + f"{v['id']}-cover.jpg"
+        try:
+            try:
+                _z("POST", f"/posts/{v['zernio_id']}/update-metadata", json={"platform": "youtube", "thumbnailUrl": url})
+            except RuntimeError as e:
+                if "HTTP 4" not in str(e) or "HTTP 403" in str(e):
+                    raise
+                acc = acc if acc is not None else zernio_accounts()
+                _z("POST", "/posts/_/update-metadata", json={"platform": "youtube", "videoId": yid, "accountId": acc.get("youtube"),
+                                                            "thumbnailUrl": url})
+            v["yt_thumb"] = "gesetzt"
+            n += 1
+            log(f"YouTube-Titelbild für Video {v['id']} gesetzt")
+        except Exception as e:  # noqa: BLE001
+            msg = str(e)[:240]
+            v["yt_thumb"] = msg
+            hint = (" – eigene Titelbilder gehen erst, wenn der YouTube-Kanal per Telefon bestätigt ist (youtube.com/verify)"
+                    if re.search(r"verif|permission|forbidden|403", msg, re.I) else "")
+            log(f"YouTube-Titelbild für Video {v['id']} nicht gesetzt: {msg}{hint}")
+    return n
+
+
 UA_WEB = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0 Safari/537.36"
 
 
@@ -518,6 +571,7 @@ def refresh_stats():
     if (cfg("upload_via") or "direct") == "zernio" and secret("ZERNIO_API_KEY"):
         try:
             log(f"Zernio: {zernio_stats()} Zahlenreihen aktualisiert")
+            zernio_thumbnails()
         except Exception as e:  # noqa: BLE001
             log(f"Zernio-Statistik: {e}")
     for p in ("youtube", "tiktok"):
