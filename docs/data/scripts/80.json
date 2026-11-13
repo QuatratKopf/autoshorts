@@ -1,0 +1,481 @@
+{
+ "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
+ "scenes": [
+  {
+   "text": "Drei Videospiel-Regeln, die im echten Alltag völlig eskalieren.",
+   "see": "Drei Videospiel-Regeln, die im echten Alltag völlig eskalieren, auf der Straße",
+   "place": "street",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "crowd": "walk",
+   "overlay": {
+    "type": "tag",
+    "text": "REGELN AN"
+   }
+  },
+  {
+   "text": "Und die letzte Regel rettet dich vor jeder verhauenen Prüfung.",
+   "see": "Eine Schülerin lernt im Klassenzimmer für eine schwere Prüfung",
+   "place": "classroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lehrbuch"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Du packst genau neunundneunzig schwere Wassermelonen in deine kleine Stoffhose.",
+   "see": "Du packst genau neunundneunzig schwere Wassermelonen in deine kleine Stoffhose",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "wassermelone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "crowd": "watch"
+  },
+  {
+   "text": "In echt wiegen diese Melonen zusammen fast eine ganze Tonne.",
+   "see": "In echt wiegen diese Melonen zusammen fast eine ganze Tonne",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_wassermelone"
+    }
+   ],
+   "shot": "insert",
+   "mood": "tense"
+  },
+  {
+   "text": "Deine Beine brechen sofort unter diesem brutalen Gewicht zusammen.",
+   "see": "Deine Beine brechen sofort unter diesem brutalen Gewicht zusammen",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "wassermelone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "fall",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Das Spiel zeigt Mitleid und du liegst einfach platt auf dem Boden.",
+   "see": "Das Spiel zeigt Mitleid und du liegst einfach platt auf dem Boden",
+   "place": "street",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Zweitens heilt Essen sofort jede noch so schlimme Verletzung.",
+   "see": "Zweitens heilt Essen sofort jede noch so schlimme Verletzung in der Küche",
+   "place": "kitchen",
+   "time": "day",
+   "props": [
+    {
+     "type": "apfel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "note",
+    "title": "REGEL 2",
+    "text": "SOFORT HEILEN"
+   }
+  },
+  {
+   "text": "Ein riesiger blauer Fleck am Knie verschwindet nach einem einzigen Biss.",
+   "see": "Ein riesiger blauer Fleck am Knie verschwindet nach einem einzigen Biss",
+   "place": "kitchen",
+   "time": "day",
+   "props": [
+    {
+     "type": "apfel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "happy"
+  },
+  {
+   "text": "In echt braucht der Körper für diesen Heilungsprozess rund zwei Wochen.",
+   "see": "In echt braucht der Körper für diesen Heilungsprozess rund zwei Wochen",
+   "place": "hospital",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "mood": "calm",
+   "crowd": "walk",
+   "overlay": {
+    "type": "tag",
+    "text": "ECHTE BIOLOGIE"
+   }
+  },
+  {
+   "text": "Hier reicht ein kleiner Apfel und du springst direkt wieder herum.",
+   "see": "Hier reicht ein kleiner Apfel und du springst direkt wieder herum",
+   "place": "kitchen",
+   "time": "day",
+   "props": [
+    {
+     "type": "apfel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Ärzte hassen diesen einfachen Trick mit dem frischen Fallobst.",
+   "see": "Ärzte hassen diesen einfachen Trick mit dem frischen Fallobst",
+   "place": "hospital",
+   "backdrop": {
+    "sky": "day",
+    "ground": "road",
+    "elements": [
+     "hospital"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_apfel",
+     "pos": 800
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "angry",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Drittens kannst du vor jeder schweren Prüfung einfach kurz speichern.",
+   "see": "Drittens kannst du vor jeder schweren Prüfung einfach kurz speichern",
+   "place": "classroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lehrbuch"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "note",
+    "title": "REGEL 3",
+    "text": "SPEICHERPUNKT"
+   }
+  },
+  {
+   "text": "Bei einer schlechten Note lädst du den letzten Spielstand sofort neu.",
+   "see": "Bei einer schlechten Note lädst du den letzten Spielstand sofort neu",
+   "place": "classroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lehrbuch"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Du wiederholst den Test solange, bis jede einzelne Antwort perfekt sitzt.",
+   "see": "Du wiederholst den Test solange, bis jede einzelne Antwort perfekt sitzt",
+   "place": "classroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Niemand merkt, dass du diesen Versuch schon hundertmal gemacht hast.",
+   "see": "Niemand merkt, dass du diesen Versuch schon hundertmal gemacht hast",
+   "place": "classroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "crowd": "watch"
+  },
+  {
+   "text": "Dein Gehirn dreht nach dem zehnten Neustart allerdings völlig durch.",
+   "see": "Dein Gehirn dreht nach dem zehnten Neustart allerdings völlig durch",
+   "place": "classroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Du vergisst, was Realität ist und was nur ein Spielstand.",
+   "see": "Du vergisst, was Realität ist und was nur ein Spielstand",
+   "place": "bedroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sleep",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary"
+  },
+  {
+   "text": "Vielleicht solltest du lieber das Spiel beenden und einfach schlafen.",
+   "see": "Vielleicht solltest du lieber das Spiel beenden und einfach schlafen",
+   "place": "bedroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sleep",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Welche Regel würdest du als Erstes in deinem echten Leben ausprobieren?",
+   "see": "Welche Regel würdest du als Erstes in deinem echten Leben ausprobieren?",
+   "place": "street",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "mood": "happy",
+   "crowd": "walk",
+   "overlay": {
+    "type": "choice",
+    "a": "Inventar",
+    "b": "Speichern"
+   }
+  }
+ ]
+}

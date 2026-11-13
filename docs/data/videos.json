@@ -2622,5 +2622,50 @@
   "look": "cartoon",
   "mp4": true,
   "error": "Bei der Prüfung verworfen: Titelbild NEUNZIG statt 99 Melonen, Schild REGEL NUMMER EINS am falschen Satz, Zuckerhaufen statt Melonen, Stempel GRATIS/PLEITE ohne Bezug, Einkaufsbeutel in fremden Szenen, Apfel fehlt"
+ },
+ {
+  "id": 80,
+  "category": "whatif",
+  "topic": "Wenn Videospiel-Regeln plötzlich im echten Alltag gelten würden – genau drei Regeln, jede mit drei bis vier Sätzen erklärt und mit der echten Physik oder Biologie verglichen: Erstens das Inventar (neunundneunzig Wassermelonen in der Hosentasche, in echt wiegen sie zusammen fast eine Tonne), zweitens Essen heilt sofort (ein Apfel und der blaue Fleck am Knie ist weg, in echt braucht der Körper dafür rund zwei Wochen), drittens Speichern und Neuladen (vor der Prüfung speichern, bei einer schlechten Note neu laden). Jeder Satz nennt das Ding, um das es geht, beim Namen. Ohne die Wörter Bug, Glitch und Feature, ohne englische Gaming-Begriffe. Titelbild-Text: 99 MELONEN EINSTECKEN",
+  "status": "rendered",
+  "created": 1794587917.5558197,
+  "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
+  "description": "Was passiert mit deiner Hosentasche?\nHier siehst du drei krasse Videospiel-Regeln.\nHolst du die Melonen oder den Apfel?",
+  "hashtags": [
+   "#shorts",
+   "#gaming",
+   "#waswärewenn",
+   "#physik",
+   "#lustig",
+   "#viral",
+   "#foryou",
+   "#deutsch"
+  ],
+  "tags": [
+   "videospiele im echten leben",
+   "inventar",
+   "essen heilt",
+   "speichern",
+   "was wäre wenn",
+   "physik",
+   "gaming regeln",
+   "lustige fakten",
+   "melone"
+  ],
+  "thumb_text": "99 MELONEN EINSTECKEN",
+  "missing": [
+   "knie",
+   "prüfung"
+  ],
+  "cover_ms": 69425,
+  "duration": 69.3,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
