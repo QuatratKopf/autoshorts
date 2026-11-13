@@ -2809,7 +2809,7 @@
   "id": 84,
   "category": "whatif",
   "topic": "Was wäre, wenn alle Menschen eine Minute lang gleichzeitig nett wären – genau drei Folgen, jede mit drei bis vier Sätzen und einem Alltagsbild, in dem jemand etwas tut: Erstens im Körper (Freundlichkeit senkt das Stresshormon Cortisol und lässt das Bindungshormon Oxytocin steigen, der Puls wird ruhiger, das Nervensystem schaltet auf Erholung), zweitens im Gehirn (wer hilft oder etwas abgibt, bei dem springt das Belohnungszentrum an, ähnlich wie bei Schokolade – Beispiel: der Kollege im Büro teilt sein letztes Stück Kuchen), drittens Ansteckung (wer Freundlichkeit erlebt, gibt sie weiter, in Experimenten bis zu drei Personen weit – Beispiele: Autofahrer lassen sich an der Ampel den Vortritt, der Nachbar hält dir die Tür auf). Schluss: Die Minute ist vorbei, aber die Wirkung bleibt, weil Freundlichkeit ansteckt. Der erste Satz spielt bei dir im Zimmer, nicht auf der Weltkarte. Einzige Zahlen im ganzen Video: acht Milliarden Menschen, eine Minute beziehungsweise sechzig Sekunden, drei Personen. Keine Zahlen über Kriege, Nachrichten, Kriminalität, Einsätze oder Geld, kein Experten vermuten, keine Zeitleiste, keine Übertreibungen wie blitzschnell oder exponentiell, kurze Einblendungen mit höchstens drei Wörtern. Jeder Satz nennt das Ding, um das es geht, beim Namen. Titel: Was wäre, wenn alle Menschen gleichzeitig nett wären? Titelbild-Text: EINE MINUTE NETT",
-  "status": "rendered",
+  "status": "published",
   "created": 1794596991.1104543,
   "title": "Was wäre, wenn alle Menschen gleichzeitig nett wären?",
   "description": "Was passiert in deinem Körper, wenn plötzlich alle Menschen nett zueinander sind?\nWir spielen die verrückte Minute durch, von Biologie bis hin zur weltweiten Ansteckung.\nWürdest du die Minute durchhalten oder doch lieber ausrasten?",
@@ -2843,6 +2843,12 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "zernio_id": "6af7636e00276754620fb751",
+  "yt_status": "Zernio: published",
+  "yt_id": "PPyTYIyDwSU",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6af7636e00276754620fb751",
+  "error": null
  }
 ]
