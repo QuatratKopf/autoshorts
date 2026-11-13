@@ -66,12 +66,17 @@ AMBIENCE = {
     "fire": ["fire crackling", "campfire"], "space": ["space ambience drone", "dark ambient drone"],
     "underwater": ["underwater ambience", "underwater bubbles"], "cave": ["cave dripping ambience", "cave ambience"],
 }
-# Openverse-Musik je Stimmung (CC0/Public Domain) → Ordner music/<Video-Art>/
+# Openverse-Musik je Stimmung (CC0/Public Domain) → Ordner music/stimmung/<Stimmung>/ (render.pick_music wählt je Video-Art)
 MUSIC = {
-    "spannend": (["suspense cinematic", "tension ambient"], ["whatif", "mysterien", "storys"]),
-    "dunkel": (["dark ambient", "horror ambience music"], ["grusel"]),
-    "hell": (["happy ukulele", "upbeat acoustic", "cheerful piano"], ["fakten", "tiere", "lustig", "comedy"]),
+    "spannend": ["suspense cinematic", "tension ambient", "cinematic documentary"],
+    "dunkel": ["dark ambient", "horror ambience music"],
+    "hell": ["upbeat acoustic loop", "cheerful piano loop", "happy background music", "positive corporate"],
 }
+MOOD_OF = {"whatif": "spannend", "mysterien": "spannend", "storys": "spannend", "grusel": "dunkel",
+           "fakten": "hell", "tiere": "hell", "lustig": "hell", "comedy": "hell"}
+# Keine bekannten Lieder (auch wenn jemand sie als CC0 hochgeladen hat: die Komposition ist meist geschützt → Content-ID)
+NOT_MUSIC = re.compile(r"birthday|rainbow|cover|remix|karaoke|feat\.|song|lied|theme from|soundtrack|ost\b|tribute|melody of|"
+                       r"jingle bells|christmas|weihnacht|national anthem|hymne|vocal|singing|voice", re.I)
 OV = "https://api.openverse.org/v1/audio/"
 UA = {"User-Agent": "AutoShorts/1.0 (open source shorts generator)"}
 
@@ -212,7 +217,8 @@ def build_earshot(man):
                 sfx.setdefault(role, []).append({"file": f"earshot/{name}", "id": sid, "onset": onset, "peak": peak, "dur": dur})
                 n += 1
     man["sfx"] = sfx
-    man.setdefault("credits", []).append({"what": "Soundeffekte", "source": "earshot (Leon Lin)", "license": "MIT",
+    man["credits"] = [c for c in man.get("credits", []) if c.get("source") != "earshot (Leon Lin)"]
+    man["credits"].append({"what": "Soundeffekte", "source": "earshot (Leon Lin)", "license": "MIT",
                                           "url": "https://github.com/Leonxlnx/earshot"})
     log(f"earshot: {n} Takes in {len(sfx)} Rollen")
     return n
@@ -241,7 +247,8 @@ def ov_search(q, category, lo, hi, n=8):
             ms = it.get("duration")
             dur = (ms or 0) / 1000
             lic = str(it.get("license") or "").lower()
-            if it.get("url") and (ms is None or lo <= dur <= hi) and lic in ("cc0", "pdm") and it["id"] not in [o["id"] for o in out]:
+            big = (it.get("filesize") or 0) > 30_000_000
+            if it.get("url") and not big and (ms is None or lo <= dur <= hi) and lic in ("cc0", "pdm") and it["id"] not in [o["id"] for o in out]:
                 out.append(it)
         if len(out) >= n:
             break
@@ -277,11 +284,18 @@ def _credit(it, what):
 
 def build_openverse(man):
     """Holt Hintergrund-Geräusche und Musik von Openverse (nur CC0/Public Domain)."""
-    amb, credits = {}, [c for c in man.get("credits", []) if c.get("source") == "earshot (Leon Lin)"]
+    amb, credits = {}, [c for c in man.get("credits", []) if c.get("source") == "earshot (Leon Lin)"][:1]
+    credits += [c for c in man.get("credits", []) if str(c.get("what", "")).startswith("Musik") and c.get("file")
+                and (ROOT / c["file"]).exists()]                     # vorhandene Musik bleibt (wird nicht doppelt geholt)
     out = LIB / "openverse"
     out.mkdir(parents=True, exist_ok=True)
+    have = man.get("amb") or {}
     for role, queries in AMBIENCE.items():
-        got = []
+        got = [g for g in have.get(role, []) if (LIB / g["file"]).exists()]   # schon da: nicht neu laden
+        if len(got) >= 2:
+            amb[role] = got
+            credits += [c for c in man.get("credits", []) if c.get("what") == f"Geräusch {role}"]
+            continue
         for q in queries:
             if len(got) >= 2:
                 break
@@ -296,7 +310,7 @@ def build_openverse(man):
                         log(f"Openverse {role}: {str(e)[:100]}")
                         continue
                     got.append({"file": f"openverse/{dest.name}", "ov": it["id"], "dur": _measure(dest)[2]})
-                    credits.append(_credit(it, f"Geräusch {role}"))
+                    credits.append({**_credit(it, f"Geräusch {role}"), "file": f"assets/sfx/openverse/{dest.name}"})
             except Exception as e:  # noqa: BLE001
                 log(f"Openverse-Suche „{q}“: {str(e)[:120]}")
             time.sleep(2)
@@ -304,8 +318,10 @@ def build_openverse(man):
             amb[role] = got
     man["amb"] = amb
     music_n = 0
-    for mood, (queries, slugs) in MUSIC.items():
-        got = 0
+    for mood, queries in MUSIC.items():
+        d = MUSIC_DIR / "stimmung" / mood
+        d.mkdir(parents=True, exist_ok=True)
+        got = len(list(d.glob("*.ogg")))
         for q in queries:
             if got >= 3:
                 break
@@ -313,17 +329,17 @@ def build_openverse(man):
                 for it in ov_search(q, "music", 45, 600):
                     if got >= 3:
                         break
-                    for slug in slugs:
-                        (MUSIC_DIR / slug).mkdir(parents=True, exist_ok=True)
-                    dest = MUSIC_DIR / slugs[0] / f"openverse_{str(it['id'])[:8]}.ogg"
+                    if NOT_MUSIC.search(f"{it.get('title') or ''} {' '.join(t.get('name', '') for t in it.get('tags') or [] if isinstance(t, dict))}"):
+                        continue
+                    dest = d / f"openverse_{str(it['id'])[:8]}.ogg"
+                    if dest.exists():
+                        continue
                     try:
                         _fetch(it, dest, 75, -20)
                     except Exception as e:  # noqa: BLE001
                         log(f"Openverse-Musik: {str(e)[:100]}")
                         continue
-                    for slug in slugs[1:]:
-                        shutil.copy(dest, MUSIC_DIR / slug / dest.name)
-                    credits.append(_credit(it, f"Musik ({mood})"))
+                    credits.append({**_credit(it, f"Musik ({mood})"), "file": str(dest.relative_to(ROOT))})
                     got += 1
                     music_n += 1
             except Exception as e:  # noqa: BLE001

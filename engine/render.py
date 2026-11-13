@@ -285,7 +285,9 @@ def synth_music(work: Path, slug: str):
 
 
 def pick_music(slug):
-    for d in (MUSIC_DIR / slug, MUSIC_DIR):
+    """Eigene Musik der Video-Art (music/<art>/), sonst freie Musik passender Stimmung (music/stimmung/…), sonst music/."""
+    from .sound import MOOD_OF
+    for d in (MUSIC_DIR / slug, MUSIC_DIR / "stimmung" / MOOD_OF.get(slug, "hell"), MUSIC_DIR):
         if d.is_dir():
             files = [p for p in d.iterdir() if p.suffix.lower() in (".mp3", ".m4a", ".wav", ".ogg")]
             if files:

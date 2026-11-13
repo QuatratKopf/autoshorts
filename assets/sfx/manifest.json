@@ -643,12 +643,6 @@
    "url": "https://github.com/Leonxlnx/earshot"
   },
   {
-   "what": "Soundeffekte",
-   "source": "earshot (Leon Lin)",
-   "license": "MIT",
-   "url": "https://github.com/Leonxlnx/earshot"
-  },
-  {
    "what": "Geräusch rain",
    "title": "Soft Rain Ambience edlarez vsnr.wav",
    "creator": "visionear",
@@ -854,78 +848,6 @@
    "creator": "Kinoton",
    "license": "CC0 1.0",
    "url": "https://freesound.org/people/Kinoton/sounds/516566",
-   "source": "freesound"
-  },
-  {
-   "what": "Musik (spannend)",
-   "title": "Thriller Documentary Pack #1",
-   "creator": "dekstromoramid",
-   "license": "CC0 1.0",
-   "url": "https://freesound.org/people/dekstromoramid/sounds/435370",
-   "source": "freesound"
-  },
-  {
-   "what": "Musik (spannend)",
-   "title": "Cinematic Dramatic Buildup",
-   "creator": "BurghRecords",
-   "license": "CC0 1.0",
-   "url": "https://freesound.org/people/BurghRecords/sounds/456102",
-   "source": "freesound"
-  },
-  {
-   "what": "Musik (spannend)",
-   "title": "Risset Horror.wav",
-   "creator": "MrFossy",
-   "license": "CC0 1.0",
-   "url": "https://freesound.org/people/MrFossy/sounds/347865",
-   "source": "freesound"
-  },
-  {
-   "what": "Musik (dunkel)",
-   "title": "Dark Ambient backgrounding 001",
-   "creator": "steaq",
-   "license": "CC0 1.0",
-   "url": "https://freesound.org/people/steaq/sounds/238251",
-   "source": "freesound"
-  },
-  {
-   "what": "Musik (dunkel)",
-   "title": "Dark Ambient 1",
-   "creator": "strathamer",
-   "license": "CC0 1.0",
-   "url": "https://freesound.org/people/strathamer/sounds/415891",
-   "source": "freesound"
-  },
-  {
-   "what": "Musik (dunkel)",
-   "title": "Dark Ambient 2",
-   "creator": "strathamer",
-   "license": "CC0 1.0",
-   "url": "https://freesound.org/people/strathamer/sounds/415890",
-   "source": "freesound"
-  },
-  {
-   "what": "Musik (hell)",
-   "title": "Blue Sky.mp3",
-   "creator": "Sergmusic",
-   "license": "CC0 1.0",
-   "url": "https://freesound.org/people/Sergmusic/sounds/639933",
-   "source": "freesound"
-  },
-  {
-   "what": "Musik (hell)",
-   "title": "HAPPY BIRTHDAY TO YOU.mp3",
-   "creator": "WKG-518",
-   "license": "CC0 1.0",
-   "url": "https://freesound.org/people/WKG-518/sounds/574342",
-   "source": "freesound"
-  },
-  {
-   "what": "Musik (hell)",
-   "title": "overtherainbow_ukulele_120.wav",
-   "creator": "SymoneDB",
-   "license": "CC0 1.0",
-   "url": "https://freesound.org/people/SymoneDB/sounds/702599",
    "source": "freesound"
   }
  ],

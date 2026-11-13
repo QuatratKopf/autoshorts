@@ -3,7 +3,6 @@
 Alle Klänge sind frei nutzbar (MIT bzw. CC0/Public Domain). Automatisch erstellt.
 
 - Soundeffekte: earshot (Leon Lin) (MIT) https://github.com/Leonxlnx/earshot
-- Soundeffekte: earshot (Leon Lin) (MIT) https://github.com/Leonxlnx/earshot
 - Geräusch rain: Soft Rain Ambience edlarez vsnr.wav von visionear (CC0 1.0) https://freesound.org/people/visionear/sounds/573335
 - Geräusch rain: light rain ambience von seth-m (CC0 1.0) https://freesound.org/people/seth-m/sounds/270349
 - Geräusch storm: Thunderstorm with heavy rain2.wav von Audeption (CC0 1.0) https://freesound.org/people/Audeption/sounds/425173
@@ -30,12 +29,3 @@ Alle Klänge sind frei nutzbar (MIT bzw. CC0/Public Domain). Automatisch erstell
 - Geräusch underwater: Deep Sea Ambience von jhumbucker (CC0 1.0) https://freesound.org/people/jhumbucker/sounds/193822
 - Geräusch cave: Dripping water von Electroviolence (CC0 1.0) https://freesound.org/people/Electroviolence/sounds/234554
 - Geräusch cave: Dark Dungeon Ambience von Kinoton (CC0 1.0) https://freesound.org/people/Kinoton/sounds/516566
-- Musik (spannend): Thriller Documentary Pack #1 von dekstromoramid (CC0 1.0) https://freesound.org/people/dekstromoramid/sounds/435370
-- Musik (spannend): Cinematic Dramatic Buildup von BurghRecords (CC0 1.0) https://freesound.org/people/BurghRecords/sounds/456102
-- Musik (spannend): Risset Horror.wav von MrFossy (CC0 1.0) https://freesound.org/people/MrFossy/sounds/347865
-- Musik (dunkel): Dark Ambient backgrounding 001 von steaq (CC0 1.0) https://freesound.org/people/steaq/sounds/238251
-- Musik (dunkel): Dark Ambient 1 von strathamer (CC0 1.0) https://freesound.org/people/strathamer/sounds/415891
-- Musik (dunkel): Dark Ambient 2 von strathamer (CC0 1.0) https://freesound.org/people/strathamer/sounds/415890
-- Musik (hell): Blue Sky.mp3 von Sergmusic (CC0 1.0) https://freesound.org/people/Sergmusic/sounds/639933
-- Musik (hell): HAPPY BIRTHDAY TO YOU.mp3 von WKG-518 (CC0 1.0) https://freesound.org/people/WKG-518/sounds/574342
-- Musik (hell): overtherainbow_ukulele_120.wav von SymoneDB (CC0 1.0) https://freesound.org/people/SymoneDB/sounds/702599
