@@ -1,5 +1,5 @@
 {
- "updated": 1794589569.4775627,
+ "updated": 1794590318.4534612,
  "enough": true,
  "counted": 7,
  "total": 9,
@@ -18,10 +18,10 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 4,
-   "avg_views": 1296,
+   "avg_views": 1314,
    "avg_likes": 29.2,
-   "like_rate": 2.26,
-   "avg_score": 1743
+   "like_rate": 2.23,
+   "avg_score": 1761
   },
   {
    "slug": "fakten",
@@ -29,7 +29,7 @@
    "n": 2,
    "avg_views": 976,
    "avg_likes": 30.5,
-   "like_rate": 3.13,
+   "like_rate": 3.12,
    "avg_score": 1448
   }
  ],
@@ -44,7 +44,7 @@
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1353 Aufrufe, 3.92 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 976 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2122 zu 702 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2137 zu 702 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -63,11 +63,11 @@
    "id": 54,
    "title": "Was passiert, wenn die Schwerkraft für fünf Sekunden verschwindet?",
    "category": "whatif",
-   "views": 1612,
+   "views": 1684,
    "likes": 45,
    "comments": 0,
    "shares": 0,
-   "score": 2287
+   "score": 2359
   },
   {
    "id": 62,
@@ -115,11 +115,11 @@
    "id": 58,
    "title": "Wie aus einer Gaming-Bude der wertvollste Tech-Gigant wurde",
    "category": "fakten",
-   "views": 584,
+   "views": 585,
    "likes": 16,
    "comments": 0,
    "shares": 0,
-   "score": 824
+   "score": 825
   },
   {
    "id": 44,
