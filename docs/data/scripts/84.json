@@ -1,0 +1,469 @@
+{
+ "title": "Was wäre, wenn alle Menschen gleichzeitig nett wären?",
+ "scenes": [
+  {
+   "text": "Acht Milliarden Menschen sind plötzlich eine Minute lang absolut nett.",
+   "see": "Acht Milliarden Menschen sind plötzlich eine Minute lang absolut nett.",
+   "place": "worldmap",
+   "time": "day",
+   "mood": "calm",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 8,
+    "unit": "MRD. MENSCHEN"
+   }
+  },
+  {
+   "text": "Und diese sechzig Sekunden verändern sofort deinen eigenen Körper.",
+   "see": "Du stehst in deinem Zimmer und bemerkst die Veränderung.",
+   "place": "bedroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "clock"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 60,
+    "unit": "SEKUNDEN"
+   }
+  },
+  {
+   "text": "Im ersten Schritt passiert im Körper etwas Bemerkenswertes, sobald echte Freundlichkeit einsetzt.",
+   "see": "Im ersten Schritt passiert im Körper etwas Bemerkenswertes.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "ERSTENS"
+   }
+  },
+  {
+   "text": "Freundlichkeit senkt sofort das Cortisol im Blut und lässt das Hormon Oxytocin steigen.",
+   "see": "Freundlichkeit senkt sofort das Cortisol im Blut.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Dein Puls wird dabei ruhiger und das gesamte Nervensystem schaltet auf Erholung um.",
+   "see": "Dein Puls wird dabei ruhiger und das Nervensystem schaltet auf Erholung.",
+   "place": "bedroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_herz"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Im zweiten Schritt schaltet sich das Gehirn ein, wenn du aktiv jemandem hilfst oder etwas abgibst.",
+   "see": "Im zweiten Schritt schaltet sich das Gehirn ein.",
+   "place": "office",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "ZWEITENS"
+   }
+  },
+  {
+   "text": "Dabei springt im Kopf das Belohnungszentrum an, exakt so wie beim Genuss von süßer Schokolade.",
+   "see": "Im Kopf springt das Belohnungszentrum an wie bei Schokolade.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "schokolade"
+    }
+   ],
+   "shot": "insert",
+   "mood": "happy",
+   "overlay": {
+    "type": "card",
+    "text": "WIE SCHOKOLADE"
+   }
+  },
+  {
+   "text": "Im Büro teilt der Kollege plötzlich freiwillig sein allerletztes Stück Kuchen mit dir.",
+   "see": "Im Büro teilt der Kollege plötzlich freiwillig sein Kuchenstück mit dir.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "kuchen"
+    }
+   ],
+   "actors": [
+    {
+     "id": "kollege",
+     "speaks": false,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "lib_kuchen",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Im dritten Schritt setzt eine Ansteckung ein, die sich rasch weiterverbreitet.",
+   "see": "Im dritten Schritt setzt eine Ansteckung ein.",
+   "place": "street",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "crowd": "walk",
+   "overlay": {
+    "type": "tag",
+    "text": "DRITTENS"
+   }
+  },
+  {
+   "text": "Wer echte Freundlichkeit am eigenen Leib erlebt, gibt diese positive Energie sofort an andere weiter.",
+   "see": "Wer Freundlichkeit erlebt, gibt diese Energie an andere weiter.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_kuchen",
+     "pos": 800
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "happy",
+   "crowd": "walk"
+  },
+  {
+   "text": "Solche Reaktionen zeigen, dass sich dieses Verhalten auf bis zu drei Personen ausweitet.",
+   "see": "Solche Reaktionen zeigen, dass sich dieses Verhalten auf bis zu drei Personen ausweitet.",
+   "place": "park",
+   "time": "day",
+   "shot": "event",
+   "mood": "happy",
+   "crowd": "watch",
+   "overlay": {
+    "type": "card",
+    "text": "BIS ZU 3"
+   }
+  },
+  {
+   "text": "Autofahrer lassen plötzlich entspannt andere Autos an der Kreuzung in den Vorrang.",
+   "see": "Autofahrer lassen plötzlich andere Autos an der Kreuzung vor.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "car"
+    }
+   ],
+   "shot": "event",
+   "mood": "calm",
+   "crowd": "walk"
+  },
+  {
+   "text": "Der nette Nachbar von nebenan hält dir im Hausflur lächelnd die schwere Eingangstür auf.",
+   "see": "Der nette Nachbar hält dir im Hausflur die schwere Eingangstür auf.",
+   "place": "hallway",
+   "time": "day",
+   "props": [
+    {
+     "type": "tuer"
+    },
+    {
+     "type": "door"
+    }
+   ],
+   "actors": [
+    {
+     "id": "kollege",
+     "speaks": false,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Niemand drängelt an der Kasse im Supermarkt oder regt sich über Kleinigkeiten im Alltag auf.",
+   "see": "Niemand drängelt an der Kasse im Supermarkt oder regt sich auf.",
+   "place": "supermarket",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Die hektische Welt atmet auf und zeigt plötzlich eine völlig unerwartete, sanfte Seite.",
+   "see": "Die hektische Welt atmet auf und zeigt eine sanfte Seite.",
+   "place": "park",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "idle",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "crowd": "cheer"
+  },
+  {
+   "text": "Nach genau sechzig Sekunden piept die digitale Stoppuhr und die magische Minute ist vorbei.",
+   "see": "Nach genau sechzig Sekunden piept die Stoppuhr und die Minute ist vorbei.",
+   "place": "bedroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "stoppuhr"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "number",
+    "value": "60",
+    "label": "SEKUNDEN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Doch die tiefen biologischen Spuren im Körper bleiben auch danach noch eine ganze Weile aktiv.",
+   "see": "Doch die tiefen biologischen Spuren bleiben aktiv.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "herz"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Weil echte Freundlichkeit wie ein Virus funktioniert, der sich ganz von alleine weiterverbreitet.",
+   "see": "Weil echte Freundlichkeit wie ein Virus funktioniert, der sich weiterverbreitet.",
+   "place": "worldmap",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "happy"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Probier es heute noch aus und folg für mehr spannende Einblicke.",
+   "see": "Probier es heute noch aus und folg für mehr spannende Einblicke.",
+   "place": "bedroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "choice",
+    "a": "NETT SEIN",
+    "b": "ABWARTEN"
+   }
+  }
+ ]
+}
