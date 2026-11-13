@@ -1,8 +1,8 @@
 {
- "updated": 1794583666.127761,
+ "updated": 1794585944.5162656,
  "enough": true,
- "counted": 6,
- "total": 7,
+ "counted": 7,
+ "total": 8,
  "needed": 6,
  "categories": [
   {
@@ -26,25 +26,25 @@
   {
    "slug": "fakten",
    "name": "💡 Fakten",
-   "n": 1,
-   "avg_views": 580,
-   "avg_likes": 15.0,
-   "like_rate": 2.59,
-   "avg_score": 805
+   "n": 2,
+   "avg_views": 978,
+   "avg_likes": 30.0,
+   "like_rate": 3.07,
+   "avg_score": 1442
   }
  ],
  "weights": {
-  "fakten": 1.2,
+  "fakten": 0.84,
   "storys": 1.2,
   "mysterien": 1.2,
   "tiere": 1.2,
-  "whatif": 1.05,
+  "whatif": 1.01,
   "comedy": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1356 Aufrufe, 3.91 % Likes).",
-  "Schwächste Kategorie: 💡 Fakten (Ø 580 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2116 zu 702 Punkte)."
+  "Schwächste Kategorie: 💡 Fakten (Ø 978 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2109 zu 702 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -80,6 +80,16 @@
    "score": 2151
   },
   {
+   "id": 75,
+   "title": "3 Tier-Superkräfte, die unmöglich wirken!",
+   "category": "fakten",
+   "views": 1375,
+   "likes": 45,
+   "comments": 1,
+   "shares": 0,
+   "score": 2080
+  },
+  {
    "id": 38,
    "title": "Was passiert, wenn Drohnen deinen Alltag komplett überwachen?",
    "category": "whatif",
@@ -88,16 +98,6 @@
    "comments": 1,
    "shares": 0,
    "score": 1404
-  },
-  {
-   "id": 58,
-   "title": "Wie aus einer Gaming-Bude der wertvollste Tech-Gigant wurde",
-   "category": "fakten",
-   "views": 580,
-   "likes": 15,
-   "comments": 0,
-   "shares": 0,
-   "score": 805
   }
  ],
  "flop": [
