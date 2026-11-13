@@ -479,6 +479,26 @@ def main():
         if check(f"Regie Drehbuch {n}", lambda: stage.direct(scenes, times, "Drohnen überwachen", rnd.choice(["", "grusel"]), rnd.choice(["", "neon"])) or True):
             for i, sc in enumerate(scenes):
                 check(f"Regie Drehbuch {n} Szene {i}: {str(sc)[:300]}", lambda: frame(sc, t=rnd.choice((0.0, 1.0, 2.9))))
+    def _bugs():                                                 # „Videospiel-Bugs“: kein Käfer im Bild, keine Strichliste, Programm-Absturz ist kein Sturz
+        from .. import writer
+        from . import library
+        it = library.clean({"name": "insekt", "aliases": ["käfer", "bug", "gift"], "height_m": 0.1,
+                            "shapes": [{"t": "ellipse", "cx": 200, "cy": 300, "rx": 80, "ry": 100, "c": "#cc3333"}, {"t": "rect", "x": 150, "y": 200, "w": 100, "h": 60, "c": "#222222"}]})
+        assert it and it["aliases"] == ["käfer"], it
+        T = ["Drei Videospiel-Bugs, die unser Leben ruinieren würden.", "Einer davon macht deinen Einkaufsbeutel überflüssig."] \
+            + [f"{o} Bug: Etwas passiert." for o in ("Zweiter", "Dritter", "Vierter", "Fünfter", "Sechster", "Siebter")]
+        assert writer.list_trouble({"scenes": [{"text": t} for t in T]}), "Strichliste nicht erkannt"
+        assert not writer.list_trouble({"scenes": [{"text": t} for t in ["Drei Tier-Superkräfte, die unmöglich sind.", "Die letzte rettet Leben.", "Nummer eins: der Krebs.",
+                                                                         "Er knallt beim vierten Versuch.", "Zweitens die Qualle.", "Die dritte Kraft ist die stärkste."]]})
+        js = writer.polish({"scenes": [{"text": "x", "overlay": {"type": "counter", "value": 99, "unit": "99 STÜCK"}}]})
+        assert js["scenes"][0]["overlay"]["unit"] == "STÜCK", js
+        sc = [{"text": "Die Schwerkraft setzt kurz aus und du schwebst.", "place": "street", "actors": [{"id": "du", "action": "float"}]},
+              {"text": "Das Spiel stürzt ab und du wachst in deinem Bett auf.", "place": "bedroom", "actors": [{"id": "du", "action": "sit"}]},
+              {"text": "Folg für mehr.", "place": "livingroom", "actors": [{"id": "du", "action": "talk"}]}]
+        stage.direct(sc, [(0, 3), (3, 6), (6, 9)], "Videospiel-Bugs im Alltag", "whatif")
+        assert not sc[1].get("float"), sc[1]
+        assert not any("insekt" in str(p_) for s_ in sc for p_ in (s_.get("props") or [])), sc
+    check("Bugs: kein Käfer, keine Strichliste, Absturz", _bugs)
     check("Titelbild", lambda: stage.cover({"place": "street", "props": ["meteor"], "actor": "du"}, {"du": {}}, "/tmp/_selftest_cover.jpg"))
     check("Titelbild kaputt", lambda: stage.cover({"place": None, "props": [None, 3], "actor": None, "backdrop": "x"}, {}, "/tmp/_selftest_cover.jpg"))
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")

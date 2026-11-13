@@ -1574,7 +1574,7 @@ def direct(scenes, times, topic="", style="", look=""):
                     and not _re0.search(FLOAT_RE, txt_f.replace("durch die luft", " ").replace("in der luft", " ")):
                 m_fl = None                               # Laser, Licht, Rauch, Schall „durch die Luft“: da schwebt kein Mensch und kein Möbel
             floats_now = bool(m_fl)
-            if _re0.search(DROP_RE, txt_f) and (_re0.search(GRAVITY_BACK_RE, txt_f) or (float_seen and not floats_now)):
+            if _re0.search(DROP_RE, _re0.sub(SOFT_CRASH_RE, " ", txt_f)) and (_re0.search(GRAVITY_BACK_RE, txt_f) or (float_seen and not floats_now)):
                 fl = "drop"                               # „… während Möbel schwerelos durcheinanderfliegen“ ist noch kein Absturz
             elif floats_now or ((zero_topic or zero_g) and any(str(a.get("action") or "") in ("float", "schweben") for a in acts_f)):
                 fl = "float"
@@ -2162,6 +2162,8 @@ FLOAT_RE = (r"schwerelos|(ohne|keine|null) (schwerkraft|gravitation|erdanziehung
 NOT_BODIES_RE = r"laser|\blicht|strahl|leucht|schall|geräusch|\bton\b|töne|geruch|\bduft|rauch|qualm|staub|funk|signal|viren|virus|keime|pollen|wellen\b"
 DROP_RE = (r"kracht|krachen|aufprall|prall\w* .{0,70}(boden|erde|asphalt|straße|\bauf\b)|knall\w* .{0,70}(boden|erde|asphalt|straße|pflaster)|"
            r"\b(schlägt|schlagen) .{0,30}(boden|asphalt|\bauf\b)|(fällt|fällst|fallen|stürzt|stürzen) .{0,50}(boden|herunter|herab|hinab|zurück|\bab\b)|plumps")
+# „Das Spiel stürzt ab“, „der Server stürzt ab“: ein Programm-Absturz – da fällt niemand zu Boden
+SOFT_CRASH_RE = r"(spiel|programm|app|computer|system|server|rechner|handy|browser|konsole|\bpc|software|internet|simulation|welt|matrix)\w* (stürzt|stürzen) .{0,20}\bab\b|(stürzt|stürzen) (das|dein|unser|mein) (spiel|system|programm|handy)\w* .{0,20}\bab\b"
 GRAVITY_BACK_RE = r"(schwerkraft|gravitation|erdanziehung\w*)\w* .{0,60}(wieder|zurück|setzt .{0,12}ein|schaltet sich .{0,12}ein|kehrt)"
 ZERO_G_TOPIC = r"schwerkraft|schwerelos|gravitation|erdanziehung"
 FLOAT_THINGS = ("lib_stuhl", "lib_kaffeetasse", "box", "clock", "lib_schuh", "glass")       # was in einem Zimmer herumtreibt, wenn nichts Bestimmtes genannt ist
@@ -2407,12 +2409,16 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
         bg = graphics.tint(bg)
     shot = "close" if shot == "close" and not has_ov and not moving and not props and actors and not scene.get("float") else ""
     ov_tall = str((scene.get("overlay") or {}).get("type") or "") in TALL_OV if has_ov else False
+    ov_kind = str((scene.get("overlay") or {}).get("type") or "") if has_ov else ""
+    if ov_tall:                               # Liste/Notiz/Handy füllt das obere Bild: eine Sprechblase stünde halb dahinter
+        for a_o in actors:
+            a_o["say"] = ""
     lead = next((a for a in actors if a["speaks"]), actors[0] if actors else None)
     if lead and not lead["kind"]:     # Gesten der Hauptfigur passend zu den Wörtern dieser Szene
         lead["gplan"] = gesture_plan([w for w in words if t0 - 0.05 <= w[1] < t0 + dur], t0, lead.get("lips"))
     cam = {"dir": 1 if index % 2 == 0 else -1, "drift": 1 if index % 3 != 2 else -1,
            "fx": (lead["x1"] if lead else (props[0][1] if props else 540)),
-           "punch": None if (shot == "close" or moving or ov_tall or place in MAPS or not (actors or props)) else _punch_time(scene, words, t0, dur)}
+           "punch": None if (shot == "close" or moving or ov_tall or ov_kind in ("counter", "bar", "thermo") or place in MAPS or not (actors or props)) else _punch_time(scene, words, t0, dur)}
     if actors and shot != "close" and not ov_tall and place not in MAPS and not scene.get("float") and str(scene.get("shot") or "") != "event":
         xs = [a["x1"] for a in actors] + [a["x0"] for a in actors if -100 < a["x0"] < W + 100]
         xs += [x for k, x in props if extras.prop_fit(k) and 0 <= x <= W]   # auch der Gegenstand, von dem der Satz spricht, bleibt ganz im Bild

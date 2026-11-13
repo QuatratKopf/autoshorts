@@ -83,10 +83,17 @@ def clean(item):
     if max(ys) - min(ys) < 40 or max(xs) - min(xs) < 20:
         return None
     aliases = [re.sub(r"[^a-zäöüß0-9 \-]", "", a.lower()).strip()[:30] for a in (item.get("aliases") if isinstance(item.get("aliases"), list) else []) if isinstance(a, str)]
+    aliases = [a for a in aliases if a not in FALSE_FRIENDS]       # „Bug“ ist im deutschen Satz ein Software-Fehler, kein Käfer
     return {"name": name, "aliases": [a for a in aliases if len(a) > 1 and a != name][:6],
             "height_m": _n(item.get("height_m"), 0.1, 80, 1.0), "sky": item.get("sky") is True,
             "anim": item.get("anim") if item.get("anim") in ("bob", "pulse") else "none",
             "shapes": shapes, "shift": BOX - max(ys), "mid": (min(xs) + max(xs)) / 2}
+
+
+# Englische Wörter, die im deutschen Sprechertext etwas ganz anderes bedeuten: nie als Alias eines Gegenstands (sonst steht bei
+# „Videospiel-Bugs“ in jeder Szene ein Marienkäfer, bei „Gift“ ein Geschenk, bei „Wand“ ein Zauberstab).
+FALSE_FRIENDS = {"bug", "bugs", "gift", "rock", "fan", "chef", "kind", "mist", "tag", "brief", "art", "list", "bad",
+                 "hell", "die", "lack", "pest", "taste", "toll", "war", "rat", "glitch", "glitches", "level", "boss", "fehler"}
 
 
 def _drawer(item):

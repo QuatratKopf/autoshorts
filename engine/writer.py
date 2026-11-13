@@ -31,6 +31,10 @@ Regeln für die Sprechertexte:
   3. Höhepunkt in der Mitte: die verblüffendste Zahl, der größte Schreck oder der beste Witz – danach kurz Luft holen lassen.
   4. Schluss löst das Versprechen aus dem Hook ein (Auflösung, Pointe) – kurz, ohne Zusammenfassung. Am besten passt der letzte
      Satz so, dass das Video von vorn wieder Sinn ergibt.
+- LISTEN („Drei Dinge, die …“): genau so viele Punkte wie im ersten Satz angekündigt, höchstens fünf. Jeder Punkt bekommt zwei bis
+  vier Sätze: was passiert, warum, welche Folge oder welcher Witz daraus entsteht. Niemals zehn oder zwanzig Punkte mit je einem Satz
+  herunterzählen. Nur der erste Satz eines Punkts darf mit „Nummer zwei“/„Zweitens“ beginnen – nicht jeder Satz mit „Erster …:“, „Zweiter …:“.
+  Jeder Satz muss für sich Sinn ergeben und zum Thema gehören; lieber ein Punkt weniger als ein Satz, den niemand versteht.
 - Lehrreich UND unterhaltsam: In jedem Video stecken mindestens drei handfeste, überprüfbare Dinge, die man danach weiß
   (Zahl, Ursache, Vergleich aus dem Alltag: „so schwer wie zwei Autos“). Kein Füllsatz, keine Wiederholung, keine Floskel.
 - So wenige Wörter wie möglich: ein Gedanke pro Satz. Was das Bild zeigt, muss der Sprecher nicht beschreiben – das Bild erzählt
@@ -452,6 +456,9 @@ def polish(js):
             sc["text"] = re.sub(r"(?i)(zwei|drei|vier|fünf|sieben|acht|neun)s(hundert|tausend)", r"\1\2", sc["text"])   # „viertausendviershundert“
             sc["text"] = re.sub(r"(?i)\b([a-zäöüß]*tausend) ((?:ein|zwei|drei|vier|fünf|sechs|sieben|acht|neun)hundert)", r"\1\2", sc["text"])   # „viertausend siebenhundert“: eine Zahl
         for box in (sc.get("overlay"), sc.get("graphic")):
+            if isinstance(box, dict) and box.get("type") == "counter" and isinstance(box.get("unit"), str):
+                box["unit"] = re.sub(r"^\s*[\d.,]+\s*", "", box["unit"])     # „99“ + „99 STÜCK“ stand als „99 99 STÜCK“ im Bild
+        for box in (sc.get("overlay"), sc.get("graphic")):
             if isinstance(box, dict):
                 for k in _LABEL_KEYS:
                     if isinstance(box.get(k), str):
@@ -462,6 +469,35 @@ def polish(js):
     if isinstance(th, dict) and isinstance(th.get("text"), str):
         th["text"] = _DENGLISH_RE.sub(lambda m: _case_like(m.group(0), _DENGLISH[m.group(0).lower()]), th["text"])
     return js
+
+
+_NUMW = {"zwei": 2, "drei": 3, "vier": 4, "fünf": 5, "sechs": 6, "sieben": 7, "acht": 8, "neun": 9, "zehn": 10}
+_ORD = {"erste": 1, "zweite": 2, "dritte": 3, "vierte": 4, "fünfte": 5, "sechste": 6, "siebte": 7, "siebente": 7, "achte": 8, "neunte": 9, "zehnte": 10,
+        "elfte": 11, "zwölfte": 12, "dreizehnte": 13, "vierzehnte": 14, "fünfzehnte": 15, "sechzehnte": 16, "siebzehnte": 17, "achtzehnte": 18,
+        "neunzehnte": 19, "zwanzigste": 20}
+_ORD_RE = re.compile(r"(?i)\b(" + "|".join(sorted(_ORD, key=len, reverse=True)) + r")[rsnm]?\b")
+_ORD_START = re.compile(r"(?i)^\s*(?:(?:und|aber|dann)\s+)?(?:(?:der|die|das)\s+)?(?:" + "|".join(sorted(_ORD, key=len, reverse=True))
+                        + r")[rsnm]?\s+[\wäöüß-]+\s*[:,.–-]|^\s*(?:nummer|punkt|platz|regel|fakt)\s+\w+\s*[:,.–-]|^\s*(?:erstens|zweitens|drittens|viertens|fünftens)\b")
+
+
+def list_trouble(js):
+    """Stimmt die Aufzählung? Meldet (als kurzen Satz für die Text-KI), wenn mehr Punkte heruntergezählt werden als angekündigt
+    („Drei Bugs …“ und dann „Neunzehnter Bug“), wenn mehr als fünf Punkte gezählt werden oder fast jeder Satz mit einer
+    Ordnungszahl beginnt – so ein Video ist eine Strichliste ohne Erklärung. Sonst None."""
+    texts = [str(s.get("text") or "") for s in js.get("scenes", []) if isinstance(s, dict)]
+    if len(texts) < 4:
+        return None
+    m0 = re.match(r"\W*(?:(?:die|diese|hier sind|das sind|es gibt)\s+)?(" + "|".join(_NUMW) + r"|\d{1,2})\b", texts[0].lower())   # „Drei Bugs, die …“
+    said = (_NUMW.get(m0.group(1)) or (int(m0.group(1)) if m0.group(1).isdigit() and 2 <= int(m0.group(1)) <= 10 else None)) if m0 else None
+    top = max([_ORD[m.group(1).lower()] for t in texts for m in _ORD_RE.finditer(" ".join(t.split()[:3]))] or [0])   # nur am Satzanfang: „beim dritten Versuch“ zählt nicht
+    starts = sum(1 for t in texts if _ORD_START.search(t))
+    if said and top > said:
+        return f"Der Einstieg kündigt {said} Punkte an, gezählt wird aber bis {top}."
+    if top > 5:
+        return f"Es werden {top} Punkte heruntergezählt – höchstens fünf, dafür jeder richtig erklärt."
+    if starts > max(5, len(texts) // 2):
+        return f"{starts} von {len(texts)} Sätzen beginnen mit einer Nummerierung – jeder Punkt braucht zwei bis vier Sätze Erklärung."
+    return None
 
 
 def spoken_words(js):
@@ -947,6 +983,24 @@ def write_script(cat: dict, topic: str, trend=None, source=None) -> tuple[dict, 
                 break
             if n_words >= words * 0.88:
                 break
+    for attempt in range(2):                             # Strichliste statt Geschichte („Drei Bugs“ → „Neunzehnter Bug“): neu schreiben lassen
+        trouble = list_trouble(js)
+        if not trouble:
+            break
+        ai.log(f"Aufzählung stimmt nicht ({trouble}) – lasse das Drehbuch neu schreiben")
+        try:
+            js2, provider = ai.chat_json(SYSTEM, user + "\n\nACHTUNG: Dein letzter Entwurf war eine Strichliste. " + trouble
+                                         + " Schreibe das Drehbuch neu, gleich lang: genau so viele Punkte wie im ersten Satz angekündigt "
+                                         "(höchstens fünf), jeder Punkt mit zwei bis vier Sätzen (was passiert, warum, Folge oder Witz). "
+                                         "Nur der erste Satz eines Punkts nennt die Nummer. Jeder Satz ergibt für sich Sinn.", 0.8)
+            n2 = sum(len(str(x.get("text", "")).split()) for x in js2.get("scenes", []) if isinstance(x, dict))
+            if n2 >= words * 0.75:
+                js, n_words = js2, n2
+        except Exception as e:  # noqa: BLE001
+            ai.log(f"Neu schreiben nicht möglich ({e})")
+            break
+    if list_trouble(js) and not str(list_trouble(js)).startswith("Der Einstieg"):
+        raise ai.ProviderError("Drehbuch ist eine Strichliste (" + str(list_trouble(js)) + ") – Video wird nicht gebaut")
     for attempt in range(2):                             # fremde Schriftzeichen mitten im Wort: das Drehbuch ist verdorben → neu schreiben lassen
         bad = foreign_in(js)
         if not bad:

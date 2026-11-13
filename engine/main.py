@@ -104,11 +104,16 @@ def find_trend(trend_id):
     return None
 
 
+# Begriffe, die kein Gegenstand sind: Dafür wird nichts „gelernt“ (aus „Bug“ wurde sonst ein Käfer in jeder Szene).
+NO_THINGS = {"bug", "bugs", "glitch", "glitches", "fehler", "regel", "regeln", "spielregel", "spielregeln", "physik", "schwerkraft", "zeit",
+             "idee", "problem", "trick", "system", "update", "spiel", "videospiel", "level", "leben", "alltag", "realität", "inventar"}
+
+
 def known_thing(word):
     """Kann die Engine das zeichnen? (Requisite, Gegenstand in der Hand, Wesen, Ort, Landschafts-Baustein, gelernte Bibliothek)"""
     from .toon import extras, places, stage
     w = str(word or "").lower().strip()
-    if len(w) < 3:
+    if len(w) < 3 or w in NO_THINGS or any(w.endswith(x) for x in ("-bug", "-bugs", "bugs", "glitch", "fehler", "regel", "regeln")):
         return True
     pool = (set(extras.PROPS) | set(extras.PROP_ALIASES) | set(extras.HELD) | set(extras.CREATURES) | set(places.PLACES) | set(places.ALIASES)
             | set(places.OUTDOOR_SPECS) | set(places.EL_ALIASES) | set(places.BACK) | set(places.MID) | set(places.FRONT_EL)
@@ -273,11 +278,13 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, 
             wps_p = wps_p if 1.6 <= wps_p <= 3.6 else 2.5
             n_plan = writer.spoken_words(plan["script"])
             min_p = float(cfg("min_seconds") or 0)
-            if min_p and n_plan / wps_p < min_p - 5:      # viel zu kurz: sonst stünde am Ende sekundenlang ein stummes Standbild
-                log(f"Vorbereitetes Drehbuch ist zu kurz ({n_plan} Wörter ≈ {n_plan / wps_p:.0f} s) – schreibe es zum selben Thema neu")
+            trouble_p = writer.list_trouble(plan["script"])
+            if trouble_p or (min_p and n_plan / wps_p < min_p - 5):   # viel zu kurz (sonst stummes Standbild am Ende) oder Strichliste statt Geschichte
+                log((f"Vorbereitetes Drehbuch ist eine Strichliste ({trouble_p})" if trouble_p else
+                     f"Vorbereitetes Drehbuch ist zu kurz ({n_plan} Wörter ≈ {n_plan / wps_p:.0f} s)") + " – schreibe es zum selben Thema neu")
                 try:
                     _t, _tr, fresh, prov = draft(cat, topic, trend, v)
-                    if writer.spoken_words(fresh) > n_plan:
+                    if trouble_p or writer.spoken_words(fresh) > n_plan:
                         plan = {**plan, "script": fresh, "provider": prov, "needs": missing_things(fresh, topic) if fresh.get("toon") else []}
                 except Exception as e:  # noqa: BLE001
                     log(f"Neu schreiben nicht möglich ({e}) – nehme das vorbereitete Drehbuch")
