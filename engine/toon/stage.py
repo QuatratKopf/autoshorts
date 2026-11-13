@@ -1412,6 +1412,9 @@ def direct(scenes, times, topic="", style="", look=""):
                 a["action"] = "talk" if a.get("speaks") else "idle"
             if str(a.get("action") or "").lower() in ("dance", "jump") and mood in ("panic", "tense", "scary", "sad"):
                 a["action"] = "look_around"
+        if len(acts) == 1 and not acts[0].get("kind") and _re.search(LYING_RE, txt) and not _re.search(r"\bbett|sofa|couch|strand|wiese|liege\b|schläf|schlaf", txt):
+            acts[0]["action"] = "fall"                    # „… und du liegst platt auf dem Boden“: die Figur liegt – sie steht nicht lächelnd in Großaufnahme da
+            sc["shot"] = "" if sc.get("shot") == "close" else sc.get("shot")
         import re as _re
         txt = str(sc.get("text") or "").lower()
         if _re.search(r"stromausfall|\bstrom\b.{0,40}\b(aus|weg|zusammen)\b|ohne strom|kein strom|blackout|lichter gehen aus|stockdunkel|finsternis|dunkelheit", txt):
@@ -1881,6 +1884,7 @@ def _topic_creature(scenes, topic):
                                 "pos": 760 if humans else "center", "emote": "", "say": "", "hold": "", "facing": ""}]
 
 
+LYING_RE = r"\b(liegst|liegt|liegen)\b.{0,40}\b(platt|flach|am boden|auf dem boden|auf der straße|auf dem asphalt|auf dem gehweg)\b"
 CARRY_RE = r"\b(diese[rnms]?|davon|damit|zusammen|sie alle|alle zusammen)\b"
 
 

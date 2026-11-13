@@ -60,6 +60,11 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   HyperFrames als HTML/GSAP-Animation (`engine/hyper.py`); fehlt HyperFrames oder scheitert es, zeichnet `graphics.py` sie wie bisher.
   Neue Grafik-Arten zuerst in `graphics.py` (Rückfall), dann optional in `hyper.BUILD`. Abschalten: `AS_HYPER=0`.
 
+- Bibliothek: englische „falsche Freunde“ (`library.FALSE_FRIENDS`: bug, gift, rock …) sind nie Alias; für Begriffe in `main.NO_THINGS`
+  (Bug, Glitch, Regel …) wird nichts gelernt. Aufzählungen prüft `writer.list_trouble` (nie mehr Punkte als angekündigt, höchstens fünf).
+  Nummern-Schilder und Stempel bleiben nur am Satz, der Nummer bzw. Wort nennt; `stage._carry_thing` lässt das zuvor genannte Ding im
+  Folgesatz stehen („diese Früchte … eine Tonne“), bei großer Zahl dreifach.
+
 ## Was zu tun ist
 1. Offene Wünsche (ohne `"done": true`) und `"auto": true`-Einträge durchgehen, höchstens 8 pro Sitzung, häufigste zuerst.
 2. Einzelne Gegenstände: sauber als Eintrag in `docs/data/shapes.json` zeichnen (Format siehe Kopf von `engine/toon/library.py`:

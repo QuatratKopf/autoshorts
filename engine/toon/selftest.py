@@ -526,6 +526,12 @@ def main():
         if "lib_apfel" in extras.PROPS:
             assert any(q.get("type") == "lib_apfel" for q in sc2[3]["props"]), sc2[3]["props"]
             frame(sc2[3])
+        sc3 = [{"text": "Drei Regeln.", "place": "street", "actors": [{"id": "du", "action": "talk"}]},
+               {"text": "Das Spiel zeigt Mitleid und du liegst einfach platt auf dem Boden.", "place": "street", "shot": "close", "actors": [{"id": "du", "action": "talk"}]},
+               {"text": "Folg für mehr.", "place": "livingroom", "actors": [{"id": "du", "action": "talk"}]}]
+        stage.direct(sc3, [(0, 3), (3, 7), (7, 9)], "Regeln im Alltag", "whatif")
+        assert sc3[1]["actors"][0]["action"] == "fall" and sc3[1].get("shot") != "close", sc3[1]
+        frame(sc3[1])
         th = writer.polish({"thumbnail": {"text": "NEUNZIG MELONEN IN DER TASCHE"}, "scenes": [{"text": "Du steckst neunundneunzig Wassermelonen ein."}]})["thumbnail"]["text"]
         assert th == "MELONEN IN DER TASCHE", th
     check("Schilder, Stempel, Haufen, Titelbild-Zahl", _labels)
