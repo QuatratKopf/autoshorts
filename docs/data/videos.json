@@ -2627,7 +2627,7 @@
   "id": 80,
   "category": "whatif",
   "topic": "Wenn Videospiel-Regeln plötzlich im echten Alltag gelten würden – genau drei Regeln, jede mit drei bis vier Sätzen erklärt und mit der echten Physik oder Biologie verglichen: Erstens das Inventar (neunundneunzig Wassermelonen in der Hosentasche, in echt wiegen sie zusammen fast eine Tonne), zweitens Essen heilt sofort (ein Apfel und der blaue Fleck am Knie ist weg, in echt braucht der Körper dafür rund zwei Wochen), drittens Speichern und Neuladen (vor der Prüfung speichern, bei einer schlechten Note neu laden). Jeder Satz nennt das Ding, um das es geht, beim Namen. Ohne die Wörter Bug, Glitch und Feature, ohne englische Gaming-Begriffe. Titelbild-Text: 99 MELONEN EINSTECKEN",
-  "status": "rendered",
+  "status": "published",
   "created": 1794587917.5558197,
   "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
   "description": "Was passiert mit deiner Hosentasche?\nHier siehst du drei krasse Videospiel-Regeln.\nHolst du die Melonen oder den Apfel?",
@@ -2666,6 +2666,12 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "zernio_id": "6af7400c9708cc2c3bcc1b8b",
+  "yt_status": "Zernio: published",
+  "yt_id": "61HvXa-rQEQ",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6af7400c9708cc2c3bcc1b8b",
+  "error": null
  }
 ]
