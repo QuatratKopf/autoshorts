@@ -1,10 +1,19 @@
 {
- "updated": 1794556717.4922502,
- "enough": false,
- "counted": 5,
+ "updated": 1794559420.8736537,
+ "enough": true,
+ "counted": 6,
  "total": 7,
  "needed": 6,
  "categories": [
+  {
+   "slug": "storys",
+   "name": "🔥 Spannende Storys",
+   "n": 1,
+   "avg_views": 1339,
+   "avg_likes": 52.0,
+   "like_rate": 3.88,
+   "avg_score": 2119
+  },
   {
    "slug": "whatif",
    "name": "🤯 What If",
@@ -25,15 +34,17 @@
   }
  ],
  "weights": {
-  "fakten": 1.0,
-  "storys": 1.0,
-  "mysterien": 1.0,
-  "tiere": 1.0,
-  "whatif": 1.0,
-  "comedy": 1.0
+  "fakten": 1.2,
+  "storys": 1.2,
+  "mysterien": 1.2,
+  "tiere": 1.2,
+  "whatif": 1.05,
+  "comedy": 1.2
  },
  "advice": [
-  "Noch zu wenig Daten: 5 von 6 Videos sind alt genug zum Vergleichen. Bis dahin läuft alles im normalen Wechsel."
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1339 Aufrufe, 3.88 % Likes).",
+  "Schwächste Kategorie: 💡 Fakten (Ø 580 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2086 zu 702 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -58,6 +69,38 @@
    "shares": 0,
    "score": 2154
   },
+  {
+   "id": 62,
+   "title": "Hollywood Heists sind physikalisch komplett wild",
+   "category": "storys",
+   "views": 1339,
+   "likes": 52,
+   "comments": 0,
+   "shares": 0,
+   "score": 2119
+  },
+  {
+   "id": 38,
+   "title": "Was passiert, wenn Drohnen deinen Alltag komplett überwachen?",
+   "category": "whatif",
+   "views": 1118,
+   "likes": 17,
+   "comments": 1,
+   "shares": 0,
+   "score": 1403
+  },
+  {
+   "id": 58,
+   "title": "Wie aus einer Gaming-Bude der wertvollste Tech-Gigant wurde",
+   "category": "fakten",
+   "views": 580,
+   "likes": 15,
+   "comments": 0,
+   "shares": 0,
+   "score": 805
+  }
+ ],
+ "flop": [
   {
    "id": 38,
    "title": "Was passiert, wenn Drohnen deinen Alltag komplett überwachen?",
@@ -88,6 +131,5 @@
    "shares": 0,
    "score": 0
   }
- ],
- "flop": []
+ ]
 }
