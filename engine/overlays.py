@@ -75,13 +75,15 @@ def tag(text):
     col = (RED, (238, 150, 30), GREEN, BLUE, (150, 80, 210))[sum(map(ord, text)) % 5]
     f = font(58)
     d = ImageDraw.Draw(Image.new("L", (1, 1)))
+    while d.textlength(text, font=f) > 800 and f.size > 36:   # langes Schild: kleinere Schrift statt abgeschnittenem Text
+        f = font(f.size - 4)
     w = int(d.textlength(text, font=f)) + 64
     h = 92
     im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     dr = ImageDraw.Draw(im)
     dr.rounded_rectangle((0, 0, w - 1, h - 1), 22, fill=col, outline=INK, width=7)
     dr.rounded_rectangle((10, 8, w - 11, 22), 7, fill=tuple(min(255, c + 50) for c in col))         # Glanzkante
-    dr.text((32, 12), text, font=f, fill=WHITE)
+    dr.text((32, 12 + (58 - f.size) // 2), text, font=f, fill=WHITE)
     return _shadow(im.rotate(4, expand=True, resample=Image.BICUBIC), 8, 10, 120)
 
 
@@ -237,13 +239,23 @@ def checklist(title, items, n_checked=None):
     return _shadow(im)
 
 
+_DANGLING = {"in", "im", "ins", "die", "der", "das", "den", "dem", "des", "ein", "eine", "einen", "einem", "einer", "und", "oder", "für", "mit", "von", "vom",
+             "zu", "zum", "zur", "auf", "an", "am", "aus", "bei", "wie", "als", "um", "nach", "vor", "über", "unter", "dein", "deine",
+             "deinen", "mein", "meine", "sein", "seine", "ihr", "ihre", "noch", "nur", "so", "&", "–", "-"}
+
+
 def _short(text, n):
     """Kürzt an einer Wortgrenze statt mitten im Wort."""
     text = " ".join(str(text or "").split())
     if len(text) <= n:
         return text
     cut = text[:n + 1].rsplit(" ", 1)[0]
-    return cut if len(cut) >= n * 0.4 else text[:n]
+    if len(cut) < n * 0.4:
+        return text[:n]
+    words = cut.split()                                  # kein abgehackter Rest („SCHREIB ES IN DIE“): Artikel und Verhältniswörter am Ende fallen weg
+    while len(words) > 1 and words[-1].lower().strip(".,:;") in _DANGLING:
+        words.pop()
+    return " ".join(words)
 
 
 def bar(label, value, shown=None):
@@ -369,7 +381,7 @@ def frames_for(ov: dict):
             col = {"red": RED, "green": GREEN, "orange": (238, 130, 20), "purple": (130, 60, 190)}.get(str(ov.get("color") or "red"), RED)
             return _slam(stamp(_short(str(ov["text"]), 16), col)), 360
         if t == "tag" and ov.get("text"):
-            return _pop(tag(_short(str(ov["text"]), 22))), 300
+            return _pop(tag(_short(str(ov["text"]), 30))), 300
         if t == "note" and ov.get("text"):
             return _pop(note(_short(ov.get("title") or "", 20), _short(ov["text"], 80))), 560
         if t == "phone" and ov.get("items"):

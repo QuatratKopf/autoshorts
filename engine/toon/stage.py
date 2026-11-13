@@ -1099,10 +1099,13 @@ def direct(scenes, times, topic="", style="", look=""):
         if place in MAPS and not isinstance(sc.get("backdrop"), dict) and _hint(sc.get("text")) is not None \
                 and not any(_re0.search(pat, sc["text"].lower()) for pat, _ in MAP_HINTS):
             sc["place"] = place = "park"                  # der Satz nennt einen Schauplatz (Ozean, Wald, Stadt …), nicht die ganze Welt: dort spielt die Szene
-        if place in MAPS:                                 # Karte höchstens zweimal pro Video
+        if place in MAPS:                                 # Karte höchstens zweimal pro Video – und nie zweimal hintereinander (zehn Sekunden dieselbe Weltkugel)
             maps_used += 1
             if maps_used > 2:
                 sc["place"] = place = "street"
+            elif i and isinstance(scenes[i - 1], dict) and places.resolve(scenes[i - 1].get("place")) in MAPS and not isinstance(sc.get("backdrop"), dict):
+                maps_used -= 1
+                sc["place"] = place = "livingroom"        # die Hauptfigur erlebt den Satz (leere Szene wird unten gefüllt)
         ov_c = sc.get("overlay") if isinstance(sc.get("overlay"), dict) else None
         if ov_c and str(ov_c.get("type") or "").lower() in graphics.TYPES and str(ov_c.get("type") or "").lower() != "phone":
             if not sc.get("graphic") and graphics.clean(ov_c):   # Grafik stand versehentlich als Einblendung im Drehbuch: als Grafik zeigen
@@ -1515,6 +1518,14 @@ def direct(scenes, times, topic="", style="", look=""):
             sc["look"], sc["time"] = "neon", "night"
         g_auto = None
         low_c = str(sc.get("text") or "").lower()
+        g_t = (sc.get("graphic") or {}).get("type") if sc.get("shot") == "graphic" and isinstance(sc.get("graphic"), dict) else None
+        if g_t and g_t != "chart" and i and isinstance(scenes[i - 1], dict) and scenes[i - 1].get("shot") == "graphic" \
+                and isinstance(scenes[i - 1].get("graphic"), dict) and scenes[i - 1]["graphic"].get("type") == g_t:
+            sc["shot"], sc["graphic"] = "", None            # nie zweimal dieselbe Grafik-Art hintereinander (zwei Zahlen-Tafeln = zehn Sekunden Standbild)
+        if g_t == "number" and isinstance(sc.get("graphic"), dict):
+            m_v = _re0.match(r"^\s*(\d[\d.,]*)\s+(\S+\s+\S+.*)$", str(sc["graphic"].get("value") or ""))
+            if m_v and not any(w.lower() in _UNITS or w.lower() in _SCALE for w in m_v.group(2).split()):
+                sc["graphic"]["value"] = m_v.group(1)       # „3 PRO KETTE“ als große Zahl: nur die Zahl bleibt, der Rest war erfunden
         if sc.get("shot") == "graphic" and (sc.get("graphic") or {}).get("type") == "chart":
             if charts >= 2 or (i and scenes[i - 1].get("shot") == "graphic" and (scenes[i - 1].get("graphic") or {}).get("type") == "chart"):
                 sc["shot"], sc["graphic"] = "", None        # höchstens zwei Kurven, nie zwei hintereinander

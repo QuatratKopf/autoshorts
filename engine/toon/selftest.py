@@ -559,6 +559,18 @@ def main():
         from .. import overlays
         fr = overlays.frames_for({"type": "phone", "title": "12:00", "items": ["Ex: Danke für alles!", "Du: Dir auch nur das Beste ❤️", "Mama", "Vier: zu viel"]})
         assert fr and fr[0]
+        sc2 = [{"text": "Acht Milliarden Menschen sind eine Minute lang nett.", "place": "worldmap", "actors": []},
+               {"text": "Und das verändert sofort alles.", "place": "worldmap", "actors": []},
+               {"text": "Drittens entsteht in sechzig Sekunden eine Welle.", "place": "beach", "shot": "graphic", "graphic": {"type": "number", "value": "60", "label": "SEKUNDEN"}, "actors": []},
+               {"text": "Wer Freundlichkeit erfährt, gibt sie an bis zu drei Personen weiter.", "place": "lab", "shot": "graphic",
+                "graphic": {"type": "number", "value": "3 PRO KETTE", "label": "WEITERGABE"}, "actors": [{"id": "du", "action": "walk"}]},
+               {"text": "Folg für mehr.", "place": "livingroom", "actors": [{"id": "du", "action": "talk"}]}]
+        stage.direct(sc2, [(i * 4, i * 4 + 4) for i in range(len(sc2))], "Wenn alle nett wären", "whatif")
+        assert places.resolve(sc2[1].get("place")) not in stage.MAPS and sc2[1]["actors"], sc2[1]      # nie zweimal hintereinander die Weltkugel
+        assert sc2[3].get("shot") != "graphic", sc2[3]                                              # nie zwei Zahlen-Tafeln hintereinander
+        frame(sc2[1])
+        assert overlays._short("SCHREIB ES IN DIE KOMMENTARE", 22) == "SCHREIB ES", overlays._short("SCHREIB ES IN DIE KOMMENTARE", 22)
+        assert overlays.frames_for({"type": "tag", "text": "SCHREIB ES IN DIE KOMMENTARE"})
     check("Geben/Essen, Einsatzwagen, Schild-Zahl, Handy", _deeds)
     check("Titelbild", lambda: stage.cover({"place": "street", "props": ["meteor"], "actor": "du"}, {"du": {}}, "/tmp/_selftest_cover.jpg"))
     check("Titelbild kaputt", lambda: stage.cover({"place": None, "props": [None, 3], "actor": None, "backdrop": "x"}, {}, "/tmp/_selftest_cover.jpg"))

@@ -71,6 +71,10 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   Konfetti gibt es nur noch, wenn gefeiert wird (`PARTY_RE`) oder eine Menge jubelt, nicht in jeder fröhlichen Szene. Schilder (`tag`) mit einer Zahl,
   die der Satz nicht nennt, entfallen (Jahreszahlen bleiben). Die Handy-Einblendung zeigt höchstens drei Nachrichten in großer Schrift, ohne Emojis.
 
+- Nie zweimal hintereinander dieselbe Karte/Weltkugel (die zweite Szene spielt mit der Hauptfigur im Zimmer) und nie zweimal hintereinander dieselbe
+  Grafik-Art (zwei Zahlen-Tafeln); Zahl-Grafik „3 PRO KETTE“ behält nur die Zahl. Schilder (`tag`) bis 30 Zeichen in kleinerer Schrift; gekürzte
+  Einblendungen enden nie auf Artikel oder Verhältniswort (`overlays._DANGLING`).
+
 ## Was zu tun ist
 1. Offene Wünsche (ohne `"done": true`) und `"auto": true`-Einträge durchgehen, höchstens 8 pro Sitzung, häufigste zuerst.
 2. Einzelne Gegenstände: sauber als Eintrag in `docs/data/shapes.json` zeichnen (Format siehe Kopf von `engine/toon/library.py`:
