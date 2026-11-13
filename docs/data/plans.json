@@ -351,631 +351,6 @@
   "title": "Wie eine Gaming Bude die Welt veränderte",
   "created": 1794410496.7208724
  },
- "2026-11-12 13:00": {
-  "category": "storys",
-  "topic": "Warum Hollywood-Heist-Filme wie 'Now You See Me' physikalisch komplett wild sind und trotzdem süchtig machen",
-  "trend": {
-   "title": "Now You See Me is the most stupid and insane big budget movie I’ve ever seen",
-   "source": "Reddit r/movies",
-   "news": [],
-   "summary": ""
-  },
-  "script": {
-   "title": "Hollywood Heist Filme sind physikalisch wild",
-   "description": "Warum Hollywood Heist Filme komplett wild sind\nMan glaubt jeden genialen Trick sofort\nWelcher Film hat den krassesten Twist",
-   "hashtags": [
-    "#shorts",
-    "#hollywood",
-    "#film",
-    "#trending",
-    "#foryou",
-    "#filme",
-    "#hinterdenkulissen"
-   ],
-   "tags": [
-    "hollywood",
-    "heist filme",
-    "physik",
-    "magie",
-    "zaubertricks",
-    "kino"
-   ],
-   "thumbnail": {
-    "place": "livingroom",
-    "time": "day",
-    "actor": "du",
-    "action": "shocked",
-    "emotion": "shocked",
-    "props": [
-     "tv"
-    ],
-    "weather": "",
-    "image": "Close-up of a magician casting cards in front of a glowing digital city skyline, exaggerated shocked expression, dark background with neon lights, bold simple composition, strong contrast, empty space in the upper third for text",
-    "text": "KOMPLETT WILD"
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "schwarz",
-     "hat": "",
-     "hair": "",
-     "hair_color": "schwarz",
-     "skin": "hell"
-    }
-   },
-   "scenes": [
-    {
-     "text": "Hollywood Heist Filme sind physikalisch komplett wild.",
-     "image": "A person sitting on a sofa watching a big screen with flashy magical effects, wide shot",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "physikalisch",
-      "wild"
-     ],
-     "hud": "",
-     "overlay": null,
-     "see": "Eine Person sitzt geschockt vor einem Fernseher auf der Couch.",
-     "time": "day",
-     "props": [
-      "tv"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "status": ""
-    },
-    {
-     "text": "Auf der Leinwand sieht jeder Zaubertrick sofort logisch aus.",
-     "image": "A theater stage with bright spotlights and floating cards in the air, event shot",
-     "who": [],
-     "place": "livingroom",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Zaubertrick",
-      "logisch"
-     ],
-     "overlay": null,
-     "see": "Eine Person steht im Wohnzimmer und gestikuliert fasziniert wie ein Magier.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "wave",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Aber im echten Leben scheitert fast jeder davon.",
-     "image": "A person looking at a broken gadget on a table with a worried face, close shot",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "echten Leben",
-      "scheitert"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "NULL PROZENT"
-     },
-     "see": "Nahaufnahme: Ein Stuhl stolpert oder fällt symbolisch um.",
-     "time": "day",
-     "props": [
-      "stuhl"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "fall",
-       "emotion": "scared",
-       "emote": "sweat",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Regisseure ignorieren einfach jede echte physikalische Gesetzmäßigkeit.",
-     "image": "A giant explosion on a movie set with cameras around, event shot",
-     "who": [],
-     "place": "lab",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "ignorieren",
-      "Physik"
-     ],
-     "overlay": null,
-     "see": "In einem Film-Labor schüttelt die Figur wütend den Kopf.",
-     "time": "day",
-     "props": [
-      "generator"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Wasserströme biegen sich plötzlich im perfekten rechten Winkel ab.",
-     "image": "Water flowing in impossible sharp angles through a futuristic room, event shot",
-     "who": [],
-     "place": "bathroom",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Wasserströme",
-      "Winkel"
-     ],
-     "overlay": {
-      "type": "bar",
-      "label": "PHYSIK",
-      "value": 0
-     },
-     "see": "Ein Bild eines defekten Wasserrohrs, das unlogisch spritzt.",
-     "time": "day",
-     "weather": "steam",
-     "props": [
-      "faucet",
-      "wave"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Menschen fliegen durch die Luft wie Superhelden im Wind.",
-     "image": "A person floating weightless in a glowing room, action shot",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "zoom_out",
-     "sfx": "whoosh",
-     "highlight": [
-      "fliegen",
-      "Superhelden"
-     ],
-     "overlay": null,
-     "see": "Eine Figur schwebt schwerelos durch das Wohnzimmer.",
-     "time": "day",
-     "props": [
-      "box"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "float",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Dazu kommt der berühmte digitale Kartenregen.",
-     "image": "Thousands of playing cards falling down from the sky like rain, event shot",
-     "who": [],
-     "place": "office",
-     "camera": "pan_right",
-     "sfx": "none",
-     "highlight": [
-      "Kartenregen"
-     ],
-     "overlay": {
-      "type": "counter",
-      "label": "KARTEN",
-      "value": 10000,
-      "unit": "STÜCK"
-     },
-     "see": "Zähler-Grafik für den digitalen Kartenregen.",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "calm",
-     "graphic": {
-      "type": "number",
-      "kicker": "KARTENREGEN",
-      "value": "1.000.000",
-      "label": "DIGITALE KARTEN"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Niemand würde Millionen Dollar so leicht auf der Straße verteilen.",
-     "image": "Money flying out of a bag on a busy city street with amazed people, event shot",
-     "who": [],
-     "place": "street",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Millionen",
-      "Strasse"
-     ],
-     "overlay": null,
-     "see": "Geld liegthaufenweise mitten auf der Straße.",
-     "time": "day",
-     "props": [
-      "money"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "tense",
-     "crowd": "watch",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Dennoch saugen uns diese Szenen jedes Mal komplett ein.",
-     "image": "A person staring hypnotized at a bright television screen in a dark room, close shot",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "saugen",
-      "komplett"
-     ],
-     "overlay": null,
-     "see": "Figur blickt wie hypnotisiert mit offenen Augen nach vorne.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "look_around",
-       "emotion": "happy",
-       "emote": "heart",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "close",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Unser Gehirn liebt das Gefühl von perfekter Kontrolle.",
-     "image": "A glowing brain graphic pulsing with electric signals, graphic shot",
-     "who": [],
-     "place": "lab",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Gehirn",
-      "Kontrolle"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "DOPAMIN"
-     },
-     "see": "Grafik zum Gefühl von perfekter Kontrolle im Gehirn.",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "calm",
-     "graphic": {
-      "type": "badge",
-      "kicker": "GEHIRN-EFFECT",
-      "text": "100% KONTROLLE"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Jeder raffinierte Coup fühlt sich an wie ein eigener Sieg.",
-     "image": "A person smiling widely while raising both fists in victory, medium shot",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "zoom_out",
-     "sfx": "none",
-     "highlight": [
-      "Coup",
-      "Sieg"
-     ],
-     "overlay": null,
-     "see": "Figur jubelt begeistert im Wohnzimmer.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "jump",
-       "emotion": "happy",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "happy",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Dabei vergessen wir schnell die Logik dahinter.",
-     "image": "A question mark glowing and dissolving into tiny digital particles, graphic shot",
-     "who": [],
-     "place": "livingroom",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "vergessen",
-      "Logik"
-     ],
-     "overlay": null,
-     "see": "Figur zuckt ratlos mit den Schultern.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "think",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Schließlich wollen wir im Kino kein Lehrbuch sehen.",
-     "image": "A heavy school book snapping shut and turning into sparkling dust, event shot",
-     "who": [],
-     "place": "classroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Kino",
-      "Lehrbuch"
-     ],
-     "overlay": null,
-     "see": "Ein großes Physik-Lehrbuch liegt symbolisch auf dem Tisch.",
-     "time": "day",
-     "props": [
-      "table"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "angry",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Sondern pure Magie auf der riesigen Leinwand.",
-     "image": "A massive cinema screen glowing brightly in a dark hall, wide shot",
-     "who": [],
-     "place": "livingroom",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "pure Magie"
-     ],
-     "overlay": null,
-     "see": "Riesige Kino-Leinwand leuchtet Magie aus.",
-     "time": "night",
-     "props": [
-      "tv"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "happy",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Am Ende gewinnen immer die Diebe.",
-     "image": "A person walking away into the sunset with a big bag of money over the shoulder, wide shot",
-     "who": [
-      "du"
-     ],
-     "place": "street",
-     "camera": "pan_right",
-     "sfx": "none",
-     "highlight": [
-      "Ende",
-      "Diebe"
-     ],
-     "overlay": null,
-     "see": "Ein Fluchtwagen saust mit Geld davon.",
-     "time": "night",
-     "props": [
-      "car",
-      "money"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "happy",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Ausser bei dem einen großen Fehler am Schluss.",
-     "image": "A close-up of a hand dropping a single playing card on the ground, close shot",
-     "who": [
-      "du"
-     ],
-     "place": "office",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "Fehler",
-      "Schluss"
-     ],
-     "overlay": null,
-     "see": "Ein Überwachungs-System entlarvt einen Coup.",
-     "time": "day",
-     "props": [
-      "cctv",
-      "computer"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "right",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Folg für mehr verrückte Filmfakten.",
-     "image": "A person pointing directly at the camera with a wide smile, close shot",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Folg",
-      "Filmfakten"
-     ],
-     "overlay": {
-      "type": "choice",
-      "a": "Sofort glauben",
-      "b": "Physik prüfen"
-     },
-     "see": "Handy-Benachrichtigung mit Aufforderung zu folgen.",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "calm",
-     "graphic": {
-      "type": "phone",
-      "mode": "alert",
-      "kicker": "MEHR FILMAKTE",
-      "text": "FOLGEN FÜR MEHR",
-      "value": "PLUS",
-      "label": "JETZT ABONNIEREN"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "needs": [
-   "kinoleinwand",
-   "wasserstrom",
-   "gesetzbuch"
-  ],
-  "title": "Hollywood Heist Filme sind physikalisch wild",
-  "created": 1794421580.7361093
- },
  "2026-11-12 21:00": {
   "category": "fakten",
   "topic": "3 seltsame Tierfähigkeiten, die wie Superkräfte wirken",
@@ -2183,5 +1558,866 @@
   ],
   "title": "Was passiert, wenn wir Tiere kreuzen?",
   "created": 1794508904.905337
+ },
+ "2026-11-13 18:00": {
+  "category": "whatif",
+  "topic": "Wenn physische Spielregeln plötzlich in der Realität gelten würden",
+  "trend": null,
+  "script": {
+   "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
+   "description": "Was passiert, wenn du plötzlich durch Wände glitchen kannst?\nErlebe die verrücktesten physischen Spielregeln in der echten Welt.\nWürdest du lieber fliegen oder unendlich oft respawnen?",
+   "hashtags": [
+    "#shorts",
+    "#gaming",
+    "#whatif",
+    "#physik",
+    "#funny",
+    "#viral",
+    "#foryou"
+   ],
+   "tags": [
+    "spielregeln",
+    "physik",
+    "was wäre wenn",
+    "videospiele",
+    "glitch",
+    "alltag",
+    "lustig"
+   ],
+   "thumbnail": {
+    "place": "street",
+    "time": "day",
+    "actor": "du",
+    "action": "shocked",
+    "emotion": "shocked",
+    "props": [
+     "box"
+    ],
+    "weather": "",
+    "image": "Close-up of a cartoon character looking confused with floating error pixels around, bright background, bold composition",
+    "text": "SPIELREGELN IM ALLTAG"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "leo": {
+     "shirt": "blau",
+     "hat": "",
+     "hair": "long",
+     "hair_color": "braun",
+     "skin": "hell"
+    }
+   },
+   "scenes": [
+    {
+     "text": "Drei Videospiel-Bugs, die unser Leben komplett ruinieren würden.",
+     "image": "Drei Videospiel-Bugs, die unser Leben komplett ruinieren würden.",
+     "who": [
+      "leo"
+     ],
+     "place": "street",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "Spielregeln",
+      "Realität"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": {
+      "type": "card",
+      "text": "GLITCH IM SYSTEM"
+     },
+     "see": "Du stehst erschrocken auf der Straße, während rote Warnzeichen um dich herum flimmern.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Einer davon macht deinen Einkaufsbeutel absolut überflüssig.",
+     "image": "Einer davon macht deinen Einkaufsbeutel absolut überflüssig.",
+     "who": [
+      "leo"
+     ],
+     "place": "supermarket",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Bug",
+      "Fußboden"
+     ],
+     "hud": "",
+     "status": "BUG: AKTIV",
+     "overlay": null,
+     "see": "Im Supermarkt lässt du den Einkaufsbeutel fallen, weil Gegenstände von alleine hinter dir her schweben.",
+     "time": "day",
+     "props": [
+      "cart",
+      "cans"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shake",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true,
+       "hold": "bag"
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "crowd": "watch",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Zweiter Bug: Unsichtbare Mauern stoppen dich auf jedem Feldweg.",
+     "image": "Zweiter Bug: Unsichtbare Mauern stoppen dich auf jedem Feldweg.",
+     "who": [
+      "leo"
+     ],
+     "place": "fields",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Mauern",
+      "Feldweg"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": {
+      "type": "tag",
+      "text": "KEIN DURCHGANG"
+     },
+     "see": "Auf einem Feldweg läufst du gegen eine unsichtbare Wand und prallst ab.",
+     "backdrop": {
+      "sky": "day",
+      "ground": "soil",
+      "elements": [
+       "fields",
+       "trees"
+      ]
+     },
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "fall",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Dritter Bug: Dein Inventar fasst genau neunundneunzig Wassermelonen auf einmal.",
+     "image": "Dritter Bug: Dein Inventar fasst genau neunundneunzig Wassermelonen auf einmal.",
+     "who": [
+      "leo"
+     ],
+     "place": "livingroom",
+     "camera": "zoom_out",
+     "sfx": "pop",
+     "highlight": [
+      "Inventar",
+      "Wassermelonen"
+     ],
+     "hud": "",
+     "status": "GEWICHT: 0 KG",
+     "overlay": {
+      "type": "counter",
+      "label": "MELONEN",
+      "value": 99,
+      "unit": "99 STÜCK"
+     },
+     "see": "Nahaufnahme von riesigen Wassermelonen, die sich in deinem Inventar stapeln.",
+     "time": "day",
+     "props": [
+      "box",
+      "pile"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "A cozy living room with a sofa, a table, and a window."
+    },
+    {
+     "text": "Vierter Bug: Essen heilt sofort jeden blauen Fleck am Knie.",
+     "image": "Vierter Bug: Essen heilt sofort jeden blauen Fleck am Knie.",
+     "who": [
+      "leo"
+     ],
+     "place": "kitchen",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Essen",
+      "heilt"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": null,
+     "see": "Du beißt in einen Apfel und der blaue Fleck an deinem Knie verschwindet augenblicklich.",
+     "time": "day",
+     "props": [
+      "table"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "jump",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "happy",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Fünfter Bug: Du kannst Gegenstände in der Luft einfrieren und stapeln.",
+     "image": "Fünfter Bug: Du kannst Gegenstände in der Luft einfrieren und stapeln.",
+     "who": [
+      "leo"
+     ],
+     "place": "street",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "Gegenstände",
+      "einfrieren"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": {
+      "type": "card",
+      "text": "PHYSIK DEAKTIVIERT"
+     },
+     "see": "Kisten schweben mitten im Raum in der Luft aufeinander gestapelt.",
+     "time": "day",
+     "props": [
+      "box",
+      "barrel"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "float",
+       "emotion": "shocked",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "event",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Sechster Bug: Jeder Mensch läuft exakt die gleiche steife Standard-Animation.",
+     "image": "Sechster Bug: Jeder Mensch läuft exakt die gleiche steife Standard-Animation.",
+     "who": [
+      "leo"
+     ],
+     "place": "street",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Mensch",
+      "Standard-Animation"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": null,
+     "see": "Mehrere Passanten in der Stadt laufen völlig steif und identisch wie in einer T-Pose.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "passant",
+       "action": "walk",
+       "emotion": "",
+       "emote": "",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "crowd": "walk",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Siebter Bug: Nachts schaltet die Welt komplett auf dunkle Grafik um.",
+     "image": "Siebter Bug: Nachts schaltet die Welt komplett auf dunkle Grafik um.",
+     "who": [
+      "leo"
+     ],
+     "place": "park",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Nachts",
+      "Grafik"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": {
+      "type": "tag",
+      "text": "RENDER-FEHLER"
+     },
+     "see": "Schlagartig wird es stockfinster und die Umgebung wechselt zu minimalistischer Vektorgrafik.",
+     "backdrop": {
+      "sky": "night",
+      "ground": "grass",
+      "elements": [
+       "trees"
+      ]
+     },
+     "time": "night",
+     "weather": "dark",
+     "props": [
+      "streetlamp"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true,
+       "hold": "flashlight"
+      }
+     ],
+     "shot": "wide",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Achter Bug: Du hörst plötzlich immer dieselbe dreiminütige Hintergrundmusik in Dauerschleife.",
+     "image": "Achter Bug: Du hörst plötzlich immer dieselbe dreiminütige Hintergrundmusik in Dauerschleife.",
+     "who": [
+      "leo"
+     ],
+     "place": "bedroom",
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "Hintergrundmusik",
+      "Dauerschleife"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": null,
+     "see": "Du hältst dir genervt die Ohren zu, während Noten-Symbole über deinem Kopf schweben.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shake",
+       "emotion": "angry",
+       "emote": "music",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Neunter Bug: Du kannst mit NPC-Passanten nur drei vorgefertigte Sätze reden.",
+     "image": "Neunter Bug: Du kannst mit NPC-Passanten nur drei vorgefertigte Sätze reden.",
+     "who": [
+      "leo"
+     ],
+     "place": "park",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "Passanten",
+      "Sätze"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": {
+      "type": "checklist",
+      "title": "DIALOGE",
+      "items": [
+       [
+        "Hallo",
+        true
+       ],
+       [
+        "Schönes Wetter",
+        true
+       ],
+       [
+        "Hilfe",
+        false
+       ]
+      ]
+     },
+     "see": "Du sprichst mit einer Person im Park, über der drei vorgegebene Textboxen schweben.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "?",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "passant",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "right",
+       "speaks": false,
+       "say": "HALLO! JA. NEIN."
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Zehnter Bug: Speichern vor der Prüfung ist erlaubt.",
+     "image": "Zehnter Bug: Speichern vor der Prüfung ist erlaubt.",
+     "who": [
+      "leo"
+     ],
+     "place": "classroom",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "Speichern",
+      "Prüfung"
+     ],
+     "hud": "",
+     "status": "STAND: GESPEICHERT",
+     "overlay": null,
+     "see": "Vor einem Klassenzimmer drückst du auf ein schwebendes Speichern-Symbol.",
+     "time": "day",
+     "props": [
+      "table"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "idea",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Elfter Bug: Ein kleiner Fehler beim Speichern löscht dein ganzes Leben.",
+     "image": "Elfter Bug: Ein kleiner Fehler beim Speichern löscht dein ganzes Leben.",
+     "who": [
+      "leo"
+     ],
+     "place": "hallway",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Fehler",
+      "löscht"
+     ],
+     "hud": "",
+     "status": "FEHLER 404",
+     "overlay": {
+      "type": "card",
+      "text": "SAVEGAME KORRUPT"
+     },
+     "see": "Ein riesiges rotes Error-Fenster löscht den Hintergrund weg.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "fall",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Zwölfter Bug: Die Schwerkraft setzt kurz aus, wenn du laut niesen musst.",
+     "image": "Zwölfter Bug: Die Schwerkraft setzt kurz aus, wenn du laut niesen musst.",
+     "who": [
+      "leo"
+     ],
+     "place": "street",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "Schwerkraft",
+      "niesen"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": null,
+     "see": "Du musst niesen und schwebst dabei hilflos in der Luft nach oben.",
+     "time": "day",
+     "weather": "wind",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "float",
+       "emotion": "shocked",
+       "emote": "sweat",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "crowd": "watch",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Dreizehnter Bug: Jede Tür führt in denselben blauen Raum.",
+     "image": "Dreizehnter Bug: Jede Tür führt in denselben blauen Raum.",
+     "who": [
+      "leo"
+     ],
+     "place": "hallway",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "Tür",
+      "Raum"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": null,
+     "see": "Du öffnest eine Haustür und schaust in einen komplett leeren, blauen Raum.",
+     "time": "day",
+     "props": [
+      "door"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Vierzehnter Bug: Du kannst im Laden einfach den Spruch vom Händler überspringen.",
+     "image": "Vierzehnter Bug: Du kannst im Laden einfach den Spruch vom Händler überspringen.",
+     "who": [
+      "leo"
+     ],
+     "place": "supermarket",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "überspringen",
+      "Händler"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": null,
+     "see": "Im Supermarkt drückst du auf einen Skip-Button, um das Gerede des Kassierers abzubrechen.",
+     "time": "day",
+     "props": [
+      "cart"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "left",
+       "speaks": true,
+       "say": "SKIP >"
+      },
+      {
+       "id": "passant",
+       "action": "idle",
+       "emotion": "shocked",
+       "emote": "",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Fünfzehnter Bug: Dein Kontostand zeigt plötzlich unendlich viele Neunen.",
+     "image": "Fünfzehnter Bug: Dein Kontostand zeigt plötzlich unendlich viele Neunen.",
+     "who": [
+      "leo"
+     ],
+     "place": "livingroom",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "Kontostand",
+      "Neunen"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": {
+      "type": "counter",
+      "label": "GELD",
+      "value": 999999,
+      "unit": "EURO"
+     },
+     "see": "Du schaust ungläubig auf dein Smartphone, wo der Kontostand mit unzähligen Neunen überläuft.",
+     "time": "day",
+     "props": [
+      "money"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "jump",
+       "emotion": "happy",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "shot": "wide",
+     "mood": "happy",
+     "who_desc": "",
+     "place_desc": "A cozy living room with a sofa, a table, and a window."
+    },
+    {
+     "text": "Sechzehnter Bug: Das Spiel stürzt ab und du wachst in deinem Bett auf.",
+     "image": "Sechzehnter Bug: Das Spiel stürzt ab und du wachst in deinem Bett auf.",
+     "who": [
+      "leo"
+     ],
+     "place": "bedroom",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "abstürzt",
+      "Bett"
+     ],
+     "hud": "",
+     "status": "CRASH",
+     "overlay": null,
+     "see": "Die Welt friert mit Glitch-Effekten ein und du schreckst im Bett auf.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "sit",
+       "emotion": "shocked",
+       "emote": "sweat",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Siebzehnter Bug: Die Entwickler haben vergessen, die Weltgrenze zu sperren.",
+     "image": "Siebzehnter Bug: Die Entwickler haben vergessen, die Weltgrenze zu sperren.",
+     "who": [
+      "leo"
+     ],
+     "place": "street",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "Entwickler",
+      "Weltgrenze"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": {
+      "type": "card",
+      "text": "ENDE DER MAP"
+     },
+     "see": "Ein Zaun am Rande der Stadt ist durchbrochen und dahinter fehlt die Bodentextur.",
+     "backdrop": {
+      "sky": "storm",
+      "ground": "rock",
+      "elements": [
+       "ruins"
+      ]
+     },
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Achtzehnter Bug: Dahinter wartet nur das pure Nichts.",
+     "image": "Achtzehnter Bug: Dahinter wartet nur das pure Nichts.",
+     "who": [
+      "leo"
+     ],
+     "place": "space",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Dahinter",
+      "Nichts"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": null,
+     "see": "Blick in ein endloses graues Nichts ohne Boden und Himmel.",
+     "time": "night",
+     "props": [],
+     "actors": [],
+     "shot": "event",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Neunzehnter Bug: Du musst folgen, bevor dein Spiel komplett einfriert.",
+     "image": "Neunzehnter Bug: Du musst folgen, bevor dein Spiel komplett einfriert.",
+     "who": [
+      "leo"
+     ],
+     "place": "livingroom",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "folg",
+      "Update"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": {
+      "type": "choice",
+      "a": "Update laden",
+      "b": "Spiel beenden"
+     },
+     "see": "Du zeigst dringend auf den Zuschauer, während hinter dir das Bild langsam einfriert.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true,
+       "say": "FOLGEN!"
+      }
+     ],
+     "shot": "close",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "A cozy living room with a sofa, a table, and a window."
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "needs": [
+   "einkaufsbeutel",
+   "wassermelone",
+   "tuer"
+  ],
+  "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
+  "created": 1794565631.8571453
  }
 }
