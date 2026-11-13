@@ -1,5 +1,5 @@
 {
- "updated": 1794580070.2612805,
+ "updated": 1794581811.8574917,
  "enough": true,
  "counted": 6,
  "total": 7,
@@ -9,10 +9,10 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 1,
-   "avg_views": 1349,
-   "avg_likes": 52.0,
-   "like_rate": 3.85,
-   "avg_score": 2129
+   "avg_views": 1356,
+   "avg_likes": 53.0,
+   "like_rate": 3.91,
+   "avg_score": 2151
   },
   {
    "slug": "whatif",
@@ -21,7 +21,7 @@
    "avg_views": 1281,
    "avg_likes": 28.0,
    "like_rate": 2.19,
-   "avg_score": 1708
+   "avg_score": 1709
   },
   {
    "slug": "fakten",
@@ -42,9 +42,9 @@
   "comedy": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1349 Aufrufe, 3.85 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1356 Aufrufe, 3.91 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 580 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2091 zu 702 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2097 zu 702 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -53,11 +53,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2450,
+   "views": 2451,
    "likes": 55,
    "comments": 0,
    "shares": 0,
-   "score": 3275
+   "score": 3276
   },
   {
    "id": 54,
@@ -73,11 +73,11 @@
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1349,
-   "likes": 52,
+   "views": 1356,
+   "likes": 53,
    "comments": 0,
    "shares": 0,
-   "score": 2129
+   "score": 2151
   },
   {
    "id": 38,
