@@ -1,643 +1,4 @@
 {
- "2026-11-12 21:00": {
-  "category": "fakten",
-  "topic": "3 seltsame Tierfähigkeiten, die wie Superkräfte wirken",
-  "trend": null,
-  "script": {
-   "title": "3 Tier-Superkräfte, die unmöglich wirken",
-   "description": "Welche Tier-Superkraft hättest du am liebsten?\nHier siehst du drei absolut verrückte Fähigkeiten aus dem Tierreich.\nPistolenkrebs oder Qualle: Was findest du cooler?",
-   "hashtags": [
-    "#shorts",
-    "#tierfakten",
-    "#wissen",
-    "#fakten",
-    "#biologie",
-    "#fyp",
-    "#viral"
-   ],
-   "tags": [
-    "tierfakten",
-    "superkräfte",
-    "tierreich",
-    "pistolenkrebs",
-    "qualle",
-    "fangschreckenkrebs",
-    "biologie fakten",
-    "interessant"
-   ],
-   "thumbnail": {
-    "image": "A dramatic close-up of a tiny colorful shrimp punch creating a glowing shockwave under water, high contrast, cinematic cartoon style, clear upper third.",
-    "text": "TIERE MIT SUPERKRÄFTEN"
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "blau",
-     "hat": "",
-     "hair": "kurz",
-     "hair_color": "braun",
-     "glasses": false,
-     "skin": "hell"
-    },
-    "krebs": {
-     "kind": "monster"
-    },
-    "qualle": {
-     "kind": "fish"
-    }
-   },
-   "scenes": [
-    {
-     "see": "Du sitzt am Schreibtisch und starrst geschockt auf dein Handy.",
-     "text": "Ein winziger Krebs erzeugt unter Wasser rund viertausendfünfhundert Grad.",
-     "image": "Ein winziger Krebs erzeugt unter Wasser rund viertausendfünfhundert Grad.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "computer"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "close",
-     "camera": "zoom_in",
-     "sfx": "boom",
-     "highlight": [
-      "vierundvierzigtausend Grad"
-     ],
-     "overlay": {
-      "type": "thermo",
-      "value": 44000
-     },
-     "who_desc": "",
-     "place_desc": "Modern teenager bedroom with gaming desk, cozy lighting, shelves",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Unter Wasser erzeugt eine Krebsschere eine riesige Hitzewelle.",
-     "text": "Aber die tödliche Gefahr entsteht erst durch seinen Knall.",
-     "image": "Aber die tödliche Gefahr entsteht erst durch seinen Knall.",
-     "who": [],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "explosion"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "event",
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "Knall"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "PISTOLENKREBS"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Pistolenkrebs schnappt mit der Schere zu und erzeugt eine Blase.",
-     "text": "Der Pistolenkrebs knallt seine Schere so schnell zu, dass Wasser verdampft.",
-     "image": "Der Pistolenkrebs knallt seine Schere so schnell zu, dass Wasser verdampft.",
-     "who": [
-      "krebs"
-     ],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "explosion"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "event",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "verdampft"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Zahlen-Grafik zeigt die Lautstärke von zweihundertachtundzwanzig Dezibel.",
-     "text": "Dabei entsteht eine Schockwelle mit zweihundertachtundzwanzig Dezibel Lautstärke.",
-     "image": "Dabei entsteht eine Schockwelle mit zweihundertachtundzwanzig Dezibel Lautstärke.",
-     "who": [],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "zweihundertachtundzwanzig Dezibel"
-     ],
-     "overlay": null,
-     "graphic": {
-      "type": "number",
-      "kicker": "LAUTSTÄRKE",
-      "value": "228 dB",
-      "label": "LAUTER ALS EIN DÜSENJET"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du hältst dir im Zimmer erschrocken die Ohren zu.",
-     "text": "Das ist lauter als ein startendes Flugzeug direkt neben dir.",
-     "image": "Das ist lauter als ein startendes Flugzeug direkt neben dir.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "plane"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "panic",
-     "shot": "wide",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "Flugzeug"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "EXTREM LAUT"
-     },
-     "who_desc": "",
-     "place_desc": "Modern teenager bedroom with gaming desk, cozy lighting, shelves",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Infokarte kündigt Kraft Nummer zwei an.",
-     "text": "Also Kraft Nummer zwei, die noch verrückter wirkt.",
-     "image": "Also Kraft Nummer zwei, die noch verrückter wirkt.",
-     "who": [],
-     "place": "zimmer",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "verrückter"
-     ],
-     "overlay": null,
-     "graphic": {
-      "type": "badge",
-      "kicker": "KRAFT #2",
-      "text": "EWIGES LEBEN"
-     },
-     "who_desc": "",
-     "place_desc": "Modern teenager bedroom with gaming desk, cozy lighting, shelves",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine kleine durchsichtige Qualle schwimmt ruhig im tiefen Meer.",
-     "text": "Die unsterbliche Qualle altert rückwärts, sobald sie Stress bekommt.",
-     "image": "Die unsterbliche Qualle altert rückwärts, sobald sie Stress bekommt.",
-     "who": [
-      "qualle"
-     ],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "wave"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "event",
-     "camera": "zoom_out",
-     "sfx": "none",
-     "highlight": [
-      "rückwärts"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "UNSTERBLICH",
-      "color": "green"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Qualle wandelt sich von einer ausgewachsenen Qualle in ein kleines Polyp-Stadium.",
-     "text": "Sie verwandelt ihre ausgewachsenen Zellen einfach wieder in Baby-Zellen zurück.",
-     "image": "Sie verwandelt ihre ausgewachsenen Zellen einfach wieder in Baby-Zellen zurück.",
-     "who": [
-      "qualle"
-     ],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "qualle",
-       "action": "jump",
-       "emotion": "happy",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "insert",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "Baby-Zellen"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du schaust ungläubig in deinen Ausweis auf dem Schreibtisch.",
-     "text": "Das wäre so, als würdest du mit achtzig Jahren wieder zum Baby werden.",
-     "image": "Das wäre so, als würdest du mit achtzig Jahren wieder zum Baby werden.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "table"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "think",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "achtzig Jahren"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "RESET-KNOPF"
-     },
-     "who_desc": "",
-     "place_desc": "Modern teenager bedroom with gaming desk, cozy lighting, shelves",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Hochleistungs-Boxhandschuh trifft einen Stein und zertrümmert ihn.",
-     "text": "Und dann wird es bei der dritten Fähigkeit richtig heftig.",
-     "image": "Und dann wird es bei der dritten Fähigkeit richtig heftig.",
-     "who": [],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "rock"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "event",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "heftig"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "KRAFT #3"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein bunter Fangschreckenkrebs steht in Habachtstellung im Riff.",
-     "text": "Der Fangschreckenkrebs boxt mit der Beschleunigung einer Gewehrkugel.",
-     "image": "Der Fangschreckenkrebs boxt mit der Beschleunigung einer Gewehrkugel.",
-     "who": [
-      "krebs"
-     ],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "rock"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "event",
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "Gewehrkugel"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafik vergleicht die Schlaggeschwindigkeit mit einer Kugel.",
-     "text": "Sein Schlag erreicht achtzig Kilometer pro Stunde im dichten Wasser.",
-     "image": "Sein Schlag erreicht achtzig Kilometer pro Stunde im dichten Wasser.",
-     "who": [],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "achtzig Kilometer"
-     ],
-     "overlay": null,
-     "graphic": {
-      "type": "compare",
-      "left": "KREBS-SCHLAG",
-      "right": "SCHNEIDEN",
-      "value": "80 km/h",
-      "sub": "80 km/h"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Unter Wasser bricht ein Aquarium-Glas mit Rissen auseinander.",
-     "text": "Damit zertrümmert er mühelos dicke Aquarienscheiben aus Glas.",
-     "image": "Damit zertrümmert er mühelos dicke Aquarienscheiben aus Glas.",
-     "who": [],
-     "place": "underwater",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "glasscheibe"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "event",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "Aquarienscheiben"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "GEBROCHEN",
-      "color": "red"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du stehst schockiert vor einem kaputten Aquarium.",
-     "text": "Mein eigener Goldfisch schaut mich seitdem sehr verdächtig an.",
-     "image": "Mein eigener Goldfisch schaut mich seitdem sehr verdächtig an.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "glass"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "panic",
-     "shot": "wide",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Goldfisch"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "Modern teenager bedroom with gaming desk, cozy lighting, shelves",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafik fasst die drei Superkräfte als Checkliste zusammen.",
-     "text": "Hitze, Unsterblichkeit und Superkraft stecken also wirklich in der Natur.",
-     "image": "Hitze, Unsterblichkeit und Superkraft stecken also wirklich in der Natur.",
-     "who": [],
-     "place": "zimmer",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Natur"
-     ],
-     "overlay": null,
-     "graphic": {
-      "type": "podium",
-      "kicker": "TOP KRAFT",
-      "text": "UNSTERBLICH",
-      "left": "KNALL",
-      "right": "SCHLAG"
-     },
-     "who_desc": "",
-     "place_desc": "Modern teenager bedroom with gaming desk, cozy lighting, shelves",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du überlegst neugierig und deutest auf den Zuschauer.",
-     "text": "Welche dieser drei Superkräfte würdest du im Alltag am ehesten nutzen?",
-     "image": "Welche dieser drei Superkräfte würdest du im Alltag am ehesten nutzen?",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "happy",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Alltag"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "Modern teenager bedroom with gaming desk, cozy lighting, shelves",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du winkst fröhlich in die Kamera und zeigst nach oben.",
-     "text": "Schreib es in die Kommentare und folg für mehr Verrücktes.",
-     "image": "Schreib es in die Kommentare und folg für mehr Verrücktes.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "wave",
-       "emotion": "happy",
-       "emote": "heart",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "happy",
-     "shot": "close",
-     "camera": "zoom_out",
-     "sfx": "pop",
-     "highlight": [
-      "folg für mehr"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "Modern teenager bedroom with gaming desk, cozy lighting, shelves",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "needs": [
-   "pistolenkrebs",
-   "qualle",
-   "fangschreckenkrebs",
-   "aquarium"
-  ],
-  "title": "3 Tier-Superkräfte, die unmöglich wirken",
-  "created": 1794497365.9041817
- },
  "2026-11-13 13:00": {
   "category": "whatif",
   "topic": "Was passieren würde, wenn man die Biologie zweier Tiere kreuzen könnte",
@@ -2868,5 +2229,721 @@
   ],
   "title": "Was wenn alle Menschen gleichzeitig nett wären?",
   "created": 1794585214.5695457
+ },
+ "2026-11-14 13:00": {
+  "category": "whatif",
+  "topic": "Die wissenschaftliche Rekonstruktion eines spurlosen Flugzeugabsturzes",
+  "trend": null,
+  "script": {
+   "title": "Was passiert, wenn ein Flugzeug spurlos verschwindet?",
+   "description": "Erlebe Schritt für Schritt, wie Ermittler ein Flugzeug im Ozean finden.\nDie Physik zeigt dir, wie Wracks aus der Tiefsee geborgen werden.\nSchreibst du im Flugzeug lieber Nachrichten oder schläfst du?",
+   "hashtags": [
+    "#shorts",
+    "#flugzeug",
+    "#wissenschaft",
+    "#physik",
+    "#whatif",
+    "#technik",
+    "#wissen",
+    "#abenteuer"
+   ],
+   "tags": [
+    "flugzeugabsturz",
+    "flugschreiber",
+    "blackbox",
+    "ozean",
+    "wissenschaft",
+    "physik",
+    "spurlos verschwunden",
+    "rekonstruktion",
+    "what if"
+   ],
+   "thumbnail": {
+    "image": "Dramatic wide shot of an ocean floor at night, glowing sonar waves sweeping over deep dark water, high contrast blue and black tones, copy space on top",
+    "text": "SPURLOS VERSCHWUNDEN?"
+   },
+   "wishes": [
+    "sonar"
+   ],
+   "toon": true,
+   "cast": {
+    "held": {
+     "shirt": "orange",
+     "hat": "",
+     "hair": "dunkelbraun",
+     "hair_color": "dunkelbraun",
+     "glasses": false,
+     "skin": "hell"
+    }
+   },
+   "scenes": [
+    {
+     "see": "Ein Flugzeug fliegt ruhig am Nachthimmel und verschwindet plötzlich auf dem Radar.",
+     "text": "Ein Passagierflugzeug verschwindet mitten über dem Ozean spurlos vom Radar.",
+     "image": "Airplane flying calmly at night sky, glowing radar ring in background",
+     "who": [],
+     "place": "space",
+     "backdrop": {
+      "sky": "night",
+      "ground": "water",
+      "elements": [
+       "sea"
+      ]
+     },
+     "time": "night",
+     "weather": "",
+     "props": [
+      "plane"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "event",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "Radar"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "SIGNAL VERLOREN"
+     },
+     "who_desc": "",
+     "place_desc": "space",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Hauptdarsteller schaut schockiert auf einen leeren Bildschirm im Labor.",
+     "text": "Erst ein winziges Signal aus dem Weltall verrät die spätere Absturzstelle.",
+     "image": "Main character staring in shock at a blank computer screen in a dark room",
+     "who": [
+      "held"
+     ],
+     "place": "lab",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "computer"
+     ],
+     "actors": [
+      {
+       "id": "held",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "panic",
+     "shot": "wide",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Alarm"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "5 SEKUNDEN"
+     },
+     "who_desc": "",
+     "place_desc": "lab",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Weltkarte zeigt, wie Satellitensignale über dem Atlantik abbrechen.",
+     "text": "Aber moderne Satelliten empfangen selbst nach dem Abbruch noch stumme Pings.",
+     "image": "World map glowing with satellite orbit lines and pulsing signal dots",
+     "who": [],
+     "place": "worldmap",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "satellite"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "graphic": {
+      "type": "map",
+      "text": "SATELLITEN-PING",
+      "value": "germany,uk"
+     },
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Pings"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Grafik berechnet die letzte bekannte Position auf dem Meer.",
+     "text": "Also berechnen Physiker aus der Signal-Laufzeit kreisförmige Streifen auf dem Ozean.",
+     "image": "Graphic showing circular distance rings on an oceanic map",
+     "who": [],
+     "place": "worldmap",
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "graphic": {
+      "type": "pulse",
+      "value": "1",
+      "label": "LAUFZEIT-MESSUNG"
+     },
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Streifen"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Rettungsschiff fährt bei starkem Wellengang durch die Nacht.",
+     "text": "Nach wenigen Stunden starten Schiffe und Flugzeuge eine gigantische Suchaktion.",
+     "image": "Ship navigating rough dark ocean waters under cloudy night sky",
+     "who": [],
+     "place": "ocean",
+     "backdrop": {
+      "sky": "storm",
+      "ground": "water",
+      "elements": [
+       "sea"
+      ]
+     },
+     "time": "night",
+     "weather": "wind",
+     "props": [
+      "ship"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "event",
+     "camera": "pan_left",
+     "sfx": "whoosh",
+     "highlight": [
+      "Suchaktion"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "STUNDEN SPÄTER"
+     },
+     "who_desc": "",
+     "place_desc": "underwater",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Grafik zählt die riesige Suchfläche in Quadratkilometern auf.",
+     "text": "Das Problem: Ein einziges Suchgebiet kann so groß wie ganz Deutschland sein.",
+     "image": "Graphic overlay showing Germany shape comparing to vast ocean area",
+     "who": [],
+     "place": "germany",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "graphic",
+     "graphic": {
+      "type": "number",
+      "kicker": "SUCHGEBIET",
+      "value": "357.000",
+      "label": "QUADRATKILOMETER"
+     },
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Deutschland"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Unter Wasser am Meeresgrund liegt die Blackbox und sendet akustische Signale.",
+     "text": "Am Meeresboden sendet die Blackbox dreißig Tage lang ultraschallsignale aus.",
+     "image": "Deep ocean floor with a glowing black box pulsing acoustic soundwaves",
+     "who": [],
+     "place": "underwater",
+     "backdrop": {
+      "sky": "dark",
+      "ground": "water",
+      "elements": [
+       "sea"
+      ]
+     },
+     "time": "night",
+     "weather": "",
+     "props": [
+      "box"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "event",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "dreißig Tage"
+     ],
+     "overlay": {
+      "type": "counter",
+      "label": "BATTERIE",
+      "value": 30,
+      "unit": "TAGE"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Kalender zaehlt die Tage von 1 bis 30 herunter.",
+     "text": "Nach einem Monat schrumpft die Chance gewaltig, weil die Batterie endgültig stirbt.",
+     "image": "Calendar month page turning fast with days crossing out",
+     "who": [],
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "sad",
+     "shot": "graphic",
+     "graphic": {
+      "type": "days",
+      "text": "BATTERIE-LAUFZEIT",
+      "value": "30",
+      "sub": "30",
+      "label": "SIGNAL EINGESTELLT"
+     },
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "stirbt"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "lab",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Tiefsee-Roboter schwimmt durch die dunkle Abgrund-Zone des Ozeans.",
+     "text": "Jetzt helfen nur noch Spezial-Tauchboote mit Hochfrequenz-Sonar in viertausend Metern Tiefe.",
+     "image": "Underwater robot with bright headlights exploring deep abyss floor",
+     "who": [],
+     "place": "underwater",
+     "backdrop": {
+      "sky": "dark",
+      "ground": "rock",
+      "elements": [
+       "sea"
+      ]
+     },
+     "time": "night",
+     "weather": "",
+     "props": [
+      "sonar"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "event",
+     "camera": "pan_right",
+     "sfx": "whoosh",
+     "highlight": [
+      "viertausend"
+     ],
+     "overlay": {
+      "type": "thermo",
+      "value": 2
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Grafik zeigt den extremen Druck in der Tiefsee.",
+     "text": "Dort unten herrscht ein Druck wie vierhundert Atmosphären auf deinem Kopf.",
+     "image": "Graphic displaying extreme water pressure arrows on a human silhouette",
+     "who": [
+      "held"
+     ],
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "held",
+       "action": "shocked",
+       "emotion": "scared",
+       "emote": "sweat",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "vierhundert"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "400 BAR DRUCK"
+     },
+     "who_desc": "",
+     "place_desc": "lab",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Wrackteil schwimmt auf der Meeresoberfläche und wird von Strömungen getrieben.",
+     "text": "Meeresströmungen treiben Trümmerteile über Hunderte Kilometer hinweg auseinander.",
+     "image": "Plane debris floating on open water surface with ocean current arrows",
+     "who": [],
+     "place": "ocean",
+     "backdrop": {
+      "sky": "day",
+      "ground": "water",
+      "elements": [
+       "sea"
+      ]
+     },
+     "time": "day",
+     "weather": "",
+     "props": [
+      "box"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "event",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "Strömungen"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "underwater",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Meeresbiologen untersuchen Muscheln an einem gefundenen Flugzeugteil.",
+     "text": "Forscher nutzen sogar Muscheln auf Treibgut, um den genauen Drift-Weg nachzuvollziehen.",
+     "image": "Scientific microscope zooming in on barnacles attached to metallic debris",
+     "who": [
+      "held"
+     ],
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "mikroskop"
+     ],
+     "actors": [
+      {
+       "id": "held",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "idea",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "pop",
+     "highlight": [
+      "Muscheln"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "BIOLOGISCHE SPUR"
+     },
+     "who_desc": "",
+     "place_desc": "lab",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Zeitleiste zeigt zwei Jahre vergehende Zeit an.",
+     "text": "Trotzdem vergehen bei schwierigen Suchen manchmal mehrere Jahre bis zum Fund.",
+     "image": "Timeline graphic advancing rapidly over two whole years",
+     "who": [],
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "sad",
+     "shot": "graphic",
+     "graphic": {
+      "type": "timer",
+      "value": "2 JAHRE",
+      "kicker": "SUCHDAUER"
+     },
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "mehrere Jahre"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "lab",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Flugzeugwrack wird am Meeresgrund von Scheinwerfern beleuchtet.",
+     "text": "Erst wenn das Wrack liegt, wird jedes einzelne Bauteil wie ein Puzzle zusammengesetzt.",
+     "image": "Submarine spotlight illuminating airplane wreckage underwater",
+     "who": [],
+     "place": "underwater",
+     "backdrop": {
+      "sky": "dark",
+      "ground": "rock",
+      "elements": [
+       "sea"
+      ]
+     },
+     "time": "night",
+     "weather": "",
+     "props": [
+      "plane"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "event",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "Puzzle"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Im Labor analysiert der Hauptdarsteller speicherdaten der Blackbox.",
+     "text": "Der Flugdatenschreiber verrät den Ermittlern schließlich Tempo, Höhe und Triebwerksdruck.",
+     "image": "Main character reading data charts on a computer screen in a high tech lab",
+     "who": [
+      "held"
+     ],
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "computer"
+     ],
+     "actors": [
+      {
+       "id": "held",
+       "action": "think",
+       "emotion": "",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Flugdatenschreiber"
+     ],
+     "overlay": {
+      "type": "note",
+      "title": "DATEN",
+      "text": "Tempo, Höhe, Druck"
+     },
+     "who_desc": "",
+     "place_desc": "lab",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Computervisualisierung zeigt den Flugverlauf kurz vor dem Absturz.",
+     "text": "So lässt sich selbst Jahre später der exakte Hergang Sekunde für Sekunde nachstellen.",
+     "image": "3D flight path trajectory simulation screen showing exact flight line",
+     "who": [],
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "graphic": {
+      "type": "chart",
+      "kicker": "FLUGKURVE",
+      "value": "100%",
+      "label": "REKONSTRUIERT"
+     },
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "nachstellen"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "lab",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Statistik über die Sicherheit von Passagierflugzeugen leuchtet grün auf.",
+     "text": "Egal wie spurlos: Flugzeuge hinterlassen am Ende immer physikalische Spuren im Ozean.",
+     "image": "Green glowing checkmark graphic over a clean radar screen background",
+     "who": [],
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "happy",
+     "shot": "graphic",
+     "graphic": {
+      "type": "badge",
+      "kicker": "PHYSIK",
+      "text": "SPUREN DA"
+     },
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Spuren"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "GELÖST",
+      "color": "green"
+     },
+     "who_desc": "",
+     "place_desc": "lab",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Hauptdarsteller schaut den Zuschauer direkt an und lächelt entspannt.",
+     "text": "Fliegen bleibt wissenschaftlich bewiesen die sicherste Reiseart der ganzen Welt.",
+     "image": "Main character in orange shirt smiling confidently at the camera",
+     "who": [
+      "held"
+     ],
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "held",
+       "action": "wave",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "happy",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "sicherste"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "lab",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Flugzeug fliegt bei Sonnenuntergang dem Horizont entgegen.",
+     "text": "Hättest du Vertrauen in die Technik tief unten im Ozean? Folg für mehr!",
+     "image": "Passenger plane flying into a bright orange sunset sky",
+     "who": [],
+     "place": "space",
+     "backdrop": {
+      "sky": "sunset",
+      "ground": "water",
+      "elements": [
+       "sea"
+      ]
+     },
+     "time": "day",
+     "weather": "",
+     "props": [
+      "plane"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "happy",
+     "shot": "event",
+     "camera": "zoom_out",
+     "sfx": "whoosh",
+     "highlight": [
+      "Folg"
+     ],
+     "overlay": {
+      "type": "choice",
+      "a": "Voll Vertrauen",
+      "b": "Lieber Bahn fahren"
+     },
+     "who_desc": "",
+     "place_desc": "space",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "needs": [
+   "sonar",
+   "blackbox",
+   "wrack"
+  ],
+  "title": "Was passiert, wenn ein Flugzeug spurlos verschwindet?",
+  "created": 1794593987.3390517
  }
 }

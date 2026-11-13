@@ -1,5 +1,5 @@
 {
- "updated": 1794592122.2789109,
+ "updated": 1794593992.3782666,
  "enough": true,
  "counted": 7,
  "total": 9,
@@ -9,10 +9,10 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 1,
-   "avg_views": 1366,
+   "avg_views": 1365,
    "avg_likes": 53.0,
    "like_rate": 3.88,
-   "avg_score": 2161
+   "avg_score": 2160
   },
   {
    "slug": "whatif",
@@ -21,20 +21,20 @@
    "avg_views": 1332,
    "avg_likes": 29.2,
    "like_rate": 2.2,
-   "avg_score": 1778
+   "avg_score": 1779
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 2,
-   "avg_views": 990,
+   "avg_views": 978,
    "avg_likes": 30.5,
-   "like_rate": 3.08,
-   "avg_score": 1462
+   "like_rate": 3.12,
+   "avg_score": 1450
   }
  ],
  "weights": {
-  "fakten": 0.84,
+  "fakten": 0.83,
   "storys": 1.2,
   "mysterien": 1.2,
   "tiere": 1.2,
@@ -42,9 +42,9 @@
   "comedy": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1366 Aufrufe, 3.88 % Likes).",
-  "Schwächste Kategorie: 💡 Fakten (Ø 990 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2159 zu 703 Punkte)."
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1365 Aufrufe, 3.88 % Likes).",
+  "Schwächste Kategorie: 💡 Fakten (Ø 978 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2154 zu 702 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -63,41 +63,41 @@
    "id": 54,
    "title": "Was passiert, wenn die Schwerkraft für fünf Sekunden verschwindet?",
    "category": "whatif",
-   "views": 1735,
+   "views": 1739,
    "likes": 45,
    "comments": 0,
    "shares": 0,
-   "score": 2410
+   "score": 2414
   },
   {
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1366,
+   "views": 1365,
    "likes": 53,
    "comments": 0,
    "shares": 0,
-   "score": 2161
+   "score": 2160
   },
   {
    "id": 75,
    "title": "3 Tier-Superkräfte, die unmöglich wirken!",
    "category": "fakten",
-   "views": 1394,
+   "views": 1372,
    "likes": 45,
    "comments": 1,
    "shares": 0,
-   "score": 2099
+   "score": 2077
   },
   {
    "id": 38,
    "title": "Was passiert, wenn Drohnen deinen Alltag komplett überwachen?",
    "category": "whatif",
-   "views": 1121,
+   "views": 1119,
    "likes": 17,
    "comments": 1,
    "shares": 0,
-   "score": 1406
+   "score": 1404
   }
  ],
  "flop": [
@@ -105,21 +105,21 @@
    "id": 38,
    "title": "Was passiert, wenn Drohnen deinen Alltag komplett überwachen?",
    "category": "whatif",
-   "views": 1121,
+   "views": 1119,
    "likes": 17,
    "comments": 1,
    "shares": 0,
-   "score": 1406
+   "score": 1404
   },
   {
    "id": 58,
    "title": "Wie aus einer Gaming-Bude der wertvollste Tech-Gigant wurde",
    "category": "fakten",
-   "views": 586,
+   "views": 584,
    "likes": 16,
    "comments": 0,
    "shares": 0,
-   "score": 826
+   "score": 824
   },
   {
    "id": 44,

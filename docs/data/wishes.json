@@ -271,5 +271,17 @@
  "anwaltstitel": {
   "n": 1,
   "last": "Als meine KI-Agenten die Kontrolle übernahmen"
+ },
+ "sonar": {
+  "n": 1,
+  "last": "Was passiert, wenn ein Flugzeug spurlos verschwindet?"
+ },
+ "blackbox": {
+  "n": 1,
+  "last": "Was passiert, wenn ein Flugzeug spurlos verschwindet?"
+ },
+ "wrack": {
+  "n": 1,
+  "last": "Was passiert, wenn ein Flugzeug spurlos verschwindet?"
  }
 }
