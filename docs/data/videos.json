@@ -2578,7 +2578,7 @@
   "id": 79,
   "category": "whatif",
   "topic": "Wenn Videospiel-Regeln plötzlich im echten Alltag gelten würden – genau drei Regeln, jede mit drei bis vier Sätzen erklärt und mit der echten Physik oder Biologie verglichen: Erstens das Inventar (du steckst neunundneunzig Wassermelonen in die Hosentasche, der Einkaufsbeutel wird überflüssig, aber in echt wiegen sie zusammen fast eine Tonne), zweitens Essen heilt sofort (ein Apfel und der blaue Fleck ist weg, in echt braucht der Körper dafür rund zwei Wochen), drittens Speichern und Neuladen (vor der Prüfung speichern, bei einer schlechten Note neu laden). Ohne die Wörter Bug und Glitch, ohne englische Gaming-Begriffe",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1794586170.9449475,
   "title": "Wenn Videospiel-Regeln plötzlich im echten Alltag gelten",
   "description": "Wenn Videospiel-Regeln plötzlich im echten Alltag gelten.\nWir testen das Inventar, unendliche Heilung und das Neuladen.\nWelches Feature würdest du als Erstes ausprobieren?",
@@ -2612,6 +2612,7 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Titelbild NEUNZIG statt 99 Melonen, Schild REGEL NUMMER EINS am falschen Satz, Zuckerhaufen statt Melonen, Stempel GRATIS/PLEITE ohne Bezug, Einkaufsbeutel in fremden Szenen, Apfel fehlt"
  }
 ]
