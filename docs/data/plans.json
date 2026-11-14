@@ -1,573 +1,4 @@
 {
- "2026-11-13 13:00": {
-  "category": "whatif",
-  "topic": "Was passieren würde, wenn man die Biologie zweier Tiere kreuzen könnte",
-  "trend": null,
-  "script": {
-   "title": "Was passiert, wenn wir Tiere kreuzen?",
-   "description": "Was würde passieren, wenn wir die Gene zweier Tiere mischen?\nWir kreuzen eine Raubkatze mit einem Insekt und schauen, was in der Natur passiert.\nWärst du mutig genug für dieses Monster?",
-   "hashtags": [
-    "#shorts",
-    "#fyp",
-    "#viral",
-    "#tiere",
-    "#biologie",
-    "#experiment",
-    "#wissenschaft"
-   ],
-   "tags": [
-    "tierfakten",
-    "biologie",
-    "genetik",
-    "experiment",
-    "tiere kreuzen",
-    "raubtier",
-    "insekt",
-    "mutation",
-    "wissenschaft"
-   ],
-   "thumbnail": {
-    "place": "fields",
-    "time": "day",
-    "actor": "du",
-    "action": "shocked",
-    "emotion": "shocked",
-    "props": [],
-    "weather": "",
-    "image": "Close-up of a strange creature combining cat and spider features, glowing eyes, laboratory background, dramatic lighting, high contrast",
-    "text": "TIERE KREUZEN"
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "blau",
-     "hat": "",
-     "hair": "long",
-     "hair_color": "braun",
-     "skin": "hell"
-    }
-   },
-   "scenes": [
-    {
-     "text": "Ein Gepard jagt mit hundertzwanzig Kilometern pro Stunde.",
-     "image": "Ein Gepard jagt mit hundertzwanzig Kilometern pro Stunde.",
-     "who": [
-      "du"
-     ],
-     "place": "fields",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Gene",
-      "mischen"
-     ],
-     "overlay": null,
-     "see": "Ein Gepard jagt über die Felder mit hoher Geschwindigkeit.",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "event",
-     "mood": "tense",
-     "backdrop": {
-      "sky": "day",
-      "ground": "grass",
-      "elements": [
-       "fields"
-      ]
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Doch was passiert, wenn wir seine Gene mit denen eines Adlers kreuzen?",
-     "image": "Doch was passiert, wenn wir seine Gene mit denen eines Adlers kreuzen?",
-     "who": [
-      "du"
-     ],
-     "place": "lab",
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "Genetik",
-      "denkbar"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "DNA MIX"
-     },
-     "see": "Eine Grafik zeigt die Frage zur Genkreuzung.",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "calm",
-     "graphic": {
-      "type": "question",
-      "text": "GEN-MIX?"
-     },
-     "who_desc": "",
-     "place_desc": "Modern laboratory with glowing screens, glass tubes, and sterile white walls",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Nehmen wir den Geparden als ersten Kandidaten.",
-     "image": "Nehmen wir den Geparden als ersten Kandidaten.",
-     "who": [
-      "du"
-     ],
-     "place": "lab",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "Geparden"
-     ],
-     "overlay": null,
-     "see": "Du stehst im Labor und denkst nach.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "think",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "Modern laboratory with glowing screens, glass tubes, and sterile white walls",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Er erreicht eine Höchstgeschwindigkeit von hundertzwanzig Kilometern pro Stunde.",
-     "image": "Er erreicht eine Höchstgeschwindigkeit von hundertzwanzig Kilometern pro Stunde.",
-     "who": [],
-     "place": "fields",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "hundertzwanzig",
-      "Kilometern"
-     ],
-     "overlay": {
-      "type": "counter",
-      "label": "GESCHWINDIGKEIT",
-      "value": 120,
-      "unit": "KM/H",
-      "sub": "MAXIMAL"
-     },
-     "see": "Ein Gepard läuft schnell über das Feld.",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "event",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Jetzt kreuzen wir ihn mit dem stärksten Springer im Tierreich, dem Floh.",
-     "image": "Jetzt kreuzen wir ihn mit dem stärksten Springer im Tierreich, dem Floh.",
-     "who": [
-      "du"
-     ],
-     "place": "lab",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Floh"
-     ],
-     "overlay": null,
-     "see": "Du betrachtest einen Floh im Labor.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "happy",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "Modern laboratory with glowing screens, glass tubes, and sterile white walls",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Ein Floh springt das Zweihundertfache seiner eigenen Körperlänge.",
-     "image": "Ein Floh springt das Zweihundertfache seiner eigenen Körperlänge.",
-     "who": [],
-     "place": "lab",
-     "camera": "zoom_out",
-     "sfx": "none",
-     "highlight": [
-      "Zweihundertfache"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "200X LÄNGE"
-     },
-     "see": "Eine Grafik zeigt die Sprungweite des Flohs.",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "calm",
-     "graphic": {
-      "type": "number",
-      "kicker": "FLOH",
-      "value": "200X",
-      "label": "LÄNGE"
-     },
-     "who_desc": "",
-     "place_desc": "Modern laboratory with glowing screens, glass tubes, and sterile white walls",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Übertragen auf unseren Raubkatzen-Floh-Hybriden bedeutet das eine enorme physikalische Veränderung.",
-     "image": "Übertragen auf unseren Raubkatzen-Floh-Hybriden bedeutet das eine enorme physikalische Veränderung.",
-     "who": [
-      "du"
-     ],
-     "place": "fields",
-     "camera": "pan_right",
-     "sfx": "none",
-     "highlight": [
-      "Hybriden",
-      "Veränderung"
-     ],
-     "overlay": null,
-     "see": "Du schaust erschrocken auf eine Messlinie am Boden.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Bei einer Körperlänge von zwei Metern springt dieses Tier aus dem Stand über vierhundert Meter weit.",
-     "image": "Bei einer Körperlänge von zwei Metern springt dieses Tier aus dem Stand über vierhundert Meter weit.",
-     "who": [],
-     "place": "fields",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "vierhundert",
-      "Meter"
-     ],
-     "overlay": {
-      "type": "counter",
-      "label": "SPRUNGWEITE",
-      "value": 400,
-      "unit": "METER",
-      "sub": "AUS DEM STAND"
-     },
-     "see": "Ein riesiger Sprung über die Felder.",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "event",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Das ist höher als der Kölner Dom.",
-     "image": "Das ist höher als der Kölner Dom.",
-     "who": [],
-     "place": "city",
-     "camera": "zoom_up",
-     "sfx": "none",
-     "highlight": [
-      "Kölner",
-      "Dom"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "HÖHER ALS DOM"
-     },
-     "see": "Eine Grafik zeigt den Vergleich mit dem Kölner Dom.",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "calm",
-     "graphic": {
-      "type": "distance",
-      "value": "400 m",
-      "left": "SPRUNG",
-      "right": "DOM"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Aber das echte Problem ist nicht die Weite, sondern die Landung.",
-     "image": "Aber das echte Problem ist nicht die Weite, sondern die Landung.",
-     "who": [
-      "du"
-     ],
-     "place": "lab",
-     "camera": "still",
-     "sfx": "tick",
-     "highlight": [
-      "Landung"
-     ],
-     "overlay": null,
-     "see": "Du hältst dir besorgt den Kopf.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shake",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "Modern laboratory with glowing screens, glass tubes, and sterile white walls",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Bei der Beschleunigung wirken Kräfte von über fünfzig G auf den Körper.",
-     "image": "Bei der Beschleunigung wirken Kräfte von über fünfzig G auf den Körper.",
-     "who": [],
-     "place": "lab",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "fünfzig",
-      "G"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "50 G KRÄFTE"
-     },
-     "see": "Eine Grafik zeigt die enorme Beschleunigung.",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "tense",
-     "graphic": {
-      "type": "number",
-      "kicker": "KRAFT",
-      "value": "50 G",
-      "label": "AUFPRALL"
-     },
-     "who_desc": "",
-     "place_desc": "Modern laboratory with glowing screens, glass tubes, and sterile white walls",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Kein normales Säugetier hält das ohne massive Innenschäden aus.",
-     "image": "Kein normales Säugetier hält das ohne massive Innenschäden aus.",
-     "who": [
-      "du"
-     ],
-     "place": "lab",
-     "camera": "shake",
-     "sfx": "none",
-     "highlight": [
-      "Innenschäden"
-     ],
-     "overlay": null,
-     "see": "Du siehst besorgt auf eine zerstörte Requisite im Labor.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "sad",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "sad",
-     "who_desc": "",
-     "place_desc": "Modern laboratory with glowing screens, glass tubes, and sterile white walls",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Deshalb würde die Evolution hier sofort eine Grenze ziehen.",
-     "image": "Deshalb würde die Evolution hier sofort eine Grenze ziehen.",
-     "who": [
-      "du"
-     ],
-     "place": "fields",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Evolution",
-      "Grenze"
-     ],
-     "overlay": null,
-     "see": "Eine Barriere aus Stein blockiert den Weg auf dem Feld.",
-     "time": "day",
-     "props": [
-      "rock"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Naturgesetze lassen sich eben nicht einfach austricksen.",
-     "image": "Naturgesetze lassen sich eben nicht einfach austricksen.",
-     "who": [
-      "du"
-     ],
-     "place": "lab",
-     "camera": "zoom_out",
-     "sfx": "none",
-     "highlight": [
-      "Naturgesetze"
-     ],
-     "overlay": null,
-     "see": "Du schüttelst den Kopf im Labor.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "idle",
-       "emotion": "worried",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "Modern laboratory with glowing screens, glass tubes, and sterile white walls",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Manchmal ist es besser, wenn manche Tiere einfach getrennt bleiben.",
-     "image": "Manchmal ist es besser, wenn manche Tiere einfach getrennt bleiben.",
-     "who": [
-      "du"
-     ],
-     "place": "park",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "getrennt",
-      "bleiben"
-     ],
-     "overlay": null,
-     "see": "Tiere bleiben friedlich getrennt auf der Wiese.",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "event",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Oder hättest du Lust auf solche Nachbarn im Garten?",
-     "image": "Oder hättest du Lust auf solche Nachbarn im Garten?",
-     "who": [
-      "du"
-     ],
-     "place": "garden",
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "Nachbarn",
-      "Garten"
-     ],
-     "overlay": {
-      "type": "choice",
-      "a": "Auf keinen Fall",
-      "b": "Schon irgendwie cool"
-     },
-     "see": "Du schaust ins Publikum und fragst nach.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "happy",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "needs": [
-   "gepard",
-   "adler",
-   "floh"
-  ],
-  "title": "Was passiert, wenn wir Tiere kreuzen?",
-  "created": 1794508904.905337
- },
  "2026-11-13 18:00": {
   "category": "whatif",
   "topic": "Wenn physische Spielregeln plötzlich in der Realität gelten würden",
@@ -2945,5 +2376,865 @@
   ],
   "title": "Was passiert, wenn ein Flugzeug spurlos verschwindet?",
   "created": 1794593987.3390517
+ },
+ "2026-11-14 18:00": {
+  "category": "storys",
+  "topic": "Der spektakulärste Gefängnisausbruch aller Zeiten: Wie zwei Männer mit einem selbstgebauten Heißluftballon über die DDR-Grenze flohen",
+  "trend": null,
+  "script": {
+   "title": "DDR-Flucht: Die unmöglichste Flucht mit einem Ballon",
+   "description": "Zwei Familien bauten heimlich einen Ballon für die Flucht.\nSie riskierten ihr Leben für die Freiheit über der DDR-Grenze.\nWürdest du dich in diesen Ballon trauen?",
+   "hashtags": [
+    "#shorts",
+    "#geschichte",
+    "#ddr",
+    "#flucht",
+    "#spannung",
+    "#viral",
+    "#wissen"
+   ],
+   "tags": [
+    "ddr flucht",
+    "heißluftballon flucht",
+    "stasi",
+    "deutsche geschichte",
+    "spannende storys"
+   ],
+   "thumbnail": {
+    "image": "Close-up of a homemade hot air balloon made of colorful fabric scraps glowing in the night sky with searchlights below.",
+    "text": "FLUCHT IM BALLON"
+   },
+   "wishes": [
+    "heißluftballon",
+    "nähmaschine",
+    "gasflasche",
+    "suchscheinwerfer"
+   ],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "grau",
+     "hat": "",
+     "hair": "curly",
+     "hair_color": "dunkelbraun",
+     "skin": "weiß",
+     "gender": "m"
+    },
+    "partner": {
+     "shirt": "blau",
+     "hat": "beanie",
+     "hair": "",
+     "hair_color": "schwarz",
+     "skin": "weiß",
+     "gender": "m"
+    }
+   },
+   "scenes": [
+    {
+     "see": "Zwei Männer nähen heimlich in einem dunklen Keller den riesigen Stoff zusammen.",
+     "text": "Zwei Familien wagen die unmöglichste Flucht aus der DDR.",
+     "image": "Two men working in a dark basement surrounded by huge piles of colorful fabric.",
+     "who": [
+      "du",
+      "partner"
+     ],
+     "place": "basement",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "spektakulärsten",
+      "Ausbruch"
+     ],
+     "status": "PLAN: GEHEIM",
+     "shot": "wide",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "nähmaschine"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "partner",
+       "action": "talk",
+       "emotion": "",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "overlay": {
+      "type": "tag",
+      "text": "DDR · 1979"
+     },
+     "who_desc": "; ",
+     "place_desc": "A dark cellar with tools, sewing equipment, and fabric scraps scattered around.",
+     "hud": ""
+    },
+    {
+     "see": "Ein Notizzettel mit den strikten Gesetzen der DDR liegt auf dem Tisch.",
+     "text": "Ihr waghalsiger Plan droht bis zur letzten Sekunde tödlich zu scheitern.",
+     "image": "A law book on a wooden desk in a dark room.",
+     "who": [],
+     "place": "basement",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Gesetz",
+      "Landes"
+     ],
+     "shot": "insert",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "gesetzbuch"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "overlay": {
+      "type": "stamp",
+      "text": "VERBOTEN",
+      "color": "red"
+     },
+     "who_desc": "",
+     "place_desc": "A dark cellar with tools, sewing equipment, and fabric scraps scattered around.",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Männer nähen hunderte Quadratmeter Stoff mit einer kleinen Maschine.",
+     "text": "Heimlich kaufen sie über tausend Quadratmeter Stoff in verschiedensten Geschäften.",
+     "image": "Close up of fabric being fed through a small sewing machine.",
+     "who": [
+      "du"
+     ],
+     "place": "street",
+     "camera": "pan_left",
+     "sfx": "tick",
+     "highlight": [
+      "tausend",
+      "Quadratmeter"
+     ],
+     "shot": "wide",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "box"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "walk",
+       "emotion": "worried",
+       "pos": "left",
+       "to": "right",
+       "speaks": true,
+       "hold": "bag"
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "overlay": {
+      "type": "card",
+      "text": "1200 m² STOFF"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Agent beobachtet argwöhnisch ein Haus durch ein Fernglas.",
+     "text": "Jeder einzelne Kauf könnte die Stasi sofort auf ihre Spur bringen.",
+     "image": "A dark street with a watchful figure in the shadows.",
+     "who": [],
+     "place": "street",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Stasi",
+      "Spur"
+     ],
+     "shot": "wide",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "cctv"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "worried",
+     "mood": "scary",
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Zwei Frauen und vier Kinder packen ängstlich kleine Taschen.",
+     "text": "Gemeinsam mit ihren Frauen und vier kleinen Kindern riskieren sie alles.",
+     "image": "Families gathered in a dim room packing small bags silently.",
+     "who": [
+      "du",
+      "partner"
+     ],
+     "place": "livingroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Frauen",
+      "Kinder"
+     ],
+     "shot": "wide",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "table"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "worried",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "partner",
+       "action": "think",
+       "emotion": "scared",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "overlay": {
+      "type": "card",
+      "text": "8 PERSONEN"
+     },
+     "who_desc": "; ",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik zeigt das Gewicht der Passagiere und die Tragkraft.",
+     "text": "Acht Personen müssen gleichzeitig in eine selbst gebaute kleine Gondel passen.",
+     "image": "Graphic illustration of a gondola.",
+     "who": [],
+     "place": "basement",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "Gondel",
+      "passen"
+     ],
+     "shot": "graphic",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "graphic": {
+      "type": "number",
+      "kicker": "GESAMTGEWICHT",
+      "value": "550 KG",
+      "label": "IN DIE GONDEL"
+     },
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "A dark cellar with tools, sewing equipment, and fabric scraps scattered around.",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "In der Nacht tragen sie den riesigen Sack auf ein dunkles Feld.",
+     "text": "Mitten in der Nacht bauen sie den Ballon auf einer Wiese auf.",
+     "image": "People unfolding a massive cloth on a pitch-black grass field.",
+     "who": [
+      "du"
+     ],
+     "place": "fields",
+     "backdrop": {
+      "sky": "night",
+      "ground": "grass",
+      "elements": [
+       "trees"
+      ]
+     },
+     "camera": "pan_right",
+     "sfx": "whoosh",
+     "highlight": [
+      "Nacht",
+      "Wiese"
+     ],
+     "status": "WIND: RUHIG",
+     "shot": "wide",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "heißluftballon"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "run",
+       "emotion": "scared",
+       "pos": "offleft",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "A dark empty field at night with tall grass and a clear sky.",
+     "hud": ""
+    },
+    {
+     "see": "Der Brenner zündet mit einer riesigen Stichflamme im Feld.",
+     "text": "Mit vier Gasflaschen erzeugen sie das heiße Feuer für den Auftrieb.",
+     "image": "A massive flame shoots out from gas burners into the balloon opening.",
+     "who": [],
+     "place": "fields",
+     "backdrop": {
+      "sky": "night",
+      "ground": "grass",
+      "elements": []
+     },
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Gasflaschen",
+      "Feuer"
+     ],
+     "shot": "event",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "fire",
+      "gasflasche"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "overlay": {
+      "type": "card",
+      "text": "4 GASFLASCHEN"
+     },
+     "who_desc": "",
+     "place_desc": "A dark empty field at night with tall grass and a clear sky.",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Ballon hebt langsam in den Nachthimmel ab.",
+     "text": "Der gigantische Stoffbeutel füllt sich langsam und hebt in die Dunkelheit ab.",
+     "image": "A huge colorful balloon ascending into the dark starry sky.",
+     "who": [],
+     "place": "fields",
+     "backdrop": {
+      "sky": "night",
+      "ground": "grass",
+      "elements": [
+       "hills"
+      ]
+     },
+     "camera": "pan_up",
+     "sfx": "whoosh",
+     "highlight": [
+      "gigantische",
+      "Dunkelheit"
+     ],
+     "shot": "wide",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "heißluftballon"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "wave",
+       "emotion": "worried",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "A dark empty field at night with tall grass and a clear sky.",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Höhenmesser-Grafik schießt extrem schnell nach oben.",
+     "text": "Sie steigen rasend schnell auf über zweitausend Meter Höhe auf.",
+     "image": "Graphic of altitude rising fast.",
+     "who": [],
+     "place": "sky",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "zweitausend",
+      "Meter"
+     ],
+     "shot": "graphic",
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "graphic": {
+      "type": "number",
+      "kicker": "FLUGHÖHE",
+      "value": "2.000 M",
+      "label": "ÜBER DEM BODEN"
+     },
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "Night sky with clouds and distant searchlights from below.",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Menschen in der Gondel frieren extrem und zittern.",
+     "text": "Dort oben herrscht eiskalte Temperatur von minus acht Grad Celsius.",
+     "image": "People huddled together in a small basket shivering in freezing cold.",
+     "who": [
+      "du",
+      "partner"
+     ],
+     "place": "sky",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "eiskalte",
+      "minus"
+     ],
+     "shot": "wide",
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shake",
+       "emotion": "scared",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "partner",
+       "action": "shake",
+       "emotion": "scared",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "scary",
+     "overlay": {
+      "type": "thermo",
+      "value": -8
+     },
+     "who_desc": "; ",
+     "place_desc": "Night sky with clouds and distant searchlights from below.",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grenz-Suchscheinwerfer suchen am Boden hektisch den Himmel ab.",
+     "text": "Plötzlich erfassen riesige Suchscheinwerfer der Grenze den Ballon am Himmel.",
+     "image": "Bright searchlight beams crisscrossing through clouds in the dark.",
+     "who": [],
+     "place": "sky",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Suchscheinwerfer",
+      "Grenze"
+     ],
+     "shot": "wide",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "suchscheinwerfer"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "partner",
+       "action": "shocked",
+       "emotion": "shocked",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "panic",
+     "overlay": {
+      "type": "card",
+      "text": "ALARM AN DER GRENZE"
+     },
+     "who_desc": "",
+     "place_desc": "Night sky with clouds and distant searchlights from below.",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gas brennt plötzlich aus, die Flamme erlischt zischend.",
+     "text": "Genau in diesem Schreckensmoment geht ihnen das allerletzte Gas aus.",
+     "image": "The flame in the burner goes out completely leaving darkness.",
+     "who": [
+      "du"
+     ],
+     "place": "sky",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "Schreckensmoment",
+      "Gas"
+     ],
+     "shot": "wide",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "gasflasche"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "panic",
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "Night sky with clouds and distant searchlights from below.",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Ballon stürzt steil durch die Wolken nach unten.",
+     "text": "Der Ballon beginnt ungebremst im freien Fall abzustürzen.",
+     "image": "The balloon falling rapidly down through fog and clouds.",
+     "who": [],
+     "place": "sky",
+     "camera": "zoom_out",
+     "sfx": "whoosh",
+     "highlight": [
+      "ungebremst",
+      "abzustürzen"
+     ],
+     "status": "FALL: 15 M/S",
+     "shot": "wide",
+     "time": "night",
+     "weather": "wind",
+     "props": [
+      "heißluftballon"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "float",
+       "emotion": "scared",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "partner",
+       "action": "float",
+       "emotion": "scared",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "panic",
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "Night sky with clouds and distant searchlights from below.",
+     "hud": ""
+    },
+    {
+     "see": "Der Ballon schlägt hart auf Bäumen und Ästen auf.",
+     "text": "Nach achtundzwanzig Minuten Flug krachen sie hart in ein Gebüsch.",
+     "image": "The gondola crashing into dark trees with dust and leaves flying.",
+     "who": [
+      "du",
+      "partner"
+     ],
+     "place": "fields",
+     "backdrop": {
+      "sky": "night",
+      "ground": "grass",
+      "elements": [
+       "forest",
+       "trees"
+      ]
+     },
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "achtundzwanzig",
+      "Gebüsch"
+     ],
+     "shot": "wide",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "tree"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "fall",
+       "emotion": "scared",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "partner",
+       "action": "fall",
+       "emotion": "scared",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "panic",
+     "overlay": {
+      "type": "card",
+      "text": "28 MINUTEN FLUG"
+     },
+     "who_desc": "; ",
+     "place_desc": "A dark empty field at night with tall grass and a clear sky.",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Menschen schauen ängstlich in der Dunkelheit umher.",
+     "text": "Niemand weiß im dunklen Wald, auf welcher Seite der Grenze sie sind.",
+     "image": "Figures looking around nervously in a misty pitch-black forest.",
+     "who": [
+      "du"
+     ],
+     "place": "forest",
+     "backdrop": {
+      "sky": "night",
+      "ground": "soil",
+      "elements": [
+       "trees"
+      ]
+     },
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "dunklen",
+      "Grenze"
+     ],
+     "shot": "wide",
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Polizeiauto steht mit blauen Lichtern an einer Straße.",
+     "text": "Da entdecken sie ein Polizeiauto und erkennen das westliche Schild.",
+     "image": "A police car parked near a rural road at night.",
+     "who": [],
+     "place": "street",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "Polizeiauto",
+      "westliche"
+     ],
+     "shot": "wide",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "car"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "!",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "partner",
+       "action": "look_around",
+       "emotion": "happy",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "happy",
+     "overlay": {
+      "type": "stamp",
+      "text": "GEFLÜCHTET",
+      "color": "green"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Familien jubeln vor Erleichterung und umarmen sich.",
+     "text": "Sie haben es tatsächlich nach Bayern geschafft und sind endlich völlig frei.",
+     "image": "The group cheering and hugging tightly with huge smiles.",
+     "who": [
+      "du",
+      "partner"
+     ],
+     "place": "fields",
+     "backdrop": {
+      "sky": "night",
+      "ground": "grass",
+      "elements": [
+       "village"
+      ]
+     },
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Bayern",
+      "frei"
+     ],
+     "shot": "wide",
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "jump",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "partner",
+       "action": "dance",
+       "emotion": "happy",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "happy",
+     "overlay": {
+      "type": "tag",
+      "text": "BAYERN · BRD"
+     },
+     "who_desc": "; ",
+     "place_desc": "A dark empty field at night with tall grass and a clear sky.",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik einer Zeitungsmeldung über die Ballonflucht.",
+     "text": "Eine unglaubliche Tat, denn genau so planen...",
+     "image": "A newspaper headline about the famous balloon escape.",
+     "who": [],
+     "place": "basement",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "unglaubliche",
+      "Tat"
+     ],
+     "shot": "graphic",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "graphic": {
+      "type": "news",
+      "kicker": "TAGESZEITUNG",
+      "text": "FLUCHT MIT BALLON GLÜCKT",
+      "sub": "Spektakuläre Landung in Bayern"
+     },
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "A dark cellar with tools, sewing equipment, and fabric scraps scattered around.",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "16. SEPTEMBER 1979 · 2:00 UH",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "nähmaschine",
+   "suchscheinwerfer",
+   "gondel"
+  ],
+  "title": "DDR-Flucht: Die unmöglichste Flucht mit einem Ballon",
+  "created": 1794651878.6275818
  }
 }

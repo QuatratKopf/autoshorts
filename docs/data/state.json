@@ -1,5 +1,5 @@
 {
- "last_category": "whatif",
+ "last_category": "storys",
  "done_slots": [
   "2026-11-08 18:00",
   "2026-11-11 18:00",
@@ -19,7 +19,7 @@
   "qnqm93yzl",
   "qqprosnb9"
  ],
- "last_stats": 1794649234.32071,
+ "last_stats": 1794651884.7785387,
  "next_id": 86,
  "connected": {
   "youtube": {
@@ -28,11 +28,19 @@
   }
  },
  "voice_wps": 2.533,
- "last_trends": 1794637313.6277797,
+ "last_trends": 1794651884.7793374,
  "tiktok_handle": "wissens..wert",
  "last_poster": {
   "hero": "fish",
   "palette": 0,
   "video": 85
+ },
+ "cat_credit": {
+  "fakten": 0.77,
+  "storys": -5.409999999999999,
+  "mysterien": 1.2,
+  "tiere": 1.2,
+  "whatif": 1.04,
+  "comedy": 1.2
  }
 }
