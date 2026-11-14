@@ -1,5 +1,5 @@
 {
- "updated": 1794664723.2453692,
+ "updated": 1794666527.6994972,
  "enough": true,
  "counted": 10,
  "total": 12,
@@ -18,10 +18,10 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 6,
-   "avg_views": 1560,
-   "avg_likes": 37.0,
-   "like_rate": 2.37,
-   "avg_score": 2120
+   "avg_views": 1562,
+   "avg_likes": 36.8,
+   "like_rate": 2.36,
+   "avg_score": 2119
   },
   {
    "slug": "fakten",
@@ -53,7 +53,7 @@
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1569 Aufrufe, 4.02 % Likes).",
   "Schwächste Kategorie: 🤪 Comedy (Ø 743 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2252 zu 702 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2251 zu 702 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -62,31 +62,31 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2501,
-   "likes": 57,
+   "views": 2502,
+   "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3356
+   "score": 3342
   },
   {
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2039,
+   "views": 2044,
    "likes": 62,
    "comments": 0,
    "shares": 0,
-   "score": 2969
+   "score": 2974
   },
   {
    "id": 80,
    "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
    "category": "whatif",
-   "views": 1949,
+   "views": 1953,
    "likes": 40,
    "comments": 0,
    "shares": 0,
-   "score": 2549
+   "score": 2553
   },
   {
    "id": 62,
