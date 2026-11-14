@@ -1,5 +1,5 @@
 {
- "updated": 1794655362.4243696,
+ "updated": 1794657467.7383657,
  "enough": true,
  "counted": 8,
  "total": 11,
@@ -9,32 +9,32 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 1,
-   "avg_views": 1513,
+   "avg_views": 1567,
    "avg_likes": 63.0,
-   "like_rate": 4.16,
-   "avg_score": 2458
+   "like_rate": 4.02,
+   "avg_score": 2512
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 5,
-   "avg_views": 1468,
-   "avg_likes": 36.2,
-   "like_rate": 2.47,
-   "avg_score": 2017
+   "avg_views": 1481,
+   "avg_likes": 36.4,
+   "like_rate": 2.46,
+   "avg_score": 2033
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 2,
-   "avg_views": 1014,
+   "avg_views": 1016,
    "avg_likes": 30.5,
-   "like_rate": 3.01,
-   "avg_score": 1486
+   "like_rate": 3.0,
+   "avg_score": 1488
   }
  ],
  "weights": {
-  "fakten": 0.77,
+  "fakten": 0.76,
   "storys": 1.2,
   "mysterien": 1.2,
   "tiere": 1.2,
@@ -42,9 +42,9 @@
   "comedy": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1513 Aufrufe, 4.16 % Likes).",
-  "Schwächste Kategorie: 💡 Fakten (Ø 1014 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2352 zu 702 Punkte)."
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1567 Aufrufe, 4.02 % Likes).",
+  "Schwächste Kategorie: 💡 Fakten (Ø 1016 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2374 zu 702 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -53,51 +53,51 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2492,
-   "likes": 56,
+   "views": 2500,
+   "likes": 57,
    "comments": 0,
    "shares": 0,
-   "score": 3332
+   "score": 3355
   },
   {
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 1976,
+   "views": 2031,
    "likes": 62,
    "comments": 0,
    "shares": 0,
-   "score": 2906
+   "score": 2961
   },
   {
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1513,
+   "views": 1567,
    "likes": 63,
    "comments": 0,
    "shares": 0,
-   "score": 2458
+   "score": 2512
   },
   {
    "id": 54,
    "title": "Was passiert, wenn die Schwerkraft für fünf Sekunden verschwindet?",
    "category": "whatif",
-   "views": 1751,
+   "views": 1752,
    "likes": 46,
    "comments": 0,
    "shares": 0,
-   "score": 2441
+   "score": 2442
   },
   {
    "id": 75,
    "title": "3 Tier-Superkräfte, die unmöglich wirken!",
    "category": "fakten",
-   "views": 1434,
+   "views": 1438,
    "likes": 45,
    "comments": 1,
    "shares": 0,
-   "score": 2139
+   "score": 2143
   }
  ],
  "flop": [
@@ -105,11 +105,11 @@
    "id": 38,
    "title": "Was passiert, wenn Drohnen deinen Alltag komplett überwachen?",
    "category": "whatif",
-   "views": 1119,
+   "views": 1120,
    "likes": 17,
    "comments": 1,
    "shares": 0,
-   "score": 1404
+   "score": 1405
   },
   {
    "id": 58,
