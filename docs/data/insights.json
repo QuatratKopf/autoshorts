@@ -1,5 +1,5 @@
 {
- "updated": 1794633699.8954253,
+ "updated": 1794635503.737171,
  "enough": true,
  "counted": 7,
  "total": 11,
@@ -18,10 +18,10 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 4,
-   "avg_views": 1341,
+   "avg_views": 1340,
    "avg_likes": 29.8,
    "like_rate": 2.22,
-   "avg_score": 1795
+   "avg_score": 1794
   },
   {
    "slug": "fakten",
@@ -44,7 +44,7 @@
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1379 Aufrufe, 3.84 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1012 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2183 zu 704 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2183 zu 702 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -93,11 +93,11 @@
    "id": 38,
    "title": "Was passiert, wenn Drohnen deinen Alltag komplett überwachen?",
    "category": "whatif",
-   "views": 1122,
+   "views": 1119,
    "likes": 17,
    "comments": 1,
    "shares": 0,
-   "score": 1407
+   "score": 1404
   }
  ],
  "flop": [
@@ -105,11 +105,11 @@
    "id": 38,
    "title": "Was passiert, wenn Drohnen deinen Alltag komplett überwachen?",
    "category": "whatif",
-   "views": 1122,
+   "views": 1119,
    "likes": 17,
    "comments": 1,
    "shares": 0,
-   "score": 1407
+   "score": 1404
   },
   {
    "id": 58,
