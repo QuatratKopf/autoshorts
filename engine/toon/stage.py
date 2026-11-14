@@ -1141,7 +1141,7 @@ def direct(scenes, times, topic="", style="", look=""):
                 g0["text"] = "KEIN RADAR"
             elif not str(g0.get("text") or "").strip() or len(str(g0.get("text"))) > 22:
                 g0["text"] = "SIGNAL VERLOREN" if lost_r else "RADAR"
-        elif i and not deep_f and _re0.search(RADAR_RE, low0) and not (g0 and g0.get("type") in FIGURE_GFX and graphics.clean(g0)):
+        elif not deep_f and _re0.search(RADAR_RE, low0) and not (g0 and g0.get("type") in FIGURE_GFX and graphics.clean(g0)):
             none_r = bool(_re0.search(r"\b(?:kein|keine|keinen|ohne) (?:\w+ )?radar", low0))
             lost_r = none_r or bool(_re0.search(RADAR_LOST_RE, low0))   # „verschwindet vom Radar“: Radarschirm, der Leuchtpunkt erlischt
             sc["graphic"] = g0 = {"type": "radar", "text": "KEIN RADAR" if none_r else "SIGNAL VERLOREN" if lost_r else "RADAR", "sub": "lost" if lost_r else ""}
@@ -1899,8 +1899,10 @@ def direct(scenes, times, topic="", style="", look=""):
         shot_w = str(sc.get("shot") or "")
         gfx_w = shot_w == "graphic" and graphics.clean(sc.get("graphic"))
         bd_w = backdrop(sc)
-        if isinstance(bd_w, dict) and str(bd_w.get("ground") or "").lower() in ("water", "wasser") and not gfx_w and shot_w != "insert":
+        if isinstance(bd_w, dict) and str(bd_w.get("ground") or "").lower() in ("water", "wasser") and not gfx_w:
             low_w = str(sc.get("text") or "").lower()
+            if shot_w == "insert":
+                sc["shot"] = shot_w = "event"              # Schiff und Flugzeug fahren auf dem Meer – nicht als Einzelteile vor braunem Grund
             sc["actors"] = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and a.get("kind")]
             sc["crowd"] = ""
             if shot_w == "close":
