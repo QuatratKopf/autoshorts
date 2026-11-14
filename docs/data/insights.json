@@ -1,5 +1,5 @@
 {
- "updated": 1794662932.2947426,
+ "updated": 1794664723.2453692,
  "enough": true,
  "counted": 10,
  "total": 12,
@@ -36,10 +36,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 1,
-   "avg_views": 740,
-   "avg_likes": 30.0,
-   "like_rate": 4.05,
-   "avg_score": 1190
+   "avg_views": 743,
+   "avg_likes": 31.0,
+   "like_rate": 4.17,
+   "avg_score": 1208
   }
  ],
  "weights": {
@@ -52,8 +52,8 @@
  },
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1569 Aufrufe, 4.02 % Likes).",
-  "Schwächste Kategorie: 🤪 Comedy (Ø 740 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2250 zu 702 Punkte)."
+  "Schwächste Kategorie: 🤪 Comedy (Ø 743 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2252 zu 702 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -114,11 +114,11 @@
    "id": 81,
    "title": "Als meine KI-Agenten die Kontrolle übernahmen",
    "category": "comedy",
-   "views": 740,
-   "likes": 30,
+   "views": 743,
+   "likes": 31,
    "comments": 0,
    "shares": 0,
-   "score": 1190
+   "score": 1208
   },
   {
    "id": 58,
