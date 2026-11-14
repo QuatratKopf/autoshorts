@@ -1917,7 +1917,10 @@ def direct(scenes, times, topic="", style="", look=""):
                 props_w = [q for q in props_w if _key_w(q) != "wave"] or props_w      # die Flutwelle verschluckt sonst das Suchschiff
             if _re0.search(r"flugzeug|flieger|suchflüge", low_w) and "plane" not in [_key_w(q) for q in props_w] and "debris" not in [_key_w(q) for q in props_w] and len(props_w) < 2:
                 props_w.append({"type": "plane"})         # „Schiffe und Flugzeuge suchen“: beides ist zu sehen
+            props_w = [dict(q, pos=560) if _key_w(q) == "ship" and not q.get("pos") and shot_w != "event" else q for q in props_w]   # das Schiff fährt mittig, nicht halb aus dem Bild
             sc["props"] = props_w
+        if places.resolve(bd_w) == "underwater" and not gfx_w and shot_w != "insert":
+            sc["props"] = [dict(q, pos=270) if isinstance(q, dict) and _key_w(q) == "submersible" and not q.get("pos") else q for q in (sc.get("props") or [])]   # Tauchboot links, Lichtkegel nach rechts – ganz im Bild
         keys_w = [_key_w(q) for q in (sc.get("props") or []) if isinstance(q, dict)]
         rp_w = places.resolve(bd_w)
         if rp_w == "space" and "satellite" in keys_w and len(keys_w) <= 2 and all(k in ("satellite", "earth") for k in keys_w) and not sc.get("actors") \
