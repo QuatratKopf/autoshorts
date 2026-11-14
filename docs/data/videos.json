@@ -2865,5 +2865,49 @@
   "yt_thumb_at": 1794599446.1522975,
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":"
+ },
+ {
+  "id": 85,
+  "category": "whatif",
+  "topic": "Die wissenschaftliche Rekonstruktion eines spurlosen Flugzeugabsturzes",
+  "status": "review",
+  "created": 1794650977.4066417,
+  "title": "Was passiert, wenn ein Flugzeug spurlos verschwindet?",
+  "description": "Erlebe Schritt für Schritt, wie Ermittler ein Flugzeug im Ozean finden.\nDie Physik zeigt dir, wie Wracks aus der Tiefsee geborgen werden.\nSchreibst du im Flugzeug lieber Nachrichten oder schläfst du?",
+  "hashtags": [
+   "#shorts",
+   "#flugzeug",
+   "#wissenschaft",
+   "#physik",
+   "#whatif",
+   "#technik",
+   "#wissen",
+   "#abenteuer"
+  ],
+  "tags": [
+   "flugzeugabsturz",
+   "flugschreiber",
+   "blackbox",
+   "ozean",
+   "wissenschaft",
+   "physik",
+   "spurlos verschwunden",
+   "rekonstruktion",
+   "what if"
+  ],
+  "thumb_text": "SPURLOS VERSCHWUNDEN?",
+  "missing": null,
+  "cover_ms": 89139,
+  "duration": 89.0,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-14 13:00",
+  "review_at": 1794651485.6316793
  }
 ]

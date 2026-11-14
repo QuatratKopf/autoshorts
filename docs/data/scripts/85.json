@@ -1,0 +1,426 @@
+{
+ "title": "Was passiert, wenn ein Flugzeug spurlos verschwindet?",
+ "scenes": [
+  {
+   "text": "Ein Passagierflugzeug verschwindet mitten über dem Ozean spurlos vom Radar.",
+   "see": "Ein Flugzeug fliegt ruhig am Nachthimmel und verschwindet plötzlich auf dem Radar.",
+   "place": "space",
+   "backdrop": {
+    "sky": "night",
+    "ground": "water",
+    "elements": [
+     "sea"
+    ]
+   },
+   "time": "night",
+   "props": [
+    {
+     "type": "plane"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "SIGNAL VERLOREN"
+   }
+  },
+  {
+   "text": "Erst ein winziges Signal aus dem Weltall verrät die spätere Absturzstelle.",
+   "see": "Der Hauptdarsteller schaut schockiert auf einen leeren Bildschirm im Labor.",
+   "place": "lab",
+   "time": "night",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Aber moderne Satelliten empfangen selbst nach dem Abbruch noch stumme Pings.",
+   "see": "Eine Weltkarte zeigt, wie Satellitensignale über dem Atlantik abbrechen.",
+   "place": "worldmap",
+   "time": "night",
+   "actors": [
+    {
+     "id": "held",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "map",
+    "value": "germany,uk",
+    "text": "SATELLITEN-PING",
+    "dark": false
+   }
+  },
+  {
+   "text": "Also berechnen Physiker aus der Signal-Laufzeit kreisförmige Streifen auf dem Ozean.",
+   "see": "Eine Grafik berechnet die letzte bekannte Position auf dem Meer.",
+   "place": "underwater",
+   "time": "night",
+   "actors": [
+    {
+     "id": "held",
+     "action": "idle",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "",
+     "kind": "fish",
+     "hold": "",
+     "emote": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Nach wenigen Stunden starten Schiffe und Flugzeuge eine gigantische Suchaktion.",
+   "see": "Ein Rettungsschiff fährt bei starkem Wellengang durch die Nacht.",
+   "place": "ocean",
+   "backdrop": {
+    "sky": "storm",
+    "ground": "water",
+    "elements": [
+     "sea"
+    ]
+   },
+   "time": "night",
+   "weather": "wind",
+   "props": [
+    {
+     "type": "ship"
+    },
+    {
+     "type": "plane"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "STUNDEN SPÄTER"
+   }
+  },
+  {
+   "text": "Das Problem: Ein einziges Suchgebiet kann so groß wie ganz Deutschland sein.",
+   "see": "Eine Grafik zählt die riesige Suchfläche in Quadratkilometern auf.",
+   "place": "germany",
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Am Meeresboden sendet die Blackbox dreißig Tage lang ultraschallsignale aus.",
+   "see": "Unter Wasser am Meeresgrund liegt die Blackbox und sendet akustische Signale.",
+   "place": "underwater",
+   "time": "night",
+   "props": [
+    {
+     "type": "lib_blackbox",
+     "pos": 540
+    },
+    {
+     "type": "ping",
+     "pos": 540
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "counter",
+    "label": "BATTERIE",
+    "value": 30,
+    "unit": "TAGE"
+   }
+  },
+  {
+   "text": "Nach einem Monat schrumpft die Chance gewaltig, weil die Batterie endgültig stirbt.",
+   "see": "Ein Kalender zaehlt die Tage von 1 bis 30 herunter.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "sad"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "sad",
+   "graphic": {
+    "type": "days",
+    "value": "30",
+    "label": "SIGNAL EINGESTELLT",
+    "sub": "30",
+    "text": "BATTERIE-LAUFZEIT",
+    "dark": false
+   }
+  },
+  {
+   "text": "Jetzt helfen nur noch Spezial-Tauchboote mit Hochfrequenz-Sonar in viertausend Metern Tiefe.",
+   "see": "Ein Tiefsee-Roboter schwimmt durch die dunkle Abgrund-Zone des Ozeans.",
+   "place": "underwater",
+   "time": "night",
+   "props": [
+    {
+     "type": "sonar",
+     "pos": 270
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Dort unten herrscht ein Druck wie vierhundert Atmosphären auf deinem Kopf.",
+   "see": "Eine Grafik zeigt den extremen Druck in der Tiefsee.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "400 BAR DRUCK"
+   }
+  },
+  {
+   "text": "Meeresströmungen treiben Trümmerteile über Hunderte Kilometer hinweg auseinander.",
+   "see": "Ein Wrackteil schwimmt auf der Meeresoberfläche und wird von Strömungen getrieben.",
+   "place": "ocean",
+   "backdrop": {
+    "sky": "day",
+    "ground": "water",
+    "elements": [
+     "sea"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "box"
+    }
+   ],
+   "actors": [
+    {
+     "id": "held",
+     "action": "look_around",
+     "emotion": "worried",
+     "pos": "left",
+     "emote": "?"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Forscher nutzen sogar Muscheln auf Treibgut, um den genauen Drift-Weg nachzuvollziehen.",
+   "see": "Meeresbiologen untersuchen Muscheln an einem gefundenen Flugzeugteil.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "mikroskop"
+    }
+   ],
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "BIOLOGISCHE SPUR"
+   }
+  },
+  {
+   "text": "Trotzdem vergehen bei schwierigen Suchen manchmal mehrere Jahre bis zum Fund.",
+   "see": "Eine Zeitleiste zeigt zwei Jahre vergehende Zeit an.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "sad"
+    }
+   ],
+   "mood": "sad"
+  },
+  {
+   "text": "Erst wenn das Wrack liegt, wird jedes einzelne Bauteil wie ein Puzzle zusammengesetzt.",
+   "see": "Das Flugzeugwrack wird am Meeresgrund von Scheinwerfern beleuchtet.",
+   "place": "underwater",
+   "time": "night",
+   "props": [
+    {
+     "type": "lib_wrack",
+     "pos": 750
+    },
+    {
+     "type": "submersible",
+     "pos": 270
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Der Flugdatenschreiber verrät den Ermittlern schließlich Tempo, Höhe und Triebwerksdruck.",
+   "see": "Im Labor analysiert der Hauptdarsteller speicherdaten der Blackbox.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    },
+    {
+     "type": "lib_blackbox"
+    }
+   ],
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "think",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "panic",
+   "overlay": {
+    "type": "note",
+    "title": "DATEN",
+    "text": "Tempo, Höhe, Druck"
+   }
+  },
+  {
+   "text": "So lässt sich selbst Jahre später der exakte Hergang Sekunde für Sekunde nachstellen.",
+   "see": "Eine Computervisualisierung zeigt den Flugverlauf kurz vor dem Absturz.",
+   "place": "lab",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "chart",
+    "kicker": "FLUGKURVE",
+    "label": "REKONSTRUIERT",
+    "dark": false
+   }
+  },
+  {
+   "text": "Egal wie spurlos: Flugzeuge hinterlassen am Ende immer physikalische Spuren im Ozean.",
+   "see": "Statistik über die Sicherheit von Passagierflugzeugen leuchtet grün auf.",
+   "place": "underwater",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "happy",
+   "graphic": {
+    "type": "badge",
+    "kicker": "PHYSIK",
+    "text": "SPUREN DA",
+    "dark": false
+   }
+  },
+  {
+   "text": "Fliegen bleibt wissenschaftlich bewiesen die sicherste Reiseart der ganzen Welt.",
+   "see": "Der Hauptdarsteller schaut den Zuschauer direkt an und lächelt entspannt.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "held",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Hättest du Vertrauen in die Technik tief unten im Ozean? Folg für mehr!",
+   "see": "Das Flugzeug fliegt bei Sonnenuntergang dem Horizont entgegen.",
+   "place": "space",
+   "backdrop": {
+    "sky": "sunset",
+    "ground": "water",
+    "elements": [
+     "sea"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "plane"
+    }
+   ],
+   "shot": "event",
+   "mood": "happy",
+   "overlay": {
+    "type": "choice",
+    "a": "Voll Vertrauen",
+    "b": "Lieber Bahn fahren"
+   }
+  }
+ ]
+}
