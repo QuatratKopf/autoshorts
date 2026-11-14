@@ -194,6 +194,9 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
                   flood, ice, volcano, cloud, stormcloud, lightning, crack, smoke, aurora, eclipse
            (meteor fällt und schlägt ein, rocket startet, wave/flood steigen, crack reißt den Boden auf, eclipse verdunkelt
             die Sonne, sprout wächst zur Blume, volcano spuckt Lava)
+           Tiefsee: submersible (Forschungs-Tauchboot mit Scheinwerfer und Sonar-Ringen – nur am Ort underwater). "place": "underwater" mit
+           "time": "night" zeigt die dunkle Tiefsee (Schlick, Felsen, kein Sonnenlicht) – für Meeresboden, Wracks, Flugschreiber; dafür KEIN
+           "backdrop" mit Meeresoberfläche angeben. Nennt der Satz Blackbox/Flugschreiber, Wrack oder Sonar/Tauchboot, stellt die Regie sie dort selbst hin.
            Nimm nur Requisiten, die an diesen Ort gehören (kein Karton mitten auf der Straße als Ersatz für einen Supermarkt –
            dafür gibt es den Ort "supermarket").
   "actors": 1–2 Figuren, z. B. [{"id": "mia", "action": "run", "emotion": "scared", "emote": "!", "pos": "offleft", "to": "center", "speaks": true}]

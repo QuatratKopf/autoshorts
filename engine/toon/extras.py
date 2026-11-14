@@ -796,6 +796,49 @@ def p_ship(d, x, t, s=1.0):
     _poly(d, [(x - 200, y - 60), (x + 220, y - 60), (x + 170, y), (x - 160, y)], (60, 74, 110))
     d.line((x - 196, y - 44, x + 214, y - 44), fill=(214, 70, 60), width=8)
 
+def p_submersible(d, x, t, s=1.0):
+    """Forschungs-Tauchboot (Sonar, Tauchroboter): schwebt im Wasser, Blick nach rechts; der Scheinwerfer leuchtet schräg nach unten,
+    die Ortungs-Ringe des Sonars laufen in dieselbe Richtung zum Meeresgrund."""
+    if x <= W:
+        x = max(290, min(x, W - 250))                                                                         # ganz im Bild, auch am rechten Platz
+    y = 640 + math.sin(t * 1.3) * 12
+    d.polygon([(x + 196, y + 52), (x + 560, y + 250), (x + 430, y + 380)], fill=(255, 240, 170, 54))          # Lichtkegel
+    for i in range(3):                                                                                        # Sonar: drei Ringe wandern nach außen und verblassen
+        ph = (t * 0.6 + i / 3) % 1
+        rr = 150 + ph * 330
+        d.arc((x + 150 - rr, y + 40 - rr, x + 150 + rr, y + 40 + rr), 14, 76, fill=(120, 244, 220, int(230 * (1 - ph) ** 0.7)), width=12)
+    for sx in (-120, 110):                                                                                    # Kufen
+        d.line((x + sx, y + 80, x + sx - 14, y + 124), fill=INK, width=12)
+    d.line((x - 190, y + 124, x + 170, y + 124), fill=INK, width=16)
+    d.line((x - 186, y + 122, x + 166, y + 122), fill=(120, 126, 140), width=6)
+    _r(d, (x - 262, y - 56, x - 226, y + 56), (96, 104, 122), 8)                                              # Schraube im Schutzring
+    spin = math.sin(t * 14) * 40
+    d.line((x - 244, y - spin, x - 244, y + spin), fill=(200, 206, 216), width=8)
+    _r(d, (x - 232, y - 20, x - 196, y + 22), (96, 104, 122), 4)
+    _r(d, (x - 96, y - 136, x + 44, y - 66), (232, 120, 52), 16)                                              # Turm
+    d.line((x - 40, y - 136, x - 40, y - 186), fill=INK, width=8)
+    d.ellipse((x - 52, y - 206, x - 28, y - 182), fill=(250, 90, 70) if int(t * 2) % 2 else (150, 60, 56), outline=INK, width=4)
+    _r(d, (x - 220, y - 84, x + 190, y + 90), (246, 196, 56), 84)                                             # Rumpf
+    d.line((x - 176, y + 34, x + 96, y + 34), fill=(210, 150, 40), width=10)
+    _r(d, (x - 150, y - 34, x - 60, y + 6), (96, 104, 122), 12)                                               # seitliche Düse
+    _o(d, (x + 70, y - 76, x + 228, y + 82), (150, 214, 240))                                                 # Sichtkuppel
+    d.arc((x + 92, y - 56, x + 190, y + 42), 190, 262, fill=(240, 250, 255), width=9)
+    _o(d, (x + 150, y + 48, x + 200, y + 98), (255, 244, 180), 5)                                             # Scheinwerfer
+    d.line([(x + 60, y + 86), (x + 130, y + 150), (x + 196, y + 136)], fill=INK, width=14, joint="curve")     # Greifarm
+    d.line([(x + 60, y + 86), (x + 130, y + 150), (x + 196, y + 136)], fill=(150, 156, 170), width=6, joint="curve")
+    d.line([(x + 196, y + 136), (x + 226, y + 118)], fill=INK, width=8)
+    d.line([(x + 196, y + 136), (x + 228, y + 152)], fill=INK, width=8)
+
+
+def p_ping(d, x, t, s=1.0):
+    """Ortungs-Signal eines Senders am Boden (Blackbox): Ringe steigen vom Gerät auf, werden größer und verblassen."""
+    cy = GROUND - 150
+    for i in range(4):
+        ph = (t * 0.55 + i / 4) % 1
+        rr = 110 + ph * 400
+        d.arc((x - rr, cy - rr, x + rr, cy + rr), 200, 340, fill=(120, 244, 220, int(235 * (1 - ph) ** 0.8)), width=13)
+
+
 def p_door(d, x, t, s=1.0):
     _r(d, (x - 130, GROUND - 500, x + 130, GROUND), (96, 66, 46), 6)
     _r(d, (x - 110, GROUND - 480, x + 110, GROUND), (150, 100, 64), 4, 5)
@@ -955,6 +998,11 @@ PROP_ALIASES = {"krankenwagen": "ambulance", "rettungswagen": "ambulance", "nota
 FRONT = ("wave", "flood", "eclipse")
 BEHIND = ("sun", "moon", "earth", "cloud", "stormcloud", "aurora")      # stehen am Himmel hinter Häusern, Bergen und Bäumen
 SKY = ("drone", "earth", "sun", "moon", "ufo", "meteor", "aurora", "eclipse", "lightning", "cloud", "stormcloud", "plane", "satellite")     # werden vor den Figuren gezeichnet
+PROPS["ping"] = p_ping                                     # Signal-Ringe über einem Sender (nur von der Regie gesetzt)
+PROPS["submersible"] = p_submersible                       # Tauchboot mit Sonar: schwebt wie die Himmels-Dinge frei im Bild (unter Wasser)
+PROP_ALIASES.update({"sonar": "submersible", "tauchboot": "submersible", "tauchboote": "submersible", "u-boot": "submersible", "uboot": "submersible",
+                     "unterseeboot": "submersible", "tauchroboter": "submersible", "tiefseeroboter": "submersible", "submarine": "submersible"})
+SKY += ("submersible", "ping")
 
 
 # Echte Größe (Höhe in Metern) und Tiefe (Fußlinie im Bild) – daraus ergibt sich der Maßstab passend zu den Menschen.

@@ -78,6 +78,14 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   Grafik-Art (zwei Zahlen-Tafeln); Zahl-Grafik „3 PRO KETTE“ behält nur die Zahl. Schilder (`tag`) bis 30 Zeichen in kleinerer Schrift; gekürzte
   Einblendungen enden nie auf Artikel oder Verhältniswort (`overlays._DANGLING`).
 
+- Tiefsee-Technik (Flugzeug-Suche, Wracks): `places.underwater(night=True)` zeichnet die dunkle Tiefsee (`_deepsea`: Schlick, Felsrücken, Schlot,
+  Meeresschnee). Requisiten `submersible` (Forschungs-Tauchboot mit Scheinwerfer und Sonar-Ringen; Wörter Sonar, Tauchboot, Tauchroboter, U-Boot –
+  `stage.SUB_RE`) und `ping` (Signal-Ringe über einem Sender, setzt nur die Regie); Bibliothek: `blackbox` (orange, wie echte Flugschreiber), `wrack`.
+  Regie: Nennt der Satz Meeresboden/Tiefsee/„Metern Tiefe“ (`DEEP_RE`) oder gibt das Drehbuch `underwater` an, spielt die Szene unter Wasser – auch
+  gegen eine Baukasten-Landschaft mit Meeresoberfläche. Mit Blackbox, Wrack oder Tauchboot im Satz (`DEEP_THING_RE`) wird es die Tiefsee: nur die
+  Technik im Bild (Boot links, Wrack/Blackbox rechts am Grund, beim Wrack leuchtet ein Tauchboot), kein Flugzeug, kein Mensch, kein Fisch, keine
+  Zahlen-Tafel. Tauchboot und Sonar erscheinen nur unter Wasser (Fledermaus-„Sonar“ im Wald bleibt ohne Boot). Selbsttest: `_deep`.
+
 ## Was zu tun ist
 1. Offene Wünsche (ohne `"done": true`) und `"auto": true`-Einträge durchgehen, höchstens 8 pro Sitzung, häufigste zuerst.
 2. Einzelne Gegenstände: sauber als Eintrag in `docs/data/shapes.json` zeichnen (Format siehe Kopf von `engine/toon/library.py`:

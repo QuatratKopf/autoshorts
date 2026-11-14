@@ -246,11 +246,13 @@
  },
  "einkaufsbeutel": {
   "n": 1,
-  "last": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?"
+  "last": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
+  "done": true
  },
  "wassermelone": {
   "n": 1,
-  "last": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?"
+  "last": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
+  "done": true
  },
  "tuer": {
   "n": 1,
@@ -258,11 +260,13 @@
  },
  "stoppuhr": {
   "n": 1,
-  "last": "Was wenn alle Menschen gleichzeitig nett wären?"
+  "last": "Was wenn alle Menschen gleichzeitig nett wären?",
+  "done": true
  },
  "prüfung": {
   "n": 2,
-  "last": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?"
+  "last": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
+  "done": true
  },
  "knie": {
   "n": 1,
@@ -274,18 +278,22 @@
  },
  "sonar": {
   "n": 1,
-  "last": "Was passiert, wenn ein Flugzeug spurlos verschwindet?"
+  "last": "Was passiert, wenn ein Flugzeug spurlos verschwindet?",
+  "done": true
  },
  "blackbox": {
   "n": 1,
-  "last": "Was passiert, wenn ein Flugzeug spurlos verschwindet?"
+  "last": "Was passiert, wenn ein Flugzeug spurlos verschwindet?",
+  "done": true
  },
  "wrack": {
   "n": 1,
-  "last": "Was passiert, wenn ein Flugzeug spurlos verschwindet?"
+  "last": "Was passiert, wenn ein Flugzeug spurlos verschwindet?",
+  "done": true
  },
  "schokolade": {
   "n": 1,
-  "last": "Was wäre, wenn alle Menschen gleichzeitig nett wären?"
+  "last": "Was wäre, wenn alle Menschen gleichzeitig nett wären?",
+  "done": true
  }
 }

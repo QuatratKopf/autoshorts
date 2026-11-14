@@ -285,7 +285,11 @@ def _prepare(scene, cast):
         if isinstance(p, dict) and str(scene.get("shot") or "") != "insert" and \
                 extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in PLACE_HAS.get(place, ()):
             continue                                              # steht an diesem Ort schon
-        if isinstance(p, dict) and place not in places.OUTDOOR and place not in ("space", "plain") and \
+        if isinstance(p, dict) and place != "underwater" and str(scene.get("shot") or "") != "insert" and \
+                extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) == "submersible":
+            continue                                              # ein Tauchboot schwebt nur unter Wasser frei im Bild – nicht am Himmel, nicht im Zimmer
+        if isinstance(p, dict) and place not in places.OUTDOOR and place not in ("space", "plain") and not (place == "underwater" and
+                extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in ("submersible", "ping")) and \
                 extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in extras.SKY and str(scene.get("shot") or "") != "insert":
             if place in places.WINDOWS and len(win) < 2:          # was am Himmel passiert, sieht man drinnen durchs Fenster
                 win.append(extras.PROP_ALIASES.get(str(p["type"]).lower(), str(p["type"]).lower()))
@@ -294,7 +298,7 @@ def _prepare(scene, cast):
                 extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in ("fire", "volcano", "tornado", "car", "police", "ambulance", "bus", "truck", "house", "tree", "meteor", "wave") \
                 and str(scene.get("shot") or "") != "insert":
             continue                                              # gehört nach draußen, nicht ins Zimmer
-        if isinstance(p, dict) and place not in places.OUTDOOR and str(p.get("type")).lower().startswith("lib_") \
+        if isinstance(p, dict) and place not in places.OUTDOOR and place != "underwater" and str(p.get("type")).lower().startswith("lib_") \
                 and extras.REAL_M.get(str(p.get("type")).lower(), extras.SIZES.get(str(p.get("type")).lower(), (0,))[0]) > 2.6 and str(scene.get("shot") or "") != "insert":
             continue                                              # Gelerntes, das höher ist als ein Zimmer (Turm, Gebäude), steht nicht im Raum
         if isinstance(p, dict) and p.get("type"):
@@ -687,7 +691,7 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                 rot = rot * min(1.0, lift / 120) if hit is None else (9 if pi % 2 else -7) * (0 if kind in ("car", "bus", "truck") else 1)
                 _prop(frame, kind, x, t, big, False, max(lift, 0.01), rot)
                 continue
-            _prop_many(frame, kind, x, t, big, (opt.get("count") or {}).get(extras.PROP_ALIASES.get(kind, kind), 1), indoor,
+            _prop_many(frame, kind, x, t, big, (opt.get("count") or {}).get(extras.PROP_ALIASES.get(kind, kind), 1), indoor and place != "underwater",
                        grow=max(0.02, extras._pop(t, 0.06 + 0.12 * pi, 0.32)) if opt.get("pop_in", True) else 1.0)
     if opt.get("crowd"):
         _crowd(frame, opt["crowd"], t, night, 1090, 9999, **ckw)
@@ -1062,6 +1066,14 @@ def direct(scenes, times, topic="", style="", look=""):
     sea_topic = bool(_re0.search(SEA_TOPIC_RE, str(topic or "").lower() + " " + " ".join(str(x.get("text") or "") for x in scenes if isinstance(x, dict)).lower()))
     for i, (sc, (s0, e0)) in enumerate(zip(scenes, times)):
         sanitize(sc)
+        low_d = str(sc.get("text") or "").lower()
+        deep_f = bool(_re0.search(DEEP_RE, low_d) or (sea_topic and _re0.search(SUB_RE, low_d)) or str(sc.get("place") or "").lower() in ("underwater", "unterwasser"))
+        if deep_f:
+            # Meeresboden, Tiefsee, Tauchboot: spielt unter Wasser – auch wenn das Drehbuch dazu eine Landschaft mit Meeresoberfläche und Himmel angibt
+            sc["place"], sc["backdrop"] = "underwater", None
+            sc["_deep"] = bool(_re0.search(DEEP_THING_RE, low_d))
+            if sc["_deep"] or _re0.search(DEEP_DARK_RE, low_d):
+                sc["time"], sc["weather"] = "night", ""           # „Nacht“ unter Wasser zeichnet die Tiefsee: dunkel, Schlick, kein Sonnenlicht
         under0 = places.resolve(backdrop(sc)) == "underwater"
         if spooky:                                        # Grusel und Rätsel spielen im Dunkeln; Stimmung unheimlich, keine Passanten
             if not _re0.search(r"tagsüber|am tag\b|mittags|sonnenschein|am nächsten morgen|am morgen", sc["text"].lower()):
@@ -1135,8 +1147,8 @@ def direct(scenes, times, topic="", style="", look=""):
                 and unspoken_figures(ov_c, sc["text"]):
             sc["overlay"] = None                          # Schild „SEKUNDE 10“ an einem Satz, der die Zahl nicht nennt (sie fällt erst im nächsten); Jahreszahlen bleiben
         has_bd = isinstance(sc.get("backdrop"), dict) and (sc["backdrop"].get("elements") or sc["backdrop"].get("ground"))
-        hint = None if has_bd else _hint(sc.get("text"))
-        said = None if has_bd or place in MAPS else _said_place(sc.get("text"))
+        hint = None if has_bd or deep_f else _hint(sc.get("text"))
+        said = None if has_bd or place in MAPS or deep_f else _said_place(sc.get("text"))
         if not said and hint is None and topic_place and place == "livingroom" and not sc.get("props") and topic_place != place \
                 and not (i and isinstance(scenes[i - 1], dict) and places.resolve(scenes[i - 1].get("place")) == topic_place):
             said = topic_place                            # ortlose Szene im Allerwelts-Wohnzimmer: dort spielen, wovon das Video handelt (Hollywood → Kino)
@@ -1191,6 +1203,8 @@ def direct(scenes, times, topic="", style="", look=""):
                         break                              # im Schlafzimmer ist neben Bett und Tisch nur Platz für ein Ding
                     if kind in INDOOR_THINGS and places.resolve(backdrop(sc)) in ("space", "underwater", "cave"):
                         continue                           # kein Schreibtisch im All, kein Kühlschrank am Meeresgrund
+                    if kind == "submersible" and places.resolve(backdrop(sc)) != "underwater":
+                        continue                           # Tauchboot und Sonar gibt es nur unter Wasser
                     if kind in INDOOR_THINGS and (places.resolve(backdrop(sc)) in places.OUTDOOR):
                         if used.get(place, 0) < 3 or sc.get("overlay") or sc.get("shot"):
                             continue                       # Zimmer-Dinge stehen nicht in der Landschaft …
@@ -1550,7 +1564,8 @@ def direct(scenes, times, topic="", style="", look=""):
         if sc.get("shot") == "graphic":
             gfx += 1
         elif (lone or not acts) and (fig_prev or neon or (i and scenes[i - 1].get("shot") == "graphic")) and sc.get("shot") in ("", "close", "event") \
-                and ov_t in ("", "card", "counter", "bar") and not last and i > 0 and gfx < (6 if neon else 4) and not window_scene and rp2 not in MAPS:
+                and ov_t in ("", "card", "counter", "bar") and not last and i > 0 and gfx < (6 if neon else 4) and not window_scene and rp2 not in MAPS \
+                and not sc.get("_deep"):                  # Blackbox, Wrack, Tauchboot am Meeresgrund: das Ding zeigen, keine Zahlen-Tafel
             ov0 = sc.get("overlay") or {}                 # Zahl aus der Einblendung („72 STUNDEN“) oder aus dem Satz
             ov_txt = " ".join(str(ov0.get(k) or "") for k in ("text", "value", "unit", "label")) if ov_t in ("card", "counter") else ""
             g_auto = graphics.clean(auto_graphic((ov_txt + ". " if ov_txt.strip() else "") + str(sc.get("text") or ""), cur_hud)) if ov_t != "bar" else None
@@ -1802,6 +1817,26 @@ def direct(scenes, times, topic="", style="", look=""):
         acts_s = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
         seas = [a for a in acts_s if str(a.get("kind") or "").lower() in SEA_KINDS]
         low_s = str(sc.get("text") or "").lower()
+        _key_s = lambda q: extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower())      # noqa: E731
+        sc["props"] = [q for q in (sc.get("props") or []) if isinstance(q, dict) and (_key_s(q) not in extras.SKY or _key_s(q) in ("submersible", "ping"))]   # unter Wasser fliegt kein Flugzeug, scheint keine Sonne
+        if sc.get("_deep") and not seas and sc.get("shot") not in ("graphic", "insert"):                           # Tiefsee-Technik: Blackbox, Wrack, Tauchboot mit Sonar
+            for pat_s, k_s in ((DEEP_WRECK_RE, "lib_wrack"), (DEEP_BOX_RE, "lib_blackbox"), (SUB_RE, "submersible")):
+                if _re0.search(pat_s, low_s) and k_s in extras.PROPS and k_s not in [_key_s(q) for q in sc["props"]]:
+                    sc["props"].append({"type": k_s})
+            keys_s = [_key_s(q) for q in sc["props"]]
+            if "lib_wrack" in keys_s and "submersible" not in keys_s:
+                sc["props"].append({"type": "submersible"})          # das Wrack liegt im Dunkeln: ein Tauchboot leuchtet es an
+            keys_s = [_key_s(q) for q in sc["props"]]
+            box_x = 660 if "submersible" in keys_s else 540
+            lay_s = {"submersible": 270, "lib_wrack": 750, "lib_blackbox": box_x}
+            if any(k in lay_s for k in keys_s):                      # nur die Technik, fest verteilt: Boot links oben, Wrack/Blackbox rechts am Grund
+                sc["props"] = [dict({k: v for k, v in q.items() if k != "count"}, pos=lay_s[_key_s(q)]) for q in sc["props"] if _key_s(q) in lay_s][:2]
+                if "lib_blackbox" in keys_s and "lib_wrack" not in keys_s and _re0.search(DEEP_PING_RE, low_s):
+                    sc["props"].append({"type": "ping", "pos": box_x})   # der Sender der Blackbox: Ringe breiten sich im Wasser aus
+                sc["actors"] = acts_s = []                           # kein Goldfisch und kein Mensch neben dem Flugschreiber in viertausend Metern Tiefe
+            sc["crowd"] = ""
+            if sc.get("shot") in ("event", "close"):
+                sc["shot"] = ""                                      # das Lichtkegel-Bild steht für sich, ohne Vergrößerung über den Bildrand hinaus
         if not seas and sea_prev and sc.get("shot") in ("", None, "close", "event", "wide") and len(acts_s) <= 1 \
                 and all(str(a.get("kind") or "fish").lower() == "fish" for a in acts_s) and not _re0.search(r"fisch|\bhai|beute|opfer", low_s):
             keep_s = acts_s[0] if acts_s else {"id": "_meer", "action": "idle", "speaks": False, "say": "", "hold": "", "facing": ""}
@@ -1844,6 +1879,14 @@ PLURAL = {"agent": r"agenten|\bbots\b|assistenten", "virus": r"\bviren|bakterien
 SEA_CREATURES = [(r"fangschreckenkreb|heuschreckenkreb|mantis-?shrimp", "mantis"), (r"pistolenkreb|knallkreb|knallgarnele|\bgarnele|krabben?\b|\bhummer|flusskreb|krebstier|\bshrimp", "shrimp"),
                  (r"qualle", "jelly"), (r"axolotl", "axolotl")]
 SEA_KINDS = ("shrimp", "mantis", "jelly", "axolotl")
+# Tiefsee-Technik (Flugzeug-Suche, Wracks): Der Satz spielt unter Wasser; nennt er Blackbox, Wrack oder Tauchboot/Sonar, wird es die dunkle Tiefsee
+DEEP_RE = r"meeresboden|meeresgrund|\btiefsee|\b(?:meter|metern|kilometer|kilometern) tiefe\b|am grund des (?:meeres|ozeans)|auf dem grund des (?:meeres|ozeans)"
+DEEP_DARK_RE = r"\btiefsee|\b(?:meter|metern|kilometer|kilometern) tiefe\b|tiefseegraben|abgrund"
+SUB_RE = r"\bsonar|tauchboot|tauchroboter|tiefseeroboter|tauchdrohne|\bu-boot|unterseeboot"
+DEEP_WRECK_RE = r"\bwracks?\b|flugzeugwrack|schiffswrack|wrackteil"
+DEEP_BOX_RE = r"blackbox|black box|flugschreiber|flugdatenschreiber|flugrekorder"
+DEEP_PING_RE = r"send|signal|\bping|ortung|ultraschall|funk|piep|batterie"
+DEEP_THING_RE = SUB_RE + "|" + DEEP_WRECK_RE + "|" + DEEP_BOX_RE
 SEA_TARGETS = ("rock", "lib_glasscheibe", "lib_tresor", "ship", "box", "barrel", "ice")
 LONG_KINDS = ("shrimp", "mantis", "axolotl", "tardigrade", "jelly", "cheetah", "eagle", "flea")          # breiter als hoch: keine Großaufnahme, Kamera lässt sie ganz im Bild
 # Winzlinge, die überall vorkommen (Moos, Eis, Weltall): als Figur an dem Ort, von dem der Satz spricht
@@ -2262,7 +2305,7 @@ HINTS = [
     (r"gletscher|eiszeit|arktis|antarktis|polkappe|\beis\b", {"ground": "snow", "elements": ["glacier", "mountains"]}),
     (r"\bschnee|\bwinter", "snow"),
     (r"\bmeer|ozean|küste|strand|\bwellen\b|\bwelle\b", "beach"),
-    (r"tiefsee|unter wasser|meeresgrund|korallen|\bfisch|unter der oberfläche|im wasser leb|\btauch(?!t (plötzlich )?auf)|taucher", "underwater"),
+    (r"tiefsee|unter wasser|meeresgrund|meeresboden|korallen|\bfisch|unter der oberfläche|im wasser leb|\btauch(?!t (plötzlich )?auf)|taucher", "underwater"),
     (r"wüste|sahara|sanddüne", "desert"),
     (r"vulkan|gebirge|\bberg|gipfel", "mountain"),
     (r"weltall|weltraum|galaxie|planet|umlaufbahn|astronaut|\bmond\b|sonnensystem", "space"),
@@ -2352,7 +2395,7 @@ OUTDOOR_THINGS = ("drone", "cctv", "fire", "smoke", "volcano", "meteor", "tornad
                   "pile", "sandpile", "trash", "barrel", "generator")
 DULL = ("table", "shelf", "streetlamp", "rock", "box")          # allein als Großaufnahme langweilig
 INDOOR_THINGS = ("faucet", "glass", "candle", "cans", "clock", "door", "fridge", "tv", "computer", "shelf", "cart", "table", "money", "aquarium")
-TEXT_PROPS = [(r"aquarium|aquarien(?!scheib|glas)|goldfisch|fischglas|fischbecken", "aquarium"), (r"drohne", "drone"), (r"überwachungskamera|kameras? (erfass|film|beobacht)|überwacht|überwachung", "cctv"), (r"zucker|\bsalz\b", "pile"), (r"\bsand\b", "sandpile"), (r"\bmüll|abfall|plastik", "trash"), (r"wasserhahn|trinkwasser|leitungswasser", "faucet"),
+TEXT_PROPS = [(SUB_RE, "submersible"), (r"aquarium|aquarien(?!scheib|glas)|goldfisch|fischglas|fischbecken", "aquarium"), (r"drohne", "drone"), (r"überwachungskamera|kameras? (erfass|film|beobacht)|überwacht|überwachung", "cctv"), (r"zucker|\bsalz\b", "pile"), (r"\bsand\b", "sandpile"), (r"\bmüll|abfall|plastik", "trash"), (r"wasserhahn|trinkwasser|leitungswasser", "faucet"),
               (r"\bglas\b|\bgläser|trinken|getränk|\bdurst", "glass"), (r"kerze", "candle"), (r"konserve|vorrät|dosen", "cans"), (r"benzin|kanister|sprit", "canister"),
               (r"krankenwagen|rettungswagen|notarzt|sanitäter|rettungsdienst|rettungskräfte|einsatzkräfte|\bnotruf", "ambulance"), (r"polizeiauto|polizeiwagen|streifenwagen|\bpolizei\b|polizist", "police"),
               (r"\bautos?\b|\bstau\b", "car"), (r"\bbus\b|busse", "bus"), (r"lkw|lastwagen|lieferung|lieferkette", "truck"), (r"flugzeug|flieger|\bflüge", "plane"),

@@ -687,7 +687,42 @@ def forest(night):
     return p.vignette()
 
 
+def _deepsea():
+    """Tiefsee (unter Wasser bei „Nacht“): kein Sonnenlicht mehr, dunkles Blau bis fast Schwarz, felsiger Grund mit Schlick,
+    ferne Felsrücken, ein rauchender Schlot und Schwebeteilchen – hier liegen Wracks und Flugschreiber, hier suchen Tauchboote."""
+    p = P(False)
+    p.grad((0, 0, W, H), (14, 52, 96), (4, 10, 26), raw=True)
+    p.veil((W / 2 - 520, -420, W / 2 + 520, 520), (60, 120, 170), 50, 160)                    # letzter Schimmer von oben
+    p.poly([(-60, GROUND - 40), (-60, GROUND - 330), (120, GROUND - 420), (250, GROUND - 300), (380, GROUND - 360), (520, GROUND - 200),
+            (700, GROUND - 260), (860, GROUND - 400), (990, GROUND - 330), (W + 60, GROUND - 450), (W + 60, GROUND - 40)], (22, 46, 78), o=0)   # ferne Felsrücken
+    p.fade((0, GROUND - 460, W, GROUND - 30), (8, 22, 46), 0, 120)
+    p.poly([(-60, GROUND - 30), (-60, GROUND - 190), (90, GROUND - 240), (210, GROUND - 150), (330, GROUND - 60)], (36, 52, 78), o=5)
+    p.poly([(760, GROUND - 40), (850, GROUND - 170), (960, GROUND - 230), (W + 60, GROUND - 200), (W + 60, GROUND - 30)], (36, 52, 78), o=5)
+    p.poly([(905, GROUND - 200), (925, GROUND - 330), (975, GROUND - 330), (1000, GROUND - 205)], (52, 58, 76), o=5)                       # Schlot („Schwarzer Raucher“)
+    p.blobs([(950, GROUND - 370, 34), (930, GROUND - 430, 44), (965, GROUND - 500, 54), (935, GROUND - 580, 62)], (30, 38, 58), o=0, hi=0, lo=0)
+    p.d.ellipse((-200, GROUND - 90, W + 200, H + 400), fill=(64, 76, 100), outline=INK, width=O)                                           # Grund: grauer Schlick
+    p.fade((0, GROUND - 40, W, GROUND + 260), (120, 140, 170), 46, 0)
+    rnd = random.Random(11)
+    for _ in range(9):                                                                         # Steine und Knollen im Schlick
+        x, y, r = rnd.randint(40, W - 40), rnd.randint(GROUND + 40, H - 120), rnd.randint(16, 44)
+        p.oval((x - r * 1.5, y - r * 0.7, x + r * 1.5, y + r * 0.7), (46, 56, 78), o=4)
+    for sx in (120, 660):                                                                      # Röhrenwürmer statt Korallen
+        for dx, hgt in ((-36, 110), (0, 150), (34, 90)):
+            p.rect((sx + dx - 9, GROUND - 60 - hgt, sx + dx + 9, GROUND - 46), (196, 204, 214), r=8, o=4)
+            p.oval((sx + dx - 15, GROUND - 82 - hgt, sx + dx + 15, GROUND - 52 - hgt), (206, 74, 84), o=4)
+    snow = Image.new("L", (W, H), 0)                                                           # „Meeresschnee“
+    sd = ImageDraw.Draw(snow)
+    for _ in range(90):
+        x, y, r = rnd.randint(0, W), rnd.randint(0, H), rnd.choice((2, 3, 3, 4, 6))
+        sd.ellipse((x - r, y - r, x + r, y + r), fill=rnd.randint(60, 150))
+    p.im.paste(Image.new("RGB", (W, H), (200, 226, 246)), (0, 0), snow.filter(ImageFilter.GaussianBlur(1.2)))
+    p.d = ImageDraw.Draw(p.im)
+    return p.vignette()
+
+
 def underwater(night):
+    if night:                                                                    # „Nacht“ unter Wasser = Tiefsee ohne Sonnenlicht
+        return _deepsea()
     p = P(False)
     for y in range(0, H, 8):
         f = y / H

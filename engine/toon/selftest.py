@@ -604,6 +604,36 @@ def main():
         assert overlays._short("SCHREIB ES IN DIE KOMMENTARE", 22) == "SCHREIB ES", overlays._short("SCHREIB ES IN DIE KOMMENTARE", 22)
         assert overlays.frames_for({"type": "tag", "text": "SCHREIB ES IN DIE KOMMENTARE"})
     check("Geben/Essen, Einsatzwagen, Schild-Zahl, Handy", _deeds)
+    def _deep():                                                 # Tiefsee-Technik: Blackbox, Tauchboot mit Sonar und Wrack am dunklen Meeresgrund – kein Flugzeug, kein Mensch, keine Zahlen-Tafel
+        T = [("Ein Flugzeug verschwindet über dem Atlantik vom Radar.", "street", [{"id": "du"}], ["plane"], ""),
+             ("Am Meeresboden sendet die Blackbox dreißig Tage lang Signale aus.", "underwater", [], ["box"], "event"),
+             ("Jetzt helfen nur noch Spezial-Tauchboote mit Hochfrequenz-Sonar in viertausend Metern Tiefe.", "underwater", [], ["sonar"], "event"),
+             ("Erst wenn das Wrack gefunden ist, beginnt die eigentliche Arbeit.", "underwater", [], ["plane"], "event"),
+             ("Der Flugdatenschreiber verrät den Ermittlern das Tempo.", "lab", [{"id": "du"}], ["computer"], ""),
+             ("Folg für mehr.", "lab", [{"id": "du"}], [], "")]
+        sd = stage.direct([{"text": t_, "place": pl_, "actors": a_, "props": pr_, "shot": sh_, "time": "day",
+                            "backdrop": {"sky": "dark", "ground": "water", "elements": ["sea"]} if pl_ == "underwater" else None} for t_, pl_, a_, pr_, sh_ in T],
+                          [(n_ * 4, n_ * 4 + 4) for n_ in range(len(T))], "Was passiert, wenn ein Flugzeug spurlos verschwindet?", "whatif")
+        keys = [[extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) for q in sc_.get("props") or []] for sc_ in sd]
+        for n_ in (1, 2, 3):
+            assert places.resolve(stage.backdrop(sd[n_])) == "underwater" and sd[n_].get("time") == "night", f"Tiefsee {n_}: {sd[n_].get('place')} {sd[n_].get('backdrop')} {sd[n_].get('time')}"
+            assert not sd[n_].get("actors") and sd[n_].get("shot") != "graphic", f"Tiefsee {n_}: {sd[n_].get('actors')} {sd[n_].get('shot')}"
+        assert "lib_blackbox" in keys[1] and "ping" in keys[1] and "box" not in keys[1], f"Blackbox: {keys[1]}"
+        assert keys[2] == ["submersible"], f"Sonar: {keys[2]}"
+        assert "lib_wrack" in keys[3] and "submersible" in keys[3] and "plane" not in keys[3], f"Wrack: {keys[3]}"
+        assert places.resolve(stage.backdrop(sd[4])) == "lab" and "lib_blackbox" in keys[4] and "submersible" not in keys[4], f"Labor: {sd[4].get('place')} {keys[4]}"
+        for sc_ in sd:
+            for t_ in (0.2, 1.3):
+                frame(sc_, {"du": {"shirt": "blau"}}, t=t_)
+        bat = stage.direct([{"text": "Fledermäuse nutzen eine Art Sonar.", "place": "forest", "actors": [{"id": "du"}]}, {"text": "Folg für mehr.", "place": "forest", "actors": [{"id": "du"}]}],
+                           [(0, 4), (4, 8)], "Fledermäuse", "fakten")
+        assert places.resolve(stage.backdrop(bat[0])) != "underwater" and not any("submersible" == extras.PROP_ALIASES.get(str(q.get("type")), str(q.get("type"))) for q in bat[0].get("props") or []), bat[0]
+        assert not [k for k, _x in stage._prepare({"place": "street", "props": ["sonar"], "actors": [{"id": "du"}]}, {"du": {}})[4] if extras.PROP_ALIASES.get(k, k) == "submersible"], "Tauchboot auf der Straße"
+        for sc_ in ({"shot": "insert", "props": ["sonar"]}, {"place": "underwater", "time": "night", "props": ["sonar", "wrack"]}, {"place": "underwater", "time": "night", "props": ["blackbox"]},
+                    {"shot": "insert", "props": ["blackbox"]}, {"shot": "insert", "props": ["wrack"]}, {"place": "classroom", "props": ["prüfung"], "actors": [{"id": "du"}]}):
+            frame(sc_)
+        assert not stage._lib_props() or all(any(k_ == key_ for _p, k_ in stage._lib_props()) for key_ in ("lib_blackbox", "lib_wrack")), "Blackbox/Wrack fehlen in der Bibliothek"
+    check("Tiefsee: Blackbox, Sonar, Wrack", _deep)
     check("Titelbild", lambda: stage.cover({"place": "street", "props": ["meteor"], "actor": "du"}, {"du": {}}, "/tmp/_selftest_cover.jpg"))
     check("Titelbild kaputt", lambda: stage.cover({"place": None, "props": [None, 3], "actor": None, "backdrop": "x"}, {}, "/tmp/_selftest_cover.jpg"))
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")
