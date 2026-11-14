@@ -1,0 +1,416 @@
+{
+ "title": "Was passiert, wenn ein Flugzeug spurlos verschwindet?",
+ "scenes": [
+  {
+   "text": "Plötzlich verschwindet das Flugzeug vom Radar über dem Ozean.",
+   "see": "Ein Radarschirm zeigt den Punkt des Flugzeugs, der plötzlich erlischt.",
+   "place": "office",
+   "time": "night",
+   "props": [
+    {
+     "type": "radar"
+    },
+    {
+     "type": "plane"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "crowd": "worried",
+   "graphic": {
+    "type": "radar",
+    "kicker": "FLUGSICHERUNG",
+    "sub": "lost",
+    "text": "SIGNAL VERLOREN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Erst ein automatischer Satelliten-Ping verrät, wo die Suche beginnen muss.",
+   "see": "Ein Satellit im All sendet Signale zur Erde.",
+   "place": "space",
+   "time": "night",
+   "props": [
+    {
+     "type": "satellite",
+     "pos": 730
+    },
+    {
+     "type": "earth",
+     "pos": 370
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Doch weit oben im All empfängt ein Satellit weiter automatische Pings des Flugzeugs.",
+   "see": "Ein Satellit im All empfängt automatische Pings.",
+   "place": "space",
+   "time": "night",
+   "props": [
+    {
+     "type": "satellite",
+     "pos": 730
+    },
+    {
+     "type": "earth",
+     "pos": 370
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "IM ALL"
+   }
+  },
+  {
+   "text": "Aus der Laufzeit dieser Funksignale grenzen Fachleute die genaue Flugroute ein.",
+   "see": "Fachleute stehen im Labor vor Bildschirmen und grenzen die Flugroute ein.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Jetzt machen sich riesige Suchschiffe und schnelle Suchflugzeuge auf den Weg.",
+   "see": "Suchschiffe und Suchflugzeuge machen sich auf dem Ozean auf den Weg.",
+   "place": "beach",
+   "backdrop": {
+    "sky": "day",
+    "ground": "water",
+    "elements": [
+     "sea"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "ship"
+    },
+    {
+     "type": "plane"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense"
+  },
+  {
+   "text": "Sie müssen auf dem offenen Meer ein gigantisches Gebiet absuchen.",
+   "see": "Ein Suchschiff fährt über das offene Meer.",
+   "place": "beach",
+   "backdrop": {
+    "sky": "day",
+    "ground": "water",
+    "elements": [
+     "sea"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "ship"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense"
+  },
+  {
+   "text": "Dieses Suchgebiet kann dabei locker so groß sein wie ganz Deutschland.",
+   "see": "Eine Deutschlandkarte zeigt die riesige Größe des Suchgebiets.",
+   "place": "germany",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "map",
+    "value": "germany",
+    "text": "SUCHGEBIET",
+    "dark": false
+   }
+  },
+  {
+   "text": "Irgendwann treiben erste kleine Trümmerteile einsam auf den Wellen.",
+   "see": "Kleine Trümmerteile treiben einsam auf den Meereswellen.",
+   "place": "beach",
+   "backdrop": {
+    "sky": "day",
+    "ground": "water",
+    "elements": [
+     "sea"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "debris",
+     "pos": 540
+    }
+   ],
+   "shot": "event",
+   "mood": "sad"
+  },
+  {
+   "text": "Forscher untersuchen daraufhin winzige Muscheln auf dem gefundenen Treibgut.",
+   "see": "Forscher untersuchen Muscheln auf dem gefundenen Treibgut im Labor.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "muschel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "WINZIGE MUSCHELN"
+   }
+  },
+  {
+   "text": "Denn das biologische Wachstum der Tiere verrät sofort die genaue Driftzeit im Wasser.",
+   "see": "Winzige Muscheln sitzen auf dem Treibgut im Wasser.",
+   "place": "beach",
+   "backdrop": {
+    "sky": "day",
+    "ground": "water",
+    "elements": [
+     "sea"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "ship"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Tief am Meeresboden sendet die Blackbox der Maschine noch Signale aus.",
+   "see": "Die Blackbox liegt am dunklen Meeresboden und sendet Signale.",
+   "place": "underwater",
+   "time": "night",
+   "props": [
+    {
+     "type": "blackbox"
+    }
+   ],
+   "shot": "insert",
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "TIEFSEE"
+   }
+  },
+  {
+   "text": "Genau dreißig Tage lang schickt sie Ultraschallsignale in die dunkle Tiefe.",
+   "see": "Ein Zähler zeigt dreißig Tage an.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "days",
+    "value": "30",
+    "label": "LAUFZEIT",
+    "sub": "30",
+    "text": "TAGE",
+    "dark": false
+   }
+  },
+  {
+   "text": "Danach ist die kleine Batterie in der Tiefe endgültig leer.",
+   "see": "Die Anzeige der Blackbox erlischt im dunklen Wasser.",
+   "place": "underwater",
+   "time": "night",
+   "props": [
+    {
+     "type": "blackbox"
+    }
+   ],
+   "shot": "event",
+   "mood": "sad"
+  },
+  {
+   "text": "Spezielle Tauchboote mit lautem Sonar suchen jetzt in eisiger Finsternis.",
+   "see": "Ein Tauchboot mit hellem Scheinwerfer sucht in der Tiefsee.",
+   "place": "underwater",
+   "time": "night",
+   "props": [
+    {
+     "type": "submersible",
+     "pos": 270
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Sie tauchen hinab in viertausend Meter Tiefe zum Meeresboden.",
+   "see": "Das Tauchboot taucht in viertausend Meter Tiefe hinab.",
+   "place": "underwater",
+   "time": "night",
+   "props": [
+    {
+     "type": "submersible"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "number",
+    "kicker": "TIEFE",
+    "value": "4000 m",
+    "label": "MEERESBODEN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Dort unten herrscht ein mörderischer Druck von rund vierhundert Bar.",
+   "see": "Blasen steigen im enormen Druck der Tiefsee auf.",
+   "place": "underwater",
+   "time": "night",
+   "props": [
+    {
+     "type": "submersible"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "400 BAR"
+   }
+  },
+  {
+   "text": "Schließlich entdecken die starken Scheinwerfer das zerstörte Wrack.",
+   "see": "Die Scheinwerfer des Tauchboots beleuchten das zerstörte Wrack am Meeresboden.",
+   "place": "underwater",
+   "time": "night",
+   "props": [
+    {
+     "type": "wrack",
+     "pos": 750
+    },
+    {
+     "type": "submersible",
+     "pos": 270
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Der gefundene Flugdatenschreiber verrät den Ermittlern Tempo, Höhe und Kurs.",
+   "see": "Ermittler untersuchen den gefundenen Flugdatenschreiber im Labor.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "blackbox"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "center"
+    }
+   ],
+   "mood": "panic",
+   "overlay": {
+    "type": "checklist",
+    "title": "LISTE",
+    "items": [
+     [
+      "Tempo",
+      true
+     ],
+     [
+      "Höhe",
+      true
+     ],
+     [
+      "Kurs",
+      true
+     ]
+    ]
+   }
+  },
+  {
+   "text": "So wird jeder Flug Sekunde für Sekunde exakt rekonstruiert, deshalb verschwindet kein Flugzeug wirklich spurlos.",
+   "see": "Eine Herzschlag-Linie auf einem Bildschirm zeigt die genaue Rekonstruktion.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  }
+ ]
+}
