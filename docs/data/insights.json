@@ -1,7 +1,7 @@
 {
- "updated": 1794635503.737171,
+ "updated": 1794637313.6270776,
  "enough": true,
- "counted": 7,
+ "counted": 8,
  "total": 11,
  "needed": 6,
  "categories": [
@@ -17,11 +17,11 @@
   {
    "slug": "whatif",
    "name": "🤯 What If",
-   "n": 4,
-   "avg_views": 1340,
-   "avg_likes": 29.8,
-   "like_rate": 2.22,
-   "avg_score": 1794
+   "n": 5,
+   "avg_views": 1463,
+   "avg_likes": 36.0,
+   "like_rate": 2.46,
+   "avg_score": 2009
   },
   {
    "slug": "fakten",
@@ -34,17 +34,17 @@
   }
  ],
  "weights": {
-  "fakten": 0.84,
+  "fakten": 0.78,
   "storys": 1.2,
   "mysterien": 1.2,
   "tiere": 1.2,
-  "whatif": 1.02,
+  "whatif": 1.06,
   "comedy": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1379 Aufrufe, 3.84 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1012 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2183 zu 702 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2297 zu 702 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -58,6 +58,16 @@
    "comments": 0,
    "shares": 0,
    "score": 3331
+  },
+  {
+   "id": 77,
+   "title": "Was wenn wir Tier-Gene kreuzen könnten?",
+   "category": "whatif",
+   "views": 1953,
+   "likes": 61,
+   "comments": 0,
+   "shares": 0,
+   "score": 2868
   },
   {
    "id": 54,
@@ -88,16 +98,6 @@
    "comments": 1,
    "shares": 0,
    "score": 2136
-  },
-  {
-   "id": 38,
-   "title": "Was passiert, wenn Drohnen deinen Alltag komplett überwachen?",
-   "category": "whatif",
-   "views": 1119,
-   "likes": 17,
-   "comments": 1,
-   "shares": 0,
-   "score": 1404
   }
  ],
  "flop": [
