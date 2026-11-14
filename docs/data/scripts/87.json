@@ -1,0 +1,456 @@
+{
+ "title": "Was passiert, wenn ein Flugzeug spurlos verschwindet?",
+ "scenes": [
+  {
+   "text": "Plötzlich erlischt das Flugzeug auf dem Radarschirm mitten im Ozean.",
+   "see": "Das Flugzeug schwebte gerade noch friedlich am Nachthimmel über den Wolken.",
+   "place": "space",
+   "time": "night",
+   "props": [
+    {
+     "type": "satellite",
+     "pos": 730
+    },
+    {
+     "type": "earth",
+     "pos": 370
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "OZEAN"
+   }
+  },
+  {
+   "text": "Erst ein winziges Signal aus dem All führt die Retter zum Wrack.",
+   "see": "Auf dem Radarschirm blinkt das Signal kurz auf und erlischt dann komplett.",
+   "place": "office",
+   "time": "night",
+   "props": [
+    {
+     "type": "computer"
+    },
+    {
+     "type": "lib_wrack"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "graphic": {
+    "type": "radar",
+    "kicker": "FLUGSICHERUNG",
+    "sub": "lost",
+    "text": "SIGNAL VERLOREN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Doch ein Satellit hoch im All empfängt noch automatisches Pingen der Triebwerke.",
+   "see": "Eine Forscherin blickt besorgt auf Monitore im Kontrollzentrum.",
+   "place": "space",
+   "time": "night",
+   "props": [
+    {
+     "type": "satellite",
+     "pos": 730
+    },
+    {
+     "type": "earth",
+     "pos": 370
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "AUTOMATISCHE PINGS"
+   }
+  },
+  {
+   "text": "Aus der exakten Laufzeit dieser Signale berechnen Experten schließlich die wahrscheinliche Flugroute.",
+   "see": "Fachleute zeichnen rote Flugrouten-Linien auf einer digitalen Karte.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Rettungskräfte schicken daraufhin Flugzeuge und Schiffe in das riesige Suchgebiet.",
+   "see": "Ein großes Schiff kämpft sich durch hohe Wellen im Sturm.",
+   "place": "beach",
+   "backdrop": {
+    "sky": "storm",
+    "ground": "water",
+    "elements": [
+     "sea"
+    ]
+   },
+   "time": "day",
+   "weather": "storm",
+   "props": [
+    {
+     "type": "ship"
+    },
+    {
+     "type": "ambulance"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "flashlight",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "insert",
+   "mood": "tense"
+  },
+  {
+   "text": "Dieses Areal auf dem Wasser ist manchmal so groß wie ganz Deutschland.",
+   "see": "Eine Karte vergleicht das riesige Suchareal mit den Umrissen von Deutschland.",
+   "place": "germany",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "map",
+    "value": "germany",
+    "text": "SUCHGEBIET",
+    "dark": false
+   }
+  },
+  {
+   "text": "Tagelang kämmen die Suchteams quadratkilometerweise die unruhige Meeresoberfläche ab.",
+   "see": "Ein Hubschrauber kreist über dunklem Meerwasser auf der Suche nach Hinweisen.",
+   "place": "beach",
+   "backdrop": {
+    "sky": "day",
+    "ground": "water",
+    "elements": [
+     "sea"
+    ]
+   },
+   "time": "day",
+   "weather": "wind",
+   "props": [
+    {
+     "type": "drone"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "TAGELANGE SUCHE"
+   }
+  },
+  {
+   "text": "Schließlich entdecken die Helfer erste Trümmerteile im strömenden Wasser.",
+   "see": "Ein Trümmerteil treibt einsam auf den Ozeanwellen.",
+   "place": "beach",
+   "backdrop": {
+    "sky": "day",
+    "ground": "water",
+    "elements": [
+     "sea"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "debris",
+     "pos": 540
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Forscher untersuchen daraufhin sofort festgewachsene Muscheln an dem Fundstück.",
+   "see": "Eine Forscherin untersucht mit einer Lupe kleine Muscheln an einem Fundstück.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "muschel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "BIO-HINWEISE"
+   }
+  },
+  {
+   "text": "Das Wachstum der Schalen verrät nämlich genau, wie lange das Material umhertrieb.",
+   "see": "Nahaufnahme von Muschelschalen mit sichtbaren Wachstumsringen.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "talk",
+     "emotion": "",
+     "pos": "center",
+     "speaks": true
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Tief am dunklen Meeresboden sendet die orangefarbene Blackbox derweil akustische Signale.",
+   "see": "Eine knallorange Blackbox liegt auf dem dunklen Meeresboden und sendet Schallwellen.",
+   "place": "underwater",
+   "time": "night",
+   "props": [
+    {
+     "type": "blackbox",
+     "pos": 540
+    },
+    {
+     "type": "ping",
+     "pos": 540
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Ihr Notsender hat Strom für exakt dreißig Tage, danach schweigt das Gerät für immer.",
+   "see": "Ein Countdown-Zähler stellt die Zeit von dreißig Tagen dar.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "days",
+    "value": "30",
+    "label": "SIGNAL AKTIV",
+    "sub": "30",
+    "text": "BATTERIE-LAUFZEIT",
+    "dark": false
+   }
+  },
+  {
+   "text": "Jetzt kommen unbemannte Spezial-Tauchboote zum Einsatz.",
+   "see": "Ein modernstes Tauchboot taucht in die rabenschwarze Tiefe ab.",
+   "place": "underwater",
+   "time": "night",
+   "props": [
+    {
+     "type": "submersible",
+     "pos": 270
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Mit feinem Sonar scannen sie den Boden in extremen viertausend Metern Tiefe.",
+   "see": "Das Tauchboot schaltet Scheinwerfer an und tastet mit Sonar den Grund ab.",
+   "place": "underwater",
+   "time": "night",
+   "props": [
+    {
+     "type": "submersible",
+     "pos": 270
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "VIERTAUSEND METER"
+   }
+  },
+  {
+   "text": "Dort unten herrscht ein gigantischer Druck von etwa vierhundert Bar.",
+   "see": "Eine Druckanzeige zeigt den enormen Druck am Meeresgrund.",
+   "place": "underwater",
+   "time": "night",
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "number",
+    "kicker": "WASSERDRUCK",
+    "value": "400 BAR",
+    "label": "IN DER TIEFSEE",
+    "dark": false
+   }
+  },
+  {
+   "text": "Erst nach Monaten stetiger Suche entdecken die Kameras schließlich das Wrack.",
+   "see": "Die Scheinwerfer des Tauchboots beleuchten plötzlich schemenhaft das versunkene Wrack.",
+   "place": "underwater",
+   "time": "night",
+   "props": [
+    {
+     "type": "submersible",
+     "pos": 270
+    },
+    {
+     "type": "wrack",
+     "pos": 750
+    }
+   ],
+   "mood": "shocked"
+  },
+  {
+   "text": "Der geborgene Flugdatenschreiber liefert den Ermittlern alle gespeicherten Daten.",
+   "see": "Ein Greifarm birgt die leicht beschädigte Blackbox vorsichtig.",
+   "place": "underwater",
+   "time": "night",
+   "props": [
+    {
+     "type": "blackbox"
+    }
+   ],
+   "shot": "insert",
+   "mood": "panic",
+   "overlay": {
+    "type": "tag",
+    "text": "DATEN GEBORGEN"
+   }
+  },
+  {
+   "text": "Geschwindigkeit, Flughöhe und Kurse werden Sekunde für Sekunde exakt rekonstruiert.",
+   "see": "Experten werten Computermonitore mit Flugkurven und Datenreihen aus.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "checklist",
+    "title": "LISTE",
+    "items": [
+     [
+      "Geschwindigkeit",
+      true
+     ],
+     [
+      "Flughöhe",
+      true
+     ],
+     [
+      "Kurse",
+      true
+     ]
+    ]
+   }
+  },
+  {
+   "text": "Dank moderner Technik verschwindet heutzutage kein Flugzeug mehr dauerhaft spurlos.",
+   "see": "Das Flugzeug fliegt wieder sicher auf einem Flugradar-Monitor, während der Kreis sich schließt.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    },
+    {
+     "type": "plane"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  }
+ ]
+}
