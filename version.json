@@ -1,6 +1,6 @@
 {
-  "version": "1.7.0",
-  "file": "releases/AutoShorts-1.7.0.cmd",
-  "sha256": "616228cda434dc7a7207791969ce8167b0e28683f6002b783d2eb610e2aa2b38",
-  "notes": "Video nachbauen per TikTok- oder YouTube-Link; Live-Zahlen im Dashboard: Abos/Follower, Aufrufe und Likes von YouTube und TikTok jede Minute"
+  "version": "1.8.0",
+  "file": "releases/AutoShorts-1.8.0.cmd",
+  "sha256": "3b023bcf2963f04a83538ab3b47b04e8383b9aae5ad5216fc1f408b70fa5327e",
+  "notes": "Video nachbauen: neuer Knopf „Als Nächstes einplanen“ – der Link kommt in die Warteschlange und wird beim nächsten Termin nachgebaut"
 }

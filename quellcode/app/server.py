@@ -953,6 +953,9 @@ def remake_link(h):
         finally:
             import shutil
             shutil.rmtree(tmp, ignore_errors=True)
+    if b.get("queue"):                                   # nur einplanen: die App setzt den Eintrag in die Warteschlange
+        log(f"Nachbau eingeplant ({'Video geladen' if how == 'datei' else 'nur Link'}): {url}")
+        return h._send(200, {"ok": True, "how": how, "ref": name, "url": url})
     dispatch({"action": "remake", "video_id": name, "category": cat, "upload": upl})
     log(f"Nachbau gestartet ({'Video geladen' if how == 'datei' else 'nur Link'}): {url}")
     h._send(200, {"ok": True, "how": how})

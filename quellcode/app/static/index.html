@@ -910,7 +910,7 @@ addEventListener("keydown", e => { if (e.key === "Escape") { closeDay(); documen
 let SEL = null;
 const VOICES = [["de-DE-FlorianMultilingualNeural", "Florian · locker, männlich"], ["de-DE-ConradNeural", "Conrad · tief, männlich"], ["de-DE-KillianNeural", "Killian · Erzähler, männlich"], ["de-DE-SeraphinaMultilingualNeural", "Seraphina · warm, weiblich"], ["de-DE-KatjaNeural", "Katja · klar, weiblich"], ["de-DE-AmalaNeural", "Amala · jung, weiblich"]];
 function viewStudio() {
-  const used = new Set(ST.used_queue || []), queue = (CFG.queue || []).filter(q => !used.has(q.id)).sort((a, b) => a.created - b.created);
+  const used = new Set(ST.used_queue || []), queue = (CFG.queue || []).filter(q => !used.has(q.id)).sort((a, b) => (b.next ? 1 : 0) - (a.next ? 1 : 0) || a.created - b.created);
   const counts = {}; VIDS.forEach(v => counts[v.category] = (counts[v.category] || 0) + 1);
   if (!SEL || !cat(SEL)) SEL = (CFG.categories[0] || {}).slug;
   $("#main").innerHTML = `
@@ -933,7 +933,8 @@ function viewStudio() {
       <label>oder Video-Datei (MP4, MOV oder WebM, bis 300 MB)<input type="file" id="rmFile" accept="video/mp4,video/quicktime,video/webm"></label>
       <label>Video-Art<select id="rmCat" aria-label="Video-Art für den Nachbau"><option value="">automatisch erkennen</option>${CFG.categories.map(c => `<option value="${esc(c.slug)}">${esc(c.emoji)} ${esc(c.name)}</option>`).join("")}</select></label>
       <label class="check"><input type="checkbox" id="rmUpl"> direkt hochladen</label>
-      <button class="btn accent" id="rmGo" style="padding:11px 20px">${icon(I.spark)}Nachbauen</button></div>
+      <div class="inline"><button class="btn accent" id="rmGo" style="padding:11px 20px">${icon(I.spark)}Jetzt nachbauen</button>
+      <button class="btn" id="rmQueue" style="padding:11px 20px" title="Kommt beim nächsten Video-Termin als Erstes dran">${icon(I.cal)}Als Nächstes einplanen</button></div></div>
     <p class="hint" id="rmState" hidden></p>
   </section>
   <section class="panel in" style="--i:1" id="trendBox">
@@ -944,7 +945,7 @@ function viewStudio() {
   </section>
   <div class="grid2">
     <section class="panel in" style="--i:2"><div><h2>Themen-Warteschlange</h2><p class="hint">Der Autopilot nimmt diese Themen der Reihe nach, bevor er selbst welche sucht.</p></div>
-      <div>${queue.length ? queue.map(q => `<div class="qrow"><div><span class="chip">${esc(cat(q.category)?.emoji || "")} ${esc(cat(q.category)?.name || q.category)}</span>${q.trend ? ' <span class="chip acc">🔥 Trend</span>' : ""} ${esc(q.text)}</div><button class="ibtn" data-delq="${esc(q.id)}" aria-label="Entfernen">${icon(I.x)}</button></div>`).join("") : `<div class="empty">Leer – die KI denkt sich passende Themen selbst aus.</div>`}</div></section>
+      <div>${queue.length ? queue.map(q => `<div class="qrow"><div><span class="chip">${esc(cat(q.category)?.emoji || "")} ${esc(cat(q.category)?.name || q.category || "Art automatisch")}</span>${q.trend ? ' <span class="chip acc">🔥 Trend</span>' : ""}${q.remake ? ' <span class="chip acc">🔁 Nachbau</span>' : ""} ${q.remake && q.url ? `<a href="${esc(q.url)}" target="_blank" rel="noopener">${esc(q.text)}</a>` : esc(q.text)}</div><button class="ibtn" data-delq="${esc(q.id)}" aria-label="Entfernen">${icon(I.x)}</button></div>`).join("") : `<div class="empty">Leer – die KI denkt sich passende Themen selbst aus.</div>`}</div></section>
     <section class="panel in" style="--i:3"><div><h2>Themen einplanen</h2><p class="hint">Für die nächsten Tage vormerken, eins pro Zeile.</p></div>
       <select id="qcat" aria-label="Kategorie">${CFG.categories.map(c => `<option value="${esc(c.slug)}">${esc(c.emoji)} ${esc(c.name)}</option>`).join("")}</select>
       <textarea id="qtext" placeholder="Was passiert, wenn man nie schläft?&#10;Die Legende vom Klabautermann"></textarea>
@@ -982,6 +983,21 @@ function viewStudio() {
       $("#rmFile").value = ""; $("#rmLink").value = ""; PENDING = {label: "Video wird nachgebaut", at: Date.now()}; banner(); setTimeout(pollRuns, 4000);
     } catch (e) { st.textContent = ""; st.hidden = true; toast(e.message, true); }
     b.disabled = false; };
+  $("#rmQueue").onclick = async () => { const link = $("#rmLink").value.trim(), b = $("#rmQueue"), st = $("#rmState");
+    if (!link) return toast("Bitte zuerst einen Link von TikTok oder YouTube einfügen.", true);
+    if (!/(tiktok\.com|youtube\.com|youtu\.be)\//i.test(link)) return toast("Der Link muss von TikTok oder YouTube sein.", true);
+    b.disabled = true; $("#rmGo").disabled = true; st.hidden = false;
+    st.textContent = "Hole das Video vom Link und lege es für den nächsten Termin bereit …";
+    try {
+      const j = await api("/api/remake/link", {url: link, category: $("#rmCat").value, queue: true});
+      const short = j.url.replace(/^https?:\/\/(www\.)?/, "").slice(0, 60);
+      CFG.queue.push({id: "q" + Math.random().toString(36).slice(2, 10), category: $("#rmCat").value, text: "Nachbau: " + short,
+                      remake: j.ref, url: j.url, next: true, created: Date.now() / 1000});
+      $("#rmLink").value = "";
+      st.textContent = j.how === "link" ? "Eingeplant. Das Video ließ sich hier nicht laden – GitHub holt es beim Termin selbst vom Link." : "Eingeplant – kommt beim nächsten Video-Termin als Erstes dran.";
+      await persist("Nachbau eingeplant", b);
+    } catch (e) { st.textContent = ""; st.hidden = true; toast(e.message, true); }
+    b.disabled = false; $("#rmGo").disabled = false; };
   $("#qadd").onclick = () => { const t = $("#qtext").value.split("\n").map(s => s.trim()).filter(Boolean); if (!t.length) return toast("Bitte mindestens ein Thema eingeben.", true);
     const now = Date.now() / 1000; t.forEach((x, i) => CFG.queue.push({id: "q" + Math.random().toString(36).slice(2, 10), category: $("#qcat").value, text: x.slice(0, 300), created: now + i})); persist("Themen eingeplant", $("#qadd")); };
 }

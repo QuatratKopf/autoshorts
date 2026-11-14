@@ -112,7 +112,9 @@ Die App lädt ein Vorlagen-Video in das Release `inbox` und startet `-f 'inputs[
 Marken oder Figuren der Vorlage. Danach wird die Vorlage aus `inbox` gelöscht. Statt einer Datei geht auch ein TikTok-/YouTube-Link:
 die App lädt ihn auf dem PC mit yt-dlp (bei Bedarf einmal per `pip --user` eingerichtet) und legt die Datei in `inbox`; klappt das nicht,
 bekommt der Lauf den Link als `video_id`, `remake.download` versucht es dort, und als letzter Ausweg baut `remake.analyze_link_text` nach
-Titel/Beschreibung (oEmbed). Kategorie `comedy`: absurde Ich-Geschichten mit Humor.
+Titel/Beschreibung (oEmbed). „Als Nächstes einplanen“ (App): Vorlage wird ebenso bereitgelegt, aber statt eines Laufs entsteht ein
+Warteschlangen-Eintrag `{"remake": Dateiname|Link, "url", "next": true, "category": ""}` – `pick` nimmt ihn zuerst, `queue_remake` baut
+ihn nach (Video-Art aus der Vorlage, wenn keine gewählt) und überholt dabei ein schon vorbereitetes Drehbuch. Kategorie `comedy`: absurde Ich-Geschichten mit Humor.
 
 ## Einstieg (erste drei Sekunden)
 `writer.sharpen_hook` schärft nach jedem Drehbuch die ersten zwei Sätze: Satz 1 nennt IMMER das Thema kurz und spannend (höchstens zwölf

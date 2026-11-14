@@ -72,11 +72,12 @@ def pick(category_slug=None, topic=None):
             raise RuntimeError(f"Kategorie '{category_slug}' gibt es nicht.")
         return cat, topic, None, None
     used = set(STATE["used_queue"])
-    queue = sorted((q for q in CONFIG["queue"] if q.get("id") not in used and category(q.get("category"))),
-                   key=lambda q: q.get("created", 0))
+    queue = sorted((q for q in CONFIG["queue"] if q.get("id") not in used and (category(q.get("category")) or q.get("remake"))),
+                   key=lambda q: (not q.get("next"), q.get("created", 0)))       # „Als Nächstes“ eingeplante Nachbauten zuerst
     if queue:
         q = queue[0]
-        return category(q["category"]), q["text"], q["id"], q.get("trend")
+        return category(q.get("category")) or category("comedy") or [c for c in CONFIG["categories"] if c.get("enabled")][0], \
+            q["text"], q["id"], q.get("trend")
     cats = [c for c in CONFIG["categories"] if c.get("enabled")]
     if not cats:
         raise RuntimeError("Keine Kategorie aktiv – bitte im Studio mindestens eine einschalten.")
@@ -91,6 +92,31 @@ def pick(category_slug=None, topic=None):
     slugs = [c["slug"] for c in cats]
     last = STATE.get("last_category")
     return (cats[(slugs.index(last) + 1) % len(cats)] if last in slugs else cats[0]), None, None, None
+
+
+def queue_remake(qid, cat):
+    """Eingeplanter Nachbau aus der Warteschlange: Vorlage (Datei im Eingang oder Link) anhören und ansehen.
+    Gibt (Kategorie, Thema, Vorlage) zurück – oder None, wenn der Eintrag kein Nachbau ist."""
+    q = next((x for x in CONFIG["queue"] if x.get("id") == qid), None)
+    if not q or not q.get("remake"):
+        return None
+    from . import remake
+    ref = str(q["remake"]).strip()
+    try:
+        src = remake.analyze(remake.fetch(ref))
+    except Exception as e:  # noqa: BLE001 – Link gesperrt: nur aus Titel/Beschreibung
+        if not remake.is_link(ref) and not q.get("url"):
+            raise
+        log(f"Vorlage nicht ladbar ({str(e)[:160]}) – baue nach Titel und Beschreibung nach")
+        src = remake.analyze_link_text(q.get("url") or ref)
+    log(f"Eingeplanter Nachbau: {src['topic']} ({src['category'] or 'ohne Kategorie'})")
+    if not category(q.get("category")) and category(src.get("category")):
+        cat = category(src["category"])
+    try:
+        remake.cleanup(ref)
+    except Exception:  # noqa: BLE001
+        pass
+    return cat, src["topic"], src
 
 
 # ---------------------------------------------------------------- Video bauen
@@ -227,13 +253,17 @@ def prepare(slot):
     if slot in plans:
         return plans[slot]
     cat, topic, qid, qtrend = pick(None, None)
+    rm = queue_remake(qid, cat) if qid else None
+    src = None
+    if rm:
+        cat, topic, src = rm
     log(f"Vorproduktion für {slot}: {cat['emoji']} {cat['name']}")
-    topic, trend, script, provider = draft(cat, topic, qtrend)
+    topic, trend, script, provider = draft(cat, topic, qtrend, None, src)
     if qid:
         STATE["used_queue"].append(qid)
     STATE["last_category"] = cat["slug"]
     needs = missing_things(script, topic) if script.get("toon") else []
-    plans[slot] = {"category": cat["slug"], "topic": topic, "trend": trend, "script": script, "provider": provider,
+    plans[slot] = {"category": cat["slug"], "topic": topic, "trend": trend, "script": script, "provider": provider, "remake": bool(src),
                    "needs": needs, "title": script.get("title"), "created": time.time()}
     for k in sorted(plans)[:-4]:                          # nur die letzten Pläne aufheben
         plans.pop(k, None)
@@ -248,6 +278,11 @@ def prepare(slot):
 
 def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, source=None):
     plan = plan or {}
+    used_q = set(STATE["used_queue"])
+    if plan.get("script") and not plan.get("remake") and not category_slug and any(
+            q.get("next") and q.get("remake") and q.get("id") not in used_q for q in CONFIG["queue"]):
+        log("Ein Nachbau ist „als Nächstes“ eingeplant – er kommt vor dem vorbereiteten Drehbuch dran")
+        plan = {}
     if plan.get("script") and category(plan.get("category")):
         dup = too_similar(f"{plan.get('topic') or ''} {plan.get('title') or ''}", published_only=True)
         if dup:                                           # derselbe Stoff ist inzwischen schon online: nicht noch einmal
@@ -258,6 +293,9 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, 
     else:
         plan = {}
         cat, topic, qid, qtrend = pick(category_slug, topic)
+        rm = queue_remake(qid, cat) if qid and not source else None
+        if rm:
+            cat, topic, source = rm
     STATE["last_category"] = cat["slug"]
     vid = max([int(STATE.get("next_id") or 1)] + [int(v["id"]) + 1 for v in VIDEOS])
     STATE["next_id"] = vid + 1
