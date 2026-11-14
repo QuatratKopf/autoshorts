@@ -1,7 +1,7 @@
 {
- "updated": 1794661132.9987044,
+ "updated": 1794662932.2947426,
  "enough": true,
- "counted": 9,
+ "counted": 10,
  "total": 12,
  "needed": 6,
  "categories": [
@@ -9,42 +9,51 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 1,
-   "avg_views": 1513,
+   "avg_views": 1569,
    "avg_likes": 63.0,
-   "like_rate": 4.16,
-   "avg_score": 2458
+   "like_rate": 4.02,
+   "avg_score": 2514
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 6,
-   "avg_views": 1548,
-   "avg_likes": 36.8,
-   "like_rate": 2.38,
-   "avg_score": 2106
+   "avg_views": 1560,
+   "avg_likes": 37.0,
+   "like_rate": 2.37,
+   "avg_score": 2120
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 2,
-   "avg_views": 1014,
+   "avg_views": 1016,
    "avg_likes": 30.5,
-   "like_rate": 3.01,
-   "avg_score": 1486
+   "like_rate": 3.0,
+   "avg_score": 1488
+  },
+  {
+   "slug": "comedy",
+   "name": "🤪 Comedy",
+   "n": 1,
+   "avg_views": 740,
+   "avg_likes": 30.0,
+   "like_rate": 4.05,
+   "avg_score": 1190
   }
  ],
  "weights": {
-  "fakten": 0.74,
+  "fakten": 0.77,
   "storys": 1.2,
   "mysterien": 1.2,
   "tiere": 1.2,
-  "whatif": 1.05,
+  "whatif": 1.09,
   "comedy": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1513 Aufrufe, 4.16 % Likes).",
-  "Schwächste Kategorie: 💡 Fakten (Ø 1014 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2380 zu 702 Punkte)."
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1569 Aufrufe, 4.02 % Likes).",
+  "Schwächste Kategorie: 🤪 Comedy (Ø 740 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2250 zu 702 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -53,63 +62,63 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2502,
-   "likes": 56,
+   "views": 2501,
+   "likes": 57,
    "comments": 0,
    "shares": 0,
-   "score": 3342
+   "score": 3356
   },
   {
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 1976,
+   "views": 2039,
    "likes": 62,
    "comments": 0,
    "shares": 0,
-   "score": 2906
+   "score": 2969
   },
   {
    "id": 80,
    "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
    "category": "whatif",
-   "views": 1943,
+   "views": 1949,
    "likes": 40,
    "comments": 0,
    "shares": 0,
-   "score": 2543
+   "score": 2549
   },
   {
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1513,
+   "views": 1569,
    "likes": 63,
    "comments": 0,
    "shares": 0,
-   "score": 2458
+   "score": 2514
   },
   {
    "id": 54,
    "title": "Was passiert, wenn die Schwerkraft für fünf Sekunden verschwindet?",
    "category": "whatif",
-   "views": 1751,
+   "views": 1752,
    "likes": 46,
    "comments": 0,
    "shares": 0,
-   "score": 2441
+   "score": 2442
   }
  ],
  "flop": [
   {
-   "id": 38,
-   "title": "Was passiert, wenn Drohnen deinen Alltag komplett überwachen?",
-   "category": "whatif",
-   "views": 1119,
-   "likes": 17,
-   "comments": 1,
+   "id": 81,
+   "title": "Als meine KI-Agenten die Kontrolle übernahmen",
+   "category": "comedy",
+   "views": 740,
+   "likes": 30,
+   "comments": 0,
    "shares": 0,
-   "score": 1404
+   "score": 1190
   },
   {
    "id": 58,
