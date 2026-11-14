@@ -1,5 +1,5 @@
 {
- "updated": 1794646303.2239106,
+ "updated": 1794648103.397992,
  "enough": true,
  "counted": 8,
  "total": 11,
@@ -9,10 +9,10 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 1,
-   "avg_views": 1380,
+   "avg_views": 1411,
    "avg_likes": 63.0,
-   "like_rate": 4.57,
-   "avg_score": 2325
+   "like_rate": 4.46,
+   "avg_score": 2356
   },
   {
    "slug": "whatif",
@@ -42,9 +42,9 @@
   "comedy": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1380 Aufrufe, 4.57 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1411 Aufrufe, 4.46 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1012 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2326 zu 702 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2331 zu 702 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -63,11 +63,11 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 1959,
+   "views": 1957,
    "likes": 62,
    "comments": 0,
    "shares": 0,
-   "score": 2889
+   "score": 2887
   },
   {
    "id": 54,
@@ -83,11 +83,11 @@
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1380,
+   "views": 1411,
    "likes": 63,
    "comments": 0,
    "shares": 0,
-   "score": 2325
+   "score": 2356
   },
   {
    "id": 75,
