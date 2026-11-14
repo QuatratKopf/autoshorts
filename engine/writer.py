@@ -248,6 +248,8 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
                                                                                                      Enthüllungen; kicker = erfundener Zeitungsname, nie eine echte Zeitung
     {"type": "pulse", "value": "1", "label": "EINE SEKUNDE"}                                         Herzschlag-Linie mit rotem Pochen – der Moment, in dem alles stillsteht
     {"type": "radio", "kicker": "FUNK · KANAL 4", "text": "BERGWACHT"}                               Funkspruch oder Durchsage mit Wellenform
+    {"type": "radar", "kicker": "FLUGSICHERUNG", "text": "SIGNAL VERLOREN", "sub": "lost"}           Radarschirm mit umlaufendem Suchstrahl und Leuchtpunkt; "sub": "lost" = der Punkt
+                                                                                                     blinkt und erlischt (Flugzeug/Schiff verschwindet vom Radar), ohne "sub" bleibt er
     {"type": "chart", "kicker": "AKTIENKURS", "value": "3 BIO.", "label": "DOLLAR"}                   Kurve schießt nach oben ("dark": true = stürzt ab) – für Kurse,
                                                                                                      Umsatz, Wachstum, Nachfrage; value/label nur, wenn der Sprecher die Zahl nennt
     {"type": "distance", "value": "100 m", "left": "IHR", "right": "ZIEL"}                           Entfernung als Messlinie zwischen zwei Punkten

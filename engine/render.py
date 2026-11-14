@@ -213,6 +213,13 @@ def scene_clip(img, dur, out, idx, motion=None, ov=None, work=None, video=False)
                 ow, oh = int(ow * k) // 2 * 2, int(oh * k) // 2 * 2
                 scale = f"scale={ow}:{oh}:flags=lanczos,"
                 ox, oy = (W - ow) // 2, 285
+                if ov.get("low") and str(ov.get("type")) not in overlays.TALL:
+                    if ov.get("low") == 2 and oh > 340:     # unter dem Schiff ist weniger Platz bis zu den Untertiteln
+                        k2 = 340 / oh
+                        ow, oh = int(ow * k2) // 2 * 2, 340
+                        scale = f"scale={ow}:{oh}:flags=lanczos,"
+                        ox = (W - ow) // 2
+                    oy = 980 if ov.get("low") == 2 else 760                    # nur ein Flugzeug/Satellit am Himmel: das Schild steht im freien Bild darunter, nicht quer über dem Ding
             else:
                 ox, oy = (W - ow) // 2, max(140, min(H - oh - 520, cy - oh // 2))
             fc += f";[1:v]format=rgba,{scale}setpts=PTS+0.18/TB[ov];[bg][ov]overlay={ox}:{oy}:eof_action=repeat:format=auto[vo]"
@@ -313,7 +320,10 @@ def render(work: Path, scenes, times, voice, ass, out, music=None, music_volume=
         extra = XF if i < n - 1 else 0          # Überlappung für den Übergang zur nächsten Szene
         toon = work / f"toon{i:02d}.mp4"
         if toon.exists():
-            scene_clip(toon, durs[i] + extra, clip, i, sc.get("camera"), sc.get("overlay"), work, video=True)
+            ov_i = sc.get("overlay")
+            if isinstance(ov_i, dict) and sc.get("_ov_low"):
+                ov_i = dict(ov_i, low=int(sc["_ov_low"]))
+            scene_clip(toon, durs[i] + extra, clip, i, sc.get("camera"), ov_i, work, video=True)
         else:
             scene_clip(work / f"img{i:02d}.jpg", durs[i] + extra, clip, i, sc.get("camera"), sc.get("overlay"), work)
         clips.append(clip)

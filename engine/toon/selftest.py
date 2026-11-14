@@ -130,7 +130,7 @@ def main():
           {"type": "compare", "value": "viel", "sub": "3"}, {"type": "podium", "kicker": "Körperteile", "text": "Fuß", "left": "Hand", "right": "Bein"}, {"type": "podium", "text": "x"},
           {"type": "share", "value": "1 von 7", "label": "träumt davon"}, {"type": "share", "value": "12 von 12"}, {"type": "share", "value": "9 von 3"}, {"type": "share", "value": "x"},
           {"type": "news", "kicker": "Talblatt", "text": "Gondel 7 abgestürzt", "sub": "Unglück im Nebel"}, {"type": "news", "text": "Donaudampfschifffahrtsgesellschaft " * 3},
-          {"type": "news"}, {"type": "pulse", "value": "1", "label": "Eine Sekunde"}, {"type": "pulse", "value": "x" * 30}, {"type": "radio", "kicker": "Funk · Kanal 4", "text": "Bergwacht"},
+          {"type": "news"}, {"type": "pulse", "value": "1", "label": "Eine Sekunde"}, {"type": "pulse", "value": "x" * 30}, {"type": "radar"}, {"type": "radar", "kicker": "Flugsicherung", "text": "Signal verloren", "sub": "lost"}, {"type": "radio", "kicker": "Funk · Kanal 4", "text": "Bergwacht"},
           {"type": "radio", "text": "x", "sub": "y" * 80}, {"type": "distance", "value": "100 m", "left": "Ihr", "right": "Ziel"}, {"type": "distance", "value": "weit"},
           {"type": "days", "text": "30 Tage überleben", "value": "1", "sub": "30", "label": "Noch 2 Min"}, {"type": "days", "value": "99", "sub": "999"}, {"type": "days", "value": "x"},
           {"type": "days", "value": "7", "sub": "7"}, {"type": "phone", "mode": "alert", "kicker": "Live", "text": "Fang ihn", "value": "10.000.000 €", "label": "Ich hab ihn gesehen"},
@@ -634,6 +634,36 @@ def main():
             frame(sc_)
         assert not stage._lib_props() or all(any(k_ == key_ for _p, k_ in stage._lib_props()) for key_ in ("lib_blackbox", "lib_wrack")), "Blackbox/Wrack fehlen in der Bibliothek"
     check("Tiefsee: Blackbox, Sonar, Wrack", _deep)
+
+    def _surface():                                              # Meeresoberfläche: kein Mensch auf dem Wasser, Treibgut statt Karton, Radarschirm, Satellit im All statt Länderkarte
+        T = [("Ein Passagierflugzeug verschwindet mitten über dem Ozean.", "space", [], ["plane"], "event", None, {"type": "card", "text": "SIGNAL VERLOREN"}),
+             ("Aber moderne Satelliten empfangen noch stumme Pings.", "worldmap", [{"id": "du"}], [], "graphic", {"type": "map", "value": "germany,uk", "text": "PING"}, None),
+             ("Also berechnen Physiker kreisförmige Streifen auf dem Ozean.", "worldmap", [{"id": "du"}], [], "", None, None),
+             ("Meeresströmungen treiben Trümmerteile über Hunderte Kilometer auseinander.", "ocean", [{"id": "du"}], ["box"], "", None, None),
+             ("Dann verschwindet der Punkt plötzlich vom Radar.", "lab", [{"id": "du"}], ["computer"], "", None, None),
+             ("Schiffe und Flugzeuge starten eine Suchaktion auf dem Meer.", "ocean", [], ["ship", "plane"], "event", None, {"type": "tag", "text": "STUNDEN SPÄTER"}),
+             ("Folg für mehr.", "lab", [{"id": "du"}], [], "", None, None)]
+        sd = stage.direct([{"text": t_, "place": pl_, "actors": a_, "props": pr_, "shot": sh_, "time": "day", "graphic": g_, "overlay": o_,
+                            "backdrop": {"sky": "day", "ground": "water", "elements": ["sea"]} if pl_ in ("ocean", "space") else None} for t_, pl_, a_, pr_, sh_, g_, o_ in T],
+                          [(n_ * 4, n_ * 4 + 4) for n_ in range(len(T))], "Was passiert, wenn ein Flugzeug spurlos verschwindet?", "whatif")
+        keys = [[extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) for q in sc_.get("props") or []] for sc_ in sd]
+        assert sd[0].get("_ov_low") == 1 and not sd[0].get("actors"), f"Schild über dem Flugzeug: {sd[0].get('_ov_low')} {sd[0].get('actors')}"
+        assert sd[1].get("shot") != "graphic" and places.resolve(stage.backdrop(sd[1])) == "space" and "satellite" in keys[1], f"Satellit: {sd[1].get('shot')} {sd[1].get('place')} {keys[1]}"
+        for n_ in (2, 3):
+            bd_ = stage.backdrop(sd[n_])
+            assert isinstance(bd_, dict) and bd_.get("ground") == "water", f"Meeresoberfläche {n_}: {bd_}"
+            assert not [a_ for a_ in sd[n_].get("actors") or [] if not a_.get("kind")] and keys[n_], f"Mensch auf dem Wasser / leeres Meer {n_}: {sd[n_].get('actors')} {keys[n_]}"
+        assert keys[3][:1] == ["debris"] and "box" not in keys[3], f"Treibgut: {keys[3]}"
+        assert sd[4].get("shot") == "graphic" and (sd[4].get("graphic") or {}).get("type") == "radar" and sd[4]["graphic"].get("sub") == "lost", f"Radar: {sd[4].get('shot')} {sd[4].get('graphic')}"
+        assert sd[5].get("_ov_low") == 2, f"Schild unter dem Schiff: {sd[5].get('_ov_low')}"
+        assert [x_ for k_, x_ in stage._prepare(sd[5], {"du": {}})[4] if k_ == "plane"] == [540], "Flugzeug über dem Schiff nicht mittig"
+        for sc_ in sd:
+            for t_ in (0.2, 1.3, 3.0):
+                frame(sc_, {"du": {"shirt": "blau"}}, t=t_)
+        land = stage.direct([{"text": "Die Trümmerteile liegen im Labor auf dem Tisch.", "place": "lab", "actors": [{"id": "du"}]}, {"text": "Folg für mehr.", "place": "lab", "actors": [{"id": "du"}]}],
+                            [(0, 4), (4, 8)], "Flugzeug", "whatif")
+        assert places.resolve(stage.backdrop(land[0])) == "lab" and land[0].get("actors"), f"Trümmer im Labor: {land[0].get('place')} {land[0].get('backdrop')}"
+    check("Meeresoberfläche: Treibgut, Radar, Satellit", _surface)
     check("Titelbild", lambda: stage.cover({"place": "street", "props": ["meteor"], "actor": "du"}, {"du": {}}, "/tmp/_selftest_cover.jpg"))
     check("Titelbild kaputt", lambda: stage.cover({"place": None, "props": [None, 3], "actor": None, "backdrop": "x"}, {}, "/tmp/_selftest_cover.jpg"))
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")

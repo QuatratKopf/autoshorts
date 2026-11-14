@@ -796,6 +796,26 @@ def p_ship(d, x, t, s=1.0):
     _poly(d, [(x - 200, y - 60), (x + 220, y - 60), (x + 170, y), (x - 160, y)], (60, 74, 110))
     d.line((x - 196, y - 44, x + 214, y - 44), fill=(214, 70, 60), width=8)
 
+def p_debris(d, x, t, s=1.0):
+    """Treibgut auf dem Meer: ein abgerissenes Rumpfstück mit Fenstern, ein Sitzkissen und ein Koffer schaukeln auf den Wellen
+    (nur von der Regie gesetzt – auf der Meeresoberfläche, nie an Land)."""
+    def bob(i):
+        return math.sin(t * 1.5 + i * 2.1) * 9
+    y = FAR + 250 + bob(0)                                                      # Rumpfstück: groß, schräg im Wasser
+    _poly(d, [(x - 190, y - 6), (x - 150, y - 108), (x - 96, y - 86), (x - 40, y - 128), (x + 44, y - 112), (x + 150, y - 132), (x + 196, y - 20), (x + 150, y + 8), (x - 150, y + 10)], (236, 238, 244))
+    d.line((x - 168, y - 26, x + 186, y - 34), fill=(214, 70, 60), width=10)
+    for i in range(3):
+        _o(d, (x - 96 + i * 76, y - 84 - i * 3, x - 58 + i * 76, y - 46 - i * 3), (120, 190, 240), 4, False)
+    y2 = FAR + 120 + bob(1)                                                     # Sitzkissen weiter hinten
+    _r(d, (x - 330, y2 - 44, x - 236, y2 + 4), (236, 140, 50), 14, 5)
+    y3 = FAR + 150 + bob(2)                                                     # Koffer
+    _r(d, (x + 250, y3 - 62, x + 350, y3 + 6), (120, 84, 60), 10, 5)
+    d.line((x + 284, y3 - 62, x + 284, y3 - 80, x + 316, y3 - 80, x + 316, y3 - 62), fill=INK, width=6)
+    for wx, wy, ww in ((x - 20, y + 16, 250), (x - 286, y2 + 10, 80), (x + 300, y3 + 12, 84)):       # Wasserlinie: helle Wellenbögen davor
+        for k in (-1, 0, 1):
+            d.arc((wx + k * ww * 0.66 - ww * 0.36, wy - 14, wx + k * ww * 0.66 + ww * 0.36, wy + 22), 180, 360, fill=(226, 242, 252, 255), width=7)
+
+
 def p_submersible(d, x, t, s=1.0):
     """Forschungs-Tauchboot (Sonar, Tauchroboter): schwebt im Wasser, Blick nach rechts; der Scheinwerfer leuchtet schräg nach unten,
     die Ortungs-Ringe des Sonars laufen in dieselbe Richtung zum Meeresgrund."""
@@ -998,6 +1018,7 @@ PROP_ALIASES = {"krankenwagen": "ambulance", "rettungswagen": "ambulance", "nota
 FRONT = ("wave", "flood", "eclipse")
 BEHIND = ("sun", "moon", "earth", "cloud", "stormcloud", "aurora")      # stehen am Himmel hinter Häusern, Bergen und Bäumen
 SKY = ("drone", "earth", "sun", "moon", "ufo", "meteor", "aurora", "eclipse", "lightning", "cloud", "stormcloud", "plane", "satellite")     # werden vor den Figuren gezeichnet
+PROPS["debris"] = p_debris                                 # Treibgut auf dem Meer (nur von der Regie gesetzt)
 PROPS["ping"] = p_ping                                     # Signal-Ringe über einem Sender (nur von der Regie gesetzt)
 PROPS["submersible"] = p_submersible                       # Tauchboot mit Sonar: schwebt wie die Himmels-Dinge frei im Bild (unter Wasser)
 PROP_ALIASES.update({"sonar": "submersible", "tauchboot": "submersible", "tauchboote": "submersible", "u-boot": "submersible", "uboot": "submersible",

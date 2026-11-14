@@ -310,8 +310,11 @@ def _prepare(scene, cast):
                 free = [c for c in (760, 320, 540) if all(abs(c - q[1]) > 300 for q in props)] or [760]
             props.append((kind, _x(p.get("pos"), free[0]) if p.get("pos") else free[0]))
             p_given.append(bool(p.get("pos")))
+    if len(props) == 1 and not actors and not p_given[0] and extras.PROP_ALIASES.get(props[0][0], props[0][0]) in ("plane", "ufo", "satellite", "rocket"):
+        props = [(props[0][0], 540)]                          # allein im Bild: mittig, nicht am rechten Rand vor einem Deko-Planeten
     if event:
-        props = [(k, 600 if (i == 0 and not p_given[i]) else x) for i, (k, x) in enumerate(props)]
+        props = [(k, 600 if (i == 0 and not p_given[i]) else 540 if (not p_given[i] and extras.PROP_ALIASES.get(k, k) in ("plane", "ufo", "satellite", "drone")) else x)
+                 for i, (k, x) in enumerate(props)]           # das Flugzeug über dem Schiff fliegt mittig – am Rand wäre es vergrößert angeschnitten
     for a in actors:                  # wer schläft, hält nichts in der ausgestreckten Hand
         if a["action"] == "sleep":
             a["hold"] = ""
@@ -482,7 +485,7 @@ def _prop(frame, kind, x, t, big, table=False, lift=0.0, rot=0.0, grow=1.0):
             _shadow(frame, int(x), int(gy), int(cut.width * 0.42))
         frame.paste(cut, (int(px0), int(py0)), cut)
         return
-    if big <= 1.01 or key in ("aurora", "lightning", "crack", "flood", "wave", "eclipse", "ship"):
+    if big <= 1.01 or key in ("aurora", "lightning", "crack", "flood", "wave", "eclipse", "ship", "debris"):
         extras.draw_prop(frame, kind, x, t)
         return
     layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
@@ -636,7 +639,7 @@ def _open_sky_x(sky, x, cy, max_up=0, half=170):
 
 
 def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, in_bed, shot="", big=1.0, fx=None):
-    if place == "space" and any(extras.PROP_ALIASES.get(k, k) in ("sun", "moon", "earth") for k, _ in props):
+    if place == "space" and any(extras.PROP_ALIASES.get(k, k) in ("sun", "moon", "earth", "satellite", "rocket", "ufo") for k, _ in props):
         bg = places.space_bare(night)                 # großer Himmelskörper im Bild: die Deko-Planeten treten zurück, nichts steckt ineinander
     frame = bg.copy()
     if (fx or {}).get("neon"):                # Lichtpunkte liegen hinter den Figuren
@@ -1124,6 +1127,14 @@ def direct(scenes, times, topic="", style="", look=""):
                 sc["graphic"], sc["shot"] = graphics.clean(ov_c), "graphic"
             sc["overlay"] = ov_c = None
         g0 = sc.get("graphic") if isinstance(sc.get("graphic"), dict) else None
+        if g0 and g0.get("type") == "map" and not _re0.search(GEO_RE, low0):
+            sc["graphic"], g0 = None, None                # Europakarte mit leuchtenden Ländern zu einem Satz, der kein Land und keine Karte nennt (Satelliten-Pings)
+            sc["shot"] = "" if sc.get("shot") == "graphic" else sc.get("shot")
+        if i and not deep_f and _re0.search(RADAR_RE, low0) and not (g0 and g0.get("type") in FIGURE_GFX and graphics.clean(g0)):
+            lost_r = bool(_re0.search(RADAR_LOST_RE, low0))   # „verschwindet vom Radar“: Radarschirm, der Leuchtpunkt erlischt
+            sc["graphic"] = g0 = {"type": "radar", "text": "SIGNAL VERLOREN" if lost_r else "RADAR", "sub": "lost" if lost_r else ""}
+            sc["shot"], sc["overlay"] = "graphic", None
+            ov_c = None
         if g0 and g0.get("type") == "chart" and g0.get("value") and not spoken_number(_lead_number(g0["value"]), sc["text"]):
             g0.pop("value", None)                         # Kurve ja – aber keine Zahl, die der Sprecher nicht nennt
             if _re0.search(r"dollar|euro|%|prozent|mio|mrd|bio", str(g0.get("label") or "").lower()):
@@ -1147,6 +1158,13 @@ def direct(scenes, times, topic="", style="", look=""):
                 and unspoken_figures(ov_c, sc["text"]):
             sc["overlay"] = None                          # Schild „SEKUNDE 10“ an einem Satz, der die Zahl nicht nennt (sie fällt erst im nächsten); Jahreszahlen bleiben
         has_bd = isinstance(sc.get("backdrop"), dict) and (sc["backdrop"].get("elements") or sc["backdrop"].get("ground"))
+        if not has_bd and not deep_f and not (sc.get("shot") == "graphic" and graphics.clean(sc.get("graphic"))) and not _re0.search(r"unter wasser|taucht|tauchen|versink|versunk|\bsinkt|gesunken", low0) \
+                and (_re0.search(SURFACE_RE, low0) or (_re0.search(DEBRIS_RE, low0) and _re0.search(r"treib(?!gut)|schwimm|strömung|\bmeer|ozean", low0)
+                                                      and not _re0.search(r"forscher|wissenschaftler|ermittler|expert|untersuch|\blabor|analys|biolog|muschel|seepocke", low0))):
+            # „auf dem Ozean“, „über dem Meer“, treibende Trümmer: die Meeresoberfläche mit Himmel – nicht der Meeresgrund mit Goldfisch, nicht der Palmenstrand
+            sc["backdrop"] = {"sky": "night" if str(sc.get("time") or "").lower() == "night" else "day", "ground": "water", "elements": ["sea"]}
+            sc["place"] = place = "beach"
+            has_bd = True
         hint = None if has_bd or deep_f else _hint(sc.get("text"))
         said = None if has_bd or place in MAPS or deep_f else _said_place(sc.get("text"))
         if not said and hint is None and topic_place and place == "livingroom" and not sc.get("props") and topic_place != place \
@@ -1195,7 +1213,8 @@ def direct(scenes, times, topic="", style="", look=""):
             for pat, kind in _lib_props() + TEXT_PROPS:
                 if kind not in have and kind not in simile and _re0.search(pat, txt0):
                     if kind in OUTDOOR_THINGS and places.resolve(backdrop(sc)) not in places.OUTDOOR and not (
-                            kind in extras.SKY and places.resolve(backdrop(sc)) in places.WINDOWS):
+                            kind in extras.SKY and places.resolve(backdrop(sc)) in places.WINDOWS) and not (
+                            kind in ("satellite", "rocket", "ufo", "meteor") and places.resolve(backdrop(sc)) == "space"):
                         continue                           # Feuer, Autos, Naturgewalten erscheinen nicht im Zimmer (Himmelsdinge: im Fenster)
                     if kind in ("computer", "tv", "fridge", "shelf", "cart") and places.resolve(backdrop(sc)) in NO_FURNITURE:
                         continue                           # „zocken“ im Diner stellt keinen Schreibtisch ins Restaurant
@@ -1861,6 +1880,36 @@ def direct(scenes, times, topic="", style="", look=""):
             seas[0]["facing"] = "left" if same_s % 3 == 2 else "right"
         if sc.get("shot") in ("event", "insert", "close"):
             sc["shot"] = ""
+    for sc in scenes:                                     # Meeresoberfläche: Niemand steht im Pulli auf dem Wasser, kein Karton auf den Wellen –
+        if not isinstance(sc, dict):                      # es treibt, was der Satz nennt (Trümmer), sonst fährt ein Schiff
+            continue
+        _key_w = lambda q: extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower())      # noqa: E731
+        shot_w = str(sc.get("shot") or "")
+        gfx_w = shot_w == "graphic" and graphics.clean(sc.get("graphic"))
+        bd_w = backdrop(sc)
+        if isinstance(bd_w, dict) and str(bd_w.get("ground") or "").lower() in ("water", "wasser") and not gfx_w and shot_w != "insert":
+            low_w = str(sc.get("text") or "").lower()
+            sc["actors"] = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and a.get("kind")]
+            sc["crowd"] = ""
+            if shot_w == "close":
+                sc["shot"] = shot_w = ""
+            props_w = [q for q in (sc.get("props") or []) if isinstance(q, dict) and (_key_w(q) in extras.SKY or _key_w(q) in SEA_TOP)]
+            if _re0.search(DEBRIS_RE, low_w) and "debris" not in [_key_w(q) for q in props_w]:
+                props_w = [q for q in props_w if _key_w(q) != "ship"][:1]
+                props_w.insert(0, {"type": "debris", "pos": 540})
+            elif not props_w and not sc["actors"]:
+                props_w.append({"type": "ship"})
+            sc["props"] = props_w
+        keys_w = [_key_w(q) for q in (sc.get("props") or []) if isinstance(q, dict)]
+        rp_w = places.resolve(bd_w)
+        if rp_w == "space" and "satellite" in keys_w and "earth" not in keys_w and len(keys_w) < 3 and not sc.get("actors") and shot_w in ("", "event", "wide"):
+            sc["props"] = [dict(q, pos=730) if _key_w(q) == "satellite" else q for q in sc["props"]] + [{"type": "earth", "pos": 370}]     # der Satellit kreist um die Erde – beide ganz im Bild
+            keys_w.append("earth")
+        sky_w = [k for k in keys_w if k in extras.SKY and k not in ("submersible", "ping")]
+        sc["_ov_low"] = 0
+        if sky_w and all(k in sky_w or k == "ship" for k in keys_w) and not sc.get("actors") and not sc.get("crowd") \
+                and shot_w in ("", "event", "wide") and (rp_w in places.OUTDOOR or rp_w == "space"):
+            sc["_ov_low"] = 2 if "ship" in keys_w else 1  # nur Flugzeug/Satellit am Himmel (und ein Schiff darunter): das Schild steht tiefer im freien Bild, nicht quer über dem Flugzeug
     return scenes
 
 
@@ -1880,6 +1929,15 @@ SEA_CREATURES = [(r"fangschreckenkreb|heuschreckenkreb|mantis-?shrimp", "mantis"
                  (r"qualle", "jelly"), (r"axolotl", "axolotl")]
 SEA_KINDS = ("shrimp", "mantis", "jelly", "axolotl")
 # Tiefsee-Technik (Flugzeug-Suche, Wracks): Der Satz spielt unter Wasser; nennt er Blackbox, Wrack oder Tauchboot/Sonar, wird es die dunkle Tiefsee
+SURFACE_RE = (r"\b(?:auf|über) (?:dem|den|der|hoher|offener|offenem) (?:\w+ )?(?:ozean|meer|atlantik|pazifik|wasseroberfläche|meeresoberfläche|see\b)|übers (?:offene )?meer|"
+              r"auf hoher see|meeresoberfläche|wasseroberfläche")
+DEBRIS_RE = r"trümmerteil|treibgut|wrackteile? (?:treib|schwimm)|trümmer (?:treib|schwimm)"
+SEA_TOP = ("ship", "debris", "wave", "ice", "lightning")       # was auf der Meeresoberfläche zu sehen sein darf (dazu alles am Himmel)
+GEO_RE = (r"europ|deutsch|länder|\bland\b|\blandes\b|staat|kontinent|\bkarte|grenz|weltweit|\bwelt\b|international|global|ausland|nachbar|region|england|britann|"
+          r"frankreich|spanien|italien|polen|österreich|schweiz|skandinav|schweden|norwegen|finnland|dänemark|russland|ukraine|türkei|niederlande|holland|belgien|"
+          r"griechenland|portugal|irland|\beu\b|bundesl")
+RADAR_RE = r"\bradar(?!falle|kontroll)|radarschirm|funkkontakt|transponder"
+RADAR_LOST_RE = r"verschwind|verschwund|verlier|verlor|bricht ab|abbrich|abgebrochen|reißt ab|abreiß|erlisch|erlosch|kein signal|spurlos|\bweg\b"
 DEEP_RE = r"meeresboden|meeresgrund|\btiefsee|\b(?:meter|metern|kilometer|kilometern) tiefe\b|am grund des (?:meeres|ozeans)|auf dem grund des (?:meeres|ozeans)"
 DEEP_DARK_RE = r"\btiefsee|\b(?:meter|metern|kilometer|kilometern) tiefe\b|tiefseegraben|abgrund"
 SUB_RE = r"\bsonar|tauchboot|tauchroboter|tiefseeroboter|tauchdrohne|\bu-boot|unterseeboot"
@@ -2308,7 +2366,7 @@ HINTS = [
     (r"tiefsee|unter wasser|meeresgrund|meeresboden|korallen|\bfisch|unter der oberfläche|im wasser leb|\btauch(?!t (plötzlich )?auf)|taucher", "underwater"),
     (r"wüste|sahara|sanddüne", "desert"),
     (r"vulkan|gebirge|\bberg|gipfel", "mountain"),
-    (r"weltall|weltraum|galaxie|planet|umlaufbahn|astronaut|\bmond\b|sonnensystem", "space"),
+    (r"weltall|weltraum|galaxie|planet|umlaufbahn|astronaut|\bmond\b|sonnensystem|satellit", "space"),
     (r"(?<![a-zäöüß])höhle|tropfstein", "cave"),
     (r"\bkino|kinosaal|leinwand|hollywood|blockbuster|\bfilme?\b|\bfilmen\b|filmszene|regisseur|kinofilm", "cinema"),
     (r"fabrik|industrie|abgase|produktion", {"sky": "haze", "elements": ["factory", "city"]}),

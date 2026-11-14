@@ -86,6 +86,13 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   Technik im Bild (Boot links, Wrack/Blackbox rechts am Grund, beim Wrack leuchtet ein Tauchboot), kein Flugzeug, kein Mensch, kein Fisch, keine
   Zahlen-Tafel. Tauchboot und Sonar erscheinen nur unter Wasser (Fledermaus-„Sonar“ im Wald bleibt ohne Boot). Selbsttest: `_deep`.
 
+- Meeresoberfläche (`stage.SURFACE_RE`, `DEBRIS_RE`, Schlussdurchgang in `direct`): „auf dem Ozean“, „über dem Meer“, treibende Trümmerteile spielen auf dem
+  Meer mit Himmel (Baukasten `ground: water`) – nicht am Meeresgrund, nicht am Palmenstrand. Dort steht kein Mensch und kein Karton auf dem Wasser:
+  Es treibt die Requisite `debris` (Rumpfstück, Sitzkissen, Koffer), sonst fährt ein Schiff. Steht nur ein Flugzeug/Satellit am Himmel, rückt die
+  Einblendung tiefer ins freie Bild (`_ov_low`, `render.scene_clip`). Satelliten-Sätze spielen im All (Satellit vor der Erde); eine Europakarte ohne
+  Land im Satz (`GEO_RE`) entfällt. Grafik `radar` (Radarschirm, mit `"sub": "lost"` erlischt der Leuchtpunkt) – ab dem zweiten Satz automatisch bei
+  „Radar“, „Funkkontakt“, „Transponder“. Bibliothek: `muschel`. Selbsttest: `_surface`.
+
 ## Was zu tun ist
 1. Offene Wünsche (ohne `"done": true`) und `"auto": true`-Einträge durchgehen, höchstens 8 pro Sitzung, häufigste zuerst.
 2. Einzelne Gegenstände: sauber als Eintrag in `docs/data/shapes.json` zeichnen (Format siehe Kopf von `engine/toon/library.py`:

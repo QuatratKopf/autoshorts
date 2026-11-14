@@ -41,7 +41,7 @@ ORANGE = (255, 138, 31)
 THEMES = {"": ((58, 40, 150), (14, 10, 46)), "scary": ((40, 30, 96), (6, 6, 22)), "panic": ((120, 34, 70), (26, 8, 30)),
           "tense": ((110, 60, 120), (22, 10, 40)), "sad": ((40, 60, 130), (10, 14, 40)), "happy": ((90, 70, 190), (30, 16, 80)),
           "calm": ((58, 40, 150), (14, 10, 46))}
-TYPES = ("number", "timer", "calendar", "question", "houses", "badge", "map", "city", "versus", "round", "score", "compare", "podium", "share", "news", "pulse", "radio", "distance", "days", "phone", "chart")
+TYPES = ("number", "timer", "calendar", "question", "houses", "badge", "map", "city", "versus", "round", "score", "compare", "podium", "share", "news", "pulse", "radio", "distance", "days", "phone", "chart", "radar")
 LEFT, RIGHT = (150, 110, 255), (255, 150, 40)                # Farben der beiden Seiten im Duell
 GREEN = (120, 230, 90)
 
@@ -1070,6 +1070,50 @@ def _g_chart(frame, g, t, dur):
         _center(d, y, str(g["label"]).upper()[:40], f, fill=ORANGE if not down else (255, 150, 140))
 
 
+def _g_radar(frame, g, t, dur):
+    """Radarschirm: Ringe, umlaufender Suchstrahl, ein Leuchtpunkt. Mit sub="lost" blinkt der Punkt und erlischt – das Signal ist weg."""
+    grn, dim = (110, 255, 170), (40, 120, 90)
+    cx, cy, r = W // 2, 760, 380
+    k = _pop(t, 0.0, 0.35)
+    if k <= 0:
+        return
+    r = int(r * min(1.04, k))
+    lay = frame.convert("RGB")                                                 # deckend zeichnen, halbtransparente Flächen mischen sich richtig
+    d = ImageDraw.Draw(lay, "RGBA")
+    d.ellipse((cx - r - 26, cy - r - 26, cx + r + 26, cy + r + 26), fill=(18, 22, 30, 255), outline=(70, 84, 100, 255), width=12)
+    d.ellipse((cx - r, cy - r, cx + r, cy + r), fill=(8, 34, 30, 255))
+    ang = (t * 150) % 360
+    for i in range(40):                                                        # Nachleuchten hinter dem Suchstrahl
+        d.pieslice((cx - r, cy - r, cx + r, cy + r), ang - 2.2 * (i + 1), ang - 2.2 * i, fill=(60, 230, 140, int(120 * (1 - i / 40) ** 1.6)))
+    for q in (0.25, 0.5, 0.75, 1.0):
+        d.ellipse((cx - r * q, cy - r * q, cx + r * q, cy + r * q), outline=dim + (255,), width=5)
+    d.line((cx - r, cy, cx + r, cy), fill=dim + (255,), width=4)
+    d.line((cx, cy - r, cx, cy + r), fill=dim + (255,), width=4)
+    d.line((cx, cy, cx + r * math.cos(math.radians(ang)), cy + r * math.sin(math.radians(ang))), fill=grn + (255,), width=8)
+    lost = str(g.get("sub") or "").lower() == "lost"
+    gone = max(1.3, min(dur * 0.5, 2.4))                                       # Zeitpunkt, zu dem der Punkt erlischt
+    bx, by = cx + r * 0.42 + min(t, gone) * 14, cy - r * 0.36 - min(t, gone) * 10    # der Punkt wandert langsam über den Schirm
+    if not lost or t < gone:
+        blink = 1.0 if not lost or t < gone - 0.8 else (1.0 if int(t * 10) % 2 else 0.25)
+        pr = 20 + 4 * math.sin(t * 6)
+        d.ellipse((bx - pr * 2.2, by - pr * 2.2, bx + pr * 2.2, by + pr * 2.2), fill=grn + (int(70 * blink),))
+        d.ellipse((bx - pr, by - pr, bx + pr, by + pr), fill=(220, 255, 230, int(255 * blink)))
+    else:                                                                      # Signal weg: rotes Kreuz an der letzten Position
+        e = _pop(t, gone, 0.3)
+        s2 = 44 * min(1.1, e)
+        for sgn in (1, -1):
+            d.line((bx - s2, by - s2 * sgn, bx + s2, by + s2 * sgn), fill=(255, 80, 90, 255), width=16)
+        d.ellipse((bx - 90, by - 90, bx + 90, by + 90), outline=(255, 80, 90, int(200 * (0.5 + 0.5 * math.sin(t * 8)))), width=6)
+    disc = Image.new("L", (W, H), 0)                                           # der Schirm bleibt deckend – der Hintergrund scheint nicht durch den Suchstrahl
+    ImageDraw.Draw(disc).ellipse((cx - r - 26, cy - r - 26, cx + r + 26, cy + r + 26), fill=255)
+    frame.paste(lay, (0, 0), disc)
+    d = ImageDraw.Draw(frame, "RGBA")
+    _kicker(d, 300, g.get("kicker"), t, 0.0)
+    lab = str(g.get("text") or "").upper()[:26]
+    if lab and (t > gone if lost else t > 0.5):
+        _pill(d, W / 2, 1196, lab, _fit(d, lab, 64, 860, "Bold"), ((230, 50, 70, 255) if lost else (30, 150, 100, 255)), WHITE)
+
+
 def _lines(d, text, f, max_w):
     out, cur = [], ""
     for w in str(text).split():
@@ -1080,7 +1124,7 @@ def _lines(d, text, f, max_w):
     return out + ([cur] if cur else [])
 
 
-DRAW = {"days": _g_days, "phone": _g_phone, "chart": _g_chart,
+DRAW = {"radar": _g_radar, "days": _g_days, "phone": _g_phone, "chart": _g_chart,
         "news": _g_news, "pulse": _g_pulse, "radio": _g_radio, "distance": _g_distance,
         "versus": _g_versus, "round": _g_round, "score": _g_score, "compare": _g_compare, "podium": _g_podium, "share": _g_share,
         "map": _g_map, "city": _g_city, "number": _g_number, "timer": _g_timer, "calendar": _g_calendar, "question": _g_question, "houses": _g_houses, "badge": _g_badge}
@@ -1098,7 +1142,7 @@ def clean(g):
     out["dark"] = g.get("dark") is True
     need = {"number": "value", "timer": "value", "calendar": "value", "houses": "value", "badge": "text", "question": None,
             "map": None, "city": None, "versus": "left", "round": "text", "score": "value", "compare": "value", "podium": "text",
-            "share": "value", "news": "text", "pulse": "value", "radio": "text", "distance": "value", "days": "value", "phone": "text", "chart": None}[out["type"]]
+            "share": "value", "news": "text", "pulse": "value", "radio": "text", "distance": "value", "days": "value", "phone": "text", "chart": None, "radar": None}[out["type"]]
     mode = str(g.get("mode") or "").lower()
     if out["type"] == "phone":
         out["mode"] = mode if mode in ("alert", "lock", "chat") else "alert"
