@@ -2915,7 +2915,7 @@
   "id": 86,
   "category": "whatif",
   "topic": "Was passiert, wenn ein Flugzeug über dem Ozean spurlos verschwindet – erzähle die Suche als spannende Geschichte in genau dieser Reihenfolge, je Abschnitt zwei bis drei kurze Sätze: Der Leuchtpunkt des Flugzeugs verschwindet vom Radar, denn mitten über dem Ozean gibt es kein Radar. Ein Satellit im All empfängt weiter automatische Pings des Flugzeugs, aus ihrer Laufzeit grenzen Fachleute die Flugroute ein. Schiffe und Flugzeuge suchen auf dem Meer ein Suchgebiet ab, das so groß wie ganz Deutschland sein kann. Auf dem Ozean treiben Trümmerteile, und Forscher untersuchen Muscheln auf dem Treibgut, weil ihr Wachstum verrät, wie lange und wo es im Wasser trieb. Am Meeresboden sendet die Blackbox etwa dreißig Tage lang Ultraschallsignale, dann ist die Batterie leer. Tauchboote mit Sonar suchen in viertausend Metern Tiefe, dort herrscht ein Druck von rund vierhundert Bar, bis sie das Wrack finden. Schluss: Der Flugdatenschreiber verrät den Ermittlern Tempo, Höhe und Kurs, so wird der Flug Sekunde für Sekunde rekonstruiert – deshalb verschwindet kein Flugzeug wirklich spurlos. Einzige Zahlen im ganzen Video: dreißig Tage, viertausend Meter, vierhundert Bar. Keine Jahreszahlen, keine Flugnummern, keine Namen von Fluggesellschaften, Herstellern oder echten Unglücken, keine Opferzahlen, keine erfundenen Statistiken, keine nummerierte Liste. Jeder Satz nennt das Ding, um das es geht, beim Namen (Radar, Satellit, Schiff, Trümmerteile, Muscheln, Blackbox, Tauchboot, Sonar, Wrack, Flugdatenschreiber). Einblendungen höchstens drei Wörter, keine Europakarte. Die Beschreibung handelt von der Suche nach dem Flugzeug und endet mit einer Frage dazu. Titel: Was passiert, wenn ein Flugzeug spurlos verschwindet? Titelbild-Text: SPURLOS VERSCHWUNDEN?",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1794653670.3869793,
   "title": "Was passiert, wenn ein Flugzeug spurlos verschwindet?",
   "description": "Was passiert eigentlich, wenn ein Flugzeug über dem Meer spurlos verschwindet?\nVom Signalverlust bis zur Bergung in viertausend Metern Tiefe.\nWelcher Schritt bei der Suche überrascht dich am meisten?",
@@ -2950,6 +2950,7 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Erster Neubau: im ersten Bild Schiff im Sturm statt Flugzeug oder Radar, Zeile SUCHE GESTARTET über dem ganzen Video und über dem Karten-Titel, Welle verschluckt das Suchschiff, Erde angeschnitten, Wrack im Labor, Schild über dem Tauchboot"
  }
 ]
