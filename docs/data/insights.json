@@ -1,5 +1,5 @@
 {
- "updated": 1794622905.8897154,
+ "updated": 1794624706.400098,
  "enough": true,
  "counted": 7,
  "total": 11,
@@ -9,27 +9,27 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 1,
-   "avg_views": 1378,
+   "avg_views": 1379,
    "avg_likes": 53.0,
-   "like_rate": 3.85,
-   "avg_score": 2173
+   "like_rate": 3.84,
+   "avg_score": 2174
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 4,
-   "avg_views": 1340,
+   "avg_views": 1341,
    "avg_likes": 29.8,
    "like_rate": 2.22,
-   "avg_score": 1794
+   "avg_score": 1795
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 2,
-   "avg_views": 1011,
+   "avg_views": 1012,
    "avg_likes": 30.5,
-   "like_rate": 3.02,
+   "like_rate": 3.01,
    "avg_score": 1484
   }
  ],
@@ -42,9 +42,9 @@
   "comedy": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1378 Aufrufe, 3.85 % Likes).",
-  "Schwächste Kategorie: 💡 Fakten (Ø 1011 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2182 zu 704 Punkte)."
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1379 Aufrufe, 3.84 % Likes).",
+  "Schwächste Kategorie: 💡 Fakten (Ø 1012 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2183 zu 704 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -53,41 +53,41 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2489,
+   "views": 2491,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3329
+   "score": 3331
   },
   {
    "id": 54,
    "title": "Was passiert, wenn die Schwerkraft für fünf Sekunden verschwindet?",
    "category": "whatif",
-   "views": 1750,
+   "views": 1751,
    "likes": 46,
    "comments": 0,
    "shares": 0,
-   "score": 2440
+   "score": 2441
   },
   {
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1378,
+   "views": 1379,
    "likes": 53,
    "comments": 0,
    "shares": 0,
-   "score": 2173
+   "score": 2174
   },
   {
    "id": 75,
    "title": "3 Tier-Superkräfte, die unmöglich wirken!",
    "category": "fakten",
-   "views": 1429,
+   "views": 1431,
    "likes": 45,
    "comments": 1,
    "shares": 0,
-   "score": 2134
+   "score": 2136
   },
   {
    "id": 38,
