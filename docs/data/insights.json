@@ -1,5 +1,5 @@
 {
- "updated": 1794624706.400098,
+ "updated": 1794626501.753205,
  "enough": true,
  "counted": 7,
  "total": 11,
@@ -9,10 +9,10 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 1,
-   "avg_views": 1379,
+   "avg_views": 1378,
    "avg_likes": 53.0,
-   "like_rate": 3.84,
-   "avg_score": 2174
+   "like_rate": 3.85,
+   "avg_score": 2173
   },
   {
    "slug": "whatif",
@@ -29,7 +29,7 @@
    "n": 2,
    "avg_views": 1012,
    "avg_likes": 30.5,
-   "like_rate": 3.01,
+   "like_rate": 3.02,
    "avg_score": 1484
   }
  ],
@@ -42,7 +42,7 @@
   "comedy": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1379 Aufrufe, 3.84 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1378 Aufrufe, 3.85 % Likes).",
   "Schwächste Kategorie: 💡 Fakten (Ø 1012 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2183 zu 704 Punkte)."
  ],
@@ -73,21 +73,21 @@
    "id": 62,
    "title": "Hollywood Heists sind physikalisch komplett wild",
    "category": "storys",
-   "views": 1379,
+   "views": 1378,
    "likes": 53,
    "comments": 0,
    "shares": 0,
-   "score": 2174
+   "score": 2173
   },
   {
    "id": 75,
    "title": "3 Tier-Superkräfte, die unmöglich wirken!",
    "category": "fakten",
-   "views": 1431,
+   "views": 1430,
    "likes": 45,
    "comments": 1,
    "shares": 0,
-   "score": 2136
+   "score": 2135
   },
   {
    "id": 38,
