@@ -1090,7 +1090,7 @@ def _g_radar(frame, g, t, dur):
     d.line((cx - r, cy, cx + r, cy), fill=dim + (255,), width=4)
     d.line((cx, cy - r, cx, cy + r), fill=dim + (255,), width=4)
     d.line((cx, cy, cx + r * math.cos(math.radians(ang)), cy + r * math.sin(math.radians(ang))), fill=grn + (255,), width=8)
-    lost = str(g.get("sub") or "").lower() == "lost"
+    lost = str(g.get("sub") or "").lower()[:4] in ("lost", "verl", "weg", "gone")
     gone = max(1.3, min(dur * 0.5, 2.4))                                       # Zeitpunkt, zu dem der Punkt erlischt
     bx, by = cx + r * 0.42 + min(t, gone) * 14, cy - r * 0.36 - min(t, gone) * 10    # der Punkt wandert langsam über den Schirm
     if not lost or t < gone:

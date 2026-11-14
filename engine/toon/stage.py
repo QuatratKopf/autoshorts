@@ -301,6 +301,9 @@ def _prepare(scene, cast):
         if isinstance(p, dict) and place not in places.OUTDOOR and place != "underwater" and str(p.get("type")).lower().startswith("lib_") \
                 and extras.REAL_M.get(str(p.get("type")).lower(), extras.SIZES.get(str(p.get("type")).lower(), (0,))[0]) > 2.6 and str(scene.get("shot") or "") != "insert":
             continue                                              # Gelerntes, das höher ist als ein Zimmer (Turm, Gebäude), steht nicht im Raum
+        if isinstance(p, dict) and place not in places.OUTDOOR and place != "underwater" and str(scene.get("shot") or "") != "insert" \
+                and extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) == "lib_wrack":
+            continue                                              # ein Flugzeugwrack passt in kein Labor (das „Wrackteil“ im Satz ist das Treibgut unterm Mikroskop)
         if isinstance(p, dict) and p.get("type"):
             taken = [q["x1"] for q in actors] + [q[1] for q in props]
             free = [c for c in (830, 250, 540, 930, 150) if all(abs(c - tx) > 200 for tx in taken)] or [830]   # nie am Rand: Dinge haben eine Mindestgröße
@@ -1130,9 +1133,18 @@ def direct(scenes, times, topic="", style="", look=""):
         if g0 and g0.get("type") == "map" and not _re0.search(GEO_RE, low0):
             sc["graphic"], g0 = None, None                # Europakarte mit leuchtenden Ländern zu einem Satz, der kein Land und keine Karte nennt (Satelliten-Pings)
             sc["shot"] = "" if sc.get("shot") == "graphic" else sc.get("shot")
-        if i and not deep_f and _re0.search(RADAR_RE, low0) and not (g0 and g0.get("type") in FIGURE_GFX and graphics.clean(g0)):
-            lost_r = bool(_re0.search(RADAR_LOST_RE, low0))   # „verschwindet vom Radar“: Radarschirm, der Leuchtpunkt erlischt
-            sc["graphic"] = g0 = {"type": "radar", "text": "SIGNAL VERLOREN" if lost_r else "RADAR", "sub": "lost" if lost_r else ""}
+        if g0 and g0.get("type") == "radar" and not deep_f:   # Radarschirm aus dem Drehbuch: ob der Punkt erlischt, bestimmt der Satz
+            none_r = bool(_re0.search(r"\b(?:kein|keine|keinen|ohne) (?:\w+ )?radar", low0))
+            lost_r = none_r or bool(_re0.search(RADAR_LOST_RE, low0)) or str(g0.get("sub") or "").lower()[:4] in ("lost", "verl", "weg", "gone")
+            g0["sub"] = "lost" if lost_r else ""
+            if none_r:
+                g0["text"] = "KEIN RADAR"
+            elif not str(g0.get("text") or "").strip() or len(str(g0.get("text"))) > 22:
+                g0["text"] = "SIGNAL VERLOREN" if lost_r else "RADAR"
+        elif i and not deep_f and _re0.search(RADAR_RE, low0) and not (g0 and g0.get("type") in FIGURE_GFX and graphics.clean(g0)):
+            none_r = bool(_re0.search(r"\b(?:kein|keine|keinen|ohne) (?:\w+ )?radar", low0))
+            lost_r = none_r or bool(_re0.search(RADAR_LOST_RE, low0))   # „verschwindet vom Radar“: Radarschirm, der Leuchtpunkt erlischt
+            sc["graphic"] = g0 = {"type": "radar", "text": "KEIN RADAR" if none_r else "SIGNAL VERLOREN" if lost_r else "RADAR", "sub": "lost" if lost_r else ""}
             sc["shot"], sc["overlay"] = "graphic", None
             ov_c = None
         if g0 and g0.get("type") == "chart" and g0.get("value") and not spoken_number(_lead_number(g0["value"]), sc["text"]):
@@ -1899,14 +1911,20 @@ def direct(scenes, times, topic="", style="", look=""):
                 props_w.insert(0, {"type": "debris", "pos": 540})
             elif not props_w and not sc["actors"]:
                 props_w.append({"type": "ship"})
+            if not _re0.search(r"riesenwelle|monsterwelle|flutwelle|tsunami|meterhohe? wellen?|welle (?:bricht|rollt|türmt)", low_w):
+                props_w = [q for q in props_w if _key_w(q) != "wave"] or props_w      # die Flutwelle verschluckt sonst das Suchschiff
+            if _re0.search(r"flugzeug|flieger|suchflüge", low_w) and "plane" not in [_key_w(q) for q in props_w] and "debris" not in [_key_w(q) for q in props_w] and len(props_w) < 2:
+                props_w.append({"type": "plane"})         # „Schiffe und Flugzeuge suchen“: beides ist zu sehen
             sc["props"] = props_w
         keys_w = [_key_w(q) for q in (sc.get("props") or []) if isinstance(q, dict)]
         rp_w = places.resolve(bd_w)
-        if rp_w == "space" and "satellite" in keys_w and "earth" not in keys_w and len(keys_w) < 3 and not sc.get("actors") and shot_w in ("", "event", "wide"):
-            sc["props"] = [dict(q, pos=730) if _key_w(q) == "satellite" else q for q in sc["props"]] + [{"type": "earth", "pos": 370}]     # der Satellit kreist um die Erde – beide ganz im Bild
-            keys_w.append("earth")
+        if rp_w == "space" and "satellite" in keys_w and len(keys_w) <= 2 and all(k in ("satellite", "earth") for k in keys_w) and not sc.get("actors") \
+                and shot_w in ("", "event", "wide"):          # der Satellit kreist um die Erde – nicht über einer Mondlandschaft; beide ganz im Bild,
+            sc["props"] = [{"type": "satellite", "pos": 730}, {"type": "earth", "pos": 370}]
+            keys_w = ["satellite", "earth"]
+            sc["shot"] = shot_w = ""                       # ohne Ereignis-Vergrößerung: sonst ragt die Erde aus dem Bild
         sky_w = [k for k in keys_w if k in extras.SKY and k not in ("submersible", "ping")]
-        sc["_ov_low"] = 0
+        sc["_ov_low"] = 3 if (rp_w == "underwater" and keys_w == ["submersible"] and not sc.get("actors")) else 0   # 3 = ganz oben, über dem Tauchboot
         if sky_w and all(k in sky_w or k == "ship" for k in keys_w) and not sc.get("actors") and not sc.get("crowd") \
                 and shot_w in ("", "event", "wide") and (rp_w in places.OUTDOOR or rp_w == "space"):
             sc["_ov_low"] = 2 if "ship" in keys_w else 1  # nur Flugzeug/Satellit am Himmel (und ein Schiff darunter): das Schild steht tiefer im freien Bild, nicht quer über dem Flugzeug
@@ -2071,6 +2089,9 @@ def _cold_open(scenes):
     import copy
     if len(scenes) < 4 or not isinstance(scenes[0], dict) or _scene_punch(scenes[0]) >= 3:
         return
+    g_first = graphics.clean(scenes[0].get("graphic")) if scenes[0].get("shot") == "graphic" else None
+    if g_first and g_first.get("type") in ("radar", "news", "radio", "phone", "chart", "pulse"):
+        return                                            # das erste Bild ist schon ein bewegtes Schaubild zum Satz (Radarschirm, Eilmeldung): kein fremdes Bild davor
     pool = [(i, _scene_punch(sc)) for i, sc in enumerate(scenes[2:max(3, len(scenes) * 2 // 3)], start=2)]
     pool = [x for x in pool if x[1] >= 4]
     if not pool:

@@ -119,9 +119,15 @@ def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, 
 
     total = times[-1][1] + 0.4
     # Ecke oben links: Ort/Zeit-Angabe der Geschichte (z. B. „TAG 1 · 3:12 UHR“), je Szene änderbar
+    huds = {str(x).strip().upper() for x in [hud] + [sc.get("hud") for sc in scenes if isinstance(sc.get("hud"), str)] if str(x or "").strip()}
+    if hud and len(huds) < 2 and not re.search(r"\d|·|\bTAG\b|\bUHR\b|\bNACHT\b|\bJAHR", str(hud).upper()):
+        hud = None                             # eine Zeile, die sich nie ändert und weder Ort noch Zeit nennt („SUCHE GESTARTET“), sagt 90 Sekunden lang nichts
     if hud:
         cur_hud = hud
         for sc, (s, e) in zip(scenes, times):
+            if str(sc.get("shot") or "") == "graphic":
+                cur_hud = sc.get("hud") if isinstance(sc.get("hud"), str) and sc.get("hud").strip() else cur_hud
+                continue                       # über einer Grafik (Karten-Titel, Zahl mit Überschrift) stünde die Zeile im Weg
             cur_hud = sc.get("hud") if isinstance(sc.get("hud"), str) and sc.get("hud").strip() else cur_hud   # gilt weiter, bis eine neue Angabe kommt
             lab = str(cur_hud or "").replace("{", "").replace("}", "").upper()[:28]
             if lab:
@@ -219,7 +225,12 @@ def scene_clip(img, dur, out, idx, motion=None, ov=None, work=None, video=False)
                         ow, oh = int(ow * k2) // 2 * 2, 340
                         scale = f"scale={ow}:{oh}:flags=lanczos,"
                         ox = (W - ow) // 2
-                    oy = 980 if ov.get("low") == 2 else 760                    # nur ein Flugzeug/Satellit am Himmel: das Schild steht im freien Bild darunter, nicht quer über dem Ding
+                    if ov.get("low") == 3 and oh > 210:     # über dem Tauchboot: flach halten
+                        k2 = 210 / oh
+                        ow, oh = int(ow * k2) // 2 * 2, 210
+                        scale = f"scale={ow}:{oh}:flags=lanczos,"
+                        ox = (W - ow) // 2
+                    oy = 980 if ov.get("low") == 2 else 150 if ov.get("low") == 3 else 760                    # nur ein Flugzeug/Satellit am Himmel: das Schild steht im freien Bild darunter, nicht quer über dem Ding
             else:
                 ox, oy = (W - ow) // 2, max(140, min(H - oh - 520, cy - oh // 2))
             fc += f";[1:v]format=rgba,{scale}setpts=PTS+0.18/TB[ov];[bg][ov]overlay={ox}:{oy}:eof_action=repeat:format=auto[vo]"
