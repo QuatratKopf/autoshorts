@@ -1,5 +1,5 @@
 {
- "updated": 1794648816.1079543,
+ "updated": 1794649234.3227427,
  "enough": true,
  "counted": 8,
  "total": 11,
@@ -9,28 +9,28 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 1,
-   "avg_views": 1491,
+   "avg_views": 1513,
    "avg_likes": 63.0,
-   "like_rate": 4.23,
-   "avg_score": 2436
+   "like_rate": 4.16,
+   "avg_score": 2458
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 5,
-   "avg_views": 1464,
+   "avg_views": 1468,
    "avg_likes": 36.2,
    "like_rate": 2.47,
-   "avg_score": 2013
+   "avg_score": 2017
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 2,
-   "avg_views": 1012,
+   "avg_views": 1014,
    "avg_likes": 30.5,
    "like_rate": 3.01,
-   "avg_score": 1484
+   "avg_score": 1486
   }
  ],
  "weights": {
@@ -42,9 +42,9 @@
   "comedy": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1491 Aufrufe, 4.23 % Likes).",
-  "Schwächste Kategorie: 💡 Fakten (Ø 1012 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2344 zu 702 Punkte)."
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1513 Aufrufe, 4.16 % Likes).",
+  "Schwächste Kategorie: 💡 Fakten (Ø 1014 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2352 zu 702 Punkte)."
  ],
  "words_good": [],
  "words_bad": [],
@@ -53,21 +53,31 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2491,
+   "views": 2492,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3331
+   "score": 3332
   },
   {
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 1957,
+   "views": 1976,
    "likes": 62,
    "comments": 0,
    "shares": 0,
-   "score": 2887
+   "score": 2906
+  },
+  {
+   "id": 62,
+   "title": "Hollywood Heists sind physikalisch komplett wild",
+   "category": "storys",
+   "views": 1513,
+   "likes": 63,
+   "comments": 0,
+   "shares": 0,
+   "score": 2458
   },
   {
    "id": 54,
@@ -80,24 +90,14 @@
    "score": 2441
   },
   {
-   "id": 62,
-   "title": "Hollywood Heists sind physikalisch komplett wild",
-   "category": "storys",
-   "views": 1491,
-   "likes": 63,
-   "comments": 0,
-   "shares": 0,
-   "score": 2436
-  },
-  {
    "id": 75,
    "title": "3 Tier-Superkräfte, die unmöglich wirken!",
    "category": "fakten",
-   "views": 1431,
+   "views": 1434,
    "likes": 45,
    "comments": 1,
    "shares": 0,
-   "score": 2136
+   "score": 2139
   }
  ],
  "flop": [
