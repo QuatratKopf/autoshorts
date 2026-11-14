@@ -2870,7 +2870,7 @@
   "id": 85,
   "category": "whatif",
   "topic": "Die wissenschaftliche Rekonstruktion eines spurlosen Flugzeugabsturzes",
-  "status": "review",
+  "status": "discarded",
   "created": 1794650977.4066417,
   "title": "Was passiert, wenn ein Flugzeug spurlos verschwindet?",
   "description": "Erlebe Schritt für Schritt, wie Ermittler ein Flugzeug im Ozean finden.\nDie Physik zeigt dir, wie Wracks aus der Tiefsee geborgen werden.\nSchreibst du im Flugzeug lieber Nachrichten oder schläfst du?",
@@ -2908,6 +2908,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-14 13:00",
-  "review_at": 1794651485.6316793
+  "review_at": 1794651485.6316793,
+  "error": "Bei der Prüfung verworfen: Fassung aus dem vorbereiteten Plan: Europakarte bei Satelliten, Goldfisch statt Ozean-Oberfläche, Mensch steht auf dem Meer, Schild über dem Flugzeug, Beschreibung am Thema vorbei"
  }
 ]
