@@ -5402,7 +5402,7 @@
   "id": 144,
   "category": "comedy",
   "topic": "Typische nervige Nachbarn, die wirklich jeder kennt",
-  "status": "review",
+  "status": "discarded",
   "created": 1795014701.3162372,
   "title": "Die Hölle auf Erden sind meine Nachbarn",
   "description": "Was tun, wenn die Nachbarn Tag und Nacht eskalieren?\nErlebe den wahren Albtraum aus der Mietwohnung.\nKlingeln bei dir um Mitternacht auch die Wände?",
@@ -5441,6 +5441,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-18 18:00",
-  "review_at": 1795015275.7903624
+  "review_at": 1795015275.7903624,
+  "error": "Bei der Prüfung verworfen: Prüfung: vier Nachbarn angekündigt, nur einer erzählt; Keule statt Club; Melone und Tür vor leerem Grund; Liste Geld/Gurken; Schluss ohne Sinn"
  }
 ]
