@@ -465,3 +465,6 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Kerzenschein, Dunkelheit im Text lassen es dunkel). Nennt der Satz einen Verwandten, gibt es keinen Einschub auf ein Ding („Der Onkel sitzt auf dem Sofa“
   zeigte sechs Sekunden ein Sofa vor leerem Grund); ein Sofa als Requisite im Wohnzimmer entfällt (`PLACE_HAS`). `_last_look`: Auswahl-Einblendung über
   mehreren Sätzen ohne „oder“ entfällt („NACHSCHLAG KOMMT / VIERTER TYP“ zehn Sekunden über dem Schluss).
+  Nach dem 3. Neubau (Video 151, veröffentlicht): `writer.loop_pass` übernimmt eine Umformulierung nicht, wenn ein Zahlwort des alten Satzes fehlt (die
+  Pointe „… aber Oma legt den vierten drauf“ wurde zur offenen Frage „… weißt du, was Oma danach macht?“) oder wenn sie eine neue Frage direkt vor den
+  nächsten Listenpunkt („Nummer zwei, …“) setzt, die niemand mehr beantwortet.

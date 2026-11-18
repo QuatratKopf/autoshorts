@@ -953,6 +953,15 @@ def main():
             writer.ai.chat_json = old_chat
         t = [x["text"] for x in out["scenes"]]
         assert t[5].startswith("Gold? Falsch") and t[6].startswith("Es sollte") and "500" not in t[4] and t[0] == "Eins.", t
+        js2 = {"title": "Vier Typen", "scenes": [{"text": t_} for t_ in ["Eins.", "Zwei.", "Wer satt sagt, bekommt bei Oma Nachschlag.",
+               "Nach dem dritten Kloß gebe ich auf, aber Oma legt den vierten drauf.", "Mein Teller wird bei Oma nie leer.", "Nummer zwei, der Onkel.", "Er erzählt.", "Ende."]]}
+        writer.ai.chat_json = lambda *a, **k: ({"edits": [{"i": 4, "text": "Nach dem dritten Kloß gebe ich auf, aber weißt du, was Oma danach macht?", "why": "rehook"},
+                                                          {"i": 5, "text": "Mein Teller wird bei Oma nie leer, aber warum eigentlich?", "why": "rehook"}]}, "t")
+        try:
+            t2 = [x["text"] for x in writer.loop_pass(js2, "Vier Typen")["scenes"]]
+        finally:
+            writer.ai.chat_json = old_chat
+        assert t2[3].endswith("vierten drauf.") and t2[4].endswith("nie leer."), t2   # Pointe bleibt; keine offene Frage direkt vor „Nummer zwei“
     check("Spannungsbogen (Rehook/Finte)", _loop)
     def _bounce():                                               # Musik-Kugel: jeder Ton trifft genau eine Scheibe, alle Melodien, Ton und Bild
         import math

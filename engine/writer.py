@@ -960,6 +960,11 @@ def loop_pass(js, topic):
         nums_old = set(re.findall(r"\d+", old))
         if set(re.findall(r"\d+", new)) - nums_old:     # keine neuen Zahlen
             continue
+        numw = lambda t: set(re.findall(r"\b(?:erst|zweit|dritt|viert|fünft|sechst|siebt|neunt|zehnt)e[nrsm]?\b|\b(?:zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|zwanzig|dreißig|vierzig|fünfzig|hundert|tausend)\w*", t.lower()))   # noqa: E731
+        if numw(old) - numw(new):                         # ein Zahlwort des alten Satzes fehlt: die Pointe ginge verloren („… aber Oma legt den vierten drauf“ → „… weißt du, was Oma danach macht?“, Video 151)
+            continue
+        if new.rstrip().endswith("?") and not old.rstrip().endswith("?") and re.match(r"\s*(?:nummer|platz|punkt|regel|typ|fakt) \w+|\s*(?:erstens|zweitens|drittens|viertens|fünftens)\b", str(sc[i + 1].get("text") or "").lower()):
+            continue                                      # neue Frage direkt vor dem nächsten Listenpunkt: niemand beantwortet sie mehr
         sc[i]["text"] = new
         done.append(f"{i + 1} ({e.get('why') or '?'})")
     if done:
