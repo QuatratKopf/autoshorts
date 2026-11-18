@@ -1,5 +1,5 @@
 {
- "updated": 1795031372.5446312,
+ "updated": 1795033179.6556287,
  "enough": true,
  "counted": 23,
  "total": 26,
@@ -9,10 +9,10 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1799,
+   "avg_views": 1800,
    "avg_likes": 43.0,
    "like_rate": 2.39,
-   "avg_score": 2444
+   "avg_score": 2445
   },
   {
    "slug": "storys",
@@ -36,19 +36,19 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 2,
-   "avg_views": 1762,
+   "avg_views": 1750,
    "avg_likes": 40.0,
-   "like_rate": 2.27,
-   "avg_score": 2398
+   "like_rate": 2.29,
+   "avg_score": 2386
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1701,
+   "avg_views": 1702,
    "avg_likes": 44.3,
-   "like_rate": 2.61,
-   "avg_score": 2376
+   "like_rate": 2.6,
+   "avg_score": 2377
   },
   {
    "slug": "whatif",
@@ -63,7 +63,7 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 2,
-   "avg_views": 1675,
+   "avg_views": 1676,
    "avg_likes": 10.5,
    "like_rate": 0.63,
    "avg_score": 1878
@@ -74,26 +74,26 @@
   "grusel": 1.2,
   "storys": 1.05,
   "mysterien": 1.2,
-  "tiere": 1.03,
+  "tiere": 1.02,
   "whatif": 1.0,
   "comedy": 1.03,
-  "musik": 0.8,
+  "musik": 0.81,
   "vergleich": 1.2,
   "motivation": 1.2,
   "liebe": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1799 Aufrufe, 2.39 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1675 Aufrufe) – kommt seltener dran.",
+  "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1800 Aufrufe, 2.39 % Likes).",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1676 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2488 zu 705 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2509 zu 2004 Punkte)."
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2508 zu 2004 Punkte)."
  ],
  "words_good": [],
  "words_bad": [
+  "lied",
   "erkennst",
-  "remix",
   "bekanntes",
-  "lied"
+  "remix"
  ],
  "top": [
   {
@@ -110,21 +110,21 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2262,
+   "views": 2263,
    "likes": 62,
    "comments": 0,
    "shares": 0,
-   "score": 3192
+   "score": 3193
   },
   {
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 1998,
+   "views": 2004,
    "likes": 68,
    "comments": 0,
    "shares": 0,
-   "score": 3018
+   "score": 3024
   },
   {
    "id": 120,
