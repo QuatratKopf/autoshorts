@@ -1,5 +1,5 @@
 {
- "updated": 1795026877.72851,
+ "updated": 1795029405.130835,
  "enough": true,
  "counted": 23,
  "total": 25,
@@ -36,19 +36,19 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 2,
-   "avg_views": 1736,
-   "avg_likes": 39.5,
-   "like_rate": 2.27,
-   "avg_score": 2364
+   "avg_views": 1754,
+   "avg_likes": 40.0,
+   "like_rate": 2.28,
+   "avg_score": 2388
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1671,
+   "avg_views": 1681,
    "avg_likes": 44.3,
-   "like_rate": 2.65,
-   "avg_score": 2346
+   "like_rate": 2.64,
+   "avg_score": 2356
   },
   {
    "slug": "whatif",
@@ -63,10 +63,10 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 2,
-   "avg_views": 1671,
-   "avg_likes": 10.5,
-   "like_rate": 0.63,
-   "avg_score": 1874
+   "avg_views": 1672,
+   "avg_likes": 10.0,
+   "like_rate": 0.6,
+   "avg_score": 1866
   }
  ],
  "weights": {
@@ -74,23 +74,23 @@
   "grusel": 1.2,
   "storys": 1.05,
   "mysterien": 1.2,
-  "tiere": 1.02,
+  "tiere": 1.03,
   "whatif": 1.01,
   "comedy": 1.04,
-  "musik": 0.81,
+  "musik": 0.8,
   "vergleich": 1.2,
   "motivation": 1.2,
   "liebe": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1798 Aufrufe, 2.39 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1671 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2476 zu 705 Punkte)."
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1672 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2480 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [
-  "lied",
   "remix",
+  "lied",
   "bekanntes",
   "erkennst"
  ],
@@ -119,11 +119,11 @@
    "id": 120,
    "title": "Warum du bei Musik Gänsehaut bekommst",
    "category": "fakten",
-   "views": 2334,
+   "views": 2336,
    "likes": 45,
    "comments": 0,
    "shares": 0,
-   "score": 3009
+   "score": 3011
   },
   {
    "id": 84,
