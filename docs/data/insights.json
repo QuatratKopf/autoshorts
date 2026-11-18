@@ -1,5 +1,5 @@
 {
- "updated": 1795022862.7021656,
+ "updated": 1795024666.6798713,
  "enough": true,
  "counted": 23,
  "total": 25,
@@ -36,10 +36,19 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1667,
+   "avg_views": 1672,
    "avg_likes": 44.3,
-   "like_rate": 2.66,
-   "avg_score": 2342
+   "like_rate": 2.65,
+   "avg_score": 2347
+  },
+  {
+   "slug": "tiere",
+   "name": "🐾 Tierwelt",
+   "n": 2,
+   "avg_views": 1724,
+   "avg_likes": 39.0,
+   "like_rate": 2.26,
+   "avg_score": 2344
   },
   {
    "slug": "whatif",
@@ -51,51 +60,39 @@
    "avg_score": 2338
   },
   {
-   "slug": "tiere",
-   "name": "🐾 Tierwelt",
-   "n": 2,
-   "avg_views": 1640,
-   "avg_likes": 38.5,
-   "like_rate": 2.35,
-   "avg_score": 2252
-  },
-  {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 2,
-   "avg_views": 1669,
+   "avg_views": 1672,
    "avg_likes": 10.0,
    "like_rate": 0.6,
-   "avg_score": 1864
+   "avg_score": 1866
   }
  ],
  "weights": {
   "fakten": 1.01,
   "grusel": 1.2,
-  "storys": 1.06,
+  "storys": 1.05,
   "mysterien": 1.2,
-  "tiere": 0.97,
+  "tiere": 1.01,
   "whatif": 1.01,
   "comedy": 1.04,
-  "musik": 0.81,
+  "musik": 0.8,
   "vergleich": 1.2,
   "motivation": 1.2,
   "liebe": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1798 Aufrufe, 2.39 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1669 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2463 zu 705 Punkte).",
-  "Wörter in starken Titeln: gänsehaut."
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1672 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2473 zu 705 Punkte)."
  ],
- "words_good": [
-  "gänsehaut"
- ],
+ "words_good": [],
  "words_bad": [
-  "lied",
+  "remix",
   "erkennst",
-  "bekanntes",
-  "remix"
+  "lied",
+  "bekanntes"
  ],
  "top": [
   {
@@ -142,11 +139,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 1949,
+   "views": 1971,
    "likes": 68,
    "comments": 0,
    "shares": 0,
-   "score": 2969
+   "score": 2991
   }
  ],
  "flop": [
