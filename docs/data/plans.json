@@ -1,12 +1,4 @@
 {
- "2026-11-17 18:00": {
-  "category": "musik",
-  "topic": "Musik-Kugel",
-  "title": "Musik-Kugel",
-  "needs": [],
-  "created": 1794911783.5982518,
-  "special": "bounce"
- },
  "2026-11-17 21:00": {
   "category": "tiere",
   "topic": "Warum dieses winzige Tier gefährlicher ist als ein Löwe",
@@ -2110,5 +2102,626 @@
   ],
   "title": "Die Hölle auf Erden sind meine Nachbarn",
   "created": 1794997363.4028482
+ },
+ "2026-11-18 21:00": {
+  "category": "comedy",
+  "topic": "Besondere familiäre Momente an großen Feiertagen",
+  "trend": null,
+  "script": {
+   "title": "Weihnachten mit der Familie eskaliert komplett",
+   "description": "Was passiert wirklich, wenn die Verwandten an den Feiertagen ausrasten?\nErzählung über das chaotische Weihnachtsessen, das völlig außer Kontrolle gerät.\nBleibst du bis zum Dessert am Tisch oder flüchtest du?",
+   "hashtags": [
+    "#shorts",
+    "#weihnachten",
+    "#familie",
+    "#comedy",
+    "#storytime",
+    "#viral",
+    "#fyp"
+   ],
+   "tags": [
+    "weihnachten",
+    "familie",
+    "feiertage",
+    "essen",
+    "eskalation",
+    "comedy",
+    "storytime",
+    "verwandte",
+    "weihnachtsessen",
+    "chaos"
+   ],
+   "thumbnail": {
+    "place": "livingroom",
+    "time": "day",
+    "actor": "du",
+    "action": "shocked",
+    "emotion": "shocked",
+    "props": [
+     "gabel"
+    ],
+    "weather": "",
+    "image": "Close-up of a shocked person at a dinner table with flying food and a turkey wearing a crown",
+    "text": "WEIHNACHTEN ESKALIERT"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "grün",
+     "hat": "",
+     "hair": "short",
+     "hair_color": "braun",
+     "gender": "w",
+     "skin": "hell"
+    },
+    "truthan": {
+     "kind": "bird"
+    },
+    "oma": {
+     "shirt": "rot",
+     "hat": "",
+     "hair": "bun",
+     "hair_color": "grau",
+     "gender": "w",
+     "skin": "hell"
+    }
+   },
+   "scenes": [
+    {
+     "text": "Weihnachten mit der Familie eskaliert nach dem ersten Gang.",
+     "image": "A person sitting at a festive table looking shocked at a turkey",
+     "who": [
+      "du"
+     ],
+     "place": "diningroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Truthahn"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "HEILIGABEND"
+     },
+     "see": "Du sitzt im Esszimmer, als das Essen eskaliert.",
+     "time": "day",
+     "props": [
+      "table",
+      "suppe"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Der Vogel springt auf, packt die Gabel und fordert eine Entschuldigung.",
+     "image": "A turkey holding a fork and looking angry at the table",
+     "who": [
+      "truthan"
+     ],
+     "place": "diningroom",
+     "camera": "zoom_in",
+     "sfx": "pop",
+     "highlight": [
+      "Gabel"
+     ],
+     "overlay": null,
+     "see": "Der Vogel springt auf dem Tisch auf und hält eine Gabel.",
+     "time": "day",
+     "props": [
+      "gabel"
+     ],
+     "actors": [
+      {
+       "id": "vogel",
+       "action": "jump",
+       "emotion": "angry",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true,
+       "say": "Entschuldigung!"
+      }
+     ],
+     "shot": "insert",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Du denkst, schlimmer kann es nicht werden, aber der Weihnachtsbaum fängt an zu tanzen.",
+     "image": "A person looking at a dancing christmas tree in the corner",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "Weihnachtsbaum"
+     ],
+     "overlay": null,
+     "see": "Der Weihnachtsbaum fängt im Wohnzimmer an zu tanzen.",
+     "time": "day",
+     "props": [
+      "tree"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "pant",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "left",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": "English description of livingroom with festive decorations and a large dining table",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Er dreht sich im Kreis und wirft mit Tannenzapfen nach Omas Kuchendose.",
+     "image": "A tree throwing pinecones across the room",
+     "who": [],
+     "place": "livingroom",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Kuchendose"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "ZAPFENREGEN"
+     },
+     "see": "Der tanzende Weihnachtsbaum wirft Tannenzapfen.",
+     "time": "day",
+     "props": [
+      "tree",
+      "kuchen"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": "English description of livingroom with festive decorations and a large dining table",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Oma zieht seelenruhig eine Trillerpfeife aus der Handtasche und pfeift zum Angriff.",
+     "image": "An elderly woman blowing a whistle with a fierce expression",
+     "who": [
+      "oma"
+     ],
+     "place": "livingroom",
+     "camera": "close",
+     "sfx": "tick",
+     "highlight": [
+      "Trillerpfeife"
+     ],
+     "overlay": null,
+     "see": "Oma zieht eine Trillerpfeife aus der Handtasche.",
+     "time": "day",
+     "props": [
+      "bag"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "angry",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "close",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "English description of livingroom with festive decorations and a large dining table",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Plötzlich marschieren zwanzig Pralinen aus der Schachtel und bilden ein Bataillon.",
+     "image": "Chocolates lined up like soldiers on the dining table",
+     "who": [],
+     "place": "kitchen",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Pralinen"
+     ],
+     "overlay": {
+      "type": "counter",
+      "label": "SCHOKOLADEN-SOLDATEN",
+      "value": 20
+     },
+     "see": "Pralinen marschieren aus der Schachtel.",
+     "time": "day",
+     "props": [
+      "schokolade"
+     ],
+     "actors": [],
+     "shot": "insert",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Die Kartoffeln rollen panisch unter das Sofa, weil der Braten die Kontrolle übernimmt.",
+     "image": "Potatoes rolling in panic under the sofa",
+     "who": [],
+     "place": "livingroom",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "Kartoffeln"
+     ],
+     "overlay": null,
+     "see": "Kartoffeln rollen panisch unter das Sofa.",
+     "time": "day",
+     "props": [
+      "kartoffel",
+      "stuhl"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": "English description of livingroom with festive decorations and a large dining table",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Du versuchst, den Raum zu verlassen, aber die Zimmertür schließt sich von selbst.",
+     "image": "A person trying to open a locked door with a worried look",
+     "who": [
+      "du"
+     ],
+     "place": "hallway",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Zimmertür"
+     ],
+     "overlay": null,
+     "see": "Die Zimmertür schließt sich von selbst vor deiner Nase.",
+     "time": "day",
+     "props": [
+      "türrahmen"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "freeze",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "An der Wand hängt plötzlich eine Neonreklame mit der Aufschrift Endspurt.",
+     "image": "A neon sign glowing on the wall with bold letters",
+     "who": [],
+     "place": "livingroom",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Endspurt"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "NEON"
+     },
+     "see": "Eine Neonreklame mit der Aufschrift Endspurt leuchtet an der Wand.",
+     "time": "night",
+     "props": [
+      "sign"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "English description of livingroom with festive decorations and a large dining table",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Dein Smartphone vibriert ununterbrochen und zeigt nur noch Warnmeldungen an.",
+     "image": "A person looking at a vibrating smartphone with alert messages",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "close",
+     "sfx": "tick",
+     "highlight": [
+      "Warnmeldungen"
+     ],
+     "overlay": {
+      "type": "phone",
+      "mode": "alert",
+      "kicker": "FEIERTAGS-ALARM",
+      "text": "ESKALATION",
+      "value": "100%",
+      "label": "LÄUFT"
+     },
+     "see": "Dein Smartphone vibriert ununterbrochen mit Warnmeldungen.",
+     "time": "night",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shake",
+       "emotion": "worried",
+       "pos": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "shot": "insert",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "English description of livingroom with festive decorations and a large dining table",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Der Truthahn hält eine Rede über die Würde des Geflügels im Advent.",
+     "image": "A turkey standing on a chair talking to the family",
+     "who": [
+      "truthan"
+     ],
+     "place": "diningroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Geflügel"
+     ],
+     "overlay": null,
+     "see": "Der Truthahn hält eine dramatische Rede.",
+     "time": "night",
+     "props": [
+      "gerupfte gans"
+     ],
+     "actors": [
+      {
+       "id": "vogel",
+       "action": "talk",
+       "emotion": "angry",
+       "pos": "center",
+       "speaks": true,
+       "say": "WÜRDE!"
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Niemand wagt es zu widersprechen, weil der Braten schärfer ist als das Messer.",
+     "image": "Family members sitting quietly and listening to the turkey",
+     "who": [
+      "du"
+     ],
+     "place": "diningroom",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "Messer"
+     ],
+     "overlay": null,
+     "see": "Alle gucken ernst und schweigen.",
+     "time": "night",
+     "props": [
+      "table"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "freeze",
+       "emotion": "scared",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "close",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Oma reicht dem Vogel feierlich die goldene Gabel als Friedensangebot.",
+     "image": "An elderly woman handing a golden fork to the turkey",
+     "who": [
+      "oma"
+     ],
+     "place": "diningroom",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Friedensangebot"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "FRIEDEN"
+     },
+     "see": "Oma reicht dem Vogel feierlich die goldene Gabel.",
+     "time": "night",
+     "props": [
+      "gabel"
+     ],
+     "actors": [
+      {
+       "id": "vogel",
+       "action": "point",
+       "emotion": "happy",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Der Truthahn nimmt an, setzt sich und wünscht allen einen guten Appetit.",
+     "image": "The turkey sitting down at the head of the table happily",
+     "who": [
+      "truthan"
+     ],
+     "place": "diningroom",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "Appetit"
+     ],
+     "overlay": null,
+     "see": "Der Truthahn nimmt an, setzt sich und wünscht guten Appetit.",
+     "time": "night",
+     "props": [
+      "chair",
+      "table"
+     ],
+     "actors": [
+      {
+       "id": "vogel",
+       "action": "sit",
+       "emotion": "happy",
+       "pos": "center",
+       "speaks": true,
+       "say": "Guten!"
+      }
+     ],
+     "shot": "wide",
+     "mood": "happy",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Alle atmen auf und greifen endlich nach dem langersehnten Kartoffelsalat.",
+     "image": "People reaching for food bowls on the table with relief",
+     "who": [
+      "du"
+     ],
+     "place": "diningroom",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "Kartoffelsalat"
+     ],
+     "overlay": null,
+     "see": "Alle atmen auf und greifen zum Kartoffelsalat.",
+     "time": "night",
+     "props": [
+      "kartoffel",
+      "table"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "pant",
+       "emotion": "happy",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "happy",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Doch da fängt der Truthahn plötzlich wieder an.",
+     "image": "The turkey opening its beak to speak again with a mischievous look",
+     "who": [
+      "truthan"
+     ],
+     "place": "diningroom",
+     "camera": "zoom_in",
+     "sfx": "boom",
+     "highlight": [
+      "Truthahn"
+     ],
+     "overlay": null,
+     "see": "Der Truthahn fängt plötzlich wieder an zu reden.",
+     "time": "night",
+     "props": [
+      "table"
+     ],
+     "actors": [
+      {
+       "id": "vogel",
+       "action": "talk",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true,
+       "say": "STOP!"
+      }
+     ],
+     "shot": "close",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "trillerpfeife",
+   "praline",
+   "neonreklame"
+  ],
+  "title": "Weihnachten mit der Familie eskaliert komplett",
+  "created": 1795017254.3738286
  }
 }
