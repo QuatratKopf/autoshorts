@@ -5512,5 +5512,49 @@
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7709549170469670176?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
+ },
+ {
+  "id": 148,
+  "category": "comedy",
+  "topic": "Besondere familiäre Momente an großen Feiertagen",
+  "status": "review",
+  "created": 1795025402.4430492,
+  "title": "Weihnachten mit der Familie eskaliert komplett",
+  "description": "Was passiert wirklich, wenn die Verwandten an den Feiertagen ausrasten?\nErzählung über das chaotische Weihnachtsessen, das völlig außer Kontrolle gerät.\nBleibst du bis zum Dessert am Tisch oder flüchtest du?",
+  "hashtags": [
+   "#shorts",
+   "#weihnachten",
+   "#familie",
+   "#comedy",
+   "#storytime",
+   "#viral",
+   "#fyp"
+  ],
+  "tags": [
+   "weihnachten",
+   "familie",
+   "feiertage",
+   "essen",
+   "eskalation",
+   "comedy",
+   "storytime",
+   "verwandte",
+   "weihnachtsessen",
+   "chaos"
+  ],
+  "thumb_text": "WEIHNACHTEN ESKALIERT",
+  "missing": null,
+  "cover_ms": 66440,
+  "duration": 66.3,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-18 21:00",
+  "review_at": 1795025916.7509015
  }
 ]
