@@ -1,0 +1,525 @@
+{
+ "title": "Vier Typen, die an Weihnachten an jedem Tisch sitzen",
+ "scenes": [
+  {
+   "text": "Diese vier Typen sitzen an Heiligabend an jedem Tisch.",
+   "see": "Die Hauptfigur blickt überrascht auf den reich gedeckten Weihnachtstisch.",
+   "place": "diningroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "oma",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    },
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "VIER TYPEN"
+   }
+  },
+  {
+   "text": "Und den vierten kennst du garantiert von dir selbst.",
+   "see": "Hauptfigur deutet geheimnisvoll nach vorne in die Kamera.",
+   "place": "diningroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Nummer eins, die Oma.",
+   "see": "Oma schaut die Hauptfigur mütterlich besorgt an.",
+   "place": "diningroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "oma",
+     "speaks": true,
+     "action": "point",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "NUMMER EINS"
+   }
+  },
+  {
+   "text": "Die Oma findet grundsätzlich, dass du viel zu dünn bist.",
+   "see": "Oma legt besorgt den Kopf schief und schüttelt ihn.",
+   "place": "diningroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "oma",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Mein Teller wird bei der Oma im Leben nicht leer.",
+   "see": "Oma häuft Essen auf den Teller der Hauptfigur.",
+   "place": "diningroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "oma",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    },
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Wer satt sagt, kriegt bei Oma sofort Nachschlag.",
+   "see": "Die Hauptfigur winkt ab, aber Oma ignoriert es lächelnd.",
+   "place": "diningroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "oma",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Nach dem dritten Kloß gebe ich auf, aber Oma legt eiskalt den vierten drauf.",
+   "see": "Ein Riesen-Kloß landet auf dem bereits vollen Teller.",
+   "place": "diningroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "cower",
+     "emotion": "scared",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "oma",
+     "speaks": true,
+     "action": "point",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense"
+  },
+  {
+   "text": "Nummer zwei, der Onkel.",
+   "see": "Onkel sitzt entspannt auf dem Sofa neben dem Weihnachtsbaum.",
+   "place": "livingroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "tv"
+    }
+   ],
+   "actors": [
+    {
+     "id": "onkel",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "NUMMER ZWEI"
+   }
+  },
+  {
+   "text": "Der Onkel sitzt auf dem Sofa am Weihnachtsbaum und erzählt jedes Jahr exakt dieselbe Geschichte von früher.",
+   "see": "Onkel gestikuliert wild auf dem Sofa im Wohnzimmer.",
+   "place": "livingroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "lib_sofa"
+    }
+   ],
+   "actors": [
+    {
+     "id": "onkel",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "insert",
+   "mood": "happy"
+  },
+  {
+   "text": "Alle am Tisch können die Story vom Onkel bereits fehlerfrei mitsprechen.",
+   "see": "Die Hauptfigur verdreht genervt die Augen.",
+   "place": "diningroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "onkel",
+     "look": {
+      "hair": "short",
+      "hair_color": "schwarz",
+      "shirt": "rot",
+      "size": 1.08
+     },
+     "speaks": false,
+     "action": "think",
+     "emotion": "",
+     "say": "",
+     "hold": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Der Onkel bringt sie trotzdem zu Ende und macht eine lange Pause für den Applaus.",
+   "see": "Onkel hält stolz inne und wartet mitten im Satz.",
+   "place": "livingroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "onkel",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Nummer drei, die Tante.",
+   "see": "Tante schaut neugierig über die Festtafel.",
+   "place": "diningroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "tante",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "NUMMER DREI"
+   }
+  },
+  {
+   "text": "Die Tante stellt vor der gesammelten Mannschaft ihre absolute Lieblingsfrage.",
+   "see": "Tante beugt sich neugierig vor und stellt laut ihre Frage.",
+   "place": "diningroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "tante",
+     "speaks": true,
+     "action": "point",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Und, was macht die Liebe?",
+   "see": "Tante grinst verschmitzt in die Runde.",
+   "place": "diningroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "tante",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "happy",
+   "overlay": {
+    "type": "card",
+    "text": "UND DIE LIEBE?"
+   }
+  },
+  {
+   "text": "Sofort schiebt die Tante nach: Und wie läuft der Job? Ich rette mich hastig mit rappelvollem Mund.",
+   "see": "Hauptfigur stopft sich verlegen Essen in den Mund, um nicht zu antworten.",
+   "place": "diningroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "tante",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    },
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "cower",
+     "emotion": "worried",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Laut Umfragen landet in Deutschland an Heiligabend übrigens meistens Kartoffelsalat mit Würstchen auf den Tellern.",
+   "see": "Ein Teller mit Kartoffelsalat und Würstchen wird auf den Tisch gestellt.",
+   "place": "diningroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "point",
+     "emotion": "happy",
+     "pos": "left",
+     "speaks": true
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "HEILIGABEND"
+   }
+  },
+  {
+   "text": "Nummer vier, der Cousin.",
+   "see": "Der Cousin sitzt stumm ganz am Rand des Tisches und schaut nach unten.",
+   "place": "diningroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "cousin",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "NUMMER VIER"
+   }
+  },
+  {
+   "text": "Der Cousin sagt den gesamten Abend kein einziges Wort, sitzt am Ende der Tafel und schaut heimlich unter dem Tisch Videos auf dem Handy.",
+   "see": "Cousin starrt heimlich vergnügt auf sein Smartphone unter der Tischkante.",
+   "place": "diningroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "cousin",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Schaust du das hier etwa gerade selbst am Familientisch? Glückwunsch, dann bist du Nummer vier – und Oma kommt bereits mit dem nächsten Nachschlag angelaufen! Wer sitzt bei euch am Tisch?",
+   "see": "Oma taucht plötzlich hinter der schockierten Hauptfigur mit der Schüssel auf.",
+   "place": "diningroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "oma",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "choice",
+    "a": "NACHSCHLAG KOMMT",
+    "b": "VIERTER TYP"
+   }
+  }
+ ]
+}
