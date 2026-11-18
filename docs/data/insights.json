@@ -1,5 +1,5 @@
 {
- "updated": 1795024666.6798713,
+ "updated": 1795026877.72851,
  "enough": true,
  "counted": 23,
  "total": 25,
@@ -33,22 +33,22 @@
    "avg_score": 2408
   },
   {
-   "slug": "fakten",
-   "name": "💡 Fakten",
-   "n": 6,
-   "avg_views": 1672,
-   "avg_likes": 44.3,
-   "like_rate": 2.65,
-   "avg_score": 2347
-  },
-  {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 2,
-   "avg_views": 1724,
-   "avg_likes": 39.0,
-   "like_rate": 2.26,
-   "avg_score": 2344
+   "avg_views": 1736,
+   "avg_likes": 39.5,
+   "like_rate": 2.27,
+   "avg_score": 2364
+  },
+  {
+   "slug": "fakten",
+   "name": "💡 Fakten",
+   "n": 6,
+   "avg_views": 1671,
+   "avg_likes": 44.3,
+   "like_rate": 2.65,
+   "avg_score": 2346
   },
   {
    "slug": "whatif",
@@ -63,10 +63,10 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 2,
-   "avg_views": 1672,
-   "avg_likes": 10.0,
-   "like_rate": 0.6,
-   "avg_score": 1866
+   "avg_views": 1671,
+   "avg_likes": 10.5,
+   "like_rate": 0.63,
+   "avg_score": 1874
   }
  ],
  "weights": {
@@ -74,25 +74,25 @@
   "grusel": 1.2,
   "storys": 1.05,
   "mysterien": 1.2,
-  "tiere": 1.01,
+  "tiere": 1.02,
   "whatif": 1.01,
   "comedy": 1.04,
-  "musik": 0.8,
+  "musik": 0.81,
   "vergleich": 1.2,
   "motivation": 1.2,
   "liebe": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1798 Aufrufe, 2.39 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1672 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2473 zu 705 Punkte)."
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1671 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2476 zu 705 Punkte)."
  ],
  "words_good": [],
  "words_bad": [
-  "remix",
-  "erkennst",
   "lied",
-  "bekanntes"
+  "remix",
+  "bekanntes",
+  "erkennst"
  ],
  "top": [
   {
