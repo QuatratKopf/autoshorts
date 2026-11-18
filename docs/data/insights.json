@@ -1,5 +1,5 @@
 {
- "updated": 1795036841.5713534,
+ "updated": 1795038777.0260923,
  "enough": true,
  "counted": 23,
  "total": 26,
@@ -9,10 +9,10 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1800,
+   "avg_views": 1799,
    "avg_likes": 43.0,
    "like_rate": 2.39,
-   "avg_score": 2445
+   "avg_score": 2444
   },
   {
    "slug": "storys",
@@ -36,16 +36,16 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 2,
-   "avg_views": 1750,
+   "avg_views": 1755,
    "avg_likes": 40.0,
-   "like_rate": 2.29,
-   "avg_score": 2386
+   "like_rate": 2.28,
+   "avg_score": 2390
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1702,
+   "avg_views": 1704,
    "avg_likes": 44.3,
    "like_rate": 2.6,
    "avg_score": 2378
@@ -66,7 +66,7 @@
    "avg_views": 1676,
    "avg_likes": 10.5,
    "like_rate": 0.63,
-   "avg_score": 1878
+   "avg_score": 1879
   }
  ],
  "weights": {
@@ -83,28 +83,28 @@
   "liebe": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1800 Aufrufe, 2.39 % Likes).",
+  "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1799 Aufrufe, 2.39 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1676 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2487 zu 705 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2507 zu 2004 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2488 zu 705 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2508 zu 2004 Punkte)."
  ],
  "words_good": [],
  "words_bad": [
-  "lied",
-  "bekanntes",
   "erkennst",
-  "remix"
+  "bekanntes",
+  "remix",
+  "lied"
  ],
  "top": [
   {
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2552,
+   "views": 2553,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3392
+   "score": 3393
   },
   {
    "id": 77,
@@ -120,11 +120,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 2004,
+   "views": 2011,
    "likes": 68,
    "comments": 0,
    "shares": 0,
-   "score": 3024
+   "score": 3031
   },
   {
    "id": 120,
