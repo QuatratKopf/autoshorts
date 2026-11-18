@@ -5517,7 +5517,7 @@
   "id": 148,
   "category": "comedy",
   "topic": "Besondere familiäre Momente an großen Feiertagen",
-  "status": "review",
+  "status": "discarded",
   "created": 1795025402.4430492,
   "title": "Weihnachten mit der Familie eskaliert komplett",
   "description": "Was passiert wirklich, wenn die Verwandten an den Feiertagen ausrasten?\nErzählung über das chaotische Weihnachtsessen, das völlig außer Kontrolle gerät.\nBleibst du bis zum Dessert am Tisch oder flüchtest du?",
@@ -5555,6 +5555,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-18 21:00",
-  "review_at": 1795025916.7509015
+  "review_at": 1795025916.7509015,
+  "error": "Bei der Prüfung verworfen: Prüfung: kein Truthahn, kein Weihnachtsbaum, keine Oma im Bild, Flur statt Esszimmer, Geschichte ohne roten Faden"
  }
 ]
