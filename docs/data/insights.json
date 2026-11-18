@@ -1,5 +1,5 @@
 {
- "updated": 1795042288.1022313,
+ "updated": 1795044352.6449986,
  "enough": true,
  "counted": 23,
  "total": 26,
@@ -9,10 +9,10 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1802,
+   "avg_views": 1800,
    "avg_likes": 43.0,
    "like_rate": 2.39,
-   "avg_score": 2447
+   "avg_score": 2445
   },
   {
    "slug": "storys",
@@ -83,28 +83,28 @@
   "liebe": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1802 Aufrufe, 2.39 % Likes).",
+  "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1800 Aufrufe, 2.39 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1678 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2488 zu 705 Punkte).",
   "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2508 zu 2004 Punkte)."
  ],
  "words_good": [],
  "words_bad": [
+  "erkennst",
   "lied",
-  "remix",
   "bekanntes",
-  "erkennst"
+  "remix"
  ],
  "top": [
   {
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2553,
+   "views": 2551,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3393
+   "score": 3391
   },
   {
    "id": 77,
@@ -120,11 +120,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 2011,
+   "views": 2008,
    "likes": 68,
    "comments": 0,
    "shares": 0,
-   "score": 3031
+   "score": 3028
   },
   {
    "id": 120,
