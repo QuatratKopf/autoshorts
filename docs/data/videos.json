@@ -5397,5 +5397,50 @@
   "look": "cartoon",
   "mp4": true,
   "error": "Bei der Prüfung verworfen: Dritter Neubau: Text schwächer als 142 (Einführung zum ersten Ort fehlt, Stempel VERBOTEN, offene Fragen) – 142 veröffentlicht"
+ },
+ {
+  "id": 144,
+  "category": "comedy",
+  "topic": "Typische nervige Nachbarn, die wirklich jeder kennt",
+  "status": "review",
+  "created": 1795014701.3162372,
+  "title": "Die Hölle auf Erden sind meine Nachbarn",
+  "description": "Was tun, wenn die Nachbarn Tag und Nacht eskalieren?\nErlebe den wahren Albtraum aus der Mietwohnung.\nKlingeln bei dir um Mitternacht auch die Wände?",
+  "hashtags": [
+   "#shorts",
+   "#fyp",
+   "#viral",
+   "#nachbarn",
+   "#comedy",
+   "#alltag",
+   "#eskalation",
+   "#mietwohnung"
+  ],
+  "tags": [
+   "nachbarn",
+   "mietwohnung",
+   "streit",
+   "alltag",
+   "comedy",
+   "eskalation",
+   "hausordnung",
+   "wohnung",
+   "lärm",
+   "genz"
+  ],
+  "thumb_text": "DIE NACHBARN ESKALIEREN",
+  "missing": null,
+  "cover_ms": 71045,
+  "duration": 70.9,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-18 18:00",
+  "review_at": 1795015275.7903624
  }
 ]
