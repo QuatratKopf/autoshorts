@@ -881,6 +881,10 @@ def hook_drops(sc, s0, s1):
     rest = stem(s0) | stem(s1)
     for x in sc[2:]:
         rest |= stem(x.get("text"))
+    old = str(sc[1].get("text") or "").lower()
+    first = _re.search(r"nummer eins|\berstens\b|platz eins|punkt eins|typ eins|regel eins|\bnummer 1\b", old)
+    if first and not _re.search(_re.escape(first.group(0)), " ".join([str(s0), str(s1)] + [str(x.get("text") or "") for x in sc[2:]]).lower()):
+        return True                                       # Satz 2 kündigt den ersten Listenpunkt an („Nummer eins, die Oma …“): fiele er weg, begänne die Liste bei Nummer zwei (Video 149)
     return len(stem(sc[1].get("text")) - rest) >= 3
 
 

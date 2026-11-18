@@ -457,3 +457,7 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Redewendungen (`RELATIVE_IDIOM_RE`) bleiben. `_prepare`: Eine Figuren-Kennung, die nicht in der Besetzung steht, aber ein Tier meint („vogel“, Besetzung
   „truthahn“ mit `kind: bird`), ist das Tier – kein Mensch im Pulli. `TEXT_PROPS`: „greifen“ ist kein Reifen. Selbsttest: `_feast`.
   Noch offen: Truthahn/Gans als eigenes Wesen (der Vogel ist ein Rotkehlchen), Figuren sitzen nicht am Tisch, sondern stehen davor.
+  Nach dem 1. Neubau (Video 149 verworfen): Im Fest-Video spielen Essens-Sätze nie auf der Deutschlandkarte oder der Straße („In Deutschland liegt
+  Kartoffelsalat vorn“, „noch vor der Gans“) – Hauptfigur am Esstisch, keine lebende Gans daneben; am Esstisch und in Szenen mit Verwandten kein Schnitt auf
+  ein einzelnes Ding (`_no_insert` – drei Sekunden ein Kloß vor leerem Grund). Gruppen-Füllfiguren (`_team…`) werden zu den Verwandten des Videos.
+  `writer.hook_drops`: Kündigt Satz 2 den ersten Listenpunkt an („Nummer eins, …“) und steht das sonst nirgends, bleibt er beim Schärfen des Einstiegs.

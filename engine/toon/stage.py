@@ -3544,12 +3544,21 @@ def _feast_story(scenes, topic=""):
     if not _re.search(FEAST_RE, all_t):
         return
     xmas = bool(_re.search(XMAS_RE, all_t))
+    main = next((str(a.get("id")) for sc in sc_l for a in (sc.get("actors") or []) if isinstance(a, dict) and str(a.get("id") or "").lower() in MAIN_IDS), "du")
     for sc in sc_l:
         low = str(sc.get("text") or "").lower()
         if sc.get("shot") == "graphic" or isinstance(backdrop(sc), dict):
             continue
         rp = places.resolve(backdrop(sc))
         home = rp in ("livingroom", "diningroom", "plain", "restaurant", "kitchen") or (rp == "hallway" and not _re.search(r"\bflur\b|\btür|treppenhaus|klingel|klopf", low))
+        if (rp in MAPS or rp in ("street", "park", "supermarket")) and _re.search(FEAST_TABLE_RE, low) and not _re.search(r"straße|supermarkt|einkauf|\bladen\b|draußen", low):
+            home = True                                    # „In Deutschland liegt Kartoffelsalat ganz vorn“ / „noch vor der Gans“: am Esstisch, nicht auf der Landkarte oder mit einer Gans auf der Straße (Video 149)
+            sc["shot"], sc["graphic"], sc["crowd"], sc["weather"] = "", None, "", ""
+            if not [a for a in (sc.get("actors") or []) if isinstance(a, dict) and not a.get("to")]:
+                sc["actors"] = [{"id": main, "action": "point", "emotion": "happy", "pos": "left", "speaks": True}]
+            for a in sc["actors"]:
+                if isinstance(a, dict) and str(a.get("action") or "") in ("walk", "run"):
+                    a["action"] = "point"
         if home and _re.search(FEAST_TABLE_RE, low) and not _re.search(r"restaurant|\bküche\b|\bherd\b|\bofen\b", low):
             sc["place"], rp = "diningroom", "diningroom"
             sc.pop("backdrop", None)
@@ -3562,7 +3571,8 @@ def _feast_story(scenes, topic=""):
                            str(q.get("type") if isinstance(q, dict) else q).lower()) not in ("tree", "plant")]      # der geschmückte Baum steht schon im Zimmer
         if rp == "diningroom":                             # Tisch, Stühle, Kerzen stehen dort schon
             sc["props"] = [q for q in (sc.get("props") or []) if extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(),
-                           str(q.get("type") if isinstance(q, dict) else q).lower()) not in ("table", "chair", "candle", "lib_stuhl", "stuhl")]
+                           str(q.get("type") if isinstance(q, dict) else q).lower()) not in ("table", "chair", "candle", "lib_stuhl", "stuhl", "lib_gans", "gans")]
+            sc["_no_insert"] = True                        # das Essen steht auf dem Tisch: kein Schnitt auf einen einzelnen Kloß vor leerem Grund
     inside = [sc for sc in sc_l if sc.get("shot") != "graphic" and not isinstance(backdrop(sc), dict) and places.resolve(backdrop(sc)) in ("livingroom", "diningroom", "kitchen", "hallway")]
     if inside and not _re.search(NIGHT_RE, all_t):         # ein Fest, eine Tageszeit: wie die erste Szene (in Video 148 wurde es nach der Hälfte grundlos Nacht)
         first = "night" if str(inside[0].get("time") or "") == "night" else "day"
@@ -3612,8 +3622,28 @@ def _relatives(scenes):
                 a["pos"], a["to"] = x, ""
         sc["actors"] = cast_n
         sc["crowd"] = ""
+        sc["_no_insert"] = True                            # es geht um die Person und was sie tut, nicht um das Ding allein
         if sc.get("shot") in ("insert", "event") or (sc.get("shot") == "close" and len(cast_n) > 1):
             sc["shot"] = ""
+    keys_r = [key for _p, key, _l in RELATIVES]
+    seen = {}                                             # Verwandte, die im Video schon auftreten (aus Drehbuch oder von oben), in der Reihenfolge ihres Auftritts
+    for sc in scenes:
+        for a in (sc.get("actors") or []) if isinstance(sc, dict) else []:
+            if isinstance(a, dict) and str(a.get("id") or "").lower() in keys_r:
+                seen.setdefault(str(a["id"]).lower(), a)
+    if len(seen) >= 2:                                    # „Diese vier Typen sitzen an jedem Tisch“: die Gruppe sind die Verwandten des Videos, keine drei Fremden (Video 149)
+        for sc in scenes:
+            acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)] if isinstance(sc, dict) else []
+            fill = [a for a in acts if str(a.get("id") or "").startswith("_team")]
+            if not fill:
+                continue
+            pool = [v for k, v in seen.items() if not any(str(a.get("id") or "").lower() == k for a in acts)]
+            for a, rel in zip(fill, pool):
+                a["id"] = rel["id"]
+                if isinstance(rel.get("look"), dict):
+                    a["look"] = dict(rel["look"])
+                else:
+                    a.pop("look", None)
 
 
 FAMILY_RE = (r"\bfamilien?\b|frauen und (?:\w+ ){0,2}kinder|erwachsene und (?:\w+ ){0,2}kinder|(?:ehe)?frau(?:en)? und (?:\w+ ){0,2}kind|mit (?:ihren|seinen|den|ihrer|seiner|deinen|deiner) (?:\w+ ){0,3}kindern|eltern und (?:\w+ ){0,2}kinder|"

@@ -611,6 +611,20 @@ def main():
         assert stage._hint("Im Gang brennt noch Licht.") == "hallway" and stage._hint("Nach dem zweiten Gang wird es still.") != "hallway"
         pl_, _n, _s, ac_, _p, _w = stage._prepare({"text": "Der Vogel springt auf.", "place": "livingroom", "actors": [{"id": "vogel", "action": "jump"}]}, {"du": {}, "truthahn": {"kind": "bird"}})
         assert ac_[0]["kind"] == "bird", f"Kennung „vogel“ ist ein Vogel: {ac_[0]['kind']}"
+        T4 = [("Nummer eins, die Oma, füllt meinen Teller.", "diningroom", [{"id": "oma", "action": "talk"}, {"id": "du", "action": "sit"}], []),
+              ("Der Onkel erzählt dieselbe Geschichte.", "diningroom", [{"id": "onkel", "action": "talk"}], []),
+              ("In Umfragen liegt an Heiligabend in Deutschland Kartoffelsalat mit Würstchen ganz vorn.", "germany", [{"id": "du", "action": "walk"}], []),
+              ("Sogar noch vor der festlichen Gans landet dieser Klassiker auf den Tellern.", "street", [], ["table", "lib_gans"]),
+              ("Diese vier Typen sitzen an jedem Familientisch.", "diningroom", [{"id": "du", "action": "talk"}], [])]
+        s4 = stage.direct([{"text": t_, "place": pl, "time": "day", "actors": a_, "props": pr} for t_, pl, a_, pr in T4],
+                          [(i * 3.5, i * 3.5 + 3.5) for i in range(len(T4))], "Vier Typen, die an Weihnachten an jedem Familientisch sitzen", "comedy", "")
+        assert s4[2]["place"] == "diningroom" and s4[3]["place"] == "diningroom", f"Essens-Sätze am Tisch statt Karte/Straße: {s4[2]['place']} {s4[3]['place']}"
+        assert s4[3]["actors"] and not [q for q in s4[3]["props"] if "gans" in str(q.get("type"))], f"keine lebende Gans am Esstisch: {s4[3]['props']}"
+        assert not any(str(a.get("id")).startswith("_team") for a in s4[4]["actors"]), f"Gruppe aus Verwandten: {[a.get('id') for a in s4[4]['actors']]}"
+        for sc in s4:
+            frame(sc, {"du": {"shirt": "grün"}})
+        from .. import writer as _wf
+        assert _wf.hook_drops([{"text": "a"}, {"text": "Nummer eins, die Oma, füllt Teller."}, {"text": "Wer satt sagt, bekommt Nachschlag."}], "Vier Typen an Weihnachten.", "Und der letzte bist du.")
         s3 = stage.direct([{"text": "Die Mutter säugt ihre Jungen.", "place": "forest", "time": "day", "actors": [{"id": "katze", "kind": "cat", "action": "idle"}]}], [(0, 3.5)], "Katzen", "tiere", "")
         assert "mama" not in [str(a.get("id")) for a in s3[0]["actors"]] and any(a.get("kind") == "cat" for a in s3[0]["actors"]), "Tier-Szene bleibt ohne Verwandte"
 
