@@ -1,5 +1,5 @@
 {
- "updated": 1795034987.5190775,
+ "updated": 1795036841.5713534,
  "enough": true,
  "counted": 23,
  "total": 26,
@@ -9,10 +9,10 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1798,
+   "avg_views": 1800,
    "avg_likes": 43.0,
    "like_rate": 2.39,
-   "avg_score": 2443
+   "avg_score": 2445
   },
   {
    "slug": "storys",
@@ -20,8 +20,8 @@
    "n": 2,
    "avg_views": 1654,
    "avg_likes": 52.5,
-   "like_rate": 3.18,
-   "avg_score": 2441
+   "like_rate": 3.17,
+   "avg_score": 2442
   },
   {
    "slug": "comedy",
@@ -36,37 +36,37 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 2,
-   "avg_views": 1754,
+   "avg_views": 1750,
    "avg_likes": 40.0,
-   "like_rate": 2.28,
-   "avg_score": 2390
+   "like_rate": 2.29,
+   "avg_score": 2386
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1696,
+   "avg_views": 1702,
    "avg_likes": 44.3,
-   "like_rate": 2.61,
-   "avg_score": 2372
+   "like_rate": 2.6,
+   "avg_score": 2378
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 8,
-   "avg_views": 1723,
+   "avg_views": 1724,
    "avg_likes": 40.8,
    "like_rate": 2.36,
-   "avg_score": 2338
+   "avg_score": 2339
   },
   {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 2,
-   "avg_views": 1672,
-   "avg_likes": 10.0,
-   "like_rate": 0.6,
-   "avg_score": 1866
+   "avg_views": 1676,
+   "avg_likes": 10.5,
+   "like_rate": 0.63,
+   "avg_score": 1878
   }
  ],
  "weights": {
@@ -74,57 +74,67 @@
   "grusel": 1.2,
   "storys": 1.05,
   "mysterien": 1.2,
-  "tiere": 1.03,
+  "tiere": 1.02,
   "whatif": 1.0,
   "comedy": 1.03,
-  "musik": 0.8,
+  "musik": 0.81,
   "vergleich": 1.2,
   "motivation": 1.2,
   "liebe": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1798 Aufrufe, 2.39 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1672 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2484 zu 705 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2504 zu 2001 Punkte)."
+  "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1800 Aufrufe, 2.39 % Likes).",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1676 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2487 zu 705 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2507 zu 2004 Punkte)."
  ],
  "words_good": [],
  "words_bad": [
+  "lied",
   "bekanntes",
-  "remix",
   "erkennst",
-  "lied"
+  "remix"
  ],
  "top": [
   {
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2551,
+   "views": 2552,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3391
+   "score": 3392
   },
   {
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2259,
+   "views": 2263,
    "likes": 62,
    "comments": 0,
    "shares": 0,
-   "score": 3189
+   "score": 3193
+  },
+  {
+   "id": 124,
+   "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
+   "category": "fakten",
+   "views": 2004,
+   "likes": 68,
+   "comments": 0,
+   "shares": 0,
+   "score": 3024
   },
   {
    "id": 120,
    "title": "Warum du bei Musik Gänsehaut bekommst",
    "category": "fakten",
-   "views": 2337,
+   "views": 2339,
    "likes": 45,
    "comments": 0,
    "shares": 0,
-   "score": 3012
+   "score": 3014
   },
   {
    "id": 84,
@@ -135,16 +145,6 @@
    "comments": 0,
    "shares": 0,
    "score": 2994
-  },
-  {
-   "id": 124,
-   "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
-   "category": "fakten",
-   "views": 1971,
-   "likes": 68,
-   "comments": 0,
-   "shares": 0,
-   "score": 2991
   }
  ],
  "flop": [
