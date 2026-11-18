@@ -1,5 +1,5 @@
 {
- "updated": 1795009276.4211318,
+ "updated": 1795010245.0869982,
  "enough": true,
  "counted": 22,
  "total": 24,
@@ -45,19 +45,19 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1617,
-   "avg_likes": 43.7,
-   "like_rate": 2.7,
-   "avg_score": 2282
+   "avg_views": 1638,
+   "avg_likes": 44.0,
+   "like_rate": 2.69,
+   "avg_score": 2308
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 1,
-   "avg_views": 1497,
+   "avg_views": 1496,
    "avg_likes": 27.0,
    "like_rate": 1.8,
-   "avg_score": 1932
+   "avg_score": 1931
   },
   {
    "slug": "musik",
@@ -70,31 +70,31 @@
   }
  ],
  "weights": {
-  "fakten": 1.0,
+  "fakten": 1.01,
   "grusel": 1.2,
   "storys": 1.07,
   "mysterien": 1.2,
   "tiere": 1.2,
-  "whatif": 1.03,
+  "whatif": 1.02,
   "comedy": 1.05,
-  "musik": 0.82,
+  "musik": 0.81,
   "vergleich": 1.2,
   "motivation": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1798 Aufrufe, 2.39 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1664 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2438 zu 705 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2446 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
  ],
  "words_good": [
   "gänsehaut"
  ],
  "words_bad": [
-  "lied",
+  "remix",
   "bekanntes",
-  "erkennst",
-  "remix"
+  "lied",
+  "erkennst"
  ],
  "top": [
   {
@@ -131,21 +131,21 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 1948,
+   "views": 1950,
    "likes": 67,
    "comments": 0,
    "shares": 0,
-   "score": 2953
+   "score": 2955
   },
   {
-   "id": 80,
-   "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
-   "category": "whatif",
-   "views": 2119,
-   "likes": 46,
+   "id": 120,
+   "title": "Warum du bei Musik Gänsehaut bekommst",
+   "category": "fakten",
+   "views": 2193,
+   "likes": 45,
    "comments": 0,
    "shares": 0,
-   "score": 2809
+   "score": 2868
   }
  ],
  "flop": [
