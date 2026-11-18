@@ -1,5 +1,5 @@
 {
- "updated": 1795038777.0260923,
+ "updated": 1795040620.4854987,
  "enough": true,
  "counted": 23,
  "total": 26,
@@ -9,10 +9,10 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 1,
-   "avg_views": 1799,
+   "avg_views": 1800,
    "avg_likes": 43.0,
    "like_rate": 2.39,
-   "avg_score": 2444
+   "avg_score": 2445
   },
   {
    "slug": "storys",
@@ -20,8 +20,8 @@
    "n": 2,
    "avg_views": 1654,
    "avg_likes": 52.5,
-   "like_rate": 3.17,
-   "avg_score": 2442
+   "like_rate": 3.18,
+   "avg_score": 2441
   },
   {
    "slug": "comedy",
@@ -36,7 +36,7 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 2,
-   "avg_views": 1755,
+   "avg_views": 1754,
    "avg_likes": 40.0,
    "like_rate": 2.28,
    "avg_score": 2390
@@ -45,7 +45,7 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1704,
+   "avg_views": 1703,
    "avg_likes": 44.3,
    "like_rate": 2.6,
    "avg_score": 2378
@@ -83,28 +83,28 @@
   "liebe": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1799 Aufrufe, 2.39 % Likes).",
+  "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1800 Aufrufe, 2.39 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1676 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2488 zu 705 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2508 zu 2004 Punkte)."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2487 zu 705 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2507 zu 2004 Punkte)."
  ],
  "words_good": [],
  "words_bad": [
+  "lied",
   "erkennst",
-  "bekanntes",
   "remix",
-  "lied"
+  "bekanntes"
  ],
  "top": [
   {
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2553,
+   "views": 2551,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3393
+   "score": 3391
   },
   {
    "id": 77,
@@ -120,21 +120,21 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 2011,
+   "views": 2008,
    "likes": 68,
    "comments": 0,
    "shares": 0,
-   "score": 3031
+   "score": 3028
   },
   {
    "id": 120,
    "title": "Warum du bei Musik Gänsehaut bekommst",
    "category": "fakten",
-   "views": 2339,
+   "views": 2337,
    "likes": 45,
    "comments": 0,
    "shares": 0,
-   "score": 3014
+   "score": 3012
   },
   {
    "id": 84,
