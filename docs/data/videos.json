@@ -5562,7 +5562,7 @@
   "id": 149,
   "category": "comedy",
   "topic": "Vier Typen, die an Weihnachten an jedem Familientisch sitzen – Vorgaben als Stichpunkte, nicht wörtlich abschreiben, in eigenen kurzen Sätzen trocken und witzig in der Ich-Form erzählen. Genau vier Typen der Reihe nach, jeder mit „Nummer eins“ bis „Nummer vier“ angekündigt und mit zwei bis drei Sätzen erzählt; in jedem dieser Sätze das Wort Oma, Onkel, Tante oder Cousin ausdrücklich nennen. Einstieg: Diese vier sitzen an Weihnachten an jedem Familientisch, und Nummer vier bist vielleicht du. Nummer eins, die Oma: findet, ich sei viel zu dünn; mein Teller wird bei ihr nie leer; wer „satt“ sagt, bekommt Nachschlag; nach dem dritten Kloß gebe ich auf, Oma legt den vierten drauf. Nummer zwei, der Onkel: erzählt jedes Jahr dieselbe Geschichte von früher; die ganze Familie kann sie längst mitsprechen; der Onkel erzählt sie trotzdem und macht eine Pause für den Applaus. Nummer drei, die Tante: fragt vor dem ganzen Tisch „Und, was macht die Liebe?“, direkt danach „Und beruflich?“; ich rette mich mit vollem Mund. Wahrer Hintergrund in einem Satz: In Umfragen liegt an Heiligabend in Deutschland Kartoffelsalat mit Würstchen immer wieder ganz vorn, noch vor der Gans. Nummer vier, der Cousin: sagt den ganzen Abend kein Wort, sitzt am Tischende und schaut unter dem Tisch am Handy Videos. Schlusspointe: Du schaust das hier gerade am Familientisch? Dann bist du Nummer vier – und Oma kommt schon mit dem Nachschlag. Letzter Satz ist eine Frage an die Zuschauer: Wer sitzt bei euch am Tisch? Schauplätze nur: Esszimmer mit gedecktem Tisch (place diningroom) und Wohnzimmer mit Weihnachtsbaum (place livingroom), alles am selben Tag; Oma, Onkel, Tante und Cousin als eigene Figuren mit den Kennungen oma, onkel, tante, cousin. Keine Personennamen, kein Alkohol, kein Truthahn, keine sprechenden Tiere oder Gegenstände, keine erfundenen Statistiken oder Prozentzahlen. Zahlen nur: vier Typen, dritter und vierter Kloß. Titel: Vier Typen, die an Weihnachten an jedem Tisch sitzen. Titelbild-Text: WER SITZT BEI DIR?",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1795027409.130048,
   "title": "Vier Typen, die an Weihnachten an jedem Tisch sitzen",
   "description": "WER SITZT BEI DIR?\nDiese vier Verwandten sitzen garantiert an jedem Heiligabend am Tisch und machen dich wahnsinnig.\nWer ist der schlimmste Gast bei eurer Familie?",
@@ -5599,6 +5599,7 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Prüfung: „Nummer eins“ fehlt, verstümmelter Satz der Tante, Kloß allein vor leerem Grund, Karte und Straße mit Gans"
  }
 ]
