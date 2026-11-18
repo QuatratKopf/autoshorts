@@ -1,19 +1,10 @@
 {
- "updated": 1795006085.1994338,
+ "updated": 1795008281.5193193,
  "enough": true,
  "counted": 22,
  "total": 24,
  "needed": 6,
  "categories": [
-  {
-   "slug": "storys",
-   "name": "🔥 Spannende Storys",
-   "n": 2,
-   "avg_views": 1656,
-   "avg_likes": 52.5,
-   "like_rate": 3.17,
-   "avg_score": 2443
-  },
   {
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
@@ -22,6 +13,15 @@
    "avg_likes": 43.0,
    "like_rate": 2.39,
    "avg_score": 2442
+  },
+  {
+   "slug": "storys",
+   "name": "🔥 Spannende Storys",
+   "n": 2,
+   "avg_views": 1654,
+   "avg_likes": 52.5,
+   "like_rate": 3.18,
+   "avg_score": 2441
   },
   {
    "slug": "comedy",
@@ -45,10 +45,10 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1610,
-   "avg_likes": 43.3,
+   "avg_views": 1632,
+   "avg_likes": 43.8,
    "like_rate": 2.69,
-   "avg_score": 2270
+   "avg_score": 2299
   },
   {
    "slug": "tiere",
@@ -70,31 +70,31 @@
   }
  ],
  "weights": {
-  "fakten": 1.0,
+  "fakten": 1.01,
   "grusel": 1.2,
   "storys": 1.07,
   "mysterien": 1.2,
   "tiere": 1.2,
-  "whatif": 1.03,
+  "whatif": 1.02,
   "comedy": 1.05,
-  "musik": 0.82,
+  "musik": 0.81,
   "vergleich": 1.2,
   "motivation": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1656 Aufrufe, 3.17 % Likes).",
+  "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1797 Aufrufe, 2.39 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1665 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2435 zu 705 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2443 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
  ],
  "words_good": [
   "gänsehaut"
  ],
  "words_bad": [
-  "remix",
   "lied",
   "bekanntes",
-  "erkennst"
+  "erkennst",
+  "remix"
  ],
  "top": [
   {
@@ -138,14 +138,14 @@
    "score": 2941
   },
   {
-   "id": 80,
-   "title": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
-   "category": "whatif",
-   "views": 2119,
-   "likes": 46,
+   "id": 120,
+   "title": "Warum du bei Musik Gänsehaut bekommst",
+   "category": "fakten",
+   "views": 2166,
+   "likes": 45,
    "comments": 0,
    "shares": 0,
-   "score": 2809
+   "score": 2841
   }
  ],
  "flop": [
