@@ -72,10 +72,11 @@ MUSIC = {
     "dunkel": ["dark ambient", "horror ambience music"],
     "hell": ["upbeat acoustic loop", "cheerful piano loop", "happy background music", "positive corporate"],
     "gutelaune": ["upbeat happy pop", "feel good upbeat", "uplifting motivational", "energetic upbeat summer", "happy ukulele upbeat"],
+    "romantisch": ["romantic piano", "soft romantic piano", "gentle love piano", "romantic acoustic guitar", "tender strings ambient"],
 }
 MOOD_OF = {"whatif": "spannend", "mysterien": "spannend", "storys": "spannend", "grusel": "dunkel",
            "fakten": "hell", "tiere": "hell", "lustig": "hell", "comedy": "hell",
-           "vergleich": "hell", "motivation": "gutelaune"}
+           "vergleich": "hell", "motivation": "gutelaune", "liebe": "romantisch"}
 # Keine bekannten Lieder (auch wenn jemand sie als CC0 hochgeladen hat: die Komposition ist meist geschützt → Content-ID)
 NOT_MUSIC = re.compile(r"birthday|rainbow|cover|remix|karaoke|feat\.|song|lied|theme from|soundtrack|ost\b|tribute|melody of|"
                        r"jingle bells|christmas|weihnacht|national anthem|hymne|vocal|singing|voice", re.I)
@@ -349,6 +350,35 @@ def build_openverse(man):
             time.sleep(2)
     man["credits"] = credits
     log(f"Openverse: {sum(len(v) for v in amb.values())} Geräusche in {len(amb)} Rollen, {music_n} Musikstücke")
+
+
+def fetch_mood(mood, want=3):
+    """Freie Musik einer Stimmung nachladen, wenn ihr Ordner noch leer ist (z. B. neue Video-Art „Liebe“ → romantisch)."""
+    d = MUSIC_DIR / "stimmung" / mood
+    d.mkdir(parents=True, exist_ok=True)
+    got = len(list(d.glob("*.ogg")))
+    for q in MUSIC.get(mood, []):
+        if got >= want:
+            break
+        try:
+            for it in ov_search(q, "music", 45, 600):
+                if got >= want:
+                    break
+                if NOT_MUSIC.search(f"{it.get('title') or ''} {' '.join(t.get('name', '') for t in it.get('tags') or [] if isinstance(t, dict))}"):
+                    continue
+                dest = d / f"openverse_{str(it['id'])[:8]}.ogg"
+                if dest.exists():
+                    continue
+                try:
+                    _fetch(it, dest, 75, -20)
+                    got += 1
+                except Exception as e:  # noqa: BLE001
+                    log(f"Openverse-Musik: {str(e)[:100]}")
+        except Exception as e:  # noqa: BLE001
+            log(f"Openverse-Musiksuche „{q}“: {str(e)[:120]}")
+    if got:
+        log(f"Musik „{mood}“: {got} Stücke bereit")
+    return got
 
 
 def build():

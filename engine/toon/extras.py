@@ -2222,7 +2222,7 @@ def draw_landscape_motion(layer, spec, place, night, t, traffic=True, parked=Tru
 
 
 MOODS = {"panic": (255, 60, 40), "tense": (255, 120, 40), "scary": (10, 10, 40), "sad": (40, 70, 130), "happy": (255, 220, 120),
-         "calm": None}
+         "love": (255, 120, 160), "calm": None}
 
 
 def draw_burst(layer, x, y, k, sc=1.0):
@@ -2258,6 +2258,26 @@ def draw_mood(layer, mood, t, confetti=False):
             d.rectangle((i * 10, i * 10, W - i * 10, H - i * 10), outline=(0, 0, 0, (12 - i) * 6), width=10)
     elif m == "sad":
         d.rectangle((0, 0, W, H), fill=(*col, 56))
+    elif m == "love":                                              # Romantik: rosiger Schimmer, warmer Rand, Herzen und Blütenblätter schweben
+        d.rectangle((0, 0, W, H), fill=(*col, 30))
+        for i in range(10):
+            d.rectangle((i * 9, i * 9, W - i * 9, H - i * 9), outline=(255, 150, 120, (10 - i) * 5), width=9)
+        for i, (a, b, c) in enumerate(_DROPS[:26]):
+            ph = (b + t * (0.05 + c * 0.05)) % 1
+            if i % 3 == 0:                                         # Herz steigt langsam auf und verblasst oben
+                x = a * W + math.sin(t * 1.1 + i) * 46
+                y = H - ph * (H + 120)
+                r = 18 + c * 18
+                al = int(210 * min(1.0, (1 - ph) * 2.2) * min(1.0, ph * 6))
+                for dx in (-r * 0.5, r * 0.5):
+                    d.ellipse((x + dx - r * 0.62, y - r * 0.62, x + dx + r * 0.62, y + r * 0.62), fill=(255, 92, 132, al))
+                d.polygon([(x - r * 1.06, y + r * 0.12), (x + r * 1.06, y + r * 0.12), (x, y + r * 1.3)], fill=(255, 92, 132, al))
+            else:                                                  # Blütenblatt fällt und dreht sich
+                x = (a * W + math.sin(t * 1.6 + i * 2) * 70 + t * 18) % W
+                y = ph * (H + 80) - 40
+                rw, rh = 9 + c * 7, 5 + c * 4
+                k = abs(math.sin(t * 2.2 + i))
+                d.ellipse((x - rw, y - rh * k - 1, x + rw, y + rh * k + 1), fill=(255, 170, 190, 215) if i % 2 else (250, 120, 150, 215))
     elif m == "happy":
         d.rectangle((0, 0, W, H), fill=(*col, 26))
         for i, (a, b, c) in enumerate(_DROPS[:30] if confetti else ()):               # Konfetti (nur wenn gefeiert wird)

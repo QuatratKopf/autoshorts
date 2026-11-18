@@ -420,6 +420,10 @@ async function gh(method, path, body, raw) {
   const j = await api("/api/gh", {method, path, body, raw: !!raw});
   if (j.status >= 400) {
     const m = (j.data && j.data.message) || "";
+    if (j.status === 403 && /personal access token/i.test(m)) {   // Schlüssel darf das nur lesen: genau sagen, welches Recht fehlt
+      const perm = path.startsWith("/actions") ? "Actions" : path.startsWith("/contents") || path.startsWith("/git") ? "Contents" : "Actions, Contents und Secrets";
+      throw new Error(`Dein GitHub-Zugangsschlüssel darf das nur lesen. Auf github.com → Settings → Developer settings → Fine-grained tokens den Schlüssel öffnen, bei „${perm}“ (am besten auch Actions, Contents und Secrets) „Read and write“ wählen, unten „Update“ – dann noch einmal versuchen.`);
+    }
     throw new Error(j.status === 401 ? "Der GitHub-Zugangsschlüssel ist ungültig oder abgelaufen." : j.status === 403 || j.status === 404 ? `GitHub verweigert den Zugriff (${m || j.status}). Prüfe die Rechte des Zugangsschlüssels.` : `GitHub meldet ${j.status}: ${m}`);
   }
   return j.data;
@@ -486,7 +490,13 @@ async function persist(msg, btn) {
 }
 async function dispatch(inputs, label) {
   try {
-    await gh("POST", "/actions/workflows/autoshorts.yml/dispatches", {ref: "main", inputs});
+    try { await gh("POST", "/actions/workflows/autoshorts.yml/dispatches", {ref: "main", inputs}); }
+    catch (e) {
+      if (!/disabled workflow/i.test(e.message)) throw e;
+      // In einer frischen Kopie (Fork) schaltet GitHub den Ablauf ab: selbst einschalten und noch einmal starten
+      try { await gh("PUT", "/actions/workflows/autoshorts.yml/enable"); await gh("POST", "/actions/workflows/autoshorts.yml/dispatches", {ref: "main", inputs}); }
+      catch (e2) { throw new Error("Auf GitHub sind die Abläufe in deiner Kopie noch ausgeschaltet. Öffne dein Repository auf github.com → Reiter „Actions“ → grüner Knopf „I understand my workflows, go ahead and enable them“; links „AutoShorts“ wählen und, falls angezeigt, „Enable workflow“ drücken. Dann hier noch einmal versuchen."); }
+    }
     PENDING = {label, at: Date.now()}; banner(); setTimeout(pollRuns, 4000); return true;
   } catch (e) { toast(e.message, true); return false; }
 }
@@ -595,7 +605,7 @@ function nextUp() {
   const used = new Set(ST.used_queue || []);
   const q = (CFG.queue || []).filter(x => !used.has(x.id) && cat(x.category)).sort((a, b) => a.created - b.created)[0];
   if (q) return {c: cat(q.category), topic: q.text};
-  const cs = CFG.categories.filter(c => c.enabled); if (!cs.length) return null;
+  const cs = CFG.categories.filter(c => c.enabled && catOk(c)); if (!cs.length) return null;
   const i = cs.findIndex(c => c.slug === ST.last_category); return {c: cs[(i + 1) % cs.length], topic: null};
 }
 function nextRun() {
@@ -720,6 +730,9 @@ const PERMS = [["zeitplan", "Autopilot & Upload-Zeiten", true], ["kanal", "Kanal
   ["rubriken_bearbeiten", "Video-Arten bearbeiten & neu anlegen", false], ["laenge", "Video-Länge", false], ["trends", "Trends & Thumbnail", false],
   ["ki", "KI-Anbieter & Stimme", false], ["stil", "Video-Stil (Look, Untertitel, Musik)", false], ["zahlen", "Abruf der Zahlen", false]];
 const can = k => !LITE() || !!(S.access && S.access.perms && S.access.perms[k]);
+// Video-Arten, die der Admin für diesen Zugang freigibt (leer = alle). Die Admin-App sieht immer alle.
+const catOk = c => !LITE() || !(S.access && Array.isArray(S.access.cats) && S.access.cats.length) || S.access.cats.includes(c.slug);
+const catBoxes = (pre, cats) => `<div class="grid2" style="gap:6px 18px">${(CFG && CFG.categories || []).map(c => `<label class="check"><input type="checkbox" data-${pre}="${esc(c.slug)}" ${!(cats && cats.length) || cats.includes(c.slug) ? "checked" : ""}> ${esc(c.emoji)} ${esc(c.name)}</label>`).join("")}</div>`;
 /* ═════════════════ Backup ═════════════════ */
 const GAS_TEMPLATE = "// AutoShorts-Backup ↔ Google Drive (Google Apps Script, als Web-App bereitstellen: Ausführen als „Ich“, Zugriff „Jeder“)\nconst GEHEIMWORT = 'HIER-DEIN-GEHEIMWORT';   // dasselbe Wort in AutoShorts unter „Geheimwort“ eintragen\nconst ORDNER = 'AutoShorts Backups';\nfunction doPost(e) {\n  try {\n    var d = JSON.parse(e.postData.contents);\n    if (d.app !== 'AutoShorts' || d.secret !== GEHEIMWORT) return out({ok: false, error: 'Geheimwort falsch'});\n    var it = DriveApp.getFoldersByName(ORDNER), folder = it.hasNext() ? it.next() : DriveApp.createFolder(ORDNER);\n    if (d.action === 'ping') return out({ok: true, script: 'autoshorts-backup', folder: folder.getUrl()});   // Verbindung testen: nichts speichern\n    if (d.action === 'list') {                         // Backups auflisten (zum Wiederherstellen)\n      var l = [], fl = folder.getFiles();\n      while (fl.hasNext()) { var y = fl.next(); if (/^AutoShorts-Backup-/.test(y.getName())) l.push({id: y.getId(), name: y.getName(), size: y.getSize(), date: y.getDateCreated().toISOString()}); }\n      l.sort(function (a, b) { return a.date < b.date ? 1 : -1; });\n      return out({ok: true, files: l});\n    }\n    if (d.action === 'get') {                          // ein Backup holen – nur aus diesem Ordner\n      var g = DriveApp.getFileById(d.id), ps = g.getParents(), inside = false;\n      while (ps.hasNext()) if (ps.next().getId() === folder.getId()) inside = true;\n      if (!inside || !/^AutoShorts-Backup-/.test(g.getName())) return out({ok: false, error: 'nicht gefunden'});\n      return out({ok: true, filename: g.getName(), data: Utilities.base64Encode(g.getBlob().getBytes())});\n    }\n    if (!/^AutoShorts-Backup-[0-9-]+\\.asbak$/.test(d.filename)) return out({ok: false, error: 'Dateiname'});\n    var f = folder.createFile(Utilities.newBlob(Utilities.base64Decode(d.data), 'application/octet-stream', d.filename));\n    var files = [], all = folder.getFiles();          // nur die neuesten „keep“ Backups behalten\n    while (all.hasNext()) { var x = all.next(); if (/^AutoShorts-Backup-/.test(x.getName())) files.push(x); }\n    files.sort(function (a, b) { return b.getDateCreated() - a.getDateCreated(); });\n    files.slice(Math.max(3, d.keep || 30)).forEach(function (x) { x.setTrashed(true); });\n    return out({ok: true, id: f.getId()});\n  } catch (err) { return out({ok: false, error: String(err)}); }\n}\nfunction out(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }\n// Einmal oben über „Ausführen“ starten, damit Google die Drive-Erlaubnis abfragt\nfunction erlauben() { DriveApp.getFoldersByName(ORDNER); }";
 let BK = null;
@@ -907,11 +920,13 @@ async function viewAdmin() {
     <div class="make"><label>Name<input id="anName" maxlength="40" placeholder="z. B. Max"></label>
       <label>Gültig für<select id="anDur"><option value="1">1 Tag</option><option value="7">7 Tage</option><option value="30" selected>30 Tage</option><option value="90">90 Tage</option><option value="365">1 Jahr</option><option value="0">unbegrenzt</option></select></label></div>
     <div class="lbl" style="margin-top:12px">Das darf die App einstellen</div>${permBoxes("np", ACC.defaults)}
+    <div class="lbl" style="margin-top:12px">Diese Video-Arten bekommt der Zugang</div>${catBoxes("nc", null)}
     <div class="inline" style="margin-top:12px"><button class="btn accent" id="anGo">${icon(I.plus)}Zugang erstellen</button></div></section>
   <section class="panel in" style="--i:1"><div class="section-h"><div><h2>Zugänge (${list.length})</h2><p class="hint">Download-Link der Kanal-App: <a href="${DL_LINK()}" target="_blank" rel="noopener">${esc(DL_LINK())}</a></p></div></div>
-    ${list.length ? list.map(e => `<details class="set-sec" style="margin-bottom:8px"><summary><span class="s-t"><b>${esc(e.name || "ohne Namen")}</b><span class="hint">erstellt ${e.created ? fmtDate(e.created) : "–"} · ${PERMS.filter(([k, , d]) => (e.perms && k in e.perms ? e.perms[k] : d)).length} von ${PERMS.length} Rechten</span></span><span class="s-chip">${accStatus(e)}</span></summary>
+    ${list.length ? list.map(e => `<details class="set-sec" style="margin-bottom:8px"><summary><span class="s-t"><b>${esc(e.name || "ohne Namen")}</b><span class="hint">erstellt ${e.created ? fmtDate(e.created) : "–"} · ${PERMS.filter(([k, , d]) => (e.perms && k in e.perms ? e.perms[k] : d)).length} von ${PERMS.length} Rechten · ${e.cats && e.cats.length ? e.cats.length + " Video-Arten" : "alle Video-Arten"}</span></span><span class="s-chip">${accStatus(e)}</span></summary>
       <div class="set-b">${permBoxes("ep-" + e.id, e.perms)}
-        <div class="inline" style="margin-top:10px;flex-wrap:wrap"><button class="btn sm primary" data-asave="${e.id}">Rechte speichern</button>
+        <div class="lbl" style="margin-top:10px">Video-Arten für diesen Zugang</div>${catBoxes("ec-" + e.id, e.cats)}
+        <div class="inline" style="margin-top:10px;flex-wrap:wrap"><button class="btn sm primary" data-asave="${e.id}">Rechte & Video-Arten speichern</button>
           <select data-adur="${e.id}" aria-label="Verlängern um"><option value="7">+7 Tage</option><option value="30" selected>+30 Tage</option><option value="90">+90 Tage</option><option value="365">+1 Jahr</option><option value="0">unbegrenzt</option></select>
           <button class="btn sm" data-aext="${e.id}">Verlängern</button><button class="btn sm danger" data-adel="${e.id}">Zugang löschen</button></div></div></details>`).join("") : `<div class="empty">Noch keine Zugänge.</div>`}</section>
   <section class="panel in" style="--i:2"><div class="section-h"><div><h2>Kanäle</h2><p class="hint">Alle Kopien deines Repositorys: was sie selbst gelernt haben, was ihnen fehlt. Übernimmst du Gelerntes in deine Engine, bekommen es alle Kanäle beim nächsten Motor-Update.</p></div>
@@ -919,6 +934,8 @@ async function viewAdmin() {
   <section class="panel in" style="--i:2"><div class="section-h"><div><h2>Standard-Rechte</h2><p class="hint">So sind die Häkchen bei neuen Zugängen vorbelegt.</p></div></div>
     ${permBoxes("dp", ACC.defaults)}<div class="inline" style="margin-top:10px"><button class="btn sm primary" id="dpSave">Standard speichern</button></div></section>`;
   const perms = attr => Object.fromEntries([...document.querySelectorAll(`[data-${attr}]`)].map(x => [x.getAttribute(`data-${attr}`), x.checked]));
+  const cats = attr => { const b = [...document.querySelectorAll(`[data-${attr}]`)], on = b.filter(x => x.checked).map(x => x.getAttribute(`data-${attr}`));
+    if (!on.length) throw new Error("Bitte mindestens eine Video-Art auswählen."); return on.length === b.length ? null : on; };   // alle = keine Einschränkung (auch neue Video-Arten)
   const busy = async (b, fn) => { b.disabled = true; try { await fn(); } catch (e) { toast(e.message, true); ACC = null; } b.disabled = false; viewAdmin(); };
   if ($("#accCopy")) $("#accCopy").onclick = () => { navigator.clipboard.writeText($("#accMsg").value).then(() => toast("Kopiert"), () => { $("#accMsg").select(); toast("Markiert – mit Strg+C kopieren"); }); };
   if ($("#accDone")) $("#accDone").onclick = () => { ACC_NEW = null; viewAdmin(); };
@@ -926,7 +943,7 @@ async function viewAdmin() {
     const name = $("#anName").value.trim(); if (!name) throw new Error("Bitte einen Namen eintragen.");
     const days = +$("#anDur").value, code = newCode(), now = Math.floor(Date.now() / 1000);
     const e = {id: crypto.getRandomValues(new Uint32Array(1))[0].toString(36), name, hash: await sha256hex("autoshorts|" + code), created: now,
-      expires: days ? now + days * 86400 : 0, perms: perms("np")};
+      expires: days ? now + days * 86400 : 0, perms: perms("np")}; const nc = cats("nc"); if (nc) e.cats = nc;
     await loadAccess(); ACC.access.push(e); await saveAccess("Zugang " + name); ACC_NEW = {name, code, expires: e.expires}; toast("Zugang erstellt");
   });
   const bindForks = () => {
@@ -941,8 +958,8 @@ async function viewAdmin() {
   $("#fkLoad").onclick = async () => { FORKS_BUSY = true; FORKS = null; $("#fkBox").innerHTML = forksHtml(); $("#fkLoad").disabled = true;
     try { await loadForks(); } catch (e) { toast(e.message, true); } FORKS_BUSY = false; $("#fkLoad").disabled = false; $("#fkLoad").textContent = "Aktualisieren"; $("#fkBox").innerHTML = forksHtml(); bindForks(); };
   $("#dpSave").onclick = () => busy($("#dpSave"), async () => { const d = perms("dp"); await loadAccess(); ACC.defaults = d; await saveAccess("Standard-Rechte"); toast("Gespeichert"); });
-  document.querySelectorAll("[data-asave]").forEach(b => b.onclick = () => busy(b, async () => { const id = b.dataset.asave, p_ = perms("ep-" + id);
-    await loadAccess(); const e = ACC.access.find(x => x.id === id); if (!e) throw new Error("Zugang nicht mehr da."); e.perms = p_; await saveAccess("Rechte " + e.name); toast("Rechte gespeichert – gilt in ihrer App spätestens nach 10 Minuten"); }));
+  document.querySelectorAll("[data-asave]").forEach(b => b.onclick = () => busy(b, async () => { const id = b.dataset.asave, p_ = perms("ep-" + id), c_ = cats("ec-" + id);
+    await loadAccess(); const e = ACC.access.find(x => x.id === id); if (!e) throw new Error("Zugang nicht mehr da."); e.perms = p_; if (c_) e.cats = c_; else delete e.cats; await saveAccess("Rechte " + e.name); toast("Rechte gespeichert – gilt in ihrer App spätestens nach 10 Minuten"); }));
   document.querySelectorAll("[data-aext]").forEach(b => b.onclick = () => busy(b, async () => { const id = b.dataset.aext, days = +document.querySelector(`[data-adur="${id}"]`).value;
     await loadAccess(); const e = ACC.access.find(x => x.id === id); if (!e) throw new Error("Zugang nicht mehr da.");
     const base = Math.max(Date.now() / 1000, e.expires || 0); e.expires = days ? Math.floor(base + days * 86400) : 0; await saveAccess("Verlängert " + e.name); toast("Verlängert"); }));
@@ -1202,10 +1219,10 @@ const VOICES = [["de-DE-FlorianMultilingualNeural", "Florian · locker, männlic
 function viewStudio() {
   const used = new Set(ST.used_queue || []), queue = (CFG.queue || []).filter(q => !used.has(q.id)).sort((a, b) => (b.next ? 1 : 0) - (a.next ? 1 : 0) || a.created - b.created);
   const counts = {}; VIDS.forEach(v => counts[v.category] = (counts[v.category] || 0) + 1);
-  if (!SEL || !cat(SEL)) SEL = (CFG.categories[0] || {}).slug;
+  if (!SEL || !cat(SEL) || !catOk(cat(SEL))) SEL = (CFG.categories.find(catOk) || {}).slug;
   $("#main").innerHTML = `
   <section class="panel in"><div class="section-h"><div><h2>Neues Video</h2><p class="hint">Video-Art antippen, Thema eingeben oder leer lassen, dann erstellen. GitHub braucht dafür etwa 5–15 Minuten.</p></div></div>
-    <div class="cats" role="radiogroup" aria-label="Video-Art">${CFG.categories.map((c, i) => `
+    <div class="cats" role="radiogroup" aria-label="Video-Art">${CFG.categories.map((c, i) => !catOk(c) ? "" : `
       <div class="cat ${c.enabled ? "" : "off"} ${SEL === c.slug ? "sel" : ""}" role="radio" tabindex="0" aria-checked="${SEL === c.slug}" data-slug="${esc(c.slug)}">
         <div class="cat-h"><span class="e" aria-hidden="true">${esc(c.emoji)}</span><span class="chip ${c.enabled ? "good" : "mute"}">${c.enabled ? "im Autopilot" : "pausiert"}</span></div>
         <h3>${esc(c.name)}</h3><p>${esc(c.description)}</p>
@@ -1221,7 +1238,7 @@ function viewStudio() {
     <div class="section-h"><div><h2>Video nachbauen</h2><p class="hint">Schick ein Video rein, das dir gefällt – als Link von TikTok oder YouTube oder als Datei. AutoShorts hört und schaut es an und baut daraus ein eigenes Video in unserem Stil – gleiche Idee und gleiches Tempo, aber eigene Worte, Figuren und Orte. Nimm nur Videos, die du als Vorlage nutzen darfst.</p></div></div>
     <div class="make"><label>Link von TikTok oder YouTube<input type="url" id="rmLink" placeholder="https://www.tiktok.com/@… oder https://youtube.com/shorts/…" autocomplete="off"></label>
       <label>oder Video-Datei (MP4, MOV oder WebM, bis 300 MB)<input type="file" id="rmFile" accept="video/mp4,video/quicktime,video/webm"></label>
-      <label>Video-Art<select id="rmCat" aria-label="Video-Art für den Nachbau"><option value="">automatisch erkennen</option>${CFG.categories.map(c => `<option value="${esc(c.slug)}">${esc(c.emoji)} ${esc(c.name)}</option>`).join("")}</select></label>
+      <label>Video-Art<select id="rmCat" aria-label="Video-Art für den Nachbau"><option value="">automatisch erkennen</option>${CFG.categories.filter(catOk).map(c => `<option value="${esc(c.slug)}">${esc(c.emoji)} ${esc(c.name)}</option>`).join("")}</select></label>
       <label class="check"><input type="checkbox" id="rmUpl"> direkt hochladen</label>
       <div class="inline"><button class="btn accent" id="rmGo" style="padding:11px 20px">${icon(I.spark)}Jetzt nachbauen</button>
       <button class="btn" id="rmQueue" style="padding:11px 20px" title="Kommt beim nächsten Video-Termin als Erstes dran">${icon(I.cal)}Als Nächstes einplanen</button></div></div>
@@ -1243,7 +1260,7 @@ function viewStudio() {
     <section class="panel in" style="--i:2"><div><h2>Themen-Warteschlange</h2><p class="hint">Der Autopilot nimmt diese Themen der Reihe nach, bevor er selbst welche sucht.</p></div>
       <div>${queue.length ? queue.map(q => `<div class="qrow"><div><span class="chip">${esc(cat(q.category)?.emoji || "")} ${esc(cat(q.category)?.name || q.category || "Art automatisch")}</span>${q.trend ? ' <span class="chip acc">🔥 Trend</span>' : ""}${q.remake ? ' <span class="chip acc">🔁 Nachbau</span>' : ""} ${q.remake && q.url ? `<a href="${esc(q.url)}" target="_blank" rel="noopener">${esc(q.text)}</a>` : esc(q.text)}</div><button class="ibtn" data-delq="${esc(q.id)}" aria-label="Entfernen">${icon(I.x)}</button></div>`).join("") : `<div class="empty">Leer – die KI denkt sich passende Themen selbst aus.</div>`}</div></section>
     <section class="panel in" style="--i:3"><div><h2>Themen einplanen</h2><p class="hint">Für die nächsten Tage vormerken, eins pro Zeile.</p></div>
-      <select id="qcat" aria-label="Kategorie">${CFG.categories.map(c => `<option value="${esc(c.slug)}">${esc(c.emoji)} ${esc(c.name)}</option>`).join("")}</select>
+      <select id="qcat" aria-label="Kategorie">${CFG.categories.filter(catOk).map(c => `<option value="${esc(c.slug)}">${esc(c.emoji)} ${esc(c.name)}</option>`).join("")}</select>
       <textarea id="qtext" placeholder="Was passiert, wenn man nie schläft?&#10;Die Legende vom Klabautermann"></textarea>
       <div><button class="btn primary" id="qadd">Zur Warteschlange</button></div></section>
   </div>`;

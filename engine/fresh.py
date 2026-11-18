@@ -72,14 +72,18 @@ ADMIN_SETTINGS = {"laenge": ("target_seconds", "min_seconds"),
                   "stil": ("look", "caption_style", "subtitles_lowercase", "sfx_volume", "music_volume", "plan_ahead", "hold_missing", "auto_learn"),
                   "zahlen": ("stats_minutes", "stats_live")}
 CAT_ADMIN = ("name", "emoji", "description", "script_style", "image_mood", "voice", "voice_rate", "voice_pitch", "voice_instructions",
-             "caption_style", "look", "music_volume", "special", "every_days", "topic_examples", "topic_rules", "trends", "niche_queries")
+             "caption_style", "look", "music_volume", "special", "every_days", "topic_examples", "topic_rules", "trends", "niche_queries", "gemini_voice", "own_voice")
 
 
-def sync_admin_settings(admin_cfg, perms):
-    """Einstellungen des Admins in diese Kopie übernehmen – nur, was der Gast nicht selbst einstellen darf. Gibt die Zahl der Änderungen zurück."""
+def sync_admin_settings(admin_cfg, perms, cats=None):
+    """Einstellungen des Admins in diese Kopie übernehmen – nur, was der Gast nicht selbst einstellen darf. Gibt die Zahl der Änderungen zurück.
+    cats: Video-Arten, die der Admin für diesen Zugang freigibt (None/leer = alle)."""
     st = CONFIG.setdefault("settings", {})
-    a_st = (admin_cfg or {}).get("settings") or {}
+    allowed = [str(x) for x in cats if isinstance(x, str)] if isinstance(cats, list) and cats else []
     n = 0
+    if (st.get("allowed_cats") or []) != allowed:
+        st["allowed_cats"], n = allowed, n + 1
+    a_st = (admin_cfg or {}).get("settings") or {}
     for perm, keys in ADMIN_SETTINGS.items():
         if perms.get(perm):
             continue                                      # darf der Gast selbst einstellen: seine Wahl bleibt
@@ -92,7 +96,10 @@ def sync_admin_settings(admin_cfg, perms):
             continue
         c = mine.get(ac["slug"])
         if c is None:                                     # neue Video-Art des Admins: kommt dazu
-            CONFIG["categories"].append(json.loads(json.dumps(ac)))
+            c = json.loads(json.dumps(ac))
+            if allowed and c["slug"] not in allowed:
+                c["enabled"] = False
+            CONFIG["categories"].append(c)
             n += 1
             continue
         if perms.get("rubriken_bearbeiten"):
@@ -102,6 +109,9 @@ def sync_admin_settings(admin_cfg, perms):
                 c[k], n = json.loads(json.dumps(ac[k])), n + 1
         if not perms.get("rubriken") and c.get("enabled") != ac.get("enabled"):
             c["enabled"], n = ac.get("enabled"), n + 1    # an/aus bestimmt dann auch der Admin
+    for c in CONFIG["categories"]:                        # nicht freigegebene Video-Arten sind aus
+        if allowed and c.get("slug") not in allowed and c.get("enabled"):
+            c["enabled"], n = False, n + 1
     if n:
         save("config.json", CONFIG)
     return n
@@ -121,7 +131,7 @@ def _admin_sync():
     aid = str(CONFIG.get("settings", {}).get("access_id") or "")
     e = next((x for x in acc.get("access", []) if isinstance(x, dict) and str(x.get("id")) == aid), None)
     perms = {**(acc.get("defaults") or {}), **((e or {}).get("perms") or {})}
-    n = sync_admin_settings(admin_cfg, perms)
+    n = sync_admin_settings(admin_cfg, perms, (e or {}).get("cats"))
     if n:
         subprocess.run(["git", "add", "docs/data/config.json"], cwd=ROOT, check=False)   # der Speicher-Schritt nimmt es mit
         log(f"Einstellungen des Admins übernommen: {n} Änderungen (nur, was dieser Kanal nicht selbst einstellen darf)")

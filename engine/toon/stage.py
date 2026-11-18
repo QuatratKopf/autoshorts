@@ -1242,6 +1242,8 @@ def direct(scenes, times, topic="", style="", look=""):
                 sc["mood"] = "scary"
             if sc["crowd"] in ("walk", "cheer"):
                 sc["crowd"] = ""
+        if style == "liebe" and sc["mood"] in ("", "calm", "happy"):   # Liebesgeschichten: rosiges Licht, schwebende Herzen (Trauriges bleibt traurig)
+            sc["mood"] = "love"
         sc["props"] = [q for q in sc["props"] if (lambda k: k in extras.PROPS or k in extras.PROP_ALIASES or k in extras.HELD)(q["type"].lower())]
         low0 = sc["text"].lower()
         if not _re0.search(HEAP_RE, low0):                # weißer Haufen (Zucker/Salz), Sand- oder Müllberg nur, wenn der Satz davon spricht

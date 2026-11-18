@@ -537,15 +537,16 @@ def spoken_words(text, path):
     return words
 
 
-GEMINI_VOICES = {"grusel": "Enceladus", "lustig": "Puck", "tiere": "Sulafat", "mysterien": "Algenib"}
+GEMINI_VOICES = {"grusel": "Enceladus", "lustig": "Puck", "tiere": "Sulafat", "mysterien": "Algenib", "liebe": "Despina"}   # Despina: weiche, warme Frauenstimme
 
 
 def _gemini_tts(text, out, cat):
     key = secret("GEMINI_API_KEY")
     if not key:
         raise ProviderError("kein GEMINI_API_KEY")
-    voice = cfg("gemini_voice") or GEMINI_VOICES.get(cat.get("slug"), "Puck")
-    style = (cfg("voice_style") or cat.get("voice_instructions") or "Ruhig und natürlich.").strip()
+    own = bool(cat.get("own_voice"))                     # Video-Art mit fester eigener Stimme (z. B. Liebe: Frauenstimme) – gilt vor der allgemeinen Wahl
+    voice = (cat.get("gemini_voice") if own else "") or cfg("gemini_voice") or GEMINI_VOICES.get(cat.get("slug"), "Puck")
+    style = ((cat.get("voice_instructions") if own else "") or cfg("voice_style") or cat.get("voice_instructions") or "Ruhig und natürlich.").strip()
     speed = max(0.8, min(1.15, float(cfg("voice_speed") or 1.0)))
     # kurze Regieanweisung: lange Anweisungen liest das Modell manchmal mit vor
     short = style.split("–")[0].split(".")[0].strip()[:60]

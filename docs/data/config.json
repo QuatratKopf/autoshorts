@@ -222,6 +222,36 @@
    ],
    "trends": false,
    "topic_rules": "Es geht um DICH: Einstellung, Disziplin, Angst vor dem ersten Schritt, Ausreden, Neuanfang, Durchhalten, Selbstwert. KEINE Technik-, Handy-, Algorithmus-, Daten- oder Überwachungs-Themen, KEINE 'Was wäre, wenn'-Fragen, nichts Gruseliges oder Düsteres. Das Thema klingt wie ein Satz, den ein Coach dir ins Gesicht sagt."
+  },
+  {
+   "slug": "liebe",
+   "name": "Liebe",
+   "emoji": "💕",
+   "description": "Liebesgeschichten, schnulzige Momente und Listen wie „3 Zeichen für echte Liebe“ – mit weicher Frauenstimme und romantischer Musik.",
+   "script_style": "Zwei Formen, abwechselnd: A) LIEBESGESCHICHTE – romantisch und gefühlvoll, zum Mitfühlen und Dahinschmelzen. Erfundene Geschichten klar als Geschichte erzählen ('Stell dir vor …', 'Das ist die Geschichte von Lena und Tom …'). Aufbau: Hook mit einem Moment, der sofort berührt ('Er hat ihr dreihundertfünfundsechzig Briefe geschrieben. Einen für jeden Tag.'), wie sie sich kennenlernen (ein kleiner, süßer Zufall), Herzklopfen oder Hindernis (Entfernung, Schüchternheit, ein verpasster Zug), die große Geste, gefühlvolles Ende mit Happy End. B) LISTE ÜBER DIE LIEBE – z. B. '3 Zeichen für echte Liebe' (Vertrauen, Zeit füreinander, Lachen ohne Grund), '5 kleine Gesten, die mehr sagen als Ich liebe dich', 'Woran du merkst, dass jemand in dich verliebt ist'. Aufbau: Hook ('Echte Liebe erkennst du nicht an großen Worten.'), dann jedes Zeichen mit einem eigenen Banner ('graphic': {'type': 'round', 'kicker': 'ZEICHEN 1', 'text': 'VERTRAUEN'}) und danach einer kleinen Alltagsszene mit zwei Figuren, die genau das zeigt (sie erzählt ihm ein Geheimnis; sie kochen zusammen; beide lachen grundlos auf dem Sofa); das schönste Zeichen zuletzt. Belegbares aus der Forschung darf vorkommen, nichts erfinden. Beide Formen: warm, zärtlich, ein bisschen kitschig mit einem Augenzwinkern; Ende mit einem Satz zum Seufzen und einer Frage an die Zuschauer ('Welches Zeichen kennst du? Markier die Person.'); kein Drama mit Gewalt, nichts Anzügliches, keine echten Privatpersonen. BILDER: zwei Figuren, die sich ansehen, nebeneinander gehen, tanzen, sich zuwinken; Herz-Emote ('emote': 'heart') bei Verliebtheit; romantische Orte: Park, Strand bei Sonnenuntergang, Restaurant mit Kerze, Wohnzimmer-Sofa, Küche, Bahnhof, Sternenhimmel in der Nacht. Für zärtliche Szenen 'mood': 'love'.",
+   "image_mood": "soft pink, rose and warm golden sunset colors, dreamy romantic light, floating hearts and petals",
+   "voice": "de-DE-SeraphinaMultilingualNeural",
+   "voice_rate": "-4%",
+   "voice_pitch": "+0Hz",
+   "voice_instructions": "Sanft, warm und gefühlvoll wie eine Freundin, die eine Liebesgeschichte erzählt; leise Pausen an den schönen Stellen.",
+   "gemini_voice": "Despina",
+   "own_voice": true,
+   "music_volume": 0.16,
+   "topic_examples": [
+    "3 Zeichen für echte Liebe",
+    "Er schrieb ihr jeden Tag einen Brief – ein Jahr lang",
+    "5 kleine Gesten, die mehr sagen als Ich liebe dich",
+    "Zwei Fremde, ein verpasster Zug und ein Zettel am Fenster",
+    "Woran du merkst, dass jemand in dich verliebt ist",
+    "Was beim Verliebtsein in deinem Gehirn passiert",
+    "Sie trafen sich nach fünfzig Jahren wieder",
+    "3 Dinge, die glückliche Paare jeden Tag tun",
+    "Der Regenschirm, der zwei Leben verband",
+    "Warum dein Herz rast, wenn du die Person siehst"
+   ],
+   "trends": false,
+   "topic_rules": "Es geht um Liebe, Verliebtsein, Romantik, große Gesten, Wiedersehen, erste Liebe, Herzklopfen – als Liebesgeschichte ODER als Liste ('3 Zeichen für echte Liebe', 'Woran du merkst …', 'Gesten, die …'); wechsle zwischen beiden ab. Nichts Gruseliges, keine Trennungs-Dramen mit Streit oder Gewalt, nichts Anzügliches, keine Promi-Beziehungen, keine echten Privatpersonen.",
+   "enabled": true
   }
  ],
  "queue": [

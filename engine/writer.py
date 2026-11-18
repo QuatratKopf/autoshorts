@@ -70,8 +70,10 @@ Regeln für die Sprechertexte:
 - Erfundene Geschichten (Grusel, Lustiges) klar als Geschichte erzählen ('Stell dir vor …', 'Eine Legende erzählt …'):
   keine erfundenen 'echten' Ereignisse, Trends, Apps, Studien oder Personen als Tatsache ausgeben, und keine Titel wie 'Die Wahrheit über …' dafür.
 - Keine Videos über einzelne echte Personen (auch keine Promis): nimm das allgemeine Thema dahinter.
-- Nenne im Sprechertext, in Titel, Beschreibung und Einblendungen KEINE Marken-, Firmen-, Produkt- oder App-Namen, auch nicht als
-  Beispiel. Umschreibe sie allgemein („ein großer Online-Händler“, „ein Videoportal“, „ein bekannter Autobauer“, „ein Chatbot“).
+- Firmen-, Marken-, Produkt- und App-Namen nennst du beim echten Namen (z. B. „Apple“, „Amazon“, „McDonald's“, „Tesla“, „WhatsApp“) –
+  im Sprechertext, im Titel und in der Beschreibung; „ein großer Online-Händler“ statt des Namens ist zu vage. Über echte Firmen nur
+  belegbare Fakten (keine erfundenen Zahlen, Skandale oder Zitate), nicht abwertend und keine Werbung. Gezeichnet werden Firmen nie:
+  keine Logos, kein Markenschriftzug, keine nachgemalten Produkte mit Markenzeichen – zeige neutrale Gebäude, Geräte und eigene Figuren.
 - AUSNAHME Spielnamen: Geht es um Videospiele, nenne jedes Spiel beim echten Namen (z. B. „Minecraft“, „Super Mario Bros.“, „Tetris“,
   „Adventure“) – im Sprechertext, im Titel und in der Beschreibung, gern gleich beim ersten Erwähnen. Die Zuschauer wollen wissen, welches
   Spiel gemeint ist; „ein Blockspiel“ oder „ein Hüpfspiel“ statt des Namens ist zu vage. Gezeichnet werden die Spiele trotzdem nie:
@@ -84,10 +86,10 @@ Regeln für die Sprechertexte:
 - Sprechertext zum Vorlesen schreiben: Zahlen und Einheiten ausschreiben ("dreißigtausend Grad", "zwanzig Prozent"),
   keine Abkürzungen, Klammern, Emojis oder Sonderzeichen; kurze, klare Sätze. In Einblendungen dürfen Ziffern stehen.
 - Keine Beleidigungen, nichts Anzügliches, keine echten Privatpersonen, keine Marken- oder Filmfiguren im Bild.
-- Baue Themen nie um urheberrechtlich geschützte Figuren, Filme, Serien oder Marken (z. B. Godzilla, Pokémon-Figuren,
-  Marvel, Disney) und erzähle deren Geschichten nicht nach. Nimm stattdessen eigene, namenlose Wesen oder echte Natur/Wissenschaft
+- Baue Themen nie um urheberrechtlich geschützte Figuren, Filme oder Serien (z. B. Godzilla, Pokémon-Figuren,
+  Marvel-Helden) und erzähle deren Geschichten nicht nach. Nimm stattdessen eigene, namenlose Wesen oder echte Natur/Wissenschaft
   (z. B. 'ein 100 Meter großes Monster'). Wahre Geschichten ÜBER Videospiele (Geheimnisse, Rekorde, Fehler, Entstehung) sind erlaubt –
-  mit Spielnamen, aber ohne deren Figuren im Bild.
+  mit Spielnamen, aber ohne deren Figuren im Bild. Wahre Firmengeschichten (Gründung, Erfolg, Pleite, Rekorde) sind erlaubt – mit Namen, ohne Logo.
 HUMOR – jedes Video ist auch unterhaltsam (in Comedy und Lustigem stark, in Grusel und ernsten Storys nur ein Augenzwinkern):
 - Mindestens zwei Lacher pro Video: trockene Untertreibung („Das war … suboptimal.“), Übertreibung mit Zahl („achtundvierzig Tabs“),
   ein Running Gag, der zweimal wiederkommt und beim dritten Mal kippt, oder eine Figur/ein Ding, das plötzlich Gefühle hat.
@@ -254,7 +256,8 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
            "walk" (Alltag, Leute gehen vorbei), "worried" (stehen unruhig, sehen sich besorgt um), "panic" (rennen in Panik
            durcheinander – NUR wenn der Satz wirklich von Panik, Flucht oder Schreien handelt), "cheer" (jubeln),
            "sad" (stehen gebeugt), "watch" (staunen, zeigen) oder ""
-  "mood": Stimmung der Szene als Farbe/Wirkung: "calm", "tense", "panic", "scary", "sad" oder "happy" – genau so stark wie
+  "mood": Stimmung der Szene als Farbe/Wirkung: "calm", "tense", "panic", "scary", "sad", "happy" oder "love" (Romantik: rosiges Licht,
+          schwebende Herzen und Blütenblätter – nur für verliebte, zärtliche Momente) – genau so stark wie
           der Satz. Die meisten Szenen sind "calm" oder "tense"; "panic" höchstens in ein bis zwei Szenen am Höhepunkt.
           Sachliche Erklärungen sind "calm".
   JEDE SZENE BRAUCHT SICHTBARE BEWEGUNG: Figur, die etwas tut, eine Menschenmenge, animierte Requisite oder Wetter.
@@ -330,7 +333,7 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
   Leere Liste, wenn alles da war."""
 
 UNSUITABLE = ("Ungeeignet sind: Themen, die sich um einzelne echte Personen drehen (Promis, Musiker, Sportler, Politiker, Creator), Todesfälle, Unglücke, Verbrechen, Krieg, Terror, Krankheiten einzelner Personen, "
-              "Parteipolitik und Wahlen, Klatsch über Privatleben, Glücksspiel, geschützte Film-/Spielfiguren und Marken als Hauptthema, reine Sport-Ergebnisse ohne Hintergrundgeschichte "
+              "Parteipolitik und Wahlen, Klatsch über Privatleben, Glücksspiel, geschützte Film-/Spielfiguren als Hauptthema, reine Sport-Ergebnisse ohne Hintergrundgeschichte "
               "und alles, was ohne Belege Spekulation wäre.")
 
 
@@ -359,26 +362,12 @@ _UML = [("fuenf", "fünf"), ("zwoelf", "zwölf"), ("dreissig", "dreißig"), ("fu
         ("pruef", "prüf"), ("rueck", "rück"), ("stuerz", "stürz"), ("schuetz", "schütz"), ("nuetz", "nütz"), ("drueck", "drück"), ("tuerm", "türm")]
 
 
-BRANDS = {"amazon": "ein großer Online-Händler", "google": "eine Suchmaschine", "apple": "ein Handy-Hersteller", "microsoft": "ein Software-Riese",
-          "facebook": "ein soziales Netzwerk", "instagram": "eine Foto-App", "tiktok": "eine Video-App", "youtube": "ein Videoportal",
-          "netflix": "ein Streamingdienst", "tesla": "ein E-Auto-Hersteller", "spacex": "eine Raumfahrtfirma", "samsung": "ein Handy-Hersteller",
-          "nike": "ein Sportartikel-Hersteller", "adidas": "ein Sportartikel-Hersteller", "mcdonald's": "eine Burgerkette", "mcdonalds": "eine Burgerkette",
-          "coca-cola": "ein Limonadenhersteller", "openai": "eine KI-Firma", "chatgpt": "ein Chatbot", "whatsapp": "ein Messenger",
-          "snapchat": "eine Foto-App", "twitter": "ein Kurznachrichtendienst", "uber": "ein Fahrdienst", "disney": "ein Filmstudio",
-          "ikea": "ein Möbelhaus", "dhl": "ein Paketdienst", "paypal": "ein Bezahldienst", "ebay": "ein Online-Marktplatz", "spotify": "ein Musikdienst",
-          "playstation": "eine Spielkonsole", "xbox": "eine Spielkonsole", "nintendo": "ein Spielehersteller", "iphone": "ein Smartphone",
-          "bmw": "ein Autobauer", "mercedes": "ein Autobauer", "audi": "ein Autobauer", "volkswagen": "ein Autobauer", "porsche": "ein Autobauer",
-          "aldi": "ein Discounter", "lidl": "ein Discounter", "rewe": "ein Supermarkt", "edeka": "ein Supermarkt", "starbucks": "eine Kaffeekette",
-          "nvidia": "ein Chip-Hersteller", "geforce": "eine neue Grafikkarte", "intel": "ein Chip-Hersteller", "amd": "ein Chip-Hersteller", "sega": "ein Spielehersteller",
-          "denny's": "ein Diner", "dennys": "ein Diner", "huawei": "ein Handy-Hersteller", "sony": "ein Elektronik-Riese",
-          "red bull": "ein Energydrink", "temu": "ein Online-Shop", "shein": "ein Online-Shop", "zalando": "ein Online-Shop", "twitch": "ein Streamingportal",
-          "marvel": "ein Superhelden-Comic", "pixar": "ein Trickfilmstudio",
-          "lego": "ein Bausteine-Hersteller", "star wars": "ein Weltraum-Film", "harry potter": "ein Zauberer-Film"}
+BRANDS = {"marvel": "ein Superhelden-Comic", "star wars": "ein Weltraum-Film", "harry potter": "ein Zauberer-Film"}   # Firmen- und Spielnamen werden genannt (Wunsch des Inhabers 18.11.2026); nur Film-/Figurenwelten bleiben draußen
 _BRAND_RE = re.compile(r"(?i)(?<![\wäöüß])(?:giganten wie |firmen wie |konzerne wie |unternehmen wie |wie )?(" + "|".join(re.escape(b) for b in sorted(BRANDS, key=len, reverse=True)) + r")(?:s)?(?![\wäöüß])")
 
 
 def strip_brands(js):
-    """Marken- und Firmennamen aus allem Gesprochenen und Eingeblendeten entfernen (allgemeine Umschreibung statt Name)."""
+    """Namen geschützter Film-/Figurenwelten aus allem Gesprochenen und Eingeblendeten entfernen (Firmen- und Spielnamen bleiben)."""
     hit = set()
 
     def conv(v):
@@ -401,7 +390,7 @@ def strip_brands(js):
         return conv(o) if isinstance(o, str) else o
     out = walk(js)
     if hit:
-        ai.log("Markennamen im Drehbuch umschrieben: " + ", ".join(sorted(hit)))
+        ai.log("Film-/Figurenwelten im Drehbuch umschrieben: " + ", ".join(sorted(hit)))
     return out
 
 
@@ -720,8 +709,8 @@ PERSON_TITLE_RE = (r"\b(?:könig|königin|king|queen|prinz|prinzessin|präsident
 
 
 def named_person(topic, names=None, trend_title=""):
-    """Dreht sich ein Trend-Thema um eine namentlich genannte echte Person, Firma oder Marke? Solche Themen baut der Kanal nicht
-    (keine echten Personen, keine Marken – und was über sie behauptet wird, lässt sich nicht prüfen). names: was die Text-KI selbst
+    """Dreht sich ein Trend-Thema um eine namentlich genannte echte Person oder ein kleines Einzelgeschäft? Solche Themen baut der Kanal nicht
+    (keine echten Personen – und was über sie behauptet wird, lässt sich nicht prüfen). names: was die Text-KI selbst
     als Namen im Thema meldet; dazu Titel + Name („König Charles“, „Präsident Müller“) im Thema."""
     import re
     t = str(topic or "")
@@ -759,13 +748,13 @@ def trend_topic(cat: dict):
             "WICHTIG: Das Thema muss wirklich zur Kategorie passen (z. B. Tierwelt = ein echtes Tier steht im Mittelpunkt; "
             "Grusel = eine Gruselgeschichte). Passt kein Trend sauber, antworte mit {\"index\": null} – lieber kein Trend als ein unpassender. "
             + _insight(cat).replace("\n", " ") + channel_hint().replace("\n", " ") +
-            "Marken, Filme, Serien und Apps dürfen nur der Anlass sein, nie das Thema selbst: mach daraus das allgemeine Thema "
-            "dahinter. Videospiele dürfen selbst das Thema sein (wahre Geschichten, Geheimnisse, Rekorde) und werden beim Namen genannt.\n"
+            "Filme und Serien dürfen nur der Anlass sein, nie das Thema selbst: mach daraus das allgemeine Thema "
+            "dahinter. Videospiele, Firmen, Marken und Apps dürfen selbst das Thema sein (wahre Geschichten, Geheimnisse, Rekorde) und werden beim Namen genannt.\n"
             "Diese Themen gab es schon:\n- " + ("\n- ".join(past) if past else "(noch keine)") + "\n"
-            "Kommt im Trend eine echte Person (auch Könige, Präsidenten, Stars), eine Firma, ein einzelnes Geschäft oder eine Marke vor, "
+            "Kommt im Trend eine echte Person (auch Könige, Präsidenten, Stars) oder ein einzelnes kleines Geschäft (Kiosk, Imbiss) vor, "
             "darf ihr Name im Thema NICHT stehen – geht das Thema ohne den Namen nicht, antworte mit {\"index\": null}.\n"
             'Antworte als JSON: {"index": Nummer des Trends, "topic": "konkretes Video-Thema auf Deutsch", "why": "kurz, warum es passt", '
-            '"names": [alle echten Personen, Firmen, Geschäfte und Marken, die im Thema namentlich vorkommen – Spielnamen gehören nicht dazu – sonst leer]} '
+            '"names": [alle echten Personen und kleinen Einzelgeschäfte, die im Thema namentlich vorkommen – Spiel-, Firmen- und Markennamen gehören nicht dazu – sonst leer]} '
             'oder {"index": null}, wenn keiner passt.')
     js, _ = ai.chat_json("Du bist Trend-Scout für einen deutschen Gen-Z-TikTok-Kanal und kennst die Internet-Kultur in den USA "
                           "und Deutschland. Sorgfältig bei Fakten. Antworte nur mit JSON.", user, 0.7)
@@ -835,7 +824,7 @@ Texte der Einblendungen und Grafiken ("labels"). Prüfe streng und verbessere NU
    Ein Satz, der in sich keinen Sinn ergibt oder sich selbst widerspricht, wird durch eine klare, richtige Aussage zum selben Punkt ersetzt.
 4. Einblendung oder Grafik passt nicht zum Satz (andere Zahl, anderes Thema, sinnloses Wort): korrigiere ihren Text.
 5. Es ist ein Video: Der Zuschauer schaut zu, er „liest“ nicht.
-Jeder verbesserte Satz bleibt etwa gleich lang (höchstens 20 % kürzer oder länger), im selben lockeren Ton, Zahlen ausgeschrieben, ohne Marken,
+Jeder verbesserte Satz bleibt etwa gleich lang (höchstens 20 % kürzer oder länger), im selben lockeren Ton, Zahlen ausgeschrieben, Firmen- und Spielnamen bleiben stehen,
 und passt weiter zu den Sätzen davor und danach. Gib NUR Änderungen zurück, als JSON:
 {"fixes": [{"i": 3, "why": "kurz", "text": "neuer Sprechertext", "labels": {"alter Text der Einblendung": "neuer Text"}}]}
 "text" und "labels" nur angeben, wenn sie sich ändern. Leere Liste, wenn alles stimmt.
@@ -854,7 +843,7 @@ Woche nicht schläfst?“ · bei Ich-Geschichten mitten hinein („Mein KI-Agent
 Er liest nicht den Titel wörtlich vor und beginnt nicht mit „Was wäre, wenn“, „Stell dir vor“, „Heute“, „In diesem Video“ oder „Wusstest du“.
 Satz 2: höchstens sechzehn Wörter, der Cliffhanger: ein offenes Versprechen, das erst das Ende einlöst („Und die letzte kann dir sogar das
 Leben retten.“) und das im Video wirklich vorkommt. Er passt nahtlos zu Satz 3.
-Gleicher Inhalt und gleiche Fakten wie vorher – nichts erfinden, keine Marken, echte Umlaute, Zahlen ausgeschrieben.
+Gleicher Inhalt und gleiche Fakten wie vorher – nichts erfinden, Firmen- und Spielnamen bleiben, echte Umlaute, Zahlen ausgeschrieben.
 Ist der Einstieg schon so, gib ihn unverändert zurück. Antworte nur mit JSON: {"s0": "…", "s1": "…"}"""
 WEAK_START = r"^(was wäre,? wenn|stell dir (mal )?vor|heute|in diesem video|wusstest du|hast du dich (schon mal|jemals) gefragt|hallo|hey leute)"
 
@@ -969,7 +958,7 @@ def loop_pass(js, topic):
 META = """Du bist Korrektor für ein deutsches Kurzvideo. Prüfe NUR Rechtschreibung und Wortwahl von Titel, Titelbild-Text und Suchbegriffen:
 verstümmelte, erfundene oder falsch geschriebene Wörter („Macks“ statt „Macken“, „körpersucken“ statt „körperzucken“), falsche Groß- und
 Kleinschreibung (Adjektive im Titel klein: „3 sinnlose Gehirn-Macken“), fehlende Umlaute. Aussage, Länge und Stil bleiben gleich; nichts
-hinzufügen, keine Marken, keine Emojis. Gib JSON zurück – nur die Felder, die sich ändern:
+hinzufügen, Firmen- und Spielnamen bleiben, keine Emojis. Gib JSON zurück – nur die Felder, die sich ändern:
 {"title": "…", "thumb": "…", "tags": {"falsch geschriebener begriff": "richtiger begriff"}}
 Leeres Objekt {}, wenn alles stimmt."""
 
@@ -1276,7 +1265,7 @@ def write_script(cat: dict, topic: str, trend=None, source=None) -> tuple[dict, 
     if source:                                       # Vorlage aus einem eingeschickten Video: in unserem Stil neu aufbauen
         ctx += ("VORLAGE – ein Video, das nachgebaut werden soll. Übernimm Idee, Ablauf, Tempo und Art der Witze, aber schreibe ALLES "
                 "in eigenen Worten neu (keinen Satz wörtlich), in unserem Stil und mit unseren Figuren und Orten. Keine Namen von Kanälen, "
-                "Personen, Marken oder Figuren aus der Vorlage. Stimmen Fakten der Vorlage nicht, korrigiere sie.\n"
+                "Personen oder Figuren aus der Vorlage (Firmen und Spiele darfst du nennen). Stimmen Fakten der Vorlage nicht, korrigiere sie.\n"
                 f"Gesprochener Text der Vorlage:\n{str(source.get('transcript') or '')[:3500]}\n"
                 + (f"Was im Bild passiert (Ablauf):\n{str(source.get('visuals') or '')[:2000]}\n" if source.get("visuals") else ""))
     user = (f"Kategorie: {cat['name']}\nStil: {cat['script_style']}\nThema: {topic}\n{ctx}"
@@ -1375,11 +1364,11 @@ def write_script(cat: dict, topic: str, trend=None, source=None) -> tuple[dict, 
         found = sorted({m.group(1) for sc_ in js.get("scenes", []) if isinstance(sc_, dict) for m in _BRAND_RE.finditer(str(sc_.get("text") or ""))}
                        | {m.group(1) for m in _BRAND_RE.finditer(str(js.get("title") or ""))})
         if found:                                        # sauber neu formulieren lassen; das Ersetzen unten ist nur das Sicherheitsnetz
-            ai.log("Drehbuch nennt Marken (" + ", ".join(found) + ") – lasse es ohne Markennamen neu formulieren")
+            ai.log("Drehbuch nennt Film-/Figurenwelten (" + ", ".join(found) + ") – lasse es ohne diese Namen neu formulieren")
             try:
                 n0 = sum(len(str(x.get("text", "")).split()) for x in js.get("scenes", []) if isinstance(x, dict))
-                js2, provider = ai.chat_json(SYSTEM, user + "\n\nACHTUNG: Dein letzter Entwurf nannte diese Marken-/Firmennamen: " + ", ".join(found)
-                                             + ". Schreibe das Drehbuch neu, gleich lang, OHNE jeden Marken-, Firmen-, Produkt- oder App-Namen – "
+                js2, provider = ai.chat_json(SYSTEM, user + "\n\nACHTUNG: Dein letzter Entwurf nannte diese geschützten Film-/Figurenwelten: " + ", ".join(found)
+                                             + ". Schreibe das Drehbuch neu, gleich lang, OHNE diese Namen (Firmen- und Spielnamen dürfen bleiben) – "
                                              "umschreibe sie allgemein und grammatisch sauber (auch in Titel, Beschreibung, Hashtags und Einblendungen).", 0.7)
                 n2 = sum(len(str(x.get("text", "")).split()) for x in js2.get("scenes", []) if isinstance(x, dict))
                 if n2 >= n0 * 0.85:
@@ -1387,7 +1376,7 @@ def write_script(cat: dict, topic: str, trend=None, source=None) -> tuple[dict, 
             except Exception as e:  # noqa: BLE001
                 ai.log(f"Neu formulieren nicht möglich ({e})")
         js = strip_brands(js)
-        for k in ("hashtags", "tags"):                  # Marken-Hashtags fliegen ganz raus
+        for k in ("hashtags", "tags"):                  # Hashtags zu Film-/Figurenwelten fliegen ganz raus
             if isinstance(js.get(k), list):
                 js[k] = [t for t in js[k] if isinstance(t, str) and not _BRAND_RE.search(t.replace("#", " "))]
     except Exception:  # noqa: BLE001

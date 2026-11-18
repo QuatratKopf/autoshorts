@@ -334,7 +334,15 @@ def synth_music(work: Path, slug: str):
 
 def pick_music(slug):
     """Eigene Musik der Video-Art (music/<art>/), sonst freie Musik passender Stimmung (music/stimmung/…), sonst music/."""
-    from .sound import MOOD_OF
+    from .sound import MOOD_OF, MUSIC
+    mood = MOOD_OF.get(slug, "hell")
+    md = MUSIC_DIR / "stimmung" / mood
+    if mood in MUSIC and not (md.is_dir() and any(p.suffix.lower() in (".mp3", ".m4a", ".wav", ".ogg") for p in md.iterdir())):
+        try:                                              # neue Stimmung ohne Stücke: einmal frei lizenzierte Musik holen
+            from .sound import fetch_mood
+            fetch_mood(mood)
+        except Exception as e:  # noqa: BLE001
+            log(f"Musik „{mood}“ nicht geladen ({str(e)[:100]})")
     for d in (MUSIC_DIR / slug, MUSIC_DIR / "stimmung" / MOOD_OF.get(slug, "hell"), MUSIC_DIR / "stimmung" / "hell", MUSIC_DIR):
         if d.is_dir():
             files = [p for p in d.iterdir() if p.suffix.lower() in (".mp3", ".m4a", ".wav", ".ogg")]

@@ -30,12 +30,13 @@ Repo: `QuatratKopf/autoshorts`, Branch `main`. Antworten und Berichte auf Deutsc
    - Einblendungen lesbar, nicht abgeschnitten, überdecken sich nicht und nicht die Untertitel; Zahlen stimmen mit dem Sprechertext überein.
    - Nicht dieselbe Einstellung mehrmals hintereinander; Szenenwechsel passen zum Satzwechsel.
    - Tag/Nacht, Wetter, innen/außen stimmen (keine Sonne im Zimmer, kein Feuer im Haus ohne Grund).
-   - Titel, Beschreibung und Hashtags handeln vom Thema des Videos; echte Umlaute; keine Marken, keine echten Personen.
+   - Titel, Beschreibung und Hashtags handeln vom Thema des Videos; echte Umlaute; keine echten Personen.
    - Geht es um Videospiele, werden die Spiele beim echten Namen genannt (Sprechertext, Titel, Beschreibung) – Wunsch des Inhabers
      (18.11.2026, nach „Drei geheime Orte in Videospielen“: „nächstes Mal bitte die Spielnamen mit erzählen“). Beim Neubau also NIE
      „Keine Spielenamen“ ins Thema schreiben, sondern die Namen vorgeben (z. B. „Adventure“, „Super Mario Bros.“, „Minecraft“).
-     Gezeichnet werden die Spiele weiterhin nicht (keine Spielfiguren, Logos oder nachgemalten Spielszenen). Firmen- und Personennamen
-     bleiben wie bisher draußen.
+     Gezeichnet werden die Spiele weiterhin nicht (keine Spielfiguren, Logos oder nachgemalten Spielszenen). Ebenso Firmen-, Marken- und
+     App-Namen: beim echten Namen nennen (Wunsch des Inhabers 18.11.2026: „Firmen Namen auch“), nur belegbare Fakten, nie ein Logo oder
+     Markenschriftzug im Bild. Personennamen bleiben wie bisher draußen.
    - Länge über 60 Sekunden; Untertitel laufen bis zum Schluss mit.
    - Fesselnd? Alle drei bis vier Sekunden ein neues Bild, Kamera springt auf das Schlüsselwort, keine zwei Szenen hintereinander mit
      demselben Aufbau, kein Satz ohne neuen Inhalt. Der Fortschrittsbalken oben läuft bis zum Ende durch.

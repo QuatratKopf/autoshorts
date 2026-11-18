@@ -281,7 +281,8 @@ def check_access(code=None, force=False):
         res = {"ok": False, "reason": "abgelaufen", "name": e.get("name", ""), "expires": e.get("expires")}
     else:
         res = {"ok": True, "id": e.get("id"), "name": e.get("name", ""), "expires": e.get("expires"),
-               "perms": {**(data.get("defaults") or {}), **(e.get("perms") or {})}}
+               "perms": {**(data.get("defaults") or {}), **(e.get("perms") or {})},
+               "cats": [str(x) for x in e.get("cats") or [] if isinstance(x, str)][:60]}
     if code == SET.get("access_code"):
         ACCESS.update(at=time.time(), res=res)
         if res["ok"]:
@@ -1382,9 +1383,16 @@ def set_secret(h):
         raise ValueError("Unbekannter Schlüssel")
     if not value:
         raise ValueError("Bitte einen Wert eintragen.")
-    pk = gh_json("GET", "/actions/secrets/public-key")
-    enc = base64.b64encode(sealed_box(value.encode(), base64.b64decode(pk["key"]))).decode()
-    gh_json("PUT", f"/actions/secrets/{name}", {"encrypted_value": enc, "key_id": pk["key_id"]})
+    try:
+        pk = gh_json("GET", "/actions/secrets/public-key")
+        enc = base64.b64encode(sealed_box(value.encode(), base64.b64decode(pk["key"]))).decode()
+        gh_json("PUT", f"/actions/secrets/{name}", {"encrypted_value": enc, "key_id": pk["key_id"]})
+    except ValueError as e:
+        if "verweigert" in str(e):   # häufigster Fall: Schlüssel darf Secrets nur lesen
+            raise ValueError("Der GitHub-Zugangsschlüssel darf keine Schlüssel speichern: bei „Secrets“ steht nur „Read-only“ (oder gar nichts). "
+                             "Auf github.com → Settings → Developer settings → Fine-grained tokens den Schlüssel öffnen, bei „Secrets“ "
+                             "„Read and write“ wählen, unten „Update“ – dann hier noch einmal speichern.") from None
+        raise
     if name in LOCAL_SECRET:   # wird hier für die Anmeldung bei YouTube/TikTok gebraucht
         SET.setdefault("client_secrets", {})[LOCAL_SECRET[name]] = value
         save_set()

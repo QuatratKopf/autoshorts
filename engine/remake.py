@@ -15,8 +15,8 @@ from .state import WORK, cfg, log, secret
 INBOX = "inbox"
 ANALYZE = """Du siehst Einzelbilder (in zeitlicher Reihenfolge) und den gesprochenen Text eines Kurzvideos.
 Beschreibe für einen Animations-Zeichner auf Deutsch, was passiert, damit ein ähnliches Video in eigenem Stil entstehen kann.
-Antworte nur mit JSON: {"topic": "Thema in einem kurzen Satz, ohne Namen von Personen, Kanälen oder Marken",
-"category": "eine von: comedy, fakten, storys, lustig, grusel, mysterien, tiere, whatif, vergleich, motivation",
+Antworte nur mit JSON: {"topic": "Thema in einem kurzen Satz, ohne Namen von Personen oder Kanälen (Firmen und Spiele dürfen genannt werden)",
+"category": "eine von: comedy, fakten, storys, lustig, grusel, mysterien, tiere, whatif, vergleich, motivation, liebe",
 "visuals": "Ablauf der Bilder als kurze Stichpunkte: Orte, Figuren (allgemein beschrieben), wiederkehrende Figuren aus Dingen oder Begriffen, Einblendungen, Witze im Bild",
 "tone": "Ton und Art des Humors in einem Satz"}"""
 

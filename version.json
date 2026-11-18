@@ -1,6 +1,6 @@
 {
-  "version": "1.15.3",
-  "file": "releases/AutoShorts-1.15.3.cmd",
-  "sha256": "c9330c8c2aedd2ae9f3c40798b7ac17a6b00f7725961a8b6053dc3c46881b259",
-  "notes": "Kanal-App: frische Kopie zeigt keine fremden Zahlen, sondern „Jetzt neu einrichten“; Gesamt-Aufrufe stimmen mit der Tagesgrafik überein"
+  "version": "1.16.0",
+  "file": "releases/AutoShorts-1.16.0.cmd",
+  "sha256": "43eb504c10f163005e2f1283826d1d5b71cf19fff5e548d988336cffdb2fbcec",
+  "notes": "Neue Video-Art „Liebe“; Admin: Video-Arten je Zugang freigeben; klare Meldungen bei fehlenden GitHub-Rechten und abgeschalteten Abläufen"
 }

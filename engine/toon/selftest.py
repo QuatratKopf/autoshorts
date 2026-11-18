@@ -96,7 +96,7 @@ def main():
     for w in ("rain", "storm", "snow", "cold", "wind", "ash", "quake", "heat", "dark", "steam", "unbekannt"):
         for pl in ("street", "forest", "office"):
             check(f"Wetter {w} in {pl}", lambda: frame({"place": pl, "weather": w, "time": "night" if w == "dark" else "day", "actors": [{"id": "du"}]}))
-    for m in ("panic", "tense", "scary", "sad", "happy", "calm", "unbekannt"):
+    for m in ("panic", "tense", "scary", "sad", "happy", "love", "calm", "unbekannt"):
         check(f"Stimmung {m}", lambda: frame({"place": "street", "mood": m, "crowd": "walk", "actors": []}))
         check(f"Einschub Stimmung {m}", lambda: frame({"place": "kitchen", "mood": m, "props": ["candle", "cans"], "shot": "insert", "actors": []}))
     for hat in ("", "cap", "helmet", "beanie", "bow", "crown", "unbekannt"):
@@ -1385,7 +1385,21 @@ def main():
         import json
         cats = {c["slug"]: c for c in json.loads((Path(__file__).resolve().parents[2] / "docs" / "data" / "config.json").read_text(encoding="utf-8"))["categories"]}
         assert cats["motivation"]["enabled"] and cats["motivation"]["caption_style"] == "word" and cats["vergleich"]["enabled"]
-    check("Motivation: Wort für Wort, Rubriken da", _word_caps)
+        assert cats["liebe"]["enabled"] and cats["liebe"]["own_voice"] and cats["liebe"]["gemini_voice"] == "Despina"
+        from .. import sound
+        assert sound.MOOD_OF["liebe"] == "romantisch" and sound.MUSIC["romantisch"]
+        sc_ = stage.direct([{"text": "Sie sahen sich an.", "place": "beach", "actors": [{"id": "lena"}], "mood": "calm"},
+                      {"text": "Dann ging er für immer.", "place": "station", "actors": [{"id": "lena"}], "mood": "sad"}], [(0, 2), (2, 4)], "Liebe", "liebe")
+        assert sc_[0]["mood"] == "love" and sc_[1]["mood"] == "sad", [s["mood"] for s in sc_]
+        from .. import fresh, state as st_
+        keep, sv = json.loads(json.dumps(st_.CONFIG)), fresh.save
+        fresh.save = lambda *a, **k: None
+        try:
+            fresh.sync_admin_settings(json.loads(json.dumps(keep)), {"rubriken": True}, ["liebe", "tiere"])
+            assert sorted(c["slug"] for c in st_.CONFIG["categories"] if c.get("enabled")) == ["liebe", "tiere"]
+        finally:
+            st_.CONFIG.clear(); st_.CONFIG.update(keep); fresh.save = sv
+    check("Motivation: Wort für Wort, Rubriken da (auch Liebe), freigegebene Rubriken je Zugang", _word_caps)
 
     def _adopt():                                                # Gelerntes aus Kopien: nur Neues, keine fremden Wörter, nur nach Bild-Prüfung
         import tempfile
