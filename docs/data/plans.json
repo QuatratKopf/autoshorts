@@ -1,721 +1,4 @@
 {
- "2026-11-17 21:00": {
-  "category": "tiere",
-  "topic": "Warum dieses winzige Tier gefährlicher ist als ein Löwe",
-  "trend": null,
-  "script": {
-   "title": "Dieses winzige Tier ist gefährlicher als ein Löwe",
-   "description": "Kennst du das winzige Tier, das extrem widerstandsfähig ist?\nEs überlebt im Vakuum des Weltalls und hält extreme Hitze aus.\nWürdest du es freiwillig in deinem Zimmer halten?",
-   "hashtags": [
-    "#shorts",
-    "#fyp",
-    "#viral",
-    "#tierfakten",
-    "#wissen",
-    "#biologie",
-    "#bärtierchen",
-    "#fakt"
-   ],
-   "tags": [
-    "bärtierchen",
-    "tierfakten",
-    "weltall",
-    "wissenschaft",
-    "tiere",
-    "gefährlich",
-    "unzerstörbar",
-    "biologie",
-    "mikroskopisch",
-    "tardigrade"
-   ],
-   "thumbnail": {
-    "place": "underwater",
-    "time": "day",
-    "actor": "du",
-    "action": "shocked",
-    "emotion": "shocked",
-    "props": [
-     "tardigrade"
-    ],
-    "weather": "",
-    "image": "Close-up of a tiny cute water bear under a glowing microscope lens, dark background, exaggerated shocked expression, bright blue and orange contrast",
-    "text": "GEFÄHRLICHER ALS LÖWEN"
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "grün",
-     "hat": "",
-     "hair": "short",
-     "gender": "w",
-     "hair_color": "braun",
-     "skin": "hell"
-    },
-    "tier": {
-     "kind": "tardigrade"
-    }
-   },
-   "scenes": [
-    {
-     "text": "Dieses winzige Tier ist tödlicher als ein ganzer Löwe.",
-     "image": "A small cute tardigrade standing proudly next to a massive cartoon lion in a laboratory setting",
-     "who": [
-      "tier"
-     ],
-     "place": "savannah",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "winzige Tier"
-     ],
-     "overlay": null,
-     "see": "Ein Löwe brüllt in der Savanne, daneben ein winziges Bärtierchen im Gras.",
-     "backdrop": {
-      "sky": "day",
-      "ground": "dry",
-      "elements": [
-       "grass"
-      ]
-     },
-     "time": "day",
-     "props": [
-      "tardigrade"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Das Bärtierchen ist gerade mal einen halben Millimeter groß.",
-     "image": "Microscopic view of a tiny water bear holding a small ruler showing zero point five millimeters",
-     "who": [
-      "tier"
-     ],
-     "place": "lab",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "halben Millimeter"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "0,5 MM"
-     },
-     "see": "Ein Bärtierchen unter dem Mikroskop im Labor.",
-     "time": "day",
-     "props": [
-      "tardigrade",
-      "mikroskop"
-     ],
-     "actors": [],
-     "shot": "insert",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Du kannst es mit bloßem Auge kaum sehen, doch es steckt voller Superkräfte.",
-     "image": "A person squinting through a large glass magnifying glass at a tiny moving dot on a desk",
-     "who": [
-      "du"
-     ],
-     "place": "park",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "Superkräfte"
-     ],
-     "overlay": null,
-     "see": "Eine Person versucht vergeblich, ein winziges Bärtierchen mit einer Lupe zu finden.",
-     "backdrop": {
-      "sky": "day",
-      "ground": "grass",
-      "elements": [
-       "trees"
-      ]
-     },
-     "time": "day",
-     "props": [
-      "tardigrade"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "think",
-       "emotion": "worried",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Wenn es brenzlig wird, rollt es sich ein und trocknet komplett aus.",
-     "image": "The tardigrade curling into a tight round ball and glowing slightly as water drops evaporate",
-     "who": [
-      "tier"
-     ],
-     "place": "forest",
-     "camera": "zoom_in",
-     "sfx": "tick",
-     "highlight": [
-      "trocknet komplett aus"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "TONNENSTADIUM"
-     },
-     "see": "Ein Bärtierchen rollt sich auf einem Moosblatt zusammen und trocknet aus.",
-     "backdrop": {
-      "sky": "day",
-      "ground": "soil",
-      "elements": [
-       "forest",
-       "trees"
-      ]
-     },
-     "time": "day",
-     "props": [
-      "tardigrade",
-      "salbeiblatt"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "In diesem sogenannten Tonnenzustand fährt es seinen Stoffwechsel auf null herunter.",
-     "image": "A tiny barrel-shaped organism resting peacefully inside a dry moss leaf under warm lab lights",
-     "who": [
-      "tier"
-     ],
-     "place": "lab",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Stoffwechsel"
-     ],
-     "overlay": null,
-     "see": "Das Bärtierchen als winzige Tonne im Labor.",
-     "time": "day",
-     "props": [
-      "tardigrade"
-     ],
-     "actors": [],
-     "shot": "insert",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Es braucht weder Wasser noch Sauerstoff und wartet einfach auf bessere Zeiten.",
-     "image": "A digital clock showing zero next to the dormant tiny animal while dust particles float",
-     "who": [
-      "tier"
-     ],
-     "place": "desert",
-     "camera": "pan_right",
-     "sfx": "none",
-     "highlight": [
-      "weder Wasser"
-     ],
-     "overlay": {
-      "type": "counter",
-      "label": "JAHRE OHNE WASSER",
-      "value": 30,
-      "unit": "JAHRE"
-     },
-     "see": "Ein Bärtierchen liegt regungslos auf trockenem Grund.",
-     "backdrop": {
-      "sky": "day",
-      "ground": "dry",
-      "elements": [
-       "cactus"
-      ]
-     },
-     "time": "day",
-     "props": [
-      "tardigrade"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Selbst kochendes Wasser von einhundert Grad Celsius übersteht es problemlos.",
-     "image": "The tiny water bear swimming happily inside a boiling glass beaker with rising steam bubbles",
-     "who": [
-      "tier"
-     ],
-     "place": "kitchen",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "einhundert Grad"
-     ],
-     "overlay": {
-      "type": "thermo",
-      "value": 100
-     },
-     "see": "Ein Bärtierchen in kochendem Wasser im Kessel.",
-     "time": "day",
-     "weather": "steam",
-     "props": [
-      "tardigrade",
-      "kessel"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Im tiefsten Frost bei minus zweihundert Grad schläft es seelenruhig weiter.",
-     "image": "The tardigrade sitting on a giant ice crystal wearing tiny blue earmuffs looking very cozy",
-     "who": [
-      "tier"
-     ],
-     "place": "snow",
-     "camera": "zoom_out",
-     "sfx": "ding",
-     "highlight": [
-      "minus zweihundert"
-     ],
-     "overlay": {
-      "type": "thermo",
-      "value": -200
-     },
-     "see": "Ein Bärtierchen im tiefsten Eis bei Minusgraden.",
-     "backdrop": {
-      "sky": "day",
-      "ground": "snow",
-      "elements": [
-       "glacier"
-      ]
-     },
-     "time": "day",
-     "weather": "cold",
-     "props": [
-      "tardigrade"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Nicht mal der enorme Druck am Grund des Ozeans kann diesem Winzling etwas anhaben.",
-     "image": "The tiny creature resting on the deep ocean floor under heavy cartoon water pressure waves",
-     "who": [
-      "tier"
-     ],
-     "place": "underwater",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "Druck"
-     ],
-     "overlay": null,
-     "see": "Ein Bärtierchen am finsteren Meeresgrund unter enormem Druck.",
-     "time": "night",
-     "props": [
-      "tardigrade"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Und als wäre das nicht genug, schickten Forscher es sogar ins eiskalte Weltall.",
-     "image": "A cartoon rocket launching into a starry night sky carrying a tiny glass vial with the animal",
-     "who": [
-      "tier"
-     ],
-     "place": "space",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "Weltall"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "RAUMFAHRT"
-     },
-     "see": "Eine Rakete fliegt ins Weltall, an Bord ein Bärtierchen.",
-     "backdrop": {
-      "sky": "night",
-      "ground": "rock",
-      "elements": []
-     },
-     "time": "night",
-     "props": [
-      "tardigrade",
-      "rocket"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Dort schwebte es tagelang im absoluten Vakuum voller tödlicher Sonnenstrahlung.",
-     "image": "The tiny water bear floating weightlessly in dark space with glowing cosmic rays around it",
-     "who": [
-      "tier"
-     ],
-     "place": "space",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Vakuum"
-     ],
-     "overlay": null,
-     "see": "Das Bärtierchen schwebt im absoluten Vakuum des Weltalls neben der Sonne.",
-     "backdrop": {
-      "sky": "night",
-      "ground": "rock",
-      "elements": []
-     },
-     "time": "night",
-     "props": [
-      "tardigrade",
-      "sun"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Die meisten Lebewesen wären sofort tot gewesen, doch das Bärtierchen?",
-     "image": "A person looking at a computer screen in total shock with wide open eyes and raised hands",
-     "who": [
-      "du"
-     ],
-     "place": "lab",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "sofort tot"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "ÜBERLEBT",
-      "color": "green"
-     },
-     "see": "Ein verblüffter Wissenschaftler schaut auf das Bärtierchen im All.",
-     "time": "day",
-     "props": [
-      "tardigrade"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "close",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Nach der Rückkehr gab man ihm einfach ein paar Tropfen Wasser auf den Körper.",
-     "image": "A small green pipette dropping a clear water droplet onto the tiny dried-up ball",
-     "who": [
-      "tier"
-     ],
-     "place": "lab",
-     "camera": "zoom_in",
-     "sfx": "pop",
-     "highlight": [
-      "Tropfen Wasser"
-     ],
-     "overlay": null,
-     "see": "Jemand tropft Wasser auf das ausgetrocknete Bärtierchen.",
-     "time": "day",
-     "props": [
-      "tardigrade",
-      "giesskanne"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "happy",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "insert",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Binnen weniger Minuten erwachte es zum Leben und krabbelte fröhlich davon.",
-     "image": "The revived water bear stretching its eight small legs and crawling away happily",
-     "who": [
-      "tier"
-     ],
-     "place": "lab",
-     "camera": "pan_right",
-     "sfx": "ding",
-     "highlight": [
-      "erwachte"
-     ],
-     "overlay": null,
-     "see": "Das Bärtierchen krabbelt munter davon.",
-     "time": "day",
-     "props": [
-      "tardigrade"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "happy",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Ein Löwe hätte im Weltall keine Chance, dieses winzige Tier überlebt es.",
-     "image": "A cartoon lion wearing a tiny space helmet looking very sad while floating away",
-     "who": [
-      "tier"
-     ],
-     "place": "space",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "dieses Tier nicht"
-     ],
-     "overlay": null,
-     "see": "Ein Löwe im Raumanzug schwebt hilflos im All, daneben das Bärtierchen.",
-     "backdrop": {
-      "sky": "night",
-      "ground": "rock",
-      "elements": []
-     },
-     "time": "night",
-     "props": [
-      "tardigrade"
-     ],
-     "actors": [],
-     "shot": "wide",
-     "mood": "panic",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Es schützt seine DNA mit speziellen Schildproteinen wie ein professioneller Tresor.",
-     "image": "A shiny metal vault door opening up to reveal glowing DNA strands protected inside",
-     "who": [
-      "tier"
-     ],
-     "place": "lab",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Schildproteinen"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "DNA SCHUTZ"
-     },
-     "see": "Ein Tresor schützt seine wertvolle DNA.",
-     "time": "day",
-     "props": [
-      "tardigrade",
-      "tresor"
-     ],
-     "actors": [],
-     "shot": "insert",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Strahlung bricht so die Erbsubstanz nicht auf und Mutationen werden sofort repariert.",
-     "image": "Glowing green light bouncing harmlessly off a tiny shield surrounding the microscopic creature",
-     "who": [
-      "tier"
-     ],
-     "place": "lab",
-     "camera": "pan_left",
-     "sfx": "tick",
-     "highlight": [
-      "repariert"
-     ],
-     "overlay": null,
-     "see": "Strahlung prallt am Schildprotein ab, die DNA bleibt heil.",
-     "time": "day",
-     "props": [
-      "tardigrade",
-      "laserstrahl"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Du findest diese heimlichen Herrscher der Erde in fast jeder feuchten Moosnische.",
-     "image": "A person gently touching a soft green patch of forest moss growing on an old stone wall",
-     "who": [
-      "du"
-     ],
-     "place": "forest",
-     "camera": "zoom_out",
-     "sfx": "none",
-     "highlight": [
-      "Moosnische"
-     ],
-     "overlay": null,
-     "see": "Ein Bärtierchen im feuchten Moos im Wald.",
-     "backdrop": {
-      "sky": "day",
-      "ground": "soil",
-      "elements": [
-       "forest",
-       "trees",
-       "flowers"
-      ]
-     },
-     "time": "day",
-     "props": [
-      "tardigrade"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "walk",
-       "emotion": "happy",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Ein Löwe ist groß und stark, aber dieses winzige Tier schlägt ihn locker.",
-     "image": "The tiny tardigrade standing victoriously on top of a tiny sleeping cartoon lion",
-     "who": [
-      "tier"
-     ],
-     "place": "savannah",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "winzige Tier"
-     ],
-     "overlay": null,
-     "see": "Ein stolzer Löwe steht im Gras, während das winzige Bärtierchen siegreich daneben sitzt.",
-     "backdrop": {
-      "sky": "day",
-      "ground": "dry",
-      "elements": [
-       "grass"
-      ]
-     },
-     "time": "day",
-     "props": [
-      "tardigrade"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "jump",
-       "emotion": "happy",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "happy",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [
-   "löwe",
-   "moos"
-  ],
-  "title": "Dieses winzige Tier ist gefährlicher als ein Löwe",
-  "created": 1794929214.5832634
- },
  "2026-11-18 13:00": {
   "category": "mysterien",
   "topic": "3 versteckte Orte in Videospielen, die fast kein Spieler je betreten hat",
@@ -2723,5 +2006,602 @@
   ],
   "title": "Weihnachten mit der Familie eskaliert komplett",
   "created": 1795017254.3738286
+ },
+ "2026-11-19 13:00": {
+  "category": "whatif",
+  "topic": "Was wäre, wenn man ein Wesen aus verschiedenen Tierarten erschafft?",
+  "trend": null,
+  "script": {
+   "title": "Was wäre, wenn du ein Super-Tier aus vier Arten baust?",
+   "description": "Was passiert, wenn du die krassesten Tier-Superkräfte in einem einzigen Wesen vereinst?\nWir bauen die ultimative Kreatur aus Adler, Gepard, Bärtierchen und Blauwal.\nWelche Superkraft würdest du zuerst ausprobieren?",
+   "hashtags": [
+    "#shorts",
+    "#tiere",
+    "#wissenschaft",
+    "#whatif",
+    "#superkräfte",
+    "#fakte",
+    "#fyp"
+   ],
+   "tags": [
+    "tierfakten",
+    "superkräfte",
+    "bärtierchen",
+    "gepard",
+    "biologie",
+    "evolution",
+    "was wäre wenn",
+    "tiere"
+   ],
+   "thumbnail": {
+    "place": "lab",
+    "time": "day",
+    "actor": "du",
+    "action": "shocked",
+    "emotion": "shocked",
+    "props": [
+     "herz"
+    ],
+    "weather": "",
+    "image": "Close-up of a chimeric super creature with eagle wings and cheetah spots, looking surprised, bright colors, empty space in upper third",
+    "text": "DAS ULTIMATIVE TIER"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "grün",
+     "hat": "",
+     "hair": "curly",
+     "gender": "w",
+     "hair_color": "braun",
+     "skin": "mittel"
+    }
+   },
+   "scenes": [
+    {
+     "text": "Baue das perfekte Super-Tier aus vier verschiedenen Arten im Labor.",
+     "image": "Lab setting with a glowing container holding a hybrid creature",
+     "who": [
+      "du"
+     ],
+     "place": "lab",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "Super-Tier"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "VIER TIERE"
+     },
+     "see": "Du stehst im Labor und baust ein Monster aus verschiedenen Tieren",
+     "time": "day",
+     "props": [
+      "mikroskop"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "idea",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "Modern science laboratory with glowing screens and test tubes",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Für den ultimativen Sprint nehmen wir die pure Muskelkraft eines Gepards",
+     "image": "Cheetah running across the savanna at high speed",
+     "who": [],
+     "place": "savannah",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "Gepards"
+     ],
+     "overlay": null,
+     "see": "Ein Gepard rennt schnell über die Savanne",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "event",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Das Wesen rennt hundertzwanzig Kilometer pro Stunde und lässt jedes Auto hinter sich",
+     "image": "Fast running creature kicking up dust clouds",
+     "who": [],
+     "place": "street",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "hundertzwanzig"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "120 KM/H"
+     },
+     "see": "Ein Auto rast mit hoher Geschwindigkeit über die Straße",
+     "time": "day",
+     "props": [
+      "car",
+      "speedometer"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Aber reine Schnelligkeit reicht nicht, wenn der Feind aus der Luft angreift",
+     "image": "Eagle soaring high in the bright blue sky",
+     "who": [],
+     "place": "park",
+     "camera": "pan_up",
+     "sfx": "none",
+     "highlight": [
+      "Luft"
+     ],
+     "overlay": null,
+     "see": "Du schaust ängstlich nach oben in den Himmel",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "cower",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Deshalb bekommt unser Monster die Augen eines Adlers mit achtfacher Sehkraft",
+     "image": "Close-up of an eagle eye scanning the landscape",
+     "who": [],
+     "place": "mountain",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Adlers"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "ACHTFACH"
+     },
+     "see": "Ein Adler fliegt hoch am Himmel",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "event",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Es entdeckt eine kleine Maus aus mehrerenhundert Metern Höhe ganz ohne Problem",
+     "image": "View from high above looking down at tiny ground details",
+     "who": [],
+     "place": "fields",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "dreitausend"
+     ],
+     "overlay": null,
+     "see": "Eine kleine Maus sitzt im Gras",
+     "time": "day",
+     "props": [
+      "maus"
+     ],
+     "actors": [],
+     "shot": "insert",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Doch was passiert bei eisiger Kälte oder im kochenden heißen Wasser",
+     "image": "Extreme temperature change with ice turning into steam",
+     "who": [],
+     "place": "snow",
+     "camera": "shake",
+     "sfx": "whoosh",
+     "highlight": [
+      "Kälte"
+     ],
+     "overlay": null,
+     "see": "Eisige Kälte und Frost breiten sich aus",
+     "time": "day",
+     "weather": "cold",
+     "props": [
+      "ice"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Hier hilft die DNA vom Bärtierchen, dem härtesten Überlebenskünstler auf der Erde",
+     "image": "Microscopic tardigrade curling into a dry tun state",
+     "who": [],
+     "place": "forest",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "Bärtierchen"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "UNZERSTÖRBAR"
+     },
+     "see": "Ein Bärtierchen liegt winzig im Moos",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "insert",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Es übersteht minus zweihundert Grad und sogar die tödliche Strahlung im Weltall",
+     "image": "Creature floating safely in the cold dark space",
+     "who": [],
+     "place": "space",
+     "camera": "float",
+     "sfx": "none",
+     "highlight": [
+      "minus zweihundert"
+     ],
+     "overlay": {
+      "type": "thermo",
+      "value": -200
+     },
+     "see": "Eis und kosmische Strahlung im kalten Weltall",
+     "time": "night",
+     "props": [
+      "sun"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Bleibt die Frage nach der Masse, denn ein echter Riese braucht enorm viel Energie",
+     "image": "Massive blue whale breaching the ocean surface",
+     "who": [],
+     "place": "lab",
+     "camera": "zoom_out",
+     "sfx": "boom",
+     "highlight": [
+      "Riese"
+     ],
+     "overlay": null,
+     "see": "Du denkst nach und hältst dir den Kopf",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "Modern science laboratory with glowing screens and test tubes",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Als vierte Zutat pflanzen wir das Herz eines Blauwals in die Brust",
+     "image": "Large blue whale heart pulsing with blue light",
+     "who": [],
+     "place": "lab",
+     "camera": "zoom_in",
+     "sfx": "thump",
+     "highlight": [
+      "Blauwals"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "180 KG"
+     },
+     "see": "Ein riesiges Walherz liegt im Labor",
+     "time": "day",
+     "props": [
+      "herz"
+     ],
+     "actors": [],
+     "shot": "insert",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "Modern science laboratory with glowing screens and test tubes",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Dieses Herz ist so schwer wie ein ausgewachsener Kleinwagen und pumpt Liter",
+     "image": "Car compared next to a giant pulsing heart graphic",
+     "who": [],
+     "place": "lab",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Kleinwagen"
+     ],
+     "overlay": null,
+     "see": "Ein schweres Walherz pumpt Blut",
+     "time": "day",
+     "props": [
+      "herz",
+      "scale"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "Modern science laboratory with glowing screens and test tubes",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Das Biest wiegt jetzt zweihundert Tonnen und hat die Größe eines Hauses",
+     "image": "Massive hybrid creature towering over city buildings",
+     "who": [],
+     "place": "street",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "zweihundert Tonnen"
+     ],
+     "overlay": {
+      "type": "counter",
+      "label": "GEWICHT",
+      "value": 200,
+      "unit": "TONNEN"
+     },
+     "see": "Ein riesiges Monster in der Größe eines Hauses steht da",
+     "time": "day",
+     "props": [
+      "house"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "tense",
+     "crowd": "watch",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Du denkst, dieses Monster wird sofort die Weltherrschaft an sich reißen",
+     "image": "Du looking worried at a giant shadow on the wall",
+     "who": [
+      "du"
+     ],
+     "place": "street",
+     "camera": "zoom_in",
+     "action": "worried",
+     "sfx": "tick",
+     "highlight": [
+      "Weltherrschaft"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "IRRTUM",
+      "color": "red"
+     },
+     "see": "Du schaust erschrocken zu dem großen Monster auf",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Falsch, denn die Biologie hat einen winzigen Haken an der ganzen Sache",
+     "image": "Lab computer screen flashing red error warnings",
+     "who": [],
+     "place": "lab",
+     "camera": "shake",
+     "sfx": "pop",
+     "highlight": [
+      "Biologie"
+     ],
+     "overlay": null,
+     "see": "Du schüttelst den Kopf",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "idle",
+       "emotion": "worried",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "Modern science laboratory with glowing screens and test tubes",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Das Gehirn vom Gepard und die Lunge vom Wal passen niemals zusammen",
+     "image": "Diagram showing mismatched animal body parts crossing out",
+     "who": [],
+     "place": "lab",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Gehirn"
+     ],
+     "overlay": null,
+     "see": "Gehirn und Lunge passen nicht zusammen",
+     "time": "day",
+     "props": [
+      "synapse"
+     ],
+     "actors": [],
+     "shot": "insert",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "Modern science laboratory with glowing screens and test tubes",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Innerhalb von drei Sekunden bricht der gesamte Stoffwechsel komplett in sich zusammen",
+     "image": "Glowing digital creature glitching and fading away",
+     "who": [],
+     "place": "lab",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "drei Sekunden"
+     ],
+     "overlay": {
+      "type": "timer",
+      "value": "00:03"
+     },
+     "see": "Ein Timer läuft schnell ab",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": "Modern science laboratory with glowing screens and test tubes",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Übrig bleibt nur ein kleiner Haufen aus verwirrten Zellen auf dem Tisch",
+     "image": "Small glowing cell cluster sitting quietly on a steel table",
+     "who": [],
+     "place": "lab",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Zellen"
+     ],
+     "overlay": null,
+     "see": "Ein Haufen Zellen liegt auf dem Tisch",
+     "time": "day",
+     "props": [
+      "table"
+     ],
+     "actors": [],
+     "shot": "insert",
+     "mood": "sad",
+     "who_desc": "",
+     "place_desc": "Modern science laboratory with glowing screens and test tubes",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Deshalb lässt Mutter Natur ihre Tiere lieber so, wie sie perfekt funktionieren",
+     "image": "Various normal animals walking together peacefully in nature",
+     "who": [],
+     "place": "lab",
+     "camera": "pan_left",
+     "sfx": "ding",
+     "highlight": [
+      "Mutter Natur"
+     ],
+     "overlay": null,
+     "see": "Du lächelst zufrieden im Labor",
+     "time": "day",
+     "props": [
+      "mikroskop"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "idle",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "Modern science laboratory with glowing screens and test tubes",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "blauwal"
+  ],
+  "title": "Was wäre, wenn du ein Super-Tier aus vier Arten baust?",
+  "created": 1795026276.6550267
  }
 }
