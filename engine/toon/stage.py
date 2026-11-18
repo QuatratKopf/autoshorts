@@ -436,7 +436,7 @@ def _on_table(key):
     """Auch kleine gelernte Gegenstände (Tasse, Router, Mikroskop …) stehen drinnen auf dem Tisch statt auf dem Boden."""
     return key in ON_TABLE or (key.startswith("lib_") and extras.SIZES.get(key, (9,))[0] <= 0.5)
 PLACE_HAS = {"kitchen": ("fridge", "table"), "office": ("computer", "table"), "supermarket": ("shelf",), "supermarket_empty": ("shelf",),
-             "livingroom": ("tv",), "forest": ("tree",), "park": ("tree",), "camp": ("tent", "fire"), "street": ("streetlamp", "house"),
+             "livingroom": ("tv", "lib_sofa", "sofa", "couch"), "forest": ("tree",), "park": ("tree",), "camp": ("tent", "fire"), "street": ("streetlamp", "house"),
              "village": ("house",), "restaurant": ("table",), "diningroom": ("table", "chair", "candle", "lib_stuhl"), "hallway": (), "serverroom": ("computer", "shelf"),
              "headquarters": ("house", "streetlamp"), "cinema": ("tv",)}
 
@@ -2296,6 +2296,10 @@ def _last_look(scenes, topic=""):
             items = [str(it[0] if isinstance(it, (list, tuple)) and it else it) for it in (ov.get("items") or [])]
             if items and not any(_stems(it) & near for it in items):
                 sc["overlay"], ov, ov_t = None, None, ""
+        if ov_t == "choice":                              # Auswahl nur an einer einzelnen Frage oder einem „oder“ – nicht zehn Sekunden „NACHSCHLAG KOMMT / VIERTER TYP“ über drei Schlusssätzen (Video 150)
+            txt_c = str(sc.get("text") or "").strip()
+            if not re.search(r"\boder\b", txt_c.lower()) and len([x for x in re.split(r"(?<=[.!?])\s+", txt_c) if x.strip()]) > 1:
+                sc["overlay"], ov, ov_t = None, None, ""
         if ov_t == "tag":
             words = _stems(ov.get("text"))
             if words and not (words & (near | _stems(topic))):
@@ -3574,10 +3578,9 @@ def _feast_story(scenes, topic=""):
                            str(q.get("type") if isinstance(q, dict) else q).lower()) not in ("table", "chair", "candle", "lib_stuhl", "stuhl", "lib_gans", "gans")]
             sc["_no_insert"] = True                        # das Essen steht auf dem Tisch: kein Schnitt auf einen einzelnen Kloß vor leerem Grund
     inside = [sc for sc in sc_l if sc.get("shot") != "graphic" and not isinstance(backdrop(sc), dict) and places.resolve(backdrop(sc)) in ("livingroom", "diningroom", "kitchen", "hallway")]
-    if inside and not _re.search(NIGHT_RE, all_t):         # ein Fest, eine Tageszeit: wie die erste Szene (in Video 148 wurde es nach der Hälfte grundlos Nacht)
-        first = "night" if str(inside[0].get("time") or "") == "night" else "day"
-        for sc in inside:
-            sc["time"] = first
+    if inside and not _re.search(r"stromausfall|kerzenschein|im dunkeln|\bdunkel\b|finster|licht (?:geht |ist )?aus|mitten in der nacht|mitternacht", all_t):
+        for sc in inside:                                  # ein Fest, ein Licht: das Festzimmer ist hell erleuchtet – „Heiligabend“ als Nacht legte das ganze Video ins düstere Halbdunkel (Video 150), in Video 148 wurde es nach der Hälfte grundlos Nacht
+            sc["time"] = "day"
 
 
 def _relatives(scenes):
@@ -3594,6 +3597,11 @@ def _relatives(scenes):
         if not isinstance(backdrop(sc), dict) and places.resolve(backdrop(sc)) in MAPS + ("space", "underwater", "cave", "highsky"):
             continue
         acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        if any(_re.search(pat, low) for pat, _k, _l in RELATIVES):
+            sc["_no_insert"] = True                        # der Satz handelt von der Person: kein Schnitt auf ein Ding allein
+            if sc.get("shot") == "insert" and any(not a.get("kind") for a in acts):
+                sc["shot"] = ""                            # „Der Onkel sitzt auf dem Sofa und erzählt“: sechs Sekunden ein Sofa vor leerem Grund (Video 150)
+                sc["props"] = [q for q in (sc.get("props") or []) if not _re.search(r"sofa|couch|sessel", str(q.get("type") if isinstance(q, dict) else q).lower())]
         found = sorted(((m.start(), key, look) for pat, key, look in RELATIVES for m in [_re.search(pat, low)] if m), key=lambda x: x[0])[:2]
         found = [(pos, key, look) for pos, key, look in found if not any(key in str(a.get("id") or "").lower() for a in acts)]
         if not found or any(a.get("kind") for a in acts):  # Tier-Szenen bleiben, wie sie sind („die Mutter säugt ihre Jungen“)

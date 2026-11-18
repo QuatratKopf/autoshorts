@@ -461,3 +461,7 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Kartoffelsalat vorn“, „noch vor der Gans“) – Hauptfigur am Esstisch, keine lebende Gans daneben; am Esstisch und in Szenen mit Verwandten kein Schnitt auf
   ein einzelnes Ding (`_no_insert` – drei Sekunden ein Kloß vor leerem Grund). Gruppen-Füllfiguren (`_team…`) werden zu den Verwandten des Videos.
   `writer.hook_drops`: Kündigt Satz 2 den ersten Listenpunkt an („Nummer eins, …“) und steht das sonst nirgends, bleibt er beim Schärfen des Einstiegs.
+  Nach dem 2. Neubau (Video 150): Das Festzimmer ist hell erleuchtet – „Heiligabend“ als Nacht legte das ganze Video ins Halbdunkel (nur Stromausfall,
+  Kerzenschein, Dunkelheit im Text lassen es dunkel). Nennt der Satz einen Verwandten, gibt es keinen Einschub auf ein Ding („Der Onkel sitzt auf dem Sofa“
+  zeigte sechs Sekunden ein Sofa vor leerem Grund); ein Sofa als Requisite im Wohnzimmer entfällt (`PLACE_HAS`). `_last_look`: Auswahl-Einblendung über
+  mehreren Sätzen ohne „oder“ entfällt („NACHSCHLAG KOMMT / VIERTER TYP“ zehn Sekunden über dem Schluss).

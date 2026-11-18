@@ -605,6 +605,15 @@ def main():
         assert scs[3]["place"] == "diningroom" and "tire" not in kn(3), f"Kartoffelsalat am Tisch, kein Reifen: {scs[3]['place']} {kn(3)}"
         assert scs[4]["place"] == "livingroom" and "tree" not in kn(4), f"Baum im Wohnzimmer: {scs[4]['place']} {kn(4)}"
         assert {sc.get("time") for sc in scs} == {"day"}, "eine Tageszeit für das ganze Fest"
+        s5 = stage.direct([{"text": "Nummer zwei, der Onkel.", "place": "livingroom", "time": "night", "actors": [{"id": "onkel", "action": "sit"}]},
+                           {"text": "Der Onkel sitzt auf dem Sofa am Weihnachtsbaum und erzählt dieselbe Geschichte.", "place": "livingroom", "time": "night", "shot": "insert",
+                            "props": ["lib_sofa"], "actors": [{"id": "onkel", "action": "talk"}]},
+                           {"text": "Schaust du das am Familientisch? Dann bist du Nummer vier. Wer sitzt bei euch am Tisch?", "place": "diningroom", "time": "night",
+                            "actors": [{"id": "du", "action": "shocked"}], "overlay": {"type": "choice", "a": "NACHSCHLAG KOMMT", "b": "VIERTER TYP"}}],
+                          [(0, 3.5), (3.5, 7), (7, 12)], "Vier Typen an Weihnachten am Familientisch", "comedy", "")
+        assert s5[1]["shot"] == "" and not s5[1]["props"], f"Onkel auf dem Sofa ist kein Sofa allein: {s5[1]['shot']} {s5[1]['props']}"
+        assert s5[2].get("overlay") is None, "Auswahl über drei Schlusssätzen entfällt"
+        assert {sc.get("time") for sc in s5} == {"day"}, "Festzimmer hell erleuchtet"
         for sc in scs:
             frame(sc, {"du": {"shirt": "grün"}})
         assert places.resolve("esszimmer") == "diningroom"
