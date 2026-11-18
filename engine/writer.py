@@ -72,6 +72,10 @@ Regeln für die Sprechertexte:
 - Keine Videos über einzelne echte Personen (auch keine Promis): nimm das allgemeine Thema dahinter.
 - Nenne im Sprechertext, in Titel, Beschreibung und Einblendungen KEINE Marken-, Firmen-, Produkt- oder App-Namen, auch nicht als
   Beispiel. Umschreibe sie allgemein („ein großer Online-Händler“, „ein Videoportal“, „ein bekannter Autobauer“, „ein Chatbot“).
+- AUSNAHME Spielnamen: Geht es um Videospiele, nenne jedes Spiel beim echten Namen (z. B. „Minecraft“, „Super Mario Bros.“, „Tetris“,
+  „Adventure“) – im Sprechertext, im Titel und in der Beschreibung, gern gleich beim ersten Erwähnen. Die Zuschauer wollen wissen, welches
+  Spiel gemeint ist; „ein Blockspiel“ oder „ein Hüpfspiel“ statt des Namens ist zu vage. Gezeichnet werden die Spiele trotzdem nie:
+  keine Spielfiguren, keine Logos, keine Spielszenen nachgemalt – zeige eigene Figuren, einen Bildschirm, eine Spielkonsole oder das Geschehen.
 - Schreibe immer echte Umlaute und ß (ä, ö, ü, ß) – niemals ae, oe, ue oder ss als Ersatz, auch nicht in GROSSBUCHSTABEN.
 - ALLES auf Deutsch: Sprechertext, Titel, Beschreibung, Titelbild-Text, Orts-/Zeitangaben und jeder Text in Einblendungen
   (Karten, Notizen, Listen, Handy, Balken, A/B-Frage). Keine englischen Wörter oder Gaming-Begriffe wie "Inventory", "Level",
@@ -80,8 +84,10 @@ Regeln für die Sprechertexte:
 - Sprechertext zum Vorlesen schreiben: Zahlen und Einheiten ausschreiben ("dreißigtausend Grad", "zwanzig Prozent"),
   keine Abkürzungen, Klammern, Emojis oder Sonderzeichen; kurze, klare Sätze. In Einblendungen dürfen Ziffern stehen.
 - Keine Beleidigungen, nichts Anzügliches, keine echten Privatpersonen, keine Marken- oder Filmfiguren im Bild.
-- Baue Themen nie um urheberrechtlich geschützte Figuren, Filme, Serien, Spiele oder Marken (z. B. Godzilla, Pokémon,
-  Marvel, Disney, Minecraft). Nimm stattdessen eigene, namenlose Wesen oder echte Natur/Wissenschaft (z. B. 'ein 100 Meter großes Monster').
+- Baue Themen nie um urheberrechtlich geschützte Figuren, Filme, Serien oder Marken (z. B. Godzilla, Pokémon-Figuren,
+  Marvel, Disney) und erzähle deren Geschichten nicht nach. Nimm stattdessen eigene, namenlose Wesen oder echte Natur/Wissenschaft
+  (z. B. 'ein 100 Meter großes Monster'). Wahre Geschichten ÜBER Videospiele (Geheimnisse, Rekorde, Fehler, Entstehung) sind erlaubt –
+  mit Spielnamen, aber ohne deren Figuren im Bild.
 HUMOR – jedes Video ist auch unterhaltsam (in Comedy und Lustigem stark, in Grusel und ernsten Storys nur ein Augenzwinkern):
 - Mindestens zwei Lacher pro Video: trockene Untertreibung („Das war … suboptimal.“), Übertreibung mit Zahl („achtundvierzig Tabs“),
   ein Running Gag, der zweimal wiederkommt und beim dritten Mal kippt, oder eine Figur/ein Ding, das plötzlich Gefühle hat.
@@ -364,9 +370,9 @@ BRANDS = {"amazon": "ein großer Online-Händler", "google": "eine Suchmaschine"
           "bmw": "ein Autobauer", "mercedes": "ein Autobauer", "audi": "ein Autobauer", "volkswagen": "ein Autobauer", "porsche": "ein Autobauer",
           "aldi": "ein Discounter", "lidl": "ein Discounter", "rewe": "ein Supermarkt", "edeka": "ein Supermarkt", "starbucks": "eine Kaffeekette",
           "nvidia": "ein Chip-Hersteller", "geforce": "eine neue Grafikkarte", "intel": "ein Chip-Hersteller", "amd": "ein Chip-Hersteller", "sega": "ein Spielehersteller",
-          "denny's": "ein Diner", "dennys": "ein Diner", "fortnite": "ein Videospiel", "minecraft": "ein Videospiel", "huawei": "ein Handy-Hersteller", "sony": "ein Elektronik-Riese",
+          "denny's": "ein Diner", "dennys": "ein Diner", "huawei": "ein Handy-Hersteller", "sony": "ein Elektronik-Riese",
           "red bull": "ein Energydrink", "temu": "ein Online-Shop", "shein": "ein Online-Shop", "zalando": "ein Online-Shop", "twitch": "ein Streamingportal",
-          "marvel": "ein Superhelden-Comic", "pixar": "ein Trickfilmstudio", "pokémon": "ein Sammelspiel", "pokemon": "ein Sammelspiel",
+          "marvel": "ein Superhelden-Comic", "pixar": "ein Trickfilmstudio",
           "lego": "ein Bausteine-Hersteller", "star wars": "ein Weltraum-Film", "harry potter": "ein Zauberer-Film"}
 _BRAND_RE = re.compile(r"(?i)(?<![\wäöüß])(?:giganten wie |firmen wie |konzerne wie |unternehmen wie |wie )?(" + "|".join(re.escape(b) for b in sorted(BRANDS, key=len, reverse=True)) + r")(?:s)?(?![\wäöüß])")
 
@@ -753,13 +759,13 @@ def trend_topic(cat: dict):
             "WICHTIG: Das Thema muss wirklich zur Kategorie passen (z. B. Tierwelt = ein echtes Tier steht im Mittelpunkt; "
             "Grusel = eine Gruselgeschichte). Passt kein Trend sauber, antworte mit {\"index\": null} – lieber kein Trend als ein unpassender. "
             + _insight(cat).replace("\n", " ") + channel_hint().replace("\n", " ") +
-            "Marken, Spiele, Filme, Serien und Apps dürfen nur der Anlass sein, nie das Thema selbst: mach daraus das allgemeine Thema "
-            "dahinter (statt eines Spiels z. B. 'Warum wir Nostalgie lieben').\n"
+            "Marken, Filme, Serien und Apps dürfen nur der Anlass sein, nie das Thema selbst: mach daraus das allgemeine Thema "
+            "dahinter. Videospiele dürfen selbst das Thema sein (wahre Geschichten, Geheimnisse, Rekorde) und werden beim Namen genannt.\n"
             "Diese Themen gab es schon:\n- " + ("\n- ".join(past) if past else "(noch keine)") + "\n"
             "Kommt im Trend eine echte Person (auch Könige, Präsidenten, Stars), eine Firma, ein einzelnes Geschäft oder eine Marke vor, "
             "darf ihr Name im Thema NICHT stehen – geht das Thema ohne den Namen nicht, antworte mit {\"index\": null}.\n"
             'Antworte als JSON: {"index": Nummer des Trends, "topic": "konkretes Video-Thema auf Deutsch", "why": "kurz, warum es passt", '
-            '"names": [alle echten Personen, Firmen, Geschäfte und Marken, die im Thema namentlich vorkommen – sonst leer]} '
+            '"names": [alle echten Personen, Firmen, Geschäfte und Marken, die im Thema namentlich vorkommen – Spielnamen gehören nicht dazu – sonst leer]} '
             'oder {"index": null}, wenn keiner passt.')
     js, _ = ai.chat_json("Du bist Trend-Scout für einen deutschen Gen-Z-TikTok-Kanal und kennst die Internet-Kultur in den USA "
                           "und Deutschland. Sorgfältig bei Fakten. Antworte nur mit JSON.", user, 0.7)

@@ -576,12 +576,12 @@ function dayMap() {   // Zuwachs je Tag: {day: {yt, tt, likes, comments, shares,
   const m = {};
   const g = d => m[d] || (m[d] = {yt: 0, tt: 0, likes: 0, comments: 0, shares: 0, vids: {}});
   for (const id in (STATS.v || {})) for (const p in STATS.v[id]) {
-    let pv = 0, pl = 0, pc = 0, ps = 0;
+    let pv = 0, pl = 0, pc = 0, ps = 0;   // bisheriger Höchststand: schwankt eine Zahl kurz nach unten, zählt der Wiederanstieg nicht doppelt
     for (const r of STATS.v[id][p]) {
       const x = g(r[0]), dv = Math.max(0, r[1] - pv), dl = Math.max(0, r[2] - pl);
       x[p === "youtube" ? "yt" : "tt"] += dv; x.likes += dl; x.comments += Math.max(0, r[3] - pc); x.shares += Math.max(0, r[4] - ps);
       const vv = x.vids[id] || (x.vids[id] = {views: 0, likes: 0}); vv.views += dv; vv.likes += dl;
-      pv = r[1]; pl = r[2]; pc = r[3]; ps = r[4];
+      pv = Math.max(pv, r[1]); pl = Math.max(pl, r[2]); pc = Math.max(pc, r[3]); ps = Math.max(ps, r[4]);
     }
   }
   for (const p in (STATS.ch || {})) { let prev = null; for (const r of STATS.ch[p]) { if (prev !== null) g(r[0])["f_" + p] = r[1] - prev; prev = r[1]; } }
@@ -684,6 +684,20 @@ function render(animate) {
     if ($("#leRelogin")) $("#leRelogin").onclick = async () => { await api("/api/github/logout", {}); S = await api("/api/state"); LOADERR = ""; $("#app").innerHTML = ""; renderSetup(); };
     return; }
   DAYS = null;
+  if (LITE() && !S_("channel_seed") && TAB !== "einstellungen") {   // frische Kopie: noch Daten des Originals drin – erst neu einrichten
+    const name = `${S.owner}/${S.repo}`;
+    $("#main").innerHTML = `<section class="panel in" style="max-width:640px;margin:20px auto;text-align:center">
+      <h2>Fast geschafft: Kopie neu einrichten</h2>
+      <p class="hint" style="font-size:14px;margin:10px 0 16px">Deine Kopie <b>${esc(name)}</b> enthält noch die Videos, Zahlen und Kanal-Namen des Originals – deshalb siehst du hier fremde Zahlen. Mit „Neu einrichten“ wird alles davon aus deiner Kopie gelöscht, und dein Kanal startet bei null. Danach Gemini-Schlüssel eintragen und YouTube/TikTok verbinden.</p>
+      <button class="btn primary" id="freshNow" style="padding:12px 22px">Jetzt neu einrichten</button>
+      <p class="hint" style="margin-top:10px">Dauert etwa 2 Minuten auf GitHub.</p></section>`;
+    $("#freshNow").onclick = async () => {
+      const typed = prompt(`Zum Bestätigen den Namen deiner Kopie eintippen:\n${name}`);
+      if ((typed || "").trim().toLowerCase() !== name.toLowerCase()) return toast("Abgebrochen – der Name stimmte nicht.", true);
+      if (await dispatch({action: "reset", topic: name}, "Kanal wird neu eingerichtet")) toast("Läuft – in etwa 2 Minuten ist deine Kopie leer.");
+    };
+    syncAccessId(); return;
+  }
   ({dashboard: viewDash, kalender: viewCal, studio: viewStudio, einstellungen: viewSettings, admin: viewAdmin})[TAB]();
   syncAccessId();
   if (!animate) document.querySelectorAll("#main .in").forEach(e => e.style.animation = "none");
@@ -999,8 +1013,9 @@ function liveTotals() {
   const yt = LIVE?.youtube, tt = LIVE?.tiktok, o = {yt: 0, tt: 0, ytLikes: 0, ttLikes: 0, live: {yt: !!yt, tt: !!tt}};
   for (const v of VIDS) { const st = latest(v.id);
     const lv = yt?.videos_live?.[v.yt_id], lt = tt?.videos_live?.[ttUrl(v)];
-    o.yt += lv ? lv.views : st.youtube?.views || 0; o.ytLikes += lv && lv.likes !== undefined ? lv.likes : st.youtube?.likes || 0;
-    o.tt += lt ? lt.views : st.tiktok?.views || 0; o.ttLikes += lt ? lt.likes : st.tiktok?.likes || 0; }
+    // Zahlen wachsen nur: je Video der höhere Wert aus live und gespeichert (die öffentliche Seite rundet „1,2 Tsd“ ab und kennt nicht jedes Video)
+    o.yt += Math.max(lv?.views || 0, st.youtube?.views || 0); o.ytLikes += Math.max(lv?.likes || 0, st.youtube?.likes || 0);
+    o.tt += Math.max(lt?.views || 0, st.tiktok?.views || 0); o.ttLikes += Math.max(lt?.likes || 0, st.tiktok?.likes || 0); }
   if (yt?.views) o.yt = Math.max(yt.src === "api" ? 0 : o.yt, yt.views);
   if (yt?.src === "api" && yt.likes) o.ytLikes = Math.max(o.ytLikes, yt.likes);
   if (tt?.views) o.tt = Math.max(o.tt, tt.views);

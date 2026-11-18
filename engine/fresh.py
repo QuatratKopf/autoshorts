@@ -65,6 +65,69 @@ UPSTREAM = "https://github.com/QuatratKopf/autoshorts.git"
 ENGINE_PATHS = ("engine", "assets", "music", "docs/data/shapes.json", "README.md")
 
 
+# Was der Admin bestimmt, solange der Gast es laut seinen Rechten (Admin-Tab) nicht selbst einstellen darf
+ADMIN_SETTINGS = {"laenge": ("target_seconds", "min_seconds"),
+                  "trends": ("trend_mode", "trend_regions", "make_thumbnail", "youtube_thumbnail", "audience"),
+                  "ki": ("text_provider", "tts_provider", "gemini_voice", "voice_speed", "voice_style", "gemini_model"),
+                  "stil": ("look", "caption_style", "subtitles_lowercase", "sfx_volume", "music_volume", "plan_ahead", "hold_missing", "auto_learn"),
+                  "zahlen": ("stats_minutes", "stats_live")}
+CAT_ADMIN = ("name", "emoji", "description", "script_style", "image_mood", "voice", "voice_rate", "voice_pitch", "voice_instructions",
+             "caption_style", "look", "music_volume", "special", "every_days", "topic_examples", "topic_rules", "trends", "niche_queries")
+
+
+def sync_admin_settings(admin_cfg, perms):
+    """Einstellungen des Admins in diese Kopie übernehmen – nur, was der Gast nicht selbst einstellen darf. Gibt die Zahl der Änderungen zurück."""
+    st = CONFIG.setdefault("settings", {})
+    a_st = (admin_cfg or {}).get("settings") or {}
+    n = 0
+    for perm, keys in ADMIN_SETTINGS.items():
+        if perms.get(perm):
+            continue                                      # darf der Gast selbst einstellen: seine Wahl bleibt
+        for k in keys:
+            if k in a_st and st.get(k) != a_st[k]:
+                st[k], n = a_st[k], n + 1
+    mine = {c.get("slug"): c for c in CONFIG.setdefault("categories", []) if isinstance(c, dict)}
+    for ac in (admin_cfg or {}).get("categories") or []:
+        if not isinstance(ac, dict) or not ac.get("slug"):
+            continue
+        c = mine.get(ac["slug"])
+        if c is None:                                     # neue Video-Art des Admins: kommt dazu
+            CONFIG["categories"].append(json.loads(json.dumps(ac)))
+            n += 1
+            continue
+        if perms.get("rubriken_bearbeiten"):
+            continue                                      # der Gast pflegt seine Video-Arten selbst
+        for k in CAT_ADMIN:
+            if k in ac and c.get(k) != ac[k]:
+                c[k], n = json.loads(json.dumps(ac[k])), n + 1
+        if not perms.get("rubriken") and c.get("enabled") != ac.get("enabled"):
+            c["enabled"], n = ac.get("enabled"), n + 1    # an/aus bestimmt dann auch der Admin
+    if n:
+        save("config.json", CONFIG)
+    return n
+
+
+def _admin_sync():
+    """Einstellungen und Video-Arten des Admins holen (öffentliche Dateien des Originals) und passend übernehmen."""
+    import subprocess
+    import urllib.request
+    base = "https://raw.githubusercontent.com/QuatratKopf/autoshorts/main/docs/"
+    get = lambda f: json.loads(urllib.request.urlopen(urllib.request.Request(base + f, headers={"User-Agent": "AutoShorts/1.0"}), timeout=30).read(3_000_000))
+    admin_cfg = get("data/config.json")
+    try:
+        acc = get("admin/access.json")
+    except Exception:  # noqa: BLE001
+        acc = {}
+    aid = str(CONFIG.get("settings", {}).get("access_id") or "")
+    e = next((x for x in acc.get("access", []) if isinstance(x, dict) and str(x.get("id")) == aid), None)
+    perms = {**(acc.get("defaults") or {}), **((e or {}).get("perms") or {})}
+    n = sync_admin_settings(admin_cfg, perms)
+    if n:
+        subprocess.run(["git", "add", "docs/data/config.json"], cwd=ROOT, check=False)   # der Speicher-Schritt nimmt es mit
+        log(f"Einstellungen des Admins übernommen: {n} Änderungen (nur, was dieser Kanal nicht selbst einstellen darf)")
+    return n
+
+
 def update_engine():
     """Kopie auf den neuesten Motor des Originals bringen (ohne „Sync fork“, das auch die Video-Daten des Originals mitbrächte)."""
     import subprocess
@@ -92,4 +155,9 @@ def update_engine():
         log(f"Gelernte Gegenstände nicht zusammengeführt ({e})")
     changed = subprocess.run(["git", "status", "--porcelain", "--", *ENGINE_PATHS], cwd=ROOT, capture_output=True, text=True).stdout.splitlines()
     log(f"Motor aus dem Original geholt: {len(changed)} Dateien neu oder geändert (Daten, Einstellungen und Videos bleiben)")
-    return len(changed)
+    try:
+        n_set = _admin_sync()
+    except Exception as e:  # noqa: BLE001 – ohne Einstellungs-Abgleich läuft der Kanal trotzdem weiter
+        log(f"Einstellungen des Admins nicht abgeglichen ({str(e)[:120]})")
+        n_set = 0
+    return len(changed) + n_set

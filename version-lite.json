@@ -1,6 +1,6 @@
 {
-  "version": "1.15.2",
-  "file": "releases/AutoShorts-Kanal-1.15.2.cmd",
-  "sha256": "7de1b0a0fad3cf387fa596136381b12cb3b4a459915962be67a9ee78fa115013",
-  "notes": "Falscher GitHub-Schlüssel: direkt änderbar; Schlüssel wird beim Verbinden gründlich geprüft"
+  "version": "1.15.3",
+  "file": "releases/AutoShorts-Kanal-1.15.3.cmd",
+  "sha256": "92b8862e8d554d08caf4723da2057b58e56faba875473d9a2b1d75fa4691d69a",
+  "notes": "Kanal-App: frische Kopie zeigt keine fremden Zahlen, sondern „Jetzt neu einrichten“; Gesamt-Aufrufe stimmen mit der Tagesgrafik überein"
 }
