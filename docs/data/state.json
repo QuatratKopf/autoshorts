@@ -38,20 +38,20 @@
   "qzcscan52"
  ],
  "last_stats": 1795018490.9579687,
- "next_id": 147,
+ "next_id": 148,
  "connected": {
   "youtube": {
    "name": "Wissens Wert 💬",
    "since": "2026-11-10"
   }
  },
- "voice_wps": 2.711,
+ "voice_wps": 2.778,
  "last_trends": 1795012315.7475557,
  "tiktok_handle": "wissens..wert",
  "last_poster": {
   "hero": "",
-  "palette": 3,
-  "video": 144
+  "palette": 0,
+  "video": 147
  },
  "cat_credit": {
   "fakten": -0.22999999999999898,

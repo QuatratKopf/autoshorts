@@ -1,0 +1,537 @@
+{
+ "title": "Vier nervige Nachbarn, die wirklich jeder kennt",
+ "scenes": [
+  {
+   "text": "Vier nervige Nachbarn, die wirklich jeder von uns kennt.",
+   "see": "Vier nervige Nachbarn stehen im Flur.",
+   "place": "kitchen",
+   "time": "night",
+   "props": [
+    {
+     "type": "glass"
+    },
+    {
+     "type": "shelf"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "event",
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "VIER NACHBARN"
+   }
+  },
+  {
+   "text": "Nummer eins ist der legendäre Heimwerker aus der Nebenwohnung.",
+   "see": "Nummer eins als Heimwerker mit Bohrmaschine im Zimmer.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "drill"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "angry",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "NUMMER EINS"
+   }
+  },
+  {
+   "text": "Er legt jeden Sonntag um acht Uhr morgens mit der Bohrmaschine los.",
+   "see": "Die Bohrmaschine rattert sonntags früh an der Wand.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "drill"
+    },
+    {
+     "type": "clock"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Er renoviert jetzt schon seit drei Jahren, und keiner weiß was.",
+   "see": "Der Nachbar bohrt schon seit drei Jahren an derselben Stelle.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "clock"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "SEIT 3 JAHREN"
+   }
+  },
+  {
+   "text": "Seine Wand muss längst aussehen wie ein riesiges Sieb.",
+   "see": "Die Wand voller Bohrlöcher sieht aus wie ein Sieb.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_mauer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Nummer zwei ist die allwissende Treppenhaus Chefin von oben.",
+   "see": "Die Treppenhaus-Chefin beobachtet vom oberen Stockwerk.",
+   "place": "hallway",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "NUMMER ZWEI"
+   }
+  },
+  {
+   "text": "Sie weiß immer genau, wann ich nach Hause komme.",
+   "see": "Die Figur kommt nach Hause und wird beobachtet.",
+   "place": "hallway",
+   "time": "day",
+   "props": [
+    {
+     "type": "door"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Ständig klebt sie mir komische Zettel an die Wohnungstür.",
+   "see": "Ein Post-it Zettel klebt an der Wohnungstür.",
+   "place": "hallway",
+   "time": "day",
+   "props": [
+    {
+     "type": "post-it"
+    },
+    {
+     "type": "door"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "talk",
+     "speaks": true
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Auf dem letzten Zettel stand wortwörtlich Bitte leiser atmen.",
+   "see": "Der Zettel mit der Aufschrift Bitte leiser atmen wird gelesen.",
+   "place": "hallway",
+   "time": "day",
+   "props": [
+    {
+     "type": "post-it"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense"
+  },
+  {
+   "text": "Nummer drei ist der ambitionierte Party Nachbar von nebenan.",
+   "see": "Der Party-Nachbar dreht die Musik auf.",
+   "place": "livingroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "bassbox"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "angry",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "NUMMER DREI"
+   }
+  },
+  {
+   "text": "Er dreht um Mitternacht den Bass auf, bis Gläser klirren.",
+   "see": "Gläser im Schrank klirren im Takt des Basses.",
+   "place": "kitchen",
+   "time": "night",
+   "props": [
+    {
+     "type": "glass"
+    },
+    {
+     "type": "shelf"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense"
+  },
+  {
+   "text": "Die Nachtruhe gilt in Deutschland in der Regel von zweiundzwanzig bis sechs Uhr.",
+   "see": "Eine Uhr zeigt die Nachtruhe von 22 bis 6 Uhr.",
+   "place": "germany",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Wenn ich mich beschwere, lädt er mich einfach direkt ein.",
+   "see": "Der Nachbar öffnet die Tür und lädt die Figur ein.",
+   "place": "hallway",
+   "time": "night",
+   "props": [
+    {
+     "type": "door"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Nummer vier ist der mysteriöse Unsichtbare aus dem Dachgeschoss.",
+   "see": "Der Dachboden des Unsichtbaren ist dunkel und leer.",
+   "place": "attic",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "center"
+    }
+   ],
+   "mood": "scary",
+   "overlay": {
+    "type": "tag",
+    "text": "NUMMER VIER"
+   }
+  },
+  {
+   "text": "Niemand im ganzen Haus hat diesen Menschen je gesehen.",
+   "see": "Niemand im Treppenhaus hat diesen Nachbarn je gesehen.",
+   "place": "hallway",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "event",
+   "mood": "calm"
+  },
+  {
+   "text": "Trotzdem landen absolut alle seine Pakete grundsätzlich bei mir.",
+   "see": "Paketstapel türmen sich im Flur vor der Tür.",
+   "place": "hallway",
+   "time": "day",
+   "props": [
+    {
+     "type": "box"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "speaks": true,
+     "pos": "offright",
+     "to": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Mein Flur ist ein Postlager, aber wo bleibt er?",
+   "see": "Der Flur gleicht einem Postlager voller Kartons.",
+   "place": "hallway",
+   "time": "day",
+   "props": [
+    {
+     "type": "box"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "angry",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Du kennst keinen von diesen vier Typen in deinem Haus?",
+   "see": "Die Hauptfigur schaut verdutzt in die Runde.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 540
+    },
+    {
+     "id": "_team1",
+     "action": "point",
+     "emotion": "",
+     "emote": "",
+     "speaks": false,
+     "look": {
+      "shirt": "grün",
+      "hair": "bob",
+      "hair_color": "rot"
+     },
+     "pos": 210,
+     "facing": "",
+     "kind": "",
+     "hold": "",
+     "say": ""
+    },
+    {
+     "id": "_team2",
+     "action": "think",
+     "emotion": "",
+     "emote": "",
+     "speaks": false,
+     "look": {
+      "shirt": "rot",
+      "hair": "ponytail",
+      "hair_color": "blond"
+     },
+     "pos": 870,
+     "facing": "",
+     "kind": "",
+     "hold": "",
+     "say": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Dann bist du höchstwahrscheinlich selbst genau dieser eine Nachbar.",
+   "see": "Die Erkenntnis trifft die Hauptfigur wie ein Schlag.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense"
+  },
+  {
+   "text": "Und im selben Moment höre ich wieder die laute Bohrmaschine.",
+   "see": "Die Bohrmaschine fängt wieder an zu dröhnen.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "drill"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "cower",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  }
+ ]
+}
