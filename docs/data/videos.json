@@ -5451,5 +5451,13 @@
   "status": "error",
   "created": 1795017330.0891583,
   "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-3.6-flash: HTTP 429 | pollinations: Antwort enthält kein JSON"
+ },
+ {
+  "id": 146,
+  "category": "comedy",
+  "topic": "Vier nervige Nachbarn, die wirklich jeder kennt – Vorgaben als Stichpunkte, nicht wörtlich abschreiben, in eigenen kurzen Sätzen trocken und witzig in der Ich-Form erzählen. Genau vier Nachbarn der Reihe nach, jeder mit „Nummer eins“ bis „Nummer vier“ angekündigt und mit zwei bis drei Sätzen erzählt. Einstieg: Diese vier Nachbarn kennt jeder, und der vierte ist der unheimlichste. Nummer eins, der Heimwerker: legt jeden Sonntag um acht Uhr morgens mit der Bohrmaschine los; er renoviert seit drei Jahren, und keiner weiß, was; seine Wand muss längst aussehen wie ein Sieb. Nummer zwei, die Treppenhaus-Chefin: weiß immer, wann ich nach Hause komme; klebt mir Zettel an die Tür; auf dem letzten Zettel stand „Bitte leiser atmen“. Nummer drei, der Party-Nachbar: dreht um Mitternacht den Bass auf, bis meine Gläser im Schrank im Takt klirren; wahrer Hintergrund: Die Nachtruhe gilt in Deutschland in der Regel von 22 bis 6 Uhr; wenn ich klingle, um mich zu beschweren, lädt er mich einfach ein. Nummer vier, der Unsichtbare: wohnt seit Jahren nebenan, aber niemand im Haus hat ihn je gesehen; trotzdem landen alle seine Pakete bei mir, mein Flur sieht aus wie ein Paketlager. Schlusspointe: Du kennst keinen davon? Dann bist du selbst einer davon – und im selben Moment höre ich wieder die Bohrmaschine. Letzter Satz ist eine Frage an die Zuschauer: Welcher Nachbar wohnt bei dir? Keine Personennamen, keine erfundenen Statistiken oder Prozentzahlen, keine Melonen, kein Tonstudio, keine Hausverwaltung. Zahlen nur: vier Nachbarn, acht Uhr, drei Jahre, 22 bis 6 Uhr. Titelbild-Text: KENNST DU DIE?",
+  "status": "error",
+  "created": 1795017949.37709,
+  "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-3.6-flash: HTTP 429 | pollinations: Antwort enthält kein JSON"
  }
 ]
