@@ -1,5 +1,5 @@
 {
- "updated": 1795021007.2445178,
+ "updated": 1795022862.7021656,
  "enough": true,
  "counted": 23,
  "total": 25,
@@ -27,10 +27,19 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 2,
-   "avg_views": 1755,
+   "avg_views": 1756,
    "avg_likes": 43.5,
    "like_rate": 2.48,
    "avg_score": 2408
+  },
+  {
+   "slug": "fakten",
+   "name": "💡 Fakten",
+   "n": 6,
+   "avg_views": 1667,
+   "avg_likes": 44.3,
+   "like_rate": 2.66,
+   "avg_score": 2342
   },
   {
    "slug": "whatif",
@@ -42,39 +51,30 @@
    "avg_score": 2338
   },
   {
-   "slug": "fakten",
-   "name": "💡 Fakten",
-   "n": 6,
-   "avg_views": 1639,
-   "avg_likes": 44.2,
-   "like_rate": 2.69,
-   "avg_score": 2312
-  },
-  {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 2,
-   "avg_views": 1676,
-   "avg_likes": 39.5,
-   "like_rate": 2.36,
-   "avg_score": 2303
+   "avg_views": 1640,
+   "avg_likes": 38.5,
+   "like_rate": 2.35,
+   "avg_score": 2252
   },
   {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 2,
-   "avg_views": 1668,
+   "avg_views": 1669,
    "avg_likes": 10.0,
    "like_rate": 0.6,
-   "avg_score": 1863
+   "avg_score": 1864
   }
  ],
  "weights": {
-  "fakten": 1.0,
+  "fakten": 1.01,
   "grusel": 1.2,
   "storys": 1.06,
   "mysterien": 1.2,
-  "tiere": 1.0,
+  "tiere": 0.97,
   "whatif": 1.01,
   "comedy": 1.04,
   "musik": 0.81,
@@ -84,8 +84,8 @@
  },
  "advice": [
   "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1798 Aufrufe, 2.39 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1668 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2459 zu 705 Punkte).",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1669 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2463 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
  ],
  "words_good": [
@@ -94,8 +94,8 @@
  "words_bad": [
   "lied",
   "erkennst",
-  "remix",
-  "bekanntes"
+  "bekanntes",
+  "remix"
  ],
  "top": [
   {
@@ -119,6 +119,16 @@
    "score": 3189
   },
   {
+   "id": 120,
+   "title": "Warum du bei Musik Gänsehaut bekommst",
+   "category": "fakten",
+   "views": 2334,
+   "likes": 45,
+   "comments": 0,
+   "shares": 0,
+   "score": 3009
+  },
+  {
    "id": 84,
    "title": "Was wäre, wenn alle Menschen gleichzeitig nett wären?",
    "category": "whatif",
@@ -132,21 +142,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 1951,
+   "views": 1949,
    "likes": 68,
    "comments": 0,
    "shares": 0,
-   "score": 2971
-  },
-  {
-   "id": 120,
-   "title": "Warum du bei Musik Gänsehaut bekommst",
-   "category": "fakten",
-   "views": 2193,
-   "likes": 45,
-   "comments": 0,
-   "shares": 0,
-   "score": 2868
+   "score": 2969
   }
  ],
  "flop": [
