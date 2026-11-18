@@ -1041,6 +1041,35 @@ def main():
         assert not sc[1].get("float"), sc[1]
         assert not any("insekt" in str(p_) for s_ in sc for p_ in (s_.get("props") or [])), sc
     check("Bugs: kein Käfer, keine Strichliste, Absturz", _bugs)
+    def _neighbours():                                           # Video 144 „Nachbarn“: Aufzählung ohne Aufzählung, Keule bei „Club“, doppelter Zähler, fremde Liste, fremdes Schild, Tür als Großaufnahme
+        from .. import writer
+        from . import library
+        T = ["Vier Nachbarn, die dein Leben zur Hölle machen.", "Der letzte Vorfall treibt mich in den Wahnsinn.", "Die Wand vibriert seit Stunden.",
+             "Also bin ich rübergegangen.", "Aber Uwe hat nicht geöffnet.", "Jetzt habe ich Ohrstöpsel."]
+        assert str(writer.list_trouble({"scenes": [{"text": t} for t in T]})).startswith("Der Einstieg"), "angekündigte Aufzählung fehlt, nicht erkannt"
+        assert not writer.list_trouble({"scenes": [{"text": t} for t in ["Fünf Sekunden, die alles verändern.", "Die Schwerkraft fällt aus.", "Alles schwebt.", "Dann kracht es."]]})
+        it = library.clean({"name": "keule", "aliases": ["keulen", "club"], "height_m": 0.8,
+                            "shapes": [{"t": "ellipse", "cx": 200, "cy": 300, "rx": 80, "ry": 100, "c": "#cc3333"}, {"t": "rect", "x": 150, "y": 200, "w": 100, "h": 60, "c": "#222222"}]})
+        assert it and it["aliases"] == ["keulen"], it
+        sc = [{"text": "Nachbarn, die dein Leben zur Hölle machen.", "place": "hallway", "actors": [{"id": "du", "action": "talk"}], "overlay": {"type": "tag", "text": "NACHTSCHICHT"}},
+              {"text": "Der Lärm treibt mich seit vierundvierzig Stunden in den Wahnsinn.", "place": "bedroom", "actors": [{"id": "du", "action": "walk"}],
+               "overlay": {"type": "counter", "label": "", "value": 44, "unit": "STUNDEN"}},
+              {"text": "Die Wand vibriert seit vierundvierzig Stunden ohne Pause.", "place": "bedroom", "actors": [{"id": "du", "action": "cower"}],
+               "overlay": {"type": "counter", "label": "STUNDEN LÄRM", "value": 44, "unit": "STUNDEN"}},
+              {"text": "Viele drohen jetzt mit Mietminderung.", "place": "office", "actors": [{"id": "du", "action": "talk"}],
+               "overlay": {"type": "checklist", "title": "MIETMINDERUNG", "items": [["Geld", False], ["Gurken", True]]}},
+              {"text": "Er hat mir eine Melone vor die Tür gelegt.", "place": "hallway", "shot": "insert", "props": [{"type": "door"}], "actors": []},
+              {"text": "Folg für mehr.", "place": "livingroom", "actors": [{"id": "du", "action": "talk"}]}]
+        stage._last_look(sc, "Nervige Nachbarn")
+        assert not sc[0].get("overlay"), sc[0]
+        assert sc[1].get("overlay") and not sc[2].get("overlay"), (sc[1], sc[2])
+        assert not sc[3].get("overlay"), sc[3]
+        assert sc[4].get("shot") != "insert" and sc[4].get("actors"), sc[4]
+        keep = [{"text": "Im August 1914 beginnt der Krieg.", "overlay": {"type": "tag", "text": "AUGUST 1914"}},
+                {"text": "Du packst Wasser, Brot und Kerzen ein.", "overlay": {"type": "checklist", "title": "CHECKLISTE", "items": [["Wasser", True], ["Brot", True]]}}]
+        stage._last_look(keep, "")
+        assert keep[0].get("overlay") and keep[1].get("overlay"), keep
+    check("Nachbarn: Aufzählung, Club, doppelter Zähler, fremde Liste", _neighbours)
     def _labels():                                               # Nummern-Schild nur beim Satz mit der Nummer, Stempel nur mit Wort aus dem Satz, kein Zuckerhaufen ohne Anlass
         from .. import writer
         sc = [{"text": "Drei verrückte Regeln, die im Alltag eskalieren würden.", "place": "street", "actors": [{"id": "du", "action": "talk"}]},

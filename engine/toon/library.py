@@ -93,7 +93,8 @@ def clean(item):
 # Englische Wörter, die im deutschen Sprechertext etwas ganz anderes bedeuten: nie als Alias eines Gegenstands (sonst steht bei
 # „Videospiel-Bugs“ in jeder Szene ein Marienkäfer, bei „Gift“ ein Geschenk, bei „Wand“ ein Zauberstab).
 FALSE_FRIENDS = {"bug", "bugs", "gift", "rock", "fan", "chef", "kind", "mist", "tag", "brief", "art", "list", "bad",
-                 "hell", "die", "lack", "pest", "taste", "toll", "war", "rat", "glitch", "glitches", "level", "boss", "fehler"}
+                 "hell", "die", "lack", "pest", "taste", "toll", "war", "rat", "glitch", "glitches", "level", "boss", "fehler",
+                 "club", "clubs", "bald"}   # „wie im Club“ ist die Disco, keine Keule (Prüfung 18.11.2026)
 
 
 def _drawer(item):

@@ -438,3 +438,11 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   kamin, pinzette, nachricht, zigarette, notenschluessel, schwamm, ohr, jacke. Offene Wünsche ohne Zeichnung: staub, raum, polyp, knie,
   anwaltstitel, toplitzsee, miete, algorithmus, statistik, musik, kompass, knall, friteuse, eiweiß, dach (greifbar davon: polyp, knie,
   kompass, friteuse, dach).
+
+- Prüfung 18.11.2026 (Video 144 „Nachbarn“): Requisite `drill` (Akku-Bohrmaschine, rattert; `TEXT_PROPS` bei bohrt/Bohrmaschine/Akkuschrauber).
+  `stage._last_look` läuft als allerletzter Durchgang der Regie: derselbe Zähler-Wert in zwei Sätzen hintereinander → der zweite entfällt;
+  Abhak-Liste, von deren Punkten weder der Satz noch seine Nachbarsätze einen nennen, entfällt; Schild (`tag`), dessen Wörter weder im Satz, in den
+  Nachbarsätzen noch im Thema vorkommen, entfällt; eine Tür ist keine Großaufnahme (fällt aus dem Einschub, allein → normale Szene mit Figur).
+  `library.FALSE_FRIENDS` um club/clubs/bald erweitert („wie im Club“ zeigte eine Keule). `writer.list_trouble` meldet jetzt auch einen Einstieg
+  „Vier Nachbarn, die …“, dem keine Aufzählung folgt (kein „Nummer eins“, keine Ordnungszahl) – das Drehbuch wird neu geschrieben.
+  `rig`: Haltung `cower` setzt den Mund ernst (vorher Sorgenbrauen mit Lächeln in der Großaufnahme).

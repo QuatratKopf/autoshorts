@@ -2253,7 +2253,55 @@ def direct(scenes, times, topic="", style="", look=""):
             for a in sc.get("actors") or []:
                 if isinstance(a, dict) and a.get("action") == "shiver" and not re.search(COLD_RE + "|" + SHIVER_RE, str(sc.get("text") or "").lower()):
                     a["action"] = "idle"
+    _last_look(scenes, topic)
     return scenes
+
+
+def _stems(text):
+    import re as _re
+    return {w[:5] for w in _re.findall(r"[a-zäöüß]{4,}", str(text or "").lower())}
+
+
+def _last_look(scenes, topic=""):
+    """Letzter Blick auf die Einblendungen und Großaufnahmen (Prüfung 18.11.2026, Video 144 „Nachbarn“):
+    – dieselbe Zahl als Zähler in zwei Sätzen hintereinander („44 STUNDEN“ zählt zweimal von null hoch): der zweite entfällt;
+    – Abhak-Liste, von deren Punkten der Sprecher keinen nennt („Geld / Gurken“ zu „drohen mit Mietminderung“): entfällt;
+    – Schild, dessen Wörter weder im Satz noch in den Nachbarsätzen noch im Thema vorkommen („NACHTSCHICHT“): entfällt;
+    – eine Tür allein vor leerem Farbgrund ist keine Großaufnahme: sie fällt aus dem Einschub heraus."""
+    sc_l = [sc for sc in scenes if isinstance(sc, dict)]
+    main = next((str(a.get("id")) for sc in sc_l for a in (sc.get("actors") or []) if isinstance(a, dict) and a.get("id") and not a.get("kind")), "du")
+    prev_val = None
+    for i, sc in enumerate(sc_l):
+        ov = sc.get("overlay") if isinstance(sc.get("overlay"), dict) else None
+        ov_t = str((ov or {}).get("type") or "")
+        g = sc.get("graphic") if isinstance(sc.get("graphic"), dict) and sc.get("shot") == "graphic" else None
+        val = None
+        if ov_t == "counter":
+            val = ("n", str(ov.get("value")), str(ov.get("unit") or "").upper())
+        elif g and str(g.get("type") or "") in ("number", "counter"):
+            val = ("n", str(g.get("value")), str(g.get("unit") or "").upper())
+        if val and prev_val and val[1] == prev_val[1] and ov_t == "counter":
+            sc["overlay"], ov, ov_t = None, None, ""
+        prev_val = val
+        near = _stems(" ".join(str(x.get("text") or "") for x in sc_l[max(0, i - 1):i + 2]))
+        if ov_t == "checklist":
+            items = [str(it[0] if isinstance(it, (list, tuple)) and it else it) for it in (ov.get("items") or [])]
+            if items and not any(_stems(it) & near for it in items):
+                sc["overlay"], ov, ov_t = None, None, ""
+        if ov_t == "tag":
+            words = _stems(ov.get("text"))
+            if words and not (words & (near | _stems(topic))):
+                sc["overlay"], ov, ov_t = None, None, ""
+        if str(sc.get("shot") or "") == "insert":
+            props = [q for q in (sc.get("props") or []) if isinstance(q, dict)]
+            rest = [q for q in props if extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) != "door"]
+            if len(rest) != len(props):
+                if rest:
+                    sc["props"] = rest
+                else:
+                    sc["shot"] = ""
+                    if not [a for a in (sc.get("actors") or []) if isinstance(a, dict)]:
+                        sc["actors"] = [{"id": main, "action": "point", "pos": "left", "speaks": True}]
 
 
 ROOMS = ("bedroom", "livingroom", "kitchen", "office", "classroom", "lab", "bathroom", "hallway", "basement", "attic")
@@ -4169,7 +4217,7 @@ INDOOR_THINGS = ("faucet", "glass", "candle", "cans", "clock", "door", "fridge",
 TEXT_PROPS = [(r"motorkran|werkstattkran|bau\w* .{0,40}motor.{0,40}\bein\b|motor\w* (?:\w+ )?(?:ein|aus)ge?bau|(?:ein|aus)bau\w* .{0,30}motor|motortausch|motor\w* .{0,25}(?:hoch|heb|hängt)", "enginehoist"),
               (r"motorständer|montageständer", "enginestand"), (r"\bv8\b|\bv12\b|\bw12\b|\bw16\b|\bmotor(?!rad|roller|säge|boot)\w*|motorblock|verbrenner|\bzylinder|\bps\b", "engine"),
               (r"kolben|pleuel|kurbelwelle", "piston"), (r"getriebe|kupplung|\bgänge?\b|schaltknauf", "gearbox"), (r"kühler\b|kühlwasser|überhitz", "radiator"),
-              (r"reifen|felge|\bräder\b", "tire"), (r"hebebühne", "carlift"), (r"werkzeug|schrauber|schraubt", "toolbox"), (r"schraubenschlüssel", "wrench"),
+              (r"reifen|felge|\bräder\b", "tire"), (r"hebebühne", "carlift"), (r"werkzeug|schrauber|schraubt", "toolbox"), (r"schraubenschlüssel", "wrench"), (r"bohrmaschine|schlagbohrer|akkuschrauber|\bbohrt\b|\bbohren\b|\bbohrer\b", "drill"),
               (r"\btacho|km/h|stundenkilometer|höchstgeschwindigkeit|beschleunig|von 0 auf 100|0 auf 100", "speedometer"),
               (r"\bwaage\b|wiegt|gewicht|\bkilo\b|schwerer als", "scale"), (r"motoröl|ölwechsel|ölkanne", "oilcan"),
               (SUB_RE, "submersible"), (r"nähmaschine|\bnäh(?:en|t|ten|te)\b|zusammennäh|zusammengenäh|vernäh", "sewing"), (r"stoffbahn|stoffballen|stoffrolle|(?:quadrat)?meter (?:\w+ )?stoff\b|\bstoff\b.{0,60}(?:kauf|geschäft|läden)|kauf\w*\b.{0,60}\bstoff\b", "fabric"), (r"aquarium|aquarien(?!scheib|glas)|goldfisch|fischglas|fischbecken", "aquarium"), (r"drohne", "drone"), (r"überwachungskamera|kameras? (erfass|film|beobacht)|überwacht|überwachung", "cctv"), (r"zucker|\bsalz\b", "pile"), (r"\bsand\b", "sandpile"), (r"\bmüll|abfall|plastik", "trash"), (r"wasserhahn|trinkwasser|leitungswasser", "faucet"),

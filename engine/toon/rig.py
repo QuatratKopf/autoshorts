@@ -620,6 +620,7 @@ def pose_at(action, t, dur, emotion="", mouth=0.0, seed=0, gest=None, shape="a")
         p.squash = 0.93 + 0.01 * s(t * 26)
         p.knee_l = p.knee_r = 16 * j
         p.eyes = "closed" if t < 1.1 else "worried"
+        p.smile = -0.5                                     # wer sich duckt, lächelt nicht (Prüfung 18.11.2026: Großaufnahme mit Sorgenbrauen und Lächeln)
         p.brow = -0.5
     elif a == "freeze":                                    # Schreckstarre: stocksteif, Arme leicht abgespreizt, große Augen, nichts bewegt sich
         p.squash = 1.0

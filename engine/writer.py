@@ -217,7 +217,7 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
                   solarpanel, cctv (Überwachungskamera am Mast)
            Werkstatt/Technik: engine (V8-Motor), enginehoist (Motorkran hebt Motor – Ein-/Ausbau), enginestand (Motor auf Montageständer),
                   crane (Motorkran leer), tire, tires (Reifenstapel), radiator (Kühler), gearbox (Getriebe), piston (Kolben, bewegt sich),
-                  toolbox (Werkzeugwagen), wrench, speedometer (Tacho, Zeiger steigt), scale (Waage, kippt), carlift (Hebebühne), oilcan
+                  toolbox (Werkzeugwagen), wrench, speedometer (Tacho, Zeiger steigt), scale (Waage, kippt), carlift (Hebebühne), oilcan, drill (Akku-Bohrmaschine, rattert)
            Himmel/Natur (Schaubilder, groß): drone (Drohne mit Kamera), plane, satellite, ship, ufo, meteor, explosion, earth, sun, moon, tornado, wave,
                   flood, ice, volcano, cloud, stormcloud, lightning, crack, smoke, aurora, eclipse
            (meteor fällt und schlägt ein, rocket startet, wave/flood steigen, crack reißt den Boden auf, eclipse verdunkelt
@@ -628,6 +628,11 @@ def list_trouble(js):
     starts = sum(1 for t in texts if _ORD_START.search(t))
     if said and top > said:
         return f"Der Einstieg kündigt {said} Punkte an, gezählt wird aber bis {top}."
+    if said and not top and re.match(r"\W*(?:\S+\s+){1,6}?\S+,\s+(?:die|der|das)\b", texts[0].lower()) \
+            and not re.search(r"(?i)\bnummer\s+(?:eins|zwei|drei|vier|fünf|\d)|\b(?:erstens|zweitens|drittens)\b|\b(?:typ|platz|punkt|fall|regel)\s+(?:eins|zwei|drei|\d)", " ".join(texts)) \
+            and not re.match(r"\W*\S+\s+(?:sekunden|minuten|stunden|tage|wochen|monate|jahre|meter|kilometer|prozent|grad|euro|millionen|milliarden)\b", texts[0].lower()):
+        # „Vier Nachbarn, die dein Leben zur Hölle machen“ – und dann geht es 70 Sekunden nur um einen (Prüfung 18.11.2026, Video 144)
+        return f"Der Einstieg kündigt {said} Punkte an, erzählt wird aber keine Aufzählung – entweder alle {said} der Reihe nach („Nummer eins …“) oder ein Einstieg ohne Zahl."
     if top > 5:
         return f"Es werden {top} Punkte heruntergezählt – höchstens fünf, dafür jeder richtig erklärt."
     if starts > max(5, len(texts) // 2):

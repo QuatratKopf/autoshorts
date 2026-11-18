@@ -3773,6 +3773,32 @@ def p_oilcan(d, x, t, s=1.0):
     _r(d, (x - 66, GROUND - 160, x + 66, GROUND - 80), (40, 40, 44), 8, shade=False)
 
 
+def p_drill(d, x, t, s=1.0):
+    """Akku-Bohrmaschine, steht auf ihrem Akku, der Bohrer zeigt nach rechts und rattert (der Heimwerker-Nachbar; Prüfung 18.11.2026)."""
+    j = int(math.sin(t * 43) * 4)                                             # sie läuft: das ganze Gerät zittert leicht
+    yel, dark = (244, 190, 48), (58, 60, 70)
+    _poly(d, [(x - 78 + j, GROUND - 222), (x - 8 + j, GROUND - 222), (x - 30 + j, GROUND - 84), (x - 100 + j, GROUND - 84)], dark)    # Griff
+    _r(d, (x - 126 + j, GROUND - 92, x + 22 + j, GROUND - 6), dark, 12)                                                         # Akku
+    _r(d, (x - 110 + j, GROUND - 60, x + 6 + j, GROUND - 40), yel, 6, shade=False)
+    _r(d, (x - 130 + j, GROUND - 318, x + 78 + j, GROUND - 212), yel, 26)                                                       # Gehäuse
+    for i in range(3):                                                                                                          # Lüftungsschlitze
+        _r(d, (x - 104 + i * 26 + j, GROUND - 292, x - 92 + i * 26 + j, GROUND - 240), dark, 4, shade=False)
+    _poly(d, [(x + 76 + j, GROUND - 306), (x + 132 + j, GROUND - 286), (x + 132 + j, GROUND - 244), (x + 76 + j, GROUND - 224)], STEEL)   # Bohrfutter
+    by = GROUND - 265 + int(math.sin(t * 61) * 3)
+    _r(d, (x + 130 + j, by - 9, x + 232 + j, by + 9), (170, 176, 186), 6)                                                       # Bohrer
+    _poly(d, [(x + 230 + j, by - 9), (x + 256 + j, by), (x + 230 + j, by + 9)], (170, 176, 186), shade=0)
+    _r(d, (x - 22 + j, GROUND - 214, x + 6 + j, GROUND - 176), RED, 6, shade=False)                                             # Schalter
+    for k in range(3):                                                                                                          # Lärm-Striche an der Spitze
+        a = math.radians(-40 + k * 40)
+        r0, r1 = 34 + (int(t * 12) % 3) * 6, 62 + (int(t * 12) % 3) * 6
+        d.line((x + 262 + j + math.cos(a) * r0, by + math.sin(a) * r0, x + 262 + j + math.cos(a) * r1, by + math.sin(a) * r1), fill=INK, width=7)
+
+
+PROPS["drill"] = p_drill
+PROP_ALIASES.update({"bohrmaschine": "drill", "bohrer": "drill", "akkuschrauber": "drill", "schlagbohrer": "drill", "bohrhammer": "drill"})
+SIZES["drill"] = (0.45, 1262)
+
+
 PROPS.update({"engine": p_engine, "enginestand": p_enginestand, "crane": p_crane, "enginehoist": p_enginehoist, "tire": p_tire, "tires": p_tires,
               "radiator": p_radiator, "gearbox": p_gearbox, "toolbox": p_toolbox, "wrench": p_wrench, "speedometer": p_speedometer,
               "scale": p_scale, "piston": p_piston, "carlift": p_carlift, "oilcan": p_oilcan})
