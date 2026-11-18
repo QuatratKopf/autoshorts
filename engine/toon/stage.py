@@ -16,7 +16,7 @@ SCALE = 1.08            # Figuren bewusst kleiner: die Szene steht im Mittelpunk
 POS = {"left": 250, "center": 540, "right": 830, "offleft": -260, "offright": 1340,
        "links": 250, "mitte": 540, "rechts": 830}
 TALL_OV = ("phone", "checklist", "note")
-NO_FURNITURE = ("restaurant", "bathroom", "hallway", "supermarket", "supermarket_empty", "station", "basement", "attic", "hospital", "serverroom")
+NO_FURNITURE = ("restaurant", "diningroom", "bathroom", "hallway", "supermarket", "supermarket_empty", "station", "basement", "attic", "hospital", "serverroom")
 MAIN_IDS = ("du", "ich", "held", "hero", "main", "erzähler", "narrator", "a0")
 
 
@@ -216,6 +216,7 @@ def _prepare(scene, cast):
     cast = cast if isinstance(cast, dict) else {}
     place = places.resolve(backdrop(scene))
     _PROP_MIN[0] = 300 if scene.get("_near") else MIN_PROP_PX
+    places.XMAS[0] = bool(scene.get("_xmas"))             # Weihnachts-Video: Wohn- und Esszimmer sind geschmückt (stage._feast_story)
     places.ICE[0] = bool(scene.get("_ice"))               # zugefrorenes Meer: „unter Wasser“ liegt unter der Eisdecke
     places.LAKE[0] = bool(scene.get("_lake"))             # Schatzsuche im See: „unter Wasser“ ist der Seegrund, nicht das Meer
     night = str(scene.get("time") or "").lower() in ("night", "nacht", "abend", "evening")
@@ -247,6 +248,11 @@ def _prepare(scene, cast):
             if len(humans) == 1:                          # Bildplan sagt „du“, Besetzung nennt die Hauptfigur beim Namen: dieselbe Figur
                 spec = humans[0]
         kind = str(a.get("kind") or spec.get("kind") or "").lower()
+        if not kind and not spec and aid.lower() not in MAIN_IDS:   # „vogel“ im Bildplan, in der Besetzung heißt er „truthahn“ (kind bird): das Tier, kein Mensch im Pulli (Video 148)
+            kind = next((k for pat, k in TOPIC_CREATURES if k not in ("agent", "virus", "cell") and re.search(pat, aid.lower())), "")
+            if not kind:
+                near = [v for k_, v in cast.items() if isinstance(v, dict) and v.get("kind") and (k_.lower()[:5] == aid.lower()[:5])]
+                kind = str(near[0].get("kind")).lower() if near else ""
         if re.search(r"gehirn|hirn|brain", aid.lower()) and kind in ("", "agent", "robot", "cell"):
             kind = "brain"                                # „gehirn_bot“, „dein_gehirn“: das Gehirn selbst als Figur, kein oranges KI-Kästchen
         if re.search(FRIDGE_ID_RE, aid.lower()) and kind in ("", "agent", "robot"):
@@ -431,7 +437,7 @@ def _on_table(key):
     return key in ON_TABLE or (key.startswith("lib_") and extras.SIZES.get(key, (9,))[0] <= 0.5)
 PLACE_HAS = {"kitchen": ("fridge", "table"), "office": ("computer", "table"), "supermarket": ("shelf",), "supermarket_empty": ("shelf",),
              "livingroom": ("tv",), "forest": ("tree",), "park": ("tree",), "camp": ("tent", "fire"), "street": ("streetlamp", "house"),
-             "village": ("house",), "restaurant": ("table",), "hallway": (), "serverroom": ("computer", "shelf"),
+             "village": ("house",), "restaurant": ("table",), "diningroom": ("table", "chair", "candle", "lib_stuhl"), "hallway": (), "serverroom": ("computer", "shelf"),
              "headquarters": ("house", "streetlamp"), "cinema": ("tv",)}
 
 
@@ -2233,6 +2239,8 @@ def direct(scenes, times, topic="", style="", look=""):
     _named_animals(scenes, topic)
     _tiny_story(scenes)
     _household(scenes)
+    _feast_story(scenes, topic)
+    _relatives(scenes)
     _music(scenes, topic)
     _fur_ancestor(scenes)
     _fur_story(scenes)
@@ -2304,7 +2312,7 @@ def _last_look(scenes, topic=""):
                         sc["actors"] = [{"id": main, "action": "point", "pos": "left", "speaks": True}]
 
 
-ROOMS = ("bedroom", "livingroom", "kitchen", "office", "classroom", "lab", "bathroom", "hallway", "basement", "attic")
+ROOMS = ("bedroom", "livingroom", "diningroom", "kitchen", "office", "classroom", "lab", "bathroom", "hallway", "basement", "attic")
 OUTSIDE_RE = r"bauernhof|\bhof\b|\bfeld|wiese|draußen|\bgarten|\bwald|strand|straße|\bstadt|\bdorf|\bpark\b|\bberg|\bmeer|\bsee\b|himmel|wüste|\bland\b"
 BODY_PROPS = ("auge", "augen", "ohr", "ohren", "nase", "zahn", "zähne", "finger", "muskel", "muskeln")
 BIG_M = 4.0                                               # Bibliotheks-Dinge ab dieser echten Höhe (Schloss, Wasserturm, Gebäude, Achterbahn) stehen in keinem Zimmer
@@ -3505,6 +3513,109 @@ def _carry_thing(scenes, main_id=None):
             sc["actors"] = [{"id": main_id, "action": "shocked", "emotion": "shocked", "emote": "!", "pos": "left", "speaks": False}]
 
 
+# Familienfest / Weihnachten (Prüfung 18.11.2026, Video 148): geschmücktes Wohn- und Esszimmer, Sätze vom Essen spielen an der Festtafel,
+# einheitliche Tageszeit. Verwandte, die der Satz nennt, stehen im Bild (in jedem Video).
+XMAS_RE = r"weihnacht|heiligabend|heilig abend|heiligen abend|\badvent|bescherung|christbaum|tannenbaum|christkind|nikolaus"
+FEAST_RE = XMAS_RE + r"|familienfeier|familienfest|festessen|familienessen|familientisch|ostern|silvester|feiertage?n?\b"
+FEAST_TABLE_RE = (r"\btisch\b|esstisch|festessen|weihnachtsessen|\bessen\b|\bisst\b|\bteller|nachschlag|\bbraten|\bgans\b|kloß|klöße|knödel|kartoffelsalat|würstchen|"
+                  r"raclette|fondue|hauptgang|ersten gang|dessert|nachtisch|plätzchen|servier|\bsatt\b|appetit|\bgabel|besteck|festtafel|\bsoße|rotkohl|blaukraut|\bportion")
+FEAST_TREE_RE = r"weihnachtsbaum|tannenbaum|christbaum|\bbaum\b|geschenk|bescherung|\bsofa\b|wohnzimmer|auspack"
+RELATIVES = [(r"\b(?:oma|omas|omi|omis|großmutter)\b", "oma", {"hair": "bun", "hair_color": "grau", "glasses": True, "shirt": "lila", "gender": "w", "size": 0.9}),
+             (r"\b(?:opa|opas|opi|großvater)\b", "opa", {"hair": "short", "hair_color": "grau", "glasses": True, "shirt": "braun", "size": 0.95}),
+             (r"\b(?:onkel|onkels)\b", "onkel", {"hair": "short", "hair_color": "schwarz", "shirt": "rot", "size": 1.08}),
+             (r"\b(?:tante|tantchen)\b", "tante", {"hair": "bob", "hair_color": "blond", "shirt": "türkis", "gender": "w"}),
+             (r"\b(?:mama|mamas|mutter|mutti)\b", "mama", {"hair": "long", "hair_color": "braun", "shirt": "gelb", "gender": "w"}),
+             (r"\b(?:papa|papas|vater|vati)\b", "papa", {"hair": "short", "hair_color": "dunkelbraun", "glasses": True, "shirt": "blau", "size": 1.05}),
+             (r"\b(?:cousin|cousins|vetter)\b", "cousin", {"hair": "short", "hair_color": "blond", "hat": "cap", "shirt": "orange", "size": 0.85}),
+             (r"\b(?:cousine|kusine)\b", "cousine", {"hair": "ponytail", "hair_color": "rot", "shirt": "pink", "gender": "w", "size": 0.85}),
+             (r"\b(?:schwester|schwesterchen)\b", "schwester", {"hair": "ponytail", "hair_color": "braun", "shirt": "pink", "gender": "w", "size": 0.9}),
+             (r"\b(?:bruder|brüderchen)\b", "bruder", {"hair": "short", "hair_color": "braun", "hat": "cap", "shirt": "orange", "size": 0.9})]
+SELF_RE = r"\b(?:du|dich|dir|dein\w*|ich|mich|mir|mein\w*|wir|uns|unser\w*)\b"
+RELATIVE_IDIOM_RE = r"vater staat|mutter natur|mutter erde|vater unser|großer bruder sieht|big brother|mutter aller|vater aller|mutter(?:sprache|land|mal|schiff|boden|kuchen|leib)|vater(?:land|schaft)"
+
+
+def _feast_story(scenes, topic=""):
+    """Weihnachten / Familienfest: Spricht Thema oder Text von Weihnachten, sind Wohn- und Esszimmer geschmückt (Baum, Girlande –
+    `places.XMAS`); Sätze vom Essen spielen an der gedeckten Tafel im Esszimmer, nicht im Flur („nach dem ersten Gang“) oder vor dem Sofa;
+    die Tageszeit springt nicht ohne Grund mitten im Fest von Tag auf Nacht."""
+    import re as _re
+    sc_l = [sc for sc in scenes if isinstance(sc, dict)]
+    all_t = (str(topic or "") + " " + " ".join(str(sc.get("text") or "") for sc in sc_l)).lower()
+    if not _re.search(FEAST_RE, all_t):
+        return
+    xmas = bool(_re.search(XMAS_RE, all_t))
+    for sc in sc_l:
+        low = str(sc.get("text") or "").lower()
+        if sc.get("shot") == "graphic" or isinstance(backdrop(sc), dict):
+            continue
+        rp = places.resolve(backdrop(sc))
+        home = rp in ("livingroom", "diningroom", "plain", "restaurant", "kitchen") or (rp == "hallway" and not _re.search(r"\bflur\b|\btür|treppenhaus|klingel|klopf", low))
+        if home and _re.search(FEAST_TABLE_RE, low) and not _re.search(r"restaurant|\bküche\b|\bherd\b|\bofen\b", low):
+            sc["place"], rp = "diningroom", "diningroom"
+            sc.pop("backdrop", None)
+        elif home and rp in ("plain", "hallway", "restaurant") or (rp == "diningroom" and _re.search(FEAST_TREE_RE, low) and not _re.search(FEAST_TABLE_RE, low)):
+            sc["place"], rp = "livingroom", "livingroom"
+            sc.pop("backdrop", None)
+        if xmas and rp in ("livingroom", "diningroom"):
+            sc["_xmas"] = True
+            sc["props"] = [q for q in (sc.get("props") or []) if extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(),
+                           str(q.get("type") if isinstance(q, dict) else q).lower()) not in ("tree", "plant")]      # der geschmückte Baum steht schon im Zimmer
+        if rp == "diningroom":                             # Tisch, Stühle, Kerzen stehen dort schon
+            sc["props"] = [q for q in (sc.get("props") or []) if extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(),
+                           str(q.get("type") if isinstance(q, dict) else q).lower()) not in ("table", "chair", "candle", "lib_stuhl", "stuhl")]
+    inside = [sc for sc in sc_l if sc.get("shot") != "graphic" and not isinstance(backdrop(sc), dict) and places.resolve(backdrop(sc)) in ("livingroom", "diningroom", "kitchen", "hallway")]
+    if inside and not _re.search(NIGHT_RE, all_t):         # ein Fest, eine Tageszeit: wie die erste Szene (in Video 148 wurde es nach der Hälfte grundlos Nacht)
+        first = "night" if str(inside[0].get("time") or "") == "night" else "day"
+        for sc in inside:
+            sc["time"] = first
+
+
+def _relatives(scenes):
+    """Nennt der Satz Oma, Opa, Onkel, Tante, Mama, Papa, Cousin …, steht die Person im Bild – mit eigenem Aussehen (graue Haare, Dutt, Brille …).
+    Handelt der Satz nur von ihr (kein du/ich), steht sie anstelle der Hauptfigur da; sonst rechts neben ihr. In Video 148 „zog Oma eine
+    Trillerpfeife“ – zu sehen war die Hauptfigur; im Nachbarn-Video 147 war kein einziger Nachbar zu sehen."""
+    import re as _re
+    for sc in scenes:
+        if not isinstance(sc, dict) or sc.get("shot") == "graphic" or sc.get("_sea") or sc.get("_balloon") or sc.get("float"):
+            continue
+        low = str(sc.get("text") or "").lower()
+        if _re.search(RELATIVE_IDIOM_RE, low):
+            continue
+        if not isinstance(backdrop(sc), dict) and places.resolve(backdrop(sc)) in MAPS + ("space", "underwater", "cave", "highsky"):
+            continue
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        found = sorted(((m.start(), key, look) for pat, key, look in RELATIVES for m in [_re.search(pat, low)] if m), key=lambda x: x[0])[:2]
+        found = [(pos, key, look) for pos, key, look in found if not any(key in str(a.get("id") or "").lower() for a in acts)]
+        if not found or any(a.get("kind") for a in acts):  # Tier-Szenen bleiben, wie sie sind („die Mutter säugt ihre Jungen“)
+            continue
+        creature = [a for a in acts if a.get("kind")][:1]
+        humans = [a for a in acts if not a.get("kind")]
+        lead = humans[0] if humans else {}
+        only_them = not _re.search(SELF_RE, low)
+        new = []
+        for n, (pos, key, look) in enumerate(found):
+            new.append({"id": key, "look": dict(look), "speaks": n == 0 and pos < 25,
+                        "action": (str(lead.get("action") or "talk") if only_them and n == 0 and str(lead.get("action") or "") not in ("walk", "run", "freeze", "pant", "cower", "sleep", "fall") else "talk" if n == 0 else "idle"),
+                        "emotion": str(lead.get("emotion") or "") if only_them and n == 0 else "happy" if n == 0 else "",
+                        "say": str(lead.get("say") or "") if only_them and n == 0 else "", "hold": str(lead.get("hold") or "") if only_them and n == 0 else ""})
+        if only_them or not humans:
+            cast_n = (new + creature)[:2]
+        else:
+            lead.update(pos=300, to="", speaks=False)
+            if str(lead.get("action") or "") in ("walk", "run"):
+                lead["action"] = "idle"
+            cast_n = [lead] + new[:1]
+        if len(cast_n) == 1:
+            cast_n[0]["pos"] = "center"
+        else:
+            for a, x in zip(cast_n, (300, 780)):
+                a["pos"], a["to"] = x, ""
+        sc["actors"] = cast_n
+        sc["crowd"] = ""
+        if sc.get("shot") in ("insert", "event") or (sc.get("shot") == "close" and len(cast_n) > 1):
+            sc["shot"] = ""
+
+
 FAMILY_RE = (r"\bfamilien?\b|frauen und (?:\w+ ){0,2}kinder|erwachsene und (?:\w+ ){0,2}kinder|(?:ehe)?frau(?:en)? und (?:\w+ ){0,2}kind|mit (?:ihren|seinen|den|ihrer|seiner|deinen|deiner) (?:\w+ ){0,3}kindern|eltern und (?:\w+ ){0,2}kinder|"
              r"\bmutter\b.{0,40}\bkind|\bkinder\b.{0,40}\b(?:mutter|eltern|ehefrau)")
 FAMILY_LOOKS = ({"shirt": "lila", "hair": "long", "hair_color": "braun", "gender": "w"}, {"shirt": "gelb", "hair": "bob", "hair_color": "blond", "size": 0.62, "gender": "w"},
@@ -4103,7 +4214,8 @@ HINTS = [
     (r"mondoberfläche|auf dem mond|mondlandung", "moon"),
     (r"wasserwerk|klärwerk|talsperre|staudamm|wasserversorgung|wasserspeicher", {"elements": ["factory", "river", "hills"]}),
     (r"feuerwehr|löschen|\bbrände", "street"),
-    (r"\bflur\b|korridor|\bgang\b|treppenhaus|hotel|vor der tür|an der tür|türklinke|klopft|zimmernummer", "hallway"),
+    (r"esszimmer|esstisch|festtafel|familientisch|weihnachtsessen|festessen|festtagsessen|am (?:gedeckten |festlich gedeckten |langen )?(?:ess|fest|familien)?tisch\b", "diningroom"),
+    (r"\bflur\b|korridor|(?:im|durch den|auf dem|über den|den) gang\b|treppenhaus|hotel|vor der tür|an der tür|türklinke|klopft|zimmernummer", "hallway"),
     (r"dachboden|(?<![a-zäöüß])speicher\b", "attic"),
     (r"\bbett\b|schlafzimmer|wachst auf|aufwach|einschlaf|schläfst|decke über|schlafen (zu )?(lassen|gehen|legen)|weckt (er |es |sie |das )?(dich|mich)|(dich|mich) (auf)?weck", "bedroom"),
     (r"(?<![a-zäöüß])spiegel(?!bild| (?:im|in|des|der|an|steigt|sinkt|fällt))|badezimmerspiegel|waschbecken", "bathroom"),
@@ -4205,7 +4317,7 @@ MOOD_HINTS = [
     (r"menschen|leute|bevölkerung|einwohner|millionen|milliarden|gesellschaft", ("", "walk")),
     (r"staunen|beobachten|schauen zu|zuschauer", ("", "watch")),
 ]
-INDOOR = ("bedroom", "livingroom", "kitchen", "office", "classroom", "lab", "hospital", "basement", "cave", "underwater", "space", "cinema")
+INDOOR = ("bedroom", "livingroom", "diningroom", "kitchen", "office", "classroom", "lab", "hospital", "basement", "cave", "underwater", "space", "cinema")
 MAPS = ("germany", "worldmap")
 GARAGES = ("garage",)                                           # in der Werkstatt stehen Autos (drinnen sonst nie)
 GARAGE_VEHICLES = ("car", "police", "ambulance", "truck", "bike")
@@ -4217,7 +4329,7 @@ INDOOR_THINGS = ("faucet", "glass", "candle", "cans", "clock", "door", "fridge",
 TEXT_PROPS = [(r"motorkran|werkstattkran|bau\w* .{0,40}motor.{0,40}\bein\b|motor\w* (?:\w+ )?(?:ein|aus)ge?bau|(?:ein|aus)bau\w* .{0,30}motor|motortausch|motor\w* .{0,25}(?:hoch|heb|hängt)", "enginehoist"),
               (r"motorständer|montageständer", "enginestand"), (r"\bv8\b|\bv12\b|\bw12\b|\bw16\b|\bmotor(?!rad|roller|säge|boot)\w*|motorblock|verbrenner|\bzylinder|\bps\b", "engine"),
               (r"kolben|pleuel|kurbelwelle", "piston"), (r"getriebe|kupplung|\bgänge?\b|schaltknauf", "gearbox"), (r"kühler\b|kühlwasser|überhitz", "radiator"),
-              (r"reifen|felge|\bräder\b", "tire"), (r"hebebühne", "carlift"), (r"werkzeug|schrauber|schraubt", "toolbox"), (r"schraubenschlüssel", "wrench"), (r"bohrmaschine|schlagbohrer|akkuschrauber|\bbohrt\b|\bbohren\b|\bbohrer\b", "drill"),
+              (r"(?<![a-zäöüß])(?:\w*?(?:auto|winter|sommer|ersatz|hinter|vorder|renn|gummi))?reifen\b|felge|\bräder\b", "tire"), (r"hebebühne", "carlift"), (r"werkzeug|schrauber|schraubt", "toolbox"), (r"schraubenschlüssel", "wrench"), (r"bohrmaschine|schlagbohrer|akkuschrauber|\bbohrt\b|\bbohren\b|\bbohrer\b", "drill"),
               (r"\btacho|km/h|stundenkilometer|höchstgeschwindigkeit|beschleunig|von 0 auf 100|0 auf 100", "speedometer"),
               (r"\bwaage\b|wiegt|gewicht|\bkilo\b|schwerer als", "scale"), (r"motoröl|ölwechsel|ölkanne", "oilcan"),
               (SUB_RE, "submersible"), (r"nähmaschine|\bnäh(?:en|t|ten|te)\b|zusammennäh|zusammengenäh|vernäh", "sewing"), (r"stoffbahn|stoffballen|stoffrolle|(?:quadrat)?meter (?:\w+ )?stoff\b|\bstoff\b.{0,60}(?:kauf|geschäft|läden)|kauf\w*\b.{0,60}\bstoff\b", "fabric"), (r"aquarium|aquarien(?!scheib|glas)|goldfisch|fischglas|fischbecken", "aquarium"), (r"drohne", "drone"), (r"überwachungskamera|kameras? (erfass|film|beobacht)|überwacht|überwachung", "cctv"), (r"zucker|\bsalz\b", "pile"), (r"\bsand\b", "sandpile"), (r"\bmüll|abfall|plastik", "trash"), (r"wasserhahn|trinkwasser|leitungswasser", "faucet"),

@@ -378,7 +378,11 @@ def livingroom(night):
     p.poly([(650, 1150), (720, 1090), (776, 1150), (716, 1196)], (250, 214, 110), o=5)      # Kissen
     p.rect((560, 1236, 584, 1262), (110, 70, 46), o=4)
     p.rect((996, 1236, 1020, 1262), (110, 70, 46), o=4)
-    p.plant(120, 1250)
+    if XMAS[0]:                                                                 # Weihnachts-Video: Girlande und geschmückter Baum statt der Zimmerpflanze
+        _garland(p, 500, 1080, 330)
+        xmas_tree(p, 250, GROUND - 16, 600)
+    else:
+        p.plant(120, 1250)
     return p.vignette()
 
 
@@ -1513,7 +1517,7 @@ EL_ALIASES = {"berge": "mountains", "hügel": "hills", "dünen": "dunes", "wald"
               "büroturm": "tower", "skyscraper": "tower", "headquarters": "tower", "kirche": "church", "dom": "church", "kathedrale": "church", "hochhäuser": "city", "tote bäume": "deadtrees", "ocean": "sea", "mountain": "mountains", "tree": "trees",
               "packeis": "packice", "meereis": "packice", "eisdecke": "packice", "eisfläche": "packice", "eisrisse": "icecracks",
               "eisscholle": "packice", "eisschollen": "packice", "eisschicht": "packice", "eispanzer": "packice", "treibeis": "packice",
-              "hafen": "harbor", "häfen": "harbor", "containerhafen": "harbor", "hafenkräne": "harbor", "containerterminal": "harbor", "port": "harbor"}
+           "hafen": "harbor", "häfen": "harbor", "containerhafen": "harbor", "hafenkräne": "harbor", "containerterminal": "harbor", "port": "harbor"}
 
 
 MID_ORDER = ("tower", "church", "windturbines", "powerplant", "bridge", "street", "gasstation", "powerlines", "graves", "camp", "cactus", "acacia", "palms",
@@ -1787,6 +1791,104 @@ def restaurant(night):
     return p.vignette()
 
 
+XMAS = [False]         # Weihnachts-Video (setzt die Regie je Szene: stage._feast_story): Wohn- und Esszimmer sind geschmückt
+
+
+def xmas_tree(p, x, base=GROUND - 14, h=560):
+    """Geschmückter Weihnachtsbaum mit Stern, Kugeln, Lichterkette und Geschenken darunter."""
+    wd = h * 0.36
+    p.d.ellipse((x - wd * 0.9, base - 14, x + wd * 0.9, base + 26), fill=p.c((120, 84, 60)))            # Schatten
+    p.rect((x - 22, base - 70, x + 22, base), (120, 80, 52), r=4)                                          # Stamm
+    p.rect((x - 56, base - 34, x + 56, base + 6), (190, 60, 56), r=8)                                      # Topf
+    top = base - h
+    for k, (f0, f1, wf) in enumerate(((0.52, 1.0, 1.0), (0.26, 0.74, 0.78), (0.0, 0.46, 0.54))):          # drei Etagen, unten breit
+        y0, y1, half = top + h * f0, base - 60 - (1 - f1) * h * 0.9, wd * wf
+        p.poly([(x, y0 - 30), (x + half, y1), (x + half * 0.55, y1 - 14), (x, y1 + 12), (x - half * 0.55, y1 - 14), (x - half, y1)],
+               (46 + k * 10, 128 + k * 12, 78 + k * 6))
+    rnd = random.Random(7)
+    for k in range(13):                                                                                    # Kugeln
+        f = 0.2 + 0.72 * (k / 12)
+        half = wd * (0.16 + 0.74 * f)
+        bx, by = x + rnd.uniform(-half, half) * 0.78, top + h * f * 0.86 + 20
+        p.oval((bx - 15, by - 15, bx + 15, by + 15), ((226, 60, 60), (250, 206, 80), (90, 150, 230), (244, 244, 248))[k % 4], o=4, glow=k % 2 == 0)
+    for k in range(3):                                                                                     # Lichterkette
+        yy = top + h * (0.34 + k * 0.22)
+        half = wd * (0.34 + k * 0.24)
+        pts = [(x - half + i * half / 4, yy + 26 * math.sin(i / 8 * math.pi)) for i in range(9)]
+        p.d.line(pts, fill=p.c((250, 226, 150), glow=True), width=6)
+    s0 = top - 26
+    p.poly([(x + 34 * math.cos(math.radians(-90 + i * 36)) * (1 if i % 2 == 0 else 0.45),
+             s0 + 34 * math.sin(math.radians(-90 + i * 36)) * (1 if i % 2 == 0 else 0.45)) for i in range(10)], (252, 214, 80), o=5, glow=True)
+    for gx, gw, gh, col in ((x - wd * 0.95, 96, 78, (214, 70, 70)), (x + wd * 0.5, 120, 64, (80, 140, 214)), (x - wd * 0.2, 80, 56, (250, 206, 80))):   # Geschenke
+        p.rect((gx, base + 22 - gh, gx + gw, base + 22), col, r=6)
+        p.rect((gx + gw / 2 - 8, base + 22 - gh, gx + gw / 2 + 8, base + 22), (250, 246, 236), o=0)
+        p.rect((gx, base + 22 - gh / 2 - 7, gx + gw, base + 22 - gh / 2 + 7), (250, 246, 236), o=0)
+
+
+def _garland(p, x0, x1, y):
+    """Tannengirlande mit roten Schleifen an der Wand."""
+    n = 14
+    pts = [(x0 + (x1 - x0) * i / n, y + 46 * math.sin(i / n * math.pi * 3) ** 2) for i in range(n + 1)]
+    p.d.line(pts, fill=p.c(INK), width=30)
+    p.d.line(pts, fill=p.c((58, 140, 84)), width=20)
+    for i in range(0, n + 1, 2):
+        bx, by = pts[i]
+        p.oval((bx - 14, by - 4, bx + 14, by + 24), (226, 60, 60), o=4)
+
+
+def diningroom(night):
+    """Esszimmer: lange gedeckte Tafel mit Tischdecke, Tellern, Kerzen, Braten und Schüssel, Stühle dahinter, Anrichte, Hängelampe.
+    Im Weihnachts-Video (XMAS) mit Girlande und geschmücktem Baum (Prüfung 18.11.2026)."""
+    p = P(night)
+    p.room((246, 226, 186), (170, 118, 80))
+    p.window((90, 410, 400, 760), curtain=(176, 70, 66))
+    p.rect((640, 440, 960, 640), (250, 250, 246), r=6)                          # Bild über der Anrichte
+    p.d.rectangle((660, 460, 940, 620), fill=p.c((236, 214, 170)))
+    p.oval((730, 490, 800, 560), (226, 110, 80), o=5)
+    p.oval((800, 520, 880, 596), (240, 190, 90), o=5)
+    p.rect((600, 800, 1040, 1010), (150, 96, 62), r=10)                         # Anrichte
+    p.rect((600, 800, 1040, 826), (190, 130, 86), o=0)
+    for dx in (620, 830):
+        p.rect((dx, 850, dx + 190, 990), (170, 112, 74), r=6, o=5)
+        p.oval((dx + 86, 908, dx + 104, 926), (240, 206, 110), o=3)
+    p.rect((690, 730, 730, 800), (250, 246, 236), r=4, o=5)                     # Kerze auf der Anrichte
+    p.oval((698, 700, 722, 736), (252, 206, 90), o=0, glow=True)
+    p.line((540, 0, 540, 250), INK, 6)                                          # Hängelampe über dem Tisch
+    p.poly([(430, 350), (650, 350), (600, 250), (480, 250)], (236, 190, 90), glow=True)
+    if XMAS[0]:
+        _garland(p, 420, 1080, 330)
+    for cx in (250, 470, 690, 900):                                             # Stuhllehnen hinter der Tafel
+        p.rect((cx - 46, 900, cx + 46, 1080), (128, 78, 52), r=14)
+        p.rect((cx - 30, 924, cx + 30, 1040), (170, 108, 70), r=8, o=0)
+    p.d.ellipse((110, 1236, 1010, 1290), fill=p.c((128, 88, 60)))               # Schatten unter dem Tisch
+    for lx in (170, 930):                                                       # Tischbeine
+        p.rect((lx - 14, 1120, lx + 14, 1262), (120, 78, 52), o=5)
+    p.rect((120, 1060, 980, 1094), (252, 250, 244), r=8)                        # Tischplatte mit Decke
+    p.poly([(120, 1092), (980, 1092), (962, 1170), (138, 1170)], (206, 60, 56))
+    p.d.line([(138, 1166), (962, 1166)], fill=p.c((250, 226, 150)), width=8)
+    for cx in (230, 470, 870):                                                  # Teller mit Besteck
+        p.oval((cx - 62, 1034, cx + 62, 1072), (246, 246, 250), o=5)
+        p.oval((cx - 40, 1040, cx + 40, 1064), (232, 234, 242), o=0)
+        p.line((cx - 80, 1040, cx - 80, 1076), (150, 154, 166), 6)
+        p.line((cx + 80, 1040, cx + 80, 1076), (150, 154, 166), 6)
+    p.oval((560, 1012, 780, 1070), (240, 240, 246), o=5)                        # Platte mit Braten
+    p.oval((592, 968, 748, 1052), (176, 104, 56), o=6)
+    p.oval((612, 980, 680, 1012), (206, 136, 78), o=0)
+    for kx in (598, 742):
+        p.oval((kx - 16, 1030, kx + 16, 1058), (240, 226, 170), o=4)            # Klöße
+    for kx in (340, 780):                                                       # Kerzen auf dem Tisch
+        p.rect((kx - 10, 986, kx + 10, 1060), (250, 246, 236), r=4, o=4)
+        p.oval((kx - 12, 952, kx + 12, 990), (252, 206, 90), o=0, glow=True)
+    p.rect((356, 1010, 420, 1062), (250, 250, 252), r=10, o=5)                  # Schüssel
+    p.oval((352, 996, 424, 1026), (246, 222, 130), o=5)
+    if XMAS[0]:
+        xmas_tree(p, 940, GROUND - 60, 470)
+    else:
+        p.plant(1020, 1250)
+    p.lamp_glow(540, 520, 560)
+    return p.vignette()
+
+
 def cinema(night):
     """Kinosaal: riesige Leinwand mit Filmszene, rote Vorhänge, Lichtkegel des Projektors, Sitzreihen mit Zuschauern."""
     p = P(False)
@@ -2025,7 +2127,7 @@ PLACES = {"bedroom": bedroom, "livingroom": livingroom, "street": street, "basem
           "beach": beach, "desert": desert, "snow": snow, "forest": forest, "underwater": underwater,
           "mountain": mountain, "hospital": hospital, "cave": cave, "supermarket": supermarket,
           "supermarket_empty": supermarket_empty, "bathroom": bathroom, "station": station, "restaurant": restaurant, "germany": germany, "worldmap": worldmap, "hallway": hallway, "attic": attic,
-          "serverroom": serverroom, "cinema": cinema, "highsky": highsky, "garage": garage}
+          "serverroom": serverroom, "cinema": cinema, "diningroom": diningroom, "highsky": highsky, "garage": garage}
 OUTDOOR = tuple(OUTDOOR_SPECS) + ("custom",)
 ALIASES = {"savanne": "savannah", "steppe": "savannah", "savanna": "savannah", "serengeti": "savannah", "asphalt": "street", "werkstatt": "garage", "autowerkstatt": "garage", "kfz-werkstatt": "garage", "workshop": "garage",
            "boxengasse": "garage", "tuning": "garage", "tuningwerkstatt": "garage", "schrauberhalle": "garage", "carport": "garage", "kino": "cinema", "kinosaal": "cinema", "kinos": "cinema", "leinwand": "cinema", "kinoleinwand": "cinema",
@@ -2048,6 +2150,7 @@ ALIASES = {"savanne": "savannah", "steppe": "savannah", "savanna": "savannah", "
            "wolkenkratzer": "headquarters", "hochhaus": "headquarters", "konzern": "headquarters", "firma": "headquarters", "hq": "headquarters",
            "eismeer": "icesea", "packeis": "icesea", "meereis": "icesea", "eisfläche": "icesea", "eisdecke": "icesea", "zugefrorenes meer": "icesea", "frozen sea": "icesea",
            "ruinen": "ruins", "zeltlager": "camp", "lager": "camp", "feld": "farm", "felder": "farm", "mondoberfläche": "moon",
+           "esszimmer": "diningroom", "esstisch": "diningroom", "dining room": "diningroom", "speisezimmer": "diningroom", "festtafel": "diningroom", "familientisch": "diningroom",
            "hafen": "harbor", "häfen": "harbor", "containerhafen": "harbor", "hafenbecken": "harbor", "frachthafen": "harbor", "seehafen": "harbor", "kai": "harbor",
            "containerterminal": "harbor", "port": "harbor", "harbour": "harbor"}
 
@@ -2066,7 +2169,7 @@ def resolve(place):
 # Fenster der Innenräume (x0, y0, x1, y1) – dort ist zu sehen, was draußen am Himmel passiert
 WINDOWS = {"bedroom": [(600, 420, 960, 800)], "livingroom": [(120, 400, 460, 760)], "kitchen": [(90, 430, 400, 760)],
            "office": [(70 + i * 330, 380, 350 + i * 330, 800) for i in range(3)], "hospital": [(640, 420, 980, 780)],
-           "restaurant": [(90, 420, 480, 800)]}
+           "restaurant": [(90, 420, 480, 800)], "diningroom": [(90, 410, 400, 760)]}
 
 _cache = {}
 _masks = {}
@@ -2103,9 +2206,10 @@ def background(place, night=False, dark=False):
             key = "lakebed"
         elif key == "underwater" and ICE[0]:
             key = "underice"
-        if (key, bool(night), bool(dark)) not in _cache:
-            _cache[(key, bool(night), bool(dark))] = (lakebed if key == "lakebed" else underice if key == "underice" else PLACES[key])(bool(night)).convert("RGB")
+        ck = key + "_xmas" if XMAS[0] and key in ("livingroom", "diningroom") else key     # geschmückte Fassung getrennt merken
+        if (ck, bool(night), bool(dark)) not in _cache:
+            _cache[(ck, bool(night), bool(dark))] = (lakebed if key == "lakebed" else underice if key == "underice" else PLACES[key])(bool(night)).convert("RGB")
         _masks["last"] = None
-        return _cache[(key, bool(night), bool(dark))]
+        return _cache[(ck, bool(night), bool(dark))]
     finally:
         DARK[0] = False

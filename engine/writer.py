@@ -192,6 +192,9 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
            germany (Deutschlandkarte), worldmap (Weltkugel), hallway (Flur mit Türen: Hotel, Wohnhaus), attic (Dachboden),
            serverroom (Rechenzentrum mit Serverschränken – für Internet, Cloud, KI, Rechenleistung)
            garage (Autowerkstatt mit Werkzeugwand – für Autos, Motoren, Tuning, Umbauten, Reparaturen)
+           diningroom (Esszimmer mit gedeckter Festtafel – Familienessen, Feiertage; bei Weihnachts-Themen sind Wohn- und Esszimmer
+           automatisch geschmückt). Verwandte (oma, opa, onkel, tante, mama, papa, cousin, cousine, schwester, bruder) unter genau dieser
+           Kennung als Figur in "actors" setzen, sobald der Satz von ihnen spricht – sie bekommen ihr eigenes Aussehen.
            draußen: headquarters (Büroturm einer großen Firma in der Stadt – für Konzerne, Firmensitze; ohne Logo), street (Häuserzeile mit Läden und Straße), park, forest, beach, desert, snow, mountain, farm, village,
            gasstation, powerplant, graveyard, ruins, camp (Zelte), moon, church, lake, river, fields, landfill (Müllhalde),
            harbor (Hafen: Kai mit Containerbrücken, Containerstapeln und Frachter – für Häfen, Schifffahrt, Handel, Lieferketten)

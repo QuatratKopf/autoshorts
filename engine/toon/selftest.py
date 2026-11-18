@@ -589,6 +589,33 @@ def main():
             frame(sc_g, {"du": {"shirt": "blau"}}, 1.2)
     check("Katze sträubt das Fell, „dir ist kalt“, gerupfte Gans, Mäuse (Prüfung 17.11.)", _goose)
 
+    def _feast():                                                # Prüfung 18.11.2026 (Video 148): Weihnachten am Esstisch, Verwandte im Bild, „greifen“ ist kein Reifen
+        T = [("Weihnachten mit der Familie eskaliert nach dem ersten Gang.", "diningroom", "day", [{"id": "du", "action": "shocked"}], ["table"]),
+             ("Oma zieht seelenruhig eine Trillerpfeife aus der Handtasche.", "livingroom", "day", [{"id": "du", "action": "talk", "emotion": "angry"}], []),
+             ("Dein Onkel erzählt dir zum zehnten Mal dieselbe Geschichte.", "livingroom", "night", [{"id": "du", "action": "idle"}], []),
+             ("Alle greifen endlich nach dem Kartoffelsalat.", "livingroom", "night", [{"id": "du", "action": "idle"}], []),
+             ("Unter dem Weihnachtsbaum liegen die Geschenke.", "diningroom", "night", [{"id": "du", "action": "idle"}], ["tree"])]
+        scs = stage.direct([{"text": t_, "place": pl, "time": tm, "actors": a_, "props": pr} for t_, pl, tm, a_, pr in T],
+                           [(i * 3.5, i * 3.5 + 3.5) for i in range(len(T))], "Weihnachten mit der Familie", "comedy", "")
+        ids = lambda i: [str(a.get("id")) for a in scs[i].get("actors") or []]   # noqa: E731
+        kn = lambda i: [str(q.get("type") if isinstance(q, dict) else q).lower() for q in scs[i].get("props") or []]   # noqa: E731
+        assert scs[0]["place"] == "diningroom" and scs[0].get("_xmas"), f"erster Gang spielt am Esstisch: {scs[0]['place']}"
+        assert ids(1) == ["oma"], f"Oma steht im Bild: {ids(1)}"
+        assert ids(2) == ["du", "onkel"], f"Onkel neben der Hauptfigur: {ids(2)}"
+        assert scs[3]["place"] == "diningroom" and "tire" not in kn(3), f"Kartoffelsalat am Tisch, kein Reifen: {scs[3]['place']} {kn(3)}"
+        assert scs[4]["place"] == "livingroom" and "tree" not in kn(4), f"Baum im Wohnzimmer: {scs[4]['place']} {kn(4)}"
+        assert {sc.get("time") for sc in scs} == {"day"}, "eine Tageszeit für das ganze Fest"
+        for sc in scs:
+            frame(sc, {"du": {"shirt": "grün"}})
+        assert places.resolve("esszimmer") == "diningroom"
+        assert stage._hint("Im Gang brennt noch Licht.") == "hallway" and stage._hint("Nach dem zweiten Gang wird es still.") != "hallway"
+        pl_, _n, _s, ac_, _p, _w = stage._prepare({"text": "Der Vogel springt auf.", "place": "livingroom", "actors": [{"id": "vogel", "action": "jump"}]}, {"du": {}, "truthahn": {"kind": "bird"}})
+        assert ac_[0]["kind"] == "bird", f"Kennung „vogel“ ist ein Vogel: {ac_[0]['kind']}"
+        s3 = stage.direct([{"text": "Die Mutter säugt ihre Jungen.", "place": "forest", "time": "day", "actors": [{"id": "katze", "kind": "cat", "action": "idle"}]}], [(0, 3.5)], "Katzen", "tiere", "")
+        assert "mama" not in [str(a.get("id")) for a in s3[0]["actors"]] and any(a.get("kind") == "cat" for a in s3[0]["actors"]), "Tier-Szene bleibt ohne Verwandte"
+
+    check("Weihnachten am Esstisch, Verwandte im Bild (Prüfung 18.11., Video 148)", _feast)
+
     def _body():                                                 # Körper-Sätze (Prüfung 16.11.2026, Video 126): die Figur macht vor, was der Satz beschreibt; Gehirn als Figur statt Passanten; „Welle“ ist kein Strand
         cast_b = {"du": {"shirt": "blau", "hair": "curly", "gender": "w"}}
         T = [("Ein lauter Knall, und du zuckst zusammen.", "livingroom", "shocked", ""), ("Zuerst blinzeln die Augen, um sich zu schützen.", "livingroom", "shocked", ""),

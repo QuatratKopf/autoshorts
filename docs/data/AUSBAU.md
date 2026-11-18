@@ -446,3 +446,14 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   `library.FALSE_FRIENDS` um club/clubs/bald erweitert („wie im Club“ zeigte eine Keule). `writer.list_trouble` meldet jetzt auch einen Einstieg
   „Vier Nachbarn, die …“, dem keine Aufzählung folgt (kein „Nummer eins“, keine Ordnungszahl) – das Drehbuch wird neu geschrieben.
   `rig`: Haltung `cower` setzt den Mund ernst (vorher Sorgenbrauen mit Lächeln in der Großaufnahme).
+
+- Prüfung 18.11.2026, Termin 21:00 (Video 148 „Weihnachten mit der Familie eskaliert“, verworfen): Neuer Ort `diningroom` (`places.diningroom`: gedeckte
+  Festtafel mit Braten, Klößen, Kerzen, Stühlen, Anrichte; Wörter Esszimmer, Esstisch, Festtafel, Festessen, „am Tisch“ – `HINTS`). „Nach dem ersten Gang“
+  ist kein Flur mehr (`\bgang\b` gilt nur noch mit „im/durch den/auf dem Gang“). Weihnachts-Videos (`stage._feast_story`, `XMAS_RE` in Thema oder Text):
+  `scene["_xmas"]` → `places.XMAS` – Wohn- und Esszimmer mit Girlande und geschmücktem Baum samt Geschenken (`places.xmas_tree`, eigener Cache-Schlüssel);
+  Sätze vom Essen (`FEAST_TABLE_RE`) spielen an der Tafel, Sätze von Baum/Geschenken im Wohnzimmer; ein Fest hat eine Tageszeit (wie die erste Szene).
+  Verwandte im Bild (`stage._relatives`, `RELATIVES`, in jedem Video): Nennt der Satz Oma, Opa, Onkel, Tante, Mama, Papa, Cousin, Cousine, Schwester,
+  Bruder, steht die Person mit eigenem Aussehen da – allein, wenn der Satz kein du/ich enthält, sonst rechts neben der Hauptfigur; Tier-Szenen und
+  Redewendungen (`RELATIVE_IDIOM_RE`) bleiben. `_prepare`: Eine Figuren-Kennung, die nicht in der Besetzung steht, aber ein Tier meint („vogel“, Besetzung
+  „truthahn“ mit `kind: bird`), ist das Tier – kein Mensch im Pulli. `TEXT_PROPS`: „greifen“ ist kein Reifen. Selbsttest: `_feast`.
+  Noch offen: Truthahn/Gans als eigenes Wesen (der Vogel ist ein Rotkehlchen), Figuren sitzen nicht am Tisch, sondern stehen davor.
