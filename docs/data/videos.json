@@ -5645,5 +5645,44 @@
   "thumb": true,
   "look": "cartoon",
   "mp4": true
+ },
+ {
+  "id": 151,
+  "category": "comedy",
+  "topic": "Vier Typen, die an Weihnachten an jedem Familientisch sitzen – Vorgaben als Stichpunkte, nicht wörtlich abschreiben, in eigenen kurzen, vollständigen Sätzen trocken und witzig in der Ich-Form erzählen. Genau vier Typen der Reihe nach, jeder mit „Nummer eins“ bis „Nummer vier“ angekündigt und mit zwei bis drei Sätzen erzählt; in jedem dieser Sätze das Wort Oma, Onkel, Tante oder Cousin ausdrücklich nennen. Satz eins und zwei sind der Einstieg: Diese vier sitzen an Weihnachten an jedem Familientisch, und Nummer vier bist vielleicht du. Der dritte Satz beginnt mit „Nummer eins, die Oma“. Nummer eins, die Oma: findet, ich sei viel zu dünn; mein Teller wird bei Oma nie leer; wer „satt“ sagt, bekommt Nachschlag; nach dem dritten Kloß gebe ich auf, Oma legt den vierten drauf. Nummer zwei, der Onkel: sitzt auf dem Sofa neben dem Weihnachtsbaum und erzählt jedes Jahr dieselbe Geschichte von früher; alle können sie längst mitsprechen; der Onkel erzählt sie trotzdem und macht eine Pause für den Applaus. Nummer drei, die Tante: stellt vor dem ganzen Tisch ihre Lieblingsfrage: „Und, was macht die Liebe?“ (als eigener, vollständiger Satz); ihre zweite Frage kommt sofort: „Und der Job?“; ich rette mich mit vollem Mund. Wahrer Hintergrund in einem Satz: In Umfragen liegt an Heiligabend in Deutschland Kartoffelsalat mit Würstchen immer wieder ganz vorn, noch vor der Gans. Nummer vier, der Cousin: sagt den ganzen Abend kein Wort, sitzt am Tischende und schaut unter dem Tisch am Handy Videos. Schlusspointe: Du schaust das hier gerade am Familientisch? Dann bist du Nummer vier – und Oma kommt schon mit dem Nachschlag. Letzter Satz ist eine Frage an die Zuschauer: Wer sitzt bei euch am Tisch? Den Einstieg am Schluss nicht wiederholen. Schauplätze nur: Esszimmer mit gedecktem Tisch (place diningroom) und Wohnzimmer mit Weihnachtsbaum und Sofa (place livingroom), alles am selben Tag; Oma, Onkel, Tante und Cousin als eigene Figuren mit den Kennungen oma, onkel, tante, cousin; der Onkel trägt ein rotes Oberteil, die Tante ein türkises, die Hauptfigur ein grünes. Keine Personennamen, keine App- oder Markennamen, kein Alkohol, kein Truthahn, keine sprechenden Tiere oder Gegenstände, keine erfundenen Statistiken oder Prozentzahlen. Zahlen nur: vier Typen, dritter und vierter Kloß. Titel: Vier Typen, die an Weihnachten an jedem Tisch sitzen. Titelbild-Text: WER SITZT BEI DIR?",
+  "status": "rendered",
+  "created": 1795029515.373696,
+  "title": "Vier Typen, die an Weihnachten an jedem Tisch sitzen",
+  "description": "Erkennst du deinen Familientisch wieder?\nDie vier klassischen Gestalten am Heiligen Abend in Deutschland.\nBist du Cousin oder Oma?",
+  "hashtags": [
+   "#shorts",
+   "#weihnachten",
+   "#familie",
+   "#comedy",
+   "#relatable",
+   "#weihnachtsesse",
+   "#deutschland",
+   "#fyp"
+  ],
+  "tags": [
+   "weihnachten familie",
+   "familientisch typen",
+   "oma nachschlag",
+   "kartoffelsalat würstchen",
+   "lustig weihnachten",
+   "tiktok comedy deutsch"
+  ],
+  "thumb_text": "WER SITZT BEI DIR?",
+  "missing": null,
+  "cover_ms": 77799,
+  "duration": 77.7,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
