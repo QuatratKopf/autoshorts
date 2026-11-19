@@ -5695,5 +5695,47 @@
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7709597619420450080?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
+ },
+ {
+  "id": 152,
+  "category": "whatif",
+  "topic": "Was wäre, wenn man ein Wesen aus verschiedenen Tierarten erschafft?",
+  "status": "review",
+  "created": 1795082991.6252382,
+  "title": "Was wäre, wenn du ein Super-Tier aus vier Arten baust?",
+  "description": "Was passiert, wenn du die krassesten Tier-Superkräfte in einem einzigen Wesen vereinst?\nWir bauen die ultimative Kreatur aus Adler, Gepard, Bärtierchen und Blauwal.\nWelche Superkraft würdest du zuerst ausprobieren?",
+  "hashtags": [
+   "#shorts",
+   "#tiere",
+   "#wissenschaft",
+   "#whatif",
+   "#superkräfte",
+   "#fakte",
+   "#fyp"
+  ],
+  "tags": [
+   "tierfakten",
+   "superkräfte",
+   "bärtierchen",
+   "gepard",
+   "biologie",
+   "evolution",
+   "was wäre wenn",
+   "tiere"
+  ],
+  "thumb_text": "DAS ULTIMATIVE TIER",
+  "missing": null,
+  "cover_ms": 88719,
+  "duration": 88.6,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-19 13:00",
+  "review_at": 1795083385.0891435
  }
 ]

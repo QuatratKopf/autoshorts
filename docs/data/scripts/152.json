@@ -1,0 +1,453 @@
+{
+ "title": "Was wäre, wenn du ein Super-Tier aus vier Arten baust?",
+ "scenes": [
+  {
+   "text": "Baue das perfekte Super-Tier aus vier verschiedenen Arten im Labor.",
+   "see": "Du stehst im Labor und baust ein Monster aus verschiedenen Tieren",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_meer",
+     "kind": "whale",
+     "action": "look_around",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": "worried",
+     "hero": true,
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "VIER TIERE"
+   }
+  },
+  {
+   "text": "Für den ultimativen Sprint nehmen wir die pure Muskelkraft eines Gepards",
+   "see": "Ein Gepard rennt schnell über die Savanne",
+   "place": "savannah",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "cheetah",
+     "hero": true,
+     "action": "run",
+     "speaks": false,
+     "pos": "center",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": ""
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Das Wesen rennt hundertzwanzig Kilometer pro Stunde und lässt jedes Auto hinter sich",
+   "see": "Ein Auto rast mit hoher Geschwindigkeit über die Straße",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "car"
+    },
+    {
+     "type": "speedometer"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "number",
+    "value": "120",
+    "label": "KM",
+    "dark": false
+   }
+  },
+  {
+   "text": "Aber reine Schnelligkeit reicht nicht, wenn der Feind aus der Luft angreift",
+   "see": "Du schaust ängstlich nach oben in den Himmel",
+   "place": "park",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "cower",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary"
+  },
+  {
+   "text": "Deshalb bekommt unser Monster die Augen eines Adlers mit achtfacher Sehkraft",
+   "see": "Ein Adler fliegt hoch am Himmel",
+   "place": "mountain",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "eagle",
+     "hero": true,
+     "action": "idle",
+     "speaks": false,
+     "pos": "center",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": "scared"
+    }
+   ],
+   "mood": "scary",
+   "overlay": {
+    "type": "card",
+    "text": "ACHTFACH"
+   }
+  },
+  {
+   "text": "Es entdeckt eine kleine Maus aus mehrerenhundert Metern Höhe ganz ohne Problem",
+   "see": "Eine kleine Maus sitzt im Gras",
+   "place": "fields",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "eagle",
+     "hero": true,
+     "action": "idle",
+     "speaks": false,
+     "pos": "center",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Doch was passiert bei eisiger Kälte oder im kochenden heißen Wasser",
+   "see": "Eisige Kälte und Frost breiten sich aus",
+   "place": "kitchen",
+   "time": "day",
+   "props": [
+    {
+     "type": "ice"
+    }
+   ],
+   "actors": [
+    {
+     "id": "_tier",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense"
+  },
+  {
+   "text": "Hier hilft die DNA vom Bärtierchen, dem härtesten Überlebenskünstler auf der Erde",
+   "see": "Ein Bärtierchen liegt winzig im Moos",
+   "place": "forest",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "tardigrade",
+     "hero": true,
+     "action": "idle",
+     "speaks": false,
+     "pos": "center",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Es übersteht minus zweihundert Grad und sogar die tödliche Strahlung im Weltall",
+   "see": "Eis und kosmische Strahlung im kalten Weltall",
+   "place": "space",
+   "time": "night",
+   "props": [
+    {
+     "type": "sun"
+    }
+   ],
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "tardigrade",
+     "hero": true,
+     "action": "idle",
+     "speaks": false,
+     "pos": "center",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": "worried"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 200,
+    "unit": "GRAD"
+   }
+  },
+  {
+   "text": "Bleibt die Frage nach der Masse, denn ein echter Riese braucht enorm viel Energie",
+   "see": "Du denkst nach und hältst dir den Kopf",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "tardigrade",
+     "hero": true,
+     "action": "idle",
+     "speaks": false,
+     "pos": "center",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Als vierte Zutat pflanzen wir das Herz eines Blauwals in die Brust",
+   "see": "Ein riesiges Walherz liegt im Labor",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_meer",
+     "kind": "whale",
+     "action": "idle",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": "",
+     "hero": true,
+     "pos": 400
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Dieses Herz ist so schwer wie ein ausgewachsener Kleinwagen und pumpt Liter",
+   "see": "Ein schweres Walherz pumpt Blut",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_meer",
+     "kind": "whale",
+     "action": "look_around",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "left",
+     "emotion": "worried",
+     "hero": true,
+     "pos": 680
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Das Biest wiegt jetzt zweihundert Tonnen und hat die Größe eines Hauses",
+   "see": "Ein riesiges Monster in der Größe eines Hauses steht da",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_meer",
+     "kind": "whale",
+     "action": "idle",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": "worried",
+     "hero": true,
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "counter",
+    "label": "GEWICHT",
+    "value": 200,
+    "unit": "TONNEN"
+   }
+  },
+  {
+   "text": "Du denkst, dieses Monster wird sofort die Weltherrschaft an sich reißen",
+   "see": "Du schaust erschrocken zu dem großen Monster auf",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "scale",
+     "pos": 600
+    },
+    {
+     "type": "scale",
+     "pos": 770
+    },
+    {
+     "type": "scale",
+     "pos": 940
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "scary"
+  },
+  {
+   "text": "Falsch, denn die Biologie hat einen winzigen Haken an der ganzen Sache",
+   "see": "Du schüttelst den Kopf",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "idle",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Das Gehirn vom Gepard und die Lunge vom Wal passen niemals zusammen",
+   "see": "Gehirn und Lunge passen nicht zusammen",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "cheetah",
+     "hero": true,
+     "action": "idle",
+     "speaks": false,
+     "pos": "center",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": "worried"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Innerhalb von drei Sekunden bricht der gesamte Stoffwechsel komplett in sich zusammen",
+   "see": "Ein Timer läuft schnell ab",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_meer",
+     "kind": "whale",
+     "action": "idle",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": "scared",
+     "hero": true,
+     "pos": 400
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 3,
+    "unit": "SEKUNDEN"
+   }
+  },
+  {
+   "text": "Übrig bleibt nur ein kleiner Haufen aus verwirrten Zellen auf dem Tisch",
+   "see": "Ein Haufen Zellen liegt auf dem Tisch",
+   "place": "street",
+   "time": "day",
+   "shot": "event",
+   "mood": "sad",
+   "crowd": "sad"
+  },
+  {
+   "text": "Deshalb lässt Mutter Natur ihre Tiere lieber so, wie sie perfekt funktionieren",
+   "see": "Du lächelst zufrieden im Labor",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "center"
+    }
+   ],
+   "mood": "calm"
+  }
+ ]
+}
