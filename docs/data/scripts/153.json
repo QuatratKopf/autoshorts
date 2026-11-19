@@ -1,0 +1,613 @@
+{
+ "title": "Was wäre, wenn du ein Super-Tier aus vier Arten baust?",
+ "scenes": [
+  {
+   "text": "Du baust im Labor das perfekte Super-Tier aus vier Tieren.",
+   "see": "Du baust im Labor ein Super-Tier.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "emote": "",
+     "hold": "",
+     "action": "point",
+     "pos": 150,
+     "facing": "right"
+    },
+    {
+     "id": "_tier",
+     "kind": "chimera",
+     "hero": true,
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "action": "idle",
+     "emotion": "",
+     "pos": 745,
+     "facing": "right"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "LABOR START"
+   }
+  },
+  {
+   "text": "Und am Ende kommt ein Haken, mit dem keiner rechnet.",
+   "see": "Ein überraschender Haken taucht auf.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "left",
+     "say": "",
+     "pos": 930
+    },
+    {
+     "id": "_tier",
+     "kind": "chimera",
+     "hero": true,
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "action": "idle",
+     "emotion": "worried",
+     "pos": 335,
+     "facing": "left"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Zutat eins sind die Beine vom Gepard für ultimativen Speed.",
+   "see": "Die Beine vom Gepard für Speed.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "cheetah",
+     "hero": true,
+     "action": "idle",
+     "speaks": false,
+     "pos": "center",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "In freier Wildbahn wurden dreiundneunzig Kilometer pro Stunde gemessen.",
+   "see": "Ein Gepard rennt schnell in der Savanne.",
+   "place": "savannah",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "number",
+    "value": "93",
+    "label": "KM/H",
+    "dark": false
+   }
+  },
+  {
+   "text": "Seine eigentliche Superkraft ist die brachiale Beschleunigung.",
+   "see": "Die brachiale Beschleunigung zeigt sich.",
+   "place": "savannah",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "chimera",
+     "hero": true,
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "action": "run",
+     "emotion": "worried",
+     "pos": "center",
+     "facing": "right"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Zutat zwei sind die extrem scharfen Adleraugen.",
+   "see": "Die extrem scharfen Adleraugen.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "eagle",
+     "hero": true,
+     "action": "idle",
+     "speaks": false,
+     "pos": "center",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "SCHARFSEHEN"
+   }
+  },
+  {
+   "text": "Der Adler sieht um ein Mehrfaches schärfer als ein Mensch.",
+   "see": "Ein Adler fliegt hoch am Himmel.",
+   "place": "mountain",
+   "backdrop": {
+    "sky": "day",
+    "ground": "rock",
+    "elements": [
+     "mountains"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "eagle",
+     "hero": true,
+     "action": "idle",
+     "speaks": false,
+     "pos": "center",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Zutat drei bringt die extreme Zähigkeit vom Bärtierchen.",
+   "see": "Die extreme Zähigkeit vom Bärtierchen.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "tardigrade",
+     "hero": true,
+     "action": "idle",
+     "speaks": false,
+     "pos": "right",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "UNZERSTÖRBAR"
+   }
+  },
+  {
+   "text": "Es übersteht fast minus zweihundertzweiundsiebzig Grad Kälte.",
+   "see": "Das Bärtierchen trotzt extremer Kälte.",
+   "place": "snow",
+   "backdrop": {
+    "sky": "day",
+    "ground": "snow",
+    "elements": []
+   },
+   "time": "day",
+   "weather": "cold",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "tardigrade",
+     "hero": true,
+     "action": "idle",
+     "speaks": false,
+     "pos": "center",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": "worried"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "counter",
+    "label": "MINUS",
+    "value": 272,
+    "unit": "GRAD"
+   }
+  },
+  {
+   "text": "Im Jahr zweitausendsieben überlebte es sogar den offenen Weltraum.",
+   "see": "Das Bärtierchen im offenen Weltraum.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "emote": "",
+     "hold": "",
+     "action": "think",
+     "pos": 150,
+     "facing": "right"
+    },
+    {
+     "id": "_tier",
+     "kind": "chimera",
+     "hero": true,
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "action": "idle",
+     "emotion": "",
+     "pos": 745,
+     "facing": "right"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "JAHR 2007"
+   }
+  },
+  {
+   "text": "Zutat vier ist das gigantische Herz vom Blauwal.",
+   "see": "Das gigantische Herz vom Blauwal.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_meer",
+     "kind": "whale",
+     "action": "idle",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": "",
+     "hero": true,
+     "pos": 400
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "RIESIGES HERZ"
+   }
+  },
+  {
+   "text": "Es ist das größte Herz der Welt und wiegt enorm viel.",
+   "see": "Ein Blauwal schwimmt im Ozean.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_meer",
+     "kind": "whale",
+     "action": "look_around",
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "left",
+     "emotion": "",
+     "hero": true,
+     "pos": 680
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Das fertige Super-Tier steht nun bereit im hellen Labor.",
+   "see": "Das fertige Super-Tier im Labor.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "left",
+     "say": "",
+     "pos": 930
+    },
+    {
+     "id": "_tier",
+     "kind": "chimera",
+     "hero": true,
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "action": "idle",
+     "emotion": "",
+     "pos": 335,
+     "facing": "left"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Du denkst im ersten Moment, dieses Wesen ist völlig unbesiegbar.",
+   "see": "Du denkst, das Wesen ist unbesiegbar.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": 150
+    },
+    {
+     "id": "_tier",
+     "kind": "chimera",
+     "hero": true,
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "action": "idle",
+     "emotion": "",
+     "pos": 745,
+     "facing": "right"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Aber jede noch so starke Superkraft hat ihren brutalen Preis.",
+   "see": "Jede Superkraft hat ihren Preis.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "worried",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "left",
+     "say": "",
+     "pos": 930
+    },
+    {
+     "id": "_tier",
+     "kind": "chimera",
+     "hero": true,
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "action": "idle",
+     "emotion": "worried",
+     "pos": 335,
+     "facing": "left"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Der Gepard hält seinen irren Sprint nur wenige Meter durch.",
+   "see": "Der Gepard hält den Sprint kaum durch.",
+   "place": "savannah",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "cheetah",
+     "hero": true,
+     "action": "run",
+     "speaks": false,
+     "pos": "center",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": ""
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Das Bärtierchen ist nur so extrem zäh, wenn es komplett trocken ist.",
+   "see": "Das Bärtierchen ist nur trocken so zäh.",
+   "place": "desert",
+   "backdrop": {
+    "sky": "day",
+    "ground": "dry",
+    "elements": [
+     "dunes"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "tardigrade",
+     "hero": true,
+     "action": "idle",
+     "speaks": false,
+     "pos": "right",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Das Herz wiegt hundertachtzig Kilogramm und sprengt jede Logik.",
+   "see": "Das schwere Herz sprengt jede Logik.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "tardigrade",
+     "hero": true,
+     "action": "idle",
+     "speaks": false,
+     "pos": "center",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "emotion": "worried"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "counter",
+    "label": "GEWICHT",
+    "value": 180,
+    "unit": "KG"
+   }
+  },
+  {
+   "text": "Das Super-Tier bricht sofort unter seinem eigenen schweren Herz zusammen.",
+   "see": "Das Super-Tier bricht zusammen.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "emote": "",
+     "hold": "",
+     "action": "shocked",
+     "emotion": "sad",
+     "pos": 150,
+     "facing": "right"
+    },
+    {
+     "id": "_tier",
+     "kind": "chimera",
+     "hero": true,
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "action": "down",
+     "emotion": "sad",
+     "pos": 745,
+     "facing": "right"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Die Evolution baut keine Alleskönner, sondern perfekte Spezialisten für das Leben.",
+   "see": "Die Evolution baut Spezialisten.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "emote": "",
+     "hold": "",
+     "action": "think",
+     "pos": 930,
+     "facing": "left"
+    },
+    {
+     "id": "_tier",
+     "kind": "chimera",
+     "hero": true,
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "action": "idle",
+     "emotion": "",
+     "pos": 335,
+     "facing": "left"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Welche Tier-Superkraft hättest du gern?",
+   "see": "Welche Tier-Superkraft hättest du gern?",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": 150
+    },
+    {
+     "id": "_tier",
+     "kind": "chimera",
+     "hero": true,
+     "speaks": false,
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "action": "idle",
+     "emotion": "",
+     "pos": 745,
+     "facing": "right"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "choice",
+    "a": "Gepard",
+    "b": "Adler"
+   }
+  }
+ ]
+}
