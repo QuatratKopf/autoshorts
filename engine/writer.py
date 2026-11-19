@@ -172,6 +172,8 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
   Nennt der Satz Gepard, Adler oder Floh, zeigt die Regie das Tier von selbst groß und allein im Bild.
   lion (Löwe mit Mähne – action "roar" = brüllt; Ort "savannah" = Savanne mit Schirmakazien). Bärtierchen: action "tun" = eingerolltes, ausgetrocknetes
   Tönnchen. In einem Video über das Bärtierchen zeigt die Regie das Tier von selbst in jedem Satz, der von ihm handelt; Moos heißt "moss".
+  frog (Pfeilgiftfrosch – knallgelb, action "hop"), platypus (Schnabeltier – action "spur" zeigt den Giftsporn am Hinterbein; Ort "river"),
+  puffer (Kugelfisch – action "puff" = bläst sich zur Stachelkugel auf; Ort underwater). Nennt der Satz eines dieser Tiere, zeigt die Regie es von selbst.
   Sie spielen am Ort underwater; nie monster oder fish als Ersatz für ein Tier nehmen, das es hier gibt.
   sowie Begriffe als Figur mit Gesicht: agent (KI, Bot, Assistent – oranges Kästchen), virus (Virus, Bakterie, Erreger), cell (Zelle),
   brain (das Gehirn als rosa Figur – für Sätze wie „dein Gehirn schlägt Alarm“; Kennung z. B. "gehirn").

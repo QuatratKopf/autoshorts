@@ -536,3 +536,15 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Hashtag „#fy“ → „#fyp“, Umlaute für geraet/kuehlschrank in Hashtags und Suchbegriffen.
   Noch offen: Gäste und Freunde („zeigt allen Gästen“, „deine Freunde grinsen“) kommen nicht ins Bild; Großaufnahmen von Fernseher, Router, Auto stehen
   allein vor Farbgrund; Kaffeemaschine und Joghurt haben keine Zeichnung; die Wanduhr `clock` steht weiter am Boden statt an der Wand.
+
+- Niedliche Gifttiere (Prüfung 19.11.2026, Termin 21 Uhr, Plan „Tödlich niedlich: Diese 3 Tiere …“, Video 161): Die Engine kannte weder Pfeilgiftfrosch
+  noch Schnabeltier noch Kugelfisch – im Video standen ein grüner, automatisch gelernter Frosch-Klecks, ein Dampfer auf dem Fluss und ein Goldfisch.
+  Neue gezeichnete Wesen (`extras.creature`): `frog` (knallgelber Pfeilgiftfrosch, `hop` = hüpft), `platypus` (Schnabeltier mit Entenschnabel und
+  Biberschwanz, `spur` = hebt das Hinterbein und zeigt den Giftsporn mit Warn-Ring), `puffer` (Kugelfisch, `puff` = bläst sich zur Stachelkugel auf).
+  Regie `stage._cute_animals` (Schlussdurchgang, `CUTE_ANIMALS`): Nennt der Satz eines der Tiere, steht es groß und allein in seinem Lebensraum (Frosch im
+  Wald, Schnabeltier am sandigen Flussufer, Kugelfisch unter Wasser); bis zu zwei Folgesätze, die sichtbar weiter von ihm handeln (`CUTE_NEXT_RE`: „Sein
+  Hautgift …“, „Er bläst sich auf …“), bleiben bei ihm – gespiegelt und mit Handlung. Geht es ums Anfassen (`CUTE_TOUCH_RE`), weicht der Mensch erschrocken
+  zurück und das Tier sitzt klein daneben. Sätze über Essen und Köche (`CUTE_SKIP_RE`) und Redewendungen („Frosch im Hals“) bleiben, wie sie sind.
+  Köche (`stage._cooks`, `COOK_RE`): Nennt der Satz einen Koch, steht eine Figur mit Kochmütze (`rig`, Hut `chef`) und weißer Jacke in der Küche –
+  vorher lief die Hauptfigur durch die Küche. Die automatisch gelernten Notbehelfe `schnabeltier` und `pfeilgiftfrosch` sind aus `shapes.json` entfernt;
+  die Wörter gelten als bekannt (`main.known_thing`). Die Text-KI darf `frog`, `platypus`, `puffer` besetzen. Selbsttest: `_cute`.

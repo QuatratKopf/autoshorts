@@ -2294,6 +2294,9 @@ def direct(scenes, times, topic="", style="", look=""):
                     a["action"] = "idle"
     _hybrid_story(scenes, topic, next((str(a.get("id")) for sc in scenes if isinstance(sc, dict) for a in (sc.get("actors") or [])
                                        if isinstance(a, dict) and a.get("id") and not a.get("kind") and not str(a.get("id")).startswith("_")), "du"))
+    _cooks(scenes)
+    _cute_animals(scenes, next((str(a.get("id")) for sc in scenes if isinstance(sc, dict) for a in (sc.get("actors") or [])
+                                if isinstance(a, dict) and a.get("id") and not a.get("kind") and not str(a.get("id")).startswith("_")), "du"))
     for sc in scenes:                                     # von der Regie eingesetzte Figur („_tier“, „_meer“) ohne Art: wäre ein fremder Mensch im Bild (ein Junge neben dem Eisberg in der Küche, Video 152)
         if isinstance(sc, dict) and sc.get("actors"):
             sc["actors"] = [a for a in sc["actors"] if not (isinstance(a, dict) and str(a.get("id") or "") in ("_tier", "_meer") and not a.get("kind"))]   # andere „_…“-Figuren (Gründer, Soldaten, Familie) sind Menschen und bleiben
@@ -3016,6 +3019,105 @@ def _named_animals(scenes, topic):
     return scenes
 
 
+# Niedliche Gifttiere (Prüfung 19.11.2026, Plan „Tödlich niedlich“): Pfeilgiftfrosch, Schnabeltier und Kugelfisch sind gezeichnete Wesen. Nennt der Satz
+# eines, steht es groß in seinem Lebensraum; bis zu zwei Folgesätze, die sichtbar weiter von ihm handeln, bleiben bei ihm (gespiegelt, mit Handlung:
+# der Kugelfisch bläst sich auf, das Schnabeltier zeigt den Sporn). Geht es ums Anfassen, steht der Mensch erschrocken daneben und das Tier klein.
+CUTE_ANIMALS = ((r"pfeilgiftfr[oö]sch|giftfr[oö]sch|baumsteigerfr[oö]sch|\bfr[oö]sch(?:e|en|es|s|lein)?\b", "frog", "forest"),
+                (r"schnabeltier", "platypus", "river"),
+                (r"kugelfisch|\bfugu", "puffer", "underwater"))
+CUTE_SKIP_RE = r"frosch im hals|sei kein frosch|\bkoch\b|\bköch|restaurant|\bteller|servier|delikatesse|luxus|\bgericht\b|\bessen\b|\bgegessen|speisekarte|\bmesser"
+CUTE_NEXT_RE = (r"^(?:er|sie|es|sein\w*|ihr\w*|dieses? (?:tier\w*|gift|fisch|frosch)|das (?:gift|tier\w*)|der (?:fisch|frosch|winzling)|dabei|damit|sogar|schon|denn|falsch|und (?:er|sie|es|das))\b|"
+                r"\bgift(?:ig|es|sporn\w*|drüse\w*)?\b|\bsporn|\bstachel|\bhaut\b|bläst|aufgeblasen|aufblas")
+CUTE_YOU_RE = r"\b(du|dein\w*|dir|dich|ich|mein\w*|mir|mich|wir|unser\w*|uns|euch|ärzt\w*|arzt|forscher\w*|opfer|patient\w*)\b"   # „zehn Menschen“ als Maß bleibt beim Tier
+CUTE_TOUCH_RE = r"berühr|anfass|anfäss|streichel|\bhand\b|\bfinger|hochheb|\bhebst|\bnimmst"
+CUTE_PUFF_RE = r"bläst|aufblas|aufgeblasen|aufpump|pumpt|stachel|stachelkugel|ballon|doppelt so groß|dreimal so groß"
+CUTE_SPUR_RE = r"\bsporn|\bsporen?\b|giftsporn|\bstachel|hinterbein|\bsticht|\bstich\b"
+
+
+# Köche (Prüfung 19.11.2026): „Nur ausgebildete Köche dürfen ihn zubereiten“ zeigte die Hauptfigur, die durch die Küche läuft. Nennt der Satz einen Koch,
+# steht eine Figur mit Kochmütze und weißer Jacke in der Küche (im Restaurant bleibt das Restaurant).
+COOK_RE = r"\bkoch\b|\bkochs\b|\bköch(?:e|en|in|innen)\b|küchenchef|sternekoch|sterneköch|spitzenkoch|spitzenköch|fugu-koch|fugu-köch"
+COOK_LOOK = {"shirt": "weiß", "hat": "chef", "hair": "kurz", "hair_color": "schwarz"}
+
+
+def _cooks(scenes):
+    for sc in scenes:
+        if not isinstance(sc, dict) or "actors" not in sc or (sc.get("shot") == "graphic" and graphics.clean(sc.get("graphic"))):
+            continue
+        low = str(sc.get("text") or "").lower()
+        if not re.search(COOK_RE, low):
+            continue
+        rp = places.resolve(backdrop(sc)) if not isinstance(backdrop(sc), dict) else "custom"
+        if rp != "kitchen":                               # auch „im Restaurant“: der Koch steht in der Küche, nicht zwischen den Gästen
+            sc.update(place="kitchen", backdrop=None, time="day")
+        hard = bool(re.search(r"falsch|fehler|vorsicht|gefähr|tödlich|\bgift|jahrelang|prüfung|lizenz|training|ausbildung", low))
+        sc.update(actors=[{"id": "_koch", "action": "think" if hard else "talk", "emotion": "worried" if hard else "", "emote": "sweat" if re.search(r"falsch|fehler", low) else "",
+                           "pos": "center", "facing": "right", "speaks": False, "say": "", "hold": "", "look": dict(COOK_LOOK)}],
+                  crowd="", props=[], float="")
+        if sc.get("shot") in ("event", "insert"):
+            sc["shot"] = ""
+    return scenes
+
+
+def _cute_named(low):
+    return next(((k, home) for pat, k, home in CUTE_ANIMALS if re.search(pat, low)), None)
+
+
+def _cute_animals(scenes, main_id="du"):
+    wild = ("forest", "river", "lake", "park", "fields", "mountain", "beach", "savannah", "desert", "custom")
+    last = None                                           # (Art, Zuhause, Nummer des Satzes)
+    for i, sc in enumerate(scenes):
+        if not isinstance(sc, dict) or "actors" not in sc:
+            continue
+        low = str(sc.get("text") or "").lower()
+        if sc.get("shot") == "graphic" and graphics.clean(sc.get("graphic")):
+            if last:
+                last = (last[0], last[1], i)              # die Zahl gehört noch zum Tier von eben
+            continue
+        hit = _cute_named(low)
+        if re.search(CUTE_SKIP_RE, low):                  # der Fisch auf dem Teller, der Koch: Sätze über Menschen und Essen bleiben, wie das Drehbuch sie setzt
+            last = None
+            continue
+        follow = False
+        if not hit and last and i - last[2] <= 2 and re.search(CUTE_NEXT_RE, low) \
+                and (not re.search(CUTE_YOU_RE, low) or (re.search(CUTE_TOUCH_RE, low) and last[0] != "puffer")):
+            hit, follow = (last[0], last[1]), True
+        if not hit:
+            last = None
+            continue
+        kind, home = hit
+        rp = places.resolve(backdrop(sc)) if not isinstance(backdrop(sc), dict) else "custom"
+        keep = kind != "puffer" and (rp in wild) and not (kind == "platypus" and rp not in ("river", "lake", "custom"))
+        touch = kind != "puffer" and bool(re.search(CUTE_TOUCH_RE, low))
+        emo = "angry" if kind == "puffer" and re.search(CUTE_PUFF_RE, low) else ""
+        act = {"id": "_tier", "kind": kind, "hero": not touch, "pos": 760 if touch else "center", "action": "idle", "emotion": emo, "emote": "", "say": "",
+               "hold": "", "facing": "left" if (touch or (follow and i - last[2] == 1)) else "right", "speaks": False}
+        if kind == "puffer" and (re.search(CUTE_PUFF_RE, low) or (follow and re.search(r"gift|tödlich|gefährlich|falsch", low))):
+            act["action"] = "puff"
+        elif kind == "platypus" and re.search(CUTE_SPUR_RE, low):
+            act["action"] = "spur"
+        elif kind == "frog" and follow and not touch:
+            act["action"] = "hop"
+        acts = [act]
+        if touch:                                         # „Schon eine Berührung …“: der Mensch weicht erschrocken zurück
+            human = next((a for a in (sc.get("actors") or []) if isinstance(a, dict) and not a.get("kind") and not str(a.get("id") or "").startswith("_")), None)
+            human = dict(human or {"id": main_id, "speaks": False, "say": "", "hold": ""})
+            human.pop("to", None)
+            human.update(pos=300, action="cower", emotion="scared", emote="!", facing="right")
+            acts = [human, act]
+        if kind == "platypus":                            # am sandigen Flussufer – nicht mitten auf dem Wasser stehend
+            sc.update(place="river", backdrop={"sky": "day", "ground": "sand", "elements": ["river"]}, time="day")
+        elif not keep:
+            sc.update(place=home, backdrop=None, time="day")
+        sc.update(actors=acts, crowd="", float="", props=[], weather="")
+        if sc.get("shot") in ("event", "insert", "close"):
+            sc["shot"] = ""
+        sc["_cute"] = kind
+        if not follow:
+            last = (kind, home, i)
+    return scenes
+
+
 # Karten nur, wo der Satz von Ländern spricht: Die Deutschlandkarte mit Leuchtpunkten erklärt weder „von Deutschland nach Dänemark und Schweden“
 # (dafür leuchten die Länder auf der Europakarte auf) noch „Du denkst, das ist Science-Fiction?“ (dort steht die Figur am Ort der Szene davor).
 MAP_WORLD_RE = r"\berde\b|planet|weltweit|\bwelt\b|global|kontinent|länder|international|überall|menschheit|ozean|\bmeere?\b"
@@ -3110,7 +3212,7 @@ def _ice_story(scenes, topic):
             sc.update(place="icesea", backdrop=None, props=[{"type": "icehole", "pos": 540}], actors=[], crowd="", shot="")
             continue
         if rp == "underwater" or (re.search(ICE_UNDER_RE, low) and not re.search(ICE_ON_RE, low)):
-            keep = [a for a in acts if str(a.get("kind") or "").lower() in ("fish", "shark", "dolphin", "whale", "jelly", "shrimp", "mantis", "axolotl", "tardigrade", "diver")]
+            keep = [a for a in acts if str(a.get("kind") or "").lower() in ("fish", "shark", "dolphin", "whale", "jelly", "shrimp", "mantis", "axolotl", "tardigrade", "diver", "puffer")]
             emo = MOOD_EMOTION.get(str(sc.get("mood") or ""), "") or "worried"
             if whale:
                 keep = [{"id": "_delfin", "kind": "dolphin", "hero": True, "action": "idle", "emotion": emo, "pos": "center", "speaks": False, "emote": "", "say": "", "hold": "", "facing": "right"}]
@@ -3688,7 +3790,7 @@ SEA_HUMAN_RE = r"\bmensch\w*|\bforscher\w*|wissenschaftler\w*|\bdein\w*|\bdu\b|\
 SEA_PEOPLE_RE = r"^(?:wir )?menschen (?:haben|besitzen|sehen|können|brauchen|schaffen)\b|ein(?:es)? menschliche[rsn]? (?:wimpernschlag|auge|hand)|\bals ein wimpernschlag"   # der Satz handelt von Menschen – auch wenn das Drehbuch dort das Tier hinstellt
 TANK_RE = r"\bbecken\b|plastikbecken|kunststoffbecken|acrylbecken|acrylglas|aquarium\b|aquarien\b"
 CAVI_RE = r"dampfblase|gasblase|kavitation|blasen? (?:kollabier|implodier|platz|fall\w* zusammen)|(?:kollabier|implodier|platz)\w* (?:die|diese) blase|druckwelle"
-LONG_KINDS = ("shrimp", "mantis", "axolotl", "tardigrade", "jelly", "cheetah", "eagle", "flea", "dolphin", "cow", "pig", "lion", "whale", "chimera")          # breiter als hoch: keine Großaufnahme, Kamera lässt sie ganz im Bild
+LONG_KINDS = ("shrimp", "mantis", "axolotl", "tardigrade", "jelly", "cheetah", "eagle", "flea", "dolphin", "cow", "pig", "lion", "whale", "chimera", "frog", "platypus", "puffer")          # breiter als hoch: keine Großaufnahme, Kamera lässt sie ganz im Bild
 # Winzlinge, die überall vorkommen (Moos, Eis, Weltall): als Figur an dem Ort, von dem der Satz spricht
 ANY_CREATURES = [(r"bärtierchen|wasserbär|tardigrad", "tardigrade"), (r"\bgepard", "cheetah"), (r"\badler|greifvogel|greifvögel", "eagle"), (r"\bfloh|\bflöhe", "flea")]
 # Landtiere und Vögel als Figur der Szene: bleiben nur einen Folgesatz, und nur, wenn er sichtbar weiter vom Tier handelt
@@ -3731,7 +3833,7 @@ def _sea_default(scenes, topic):
     return next(iter(kinds)) if len(kinds) == 1 else None
 
 
-HERO_SIZE = {"cheetah": 1.45, "eagle": 1.5, "flea": 1.35, "shrimp": 1.6, "mantis": 1.6, "jelly": 1.4, "axolotl": 1.6, "tardigrade": 1.5, "agent": 0.8, "brain": 1.6, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9, "diver": 1.3, "dolphin": 1.5, "cow": 1.25, "pig": 1.1, "chimp": 1.2, "mosquito": 1.0, "fly": 1.0, "lion": 1.3, "whale": 1.75, "chimera": 1.35}   # Hauptfigur: etwa halb so hoch wie ein Mensch
+HERO_SIZE = {"cheetah": 1.45, "eagle": 1.5, "flea": 1.35, "shrimp": 1.6, "mantis": 1.6, "jelly": 1.4, "axolotl": 1.6, "tardigrade": 1.5, "agent": 0.8, "brain": 1.6, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9, "diver": 1.3, "dolphin": 1.5, "cow": 1.25, "pig": 1.1, "chimp": 1.2, "mosquito": 1.0, "fly": 1.0, "lion": 1.3, "whale": 1.75, "chimera": 1.35, "frog": 1.25, "platypus": 1.45, "puffer": 1.35}   # Hauptfigur: etwa halb so hoch wie ein Mensch
 
 
 def _topic_creature(scenes, topic):
@@ -4688,7 +4790,7 @@ TEXT_PROPS = [(r"motorkran|werkstattkran|bau\w* .{0,40}motor.{0,40}\bein\b|motor
 MAP_HINTS = ((r"ganz deutschland|in deutschland|deutschlandweit|bundesweit|bundesländer|jeder deutsche|alle deutschen", "germany"),
              (r"weltweit|auf der ganzen welt|alle länder|rund um den globus|weltbevölkerung|alle kontinente|die ganze erde|die ganze welt", "worldmap"))
 # Tiere neben Menschen: Größe im Verhältnis zur Figur (1.0 = menschengroß). „Riesen…“-Themen heben das auf (giant).
-CREATURE_SIZE = {"cheetah": 1.0, "eagle": 0.8, "flea": 0.4, "shrimp": 0.5, "mantis": 0.5, "jelly": 0.6, "axolotl": 0.5, "tardigrade": 0.5, "brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45, "diver": 1.1, "dolphin": 1.0, "cow": 0.9, "pig": 0.6, "chimp": 0.75, "mosquito": 0.45, "fly": 0.45, "lion": 1.15, "whale": 1.4, "chimera": 1.05}
+CREATURE_SIZE = {"cheetah": 1.0, "eagle": 0.8, "flea": 0.4, "shrimp": 0.5, "mantis": 0.5, "jelly": 0.6, "axolotl": 0.5, "tardigrade": 0.5, "brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45, "diver": 1.1, "dolphin": 1.0, "cow": 0.9, "pig": 0.6, "chimp": 0.75, "mosquito": 0.45, "fly": 0.45, "lion": 1.15, "whale": 1.4, "chimera": 1.05, "frog": 0.34, "platypus": 0.55, "puffer": 0.6}
 GIANT_RE = r"riesen|riesig|gigant|monströs|so groß wie|meterhoh|haushoh|mutier"
 # Nur hier laufen Passanten durchs Bild – auf dem Feld, im Wald, im Keller ist niemand unterwegs
 CROWD_PLACES = ("headquarters", "street", "park", "village", "beach", "icesea", "harbor", "gasstation", "station", "transit", "supermarket", "supermarket_empty", "hospital", "office",

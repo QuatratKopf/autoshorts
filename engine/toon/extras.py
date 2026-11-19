@@ -3635,13 +3635,131 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
         brow(hx + 2, hy - 44, 14, 1)
         brow(hx + 46, hy - 44, 14, -1)
         cheek(hx - 26, hy + 22, 13)
+    elif kind == "frog":
+        # Pfeilgiftfrosch (Prüfung 19.11.2026): winziger, knallgelber Frosch mit dunklen Zehenspitzen und großen dunklen Augen; sitzt, die Kehle pulsiert.
+        # action „hop“: er hüpft auf der Stelle.
+        col = (250, 208, 40)
+        dk = (60, 54, 60)
+        hop = abs(math.sin(t * 5)) * 60 if action in ("hop", "walk", "run") else 0
+        oy = -hop
+        pulse = math.sin(t * 6) * 6
+        stroke([(-96, -96 + oy), (-150, -60 + oy * 0.5), (-70, -22 + oy * 0.2)], 34, _dark(col, 0.16))      # Hinterbein der abgewandten Seite
+        ell(-160, -196 + oy, 30, -58 + oy, col)                                                              # Rumpf: hinten flach …
+        ell(-50, -252 + oy, 160, -62 + oy, col)                                                              # … vorn hoch aufgerichtet
+        ell(-140, -186 + oy, 60, -70 + oy, col, shade=0, line=False)
+        ell(-20, -150 + oy, 150, -58 + oy - pulse, _light(col, 0.5), shade=0, line=False)                    # helle Kehle
+        stroke([(-80, -150 + oy), (-170, -110 + oy * 0.6), (-110, -30 + oy * 0.2), (-30, -16)], 40, col)   # gefaltetes Hinterbein
+        for tz in (-14, 6, 26):                                                                             # lange Zehen mit dunklen Haftscheiben
+            stroke([(-34, -16), (20 + tz, -8 + abs(tz) * 0.2)], 10, col)
+            ell(14 + tz, -18 + abs(tz) * 0.2, 34 + tz, 2 + abs(tz) * 0.2, dk, shade=0)
+        stroke([(96, -110 + oy), (110, -50 + oy * 0.4), (140, -14)], 26, col)                               # Vorderbein
+        for tz in (-16, 4, 24):
+            stroke([(140, -14), (160 + tz, -8)], 9, col)
+            ell(154 + tz, -18, 172 + tz, 0, dk, shade=0)
+        for sx_, sy_, r_ in ((-70, -170, 16), (-20, -200, 12), (-110, -120, 11)):                           # ein paar dunkle Flecken
+            ell(sx_ - r_, sy_ + oy - r_ * 0.8, sx_ + r_, sy_ + oy + r_ * 0.8, _dark(col, 0.3), shade=0, line=False)
+        hx, hy = 120, -210 + oy
+        ell(hx - 90, hy - 56, hx + 86, hy + 66, col)                                                         # breiter Kopf
+        for ex_ in (-34, 44):                                                                               # Augenhügel obenauf
+            ell(hx + ex_ - 34, hy - 92, hx + ex_ + 34, hy - 24, col, shade=0)
+            eye(hx + ex_ + 2, hy - 56, 23)
+        brow(hx - 32, hy - 96, 18, 1)
+        brow(hx + 46, hy - 96, 18, -1)
+        cheek(hx - 52, hy + 14, 14)
+        cheek(hx + 66, hy + 12, 12)
+        if mouth > 0.1 or wide:
+            mouthf(hx + 14, hy + 16, 16)
+        else:
+            d.arc(B(hx - 50, hy - 30, hx + 78, hy + 36), *((20, 160) if mood not in ("sad", "worried") else (200, 340)), fill=INK, width=max(2, int(6 * k)))
+    elif kind == "platypus":
+        # Schnabeltier (Prüfung 19.11.2026): brauner, flacher Pelzkörper, breiter Biberschwanz, dunkler Entenschnabel, Schwimmfüße; am Hinterbein der Giftsporn.
+        # action „spur“: das Hinterbein ist angehoben, der Sporn steht groß und hell hervor (mit Warn-Ring).
+        col = (150, 104, 70)
+        belly = _light(col, 0.4)
+        bill = (74, 70, 78)
+        foot = (92, 80, 84)
+        spur = action == "spur"
+        cx -= 24 * k * f                                                                                    # der lange Schnabel passt ganz auf die Zeichenfläche
+        sw = math.sin(t * 6) * (10 if action in ("walk", "run", "swim") else 3)
+        wag = math.sin(t * 3) * 8
+        poly([(-120, -150), (-200, -170 + wag), (-286, -150 + wag), (-300, -110 + wag), (-280, -76 + wag), (-190, -64 + wag * 0.5), (-120, -80)], _dark(col, 0.12))   # platter Biberschwanz
+        for q in (-250, -220, -190):
+            d.line((*P(q, -150 + wag), *P(q + 10, -84 + wag)), fill=_dark(col, 0.4), width=max(2, int(4 * k)))
+        for lx in (-70, 110):                                                                               # Füße der abgewandten Seite
+            stroke([(lx, -70), (lx + 8 - sw, -24)], 30, _dark(col, 0.25))
+            poly([(lx - 12 - sw, -26), (lx + 52 - sw, -4), (lx - 14 - sw, 0)], _dark(foot, 0.2), shade=0)
+        ell(-170, -210, 130, -50, col)                                                                       # Rumpf
+        ell(-110, -110, 110, -54, belly, shade=0, line=False)
+        hx, hy = 150, -150
+        ell(hx - 80, hy - 70, hx + 60, hy + 62, col)                                                         # Kopf
+        poly([(hx + 30, hy - 22), (hx + 120, hy - 26), (hx + 160, hy - 6), (hx + 164, hy + 16), (hx + 120, hy + 34), (hx + 30, hy + 30)], bill)   # breiter, flacher Schnabel
+        d.line((*P(hx + 44, hy + 8), *P(hx + 156, hy + 8)), fill=INK, width=max(2, int(4 * k)))
+        for nx_ in (132, 146):
+            ell(hx + nx_ - 4, hy - 12, hx + nx_ + 4, hy - 4, INK, shade=0, line=False)
+        rr(hx + 18, hy - 34, hx + 40, hy + 40, 10, _dark(bill, 0.2), shade=0)                                # Schnabelschild
+        eye(hx - 4, hy - 22, 15)
+        brow(hx - 4, hy - 46, 14, -1)
+        cheek(hx - 26, hy + 18, 13)
+        stroke([(104, -76), (112 + sw, -24)], 32, col)                                                       # Vorderfuß mit Schwimmhaut
+        poly([(92 + sw, -28), (166 + sw, -6), (90 + sw, 2)], foot, shade=0)
+        hx0, hy0 = (-96, -90)
+        fx_, fy_ = (-150, -96) if spur else (-84 - sw, -22)                                                  # Hinterbein: angehoben zeigt es den Sporn
+        stroke([(hx0, hy0), (fx_, fy_)], 36, col)
+        if spur:
+            poly([(fx_ - 6, fy_ - 22), (fx_ - 74, fy_ + 6), (fx_ - 8, fy_ + 26)], foot, shade=0)
+            gl = 0.5 + 0.5 * math.sin(t * 7)
+            rx_ = 40 + 10 * gl
+            d.ellipse(B(fx_ + 6 - rx_, fy_ + 44 - rx_, fx_ + 6 + rx_, fy_ + 44 + rx_), outline=(236, 64, 60, 230), width=max(3, int(7 * k)))   # Warn-Ring um den Sporn
+            poly([(fx_ - 8, fy_ + 18), (fx_ + 20, fy_ + 22), (fx_ + 10, fy_ + 74)], (250, 240, 214), shade=0)   # Giftsporn
+            ell(fx_ + 2, fy_ + 78, fx_ + 18, fy_ + 98, (150, 220, 90), shade=0)                              # Gifttropfen
+        else:
+            poly([(fx_ - 14, -28), (fx_ + 60, -6), (fx_ - 16, 2)], foot, shade=0)
+            poly([(fx_ - 10, -44), (fx_ - 34, -40), (fx_ - 14, -30)], (250, 240, 214), shade=0)             # kleiner Sporn an der Ferse
+    elif kind == "puffer":
+        # Kugelfisch (Prüfung 19.11.2026): rundlicher, sandgelber Fisch mit dunklen Tupfen, hellem Bauch und kleinem Schnabelmund; schwimmt.
+        # action „puff“: Er bläst sich zur stacheligen Kugel auf.
+        fly = True
+        col = (232, 190, 96)
+        belly = (250, 244, 226)
+        puff = action == "puff"
+        g = min(1.0, max(0.0, t / 0.7)) if puff else 0.0
+        g = g + (math.sin(t * 5) * 0.03 if puff else 0)
+        by = -300 + bob * (0.8 if puff else 1.8)
+        rx_, ry_ = 130 + 60 * g, 92 + 96 * g
+        wag = math.sin(t * 8) * 18
+        poly([(-rx_ + 14, by - 12), (-rx_ - 66, by - 50 + wag), (-rx_ - 50, by + wag * 0.4), (-rx_ - 66, by + 50 + wag), (-rx_ + 14, by + 12)], _dark(col, 0.08))   # Schwanzflosse
+        if puff:
+            for i in range(22):                                                                             # Stacheln rundum
+                a_ = i * math.tau / 22
+                if abs(math.cos(a_) - 1) < 0.08:
+                    continue
+                x0, y0 = math.cos(a_) * (rx_ - 6), by + math.sin(a_) * (ry_ - 6)
+                x1, y1 = math.cos(a_) * (rx_ + 34), by + math.sin(a_) * (ry_ + 34)
+                nx_, ny_ = -math.sin(a_) * 13, math.cos(a_) * 13
+                poly([(x0 - nx_, y0 - ny_), (x1, y1), (x0 + nx_, y0 + ny_)], (252, 246, 232) if math.sin(a_) > 0.2 else _light(col, 0.3), shade=0)
+        fl = math.sin(t * 10) * 12
+        poly([(-10, by - ry_ + 8), (-50, by - ry_ - 44 + fl * 0.4), (40, by - ry_ - 30), (50, by - ry_ + 10)], _dark(col, 0.06))   # Rückenflosse
+        ell(-rx_, by - ry_, rx_, by + ry_, col)
+        d.chord(B(-rx_ + 6, by - ry_ * 0.5, rx_ - 6, by + ry_ - 4), 10, 170, fill=belly)                    # heller Bauch
+        d.ellipse(B(-rx_, by - ry_, rx_, by + ry_), outline=INK, width=o)
+        for sx_, sy_, r_ in ((-70, -0.55, 13), (-20, -0.7, 15), (30, -0.5, 11), (-100, -0.2, 11), (-44, -0.3, 10), (70, -0.72, 9)):   # dunkle Tupfen auf dem Rücken
+            xx, yy = sx_ * rx_ / 130, by + sy_ * ry_
+            ell(xx - r_, yy - r_ * 0.8, xx + r_, yy + r_ * 0.8, _dark(col, 0.32), shade=0, line=False)
+        poly([(-6, by + 16), (-52, by + 58 + fl), (22, by + 50)], _dark(col, 0.1))                           # Brustflosse
+        ex_ = rx_ * 0.52
+        eye(ex_, by - ry_ * 0.22, 22 if not puff else 26, "wide" if puff else None)
+        brow(ex_, by - ry_ * 0.22 - 34, 18, 1)
+        cheek(ex_ - 8, by + ry_ * 0.2, 15)
+        mx_ = rx_ - 12
+        ell(mx_ - 16, by + 4, mx_ + 20, by + 34, (240, 150, 140), shade=0)                                   # kleiner Schnabelmund
+        d.line((*P(mx_ - 10, by + 19), *P(mx_ + 16, by + 19)), fill=INK, width=max(2, int(4 * k)))
     else:
         return None
     out = im.resize((im.width // S, im.height // S), Image.LANCZOS)
     return out, ax / S, gy / S, fly
 
 
-CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly", "axolotl", "tardigrade", "cheetah", "eagle", "flea", "diver", "fridge", "cow", "pig", "chimp", "mosquito", "fly", "dolphin", "lion", "whale", "chimera")
+CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly", "axolotl", "tardigrade", "cheetah", "eagle", "flea", "diver", "fridge", "cow", "pig", "chimp", "mosquito", "fly", "dolphin", "lion", "whale", "chimera", "frog", "platypus", "puffer")
 
 
 # ------------------------------------------------------------------ Werkstatt & Technik (Motor, Kran, Reifen, Getriebe …)

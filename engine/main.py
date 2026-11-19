@@ -156,6 +156,7 @@ def known_thing(word):
             | {"mensch", "menschen", "leute", "person", "personen", "figur", "mann", "frau", "kind", "kinder", "menge", "familie",
                "katze", "hund", "spinne", "krebs", "krebse", "geist", "roboter", "vogel", "vögel", "dinosaurier", "fisch", "fische", "hai", "biene", "bienen",
                "wespe", "delfin", "delfine", "delphin", "schweinswal", "schweinswale", "tümmler", "kuh", "kühe", "rind", "rinder", "schwein", "schweine", "ferkel",
+               "frosch", "frösche", "pfeilgiftfrosch", "pfeilgiftfrösche", "giftfrosch", "schnabeltier", "schnabeltiere", "kugelfisch", "kugelfische", "fugu", "giftsporn", "sporn",
                "schimpanse", "schimpansen", "affe", "affen", "mücke", "mücken", "stechmücke", "fliege", "löwe", "löwen", "löwin", "raubkatze", "atemloch", "atemlöcher", "eisloch", "eislöcher", "armee", "soldaten", "truppen", "heer",
                "gehirn", "hirn", "himmel", "boden", "licht", "dunkelheit", "nacht", "regen", "schnee", "sturm", "wind", "nebel", "erdbeben", "hitze", "kälte", "kaelte", "frost"})
     forms = {w, w.rstrip("n"), w.rstrip("en"), w.rstrip("e"), w.rstrip("s"), w + "e", w + "n", w + "en"}
