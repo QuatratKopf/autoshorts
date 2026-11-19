@@ -514,7 +514,7 @@ def given_meta(js, topic):
     return js
 
 
-_UML = {"baertier": "bärtier", "kaefer": "käfer", "loewe": "löwe", "voegel": "vögel", "baer": "bär", "koerper": "körper", "gefuehl": "gefühl", "glueck": "glück", "aengst": "ängst", "erklaer": "erklär", "traeum": "träum", "maedchen": "mädchen",
+_UML = {"geraet": "gerät", "kuehlschrank": "kühlschrank", "waswaerewenn": "waswärewenn", "baertier": "bärtier", "kaefer": "käfer", "loewe": "löwe", "voegel": "vögel", "baer": "bär", "koerper": "körper", "gefuehl": "gefühl", "glueck": "glück", "aengst": "ängst", "erklaer": "erklär", "traeum": "träum", "maedchen": "mädchen",
         "schoen": "schön", "gesuender": "gesünder", "zaehne": "zähne", "haende": "hände", "fuesse": "füße", "muedigkeit": "müdigkeit", "muede": "müde",
         "ernaehrung": "ernährung", "gaensehaut": "gänsehaut", "gedaechtnis": "gedächtnis", "raetsel": "rätsel", "phaenomen": "phänomen", "taeglich": "täglich",
         "ueberleben": "überleben", "ueberrasch": "überrasch", "fuer": "für", "natuerlich": "natürlich", "kuenstlich": "künstlich", "maerchen": "märchen",
@@ -576,7 +576,7 @@ def polish(js):
     for k in ("hashtags", "tags"):                        # echte Umlaute in Hashtags und Suchbegriffen („#koerper“ → „#körper“)
         if isinstance(js.get(k), list):
             js[k] = [_re_p.sub(_UML_RE, lambda m: _UML[m.group(0).lower()], x) if isinstance(x, str) else x for x in js[k]]
-            js[k] = [_re_p.sub(r"(?i)^(#?)(fakte|wisse|wissenschaf|tierfakte|weihnachtsesse|natu)$", lambda m: m.group(1) + {"fakte": "fakten", "wisse": "wissen", "wissenschaf": "wissenschaft", "tierfakte": "tierfakten", "weihnachtsesse": "weihnachtsessen", "natu": "natur"}[m.group(2).lower()], x)
+            js[k] = [_re_p.sub(r"(?i)^(#?)(fakte|wisse|wissenschaf|tierfakte|weihnachtsesse|natu|fy)$", lambda m: m.group(1) + {"fakte": "fakten", "wisse": "wissen", "wissenschaf": "wissenschaft", "tierfakte": "tierfakten", "weihnachtsesse": "weihnachtsessen", "natu": "natur", "fy": "fyp"}[m.group(2).lower()], x)
                      if isinstance(x, str) else x for x in js[k]]   # abgeschnittene Hashtags der Text-KI („#fakte“, Video 152; „#weihnachtsesse“, Video 151)
     for sc in js.get("scenes", []):
         if not isinstance(sc, dict):
@@ -587,7 +587,8 @@ def polish(js):
             sc["text"] = fix_eszett(sc["text"])
             sc["text"] = re.sub(r"(?i)\b([a-zäöüß]{4,}) \1\b", r"\1", sc["text"])      # „reine reine Fantasie“: versehentlich doppeltes Wort
             sc["text"] = re.sub(r"(?i)(zwei|drei|vier|fünf|sieben|acht|neun)s(hundert|tausend)", r"\1\2", sc["text"])
-            sc["text"] = re.sub(r"(?i)\b(\w*schau)ßt\b", r"\1st", sc["text"])   # „hineinschaußt“ (Video 157)   # „viertausendviershundert“
+            sc["text"] = re.sub(r"(?i)\b(\w*schau)ßt\b", r"\1st", sc["text"])   # „hineinschaußt“ (Video 157)
+            sc["text"] = re.sub(r"\b([Ee])s war ((?:nämlich |eben |ja |wirklich )?nur du)\b", r"\1s warst \2", sc["text"])   # „Es war nämlich nur du.“ (Video 160)   # „viertausendviershundert“
             sc["text"] = re.sub(r"(?i)\b(zwanzig|dreißig|vierzig|fünfzig|sechzig|siebzig|achtzig|neunzig)[ -]und[ -](ein|eins|zwei|drei|vier|fünf|sechs|sieben|acht|neun)\b",
                                 lambda m: (m.group(2).lower().replace("eins", "ein") + "und" + m.group(1).lower()), sc["text"])   # „neunzig und drei Kilometer“ → „dreiundneunzig“ (Video 154: Zähler zeigte „3 KM“)
             sc["text"] = re.sub(r"(?i)\b(mehreren?|einigen?|vielen?|wenigen?|paar)(hundert|tausend|millionen|milliarden)\b", r"\1 \2", sc["text"])   # „mehrerenhundert Metern“ (Video 152)

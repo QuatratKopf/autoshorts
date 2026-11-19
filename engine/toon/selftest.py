@@ -1873,8 +1873,15 @@ def main():
         frame({"place": "transit", "time": "night", "actors": [{"id": "du"}]})
         assert stage._hint("Nach zwei Sekunden liest es deinen Suchverlauf laut im Bus vor.") == "transit" and stage._hint("Der Bus fährt los.") != "transit"
         from .. import writer as wr_
-        js_ = wr_.polish({"title": "T", "scenes": [{"text": "Warum du jeden Abend hineinschaußt."}]})
+        js_ = wr_.polish({"title": "T", "hashtags": ["#fy", "#geraete"], "tags": ["kuehlschrank"], "scenes": [{"text": "Warum du jeden Abend hineinschaußt."}, {"text": "Es war nämlich nur du."}]})
         assert "hineinschaust" in js_["scenes"][0]["text"], js_["scenes"][0]["text"]
+        assert js_["scenes"][1]["text"] == "Es warst nämlich nur du." and js_["hashtags"] == ["#fyp", "#geräte"] and js_["tags"] == ["kühlschrank"], (js_["scenes"][1], js_["hashtags"], js_["tags"])
+        sd2 = stage.direct([{"text": "Das ist der Anfang.", "place": "livingroom", "actors": [{"id": "du"}]},
+                            {"text": "Plötzlich drehen sich alle Fahrgäste um und mustern dich mit großen Augen.", "place": "transit", "crowd": "worried", "props": [{"type": "lib_auge"}], "actors": [{"id": "du", "action": "cower"}]},
+                            {"text": "Auf dem Weg zum Bäcker sagt das Navi im Auto, dass du auch zu Fuß gehen kannst.", "place": "street", "props": [{"type": "car"}], "actors": [{"id": "du", "action": "sit"}]},
+                            {"text": "Ende.", "place": "livingroom", "actors": [{"id": "du"}]}], [(i_ * 4, i_ * 4 + 4) for i_ in range(4)], "Geräte sagen die Wahrheit", "whatif")
+        assert "lib_auge" not in [stage._pkey(q_) for q_ in sd2[1].get("props") or []], "kein einzelnes Auge in der Bahn"
+        assert all(a_.get("action") != "sit" for a_ in sd2[2].get("actors") or []), "niemand sitzt auf dem Gehweg vor dem Auto"
     check("Sprechende Geräte, Bus-Innenraum, Verneinung, fallende Kurve (Prüfung 19.11., Videos 156/157)", _devices)
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")
     import collections

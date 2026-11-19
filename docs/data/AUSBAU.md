@@ -531,3 +531,8 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Text aber unter `thumbnail.text` – der große Titel im ersten Bild fehlte deshalb in jedem Video. Bibliothek: die automatisch gelernte Zeichnung
   `gameboy` (Nachbild eines Markengeräts) ist entfernt, das Wort zeigt die neutrale `konsole`; für Marken-Geräte wird nichts mehr gelernt (`main.NO_THINGS`).
   `writer.polish`: „hineinschaußt“ → „hineinschaust“. Selbsttest: `_devices`.
+  Nach Video 160 (veröffentlicht): ein einzelnes Auge aus der Bibliothek steht nirgends mehr neben Menschen („mustern dich mit großen Augen“ in der Bahn);
+  beim Navi-/„im Auto“-Satz draußen sitzt die Figur nicht auf einer Kiste am Gehweg; `writer.polish`: „Es war nämlich nur du“ → „Es warst nämlich nur du“,
+  Hashtag „#fy“ → „#fyp“, Umlaute für geraet/kuehlschrank in Hashtags und Suchbegriffen.
+  Noch offen: Gäste und Freunde („zeigt allen Gästen“, „deine Freunde grinsen“) kommen nicht ins Bild; Großaufnahmen von Fernseher, Router, Auto stehen
+  allein vor Farbgrund; Kaffeemaschine und Joghurt haben keine Zeichnung; die Wanduhr `clock` steht weiter am Boden statt an der Wand.

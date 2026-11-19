@@ -2306,6 +2306,10 @@ def direct(scenes, times, topic="", style="", look=""):
             o_k["unit"] = "KM/H"
     _devices(scenes)
     _last_look(scenes, topic)
+    for sc in scenes:                                     # ein einzelnes Auge neben Menschen („mustern dich mit großen Augen“ in der Bahn, Video 160) – überall, nicht nur im Zimmer
+        if isinstance(sc, dict) and isinstance(sc.get("props"), list) and str(sc.get("shot") or "") not in ("insert", "graphic") and (
+                sc.get("crowd") or any(isinstance(a, dict) and not a.get("kind") for a in sc.get("actors") or [])):
+            sc["props"] = [q for q in sc["props"] if str((q.get("type") if isinstance(q, dict) else q) or "").lower().replace("lib_", "") not in ("auge", "augen")]
     for sc in scenes:                                     # was der Satz verneint („ohne Burgen“), bringt auch kein späterer Durchgang zurück
         if isinstance(sc, dict) and sc.get("_simile") and isinstance(sc.get("props"), list) and str(sc.get("shot") or "") != "graphic":
             deny_k = [k for pat, k in _lib_props() + TEXT_PROPS if k in sc["_simile"] and denied(pat, str(sc.get("text") or "").lower())]
@@ -3233,6 +3237,10 @@ def _devices(scenes):
         if re.search(r"\bnavis?\b|navigationsgerät|\bim auto\b", low) and not isinstance(backdrop(sc), dict) and places.resolve(backdrop(sc)) in GARAGES \
                 and not re.search(r"werkstatt|garage|hebebühne|schraub|reparier", low):
             sc["place"] = "street"                                                   # „Im Auto behauptet das Navi …“ spielt unterwegs, nicht in der Werkstatt
+        if re.search(r"\bnavis?\b|navigationsgerät|\bim auto\b", low) and (isinstance(backdrop(sc), dict) or places.resolve(backdrop(sc)) in places.OUTDOOR):
+            for a in acts:                                                           # „sitzt im Auto“: draußen säße die Figur auf einer Kiste am Gehweg vor dem Auto (Video 160)
+                if not a.get("kind") and a.get("action") == "sit":
+                    a["action"] = "idle"
         if isinstance(sc.get("props"), list):
             if re.search(CLOCK_TIME_RE, low) and not re.search(r"wanduhr|armbanduhr|die uhr\b|der uhr\b|eine uhr\b|wecker|zeiger|tickt", low):
                 sc["props"] = [p for p in sc["props"] if _pkey(p) != "clock"]        # „um drei Uhr nachts“: eine Uhrzeit, keine Wanduhr auf dem Flurboden
