@@ -1760,6 +1760,13 @@ def main():
         sc[7]["props"] = [{"type": "scale", "pos": 600}]
         sd = stage.direct(sc, [(i_ * 4, i_ * 4 + 4) for i_ in range(len(sc))], "Was wäre, wenn du ein Super-Tier aus vier Tierarten baust?", "whatif")
         kinds = [[str(a_.get("kind") or "") for a_ in s_.get("actors") or []] for s_ in sd]
+        assert sd[4].get("place") == "forest" and sd[1].get("place") == "savannah" and sd[6].get("place") == "underwater", "genanntes Tier in seinem Lebensraum, nicht auf der Straße"
+        sf = stage.direct([{"text": t_, "place": "lab", "actors": [{"id": "du"}]} for t_ in ("Du baust ein Super-Tier.", "Zutat drei ist das Bärtierchen.", "Es übersteht extreme Kälte.",
+                                                                                              "Im Jahr 2007 überlebte es sogar den offenen Weltraum.", "Das Herz wiegt 180 Kilogramm.")],
+                          [(i_ * 4, i_ * 4 + 4) for i_ in range(5)], "Was wäre, wenn du ein Super-Tier aus vier Tierarten baust?", "whatif")
+        kf = [[str(a_.get("kind") or "") for a_ in s_.get("actors") or []] for s_ in sf]
+        assert kf[2] == ["tardigrade"] and kf[3] == ["tardigrade"] and sf[3].get("place") == "space", f"Folgesätze bleiben beim Tier: {kf} {sf[3].get('place')}"
+        assert "chimera" in kf[4] and "tardigrade" not in kf[4], f"Herz-Satz zeigt das Wesen, nicht das Tier von eben: {kf[4]}"
         for i_ in (0, 7, 8, 9, 10):
             assert "chimera" in kinds[i_] and "" in kinds[i_] and sd[i_].get("place") == "lab", f"Satz {i_}: Misch-Wesen und Hauptfigur im Labor erwartet: {kinds[i_]} {sd[i_].get('place')}"
             assert not sd[i_].get("crowd") and not sd[i_].get("props"), f"Satz {i_}: Passanten/Waage im Labor"

@@ -2281,6 +2281,7 @@ HYBRID_RE = (r"super-?tier|mischwesen|misch-wesen|hybrid-?(?:tier|wesen)|chimär
              r"(?:tiere|tierarten) (?:zu einem|in einem) (?:\w+ )?(?:wesen|tier)|aus (?:mehreren|verschiedenen|vier|drei|fünf) tieren")
 HYBRID_BEING_RE = r"super-?tier|\bwesen\b|\bmonster|\bbiest|\bkreatur|mischwesen|chimäre|geschöpf|unser tier\b|dein tier\b|\bbauplan|\bbaukasten"
 HYBRID_FAIL_RE = r"bricht\b.*zusammen|zusammenbr|kollabier|überhitz|\bversagt|\bstirbt|\bkippt um|\bfällt um|klappt zusammen|macht schlapp|\bschlapp\b|geht k\.?o|am ende seiner kräfte|kann es nicht|schafft es nicht"
+HYBRID_HOME = {"cheetah": "savannah", "lion": "savannah", "eagle": "mountain", "tardigrade": "forest", "flea": "park", "cow": "fields", "pig": "farm", "chimp": "forest"}
 HYBRID_RUN_RE = r"\brenn|\bsprint|\brast\b|\bjagt\b|km/h|kilometer\w* pro stunde|stundenkilometer|\bbeschleunig"
 
 
@@ -2305,8 +2306,35 @@ def _hybrid_named(low):
 def _hybrid_story(scenes, topic="", main_id="du"):
     if not hybrid_story(scenes, topic):
         return scenes
-    last_named, flip, n_lab = None, False, 0
-    n = len([x for x in scenes if isinstance(x, dict)])
+    last_named, flip, n_lab, fallen = None, False, 0, False
+    wild = ("space", "snow", "desert", "underwater", "mountain", "savannah", "forest", "fields", "highsky", "beach", "cave", "icesea", "lake", "river", "moon")
+
+    def animal(sc, kind, low, keep_place=True):
+        """Das genannte Tier allein in seinem Lebensraum – nicht im Labor (der Adler flog zwischen den Kolben, Video 153)."""
+        rp = places.resolve(backdrop(sc)) if not isinstance(backdrop(sc), dict) else "custom"
+        hint = _hint(low)
+        home = HYBRID_HOME.get(kind) or ("underwater" if kind in SEA_KINDS + ("fish", "shark", "dolphin") else "")
+        if kind in SEA_KINDS + ("fish", "shark", "dolphin"):
+            place = "underwater"
+        elif hint in wild and hint != "underwater":
+            place = hint
+        elif keep_place and (rp == "custom" or (rp in wild and rp != "underwater")):
+            place = rp                                    # Schnee, Wüste, eigene Landschaft aus dem Drehbuch bleiben
+        else:
+            place = home or rp
+        act = next((a for a in (sc.get("actors") or []) if isinstance(a, dict) and str(a.get("kind") or "").lower() == kind), None)
+        act = dict(act or {"id": "_tier", "speaks": False, "emote": "", "say": "", "hold": "", "action": "idle",
+                           "emotion": MOOD_EMOTION.get(str(sc.get("mood") or ""), "")}, kind=kind, hero=True, pos="center", facing="right")
+        act.pop("to", None)
+        if kind == "cheetah" and re.search(HYBRID_RUN_RE + r"|\bschnell", low):
+            act.update(action="run", emotion="")
+        if place != rp:
+            sc.update(place=place, backdrop=None, weather="", time="night" if place == "space" else "day")
+        sc.update(actors=[act], crowd="", float="", props=[q for q in (sc.get("props") or []) if place == rp and isinstance(q, dict)
+                                                           and extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) in extras.SKY][:1])
+        if sc.get("shot") in ("event", "insert", "close"):
+            sc["shot"] = ""
+
     for i, sc in enumerate(scenes):
         if not isinstance(sc, dict):
             continue
@@ -2314,38 +2342,46 @@ def _hybrid_story(scenes, topic="", main_id="du"):
         sc["crowd"] = ""
         named = _hybrid_named(low)
         being = bool(re.search(HYBRID_BEING_RE, low))
+        fail = bool(re.search(HYBRID_FAIL_RE, low))
         acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
-        kinds = [str(a.get("kind") or "").lower() for a in acts if a.get("kind")]
         ov_h = sc.get("overlay") if isinstance(sc.get("overlay"), dict) else None
         if ov_h and str(ov_h.get("type") or "") == "counter" and not str(ov_h.get("label") or "").strip() and re.search(r"\bminus\b", low) \
                 and re.search(r"grad", str(ov_h.get("unit") or "").lower()):
             ov_h["label"] = "MINUS"                       # „minus zweihundert Grad“ stand als „200 GRAD“ im Bild
         if sc.get("shot") == "graphic" and graphics.clean(sc.get("graphic")):
-            last_named = None
+            if last_named:
+                last_named = (last_named[0], i)           # die Zahl gehört noch zum Tier von eben: der Satz danach („Seine eigentliche Stärke …“) meint es weiter
             continue
-        if named and i > 0 and named in kinds and not re.search(HYBRID_FAIL_RE, low):
-            last_named = (named, i)                       # „… die Augen eines Adlers“: der Adler in seinem Lebensraum (Regie weiter oben)
+        if named and not fail and not (being and i == 0):
+            animal(sc, named, low)                        # „… die Augen vom Adler“: der Adler in seinem Lebensraum
+            last_named, n_lab = (named, i), 0
+            continue
+        follow = bool(last_named and i - last_named[1] <= 2 and not being and not fail
+                      and re.search(r"^(?:es|er|sie|seine?|ihre?|dieses tier|dieser|im jahr|sogar|dabei|damit|und (?:es|er|sie))\b", low)
+                      and not (re.search(r"\bherz", low) and last_named[0] != "whale"))
+        if follow:
+            animal(sc, last_named[0], low, keep_place=False if _hint(low) is None and i - last_named[1] == 0 else True)   # Folgesätze bleiben beim Tier von eben
+            if scenes[last_named[1]] is not sc and isinstance(scenes[last_named[1]], dict) and scenes[last_named[1]].get("shot") != "graphic" \
+                    and places.resolve(backdrop(sc)) == places.resolve(backdrop(scenes[last_named[1]])) and i - last_named[1] == 1:
+                sc["actors"][0]["facing"] = "left"        # derselbe Ort wie eben: wenigstens gespiegelt
             n_lab = 0
             continue
-        follow = bool(last_named and i - last_named[1] == 1 and last_named[0] in kinds and not being and not re.search(HYBRID_FAIL_RE, low)
-                      and re.search(r"^(?:es|er|sie|dieses|dieser|diese|damit|sein|seine|ihr|ihre|das herz|der vogel|die katze)\b", low))
-        if follow:
-            continue                                      # ein Folgesatz bleibt beim Tier von eben
         last_named = None
-        fail = bool(re.search(HYBRID_FAIL_RE, low))
+        fallen = fallen or fail
         run = bool(re.search(HYBRID_RUN_RE, low)) and not fail
         human = next((a for a in acts if not a.get("kind") and not str(a.get("id") or "").startswith("_")), None)
         cells = bool(re.search(r"\bzellen\b|zellhaufen|\bhaufen\b", low))
-        beast = {"id": "_tier", "kind": "chimera", "hero": True, "speaks": False, "emote": "", "say": "", "hold": "",
-                 "action": "down" if fail or cells else "run" if run else "idle",
-                 "emotion": "sad" if fail or cells else MOOD_EMOTION.get(str(sc.get("mood") or ""), "")}
+        lying = fail or cells or (fallen and "?" not in str(sc.get("text") or ""))   # einmal zusammengebrochen, bleibt es liegen – bis zur Schlussfrage
+        beast = {"id": "_tier", "kind": "chimera", "speaks": False, "emote": "", "say": "", "hold": "",
+                 "action": "down" if lying else "run" if run else "idle",
+                 "emotion": "sad" if lying else MOOD_EMOTION.get(str(sc.get("mood") or ""), "")}
         if sc.get("shot") == "close" and human and not being and i > 0 and n_lab >= 1:
             sc.update(place="lab", time="day", backdrop=None, weather="", props=[], float="", actors=[human])
             n_lab += 1
             continue                                      # „Falsch, denn …“: die Großaufnahme der Hauptfigur bleibt als Abwechslung
         if run:
             sc.update(place="savannah", time="day", backdrop=None, weather="", props=[], float="", shot="",
-                      actors=[dict(beast, pos="center", facing="right")])
+                      actors=[dict(beast, pos="center", facing="right", hero=True)])
             n_lab = 0
             continue
         me = dict(human or {"id": main_id, "speaks": False, "emote": ""})
@@ -2353,12 +2389,12 @@ def _hybrid_story(scenes, topic="", main_id="du"):
         me["hold"] = ""
         if str(me.get("action") or "") in ("", "idle", "walk", "run", "sit", "sleep", "fall", "float", "jump", "cower", "swim", "lie"):
             me["action"] = "shocked" if fail or cells else "point" if being else "think"
-        if fail or cells:
+        if lying:
             me.update(emotion="sad", emote="")
         flip = not flip                                   # abwechselnd links/rechts; das breite Wesen steht mit Abstand neben der Figur, Kopf nach außen
-        me["pos"], me["facing"] = (150, "right") if flip else (930, "left")
-        beast.update(pos=745 if flip else 335, facing="right" if flip else "left")
-        sc.update(place="lab", time="day", backdrop=None, weather="", props=[], float="", shot="", actors=[me, beast])
+        me["pos"], me["facing"] = (230, "right") if flip else (850, "left")   # nicht am Rand: die Kamera schnitt die Figur sonst an (Video 153)
+        beast.update(pos=730 if flip else 350, facing="right" if flip else "left")
+        sc.update(place="lab", time="day", backdrop=None, weather="", props=[], float="", shot="", actors=[me, beast], _no_cut=True, cam_move="push" if n_lab % 2 else "pull")   # Figur und breites Wesen füllen das Bild: kein Schwenk, kein näherer Gegenschnitt (schnitt die Figur an)
         if str(sc.get("mood") or "") in ("scary", "panic"):
             sc["mood"] = "tense"
         n_lab += 1

@@ -497,4 +497,9 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   wenn der Satz „Kilometer pro Stunde“ sagt; Zähler „… GRAD“ bekommt die Überzeile „MINUS“, wenn der Satz „minus“ sagt (nur im Misch-Wesen-Durchgang).
   Untertitel (`render.build_ass`): kein Häppchen über einen Szenenwechsel hinweg – bei Sätzen ohne Punkt stand das erste Wort des nächsten Satzes noch
   im alten Bild („ANGREIFT DESHALB“). `writer.polish`: „mehrerenhundert“ → „mehreren hundert“; abgeschnittene Hashtags („#fakte“ → „#fakten“).
+  Nach dem 1. Neubau (Video 153, verworfen: Bärtierchen im Bild zum Satz „Das Herz wiegt 180 Kilogramm“, Adler und Bärtierchen im Labor, Hauptfigur am
+  Bildrand angeschnitten, Misch-Wesen statt Bärtierchen beim Weltraum-Satz): genannte Tiere stehen in ihrem Lebensraum (`HYBRID_HOME`; Schnee, Wüste,
+  Weltraum aus Satz oder Drehbuch bleiben), bis zu zwei Folgesätze („Es …“, „Seine …“, „Im Jahr …“) bleiben beim Tier – auch über eine Zahl-Grafik
+  hinweg –, ein Herz-Satz ohne Wal zeigt das Wesen; im Labor stehen Figur und Wesen weiter innen, ohne Schwenk und Gegenschnitt (`_no_cut`,
+  `cam_move`); nach dem Zusammenbruch bleibt das Wesen bis zur Schlussfrage liegen.
   Selbsttest: `_hybrid`. Noch offen: Das Bärtierchen steht in Mehr-Tier-Videos baumhoch im Wald (nur im Ein-Tier-Video klein am Moos).
