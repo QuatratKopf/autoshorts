@@ -5700,7 +5700,7 @@
   "id": 152,
   "category": "whatif",
   "topic": "Was wäre, wenn man ein Wesen aus verschiedenen Tierarten erschafft?",
-  "status": "review",
+  "status": "discarded",
   "created": 1795082991.6252382,
   "title": "Was wäre, wenn du ein Super-Tier aus vier Arten baust?",
   "description": "Was passiert, wenn du die krassesten Tier-Superkräfte in einem einzigen Wesen vereinst?\nWir bauen die ultimative Kreatur aus Adler, Gepard, Bärtierchen und Blauwal.\nWelche Superkraft würdest du zuerst ausprobieren?",
@@ -5736,6 +5736,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-19 13:00",
-  "review_at": 1795083385.0891435
+  "review_at": 1795083385.0891435,
+  "error": "Bei der Prüfung verworfen: Wesen nie im Bild (Wal unter Wasser statt Labor), Passanten und Waagen ohne Bezug, falsche Angaben (Herz so schwer wie ein Kleinwagen, schneller als jedes Auto, 200 Tonnen, drei Sekunden)"
  }
 ]
