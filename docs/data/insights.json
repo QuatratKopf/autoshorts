@@ -1,24 +1,15 @@
 {
- "updated": 1795069662.6454291,
+ "updated": 1795071460.3279521,
  "enough": true,
- "counted": 23,
+ "counted": 24,
  "total": 26,
  "needed": 6,
  "categories": [
   {
-   "slug": "mysterien",
-   "name": "🕵️ Mysterien & Rätsel",
-   "n": 1,
-   "avg_views": 1802,
-   "avg_likes": 43.0,
-   "like_rate": 2.39,
-   "avg_score": 2447
-  },
-  {
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1655,
+   "avg_views": 1654,
    "avg_likes": 52.5,
    "like_rate": 3.17,
    "avg_score": 2442
@@ -27,10 +18,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 2,
-   "avg_views": 1806,
+   "avg_views": 1805,
    "avg_likes": 40.0,
-   "like_rate": 2.21,
-   "avg_score": 2442
+   "like_rate": 2.22,
+   "avg_score": 2440
   },
   {
    "slug": "comedy",
@@ -51,6 +42,15 @@
    "avg_score": 2398
   },
   {
+   "slug": "mysterien",
+   "name": "🕵️ Mysterien & Rätsel",
+   "n": 2,
+   "avg_views": 1771,
+   "avg_likes": 38.5,
+   "like_rate": 2.17,
+   "avg_score": 2364
+  },
+  {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 8,
@@ -63,37 +63,40 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 2,
-   "avg_views": 1680,
+   "avg_views": 1672,
    "avg_likes": 10.5,
-   "like_rate": 0.62,
-   "avg_score": 1882
+   "like_rate": 0.63,
+   "avg_score": 1875
   }
  ],
  "weights": {
-  "fakten": 1.02,
+  "fakten": 1.03,
   "grusel": 1.2,
   "storys": 1.04,
-  "mysterien": 1.2,
+  "mysterien": 1.01,
   "tiere": 1.04,
   "whatif": 1.0,
-  "comedy": 1.02,
+  "comedy": 1.03,
   "musik": 0.8,
   "vergleich": 1.2,
   "motivation": 1.2,
   "liebe": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1802 Aufrufe, 2.39 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1680 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2499 zu 705 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2523 zu 2005 Punkte)."
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1654 Aufrufe, 3.17 % Likes).",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1672 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2488 zu 705 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2507 zu 2003 Punkte).",
+  "Wörter in starken Titeln: gänsehaut."
  ],
- "words_good": [],
+ "words_good": [
+  "gänsehaut"
+ ],
  "words_bad": [
   "lied",
-  "bekanntes",
   "remix",
-  "erkennst"
+  "erkennst",
+  "bekanntes"
  ],
  "top": [
   {
