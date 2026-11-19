@@ -1,5 +1,5 @@
 {
- "updated": 1795108612.539278,
+ "updated": 1795110402.1406834,
  "enough": true,
  "counted": 26,
  "total": 28,
@@ -9,19 +9,19 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 4,
-   "avg_views": 1781,
+   "avg_views": 1782,
    "avg_likes": 44.2,
    "like_rate": 2.48,
-   "avg_score": 2462
+   "avg_score": 2463
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 2,
-   "avg_views": 1820,
+   "avg_views": 1814,
    "avg_likes": 40.0,
    "like_rate": 2.2,
-   "avg_score": 2455
+   "avg_score": 2450
   },
   {
    "slug": "storys",
@@ -46,9 +46,9 @@
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
    "avg_views": 1778,
-   "avg_likes": 39.0,
-   "like_rate": 2.19,
-   "avg_score": 2393
+   "avg_likes": 38.5,
+   "like_rate": 2.17,
+   "avg_score": 2370
   },
   {
    "slug": "whatif",
@@ -63,17 +63,17 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 2,
-   "avg_views": 1744,
+   "avg_views": 1739,
    "avg_likes": 11.0,
    "like_rate": 0.63,
-   "avg_score": 1954
+   "avg_score": 1949
   }
  ],
  "weights": {
   "fakten": 1.02,
   "grusel": 1.2,
-  "storys": 1.03,
-  "mysterien": 1.01,
+  "storys": 1.04,
+  "mysterien": 1.0,
   "tiere": 1.04,
   "whatif": 0.99,
   "comedy": 1.04,
@@ -84,9 +84,9 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 1781 Aufrufe, 2.48 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1744 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2502 zu 705 Punkte).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 1782 Aufrufe, 2.48 % Likes).",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1739 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2499 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
  ],
  "words_good": [
@@ -123,21 +123,21 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 2054,
+   "views": 2053,
    "likes": 68,
    "comments": 0,
    "shares": 0,
-   "score": 3074
+   "score": 3073
   },
   {
    "id": 120,
    "title": "Warum du bei Musik Gänsehaut bekommst",
    "category": "fakten",
-   "views": 2341,
+   "views": 2344,
    "likes": 45,
    "comments": 0,
    "shares": 0,
-   "score": 3016
+   "score": 3019
   },
   {
    "id": 84,
