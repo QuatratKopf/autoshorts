@@ -1,5 +1,5 @@
 {
- "updated": 1795098029.2170055,
+ "updated": 1795100032.3632383,
  "enough": true,
  "counted": 25,
  "total": 27,
@@ -45,10 +45,10 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
-   "avg_views": 1774,
+   "avg_views": 1776,
    "avg_likes": 38.5,
    "like_rate": 2.17,
-   "avg_score": 2367
+   "avg_score": 2369
   },
   {
    "slug": "whatif",
@@ -93,10 +93,10 @@
   "gänsehaut"
  ],
  "words_bad": [
-  "erkennst",
   "remix",
+  "lied",
   "bekanntes",
-  "lied"
+  "erkennst"
  ],
  "top": [
   {
