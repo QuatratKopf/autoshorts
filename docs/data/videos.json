@@ -4013,9 +4013,9 @@
   "tt_status": "Zernio: published",
   "tt_publish_id": "zernio:6afa0dd2e5712efc6ef658dc",
   "error": null,
-  "yt_thumb_at": 1794993039.2633631,
-  "yt_thumb_tries": 4,
-  "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
+  "yt_thumb_at": 1795066067.6217818,
+  "yt_thumb_tries": 5,
+  "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The request cannot be completed because you have exceeded your \\u003ca href=\\\"/youtube/data/getting-starte",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7708488974695714081?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
  },
  {
