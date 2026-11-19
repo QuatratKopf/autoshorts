@@ -839,7 +839,19 @@ let ACC_SYNCED = false;
 function syncAccessId() {   // die Kopie merkt sich ihren Zugang – ihr Motor prüft ihn vor jedem Video
   if (!LITE() || ACC_SYNCED || !CFG || !S.access || !S.access.ok || !S.access.id) return;
   ACC_SYNCED = true;
-  if (CFG.settings.access_id !== S.access.id) { CFG.settings.access_id = S.access.id; saveConfig("Zugang").catch(() => { ACC_SYNCED = false; }); }
+  (async () => {
+    let msg = [];
+    if (CFG.settings.access_id !== S.access.id) { CFG.settings.access_id = S.access.id; msg.push("Zugang"); }
+    // neue Video-Arten des Admins sofort übernehmen (sonst erst beim nächsten Motor-Update vor einem Video)
+    const adm = await rawJson("QuatratKopf/autoshorts", "main", "config.json");
+    const have = new Set(CFG.categories.map(c => c.slug));
+    const fresh = (adm && Array.isArray(adm.categories) ? adm.categories : []).filter(c => c && typeof c.slug === "string" && /^[a-z0-9_-]{1,30}$/.test(c.slug) && !have.has(c.slug));
+    for (const c of fresh) CFG.categories.push({...JSON.parse(JSON.stringify(c)), enabled: !!c.enabled && catOk(c)});
+    if (fresh.length) msg.push("Neue Video-Arten: " + fresh.map(c => c.name).join(", "));
+    if (!msg.length) return;
+    try { await saveConfig(msg.join(" · ")); if (fresh.length) { toast("Neu dabei: " + fresh.map(c => `${c.emoji || ""} ${c.name}`).join(", ")); render(); } }
+    catch (e) { ACC_SYNCED = false; }
+  })();
 }
 
 /* ═════════════════ Admin: Zugänge ═════════════════ */

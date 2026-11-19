@@ -1523,6 +1523,44 @@ def main():
             assert not [ln for ln in f_.read_text(encoding="utf-8").splitlines() if ",Hook," in ln or ",Num," in ln]
     check("Hook-Titel im ersten Bild, Listen-Zähler", _hook_count)
 
+    def _ytcut():                                                # kürzere YouTube-Fassung: was darf raus, wer bekommt welche Datei
+        from .. import ytcut, main as mn, uploaders as up
+        sc_y = [{"text": f"Satz {i}."} for i in range(14)]
+        sc_y[5]["text"] = "Nummer zwei ist der Onkel."
+        tm = [(i * 5.0, i * 5.0 + 5.0) for i in range(14)]       # 70 s
+        keep = ytcut.plan(sc_y, tm, 55, lambda *a: ({"drop": [0, 1, 4, 5, 7, 12, 13, "x"]}, ""))
+        assert keep == [0, 1, 2, 3, 5, 6, 8, 9, 10, 11, 12, 13], keep        # nie Anfang/Ende/Listen-Nummer, nur gültige Nummern
+        assert ytcut.plan(sc_y, tm, 0, lambda *a: ({"drop": [4]}, "")) is None
+        assert ytcut.plan(sc_y[:8], tm[:8], 55, lambda *a: ({"drop": [4]}, "")) is None          # 40 s: schon kurz genug
+        k2 = ytcut.plan(sc_y, tm, 55, lambda *a: ({"drop": [2, 3, 4, 6, 7, 8, 9, 10]}, ""))
+        assert k2 and 70 - 5 * (14 - len(k2)) >= 47, k2                      # nicht zu viel wegschneiden
+        calls, saved = [], (up.upload_video, up.zernio_ready, up.connected, mn.cfg)
+        def fake(v, path):
+            calls.append((path, bool(v.get("yt_id")), bool(v.get("tt_publish_id"))))
+            if not v.get("yt_id"):
+                v["yt_id"] = "Y1"
+            if not v.get("tt_publish_id"):
+                v["tt_publish_id"] = "T1"
+            v["error"] = None
+        try:
+            up.upload_video, up.zernio_ready, up.connected = fake, (lambda: False), (lambda p: True)
+            mn.cfg = lambda k: True if k == "youtube_enabled" else saved[3](k)
+            import tempfile
+            from pathlib import Path
+            with tempfile.TemporaryDirectory() as td:
+                short = Path(td) / "k.mp4"
+                short.write_bytes(b"x")
+                v_ = {"id": 1}
+                mn.upload_split(v_, "voll.mp4", short)
+                assert calls == [(short, False, True), ("voll.mp4", True, False)], calls
+                assert v_["yt_id"] == "Y1" and v_["tt_publish_id"] == "T1" and v_["status"] == "published", v_
+                calls.clear()
+                mn.upload_split({"id": 2}, "voll.mp4", None)
+                assert calls == [("voll.mp4", False, False)], calls
+        finally:
+            up.upload_video, up.zernio_ready, up.connected, mn.cfg = saved
+    check("YouTube-Kurzfassung: Auswahl und getrennte Uploads", _ytcut)
+
     def _adopt():                                                # Gelerntes aus Kopien: nur Neues, keine fremden Wörter, nur nach Bild-Prüfung
         import tempfile
         from pathlib import Path

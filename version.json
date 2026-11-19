@@ -1,6 +1,6 @@
 {
-  "version": "1.16.1",
-  "file": "releases/AutoShorts-1.16.1.cmd",
-  "sha256": "3ef66941abbbc4fdc609e7d8ac0a653b941163d12105c74e66d5db28803fffc4",
-  "notes": "Gesamt-Aufrufe links stimmen mit der Tagesgrafik überein"
+  "version": "1.16.2",
+  "file": "releases/AutoShorts-1.16.2.cmd",
+  "sha256": "a4f827a297f57081bf6a28baf3706eb2c51fd10c4b80ff45ca667759c5f00ece",
+  "notes": "Gast-App übernimmt neue Video-Arten des Admins sofort (z. B. Liebe)"
 }

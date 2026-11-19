@@ -134,6 +134,7 @@ DEFAULT_SETTINGS = {
     "upload_via": "direct",         # direct = eigene Google-/TikTok-App · zernio = über den Dienst Zernio (ein API-Schlüssel)
     "target_seconds": 70,
     "min_seconds": 62,              # Videos sollen sicher über einer Minute liegen (TikTok-Creator-Programm)
+    "youtube_seconds": 55,          # YouTube bekommt eine gekürzte Fassung um diese Länge (Shorts werden kurz öfter zu Ende geschaut) · 0 = aus
     "text_provider": "gemini",
     "tts_provider": "gemini",        # gemini = natürliche Erzählerstimme (kostenloses Kontingent), sonst edge
     "voice_style": "Lebendig und mitreißend mit klarer Betonung – wie der Sprecher eines viralen Erklärvideos, flüssig und natürlich.",

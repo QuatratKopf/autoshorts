@@ -13,6 +13,7 @@ import shutil
 import subprocess
 import sys
 import time
+from pathlib import Path
 
 from PIL import Image
 
@@ -518,13 +519,24 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, 
 
         log("Schneide Video …")
         ass = work / "subs.ass"
-        render.build_ass(words, scenes, times, ass, bool(cfg("subtitles_lowercase")),
-                         script.get("hud"), script.get("countdown"), 480 if toon else 560,
-                         cat.get("caption_style") or cfg("caption_style") or "impact",   # Motivation: ein großes Wort in der Mitte
-                         hook=(kick if toon and kick_ok else None), title=script.get("title") or "")
-        v["cover_ms"] = render.render(work, scenes, times, voice, ass, final, render.pick_music(cat["slug"]),
-                                      float(cat.get("music_volume") or cfg("music_volume") or 0.1), cover,   # Motivation: Musik deutlich hörbar
-                                      float(cfg("sfx_volume") if cfg("sfx_volume") is not None else 0.35), cat["slug"])
+        ass_args = dict(lower=bool(cfg("subtitles_lowercase")), hud=script.get("hud"), countdown=script.get("countdown"), margin=480 if toon else 560,
+                        style=cat.get("caption_style") or cfg("caption_style") or "impact",   # Motivation: ein großes Wort in der Mitte
+                        hook=(kick if toon and kick_ok else None), title=script.get("title") or "")
+        render.build_ass(words, scenes, times, ass, **ass_args)
+        music_f = render.pick_music(cat["slug"])
+        render_args = dict(music=music_f, music_volume=float(cat.get("music_volume") or cfg("music_volume") or 0.1), cover=cover,   # Motivation: Musik deutlich hörbar
+                           sfx_volume=float(cfg("sfx_volume") if cfg("sfx_volume") is not None else 0.35), slug=cat["slug"])
+        v["cover_ms"] = render.render(work, scenes, times, voice, ass, final, **render_args)
+        yt_short = None
+        if toon and upload and not cat.get("special"):     # kürzere YouTube-Fassung (TikTok bekommt die volle über einer Minute)
+            try:
+                from . import ytcut
+                yt_short, yt_dur = ytcut.make(work, scenes, times, words, voice, OUT / f"{vid}-yt.mp4", ass_args, render_args, total, ai.chat_json)
+                if yt_short:
+                    v["yt_duration"] = round(yt_dur + 0.35, 1)
+            except Exception as e:  # noqa: BLE001 – ohne Kurzfassung bekommt YouTube die volle
+                yt_short = None
+                log(f"YouTube-Kurzfassung übersprungen ({type(e).__name__}: {str(e)[:160]})")
         Image.open(cover or (work / "img00.jpg")).resize((360, 640)).save(THUMBS / f"{vid}.jpg", quality=82)
         v.update(status="rendered", duration=round(total + 0.35, 1), providers=used, thumb=True,
                  look=(os.environ.get("AS_LOOK") or cat.get("look") or cfg("look") or "cartoon") if script.get("toon") else "ki")
@@ -543,9 +555,36 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, 
         log(v["error"])
         save_all()
     elif upload:
-        uploaders.upload_video(v, final)
+        upload_split(v, final, yt_short)
         save_all()
     return v
+
+
+def upload_split(v, full, yt_file=None):
+    """YouTube bekommt die kürzere Fassung (wenn es eine gibt), TikTok die volle. Der Upload-Code selbst bleibt unverändert:
+    zweimal aufgerufen, jeweils mit der anderen Plattform als „schon erledigt“ markiert."""
+    if not (yt_file and Path(yt_file).exists()) or uploaders.zernio_ready() or not (cfg("youtube_enabled") and uploaders.connected("youtube")) or v.get("yt_id"):
+        return uploaders.upload_video(v, full)
+    had_tt = v.get("tt_publish_id")
+    v["tt_publish_id"] = had_tt or "__später"
+    try:
+        uploaders.upload_video(v, yt_file)              # nur YouTube (TikTok gilt als erledigt)
+    finally:
+        if v.get("tt_publish_id") == "__später":
+            v["tt_publish_id"] = had_tt
+    err1 = v.get("error")
+    yt_failed = not v.get("yt_id")
+    if yt_failed:
+        v["yt_id"] = "__fehler"                          # YouTube nicht noch einmal mit der langen Fassung versuchen
+    try:
+        uploaders.upload_video(v, full)                 # jetzt TikTok mit der vollen Fassung
+    finally:
+        if v.get("yt_id") == "__fehler":
+            v["yt_id"] = None
+    errs = [e for e in (err1, v.get("error")) if e]
+    done = bool(v.get("yt_id")) or bool(v.get("tt_publish_id"))
+    v["error"] = "\n".join(errs)[:900] or None
+    v["status"] = "published" if done and not errs else ("partial" if done else ("error" if errs else "rendered"))
 
 
 def make_bounce(cat, upload=True, force=None):
