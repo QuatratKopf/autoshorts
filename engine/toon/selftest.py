@@ -1785,6 +1785,7 @@ def main():
         sc[7]["props"] = [{"type": "scale", "pos": 600}]
         sd = stage.direct(sc, [(i_ * 4, i_ * 4 + 4) for i_ in range(len(sc))], "Was wäre, wenn du ein Super-Tier aus vier Tierarten baust?", "whatif")
         kinds = [[str(a_.get("kind") or "") for a_ in s_.get("actors") or []] for s_ in sd]
+        assert not sd[4]["actors"][0].get("hero") and [q_.get("type") for q_ in sd[4].get("props") or []] == ["moss"], "Bärtierchen klein am Moos"
         assert sd[4].get("place") == "forest" and sd[1].get("place") == "savannah" and sd[6].get("place") == "underwater", "genanntes Tier in seinem Lebensraum, nicht auf der Straße"
         sf = stage.direct([{"text": t_, "place": "lab", "actors": [{"id": "du"}]} for t_ in ("Du baust ein Super-Tier.", "Zutat drei ist das Bärtierchen.", "Es übersteht extreme Kälte.",
                                                                                               "Im Jahr 2007 überlebte es sogar den offenen Weltraum.", "Das Herz wiegt 180 Kilogramm.")],
@@ -1822,6 +1823,12 @@ def main():
         kn = [[str(a_.get("kind") or "") for a_ in s_.get("actors") or []] for s_ in sn]
         assert sn[2].get("shot") == "graphic" or kn[2] == ["cheetah"], f"Messwert gehört zum Gepard: {kn[2]}"
         assert "cheetah" not in kn[3], f"neuer Gedanke: nicht mehr der Gepard: {kn[3]}"
+        sw = stage.direct([{"text": "Du baust ein Super-Tier.", "place": "lab", "actors": [{"id": "du"}]},
+                           {"text": "Der Gepard hält seinen Sprint nur wenige hundert Meter durch.", "place": "savannah", "actors": [{"id": "du"}],
+                            "overlay": {"type": "counter", "label": "", "value": 100, "unit": "METER"}}], [(0, 4), (4, 8)], "Was wäre, wenn du ein Super-Tier aus vier Tierarten baust?", "whatif")
+        assert not sw[1].get("overlay"), f"Zähler aus „wenige hundert“: {sw[1].get('overlay')}"
+        js_ = _w.polish({"title": "x", "description": "y", "hashtags": ["#baertierchen"], "tags": ["baertierchen"], "scenes": [{"text": "a."}]})
+        assert js_["hashtags"] == ["#bärtierchen"] and js_["tags"] == ["bärtierchen"], js_
     check("Super-Tier aus vier Arten: Misch-Wesen im Bild (Prüfung 19.11., Video 152)", _hybrid)
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")
     import collections

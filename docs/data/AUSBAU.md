@@ -506,4 +506,9 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   `writer.polish` dreht „neunzig und drei“ zu „dreiundneunzig“; Zähler-Einheit „KM“ wird „KM/H“ bei „Kilometer pro Stunde“; der Satz direkt nach
   einem Tier-Satz („In freier Wildbahn wurden … gemessen“) bleibt beim Tier, solange er keinen neuen Gedanken beginnt (Aber/Doch/Zutat/Superkraft …);
   Titelbild eines Misch-Wesen-Videos zeigt das Wesen (`poster_hero`, `poster`). Für Neubauten: Zahlen im Thema zusätzlich als Wort ausschreiben.
-  Selbsttest: `_hybrid`. Noch offen: Das Bärtierchen steht in Mehr-Tier-Videos baumhoch im Wald (nur im Ein-Tier-Video klein am Moos).
+  Nach dem 3. Neubau (Video 155, veröffentlicht): Zähler aus „wenige/mehrere/einige hundert …“ entfällt („100 METER“ lag über dem Kopf des Gepards);
+  im Misch-Wesen-Video steht das Bärtierchen im Wald klein am Moospolster statt baumhoch; `writer`: Umlaute für baertier/kaefer/loewe/voegel in
+  Hashtags und Suchbegriffen. Selbsttest: `_hybrid`.
+  Noch offen: In anderen Mehr-Tier-Videos steht das Bärtierchen weiter groß im Wald. Die Text-KI lässt die verlangte Schlussfrage weg; Zahlen im
+  Thema werden nur verlässlich gesprochen, wenn sie zusätzlich als Wort dastehen („gesprochen: dreiundneunzig“). Die Aktion `upload` und der Weg über
+  Zernio laden auf YouTube die volle Fassung hoch – die Kurzfassung aus `ytcut` entsteht nur beim direkten Bau mit Upload ohne Zernio.

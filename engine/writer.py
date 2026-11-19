@@ -514,7 +514,7 @@ def given_meta(js, topic):
     return js
 
 
-_UML = {"koerper": "körper", "gefuehl": "gefühl", "glueck": "glück", "aengst": "ängst", "erklaer": "erklär", "traeum": "träum", "maedchen": "mädchen",
+_UML = {"baertier": "bärtier", "kaefer": "käfer", "loewe": "löwe", "voegel": "vögel", "baer": "bär", "koerper": "körper", "gefuehl": "gefühl", "glueck": "glück", "aengst": "ängst", "erklaer": "erklär", "traeum": "träum", "maedchen": "mädchen",
         "schoen": "schön", "gesuender": "gesünder", "zaehne": "zähne", "haende": "hände", "fuesse": "füße", "muedigkeit": "müdigkeit", "muede": "müde",
         "ernaehrung": "ernährung", "gaensehaut": "gänsehaut", "gedaechtnis": "gedächtnis", "raetsel": "rätsel", "phaenomen": "phänomen", "taeglich": "täglich",
         "ueberleben": "überleben", "ueberrasch": "überrasch", "fuer": "für", "natuerlich": "natürlich", "kuenstlich": "künstlich", "maerchen": "märchen",

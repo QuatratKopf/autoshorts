@@ -947,7 +947,7 @@ def find_figure(text):
     best = None
     for i, w in enumerate(ws):
         v = _number(w)
-        if v is not None and i and ws[i - 1].lower() in ("mehrere", "mehreren", "einige", "einigen", "viele", "vielen", "paar", "etliche", "zig", "unzählige", "hunderte", "tausende"):
+        if v is not None and i and ws[i - 1].lower() in ("mehrere", "mehreren", "einige", "einigen", "viele", "vielen", "paar", "etliche", "zig", "unzählige", "hunderte", "tausende", "wenige", "wenigen", "manche"):   # „nur wenige hundert Meter“ → kein Zähler „100 METER“ (Video 155)
             continue                                      # „mehrere tausend Grad“ ist keine Zahl für einen Zähler („1.000 GRAD“ wäre falsch)
         if v is None or (w.lower().strip(".,") in ("ein", "eine", "einen", "einem", "einer") and
                          (i + 1 >= len(ws) or ws[i + 1].lower().strip(".,;:!?") not in _SCALE)):
@@ -1319,6 +1319,9 @@ def direct(scenes, times, topic="", style="", look=""):
                 g0.pop("label", None)
         if ov_c and str(ov_c.get("type") or "") == "counter" and not spoken_number(ov_c.get("value"), sc["text"]):
             sc["overlay"] = None                          # Zahl in der Einblendung, die der Sprecher gar nicht nennt: weg damit
+        if ov_c and sc.get("overlay") and str(ov_c.get("type") or "") == "counter" and str(ov_c.get("value")).replace(".0", "") in ("100", "1000", "1000000", "1000000000") \
+                and _re0.search(r"\b(?:wenige|mehrere|einige|viele|etliche|manche)n?\s+(?:hundert|tausend|millionen|milliarden)|\bpaar\s+(?:hundert|tausend|millionen|milliarden)", str(sc.get("text") or "").lower()):
+            sc["overlay"] = None                          # „nur wenige hundert Meter“ ist keine Zahl für einen Zähler („100 METER“ stand quer über dem Gepard, Video 155)
         if ov_c and str(ov_c.get("type") or "") == "bar" and not spoken_number(ov_c.get("value"), sc["text"]):
             sc["overlay"] = ov_c = None                   # Füllstand „SAUERSTOFF 15 %“ zu einem Satz ohne Zahl: die Prozentzahl ist erfunden
         if ov_c and str(ov_c.get("type") or "") == "thermo" and (not spoken_number(ov_c.get("value"), sc["text"])
@@ -2342,6 +2345,9 @@ def _hybrid_story(scenes, topic="", main_id="du"):
                                                            and extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) in extras.SKY][:1])
         if sc.get("shot") in ("event", "insert", "close"):
             sc["shot"] = ""
+        if kind == "tardigrade" and place in ("forest", "park"):   # der Winzling stand baumhoch im Wald (Videos 152–155): klein am Moospolster
+            act.update(hero=False, pos=430)
+            sc["props"] = [{"type": "moss", "pos": 650}]
 
     for i, sc in enumerate(scenes):
         if not isinstance(sc, dict):
