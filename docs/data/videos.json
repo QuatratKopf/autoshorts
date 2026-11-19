@@ -5829,7 +5829,7 @@
   "id": 155,
   "category": "whatif",
   "topic": "Was wäre, wenn du ein Super-Tier aus vier Tierarten baust? – Vorgaben als Stichpunkte, nicht wörtlich abschreiben, in eigenen kurzen, vollständigen Sätzen locker in der Du-Form erzählen, mindestens zwanzig Sätze. Einstieg: Du baust im Labor das perfekte Super-Tier aus vier Tieren – und am Ende kommt ein Haken, mit dem keiner rechnet. Zutat eins, die Beine vom Gepard: das schnellste Landtier, in freier Wildbahn wurden 93 Kilometer pro Stunde gemessen (gesprochen: dreiundneunzig); die eigentliche Stärke vom Gepard ist die Beschleunigung. Zutat zwei, die Augen vom Adler: Der Adler sieht um ein Mehrfaches schärfer als ein Mensch und erkennt Beute aus großer Höhe. Zutat drei, die Zähigkeit vom Bärtierchen: Das Bärtierchen übersteht fast minus 272 Grad (gesprochen: minus zweihundertzweiundsiebzig) und überlebte 2007 (gesprochen: zweitausendsieben) sogar den offenen Weltraum. Zutat vier, das Herz vom Blauwal: das größte Herz der Welt, rund 180 Kilogramm schwer (gesprochen: hundertachtzig). Dann der Moment: Das Super-Tier steht fertig im Labor, und du denkst, dieses Wesen ist unbesiegbar. Der Haken, sachlich richtig: Jede Superkraft hat ihren Preis. Der Gepard hält seinen Sprint nur wenige hundert Meter durch (genau so sagen: wenige hundert Meter). Das Bärtierchen ist nur so zäh, wenn es ausgetrocknet und reglos ist. Und die Pointe, unbedingt mit dem Vergleich: Das Blauwal-Herz wiegt mehr als dreimal so viel wie ein ganzer Gepard. Danach als eigener Satz: Das Super-Tier bricht unter seinem eigenen Herzen zusammen. Auflösung: Die Evolution baut keine Alleskönner, sondern Spezialisten – jedes Tier ist genau für sein Leben gebaut. Der allerletzte Satz muss diese Frage an die Zuschauer sein: Welche Tier-Superkraft hättest du gern? Sätze über das gebaute Tier nennen es immer Super-Tier oder Wesen; Sätze über ein einzelnes Tier nennen dieses Tier beim Namen (Gepard, Adler, Bärtierchen, Blauwal). Jeder Satz endet mit einem Satzzeichen, Nebensätze mit Komma. Keine anderen Zahlen als 93, 272, 2007 und 180. Keine anderen Jahreszahlen. Nicht behaupten: schneller als jedes Auto, Herz so schwer wie ein Auto, Weltherrschaft, Gewicht in Tonnen, Erbgut mischen funktioniert in echt. Titel: Was wäre, wenn du ein Super-Tier aus vier Arten baust? Titelbild-Text: DAS SUPER-TIER",
-  "status": "rendered",
+  "status": "published",
   "created": 1795086599.9427547,
   "title": "Was wäre, wenn du ein Super-Tier aus vier Arten baust?",
   "description": "Was passiert, wenn du das perfekte Super-Tier aus vier Tieren baust?\nIm Labor erschaffst du eine Kreatur aus Gepard, Adler, Bärtierchen und Blauwal.\nWelche Tier-Superkraft hättest du gern?",
@@ -5864,6 +5864,12 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "zernio_id": "6afedafc3d9ac365e492a3e9",
+  "yt_status": "Zernio: published",
+  "yt_id": "cI-1331C3-o",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6afedafc3d9ac365e492a3e9",
+  "error": null
  }
 ]
