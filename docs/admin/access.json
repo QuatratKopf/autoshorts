@@ -34,7 +34,10 @@
     "ki": false,
     "stil": true,
     "zahlen": true
-   }
+   },
+   "cats": [
+    "liebe"
+   ]
   }
  ]
 }
