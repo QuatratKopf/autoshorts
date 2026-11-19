@@ -1,10 +1,19 @@
 {
- "updated": 1795089826.0333998,
+ "updated": 1795091620.0145676,
  "enough": true,
- "counted": 24,
+ "counted": 25,
  "total": 27,
  "needed": 6,
  "categories": [
+  {
+   "slug": "tiere",
+   "name": "🐾 Tierwelt",
+   "n": 2,
+   "avg_views": 1812,
+   "avg_likes": 40.0,
+   "like_rate": 2.21,
+   "avg_score": 2448
+  },
   {
    "slug": "storys",
    "name": "🔥 Spannende Storys",
@@ -15,22 +24,13 @@
    "avg_score": 2444
   },
   {
-   "slug": "tiere",
-   "name": "🐾 Tierwelt",
-   "n": 2,
-   "avg_views": 1810,
-   "avg_likes": 40.0,
-   "like_rate": 2.21,
-   "avg_score": 2444
-  },
-  {
    "slug": "comedy",
    "name": "🤪 Comedy",
-   "n": 2,
-   "avg_views": 1756,
-   "avg_likes": 43.0,
-   "like_rate": 2.45,
-   "avg_score": 2400
+   "n": 3,
+   "avg_views": 1749,
+   "avg_likes": 42.3,
+   "like_rate": 2.42,
+   "avg_score": 2407
   },
   {
    "slug": "fakten",
@@ -45,10 +45,10 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
-   "avg_views": 1772,
+   "avg_views": 1774,
    "avg_likes": 38.5,
    "like_rate": 2.17,
-   "avg_score": 2365
+   "avg_score": 2366
   },
   {
    "slug": "whatif",
@@ -63,14 +63,14 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 2,
-   "avg_views": 1672,
+   "avg_views": 1673,
    "avg_likes": 10.5,
    "like_rate": 0.63,
-   "avg_score": 1875
+   "avg_score": 1876
   }
  ],
  "weights": {
-  "fakten": 1.03,
+  "fakten": 1.02,
   "grusel": 1.2,
   "storys": 1.04,
   "mysterien": 1.01,
@@ -84,19 +84,18 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1656 Aufrufe, 3.17 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1672 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2489 zu 705 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2508 zu 2003 Punkte).",
+  "Stärkste Kategorie: 🐾 Tierwelt (Ø 1812 Aufrufe, 2.21 % Likes).",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1673 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2486 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
  ],
  "words_good": [
   "gänsehaut"
  ],
  "words_bad": [
+  "remix",
   "erkennst",
   "lied",
-  "remix",
   "bekanntes"
  ],
  "top": [
@@ -104,11 +103,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2553,
+   "views": 2554,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3393
+   "score": 3394
   },
   {
    "id": 77,
@@ -124,11 +123,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 2047,
+   "views": 2048,
    "likes": 68,
    "comments": 0,
    "shares": 0,
-   "score": 3067
+   "score": 3068
   },
   {
    "id": 120,
