@@ -5917,5 +5917,50 @@
   "slot": "2026-11-19 18:00",
   "review_at": 1795101589.732721,
   "error": "Bei der Prüfung verworfen: Kein Bus und kein Fernseher im Bild, Fass im Wohnzimmer, Börsenkurve steigt bei „stürzen ab“, Burg bei „ohne Burgen“, Chip bei „keinen Chip“, Geschichte ohne roten Faden, falsche Aussage zum Gameboy"
+ },
+ {
+  "id": 157,
+  "category": "whatif",
+  "topic": "Was wäre, wenn deine Geräte einen Tag lang nur die Wahrheit sagen? – Titel: Was wäre, wenn deine Geräte plötzlich die Wahrheit sagen? Titelbild-Text: GERÄTE PACKEN AUS. Vorgaben als Stichpunkte, nicht wörtlich abschreiben, in eigenen kurzen, vollständigen Sätzen locker in der Du-Form erzählen, mindestens zwanzig Sätze, ein roter Faden vom Morgen bis in die Nacht. Einstieg: Deine Geräte sagen einen Tag lang nur noch die Wahrheit – und das letzte verrät etwas, das wirklich stimmt. Morgens im Schlafzimmer der Wecker: Er verkündet laut, dass du neunmal auf Schlummern gedrückt hast. In der vollen Bahn das Handy: Es liest laut deine Bildschirmzeit von gestern vor, sieben Stunden, und alle Fahrgäste drehen sich um. Mittags in der Küche der Kühlschrank: Er meldet, dass der Joghurt seit drei Wochen abgelaufen ist, und fragt, warum du trotzdem jeden Abend hineinschaust. Im Auto das Navi: Es sagt, dass du die vierhundert Meter zum Bäcker auch zu Fuß geschafft hättest. Abends im Wohnzimmer der Fernseher: Er zeigt allen Gästen, welche Serie du heimlich schon dreimal durchgeschaut hast. Nachts der Router: Er zählt auf, wer um drei Uhr nachts noch online war. Finte: Du denkst, das ist reine Fantasie? Falsch. Auflösung, die wirklich stimmt: Dein Handy misst deine Bildschirmzeit tatsächlich, viele smarte Fernseher erfassen, was bei dir läuft, und dein Router führt eine Liste aller verbundenen Geräte. Schlusspointe: Deine Geräte wissen das alles längst, sie sagen es nur nicht laut. Letzter Satz als Frage an die Zuschauer: Welches Gerät dürfte bei dir auf keinen Fall auspacken? Einzige Zahlen: neunmal, sieben Stunden, drei Wochen, vierhundert Meter, dreimal, drei Uhr. Keine Markennamen, keine Personennamen, keine erfundenen Statistiken.",
+  "status": "rendered",
+  "created": 1795101777.1646357,
+  "title": "Was wäre, wenn deine Geräte plötzlich die Wahrheit sagen?",
+  "description": "Deine Geräte packen einen Tag lang aus!\nErlebe, wie Wecker, Handy und Kühlschrank gnadenlos die Wahrheit über dich verraten.\nWelches Gerät dürfte bei dir niemals auspacken?",
+  "hashtags": [
+   "#shorts",
+   "#fy",
+   "#viral",
+   "#tech",
+   "#smartphone",
+   "#lustig",
+   "#alltag",
+   "#whatif"
+  ],
+  "tags": [
+   "geraete",
+   "wahrheit",
+   "smartphone",
+   "bildschirmzeit",
+   "wecker",
+   "kuehlschrank",
+   "router",
+   "alltag",
+   "lustig",
+   "waswaerewenn"
+  ],
+  "thumb_text": "GERÄTE PACKEN AUS",
+  "missing": [
+   "navi"
+  ],
+  "cover_ms": 79118,
+  "duration": 79.0,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
