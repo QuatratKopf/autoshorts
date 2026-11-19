@@ -1561,6 +1561,14 @@ def main():
             up.upload_video, up.zernio_ready, up.connected, mn.cfg = saved
     check("YouTube-Kurzfassung: Auswahl und getrennte Uploads", _ytcut)
 
+    def _shape():                                                # KI schreibt eine Liste, wo ein Objekt stehen muss
+        from .. import ai
+        js_ = ai._shape({"scenes": [{"text": "a", "overlay": [{"type": "card", "text": "X"}], "graphic": [], "actors": ["du", {"id": "er"}, 3]}, "kaputt"],
+                         "thumbnail": [{"text": "T"}], "cast": [{"id": "du", "shirt": "rot"}], "fixes": [{"i": 1}]})
+        assert js_ == {"scenes": [{"text": "a", "overlay": {"type": "card", "text": "X"}, "graphic": None, "actors": [{"id": "du"}, {"id": "er"}]}],
+                       "thumbnail": {"text": "T"}, "cast": {"du": {"shirt": "rot"}}, "fixes": [{"i": 1}]}, js_
+    check("KI-Antwort: Liste statt Objekt wird bereinigt", _shape)
+
     def _adopt():                                                # Gelerntes aus Kopien: nur Neues, keine fremden Wörter, nur nach Bild-Prüfung
         import tempfile
         from pathlib import Path

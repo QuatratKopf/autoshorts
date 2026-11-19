@@ -1,6 +1,6 @@
 {
-  "version": "1.16.2",
-  "file": "releases/AutoShorts-1.16.2.cmd",
-  "sha256": "a4f827a297f57081bf6a28baf3706eb2c51fd10c4b80ff45ca667759c5f00ece",
-  "notes": "Gast-App übernimmt neue Video-Arten des Admins sofort (z. B. Liebe)"
+  "version": "1.16.3",
+  "file": "releases/AutoShorts-1.16.3.cmd",
+  "sha256": "968fec01d9215edce6c6d0b3b48b1cd4e94bd7fc962db8b7ac3efcd12547765c",
+  "notes": "Kein kurz aufblitzendes Konsolenfenster mehr; klare Meldung bei abgelehntem Gemini-Schlüssel"
 }

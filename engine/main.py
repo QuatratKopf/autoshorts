@@ -369,6 +369,7 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, 
                 v["remake"] = True
             if qid:
                 STATE["used_queue"].append(qid)
+        script = ai._shape(script)                      # Liste statt Objekt (z. B. „overlay“: [{…}]) – auch in älteren Plänen
         scenes = script["scenes"]
         v.update(title=script["title"], description=script["description"], hashtags=script["hashtags"],
                  tags=script.get("tags", []), thumb_text=script["thumbnail"]["text"])

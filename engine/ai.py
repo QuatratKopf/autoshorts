@@ -144,6 +144,14 @@ def _gemini(system, user, temperature):
                     continue                      # Modell kennt die Denk-Vorgabe nicht → ohne
                 if r.status_code != 200:
                     last = f"{m}: HTTP {r.status_code}"
+                    if r.status_code in (400, 401, 403):           # Schlüssel abgelehnt: Googles Begründung mitgeben
+                        try:
+                            last += " – " + " ".join(str(r.json().get("error", {}).get("message") or "").split())[:160]
+                        except Exception:  # noqa: BLE001
+                            pass
+                        if r.status_code in (401, 403) or "API key" in last:
+                            raise ProviderError("Gemini-Schlüssel abgelehnt (" + last + "). Neuen Schlüssel auf aistudio.google.com/apikey erstellen "
+                                                "(„Create API key“) und in der App unter Einstellungen → Gemini eintragen.")
                     busy += r.status_code in (429, 500, 502, 503, 504)
                     break
                 try:
@@ -236,6 +244,32 @@ def _pollinations_text(system, user, temperature):
 TEXT_PROVIDERS = {"gemini": _gemini, "openai": _openai_text, "pollinations": _pollinations_text}
 
 
+ONE_OBJ = ("overlay", "graphic", "thumbnail", "countdown", "backdrop", "camera_plan")
+
+
+def _shape(o, key=""):
+    """Drehbuch-Felder in die erwartete Form bringen: Die KI schreibt manchmal eine Liste, wo ein Objekt stehen muss
+    („overlay": [{…}]) – das brach später mit „'list' object has no attribute 'get'“ ab (Gast-Kanal 19.11.2026)."""
+    if isinstance(o, dict):
+        out = {}
+        for k, v in o.items():
+            if k in ONE_OBJ and isinstance(v, list):
+                v = next((x for x in v if isinstance(x, dict)), None)
+            elif k == "scenes" and isinstance(v, list):
+                v = [x for x in v if isinstance(x, dict)]
+            elif k == "actors" and isinstance(v, list):
+                v = [x if isinstance(x, dict) else {"id": str(x)} for x in v if isinstance(x, (dict, str)) and x]
+            elif k == "actors" and isinstance(v, dict):
+                v = [v]
+            elif k == "cast" and isinstance(v, list):
+                v = {str(x.get("id") or f"p{i}"): {kk: vv for kk, vv in x.items() if kk != "id"} for i, x in enumerate(v) if isinstance(x, dict)}
+            out[k] = _shape(v, k)
+        return out
+    if isinstance(o, list):
+        return [_shape(x, key) for x in o]
+    return o
+
+
 def chat_json(system: str, user: str, temperature: float = 0.9) -> tuple[dict, str]:
     """JSON von der Text-KI. Reihenfolge: gewählter Anbieter, dann die übrigen. Sind alle nur vorübergehend gestört
     (überlastet, Zeitüberschreitung, kaputtes JSON), wird nach zwei Minuten noch eine Runde versucht."""
@@ -247,7 +281,7 @@ def chat_json(system: str, user: str, temperature: float = 0.9) -> tuple[dict, s
         for p in order:
             for attempt in range(2 if p == "pollinations" else 1):   # freies Modell: kaputtes JSON → noch einmal fragen
                 try:
-                    return _parse_json(TEXT_PROVIDERS[p](system, user, temperature)), p
+                    return _shape(_parse_json(TEXT_PROVIDERS[p](system, user, temperature))), p
                 except Exception as e:  # noqa: BLE001
                     err = f"{p}: {e}"
                     if attempt == 0 and p == "pollinations" and isinstance(e, ValueError):

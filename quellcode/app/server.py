@@ -126,7 +126,8 @@ def _curl(method, url, data, headers, timeout):
         args += ["-H", f"{k}: {v}"]
     if data is not None:
         args += ["--data-binary", "@-"]
-    r = subprocess.run(args, input=data, capture_output=True, timeout=timeout)
+    r = subprocess.run(args, input=data, capture_output=True, timeout=timeout,
+                       creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))   # Windows: kein kurz aufblitzendes Konsolenfenster
     out = r.stdout
     body, _, code = out.rpartition(b"\n")
     return int(code or 0), body
@@ -302,7 +303,7 @@ def _fetch(url, limit=10_000_000):
         import subprocess
         if shutil.which("curl"):   # z. B. fehlende Zertifikate bei Python auf dem Mac
             return subprocess.run(["curl", "-fsSL", "-H", "Cache-Control: no-cache", url], capture_output=True,
-                                  check=True, timeout=90).stdout[:limit]
+                                  check=True, timeout=90, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0)).stdout[:limit]
         raise
 
 
