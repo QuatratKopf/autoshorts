@@ -41,7 +41,7 @@ ORANGE = (255, 138, 31)
 THEMES = {"": ((58, 40, 150), (14, 10, 46)), "scary": ((40, 30, 96), (6, 6, 22)), "panic": ((120, 34, 70), (26, 8, 30)),
           "tense": ((110, 60, 120), (22, 10, 40)), "sad": ((40, 60, 130), (10, 14, 40)), "happy": ((90, 70, 190), (30, 16, 80)),
           "calm": ((58, 40, 150), (14, 10, 46))}
-TYPES = ("number", "timer", "calendar", "question", "houses", "badge", "map", "city", "versus", "round", "score", "compare", "podium", "share", "news", "pulse", "radio", "distance", "days", "phone", "game", "chart", "radar", "size")
+TYPES = ("number", "timer", "calendar", "question", "houses", "badge", "map", "city", "versus", "round", "score", "compare", "podium", "share", "news", "pulse", "radio", "distance", "days", "phone", "game", "chart", "radar", "size", "message", "chapter")
 LEFT, RIGHT = (150, 110, 255), (255, 150, 40)                # Farben der beiden Seiten im Duell
 GREEN = (120, 230, 90)
 
@@ -122,6 +122,17 @@ def tint(bg):
         t = _bg["_tint"] = Image.new("RGB", (W, H), (150, 132, 236))
     out = ImageChops.multiply(bg.convert("RGB"), t)
     return Image.blend(out, bg.convert("RGB"), 0.16)
+
+
+def noir(bg):
+    """Look „Düster“ (Mystery-Storys): Kulisse entsättigt, dunkler und kühl – Figuren und Dinge bleiben unverändert,
+    das Licht kommt nur von der Lampe über den Figuren."""
+    from PIL import ImageEnhance
+    t = _bg.get("_noir")
+    if t is None:
+        t = _bg["_noir"] = Image.new("RGB", (W, H), (150, 156, 172))
+    out = ImageEnhance.Color(bg.convert("RGB")).enhance(0.35)
+    return ImageChops.multiply(out, t)
 
 
 def _center(d, y, text, f, fill=WHITE, stroke=0, shadow=True, spacing=0):
@@ -1544,7 +1555,107 @@ def _g_game(frame, g, t, dur):
 
 
 
-DRAW = {"game": _g_game, "radar": _g_radar, "size": _g_size, "days": _g_days, "phone": _g_phone, "chart": _g_chart,
+# ------------------------------------------------------------------ Nachricht vom Unbekannten, Kapitelkarte (Vorbild: Mystery-Storys mit Countdown)
+
+_dark = {}
+
+
+def _dark_bg():
+    """Fast schwarzer, kühler Grund mit weichem Lichtfleck in der Mitte – wie ein Handy-Bildschirm im dunklen Zimmer."""
+    if "msg" not in _dark:
+        g = Image.new("L", (W // 8, H // 8), 0)
+        ImageDraw.Draw(g).ellipse((-20, H // 8 * 0.18, W // 8 + 20, H // 8 * 0.86), fill=255)
+        g = g.filter(ImageFilter.GaussianBlur(26)).resize((W, H), Image.BILINEAR)
+        _dark["msg"] = Image.composite(Image.new("RGB", (W, H), (34, 44, 70)), Image.new("RGB", (W, H), (6, 8, 14)), g)
+    return _dark["msg"].copy()
+
+
+def msg_lines(g):
+    """Zeilen der Nachricht: "lines" (Liste) oder "text" mit „/“ getrennt. Eine Zeile mit „!“ davor ist die rote Warnung."""
+    raw = g.get("lines") if isinstance(g.get("lines"), list) else str(g.get("text") or "").split("/")
+    out = [" ".join(str(x).split())[:42] for x in raw if str(x).strip()]
+    return out[:6]
+
+
+def _g_message(frame, g, t, dur):
+    """Nachricht von unbekannter Nummer: dunkles Handy schräg im Hintergrund, die Zeilen erscheinen nacheinander (getippt),
+    die Warnzeile („!…“) leuchtet rot. Für Mystery- und Countdown-Geschichten."""
+    frame.paste(_dark_bg())
+    d = ImageDraw.Draw(frame, "RGBA")
+    ph = Image.new("RGBA", (560, 1080), (0, 0, 0, 0))                    # Handy, leicht gedreht, halb im Dunkeln
+    pd = ImageDraw.Draw(ph)
+    pd.rounded_rectangle((0, 0, 559, 1079), 70, fill=(22, 26, 38, 255), outline=(70, 80, 104, 255), width=6)
+    pd.rounded_rectangle((180, 26, 380, 58), 16, fill=(8, 10, 16, 255))
+    pd.ellipse((240, 110, 320, 190), fill=(64, 72, 96, 255))
+    sender = str(g.get("kicker") or "UNBEKANNT").upper()[:18]
+    fs = _font(34, "Bold")
+    pd.text((280 - pd.textlength(sender, font=fs) / 2, 206), sender, font=fs, fill=(150, 160, 186, 255))
+    for i in range(6):                                                     # angedeutete ältere Nachrichten
+        pd.rounded_rectangle((40, 300 + i * 112, 40 + (380 if i % 2 else 470), 370 + i * 112), 30, fill=(40, 46, 64, 255))
+    ph = ph.rotate(-7, expand=True, resample=Image.BICUBIC)
+    shake = math.sin(t * 40) * 6 if t < 0.5 else 0                         # brummt kurz beim Eintreffen
+    frame.paste(ph, (int(-170 + shake), 520), ph)
+    lines = msg_lines(g)
+    if not lines:
+        return
+    x0, max_w = 390, 540                                                    # Platz für Kamerafahrt und rote Umrandung
+    size = 60                                                              # eine Schriftgröße für alle Zeilen (wie im Chat)
+    while size > 42 and max(d.textlength(ln.lstrip("! "), font=_font(size, "Bold")) for ln in lines) > max_w:
+        size -= 2
+    f = _font(size, "Bold")
+    t0, t1 = 0.35, max(0.9, dur * 0.82)
+    step = (t1 - t0) / max(1, len(lines))
+    row = int(size * 1.85)
+    y = int(1000 - row * len(lines) / 2)
+    for i, ln in enumerate(lines):
+        ts = t0 + i * step
+        if t < ts:
+            break
+        warn = ln.startswith("!")
+        txt = ln.lstrip("! ").strip()
+        n = len(txt) if warn else max(1, min(len(txt), int((t - ts) / max(0.25, step * 0.55) * len(txt)) + 1))   # tippt sich, Warnung steht sofort
+        shown = txt[:n]
+        fl = f
+        tw = d.textlength(txt, font=fl)
+        hgt = size * 1.3
+        if warn:
+            k = _pop(t, ts, 0.3)
+            pad = 14 * min(1.0, k)
+            d.rounded_rectangle((x0 - 22 - pad, y - 12 - pad / 2, x0 + tw + 22 + pad, y + hgt + 6 + pad / 2), 18, fill=(196, 34, 46, 235))
+        else:
+            d.rounded_rectangle((x0 - 22, y - 12, x0 + tw + 22, y + hgt + 6), 18, fill=(24, 30, 46, 210))
+        d.text((x0, y), shown, font=fl, fill=WHITE)
+        if not warn and n < len(txt) and (t * 3) % 1 < 0.6:                 # Schreibmarke
+            cx = x0 + d.textlength(shown, font=fl) + 6
+            d.rectangle((cx, y + 6, cx + 6, y + hgt - 4), fill=WHITE)
+        y += row
+
+
+def _g_chapter(frame, g, t, dur):
+    """Kapitelkarte auf Schwarz: große Zahl, darunter die Zeile („NOCH 7 TAGE“, „TAG 3“) – kurzer Ruck, leichtes Flackern."""
+    frame.paste((4, 4, 6), (0, 0, W, H))
+    d = ImageDraw.Draw(frame, "RGBA")
+    k = _pop(t, 0.05, 0.4)
+    if k <= 0:
+        return
+    val = str(g.get("value") or "").strip()[:6]
+    sub = str(g.get("text") or g.get("label") or "").upper().strip()[:28]
+    head = str(g.get("kicker") or "").upper().strip()[:24]
+    col = (250, 214, 160) if not (t > 0.4 and (t * 7) % 1 < 0.06) else (180, 150, 112)      # ganz selten flackert sie
+    fv = _font(int(420 * min(1.08, k)), "anton")
+    if val:
+        vw = d.textlength(val, font=fv)
+        d.text((W / 2 - vw / 2, 640 - 420 * min(1.08, k) / 2 + 60), val, font=fv, fill=col)
+    fsb = _fit(d, sub, 92, 900, "anton")
+    if sub and t > 0.25:
+        a = int(255 * min(1.0, (t - 0.25) / 0.3))
+        d.text((W / 2 - d.textlength(sub, font=fsb) / 2, 1020), sub, font=fsb, fill=(232, 120, 60, a))
+    if head:
+        fh = _fit(d, " ".join(head), 40, 900, "SemiBold")
+        d.text((W / 2 - d.textlength(" ".join(head), font=fh) / 2, 420), " ".join(head), font=fh, fill=(150, 150, 160))
+
+
+DRAW = {"message": _g_message, "chapter": _g_chapter, "game": _g_game, "radar": _g_radar, "size": _g_size, "days": _g_days, "phone": _g_phone, "chart": _g_chart,
         "news": _g_news, "pulse": _g_pulse, "radio": _g_radio, "distance": _g_distance,
         "versus": _g_versus, "round": _g_round, "score": _g_score, "compare": _g_compare, "podium": _g_podium, "share": _g_share,
         "map": _g_map, "city": _g_city, "number": _g_number, "timer": _g_timer, "calendar": _g_calendar, "question": _g_question, "houses": _g_houses, "badge": _g_badge}
@@ -1565,7 +1676,7 @@ def clean(g):
     out["dark"] = g.get("dark") is True
     need = {"number": "value", "timer": "value", "calendar": "value", "houses": "value", "badge": "text", "question": None,
             "map": None, "city": None, "versus": "left", "round": "text", "score": "value", "compare": "value", "podium": "text",
-            "share": "value", "news": "text", "pulse": "value", "radio": "text", "distance": "value", "days": "value", "phone": "text", "chart": None, "game": None, "radar": None, "size": "value"}[out["type"]]
+            "share": "value", "news": "text", "pulse": "value", "radio": "text", "distance": "value", "days": "value", "phone": "text", "chart": None, "game": None, "radar": None, "size": "value", "message": None, "chapter": "value"}[out["type"]]
     mode = str(g.get("mode") or "").lower()
     if out["type"] == "phone":
         out["mode"] = mode if mode in ("alert", "lock", "chat") else "alert"
@@ -1581,6 +1692,12 @@ def clean(g):
         return None
     if out["type"] == "size" and _size_val(out["value"]) is None:
         return None
+    if out["type"] == "message":                 # Zeilen der Nachricht (sonst „text“ mit „/“ getrennt)
+        lines = msg_lines(g)
+        if not lines:
+            return None
+        out["lines"] = lines
+        out.pop("text", None)
     return out
 
 

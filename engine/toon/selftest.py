@@ -1569,6 +1569,31 @@ def main():
                        "thumbnail": {"text": "T"}, "cast": {"du": {"shirt": "rot"}}, "fixes": [{"i": 1}]}, js_
     check("KI-Antwort: Liste statt Objekt wird bereinigt", _shape)
 
+    for g_m in ({"type": "message", "kicker": "UNBEKANNT", "lines": ["In sieben Tagen", "beginnt es.", "!Öffne niemals die Tür."]},
+                {"type": "message", "text": "Geh zur Bank. / Heb alles ab. / !Alles."}, {"type": "message", "lines": ["x" * 80] * 9},
+                {"type": "chapter", "value": "7", "text": "TAGE ÜBRIG"}, {"type": "chapter", "value": "1", "kicker": "LETZTER TAG", "text": "NOCH 24 STUNDEN"}):
+        for t_m in (0.0, 0.5, 2.0, 4.9):
+            check(f"Grafik {g_m['type']} t={t_m}", lambda: graphics.frame(graphics.clean(g_m), t_m, 5.0))
+    assert graphics.clean({"type": "message"}) is None and graphics.clean({"type": "chapter", "text": "x"}) is None
+    assert len(graphics.clean({"type": "message", "lines": ["a"] * 9})["lines"]) == 6
+
+    def _noir():                                                 # Rubrik „Unbekannte Nachricht“: düsterer Look, Nachricht, Kapitelkarte
+        import json
+        from pathlib import Path
+        cats = {c["slug"]: c for c in json.loads((Path(__file__).resolve().parents[2] / "docs" / "data" / "config.json").read_text(encoding="utf-8"))["categories"]}
+        assert cats["nachricht"]["enabled"] and cats["nachricht"]["look"] == "noir" and cats["nachricht"]["own_voice"]
+        sc_n = [{"text": "Drei Uhr zwölf. Dein Handy vibriert.", "place": "bedroom", "time": "night", "actors": [{"id": "du", "action": "sleep"}]},
+                {"text": "Vertrau niemandem.", "shot": "graphic", "graphic": {"type": "message", "lines": ["Vertrau niemandem.", "!Öffne nicht die Tür."]}},
+                {"text": "Noch sieben Tage.", "shot": "graphic", "graphic": {"type": "chapter", "value": "7", "text": "TAGE ÜBRIG"}}]
+        stage.direct(sc_n, [(0, 3), (3, 6), (6, 8)], "Unbekannte Nachricht", "nachricht", "noir")
+        assert [s.get("look") for s in sc_n] == ["noir"] * 3
+        assert [(s.get("graphic") or {}).get("type") for s in sc_n[1:]] == ["message", "chapter"], [s.get("graphic") for s in sc_n]
+        from PIL import Image
+        bg = graphics.noir(Image.new("RGB", (graphics.W, graphics.H), (240, 200, 120)))
+        r_, g_, b_ = bg.getpixel((10, 10))
+        assert max(r_, g_, b_) < 200 and abs(r_ - b_) < 60, (r_, g_, b_)
+    check("Unbekannte Nachricht: düsterer Look, Nachricht, Kapitelkarte", _noir)
+
     def _adopt():                                                # Gelerntes aus Kopien: nur Neues, keine fremden Wörter, nur nach Bild-Prüfung
         import tempfile
         from pathlib import Path

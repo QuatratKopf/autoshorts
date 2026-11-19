@@ -884,7 +884,8 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
         extras.draw_mood(over, opt["mood"], t, opt.get("confetti", False))
     if not close:
         glows = [(x + GLOWS[extras.PROP_ALIASES.get(k_, k_)][0],) + GLOWS[extras.PROP_ALIASES.get(k_, k_)][1:] for k_, x in props if extras.PROP_ALIASES.get(k_, k_) in GLOWS]
-        frame = _light(frame, "night" if glows and night and place in places.OUTDOOR else _light_kind(place, night, opt.get("mood"), xs_now), xs_now, glows)
+        frame = _light(frame, "night" if glows and night and place in places.OUTDOOR else
+                       ("spot" if opt.get("noir") and xs_now else _light_kind(place, night, opt.get("mood"), xs_now)), xs_now, glows)
     if landed is not None and landed < 0.5:      # Aufschlag: das Bild wackelt kurz
         k = 1 - landed / 0.5
         dx, dy = int(math.sin(t * 61) * 22 * k), int(math.cos(t * 53) * 26 * k)
@@ -1223,6 +1224,7 @@ def direct(scenes, times, topic="", style="", look=""):
     size_done = False                                     # „nur einen halben Millimeter groß“: einmal je Video die Größe mit Lineal zeigen
     charts = 0
     neon = str(look or "").lower() == "neon"
+    noir = str(look or "").lower() == "noir"
     cur_hud = ""
     sea_last = any_last = None
     sea_age = any_age = 0
@@ -1782,6 +1784,8 @@ def direct(scenes, times, topic="", style="", look=""):
         cur_hud = sc.get("hud") if isinstance(sc.get("hud"), str) and sc.get("hud").strip() else cur_hud
         if neon:
             sc["look"], sc["time"] = "neon", "night"
+        elif noir:
+            sc["look"] = "noir"
         g_auto = None
         low_c = str(sc.get("text") or "").lower()
         g_t = (sc.get("graphic") or {}).get("type") if sc.get("shot") == "graphic" and isinstance(sc.get("graphic"), dict) else None
@@ -4745,6 +4749,8 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     neon_look = str(scene.get("look") or "") == "neon"
     if neon_look:                             # Neon-Nacht: nur die Kulisse wird violett getönt – Figuren und Dinge bleiben kräftig
         bg = graphics.tint(bg)
+    elif str(scene.get("look") or "") == "noir":
+        bg = graphics.noir(bg)                # Düster: graue, kühle Kulisse, Licht nur über den Figuren
     shot = "close" if shot == "close" and not has_ov and not moving and not props and actors and not scene.get("float") else ""
     ov_tall = str((scene.get("overlay") or {}).get("type") or "") in TALL_OV if has_ov else False
     ov_kind = str((scene.get("overlay") or {}).get("type") or "") if has_ov else ""
@@ -4833,6 +4839,7 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     party = bool(re.search(PARTY_RE, str(scene.get("text") or "").lower())) or (str(scene.get("crowd") or "") == "cheer" and crowd_ok(scene))
     fx_opt = {"crowd": scene.get("crowd") if crowd_ok(scene) else "", "mood": mood_s, "confetti": party,   # Konfetti nur, wenn gefeiert wird – nicht in jeder fröhlichen Szene (Klinik, Büro) "spec": places.spec_of(backdrop(scene)), "sky": sky_m,
               "win": scene.get("_win"), "count": scene.get("_count"), "neon": neon_look, "float": str(scene.get("float") or ""),
+              "noir": str(scene.get("look") or "") == "noir",
               "aloft": bool(scene.get("aloft")), "low": bool(scene.get("low")), "no_traffic": bool(scene.get("no_traffic") or scene.get("dark_city"))}
     ff = subprocess.Popen(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24",
                            "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-preset", "veryfast",

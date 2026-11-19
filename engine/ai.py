@@ -571,7 +571,7 @@ def spoken_words(text, path):
     return words
 
 
-GEMINI_VOICES = {"grusel": "Enceladus", "lustig": "Puck", "tiere": "Sulafat", "mysterien": "Algenib", "liebe": "Despina"}   # Despina: weiche, warme Frauenstimme
+GEMINI_VOICES = {"grusel": "Enceladus", "lustig": "Puck", "tiere": "Sulafat", "mysterien": "Algenib", "liebe": "Despina", "nachricht": "Charon"}   # Despina: weiche, warme Frauenstimme
 
 
 def _gemini_tts(text, out, cat):

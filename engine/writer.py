@@ -309,6 +309,12 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
     {"type": "phone", "mode": "lock", "value": "07:49", "kicker": "UNBEKANNT", "text": "Wir wissen, wo du bist."}   Sperrbildschirm mit Uhrzeit, eine Nachricht rutscht herein
     {"type": "phone", "mode": "chat", "kicker": "Oma", "text": "Junge, stimmt das mit den 10 Millionen?", "sub": "Oma, bitte nicht."}
                                                                                                      Nachrichten-Verlauf: text = Nachricht der anderen Person, sub = eigene Antwort
+    {"type": "message", "kicker": "UNBEKANNT", "lines": ["In sieben Tagen", "beginnt es.", "Vertrau niemandem.", "!Öffne nicht die Tür."]}
+                                                                                                     Nachricht von unbekannter Nummer im dunklen Zimmer: die Zeilen tippen sich
+                                                                                                     nacheinander (je höchstens 40 Zeichen, bis 6 Zeilen), eine Zeile mit „!“ davor
+                                                                                                     leuchtet rot – der Sprecher liest die Nachricht dabei vor
+    {"type": "chapter", "value": "7", "text": "TAGE ÜBRIG"}                                          Kapitelkarte auf Schwarz: große Zahl, darunter die Zeile – für Countdown-
+                                                                                                     Geschichten („NOCH 7 TAGE“, „TAG 3“), der Sprecher sagt sie dabei
     {"type": "versus", "left": "ENERGY", "right": "KAFFEE", "kicker": "5 RUNDEN"}                    Duell-Bild mit großem VS
     {"type": "round", "kicker": "RUNDE 1", "text": "KOFFEIN"}                                        Banner kündigt die nächste Runde an
     {"type": "score", "left": "ENERGY", "right": "KAFFEE", "value": "0:2", "kicker": "RUNDE 3/5"}    Punktestand nach einer Runde

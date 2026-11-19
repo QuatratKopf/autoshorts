@@ -252,6 +252,33 @@
    "trends": false,
    "topic_rules": "Es geht um Liebe, Verliebtsein, Romantik, große Gesten, Wiedersehen, erste Liebe, Herzklopfen – als Liebesgeschichte ODER als Liste ('3 Zeichen für echte Liebe', 'Woran du merkst …', 'Gesten, die …'); wechsle zwischen beiden ab. Nichts Gruseliges, keine Trennungs-Dramen mit Streit oder Gewalt, nichts Anzügliches, keine Promi-Beziehungen, keine echten Privatpersonen.",
    "enabled": true
+  },
+  {
+   "slug": "nachricht",
+   "name": "Unbekannte Nachricht",
+   "emoji": "📱",
+   "description": "Mystery-Countdown: Nachts schreibt dir eine unbekannte Nummer seltsame Anweisungen – und die Tage bis zum großen Ereignis laufen ab.",
+   "script_style": "Erfundene Mystery-Geschichte in der Du-Form, düster und spannend, mit Countdown. Aufbau: 1) Hook: 'Drei Uhr zwölf. Dein Handy vibriert. Unbekannte Nummer.' (hud '3:12 UHR', du schläfst im dunklen Schlafzimmer). 2) Die erste Nachricht als Grafik {'type': 'message', 'kicker': 'UNBEKANNT', 'lines': [...]} – kurze, unheimliche Zeilen, die letzte mit '!' als rote Warnung ('!Öffne niemals die Tür.'); der Sprecher liest sie vor. 3) Du hältst es für einen Scherz und löschst sie – dann ein Beweis, dass der Absender alles weiß (eine seltsame, harmlose Kleinigkeit, die stimmt: 'In deinem Kühlschrank liegen eine halbe Pizza und ein kaputter Regenschirm.'), du prüfst es nach, es stimmt. 4) Kapitelkarten {'type': 'chapter', 'value': '7', 'text': 'TAGE ÜBRIG'} und dann drei bis vier weitere Tage ('5', '3', '1'), an jedem eine neue, seltsame Anweisung (Geld abheben, dreihundert Dosen kaufen, eine Tür im Keller finden, niemandem etwas sagen – besonders nicht dem Nachbarn), die du befolgst; zeig, wie du es tust, gern mit Zähler oben ('status': 'ERSPART: 4.300 €'). Jede Anweisung wirft eine neue Frage auf. 5) Spannung steigt: Nachbarn werden misstrauisch, im Fernsehen läuft eine seltsame Eilmeldung ('graphic' news). 6) Schluss mit Wendung: wer schreibt die Nachrichten? (z. B. du selbst aus der Zukunft, dein Hund, dein altes Handy) – oder Cliffhanger mit 'Soll ich Teil zwei erzählen?'. Kurze Sätze, Pausen, kein Blut, keine echten Katastrophen, Krankheiten, Firmen oder Personen als Tatsache – klar erfunden.",
+   "image_mood": "dark moody night rooms, single ceiling lamp light cone, desaturated cold colors, glowing phone screen",
+   "voice": "de-DE-ConradNeural",
+   "voice_rate": "+0%",
+   "voice_pitch": "-2Hz",
+   "voice_instructions": "Ruhig, leise und eindringlich wie ein Erzähler einer unheimlichen Geschichte; kurze Pausen vor jeder neuen Nachricht.",
+   "gemini_voice": "Charon",
+   "own_voice": true,
+   "look": "noir",
+   "music_volume": 0.12,
+   "topic_examples": [
+    "Eine unbekannte Nummer zählt die Tage bis zum Ausbruch",
+    "Die Nachricht sagt: Kauf dreihundert Dosen Hundefutter",
+    "Jemand schreibt dir jede Nacht um 3:12 Uhr",
+    "Noch fünf Tage – und niemand darf es erfahren",
+    "Die Nachricht kam von deiner eigenen Nummer",
+    "Unter deiner Garage ist ein Keller, von dem du nichts weißt"
+   ],
+   "trends": false,
+   "topic_rules": "Erfundene Mystery-Countdown-Geschichte mit Nachrichten von einer unbekannten Nummer: seltsame Anweisungen, Tage laufen ab, Wendung am Ende. Keine echten Katastrophen, Krankheiten, Personen oder Firmen, kein Blut.",
+   "enabled": true
   }
  ],
  "queue": [
