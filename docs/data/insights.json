@@ -1,5 +1,5 @@
 {
- "updated": 1795087967.6629589,
+ "updated": 1795089826.0333998,
  "enough": true,
  "counted": 24,
  "total": 27,
@@ -63,10 +63,10 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 2,
-   "avg_views": 1673,
+   "avg_views": 1672,
    "avg_likes": 10.5,
    "like_rate": 0.63,
-   "avg_score": 1876
+   "avg_score": 1875
   }
  ],
  "weights": {
@@ -85,7 +85,7 @@
  },
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1656 Aufrufe, 3.17 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1673 Aufrufe) – kommt seltener dran.",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1672 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2489 zu 705 Punkte).",
   "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2508 zu 2003 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
@@ -94,9 +94,9 @@
   "gänsehaut"
  ],
  "words_bad": [
-  "remix",
   "erkennst",
   "lied",
+  "remix",
   "bekanntes"
  ],
  "top": [
