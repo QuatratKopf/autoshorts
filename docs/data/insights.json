@@ -1,19 +1,10 @@
 {
- "updated": 1795093428.119474,
+ "updated": 1795095220.3418667,
  "enough": true,
  "counted": 25,
  "total": 27,
  "needed": 6,
  "categories": [
-  {
-   "slug": "tiere",
-   "name": "🐾 Tierwelt",
-   "n": 2,
-   "avg_views": 1810,
-   "avg_likes": 40.0,
-   "like_rate": 2.21,
-   "avg_score": 2446
-  },
   {
    "slug": "storys",
    "name": "🔥 Spannende Storys",
@@ -24,13 +15,22 @@
    "avg_score": 2444
   },
   {
+   "slug": "tiere",
+   "name": "🐾 Tierwelt",
+   "n": 2,
+   "avg_views": 1810,
+   "avg_likes": 40.0,
+   "like_rate": 2.21,
+   "avg_score": 2444
+  },
+  {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 3,
-   "avg_views": 1750,
+   "avg_views": 1751,
    "avg_likes": 42.3,
    "like_rate": 2.42,
-   "avg_score": 2408
+   "avg_score": 2409
   },
   {
    "slug": "fakten",
@@ -45,10 +45,10 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
-   "avg_views": 1774,
+   "avg_views": 1773,
    "avg_likes": 38.5,
    "like_rate": 2.17,
-   "avg_score": 2367
+   "avg_score": 2366
   },
   {
    "slug": "whatif",
@@ -84,7 +84,7 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🐾 Tierwelt (Ø 1810 Aufrufe, 2.21 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1656 Aufrufe, 3.17 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1673 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2486 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
@@ -93,21 +93,21 @@
   "gänsehaut"
  ],
  "words_bad": [
+  "lied",
   "erkennst",
   "bekanntes",
-  "remix",
-  "lied"
+  "remix"
  ],
  "top": [
   {
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2554,
+   "views": 2553,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3394
+   "score": 3393
   },
   {
    "id": 77,
@@ -123,11 +123,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 2048,
+   "views": 2047,
    "likes": 68,
    "comments": 0,
    "shares": 0,
-   "score": 3068
+   "score": 3067
   },
   {
    "id": 120,
