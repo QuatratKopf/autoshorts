@@ -1,5 +1,5 @@
 {
- "updated": 1795080027.7019663,
+ "updated": 1795081774.8430116,
  "enough": true,
  "counted": 24,
  "total": 26,
@@ -18,10 +18,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 2,
-   "avg_views": 1806,
+   "avg_views": 1810,
    "avg_likes": 40.0,
    "like_rate": 2.21,
-   "avg_score": 2441
+   "avg_score": 2444
   },
   {
    "slug": "comedy",
@@ -36,10 +36,10 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1723,
+   "avg_views": 1724,
    "avg_likes": 44.3,
    "like_rate": 2.57,
-   "avg_score": 2398
+   "avg_score": 2399
   },
   {
    "slug": "mysterien",
@@ -63,14 +63,14 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 2,
-   "avg_views": 1672,
+   "avg_views": 1673,
    "avg_likes": 10.5,
    "like_rate": 0.63,
-   "avg_score": 1875
+   "avg_score": 1876
   }
  ],
  "weights": {
-  "fakten": 1.02,
+  "fakten": 1.03,
   "grusel": 1.2,
   "storys": 1.04,
   "mysterien": 1.01,
@@ -84,8 +84,8 @@
  },
  "advice": [
   "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1656 Aufrufe, 3.17 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1672 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2488 zu 705 Punkte).",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1673 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2489 zu 705 Punkte).",
   "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2508 zu 2003 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
  ],
@@ -93,10 +93,10 @@
   "gänsehaut"
  ],
  "words_bad": [
+  "erkennst",
   "bekanntes",
   "lied",
-  "remix",
-  "erkennst"
+  "remix"
  ],
  "top": [
   {
@@ -123,11 +123,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 2045,
+   "views": 2047,
    "likes": 68,
    "comments": 0,
    "shares": 0,
-   "score": 3065
+   "score": 3067
   },
   {
    "id": 120,
