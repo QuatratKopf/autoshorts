@@ -1,6 +1,6 @@
 {
-  "version": "1.16.0",
-  "file": "releases/AutoShorts-Kanal-1.16.0.cmd",
-  "sha256": "5ab755a82feddcd1f0dafbabcd38cb1424f59920a5125884fc04c49c1f703371",
-  "notes": "Neue Video-Art „Liebe“; Admin: Video-Arten je Zugang freigeben; klare Meldungen bei fehlenden GitHub-Rechten und abgeschalteten Abläufen"
+  "version": "1.16.1",
+  "file": "releases/AutoShorts-Kanal-1.16.1.cmd",
+  "sha256": "fefc0eb2a729a3cdbcba555ecc58193ad1df5e982def7fa486ee2af6e914d5b0",
+  "notes": "Gesamt-Aufrufe links stimmen mit der Tagesgrafik überein"
 }

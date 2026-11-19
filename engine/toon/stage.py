@@ -4547,8 +4547,8 @@ def _punch_time(scene, words, t0, dur):
     return dur * 0.5 if dur >= 3.2 else None
 
 
-CALM_MAX = 4.5       # eine ruhige Szene ohne Schnitt höchstens so lang (s); länger steht sonst dasselbe Bild zu lange
-CUT_MIN = 2.6        # ab dieser Szenenlänge (s) wird mitten im Satz geschnitten – wie in den Vorbild-Shorts etwa alle 1,8 Sekunden ein neues Bild
+CALM_MAX = 3.6       # eine ruhige Szene ohne Schnitt höchstens so lang (s); länger steht sonst dasselbe Bild zu lange
+CUT_MIN = 2.3        # ab dieser Szenenlänge (s) wird mitten im Satz geschnitten – wie in den Vorbild-Shorts etwa alle 1,8 Sekunden ein neues Bild
 
 
 def _said_prop(kind, low):

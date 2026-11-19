@@ -1489,6 +1489,27 @@ def main():
             st_.CONFIG.clear(); st_.CONFIG.update(keep); fresh.save = sv
     check("Motivation: Wort für Wort, Rubriken da (auch Liebe), freigegebene Rubriken je Zugang", _word_caps)
 
+    def _hook_count():                                           # Hook-Titel im ersten Bild, Listen-Zähler „2/4“
+        import tempfile
+        from pathlib import Path
+        from .. import render as rd
+        sc_l = [{"text": "Vier Typen sitzen an Weihnachten an jedem Tisch."}, {"text": "Und den letzten kennst du."}, {"text": "Nummer eins, die Oma."},
+                {"text": "Sie kocht zu viel."}, {"text": "Nummer zwei: der Onkel."}, {"text": "Typ Nummer drei ist der Handy-Neffe."}, {"text": "Und Nummer vier bist du."}]
+        m_, n_ = rd.list_counter(sc_l, "Vier Typen am Tisch")
+        assert n_ == 4 and m_ == {2: 1, 4: 2, 5: 3, 6: 4}, (m_, n_)
+        assert rd.list_counter([{"text": "Was wäre, wenn die Sonne ausgeht?"}, {"text": "Es wird kalt."}, {"text": "Nummer eins der Gefahren."}])[1] == 0
+        with tempfile.TemporaryDirectory() as td:
+            f_ = Path(td) / "a.ass"
+            tm = [(i * 2.0, i * 2.0 + 2.0) for i in range(len(sc_l))]
+            rd.build_ass([("Vier", 0.1, 0.4)], sc_l, tm, f_, hook="VIER TYPEN AM WEIHNACHTSTISCH", title="Vier Typen am Tisch")
+            ev = [ln for ln in f_.read_text(encoding="utf-8").splitlines() if ln.startswith("Dialogue")]
+            hk = [ln for ln in ev if ",Hook," in ln]
+            assert len(hk) == 1 and hk[0].startswith("Dialogue: 4,0:00:00.00") and "\\N" in hk[0], hk
+            assert len([ln for ln in ev if ",Num," in ln]) == 4
+            rd.build_ass([("Mut", 0.1, 0.4)], sc_l, tm, f_, style="word", hook="NIE AUFGEBEN")
+            assert not [ln for ln in f_.read_text(encoding="utf-8").splitlines() if ",Hook," in ln or ",Num," in ln]
+    check("Hook-Titel im ersten Bild, Listen-Zähler", _hook_count)
+
     def _adopt():                                                # Gelerntes aus Kopien: nur Neues, keine fremden Wörter, nur nach Bild-Prüfung
         import tempfile
         from pathlib import Path

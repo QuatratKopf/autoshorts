@@ -1033,7 +1033,7 @@ function liveTotals() {
     // Zahlen wachsen nur: je Video der höhere Wert aus live und gespeichert (die öffentliche Seite rundet „1,2 Tsd“ ab und kennt nicht jedes Video)
     o.yt += Math.max(lv?.views || 0, st.youtube?.views || 0); o.ytLikes += Math.max(lv?.likes || 0, st.youtube?.likes || 0);
     o.tt += Math.max(lt?.views || 0, st.tiktok?.views || 0); o.ttLikes += Math.max(lt?.likes || 0, st.tiktok?.likes || 0); }
-  if (yt?.views) o.yt = Math.max(yt.src === "api" ? 0 : o.yt, yt.views);
+  if (yt?.views) o.yt = Math.max(o.yt, yt.views);   // Kanal-Gesamtzahl hinkt nach (zählt bei Shorts weniger) – die Summe der Videos gilt, wenn sie höher ist
   if (yt?.src === "api" && yt.likes) o.ytLikes = Math.max(o.ytLikes, yt.likes);
   if (tt?.views) o.tt = Math.max(o.tt, tt.views);
   if (tt?.likes) o.ttLikes = Math.max(o.ttLikes, tt.likes);

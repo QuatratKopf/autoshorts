@@ -421,6 +421,7 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, 
         seed = random.randint(1, 10_000_000)
         img_used = set()
         toon = bool(script.get("toon"))
+        kick, kick_ok = "", False
         if toon:
             from .toon import stage
             log("Animiere Szenen …")
@@ -443,10 +444,12 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, 
             _no_overlays()
             stage.direct(scenes, times, f"{stage.topic_head(v.get('topic'))} {script.get('title') or ''}", cat["slug"], os.environ.get("AS_LOOK") or cat.get("look") or cfg("look") or "")
             _no_overlays(False)                           # auch Schilder, die die Regie selbst ergänzt hat (ihre Grafiken füllen sonst leere Szenen)
-            kick = " ".join(str(script.get("thumb") or "").split())[:28]
-            if kick and str(cat.get("caption_style") or "") != "word" and scenes and isinstance(scenes[0], dict) and scenes[0].get("shot") != "graphic" and \
-                    str((scenes[0].get("overlay") or {}).get("type") or "tag") == "tag":
-                scenes[0]["overlay"] = {"type": "tag", "text": kick}   # erstes Bild: Thema als Schild („3 TIER-SUPERKRÄFTE“)
+            kick = " ".join(str(script.get("thumb") or "").split())[:36]
+            kick_ok = bool(kick) and str(cat.get("caption_style") or "") != "word" and bool(scenes) and isinstance(scenes[0], dict) and scenes[0].get("shot") != "graphic"
+            if kick_ok and str((scenes[0].get("overlay") or {}).get("type") or "tag") == "tag":
+                scenes[0]["overlay"] = None                # erstes Bild: das Thema steht groß als Hook-Titel oben (Untertitel-Ebene, schon im allerersten Bild)
+            elif kick_ok:
+                kick_ok = False                            # erstes Bild hat schon eine andere Einblendung (Karte, Zähler) – kein zweiter Text darüber
             try:                                          # Bildplan aufheben: so lässt sich später nachsehen, warum eine Szene so aussah
                 from .state import DATA
                 (DATA / "scripts").mkdir(exist_ok=True)
@@ -516,7 +519,8 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, 
         ass = work / "subs.ass"
         render.build_ass(words, scenes, times, ass, bool(cfg("subtitles_lowercase")),
                          script.get("hud"), script.get("countdown"), 480 if toon else 560,
-                         cat.get("caption_style") or cfg("caption_style") or "impact")   # Motivation: ein großes Wort in der Mitte
+                         cat.get("caption_style") or cfg("caption_style") or "impact",   # Motivation: ein großes Wort in der Mitte
+                         hook=(kick if toon and kick_ok else None), title=script.get("title") or "")
         v["cover_ms"] = render.render(work, scenes, times, voice, ass, final, render.pick_music(cat["slug"]),
                                       float(cat.get("music_volume") or cfg("music_volume") or 0.1), cover,   # Motivation: Musik deutlich hörbar
                                       float(cfg("sfx_volume") if cfg("sfx_volume") is not None else 0.35), cat["slug"])

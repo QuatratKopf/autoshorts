@@ -52,7 +52,43 @@ def _clean(w, lower):
     return w.lower() if lower else w.upper()
 
 
-def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, margin=560, style="impact"):
+NUMS = {"eins": 1, "erste": 1, "ersten": 1, "erster": 1, "zwei": 2, "zweite": 2, "zweiten": 2, "zweiter": 2, "drei": 3, "dritte": 3, "dritten": 3,
+        "dritter": 3, "vier": 4, "vierte": 4, "vierten": 4, "vierter": 4, "fünf": 5, "fünfte": 5, "fünften": 5, "fünfter": 5, "sechs": 6, "sechste": 6,
+        "sieben": 7, "siebte": 7, "acht": 8, "achte": 8, "neun": 9, "zehn": 10}
+_COUNT_W = "|".join(sorted(NUMS, key=len, reverse=True))
+ITEM_RE = re.compile(r"(?i)(?:^|[.!?]\s+|^\W*)(?:und\s+)?(?:nummer|platz|zeichen|fakt|punkt|typ|tipp|ding|regel|grund|geste)\s+(" + _COUNT_W + r"|\d{1,2})\b"
+                     r"|(?:^|[.!?]\s+)(?:und\s+)?(?:der|die|das)\s+(" + _COUNT_W + r")\s+(?:fakt|typ|zeichen|ort|grund|tipp|ding|geste|regel|platz)\b"
+                     r"|\b(?:typ|platz|zeichen|fakt|tipp|grund|ort)\s+nummer\s+(" + _COUNT_W + r"|\d{1,2})\b")
+TOTAL_RE = re.compile(r"(?i)\b(" + _COUNT_W + r"|\d)\s+(?:[a-zäöüß-]+\s+){0,2}(?:typen|zeichen|fakten|dinge|orte|gründe|tipps|gesten|regeln|tiere|superkräfte|fehler|geheimnisse|arten|sachen|wege|tricks)\b")
+
+
+def _num(w):
+    w = str(w or "").lower()
+    return int(w) if w.isdigit() else NUMS.get(w)
+
+
+def list_counter(scenes, title=""):
+    """Listen-Video („Vier Typen …“, „3 Zeichen …“): zu welcher Szene gehört welche Nummer? Gibt ({szene: nummer}, gesamt) oder ({}, 0).
+    Damit steht oben „2/4“ – der Zuschauer sieht, dass noch etwas kommt, und bleibt bis zur letzten Nummer."""
+    m = TOTAL_RE.search(" ".join([str(title or "")] + [str(s.get("text") or "") for s in scenes[:2] if isinstance(s, dict)]))
+    total = _num(m.group(1)) if m else None
+    if not total or not 3 <= total <= 10:
+        return {}, 0
+    marks = {}
+    for i, sc in enumerate(scenes):
+        if not isinstance(sc, dict) or i < 1:
+            continue
+        mm = ITEM_RE.search(str(sc.get("text") or ""))
+        if mm:
+            n = _num(next((g for g in mm.groups() if g), ""))
+            if n and 1 <= n <= total and n not in marks.values():
+                marks[i] = n
+    if len(marks) < max(2, total - 1):                    # nur, wenn die Liste im Text wirklich durchgezählt wird
+        return {}, 0
+    return marks, total
+
+
+def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, margin=560, style="impact", hook=None, title=""):
     """style "impact": schmale, fette GROSSBUCHSTABEN mit orangem Schlüsselwort (wie in viralen Erklärvideos);
     "classic": runde Schrift, wahlweise klein geschrieben."""
     word_mode = str(style or "").lower() == "word"       # Motivation: EIN großes Wort mitten im Bild, Schnitt für Schnitt
@@ -132,6 +168,35 @@ def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, 
             lines.append(f"Dialogue: 1,{_ts(t0)},{_ts(t1)},Cap,,0,0,0,,{fit}{pop if j == 0 else ''}{' '.join(parts)}")
 
     total = times[-1][1] + 0.4
+    # Hook-Titel: groß oben im allerersten Bild (der Feed zeigt es, bevor jemand weiterwischt) – bis zum Ende der ersten Szene
+    hook_t = re.sub(r"[{}\\]", "", " ".join(str(hook or "").split())).upper()[:40] if not word_mode else ""
+    if hook_t and times:
+        end_h = min(max(times[0][1], 1.8), 3.4)
+        ws = hook_t.split()
+        if len(ws) >= 3:                                   # zwei Zeilen, ausgewogen
+            cut = min(range(1, len(ws)), key=lambda k: abs(len(" ".join(ws[:k])) - len(" ".join(ws[k:]))))
+            hook_t = " ".join(ws[:cut]) + r"\N" + " ".join(ws[cut:])
+        fs_h = 176
+        try:                                               # so groß wie möglich, aber keine Zeile breiter als das Bild (gemessen, nicht geschätzt)
+            from PIL import ImageFont
+            f100 = ImageFont.truetype(str(Path(str(FONTS_DIR)) / ("Anton-Regular.ttf" if cap_font == "Anton" else "Poppins-ExtraBold.ttf")), 100)
+            widest = max(f100.getlength(x) + 2 * len(x) for x in hook_t.split(r"\N"))
+            fs_h = int(min(176, 100 * 900 / max(1.0, widest)))
+        except Exception:  # noqa: BLE001
+            fs_h = int(min(176, 1700 / max(1, max(len(x) for x in hook_t.split(r"\N")))))
+        last = hook_t.rsplit(r"\N", 1)
+        body = (last[0] + r"\N{\c&H0019C8FF&}" + last[1]) if len(last) == 2 else r"{\c&H0019C8FF&}" + hook_t   # untere Zeile gelb-orange
+        lines.append(f"Dialogue: 4,{_ts(0)},{_ts(end_h)},Hook,,0,0,0,,{{\\fs{fs_h}\\fscx112\\fscy112\\t(0,160,\\fscx100\\fscy100)\\fad(0,180)}}{body}")
+    # Listen-Zähler oben rechts („2/4“): man sieht, dass noch etwas kommt
+    marks, n_all = list_counter(scenes, title) if not word_mode and not (countdown and countdown.get("seconds")) \
+        and not any(isinstance(sc.get("status"), str) and sc.get("status").strip() for sc in scenes) else ({}, 0)
+    if marks:
+        order = sorted(marks)
+        for k, i0 in enumerate(order):
+            s_c = times[i0][0]
+            e_c = times[order[k + 1]][0] if k + 1 < len(order) else (times[min(len(times) - 1, i0 + 4)][1])
+            lines.append(f"Dialogue: 3,{_ts(s_c)},{_ts(e_c)},Num,,0,0,0,,{{\\fscx70\\fscy70\\t(0,120,\\fscx108\\fscy108)\\t(120,220,\\fscx100\\fscy100)}}"
+                         f"{marks[i0]}{{\\fs72\\c&H00FFFFFF&}}/{n_all}")
     # Ecke oben links: Ort/Zeit-Angabe der Geschichte (z. B. „TAG 1 · 3:12 UHR“), je Szene änderbar
     huds = {str(x).strip().upper() for x in [hud] + [sc.get("hud") for sc in scenes if isinstance(sc.get("hud"), str)] if str(x or "").strip()}
     if hud and len(huds) < 2 and not re.search(r"\d|·|\bTAG\b|\bUHR\b|\bNACHT\b|\bJAHR", str(hud).upper()):
@@ -199,6 +264,8 @@ Style: Cap,{cap_font},{(124 if cap_font == "Anton" else 96) if impact else (86 i
 Style: Big,{cap_font},200,&H00FFFFFF,&H00FFFFFF,&H00241430,&H96000000,0,0,0,0,100,100,3,0,1,9,6,2,40,40,640,1
 Style: Hud,{FONT},54,&H00FFFFFF,&H00FFFFFF,&H00141414,&H64000000,-1,0,0,0,100,100,1,0,1,5,2,7,60,60,190,1
 Style: Cnt,{FONT},76,&H003FD2FF,&H003FD2FF,&H00141414,&H64000000,-1,0,0,0,100,100,1,0,1,6,2,9,60,60,170,1
+Style: Hook,{cap_font},128,&H00FFFFFF,&H00FFFFFF,&H00101010,&H96000000,{0 if cap_font == "Anton" else -1},0,0,0,100,100,2,0,1,10,6,8,50,50,210,1
+Style: Num,{cap_font},150,&H0019C8FF,&H0019C8FF,&H00101010,&H96000000,{0 if cap_font == "Anton" else -1},0,0,0,100,100,2,0,1,8,4,9,60,60,190,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text

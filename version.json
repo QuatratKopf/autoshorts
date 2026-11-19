@@ -1,6 +1,6 @@
 {
-  "version": "1.16.0",
-  "file": "releases/AutoShorts-1.16.0.cmd",
-  "sha256": "43eb504c10f163005e2f1283826d1d5b71cf19fff5e548d988336cffdb2fbcec",
-  "notes": "Neue Video-Art „Liebe“; Admin: Video-Arten je Zugang freigeben; klare Meldungen bei fehlenden GitHub-Rechten und abgeschalteten Abläufen"
+  "version": "1.16.1",
+  "file": "releases/AutoShorts-1.16.1.cmd",
+  "sha256": "3ef66941abbbc4fdc609e7d8ac0a653b941163d12105c74e66d5db28803fffc4",
+  "notes": "Gesamt-Aufrufe links stimmen mit der Tagesgrafik überein"
 }
