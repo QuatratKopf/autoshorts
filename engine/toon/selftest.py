@@ -1830,6 +1830,52 @@ def main():
         js_ = _w.polish({"title": "x", "description": "y", "hashtags": ["#baertierchen"], "tags": ["baertierchen"], "scenes": [{"text": "a."}]})
         assert js_["hashtags"] == ["#bärtierchen"] and js_["tags"] == ["bärtierchen"], js_
     check("Super-Tier aus vier Arten: Misch-Wesen im Bild (Prüfung 19.11., Video 152)", _hybrid)
+
+    def _devices():                                              # Prüfung 19.11.2026 (Videos 156/157): sprechende Geräte, Bus-Innenraum, Verneinung, Kurve stürzt ab
+        T = ["Deine Geräte packen heute aus.", "Morgens verkündet der Wecker laut, dass du neunmal auf Schlummern gedrückt hast.",
+             "In der vollen Bahn liest dein Handy laut deine Bildschirmzeit vor.", "Es sind sieben Stunden, und alle Fahrgäste drehen sich um.",
+             "Mittags in der Küche meldet der Kühlschrank den Zustand deiner Vorräte.", "Er sagt, dass der Joghurt seit drei Wochen abgelaufen ist.",
+             "Abends schaltet sich im Wohnzimmer der Fernseher von alleine ein.", "Die Passanten starren fassungslos auf den Bildschirm.",
+             "Er zählt laut auf, wer um drei Uhr nachts noch online war.", "Die Börsenkurse stürzen ab.",
+             "Nach einer Woche leben wir wie im Mittelalter, nur ohne Burgen.", "Nur das alte Radio läuft noch, weil es keinen Chip besitzt.",
+             "Und dein Router führt eine Liste aller verbundenen Geräte."]
+        sc = [{"text": t_, "place": "livingroom", "time": "day", "props": [], "actors": [{"id": "du", "action": "walk", "pos": "offleft", "to": "center"}]} for t_ in T]
+        sc[1].update(place="bedroom", props=[{"type": "clock"}])
+        sc[2].update(place="station", crowd="walk")
+        sc[3].update(place="station", crowd="walk", overlay={"type": "counter", "label": "STUNDEN", "value": 7, "unit": "HEUTE"})
+        sc[4].update(place="kitchen", shot="insert", props=[{"type": "fridge"}, {"type": "cans"}])
+        sc[5].update(place="kitchen")
+        sc[6].update(props=[{"type": "tv"}])
+        sc[8].update(place="hallway", props=[{"type": "clock"}])
+        sc[9].update(shot="graphic", graphic={"type": "chart", "kicker": "DAX", "label": "PUNKTE", "dark": False}, actors=[])
+        sc[10].update(place="village", props=[{"type": "lib_burg"}])
+        sc[11].update(props=[{"type": "lib_mikrochip"}])
+        sc[12].update(place="serverroom")
+        sd = stage.direct(sc, [(i_ * 4, i_ * 4 + 4) for i_ in range(len(sc))], "Was wäre, wenn deine Geräte die Wahrheit sagen?", "whatif")
+        keys = [[stage._pkey(q_) for q_ in s_.get("props") or []] for s_ in sd]
+        kinds = [[str(a_.get("kind") or "") for a_ in s_.get("actors") or []] for s_ in sd]
+        assert "clock" not in keys[1] and "lib_wecker" in keys[1], ("Wecker statt Wanduhr", keys[1])
+        assert sd[2]["place"] == "transit" and sd[3]["place"] == "transit", ("Bahn-Innenraum statt Bahnsteig", sd[2]["place"], sd[3]["place"])
+        assert sd[3].get("crowd") == "watch" and all(a_.get("action") != "walk" for s_ in sd[2:4] for a_ in s_.get("actors") or []), "in der Bahn läuft niemand"
+        assert "HEUTE" not in str((sd[3].get("overlay") or {}).get("unit") or ""), "Zähler ohne Wort, das niemand sagt"
+        assert "fridge" in kinds[4] and sd[4].get("shot") != "insert" and "fridge" not in keys[4], ("Kühlschrank als Figur", kinds[4], sd[4].get("shot"))
+        assert "fridge" in kinds[5], ("„Er sagt …“ bleibt beim Kühlschrank", kinds[5])
+        assert "tv" in keys[6], ("Fernseher im Wohnzimmer ist zu sehen", keys[6])
+        assert "barrel" not in keys[7], "fassungslos ist kein Fass"
+        assert "clock" not in keys[8], ("Uhrzeit ist keine Wanduhr", keys[8])
+        assert sd[9].get("shot") != "graphic" or (sd[9]["graphic"].get("dark") and sd[9]["graphic"].get("kicker") != "DAX"), "Kurve stürzt ab, kein DAX"
+        assert "lib_burg" not in keys[10], ("ohne Burgen: keine Burg", keys[10])
+        assert "lib_mikrochip" not in keys[11], ("keinen Chip: kein Chip", keys[11])
+        assert places.resolve(sd[12]["place"]) != "serverroom", "Router zu Hause steht nicht im Rechenzentrum"
+        assert stage.denied(r"burg", "nur ohne burgen") and stage.denied(r"chip", "weil er keinen chip besitzt") and not stage.denied(r"chip", "ein chip, aber kein chip aus gold")
+        assert "tv" in stage._prepare({"place": "livingroom", "props": [{"type": "tv"}], "actors": [{"id": "du"}]}, {"du": {}})[4][0][0], "Fernseher wird gezeichnet"
+        frame({"place": "transit", "crowd": "watch", "actors": [{"id": "du", "hold": "phone"}]})
+        frame({"place": "transit", "time": "night", "actors": [{"id": "du"}]})
+        assert stage._hint("Nach zwei Sekunden liest es deinen Suchverlauf laut im Bus vor.") == "transit" and stage._hint("Der Bus fährt los.") != "transit"
+        from .. import writer as wr_
+        js_ = wr_.polish({"title": "T", "scenes": [{"text": "Warum du jeden Abend hineinschaußt."}]})
+        assert "hineinschaust" in js_["scenes"][0]["text"], js_["scenes"][0]["text"]
+    check("Sprechende Geräte, Bus-Innenraum, Verneinung, fallende Kurve (Prüfung 19.11., Videos 156/157)", _devices)
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")
     import collections
     for line, n in collections.Counter(e.strip().splitlines()[-1] + "  @ " + e.strip().splitlines()[-3].strip()[:90] for e in errors).most_common(30):

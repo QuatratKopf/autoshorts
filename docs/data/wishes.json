@@ -661,7 +661,8 @@
  },
  "gameboy": {
   "n": 1,
-  "last": "Wenn Technik die Kontrolle verliert"
+  "last": "Wenn Technik die Kontrolle verliert",
+  "done": true
  },
  "navi": {
   "n": 1,

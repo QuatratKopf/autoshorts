@@ -189,7 +189,7 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
   Büro, Schule. Nicht auf dem Feld, im Wald, im Keller oder in der Wüste.
 - In jeder Szene:
   "place": drinnen: bedroom, livingroom, kitchen, bathroom, office, classroom, lab, hospital, basement, supermarket,
-           supermarket_empty (leergekaufte Regale), station (Bahnhof), restaurant, cave, underwater, space,
+           supermarket_empty (leergekaufte Regale), station (Bahnhof), transit (im Bus/in der Bahn: Innenraum mit Fahrgästen), restaurant, cave, underwater, space,
            germany (Deutschlandkarte), worldmap (Weltkugel), hallway (Flur mit Türen: Hotel, Wohnhaus), attic (Dachboden),
            serverroom (Rechenzentrum mit Serverschränken – für Internet, Cloud, KI, Rechenleistung)
            garage (Autowerkstatt mit Werkzeugwand – für Autos, Motoren, Tuning, Umbauten, Reparaturen)
@@ -586,7 +586,8 @@ def polish(js):
                                    lambda m: m.group(1).upper(), sc["text"], flags=_re_p.I)     # Regie-Wort der Vorgabe mitgesprochen („Dann die Finte: Du denkst …“)
             sc["text"] = fix_eszett(sc["text"])
             sc["text"] = re.sub(r"(?i)\b([a-zäöüß]{4,}) \1\b", r"\1", sc["text"])      # „reine reine Fantasie“: versehentlich doppeltes Wort
-            sc["text"] = re.sub(r"(?i)(zwei|drei|vier|fünf|sieben|acht|neun)s(hundert|tausend)", r"\1\2", sc["text"])   # „viertausendviershundert“
+            sc["text"] = re.sub(r"(?i)(zwei|drei|vier|fünf|sieben|acht|neun)s(hundert|tausend)", r"\1\2", sc["text"])
+            sc["text"] = re.sub(r"(?i)\b(\w*schau)ßt\b", r"\1st", sc["text"])   # „hineinschaußt“ (Video 157)   # „viertausendviershundert“
             sc["text"] = re.sub(r"(?i)\b(zwanzig|dreißig|vierzig|fünfzig|sechzig|siebzig|achtzig|neunzig)[ -]und[ -](ein|eins|zwei|drei|vier|fünf|sechs|sieben|acht|neun)\b",
                                 lambda m: (m.group(2).lower().replace("eins", "ein") + "und" + m.group(1).lower()), sc["text"])   # „neunzig und drei Kilometer“ → „dreiundneunzig“ (Video 154: Zähler zeigte „3 KM“)
             sc["text"] = re.sub(r"(?i)\b(mehreren?|einigen?|vielen?|wenigen?|paar)(hundert|tausend|millionen|milliarden)\b", r"\1 \2", sc["text"])   # „mehrerenhundert Metern“ (Video 152)

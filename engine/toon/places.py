@@ -1752,6 +1752,45 @@ def station(night):
     return p.vignette()
 
 
+def transit(night):
+    """Innenraum von Bus, Straßenbahn oder U-Bahn (Prüfung 19.11.2026, Video 156: „im Bus“ spielte am Bahnsteig): Fensterband mit
+    vorbeiziehender Stadt, Haltestange mit Schlaufen, Sitzreihe an der Wand, gelbe Haltestangen, Gummiboden."""
+    p = P(night)
+    p.room((206, 212, 222), (104, 108, 122), stripe=False, panel=False)
+    p.rect((-10, 250, W + 10, 330), (232, 234, 240), o=5)                       # Deckenkante mit Lichtband
+    p.rect((60, 272, W - 60, 300), (255, 246, 200), r=12, o=0, glow=True)
+    for i, x in enumerate(range(-40, W, 380)):                                  # Fensterband: Himmel, Häuserzeile, Rahmen
+        box = (x + 30, 420, x + 350, 800)
+        p.rect((box[0] - 14, box[1] - 14, box[2] + 14, box[3] + 14), (70, 76, 92), r=34)
+        if night:
+            p.grad(box, (20, 24, 70), (52, 56, 120), raw=True)
+        else:
+            p.grad(box, (120, 196, 252), (212, 238, 255), raw=True)
+        for j in range(3):                                                      # Häuser draußen
+            hx = box[0] + 14 + j * 104
+            hh = (150, 230, 190)[(i + j) % 3]
+            col = ((60, 64, 104), (70, 60, 100), (52, 70, 110))[(i + j) % 3] if night else ((236, 190, 150), (206, 214, 170), (226, 176, 190))[(i + j) % 3]
+            p.d.rectangle((hx, box[3] - hh, hx + 88, box[3]), fill=p.c(col, glow=True))
+            for wy in range(box[3] - hh + 24, box[3] - 30, 56):
+                for wx in (hx + 14, hx + 52):
+                    p.d.rectangle((wx, wy, wx + 22, wy + 30), fill=(255, 232, 150) if night else p.c((250, 250, 255), glow=True))
+        p.d.rounded_rectangle(box, 22, outline=INK, width=6)
+    p.rect((-10, 352, W + 10, 372), (250, 206, 60), r=10, o=5)                  # Haltestange oben mit Schlaufen
+    for x in range(110, W, 215):
+        p.line((x, 372, x, 452), (60, 64, 76), 8)
+        p.d.rounded_rectangle((x - 30, 446, x + 30, 512), 22, outline=p.c((60, 64, 76)), width=12)
+    p.rect((-10, 836, W + 10, 880), (150, 158, 176), o=5)                       # Brüstung unter den Fenstern
+    for x in range(-30, W, 270):                                                # Sitzreihe an der Wand
+        p.rect((x + 20, 900, x + 240, 1090), (52, 96, 170), r=30)
+        p.rect((x + 40, 920, x + 220, 1000), (72, 120, 196), r=22, o=0)
+        p.rect((x + 10, 1080, x + 250, 1150), (40, 78, 146), r=22)
+        p.rect((x + 110, 1150, x + 150, 1215), (90, 96, 110), o=5)
+    for x in (270, 810):                                                        # senkrechte Haltestangen
+        p.rect((x - 11, 372, x + 11, 1222), (250, 206, 60), r=10, o=5)
+    p.rect((-10, GROUND - 60, W + 10, GROUND - 34), (250, 206, 60), o=4)        # gelbe Kante am Boden
+    return p.vignette()
+
+
 def restaurant(night):
     """Restaurant/Imbiss: Theke mit Kaffeemaschine, Menütafel mit Bildern, gedeckte Tische mit Essen, Stühle, Hängelampen."""
     p = P(night)
@@ -2127,7 +2166,7 @@ PLACES = {"bedroom": bedroom, "livingroom": livingroom, "street": street, "basem
           "beach": beach, "desert": desert, "snow": snow, "forest": forest, "underwater": underwater,
           "mountain": mountain, "hospital": hospital, "cave": cave, "supermarket": supermarket,
           "supermarket_empty": supermarket_empty, "bathroom": bathroom, "station": station, "restaurant": restaurant, "germany": germany, "worldmap": worldmap, "hallway": hallway, "attic": attic,
-          "serverroom": serverroom, "cinema": cinema, "diningroom": diningroom, "highsky": highsky, "garage": garage}
+          "serverroom": serverroom, "cinema": cinema, "diningroom": diningroom, "highsky": highsky, "garage": garage, "transit": transit}
 OUTDOOR = tuple(OUTDOOR_SPECS) + ("custom",)
 ALIASES = {"savanne": "savannah", "steppe": "savannah", "savanna": "savannah", "serengeti": "savannah", "asphalt": "street", "werkstatt": "garage", "autowerkstatt": "garage", "kfz-werkstatt": "garage", "workshop": "garage",
            "boxengasse": "garage", "tuning": "garage", "tuningwerkstatt": "garage", "schrauberhalle": "garage", "carport": "garage", "kino": "cinema", "kinosaal": "cinema", "kinos": "cinema", "leinwand": "cinema", "kinoleinwand": "cinema",
@@ -2141,7 +2180,7 @@ ALIASES = {"savanne": "savannah", "steppe": "savannah", "savanna": "savannah", "
            "flur": "hallway", "gang": "hallway", "korridor": "hallway", "treppenhaus": "hallway", "hotel": "hallway", "hotelflur": "hallway", "corridor": "hallway", "hausflur": "hallway", "hotelzimmer": "bedroom", "hotel room": "bedroom", "dachboden": "attic", "speicher": "attic", "deutschland": "germany", "deutschlandkarte": "germany", "karte": "germany", "map": "germany", "weltkarte": "worldmap",
            "welt": "worldmap", "world": "worldmap", "globus": "worldmap", "supermarkt": "supermarket", "laden": "supermarket", "geschäft": "supermarket", "shop": "supermarket", "store": "supermarket",
            "leerer supermarkt": "supermarket_empty", "bad": "bathroom", "badezimmer": "bathroom", "bahnhof": "station",
-           "u-bahn": "station", "zug": "station", "restaurant": "restaurant", "café": "restaurant", "cafe": "restaurant", "diner": "restaurant", "burgerladen": "restaurant", "imbiss": "restaurant", "kneipe": "restaurant",
+           "u-bahn": "station", "zug": "station", "bus": "transit", "bahn": "transit", "linienbus": "transit", "straßenbahn": "transit", "tram": "transit", "abteil": "transit", "waggon": "transit", "restaurant": "restaurant", "café": "restaurant", "cafe": "restaurant", "diner": "restaurant", "burgerladen": "restaurant", "imbiss": "restaurant", "kneipe": "restaurant",
            "gaststätte": "restaurant", "schnellrestaurant": "restaurant", "fast food": "restaurant", "bistro": "restaurant", "pizzeria": "restaurant",
            "bauernhof": "farm", "dorf": "village", "tankstelle": "gasstation", "kraftwerk": "powerplant", "friedhof": "graveyard", "kirche": "church", "dom": "church", "see": "lake", "fluss": "river", "müllhalde": "landfill", "deponie": "landfill",
            "rechenzentrum": "serverroom", "serverraum": "serverroom", "serverfarm": "serverroom", "datacenter": "serverroom", "data center": "serverroom",

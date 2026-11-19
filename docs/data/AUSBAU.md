@@ -512,3 +512,22 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Noch offen: In anderen Mehr-Tier-Videos steht das Bärtierchen weiter groß im Wald. Die Text-KI lässt die verlangte Schlussfrage weg; Zahlen im
   Thema werden nur verlässlich gesprochen, wenn sie zusätzlich als Wort dastehen („gesprochen: dreiundneunzig“). Die Aktion `upload` und der Weg über
   Zernio laden auf YouTube die volle Fassung hoch – die Kurzfassung aus `ytcut` entsteht nur beim direkten Bau mit Upload ohne Zernio.
+
+- Sprechende Geräte (Prüfung 19.11.2026, „Wenn Technik die Kontrolle verliert“ / „Was wäre, wenn deine Geräte die Wahrheit sagen?“, Videos 156/157 –
+  `stage._devices`, Schlussdurchgang in `direct`): Tut der Kühlschrank im Satz selbst etwas (`DEVICE_TALK_RE`: meldet, fragt, übernimmt, wirft …), steht er
+  als Figur `fridge` neben dem Menschen (`_fridge_in`) – nicht als Großaufnahme ohne Gesicht mit Dosen vor blauem Grund. Folgesätze „Er sagt …“, „Und er
+  fragt …“ bleiben bis zu zwei Sätze beim Gerät von eben (`DEVICES`: Kühlschrank-Figur, Fernseher, Router, Wecker). Wecker im Satz: Bibliotheks-`wecker`
+  statt Wanduhr `clock`; „um drei Uhr nachts“ (`CLOCK_TIME_RE`) ist eine Uhrzeit und stellt keine Wanduhr auf den Boden. „Dein Router“ steht nicht im
+  Rechenzentrum; „Im Auto behauptet das Navi“ spielt auf der Straße, nicht in der Werkstatt (Navi → `car` in `TEXT_PROPS`). Zähler-Einheit ohne Wörter,
+  die niemand sagt („7 HEUTE“).
+  Neuer Ort `transit` (`places.transit`: Innenraum von Bus/Straßenbahn/Bahn – Fensterband mit Stadt, Haltestangen mit Schlaufen, Sitzreihe): „im Bus“,
+  „in der (vollen) Bahn“, „Fahrgäste“ (`HINTS`, `places.ALIASES`); ein Bahnsteig (`station`) mit Fahrgästen im Satz oder direkt nach einer Fahrzeug-Szene
+  wird zum Innenraum. Dort läuft niemand durchs Bild, die Fahrgäste stehen und schauen her (`crowd: watch`). Die Text-KI darf `transit` wählen.
+  Verneinung (`stage.denied`, `DENY_RE`): „nur ohne Burgen“, „weil er keinen Chip besitzt“ – wovon der Satz sagt, dass es fehlt, steht nicht im Bild
+  (weder aus dem Drehbuch noch aus der Bibliothek, auch nicht als Großaufnahme). Der Fernseher im Wohnzimmer wird gezeichnet (`PLACE_HAS` behauptete, er
+  stehe schon da – im Bild gab es nie einen). „fassungslos“ ist kein Fass. Kurve aus dem Drehbuch: Richtung nach dem Satz („stürzen ab“ → rot abwärts),
+  Überschrift/Unterzeile nur mit Wörtern aus dem Satz (kein „DAX“). Vorgriff im ersten Bild (`_cold_open`) nimmt kein Alltagsbild mehr, das nur aus einem
+  Ding und einer Geste besteht (Auto auf der Straße zum Satz „Deine Geräte packen aus“). Hook-Titel: `main` las `script["thumb"]`, das Drehbuch führt den
+  Text aber unter `thumbnail.text` – der große Titel im ersten Bild fehlte deshalb in jedem Video. Bibliothek: die automatisch gelernte Zeichnung
+  `gameboy` (Nachbild eines Markengeräts) ist entfernt, das Wort zeigt die neutrale `konsole`; für Marken-Geräte wird nichts mehr gelernt (`main.NO_THINGS`).
+  `writer.polish`: „hineinschaußt“ → „hineinschaust“. Selbsttest: `_devices`.

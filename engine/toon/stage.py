@@ -16,7 +16,7 @@ SCALE = 1.08            # Figuren bewusst kleiner: die Szene steht im Mittelpunk
 POS = {"left": 250, "center": 540, "right": 830, "offleft": -260, "offright": 1340,
        "links": 250, "mitte": 540, "rechts": 830}
 TALL_OV = ("phone", "checklist", "note")
-NO_FURNITURE = ("restaurant", "diningroom", "bathroom", "hallway", "supermarket", "supermarket_empty", "station", "basement", "attic", "hospital", "serverroom")
+NO_FURNITURE = ("restaurant", "diningroom", "bathroom", "hallway", "supermarket", "supermarket_empty", "station", "transit", "basement", "attic", "hospital", "serverroom")
 MAIN_IDS = ("du", "ich", "held", "hero", "main", "erzähler", "narrator", "a0")
 
 
@@ -436,7 +436,7 @@ def _on_table(key):
     """Auch kleine gelernte Gegenstände (Tasse, Router, Mikroskop …) stehen drinnen auf dem Tisch statt auf dem Boden."""
     return key in ON_TABLE or (key.startswith("lib_") and extras.SIZES.get(key, (9,))[0] <= 0.5)
 PLACE_HAS = {"kitchen": ("fridge", "table"), "office": ("computer", "table"), "supermarket": ("shelf",), "supermarket_empty": ("shelf",),
-             "livingroom": ("tv", "lib_sofa", "sofa", "couch"), "forest": ("tree",), "park": ("tree",), "camp": ("tent", "fire"), "street": ("streetlamp", "house"),
+             "livingroom": ("lib_sofa", "sofa", "couch"), "forest": ("tree",), "park": ("tree",), "camp": ("tent", "fire"), "street": ("streetlamp", "house"),
              "village": ("house",), "restaurant": ("table",), "diningroom": ("table", "chair", "candle", "lib_stuhl"), "hallway": (), "serverroom": ("computer", "shelf"),
              "headquarters": ("house", "streetlamp"), "cinema": ("tv",)}
 
@@ -1095,6 +1095,19 @@ def _lib_props():
         return []
 
 
+DENY_RE = r"\b(?:ohne|kein|keine|keinen|keinem|keiner|keines|keinerlei)\s+(?:(?!und\b|oder\b|aber\b)[a-zäöüß-]+\s+){0,2}?"
+
+
+def denied(pat, low):
+    """Nennt der Satz das Ding nur, um zu sagen, dass es fehlt („nur ohne Burgen“, „keinen Chip“, „ohne einen einzigen Fernseher“)?
+    Dann gehört es nicht ins Bild. Steht es daneben auch unverneint im Satz, bleibt es."""
+    low = str(low or "")
+    hits = [m for m in re.finditer(pat, low)]
+    if not hits:
+        return False
+    return all(re.search(DENY_RE + r"$", low[:m.start()]) for m in hits)
+
+
 def topic_head(topic):
     """Kern eines langen Themas (bis zum ersten Doppelpunkt, Gedankenstrich oder der ersten Klammer). Ein Thema mit ausführlichen
     Vorgaben nennt viele Dinge – keines davon ist „das Ding des Themas“, das in jeder zweiten Szene im Bild steht."""
@@ -1269,6 +1282,10 @@ def direct(scenes, times, topic="", style="", look=""):
         for pat, k in TEXT_PROPS:                         # „wie ein Raketenstart“, „wie ein Vulkan“: ein Vergleich, kein Ding im Bild
             m = _re0.search(r"\bwie (?:bei |in |auf |von )?(?:ein\w* |der |die |das |dem |den )?(?:\w+ )?(?:" + pat + ")", low0)
             if m and not _re0.search(pat, low0[:m.start()] + " " + low0[m.end():]):
+                simile.append(k)
+                sc["props"] = [q for q in sc["props"] if extras.PROP_ALIASES.get(q["type"].lower(), q["type"].lower()) != k]
+        for pat, k in _lib_props() + TEXT_PROPS:          # „nur ohne Burgen“, „weil er keinen Chip besitzt“: wovon der Satz sagt, dass es fehlt, steht nicht im Bild (Video 156)
+            if k not in simile and denied(pat, low0):
                 simile.append(k)
                 sc["props"] = [q for q in sc["props"] if extras.PROP_ALIASES.get(q["type"].lower(), q["type"].lower()) != k]
         if sc["weather"] in ("dark", "dunkel", "blackout") and not _re0.search(r"dunkel|finster|nacht|schwarz|\bstrom|licht|blackout|sonne", low0):
@@ -1806,6 +1823,13 @@ def direct(scenes, times, topic="", style="", look=""):
                 charts += 1
                 sc["actors"], sc["props"], sc["crowd"], sc["weather"] = [], [], "", ""
                 acts, lone = [], False
+                sc["graphic"]["dark"] = bool(_re0.search(CHART_DOWN_RE, low_c))   # „Die Börsenkurse stürzen ab“ mit steigender grüner Kurve (Video 156): die Richtung bestimmt der Satz
+                kick_c = str(sc["graphic"].get("kicker") or "").strip().lower()
+                if kick_c and not all(w[:5] in low_c for w in _re0.findall(r"[a-zäöüß0-9]{3,}", kick_c)):
+                    sc["graphic"]["kicker"] = next((k for pat, k in CHART_KICKERS if _re0.search(pat, low_c)), "KURS")   # „DAX“, wenn niemand vom DAX spricht
+                lab_c = str(sc["graphic"].get("label") or "").strip().lower()
+                if lab_c and not any(w[:5] in low_c for w in _re0.findall(r"[a-zäöüß]{3,}", lab_c)):
+                    sc["graphic"]["label"] = ""
         elif _re0.search(CHART_RE, low_c) and sc.get("shot") != "graphic" and charts < 2 and i > 0 and not last and ov_t not in TALL_OV and ov_t != "choice" \
                 and not sc.get("float") and not (scenes[i - 1].get("shot") == "graphic" and (scenes[i - 1].get("graphic") or {}).get("type") == "chart"):
             fig_c = find_figure(sc.get("text"))             # nur Zahlen, die der Sprecher auch sagt
@@ -2280,7 +2304,16 @@ def direct(scenes, times, topic="", style="", look=""):
         if o_k and str(o_k.get("type") or "") == "counter" and str(o_k.get("unit") or "").strip().upper() == "KM" \
                 and re.search(r"kilometer\w* pro stunde|km/h|stundenkilometer", str(sc.get("text") or "").lower()):
             o_k["unit"] = "KM/H"
+    _devices(scenes)
     _last_look(scenes, topic)
+    for sc in scenes:                                     # was der Satz verneint („ohne Burgen“), bringt auch kein späterer Durchgang zurück
+        if isinstance(sc, dict) and sc.get("_simile") and isinstance(sc.get("props"), list) and str(sc.get("shot") or "") != "graphic":
+            deny_k = [k for pat, k in _lib_props() + TEXT_PROPS if k in sc["_simile"] and denied(pat, str(sc.get("text") or "").lower())]
+            if deny_k:
+                sc["props"] = [q for q in sc["props"] if extras.PROP_ALIASES.get(str((q.get("type") if isinstance(q, dict) else q) or "").lower(),
+                                                                             str((q.get("type") if isinstance(q, dict) else q) or "").lower()) not in deny_k]
+                if str(sc.get("shot") or "") == "insert" and not sc["props"]:
+                    sc["shot"] = ""
     return scenes
 
 
@@ -3130,6 +3163,110 @@ RADIO_RE = r"radio|funk|durchsage|sender|empfang|lautsprecher"
 TEETH_RE = r"(?:zähne\w*|zahn|gebiss|lächeln)\b[^.!?]{0,60}\b(grün|gelb|schwarz|braun|blau)|\b(grün|gelb|schwarz|braun|blau)e[nrs]? (?:zähne|gebiss|lächeln)"
 TEETH_COLORS = {"grün": (96, 190, 90), "gelb": (236, 208, 80), "schwarz": (58, 56, 62), "braun": (150, 104, 66), "blau": (90, 150, 230)}
 SCRUB_RE = r"schrubb|\bputz(?:t|e|en|st|te)\b|\breib(?:t|e|en|st)\b|\bkau(?:t|e|en|st)\b"
+
+
+DEVICE_TALK_RE = r"sagt|meldet|fragt|verkündet|ruft|flüstert|petzt|verrät|beschwert|lacht|streikt|übernimmt|wirft|verriegelt|weigert|verweigert|schimpft|droht|antwortet|erklärt|behauptet|gesteht|plaudert|packt aus|zählt|liest|brüllt|motzt|meckert|protestiert|fordert|kündigt"
+
+
+def _fridge_in(sc, acts, low, human_idle=True):
+    """Stellt den Kühlschrank als Figur mit Gesicht neben den Menschen (kein gesichtsloses Gerät als Großaufnahme)."""
+    human = [a for a in acts if not a.get("kind")][:1]
+    for a in human:
+        a["pos"] = "left"
+        if a.get("action") == "walk":
+            a["action"], a["to"] = "idle", ""
+    sc["actors"] = human + [{"id": "kuehlschrank", "kind": "fridge", "action": "point" if human else "idle", "emotion": "angry" if re.search(
+        r"kontrolle|verriegel|wirft|droht|schimpf|streik|weiger|fordert", low) else "happy", "pos": "right" if human else "center",
+        "speaks": True, "emote": "!", "say": "", "hold": "", "facing": ""}]
+    sc["props"] = [p for p in (sc.get("props") or []) if _pkey(p) not in ("fridge", "cans")]
+    if str(sc.get("shot") or "") in ("insert", "event", "close"):
+        sc["shot"] = ""
+    if isinstance(backdrop(sc), dict) or places.resolve(backdrop(sc)) not in INDOOR:
+        sc["place"] = "kitchen"
+        sc.pop("backdrop", None)
+
+
+def _pkey(p):
+    k = str((p.get("type") if isinstance(p, dict) else p) or "").lower()
+    return extras.PROP_ALIASES.get(k, k)
+
+
+DEVICES = ((r"kühlschrank", "fridge"), (r"fernseh|\btv\b", "tv"), (r"router", "lib_router"), (r"wecker", "lib_wecker"), (r"\bnavis?\b|navigationsgerät", "car"))
+CLOCK_TIME_RE = r"\bum (?:\w+ )?(?:\w+ )?uhr\b|\d\s*uhr\b|\buhr (?:nachts|morgens|abends|früh|mittags)|\buhrzeit"
+
+
+def _devices(scenes):
+    """Schlussdurchgang für sprechende Geräte (Prüfung 19.11.2026, Videos 156/157): Tut der Kühlschrank im Satz selbst etwas („meldet“, „fragt“,
+    „übernimmt die Kontrolle“), steht er als Figur mit Gesicht neben dem Menschen – nicht als Möbel am Bildrand oder allein vor blauem Grund.
+    Folgesätze mit „Er sagt …“, „Und er fragt …“ bleiben beim Gerät von eben (Kühlschrank-Figur, Fernseher, Router, Wecker). Ein Wecker ist keine
+    Wanduhr am Boden; „um drei Uhr nachts“ ist eine Uhrzeit und kein Ding; der heimische Router steht nicht im Rechenzentrum; im Bus und in der Bahn
+    läuft niemand durchs Bild; ein Zähler zeigt keine Wörter, die niemand sagt („7 HEUTE“)."""
+    last = None
+    for i, sc in enumerate(scenes):
+        if not isinstance(sc, dict):
+            continue
+        low = str(sc.get("text") or "").lower()
+        ov = sc.get("overlay") if isinstance(sc.get("overlay"), dict) else None
+        if ov and str(ov.get("type") or "") == "counter" and isinstance(ov.get("unit"), str):
+            ov["unit"] = " ".join(w for w in ov["unit"].split() if not (w.isalpha() and len(w) >= 4 and w.lower()[:5] not in low))
+        if str(sc.get("shot") or "") == "graphic":
+            continue
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        if not isinstance(backdrop(sc), dict) and places.resolve(backdrop(sc)) == "transit":   # im Bus/in der Bahn läuft niemand durchs Bild: Fahrgäste stehen und schauen her
+            if str(sc.get("crowd") or "") in ("walk", "cheer") or (not sc.get("crowd") and re.search(r"fahrg[aä]st|mitfahrer|\balle\b|leute|menschen|jeder", low)):
+                sc["crowd"] = "watch"
+            for a in acts:
+                if a.get("action") in ("walk", "run") and not re.search(r"steig|rennt|läuft|geht|flücht|flieh", low):
+                    a["action"], a["to"] = "idle", ""
+                    if str(a.get("pos") or "").startswith("off"):
+                        a["pos"] = "center"
+        prev_d = scenes[i - 1] if i and isinstance(scenes[i - 1], dict) else {}
+        if not isinstance(backdrop(sc), dict) and places.resolve(backdrop(sc)) == "station" and not re.search(r"bahnsteig|bahnhof|\bgleis|steig\w* (?:aus|ein)", low) \
+                and (re.search(r"fahrg[aä]st|mitfahrer|\bim (?:\w+ )?(?:bus|abteil|waggon)\b|in der (?:\w+ )?(?:bahn|tram|straßenbahn)\b", low)
+                     or (not isinstance(backdrop(prev_d), dict) and places.resolve(backdrop(prev_d)) == "transit" and str(prev_d.get("shot") or "") != "graphic")):
+            sc["place"] = "transit"                                                  # Fahrgäste sitzen im Fahrzeug, nicht am Bahnsteig; der Folgesatz bleibt drin
+            if str(sc.get("crowd") or "") in ("walk", "cheer", ""):
+                sc["crowd"] = "watch"
+            for a in acts:
+                if a.get("action") in ("walk", "run"):
+                    a["action"], a["to"] = "idle", ""
+        if re.search(r"\bnavis?\b|navigationsgerät|\bim auto\b", low) and not isinstance(backdrop(sc), dict) and places.resolve(backdrop(sc)) in GARAGES \
+                and not re.search(r"werkstatt|garage|hebebühne|schraub|reparier", low):
+            sc["place"] = "street"                                                   # „Im Auto behauptet das Navi …“ spielt unterwegs, nicht in der Werkstatt
+        if isinstance(sc.get("props"), list):
+            if re.search(CLOCK_TIME_RE, low) and not re.search(r"wanduhr|armbanduhr|die uhr\b|der uhr\b|eine uhr\b|wecker|zeiger|tickt", low):
+                sc["props"] = [p for p in sc["props"] if _pkey(p) != "clock"]        # „um drei Uhr nachts“: eine Uhrzeit, keine Wanduhr auf dem Flurboden
+            if re.search(r"wecker", low) and not denied(r"wecker", low) and "lib_wecker" in extras.SIZES:
+                sc["props"] = [p for p in sc["props"] if _pkey(p) != "clock"]        # Wecker statt Wanduhr
+                if not any(_pkey(p) == "lib_wecker" for p in sc["props"]):
+                    sc["props"].append({"type": "lib_wecker"})
+        if re.search(r"router", low) and not isinstance(backdrop(sc), dict) and places.resolve(backdrop(sc)) == "serverroom" \
+                and re.search(r"\bdein|\bmein|\bunser|zuhause|zu hause|daheim|wlan|wohnung", low):
+            sc["place"] = "livingroom"                                               # der Router zu Hause steht nicht im Rechenzentrum
+        named = next((k for pat, k in DEVICES if re.search(pat, low) and not denied(pat, low)), None)
+        talks = bool(re.search(r"\b(?:" + DEVICE_TALK_RE + r")", low))
+        pron = bool(re.match(r"(?:und |aber |dann |doch |denn )?(?:er|es|sie) ", low)) and talks
+        dev = None
+        if named:
+            last = (named, i)
+            dev = named if (talks or named == "fridge") else None
+        elif pron and last and i - last[1] <= 2:
+            dev = last[0]
+            last = (dev, last[1])
+            src = scenes[i - 1] if isinstance(scenes[i - 1], dict) else {}
+            if str(src.get("shot") or "") != "graphic" and src.get("place") and backdrop(src) != backdrop(sc) and dev != "car":
+                sc["place"], sc["time"] = src.get("place"), src.get("time", sc.get("time"))   # „Er sagt …“ spielt dort, wo das Gerät eben stand
+                sc.pop("backdrop", None)
+        elif not pron:
+            last = last if (last and i - last[1] < 1) else None
+        if dev == "fridge":
+            m = re.search(r"kühlschrank\w*\b(.{0,90})", low)
+            does = pron or (m and re.search(r"\b(?:" + DEVICE_TALK_RE + r")", m.group(1) + " " + low[:m.start()][-40:]))
+            if does and not any(str(a.get("kind") or "") == "fridge" or re.search(FRIDGE_ID_RE, str(a.get("id") or "").lower()) for a in acts):
+                _fridge_in(sc, acts, low)
+        elif dev and pron and isinstance(sc.get("props"), list) and dev in extras.SIZES and not any(_pkey(p) == dev for p in sc["props"]) \
+                and str(sc.get("shot") or "") not in ("close",) and (dev != "car" or isinstance(backdrop(sc), dict) or places.resolve(backdrop(sc)) in places.OUTDOOR):
+            sc["props"] = sc["props"][:1] + [{"type": dev}]                          # das Gerät von eben bleibt im Bild
 
 
 def _household(scenes):
@@ -4070,7 +4207,9 @@ def _cold_open(scenes):
     if g_first and g_first.get("type") in ("radar", "news", "radio", "phone", "chart", "pulse"):
         return                                            # das erste Bild ist schon ein bewegtes Schaubild zum Satz (Radarschirm, Eilmeldung): kein fremdes Bild davor
     pool = [(i, _scene_punch(sc)) for i, sc in enumerate(scenes[2:max(3, len(scenes) * 2 // 3)], start=2)]
-    pool = [x for x in pool if x[1] >= 4]
+    pool = [x for x in pool if x[1] >= 4 and (x[1] >= 5 or scenes[x[0]].get("float") or scenes[x[0]].get("shot") == "event" or scenes[x[0]].get("weather")
+                                              or any(isinstance(a, dict) and (a.get("kind") or str(a.get("action") or "") in ("fall", "run", "jump", "dance", "scared"))
+                                                     for a in scenes[x[0]].get("actors") or []))]   # ein Alltagsding plus Kopfschütteln (Auto auf der Straße) ist kein „stärkstes Bild“ (Video 157)
     if not pool:
         return
     best = scenes[max(pool, key=lambda x: (x[1], -x[0]))[0]]
@@ -4395,6 +4534,7 @@ HINTS = [
     (r"kraftwerk|atomkraft|reaktor|stromnetz", "powerplant"),
     (r"strommast|stromleitung|hochspannung", {"elements": ["powerlines", "hills"]}),
     (r"windrad|windräder|windkraft", {"elements": ["windturbines", "fields"]}),
+    (r"\bim (?:\w+ )?(?:bus|linienbus|abteil|waggon)\b|in (?:der|einer|deiner) (?:\w+ )?(?:bahn|straßenbahn|tram|u-bahn|s-bahn)\b|fahrgäste|fahrgast|mitfahrer", "transit"),   # im Fahrzeug, nicht am Bahnsteig
     (r"bahnhof|\bzug\b|\bzüge|u-bahn|s-bahn|bahnsteig", "station"),
     (HARBOR_RE, "harbor"),
     (r"friedhof|\bgrab\b|gräber", "graveyard"),
@@ -4509,7 +4649,7 @@ MOOD_HINTS = [
     (r"menschen|leute|bevölkerung|einwohner|millionen|milliarden|gesellschaft", ("", "walk")),
     (r"staunen|beobachten|schauen zu|zuschauer", ("", "watch")),
 ]
-INDOOR = ("bedroom", "livingroom", "diningroom", "kitchen", "office", "classroom", "lab", "hospital", "basement", "cave", "underwater", "space", "cinema")
+INDOOR = ("bedroom", "livingroom", "diningroom", "kitchen", "transit", "office", "classroom", "lab", "hospital", "basement", "cave", "underwater", "space", "cinema")
 MAPS = ("germany", "worldmap")
 GARAGES = ("garage",)                                           # in der Werkstatt stehen Autos (drinnen sonst nie)
 GARAGE_VEHICLES = ("car", "police", "ambulance", "truck", "bike")
@@ -4527,14 +4667,14 @@ TEXT_PROPS = [(r"motorkran|werkstattkran|bau\w* .{0,40}motor.{0,40}\bein\b|motor
               (SUB_RE, "submersible"), (r"nähmaschine|\bnäh(?:en|t|ten|te)\b|zusammennäh|zusammengenäh|vernäh", "sewing"), (r"stoffbahn|stoffballen|stoffrolle|(?:quadrat)?meter (?:\w+ )?stoff\b|\bstoff\b.{0,60}(?:kauf|geschäft|läden)|kauf\w*\b.{0,60}\bstoff\b", "fabric"), (r"aquarium|aquarien(?!scheib|glas)|goldfisch|fischglas|fischbecken", "aquarium"), (r"drohne", "drone"), (r"überwachungskamera|kameras? (erfass|film|beobacht)|überwacht|überwachung", "cctv"), (r"zucker|\bsalz\b", "pile"), (r"\bsand\b", "sandpile"), (r"\bmüll|abfall|plastik", "trash"), (r"wasserhahn|trinkwasser|leitungswasser", "faucet"),
               (r"\bglas\b|\bgläser|trinken|getränk|\bdurst", "glass"), (r"kerze", "candle"), (r"konserve|vorrät|dosen", "cans"), (r"benzin|kanister|sprit", "canister"),
               (r"krankenwagen|rettungswagen|notarzt|sanitäter|rettungsdienst|rettungskräfte|einsatzkräfte|\bnotruf", "ambulance"), (r"polizeiauto|polizeiwagen|streifenwagen|\bpolizei\b|polizist", "police"),
-              (r"\bautos?\b|\bstau\b|kleinwagen|sportwagen|\bpkw\b|karosserie", "car"), (r"\bbus\b|busse", "bus"), (r"lkw|lastwagen|lieferung|lieferkette", "truck"), (r"flugzeug|flieger|\bflüge", "plane"),
+              (r"\bautos?\b|\bstau\b|kleinwagen|sportwagen|\bpkw\b|karosserie|\bnavis?\b|navigationsgerät|navigationssystem", "car"), (r"\bbus\b|busse", "bus"), (r"lkw|lastwagen|lieferung|lieferkette", "truck"), (r"flugzeug|flieger|\bflüge", "plane"),
               (r"satellit|\bgps\b", "satellite"), (r"rakete", "rocket"), (r"\bgeld|\beuro\b|kosten|(?<![a-zäöüß])teuer|preise|milliarden euro|bezahl", "money"),
               (r"solar", "solarpanel"), (r"generator|notstrom|aggregat", "generator"), (r"\bfeuer\b|flammen|\bbrand\b|in brand|lichterloh|waldbr[aä]nd|\bbrände", "fire"), (r"\brauch\b|qualm", "smoke"),
               (r"vulkan|lava", "volcano"), (r"meteor|asteroid|komet", "meteor"), (r"tornado|wirbelsturm", "tornado"), (r"gewitter|\bblitz(?!schnell|artig|blank|sauber|gescheit)", "lightning"),
               (r"überschwemm|\bflut|hochwasser", "flood"), (r"erdbeben|boden reißt|erdkruste|fundament|reiß\w* .{0,40}\b(ab|auf)\b|bricht .{0,20}\bauf\b|\brisse\b|spalte", "crack"), (r"tsunami|riesenwelle|wasserwelle|wasserwand|wassermassen|flutwelle|monsterwelle|riesige\w* welle", "wave"), (r"orkan|hurrikan|\bsturm\b", "stormcloud"), (r"explo", "explosion"),
               (r"\bufo|außerirdisch", "ufo"), (r"polarlicht", "aurora"), (r"eisberg|\beis schmilzt", "ice"), (r"\bschiff|\bboot", "ship"),
               (r"fahrrad", "bike"), (r"kühlschrank", "fridge"), (r"einkaufswagen", "cart"), (r"tür\b|türen\b|klopft", "door"), (r"\buhr\b|uhrzeit", "clock"),
-              (r"\bfass|fässer|\böl\b", "barrel"), (r"\bzelt", "tent"), (r"ampel", "trafficlight"), (r"fernseh|nachrichten", "tv"), (r"computer|internet|server|zock|gaming|videospiel|ballerspiel|\bgamer|\bpc\b|laptop", "computer"),
+              (r"\bfass\b|\bfässer|\bölfass|\bfässern|\böl\b", "barrel"), (r"\bzelt", "tent"), (r"ampel", "trafficlight"), (r"fernseh|nachrichten", "tv"), (r"computer|internet|server|zock|gaming|videospiel|ballerspiel|\bgamer|\bpc\b|laptop", "computer"),
               (r"pflanze[n]? wachs|keim|\bsaat", "sprout"), (r"\bmoos(?!gummi)|moospolster|mooskissen", "moss"), (r"haarwurzel|haarbalg|härchen", "goosebumps"),
               (r"adrenalin|nebenniere|stresshormon", "adrenaline"), (FUR_RE, "fur")]   # „Gänsehaut“ selbst setzt stage._music (nicht als Ding des Themas in jeder zweiten Szene)
 MAP_HINTS = ((r"ganz deutschland|in deutschland|deutschlandweit|bundesweit|bundesländer|jeder deutsche|alle deutschen", "germany"),
@@ -4543,7 +4683,7 @@ MAP_HINTS = ((r"ganz deutschland|in deutschland|deutschlandweit|bundesweit|bunde
 CREATURE_SIZE = {"cheetah": 1.0, "eagle": 0.8, "flea": 0.4, "shrimp": 0.5, "mantis": 0.5, "jelly": 0.6, "axolotl": 0.5, "tardigrade": 0.5, "brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45, "diver": 1.1, "dolphin": 1.0, "cow": 0.9, "pig": 0.6, "chimp": 0.75, "mosquito": 0.45, "fly": 0.45, "lion": 1.15, "whale": 1.4, "chimera": 1.05}
 GIANT_RE = r"riesen|riesig|gigant|monströs|so groß wie|meterhoh|haushoh|mutier"
 # Nur hier laufen Passanten durchs Bild – auf dem Feld, im Wald, im Keller ist niemand unterwegs
-CROWD_PLACES = ("headquarters", "street", "park", "village", "beach", "icesea", "harbor", "gasstation", "station", "supermarket", "supermarket_empty", "hospital", "office",
+CROWD_PLACES = ("headquarters", "street", "park", "village", "beach", "icesea", "harbor", "gasstation", "station", "transit", "supermarket", "supermarket_empty", "hospital", "office",
                 "classroom", "restaurant", "church")
 CROWD_ELEMENTS = ("city", "village", "street", "houses")
 
@@ -4555,7 +4695,7 @@ def crowd_ok(scene):
     return places.resolve(b) in CROWD_PLACES
 
 
-PUBLIC_INDOOR = ("supermarket", "supermarket_empty", "station", "hospital", "office", "classroom", "restaurant")
+PUBLIC_INDOOR = ("supermarket", "supermarket_empty", "station", "transit", "hospital", "office", "classroom", "restaurant")
 STRONG_FEELINGS = ("shocked", "scared", "sad", "angry", "worried")
 MOOD_EMOTION = {"panic": "scared", "tense": "worried", "scary": "scared", "sad": "sad", "happy": "happy"}
 EMOTION_OK = {"panic": ("scared", "shocked", "worried"), "tense": ("worried", "scared", "shocked", "angry", ""),

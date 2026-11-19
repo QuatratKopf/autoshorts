@@ -141,7 +141,8 @@ NO_THINGS = {"bug", "bugs", "glitch", "glitches", "fehler", "regel", "regeln", "
              "idee", "problem", "trick", "system", "update", "spiel", "videospiel", "level", "leben", "alltag", "realität", "inventar",
              "haar", "haare", "härchen", "haarwurzel", "haarwurzeln", "haut", "körper", "kopf",
              "tönnchen", "tönnchenform", "tönnchenstadium", "tonnenstadium", "eiweiß", "schutz-eiweiß", "schutzeiweiß", "erbgut", "stoffwechsel", "strahlung",
-             "wand", "wände", "zimmerwand", "punkt", "punkte"}       # Körperteile allein im Bild (ein Haarschopf ohne Gesicht auf dem Tisch) sehen befremdlich aus
+             "wand", "wände", "zimmerwand", "punkt", "punkte",
+             "gameboy", "game boy", "playstation", "xbox", "nintendo", "iphone", "ipad"}       # Körperteile allein im Bild (ein Haarschopf ohne Gesicht auf dem Tisch) sehen befremdlich aus
 
 
 def known_thing(word):
@@ -447,7 +448,7 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, 
             _no_overlays()
             stage.direct(scenes, times, f"{stage.topic_head(v.get('topic'))} {script.get('title') or ''}", cat["slug"], os.environ.get("AS_LOOK") or cat.get("look") or cfg("look") or "")
             _no_overlays(False)                           # auch Schilder, die die Regie selbst ergänzt hat (ihre Grafiken füllen sonst leere Szenen)
-            kick = " ".join(str(script.get("thumb") or "").split())[:36]
+            kick = " ".join(str(script.get("thumb") or (script.get("thumbnail") or {}).get("text") or v.get("thumb_text") or "").split())[:36]   # das Drehbuch führt den Titelbild-Text unter thumbnail.text – „thumb“ gab es nie, der Hook-Titel fehlte deshalb in jedem Video
             kick_ok = bool(kick) and str(cat.get("caption_style") or "") != "word" and bool(scenes) and isinstance(scenes[0], dict) and scenes[0].get("shot") != "graphic"
             if kick_ok and str((scenes[0].get("overlay") or {}).get("type") or "tag") == "tag":
                 scenes[0]["overlay"] = None                # erstes Bild: das Thema steht groß als Hook-Titel oben (Untertitel-Ebene, schon im allerersten Bild)
