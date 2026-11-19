@@ -6029,5 +6029,47 @@
   "yt_thumb_at": 1795108610.2724943,
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":"
+ },
+ {
+  "id": 161,
+  "category": "tiere",
+  "topic": "Tiere, die extrem niedlich aussehen, aber tödlich gefährlich sind",
+  "status": "review",
+  "created": 1795111796.181215,
+  "title": "Tödlich niedlich: Diese 3 Tiere solltest du nie streicheln",
+  "description": "Niedlich, flauschig und extrem gefährlich!\nHier siehst du drei Tiere, die süß aussehen, dich aber sofort ins Krankenhaus befördern können.\nWürdest du ein Schnabeltier streicheln?",
+  "hashtags": [
+   "#shorts",
+   "#tierfakten",
+   "#tiere",
+   "#wissen",
+   "#viral",
+   "#fyp",
+   "#natur"
+  ],
+  "tags": [
+   "süße tiere tödlich",
+   "gefährliche tiere niedlich",
+   "kugelfisch gift",
+   "schnabeltier sporn",
+   "pfeilgiftfrosch",
+   "tierfakten"
+  ],
+  "thumb_text": "SÜSS ABER TÖDLICH",
+  "missing": [
+   "giftsporn"
+  ],
+  "cover_ms": 80105,
+  "duration": 80.0,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-19 21:00",
+  "review_at": 1795112112.7978463
  }
 ]
