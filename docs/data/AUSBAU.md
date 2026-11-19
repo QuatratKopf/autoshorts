@@ -483,3 +483,18 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   polyp, knie, anwaltstitel, toplitzsee, miete, algorithmus, statistik, musik, kompass, knall, friteuse, dach (greifbar davon: polyp, knie,
   kompass, friteuse, dach). „Wand“ und „Punkt“ stehen jetzt in `main.NO_THINGS` (jedes Zimmer hat Wände, ein Punkt ist kein Ding) – dafür wird
   nichts mehr gelernt; die Wünsche wand, punkt, tönnchen, eiweiß sind damit erledigt.
+
+- Prüfung 19.11.2026 (13-Uhr-Termin, Video 152 „Was wäre, wenn du ein Super-Tier aus vier Arten baust?“ verworfen): Das gebaute Wesen war nie zu
+  sehen – im ersten Bild („im Labor“) und in fünf weiteren Szenen schwamm ein Blauwal unter Wasser, zum „Haufen Zellen auf dem Tisch“ standen Passanten
+  auf der Straße, zur „Weltherrschaft“ drei Waagen, in der Küche ein fremder Junge neben einem Eisberg (Regie-Figur `_tier` ohne Art).
+  Neues Wesen `chimera` (`extras.creature`, im Gepard-Zweig): Gepard-Körper mit Adlerflügeln, großen gelb umrandeten Adleraugen und einem schlagenden
+  roten Herzen in der Brust; `action` „run“ (Galopp) und „down“ (zusammengesackt, Herz grau, Augen zu). Größen in `HERO_SIZE`/`CREATURE_SIZE`, `LONG_KINDS`.
+  Regie `stage._hybrid_story` (Schlussdurchgang, greift nur, wenn Thema/Titel ein Misch-Wesen nennen – `HYBRID_RE`: Super-Tier, Mischwesen, „Wesen aus …
+  Tierarten“): Sätze über das Wesen (`HYBRID_BEING_RE`) und Sätze ohne Tiernamen spielen im Labor – Hauptfigur und Misch-Wesen nebeneinander, Seiten
+  wechseln; „rennt/sprintet“ → Wesen im Galopp in der Savanne; „bricht zusammen/versagt“ (`HYBRID_FAIL_RE`) und „Haufen Zellen“ → Wesen liegt, Figur
+  erschrocken. Nennt ein Satz ein Tier beim Namen, bleibt dieses Tier in seinem Lebensraum (höchstens ein Folgesatz mit „Es/Dieses …“). Keine Passanten,
+  keine Requisiten aus Vorsätzen. Allgemein (jedes Video): Regie-Figuren (`_tier`, `_meer`) ohne Art werden gestrichen; Zahl-Grafik „KM“ wird „KM/H“,
+  wenn der Satz „Kilometer pro Stunde“ sagt; Zähler „… GRAD“ bekommt die Überzeile „MINUS“, wenn der Satz „minus“ sagt (nur im Misch-Wesen-Durchgang).
+  Untertitel (`render.build_ass`): kein Häppchen über einen Szenenwechsel hinweg – bei Sätzen ohne Punkt stand das erste Wort des nächsten Satzes noch
+  im alten Bild („ANGREIFT DESHALB“). `writer.polish`: „mehrerenhundert“ → „mehreren hundert“; abgeschnittene Hashtags („#fakte“ → „#fakten“).
+  Selbsttest: `_hybrid`. Noch offen: Das Bärtierchen steht in Mehr-Tier-Videos baumhoch im Wald (nur im Ein-Tier-Video klein am Moos).

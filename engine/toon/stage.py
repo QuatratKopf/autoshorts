@@ -2261,7 +2261,107 @@ def direct(scenes, times, topic="", style="", look=""):
             for a in sc.get("actors") or []:
                 if isinstance(a, dict) and a.get("action") == "shiver" and not re.search(COLD_RE + "|" + SHIVER_RE, str(sc.get("text") or "").lower()):
                     a["action"] = "idle"
+    _hybrid_story(scenes, topic, next((str(a.get("id")) for sc in scenes if isinstance(sc, dict) for a in (sc.get("actors") or [])
+                                       if isinstance(a, dict) and a.get("id") and not a.get("kind") and not str(a.get("id")).startswith("_")), "du"))
+    for sc in scenes:                                     # von der Regie eingesetzte Figur („_tier“, „_meer“) ohne Art: wäre ein fremder Mensch im Bild (ein Junge neben dem Eisberg in der Küche, Video 152)
+        if isinstance(sc, dict) and sc.get("actors"):
+            sc["actors"] = [a for a in sc["actors"] if not (isinstance(a, dict) and str(a.get("id") or "") in ("_tier", "_meer") and not a.get("kind"))]   # andere „_…“-Figuren (Gründer, Soldaten, Familie) sind Menschen und bleiben
+        g_k = sc.get("graphic") if isinstance(sc, dict) and isinstance(sc.get("graphic"), dict) else None
+        if g_k and str(g_k.get("label") or "").strip().upper() == "KM" and re.search(r"kilometer\w* pro stunde|km/h|stundenkilometer", str(sc.get("text") or "").lower()):
+            g_k["label"] = "KM/H"                         # „93 Kilometer pro Stunde“ stand als „93 KM“ im Bild (Video 152)
     _last_look(scenes, topic)
+    return scenes
+
+
+# Misch-Wesen (Prüfung 19.11.2026, Video 152 „Super-Tier aus vier Arten“): Das Video handelt von einem Wesen, das aus mehreren Tieren gebaut wird.
+# Vorher war dieses Wesen nie zu sehen – stattdessen ein Blauwal unter Wasser (auch im ersten Bild „im Labor“), Passanten zum „Haufen Zellen“,
+# drei Waagen auf der Straße. Jetzt: Sätze über das Wesen zeigen das gezeichnete Misch-Wesen (extras.creature „chimera“) im Labor neben der
+# Hauptfigur bzw. rennend in der Savanne; Sätze, die ein Tier beim Namen nennen, behalten dieses Tier in seinem Lebensraum (höchstens ein Folgesatz).
+HYBRID_RE = (r"super-?tier|mischwesen|misch-wesen|hybrid-?(?:tier|wesen)|chimäre|tier-?mix|wesen aus \w+ (?:verschiedenen )?(?:tier)?arten|tier aus \w+ (?:verschiedenen )?(?:tier)?arten|"
+             r"(?:tiere|tierarten) (?:zu einem|in einem) (?:\w+ )?(?:wesen|tier)|aus (?:mehreren|verschiedenen|vier|drei|fünf) tieren")
+HYBRID_BEING_RE = r"super-?tier|\bwesen\b|\bmonster|\bbiest|\bkreatur|mischwesen|chimäre|geschöpf|unser tier\b|dein tier\b|\bbauplan|\bbaukasten"
+HYBRID_FAIL_RE = r"bricht\b.*zusammen|zusammenbr|kollabier|überhitz|\bversagt|\bstirbt|\bkippt um|\bfällt um|klappt zusammen|macht schlapp|\bschlapp\b|geht k\.?o|am ende seiner kräfte|kann es nicht|schafft es nicht"
+HYBRID_RUN_RE = r"\brenn|\bsprint|\brast\b|\bjagt\b|km/h|kilometer\w* pro stunde|stundenkilometer|\bbeschleunig"
+
+
+def hybrid_story(scenes, topic=""):
+    return bool(re.search(HYBRID_RE, str(topic or "").lower()))
+
+
+def _hybrid_named(low):
+    """Welches zeichenbare Tier nennt der Satz beim Namen?"""
+    for pat, k in ANY_CREATURES + SEA_CREATURES:
+        if re.search(pat, low):
+            return k
+    for pat, k, _pl in NAMED_ANIMALS:
+        if re.search(pat, low):
+            return k
+    for pat, k in TOPIC_CREATURES:
+        if k in ("lion", "cat", "dog", "spider", "bee", "wasp", "shark", "fish", "dino") and re.search(pat, low):
+            return k
+    return None
+
+
+def _hybrid_story(scenes, topic="", main_id="du"):
+    if not hybrid_story(scenes, topic):
+        return scenes
+    last_named, flip, n_lab = None, False, 0
+    n = len([x for x in scenes if isinstance(x, dict)])
+    for i, sc in enumerate(scenes):
+        if not isinstance(sc, dict):
+            continue
+        low = str(sc.get("text") or "").lower()
+        sc["crowd"] = ""
+        named = _hybrid_named(low)
+        being = bool(re.search(HYBRID_BEING_RE, low))
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        kinds = [str(a.get("kind") or "").lower() for a in acts if a.get("kind")]
+        ov_h = sc.get("overlay") if isinstance(sc.get("overlay"), dict) else None
+        if ov_h and str(ov_h.get("type") or "") == "counter" and not str(ov_h.get("label") or "").strip() and re.search(r"\bminus\b", low) \
+                and re.search(r"grad", str(ov_h.get("unit") or "").lower()):
+            ov_h["label"] = "MINUS"                       # „minus zweihundert Grad“ stand als „200 GRAD“ im Bild
+        if sc.get("shot") == "graphic" and graphics.clean(sc.get("graphic")):
+            last_named = None
+            continue
+        if named and i > 0 and named in kinds and not re.search(HYBRID_FAIL_RE, low):
+            last_named = (named, i)                       # „… die Augen eines Adlers“: der Adler in seinem Lebensraum (Regie weiter oben)
+            n_lab = 0
+            continue
+        follow = bool(last_named and i - last_named[1] == 1 and last_named[0] in kinds and not being and not re.search(HYBRID_FAIL_RE, low)
+                      and re.search(r"^(?:es|er|sie|dieses|dieser|diese|damit|sein|seine|ihr|ihre|das herz|der vogel|die katze)\b", low))
+        if follow:
+            continue                                      # ein Folgesatz bleibt beim Tier von eben
+        last_named = None
+        fail = bool(re.search(HYBRID_FAIL_RE, low))
+        run = bool(re.search(HYBRID_RUN_RE, low)) and not fail
+        human = next((a for a in acts if not a.get("kind") and not str(a.get("id") or "").startswith("_")), None)
+        cells = bool(re.search(r"\bzellen\b|zellhaufen|\bhaufen\b", low))
+        beast = {"id": "_tier", "kind": "chimera", "hero": True, "speaks": False, "emote": "", "say": "", "hold": "",
+                 "action": "down" if fail or cells else "run" if run else "idle",
+                 "emotion": "sad" if fail or cells else MOOD_EMOTION.get(str(sc.get("mood") or ""), "")}
+        if sc.get("shot") == "close" and human and not being and i > 0 and n_lab >= 1:
+            sc.update(place="lab", time="day", backdrop=None, weather="", props=[], float="", actors=[human])
+            n_lab += 1
+            continue                                      # „Falsch, denn …“: die Großaufnahme der Hauptfigur bleibt als Abwechslung
+        if run:
+            sc.update(place="savannah", time="day", backdrop=None, weather="", props=[], float="", shot="",
+                      actors=[dict(beast, pos="center", facing="right")])
+            n_lab = 0
+            continue
+        me = dict(human or {"id": main_id, "speaks": False, "emote": ""})
+        me.pop("to", None)
+        me["hold"] = ""
+        if str(me.get("action") or "") in ("", "idle", "walk", "run", "sit", "sleep", "fall", "float", "jump", "cower", "swim", "lie"):
+            me["action"] = "shocked" if fail or cells else "point" if being else "think"
+        if fail or cells:
+            me.update(emotion="sad", emote="")
+        flip = not flip                                   # abwechselnd links/rechts; das breite Wesen steht mit Abstand neben der Figur, Kopf nach außen
+        me["pos"], me["facing"] = (150, "right") if flip else (930, "left")
+        beast.update(pos=745 if flip else 335, facing="right" if flip else "left")
+        sc.update(place="lab", time="day", backdrop=None, weather="", props=[], float="", shot="", actors=[me, beast])
+        if str(sc.get("mood") or "") in ("scary", "panic"):
+            sc["mood"] = "tense"
+        n_lab += 1
     return scenes
 
 
@@ -3391,7 +3491,7 @@ SEA_HUMAN_RE = r"\bmensch\w*|\bforscher\w*|wissenschaftler\w*|\bdein\w*|\bdu\b|\
 SEA_PEOPLE_RE = r"^(?:wir )?menschen (?:haben|besitzen|sehen|können|brauchen|schaffen)\b|ein(?:es)? menschliche[rsn]? (?:wimpernschlag|auge|hand)|\bals ein wimpernschlag"   # der Satz handelt von Menschen – auch wenn das Drehbuch dort das Tier hinstellt
 TANK_RE = r"\bbecken\b|plastikbecken|kunststoffbecken|acrylbecken|acrylglas|aquarium\b|aquarien\b"
 CAVI_RE = r"dampfblase|gasblase|kavitation|blasen? (?:kollabier|implodier|platz|fall\w* zusammen)|(?:kollabier|implodier|platz)\w* (?:die|diese) blase|druckwelle"
-LONG_KINDS = ("shrimp", "mantis", "axolotl", "tardigrade", "jelly", "cheetah", "eagle", "flea", "dolphin", "cow", "pig", "lion", "whale")          # breiter als hoch: keine Großaufnahme, Kamera lässt sie ganz im Bild
+LONG_KINDS = ("shrimp", "mantis", "axolotl", "tardigrade", "jelly", "cheetah", "eagle", "flea", "dolphin", "cow", "pig", "lion", "whale", "chimera")          # breiter als hoch: keine Großaufnahme, Kamera lässt sie ganz im Bild
 # Winzlinge, die überall vorkommen (Moos, Eis, Weltall): als Figur an dem Ort, von dem der Satz spricht
 ANY_CREATURES = [(r"bärtierchen|wasserbär|tardigrad", "tardigrade"), (r"\bgepard", "cheetah"), (r"\badler|greifvogel|greifvögel", "eagle"), (r"\bfloh|\bflöhe", "flea")]
 # Landtiere und Vögel als Figur der Szene: bleiben nur einen Folgesatz, und nur, wenn er sichtbar weiter vom Tier handelt
@@ -3434,7 +3534,7 @@ def _sea_default(scenes, topic):
     return next(iter(kinds)) if len(kinds) == 1 else None
 
 
-HERO_SIZE = {"cheetah": 1.45, "eagle": 1.5, "flea": 1.35, "shrimp": 1.6, "mantis": 1.6, "jelly": 1.4, "axolotl": 1.6, "tardigrade": 1.5, "agent": 0.8, "brain": 1.6, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9, "diver": 1.3, "dolphin": 1.5, "cow": 1.25, "pig": 1.1, "chimp": 1.2, "mosquito": 1.0, "fly": 1.0, "lion": 1.3, "whale": 1.75}   # Hauptfigur: etwa halb so hoch wie ein Mensch
+HERO_SIZE = {"cheetah": 1.45, "eagle": 1.5, "flea": 1.35, "shrimp": 1.6, "mantis": 1.6, "jelly": 1.4, "axolotl": 1.6, "tardigrade": 1.5, "agent": 0.8, "brain": 1.6, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9, "diver": 1.3, "dolphin": 1.5, "cow": 1.25, "pig": 1.1, "chimp": 1.2, "mosquito": 1.0, "fly": 1.0, "lion": 1.3, "whale": 1.75, "chimera": 1.35}   # Hauptfigur: etwa halb so hoch wie ein Mensch
 
 
 def _topic_creature(scenes, topic):
@@ -4388,7 +4488,7 @@ TEXT_PROPS = [(r"motorkran|werkstattkran|bau\w* .{0,40}motor.{0,40}\bein\b|motor
 MAP_HINTS = ((r"ganz deutschland|in deutschland|deutschlandweit|bundesweit|bundesländer|jeder deutsche|alle deutschen", "germany"),
              (r"weltweit|auf der ganzen welt|alle länder|rund um den globus|weltbevölkerung|alle kontinente|die ganze erde|die ganze welt", "worldmap"))
 # Tiere neben Menschen: Größe im Verhältnis zur Figur (1.0 = menschengroß). „Riesen…“-Themen heben das auf (giant).
-CREATURE_SIZE = {"cheetah": 1.0, "eagle": 0.8, "flea": 0.4, "shrimp": 0.5, "mantis": 0.5, "jelly": 0.6, "axolotl": 0.5, "tardigrade": 0.5, "brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45, "diver": 1.1, "dolphin": 1.0, "cow": 0.9, "pig": 0.6, "chimp": 0.75, "mosquito": 0.45, "fly": 0.45, "lion": 1.15, "whale": 1.4}
+CREATURE_SIZE = {"cheetah": 1.0, "eagle": 0.8, "flea": 0.4, "shrimp": 0.5, "mantis": 0.5, "jelly": 0.6, "axolotl": 0.5, "tardigrade": 0.5, "brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45, "diver": 1.1, "dolphin": 1.0, "cow": 0.9, "pig": 0.6, "chimp": 0.75, "mosquito": 0.45, "fly": 0.45, "lion": 1.15, "whale": 1.4, "chimera": 1.05}
 GIANT_RE = r"riesen|riesig|gigant|monströs|so groß wie|meterhoh|haushoh|mutier"
 # Nur hier laufen Passanten durchs Bild – auf dem Feld, im Wald, im Keller ist niemand unterwegs
 CROWD_PLACES = ("headquarters", "street", "park", "village", "beach", "icesea", "harbor", "gasstation", "station", "supermarket", "supermarket_empty", "hospital", "office",

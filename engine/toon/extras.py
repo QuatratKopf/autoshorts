@@ -3212,14 +3212,33 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
         brow(hx - 14, by - 46, 13, 1)
         brow(hx + 30, by - 50, 13, -1)
         cheek(hx - 34, by + 14, 14)
-    elif kind in ("cheetah", "gepard"):
+    elif kind in ("cheetah", "gepard", "chimera"):
         # Gepard: schlanke Raubkatze mit langen Beinen, Tupfen, Tränenstreifen und Ringelschwanz; action = "run": gestreckter Galopp
+        # "chimera": das Misch-Wesen aus „Was wäre, wenn man ein Super-Tier baut“ (Prüfung 19.11.2026) – Gepard-Körper mit Adlerflügeln,
+        # großen gelben Adleraugen und einem leuchtenden, schlagenden Herzen in der Brust; action = "down": zusammengesackt am Boden
+        chim = kind == "chimera"
+        down = chim and action == "down"
         col = (236, 184, 96)
         belly = _light(col, 0.6)
         spot = (64, 46, 34)
         run = action == "run"
         ext = math.sin(t * 11) if run else 0.0                                   # +1 gestreckt, -1 Beine unter dem Bauch
         oy = (-16 - 12 * ext) if run else bob * 0.25                             # im Galopp hebt der Körper ab
+        if down:
+            oy = 96 + bob * 0.1                                                  # der Rumpf liegt am Boden, die Beine sind eingeknickt
+        wcol = (112, 78, 54)
+        wfl = math.sin(t * (9 if run else 2.2)) * (0.5 if run else 0.25) + (0.2 if not down else -1.5)
+
+        def chim_wing(front):
+            wy_ = -40 * wfl
+            ax_, ay_ = (-10 if front else 14), -232 + oy
+            pts = [(ax_ + 30, ay_ + 4), (ax_ - 6, ay_ - 96 + wy_), (ax_ - 62, ay_ - 160 + wy_ * 1.3), (ax_ - 96, ay_ - 134 + wy_ * 1.2), (ax_ - 116, ay_ - 164 + wy_ * 1.3),
+                   (ax_ - 146, ay_ - 130 + wy_ * 1.2), (ax_ - 170, ay_ - 150 + wy_ * 1.25), (ax_ - 190, ay_ - 110 + wy_ * 1.1), (ax_ - 214, ay_ - 116 + wy_ * 1.1),
+                   (ax_ - 200, ay_ - 60 + wy_ * 0.7), (ax_ - 110, ay_ + 14)]
+            poly(pts, wcol if front else _dark(wcol, 0.3), shade=0.08 if front else 0)
+            if front:
+                for q in (0.3, 0.52, 0.74):
+                    d.line((*P(ax_ - 10 - 110 * q, ay_ - 20 - 100 * q + wy_ * q), *P(ax_ - 100 - 90 * q, ay_ + 6 - 76 * q + wy_ * q * 0.8)), fill=_dark(wcol, 0.35), width=max(2, int(5 * k)))
         wag = math.sin(t * 3) * 12
         tail = [(-168, -196 + oy), (-232, -176 + oy), (-272, -128 + oy + wag * 0.5), (-268 + wag * 0.4, -78 + oy + wag)] if not run else \
                [(-168, -196 + oy), (-232, -206 + oy), (-272, -214 + oy - ext * 10), (-296, -196 + oy - ext * 18)]
@@ -3235,14 +3254,20 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
                 top = (98, -150 + oy)
                 paw = (98 + 122 * e, -10 - 34 * abs(e) if run else -10)
                 knee = ((top[0] + paw[0]) / 2 + 16 - 10 * e, (top[1] + paw[1]) / 2 + 6)
+                if down:
+                    paw, knee = (190, -8), (150, -40)
             else:
                 top = (-128, -150 + oy)
                 paw = (-128 - 118 * e, -10 - 30 * abs(e) if run else -10)
                 knee = ((top[0] + paw[0]) / 2 - 30 + 8 * e, (top[1] + paw[1]) / 2 + 14)
+                if down:
+                    paw, knee = (-60, -8), (-150, -44)
             stroke([top, knee, paw], 24, c2)
             ell(paw[0] - 14, paw[1] - 12, paw[0] + 26, paw[1] + 10, _light(c2, 0.35), shade=0)
         for fr in (True, False):                                                 # Beine der abgewandten Seite (leicht versetzt im Takt)
             leg(fr, math.sin(t * 11 - 0.7) if run else -0.22, _dark(col, 0.22))
+        if chim:
+            chim_wing(False)
         ell(-190, -240 + oy, 60, -128 + oy, col)                                 # schlanker Rumpf mit tiefer Brust
         ell(10, -256 + oy, 160, -112 + oy, col)
         ell(-176, -234 + oy, 100, -134 + oy, col, shade=0, line=False)           # Naht zwischen Rumpf und Brust schließen
@@ -3251,7 +3276,20 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
             ell(sx - 9, sy - 8 + oy, sx + 9, sy + 8 + oy, spot, shade=0, line=False)
         for fr in (True, False):
             leg(fr, ext if run else 0.0, col)
+        if chim:
+            chim_wing(True)
+            beat = 1.0 + 0.16 * max(0.0, math.sin(t * (2.0 if down else 7.0))) ** 2          # das Wal-Herz schlägt sichtbar in der Brust
+            hcx, hcy, hr = 96, -176 + oy, 30 * beat
+            hcol = (150, 150, 160) if down else (232, 60, 76)
+            if not down:
+                d.ellipse(B(hcx - hr * 1.9, hcy - hr * 1.7, hcx + hr * 1.9, hcy + hr * 1.9), fill=(255, 90, 100, 70))
+            ell(hcx - hr, hcy - hr * 0.9, hcx, hcy + hr * 0.1, hcol, shade=0)
+            ell(hcx, hcy - hr * 0.9, hcx + hr, hcy + hr * 0.1, hcol, shade=0)
+            poly([(hcx - hr * 0.96, hcy - hr * 0.2), (hcx + hr * 0.96, hcy - hr * 0.2), (hcx, hcy + hr * 1.05)], hcol, shade=0)
+            d.ellipse(B(hcx - hr * 0.8, hcy - hr * 0.7, hcx + hr * 0.8, hcy + hr * 0.05), fill=hcol)
         hx, hy = 186, -306 + oy + (bob * 0.3 if not run else 0)
+        if down:
+            hx, hy = 214, -150 + oy                                              # der Kopf liegt vorn auf den Pfoten
         stroke([(118, -214 + oy), (158, hy + 26)], 58, col)                      # Hals
         for ex_ in (-34, 22):                                                    # kleine runde Ohren
             ell(hx + ex_ - 18, hy - 76, hx + ex_ + 18, hy - 36, _dark(col, 0.2) if ex_ < 0 else col, shade=0)
@@ -3264,8 +3302,16 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
             d.line((*P(hx + ex_ + 6, hy - 4), *P(hx + ex_ + 12, hy + 16), *P(hx + ex_ + 8, hy + 36)), fill=spot, width=max(2, int(6 * k)), joint="curve")
         poly([(hx + 46, hy + 6), (hx + 66, hy + 6), (hx + 56, hy + 19)], (60, 40, 40), shade=0)   # Nase
         mouthf(hx + 54, hy + 32, 13)
-        eye(hx + 4, hy - 18, 14)
-        eye(hx + 46, hy - 18, 14)
+        if chim:                                                                 # Adleraugen: groß, gelb umrandet, strenge Braue
+            for ex_ in (2, 48):
+                ell(hx + ex_ - 29, hy - 49, hx + ex_ + 29, hy + 9, col if down else (248, 196, 60), shade=0, line=not down)
+            eye(hx + 2, hy - 20, 17, "closed" if down else None)
+            eye(hx + 48, hy - 20, 17, "closed" if down else None)
+            if not down and mood not in ("sad", "worried", "scared"):
+                d.line((*P(hx - 22, hy - 52), *P(hx + 26, hy - 42)), fill=INK, width=max(2, int(7 * k)))
+        else:
+            eye(hx + 4, hy - 18, 14)
+            eye(hx + 46, hy - 18, 14)
         brow(hx + 4, hy - 42, 13, 1)
         brow(hx + 46, hy - 42, 13, -1)
         cheek(hx - 24, hy + 20, 13)
@@ -3595,7 +3641,7 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
     return out, ax / S, gy / S, fly
 
 
-CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly", "axolotl", "tardigrade", "cheetah", "eagle", "flea", "diver", "fridge", "cow", "pig", "chimp", "mosquito", "fly", "dolphin", "lion", "whale")
+CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly", "axolotl", "tardigrade", "cheetah", "eagle", "flea", "diver", "fridge", "cow", "pig", "chimp", "mosquito", "fly", "dolphin", "lion", "whale", "chimera")
 
 
 # ------------------------------------------------------------------ Werkstatt & Technik (Motor, Kran, Reifen, Getriebe …)

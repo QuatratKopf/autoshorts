@@ -1749,6 +1749,38 @@ def main():
         from .. import overlays as _ov
         assert _ov.quote("FORSCHER VERMUTEN", "…dass die plötzliche Wende der Musik im Gehirn kurz wie ein Alarm wirkt.") is not None
     check("Prüfung 16.11.: Nacht ohne Grund, Haarbalgmuskeln, Vorfahren, blitzschnell", _pruef_1116b)
+    def _hybrid():                                               # Prüfung 19.11.2026 (Video 152): Super-Tier aus vier Arten – das Misch-Wesen ist zu sehen, kein Wal im Labor
+        T = ["Du baust im Labor das perfekte Super-Tier aus vier Tieren.", "Zutat eins: die Beine vom Gepard.", "In freier Wildbahn wurden 93 Kilometer pro Stunde gemessen.",
+             "Dein Super-Tier sprintet jetzt los.", "Zutat drei: die Zähigkeit vom Bärtierchen.", "Es übersteht fast minus 272 Grad.", "Zutat vier: das Herz vom Blauwal.",
+             "Du denkst, dieses Monster ist unbesiegbar?", "Dein Super-Tier bricht unter seinem eigenen Herzen zusammen.", "Übrig bleibt nur ein Haufen verwirrter Zellen auf dem Tisch.",
+             "Welche Tier-Superkraft hättest du gern?"]
+        sc = [{"text": t_, "place": "street", "time": "day", "crowd": "walk", "actors": [{"id": "du", "action": "walk", "speaks": True}]} for t_ in T]
+        sc[2].update(shot="graphic", graphic={"type": "number", "value": "93", "label": "KM"})
+        sc[5]["overlay"] = {"type": "counter", "label": "", "value": 272, "unit": "GRAD"}
+        sc[7]["props"] = [{"type": "scale", "pos": 600}]
+        sd = stage.direct(sc, [(i_ * 4, i_ * 4 + 4) for i_ in range(len(sc))], "Was wäre, wenn du ein Super-Tier aus vier Tierarten baust?", "whatif")
+        kinds = [[str(a_.get("kind") or "") for a_ in s_.get("actors") or []] for s_ in sd]
+        for i_ in (0, 7, 8, 9, 10):
+            assert "chimera" in kinds[i_] and "" in kinds[i_] and sd[i_].get("place") == "lab", f"Satz {i_}: Misch-Wesen und Hauptfigur im Labor erwartet: {kinds[i_]} {sd[i_].get('place')}"
+            assert not sd[i_].get("crowd") and not sd[i_].get("props"), f"Satz {i_}: Passanten/Waage im Labor"
+        assert kinds[3] == ["chimera"] and sd[3]["actors"][0].get("action") == "run" and sd[3].get("place") == "savannah", f"Sprint: {kinds[3]} {sd[3].get('place')}"
+        assert kinds[1] == ["cheetah"] and kinds[4] == ["tardigrade"] and kinds[6] == ["whale"], f"genannte Tiere: {kinds[1]} {kinds[4]} {kinds[6]}"
+        assert [a_ for a_ in sd[8]["actors"] if a_.get("kind")][0].get("action") == "down", "bricht zusammen: Wesen liegt"
+        assert sd[2]["graphic"].get("label") == "KM/H", sd[2]["graphic"]
+        assert sd[5]["overlay"].get("label") == "MINUS", sd[5]["overlay"]
+        assert all(not (str(a_.get("id") or "") in ("_tier", "_meer") and not a_.get("kind")) for s_ in sd for a_ in s_.get("actors") or [])
+        for s_ in sd:
+            assert frame(s_, {"du": {}}) is not None
+        for act_ in ("idle", "run", "down"):
+            for mood_ in ("", "sad", "scared"):
+                assert extras.creature("chimera", 0.7, 1, 0.0, mood_, 1.0, act_)[0].getbbox()
+        other = stage.direct([{"text": "Dieses Monster wohnt unter deinem Bett.", "place": "bedroom", "actors": [{"id": "du"}]}], [(0, 4)], "Warum Kinder Angst vor Monstern haben", "fakten")
+        assert "chimera" not in [str(a_.get("kind") or "") for a_ in other[0].get("actors") or []], "Misch-Wesen in fremdem Video"
+        from .. import writer as _w
+        js_ = {"title": "x", "description": "y", "hashtags": ["#fakte"], "tags": [], "scenes": [{"text": "Es sieht eine Maus aus mehrerenhundert Metern Höhe."}]}
+        js_ = _w.polish(js_) or js_
+        assert js_["hashtags"] == ["#fakten"] and "mehreren hundert" in js_["scenes"][0]["text"], js_
+    check("Super-Tier aus vier Arten: Misch-Wesen im Bild (Prüfung 19.11., Video 152)", _hybrid)
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")
     import collections
     for line, n in collections.Counter(e.strip().splitlines()[-1] + "  @ " + e.strip().splitlines()[-3].strip()[:90] for e in errors).most_common(30):

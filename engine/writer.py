@@ -570,6 +570,8 @@ def polish(js):
     for k in ("hashtags", "tags"):                        # echte Umlaute in Hashtags und Suchbegriffen („#koerper“ → „#körper“)
         if isinstance(js.get(k), list):
             js[k] = [_re_p.sub(_UML_RE, lambda m: _UML[m.group(0).lower()], x) if isinstance(x, str) else x for x in js[k]]
+            js[k] = [_re_p.sub(r"(?i)^(#?)(fakte|wisse|wissenschaf|tierfakte|weihnachtsesse|natu)$", lambda m: m.group(1) + {"fakte": "fakten", "wisse": "wissen", "wissenschaf": "wissenschaft", "tierfakte": "tierfakten", "weihnachtsesse": "weihnachtsessen", "natu": "natur"}[m.group(2).lower()], x)
+                     if isinstance(x, str) else x for x in js[k]]   # abgeschnittene Hashtags der Text-KI („#fakte“, Video 152; „#weihnachtsesse“, Video 151)
     for sc in js.get("scenes", []):
         if not isinstance(sc, dict):
             continue
@@ -579,6 +581,7 @@ def polish(js):
             sc["text"] = fix_eszett(sc["text"])
             sc["text"] = re.sub(r"(?i)\b([a-zäöüß]{4,}) \1\b", r"\1", sc["text"])      # „reine reine Fantasie“: versehentlich doppeltes Wort
             sc["text"] = re.sub(r"(?i)(zwei|drei|vier|fünf|sieben|acht|neun)s(hundert|tausend)", r"\1\2", sc["text"])   # „viertausendviershundert“
+            sc["text"] = re.sub(r"(?i)\b(mehreren?|einigen?|vielen?|wenigen?|paar)(hundert|tausend|millionen|milliarden)\b", r"\1 \2", sc["text"])   # „mehrerenhundert Metern“ (Video 152)
             sc["text"] = re.sub(r"(?i)\b([a-zäöüß]*tausend) ((?:ein|zwei|drei|vier|fünf|sechs|sieben|acht|neun)hundert)", r"\1\2", sc["text"])   # „viertausend siebenhundert“: eine Zahl
         for box in (sc.get("overlay"), sc.get("graphic")):
             if isinstance(box, dict) and box.get("type") == "counter" and isinstance(box.get("unit"), str):

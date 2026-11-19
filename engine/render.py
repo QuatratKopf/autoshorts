@@ -100,10 +100,15 @@ def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, 
     key_col = r"{\c&H001F8AFF&}" if impact else r"{\c&H003FD2FF&}"
     # Wörter zu kurzen Häppchen (1–2 Wörter, max. 14 Zeichen) zusammenfassen
     chunks, cur = [], []
-    for w, s, e in words:
+    cuts = [float(t0) for t0, _t1 in list(times or [])[1:]]
+
+    def _scene_of(t):
+        return sum(1 for c in cuts if t >= c - 0.12)
+    for wi, (w, s, e) in enumerate(words):
         cur.append((w, s, e))
         txt = " ".join(x[0] for x in cur)
-        if len(cur) >= (3 if impact else 2) or len(txt) >= (13 if impact else 12) or re.search(r"[.!?,;:]$", w):
+        nxt_cut = wi + 1 < len(words) and _scene_of(words[wi + 1][1]) != _scene_of(s)   # der nächste Satz beginnt: kein Häppchen über den Schnitt hinweg
+        if len(cur) >= (3 if impact else 2) or len(txt) >= (13 if impact else 12) or re.search(r"[.!?,;:]$", w) or nxt_cut:   # („ANGREIFT DESHALB“, „TISCH DESHALB“ bei Sätzen ohne Punkt, Video 152)
             chunks.append(cur)
             cur = []
     if cur:
