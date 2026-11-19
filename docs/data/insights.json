@@ -1,5 +1,5 @@
 {
- "updated": 1795067857.158999,
+ "updated": 1795069662.6454291,
  "enough": true,
  "counted": 23,
  "total": 26,
@@ -18,7 +18,7 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1654,
+   "avg_views": 1655,
    "avg_likes": 52.5,
    "like_rate": 3.17,
    "avg_score": 2442
@@ -27,10 +27,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 2,
-   "avg_views": 1805,
+   "avg_views": 1806,
    "avg_likes": 40.0,
-   "like_rate": 2.22,
-   "avg_score": 2440
+   "like_rate": 2.21,
+   "avg_score": 2442
   },
   {
    "slug": "comedy",
@@ -63,10 +63,10 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 2,
-   "avg_views": 1672,
+   "avg_views": 1680,
    "avg_likes": 10.5,
-   "like_rate": 0.63,
-   "avg_score": 1875
+   "like_rate": 0.62,
+   "avg_score": 1882
   }
  ],
  "weights": {
@@ -76,7 +76,7 @@
   "mysterien": 1.2,
   "tiere": 1.04,
   "whatif": 1.0,
-  "comedy": 1.03,
+  "comedy": 1.02,
   "musik": 0.8,
   "vergleich": 1.2,
   "motivation": 1.2,
@@ -84,15 +84,15 @@
  },
  "advice": [
   "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1802 Aufrufe, 2.39 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1672 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2498 zu 705 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2523 zu 2003 Punkte)."
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1680 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2499 zu 705 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2523 zu 2005 Punkte)."
  ],
  "words_good": [],
  "words_bad": [
+  "lied",
   "bekanntes",
   "remix",
-  "lied",
   "erkennst"
  ],
  "top": [
