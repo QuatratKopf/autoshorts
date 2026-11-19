@@ -2921,7 +2921,7 @@ def _ice_story(scenes, topic):
             sc.update(place="icesea", backdrop=None, props=[{"type": "icehole", "pos": 540}], actors=[], crowd="", shot="")
             continue
         if rp == "underwater" or (re.search(ICE_UNDER_RE, low) and not re.search(ICE_ON_RE, low)):
-            keep = [a for a in acts if str(a.get("kind") or "").lower() in ("fish", "shark", "dolphin", "jelly", "shrimp", "mantis", "axolotl", "tardigrade", "diver")]
+            keep = [a for a in acts if str(a.get("kind") or "").lower() in ("fish", "shark", "dolphin", "whale", "jelly", "shrimp", "mantis", "axolotl", "tardigrade", "diver")]
             emo = MOOD_EMOTION.get(str(sc.get("mood") or ""), "") or "worried"
             if whale:
                 keep = [{"id": "_delfin", "kind": "dolphin", "hero": True, "action": "idle", "emotion": emo, "pos": "center", "speaks": False, "emote": "", "say": "", "hold": "", "facing": "right"}]
@@ -3364,8 +3364,10 @@ PLURAL = {"agent": r"agenten|\bbots\b|assistenten", "virus": r"\bviren|bakterien
           "dino": r"dinosaurier", "monster": r"monster"}
 # Meerestiere als Figur der Szene (Reihenfolge zählt: „Fangschreckenkrebs“ enthält „krebs“)
 SEA_CREATURES = [(r"fangschreckenkreb|heuschreckenkreb|mantis-?shrimp", "mantis"), (r"pistolenkreb|knallkreb|knallgarnele|\bgarnele|krabben?\b|\bhummer|flusskreb|krebstier|\bshrimp", "shrimp"),
-                 (r"qualle", "jelly"), (r"axolotl", "axolotl")]
-SEA_KINDS = ("shrimp", "mantis", "jelly", "axolotl")
+                 (r"qualle", "jelly"), (r"axolotl", "axolotl"),
+                 # Blauwal und andere Großwale (Ausbau 19.11.2026) – nicht der Schweinswal/Delfin (eigenes Wesen `dolphin`), nicht „Wahl“, nicht „Walnuss“
+                 (r"^(?!.*(?:schweinswal|delfin|delphin|tümmler)).*(?:blauwal|buckelwal|pottwal|finnwal|grauwal|bartenwal|\bwal(?:e|es|en|s)?\b)", "whale")]
+SEA_KINDS = ("shrimp", "mantis", "jelly", "axolotl", "whale")
 # Tiefsee-Technik (Flugzeug-Suche, Wracks): Der Satz spielt unter Wasser; nennt er Blackbox, Wrack oder Tauchboot/Sonar, wird es die dunkle Tiefsee
 SURFACE_RE = (r"\b(?:auf|über) (?:dem|den|der|hoher|offener|offenem) (?:\w+ )?(?:ozean|meer|atlantik|pazifik|wasseroberfläche|meeresoberfläche|see\b)|übers (?:offene )?meer|"
               r"auf hoher see|meeresoberfläche|wasseroberfläche")
@@ -3389,7 +3391,7 @@ SEA_HUMAN_RE = r"\bmensch\w*|\bforscher\w*|wissenschaftler\w*|\bdein\w*|\bdu\b|\
 SEA_PEOPLE_RE = r"^(?:wir )?menschen (?:haben|besitzen|sehen|können|brauchen|schaffen)\b|ein(?:es)? menschliche[rsn]? (?:wimpernschlag|auge|hand)|\bals ein wimpernschlag"   # der Satz handelt von Menschen – auch wenn das Drehbuch dort das Tier hinstellt
 TANK_RE = r"\bbecken\b|plastikbecken|kunststoffbecken|acrylbecken|acrylglas|aquarium\b|aquarien\b"
 CAVI_RE = r"dampfblase|gasblase|kavitation|blasen? (?:kollabier|implodier|platz|fall\w* zusammen)|(?:kollabier|implodier|platz)\w* (?:die|diese) blase|druckwelle"
-LONG_KINDS = ("shrimp", "mantis", "axolotl", "tardigrade", "jelly", "cheetah", "eagle", "flea", "dolphin", "cow", "pig", "lion")          # breiter als hoch: keine Großaufnahme, Kamera lässt sie ganz im Bild
+LONG_KINDS = ("shrimp", "mantis", "axolotl", "tardigrade", "jelly", "cheetah", "eagle", "flea", "dolphin", "cow", "pig", "lion", "whale")          # breiter als hoch: keine Großaufnahme, Kamera lässt sie ganz im Bild
 # Winzlinge, die überall vorkommen (Moos, Eis, Weltall): als Figur an dem Ort, von dem der Satz spricht
 ANY_CREATURES = [(r"bärtierchen|wasserbär|tardigrad", "tardigrade"), (r"\bgepard", "cheetah"), (r"\badler|greifvogel|greifvögel", "eagle"), (r"\bfloh|\bflöhe", "flea")]
 # Landtiere und Vögel als Figur der Szene: bleiben nur einen Folgesatz, und nur, wenn er sichtbar weiter vom Tier handelt
@@ -3432,7 +3434,7 @@ def _sea_default(scenes, topic):
     return next(iter(kinds)) if len(kinds) == 1 else None
 
 
-HERO_SIZE = {"cheetah": 1.45, "eagle": 1.5, "flea": 1.35, "shrimp": 1.6, "mantis": 1.6, "jelly": 1.4, "axolotl": 1.6, "tardigrade": 1.5, "agent": 0.8, "brain": 1.6, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9, "diver": 1.3, "dolphin": 1.5, "cow": 1.25, "pig": 1.1, "chimp": 1.2, "mosquito": 1.0, "fly": 1.0, "lion": 1.3}   # Hauptfigur: etwa halb so hoch wie ein Mensch
+HERO_SIZE = {"cheetah": 1.45, "eagle": 1.5, "flea": 1.35, "shrimp": 1.6, "mantis": 1.6, "jelly": 1.4, "axolotl": 1.6, "tardigrade": 1.5, "agent": 0.8, "brain": 1.6, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9, "diver": 1.3, "dolphin": 1.5, "cow": 1.25, "pig": 1.1, "chimp": 1.2, "mosquito": 1.0, "fly": 1.0, "lion": 1.3, "whale": 1.75}   # Hauptfigur: etwa halb so hoch wie ein Mensch
 
 
 def _topic_creature(scenes, topic):
@@ -4386,7 +4388,7 @@ TEXT_PROPS = [(r"motorkran|werkstattkran|bau\w* .{0,40}motor.{0,40}\bein\b|motor
 MAP_HINTS = ((r"ganz deutschland|in deutschland|deutschlandweit|bundesweit|bundesländer|jeder deutsche|alle deutschen", "germany"),
              (r"weltweit|auf der ganzen welt|alle länder|rund um den globus|weltbevölkerung|alle kontinente|die ganze erde|die ganze welt", "worldmap"))
 # Tiere neben Menschen: Größe im Verhältnis zur Figur (1.0 = menschengroß). „Riesen…“-Themen heben das auf (giant).
-CREATURE_SIZE = {"cheetah": 1.0, "eagle": 0.8, "flea": 0.4, "shrimp": 0.5, "mantis": 0.5, "jelly": 0.6, "axolotl": 0.5, "tardigrade": 0.5, "brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45, "diver": 1.1, "dolphin": 1.0, "cow": 0.9, "pig": 0.6, "chimp": 0.75, "mosquito": 0.45, "fly": 0.45, "lion": 1.15}
+CREATURE_SIZE = {"cheetah": 1.0, "eagle": 0.8, "flea": 0.4, "shrimp": 0.5, "mantis": 0.5, "jelly": 0.6, "axolotl": 0.5, "tardigrade": 0.5, "brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45, "diver": 1.1, "dolphin": 1.0, "cow": 0.9, "pig": 0.6, "chimp": 0.75, "mosquito": 0.45, "fly": 0.45, "lion": 1.15, "whale": 1.4}
 GIANT_RE = r"riesen|riesig|gigant|monströs|so groß wie|meterhoh|haushoh|mutier"
 # Nur hier laufen Passanten durchs Bild – auf dem Feld, im Wald, im Keller ist niemand unterwegs
 CROWD_PLACES = ("headquarters", "street", "park", "village", "beach", "icesea", "harbor", "gasstation", "station", "supermarket", "supermarket_empty", "hospital", "office",

@@ -715,6 +715,19 @@ def main():
         g = stage.direct([{"text": "Sein Schlag erreicht achtzig Kilometer pro Stunde.", "place": "underwater", "shot": "graphic",
                            "graphic": {"type": "compare", "left": "SCHLAG", "right": "SCHNEIDEN", "value": "80 km/h", "sub": "80 km/h"}}], [(0, 3)], "Tiere")
         assert (g[0].get("graphic") or {}).get("type") != "compare", "Vergleich mit zweimal derselben Zahl"
+        TW = [("Als vierte Zutat pflanzen wir das Herz eines Blauwals in die Brust.", "lab", [{"id": "du"}], ""),      # Ausbau 19.11.2026: Blauwal als Wesen
+              ("Wir gehen heute zur Wahl und essen eine Walnuss.", "livingroom", [{"id": "du"}], ""),
+              ("Der Schweinswal ist der einzige Wal der Ostsee.", "underwater", [], "")]
+        for n_, (t_, pl_, a_, sh_) in enumerate(TW):
+            w_ = stage.direct([{"text": t_, "place": pl_, "actors": a_, "shot": sh_}], [(0, 4)], "Tiere im Vergleich")[0]
+            ks = [x.get("kind") for x in w_.get("actors") or []]
+            if n_ == 0:
+                assert ks == ["whale"] and places.resolve(stage.backdrop(w_)) == "underwater", f"Blauwal: {ks} am Ort {stage.backdrop(w_)}"
+                assert frame(w_, {"du": {"shirt": "blau"}}).getbbox(), "Blauwal-Bild leer"
+            else:
+                assert "whale" not in ks, f"Wal, wo keiner gemeint ist ({t_}): {ks}"
+        from .. import main as _main_w
+        assert _main_w.known_thing("blauwal") and _main_w.known_thing("wal"), "Blauwal gilt als unbekannt"
         T2 = [("Kandidat Nummer zwei ist der Axolotl.", "lab", [{"id": "du"}], "graphic"), ("Sogar Rückenmark wächst lückenlos nach.", "lab", [{"id": "du", "action": "shocked"}], ""),
               ("Mediziner erforschen das, um Menschen zu helfen.", "lab", [{"id": "du"}], ""), ("Bärtierchen überleben extreme Kälte.", "kitchen", [{"id": "du", "action": "walk"}], ""),
               ("Sie trocknen jahrelang ohne Wasser einfach aus.", "desert", [], ""), ("Dann wachen sie auf und krabbeln einfach weiter.", "lab", [{"id": "du"}], ""),

@@ -468,3 +468,18 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Nach dem 3. Neubau (Video 151, veröffentlicht): `writer.loop_pass` übernimmt eine Umformulierung nicht, wenn ein Zahlwort des alten Satzes fehlt (die
   Pointe „… aber Oma legt den vierten drauf“ wurde zur offenen Frage „… weißt du, was Oma danach macht?“) oder wenn sie eine neue Frage direkt vor den
   nächsten Listenpunkt („Nummer zwei, …“) setzt, die niemand mehr beantwortet.
+
+- Ausbau 19.11.2026 (13-Uhr-Termin „Was wäre, wenn du ein Super-Tier aus vier Arten baust?“: blauwal; dazu die Wünsche aus den Nachbarn-, Spiele- und
+  Weihnachts-Videos): Neues Wesen `whale` (`extras.creature`: Blauwal – langer blaugrauer Körper, helle Kehle mit Furchen, kleine Finne weit hinten,
+  breite Fluke, gleitet). Steht in `stage.SEA_CREATURES`/`SEA_KINDS`: Nennt der Satz Blauwal, Buckelwal, Pottwal oder „Wal/Wale“, ist er groß und allein
+  die Figur der Szene unter Wasser, Folgesätze bleiben bei ihm (nicht bei Schweinswal/Delfin im selben Satz – das bleibt `dolphin`; „Wahl“ und „Walnuss“
+  zählen nicht). Größen in `HERO_SIZE`/`CREATURE_SIZE`, `LONG_KINDS`; die Text-KI darf ihn besetzen (`writer`: "kind": whale). Selbsttest: `_sea`.
+  Bibliothek von Hand neu gezeichnet statt der vorläufigen Fassung: `konsole` (flache Spielkonsole mit Gamepad, kein Vorbild-Modell), `mauer`
+  (Ziegelmauer mit Abdeckplatte – der Alias „wand“ ist weg: „Die Wand vibriert“ stellte eine Ziegelmauer ins Wohnzimmer), `post-it` (gelbe Haftnotiz
+  mit Kritzeln statt Schrift), `mischpult` (Regler und Pegelanzeige, pulsiert), `trillerpfeife` (ohne den Alias „pfeife“), `praline` (im
+  Papierförmchen; ohne die Aliasse „schokolade“ und „trüffel“), `kloß` (drei Klöße in Soße auf dem Teller; auch Knödel).
+  Noch offen (vorläufige Zeichnungen der Text-KI): kaffeebohne, tarantel, insekt, erdloch, keule, radar, kunststoffbecken, knoblauch, kessel, kamin,
+  pinzette, nachricht, zigarette, notenschluessel, schwamm, ohr, jacke, ohrstöpsel, neonreklame, sofa. Offene Wünsche ohne Zeichnung: staub, raum,
+  polyp, knie, anwaltstitel, toplitzsee, miete, algorithmus, statistik, musik, kompass, knall, friteuse, dach (greifbar davon: polyp, knie,
+  kompass, friteuse, dach). „Wand“ und „Punkt“ stehen jetzt in `main.NO_THINGS` (jedes Zimmer hat Wände, ein Punkt ist kein Ding) – dafür wird
+  nichts mehr gelernt; die Wünsche wand, punkt, tönnchen, eiweiß sind damit erledigt.

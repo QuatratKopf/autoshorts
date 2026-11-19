@@ -166,7 +166,8 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
   als Zeichen für die Eisdecke. Schiffe im Eis, das Atemloch der Delfine und die Eisdecke unter Wasser zeichnet die Regie von selbst.
   Haushaltsgerät als Figur mit eigenem Willen: "kind": fridge (Kühlschrank mit Gesicht und Armen; Kennung z. B. "kuehlschrank") – nicht robot; keinen zweiten Kühlschrank als Requisite daneben stellen
   Meerestiere: shrimp (Pistolenkrebs, Garnele, Krebs – die Knallschere schnappt zu), mantis (Fangschreckenkrebs – schlägt mit der Keule), jelly (Qualle),
-  axolotl (rosa Schwanzlurch mit Kiemenästen) · überall: tardigrade (Bärtierchen).
+  axolotl (rosa Schwanzlurch mit Kiemenästen), whale (Blauwal und andere Großwale – gleitet groß durchs Bild; nennt der Satz einen Wal, zeigt die Regie ihn
+  von selbst unter Wasser) · überall: tardigrade (Bärtierchen).
   Wildtiere an Land und in der Luft: cheetah (Gepard – action "run" = Galopp), eagle (Adler, fliegt), flea (Floh – action "jump" = springt hoch).
   Nennt der Satz Gepard, Adler oder Floh, zeigt die Regie das Tier von selbst groß und allein im Bild.
   lion (Löwe mit Mähne – action "roar" = brüllt; Ort "savannah" = Savanne mit Schirmakazien). Bärtierchen: action "tun" = eingerolltes, ausgetrocknetes

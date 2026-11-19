@@ -3372,6 +3372,40 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
         eye(120, by - 16, 14)
         brow(120, by - 40, 13, 1)
         cheek(98, by + 14, 12)
+    elif kind in ("whale", "wal", "blauwal", "buckelwal"):                          # Blauwal: langer blaugrauer Körper, helle Kehle mit Furchen, winzige Finne weit hinten, breite Fluke – gleitet
+        fly = True
+        by = -300 + bob * 1.5
+        wag = math.sin(t * 2.2) * 16
+        col, belly = (84, 128, 172), (214, 228, 238)
+        x0, x1 = -214, 286
+        xs = [x0 + (x1 - x0) * i / 28 for i in range(29)]
+
+        def half(x, hm):                                                            # Umriss: dünner Schwanzstiel, größte Dicke im vorderen Drittel, stumpfes Maul
+            u = (x - x0) / (x1 - x0)
+            return 15 * (1 - u) + hm * math.sin(math.pi * min(1.0, u ** 1.45)) ** 0.62
+        top = [(x, by - half(x, 66) + wag * max(0.0, (-60 - x) / 154) ** 2) for x in xs]
+        bot = [(x, by + half(x, 84) + wag * max(0.0, (-60 - x) / 154) ** 2) for x in xs]
+        fy = by + wag
+        poly([(-196, fy - 8), (-232, fy - 50), (-268, fy - 92), (-304, fy - 98), (-290, fy - 56), (-262, fy - 2), (-292, fy + 54), (-306, fy + 94), (-268, fy + 90),
+              (-232, fy + 50), (-196, fy + 10)], _dark(col, 0.1))                    # Fluke: zwei geschwungene Lappen mit Kerbe
+        poly([(-112, by - 44), (-132, by - 78), (-74, by - 52)], col, shade=0)        # kleine Rückenfinne, weit hinten
+        d.polygon([P(*q) for q in top + bot[::-1]], fill=_dark(col, 0.22), outline=INK, width=o)
+        d.polygon([P(x + 4, y + 6) for x, y in top[1:-1]] + [P(x + 4, by + (y - by) * 0.12 + 8) for x, y in top[-2:0:-1]], fill=col)   # Rücken im Licht, läuft zum Schwanz spitz aus
+        thr = [(x, y, min(1.0, max(0.0, (x + 44) / 90))) for x, y in bot[:-1] if x >= -44]   # Kehle und Bauch hell, setzt hinter der Brustflosse weich an
+        d.polygon([P(x, y - 7) for x, y, _ in thr] + [P(x, (y - 7) - (y - by) * 0.62 * w_) for x, y, w_ in thr[::-1]], fill=belly)
+        for i in range(4):                                                           # Kehlfurchen folgen dem Bauch
+            fr = 0.52 + i * 0.11
+            d.line([P(x, by + (y - by) * fr) for x, y, w_ in thr if w_ >= 1 and x < 250 - i * 6][i:], fill=_dark(belly, 0.2), width=max(2, int(3.5 * k)), joint="curve")
+        for sx, sy, sr in ((-60, -30, 9), (-20, -44, 7), (40, -40, 10), (96, -48, 7), (-110, -14, 6), (150, -36, 8), (10, -14, 6)):   # helle Sprenkel
+            d.ellipse(B(sx - sr, by + sy - sr * 0.6, sx + sr, by + sy + sr * 0.6), fill=_light(col, 0.22))
+        jaw = mouth * 10
+        d.line([P(278, by + 8), P(236, by + 22 + jaw), P(190, by + 28 + jaw), P(150, by + 22)], fill=INK, width=max(2, int(5 * k)), joint="curve")   # langes Maul
+        d.arc(B(132, by + 4, 168, by + 34), 60, 170, fill=INK, width=max(2, int(5 * k)))                                                        # Mundwinkel lächelt
+        ell(186, by - 60, 210, by - 51, _dark(col, 0.35), shade=0)                     # Blasloch
+        poly([(86, by + 46), (62, by + 96), (24, by + 138), (74, by + 122), (112, by + 92), (134, by + 60)], _dark(col, 0.12))   # lange, spitze Brustflosse
+        eye(162, by - 8, 11)
+        brow(162, by - 28, 11, 1)
+        cheek(140, by + 12, 10)
     elif kind in ("cow", "kuh", "pig", "schwein"):                                  # Hoftiere: Kuh (gefleckt, Hörner, Euter) und Schwein (rosa, Rüsselscheibe, Ringelschwanz)
         cow = kind in ("cow", "kuh")
         col = (246, 244, 238) if cow else (246, 170, 176)
@@ -3561,7 +3595,7 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
     return out, ax / S, gy / S, fly
 
 
-CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly", "axolotl", "tardigrade", "cheetah", "eagle", "flea", "diver", "fridge", "cow", "pig", "chimp", "mosquito", "fly", "dolphin", "lion")
+CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly", "axolotl", "tardigrade", "cheetah", "eagle", "flea", "diver", "fridge", "cow", "pig", "chimp", "mosquito", "fly", "dolphin", "lion", "whale")
 
 
 # ------------------------------------------------------------------ Werkstatt & Technik (Motor, Kran, Reifen, Getriebe …)

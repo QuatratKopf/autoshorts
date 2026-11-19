@@ -139,7 +139,8 @@ def find_trend(trend_id):
 NO_THINGS = {"bug", "bugs", "glitch", "glitches", "fehler", "regel", "regeln", "spielregel", "spielregeln", "physik", "schwerkraft", "zeit",
              "idee", "problem", "trick", "system", "update", "spiel", "videospiel", "level", "leben", "alltag", "realität", "inventar",
              "haar", "haare", "härchen", "haarwurzel", "haarwurzeln", "haut", "körper", "kopf",
-             "tönnchen", "tönnchenform", "tönnchenstadium", "tonnenstadium", "eiweiß", "schutz-eiweiß", "schutzeiweiß", "erbgut", "stoffwechsel", "strahlung"}       # Körperteile allein im Bild (ein Haarschopf ohne Gesicht auf dem Tisch) sehen befremdlich aus
+             "tönnchen", "tönnchenform", "tönnchenstadium", "tonnenstadium", "eiweiß", "schutz-eiweiß", "schutzeiweiß", "erbgut", "stoffwechsel", "strahlung",
+             "wand", "wände", "zimmerwand", "punkt", "punkte"}       # Körperteile allein im Bild (ein Haarschopf ohne Gesicht auf dem Tisch) sehen befremdlich aus
 
 
 def known_thing(word):

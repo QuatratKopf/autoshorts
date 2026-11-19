@@ -484,7 +484,8 @@
  },
  "maus": {
   "n": 1,
-  "last": "5 Dinge, die dein Gehirn schläft"
+  "last": "5 Dinge, die dein Gehirn schläft",
+  "done": true
  },
  "vokabel": {
   "n": 3,
@@ -540,7 +541,8 @@
  },
  "gans": {
   "n": 1,
-  "last": "Warum bekommen wir Gänsehaut? Titelbild-Text: WARUM GÄNSEHAUT?"
+  "last": "Warum bekommen wir Gänsehaut? Titelbild-Text: WARUM GÄNSEHAUT?",
+  "done": true
  },
  "jacke": {
   "n": 1,
@@ -583,11 +585,13 @@
  },
  "tönnchen": {
   "n": 1,
-  "last": "Dieses winzige Tier ist zäher als ein Löwe"
+  "last": "Dieses winzige Tier ist zäher als ein Löwe",
+  "done": true
  },
  "eiweiß": {
   "n": 1,
-  "last": "Dieses winzige Tier ist zäher als ein Löwe"
+  "last": "Dieses winzige Tier ist zäher als ein Löwe",
+  "done": true
  },
  "dach": {
   "n": 1,
@@ -595,11 +599,13 @@
  },
  "post-it": {
   "n": 1,
-  "last": "Die Hölle auf Erden sind meine Nachbarn"
+  "last": "Die Hölle auf Erden sind meine Nachbarn",
+  "done": true
  },
  "mischpult": {
   "n": 1,
-  "last": "Die Hölle auf Erden sind meine Nachbarn"
+  "last": "Die Hölle auf Erden sind meine Nachbarn",
+  "done": true
  },
  "ohrstöpsel": {
   "n": 1,
@@ -607,27 +613,33 @@
  },
  "konsole": {
   "n": 1,
-  "last": "Drei krasse Orte, die Programmierer in Spielen versteckten"
+  "last": "Drei krasse Orte, die Programmierer in Spielen versteckten",
+  "done": true
  },
  "punkt": {
   "n": 2,
-  "last": "Drei geheime Orte in Videospielen, die es wirklich gibt"
+  "last": "Drei geheime Orte in Videospielen, die es wirklich gibt",
+  "done": true
  },
  "mauer": {
   "n": 1,
-  "last": "Drei krasse Orte, die Programmierer in Spielen versteckten"
+  "last": "Drei krasse Orte, die Programmierer in Spielen versteckten",
+  "done": true
  },
  "wand": {
   "n": 1,
-  "last": "Drei krasse Orte, die Programmierer in Spielen versteckten"
+  "last": "Drei krasse Orte, die Programmierer in Spielen versteckten",
+  "done": true
  },
  "trillerpfeife": {
   "n": 1,
-  "last": "Weihnachten mit der Familie eskaliert komplett"
+  "last": "Weihnachten mit der Familie eskaliert komplett",
+  "done": true
  },
  "praline": {
   "n": 1,
-  "last": "Weihnachten mit der Familie eskaliert komplett"
+  "last": "Weihnachten mit der Familie eskaliert komplett",
+  "done": true
  },
  "neonreklame": {
   "n": 1,
@@ -635,11 +647,13 @@
  },
  "blauwal": {
   "n": 1,
-  "last": "Was wäre, wenn du ein Super-Tier aus vier Arten baust?"
+  "last": "Was wäre, wenn du ein Super-Tier aus vier Arten baust?",
+  "done": true
  },
  "kloß": {
   "n": 1,
-  "last": "Vier Typen, die an Weihnachten an jedem Tisch sitzen"
+  "last": "Vier Typen, die an Weihnachten an jedem Tisch sitzen",
+  "done": true
  },
  "sofa": {
   "n": 1,
