@@ -553,3 +553,5 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Videos zeigt Frosch und Schnabeltier nebeneinander am Ufer statt eines Menschen am Fluss. Folgesätze wechseln die Blickrichtung. Kochmütze niedriger
   (füllte in der Großaufnahme das halbe Bild), der Koch redet statt mit Fragezeichen zu grübeln. Auswahl-Einblendung mit zwei Antworten zur Frage
   „Welches der drei …?“ entfällt. Kugelfisch ohne Zorn-Zeichen. Giftsporn größer gezeichnet.
+  Nach dem 2. Neubau (Video 163): Das Titelbild zeigte einen grünen Außerirdischen – „Australien“ enthält „alien“ (`TOPIC_CREATURES`, Weltraum-Hinweis).
+  Das Muster verlangt jetzt den Wortanfang.

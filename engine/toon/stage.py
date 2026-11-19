@@ -3776,7 +3776,7 @@ TOPIC_CREATURES = [(r"ki-agent|\bagent|\bbots?\b|chatbot|\bassistent|\bki\b|kün
                    (r"spinne|tarantel|vogelspinne|weberknecht|kreuzspinne", "spider"), (r"katze|kater|kätzchen", "cat"), (r"\bhund(e|es|en|chen)?\b|\bhunde(?!rt)\w|welpe", "dog"),
                    (r"biene", "bee"), (r"wespe|hornisse", "wasp"), (r"\bhai\b|haie|weißer hai", "shark"), (r"\bfisch|goldfisch", "fish"),
                    (r"\bvogel|vögel|spatz|taube|amsel", "bird"), (r"\bgeist|gespenst", "ghost"), (r"roboter", "robot"),
-                   (r"außerirdisch|alien|\bufo", "alien"), (r"dinosaurier|\bdino|t-rex", "dino"), (r"monster|ungeheuer", "monster")]
+                   (r"außerirdisch|(?<![a-zäöüß])aliens?\b|\bufo", "alien"), (r"dinosaurier|\bdino|t-rex", "dino"), (r"monster|ungeheuer", "monster")]
 PLURAL = {"agent": r"agenten|\bbots\b|assistenten", "virus": r"\bviren|bakterien|keime|erreger", "cell": r"zellen|blutkörperchen",
           "spider": r"spinnen|taranteln", "bee": r"bienen", "wasp": r"wespen", "cat": r"katzen", "dog": r"\bhunde\b", "bird": r"vögel",
           "fish": r"fische", "shark": r"\bhaie", "ghost": r"geister|gespenster", "robot": r"roboter\b", "alien": r"außerirdische|aliens",
@@ -4712,7 +4712,7 @@ HINTS = [
 ]
 GENERIC = ("street", "park", "plain", "livingroom")
 SPACE_RE = (r"weltall|weltraum|\ball\b|galaxi|planet|umlaufbahn|orbit|astronaut|\bmond|sonnensystem|\bstern|satellit|rakete|raumschiff|raumstation|\biss\b|"
-            r"kosmos|universum|schwarze\w* l[oö]ch|\berde\b|\bsonne\b|meteor|asteroid|komet|außerirdisch|alien|\bufo|raumfahrt|schwerelos|mars\b|jupiter|saturn|milchstraße")
+            r"kosmos|universum|schwarze\w* l[oö]ch|\berde\b|\bsonne\b|meteor|asteroid|komet|außerirdisch|(?<![a-zäöüß])aliens?\b|\bufo|raumfahrt|schwerelos|mars\b|jupiter|saturn|milchstraße")
 GROUP_RE = (r"\b(zwei|drei|vier|fünf) (?:\w+ )?(gründer\w*|freund\w*|forscher\w*|wissenschaftler\w*|student\w*|brüder\w*|schwestern|kolleg\w*|ingenieur\w*|"
             r"entwickler\w*|tüftler\w*|erfinder\w*|männer\w*|frauen|jungs|kumpel\w*|nerds|programmierer\w*|unternehmer\w*|geschwister\w*|typen|partner\w*|"
             r"schüler\w*|mitarbeiter\w*|expert\w*|bastler\w*|teenager\w*|jugendliche\w*)\b")
