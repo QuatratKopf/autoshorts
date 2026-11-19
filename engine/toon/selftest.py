@@ -1803,6 +1803,7 @@ def main():
         assert all(not (str(a_.get("id") or "") in ("_tier", "_meer") and not a_.get("kind")) for s_ in sd for a_ in s_.get("actors") or [])
         for s_ in sd:
             assert frame(s_, {"du": {}}) is not None
+        assert stage.poster_hero("Was wäre, wenn du ein Super-Tier aus vier Tierarten baust? – Herz vom Blauwal", sd, None, []) == "chimera", "Titelbild: das Misch-Wesen"
         for act_ in ("idle", "run", "down"):
             for mood_ in ("", "sad", "scared"):
                 assert extras.creature("chimera", 0.7, 1, 0.0, mood_, 1.0, act_)[0].getbbox()
@@ -1812,6 +1813,15 @@ def main():
         js_ = {"title": "x", "description": "y", "hashtags": ["#fakte"], "tags": [], "scenes": [{"text": "Es sieht eine Maus aus mehrerenhundert Metern Höhe."}]}
         js_ = _w.polish(js_) or js_
         assert js_["hashtags"] == ["#fakten"] and "mehreren hundert" in js_["scenes"][0]["text"], js_
+        js_ = {"title": "x", "description": "y", "hashtags": [], "tags": [], "scenes": [{"text": "In freier Wildbahn wurden neunzig und drei Kilometer pro Stunde gemessen."}]}
+        js_ = _w.polish(js_) or js_
+        assert "dreiundneunzig Kilometer" in js_["scenes"][0]["text"], js_
+        sn = stage.direct([{"text": t_, "place": "lab", "actors": [{"id": "du"}]} for t_ in ("Du baust ein Super-Tier.", "Zutat eins sind die Beine vom Gepard.",
+                                                                                              "In freier Wildbahn wurden dreiundneunzig Kilometer pro Stunde gemessen.", "Aber jede Superkraft hat ihren Preis.")],
+                          [(i_ * 4, i_ * 4 + 4) for i_ in range(4)], "Was wäre, wenn du ein Super-Tier aus vier Tierarten baust?", "whatif")
+        kn = [[str(a_.get("kind") or "") for a_ in s_.get("actors") or []] for s_ in sn]
+        assert sn[2].get("shot") == "graphic" or kn[2] == ["cheetah"], f"Messwert gehört zum Gepard: {kn[2]}"
+        assert "cheetah" not in kn[3], f"neuer Gedanke: nicht mehr der Gepard: {kn[3]}"
     check("Super-Tier aus vier Arten: Misch-Wesen im Bild (Prüfung 19.11., Video 152)", _hybrid)
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")
     import collections

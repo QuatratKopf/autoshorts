@@ -587,6 +587,8 @@ def polish(js):
             sc["text"] = fix_eszett(sc["text"])
             sc["text"] = re.sub(r"(?i)\b([a-zäöüß]{4,}) \1\b", r"\1", sc["text"])      # „reine reine Fantasie“: versehentlich doppeltes Wort
             sc["text"] = re.sub(r"(?i)(zwei|drei|vier|fünf|sieben|acht|neun)s(hundert|tausend)", r"\1\2", sc["text"])   # „viertausendviershundert“
+            sc["text"] = re.sub(r"(?i)\b(zwanzig|dreißig|vierzig|fünfzig|sechzig|siebzig|achtzig|neunzig)[ -]und[ -](ein|eins|zwei|drei|vier|fünf|sechs|sieben|acht|neun)\b",
+                                lambda m: (m.group(2).lower().replace("eins", "ein") + "und" + m.group(1).lower()), sc["text"])   # „neunzig und drei Kilometer“ → „dreiundneunzig“ (Video 154: Zähler zeigte „3 KM“)
             sc["text"] = re.sub(r"(?i)\b(mehreren?|einigen?|vielen?|wenigen?|paar)(hundert|tausend|millionen|milliarden)\b", r"\1 \2", sc["text"])   # „mehrerenhundert Metern“ (Video 152)
             sc["text"] = re.sub(r"(?i)\b([a-zäöüß]*tausend) ((?:ein|zwei|drei|vier|fünf|sechs|sieben|acht|neun)hundert)", r"\1\2", sc["text"])   # „viertausend siebenhundert“: eine Zahl
         for box in (sc.get("overlay"), sc.get("graphic")):

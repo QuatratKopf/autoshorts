@@ -502,4 +502,8 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Weltraum aus Satz oder Drehbuch bleiben), bis zu zwei Folgesätze („Es …“, „Seine …“, „Im Jahr …“) bleiben beim Tier – auch über eine Zahl-Grafik
   hinweg –, ein Herz-Satz ohne Wal zeigt das Wesen; im Labor stehen Figur und Wesen weiter innen, ohne Schwenk und Gegenschnitt (`_no_cut`,
   `cam_move`); nach dem Zusammenbruch bleibt das Wesen bis zur Schlussfrage liegen.
+  Nach dem 2. Neubau (Video 154, verworfen: Sprecher sagt „neunzig und drei Kilometer“, Zähler „3 KM“; „minus 271“ statt 272; Herz auf dem Titelbild):
+  `writer.polish` dreht „neunzig und drei“ zu „dreiundneunzig“; Zähler-Einheit „KM“ wird „KM/H“ bei „Kilometer pro Stunde“; der Satz direkt nach
+  einem Tier-Satz („In freier Wildbahn wurden … gemessen“) bleibt beim Tier, solange er keinen neuen Gedanken beginnt (Aber/Doch/Zutat/Superkraft …);
+  Titelbild eines Misch-Wesen-Videos zeigt das Wesen (`poster_hero`, `poster`). Für Neubauten: Zahlen im Thema zusätzlich als Wort ausschreiben.
   Selbsttest: `_hybrid`. Noch offen: Das Bärtierchen steht in Mehr-Tier-Videos baumhoch im Wald (nur im Ein-Tier-Video klein am Moos).

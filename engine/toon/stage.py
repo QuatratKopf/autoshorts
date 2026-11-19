@@ -2273,6 +2273,10 @@ def direct(scenes, times, topic="", style="", look=""):
         g_k = sc.get("graphic") if isinstance(sc, dict) and isinstance(sc.get("graphic"), dict) else None
         if g_k and str(g_k.get("label") or "").strip().upper() == "KM" and re.search(r"kilometer\w* pro stunde|km/h|stundenkilometer", str(sc.get("text") or "").lower()):
             g_k["label"] = "KM/H"                         # „93 Kilometer pro Stunde“ stand als „93 KM“ im Bild (Video 152)
+        o_k = sc.get("overlay") if isinstance(sc, dict) and isinstance(sc.get("overlay"), dict) else None
+        if o_k and str(o_k.get("type") or "") == "counter" and str(o_k.get("unit") or "").strip().upper() == "KM" \
+                and re.search(r"kilometer\w* pro stunde|km/h|stundenkilometer", str(sc.get("text") or "").lower()):
+            o_k["unit"] = "KM/H"
     _last_look(scenes, topic)
     return scenes
 
@@ -2360,8 +2364,10 @@ def _hybrid_story(scenes, topic="", main_id="du"):
             animal(sc, named, low)                        # „… die Augen vom Adler“: der Adler in seinem Lebensraum
             last_named, n_lab = (named, i), 0
             continue
+        near = bool(last_named and i - last_named[1] == 1 and not re.search(HUMAN_RE, low)
+                    and not re.search(r"^(?:aber|doch|jetzt|dann|nun|und am ende|am ende)\b|superkr|\bpreis|\bhaken|\bzutat|evolution|\bnatur\b", low))   # „In freier Wildbahn wurden 93 km/h gemessen“ direkt nach dem Gepard-Satz meint den Gepard (Video 154: das Wesen rannte)
         follow = bool(last_named and i - last_named[1] <= 2 and not being and not fail
-                      and re.search(r"^(?:es|er|sie|seine?|ihre?|dieses tier|dieser|im jahr|sogar|dabei|damit|und (?:es|er|sie))\b", low)
+                      and (near or re.search(r"^(?:es|er|sie|seine?|ihre?|dieses tier|dieser|im jahr|sogar|dabei|damit|und (?:es|er|sie))\b", low))
                       and not (re.search(r"\bherz", low) and last_named[0] != "whale"))
         if follow:
             animal(sc, last_named[0], low, keep_place=False if _hint(low) is None and i - last_named[1] == 0 else True)   # Folgesätze bleiben beim Tier von eben
@@ -4890,6 +4896,8 @@ def poster_hero(topic, scenes, cast=None, avoid=()):
     auf dem letzten Titelbild war (avoid), kommt nur, wenn es keine andere Wahl gibt."""
     import re as _re
     low = str(topic or "").lower()
+    if _re.search(HYBRID_RE, topic_head(low)):
+        return "chimera"                                  # Misch-Wesen-Video: das gebaute Wesen ist das Gesicht des Videos
     named = [k for pat, k in TOPIC_CREATURES if _re.search(pat, low)]
     sk = _sea_kind(low, bool(_re.search(SEA_TOPIC_RE, low)))
     named += [sk] if sk else []
@@ -4978,6 +4986,9 @@ def poster(spec: dict, cast: dict, out: Path, topic=""):
         keys = []                                         # Video über einen Winzling: das Tier aufs Titelbild – nicht ein Gegenstand aus dem Vorschlag der Text-KI (Videos 138/139: ein Holzfass für „Tönnchen“)
     if hk == "fridge":
         keys = []                                         # der Kühlschrank ist eine Figur der Geschichte: mit Gesicht aufs Titelbild, nicht als Gerät
+    if _re.search(HYBRID_RE, low):
+        keys, hk = [], "chimera"                          # Misch-Wesen-Video: das gebaute Wesen aufs Titelbild – nicht ein Herz aus den Requisiten (Video 153)
+        spec["hero_kind"] = "chimera"
     for k in keys:
         if k in extras.PROPS:
             lay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
