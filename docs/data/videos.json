@@ -5880,7 +5880,7 @@
   "id": 156,
   "category": "whatif",
   "topic": "Absurde Alltagssituationen, in denen Technologie völlig verrückt spielt",
-  "status": "review",
+  "status": "discarded",
   "created": 1795101090.3970115,
   "title": "Wenn Technik die Kontrolle verliert",
   "description": "Wenn Technik die Kontrolle verliert\nErlebe den Albtraum des smarten Alltags\nWürdest du noch ein Gadget berühren?",
@@ -5915,6 +5915,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-19 18:00",
-  "review_at": 1795101589.732721
+  "review_at": 1795101589.732721,
+  "error": "Bei der Prüfung verworfen: Kein Bus und kein Fernseher im Bild, Fass im Wohnzimmer, Börsenkurve steigt bei „stürzen ab“, Burg bei „ohne Burgen“, Chip bei „keinen Chip“, Geschichte ohne roten Faden, falsche Aussage zum Gameboy"
  }
 ]
