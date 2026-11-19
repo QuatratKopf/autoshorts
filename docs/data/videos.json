@@ -6169,7 +6169,7 @@
   "id": 164,
   "category": "tiere",
   "topic": "Drei niedliche Tiere, die du besser nie anfasst – Titel: Süß, aber giftig: Diese 3 Tiere fasst du besser nie an. Titelbild-Text: SÜSS ABER GIFTIG. Vorgaben als Stichpunkte, nicht wörtlich abschreiben, in eigenen kurzen, vollständigen Sätzen locker in der Du-Form erzählen. Genau drei Tiere, angesagt mit „Nummer eins“, „Nummer zwei“, „Nummer drei“, und jedes Tier in mehreren Sätzen beim Namen nennen. Erster Satz: Diese drei Tiere sehen aus wie Kuscheltiere, aber alle drei sind giftig. Zweiter Satz: Und das Gift von Nummer drei ist stärker als Zyankali. Nummer eins, der Pfeilgiftfrosch aus dem Regenwald in Kolumbien: knallgelb und so klein, dass er auf deine Handfläche passt; das Gift eines einzigen Pfeilgiftfroschs würde für rund zehn Menschen reichen (gesprochen: zehn); es sitzt in seiner Haut; die grelle Farbe warnt Fressfeinde; Jäger im Regenwald bestrichen mit dem Gift ihre Blasrohr-Pfeile, daher der Name; das Gift stammt aus seiner Nahrung, im Terrarium aufgezogene Frösche sind harmlos. Nummer zwei, das Schnabeltier aus Australien: sieht aus wie ein Kuscheltier mit Entenschnabel; nur die Männchen tragen an jedem Hinterbein einen Giftsporn; für Menschen ist das Gift nicht tödlich, aber extrem schmerzhaft; die Schmerzen können Tage bis Wochen anhalten; in einem dokumentierten Fall half nicht einmal Morphin. Nummer drei, der Kugelfisch: bei Gefahr bläst sich der Kugelfisch zur Stachelkugel auf; in Leber und Haut steckt das Nervengift Tetrodotoxin, bis zu tausendzweihundertmal giftiger als Zyankali (gesprochen: tausendzweihundert); ein Gegengift gibt es nicht; trotzdem gilt der Kugelfisch in Japan als Delikatesse, und nur Köche mit Lizenz dürfen ihn nach jahrelanger Ausbildung zubereiten. Der allerletzte Satz des Videos ist wörtlich diese Frage: Welches der drei hättest du gestreichelt? Verboten: Zentimeter-Angaben, Jahreszahlen, andere Zahlen als zehn und tausendzweihundert, „Herzversagen“, „Urlaub“, „Tiefsee“, „tiefer Ozean“, „tödlich“ beim Schnabeltier, „tödliches Gift“ für alle drei zusammen, Füllsätze ohne neuen Inhalt, Personennamen.",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1795115389.7538538,
   "title": "Süß, aber giftig: Diese 3 Tiere fasst du besser nie an",
   "description": "Diese drei Tiere sehen aus wie Kuscheltiere, aber alle ihre Gifte sind extrem gefährlich.\nErfahre, welche drei süßen Tiere du im Tierreich lieber niemals berühren solltest.\nWelches der drei hättest du gestreichelt?",
@@ -6206,6 +6206,7 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Prüfung: dritter Neubau – Goldfisch statt Kugelfisch im zweiten Satz, „tödlich giftig“ für alle drei (Schnabeltier ist es nicht); Video 163 veröffentlicht"
  }
 ]
