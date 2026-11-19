@@ -1,7 +1,7 @@
 {
- "updated": 1795100032.3632383,
+ "updated": 1795103726.9242513,
  "enough": true,
- "counted": 25,
+ "counted": 26,
  "total": 27,
  "needed": 6,
  "categories": [
@@ -26,11 +26,11 @@
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
-   "n": 3,
-   "avg_views": 1750,
-   "avg_likes": 42.3,
-   "like_rate": 2.42,
-   "avg_score": 2408
+   "n": 4,
+   "avg_views": 1749,
+   "avg_likes": 44.0,
+   "like_rate": 2.52,
+   "avg_score": 2427
   },
   {
    "slug": "fakten",
@@ -63,10 +63,10 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 2,
-   "avg_views": 1674,
-   "avg_likes": 11.5,
-   "like_rate": 0.69,
-   "avg_score": 1891
+   "avg_views": 1688,
+   "avg_likes": 11.0,
+   "like_rate": 0.65,
+   "avg_score": 1898
   }
  ],
  "weights": {
@@ -75,7 +75,7 @@
   "storys": 1.04,
   "mysterien": 1.01,
   "tiere": 1.04,
-  "whatif": 1.0,
+  "whatif": 0.99,
   "comedy": 1.03,
   "musik": 0.81,
   "vergleich": 1.2,
@@ -85,7 +85,7 @@
  },
  "advice": [
   "Stärkste Kategorie: 🐾 Tierwelt (Ø 1814 Aufrufe, 2.21 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1674 Aufrufe) – kommt seltener dran.",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1688 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2488 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
  ],
@@ -93,10 +93,10 @@
   "gänsehaut"
  ],
  "words_bad": [
-  "remix",
   "lied",
-  "bekanntes",
-  "erkennst"
+  "remix",
+  "erkennst",
+  "bekanntes"
  ],
  "top": [
   {
