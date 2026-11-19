@@ -1,5 +1,5 @@
 {
- "updated": 1795076922.1123955,
+ "updated": 1795078109.262198,
  "enough": true,
  "counted": 24,
  "total": 26,
@@ -93,10 +93,10 @@
   "gänsehaut"
  ],
  "words_bad": [
+  "remix",
   "bekanntes",
-  "erkennst",
   "lied",
-  "remix"
+  "erkennst"
  ],
  "top": [
   {
@@ -133,11 +133,11 @@
    "id": 120,
    "title": "Warum du bei Musik Gänsehaut bekommst",
    "category": "fakten",
-   "views": 2340,
+   "views": 2341,
    "likes": 45,
    "comments": 0,
    "shares": 0,
-   "score": 3015
+   "score": 3016
   },
   {
    "id": 84,
