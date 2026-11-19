@@ -1,5 +1,5 @@
 {
- "updated": 1795127636.3279493,
+ "updated": 1795129431.1278362,
  "enough": true,
  "counted": 26,
  "total": 29,
@@ -9,10 +9,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 4,
-   "avg_views": 1844,
-   "avg_likes": 44.5,
+   "avg_views": 1856,
+   "avg_likes": 44.8,
    "like_rate": 2.41,
-   "avg_score": 2528
+   "avg_score": 2545
   },
   {
    "slug": "tiere",
@@ -76,7 +76,7 @@
   "mysterien": 1.01,
   "tiere": 1.04,
   "whatif": 0.98,
-  "comedy": 1.06,
+  "comedy": 1.07,
   "musik": 0.83,
   "vergleich": 1.2,
   "motivation": 1.2,
@@ -84,18 +84,18 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 1844 Aufrufe, 2.41 % Likes).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 1856 Aufrufe, 2.41 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1755 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2514 zu 705 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2517 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
  ],
  "words_good": [
   "gänsehaut"
  ],
  "words_bad": [
-  "lied",
-  "erkennst",
   "remix",
+  "erkennst",
+  "lied",
   "bekanntes"
  ],
  "top": [
