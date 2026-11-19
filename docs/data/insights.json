@@ -1,5 +1,5 @@
 {
- "updated": 1795123429.1583703,
+ "updated": 1795125794.9372075,
  "enough": true,
  "counted": 26,
  "total": 29,
@@ -9,10 +9,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 4,
-   "avg_views": 1840,
+   "avg_views": 1847,
    "avg_likes": 44.5,
-   "like_rate": 2.42,
-   "avg_score": 2525
+   "like_rate": 2.41,
+   "avg_score": 2532
   },
   {
    "slug": "tiere",
@@ -27,28 +27,28 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1656,
+   "avg_views": 1658,
    "avg_likes": 52.5,
    "like_rate": 3.17,
-   "avg_score": 2444
-  },
-  {
-   "slug": "fakten",
-   "name": "💡 Fakten",
-   "n": 6,
-   "avg_views": 1726,
-   "avg_likes": 44.3,
-   "like_rate": 2.57,
-   "avg_score": 2401
+   "avg_score": 2445
   },
   {
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
-   "avg_views": 1780,
+   "avg_views": 1784,
    "avg_likes": 39.0,
    "like_rate": 2.19,
-   "avg_score": 2396
+   "avg_score": 2400
+  },
+  {
+   "slug": "fakten",
+   "name": "💡 Fakten",
+   "n": 6,
+   "avg_views": 1716,
+   "avg_likes": 44.3,
+   "like_rate": 2.58,
+   "avg_score": 2391
   },
   {
    "slug": "whatif",
@@ -76,7 +76,7 @@
   "mysterien": 1.01,
   "tiere": 1.04,
   "whatif": 0.98,
-  "comedy": 1.06,
+  "comedy": 1.07,
   "musik": 0.83,
   "vergleich": 1.2,
   "motivation": 1.2,
@@ -84,9 +84,9 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 1840 Aufrufe, 2.42 % Likes).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 1847 Aufrufe, 2.41 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1754 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2515 zu 705 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2514 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
  ],
  "words_good": [
@@ -94,20 +94,20 @@
  ],
  "words_bad": [
   "bekanntes",
+  "remix",
   "lied",
-  "erkennst",
-  "remix"
+  "erkennst"
  ],
  "top": [
   {
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2554,
+   "views": 2557,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3394
+   "score": 3397
   },
   {
    "id": 77,
