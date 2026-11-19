@@ -1,5 +1,5 @@
 {
- "updated": 1795051670.1580153,
+ "updated": 1795053456.5819511,
  "enough": true,
  "counted": 23,
  "total": 26,
@@ -27,10 +27,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 2,
-   "avg_views": 1804,
+   "avg_views": 1806,
    "avg_likes": 40.0,
-   "like_rate": 2.22,
-   "avg_score": 2440
+   "like_rate": 2.21,
+   "avg_score": 2442
   },
   {
    "slug": "comedy",
@@ -85,14 +85,14 @@
  "advice": [
   "Stärkste Kategorie: 🕵️ Mysterien & Rätsel (Ø 1802 Aufrufe, 2.39 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1680 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2498 zu 705 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2499 zu 705 Punkte).",
   "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2523 zu 2005 Punkte)."
  ],
  "words_good": [],
  "words_bad": [
-  "bekanntes",
-  "erkennst",
   "remix",
+  "erkennst",
+  "bekanntes",
   "lied"
  ],
  "top": [
