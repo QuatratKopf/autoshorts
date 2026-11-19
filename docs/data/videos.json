@@ -5875,5 +5875,46 @@
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7709840463380892960?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
+ },
+ {
+  "id": 156,
+  "category": "whatif",
+  "topic": "Absurde Alltagssituationen, in denen Technologie völlig verrückt spielt",
+  "status": "review",
+  "created": 1795101090.3970115,
+  "title": "Wenn Technik die Kontrolle verliert",
+  "description": "Wenn Technik die Kontrolle verliert\nErlebe den Albtraum des smarten Alltags\nWürdest du noch ein Gadget berühren?",
+  "hashtags": [
+   "#shorts",
+   "#tech",
+   "#trending",
+   "#lustig",
+   "#zukunft",
+   "#foryou",
+   "#viral"
+  ],
+  "tags": [
+   "technik",
+   "smart home",
+   "ki",
+   "smartphone",
+   "was wäre wenn",
+   "zukunft",
+   "chaos"
+  ],
+  "thumb_text": "HANDY STREIKT",
+  "missing": null,
+  "cover_ms": 66219,
+  "duration": 66.1,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-19 18:00",
+  "review_at": 1795101589.732721
  }
 ]

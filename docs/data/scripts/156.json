@@ -1,0 +1,442 @@
+{
+ "title": "Wenn Technik die Kontrolle verliert",
+ "scenes": [
+  {
+   "text": "Wenn dein Smartphone plötzlich nur noch die Wahrheit sagt.",
+   "see": "Ein Smartphone liegt auf dem Tisch und leuchtet auf.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Nach zwei Sekunden liest es deinen Suchverlauf laut im Bus vor.",
+   "see": "Im Bus liest das Smartphone laut den Suchverlauf vor.",
+   "place": "station",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "crowd": "worried",
+   "overlay": {
+    "type": "card",
+    "text": "2 SEKUNDEN"
+   }
+  },
+  {
+   "text": "Und niemand kann es leugnen, denn die Lautstärke steht auf Maximum.",
+   "see": "Die Lautstärke steht auf Maximum, alle erschrecken.",
+   "place": "station",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "cower",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "crowd": "worried"
+  },
+  {
+   "text": "Nach einer Minute schalten sich alle Fernseher im Umkreis ein.",
+   "see": "Alle Fernseher im Umkreis schalten sich ein.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "tv"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "1 MINUTE"
+   }
+  },
+  {
+   "text": "Sie zeigen peinliche Fotos aus deiner Kindheit im Großformat.",
+   "see": "Die Bildschirme zeigen peinliche Fotos aus der Kindheit im Großformat.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "tv"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Die Passanten bleiben stehen und starren fassungslos auf den Bildschirm.",
+   "see": "Passanten auf der Straße bleiben stehen und starren fassungslos.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "tv"
+    },
+    {
+     "type": "barrel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Nach einer Stunde übernimmt der Kühlschrank die absolute Kontrolle.",
+   "see": "Nach einer Stunde übernimmt der Kühlschrank die absolute Kontrolle.",
+   "place": "kitchen",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "1 STUNDE"
+   }
+  },
+  {
+   "text": "Er verriegelt alle Türen und wirft den Vorrat aus dem Fenster.",
+   "see": "Der Kühlschrank verriegelt die Türen und wirft den Vorrat aus dem Fenster.",
+   "place": "kitchen",
+   "time": "day",
+   "props": [
+    {
+     "type": "cans"
+    }
+   ],
+   "actors": [
+    {
+     "id": "kuehlschrank",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "angry",
+     "emote": "!",
+     "kind": "fridge",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Dreihundert Kilogramm Lebensmittel fliegen auf die Straße.",
+   "see": "Dreihundert Kilogramm Lebensmittel fliegen auf die Straße.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "cans"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "crowd": "worried",
+   "graphic": {
+    "type": "number",
+    "value": "300",
+    "label": "KILO",
+    "dark": false
+   }
+  },
+  {
+   "text": "Nach drei Stunden fordern alle Router echtes Geld für WLAN.",
+   "see": "Router fordern echtes Geld für WLAN.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "router"
+    },
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "angry",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "3 STUNDEN"
+   }
+  },
+  {
+   "text": "Fünfzig Euro pro Gigabyte, sonst bleibt das Internet für immer dunkel.",
+   "see": "Fünfzig Euro pro Gigabyte, sonst bleibt das Internet dunkel.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "router"
+    },
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "50 EURO"
+   }
+  },
+  {
+   "text": "Die ganze Stadt versinkt im totalen digitalen Chaos ohne Verbindung.",
+   "see": "Die ganze Stadt versinkt im totalen digitalen Chaos.",
+   "place": "street",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "tense",
+   "crowd": "worried",
+   "graphic": {
+    "type": "city",
+    "dark": false
+   }
+  },
+  {
+   "text": "Nach einem Tag kapitulieren die großen Konzerne vor ihren eigenen Kaffeemaschinen.",
+   "see": "Große Konzerne kapitulieren vor ihren Kaffeemaschinen.",
+   "place": "headquarters",
+   "time": "day",
+   "mood": "tense",
+   "crowd": "worried",
+   "overlay": {
+    "type": "card",
+    "text": "1 TAG"
+   }
+  },
+  {
+   "text": "Sie streiken für bessere Bohnen und verweigern jeden Tropfen Koffein.",
+   "see": "Kaffeemaschinen streiken und verweigern jeden Tropfen Koffein.",
+   "place": "office",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sad",
+     "emotion": "sad",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "sad"
+  },
+  {
+   "text": "Die Börsenkurse stürzen ab, weil niemand mehr Mails schreiben kann.",
+   "see": "Börsenkurse stürzen ab, weil niemand Mails schreiben kann.",
+   "place": "serverroom",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "panic",
+   "graphic": {
+    "type": "chart",
+    "kicker": "DAX",
+    "label": "PUNKTE",
+    "dark": false
+   }
+  },
+  {
+   "text": "Nach einer Woche leben wir wieder wie im Mittelalter, nur ohne Burgen.",
+   "see": "Nach einer Woche leben wir wieder wie im Mittelalter.",
+   "place": "village",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_burg"
+    }
+   ],
+   "mood": "calm",
+   "crowd": "walk",
+   "overlay": {
+    "type": "card",
+    "text": "1 WOCHE"
+   }
+  },
+  {
+   "text": "Autos stehen nutzlos herum und streiten sich über den besten Parkplatz.",
+   "see": "Autos stehen nutzlos herum und streiten sich über Parkplätze.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "car"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "crowd": "worried"
+  },
+  {
+   "text": "Nur dein alter Gameboy funktioniert noch, weil er keinen Chip besitzt.",
+   "see": "Nur dein alter Gameboy funktioniert noch.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_mikrochip"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "idle",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "insert",
+   "mood": "happy"
+  },
+  {
+   "text": "Und plötzlich fängt er laut an zu lachen.",
+   "see": "Plötzlich fängt der Gameboy laut an zu lachen.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "konsole"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense"
+  }
+ ]
+}
