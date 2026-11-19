@@ -3027,7 +3027,7 @@ CUTE_ANIMALS = ((r"pfeilgiftfr[oö]sch|giftfr[oö]sch|baumsteigerfr[oö]sch|\bfr
                 (r"kugelfisch|\bfugu", "puffer", "underwater"))
 CUTE_SKIP_RE = r"frosch im hals|sei kein frosch|\bkoch\b|\bköch|restaurant|\bteller|servier|delikatesse|luxus|\bgericht\b|\bessen\b|\bgegessen|speisekarte|\bmesser"
 CUTE_NEXT_RE = (r"^(?:er|sie|es|sein\w*|ihr\w*|dieses? (?:tier\w*|gift|fisch|frosch)|das (?:gift|tier\w*)|der (?:fisch|frosch|winzling)|dabei|damit|sogar|schon|denn|falsch|und (?:er|sie|es|das))\b|"
-                r"\bgift(?:ig|es|sporn\w*|drüse\w*)?\b|\bsporn|\bstachel|\bhaut\b|bläst|aufgeblasen|aufblas")
+                r"\bgift(?:ig|es|sporn\w*|drüse\w*)?\b|\bsporn|\bstachel|\bhaut\b|bläst|aufgeblasen|aufblas|\bfarbe\b|fressfeind|\bnahrung\b|\bbeute\b")
 CUTE_YOU_RE = r"\b(du|dein\w*|dir|dich|ich|mein\w*|mir|mich|wir|unser\w*|uns|euch|ärzt\w*|arzt|forscher\w*|opfer|patient\w*)\b"   # „zehn Menschen“ als Maß bleibt beim Tier
 CUTE_PALM_RE = r"handfläche|passt (?:\w+ ){0,3}(?:auf|in) (?:deine|eine|die|jede) hand\b|daumennagel|fingerkuppe|kleiner als (?:dein|ein) daumen"
 CUTE_TOUCH_RE = r"berühr|anfass|anfäss|streichel|\bhand\b|\bfinger|hochheb|\bhebst|\bnimmst"
@@ -3070,6 +3070,11 @@ def _cute_named(low):
 def _cute_animals(scenes, main_id="du"):
     wild = ("forest", "river", "lake", "park", "fields", "mountain", "beach", "savannah", "desert", "custom")
     last = None                                           # (Art, Zuhause, Nummer des Satzes)
+    if any(isinstance(s2, dict) and (_cute_named(str(s2.get("text") or "").lower()) or ("",))[0] == "puffer" for s2 in scenes):
+        for s2 in scenes:                                 # Kugelfisch-Video: der Ersatz-Goldfisch der Text-KI („das Gift der Nummer drei“, Video 164) ist der Kugelfisch
+            for a2 in (s2.get("actors") or []) if isinstance(s2, dict) else []:
+                if isinstance(a2, dict) and str(a2.get("kind") or "").lower() == "fish":
+                    a2.update(kind="puffer", hero=True)
     for i, sc in enumerate(scenes):
         if not isinstance(sc, dict):
             continue

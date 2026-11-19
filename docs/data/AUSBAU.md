@@ -555,3 +555,8 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   „Welches der drei …?“ entfällt. Kugelfisch ohne Zorn-Zeichen. Giftsporn größer gezeichnet.
   Nach dem 2. Neubau (Video 163): Das Titelbild zeigte einen grünen Außerirdischen – „Australien“ enthält „alien“ (`TOPIC_CREATURES`, Weltraum-Hinweis).
   Das Muster verlangt jetzt den Wortanfang.
+  Nach dem 3. Neubau (Video 164, verworfen; veröffentlicht wurde 163): Besetzt die Text-KI in einem Kugelfisch-Video den Ersatz-Goldfisch (`fish`), wird er
+  zum Kugelfisch. Folgesätze über Farbe, Fressfeinde, Nahrung bleiben beim Tier.
+  Noch offen: Der geschärfte Einstieg der Text-KI macht aus „alle drei sind giftig“ ein „tödlich giftig“ samt Stempel, obwohl das Schnabeltier für
+  Menschen nicht tödlich ist; „landet in Japan auf dem Teller“ spielt in einem Schnellrestaurant mit Passanten; Jäger mit Blasrohr haben kein Bild; eine
+  Hand, auf der der Frosch sitzt, gibt es nicht; die verlangte Schlussfrage fehlt je nach Neubau.
