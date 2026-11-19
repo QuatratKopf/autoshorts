@@ -1,5 +1,5 @@
 {
- "updated": 1795097086.6933033,
+ "updated": 1795098029.2170055,
  "enough": true,
  "counted": 25,
  "total": 27,
@@ -9,10 +9,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 2,
-   "avg_views": 1810,
+   "avg_views": 1814,
    "avg_likes": 40.0,
    "like_rate": 2.21,
-   "avg_score": 2446
+   "avg_score": 2449
   },
   {
    "slug": "storys",
@@ -63,10 +63,10 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 2,
-   "avg_views": 1673,
+   "avg_views": 1674,
    "avg_likes": 11.5,
    "like_rate": 0.69,
-   "avg_score": 1890
+   "avg_score": 1891
   }
  ],
  "weights": {
@@ -84,8 +84,8 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🐾 Tierwelt (Ø 1810 Aufrufe, 2.21 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1673 Aufrufe) – kommt seltener dran.",
+  "Stärkste Kategorie: 🐾 Tierwelt (Ø 1814 Aufrufe, 2.21 % Likes).",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1674 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2488 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
  ],
@@ -94,9 +94,9 @@
  ],
  "words_bad": [
   "erkennst",
-  "lied",
   "remix",
-  "bekanntes"
+  "bekanntes",
+  "lied"
  ],
  "top": [
   {
