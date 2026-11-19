@@ -2,8 +2,8 @@
  "title": "Was wäre, wenn du ein Super-Tier aus vier Arten baust?",
  "scenes": [
   {
-   "text": "Du baust im Labor das perfekte Super-Tier aus vier Tieren.",
-   "see": "Du baust im Labor ein Super-Tier.",
+   "text": "Du baust im Labor das ultimative Super-Tier aus vier Arten.",
+   "see": "Du baust im Labor das ultimative Super-Tier aus vier Arten.",
    "place": "lab",
    "time": "day",
    "actors": [
@@ -13,32 +13,27 @@
      "emote": "",
      "hold": "",
      "action": "point",
-     "pos": 150,
+     "pos": 230,
      "facing": "right"
     },
     {
      "id": "_tier",
      "kind": "chimera",
-     "hero": true,
      "speaks": false,
      "emote": "",
      "say": "",
      "hold": "",
      "action": "idle",
      "emotion": "",
-     "pos": 745,
+     "pos": 730,
      "facing": "right"
     }
    ],
-   "mood": "calm",
-   "overlay": {
-    "type": "tag",
-    "text": "LABOR START"
-   }
+   "mood": "calm"
   },
   {
-   "text": "Und am Ende kommt ein Haken, mit dem keiner rechnet.",
-   "see": "Ein überraschender Haken taucht auf.",
+   "text": "Und am Ende sorgt ein genialer Haken für die totale Überraschung.",
+   "see": "Ein genialer Haken sorgt für totale Überraschung.",
    "place": "lab",
    "time": "day",
    "actors": [
@@ -46,41 +41,40 @@
      "id": "du",
      "speaks": true,
      "action": "shocked",
-     "emotion": "shocked",
+     "emotion": "scared",
      "emote": "!",
      "kind": "",
      "hold": "",
      "facing": "left",
      "say": "",
-     "pos": 930
+     "pos": 850
     },
     {
      "id": "_tier",
      "kind": "chimera",
-     "hero": true,
      "speaks": false,
      "emote": "",
      "say": "",
      "hold": "",
      "action": "idle",
      "emotion": "worried",
-     "pos": 335,
+     "pos": 350,
      "facing": "left"
     }
    ],
    "mood": "tense"
   },
   {
-   "text": "Zutat eins sind die Beine vom Gepard für ultimativen Speed.",
-   "see": "Die Beine vom Gepard für Speed.",
-   "place": "lab",
+   "text": "Der Gepard ist das schnellste Landtier.",
+   "see": "Der Gepard galoppiert als schnellstes Landtier durch die Savanne.",
+   "place": "savannah",
    "time": "day",
    "actors": [
     {
      "id": "_tier",
      "kind": "cheetah",
      "hero": true,
-     "action": "idle",
+     "action": "run",
      "speaks": false,
      "pos": "center",
      "emote": "",
@@ -94,11 +88,11 @@
   },
   {
    "text": "In freier Wildbahn wurden dreiundneunzig Kilometer pro Stunde gemessen.",
-   "see": "Ein Gepard rennt schnell in der Savanne.",
+   "see": "Der Gepard rennt mit dreiundneunzig Kilometern pro Stunde.",
    "place": "savannah",
    "time": "day",
    "shot": "graphic",
-   "mood": "calm",
+   "mood": "tense",
    "graphic": {
     "type": "number",
     "value": "93",
@@ -107,31 +101,31 @@
    }
   },
   {
-   "text": "Seine eigentliche Superkraft ist die brachiale Beschleunigung.",
-   "see": "Die brachiale Beschleunigung zeigt sich.",
+   "text": "Die eigentliche Stärke vom Gepard ist die Beschleunigung.",
+   "see": "Der Gepard beschleunigt blitzschnell im Gras.",
    "place": "savannah",
    "time": "day",
    "actors": [
     {
      "id": "_tier",
-     "kind": "chimera",
+     "kind": "cheetah",
      "hero": true,
+     "action": "run",
      "speaks": false,
+     "pos": "center",
      "emote": "",
      "say": "",
      "hold": "",
-     "action": "run",
-     "emotion": "worried",
-     "pos": "center",
-     "facing": "right"
+     "facing": "right",
+     "emotion": ""
     }
    ],
-   "mood": "tense"
+   "mood": "calm"
   },
   {
-   "text": "Zutat zwei sind die extrem scharfen Adleraugen.",
-   "see": "Die extrem scharfen Adleraugen.",
-   "place": "lab",
+   "text": "Zutat zwei sind die Augen vom Adler.",
+   "see": "Du betrachtest das Auge vom Adler.",
+   "place": "mountain",
    "time": "day",
    "actors": [
     {
@@ -150,13 +144,13 @@
    ],
    "mood": "calm",
    "overlay": {
-    "type": "card",
-    "text": "SCHARFSEHEN"
+    "type": "tag",
+    "text": "ZUTAT ZWEI"
    }
   },
   {
-   "text": "Der Adler sieht um ein Mehrfaches schärfer als ein Mensch.",
-   "see": "Ein Adler fliegt hoch am Himmel.",
+   "text": "Der Adler sieht um ein Mehrfaches schärfer als ein Mensch und erkennt Beute aus großer Höhe.",
+   "see": "Der Adler fliegt hoch am Himmel und späht nach Beute.",
    "place": "mountain",
    "backdrop": {
     "sky": "day",
@@ -184,9 +178,9 @@
    "mood": "calm"
   },
   {
-   "text": "Zutat drei bringt die extreme Zähigkeit vom Bärtierchen.",
-   "see": "Die extreme Zähigkeit vom Bärtierchen.",
-   "place": "lab",
+   "text": "Zutat drei ist die Zähigkeit vom Bärtierchen.",
+   "see": "Du nimmst die Zähigkeit vom Bärtierchen unter die Lupe.",
+   "place": "forest",
    "time": "day",
    "actors": [
     {
@@ -195,7 +189,7 @@
      "hero": true,
      "action": "idle",
      "speaks": false,
-     "pos": "right",
+     "pos": "center",
      "emote": "",
      "say": "",
      "hold": "",
@@ -205,21 +199,15 @@
    ],
    "mood": "calm",
    "overlay": {
-    "type": "card",
-    "text": "UNZERSTÖRBAR"
+    "type": "tag",
+    "text": "ZUTAT DREI"
    }
   },
   {
-   "text": "Es übersteht fast minus zweihundertzweiundsiebzig Grad Kälte.",
-   "see": "Das Bärtierchen trotzt extremer Kälte.",
-   "place": "snow",
-   "backdrop": {
-    "sky": "day",
-    "ground": "snow",
-    "elements": []
-   },
+   "text": "Das Bärtierchen übersteht fast minus zweihundertzweiundsiebzig Grad.",
+   "see": "Das Bärtierchen übersteht minus zweihundertzweiundsiebzig Grad in Kälte.",
+   "place": "forest",
    "time": "day",
-   "weather": "cold",
    "actors": [
     {
      "id": "_tier",
@@ -245,42 +233,29 @@
   },
   {
    "text": "Im Jahr zweitausendsieben überlebte es sogar den offenen Weltraum.",
-   "see": "Das Bärtierchen im offenen Weltraum.",
-   "place": "lab",
-   "time": "day",
+   "see": "Im Jahr zweitausendsieben überlebt das Bärtierchen den offenen Weltraum.",
+   "place": "space",
+   "time": "night",
    "actors": [
     {
-     "id": "du",
-     "speaks": false,
-     "emote": "",
-     "hold": "",
-     "action": "think",
-     "pos": 150,
-     "facing": "right"
-    },
-    {
      "id": "_tier",
-     "kind": "chimera",
+     "kind": "tardigrade",
      "hero": true,
+     "action": "idle",
      "speaks": false,
+     "pos": "center",
      "emote": "",
      "say": "",
      "hold": "",
-     "action": "idle",
-     "emotion": "",
-     "pos": 745,
-     "facing": "right"
+     "facing": "right",
+     "emotion": ""
     }
    ],
-   "mood": "calm",
-   "overlay": {
-    "type": "tag",
-    "text": "JAHR 2007"
-   }
+   "mood": "calm"
   },
   {
-   "text": "Zutat vier ist das gigantische Herz vom Blauwal.",
-   "see": "Das gigantische Herz vom Blauwal.",
+   "text": "Zutat vier ist das Herz vom Blauwal.",
+   "see": "Du bestaunst das Herz vom Blauwal im Labor.",
    "place": "underwater",
    "time": "day",
    "actors": [
@@ -293,20 +268,20 @@
      "say": "",
      "hold": "",
      "facing": "right",
-     "emotion": "",
+     "emotion": "worried",
      "hero": true,
-     "pos": 400
+     "pos": "center"
     }
    ],
-   "mood": "calm",
+   "mood": "tense",
    "overlay": {
-    "type": "card",
-    "text": "RIESIGES HERZ"
+    "type": "tag",
+    "text": "ZUTAT VIER"
    }
   },
   {
-   "text": "Es ist das größte Herz der Welt und wiegt enorm viel.",
-   "see": "Ein Blauwal schwimmt im Ozean.",
+   "text": "Es ist das größte Herz der Welt und rund hundertachtzig Kilogramm schwer.",
+   "see": "Das Herz ist riesig und wiegt hundertachtzig Kilogramm.",
    "place": "underwater",
    "time": "day",
    "actors": [
@@ -321,48 +296,18 @@
      "facing": "left",
      "emotion": "",
      "hero": true,
-     "pos": 680
+     "pos": "center"
     }
    ],
-   "mood": "calm"
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "180 KG"
+   }
   },
   {
-   "text": "Das fertige Super-Tier steht nun bereit im hellen Labor.",
-   "see": "Das fertige Super-Tier im Labor.",
-   "place": "lab",
-   "time": "day",
-   "actors": [
-    {
-     "id": "du",
-     "speaks": true,
-     "action": "talk",
-     "emotion": "happy",
-     "emote": "",
-     "kind": "",
-     "hold": "",
-     "facing": "left",
-     "say": "",
-     "pos": 930
-    },
-    {
-     "id": "_tier",
-     "kind": "chimera",
-     "hero": true,
-     "speaks": false,
-     "emote": "",
-     "say": "",
-     "hold": "",
-     "action": "idle",
-     "emotion": "",
-     "pos": 335,
-     "facing": "left"
-    }
-   ],
-   "mood": "calm"
-  },
-  {
-   "text": "Du denkst im ersten Moment, dieses Wesen ist völlig unbesiegbar.",
-   "see": "Du denkst, das Wesen ist unbesiegbar.",
+   "text": "Das Super-Tier steht fertig im Labor, und du denkst, dieses Wesen ist unbesiegbar.",
+   "see": "Das Super-Tier steht fertig im Labor und wirkt unbesiegbar.",
    "place": "lab",
    "time": "day",
    "actors": [
@@ -371,31 +316,30 @@
      "speaks": true,
      "action": "think",
      "emotion": "happy",
-     "emote": "idea",
+     "emote": "",
      "kind": "",
      "hold": "",
      "facing": "right",
      "say": "",
-     "pos": 150
+     "pos": 230
     },
     {
      "id": "_tier",
      "kind": "chimera",
-     "hero": true,
      "speaks": false,
      "emote": "",
      "say": "",
      "hold": "",
      "action": "idle",
      "emotion": "",
-     "pos": 745,
+     "pos": 730,
      "facing": "right"
     }
    ],
    "mood": "calm"
   },
   {
-   "text": "Aber jede noch so starke Superkraft hat ihren brutalen Preis.",
+   "text": "Jede Superkraft hat ihren Preis.",
    "see": "Jede Superkraft hat ihren Preis.",
    "place": "lab",
    "time": "day",
@@ -403,34 +347,22 @@
     {
      "id": "du",
      "speaks": true,
-     "action": "shocked",
+     "action": "talk",
      "emotion": "worried",
-     "emote": "!",
+     "emote": "",
      "kind": "",
      "hold": "",
-     "facing": "left",
+     "facing": "",
      "say": "",
-     "pos": 930
-    },
-    {
-     "id": "_tier",
-     "kind": "chimera",
-     "hero": true,
-     "speaks": false,
-     "emote": "",
-     "say": "",
-     "hold": "",
-     "action": "idle",
-     "emotion": "worried",
-     "pos": 335,
-     "facing": "left"
+     "pos": "center"
     }
    ],
+   "shot": "close",
    "mood": "tense"
   },
   {
-   "text": "Der Gepard hält seinen irren Sprint nur wenige Meter durch.",
-   "see": "Der Gepard hält den Sprint kaum durch.",
+   "text": "Der Gepard hält seinen Sprint nur wenige hundert Meter durch.",
+   "see": "Der Gepard hält seinen Sprint nur wenige hundert Meter durch.",
    "place": "savannah",
    "time": "day",
    "actors": [
@@ -448,41 +380,18 @@
      "emotion": ""
     }
    ],
-   "mood": "tense"
+   "mood": "tense",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 100,
+    "unit": "METER"
+   }
   },
   {
-   "text": "Das Bärtierchen ist nur so extrem zäh, wenn es komplett trocken ist.",
-   "see": "Das Bärtierchen ist nur trocken so zäh.",
-   "place": "desert",
-   "backdrop": {
-    "sky": "day",
-    "ground": "dry",
-    "elements": [
-     "dunes"
-    ]
-   },
-   "time": "day",
-   "actors": [
-    {
-     "id": "_tier",
-     "kind": "tardigrade",
-     "hero": true,
-     "action": "idle",
-     "speaks": false,
-     "pos": "right",
-     "emote": "",
-     "say": "",
-     "hold": "",
-     "facing": "right",
-     "emotion": ""
-    }
-   ],
-   "mood": "calm"
-  },
-  {
-   "text": "Das Herz wiegt hundertachtzig Kilogramm und sprengt jede Logik.",
-   "see": "Das schwere Herz sprengt jede Logik.",
-   "place": "lab",
+   "text": "Das Bärtierchen ist nur so zäh, wenn es ausgetrocknet und reglos ist.",
+   "see": "Das Bärtierchen ist nur ausgetrocknet und reglos so zäh.",
+   "place": "forest",
    "time": "day",
    "actors": [
     {
@@ -496,20 +405,36 @@
      "say": "",
      "hold": "",
      "facing": "right",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Das Blauwal-Herz wiegt mehr als dreimal so viel wie ein ganzer Gepard.",
+   "see": "Das Blauwal-Herz wiegt mehr als dreimal so viel wie ein ganzer Gepard.",
+   "place": "savannah",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "cheetah",
+     "hero": true,
+     "action": "idle",
+     "speaks": false,
+     "pos": "center",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
      "emotion": "worried"
     }
    ],
-   "mood": "tense",
-   "overlay": {
-    "type": "counter",
-    "label": "GEWICHT",
-    "value": 180,
-    "unit": "KG"
-   }
+   "mood": "tense"
   },
   {
-   "text": "Das Super-Tier bricht sofort unter seinem eigenen schweren Herz zusammen.",
-   "see": "Das Super-Tier bricht zusammen.",
+   "text": "Das Super-Tier bricht unter seinem eigenen Herzen zusammen.",
+   "see": "Das Super-Tier bricht unter seinem eigenen Herzen zusammen.",
    "place": "lab",
    "time": "day",
    "actors": [
@@ -520,94 +445,56 @@
      "hold": "",
      "action": "shocked",
      "emotion": "sad",
-     "pos": 150,
-     "facing": "right"
+     "pos": 850,
+     "facing": "left"
     },
     {
      "id": "_tier",
      "kind": "chimera",
-     "hero": true,
      "speaks": false,
      "emote": "",
      "say": "",
      "hold": "",
      "action": "down",
      "emotion": "sad",
-     "pos": 745,
-     "facing": "right"
+     "pos": 350,
+     "facing": "left"
     }
    ],
    "mood": "tense"
   },
   {
-   "text": "Die Evolution baut keine Alleskönner, sondern perfekte Spezialisten für das Leben.",
-   "see": "Die Evolution baut Spezialisten.",
-   "place": "lab",
-   "time": "day",
-   "actors": [
-    {
-     "id": "du",
-     "speaks": false,
-     "emote": "",
-     "hold": "",
-     "action": "think",
-     "pos": 930,
-     "facing": "left"
-    },
-    {
-     "id": "_tier",
-     "kind": "chimera",
-     "hero": true,
-     "speaks": false,
-     "emote": "",
-     "say": "",
-     "hold": "",
-     "action": "idle",
-     "emotion": "",
-     "pos": 335,
-     "facing": "left"
-    }
-   ],
-   "mood": "calm"
-  },
-  {
-   "text": "Welche Tier-Superkraft hättest du gern?",
-   "see": "Welche Tier-Superkraft hättest du gern?",
+   "text": "Die Evolution baut keine Alleskönner, sondern Spezialisten, jedes Tier ist genau für sein Leben gebaut.",
+   "see": "Die Evolution baut Spezialisten und jedes Tier ist genau für sein Leben gebaut.",
    "place": "lab",
    "time": "day",
    "actors": [
     {
      "id": "du",
      "speaks": true,
-     "action": "talk",
-     "emotion": "happy",
-     "emote": "?",
+     "action": "think",
+     "emotion": "sad",
+     "emote": "",
      "kind": "",
      "hold": "",
      "facing": "right",
      "say": "",
-     "pos": 150
+     "pos": 230
     },
     {
      "id": "_tier",
      "kind": "chimera",
-     "hero": true,
      "speaks": false,
      "emote": "",
      "say": "",
      "hold": "",
-     "action": "idle",
-     "emotion": "",
-     "pos": 745,
+     "action": "down",
+     "emotion": "sad",
+     "pos": 730,
      "facing": "right"
     }
    ],
-   "mood": "calm",
-   "overlay": {
-    "type": "choice",
-    "a": "Gepard",
-    "b": "Adler"
-   }
+   "mood": "calm"
   }
  ]
 }
