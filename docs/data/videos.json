@@ -6035,7 +6035,7 @@
   "id": 161,
   "category": "tiere",
   "topic": "Tiere, die extrem niedlich aussehen, aber tödlich gefährlich sind",
-  "status": "review",
+  "status": "discarded",
   "created": 1795111796.181215,
   "title": "Tödlich niedlich: Diese 3 Tiere solltest du nie streicheln",
   "description": "Niedlich, flauschig und extrem gefährlich!\nHier siehst du drei Tiere, die süß aussehen, dich aber sofort ins Krankenhaus befördern können.\nWürdest du ein Schnabeltier streicheln?",
@@ -6071,6 +6071,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-19 21:00",
-  "review_at": 1795112112.7978463
+  "review_at": 1795112112.7978463,
+  "error": "Bei der Prüfung verworfen: Prüfung: Frosch grün und als Klecks, Schiff statt Schnabeltier, Goldfisch statt Kugelfisch, falsche Angaben (zwei Zentimeter, Herzversagen durch Berührung), Schlusssatz bricht ab"
  }
 ]
