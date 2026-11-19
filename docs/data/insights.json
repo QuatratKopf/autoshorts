@@ -1,5 +1,5 @@
 {
- "updated": 1795091620.0145676,
+ "updated": 1795093428.119474,
  "enough": true,
  "counted": 25,
  "total": 27,
@@ -9,10 +9,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 2,
-   "avg_views": 1812,
+   "avg_views": 1810,
    "avg_likes": 40.0,
    "like_rate": 2.21,
-   "avg_score": 2448
+   "avg_score": 2446
   },
   {
    "slug": "storys",
@@ -27,10 +27,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 3,
-   "avg_views": 1749,
+   "avg_views": 1750,
    "avg_likes": 42.3,
    "like_rate": 2.42,
-   "avg_score": 2407
+   "avg_score": 2408
   },
   {
    "slug": "fakten",
@@ -48,7 +48,7 @@
    "avg_views": 1774,
    "avg_likes": 38.5,
    "like_rate": 2.17,
-   "avg_score": 2366
+   "avg_score": 2367
   },
   {
    "slug": "whatif",
@@ -84,7 +84,7 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🐾 Tierwelt (Ø 1812 Aufrufe, 2.21 % Likes).",
+  "Stärkste Kategorie: 🐾 Tierwelt (Ø 1810 Aufrufe, 2.21 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1673 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2486 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
@@ -93,10 +93,10 @@
   "gänsehaut"
  ],
  "words_bad": [
-  "remix",
   "erkennst",
-  "lied",
-  "bekanntes"
+  "bekanntes",
+  "remix",
+  "lied"
  ],
  "top": [
   {
