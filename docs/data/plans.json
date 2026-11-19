@@ -1,750 +1,4 @@
 {
- "2026-11-18 18:00": {
-  "category": "comedy",
-  "topic": "Typische nervige Nachbarn, die wirklich jeder kennt",
-  "trend": null,
-  "script": {
-   "title": "Die Hölle auf Erden sind meine Nachbarn",
-   "description": "Was tun, wenn die Nachbarn Tag und Nacht eskalieren?\nErlebe den wahren Albtraum aus der Mietwohnung.\nKlingeln bei dir um Mitternacht auch die Wände?",
-   "hashtags": [
-    "#shorts",
-    "#fyp",
-    "#viral",
-    "#nachbarn",
-    "#comedy",
-    "#alltag",
-    "#eskalation",
-    "#mietwohnung"
-   ],
-   "tags": [
-    "nachbarn",
-    "mietwohnung",
-    "streit",
-    "alltag",
-    "comedy",
-    "eskalation",
-    "hausordnung",
-    "wohnung",
-    "lärm",
-    "genz"
-   ],
-   "thumbnail": {
-    "place": "hallway",
-    "time": "day",
-    "actor": "du",
-    "action": "shocked",
-    "emotion": "shocked",
-    "props": [
-     "wassermelone"
-    ],
-    "weather": "",
-    "image": "A young person looking stressed and angry in a living room, holding hands to their ears, vibrant cartoon style",
-    "text": "DIE NACHBARN ESKALIEREN"
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "grün",
-     "hat": "",
-     "hair": "curly",
-     "gender": "w",
-     "hair_color": "braun",
-     "skin": "hell"
-    }
-   },
-   "scenes": [
-    {
-     "text": "Vier Nachbarn, die dein Leben zur Hölle machen.",
-     "image": "A young woman sitting on a sofa in a living room at night looking annoyed",
-     "who": [
-      "du"
-     ],
-     "place": "hallway",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Nachbarn",
-      "drei Uhr"
-     ],
-     "hud": "TAG 1 · 3:00 UHR",
-     "status": "LÄRM: HOCH",
-     "overlay": {
-      "type": "tag",
-      "text": "NACHTSCHICHT"
-     },
-     "see": "Ein wütender Mann blickt panisch im Flur umher.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "look_around",
-       "emotion": "angry",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Der letzte Vorfall treibt mich seit vierundvierzig Stunden in den Wahnsinn.",
-     "image": "A young woman covering her ears on the sofa",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "camera": "zoom_in",
-     "sfx": "boom",
-     "highlight": [
-      "Uwe",
-      "Bassgitarren"
-     ],
-     "overlay": null,
-     "see": "Grafik über die lange Zeit von 44 Stunden.",
-     "time": "night",
-     "props": [],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "tense",
-     "graphic": {
-      "type": "timer",
-      "value": "44:00:00",
-      "kicker": "LÄRM-TERROR"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Die Wand vibriert bereits seit vierundvierzig Stunden ohne Unterbrechung.",
-     "image": "A living room wall shaking with dust falling down",
-     "who": [],
-     "place": "bedroom",
-     "camera": "shake",
-     "sfx": "none",
-     "highlight": [
-      "vierundvierzig",
-      "Stunden"
-     ],
-     "overlay": {
-      "type": "counter",
-      "label": "STUNDEN LÄRM",
-      "value": 44,
-      "unit": "STUNDEN"
-     },
-     "see": "Die Wand im Schlafzimmer wackelt heftig, die Figur liegt schlaflos im Bett.",
-     "time": "night",
-     "weather": "quake",
-     "props": [
-      "clock"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "cower",
-       "emotion": "worried",
-       "emote": "sweat",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Also bin ich rübergegangen, um höflich auf den Hausfrieden hinzuweisen.",
-     "image": "A young woman walking angrily towards a door",
-     "who": [
-      "du"
-     ],
-     "place": "hallway",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "Hausfrieden"
-     ],
-     "overlay": null,
-     "see": "Der Hauptdarsteller geht im Flur zur Nachbartür und klopft an.",
-     "time": "day",
-     "props": [
-      "door"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "walk",
-       "emotion": "angry",
-       "emote": "",
-       "pos": "left",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Aber Uwe hat nicht geöffnet, sondern mir einfach eine Melone vor die Tür gelegt.",
-     "image": "A close-up of a watermelon sitting in front of a closed apartment door",
-     "who": [],
-     "place": "hallway",
-     "camera": "insert",
-     "sfx": "pop",
-     "highlight": [
-      "Melone"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "GRUSS",
-      "color": "orange"
-     },
-     "see": "Eine große Honigmelone liegt plötzlich vor der Wohnungstür.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "?",
-       "pos": "left",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Eine unbehandelte Honigmelone mit Post-it, doch was stand auf dem Zettel?",
-     "image": "A watermelon with a yellow sticky note on it close-up",
-     "who": [],
-     "place": "hallway",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Honigmelone",
-      "Post-it"
-     ],
-     "overlay": {
-      "type": "note",
-      "title": "NOTIZ",
-      "text": "WENIGER REDEN"
-     },
-     "see": "Nahaufnahme der Melone mit einem Notizzettel darauf.",
-     "time": "day",
-     "props": [
-      "honigmelone"
-     ],
-     "actors": [],
-     "shot": "insert",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Da fängt das Problem erst an, weil Uwe einfach gar nicht reagiert.",
-     "image": "A young woman staring at a watermelon on the floor with wide eyes",
-     "who": [
-      "du"
-     ],
-     "place": "hallway",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Gefühle"
-     ],
-     "overlay": null,
-     "see": "Uwe steht stur hinter der angelehnten Tür und reagiert nicht.",
-     "time": "day",
-     "props": [
-      "door"
-     ],
-     "actors": [
-      {
-       "id": "uwe",
-       "action": "idle",
-       "emotion": "",
-       "emote": "",
-       "pos": "right",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Er dreht den Bass nur noch weiter auf und ignoriert jedes Klopfen.",
-     "image": "A watermelon with a drawn-on face breathing heavily on the floor",
-     "who": [],
-     "place": "livingroom",
-     "camera": "still",
-     "sfx": "tick",
-     "highlight": [
-      "atmen"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "LÄRM"
-     },
-     "see": "Uwe dreht in seinem Zimmer an einer riesigen Lautsprecherbox auf.",
-     "time": "day",
-     "props": [
-      "bassbox"
-     ],
-     "actors": [
-      {
-       "id": "uwe",
-       "action": "dance",
-       "emotion": "happy",
-       "emote": "music",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "modern apartment living room with a sofa, a window and walls that look thin",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Du denkst dir jetzt, das ist absurd und du hast völlig recht.",
-     "image": "A young woman rubbing her temples in disbelief",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "absurd",
-      "recht"
-     ],
-     "overlay": null,
-     "see": "Die Figur schüttelt ungläubig den Kopf und zeigt auf die Wand.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "shocked",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "modern apartment living room with a sofa, a window and walls that look thin",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Sogar die anderen Nachbarn stehen mittlerweile genervt im Treppenhaus.",
-     "image": "A cat eating a piece of watermelon on the carpet",
-     "who": [],
-     "place": "hallway",
-     "camera": "pan_right",
-     "sfx": "none",
-     "highlight": [
-      "Katze",
-      "verspeist"
-     ],
-     "overlay": null,
-     "see": "Mehrere genervte Nachbarn stehen diskutierend im Treppenhaus.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "nachbarin",
-       "action": "talk",
-       "emotion": "angry",
-       "emote": "anger",
-       "pos": "left",
-       "speaks": true
-      },
-      {
-       "id": "du",
-       "action": "cower",
-       "emotion": "worried",
-       "emote": "",
-       "pos": "right",
-       "speaks": false
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "crowd": "worried",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Aus der Wohnung dröhnt die Musik, als stünde man direkt im Club.",
-     "image": "A cat standing with multiple tiny guitars strapped to its back",
-     "who": [],
-     "place": "livingroom",
-     "camera": "zoom_out",
-     "sfx": "boom",
-     "highlight": [
-      "achtundvierzig",
-      "Bassgitarren"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "BASS"
-     },
-     "see": "Bunt flackerndes Licht und Stroboskop im Raum wie in einer Diskothek.",
-     "time": "night",
-     "props": [
-      "bassbox"
-     ],
-     "actors": [
-      {
-       "id": "uwe",
-       "action": "jump",
-       "emotion": "happy",
-       "emote": "music",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "modern apartment living room with a sofa, a window and walls that look thin",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Das war der Moment, in dem die Hausverwaltung offiziell kapituliert hat.",
-     "image": "A letter flying through the air representing a capitulation",
-     "who": [],
-     "place": "office",
-     "camera": "shake",
-     "sfx": "none",
-     "highlight": [
-      "Hausverwaltung",
-      "kapituliert"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "KAPITULATION",
-      "color": "red"
-     },
-     "see": "Eine Mitteilung der Hausverwaltung mit einem großen KAPIULIERT-Stempel.",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "sad",
-     "graphic": {
-      "type": "badge",
-      "kicker": "HAUSVERWALTUNG",
-      "text": "KAPITULIERT"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Viele drohen jetzt mit Mietminderung, aber wie reagiert Uwe darauf?",
-     "image": "A stack of pickles next to a digital coin display on a table",
-     "who": [],
-     "place": "office",
-     "camera": "insert",
-     "sfx": "none",
-     "highlight": [
-      "Kryptowährung",
-      "Essiggurken"
-     ],
-     "overlay": {
-      "type": "checklist",
-      "title": "MIETMINDERUNG",
-      "items": [
-       [
-        "Geld",
-        false
-       ],
-       [
-        "Gurken",
-        true
-       ]
-      ]
-     },
-     "see": "Checkliste der Mietminderungen wird eingeblendet.",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "tense",
-     "graphic": {
-      "type": "compare",
-      "left": "MIETE",
-      "right": "ABZUG",
-      "value": "100%",
-      "sub": "50%"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Uwe zog in den Flur und baute dort ein echtes Tonstudio auf.",
-     "image": "A hallway filled with mixing desks and cable chaos",
-     "who": [],
-     "place": "hallway",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "Tonstudio"
-     ],
-     "overlay": null,
-     "see": "Uwe hat im Hausflur Mischpulte und Kabel aufgebaut.",
-     "time": "day",
-     "props": [
-      "computer",
-      "box"
-     ],
-     "actors": [
-      {
-       "id": "uwe",
-       "action": "dance",
-       "emotion": "happy",
-       "emote": "music",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Mit Mischpulten, Nebelmaschinen und einem Chor aus genervten Nachbarn.",
-     "image": "Several neighbors standing in a foggy hallway holding microphones",
-     "who": [],
-     "place": "hallway",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Mischpulten",
-      "Nebelmaschinen"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "CHOR DER WUT"
-     },
-     "see": "Nebel steigt im Flur auf, genervte Nachbarn stehen wie ein Chor herum.",
-     "time": "day",
-     "weather": "steam",
-     "props": [],
-     "actors": [
-      {
-       "id": "uwe",
-       "action": "wave",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "crowd": "worried",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Meine Gläser im Schrank klappern ständig und spielen im Takt mit.",
-     "image": "A refrigerator with disco lights flashing and musical notes around it",
-     "who": [],
-     "place": "kitchen",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Kühlschrank",
-      "Techno"
-     ],
-     "overlay": {
-      "type": "bar",
-      "label": "VIBRATION",
-      "value": 100
-     },
-     "see": "Gläser im Küchenschrank wackeln im Takt des Basses.",
-     "time": "day",
-     "weather": "quake",
-     "props": [
-      "glass",
-      "shelf"
-     ],
-     "actors": [],
-     "shot": "insert",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Wer braucht schon Ruhe, wenn der Bass die Milch im Karton schüttelt.",
-     "image": "A milk carton shaking violently on a kitchen counter",
-     "who": [],
-     "place": "kitchen",
-     "camera": "shake",
-     "sfx": "none",
-     "highlight": [
-      "Milch",
-      "schüttelt"
-     ],
-     "overlay": null,
-     "see": "Der Hauptdarsteller hält schockiert eine vibrierende Milchtüte im Raum.",
-     "time": "day",
-     "props": [
-      "table"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shake",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Deshalb habe ich die Polizei gerufen und Schlafohrstöpsel gekauft.",
-     "image": "A young woman walking proudly with a suitcase towards the door",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "camera": "pan_right",
-     "sfx": "none",
-     "highlight": [
-      "Koffer",
-      "Uwe"
-     ],
-     "overlay": null,
-     "see": "Die Figur telefoniert panisch mit der Polizei.",
-     "time": "night",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "hold": "phone",
-       "emotion": "scared",
-       "emote": "sweat",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Jetzt spiele ich die Melone.",
-     "image": "A young woman holding a watermelon like a guitar and smiling",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "Melone"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "ENDE",
-      "color": "green"
-     },
-     "see": "Die Figur trommelt mit zwei Stöcken voller Wut auf der Melone herum.",
-     "time": "day",
-     "props": [
-      "wassermelone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "jump",
-       "emotion": "angry",
-       "emote": "anger",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "modern apartment living room with a sofa, a window and walls that look thin",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [
-   "post-it",
-   "mischpult",
-   "ohrstöpsel"
-  ],
-  "title": "Die Hölle auf Erden sind meine Nachbarn",
-  "created": 1794997363.4028482
- },
  "2026-11-18 21:00": {
   "category": "comedy",
   "topic": "Besondere familiäre Momente an großen Feiertagen",
@@ -2633,5 +1887,754 @@
   ],
   "title": "Wenn Technik die Kontrolle verliert",
   "created": 1795083856.6835654
+ },
+ "2026-11-19 21:00": {
+  "category": "tiere",
+  "topic": "Tiere, die extrem niedlich aussehen, aber tödlich gefährlich sind",
+  "trend": null,
+  "script": {
+   "title": "Tödlich niedlich: Diese 3 Tiere solltest du nie streicheln",
+   "description": "Niedlich, flauschig und extrem gefährlich!\nHier siehst du drei Tiere, die süß aussehen, dich aber sofort ins Krankenhaus befördern können.\nWürdest du ein Schnabeltier streicheln?",
+   "hashtags": [
+    "#shorts",
+    "#tierfakten",
+    "#tiere",
+    "#wissen",
+    "#viral",
+    "#fyp",
+    "#natur"
+   ],
+   "tags": [
+    "süße tiere tödlich",
+    "gefährliche tiere niedlich",
+    "kugelfisch gift",
+    "schnabeltier sporn",
+    "pfeilgiftfrosch",
+    "tierfakten"
+   ],
+   "thumbnail": {
+    "image": "Close-up of a cute platypus with glowing blue venom sparks around its hind legs, dramatic lighting, bold contrast",
+    "text": "SÜSS ABER TÖDLICH",
+    "place": "river",
+    "time": "day",
+    "actor": "platypus_pete",
+    "action": "shocked",
+    "emotion": "shocked",
+    "props": [
+     "water"
+    ],
+    "weather": ""
+   },
+   "wishes": [
+    "schnabeltier",
+    "pfeilgiftfrosch",
+    "kugelfisch"
+   ],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "lila",
+     "hat": "",
+     "hair": "ponytail",
+     "hair_color": "blond",
+     "gender": "w",
+     "skin": "hell"
+    },
+    "frosch": {
+     "kind": "monster"
+    },
+    "platypus_pete": {
+     "kind": "cat"
+    }
+   },
+   "scenes": [
+    {
+     "see": "Eine Frau schaut erstaunt auf ein kleines süßes Tier.",
+     "text": "Drei Tiere, die extrem niedlich aussehen, aber absolut tödlich sind.",
+     "image": "Woman points in amazement at a small cute creature",
+     "who": [
+      "du"
+     ],
+     "place": "forest",
+     "backdrop": {
+      "sky": "day",
+      "ground": "grass",
+      "elements": [
+       "forest",
+       "flowers"
+      ]
+     },
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "absolut tödlich"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "3 TÖDLICHE TIERE"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein winziger bunter Frosch sitzt auf einem Blatt.",
+     "text": "Und das letzte Tier ruiniert deinen Urlaub schneller als gedacht.",
+     "image": "A small colorful frog sitting on a lush green leaf in the jungle",
+     "who": [],
+     "place": "forest",
+     "backdrop": {
+      "sky": "day",
+      "ground": "grass",
+      "elements": [
+       "forest"
+      ]
+     },
+     "time": "day",
+     "weather": "",
+     "props": [
+      "pfeilgiftfrosch"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "event",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Urlaub"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "CLIFFHANGER"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein knallgelber Pfeilgiftfrosch im Regenwald.",
+     "text": "Nummer eins: Der schreckliche Pfeilgiftfrosch ist nur zwei Zentimeter groß.",
+     "image": "Tiny bright yellow frog on a dark rock",
+     "who": [],
+     "place": "forest",
+     "backdrop": {
+      "sky": "day",
+      "ground": "rock",
+      "elements": [
+       "forest"
+      ]
+     },
+     "time": "day",
+     "weather": "",
+     "props": [
+      "pfeilgiftfrosch"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "insert",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "zwei Zentimeter"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "2 CENTIMETER"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Grafik zeigt die Giftmenge für zehn Menschen.",
+     "text": "Aber sein Hautgift reicht locker aus, um zehn erwachsene Menschen zu töten.",
+     "image": "Graphic overlay with number ten and human icons",
+     "who": [],
+     "place": "forest",
+     "backdrop": {
+      "sky": "day",
+      "ground": "soil",
+      "elements": [
+       "forest"
+      ]
+     },
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "graphic",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "zehn Menschen"
+     ],
+     "overlay": null,
+     "graphic": {
+      "type": "number",
+      "kicker": "GIFT-MENGE",
+      "value": "10",
+      "label": "MENSCHEN TÖDLICH"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Hauptfigur weicht erschrocken vom Frosch zurück.",
+     "text": "Schon eine bloße Berührung kann Herzversagen auslösen.",
+     "image": "Woman steps back scared from tiny frog",
+     "who": [
+      "du"
+     ],
+     "place": "forest",
+     "backdrop": {
+      "sky": "day",
+      "ground": "grass",
+      "elements": [
+       "forest"
+      ]
+     },
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "cower",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "panic",
+     "shot": "wide",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Herzversagen"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "GIFTIG",
+      "color": "red"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Entenschnabeltier schwimmt friedlich im Fluss.",
+     "text": "Aber wie sieht es mit dem flauschigen Schnabeltier aus?",
+     "image": "Platypus swimming happily in a river",
+     "who": [],
+     "place": "river",
+     "backdrop": {
+      "sky": "day",
+      "ground": "water",
+      "elements": [
+       "trees",
+       "river"
+      ]
+     },
+     "time": "day",
+     "weather": "",
+     "props": [
+      "schnabeltier"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "event",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "flauschigen Schnabeltier"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "NUMMER 2"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Nahaufnahme der Hinterbeine des Schnabeltiers mit scharfen Sporen.",
+     "text": "Zweitens: Männliche Schnabeltiere besitzen an den Hinterbeinen scharfe Giftsporne.",
+     "image": "Close-up on platypus hind legs showing venomous spurs",
+     "who": [],
+     "place": "river",
+     "backdrop": {
+      "sky": "day",
+      "ground": "sand",
+      "elements": [
+       "river"
+      ]
+     },
+     "time": "day",
+     "weather": "",
+     "props": [
+      "schnabeltier"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "insert",
+     "camera": "zoom_in",
+     "sfx": "pop",
+     "highlight": [
+      "Giftsporten"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Mann krümmt sich vor Schmerzen am Ufer.",
+     "text": "Das Gift tötet dich zwar nicht, verursacht aber extreme Schmerzen.",
+     "image": "A man sitting on ground holding his foot in severe pain",
+     "who": [
+      "du"
+     ],
+     "place": "river",
+     "backdrop": {
+      "sky": "day",
+      "ground": "grass",
+      "elements": [
+       "river"
+      ]
+     },
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shiver",
+       "emotion": "sad",
+       "emote": "sweat",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "sad",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "extreme Schmerzen"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "KEIN SCHMERZMITTEL HILFT"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Spritze mit Schmerzmittel verpufft symbolisch.",
+     "text": "Normale Schmerzmittel schlagen bei diesem Gift nicht einmal an.",
+     "image": "Syringe icon with a red cross over it",
+     "who": [],
+     "place": "hospital",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "graphic",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "schlagen nicht an"
+     ],
+     "overlay": null,
+     "graphic": {
+      "type": "badge",
+      "kicker": "WARNUNG",
+      "text": "WIRKUNGSLOS"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Hauptfigur schaut ungläubig auf eine Uhr.",
+     "text": "Die Qualen können tagelang oder sogar monatelang anhalten.",
+     "image": "Woman looking shocked at a ticking clock",
+     "who": [
+      "du"
+     ],
+     "place": "hospital",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "clock"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "monatelang"
+     ],
+     "overlay": {
+      "type": "note",
+      "title": "DAUER",
+      "text": "Bis zu mehrere Monate"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein niedlicher Kugelfisch schwimmt im Wasser.",
+     "text": "Du denkst, der Kugelfisch ist nur eine lustige Unterwasser-Kugel?",
+     "image": "Cute pufferfish floating calmly in clear water",
+     "who": [],
+     "place": "underwater",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "kugelfisch"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "event",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Unterwasser-Kugel"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "NUMMER 3"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Kugelfisch bläst sich plötzlich riesig auf.",
+     "text": "Falsch: Er enthält Tetrodotoxin, ein tödliches Nervengift.",
+     "image": "Pufferfish puffing up huge with sharp spikes",
+     "who": [],
+     "place": "underwater",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "kugelfisch"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "insert",
+     "camera": "shake",
+     "sfx": "whoosh",
+     "highlight": [
+      "Nervengift"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "TÖDLICH",
+      "color": "purple"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Infografik vergleicht Tetrodotoxin mit Zyankali.",
+     "text": "Dieses Gift ist tausendmal tödlicher als normales Zyankali.",
+     "image": "Comparison chart of toxic compounds",
+     "who": [],
+     "place": "underwater",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "graphic",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "tausendmal tödlicher"
+     ],
+     "overlay": null,
+     "graphic": {
+      "type": "compare",
+      "left": "ZYANKALI",
+      "right": "KUGELFISCH",
+      "value": "1x",
+      "sub": "1000x"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Restaurant-Teller mit edel zubereitetem Fugu-Fisch.",
+     "text": "In Japan gilt der Fisch zubereitet als Fugu dennoch als Luxus-Essen.",
+     "image": "Fancy Japanese dish served on a plate",
+     "who": [],
+     "place": "restaurant",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "table"
+     ],
+     "actors": [],
+     "crowd": "walk",
+     "mood": "calm",
+     "shot": "insert",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "Luxus-Essen"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "JAPAN · FUGU"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Koch schneidet extrem vorsichtig den Fisch.",
+     "text": "Nur speziell ausgebildete Köche dürfen ihn nach Jahrelangem Training servieren.",
+     "image": "Chef with apron carefully cutting fish in restaurant kitchen",
+     "who": [],
+     "place": "kitchen",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "table"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "event",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Jahrelangem Training"
+     ],
+     "overlay": {
+      "type": "checklist",
+      "title": "FUGU LIZENZ",
+      "items": [
+       [
+        "3 Jahre Ausbildung",
+        true
+       ],
+       [
+        "Schwere Prüfung",
+        true
+       ]
+      ]
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Gast schaut skeptisch auf sein Essen.",
+     "text": "Ein einziger falscher Schnitt des Kochs führt zu Lähmungen.",
+     "image": "Restaurant guest looking nervous at fish dish",
+     "who": [
+      "du"
+     ],
+     "place": "restaurant",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "table"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "tremble",
+       "emotion": "worried",
+       "emote": "sweat",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Lähmungen"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Grafik zeigt das Verlangen zu atmen stoppt.",
+     "text": "Am Ende setzt die Atmung bei vollem Bewusstsein aus.",
+     "image": "Anatomy graphic of lungs with red warning sign",
+     "who": [],
+     "place": "hospital",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "herz"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "panic",
+     "shot": "graphic",
+     "camera": "still",
+     "sfx": "boom",
+     "highlight": [
+      "Atmung setzt aus"
+     ],
+     "overlay": null,
+     "graphic": {
+      "type": "pulse",
+      "value": "0",
+      "label": "ATEMSTILLSTAND"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Gegengift-Spritzen-Icon ist durchgestrichen.",
+     "text": "Es gibt bis heute kein echtes Gegengift gegen Tetrodotoxin.",
+     "image": "Red stop sign over medicine bottle",
+     "who": [],
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "event",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "kein echtes Gegengift"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "KEIN GEGENGIFT",
+      "color": "red"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Hauptfigur zeigt auf eine Übersicht der Tiere.",
+     "text": "Überlege dir also genau, welches süße Tier du streichelst. Denn es gibt.",
+     "image": "Woman points to graphics of cute animals with cautionary expression",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "idea",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "whoosh",
+     "highlight": [
+      "streichelst"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "schnabeltier",
+   "pfeilgiftfrosch",
+   "giftsporn"
+  ],
+  "title": "Tödlich niedlich: Diese 3 Tiere solltest du nie streicheln",
+  "created": 1795104904.1116922
  }
 }
