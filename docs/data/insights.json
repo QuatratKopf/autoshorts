@@ -1,10 +1,19 @@
 {
- "updated": 1795095220.3418667,
+ "updated": 1795097086.6933033,
  "enough": true,
  "counted": 25,
  "total": 27,
  "needed": 6,
  "categories": [
+  {
+   "slug": "tiere",
+   "name": "🐾 Tierwelt",
+   "n": 2,
+   "avg_views": 1810,
+   "avg_likes": 40.0,
+   "like_rate": 2.21,
+   "avg_score": 2446
+  },
   {
    "slug": "storys",
    "name": "🔥 Spannende Storys",
@@ -15,22 +24,13 @@
    "avg_score": 2444
   },
   {
-   "slug": "tiere",
-   "name": "🐾 Tierwelt",
-   "n": 2,
-   "avg_views": 1810,
-   "avg_likes": 40.0,
-   "like_rate": 2.21,
-   "avg_score": 2444
-  },
-  {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 3,
-   "avg_views": 1751,
+   "avg_views": 1750,
    "avg_likes": 42.3,
    "like_rate": 2.42,
-   "avg_score": 2409
+   "avg_score": 2408
   },
   {
    "slug": "fakten",
@@ -45,10 +45,10 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
-   "avg_views": 1773,
+   "avg_views": 1774,
    "avg_likes": 38.5,
    "like_rate": 2.17,
-   "avg_score": 2366
+   "avg_score": 2367
   },
   {
    "slug": "whatif",
@@ -64,9 +64,9 @@
    "name": "🎵 Musik-Kugel",
    "n": 2,
    "avg_views": 1673,
-   "avg_likes": 10.5,
-   "like_rate": 0.63,
-   "avg_score": 1876
+   "avg_likes": 11.5,
+   "like_rate": 0.69,
+   "avg_score": 1890
   }
  ],
  "weights": {
@@ -77,37 +77,37 @@
   "tiere": 1.04,
   "whatif": 1.0,
   "comedy": 1.03,
-  "musik": 0.8,
+  "musik": 0.81,
   "vergleich": 1.2,
   "motivation": 1.2,
   "liebe": 1.2,
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1656 Aufrufe, 3.17 % Likes).",
+  "Stärkste Kategorie: 🐾 Tierwelt (Ø 1810 Aufrufe, 2.21 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1673 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2486 zu 705 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2488 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
  ],
  "words_good": [
   "gänsehaut"
  ],
  "words_bad": [
-  "lied",
   "erkennst",
-  "bekanntes",
-  "remix"
+  "lied",
+  "remix",
+  "bekanntes"
  ],
  "top": [
   {
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2553,
+   "views": 2554,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3393
+   "score": 3394
   },
   {
    "id": 77,
@@ -123,11 +123,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 2047,
+   "views": 2048,
    "likes": 68,
    "comments": 0,
    "shares": 0,
-   "score": 3067
+   "score": 3068
   },
   {
    "id": 120,
