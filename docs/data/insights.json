@@ -1,19 +1,10 @@
 {
- "updated": 1795083869.9510877,
+ "updated": 1795085749.3135405,
  "enough": true,
  "counted": 24,
  "total": 26,
  "needed": 6,
  "categories": [
-  {
-   "slug": "storys",
-   "name": "🔥 Spannende Storys",
-   "n": 2,
-   "avg_views": 1656,
-   "avg_likes": 52.5,
-   "like_rate": 3.17,
-   "avg_score": 2444
-  },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
@@ -21,6 +12,15 @@
    "avg_views": 1810,
    "avg_likes": 40.0,
    "like_rate": 2.21,
+   "avg_score": 2446
+  },
+  {
+   "slug": "storys",
+   "name": "🔥 Spannende Storys",
+   "n": 2,
+   "avg_views": 1656,
+   "avg_likes": 52.5,
+   "like_rate": 3.17,
    "avg_score": 2444
   },
   {
@@ -74,7 +74,7 @@
   "grusel": 1.2,
   "storys": 1.04,
   "mysterien": 1.01,
-  "tiere": 1.04,
+  "tiere": 1.05,
   "whatif": 1.0,
   "comedy": 1.03,
   "musik": 0.8,
@@ -83,10 +83,10 @@
   "liebe": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1656 Aufrufe, 3.17 % Likes).",
+  "Stärkste Kategorie: 🐾 Tierwelt (Ø 1810 Aufrufe, 2.21 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1673 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2489 zu 705 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2508 zu 2003 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2509 zu 2003 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
  ],
  "words_good": [
@@ -94,9 +94,9 @@
  ],
  "words_bad": [
   "erkennst",
+  "remix",
   "lied",
-  "bekanntes",
-  "remix"
+  "bekanntes"
  ],
  "top": [
   {
