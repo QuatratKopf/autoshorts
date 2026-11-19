@@ -1,0 +1,578 @@
+{
+ "title": "Süß, aber giftig: Diese 3 Tiere fasst du besser nie an",
+ "scenes": [
+  {
+   "text": "Drei Kuscheltiere, die tödlich giftig sind.",
+   "see": "Drei Kuscheltiere sitzen im Gras, aber sie sind gefährlich.",
+   "place": "river",
+   "backdrop": {
+    "sky": "day",
+    "ground": "sand",
+    "elements": [
+     "river"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier1",
+     "kind": "frog",
+     "hero": true,
+     "_ksz": 0.8,
+     "pos": 200,
+     "action": "hop",
+     "emotion": "",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "speaks": false
+    },
+    {
+     "id": "_tier2",
+     "kind": "platypus",
+     "hero": true,
+     "_ksz": 0.95,
+     "pos": 820,
+     "action": "idle",
+     "emotion": "",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "left",
+     "speaks": false
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "stamp",
+    "text": "TÖDLICH",
+    "color": "red"
+   }
+  },
+  {
+   "text": "Und das Gift der Nummer drei schlägt jedes Zyankali.",
+   "see": "Eine giftige Kreatur zeigt sich bedrohlich im Bild.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "idle",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried",
+     "kind": "fish",
+     "hold": "",
+     "emote": ""
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "NUMMER DREI"
+   }
+  },
+  {
+   "text": "Nummer eins, der Pfeilgiftfrosch aus dem Regenwald in Kolumbien, ist knallgelb.",
+   "see": "Ein knallgelber Pfeilgiftfrosch sitzt im Regenwald.",
+   "place": "forest",
+   "backdrop": {
+    "elements": [
+     "forest"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "frog",
+     "hero": true,
+     "pos": "center",
+     "action": "idle",
+     "emotion": "",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "speaks": false
+    }
+   ],
+   "mood": "calns",
+   "overlay": {
+    "type": "tag",
+    "text": "KOLUMBIEN"
+   }
+  },
+  {
+   "text": "Er ist so klein, dass er auf deine Handfläche passt.",
+   "see": "Du hältst den winzigen Frosch auf deiner Handfläche.",
+   "place": "forest",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "frog",
+     "hero": true,
+     "pos": "center",
+     "action": "idle",
+     "emotion": "",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "left",
+     "speaks": false,
+     "_ksz": 0.75
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Das Gift eines einzigen Pfeilgiftfroschs würde für rund zehn Menschen reichen.",
+   "see": "Eine Grafik zeigt die Anzahl von zehn Menschen.",
+   "place": "forest",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "frog",
+     "hero": true,
+     "pos": "center",
+     "action": "idle",
+     "emotion": "",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "speaks": false
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "counter",
+    "label": "MENSCHEN",
+    "value": 10
+   }
+  },
+  {
+   "text": "Es sitzt direkt in seiner Haut.",
+   "see": "Das Gift funkelt auf der Haut des Frosches.",
+   "place": "forest",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "frog",
+     "hero": true,
+     "pos": "center",
+     "action": "hop",
+     "emotion": "",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "left",
+     "speaks": false
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Die grelle Farbe warnt alle Fressfeinde im Dschungel.",
+   "see": "Die grelle Farbe warnt Fressfeinde im Dschungel.",
+   "place": "forest",
+   "backdrop": {
+    "elements": [
+     "forest"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "look_around",
+     "emotion": "worried",
+     "pos": "center",
+     "emote": "?"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Früher bestrichen Jäger damit ihre Blasrohr-Pfeile, daher der Name.",
+   "see": "Jäger nutzen Blasrohr-Pfeile im Regenwald.",
+   "place": "forest",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "look_around",
+     "emotion": "",
+     "pos": "center",
+     "emote": "?"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Das Gift stammt aus seiner Nahrung.",
+   "see": "Der Frosch frisst Insekten in seiner Umgebung.",
+   "place": "forest",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "think",
+     "emotion": "",
+     "pos": "center",
+     "emote": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Im Terrarium aufgezogene Frösche sind dagegen völlig harmlos.",
+   "see": "Ein Frosch sitzt sicher im Terrarium.",
+   "place": "forest",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "frog",
+     "hero": true,
+     "pos": "center",
+     "action": "idle",
+     "emotion": "",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "speaks": false
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "stamp",
+    "text": "HARMLOS",
+    "color": "green"
+   }
+  },
+  {
+   "text": "Nummer zwei ist das Schnabeltier aus Australien.",
+   "see": "Ein Schnabeltier schwimmt im Fluss in Australien.",
+   "place": "river",
+   "backdrop": {
+    "sky": "day",
+    "ground": "sand",
+    "elements": [
+     "river"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "platypus",
+     "hero": true,
+     "pos": "center",
+     "action": "idle",
+     "emotion": "",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "speaks": false
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "AUSTRALIEN"
+   }
+  },
+  {
+   "text": "Es sieht aus wie ein Kuscheltier mit Entenschnabel.",
+   "see": "Das Schnabeltier zeigt seinen markanten Entenschnabel.",
+   "place": "river",
+   "backdrop": {
+    "sky": "day",
+    "ground": "sand",
+    "elements": [
+     "river"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "platypus",
+     "hero": true,
+     "pos": "center",
+     "action": "idle",
+     "emotion": "",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "left",
+     "speaks": false
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Nur die Männchen tragen an jedem Hinterbein einen Giftsporn.",
+   "see": "Das Männchen zeigt den Giftsporn am Hinterbein.",
+   "place": "river",
+   "backdrop": {
+    "sky": "day",
+    "ground": "sand",
+    "elements": [
+     "river"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "platypus",
+     "hero": true,
+     "pos": "center",
+     "action": "spur",
+     "emotion": "",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "speaks": false
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Für Menschen ist das Gift nicht tödlich, aber extrem schmerzhaft.",
+   "see": "Du zuckst schmerzhaft zusammen.",
+   "place": "river",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "cower",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense"
+  },
+  {
+   "text": "Die Schmerzen können sogar Tage bis Wochen anhalten.",
+   "see": "Ein Kalenderblatt zeigt vergehende Tage.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "WOCHENLANG"
+   }
+  },
+  {
+   "text": "In einem dokumentierten Fall half nicht einmal starkes Morphin.",
+   "see": "Medizinische Geräte piepen im Krankenhaus.",
+   "place": "hospital",
+   "time": "day",
+   "shot": "event",
+   "mood": "tense",
+   "crowd": "worried"
+  },
+  {
+   "text": "Nummer drei ist der Kugelfisch.",
+   "see": "Ein Kugelfisch schwimmt im klaren Wasser.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "puffer",
+     "hero": true,
+     "pos": "center",
+     "action": "idle",
+     "emotion": "",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "speaks": false
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "NUMMER DREI"
+   }
+  },
+  {
+   "text": "Bei Gefahr bläst sich der Kugelfisch sofort zur Stachelkugel auf.",
+   "see": "Der Kugelfisch bläst sich blitzschnell zur Stachelkugel auf.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "puffer",
+     "hero": true,
+     "pos": "center",
+     "action": "puff",
+     "emotion": "",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "speaks": false
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "stamp",
+    "text": "GEFAHR",
+    "color": "orange"
+   }
+  },
+  {
+   "text": "In seiner Leber und Haut steckt das Nervengift Tetrodotoxin.",
+   "see": "Das Nervengift sitzt in Leber und Haut.",
+   "place": "underwater",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "puffer",
+     "hero": true,
+     "pos": "center",
+     "action": "puff",
+     "emotion": "",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "left",
+     "speaks": false
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Das ist bis zu tausendzweihundertmal giftiger als Zyankali.",
+   "see": "Eine Grafik zeigt die enorme Giftigkeit.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "stamp",
+    "text": "GIFTIG",
+    "color": "purple"
+   }
+  },
+  {
+   "text": "Ein passendes Gegengift gibt es bis heute nicht.",
+   "see": "Ein rotes Stopp-Zeichen leuchtet auf.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "talk",
+     "speaks": true
+    }
+   ],
+   "shot": "close",
+   "mood": "tense"
+  },
+  {
+   "text": "Trotzdem gilt der Kugelfisch in Japan als absolute Delikatesse.",
+   "see": "Ein traditionelles japanisches Restaurant serviert Speisen.",
+   "place": "restaurant",
+   "time": "day",
+   "shot": "event",
+   "mood": "calm",
+   "crowd": "walk",
+   "overlay": {
+    "type": "tag",
+    "text": "JAPAN"
+   }
+  },
+  {
+   "text": "Nur Köche mit spezieller Lizenz dürfen ihn nach jahrelanger Ausbildung zubereiten.",
+   "see": "Ein Koch bereitet den Fisch mit großer Sorgfalt zu.",
+   "place": "kitchen",
+   "time": "day",
+   "actors": [
+    {
+     "id": "_koch",
+     "action": "talk",
+     "emotion": "worried",
+     "emote": "",
+     "pos": "center",
+     "facing": "right",
+     "speaks": false,
+     "say": "",
+     "hold": "",
+     "look": {
+      "shirt": "weiß",
+      "hat": "chef",
+      "hair": "kurz",
+      "hair_color": "schwarz"
+     }
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "NUR MIT LIZENZ"
+   }
+  },
+  {
+   "text": "Welches der drei hättest du gestreichelt?",
+   "see": "Du schaust fragend in die Kamera.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  }
+ ]
+}
