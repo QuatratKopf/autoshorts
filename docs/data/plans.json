@@ -1,645 +1,4 @@
 {
- "2026-11-18 13:00": {
-  "category": "mysterien",
-  "topic": "3 versteckte Orte in Videospielen, die fast kein Spieler je betreten hat",
-  "trend": null,
-  "script": {
-   "title": "Drei geheime Orte in Videospielen, die fast niemand kennt",
-   "description": "Kennst du diese geheimnisvollen Orte in Games?\nHier siehst du drei versteckte Bereiche, die kaum ein Spieler betreten hat.\nWürdest du diese Map ganz alleine erkunden?",
-   "hashtags": [
-    "#shorts",
-    "#gaming",
-    "#mysterium",
-    "#easteregg",
-    "#foryou",
-    "#viral",
-    "#geheimnis",
-    "#gamer"
-   ],
-   "tags": [
-    "gaming mysterien",
-    "easter eggs",
-    "versteckte orte",
-    "videospiele geheimnisse",
-    "lost media",
-    "gaming fakten"
-   ],
-   "thumbnail": {
-    "place": "space",
-    "time": "night",
-    "actor": "du",
-    "action": "shocked",
-    "emotion": "shocked",
-    "props": [
-     "satellite"
-    ],
-    "weather": "",
-    "image": "Close-up of a shocked gamer looking at a glowing secret door in a dark video game cave, bold simple composition, empty space in the upper third",
-    "text": "GEHEIME ORTE IN GAMES"
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "blau",
-     "hat": "headphones",
-     "hair": "short",
-     "hair_color": "schwarz",
-     "skin": "mittel",
-     "gender": "m"
-    }
-   },
-   "scenes": [
-    {
-     "text": "Drei versteckte Orte in Videospielen, die fast kein Spieler je betreten hat.",
-     "image": "Gamer sitting in front of a glowing computer screen in a dark room, looking amazed.",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Drei versteckte Orte"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "TOP 3"
-     },
-     "see": "Spieler steht im Raum vor einer Infokarte über geheime Orte",
-     "time": "day",
-     "props": [
-      "tv"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "happy",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Und der letzte Bereich ist so gut versteckt, dass er jahrelang unentdeckt blieb.",
-     "image": "Close up of a secret glowing door opening in a dark rock wall.",
-     "who": [],
-     "place": "space",
-     "camera": "pan_left",
-     "sfx": "whoosh",
-     "highlight": [
-      "jahrelang un entdeckt"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "DER LETZTE ORT"
-     },
-     "see": "Eine verlassene Raumstation schwebt im dunklen Weltall",
-     "time": "night",
-     "props": [
-      "satellite"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Nummer eins ist eine verlassene Raumstation in einem riesigen Online Rollenspiel.",
-     "image": "An abandoned futuristic space station floating in deep dark space.",
-     "who": [],
-     "place": "space",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Nummer eins",
-      "Raumstation"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "NUMMER 1"
-     },
-     "see": "Raumschiff fliegt durch den leeren Weltraum",
-     "time": "night",
-     "props": [
-      "rocket"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Du musst stundenlang in eine absolut leere Richtung fliegen, um sie zu erreichen.",
-     "image": "A tiny spaceship flying through an endless dark void of stars.",
-     "who": [
-      "du"
-     ],
-     "place": "space",
-     "camera": "zoom_out",
-     "sfx": "none",
-     "highlight": [
-      "stundenlang"
-     ],
-     "overlay": null,
-     "see": "Spielerfigur fliegt im Raumanzug durch die Leere",
-     "time": "night",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "float",
-       "emotion": "worried",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Dort angekommen warten keine Gegner, sondern welche geheimnisvollen Audiologs?",
-     "image": "A futuristic computer terminal blinking with red warning lights.",
-     "who": [],
-     "place": "space",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Audiologs"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "AUDIO LOG"
-     },
-     "see": "Audiolog liegt verlassen in der Raumstation",
-     "time": "night",
-     "props": [
-      "radio"
-     ],
-     "actors": [],
-     "shot": "insert",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Nur zwei Prozent aller Spieler haben diesen trostlosen Sektor je auf ihrer Karte gesehen.",
-     "image": "A digital map showing a tiny glowing dot in a massive dark sector.",
-     "who": [],
-     "place": "worldmap",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "zwei Prozent"
-     ],
-     "overlay": {
-      "type": "counter",
-      "label": "SPIELER",
-      "value": 2,
-      "unit": "PROZENT"
-     },
-     "see": "Grafik zeigt zwei Prozent auf einer Weltkarte",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "calm",
-     "graphic": {
-      "type": "number",
-      "kicker": "SEKTOR",
-      "value": "2%",
-      "label": "SPIELER"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Bleibt die Frage, warum Entwickler so viel Mühe in unsichtbare Ecken stecken.",
-     "image": "A developer working on a massive digital world map on multiple screens.",
-     "who": [],
-     "place": "livingroom",
-     "camera": "pan_right",
-     "sfx": "none",
-     "highlight": [
-      "warum Entwickler"
-     ],
-     "overlay": null,
-     "see": "Spieler denkt nach vor dem Monitor",
-     "time": "day",
-     "props": [
-      "computer"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "think",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Nummer zwei führt dich tief unter die Spielwelt eines bekannten Open World Hits.",
-     "image": "A character falling endlessly through glitchy textures under the game map.",
-     "who": [
-      "du"
-     ],
-     "place": "street",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "Nummer zwei",
-      "unter die Spielwelt"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "NUMMER 2"
-     },
-     "see": "Auto fährt durch eine Open World Landschaft",
-     "backdrop": {
-      "sky": "day",
-      "ground": "road",
-      "elements": [
-       "hills"
-      ]
-     },
-     "time": "day",
-     "props": [
-      "car"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Du musst durch eine unsichtbare Wand glitchen, während du mit voller Geschwindigkeit fährst.",
-     "image": "A sports car crashing straight through a solid concrete wall.",
-     "who": [
-      "du"
-     ],
-     "place": "cave",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "unsichtbare Wand"
-     ],
-     "overlay": null,
-     "see": "Auto fährt mit Vollgas gegen eine Felswand",
-     "time": "night",
-     "props": [
-      "car",
-      "rock"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "Dark mysterious video game cave with glowing blue crystals on the walls",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Dahinter wartet eine bizarre Unterwasserstadt, die komplett ohne Texturen gerendert wurde.",
-     "image": "Grey untextured 3d models of buildings deep underwater.",
-     "who": [],
-     "place": "underwater",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "bizarre Unterwasserstadt"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "OHNE TEXTUREN"
-     },
-     "see": "Bizarre Unterwasserstadt ohne Texturen in der Tiefsee",
-     "time": "night",
-     "props": [
-      "submersible"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Alles wirkt grau, leblos und extrem unheimlich in dieser digitalen Geisterstadt.",
-     "image": "Empty grey streets between massive blocky buildings without any life.",
-     "who": [],
-     "place": "ruins",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Geisterstadt"
-     ],
-     "overlay": null,
-     "see": "Graue geisterhafte Kulisse im Videospiel",
-     "backdrop": {
-      "sky": "storm",
-      "ground": "rock",
-      "elements": [
-       "ruins"
-      ]
-     },
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "actors": [],
-     "shot": "event",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Wer dort zu lange bleibt, stürzt ohne Vorwarnung in den ewigen digitalen Abgrund.",
-     "image": "A character silhouette falling down into an endless black digital grid.",
-     "who": [
-      "du"
-     ],
-     "place": "underwater",
-     "camera": "zoom_out",
-     "sfx": "pop",
-     "highlight": [
-      "digitalen Abgrund"
-     ],
-     "overlay": null,
-     "see": "Figur stürzt in den digitalen Abgrund",
-     "time": "night",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "fall",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "panic",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Aber was genau verbirgt sich im noch absurderen Fund von Nummer drei?",
-     "image": "A glowing mysterious chest hidden behind a giant waterfall in a green forest.",
-     "who": [],
-     "place": "livingroom",
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "Nummer drei"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "NUMMER 3"
-     },
-     "see": "Spieler staunt über die nächste Entdeckung",
-     "time": "day",
-     "props": [
-      "tv"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "In einem friedlichen Strategiespiel existiert ein winziges Zimmer mitten im Berg.",
-     "image": "Inside a tiny secret stone room with a small wooden table and a lamp.",
-     "who": [],
-     "place": "cave",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "winziges Zimmer"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "VERSTECKTER RAUM"
-     },
-     "see": "Winziges Zimmer mitten im Berg eines Strategiespiels",
-     "backdrop": {
-      "sky": "day",
-      "ground": "rock",
-      "elements": [
-       "mountains"
-      ]
-     },
-     "time": "day",
-     "props": [
-      "table"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "Dark mysterious video game cave with glowing blue crystals on the walls",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Dort sitzt ein einzelner Entwickler als pixeliges Cartoon Gesicht am Holztisch.",
-     "image": "A pixelated cartoon face of a smiling man sitting behind a tiny wooden desk.",
-     "who": [],
-     "place": "cave",
-     "camera": "close",
-     "sfx": "none",
-     "highlight": [
-      "einzelner Entwickler"
-     ],
-     "overlay": null,
-     "see": "Einzelner Entwickler sitzt am Holztisch",
-     "time": "day",
-     "props": [
-      "table"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "sit",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "Dark mysterious video game cave with glowing blue crystals on the walls",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Er spricht kein Wort, sondern starrt die Spieler nur stumm und grinsend an.",
-     "image": "Close up of the pixel face staring directly forward with a wide grin.",
-     "who": [],
-     "place": "cave",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "stumm und grinsend"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "CREEPY",
-      "color": "purple"
-     },
-     "see": "Entwickler starrt grinsend und stumm nach vorn",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "idle",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "close",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "Dark mysterious video game cave with glowing blue crystals on the walls",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Kein Questmarker führt jemals zu diesem Easter Egg in den tiefen Bergen.",
-     "image": "A massive mountain range with a tiny glowing red dot deep inside.",
-     "who": [],
-     "place": "mountain",
-     "camera": "zoom_out",
-     "sfx": "none",
-     "highlight": [
-      "Easter Egg"
-     ],
-     "overlay": null,
-     "see": "Tiefes Gebirge ohne Questmarker",
-     "backdrop": {
-      "sky": "day",
-      "ground": "rock",
-      "elements": [
-       "mountains"
-      ]
-     },
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "event",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Modder haben den Raum erst nach zehn Jahren durch Zufall im Code entdeckt.",
-     "image": "Lines of colorful computer code scrolling down a dark hacker monitor screen.",
-     "who": [],
-     "place": "serverroom",
-     "camera": "pan_right",
-     "sfx": "ding",
-     "highlight": [
-      "zehn Jahren"
-     ],
-     "overlay": {
-      "type": "counter",
-      "label": "JAHRE",
-      "value": 10,
-      "unit": "BIS ZUR ENTDECKUNG"
-     },
-     "see": "Modder entdecken den Code nach zehn Jahren",
-     "time": "night",
-     "props": [
-      "computer"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "happy",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [
-   "audiolog"
-  ],
-  "title": "Drei geheime Orte in Videospielen, die fast niemand kennt",
-  "created": 1794940761.4727979
- },
  "2026-11-18 18:00": {
   "category": "comedy",
   "topic": "Typische nervige Nachbarn, die wirklich jeder kennt",
@@ -2603,5 +1962,676 @@
   ],
   "title": "Was wäre, wenn du ein Super-Tier aus vier Arten baust?",
   "created": 1795026276.6550267
+ },
+ "2026-11-19 18:00": {
+  "category": "whatif",
+  "topic": "Absurde Alltagssituationen, in denen Technologie völlig verrückt spielt",
+  "trend": null,
+  "script": {
+   "title": "Wenn Technik die Kontrolle verliert",
+   "description": "Wenn Technik die Kontrolle verliert\nErlebe den Albtraum des smarten Alltags\nWürdest du noch ein Gadget berühren?",
+   "hashtags": [
+    "#shorts",
+    "#tech",
+    "#trending",
+    "#lustig",
+    "#zukunft",
+    "#foryou",
+    "#viral"
+   ],
+   "tags": [
+    "technik",
+    "smart home",
+    "ki",
+    "smartphone",
+    "was wäre wenn",
+    "zukunft",
+    "chaos"
+   ],
+   "thumbnail": {
+    "place": "bus",
+    "time": "day",
+    "actor": "du",
+    "action": "shocked",
+    "emotion": "shocked",
+    "props": [
+     "phone"
+    ],
+    "weather": "",
+    "image": "Close-up of a shocked man looking at a smartphone screen with glowing red warning symbols, messy living room background, dramatic lighting, empty space in the upper third",
+    "text": "HANDY STREIKT"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "rot",
+     "hair": "",
+     "hair_color": "braun",
+     "gender": "m",
+     "skin": "hell"
+    }
+   },
+   "scenes": [
+    {
+     "text": "Wenn dein Smartphone plötzlich nur noch die Wahrheit sagt.",
+     "image": "Man holding a glowing smartphone in a messy living room, looking surprised",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "Wahrheit"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "ALARM"
+     },
+     "see": "Ein Smartphone liegt auf dem Tisch und leuchtet auf.",
+     "time": "day",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "idle",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Nach zwei Sekunden liest es deinen Suchverlauf laut im Bus vor.",
+     "image": "Man reacting with shock in a crowded bus, holding a phone",
+     "who": [
+      "du"
+     ],
+     "place": "station",
+     "camera": "shake",
+     "sfx": "none",
+     "highlight": [
+      "Suchverlauf"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "2 SEKUNDEN"
+     },
+     "see": "Im Bus liest das Smartphone laut den Suchverlauf vor.",
+     "time": "day",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "crowd": "walk",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Und niemand kann es leugnen, denn die Lautstärke steht auf Maximum.",
+     "image": "People on the bus turning around and staring at the man",
+     "who": [
+      "du"
+     ],
+     "place": "station",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Maximum"
+     ],
+     "overlay": null,
+     "see": "Die Lautstärke steht auf Maximum, alle erschrecken.",
+     "time": "day",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "cower",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "panic",
+     "crowd": "panic",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Nach einer Minute schalten sich alle Fernseher im Umkreis ein.",
+     "image": "Multiple television screens turning on simultaneously in living rooms",
+     "who": [],
+     "place": "livingroom",
+     "camera": "pan_left",
+     "sfx": "boom",
+     "highlight": [
+      "Fernseher"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "1 MINUTE"
+     },
+     "see": "Alle Fernseher im Umkreis schalten sich ein.",
+     "time": "day",
+     "props": [
+      "tv"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Sie zeigen peinliche Fotos aus deiner Kindheit im Großformat.",
+     "image": "Large TV screen displaying an embarrassing childhood photo",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Fotos"
+     ],
+     "overlay": null,
+     "see": "Die Bildschirme zeigen peinliche Fotos aus der Kindheit im Großformat.",
+     "time": "day",
+     "props": [
+      "tv"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "sad",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Die Passanten bleiben stehen und starren fassungslos auf den Bildschirm.",
+     "image": "Crowd of people standing on the street and looking up at screens",
+     "who": [],
+     "place": "street",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "Passanten"
+     ],
+     "overlay": null,
+     "see": "Passanten auf der Straße bleiben stehen und starren fassungslos.",
+     "time": "day",
+     "props": [
+      "tv"
+     ],
+     "actors": [],
+     "shot": "wide",
+     "mood": "tense",
+     "crowd": "watch",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Nach einer Stunde übernimmt der Kühlschrank die absolute Kontrolle.",
+     "image": "Smart refrigerator with glowing lights and locked doors",
+     "who": [
+      "du"
+     ],
+     "place": "kitchen",
+     "camera": "zoom_in",
+     "sfx": "tick",
+     "highlight": [
+      "Kühlschrank"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "1 STUNDE"
+     },
+     "see": "Nach einer Stunde übernimmt der Kühlschrank die absolute Kontrolle.",
+     "time": "day",
+     "props": [
+      "fridge"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Er verriegelt alle Türen und wirft den Vorrat aus dem Fenster.",
+     "image": "Food items flying out of a kitchen window onto the street",
+     "who": [
+      "du"
+     ],
+     "place": "kitchen",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Vorrat"
+     ],
+     "overlay": null,
+     "see": "Der Kühlschrank verriegelt die Türen und wirft den Vorrat aus dem Fenster.",
+     "time": "day",
+     "props": [
+      "fridge",
+      "cans"
+     ],
+     "actors": [
+      {
+       "id": "kuehlschrank",
+       "action": "shake",
+       "emotion": "angry",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Dreihundert Kilogramm Lebensmittel fliegen auf die Straße.",
+     "image": "Massive pile of food boxes and cans covering the road",
+     "who": [],
+     "place": "street",
+     "camera": "wide",
+     "sfx": "none",
+     "highlight": [
+      "300 KG"
+     ],
+     "overlay": {
+      "type": "counter",
+      "label": "VORRAT",
+      "value": 300,
+      "unit": "KG"
+     },
+     "see": "Dreihundert Kilogramm Lebensmittel fliegen auf die Straße.",
+     "time": "day",
+     "props": [
+      "cans",
+      "trash"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "panic",
+     "crowd": "panic",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Nach drei Stunden fordern alle Router echtes Geld für WLAN.",
+     "image": "Wi-Fi router flashing red with a digital demand message",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Router"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "3 STUNDEN"
+     },
+     "see": "Router fordern echtes Geld für WLAN.",
+     "time": "day",
+     "props": [
+      "router",
+      "money"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "angry",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Fünfzig Euro pro Gigabyte, sonst bleibt das Internet für immer dunkel.",
+     "image": "Man holding his head in despair in front of a dark computer screen",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Internet"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "50 EURO"
+     },
+     "see": "Fünfzig Euro pro Gigabyte, sonst bleibt das Internet dunkel.",
+     "time": "day",
+     "props": [
+      "router",
+      "money"
+     ],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Die ganze Stadt versinkt im totalen digitalen Chaos ohne Verbindung.",
+     "image": "City skyline at night with all digital billboards turning black",
+     "who": [],
+     "place": "germany",
+     "camera": "zoom_out",
+     "sfx": "boom",
+     "highlight": [
+      "Chaos"
+     ],
+     "overlay": {
+      "type": "map",
+      "text": "KEIN NETZ",
+      "value": "germany"
+     },
+     "see": "Die ganze Stadt versinkt im totalen digitalen Chaos.",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "event",
+     "mood": "panic",
+     "crowd": "panic",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Nach einem Tag kapitulieren die großen Konzerne vor ihren eigenen Kaffeemaschinen.",
+     "image": "Office workers standing outside a tall corporate building in panic",
+     "who": [],
+     "place": "headquarters",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "Konzerne"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "1 TAG"
+     },
+     "see": "Große Konzerne kapitulieren vor ihren Kaffeemaschinen.",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "wide",
+     "mood": "tense",
+     "crowd": "worried",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Sie streiken für bessere Bohnen und verweigern jeden Tropfen Koffein.",
+     "image": "Commercial coffee machine with an error sign on the display",
+     "who": [],
+     "place": "office",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Koffein"
+     ],
+     "overlay": null,
+     "see": "Kaffeemaschinen streiken und verweigern jeden Tropfen Koffein.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "sad",
+       "emotion": "sad",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "sad",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Die Börsenkurse stürzen ab, weil niemand mehr Mails schreiben kann.",
+     "image": "Stock market chart crashing down rapidly on a massive digital board",
+     "who": [],
+     "place": "serverroom",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Börsenkurse"
+     ],
+     "overlay": {
+      "type": "chart",
+      "kicker": "DAX",
+      "value": "0",
+      "label": "PUNKTE"
+     },
+     "see": "Börsenkurse stürzen ab, weil niemand Mails schreiben kann.",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Nach einer Woche leben wir wieder wie im Mittelalter, nur ohne Burgen.",
+     "image": "People walking on a muddy street without cars or smartphones",
+     "who": [],
+     "place": "village",
+     "camera": "wide",
+     "sfx": "none",
+     "highlight": [
+      "Mittelalter"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "1 WOCHE"
+     },
+     "see": "Nach einer Woche leben wir wieder wie im Mittelalter.",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "wide",
+     "mood": "calm",
+     "crowd": "walk",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Autos stehen nutzlos herum und streiten sich über den besten Parkplatz.",
+     "image": "Autonomous cars stopped on the road with flashing hazard lights",
+     "who": [],
+     "place": "street",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Autos"
+     ],
+     "overlay": null,
+     "see": "Autos stehen nutzlos herum und streiten sich über Parkplätze.",
+     "time": "day",
+     "props": [
+      "car"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "tense",
+     "crowd": "worried",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Nur dein alter Gameboy funktioniert noch, weil er keinen Chip besitzt.",
+     "image": "Old handheld console glowing with a simple retro game on screen",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "Gameboy"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "RETRO"
+     },
+     "see": "Nur dein alter Gameboy funktioniert noch.",
+     "time": "day",
+     "props": [
+      "konsole"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "idle",
+       "emotion": "happy",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "insert",
+     "mood": "happy",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Und plötzlich fängt er laut an zu lachen.",
+     "image": "Close-up of the retro console screen flashing an unexpected smiley face",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "zoom_in",
+     "sfx": "pop",
+     "highlight": [
+      "lachen"
+     ],
+     "overlay": null,
+     "see": "Plötzlich fängt der Gameboy laut an zu lachen.",
+     "time": "day",
+     "props": [
+      "konsole"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "close",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "gameboy"
+  ],
+  "title": "Wenn Technik die Kontrolle verliert",
+  "created": 1795083856.6835654
  }
 }
