@@ -1,5 +1,5 @@
 {
- "updated": 1795121630.975827,
+ "updated": 1795123429.1583703,
  "enough": true,
  "counted": 26,
  "total": 29,
@@ -18,10 +18,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 2,
-   "avg_views": 1828,
-   "avg_likes": 40.0,
-   "like_rate": 2.19,
-   "avg_score": 2464
+   "avg_views": 1834,
+   "avg_likes": 40.5,
+   "like_rate": 2.21,
+   "avg_score": 2476
   },
   {
    "slug": "storys",
@@ -63,10 +63,10 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 2,
-   "avg_views": 1745,
+   "avg_views": 1754,
    "avg_likes": 11.0,
    "like_rate": 0.63,
-   "avg_score": 1955
+   "avg_score": 1964
   }
  ],
  "weights": {
@@ -75,9 +75,9 @@
   "storys": 1.03,
   "mysterien": 1.01,
   "tiere": 1.04,
-  "whatif": 0.99,
+  "whatif": 0.98,
   "comedy": 1.06,
-  "musik": 0.82,
+  "musik": 0.83,
   "vergleich": 1.2,
   "motivation": 1.2,
   "liebe": 1.2,
@@ -85,18 +85,18 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 1840 Aufrufe, 2.42 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1745 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2513 zu 705 Punkte).",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1754 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2515 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
  ],
  "words_good": [
   "gänsehaut"
  ],
  "words_bad": [
-  "remix",
-  "lied",
   "bekanntes",
-  "erkennst"
+  "lied",
+  "erkennst",
+  "remix"
  ],
  "top": [
   {
@@ -140,14 +140,14 @@
    "score": 3016
   },
   {
-   "id": 84,
-   "title": "Was wäre, wenn alle Menschen gleichzeitig nett wären?",
-   "category": "whatif",
-   "views": 2004,
-   "likes": 66,
+   "id": 139,
+   "title": "Dieses winzige Tier ist zäher als ein Löwe",
+   "category": "tiere",
+   "views": 2163,
+   "likes": 54,
    "comments": 0,
-   "shares": 0,
-   "score": 2994
+   "shares": 1,
+   "score": 3013
   }
  ],
  "flop": [
