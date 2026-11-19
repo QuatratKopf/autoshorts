@@ -42,20 +42,20 @@
   "qrsauuc3k"
  ],
  "last_stats": 1795085749.3107965,
- "next_id": 154,
+ "next_id": 155,
  "connected": {
   "youtube": {
    "name": "Wissens Wert 💬",
    "since": "2026-11-10"
   }
  },
- "voice_wps": 2.576,
+ "voice_wps": 2.661,
  "last_trends": 1795083869.9522834,
  "tiktok_handle": "wissens..wert",
  "last_poster": {
   "hero": "whale",
-  "palette": 4,
-  "video": 153
+  "palette": 0,
+  "video": 154
  },
  "cat_credit": {
   "fakten": -0.22999999999999898,
