@@ -1,5 +1,5 @@
 {
- "updated": 1795055263.5647619,
+ "updated": 1795057061.3668282,
  "enough": true,
  "counted": 23,
  "total": 26,
@@ -65,7 +65,7 @@
    "n": 2,
    "avg_views": 1680,
    "avg_likes": 10.5,
-   "like_rate": 0.63,
+   "like_rate": 0.62,
    "avg_score": 1882
   }
  ],
@@ -90,10 +90,10 @@
  ],
  "words_good": [],
  "words_bad": [
-  "remix",
-  "bekanntes",
   "lied",
-  "erkennst"
+  "erkennst",
+  "bekanntes",
+  "remix"
  ],
  "top": [
   {
