@@ -1,8 +1,8 @@
 {
- "updated": 1795114426.2415628,
+ "updated": 1795116229.362397,
  "enough": true,
  "counted": 26,
- "total": 28,
+ "total": 29,
  "needed": 6,
  "categories": [
   {
@@ -93,10 +93,10 @@
   "gänsehaut"
  ],
  "words_bad": [
-  "bekanntes",
-  "erkennst",
+  "lied",
   "remix",
-  "lied"
+  "bekanntes",
+  "erkennst"
  ],
  "top": [
   {
