@@ -1,5 +1,5 @@
 {
- "updated": 1795075065.857908,
+ "updated": 1795076922.1123955,
  "enough": true,
  "counted": 24,
  "total": 26,
@@ -9,10 +9,10 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 2,
-   "avg_views": 1656,
+   "avg_views": 1655,
    "avg_likes": 52.5,
    "like_rate": 3.17,
-   "avg_score": 2444
+   "avg_score": 2442
   },
   {
    "slug": "tiere",
@@ -27,10 +27,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 2,
-   "avg_views": 1756,
+   "avg_views": 1754,
    "avg_likes": 43.0,
    "like_rate": 2.45,
-   "avg_score": 2402
+   "avg_score": 2400
   },
   {
    "slug": "fakten",
@@ -45,10 +45,10 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
-   "avg_views": 1772,
+   "avg_views": 1770,
    "avg_likes": 38.5,
-   "like_rate": 2.17,
-   "avg_score": 2364
+   "like_rate": 2.18,
+   "avg_score": 2362
   },
   {
    "slug": "whatif",
@@ -83,20 +83,20 @@
   "liebe": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1656 Aufrufe, 3.17 % Likes).",
+  "Stärkste Kategorie: 🔥 Spannende Storys (Ø 1655 Aufrufe, 3.17 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1672 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2488 zu 705 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2508 zu 2003 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2507 zu 2003 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
  ],
  "words_good": [
   "gänsehaut"
  ],
  "words_bad": [
-  "lied",
-  "remix",
+  "bekanntes",
   "erkennst",
-  "bekanntes"
+  "lied",
+  "remix"
  ],
  "top": [
   {
@@ -123,21 +123,21 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 2045,
+   "views": 2044,
    "likes": 68,
    "comments": 0,
    "shares": 0,
-   "score": 3065
+   "score": 3064
   },
   {
    "id": 120,
    "title": "Warum du bei Musik Gänsehaut bekommst",
    "category": "fakten",
-   "views": 2341,
+   "views": 2340,
    "likes": 45,
    "comments": 0,
    "shares": 0,
-   "score": 3016
+   "score": 3015
   },
   {
    "id": 84,
