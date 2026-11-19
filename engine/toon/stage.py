@@ -3029,6 +3029,7 @@ CUTE_SKIP_RE = r"frosch im hals|sei kein frosch|\bkoch\b|\bköch|restaurant|\bte
 CUTE_NEXT_RE = (r"^(?:er|sie|es|sein\w*|ihr\w*|dieses? (?:tier\w*|gift|fisch|frosch)|das (?:gift|tier\w*)|der (?:fisch|frosch|winzling)|dabei|damit|sogar|schon|denn|falsch|und (?:er|sie|es|das))\b|"
                 r"\bgift(?:ig|es|sporn\w*|drüse\w*)?\b|\bsporn|\bstachel|\bhaut\b|bläst|aufgeblasen|aufblas")
 CUTE_YOU_RE = r"\b(du|dein\w*|dir|dich|ich|mein\w*|mir|mich|wir|unser\w*|uns|euch|ärzt\w*|arzt|forscher\w*|opfer|patient\w*)\b"   # „zehn Menschen“ als Maß bleibt beim Tier
+CUTE_PALM_RE = r"handfläche|passt (?:\w+ ){0,3}(?:auf|in) (?:deine|eine|die|jede) hand\b|daumennagel|fingerkuppe|kleiner als (?:dein|ein) daumen"
 CUTE_TOUCH_RE = r"berühr|anfass|anfäss|streichel|\bhand\b|\bfinger|hochheb|\bhebst|\bnimmst"
 CUTE_PUFF_RE = r"bläst|aufblas|aufgeblasen|aufpump|pumpt|stachel|stachelkugel|ballon|doppelt so groß|dreimal so groß"
 CUTE_SPUR_RE = r"\bsporn|\bsporen?\b|giftsporn|\bstachel|hinterbein|\bsticht|\bstich\b"
@@ -3042,6 +3043,9 @@ COOK_LOOK = {"shirt": "weiß", "hat": "chef", "hair": "kurz", "hair_color": "sch
 
 def _cooks(scenes):
     for sc in scenes:
+        ov_3 = sc.get("overlay") if isinstance(sc, dict) and isinstance(sc.get("overlay"), dict) else None
+        if ov_3 and str(ov_3.get("type") or "") == "choice" and re.search(r"\b(?:der|die|den|diesen?) drei\b|\bdrei (?:tiere|dinge)", str(sc.get("text") or "").lower()):
+            sc["overlay"] = None                          # „Welches der drei …?“ mit nur zwei Antworten (A FROSCH / B SCHNABELTIER, Video 162)
         if not isinstance(sc, dict) or "actors" not in sc or (sc.get("shot") == "graphic" and graphics.clean(sc.get("graphic"))):
             continue
         low = str(sc.get("text") or "").lower()
@@ -3051,7 +3055,7 @@ def _cooks(scenes):
         if rp != "kitchen":                               # auch „im Restaurant“: der Koch steht in der Küche, nicht zwischen den Gästen
             sc.update(place="kitchen", backdrop=None, time="day")
         hard = bool(re.search(r"falsch|fehler|vorsicht|gefähr|tödlich|\bgift|jahrelang|prüfung|lizenz|training|ausbildung", low))
-        sc.update(actors=[{"id": "_koch", "action": "think" if hard else "talk", "emotion": "worried" if hard else "", "emote": "sweat" if re.search(r"falsch|fehler", low) else "",
+        sc.update(actors=[{"id": "_koch", "action": "talk", "emotion": "worried" if hard else "", "emote": "sweat" if re.search(r"falsch|fehler", low) else "",
                            "pos": "center", "facing": "right", "speaks": False, "say": "", "hold": "", "look": dict(COOK_LOOK)}],
                   crowd="", props=[], float="")
         if sc.get("shot") in ("event", "insert"):
@@ -3067,36 +3071,52 @@ def _cute_animals(scenes, main_id="du"):
     wild = ("forest", "river", "lake", "park", "fields", "mountain", "beach", "savannah", "desert", "custom")
     last = None                                           # (Art, Zuhause, Nummer des Satzes)
     for i, sc in enumerate(scenes):
-        if not isinstance(sc, dict) or "actors" not in sc:
+        if not isinstance(sc, dict):
             continue
         low = str(sc.get("text") or "").lower()
         if sc.get("shot") == "graphic" and graphics.clean(sc.get("graphic")):
             if last:
                 last = (last[0], last[1], i)              # die Zahl gehört noch zum Tier von eben
             continue
+        if "actors" not in sc:
+            sc["actors"] = []
         hit = _cute_named(low)
         if re.search(CUTE_SKIP_RE, low):                  # der Fisch auf dem Teller, der Koch: Sätze über Menschen und Essen bleiben, wie das Drehbuch sie setzt
             last = None
             continue
         follow = False
-        if not hit and last and i - last[2] <= 2 and re.search(CUTE_NEXT_RE, low) \
-                and (not re.search(CUTE_YOU_RE, low) or (re.search(CUTE_TOUCH_RE, low) and last[0] != "puffer")):
+        palm = bool(re.search(CUTE_PALM_RE, low))        # „Er passt auf deine Handfläche“: ein Größenvergleich – das Tier bleibt im Bild, niemand weicht zurück
+        if not hit and last and i - last[2] <= 2 and (re.search(CUTE_NEXT_RE, low) or palm) \
+                and (palm or not re.search(CUTE_YOU_RE, low) or (re.search(CUTE_TOUCH_RE, low) and last[0] != "puffer")):
             hit, follow = (last[0], last[1]), True
+        if not hit and i == 0 and not (sc.get("shot") == "graphic"):   # erstes Bild eines Videos über diese Tiere: die Tiere selbst (Frosch und Schnabeltier am Ufer) – nicht bloß ein Mensch am Fluss
+            land = list(dict.fromkeys(k for s2 in scenes if isinstance(s2, dict) for k in [(_cute_named(str(s2.get("text") or "").lower()) or ("",))[0]] if k in ("frog", "platypus")))
+            if len(land) == 2 and not re.search(CUTE_SKIP_RE, low):
+                sc.update(place="river", backdrop={"sky": "day", "ground": "sand", "elements": ["river"]}, time="day", crowd="", float="", props=[], weather="",
+                          actors=[{"id": "_tier1", "kind": "frog", "hero": True, "_ksz": 0.8, "pos": 200, "action": "hop", "emotion": "", "emote": "", "say": "", "hold": "", "facing": "right", "speaks": False},
+                                  {"id": "_tier2", "kind": "platypus", "hero": True, "_ksz": 0.95, "pos": 820, "action": "idle", "emotion": "", "emote": "", "say": "", "hold": "", "facing": "left", "speaks": False}])
+                if sc.get("shot") in ("event", "insert", "close"):
+                    sc["shot"] = ""
+                sc["_cute"] = "duo"
+                continue
         if not hit:
             last = None
             continue
         kind, home = hit
         rp = places.resolve(backdrop(sc)) if not isinstance(backdrop(sc), dict) else "custom"
         keep = kind != "puffer" and (rp in wild) and not (kind == "platypus" and rp not in ("river", "lake", "custom"))
-        touch = kind != "puffer" and bool(re.search(CUTE_TOUCH_RE, low))
-        emo = "angry" if kind == "puffer" and re.search(CUTE_PUFF_RE, low) else ""
+        touch = kind != "puffer" and bool(re.search(CUTE_TOUCH_RE, low)) and not palm
+        emo = ""
+        ov_c = sc.get("overlay") if isinstance(sc.get("overlay"), dict) else None
         act = {"id": "_tier", "kind": kind, "hero": not touch, "pos": 760 if touch else "center", "action": "idle", "emotion": emo, "emote": "", "say": "",
-               "hold": "", "facing": "left" if (touch or (follow and i - last[2] == 1)) else "right", "speaks": False}
+               "hold": "", "facing": "left" if (touch or (follow and (i - last[2]) % 2 == 1)) else "right", "speaks": False}
+        if palm:
+            act["_ksz"] = 0.75                            # der Größenvergleich: das Tier kleiner im Bild als eben
         if kind == "puffer" and (re.search(CUTE_PUFF_RE, low) or (follow and re.search(r"gift|tödlich|gefährlich|falsch", low))):
             act["action"] = "puff"
         elif kind == "platypus" and re.search(CUTE_SPUR_RE, low):
             act["action"] = "spur"
-        elif kind == "frog" and follow and not touch:
+        elif kind == "frog" and follow and not touch and not palm:
             act["action"] = "hop"
         acts = [act]
         if touch:                                         # „Schon eine Berührung …“: der Mensch weicht erschrocken zurück

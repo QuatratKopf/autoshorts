@@ -3708,10 +3708,10 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
         if spur:
             poly([(fx_ - 6, fy_ - 22), (fx_ - 74, fy_ + 6), (fx_ - 8, fy_ + 26)], foot, shade=0)
             gl = 0.5 + 0.5 * math.sin(t * 7)
-            rx_ = 40 + 10 * gl
-            d.ellipse(B(fx_ + 6 - rx_, fy_ + 44 - rx_, fx_ + 6 + rx_, fy_ + 44 + rx_), outline=(236, 64, 60, 230), width=max(3, int(7 * k)))   # Warn-Ring um den Sporn
-            poly([(fx_ - 8, fy_ + 18), (fx_ + 20, fy_ + 22), (fx_ + 10, fy_ + 74)], (250, 240, 214), shade=0)   # Giftsporn
-            ell(fx_ + 2, fy_ + 78, fx_ + 18, fy_ + 98, (150, 220, 90), shade=0)                              # Gifttropfen
+            rx_ = 62 + 12 * gl
+            d.ellipse(B(fx_ + 8 - rx_, fy_ + 58 - rx_, fx_ + 8 + rx_, fy_ + 58 + rx_), outline=(236, 64, 60, 230), width=max(3, int(8 * k)))   # Warn-Ring um den Sporn
+            poly([(fx_ - 16, fy_ + 16), (fx_ + 28, fy_ + 22), (fx_ + 12, fy_ + 98)], (250, 240, 214), shade=0)   # Giftsporn, gut sichtbar
+            ell(fx_ + 2, fy_ + 102, fx_ + 22, fy_ + 126, (150, 220, 90), shade=0)                            # Gifttropfen
         else:
             poly([(fx_ - 14, -28), (fx_ + 60, -6), (fx_ - 16, 2)], foot, shade=0)
             poly([(fx_ - 10, -44), (fx_ - 34, -40), (fx_ - 14, -30)], (250, 240, 214), shade=0)             # kleiner Sporn an der Ferse

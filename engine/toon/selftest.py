@@ -1904,6 +1904,20 @@ def main():
         assert kinds[8] == ["puffer"] and acts[8] == ["puff"], ("Kugelfisch bläst sich auf", kinds[8], acts[8])
         assert kinds[9] == [""] and (sd[9]["actors"][0].get("look") or {}).get("hat") == "chef" and places.resolve(sd[9]["place"]) == "kitchen", ("Koch mit Mütze in der Küche", sd[9]["actors"])
         assert "frog" not in kinds[10], "Frosch im Hals ist kein Frosch"
+        sd3 = stage.direct([{"text": "Drei süße Tiere, die giftig sind.", "place": "river", "actors": [{"id": "du"}]},
+                            {"text": "Nummer eins, der Pfeilgiftfrosch, ist knallgelb.", "place": "forest", "actors": [{"id": "du"}]},
+                            {"text": "Er passt problemlos auf deine Handfläche.", "place": "forest", "shot": "close", "actors": [{"id": "du"}]},
+                            {"text": "Das Gift eines einzigen Froschs würde für rund zehn Menschen reichen.", "place": "forest", "shot": "graphic", "graphic": {"type": "number", "value": "10", "label": "MENSCHEN"}},
+                            {"text": "Es sitzt direkt in seiner Haut, und die grelle Farbe warnt alle Fressfeinde.", "place": "forest", "actors": [{"id": "du", "action": "talk"}]},
+                            {"text": "Nummer zwei ist das Schnabeltier.", "place": "river", "actors": [{"id": "du"}]},
+                            {"text": "Welches der drei hättest du gestreichelt?", "place": "river", "actors": [{"id": "du"}], "overlay": {"type": "choice", "a": "Frosch", "b": "Schnabeltier"}}],
+                           [(i_ * 4, i_ * 4 + 4) for i_ in range(7)], "Drei niedliche Tiere, die du besser nie anfasst", "tiere")
+        k3 = [[str(a_.get("kind") or "") for a_ in s_.get("actors") or []] for s_ in sd3]
+        assert k3[0] == ["frog", "platypus"], ("erstes Bild zeigt die Tiere", k3[0])
+        assert k3[2] == ["frog"] and sd3[2].get("shot") != "close", ("Handfläche: der Frosch bleibt im Bild", k3[2])
+        assert k3[4] == ["frog"], ("nach der Zahl-Grafik bleibt „Es sitzt in seiner Haut“ beim Frosch", k3[4])
+        assert not sd3[6].get("overlay"), "Auswahl mit zwei Antworten zur Frage nach den dreien entfällt"
+        frame(sd3[0])
         for k_, a_ in (("frog", ""), ("frog", "hop"), ("platypus", ""), ("platypus", "spur"), ("puffer", ""), ("puffer", "puff")):
             for f_ in (1, -1):
                 assert extras.creature(k_, 1.3, facing=f_, action=a_)[0].getbbox(), (k_, a_)

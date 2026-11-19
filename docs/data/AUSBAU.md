@@ -548,3 +548,8 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Köche (`stage._cooks`, `COOK_RE`): Nennt der Satz einen Koch, steht eine Figur mit Kochmütze (`rig`, Hut `chef`) und weißer Jacke in der Küche –
   vorher lief die Hauptfigur durch die Küche. Die automatisch gelernten Notbehelfe `schnabeltier` und `pfeilgiftfrosch` sind aus `shapes.json` entfernt;
   die Wörter gelten als bekannt (`main.known_thing`). Die Text-KI darf `frog`, `platypus`, `puffer` besetzen. Selbsttest: `_cute`.
+  Nach dem 1. Neubau (Video 162): „Er passt auf deine Handfläche“ (`CUTE_PALM_RE`) und „Es sitzt in seiner Haut …“ nach einer Zahl-Grafik bleiben
+  beim Tier (vorher Großaufnahme des Menschen – Szenen ohne `actors` wurden übersprungen, die Grafik zählte nicht mit). Das erste Bild eines solchen
+  Videos zeigt Frosch und Schnabeltier nebeneinander am Ufer statt eines Menschen am Fluss. Folgesätze wechseln die Blickrichtung. Kochmütze niedriger
+  (füllte in der Großaufnahme das halbe Bild), der Koch redet statt mit Fragezeichen zu grübeln. Auswahl-Einblendung mit zwei Antworten zur Frage
+  „Welches der drei …?“ entfällt. Kugelfisch ohne Zorn-Zeichen. Giftsporn größer gezeichnet.
