@@ -1,5 +1,5 @@
 {
- "updated": 1795129431.1278362,
+ "updated": 1795131227.9271955,
  "enough": true,
  "counted": 26,
  "total": 29,
@@ -93,10 +93,10 @@
   "gänsehaut"
  ],
  "words_bad": [
-  "remix",
-  "erkennst",
   "lied",
-  "bekanntes"
+  "erkennst",
+  "bekanntes",
+  "remix"
  ],
  "top": [
   {
