@@ -1,0 +1,525 @@
+{
+ "title": "Was wäre, wenn deine Geräte plötzlich die Wahrheit sagen?",
+ "scenes": [
+  {
+   "text": "Deine Geräte sagen plötzlich einen Tag lang die Wahrheit.",
+   "see": "Ein belebter Raum mit verschiedenen Geräten, die bedrohlich oder aktiv wirken.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "tv"
+    },
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Morgens im Schlafzimmer verkündet der Wecker laut, dass du neunmal auf Schlummern gedrückt hast.",
+   "see": "Im Schlafzimmer schreit ein digitaler Wecker auf dem Nachttisch.",
+   "place": "bedroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_wecker"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sleep",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "In der vollen Bahn liest das Handy laut deine Bildschirmzeit von gestern vor, sieben Stunden.",
+   "see": "Das Handy zeigt die Bildschirmzeit von sieben Stunden im vollen Zug an.",
+   "place": "transit",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "crowd": "watch",
+   "overlay": {
+    "type": "card",
+    "text": "7 STUNDEN"
+   }
+  },
+  {
+   "text": "Plötzlich drehen sich alle Fahrgäste um und mustern dich mit großen Augen.",
+   "see": "Die Fahrgäste in der Bahn drehen sich alle um und stieren die Hauptfigur an.",
+   "place": "transit",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_auge"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "cower",
+     "emotion": "scared",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "crowd": "worried"
+  },
+  {
+   "text": "Mittags in der Küche meldet der Kühlschrank, dass der Joghurt seit drei Wochen abgelaufen ist.",
+   "see": "Der Kühlschrank steht mitten in der Küche und spricht zum Protagonisten.",
+   "place": "kitchen",
+   "time": "day",
+   "actors": [
+    {
+     "id": "kuehlschrank",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "angry",
+     "emote": "!",
+     "kind": "fridge",
+     "hold": "",
+     "facing": "",
+     "say": "ABGELAUFEN!",
+     "pos": "left"
+    },
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "freeze",
+     "emotion": "shocked",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "3 WOCHEN"
+   }
+  },
+  {
+   "text": "Er fragt direkt, warum du trotzdem jeden Abend hineinschaust.",
+   "see": "Der Kühlschrank zeigt vorwurfsvoll auf die Hauptfigur.",
+   "place": "kitchen",
+   "time": "day",
+   "actors": [
+    {
+     "id": "kuehlschrank",
+     "speaks": true,
+     "action": "point",
+     "emotion": "",
+     "emote": "?",
+     "kind": "fridge",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "think",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Auf dem Weg zum Bäcker sagt das Navi im Auto, dass du die vierhundert Meter auch zu Fuß geschafft hättest.",
+   "see": "Das Navi im Auto mahnt die Hauptfigur kurz vor dem Bäcker.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "car"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "400 METER"
+   }
+  },
+  {
+   "text": "Du steigst seufzend aus und läufst die winzige Strecke.",
+   "see": "Die Hauptfigur steigt genervt aus dem Auto aus und geht zu Fuß.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "car"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "right"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Abends im Wohnzimmer zeigt der Fernseher allen Gästen, welche Serie du heimlich schon dreimal durchgeschaut hast.",
+   "see": "Der Fernseher im Wohnzimmer enthüllt heimliche Serienmarathons vor Besuchern.",
+   "place": "livingroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "tv"
+    },
+    {
+     "type": "sofa"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Deine Freunde grinsen breit und nicken anerkennend.",
+   "see": "Die Hauptfigur schämt sich, während eine andere Person grinsend daneben steht.",
+   "place": "livingroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "sofa"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "cower",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Nachts im Flur zählt der Router laut auf, wer um drei Uhr nachts noch online war.",
+   "see": "Ein leuchtender Router im dunklen Flur sendet lautstark Signale aus.",
+   "place": "hallway",
+   "time": "night",
+   "props": [
+    {
+     "type": "lib_router"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "insert",
+   "mood": "scary",
+   "overlay": {
+    "type": "card",
+    "text": "3 UHR"
+   }
+  },
+  {
+   "text": "Es war nämlich nur du.",
+   "see": "Die Hauptfigur steht nachts erschrocken allein im dunklen Flur.",
+   "place": "hallway",
+   "time": "night",
+   "props": [
+    {
+     "type": "router"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "freeze",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary"
+  },
+  {
+   "text": "Du denkst, das ist reine Fantasie?",
+   "see": "Nahaufnahme der Hauptfigur, die nachdenklich ins Publikum blickt.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "question",
+    "text": "WIRKLICH?",
+    "dark": false
+   }
+  },
+  {
+   "text": "Falsch.",
+   "see": "Grafischer Einblender: FALSCH.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "badge",
+    "kicker": "FAKTENCHECK",
+    "text": "FALSCH",
+    "dark": false
+   }
+  },
+  {
+   "text": "Dein Handy misst deine Bildschirmzeit tatsächlich.",
+   "see": "Ein Smartphone zeigt eine Bildschirmzeit-Statistik im Detail.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "FAKT"
+   }
+  },
+  {
+   "text": "Viele smarte Fernseher erfassen genau, was bei dir läuft.",
+   "see": "Ein moderner Fernseher analysiert das Sehverhalten der Nutzer.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "tv"
+    }
+   ],
+   "shot": "insert",
+   "mood": "calm"
+  },
+  {
+   "text": "Und dein Router führt eine Liste aller verbundenen Geräte.",
+   "see": "Ein Serverraum veranschaulicht die Speicherung aller Datenverbindungen.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_router"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "event",
+   "mood": "calm"
+  },
+  {
+   "text": "Deine Geräte wissen das alles längst, sie sagen es nur nicht laut.",
+   "see": "Die Hauptfigur blickt ängstlich auf den Tisch voller schweigender Geräte.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "tv"
+    },
+    {
+     "type": "phone"
+    },
+    {
+     "type": "table"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "tremble",
+     "emotion": "scared",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Welches Gerät dürfte bei dir auf keinen Fall auspacken?",
+   "see": "Die Hauptfigur hält sich fragend die Hände offen und schaut die Zuschauer an.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "choice",
+    "a": "Das Handy",
+    "b": "Der Router"
+   }
+  }
+ ]
+}
