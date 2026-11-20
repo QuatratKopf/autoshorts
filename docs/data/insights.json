@@ -1,5 +1,5 @@
 {
- "updated": 1795215684.2550437,
+ "updated": 1795217460.5110416,
  "enough": true,
  "counted": 29,
  "total": 32,
@@ -9,19 +9,19 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 4,
-   "avg_views": 1933,
+   "avg_views": 1931,
    "avg_likes": 44.8,
-   "like_rate": 2.31,
-   "avg_score": 2622
+   "like_rate": 2.32,
+   "avg_score": 2620
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 3,
-   "avg_views": 1789,
+   "avg_views": 1790,
    "avg_likes": 43.0,
    "like_rate": 2.4,
-   "avg_score": 2467
+   "avg_score": 2468
   },
   {
    "slug": "storys",
@@ -30,43 +30,43 @@
    "avg_views": 1658,
    "avg_likes": 52.5,
    "like_rate": 3.17,
-   "avg_score": 2445
+   "avg_score": 2446
   },
   {
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
-   "avg_views": 1792,
+   "avg_views": 1794,
    "avg_likes": 39.0,
-   "like_rate": 2.18,
-   "avg_score": 2406
+   "like_rate": 2.17,
+   "avg_score": 2408
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1723,
+   "avg_views": 1725,
    "avg_likes": 44.5,
    "like_rate": 2.58,
-   "avg_score": 2400
+   "avg_score": 2402
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 10,
-   "avg_views": 1722,
+   "avg_views": 1724,
    "avg_likes": 43.7,
    "like_rate": 2.54,
-   "avg_score": 2381
+   "avg_score": 2382
   },
   {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 2,
-   "avg_views": 1772,
+   "avg_views": 1774,
    "avg_likes": 11.0,
    "like_rate": 0.62,
-   "avg_score": 1982
+   "avg_score": 1984
   }
  ],
  "weights": {
@@ -84,9 +84,9 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 1933 Aufrufe, 2.31 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1772 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2532 zu 705 Punkte).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 1931 Aufrufe, 2.32 % Likes).",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1774 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2533 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -94,31 +94,31 @@
   "vier"
  ],
  "words_bad": [
-  "remix",
   "erkennst",
-  "bekanntes",
-  "lied"
+  "lied",
+  "remix",
+  "bekanntes"
  ],
  "top": [
   {
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2562,
+   "views": 2563,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3402
+   "score": 3403
   },
   {
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2264,
+   "views": 2265,
    "likes": 62,
    "comments": 0,
    "shares": 0,
-   "score": 3194
+   "score": 3195
   },
   {
    "id": 124,
@@ -134,21 +134,21 @@
    "id": 139,
    "title": "Dieses winzige Tier ist zäher als ein Löwe",
    "category": "tiere",
-   "views": 2173,
+   "views": 2175,
    "likes": 54,
    "comments": 0,
    "shares": 1,
-   "score": 3023
+   "score": 3025
   },
   {
    "id": 120,
    "title": "Warum du bei Musik Gänsehaut bekommst",
    "category": "fakten",
-   "views": 2339,
+   "views": 2340,
    "likes": 45,
    "comments": 0,
    "shares": 0,
-   "score": 3014
+   "score": 3015
   }
  ],
  "flop": [
