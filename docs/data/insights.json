@@ -1,5 +1,5 @@
 {
- "updated": 1795131227.9271955,
+ "updated": 1795133041.0707746,
  "enough": true,
  "counted": 26,
  "total": 29,
@@ -18,10 +18,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 2,
-   "avg_views": 1834,
+   "avg_views": 1836,
    "avg_likes": 40.5,
    "like_rate": 2.21,
-   "avg_score": 2476
+   "avg_score": 2478
   },
   {
    "slug": "storys",
@@ -36,19 +36,19 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
-   "avg_views": 1782,
+   "avg_views": 1785,
    "avg_likes": 39.0,
-   "like_rate": 2.19,
-   "avg_score": 2398
+   "like_rate": 2.18,
+   "avg_score": 2400
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1716,
+   "avg_views": 1718,
    "avg_likes": 44.3,
    "like_rate": 2.58,
-   "avg_score": 2391
+   "avg_score": 2393
   },
   {
    "slug": "whatif",
@@ -63,10 +63,10 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 2,
-   "avg_views": 1755,
+   "avg_views": 1762,
    "avg_likes": 11.0,
-   "like_rate": 0.63,
-   "avg_score": 1965
+   "like_rate": 0.62,
+   "avg_score": 1972
   }
  ],
  "weights": {
@@ -85,18 +85,18 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 1856 Aufrufe, 2.41 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1755 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2517 zu 705 Punkte).",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1762 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2518 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
  ],
  "words_good": [
   "gänsehaut"
  ],
  "words_bad": [
-  "lied",
-  "erkennst",
+  "remix",
   "bekanntes",
-  "remix"
+  "erkennst",
+  "lied"
  ],
  "top": [
   {
@@ -123,11 +123,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 2055,
+   "views": 2056,
    "likes": 68,
    "comments": 0,
    "shares": 0,
-   "score": 3075
+   "score": 3076
   },
   {
    "id": 120,
@@ -143,11 +143,11 @@
    "id": 139,
    "title": "Dieses winzige Tier ist zäher als ein Löwe",
    "category": "tiere",
-   "views": 2163,
+   "views": 2167,
    "likes": 54,
    "comments": 0,
    "shares": 1,
-   "score": 3013
+   "score": 3017
   }
  ],
  "flop": [
@@ -165,11 +165,11 @@
    "id": 58,
    "title": "Wie aus einer Gaming-Bude der wertvollste Tech-Gigant wurde",
    "category": "fakten",
-   "views": 596,
+   "views": 597,
    "likes": 17,
    "comments": 0,
    "shares": 0,
-   "score": 851
+   "score": 852
   },
   {
    "id": 44,
