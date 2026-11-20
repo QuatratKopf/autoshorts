@@ -1,5 +1,5 @@
 {
- "updated": 1795167431.773854,
+ "updated": 1795169261.4008582,
  "enough": true,
  "counted": 27,
  "total": 29,
@@ -39,13 +39,13 @@
    "avg_views": 1786,
    "avg_likes": 39.0,
    "like_rate": 2.18,
-   "avg_score": 2400
+   "avg_score": 2402
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1719,
+   "avg_views": 1720,
    "avg_likes": 44.5,
    "like_rate": 2.59,
    "avg_score": 2397
@@ -93,10 +93,10 @@
   "gänsehaut"
  ],
  "words_bad": [
-  "bekanntes",
-  "remix",
   "erkennst",
-  "lied"
+  "lied",
+  "bekanntes",
+  "remix"
  ],
  "top": [
   {
