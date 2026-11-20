@@ -6252,7 +6252,7 @@
   "id": 166,
   "category": "musik",
   "topic": "Musik-Kugel: Bella Ciao (Glas Remix)",
-  "status": "rendered",
+  "status": "published",
   "created": 1795171306.2465467,
   "title": "Bekanntes Lied als Glas-Remix – erkennst du es? 🎵",
   "description": "Ein Lied, das jeder kennt – als Glas-Remix, jede Glasscheibe ist ein Ton. Erkennst du es? 🎵\nSchreib in die Kommentare, welches Lied es ist – und welches als Nächstes einen Remix bekommen soll!",
@@ -6278,6 +6278,12 @@
   },
   "thumb": true,
   "look": "musik",
-  "mp4": true
+  "mp4": true,
+  "zernio_id": "6b00246fbd3aa39720f8f48a",
+  "yt_status": "Zernio: published",
+  "yt_id": "HyT8ToXug9k",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6b00246fbd3aa39720f8f48a",
+  "error": null
  }
 ]
