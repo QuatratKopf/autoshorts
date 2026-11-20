@@ -1,5 +1,5 @@
 {
- "updated": 1795163745.0613356,
+ "updated": 1795165609.9295225,
  "enough": true,
  "counted": 27,
  "total": 29,
@@ -45,10 +45,10 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1718,
+   "avg_views": 1719,
    "avg_likes": 44.5,
    "like_rate": 2.59,
-   "avg_score": 2396
+   "avg_score": 2397
   },
   {
    "slug": "whatif",
@@ -86,17 +86,17 @@
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 1867 Aufrufe, 2.4 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1764 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2516 zu 705 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2517 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
  ],
  "words_good": [
   "gänsehaut"
  ],
  "words_bad": [
-  "bekanntes",
   "lied",
-  "remix",
-  "erkennst"
+  "bekanntes",
+  "erkennst",
+  "remix"
  ],
  "top": [
   {
