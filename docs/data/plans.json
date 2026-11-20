@@ -1,753 +1,4 @@
 {
- "2026-11-19 21:00": {
-  "category": "tiere",
-  "topic": "Tiere, die extrem niedlich aussehen, aber tödlich gefährlich sind",
-  "trend": null,
-  "script": {
-   "title": "Tödlich niedlich: Diese 3 Tiere solltest du nie streicheln",
-   "description": "Niedlich, flauschig und extrem gefährlich!\nHier siehst du drei Tiere, die süß aussehen, dich aber sofort ins Krankenhaus befördern können.\nWürdest du ein Schnabeltier streicheln?",
-   "hashtags": [
-    "#shorts",
-    "#tierfakten",
-    "#tiere",
-    "#wissen",
-    "#viral",
-    "#fyp",
-    "#natur"
-   ],
-   "tags": [
-    "süße tiere tödlich",
-    "gefährliche tiere niedlich",
-    "kugelfisch gift",
-    "schnabeltier sporn",
-    "pfeilgiftfrosch",
-    "tierfakten"
-   ],
-   "thumbnail": {
-    "image": "Close-up of a cute platypus with glowing blue venom sparks around its hind legs, dramatic lighting, bold contrast",
-    "text": "SÜSS ABER TÖDLICH",
-    "place": "river",
-    "time": "day",
-    "actor": "platypus_pete",
-    "action": "shocked",
-    "emotion": "shocked",
-    "props": [
-     "water"
-    ],
-    "weather": ""
-   },
-   "wishes": [
-    "schnabeltier",
-    "pfeilgiftfrosch",
-    "kugelfisch"
-   ],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "lila",
-     "hat": "",
-     "hair": "ponytail",
-     "hair_color": "blond",
-     "gender": "w",
-     "skin": "hell"
-    },
-    "frosch": {
-     "kind": "monster"
-    },
-    "platypus_pete": {
-     "kind": "cat"
-    }
-   },
-   "scenes": [
-    {
-     "see": "Eine Frau schaut erstaunt auf ein kleines süßes Tier.",
-     "text": "Drei Tiere, die extrem niedlich aussehen, aber absolut tödlich sind.",
-     "image": "Woman points in amazement at a small cute creature",
-     "who": [
-      "du"
-     ],
-     "place": "forest",
-     "backdrop": {
-      "sky": "day",
-      "ground": "grass",
-      "elements": [
-       "forest",
-       "flowers"
-      ]
-     },
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "happy",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "absolut tödlich"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "3 TÖDLICHE TIERE"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein winziger bunter Frosch sitzt auf einem Blatt.",
-     "text": "Und das letzte Tier ruiniert deinen Urlaub schneller als gedacht.",
-     "image": "A small colorful frog sitting on a lush green leaf in the jungle",
-     "who": [],
-     "place": "forest",
-     "backdrop": {
-      "sky": "day",
-      "ground": "grass",
-      "elements": [
-       "forest"
-      ]
-     },
-     "time": "day",
-     "weather": "",
-     "props": [
-      "pfeilgiftfrosch"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "event",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Urlaub"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "CLIFFHANGER"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein knallgelber Pfeilgiftfrosch im Regenwald.",
-     "text": "Nummer eins: Der schreckliche Pfeilgiftfrosch ist nur zwei Zentimeter groß.",
-     "image": "Tiny bright yellow frog on a dark rock",
-     "who": [],
-     "place": "forest",
-     "backdrop": {
-      "sky": "day",
-      "ground": "rock",
-      "elements": [
-       "forest"
-      ]
-     },
-     "time": "day",
-     "weather": "",
-     "props": [
-      "pfeilgiftfrosch"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "insert",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "zwei Zentimeter"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "2 CENTIMETER"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Grafik zeigt die Giftmenge für zehn Menschen.",
-     "text": "Aber sein Hautgift reicht locker aus, um zehn erwachsene Menschen zu töten.",
-     "image": "Graphic overlay with number ten and human icons",
-     "who": [],
-     "place": "forest",
-     "backdrop": {
-      "sky": "day",
-      "ground": "soil",
-      "elements": [
-       "forest"
-      ]
-     },
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "zehn Menschen"
-     ],
-     "overlay": null,
-     "graphic": {
-      "type": "number",
-      "kicker": "GIFT-MENGE",
-      "value": "10",
-      "label": "MENSCHEN TÖDLICH"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Hauptfigur weicht erschrocken vom Frosch zurück.",
-     "text": "Schon eine bloße Berührung kann Herzversagen auslösen.",
-     "image": "Woman steps back scared from tiny frog",
-     "who": [
-      "du"
-     ],
-     "place": "forest",
-     "backdrop": {
-      "sky": "day",
-      "ground": "grass",
-      "elements": [
-       "forest"
-      ]
-     },
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "cower",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "panic",
-     "shot": "wide",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "Herzversagen"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "GIFTIG",
-      "color": "red"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Entenschnabeltier schwimmt friedlich im Fluss.",
-     "text": "Aber wie sieht es mit dem flauschigen Schnabeltier aus?",
-     "image": "Platypus swimming happily in a river",
-     "who": [],
-     "place": "river",
-     "backdrop": {
-      "sky": "day",
-      "ground": "water",
-      "elements": [
-       "trees",
-       "river"
-      ]
-     },
-     "time": "day",
-     "weather": "",
-     "props": [
-      "schnabeltier"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "event",
-     "camera": "pan_right",
-     "sfx": "none",
-     "highlight": [
-      "flauschigen Schnabeltier"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "NUMMER 2"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Nahaufnahme der Hinterbeine des Schnabeltiers mit scharfen Sporen.",
-     "text": "Zweitens: Männliche Schnabeltiere besitzen an den Hinterbeinen scharfe Giftsporne.",
-     "image": "Close-up on platypus hind legs showing venomous spurs",
-     "who": [],
-     "place": "river",
-     "backdrop": {
-      "sky": "day",
-      "ground": "sand",
-      "elements": [
-       "river"
-      ]
-     },
-     "time": "day",
-     "weather": "",
-     "props": [
-      "schnabeltier"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "insert",
-     "camera": "zoom_in",
-     "sfx": "pop",
-     "highlight": [
-      "Giftsporten"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Mann krümmt sich vor Schmerzen am Ufer.",
-     "text": "Das Gift tötet dich zwar nicht, verursacht aber extreme Schmerzen.",
-     "image": "A man sitting on ground holding his foot in severe pain",
-     "who": [
-      "du"
-     ],
-     "place": "river",
-     "backdrop": {
-      "sky": "day",
-      "ground": "grass",
-      "elements": [
-       "river"
-      ]
-     },
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shiver",
-       "emotion": "sad",
-       "emote": "sweat",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "sad",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "extreme Schmerzen"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "KEIN SCHMERZMITTEL HILFT"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Spritze mit Schmerzmittel verpufft symbolisch.",
-     "text": "Normale Schmerzmittel schlagen bei diesem Gift nicht einmal an.",
-     "image": "Syringe icon with a red cross over it",
-     "who": [],
-     "place": "hospital",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "schlagen nicht an"
-     ],
-     "overlay": null,
-     "graphic": {
-      "type": "badge",
-      "kicker": "WARNUNG",
-      "text": "WIRKUNGSLOS"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Hauptfigur schaut ungläubig auf eine Uhr.",
-     "text": "Die Qualen können tagelang oder sogar monatelang anhalten.",
-     "image": "Woman looking shocked at a ticking clock",
-     "who": [
-      "du"
-     ],
-     "place": "hospital",
-     "time": "day",
-     "weather": "",
-     "props": [
-      "clock"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "tick",
-     "highlight": [
-      "monatelang"
-     ],
-     "overlay": {
-      "type": "note",
-      "title": "DAUER",
-      "text": "Bis zu mehrere Monate"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein niedlicher Kugelfisch schwimmt im Wasser.",
-     "text": "Du denkst, der Kugelfisch ist nur eine lustige Unterwasser-Kugel?",
-     "image": "Cute pufferfish floating calmly in clear water",
-     "who": [],
-     "place": "underwater",
-     "time": "day",
-     "weather": "",
-     "props": [
-      "kugelfisch"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "event",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Unterwasser-Kugel"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "NUMMER 3"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Kugelfisch bläst sich plötzlich riesig auf.",
-     "text": "Falsch: Er enthält Tetrodotoxin, ein tödliches Nervengift.",
-     "image": "Pufferfish puffing up huge with sharp spikes",
-     "who": [],
-     "place": "underwater",
-     "time": "day",
-     "weather": "",
-     "props": [
-      "kugelfisch"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "insert",
-     "camera": "shake",
-     "sfx": "whoosh",
-     "highlight": [
-      "Nervengift"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "TÖDLICH",
-      "color": "purple"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Infografik vergleicht Tetrodotoxin mit Zyankali.",
-     "text": "Dieses Gift ist tausendmal tödlicher als normales Zyankali.",
-     "image": "Comparison chart of toxic compounds",
-     "who": [],
-     "place": "underwater",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "tausendmal tödlicher"
-     ],
-     "overlay": null,
-     "graphic": {
-      "type": "compare",
-      "left": "ZYANKALI",
-      "right": "KUGELFISCH",
-      "value": "1x",
-      "sub": "1000x"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Restaurant-Teller mit edel zubereitetem Fugu-Fisch.",
-     "text": "In Japan gilt der Fisch zubereitet als Fugu dennoch als Luxus-Essen.",
-     "image": "Fancy Japanese dish served on a plate",
-     "who": [],
-     "place": "restaurant",
-     "time": "night",
-     "weather": "",
-     "props": [
-      "table"
-     ],
-     "actors": [],
-     "crowd": "walk",
-     "mood": "calm",
-     "shot": "insert",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "Luxus-Essen"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "JAPAN · FUGU"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Koch schneidet extrem vorsichtig den Fisch.",
-     "text": "Nur speziell ausgebildete Köche dürfen ihn nach Jahrelangem Training servieren.",
-     "image": "Chef with apron carefully cutting fish in restaurant kitchen",
-     "who": [],
-     "place": "kitchen",
-     "time": "day",
-     "weather": "",
-     "props": [
-      "table"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "event",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Jahrelangem Training"
-     ],
-     "overlay": {
-      "type": "checklist",
-      "title": "FUGU LIZENZ",
-      "items": [
-       [
-        "3 Jahre Ausbildung",
-        true
-       ],
-       [
-        "Schwere Prüfung",
-        true
-       ]
-      ]
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Gast schaut skeptisch auf sein Essen.",
-     "text": "Ein einziger falscher Schnitt des Kochs führt zu Lähmungen.",
-     "image": "Restaurant guest looking nervous at fish dish",
-     "who": [
-      "du"
-     ],
-     "place": "restaurant",
-     "time": "night",
-     "weather": "",
-     "props": [
-      "table"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "tremble",
-       "emotion": "worried",
-       "emote": "sweat",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Lähmungen"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Grafik zeigt das Verlangen zu atmen stoppt.",
-     "text": "Am Ende setzt die Atmung bei vollem Bewusstsein aus.",
-     "image": "Anatomy graphic of lungs with red warning sign",
-     "who": [],
-     "place": "hospital",
-     "time": "day",
-     "weather": "",
-     "props": [
-      "herz"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "panic",
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "boom",
-     "highlight": [
-      "Atmung setzt aus"
-     ],
-     "overlay": null,
-     "graphic": {
-      "type": "pulse",
-      "value": "0",
-      "label": "ATEMSTILLSTAND"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Gegengift-Spritzen-Icon ist durchgestrichen.",
-     "text": "Es gibt bis heute kein echtes Gegengift gegen Tetrodotoxin.",
-     "image": "Red stop sign over medicine bottle",
-     "who": [],
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "event",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "kein echtes Gegengift"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "KEIN GEGENGIFT",
-      "color": "red"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Hauptfigur zeigt auf eine Übersicht der Tiere.",
-     "text": "Überlege dir also genau, welches süße Tier du streichelst. Denn es gibt.",
-     "image": "Woman points to graphics of cute animals with cautionary expression",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "happy",
-       "emote": "idea",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "streichelst"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [
-   "schnabeltier",
-   "pfeilgiftfrosch",
-   "giftsporn"
-  ],
-  "title": "Tödlich niedlich: Diese 3 Tiere solltest du nie streicheln",
-  "created": 1795104904.1116922
- },
  "2026-11-20 13:00": {
   "category": "musik",
   "topic": "Musik-Kugel",
@@ -2016,5 +1267,702 @@
   ],
   "title": "Tattoo vs. Nagelstudio: Wer verdient wirklich mehr?",
   "created": 1795188465.1766386
+ },
+ "2026-11-21 13:00": {
+  "category": "motivation",
+  "topic": "Niemand kommt, um dich zu retten – und das ist gut so",
+  "trend": null,
+  "script": {
+   "title": "Niemand kommt, um dich zu retten",
+   "description": "Niemand kommt, um dich zu retten\nWarum du ab heute alles allein machen musst und warum das deine einzige Rettung ist.\nWartest du noch auf den perfekten Moment?",
+   "hashtags": [
+    "#shorts",
+    "#motivation",
+    "#mindset",
+    "#erfolg",
+    "#disziplin",
+    "#foryou",
+    "#viral"
+   ],
+   "tags": [
+    "motivation",
+    "mindset",
+    "Erfolg",
+    "Disziplin",
+    "Fokus",
+    "Produktivität",
+    "Ziele",
+    "Durchziehen",
+    "Selbstbewusstsein",
+    "Machen"
+   ],
+   "thumbnail": {
+    "place": "bedroom",
+    "time": "night",
+    "actor": "du",
+    "action": "shocked",
+    "emotion": "shocked",
+    "props": [
+     "phone"
+    ],
+    "weather": "",
+    "image": "Close-up of a young person staring intensely forward with fierce determination, dark background, strong contrast, empty space in the upper third for text",
+    "text": "NIEMAND KOMMT"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "schwarz",
+     "hat": "",
+     "hair": "kurz",
+     "gender": "m",
+     "hair_color": "schwarz",
+     "skin": "hell"
+    }
+   },
+   "scenes": [
+    {
+     "text": "Du bist nicht faul. Du bist einfach nur abgelenkt.",
+     "image": "Close-up of a young man lying in bed at night looking at a glowing phone screen",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "nicht faul",
+      "abgelenkt"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "WACH AUF"
+     },
+     "see": "Du sitzt am Schreibtisch in deinem Zimmer und starrt abgelenkt auf den Tisch.",
+     "time": "day",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "sit",
+       "emotion": "worried",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "Dark bedroom with a glowing smartphone screen on the bed",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Jeden Tagscrollst du stundenlang durch fremde Leben.",
+     "image": "Young man scrolling on his phone with a bored and tired facial expression",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "stundenlang"
+     ],
+     "overlay": null,
+     "see": "Du scrollst stundenlang auf dem Smartphone.",
+     "time": "day",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "worried",
+       "emote": "",
+       "pos": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "shot": "close",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "Dark bedroom with a glowing smartphone screen on the bed",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Es ist drei Uhr nachts und du wunderst dich über die Zeit.",
+     "image": "Man looking at a digital alarm clock showing three in the morning",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "camera": "zoom_in",
+     "sfx": "tick",
+     "highlight": [
+      "drei Uhr"
+     ],
+     "overlay": {
+      "type": "phone",
+      "mode": "lock",
+      "value": "03:00",
+      "kicker": "NACHT",
+      "text": "Zu spät"
+     },
+     "see": "Es ist tiefste Nacht im Schlafzimmer und du blickst auf die Uhr.",
+     "time": "night",
+     "props": [
+      "clock"
+     ],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "Dark bedroom with a glowing smartphone screen on the bed",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Du wartest auf den perfekten Moment, der niemals kommt.",
+     "image": "Man standing by the window looking outside into the dark street",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "perfekten Moment"
+     ],
+     "overlay": null,
+     "see": "Du wartest ungeduldig am Fenster.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "sit",
+       "emotion": "sad",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Du willst starten, aber die Angst vor dem ersten Schritt stoppt dich.",
+     "image": "Man standing in front of a closed room door, hesitating to open it",
+     "who": [
+      "du"
+     ],
+     "place": "office",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Angst",
+      "ersten Schritt"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "DER ANFANG"
+     },
+     "see": "Du willst den ersten Schritt tun, zuckst aber zurück.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "freeze",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Hier ist die harte Wahrheit, die niemand dir ins Gesicht sagt.",
+     "image": "Man looking straight into the camera with a serious and direct expression",
+     "who": [
+      "du"
+     ],
+     "place": "office",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "harte Wahrheit"
+     ],
+     "overlay": null,
+     "see": "Du stehst ernst im Raum.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "angry",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Niemand kommt, um dich zu retten.",
+     "image": "Man standing alone in the middle of an empty room, arms slightly open",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "Niemand kommt",
+      "retten"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "ALLEIN",
+      "color": "red"
+     },
+     "see": "Du blickst entschlossen und allein in den leeren Raum.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "angry",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Kein Held springt durch dein Fenster und löst deine Probleme.",
+     "image": "Man looking at an empty window while shaking his head",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Kein Held"
+     ],
+     "overlay": null,
+     "see": "Ein einsames Fenster zeigt nach draußen, niemand kommt.",
+     "time": "night",
+     "props": [
+      "door"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "sad",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "sad",
+     "who_desc": "",
+     "place_desc": "Dark bedroom with a glowing smartphone screen on the bed",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Kein Mentor schenkt dir den großen Durchbruch auf dem silbernen Tablett.",
+     "image": "Man sitting at a desk with an empty sheet of paper and a pen",
+     "who": [
+      "du"
+     ],
+     "place": "office",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "Durchbruch"
+     ],
+     "overlay": null,
+     "see": "Du stehst vor einem leeren Tisch.",
+     "time": "day",
+     "props": [
+      "table"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shake",
+       "emotion": "sad",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Und weißt du was? Das ist das Beste, was dir je passieren konnte.",
+     "image": "Man nodding slowly with a sudden change to a confident smile",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "das Beste"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "DEINE CHANCE"
+     },
+     "see": "Du lächelst leicht und ballst die Faust.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "idea",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "happy",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Weil niemand kommt, hast du ab heute die vollständige Kontrolle.",
+     "image": "Man standing up from his chair and clenching his fist with determination",
+     "who": [
+      "du"
+     ],
+     "place": "office",
+     "camera": "shake",
+     "sfx": "none",
+     "highlight": [
+      "vollständige Kontrolle"
+     ],
+     "overlay": null,
+     "see": "Du stehst aufrecht und breitest die Arme aus.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "happy",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Wer hält dich eigentlich noch auf, wenn es keine Ausreden mehr gibt?",
+     "image": "Man pointing at his own head with a focused look",
+     "who": [
+      "du"
+     ],
+     "place": "street",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Ausreden"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "SCHLUSS DAMIT"
+     },
+     "see": "Du schaust herausfordernd in die Kamera.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "angry",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Schlag den Wecker morgen früh um sechs Uhr gnadenlos aus dem Leben.",
+     "image": "Man setting an alarm on his phone with an energetic motion",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "sechs Uhr"
+     ],
+     "overlay": null,
+     "see": "Der Wecker klingelt auf dem Nachttisch.",
+     "time": "night",
+     "props": [
+      "clock"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shake",
+       "emotion": "angry",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true,
+       "hold": "clock"
+      }
+     ],
+     "shot": "wide",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": "Dark bedroom with a glowing smartphone screen on the bed",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Lauf diese eine Meile, wenn deine Beine brennen und du eigentlich aufgeben willst.",
+     "image": "Man running fast forward outside on a street with intense effort",
+     "backdrop": {
+      "sky": "day",
+      "ground": "road",
+      "elements": [
+       "street"
+      ]
+     },
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "laufen",
+      "aufgeben"
+     ],
+     "overlay": {
+      "type": "bar",
+      "label": "ENERGIE",
+      "value": 100
+     },
+     "see": "Du rennst entschlossen im Park.",
+     "place": "park",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "run",
+       "emotion": "angry",
+       "emote": "",
+       "pos": "offleft",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Lern diese Formel, bis sie sitzt, auch wenn du jede Sekunde verfluchst.",
+     "image": "Man sitting at a desk with an open book, writing furiously with a pen",
+     "who": [
+      "du"
+     ],
+     "place": "classroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "lernen"
+     ],
+     "overlay": null,
+     "see": "Du sitzt am Tisch und lernst konzentriert mit einem Buch.",
+     "time": "day",
+     "props": [
+      "book"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "sit",
+       "emotion": "worried",
+       "emote": "",
+       "pos": "center",
+       "speaks": true,
+       "hold": "lehrbuch"
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Nicht morgen. Nicht nächste Woche. Fang genau jetzt in dieser Sekunde an.",
+     "image": "Man standing tall and looking directly forward with total focus",
+     "who": [
+      "du"
+     ],
+     "place": "office",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "Nicht morgen",
+      "Jetzt"
+     ],
+     "overlay": {
+      "type": "pulse",
+      "value": "1",
+      "label": "JETZT"
+     },
+     "see": "Du springst entschlossen auf und ballst die Hand zur Faust.",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "happy",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Dein Erfolg gehört am Ende nur dir ganz allein.",
+     "image": "Man raising both arms in victory inside his room",
+     "who": [
+      "du"
+     ],
+     "place": "mountain",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "nur dir"
+     ],
+     "overlay": null,
+     "see": "Du stehst auf einem Hügel und blickst in den Sonnenaufgang.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "happy",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Du bist nicht faul.",
+     "image": "Man nodding with a calm and determined face",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "nicht faul"
+     ],
+     "overlay": null,
+     "see": "Du stehst ruhig im Raum und schüttelst den Kopf.",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "idle",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [],
+  "title": "Niemand kommt, um dich zu retten",
+  "created": 1795199373.8597217
  }
 }

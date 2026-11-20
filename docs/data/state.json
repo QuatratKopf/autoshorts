@@ -1,5 +1,5 @@
 {
- "last_category": "vergleich",
+ "last_category": "motivation",
  "done_slots": [
   "2026-11-08 18:00",
   "2026-11-11 18:00",
@@ -47,7 +47,7 @@
   "qrsauuc3k",
   "qa5v1ywsb"
  ],
- "last_stats": 1795197534.9425666,
+ "last_stats": 1795199390.8044512,
  "next_id": 171,
  "connected": {
   "youtube": {
@@ -64,17 +64,17 @@
   "video": 170
  },
  "cat_credit": {
-  "fakten": 1.7800000000000011,
-  "storys": 4.520000000000001,
-  "mysterien": -5.14,
-  "tiere": -3.8700000000000006,
-  "whatif": 4.07,
-  "comedy": -7.24,
-  "vergleich": -7.319999999999999,
-  "motivation": 4.8,
-  "grusel": 3.5999999999999996,
-  "liebe": 2.4,
-  "nachricht": 2.4
+  "fakten": 2.780000000000001,
+  "storys": 5.540000000000001,
+  "mysterien": -4.14,
+  "tiere": -2.8500000000000005,
+  "whatif": 5.0600000000000005,
+  "comedy": -6.15,
+  "vergleich": -6.119999999999999,
+  "motivation": -6.119999999999999,
+  "grusel": 4.8,
+  "liebe": 3.5999999999999996,
+  "nachricht": 3.5999999999999996
  },
  "bounce_songs": [
   "cc:a0374037-c7fc-4467-94de-28d2e36fc183",
