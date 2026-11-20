@@ -274,8 +274,32 @@ def _ok_target(q, v, dt):
     return True
 
 
-def _candidates(p, v_in, t, dn, rnd, recent, trail=(), strict=False, t_show=None):
-    """Mögliche echte Abpraller an diesem Punkt, beste zuerst (erst normale, dann federnde Scheiben)."""
+PANE_GAP = 12                    # so viel Luft bleibt zwischen zwei Scheiben, die gleichzeitig dastehen (px)
+
+
+def _pane_rect(p, n, grow=0.0):
+    """Ecken der Scheibe, an der die Kugel im Punkt p mit der Normale n abprallt (grow = Rand ringsum)."""
+    cx, cy = p[0] - n[0] * (BALL_R + PANE_W / 2), p[1] - n[1] * (BALL_R + PANE_W / 2)
+    ux, uy = -n[1], n[0]
+    hl, hw = PANE_LEN / 2 + grow, PANE_W / 2 + grow
+    return [(cx + sx * ux + sy * n[0], cy + sx * uy + sy * n[1]) for sx, sy in ((-hl, -hw), (hl, -hw), (hl, hw), (-hl, hw))]
+
+
+def _rects_touch(a, b):
+    """Überdecken sich zwei Rechtecke (Trennachsen-Test)?"""
+    for poly in (a, b):
+        for k in range(4):
+            ax, ay = poly[k][1] - poly[(k + 1) % 4][1], poly[(k + 1) % 4][0] - poly[k][0]
+            pa = [x * ax + y * ay for x, y in a]
+            pb = [x * ax + y * ay for x, y in b]
+            if max(pa) < min(pb) or max(pb) < min(pa):
+                return False
+    return True
+
+
+def _candidates(p, v_in, t, dn, rnd, recent, trail=(), strict=False, t_show=None, standing=()):
+    """Mögliche echte Abpraller an diesem Punkt, beste zuerst (erst normale, dann federnde Scheiben).
+    standing = Ecken der Scheiben, die gleichzeitig mit dieser dastehen: die neue darf keine davon berühren."""
     x0, y0, x1, y1 = BOX
     cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
     sp_in = math.hypot(*v_in)
@@ -292,6 +316,10 @@ def _candidates(p, v_in, t, dn, rnd, recent, trail=(), strict=False, t_show=None
             q, v_next = _fly(p, vo, dn)
             if not _ok_target(q, vo, dn):
                 continue
+            if standing:                                 # zwei Scheiben lagen über Eck aufeinander (Video 165, gleich im ersten Bild)
+                mine = _pane_rect(p, n, PANE_GAP)
+                if any(_rects_touch(mine, r) for r in standing):
+                    continue
             sp = math.hypot(*vo)
             sc = max(0, sp - 2700) * 3 + max(0, 500 - sp) * 2
             sc += (abs(q[0] - cx) / (x1 - x0) + abs(q[1] - cy) / (y1 - y0)) * 120          # lieber in der Mitte bleiben
@@ -364,7 +392,10 @@ def path(hits, seed=0):
             if hits[0][0] >= t_lo:                       # der Fall von der Startklappe
                 f0 = min(FALL, hits[0][0])
                 trail += [(hits[0][0] - f0 + f0 * j / 10, start[0], start[1] + 0.5 * G * (f0 * j / 10) ** 2) for j in range(10)]
-            stack.append({"p": p, "v_in": v_in, "dn": dn, "cands": _candidates(p, v_in, hits[i][0], dn, rnd, recent, trail, steps < STRICT_STEPS, t_lo), "idx": 0})
+            t_me = appear_at(times, i)                   # ab da steht die Scheibe dieses Tons da – zusammen mit allen früheren, die dann noch nicht zersprungen sind
+            standing = [_pane_rect(stack[k]["p"], stack[k]["cands"][stack[k]["idx"]][1]) for k in range(i) if hits[k][0] > t_me] if steps < STRICT_STEPS else []
+            stack.append({"p": p, "v_in": v_in, "dn": dn, "idx": 0,
+                          "cands": _candidates(p, v_in, hits[i][0], dn, rnd, recent, trail, steps < STRICT_STEPS, t_lo, standing)})
         fr = stack[i]
         if fr["idx"] < len(fr["cands"]) or i == 0 or steps > 6000:
             if fr["idx"] >= len(fr["cands"]):            # Notfall (praktisch nie): Ziel in der Mitte, Abprall nur ungefähr

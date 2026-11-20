@@ -10,7 +10,7 @@ from pathlib import Path
 import numpy as np
 
 SR = 44100
-PEAK = 0.6                       # Aussteuerung: bei 0,89 lagen die Spitzen zwischen den Abtastwerten über Vollausschlag (+2,3 dBTP), AAC übersteuerte
+PEAK = 0.6                       # frühere Aussteuerung nach der Abtast-Spitze – seit 20.11.2026 gilt TRUE_PEAK (siehe unten)
 
 # Tonart und Taktart je Melodie: (Grundton 0=C … 11=H, "dur"/"moll", Schläge pro Takt)
 KEYS = {"fuer_elise": (9, "moll", 3), "ode_freude": (0, "dur", 4), "bergkoenig": (11, "moll", 4), "korobeiniki": (9, "moll", 4),
@@ -40,6 +40,28 @@ DRUMS = {   # Schlagzeug je Takt (in Schlägen): kick, snare, hat (Abstand), ope
     "none": {"kick": (), "snare": (), "hat": None},                                   # Glas: nur Melodie, Bass und Klirren – kein Schlagzeug
     "dance": {"kick": (0, 1, 2, 3), "snare": (1, 3), "hat": 0.5, "open": (1.5, 3.5)},   # Radio-Pop: gerader Kick, Klatscher auf 2 und 4
 }
+
+
+TRUE_PEAK = 0.75                 # höchste Spitze zwischen den Abtastwerten (−2,5 dBTP); AAC legt bei harten Anschlägen bis zu 2,7 dB drauf
+LOWPASS = (15000.0, 19000.0)     # über 15 kHz läuft der Mix weich aus: das Klirren ist zweifach differenziertes Rauschen mit der meisten
+                                 # Energie an der halben Abtastrate – unhörbar, aber genau das erzeugt die Spitzen zwischen den Abtastwerten
+
+
+def _lowpass(y, band=LOWPASS):
+    """Höhen oberhalb von band[0] weich ausblenden (Kosinus-Flanke bis band[1])."""
+    F = np.fft.rfft(y)
+    fr = np.fft.rfftfreq(len(y), 1 / SR)
+    k = np.clip((fr - band[0]) / (band[1] - band[0]), 0, 1)
+    return np.fft.irfft(F * (0.5 + 0.5 * np.cos(np.pi * k)), len(y))
+
+
+def true_peak(y, over=4):
+    """Größter Ausschlag des Signals zwischen den Abtastwerten (vierfach überabgetastet)."""
+    n = len(y)
+    F = np.fft.rfft(y)
+    G = np.zeros(n * over // 2 + 1, complex)
+    G[:len(F)] = F
+    return float(np.max(np.abs(np.fft.irfft(G, n * over)))) * over
 
 
 def _f(m):
@@ -259,8 +281,9 @@ def build(song_seq, key, style_key, out: Path, lead_in_beats=None, seed=0):
     if style_key == "edm":                               # Pumpen: alles außer Kick duckt kurz auf jedem Schlag
         tt = np.arange(len(buf)) / SR
         buf *= 1 - 0.35 * np.exp(-((tt - first_drop) % beat) / 0.11) * (tt > first_drop)
-    y = np.tanh(buf * 1.15)
-    y = y / max(1e-6, np.max(np.abs(y))) * PEAK
+    y = _lowpass(np.tanh(buf * 1.15))
+    y = y / max(1e-6, true_peak(y)) * TRUE_PEAK          # ausgesteuert wird nach der Spitze zwischen den Abtastwerten (Glas-Klirren lag bei
+                                                         # 0,6 Abtast-Spitze auf +4,4 dBTP, im fertigen Video waren Abtastwerte abgeschnitten)
     fade = int(0.9 * SR)
     end = int(total * SR)
     y = y[:end]

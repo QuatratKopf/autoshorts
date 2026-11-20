@@ -63,7 +63,8 @@ Repo: `QuatratKopf/autoshorts`, Branch `main`. Antworten und Berichte auf Deutsc
 Statt Szenen gegen Sätze: Bildübersicht über das ganze Video, Anfang und Schluss groß ansehen. Prüfen: Kugel trifft jede Scheibe und fliegt
 durch keine hindurch; nichts ragt in die Überschrift; kein leeres Bild am Schluss (Video endet kurz nachdem die Kugel weg ist, oben steht die
 Frage an die Zuschauer); blasse Banden nur bei stillen Zwischen-Aufprallen; Titel und Beschreibung verraten das Lied nicht; Melodie ist
-gemeinfrei (`bounce.SONGS`). Ton messen (Lautheit, Spitzen, Melodie-Einsätze auf den Aufprall-Zeiten). Die Länge liegt bei 20–40 s – die
+gemeinfrei (`bounce.SONGS`); keine zwei Scheiben berühren oder überdecken sich. Ton messen (Lautheit, Spitze zwischen den Abtastwerten
+mit `ebur128=peak=true` und abgeschnittene Abtastwerte im dekodierten Ton, Melodie-Einsätze auf den Aufprall-Zeiten). Die Länge liegt bei 20–40 s – die
 60-Sekunden-Regel gilt hier nicht. Neubau derselben Melodie: `make` mit `category=musik`, `upload=0`, `topic=<Melodie-Schlüssel> <Stil>`
 (z. B. `saints pop`).
 

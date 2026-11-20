@@ -371,6 +371,13 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   sind keine bunten Glasscheiben mehr, sondern blasse Banden (`GHOST_COL`), die nicht zerspringen – „Jede Scheibe ist ein Ton“ stimmt wieder.
   `remix.PEAK` 0,6 statt 0,89 (Spitzen lagen über Vollausschlag). Neubau derselben Fassung: Thema „saints pop“ (Melodie-Schlüssel aus
   `bounce.SONGS`, optional Stil aus `remix.STYLES`) bei `make` mit Kategorie `musik`.
+- Prüfung 20.11.2026 (Video 165, „Bella Ciao“ im Glas-Stil): Zwei Scheiben lagen über Eck aufeinander, gleich im ersten Bild und noch einmal
+  bei 20 s. `bounce._candidates` verwirft jetzt jede Neigung, bei der die neue Scheibe eine gleichzeitig dastehende berührt (`_pane_rect`,
+  `_rects_touch`, Abstand `PANE_GAP`); findet sich keine, geht die Suche wie bisher einen Ton zurück. Ton: Das Klirren (`remix.shatter`) ist
+  zweifach differenziertes Rauschen mit der meisten Energie an der halben Abtastrate – bei 0,6 Abtast-Spitze lag die Spitze zwischen den
+  Abtastwerten auf +4,4 dBTP, im fertigen Video waren Abtastwerte abgeschnitten. `remix.build` blendet den Mix über 15 kHz weich aus
+  (`_lowpass`, `LOWPASS`) und steuert nach der überabgetasteten Spitze aus (`true_peak`, `TRUE_PEAK` = −2,5 dBTP; `PEAK` gilt nicht mehr).
+  Gemessen danach: Glas rund −15 LUFS, Pop rund −11 LUFS, nach AAC kein abgeschnittener Abtastwert. Selftest: beides in `_bounce`.
 
 - Prüfung 16.11.2026 (Gänsehaut-Video): `writer.polish` streicht am Schlusssatz einen angefangenen Nebensatz („… jedes Mal wieder, sobald.“ –
   Liste `_DANGLING`). `stage.direct`: Siegertreppchen (`podium`) bleibt nur, wenn mindestens zwei der drei Plätze im Satz oder in den Nachbarsätzen
