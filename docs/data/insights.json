@@ -1,5 +1,5 @@
 {
- "updated": 1795174662.122831,
+ "updated": 1795176464.5559785,
  "enough": true,
  "counted": 27,
  "total": 30,
@@ -9,10 +9,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 4,
-   "avg_views": 1914,
+   "avg_views": 1867,
    "avg_likes": 44.8,
-   "like_rate": 2.34,
-   "avg_score": 2603
+   "like_rate": 2.4,
+   "avg_score": 2556
   },
   {
    "slug": "tiere",
@@ -39,13 +39,13 @@
    "avg_views": 1786,
    "avg_likes": 39.0,
    "like_rate": 2.18,
-   "avg_score": 2402
+   "avg_score": 2400
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1720,
+   "avg_views": 1719,
    "avg_likes": 44.5,
    "like_rate": 2.59,
    "avg_score": 2397
@@ -63,20 +63,20 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 2,
-   "avg_views": 1764,
+   "avg_views": 1765,
    "avg_likes": 11.0,
    "like_rate": 0.62,
-   "avg_score": 1974
+   "avg_score": 1975
   }
  ],
  "weights": {
-  "fakten": 1.0,
+  "fakten": 1.01,
   "grusel": 1.2,
-  "storys": 1.02,
+  "storys": 1.03,
   "mysterien": 1.01,
   "tiere": 1.04,
-  "whatif": 0.98,
-  "comedy": 1.09,
+  "whatif": 0.99,
+  "comedy": 1.07,
   "musik": 0.83,
   "vergleich": 1.2,
   "motivation": 1.2,
@@ -84,19 +84,19 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 1914 Aufrufe, 2.34 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1764 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2524 zu 705 Punkte).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 1867 Aufrufe, 2.4 % Likes).",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1765 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2517 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
  ],
  "words_good": [
   "gänsehaut"
  ],
  "words_bad": [
-  "remix",
-  "erkennst",
   "lied",
-  "bekanntes"
+  "remix",
+  "bekanntes",
+  "erkennst"
  ],
  "top": [
   {
@@ -123,11 +123,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 2059,
+   "views": 2058,
    "likes": 68,
    "comments": 0,
    "shares": 0,
-   "score": 3079
+   "score": 3078
   },
   {
    "id": 139,
