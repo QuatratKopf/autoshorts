@@ -6394,5 +6394,48 @@
   "status": "error",
   "created": 1795193202.9095592,
   "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-3.6-flash: HTTP 429 | pollinations: Antwort enthält kein JSON"
+ },
+ {
+  "id": 170,
+  "category": "vergleich",
+  "topic": "Tattoo-Studio gegen Nagelstudio: Wer verdient wirklich mehr?",
+  "status": "review",
+  "created": 1795198391.003562,
+  "title": "Tattoo vs. Nagelstudio: Wer verdient wirklich mehr?",
+  "description": "Tattoo-Künstler gegen Nageldesignerin im Money-Check!\nErfahre Einnahmen, Kosten und den echten Stundenlohn beider Berufe.\nZu wem würdest du eher gehen? Schreib es in die Kommentare!",
+  "hashtags": [
+   "#shorts",
+   "#finanzen",
+   "#geld",
+   "#business",
+   "#gehalt",
+   "#tattoo",
+   "#nagelstudio",
+   "#viral"
+  ],
+  "tags": [
+   "tattoo studio gehalt",
+   "nagelstudio verdienst",
+   "wer verdient mehr",
+   "stundenlohn tattoo",
+   "selbstständig machen",
+   "business vergleich"
+  ],
+  "thumb_text": "WER WIRD REICHER?",
+  "missing": [
+   "gel"
+  ],
+  "cover_ms": 90559,
+  "duration": 90.5,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-20 21:00",
+  "review_at": 1795199122.4275348
  }
 ]
