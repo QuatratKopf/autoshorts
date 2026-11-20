@@ -6212,5 +6212,39 @@
   "look": "cartoon",
   "mp4": true,
   "error": "Bei der Prüfung verworfen: Prüfung: dritter Neubau – Goldfisch statt Kugelfisch im zweiten Satz, „tödlich giftig“ für alle drei (Schnabeltier ist es nicht); Video 163 veröffentlicht"
+ },
+ {
+  "id": 165,
+  "category": "musik",
+  "topic": "Musik-Kugel: Bella Ciao (Glas Remix)",
+  "status": "review",
+  "created": 1795169373.2694228,
+  "title": "Bekanntes Lied als Glas-Remix – erkennst du es? 🎵",
+  "description": "Ein Lied, das jeder kennt – als Glas-Remix, jede Glasscheibe ist ein Ton. Erkennst du es? 🎵\nSchreib in die Kommentare, welches Lied es ist – und welches als Nächstes einen Remix bekommen soll!",
+  "hashtags": [
+   "#musik",
+   "#remix",
+   "#glas",
+   "#satisfying",
+   "#erkennstdudaslied",
+   "#shorts"
+  ],
+  "tags": [
+   "musik",
+   "melodie",
+   "bella ciao (glas remix)",
+   "satisfying"
+  ],
+  "thumb_text": "ERKENNST DU ES?",
+  "duration": 36.8,
+  "providers": {
+   "text": "Melodie",
+   "voice": "eigener Ton"
+  },
+  "thumb": true,
+  "look": "musik",
+  "mp4": true,
+  "slot": "2026-11-20 13:00",
+  "review_at": 1795169474.6899862
  }
 ]
