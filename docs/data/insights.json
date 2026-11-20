@@ -1,5 +1,5 @@
 {
- "updated": 1795189248.9585378,
+ "updated": 1795191574.276637,
  "enough": true,
  "counted": 29,
  "total": 30,
@@ -9,19 +9,19 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 4,
-   "avg_views": 1923,
+   "avg_views": 1925,
    "avg_likes": 44.8,
-   "like_rate": 2.33,
-   "avg_score": 2612
+   "like_rate": 2.32,
+   "avg_score": 2614
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 3,
-   "avg_views": 1780,
+   "avg_views": 1783,
    "avg_likes": 42.7,
-   "like_rate": 2.4,
-   "avg_score": 2453
+   "like_rate": 2.39,
+   "avg_score": 2456
   },
   {
    "slug": "storys",
@@ -36,7 +36,7 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
-   "avg_views": 1788,
+   "avg_views": 1789,
    "avg_likes": 39.0,
    "like_rate": 2.18,
    "avg_score": 2404
@@ -45,19 +45,19 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1721,
+   "avg_views": 1722,
    "avg_likes": 44.5,
-   "like_rate": 2.59,
+   "like_rate": 2.58,
    "avg_score": 2399
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 10,
-   "avg_views": 1720,
+   "avg_views": 1721,
    "avg_likes": 43.7,
    "like_rate": 2.54,
-   "avg_score": 2378
+   "avg_score": 2380
   },
   {
    "slug": "musik",
@@ -84,9 +84,9 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 1923 Aufrufe, 2.33 % Likes).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 1925 Aufrufe, 2.32 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1768 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2527 zu 705 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2528 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -94,8 +94,8 @@
   "vier"
  ],
  "words_bad": [
-  "lied",
   "bekanntes",
+  "lied",
   "erkennst",
   "remix"
  ],
@@ -104,11 +104,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2560,
+   "views": 2561,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3400
+   "score": 3401
   },
   {
    "id": 77,
@@ -134,21 +134,21 @@
    "id": 139,
    "title": "Dieses winzige Tier ist zäher als ein Löwe",
    "category": "tiere",
-   "views": 2170,
+   "views": 2172,
    "likes": 54,
    "comments": 0,
    "shares": 1,
-   "score": 3020
+   "score": 3022
   },
   {
    "id": 120,
    "title": "Warum du bei Musik Gänsehaut bekommst",
    "category": "fakten",
-   "views": 2342,
+   "views": 2339,
    "likes": 45,
    "comments": 0,
    "shares": 0,
-   "score": 3017
+   "score": 3014
   }
  ],
  "flop": [
