@@ -2282,6 +2282,7 @@ def direct(scenes, times, topic="", style="", look=""):
     _relatives(scenes)
     _funeral_story(scenes, topic)
     _studio_story(scenes, topic)
+    _unpaid(scenes)
     _music(scenes, topic)
     _fur_ancestor(scenes)
     _fur_story(scenes)
@@ -4097,7 +4098,24 @@ def _funeral_story(scenes, topic=""):
 TATTOO_RE = r"tattoo|tätowier|tatowier"
 NAILS_RE = r"nagelstudio|nageldesign|nagelsalon|manik[üu]re|neumodellage|gel-?nägel|kunstnägel|fingernägel|nagellack|\bnägel\b|nagelfeile|\bfeilt\b|\bfeile\b"
 TATTOO_DO_RE = r"\bsticht\b|\bstechen\b|\bgestochen|tätowiert|tätowieren|\bnadel|tattoo"
-NAILS_DO_RE = r"\bfeilt\b|\bfeilen\b|\bfeile\b|lackier|\bnägel\b|neumodellage|manik[üu]re|auffüllen"
+NAILS_DO_RE = r"\bfeilt\b|\bfeilen\b|\bfeile\b|lackier|\bnägel\b|gel-?nägel|kunstnägel|modellage|manik[üu]re|auffüllen|aufgefüllt"
+UNPAID_RE = r"unbezahlt|bezahlt \w+ (?:leider |aber |natürlich )?(?:niemand|keiner)|(?:niemand|keiner) bezahlt|bezahlt (?:leider |aber )?(?:niemand|keiner)|ohne bezahlung|\bkostenlos\b|\bumsonst\b|\bgratis\b|kein(?:en)? cent|kein geld"
+
+
+def _unpaid(scenes):
+    """„Beratung und Zeichnen bezahlt Tobi leider niemand“ (Video 171, Prüfung 20.11.2026): die Figur hielt dabei einen Stapel Geldscheine.
+    Sagt der Satz, dass etwas unbezahlt oder kostenlos ist, liegt und hält niemand Geld."""
+    import re as _re
+    for sc in scenes:
+        if not isinstance(sc, dict) or not _re.search(UNPAID_RE, str(sc.get("text") or "").lower()):
+            continue
+        key = lambda q: extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(), str(q.get("type") if isinstance(q, dict) else q).lower())
+        sc["props"] = [q for q in (sc.get("props") or []) if key(q) != "money"]
+        for a in (sc.get("actors") or []):
+            if isinstance(a, dict) and extras.PROP_ALIASES.get(str(a.get("hold") or "").lower(), str(a.get("hold") or "").lower()) in ("money", "prop:money"):
+                a["hold"] = ""
+        if sc.get("shot") == "insert" and not sc.get("props"):
+            sc["shot"] = "wide"
 
 
 def _studio_story(scenes, topic=""):
@@ -4141,6 +4159,11 @@ def _studio_story(scenes, topic=""):
         tools = ("tattoomachine",) if rp == "tattoostudio" else ("nailfile", "nailpolish")
         sc["props"] = [q for q in (sc.get("props") or []) if (extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(), str(q.get("type") if isinstance(q, dict) else q).lower())
                                                            not in ("car", "bus", "truck", "police", "ambulance", "tree", "house", "tv", "computer", "fridge", "sofa", "table", "shelf", "tattoomachine", "nailfile") + (("nailpolish",) if rp == "tattoostudio" else ()))]
+        loose = [q for q in (sc.get("props") or []) if (extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(), str(q.get("type") if isinstance(q, dict) else q).lower())) in ("nailpolish", "nailfile", "tattoomachine")]
+        if loose:                                         # Fläschchen und Feile liegen nicht auf dem Fußboden: in die Hand oder weg
+            sc["props"] = [q for q in sc["props"] if q not in loose]
+            if humans and not str(humans[0].get("hold") or "") and str(humans[0].get("action") or "") not in ("run", "sleep", "fall", "jump", "dance", "wave", "shake", "lie"):
+                humans[0]["hold"] = str(loose[0].get("type") if isinstance(loose[0], dict) else loose[0])
         if len(humans) == 1:
             home.setdefault(str(humans[0]["id"]), rp)
         do = _re.search(TATTOO_DO_RE if rp == "tattoostudio" else NAILS_DO_RE, low)

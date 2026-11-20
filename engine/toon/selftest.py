@@ -2011,7 +2011,12 @@ def main():
         assert places.resolve("fitnessstudio") == "plain" and places.resolve("neutral_studio") == "plain"
         no = stage.direct([{"text": "Ich schneide mir die Nägel im Bad.", "place": "bathroom", "actors": [{"id": "du"}]}], [(0, 4)], "Morgenroutine", "fakten")
         assert places.resolve(no[0]["place"]) == "bathroom", "ein genannter Ort bleibt"
-        for sc_ in sf:
+        up = stage.direct([{"text": "Beratung und Motive zeichnen bezahlt Tobi leider niemand.", "place": "tattoostudio", "actors": [{"id": "tobi", "action": "think", "hold": "money"}], "props": ["money"]},
+                           {"text": "Einfache Gelnägel bei Nina kosten vierzig Euro.", "place": "nagelstudio", "actors": [{"id": "nina", "action": "point"}], "props": ["nailpolish"]}],
+                          [(0, 4), (4, 8)], "Tattoo-Studio gegen Nagelstudio", "vergleich")
+        assert not [q for q in up[0].get("props") or [] if "money" in str(q)] and not str(up[0]["actors"][0].get("hold") or ""), f"unbezahlt: kein Geld im Bild: {up[0].get('props')} {up[0]['actors'][0].get('hold')}"
+        assert not [q for q in up[1].get("props") or [] if "nailpolish" in str(q)] and up[1]["actors"][0].get("hold"), f"Fläschchen in der Hand statt am Boden: {up[1].get('props')} {up[1]['actors'][0].get('hold')}"
+        for sc_ in sf + up:
             frame(sc_, {"tobi": {"shirt": "schwarz", "hat": "beanie"}, "nina": {"shirt": "pink", "hair": "ponytail", "gender": "w"}})
         for pl_ in ("tattoostudio", "nailstudio"):
             frame({"place": pl_, "time": "night", "actors": [{"id": "du"}]})

@@ -608,3 +608,6 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   übers Tätowieren bzw. über Nägel spielt im passenden Studio, die Figur hält Maschine bzw. Feile, kein Schnitt auf ein Ding allein
   (`_no_insert`). Jede Figur merkt sich ihr Studio: Folgesätze ohne eigenen Ort spielen wieder dort; stehen beide zusammen im Bild und der
   Satz nennt kein Studio, ist der Ort neutral. Drinnen kein Wetter, kein Auto, keine Passanten. Selbsttest-Fall `_studios`.
+  Nach Video 171 (erster Neubau): `stage._unpaid` – sagt der Satz „unbezahlt“, „bezahlt … niemand“, „kostenlos“, liegt und hält niemand Geld
+  (Tobi hielt bei „bezahlt ihm niemand“ einen Stapel Scheine). Fläschchen, Feile und Maschine liegen im Studio nie am Boden: in die Hand
+  der Figur oder weg. Plan-Figuren unter `who` werden zu `actors` (`writer`).
