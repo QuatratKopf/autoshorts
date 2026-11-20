@@ -560,3 +560,15 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Noch offen: Der geschärfte Einstieg der Text-KI macht aus „alle drei sind giftig“ ein „tödlich giftig“ samt Stempel, obwohl das Schnabeltier für
   Menschen nicht tödlich ist; „landet in Japan auf dem Teller“ spielt in einem Schnellrestaurant mit Passanten; Jäger mit Blasrohr haben kein Bild; eine
   Hand, auf der der Frosch sitzt, gibt es nicht; die verlangte Schlussfrage fehlt je nach Neubau.
+
+- Ausbau 20.11.2026 (keine offenen `needs` in den Plänen; Wünsche aus den Mittelalter-, Weihnachts-, Gänsehaut- und Geräte-Videos):
+  Bibliothek von Hand gezeichnet: `kompass` (Taschenkompass aus Messing mit rot-weißer Nadel; neu). Neu gezeichnet statt der vorläufigen Fassung:
+  `knoblauch` (Knolle mit einzelner Zehe), `kessel` (gusseiserner Kochkessel auf drei Füßen mit Eintopf, Henkel und Dampf – ohne den Alias „topf“),
+  `kamin` (gemauerter Kamin mit Holzsims und brennenden Scheiten – ohne den Alias „ofen“: „Backofen“/„Ofen“ ist kein Kamin), `kalender`
+  (Abreißkalender zum Aufstellen, ein Tag rot markiert, keine Ziffern), `sofa` (blaues Zweisitzer-Sofa mit Kissen), `neonreklame` (Schild am Mast
+  mit Neonröhren-Rahmen, Pfeil und Zickzack, ohne Schrift – pulsiert; als Bild 2,4 m hoch), `jacke` (orange Steppjacke am Kleiderbügel).
+  Der Wunsch `navi` ist erledigt (seit der Prüfung vom 19.11. zeigt ein Navi-Satz das Auto auf der Straße).
+  Noch offen (vorläufige Zeichnungen der Text-KI): kaffeebohne, tarantel, insekt, erdloch, keule, radar, kunststoffbecken, pinzette, nachricht,
+  zigarette, notenschluessel, schwamm, ohr, ohrstöpsel. Offene Wünsche ohne Zeichnung: staub, raum, polyp, knie, anwaltstitel, toplitzsee, miete,
+  algorithmus, statistik, musik, knall, friteuse, dach, hand, handfläche (greifbar davon: polyp, knie, friteuse, dach, hand/handfläche – eine
+  Hand, auf der ein Tier sitzt, wäre eine eigene Haltung der Figur, kein Bibliotheks-Gegenstand).

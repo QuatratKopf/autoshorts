@@ -1599,7 +1599,7 @@ def main():
         from pathlib import Path
         from .. import adopt, state as st_
         good = [{"t": "rect", "x": 150, "y": 200, "w": 100, "h": 200, "c": "#88aa44"}, {"t": "ellipse", "cx": 200, "cy": 180, "rx": 60, "ry": 40, "c": "#cc4444"}]
-        theirs = {"kompass": {"name": "kompass", "aliases": ["kompasse", "haus", "geld"], "shapes": good}, "auto": {"name": "auto", "shapes": good},
+        theirs = {"sextant": {"name": "sextant", "aliases": ["sextanten", "haus", "geld"], "shapes": good}, "auto": {"name": "auto", "shapes": good},
                   "kaputt": {"name": "kaputt", "shapes": [{"t": "rect"}]}, "boese": {"name": "boese", "shapes": good}, "x": "<script>"}
         saved = {}
         old = (adopt._repo_ok, adopt._fetch_shapes, adopt._looks_ok, adopt.load, adopt.save)
@@ -1612,7 +1612,7 @@ def main():
             assert adopt.adopt("freund/autoshorts,fremd/repo") == 1
         finally:
             adopt._repo_ok, adopt._fetch_shapes, adopt._looks_ok, adopt.load, adopt.save = old
-        assert set(saved) == {"kompass"} and saved["kompass"]["aliases"] == ["kompasse"], saved.keys()
+        assert set(saved) == {"sextant"} and saved["sextant"]["aliases"] == ["sextanten"], saved.keys()
     check("Kanäle: Übernahme aus Kopien nur geprüft", _adopt)
 
     def _size():                                                 # winzige Tiere: Größe mit Zoom und Lineal statt Tier so groß wie ein Bär

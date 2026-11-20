@@ -338,15 +338,18 @@
  },
  "knoblauch": {
   "n": 1,
-  "last": "Ich lebte wie 1348 und mein Haushalt verklagte mich"
+  "last": "Ich lebte wie 1348 und mein Haushalt verklagte mich",
+  "done": true
  },
  "kessel": {
   "n": 1,
-  "last": "Ich lebte wie 1348 und mein Haushalt verklagte mich"
+  "last": "Ich lebte wie 1348 und mein Haushalt verklagte mich",
+  "done": true
  },
  "kamin": {
   "n": 1,
-  "last": "Ich lebte wie 1348 und mein Haushalt verklagte mich"
+  "last": "Ich lebte wie 1348 und mein Haushalt verklagte mich",
+  "done": true
  },
  "salbeiblatt": {
   "n": 1,
@@ -442,7 +445,8 @@
  },
  "kompass": {
   "n": 1,
-  "last": "Du bist nicht müde: Hol dir deine Energie zurück!"
+  "last": "Du bist nicht müde: Hol dir deine Energie zurück!",
+  "done": true
  },
  "wecker": {
   "n": 1,
@@ -546,7 +550,8 @@
  },
  "jacke": {
   "n": 1,
-  "last": "Warum bekommen wir Gänsehaut? Titelbild-Text: WARUM GÄNSEHAUT?"
+  "last": "Warum bekommen wir Gänsehaut? Titelbild-Text: WARUM GÄNSEHAUT?",
+  "done": true
  },
  "löwe": {
   "n": 1,
@@ -643,7 +648,8 @@
  },
  "neonreklame": {
   "n": 1,
-  "last": "Weihnachten mit der Familie eskaliert komplett"
+  "last": "Weihnachten mit der Familie eskaliert komplett",
+  "done": true
  },
  "blauwal": {
   "n": 1,
@@ -657,7 +663,8 @@
  },
  "sofa": {
   "n": 1,
-  "last": "Vier Typen, die an Weihnachten an jedem Tisch sitzen"
+  "last": "Vier Typen, die an Weihnachten an jedem Tisch sitzen",
+  "done": true
  },
  "gameboy": {
   "n": 1,
@@ -666,7 +673,8 @@
  },
  "navi": {
   "n": 1,
-  "last": "Was wäre, wenn deine Geräte plötzlich die Wahrheit sagen?"
+  "last": "Was wäre, wenn deine Geräte plötzlich die Wahrheit sagen?",
+  "done": true
  },
  "schnabeltier": {
   "n": 1,
@@ -689,7 +697,8 @@
  },
  "kalender": {
   "n": 1,
-  "last": "Süß, aber giftig: Diese 3 Tiere fasst du besser nie an"
+  "last": "Süß, aber giftig: Diese 3 Tiere fasst du besser nie an",
+  "done": true
  },
  "handfläche": {
   "n": 1,
