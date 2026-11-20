@@ -4772,8 +4772,8 @@
   "tt_status": "Zernio: published",
   "tt_publish_id": "zernio:6afb5bb4e314293ef26cba5b",
   "error": null,
-  "yt_thumb_at": 1795078105.20017,
-  "yt_thumb_tries": 4,
+  "yt_thumb_at": 1795151085.2199593,
+  "yt_thumb_tries": 5,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7708856121619959073?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
  },
@@ -5025,8 +5025,8 @@
   "tt_status": "Zernio: published",
   "tt_publish_id": "zernio:6afc7630915303bf9fc35a35",
   "error": null,
-  "yt_thumb_at": 1795078107.4898055,
-  "yt_thumb_tries": 3,
+  "yt_thumb_at": 1795151087.139083,
+  "yt_thumb_tries": 4,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7709166672900361505?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
  },
