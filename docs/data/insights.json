@@ -1,5 +1,5 @@
 {
- "updated": 1795165609.9295225,
+ "updated": 1795167431.773854,
  "enough": true,
  "counted": 27,
  "total": 29,
@@ -18,10 +18,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 2,
-   "avg_views": 1836,
+   "avg_views": 1838,
    "avg_likes": 40.5,
-   "like_rate": 2.21,
-   "avg_score": 2478
+   "like_rate": 2.2,
+   "avg_score": 2480
   },
   {
    "slug": "storys",
@@ -93,10 +93,10 @@
   "gänsehaut"
  ],
  "words_bad": [
-  "lied",
   "bekanntes",
+  "remix",
   "erkennst",
-  "remix"
+  "lied"
  ],
  "top": [
   {
@@ -130,6 +130,16 @@
    "score": 3078
   },
   {
+   "id": 139,
+   "title": "Dieses winzige Tier ist zäher als ein Löwe",
+   "category": "tiere",
+   "views": 2168,
+   "likes": 54,
+   "comments": 0,
+   "shares": 1,
+   "score": 3018
+  },
+  {
    "id": 120,
    "title": "Warum du bei Musik Gänsehaut bekommst",
    "category": "fakten",
@@ -138,16 +148,6 @@
    "comments": 0,
    "shares": 0,
    "score": 3017
-  },
-  {
-   "id": 139,
-   "title": "Dieses winzige Tier ist zäher als ein Löwe",
-   "category": "tiere",
-   "views": 2164,
-   "likes": 54,
-   "comments": 0,
-   "shares": 1,
-   "score": 3014
   }
  ],
  "flop": [
