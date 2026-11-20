@@ -6377,5 +6377,13 @@
   "thumb": true,
   "look": "cartoon",
   "mp4": true
+ },
+ {
+  "id": 169,
+  "category": "comedy",
+  "topic": "Warum wir in den unpassendsten Momenten lachen müssen – Ich-Geschichte eines jungen Mannes (männliche Hauptfigur „du“, erzählt in Ich-Form, durchgehend in der Vergangenheit) auf einer Beerdigung, lustig und warmherzig, nie respektlos. Stoff als Stichpunkte, nicht wörtlich abschreiben, in dieser Reihenfolge: Der erste Satz sagt, dass er auf einer Beerdigung mitten in der Kirche laut loslachen musste. Am Morgen explodierte sein Staubsauger mit einem Knall, die Wohnung war voller Staub, er kam gestresst und zu spät los. In der Kirche war es totenstill, Oma weinte leise neben ihm. Mitten in der Stille fiel ihm der Staubsauger wieder ein und er spürte das Lachen aufsteigen. Er biss sich auf die Lippe, hielt die Luft an und dachte an seine Steuererklärung. Dann prustete er laut los und alle drehten sich um. Finte: Das ist nicht respektlos, das ist nervöses Lachen. Erklärung: Bei zu viel Anspannung versucht der Körper unbewusst, Stress abzubauen, das Lachen wirkt wie ein Ventil. Forscher sehen darin einen Schutz vor überwältigender Anspannung. Der Haken: Meist macht es die Lage erst richtig peinlich. Was oft hilft: langsam und tief ausatmen und sich auf etwas Neutrales konzentrieren, zum Beispiel die Kirchenfenster zählen. Schlusspointe: Nach der Feier nahm Oma ihn draußen in den Arm und sagte, der Verstorbene hätte am lautesten mitgelacht (ihn nur „er“ nennen, kein Opa, kein Onkel). Letzter Satz ist die Frage an die Zuschauer: Wo musstest du schon mal im falschen Moment lachen? Keine Zahlen, keine Uhrzeit, keine Prozentangaben, keine Jahreszahlen, kein Dopamin, keine Hormone, keine Forschernamen, kein erfundener Fachbegriff, kein Zwicken oder Schmerz als Tipp, kein Teppich, keine Grafik mit Zahl. Orte: Staubsauger im Wohnzimmer, sonst alles in der Kirche (chapel), nur die Schlusspointe mit Oma auf dem Friedhof (graveyard); das Gehirn darf als Figur bei der Erklärung auftreten. Titel: Warum du ausgerechnet auf Beerdigungen lachen musst. Titelbild-Text: WARUM LACHST DU?",
+  "status": "error",
+  "created": 1795193202.9095592,
+  "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-3.6-flash: HTTP 429 | pollinations: Antwort enthält kein JSON"
  }
 ]
