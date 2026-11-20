@@ -1,7 +1,7 @@
 {
- "updated": 1795185468.5860574,
+ "updated": 1795187274.4875028,
  "enough": true,
- "counted": 28,
+ "counted": 29,
  "total": 30,
  "needed": 6,
  "categories": [
@@ -17,11 +17,11 @@
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
-   "n": 2,
-   "avg_views": 1838,
-   "avg_likes": 40.5,
-   "like_rate": 2.2,
-   "avg_score": 2480
+   "n": 3,
+   "avg_views": 1777,
+   "avg_likes": 42.7,
+   "like_rate": 2.4,
+   "avg_score": 2450
   },
   {
    "slug": "storys",
@@ -36,28 +36,28 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
-   "avg_views": 1786,
+   "avg_views": 1788,
    "avg_likes": 39.0,
    "like_rate": 2.18,
-   "avg_score": 2402
+   "avg_score": 2404
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1719,
+   "avg_views": 1721,
    "avg_likes": 44.5,
    "like_rate": 2.59,
-   "avg_score": 2397
+   "avg_score": 2398
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 10,
-   "avg_views": 1718,
+   "avg_views": 1719,
    "avg_likes": 43.7,
    "like_rate": 2.54,
-   "avg_score": 2377
+   "avg_score": 2378
   },
   {
    "slug": "musik",
@@ -74,7 +74,7 @@
   "grusel": 1.2,
   "storys": 1.02,
   "mysterien": 1.0,
-  "tiere": 1.03,
+  "tiere": 1.02,
   "whatif": 0.99,
   "comedy": 1.09,
   "musik": 0.82,
@@ -86,7 +86,7 @@
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 1924 Aufrufe, 2.33 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1765 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2530 zu 705 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2526 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -94,21 +94,21 @@
   "vier"
  ],
  "words_bad": [
-  "erkennst",
+  "lied",
   "remix",
-  "bekanntes",
-  "lied"
+  "erkennst",
+  "bekanntes"
  ],
  "top": [
   {
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2557,
+   "views": 2560,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3397
+   "score": 3400
   },
   {
    "id": 77,
@@ -124,21 +124,21 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 2058,
+   "views": 2059,
    "likes": 68,
    "comments": 0,
    "shares": 0,
-   "score": 3078
+   "score": 3079
   },
   {
    "id": 139,
    "title": "Dieses winzige Tier ist zäher als ein Löwe",
    "category": "tiere",
-   "views": 2168,
+   "views": 2169,
    "likes": 54,
    "comments": 0,
    "shares": 1,
-   "score": 3018
+   "score": 3019
   },
   {
    "id": 120,
