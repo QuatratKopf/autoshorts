@@ -16,7 +16,7 @@ SCALE = 1.08            # Figuren bewusst kleiner: die Szene steht im Mittelpunk
 POS = {"left": 250, "center": 540, "right": 830, "offleft": -260, "offright": 1340,
        "links": 250, "mitte": 540, "rechts": 830}
 TALL_OV = ("phone", "checklist", "note")
-NO_FURNITURE = ("restaurant", "diningroom", "bathroom", "hallway", "supermarket", "supermarket_empty", "station", "transit", "basement", "attic", "hospital", "serverroom")
+NO_FURNITURE = ("restaurant", "diningroom", "bathroom", "hallway", "supermarket", "supermarket_empty", "station", "transit", "basement", "attic", "hospital", "serverroom", "chapel")
 MAIN_IDS = ("du", "ich", "held", "hero", "main", "erzähler", "narrator", "a0")
 
 
@@ -216,6 +216,7 @@ def _prepare(scene, cast):
     cast = cast if isinstance(cast, dict) else {}
     place = places.resolve(backdrop(scene))
     _PROP_MIN[0] = 300 if scene.get("_near") else MIN_PROP_PX
+    MOURN[0] = bool(scene.get("_mourn"))                  # Beerdigung: Trauergäste und Verwandte tragen Schwarz (stage._funeral_story)
     places.XMAS[0] = bool(scene.get("_xmas"))             # Weihnachts-Video: Wohn- und Esszimmer sind geschmückt (stage._feast_story)
     places.ICE[0] = bool(scene.get("_ice"))               # zugefrorenes Meer: „unter Wasser“ liegt unter der Eisdecke
     places.LAKE[0] = bool(scene.get("_lake"))             # Schatzsuche im See: „unter Wasser“ ist der Seegrund, nicht das Meer
@@ -248,6 +249,8 @@ def _prepare(scene, cast):
             if len(humans) == 1:                          # Bildplan sagt „du“, Besetzung nennt die Hauptfigur beim Namen: dieselbe Figur
                 spec = humans[0]
         kind = str(a.get("kind") or spec.get("kind") or "").lower()
+        if MOURN[0] and not kind:                         # auf der Beerdigung: schwarz gekleidet, keine bunte Mütze (Plan 20.11.2026: Oma mit roter Mütze in der Kirche)
+            spec = dict(spec, shirt="schwarz", hat="" if str(spec.get("hat") or "") in ("cap", "beanie", "party", "chef") else spec.get("hat") or "")
         if not kind and not spec and aid.lower() not in MAIN_IDS:   # „vogel“ im Bildplan, in der Besetzung heißt er „truthahn“ (kind bird): das Tier, kein Mensch im Pulli (Video 148)
             kind = next((k for pat, k in TOPIC_CREATURES if k not in ("agent", "virus", "cell") and re.search(pat, aid.lower())), "")
             if not kind:
@@ -351,6 +354,8 @@ def _prepare(scene, cast):
     return place, night, scale, actors, props, str(scene.get("weather") or "").lower()
 
 
+MOURN = [False]        # Trauerfeier (setzt _prepare je Szene): alle im Bild tragen Schwarz
+MOURN_SHIRTS = ("schwarz", "grau", "schwarz", "schwarz", "grau")
 CROWD_SHIRTS = ("blau", "rot", "grün", "gelb", "orange", "lila", "türkis", "grau", "braun", "pink")
 CROWD_KINDS = {"worried": "worried", "besorgt": "worried", "nervous": "worried", "tense": "worried", "unruhig": "worried",
                "wait": "worried", "queue": "worried", "panic": "panic", "panik": "panic", "flee": "panic", "flucht": "panic", "run": "panic",
@@ -380,7 +385,7 @@ def _crowd(frame, kind, t, night, lo=0, hi=9999, road=False, traffic=True, indoo
             gy = (1004 + rnd.random() * 30) if i % 3 == 0 else (1110 + rnd.random() * 160)
         else:
             gy = 1000 + (rnd.random() ** 0.8) * 270
-        look = rig.Look.from_spec({"shirt": CROWD_SHIRTS[(i * 3 + 1) % len(CROWD_SHIRTS)], "hat": ("", "", "cap", "beanie", "")[i % 5],
+        look = rig.Look.from_spec({"shirt": MOURN_SHIRTS[i % len(MOURN_SHIRTS)] if MOURN[0] else CROWD_SHIRTS[(i * 3 + 1) % len(CROWD_SHIRTS)], "hat": "" if MOURN[0] else ("", "", "cap", "beanie", "")[i % 5],
                                    "hat_color": CROWD_SHIRTS[(i * 7) % len(CROWD_SHIRTS)], "hair": ("", "long", "", "bun")[i % 4],
                                    "skin": ("weiß", "hell", "mittel", "dunkel")[i % 4]})
         people.append((gy, look, rnd.random(), rnd.choice((-1, 1)), i))
@@ -2272,6 +2277,7 @@ def direct(scenes, times, topic="", style="", look=""):
     _household(scenes)
     _feast_story(scenes, topic)
     _relatives(scenes)
+    _funeral_story(scenes, topic)
     _music(scenes, topic)
     _fur_ancestor(scenes)
     _fur_story(scenes)
@@ -3410,6 +3416,19 @@ def _household(scenes):
     (3) Abmahnung, Brief, Einschreiben: die Figur hält einen Umschlag – kein Radio, von dem niemand spricht."""
     fridge_char = any(re.search(FRIDGE_ID_RE, str(a.get("id") or "").lower()) for sc in scenes if isinstance(sc, dict)
                       for a in (sc.get("actors") or []) if isinstance(a, dict))
+    vac_broken = False                                    # „mein Staubsauger explodierte“: ab da steht er kaputt da (Deckel auf, Staubwolke) – Prüfung 20.11.2026
+    for sc in scenes:
+        if not isinstance(sc, dict):
+            continue
+        low_v = str(sc.get("text") or "").lower()
+        if "staubsauger" in low_v and re.search(r"explodier|knall|kaputt|qualm|raucht|rauch\b|geht .{0,20}in die luft|den geist auf|platzt", low_v):
+            vac_broken = True
+        if vac_broken:
+            for q in (sc.get("props") or []):
+                if isinstance(q, dict) and extras.PROP_ALIASES.get(str(q.get("type") or "").lower(), str(q.get("type") or "").lower()) == "vacuum":
+                    q["type"] = "vacuum_broken"
+            if any(isinstance(q, dict) and q.get("type") == "vacuum_broken" for q in (sc.get("props") or [])):
+                sc["props"] = [q for q in sc["props"] if not (isinstance(q, dict) and str(q.get("type") or "").lower() in ("smoke", "explosion", "fire"))]   # die Staubwolke gehört zum Gerät: kein Qualm quer durchs Zimmer, keine Feuer-Explosion
     for sc in scenes:
         if not isinstance(sc, dict):
             continue
@@ -4009,6 +4028,54 @@ def _feast_story(scenes, topic=""):
             sc["time"] = "day"
 
 
+FUNERAL_RE = r"beerdigung|beisetzung|begräbnis|trauerfeier|trauergottesdienst|trauergäste|trauergemeinde|\bsarg\b|\bam grab\b"
+CHURCH_IN_RE = r"\bin (?:der|einer|dieser|unserer) (?:\w+ )?(?:kirche|kapelle|trauerhalle)\b|kirchenbank|kirchenbänke|trauerfeier|gottesdienst|trauergäste|trauergemeinde|\bpfarrer|\bpastor|\borgel"
+CHURCH_OUT_RE = r"vor der (?:kirche|kapelle)|kirchturm|kirchenglocke|kirchplatz|kirchentür|\bdraußen\b|\bfriedhof|\bam grab\b"
+
+
+def _funeral_story(scenes, topic=""):
+    """Beerdigung / Trauerfeier (Prüfung 20.11.2026, Plan „Unpassend lachen“): „In der Kirche war es so leise …“ spielte auf der Straße vor
+    einer Kirche, die „Trauergäste“ waren bunte Passanten mit Mützen, Oma trug eine rote Mütze. Spricht Thema oder Text von einer
+    Beerdigung, spielen Kirchen-Szenen im Kirchenraum (`chapel`), alle Menschen in Kirche und am Grab tragen Schwarz (`_mourn`),
+    es läuft, jubelt und rennt dort niemand, kein Auto und kein Wetter im Kirchenraum, und es bleibt bei einer Tageszeit."""
+    import re as _re
+    sc_l = [sc for sc in scenes if isinstance(sc, dict)]
+    all_t = (str(topic or "") + " " + " ".join(str(sc.get("text") or "") for sc in sc_l)).lower()
+    if not _re.search(FUNERAL_RE, all_t):
+        return
+    inside = False
+    for sc in sc_l:
+        low = str(sc.get("text") or "").lower()
+        if sc.get("shot") == "graphic" or isinstance(backdrop(sc), dict):
+            continue
+        rp = places.resolve(backdrop(sc))
+        if _re.search(CHURCH_OUT_RE, low):
+            inside = False
+        elif rp == "church" or (_re.search(CHURCH_IN_RE, low) and rp in GENERIC + ("plain", "street", "park", "village", "graveyard", "church", "hallway")):
+            sc["place"], rp, inside = "chapel", "chapel", True
+        elif rp == "chapel":
+            inside = True
+        if rp not in ("chapel", "graveyard"):
+            continue
+        sc["_mourn"] = True
+        cr = str(sc.get("crowd") or "").lower()
+        if cr and CROWD_KINDS.get(cr) not in ("sad", "watch", "worried"):
+            sc["crowd"] = "sad"                            # niemand schlendert, jubelt oder rennt durch die Trauerfeier
+        elif not cr and str(sc.get("shot") or "") not in ("close", "insert") and len([a for a in (sc.get("actors") or []) if isinstance(a, dict)]) < 2 and _re.search(r"beerdigung|trauergäste|trauergemeinde|\balle\b|\bjeder\b|\bleute\b|\bstill|\bleise\b", low):
+            sc["crowd"] = "sad"                            # „alle blickten betroffen auf den Boden“: die Trauergäste stehen da
+        sc["props"] = [q for q in (sc.get("props") or []) if (extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(), str(q.get("type") if isinstance(q, dict) else q).lower())
+                                                           not in ("vacuum", "vacuum_broken", "smoke", "explosion", "fire"))]   # „ich dachte nur an den Staubsauger“: ein Gedanke – das Gerät steht nicht im Mittelgang
+        if rp == "chapel":
+            sc["weather"] = ""
+            sc["time"] = "day"
+            sc["props"] = [q for q in (sc.get("props") or []) if (extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(), str(q.get("type") if isinstance(q, dict) else q).lower())
+                                                               not in ("car", "bus", "truck", "police", "ambulance", "tree", "house", "tv", "computer", "fridge", "sofa"))]
+        for a in (sc.get("actors") or []):
+            if isinstance(a, dict) and not a.get("kind") and str(a.get("action") or "") in ("dance", "cheer", "run") and not _re.search(r"renn|rann|lauf|lief|tanz|flücht|stürm", low):
+                a["action"] = "freeze"                     # in der Kirche tanzt und rennt niemand ohne Grund
+                a["to"] = ""
+
+
 def _relatives(scenes):
     """Nennt der Satz Oma, Opa, Onkel, Tante, Mama, Papa, Cousin …, steht die Person im Bild – mit eigenem Aussehen (graue Haare, Dutt, Brille …).
     Handelt der Satz nur von ihr (kein du/ich), steht sie anstelle der Hauptfigur da; sonst rechts neben ihr. In Video 148 „zog Oma eine
@@ -4338,6 +4405,10 @@ def _cold_open(scenes):
     import copy
     if len(scenes) < 4 or not isinstance(scenes[0], dict) or _scene_punch(scenes[0]) >= 3:
         return
+    rp0 = places.resolve(backdrop(scenes[0])) if not isinstance(backdrop(scenes[0]), dict) else ""
+    words0 = re.findall(r"[a-zäöüß]{4,}", str(scenes[0].get("text") or "").lower())
+    if rp0 and rp0 not in GENERIC and any(places.ALIASES.get(f_) == rp0 or f_ == rp0 for w_ in words0 for f_ in (w_, w_[:-1], w_[:-2]) if f_ not in SAID_SKIP):
+        return                                            # „Ich stand auf einer Beerdigung …“: der Satz nennt seinen Ort und spielt dort – kein Vorgriff aufs Wohnzimmer (Video 167)
     g_first = graphics.clean(scenes[0].get("graphic")) if scenes[0].get("shot") == "graphic" else None
     if g_first and g_first.get("type") in ("radar", "news", "radio", "phone", "chart", "pulse"):
         return                                            # das erste Bild ist schon ein bewegtes Schaubild zum Satz (Radarschirm, Eilmeldung): kein fremdes Bild davor
@@ -4784,7 +4855,7 @@ MOOD_HINTS = [
     (r"menschen|leute|bevölkerung|einwohner|millionen|milliarden|gesellschaft", ("", "walk")),
     (r"staunen|beobachten|schauen zu|zuschauer", ("", "watch")),
 ]
-INDOOR = ("bedroom", "livingroom", "diningroom", "kitchen", "transit", "office", "classroom", "lab", "hospital", "basement", "cave", "underwater", "space", "cinema")
+INDOOR = ("bedroom", "livingroom", "diningroom", "kitchen", "transit", "office", "classroom", "lab", "hospital", "basement", "cave", "underwater", "space", "cinema", "chapel")
 MAPS = ("germany", "worldmap")
 GARAGES = ("garage",)                                           # in der Werkstatt stehen Autos (drinnen sonst nie)
 GARAGE_VEHICLES = ("car", "police", "ambulance", "truck", "bike")
@@ -4793,7 +4864,7 @@ OUTDOOR_THINGS = ("drone", "cctv", "fire", "smoke", "volcano", "meteor", "tornad
                   "pile", "sandpile", "trash", "barrel", "generator")
 DULL = ("table", "shelf", "streetlamp", "rock", "box")          # allein als Großaufnahme langweilig
 INDOOR_THINGS = ("faucet", "glass", "candle", "cans", "clock", "door", "fridge", "tv", "computer", "shelf", "cart", "table", "money", "aquarium")
-TEXT_PROPS = [(r"motorkran|werkstattkran|bau\w* .{0,40}motor.{0,40}\bein\b|motor\w* (?:\w+ )?(?:ein|aus)ge?bau|(?:ein|aus)bau\w* .{0,30}motor|motortausch|motor\w* .{0,25}(?:hoch|heb|hängt)", "enginehoist"),
+TEXT_PROPS = [(r"staubsauger", "vacuum"), (r"motorkran|werkstattkran|bau\w* .{0,40}motor.{0,40}\bein\b|motor\w* (?:\w+ )?(?:ein|aus)ge?bau|(?:ein|aus)bau\w* .{0,30}motor|motortausch|motor\w* .{0,25}(?:hoch|heb|hängt)", "enginehoist"),
               (r"motorständer|montageständer", "enginestand"), (r"\bv8\b|\bv12\b|\bw12\b|\bw16\b|\bmotor(?!rad|roller|säge|boot)\w*|motorblock|verbrenner|\bzylinder|\bps\b", "engine"),
               (r"kolben|pleuel|kurbelwelle", "piston"), (r"getriebe|kupplung|\bgänge?\b|schaltknauf", "gearbox"), (r"kühler\b|kühlwasser|überhitz", "radiator"),
               (r"(?<![a-zäöüß])(?:\w*?(?:auto|winter|sommer|ersatz|hinter|vorder|renn|gummi))?reifen\b|felge|\bräder\b", "tire"), (r"hebebühne", "carlift"), (r"werkzeug|schrauber|schraubt", "toolbox"), (r"schraubenschlüssel", "wrench"), (r"bohrmaschine|schlagbohrer|akkuschrauber|\bbohrt\b|\bbohren\b|\bbohrer\b", "drill"),
@@ -4819,18 +4890,20 @@ CREATURE_SIZE = {"cheetah": 1.0, "eagle": 0.8, "flea": 0.4, "shrimp": 0.5, "mant
 GIANT_RE = r"riesen|riesig|gigant|monströs|so groß wie|meterhoh|haushoh|mutier"
 # Nur hier laufen Passanten durchs Bild – auf dem Feld, im Wald, im Keller ist niemand unterwegs
 CROWD_PLACES = ("headquarters", "street", "park", "village", "beach", "icesea", "harbor", "gasstation", "station", "transit", "supermarket", "supermarket_empty", "hospital", "office",
-                "classroom", "restaurant", "church")
+                "classroom", "restaurant", "church", "chapel")
 CROWD_ELEMENTS = ("city", "village", "street", "houses")
 
 
 def crowd_ok(scene):
+    if scene.get("_mourn") and str(scene.get("crowd") or "") in ("sad", "watch", "worried"):
+        return True                                       # Trauergäste stehen auch am Grab (stage._funeral_story)
     b = backdrop(scene)
     if isinstance(b, dict):
         return any(str(e) in CROWD_ELEMENTS for e in (b.get("elements") or []))
     return places.resolve(b) in CROWD_PLACES
 
 
-PUBLIC_INDOOR = ("supermarket", "supermarket_empty", "station", "transit", "hospital", "office", "classroom", "restaurant")
+PUBLIC_INDOOR = ("supermarket", "supermarket_empty", "station", "transit", "hospital", "office", "classroom", "restaurant", "chapel")
 STRONG_FEELINGS = ("shocked", "scared", "sad", "angry", "worried")
 MOOD_EMOTION = {"panic": "scared", "tense": "worried", "scary": "scared", "sad": "sad", "happy": "happy"}
 EMOTION_OK = {"panic": ("scared", "shocked", "worried"), "tense": ("worried", "scared", "shocked", "angry", ""),

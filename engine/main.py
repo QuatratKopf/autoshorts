@@ -153,7 +153,8 @@ def known_thing(word):
         return True
     pool = (set(extras.PROPS) | set(extras.PROP_ALIASES) | set(extras.HELD) | set(extras.CREATURES) | set(places.PLACES) | set(places.ALIASES)
             | set(places.OUTDOOR_SPECS) | set(places.EL_ALIASES) | set(places.BACK) | set(places.MID) | set(places.FRONT_EL)
-            | {"mensch", "menschen", "leute", "person", "personen", "figur", "mann", "frau", "kind", "kinder", "menge", "familie",
+            | {"teppich", "teppiche", "beerdigung", "trauerfeier", "trauergäste", "sarg", "staub",   # Teppich liegt im Wohnzimmer schon; gelernt wurde ein Tisch mit Muster (Video 167)
+               "mensch", "menschen", "leute", "person", "personen", "figur", "mann", "frau", "kind", "kinder", "menge", "familie",
                "katze", "hund", "spinne", "krebs", "krebse", "geist", "roboter", "vogel", "vögel", "dinosaurier", "fisch", "fische", "hai", "biene", "bienen",
                "wespe", "delfin", "delfine", "delphin", "schweinswal", "schweinswale", "tümmler", "kuh", "kühe", "rind", "rinder", "schwein", "schweine", "ferkel",
                "frosch", "frösche", "pfeilgiftfrosch", "pfeilgiftfrösche", "giftfrosch", "schnabeltier", "schnabeltiere", "kugelfisch", "kugelfische", "fugu", "giftsporn", "sporn",

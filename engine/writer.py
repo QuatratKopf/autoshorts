@@ -198,6 +198,8 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
            diningroom (Esszimmer mit gedeckter Festtafel – Familienessen, Feiertage; bei Weihnachts-Themen sind Wohn- und Esszimmer
            automatisch geschmückt). Verwandte (oma, opa, onkel, tante, mama, papa, cousin, cousine, schwester, bruder) unter genau dieser
            Kennung als Figur in "actors" setzen, sobald der Satz von ihnen spricht – sie bekommen ihr eigenes Aussehen.
+           chapel (Kirche von innen: bunte Fenster, Altar, Bankreihen – für Trauerfeier, Gottesdienst, Hochzeit; "church" ist die Kirche
+           von außen an der Straße). Bei einer Beerdigung tragen alle im Bild automatisch Schwarz; "crowd": "sad" zeigt die Trauergäste.
            draußen: headquarters (Büroturm einer großen Firma in der Stadt – für Konzerne, Firmensitze; ohne Logo), street (Häuserzeile mit Läden und Straße), park, forest, beach, desert, snow, mountain, farm, village,
            gasstation, powerplant, graveyard, ruins, camp (Zelte), moon, church, lake, river, fields, landfill (Müllhalde),
            harbor (Hafen: Kai mit Containerbrücken, Containerstapeln und Frachter – für Häfen, Schifffahrt, Handel, Lieferketten)
@@ -223,7 +225,7 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
                   solarpanel, cctv (Überwachungskamera am Mast)
            Werkstatt/Technik: engine (V8-Motor), enginehoist (Motorkran hebt Motor – Ein-/Ausbau), enginestand (Motor auf Montageständer),
                   crane (Motorkran leer), tire, tires (Reifenstapel), radiator (Kühler), gearbox (Getriebe), piston (Kolben, bewegt sich),
-                  toolbox (Werkzeugwagen), wrench, speedometer (Tacho, Zeiger steigt), scale (Waage, kippt), carlift (Hebebühne), oilcan, drill (Akku-Bohrmaschine, rattert)
+                  toolbox (Werkzeugwagen), wrench, speedometer (Tacho, Zeiger steigt), scale (Waage, kippt), carlift (Hebebühne), oilcan, drill (Akku-Bohrmaschine, rattert), vacuum (Staubsauger; vacuum_broken: Deckel aufgesprungen, Staubwolke)
            Himmel/Natur (Schaubilder, groß): drone (Drohne mit Kamera), plane, satellite, ship, ufo, meteor, explosion, earth, sun, moon, tornado, wave,
                   flood, ice, volcano, cloud, stormcloud, lightning, crack, smoke, aurora, eclipse
            (meteor fällt und schlägt ein, rocket startet, wave/flood steigen, crack reißt den Boden auf, eclipse verdunkelt

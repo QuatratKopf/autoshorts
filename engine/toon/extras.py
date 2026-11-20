@@ -3997,6 +3997,64 @@ PROP_ALIASES.update({"bohrmaschine": "drill", "bohrer": "drill", "akkuschrauber"
 SIZES["drill"] = (0.45, 1262)
 
 
+def _vacuum(d, x, t, broken):
+    """Bodenstaubsauger (Prüfung 20.11.2026, Plan „Unpassend lachen“: „mein Staubsauger explodierte“ – kein Staubsauger im Bild):
+    rotes Gehäuse auf Rädern, Schlauch im Bogen zum Saugrohr mit Bodendüse. Kaputt: Deckel aufgesprungen, Staubwolke, Knall-Zacken."""
+    j = int(math.sin(t * 37) * 3) if not broken else 0                        # er läuft: zittert leicht
+    body, dark = (214, 64, 58), (58, 60, 70)
+    bx = x - 40 + j
+    pts = [(bx - 30, GROUND - 250), (bx - 62, GROUND - 190), (bx - 70, GROUND - 120), (bx - 84, GROUND - 60), (bx - 112, GROUND - 22), (bx - 176, GROUND - 14)]   # Schlauch → Rohr → Düse
+    d.line(pts[:3], fill=INK, width=30, joint="curve")
+    d.line(pts[:3], fill=(96, 100, 112), width=18, joint="curve")
+    d.line(pts[2:5], fill=INK, width=24, joint="curve")
+    d.line(pts[2:5], fill=STEEL, width=12, joint="curve")
+    _r(d, (bx - 236, GROUND - 34, bx - 96, GROUND - 4), dark, 10)                                                               # Bodendüse
+    _o(d, (bx + 96, GROUND - 92, bx + 184, GROUND - 4), dark)                                                                 # Rad hinten
+    _o(d, (bx + 124, GROUND - 64, bx + 156, GROUND - 32), STEEL, 5, shade=False)
+    _r(d, (bx - 40, GROUND - 210, bx + 190, GROUND - 46), body, 62)                                                             # Gehäuse
+    _r(d, (bx - 6, GROUND - 100, bx + 150, GROUND - 76), dark, 8, shade=False)                                                  # Lüftungsgitter
+    _o(d, (bx + 96, GROUND - 180, bx + 150, GROUND - 126), (250, 206, 60), 6)                                                 # Schalter
+    _o(d, (bx - 30, GROUND - 60, bx + 26, GROUND - 4), dark)                                                                  # Rad vorn
+    if not broken:
+        _r(d, (bx + 10, GROUND - 244, bx + 130, GROUND - 204), dark, 16)                                                        # Tragegriff
+        return
+    _poly(d, [(bx + 10, GROUND - 214), (bx + 150, GROUND - 300), (bx + 176, GROUND - 264), (bx + 40, GROUND - 190)], (178, 52, 50))   # Deckel steht offen
+    k = min(1.0, max(0.0, t / 0.35))
+    cx, cy = bx + 70, GROUND - 300
+    if t < 1.1:                                                                                                                 # Knall-Zacken
+        star = []
+        for i in range(16):
+            a = math.radians(i * 22.5)
+            r = (150 if i % 2 == 0 else 84) * (0.4 + 0.6 * k)
+            star.append((cx + math.cos(a) * r, cy - 40 + math.sin(a) * r))
+        d.polygon(star, fill=(252, 214, 80), outline=INK, width=O)
+    for i in range(7):                                                                                                          # Staubwolke quillt heraus
+        ph = (t * 0.4 + i / 7) % 1
+        r = 34 + ph * 70
+        px = cx - 120 + i * 44 + math.sin(t * 1.3 + i * 2.1) * 16
+        py = cy - 30 - ph * 230
+        g = int(150 + ph * 60)
+        d.ellipse((px - r, py - r, px + r, py + r), fill=(g, g - 8, g - 20), outline=INK if ph < 0.55 else None, width=5)
+    for i in range(5):                                                                                                          # Staubflusen am Boden
+        fx = bx - 260 + i * 118 + (i % 2) * 30
+        d.ellipse((fx - 30, GROUND - 22, fx + 30, GROUND + 4), fill=(170, 160, 146), outline=INK, width=4)
+
+
+def p_vacuum(d, x, t, s=1.0):
+    _vacuum(d, x, t, False)
+
+
+def p_vacuum_broken(d, x, t, s=1.0):
+    _vacuum(d, x, t, True)
+
+
+PROPS["vacuum"] = p_vacuum
+PROPS["vacuum_broken"] = p_vacuum_broken
+PROP_ALIASES.update({"staubsauger": "vacuum", "sauger": "vacuum", "vacuum cleaner": "vacuum", "bodenstaubsauger": "vacuum", "kaputter staubsauger": "vacuum_broken", "broken vacuum": "vacuum_broken"})
+SIZES["vacuum"] = (0.8, 1262)
+SIZES["vacuum_broken"] = (1.7, 1262)
+
+
 PROPS.update({"engine": p_engine, "enginestand": p_enginestand, "crane": p_crane, "enginehoist": p_enginehoist, "tire": p_tire, "tires": p_tires,
               "radiator": p_radiator, "gearbox": p_gearbox, "toolbox": p_toolbox, "wrench": p_wrench, "speedometer": p_speedometer,
               "scale": p_scale, "piston": p_piston, "carlift": p_carlift, "oilcan": p_oilcan})

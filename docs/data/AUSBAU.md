@@ -579,3 +579,14 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   zigarette, notenschluessel, schwamm, ohr, ohrstöpsel. Offene Wünsche ohne Zeichnung: staub, raum, polyp, knie, anwaltstitel, toplitzsee, miete,
   algorithmus, statistik, musik, knall, friteuse, dach, hand, handfläche (greifbar davon: polyp, knie, friteuse, dach, hand/handfläche – eine
   Hand, auf der ein Tier sitzt, wäre eine eigene Haltung der Figur, kein Bibliotheks-Gegenstand).
+
+- Prüfung 20.11.2026, Termin 18 Uhr (Plan „Unpassend lachen: Warum das Gehirn bei Beerdigungen ausrastet“):
+  Neuer Ort `chapel` (`places.chapel`): Kirche von innen – Steinwand, drei Spitzbogenfenster mit buntem Glas, Altar mit Kerzen und Blumen,
+  Bankreihen, roter Läufer. `church` bleibt die Kirche von außen. Neuer Schlussdurchgang `stage._funeral_story` (greift bei Beerdigung,
+  Trauerfeier, Beisetzung, Sarg … in Thema oder Text): Szenen mit Ort `church` und Sätze „in der Kirche“, „Trauergäste“, „Pfarrer“ spielen im
+  Kirchenraum (außer „vor der Kirche“, „Friedhof“, „draußen“); Kirchenraum und Friedhof bekommen `_mourn` – alle Menschen tragen Schwarz,
+  niemand trägt Kappe oder bunte Mütze (`stage.MOURN`, auch die Menge aus `_crowd`), Trauergäste stehen auch am Grab (`crowd_ok`), niemand
+  schlendert, jubelt, tanzt oder rennt, kein Auto und kein Wetter im Kirchenraum.
+  Neue Requisiten `vacuum` (Bodenstaubsauger mit Schlauch und Düse) und `vacuum_broken` (Deckel aufgesprungen, Knall-Zacken, Staubwolke, Flusen
+  am Boden). „Staubsauger“ im Satz stellt ihn ins Bild (`TEXT_PROPS`); sagt der Satz „explodiert / Knall / kaputt / raucht“, steht er ab da
+  kaputt da und ersetzt Qualm und Feuer-Explosion (`stage._household`). Selbsttest-Fall `_funeral`.

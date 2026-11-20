@@ -1791,6 +1791,60 @@ def transit(night):
     return p.vignette()
 
 
+def chapel(night):
+    """Kirche von innen (Prüfung 20.11.2026, Plan „Unpassend lachen“: „In der Kirche war es so leise …“ spielte auf der Straße vor
+    einer Kirche mit bunten Passanten): Steinwand, drei Spitzbogenfenster mit buntem Glas, Altar mit Tuch, Kerzen und Blumen,
+    Bankreihen links und rechts vom Mittelgang mit rotem Läufer."""
+    p = P(night)
+    p.room((214, 204, 192), (156, 140, 128), stripe=False, panel=False)
+    for y in range(120, GROUND - 90, 150):                                      # Mauerfugen
+        for x in range(-60 + (y // 150 % 2) * 110, W, 220):
+            p.d.line((x, y, x + 150, y), fill=p.c((190, 180, 168)), width=5)
+    panes = ((226, 84, 76), (250, 196, 70), (70, 140, 220), (96, 180, 120), (160, 96, 190), (240, 140, 70))
+    for n, cx in enumerate((190, 540, 890)):                                    # Spitzbogenfenster mit buntem Glas
+        hw, top, bot = (118, 250, 800) if cx == 540 else (96, 380, 800)
+        arch = top + int(hw * 1.5)
+        p.poly([(cx - hw - 18, bot + 18), (cx - hw - 18, arch), (cx, top - 30), (cx + hw + 18, arch), (cx + hw + 18, bot + 18)], (128, 118, 110))
+        rows = list(range(arch, bot, 92))
+        for r, y in enumerate(rows):
+            for c in range(2):
+                x0 = cx - hw + c * hw
+                col = panes[(n * 2 + r + c * 3) % len(panes)]
+                p.d.rectangle((x0, y, x0 + hw, min(bot, y + 92)), fill=_mix(col, 0.45, (20, 24, 70)) if night else p.c(_mix(col, 0.18, (255, 255, 255)), glow=True))
+        p.d.polygon([(cx - hw, arch), (cx, top), (cx, arch)], fill=_mix(panes[(n + 1) % 6], 0.45, (20, 24, 70)) if night else _mix(panes[(n + 1) % 6], 0.18, (255, 255, 255)))
+        p.d.polygon([(cx, arch), (cx, top), (cx + hw, arch)], fill=_mix(panes[(n + 4) % 6], 0.45, (20, 24, 70)) if night else _mix(panes[(n + 4) % 6], 0.18, (255, 255, 255)))
+        for y in rows:
+            p.d.line((cx - hw, y, cx + hw, y), fill=INK, width=5)
+        p.d.line((cx, top, cx, bot), fill=INK, width=5)
+        p.d.line([(cx - hw, bot), (cx - hw, arch), (cx, top), (cx + hw, arch), (cx + hw, bot), (cx - hw, bot)], fill=INK, width=7, joint="curve")
+        if not night:
+            p.veil((cx - hw - 60, top - 40, cx + hw + 60, bot + 60), (255, 236, 190), 46, 70)
+    p.rect((330, 1040, 750, 1090), (176, 160, 146), r=6)                        # Altarstufe
+    p.rect((390, 880, 690, 1044), (150, 104, 70), r=6)                          # Altar mit weißem Tuch
+    p.poly([(374, 868), (706, 868), (706, 930), (540, 968), (374, 930)], (250, 248, 242))
+    p.d.line([(384, 922), (540, 958), (696, 922)], fill=p.c((226, 190, 96)), width=6)
+    for kx in (420, 660):                                                       # Kerzen
+        p.rect((kx - 9, 790, kx + 9, 870), (250, 246, 236), r=4, o=4)
+        p.oval((kx - 12, 752, kx + 12, 794), (252, 206, 90), o=0, glow=True)
+    p.rect((514, 820, 566, 870), (120, 150, 190), r=8, o=5)                     # Vase mit Blumen
+    for dx, dy, col in ((-30, -34, (240, 240, 246)), (0, -56, (250, 222, 120)), (30, -34, (240, 240, 246)), (-14, -18, (236, 170, 190)), (16, -20, (250, 250, 250))):
+        p.line((540, 824, 540 + dx, 824 + dy + 14), (70, 130, 80), 5)
+        p.oval((540 + dx - 17, 824 + dy - 17, 540 + dx + 17, 824 + dy + 17), col, o=4)
+    for side in (-1, 1):                                                        # Bankreihen links und rechts vom Mittelgang
+        for row, (y, hgt, inner) in enumerate(((1010, 96, 250), (1100, 116, 230))):
+            x0, x1 = (-20, 540 - inner) if side < 0 else (540 + inner, W + 20)
+            p.rect((x0, y, x1, y + hgt), (128, 82, 54) if row else (112, 72, 48), r=10)
+            p.rect((x0, y, x1, y + 22), (168, 112, 72), r=8, o=5)
+            ex = x1 if side < 0 else x0
+            p.rect((ex - 20, y - 26, ex + 20, y + hgt + 6), (150, 98, 64), r=12)
+    p.poly([(470, GROUND - 40), (610, GROUND - 40), (760, H), (320, H)], (170, 50, 54), o=0)   # roter Läufer im Mittelgang
+    p.d.line([(470, GROUND - 40), (320, H)], fill=p.c((226, 190, 96)), width=8)
+    p.d.line([(610, GROUND - 40), (760, H)], fill=p.c((226, 190, 96)), width=8)
+    if not night:
+        p.lamp_glow(540, 620, 620)
+    return p.vignette()
+
+
 def restaurant(night):
     """Restaurant/Imbiss: Theke mit Kaffeemaschine, Menütafel mit Bildern, gedeckte Tische mit Essen, Stühle, Hängelampen."""
     p = P(night)
@@ -2166,7 +2220,7 @@ PLACES = {"bedroom": bedroom, "livingroom": livingroom, "street": street, "basem
           "beach": beach, "desert": desert, "snow": snow, "forest": forest, "underwater": underwater,
           "mountain": mountain, "hospital": hospital, "cave": cave, "supermarket": supermarket,
           "supermarket_empty": supermarket_empty, "bathroom": bathroom, "station": station, "restaurant": restaurant, "germany": germany, "worldmap": worldmap, "hallway": hallway, "attic": attic,
-          "serverroom": serverroom, "cinema": cinema, "diningroom": diningroom, "highsky": highsky, "garage": garage, "transit": transit}
+          "serverroom": serverroom, "cinema": cinema, "diningroom": diningroom, "highsky": highsky, "garage": garage, "transit": transit, "chapel": chapel}
 OUTDOOR = tuple(OUTDOOR_SPECS) + ("custom",)
 ALIASES = {"savanne": "savannah", "steppe": "savannah", "savanna": "savannah", "serengeti": "savannah", "asphalt": "street", "werkstatt": "garage", "autowerkstatt": "garage", "kfz-werkstatt": "garage", "workshop": "garage",
            "boxengasse": "garage", "tuning": "garage", "tuningwerkstatt": "garage", "schrauberhalle": "garage", "carport": "garage", "kino": "cinema", "kinosaal": "cinema", "kinos": "cinema", "leinwand": "cinema", "kinoleinwand": "cinema",
@@ -2189,6 +2243,7 @@ ALIASES = {"savanne": "savannah", "steppe": "savannah", "savanna": "savannah", "
            "wolkenkratzer": "headquarters", "hochhaus": "headquarters", "konzern": "headquarters", "firma": "headquarters", "hq": "headquarters",
            "eismeer": "icesea", "packeis": "icesea", "meereis": "icesea", "eisfläche": "icesea", "eisdecke": "icesea", "zugefrorenes meer": "icesea", "frozen sea": "icesea",
            "ruinen": "ruins", "zeltlager": "camp", "lager": "camp", "feld": "farm", "felder": "farm", "mondoberfläche": "moon",
+           "beerdigung": "graveyard", "begräbnis": "graveyard", "beisetzung": "graveyard", "trauerfeier": "chapel", "kirchenraum": "chapel", "kirchenschiff": "chapel", "kapelle": "chapel", "trauerhalle": "chapel", "church_inside": "chapel", "church interior": "chapel", "in der kirche": "chapel",
            "esszimmer": "diningroom", "esstisch": "diningroom", "dining room": "diningroom", "speisezimmer": "diningroom", "festtafel": "diningroom", "familientisch": "diningroom",
            "hafen": "harbor", "häfen": "harbor", "containerhafen": "harbor", "hafenbecken": "harbor", "frachthafen": "harbor", "seehafen": "harbor", "kai": "harbor",
            "containerterminal": "harbor", "port": "harbor", "harbour": "harbor"}

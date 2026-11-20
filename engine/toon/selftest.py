@@ -1947,6 +1947,39 @@ def main():
             frame(sd[i_])
         frame({"place": "kitchen", "actors": [{"id": "k", "look": {"hat": "chef", "shirt": "weiß"}}]})
     check("Niedliche Gifttiere: Pfeilgiftfrosch, Schnabeltier, Kugelfisch; Koch mit Mütze (Prüfung 19.11., Plan 21 Uhr)", _cute)
+
+    def _funeral():                                              # Prüfung 20.11.2026 (Plan „Unpassend lachen“): Kirche von innen, Trauerkleidung, Staubsauger
+        T = [("Ich stand auf einer Beerdigung und musste plötzlich lachen.", "graveyard", [{"id": "du", "action": "jump"}], [], "sad"),
+             ("Alles begann, als mein Staubsauger mit einem lauten Knall explodierte.", "livingroom", [{"id": "du", "action": "shocked"}], ["staubsauger", "smoke"], ""),
+             ("In der Kirche war es so leise, dass man Stecknadeln hören konnte.", "church", [{"id": "du", "action": "freeze"}], ["car"], "walk"),
+             ("Oma weinte leise und alle blickten betroffen auf den Boden.", "church", [{"id": "oma", "action": "sad"}], [], ""),
+             ("Vor der Kirche atmete ich tief durch.", "church", [{"id": "du", "action": "pant"}], [], ""),
+             ("In der Kirche dachte ich nur an den Staubsauger.", "church", [{"id": "du", "action": "think"}], ["staubsauger"], "")]
+        sf = stage.direct([{"text": t_, "place": pl_, "actors": a_, "props": pr_, "crowd": cr_} for t_, pl_, a_, pr_, cr_ in T],
+                          [(i_ * 4, i_ * 4 + 4) for i_ in range(len(T))], "Warum wir in unpassenden Situationen lachen", "comedy")
+        kn = lambda i_: [str(q.get("type") if isinstance(q, dict) else q) for q in sf[i_].get("props") or []]
+        assert sf[0].get("_mourn") and sf[0].get("crowd") == "sad" and stage.crowd_ok(sf[0]), "Trauergäste am Grab"
+        assert "vacuum_broken" in kn(1) and "smoke" not in kn(1), f"kaputter Staubsauger im Bild: {kn(1)}"
+        assert sf[2]["place"] == "chapel" and sf[2].get("crowd") == "sad" and "car" not in kn(2), f"in der Kirche: Kirchenraum, Trauergäste, kein Auto: {sf[2]['place']} {sf[2].get('crowd')} {kn(2)}"
+        assert sf[3]["place"] == "chapel" and sf[3].get("_mourn"), "Folgesatz bleibt im Kirchenraum"
+        assert sf[4]["place"] == "church", "vor der Kirche bleibt draußen"
+        assert sf[5]["place"] == "chapel" and not kn(5), f"an den Staubsauger denken stellt ihn nicht in die Kirche: {kn(5)}"
+        assert places.resolve("kapelle") == "chapel" and stage._prepare({"place": "chapel", "_mourn": True, "actors": [{"id": "oma"}]}, {"oma": {"shirt": "lila", "hat": "beanie"}})[3][0]["look"].hat == ""
+        no = stage.direct([{"text": "In der Kirche heiraten zwei.", "place": "church", "actors": [{"id": "du"}]}], [(0, 4)], "Hochzeit", "fakten")
+        assert no[0]["place"] == "church" and not no[0].get("_mourn"), "ohne Beerdigung greift die Regel nicht"
+        co = [{"text": "Ich stand auf einer Beerdigung und musste lachen.", "place": "graveyard", "actors": [{"id": "du", "action": "talk"}]},
+              {"text": "Zwei.", "place": "livingroom", "actors": [{"id": "du"}]},
+              {"text": "Ich rannte los.", "place": "livingroom", "props": ["fire"], "weather": "storm", "actors": [{"id": "du", "action": "run"}]}] + [
+              {"text": "Und weiter.", "place": "livingroom", "actors": [{"id": "du"}]} for _ in range(3)]
+        stage._cold_open(co)
+        assert co[0]["place"] == "graveyard" and not co[0].get("_cold_open"), "der erste Satz nennt seinen Ort: kein Vorgriff aufs Wohnzimmer (Video 167)"
+        for sc_ in sf:
+            frame(sc_, {"du": {"shirt": "schwarz"}, "oma": {"hat": "beanie"}})
+        frame({"place": "chapel", "time": "night", "actors": [{"id": "du"}]})
+        for k_ in ("vacuum", "vacuum_broken"):
+            for t_ in (0.1, 0.6, 2.4):
+                frame({"place": "livingroom", "props": [k_], "actors": [{"id": "du"}]}, None, t_)
+    check("Beerdigung: Kirchenraum, Trauerkleidung, Staubsauger (Prüfung 20.11., Plan 18 Uhr)", _funeral)
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")
     import collections
     for line, n in collections.Counter(e.strip().splitlines()[-1] + "  @ " + e.strip().splitlines()[-3].strip()[:90] for e in errors).most_common(30):
