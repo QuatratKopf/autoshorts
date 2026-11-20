@@ -611,3 +611,6 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Nach Video 171 (erster Neubau): `stage._unpaid` – sagt der Satz „unbezahlt“, „bezahlt … niemand“, „kostenlos“, liegt und hält niemand Geld
   (Tobi hielt bei „bezahlt ihm niemand“ einen Stapel Scheine). Fläschchen, Feile und Maschine liegen im Studio nie am Boden: in die Hand
   der Figur oder weg. Plan-Figuren unter `who` werden zu `actors` (`writer`).
+  Nach Video 172 (zweiter Neubau, verworfen): `_studio_story` tauscht die Figur, wenn der Satz vom anderen handelt („nimmt Tobi dreimal so
+  viel ein“ – im Bild war Nina; „Tätowierer verdienen …“ – Nina stand im Tattoo-Studio): die genannte Person bzw. die Besitzerin des
+  Studios steht in ihrem Studio. `stage._score_labels`: der Punktestand trägt die Namen des Duell-Bilds (statt „PUNKT NÄGEL“).

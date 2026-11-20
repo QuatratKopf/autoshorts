@@ -2283,6 +2283,7 @@ def direct(scenes, times, topic="", style="", look=""):
     _funeral_story(scenes, topic)
     _studio_story(scenes, topic)
     _unpaid(scenes)
+    _score_labels(scenes)
     _music(scenes, topic)
     _fur_ancestor(scenes)
     _fur_story(scenes)
@@ -4102,6 +4103,18 @@ NAILS_DO_RE = r"\bfeilt\b|\bfeilen\b|\bfeile\b|lackier|\bnägel\b|gel-?nägel|ku
 UNPAID_RE = r"unbezahlt|bezahlt \w+ (?:leider |aber |natürlich )?(?:niemand|keiner)|(?:niemand|keiner) bezahlt|bezahlt (?:leider |aber )?(?:niemand|keiner)|ohne bezahlung|\bkostenlos\b|\bumsonst\b|\bgratis\b|kein(?:en)? cent|kein geld"
 
 
+def _score_labels(scenes):
+    """Punktestand trägt dieselben zwei Namen wie das Duell-Bild (Video 172: „TATTOO“ gegen „PUNKT NÄGEL“)."""
+    vs = next((sc["graphic"] for sc in scenes if isinstance(sc, dict) and isinstance(sc.get("graphic"), dict) and sc["graphic"].get("type") == "versus"
+               and sc["graphic"].get("left") and sc["graphic"].get("right")), None)
+    if not vs:
+        return
+    for sc in scenes:
+        g = sc.get("graphic") if isinstance(sc, dict) else None
+        if isinstance(g, dict) and g.get("type") == "score":
+            g["left"], g["right"] = vs["left"], vs["right"]
+
+
 def _unpaid(scenes):
     """„Beratung und Zeichnen bezahlt Tobi leider niemand“ (Video 171, Prüfung 20.11.2026): die Figur hielt dabei einen Stapel Geldscheine.
     Sagt der Satz, dass etwas unbezahlt oder kostenlos ist, liegt und hält niemand Geld."""
@@ -4144,6 +4157,22 @@ def _studio_story(scenes, topic=""):
                 want = home[str(humans[0]["id"])]         # „Sie schafft acht Termine am Tag“: Nina steht in ihrem Nagelstudio
             if want:
                 sc["place"], rp = want, want
+        if len(humans) == 1 and home:
+            # Der Satz handelt vom anderen (Video 172: „Tätowierer verdienen …“ – im Tattoo-Studio stand Nina; „nimmt Tobi dreimal so viel ein“ –
+            # zu sehen war Nina): die genannte Person bzw. die Besitzerin des Studios steht im Bild, in ihrem Studio
+            me = str(humans[0]["id"])
+            named = [k for k in home if k != me and _re.search(r"\b" + _re.escape(k.lower()) + r"s?\b", low)]
+            owner = {v_: k_ for k_, v_ in home.items()}
+            target = ""
+            if len(named) == 1 and not _re.search(r"\b" + _re.escape(me.lower()) + r"s?\b", low):
+                target = named[0]
+            elif tat != nail and owner.get("tattoostudio" if tat else "nailstudio") not in (None, me) and home.get(me) not in (None, "tattoostudio" if tat else "nailstudio"):
+                target = owner["tattoostudio" if tat else "nailstudio"]
+            if target:
+                humans[0]["id"] = target
+                humans[0]["hold"] = ""
+                if rp in ("tattoostudio", "nailstudio", "plain") or rp in GENERIC:
+                    sc["place"] = rp = home[target]
         if rp in ("tattoostudio", "nailstudio") and not (tat or nail) and humans:
             hs = {home.get(str(a["id"])) for a in humans}
             if len(humans) == 1 and hs - {None, rp}:

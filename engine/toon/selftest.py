@@ -2016,7 +2016,19 @@ def main():
                           [(0, 4), (4, 8)], "Tattoo-Studio gegen Nagelstudio", "vergleich")
         assert not [q for q in up[0].get("props") or [] if "money" in str(q)] and not str(up[0]["actors"][0].get("hold") or ""), f"unbezahlt: kein Geld im Bild: {up[0].get('props')} {up[0]['actors'][0].get('hold')}"
         assert not [q for q in up[1].get("props") or [] if "nailpolish" in str(q)] and up[1]["actors"][0].get("hold"), f"Fläschchen in der Hand statt am Boden: {up[1].get('props')} {up[1]['actors'][0].get('hold')}"
-        for sc_ in sf + up:
+        wp = stage.direct([{"text": "Tobi sticht ein Tattoo.", "place": "tattoostudio", "actors": [{"id": "tobi"}], "graphic": None},
+                           {"text": "Nina feilt Nägel im Nagelstudio.", "place": "nailstudio", "actors": [{"id": "nina"}]},
+                           {"text": "Pro Stunde nimmt Tobi also dreimal so viel ein.", "place": "nailstudio", "actors": [{"id": "nina", "action": "walk"}]},
+                           {"text": "Tätowierer verdienen rund zweitausendachthundert Euro brutto.", "place": "tattoostudio", "actors": [{"id": "nina", "action": "walk"}]},
+                           {"text": "Duell.", "place": "plain", "shot": "graphic", "graphic": {"type": "versus", "left": "TATTOO", "right": "NÄGEL"}},
+                           {"text": "Ausgleich.", "place": "plain", "shot": "graphic", "graphic": {"type": "score", "left": "TATTOO", "right": "PUNKT NÄGEL", "value": "1:1"}}],
+                          [(i_ * 4, i_ * 4 + 4) for i_ in range(6)], "Tattoo-Studio gegen Nagelstudio", "vergleich")
+        who_ = lambda i_: [str(a.get("id")) for a in wp[i_].get("actors") or [] if isinstance(a, dict)]
+        assert who_(2) == ["tobi"] and places.resolve(wp[2]["place"]) == "tattoostudio", f"Satz über Tobi: Tobi in seinem Studio: {who_(2)} {wp[2]['place']}"
+        assert who_(3) == ["tobi"] and places.resolve(wp[3]["place"]) == "tattoostudio", f"Tätowierer-Satz: nicht Nina im Tattoo-Studio: {who_(3)} {wp[3]['place']}"
+        sg_ = [sc_.get("graphic") for sc_ in wp if isinstance(sc_.get("graphic"), dict) and sc_["graphic"].get("type") == "score"]
+        assert not sg_ or sg_[0].get("right") == "NÄGEL", f"Punktestand trägt die Namen des Duells: {sg_}"
+        for sc_ in sf + up + wp:
             frame(sc_, {"tobi": {"shirt": "schwarz", "hat": "beanie"}, "nina": {"shirt": "pink", "hair": "ponytail", "gender": "w"}})
         for pl_ in ("tattoostudio", "nailstudio"):
             frame({"place": pl_, "time": "night", "actors": [{"id": "du"}]})
