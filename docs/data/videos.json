@@ -6335,5 +6335,47 @@
   "slot": "2026-11-20 18:00",
   "review_at": 1795188283.541561,
   "error": "Bei der Prüfung verworfen: Prüfung: Beerdigung spielt im Wohnzimmer, Kirche ist eine Straße mit bunten Passanten, kein Staubsauger im Bild, Dopamin-Aussage und Fachbegriff nicht belegt"
+ },
+ {
+  "id": 168,
+  "category": "comedy",
+  "topic": "Warum wir in den unpassendsten Momenten lachen müssen – Ich-Geschichte eines jungen Mannes (männliche Hauptfigur „du“, schwarz gekleidet, erzählt in Ich-Form und Vergangenheit) auf einer Beerdigung, lustig und warmherzig, nie respektlos. Stoff als Stichpunkte, nicht wörtlich abschreiben, in dieser Reihenfolge: Am Morgen explodiert sein Staubsauger mit einem Knall, die Wohnung ist voller Staub, er kommt gestresst und zu spät los. In der Kirche ist es totenstill, Oma weint leise neben ihm. Mitten in der Stille fällt ihm der Staubsauger wieder ein und er spürt das Lachen aufsteigen. Er beißt sich auf die Lippe, hält die Luft an und denkt an seine Steuererklärung. Dann prustet er laut los und alle drehen sich um. Finte: Das ist nicht respektlos, das ist nervöses Lachen. Erklärung: Bei zu viel Anspannung versucht der Körper unbewusst, Stress abzubauen, das Lachen wirkt wie ein Ventil. Forscher sehen darin einen Schutz vor überwältigender Anspannung. Der Haken: Meist macht es die Lage erst richtig peinlich. Was oft hilft: langsam und tief ausatmen und sich auf etwas Neutrales konzentrieren, zum Beispiel die Kirchenfenster zählen. Schlusspointe: Nach der Feier nimmt Oma ihn in den Arm und sagt, der Verstorbene hätte am lautesten mitgelacht (ihn nur „er“ nennen, kein Opa, kein Onkel). Letzter Satz ist die Frage an die Zuschauer: Wo musstest du schon mal im falschen Moment lachen? Der erste Satz sagt, dass er auf einer Beerdigung laut loslachen musste. Keine Zahlen, keine Prozentangaben, keine Jahreszahlen, kein Dopamin, keine Hormone, keine Forschernamen, kein erfundener Fachbegriff, kein Zwicken oder Schmerz als Tipp, kein Teppich. Orte: erster Satz Friedhof (graveyard), Staubsauger im Wohnzimmer, alles Weitere in der Kirche (chapel); das Gehirn darf als Figur bei der Erklärung auftreten. Titel: Warum du ausgerechnet auf Beerdigungen lachen musst. Titelbild-Text: WARUM LACHST DU?",
+  "status": "rendered",
+  "created": 1795190494.9945538,
+  "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
+  "description": "Ist dir das auch schon mal passiert?\nDein Gehirn baut Stress ab, indem es dich im falschen Moment lachen lässt.\nMusstest du schon mal in einem völlig unpassenden Moment laut lachen?",
+  "hashtags": [
+   "#shorts",
+   "#psychologie",
+   "#wissen",
+   "#lustig",
+   "#fakten",
+   "#lachen",
+   "#viral",
+   "#fyp"
+  ],
+  "tags": [
+   "lachen im falschen moment",
+   "nervöses lachen",
+   "beerdigung lachen",
+   "psychologie fakten",
+   "warum lachen wir",
+   "stress abbauen",
+   "alltag comedy"
+  ],
+  "thumb_text": "WARUM LACHST DU?",
+  "missing": [
+   "steuererklärung"
+  ],
+  "cover_ms": 72537,
+  "duration": 72.4,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
