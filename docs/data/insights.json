@@ -1,7 +1,7 @@
 {
- "updated": 1795158339.5401,
+ "updated": 1795160145.2947235,
  "enough": true,
- "counted": 26,
+ "counted": 27,
  "total": 29,
  "needed": 6,
  "categories": [
@@ -21,7 +21,7 @@
    "avg_views": 1836,
    "avg_likes": 40.5,
    "like_rate": 2.21,
-   "avg_score": 2479
+   "avg_score": 2478
   },
   {
    "slug": "storys",
@@ -53,11 +53,11 @@
   {
    "slug": "whatif",
    "name": "🤯 What If",
-   "n": 8,
-   "avg_views": 1724,
-   "avg_likes": 40.8,
-   "like_rate": 2.36,
-   "avg_score": 2339
+   "n": 9,
+   "avg_views": 1716,
+   "avg_likes": 41.9,
+   "like_rate": 2.44,
+   "avg_score": 2347
   },
   {
    "slug": "musik",
@@ -75,7 +75,7 @@
   "storys": 1.03,
   "mysterien": 1.01,
   "tiere": 1.04,
-  "whatif": 0.98,
+  "whatif": 0.99,
   "comedy": 1.07,
   "musik": 0.83,
   "vergleich": 1.2,
@@ -86,17 +86,17 @@
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 1867 Aufrufe, 2.41 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1764 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2521 zu 705 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2517 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
  ],
  "words_good": [
   "gänsehaut"
  ],
  "words_bad": [
-  "bekanntes",
-  "remix",
   "erkennst",
-  "lied"
+  "lied",
+  "remix",
+  "bekanntes"
  ],
  "top": [
   {
@@ -143,11 +143,11 @@
    "id": 139,
    "title": "Dieses winzige Tier ist zäher als ein Löwe",
    "category": "tiere",
-   "views": 2166,
+   "views": 2164,
    "likes": 54,
    "comments": 0,
    "shares": 1,
-   "score": 3016
+   "score": 3014
   }
  ],
  "flop": [
