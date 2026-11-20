@@ -672,6 +672,14 @@ def pose_at(action, t, dur, emotion="", mouth=0.0, seed=0, gest=None, shape="a")
         p.arm_l, p.fore_l = -16, -10
         p.eyes = "worried"
         p.extra["open"] = 0.4
+    elif a == "laugh":                                     # lacht laut los (Prüfung 20.11.2026, Video 168: „ich pruste laut los“ zeigte ein erschrockenes Gesicht): Kopf im Nacken, Augen zugekniffen, Mund weit offen, Schultern beben, Hand am Bauch
+        p.squash = 1 + 0.05 * s(t * 14)
+        p.lift = 7 * abs(s(t * 14))
+        p.head, p.lean = -14 + 4 * s(t * 7), -5
+        p.arm_r, p.fore_r = 16, 112
+        p.arm_l, p.fore_l = -34 + 6 * s(t * 14), -46
+        p.eyes, p.smile, p.brow = "happy", 1.0, 0.3
+        p.extra["open"] = 0.95
     elif a == "pupils":                                    # starrt mit sich weitenden Pupillen
         p.eyes, p.brow, p.look = "wide", 0.8, 0.0
         p.extra["pupil"] = 0.46 + 0.5 * min(1.0, max(0.0, (t - 0.25) / 1.1))
@@ -741,7 +749,7 @@ def pose_at(action, t, dur, emotion="", mouth=0.0, seed=0, gest=None, shape="a")
         p.eyes, p.smile = "happy", 1
 
     emo = (emotion or "").lower()
-    if emo and a not in ("shocked", "jump", "happy", "sad", "sleep", "cower", "freeze", "tremble", "shiver", "blink", "pant", "pupils"):
+    if emo and a not in ("shocked", "jump", "happy", "sad", "sleep", "cower", "freeze", "tremble", "shiver", "blink", "pant", "pupils", "laugh"):
         p.eyes = {"happy": "happy", "shocked": "wide", "scared": "wide", "sad": "sad", "angry": "angry",
                   "worried": "worried", "tired": "closed"}.get(emo, p.eyes)
         p.smile = {"happy": 0.8, "sad": -0.8, "angry": -0.6, "worried": -0.4}.get(emo, p.smile)

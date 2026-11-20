@@ -248,7 +248,7 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
      action: idle, talk, walk, run, wave, point, shocked, sad, jump, think, sit, sleep, dance, look_around, fall, shake (schüttelt aus, was sie hält – NICHT für Kopfschütteln, dafür idle),
              float (schwebt schwerelos in der Luft – dann schweben auch die Dinge aus "props" mit; für Sätze über Schweben, Abheben, fehlende Schwerkraft)
              Körper-Reaktionen: cower (zuckt zusammen, zieht den Kopf ein), freeze (erstarrt), tremble (Hände zittern), shiver (friert: Arme um den Körper, bibbert), blink (blinzelt), pupils (Pupillen weiten sich),
-             pant (atmet schnell, Hand an der Brust). NICHT in jeder Szene "shocked" – die Figur macht vor, was der Satz beschreibt.
+             pant (atmet schnell, Hand an der Brust), laugh (lacht laut los: Kopf im Nacken, Augen zu, Hand am Bauch). NICHT in jeder Szene "shocked" – die Figur macht vor, was der Satz beschreibt.
      hold (optional): was die Figur in der Hand hält – phone, flashlight, bag, bottle, umbrella, sign, map, radio oder jeder kleine Gegenstand
           aus "props"/"wishes" (z. B. "schuh", "glass", "candle")
      HANDLUNG STATT GEGENSTAND: Beschreibt der Satz, dass jemand etwas mit einem Ding tut (Schuhe ausschütteln, Kerze halten, Glas heben),

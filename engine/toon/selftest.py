@@ -670,7 +670,7 @@ def main():
         for sc_b in scs:
             for t_b in (0.1, 1.2, 2.4):
                 frame(sc_b, cast_b, t_b)
-        for ac_b in ("cower", "freeze", "tremble", "blink", "pant", "pupils"):
+        for ac_b in ("cower", "freeze", "tremble", "blink", "pant", "pupils", "laugh"):
             for t_b in (0.0, 0.2, 1.0, 2.9):
                 rig.pose_at(ac_b, t_b, 3.0, "scared", 0.3, 1)
         from .. import writer as _wr_b
@@ -1954,7 +1954,9 @@ def main():
              ("In der Kirche war es so leise, dass man Stecknadeln hören konnte.", "church", [{"id": "du", "action": "freeze"}], ["car"], "walk"),
              ("Oma weinte leise und alle blickten betroffen auf den Boden.", "church", [{"id": "oma", "action": "sad"}], [], ""),
              ("Vor der Kirche atmete ich tief durch.", "church", [{"id": "du", "action": "pant"}], [], ""),
-             ("In der Kirche dachte ich nur an den Staubsauger.", "church", [{"id": "du", "action": "think"}], ["staubsauger"], "")]
+             ("In der Kirche dachte ich nur an den Staubsauger.", "church", [{"id": "du", "action": "think"}], ["staubsauger"], ""),
+             ("Zwecklos: Ich pruste laut los und die ganze Trauergemeinde dreht sich um.", "chapel", [{"id": "du", "action": "shocked", "emotion": "sad"}], [], "worried"),
+             ("Aber warum passiert so etwas immer im schlimmsten Augenblick?", "kirche", [], [], "worried")]
         sf = stage.direct([{"text": t_, "place": pl_, "actors": a_, "props": pr_, "crowd": cr_} for t_, pl_, a_, pr_, cr_ in T],
                           [(i_ * 4, i_ * 4 + 4) for i_ in range(len(T))], "Warum wir in unpassenden Situationen lachen", "comedy")
         kn = lambda i_: [str(q.get("type") if isinstance(q, dict) else q) for q in sf[i_].get("props") or []]
@@ -1964,6 +1966,14 @@ def main():
         assert sf[3]["place"] == "chapel" and sf[3].get("_mourn"), "Folgesatz bleibt im Kirchenraum"
         assert sf[4]["place"] == "church", "vor der Kirche bleibt draußen"
         assert sf[5]["place"] == "chapel" and not kn(5), f"an den Staubsauger denken stellt ihn nicht in die Kirche: {kn(5)}"
+        assert kn(1).count("vacuum_broken") == 1, f"nur ein Staubsauger: {kn(1)}"
+        assert sf[6]["actors"][0]["action"] == "laugh" and sf[6]["actors"][0]["emotion"] == "happy", f"losprusten ist Lachen: {sf[6]['actors']}"
+        assert sf[7]["place"] == "chapel" and sf[7].get("actors"), "Frage ohne Figur: Hauptfigur im Kirchenraum, kein leeres Bild"
+        gp = stage.direct([{"text": "Ich stand auf einer Beerdigung.", "place": "graveyard", "actors": [{"id": "du"}]},
+                           {"text": "Aber warum passiert so etwas immer im schlimmsten Augenblick?", "place": "kirche", "shot": "graphic", "graphic": {"type": "pulse", "value": "1", "label": "MOMENT DER STILLE"}},
+                           {"text": "Dein Puls steigt auf hundertachtzig.", "place": "lab", "shot": "graphic", "graphic": {"type": "pulse", "value": "180", "label": "PULS"}}],
+                          [(0, 4), (4, 8), (8, 12)], "Warum wir in unpassenden Situationen lachen", "comedy")
+        assert (gp[1].get("graphic") or {}).get("type") != "pulse" and (gp[2].get("graphic") or {}).get("type") == "pulse", "Herzschlag-Kurve nur zu einem Satz über Puls oder Herz"
         assert places.resolve("kapelle") == "chapel" and stage._prepare({"place": "chapel", "_mourn": True, "actors": [{"id": "oma"}]}, {"oma": {"shirt": "lila", "hat": "beanie"}})[3][0]["look"].hat == ""
         no = stage.direct([{"text": "In der Kirche heiraten zwei.", "place": "church", "actors": [{"id": "du"}]}], [(0, 4)], "Hochzeit", "fakten")
         assert no[0]["place"] == "church" and not no[0].get("_mourn"), "ohne Beerdigung greift die Regel nicht"

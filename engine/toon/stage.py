@@ -1365,6 +1365,9 @@ def direct(scenes, times, topic="", style="", look=""):
         if g0 and g0.get("type") in FIGURE_GFX and unspoken_figures(g0, said_c):
             sc["graphic"], g0 = None, None                # Grafik mit einer Zahl, die niemand sagt („1.000.000 KARTEN“, „100 % KONTROLLE“): erfunden – weg
             sc["shot"] = "" if sc.get("shot") == "graphic" else sc.get("shot")
+        if g0 and g0.get("type") == "pulse" and not _re0.search(r"puls|herz|schläge pro|\bbpm\b|adrenalin|blutdruck", sc["text"].lower()):
+            sc["graphic"], g0 = None, None                # Herzschlag-Kurve mit „1 · MOMENT DER STILLE“ zu einem Satz, der von keinem Herzschlag spricht (Video 168)
+            sc["shot"] = "" if sc.get("shot") == "graphic" else sc.get("shot")
         if ov_c and sc.get("overlay") and str(ov_c.get("type") or "") in ("card", "counter", "note", "stamp") and unspoken_figures(ov_c, said_c):
             sc["overlay"] = None
         if ov_c and sc.get("overlay") and str(ov_c.get("type") or "") == "tag" and not _re0.search(r"\b(1[0-9]|20)\d{2}\b", str(ov_c.get("text") or "")) \
@@ -2550,6 +2553,7 @@ BODY_ACTS = ((r"zuck\w* (?:\w+ ){0,3}zusammen|zusammenzuck|zusammengezuckt|kopf 
              (r"(?:hände|finger|knie|beine) (?:\w+ ){0,3}zitter|zitter\w* (?:\w+ ){0,4}(?:hände|finger|knie|beine)|\bzitterst\b", "tremble", ""),
              (r"pupillen (?:\w+ ){0,5}(?:weit|groß|größer|riesig|öffn|licht)|(?:weit|groß|riesig|geweitet)\w* (?:\w+ ){0,2}pupillen", "pupils", "close"),
              (r"blinzel|lidschl|lider (?:\w+ ){0,3}(?:zu\b|schließ)|augen (?:\w+ ){0,4}(?:zu\b|schließ|kneif)|kneifst (?:\w+ ){0,3}augen", "blink", "close"),
+             (r"\bprust\w*|\bloslach|\blosgelacht|lachkrampf|lachanfall|\blach\w* (?:\w+ ){0,2}(?:laut|los)\b|laut (?:\w+ ){0,2}lach|vor lachen", "laugh", ""),
              (r"atmest (?:\w+ ){0,3}(?:schneller|flach|hektisch)|atmung (?:\w+ ){0,3}(?:schneller|beschleunig|flach|rast)|schnappst nach luft|außer atem|keuch", "pant", ""),
              (r"herz (?:\w+ ){0,3}(?:schlägt|rast|klopft|pocht|hämmert|pumpt)|herzschlag (?:\w+ ){0,3}(?:schneller|beschleunig|rast)|puls (?:\w+ ){0,3}(?:steigt|rast|schnellt|jagt)", "pant", "wide"))
 BODY_BRAIN_RE = r"\bgehirn|\bhirn\b|hirnstamm|mandelkern|amygdala|großhirn|kleinhirn|denkzentrale"
@@ -2592,6 +2596,8 @@ def _body_story(scenes):
             act, want = hit
             h.update(action=act, emote="", pos="center")
             h.pop("to", None)
+            if act == "laugh":
+                h["emotion"] = "happy"
             if act in ("tremble", "pant", "cower") and not str(h.get("emotion") or ""):
                 h["emotion"] = "worried"
             if want == "close":
@@ -3427,6 +3433,12 @@ def _household(scenes):
             for q in (sc.get("props") or []):
                 if isinstance(q, dict) and extras.PROP_ALIASES.get(str(q.get("type") or "").lower(), str(q.get("type") or "").lower()) == "vacuum":
                     q["type"] = "vacuum_broken"
+            seen_v = False                                # Drehbuch nennt ihn und die Text-Regel stellt ihn dazu: nur einer steht da (Video 168: zwei ineinander)
+            for q in list(sc.get("props") or []):
+                if isinstance(q, dict) and q.get("type") == "vacuum_broken":
+                    if seen_v:
+                        sc["props"].remove(q)
+                    seen_v = True
             if any(isinstance(q, dict) and q.get("type") == "vacuum_broken" for q in (sc.get("props") or [])):
                 sc["props"] = [q for q in sc["props"] if not (isinstance(q, dict) and str(q.get("type") or "").lower() in ("smoke", "explosion", "fire"))]   # die Staubwolke gehört zum Gerät: kein Qualm quer durchs Zimmer, keine Feuer-Explosion
     for sc in scenes:
@@ -4044,6 +4056,8 @@ def _funeral_story(scenes, topic=""):
     if not _re.search(FUNERAL_RE, all_t):
         return
     inside = False
+    lead_f = next((str(a.get("id")) for sc in sc_l for a in (sc.get("actors") or []) if isinstance(a, dict) and a.get("id") and not a.get("kind")
+                   and not _re.search(r"gehirn|hirn|brain", str(a.get("id")).lower())), "du")
     for sc in sc_l:
         low = str(sc.get("text") or "").lower()
         if sc.get("shot") == "graphic" or isinstance(backdrop(sc), dict):
@@ -4070,6 +4084,9 @@ def _funeral_story(scenes, topic=""):
             sc["time"] = "day"
             sc["props"] = [q for q in (sc.get("props") or []) if (extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(), str(q.get("type") if isinstance(q, dict) else q).lower())
                                                                not in ("car", "bus", "truck", "police", "ambulance", "tree", "house", "tv", "computer", "fridge", "sofa"))]
+        if not [a for a in (sc.get("actors") or []) if isinstance(a, dict)] and str(sc.get("shot") or "") != "insert" and _re.search(SELF_RE + r"|\bwarum\b|\bwieso\b", low):
+            sc["actors"] = [{"id": lead_f, "action": "think", "emotion": "worried", "emote": "?" if "?" in low else "", "pos": "center", "speaks": True, "say": "", "hold": "", "facing": ""}]
+            sc["shot"] = ""                                # „Aber warum passiert so etwas …?“ ohne Figur: die Hauptfigur grübelt in der Bank, kein leerer Kirchenraum
         for a in (sc.get("actors") or []):
             if isinstance(a, dict) and not a.get("kind") and str(a.get("action") or "") in ("dance", "cheer", "run") and not _re.search(r"renn|rann|lauf|lief|tanz|flücht|stürm", low):
                 a["action"] = "freeze"                     # in der Kirche tanzt und rennt niemand ohne Grund

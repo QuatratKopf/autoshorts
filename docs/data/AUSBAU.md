@@ -590,3 +590,11 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Neue Requisiten `vacuum` (Bodenstaubsauger mit Schlauch und Düse) und `vacuum_broken` (Deckel aufgesprungen, Knall-Zacken, Staubwolke, Flusen
   am Boden). „Staubsauger“ im Satz stellt ihn ins Bild (`TEXT_PROPS`); sagt der Satz „explodiert / Knall / kaputt / raucht“, steht er ab da
   kaputt da und ersetzt Qualm und Feuer-Explosion (`stage._household`). Selbsttest-Fall `_funeral`.
+  Nach Video 167/168 (erster Neubau): Der Vorgriff im ersten Bild (`_cold_open`) entfällt, wenn der erste Satz seinen Ort nennt und dort
+  spielt („Ich stand auf einer Beerdigung …“ lief im Wohnzimmer); „Beerdigung“, „Begräbnis“, „Beisetzung“ sind Orts-Namen für `graveyard`,
+  „Trauerfeier“ für `chapel`. Ein Staubsauger, an den nur gedacht wird, steht nicht im Kirchenraum; nie zwei Staubsauger ineinander.
+  Neue Haltung `laugh` (`rig.pose_at`: Kopf im Nacken, Augen zugekniffen, Mund weit offen, Schultern beben) – „pruste los“, „loslachen“,
+  „Lachkrampf“, „vor Lachen“ setzen sie (`BODY_ACTS`), mit fröhlichem Gesicht statt Schreck. Herzschlag-Grafik (`pulse`) nur zu einem Satz
+  über Puls, Herz oder Adrenalin. Die Ecken-Zeile des Drehbuchs verliert eine Uhrzeit, die kein Satz nennt, auch wenn Szenen eigene Zeilen
+  haben (`render.build_ass`). Satz ohne Figur im Kirchenraum oder am Grab: die Hauptfigur grübelt dort. Für „Teppich“, „Staub“,
+  „Beerdigung“ wird nichts gelernt (der gelernte „Teppich“ war ein Tisch mit Muster und ist entfernt).
