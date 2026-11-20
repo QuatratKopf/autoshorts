@@ -6217,7 +6217,7 @@
   "id": 165,
   "category": "musik",
   "topic": "Musik-Kugel: Bella Ciao (Glas Remix)",
-  "status": "review",
+  "status": "discarded",
   "created": 1795169373.2694228,
   "title": "Bekanntes Lied als Glas-Remix – erkennst du es? 🎵",
   "description": "Ein Lied, das jeder kennt – als Glas-Remix, jede Glasscheibe ist ein Ton. Erkennst du es? 🎵\nSchreib in die Kommentare, welches Lied es ist – und welches als Nächstes einen Remix bekommen soll!",
@@ -6245,6 +6245,7 @@
   "look": "musik",
   "mp4": true,
   "slot": "2026-11-20 13:00",
-  "review_at": 1795169474.6899862
+  "review_at": 1795169474.6899862,
+  "error": "Bei der Prüfung verworfen: Prüfung: zwei Scheiben lagen über Eck aufeinander (erstes Bild und bei 20 s), Ton-Spitzen über Vollausschlag"
  }
 ]
