@@ -1,5 +1,5 @@
 {
- "updated": 1795213856.3162289,
+ "updated": 1795215684.2550437,
  "enough": true,
  "counted": 29,
  "total": 32,
@@ -9,7 +9,7 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 4,
-   "avg_views": 1934,
+   "avg_views": 1933,
    "avg_likes": 44.8,
    "like_rate": 2.31,
    "avg_score": 2622
@@ -18,10 +18,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 3,
-   "avg_views": 1791,
-   "avg_likes": 42.7,
-   "like_rate": 2.38,
-   "avg_score": 2464
+   "avg_views": 1789,
+   "avg_likes": 43.0,
+   "like_rate": 2.4,
+   "avg_score": 2467
   },
   {
    "slug": "storys",
@@ -30,43 +30,43 @@
    "avg_views": 1658,
    "avg_likes": 52.5,
    "like_rate": 3.17,
-   "avg_score": 2446
+   "avg_score": 2445
   },
   {
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
-   "avg_views": 1796,
+   "avg_views": 1792,
    "avg_likes": 39.0,
-   "like_rate": 2.17,
-   "avg_score": 2410
+   "like_rate": 2.18,
+   "avg_score": 2406
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1725,
+   "avg_views": 1723,
    "avg_likes": 44.5,
    "like_rate": 2.58,
-   "avg_score": 2402
+   "avg_score": 2400
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 10,
-   "avg_views": 1724,
+   "avg_views": 1722,
    "avg_likes": 43.7,
-   "like_rate": 2.53,
-   "avg_score": 2383
+   "like_rate": 2.54,
+   "avg_score": 2381
   },
   {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 2,
-   "avg_views": 1774,
+   "avg_views": 1772,
    "avg_likes": 11.0,
    "like_rate": 0.62,
-   "avg_score": 1984
+   "avg_score": 1982
   }
  ],
  "weights": {
@@ -74,7 +74,7 @@
   "grusel": 1.2,
   "storys": 1.02,
   "mysterien": 1.0,
-  "tiere": 1.02,
+  "tiere": 1.03,
   "whatif": 0.99,
   "comedy": 1.09,
   "musik": 0.82,
@@ -84,9 +84,9 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 1934 Aufrufe, 2.31 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1774 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2533 zu 706 Punkte).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 1933 Aufrufe, 2.31 % Likes).",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1772 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2532 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -95,60 +95,60 @@
  ],
  "words_bad": [
   "remix",
+  "erkennst",
   "bekanntes",
-  "lied",
-  "erkennst"
+  "lied"
  ],
  "top": [
   {
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2563,
+   "views": 2562,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3403
+   "score": 3402
   },
   {
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2265,
+   "views": 2264,
    "likes": 62,
    "comments": 0,
    "shares": 0,
-   "score": 3195
+   "score": 3194
   },
   {
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 2058,
+   "views": 2057,
    "likes": 68,
    "comments": 0,
    "shares": 0,
-   "score": 3078
+   "score": 3077
   },
   {
    "id": 139,
    "title": "Dieses winzige Tier ist zäher als ein Löwe",
    "category": "tiere",
-   "views": 2178,
+   "views": 2173,
    "likes": 54,
    "comments": 0,
    "shares": 1,
-   "score": 3028
+   "score": 3023
   },
   {
    "id": 120,
    "title": "Warum du bei Musik Gänsehaut bekommst",
    "category": "fakten",
-   "views": 2340,
+   "views": 2339,
    "likes": 45,
    "comments": 0,
    "shares": 0,
-   "score": 3015
+   "score": 3014
   }
  ],
  "flop": [
@@ -156,21 +156,21 @@
    "id": 38,
    "title": "Was passiert, wenn Drohnen deinen Alltag komplett überwachen?",
    "category": "whatif",
-   "views": 1126,
+   "views": 1125,
    "likes": 17,
    "comments": 1,
    "shares": 0,
-   "score": 1411
+   "score": 1410
   },
   {
    "id": 58,
    "title": "Wie aus einer Gaming-Bude der wertvollste Tech-Gigant wurde",
    "category": "fakten",
-   "views": 598,
+   "views": 597,
    "likes": 17,
    "comments": 0,
    "shares": 0,
-   "score": 853
+   "score": 852
   },
   {
    "id": 44,
