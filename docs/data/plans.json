@@ -1,1222 +1,4 @@
 {
- "2026-11-18 21:00": {
-  "category": "comedy",
-  "topic": "Besondere familiäre Momente an großen Feiertagen",
-  "trend": null,
-  "script": {
-   "title": "Weihnachten mit der Familie eskaliert komplett",
-   "description": "Was passiert wirklich, wenn die Verwandten an den Feiertagen ausrasten?\nErzählung über das chaotische Weihnachtsessen, das völlig außer Kontrolle gerät.\nBleibst du bis zum Dessert am Tisch oder flüchtest du?",
-   "hashtags": [
-    "#shorts",
-    "#weihnachten",
-    "#familie",
-    "#comedy",
-    "#storytime",
-    "#viral",
-    "#fyp"
-   ],
-   "tags": [
-    "weihnachten",
-    "familie",
-    "feiertage",
-    "essen",
-    "eskalation",
-    "comedy",
-    "storytime",
-    "verwandte",
-    "weihnachtsessen",
-    "chaos"
-   ],
-   "thumbnail": {
-    "place": "livingroom",
-    "time": "day",
-    "actor": "du",
-    "action": "shocked",
-    "emotion": "shocked",
-    "props": [
-     "gabel"
-    ],
-    "weather": "",
-    "image": "Close-up of a shocked person at a dinner table with flying food and a turkey wearing a crown",
-    "text": "WEIHNACHTEN ESKALIERT"
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "grün",
-     "hat": "",
-     "hair": "short",
-     "hair_color": "braun",
-     "gender": "w",
-     "skin": "hell"
-    },
-    "truthan": {
-     "kind": "bird"
-    },
-    "oma": {
-     "shirt": "rot",
-     "hat": "",
-     "hair": "bun",
-     "hair_color": "grau",
-     "gender": "w",
-     "skin": "hell"
-    }
-   },
-   "scenes": [
-    {
-     "text": "Weihnachten mit der Familie eskaliert nach dem ersten Gang.",
-     "image": "A person sitting at a festive table looking shocked at a turkey",
-     "who": [
-      "du"
-     ],
-     "place": "diningroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Truthahn"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "HEILIGABEND"
-     },
-     "see": "Du sitzt im Esszimmer, als das Essen eskaliert.",
-     "time": "day",
-     "props": [
-      "table",
-      "suppe"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Der Vogel springt auf, packt die Gabel und fordert eine Entschuldigung.",
-     "image": "A turkey holding a fork and looking angry at the table",
-     "who": [
-      "truthan"
-     ],
-     "place": "diningroom",
-     "camera": "zoom_in",
-     "sfx": "pop",
-     "highlight": [
-      "Gabel"
-     ],
-     "overlay": null,
-     "see": "Der Vogel springt auf dem Tisch auf und hält eine Gabel.",
-     "time": "day",
-     "props": [
-      "gabel"
-     ],
-     "actors": [
-      {
-       "id": "vogel",
-       "action": "jump",
-       "emotion": "angry",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true,
-       "say": "Entschuldigung!"
-      }
-     ],
-     "shot": "insert",
-     "mood": "panic",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Du denkst, schlimmer kann es nicht werden, aber der Weihnachtsbaum fängt an zu tanzen.",
-     "image": "A person looking at a dancing christmas tree in the corner",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "pan_right",
-     "sfx": "none",
-     "highlight": [
-      "Weihnachtsbaum"
-     ],
-     "overlay": null,
-     "see": "Der Weihnachtsbaum fängt im Wohnzimmer an zu tanzen.",
-     "time": "day",
-     "props": [
-      "tree"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "pant",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "left",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "panic",
-     "who_desc": "",
-     "place_desc": "English description of livingroom with festive decorations and a large dining table",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Er dreht sich im Kreis und wirft mit Tannenzapfen nach Omas Kuchendose.",
-     "image": "A tree throwing pinecones across the room",
-     "who": [],
-     "place": "livingroom",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "Kuchendose"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "ZAPFENREGEN"
-     },
-     "see": "Der tanzende Weihnachtsbaum wirft Tannenzapfen.",
-     "time": "day",
-     "props": [
-      "tree",
-      "kuchen"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "panic",
-     "who_desc": "",
-     "place_desc": "English description of livingroom with festive decorations and a large dining table",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Oma zieht seelenruhig eine Trillerpfeife aus der Handtasche und pfeift zum Angriff.",
-     "image": "An elderly woman blowing a whistle with a fierce expression",
-     "who": [
-      "oma"
-     ],
-     "place": "livingroom",
-     "camera": "close",
-     "sfx": "tick",
-     "highlight": [
-      "Trillerpfeife"
-     ],
-     "overlay": null,
-     "see": "Oma zieht eine Trillerpfeife aus der Handtasche.",
-     "time": "day",
-     "props": [
-      "bag"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "angry",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "close",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "English description of livingroom with festive decorations and a large dining table",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Plötzlich marschieren zwanzig Pralinen aus der Schachtel und bilden ein Bataillon.",
-     "image": "Chocolates lined up like soldiers on the dining table",
-     "who": [],
-     "place": "kitchen",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Pralinen"
-     ],
-     "overlay": {
-      "type": "counter",
-      "label": "SCHOKOLADEN-SOLDATEN",
-      "value": 20
-     },
-     "see": "Pralinen marschieren aus der Schachtel.",
-     "time": "day",
-     "props": [
-      "schokolade"
-     ],
-     "actors": [],
-     "shot": "insert",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Die Kartoffeln rollen panisch unter das Sofa, weil der Braten die Kontrolle übernimmt.",
-     "image": "Potatoes rolling in panic under the sofa",
-     "who": [],
-     "place": "livingroom",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "Kartoffeln"
-     ],
-     "overlay": null,
-     "see": "Kartoffeln rollen panisch unter das Sofa.",
-     "time": "day",
-     "props": [
-      "kartoffel",
-      "stuhl"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "panic",
-     "who_desc": "",
-     "place_desc": "English description of livingroom with festive decorations and a large dining table",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Du versuchst, den Raum zu verlassen, aber die Zimmertür schließt sich von selbst.",
-     "image": "A person trying to open a locked door with a worried look",
-     "who": [
-      "du"
-     ],
-     "place": "hallway",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Zimmertür"
-     ],
-     "overlay": null,
-     "see": "Die Zimmertür schließt sich von selbst vor deiner Nase.",
-     "time": "day",
-     "props": [
-      "türrahmen"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "freeze",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "An der Wand hängt plötzlich eine Neonreklame mit der Aufschrift Endspurt.",
-     "image": "A neon sign glowing on the wall with bold letters",
-     "who": [],
-     "place": "livingroom",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Endspurt"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "NEON"
-     },
-     "see": "Eine Neonreklame mit der Aufschrift Endspurt leuchtet an der Wand.",
-     "time": "night",
-     "props": [
-      "sign"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "English description of livingroom with festive decorations and a large dining table",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Dein Smartphone vibriert ununterbrochen und zeigt nur noch Warnmeldungen an.",
-     "image": "A person looking at a vibrating smartphone with alert messages",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "close",
-     "sfx": "tick",
-     "highlight": [
-      "Warnmeldungen"
-     ],
-     "overlay": {
-      "type": "phone",
-      "mode": "alert",
-      "kicker": "FEIERTAGS-ALARM",
-      "text": "ESKALATION",
-      "value": "100%",
-      "label": "LÄUFT"
-     },
-     "see": "Dein Smartphone vibriert ununterbrochen mit Warnmeldungen.",
-     "time": "night",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shake",
-       "emotion": "worried",
-       "pos": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "shot": "insert",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "English description of livingroom with festive decorations and a large dining table",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Der Truthahn hält eine Rede über die Würde des Geflügels im Advent.",
-     "image": "A turkey standing on a chair talking to the family",
-     "who": [
-      "truthan"
-     ],
-     "place": "diningroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Geflügel"
-     ],
-     "overlay": null,
-     "see": "Der Truthahn hält eine dramatische Rede.",
-     "time": "night",
-     "props": [
-      "gerupfte gans"
-     ],
-     "actors": [
-      {
-       "id": "vogel",
-       "action": "talk",
-       "emotion": "angry",
-       "pos": "center",
-       "speaks": true,
-       "say": "WÜRDE!"
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Niemand wagt es zu widersprechen, weil der Braten schärfer ist als das Messer.",
-     "image": "Family members sitting quietly and listening to the turkey",
-     "who": [
-      "du"
-     ],
-     "place": "diningroom",
-     "camera": "zoom_out",
-     "sfx": "none",
-     "highlight": [
-      "Messer"
-     ],
-     "overlay": null,
-     "see": "Alle gucken ernst und schweigen.",
-     "time": "night",
-     "props": [
-      "table"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "freeze",
-       "emotion": "scared",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "close",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Oma reicht dem Vogel feierlich die goldene Gabel als Friedensangebot.",
-     "image": "An elderly woman handing a golden fork to the turkey",
-     "who": [
-      "oma"
-     ],
-     "place": "diningroom",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Friedensangebot"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "FRIEDEN"
-     },
-     "see": "Oma reicht dem Vogel feierlich die goldene Gabel.",
-     "time": "night",
-     "props": [
-      "gabel"
-     ],
-     "actors": [
-      {
-       "id": "vogel",
-       "action": "point",
-       "emotion": "happy",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Der Truthahn nimmt an, setzt sich und wünscht allen einen guten Appetit.",
-     "image": "The turkey sitting down at the head of the table happily",
-     "who": [
-      "truthan"
-     ],
-     "place": "diningroom",
-     "camera": "pan_right",
-     "sfx": "none",
-     "highlight": [
-      "Appetit"
-     ],
-     "overlay": null,
-     "see": "Der Truthahn nimmt an, setzt sich und wünscht guten Appetit.",
-     "time": "night",
-     "props": [
-      "chair",
-      "table"
-     ],
-     "actors": [
-      {
-       "id": "vogel",
-       "action": "sit",
-       "emotion": "happy",
-       "pos": "center",
-       "speaks": true,
-       "say": "Guten!"
-      }
-     ],
-     "shot": "wide",
-     "mood": "happy",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Alle atmen auf und greifen endlich nach dem langersehnten Kartoffelsalat.",
-     "image": "People reaching for food bowls on the table with relief",
-     "who": [
-      "du"
-     ],
-     "place": "diningroom",
-     "camera": "zoom_out",
-     "sfx": "none",
-     "highlight": [
-      "Kartoffelsalat"
-     ],
-     "overlay": null,
-     "see": "Alle atmen auf und greifen zum Kartoffelsalat.",
-     "time": "night",
-     "props": [
-      "kartoffel",
-      "table"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "pant",
-       "emotion": "happy",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "happy",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Doch da fängt der Truthahn plötzlich wieder an.",
-     "image": "The turkey opening its beak to speak again with a mischievous look",
-     "who": [
-      "truthan"
-     ],
-     "place": "diningroom",
-     "camera": "zoom_in",
-     "sfx": "boom",
-     "highlight": [
-      "Truthahn"
-     ],
-     "overlay": null,
-     "see": "Der Truthahn fängt plötzlich wieder an zu reden.",
-     "time": "night",
-     "props": [
-      "table"
-     ],
-     "actors": [
-      {
-       "id": "vogel",
-       "action": "talk",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true,
-       "say": "STOP!"
-      }
-     ],
-     "shot": "close",
-     "mood": "panic",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [
-   "trillerpfeife",
-   "praline",
-   "neonreklame"
-  ],
-  "title": "Weihnachten mit der Familie eskaliert komplett",
-  "created": 1795017254.3738286
- },
- "2026-11-19 13:00": {
-  "category": "whatif",
-  "topic": "Was wäre, wenn man ein Wesen aus verschiedenen Tierarten erschafft?",
-  "trend": null,
-  "script": {
-   "title": "Was wäre, wenn du ein Super-Tier aus vier Arten baust?",
-   "description": "Was passiert, wenn du die krassesten Tier-Superkräfte in einem einzigen Wesen vereinst?\nWir bauen die ultimative Kreatur aus Adler, Gepard, Bärtierchen und Blauwal.\nWelche Superkraft würdest du zuerst ausprobieren?",
-   "hashtags": [
-    "#shorts",
-    "#tiere",
-    "#wissenschaft",
-    "#whatif",
-    "#superkräfte",
-    "#fakte",
-    "#fyp"
-   ],
-   "tags": [
-    "tierfakten",
-    "superkräfte",
-    "bärtierchen",
-    "gepard",
-    "biologie",
-    "evolution",
-    "was wäre wenn",
-    "tiere"
-   ],
-   "thumbnail": {
-    "place": "lab",
-    "time": "day",
-    "actor": "du",
-    "action": "shocked",
-    "emotion": "shocked",
-    "props": [
-     "herz"
-    ],
-    "weather": "",
-    "image": "Close-up of a chimeric super creature with eagle wings and cheetah spots, looking surprised, bright colors, empty space in upper third",
-    "text": "DAS ULTIMATIVE TIER"
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "grün",
-     "hat": "",
-     "hair": "curly",
-     "gender": "w",
-     "hair_color": "braun",
-     "skin": "mittel"
-    }
-   },
-   "scenes": [
-    {
-     "text": "Baue das perfekte Super-Tier aus vier verschiedenen Arten im Labor.",
-     "image": "Lab setting with a glowing container holding a hybrid creature",
-     "who": [
-      "du"
-     ],
-     "place": "lab",
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "Super-Tier"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "VIER TIERE"
-     },
-     "see": "Du stehst im Labor und baust ein Monster aus verschiedenen Tieren",
-     "time": "day",
-     "props": [
-      "mikroskop"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "happy",
-       "emote": "idea",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "Modern science laboratory with glowing screens and test tubes",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Für den ultimativen Sprint nehmen wir die pure Muskelkraft eines Gepards",
-     "image": "Cheetah running across the savanna at high speed",
-     "who": [],
-     "place": "savannah",
-     "camera": "pan_right",
-     "sfx": "none",
-     "highlight": [
-      "Gepards"
-     ],
-     "overlay": null,
-     "see": "Ein Gepard rennt schnell über die Savanne",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "event",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Das Wesen rennt hundertzwanzig Kilometer pro Stunde und lässt jedes Auto hinter sich",
-     "image": "Fast running creature kicking up dust clouds",
-     "who": [],
-     "place": "street",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "hundertzwanzig"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "120 KM/H"
-     },
-     "see": "Ein Auto rast mit hoher Geschwindigkeit über die Straße",
-     "time": "day",
-     "props": [
-      "car",
-      "speedometer"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Aber reine Schnelligkeit reicht nicht, wenn der Feind aus der Luft angreift",
-     "image": "Eagle soaring high in the bright blue sky",
-     "who": [],
-     "place": "park",
-     "camera": "pan_up",
-     "sfx": "none",
-     "highlight": [
-      "Luft"
-     ],
-     "overlay": null,
-     "see": "Du schaust ängstlich nach oben in den Himmel",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "cower",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Deshalb bekommt unser Monster die Augen eines Adlers mit achtfacher Sehkraft",
-     "image": "Close-up of an eagle eye scanning the landscape",
-     "who": [],
-     "place": "mountain",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Adlers"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "ACHTFACH"
-     },
-     "see": "Ein Adler fliegt hoch am Himmel",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "event",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Es entdeckt eine kleine Maus aus mehrerenhundert Metern Höhe ganz ohne Problem",
-     "image": "View from high above looking down at tiny ground details",
-     "who": [],
-     "place": "fields",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "dreitausend"
-     ],
-     "overlay": null,
-     "see": "Eine kleine Maus sitzt im Gras",
-     "time": "day",
-     "props": [
-      "maus"
-     ],
-     "actors": [],
-     "shot": "insert",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Doch was passiert bei eisiger Kälte oder im kochenden heißen Wasser",
-     "image": "Extreme temperature change with ice turning into steam",
-     "who": [],
-     "place": "snow",
-     "camera": "shake",
-     "sfx": "whoosh",
-     "highlight": [
-      "Kälte"
-     ],
-     "overlay": null,
-     "see": "Eisige Kälte und Frost breiten sich aus",
-     "time": "day",
-     "weather": "cold",
-     "props": [
-      "ice"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Hier hilft die DNA vom Bärtierchen, dem härtesten Überlebenskünstler auf der Erde",
-     "image": "Microscopic tardigrade curling into a dry tun state",
-     "who": [],
-     "place": "forest",
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "Bärtierchen"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "UNZERSTÖRBAR"
-     },
-     "see": "Ein Bärtierchen liegt winzig im Moos",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "insert",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Es übersteht minus zweihundert Grad und sogar die tödliche Strahlung im Weltall",
-     "image": "Creature floating safely in the cold dark space",
-     "who": [],
-     "place": "space",
-     "camera": "float",
-     "sfx": "none",
-     "highlight": [
-      "minus zweihundert"
-     ],
-     "overlay": {
-      "type": "thermo",
-      "value": -200
-     },
-     "see": "Eis und kosmische Strahlung im kalten Weltall",
-     "time": "night",
-     "props": [
-      "sun"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Bleibt die Frage nach der Masse, denn ein echter Riese braucht enorm viel Energie",
-     "image": "Massive blue whale breaching the ocean surface",
-     "who": [],
-     "place": "lab",
-     "camera": "zoom_out",
-     "sfx": "boom",
-     "highlight": [
-      "Riese"
-     ],
-     "overlay": null,
-     "see": "Du denkst nach und hältst dir den Kopf",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "think",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "Modern science laboratory with glowing screens and test tubes",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Als vierte Zutat pflanzen wir das Herz eines Blauwals in die Brust",
-     "image": "Large blue whale heart pulsing with blue light",
-     "who": [],
-     "place": "lab",
-     "camera": "zoom_in",
-     "sfx": "thump",
-     "highlight": [
-      "Blauwals"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "180 KG"
-     },
-     "see": "Ein riesiges Walherz liegt im Labor",
-     "time": "day",
-     "props": [
-      "herz"
-     ],
-     "actors": [],
-     "shot": "insert",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "Modern science laboratory with glowing screens and test tubes",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Dieses Herz ist so schwer wie ein ausgewachsener Kleinwagen und pumpt Liter",
-     "image": "Car compared next to a giant pulsing heart graphic",
-     "who": [],
-     "place": "lab",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Kleinwagen"
-     ],
-     "overlay": null,
-     "see": "Ein schweres Walherz pumpt Blut",
-     "time": "day",
-     "props": [
-      "herz",
-      "scale"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "Modern science laboratory with glowing screens and test tubes",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Das Biest wiegt jetzt zweihundert Tonnen und hat die Größe eines Hauses",
-     "image": "Massive hybrid creature towering over city buildings",
-     "who": [],
-     "place": "street",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "zweihundert Tonnen"
-     ],
-     "overlay": {
-      "type": "counter",
-      "label": "GEWICHT",
-      "value": 200,
-      "unit": "TONNEN"
-     },
-     "see": "Ein riesiges Monster in der Größe eines Hauses steht da",
-     "time": "day",
-     "props": [
-      "house"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "tense",
-     "crowd": "watch",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Du denkst, dieses Monster wird sofort die Weltherrschaft an sich reißen",
-     "image": "Du looking worried at a giant shadow on the wall",
-     "who": [
-      "du"
-     ],
-     "place": "street",
-     "camera": "zoom_in",
-     "action": "worried",
-     "sfx": "tick",
-     "highlight": [
-      "Weltherrschaft"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "IRRTUM",
-      "color": "red"
-     },
-     "see": "Du schaust erschrocken zu dem großen Monster auf",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "panic",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Falsch, denn die Biologie hat einen winzigen Haken an der ganzen Sache",
-     "image": "Lab computer screen flashing red error warnings",
-     "who": [],
-     "place": "lab",
-     "camera": "shake",
-     "sfx": "pop",
-     "highlight": [
-      "Biologie"
-     ],
-     "overlay": null,
-     "see": "Du schüttelst den Kopf",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "idle",
-       "emotion": "worried",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "Modern science laboratory with glowing screens and test tubes",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Das Gehirn vom Gepard und die Lunge vom Wal passen niemals zusammen",
-     "image": "Diagram showing mismatched animal body parts crossing out",
-     "who": [],
-     "place": "lab",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Gehirn"
-     ],
-     "overlay": null,
-     "see": "Gehirn und Lunge passen nicht zusammen",
-     "time": "day",
-     "props": [
-      "synapse"
-     ],
-     "actors": [],
-     "shot": "insert",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "Modern science laboratory with glowing screens and test tubes",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Innerhalb von drei Sekunden bricht der gesamte Stoffwechsel komplett in sich zusammen",
-     "image": "Glowing digital creature glitching and fading away",
-     "who": [],
-     "place": "lab",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "drei Sekunden"
-     ],
-     "overlay": {
-      "type": "timer",
-      "value": "00:03"
-     },
-     "see": "Ein Timer läuft schnell ab",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "panic",
-     "who_desc": "",
-     "place_desc": "Modern science laboratory with glowing screens and test tubes",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Übrig bleibt nur ein kleiner Haufen aus verwirrten Zellen auf dem Tisch",
-     "image": "Small glowing cell cluster sitting quietly on a steel table",
-     "who": [],
-     "place": "lab",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Zellen"
-     ],
-     "overlay": null,
-     "see": "Ein Haufen Zellen liegt auf dem Tisch",
-     "time": "day",
-     "props": [
-      "table"
-     ],
-     "actors": [],
-     "shot": "insert",
-     "mood": "sad",
-     "who_desc": "",
-     "place_desc": "Modern science laboratory with glowing screens and test tubes",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Deshalb lässt Mutter Natur ihre Tiere lieber so, wie sie perfekt funktionieren",
-     "image": "Various normal animals walking together peacefully in nature",
-     "who": [],
-     "place": "lab",
-     "camera": "pan_left",
-     "sfx": "ding",
-     "highlight": [
-      "Mutter Natur"
-     ],
-     "overlay": null,
-     "see": "Du lächelst zufrieden im Labor",
-     "time": "day",
-     "props": [
-      "mikroskop"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "idle",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "Modern science laboratory with glowing screens and test tubes",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [
-   "blauwal"
-  ],
-  "title": "Was wäre, wenn du ein Super-Tier aus vier Arten baust?",
-  "created": 1795026276.6550267
- },
  "2026-11-19 18:00": {
   "category": "whatif",
   "topic": "Absurde Alltagssituationen, in denen Technologie völlig verrückt spielt",
@@ -2644,5 +1426,732 @@
   "needs": [],
   "created": 1795112188.8434942,
   "special": "bounce"
+ },
+ "2026-11-20 18:00": {
+  "category": "comedy",
+  "topic": "Warum wir in unpassenden Situationen plötzlich lachen müssen – Ich-Geschichte über eine Beerdigung, einen kaputten Staubsauger und den Versuch, das Gehirn stummzuschalten",
+  "trend": null,
+  "script": {
+   "title": "Unpassend lachen: Warum das Gehirn bei Beerdigungen ausrastet",
+   "description": "Warum musst du ausgerechnet in ernsten Momenten laut loslachen?\nDas Phänomen heißt überfließende Emotion – und dein Gehirn versucht dich nur zu schützen.\nLachst du bei Stress oder bleibst du eiskalt?",
+   "hashtags": [
+    "#shorts",
+    "#psychologie",
+    "#gehirn",
+    "#alltag",
+    "#comedy",
+    "#fakten",
+    "#lustig",
+    "#wissen"
+   ],
+   "tags": [
+    "unpassend lachen",
+    "lachkrampf beerdigung",
+    "nervöses lachen",
+    "psychologie fakten",
+    "gehirn erklärung",
+    "stress symptom",
+    "lachkrampf unterdrücken",
+    "lachreiz"
+   ],
+   "thumbnail": {
+    "image": "Close-up of a young man with wide terrified eyes trying to hold back a burst of laughter in a dark serious room, biting his lip tightly",
+    "text": "WARUM LACHST DU?"
+   },
+   "wishes": [
+    "staubsauger"
+   ],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "schwarz",
+     "hat": "",
+     "hair": "curly",
+     "hair_color": "dunkelbraun",
+     "gender": "m",
+     "skin": "hell"
+    },
+    "gehirn": {
+     "kind": "brain"
+    },
+    "oma": {
+     "shirt": "schwarz",
+     "hat": "beanie",
+     "hair": "short",
+     "hair_color": "grau",
+     "gender": "w",
+     "skin": "hell"
+    }
+   },
+   "scenes": [
+    {
+     "see": "Die Hauptfigur steht verängstigt auf der Beerdigung und krampfhaft versucht, nicht zu lachen.",
+     "text": "Ich stand auf einer Beerdigung und musste plötzlich laut loslachen.",
+     "place": "graveyard",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "jump",
+       "emotion": "happy",
+       "emote": "music",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "sad",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "Beerdigung",
+      "lachen"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "ERNSTE LAGE"
+     },
+     "image": "Ich stand auf einer Beerdigung und musste plötzlich laut loslachen.",
+     "who_desc": "",
+     "place_desc": "A quiet graveyard with dark tombstones and green grass under a overcast sky",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik mit einem brennenden Gehirn zeigt die pure Panik im Kopf.",
+     "text": "Und das Schlimmste daran ist, dass du es absolut nicht stoppen kannst.",
+     "place": "graveyard",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "tremble",
+       "emotion": "worried",
+       "emote": "sweat",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "panic",
+     "shot": "close",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "stoppen"
+     ],
+     "overlay": null,
+     "image": "Und das Schlimmste daran ist, dass du es absolut nicht stoppen kannst.",
+     "who_desc": "",
+     "place_desc": "A quiet graveyard with dark tombstones and green grass under a overcast sky",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Rückblick ins Wohnzimmer mit dem explodierten Staubsauger.",
+     "text": "Alles begann heute Morgen, als mein Staubsauger mit einem lauten Knall explodierte.",
+     "place": "livingroom",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "staubsauger",
+      "smoke"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "boom",
+     "highlight": [
+      "Staubsauger",
+      "explodierte"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "08:15 UHR"
+     },
+     "image": "Alles begann heute Morgen, als mein Staubsauger mit einem lauten Knall explodierte.",
+     "who_desc": "",
+     "place_desc": "A cozy living room with a couch and a broken vacuum cleaner on the carpet",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Figur schaut wütend auf das rauchende Gerät.",
+     "text": "Mein kompletter Teppich war voller Staub, aber ich musste pünktlich los.",
+     "place": "livingroom",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "staubsauger"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "run",
+       "emotion": "worried",
+       "emote": "sweat",
+       "pos": "left",
+       "to": "right",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "pan_right",
+     "sfx": "whoosh",
+     "highlight": [
+      "Teppich",
+      "pünktlich"
+     ],
+     "overlay": null,
+     "image": "Mein kompletter Teppich war voller Staub, aber ich musste pünktlich los.",
+     "who_desc": "",
+     "place_desc": "A cozy living room with a couch and a broken vacuum cleaner on the carpet",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn taucht als Figur auf und drückt rote Panik-Knöpfe.",
+     "text": "Mein Stresspegel war auf dreihundert Prozent, aber wie passte das zur Beerdigung?",
+     "place": "office",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "dance",
+       "emotion": "angry",
+       "emote": "anger",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "panic",
+     "shot": "graphic",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Stresspegel"
+     ],
+     "graphic": {
+      "type": "number",
+      "kicker": "STRESSPEGEL",
+      "value": "300 %",
+      "label": "OVERLOAD"
+     },
+     "overlay": null,
+     "image": "Mein Stresspegel war auf dreihundert Prozent, aber wie passte das zur Beerdigung?",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Kirche von innen, stille Trauergäste.",
+     "text": "In der Kirche war es danach so leise, dass man Stecknadeln hören konnte.",
+     "place": "church",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "freeze",
+       "emotion": "worried",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "sad",
+     "mood": "calm",
+     "shot": "event",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "Kirche",
+      "leise"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "TOTENSTILLE"
+     },
+     "image": "In der Kirche war es danach so leise, dass man Stecknadeln hören konnte.",
+     "who_desc": "",
+     "place_desc": "Inside a dim church with wooden pews and quiet atmosphere",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Oma schaut traurig zur Seite.",
+     "text": "Oma weinte leise und alle blickten betroffen auf den Boden.",
+     "place": "church",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "oma",
+       "action": "sad",
+       "emotion": "sad",
+       "emote": "",
+       "pos": "center",
+       "speaks": false
+      }
+     ],
+     "crowd": "sad",
+     "mood": "sad",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Oma",
+      "betroffen"
+     ],
+     "overlay": null,
+     "image": "Oma weinte leise und alle blickten betroffen auf den Boden.",
+     "who_desc": "",
+     "place_desc": "Inside a dim church with wooden pews and quiet atmosphere",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Gedankenblase mit dem staubsaugenden Roboter.",
+     "text": "Aber mein Kopf dachte nur an den Staubsauger – was passierte dann?",
+     "place": "church",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "idea",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "pop",
+     "highlight": [
+      "Staubsauger"
+     ],
+     "overlay": null,
+     "image": "Aber mein Kopf dachte nur an den Staubsauger – was passierte dann?",
+     "who_desc": "",
+     "place_desc": "Inside a dim church with wooden pews and quiet atmosphere",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn kichert fies hinter einem Pult.",
+     "text": "Plötzlich flüsterte mir mein Gehirn einen extrem absurden Witz zu.",
+     "place": "church",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "music",
+       "pos": "right",
+       "speaks": true,
+       "say": "HIHI!"
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "Gehirn",
+      "Witz"
+     ],
+     "overlay": null,
+     "image": "Plötzlich flüsterte mir mein Gehirn einen extrem absurden Witz zu.",
+     "who_desc": "",
+     "place_desc": "Inside a dim church with wooden pews and quiet atmosphere",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Hauptfigur beißt sich krampfhaft auf die Lippen und läuft rot an.",
+     "text": "Ich versuchte sofort krampfhaft, an traurige Dinge wie Mathe zu denken.",
+     "place": "church",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "freeze",
+       "emotion": "scared",
+       "emote": "sweat",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "close",
+     "camera": "shake",
+     "sfx": "none",
+     "highlight": [
+      "traurige Dinge"
+     ],
+     "overlay": {
+      "type": "note",
+      "title": "RETTUNGSPLAN",
+      "text": "Denk an Mathe!"
+     },
+     "image": "Ich versuchte sofort krampfhaft, an traurige Dinge wie Mathe zu denken.",
+     "who_desc": "",
+     "place_desc": "Inside a dim church with wooden pews and quiet atmosphere",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik über die psychologische Reaktion des Gehirns.",
+     "text": "Du denkst vielleicht, dass das fies oder respektlos von mir war.",
+     "place": "church",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "respektlos"
+     ],
+     "graphic": {
+      "type": "question",
+      "text": "BIST DU FIES?"
+     },
+     "overlay": null,
+     "image": "Du denkst vielleicht, dass das fies oder respektlos von mir war.",
+     "who_desc": "",
+     "place_desc": "Inside a dim church with wooden pews and quiet atmosphere",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn hält ein Schutzschild hoch.",
+     "text": "Falsch, es ist ein völlig normaler Schutzmechanismus deines Körpers.",
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "Schutzmechanismus"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "NORMAL",
+      "color": "green"
+     },
+     "image": "Falsch, es ist ein völlig normaler Schutzmechanismus deines Körpers.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Schautafel über das Nervensystem bei extremer Überlastung.",
+     "text": "Wenn der Druck zu hoch wird, schüttet das Gehirn stoßweise Dopamin aus.",
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "adrenaline"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "pant",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "event",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Dopamin"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "DOPAMIN-VENTIL"
+     },
+     "image": "Wenn der Druck zu hoch wird, schüttet das Gehirn stoßweise Dopamin aus.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Zähler schießt nach oben und zeigt den emotionalen Überdruck.",
+     "text": "Psychologen nennen dieses Phänomen eine überfließende Emotion zur Stressbewältigung.",
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "überfließende Emotion"
+     ],
+     "graphic": {
+      "type": "number",
+      "kicker": "PSYCHOLOGIE",
+      "value": "EMOTION",
+      "label": "ÜBERLAUF"
+     },
+     "overlay": null,
+     "image": "Psychologen nennen dieses Phänomen eine überfließende Emotion zur Stressbewältigung.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn dreht völlig durch und wirft mit Konfetti.",
+     "text": "Das Lachen funktioniert wie ein Sicherheitsventil, aber wie stoppt man es wieder?",
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "jump",
+       "emotion": "happy",
+       "emote": "music",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "happy",
+     "shot": "wide",
+     "camera": "shake",
+     "sfx": "pop",
+     "highlight": [
+      "Sicherheitsventil"
+     ],
+     "overlay": null,
+     "image": "Das Lachen funktioniert wie ein Sicherheitsventil, aber wie stoppt man es wieder?",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Figur stöhnt leise im Gottesdienst und versucht sich abzulenken.",
+     "text": "Bleibt nur die Frage, wie man diesen Reiz sofort stoppt.",
+     "place": "church",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "pant",
+       "emotion": "worried",
+       "emote": "sweat",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "sofort stoppt"
+     ],
+     "overlay": null,
+     "image": "Bleibt nur die Frage, wie man diesen Reiz sofort stoppt.",
+     "who_desc": "",
+     "place_desc": "Inside a dim church with wooden pews and quiet atmosphere",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein sanfter Schmerz-Tipp wird symbolisiert.",
+     "text": "Ein kurzer, kleiner Schmerzreiz wie leichtes Zwicken hilft meistens direkt.",
+     "place": "church",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "cower",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "close",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Schmerzreiz"
+     ],
+     "overlay": {
+      "type": "note",
+      "title": "TRICK",
+      "text": "Leicht zwicken!"
+     },
+     "image": "Ein kurzer, kleiner Schmerzreiz wie leichtes Zwicken hilft meistens direkt.",
+     "who_desc": "",
+     "place_desc": "Inside a dim church with wooden pews and quiet atmosphere",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Oma schaut überrascht rüber, als ein Geräusch ertönt.",
+     "text": "Ich hab mich fest gezwickt, aber laut gepustet.",
+     "place": "church",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "sweat",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "oma",
+       "action": "look_around",
+       "emotion": "shocked",
+       "emote": "?",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "panic",
+     "shot": "wide",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "gepustet"
+     ],
+     "overlay": null,
+     "image": "Ich hab mich fest gezwickt, aber laut gepustet.",
+     "who_desc": "",
+     "place_desc": "Inside a dim church with wooden pews and quiet atmosphere",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Hauptfigur steht schockiert da, während die Schleife vorbereitet wird.",
+     "text": "Und genau deshalb schaust du mich jetzt so entsetzt an.",
+     "place": "church",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "worried",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "watch",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "entsetzt"
+     ],
+     "overlay": {
+      "type": "choice",
+      "a": "Lachen unterdrücken",
+      "b": "Einfach rausrennen"
+     },
+     "image": "Und genau deshalb schaust du mich jetzt so entsetzt an.",
+     "who_desc": "",
+     "place_desc": "Inside a dim church with wooden pews and quiet atmosphere",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "beerdigung",
+   "teppich"
+  ],
+  "title": "Unpassend lachen: Warum das Gehirn bei Beerdigungen ausrastet",
+  "created": 1795170487.0312629
  }
 }
