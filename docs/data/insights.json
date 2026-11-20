@@ -1,5 +1,5 @@
 {
- "updated": 1795199390.8044631,
+ "updated": 1795201138.679977,
  "enough": true,
  "counted": 29,
  "total": 31,
@@ -9,10 +9,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 4,
-   "avg_views": 1927,
+   "avg_views": 1928,
    "avg_likes": 44.8,
    "like_rate": 2.32,
-   "avg_score": 2616
+   "avg_score": 2617
   },
   {
    "slug": "tiere",
@@ -48,7 +48,7 @@
    "avg_views": 1722,
    "avg_likes": 44.5,
    "like_rate": 2.58,
-   "avg_score": 2400
+   "avg_score": 2399
   },
   {
    "slug": "whatif",
@@ -84,7 +84,7 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 1927 Aufrufe, 2.32 % Likes).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 1928 Aufrufe, 2.32 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1768 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2529 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
@@ -94,10 +94,10 @@
   "vier"
  ],
  "words_bad": [
-  "erkennst",
+  "lied",
   "remix",
   "bekanntes",
-  "lied"
+  "erkennst"
  ],
  "top": [
   {
@@ -124,11 +124,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 2059,
+   "views": 2057,
    "likes": 68,
    "comments": 0,
    "shares": 0,
-   "score": 3079
+   "score": 3077
   },
   {
    "id": 139,
