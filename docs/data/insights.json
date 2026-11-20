@@ -1,18 +1,18 @@
 {
- "updated": 1795171065.2827055,
+ "updated": 1795172881.996812,
  "enough": true,
  "counted": 27,
- "total": 29,
+ "total": 30,
  "needed": 6,
  "categories": [
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 4,
-   "avg_views": 1914,
+   "avg_views": 1924,
    "avg_likes": 44.8,
-   "like_rate": 2.34,
-   "avg_score": 2603
+   "like_rate": 2.33,
+   "avg_score": 2612
   },
   {
    "slug": "tiere",
@@ -57,7 +57,7 @@
    "avg_views": 1716,
    "avg_likes": 41.9,
    "like_rate": 2.44,
-   "avg_score": 2347
+   "avg_score": 2348
   },
   {
    "slug": "musik",
@@ -73,7 +73,7 @@
   "fakten": 1.0,
   "grusel": 1.2,
   "storys": 1.02,
-  "mysterien": 1.01,
+  "mysterien": 1.0,
   "tiere": 1.04,
   "whatif": 0.98,
   "comedy": 1.09,
@@ -84,18 +84,19 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 1914 Aufrufe, 2.34 % Likes).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 1924 Aufrufe, 2.33 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1764 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2524 zu 705 Punkte).",
-  "Wörter in starken Titeln: gänsehaut."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2526 zu 705 Punkte).",
+  "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
-  "gänsehaut"
+  "gänsehaut",
+  "vier"
  ],
  "words_bad": [
-  "erkennst",
-  "lied",
   "bekanntes",
+  "lied",
+  "erkennst",
   "remix"
  ],
  "top": [
@@ -123,11 +124,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 2059,
+   "views": 2058,
    "likes": 68,
    "comments": 0,
    "shares": 0,
-   "score": 3079
+   "score": 3078
   },
   {
    "id": 139,
