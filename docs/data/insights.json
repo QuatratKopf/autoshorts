@@ -1,18 +1,18 @@
 {
- "updated": 1795193936.719059,
+ "updated": 1795195736.427745,
  "enough": true,
  "counted": 29,
- "total": 30,
+ "total": 31,
  "needed": 6,
  "categories": [
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 4,
-   "avg_views": 1927,
+   "avg_views": 1928,
    "avg_likes": 44.8,
    "like_rate": 2.32,
-   "avg_score": 2616
+   "avg_score": 2617
   },
   {
    "slug": "tiere",
@@ -84,7 +84,7 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 1927 Aufrufe, 2.32 % Likes).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 1928 Aufrufe, 2.32 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1768 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2529 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
