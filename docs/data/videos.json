@@ -6399,7 +6399,7 @@
   "id": 170,
   "category": "vergleich",
   "topic": "Tattoo-Studio gegen Nagelstudio: Wer verdient wirklich mehr?",
-  "status": "review",
+  "status": "discarded",
   "created": 1795198391.003562,
   "title": "Tattoo vs. Nagelstudio: Wer verdient wirklich mehr?",
   "description": "Tattoo-Künstler gegen Nageldesignerin im Money-Check!\nErfahre Einnahmen, Kosten und den echten Stundenlohn beider Berufe.\nZu wem würdest du eher gehen? Schreib es in die Kommentare!",
@@ -6436,6 +6436,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-20 21:00",
-  "review_at": 1795199122.4275348
+  "review_at": 1795199122.4275348,
+  "error": "Bei der Prüfung verworfen: Prüfung: erfundene Gewinne und Stundenlöhne, Supermarkt statt Tattoo- und Nagelstudio, Tobi und Nina nie im Bild"
  }
 ]
