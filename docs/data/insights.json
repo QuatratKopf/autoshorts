@@ -1,5 +1,5 @@
 {
- "updated": 1795208393.70094,
+ "updated": 1795210269.4440784,
  "enough": true,
  "counted": 29,
  "total": 32,
@@ -9,19 +9,19 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 4,
-   "avg_views": 1930,
+   "avg_views": 1931,
    "avg_likes": 44.8,
    "like_rate": 2.32,
-   "avg_score": 2619
+   "avg_score": 2620
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 3,
-   "avg_views": 1784,
+   "avg_views": 1786,
    "avg_likes": 42.7,
    "like_rate": 2.39,
-   "avg_score": 2457
+   "avg_score": 2460
   },
   {
    "slug": "storys",
@@ -30,16 +30,16 @@
    "avg_views": 1658,
    "avg_likes": 52.5,
    "like_rate": 3.17,
-   "avg_score": 2446
+   "avg_score": 2445
   },
   {
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
-   "avg_views": 1789,
+   "avg_views": 1792,
    "avg_likes": 39.0,
    "like_rate": 2.18,
-   "avg_score": 2404
+   "avg_score": 2406
   },
   {
    "slug": "fakten",
@@ -57,16 +57,16 @@
    "avg_views": 1722,
    "avg_likes": 43.7,
    "like_rate": 2.54,
-   "avg_score": 2380
+   "avg_score": 2381
   },
   {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 2,
-   "avg_views": 1770,
+   "avg_views": 1772,
    "avg_likes": 11.0,
    "like_rate": 0.62,
-   "avg_score": 1980
+   "avg_score": 1982
   }
  ],
  "weights": {
@@ -84,9 +84,9 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 1930 Aufrufe, 2.32 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1770 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2530 zu 705 Punkte).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 1931 Aufrufe, 2.32 % Likes).",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1772 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2531 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -94,10 +94,10 @@
   "vier"
  ],
  "words_bad": [
+  "bekanntes",
   "remix",
-  "erkennst",
   "lied",
-  "bekanntes"
+  "erkennst"
  ],
  "top": [
   {
@@ -134,11 +134,11 @@
    "id": 139,
    "title": "Dieses winzige Tier ist zäher als ein Löwe",
    "category": "tiere",
-   "views": 2172,
+   "views": 2173,
    "likes": 54,
    "comments": 0,
    "shares": 1,
-   "score": 3022
+   "score": 3023
   },
   {
    "id": 120,
