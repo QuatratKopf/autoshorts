@@ -1,5 +1,5 @@
 {
- "updated": 1795145623.8463547,
+ "updated": 1795147421.1641061,
  "enough": true,
  "counted": 26,
  "total": 29,
@@ -48,7 +48,7 @@
    "avg_views": 1718,
    "avg_likes": 44.3,
    "like_rate": 2.58,
-   "avg_score": 2392
+   "avg_score": 2393
   },
   {
    "slug": "whatif",
@@ -93,9 +93,9 @@
   "gänsehaut"
  ],
  "words_bad": [
-  "bekanntes",
-  "erkennst",
   "lied",
+  "erkennst",
+  "bekanntes",
   "remix"
  ],
  "top": [
