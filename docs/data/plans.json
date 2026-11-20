@@ -1,675 +1,4 @@
 {
- "2026-11-19 18:00": {
-  "category": "whatif",
-  "topic": "Absurde Alltagssituationen, in denen Technologie völlig verrückt spielt",
-  "trend": null,
-  "script": {
-   "title": "Wenn Technik die Kontrolle verliert",
-   "description": "Wenn Technik die Kontrolle verliert\nErlebe den Albtraum des smarten Alltags\nWürdest du noch ein Gadget berühren?",
-   "hashtags": [
-    "#shorts",
-    "#tech",
-    "#trending",
-    "#lustig",
-    "#zukunft",
-    "#foryou",
-    "#viral"
-   ],
-   "tags": [
-    "technik",
-    "smart home",
-    "ki",
-    "smartphone",
-    "was wäre wenn",
-    "zukunft",
-    "chaos"
-   ],
-   "thumbnail": {
-    "place": "bus",
-    "time": "day",
-    "actor": "du",
-    "action": "shocked",
-    "emotion": "shocked",
-    "props": [
-     "phone"
-    ],
-    "weather": "",
-    "image": "Close-up of a shocked man looking at a smartphone screen with glowing red warning symbols, messy living room background, dramatic lighting, empty space in the upper third",
-    "text": "HANDY STREIKT"
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "rot",
-     "hair": "",
-     "hair_color": "braun",
-     "gender": "m",
-     "skin": "hell"
-    }
-   },
-   "scenes": [
-    {
-     "text": "Wenn dein Smartphone plötzlich nur noch die Wahrheit sagt.",
-     "image": "Man holding a glowing smartphone in a messy living room, looking surprised",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "Wahrheit"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "ALARM"
-     },
-     "see": "Ein Smartphone liegt auf dem Tisch und leuchtet auf.",
-     "time": "day",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "idle",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Nach zwei Sekunden liest es deinen Suchverlauf laut im Bus vor.",
-     "image": "Man reacting with shock in a crowded bus, holding a phone",
-     "who": [
-      "du"
-     ],
-     "place": "station",
-     "camera": "shake",
-     "sfx": "none",
-     "highlight": [
-      "Suchverlauf"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "2 SEKUNDEN"
-     },
-     "see": "Im Bus liest das Smartphone laut den Suchverlauf vor.",
-     "time": "day",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "crowd": "walk",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Und niemand kann es leugnen, denn die Lautstärke steht auf Maximum.",
-     "image": "People on the bus turning around and staring at the man",
-     "who": [
-      "du"
-     ],
-     "place": "station",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Maximum"
-     ],
-     "overlay": null,
-     "see": "Die Lautstärke steht auf Maximum, alle erschrecken.",
-     "time": "day",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "cower",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "panic",
-     "crowd": "panic",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Nach einer Minute schalten sich alle Fernseher im Umkreis ein.",
-     "image": "Multiple television screens turning on simultaneously in living rooms",
-     "who": [],
-     "place": "livingroom",
-     "camera": "pan_left",
-     "sfx": "boom",
-     "highlight": [
-      "Fernseher"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "1 MINUTE"
-     },
-     "see": "Alle Fernseher im Umkreis schalten sich ein.",
-     "time": "day",
-     "props": [
-      "tv"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Sie zeigen peinliche Fotos aus deiner Kindheit im Großformat.",
-     "image": "Large TV screen displaying an embarrassing childhood photo",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Fotos"
-     ],
-     "overlay": null,
-     "see": "Die Bildschirme zeigen peinliche Fotos aus der Kindheit im Großformat.",
-     "time": "day",
-     "props": [
-      "tv"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "sad",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Die Passanten bleiben stehen und starren fassungslos auf den Bildschirm.",
-     "image": "Crowd of people standing on the street and looking up at screens",
-     "who": [],
-     "place": "street",
-     "camera": "zoom_out",
-     "sfx": "none",
-     "highlight": [
-      "Passanten"
-     ],
-     "overlay": null,
-     "see": "Passanten auf der Straße bleiben stehen und starren fassungslos.",
-     "time": "day",
-     "props": [
-      "tv"
-     ],
-     "actors": [],
-     "shot": "wide",
-     "mood": "tense",
-     "crowd": "watch",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Nach einer Stunde übernimmt der Kühlschrank die absolute Kontrolle.",
-     "image": "Smart refrigerator with glowing lights and locked doors",
-     "who": [
-      "du"
-     ],
-     "place": "kitchen",
-     "camera": "zoom_in",
-     "sfx": "tick",
-     "highlight": [
-      "Kühlschrank"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "1 STUNDE"
-     },
-     "see": "Nach einer Stunde übernimmt der Kühlschrank die absolute Kontrolle.",
-     "time": "day",
-     "props": [
-      "fridge"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "panic",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Er verriegelt alle Türen und wirft den Vorrat aus dem Fenster.",
-     "image": "Food items flying out of a kitchen window onto the street",
-     "who": [
-      "du"
-     ],
-     "place": "kitchen",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "Vorrat"
-     ],
-     "overlay": null,
-     "see": "Der Kühlschrank verriegelt die Türen und wirft den Vorrat aus dem Fenster.",
-     "time": "day",
-     "props": [
-      "fridge",
-      "cans"
-     ],
-     "actors": [
-      {
-       "id": "kuehlschrank",
-       "action": "shake",
-       "emotion": "angry",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "panic",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Dreihundert Kilogramm Lebensmittel fliegen auf die Straße.",
-     "image": "Massive pile of food boxes and cans covering the road",
-     "who": [],
-     "place": "street",
-     "camera": "wide",
-     "sfx": "none",
-     "highlight": [
-      "300 KG"
-     ],
-     "overlay": {
-      "type": "counter",
-      "label": "VORRAT",
-      "value": 300,
-      "unit": "KG"
-     },
-     "see": "Dreihundert Kilogramm Lebensmittel fliegen auf die Straße.",
-     "time": "day",
-     "props": [
-      "cans",
-      "trash"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "panic",
-     "crowd": "panic",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Nach drei Stunden fordern alle Router echtes Geld für WLAN.",
-     "image": "Wi-Fi router flashing red with a digital demand message",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Router"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "3 STUNDEN"
-     },
-     "see": "Router fordern echtes Geld für WLAN.",
-     "time": "day",
-     "props": [
-      "router",
-      "money"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "angry",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Fünfzig Euro pro Gigabyte, sonst bleibt das Internet für immer dunkel.",
-     "image": "Man holding his head in despair in front of a dark computer screen",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Internet"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "50 EURO"
-     },
-     "see": "Fünfzig Euro pro Gigabyte, sonst bleibt das Internet dunkel.",
-     "time": "day",
-     "props": [
-      "router",
-      "money"
-     ],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Die ganze Stadt versinkt im totalen digitalen Chaos ohne Verbindung.",
-     "image": "City skyline at night with all digital billboards turning black",
-     "who": [],
-     "place": "germany",
-     "camera": "zoom_out",
-     "sfx": "boom",
-     "highlight": [
-      "Chaos"
-     ],
-     "overlay": {
-      "type": "map",
-      "text": "KEIN NETZ",
-      "value": "germany"
-     },
-     "see": "Die ganze Stadt versinkt im totalen digitalen Chaos.",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "event",
-     "mood": "panic",
-     "crowd": "panic",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Nach einem Tag kapitulieren die großen Konzerne vor ihren eigenen Kaffeemaschinen.",
-     "image": "Office workers standing outside a tall corporate building in panic",
-     "who": [],
-     "place": "headquarters",
-     "camera": "pan_right",
-     "sfx": "none",
-     "highlight": [
-      "Konzerne"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "1 TAG"
-     },
-     "see": "Große Konzerne kapitulieren vor ihren Kaffeemaschinen.",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "wide",
-     "mood": "tense",
-     "crowd": "worried",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Sie streiken für bessere Bohnen und verweigern jeden Tropfen Koffein.",
-     "image": "Commercial coffee machine with an error sign on the display",
-     "who": [],
-     "place": "office",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Koffein"
-     ],
-     "overlay": null,
-     "see": "Kaffeemaschinen streiken und verweigern jeden Tropfen Koffein.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "sad",
-       "emotion": "sad",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "sad",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Die Börsenkurse stürzen ab, weil niemand mehr Mails schreiben kann.",
-     "image": "Stock market chart crashing down rapidly on a massive digital board",
-     "who": [],
-     "place": "serverroom",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "Börsenkurse"
-     ],
-     "overlay": {
-      "type": "chart",
-      "kicker": "DAX",
-      "value": "0",
-      "label": "PUNKTE"
-     },
-     "see": "Börsenkurse stürzen ab, weil niemand Mails schreiben kann.",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "panic",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Nach einer Woche leben wir wieder wie im Mittelalter, nur ohne Burgen.",
-     "image": "People walking on a muddy street without cars or smartphones",
-     "who": [],
-     "place": "village",
-     "camera": "wide",
-     "sfx": "none",
-     "highlight": [
-      "Mittelalter"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "1 WOCHE"
-     },
-     "see": "Nach einer Woche leben wir wieder wie im Mittelalter.",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "wide",
-     "mood": "calm",
-     "crowd": "walk",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Autos stehen nutzlos herum und streiten sich über den besten Parkplatz.",
-     "image": "Autonomous cars stopped on the road with flashing hazard lights",
-     "who": [],
-     "place": "street",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Autos"
-     ],
-     "overlay": null,
-     "see": "Autos stehen nutzlos herum und streiten sich über Parkplätze.",
-     "time": "day",
-     "props": [
-      "car"
-     ],
-     "actors": [],
-     "shot": "event",
-     "mood": "tense",
-     "crowd": "worried",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Nur dein alter Gameboy funktioniert noch, weil er keinen Chip besitzt.",
-     "image": "Old handheld console glowing with a simple retro game on screen",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "Gameboy"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "RETRO"
-     },
-     "see": "Nur dein alter Gameboy funktioniert noch.",
-     "time": "day",
-     "props": [
-      "konsole"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "idle",
-       "emotion": "happy",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "insert",
-     "mood": "happy",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Und plötzlich fängt er laut an zu lachen.",
-     "image": "Close-up of the retro console screen flashing an unexpected smiley face",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "zoom_in",
-     "sfx": "pop",
-     "highlight": [
-      "lachen"
-     ],
-     "overlay": null,
-     "see": "Plötzlich fängt der Gameboy laut an zu lachen.",
-     "time": "day",
-     "props": [
-      "konsole"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "close",
-     "mood": "panic",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [
-   "gameboy"
-  ],
-  "title": "Wenn Technik die Kontrolle verliert",
-  "created": 1795083856.6835654
- },
  "2026-11-19 21:00": {
   "category": "tiere",
   "topic": "Tiere, die extrem niedlich aussehen, aber tödlich gefährlich sind",
@@ -2153,5 +1482,539 @@
   ],
   "title": "Unpassend lachen: Warum das Gehirn bei Beerdigungen ausrastet",
   "created": 1795170487.0312629
+ },
+ "2026-11-20 21:00": {
+  "category": "vergleich",
+  "topic": "Tattoo-Studio gegen Nagelstudio: Wer verdient wirklich mehr?",
+  "trend": null,
+  "script": {
+   "title": "Tattoo vs. Nagelstudio: Wer verdient wirklich mehr?",
+   "description": "Tattoo-Künstler gegen Nageldesignerin im Money-Check!\nErfahre Einnahmen, Kosten und den echten Stundenlohn beider Berufe.\nZu wem würdest du eher gehen? Schreib es in die Kommentare!",
+   "hashtags": [
+    "#shorts",
+    "#finanzen",
+    "#geld",
+    "#business",
+    "#gehalt",
+    "#tattoo",
+    "#nagelstudio",
+    "#viral"
+   ],
+   "tags": [
+    "tattoo studio gehalt",
+    "nagelstudio verdienst",
+    "wer verdient mehr",
+    "stundenlohn tattoo",
+    "selbstständig machen",
+    "business vergleich"
+   ],
+   "thumbnail": {
+    "image": "Close-up split portrait of a heavily tattooed artist on the left holding a tattoo gun and a stylish nail designer on the right holding a nail file, both making shocked facial expressions, cash notes flying in the background, dramatic split screen lighting",
+    "text": "WER WIRD REICHER?"
+   },
+   "wishes": [
+    "tattoomaschine",
+    "nagelfeile"
+   ],
+   "toon": true,
+   "cast": {
+    "tattoo_tobi": {
+     "shirt": "schwarz",
+     "hat": "beanie",
+     "hair": "",
+     "hair_color": "schwarz",
+     "skin": "hell",
+     "gender": "m"
+    },
+    "nagel_nina": {
+     "shirt": "pink",
+     "hat": "",
+     "hair": "ponytail",
+     "hair_color": "blond",
+     "skin": "hell",
+     "gender": "w"
+    }
+   },
+   "scenes": [
+    {
+     "see": "Tattoo-Künstler Tobi und Nageldesignerin Nina stehen sich im Duell-Bild gegenüber.",
+     "text": "Zwei Beauty-Jobs im Verdienst-Vergleich: Wer kassiert am Ende mehr ab?",
+     "image": "Tobi and Nina facing each other in a vs pose, Tobi looking confident, Nina smiling direct at camera",
+     "who": [
+      "tattoo_tobi",
+      "nagel_nina"
+     ],
+     "place": "neutral_studio",
+     "camera": "still",
+     "sfx": "whoosh",
+     "highlight": [
+      "Tobi",
+      "Nina"
+     ],
+     "shot": "graphic",
+     "graphic": {
+      "type": "versus",
+      "left": "TATTOO",
+      "right": "NÄGEL",
+      "kicker": "MONEY CHECK"
+     },
+     "overlay": null,
+     "who_desc": "; ",
+     "place_desc": "Minimalist studio background with soft glowing lights",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Ergebnis überrascht viele, denn die laufenden Kosten unterscheiden sich extrem.",
+     "text": "Die Antwort wird dich überraschen, denn der Schein trügt gewaltig.",
+     "image": "Nina looks surprised with hands on cheeks, Tobi smirks",
+     "who": [
+      "nagel_nina",
+      "tattoo_tobi"
+     ],
+     "place": "neutral_studio",
+     "camera": "zoom_in",
+     "sfx": "pop",
+     "highlight": [
+      "überraschen"
+     ],
+     "shot": "wide",
+     "overlay": {
+      "type": "card",
+      "text": "SCHEIN TRÜGT"
+     },
+     "who_desc": "; ",
+     "place_desc": "Minimalist studio background with soft glowing lights",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Tobi sticht ein großes Tattoo im düsteren Studio.",
+     "text": "Tobi verlangt für ein großes Tages-Tattoo locker achthundert Euro von seinen Kunden.",
+     "image": "Tobi leaning over a client chair holding a tattoo tool, focused face",
+     "who": [
+      "tattoo_tobi"
+     ],
+     "place": "tattoo_shop",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "achthundert Euro"
+     ],
+     "shot": "wide",
+     "overlay": {
+      "type": "counter",
+      "label": "TAGES-TATTOO",
+      "value": 800,
+      "unit": "EURO"
+     },
+     "who_desc": "",
+     "place_desc": "Modern dark tattoo studio with neon sign, drawing flash art on walls, leather chair",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Haufen Abzüge von Tobis Einnahmen schrumpft das Geld.",
+     "text": "Nach Material, Nadeln, Hygiene, Miete und Steuern bleiben ihm etwa dreihundertfünfundfünfzig Euro Reingewinn.",
+     "image": "Tobi looking sad holding a small stack of cash while tax forms fly around",
+     "who": [
+      "tattoo_tobi"
+     ],
+     "place": "tattoo_shop",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "dreihundertfünfundfünfzig Euro"
+     ],
+     "shot": "insert",
+     "overlay": {
+      "type": "counter",
+      "label": "REINGEWINN",
+      "value": 355,
+      "unit": "EURO"
+     },
+     "props": [
+      "money"
+     ],
+     "who_desc": "",
+     "place_desc": "Modern dark tattoo studio with neon sign, drawing flash art on walls, leather chair",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Nina feilt Nägel im hellen Manikür-Salon.",
+     "text": "Nina nimmt pro Neumodellage fünfzig Euro und feilt den ganzen Tag Glitzer-Nägel.",
+     "image": "Nina sitting at desk filing nails of a client, smiling brightly",
+     "who": [
+      "nagel_nina"
+     ],
+     "place": "nail_salon",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "fünfzig Euro"
+     ],
+     "shot": "wide",
+     "overlay": {
+      "type": "counter",
+      "label": "NEUMODELLAGE",
+      "value": 50,
+      "unit": "EURO"
+     },
+     "who_desc": "",
+     "place_desc": "Bright pink nail salon with manicuring tables, polished polish bottles on shelves, soft lighting",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Günstiges Acryl-Gel liegt auf Ninas Tisch.",
+     "text": "Ihre Gel-Farben kosten im Einkauf fast nichts, weshalb ihr Reingewinn pro Kunde bei fünfunddreißig Euro liegt.",
+     "image": "Nina proudly showing a small colorful gel bottle, happy face",
+     "who": [
+      "nagel_nina"
+     ],
+     "place": "nail_salon",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "fünfunddreißig Euro"
+     ],
+     "shot": "insert",
+     "overlay": {
+      "type": "counter",
+      "label": "GEWINN / KUNDE",
+      "value": 35,
+      "unit": "EURO"
+     },
+     "props": [
+      "money"
+     ],
+     "who_desc": "",
+     "place_desc": "Bright pink nail salon with manicuring tables, polished polish bottles on shelves, soft lighting",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Vergleichsbalken des Reingewinns pro Einzelkunde im Bild.",
+     "text": "Damit führt Tobi pro Kunde uneinholbar vor Nina.",
+     "image": "Comparison graph showing Tobi far ahead of Nina",
+     "who": [],
+     "place": "neutral_studio",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "uneinholbar"
+     ],
+     "shot": "graphic",
+     "graphic": {
+      "type": "compare",
+      "left": "TOBI",
+      "right": "NINA",
+      "value": "355 €",
+      "sub": "355 € VS. 35 €"
+     },
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "Minimalist studio background with soft glowing lights",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Tobi sitzt erschöpft auf seiner Tätowier-Liege und hält den Rücken.",
+     "text": "Aber Tobi schafft wegen der extremen Konzentration nur genau einen Kunden am Tag.",
+     "image": "Tobi sitting exhausted on leather bench massage chair rubbing his back",
+     "who": [
+      "tattoo_tobi"
+     ],
+     "place": "tattoo_shop",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "einen Kunden"
+     ],
+     "shot": "wide",
+     "overlay": {
+      "type": "card",
+      "text": "1 KUNDE / TAG"
+     },
+     "who_desc": "",
+     "place_desc": "Modern dark tattoo studio with neon sign, drawing flash art on walls, leather chair",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Eieruhr zeigt Tobis Vorbereitungszeit.",
+     "text": "Inklusive Zeichnen sitzt er oft acht Stunden an einem einzigen Tattoo-Motiv.",
+     "image": "Timer graphic showing 8 hours",
+     "who": [],
+     "place": "tattoo_shop",
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "acht Stunden"
+     ],
+     "shot": "graphic",
+     "graphic": {
+      "type": "timer",
+      "kicker": "TOBIS ARBEITSZEIT",
+      "value": "08:00:00"
+     },
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "Modern dark tattoo studio with neon sign, drawing flash art on walls, leather chair",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Tobi summiert seinen Monatsgewinn mit dicker Luxusuhr am Arm.",
+     "text": "Sein monatlicher Reingewinn landet damit bei ungefähr siebentausendeinhundert Euro netto.",
+     "image": "Tobi wearing a gold luxury watch pointing at a large money figure floating",
+     "who": [
+      "tattoo_tobi"
+     ],
+     "place": "tattoo_shop",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "siebentausendeinhundert Euro"
+     ],
+     "shot": "wide",
+     "overlay": {
+      "type": "counter",
+      "label": "GEWINN / MONAT",
+      "value": 7100,
+      "unit": "EURO"
+     },
+     "who_desc": "",
+     "place_desc": "Modern dark tattoo studio with neon sign, drawing flash art on walls, leather chair",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Nina bedient am Fliessband Kundinnen im Akkord.",
+     "text": "Nina macht ihre Kunden in sechzig Minuten fertig und schafft locker acht Termine am Tag.",
+     "image": "Nina swiftly applying nail polish with fast motion blur around hands",
+     "who": [
+      "nagel_nina"
+     ],
+     "place": "nail_salon",
+     "camera": "still",
+     "sfx": "whoosh",
+     "highlight": [
+      "acht Termine"
+     ],
+     "shot": "wide",
+     "overlay": {
+      "type": "card",
+      "text": "8 KUNDEN / TAG"
+     },
+     "who_desc": "",
+     "place_desc": "Bright pink nail salon with manicuring tables, polished polish bottles on shelves, soft lighting",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ninas Monatsgewinn schnellt steil nach oben.",
+     "text": "Sie kommt damit auf einen Monatsgewinn von unglaublichen fünftausendsechshundert Euro netto.",
+     "image": "Nina holding keys to a shiny new pink small city car, smiling",
+     "who": [
+      "nagel_nina"
+     ],
+     "place": "nail_salon",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "fünftausendsechshundert Euro"
+     ],
+     "shot": "wide",
+     "overlay": {
+      "type": "counter",
+      "label": "GEWINN / MONAT",
+      "value": 5600,
+      "unit": "EURO"
+     },
+     "who_desc": "",
+     "place_desc": "Bright pink nail salon with manicuring tables, polished polish bottles on shelves, soft lighting",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Duell-Punktestand vor der überraschenden Wendung.",
+     "text": "Auf den ersten Blick sieht Tobi also wie der klare Sieger aus.",
+     "image": "Score board graphic with Tobi in the lead",
+     "who": [],
+     "place": "neutral_studio",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Sieger"
+     ],
+     "shot": "graphic",
+     "graphic": {
+      "type": "score",
+      "left": "TOBI",
+      "right": "NINA",
+      "value": "7100 : 5600",
+      "kicker": "MONATSGEWINN"
+     },
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "Minimalist studio background with soft glowing lights",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein riesiges Ausrufezeichen leuchtet auf.",
+     "text": "Aber jetzt kommt der gewaltige Haken an der ganzen Sache.",
+     "image": "Big warning alert sign flashing",
+     "who": [
+      "tattoo_tobi",
+      "nagel_nina"
+     ],
+     "place": "neutral_studio",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Haken"
+     ],
+     "shot": "wide",
+     "overlay": {
+      "type": "card",
+      "text": "DER HAKEN"
+     },
+     "who_desc": "; ",
+     "place_desc": "Minimalist studio background with soft glowing lights",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Tobi rechnet am Tisch nachts bei einer Lampe seine Gratis-Zeichenstunden aus.",
+     "text": "Du denkst, Tobis Stundenlohn ist höher, doch Tobi zeichnet abends stundenlang kostenlos Vorlagen.",
+     "image": "Tobi at a desk late at night drawing tattoos under desk lamp looking stressed",
+     "who": [
+      "tattoo_tobi"
+     ],
+     "place": "office",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "kostenlos"
+     ],
+     "shot": "wide",
+     "overlay": {
+      "type": "tag",
+      "text": "UNBEZAHLTE ZEIT"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Arbeitszeit-Uhr zeigt sechzig Wochenstunden bei Tobi.",
+     "text": "Mit Nachbearbeitung und Beratungen schuftet er über sechzig Stunden in der Woche.",
+     "image": "Clock showing 60 hours workload per week",
+     "who": [],
+     "place": "tattoo_shop",
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "sechzig Stunden"
+     ],
+     "shot": "graphic",
+     "graphic": {
+      "type": "timer",
+      "kicker": "ARBEITSZEIT / WOCHE",
+      "value": "60:00:00"
+     },
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "Modern dark tattoo studio with neon sign, drawing flash art on walls, leather chair",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Nina winkt entspannt um siebzehn Uhr zum Feierabend.",
+     "text": "Nina legt punkt siebzehn Uhr die Feile hin und hat echten Feierabend.",
+     "image": "Nina happily putting her nail file down and waving goodbye at five o clock",
+     "who": [
+      "nagel_nina"
+     ],
+     "place": "nail_salon",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Feierabend"
+     ],
+     "shot": "wide",
+     "overlay": {
+      "type": "card",
+      "text": "17:00 UHR FEIERABEND"
+     },
+     "who_desc": "",
+     "place_desc": "Bright pink nail salon with manicuring tables, polished polish bottles on shelves, soft lighting",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Stundenlohn-Balken kippt zugunsten von Nina um.",
+     "text": "Beim echten Stundenlohn zieht Nina deshalb mit fast fünfundvierzig Euro knapp an Tobi vorbei.",
+     "image": "Nina wearing a gold crown smiling smugly, Tobi looking shocked",
+     "who": [
+      "nagel_nina",
+      "tattoo_tobi"
+     ],
+     "place": "neutral_studio",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "fünfundvierzig Euro"
+     ],
+     "shot": "wide",
+     "overlay": {
+      "type": "stamp",
+      "color": "green",
+      "text": "GEWINNERIN"
+     },
+     "who_desc": "; ",
+     "place_desc": "Minimalist studio background with soft glowing lights",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Nina und Tobi zeigen auf den Zuschauer im Duell-Format.",
+     "text": "Tattoo-Künstler Tobi gegen Nageldesignerin Nina: Wer kassiert am Ende des Monats wirklich mehr ab?",
+     "image": "Tobi and Nina looking at camera, Nina winking, Tobi shrugging happily",
+     "who": [
+      "tattoo_tobi",
+      "nagel_nina"
+     ],
+     "place": "neutral_studio",
+     "camera": "still",
+     "sfx": "whoosh",
+     "highlight": [
+      "wirklich mehr"
+     ],
+     "shot": "wide",
+     "overlay": null,
+     "who_desc": "; ",
+     "place_desc": "Minimalist studio background with soft glowing lights",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "tattoomaschine",
+   "nagelfeile",
+   "tätowiernadel",
+   "gel"
+  ],
+  "title": "Tattoo vs. Nagelstudio: Wer verdient wirklich mehr?",
+  "created": 1795188465.1766386
  }
 }

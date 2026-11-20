@@ -1,5 +1,5 @@
 {
- "last_category": "comedy",
+ "last_category": "vergleich",
  "done_slots": [
   "2026-11-08 18:00",
   "2026-11-11 18:00",
@@ -63,17 +63,17 @@
   "video": 167
  },
  "cat_credit": {
-  "fakten": 0.780000000000001,
-  "storys": 3.5000000000000018,
-  "mysterien": -6.14,
-  "tiere": -4.890000000000001,
-  "whatif": 3.08,
-  "comedy": -8.33,
-  "vergleich": 3.5999999999999996,
-  "motivation": 3.5999999999999996,
-  "grusel": 2.4,
-  "liebe": 1.2,
-  "nachricht": 1.2
+  "fakten": 1.7800000000000011,
+  "storys": 4.520000000000001,
+  "mysterien": -5.14,
+  "tiere": -3.8700000000000006,
+  "whatif": 4.07,
+  "comedy": -7.24,
+  "vergleich": -7.319999999999999,
+  "motivation": 4.8,
+  "grusel": 3.5999999999999996,
+  "liebe": 2.4,
+  "nachricht": 2.4
  },
  "bounce_songs": [
   "cc:a0374037-c7fc-4467-94de-28d2e36fc183",
