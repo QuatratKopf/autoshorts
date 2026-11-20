@@ -1845,6 +1845,112 @@ def chapel(night):
     return p.vignette()
 
 
+def tattoostudio(night):
+    """Tattoo-Studio (Prüfung 20.11.2026, Plan „Tattoo-Studio gegen Nagelstudio“: der Ort fehlte, alles spielte vor leerer Wand):
+    dunkle Wand mit gerahmten Motiv-Bögen, Leucht-Herz, schwarze Liege, Rollwagen mit Farbfläschchen, Ringlicht."""
+    p = P(night)
+    p.room((74, 70, 92), (92, 78, 76), stripe=False)
+    motifs = ("anchor", "heart", "star", "moon", "bolt", "diamond")
+    for n, (fx, fy) in enumerate(((120, 250), (330, 250), (120, 520), (330, 520), (540, 250), (540, 520))):   # gerahmte Motiv-Bögen
+        p.rect((fx - 86, fy - 112, fx + 86, fy + 112), (36, 32, 40), r=8)
+        p.rect((fx - 70, fy - 96, fx + 70, fy + 96), (244, 236, 216), r=4, o=0)
+        m, cx, cy = motifs[n], fx, fy
+        if m == "heart":
+            p.oval((cx - 46, cy - 46, cx + 2, cy + 2), (214, 60, 70), o=5)
+            p.oval((cx - 2, cy - 46, cx + 46, cy + 2), (214, 60, 70), o=5)
+            p.poly([(cx - 44, cy - 12), (cx + 44, cy - 12), (cx, cy + 56)], (214, 60, 70), o=5)
+            p.rect((cx - 30, cy - 34, cx + 30, cy - 8), (214, 60, 70), o=0)
+        elif m == "star":
+            pts = []
+            for i in range(10):
+                a = math.radians(-90 + i * 36)
+                r = 58 if i % 2 == 0 else 24
+                pts.append((cx + math.cos(a) * r, cy + math.sin(a) * r))
+            p.poly(pts, (250, 196, 70), o=5)
+        elif m == "moon":
+            p.oval((cx - 52, cy - 52, cx + 52, cy + 52), (70, 110, 180), o=5)
+            p.oval((cx - 16, cy - 60, cx + 72, cy + 28), (244, 236, 216), o=0)
+        elif m == "bolt":
+            p.poly([(cx + 10, cy - 66), (cx - 40, cy + 6), (cx - 4, cy + 6), (cx - 18, cy + 66), (cx + 42, cy - 16), (cx + 4, cy - 16)], (250, 196, 70), o=5)
+        elif m == "diamond":
+            p.poly([(cx, cy - 60), (cx + 50, cy - 10), (cx, cy + 62), (cx - 50, cy - 10)], (90, 190, 200), o=5)
+            p.line([(cx - 50, cy - 10), (cx + 50, cy - 10)], INK, 5)
+        else:                                                                   # Anker
+            p.oval((cx - 16, cy - 66, cx + 16, cy - 34), (244, 236, 216), o=7)
+            p.line([(cx, cy - 34), (cx, cy + 56)], INK, 9)
+            p.line([(cx - 30, cy - 12), (cx + 30, cy - 12)], INK, 9)
+            p.d.arc((cx - 50, cy - 20, cx + 50, cy + 60), 20, 160, fill=INK, width=9)
+    hx, hy = 860, 330                                                           # Leucht-Herz an der Wand (kein Schriftzug)
+    p.rect((hx - 150, hy - 150, hx + 150, hy + 150), (40, 36, 52), r=20)
+    for wd, col in ((26, (255, 120, 170)), (10, (255, 226, 236))):
+        p.d.arc((hx - 96, hy - 90, hx, hy + 6), 150, 360, fill=p.c(col, glow=True), width=wd)
+        p.d.arc((hx, hy - 90, hx + 96, hy + 6), 180, 30, fill=p.c(col, glow=True), width=wd)
+        p.d.line([(hx - 90, hy - 18), (hx, hy + 96), (hx + 90, hy - 18)], fill=p.c(col, glow=True), width=wd, joint="curve")
+    p.veil((hx - 240, hy - 240, hx + 240, hy + 240), (255, 110, 170), 60, 90)
+    p.rect((700, 1010, 1060, 1066), (40, 40, 48), r=22)                         # Liege: Polster, Kopfteil schräg, Fuß
+    p.poly([(700, 1010), (760, 1010), (700, 880), (640, 892)], (40, 40, 48))
+    p.rect((716, 1022, 1044, 1036), (84, 84, 96), r=6, o=0)
+    p.rect((850, 1066, 900, 1200), (150, 154, 166), o=5)
+    p.rect((770, 1196, 980, 1226), (110, 112, 124), r=10)
+    p.rect((90, 1010, 290, 1034), (176, 180, 192), r=6)                         # Rollwagen mit Farbfläschchen
+    p.rect((104, 1034, 120, 1220), (120, 122, 134), o=5)
+    p.rect((260, 1034, 276, 1220), (120, 122, 134), o=5)
+    p.rect((104, 1120, 276, 1138), (176, 180, 192), r=4, o=5)
+    for wx in (112, 268):
+        p.oval((wx - 16, 1212, wx + 16, 1244), (50, 50, 58), o=5)
+    for k, col in enumerate(((30, 30, 36), (214, 60, 70), (70, 130, 210), (250, 196, 70), (90, 180, 110))):
+        bx = 112 + k * 36
+        p.rect((bx, 958, bx + 26, 1010), col, r=6, o=5)
+        p.rect((bx + 7, 942, bx + 19, 960), (230, 230, 236), r=3, o=4)
+    p.rect((120, 1076, 250, 1120), (250, 250, 246), r=6, o=5)                   # Papiertücher
+    p.line([(400, 1250), (400, 760)], (60, 62, 72), 12)                         # Ringlicht auf Stativ
+    p.line([(350, 1250), (400, 1180), (450, 1250)], (60, 62, 72), 10)
+    p.oval((330, 620, 470, 760), (255, 250, 232), o=7, glow=True)
+    p.oval((362, 652, 438, 728), (74, 70, 92), o=7)
+    p.lamp_glow(400, 690, 380)
+    return p.vignette()
+
+
+def nailstudio(night):
+    """Nagelstudio (Prüfung 20.11.2026, Plan „Tattoo-Studio gegen Nagelstudio“): helle rosa Wand, Regal voller Nagellack-Fläschchen,
+    runder Spiegel, Arbeitstisch mit Bogenlampe, Handauflage und Härtelampe, Hocker, Pflanze."""
+    p = P(night)
+    p.room((248, 214, 224), (206, 176, 160))
+    cols = ((226, 64, 96), (250, 150, 180), (190, 110, 200), (250, 196, 70), (110, 190, 200), (236, 100, 60), (160, 30, 60), (250, 232, 236), (120, 170, 240))
+    for row, y in enumerate((330, 470, 610)):                                   # Regal voller Nagellack
+        p.rect((70, y, 560, y + 22), (250, 250, 250), r=6, o=5)
+        for k in range(9):
+            bx = 92 + k * 52
+            col = cols[(k * 2 + row * 4) % len(cols)]
+            p.rect((bx, y - 62, bx + 34, y), col, r=9, o=5)
+            p.rect((bx + 9, y - 96, bx + 25, y - 60), (40, 40, 48), r=4, o=4)
+    p.oval((690, 240, 990, 620), (226, 190, 96), o=7)                           # runder Spiegel mit Goldrand
+    p.oval((714, 264, 966, 596), (214, 236, 246), o=5)
+    p.line([(770, 340), (850, 300)], (255, 255, 255), 12)
+    p.line([(760, 400), (800, 380)], (255, 255, 255), 10)
+    p.rect((560, 1000, 1060, 1040), (252, 250, 250), r=10)                      # Arbeitstisch
+    p.rect((600, 1040, 630, 1240), (226, 190, 96), o=5)
+    p.rect((990, 1040, 1020, 1240), (226, 190, 96), o=5)
+    p.rect((640, 1040, 800, 1150), (250, 232, 238), r=8, o=5)                   # Schublade
+    p.oval((706, 1084, 734, 1112), (226, 190, 96), o=4)
+    p.d.arc((880, 800, 1040, 1000), 180, 300, fill=INK, width=18)               # Bogenlampe
+    p.d.arc((880, 800, 1040, 1000), 180, 300, fill=p.c((230, 230, 236)), width=8)
+    p.poly([(950, 800), (1040, 820), (1020, 868), (940, 846)], (255, 240, 200), glow=True)
+    p.rect((596, 930, 716, 1000), (250, 250, 252), r=22)                        # Härtelampe (offener Bogen, leuchtet violett)
+    p.rect((614, 958, 698, 1000), (170, 120, 240), r=12, o=0, glow=True)
+    p.rect((750, 968, 890, 1000), (250, 170, 196), r=14)                        # Handauflage
+    for k, col in enumerate(((226, 64, 96), (190, 110, 200), (250, 196, 70))):  # drei Fläschchen auf dem Tisch
+        bx = 908 + k * 34
+        p.rect((bx, 954, bx + 24, 1000), col, r=7, o=4)
+        p.rect((bx + 6, 930, bx + 18, 956), (40, 40, 48), r=3, o=4)
+    p.oval((400, 1090, 520, 1130), (250, 170, 196), o=6)                        # Hocker
+    p.rect((452, 1130, 468, 1230), (226, 190, 96), o=5)
+    p.oval((416, 1222, 504, 1248), (226, 190, 96), o=5)
+    p.plant(110, 1250, 1.0, pot=(250, 250, 250))
+    p.lamp_glow(900, 860, 420)
+    return p.vignette()
+
+
 def restaurant(night):
     """Restaurant/Imbiss: Theke mit Kaffeemaschine, Menütafel mit Bildern, gedeckte Tische mit Essen, Stühle, Hängelampen."""
     p = P(night)
@@ -2220,7 +2326,7 @@ PLACES = {"bedroom": bedroom, "livingroom": livingroom, "street": street, "basem
           "beach": beach, "desert": desert, "snow": snow, "forest": forest, "underwater": underwater,
           "mountain": mountain, "hospital": hospital, "cave": cave, "supermarket": supermarket,
           "supermarket_empty": supermarket_empty, "bathroom": bathroom, "station": station, "restaurant": restaurant, "germany": germany, "worldmap": worldmap, "hallway": hallway, "attic": attic,
-          "serverroom": serverroom, "cinema": cinema, "diningroom": diningroom, "highsky": highsky, "garage": garage, "transit": transit, "chapel": chapel}
+          "serverroom": serverroom, "cinema": cinema, "diningroom": diningroom, "highsky": highsky, "garage": garage, "transit": transit, "chapel": chapel, "tattoostudio": tattoostudio, "nailstudio": nailstudio}
 OUTDOOR = tuple(OUTDOOR_SPECS) + ("custom",)
 ALIASES = {"savanne": "savannah", "steppe": "savannah", "savanna": "savannah", "serengeti": "savannah", "asphalt": "street", "werkstatt": "garage", "autowerkstatt": "garage", "kfz-werkstatt": "garage", "workshop": "garage",
            "boxengasse": "garage", "tuning": "garage", "tuningwerkstatt": "garage", "schrauberhalle": "garage", "carport": "garage", "kino": "cinema", "kinosaal": "cinema", "kinos": "cinema", "leinwand": "cinema", "kinoleinwand": "cinema",
@@ -2244,6 +2350,10 @@ ALIASES = {"savanne": "savannah", "steppe": "savannah", "savanna": "savannah", "
            "eismeer": "icesea", "packeis": "icesea", "meereis": "icesea", "eisfläche": "icesea", "eisdecke": "icesea", "zugefrorenes meer": "icesea", "frozen sea": "icesea",
            "ruinen": "ruins", "zeltlager": "camp", "lager": "camp", "feld": "farm", "felder": "farm", "mondoberfläche": "moon",
            "beerdigung": "graveyard", "begräbnis": "graveyard", "beisetzung": "graveyard", "trauerfeier": "chapel", "kirchenraum": "chapel", "kirchenschiff": "chapel", "kapelle": "chapel", "trauerhalle": "chapel", "church_inside": "chapel", "church interior": "chapel", "in der kirche": "chapel",
+           "tattoostudio": "tattoostudio", "tattoo-studio": "tattoostudio", "tattoo studio": "tattoostudio", "tattoo_shop": "tattoostudio", "tattoo shop": "tattoostudio", "tattooshop": "tattoostudio", "tattoo_studio": "tattoostudio",
+           "tattooladen": "tattoostudio", "tätowierstudio": "tattoostudio", "tattoo parlor": "tattoostudio", "tattoo": "tattoostudio",
+           "nagelstudio": "nailstudio", "nail_salon": "nailstudio", "nail salon": "nailstudio", "nailsalon": "nailstudio", "nail_studio": "nailstudio", "nail studio": "nailstudio", "nagelsalon": "nailstudio",
+           "nageldesign": "nailstudio", "maniküre": "nailstudio", "beauty salon": "nailstudio", "kosmetikstudio": "nailstudio",
            "esszimmer": "diningroom", "esstisch": "diningroom", "dining room": "diningroom", "speisezimmer": "diningroom", "festtafel": "diningroom", "familientisch": "diningroom",
            "hafen": "harbor", "häfen": "harbor", "containerhafen": "harbor", "hafenbecken": "harbor", "frachthafen": "harbor", "seehafen": "harbor", "kai": "harbor",
            "containerterminal": "harbor", "port": "harbor", "harbour": "harbor"}

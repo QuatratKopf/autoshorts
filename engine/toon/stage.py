@@ -16,7 +16,7 @@ SCALE = 1.08            # Figuren bewusst kleiner: die Szene steht im Mittelpunk
 POS = {"left": 250, "center": 540, "right": 830, "offleft": -260, "offright": 1340,
        "links": 250, "mitte": 540, "rechts": 830}
 TALL_OV = ("phone", "checklist", "note")
-NO_FURNITURE = ("restaurant", "diningroom", "bathroom", "hallway", "supermarket", "supermarket_empty", "station", "transit", "basement", "attic", "hospital", "serverroom", "chapel")
+NO_FURNITURE = ("restaurant", "diningroom", "bathroom", "hallway", "supermarket", "supermarket_empty", "station", "transit", "basement", "attic", "hospital", "serverroom", "chapel", "tattoostudio", "nailstudio")
 MAIN_IDS = ("du", "ich", "held", "hero", "main", "erzähler", "narrator", "a0")
 
 
@@ -2281,6 +2281,7 @@ def direct(scenes, times, topic="", style="", look=""):
     _feast_story(scenes, topic)
     _relatives(scenes)
     _funeral_story(scenes, topic)
+    _studio_story(scenes, topic)
     _music(scenes, topic)
     _fur_ancestor(scenes)
     _fur_story(scenes)
@@ -4093,6 +4094,67 @@ def _funeral_story(scenes, topic=""):
                 a["to"] = ""
 
 
+TATTOO_RE = r"tattoo|tätowier|tatowier"
+NAILS_RE = r"nagelstudio|nageldesign|nagelsalon|manik[üu]re|neumodellage|gel-?nägel|kunstnägel|fingernägel|nagellack|\bnägel\b|nagelfeile|\bfeilt\b|\bfeile\b"
+TATTOO_DO_RE = r"\bsticht\b|\bstechen\b|\bgestochen|tätowiert|tätowieren|\bnadel|tattoo"
+NAILS_DO_RE = r"\bfeilt\b|\bfeilen\b|\bfeile\b|lackier|\bnägel\b|neumodellage|manik[üu]re|auffüllen"
+
+
+def _studio_story(scenes, topic=""):
+    """Tattoo-Studio und Nagelstudio (Prüfung 20.11.2026, Plan „Tattoo-Studio gegen Nagelstudio“): Die Orte gab es nicht – „tattoo_shop“ und
+    „nail_salon“ wurden zur leeren Wand. Spricht ein Satz vom Tätowieren oder von Nägeln, spielt er im passenden Studio und die Figur hält
+    die Tätowiermaschine bzw. die Nagelfeile. Wer einmal in seinem Studio stand, steht in Folgesätzen ohne eigenen Ort wieder dort
+    (Tobi im Tattoo-Studio, Nina im Nagelstudio). Drinnen kein Wetter, kein Auto, keine Passanten."""
+    import re as _re
+    sc_l = [sc for sc in scenes if isinstance(sc, dict)]
+    all_t = (str(topic or "") + " " + " ".join(str(sc.get("text") or "") for sc in sc_l)).lower()
+    if not _re.search(TATTOO_RE + "|" + NAILS_RE, all_t):
+        return
+    home = {}
+    for sc in sc_l:
+        if sc.get("shot") == "graphic" or isinstance(backdrop(sc), dict):
+            continue
+        low = str(sc.get("text") or "").lower()
+        rp = places.resolve(backdrop(sc))
+        humans = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and a.get("id") and not a.get("kind")]
+        tat, nail = bool(_re.search(TATTOO_RE, low)), bool(_re.search(NAILS_RE, low))
+        if rp in GENERIC + ("plain", "office", "hospital", "lab", "supermarket"):
+            want = ""
+            if tat != nail:
+                want = "tattoostudio" if tat else "nailstudio"
+            elif not tat and len(humans) == 1 and str(humans[0]["id"]) in home and rp in ("plain", "livingroom", "street", "park") and not _said_place(low):
+                want = home[str(humans[0]["id"])]         # „Sie schafft acht Termine am Tag“: Nina steht in ihrem Nagelstudio
+            if want:
+                sc["place"], rp = want, want
+        if rp in ("tattoostudio", "nailstudio") and not (tat or nail) and humans:
+            hs = {home.get(str(a["id"])) for a in humans}
+            if len(humans) == 1 and hs - {None, rp}:
+                sc["place"] = rp = hs.pop()               # der Ort blieb vom Satz davor stehen: Tobi steht nicht im Nagelstudio
+            elif len(humans) > 1 and len(hs - {None}) > 1:
+                sc["place"] = rp = "plain"                # beide zusammen im Vergleich: neutraler Ort
+        if rp not in ("tattoostudio", "nailstudio"):
+            continue
+        sc["weather"] = ""
+        if str(sc.get("time") or "") == "night" and not _re.search(r"nacht|abend|mitternacht", low):
+            sc["time"] = "day"
+        sc["crowd"] = ""
+        tools = ("tattoomachine",) if rp == "tattoostudio" else ("nailfile", "nailpolish")
+        sc["props"] = [q for q in (sc.get("props") or []) if (extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(), str(q.get("type") if isinstance(q, dict) else q).lower())
+                                                           not in ("car", "bus", "truck", "police", "ambulance", "tree", "house", "tv", "computer", "fridge", "sofa", "table", "shelf", "tattoomachine", "nailfile") + (("nailpolish",) if rp == "tattoostudio" else ()))]
+        if len(humans) == 1:
+            home.setdefault(str(humans[0]["id"]), rp)
+        do = _re.search(TATTOO_DO_RE if rp == "tattoostudio" else NAILS_DO_RE, low)
+        for a in humans[:1]:
+            if home.get(str(a["id"]), rp) != rp:
+                continue                                  # der Tätowierer hält im Nagelstudio keine Feile
+            if do:
+                sc["_no_insert"] = True                   # der Satz beschreibt die Arbeit: kein Schnitt auf Geld oder Werkzeug allein
+                if sc.get("shot") == "insert":
+                    sc["shot"] = "wide"
+            if do and not str(a.get("hold") or "") and str(a.get("action") or "") not in ("run", "sleep", "fall", "jump", "dance", "wave", "shake", "lie"):
+                a["hold"] = tools[0]                      # das Werkzeug in der Hand statt am Boden
+
+
 def _relatives(scenes):
     """Nennt der Satz Oma, Opa, Onkel, Tante, Mama, Papa, Cousin …, steht die Person im Bild – mit eigenem Aussehen (graue Haare, Dutt, Brille …).
     Handelt der Satz nur von ihr (kein du/ich), steht sie anstelle der Hauptfigur da; sonst rechts neben ihr. In Video 148 „zog Oma eine
@@ -4872,7 +4934,7 @@ MOOD_HINTS = [
     (r"menschen|leute|bevölkerung|einwohner|millionen|milliarden|gesellschaft", ("", "walk")),
     (r"staunen|beobachten|schauen zu|zuschauer", ("", "watch")),
 ]
-INDOOR = ("bedroom", "livingroom", "diningroom", "kitchen", "transit", "office", "classroom", "lab", "hospital", "basement", "cave", "underwater", "space", "cinema", "chapel")
+INDOOR = ("bedroom", "livingroom", "diningroom", "kitchen", "transit", "office", "classroom", "lab", "hospital", "basement", "cave", "underwater", "space", "cinema", "chapel", "tattoostudio", "nailstudio")
 MAPS = ("germany", "worldmap")
 GARAGES = ("garage",)                                           # in der Werkstatt stehen Autos (drinnen sonst nie)
 GARAGE_VEHICLES = ("car", "police", "ambulance", "truck", "bike")

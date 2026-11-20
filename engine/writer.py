@@ -198,6 +198,8 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
            diningroom (Esszimmer mit gedeckter Festtafel – Familienessen, Feiertage; bei Weihnachts-Themen sind Wohn- und Esszimmer
            automatisch geschmückt). Verwandte (oma, opa, onkel, tante, mama, papa, cousin, cousine, schwester, bruder) unter genau dieser
            Kennung als Figur in "actors" setzen, sobald der Satz von ihnen spricht – sie bekommen ihr eigenes Aussehen.
+           tattoostudio (Tattoo-Studio: dunkle Wand mit Motiv-Bögen, Liege, Farbfläschchen), nailstudio (Nagelstudio: Regal voller Nagellack,
+           Arbeitstisch mit Lampe) – für Tätowierer, Nageldesign, Maniküre.
            chapel (Kirche von innen: bunte Fenster, Altar, Bankreihen – für Trauerfeier, Gottesdienst, Hochzeit; "church" ist die Kirche
            von außen an der Straße). Bei einer Beerdigung tragen alle im Bild automatisch Schwarz; "crowd": "sad" zeigt die Trauergäste.
            draußen: headquarters (Büroturm einer großen Firma in der Stadt – für Konzerne, Firmensitze; ohne Logo), street (Häuserzeile mit Läden und Straße), park, forest, beach, desert, snow, mountain, farm, village,
@@ -225,7 +227,7 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
                   solarpanel, cctv (Überwachungskamera am Mast)
            Werkstatt/Technik: engine (V8-Motor), enginehoist (Motorkran hebt Motor – Ein-/Ausbau), enginestand (Motor auf Montageständer),
                   crane (Motorkran leer), tire, tires (Reifenstapel), radiator (Kühler), gearbox (Getriebe), piston (Kolben, bewegt sich),
-                  toolbox (Werkzeugwagen), wrench, speedometer (Tacho, Zeiger steigt), scale (Waage, kippt), carlift (Hebebühne), oilcan, drill (Akku-Bohrmaschine, rattert), vacuum (Staubsauger; vacuum_broken: Deckel aufgesprungen, Staubwolke)
+                  toolbox (Werkzeugwagen), wrench, speedometer (Tacho, Zeiger steigt), scale (Waage, kippt), carlift (Hebebühne), oilcan, drill (Akku-Bohrmaschine, rattert), tattoomachine (Tätowiermaschine), nailfile (Nagelfeile), nailpolish (Nagellack-Fläschchen) – klein, am besten als "hold" in der Hand der Figur, vacuum (Staubsauger; vacuum_broken: Deckel aufgesprungen, Staubwolke)
            Himmel/Natur (Schaubilder, groß): drone (Drohne mit Kamera), plane, satellite, ship, ufo, meteor, explosion, earth, sun, moon, tornado, wave,
                   flood, ice, volcano, cloud, stormcloud, lightning, crack, smoke, aurora, eclipse
            (meteor fällt und schlägt ein, rocket startet, wave/flood steigen, crack reißt den Boden auf, eclipse verdunkelt
@@ -1488,6 +1490,12 @@ def write_script(cat: dict, topic: str, trend=None, source=None) -> tuple[dict, 
         who = s.get("who") or []
         who = [who] if isinstance(who, str) else who
         s["who_desc"] = "; ".join(cast[w] for w in who if w in cast)
+        ids_w = [str(w) for w in who if isinstance(raw_cast.get(str(w)), dict)][:2]
+        if ids_w and not s.get("actors") and str(s.get("shot") or "") not in ("graphic", "insert", "event"):
+            # Plan nennt die Figuren nur unter "who" (Prüfung 20.11.2026, Plan „Tattoo vs. Nagelstudio“: Tobi und Nina kamen nie ins Bild,
+            # überall stand die Ersatzfigur „du“): daraus werden die Figuren der Szene
+            s["actors"] = [{"id": w, "action": "talk", "emotion": "", "emote": "", "speaks": n == 0,
+                            "pos": "center" if len(ids_w) == 1 else ("left", "right")[n]} for n, w in enumerate(ids_w)]
         s["place_desc"] = places.get(str(s.get("place") or ""), "")
         s["highlight"] = [str(h) for h in (s.get("highlight") or []) if str(h).strip()][:3]
         s["camera"] = str(s.get("camera") or "")

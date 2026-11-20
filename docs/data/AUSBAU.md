@@ -598,3 +598,13 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   über Puls, Herz oder Adrenalin. Die Ecken-Zeile des Drehbuchs verliert eine Uhrzeit, die kein Satz nennt, auch wenn Szenen eigene Zeilen
   haben (`render.build_ass`). Satz ohne Figur im Kirchenraum oder am Grab: die Hauptfigur grübelt dort. Für „Teppich“, „Staub“,
   „Beerdigung“ wird nichts gelernt (der gelernte „Teppich“ war ein Tisch mit Muster und ist entfernt).
+
+- Prüfung 20.11.2026, Termin 21 Uhr (Plan „Tattoo-Studio gegen Nagelstudio: Wer verdient wirklich mehr?“):
+  Neue Orte `tattoostudio` (dunkle Wand mit gerahmten Motiv-Bögen, Leucht-Herz ohne Schrift, schwarze Liege, Rollwagen mit Farbfläschchen,
+  Ringlicht) und `nailstudio` (rosa Wand, Regal voller Nagellack, runder Spiegel, Arbeitstisch mit Bogenlampe, Härtelampe, Hocker).
+  Namen wie „tattoo_shop“, „Tattoo-Studio“, „nail_salon“, „Nagelstudio“, „Maniküre“ führen dorthin (`places.ALIASES`).
+  Neue Requisiten `tattoomachine`, `nailfile`, `nailpolish` – klein, gedacht für die Hand der Figur (`hold`).
+  Neuer Schlussdurchgang `stage._studio_story` (greift bei Tattoo/Tätowieren oder Nagelstudio/Nägel/Maniküre in Thema oder Text): Ein Satz
+  übers Tätowieren bzw. über Nägel spielt im passenden Studio, die Figur hält Maschine bzw. Feile, kein Schnitt auf ein Ding allein
+  (`_no_insert`). Jede Figur merkt sich ihr Studio: Folgesätze ohne eigenen Ort spielen wieder dort; stehen beide zusammen im Bild und der
+  Satz nennt kein Studio, ist der Ort neutral. Drinnen kein Wetter, kein Auto, keine Passanten. Selbsttest-Fall `_studios`.

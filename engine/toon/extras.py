@@ -3992,6 +3992,62 @@ def p_drill(d, x, t, s=1.0):
         d.line((x + 262 + j + math.cos(a) * r0, by + math.sin(a) * r0, x + 262 + j + math.cos(a) * r1, by + math.sin(a) * r1), fill=INK, width=7)
 
 
+def p_tattoomachine(d, x, t, s=1.0):
+    """Tätowiermaschine (Prüfung 20.11.2026, Plan „Tattoo-Studio gegen Nagelstudio“): Stift-Maschine schräg, dunkler Griff, Motor oben,
+    Nadel unten links mit Tintentropfen; sie surrt (zittert, Striche an der Spitze)."""
+    j = int(math.sin(t * 47) * 3)
+    dark = (40, 40, 48)
+    tip = (x - 96 + j, GROUND - 14)
+    d.line([(x + 96 + j, GROUND - 300), (x + 150 + j, GROUND - 330), (x + 190 + j, GROUND - 300)], fill=INK, width=12, joint="curve")   # Kabel
+    d.line([(x - 40 + j, GROUND - 96), (x + 84 + j, GROUND - 288)], fill=INK, width=84)                                         # Körper mit Umriss
+    d.line([(x - 40 + j, GROUND - 96), (x + 84 + j, GROUND - 288)], fill=dark, width=68)
+    d.line([(x + 30 + j, GROUND - 204), (x + 84 + j, GROUND - 288)], fill=RED, width=68)                                        # Motor
+    d.line([(x - 40 + j, GROUND - 96), (x - 4 + j, GROUND - 152)], fill=(96, 100, 112), width=68)                               # Griffstück
+    d.line([(x - 70 + j, GROUND - 50), (x - 40 + j, GROUND - 96)], fill=INK, width=44)                                          # Spitze
+    d.line([(x - 70 + j, GROUND - 50), (x - 40 + j, GROUND - 96)], fill=STEEL, width=30)
+    d.line([tip, (x - 70 + j, GROUND - 50)], fill=INK, width=9)                                                                 # Nadel
+    d.ellipse((tip[0] - 16, tip[1] - 6, tip[0] + 16, tip[1] + 14), fill=(30, 30, 36))                                           # Tintentropfen
+    for k in range(3):                                                                                                          # Surr-Striche
+        a = math.radians(150 + k * 35)
+        r0, r1 = 34 + (int(t * 12) % 3) * 5, 60 + (int(t * 12) % 3) * 5
+        d.line((tip[0] + math.cos(a) * r0, tip[1] - 20 + math.sin(a) * r0, tip[0] + math.cos(a) * r1, tip[1] - 20 + math.sin(a) * r1), fill=INK, width=7)
+
+
+def p_nailfile(d, x, t, s=1.0):
+    """Nagelfeile: lange rosa Feile mit rauer Fläche, lehnt schräg (Prüfung 20.11.2026)."""
+    a, b = (x - 90, GROUND - 10), (x + 90, GROUND - 300)
+    d.line([a, b], fill=INK, width=64)
+    d.line([a, b], fill=(244, 150, 180), width=50)
+    d.line([(x - 66, GROUND - 48), (x + 66, GROUND - 262)], fill=(226, 226, 232), width=30)
+    for k in range(9):                                                                                                          # raue Körnung
+        f = 0.08 + k * 0.1
+        cx, cy = a[0] + (b[0] - a[0]) * f + 24, a[1] + (b[1] - a[1]) * f - 2
+        d.line((cx - 9, cy - 6, cx + 9, cy + 6), fill=(170, 170, 180), width=5)
+    if int(t * 3) % 2 == 0:                                                                                                     # Glitzer
+        d.line((x + 120, GROUND - 330, x + 120, GROUND - 290), fill=(250, 206, 60), width=7)
+        d.line((x + 100, GROUND - 310, x + 140, GROUND - 310), fill=(250, 206, 60), width=7)
+
+
+def p_nailpolish(d, x, t, s=1.0):
+    """Nagellack-Fläschchen: pinkes Glas mit schwarzem Deckel und Lichtreflex (Prüfung 20.11.2026)."""
+    _r(d, (x - 34, GROUND - 300, x + 34, GROUND - 170), (40, 40, 48), 14)                                                       # Deckel mit Pinsel
+    _r(d, (x - 84, GROUND - 180, x + 84, GROUND - 6), (236, 70, 120), 34)                                                       # Flasche
+    _r(d, (x - 58, GROUND - 150, x - 34, GROUND - 60), (255, 190, 210), 10, 0, shade=False)
+    _r(d, (x - 44, GROUND - 196, x + 44, GROUND - 168), (226, 190, 96), 8)
+
+
+PROPS["tattoomachine"] = p_tattoomachine
+PROPS["nailfile"] = p_nailfile
+PROPS["nailpolish"] = p_nailpolish
+PROP_ALIASES.update({"tattoomaschine": "tattoomachine", "tätowiermaschine": "tattoomachine", "tattoo machine": "tattoomachine", "tattoo gun": "tattoomachine", "tattoo_gun": "tattoomachine",
+                     "tattoonadel": "tattoomachine", "tätowiernadel": "tattoomachine", "tattoo tool": "tattoomachine", "tattoo needle": "tattoomachine", "tattoo pen": "tattoomachine",
+                     "nagelfeile": "nailfile", "feile": "nailfile", "nail file": "nailfile", "nail_file": "nailfile",
+                     "nagellack": "nailpolish", "nail polish": "nailpolish", "nail_polish": "nailpolish", "gel-lack": "nailpolish", "gellack": "nailpolish", "nagellackfläschchen": "nailpolish"})
+SIZES["tattoomachine"] = (0.24, 1262)
+SIZES["nailfile"] = (0.2, 1262)
+SIZES["nailpolish"] = (0.14, 1262)
+
+
 PROPS["drill"] = p_drill
 PROP_ALIASES.update({"bohrmaschine": "drill", "bohrer": "drill", "akkuschrauber": "drill", "schlagbohrer": "drill", "bohrhammer": "drill"})
 SIZES["drill"] = (0.45, 1262)
