@@ -6294,7 +6294,7 @@
   "id": 167,
   "category": "comedy",
   "topic": "Warum wir in unpassenden Situationen plötzlich lachen müssen – Ich-Geschichte über eine Beerdigung, einen kaputten Staubsauger und den Versuch, das Gehirn stummzuschalten",
-  "status": "review",
+  "status": "discarded",
   "created": 1795187544.8487363,
   "title": "Unpassend lachen: Warum das Gehirn bei Beerdigungen ausrastet",
   "description": "Warum musst du ausgerechnet in ernsten Momenten laut loslachen?\nDas Phänomen heißt überfließende Emotion – und dein Gehirn versucht dich nur zu schützen.\nLachst du bei Stress oder bleibst du eiskalt?",
@@ -6333,6 +6333,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-20 18:00",
-  "review_at": 1795188283.541561
+  "review_at": 1795188283.541561,
+  "error": "Bei der Prüfung verworfen: Prüfung: Beerdigung spielt im Wohnzimmer, Kirche ist eine Straße mit bunten Passanten, kein Staubsauger im Bild, Dopamin-Aussage und Fachbegriff nicht belegt"
  }
 ]
