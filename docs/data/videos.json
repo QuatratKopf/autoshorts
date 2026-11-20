@@ -6289,5 +6289,50 @@
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7710202692924149025?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
+ },
+ {
+  "id": 167,
+  "category": "comedy",
+  "topic": "Warum wir in unpassenden Situationen plötzlich lachen müssen – Ich-Geschichte über eine Beerdigung, einen kaputten Staubsauger und den Versuch, das Gehirn stummzuschalten",
+  "status": "review",
+  "created": 1795187544.8487363,
+  "title": "Unpassend lachen: Warum das Gehirn bei Beerdigungen ausrastet",
+  "description": "Warum musst du ausgerechnet in ernsten Momenten laut loslachen?\nDas Phänomen heißt überfließende Emotion – und dein Gehirn versucht dich nur zu schützen.\nLachst du bei Stress oder bleibst du eiskalt?",
+  "hashtags": [
+   "#shorts",
+   "#psychologie",
+   "#gehirn",
+   "#alltag",
+   "#comedy",
+   "#fakten",
+   "#lustig",
+   "#wissen"
+  ],
+  "tags": [
+   "unpassend lachen",
+   "lachkrampf beerdigung",
+   "nervöses lachen",
+   "psychologie fakten",
+   "gehirn erklärung",
+   "stress symptom",
+   "lachkrampf unterdrücken",
+   "lachreiz"
+  ],
+  "thumb_text": "WARUM LACHST DU?",
+  "missing": [
+   "beerdigung"
+  ],
+  "cover_ms": 70990,
+  "duration": 70.9,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-20 18:00",
+  "review_at": 1795188283.541561
  }
 ]

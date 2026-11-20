@@ -1,0 +1,473 @@
+{
+ "title": "Unpassend lachen: Warum das Gehirn bei Beerdigungen ausrastet",
+ "scenes": [
+  {
+   "text": "Ich stand auf einer Beerdigung und musste plötzlich laut loslachen.",
+   "see": "Die Hauptfigur steht verängstigt auf der Beerdigung und krampfhaft versucht, nicht zu lachen.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_teppich"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "run",
+     "emotion": "worried",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "right"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Und das Schlimmste daran ist, dass du es absolut nicht stoppen kannst.",
+   "see": "Grafik mit einem brennenden Gehirn zeigt die pure Panik im Kopf.",
+   "place": "graveyard",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "tremble",
+     "emotion": "worried",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense"
+  },
+  {
+   "text": "Alles begann heute Morgen, als mein Staubsauger mit einem lauten Knall explodierte.",
+   "see": "Rückblick ins Wohnzimmer mit dem explodierten Staubsauger.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "smoke"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Mein kompletter Teppich war voller Staub, aber ich musste pünktlich los.",
+   "see": "Die Figur schaut wütend auf das rauchende Gerät.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_teppich"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "run",
+     "emotion": "worried",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "right"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Mein Stresspegel war auf dreihundert Prozent, aber wie passte das zur Beerdigung?",
+   "see": "Das Gehirn taucht als Figur auf und drückt rote Panik-Knöpfe.",
+   "place": "office",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "angry",
+     "emote": "anger",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "In der Kirche war es danach so leise, dass man Stecknadeln hören konnte.",
+   "see": "Die Kirche von innen, stille Trauergäste.",
+   "place": "church",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "freeze",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "event",
+   "mood": "calm",
+   "crowd": "sad",
+   "overlay": {
+    "type": "card",
+    "text": "TOTENSTILLE"
+   }
+  },
+  {
+   "text": "Oma weinte leise und alle blickten betroffen auf den Boden.",
+   "see": "Die Oma schaut traurig zur Seite.",
+   "place": "church",
+   "time": "day",
+   "actors": [
+    {
+     "id": "oma",
+     "speaks": false,
+     "action": "sad",
+     "emotion": "sad",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "sad",
+   "crowd": "sad"
+  },
+  {
+   "text": "Aber mein Kopf dachte nur an den Staubsauger – was passierte dann?",
+   "see": "Gedankenblase mit dem staubsaugenden Roboter.",
+   "place": "church",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Plötzlich flüsterte mir mein Gehirn einen extrem absurden Witz zu.",
+   "see": "Das Gehirn kichert fies hinter einem Pult.",
+   "place": "church",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "worried",
+     "emote": "music",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "HIHI!",
+     "pos": "right"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense"
+  },
+  {
+   "text": "Ich versuchte sofort krampfhaft, an traurige Dinge wie Mathe zu denken.",
+   "see": "Die Hauptfigur beißt sich krampfhaft auf die Lippen und läuft rot an.",
+   "place": "church",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "freeze",
+     "emotion": "scared",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "note",
+    "title": "RETTUNGSPLAN",
+    "text": "Denk an Mathe!"
+   }
+  },
+  {
+   "text": "Du denkst vielleicht, dass das fies oder respektlos von mir war.",
+   "see": "Grafik über die psychologische Reaktion des Gehirns.",
+   "place": "church",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "calm",
+   "crowd": "walk",
+   "graphic": {
+    "type": "badge",
+    "text": "BIST DU FIES",
+    "dark": false
+   }
+  },
+  {
+   "text": "Falsch, es ist ein völlig normaler Schutzmechanismus deines Körpers.",
+   "see": "Das Gehirn hält ein Schutzschild hoch.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "stamp",
+    "text": "NORMAL",
+    "color": "green"
+   }
+  },
+  {
+   "text": "Wenn der Druck zu hoch wird, schüttet das Gehirn stoßweise Dopamin aus.",
+   "see": "Schautafel über das Nervensystem bei extremer Überlastung.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "pant",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "right",
+     "say": "",
+     "pos": 300
+    },
+    {
+     "id": "_hirn",
+     "kind": "brain",
+     "hero": false,
+     "pos": 770,
+     "action": "talk",
+     "emotion": "",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "left",
+     "speaks": false
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "DOPAMIN-VENTIL"
+   }
+  },
+  {
+   "text": "Psychologen nennen dieses Phänomen eine überfließende Emotion zur Stressbewältigung.",
+   "see": "Zähler schießt nach oben und zeigt den emotionalen Überdruck.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "number",
+    "kicker": "PSYCHOLOGIE",
+    "value": "EMOTION",
+    "label": "ÜBERLAUF",
+    "dark": false
+   }
+  },
+  {
+   "text": "Das Lachen funktioniert wie ein Sicherheitsventil, aber wie stoppt man es wieder?",
+   "see": "Das Gehirn dreht völlig durch und wirft mit Konfetti.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "music",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Bleibt nur die Frage, wie man diesen Reiz sofort stoppt.",
+   "see": "Die Figur stöhnt leise im Gottesdienst und versucht sich abzulenken.",
+   "place": "church",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "pant",
+     "emotion": "worried",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Ein kurzer, kleiner Schmerzreiz wie leichtes Zwicken hilft meistens direkt.",
+   "see": "Ein sanfter Schmerz-Tipp wird symbolisiert.",
+   "place": "church",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "cower",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense",
+   "overlay": {
+    "type": "note",
+    "title": "TRICK",
+    "text": "Leicht zwicken!"
+   }
+  },
+  {
+   "text": "Ich hab mich fest gezwickt, aber laut gepustet.",
+   "see": "Die Oma schaut überrascht rüber, als ein Geräusch ertönt.",
+   "place": "church",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "oma",
+     "speaks": false,
+     "action": "look_around",
+     "emotion": "shocked",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Und genau deshalb schaust du mich jetzt so entsetzt an.",
+   "see": "Die Hauptfigur steht schockiert da, während die Schleife vorbereitet wird.",
+   "place": "church",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "worried",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense",
+   "crowd": "watch"
+  }
+ ]
+}
