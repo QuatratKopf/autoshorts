@@ -1,5 +1,5 @@
 {
- "updated": 1795204792.7531168,
+ "updated": 1795206590.1147387,
  "enough": true,
  "counted": 29,
  "total": 32,
@@ -12,16 +12,16 @@
    "avg_views": 1930,
    "avg_likes": 44.8,
    "like_rate": 2.32,
-   "avg_score": 2618
+   "avg_score": 2619
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 3,
-   "avg_views": 1784,
+   "avg_views": 1786,
    "avg_likes": 42.7,
    "like_rate": 2.39,
-   "avg_score": 2457
+   "avg_score": 2460
   },
   {
    "slug": "storys",
@@ -36,16 +36,16 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
-   "avg_views": 1789,
+   "avg_views": 1791,
    "avg_likes": 39.0,
    "like_rate": 2.18,
-   "avg_score": 2404
+   "avg_score": 2406
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1722,
+   "avg_views": 1723,
    "avg_likes": 44.5,
    "like_rate": 2.58,
    "avg_score": 2400
@@ -57,16 +57,16 @@
    "avg_views": 1722,
    "avg_likes": 43.7,
    "like_rate": 2.54,
-   "avg_score": 2380
+   "avg_score": 2381
   },
   {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 2,
-   "avg_views": 1768,
+   "avg_views": 1772,
    "avg_likes": 11.0,
    "like_rate": 0.62,
-   "avg_score": 1978
+   "avg_score": 1982
   }
  ],
  "weights": {
@@ -85,8 +85,8 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 1930 Aufrufe, 2.32 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1768 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2529 zu 705 Punkte).",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1772 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2530 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -94,10 +94,10 @@
   "vier"
  ],
  "words_bad": [
-  "remix",
   "lied",
-  "bekanntes",
-  "erkennst"
+  "remix",
+  "erkennst",
+  "bekanntes"
  ],
  "top": [
   {
@@ -134,11 +134,11 @@
    "id": 139,
    "title": "Dieses winzige Tier ist zäher als ein Löwe",
    "category": "tiere",
-   "views": 2172,
+   "views": 2173,
    "likes": 54,
    "comments": 0,
    "shares": 1,
-   "score": 3022
+   "score": 3023
   },
   {
    "id": 120,
