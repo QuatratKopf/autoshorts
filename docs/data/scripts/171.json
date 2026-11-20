@@ -1,0 +1,378 @@
+{
+ "title": "Tattoo-Studio gegen Nagelstudio: Wer verdient wirklich mehr?",
+ "scenes": [
+  {
+   "text": "Tattoo-Studio gegen Nagelstudio: Wer verdient in Deutschland eigentlich wirklich mehr Geld?",
+   "see": "Tobi und Nina stehen bereit für den großen Business-Vergleich",
+   "place": "germany",
+   "shot": "graphic",
+   "graphic": {
+    "type": "versus",
+    "kicker": "3 RUNDEN",
+    "left": "TATTOO",
+    "right": "NÄGEL",
+    "dark": false
+   }
+  },
+  {
+   "text": "Wir starten in Runde eins mit dem Preis pro Stunde.",
+   "see": "Ein eingeblendetes Banner kündigt die erste Runde an",
+   "place": "tattoostudio",
+   "shot": "graphic",
+   "graphic": {
+    "type": "round",
+    "kicker": "RUNDE 1",
+    "text": "STUNDENLOHN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Tätowierer Tobi verlangt im Schnitt gut einhundert Euro pro Stunde fürs Stechen.",
+   "see": "Tobi hält stolz seine Tätowiernadel hoch im Studio",
+   "place": "tattoostudio",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "tobi",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "tattoomachine",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "overlay": {
+    "type": "counter",
+    "label": "PREIS PRO STUNDE",
+    "value": 100,
+    "unit": "EURO"
+   }
+  },
+  {
+   "text": "Einfache Gelnägel bei Nina kosten zwar nur vierzig bis fünfzig Euro.",
+   "see": "Nina präsentiert ein Fläschchen Nagellack an ihrem Tisch",
+   "place": "nagelstudio",
+   "props": [
+    {
+     "type": "nailpolish"
+    },
+    {
+     "type": "lib_gelnagel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "nina",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "overlay": {
+    "type": "card",
+    "text": "40 - 50 EURO"
+   }
+  },
+  {
+   "text": "Aber eine frische Modellage dauert eben auch knapp anderthalb Stunden.",
+   "see": "Eine Zeitschaltuhr zeigt eineinhalb Stunden Bearbeitungszeit für Nägel",
+   "place": "nagelstudio",
+   "actors": [
+    {
+     "id": "nina",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Pro Stunde nimmt Tobi also dreimal so viel ein, aber wer kriegt mehr bezahlte Zeit?",
+   "see": "Vergleichsbalken zeigt drei zu eins Führung für Tobis Stundenlohn",
+   "place": "tattoostudio",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "shot": "graphic",
+   "graphic": {
+    "type": "score",
+    "kicker": "RUNDE 1/3",
+    "value": "1:0",
+    "left": "TATTOO",
+    "right": "NÄGEL",
+    "dark": false
+   }
+  },
+  {
+   "text": "Weiter geht es mit Runde zwei und der bezahlten Arbeitszeit.",
+   "see": "Banner kündigt die zweite Runde bezahlte Arbeitszeit an",
+   "place": "tattoostudio",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "shot": "graphic",
+   "graphic": {
+    "type": "round",
+    "kicker": "RUNDE 2",
+    "text": "BEZAHLTE ZEIT",
+    "dark": false
+   }
+  },
+  {
+   "text": "Beratung, Motive zeichnen und Putzen bezahlt Tobi leider niemand.",
+   "see": "Tobi sitzt ratlos vor vielen Tattooskizzen am Tisch",
+   "place": "tattoostudio",
+   "actors": [
+    {
+     "id": "tobi",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "money",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "overlay": {
+    "type": "card",
+    "text": "UNBEZAHLTE ZEIT"
+   }
+  },
+  {
+   "text": "Acht Stunden echtes Stechen am Tag schafft ohnehin kaum ein Tätowierer.",
+   "see": "Tobi hält sich müde die Schulter nach langer Arbeit",
+   "place": "tattoostudio",
+   "actors": [
+    {
+     "id": "tobi",
+     "speaks": true,
+     "action": "pant",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "tattoomachine",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "overlay": {
+    "type": "card",
+    "text": "MAX 8 STUNDEN"
+   }
+  },
+  {
+   "text": "Bei Nina folgt dagegen lückenlos Termin auf Termin.",
+   "see": "Nina feilt zügig die Nägel an ihrem Arbeitstisch",
+   "place": "nagelstudio",
+   "actors": [
+    {
+     "id": "nina",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ]
+  },
+  {
+   "text": "Ihre Kundinnen müssen nach vier Wochen wiederkommen – ein Tattoo hält ewig.",
+   "see": "Ein Kalender zeigt das regelmäßige Auffüllen nach vier Wochen",
+   "place": "nagelstudio",
+   "actors": [
+    {
+     "id": "nina",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 4,
+    "unit": "WOCHEN"
+   }
+  },
+  {
+   "text": "Das bringt den Ausgleich, aber wer liegt beim monatlichen Bruttogehalt wirklich vorne?",
+   "see": "Punktestand wechselt auf Unentschieden eins zu eins",
+   "place": "nagelstudio",
+   "shot": "graphic",
+   "graphic": {
+    "type": "score",
+    "kicker": "RUNDE 2/3",
+    "value": "1:1",
+    "left": "TATTOO",
+    "right": "NÄGEL",
+    "dark": false
+   }
+  },
+  {
+   "text": "Jetzt die Entscheidung in Runde drei: Wie viel Gehalt bleibt Brutto im Monat?",
+   "see": "Banner kündigt das Monatsgehalt in Runde drei an",
+   "place": "tattoostudio",
+   "shot": "graphic",
+   "graphic": {
+    "type": "round",
+    "kicker": "RUNDE 3",
+    "text": "MONATSGEHALT",
+    "dark": false
+   }
+  },
+  {
+   "text": "Laut Gehaltsportal verdient ein Tätowierer im Schnitt zweitausendachthundert Euro.",
+   "see": "Tobi freut sich über die hohe Zahl neben ihm",
+   "place": "tattoostudio",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "tobi",
+     "speaks": true,
+     "action": "happy",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ]
+  },
+  {
+   "text": "Eine Nageldesignerin kommt im mittleren Wert auf ungefähr zweitausendzweihundert Euro.",
+   "see": "Nina sitzt nachdenklich an ihrem Manikürtisch im Studio",
+   "place": "nagelstudio",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "nina",
+     "speaks": true,
+     "action": "happy",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ]
+  },
+  {
+   "text": "Damit holt Tobi den Gesamtsieg mit zwei zu eins, aber wo liegt der fiese Haken?",
+   "see": "Der Endstand wird groß mit zwei zu eins für Tattoo eingeblendet",
+   "place": "tattoostudio",
+   "shot": "graphic",
+   "graphic": {
+    "type": "score",
+    "kicker": "ENDSTAND",
+    "value": "2:1",
+    "left": "TATTOO",
+    "right": "NÄGEL",
+    "dark": false
+   }
+  },
+  {
+   "text": "Aber Achtung: Tätowierer ist in Deutschland gar kein offizieller Ausbildungsberuf.",
+   "see": "Tobi zuckt überrascht mit den Schultern im Tätowierstudio",
+   "place": "tattoostudio",
+   "actors": [
+    {
+     "id": "tobi",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "overlay": {
+    "type": "note",
+    "title": "DER HAKEN",
+    "text": "Kein Ausbildungsberuf"
+   }
+  },
+  {
+   "text": "Die Lehrzeit dauert oft zwei bis drei Jahre und bleibt meist komplett unbezahlt.",
+   "see": "Tobi sitzt enttäuscht ohne Bezahlung an seinem Skizzenblock",
+   "place": "tattoostudio",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "tobi",
+     "speaks": true,
+     "action": "sad",
+     "emotion": "sad",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "overlay": {
+    "type": "card",
+    "text": "OFT UNBEZAHLT"
+   }
+  },
+  {
+   "text": "Auf dem Papier bringt Tattoo mehr, aber das Nagelstudio hat treuere Stammkunden. Welchen Job würdest du wählen?",
+   "see": "Tobi und Nina stehen nebeneinander und schauen neugierig in die Kamera",
+   "place": "tattoostudio",
+   "shot": "graphic",
+   "graphic": {
+    "type": "question",
+    "text": "WELCHEN JOB WÄHLST DU?",
+    "dark": false
+   }
+  }
+ ]
+}

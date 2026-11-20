@@ -6438,5 +6438,46 @@
   "slot": "2026-11-20 21:00",
   "review_at": 1795199122.4275348,
   "error": "Bei der Prüfung verworfen: Prüfung: erfundene Gewinne und Stundenlöhne, Supermarkt statt Tattoo- und Nagelstudio, Tobi und Nina nie im Bild"
+ },
+ {
+  "id": 171,
+  "category": "vergleich",
+  "topic": "Tattoo-Studio gegen Nagelstudio: Wer verdient wirklich mehr? – Duell in drei Runden zwischen Tätowierer Tobi (Figur \"tobi\": Mann, schwarzes Shirt, Mütze) und Nageldesignerin Nina (Figur \"nina\": Frau, pinkes Shirt, blonder Pferdeschwanz). Beide sind erfundene Beispielfiguren; in jeder Szene über Tobi steht Tobi im Bild, in jeder Szene über Nina steht Nina im Bild, keine Figur \"du\". Stoff als Stichpunkte, nicht wörtlich abschreiben, nur diese geprüften Angaben: Runde eins, Preis pro Stunde: Tätowierer verlangen oft um die hundert Euro pro Stunde. Einfache Gelnägel kosten meist vierzig bis fünfzig Euro, und eine neue Modellage dauert gut anderthalb Stunden. Pro Stunde nimmt Tobi also etwa dreimal so viel ein – Punkt für Tattoo. Runde zwei, bezahlte Zeit: Beratung, Motiv zeichnen, Arbeitsplatz vor- und nachbereiten, Material bestellen und Buchhaltung kann Tobi niemandem berechnen; acht Stunden Stechen am Tag schafft kaum jemand. Bei Nina folgt Termin auf Termin, und Gelnägel müssen nach drei bis vier Wochen aufgefüllt werden – ihre Kundinnen kommen jeden Monat wieder, ein Tattoo hält ein Leben lang – Punkt für Nägel. Runde drei, Gehalt für Angestellte laut Gehaltsportal (mittlerer Wert, brutto im Monat): Tätowierer rund 2800 Euro, Nageldesignerin rund 2200 Euro – Punkt für Tattoo, Endstand zwei zu eins für Tattoo. Der Haken zum Schluss: Tätowierer ist in Deutschland kein anerkannter Ausbildungsberuf, die Lehrzeit dauert zwei bis drei Jahre und ist oft unbezahlt. Fazit: Auf dem Papier verdient das Tattoo-Studio mehr, das Nagelstudio hat die treueren Stammkunden. Letzter Satz ist die Frage an die Zuschauer: Welchen der beiden Jobs würdest du wählen? Keine anderen Zahlen, keine erfundenen Gewinne, Monatsgewinne, Nettobeträge oder Stundenlöhne, keine Uhrzeiten, keine Kundenzahl pro Tag, kein \"Money-Check\", kein \"kassiert ab\", kein \"uneinholbar\". Orte: Szenen über Tobi im tattoostudio, Szenen über Nina im nailstudio, kein Supermarkt, kein Park, keine Straße. Titel: Tattoo-Studio gegen Nagelstudio: Wer verdient wirklich mehr? Titelbild-Text: WER VERDIENT MEHR?",
+  "status": "rendered",
+  "created": 1795199691.0188136,
+  "title": "Tattoo-Studio gegen Nagelstudio: Wer verdient wirklich mehr?",
+  "description": "Tattoo-Studio oder Nagelstudio: Welches Business spült am Ende mehr Geld in die Kasse?\nVergleiche die Einnahmen pro Stunde, treue Kunden und Gehälter im Alltag.\nWelchen der beiden Jobs würdest du wählen?",
+  "hashtags": [
+   "#shorts",
+   "#duell",
+   "#gehalt",
+   "#geld",
+   "#jobvergleich",
+   "#tattoo",
+   "#nagelstudio",
+   "#viral"
+  ],
+  "tags": [
+   "tattoostudio",
+   "nagelstudio",
+   "wer verdient mehr",
+   "gehaltsvergleich",
+   "tattoo kosten",
+   "gelnägel preis",
+   "job vergleich",
+   "ausbildung tattoo"
+  ],
+  "thumb_text": "WER VERDIENT MEHR?",
+  "missing": null,
+  "cover_ms": 78845,
+  "duration": 78.7,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
