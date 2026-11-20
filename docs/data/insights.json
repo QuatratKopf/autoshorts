@@ -1,7 +1,7 @@
 {
- "updated": 1795178264.8958123,
+ "updated": 1795180072.6125307,
  "enough": true,
- "counted": 27,
+ "counted": 28,
  "total": 30,
  "needed": 6,
  "categories": [
@@ -9,10 +9,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 4,
-   "avg_views": 1867,
+   "avg_views": 1924,
    "avg_likes": 44.8,
-   "like_rate": 2.4,
-   "avg_score": 2556
+   "like_rate": 2.33,
+   "avg_score": 2613
   },
   {
    "slug": "tiere",
@@ -36,7 +36,7 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
-   "avg_views": 1786,
+   "avg_views": 1787,
    "avg_likes": 39.0,
    "like_rate": 2.18,
    "avg_score": 2402
@@ -45,7 +45,7 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1720,
+   "avg_views": 1721,
    "avg_likes": 44.5,
    "like_rate": 2.59,
    "avg_score": 2398
@@ -53,50 +53,51 @@
   {
    "slug": "whatif",
    "name": "🤯 What If",
-   "n": 9,
-   "avg_views": 1716,
-   "avg_likes": 41.9,
-   "like_rate": 2.44,
-   "avg_score": 2348
+   "n": 10,
+   "avg_views": 1719,
+   "avg_likes": 43.7,
+   "like_rate": 2.54,
+   "avg_score": 2378
   },
   {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 2,
-   "avg_views": 1764,
+   "avg_views": 1765,
    "avg_likes": 11.0,
    "like_rate": 0.62,
-   "avg_score": 1974
+   "avg_score": 1975
   }
  ],
  "weights": {
-  "fakten": 1.01,
+  "fakten": 1.0,
   "grusel": 1.2,
-  "storys": 1.03,
-  "mysterien": 1.01,
-  "tiere": 1.04,
+  "storys": 1.02,
+  "mysterien": 1.0,
+  "tiere": 1.03,
   "whatif": 0.99,
-  "comedy": 1.07,
-  "musik": 0.83,
+  "comedy": 1.09,
+  "musik": 0.82,
   "vergleich": 1.2,
   "motivation": 1.2,
   "liebe": 1.2,
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 1867 Aufrufe, 2.4 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1764 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2517 zu 705 Punkte).",
-  "Wörter in starken Titeln: gänsehaut."
+  "Stärkste Kategorie: 🤪 Comedy (Ø 1924 Aufrufe, 2.33 % Likes).",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1765 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2531 zu 705 Punkte).",
+  "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
-  "gänsehaut"
+  "gänsehaut",
+  "vier"
  ],
  "words_bad": [
+  "bekanntes",
   "erkennst",
   "remix",
-  "lied",
-  "bekanntes"
+  "lied"
  ],
  "top": [
   {
@@ -133,11 +134,11 @@
    "id": 139,
    "title": "Dieses winzige Tier ist zäher als ein Löwe",
    "category": "tiere",
-   "views": 2168,
+   "views": 2169,
    "likes": 54,
    "comments": 0,
    "shares": 1,
-   "score": 3018
+   "score": 3019
   },
   {
    "id": 120,
