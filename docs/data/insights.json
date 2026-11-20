@@ -1,5 +1,5 @@
 {
- "updated": 1795143822.9836972,
+ "updated": 1795145623.8463547,
  "enough": true,
  "counted": 26,
  "total": 29,
@@ -18,10 +18,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 2,
-   "avg_views": 1836,
+   "avg_views": 1834,
    "avg_likes": 40.5,
    "like_rate": 2.21,
-   "avg_score": 2478
+   "avg_score": 2477
   },
   {
    "slug": "storys",
@@ -45,7 +45,7 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1717,
+   "avg_views": 1718,
    "avg_likes": 44.3,
    "like_rate": 2.58,
    "avg_score": 2392
@@ -63,10 +63,10 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 2,
-   "avg_views": 1762,
+   "avg_views": 1764,
    "avg_likes": 11.0,
    "like_rate": 0.62,
-   "avg_score": 1972
+   "avg_score": 1974
   }
  ],
  "weights": {
@@ -85,7 +85,7 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 1857 Aufrufe, 2.41 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1762 Aufrufe) – kommt seltener dran.",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1764 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2518 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
  ],
@@ -93,10 +93,10 @@
   "gänsehaut"
  ],
  "words_bad": [
-  "remix",
-  "lied",
   "bekanntes",
-  "erkennst"
+  "erkennst",
+  "lied",
+  "remix"
  ],
  "top": [
   {
@@ -123,11 +123,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 2056,
+   "views": 2058,
    "likes": 68,
    "comments": 0,
    "shares": 0,
-   "score": 3076
+   "score": 3078
   },
   {
    "id": 120,
@@ -143,11 +143,11 @@
    "id": 139,
    "title": "Dieses winzige Tier ist zäher als ein Löwe",
    "category": "tiere",
-   "views": 2167,
+   "views": 2162,
    "likes": 54,
    "comments": 0,
    "shares": 1,
-   "score": 3017
+   "score": 3012
   }
  ],
  "flop": [
