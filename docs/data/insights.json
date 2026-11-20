@@ -1,5 +1,5 @@
 {
- "updated": 1795212083.6921482,
+ "updated": 1795213856.3162289,
  "enough": true,
  "counted": 29,
  "total": 32,
@@ -9,19 +9,19 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 4,
-   "avg_views": 1932,
+   "avg_views": 1934,
    "avg_likes": 44.8,
-   "like_rate": 2.32,
-   "avg_score": 2621
+   "like_rate": 2.31,
+   "avg_score": 2622
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 3,
-   "avg_views": 1785,
+   "avg_views": 1791,
    "avg_likes": 42.7,
-   "like_rate": 2.39,
-   "avg_score": 2458
+   "like_rate": 2.38,
+   "avg_score": 2464
   },
   {
    "slug": "storys",
@@ -36,28 +36,28 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
-   "avg_views": 1794,
+   "avg_views": 1796,
    "avg_likes": 39.0,
    "like_rate": 2.17,
-   "avg_score": 2408
+   "avg_score": 2410
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1723,
+   "avg_views": 1725,
    "avg_likes": 44.5,
    "like_rate": 2.58,
-   "avg_score": 2400
+   "avg_score": 2402
   },
   {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 10,
-   "avg_views": 1722,
+   "avg_views": 1724,
    "avg_likes": 43.7,
-   "like_rate": 2.54,
-   "avg_score": 2381
+   "like_rate": 2.53,
+   "avg_score": 2383
   },
   {
    "slug": "musik",
@@ -84,9 +84,9 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 1932 Aufrufe, 2.32 % Likes).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 1934 Aufrufe, 2.31 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1774 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2531 zu 705 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2533 zu 706 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -104,41 +104,41 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2562,
+   "views": 2563,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3402
+   "score": 3403
   },
   {
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2264,
+   "views": 2265,
    "likes": 62,
    "comments": 0,
    "shares": 0,
-   "score": 3194
+   "score": 3195
   },
   {
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 2057,
+   "views": 2058,
    "likes": 68,
    "comments": 0,
    "shares": 0,
-   "score": 3077
+   "score": 3078
   },
   {
    "id": 139,
    "title": "Dieses winzige Tier ist zäher als ein Löwe",
    "category": "tiere",
-   "views": 2175,
+   "views": 2178,
    "likes": 54,
    "comments": 0,
    "shares": 1,
-   "score": 3025
+   "score": 3028
   },
   {
    "id": 120,
@@ -156,21 +156,21 @@
    "id": 38,
    "title": "Was passiert, wenn Drohnen deinen Alltag komplett überwachen?",
    "category": "whatif",
-   "views": 1125,
+   "views": 1126,
    "likes": 17,
    "comments": 1,
    "shares": 0,
-   "score": 1410
+   "score": 1411
   },
   {
    "id": 58,
    "title": "Wie aus einer Gaming-Bude der wertvollste Tech-Gigant wurde",
    "category": "fakten",
-   "views": 597,
+   "views": 598,
    "likes": 17,
    "comments": 0,
    "shares": 0,
-   "score": 852
+   "score": 853
   },
   {
    "id": 44,
