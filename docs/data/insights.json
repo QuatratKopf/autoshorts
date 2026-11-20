@@ -1,5 +1,5 @@
 {
- "updated": 1795176464.5559785,
+ "updated": 1795178264.8958123,
  "enough": true,
  "counted": 27,
  "total": 30,
@@ -39,16 +39,16 @@
    "avg_views": 1786,
    "avg_likes": 39.0,
    "like_rate": 2.18,
-   "avg_score": 2400
+   "avg_score": 2402
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1719,
+   "avg_views": 1720,
    "avg_likes": 44.5,
    "like_rate": 2.59,
-   "avg_score": 2397
+   "avg_score": 2398
   },
   {
    "slug": "whatif",
@@ -57,16 +57,16 @@
    "avg_views": 1716,
    "avg_likes": 41.9,
    "like_rate": 2.44,
-   "avg_score": 2347
+   "avg_score": 2348
   },
   {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 2,
-   "avg_views": 1765,
+   "avg_views": 1764,
    "avg_likes": 11.0,
    "like_rate": 0.62,
-   "avg_score": 1975
+   "avg_score": 1974
   }
  ],
  "weights": {
@@ -85,7 +85,7 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 1867 Aufrufe, 2.4 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1765 Aufrufe) – kommt seltener dran.",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1764 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2517 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
  ],
@@ -93,21 +93,21 @@
   "gänsehaut"
  ],
  "words_bad": [
-  "lied",
+  "erkennst",
   "remix",
-  "bekanntes",
-  "erkennst"
+  "lied",
+  "bekanntes"
  ],
  "top": [
   {
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2557,
+   "views": 2560,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3397
+   "score": 3400
   },
   {
    "id": 77,
@@ -123,11 +123,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 2058,
+   "views": 2059,
    "likes": 68,
    "comments": 0,
    "shares": 0,
-   "score": 3078
+   "score": 3079
   },
   {
    "id": 139,
