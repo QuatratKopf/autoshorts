@@ -1,5 +1,5 @@
 {
- "updated": 1795251831.4969418,
+ "updated": 1795253623.0305564,
  "enough": true,
  "counted": 30,
  "total": 32,
@@ -18,10 +18,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 3,
-   "avg_views": 1796,
+   "avg_views": 1797,
    "avg_likes": 43.0,
    "like_rate": 2.39,
-   "avg_score": 2474
+   "avg_score": 2476
   },
   {
    "slug": "storys",
@@ -36,10 +36,10 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
-   "avg_views": 1799,
+   "avg_views": 1800,
    "avg_likes": 39.0,
    "like_rate": 2.17,
-   "avg_score": 2414
+   "avg_score": 2415
   },
   {
    "slug": "fakten",
@@ -54,7 +54,7 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 10,
-   "avg_views": 1726,
+   "avg_views": 1727,
    "avg_likes": 43.7,
    "like_rate": 2.53,
    "avg_score": 2385
@@ -95,9 +95,9 @@
  ],
  "words_bad": [
   "bekanntes",
-  "erkennst",
+  "remix",
   "lied",
-  "remix"
+  "erkennst"
  ],
  "top": [
   {
