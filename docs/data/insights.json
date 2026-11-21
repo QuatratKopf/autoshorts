@@ -1,5 +1,5 @@
 {
- "updated": 1795240961.8214545,
+ "updated": 1795242767.8531263,
  "enough": true,
  "counted": 29,
  "total": 32,
@@ -21,7 +21,7 @@
    "avg_views": 1795,
    "avg_likes": 43.0,
    "like_rate": 2.4,
-   "avg_score": 2473
+   "avg_score": 2474
   },
   {
    "slug": "storys",
@@ -45,7 +45,7 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1726,
+   "avg_views": 1725,
    "avg_likes": 44.5,
    "like_rate": 2.58,
    "avg_score": 2403
@@ -94,10 +94,10 @@
   "vier"
  ],
  "words_bad": [
-  "lied",
-  "erkennst",
+  "bekanntes",
   "remix",
-  "bekanntes"
+  "lied",
+  "erkennst"
  ],
  "top": [
   {
