@@ -6668,5 +6668,39 @@
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7710588026690325793?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
+ },
+ {
+  "id": 176,
+  "category": "musik",
+  "topic": "Musik-Kugel: Ode an die Freude (Trap Remix)",
+  "status": "review",
+  "created": 1795273802.5576692,
+  "title": "Bekanntes Lied als Trap-Remix – erkennst du es? 🎵",
+  "description": "Ein Lied, das jeder kennt – als Trap-Remix, jede Glasscheibe ist ein Ton. Erkennst du es? 🎵\nSchreib in die Kommentare, welches Lied es ist – und welches als Nächstes einen Remix bekommen soll!",
+  "hashtags": [
+   "#musik",
+   "#remix",
+   "#trap",
+   "#satisfying",
+   "#erkennstdudaslied",
+   "#shorts"
+  ],
+  "tags": [
+   "musik",
+   "melodie",
+   "ode an die freude (trap remix)",
+   "satisfying"
+  ],
+  "thumb_text": "ERKENNST DU ES?",
+  "duration": 32.8,
+  "providers": {
+   "text": "Melodie",
+   "voice": "eigener Ton"
+  },
+  "thumb": true,
+  "look": "musik",
+  "mp4": true,
+  "slot": "2026-11-21 18:00",
+  "review_at": 1795273895.3166878
  }
 ]
