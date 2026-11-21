@@ -1,5 +1,5 @@
 {
- "updated": 1795246434.912851,
+ "updated": 1795248229.8855255,
  "enough": true,
  "counted": 30,
  "total": 32,
@@ -18,9 +18,9 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 3,
-   "avg_views": 1795,
+   "avg_views": 1796,
    "avg_likes": 43.0,
-   "like_rate": 2.4,
+   "like_rate": 2.39,
    "avg_score": 2474
   },
   {
@@ -45,7 +45,7 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1725,
+   "avg_views": 1726,
    "avg_likes": 44.5,
    "like_rate": 2.58,
    "avg_score": 2403
@@ -94,10 +94,10 @@
   "vier"
  ],
  "words_bad": [
-  "remix",
-  "bekanntes",
   "erkennst",
-  "lied"
+  "remix",
+  "lied",
+  "bekanntes"
  ],
  "top": [
   {
