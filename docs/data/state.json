@@ -1,5 +1,5 @@
 {
- "last_category": "motivation",
+ "last_category": "storys",
  "done_slots": [
   "2026-11-08 18:00",
   "2026-11-11 18:00",
@@ -49,7 +49,7 @@
   "qrsauuc3k",
   "qa5v1ywsb"
  ],
- "last_stats": 1795271990.0074832,
+ "last_stats": 1795274314.077431,
  "next_id": 177,
  "connected": {
   "youtube": {
@@ -58,7 +58,7 @@
   }
  },
  "voice_wps": 2.724,
- "last_trends": 1795262931.8696573,
+ "last_trends": 1795274314.0786006,
  "tiktok_handle": "wissens..wert",
  "last_poster": {
   "hero": "",
@@ -66,17 +66,17 @@
   "video": 175
  },
  "cat_credit": {
-  "fakten": 2.780000000000001,
-  "storys": 5.540000000000001,
-  "mysterien": -4.14,
-  "tiere": -2.8500000000000005,
-  "whatif": 5.0600000000000005,
-  "comedy": -6.15,
-  "vergleich": -6.119999999999999,
-  "motivation": -6.119999999999999,
-  "grusel": 4.8,
-  "liebe": 3.5999999999999996,
-  "nachricht": 3.5999999999999996
+  "fakten": 3.7700000000000014,
+  "storys": -5.5699999999999985,
+  "mysterien": -3.1499999999999995,
+  "tiere": -1.8300000000000005,
+  "whatif": 6.040000000000001,
+  "comedy": -5.0200000000000005,
+  "vergleich": -4.919999999999999,
+  "motivation": -4.919999999999999,
+  "grusel": 6.0,
+  "liebe": 4.8,
+  "nachricht": 4.8
  },
  "bounce_songs": [
   "cc:a0374037-c7fc-4467-94de-28d2e36fc183",

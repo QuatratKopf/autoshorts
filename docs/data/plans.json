@@ -1,739 +1,4 @@
 {
- "2026-11-20 13:00": {
-  "category": "musik",
-  "topic": "Musik-Kugel",
-  "title": "Musik-Kugel",
-  "needs": [],
-  "created": 1795112188.8434942,
-  "special": "bounce"
- },
- "2026-11-20 18:00": {
-  "category": "comedy",
-  "topic": "Warum wir in unpassenden Situationen plötzlich lachen müssen – Ich-Geschichte über eine Beerdigung, einen kaputten Staubsauger und den Versuch, das Gehirn stummzuschalten",
-  "trend": null,
-  "script": {
-   "title": "Unpassend lachen: Warum das Gehirn bei Beerdigungen ausrastet",
-   "description": "Warum musst du ausgerechnet in ernsten Momenten laut loslachen?\nDas Phänomen heißt überfließende Emotion – und dein Gehirn versucht dich nur zu schützen.\nLachst du bei Stress oder bleibst du eiskalt?",
-   "hashtags": [
-    "#shorts",
-    "#psychologie",
-    "#gehirn",
-    "#alltag",
-    "#comedy",
-    "#fakten",
-    "#lustig",
-    "#wissen"
-   ],
-   "tags": [
-    "unpassend lachen",
-    "lachkrampf beerdigung",
-    "nervöses lachen",
-    "psychologie fakten",
-    "gehirn erklärung",
-    "stress symptom",
-    "lachkrampf unterdrücken",
-    "lachreiz"
-   ],
-   "thumbnail": {
-    "image": "Close-up of a young man with wide terrified eyes trying to hold back a burst of laughter in a dark serious room, biting his lip tightly",
-    "text": "WARUM LACHST DU?"
-   },
-   "wishes": [
-    "staubsauger"
-   ],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "schwarz",
-     "hat": "",
-     "hair": "curly",
-     "hair_color": "dunkelbraun",
-     "gender": "m",
-     "skin": "hell"
-    },
-    "gehirn": {
-     "kind": "brain"
-    },
-    "oma": {
-     "shirt": "schwarz",
-     "hat": "beanie",
-     "hair": "short",
-     "hair_color": "grau",
-     "gender": "w",
-     "skin": "hell"
-    }
-   },
-   "scenes": [
-    {
-     "see": "Die Hauptfigur steht verängstigt auf der Beerdigung und krampfhaft versucht, nicht zu lachen.",
-     "text": "Ich stand auf einer Beerdigung und musste plötzlich laut loslachen.",
-     "place": "graveyard",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "jump",
-       "emotion": "happy",
-       "emote": "music",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "sad",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "Beerdigung",
-      "lachen"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "ERNSTE LAGE"
-     },
-     "image": "Ich stand auf einer Beerdigung und musste plötzlich laut loslachen.",
-     "who_desc": "",
-     "place_desc": "A quiet graveyard with dark tombstones and green grass under a overcast sky",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafik mit einem brennenden Gehirn zeigt die pure Panik im Kopf.",
-     "text": "Und das Schlimmste daran ist, dass du es absolut nicht stoppen kannst.",
-     "place": "graveyard",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "tremble",
-       "emotion": "worried",
-       "emote": "sweat",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "panic",
-     "shot": "close",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "stoppen"
-     ],
-     "overlay": null,
-     "image": "Und das Schlimmste daran ist, dass du es absolut nicht stoppen kannst.",
-     "who_desc": "",
-     "place_desc": "A quiet graveyard with dark tombstones and green grass under a overcast sky",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Rückblick ins Wohnzimmer mit dem explodierten Staubsauger.",
-     "text": "Alles begann heute Morgen, als mein Staubsauger mit einem lauten Knall explodierte.",
-     "place": "livingroom",
-     "time": "day",
-     "weather": "",
-     "props": [
-      "staubsauger",
-      "smoke"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "boom",
-     "highlight": [
-      "Staubsauger",
-      "explodierte"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "08:15 UHR"
-     },
-     "image": "Alles begann heute Morgen, als mein Staubsauger mit einem lauten Knall explodierte.",
-     "who_desc": "",
-     "place_desc": "A cozy living room with a couch and a broken vacuum cleaner on the carpet",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Figur schaut wütend auf das rauchende Gerät.",
-     "text": "Mein kompletter Teppich war voller Staub, aber ich musste pünktlich los.",
-     "place": "livingroom",
-     "time": "day",
-     "weather": "",
-     "props": [
-      "staubsauger"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "run",
-       "emotion": "worried",
-       "emote": "sweat",
-       "pos": "left",
-       "to": "right",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "pan_right",
-     "sfx": "whoosh",
-     "highlight": [
-      "Teppich",
-      "pünktlich"
-     ],
-     "overlay": null,
-     "image": "Mein kompletter Teppich war voller Staub, aber ich musste pünktlich los.",
-     "who_desc": "",
-     "place_desc": "A cozy living room with a couch and a broken vacuum cleaner on the carpet",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Gehirn taucht als Figur auf und drückt rote Panik-Knöpfe.",
-     "text": "Mein Stresspegel war auf dreihundert Prozent, aber wie passte das zur Beerdigung?",
-     "place": "office",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "dance",
-       "emotion": "angry",
-       "emote": "anger",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "panic",
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Stresspegel"
-     ],
-     "graphic": {
-      "type": "number",
-      "kicker": "STRESSPEGEL",
-      "value": "300 %",
-      "label": "OVERLOAD"
-     },
-     "overlay": null,
-     "image": "Mein Stresspegel war auf dreihundert Prozent, aber wie passte das zur Beerdigung?",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Kirche von innen, stille Trauergäste.",
-     "text": "In der Kirche war es danach so leise, dass man Stecknadeln hören konnte.",
-     "place": "church",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "freeze",
-       "emotion": "worried",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "sad",
-     "mood": "calm",
-     "shot": "event",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "Kirche",
-      "leise"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "TOTENSTILLE"
-     },
-     "image": "In der Kirche war es danach so leise, dass man Stecknadeln hören konnte.",
-     "who_desc": "",
-     "place_desc": "Inside a dim church with wooden pews and quiet atmosphere",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Oma schaut traurig zur Seite.",
-     "text": "Oma weinte leise und alle blickten betroffen auf den Boden.",
-     "place": "church",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "oma",
-       "action": "sad",
-       "emotion": "sad",
-       "emote": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ],
-     "crowd": "sad",
-     "mood": "sad",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Oma",
-      "betroffen"
-     ],
-     "overlay": null,
-     "image": "Oma weinte leise und alle blickten betroffen auf den Boden.",
-     "who_desc": "",
-     "place_desc": "Inside a dim church with wooden pews and quiet atmosphere",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Gedankenblase mit dem staubsaugenden Roboter.",
-     "text": "Aber mein Kopf dachte nur an den Staubsauger – was passierte dann?",
-     "place": "church",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "think",
-       "emotion": "worried",
-       "emote": "idea",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "zoom_in",
-     "sfx": "pop",
-     "highlight": [
-      "Staubsauger"
-     ],
-     "overlay": null,
-     "image": "Aber mein Kopf dachte nur an den Staubsauger – was passierte dann?",
-     "who_desc": "",
-     "place_desc": "Inside a dim church with wooden pews and quiet atmosphere",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Gehirn kichert fies hinter einem Pult.",
-     "text": "Plötzlich flüsterte mir mein Gehirn einen extrem absurden Witz zu.",
-     "place": "church",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "talk",
-       "emotion": "happy",
-       "emote": "music",
-       "pos": "right",
-       "speaks": true,
-       "say": "HIHI!"
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "Gehirn",
-      "Witz"
-     ],
-     "overlay": null,
-     "image": "Plötzlich flüsterte mir mein Gehirn einen extrem absurden Witz zu.",
-     "who_desc": "",
-     "place_desc": "Inside a dim church with wooden pews and quiet atmosphere",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Hauptfigur beißt sich krampfhaft auf die Lippen und läuft rot an.",
-     "text": "Ich versuchte sofort krampfhaft, an traurige Dinge wie Mathe zu denken.",
-     "place": "church",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "freeze",
-       "emotion": "scared",
-       "emote": "sweat",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "close",
-     "camera": "shake",
-     "sfx": "none",
-     "highlight": [
-      "traurige Dinge"
-     ],
-     "overlay": {
-      "type": "note",
-      "title": "RETTUNGSPLAN",
-      "text": "Denk an Mathe!"
-     },
-     "image": "Ich versuchte sofort krampfhaft, an traurige Dinge wie Mathe zu denken.",
-     "who_desc": "",
-     "place_desc": "Inside a dim church with wooden pews and quiet atmosphere",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafik über die psychologische Reaktion des Gehirns.",
-     "text": "Du denkst vielleicht, dass das fies oder respektlos von mir war.",
-     "place": "church",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "respektlos"
-     ],
-     "graphic": {
-      "type": "question",
-      "text": "BIST DU FIES?"
-     },
-     "overlay": null,
-     "image": "Du denkst vielleicht, dass das fies oder respektlos von mir war.",
-     "who_desc": "",
-     "place_desc": "Inside a dim church with wooden pews and quiet atmosphere",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Gehirn hält ein Schutzschild hoch.",
-     "text": "Falsch, es ist ein völlig normaler Schutzmechanismus deines Körpers.",
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "point",
-       "emotion": "happy",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "Schutzmechanismus"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "NORMAL",
-      "color": "green"
-     },
-     "image": "Falsch, es ist ein völlig normaler Schutzmechanismus deines Körpers.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Schautafel über das Nervensystem bei extremer Überlastung.",
-     "text": "Wenn der Druck zu hoch wird, schüttet das Gehirn stoßweise Dopamin aus.",
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [
-      "adrenaline"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "pant",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "right",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "event",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Dopamin"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "DOPAMIN-VENTIL"
-     },
-     "image": "Wenn der Druck zu hoch wird, schüttet das Gehirn stoßweise Dopamin aus.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Zähler schießt nach oben und zeigt den emotionalen Überdruck.",
-     "text": "Psychologen nennen dieses Phänomen eine überfließende Emotion zur Stressbewältigung.",
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "tick",
-     "highlight": [
-      "überfließende Emotion"
-     ],
-     "graphic": {
-      "type": "number",
-      "kicker": "PSYCHOLOGIE",
-      "value": "EMOTION",
-      "label": "ÜBERLAUF"
-     },
-     "overlay": null,
-     "image": "Psychologen nennen dieses Phänomen eine überfließende Emotion zur Stressbewältigung.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Gehirn dreht völlig durch und wirft mit Konfetti.",
-     "text": "Das Lachen funktioniert wie ein Sicherheitsventil, aber wie stoppt man es wieder?",
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "jump",
-       "emotion": "happy",
-       "emote": "music",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "happy",
-     "shot": "wide",
-     "camera": "shake",
-     "sfx": "pop",
-     "highlight": [
-      "Sicherheitsventil"
-     ],
-     "overlay": null,
-     "image": "Das Lachen funktioniert wie ein Sicherheitsventil, aber wie stoppt man es wieder?",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Figur stöhnt leise im Gottesdienst und versucht sich abzulenken.",
-     "text": "Bleibt nur die Frage, wie man diesen Reiz sofort stoppt.",
-     "place": "church",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "pant",
-       "emotion": "worried",
-       "emote": "sweat",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "sofort stoppt"
-     ],
-     "overlay": null,
-     "image": "Bleibt nur die Frage, wie man diesen Reiz sofort stoppt.",
-     "who_desc": "",
-     "place_desc": "Inside a dim church with wooden pews and quiet atmosphere",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein sanfter Schmerz-Tipp wird symbolisiert.",
-     "text": "Ein kurzer, kleiner Schmerzreiz wie leichtes Zwicken hilft meistens direkt.",
-     "place": "church",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "cower",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "close",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Schmerzreiz"
-     ],
-     "overlay": {
-      "type": "note",
-      "title": "TRICK",
-      "text": "Leicht zwicken!"
-     },
-     "image": "Ein kurzer, kleiner Schmerzreiz wie leichtes Zwicken hilft meistens direkt.",
-     "who_desc": "",
-     "place_desc": "Inside a dim church with wooden pews and quiet atmosphere",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Oma schaut überrascht rüber, als ein Geräusch ertönt.",
-     "text": "Ich hab mich fest gezwickt, aber laut gepustet.",
-     "place": "church",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "sweat",
-       "pos": "left",
-       "speaks": true
-      },
-      {
-       "id": "oma",
-       "action": "look_around",
-       "emotion": "shocked",
-       "emote": "?",
-       "pos": "right",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "panic",
-     "shot": "wide",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "gepustet"
-     ],
-     "overlay": null,
-     "image": "Ich hab mich fest gezwickt, aber laut gepustet.",
-     "who_desc": "",
-     "place_desc": "Inside a dim church with wooden pews and quiet atmosphere",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Hauptfigur steht schockiert da, während die Schleife vorbereitet wird.",
-     "text": "Und genau deshalb schaust du mich jetzt so entsetzt an.",
-     "place": "church",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "worried",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "watch",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "zoom_out",
-     "sfx": "none",
-     "highlight": [
-      "entsetzt"
-     ],
-     "overlay": {
-      "type": "choice",
-      "a": "Lachen unterdrücken",
-      "b": "Einfach rausrennen"
-     },
-     "image": "Und genau deshalb schaust du mich jetzt so entsetzt an.",
-     "who_desc": "",
-     "place_desc": "Inside a dim church with wooden pews and quiet atmosphere",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [
-   "beerdigung",
-   "teppich"
-  ],
-  "title": "Unpassend lachen: Warum das Gehirn bei Beerdigungen ausrastet",
-  "created": 1795170487.0312629
- },
  "2026-11-20 21:00": {
   "category": "vergleich",
   "topic": "Tattoo-Studio gegen Nagelstudio: Wer verdient wirklich mehr?",
@@ -1972,5 +1237,667 @@
   "needs": [],
   "created": 1795256311.6750634,
   "special": "bounce"
+ },
+ "2026-11-21 21:00": {
+  "category": "storys",
+  "topic": "Wie NASA-Ingenieure die Raumsonde Voyager 1 aus 24 Milliarden Kilometern Entfernung retteten",
+  "trend": {
+   "title": "Voyager 1",
+   "source": "Wikipedia",
+   "news": [],
+   "summary": "Raumsonde der NASA und das am weitesten von der Erde entfernte von Menschen gebaute Objekt – Voyager 1 ist eine Raumsonde der US-amerikanischen Raumfahrtbehörde NASA zur Erforschung des äußeren Planetensystems und des interstellaren Raums im Rahmen des Voyager-Programms. Sie ist das am weitesten von der Erde entfernte von Menschen gebaute Objekt und wird diesen Status au"
+  },
+  "script": {
+   "title": "Voyager 1: Rettung aus 24 Milliarden Kilometern Entfernung",
+   "description": "Voyager 1 sendet nur noch Müll aus dem Weltall!",
+   "hashtags": [
+    "#shorts",
+    "#voyager1",
+    "#nasa",
+    "#weltall",
+    "#wissenschaft",
+    "#tech",
+    "#fyp",
+    "#viral"
+   ],
+   "tags": [
+    "voyager 1",
+    "nasa",
+    "weltall",
+    "raumsonde",
+    "rettung",
+    "technik",
+    "ingenieure",
+    "universum"
+   ],
+   "thumbnail": {
+    "image": "Close-up of a shocked scientist looking at a screen filled with glitching code matrix text, bright neon glow, high contrast",
+    "text": "RETTUNG IM ALL"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "blau",
+     "hat": "",
+     "hair": "curly",
+     "hair_color": "dunkelbraun",
+     "gender": "w",
+     "glasses": true,
+     "skin": "hell"
+    }
+   },
+   "scenes": [
+    {
+     "see": "Voyager 1 treibt weit entfernt von der Erde im düsteren Weltall.",
+     "text": "NASA-Ingenieure mussten eine Raumsonde aus vierundzwanzig Milliarden Kilometern Entfernung retten.",
+     "place": "space",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "satellite"
+     ],
+     "shot": "event",
+     "actors": [],
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "Müll"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "VOYAGER 1"
+     },
+     "mood": "tense",
+     "crowd": "",
+     "image": "NASA-Ingenieure mussten eine Raumsonde aus vierundzwanzig Milliarden Kilometern Entfernung retten.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Ingenieurin im NASA Lab starrt geschockt auf ihren Bildschirm voller Nullen.",
+     "text": "Ende zweitausenddreiundzwanzig verstummte Voyager eins nach über sechsundvierzig Jahren Reisezeit.",
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "computer"
+     ],
+     "shot": "wide",
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "verstummte"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "NOVEMBER 2023"
+     },
+     "mood": "tense",
+     "image": "Ende zweitausenddreiundzwanzig verstummte Voyager eins nach über sechsundvierzig Jahren Reisezeit.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Computergrafik zeigt den gewaltigen Abstand zwischen Erde und Raumsonde.",
+     "text": "Die Sonde war vierundzwanzig Milliarden Kilometer weit weg in der absoluten Dunkelheit.",
+     "place": "space",
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "shot": "graphic",
+     "graphic": {
+      "type": "distance",
+      "value": "24 MRD. KM",
+      "left": "ERDE",
+      "right": "VOYAGER"
+     },
+     "actors": [],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "vierundzwanzig Milliarden"
+     ],
+     "overlay": null,
+     "mood": "calm",
+     "crowd": "",
+     "image": "Die Sonde war vierundzwanzig Milliarden Kilometer weit weg in der absoluten Dunkelheit.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Funksignal breitet sich langsam durch den Weltraum aus.",
+     "text": "Ein einziges Signal brauchte zweiundzwanzig und eine halbe Stunde für einen Weg.",
+     "place": "space",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "satellite"
+     ],
+     "shot": "event",
+     "actors": [],
+     "camera": "pan_right",
+     "sfx": "tick",
+     "highlight": [
+      "zweiundzwanzig"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "22,5 STUNDEN"
+     },
+     "mood": "calm",
+     "crowd": "",
+     "image": "Ein einziges Signal brauchte zweiundzwanzig und eine halbe Stunde für einen Weg.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik zur Übertragungsdauer einer Antwort.",
+     "text": "Wer eine Taste drückte, musste fast zwei Tage auf die Antwort warten.",
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "shot": "graphic",
+     "graphic": {
+      "type": "timer",
+      "value": "45:00:00",
+      "kicker": "SIGNAL-LAUFZEIT"
+     },
+     "actors": [],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "zwei Tage"
+     ],
+     "overlay": null,
+     "mood": "calm",
+     "crowd": "",
+     "image": "Wer eine Taste drückte, musste fast zwei Tage auf die Antwort warten.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Ingenieurin sitzt im Labor und liest alte Papierdokumente durch.",
+     "text": "Aber das echte Problem lag tief im Speicher der alten Raumsonde vergraben.",
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "table",
+      "computer"
+     ],
+     "shot": "wide",
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Speicher"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "SPURENSUCHE"
+     },
+     "mood": "tense",
+     "image": "Aber das echte Problem lag tief im Speicher der alten Raumsonde vergraben.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Große Grafik zeigt einen einzelnen defekten Speicherchip mit Warnzeichen.",
+     "text": "Ein einziger Computerchip mit drei Prozent des Hauptspeichers war komplett kaputtgegangen.",
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "shot": "graphic",
+     "graphic": {
+      "type": "number",
+      "kicker": "DEFEKTER SPEICHER",
+      "value": "3 %",
+      "label": "AUSFALL"
+     },
+     "actors": [],
+     "camera": "still",
+     "sfx": "boom",
+     "highlight": [
+      "kaputtgegangen"
+     ],
+     "overlay": null,
+     "mood": "tense",
+     "crowd": "",
+     "image": "Ein einziger Computerchip mit drei Prozent des Hauptspeichers war komplett kaputtgegangen.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Ingenieurin schüttelt verzweifelt den Kopf vor dem Computer.",
+     "text": "Ohne diesen Chip konnte die Sonde ihren eigenen Zustand nicht mehr senden.",
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "computer"
+     ],
+     "shot": "wide",
+     "actors": [
+      {
+       "id": "du",
+       "action": "cower",
+       "emotion": "sad",
+       "emote": "sweat",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Zustand"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "SPEICHERFEHLER",
+      "color": "red"
+     },
+     "mood": "sad",
+     "image": "Ohne diesen Chip konnte die Sonde ihren eigenen Zustand nicht mehr senden.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafische Darstellung des uralten Speicherbereichs von Voyager 1.",
+     "text": "Du denkst vielleicht, sie haben einfach ein neues Ersatzteil hochgeschickt.",
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "shot": "graphic",
+     "graphic": {
+      "type": "badge",
+      "kicker": "HARDWARE",
+      "text": "BAUJAHR 1977"
+     },
+     "actors": [],
+     "camera": "still",
+     "sfx": "whoosh",
+     "highlight": [
+      "Ersatzteil"
+     ],
+     "overlay": null,
+     "mood": "calm",
+     "crowd": "",
+     "image": "Du denkst vielleicht, sie haben einfach ein neues Ersatzteil hochgeschickt.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Ingenieurin winkt energisch ab.",
+     "text": "Falsch, da draußen fliegt Technik aus den siebziger Jahren ohne Internet.",
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "computer"
+     ],
+     "shot": "wide",
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "angry",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "camera": "shake",
+     "sfx": "pop",
+     "highlight": [
+      "Falsch"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "KEIN INTERNET"
+     },
+     "mood": "tense",
+     "image": "Falsch, da draußen fliegt Technik aus den siebziger Jahren ohne Internet.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Speicher der Sonde wird als Baustein-Grafik dargestellt.",
+     "text": "Der Speicher ist kleiner als das Bild eines modernen Smartphones.",
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "shot": "graphic",
+     "graphic": {
+      "type": "compare",
+      "left": "HANDYBILD",
+      "right": "VOYAGER",
+      "value": "3 MB",
+      "sub": "0,07 MB"
+     },
+     "actors": [],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "kleiner"
+     ],
+     "overlay": null,
+     "mood": "calm",
+     "crowd": "",
+     "image": "Der Speicher ist kleiner als das Bild eines modernen Smartphones.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Ingenieurin arbeitet aufgeregt am Rechner.",
+     "text": "Also mussten die Ingenieure den kaputten Code in winzige Schnipsel zerlegen.",
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "computer"
+     ],
+     "shot": "wide",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "idea",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "Schnipsel"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "DER PLAN"
+     },
+     "mood": "happy",
+     "image": "Also mussten die Ingenieure den kaputten Code in winzige Schnipsel zerlegen.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Nachricht wird zeilenweise aufgebaut.",
+     "text": "Sie verteilten den Programmcode auf verschiedene freie Stellen im Speicher.",
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "shot": "graphic",
+     "graphic": {
+      "type": "message",
+      "kicker": "CODE-UPDATE",
+      "lines": [
+       "Teil 1 versendet.",
+       "Teil 2 verteilt.",
+       "!Adresse angepasst."
+      ]
+     },
+     "actors": [],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "verteilten"
+     ],
+     "overlay": null,
+     "mood": "calm",
+     "crowd": "",
+     "image": "Sie verteilten den Programmcode auf verschiedene freie Stellen im Speicher.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Voyager 1 im All empfängt Funkwellen von der Erde.",
+     "text": "Im April zweitausendvierundzwanzig schickten sie den gewagten Befehl ins All.",
+     "place": "space",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "satellite"
+     ],
+     "shot": "event",
+     "actors": [],
+     "camera": "still",
+     "sfx": "whoosh",
+     "highlight": [
+      "gewagten Befehl"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "APRIL 2024"
+     },
+     "mood": "tense",
+     "crowd": "",
+     "image": "Im April zweitausendvierundzwanzig schickten sie den gewagten Befehl ins All.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Ingenieurin blickt angespannt auf die Uhr an der Wand.",
+     "text": "Danach begann das nervenaufreibende Warten auf ein Lebenszeichen der Sonde.",
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "clock"
+     ],
+     "shot": "wide",
+     "actors": [
+      {
+       "id": "du",
+       "action": "freeze",
+       "emotion": "worried",
+       "emote": "sweat",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "Warten"
+     ],
+     "overlay": {
+      "type": "thermo",
+      "value": 20
+     },
+     "mood": "tense",
+     "image": "Danach begann das nervenaufreibende Warten auf ein Lebenszeichen der Sonde.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Herzschlag-Grafik pocht auf dem Schirm.",
+     "text": "Nach fünfundvierzig Stunden empfing die Erde plötzlich wieder klare Daten.",
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "shot": "graphic",
+     "graphic": {
+      "type": "pulse",
+      "value": "45",
+      "label": "STUNDEN SPÄTER"
+     },
+     "actors": [],
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "klare Daten"
+     ],
+     "overlay": null,
+     "mood": "happy",
+     "crowd": "",
+     "image": "Nach fünfundvierzig Stunden empfing die Erde plötzlich wieder klare Daten.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Ingenieurin jubelt freudig vor ihren Monitoren.",
+     "text": "Die Rettungsaktion aus unfassbarer Entfernung war ein kompletter Erfolg.",
+     "place": "lab",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "computer"
+     ],
+     "shot": "wide",
+     "actors": [
+      {
+       "id": "du",
+       "action": "jump",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "camera": "zoom_out",
+     "sfx": "pop",
+     "highlight": [
+      "Erfolg"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "GERETTET",
+      "color": "green"
+     },
+     "mood": "happy",
+     "image": "Die Rettungsaktion aus unfassbarer Entfernung war ein kompletter Erfolg.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Voyager 1 fliegt stolz weiter durch die Sterne.",
+     "text": "Damit reist Voyager eins weiter durch die unendliche Weite des Alls.",
+     "place": "space",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "satellite"
+     ],
+     "shot": "event",
+     "actors": [],
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "unendliche Weite"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "INTERSTELLAR"
+     },
+     "mood": "calm",
+     "crowd": "",
+     "image": "Damit reist Voyager eins weiter durch die unendliche Weite des Alls.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Voyager 1 zieht einsam ihre Bahn durch den Kosmos.",
+     "text": "Und das, obwohl das weitest entfernte Objekt der Menschheit plötzlich nur noch unverständlichen Müll sendete.",
+     "place": "space",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "satellite"
+     ],
+     "shot": "event",
+     "actors": [],
+     "camera": "still",
+     "sfx": "whoosh",
+     "highlight": [
+      "unverständlichen Müll"
+     ],
+     "overlay": {
+      "type": "choice",
+      "a": "Code retten",
+      "b": "Aufgeben"
+     },
+     "mood": "calm",
+     "crowd": "",
+     "image": "Und das, obwohl das weitest entfernte Objekt der Menschheit plötzlich nur noch unverständlichen Müll sendete.",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "24 MRD. KM VON DER ERDE",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "raumsonde"
+  ],
+  "title": "Voyager 1: Rettung aus 24 Milliarden Kilometern Entfernung",
+  "created": 1795274293.8068063
  }
 }

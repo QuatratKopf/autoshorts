@@ -1,5 +1,5 @@
 {
- "updated": 1795271990.0099041,
+ "updated": 1795274314.077441,
  "enough": true,
  "counted": 32,
  "total": 33,
@@ -18,10 +18,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 5,
-   "avg_views": 2087,
-   "avg_likes": 43.4,
+   "avg_views": 2093,
+   "avg_likes": 43.6,
    "like_rate": 2.08,
-   "avg_score": 2758
+   "avg_score": 2767
   },
   {
    "slug": "tiere",
@@ -72,21 +72,21 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 3,
-   "avg_views": 1759,
-   "avg_likes": 11.7,
+   "avg_views": 1718,
+   "avg_likes": 11.3,
    "like_rate": 0.66,
-   "avg_score": 1974
+   "avg_score": 1928
   }
  ],
  "weights": {
   "fakten": 0.99,
   "grusel": 1.2,
-  "storys": 1.0,
+  "storys": 1.01,
   "mysterien": 0.99,
   "tiere": 1.02,
   "whatif": 0.98,
-  "comedy": 1.13,
-  "musik": 0.81,
+  "comedy": 1.14,
+  "musik": 0.79,
   "vergleich": 1.2,
   "motivation": 1.2,
   "liebe": 1.2,
@@ -94,8 +94,8 @@
  },
  "advice": [
   "Stärkste Kategorie: 💰 Wer verdient mehr? (Ø 2307 Aufrufe, 1.43 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1759 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2552 zu 706 Punkte).",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1718 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2549 zu 706 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -103,9 +103,9 @@
   "vier"
  ],
  "words_bad": [
-  "erkennst",
-  "remix",
   "bekanntes",
+  "remix",
+  "erkennst",
   "lied"
  ],
  "top": [
@@ -123,11 +123,11 @@
    "id": 168,
    "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
    "category": "comedy",
-   "views": 2655,
-   "likes": 38,
+   "views": 2685,
+   "likes": 39,
    "comments": 1,
    "shares": 0,
-   "score": 3255
+   "score": 3300
   },
   {
    "id": 77,
