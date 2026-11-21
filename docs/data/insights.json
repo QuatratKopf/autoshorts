@@ -1,5 +1,5 @@
 {
- "updated": 1795275685.8568218,
+ "updated": 1795277736.046047,
  "enough": true,
  "counted": 32,
  "total": 34,
@@ -18,19 +18,19 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 5,
-   "avg_views": 2085,
-   "avg_likes": 43.4,
+   "avg_views": 2097,
+   "avg_likes": 43.6,
    "like_rate": 2.08,
-   "avg_score": 2756
+   "avg_score": 2771
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 3,
-   "avg_views": 1798,
+   "avg_views": 1800,
    "avg_likes": 43.3,
    "like_rate": 2.41,
-   "avg_score": 2482
+   "avg_score": 2484
   },
   {
    "slug": "storys",
@@ -48,7 +48,7 @@
    "avg_views": 1804,
    "avg_likes": 39.0,
    "like_rate": 2.16,
-   "avg_score": 2418
+   "avg_score": 2420
   },
   {
    "slug": "fakten",
@@ -64,18 +64,18 @@
    "name": "🤯 What If",
    "n": 10,
    "avg_views": 1728,
-   "avg_likes": 43.8,
+   "avg_likes": 43.7,
    "like_rate": 2.53,
-   "avg_score": 2388
+   "avg_score": 2387
   },
   {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 3,
-   "avg_views": 1759,
+   "avg_views": 1719,
    "avg_likes": 11.3,
-   "like_rate": 0.64,
-   "avg_score": 1969
+   "like_rate": 0.66,
+   "avg_score": 1929
   }
  ],
  "weights": {
@@ -85,8 +85,8 @@
   "mysterien": 0.99,
   "tiere": 1.02,
   "whatif": 0.98,
-  "comedy": 1.13,
-  "musik": 0.81,
+  "comedy": 1.14,
+  "musik": 0.79,
   "vergleich": 1.2,
   "motivation": 1.2,
   "liebe": 1.2,
@@ -94,8 +94,8 @@
  },
  "advice": [
   "Stärkste Kategorie: 💰 Wer verdient mehr? (Ø 2307 Aufrufe, 1.43 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1759 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2552 zu 706 Punkte).",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1719 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2550 zu 706 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -103,10 +103,10 @@
   "vier"
  ],
  "words_bad": [
-  "erkennst",
-  "bekanntes",
   "lied",
-  "remix"
+  "erkennst",
+  "remix",
+  "bekanntes"
  ],
  "top": [
   {
@@ -123,11 +123,11 @@
    "id": 168,
    "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
    "category": "comedy",
-   "views": 2649,
-   "likes": 38,
+   "views": 2717,
+   "likes": 39,
    "comments": 1,
    "shares": 0,
-   "score": 3249
+   "score": 3332
   },
   {
    "id": 77,
@@ -153,11 +153,11 @@
    "id": 139,
    "title": "Dieses winzige Tier ist zäher als ein Löwe",
    "category": "tiere",
-   "views": 2180,
+   "views": 2182,
    "likes": 55,
    "comments": 0,
    "shares": 1,
-   "score": 3045
+   "score": 3047
   }
  ],
  "flop": [
