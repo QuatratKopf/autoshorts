@@ -6579,7 +6579,7 @@
   "id": 174,
   "category": "motivation",
   "topic": "Niemand kommt, um dich zu retten – und das ist gut so. Vorgaben: Motivationsrede an \"du\", 20 bis 24 kurze Sätze, rund 75 Sekunden. In JEDER Szene steht die Figur \"du\" im Bild und TUT genau das, was der Satz sagt (actors nie leer, keine Fremden, keine Menschenmenge, keine Grafik-Szene). Botschaft: Verantwortung für den eigenen ersten Schritt übernehmen – nicht \"alles allein machen müssen\", Hilfe annehmen bleibt erlaubt. Stoff als Stichpunkte, nicht wörtlich abschreiben: Hook: Du bist nicht faul, du bist abgelenkt. Alltag: abends im Bett am Handy scrollen, bis es mitten in der Nacht ist (Ort bedroom, Nacht, Handy in der Hand); auf dem Sofa auf den perfekten Moment warten (Ort livingroom); die Angst vor dem ersten Schritt. Wendepunkt: Niemand kommt, um dich zu retten – kein Held, kein Mentor, kein Glückstreffer. Genau das ist die gute Nachricht: Wenn niemand kommt, entscheidest du selbst. Dann drei kleine Schritte, jeder mit eigenem Bild: aufstehen, sobald der Wecker klingelt (Ort bedroom, Tag); eine Runde im Park laufen, auch wenn die Beine schwer sind (Ort park, Tag, Figur rennt: action run); zwanzig Minuten am Schreibtisch lernen, das Handy bleibt im Nebenzimmer (Ort office, Figur sitzt mit Buch). Schluss auf dem Berg (Ort mountain, Tag): Jeder kleine Schritt gehört dir; ein Satz zum Merken. Verboten: Uhrzeiten und alle Zahlen außer \"zwanzig Minuten\", die Wörter Meile, Mindset, Grind, \"Schlag den Wecker\", Versprechen von Reichtum oder schnellem Erfolg, Zitate, Namen. Jedes Wort einzeln und richtig schreiben. Beschreibung: worum es geht (der erste Schritt liegt bei dir), dazu eine Frage an die Zuschauer. Titel: Niemand kommt, um dich zu retten. Titelbild-Text: NIEMAND KOMMT",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1795257985.8986876,
   "title": "Niemand kommt, um dich zu retten",
   "description": "Du bist nicht faul. Du bist einfach nur abgelenkt.\nErfahre, warum der erste Schritt immer bei dir liegt und warum das die beste Nachricht ist.\nWann nimmst du dein Leben selbst in die Hand?",
@@ -6614,6 +6614,7 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Prüfung: panische Menge beim Lernen, leeres Bild am Gipfel, schlafend statt scrollend, Wort über dem Gesicht"
  }
 ]
