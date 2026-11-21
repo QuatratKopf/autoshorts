@@ -6717,7 +6717,7 @@
   "id": 177,
   "category": "storys",
   "topic": "Wie NASA-Ingenieure die Raumsonde Voyager 1 aus 24 Milliarden Kilometern Entfernung retteten",
-  "status": "review",
+  "status": "discarded",
   "created": 1795284580.0797215,
   "trend": {
    "title": "Voyager 1",
@@ -6758,6 +6758,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-21 21:00",
-  "review_at": 1795285164.282005
+  "review_at": 1795285164.282005,
+  "error": "Bei der Prüfung verworfen: Sonde als Drohne über Stadtstraße mit Passanten, Dachboden bei Speicher, Müllkippe am Schluss, kein Weltraum"
  }
 ]
