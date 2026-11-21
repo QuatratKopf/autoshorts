@@ -1,5 +1,5 @@
 {
- "updated": 1795292929.415539,
+ "updated": 1795294729.953456,
  "enough": true,
  "counted": 32,
  "total": 35,
@@ -9,10 +9,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 5,
-   "avg_views": 2140,
+   "avg_views": 2145,
    "avg_likes": 44.2,
-   "like_rate": 2.07,
-   "avg_score": 2823
+   "like_rate": 2.06,
+   "avg_score": 2828
   },
   {
    "slug": "vergleich",
@@ -57,7 +57,7 @@
    "avg_views": 1725,
    "avg_likes": 44.5,
    "like_rate": 2.58,
-   "avg_score": 2402
+   "avg_score": 2403
   },
   {
    "slug": "whatif",
@@ -72,10 +72,10 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 3,
-   "avg_views": 1719,
+   "avg_views": 1720,
    "avg_likes": 11.3,
    "like_rate": 0.66,
-   "avg_score": 1929
+   "avg_score": 1930
   }
  ],
  "weights": {
@@ -93,9 +93,9 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2140 Aufrufe, 2.07 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1719 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2555 zu 706 Punkte).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2145 Aufrufe, 2.06 % Likes).",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1720 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2556 zu 706 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -103,21 +103,21 @@
   "vier"
  ],
  "words_bad": [
+  "erkennst",
   "bekanntes",
-  "lied",
   "remix",
-  "erkennst"
+  "lied"
  ],
  "top": [
   {
    "id": 168,
    "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
    "category": "comedy",
-   "views": 2932,
+   "views": 2955,
    "likes": 41,
    "comments": 1,
    "shares": 0,
-   "score": 3577
+   "score": 3600
   },
   {
    "id": 46,
