@@ -1,0 +1,412 @@
+{
+ "title": "Voyager 1: Rettung aus 24 Milliarden Kilometern Entfernung",
+ "scenes": [
+  {
+   "text": "NASA-Ingenieure mussten eine Raumsonde aus vierundzwanzig Milliarden Kilometern Entfernung retten.",
+   "see": "Voyager 1 treibt weit entfernt von der Erde im düsteren Weltall.",
+   "place": "street",
+   "backdrop": {
+    "ground": "road",
+    "elements": [
+     "city"
+    ]
+   },
+   "props": [
+    {
+     "type": "lib_raumsonde"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "crowd": "worried",
+   "overlay": {
+    "type": "card",
+    "text": "VOYAGER 1"
+   }
+  },
+  {
+   "text": "Ende zweitausenddreiundzwanzig verstummte Voyager eins nach über sechsundvierzig Jahren Reisezeit.",
+   "see": "Eine Ingenieurin im NASA Lab starrt geschockt auf ihren Bildschirm voller Nullen.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "2023"
+   }
+  },
+  {
+   "text": "Die Sonde war vierundzwanzig Milliarden Kilometer weit weg in der absoluten Dunkelheit.",
+   "see": "Eine Computergrafik zeigt den gewaltigen Abstand zwischen Erde und Raumsonde.",
+   "place": "street",
+   "time": "night",
+   "shot": "graphic",
+   "mood": "scary",
+   "graphic": {
+    "type": "distance",
+    "value": "24 MRD. KM",
+    "left": "ERDE",
+    "right": "VOYAGER",
+    "dark": false
+   }
+  },
+  {
+   "text": "Ein einziges Signal brauchte zweiundzwanzig und eine halbe Stunde für einen Weg.",
+   "see": "Ein Funksignal breitet sich langsam durch den Weltraum aus.",
+   "place": "street",
+   "shot": "event",
+   "mood": "calm",
+   "crowd": "walk"
+  },
+  {
+   "text": "Wer eine Taste drückte, musste fast zwei Tage auf die Antwort warten.",
+   "see": "Grafik zur Übertragungsdauer einer Antwort.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 2,
+    "unit": "TAGE"
+   }
+  },
+  {
+   "text": "Aber das echte Problem lag tief im Speicher der alten Raumsonde vergraben.",
+   "see": "Die Ingenieurin sitzt im Labor und liest alte Papierdokumente durch.",
+   "place": "attic",
+   "time": "day",
+   "props": [
+    {
+     "type": "table"
+    },
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Ein einziger Computerchip mit drei Prozent des Hauptspeichers war komplett kaputtgegangen.",
+   "see": "Große Grafik zeigt einen einzelnen defekten Speicherchip mit Warnzeichen.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_mikrochip"
+    },
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "bar",
+    "label": "COMPUTERCHIP",
+    "value": 3.0
+   }
+  },
+  {
+   "text": "Ohne diesen Chip konnte die Sonde ihren eigenen Zustand nicht mehr senden.",
+   "see": "Die Ingenieurin schüttelt verzweifelt den Kopf vor dem Computer.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "cower",
+     "emotion": "sad",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "sad"
+  },
+  {
+   "text": "Du denkst vielleicht, sie haben einfach ein neues Ersatzteil hochgeschickt.",
+   "see": "Grafische Darstellung des uralten Speicherbereichs von Voyager 1.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Falsch, da draußen fliegt Technik aus den siebziger Jahren ohne Internet.",
+   "see": "Die Ingenieurin winkt energisch ab.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "angry",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "KEIN INTERNET"
+   }
+  },
+  {
+   "text": "Der Speicher ist kleiner als das Bild eines modernen Smartphones.",
+   "see": "Der Speicher der Sonde wird als Baustein-Grafik dargestellt.",
+   "place": "attic",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Also mussten die Ingenieure den kaputten Code in winzige Schnipsel zerlegen.",
+   "see": "Die Ingenieurin arbeitet aufgeregt am Rechner.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Sie verteilten den Programmcode auf verschiedene freie Stellen im Speicher.",
+   "see": "Eine Nachricht wird zeilenweise aufgebaut.",
+   "place": "attic",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "message",
+    "kicker": "CODE-UPDATE",
+    "dark": false,
+    "lines": [
+     "Teil 1 versendet.",
+     "Teil 2 verteilt.",
+     "!Adresse angepasst."
+    ]
+   }
+  },
+  {
+   "text": "Im April zweitausendvierundzwanzig schickten sie den gewagten Befehl ins All.",
+   "see": "Voyager 1 im All empfängt Funkwellen von der Erde.",
+   "place": "space",
+   "time": "night",
+   "props": [
+    {
+     "type": "satellite",
+     "pos": 730
+    },
+    {
+     "type": "earth",
+     "pos": 370
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "APRIL 2024"
+   }
+  },
+  {
+   "text": "Danach begann das nervenaufreibende Warten auf ein Lebenszeichen der Sonde.",
+   "see": "Die Ingenieurin blickt angespannt auf die Uhr an der Wand.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "freeze",
+     "emotion": "worried",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Nach fünfundvierzig Stunden empfing die Erde plötzlich wieder klare Daten.",
+   "see": "Eine Herzschlag-Grafik pocht auf dem Schirm.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "happy"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 45,
+    "unit": "STUNDEN"
+   }
+  },
+  {
+   "text": "Die Rettungsaktion aus unfassbarer Entfernung war ein kompletter Erfolg.",
+   "see": "Die Ingenieurin jubelt freudig vor ihren Monitoren.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Damit reist Voyager eins weiter durch die unendliche Weite des Alls.",
+   "see": "Voyager 1 fliegt stolz weiter durch die Sterne.",
+   "place": "street",
+   "shot": "event",
+   "mood": "calm",
+   "crowd": "walk",
+   "overlay": {
+    "type": "card",
+    "text": "INTERSTELLAR"
+   }
+  },
+  {
+   "text": "Und das, obwohl das weitest entfernte Objekt der Menschheit plötzlich nur noch unverständlichen Müll sendete.",
+   "see": "Voyager 1 zieht einsam ihre Bahn durch den Kosmos.",
+   "place": "landfill",
+   "props": [
+    {
+     "type": "trash"
+    }
+   ],
+   "shot": "event",
+   "mood": "calm"
+  }
+ ]
+}

@@ -6712,5 +6712,52 @@
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7710644763053034784?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
+ },
+ {
+  "id": 177,
+  "category": "storys",
+  "topic": "Wie NASA-Ingenieure die Raumsonde Voyager 1 aus 24 Milliarden Kilometern Entfernung retteten",
+  "status": "review",
+  "created": 1795284580.0797215,
+  "trend": {
+   "title": "Voyager 1",
+   "source": "Wikipedia"
+  },
+  "title": "Voyager 1: Rettung aus 24 Milliarden Kilometern Entfernung",
+  "description": "Voyager 1 sendet nur noch Müll aus dem Weltall!",
+  "hashtags": [
+   "#shorts",
+   "#voyager1",
+   "#nasa",
+   "#weltall",
+   "#wissenschaft",
+   "#tech",
+   "#fyp",
+   "#viral"
+  ],
+  "tags": [
+   "voyager 1",
+   "nasa",
+   "weltall",
+   "raumsonde",
+   "rettung",
+   "technik",
+   "ingenieure",
+   "universum"
+  ],
+  "thumb_text": "RETTUNG IM ALL",
+  "missing": null,
+  "cover_ms": 80740,
+  "duration": 80.6,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-21 21:00",
+  "review_at": 1795285164.282005
  }
 ]
