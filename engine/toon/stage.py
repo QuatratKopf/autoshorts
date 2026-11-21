@@ -191,6 +191,8 @@ def sanitize(sc):
                  "speaks": a.get("speaks") is True, **({"hero": True} if a.get("hero") is True else {})}
             if isinstance(a.get("_ksz"), (int, float)) and not isinstance(a.get("_ksz"), bool):
                 c["_ksz"] = float(a["_ksz"])               # Größe je Figur, von der Regie gesetzt (stage._tiny_story)
+            if a.get("_jog") is True:
+                c["_jog"] = True                           # Dauerlauf, von der Regie gesetzt (stage._jogging)
             for k in ("action", "emotion", "emote", "kind", "hold", "facing"):
                 c[k] = word(a.get(k)) if k == "emote" else word(a.get(k)).lower()
             if isinstance(a.get("look"), dict):               # Nebenfiguren der Regie bringen ihr Aussehen mit
@@ -274,7 +276,7 @@ def _prepare(scene, cast):
         actors.append({"look": look_a, "kind": kind if kind in extras.CREATURES else "",
                        "hold": extras.held_key(a.get("hold")),
                        "action": action, "emotion": str(a.get("emotion") or "").lower(), "emote": a.get("emote") or "", "giant": bool(scene.get("giant")), "small": bool(scene.get("_beside_bed")), "hero": bool(a.get("hero")), "ksz": float(a["_ksz"]) if isinstance(a.get("_ksz"), (int, float)) and not isinstance(a.get("_ksz"), bool) and 0.2 <= a["_ksz"] <= 2.0 else 0.0, "say": str(a.get("say") or "") if isinstance(a.get("say"), str) else "",
-                       "x0": x0, "x1": x1, "speaks": bool(a.get("speaks")), "seed": i * 5 + len(aid), "face": a.get("facing"),
+                       "x0": x0, "x1": x1, "speaks": bool(a.get("speaks")), "seed": i * 5 + len(aid), "face": a.get("facing"), "jog": bool(a.get("_jog")) and action == "run",
                        "teeth": TEETH_COLORS.get(str(a.get("teeth") or "").lower())})
     for i, a in enumerate(actors):     # zwei Figuren nie auf derselben Stelle
         for b in actors[:i]:
@@ -762,8 +764,10 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
         moving = a["x1"] != a["x0"]
         speed = 360 if a["action"] == "walk" else 680
         move_t = min(dur * 0.7, abs(a["x1"] - a["x0"]) / speed) if moving else 0
+        if moving and a.get("jog"):                    # Dauerlauf: quer durchs Bild, die ganze Szene lang
+            move_t = dur + 0.8
         arrived = moving and t >= move_t
-        x = a["x1"] if arrived else (a["x0"] + (a["x1"] - a["x0"]) * _ease(t / move_t) if moving else a["x0"])
+        x = a["x1"] if arrived else (a["x0"] + (a["x1"] - a["x0"]) * (t / move_t if a.get("jog") else _ease(t / move_t)) if moving else a["x0"])
         if close:                                      # die Hauptfigur steht mittig, andere im selben Abstand daneben
             x = 540 + (x - lead["x1"] - c_off) * W / CLOSE_BG
         xs_now.append(x)
@@ -1145,6 +1149,11 @@ def direct(scenes, times, topic="", style="", look=""):
     prev_place, same, changes, prev_bd = None, 0, 0, None
     import re as _re0
     _clock = r"\d{1,2}[:.]\d{2}(?:\s*UHR)?|\d{1,2}\s*UHR"
+    for sc in scenes:                                     # Bildplan sagt „Du rennst im Park“ und Ort park, die Baukasten-Landschaft daneben ist aber eine Straße: der genannte Ort gilt (Video 173)
+        if isinstance(sc, dict) and isinstance(sc.get("backdrop"), dict) and isinstance(sc.get("place"), str) and sc["place"].strip():
+            said_pl = _said_place(sc.get("see")) or _said_place(sc.get("text"))
+            if said_pl and places.resolve(said_pl) == places.resolve(sc["place"]) and places.resolve(sc["place"]) in places.PLACES:
+                sc["backdrop"] = None
     for sc in scenes:                                     # erfundene Uhrzeit („02:00 UHR · WALD“) in der Ecke oder über einer Zahl: sagt der Satz keine Uhrzeit, entfällt sie
         if not isinstance(sc, dict) or _re0.search(r"\buhr\b", str(sc.get("text") or "").lower()):
             continue
@@ -1763,8 +1772,13 @@ def direct(scenes, times, topic="", style="", look=""):
         if acts:
             last_id = acts[0].get("id") or last_id
         if not outdoor and "actors" in sc and not acts_now and str(sc.get("shot") or "") != "insert":
-            if public and not sc.get("crowd"):            # leerer öffentlicher Raum: Menschen passend zur Stimmung
+            solo = bool(last_id) and not sc.get("crowd") and (str(style or "") == "motivation" or bool(_re.search(SELF_RE, txt))) \
+                and not _re.search(r"\balle\b|\bleute|menschen|\bmenge\b|publikum|kolleg|\bteam\b|zuschauer", txt)
+            if public and not sc.get("crowd") and not solo:   # leerer öffentlicher Raum: Menschen passend zur Stimmung
                 sc["crowd"] = {"panic": "panic", "tense": "worried", "sad": "sad", "happy": "cheer"}.get(mood, "walk")
+            elif public and solo:                         # „Fang genau jetzt an.“ spricht zu dir: die Hauptfigur steht da – keine drei jubelnden Fremden im Konfetti (Video 173)
+                sc["actors"] = acts = [{"id": last_id, "action": "cheer" if mood == "happy" else "talk", "pos": "center",
+                                        "emotion": MOOD_EMOTION.get(mood, "") or ("happy" if mood == "happy" else "")}]
             elif not public and last_id and rp not in ("space", "underwater", "cave"):
                 sc["actors"] = acts = [{"id": last_id, "action": "walk", "pos": "offleft", "to": "center",
                                         "emotion": MOOD_EMOTION.get(mood, "")}]
@@ -2321,6 +2335,7 @@ def direct(scenes, times, topic="", style="", look=""):
             o_k["unit"] = "KM/H"
     _devices(scenes)
     _last_look(scenes, topic)
+    _jogging(scenes)
     for sc in scenes:                                     # ein einzelnes Auge neben Menschen („mustern dich mit großen Augen“ in der Bahn, Video 160) – überall, nicht nur im Zimmer
         if isinstance(sc, dict) and isinstance(sc.get("props"), list) and str(sc.get("shot") or "") not in ("insert", "graphic") and (
                 sc.get("crowd") or any(isinstance(a, dict) and not a.get("kind") for a in sc.get("actors") or [])):
@@ -2346,6 +2361,31 @@ HYBRID_BEING_RE = r"super-?tier|\bwesen\b|\bmonster|\bbiest|\bkreatur|mischwesen
 HYBRID_FAIL_RE = r"bricht\b.*zusammen|zusammenbr|kollabier|überhitz|\bversagt|\bstirbt|\bkippt um|\bfällt um|klappt zusammen|macht schlapp|\bschlapp\b|geht k\.?o|am ende seiner kräfte|kann es nicht|schafft es nicht"
 HYBRID_HOME = {"cheetah": "savannah", "lion": "savannah", "eagle": "mountain", "tardigrade": "forest", "flea": "park", "cow": "fields", "pig": "farm", "chimp": "forest"}
 HYBRID_RUN_RE = r"\brenn|\bsprint|\brast\b|\bjagt\b|km/h|kilometer\w* pro stunde|stundenkilometer|\bbeschleunig"
+
+
+# „Lauf diese Runde“, „du rennst durch den Park“: die Figur läuft die ganze Szene – sie kommt nicht ins Bild und steht dann vier Sekunden da (Video 173)
+JOG_RE = r"(?:^|[.!?,:;] )\s*(?:lauf|laufe|renn|renne|jogg|jogge|sprinte)\b|\bdu (?:läufst|rennst|joggst|sprintest)\b|\b(?:läufst|rennst|joggst|sprintest) du\b"
+
+
+def _jogging(scenes):
+    for sc in scenes:
+        if not isinstance(sc, dict) or str(sc.get("shot") or "") in ("graphic", "insert", "close") or sc.get("float"):
+            continue
+        low = str(sc.get("text") or "").lower()
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        if len(acts) != 1 or acts[0].get("kind") or not re.search(JOG_RE, low) or re.search(r"\bnicht\b.{0,12}\b(lauf|renn)|davon|\bweg\b|läuft (?:gut|schlecht|schief|ab)", low):
+            continue
+        bd = backdrop(sc)
+        if not isinstance(bd, dict) and places.resolve(bd) not in places.OUTDOOR:
+            continue
+        acts[0].update(action="run", pos=190, to=890, _jog=True, hold="", facing="")
+        if str(acts[0].get("emote") or "") in ("x", "?", "anger"):
+            acts[0]["emote"] = ""
+        if str(acts[0].get("emotion") or "") in ("angry", "sad", "worried", "scared"):
+            acts[0]["emotion"] = ""                       # entschlossen, nicht wütend
+        sc["props"] = [q for q in (sc.get("props") or []) if isinstance(q, dict) and q.get("pos") in (None, "")][:1]
+        if str(sc.get("mood") or "") in ("tense", "panic", "sad") and str(sc.get("time") or "") != "night":
+            sc["mood"] = ""                               # Lauf am Tag: helles Bild, kein Halbdunkel mit Lichtkegel
 
 
 def hybrid_story(scenes, topic=""):
@@ -3388,6 +3428,9 @@ def _devices(scenes):
                 sc["props"] = [p for p in sc["props"] if _pkey(p) != "clock"]        # „um drei Uhr nachts“: eine Uhrzeit, keine Wanduhr auf dem Flurboden
             if re.search(r"wecker", low) and not denied(r"wecker", low) and "lib_wecker" in extras.SIZES:
                 sc["props"] = [p for p in sc["props"] if _pkey(p) != "clock"]        # Wecker statt Wanduhr
+                for a in acts:                                                       # … und keine Wanduhr in der Hand, größer als der Kopf (Video 173)
+                    if isinstance(a, dict) and str(a.get("hold") or "") == "clock":
+                        a["hold"] = ""
                 if not any(_pkey(p) == "lib_wecker" for p in sc["props"]):
                     sc["props"].append({"type": "lib_wecker"})
         if re.search(r"router", low) and not isinstance(backdrop(sc), dict) and places.resolve(backdrop(sc)) == "serverroom" \
@@ -3949,6 +3992,25 @@ CARRY_ABSTRACT_RE = (r"\bdiese[rnms]?\s+(?:[a-zäöüß]+\s+)?(energie|wirkung\w
                      r"entdeckung\w*|theorie\w*|zahl\w*|menschen|leute|person\w*)\b")
 
 
+# „diese Früchte“, „diese Dinger“ meinen das Ding von eben; „diese Meile“, „diese Formel“ nennen etwas Neues
+CARRY_GENERIC_RE = (r"frucht|früchte|ding|dinger|teil|teile|stück|stücke|sache|sachen|menge|masse|last|ladung|gegenst[aä]nd\w*|objekt\w*|tier|tiere|ger[aä]t\w*|"
+                    r"maschine\w*|exemplar\w*|brocken|kolosse?|riesen?|winzling\w*|kleinen|großen|beiden|drei|vier|alle|hier|da|gewicht|haufen|berg|stapel")
+
+
+def _carry_other(text, thing):
+    """Nennt „diese/dieser/dieses …“ ein eigenes Hauptwort, das nicht das zuletzt gezeigte Ding ist? Dann meint der Satz etwas Neues."""
+    import re as _re
+    hit = False
+    for m in _re.finditer(r"\b[Dd]iese[rnms]?\s+(?:[a-zäöüß]+\s+){0,2}([A-ZÄÖÜ][a-zäöüß]{2,})", str(text or "")):
+        noun = m.group(1).lower()
+        if _re.fullmatch(CARRY_GENERIC_RE, noun) or _re.search(CARRY_ABSTRACT_RE, "diese " + noun):
+            return False
+        if any(_re.search(pat, noun) for pat, k in _lib_props() + TEXT_PROPS if k == thing):
+            return False
+        hit = True
+    return hit
+
+
 def _carry_thing(scenes, main_id=None):
     """„Du steckst neunundneunzig Wassermelonen ein.“ – „Aber in echt wiegen diese Früchte zusammen fast eine Tonne.“: Der Folgesatz
     meint dasselbe Ding, nennt es aber nicht. Statt eines leeren Bildes bleibt es stehen – bei einer großen Zahl gleich mehrfach."""
@@ -3959,12 +4021,14 @@ def _carry_thing(scenes, main_id=None):
             continue
         low = str(sc.get("text") or "").lower()
         named = [k for pat, k in _lib_props() + TEXT_PROPS if _re.search(pat, low) and extras.prop_fit(k) and k not in extras.SKY and k not in ("pile", "sandpile", "trash")]
-        many = any((_number(w) or 0) > 3 for w in _re.findall(r"[a-zäöüß]{4,}|\d+", low) if w != "acht")
+        many = any((_number(w) or 0) > 3 for w in _re.findall(r"[a-zäöüß]{4,}|\d+", _re.sub(r"\b[a-zäöüß0-9:.]+\s+uhr\b", " ", low)) if w != "acht")   # „um sechs Uhr“ ist eine Uhrzeit, keine Menge (drei Wecker im Park, Video 173)
         if named:
             last = (named[0], i, many)
             continue
         acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
         rp = places.resolve(backdrop(sc)) if not isinstance(backdrop(sc), dict) else "custom"
+        if last and _carry_other(str(sc.get("text") or ""), last[0]):
+            continue                                      # „Lauf diese eine Meile“, „Lern diese Formel“: „diese“ benennt selbst etwas anderes – der Wecker von eben bleibt nicht stehen
         if not last or i - last[1] > 2 or not _re.search(CARRY_RE, _re.sub(CARRY_ABSTRACT_RE, " ", low)) or sc.get("props") or sc.get("float") or len(acts) > 1 \
                 or sc.get("shot") in ("graphic", "insert", "close") or rp in MAPS or rp in ("space", "underwater") or any(a.get("kind") for a in acts):
             continue

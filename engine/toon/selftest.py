@@ -1517,6 +1517,39 @@ def main():
             st_.CONFIG.clear(); st_.CONFIG.update(keep); fresh.save = sv
     check("Motivation: Wort für Wort, Rubriken da (auch Liebe), freigegebene Rubriken je Zugang", _word_caps)
 
+    def _speech173():                                            # Prüfung 21.11.2026, Video 173 („Niemand kommt, um dich zu retten“)
+        import tempfile
+        from pathlib import Path
+        from .. import render, writer
+        with tempfile.TemporaryDirectory() as tmp:               # das große Wort steht in der Untertitel-Zone – nicht quer über dem Gesicht
+            f = Path(tmp) / "w.ass"
+            render.build_ass([("Du", 0.0, 0.3), ("bist", 0.3, 0.6)], [{}], [(0, 1.0)], f, style="word")
+            st = next(ln for ln in f.read_text(encoding="utf-8").splitlines() if ln.startswith("Style: Big,"))
+            assert 380 <= int(st.split(",")[-2]) <= 480, st
+        sc = stage.direct([{"text": "Schlag den Wecker morgen früh um sechs Uhr aus.", "place": "bedroom", "time": "night", "props": ["clock"],
+                            "actors": [{"id": "du", "action": "shake", "hold": "clock"}], "mood": "tense"},
+                           {"text": "Lauf diese eine Meile, wenn deine Beine brennen.", "see": "Du rennst entschlossen im Park.", "place": "park", "time": "day",
+                            "backdrop": {"sky": "day", "ground": "road", "elements": ["street"]},
+                            "actors": [{"id": "du", "action": "run", "emotion": "angry", "pos": "offleft", "to": "center"}], "mood": "tense"},
+                           {"text": "Lern diese Formel, bis sie sitzt.", "place": "classroom", "time": "day", "actors": [{"id": "du", "action": "sit"}], "mood": "calm"},
+                           {"text": "Nicht morgen. Fang genau jetzt in dieser Sekunde an.", "place": "office", "time": "day", "actors": [], "mood": "happy"}],
+                          [(0, 4), (4, 8), (8, 12), (12, 16)], "Niemand kommt, um dich zu retten", "motivation")
+        keys = [[str((q.get("type") if isinstance(q, dict) else q) or "") for q in (x.get("props") or [])] for x in sc]
+        assert "clock" not in keys[0] and not sc[0]["actors"][0].get("hold"), (keys[0], sc[0]["actors"])
+        assert not [k for k in keys[1] + keys[2] if "wecker" in k or k == "clock"], keys      # der Wecker wandert nicht in Park und Klassenzimmer
+        assert not isinstance(sc[1].get("backdrop"), dict) and sc[1]["place"] == "park", sc[1]
+        a1 = sc[1]["actors"][0]
+        assert a1["action"] == "run" and a1.get("_jog") and a1["pos"] != a1["to"], a1
+        pr = stage._prepare(sc[1], {"du": {}})
+        assert pr[3][0]["jog"] and pr[3][0]["x0"] != pr[3][0]["x1"], pr[3]
+        assert [a.get("id") for a in sc[3]["actors"]] == ["du"] and not sc[3].get("crowd"), sc[3]   # die Hauptfigur, keine jubelnden Fremden
+        sc2 = stage.direct([{"text": "Du steckst neunundneunzig Wassermelonen ein.", "place": "kitchen", "actors": [{"id": "du"}], "props": ["watermelon"]},
+                            {"text": "Aber in echt wiegen diese Früchte zusammen fast eine Tonne.", "place": "kitchen", "actors": [{"id": "du"}]}], [(0, 4), (4, 8)], "x", "whatif")
+        assert stage._carry_other("Lauf diese eine Meile.", "lib_wecker") and not stage._carry_other("Aber diese Früchte wiegen eine Tonne.", "lib_wecker")
+        js = writer.polish({"title": "x", "description": "y", "scenes": [{"text": "Jeden Tagscrollst du stundenlang durch fremde Leben."}] + [{"text": f"Satz {i}."} for i in range(3)]})
+        assert js["scenes"][0]["text"].startswith("Jeden Tag scrollst du"), js["scenes"][0]["text"]
+    check("Motivation (Video 173): Wort unter dem Gesicht, Wecker bleibt im Schlafzimmer, Dauerlauf im Park, Hauptfigur statt Fremder", _speech173)
+
     def _hook_count():                                           # Hook-Titel im ersten Bild, Listen-Zähler „2/4“
         import tempfile
         from pathlib import Path
