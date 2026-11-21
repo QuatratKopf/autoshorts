@@ -2282,8 +2282,8 @@ def direct(scenes, times, topic="", style="", look=""):
             keys_w = ["satellite", "earth"]
             sc["shot"] = shot_w = ""                       # ohne Ereignis-Vergrößerung: sonst ragt die Erde aus dem Bild
         sky_w = [k for k in keys_w if k in extras.SKY and k not in ("submersible", "ping")]
-        sc["_ov_low"] = 3 if (rp_w == "underwater" and keys_w == ["submersible"] and not sc.get("actors")) or (rp_w == "highsky" and sc.get("_balloon")) or sc.get("_balloon") in ("fill", "fly") else 0   # 3 = ganz oben, über dem Tauchboot
-        if sky_w and all(k in sky_w or k == "ship" for k in keys_w) and not sc.get("actors") and not sc.get("crowd") \
+        sc["_ov_low"] = 3 if (rp_w == "underwater" and keys_w == ["submersible"] and not sc.get("actors")) or (rp_w == "highsky" and sc.get("_balloon")) or sc.get("_balloon") in ("fill", "fly") or sc.get("_probe") else 0   # 3 = ganz oben, über dem Tauchboot
+        if sky_w and not sc.get("_probe") and all(k in sky_w or k == "ship" for k in keys_w) and not sc.get("actors") and not sc.get("crowd") \
                 and shot_w in ("", "event", "wide") and (rp_w in places.OUTDOOR or rp_w == "space"):
             sc["_ov_low"] = 2 if "ship" in keys_w else 1  # nur Flugzeug/Satellit am Himmel (und ein Schiff darunter): das Schild steht tiefer im freien Bild, nicht quer über dem Flugzeug
     _divers(scenes)
@@ -4635,7 +4635,9 @@ def _probe_story(scenes, topic="", main_id=""):
             continue
         rp = places.resolve(backdrop(sc)) if not isinstance(backdrop(sc), dict) else "custom"
         humans = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and not a.get("kind")]
-        if rp in ("space", "moon") and (not humans or not _re.search(r"astronaut|raumfahrer|kosmonaut", low)):   # dort draußen ist kein Mensch – auch keiner, der „hereinkommt“
+        plan_space = places.resolve(sc.get("place")) in ("space", "moon")     # auch mit eigenem Hintergrund der Text-KI (Wiese mit Mond unter der Sonde, Video 179)
+        out_there = not humans and rp not in ROOMS and bool(_re.search(PROBE_RE + r"|\bsonde\b|interstellar|\balls?\b|weltall|weltraum", low))
+        if (rp in ("space", "moon") or plan_space or out_there) and (not humans or not _re.search(r"astronaut|raumfahrer|kosmonaut", low)):   # dort draußen ist kein Mensch – auch keiner, der „hereinkommt“
             if _re.search(JUNK_TALK_RE + r"|datensalat|kauderwelsch|verstumm|nur noch (?:unsinn|rauschen|nullen)", low):
                 kind = "probe_glitch"
             elif _re.search(r"befehl|kommando|hochgeschick|schick\w* (?:\w+ ){0,5}(?:ins all|ins weltall|zur sonde|hinauf|hoch)|von der erde aus", low):
@@ -4652,7 +4654,7 @@ def _probe_story(scenes, topic="", main_id=""):
                 kind = {"probe": "probe_far", "probe_far": "probe", "probe_signal": "probe", "probe_uplink": "probe_signal", "probe_glitch": "probe_far"}[kind]
             sc["place"], sc["time"] = "space", "night"
             sc.pop("backdrop", None)
-            sc.update(props=[{"type": kind, "pos": 540}], actors=[], crowd="", shot="", weather="", _probe=kind, _ov_low=3)
+            sc.update(props=[{"type": kind, "pos": 540}], actors=[], crowd="", shot="", weather="", _probe=kind, _ov_low=3, _no_cut=True)
             for k in ("float", "aloft", "low", "dark_city"):
                 sc.pop(k, None)
             ov = sc.get("overlay")
@@ -4662,6 +4664,8 @@ def _probe_story(scenes, topic="", main_id=""):
                 sc["overlay"] = {"type": "card", "text": f"{val} {str(ov.get('unit') or ov.get('label') or '').strip()}".strip().upper()}
             elif isinstance(ov, dict) and str(ov.get("type") or "") in ("choice", "checklist", "phone", "note", "bar", "thermo"):
                 sc["overlay"] = None                                  # Liste/Auswahl deckt die Sonde zu
+            elif isinstance(ov, dict) and str(ov.get("type") or "") == "tag" and str(ov.get("text") or "").strip():
+                sc["overlay"] = {"type": "card", "text": str(ov["text"]).strip()}   # ein Schild klebte quer auf der Schüssel: als Karte ganz oben (Video 179)
             last = kind
             continue
         last = ""
@@ -5515,7 +5519,7 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     if actors and all(a_g["kind"] in LONG_KINDS for a_g in actors) and not scene.get("float") and place != "highsky" and \
             (place != "underwater" or all(a_g["kind"] in TINY_KINDS for a_g in actors)):
         cam["ay"] = 1450.0                                                  # nur Tiere am Boden: Die Kamera zoomt um einen Punkt unter der Bodenlinie, die Füße rücken dabei nach oben – der Fixpunkt oben schob Bärtierchen und Löwe sonst in die Untertitel (Video 137)
-    if scene.get("_balloon") and isinstance(scene.get("overlay"), dict):
+    if (scene.get("_balloon") and isinstance(scene.get("overlay"), dict)) or scene.get("_probe"):
         cam["punch"] = None                                                 # kein Sprung ins Bild: der Ballon wüchse sonst unter das Schild
     cam["opener"] = index == 0
     cam["move"] = scene.get("cam_move") or ("push", "pan_r", "pull", "pan_l", "push", "pull")[index % 6]

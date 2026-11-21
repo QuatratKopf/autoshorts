@@ -1273,7 +1273,8 @@ def main():
              "Der Speicher ist kleiner als das Bild eines modernen Smartphones.", "Im April schickten sie den gewagten Befehl ins All.",
              "Damit reist Voyager eins weiter durch die unendliche Weite des Alls.", "Und das, obwohl sie plötzlich nur noch unverständlichen Müll sendete."]
         sp = (0, 2, 7, 8, 9)
-        sb = stage.direct([{"text": t_, "place": "space" if n_ in sp else "lab", "time": "night" if n_ in sp else "day", "props": ["satellite"] if n_ == 0 else [],
+        sb = stage.direct([{"text": t_, "place": "space" if n_ in sp else "lab", "time": "night" if n_ in sp else "day", "props": ["raumsonde"] if n_ == 0 else [],
+                            "backdrop": {"sky": "night", "ground": "grass", "elements": ["hills"]} if n_ == 0 else None,
                             "shot": "event" if n_ in sp else "wide", "actors": [{"id": "du", "action": "shocked"}] if n_ == 1 else [],
                             "overlay": {"type": "choice", "a": "Code retten", "b": "Aufgeben"} if n_ == 9 else None}
                            for n_, t_ in enumerate(T)], [(n_ * 4, n_ * 4 + 4) for n_ in range(len(T))], "Wie NASA-Ingenieure die Raumsonde Voyager 1 retteten", "storys", "")
@@ -1283,6 +1284,10 @@ def main():
             assert places.resolve(stage.backdrop(sb[n_])) == "space" and not sb[n_].get("actors") and not sb[n_].get("crowd"), (n_, sb[n_])
         assert all(places.resolve(stage.backdrop(sb[n_])) == "lab" for n_ in (1, 3, 4, 5, 6)), [sc.get("place") for sc in sb]   # „Speicher“ ist kein Dachboden
         assert not sb[9].get("overlay"), "Auswahl deckt die Sonde zu"
+        assert not isinstance(stage.backdrop(sb[0]), dict) and all(sb[n_].get("_no_cut") for n_ in (0, 7, 8, 9)), "eigener Hintergrund der Text-KI unter der Sonde / Schnitt ins Leere"
+        s3 = stage.direct([{"text": "Im April schickten sie den Befehl ins All zur Raumsonde.", "place": "space", "overlay": {"type": "tag", "text": "BEFEHL GESENDET"}}, {"text": "Dann warteten alle.", "place": "lab", "actors": [{"id": "du"}]}],
+                          [(0, 4), (4, 8)], "Raumsonde Voyager 1", "storys", "")
+        assert (s3[0].get("overlay") or {}).get("type") == "card" and s3[0].get("_ov_low") == 3, s3[0].get("overlay")
         assert sum(1 for sc in sb for a in sc.get("actors") or [] if a.get("action") == "walk") <= 1, "Ingenieurin kommt nicht in jeder Szene neu herein"
         acts_l = [str((sc.get("actors") or [{}])[0].get("action") or "") for sc in sb[3:7]]
         assert all(x != y for x, y in zip(acts_l, acts_l[1:])), acts_l

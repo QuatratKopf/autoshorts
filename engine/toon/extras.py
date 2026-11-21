@@ -1544,7 +1544,7 @@ def _waves(d, ox, oy, t, col, out=True, a0=200, a1=250, n=4, r0=120, r1=900, wid
 
 def p_probe(d, x, t, s=1.0):
     """Die Raumsonde groß im Bild – treibt ruhig durch das All."""
-    _probe(d, x + math.sin(t * 0.5) * 10, 800 + math.sin(t * 0.9) * 14, 1.0, t)
+    _probe(d, x + math.sin(t * 0.5) * 10, 840 + math.sin(t * 0.9) * 14, 1.0, t)
 
 
 def p_probe_far(d, x, t, s=1.0):
@@ -1557,12 +1557,12 @@ def p_probe_far(d, x, t, s=1.0):
         ph = (t * 0.35 + i * 0.21) % 1
         lx, ly = x + 520 - ph * 1100, 420 + i * 190 + ph * 60
         d.line((lx, ly, lx + 90, ly - 5), fill=(220, 230, 255, int(120 * math.sin(math.pi * ph))), width=5)
-    _probe(d, x + 60 + math.sin(t * 0.4) * 30 + t * 10, 700 + math.sin(t * 0.8) * 10 - t * 4, 0.5, t)
+    _probe(d, x + 60 + math.sin(t * 0.4) * 30 + t * 10, 780 + math.sin(t * 0.8) * 10 - t * 4, 0.5, t)
 
 
 def p_probe_signal(d, x, t, s=1.0):
     """Die Sonde funkt: Wellen-Ringe laufen von der Schüssel weg in Richtung Erde."""
-    cx, cy = x + 130, 700 + math.sin(t * 0.9) * 10
+    cx, cy = x + 130, 780 + math.sin(t * 0.9) * 10
     _waves(d, cx, cy - 80, t, (120, 230, 255), True, 100, 190, 4, 200, 1000)
     _probe(d, cx, cy, 0.8, t)
 
@@ -1576,12 +1576,12 @@ def p_probe_uplink(d, x, t, s=1.0):
     d.ellipse((ex - 40, ey - 40, ex + 40, ey + 40), fill=(44, 116, 204), outline=INK, width=5)
     d.polygon([(ex - 22, ey - 18), (ex - 2, ey - 26), (ex + 10, ey - 8), (ex - 4, ey + 8), (ex - 20, ey + 2)], fill=(98, 180, 112))
     d.polygon([(ex + 6, ey + 10), (ex + 24, ey + 4), (ex + 22, ey + 24), (ex + 8, ey + 26)], fill=(98, 180, 112))
-    _probe(d, x + 150, 640 + math.sin(t * 0.9) * 10, 0.7, t)
+    _probe(d, x + 150, 740 + math.sin(t * 0.9) * 10, 0.7, t)
 
 
 def p_probe_glitch(d, x, t, s=1.0):
     """Die Sonde sendet nur noch Datenmüll: zerhackte rote Wellen, dazwischen flackern wirre Datenblöcke."""
-    cx, cy = x + 110 + math.sin(t * 13) * 5, 700 + math.sin(t * 0.9) * 10
+    cx, cy = x + 110 + math.sin(t * 13) * 5, 780 + math.sin(t * 0.9) * 10
     _waves(d, cx, cy - 80, t, (255, 96, 80), True, 95, 195, 4, 200, 1000, 14, True)
     rnd = random.Random(int(t * 6))
     for i in range(9):                                                                               # Datenblöcke: mal da, mal weg, nie lesbar
