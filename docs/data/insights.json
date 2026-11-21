@@ -1,5 +1,5 @@
 {
- "updated": 1795217460.5110416,
+ "updated": 1795219289.7324271,
  "enough": true,
  "counted": 29,
  "total": 32,
@@ -56,7 +56,7 @@
    "n": 10,
    "avg_views": 1724,
    "avg_likes": 43.7,
-   "like_rate": 2.54,
+   "like_rate": 2.53,
    "avg_score": 2382
   },
   {
@@ -94,8 +94,8 @@
   "vier"
  ],
  "words_bad": [
-  "erkennst",
   "lied",
+  "erkennst",
   "remix",
   "bekanntes"
  ],
@@ -124,11 +124,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 2057,
+   "views": 2058,
    "likes": 68,
    "comments": 0,
    "shares": 0,
-   "score": 3077
+   "score": 3078
   },
   {
    "id": 139,
