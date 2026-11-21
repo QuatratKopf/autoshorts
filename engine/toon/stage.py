@@ -963,6 +963,8 @@ def find_figure(text):
         if v is None or (w.lower().strip(".,") in ("ein", "eine", "einen", "einem", "einer") and
                          (i + 1 >= len(ws) or ws[i + 1].lower().strip(".,;:!?") not in _SCALE)):
             continue
+        if i >= 2 and ws[i - 1].lower().strip(".,") == "komma" and _number(ws[i - 2]) is not None and 0 <= v < 10 and v == int(v):
+            v = _number(ws[i - 2]) + v / 10               # „zweiundzwanzig Komma fünf Stunden“ sind 22,5 – nicht „5 STUNDEN“ (Video 178)
         j, unit = i + 1, []
         if j < len(ws) and ws[j].lower().strip(".,;:!?") in _SCALE:
             unit.append(_SCALE[ws[j].lower().strip(".,;:!?")])
@@ -1247,6 +1249,7 @@ def direct(scenes, times, topic="", style="", look=""):
     fig_prev, inserts, counters = False, 0, 0
     topic_things = [k for pat, k in _lib_props() + TEXT_PROPS if _re0.search(pat, str(topic or "").lower()) and extras.prop_fit(k)][:2]
     topic_any = [k for pat, k in _lib_props() + TEXT_PROPS if _re0.search(pat, str(topic or "").lower())][:2]   # auch Himmel/Natur
+    _CTX["mem"] = bool(_re0.search(MEM_TOPIC_RE, (str(topic or "") + " " + " ".join(str(x.get("text") or "") for x in scenes if isinstance(x, dict))).lower()))
     topic_place = _hint(topic)
     topic_place = topic_place if isinstance(topic_place, str) and topic_place in TOPIC_PLACES else None
     stale, topic_ins, gfx = 0, 0, 0
@@ -2115,6 +2118,14 @@ def direct(scenes, times, topic="", style="", look=""):
     for sc in scenes:                                     # Zustands-Zeile oben rechts mit einer Zahl, die niemand sagt („FALL: 15 M/S“): erfunden, entfällt
         if isinstance(sc, dict) and isinstance(sc.get("status"), str) and unspoken_figures({"text": sc["status"]}, str(sc.get("text") or "")):
             sc["status"] = ""
+    for sc in scenes:                                     # Ecken-Zeile mit einer Jahreszahl, die der Satz nicht nennt („1977 · START INS ALL“ über dem Fehler von 2023): entfällt
+        if isinstance(sc, dict) and isinstance(sc.get("hud"), str):
+            yrs_h = _re0.findall(r"\b(?:1[5-9]\d\d|20\d\d)\b", sc["hud"])
+            if yrs_h:
+                from ..writer import year_words
+                low_h = str(sc.get("text") or "").lower().replace("-", "").replace(" ", "")
+                if not any(y_h in low_h or year_words(int(y_h)).replace(" ", "") in low_h for y_h in yrs_h):
+                    sc["hud"] = ""
     _balloon_story(scenes, topic)
     _probe_story(scenes, topic, main_id)
     _family(scenes, main_id)
@@ -2404,6 +2415,13 @@ def _speech(scenes, style=""):
             prev_sc = next((q for q in reversed(scenes[:scenes.index(sc)]) if isinstance(q, dict) and str(q.get("shot") or "") != "graphic"), None)
             if prev_sc is not None:                       # „Speicher dir das“ meint Merken, nicht den Dachboden (Video 175)
                 sc["place"], sc["backdrop"], sc["time"] = prev_sc.get("place"), prev_sc.get("backdrop"), prev_sc.get("time") or sc.get("time")
+        if "speicher" in low and "dachboden" not in low and (_CTX["mem"] or re.search(COMPUTER_MEM_RE, low)) \
+                and not isinstance(backdrop(sc), dict) and places.resolve(backdrop(sc)) == "attic":
+            prev_sc = next((q for q in reversed(scenes[:scenes.index(sc)]) if isinstance(q, dict) and str(q.get("shot") or "") != "graphic"
+                            and not isinstance(backdrop(q), dict) and places.resolve(backdrop(q)) in ROOMS and places.resolve(backdrop(q)) != "attic"), None)
+            # „freie Stellen im Speicher“ in einem Video über Computerspeicher: der Raum von eben, nicht der Dachboden (Video 178)
+            sc["place"], sc["backdrop"] = (prev_sc.get("place"), prev_sc.get("backdrop")) if prev_sc is not None else ("office", None)
+            sc["time"] = (prev_sc.get("time") if prev_sc is not None else "") or sc.get("time")
         if not speech:
             continue
         if sc.get("crowd") and not re.search(PEOPLE_RE + r"|publikum|zuschauer|\bmenge\b", low):
@@ -5109,7 +5127,9 @@ HINTS = [
     (r"küche|kochen|kühlschrank", "kitchen"),
 ]
 GENERIC = ("street", "park", "plain", "livingroom")
-COMPUTER_MEM_RE = (r"hauptspeicher|arbeitsspeicher|datenspeicher|speicherchip|speicherplatz|speicherkarte|\bchips?\b|computer|\bcode\b|programm|software|\bdaten\b|"
+_CTX = {"mem": False}     # setzt direct(): Das ganze Video handelt von Computerspeicher – „freie Stellen im Speicher“ ist dann nie der Dachboden (Video 178)
+MEM_TOPIC_RE = r"speicherchip|hauptspeicher|arbeitsspeicher|bordspeicher|datenspeicher|bordcomputer|programmcode|kilobyte|megabyte|gigabyte|raumsonde"
+COMPUTER_MEM_RE = (r"hauptspeicher|bordspeicher|bordcomputer|arbeitsspeicher|datenspeicher|speicherchip|speicherplatz|speicherkarte|\bchips?\b|computer|\bcode\b|programm|software|\bdaten\b|"
                    r"\bsonde\b|raumsonde|rechner|megabyte|gigabyte|kilobyte|\bbytes?\b|festplatte|handy|smartphone|\bbits?\b|prozessor|\bserver")
 JUNK_TALK_RE = (r"datenmüll|müll (?:send|funk|red|erzähl|laber|schreib|von sich)|(?:send\w*|funk\w*|red\w*|erzähl\w*|laber\w*|schreib\w*) (?:\w+ ){0,4}müll|"
                 r"(?:unverständlich\w*|wirr\w*|digital\w*|sinnlos\w*) müll|müll (?:aus dem (?:all|weltall|weltraum))")
@@ -5277,7 +5297,7 @@ def _hint(text):
     merged, first = None, None
     for pat, target in HINTS:
         if _re.search(pat, t):
-            if target == "attic" and not _re.search(r"dachboden", t) and _re.search(COMPUTER_MEM_RE, t):
+            if target == "attic" and not _re.search(r"dachboden", t) and (_CTX["mem"] or _re.search(COMPUTER_MEM_RE, t)):
                 continue                                  # „im Speicher der Sonde“, „Hauptspeicher“: Computerspeicher, kein Dachboden (Video 177)
             if target == "landfill" and not _re.search(r"müllhalde|müllberg|deponie", t) and _re.search(JUNK_TALK_RE, t):
                 continue                                  # „sendet nur noch Müll“, „Datenmüll“: Redensart, keine Müllkippe (Video 177)

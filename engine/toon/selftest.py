@@ -1286,6 +1286,15 @@ def main():
         assert sum(1 for sc in sb for a in sc.get("actors") or [] if a.get("action") == "walk") <= 1, "Ingenieurin kommt nicht in jeder Szene neu herein"
         acts_l = [str((sc.get("actors") or [{}])[0].get("action") or "") for sc in sb[3:7]]
         assert all(x != y for x, y in zip(acts_l, acts_l[1:])), acts_l
+        sb2 = stage.direct([{"text": t_, "place": "lab", "hud": "1977 · START INS ALL" if n_ == 0 else "NOV 2023 · FEHLER" if n_ == 1 else "", "actors": [{"id": "du", "action": "talk"}]} for n_, t_ in enumerate(
+            ["Die Raumsonde sendet nur noch Datensalat.", "Im November zweitausenddreiundzwanzig begann der Fehler.", "Ein einziges Funksignal braucht für einen Weg zweiundzwanzig Komma fünf Stunden.",
+             "Sie verteilten diese Teile clever auf andere freie Stellen im Speicher."])], [(n_ * 4, n_ * 4 + 4) for n_ in range(4)], "Raumsonde Voyager 1", "storys", "")
+        assert not sb2[0].get("hud") and sb2[1].get("hud") == "NOV 2023 · FEHLER", [sc.get("hud") for sc in sb2]      # Jahreszahl, die der Satz nicht nennt
+        assert places.resolve(stage.backdrop(sb2[3])) != "attic", sb2[3].get("place")                                 # „im Speicher“ ohne Computer-Wort im selben Satz
+        assert stage.find_figure("Ein Funksignal braucht zweiundzwanzig Komma fünf Stunden.")["value"] == 22.5
+        ov2 = sb2[2].get("overlay") or sb2[2].get("graphic") or {}
+        assert "5 STUNDEN" != f"{ov2.get('value')} {ov2.get('unit') or ov2.get('label') or ''}".strip() and str(ov2.get("value")) not in ("5", "5.0"), ov2
+        stage._CTX["mem"] = False
         assert stage._hint("Auf dem Speicher steht eine alte Truhe.") == "attic" and stage._hint("Der Müll stapelt sich auf der Straße.") == "landfill"
         assert stage._hint("Die Sonde sendet nur noch Müll.") != "landfill" and stage._hint("Drei Prozent des Hauptspeichers waren kaputt.") != "attic"
         for sc in sb:
