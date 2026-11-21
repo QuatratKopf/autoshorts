@@ -1,5 +1,5 @@
 {
- "updated": 1795250033.2207649,
+ "updated": 1795251831.4969418,
  "enough": true,
  "counted": 30,
  "total": 32,
@@ -94,10 +94,10 @@
   "vier"
  ],
  "words_bad": [
-  "remix",
-  "erkennst",
   "bekanntes",
-  "lied"
+  "erkennst",
+  "lied",
+  "remix"
  ],
  "top": [
   {
