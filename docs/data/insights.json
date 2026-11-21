@@ -1,7 +1,7 @@
 {
- "updated": 1795242767.8531263,
+ "updated": 1795244568.1766784,
  "enough": true,
- "counted": 29,
+ "counted": 30,
  "total": 32,
  "needed": 6,
  "categories": [
@@ -62,21 +62,21 @@
   {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
-   "n": 2,
-   "avg_views": 1774,
+   "n": 3,
+   "avg_views": 1754,
    "avg_likes": 11.0,
-   "like_rate": 0.62,
-   "avg_score": 1984
+   "like_rate": 0.63,
+   "avg_score": 1959
   }
  ],
  "weights": {
   "fakten": 1.0,
   "grusel": 1.2,
-  "storys": 1.01,
-  "mysterien": 1.0,
+  "storys": 1.02,
+  "mysterien": 1.01,
   "tiere": 1.03,
-  "whatif": 0.99,
-  "comedy": 1.09,
+  "whatif": 1.0,
+  "comedy": 1.1,
   "musik": 0.82,
   "vergleich": 1.2,
   "motivation": 1.2,
@@ -85,8 +85,8 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 1944 Aufrufe, 2.3 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1774 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2537 zu 706 Punkte).",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1754 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2514 zu 706 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -94,10 +94,10 @@
   "vier"
  ],
  "words_bad": [
-  "bekanntes",
+  "erkennst",
   "remix",
   "lied",
-  "erkennst"
+  "bekanntes"
  ],
  "top": [
   {
