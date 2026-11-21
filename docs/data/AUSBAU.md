@@ -137,6 +137,13 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   Eine einzelne Zustands-Angabe oben rechts gilt nur zwei Sätze weiter; nennt sie eine Zahl, die niemand sagt, entfällt sie.
   Eine Uhrzeit in der Ecken-Zeile oder über einer Zahl-Grafik, die der Satz nicht nennt, entfällt (`stage.direct`, Anfang); eine Orts-Angabe je Szene
   („WALD“) gilt nur zwei Sätze weiter und ist keine Überschrift für eine Zahl. Auswahl-Einblendung (`choice`) nur an einer Frage oder einem „oder“.
+- Motivationsrede (Rubrik `motivation`, `caption_style: word` – Prüfung 21.11.2026, Videos 173–175): Das große Wort steht ÜBER dem Kopf
+  (`render.build_ass`, Stil `Big`, Rand 1220) – nie auf Gesicht oder Hals; deshalb zeichnet `stage._speech` dort keine Zeichen über dem Kopf (`emote: none`).
+  `_speech` sorgt außerdem dafür, dass in jedem Bild die Hauptfigur steht (keine Menschenmenge, keine Panik ohne Anlass, kein Bild nur mit einem Ding).
+  Für alle Videos: Wer im Bett am Handy scrollt, schläft nicht; eine Wanduhr steht nur bei Uhr/Zeit im Satz; „Handy bleibt im anderen Zimmer“ → kein Handy
+  in der Hand; „Speicher dir das“ ist kein Dachboden. `stage._jogging`: „Lauf eine Runde“, „du rennst“ → die Figur läuft die ganze Szene quer durchs helle Bild.
+  `_carry_thing`: eine Uhrzeit ist keine Menge, und „diese Meile/Formel“ nennt etwas Neues (`_carry_other`) – der Wecker wandert nicht in die nächsten Szenen.
+  Leerer öffentlicher Raum in einem Du-Satz zeigt die Hauptfigur statt jubelnder Fremder. Selbsttest: `_speech173`.
 
 ## Was zu tun ist
 1. Offene Wünsche (ohne `"done": true`) und `"auto": true`-Einträge durchgehen, höchstens 8 pro Sitzung, häufigste zuerst.

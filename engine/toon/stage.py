@@ -2390,6 +2390,17 @@ def _speech(scenes, style=""):
                 a.update(action="idle", hold="phone", emote="")       # liegt wach am Handy: kein „zzz“ unter der Decke
         if isinstance(sc.get("props"), list) and not re.search(r"\buhr|wecker|\bzeit|spät|stunde|minute|sekunde|tick|pünktlich|countdown|frist", low):
             sc["props"] = [q for q in sc["props"] if str((q.get("type") if isinstance(q, dict) else q) or "").lower() not in ("clock", "uhr", "wanduhr")]
+        if re.search(r"handy|smartphone|telefon", low) and re.search(r"bleibt\b.{0,40}\b(zimmer|draußen|liegen|weg|aus)\b|\bim (?:anderen|nächsten) zimmer|nebenzimmer|\bleg\w*\b.{0,30}\bweg\b|ohne (?:dein |das )?(?:handy|smartphone)|aus der hand", low):
+            for a in acts:                                # „Das Handy bleibt im anderen Zimmer liegen“: dann hält es niemand in der Hand (Video 175)
+                if str(a.get("hold") or "").lower() in ("phone", "handy", "smartphone"):
+                    a["hold"] = ""
+            if isinstance(sc.get("props"), list):
+                sc["props"] = [q for q in sc["props"] if str((q.get("type") if isinstance(q, dict) else q) or "").lower() not in ("phone", "handy", "smartphone")]
+        if re.search(r"\bspeicher\w*\s+(?:dir|es|das|dies\w*|ab)\b|abspeicher|gespeichert|\bspeichern\b", low) and not re.search(r"dachboden|auf dem speicher|im speicher|auf den speicher", low) \
+                and not isinstance(backdrop(sc), dict) and places.resolve(backdrop(sc)) == "attic":
+            prev_sc = next((q for q in reversed(scenes[:scenes.index(sc)]) if isinstance(q, dict) and str(q.get("shot") or "") != "graphic"), None)
+            if prev_sc is not None:                       # „Speicher dir das“ meint Merken, nicht den Dachboden (Video 175)
+                sc["place"], sc["backdrop"], sc["time"] = prev_sc.get("place"), prev_sc.get("backdrop"), prev_sc.get("time") or sc.get("time")
         if not speech:
             continue
         if sc.get("crowd") and not re.search(PEOPLE_RE + r"|publikum|zuschauer|\bmenge\b", low):

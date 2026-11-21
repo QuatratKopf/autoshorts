@@ -1555,6 +1555,13 @@ def main():
         assert [a.get("id") for a in sc3[3]["actors"]] == ["du"] and sc3[3].get("shot") != "event", sc3[3]
         assert all(a.get("emote") == "none" for x in sc3 for a in x["actors"]), sc3
         assert not stage._prepare(sc3[0], {"du": {}})[3][0]["emote"] or stage._prepare(sc3[0], {"du": {}})[3][0]["emote"] == "none"
+        sc4 = stage.direct([{"text": "Lerne zwanzig Minuten am Schreibtisch.", "place": "office", "time": "day", "actors": [{"id": "du", "action": "sit"}]},
+                            {"text": "Das Handy bleibt dabei konsequent im anderen Zimmer liegen.", "place": "livingroom", "time": "day", "props": ["phone"], "actors": [{"id": "du", "action": "sit", "hold": "phone"}]},
+                            {"text": "Du gehst los.", "place": "mountain", "time": "day", "actors": [{"id": "du", "action": "walk"}]},
+                            {"text": "Speicher dir das für die harten Tage.", "place": "attic", "time": "day", "actors": [{"id": "du", "action": "think"}]}],
+                           [(0, 3), (3, 6), (6, 9), (9, 12)], "Niemand kommt, um dich zu retten", "motivation")
+        assert not sc4[1]["actors"][0].get("hold") and not [q for q in sc4[1].get("props") or [] if "phone" in str(q)], sc4[1]
+        assert sc4[3]["place"] == "mountain", sc4[3]["place"]
         sc2 = stage.direct([{"text": "Du steckst neunundneunzig Wassermelonen ein.", "place": "kitchen", "actors": [{"id": "du"}], "props": ["watermelon"]},
                             {"text": "Aber in echt wiegen diese Früchte zusammen fast eine Tonne.", "place": "kitchen", "actors": [{"id": "du"}]}], [(0, 4), (4, 8)], "x", "whatif")
         assert stage._carry_other("Lauf diese eine Meile.", "lib_wecker") and not stage._carry_other("Aber diese Früchte wiegen eine Tonne.", "lib_wecker")
