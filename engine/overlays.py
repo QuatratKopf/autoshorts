@@ -330,7 +330,7 @@ def counter(label, value, unit, shown=None, sub=""):
     cur = v if shown is None else shown
     fl, fn, fs = font(34, "Bold"), _cfont(150), font(40, "Bold")
     one = {"TAGE": "TAG", "STUNDEN": "STUNDE", "MINUTEN": "MINUTE", "SEKUNDEN": "SEKUNDE", "JAHRE": "JAHR", "WOCHEN": "WOCHE", "MONATE": "MONAT"}
-    unit_now = one.get(unit.upper(), unit) if unit and abs(cur - 1) < 1e-9 and decimals == 0 else unit   # „1 TAG“, nicht „1 TAGE“ (Video 177)
+    unit_now = one.get(unit.upper(), unit) if unit and _num(cur, decimals) == "1" else unit   # „1 TAG“, nicht „1 TAGE“ – auch während die Zahl hochläuft (Video 177/180)
     txt = (_num(cur, decimals) + (" " + unit_now.upper() if unit_now else "")).strip()
     w, h = 980, 330
     im = Image.new("RGBA", (w, h), (0, 0, 0, 0))

@@ -105,7 +105,11 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   Nebel, kein Mondboden) – nie zweimal hintereinander dieselbe; Einblendungen stehen ganz oben. Im Kontrollraum kommt die Figur nur einmal zur Tür
   herein, danach arbeitet sie am Rechner. `SPACE_RE` kennt Raumsonde/Voyager/„des Alls“; „Speicher“ neben Computer-Wörtern ist kein Dachboden
   (`COMPUTER_MEM_RE`), „sendet nur noch Müll“ keine Müllkippe (`JUNK_TALK_RE`). Eine Ecken-Zeile mit Entfernung („… KM VON DER ERDE“) steht nur
-  über Szenen im All (`render.build_ass`); der Zähler schreibt „1 TAG“ statt „1 TAGE“. Selbsttest: `_probe`.
+  über Szenen im All (`render.build_ass`); der Zähler schreibt „1 TAG“ statt „1 TAGE“. Sonden-Szenen spielen auch dann im tiefen All, wenn das
+  Drehbuch einen eigenen Hintergrund mitgibt (Wiese mit Mond); Schilder werden zur Karte ganz oben (`_ov_low` 3, die Ecken-Zeile entfällt dort),
+  kein Schnitt und kein Kamerasprung (`_no_cut`). „zweiundzwanzig Komma fünf Stunden“ ergibt 22,5 (`find_figure`); handelt das Video von
+  Computerspeicher (`MEM_TOPIC_RE`, `_CTX`), ist „im Speicher“ nie der Dachboden; eine Ecken-Zeile mit einer Jahreszahl, die der Satz nicht nennt,
+  und Regie-Wörter als Ecken-Zeile („REHOOK“, „FINTE“) entfallen. Selbsttest: `_probe`.
 - Heißluftballon (Ballonflucht, Ballonfahrt – `stage._balloon_story`, greift bei `HOTAIR_RE` in Thema oder Sätzen; ein „Luftballon“ zählt nicht): Requisiten
   `balloon` (fliegt, acht Köpfe in der Plattform-Gondel, Brennerflamme), `balloon_dark` (Gas aus), `balloon_out` (sackt schräg durch), `balloon_fill`
   (richtet sich am Boden mit Flamme auf), `balloon_ground` (Stoffberg mit Gondel), `balloon_down` (Hülle im Gebüsch), `gondola` (Gondel ganz nah),

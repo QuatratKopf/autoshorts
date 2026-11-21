@@ -1299,6 +1299,8 @@ def main():
         assert stage.find_figure("Ein Funksignal braucht zweiundzwanzig Komma fünf Stunden.")["value"] == 22.5
         ov2 = sb2[2].get("overlay") or sb2[2].get("graphic") or {}
         assert "5 STUNDEN" != f"{ov2.get('value')} {ov2.get('unit') or ov2.get('label') or ''}".strip() and str(ov2.get("value")) not in ("5", "5.0"), ov2
+        s4 = stage.direct([{"text": "Wie findet man einen Fehler in dieser Entfernung?", "place": "lab", "hud": "REHOOK", "status": "FINTE", "actors": [{"id": "du"}]}], [(0, 4)], "Raumsonde Voyager 1", "storys", "")
+        assert not s4[0].get("hud") and not s4[0].get("status"), (s4[0].get("hud"), s4[0].get("status"))            # Regie-Wort als Ecken-Zeile
         stage._CTX["mem"] = False
         assert stage._hint("Auf dem Speicher steht eine alte Truhe.") == "attic" and stage._hint("Der Müll stapelt sich auf der Straße.") == "landfill"
         assert stage._hint("Die Sonde sendet nur noch Müll.") != "landfill" and stage._hint("Drei Prozent des Hauptspeichers waren kaputt.") != "attic"
@@ -1308,6 +1310,15 @@ def main():
         assert max(im_d.getpixel((540, 1700))) < 110, "tiefer Weltraum: kein heller Mondboden unter der Sonde"
         from .. import overlays
         assert overlays.counter("", 2, "TAGE", 1.0) is not None
+        assert overlays.counter("", 2, "TAGE", 1.2).tobytes() != overlays.counter("", 2, "TAGE", 2.0).tobytes()
+        import tempfile, pathlib
+        from .. import render
+        with tempfile.TemporaryDirectory() as td_:
+            ass_ = pathlib.Path(td_) / "t.ass"
+            render.build_ass([("Sonde", 0.2, 0.8), ("Labor", 4.2, 4.8)], [{"text": "Sonde", "place": "space", "overlay": {"type": "card", "text": "DATENSALAT"}, "_ov_low": 3}, {"text": "Labor", "place": "space"}],
+                             [(0, 4), (4, 8)], ass_, hud="24 MRD. KM ENTFERNT")
+            hud_l = [ln for ln in ass_.read_text(encoding="utf-8").splitlines() if ",Hud," in ln]
+            assert len(hud_l) == 1 and hud_l[0].startswith("Dialogue: 3,0:00:04"), hud_l                    # Ecken-Zeile nicht unter der Karte ganz oben
     check("Raumsonde: Sonde im tiefen All, Speicher/Müll als Redensart", _probe)
 
     def _balloon():                                              # Ballonflucht: Stoffberg und Gondel am Boden, Ballon mit acht Köpfen am Himmel, Suchscheinwerfer, Landung im Gebüsch – keine Figur „schwebt“ auf der Wiese

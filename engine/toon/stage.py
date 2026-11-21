@@ -1222,6 +1222,9 @@ def direct(scenes, times, topic="", style="", look=""):
         if isinstance(sc.get("backdrop"), dict) and str(sc.get("place") or "").strip() and places.resolve(sc.get("place")) in ROOMS \
                 and not _re0.search(OUTSIDE_RE, low_c0):
             sc["backdrop"] = None                         # Ort „Zimmer“, dazu ein Landschafts-Baukasten (Bauernhof mit Feldern), von dem kein Satz spricht: der Raum gilt (Video 123 begann auf einem Bauernhof bei Nacht)
+        for key_m in ("hud", "status"):                   # Regie-Wort als Ecken-Zeile („REHOOK“, „FINTE“ im Bildplan von Video 179): entfällt
+            if isinstance(sc.get(key_m), str) and _re0.search(META_LABEL_RE, sc[key_m].upper()) and not _re0.search(META_LABEL_RE, low_c0.upper()):
+                sc[key_m] = ""
         for key_m in ("overlay", "graphic"):              # Regie-Wort der Drehbuch-Anleitung als Einblendung („CLIFFHANGER“, „REHOOK“): hat im Bild nichts zu suchen
             box_m = sc.get(key_m)
             if isinstance(box_m, dict):

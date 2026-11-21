@@ -219,6 +219,8 @@ def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, 
                 cur_hud = hud                  # – aber nicht bis zum Schluss: „WALD“ steht sonst noch über dem Dorf am Ende
             if str(sc.get("shot") or "") == "graphic":
                 continue                       # über einer Grafik (Karten-Titel, Zahl mit Überschrift) stünde die Zeile im Weg
+            if sc.get("_ov_low") == 3 and isinstance(sc.get("overlay"), dict):
+                continue                       # die Einblendung steht hier ganz oben (über Sonde, Ballon, Tauchboot) – die Ecken-Zeile läge darunter (Video 180)
             lab = str(cur_hud or "").replace("{", "").replace("}", "").upper()
             if re.search(r"\bKM\b|KILOMETER|VON DER ERDE|ENTFERNT|LICHTJAHR", lab) and str(sc.get("place") or "") not in ("space", "moon", "highsky", "underwater"):
                 continue                       # „24 MRD. KM VON DER ERDE“ gilt für die Sonde im All – nicht für das Labor auf der Erde (Video 177)
