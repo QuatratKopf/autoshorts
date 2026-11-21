@@ -1,0 +1,427 @@
+{
+ "title": "Niemand kommt, um dich zu retten",
+ "scenes": [
+  {
+   "text": "Du bist nicht faul. Du bist einfach nur abgelenkt.",
+   "see": "Du sitzt am Schreibtisch in deinem Zimmer und starrt abgelenkt auf den Tisch.",
+   "place": "bedroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Jeden Tagscrollst du stundenlang durch fremde Leben.",
+   "see": "Du scrollst stundenlang auf dem Smartphone.",
+   "place": "bedroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Es ist drei Uhr nachts und du wunderst dich über die Zeit.",
+   "see": "Es ist tiefste Nacht im Schlafzimmer und du blickst auf die Uhr.",
+   "place": "bedroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Du wartest auf den perfekten Moment, der niemals kommt.",
+   "see": "Du wartest ungeduldig am Fenster.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Du willst starten, aber die Angst vor dem ersten Schritt stoppt dich.",
+   "see": "Du willst den ersten Schritt tun, zuckst aber zurück.",
+   "place": "office",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "freeze",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Hier ist die harte Wahrheit, die niemand dir ins Gesicht sagt.",
+   "see": "Du stehst ernst im Raum.",
+   "place": "office",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "angry",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense"
+  },
+  {
+   "text": "Niemand kommt, um dich zu retten.",
+   "see": "Du blickst entschlossen und allein in den leeren Raum.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "angry",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Kein Held springt durch dein Fenster und löst deine Probleme.",
+   "see": "Ein einsames Fenster zeigt nach draußen, niemand kommt.",
+   "place": "bedroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "sad",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "sad"
+  },
+  {
+   "text": "Kein Mentor schenkt dir den großen Durchbruch auf dem silbernen Tablett.",
+   "see": "Du stehst vor einem leeren Tisch.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "table"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Und weißt du was? Das ist das Beste, was dir je passieren konnte.",
+   "see": "Du lächelst leicht und ballst die Faust.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Weil niemand kommt, hast du ab heute die vollständige Kontrolle.",
+   "see": "Du stehst aufrecht und breitest die Arme aus.",
+   "place": "office",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Wer hält dich eigentlich noch auf, wenn es keine Ausreden mehr gibt?",
+   "see": "Du schaust herausfordernd in die Kamera.",
+   "place": "street",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "angry",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Schlag den Wecker morgen früh um sechs Uhr gnadenlos aus dem Leben.",
+   "see": "Der Wecker klingelt auf dem Nachttisch.",
+   "place": "bedroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "lib_wecker"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "angry",
+     "emote": "!",
+     "kind": "",
+     "hold": "clock",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Lauf diese eine Meile, wenn deine Beine brennen und du eigentlich aufgeben willst.",
+   "see": "Du rennst entschlossen im Park.",
+   "place": "park",
+   "backdrop": {
+    "sky": "day",
+    "ground": "road",
+    "elements": [
+     "street"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_wecker",
+     "pos": 600
+    },
+    {
+     "type": "lib_wecker",
+     "pos": 770
+    },
+    {
+     "type": "lib_wecker",
+     "pos": 940
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "run",
+     "emotion": "angry",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Lern diese Formel, bis sie sitzt, auch wenn du jede Sekunde verfluchst.",
+   "see": "Du sitzt am Tisch und lernst konzentriert mit einem Buch.",
+   "place": "classroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_wecker",
+     "pos": 600
+    },
+    {
+     "type": "lib_wecker",
+     "pos": 770
+    },
+    {
+     "type": "lib_wecker",
+     "pos": 940
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "lehrbuch",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Nicht morgen. Nicht nächste Woche. Fang genau jetzt in dieser Sekunde an.",
+   "see": "Du springst entschlossen auf und ballst die Hand zur Faust.",
+   "place": "office",
+   "time": "day",
+   "mood": "happy",
+   "crowd": "cheer"
+  },
+  {
+   "text": "Dein Erfolg gehört am Ende nur dir ganz allein.",
+   "see": "Du stehst auf einem Hügel und blickst in den Sonnenaufgang.",
+   "place": "mountain",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Du bist nicht faul.",
+   "see": "Du stehst ruhig im Raum und schüttelst den Kopf.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "idle",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  }
+ ]
+}

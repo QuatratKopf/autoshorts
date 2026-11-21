@@ -6529,5 +6529,49 @@
   "look": "cartoon",
   "mp4": true,
   "error": "Bei der Prüfung verworfen: Prüfung: zweiter Neubau schwächer als 171 – Nina im Tattoo-Studio beim Tätowierer-Satz, „dreimal so viel“ ohne die Dauer der Modellage"
+ },
+ {
+  "id": 173,
+  "category": "motivation",
+  "topic": "Niemand kommt, um dich zu retten – und das ist gut so",
+  "status": "review",
+  "created": 1795255799.58542,
+  "title": "Niemand kommt, um dich zu retten",
+  "description": "Niemand kommt, um dich zu retten\nWarum du ab heute alles allein machen musst und warum das deine einzige Rettung ist.\nWartest du noch auf den perfekten Moment?",
+  "hashtags": [
+   "#shorts",
+   "#motivation",
+   "#mindset",
+   "#erfolg",
+   "#disziplin",
+   "#foryou",
+   "#viral"
+  ],
+  "tags": [
+   "motivation",
+   "mindset",
+   "Erfolg",
+   "Disziplin",
+   "Fokus",
+   "Produktivität",
+   "Ziele",
+   "Durchziehen",
+   "Selbstbewusstsein",
+   "Machen"
+  ],
+  "thumb_text": "NIEMAND KOMMT",
+  "missing": null,
+  "cover_ms": 66437,
+  "duration": 66.3,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-21 13:00",
+  "review_at": 1795256180.8598497
  }
 ]
