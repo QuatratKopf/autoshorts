@@ -1,24 +1,24 @@
 {
- "updated": 1795261129.9889164,
+ "updated": 1795262931.8688521,
  "enough": true,
- "counted": 30,
- "total": 32,
+ "counted": 31,
+ "total": 33,
  "needed": 6,
  "categories": [
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
-   "n": 4,
-   "avg_views": 1944,
-   "avg_likes": 44.8,
-   "like_rate": 2.3,
-   "avg_score": 2633
+   "n": 5,
+   "avg_views": 2060,
+   "avg_likes": 43.4,
+   "like_rate": 2.11,
+   "avg_score": 2731
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 3,
-   "avg_views": 1798,
+   "avg_views": 1797,
    "avg_likes": 43.3,
    "like_rate": 2.41,
    "avg_score": 2481
@@ -36,10 +36,10 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
-   "avg_views": 1799,
+   "avg_views": 1800,
    "avg_likes": 39.0,
    "like_rate": 2.17,
-   "avg_score": 2414
+   "avg_score": 2415
   },
   {
    "slug": "fakten",
@@ -54,7 +54,7 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 10,
-   "avg_views": 1726,
+   "avg_views": 1727,
    "avg_likes": 43.7,
    "like_rate": 2.53,
    "avg_score": 2385
@@ -70,23 +70,23 @@
   }
  ],
  "weights": {
-  "fakten": 1.0,
+  "fakten": 0.99,
   "grusel": 1.2,
-  "storys": 1.02,
-  "mysterien": 1.01,
-  "tiere": 1.04,
-  "whatif": 1.0,
-  "comedy": 1.1,
-  "musik": 0.82,
+  "storys": 1.01,
+  "mysterien": 1.0,
+  "tiere": 1.03,
+  "whatif": 0.99,
+  "comedy": 1.13,
+  "musik": 0.81,
   "vergleich": 1.2,
   "motivation": 1.2,
   "liebe": 1.2,
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 1944 Aufrufe, 2.3 % Likes).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2060 Aufrufe, 2.11 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1754 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2516 zu 706 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2537 zu 706 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -94,10 +94,10 @@
   "vier"
  ],
  "words_bad": [
-  "lied",
-  "remix",
   "erkennst",
-  "bekanntes"
+  "remix",
+  "bekanntes",
+  "lied"
  ],
  "top": [
   {
@@ -121,6 +121,16 @@
    "score": 3195
   },
   {
+   "id": 168,
+   "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
+   "category": "comedy",
+   "views": 2522,
+   "likes": 38,
+   "comments": 1,
+   "shares": 0,
+   "score": 3122
+  },
+  {
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
@@ -139,16 +149,6 @@
    "comments": 0,
    "shares": 1,
    "score": 3045
-  },
-  {
-   "id": 120,
-   "title": "Warum du bei Musik Gänsehaut bekommst",
-   "category": "fakten",
-   "views": 2340,
-   "likes": 45,
-   "comments": 0,
-   "shares": 0,
-   "score": 3015
   }
  ],
  "flop": [
