@@ -1,5 +1,5 @@
 {
- "updated": 1795264732.125408,
+ "updated": 1795266530.2362773,
  "enough": true,
  "counted": 31,
  "total": 33,
@@ -18,7 +18,7 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 3,
-   "avg_views": 1797,
+   "avg_views": 1798,
    "avg_likes": 43.3,
    "like_rate": 2.41,
    "avg_score": 2481
@@ -36,10 +36,10 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
-   "avg_views": 1800,
+   "avg_views": 1804,
    "avg_likes": 39.0,
-   "like_rate": 2.17,
-   "avg_score": 2415
+   "like_rate": 2.16,
+   "avg_score": 2418
   },
   {
    "slug": "fakten",
@@ -63,10 +63,10 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 3,
-   "avg_views": 1757,
+   "avg_views": 1755,
    "avg_likes": 11.3,
-   "like_rate": 0.64,
-   "avg_score": 1967
+   "like_rate": 0.65,
+   "avg_score": 1965
   }
  ],
  "weights": {
@@ -85,7 +85,7 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2060 Aufrufe, 2.12 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1757 Aufrufe) – kommt seltener dran.",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1755 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2538 zu 706 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
@@ -94,9 +94,9 @@
   "vier"
  ],
  "words_bad": [
-  "bekanntes",
   "lied",
   "erkennst",
+  "bekanntes",
   "remix"
  ],
  "top": [
