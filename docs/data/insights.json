@@ -1,5 +1,5 @@
 {
- "updated": 1795233722.047064,
+ "updated": 1795235507.874373,
  "enough": true,
  "counted": 29,
  "total": 32,
@@ -21,7 +21,7 @@
    "avg_views": 1795,
    "avg_likes": 43.0,
    "like_rate": 2.4,
-   "avg_score": 2473
+   "avg_score": 2474
   },
   {
    "slug": "storys",
@@ -45,7 +45,7 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1726,
+   "avg_views": 1725,
    "avg_likes": 44.5,
    "like_rate": 2.58,
    "avg_score": 2403
@@ -57,16 +57,16 @@
    "avg_views": 1726,
    "avg_likes": 43.7,
    "like_rate": 2.53,
-   "avg_score": 2384
+   "avg_score": 2385
   },
   {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 2,
-   "avg_views": 1775,
+   "avg_views": 1774,
    "avg_likes": 11.0,
    "like_rate": 0.62,
-   "avg_score": 1985
+   "avg_score": 1984
   }
  ],
  "weights": {
@@ -85,7 +85,7 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 1944 Aufrufe, 2.3 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1775 Aufrufe) – kommt seltener dran.",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1774 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2537 zu 706 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
@@ -94,10 +94,10 @@
   "vier"
  ],
  "words_bad": [
-  "erkennst",
   "lied",
-  "remix",
-  "bekanntes"
+  "bekanntes",
+  "erkennst",
+  "remix"
  ],
  "top": [
   {
