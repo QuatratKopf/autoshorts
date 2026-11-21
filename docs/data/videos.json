@@ -6765,7 +6765,7 @@
   "id": 178,
   "category": "storys",
   "topic": "Wie NASA-Ingenieure die Raumsonde Voyager 1 aus 24 Milliarden Kilometern Entfernung retteten – Vorgaben als Stichpunkte, nicht wörtlich abschreiben: Start 1977, seit über 46 Jahren unterwegs; im November 2023 sendet die Sonde plötzlich nur noch unlesbaren Datensalat (sie verstummt nicht, das Funksignal kommt weiter an); rund 24 Milliarden Kilometer entfernt, weiter weg als alles, was Menschen je gebaut haben; ein Funksignal braucht 22,5 Stunden für einen Weg, eine Antwort kommt also erst nach rund 45 Stunden, fast zwei Tage; Ursache nach Monaten gefunden: ein einziger defekter Speicherchip im Flugdaten-Computer, rund 3 Prozent des Speichers; hinfliegen und reparieren unmöglich; der ganze Bordspeicher fasst nur rund 70 Kilobyte, weniger als ein einziges Handyfoto; Lösung: den betroffenen Programmcode in Stücke teilen und auf freie Stellen im Speicher verteilen; im April 2024 Befehl gesendet, rund zwei Tage später wieder lesbare Daten; seit Juni 2024 liefern alle vier Messgeräte wieder; die Sonde fliegt weiter durch den interstellaren Raum. Jahreszahlen nur 1977, 2023 und 2024. Keine anderen Jahreszahlen. Keine Personennamen. Sätze über die Sonde spielen im All (place space, keine Figuren), Sätze über die Ingenieure im Kontrollraum (place lab) mit einer Ingenieurin am Rechner. Kein Dachboden, keine Stadt. Titelbild-Text: RETTUNG IM ALL.",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1795286726.1717687,
   "title": "Voyager 1: Die unmögliche Rettung aus 24 Milliarden Kilometern",
   "description": "Die NASA rettet Voyager 1 in 24 Milliarden Kilometer Entfernung!\nEin einzelner defekter Speicherchip bedrohte die legendäre Raumsonde im interstellaren Raum.",
@@ -6800,7 +6800,8 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Zähler 5 STUNDEN statt 22,5, Dachboden bei Speicher, Ecken-Zeile 1977 über dem Fehler von 2023"
  },
  {
   "id": 179,
