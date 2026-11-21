@@ -1,0 +1,453 @@
+{
+ "title": "Voyager 1: Die unmögliche Rettung aus 24 Milliarden km",
+ "scenes": [
+  {
+   "text": "Voyager 1 sendete plötzlich nur noch unlesbaren Datensalat ins All.",
+   "see": "Die Raumsonde Voyager 1 schwebt einsam im Weltall.",
+   "place": "space",
+   "backdrop": {
+    "sky": "night",
+    "ground": "space",
+    "elements": []
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "raumsonde"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "DATENSALAT"
+   }
+  },
+  {
+   "text": "Das Funksignal war zwar da, aber die Messwerte waren komplett unbrauchbar.",
+   "see": "Eine Ingenieurin blickt besorgt auf ihren Monitor im Kontrollraum.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "kontrollraum"
+    },
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "ingenieurin",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Die Sonde war rund vierundzwanzig Milliarden Kilometer weit entfernt.",
+   "see": "Ein Zähler zeigt die gigantische Distanz der Sonde an.",
+   "place": "space",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "number",
+    "kicker": "ENTFERNUNG ZUR ERDE",
+    "value": "24 MRD.",
+    "label": "KILOMETER",
+    "dark": false
+   }
+  },
+  {
+   "text": "Das ist weiter weg als alles Menschliche, doch wie erreicht man ein solch fernes Ziel?",
+   "see": "Die Raumsonde fliegt weit außerhalb unseres Sonnensystems.",
+   "place": "space",
+   "time": "night",
+   "props": [
+    {
+     "type": "probe_far",
+     "pos": 540
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Ein einziges Funksignal braucht zweiundzwanzig Komma fünf Stunden nur für einen Weg.",
+   "see": "Die Ingenieurin stoppt eine Stoppuhr im Kontrollraum.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "kontrollraum"
+    },
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "ingenieurin",
+     "speaks": true,
+     "action": "point",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 22.5,
+    "unit": "STUNDEN"
+   }
+  },
+  {
+   "text": "Auf eine Antwort warteten alle zwei Tage, aber wie spürt man dort Fehler auf?",
+   "see": "Eine Zeitschaltuhr zeigt fast 45 Stunden Wartezeit.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "ingenieurin",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 2,
+    "unit": "TAGE"
+   }
+  },
+  {
+   "text": "Wie findet man einen Fehler, wenn man zwei Tage auf jede Antwort wartet?",
+   "see": "Eine Ingenieurin schüttelt ungläubig den Kopf im Kontrollraum.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "kontrollraum"
+    }
+   ],
+   "actors": [
+    {
+     "id": "ingenieurin",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense",
+   "hud": "REHOOK"
+  },
+  {
+   "text": "Nach Monaten entdeckten sie die Ursache: Ein einziger Speicherchip war defekt.",
+   "see": "Ein beschädigter Mikrochip wird groß dargestellt.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "ingenieurin",
+     "action": "talk",
+     "emotion": "worried",
+     "pos": "center",
+     "speaks": true
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "stamp",
+    "text": "DEFEKT",
+    "color": "red"
+   }
+  },
+  {
+   "text": "Das waren nur drei Prozent des gesamten Flugdaten-Computers.",
+   "see": "Eine Grafik veranschaulicht drei Prozent Ausfall im Speicher.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "ingenieurin",
+     "action": "talk",
+     "pos": "left",
+     "emotion": "",
+     "emote": "",
+     "facing": "right"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Hinfliegen und den Chip tauschen war natürlich absolut unmöglich.",
+   "see": "Die Ingenieurin zuckt hilflos mit den Schultern im Kontrollraum.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "kontrollraum"
+    },
+    {
+     "type": "lib_mikrochip"
+    }
+   ],
+   "actors": [
+    {
+     "id": "ingenieurin",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "stamp",
+    "text": "UNMÖGLICH",
+    "color": "red"
+   }
+  },
+  {
+   "text": "Du denkst, alte NASA-Computer hatten riesigen Speicher? Falsch.",
+   "see": "Ein Smartphone zeigt ein Foto im Vergleich zur Raumsonde.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "ingenieurin",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "insert",
+   "mood": "calm",
+   "hud": "FINTE"
+  },
+  {
+   "text": "Der Bordspeicher fasste nur siebzig Kilobyte, weniger als ein Handyfoto.",
+   "see": "Ein Vergleich zwischen 70 Kilobyte Speicher und einem Handyfoto.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "ingenieurin",
+     "action": "point",
+     "pos": "left",
+     "emotion": "",
+     "emote": "",
+     "facing": "right"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "NUR 70 KILOBYTE"
+   }
+  },
+  {
+   "text": "Sie zerlegten den fehlerhaften Programmcode in winzige Puzzleteile.",
+   "see": "Die Ingenieurin tippt aufgeregt eine Idee in die Tastatur.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "kontrollraum"
+    },
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "ingenieurin",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense"
+  },
+  {
+   "text": "Sie verteilten die Schnipsel auf freie Lücken, doch würde der Riskante Befehl wirklich funktionieren?",
+   "see": "Eine Notiz zeigt die Verteilung des Codes im Speicher.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "kontrollraum"
+    }
+   ],
+   "actors": [
+    {
+     "id": "ingenieurin",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "note",
+    "title": "DER PLAN",
+    "text": "Code in Lücken verteilten"
+   }
+  },
+  {
+   "text": "Im April 2024 schickten die Ingenieure den Rettungsbefehl ins All.",
+   "see": "Die Raumsonde empfängt ein Signal von der Erde.",
+   "place": "space",
+   "time": "night",
+   "props": [
+    {
+     "type": "probe_uplink",
+     "pos": 540
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "BEFEHL GESENDET"
+   },
+   "hud": "APRIL 2024"
+  },
+  {
+   "text": "Rund zwei Tage später kamen endlich wieder lesbare Daten an.",
+   "see": "Die Ingenieurin wartet gespannt auf ihren Monitor im Kontrollraum.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "kontrollraum"
+    },
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "ingenieurin",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Seit Juni 2024 liefern alle vier Messgeräte wieder perfekte Ergebnisse.",
+   "see": "Messgeräte an der Sonde fahren im All aus.",
+   "place": "space",
+   "time": "night",
+   "props": [
+    {
+     "type": "probe",
+     "pos": 540
+    }
+   ],
+   "mood": "happy",
+   "hud": "JUNI 2024"
+  },
+  {
+   "text": "Gestartet 1977 fliegt der Oldtimer unaufhaltsam durch den interstellaren Raum.",
+   "see": "Die Sonde zieht ruhig ihre Bahn durch die Sterne.",
+   "place": "space",
+   "time": "night",
+   "props": [
+    {
+     "type": "probe_far",
+     "pos": 540
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "1977"
+   },
+   "hud": "GESTARTET 1977"
+  },
+  {
+   "text": "Und das, obwohl im November 2023 eigentlich alles nach einem Ende aussah.",
+   "see": "Die Sonde fliegt weiter ins dunkle Weltall hinaus.",
+   "place": "space",
+   "time": "night",
+   "props": [
+    {
+     "type": "probe",
+     "pos": 540
+    }
+   ],
+   "mood": "calm"
+  }
+ ]
+}
