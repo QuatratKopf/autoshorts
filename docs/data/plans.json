@@ -1,538 +1,4 @@
 {
- "2026-11-20 21:00": {
-  "category": "vergleich",
-  "topic": "Tattoo-Studio gegen Nagelstudio: Wer verdient wirklich mehr?",
-  "trend": null,
-  "script": {
-   "title": "Tattoo vs. Nagelstudio: Wer verdient wirklich mehr?",
-   "description": "Tattoo-Künstler gegen Nageldesignerin im Money-Check!\nErfahre Einnahmen, Kosten und den echten Stundenlohn beider Berufe.\nZu wem würdest du eher gehen? Schreib es in die Kommentare!",
-   "hashtags": [
-    "#shorts",
-    "#finanzen",
-    "#geld",
-    "#business",
-    "#gehalt",
-    "#tattoo",
-    "#nagelstudio",
-    "#viral"
-   ],
-   "tags": [
-    "tattoo studio gehalt",
-    "nagelstudio verdienst",
-    "wer verdient mehr",
-    "stundenlohn tattoo",
-    "selbstständig machen",
-    "business vergleich"
-   ],
-   "thumbnail": {
-    "image": "Close-up split portrait of a heavily tattooed artist on the left holding a tattoo gun and a stylish nail designer on the right holding a nail file, both making shocked facial expressions, cash notes flying in the background, dramatic split screen lighting",
-    "text": "WER WIRD REICHER?"
-   },
-   "wishes": [
-    "tattoomaschine",
-    "nagelfeile"
-   ],
-   "toon": true,
-   "cast": {
-    "tattoo_tobi": {
-     "shirt": "schwarz",
-     "hat": "beanie",
-     "hair": "",
-     "hair_color": "schwarz",
-     "skin": "hell",
-     "gender": "m"
-    },
-    "nagel_nina": {
-     "shirt": "pink",
-     "hat": "",
-     "hair": "ponytail",
-     "hair_color": "blond",
-     "skin": "hell",
-     "gender": "w"
-    }
-   },
-   "scenes": [
-    {
-     "see": "Tattoo-Künstler Tobi und Nageldesignerin Nina stehen sich im Duell-Bild gegenüber.",
-     "text": "Zwei Beauty-Jobs im Verdienst-Vergleich: Wer kassiert am Ende mehr ab?",
-     "image": "Tobi and Nina facing each other in a vs pose, Tobi looking confident, Nina smiling direct at camera",
-     "who": [
-      "tattoo_tobi",
-      "nagel_nina"
-     ],
-     "place": "neutral_studio",
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "Tobi",
-      "Nina"
-     ],
-     "shot": "graphic",
-     "graphic": {
-      "type": "versus",
-      "left": "TATTOO",
-      "right": "NÄGEL",
-      "kicker": "MONEY CHECK"
-     },
-     "overlay": null,
-     "who_desc": "; ",
-     "place_desc": "Minimalist studio background with soft glowing lights",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Ergebnis überrascht viele, denn die laufenden Kosten unterscheiden sich extrem.",
-     "text": "Die Antwort wird dich überraschen, denn der Schein trügt gewaltig.",
-     "image": "Nina looks surprised with hands on cheeks, Tobi smirks",
-     "who": [
-      "nagel_nina",
-      "tattoo_tobi"
-     ],
-     "place": "neutral_studio",
-     "camera": "zoom_in",
-     "sfx": "pop",
-     "highlight": [
-      "überraschen"
-     ],
-     "shot": "wide",
-     "overlay": {
-      "type": "card",
-      "text": "SCHEIN TRÜGT"
-     },
-     "who_desc": "; ",
-     "place_desc": "Minimalist studio background with soft glowing lights",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Tobi sticht ein großes Tattoo im düsteren Studio.",
-     "text": "Tobi verlangt für ein großes Tages-Tattoo locker achthundert Euro von seinen Kunden.",
-     "image": "Tobi leaning over a client chair holding a tattoo tool, focused face",
-     "who": [
-      "tattoo_tobi"
-     ],
-     "place": "tattoo_shop",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "achthundert Euro"
-     ],
-     "shot": "wide",
-     "overlay": {
-      "type": "counter",
-      "label": "TAGES-TATTOO",
-      "value": 800,
-      "unit": "EURO"
-     },
-     "who_desc": "",
-     "place_desc": "Modern dark tattoo studio with neon sign, drawing flash art on walls, leather chair",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Haufen Abzüge von Tobis Einnahmen schrumpft das Geld.",
-     "text": "Nach Material, Nadeln, Hygiene, Miete und Steuern bleiben ihm etwa dreihundertfünfundfünfzig Euro Reingewinn.",
-     "image": "Tobi looking sad holding a small stack of cash while tax forms fly around",
-     "who": [
-      "tattoo_tobi"
-     ],
-     "place": "tattoo_shop",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "dreihundertfünfundfünfzig Euro"
-     ],
-     "shot": "insert",
-     "overlay": {
-      "type": "counter",
-      "label": "REINGEWINN",
-      "value": 355,
-      "unit": "EURO"
-     },
-     "props": [
-      "money"
-     ],
-     "who_desc": "",
-     "place_desc": "Modern dark tattoo studio with neon sign, drawing flash art on walls, leather chair",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Nina feilt Nägel im hellen Manikür-Salon.",
-     "text": "Nina nimmt pro Neumodellage fünfzig Euro und feilt den ganzen Tag Glitzer-Nägel.",
-     "image": "Nina sitting at desk filing nails of a client, smiling brightly",
-     "who": [
-      "nagel_nina"
-     ],
-     "place": "nail_salon",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "fünfzig Euro"
-     ],
-     "shot": "wide",
-     "overlay": {
-      "type": "counter",
-      "label": "NEUMODELLAGE",
-      "value": 50,
-      "unit": "EURO"
-     },
-     "who_desc": "",
-     "place_desc": "Bright pink nail salon with manicuring tables, polished polish bottles on shelves, soft lighting",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Günstiges Acryl-Gel liegt auf Ninas Tisch.",
-     "text": "Ihre Gel-Farben kosten im Einkauf fast nichts, weshalb ihr Reingewinn pro Kunde bei fünfunddreißig Euro liegt.",
-     "image": "Nina proudly showing a small colorful gel bottle, happy face",
-     "who": [
-      "nagel_nina"
-     ],
-     "place": "nail_salon",
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "fünfunddreißig Euro"
-     ],
-     "shot": "insert",
-     "overlay": {
-      "type": "counter",
-      "label": "GEWINN / KUNDE",
-      "value": 35,
-      "unit": "EURO"
-     },
-     "props": [
-      "money"
-     ],
-     "who_desc": "",
-     "place_desc": "Bright pink nail salon with manicuring tables, polished polish bottles on shelves, soft lighting",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Vergleichsbalken des Reingewinns pro Einzelkunde im Bild.",
-     "text": "Damit führt Tobi pro Kunde uneinholbar vor Nina.",
-     "image": "Comparison graph showing Tobi far ahead of Nina",
-     "who": [],
-     "place": "neutral_studio",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "uneinholbar"
-     ],
-     "shot": "graphic",
-     "graphic": {
-      "type": "compare",
-      "left": "TOBI",
-      "right": "NINA",
-      "value": "355 €",
-      "sub": "355 € VS. 35 €"
-     },
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "Minimalist studio background with soft glowing lights",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Tobi sitzt erschöpft auf seiner Tätowier-Liege und hält den Rücken.",
-     "text": "Aber Tobi schafft wegen der extremen Konzentration nur genau einen Kunden am Tag.",
-     "image": "Tobi sitting exhausted on leather bench massage chair rubbing his back",
-     "who": [
-      "tattoo_tobi"
-     ],
-     "place": "tattoo_shop",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "einen Kunden"
-     ],
-     "shot": "wide",
-     "overlay": {
-      "type": "card",
-      "text": "1 KUNDE / TAG"
-     },
-     "who_desc": "",
-     "place_desc": "Modern dark tattoo studio with neon sign, drawing flash art on walls, leather chair",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Eieruhr zeigt Tobis Vorbereitungszeit.",
-     "text": "Inklusive Zeichnen sitzt er oft acht Stunden an einem einzigen Tattoo-Motiv.",
-     "image": "Timer graphic showing 8 hours",
-     "who": [],
-     "place": "tattoo_shop",
-     "camera": "still",
-     "sfx": "tick",
-     "highlight": [
-      "acht Stunden"
-     ],
-     "shot": "graphic",
-     "graphic": {
-      "type": "timer",
-      "kicker": "TOBIS ARBEITSZEIT",
-      "value": "08:00:00"
-     },
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "Modern dark tattoo studio with neon sign, drawing flash art on walls, leather chair",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Tobi summiert seinen Monatsgewinn mit dicker Luxusuhr am Arm.",
-     "text": "Sein monatlicher Reingewinn landet damit bei ungefähr siebentausendeinhundert Euro netto.",
-     "image": "Tobi wearing a gold luxury watch pointing at a large money figure floating",
-     "who": [
-      "tattoo_tobi"
-     ],
-     "place": "tattoo_shop",
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "siebentausendeinhundert Euro"
-     ],
-     "shot": "wide",
-     "overlay": {
-      "type": "counter",
-      "label": "GEWINN / MONAT",
-      "value": 7100,
-      "unit": "EURO"
-     },
-     "who_desc": "",
-     "place_desc": "Modern dark tattoo studio with neon sign, drawing flash art on walls, leather chair",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Nina bedient am Fliessband Kundinnen im Akkord.",
-     "text": "Nina macht ihre Kunden in sechzig Minuten fertig und schafft locker acht Termine am Tag.",
-     "image": "Nina swiftly applying nail polish with fast motion blur around hands",
-     "who": [
-      "nagel_nina"
-     ],
-     "place": "nail_salon",
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "acht Termine"
-     ],
-     "shot": "wide",
-     "overlay": {
-      "type": "card",
-      "text": "8 KUNDEN / TAG"
-     },
-     "who_desc": "",
-     "place_desc": "Bright pink nail salon with manicuring tables, polished polish bottles on shelves, soft lighting",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ninas Monatsgewinn schnellt steil nach oben.",
-     "text": "Sie kommt damit auf einen Monatsgewinn von unglaublichen fünftausendsechshundert Euro netto.",
-     "image": "Nina holding keys to a shiny new pink small city car, smiling",
-     "who": [
-      "nagel_nina"
-     ],
-     "place": "nail_salon",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "fünftausendsechshundert Euro"
-     ],
-     "shot": "wide",
-     "overlay": {
-      "type": "counter",
-      "label": "GEWINN / MONAT",
-      "value": 5600,
-      "unit": "EURO"
-     },
-     "who_desc": "",
-     "place_desc": "Bright pink nail salon with manicuring tables, polished polish bottles on shelves, soft lighting",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Duell-Punktestand vor der überraschenden Wendung.",
-     "text": "Auf den ersten Blick sieht Tobi also wie der klare Sieger aus.",
-     "image": "Score board graphic with Tobi in the lead",
-     "who": [],
-     "place": "neutral_studio",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Sieger"
-     ],
-     "shot": "graphic",
-     "graphic": {
-      "type": "score",
-      "left": "TOBI",
-      "right": "NINA",
-      "value": "7100 : 5600",
-      "kicker": "MONATSGEWINN"
-     },
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "Minimalist studio background with soft glowing lights",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein riesiges Ausrufezeichen leuchtet auf.",
-     "text": "Aber jetzt kommt der gewaltige Haken an der ganzen Sache.",
-     "image": "Big warning alert sign flashing",
-     "who": [
-      "tattoo_tobi",
-      "nagel_nina"
-     ],
-     "place": "neutral_studio",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "Haken"
-     ],
-     "shot": "wide",
-     "overlay": {
-      "type": "card",
-      "text": "DER HAKEN"
-     },
-     "who_desc": "; ",
-     "place_desc": "Minimalist studio background with soft glowing lights",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Tobi rechnet am Tisch nachts bei einer Lampe seine Gratis-Zeichenstunden aus.",
-     "text": "Du denkst, Tobis Stundenlohn ist höher, doch Tobi zeichnet abends stundenlang kostenlos Vorlagen.",
-     "image": "Tobi at a desk late at night drawing tattoos under desk lamp looking stressed",
-     "who": [
-      "tattoo_tobi"
-     ],
-     "place": "office",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "kostenlos"
-     ],
-     "shot": "wide",
-     "overlay": {
-      "type": "tag",
-      "text": "UNBEZAHLTE ZEIT"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Arbeitszeit-Uhr zeigt sechzig Wochenstunden bei Tobi.",
-     "text": "Mit Nachbearbeitung und Beratungen schuftet er über sechzig Stunden in der Woche.",
-     "image": "Clock showing 60 hours workload per week",
-     "who": [],
-     "place": "tattoo_shop",
-     "camera": "still",
-     "sfx": "tick",
-     "highlight": [
-      "sechzig Stunden"
-     ],
-     "shot": "graphic",
-     "graphic": {
-      "type": "timer",
-      "kicker": "ARBEITSZEIT / WOCHE",
-      "value": "60:00:00"
-     },
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "Modern dark tattoo studio with neon sign, drawing flash art on walls, leather chair",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Nina winkt entspannt um siebzehn Uhr zum Feierabend.",
-     "text": "Nina legt punkt siebzehn Uhr die Feile hin und hat echten Feierabend.",
-     "image": "Nina happily putting her nail file down and waving goodbye at five o clock",
-     "who": [
-      "nagel_nina"
-     ],
-     "place": "nail_salon",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Feierabend"
-     ],
-     "shot": "wide",
-     "overlay": {
-      "type": "card",
-      "text": "17:00 UHR FEIERABEND"
-     },
-     "who_desc": "",
-     "place_desc": "Bright pink nail salon with manicuring tables, polished polish bottles on shelves, soft lighting",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Stundenlohn-Balken kippt zugunsten von Nina um.",
-     "text": "Beim echten Stundenlohn zieht Nina deshalb mit fast fünfundvierzig Euro knapp an Tobi vorbei.",
-     "image": "Nina wearing a gold crown smiling smugly, Tobi looking shocked",
-     "who": [
-      "nagel_nina",
-      "tattoo_tobi"
-     ],
-     "place": "neutral_studio",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "fünfundvierzig Euro"
-     ],
-     "shot": "wide",
-     "overlay": {
-      "type": "stamp",
-      "color": "green",
-      "text": "GEWINNERIN"
-     },
-     "who_desc": "; ",
-     "place_desc": "Minimalist studio background with soft glowing lights",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Nina und Tobi zeigen auf den Zuschauer im Duell-Format.",
-     "text": "Tattoo-Künstler Tobi gegen Nageldesignerin Nina: Wer kassiert am Ende des Monats wirklich mehr ab?",
-     "image": "Tobi and Nina looking at camera, Nina winking, Tobi shrugging happily",
-     "who": [
-      "tattoo_tobi",
-      "nagel_nina"
-     ],
-     "place": "neutral_studio",
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "wirklich mehr"
-     ],
-     "shot": "wide",
-     "overlay": null,
-     "who_desc": "; ",
-     "place_desc": "Minimalist studio background with soft glowing lights",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [
-   "tattoomaschine",
-   "nagelfeile",
-   "tätowiernadel",
-   "gel"
-  ],
-  "title": "Tattoo vs. Nagelstudio: Wer verdient wirklich mehr?",
-  "created": 1795188465.1766386
- },
  "2026-11-21 13:00": {
   "category": "motivation",
   "topic": "Niemand kommt, um dich zu retten – und das ist gut so",
@@ -1899,5 +1365,646 @@
   ],
   "title": "Voyager 1: Rettung aus 24 Milliarden Kilometern Entfernung",
   "created": 1795274293.8068063
+ },
+ "2026-11-22 13:00": {
+  "category": "grusel",
+  "topic": "Das unheimliche Phänomen der 'Doppelgänger-Stimmen' beim Telefonieren: Warum hunderte Gen-Z-User schwören, sie hätten am Ende des Anrufs sich selbst antworten hören – und was die Forschung dazu sagt.",
+  "trend": null,
+  "script": {
+   "title": "Doppelgänger am Telefon: Hörst du dich selbst?",
+   "description": "Was passiert, wenn dein eigener Doppelgänger am Telefon mit dir spricht?\nHunderte Gen-Z-User berichten von unheimlichen Anrufen auf TikTok.\nWürdest du sofort auflegen oder weiterreden?",
+   "hashtags": [
+    "#shorts",
+    "#doppelgänger",
+    "#grusel",
+    "#creepypasta",
+    "#mystery",
+    "#phenomenon",
+    "#genz",
+    "#viral"
+   ],
+   "tags": [
+    "doppelgänger am telefon",
+    "unheimliche anrufe",
+    "gruselgeschichte deutsch",
+    "tiktok trend",
+    "stimme gedoppelt",
+    "mystery story",
+    "ki stimme am telefon",
+    "netzwerk verzögerung"
+   ],
+   "thumbnail": {
+    "image": "Close-up of a young person holding a smartphone to their ear in a dark room, eyes wide with horror, dramatic lighting from the phone screen",
+    "text": "STIMME AUS DER ZUKUNFT"
+   },
+   "wishes": [
+    "audiolog"
+   ],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "lila",
+     "hat": "",
+     "hair": "ponytail",
+     "gender": "w",
+     "hair_color": "blond",
+     "skin": "weiß"
+    },
+    "freund": {
+     "shirt": "schwarz",
+     "hat": "beanie",
+     "hair": "",
+     "gender": "m",
+     "hair_color": "dunkelbraun",
+     "skin": "weiß"
+    }
+   },
+   "scenes": [
+    {
+     "see": "Ein Mädchen telefoniert spät nachts in ihrem dunklen Zimmer.",
+     "text": "Hunderte Gen-Z-User hören am Telefon ihre eigene Stimme.",
+     "image": "Girl holding phone near ear late at night, whispering in shock, room is dark",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      " TikTok",
+      "sich selbst"
+     ],
+     "hud": "23:42 UHR · DEUTSCHLAND",
+     "status": "SIGNAL: AKTIV",
+     "overlay": {
+      "type": "card",
+      "text": "VIRALER ANRUF"
+     },
+     "time": "night",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "worried",
+       "hold": "phone",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "crowd": "",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "see": "Das Mädchen zuckt zusammen, weil das Handy ein Wort nachspricht.",
+     "text": "Und das Verstörendste daran geschieht erst nach genau drei Sekunden Schweigen.",
+     "image": "Girl cowering in fear while holding glowing phone, eyes wide open",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "drei Sekunden"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "3 SEKUNDEN PAUSE"
+     },
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein verschwommener Schatten hinter dem Vorhang.",
+     "text": "Stell dir vor, du rufst spät nachts deinen besten Kumpel an.",
+     "image": "Girl looking at phone screen with confusion in dimmed room",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "besten Kumpel"
+     ],
+     "overlay": null,
+     "time": "night",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "happy",
+       "hold": "phone",
+       "speaks": true
+      },
+      {
+       "id": "freund",
+       "action": "sit",
+       "emotion": "calm"
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "crowd": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Freund nimmt am anderen Ende den Hörer ab.",
+     "text": "Er antwortet ganz normal, aber seine Stimme klingt irgendwie mechanisch und fremd.",
+     "image": "Boy with headphones talking on phone, dark lighting, serious look",
+     "who": [
+      "freund"
+     ],
+     "place": "zimmer",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "mechanisch"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "ANRUF VERBUNDEN"
+     },
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "freund",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Mädchen spricht ein Wort in ihr Handy.",
+     "text": "Du fragst, wo er bleibt, aber warum antwortet dir plötzlich genau deine eigene Stimme?",
+     "image": "Girl speaking nervously into glowing smartphone",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "eigene Stimme"
+     ],
+     "overlay": null,
+     "time": "night",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "scared",
+       "emote": "?",
+       "hold": "phone",
+       "speaks": true
+      }
+     ],
+     "shot": "close",
+     "mood": "scary",
+     "crowd": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Hauptfigur erstarrt mit aufgerissenen Augen.",
+     "text": "Sie wiederholt deinen letzten Satz Wort für Wort, aber lacht plötzlich ganz leise.",
+     "image": "Girl freezing in horror, eyes wide open, hand over mouth",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "lacht plötzlich"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "DOPPELGÄNGER",
+      "color": "red"
+     },
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Welle von Panik breitet sich auf einer Karte aus.",
+     "text": "Du denkst natürlich sofort an einen fiesen KI-Stimmen-Prank deines Kumpels.",
+     "image": "Girl shaking head in disbelief while looking at phone",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "KI-Stimmen-Prank"
+     ],
+     "overlay": {
+      "type": "choice",
+      "a": "Auflegen",
+      "b": "Weiterhören"
+     },
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Freund schüttelt den Kopf, hat das Handy gar nicht in der Hand.",
+     "text": "Falsch, denn sein Handy lag zu diesem Zeitpunkt ausgeschaltet auf dem Tisch.",
+     "image": "Boy sitting at table, phone lying off on desk far away",
+     "who": [
+      "freund"
+     ],
+     "place": "zimmer",
+     "camera": "pan_right",
+     "sfx": "ding",
+     "highlight": [
+      "ausgeschaltet"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "HANDY AUS",
+      "color": "purple"
+     },
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "freund",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein großer Serverschrank mit blinkenden Notlichtern.",
+     "text": "Netzwerk-Experten vermuten, dass solche Effekte durch Verzögerungen und Echos in der Leitung entstehen.",
+     "image": "Blinking lights inside a futuristic dark server room, no actors",
+     "who": [],
+     "place": "server",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Fünf-G-Netz"
+     ],
+     "shot": "event",
+     "overlay": {
+      "type": "card",
+      "text": "TECHNIK-ECHO"
+     },
+     "who_desc": "",
+     "place_desc": "serverroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik zeigt das Signal, das im Kreis läuft.",
+     "text": "Die digitale Sprachleitung spiegelt dein Audiosignal wie ein alter Wand-Spiegel im Raum.",
+     "image": "Graphic pulse line going in circles with red warning glow",
+     "who": [],
+     "place": "server",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "spiegelt"
+     ],
+     "shot": "graphic",
+     "graphic": {
+      "type": "pulse",
+      "value": "5G",
+      "label": "ECHO-PROTKOLL"
+     },
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "serverroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Hauptfigur sieht wieder besorgt aus.",
+     "text": "Aber das erklärt noch lange nicht die vielen gruseligen Abweichungen in den Aufnahmen.",
+     "image": "Girl looking worriedly at screen showing audio waveform",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Abweichungen"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "RÄTSELHAFT"
+     },
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Zwei Audiowellen im Vergleich untereinander.",
+     "text": "Audio-Analysen zeigen bei manchen dieser Aufnahmen leicht veränderte Tonhöhen.",
+     "image": "Graphic comparing two soundwaves on black background",
+     "who": [],
+     "place": "zimmer",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "sechzig Prozent"
+     ],
+     "shot": "graphic",
+     "graphic": {
+      "type": "compare",
+      "left": "DU",
+      "right": "ECHO",
+      "value": "440 Hz",
+      "sub": "410 Hz"
+     },
+     "overlay": {
+      "type": "counter",
+      "label": "ANALYSE",
+      "value": 60,
+      "unit": "AUDIO"
+     },
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Hauptfigur hält das Handy mit zitternden Händen.",
+     "text": "Der Doppelgänger antwortet manchmal Dinge, die du selbst nie laut ausgesprochen hast.",
+     "image": "Girl trembling while holding phone close to her face, scared emotion",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "shake",
+     "sfx": "whoosh",
+     "highlight": [
+      "nie laut ausgesprochen"
+     ],
+     "status": "PANIK: HOCH",
+     "overlay": null,
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bedroom",
+     "hud": ""
+    },
+    {
+     "see": "Ein Handybildschirm zeigt eine unheimliche SMS.",
+     "text": "Manche Nutzer berichten sogar von angeblichen Antworten auf Fragen, die sie kurz zuvor gestellt hatten.",
+     "image": "Dark screen showing incoming voice message from unknown contact",
+     "who": [],
+     "place": "zimmer",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "nur gedacht"
+     ],
+     "shot": "graphic",
+     "graphic": {
+      "type": "phone",
+      "mode": "lock",
+      "value": "23:45",
+      "kicker": "DOPPELGÄNGER",
+      "text": "Ich höre dich."
+     },
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine schwarze Welle mit rotem Ausrufezeichen.",
+     "text": "Vermutlich stecken dahinter aber einfach nur technische Störungen oder geschickte Online-Pranks.",
+     "image": "Warning badge with exclamation mark glowing red",
+     "who": [],
+     "place": "server",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "KI-Bots"
+     ],
+     "shot": "graphic",
+     "graphic": {
+      "type": "question",
+      "text": "KI TEST?"
+     },
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "serverroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Mädchen drückt verzweifelt auf den roten Auflegen-Knopf.",
+     "text": "Du willst panisch auflegen, aber das Gespräch lässt sich nicht mehr beenden.",
+     "image": "Girl pressing phone red button frantically, sweat emote",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "nicht mehr beenden"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "FEHLER",
+      "color": "red"
+     },
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Handybildschirm leuchtet dunkelrot auf.",
+     "text": "Das Display flackert kurz auf, während die Verbindung in diesem Moment plötzlich von alleine abbricht.",
+     "image": "Smartphone sitting on floor in darkness with screen dimly flickering red",
+     "who": [],
+     "place": "zimmer",
+     "camera": "zoom_in",
+     "sfx": "boom",
+     "highlight": [
+      "deinen Namen"
+     ],
+     "shot": "insert",
+     "props": [
+      "phone"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "VERBINDUNG WEG"
+     },
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Mädchen zieht sich erschrocken unter die Bettdecke.",
+     "text": "Erst nach einem kurzen Schreck hörst du beim erneuten Abheben wieder das ganz normale Freizeichen.",
+     "image": "Girl freezing under bed covers, looking terrified into the darkness",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "Freizeichen"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Mädchen hebt erneut vorsichtig das Handy ans Ohr.",
+     "text": "Ob technischer Fehler oder viraler Trend: Es bleibt unheimlich, wenn du plötzlich deine eigene Stimme hörst.",
+     "image": "Girl holding phone back up to her ear with shocked expression",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "sich selbst"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "23:42 UHR · ANRUF LÄUFT",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "display"
+  ],
+  "title": "Doppelgänger am Telefon: Hörst du dich selbst?",
+  "created": 1795285361.1395626
  }
 }

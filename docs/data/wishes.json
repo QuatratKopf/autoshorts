@@ -753,5 +753,9 @@
  "raumsonde": {
   "n": 1,
   "last": "Voyager 1: Rettung aus 24 Milliarden Kilometern Entfernung"
+ },
+ "display": {
+  "n": 1,
+  "last": "Doppelgänger am Telefon: Hörst du dich selbst?"
  }
 }
