@@ -1761,7 +1761,7 @@ def direct(scenes, times, topic="", style="", look=""):
         # Erzählt das Drehbuch alles mit einer redenden Figur in der Mitte, zeigt jede zweite passende Szene stattdessen das Geschehen
         if (len(acts_now) == 1 and str(acts_now[0].get("action") or "talk").lower() in ("talk", "idle", "") and outdoor
                 and (sc.get("crowd") or sc.get("props") or isinstance(sc.get("backdrop"), dict)) and i % 2 == 1
-                and not sc.get("shot")):
+                and not sc.get("shot") and not _re.search(r"\bdu\b|\bdich\b|\bdir\b", txt) and str(style or "") != "motivation"):   # „Du stehst auf dem Gipfel“ zeigte nur einen Felsbrocken (Video 174)
             sc["actors"] = []
             sc["shot"] = "event"
             acts_now = []
@@ -2336,6 +2336,7 @@ def direct(scenes, times, topic="", style="", look=""):
     _devices(scenes)
     _last_look(scenes, topic)
     _jogging(scenes)
+    _speech(scenes, style)
     for sc in scenes:                                     # ein einzelnes Auge neben Menschen („mustern dich mit großen Augen“ in der Bahn, Video 160) – überall, nicht nur im Zimmer
         if isinstance(sc, dict) and isinstance(sc.get("props"), list) and str(sc.get("shot") or "") not in ("insert", "graphic") and (
                 sc.get("crowd") or any(isinstance(a, dict) and not a.get("kind") for a in sc.get("actors") or [])):
@@ -2365,6 +2366,45 @@ HYBRID_RUN_RE = r"\brenn|\bsprint|\brast\b|\bjagt\b|km/h|kilometer\w* pro stunde
 
 # „Lauf diese Runde“, „du rennst durch den Park“: die Figur läuft die ganze Szene – sie kommt nicht ins Bild und steht dann vier Sekunden da (Video 173)
 JOG_RE = r"(?:^|[.!?,:;] )\s*(?:lauf|laufe|renn|renne|jogg|jogge|sprinte)\b|\bdu (?:läufst|rennst|joggst|sprintest)\b|\b(?:läufst|rennst|joggst|sprintest) du\b"
+
+
+SPEECH_PANIC_RE = r"panik|\bangst|fürcht|erschr|schock|zitter|albtraum|gefahr|bedroh"
+
+
+def _speech(scenes, style=""):
+    """Motivationsrede (Prüfung 21.11.2026, Videos 173/174): Die Rede geht an „du“ – in jedem Bild steht die Hauptfigur, keine Menschenmenge
+    rennt durchs Büro, wenn der Satz vom konzentrierten Lernen spricht, kein leeres Bild mit einem Felsbrocken. Das große Wort steht über dem
+    Kopf, deshalb gibt es dort keine Zeichen (!, ?). Für alle Videos: Wer im Bett am Handy scrollt, schläft nicht; eine Wanduhr steht nur im
+    Bild, wenn der Satz von Uhr oder Zeit spricht."""
+    speech = str(style or "").lower() == "motivation"
+    main = next((str(a.get("id")) for sc in scenes if isinstance(sc, dict) for a in (sc.get("actors") or [])
+                 if isinstance(a, dict) and str(a.get("id") or "").lower() in MAIN_IDS), "du")
+    for sc in scenes:
+        if not isinstance(sc, dict) or str(sc.get("shot") or "") == "graphic":
+            continue
+        low = str(sc.get("text") or "").lower()
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        for a in acts:
+            if not a.get("kind") and str(a.get("action") or "") == "sleep" and re.search(r"scroll|handy|smartphone|bildschirm|\bfeed\b|wach\b|nicht schlafen|tippst|chattest", low) \
+                    and not re.search(r"schläfst|eingeschlafen|schlummer", low):
+                a.update(action="idle", hold="phone", emote="")       # liegt wach am Handy: kein „zzz“ unter der Decke
+        if isinstance(sc.get("props"), list) and not re.search(r"\buhr|wecker|\bzeit|spät|stunde|minute|sekunde|tick|pünktlich|countdown|frist", low):
+            sc["props"] = [q for q in sc["props"] if str((q.get("type") if isinstance(q, dict) else q) or "").lower() not in ("clock", "uhr", "wanduhr")]
+        if not speech:
+            continue
+        if sc.get("crowd") and not re.search(PEOPLE_RE + r"|publikum|zuschauer|\bmenge\b", low):
+            sc["crowd"] = ""
+        if str(sc.get("mood") or "") == "panic" and not re.search(SPEECH_PANIC_RE, low):
+            sc["mood"] = ""
+            for a in acts:
+                if str(a.get("emotion") or "") in ("scared", "shocked") or str(a.get("action") or "") in ("shocked", "scared", "shiver", "cower"):
+                    a["emotion"] = ""
+                    a["action"] = "idle" if str(a.get("action") or "") in ("shocked", "scared", "shiver", "cower") else a.get("action")
+        if not acts and str(sc.get("shot") or "") in ("", "event") and not sc.get("float"):
+            sc["actors"] = acts = [{"id": main, "action": "idle", "pos": "left" if sc.get("props") else "center", "emotion": MOOD_EMOTION.get(str(sc.get("mood") or ""), "")}]
+            sc["shot"] = ""
+        for a in acts:
+            a["emote"] = "none"                           # das große Wort steht über dem Kopf – dort kein Zeichen
 
 
 def _jogging(scenes):

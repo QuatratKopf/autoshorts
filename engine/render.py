@@ -266,7 +266,7 @@ ScaledBorderAndShadow: yes
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
 Style: Cap,{cap_font},{(124 if cap_font == "Anton" else 96) if impact else (86 if lower else 92)},&H00FFFFFF,&H00FFFFFF,&H00141414,&H96000000,{0 if cap_font == "Anton" else -1},0,0,0,100,100,{2 if impact else (0 if lower else 2)},0,1,{6 if impact else 8},{5 if impact else 4},2,60,60,{margin},1
-Style: Big,{cap_font},200,&H00FFFFFF,&H00FFFFFF,&H00241430,&H96000000,0,0,0,0,100,100,3,0,1,9,6,2,40,40,430,1
+Style: Big,{cap_font},200,&H00FFFFFF,&H00FFFFFF,&H00241430,&H96000000,0,0,0,0,100,100,3,0,1,9,6,2,40,40,1220,1
 Style: Hud,{FONT},54,&H00FFFFFF,&H00FFFFFF,&H00141414,&H64000000,-1,0,0,0,100,100,1,0,1,5,2,7,60,60,190,1
 Style: Cnt,{FONT},76,&H003FD2FF,&H003FD2FF,&H00141414,&H64000000,-1,0,0,0,100,100,1,0,1,6,2,9,60,60,170,1
 Style: Hook,{cap_font},128,&H00FFFFFF,&H00FFFFFF,&H00101010,&H96000000,{0 if cap_font == "Anton" else -1},0,0,0,100,100,2,0,1,10,6,8,50,50,210,1

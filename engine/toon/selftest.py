@@ -1521,11 +1521,11 @@ def main():
         import tempfile
         from pathlib import Path
         from .. import render, writer
-        with tempfile.TemporaryDirectory() as tmp:               # das große Wort steht in der Untertitel-Zone – nicht quer über dem Gesicht
+        with tempfile.TemporaryDirectory() as tmp:               # das große Wort steht über dem Kopf – nicht quer über dem Gesicht
             f = Path(tmp) / "w.ass"
             render.build_ass([("Du", 0.0, 0.3), ("bist", 0.3, 0.6)], [{}], [(0, 1.0)], f, style="word")
             st = next(ln for ln in f.read_text(encoding="utf-8").splitlines() if ln.startswith("Style: Big,"))
-            assert 380 <= int(st.split(",")[-2]) <= 480, st
+            assert int(st.split(",")[-2]) >= 1150, st   # über dem Kopf (auch in der Großaufnahme), nicht auf Gesicht oder Hals
         sc = stage.direct([{"text": "Schlag den Wecker morgen früh um sechs Uhr aus.", "place": "bedroom", "time": "night", "props": ["clock"],
                             "actors": [{"id": "du", "action": "shake", "hold": "clock"}], "mood": "tense"},
                            {"text": "Lauf diese eine Meile, wenn deine Beine brennen.", "see": "Du rennst entschlossen im Park.", "place": "park", "time": "day",
@@ -1543,6 +1543,18 @@ def main():
         pr = stage._prepare(sc[1], {"du": {}})
         assert pr[3][0]["jog"] and pr[3][0]["x0"] != pr[3][0]["x1"], pr[3]
         assert [a.get("id") for a in sc[3]["actors"]] == ["du"] and not sc[3].get("crowd"), sc[3]   # die Hauptfigur, keine jubelnden Fremden
+        sc3 = stage.direct([{"text": "Niemand kommt, um dich zu retten.", "place": "bedroom", "time": "day", "props": ["clock"], "actors": [{"id": "du", "action": "talk", "emote": "!"}]},
+                            {"text": "Abends liegst du im Bett und scrollst stundenlang durch den Feed.", "place": "bedroom", "time": "night", "actors": [{"id": "du", "action": "sleep", "hold": "phone"}]},
+                            {"text": "Drittens: Lerne zwanzig Minuten lang konzentriert am Schreibtisch.", "place": "office", "time": "day", "crowd": "panic", "mood": "panic",
+                             "actors": [{"id": "du", "action": "sit", "emotion": "scared", "hold": "lehrbuch"}]},
+                            {"text": "Du stehst auf dem Gipfel und schaust ins Tal.", "place": "mountain", "time": "day", "props": ["rock"], "actors": [{"id": "du", "action": "talk"}]}],
+                           [(0, 3), (3, 6), (6, 9), (9, 12)], "Niemand kommt, um dich zu retten", "motivation")
+        assert not [q for q in sc3[0].get("props") or [] if "clock" in str(q)], sc3[0]["props"]
+        assert sc3[1]["actors"][0]["action"] != "sleep" and sc3[1]["actors"][0].get("hold") == "phone", sc3[1]["actors"]
+        assert not sc3[2].get("crowd") and sc3[2].get("mood") != "panic" and sc3[2]["actors"][0].get("emotion") != "scared", sc3[2]
+        assert [a.get("id") for a in sc3[3]["actors"]] == ["du"] and sc3[3].get("shot") != "event", sc3[3]
+        assert all(a.get("emote") == "none" for x in sc3 for a in x["actors"]), sc3
+        assert not stage._prepare(sc3[0], {"du": {}})[3][0]["emote"] or stage._prepare(sc3[0], {"du": {}})[3][0]["emote"] == "none"
         sc2 = stage.direct([{"text": "Du steckst neunundneunzig Wassermelonen ein.", "place": "kitchen", "actors": [{"id": "du"}], "props": ["watermelon"]},
                             {"text": "Aber in echt wiegen diese Früchte zusammen fast eine Tonne.", "place": "kitchen", "actors": [{"id": "du"}]}], [(0, 4), (4, 8)], "x", "whatif")
         assert stage._carry_other("Lauf diese eine Meile.", "lib_wecker") and not stage._carry_other("Aber diese Früchte wiegen eine Tonne.", "lib_wecker")
