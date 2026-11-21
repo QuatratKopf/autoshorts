@@ -479,7 +479,14 @@ def space_bare(night=False):
     return _bare[night]
 
 
-def space(night, planets=True):
+def space_deep(night=False):
+    """Tiefer Weltraum weit hinter den Planeten: nur Sterne und ein blasser Nebel – kein Mondboden, keine Deko-Planeten (Raumsonde)."""
+    if ("deep", night) not in _bare:
+        _bare[("deep", night)] = space(night, planets=False, ground=False).convert("RGB")
+    return _bare[("deep", night)]
+
+
+def space(night, planets=True, ground=True):
     p = P(True)
     for y in range(0, H, 8):
         f = y / H
@@ -492,6 +499,15 @@ def space(night, planets=True):
         p.oval((640, 240, 980, 580), (236, 150, 90), glow=True)                # Planet mit Ring
         p.d.arc((560, 350, 1060, 480), 10, 170, fill=(250, 220, 160), width=14)
         p.oval((110, 520, 250, 660), (150, 190, 240), glow=True)
+    if not ground:                                                             # blasser Nebel statt Boden: Tiefe ohne Horizont
+        from PIL import ImageFilter
+        lay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        ld = ImageDraw.Draw(lay)
+        for cx, cy, r, col in ((240, 1500, 420, (90, 60, 150)), (860, 380, 360, (40, 90, 150)), (700, 1700, 300, (130, 60, 110))):
+            ld.ellipse((cx - r, cy - r * 0.7, cx + r, cy + r * 0.7), fill=col + (70,))
+        lay = lay.filter(ImageFilter.GaussianBlur(110))
+        p.im.paste(lay, (0, 0), lay)
+        return p.vignette()
     p.d.ellipse((-200, GROUND - 60, W + 200, H + 500), fill=(120, 124, 140), outline=INK, width=O)   # Mondboden
     for cx, cy, r in ((220, GROUND + 180, 70), (700, GROUND + 120, 50), (900, GROUND + 330, 90), (430, GROUND + 420, 60)):
         p.d.ellipse((cx - r, cy - r * 0.4, cx + r, cy + r * 0.4), fill=(96, 100, 116), outline=INK, width=5)

@@ -1266,6 +1266,36 @@ def main():
         assert not stage._lib_props() or all(any(k_ == key_ for _p, k_ in stage._lib_props()) for key_ in ("lib_blackbox", "lib_wrack")), "Blackbox/Wrack fehlen in der Bibliothek"
     check("Tiefsee: Blackbox, Sonar, Wrack", _deep)
 
+    def _probe():                                                # Raumsonde (Video 177): im All die gezeichnete Sonde vor tiefem Weltraum – keine Stadt, kein Dachboden, keine Müllkippe
+        T = ["NASA-Ingenieure mussten eine Raumsonde aus vierundzwanzig Milliarden Kilometern Entfernung retten.", "Ende zweitausenddreiundzwanzig verstummte Voyager eins.",
+             "Ein einziges Signal brauchte zweiundzwanzig Stunden für einen Weg.", "Wer eine Taste drückte, musste fast zwei Tage auf die Antwort warten.",
+             "Aber das echte Problem lag tief im Speicher der alten Raumsonde vergraben.", "Du denkst vielleicht, sie haben einfach ein Ersatzteil hochgeschickt.",
+             "Der Speicher ist kleiner als das Bild eines modernen Smartphones.", "Im April schickten sie den gewagten Befehl ins All.",
+             "Damit reist Voyager eins weiter durch die unendliche Weite des Alls.", "Und das, obwohl sie plötzlich nur noch unverständlichen Müll sendete."]
+        sp = (0, 2, 7, 8, 9)
+        sb = stage.direct([{"text": t_, "place": "space" if n_ in sp else "lab", "time": "night" if n_ in sp else "day", "props": ["satellite"] if n_ == 0 else [],
+                            "shot": "event" if n_ in sp else "wide", "actors": [{"id": "du", "action": "shocked"}] if n_ == 1 else [],
+                            "overlay": {"type": "choice", "a": "Code retten", "b": "Aufgeben"} if n_ == 9 else None}
+                           for n_, t_ in enumerate(T)], [(n_ * 4, n_ * 4 + 4) for n_ in range(len(T))], "Wie NASA-Ingenieure die Raumsonde Voyager 1 retteten", "storys", "")
+        kinds = [sc.get("_probe") for sc in sb]
+        assert kinds == ["probe", None, None, None, None, None, None, "probe_uplink", "probe_far", "probe_glitch"] and sb[2].get("shot") == "graphic", kinds
+        for n_ in (0, 7, 8, 9):
+            assert places.resolve(stage.backdrop(sb[n_])) == "space" and not sb[n_].get("actors") and not sb[n_].get("crowd"), (n_, sb[n_])
+        assert all(places.resolve(stage.backdrop(sb[n_])) == "lab" for n_ in (1, 3, 4, 5, 6)), [sc.get("place") for sc in sb]   # „Speicher“ ist kein Dachboden
+        assert not sb[9].get("overlay"), "Auswahl deckt die Sonde zu"
+        assert sum(1 for sc in sb for a in sc.get("actors") or [] if a.get("action") == "walk") <= 1, "Ingenieurin kommt nicht in jeder Szene neu herein"
+        acts_l = [str((sc.get("actors") or [{}])[0].get("action") or "") for sc in sb[3:7]]
+        assert all(x != y for x, y in zip(acts_l, acts_l[1:])), acts_l
+        assert stage._hint("Auf dem Speicher steht eine alte Truhe.") == "attic" and stage._hint("Der Müll stapelt sich auf der Straße.") == "landfill"
+        assert stage._hint("Die Sonde sendet nur noch Müll.") != "landfill" and stage._hint("Drei Prozent des Hauptspeichers waren kaputt.") != "attic"
+        for sc in sb:
+            assert frame(sc, {"du": {}}) is not None
+        im_d = frame(sb[0], {"du": {}}).convert("RGB")
+        assert max(im_d.getpixel((540, 1700))) < 110, "tiefer Weltraum: kein heller Mondboden unter der Sonde"
+        from .. import overlays
+        assert overlays.counter("", 2, "TAGE", 1.0) is not None
+    check("Raumsonde: Sonde im tiefen All, Speicher/Müll als Redensart", _probe)
+
     def _balloon():                                              # Ballonflucht: Stoffberg und Gondel am Boden, Ballon mit acht Köpfen am Himmel, Suchscheinwerfer, Landung im Gebüsch – keine Figur „schwebt“ auf der Wiese
         from PIL import Image
         T = ["Zwei Familien fliehen mit einem selbst genähten Heißluftballon.", "Im Keller nähen sie heimlich über tausend Quadratmeter Stoff zusammen.",

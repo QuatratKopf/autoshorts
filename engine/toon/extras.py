@@ -1473,6 +1473,130 @@ SKY += ("balloon", "balloon_out", "balloon_dark", "gondola", "searchlight")     
 BALLOON_KINDS = ("balloon", "balloon_out", "balloon_dark", "gondola_empty", "balloon_fill", "balloon_ground", "balloon_down", "gondola", "searchlight")
 
 
+def _probe(d, cx, cy, k=1.0, t=0.0):
+    """Raumsonde, wie sie seit den Siebzigern durchs All fliegt: große weiße Schüssel, darunter der kantige Gerätekasten in Goldfolie,
+    ein Ausleger mit den Nuklearbatterien, einer mit den Messgeräten, ein langer Gittermast und zwei Stabantennen. Kein Schriftzug, kein Logo."""
+    def P(dx, dy):
+        return (cx + dx * k, cy + dy * k)
+
+    def B(x0, y0, x1, y1):
+        return P(x0, y0) + P(x1, y1)
+    w = max(3, int(O * k))
+    for (ax, ay), (bx, by) in (((-50, 110), (-170, 430)), ((40, 110), (130, 440))):                   # Stabantennen
+        d.line(P(ax, ay) + P(bx, by), fill=(176, 182, 198), width=max(3, int(5 * k)))
+    n = 9                                                                                            # Gittermast nach links unten
+    for off in (-14, 14):
+        d.line(P(-80 + off, 70 - off * 0.6) + P(-390 + off, 300 - off * 0.6), fill=(176, 182, 198), width=max(3, int(5 * k)))
+    for i in range(n):
+        f0, f1 = i / n, (i + 1) / n
+        a = (-80 + (-310) * f0, 70 + 230 * f0)
+        b = (-80 + (-310) * f1, 70 + 230 * f1)
+        s_ = 1 if i % 2 else -1
+        d.line(P(a[0] + 14 * s_, a[1] - 8 * s_) + P(b[0] - 14 * s_, b[1] + 8 * s_), fill=(176, 182, 198), width=max(2, int(4 * k)))
+    d.line(P(70, 80) + P(300, 250), fill=INK, width=max(6, int(16 * k)))                              # Ausleger mit den Nuklearbatterien
+    d.line(P(70, 80) + P(300, 250), fill=(150, 154, 166), width=max(2, int(7 * k)))
+    for i in range(3):
+        bx, by = 250 + i * 46, 214 + i * 34
+        d.ellipse(B(bx - 34, by - 34, bx + 34, by + 34), fill=(66, 70, 84), outline=INK, width=w)
+        d.line(P(bx - 22, by + 22) + P(bx + 22, by - 22), fill=(120, 124, 140), width=max(2, int(5 * k)))
+    d.line(P(60, 20) + P(320, -120), fill=INK, width=max(6, int(14 * k)))                             # Ausleger mit Kamera und Messgeräten
+    d.line(P(60, 20) + P(320, -120), fill=(150, 154, 166), width=max(2, int(6 * k)))
+    _r(d, B(286, -176, 372, -100), (214, 216, 226), max(3, int(10 * k)), w)
+    d.ellipse(B(352, -156, 392, -116), fill=(40, 50, 80), outline=INK, width=max(3, int(5 * k)))
+    d.ellipse(B(364, -146, 378, -132), fill=(150, 200, 255))
+    _r(d, B(300, -98, 346, -62), (226, 176, 70), max(2, int(6 * k)), max(3, int(5 * k)))
+    _poly(d, [P(-110, 40), P(-70, 20), P(70, 20), P(110, 40), P(110, 110), P(70, 132), P(-70, 132), P(-110, 110)], (226, 176, 70), w)   # Gerätekasten in Goldfolie
+    for vx in (-70, -24, 24, 70):
+        d.line(P(vx, 24) + P(vx, 128), fill=(160, 112, 40), width=max(2, int(4 * k)))
+    d.ellipse(B(-236, -176, 236, 76), fill=INK)                                                       # Schüssel, leicht von oben gesehen
+    d.ellipse(B(-228, -168, 228, 68), fill=(238, 240, 246))
+    d.ellipse(B(-196, -150, 196, 40), fill=(206, 212, 226))
+    d.ellipse(B(-150, -124, 150, 14), fill=(224, 228, 238))
+    for fx in (-170, 0, 170):                                                                        # Empfänger im Brennpunkt auf drei Streben
+        d.line(P(fx, -40 if fx else 30) + P(0, -210), fill=INK, width=max(3, int(6 * k)))
+    d.ellipse(B(-30, -240, 30, -180), fill=(226, 176, 70), outline=INK, width=max(3, int(5 * k)))
+    if int(t * 2) % 2:                                                                               # Lebenszeichen: ein kleines Licht am Kasten
+        d.ellipse(B(-12, 64, 12, 88), fill=(250, 90, 80))
+    else:
+        d.ellipse(B(-12, 64, 12, 88), fill=(120, 40, 40))
+
+
+def _waves(d, ox, oy, t, col, out=True, a0=200, a1=250, n=4, r0=120, r1=900, width=12, broken=False):
+    """Funkwellen als Bogen-Ringe um (ox, oy): laufen nach außen (Sonde sendet) oder nach innen … zum Ziel hin (Befehl kommt an)."""
+    rnd = random.Random(7)
+    for i in range(n):
+        ph = (t * 0.55 + i / n) % 1
+        ph = ph if out else 1 - ph
+        r = r0 + (r1 - r0) * ph
+        alpha = int(230 * math.sin(math.pi * min(1.0, max(0.0, ph))) ** 0.7)
+        if alpha < 12:
+            continue
+        if broken:                                                                                   # Datenmüll: zerhackte, flackernde Bögen
+            a = a0
+            while a < a1:
+                seg = rnd.uniform(3, 9)
+                if (int(t * 9) + int(a) + i) % 3:
+                    d.arc((ox - r, oy - r, ox + r, oy + r), a, min(a1, a + seg), fill=col + (alpha,), width=width)
+                a += seg + rnd.uniform(2, 6)
+        else:
+            d.arc((ox - r, oy - r, ox + r, oy + r), a0, a1, fill=col + (alpha,), width=width)
+
+
+def p_probe(d, x, t, s=1.0):
+    """Die Raumsonde groß im Bild – treibt ruhig durch das All."""
+    _probe(d, x + math.sin(t * 0.5) * 10, 800 + math.sin(t * 0.9) * 14, 1.0, t)
+
+
+def p_probe_far(d, x, t, s=1.0):
+    """Die Sonde klein und weit weg: zieht langsam durch die Leere, hinter ihr die Sonne nur noch als heller Stern."""
+    sx, sy = x - 330, 1130
+    for r, a in ((70, 26), (44, 50), (22, 110)):
+        d.ellipse((sx - r, sy - r, sx + r, sy + r), fill=(255, 236, 170, a))
+    d.ellipse((sx - 9, sy - 9, sx + 9, sy + 9), fill=(255, 250, 220))
+    for i in range(5):                                                                               # Staubkörner ziehen vorbei: man sieht, dass sie fliegt
+        ph = (t * 0.35 + i * 0.21) % 1
+        lx, ly = x + 520 - ph * 1100, 420 + i * 190 + ph * 60
+        d.line((lx, ly, lx + 90, ly - 5), fill=(220, 230, 255, int(120 * math.sin(math.pi * ph))), width=5)
+    _probe(d, x + 60 + math.sin(t * 0.4) * 30 + t * 10, 700 + math.sin(t * 0.8) * 10 - t * 4, 0.5, t)
+
+
+def p_probe_signal(d, x, t, s=1.0):
+    """Die Sonde funkt: Wellen-Ringe laufen von der Schüssel weg in Richtung Erde."""
+    cx, cy = x + 130, 700 + math.sin(t * 0.9) * 10
+    _waves(d, cx, cy - 80, t, (120, 230, 255), True, 100, 190, 4, 200, 1000)
+    _probe(d, cx, cy, 0.8, t)
+
+
+def p_probe_uplink(d, x, t, s=1.0):
+    """Ein Befehl von der Erde: unten links die Erde als kleiner blauer Punkt, ihre Funkwellen laufen zur Sonde hinauf."""
+    ex, ey = x - 400, 1240
+    _waves(d, ex, ey, t, (255, 226, 120), True, 285, 350, 4, 90, 1050)
+    for r, a in ((62, 40), (50, 70)):
+        d.ellipse((ex - r, ey - r, ex + r, ey + r), fill=(110, 170, 255, a))
+    d.ellipse((ex - 40, ey - 40, ex + 40, ey + 40), fill=(44, 116, 204), outline=INK, width=5)
+    d.polygon([(ex - 22, ey - 18), (ex - 2, ey - 26), (ex + 10, ey - 8), (ex - 4, ey + 8), (ex - 20, ey + 2)], fill=(98, 180, 112))
+    d.polygon([(ex + 6, ey + 10), (ex + 24, ey + 4), (ex + 22, ey + 24), (ex + 8, ey + 26)], fill=(98, 180, 112))
+    _probe(d, x + 150, 640 + math.sin(t * 0.9) * 10, 0.7, t)
+
+
+def p_probe_glitch(d, x, t, s=1.0):
+    """Die Sonde sendet nur noch Datenmüll: zerhackte rote Wellen, dazwischen flackern wirre Datenblöcke."""
+    cx, cy = x + 110 + math.sin(t * 13) * 5, 700 + math.sin(t * 0.9) * 10
+    _waves(d, cx, cy - 80, t, (255, 96, 80), True, 95, 195, 4, 200, 1000, 14, True)
+    rnd = random.Random(int(t * 6))
+    for i in range(9):                                                                               # Datenblöcke: mal da, mal weg, nie lesbar
+        bx, by = cx - 560 + rnd.randint(0, 420), cy + 150 + rnd.randint(0, 420)
+        bw = rnd.choice((26, 40, 64))
+        d.rectangle((bx, by, bx + bw, by + 22), fill=rnd.choice(((255, 96, 80), (255, 190, 90), (240, 240, 246))) + (rnd.randint(120, 230),))
+    _probe(d, cx, cy, 0.8, t)
+
+
+PROBE_KINDS = ("probe", "probe_far", "probe_signal", "probe_uplink", "probe_glitch")
+PROPS.update({"probe": p_probe, "probe_far": p_probe_far, "probe_signal": p_probe_signal, "probe_uplink": p_probe_uplink, "probe_glitch": p_probe_glitch})
+PROP_ALIASES.update({"raumsonde": "probe", "weltraumsonde": "probe", "sonde": "probe", "space probe": "probe", "voyager": "probe"})
+SKY += PROBE_KINDS                                           # schwebt frei im Bild (die Regie setzt sie vor den tiefen Weltraum ohne Mondboden)
+
+
 def p_goosebumps(d, x, t, s=1.0):
     """Gänsehaut als Schaubild: Hautschnitt mit drei Haaren. Die kleinen Haarbalgmuskeln (rot) ziehen sich zusammen, die Haare richten sich
     auf und die Haut wölbt sich an jedem Haar zu einem Hügel (Wörter Gänsehaut, Haarwurzel, Haarbalg, Härchen – stage.GOOSE_RE)."""

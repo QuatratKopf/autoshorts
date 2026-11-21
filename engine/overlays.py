@@ -329,7 +329,9 @@ def counter(label, value, unit, shown=None, sub=""):
     decimals = 0 if abs(v - round(v)) < 1e-9 else (1 if abs(v * 10 - round(v * 10)) < 1e-9 else 2)
     cur = v if shown is None else shown
     fl, fn, fs = font(34, "Bold"), _cfont(150), font(40, "Bold")
-    txt = (_num(cur, decimals) + (" " + unit.upper() if unit else "")).strip()
+    one = {"TAGE": "TAG", "STUNDEN": "STUNDE", "MINUTEN": "MINUTE", "SEKUNDEN": "SEKUNDE", "JAHRE": "JAHR", "WOCHEN": "WOCHE", "MONATE": "MONAT"}
+    unit_now = one.get(unit.upper(), unit) if unit and abs(cur - 1) < 1e-9 and decimals == 0 else unit   # „1 TAG“, nicht „1 TAGE“ (Video 177)
+    txt = (_num(cur, decimals) + (" " + unit_now.upper() if unit_now else "")).strip()
     w, h = 980, 330
     im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     dr = ImageDraw.Draw(im)

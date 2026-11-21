@@ -220,6 +220,8 @@ def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, 
             if str(sc.get("shot") or "") == "graphic":
                 continue                       # über einer Grafik (Karten-Titel, Zahl mit Überschrift) stünde die Zeile im Weg
             lab = str(cur_hud or "").replace("{", "").replace("}", "").upper()
+            if re.search(r"\bKM\b|KILOMETER|VON DER ERDE|ENTFERNT|LICHTJAHR", lab) and str(sc.get("place") or "") not in ("space", "moon", "highsky", "underwater"):
+                continue                       # „24 MRD. KM VON DER ERDE“ gilt für die Sonde im All – nicht für das Labor auf der Erde (Video 177)
             if len(lab) > 30:                  # zu lang: am Wortende kürzen, nicht mitten im Wort („2:00 UH“)
                 lab = lab[:31].rsplit(" ", 1)[0].rstrip(" ·|,–-:")
             if lab:

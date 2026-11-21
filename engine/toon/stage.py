@@ -686,7 +686,9 @@ def _open_sky_x(sky, x, cy, max_up=0, half=170):
 
 
 def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, in_bed, shot="", big=1.0, fx=None):
-    if place == "space" and any(extras.PROP_ALIASES.get(k, k) in ("sun", "moon", "earth", "satellite", "rocket", "ufo") for k, _ in props):
+    if place == "space" and any(extras.PROP_ALIASES.get(k, k) in extras.PROBE_KINDS for k, _ in props):
+        bg = places.space_deep(night)                 # Raumsonde: tiefer Weltraum ohne Mondboden – sie fliegt weit hinter den Planeten
+    elif place == "space" and any(extras.PROP_ALIASES.get(k, k) in ("sun", "moon", "earth", "satellite", "rocket", "ufo") for k, _ in props):
         bg = places.space_bare(night)                 # großer Himmelskörper im Bild: die Deko-Planeten treten zurück, nichts steckt ineinander
     frame = bg.copy()
     if (fx or {}).get("neon"):                # Lichtpunkte liegen hinter den Figuren
@@ -2114,6 +2116,7 @@ def direct(scenes, times, topic="", style="", look=""):
         if isinstance(sc, dict) and isinstance(sc.get("status"), str) and unspoken_figures({"text": sc["status"]}, str(sc.get("text") or "")):
             sc["status"] = ""
     _balloon_story(scenes, topic)
+    _probe_story(scenes, topic, main_id)
     _family(scenes, main_id)
     for sc in scenes:                                     # Nähmaschine: steht frei zwischen den Figuren, nicht dahinter; der Stoffberg gehört schon dazu
         if isinstance(sc, dict) and sc.get("shot") not in ("graphic", "insert"):
@@ -4594,6 +4597,79 @@ def _balloon_story(scenes, topic=""):
                 first_sc.pop(k, None)
 
 
+def _probe_story(scenes, topic="", main_id=""):
+    """Geschichte einer Raumsonde (Voyager): Spielt ein Satz im All, sieht man die gezeichnete Sonde vor dem tiefen Weltraum – groß, klein in der
+    Ferne, funkend, mit dem Befehl von der Erde oder mit zerhacktem Datenmüll, je nach Satz und nie zweimal hintereinander gleich. Keine Stadtstraße,
+    keine Passanten, kein Mondboden, kein gelernter Notbehelf. Im Kontrollraum kommt die Ingenieurin nicht in jeder Szene neu zur Tür herein,
+    sondern arbeitet am Rechner (Video 177)."""
+    import re as _re
+    if not _re.search(PROBE_RE, (str(topic or "") + " " + " ".join(str(sc.get("text") or "") for sc in scenes if isinstance(sc, dict))).lower()):
+        return
+    last, walkins, last_act = "", 0, ""
+    for n, sc in enumerate(scenes):
+        if not isinstance(sc, dict):
+            continue
+        low = str(sc.get("text") or "").lower()
+        keys = [extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(), str(q.get("type") if isinstance(q, dict) else q).lower()) for q in sc.get("props") or []]
+        sc["props"] = [q for q, k in zip(sc.get("props") or [], keys) if k not in ("lib_raumsonde", "lib_sonde", "lib_voyager")]   # gelernter Notbehelf: sah aus wie eine Drohne
+        if sc.get("shot") == "graphic" and graphics.clean(sc.get("graphic")):
+            last = ""
+            continue
+        rp = places.resolve(backdrop(sc)) if not isinstance(backdrop(sc), dict) else "custom"
+        humans = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and not a.get("kind")]
+        if rp in ("space", "moon") and (not humans or not _re.search(r"astronaut|raumfahrer|kosmonaut", low)):   # dort draußen ist kein Mensch – auch keiner, der „hereinkommt“
+            if _re.search(JUNK_TALK_RE + r"|datensalat|kauderwelsch|verstumm|nur noch (?:unsinn|rauschen|nullen)", low):
+                kind = "probe_glitch"
+            elif _re.search(r"befehl|kommando|hochgeschick|schick\w* (?:\w+ ){0,5}(?:ins all|ins weltall|zur sonde|hinauf|hoch)|von der erde aus", low):
+                kind = "probe_uplink"
+            elif _re.search(r"signal|funk|\bsend|\bdaten\b|antwort|lebenszeichen|empf[aä]ng|nachricht|meldet", low):
+                kind = "probe_signal"
+            elif _re.search(r"\bweit|entfern|reist|fliegt|unendlich|dunkelheit|einsam|interstellar|kilometer|leere", low):
+                kind = "probe_far"
+            else:
+                kind = "probe"
+            if n == 0:
+                kind = "probe" if kind == "probe_far" else kind       # erstes Bild: die Sonde groß, man soll sie erkennen
+            if kind == last:
+                kind = {"probe": "probe_far", "probe_far": "probe", "probe_signal": "probe", "probe_uplink": "probe_signal", "probe_glitch": "probe_far"}[kind]
+            sc["place"], sc["time"] = "space", "night"
+            sc.pop("backdrop", None)
+            sc.update(props=[{"type": kind, "pos": 540}], actors=[], crowd="", shot="", weather="", _probe=kind, _ov_low=3)
+            for k in ("float", "aloft", "low", "dark_city"):
+                sc.pop(k, None)
+            ov = sc.get("overlay")
+            if isinstance(ov, dict) and str(ov.get("type") or "") == "counter":   # Zähler liefe groß quer über die Sonde: als Schild darüber
+                val = ov.get("value")
+                val = int(val) if isinstance(val, float) and val == int(val) else val
+                sc["overlay"] = {"type": "card", "text": f"{val} {str(ov.get('unit') or ov.get('label') or '').strip()}".strip().upper()}
+            elif isinstance(ov, dict) and str(ov.get("type") or "") in ("choice", "checklist", "phone", "note", "bar", "thermo"):
+                sc["overlay"] = None                                  # Liste/Auswahl deckt die Sonde zu
+            last = kind
+            continue
+        last = ""
+        if rp in ROOMS and len(humans) == 1 and len(sc.get("actors") or []) == 1 and str(humans[0].get("action") or "") == "walk" \
+                and str(humans[0].get("pos") or "") in ("offleft", "offright") and not humans[0].get("say"):
+            walkins += 1
+            if walkins > 1:                                           # schon einmal hereingekommen: jetzt arbeitet sie am Rechner
+                a = humans[0]
+                if _re.search(r"du denkst|vielleicht|\bwarum|\bwie\b|rätsel|problem|\bwarten|musste", low):
+                    act, emo, emote = "think", a.get("emotion") or "", "?"
+                elif _re.search(r"endlich|geschafft|erfolg|klare daten|plötzlich wieder|funktioniert|gerettet", low):
+                    act, emo, emote = "cheer", "happy", ""
+                elif _re.search(r"kaputt|defekt|ausfall|fehler|nicht mehr", low):
+                    act, emo, emote = "shocked", "worried", "!"
+                else:
+                    act, emo, emote = ("point", a.get("emotion") or "", "") if walkins % 2 else ("talk", a.get("emotion") or "", "")
+                if act == last_act:                                   # nie zweimal hintereinander dieselbe Geste am Rechner
+                    act = next(x for x in ("point", "talk", "look_around", "think") if x != last_act)
+                    emote = "?" if act == "think" else ""
+                last_act = act
+                a.update(action=act, emotion=emo, emote=emote, pos="left", facing="right")
+                a.pop("to", None)
+                if "computer" not in keys:
+                    sc["props"] = list(sc.get("props") or []) + [{"type": "computer"}]
+
+
 def _look_sig(sc):
     """Was man in einer Szene sieht (Ort, Figuren/Wesen, Dinge, Einstellung) – gleich = für den Zuschauer dasselbe Bild."""
     if not isinstance(sc, dict):
@@ -5033,7 +5109,12 @@ HINTS = [
     (r"küche|kochen|kühlschrank", "kitchen"),
 ]
 GENERIC = ("street", "park", "plain", "livingroom")
-SPACE_RE = (r"weltall|weltraum|\ball\b|galaxi|planet|umlaufbahn|orbit|astronaut|\bmond|sonnensystem|\bstern|satellit|rakete|raumschiff|raumstation|\biss\b|"
+COMPUTER_MEM_RE = (r"hauptspeicher|arbeitsspeicher|datenspeicher|speicherchip|speicherplatz|speicherkarte|\bchips?\b|computer|\bcode\b|programm|software|\bdaten\b|"
+                   r"\bsonde\b|raumsonde|rechner|megabyte|gigabyte|kilobyte|\bbytes?\b|festplatte|handy|smartphone|\bbits?\b|prozessor|\bserver")
+JUNK_TALK_RE = (r"datenmüll|müll (?:send|funk|red|erzähl|laber|schreib|von sich)|(?:send\w*|funk\w*|red\w*|erzähl\w*|laber\w*|schreib\w*) (?:\w+ ){0,4}müll|"
+                r"(?:unverständlich\w*|wirr\w*|digital\w*|sinnlos\w*) müll|müll (?:aus dem (?:all|weltall|weltraum))")
+PROBE_RE = r"raumsonde|weltraumsonde|voyager"
+SPACE_RE = (r"weltall|weltraum|\balls?\b|raumsonde|weltraumsonde|voyager|interstellar|galaxi|planet|umlaufbahn|orbit|astronaut|\bmond|sonnensystem|\bstern|satellit|rakete|raumschiff|raumstation|\biss\b|"
             r"kosmos|universum|schwarze\w* l[oö]ch|\berde\b|\bsonne\b|meteor|asteroid|komet|außerirdisch|(?<![a-zäöüß])aliens?\b|\bufo|raumfahrt|schwerelos|mars\b|jupiter|saturn|milchstraße")
 GROUP_RE = (r"\b(zwei|drei|vier|fünf) (?:\w+ )?(gründer\w*|freund\w*|forscher\w*|wissenschaftler\w*|student\w*|brüder\w*|schwestern|kolleg\w*|ingenieur\w*|"
             r"entwickler\w*|tüftler\w*|erfinder\w*|männer\w*|frauen|jungs|kumpel\w*|nerds|programmierer\w*|unternehmer\w*|geschwister\w*|typen|partner\w*|"
@@ -5196,6 +5277,10 @@ def _hint(text):
     merged, first = None, None
     for pat, target in HINTS:
         if _re.search(pat, t):
+            if target == "attic" and not _re.search(r"dachboden", t) and _re.search(COMPUTER_MEM_RE, t):
+                continue                                  # „im Speicher der Sonde“, „Hauptspeicher“: Computerspeicher, kein Dachboden (Video 177)
+            if target == "landfill" and not _re.search(r"müllhalde|müllberg|deponie", t) and _re.search(JUNK_TALK_RE, t):
+                continue                                  # „sendet nur noch Müll“, „Datenmüll“: Redensart, keine Müllkippe (Video 177)
             if isinstance(target, dict):
                 if merged is None:
                     merged = {k: (list(v) if isinstance(v, list) else v) for k, v in target.items()}

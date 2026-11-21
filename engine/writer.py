@@ -244,6 +244,8 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
            Heißluftballon: balloon (fliegt, acht Köpfe in der Gondel), gondola (die Gondel ganz nah), searchlight (Suchscheinwerfer vom Boden),
            dazu sewing (Nähmaschine mit Stoffbahnen) und fabric (Stoffballen). Die Regie stellt den Ballon selbst richtig hin (am Boden als Stoffberg
            mit Gondel, beim Start mit Flamme, in der Luft vor hohem Himmel, nach der Landung im Gebüsch) – in Flug-Sätzen KEINE Figuren angeben.
+           Raumsonde (Voyager und andere): probe – die Regie zeigt sie in jedem Satz, der im All spielt ("place": "space", KEINE Figuren), von selbst
+           passend: groß, klein in der Ferne, funkend, mit dem Befehl von der Erde oder mit zerhacktem Datenmüll. NIE satellite für eine Raumsonde.
            Nimm nur Requisiten, die an diesen Ort gehören (kein Karton mitten auf der Straße als Ersatz für einen Supermarkt –
            dafür gibt es den Ort "supermarket").
   "actors": 1–2 Figuren, z. B. [{"id": "mia", "action": "run", "emotion": "scared", "emote": "!", "pos": "offleft", "to": "center", "speaks": true}]

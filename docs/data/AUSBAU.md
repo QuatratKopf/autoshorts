@@ -98,6 +98,14 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   Land im Satz (`GEO_RE`) entfällt. Grafik `radar` (Radarschirm, mit `"sub": "lost"` erlischt der Leuchtpunkt) – ab dem zweiten Satz automatisch bei
   „Radar“, „Funkkontakt“, „Transponder“. Bibliothek: `muschel`. Selbsttest: `_surface`.
 
+- Raumsonde (`stage._probe_story`, greift bei `PROBE_RE` – Raumsonde, Weltraumsonde, Voyager – in Thema oder Sätzen): gezeichnete Sonde
+  (`extras._probe`: Schüssel, Gerätekasten in Goldfolie, Ausleger, Gittermast; kein Schriftzug) als `probe` (groß), `probe_far` (klein, die Sonne
+  nur noch ein Stern), `probe_signal` (funkt), `probe_uplink` (Befehl von der Erde, die Erde als blauer Punkt), `probe_glitch` (zerhackte rote
+  Wellen, Datenmüll). Jeder Satz, der im All spielt und keine Figur hat, zeigt die zum Satz passende Fassung vor `places.space_deep` (Sterne und
+  Nebel, kein Mondboden) – nie zweimal hintereinander dieselbe; Einblendungen stehen ganz oben. Im Kontrollraum kommt die Figur nur einmal zur Tür
+  herein, danach arbeitet sie am Rechner. `SPACE_RE` kennt Raumsonde/Voyager/„des Alls“; „Speicher“ neben Computer-Wörtern ist kein Dachboden
+  (`COMPUTER_MEM_RE`), „sendet nur noch Müll“ keine Müllkippe (`JUNK_TALK_RE`). Eine Ecken-Zeile mit Entfernung („… KM VON DER ERDE“) steht nur
+  über Szenen im All (`render.build_ass`); der Zähler schreibt „1 TAG“ statt „1 TAGE“. Selbsttest: `_probe`.
 - Heißluftballon (Ballonflucht, Ballonfahrt – `stage._balloon_story`, greift bei `HOTAIR_RE` in Thema oder Sätzen; ein „Luftballon“ zählt nicht): Requisiten
   `balloon` (fliegt, acht Köpfe in der Plattform-Gondel, Brennerflamme), `balloon_dark` (Gas aus), `balloon_out` (sackt schräg durch), `balloon_fill`
   (richtet sich am Boden mit Flamme auf), `balloon_ground` (Stoffberg mit Gondel), `balloon_down` (Hülle im Gebüsch), `gondola` (Gondel ganz nah),
