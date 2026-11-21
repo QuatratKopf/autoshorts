@@ -5352,8 +5352,8 @@
   "tt_publish_id": "zernio:6afd8be4582a0eae30c8e9d5",
   "error": null,
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7709471966943661344?utm_campaign=tt4d_open_api&utm_source=7608030276714774544",
-  "yt_thumb_at": 1795149221.501599,
-  "yt_thumb_tries": 4,
+  "yt_thumb_at": 1795222884.0308168,
+  "yt_thumb_tries": 5,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":"
  },
  {

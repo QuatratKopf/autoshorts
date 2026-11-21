@@ -1,5 +1,5 @@
 {
- "updated": 1795221055.1451914,
+ "updated": 1795222887.348026,
  "enough": true,
  "counted": 29,
  "total": 32,
@@ -9,7 +9,7 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 4,
-   "avg_views": 1932,
+   "avg_views": 1931,
    "avg_likes": 44.8,
    "like_rate": 2.32,
    "avg_score": 2620
@@ -18,10 +18,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 3,
-   "avg_views": 1792,
+   "avg_views": 1791,
    "avg_likes": 43.0,
    "like_rate": 2.4,
-   "avg_score": 2470
+   "avg_score": 2469
   },
   {
    "slug": "storys",
@@ -36,10 +36,10 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
-   "avg_views": 1796,
+   "avg_views": 1794,
    "avg_likes": 39.0,
    "like_rate": 2.17,
-   "avg_score": 2410
+   "avg_score": 2408
   },
   {
    "slug": "fakten",
@@ -54,10 +54,10 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 10,
-   "avg_views": 1726,
+   "avg_views": 1724,
    "avg_likes": 43.7,
    "like_rate": 2.53,
-   "avg_score": 2384
+   "avg_score": 2382
   },
   {
    "slug": "musik",
@@ -84,9 +84,9 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 1932 Aufrufe, 2.32 % Likes).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 1931 Aufrufe, 2.32 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1774 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2534 zu 706 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2533 zu 705 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -94,10 +94,10 @@
   "vier"
  ],
  "words_bad": [
+  "bekanntes",
   "lied",
   "remix",
-  "erkennst",
-  "bekanntes"
+  "erkennst"
  ],
  "top": [
   {
@@ -134,11 +134,11 @@
    "id": 139,
    "title": "Dieses winzige Tier ist zäher als ein Löwe",
    "category": "tiere",
-   "views": 2180,
+   "views": 2175,
    "likes": 54,
    "comments": 0,
    "shares": 1,
-   "score": 3030
+   "score": 3025
   },
   {
    "id": 120,
@@ -156,21 +156,21 @@
    "id": 38,
    "title": "Was passiert, wenn Drohnen deinen Alltag komplett überwachen?",
    "category": "whatif",
-   "views": 1126,
+   "views": 1125,
    "likes": 17,
    "comments": 1,
    "shares": 0,
-   "score": 1411
+   "score": 1410
   },
   {
    "id": 58,
    "title": "Wie aus einer Gaming-Bude der wertvollste Tech-Gigant wurde",
    "category": "fakten",
-   "views": 598,
+   "views": 597,
    "likes": 17,
    "comments": 0,
    "shares": 0,
-   "score": 853
+   "score": 852
   },
   {
    "id": 44,
