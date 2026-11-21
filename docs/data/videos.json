@@ -6534,7 +6534,7 @@
   "id": 173,
   "category": "motivation",
   "topic": "Niemand kommt, um dich zu retten – und das ist gut so",
-  "status": "review",
+  "status": "discarded",
   "created": 1795255799.58542,
   "title": "Niemand kommt, um dich zu retten",
   "description": "Niemand kommt, um dich zu retten\nWarum du ab heute alles allein machen musst und warum das deine einzige Rettung ist.\nWartest du noch auf den perfekten Moment?",
@@ -6572,6 +6572,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-21 13:00",
-  "review_at": 1795256180.8598497
+  "review_at": 1795256180.8598497,
+  "error": "Bei der Prüfung verworfen: Prüfung: Wecker in Park und Klassenzimmer, jubelnde Fremde, Wort über dem Gesicht, Tippfehler Tagscrollst"
  }
 ]
