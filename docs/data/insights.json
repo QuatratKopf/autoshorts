@@ -1,5 +1,5 @@
 {
- "updated": 1795230117.1470487,
+ "updated": 1795231845.619532,
  "enough": true,
  "counted": 29,
  "total": 32,
@@ -36,10 +36,10 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
-   "avg_views": 1796,
+   "avg_views": 1798,
    "avg_likes": 39.0,
    "like_rate": 2.17,
-   "avg_score": 2411
+   "avg_score": 2414
   },
   {
    "slug": "fakten",
@@ -86,7 +86,7 @@
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 1944 Aufrufe, 2.3 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1775 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2536 zu 706 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2537 zu 706 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -94,8 +94,8 @@
   "vier"
  ],
  "words_bad": [
-  "remix",
   "erkennst",
+  "remix",
   "bekanntes",
   "lied"
  ],
