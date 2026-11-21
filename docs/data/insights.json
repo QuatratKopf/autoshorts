@@ -1,27 +1,36 @@
 {
- "updated": 1795270145.3886235,
+ "updated": 1795271990.0099041,
  "enough": true,
- "counted": 31,
+ "counted": 32,
  "total": 33,
  "needed": 6,
  "categories": [
   {
+   "slug": "vergleich",
+   "name": "💰 Wer verdient mehr?",
+   "n": 1,
+   "avg_views": 2307,
+   "avg_likes": 33.0,
+   "like_rate": 1.43,
+   "avg_score": 2802
+  },
+  {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 5,
-   "avg_views": 2077,
+   "avg_views": 2087,
    "avg_likes": 43.4,
-   "like_rate": 2.09,
-   "avg_score": 2748
+   "like_rate": 2.08,
+   "avg_score": 2758
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 3,
-   "avg_views": 1798,
+   "avg_views": 1800,
    "avg_likes": 43.3,
    "like_rate": 2.41,
-   "avg_score": 2482
+   "avg_score": 2483
   },
   {
    "slug": "storys",
@@ -39,7 +48,7 @@
    "avg_views": 1804,
    "avg_likes": 39.0,
    "like_rate": 2.16,
-   "avg_score": 2418
+   "avg_score": 2420
   },
   {
    "slug": "fakten",
@@ -72,8 +81,8 @@
  "weights": {
   "fakten": 0.99,
   "grusel": 1.2,
-  "storys": 1.01,
-  "mysterien": 1.0,
+  "storys": 1.0,
+  "mysterien": 0.99,
   "tiere": 1.02,
   "whatif": 0.98,
   "comedy": 1.13,
@@ -84,9 +93,9 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2077 Aufrufe, 2.09 % Likes).",
+  "Stärkste Kategorie: 💰 Wer verdient mehr? (Ø 2307 Aufrufe, 1.43 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1759 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2542 zu 706 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2552 zu 706 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -94,10 +103,10 @@
   "vier"
  ],
  "words_bad": [
-  "remix",
   "erkennst",
-  "lied",
-  "bekanntes"
+  "remix",
+  "bekanntes",
+  "lied"
  ],
  "top": [
   {
@@ -114,11 +123,11 @@
    "id": 168,
    "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
    "category": "comedy",
-   "views": 2610,
+   "views": 2655,
    "likes": 38,
    "comments": 1,
    "shares": 0,
-   "score": 3210
+   "score": 3255
   },
   {
    "id": 77,
