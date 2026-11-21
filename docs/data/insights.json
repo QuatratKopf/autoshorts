@@ -1,5 +1,5 @@
 {
- "updated": 1795301934.3855057,
+ "updated": 1795303725.4136016,
  "enough": true,
  "counted": 32,
  "total": 35,
@@ -9,19 +9,19 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 5,
-   "avg_views": 2156,
-   "avg_likes": 44.2,
-   "like_rate": 2.05,
-   "avg_score": 2839
+   "avg_views": 2158,
+   "avg_likes": 44.0,
+   "like_rate": 2.04,
+   "avg_score": 2838
   },
   {
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 1,
-   "avg_views": 2228,
+   "avg_views": 2198,
    "avg_likes": 34.0,
-   "like_rate": 1.53,
-   "avg_score": 2738
+   "like_rate": 1.55,
+   "avg_score": 2708
   },
   {
    "slug": "tiere",
@@ -30,7 +30,7 @@
    "avg_views": 1801,
    "avg_likes": 43.3,
    "like_rate": 2.41,
-   "avg_score": 2484
+   "avg_score": 2485
   },
   {
    "slug": "storys",
@@ -93,9 +93,9 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2156 Aufrufe, 2.05 % Likes).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2158 Aufrufe, 2.04 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1720 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2560 zu 706 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2559 zu 706 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -103,9 +103,9 @@
   "vier"
  ],
  "words_bad": [
-  "bekanntes",
   "lied",
   "erkennst",
+  "bekanntes",
   "remix"
  ],
  "top": [
@@ -113,11 +113,11 @@
    "id": 168,
    "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
    "category": "comedy",
-   "views": 3009,
+   "views": 3021,
    "likes": 41,
    "comments": 1,
    "shares": 0,
-   "score": 3654
+   "score": 3666
   },
   {
    "id": 46,
@@ -153,11 +153,11 @@
    "id": 139,
    "title": "Dieses winzige Tier ist zäher als ein Löwe",
    "category": "tiere",
-   "views": 2184,
+   "views": 2185,
    "likes": 55,
    "comments": 0,
    "shares": 1,
-   "score": 3049
+   "score": 3050
   }
  ],
  "flop": [
