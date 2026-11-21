@@ -1,5 +1,5 @@
 {
- "updated": 1795268331.9233618,
+ "updated": 1795270145.3886235,
  "enough": true,
  "counted": 31,
  "total": 33,
@@ -9,10 +9,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 5,
-   "avg_views": 2067,
-   "avg_likes": 43.6,
-   "like_rate": 2.11,
-   "avg_score": 2741
+   "avg_views": 2077,
+   "avg_likes": 43.4,
+   "like_rate": 2.09,
+   "avg_score": 2748
   },
   {
    "slug": "tiere",
@@ -75,18 +75,18 @@
   "storys": 1.01,
   "mysterien": 1.0,
   "tiere": 1.02,
-  "whatif": 0.99,
+  "whatif": 0.98,
   "comedy": 1.13,
-  "musik": 0.82,
+  "musik": 0.81,
   "vergleich": 1.2,
   "motivation": 1.2,
   "liebe": 1.2,
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2067 Aufrufe, 2.11 % Likes).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2077 Aufrufe, 2.09 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1759 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2540 zu 706 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2542 zu 706 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -94,21 +94,31 @@
   "vier"
  ],
  "words_bad": [
+  "remix",
   "erkennst",
   "lied",
-  "bekanntes",
-  "remix"
+  "bekanntes"
  ],
  "top": [
   {
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2563,
+   "views": 2565,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3403
+   "score": 3405
+  },
+  {
+   "id": 168,
+   "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
+   "category": "comedy",
+   "views": 2610,
+   "likes": 38,
+   "comments": 1,
+   "shares": 0,
+   "score": 3210
   },
   {
    "id": 77,
@@ -119,16 +129,6 @@
    "comments": 0,
    "shares": 0,
    "score": 3195
-  },
-  {
-   "id": 168,
-   "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
-   "category": "comedy",
-   "views": 2557,
-   "likes": 39,
-   "comments": 1,
-   "shares": 0,
-   "score": 3172
   },
   {
    "id": 124,
