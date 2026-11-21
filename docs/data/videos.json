@@ -6673,7 +6673,7 @@
   "id": 176,
   "category": "musik",
   "topic": "Musik-Kugel: Ode an die Freude (Trap Remix)",
-  "status": "review",
+  "status": "published",
   "created": 1795273802.5576692,
   "title": "Bekanntes Lied als Trap-Remix – erkennst du es? 🎵",
   "description": "Ein Lied, das jeder kennt – als Trap-Remix, jede Glasscheibe ist ein Ton. Erkennst du es? 🎵\nSchreib in die Kommentare, welches Lied es ist – und welches als Nächstes einen Remix bekommen soll!",
@@ -6701,6 +6701,12 @@
   "look": "musik",
   "mp4": true,
   "slot": "2026-11-21 18:00",
-  "review_at": 1795273895.3166878
+  "review_at": 1795273895.3166878,
+  "zernio_id": "6b01b681f86046332fe0a9f2",
+  "yt_status": "Zernio: published",
+  "yt_id": "Ooh7e4SAJBQ",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6b01b681f86046332fe0a9f2",
+  "error": null
  }
 ]
