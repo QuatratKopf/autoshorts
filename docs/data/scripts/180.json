@@ -1,0 +1,423 @@
+{
+ "title": "Wie die NASA Voyager 1 aus 24 Milliarden Kilometern rettete",
+ "scenes": [
+  {
+   "text": "Voyager eins sendet aus Milliarden Kilometern plötzlich unlesbaren Datensalat.",
+   "see": "Voyager 1 fliegt durch das dunkle Weltall.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    },
+    {
+     "type": "kontrollraum"
+    }
+   ],
+   "actors": [
+    {
+     "id": "ingenieurin",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "SEIT 1977"
+   }
+  },
+  {
+   "text": "Doch die Ingenieure müssen die ferne Sonde retten, ohne hinzugehen.",
+   "see": "Das Datensignal der Raumsonde verwandelt sich in Müll.",
+   "place": "space",
+   "time": "night",
+   "props": [
+    {
+     "type": "probe",
+     "pos": 540
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "DATENSALAT"
+   }
+  },
+  {
+   "text": "Die NASA-Ingenieure tüfteln an einer Lösung, denn hinfliegen ist absolut unmöglich.",
+   "see": "Die Ingenieurin sitzt schockiert vor dem Monitor im Kontrollraum.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    },
+    {
+     "type": "kontrollraum"
+    }
+   ],
+   "actors": [
+    {
+     "id": "ingenieurin",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Ein einziges Funksignal braucht zweiundzwanzig Komma fünf Stunden bis zur Sonde.",
+   "see": "Eine Grafik zeigt die riesige Entfernung zur Erde.",
+   "place": "space",
+   "backdrop": {
+    "sky": "night",
+    "ground": "water",
+    "elements": []
+   },
+   "time": "day",
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "number",
+    "kicker": "NOVEMBER 2023",
+    "value": "22,5",
+    "label": "STUNDEN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Auf eine Antwort wartet das Team fast zwei Tage, aber was verursachte den Fehler?",
+   "see": "Eine Uhr dreht sich schnell weiter.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "ingenieurin",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 2,
+    "unit": "TAGE"
+   }
+  },
+  {
+   "text": "Der Grund für das Chaos ist ein einzelner kaputter Speicherchip.",
+   "see": "Ein defekter Mikrochip blinkt rot.",
+   "place": "space",
+   "time": "night",
+   "props": [
+    {
+     "type": "probe",
+     "pos": 540
+    }
+   ],
+   "mood": "scary"
+  },
+  {
+   "text": "Damit fielen drei Prozent des gesamten Bordspeichers schlagartig aus.",
+   "see": "Ein kleiner Balken zeigt den Ausfall von drei Prozent.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "ingenieurin",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 3,
+    "unit": "%"
+   }
+  },
+  {
+   "text": "Dieser Speicher fasst nur siebzig Kilobyte, weniger als ein einziges Handyfoto.",
+   "see": "Die Ingenieurin vergleicht ein Smartphone mit einem alten Speicherbaustein.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "ingenieurin",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "number",
+    "kicker": "VOYAGER",
+    "value": "70 KB",
+    "label": ""
+   }
+  },
+  {
+   "text": "Bleibt die Frage, wie man eine Sonde ohne Ersatzteile repariert.",
+   "see": "Ein Funksignal breitet sich von der Erde im Weltall aus.",
+   "place": "space",
+   "time": "night",
+   "props": [
+    {
+     "type": "probe",
+     "pos": 540
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "DIE FRAGE"
+   }
+  },
+  {
+   "text": "War die Mission damit vorbei? Die Ingenieure hatten eine geniale Idee.",
+   "see": "Die Ingenieurin arbeitet konzentriert am Code auf ihrem Computer.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "ingenieurin",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Sie zerlegten den kaputten Programmcode einfach in viele kleine Stücke.",
+   "see": "Ein Programmcode teilt sich in virtuelle Puzzleteile auf.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "ingenieurin",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "CODE ZERLEGT"
+   }
+  },
+  {
+   "text": "Diese Schnipsel verteilten sie auf freie Plätze, doch würde der Befehl im All ankommen?",
+   "see": "Die Schnipsel verteilen sich auf freie Stellen einer Speicherkarte.",
+   "place": "space",
+   "time": "night",
+   "props": [
+    {
+     "type": "probe_uplink",
+     "pos": 540
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Im April 2024 schickten sie den Rettungsbefehl durch das All.",
+   "see": "Im Kontrollraum drückt die Ingenieurin die Eingabetaste.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "ingenieurin",
+     "speaks": true,
+     "action": "point",
+     "emotion": "worried",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "APRIL 2024"
+   },
+   "hud": "APRIL 2024"
+  },
+  {
+   "text": "Der Befehl reiste fast vierundzwanzig Milliarden Kilometer zum Ziel.",
+   "see": "Das Signal reist als Lichtstrahl an Sternen vorbei.",
+   "place": "space",
+   "time": "day",
+   "props": [
+    {
+     "type": "raumsonde"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "number",
+    "kicker": "APRIL 2024",
+    "value": "24 MRD.",
+    "label": "KM",
+    "dark": false
+   }
+  },
+  {
+   "text": "Zwei Tage später kamen saubere Daten, aber funktionierten auch die Instrumente noch?",
+   "see": "Die Ingenieurin wartet nervös auf den Empfang der Antwort.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "ingenieurin",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 2,
+    "unit": "TAGE"
+   }
+  },
+  {
+   "text": "Seit Juni 2024 liefern alle vier Messgeräte wieder frische Wissenschaftsdaten.",
+   "see": "Vier Messgeräte an der Sonde schalten sich nacheinander ein.",
+   "place": "space",
+   "time": "night",
+   "props": [
+    {
+     "type": "probe",
+     "pos": 540
+    }
+   ],
+   "mood": "happy",
+   "hud": "JUNI 2024"
+  },
+  {
+   "text": "Die Sonde fliegt unaufhaltsam weiter durch den dunklen interstellaren Raum.",
+   "see": "Voyager 1 gleitet majestätisch durch den interstellaren Raum.",
+   "place": "space",
+   "time": "night",
+   "props": [
+    {
+     "type": "probe_far",
+     "pos": 540
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Das war die spektakulärste Fernreparatur in der gesamten Geschichte der Menschheit.",
+   "see": "Die Ingenieurin jubelt stolz im Kontrollraum.",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "ingenieurin",
+     "speaks": true,
+     "action": "laugh",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "card",
+    "text": "REKORD-REPARATUR"
+   }
+  },
+  {
+   "text": "Und das Allerbeste daran ist:",
+   "see": "Voyager 1 zieht weiter ihre Bahn durch die Unendlichkeit.",
+   "place": "space",
+   "time": "night",
+   "props": [
+    {
+     "type": "probe",
+     "pos": 540
+    }
+   ],
+   "mood": "calm"
+  }
+ ]
+}

@@ -6841,5 +6841,46 @@
   "thumb": true,
   "look": "cartoon",
   "mp4": true
+ },
+ {
+  "id": 180,
+  "category": "storys",
+  "topic": "Wie NASA-Ingenieure die Raumsonde Voyager 1 aus 24 Milliarden Kilometern Entfernung retteten – Vorgaben als Stichpunkte, nicht wörtlich abschreiben: Der erste Satz nennt Voyager 1 beim Namen; kein Satz wiederholt einen früheren, jede Frage nur einmal. Start 1977, seit über 46 Jahren unterwegs; im November 2023 sendet die Sonde plötzlich nur noch unlesbaren Datensalat (sie verstummt nicht, das Funksignal kommt weiter an); rund 24 Milliarden Kilometer entfernt, weiter weg als alles, was Menschen je gebaut haben; ein Funksignal braucht 22,5 Stunden für einen Weg, eine Antwort kommt also erst nach rund 45 Stunden, fast zwei Tage; Ursache nach Monaten gefunden: ein einziger defekter Speicherchip im Flugdaten-Computer, rund 3 Prozent des Speichers; hinfliegen und reparieren unmöglich; der ganze Bordspeicher fasst nur rund 70 Kilobyte, weniger als ein einziges Handyfoto; Lösung: den betroffenen Programmcode in Stücke teilen und auf freie Stellen im Speicher verteilen; im April 2024 Befehl ins All gesendet, rund zwei Tage später wieder lesbare Daten; seit Juni 2024 liefern alle vier Messgeräte wieder; die Sonde fliegt weiter durch den interstellaren Raum. Jahreszahlen nur 1977, 2023 und 2024. Keine anderen Jahreszahlen. Keine Personennamen. Sätze über die Sonde, das Funksignal und den Befehl spielen im All (place space, keine Figuren, kein eigener Hintergrund), Sätze über die Ingenieure im Kontrollraum (place lab) mit einer Ingenieurin am Rechner. Kein Dachboden, keine Stadt, keine Wiese. Titelbild-Text: RETTUNG IM ALL.",
+  "status": "rendered",
+  "created": 1795290284.385904,
+  "title": "Wie die NASA Voyager 1 aus 24 Milliarden Kilometern rettete",
+  "description": "Wie die NASA Voyager 1 gerettet hat!\nEin defekter Chip legte den Computer lahm.\nTraust du dir zu, so ein Problem zu lösen?",
+  "hashtags": [
+   "#shorts",
+   "#voyager1",
+   "#nasa",
+   "#weltall",
+   "#tech",
+   "#wissenschaft",
+   "#fyp",
+   "#viral"
+  ],
+  "tags": [
+   "voyager 1",
+   "nasa",
+   "weltall",
+   "raumsonde",
+   "weltraum",
+   "technik",
+   "wissenschaft",
+   "interstellar"
+  ],
+  "thumb_text": "RETTUNG IM ALL",
+  "missing": null,
+  "cover_ms": 83909,
+  "duration": 83.8,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
