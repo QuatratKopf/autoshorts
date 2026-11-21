@@ -614,3 +614,18 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Nach Video 172 (zweiter Neubau, verworfen): `_studio_story` tauscht die Figur, wenn der Satz vom anderen handelt („nimmt Tobi dreimal so
   viel ein“ – im Bild war Nina; „Tätowierer verdienen …“ – Nina stand im Tattoo-Studio): die genannte Person bzw. die Besitzerin des
   Studios steht in ihrem Studio. `stage._score_labels`: der Punktestand trägt die Namen des Duell-Bilds (statt „PUNKT NÄGEL“).
+
+- Ausbau 21.11.2026 (keine offenen `needs` in den Plänen; aufgeräumt wurden die ältesten vorläufigen Zeichnungen und das Studio-Video):
+  Bibliothek von Hand neu gezeichnet statt der vorläufigen Fassung: `kaffeebohne` (zwei geröstete Bohnen mit Kerbe; auch „Bohne/Bohnen“), `keule`
+  (Holzkeule mit Astknoten und Griffwicklung), `radar` (Radarstation: Häuschen, Gittermast, schräge Schüssel mit Funkwellen – pulsiert; als Bild 8 m,
+  steht damit in keinem Zimmer), `pinzette` (offene Stahlpinzette; der Alias „zange“ ist weg), `notenschluessel` (Notenblatt mit Violinschlüssel und
+  zwei Noten; auch „Notenschlüssel“, „Notenblatt“, „Notenlinien“), `schwamm` (gelber Küchenschwamm mit grüner Scheuerseite und Schaum), `ohrstöpsel`
+  (zwei orange Schaumstoff-Stöpsel am Band, kein Markenname als Alias), `gelnagel` (Fächer bunter Kunstnägel auf einem Ständer statt eines einzelnen
+  abgeschnittenen Fingers; ohne den Alias „fingernagel“).
+  Entfernt: die vorläufigen Zeichnungen `tattoomaschine`, `nagelfeile`, `tätowiernadel` – dafür gibt es seit dem 20.11. die gezeichneten Requisiten
+  `tattoomachine` und `nailfile`, die die Figur im Studio in der Hand hält; die Bibliotheks-Fassungen lagen zusätzlich am Boden. „Gel“ ist ein Stoff,
+  kein Ding (`main.NO_THINGS`); „Nagelgel“, „UV-Gel“, „Aufbaugel“ zeigen das Fläschchen `nailpolish`.
+  Noch offen (vorläufige Zeichnungen der Text-KI): tarantel (Alias „spinne“ – gehört als Wesen gezeichnet), insekt, erdloch (Alias „loch“ zu weit),
+  kunststoffbecken (Alias „becken“ zu weit), nachricht (Briefumschlag bei jedem „Nachricht“), zigarette, ohr (Körperteil allein im Bild).
+  Offene Wünsche ohne Zeichnung: raum, polyp, knie, anwaltstitel, toplitzsee, miete, algorithmus, statistik, musik, knall, friteuse, dach, hand,
+  handfläche, steuererklärung (greifbar davon: polyp, friteuse, dach, steuererklärung).

@@ -142,7 +142,7 @@ NO_THINGS = {"bug", "bugs", "glitch", "glitches", "fehler", "regel", "regeln", "
              "haar", "haare", "härchen", "haarwurzel", "haarwurzeln", "haut", "körper", "kopf",
              "tönnchen", "tönnchenform", "tönnchenstadium", "tonnenstadium", "eiweiß", "schutz-eiweiß", "schutzeiweiß", "erbgut", "stoffwechsel", "strahlung",
              "wand", "wände", "zimmerwand", "punkt", "punkte",
-             "gameboy", "game boy", "playstation", "xbox", "nintendo", "iphone", "ipad"}       # Körperteile allein im Bild (ein Haarschopf ohne Gesicht auf dem Tisch) sehen befremdlich aus
+             "gel", "gameboy", "game boy", "playstation", "xbox", "nintendo", "iphone", "ipad"}       # Körperteile allein im Bild (ein Haarschopf ohne Gesicht auf dem Tisch) sehen befremdlich aus
 
 
 def known_thing(word):

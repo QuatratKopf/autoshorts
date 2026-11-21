@@ -4042,7 +4042,7 @@ PROPS["nailpolish"] = p_nailpolish
 PROP_ALIASES.update({"tattoomaschine": "tattoomachine", "tätowiermaschine": "tattoomachine", "tattoo machine": "tattoomachine", "tattoo gun": "tattoomachine", "tattoo_gun": "tattoomachine",
                      "tattoonadel": "tattoomachine", "tätowiernadel": "tattoomachine", "tattoo tool": "tattoomachine", "tattoo needle": "tattoomachine", "tattoo pen": "tattoomachine",
                      "nagelfeile": "nailfile", "feile": "nailfile", "nail file": "nailfile", "nail_file": "nailfile",
-                     "nagellack": "nailpolish", "nail polish": "nailpolish", "nail_polish": "nailpolish", "gel-lack": "nailpolish", "gellack": "nailpolish", "nagellackfläschchen": "nailpolish"})
+                     "nagellack": "nailpolish", "nail polish": "nailpolish", "nail_polish": "nailpolish", "gel-lack": "nailpolish", "nagelgel": "nailpolish", "uv-gel": "nailpolish", "aufbaugel": "nailpolish", "gellack": "nailpolish", "nagellackfläschchen": "nailpolish"})
 SIZES["tattoomachine"] = (0.24, 1262)
 SIZES["nailfile"] = (0.2, 1262)
 SIZES["nailpolish"] = (0.14, 1262)
