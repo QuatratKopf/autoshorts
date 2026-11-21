@@ -1,5 +1,5 @@
 {
- "updated": 1795231845.619532,
+ "updated": 1795233722.047064,
  "enough": true,
  "counted": 29,
  "total": 32,
@@ -12,7 +12,7 @@
    "avg_views": 1944,
    "avg_likes": 44.8,
    "like_rate": 2.3,
-   "avg_score": 2632
+   "avg_score": 2633
   },
   {
    "slug": "tiere",
@@ -95,9 +95,9 @@
  ],
  "words_bad": [
   "erkennst",
+  "lied",
   "remix",
-  "bekanntes",
-  "lied"
+  "bekanntes"
  ],
  "top": [
   {
