@@ -1,5 +1,5 @@
 {
- "updated": 1795360132.7189848,
+ "updated": 1795361928.7126226,
  "enough": true,
  "counted": 34,
  "total": 36,
@@ -9,28 +9,28 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 5,
-   "avg_views": 2273,
+   "avg_views": 2323,
    "avg_likes": 46.4,
-   "like_rate": 2.04,
-   "avg_score": 2989
+   "like_rate": 2.0,
+   "avg_score": 3039
   },
   {
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 1,
-   "avg_views": 2329,
+   "avg_views": 2328,
    "avg_likes": 34.0,
    "like_rate": 1.46,
-   "avg_score": 2839
+   "avg_score": 2838
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 3,
-   "avg_views": 1805,
+   "avg_views": 1804,
    "avg_likes": 43.3,
    "like_rate": 2.4,
-   "avg_score": 2488
+   "avg_score": 2487
   },
   {
    "slug": "storys",
@@ -47,8 +47,8 @@
    "n": 2,
    "avg_views": 1810,
    "avg_likes": 39.0,
-   "like_rate": 2.15,
-   "avg_score": 2425
+   "like_rate": 2.16,
+   "avg_score": 2424
   },
   {
    "slug": "fakten",
@@ -66,16 +66,16 @@
    "avg_views": 1732,
    "avg_likes": 43.7,
    "like_rate": 2.52,
-   "avg_score": 2391
+   "avg_score": 2390
   },
   {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 4,
-   "avg_views": 1556,
+   "avg_views": 1552,
    "avg_likes": 10.2,
    "like_rate": 0.66,
-   "avg_score": 1754
+   "avg_score": 1751
   },
   {
    "slug": "motivation",
@@ -88,24 +88,24 @@
   }
  ],
  "weights": {
-  "fakten": 1.0,
+  "fakten": 0.99,
   "grusel": 1.2,
-  "storys": 1.02,
-  "mysterien": 1.01,
+  "storys": 1.01,
+  "mysterien": 1.0,
   "tiere": 1.03,
   "whatif": 0.99,
-  "comedy": 1.24,
-  "musik": 0.73,
+  "comedy": 1.26,
+  "musik": 0.72,
   "vergleich": 1.2,
   "motivation": 1.2,
   "liebe": 1.2,
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2273 Aufrufe, 2.04 % Likes).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2323 Aufrufe, 2.0 % Likes).",
   "Schwächste Kategorie: 🔥 Motivation (Ø 862 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2516 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2642 zu 2033 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2523 zu 706 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2653 zu 2032 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -113,9 +113,9 @@
   "vier"
  ],
  "words_bad": [
-  "remix",
   "bekanntes",
   "erkennst",
+  "remix",
   "lied"
  ],
  "top": [
@@ -123,11 +123,11 @@
    "id": 168,
    "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
    "category": "comedy",
-   "views": 3585,
+   "views": 3835,
    "likes": 52,
    "comments": 1,
    "shares": 0,
-   "score": 4395
+   "score": 4645
   },
   {
    "id": 46,
@@ -175,11 +175,11 @@
    "id": 176,
    "title": "Bekanntes Lied als Trap-Remix – erkennst du es? 🎵",
    "category": "musik",
-   "views": 934,
+   "views": 923,
    "likes": 7,
    "comments": 2,
    "shares": 0,
-   "score": 1099
+   "score": 1088
   },
   {
    "id": 58,
