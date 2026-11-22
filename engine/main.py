@@ -142,6 +142,7 @@ NO_THINGS = {"bug", "bugs", "glitch", "glitches", "fehler", "regel", "regeln", "
              "haar", "haare", "härchen", "haarwurzel", "haarwurzeln", "haut", "körper", "kopf",
              "tönnchen", "tönnchenform", "tönnchenstadium", "tonnenstadium", "eiweiß", "schutz-eiweiß", "schutzeiweiß", "erbgut", "stoffwechsel", "strahlung",
              "wand", "wände", "zimmerwand", "punkt", "punkte",
+             "nachricht", "nachrichten",      # „Nachricht“ ist meist eine Textnachricht oder Meldung – die gelernte Zeichnung stellte bei jedem Satz einen Briefumschlag ins Bild (Ausbau 22.11.2026)
              "gel", "gameboy", "game boy", "playstation", "xbox", "nintendo", "iphone", "ipad"}       # Körperteile allein im Bild (ein Haarschopf ohne Gesicht auf dem Tisch) sehen befremdlich aus
 
 
@@ -156,7 +157,7 @@ def known_thing(word):
             | {"teppich", "teppiche", "beerdigung", "trauerfeier", "trauergäste", "sarg", "staub",   # Teppich liegt im Wohnzimmer schon; gelernt wurde ein Tisch mit Muster (Video 167)
                "mensch", "menschen", "leute", "person", "personen", "figur", "mann", "frau", "kind", "kinder", "menge", "familie",
                "katze", "hund", "spinne", "krebs", "krebse", "geist", "roboter", "vogel", "vögel", "dinosaurier", "fisch", "fische", "hai", "biene", "bienen",
-               "wespe", "delfin", "delfine", "delphin", "schweinswal", "schweinswale", "tümmler", "kuh", "kühe", "rind", "rinder", "schwein", "schweine", "ferkel",
+               "wespe", "tarantel", "taranteln", "vogelspinne", "vogelspinnen", "delfin", "delfine", "delphin", "schweinswal", "schweinswale", "tümmler", "kuh", "kühe", "rind", "rinder", "schwein", "schweine", "ferkel",
                "frosch", "frösche", "pfeilgiftfrosch", "pfeilgiftfrösche", "giftfrosch", "schnabeltier", "schnabeltiere", "kugelfisch", "kugelfische", "fugu", "giftsporn", "sporn",
                "schimpanse", "schimpansen", "affe", "affen", "mücke", "mücken", "stechmücke", "fliege", "löwe", "löwen", "löwin", "raubkatze", "atemloch", "atemlöcher", "eisloch", "eislöcher", "armee", "soldaten", "truppen", "heer",
                "gehirn", "hirn", "himmel", "boden", "licht", "dunkelheit", "nacht", "regen", "schnee", "sturm", "wind", "nebel", "erdbeben", "hitze", "kälte", "kaelte", "frost"})

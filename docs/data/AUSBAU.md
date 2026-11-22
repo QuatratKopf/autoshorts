@@ -398,6 +398,26 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   (`_lowpass`, `LOWPASS`) und steuert nach der überabgetasteten Spitze aus (`true_peak`, `TRUE_PEAK` = −2,5 dBTP; `PEAK` gilt nicht mehr).
   Gemessen danach: Glas rund −15 LUFS, Pop rund −11 LUFS, nach AAC kein abgeschnittener Abtastwert. Selftest: beides in `_bounce`.
 
+- Ausbau 22.11.2026 (13-Uhr-Termin „Doppelgänger am Telefon: Hörst du dich selbst?“: display; dazu die Wünsche aus dem Raumsonden-Video):
+  Neue Requisite `display` (`extras.p_display`: Smartphone aufrecht im Ständer, der Bildschirm flackert – hell, fast aus, Störstreifen –, darauf ein
+  Anrufbild ohne Schrift mit rotem Auflegen-Knopf). Wörter Display, Handydisplay, Handybildschirm, Touchscreen, Sperrbildschirm (`TEXT_PROPS`);
+  leuchtet nachts im eigenen Schein (`GLOWS`), als Einschub (`shot: insert`) groß allein im Bild. Der Plan-Satz „Das Display flackert kurz auf …“
+  gab vorher ein leeres Bild (das Drehbuch setzte dort `phone`, das es nur in der Hand gibt).
+  Neuer Ort `controlroom` (`places.controlroom`: dunkler Kontrollraum mit Anzeigewand – Erde mit Flugbahn, Balken, Messkurve, Rundanzeige,
+  Meldezeilen –, links und rechts Bedienpulte mit Monitoren; Lämpchen blinken, das Ziel pulsiert: `extras.draw_ambient`). Wörter Kontrollraum,
+  Kontrollzentrum, Leitwarte, Leitstand, Leitstelle, Bodenstation, Flugleitung, Mission Control (`HINTS`, `places.ALIASES`); die Text-KI darf
+  ihn wählen. Die Raumsonden-Regie (`_probe_story`) lässt Labor-Szenen, wie sie sind – der Kontrollraum kommt nur, wenn Satz oder Drehbuch ihn nennen.
+  Bibliothek von Hand neu gezeichnet statt der vorläufigen Fassung: `messgerät` (gelbes Multimeter mit Anzeige, Drehschalter und zwei Messspitzen),
+  `insekt` (Marienkäfer von der Seite; auch Käfer, Krabbeltier), `zigarette` (im Aschenbecher mit Rauchfaden; auch Kippe, Aschenbecher).
+  Entfernt: `raumsonde` (es gibt die gezeichnete Sonde `probe`; die Notfassung hängte sich mit dem Alias „satellit“
+  zusätzlich an jeden Satelliten-Satz), `kontrollraum` (ein Ort, kein Gegenstand – jetzt `controlroom`), `tarantel` (Alias „spinne“; Tarantel und
+  Vogelspinne sind das Wesen `spider`, auch in `NAMED_ANIMALS`), `nachricht` (stellte bei jedem „Nachricht“ einen Briefumschlag ins Bild –
+  jetzt `briefumschlag` mit Siegel, nur bei Briefumschlag/Kuvert; „Nachricht“ steht in `main.NO_THINGS`). `wasserrohr` verliert den Alias
+  „leitung“ („Echos in der Leitung“ stellte im Telefon-Plan zweimal ein Wasserrohr ins Bild). Selbsttest: `_ausbau2211`.
+  Noch offen (vorläufige Zeichnungen der Text-KI): erdloch (Alias „loch“ zu weit), kunststoffbecken (Alias „becken“ zu weit), ohr (Körperteil
+  allein im Bild). Offene Wünsche ohne Zeichnung: raum, polyp, knie, anwaltstitel, toplitzsee, miete, algorithmus, statistik, musik, knall,
+  friteuse, dach, hand, handfläche, steuererklärung (greifbar davon: polyp, friteuse, dach, steuererklärung).
+
 - Prüfung 16.11.2026 (Gänsehaut-Video): `writer.polish` streicht am Schlusssatz einen angefangenen Nebensatz („… jedes Mal wieder, sobald.“ –
   Liste `_DANGLING`). `stage.direct`: Siegertreppchen (`podium`) bleibt nur, wenn mindestens zwei der drei Plätze im Satz oder in den Nachbarsätzen
   genannt werden; Plakette ohne Fragezeichen, wenn der Satz nichts fragt; folgt eine Plakette direkt auf eine andere Vollbild-Grafik, weicht sie

@@ -2307,6 +2307,81 @@ def serverroom(night):
     return p.vignette()
 
 
+CONTROL_LAMPS = [(x, 1012) for x in (70, 122, 174, 226, 278, 330)] + [(x, 1012) for x in (750, 802, 854, 906, 958, 1010)]   # Lämpchen auf den Pulten (blinken: extras.draw_ambient)
+CONTROL_DOT = (668, 452)                                               # Leuchtpunkt am Ende der Flugbahn auf der großen Anzeige
+
+
+def controlroom(night):
+    """Kontrollraum / Leitwarte (Ausbau 22.11.2026 – Wunsch aus dem Raumsonden-Video; die Text-KI hatte dafür einen grauen Kasten gelernt):
+    dunkler Raum, große Anzeigewand (Mitte: Erde mit Flugbahn, links Balken und Messkurve, rechts Rundanzeige und Meldezeilen),
+    davor links und rechts Bedienpulte mit Monitoren und Lämpchen; die Mitte bleibt frei für die Figuren."""
+    p = P(False)                                                # immer Kunstlicht – kein Fenster, keine Tageszeit
+    p.room((44, 56, 90), (92, 100, 124), stripe=False, panel=False)
+    p.rect((-10, 236, W + 10, 276), (74, 84, 116), o=5)                          # Lichtschiene
+    for x in (170, 540, 910):
+        p.poly([(x - 44, 276), (x + 44, 276), (x + 28, 312), (x - 28, 312)], (250, 240, 200), o=5, glow=True)
+    p.rect((34, 336, 1046, 806), (20, 24, 38), r=18)                            # Anzeigewand
+    p.rect((34, 806, 1046, 836), (60, 68, 96), r=6, o=5)
+    # Mitte: Erde, Flugbahn, Ziel
+    p.grad((330, 358, 750, 784), (14, 30, 70), (22, 54, 110), raw=True)
+    for gy in range(400, 784, 64):
+        p.d.line((330, gy, 750, gy), fill=(34, 66, 124), width=2)
+    for gx in range(390, 750, 72):
+        p.d.line((gx, 358, gx, 784), fill=(34, 66, 124), width=2)
+    p.d.ellipse((352, 620, 492, 760), fill=(60, 140, 230), outline=INK, width=5)
+    p.d.ellipse((376, 640, 436, 690), fill=(96, 200, 130))
+    p.d.ellipse((424, 696, 470, 736), fill=(96, 200, 130))
+    p.d.ellipse((366, 632, 406, 660), fill=(150, 200, 250))
+    arc = [(470 + i * 22, 640 - int(190 * math.sin(i / 9 * math.pi / 2))) for i in range(10)]
+    for a, b in zip(arc[::2], arc[1::2]):
+        p.d.line((a, b), fill=(250, 214, 110), width=6)
+    cx, cy = CONTROL_DOT
+    p.d.ellipse((cx - 26, cy - 26, cx + 26, cy + 26), outline=(250, 214, 110), width=4)
+    p.d.ellipse((cx - 10, cy - 10, cx + 10, cy + 10), fill=(255, 240, 180))
+    p.d.rectangle((330, 358, 750, 784), outline=INK, width=6)
+    # links: Balken, darunter Messkurve
+    p.rect((56, 358, 312, 560), (16, 40, 52), o=6)
+    for i, hh in enumerate((70, 120, 90, 150, 110)):
+        p.d.rectangle((78 + i * 46, 540 - hh, 108 + i * 46, 540), fill=(90, 220, 150))
+    p.rect((56, 582, 312, 784), (16, 40, 52), o=6)
+    wave = [(70 + i * 16, 684 - int(56 * math.sin(i * 0.8) * (0.4 + 0.6 * abs(math.sin(i * 0.23))))) for i in range(15)]
+    p.line(wave, (110, 230, 250), 6)
+    p.d.line((70, 684, 298, 684), fill=(40, 90, 110), width=2)
+    # rechts: Rundanzeige, darunter Meldezeilen
+    p.rect((768, 358, 1024, 560), (30, 26, 56), o=6)
+    for r in (84, 56, 28):
+        p.d.ellipse((896 - r, 459 - r, 896 + r, 459 + r), outline=(150, 130, 250), width=4)
+    p.d.line((896, 459, 956, 400), fill=(250, 214, 110), width=6)
+    p.d.ellipse((930, 478, 946, 494), fill=(250, 120, 110))
+    p.rect((768, 582, 1024, 784), (30, 26, 56), o=6)
+    for i, (wd, col) in enumerate(((190, (220, 226, 246)), (130, (220, 226, 246)), (170, (110, 230, 150)), (90, (250, 190, 90)), (150, (220, 226, 246)))):
+        p.d.rounded_rectangle((792, 606 + i * 34, 792 + wd, 620 + i * 34), 6, fill=col)
+    # Bedienpulte links und rechts
+    for x0 in (16, 696):
+        x1 = x0 + 368
+        for mx, sc in ((x0 + 34, (120, 200, 255)), (x0 + 196, (110, 226, 160))):                  # je zwei Monitore
+            p.rect((mx, 846, mx + 140, 962), (30, 34, 48), r=8)
+            p.rect((mx + 12, 858, mx + 128, 950), sc, r=4, o=0, glow=True)
+            p.d.line((mx + 24, 880, mx + 96, 880), fill=(255, 255, 255), width=5)
+            p.d.line((mx + 24, 902, mx + 116, 902), fill=_mix(sc, 0.4, (255, 255, 255)), width=5)
+            p.d.line((mx + 24, 924, mx + 76, 924), fill=_mix(sc, 0.4, (255, 255, 255)), width=5)
+            p.rect((mx + 56, 962, mx + 84, 984), (60, 64, 80), o=5)
+        p.poly([(x0, 1040), (x1, 1040), (x1 - 22, 984), (x0 + 22, 984)], (96, 106, 140))            # schräge Bedienfläche
+        p.rect((x0, 1040, x1, 1254), (58, 66, 98), r=8)                                             # Pultkörper
+        p.rect((x0 + 20, 1066, x1 - 20, 1100), (44, 50, 78), r=6, o=4)
+        p.rect((x0 + 20, 1124, x0 + 170, 1232), (70, 80, 116), r=6, o=5)
+        p.rect((x1 - 170, 1124, x1 - 20, 1232), (70, 80, 116), r=6, o=5)
+    for i, (lx, ly) in enumerate(CONTROL_LAMPS):
+        p.d.ellipse((lx - 11, ly - 11, lx + 11, ly + 11), fill=((110, 230, 140), (250, 200, 80), (240, 96, 90))[i % 3], outline=INK, width=3)
+    p.rug((330, GROUND + 14, 750, GROUND + 150), (40, 70, 130))
+    g = Image.new("L", (W, H), 0)                                               # kühler Schein der Anzeigewand
+    ImageDraw.Draw(g).rectangle((60, 380, W - 60, 800), fill=64)
+    g = g.filter(ImageFilter.GaussianBlur(150))
+    p.im.paste(Image.new("RGB", (W, H), (110, 180, 255)), (0, 0), g)
+    p.d = ImageDraw.Draw(p.im)
+    return p.vignette()
+
+
 def plain(night):
     p = P(night)
     p.room((244, 226, 190), (210, 170, 120))
@@ -2342,7 +2417,8 @@ PLACES = {"bedroom": bedroom, "livingroom": livingroom, "street": street, "basem
           "beach": beach, "desert": desert, "snow": snow, "forest": forest, "underwater": underwater,
           "mountain": mountain, "hospital": hospital, "cave": cave, "supermarket": supermarket,
           "supermarket_empty": supermarket_empty, "bathroom": bathroom, "station": station, "restaurant": restaurant, "germany": germany, "worldmap": worldmap, "hallway": hallway, "attic": attic,
-          "serverroom": serverroom, "cinema": cinema, "diningroom": diningroom, "highsky": highsky, "garage": garage, "transit": transit, "chapel": chapel, "tattoostudio": tattoostudio, "nailstudio": nailstudio}
+          "serverroom": serverroom, "cinema": cinema, "diningroom": diningroom, "highsky": highsky, "garage": garage, "transit": transit, "chapel": chapel, "tattoostudio": tattoostudio, "nailstudio": nailstudio,
+          "controlroom": controlroom}
 OUTDOOR = tuple(OUTDOOR_SPECS) + ("custom",)
 ALIASES = {"savanne": "savannah", "steppe": "savannah", "savanna": "savannah", "serengeti": "savannah", "asphalt": "street", "werkstatt": "garage", "autowerkstatt": "garage", "kfz-werkstatt": "garage", "workshop": "garage",
            "boxengasse": "garage", "tuning": "garage", "tuningwerkstatt": "garage", "schrauberhalle": "garage", "carport": "garage", "kino": "cinema", "kinosaal": "cinema", "kinos": "cinema", "leinwand": "cinema", "kinoleinwand": "cinema",
@@ -2361,6 +2437,8 @@ ALIASES = {"savanne": "savannah", "steppe": "savannah", "savanna": "savannah", "
            "bauernhof": "farm", "dorf": "village", "tankstelle": "gasstation", "kraftwerk": "powerplant", "friedhof": "graveyard", "kirche": "church", "dom": "church", "see": "lake", "fluss": "river", "müllhalde": "landfill", "deponie": "landfill",
            "rechenzentrum": "serverroom", "serverraum": "serverroom", "serverfarm": "serverroom", "datacenter": "serverroom", "data center": "serverroom",
            "server room": "serverroom", "server": "serverroom", "datenzentrum": "serverroom",
+           "kontrollraum": "controlroom", "kontrollzentrum": "controlroom", "kontrollzentrale": "controlroom", "leitwarte": "controlroom", "leitstand": "controlroom", "leitstelle": "controlroom",
+           "bodenstation": "controlroom", "flugleitung": "controlroom", "missionskontrolle": "controlroom", "mission control": "controlroom", "control room": "controlroom", "control_room": "controlroom",
            "firmenzentrale": "headquarters", "konzernzentrale": "headquarters", "hauptsitz": "headquarters", "firmensitz": "headquarters",
            "wolkenkratzer": "headquarters", "hochhaus": "headquarters", "konzern": "headquarters", "firma": "headquarters", "hq": "headquarters",
            "eismeer": "icesea", "packeis": "icesea", "meereis": "icesea", "eisfläche": "icesea", "eisdecke": "icesea", "zugefrorenes meer": "icesea", "frozen sea": "icesea",

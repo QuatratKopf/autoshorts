@@ -194,6 +194,7 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
            supermarket_empty (leergekaufte Regale), station (Bahnhof), transit (im Bus/in der Bahn: Innenraum mit Fahrgästen), restaurant, cave, underwater, space,
            germany (Deutschlandkarte), worldmap (Weltkugel), hallway (Flur mit Türen: Hotel, Wohnhaus), attic (Dachboden),
            serverroom (Rechenzentrum mit Serverschränken – für Internet, Cloud, KI, Rechenleistung)
+           controlroom (Kontrollraum/Leitwarte: große Anzeigewand, Bedienpulte – für Raumfahrt-Missionen, Kraftwerk, Flugsicherung, Leitstelle)
            garage (Autowerkstatt mit Werkzeugwand – für Autos, Motoren, Tuning, Umbauten, Reparaturen)
            diningroom (Esszimmer mit gedeckter Festtafel – Familienessen, Feiertage; bei Weihnachts-Themen sind Wohn- und Esszimmer
            automatisch geschmückt). Verwandte (oma, opa, onkel, tante, mama, papa, cousin, cousine, schwester, bruder) unter genau dieser
@@ -227,7 +228,7 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
                   solarpanel, cctv (Überwachungskamera am Mast)
            Werkstatt/Technik: engine (V8-Motor), enginehoist (Motorkran hebt Motor – Ein-/Ausbau), enginestand (Motor auf Montageständer),
                   crane (Motorkran leer), tire, tires (Reifenstapel), radiator (Kühler), gearbox (Getriebe), piston (Kolben, bewegt sich),
-                  toolbox (Werkzeugwagen), wrench, speedometer (Tacho, Zeiger steigt), scale (Waage, kippt), carlift (Hebebühne), oilcan, drill (Akku-Bohrmaschine, rattert), tattoomachine (Tätowiermaschine), nailfile (Nagelfeile), nailpolish (Nagellack-Fläschchen) – klein, am besten als "hold" in der Hand der Figur, vacuum (Staubsauger; vacuum_broken: Deckel aufgesprungen, Staubwolke)
+                  toolbox (Werkzeugwagen), wrench, speedometer (Tacho, Zeiger steigt), scale (Waage, kippt), carlift (Hebebühne), oilcan, drill (Akku-Bohrmaschine, rattert), tattoomachine (Tätowiermaschine), nailfile (Nagelfeile), nailpolish (Nagellack-Fläschchen) – klein, am besten als "hold" in der Hand der Figur, vacuum (Staubsauger; vacuum_broken: Deckel aufgesprungen, Staubwolke), display (Handy-Display groß, flackert – für „das Display leuchtet/flackert“, am besten mit "shot": "insert")
            Himmel/Natur (Schaubilder, groß): drone (Drohne mit Kamera), plane, satellite, ship, ufo, meteor, explosion, earth, sun, moon, tornado, wave,
                   flood, ice, volcano, cloud, stormcloud, lightning, crack, smoke, aurora, eclipse
            (meteor fällt und schlägt ein, rocket startet, wave/flood steigen, crack reißt den Boden auf, eclipse verdunkelt

@@ -429,11 +429,13 @@
  },
  "nachricht": {
   "n": 1,
-  "last": "Was wenn dein Handy wüsste, wann du stirbst?"
+  "last": "Was wenn dein Handy wüsste, wann du stirbst?",
+  "done": true
  },
  "zigarette": {
   "n": 1,
-  "last": "Was wenn dein Handy wüsste, wann du stirbst?"
+  "last": "Was wenn dein Handy wüsste, wann du stirbst?",
+  "done": true
  },
  "algorithmus": {
   "n": 1,
@@ -752,18 +754,22 @@
  },
  "raumsonde": {
   "n": 1,
-  "last": "Voyager 1: Rettung aus 24 Milliarden Kilometern Entfernung"
+  "last": "Voyager 1: Rettung aus 24 Milliarden Kilometern Entfernung",
+  "done": true
  },
  "display": {
   "n": 1,
-  "last": "Doppelgänger am Telefon: Hörst du dich selbst?"
+  "last": "Doppelgänger am Telefon: Hörst du dich selbst?",
+  "done": true
  },
  "kontrollraum": {
   "n": 1,
-  "last": "Voyager 1: Die unmögliche Rettung aus 24 Milliarden Kilometern"
+  "last": "Voyager 1: Die unmögliche Rettung aus 24 Milliarden Kilometern",
+  "done": true
  },
  "messgerät": {
   "n": 1,
-  "last": "Voyager 1: Die unmögliche Rettung aus 24 Milliarden Kilometern"
+  "last": "Voyager 1: Die unmögliche Rettung aus 24 Milliarden Kilometern",
+  "done": true
  }
 }

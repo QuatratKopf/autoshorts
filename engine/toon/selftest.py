@@ -2143,6 +2143,37 @@ def main():
             assert extras.held_key(k_) == "prop:" + k_
             frame({"place": "plain", "props": [k_], "actors": [{"id": "du", "hold": k_}]}, None, 0.7)
     check("Tattoo-Studio und Nagelstudio: Orte, Werkzeug in der Hand (Prüfung 20.11., Plan 21 Uhr)", _studios)
+
+    def _ausbau2211():                                           # Ausbau 22.11.2026: Handy-Display, Kontrollraum, aufgeräumte Bibliothek
+        import re
+        from engine import main as _main
+        sd = stage.direct([{"text": "Du willst panisch auflegen.", "place": "bedroom", "time": "night", "actors": [{"id": "du", "action": "talk"}]},
+                           {"text": "Das Display flackert kurz auf, während die Verbindung plötzlich von alleine abbricht.", "place": "bedroom", "time": "night", "shot": "insert", "props": ["phone"]}],
+                          [(0, 4), (4, 8)], "Doppelgänger-Stimmen beim Telefonieren", "grusel", "")
+        kn = [extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(), str(q.get("type") if isinstance(q, dict) else q).lower()) for q in sd[1].get("props") or []]
+        assert "display" in kn, f"Display im Satz: das Handy-Display steht im Bild: {kn}"
+        assert _main.known_thing("display") and extras.prop_fit("display"), "display ist der Engine bekannt"
+        for t_ in (0.3, 0.75, 1.3, 2.2):
+            assert frame({"shot": "insert", "props": [{"type": "display"}], "mood": "scary"}, None, t_) is not None
+        frame({"place": "bedroom", "time": "night", "actors": [{"id": "du", "action": "shocked"}], "props": [{"type": "display"}]})
+        for w_ in ("kontrollraum", "Leitwarte", "mission control", "control_room"):
+            assert places.resolve(w_) == "controlroom", w_
+        assert stage._hint("Im Kontrollraum der Bodenstation warten alle auf das Signal.") == "controlroom"
+        assert "controlroom" in stage.INDOOR and _main.known_thing("kontrollraum")
+        for ng_ in (False, True):
+            assert frame({"place": "controlroom", "time": "night" if ng_ else "day", "actors": [{"id": "du", "action": "point"}], "props": [{"type": "computer"}]}) is not None
+        for w_ in ("lib_raumsonde", "lib_kontrollraum", "lib_tarantel", "lib_nachricht"):
+            assert w_ not in extras.PROPS, f"vorläufige Zeichnung entfernt: {w_}"
+        assert extras.PROP_ALIASES.get("raumsonde") == "probe" and extras.PROP_ALIASES.get("satellit") != "lib_raumsonde"
+        tp = stage._lib_props()
+        hit = lambda txt: [k_ for pat_, k_ in tp if re.search(pat_, txt)]
+        assert hit("echos in der leitung") == [], f"„Leitung“ beim Telefonieren ist kein Wasserrohr: {hit('echos in der leitung')}"
+        assert hit("eine nachricht von dir") == [] and hit("ein briefumschlag liegt da") == ["lib_briefumschlag"]
+        assert hit("das multimeter zeigt null") == ["lib_messgeraet"] and hit("eine zigarette") == ["lib_zigarette"] and hit("ein käfer krabbelt") == ["lib_insekt"]
+        for k_ in ("lib_messgeraet", "lib_insekt", "lib_zigarette", "lib_briefumschlag"):
+            frame({"place": "livingroom", "actors": [{"id": "du"}], "props": [{"type": k_}]})
+            frame({"shot": "insert", "props": [{"type": k_}]})
+    check("Ausbau 22.11.: Handy-Display, Kontrollraum, Bibliothek aufgeräumt", _ausbau2211)
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")
     import collections
     for line, n in collections.Counter(e.strip().splitlines()[-1] + "  @ " + e.strip().splitlines()[-3].strip()[:90] for e in errors).most_common(30):

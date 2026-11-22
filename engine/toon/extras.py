@@ -2479,6 +2479,14 @@ def draw_ambient(layer, place, night, t):
                     d.ellipse((x0 + 30, y + 16, x0 + 48, y + 34), fill=(24, 60, 40, 255))
                 if math.sin(t * (3 + b * 7) + a * 40) > 0.55:
                     d.ellipse((x0 + 56, y + 16, x0 + 74, y + 34), fill=(250, 200, 80, 255))
+    if place == "controlroom":                                    # Lämpchen auf den Pulten blinken, das Ziel auf der Anzeigewand pulsiert
+        from .places import CONTROL_DOT, CONTROL_LAMPS
+        for i, (lx, ly) in enumerate(CONTROL_LAMPS):
+            if math.sin(t * (3 + (i * 7 % 5)) + i * 1.9) > 0.35:
+                d.ellipse((lx - 8, ly - 8, lx + 8, ly + 8), fill=(30, 34, 48, 255))
+        ph = (t * 0.8) % 1
+        r = 14 + ph * 44
+        d.ellipse((CONTROL_DOT[0] - r, CONTROL_DOT[1] - r, CONTROL_DOT[0] + r, CONTROL_DOT[1] + r), outline=(255, 230, 150, int(230 * (1 - ph))), width=5)
     if place == "station":                                        # Anzeige blinkt
         if int(t * 1.5) % 2:
             d.rectangle((700, 478, 800, 500), fill=(30, 40, 70, 255))
@@ -4252,3 +4260,46 @@ PROP_ALIASES.update({"motor": "engine", "motoren": "engine", "v8": "engine", "v8
 SIZES.update({"engine": (0.9, 1255), "enginestand": (1.6, 1255), "crane": (2.3, 1255), "enginehoist": (2.3, 1255), "tire": (0.7, 1260), "tires": (1.2, 1255),
               "radiator": (0.75, 1255), "gearbox": (0.7, 1258), "toolbox": (1.1, 1255), "wrench": (0.3, 1262), "speedometer": (1.1, 1255),
               "scale": (0.9, 1255), "piston": (0.6, 1260), "carlift": (2.2, 1250), "oilcan": (0.5, 1262)})
+
+
+def p_display(d, x, t, s=1.0):
+    """Handy-Display groß im Bild (Ausbau 22.11.2026, Plan „Doppelgänger am Telefon“: „Das Display flackert kurz auf, während die Verbindung
+    abbricht“ – „display“ fehlte der Engine): Smartphone steht aufrecht in einem kleinen Ständer, der Bildschirm flackert (hell – fast aus –
+    hell, Störstreifen wandern), darauf ein Anrufbild ohne Schrift: Kreis mit Kopf-Umriss, zwei Textbalken, roter Auflegen-Knopf."""
+    top, bot = GROUND - 520, GROUND - 26
+    _poly(d, [(x - 150, GROUND), (x + 150, GROUND), (x + 112, GROUND - 46), (x - 112, GROUND - 46)], (96, 100, 116))           # Ständer
+    _r(d, (x - 140, top, x + 140, bot), (34, 36, 48), 40)                                                                       # Gehäuse
+    step = int(t * 14)
+    on = 0.18 if (step * 7 + step // 3) % 5 == 0 else 0.55 if step % 4 == 1 else 1.0                                            # Flackern: kurz fast aus, dann wieder hell
+
+    def mix(c):
+        return tuple(int(12 + (v - 12) * on) for v in c)
+    sx0, sy0, sx1, sy1 = x - 118, top + 26, x + 118, bot - 26
+    d.rounded_rectangle((sx0, sy0, sx1, sy1), 24, fill=mix((70, 120, 210)))
+    d.rounded_rectangle((sx0, sy0, sx1, sy0 + 190), 24, fill=mix((96, 150, 236)))
+    d.rounded_rectangle((x - 30, top + 34, x + 30, top + 46), 6, fill=(20, 22, 30))                                             # Hörer-Schlitz
+    d.ellipse((x - 58, sy0 + 44, x + 58, sy0 + 160), fill=mix((226, 234, 250)))                                                 # Anrufer: Kreis mit Kopf-Umriss
+    d.ellipse((x - 22, sy0 + 64, x + 22, sy0 + 108), fill=mix((120, 140, 190)))
+    d.chord((x - 44, sy0 + 112, x + 44, sy0 + 200), 180, 360, fill=mix((120, 140, 190)))
+    d.rounded_rectangle((x - 80, sy0 + 196, x + 80, sy0 + 216), 8, fill=mix((240, 244, 255)))                                   # Name und Dauer als Balken
+    d.rounded_rectangle((x - 46, sy0 + 232, x + 46, sy0 + 246), 6, fill=mix((176, 200, 244)))
+    ky = sy1 - 78
+    d.ellipse((x - 46, ky - 46, x + 46, ky + 46), fill=mix((232, 64, 58)), outline=INK, width=5)                                # Auflegen-Knopf
+    d.arc((x - 30, ky - 12, x + 30, ky + 44), 200, 340, fill=mix((255, 255, 255)), width=12)
+    for k in range(3):                                                                                                          # Störstreifen wandern über den Schirm
+        gy = sy0 + 30 + ((step * 53 + k * 131) % int(sy1 - sy0 - 70))
+        gh = 8 + (step + k * 5) % 3 * 8
+        off = ((step * 17 + k * 29) % 5 - 2) * 12
+        d.rectangle((sx0 + 8 + max(0, off), gy, sx1 - 8 + min(0, off), gy + gh), fill=mix((214, 228, 255)) if (step + k) % 2 else (16, 18, 30))
+    d.polygon([(sx0 + 8, sy0 + 110), (sx0 + 8, sy0 + 60), (sx0 + 60, sy0 + 8), (sx0 + 110, sy0 + 8)], fill=mix((150, 190, 250)))                 # Spiegelung
+    if on >= 1.0:                                                                                                               # Lichtstriche, wenn er aufflackert
+        for a in (-150, -120, -60, -30):
+            ca, sa = math.cos(math.radians(a)), math.sin(math.radians(a))
+            cx, cy = x + ca * 190, top + 190 + sa * 250
+            d.line((cx, cy, cx + ca * 44, cy + sa * 44), fill=(255, 236, 150), width=9)
+
+
+PROPS["display"] = p_display                              # Handy-Display, flackert (Regie: TEXT_PROPS „Display“, „Handybildschirm“, „Touchscreen“)
+PROP_ALIASES.update({"handydisplay": "display", "handy-display": "display", "handybildschirm": "display", "touchscreen": "display", "sperrbildschirm": "display",
+                     "phone screen": "display", "phone_screen": "display", "smartphone screen": "display"})
+SIZES["display"] = (0.8, 1262)                            # deutlich überzeichnet, damit man den Bildschirm neben der Figur erkennt

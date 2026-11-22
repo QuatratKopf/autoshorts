@@ -16,7 +16,7 @@ SCALE = 1.08            # Figuren bewusst kleiner: die Szene steht im Mittelpunk
 POS = {"left": 250, "center": 540, "right": 830, "offleft": -260, "offright": 1340,
        "links": 250, "mitte": 540, "rechts": 830}
 TALL_OV = ("phone", "checklist", "note")
-NO_FURNITURE = ("restaurant", "diningroom", "bathroom", "hallway", "supermarket", "supermarket_empty", "station", "transit", "basement", "attic", "hospital", "serverroom", "chapel", "tattoostudio", "nailstudio")
+NO_FURNITURE = ("restaurant", "diningroom", "bathroom", "hallway", "supermarket", "supermarket_empty", "station", "transit", "basement", "attic", "hospital", "serverroom", "chapel", "tattoostudio", "nailstudio", "controlroom")
 MAIN_IDS = ("du", "ich", "held", "hero", "main", "erzähler", "narrator", "a0")
 
 
@@ -444,7 +444,7 @@ def _on_table(key):
     return key in ON_TABLE or (key.startswith("lib_") and extras.SIZES.get(key, (9,))[0] <= 0.5)
 PLACE_HAS = {"kitchen": ("fridge", "table"), "office": ("computer", "table"), "supermarket": ("shelf",), "supermarket_empty": ("shelf",),
              "livingroom": ("lib_sofa", "sofa", "couch"), "forest": ("tree",), "park": ("tree",), "camp": ("tent", "fire"), "street": ("streetlamp", "house"),
-             "village": ("house",), "restaurant": ("table",), "diningroom": ("table", "chair", "candle", "lib_stuhl"), "hallway": (), "serverroom": ("computer", "shelf"),
+             "village": ("house",), "restaurant": ("table",), "diningroom": ("table", "chair", "candle", "lib_stuhl"), "hallway": (), "serverroom": ("computer", "shelf"), "controlroom": ("computer", "table", "tv"),
              "headquarters": ("house", "streetlamp"), "cinema": ("tv",)}
 
 
@@ -547,7 +547,7 @@ def _light_kind(place, night, mood, xs):
     return "floor"
 
 
-GLOWS = {"cavitation": (0, 930, 330), "lib_glasscheibe": (0, places.GROUND - 280, 340), "lib_sprungfeder": (0, places.GROUND - 150, 260), "gondola_empty": (0, places.GROUND - 300, 460), "balloon": (0, 780, 400), "balloon_dark": (0, 780, 400), "balloon_out": (0, 800, 400), "balloon_fill": (-70, places.GROUND - 470, 430),
+GLOWS = {"display": (0, places.GROUND - 150, 300), "cavitation": (0, 930, 330), "lib_glasscheibe": (0, places.GROUND - 280, 340), "lib_sprungfeder": (0, places.GROUND - 150, 260), "gondola_empty": (0, places.GROUND - 300, 460), "balloon": (0, 780, 400), "balloon_dark": (0, 780, 400), "balloon_out": (0, 800, 400), "balloon_fill": (-70, places.GROUND - 470, 430),
          "balloon_ground": (-80, places.GROUND - 130, 420), "balloon_down": (-60, places.GROUND - 150, 420)}   # leuchtet nachts selbst (Brenner) bzw. steht im Blick
 
 
@@ -1454,8 +1454,8 @@ def direct(scenes, times, topic="", style="", look=""):
                         continue                           # Feuer, Autos, Naturgewalten erscheinen nicht im Zimmer (Himmelsdinge: im Fenster)
                     if kind in ("computer", "tv", "fridge", "shelf", "cart") and places.resolve(backdrop(sc)) in NO_FURNITURE:
                         continue                           # „zocken“ im Diner stellt keinen Schreibtisch ins Restaurant
-                    if places.resolve(backdrop(sc)) == "bedroom" and sc.get("props"):
-                        break                              # im Schlafzimmer ist neben Bett und Tisch nur Platz für ein Ding
+                    if places.resolve(backdrop(sc)) == "bedroom" and have & set(extras.PROPS):
+                        break                              # im Schlafzimmer ist neben Bett und Tisch nur Platz für ein Ding (ein „phone“ aus dem Drehbuch zählt nicht: das gibt es nur in der Hand)
                     if kind in INDOOR_THINGS and places.resolve(backdrop(sc)) in ("space", "underwater", "cave"):
                         continue                           # kein Schreibtisch im All, kein Kühlschrank am Meeresgrund
                     if kind == "submersible" and places.resolve(backdrop(sc)) != "underwater":
@@ -2957,7 +2957,7 @@ NAMED_ANIMALS = ((r"\bkuh\b|\bkühen?\b|\brind(?:er|ern|es)?\b|\bkalb\b|\bkälbe
                  (r"\bmücken?\b|stechmücke|moskito", "mosquito", r"mücken|moskitos"),
                  (r"\b(?:eine|die|jede|der|einer) fliege\b|stubenfliege", "fly", r"$^"),
                  (r"\blöwen?\b|\blöwin", "lion", r"(?:\b(?:die|viele|alle|zwei|drei|mehrere|ganze[ns]?) |-)löwen\b|\blöwen (?:sind|haben|jagen|leben|töten|brüllen)|löwenrudel"),
-                 (r"spinne", "spider", r"spinnen"), (r"katze|kater\b|kätzchen", "cat", r"katzen"), (r"\bhund(?:e|es|en|chen)?\b|welpe", "dog", r"\bhunde[n]?\b|welpen"))
+                 (r"spinne|tarantel", "spider", r"spinnen|taranteln"), (r"katze|kater\b|kätzchen", "cat", r"katzen"), (r"\bhund(?:e|es|en|chen)?\b|welpe", "dog", r"\bhunde[n]?\b|welpen"))
 ANIMAL_IDIOM_RE = (r"schwein gehabt|armes schwein|kein schwein|schweinehund|sparschwein|glücksschwein|schweineteuer|affenhitze|affenzahn|laust der affe|heilige kuh|"
                    r"melkkuh|kuhhandel|hundemüde|hundeelend|katzensprung|katzenwäsche|\bkater\b.{0,20}(?:alkohol|party|getrunken)|spinnst|spinnen die")
 TALKING_RE = r"tiere?n?\b.{0,50}\b(?:sprechen|reden|sprache|sprächen)|sprechende[nrs]? tiere?"
@@ -5078,6 +5078,7 @@ def backdrop(scene):
 # Wörter im Sprechertext → passender Hintergrund (greift nur, wenn das Drehbuch einen unpassenden Allerwelts-Ort nennt)
 HARBOR_RE = r"\bhafen(?!t)|\bhäfen|hafenbecken|hafenstadt|containerterminal|containerhafen|\bkai\b|kaimauer|\bwerft"    # „Hafen“, nicht „haften“
 HINTS = [
+    (r"kontrollraum|kontrollräum|kontrollzentr|leitwarte|leitstand|leitstelle|bodenstation|flugleitung|missionskontrolle|mission control|bodenkontrolle", "controlroom"),
     (r"rechenzentr|serverfarm|serverraum|serverräume|\bserver\b|\bservern\b|rechenleistung|rechenpower|ki-modell|supercomputer|datenzentr|des (gesamten |ganzen )?internets|datenström", "serverroom"),
     (r"konzern|firmenzentrale|hauptsitz|hauptquartier|firmensitz|tech-gigant|tech-riese|techriese|wolkenkratzer|weltfirma|weltmarktführer|milliardenfirma|billionenfirma", "headquarters"),
     (r"leergekauft|leere regale|leeren regale|regale sind leer|regale leer|hamsterk|ausverkauft|geplündert", "supermarket_empty"),
@@ -5209,7 +5210,7 @@ MOOD_HINTS = [
     (r"menschen|leute|bevölkerung|einwohner|millionen|milliarden|gesellschaft", ("", "walk")),
     (r"staunen|beobachten|schauen zu|zuschauer", ("", "watch")),
 ]
-INDOOR = ("bedroom", "livingroom", "diningroom", "kitchen", "transit", "office", "classroom", "lab", "hospital", "basement", "cave", "underwater", "space", "cinema", "chapel", "tattoostudio", "nailstudio")
+INDOOR = ("bedroom", "livingroom", "diningroom", "kitchen", "transit", "office", "classroom", "lab", "hospital", "basement", "cave", "underwater", "space", "cinema", "chapel", "tattoostudio", "nailstudio", "controlroom")
 MAPS = ("germany", "worldmap")
 GARAGES = ("garage",)                                           # in der Werkstatt stehen Autos (drinnen sonst nie)
 GARAGE_VEHICLES = ("car", "police", "ambulance", "truck", "bike")
@@ -5218,7 +5219,7 @@ OUTDOOR_THINGS = ("drone", "cctv", "fire", "smoke", "volcano", "meteor", "tornad
                   "pile", "sandpile", "trash", "barrel", "generator")
 DULL = ("table", "shelf", "streetlamp", "rock", "box")          # allein als Großaufnahme langweilig
 INDOOR_THINGS = ("faucet", "glass", "candle", "cans", "clock", "door", "fridge", "tv", "computer", "shelf", "cart", "table", "money", "aquarium")
-TEXT_PROPS = [(r"staubsauger", "vacuum"), (r"motorkran|werkstattkran|bau\w* .{0,40}motor.{0,40}\bein\b|motor\w* (?:\w+ )?(?:ein|aus)ge?bau|(?:ein|aus)bau\w* .{0,30}motor|motortausch|motor\w* .{0,25}(?:hoch|heb|hängt)", "enginehoist"),
+TEXT_PROPS = [(r"staubsauger", "vacuum"), (r"\bdisplays?\b|handydisplay|handy-display|handybildschirm|handy-bildschirm|touchscreen|sperrbildschirm", "display"), (r"motorkran|werkstattkran|bau\w* .{0,40}motor.{0,40}\bein\b|motor\w* (?:\w+ )?(?:ein|aus)ge?bau|(?:ein|aus)bau\w* .{0,30}motor|motortausch|motor\w* .{0,25}(?:hoch|heb|hängt)", "enginehoist"),
               (r"motorständer|montageständer", "enginestand"), (r"\bv8\b|\bv12\b|\bw12\b|\bw16\b|\bmotor(?!rad|roller|säge|boot)\w*|motorblock|verbrenner|\bzylinder|\bps\b", "engine"),
               (r"kolben|pleuel|kurbelwelle", "piston"), (r"getriebe|kupplung|\bgänge?\b|schaltknauf", "gearbox"), (r"kühler\b|kühlwasser|überhitz", "radiator"),
               (r"(?<![a-zäöüß])(?:\w*?(?:auto|winter|sommer|ersatz|hinter|vorder|renn|gummi))?reifen\b|felge|\bräder\b", "tire"), (r"hebebühne", "carlift"), (r"werkzeug|schrauber|schraubt", "toolbox"), (r"schraubenschlüssel", "wrench"), (r"bohrmaschine|schlagbohrer|akkuschrauber|\bbohrt\b|\bbohren\b|\bbohrer\b", "drill"),
