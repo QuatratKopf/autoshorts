@@ -1,8 +1,8 @@
 {
- "updated": 1795349277.0861645,
+ "updated": 1795351099.0940797,
  "enough": true,
  "counted": 34,
- "total": 35,
+ "total": 36,
  "needed": 6,
  "categories": [
   {
@@ -18,10 +18,10 @@
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 1,
-   "avg_views": 2251,
+   "avg_views": 2327,
    "avg_likes": 34.0,
-   "like_rate": 1.51,
-   "avg_score": 2761
+   "like_rate": 1.46,
+   "avg_score": 2837
   },
   {
    "slug": "tiere",
@@ -72,10 +72,10 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 4,
-   "avg_views": 1551,
+   "avg_views": 1552,
    "avg_likes": 10.2,
    "like_rate": 0.66,
-   "avg_score": 1742
+   "avg_score": 1751
   },
   {
    "slug": "motivation",
@@ -95,7 +95,7 @@
   "tiere": 1.03,
   "whatif": 0.99,
   "comedy": 1.24,
-  "musik": 0.72,
+  "musik": 0.73,
   "vergleich": 1.2,
   "motivation": 1.2,
   "liebe": 1.2,
@@ -104,8 +104,8 @@
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2273 Aufrufe, 2.04 % Likes).",
   "Schwächste Kategorie: 🔥 Motivation (Ø 845 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2510 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2637 zu 2028 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2514 zu 706 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2641 zu 2030 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -113,10 +113,10 @@
   "vier"
  ],
  "words_bad": [
-  "erkennst",
+  "remix",
   "lied",
   "bekanntes",
-  "remix"
+  "erkennst"
  ],
  "top": [
   {
@@ -175,11 +175,11 @@
    "id": 176,
    "title": "Bekanntes Lied als Trap-Remix – erkennst du es? 🎵",
    "category": "musik",
-   "views": 919,
-   "likes": 6,
-   "comments": 1,
+   "views": 923,
+   "likes": 7,
+   "comments": 2,
    "shares": 0,
-   "score": 1039
+   "score": 1088
   },
   {
    "id": 58,
