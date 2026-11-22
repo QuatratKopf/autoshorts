@@ -1,5 +1,5 @@
 {
- "updated": 1795343692.289589,
+ "updated": 1795345515.8843904,
  "enough": true,
  "counted": 33,
  "total": 35,
@@ -9,10 +9,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 5,
-   "avg_views": 2262,
+   "avg_views": 2271,
    "avg_likes": 46.4,
-   "like_rate": 2.05,
-   "avg_score": 2978
+   "like_rate": 2.04,
+   "avg_score": 2987
   },
   {
    "slug": "vergleich",
@@ -27,10 +27,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 3,
-   "avg_views": 1802,
+   "avg_views": 1803,
    "avg_likes": 43.3,
    "like_rate": 2.4,
-   "avg_score": 2485
+   "avg_score": 2486
   },
   {
    "slug": "storys",
@@ -45,10 +45,10 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
-   "avg_views": 1807,
+   "avg_views": 1809,
    "avg_likes": 39.0,
    "like_rate": 2.16,
-   "avg_score": 2422
+   "avg_score": 2424
   },
   {
    "slug": "fakten",
@@ -72,19 +72,19 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 3,
-   "avg_views": 1760,
+   "avg_views": 1762,
    "avg_likes": 11.7,
    "like_rate": 0.66,
-   "avg_score": 1975
+   "avg_score": 1977
   },
   {
    "slug": "motivation",
    "name": "🔥 Motivation",
    "n": 1,
-   "avg_views": 831,
+   "avg_views": 845,
    "avg_likes": 45.0,
-   "like_rate": 5.42,
-   "avg_score": 1546
+   "like_rate": 5.33,
+   "avg_score": 1560
   }
  ],
  "weights": {
@@ -102,9 +102,9 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2262 Aufrufe, 2.05 % Likes).",
-  "Schwächste Kategorie: 🔥 Motivation (Ø 831 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2555 zu 706 Punkte).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2271 Aufrufe, 2.04 % Likes).",
+  "Schwächste Kategorie: 🔥 Motivation (Ø 845 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2558 zu 706 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -112,21 +112,21 @@
   "vier"
  ],
  "words_bad": [
-  "lied",
-  "erkennst",
+  "remix",
   "bekanntes",
-  "remix"
+  "lied",
+  "erkennst"
  ],
  "top": [
   {
    "id": 168,
    "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
    "category": "comedy",
-   "views": 3531,
+   "views": 3575,
    "likes": 52,
    "comments": 1,
    "shares": 0,
-   "score": 4341
+   "score": 4385
   },
   {
    "id": 46,
