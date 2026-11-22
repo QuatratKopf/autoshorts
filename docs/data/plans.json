@@ -1,701 +1,4 @@
 {
- "2026-11-21 13:00": {
-  "category": "motivation",
-  "topic": "Niemand kommt, um dich zu retten – und das ist gut so",
-  "trend": null,
-  "script": {
-   "title": "Niemand kommt, um dich zu retten",
-   "description": "Niemand kommt, um dich zu retten\nWarum du ab heute alles allein machen musst und warum das deine einzige Rettung ist.\nWartest du noch auf den perfekten Moment?",
-   "hashtags": [
-    "#shorts",
-    "#motivation",
-    "#mindset",
-    "#erfolg",
-    "#disziplin",
-    "#foryou",
-    "#viral"
-   ],
-   "tags": [
-    "motivation",
-    "mindset",
-    "Erfolg",
-    "Disziplin",
-    "Fokus",
-    "Produktivität",
-    "Ziele",
-    "Durchziehen",
-    "Selbstbewusstsein",
-    "Machen"
-   ],
-   "thumbnail": {
-    "place": "bedroom",
-    "time": "night",
-    "actor": "du",
-    "action": "shocked",
-    "emotion": "shocked",
-    "props": [
-     "phone"
-    ],
-    "weather": "",
-    "image": "Close-up of a young person staring intensely forward with fierce determination, dark background, strong contrast, empty space in the upper third for text",
-    "text": "NIEMAND KOMMT"
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "schwarz",
-     "hat": "",
-     "hair": "kurz",
-     "gender": "m",
-     "hair_color": "schwarz",
-     "skin": "hell"
-    }
-   },
-   "scenes": [
-    {
-     "text": "Du bist nicht faul. Du bist einfach nur abgelenkt.",
-     "image": "Close-up of a young man lying in bed at night looking at a glowing phone screen",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "nicht faul",
-      "abgelenkt"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "WACH AUF"
-     },
-     "see": "Du sitzt am Schreibtisch in deinem Zimmer und starrt abgelenkt auf den Tisch.",
-     "time": "day",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "sit",
-       "emotion": "worried",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "Dark bedroom with a glowing smartphone screen on the bed",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Jeden Tagscrollst du stundenlang durch fremde Leben.",
-     "image": "Young man scrolling on his phone with a bored and tired facial expression",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "stundenlang"
-     ],
-     "overlay": null,
-     "see": "Du scrollst stundenlang auf dem Smartphone.",
-     "time": "day",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "worried",
-       "emote": "",
-       "pos": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "shot": "close",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "Dark bedroom with a glowing smartphone screen on the bed",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Es ist drei Uhr nachts und du wunderst dich über die Zeit.",
-     "image": "Man looking at a digital alarm clock showing three in the morning",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "camera": "zoom_in",
-     "sfx": "tick",
-     "highlight": [
-      "drei Uhr"
-     ],
-     "overlay": {
-      "type": "phone",
-      "mode": "lock",
-      "value": "03:00",
-      "kicker": "NACHT",
-      "text": "Zu spät"
-     },
-     "see": "Es ist tiefste Nacht im Schlafzimmer und du blickst auf die Uhr.",
-     "time": "night",
-     "props": [
-      "clock"
-     ],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "Dark bedroom with a glowing smartphone screen on the bed",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Du wartest auf den perfekten Moment, der niemals kommt.",
-     "image": "Man standing by the window looking outside into the dark street",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "perfekten Moment"
-     ],
-     "overlay": null,
-     "see": "Du wartest ungeduldig am Fenster.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "sit",
-       "emotion": "sad",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Du willst starten, aber die Angst vor dem ersten Schritt stoppt dich.",
-     "image": "Man standing in front of a closed room door, hesitating to open it",
-     "who": [
-      "du"
-     ],
-     "place": "office",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "Angst",
-      "ersten Schritt"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "DER ANFANG"
-     },
-     "see": "Du willst den ersten Schritt tun, zuckst aber zurück.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "freeze",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Hier ist die harte Wahrheit, die niemand dir ins Gesicht sagt.",
-     "image": "Man looking straight into the camera with a serious and direct expression",
-     "who": [
-      "du"
-     ],
-     "place": "office",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "harte Wahrheit"
-     ],
-     "overlay": null,
-     "see": "Du stehst ernst im Raum.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "angry",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Niemand kommt, um dich zu retten.",
-     "image": "Man standing alone in the middle of an empty room, arms slightly open",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "zoom_out",
-     "sfx": "none",
-     "highlight": [
-      "Niemand kommt",
-      "retten"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "ALLEIN",
-      "color": "red"
-     },
-     "see": "Du blickst entschlossen und allein in den leeren Raum.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "angry",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Kein Held springt durch dein Fenster und löst deine Probleme.",
-     "image": "Man looking at an empty window while shaking his head",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Kein Held"
-     ],
-     "overlay": null,
-     "see": "Ein einsames Fenster zeigt nach draußen, niemand kommt.",
-     "time": "night",
-     "props": [
-      "door"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "look_around",
-       "emotion": "sad",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "sad",
-     "who_desc": "",
-     "place_desc": "Dark bedroom with a glowing smartphone screen on the bed",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Kein Mentor schenkt dir den großen Durchbruch auf dem silbernen Tablett.",
-     "image": "Man sitting at a desk with an empty sheet of paper and a pen",
-     "who": [
-      "du"
-     ],
-     "place": "office",
-     "camera": "pan_right",
-     "sfx": "none",
-     "highlight": [
-      "Durchbruch"
-     ],
-     "overlay": null,
-     "see": "Du stehst vor einem leeren Tisch.",
-     "time": "day",
-     "props": [
-      "table"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shake",
-       "emotion": "sad",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Und weißt du was? Das ist das Beste, was dir je passieren konnte.",
-     "image": "Man nodding slowly with a sudden change to a confident smile",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "das Beste"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "DEINE CHANCE"
-     },
-     "see": "Du lächelst leicht und ballst die Faust.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "happy",
-       "emote": "idea",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "happy",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Weil niemand kommt, hast du ab heute die vollständige Kontrolle.",
-     "image": "Man standing up from his chair and clenching his fist with determination",
-     "who": [
-      "du"
-     ],
-     "place": "office",
-     "camera": "shake",
-     "sfx": "none",
-     "highlight": [
-      "vollständige Kontrolle"
-     ],
-     "overlay": null,
-     "see": "Du stehst aufrecht und breitest die Arme aus.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "happy",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Wer hält dich eigentlich noch auf, wenn es keine Ausreden mehr gibt?",
-     "image": "Man pointing at his own head with a focused look",
-     "who": [
-      "du"
-     ],
-     "place": "street",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Ausreden"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "SCHLUSS DAMIT"
-     },
-     "see": "Du schaust herausfordernd in die Kamera.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "angry",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Schlag den Wecker morgen früh um sechs Uhr gnadenlos aus dem Leben.",
-     "image": "Man setting an alarm on his phone with an energetic motion",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "sechs Uhr"
-     ],
-     "overlay": null,
-     "see": "Der Wecker klingelt auf dem Nachttisch.",
-     "time": "night",
-     "props": [
-      "clock"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shake",
-       "emotion": "angry",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true,
-       "hold": "clock"
-      }
-     ],
-     "shot": "wide",
-     "mood": "panic",
-     "who_desc": "",
-     "place_desc": "Dark bedroom with a glowing smartphone screen on the bed",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Lauf diese eine Meile, wenn deine Beine brennen und du eigentlich aufgeben willst.",
-     "image": "Man running fast forward outside on a street with intense effort",
-     "backdrop": {
-      "sky": "day",
-      "ground": "road",
-      "elements": [
-       "street"
-      ]
-     },
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "laufen",
-      "aufgeben"
-     ],
-     "overlay": {
-      "type": "bar",
-      "label": "ENERGIE",
-      "value": 100
-     },
-     "see": "Du rennst entschlossen im Park.",
-     "place": "park",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "run",
-       "emotion": "angry",
-       "emote": "",
-       "pos": "offleft",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Lern diese Formel, bis sie sitzt, auch wenn du jede Sekunde verfluchst.",
-     "image": "Man sitting at a desk with an open book, writing furiously with a pen",
-     "who": [
-      "du"
-     ],
-     "place": "classroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "lernen"
-     ],
-     "overlay": null,
-     "see": "Du sitzt am Tisch und lernst konzentriert mit einem Buch.",
-     "time": "day",
-     "props": [
-      "book"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "sit",
-       "emotion": "worried",
-       "emote": "",
-       "pos": "center",
-       "speaks": true,
-       "hold": "lehrbuch"
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Nicht morgen. Nicht nächste Woche. Fang genau jetzt in dieser Sekunde an.",
-     "image": "Man standing tall and looking directly forward with total focus",
-     "who": [
-      "du"
-     ],
-     "place": "office",
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "Nicht morgen",
-      "Jetzt"
-     ],
-     "overlay": {
-      "type": "pulse",
-      "value": "1",
-      "label": "JETZT"
-     },
-     "see": "Du springst entschlossen auf und ballst die Hand zur Faust.",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "happy",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Dein Erfolg gehört am Ende nur dir ganz allein.",
-     "image": "Man raising both arms in victory inside his room",
-     "who": [
-      "du"
-     ],
-     "place": "mountain",
-     "camera": "zoom_out",
-     "sfx": "none",
-     "highlight": [
-      "nur dir"
-     ],
-     "overlay": null,
-     "see": "Du stehst auf einem Hügel und blickst in den Sonnenaufgang.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "happy",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Du bist nicht faul.",
-     "image": "Man nodding with a calm and determined face",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "nicht faul"
-     ],
-     "overlay": null,
-     "see": "Du stehst ruhig im Raum und schüttelst den Kopf.",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "idle",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [],
-  "title": "Niemand kommt, um dich zu retten",
-  "created": 1795199373.8597217
- },
  "2026-11-21 18:00": {
   "category": "musik",
   "topic": "Musik-Kugel",
@@ -2006,5 +1309,685 @@
   ],
   "title": "Doppelgänger am Telefon: Hörst du dich selbst?",
   "created": 1795285361.1395626
+ },
+ "2026-11-22 18:00": {
+  "category": "whatif",
+  "topic": "Was wäre, wenn du ein Smartphone mit ins Jahr 1800 nimmst? – Titel: Smartphone im Jahr 1800: Was passiert wirklich? Titelbild-Text: TIMETRAVEL SMARTPHONE. Vorgaben: Erzähle Schritt für Schritt in der Du-Form vom Moment der Ankunft bis zum Schicksal des Telefons. Erstes Ziel: Nach Sekunden schaust du auf das Display, aber du hast kein Netz, keine SIM-Funktion und kein WLAN, weil kein einziger Masten existiert. Zweitens nach fünf Minuten: Du machst ein Foto mit Blitz von den Menschen auf der Straße. Im Jahr 1800 halten sie das grelle Licht und das magische Bild für Hexerei oder Teufelswerk, die Wachen der Stadt werden gerufen. Drittens nach Stunden: Du wirst dem König oder dem Stadtrat vorgeführt. Du nutzt die Taschenlampen-Funktion, die Offline-Rechner-App und spielst Musik über die Lautsprecher ab, um deine Haut zu retten. Der Herrscher denkt, du bist ein mächtiger Zauberer oder ein Spion aus der Zukunft. Viertens nach zwei Tagen: Der Akku zeigt ein Prozent an und das Handy geht für immer aus. Da es im Jahr 1800 weder Steckdosen noch Stromnetze gibt (erst fast hundert Jahre später erfunden), kannst du es nie wieder aufladen. Twist/Auflösung: Du wirst nicht wegen der Technik berühmt, sondern das wertvollste Gerät der Welt wird zum nutzlosen Stück Glas und Metall im Museum des Königs. Allerletzter Satz als Frage an Gen Z: Welche Offline-App hättest du im Jahr 1800 als Erstes gezeigt?",
+  "trend": null,
+  "script": {
+   "title": "Smartphone im Jahr 1800: Was passiert wirklich?",
+   "description": "Was passiert, wenn du mit deinem Smartphone im Jahr 1800 landest?\nDu zeigst dem König deine Apps, aber das größte Problem kommt nach zwei Tagen.",
+   "hashtags": [
+    "#shorts",
+    "#geschichte",
+    "#zeitreise",
+    "#smartphone",
+    "#whatif",
+    "#viral",
+    "#fyp",
+    "#tech"
+   ],
+   "tags": [
+    "smartphone 1800",
+    "zeitreise handy",
+    "what if deutsch",
+    "was wäre wenn",
+    "geschichtsfakten",
+    "handy ohne strom",
+    "zeitreise geschichte"
+   ],
+   "thumbnail": {
+    "image": "Close-up of a medieval king staring in absolute disbelief and horror at a glowing smartphone held in front of him, dramatic dark palace background, torch light contrast",
+    "text": "TIMETRAVEL SMARTPHONE",
+    "place": "livingroom",
+    "time": "night",
+    "actor": "du",
+    "action": "shocked",
+    "emotion": "shocked",
+    "props": [
+     "phone"
+    ],
+    "weather": ""
+   },
+   "wishes": [
+    "kutsche"
+   ],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "lila",
+     "hat": "",
+     "hair": "ponytail",
+     "hair_color": "blond",
+     "gender": "w",
+     "skin": "weiß"
+    },
+    "koenig": {
+     "shirt": "rot",
+     "hat": "crown",
+     "hair": "curly",
+     "hair_color": "grau",
+     "gender": "m",
+     "skin": "weiß"
+    },
+    "wache": {
+     "shirt": "grau",
+     "hat": "helmet",
+     "hair": "",
+     "hair_color": "schwarz",
+     "gender": "m",
+     "skin": "weiß"
+    }
+   },
+   "scenes": [
+    {
+     "see": "Du stehst mitten auf einer alten Straße des Jahres 1800 und starrst verwirrt auf dein Handy.",
+     "text": "Mit deinem Smartphone landest du plötzlich im Jahr achtzehnhundert.",
+     "image": "A young woman standing on an old 1800s cobblestone street looking confused at her smartphone.",
+     "who": [
+      "du"
+     ],
+     "place": "street",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "achtzehnhundert"
+     ],
+     "hud": "JAHR 1800 · ANKUNFT",
+     "overlay": {
+      "type": "tag",
+      "text": "JAHR 1800"
+     },
+     "time": "day",
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "worried",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "status": ""
+    },
+    {
+     "see": "Das Handy-Display hat kein Netz und zeigt Empfangssuche.",
+     "text": "Doch schon nach zwei Sekunden bemerkst du einen fatalen Fehler.",
+     "image": "Close up of a glowing smartphone screen showing no signal bars and no wifi icon.",
+     "who": [
+      "du"
+     ],
+     "place": "street",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "zwei Sekunden"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik zeigt kein Netz und null Masten.",
+     "text": "Du hast kein Netz, keine SIM-Funktion und natürlich kein WLAN.",
+     "image": "Graphic showing mobile network cross mark and zero cell towers.",
+     "who": [],
+     "place": "street",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "kein Netz"
+     ],
+     "shot": "graphic",
+     "graphic": {
+      "type": "badge",
+      "kicker": "SIGNAL",
+      "text": "0 MASTEN"
+     },
+     "overlay": {
+      "type": "card",
+      "text": "KEIN NETZ"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Kein einziger Masta existiert weit und breit.",
+     "text": "Denn im Jahr achtzehnhundert existiert weltweit noch kein einziger Mobilfunkmast.",
+     "image": "Wide shot of old landscape in 1800 without any technology or towers.",
+     "who": [],
+     "place": "fields",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "Mobilfunkmast"
+     ],
+     "shot": "wide",
+     "overlay": null,
+     "time": "day",
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "hold": "phone",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du fotografierst Passanten auf der Straße mit grellem Kamerablitz.",
+     "text": "Nach fünf Minuten machst du ein Foto mit Blitz von den Passanten.",
+     "image": "The young woman holds up her glowing phone taking a photo with bright camera flash at terrified citizens in historical clothes.",
+     "who": [
+      "du"
+     ],
+     "place": "street",
+     "camera": "shake",
+     "sfx": "ding",
+     "highlight": [
+      "fünf Minuten"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "5 MINUTEN"
+     },
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Passanten weichen schockiert und verängstigt zurück.",
+     "text": "Die Menschen halten das grelle Licht sofort für gefährliche Hexerei beziehungsweise Teufelswerk.",
+     "image": "Historical citizens in panic backing away from the light, pointing in fear.",
+     "who": [
+      "du"
+     ],
+     "place": "street",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Teufelswerk"
+     ],
+     "crowd": "panic",
+     "overlay": {
+      "type": "stamp",
+      "text": "HEXEREI",
+      "color": "red"
+     },
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Zwei Wachen stürmen auf dich zu und greifen dich.",
+     "text": "Die Stadtwachen werden gerufen und nehmen dich sofort in Ketten.",
+     "image": "Two guards in old uniform grabbing the young woman on the street.",
+     "who": [
+      "du",
+      "wache"
+     ],
+     "place": "street",
+     "camera": "zoom_in",
+     "sfx": "boom",
+     "highlight": [
+      "Stadtwachen"
+     ],
+     "overlay": null,
+     "time": "day",
+     "actors": [
+      {
+       "id": "wache",
+       "action": "point",
+       "emotion": "angry",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "du",
+       "action": "cower",
+       "emotion": "scared",
+       "pos": "right"
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "; ",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du stehst im prunkvollen Thronsaal vor dem König.",
+     "text": "Nach zwei Stunden wirst du direkt dem Stadtrat und dem König vorgeführt.",
+     "image": "The young woman standing bound before a king on his throne in a grand hall.",
+     "who": [
+      "du",
+      "koenig"
+     ],
+     "place": "thronsaal",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "König"
+     ],
+     "status": "STATUS: GEFANGEN",
+     "overlay": {
+      "type": "tag",
+      "text": "2 STUNDEN"
+     },
+     "who_desc": "; ",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "left"
+      },
+      {
+       "id": "koenig",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": false,
+       "pos": "right"
+      }
+     ],
+     "place_desc": "Grand medieval palace throne room, stone walls, torches, red carpet, gold decorations",
+     "hud": ""
+    },
+    {
+     "see": "Du machst die hell leuchtende Taschenlampe am Handy an.",
+     "text": "Um deine Haut zu retten, schaltest du die helle Taschenlampe ein.",
+     "image": "The woman holds up her phone with a bright spotlight flashlight beaming through the room.",
+     "who": [
+      "du"
+     ],
+     "place": "thronsaal",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "Taschenlampe"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "Grand medieval palace throne room, stone walls, torches, red carpet, gold decorations",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du tippst blitzschnell riesige Zahlen im Offline-Rechner ein.",
+     "text": "Du rechnest mit dem Rechner riesige Zahlen in einer Sekunde aus.",
+     "image": "Close up of the phone displaying a calculator app with large numbers.",
+     "who": [
+      "du"
+     ],
+     "place": "thronsaal",
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "Rechner"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "MATHE-MAGIE"
+     },
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "Grand medieval palace throne room, stone walls, torches, red carpet, gold decorations",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Musik schallt aus dem Lautsprecher, der König staunt.",
+     "text": "Danach spielst du Musik über den Lautsprecher ab und alle erstarren.",
+     "image": "The king on his throne in utter shock listening to sound coming from the small black object.",
+     "who": [
+      "koenig"
+     ],
+     "place": "thronsaal",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "Musik"
+     ],
+     "overlay": null,
+     "time": "day",
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "happy",
+       "hold": "phone",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "koenig",
+       "action": "freeze",
+       "emotion": "shocked",
+       "pos": "right"
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "Grand medieval palace throne room, stone walls, torches, red carpet, gold decorations",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der König deutet ehrfürchtig auf dich.",
+     "text": "Der Herrscher hält dich jetzt für einen mächtigen Zauberer aus der Zukunft.",
+     "image": "The king bowing slightly with raised eyebrows, holding his hands up in reverence.",
+     "who": [
+      "koenig"
+     ],
+     "place": "thronsaal",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Zauberer"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "MAGIER",
+      "color": "purple"
+     },
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "koenig",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "Grand medieval palace throne room, stone walls, torches, red carpet, gold decorations",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Prozent Akku blinkt rot auf dem Handy-Display.",
+     "text": "Aber nach zwei Tagen zeigt dein Akku plötzlich nur noch ein Prozent.",
+     "image": "Phone screen flashing red low battery icon showing one percent remaining.",
+     "who": [
+      "du"
+     ],
+     "place": "thronsaal",
+     "camera": "shake",
+     "sfx": "tick",
+     "highlight": [
+      "ein Prozent"
+     ],
+     "overlay": {
+      "type": "bar",
+      "label": "AKKU",
+      "value": 1
+     },
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "Grand medieval palace throne room, stone walls, torches, red carpet, gold decorations",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Handy-Display wird komplett schwarz.",
+     "text": "Das Display wird schwarz und dein Zaubergerät geht für immer aus.",
+     "image": "Close up of completely black lifeless smartphone screen held in hands.",
+     "who": [
+      "du"
+     ],
+     "place": "thronsaal",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "für immer aus"
+     ],
+     "overlay": null,
+     "time": "day",
+     "props": [
+      "display"
+     ],
+     "shot": "insert",
+     "mood": "sad",
+     "who_desc": "",
+     "place_desc": "Grand medieval palace throne room, stone walls, torches, red carpet, gold decorations",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du suchst verzweifelt eine Steckdose an einer Steinwand, aber da ist keine.",
+     "text": "Du denkst, du kannst es einfach aufladen? Falsch, denn Steckdosen existieren schlichtweg nicht.",
+     "image": "The woman frantically looking at a plain stone wall with no electrical outlets anywhere.",
+     "who": [
+      "du"
+     ],
+     "place": "thronsaal",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "Steckdosen"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "KEIN STROM",
+      "color": "red"
+     },
+     "time": "day",
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "sad",
+       "hold": "phone",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "sad",
+     "who_desc": "",
+     "place_desc": "Grand medieval palace throne room, stone walls, torches, red carpet, gold decorations",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik zeigt Stromnetz-Erfindung erst achtzig Jahre später.",
+     "text": "Stromnetze werden nämlich erst fast hundert Jahre später erfunden.",
+     "image": "Graphic showing a historical timeline moving to year 1880 for electricity.",
+     "who": [],
+     "place": "thronsaal",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "hundert Jahre"
+     ],
+     "shot": "graphic",
+     "graphic": {
+      "type": "calendar",
+      "kicker": "STROMNETZ ERST IN",
+      "value": "80",
+      "label": "JAHREN"
+     },
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "Grand medieval palace throne room, stone walls, torches, red carpet, gold decorations",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das tote Handy liegt auf einem Samtkissen im Museum in einer Vitrine.",
+     "text": "Dein teures Handy wird zum völlig nutzlosen Stück Glas und Metall.",
+     "image": "The dark smartphone lying inside a glass display museum case on velvet pillow.",
+     "who": [],
+     "place": "thronsaal",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "nutzlosen Stück"
+     ],
+     "shot": "insert",
+     "props": [
+      "phone"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "MUSEUMSTÜCK"
+     },
+     "who_desc": "",
+     "place_desc": "Grand medieval palace throne room, stone walls, torches, red carpet, gold decorations",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Besucher im Museum stauen vor der Glasvitrine mit dem Handy.",
+     "text": "Es landet auf ewig im königlichen Museum als rätselhaftes Artefakt.",
+     "image": "Historical museum display with visitors standing around looking at the phone in glass case.",
+     "who": [],
+     "place": "thronsaal",
+     "camera": "zoom_out",
+     "sfx": "ding",
+     "highlight": [
+      "Artefakt"
+     ],
+     "shot": "wide",
+     "crowd": "watch",
+     "overlay": null,
+     "time": "day",
+     "props": [
+      "phone"
+     ],
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "Grand medieval palace throne room, stone walls, torches, red carpet, gold decorations",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du schaust fragend in die Kamera.",
+     "text": "Welche Offline-App hättest du im Jahr achtzehnhundert als Erstes gezeigt?",
+     "image": "The young woman looking directly into the camera asking a question with a thoughtful gesture.",
+     "who": [
+      "du"
+     ],
+     "place": "street",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Offline-App"
+     ],
+     "overlay": {
+      "type": "choice",
+      "a": "Kamera & Fotos",
+      "b": "Taschenrechner"
+     },
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "kutsche",
+   "funkmast",
+   "steckdose",
+   "museum"
+  ],
+  "title": "Smartphone im Jahr 1800: Was passiert wirklich?",
+  "created": 1795342879.8392231
  }
 }
