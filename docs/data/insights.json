@@ -1,5 +1,5 @@
 {
- "updated": 1795380288.4529414,
+ "updated": 1795382130.6247396,
  "enough": true,
  "counted": 35,
  "total": 38,
@@ -48,7 +48,7 @@
    "avg_views": 1726,
    "avg_likes": 44.5,
    "like_rate": 2.58,
-   "avg_score": 2403
+   "avg_score": 2404
   },
   {
    "slug": "whatif",
@@ -113,9 +113,9 @@
   "vier"
  ],
  "words_bad": [
+  "remix",
   "bekanntes",
   "lied",
-  "remix",
   "erkennst"
  ],
  "top": [
@@ -133,11 +133,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2577,
+   "views": 2578,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3417
+   "score": 3418
   },
   {
    "id": 77,
@@ -153,11 +153,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 2060,
+   "views": 2061,
    "likes": 68,
    "comments": 0,
    "shares": 0,
-   "score": 3080
+   "score": 3081
   },
   {
    "id": 139,
