@@ -1371,6 +1371,55 @@ def main():
         assert s5[6].get("shot") != "graphic" and s5[6]["actors"][0].get("wear") == "headphones" and str(s5[6]["actors"][0].get("id")) != "du", s5[6]
     check("Telefonat: Handy am Ohr, Angerufener im eigenen Zimmer, Echo-Schaubild", _call)
 
+    def _past():                                                 # Reise ins Jahr 1800 (Video 185): Altstadt, Thronsaal, Kabinett – Kleidung der Zeit, Handy in der Hand, nichts Modernes im Bild
+        T = ["Mit deinem Smartphone landest du plötzlich im Jahr achtzehnhundert.", "Doch schon nach zwei Sekunden bemerkst du einen fatalen Fehler.",
+             "Denn im Jahr achtzehnhundert existiert weltweit noch kein einziger Mobilfunkmast.", "Nach fünf Minuten machst du ein Foto mit Blitz von den Passanten.",
+             "Die Menschen halten das grelle Licht sofort für Hexerei.", "Die Stadtwachen werden gerufen und nehmen dich sofort in Ketten.",
+             "Nach zwei Stunden wirst du dem König vorgeführt.", "Um deine Haut zu retten, schaltest du die helle Taschenlampe ein.",
+             "Danach spielst du Musik über den Lautsprecher ab und alle erstarren.", "Aber nach zwei Tagen zeigt dein Akku nur noch ein Prozent.",
+             "Das Display wird schwarz und dein Zaubergerät geht für immer aus.", "Du denkst, du kannst es einfach aufladen? Falsch, denn Steckdosen existieren nicht.",
+             "Dein teures Handy wird zum nutzlosen Stück Glas und Metall.", "Es landet auf ewig im königlichen Museum.", "Welche App hättest du im Jahr achtzehnhundert als Erstes gezeigt?"]
+        raw = [{"text": t_, "place": "street" if n_ < 13 else "powerplant", "backdrop": {"ground": "road", "elements": ["city"]} if n_ in (0, 3) else None,
+                "props": [{"type": "lightning"}] if n_ in (0, 3) else [{"type": "lib_bassbox"}] if n_ == 8 else [{"type": "glass"}] if n_ == 12 else [],
+                "crowd": "walk" if n_ in (4, 8) else "", "mood": "tense" if n_ in (0, 5) else "",
+                "actors": [{"id": "du", "action": "talk", "speaks": True}] + ([{"id": "koenig", "action": "talk"}] if n_ == 6 else []) + ([{"id": "wache", "action": "point"}] if n_ == 5 else []),
+                **({"shot": "graphic", "graphic": {"type": "number", "value": "2", "label": "SEKUNDEN"}} if n_ == 1 else {})} for n_, t_ in enumerate(T)]
+        cast_p = {"du": {"shirt": "lila", "hair": "ponytail", "gender": "w"}, "koenig": {"shirt": "rot", "hat": "crown", "hair": "curly", "gender": "m"}, "wache": {"shirt": "grau", "hat": "helmet"}}
+        sb = stage.direct(raw, [(n_ * 4, n_ * 4 + 4) for n_ in range(len(T))], "Was wäre, wenn du ein Smartphone mit ins Jahr 1800 nimmst? – Vorgaben: kein Auto", "whatif", "")
+        pl = [places.resolve(stage.backdrop(sc)) if not isinstance(stage.backdrop(sc), dict) else "custom" for sc in sb]
+        assert all(p_ in ("oldtown", "throneroom", "royalmuseum", "village") for p_ in pl), pl
+        assert pl[0] == "oldtown" and pl[2] == "village" and pl[6] == "throneroom" and pl[13] == "royalmuseum" and pl[14] == "oldtown", pl
+        assert sb[1].get("shot") != "graphic", "„nach zwei Sekunden bemerkst du“ ist kein Zahlen-Schaubild"
+        assert not any(q for sc in sb for q in (sc.get("props") or []) if str(q.get("type")) != "phone_dead"), [sc.get("props") for sc in sb]
+        hold = [next((a.get("hold") for a in sc.get("actors") or [] if a.get("id") == "du"), None) for sc in sb]
+        assert hold[0] == "phone" and hold[3] == "phoneflash" and hold[7] == "phonelight" and hold[8] == "phonemusic" and hold[5] == "", hold
+        assert sb[10].get("shot") == "insert" and hold[11] == "phonedead" and hold[12] == "phonedead" and not hold[14], (sb[10].get("shot"), hold)
+        assert [a.get("_outfit") for a in sb[5]["actors"]] == ["guard", "modern", "guard"], sb[5]["actors"]
+        assert any(a.get("_outfit") == "king" for a in sb[6]["actors"]) and not any(a.get("id") == "du" for a in sb[13]["actors"]), (sb[6]["actors"], sb[13]["actors"])
+        assert not any(str(sc.get("mood") or "") == "tense" for sc in sb), "kein Halbdunkel am Tag"
+        for n_ in (0, 3, 5, 6, 7, 8, 10, 11, 13):
+            frame(sb[n_], cast_p)
+        _, _, _, acts_p, _, _ = stage._prepare(sb[5], cast_p)
+        assert [a["look"].outfit for a in acts_p] == ["guard", "", "guard"] and acts_p[0]["look"].hat == "tricorn", [(a["look"].outfit, a["look"].hat) for a in acts_p]
+        _, _, _, acts_k, _, _ = stage._prepare(sb[6], cast_p)
+        assert acts_k[1]["look"].outfit == "king" and acts_k[1]["look"].hat == "crown" and acts_k[1]["look"].hair == "", acts_k[1]["look"]
+        stage._prepare({"place": "street", "actors": [{"id": "du"}]}, cast_p)
+        assert not stage.ERA[0], "Kleidung der Zeit gilt nur in Szenen der Vergangenheit"
+        for pl_ in ("oldtown", "throneroom", "royalmuseum"):
+            for night_ in (False, True):
+                assert places.background(pl_, night_).size == (1080, 1920)
+        assert places.resolve("thronsaal") == "throneroom" and places.resolve("museum") == "royalmuseum" and places.resolve("altstadt") == "oldtown"
+        for fit_ in ("period", "king", "guard"):
+            for hat_ in ("tricorn", "bonnet", "crown", ""):
+                for fem_ in ("m", "w"):
+                    lk_ = rig.Look.from_spec({"outfit": fit_, "hat": hat_, "gender": fem_, "skin": "hell"}, "x", 0)
+                    for act_ in ("idle", "walk", "cower", "shocked", "point"):
+                        pose_, _ = rig.pose_at(act_, 0.7, 3.0, "", 0.0, 1)
+                        assert rig.draw(lk_, pose_, 1, 1.0)[0].getbbox()
+        s2 = stage.direct([{"text": "Im Jahr 1979 fliehen zwei Familien.", "place": "street", "actors": [{"id": "du"}]}], [(0, 4)], "Flucht im Jahr 1979", "storys", "")
+        assert not s2[0].get("_era") and s2[0].get("place") == "street", "1979 ist keine Reise in die alte Zeit"
+    check("Vergangenheit: Altstadt, Thronsaal, Kabinett, Kleidung der Zeit, Handy in der Hand", _past)
+
     def _balloon():                                              # Ballonflucht: Stoffberg und Gondel am Boden, Ballon mit acht Köpfen am Himmel, Suchscheinwerfer, Landung im Gebüsch – keine Figur „schwebt“ auf der Wiese
         from PIL import Image
         T = ["Zwei Familien fliehen mit einem selbst genähten Heißluftballon.", "Im Keller nähen sie heimlich über tausend Quadratmeter Stoff zusammen.",

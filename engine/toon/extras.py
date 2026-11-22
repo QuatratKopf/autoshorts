@@ -1953,7 +1953,8 @@ LAKE_KINDS = ("crate", "crates", "cashcrate", "goldbars", "logs", "crates_sink",
 HELD = {"call": "call", "phone": "phone", "handy": "phone", "smartphone": "phone", "flashlight": "flashlight", "taschenlampe": "flashlight",
         "bag": "bag", "tasche": "bag", "einkaufstüte": "bag", "tüte": "bag", "bottle": "bottle", "flasche": "bottle",
         "wasserflasche": "bottle", "umbrella": "umbrella", "regenschirm": "umbrella", "schild": "sign", "sign": "sign",
-        "map": "map", "karte": "map", "radio": "radio", "letter": "letter", "brief": "letter", "umschlag": "letter"}
+        "map": "map", "karte": "map", "radio": "radio", "letter": "letter", "brief": "letter", "umschlag": "letter",
+        "phonelight": "phonelight", "phoneflash": "phoneflash", "phonedead": "phonedead", "phonemusic": "phonemusic"}   # Handy als Taschenlampe, mit Kamerablitz, erloschen, spielt Musik (Regie: stage._past_story)
 _nat = {}
 
 
@@ -2037,6 +2038,44 @@ def draw_held(layer, kind, x, y, facing, t, k=1.0, night=False):
         d.rounded_rectangle((x - 14 * k, y - 54 * k, x + 14 * k, y, ), 4 * k, fill=(150, 210, 255))
         if night:
             d.ellipse((x - 90 * k, y - 120 * k, x + 90 * k, y + 60 * k), fill=(150, 210, 255, 40))
+    elif kind in ("phonelight", "phoneflash", "phonedead", "phonemusic"):
+        top = y - 62 * k
+        if kind == "phonelight":                          # Taschenlampe des Handys: Lichtkegel aus der oberen Kante nach vorn
+            lx, ly = x + f * 16 * k, top + 8 * k
+            d.polygon([(lx, ly), (x + f * 640 * k, ly - 230 * k), (x + f * 640 * k, ly + 190 * k)], fill=(255, 244, 180, 110 if night else 84))
+            d.polygon([(lx, ly), (x + f * 640 * k, ly - 110 * k), (x + f * 640 * k, ly + 80 * k)], fill=(255, 250, 214, 90))
+        if kind == "phoneflash":                          # Kamerablitz: greller Stern, pulsiert zweimal je Sekunde
+            ph = (t * 2.0) % 1.0
+            r0 = (70 + 80 * (1 - ph)) * k                 # klein genug, dass das Gesicht der Figur frei bleibt
+            cx_, cy_ = x + f * 34 * k, top - 4 * k
+            d.ellipse((cx_ - r0, cy_ - r0, cx_ + r0, cy_ + r0), fill=(255, 255, 236, int(120 * (1 - ph) + 30)))
+            for i in range(12):
+                ang = math.radians(i * 30 + 8)
+                r1 = r0 * (2.3 if i % 2 == 0 else 1.5)
+                d.line((cx_ + math.cos(ang) * r0 * 0.3, cy_ + math.sin(ang) * r0 * 0.3, cx_ + math.cos(ang) * r1, cy_ + math.sin(ang) * r1),
+                       fill=(255, 250, 200, int(235 * (1 - ph * 0.7))), width=max(3, int(12 * k)))
+            d.ellipse((cx_ - 26 * k, cy_ - 26 * k, cx_ + 26 * k, cy_ + 26 * k), fill=(255, 255, 255, 250))
+        d.rounded_rectangle((x - 20 * k, top, x + 20 * k, y + 8 * k), 7 * k, fill=(30, 32, 40), outline=INK, width=4)
+        if kind == "phonedead":                           # Akku leer: schwarzer Schirm, nur eine matte Spiegelung
+            d.rounded_rectangle((x - 14 * k, top + 8 * k, x + 14 * k, y), 4 * k, fill=(12, 13, 18))
+            d.line((x - 8 * k, top + 16 * k, x + 2 * k, top + 40 * k), fill=(60, 64, 80), width=max(2, int(4 * k)))
+        else:
+            d.rounded_rectangle((x - 14 * k, top + 8 * k, x + 14 * k, y), 4 * k, fill=(150, 210, 255))
+        if kind == "phonemusic":                          # Musik aus dem Lautsprecher: Schallbögen und aufsteigende Noten
+            for i in range(3):
+                ph = (t * 1.1 + i / 3) % 1.0
+                r = (46 + ph * 110) * k
+                d.arc((x - r, top - 20 * k - r, x + r, top - 20 * k + r), 215, 325, fill=(255, 255, 255, int(235 * (1 - ph))), width=max(3, int(8 * k)))
+            for i, col in enumerate(((250, 206, 80), (240, 110, 130), (110, 200, 240))):
+                ph = (t * 0.55 + i / 3) % 1.0
+                nx = x + (math.sin(ph * 6.3 + i * 2.1) * 60 + (i - 1) * 70 + f * 40) * k
+                ny = top - (60 + ph * 300) * k
+                al = int(255 * min(1.0, (1 - ph) * 1.6))
+                r = 20 * k
+                d.ellipse((nx - r - 3, ny - r * 0.8 - 3, nx + r + 3, ny + r * 0.8 + 3), fill=INK + (al,))
+                d.ellipse((nx - r, ny - r * 0.8, nx + r, ny + r * 0.8), fill=col + (al,))
+                d.line((nx + r - 3, ny, nx + r - 3, ny - 74 * k), fill=INK + (al,), width=max(3, int(9 * k)))
+                d.line((nx + r - 3, ny - 74 * k, nx + r + 26 * k, ny - 58 * k), fill=INK + (al,), width=max(3, int(11 * k)))
     elif kind == "flashlight":
         tip = (x + f * 64 * k, y - 10 * k)
         d.polygon([tip, (x + f * 620 * k, y - 190 * k), (x + f * 620 * k, y + 150 * k)], fill=(255, 240, 170, 90 if night else 50))
@@ -4305,6 +4344,27 @@ def p_display(d, x, t, s=1.0):
             d.line((cx, cy, cx + ca * 44, cy + sa * 44), fill=(255, 236, 150), width=9)
 
 
+def p_phone_dead(d, x, t, s=1.0):
+    """Erloschenes Handy groß im Bild (Prüfung 22.11.2026, Video 185: bei „Das Display wird schwarz und dein Zaubergerät geht für immer
+    aus“ leuchtete ein Anrufbild): Gehäuse mit schwarzem Schirm, darauf nur das leere Akku-Zeichen, das rot aufblinkt und verlischt."""
+    top, bot = GROUND - 520, GROUND - 26
+    _poly(d, [(x - 150, GROUND), (x + 150, GROUND), (x + 112, GROUND - 46), (x - 112, GROUND - 46)], (96, 100, 116))
+    _r(d, (x - 140, top, x + 140, bot), (34, 36, 48), 40)
+    sx0, sy0, sx1, sy1 = x - 118, top + 26, x + 118, bot - 26
+    d.rounded_rectangle((sx0, sy0, sx1, sy1), 24, fill=(10, 11, 16))
+    d.rounded_rectangle((x - 30, top + 34, x + 30, top + 46), 6, fill=(26, 28, 38))
+    d.polygon([(sx0 + 8, sy0 + 120), (sx0 + 8, sy0 + 60), (sx0 + 60, sy0 + 8), (sx0 + 120, sy0 + 8)], fill=(30, 33, 46))      # matte Spiegelung
+    blink = 1.0 if t < 0.5 else (1.0 if int(t * 3) % 2 == 0 else 0.25) if t < 2.2 else 0.0                                     # Akku-Zeichen blinkt, dann ist auch das weg
+    if blink:
+        col = tuple(int(10 + (v - 10) * blink) for v in (226, 60, 56))
+        cy = (sy0 + sy1) // 2
+        d.rounded_rectangle((x - 70, cy - 36, x + 60, cy + 36), 10, outline=col, width=9)
+        d.rounded_rectangle((x + 60, cy - 14, x + 76, cy + 14), 4, fill=col)
+        d.rounded_rectangle((x - 58, cy - 24, x - 40, cy + 24), 4, fill=col)
+
+
+PROPS["phone_dead"] = p_phone_dead                        # setzt nur die Regie (stage._past_story)
+SIZES["phone_dead"] = (0.8, 1262)
 PROPS["display"] = p_display                              # Handy-Display, flackert (Regie: TEXT_PROPS „Display“, „Handybildschirm“, „Touchscreen“)
 PROP_ALIASES.update({"handydisplay": "display", "handy-display": "display", "handybildschirm": "display", "touchscreen": "display", "sperrbildschirm": "display",
                      "phone screen": "display", "phone_screen": "display", "smartphone screen": "display"})

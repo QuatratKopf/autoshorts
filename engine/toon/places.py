@@ -940,7 +940,8 @@ def cave(night):
 
 GROUNDS = {"grass": (104, 180, 96), "sand": (240, 206, 132), "snow": (240, 246, 252), "road": (88, 90, 100),
            "rock": (140, 136, 140), "soil": (150, 104, 66), "dry": (206, 170, 110), "water": (60, 150, 220),
-           "ice": (210, 234, 248), "lava": (90, 50, 44), "moon": (124, 128, 144), "quay": (178, 182, 192)}
+           "ice": (210, 234, 248), "lava": (90, 50, 44), "moon": (124, 128, 144), "quay": (178, 182, 192),
+           "cobble": (164, 150, 134)}
 BASE = FAR               # Fußlinie der fernen Kulisse; davor liegt der Boden bis zu den Figuren
 
 
@@ -1512,7 +1513,86 @@ def _mid_tower(p, rnd):
     p.oval((cx - 9, y - m * 14.4 - 9, cx + 9, y - m * 14.4 + 9), (240, 80, 70), o=4, glow=True)
 
 
-MID = {"tower": _mid_tower, "church": _mid_church, "forest": _mid_forest, "trees": _mid_trees, "deadtrees": _mid_deadtrees, "palms": _mid_palms, "cactus": _mid_cactus, "acacia": _mid_acacia,
+def _mid_oldtown(p, rnd):
+    """Häuserzeile einer Stadt um 1800 (Prüfung 22.11.2026, Video 185 „Smartphone im Jahr 1800“: die Geschichte spielte vor Läden mit
+    Markisen und Schaufenstern an einer Asphaltstraße): Fachwerkhäuser mit steilem Giebeldach, Sprossenfenster mit Läden, Holztür,
+    Schornstein – keine Schaufenster, keine Markise, keine Straßenlaterne mit Strom. Dazu ein Brunnen und eine Öllaterne an der Wand."""
+    y = 1000
+    m = px(1.0, y)
+    x = -80
+    walls = ((240, 228, 204), (232, 214, 180), (226, 222, 210), (236, 206, 176), (220, 210, 190))
+    roofs = ((150, 74, 58), (128, 66, 54), (112, 82, 70), (160, 90, 62))
+    beam = (98, 66, 46)
+    i = 0
+    while x < W:
+        w, floors = rnd.randint(int(m * 3.3), int(m * 4.4)), rnd.randint(1, 2)     # niedrige Häuser: Giebel und Himmel bleiben im Bild
+        h = m * (2.9 + floors * 2.6)
+        col = walls[(i * 2 + rnd.randint(0, 1)) % 5]
+        roof = roofs[(i + rnd.randint(0, 1)) % 4]
+        rh = m * rnd.uniform(2.6, 3.4)
+        cx_ = x + w * (0.3 if i % 2 else 0.7)                                # Schornstein hinter dem Dach
+        p.rect((cx_ - m * 0.28, y - h - rh * 0.86, cx_ + m * 0.28, y - h - rh * 0.3), (150, 110, 96), o=5)
+        p.rect((cx_ - m * 0.36, y - h - rh * 0.92, cx_ + m * 0.36, y - h - rh * 0.8), (120, 88, 78), r=3, o=5)
+        p.poly([(x - 16, y - h + 6), (x + w / 2, y - h - rh), (x + w + 16, y - h + 6)], roof)   # steiles Giebeldach
+        p.d.polygon([(x + w / 2, y - h - rh + 14), (x + w + 4, y - h), (x + w * 0.62, y - h)], fill=p.c(_mix(roof, 0.2, (30, 20, 40))))
+        for k in range(1, 5):                                               # Ziegelreihen
+            yy = y - h - rh + rh * k / 5
+            half = (w / 2 + 14) * k / 5
+            p.d.line((x + w / 2 - half + 10, yy, x + w / 2 + half - 10, yy), fill=p.c(_mix(roof, 0.24, (30, 20, 40))), width=4)
+        p.rect((x, y - h, x + w, y), col)
+        p.d.rectangle((x + w - m * 0.3, y - h + O, x + w - O, y - O), fill=p.c(_mix(col, 0.1, (60, 40, 40))))    # Schattenkante
+        gf = y - m * 2.9
+        p.d.rectangle((x + O, gf, x + w - O, y - O), fill=p.c(_mix(col, 0.14, (120, 110, 100))))                 # gemauertes Erdgeschoss
+        for fl in range(floors):                                            # Fachwerk: Schwellen, Ständer, Streben
+            y1, y0 = gf - m * 2.6 * fl, gf - m * 2.6 * (fl + 1)
+            p.d.line((x, y1, x + w, y1), fill=p.c(beam), width=12)
+            for q in range(4):
+                bx = x + 6 + (w - 12) * q / 3
+                p.d.line((bx, y0, bx, y1), fill=p.c(beam), width=11)
+            p.d.line((x + 6, y1, x + (w - 12) / 3, y0 + 8), fill=p.c(beam), width=9)
+            p.d.line((x + w - 6, y1, x + w - (w - 12) / 3, y0 + 8), fill=p.c(beam), width=9)
+            wx0 = x + w / 2 - m * 0.42                                      # Sprossenfenster mit Läden im mittleren Gefach
+            wy0 = y0 + m * 0.62
+            lit = p.night and not p.dark and rnd.random() < 0.5
+            shut = ((84, 122, 96), (140, 78, 62), (80, 104, 140))[(i + fl) % 3]
+            for sx in (wx0 - m * 0.34, wx0 + m * 0.84):
+                p.rect((sx, wy0 - 4, sx + m * 0.34, wy0 + m * 1.3 + 4), shut, r=3, o=4)
+            p.rect((wx0, wy0, wx0 + m * 0.84, wy0 + m * 1.3), (255, 214, 120) if lit else (150, 184, 206), r=2, o=5, glow=lit)
+            p.d.line((wx0 + m * 0.42, wy0, wx0 + m * 0.42, wy0 + m * 1.3), fill=INK, width=4)
+            p.d.line((wx0, wy0 + m * 0.65, wx0 + m * 0.84, wy0 + m * 0.65), fill=INK, width=4)
+        p.d.line((x, y - h + 4, x + w, y - h + 4), fill=p.c(beam), width=12)
+        p.d.rectangle((x, y - h, x + w, y), outline=INK, width=O)
+        dx0 = x + w * (0.14 if i % 2 else 0.58)                             # Holztür mit Rundbogen und Beschlag
+        p.rect((dx0, y - m * 2.1, dx0 + m * 1.0, y), (112, 76, 50), r=int(m * 0.42), o=5)
+        p.d.rectangle((dx0 + 5, y - m * 1.2, dx0 + m * 1.0 - 5, y - 4), fill=p.c((112, 76, 50)))
+        p.d.line((dx0, y - m * 1.2, dx0, y), fill=INK, width=5)
+        p.d.line((dx0 + m * 1.0, y - m * 1.2, dx0 + m * 1.0, y), fill=INK, width=5)
+        p.d.line((dx0 + m * 0.5, y - m * 2.0, dx0 + m * 0.5, y - 6), fill=p.c((84, 56, 38)), width=4)
+        p.oval((dx0 + m * 0.6, y - m * 1.02, dx0 + m * 0.74, y - m * 0.88), (60, 52, 50), o=2)
+        wx1 = x + w * (0.62 if i % 2 else 0.12)                             # kleines Fenster im Erdgeschoss
+        p.rect((wx1, y - m * 1.9, wx1 + m * 0.8, y - m * 0.9), (150, 184, 206), r=2, o=5)
+        p.d.line((wx1 + m * 0.4, y - m * 1.9, wx1 + m * 0.4, y - m * 0.9), fill=INK, width=4)
+        if i % 3 == 1:                                                      # Öllaterne am Wandarm
+            lx, ly = x + 14, y - m * 2.7
+            p.d.line((lx, ly, lx + m * 0.6, ly), fill=INK, width=8)
+            p.rect((lx + m * 0.44, ly + 4, lx + m * 0.8, ly + m * 0.52), (255, 214, 120) if (p.night and not p.dark) else (226, 214, 170), r=4, o=5, glow=p.night and not p.dark)
+            p.poly([(lx + m * 0.38, ly + 6), (lx + m * 0.62, ly - m * 0.16), (lx + m * 0.86, ly + 6)], (60, 56, 60), o=4)
+        x += w
+        i += 1
+    bx, by = 880, 1070                                                      # Brunnen auf dem Platz
+    k = depth(by)
+    p.oval((bx - 150 * k, by - 30 * k, bx + 150 * k, by + 34 * k), (150, 144, 140))
+    p.rect((bx - 150 * k, by - 96 * k, bx + 150 * k, by + 4 * k), (176, 168, 160), r=int(10 * k))
+    p.oval((bx - 150 * k, by - 124 * k, bx + 150 * k, by - 66 * k), (190, 184, 176))
+    p.oval((bx - 122 * k, by - 114 * k, bx + 122 * k, by - 76 * k), (96, 150, 190), o=4)
+    for sx in (-1, 1):
+        p.rect((bx + sx * 132 * k - 9 * k, by - 300 * k, bx + sx * 132 * k + 9 * k, by - 96 * k), (112, 76, 50), o=4)
+    p.poly([(bx - 176 * k, by - 292 * k), (bx, by - 372 * k), (bx + 176 * k, by - 292 * k)], (128, 66, 54), o=5)
+    p.d.line((bx, by - 292 * k, bx, by - 150 * k), fill=INK, width=max(2, int(4 * k)))
+    p.rect((bx - 20 * k, by - 160 * k, bx + 20 * k, by - 118 * k), (126, 90, 62), r=3, o=4)
+
+
+MID = {"oldtown": _mid_oldtown, "tower": _mid_tower, "church": _mid_church, "forest": _mid_forest, "trees": _mid_trees, "deadtrees": _mid_deadtrees, "palms": _mid_palms, "cactus": _mid_cactus, "acacia": _mid_acacia,
        "street": _mid_street, "powerlines": _mid_powerlines, "windturbines": _mid_windturbines, "gasstation": _mid_gasstation,
        "powerplant": _mid_powerplant, "bridge": _mid_bridge, "camp": _mid_camp, "graves": _mid_graves}
 
@@ -1533,10 +1613,11 @@ EL_ALIASES = {"berge": "mountains", "hügel": "hills", "dünen": "dunes", "wald"
               "büroturm": "tower", "skyscraper": "tower", "headquarters": "tower", "kirche": "church", "dom": "church", "kathedrale": "church", "hochhäuser": "city", "tote bäume": "deadtrees", "ocean": "sea", "mountain": "mountains", "tree": "trees",
               "packeis": "packice", "meereis": "packice", "eisdecke": "packice", "eisfläche": "packice", "eisrisse": "icecracks",
               "eisscholle": "packice", "eisschollen": "packice", "eisschicht": "packice", "eispanzer": "packice", "treibeis": "packice",
-           "hafen": "harbor", "häfen": "harbor", "containerhafen": "harbor", "hafenkräne": "harbor", "containerterminal": "harbor", "port": "harbor"}
+           "hafen": "harbor", "häfen": "harbor", "containerhafen": "harbor", "hafenkräne": "harbor", "containerterminal": "harbor", "port": "harbor",
+              "altstadt": "oldtown", "fachwerk": "oldtown", "fachwerkhäuser": "oldtown", "gasse": "oldtown", "marktplatz": "oldtown"}
 
 
-MID_ORDER = ("tower", "church", "windturbines", "powerplant", "bridge", "street", "gasstation", "powerlines", "graves", "camp", "cactus", "acacia", "palms",
+MID_ORDER = ("oldtown", "tower", "church", "windturbines", "powerplant", "bridge", "street", "gasstation", "powerlines", "graves", "camp", "cactus", "acacia", "palms",
              "deadtrees", "trees", "forest")
 
 
@@ -1545,6 +1626,7 @@ def norm_spec(spec):
     ground = str(spec.get("ground") or "").lower()
     if ground not in GROUNDS:
         ground = ("sand" if ("dunes" in els or "palms" in els or "cactus" in els) else "ice" if "packice" in els else "snow" if "glacier" in els
+                  else "cobble" if "oldtown" in els
                   else "road" if any(e in els for e in ("city", "ruins", "street", "gasstation")) else "soil" if "fields" in els else "grass")
     if "asphalt" in els:
         ground = "road"                                           # aufgerissener Asphalt liegt immer auf einer Fahrbahn
@@ -1589,6 +1671,18 @@ def compose(spec: dict, night=False):
             p.d.line((W / 2 + (i - 3) * 190, 1240, W / 2 + (i - 3) * 330, H), fill=p.c((176, 176, 184)), width=4)
         for y in (1330, 1470, 1680):
             p.d.line((0, y, W, y), fill=p.c((176, 176, 184)), width=4)
+    elif ground == "cobble":                                      # Kopfsteinpflaster (Stadt um 1800): versetzte Steinreihen, nach hinten kleiner – keine Fahrbahn, keine Markierung
+        joint = _mix(col, 0.26, (60, 50, 50))
+        y, row = BASE + 8, 0
+        while y < H:
+            k = depth(y + 20)
+            hgt = max(14, int(46 * k))
+            wd = max(24, int(96 * k))
+            for x in range(-wd + (row % 2) * wd // 2, W + wd, wd):
+                tone = _mix(col, 0.08 * ((x // max(1, wd) + row * 3) % 3), (255, 250, 240) if (x // max(1, wd) + row) % 2 else (90, 80, 80))
+                p.d.rounded_rectangle((x + 2, y + 2, x + wd - 2, y + hgt - 2), max(3, int(hgt * 0.3)), fill=p.c(tone), outline=p.c(joint), width=max(2, int(4 * k)))
+            y += hgt
+            row += 1
     elif ground == "grass":
         for _ in range(40):
             x, y = rnd.randint(0, W), rnd.randint(BASE + 30, H - 300)
@@ -1666,6 +1760,7 @@ OUTDOOR_SPECS = {
     "icesea": {"ground": "ice", "elements": ["packice", "icecracks"]},        # zugefrorenes Meer (Regie: stage._ice_story)
     "harbor": {"ground": "quay", "elements": ["sea", "harbor"]},              # Hafen: Kai, Containerbrücken, Frachter
     "savannah": {"ground": "dry", "elements": ["savannah", "acacia"]},        # Savanne: trockenes Grasland mit Schirmakazien (Löwe, Gepard)
+    "oldtown": {"ground": "cobble", "elements": ["oldtown"]},                 # Stadt um 1800: Fachwerkhäuser, Kopfsteinpflaster, Brunnen (Regie: stage._past_story)
 }
 
 
@@ -2412,15 +2507,155 @@ def highsky(night):
     return p.vignette()
 
 
+def _stone_hall(p, wall, floor_a, floor_b):
+    """Steinsaal: gemauerte Wand mit Fugen, Schachbrett-Steinboden in Perspektive (Thronsaal, Kabinett des Königs)."""
+    p.indoor = True
+    base = GROUND - 60
+    p.grad((0, 0, W, base), _mix(wall, 0.16, (30, 26, 50)), _mix(wall, 0.04, (255, 250, 236)))
+    for row, y in enumerate(range(60, base, 120)):                            # Quader mit Fugen
+        p.d.line((0, y, W, y), fill=p.c(_mix(wall, 0.14, (60, 50, 60))), width=5)
+        for x in range(-90 + (row % 2) * 135, W, 270):
+            p.d.line((x, y, x, y + 120), fill=p.c(_mix(wall, 0.14, (60, 50, 60))), width=5)
+    p.rect((-10, base - 6, W + 10, base + 22), _mix(wall, 0.22, (40, 34, 50)), o=5)   # Sockel
+    y0 = base + 22
+    p.grad((0, y0, W, H), floor_a, _mix(floor_a, 0.2, (40, 30, 40)))
+    rows = [y0, y0 + 46, y0 + 110, y0 + 200, y0 + 330, y0 + 520, H + 200]
+    xs = [(W / 2 + i * 84, W / 2 + i * 300) for i in range(-9, 10)]
+    for r, (ya, yb) in enumerate(zip(rows, rows[1:])):                        # Schachbrett aus hellen und dunklen Platten
+        fa, fb = (ya - y0) / (H - y0), (yb - y0) / (H - y0)
+        for i, ((a0, a1), (b0, b1)) in enumerate(zip(xs, xs[1:])):
+            if (i + r) % 2:
+                p.d.polygon([(a0 + (a1 - a0) * fa, ya), (b0 + (b1 - b0) * fa, ya), (b0 + (b1 - b0) * fb, yb), (a0 + (a1 - a0) * fb, yb)], fill=p.c(floor_b))
+    p.d.line((0, y0, W, y0), fill=INK, width=5)
+
+
+def _torch(p, x, y):
+    """Wandfackel mit Schein (kein elektrisches Licht im Jahr 1800)."""
+    p.poly([(x - 16, y), (x + 16, y), (x + 7, y + 90), (x - 7, y + 90)], (112, 76, 50), o=5)
+    p.rect((x - 24, y - 12, x + 24, y + 8), (70, 64, 70), r=4, o=5)
+    p.poly([(x - 20, y - 12), (x - 10, y - 50), (x - 2, y - 30), (x + 4, y - 74), (x + 14, y - 34), (x + 20, y - 12)], (250, 150, 50), o=5, glow=True)
+    p.poly([(x - 9, y - 14), (x, y - 44), (x + 9, y - 14)], (255, 226, 120), o=0, glow=True)
+    p.lamp_glow(x, y - 40, 260)
+
+
+def throneroom(night):
+    """Thronsaal (Prüfung 22.11.2026, Video 185: „wirst du dem König vorgeführt“ spielte auf einer Einkaufsstraße): Steinwand, hohe
+    Bogenfenster, rote Banner ohne Wappen, Säulen, Podest mit goldenem Thron, roter Läufer, Fackeln."""
+    p = P(night)
+    _stone_hall(p, (190, 180, 170), (176, 164, 150), (124, 112, 108))
+    base = GROUND - 60
+    for cx in (150, 930):                                                     # hohe Bogenfenster
+        hw, top, bot = 84, 300, 760
+        p.rect((cx - hw - 16, top + hw - 10, cx + hw + 16, bot + 16), (128, 118, 112), r=6)
+        p.oval((cx - hw - 16, top - 16, cx + hw + 16, top + 2 * hw + 16), (128, 118, 112))
+        sky = (40, 48, 96) if night else (170, 214, 246)
+        p.d.ellipse((cx - hw, top, cx + hw, top + 2 * hw), fill=sky)
+        p.d.rectangle((cx - hw, top + hw, cx + hw, bot), fill=sky)
+        p.d.line((cx, top, cx, bot), fill=INK, width=6)
+        for yy in range(top + hw, bot, 110):
+            p.d.line((cx - hw, yy, cx + hw, yy), fill=INK, width=5)
+        p.d.rectangle((cx - hw, bot - 4, cx + hw, bot + 2), fill=INK)
+        if not night:
+            p.veil((cx - hw - 50, top - 30, cx + hw + 50, bot + 50), (255, 240, 200), 40, 60)
+    for cx in (345, 735):                                                     # rote Banner mit goldener Borte (ohne Wappen)
+        p.rect((cx - 70, 190, cx + 70, 206), (120, 90, 50), r=6, o=5)
+        p.poly([(cx - 58, 206), (cx + 58, 206), (cx + 58, 640), (cx, 700), (cx - 58, 640)], (160, 40, 48))
+        p.d.line([(cx - 44, 214), (cx - 44, 632), (cx, 678), (cx + 44, 632), (cx + 44, 214)], fill=p.c((226, 186, 90)), width=7)
+        p.oval((cx - 24, 380, cx + 24, 428), (226, 186, 90), o=4)
+    p.rect((300, base - 34, 780, base + 26), (150, 140, 134), r=6)             # Podest, zwei Stufen
+    p.rect((350, base - 78, 730, base - 30), (166, 156, 148), r=6)
+    tx = 540                                                                  # Thron: hohe Lehne in Gold mit rotem Polster
+    p.rect((tx - 118, 520, tx + 118, base - 74), (214, 170, 70), r=26)
+    p.rect((tx - 92, 556, tx + 92, base - 150), (156, 36, 46), r=18, o=5)
+    for dx in (-118, 118):
+        p.oval((tx + dx - 26, 486, tx + dx + 26, 538), (236, 196, 90))
+    p.poly([(tx - 44, 524), (tx - 44, 478), (tx - 20, 500), (tx, 462), (tx + 20, 500), (tx + 44, 478), (tx + 44, 524)], (236, 196, 90))
+    p.rect((tx - 134, base - 236, tx - 92, base - 74), (196, 152, 60), r=12)   # Armlehnen
+    p.rect((tx + 92, base - 236, tx + 134, base - 74), (196, 152, 60), r=12)
+    p.rect((tx - 100, base - 170, tx + 100, base - 110), (176, 44, 54), r=16, o=5)   # Sitzpolster
+    for cx in (40, 1040):                                                     # Säulen am Rand
+        p.rect((cx - 40, 120, cx + 40, base), (206, 198, 190))
+        p.d.rectangle((cx + 16, 126, cx + 34, base - 6), fill=p.c((176, 168, 164)))
+        p.rect((cx - 56, 90, cx + 56, 130), (188, 180, 172), r=6)
+        p.rect((cx - 56, base - 34, cx + 56, base + 10), (188, 180, 172), r=6)
+    p.poly([(446, base + 24), (634, base + 24), (800, H), (280, H)], (160, 40, 48), o=0)   # roter Läufer zum Thron
+    p.d.line([(446, base + 24), (280, H)], fill=p.c((226, 186, 90)), width=8)
+    p.d.line([(634, base + 24), (800, H)], fill=p.c((226, 186, 90)), width=8)
+    _torch(p, 250, 560)
+    _torch(p, 830, 560)
+    return p.vignette()
+
+
+VITRINE = (540, 760, 1040)        # Mitte, Oberkante Glas, Oberkante Sockel der Vitrine im Kabinett (für Lichtpunkte der Regie)
+
+
+def royalmuseum(night):
+    """Kabinett des Königs / Museum um 1800 (Prüfung 22.11.2026, Video 185: „Es landet im königlichen Museum“ zeigte Kühltürme eines
+    Kraftwerks): Steinsaal mit Gemälden in Goldrahmen, Vasen auf Sockeln – und in der Mitte eine Glasvitrine, in der ein erloschenes
+    Handy auf einem roten Samtkissen liegt."""
+    p = P(night)
+    _stone_hall(p, (204, 188, 168), (186, 170, 150), (150, 128, 112))
+    base = GROUND - 60
+    for (x0, y0, x1, y1), kind in (((70, 330, 330, 640), 0), ((750, 330, 1010, 640), 1), ((120, 120, 300, 280), 2), ((780, 120, 960, 280), 2)):
+        p.rect((x0 - 20, y0 - 20, x1 + 20, y1 + 20), (214, 170, 70), r=8)       # Gemälde im Goldrahmen: Landschaft, Schiff, Stillleben – keine Menschen
+        p.d.rectangle((x0, y0, x1, y1), fill=p.c((150, 190, 214) if kind != 2 else (96, 80, 70)))
+        if kind == 0:
+            p.d.polygon([(x0, y1), (x0, y1 - 110), (x0 + 90, y1 - 190), (x0 + 170, y1 - 120), (x1, y1 - 170), (x1, y1)], fill=p.c((96, 140, 100)))
+            p.d.ellipse((x1 - 90, y0 + 30, x1 - 40, y0 + 80), fill=p.c((250, 226, 150)))
+        elif kind == 1:
+            p.d.rectangle((x0, y1 - 90, x1, y1), fill=p.c((70, 110, 160)))
+            p.d.polygon([(x0 + 60, y1 - 90), (x1 - 60, y1 - 90), (x1 - 90, y1 - 50), (x0 + 90, y1 - 50)], fill=p.c((112, 76, 50)))
+            p.d.polygon([(x0 + 130, y1 - 96), (x0 + 130, y0 + 50), (x0 + 210, y1 - 96)], fill=p.c((244, 238, 224)))
+        else:
+            p.d.rectangle((x0, y1 - 40, x1, y1), fill=p.c((126, 96, 70)))                       # Stillleben: Krug und Birne auf einem Tisch
+            p.d.rounded_rectangle((x0 + 34, y0 + 44, x0 + 80, y1 - 36), 14, fill=p.c((206, 196, 176)))
+            p.d.ellipse((x0 + 108, y0 + 78, x0 + 148, y1 - 34), fill=p.c((170, 190, 90)))
+            p.d.ellipse((x0 + 116, y0 + 56, x0 + 140, y0 + 96), fill=p.c((170, 190, 90)))
+        p.d.rectangle((x0, y0, x1, y1), outline=INK, width=5)
+    for cx, col in ((130, (70, 110, 170)), (950, (170, 90, 70))):             # Vasen auf Sockeln
+        p.rect((cx - 60, base - 250, cx + 60, base + 10), (214, 206, 196), r=6)
+        p.rect((cx - 76, base - 274, cx + 76, base - 240), (196, 188, 178), r=6)
+        p.oval((cx - 46, base - 400, cx + 46, base - 280), col)
+        p.rect((cx - 22, base - 440, cx + 22, base - 384), col, r=8)
+        p.oval((cx - 32, base - 458, cx + 32, base - 430), _mix(col, 0.2, (255, 255, 255)))
+    vx, top, ped = VITRINE                                                    # Vitrine in der Mitte
+    p.rect((vx - 170, ped, vx + 170, GROUND + 24), (112, 76, 50), r=8)         # Holzsockel mit Goldleiste
+    p.d.rectangle((vx - 162, ped + 30, vx + 162, ped + 42), fill=p.c((214, 170, 70)))
+    p.rect((vx - 190, ped - 22, vx + 190, ped + 10), (132, 92, 60), r=8)
+    p.d.rounded_rectangle((vx - 120, ped - 60, vx + 120, ped - 16), 20, fill=p.c((170, 40, 52)), outline=INK, width=6)   # Samtkissen
+    for sx in (-1, 1):
+        p.oval((vx + sx * 122 - 12, ped - 50, vx + sx * 122 + 12, ped - 26), (226, 186, 90), o=4)
+    p.poly([(vx - 20, ped - 44), (vx - 64, ped - 222), (vx + 26, ped - 244), (vx + 70, ped - 66)], (44, 46, 58), o=6)      # das Handy lehnt schräg auf dem Kissen, schwarz und aus
+    p.d.polygon([(vx - 14, ped - 58), (vx - 50, ped - 212), (vx + 20, ped - 229), (vx + 56, ped - 75)], fill=p.c((14, 15, 22)))
+    p.d.line((vx - 36, ped - 196, vx - 8, ped - 84), fill=p.c((70, 76, 96)), width=6)
+    glass = Image.new("L", (W, H), 0)                                         # Glashaube: zarter Schleier, Kanten, Lichtstreifen
+    ImageDraw.Draw(glass).rectangle((vx - 170, top, vx + 170, ped - 22), fill=44)
+    p.im.paste(Image.new("RGB", (W, H), (214, 236, 250)), (0, 0), glass)
+    p.d = ImageDraw.Draw(p.im)
+    p.d.rectangle((vx - 170, top, vx + 170, ped - 22), outline=INK, width=6)
+    p.d.rectangle((vx - 178, top - 14, vx + 178, top + 6), fill=p.c((214, 170, 70)), outline=INK, width=5)
+    p.d.polygon([(vx - 150, top + 26), (vx - 110, top + 26), (vx - 150, top + 190)], fill=p.c((240, 248, 255)))
+    p.d.line((vx + 120, top + 40, vx + 146, top + 150), fill=p.c((240, 248, 255)), width=8)
+    p.rect((vx - 74, ped + 62, vx + 74, ped + 108), (236, 226, 200), r=6, o=5)   # Schildchen ohne lesbare Schrift
+    for i in range(2):
+        p.d.line((vx - 50, ped + 78 + i * 14, vx + 50 - i * 30, ped + 78 + i * 14), fill=p.c((120, 104, 90)), width=5)
+    _torch(p, 440, 420)
+    _torch(p, 640, 420)
+    return p.vignette()
+
+
 PLACES = {"bedroom": bedroom, "livingroom": livingroom, "street": street, "basement": basement, "park": park,
           "space": space, "lab": lab, "classroom": classroom, "plain": plain, "kitchen": kitchen, "office": office,
           "beach": beach, "desert": desert, "snow": snow, "forest": forest, "underwater": underwater,
           "mountain": mountain, "hospital": hospital, "cave": cave, "supermarket": supermarket,
           "supermarket_empty": supermarket_empty, "bathroom": bathroom, "station": station, "restaurant": restaurant, "germany": germany, "worldmap": worldmap, "hallway": hallway, "attic": attic,
           "serverroom": serverroom, "cinema": cinema, "diningroom": diningroom, "highsky": highsky, "garage": garage, "transit": transit, "chapel": chapel, "tattoostudio": tattoostudio, "nailstudio": nailstudio,
-          "controlroom": controlroom}
+          "controlroom": controlroom, "throneroom": throneroom, "royalmuseum": royalmuseum}
 OUTDOOR = tuple(OUTDOOR_SPECS) + ("custom",)
-ALIASES = {"savanne": "savannah", "steppe": "savannah", "savanna": "savannah", "serengeti": "savannah", "asphalt": "street", "werkstatt": "garage", "autowerkstatt": "garage", "kfz-werkstatt": "garage", "workshop": "garage",
+ALIASES = {"thronsaal": "throneroom", "thron": "throneroom", "palast": "throneroom", "königshof": "throneroom", "throne room": "throneroom", "throne_room": "throneroom",
+           "museum": "royalmuseum", "vitrine": "royalmuseum", "kabinett": "royalmuseum", "schatzkammer": "royalmuseum", "kunstkammer": "royalmuseum",
+           "altstadt": "oldtown", "old town": "oldtown", "old_town": "oldtown", "gasse": "oldtown", "marktplatz": "oldtown", "fachwerk": "oldtown",
+           "savanne": "savannah", "steppe": "savannah", "savanna": "savannah", "serengeti": "savannah", "asphalt": "street", "werkstatt": "garage", "autowerkstatt": "garage", "kfz-werkstatt": "garage", "workshop": "garage",
            "boxengasse": "garage", "tuning": "garage", "tuningwerkstatt": "garage", "schrauberhalle": "garage", "carport": "garage", "kino": "cinema", "kinosaal": "cinema", "kinos": "cinema", "leinwand": "cinema", "kinoleinwand": "cinema",
            "lichtspielhaus": "cinema", "filmpalast": "cinema", "schlafzimmer": "bedroom", "zimmer": "livingroom", "wohnzimmer": "livingroom", "straße": "street", "stadt": "street",
            "city": "street", "keller": "basement", "bunker": "basement", "wald": "forest", "natur": "park", "garten": "park",

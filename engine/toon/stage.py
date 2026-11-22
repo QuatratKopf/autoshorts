@@ -17,7 +17,7 @@ POS = {"left": 250, "center": 540, "right": 830, "offleft": -260, "offright": 13
        "links": 250, "mitte": 540, "rechts": 830}
 CALL_ARM = (106, 70)    # Oberarm/Unterarm für „Handy am Ohr“
 TALL_OV = ("phone", "checklist", "note")
-NO_FURNITURE = ("restaurant", "diningroom", "bathroom", "hallway", "supermarket", "supermarket_empty", "station", "transit", "basement", "attic", "hospital", "serverroom", "chapel", "tattoostudio", "nailstudio", "controlroom")
+NO_FURNITURE = ("restaurant", "diningroom", "bathroom", "hallway", "supermarket", "supermarket_empty", "station", "transit", "basement", "attic", "hospital", "serverroom", "chapel", "tattoostudio", "nailstudio", "controlroom", "throneroom", "royalmuseum")
 MAIN_IDS = ("du", "ich", "held", "hero", "main", "erzähler", "narrator", "a0")
 
 
@@ -194,10 +194,12 @@ def sanitize(sc):
                 c["_ksz"] = float(a["_ksz"])               # Größe je Figur, von der Regie gesetzt (stage._tiny_story)
             if a.get("_jog") is True:
                 c["_jog"] = True                           # Dauerlauf, von der Regie gesetzt (stage._jogging)
+            if a.get("_outfit") in ("modern", "period", "king", "guard"):
+                c["_outfit"] = a["_outfit"]                # Kleidung der Zeit, von der Regie gesetzt (stage._past_story)
             for k in ("action", "emotion", "emote", "kind", "hold", "facing"):
                 c[k] = word(a.get(k)) if k == "emote" else word(a.get(k)).lower()
             if isinstance(a.get("look"), dict):               # Nebenfiguren der Regie bringen ihr Aussehen mit
-                c["look"] = {k: v for k, v in a["look"].items() if k in ("shirt", "hair", "hat", "glasses", "skin", "hair_color", "gender", "size") and isinstance(v, (str, bool, int, float))}
+                c["look"] = {k: v for k, v in a["look"].items() if k in ("shirt", "hair", "hat", "glasses", "skin", "hair_color", "gender", "size", "outfit", "hat_color") and isinstance(v, (str, bool, int, float))}
             if isinstance(a.get("teeth"), str) and a["teeth"].lower() in TEETH_COLORS:
                 c["teeth"] = a["teeth"].lower()
             if str(a.get("wear") or "").lower() == "headphones":   # Kopfhörer auf dem Kopf (setzt die Regie: _music)
@@ -220,6 +222,7 @@ def _prepare(scene, cast):
     place = places.resolve(backdrop(scene))
     _PROP_MIN[0] = 300 if scene.get("_near") else MIN_PROP_PX
     MOURN[0] = bool(scene.get("_mourn"))                  # Beerdigung: Trauergäste und Verwandte tragen Schwarz (stage._funeral_story)
+    ERA[0] = bool(scene.get("_era"))                      # Geschichte spielt um 1800 oder früher: Passanten tragen die Kleidung der Zeit (stage._past_story)
     places.XMAS[0] = bool(scene.get("_xmas"))             # Weihnachts-Video: Wohn- und Esszimmer sind geschmückt (stage._feast_story)
     places.ICE[0] = bool(scene.get("_ice"))               # zugefrorenes Meer: „unter Wasser“ liegt unter der Eisdecke
     places.LAKE[0] = bool(scene.get("_lake"))             # Schatzsuche im See: „unter Wasser“ ist der Seegrund, nicht das Meer
@@ -254,6 +257,16 @@ def _prepare(scene, cast):
         kind = str(a.get("kind") or spec.get("kind") or "").lower()
         if MOURN[0] and not kind:                         # auf der Beerdigung: schwarz gekleidet, keine bunte Mütze (Plan 20.11.2026: Oma mit roter Mütze in der Kirche)
             spec = dict(spec, shirt="schwarz", hat="" if str(spec.get("hat") or "") in ("cap", "beanie", "party", "chef") else spec.get("hat") or "")
+        fit_a = str(a.get("_outfit") or "")
+        if fit_a in ("period", "king", "guard") and not kind:   # Kleidung der Zeit (stage._past_story): König mit Krone und Hermelin, Wache im Uniformrock mit Dreispitz, Bürger im Rock bzw. Kleid
+            fem_a = str(spec.get("gender") or "").lower() in ("w", "f", "female", "frau", "weiblich") or (str(spec.get("hair") or "").lower() in rig.FEM_HAIR and fit_a != "king")
+            if fit_a == "king":
+                spec = dict(spec, outfit="king", hat="crown", shirt=spec.get("shirt") or "rot", hair=spec.get("hair") if fem_a else "", hair_color=spec.get("hair_color") or "grau")
+            elif fit_a == "guard":
+                spec = dict(spec, outfit="guard", hat="tricorn", shirt="blau", hair="", gender="m")
+            else:
+                hat_a = str(spec.get("hat") or "").lower()
+                spec = dict(spec, outfit="period", hat=("bonnet" if fem_a else "tricorn") if hat_a in ("cap", "beanie", "helmet", "headphones", "army", "chef") else hat_a)
         if not kind and not spec and aid.lower() not in MAIN_IDS:   # „vogel“ im Bildplan, in der Besetzung heißt er „truthahn“ (kind bird): das Tier, kein Mensch im Pulli (Video 148)
             kind = next((k for pat, k in TOPIC_CREATURES if k not in ("agent", "virus", "cell") and re.search(pat, aid.lower())), "")
             if not kind:
@@ -360,6 +373,8 @@ def _prepare(scene, cast):
     return place, night, scale, actors, props, str(scene.get("weather") or "").lower()
 
 
+ERA = [False]          # Geschichte um 1800 (setzt _prepare je Szene): Passanten tragen Rock, Kleid, Dreispitz und Haube statt Kapuzenpulli und Mütze
+ERA_SHIRTS = ("braun", "grün", "grau", "blau", "beige", "oliv", "türkis", "rot")
 MOURN = [False]        # Trauerfeier (setzt _prepare je Szene): alle im Bild tragen Schwarz
 MOURN_SHIRTS = ("schwarz", "grau", "schwarz", "schwarz", "grau")
 CROWD_SHIRTS = ("blau", "rot", "grün", "gelb", "orange", "lila", "türkis", "grau", "braun", "pink")
@@ -394,6 +409,10 @@ def _crowd(frame, kind, t, night, lo=0, hi=9999, road=False, traffic=True, indoo
         look = rig.Look.from_spec({"shirt": MOURN_SHIRTS[i % len(MOURN_SHIRTS)] if MOURN[0] else CROWD_SHIRTS[(i * 3 + 1) % len(CROWD_SHIRTS)], "hat": "" if MOURN[0] else ("", "", "cap", "beanie", "")[i % 5],
                                    "hat_color": CROWD_SHIRTS[(i * 7) % len(CROWD_SHIRTS)], "hair": ("", "long", "", "bun")[i % 4],
                                    "skin": ("weiß", "hell", "mittel", "dunkel")[i % 4]})
+        if ERA[0] and not MOURN[0]:
+            hair_e = ("", "long", "", "bun")[i % 4]
+            look = rig.Look.from_spec({"shirt": ERA_SHIRTS[(i * 3 + 1) % len(ERA_SHIRTS)], "outfit": "period", "hair": hair_e, "hat_color": ERA_SHIRTS[(i * 5) % len(ERA_SHIRTS)],
+                                       "hat": ("bonnet" if i % 4 == 3 else "") if hair_e else ("tricorn" if i % 4 == 0 else ""), "skin": ("weiß", "hell", "weiß", "hell")[i % 4]})
         people.append((gy, look, rnd.random(), rnd.choice((-1, 1)), i))
     for gy, look, ph, direction, i in sorted(people, key=lambda q: q[0]):
         if not (lo <= gy < hi):
@@ -836,7 +855,7 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                 pose.shape = "e"
             if a.get("hold") and action not in ("run", "sleep", "fall", "jump", "dance", "wave", "shake") and not pose.lying:
                 small_h = a["hold"].startswith("prop:") and (extras.REAL_M.get(a["hold"][5:]) or extras.SIZES.get(a["hold"][5:], (9,))[0]) <= 0.3
-                pose.arm_r, pose.fore_r = (62, 50) if a["hold"] in ("phone", "map", "flashlight", "radio", "bottle", "letter") or small_h else (8, 4)   # Kleines (Apfel, Kuchen) hält man vor sich, nicht an der Hüfte
+                pose.arm_r, pose.fore_r = (62, 50) if a["hold"] in ("phone", "map", "flashlight", "radio", "bottle", "letter", "phonelight", "phonedead", "phonemusic") or small_h else (104, 34) if a["hold"] == "phoneflash" else (8, 4)   # Kleines (Apfel, Kuchen) hält man vor sich, nicht an der Hüfte
                 if a["hold"] in ("umbrella", "sign"):
                     pose.arm_r, pose.fore_r = 40, 100
                 if a["hold"] == "call":                         # Telefonat: Hand mit dem Handy am Ohr
@@ -2361,6 +2380,7 @@ def direct(scenes, times, topic="", style="", look=""):
     _jogging(scenes)
     _speech(scenes, style)
     _call_story(scenes, topic, main_id)
+    _past_story(scenes, topic, main_id)
     for sc in scenes:                                     # ein einzelnes Auge neben Menschen („mustern dich mit großen Augen“ in der Bahn, Video 160) – überall, nicht nur im Zimmer
         if isinstance(sc, dict) and isinstance(sc.get("props"), list) and str(sc.get("shot") or "") not in ("insert", "graphic") and (
                 sc.get("crowd") or any(isinstance(a, dict) and not a.get("kind") for a in sc.get("actors") or [])):
@@ -2374,6 +2394,191 @@ def direct(scenes, times, topic="", style="", look=""):
                 if str(sc.get("shot") or "") == "insert" and not sc["props"]:
                     sc["shot"] = ""
     return scenes
+
+
+# Reise in die Vergangenheit (Prüfung 22.11.2026, Video 185 „Smartphone im Jahr 1800: Was passiert wirklich?“): Das Jahr 1800 spielte vor Läden
+# mit Markisen an einer Asphaltstraße, die Passanten trugen Kapuzenpullis und Mützen, die Stadtwache einen Bauhelm, der König stand im Pulli auf
+# dem Gehweg; zur Musik stand eine Bassbox im Bild, zu „Stück Glas und Metall“ ein Trinkglas, zum Museum Kühltürme, zu „Display wird schwarz“
+# leuchtete ein Anrufbild, und bei „kein einziger Mobilfunkmast“ funkelte eine Weltkugel voller Stadtlichter. Jetzt: Nennt der Kern des Themas
+# ein Jahr bis 1849 oder das Mittelalter, spielt alles in der Zeit – Altstadt mit Fachwerk und Pflaster (`oldtown`), Thronsaal (`throneroom`),
+# Kabinett mit Vitrine (`royalmuseum`), Dorf ohne Masten; alle außer der Hauptfigur tragen die Kleidung der Zeit; nichts Modernes steht im Bild.
+# Bringt die Hauptfigur ein Handy mit, hält sie es in jeder Szene – mit Blitz beim Foto, als Taschenlampe, mit Noten bei Musik, schwarz, sobald
+# der Akku leer ist.
+PAST_TOPIC_RE = r"\b(?:im|ins|das|dem) jahre? (?:1[0-7]\d\d|18[0-4]\d|[1-9]\d\d)\b|\bmittelalter"
+P_THRONE_RE = r"könig|kaiser|herrscher|\bthron|stadtrat|palast|\bfürst|vorgeführt|\bhof\b|majestät"
+P_MUSEUM_RE = r"museum|vitrine|ausgestellt|schatzkammer|kunstkammer|kabinett|artefakt"
+P_TOWN_RE = r"straße|passant|\bstadt\b|marktplatz|\bmarkt\b|gasse|landest|ankunft|kommst (?:\w+ ){0,3}an\b"
+P_FIELD_RE = r"mobilfunkmast|funkmast|sendemast|\bmast\b|\bmasten\b|weit und breit|funkturm|satellit"
+P_GUARD_RE = r"\bwache|wachen\b|stadtwache|soldat|in ketten|festgenommen|verhaftet|abgeführt|gefesselt|nehmen dich|packen dich|kerker"
+P_PHOTO_RE = r"\bfoto|\bblitz\b|fotografier|kamera|selfie"
+P_WITCH_RE = r"hexe|teufel|zauberei|dämon|schreien|flieh|weichen (?:\w+ ){0,3}zurück|\bangst\b|panik"
+P_LIGHT_RE = r"taschenlampe|\blicht\b|leuchte"
+P_MUSIC_RE = r"musik|\blied|\bsong|melodie|lautsprecher"
+P_CALC_RE = r"\brechn|taschenrechner|zahlen|mathe"
+P_MAGE_RE = r"zauberer|magier|hexer|hexenmeister|spion|verbeugt|staunt"
+P_BATT_RE = r"\bakku|prozent|batterie"
+P_DEAD_RE = r"(?:display|bildschirm|schirm) (?:\w+ ){0,3}schwarz|geht (?:\w+ ){0,4}aus\b|akku (?:ist |war )?(?:leer|tot)|erlischt|schaltet sich (?:\w+ ){0,2}ab|ist tot\b"
+P_PLUG_RE = r"steckdose|aufladen|ladekabel|ladegerät|\bstrom\b|stromnetz|kraftwerk"
+P_JUNK_RE = r"glas und metall|nutzlos|wertlos|briefbeschwerer|\bschrott"
+P_KING_ID = r"k(?:ö|oe|o)nig|kaiser|herrscher|fuerst|fürst|king"
+P_GUARD_ID = r"wache|waechter|wächter|soldat|guard"
+P_STEP_RE = r"\bnach (?:\w+ ){1,2}(?:sekunde|minute|stunde|tag|woche)"
+
+
+def past_story(scenes, topic=""):
+    """Für den Selbsttest."""
+    _past_story(scenes, topic, "du")
+    return scenes
+
+
+def _past_story(scenes, topic="", main_id=""):
+    """Geschichte in der Vergangenheit: siehe Kommentar oben. Greift nur, wenn der Kern des Themas ein Jahr bis 1849 oder das Mittelalter nennt."""
+    import re as _re
+    if not _re.search(PAST_TOPIC_RE, topic_head(topic).lower()):
+        return
+    dicts = [sc for sc in scenes if isinstance(sc, dict)]
+    main_id = str(main_id or "du")
+    ids = [str(a.get("id")) for sc in dicts for a in (sc.get("actors") or []) if isinstance(a, dict) and a.get("id") and not a.get("kind")]
+    king_id = next((i for i in ids if _re.search(P_KING_ID, i.lower())), "_koenig")
+    guard_id = next((i for i in ids if _re.search(P_GUARD_ID, i.lower())), "_wache")
+    has_phone = bool(_re.search(r"smartphone|handy|telefon", str(topic or "").lower()))
+    king_look = {"shirt": "rot", "hat": "crown", "hair_color": "grau", "gender": "m", "outfit": "king"}
+    guard_look = {"shirt": "blau", "hat": "tricorn", "gender": "m", "outfit": "guard"}
+    folk = ({"shirt": "braun", "hat": "tricorn", "gender": "m", "outfit": "period", "hair_color": "braun"},
+            {"shirt": "grün", "hat": "bonnet", "hair": "bun", "gender": "w", "outfit": "period", "hair_color": "rot", "hat_color": "blau"},
+            {"shirt": "oliv", "hat": "", "gender": "m", "outfit": "period", "hair_color": "schwarz"},
+            {"shirt": "türkis", "hat": "", "hair": "long", "gender": "w", "outfit": "period", "hair_color": "dunkelbraun"})
+
+    def citizen(i, pos, action, emotion="", emote=""):
+        return {"id": "_buerger%d" % (i % 4 + 1), "look": dict(folk[i % 4]), "_outfit": "period", "action": action, "emotion": emotion, "emote": emote,
+                "pos": pos, "speaks": False, "hold": "", "kind": "", "facing": "", "say": ""}
+
+    def king(action, emotion="", emote="", pos="right"):
+        return {"id": king_id, "look": dict(king_look), "_outfit": "king", "action": action, "emotion": emotion, "emote": emote, "pos": pos,
+                "speaks": False, "hold": "", "kind": "", "facing": "", "say": ""}
+
+    def guard(i, pos):
+        return {"id": guard_id if i == 0 else "_wache2", "look": dict(guard_look), "_outfit": "guard", "action": "point", "emotion": "angry", "emote": "",
+                "pos": pos, "speaks": False, "hold": "", "kind": "", "facing": "", "say": ""}
+
+    loc, dead, last_n, n_town, said_dead = "town", False, len(scenes) - 1, 0, False
+    for n, sc in enumerate(scenes):
+        if not isinstance(sc, dict):
+            continue
+        text = str(sc.get("text") or "")
+        low = text.lower()
+        sc["_era"] = True
+        if any(isinstance(a, dict) and a.get("kind") for a in sc.get("actors") or []):
+            continue                                      # Tier oder Wesen als Figur: gehört einer anderen Regie
+        museum = bool(_re.search(P_MUSEUM_RE, low))
+        if _re.search(P_THRONE_RE, low):
+            loc = "throne"
+        elif _re.search(P_TOWN_RE, low) and not museum:
+            loc = "town"
+        here = "museum" if museum else loc
+        if n == last_n and "?" in text and n > 2:
+            here = "town"                                 # die Schlussfrage an die Zuschauer: zurück auf den Platz
+        dying = bool(_re.search(P_DEAD_RE, low)) and has_phone
+        if sc.get("shot") == "graphic" and graphics.clean(sc.get("graphic")):
+            g_p = sc["graphic"]
+            step = _re.search(P_STEP_RE, low) and str(g_p.get("type") or "").lower() in ("number", "timer", "calendar", "days") and _re.search(r"\bdu\b|\bdich\b|\bdein", low)
+            if not step:
+                dead = dead or dying
+                if _re.search(r"ankunft|gelandet|landung", str(g_p.get("kicker") or "").lower()):
+                    g_p["kicker"] = "ERST SPÄTER" if _re.search(r"später|danach", low) else ""   # „JAHR 1800 · ANKUNFT“ über „100 JAHRE“ (später): die Ecken-Zeile ist keine Überschrift für diese Zahl
+                continue                                  # echtes Schaubild (Jahre, Vergleich) bleibt
+            sc["graphic"], sc["shot"] = None, ""          # „Doch schon nach zwei Sekunden bemerkst du …“: die Zahl „2 SEKUNDEN“ allein erzählt nichts – die Szene zeigt, was passiert
+            if not isinstance(sc.get("overlay"), dict):
+                val, lab = str(g_p.get("value") or "").strip(), str(g_p.get("label") or "").strip()
+                if val and lab and spoken_number(val, text):
+                    sc["overlay"] = {"type": "tag", "text": ("NACH %s %s" % (val, lab)).upper()[:24]}
+        sc["backdrop"], sc["weather"], sc["crowd"], sc["props"], sc["shot"] = None, "", "", [], ""
+        sc["mood"] = "sad" if str(sc.get("mood") or "") == "sad" else ""       # kein Halbdunkel mit Lichtkegel am helllichten Tag auf dem Marktplatz
+        sc["time"] = "night" if str(sc.get("time") or "") == "night" and _re.search(r"nacht|mitternacht|dunkel", low) else "day"
+        sc["place"] = {"town": "oldtown", "throne": "throneroom", "museum": "royalmuseum"}[here]
+        phone = ("phonedead" if dead else "phone") if has_phone else ""
+        me = {"id": main_id, "_outfit": "modern", "action": "idle", "emotion": "", "emote": "", "pos": "left", "hold": phone, "speaks": True,
+              "kind": "", "facing": "", "say": ""}
+        if here == "museum":                              # Vitrine in der Mitte, zwei staunende Besucher in der Kleidung der Zeit – die Hauptfigur ist nicht dabei
+            sc["actors"] = [citizen(n, 200, "think", "", "?"), citizen(n + 1, 880, "point", "shocked", "!")]
+            sc["_no_cut"] = True
+        elif dying and not said_dead:                     # das Handy geht aus: groß und allein im Bild, der Schirm schwarz
+            sc["actors"], sc["props"], sc["shot"], sc["mood"] = [], [{"type": "phone_dead"}], "insert", "sad"
+            said_dead = True
+        elif _re.search(P_GUARD_RE, low):                 # Wachen links und rechts, die Hauptfigur duckt sich dazwischen
+            me.update(action="cower", emotion="scared", pos="center", hold="")
+            sc["actors"] = [guard(0, 210), me, guard(1, 870)]
+            sc["_no_cut"] = True
+        elif here == "town" and _re.search(P_PHOTO_RE, low) and has_phone and not dead:
+            me.update(hold="phoneflash", pos=230, emotion="happy")
+            sc["actors"] = [me, citizen(n, 640, "shocked", "scared", "!"), citizen(n + 1, 900, "cower", "scared", "")]
+            sc["_no_cut"] = True
+        elif here == "town" and _re.search(P_WITCH_RE, low):
+            me.update(pos=220, emotion="worried", action="idle")
+            sc["actors"] = [me, citizen(n, 620, "point", "angry", "anger"), citizen(n + 1, 890, "shocked", "scared", "!")]
+            sc["_no_cut"] = True
+        elif here == "throne":
+            solo = False
+            if _re.search(P_PLUG_RE, low):
+                me.update(action="look_around", emotion="sad", emote="?", pos="center")
+                solo = True
+            elif _re.search(P_BATT_RE, low):
+                me.update(action="shocked", emotion="worried", pos="center")
+                solo = True
+            elif _re.search(P_JUNK_RE, low):
+                me.update(action="sad", emotion="sad", pos=260)
+                kg = king("think", "", "?")
+            elif _re.search(P_LIGHT_RE, low) and has_phone and not dead:
+                me.update(hold="phonelight", pos=220, emotion="happy")
+                kg = king("shocked", "shocked", "!", 840)
+            elif _re.search(P_MUSIC_RE, low) and has_phone and not dead:
+                me.update(hold="phonemusic", pos=240, emotion="happy")
+                kg = king("freeze", "shocked", "!")
+            elif _re.search(P_CALC_RE, low):
+                me.update(pos=250, emotion="happy")
+                kg = king("think", "worried", "?")
+            elif _re.search(P_MAGE_RE, low):
+                me.update(pos=250, emotion="happy", action="idle")
+                kg = king("point", "shocked", "!")
+            else:
+                me.update(pos=250, emotion="worried")
+                kg = king("talk", "angry", "")
+                kg["speaks"], me["speaks"] = True, False
+            sc["actors"] = [me] if solo else [me, kg]
+            if not solo:
+                sc["_no_cut"] = bool(me["hold"] in ("phonelight", "phonemusic"))
+        else:                                             # auf dem Platz der alten Stadt (oder im Dorf, wenn der Satz von Masten spricht)
+            if _re.search(P_FIELD_RE, low) and not _re.search(P_PLUG_RE, low):
+                sc["place"] = "village"
+                me.update(action="look_around", emotion="worried", emote="?", pos="center")
+            elif n == last_n:
+                me.update(action="talk", emotion="happy", pos="center", hold="phone" if has_phone and not dead else "")
+            elif _re.search(P_PLUG_RE, low):
+                me.update(action="look_around", emotion="sad", emote="?", pos="center")
+            elif _re.search(P_BATT_RE, low):
+                me.update(action="shocked", emotion="worried", pos="center")
+            elif n == 0:
+                me.update(action="look_around", emotion="worried", pos="center")
+                sc["crowd"] = "walk"
+            else:
+                me.update(action="think" if n_town % 2 else "idle", emotion="worried", pos="center" if n_town % 2 else 330)
+                sc["crowd"] = "walk" if n_town % 2 == 0 else ""
+            sc["actors"] = [me]
+            n_town += 1
+        dead = dead or dying
+        ov_p = sc.get("overlay")
+        if isinstance(ov_p, dict) and str(ov_p.get("type") or "") in ("phone", "note", "checklist"):
+            sc["overlay"] = None                          # Handy-Chat oder Zettel als Einblendung: im Jahr 1800 schreibt niemand zurück
+    for n in range(1, len(scenes)):                       # dieselbe Einstellung zweimal hintereinander: die zweite rückt als Großaufnahme an die Hauptfigur
+        a_, b_ = scenes[n - 1], scenes[n]
+        if not (isinstance(a_, dict) and isinstance(b_, dict) and b_.get("_era")):
+            continue
+        acts_b = [x for x in (b_.get("actors") or []) if isinstance(x, dict)]
+        acts_a = [x for x in (a_.get("actors") or []) if isinstance(x, dict)]
+        if len(acts_b) == 1 and len(acts_a) == 1 and a_.get("place") == b_.get("place") and not a_.get("shot") and not b_.get("shot") \
+                and acts_b[0].get("hold") not in ("phonelight", "phonemusic", "phoneflash") and str(acts_b[0].get("action")) not in ("look_around", "cower"):
+            b_["shot"], b_["crowd"] = "close", ""
+            acts_b[0]["pos"] = "center"
 
 
 # Telefonat (Prüfung 22.11.2026, Video 181 „Doppelgänger am Telefon“): Die Geschichte spielt während eines Anrufs – im Bild saß der Angerufene
@@ -5382,7 +5587,7 @@ MOOD_HINTS = [
     (r"menschen|leute|bevölkerung|einwohner|millionen|milliarden|gesellschaft", ("", "walk")),
     (r"staunen|beobachten|schauen zu|zuschauer", ("", "watch")),
 ]
-INDOOR = ("bedroom", "livingroom", "diningroom", "kitchen", "transit", "office", "classroom", "lab", "hospital", "basement", "cave", "underwater", "space", "cinema", "chapel", "tattoostudio", "nailstudio", "controlroom")
+INDOOR = ("bedroom", "livingroom", "diningroom", "kitchen", "transit", "office", "classroom", "lab", "hospital", "basement", "cave", "underwater", "space", "cinema", "chapel", "tattoostudio", "nailstudio", "controlroom", "throneroom", "royalmuseum")
 MAPS = ("germany", "worldmap")
 GARAGES = ("garage",)                                           # in der Werkstatt stehen Autos (drinnen sonst nie)
 GARAGE_VEHICLES = ("car", "police", "ambulance", "truck", "bike")
@@ -5888,6 +6093,11 @@ def poster(spec: dict, cast: dict, out: Path, topic=""):
         res = extras.creature(kind if kind in extras.CREATURES else cast_kind, 0.4, 1, 0.6, "", 1.6)
         if res and res[0].getbbox():
             hero = res[0].crop(res[0].getbbox())
+    if hero is None and _re.search(r"smartphone|\bhandy", low):   # Handy-Thema ohne Motiv (Video 185: nur die Figur vor Strahlen): das leuchtende Handy als Aufkleber
+        lay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        extras.draw_prop(lay, "display", 540, 1.2)
+        if lay.getbbox():
+            hero = lay.crop(lay.getbbox())
     # 2) die Hauptfigur, groß im Anschnitt
     aid = spec.get("actor") if isinstance((cast or {}).get(spec.get("actor")), dict) and not cast[spec.get("actor")].get("kind") else \
         next((k for k, v in (cast or {}).items() if isinstance(v, dict) and not v.get("kind")), None)

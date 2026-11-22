@@ -201,6 +201,11 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
            Kennung als Figur in "actors" setzen, sobald der Satz von ihnen spricht – sie bekommen ihr eigenes Aussehen.
            tattoostudio (Tattoo-Studio: dunkle Wand mit Motiv-Bögen, Liege, Farbfläschchen), nailstudio (Nagelstudio: Regal voller Nagellack,
            Arbeitstisch mit Lampe) – für Tätowierer, Nageldesign, Maniküre.
+           oldtown (Stadt um 1800 oder im Mittelalter: Fachwerkhäuser, Kopfsteinpflaster, Brunnen – ohne Autos, Läden, Strom),
+           throneroom (Thronsaal eines Königs: Steinwand, Thron, Banner, Fackeln), royalmuseum (Kabinett/Museum des Königs mit Vitrine).
+           Spielt die Geschichte in der Vergangenheit (Zeitreise, „im Jahr 1800“, Mittelalter), NUR diese drei Orte und village/forest/fields
+           verwenden – nie street, office, supermarket. Könige unter der Kennung "koenig", Wachen unter "wache" in "actors" setzen;
+           die Regie kleidet alle außer der Hauptfigur in die Kleidung der Zeit und gibt der Hauptfigur ihr Handy in die Hand.
            chapel (Kirche von innen: bunte Fenster, Altar, Bankreihen – für Trauerfeier, Gottesdienst, Hochzeit; "church" ist die Kirche
            von außen an der Straße). Bei einer Beerdigung tragen alle im Bild automatisch Schwarz; "crowd": "sad" zeigt die Trauergäste.
            draußen: headquarters (Büroturm einer großen Firma in der Stadt – für Konzerne, Firmensitze; ohne Logo), street (Häuserzeile mit Läden und Straße), park, forest, beach, desert, snow, mountain, farm, village,

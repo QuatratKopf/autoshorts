@@ -169,6 +169,19 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   in der Hand; „Speicher dir das“ ist kein Dachboden. `stage._jogging`: „Lauf eine Runde“, „du rennst“ → die Figur läuft die ganze Szene quer durchs helle Bild.
   `_carry_thing`: eine Uhrzeit ist keine Menge, und „diese Meile/Formel“ nennt etwas Neues (`_carry_other`) – der Wecker wandert nicht in die nächsten Szenen.
   Leerer öffentlicher Raum in einem Du-Satz zeigt die Hauptfigur statt jubelnder Fremder. Selbsttest: `_speech173`.
+- Reise in die Vergangenheit (`stage._past_story`, greift, wenn der Kern des Themas ein Jahr bis 1849 oder das Mittelalter nennt – `PAST_TOPIC_RE`;
+  Prüfung 22.11.2026, Video 185 „Smartphone im Jahr 1800“ spielte vor Läden mit Markisen, mit Passanten im Kapuzenpulli, Wache mit Bauhelm, Bassbox,
+  Trinkglas und Kühltürmen): Orte `oldtown` (Baukasten `ground: cobble`, `elements: [oldtown]` – Fachwerkhäuser, Kopfsteinpflaster, Brunnen, Öllaterne),
+  `throneroom` (Steinsaal, Thron, Banner ohne Wappen, Fackeln), `royalmuseum` (Kabinett mit Gemälden und einer Vitrine, in der ein erloschenes Handy auf
+  Samt liegt); „kein einziger Mobilfunkmast“ spielt im Dorf. Kleidung (`rig.Look.outfit`): `period` (Rock mit Knöpfen bzw. langes Kleid mit Schürze),
+  `king` (roter Mantel mit Hermelin, Krone), `guard` (blauer Uniformrock, weiße Gurte); Hüte `tricorn` (Dreispitz) und `bonnet` (Haube). Die Regie gibt
+  jeder Figur `_outfit` mit (Hauptfigur `modern` – sie bleibt im Pulli, das ist der Witz), Passanten tragen in solchen Szenen von selbst die Kleidung der
+  Zeit (`stage.ERA`). Die Regie führt Buch, wo die Geschichte ist (Stadt → König/Thron/vorgeführt → Museum; Schlussfrage wieder auf dem Platz) und setzt je
+  Satz das Bild: Foto/Blitz → Handy mit Blitz (`phoneflash`), zwei erschrockene Bürger; Hexerei → Bürger zeigen auf die Figur; Wachen/Ketten → zwei Wachen
+  links und rechts; Taschenlampe → `phonelight` (Lichtkegel auf den König); Musik → `phonemusic` (Noten); Akku → Figur allein, erschrocken; „Display wird
+  schwarz/geht aus“ → Requisite `phone_dead` groß (`insert`), danach hält die Figur `phonedead`; Museum → zwei Besucher an der Vitrine. Alle Requisiten,
+  Wetter, Baukasten-Landschaften und Handy-/Zettel-Einblendungen des Drehbuchs entfallen dort (nichts Modernes im Bild); ein Zahlen-Schaubild zu
+  „nach zwei Sekunden bemerkst du …“ wird zur Szene mit Schild. Selftest: `_past`. Fehlt noch: Kutsche, Pferd, Kerker, Marktstände, Kirche der Zeit.
 
 ## Was zu tun ist
 1. Offene Wünsche (ohne `"done": true`) und `"auto": true`-Einträge durchgehen, höchstens 8 pro Sitzung, häufigste zuerst.

@@ -117,13 +117,14 @@ class Look:
     shirt: tuple = COLORS["blau"]
     pants: tuple = (40, 40, 48)
     skin: tuple = SKINS["schwarz"]
-    hat: str = ""            # cap | helmet | bow | beanie | crown | army | headphones | chef | ""
+    hat: str = ""            # cap | helmet | bow | beanie | crown | army | headphones | chef | tricorn | bonnet | ""
     hat_color: tuple = COLORS["rot"]
     glasses: bool = False
     hair: str = ""           # long | bun | ponytail | bob | curly | "" (kurz)
     size: float = 1.0
     hair_color: tuple = None
     fem: bool = False        # weibliches Gesicht: Wimpern, feinere Brauen, Lippenfarbe, eigener Pony (automatisch bei Frauen-Frisuren)
+    outfit: str = ""         # "" Kapuzenpulli | period (Bürger um 1800: Rock mit Knöpfen bzw. langes Kleid mit Schürze) | king (Mantel mit Hermelin) | guard (Uniformrock mit weißen Gurten)
 
     @staticmethod
     def from_spec(spec: dict, name: str = "", nth: int = None):
@@ -137,7 +138,8 @@ class Look:
                     or (HAIRS[_HAIR_AUTO[(nth if nth is not None else sum(ord(c) for c in str(name))) % len(_HAIR_AUTO)]] if (name or nth is not None) else None),
                     size=max(0.6, min(1.3, float(spec.get("size") or 1.0))),
                     fem=str(spec.get("gender") or "").lower() in ("w", "f", "female", "frau", "weiblich", "girl", "mädchen")
-                    or str(spec.get("hair") or "").lower() in FEM_HAIR)
+                    or str(spec.get("hair") or "").lower() in FEM_HAIR,
+                    outfit=str(spec.get("outfit") or "").lower() if str(spec.get("outfit") or "").lower() in ("period", "king", "guard") else "")
 
 
 @dataclass
@@ -292,6 +294,11 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
         return p2
 
     shoe_col = _mix(shirt, (250, 250, 250), 0.12) if not mask else (60, 60, 70)
+    outfit = look.outfit if not mask else ""
+    if outfit:                                           # Kleidung um 1800: dunkle Lederschuhe, gedeckte Hose – keine Turnschuhe, keine Jeans
+        shoe_col, sole = (70, 54, 44), (44, 36, 32)
+        pants = (236, 230, 216) if outfit == "guard" else (104, 86, 70) if look.pants == (40, 40, 48) else look.pants
+        pants_d = _dark(pants, 0.3)
     # Haar hinten (lang, Bob, Pferdeschwanz, Locken): VOR dem Körper gezeichnet, liegt also hinter Hals, Kapuze und Schultern
     if not mask and look.hat not in ("helmet", "army", "chef") and look.hair in ("long", "bob", "ponytail", "curly"):
         _hr = 80 * k
@@ -306,24 +313,79 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
     limb(hl, pose.leg_l * f, leg1, -pose.knee_l * f, leg2, lw, pants_d, shoe=_dark(shoe_col, 0.25))
     limb(hr_, pose.leg_r * f, leg1, -pose.knee_r * f, leg2, lw, pants, shoe=shoe_col)
 
+    long_robe = outfit == "king" or (outfit == "period" and look.fem)
+    if outfit:                                                                # langes Kleid / Königsmantel bis zu den Knöcheln bzw. Rockschöße – über den Beinen, unter dem Rumpf
+        hem_y = hip[1] + ((leg1 + leg2) * pose.squash - 22 * k if long_robe else 62 * k)
+        half_t, half_b = bw * 0.52, (78 * k if long_robe else bw * 0.66)
+        hx = hip[0] + (foot_x - hip[0]) * 0.0
+        robe = [(hx - half_t, hip[1] - bw * 0.3), (hx + half_t, hip[1] - bw * 0.3), (hx + half_b, hem_y), (hx - half_b, hem_y)]
+        rc = shirt_d if outfit != "king" else _dark(shirt, 0.12)
+        d.polygon(robe, fill=rc, outline=INK, width=max(2, int(o)))
+        d.polygon([(hx - half_t * 0.2 + 9 * k * f, hip[1] - bw * 0.3), (hx + half_t - 4 * k, hip[1] - bw * 0.3), (hx + half_b - 6 * k, hem_y - o), (hx - half_b * 0.2 + 9 * k * f, hem_y - o)],
+                  fill=shirt if outfit != "king" else shirt) if f > 0 else \
+            d.polygon([(hx - half_t + 4 * k, hip[1] - bw * 0.3), (hx + half_t * 0.2 - 9 * k, hip[1] - bw * 0.3), (hx + half_b * 0.2 - 9 * k, hem_y - o), (hx - half_b + 6 * k, hem_y - o)], fill=shirt)
+        if outfit == "king":                                                  # Hermelinborte vorn herunter und am Saum
+            d.rectangle((hx - 15 * k, hip[1] - bw * 0.3, hx + 15 * k, hem_y - o), fill=(250, 248, 240))
+            d.rectangle((hx - half_b + o, hem_y - 26 * k, hx + half_b - o, hem_y - o), fill=(250, 248, 240))
+            for j in range(5):
+                yy = hip[1] + j * 34 * k
+                if yy < hem_y - 34 * k:
+                    d.ellipse((hx - 5 * k, yy, hx + 5 * k, yy + 12 * k), fill=INK)
+            for j in range(-2, 3):
+                d.ellipse((hx + j * 30 * k - 4 * k, hem_y - 20 * k, hx + j * 30 * k + 4 * k, hem_y - 9 * k), fill=INK)
+            d.line([robe[2], robe[3]], fill=INK, width=max(2, int(o)))
+        elif long_robe:                                                       # weiße Schürze über dem Kleid
+            d.rounded_rectangle((hx - 34 * k + 6 * k * f, hip[1] - 6 * k, hx + 34 * k + 6 * k * f, hem_y - 34 * k), 10 * k, fill=(246, 242, 232), outline=INK, width=max(2, int(o * 0.6)))
     # Rumpf: Kapuzenpulli mit Schattenkante auf der Rückseite, Saum, Tasche und Kordeln
     b0 = _pt(hip, 180 - lean, bw * 0.40)
     b1 = _pt(hip, 180 - lean, bh - bw * 0.42)
     _stroke(d, [b0, b1], bw + 2 * o, INK)
     _stroke(d, [b0, b1], bw, shirt_d)
     _stroke(d, [(b0[0] + 9 * k * f, b0[1] - 2 * k), (b1[0] + 9 * k * f, b1[1] + 2 * k)], bw - 18 * k, shirt)
-    hood = _pt(hip, 180 - lean, bh - 6 * k)                                   # Kapuze im Nacken
-    d.ellipse((hood[0] - 52 * k - o, hood[1] - 24 * k - o, hood[0] + 52 * k + o, hood[1] + 30 * k + o), fill=INK)
-    d.ellipse((hood[0] - 52 * k, hood[1] - 24 * k, hood[0] + 52 * k, hood[1] + 30 * k), fill=shirt_d)
-    d.ellipse((hood[0] - 40 * k + 6 * k * f, hood[1] - 16 * k, hood[0] + 40 * k + 6 * k * f, hood[1] + 20 * k), fill=shirt)
-    pk = _pt(hip, 180 - lean, bw * 0.50)                                      # Bauchtasche
-    d.rounded_rectangle((pk[0] - 30 * k + 6 * k * f, pk[1] - 13 * k, pk[0] + 30 * k + 6 * k * f, pk[1] + 16 * k), 9 * k, fill=shirt_d)
-    for sgn in (-1, 1):                                                       # Kordeln
-        c0 = _pt(hip, 180 - lean, bh - 34 * k)
-        c1 = _pt(hip, 180 - lean, bh - 70 * k)
-        ox = (sgn * 11 + 6 * f) * k
-        d.line((c0[0] + ox, c0[1], c1[0] + ox + sgn * 2 * k, c1[1]), fill=shirt_l, width=max(2, int(5 * k)))
-        d.ellipse((c1[0] + ox + sgn * 2 * k - 5 * k, c1[1] - 2 * k, c1[0] + ox + sgn * 2 * k + 5 * k, c1[1] + 8 * k), fill=shirt_l)
+    if outfit:                                                                # Kleidung um 1800 statt Kapuze, Bauchtasche und Kordeln
+        c_top, c_mid, c_low = _pt(hip, 180 - lean, bh - 22 * k), _pt(hip, 180 - lean, bh * 0.55), _pt(hip, 180 - lean, bw * 0.3)
+        fx_ = 6 * k * f
+        gold = (232, 190, 84)
+        if outfit == "king":                                                  # Hermelinkragen über den Schultern, Goldkette
+            d.rectangle((c_top[0] - 15 * k + fx_, c_top[1], c_low[0] + 15 * k + fx_, c_low[1] + 10 * k), fill=(250, 248, 240))
+            d.ellipse((c_top[0] - 60 * k - o, c_top[1] - 22 * k - o, c_top[0] + 60 * k + o, c_top[1] + 34 * k + o), fill=INK)
+            d.ellipse((c_top[0] - 60 * k, c_top[1] - 22 * k, c_top[0] + 60 * k, c_top[1] + 34 * k), fill=(250, 248, 240))
+            for j in (-40, -14, 14, 40):
+                d.ellipse((c_top[0] + j * k - 4 * k, c_top[1] + 6 * k, c_top[0] + j * k + 4 * k, c_top[1] + 18 * k), fill=INK)
+            d.ellipse((c_mid[0] - 13 * k + fx_, c_mid[1] - 2 * k, c_mid[0] + 13 * k + fx_, c_mid[1] + 24 * k), fill=gold, outline=INK, width=max(2, int(o * 0.6)))
+        elif outfit == "guard":                                               # Uniformrock: gekreuzte weiße Gurte, roter Kragen, Messingknöpfe
+            sl, sr = (c_top[0] - 34 * k, c_top[1] + 6 * k), (c_top[0] + 34 * k, c_top[1] + 6 * k)
+            hl_, hr2 = (c_low[0] - 34 * k, c_low[1] + 4 * k), (c_low[0] + 34 * k, c_low[1] + 4 * k)
+            for a_, b_ in ((sl, hr2), (sr, hl_)):
+                d.line((a_, b_), fill=INK, width=max(3, int(15 * k + o)))
+                d.line((a_, b_), fill=(246, 244, 236), width=max(2, int(15 * k)))
+            d.rounded_rectangle((c_top[0] - 34 * k - o, c_top[1] - 14 * k - o, c_top[0] + 34 * k + o, c_top[1] + 12 * k + o), 10 * k, fill=INK)
+            d.rounded_rectangle((c_top[0] - 34 * k, c_top[1] - 14 * k, c_top[0] + 34 * k, c_top[1] + 12 * k), 9 * k, fill=(190, 52, 52))
+            d.ellipse((c_mid[0] - 9 * k + fx_, c_mid[1] + 8 * k, c_mid[0] + 9 * k + fx_, c_mid[1] + 26 * k), fill=gold, outline=INK, width=max(2, int(o * 0.5)))
+        else:                                                                 # Bürger: weißer Kragen / Halstuch, beim Mann Knopfreihe, bei der Frau Mieder-Schnürung
+            d.polygon([(c_top[0] - 30 * k + fx_, c_top[1] - 8 * k), (c_top[0] + 30 * k + fx_, c_top[1] - 8 * k), (c_top[0] + fx_, c_top[1] + 40 * k)],
+                      fill=(248, 244, 234), outline=INK, width=max(2, int(o * 0.6)))
+            if look.fem:
+                for j in range(3):
+                    yy = c_mid[1] + (j - 0.4) * 20 * k
+                    d.line((c_mid[0] - 12 * k + fx_, yy, c_mid[0] + 12 * k + fx_, yy + 8 * k), fill=shirt_l, width=max(2, int(4 * k)))
+            else:
+                for j in range(3):
+                    yy = c_mid[1] + (j - 0.6) * 24 * k
+                    d.ellipse((c_mid[0] - 6 * k + fx_, yy, c_mid[0] + 6 * k + fx_, yy + 12 * k), fill=gold, outline=INK, width=max(1, int(o * 0.4)))
+    else:
+        hood = _pt(hip, 180 - lean, bh - 6 * k)                                   # Kapuze im Nacken
+        d.ellipse((hood[0] - 52 * k - o, hood[1] - 24 * k - o, hood[0] + 52 * k + o, hood[1] + 30 * k + o), fill=INK)
+        d.ellipse((hood[0] - 52 * k, hood[1] - 24 * k, hood[0] + 52 * k, hood[1] + 30 * k), fill=shirt_d)
+        d.ellipse((hood[0] - 40 * k + 6 * k * f, hood[1] - 16 * k, hood[0] + 40 * k + 6 * k * f, hood[1] + 20 * k), fill=shirt)
+        pk = _pt(hip, 180 - lean, bw * 0.50)                                      # Bauchtasche
+        d.rounded_rectangle((pk[0] - 30 * k + 6 * k * f, pk[1] - 13 * k, pk[0] + 30 * k + 6 * k * f, pk[1] + 16 * k), 9 * k, fill=shirt_d)
+        for sgn in (-1, 1):                                                       # Kordeln
+            c0 = _pt(hip, 180 - lean, bh - 34 * k)
+            c1 = _pt(hip, 180 - lean, bh - 70 * k)
+            ox = (sgn * 11 + 6 * f) * k
+            d.line((c0[0] + ox, c0[1], c1[0] + ox + sgn * 2 * k, c1[1]), fill=shirt_l, width=max(2, int(5 * k)))
+            d.ellipse((c1[0] + ox + sgn * 2 * k - 5 * k, c1[1] - 2 * k, c1[0] + ox + sgn * 2 * k + 5 * k, c1[1] + 8 * k), fill=shirt_l)
 
     # Hals
     nk0, nk1 = _pt(top, 180 - lean, -16 * k), _pt(top, 180 - lean, 14 * k)
@@ -502,6 +564,26 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
             d.polygon([(bx, by), (bx + sgn * 46 * u, by - 32 * u), (bx + sgn * 46 * u, by + 32 * u)], fill=INK)
             d.polygon([(bx + sgn * 6 * u, by), (bx + sgn * 40 * u, by - 22 * u), (bx + sgn * 40 * u, by + 22 * u)], fill=look.hat_color)
         _blob(d, (bx - 9 * u, by - 9 * u, bx + 9 * u, by + 9 * u), _dark(look.hat_color, 0.2), o * 0.5)
+    elif look.hat == "tricorn":                            # Dreispitz (Bürger und Stadtwachen um 1800): schwarzer Filz, Krempe an drei Seiten hochgeschlagen, helle Borte
+        y0 = ty + hr * 0.5
+        pts = _smooth([(hcx - rx * 1.42, y0 - 6 * u), (hcx - rx * 0.86, y0 - 62 * u), (hcx - rx * 0.3, y0 - 50 * u), (hcx, y0 - 84 * u), (hcx + rx * 0.3, y0 - 50 * u),
+                       (hcx + rx * 0.86, y0 - 62 * u), (hcx + rx * 1.42, y0 - 6 * u), (hcx + rx * 0.7, y0 + 10 * u), (hcx, y0 - 8 * u), (hcx - rx * 0.7, y0 + 10 * u)], 5)
+        d.polygon(pts, fill=(46, 44, 52), outline=INK, width=max(2, int(o)))
+        d.line(_smooth([(hcx - rx * 1.3, y0 - 6 * u), (hcx - rx * 0.7, y0 + 2 * u), (hcx, y0 - 16 * u), (hcx + rx * 0.7, y0 + 2 * u), (hcx + rx * 1.3, y0 - 6 * u),
+                        (hcx + rx * 0.7, y0 + 2 * u), (hcx, y0 - 16 * u), (hcx - rx * 0.7, y0 + 2 * u)], 5)[:21], fill=(226, 190, 96), width=max(2, int(6 * u)))
+    elif look.hat == "bonnet":                             # Haube (Frauen um 1800): weißes Tuch über dem Haar, Rüschenrand, Schleife
+        col = (248, 244, 234)
+        d.chord((hat_box[0] - 6 * u - o, hat_box[1] - 8 * u - o, hat_box[2] + 6 * u + o, hat_box[3] + o), 180, 360, fill=INK)
+        d.chord((hat_box[0] - 6 * u, hat_box[1] - 8 * u, hat_box[2] + 6 * u, hat_box[3]), 180, 360, fill=_dark(col, 0.1))
+        d.chord((hat_box[0] - 6 * u + (12 * k if f > 0 else 0), hat_box[1] - 8 * u, hat_box[2] + 6 * u - (12 * k if f < 0 else 0), hat_box[3]), 180, 360, fill=col)
+        base = ty + hr * 0.5
+        for j in range(-4, 5):
+            bx_ = hcx + j * rx * 0.25
+            d.ellipse((bx_ - 15 * u - o * 0.6, base - 14 * u - o * 0.6, bx_ + 15 * u + o * 0.6, base + 14 * u + o * 0.6), fill=INK)
+        for j in range(-4, 5):
+            bx_ = hcx + j * rx * 0.25
+            d.ellipse((bx_ - 15 * u, base - 14 * u, bx_ + 15 * u, base + 14 * u), fill=col)
+        d.line((hcx - rx * 0.9, base - 16 * u, hcx + rx * 0.9, base - 16 * u), fill=look.hat_color, width=max(2, int(9 * u)))
     elif look.hat == "crown":
         y0 = ty + 16 * u
         pts = [(hcx - 58 * u, y0), (hcx - 58 * u, y0 - 56 * u), (hcx - 28 * u, y0 - 26 * u), (hcx, y0 - 68 * u),
