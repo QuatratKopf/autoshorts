@@ -1,5 +1,5 @@
 {
- "updated": 1795314593.7758005,
+ "updated": 1795316385.0515234,
  "enough": true,
  "counted": 32,
  "total": 35,
@@ -48,7 +48,7 @@
    "avg_views": 1806,
    "avg_likes": 39.0,
    "like_rate": 2.16,
-   "avg_score": 2422
+   "avg_score": 2420
   },
   {
    "slug": "fakten",
@@ -95,7 +95,7 @@
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2185 Aufrufe, 2.03 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1720 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2567 zu 706 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2566 zu 706 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -103,10 +103,10 @@
   "vier"
  ],
  "words_bad": [
-  "remix",
   "lied",
-  "erkennst",
-  "bekanntes"
+  "bekanntes",
+  "remix",
+  "erkennst"
  ],
  "top": [
   {
@@ -123,11 +123,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2572,
+   "views": 2571,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3412
+   "score": 3411
   },
   {
    "id": 77,
