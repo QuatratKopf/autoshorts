@@ -56,8 +56,10 @@ def _shadow(img, off=10, blur=14, alpha=110):
 
 def card(text, color=RED):
     f = font(92)
-    lines = _wrap(text.upper(), f, 820)[:2]
     d = ImageDraw.Draw(Image.new("L", (1, 1)))
+    while f.size > 52 and max(d.textlength(w_, font=f) for w_ in text.upper().split() or [""]) > 820:
+        f = font(f.size - 4)                                 # ein einzelnes langes Wort („GEWOHNHEITSSCHOCK“, Video 183) ragte links und rechts aus dem Bild: kleinere Schrift
+    lines = _wrap(text.upper(), f, 820)[:2]
     w = int(max(d.textlength(l, font=f) for l in lines)) + 90
     h = 112 * len(lines) + 60
     im = Image.new("RGBA", (w, h), (0, 0, 0, 0))

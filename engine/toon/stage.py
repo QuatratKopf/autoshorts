@@ -2381,7 +2381,7 @@ def direct(scenes, times, topic="", style="", look=""):
 CALL_RE = r"telefon|\banruf|\bruf\w* (?:\w+ ){0,5}an\b|angerufen|auflegen|\blegst (?:\w+ ){0,3}auf\b|aufgelegt|freizeichen|\bhörer\b|am handy|in der leitung|geht ran|gehst ran|nimmt ab|hebt ab|klingelt"
 CALL_END_RE = r"\blegst (?:\w+ ){0,4}auf\b|aufgelegt|\bleg\w* (?:\w+ ){0,3}auf\b|verbindung (?:\w+ ){0,6}(?:bricht|abbricht|abgebrochen|weg|tot)|leitung (?:ist |bleibt )?(?:tot|stumm)|freizeichen|anruf (?:ist )?(?:beendet|vorbei)|drückst (?:\w+ ){0,3}weg"
 CALL_TRY_END_RE = r"willst (?:\w+ ){0,3}auflegen|auflegen, aber|nicht (?:mehr )?(?:auflegen|beenden)|lässt sich nicht"
-CALL_TECH_RE = r"\becho|\bfilter|herausgerechnet|rechnet \w+ (?:\w+ )?heraus|leitung|verzögerung|verzögert|mikrofon|lautsprecher|echo-?unterdrück|übertrag|schallwelle|signal|zurückgeschickt|zurück zu dir|wieder zurück|laut gestellt|freisprech"
+CALL_TECH_RE = r"\becho|\bfilter|herausgerechnet|rechnet \w+ (?:\w+ )?heraus|leitung|verzögerung|verzögert|mikrofon|lautsprecher|echo-?unterdrück|schallwelle|signal|zurückgeschickt|zurück zu dir|wieder zurück|laut gestellt|freisprech"
 CALL_FILTER_RE = r"echo (?:\w+ ){0,3}stopp|stoppt das echo|verschwind|kein echo|echo (?:ist )?weg|unterdrück|\bfilter|herausgerechnet|rechnet \w+ (?:\w+ )?heraus|löscht|gelöscht|entfern|normalerweise|eigentlich"
 CALL_OTHER_RE = (r"\b(?:er|sie) (?:antwortet|geht ran|nimmt ab|hebt ab|meldet sich|sagt|lacht|schwört|schweigt|hört)\b|am anderen ende|bei (?:ihm|ihr)\b|"
                  r"(?:kumpel|freund|freundin|bruder|schwester|mama|mutter|papa|vater)s? (?:\w+ ){0,2}(?:antwortet|geht ran|nimmt ab|hebt ab|meldet sich|sagt|schwört|schläft|hat|hatte|stellt|nimmt|setzt|dreht)|"
@@ -2446,7 +2446,12 @@ def _call_story(scenes, topic="", main_id=""):
         other = bool(_re.search(CALL_OTHER_RE, low))
         if _re.search(r"plötzlich|antwortet dir|\bdu hörst\b|\bhörst du\b|erschr|panik|gänsehaut", low) and not other:
             tech = False                                  # „Doch plötzlich antwortet dir mit kleiner Verzögerung deine eigene Stimme“ ist die Geschichte, nicht die Erklärung (Video 182)
+        if _re.search(r"tonhöhe|frequenz|blechern|dumpf|\bklingt\b", low) and not _re.search(r"\becho|mikrofon|lautsprecher", low):
+            tech = False                                  # „Telefone übertragen nur einen Teil der Tonhöhen“, „klingt über die Leitung blechern“: Klang, kein Echo (Video 183 zeigte das Echo-Schaubild)
         phones_tip = bool(_re.search(HEADPHONE_RE, low))
+        ov_k = sc.get("overlay")
+        if isinstance(ov_k, dict) and _re.search(HEADPHONE_RE, " ".join(str(v) for v in ov_k.values()).lower()) and not phones_tip:
+            sc["overlay"] = None                          # Zettel „TIPP: Kopfhörer benutzen!“ einen Satz zu früh
         if phones_tip:
             tech, other = False, True                     # „Bitte deinen Kumpel, Kopfhörer zu nutzen, um das Echo zu stoppen“: der Freund mit Kopfhörern, nicht noch einmal das Echo-Schaubild
         bone = bool(_re.search(r"schädel|knochen", low))
@@ -2515,8 +2520,10 @@ def _call_story(scenes, topic="", main_id=""):
                 me.pop("to", None)
             if _re.search(r"erschr|schreck|erstarr|panisch|gänsehaut|zuck|deine eigene stimme|dich selbst", low) and on:
                 me["emotion"] = "scared"
-            me["pos"] = ("center", "left", "right", "center")[n_main % 4]
-            me["facing"] = {"left": "right", "right": "left"}.get(me["pos"], "")
+            me["pos"] = (540, 410, 670, 540)[n_main % 4]   # nicht ganz an den Rand: mit Kamerafahrt war die Figur links halb abgeschnitten (Video 183)
+            me["facing"] = {410: "right", 670: "left"}.get(me["pos"], "")
+            if str(me.get("action") or "") in ("cower", "fall", "freeze", "look_around", "sit", "sleep") and me["hold"] == "call":
+                me["action"] = "shocked"                  # geduckt rutscht das Handy vors Auge; wer das Handy am Ohr hat, steht
             n_main += 1
             sc["props"] = [q for q in (sc.get("props") or []) if isinstance(q, dict) and str(q.get("type") or "").lower() not in ("phone", "handy", "smartphone")]
             if sc.get("shot") == "close" and last_kind == "close":

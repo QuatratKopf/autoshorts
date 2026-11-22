@@ -1361,6 +1361,11 @@ def main():
                           [(n_ * 4, n_ * 4 + 4) for n_ in range(7)], "Anruf am Telefon", "grusel", "")
         assert s5[2].get("shot") != "graphic" and not s5[0].get("status"), (s5[2].get("shot"), s5[0].get("status"))
         assert (s5[5].get("graphic") or {}).get("sub") == "filter" and (s5[5].get("graphic") or {}).get("kicker") == "ECHO-UNTERDRÜCKUNG", s5[5].get("graphic")
+        s6 = stage.direct([{"text": t_, "place": "livingroom", "actors": [{"id": "du", "action": "talk"}], "overlay": {"type": "note", "title": "TIPP", "text": "Kopfhörer benutzen!"} if n_ == 3 else None}
+                           for n_, t_ in enumerate(["Du rufst deinen Freund an.", "Am Telefon hörst du dich selbst.", "Du legst auf.", "Telefone übertragen außerdem nur einen Teil der Tonhöhen, darum klingt es über die Leitung blechern."])],
+                          [(n_ * 4, n_ * 4 + 4) for n_ in range(4)], "Anruf am Telefon", "grusel", "")
+        assert s6[3].get("shot") != "graphic" and not s6[3].get("overlay") and str(s6[3]["actors"][0].get("id")) == "du", s6[3]
+        assert overlays.card("GEWOHNHEITSSCHOCK").width <= 1010, overlays.card("GEWOHNHEITSSCHOCK").width
         assert s5[6].get("shot") != "graphic" and s5[6]["actors"][0].get("wear") == "headphones" and str(s5[6]["actors"][0].get("id")) != "du", s5[6]
     check("Telefonat: Handy am Ohr, Angerufener im eigenen Zimmer, Echo-Schaubild", _call)
 
