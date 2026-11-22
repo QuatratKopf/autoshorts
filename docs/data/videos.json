@@ -6894,5 +6894,48 @@
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7710716287873305889?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
+ },
+ {
+  "id": 181,
+  "category": "grusel",
+  "topic": "Das unheimliche Phänomen der 'Doppelgänger-Stimmen' beim Telefonieren: Warum hunderte Gen-Z-User schwören, sie hätten am Ende des Anrufs sich selbst antworten hören – und was die Forschung dazu sagt.",
+  "status": "review",
+  "created": 1795342205.6102843,
+  "title": "Doppelgänger am Telefon: Hörst du dich selbst?",
+  "description": "Was passiert, wenn dein eigener Doppelgänger am Telefon mit dir spricht?\nHunderte Gen-Z-User berichten von unheimlichen Anrufen auf TikTok.\nWürdest du sofort auflegen oder weiterreden?",
+  "hashtags": [
+   "#shorts",
+   "#doppelgänger",
+   "#grusel",
+   "#creepypasta",
+   "#mystery",
+   "#phenomenon",
+   "#genz",
+   "#viral"
+  ],
+  "tags": [
+   "doppelgänger am telefon",
+   "unheimliche anrufe",
+   "gruselgeschichte deutsch",
+   "tiktok trend",
+   "stimme gedoppelt",
+   "mystery story",
+   "ki stimme am telefon",
+   "netzwerk verzögerung"
+  ],
+  "thumb_text": "STIMME AUS DER ZUKUNFT",
+  "missing": null,
+  "cover_ms": 91067,
+  "duration": 91.0,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-22 13:00",
+  "review_at": 1795342720.5561836
  }
 ]
