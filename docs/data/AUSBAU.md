@@ -181,7 +181,10 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   links und rechts; Taschenlampe → `phonelight` (Lichtkegel auf den König); Musik → `phonemusic` (Noten); Akku → Figur allein, erschrocken; „Display wird
   schwarz/geht aus“ → Requisite `phone_dead` groß (`insert`), danach hält die Figur `phonedead`; Museum → zwei Besucher an der Vitrine. Alle Requisiten,
   Wetter, Baukasten-Landschaften und Handy-/Zettel-Einblendungen des Drehbuchs entfallen dort (nichts Modernes im Bild); ein Zahlen-Schaubild zu
-  „nach zwei Sekunden bemerkst du …“ wird zur Szene mit Schild. Selftest: `_past`. Fehlt noch: Kutsche, Pferd, Kerker, Marktstände, Kirche der Zeit.
+  „nach zwei Sekunden bemerkst du …“ wird zur Szene mit Schild, ein Zähler „5 MINUTEN“ zum Schild „NACH 5 MINUTEN“. „Die Gelehrten des Königs …“ zeigt zwei
+  ratlose Gelehrte; ein zweiter Satz zum selben Moment (Musik) holt eine staunende Wache dazu statt dasselbe Bild zu wiederholen. Für alle Videos (Video 186):
+  ein Zähler ohne Einheit mit einer Jahreszahl wird zum Schild („ERSTER SATELLIT 1957“ statt hochzählender „1.957“), unter einem Zähler schneidet
+  `_cut_plan` nicht auf die Großaufnahme (die Zahl läge auf dem Gesicht), und die gesperrte Überschrift der Plakette (`hyper._badge`) behält ihre Wortlücken. Selftest: `_past`. Fehlt noch: Kutsche, Pferd, Kerker, Marktstände, Kirche der Zeit.
 
 ## Was zu tun ist
 1. Offene Wünsche (ohne `"done": true`) und `"auto": true`-Einträge durchgehen, höchstens 8 pro Sitzung, häufigste zuerst.

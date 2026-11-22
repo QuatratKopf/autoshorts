@@ -1416,6 +1416,23 @@ def main():
                     for act_ in ("idle", "walk", "cower", "shocked", "point"):
                         pose_, _ = rig.pose_at(act_, 0.7, 3.0, "", 0.0, 1)
                         assert rig.draw(lk_, pose_, 1, 1.0)[0].getbbox()
+        T3 = ["Du landest mit deinem Smartphone im Jahr achtzehnhundert.", "Der erste Satellit startet erst 1957.", "Nach fünf Minuten machst du ein Foto mit Blitz von den Passanten.",
+              "Nach zwei Stunden stehst du vor dem König.", "Mit dem Rechner löst du Aufgaben in einer Sekunde.", "Die Gelehrten des Königs brauchen dafür Stunden.",
+              "Du spielst Musik über den Lautsprecher ab.", "Musik ohne Musiker hat hier noch nie ein Mensch gehört.", "Es landet in einer Vitrine im Museum."]
+        s3 = stage.direct([{"text": t_, "place": "street", "actors": [{"id": "du", "action": "talk"}], "mood": "sad" if n_ == 8 else "",
+                            "overlay": {"type": "counter", "label": "ERSTER SATELLIT", "value": 1957} if n_ == 1 else {"type": "counter", "label": "", "value": 5, "unit": "MINUTEN"} if n_ == 2 else None}
+                           for n_, t_ in enumerate(T3)], [(n_ * 4, n_ * 4 + 4) for n_ in range(len(T3))], "Was wäre, wenn du ein Smartphone mit ins Jahr 1800 nimmst?", "whatif", "")
+        assert s3[1]["overlay"] == {"type": "tag", "text": "ERSTER SATELLIT 1957"}, s3[1]["overlay"]          # ein Jahr zählt nicht hoch
+        assert s3[2]["overlay"] == {"type": "tag", "text": "NACH 5 MINUTEN"}, s3[2]["overlay"]
+        assert [a.get("id") for a in s3[5]["actors"]] == ["du", "_gelehrter1", "_gelehrter2"], s3[5]["actors"]
+        assert len(s3[7]["actors"]) == 3 and s3[7]["actors"][1].get("_outfit") == "guard", s3[7]["actors"]   # zweiter Satz zum selben Moment: nicht noch einmal dasselbe Bild
+        assert not s3[8].get("mood"), "Vitrine nicht im Halbdunkel"
+        for n_ in (5, 7, 8):
+            frame(s3[n_], cast_p)
+        sy = stage.direct([{"text": "Der erste Satellit startet 1957.", "place": "space", "overlay": {"type": "counter", "label": "START", "value": 1957}}], [(0, 4)], "Satelliten", "fakten", "")
+        assert (sy[0].get("overlay") or {}).get("type") != "counter", sy[0].get("overlay")
+        from .. import hyper as _hy
+        assert "\u00a0" in "".join(_hy._badge({"type": "badge", "kicker": "ERSTES FOTO", "text": "JAHR 1826"}, 4.0)[0]), "Wortlücke in gesperrter Überschrift"
         s2 = stage.direct([{"text": "Im Jahr 1979 fliehen zwei Familien.", "place": "street", "actors": [{"id": "du"}]}], [(0, 4)], "Flucht im Jahr 1979", "storys", "")
         assert not s2[0].get("_era") and s2[0].get("place") == "street", "1979 ist keine Reise in die alte Zeit"
     check("Vergangenheit: Altstadt, Thronsaal, Kabinett, Kleidung der Zeit, Handy in der Hand", _past)

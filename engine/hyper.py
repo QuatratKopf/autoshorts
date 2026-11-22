@@ -187,7 +187,7 @@ def _question(g, dur):
 
 def _badge(g, dur):
     txt = str(g.get("text") or "").upper()[:20]
-    kick = " ".join(str(g.get("kicker") or "").upper()[:24])
+    kick = " ".join(str(g.get("kicker") or "").upper()[:24]).replace("   ", "\u00a0\u00a0\u00a0")   # gesperrte Schrift: die Wortlücke bleibt drei feste Leerzeichen – HTML zog sie zu einem zusammen („ERSTESFOTODERWELT“, Video 186)
     stars = "".join(f'<div class="star" style="left:{540 + 400 * math.cos(i / 12 * 6.2832):.0f}px;'
                     f'top:{760 + 400 * math.sin(i / 12 * 6.2832):.0f}px">★</div>' for i in range(12))
     els = [f'<div id="stars" style="position:absolute;inset:0">{stars}</div>',

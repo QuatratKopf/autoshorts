@@ -2381,6 +2381,16 @@ def direct(scenes, times, topic="", style="", look=""):
     _speech(scenes, style)
     _call_story(scenes, topic, main_id)
     _past_story(scenes, topic, main_id)
+    for sc in scenes:                                     # Zähler mit einer Jahreszahl („ERSTER SATELLIT 1.957“ zählte hoch, mit Tausenderpunkt, mitten im Bild – Video 186): ein Jahr ist keine Menge, es wird ein Schild
+        ov_y = sc.get("overlay") if isinstance(sc, dict) and isinstance(sc.get("overlay"), dict) else None
+        if ov_y and str(ov_y.get("type") or "") == "counter" and not str(ov_y.get("unit") or "").strip():
+            try:
+                v_y = float(str(ov_y.get("value")).replace(".", "").replace(",", "."))
+            except (TypeError, ValueError):
+                v_y = None
+            if v_y is not None and 1000 <= v_y <= 2100 and v_y == int(v_y):
+                lab_y = str(ov_y.get("label") or "").strip().upper()
+                sc["overlay"] = {"type": "tag", "text": ((lab_y + " " if lab_y else "JAHR ") + str(int(v_y)))[:30]}
     for sc in scenes:                                     # ein einzelnes Auge neben Menschen („mustern dich mit großen Augen“ in der Bahn, Video 160) – überall, nicht nur im Zimmer
         if isinstance(sc, dict) and isinstance(sc.get("props"), list) and str(sc.get("shot") or "") not in ("insert", "graphic") and (
                 sc.get("crowd") or any(isinstance(a, dict) and not a.get("kind") for a in sc.get("actors") or [])):
@@ -2422,6 +2432,7 @@ P_PLUG_RE = r"steckdose|aufladen|ladekabel|ladegerät|\bstrom\b|stromnetz|kraftw
 P_JUNK_RE = r"glas und metall|nutzlos|wertlos|briefbeschwerer|\bschrott"
 P_KING_ID = r"k(?:ö|oe|o)nig|kaiser|herrscher|fuerst|fürst|king"
 P_GUARD_ID = r"wache|waechter|wächter|soldat|guard"
+P_SCHOLAR_RE = r"gelehrte|berater|minister|hofstaat|höfling|professor|mathematiker|rechenmeister"
 P_STEP_RE = r"\bnach (?:\w+ ){1,2}(?:sekunde|minute|stunde|tag|woche)"
 
 
@@ -2461,7 +2472,7 @@ def _past_story(scenes, topic="", main_id=""):
         return {"id": guard_id if i == 0 else "_wache2", "look": dict(guard_look), "_outfit": "guard", "action": "point", "emotion": "angry", "emote": "",
                 "pos": pos, "speaks": False, "hold": "", "kind": "", "facing": "", "say": ""}
 
-    loc, dead, last_n, n_town, said_dead = "town", False, len(scenes) - 1, 0, False
+    loc, dead, last_n, n_town, said_dead, last_sig = "town", False, len(scenes) - 1, 0, False, None
     for n, sc in enumerate(scenes):
         if not isinstance(sc, dict):
             continue
@@ -2501,7 +2512,7 @@ def _past_story(scenes, topic="", main_id=""):
               "kind": "", "facing": "", "say": ""}
         if here == "museum":                              # Vitrine in der Mitte, zwei staunende Besucher in der Kleidung der Zeit – die Hauptfigur ist nicht dabei
             sc["actors"] = [citizen(n, 200, "think", "", "?"), citizen(n + 1, 880, "point", "shocked", "!")]
-            sc["_no_cut"] = True
+            sc["_no_cut"], sc["mood"] = True, ""          # hell: im Halbdunkel verschwand die Vitrine (Video 186)
         elif dying and not said_dead:                     # das Handy geht aus: groß und allein im Bild, der Schirm schwarz
             sc["actors"], sc["props"], sc["shot"], sc["mood"] = [], [{"type": "phone_dead"}], "insert", "sad"
             said_dead = True
@@ -2547,6 +2558,18 @@ def _past_story(scenes, topic="", main_id=""):
             sc["actors"] = [me] if solo else [me, kg]
             if not solo:
                 sc["_no_cut"] = bool(me["hold"] in ("phonelight", "phonemusic"))
+                sig = (me["hold"], kg["action"])
+                if _re.search(P_SCHOLAR_RE, low):           # „Die Gelehrten des Königs brauchen dafür Stunden“: zwei ratlose Gelehrte neben dem König statt noch einmal dasselbe Bild
+                    me.update(pos=170)
+                    kg.update(pos=900)
+                    sc["actors"] = [me, dict(citizen(0, 480, "think", "worried", "?"), id="_gelehrter1"), dict(citizen(2, 700, "shocked", "shocked", "!"), id="_gelehrter2")]
+                    sc["_no_cut"] = True
+                elif sig == last_sig:                     # zweiter Satz zum selben Moment (Musik … „hat hier noch nie ein Mensch gehört“): eine Wache staunt mit, der König reißt die Arme hoch
+                    me.update(pos=170)
+                    kg.update(pos=900, action="shocked", emotion="shocked", emote="!")
+                    sc["actors"] = [me, dict(guard(0, 540), action="shocked", emotion="shocked", emote="?"), kg]
+                    sc["_no_cut"] = True
+                last_sig = sig
         else:                                             # auf dem Platz der alten Stadt (oder im Dorf, wenn der Satz von Masten spricht)
             if _re.search(P_FIELD_RE, low) and not _re.search(P_PLUG_RE, low):
                 sc["place"] = "village"
@@ -2566,6 +2589,10 @@ def _past_story(scenes, topic="", main_id=""):
             sc["actors"] = [me]
             n_town += 1
         dead = dead or dying
+        ov_p = sc.get("overlay")
+        if isinstance(ov_p, dict) and str(ov_p.get("type") or "") == "counter" and str(ov_p.get("unit") or "").strip() and ov_p.get("value") is not None:
+            sc["overlay"] = {"type": "tag", "text": ("NACH %s %s" % (_fmt_num(ov_p["value"]) if isinstance(ov_p["value"], (int, float)) else ov_p["value"], str(ov_p["unit"]).strip())).upper()[:24]} \
+                if _re.search(P_STEP_RE, low) else ov_p   # „Nach fünf Minuten …“: kleines Schild oben statt einer großen Zahl, die mitten über der Handlung hochzählt
         ov_p = sc.get("overlay")
         if isinstance(ov_p, dict) and str(ov_p.get("type") or "") in ("phone", "note", "checklist"):
             sc["overlay"] = None                          # Handy-Chat oder Zettel als Einblendung: im Jahr 1800 schreibt niemand zurück
@@ -5907,7 +5934,7 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     if moving or str(scene.get("shot") or "") == "close":
         cam["move"] = "push" if index % 2 else "pull"     # wer durchs Bild läuft oder groß im Bild ist: kein zusätzlicher Schwenk
     cam_flat = {"flat": True, "dir": cam["dir"], "drift": cam["drift"], "opener": index == 0, "move": "push" if index % 2 else "pull"}
-    cut_t, cut_kind, named = _cut_plan(scene, shot, gfx or ins, moving, ov_tall, place, actors, props, dur, cam, index)
+    cut_t, cut_kind, named = _cut_plan(scene, shot, gfx or ins, moving, ov_tall or ov_kind == "counter", place, actors, props, dur, cam, index)   # großer Zähler mitten im Bild: kein Schnitt auf die Großaufnahme – die Zahl läge auf dem Gesicht (Video 186)
     sfx = []                                  # Ton-Ereignisse dieser Szene (Sekunden ab Szenenbeginn) für render.py / sound.py
     if not (gfx or ins):
         for pi, (k_p, _) in enumerate([p for p in props if extras.PROP_ALIASES.get(p[0], p[0]) not in extras.FRONT][:3]):
