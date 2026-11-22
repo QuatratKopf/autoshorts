@@ -106,7 +106,9 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   Mikrofon, Signal (`CALL_TECH_RE`) zeigen das Schaubild `echo` (`graphics._g_echo`: zwei Handys, die Stimme läuft oben hinüber und kommt unten
   blasser zurück; `"sub": "filter"` – eine Sperre hält das Echo auf, automatisch bei „unterdrückt/filtert/verschwindet“) im Wechsel mit dem
   Handy des Angerufenen auf laut. Sätze über Schädelknochen bzw. „so hören dich andere“ zeigen das Schaubild `voice` (`graphics._g_voice`: Kopf,
-  Schall außen durch die Luft und innen durch den Knochen; `"sub": "air"` nur der Luftweg). „Kopfhörer“ beim Freund: er trägt sie. Eine Ecken-Zeile mit vorangestellter Uhrzeit, die niemand sagt
+  Schall außen durch die Luft und innen durch den Knochen; `"sub": "air"` nur der Luftweg). „Kopfhörer“ beim Freund: er trägt sie – und nur dort (`_no_headphones` nimmt sie ihm in allen anderen Szenen ab, auch wenn die
+  Besetzung sie als Kopfbedeckung vorgibt). Klang-Sätze (Tonhöhen, blechern) sind keine Echo-Sätze; eine Karte mit einem langen Wort wird kleiner
+  gesetzt (`overlays.card`); `writer.hook_drops` behält Satz 2, wenn Satz 3 mit „Doch/Dann/Plötzlich“ an ihn anknüpft. Eine Ecken-Zeile mit vorangestellter Uhrzeit, die niemand sagt
   („23:42 UHR · ANRUF LÄUFT“), entfällt samt Zustand (`render.build_ass`). Selbsttest: `_call`.
 
 - Raumsonde (`stage._probe_story`, greift bei `PROBE_RE` – Raumsonde, Weltraumsonde, Voyager – in Thema oder Sätzen): gezeichnete Sonde

@@ -271,6 +271,9 @@ def _prepare(scene, cast):
         if action in ("walk", "run") and x1 == x0:       # ohne Ziel: von außen hereinkommen
             x0 = -260 if x0 <= 540 else 1340
         look_a = rig.Look.from_spec(spec, aid, list(cast).index(aid) if aid in cast else None)
+        if scene.get("_no_headphones") and look_a.hat == "headphones":
+            import dataclasses
+            look_a = dataclasses.replace(look_a, hat="")   # Telefonat: der Freund hat das Handy auf laut – trüge er laut Besetzung schon Kopfhörer, widerspräche das Bild dem Satz (Video 184)
         if a.get("wear") == "headphones" and not look_a.hat and kind not in extras.CREATURES:
             import dataclasses
             look_a = dataclasses.replace(look_a, hat="headphones")
@@ -2478,6 +2481,8 @@ def _call_story(scenes, topic="", main_id=""):
                              "hold": "" if off else ("phone" if tech or not on or _re.search(HEADPHONE_RE, low) else "call"), "pos": "center", "facing": "", "say": "", "kind": "", "keep": True}]
             if _re.search(HEADPHONE_RE, low):             # „Bitte deinen Freund, Kopfhörer zu nehmen“: er trägt sie, nicht die Anruferin
                 sc["actors"][0]["wear"] = "headphones"
+            else:
+                sc["_no_headphones"] = True
             sc["props"] = [{"type": "phone", "pos": 800}] if off else []
             sc["crowd"], sc["weather"] = "", ""
             sc["shot"] = "" if last_kind in ("other", "close") or off else "close"

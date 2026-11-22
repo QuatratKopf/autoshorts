@@ -1341,6 +1341,8 @@ def main():
         assert sb[7]["actors"][0].get("hold") == "phone" and sb[8]["actors"][0].get("hold") == "phone", "nach dem Auflegen kein Handy mehr am Ohr"
         for n_ in (0, 1, 4, 5, 7):
             frame(sb[n_], {"du": {"shirt": "lila", "gender": "w"}, "freund": {"shirt": "schwarz", "hat": "beanie"}})
+        _, _, _, acts_h, _, _ = stage._prepare(sb[1], {"du": {"shirt": "lila"}, "freund": {"shirt": "schwarz", "hat": "headphones"}})
+        assert acts_h[0]["look"].hat != "headphones", "Freund mit Handy auf laut trägt keine Kopfhörer"
         g = graphics.clean({"type": "echo", "sub": "filter", "kicker": "ECHO-UNTERDRÜCKUNG"})
         assert g and graphics.frame(g, 1.2, 4.0, "scary").size == (1080, 1920)
         assert graphics.frame(graphics.clean({"type": "voice", "sub": "air"}), 1.2, 4.0, "").size == (1080, 1920)
