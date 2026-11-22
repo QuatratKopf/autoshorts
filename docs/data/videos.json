@@ -6899,7 +6899,7 @@
   "id": 181,
   "category": "grusel",
   "topic": "Das unheimliche Phänomen der 'Doppelgänger-Stimmen' beim Telefonieren: Warum hunderte Gen-Z-User schwören, sie hätten am Ende des Anrufs sich selbst antworten hören – und was die Forschung dazu sagt.",
-  "status": "review",
+  "status": "discarded",
   "created": 1795342205.6102843,
   "title": "Doppelgänger am Telefon: Hörst du dich selbst?",
   "description": "Was passiert, wenn dein eigener Doppelgänger am Telefon mit dir spricht?\nHunderte Gen-Z-User berichten von unheimlichen Anrufen auf TikTok.\nWürdest du sofort auflegen oder weiterreden?",
@@ -6936,6 +6936,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-22 13:00",
-  "review_at": 1795342720.5561836
+  "review_at": 1795342720.5561836,
+  "error": "Bei der Prüfung verworfen: Prüfung: Freund sitzt beim Anruf im selben Zimmer, Handy fehlt in den meisten Szenen, Straße und Rechenzentrum mit hereinlaufender Figur, erfundener Trend als Tatsache"
  }
 ]
