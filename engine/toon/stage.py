@@ -2464,7 +2464,7 @@ def _past_story(scenes, topic="", main_id=""):
         return {"id": "_buerger%d" % (i % 4 + 1), "look": dict(folk[i % 4]), "_outfit": "period", "action": action, "emotion": emotion, "emote": emote,
                 "pos": pos, "speaks": False, "hold": "", "kind": "", "facing": "", "say": ""}
 
-    def king(action, emotion="", emote="", pos="right"):
+    def king(action, emotion="", emote="", pos=800):          # nicht am Rand: die Kamerafahrt schnitt Figuren bei 170/900 an (Video 187)
         return {"id": king_id, "look": dict(king_look), "_outfit": "king", "action": action, "emotion": emotion, "emote": emote, "pos": pos,
                 "speaks": False, "hold": "", "kind": "", "facing": "", "say": ""}
 
@@ -2473,6 +2473,7 @@ def _past_story(scenes, topic="", main_id=""):
                 "pos": pos, "speaks": False, "hold": "", "kind": "", "facing": "", "say": ""}
 
     loc, dead, last_n, n_town, said_dead, last_sig = "town", False, len(scenes) - 1, 0, False, None
+    head_years = set(_re.findall(r"\b\d{3,4}\b", topic_head(topic)))
     for n, sc in enumerate(scenes):
         if not isinstance(sc, dict):
             continue
@@ -2504,29 +2505,35 @@ def _past_story(scenes, topic="", main_id=""):
                 if val and lab and spoken_number(val, text):
                     sc["overlay"] = {"type": "tag", "text": ("NACH %s %s" % (val, lab)).upper()[:24]}
         sc["backdrop"], sc["weather"], sc["crowd"], sc["props"], sc["shot"] = None, "", "", [], ""
-        sc["mood"] = "sad" if str(sc.get("mood") or "") == "sad" else ""       # kein Halbdunkel mit Lichtkegel am helllichten Tag auf dem Marktplatz
+        sc["mood"] = ""                                   # kein Halbdunkel mit Lichtkegel am helllichten Tag auf dem Marktplatz, im Thronsaal und vor der Vitrine
         sc["time"] = "night" if str(sc.get("time") or "") == "night" and _re.search(r"nacht|mitternacht|dunkel", low) else "day"
         sc["place"] = {"town": "oldtown", "throne": "throneroom", "museum": "royalmuseum"}[here]
         phone = ("phonedead" if dead else "phone") if has_phone else ""
         me = {"id": main_id, "_outfit": "modern", "action": "idle", "emotion": "", "emote": "", "pos": "left", "hold": phone, "speaks": True,
               "kind": "", "facing": "", "say": ""}
+        yrs_p = [int(y) for y in _re.findall(r"\b(1[0-9]\d\d|20\d\d)\b", year_digits(text) + " " + text) if y not in head_years]   # ein anderes Jahr als das der Geschichte („erst 1826“, „erst 1882“)
+        prev_p = scenes[n - 1] if n and isinstance(scenes[n - 1], dict) else {}
+        if yrs_p and n and prev_p.get("shot") != "graphic" and not _re.search(P_GUARD_RE + "|" + P_MUSEUM_RE, low) and not dying:
+            sc["graphic"] = {"type": "badge", "kicker": "ERST SPÄTER", "text": "JAHR %d" % yrs_p[0]}   # „Die ersten Kraftwerke gehen erst 1882 ans Netz“: das Jahr groß als Plakette statt noch einmal dieselbe ratlose Figur (Video 187)
+            sc["shot"], sc["overlay"], sc["actors"] = "graphic", None, []
+            continue
         if here == "museum":                              # Vitrine in der Mitte, zwei staunende Besucher in der Kleidung der Zeit – die Hauptfigur ist nicht dabei
-            sc["actors"] = [citizen(n, 200, "think", "", "?"), citizen(n + 1, 880, "point", "shocked", "!")]
+            sc["actors"] = [citizen(n, 230, "think", "", "?"), citizen(n + 1, 850, "point", "shocked", "!")]
             sc["_no_cut"], sc["mood"] = True, ""          # hell: im Halbdunkel verschwand die Vitrine (Video 186)
         elif dying and not said_dead:                     # das Handy geht aus: groß und allein im Bild, der Schirm schwarz
             sc["actors"], sc["props"], sc["shot"], sc["mood"] = [], [{"type": "phone_dead"}], "insert", "sad"
             said_dead = True
         elif _re.search(P_GUARD_RE, low):                 # Wachen links und rechts, die Hauptfigur duckt sich dazwischen
             me.update(action="cower", emotion="scared", pos="center", hold="")
-            sc["actors"] = [guard(0, 210), me, guard(1, 870)]
+            sc["actors"] = [guard(0, 250), me, guard(1, 830)]
             sc["_no_cut"] = True
         elif here == "town" and _re.search(P_PHOTO_RE, low) and has_phone and not dead:
-            me.update(hold="phoneflash", pos=230, emotion="happy")
-            sc["actors"] = [me, citizen(n, 640, "shocked", "scared", "!"), citizen(n + 1, 900, "cower", "scared", "")]
+            me.update(hold="phoneflash", pos=260, emotion="happy")
+            sc["actors"] = [me, citizen(n, 610, "shocked", "scared", "!"), citizen(n + 1, 840, "cower", "scared", "")]
             sc["_no_cut"] = True
         elif here == "town" and _re.search(P_WITCH_RE, low):
-            me.update(pos=220, emotion="worried", action="idle")
-            sc["actors"] = [me, citizen(n, 620, "point", "angry", "anger"), citizen(n + 1, 890, "shocked", "scared", "!")]
+            me.update(pos=260, emotion="worried", action="idle")
+            sc["actors"] = [me, citizen(n, 600, "point", "angry", "anger"), citizen(n + 1, 840, "shocked", "scared", "!")]
             sc["_no_cut"] = True
         elif here == "throne":
             solo = False
@@ -2537,22 +2544,22 @@ def _past_story(scenes, topic="", main_id=""):
                 me.update(action="shocked", emotion="worried", pos="center")
                 solo = True
             elif _re.search(P_JUNK_RE, low):
-                me.update(action="sad", emotion="sad", pos=260)
+                me.update(action="sad", emotion="sad", pos=290)
                 kg = king("think", "", "?")
             elif _re.search(P_LIGHT_RE, low) and has_phone and not dead:
-                me.update(hold="phonelight", pos=220, emotion="happy")
-                kg = king("shocked", "shocked", "!", 840)
+                me.update(hold="phonelight", pos=290, emotion="happy")
+                kg = king("shocked", "shocked", "!", 800)
             elif _re.search(P_MUSIC_RE, low) and has_phone and not dead:
-                me.update(hold="phonemusic", pos=240, emotion="happy")
+                me.update(hold="phonemusic", pos=290, emotion="happy")
                 kg = king("freeze", "shocked", "!")
             elif _re.search(P_CALC_RE, low):
-                me.update(pos=250, emotion="happy")
+                me.update(pos=290, emotion="happy")
                 kg = king("think", "worried", "?")
             elif _re.search(P_MAGE_RE, low):
-                me.update(pos=250, emotion="happy", action="idle")
+                me.update(pos=290, emotion="happy", action="idle")
                 kg = king("point", "shocked", "!")
             else:
-                me.update(pos=250, emotion="worried")
+                me.update(pos=290, emotion="worried")
                 kg = king("talk", "angry", "")
                 kg["speaks"], me["speaks"] = True, False
             sc["actors"] = [me] if solo else [me, kg]
@@ -2560,13 +2567,12 @@ def _past_story(scenes, topic="", main_id=""):
                 sc["_no_cut"] = bool(me["hold"] in ("phonelight", "phonemusic"))
                 sig = (me["hold"], kg["action"])
                 if _re.search(P_SCHOLAR_RE, low):           # „Die Gelehrten des Königs brauchen dafür Stunden“: zwei ratlose Gelehrte neben dem König statt noch einmal dasselbe Bild
-                    me.update(pos=170)
-                    kg.update(pos=900)
-                    sc["actors"] = [me, dict(citizen(0, 480, "think", "worried", "?"), id="_gelehrter1"), dict(citizen(2, 700, "shocked", "shocked", "!"), id="_gelehrter2")]
+                    me.update(pos=250)
+                    sc["actors"] = [me, dict(citizen(0, 540, "think", "worried", "?"), id="_gelehrter1"), dict(citizen(2, 820, "shocked", "shocked", "!"), id="_gelehrter2")]
                     sc["_no_cut"] = True
                 elif sig == last_sig:                     # zweiter Satz zum selben Moment (Musik … „hat hier noch nie ein Mensch gehört“): eine Wache staunt mit, der König reißt die Arme hoch
-                    me.update(pos=170)
-                    kg.update(pos=900, action="shocked", emotion="shocked", emote="!")
+                    me.update(pos=250)
+                    kg.update(pos=830, action="shocked", emotion="shocked", emote="!")
                     sc["actors"] = [me, dict(guard(0, 540), action="shocked", emotion="shocked", emote="?"), kg]
                     sc["_no_cut"] = True
                 last_sig = sig
@@ -2603,7 +2609,7 @@ def _past_story(scenes, topic="", main_id=""):
         acts_b = [x for x in (b_.get("actors") or []) if isinstance(x, dict)]
         acts_a = [x for x in (a_.get("actors") or []) if isinstance(x, dict)]
         if len(acts_b) == 1 and len(acts_a) == 1 and a_.get("place") == b_.get("place") and not a_.get("shot") and not b_.get("shot") \
-                and acts_b[0].get("hold") not in ("phonelight", "phonemusic", "phoneflash") and str(acts_b[0].get("action")) not in ("look_around", "cower"):
+                and acts_b[0].get("hold") not in ("phonelight", "phonemusic", "phoneflash") and str(acts_b[0].get("action")) not in ("cower",):
             b_["shot"], b_["crowd"] = "close", ""
             acts_b[0]["pos"] = "center"
 

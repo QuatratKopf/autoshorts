@@ -922,6 +922,8 @@ def hook_drops(sc, s0, s1):
     if _re.match(r"(?:doch|dann|da|plötzlich|und plötzlich|doch plötzlich|aber plötzlich|und dann|doch dann|aber dann|in dem moment|in diesem moment|genau dann|kurz darauf)\b", nxt) \
             and _re.search(r"\bdu\b|stell dir vor|\b(?:er|sie)\b", old) and not _re.search(r"\?\s*$", str(sc[1].get("text") or "")):
         return True                                       # Satz 3 knüpft an („Doch plötzlich antwortet dir …“): Satz 2 erzählt den Anfang der Szene („Du rufst deinen Freund an“) – fiele er weg, hinge Satz 3 in der Luft (Video 182)
+    if _re.match(r"(?:kein wunder|denn\b|deshalb|darum|deswegen|der grund|das liegt|weil\b|genau deshalb|nämlich)", nxt):
+        return True                                       # Satz 3 begründet Satz 2 („Kein Wunder, denn der erste Satellit startet erst 1957“): ohne „du hast kein Netz“ davor begründet er nichts (Video 187)
     return len(stem(sc[1].get("text")) - rest) >= 3
 
 
@@ -949,6 +951,12 @@ def sharpen_hook(js, topic):
                 break
             if (s0, s1) != (sc[0].get("text"), sc[1].get("text")):
                 ai.log(f"Einstieg geschärft: „{s0}“ / „{s1}“")
+            for x, new in ((sc[0], s0), (sc[1], s1)):     # Einblendung des alten Satzes („KEIN EMPFANG“) passt nicht mehr zum neuen („… ein nutzloses Museumsstück“): sie entfällt (Video 187)
+                ov = x.get("overlay")
+                if new != x.get("text") and isinstance(ov, dict):
+                    words = _re.findall(r"[a-zäöüß]{4,}", " ".join(str(v) for k, v in ov.items() if k != "type").lower())
+                    if words and not any(w[:5] in new.lower() for w in words):
+                        x["overlay"] = None
             sc[0]["text"], sc[1]["text"] = s0, s1
             break
     return js

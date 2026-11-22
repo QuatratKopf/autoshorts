@@ -1422,15 +1422,25 @@ def main():
         s3 = stage.direct([{"text": t_, "place": "street", "actors": [{"id": "du", "action": "talk"}], "mood": "sad" if n_ == 8 else "",
                             "overlay": {"type": "counter", "label": "ERSTER SATELLIT", "value": 1957} if n_ == 1 else {"type": "counter", "label": "", "value": 5, "unit": "MINUTEN"} if n_ == 2 else None}
                            for n_, t_ in enumerate(T3)], [(n_ * 4, n_ * 4 + 4) for n_ in range(len(T3))], "Was wäre, wenn du ein Smartphone mit ins Jahr 1800 nimmst?", "whatif", "")
-        assert s3[1]["overlay"] == {"type": "tag", "text": "ERSTER SATELLIT 1957"}, s3[1]["overlay"]          # ein Jahr zählt nicht hoch
+        assert s3[1].get("shot") == "graphic" and s3[1]["graphic"].get("text") == "JAHR 1957" and not s3[1].get("overlay"), s3[1]   # ein Jahr zählt nicht hoch: Plakette
         assert s3[2]["overlay"] == {"type": "tag", "text": "NACH 5 MINUTEN"}, s3[2]["overlay"]
         assert [a.get("id") for a in s3[5]["actors"]] == ["du", "_gelehrter1", "_gelehrter2"], s3[5]["actors"]
         assert len(s3[7]["actors"]) == 3 and s3[7]["actors"][1].get("_outfit") == "guard", s3[7]["actors"]   # zweiter Satz zum selben Moment: nicht noch einmal dasselbe Bild
         assert not s3[8].get("mood"), "Vitrine nicht im Halbdunkel"
         for n_ in (5, 7, 8):
             frame(s3[n_], cast_p)
+        from .. import writer as _w
+        s6 = stage.direct([{"text": t_, "place": "street", "actors": [{"id": "du", "action": "talk"}], "mood": "sad"} for t_ in
+                           ["Du landest mit deinem Handy im Jahr achtzehnhundert.", "Aufladen geht nicht, denn es gibt keine Steckdose.", "Die ersten Kraftwerke gehen erst 1882 ans Netz.",
+                            "Die Menschen staunen, denn das erste Foto entsteht erst achtzehnhundertsechsundzwanzig.", "Dein Handy ist nutzlos."]],
+                          [(n_ * 4, n_ * 4 + 4) for n_ in range(5)], "Was wäre, wenn du ein Handy mit ins Jahr 1800 nimmst?", "whatif", "")
+        assert s6[2].get("shot") == "graphic" and s6[2]["graphic"].get("text") == "JAHR 1882", s6[2]          # das spätere Jahr als Plakette statt zweimal dieselbe Figur
+        assert s6[3].get("shot") != "graphic" and s6[0].get("shot") != "graphic", "nie zwei Plaketten hintereinander, nie im ersten Bild"
+        assert not any(sc.get("mood") for sc in s6 if sc.get("shot") != "graphic"), [sc.get("mood") for sc in s6]
+        hk = [{"text": "Du landest im Jahr 1800."}, {"text": "Du hast kein Netz."}, {"text": "Kein Wunder, denn der erste Satellit startet erst 1957."}, {"text": "Ende."}]
+        assert _w.hook_drops(hk, "Dein Handy im Jahr 1800.", "Am Ende ist es ein Museumsstück."), "Satz 3 begründet Satz 2: er bleibt"
         sy = stage.direct([{"text": "Der erste Satellit startet 1957.", "place": "space", "overlay": {"type": "counter", "label": "START", "value": 1957}}], [(0, 4)], "Satelliten", "fakten", "")
-        assert (sy[0].get("overlay") or {}).get("type") != "counter", sy[0].get("overlay")
+        assert sy[0].get("overlay") == {"type": "tag", "text": "START 1957"} or (sy[0].get("overlay") or {}).get("type") != "counter", sy[0].get("overlay")
         from .. import hyper as _hy
         assert "\u00a0" in "".join(_hy._badge({"type": "badge", "kicker": "ERSTES FOTO", "text": "JAHR 1826"}, 4.0)[0]), "Wortlücke in gesperrter Überschrift"
         s2 = stage.direct([{"text": "Im Jahr 1979 fliehen zwei Familien.", "place": "street", "actors": [{"id": "du"}]}], [(0, 4)], "Flucht im Jahr 1979", "storys", "")

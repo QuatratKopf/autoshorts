@@ -184,7 +184,10 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   „nach zwei Sekunden bemerkst du …“ wird zur Szene mit Schild, ein Zähler „5 MINUTEN“ zum Schild „NACH 5 MINUTEN“. „Die Gelehrten des Königs …“ zeigt zwei
   ratlose Gelehrte; ein zweiter Satz zum selben Moment (Musik) holt eine staunende Wache dazu statt dasselbe Bild zu wiederholen. Für alle Videos (Video 186):
   ein Zähler ohne Einheit mit einer Jahreszahl wird zum Schild („ERSTER SATELLIT 1957“ statt hochzählender „1.957“), unter einem Zähler schneidet
-  `_cut_plan` nicht auf die Großaufnahme (die Zahl läge auf dem Gesicht), und die gesperrte Überschrift der Plakette (`hyper._badge`) behält ihre Wortlücken. Selftest: `_past`. Fehlt noch: Kutsche, Pferd, Kerker, Marktstände, Kirche der Zeit.
+  `_cut_plan` nicht auf die Großaufnahme (die Zahl läge auf dem Gesicht), und die gesperrte Überschrift der Plakette (`hyper._badge`) behält ihre Wortlücken. Nennt ein Satz ein anderes Jahr als das der Geschichte („erst 1882“), zeigt er es als Plakette („ERST SPÄTER · JAHR 1882“) –
+  nie zwei Schaubilder hintereinander. Kein Halbdunkel in diesen Szenen (`mood` leer). `writer.hook_drops` (Video 187): Satz 2 bleibt beim Schärfen des
+  Einstiegs, wenn Satz 3 ihn begründet („Kein Wunder, denn …“, „Deshalb …“); wird ein Einstiegssatz ersetzt, entfällt seine Einblendung, wenn sie zum neuen
+  Satz kein Wort mehr gemeinsam hat („KEIN EMPFANG“ über dem Museum). Selftest: `_past`. Fehlt noch: Kutsche, Pferd, Kerker, Marktstände, Kirche der Zeit.
 
 ## Was zu tun ist
 1. Offene Wünsche (ohne `"done": true`) und `"auto": true`-Einträge durchgehen, höchstens 8 pro Sitzung, häufigste zuerst.
