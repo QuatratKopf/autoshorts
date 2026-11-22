@@ -1,5 +1,5 @@
 {
- "updated": 1795365659.003431,
+ "updated": 1795367633.8207147,
  "enough": true,
  "counted": 35,
  "total": 36,
@@ -9,10 +9,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 5,
-   "avg_views": 2324,
+   "avg_views": 2323,
    "avg_likes": 46.4,
    "like_rate": 2.0,
-   "avg_score": 3040
+   "avg_score": 3039
   },
   {
    "slug": "vergleich",
@@ -75,16 +75,16 @@
    "avg_views": 1560,
    "avg_likes": 10.2,
    "like_rate": 0.66,
-   "avg_score": 1759
+   "avg_score": 1758
   },
   {
    "slug": "motivation",
    "name": "🔥 Motivation",
    "n": 1,
-   "avg_views": 865,
+   "avg_views": 862,
    "avg_likes": 45.0,
-   "like_rate": 5.2,
-   "avg_score": 1580
+   "like_rate": 5.22,
+   "avg_score": 1577
   }
  ],
  "weights": {
@@ -102,10 +102,10 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2324 Aufrufe, 2.0 % Likes).",
-  "Schwächste Kategorie: 🔥 Motivation (Ø 865 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2475 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2574 zu 2035 Punkte).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2323 Aufrufe, 2.0 % Likes).",
+  "Schwächste Kategorie: 🔥 Motivation (Ø 862 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2474 zu 706 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2573 zu 2034 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -113,21 +113,21 @@
   "vier"
  ],
  "words_bad": [
-  "remix",
+  "erkennst",
   "lied",
   "bekanntes",
-  "erkennst"
+  "remix"
  ],
  "top": [
   {
    "id": 168,
    "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
    "category": "comedy",
-   "views": 3839,
+   "views": 3835,
    "likes": 52,
    "comments": 1,
    "shares": 0,
-   "score": 4649
+   "score": 4645
   },
   {
    "id": 46,
