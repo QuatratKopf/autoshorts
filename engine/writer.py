@@ -913,6 +913,10 @@ def hook_drops(sc, s0, s1):
     first = _re.search(r"nummer eins|\berstens\b|platz eins|punkt eins|typ eins|regel eins|\bnummer 1\b", old)
     if first and not _re.search(_re.escape(first.group(0)), " ".join([str(s0), str(s1)] + [str(x.get("text") or "") for x in sc[2:]]).lower()):
         return True                                       # Satz 2 kündigt den ersten Listenpunkt an („Nummer eins, die Oma …“): fiele er weg, begänne die Liste bei Nummer zwei (Video 149)
+    nxt = str(sc[2].get("text") or "").lower().lstrip("„\"' ") if len(sc) > 2 else ""
+    if _re.match(r"(?:doch|dann|da|plötzlich|und plötzlich|doch plötzlich|aber plötzlich|und dann|doch dann|aber dann|in dem moment|in diesem moment|genau dann|kurz darauf)\b", nxt) \
+            and _re.search(r"\bdu\b|stell dir vor|\b(?:er|sie)\b", old) and not _re.search(r"\?\s*$", str(sc[1].get("text") or "")):
+        return True                                       # Satz 3 knüpft an („Doch plötzlich antwortet dir …“): Satz 2 erzählt den Anfang der Szene („Du rufst deinen Freund an“) – fiele er weg, hinge Satz 3 in der Luft (Video 182)
     return len(stem(sc[1].get("text")) - rest) >= 3
 
 

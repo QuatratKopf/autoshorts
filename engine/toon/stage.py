@@ -2381,12 +2381,13 @@ def direct(scenes, times, topic="", style="", look=""):
 CALL_RE = r"telefon|\banruf|\bruf\w* (?:\w+ ){0,5}an\b|angerufen|auflegen|\blegst (?:\w+ ){0,3}auf\b|aufgelegt|freizeichen|\bhörer\b|am handy|in der leitung|geht ran|gehst ran|nimmt ab|hebt ab|klingelt"
 CALL_END_RE = r"\blegst (?:\w+ ){0,4}auf\b|aufgelegt|\bleg\w* (?:\w+ ){0,3}auf\b|verbindung (?:\w+ ){0,6}(?:bricht|abbricht|abgebrochen|weg|tot)|leitung (?:ist |bleibt )?(?:tot|stumm)|freizeichen|anruf (?:ist )?(?:beendet|vorbei)|drückst (?:\w+ ){0,3}weg"
 CALL_TRY_END_RE = r"willst (?:\w+ ){0,3}auflegen|auflegen, aber|nicht (?:mehr )?(?:auflegen|beenden)|lässt sich nicht"
-CALL_TECH_RE = r"\becho|leitung|verzögerung|verzögert|mikrofon|lautsprecher|echo-?unterdrück|übertrag|schallwelle|signal|zurückgeschickt|zurück zu dir|wieder zurück|laut gestellt|freisprech"
-CALL_FILTER_RE = r"verschwind|kein echo|echo (?:ist )?weg|unterdrück|\bfilter|herausgerechnet|rechnet \w+ (?:\w+ )?heraus|löscht|gelöscht|entfern|normalerweise|eigentlich"
+CALL_TECH_RE = r"\becho|\bfilter|herausgerechnet|rechnet \w+ (?:\w+ )?heraus|leitung|verzögerung|verzögert|mikrofon|lautsprecher|echo-?unterdrück|übertrag|schallwelle|signal|zurückgeschickt|zurück zu dir|wieder zurück|laut gestellt|freisprech"
+CALL_FILTER_RE = r"echo (?:\w+ ){0,3}stopp|stoppt das echo|verschwind|kein echo|echo (?:ist )?weg|unterdrück|\bfilter|herausgerechnet|rechnet \w+ (?:\w+ )?heraus|löscht|gelöscht|entfern|normalerweise|eigentlich"
 CALL_OTHER_RE = (r"\b(?:er|sie) (?:antwortet|geht ran|nimmt ab|hebt ab|meldet sich|sagt|lacht|schwört|schweigt|hört)\b|am anderen ende|bei (?:ihm|ihr)\b|"
                  r"(?:kumpel|freund|freundin|bruder|schwester|mama|mutter|papa|vater)s? (?:\w+ ){0,2}(?:antwortet|geht ran|nimmt ab|hebt ab|meldet sich|sagt|schwört|schläft|hat|hatte|stellt|nimmt|setzt|dreht)|"
                  r"(?:kumpel|freund|freundin)[^.!?]{0,40}kopfhörer|\bsein(?:em|en|e)? (?:handy|lautsprecher|mikrofon|zimmer)|\bihr(?:em|en|e)? (?:handy|lautsprecher|mikrofon|zimmer)")
 CALL_START_RE = r"\bruf\w* (?:\w+ ){0,5}an\b|klingelt|geht ran|gehst ran|nimmt ab|hebt ab|\bwählst|nächste[rn]? anruf (?:\w+ ){0,3}(?:kommt|klingelt)"
+CALL_FAIL_RE = r"versag|scheiter|schafft (?:\w+ ){0,3}nicht|fällt aus|klappt (?:\w+ ){0,2}nicht|funktioniert (?:\w+ ){0,2}nicht|überfordert"
 CALL_OUT_RE = r"straße|draußen|\bstadt\b|\bpark\b|\bbus\b|\bbahn|unterwegs|\bbüro|schule|supermarkt"
 
 
@@ -2403,7 +2404,7 @@ def _call_story(scenes, topic="", main_id=""):
     other_home = "bedroom" if home != "bedroom" else "livingroom"
     other_id = next((str(a.get("id")) for sc in dicts for a in (sc.get("actors") or []) if isinstance(a, dict) and a.get("id") and not a.get("kind")
                      and str(a.get("id")) != main_id and not str(a.get("id")).startswith("_")), "_freund")
-    on, tech_n, last_kind, n_main, ended = False, 0, "", 0, False
+    on, tech_n, last_kind, n_main, ended, last_sub = False, 0, "", 0, False, "-"
     for n, sc in enumerate(scenes):
         if not isinstance(sc, dict):
             continue
@@ -2412,7 +2413,27 @@ def _call_story(scenes, topic="", main_id=""):
             on = True                                     # nach dem Auflegen beginnt ein Anruf nur neu, wenn wirklich wieder gewählt wird („aus dem Telefon kommt …“ ist keiner)
         ending = bool(_re.search(CALL_END_RE, low)) and not _re.search(CALL_TRY_END_RE, low)
         ended = ended or ending
+        g_run = 0                                         # wie viele Schaubilder stehen unmittelbar davor – nie drei hintereinander
+        while n - g_run - 1 >= 0 and isinstance(scenes[n - g_run - 1], dict) and scenes[n - g_run - 1].get("shot") == "graphic":
+            g_run += 1
+        if isinstance(sc.get("status"), str) and _re.search(r"läuft|aktiv|verbunden|bereit|live", sc["status"].lower()):
+            sc["status"] = ""                             # „TELEFONAT: LÄUFT“ stand bis zum Schluss über der ganzen Erklärung (Video 182)
+        g_c = sc.get("graphic") if sc.get("shot") == "graphic" and isinstance(sc.get("graphic"), dict) else None
+        if g_c and str(g_c.get("type") or "").lower() == "echo":   # Echo-Schaubild aus dem Drehbuch: Fassung und Überschrift richten sich nach dem Satz („FILTER BOCKT“ über „filtert es heraus“)
+            sub_c = "filter" if _re.search(CALL_FILTER_RE, low) and not _re.search(CALL_FAIL_RE, low) else ""
+            story_c = bool(_re.search(r"plötzlich|antwortet dir|\bdu hörst\b|\bhörst du\b|erschr|panik|gänsehaut|" + HEADPHONE_RE, low))
+            if story_c or g_run >= 2 or (last_kind == "graphic" and last_sub == sub_c):
+                sc["graphic"], sc["shot"], g_c = None, "", None   # zweimal dasselbe Schaubild hintereinander oder mitten in der Geschichte: die Szene bekommt ihr Bild
+            else:
+                sc["graphic"] = {"type": "echo", "sub": sub_c, "kicker": "ECHO-UNTERDRÜCKUNG" if sub_c else "SO ENTSTEHT DAS ECHO"}
+                sc["overlay"] = None
+                last_sub = sub_c
         if sc.get("shot") == "graphic" and graphics.clean(sc.get("graphic")):
+            ov_c, gg_c = sc.get("overlay"), sc.get("graphic")
+            if isinstance(ov_c, dict) and str(ov_c.get("text") or "").strip().upper() and str(ov_c.get("text") or "").strip().upper() in " ".join(str(v) for v in gg_c.values()).upper():
+                sc["overlay"] = None                      # Stempel „KEIN GEIST“ auf der Plakette „KEIN GEIST“
+            if str(gg_c.get("type") or "").lower() != "echo":
+                last_sub = "-"
             last_kind = "graphic"
             on = on and not ending
             continue
@@ -2423,19 +2444,24 @@ def _call_story(scenes, topic="", main_id=""):
         rp = places.resolve(backdrop(sc)) if not isinstance(backdrop(sc), dict) else "custom"
         tech = bool(_re.search(CALL_TECH_RE, low))
         other = bool(_re.search(CALL_OTHER_RE, low))
+        if _re.search(r"plötzlich|antwortet dir|\bdu hörst\b|\bhörst du\b|erschr|panik|gänsehaut", low) and not other:
+            tech = False                                  # „Doch plötzlich antwortet dir mit kleiner Verzögerung deine eigene Stimme“ ist die Geschichte, nicht die Erklärung (Video 182)
+        phones_tip = bool(_re.search(HEADPHONE_RE, low))
+        if phones_tip:
+            tech, other = False, True                     # „Bitte deinen Kumpel, Kopfhörer zu nutzen, um das Echo zu stoppen“: der Freund mit Kopfhörern, nicht noch einmal das Echo-Schaubild
         bone = bool(_re.search(r"schädel|knochen", low))
         air = bool(_re.search(r"durch die luft|luftschall|so hören dich|hören dich (?:alle |die )?ander|wie (?:alle )?andere dich hören", low))
         if (bone or air) and n and last_kind != "graphic" and _re.search(r"stimme|\bhör|kling|schall", low):
             sc["graphic"] = {"type": "voice", "sub": "" if bone else "air", "kicker": "SO HÖRST DU DICH SELBST" if bone else "SO HÖREN DICH ANDERE"}
             sc["shot"], sc["overlay"] = "graphic", None    # warum die eigene Stimme fremd klingt: Kopf mit Luft- und Knochenweg statt noch einmal das Wohnzimmer
-            last_kind = "graphic"
+            last_kind, last_sub = "graphic", "-"
             on = on and not ending
             continue
-        if tech and not (n == 0) and last_kind != "graphic" and (tech_n % 2 == 0 or not other):
-            sub = "filter" if _re.search(CALL_FILTER_RE, low) else ""
+        sub = "filter" if _re.search(CALL_FILTER_RE, low) and not _re.search(CALL_FAIL_RE, low) else ""   # „versagt die Echo-Unterdrückung“: das Echo kommt durch
+        if tech and not (n == 0) and g_run < 2 and (last_kind != "graphic" or (last_sub not in ("-", sub))) and (tech_n % 2 == 0 or not other):
             sc["graphic"] = {"type": "echo", "sub": sub, "kicker": "ECHO-UNTERDRÜCKUNG" if sub else "SO ENTSTEHT DAS ECHO"}
             sc["shot"], sc["overlay"] = "graphic", None
-            tech_n, last_kind = tech_n + 1, "graphic"
+            tech_n, last_kind, last_sub = tech_n + 1, "graphic", sub
             on = on and not ending
             continue
         if tech or other:                                 # beim Angerufenen: allein in seinem Zimmer, Handy in der Hand (auf laut) bzw. am Ohr
@@ -2474,6 +2500,16 @@ def _call_story(scenes, topic="", main_id=""):
         if me is not None and len(humans) == 1 and not str(me.get("hold") or "").startswith("prop:") and str(me.get("action") or "") not in ("sleep", "fall", "run", "sit"):
             after = not on or ending
             me["hold"] = "phone" if after else "call"      # nach dem Auflegen starrt sie aufs Handy in der Hand
+            if ended and not ending:                      # die Erklärung danach: kein Dauer-Schreck mehr (Video 182: bis zum „beruhigt“ am Schluss erschrocken)
+                calm = bool(_re.search(r"beruhig|keine sorge|entspann|jetzt weißt du|weißt du jetzt|ganz normal|harmlos|kein grund", low))
+                scary = bool(_re.search(r"erschr|schreck|panik|gänsehaut|unheimlich|grusel|\bangst", low))
+                if not scary:
+                    me["emotion"] = "happy" if calm else ("worried" if "?" in str(sc.get("text") or "") else "")
+                    me["emote"] = "?" if "?" in str(sc.get("text") or "") else ""
+                    if str(me.get("action") or "") in ("shocked", "scared", "freeze"):
+                        me["action"] = "talk"
+                    if str(sc.get("mood") or "") in ("scary", "panic", "tense"):
+                        sc["mood"] = "calm"
             if str(me.get("action") or "") == "walk" or me.get("to"):
                 me["action"] = "shocked" if _re.search(r"erschr|schreck|erstarr|panisch|gänsehaut|zuck", low) else "talk"
                 me.pop("to", None)

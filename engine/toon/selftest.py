@@ -1351,6 +1351,17 @@ def main():
         s2 = stage.direct([{"text": "Du gehst im Park spazieren.", "place": "park", "actors": [{"id": "du", "action": "walk"}]}, {"text": "Dein Handy liegt zu Hause.", "place": "park", "actors": [{"id": "du"}]}],
                           [(0, 4), (4, 8)], "Spazieren", "fakten", "")
         assert not any(a.get("hold") == "call" for sc in s2 for a in sc.get("actors") or []), "kein Telefonat ohne Anruf"
+        from .. import writer as _w                                   # Einstieg schärfen: Satz 2 bleibt, wenn Satz 3 an ihn anknüpft („Doch plötzlich …“, Video 182)
+        hs = [{"text": "Am Telefon antwortet dir deine eigene Stimme."}, {"text": "Spät nachts rufst du deinen besten Freund an."}, {"text": "Doch plötzlich antwortet dir deine eigene Stimme."}, {"text": "Du legst auf."}]
+        assert _w.hook_drops(hs, "Deine eigene Stimme antwortet dir am Telefon.", "Der Grund ist kein Geist.")
+        s5 = stage.direct([{"text": t_, "place": "livingroom", "status": "TELEFONAT: LÄUFT" if n_ == 0 else "", "actors": [{"id": "du", "action": "talk"}],
+                            **({"shot": "graphic", "graphic": {"type": "echo", "kicker": "FILTER BOCKT"}} if n_ in (2, 5) else {})} for n_, t_ in enumerate(
+            ["Du rufst deinen Freund an.", "Er geht ran.", "Doch plötzlich antwortet dir mit Verzögerung deine eigene Stimme.", "Du legst auf.", "Es ist nur ein Echo.",
+             "Eigentlich filtert dein Handy dieses Echo heraus.", "Bitte deinen Kumpel, Kopfhörer zu nutzen, um das Echo zu stoppen."])],
+                          [(n_ * 4, n_ * 4 + 4) for n_ in range(7)], "Anruf am Telefon", "grusel", "")
+        assert s5[2].get("shot") != "graphic" and not s5[0].get("status"), (s5[2].get("shot"), s5[0].get("status"))
+        assert (s5[5].get("graphic") or {}).get("sub") == "filter" and (s5[5].get("graphic") or {}).get("kicker") == "ECHO-UNTERDRÜCKUNG", s5[5].get("graphic")
+        assert s5[6].get("shot") != "graphic" and s5[6]["actors"][0].get("wear") == "headphones" and str(s5[6]["actors"][0].get("id")) != "du", s5[6]
     check("Telefonat: Handy am Ohr, Angerufener im eigenen Zimmer, Echo-Schaubild", _call)
 
     def _balloon():                                              # Ballonflucht: Stoffberg und Gondel am Boden, Ballon mit acht Köpfen am Himmel, Suchscheinwerfer, Landung im Gebüsch – keine Figur „schwebt“ auf der Wiese
