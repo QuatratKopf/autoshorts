@@ -1,0 +1,462 @@
+{
+ "title": "Warum antwortet dir am Telefon deine eigene Stimme?",
+ "scenes": [
+  {
+   "text": "Plötzlich antwortet dir am Telefon deine eigene Stimme.",
+   "see": "Ein dunkles Zimmer bei Nacht, die Hauptfigur sieht erschrocken aufs Handy.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "call",
+     "facing": "",
+     "say": "",
+     "pos": 540
+    }
+   ],
+   "shot": "close",
+   "mood": "scary"
+  },
+  {
+   "text": "Spät nachts rufst du deinen besten Freund an und er geht sofort ran.",
+   "see": "Spät nachts ruft die Figur ihren Freund an, der müde ans Handy geht.",
+   "place": "zimmer",
+   "time": "night",
+   "weather": "dark",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "call",
+     "facing": "right",
+     "say": "",
+     "pos": 410
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Doch kurz nach deinen Worten hörst du dich selbst, genau einen Wimpernschlag später.",
+   "see": "Eine gruselige Sprachwelle schallt aus dem Handy zurück.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "talk",
+     "pos": 670,
+     "emotion": "scared",
+     "hold": "call",
+     "facing": "left"
+    }
+   ],
+   "shot": "close",
+   "mood": "scary"
+  },
+  {
+   "text": "Du bekommst eine Gänsehaut und legst sofort auf.",
+   "see": "Die Figur legt voller Angst sofort auf.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": 540
+    }
+   ],
+   "mood": "scary",
+   "overlay": {
+    "type": "card",
+    "text": "AUFGELEGT"
+   }
+  },
+  {
+   "text": "Keine Sorge, hinter diesem Phänomen steckt kein Geist, sondern ein ganz einfaches Echo.",
+   "see": "Infografik zeigt: Es war nur ein Echo.",
+   "place": "lab",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "scared"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "scary",
+   "graphic": {
+    "type": "echo",
+    "sub": "",
+    "kicker": "SO ENTSTEHT DAS ECHO"
+   }
+  },
+  {
+   "text": "Deine Stimme hallt beim Freund aus dem Lautsprecher direkt zurück in sein Mikrofon.",
+   "see": "Der Freund hat den Lautsprecher an seinem Handy eingeschaltet.",
+   "place": "bedroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "freund",
+     "action": "talk",
+     "speaks": true,
+     "emotion": "",
+     "emote": "",
+     "hold": "phone",
+     "pos": "center",
+     "facing": "",
+     "say": "",
+     "kind": "",
+     "keep": true
+    }
+   ],
+   "shot": "close",
+   "mood": "scary",
+   "overlay": {
+    "type": "tag",
+    "text": "LAUTSPRECHER AN"
+   }
+  },
+  {
+   "text": "Wenn sein Handy auf laut gestellt ist, wandert dein Signal sofort zu dir zurück.",
+   "see": "Das Mikrofon schickt das Signal über die Funkverbindung zurück.",
+   "place": "lab",
+   "time": "night",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "freund",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "scared"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "scary",
+   "graphic": {
+    "type": "echo",
+    "sub": "",
+    "kicker": "SO ENTSTEHT DAS ECHO"
+   }
+  },
+  {
+   "text": "Normalerweise löscht eine smarte Echo-Unterdrückung im Handy genau diese Signale wieder heraus.",
+   "see": "Grafik zur Echo-Unterdrückung im Smartphone.",
+   "place": "lab",
+   "time": "night",
+   "actors": [
+    {
+     "id": "freund",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "scared"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "scary",
+   "graphic": {
+    "type": "echo",
+    "sub": "filter",
+    "kicker": "ECHO-UNTERDRÜCKUNG"
+   }
+  },
+  {
+   "text": "Bei schlechter Verbindung oder zu starker Lautstärke schafft die Technik das aber manchmal nicht.",
+   "see": "Bei schwachem Empfang überfordert das die Technik.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": 540
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Doch warum klingt diese verzögerte Stimme im Ohr so unheimlich fremd für dich?",
+   "see": "Schallwellen-Grafik über Schädelknochen und Luftweg.",
+   "place": "lab",
+   "time": "night",
+   "props": [
+    {
+     "type": "schädel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "scared"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "scary",
+   "graphic": {
+    "type": "voice",
+    "kicker": "SO HÖRST DU DICH SELBST",
+    "dark": false
+   }
+  },
+  {
+   "text": "Beim Sprechen hörst du deine Stimme nicht nur über die Luft, sondern auch durch Schädelknochen.",
+   "see": "Die Figur spricht und deutet sich an die Schläfe.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "schädel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "phone",
+     "facing": "right",
+     "say": "",
+     "pos": 410
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Durch diese Schwingungen im Kopf wirkt dein Klang für dich selbst viel tiefer und voller.",
+   "see": "Die Stimme wirkt tiefer und voller im eigenen Kopf.",
+   "place": "livingroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "talk",
+     "pos": 670,
+     "emotion": "",
+     "hold": "phone",
+     "emote": "",
+     "facing": "left"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Aus dem Lautsprecher kommt aber nur der reine Schall durch die Luft bei dir an.",
+   "see": "Aus dem Hörer kommt der reine Schall nur aus der Luft.",
+   "place": "lab",
+   "time": "night",
+   "props": [
+    {
+     "type": "lib_bassbox"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "scared"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "scary",
+   "graphic": {
+    "type": "voice",
+    "kicker": "NUR SCHALL DURCH LUFT",
+    "sub": "air",
+    "dark": false
+   }
+  },
+  {
+   "text": "Genau so hören dich alle anderen Menschen, weshalb viele ihre Stimme auf Aufnahmen hassen.",
+   "see": "Genau so hören alle anderen die Figur im Alltag.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": 540
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "UNGEWOHNT"
+   }
+  },
+  {
+   "text": "Telefone schneiden beim Übertragen zusätzlich noch tiefe und hohe Tonhöhen komplett ab.",
+   "see": "Ein Handy mit eingeschränkten Frequenzen im Schaubild.",
+   "place": "livingroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "talk",
+     "pos": 540,
+     "emotion": "",
+     "hold": "phone",
+     "emote": "",
+     "facing": ""
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Darum klingt deine Stimme am Telefon zusätzlich noch flach und blechern.",
+   "see": "Das Handy erzeugt dadurch den typischen blechernen Klang.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "phone",
+     "facing": "right",
+     "say": "",
+     "pos": 410
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Ein einfacher Trick hilft sofort: Bitte deinen Freund einfach, Kopfhörer zu benutzen.",
+   "see": "Der Freund setzt Kopfhörer auf und lächelt.",
+   "place": "bedroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "freund",
+     "action": "talk",
+     "speaks": true,
+     "emotion": "",
+     "emote": "",
+     "hold": "phone",
+     "pos": "center",
+     "facing": "",
+     "say": "",
+     "kind": "",
+     "keep": true,
+     "wear": "headphones"
+    }
+   ],
+   "shot": "close",
+   "mood": "scary",
+   "overlay": {
+    "type": "note",
+    "title": "TIPP",
+    "text": "Kopfhörer nutzen"
+   }
+  },
+  {
+   "text": "Oder er stellt den Lautsprecher leiser, damit das Echo endlich wieder verschwindet.",
+   "see": "Der Freund schaltet den Lautsprecher leiser.",
+   "place": "freund_zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "phone"
+    },
+    {
+     "type": "lib_bassbox"
+    }
+   ],
+   "actors": [
+    {
+     "id": "freund",
+     "speaks": false,
+     "action": "point",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "scary",
+   "graphic": {
+    "type": "echo",
+    "sub": "filter",
+    "kicker": "ECHO-UNTERDRÜCKUNG"
+   }
+  },
+  {
+   "text": "So kannst du ganz beruhigt weitersprechen, auch wenn dir am Telefon deine eigene Stimme antwortet.",
+   "see": "Die Hauptfigur ruft entspannt am Telefon an, die Schleife schließt sich.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "phone",
+     "facing": "left",
+     "say": "",
+     "pos": 670
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  }
+ ]
+}
