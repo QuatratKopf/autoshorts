@@ -7254,7 +7254,7 @@
   "id": 189,
   "category": "musik",
   "topic": "Musik-Kugel: Auld Lang Syne (Nehmt Abschied, Brüder) (Glas Remix)",
-  "status": "review",
+  "status": "published",
   "created": 1795370979.9555469,
   "title": "Jede Scheibe ein Ton: Glas-Remix eines Klassikers",
   "description": "Ein Lied, das jeder kennt – als Glas-Remix, jede Glasscheibe ist ein Ton. Erkennst du es? 🎵\nSchreib in die Kommentare, welches Lied es ist – und welches als Nächstes einen Remix bekommen soll!",
@@ -7282,6 +7282,12 @@
   "look": "musik",
   "mp4": true,
   "slot": "2026-11-22 21:00",
-  "review_at": 1795371118.4843178
+  "review_at": 1795371118.4843178,
+  "zernio_id": "6b03318e50ad14cae9484beb",
+  "yt_status": "Zernio: published",
+  "yt_id": "iwQQwFLro3k",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6b03318e50ad14cae9484beb",
+  "error": null
  }
 ]
