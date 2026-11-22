@@ -1,5 +1,5 @@
 {
- "updated": 1795328991.8582606,
+ "updated": 1795330783.8851278,
  "enough": true,
  "counted": 32,
  "total": 35,
@@ -9,10 +9,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 5,
-   "avg_views": 2192,
-   "avg_likes": 45.0,
-   "like_rate": 2.05,
-   "avg_score": 2887
+   "avg_views": 2193,
+   "avg_likes": 45.4,
+   "like_rate": 2.07,
+   "avg_score": 2894
   },
   {
    "slug": "vergleich",
@@ -93,9 +93,9 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2192 Aufrufe, 2.05 % Likes).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2193 Aufrufe, 2.07 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1724 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2570 zu 706 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2571 zu 706 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -103,21 +103,21 @@
   "vier"
  ],
  "words_bad": [
-  "remix",
-  "lied",
+  "bekanntes",
   "erkennst",
-  "bekanntes"
+  "remix",
+  "lied"
  ],
  "top": [
   {
    "id": 168,
    "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
    "category": "comedy",
-   "views": 3184,
-   "likes": 45,
+   "views": 3187,
+   "likes": 47,
    "comments": 1,
    "shares": 0,
-   "score": 3889
+   "score": 3922
   },
   {
    "id": 46,
