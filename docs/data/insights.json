@@ -1,5 +1,5 @@
 {
- "updated": 1795309194.1223726,
+ "updated": 1795310986.1083932,
  "enough": true,
  "counted": 32,
  "total": 35,
@@ -9,19 +9,19 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 5,
-   "avg_views": 2157,
+   "avg_views": 2162,
    "avg_likes": 44.2,
-   "like_rate": 2.05,
-   "avg_score": 2840
+   "like_rate": 2.04,
+   "avg_score": 2845
   },
   {
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 1,
-   "avg_views": 2245,
+   "avg_views": 2228,
    "avg_likes": 34.0,
-   "like_rate": 1.51,
-   "avg_score": 2755
+   "like_rate": 1.53,
+   "avg_score": 2738
   },
   {
    "slug": "tiere",
@@ -93,9 +93,9 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2157 Aufrufe, 2.05 % Likes).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2162 Aufrufe, 2.04 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1720 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2561 zu 706 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2562 zu 706 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -104,20 +104,20 @@
  ],
  "words_bad": [
   "bekanntes",
+  "erkennst",
   "lied",
-  "remix",
-  "erkennst"
+  "remix"
  ],
  "top": [
   {
    "id": 168,
    "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
    "category": "comedy",
-   "views": 3010,
+   "views": 3036,
    "likes": 41,
    "comments": 1,
    "shares": 0,
-   "score": 3655
+   "score": 3681
   },
   {
    "id": 46,
