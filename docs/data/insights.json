@@ -1,5 +1,5 @@
 {
- "updated": 1795319992.7711456,
+ "updated": 1795321792.9579341,
  "enough": true,
  "counted": 32,
  "total": 35,
@@ -18,10 +18,10 @@
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 1,
-   "avg_views": 2245,
+   "avg_views": 2250,
    "avg_likes": 34.0,
    "like_rate": 1.51,
-   "avg_score": 2755
+   "avg_score": 2760
   },
   {
    "slug": "tiere",
@@ -72,10 +72,10 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 3,
-   "avg_views": 1720,
+   "avg_views": 1721,
    "avg_likes": 11.3,
    "like_rate": 0.66,
-   "avg_score": 1930
+   "avg_score": 1931
   }
  ],
  "weights": {
@@ -94,7 +94,7 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2183 Aufrufe, 2.03 % Likes).",
-  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1720 Aufrufe) – kommt seltener dran.",
+  "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1721 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2566 zu 706 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
@@ -103,10 +103,10 @@
   "vier"
  ],
  "words_bad": [
-  "remix",
-  "lied",
   "erkennst",
-  "bekanntes"
+  "bekanntes",
+  "lied",
+  "remix"
  ],
  "top": [
   {
