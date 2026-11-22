@@ -318,6 +318,8 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
     {"type": "phone", "mode": "lock", "value": "07:49", "kicker": "UNBEKANNT", "text": "Wir wissen, wo du bist."}   Sperrbildschirm mit Uhrzeit, eine Nachricht rutscht herein
     {"type": "phone", "mode": "chat", "kicker": "Oma", "text": "Junge, stimmt das mit den 10 Millionen?", "sub": "Oma, bitte nicht."}
                                                                                                      Nachrichten-Verlauf: text = Nachricht der anderen Person, sub = eigene Antwort
+    {"type": "voice", "kicker": "SO HÖRST DU DICH SELBST"}                                         eigene Stimme: Kopf, Schall läuft außen durch die Luft und innen durch die Knochen zum Ohr; mit "sub": "air" nur der Luftweg (so hören dich andere)
+    {"type": "echo", "kicker": "SO ENTSTEHT DAS ECHO"}                                             Telefon-Echo: zwei Handys, deine Stimme läuft hinüber und kommt blasser zurück; mit "sub": "filter" hält eine Sperre das Echo auf
     {"type": "message", "kicker": "UNBEKANNT", "lines": ["In sieben Tagen", "beginnt es.", "Vertrau niemandem.", "!Öffne nicht die Tür."]}
                                                                                                      Nachricht von unbekannter Nummer im dunklen Zimmer: die Zeilen tippen sich
                                                                                                      nacheinander (je höchstens 40 Zeichen, bis 6 Zeilen), eine Zeile mit „!“ davor

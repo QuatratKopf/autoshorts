@@ -1321,6 +1321,38 @@ def main():
             assert len(hud_l) == 1 and hud_l[0].startswith("Dialogue: 3,0:00:04"), hud_l                    # Ecken-Zeile nicht unter der Karte ganz oben
     check("Raumsonde: Sonde im tiefen All, Speicher/Müll als Redensart", _probe)
 
+    def _call():                                                 # Telefonat (Video 181): Handy am Ohr, Angerufener allein in seinem Zimmer, Echo als Schaubild – keine Straße, kein Rechenzentrum
+        T = ["Stell dir vor, du rufst spät nachts deinen besten Kumpel an.", "Er antwortet ganz normal, aber seine Stimme klingt fremd.",
+             "Plötzlich antwortet dir am Telefon deine eigene Stimme.", "Falsch, das war kein Scherz.",
+             "Deine Stimme kommt bei ihm aus dem Lautsprecher und landet wieder in seinem Mikrofon.", "So entsteht ein Echo in der Leitung.",
+             "Normalerweise filtert dein Handy dieses Echo einfach heraus.", "Du legst erschrocken auf.", "Jetzt weißt du, warum du dich selbst gehört hast."]
+        sb = stage.direct([{"text": t_, "place": "livingroom" if n_ != 5 else "server", "time": "night",
+                            "actors": [{"id": "du", "action": "talk", "speaks": True}] + ([{"id": "freund", "action": "sit"}] if n_ == 0 else []) if n_ not in (1, 5) else
+                            ([{"id": "freund", "action": "talk"}] if n_ == 1 else [])} for n_, t_ in enumerate(T)],
+                          [(n_ * 4, n_ * 4 + 4) for n_ in range(len(T))], "Warum du am Telefon deine eigene Stimme hörst", "grusel", "")
+        ids = [[str(a.get("id")) for a in sc.get("actors") or []] if sc.get("shot") != "graphic" else "G" for sc in sb]
+        assert ids[0] == ["du"] and ids[1] == ["freund"] and ids[2] == ["du"] and ids[3] == ["du"], ids   # der Angerufene sitzt nicht im selben Zimmer
+        assert sb[0]["actors"][0].get("hold") == "call" and sb[2]["actors"][0].get("hold") == "call", [sc.get("actors") for sc in sb[:3]]
+        assert places.resolve(sb[1].get("place")) != places.resolve(sb[0].get("place")), (sb[0].get("place"), sb[1].get("place"))
+        gs = [str((sc.get("graphic") or {}).get("type") or "") if sc.get("shot") == "graphic" else "" for sc in sb]
+        assert "echo" in gs[4:7] and not any(x == y == "echo" for x, y in zip(gs, gs[1:])), gs
+        assert all(places.resolve(stage.backdrop(sc)) not in ("street", "serverroom") for sc in sb if sc.get("shot") != "graphic"), [sc.get("place") for sc in sb]
+        assert not any(a.get("action") == "walk" for sc in sb for a in sc.get("actors") or []), "niemand läuft während des Anrufs herein"
+        assert sb[7]["actors"][0].get("hold") == "phone" and sb[8]["actors"][0].get("hold") == "phone", "nach dem Auflegen kein Handy mehr am Ohr"
+        for n_ in (0, 1, 4, 5, 7):
+            frame(sb[n_], {"du": {"shirt": "lila", "gender": "w"}, "freund": {"shirt": "schwarz", "hat": "beanie"}})
+        g = graphics.clean({"type": "echo", "sub": "filter", "kicker": "ECHO-UNTERDRÜCKUNG"})
+        assert g and graphics.frame(g, 1.2, 4.0, "scary").size == (1080, 1920)
+        assert graphics.frame(graphics.clean({"type": "voice", "sub": "air"}), 1.2, 4.0, "").size == (1080, 1920)
+        s4 = stage.direct([{"text": t_, "place": "livingroom", "actors": [{"id": "du", "action": "talk"}]} for t_ in
+                           ["Du rufst deinen Freund an.", "Am Telefon hörst du plötzlich deine eigene Stimme.", "Beim Sprechen hörst du dich auch über deine Schädelknochen.", "Du legst auf."]],
+                          [(n_ * 4, n_ * 4 + 4) for n_ in range(4)], "Anruf", "grusel", "")
+        assert (s4[2].get("graphic") or {}).get("type") == "voice" and s4[2].get("shot") == "graphic", s4[2]
+        s2 = stage.direct([{"text": "Du gehst im Park spazieren.", "place": "park", "actors": [{"id": "du", "action": "walk"}]}, {"text": "Dein Handy liegt zu Hause.", "place": "park", "actors": [{"id": "du"}]}],
+                          [(0, 4), (4, 8)], "Spazieren", "fakten", "")
+        assert not any(a.get("hold") == "call" for sc in s2 for a in sc.get("actors") or []), "kein Telefonat ohne Anruf"
+    check("Telefonat: Handy am Ohr, Angerufener im eigenen Zimmer, Echo-Schaubild", _call)
+
     def _balloon():                                              # Ballonflucht: Stoffberg und Gondel am Boden, Ballon mit acht Köpfen am Himmel, Suchscheinwerfer, Landung im Gebüsch – keine Figur „schwebt“ auf der Wiese
         from PIL import Image
         T = ["Zwei Familien fliehen mit einem selbst genähten Heißluftballon.", "Im Keller nähen sie heimlich über tausend Quadratmeter Stoff zusammen.",

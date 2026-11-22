@@ -15,6 +15,7 @@ W, H, FPS = 1080, 1920, 30
 SCALE = 1.08            # Figuren bewusst kleiner: die Szene steht im Mittelpunkt
 POS = {"left": 250, "center": 540, "right": 830, "offleft": -260, "offright": 1340,
        "links": 250, "mitte": 540, "rechts": 830}
+CALL_ARM = (106, 70)    # Oberarm/Unterarm für „Handy am Ohr“
 TALL_OV = ("phone", "checklist", "note")
 NO_FURNITURE = ("restaurant", "diningroom", "bathroom", "hallway", "supermarket", "supermarket_empty", "station", "transit", "basement", "attic", "hospital", "serverroom", "chapel", "tattoostudio", "nailstudio", "controlroom")
 MAIN_IDS = ("du", "ich", "held", "hero", "main", "erzähler", "narrator", "a0")
@@ -835,6 +836,8 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                 pose.arm_r, pose.fore_r = (62, 50) if a["hold"] in ("phone", "map", "flashlight", "radio", "bottle", "letter") or small_h else (8, 4)   # Kleines (Apfel, Kuchen) hält man vor sich, nicht an der Hüfte
                 if a["hold"] in ("umbrella", "sign"):
                     pose.arm_r, pose.fore_r = 40, 100
+                if a["hold"] == "call":                         # Telefonat: Hand mit dem Handy am Ohr
+                    pose.arm_r, pose.fore_r = CALL_ARM
             if 0 <= t - move_t < 0.18 and arrived:           # kleines Abfedern beim Ankommen
                 pose.squash *= 1 - 0.08 * math.sin((t - move_t) / 0.18 * math.pi)
             elif not moving and t < 0.3 and not pose.lying:  # Szenenbeginn: die Figur federt kurz – nichts steht steif da
@@ -2354,6 +2357,7 @@ def direct(scenes, times, topic="", style="", look=""):
     _last_look(scenes, topic)
     _jogging(scenes)
     _speech(scenes, style)
+    _call_story(scenes, topic, main_id)
     for sc in scenes:                                     # ein einzelnes Auge neben Menschen („mustern dich mit großen Augen“ in der Bahn, Video 160) – überall, nicht nur im Zimmer
         if isinstance(sc, dict) and isinstance(sc.get("props"), list) and str(sc.get("shot") or "") not in ("insert", "graphic") and (
                 sc.get("crowd") or any(isinstance(a, dict) and not a.get("kind") for a in sc.get("actors") or [])):
@@ -2367,6 +2371,126 @@ def direct(scenes, times, topic="", style="", look=""):
                 if str(sc.get("shot") or "") == "insert" and not sc["props"]:
                     sc["shot"] = ""
     return scenes
+
+
+# Telefonat (Prüfung 22.11.2026, Video 181 „Doppelgänger am Telefon“): Die Geschichte spielt während eines Anrufs – im Bild saß der Angerufene
+# aber im selben Wohnzimmer daneben, die Hauptfigur hatte in den meisten Szenen gar kein Handy, lief zwischendurch auf eine Stadtstraße und
+# in ein Rechenzentrum, und die Erklärung („Echo in der Leitung“) hatte kein Bild. Jetzt: Wer telefoniert, hält das Handy ans Ohr (hold „call“)
+# und bleibt zu Hause; der Angerufene ist allein in seinem eigenen Zimmer; Technik-Sätze über Echo, Leitung, Lautsprecher und Mikrofon zeigen
+# das Schaubild „echo“ (zwei Handys, Stimme hin, Echo zurück) im Wechsel mit dem Handy des Freundes auf laut.
+CALL_RE = r"telefon|\banruf|\bruf\w* (?:\w+ ){0,5}an\b|angerufen|auflegen|\blegst (?:\w+ ){0,3}auf\b|aufgelegt|freizeichen|\bhörer\b|am handy|in der leitung|geht ran|gehst ran|nimmt ab|hebt ab|klingelt"
+CALL_END_RE = r"\blegst (?:\w+ ){0,4}auf\b|aufgelegt|\bleg\w* (?:\w+ ){0,3}auf\b|verbindung (?:\w+ ){0,6}(?:bricht|abbricht|abgebrochen|weg|tot)|leitung (?:ist |bleibt )?(?:tot|stumm)|freizeichen|anruf (?:ist )?(?:beendet|vorbei)|drückst (?:\w+ ){0,3}weg"
+CALL_TRY_END_RE = r"willst (?:\w+ ){0,3}auflegen|auflegen, aber|nicht (?:mehr )?(?:auflegen|beenden)|lässt sich nicht"
+CALL_TECH_RE = r"\becho|leitung|verzögerung|verzögert|mikrofon|lautsprecher|echo-?unterdrück|übertrag|schallwelle|signal|zurückgeschickt|zurück zu dir|wieder zurück|laut gestellt|freisprech"
+CALL_FILTER_RE = r"verschwind|kein echo|echo (?:ist )?weg|unterdrück|\bfilter|herausgerechnet|rechnet \w+ (?:\w+ )?heraus|löscht|gelöscht|entfern|normalerweise|eigentlich"
+CALL_OTHER_RE = (r"\b(?:er|sie) (?:antwortet|geht ran|nimmt ab|hebt ab|meldet sich|sagt|lacht|schwört|schweigt|hört)\b|am anderen ende|bei (?:ihm|ihr)\b|"
+                 r"(?:kumpel|freund|freundin|bruder|schwester|mama|mutter|papa|vater)s? (?:\w+ ){0,2}(?:antwortet|geht ran|nimmt ab|hebt ab|meldet sich|sagt|schwört|schläft|hat|hatte|stellt|nimmt|setzt|dreht)|"
+                 r"(?:kumpel|freund|freundin)[^.!?]{0,40}kopfhörer|\bsein(?:em|en|e)? (?:handy|lautsprecher|mikrofon|zimmer)|\bihr(?:em|en|e)? (?:handy|lautsprecher|mikrofon|zimmer)")
+CALL_START_RE = r"\bruf\w* (?:\w+ ){0,5}an\b|klingelt|geht ran|gehst ran|nimmt ab|hebt ab|\bwählst|nächste[rn]? anruf (?:\w+ ){0,3}(?:kommt|klingelt)"
+CALL_OUT_RE = r"straße|draußen|\bstadt\b|\bpark\b|\bbus\b|\bbahn|unterwegs|\bbüro|schule|supermarkt"
+
+
+def _call_story(scenes, topic="", main_id=""):
+    """Geschichte eines Telefonats: siehe Kommentar oben. Greift nur, wenn Thema oder mindestens drei Sätze vom Telefonieren handeln."""
+    import re as _re
+    dicts = [sc for sc in scenes if isinstance(sc, dict)]
+    hits = sum(1 for sc in dicts if _re.search(CALL_RE, str(sc.get("text") or "").lower()))
+    if not ((_re.search(r"telefon|\banruf|am handy", str(topic or "").lower()) and hits >= 2) or hits >= 3):
+        return
+    main_id = str(main_id or "du")
+    home = next((places.resolve(sc.get("place")) for sc in dicts if places.resolve(sc.get("place")) in ("bedroom", "livingroom", "kitchen", "hallway")
+                 and any(isinstance(a, dict) and str(a.get("id")) == main_id for a in sc.get("actors") or [])), "livingroom")
+    other_home = "bedroom" if home != "bedroom" else "livingroom"
+    other_id = next((str(a.get("id")) for sc in dicts for a in (sc.get("actors") or []) if isinstance(a, dict) and a.get("id") and not a.get("kind")
+                     and str(a.get("id")) != main_id and not str(a.get("id")).startswith("_")), "_freund")
+    on, tech_n, last_kind, n_main, ended = False, 0, "", 0, False
+    for n, sc in enumerate(scenes):
+        if not isinstance(sc, dict):
+            continue
+        low = str(sc.get("text") or "").lower()
+        if _re.search(CALL_START_RE if ended else CALL_RE, low) and not _re.search(CALL_END_RE, low):
+            on = True                                     # nach dem Auflegen beginnt ein Anruf nur neu, wenn wirklich wieder gewählt wird („aus dem Telefon kommt …“ ist keiner)
+        ending = bool(_re.search(CALL_END_RE, low)) and not _re.search(CALL_TRY_END_RE, low)
+        ended = ended or ending
+        if sc.get("shot") == "graphic" and graphics.clean(sc.get("graphic")):
+            last_kind = "graphic"
+            on = on and not ending
+            continue
+        if any(isinstance(a, dict) and a.get("kind") for a in sc.get("actors") or []):
+            last_kind = ""                                # Gehirn, Tier, Gerät als Figur: gehört einer anderen Regie
+            on = on and not ending
+            continue
+        rp = places.resolve(backdrop(sc)) if not isinstance(backdrop(sc), dict) else "custom"
+        tech = bool(_re.search(CALL_TECH_RE, low))
+        other = bool(_re.search(CALL_OTHER_RE, low))
+        bone = bool(_re.search(r"schädel|knochen", low))
+        air = bool(_re.search(r"durch die luft|luftschall|so hören dich|hören dich (?:alle |die )?ander|wie (?:alle )?andere dich hören", low))
+        if (bone or air) and n and last_kind != "graphic" and _re.search(r"stimme|\bhör|kling|schall", low):
+            sc["graphic"] = {"type": "voice", "sub": "" if bone else "air", "kicker": "SO HÖRST DU DICH SELBST" if bone else "SO HÖREN DICH ANDERE"}
+            sc["shot"], sc["overlay"] = "graphic", None    # warum die eigene Stimme fremd klingt: Kopf mit Luft- und Knochenweg statt noch einmal das Wohnzimmer
+            last_kind = "graphic"
+            on = on and not ending
+            continue
+        if tech and not (n == 0) and last_kind != "graphic" and (tech_n % 2 == 0 or not other):
+            sub = "filter" if _re.search(CALL_FILTER_RE, low) else ""
+            sc["graphic"] = {"type": "echo", "sub": sub, "kicker": "ECHO-UNTERDRÜCKUNG" if sub else "SO ENTSTEHT DAS ECHO"}
+            sc["shot"], sc["overlay"] = "graphic", None
+            tech_n, last_kind = tech_n + 1, "graphic"
+            on = on and not ending
+            continue
+        if tech or other:                                 # beim Angerufenen: allein in seinem Zimmer, Handy in der Hand (auf laut) bzw. am Ohr
+            tech_n += 1 if tech else 0
+            off = bool(_re.search(r"ausgeschaltet|\bhandy (?:\w+ ){0,4}(?:aus\b|lag\b|liegt\b)|kein(?:en)? (?:anruf|empfang)|gar nicht (?:angerufen|telefoniert)|schlief|schläft|geschlafen", low))
+            sc["place"], sc["time"] = other_home, sc.get("time") or "night"
+            sc.pop("backdrop", None)
+            sc["actors"] = [{"id": other_id, "action": "think" if off else "talk", "speaks": not off, "emotion": "" if not off else "worried", "emote": "?" if off else "",
+                             "hold": "" if off else ("phone" if tech or not on or _re.search(HEADPHONE_RE, low) else "call"), "pos": "center", "facing": "", "say": "", "kind": "", "keep": True}]
+            if _re.search(HEADPHONE_RE, low):             # „Bitte deinen Freund, Kopfhörer zu nehmen“: er trägt sie, nicht die Anruferin
+                sc["actors"][0]["wear"] = "headphones"
+            sc["props"] = [{"type": "phone", "pos": 800}] if off else []
+            sc["crowd"], sc["weather"] = "", ""
+            sc["shot"] = "" if last_kind in ("other", "close") or off else "close"
+            last_kind = "other" if sc["shot"] == "" else "close"
+            on = on and not ending
+            continue
+        humans = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and not a.get("kind")]
+        if sc.get("shot") == "insert" and not humans:      # Großaufnahme des Handys bleibt
+            last_kind = "insert"
+            on = on and not ending
+            continue
+        elsewhere = rp not in ("bedroom", "livingroom", "kitchen", "hallway", "bathroom") and not _re.search(CALL_OUT_RE, low)
+        if elsewhere or not any(str(a.get("id")) == main_id for a in humans) or len(humans) != 1 or sc.get("crowd"):
+            if elsewhere or not _re.search(CALL_OUT_RE, low):   # Stadtstraße, Rechenzentrum, Passanten, der Freund im selben Zimmer: wer telefoniert, ist allein zu Hause
+                sc["place"] = home
+                sc.pop("backdrop", None)
+                sc["crowd"], sc["weather"] = "", ""
+                me = next((a for a in humans if str(a.get("id")) == main_id), None) or {"id": main_id, "action": "talk", "speaks": True, "emotion": MOOD_EMOTION.get(str(sc.get("mood") or ""), ""),
+                                                                                        "emote": "", "say": "", "kind": "", "facing": ""}
+                sc["actors"] = humans = [me]
+                sc["props"] = [q for q in (sc.get("props") or []) if isinstance(q, dict) and str(q.get("type") or "").lower() not in ("phone", "handy", "smartphone", "display")]
+                if sc.get("shot") in ("event", "insert"):
+                    sc["shot"] = ""
+        me = next((a for a in humans if str(a.get("id")) == main_id), None)
+        if me is not None and len(humans) == 1 and not str(me.get("hold") or "").startswith("prop:") and str(me.get("action") or "") not in ("sleep", "fall", "run", "sit"):
+            after = not on or ending
+            me["hold"] = "phone" if after else "call"      # nach dem Auflegen starrt sie aufs Handy in der Hand
+            if str(me.get("action") or "") == "walk" or me.get("to"):
+                me["action"] = "shocked" if _re.search(r"erschr|schreck|erstarr|panisch|gänsehaut|zuck", low) else "talk"
+                me.pop("to", None)
+            if _re.search(r"erschr|schreck|erstarr|panisch|gänsehaut|zuck|deine eigene stimme|dich selbst", low) and on:
+                me["emotion"] = "scared"
+            me["pos"] = ("center", "left", "right", "center")[n_main % 4]
+            me["facing"] = {"left": "right", "right": "left"}.get(me["pos"], "")
+            n_main += 1
+            sc["props"] = [q for q in (sc.get("props") or []) if isinstance(q, dict) and str(q.get("type") or "").lower() not in ("phone", "handy", "smartphone")]
+            if sc.get("shot") == "close" and last_kind == "close":
+                sc["shot"] = ""
+            elif sc.get("shot") in ("", None) and last_kind == "wide":
+                sc["shot"] = "close"
+            last_kind = "close" if sc.get("shot") == "close" else "wide"
+        else:
+            last_kind = ""
+        on = on and not ending
 
 
 # Misch-Wesen (Prüfung 19.11.2026, Video 152 „Super-Tier aus vier Arten“): Das Video handelt von einem Wesen, das aus mehreren Tieren gebaut wird.

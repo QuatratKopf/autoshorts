@@ -41,7 +41,7 @@ ORANGE = (255, 138, 31)
 THEMES = {"": ((58, 40, 150), (14, 10, 46)), "scary": ((40, 30, 96), (6, 6, 22)), "panic": ((120, 34, 70), (26, 8, 30)),
           "tense": ((110, 60, 120), (22, 10, 40)), "sad": ((40, 60, 130), (10, 14, 40)), "happy": ((90, 70, 190), (30, 16, 80)),
           "calm": ((58, 40, 150), (14, 10, 46))}
-TYPES = ("number", "timer", "calendar", "question", "houses", "badge", "map", "city", "versus", "round", "score", "compare", "podium", "share", "news", "pulse", "radio", "distance", "days", "phone", "game", "chart", "radar", "size", "message", "chapter")
+TYPES = ("number", "timer", "calendar", "question", "houses", "badge", "map", "city", "versus", "round", "score", "compare", "podium", "share", "news", "pulse", "radio", "distance", "days", "phone", "game", "chart", "radar", "size", "message", "chapter", "echo", "voice")
 LEFT, RIGHT = (150, 110, 255), (255, 150, 40)                # Farben der beiden Seiten im Duell
 GREEN = (120, 230, 90)
 
@@ -1661,6 +1661,123 @@ DRAW = {"message": _g_message, "chapter": _g_chapter, "game": _g_game, "radar": 
         "map": _g_map, "city": _g_city, "number": _g_number, "timer": _g_timer, "calendar": _g_calendar, "question": _g_question, "houses": _g_houses, "badge": _g_badge}
 
 
+def _echo_phone(d, cx, cy, k, lit, name):
+    """Handy für das Echo-Schaubild: steht aufrecht, Lautsprecher-Schlitz oben, Mikrofon-Punkt unten."""
+    w, h = 96 * k, 190 * k
+    d.rounded_rectangle((cx - w, cy - h, cx + w, cy + h), 30 * k, fill=(26, 28, 38, 255), outline=(8, 8, 14, 255), width=10)
+    d.rounded_rectangle((cx - w + 16, cy - h + 44, cx + w - 16, cy + h - 44), 14 * k, fill=tuple(int(c * (0.55 + 0.45 * lit)) for c in (110, 190, 255)) + (255,))
+    d.rounded_rectangle((cx - 26 * k, cy - h + 16, cx + 26 * k, cy - h + 28), 6, fill=(120, 130, 150, 255))
+    d.ellipse((cx - 9, cy + h - 30, cx + 9, cy + h - 12), fill=(120, 130, 150, 255))
+    d.ellipse((cx - 40 * k, cy - 70 * k, cx + 40 * k, cy + 10 * k), fill=(240, 246, 255, 255))                      # Kontaktbild: Kopf und Schultern
+    d.pieslice((cx - 66 * k, cy + 20 * k, cx + 66 * k, cy + 150 * k), 180, 360, fill=(240, 246, 255, 255))
+    f = _font(46, "Bold")
+    tw = d.textlength(name, font=f)
+    d.rounded_rectangle((cx - tw / 2 - 22, cy + h + 26, cx + tw / 2 + 22, cy + h + 92), 22, fill=(255, 255, 255, 255))
+    d.text((cx - tw / 2, cy + h + 32), name, font=f, fill=INK)
+
+
+def _g_echo(frame, g, t, dur):
+    """Echo am Telefon: zwei Handys. Deine Stimme läuft als Welle oben hinüber, drüben aus dem Lautsprecher ins Mikrofon und unten – blasser,
+    verspätet – wieder zurück. Mit sub="filter" hält eine Sperre die Rückwelle auf (Echo-Unterdrückung)."""
+    k = _pop(t, 0.0, 0.35)
+    if k <= 0:
+        return
+    d = ImageDraw.Draw(frame, "RGBA")
+    lx, rx, cy = 215, W - 215, 860
+    left = str(g.get("left") or "DU").upper()[:10]
+    right = str(g.get("right") or "FREUND").upper()[:10]
+    block = str(g.get("sub") or "").lower()[:6] in ("filter", "block", "stopp", "cancel")
+    loop = 3.2
+    u = (t % loop) / loop
+    go, back = min(1.0, u / 0.42), min(1.0, max(0.0, (u - 0.5) / 0.42))
+    _echo_phone(d, lx, cy, 1.2 * min(1.04, k), 0.4 + 0.6 * (1 if u < 0.2 or (back >= 1 and not block) else 0), left)
+    _echo_phone(d, rx, cy, 1.2 * min(1.04, k), 0.4 + 0.6 * (1 if 0.4 < u < 0.62 else 0), right)
+
+    def wave(p, y, col, rev, alpha):
+        x0, x1 = (rx - 150, lx + 150) if rev else (lx + 150, rx - 150)
+        x = x0 + (x1 - x0) * p
+        sg = -1 if rev else 1
+        for j in range(3):                                                    # drei Bögen hintereinander: eine Schallwelle
+            xr = x - sg * j * 40
+            if min(x0, x1) - 4 <= xr <= max(x0, x1) + 4:
+                rr = 58 + j * 18
+                a0 = (-60, 60) if not rev else (120, 240)
+                d.arc((xr - rr, y - rr, xr + rr, y + rr), a0[0], a0[1], fill=col + (int(alpha * (1 - j * 0.25)),), width=16)
+
+    d.line((lx + 150, cy - 130, rx - 150, cy - 130), fill=(255, 255, 255, 40), width=4)
+    d.line((lx + 150, cy + 130, rx - 150, cy + 130), fill=(255, 255, 255, 40), width=4)
+    if 0 < go < 1:
+        wave(go, cy - 130, ORANGE, False, 255)
+    stop = 0.45 if block else 1.0
+    if 0 < back < stop:
+        wave(back, cy + 130, (120, 200, 255), True, 200)
+    if block:                                                                 # Sperre mitten auf dem Rückweg
+        bx = W / 2 - 30
+        hit = back >= stop
+        col = (120, 230, 90, 255) if hit else (200, 210, 230, 255)
+        d.rounded_rectangle((bx - 14, cy + 40, bx + 14, cy + 220), 10, fill=col, outline=(8, 8, 14, 255), width=5)
+    d = ImageDraw.Draw(frame, "RGBA")
+    _kicker(d, 300, g.get("kicker"), t, 0.0)
+    f1 = _font(50, "Bold")
+    for txt, y, col in ((str(g.get("value") or "DEINE STIMME").upper()[:18], cy - 290, ORANGE), (str(g.get("label") or ("GESTOPPT" if block else "ECHO")).upper()[:18], cy + 250, (150, 210, 255))):
+        tw = d.textlength(txt, font=f1)
+        d.text((W / 2 - tw / 2, y), txt, font=f1, fill=col + (255,), stroke_width=5, stroke_fill=(8, 8, 14, 255))
+    lab = str(g.get("text") or "").upper()[:28]
+    if lab and t > 0.5:
+        _pill(d, W / 2, 1250, lab, _fit(d, lab, 64, 900, "Bold"), (40, 60, 130, 255), WHITE)
+
+
+DRAW["echo"] = _g_echo
+
+
+def _g_voice(frame, g, t, dur):
+    """Warum die eigene Stimme fremd klingt: ein Kopf von vorn. Orange läuft der Schall vom Mund außen durch die Luft zum Ohr, blau wandert er
+    innen durch die Schädelknochen zum anderen Ohr. Mit sub="air" bleibt nur der Luftweg – so hören dich die anderen und das Telefon."""
+    k = _pop(t, 0.0, 0.35)
+    if k <= 0:
+        return
+    d = ImageDraw.Draw(frame, "RGBA")
+    cx, cy, r = W // 2, 840, int(250 * min(1.04, k))
+    only_air = str(g.get("sub") or "").lower()[:3] in ("air", "luf", "tel")
+    skin, ink = (255, 222, 190, 255), (8, 8, 14, 255)
+    for sx in (-1, 1):                                                        # Ohren
+        d.ellipse((cx + sx * r - 46, cy - 60, cx + sx * r + 46, cy + 60), fill=skin, outline=ink, width=10)
+    d.ellipse((cx - r, cy - r, cx + r, cy + r), fill=skin, outline=ink, width=12)
+    for sx in (-1, 1):                                                        # Augen
+        d.ellipse((cx + sx * 96 - 44, cy - 96, cx + sx * 96 + 44, cy - 8), fill=(255, 255, 255, 255), outline=ink, width=8)
+        d.ellipse((cx + sx * 96 - 16, cy - 66, cx + sx * 96 + 16, cy - 34), fill=ink)
+    mo = 26 + 16 * abs(math.sin(t * 7))                                       # der Mund spricht
+    d.ellipse((cx - 54, cy + 110 - mo, cx + 54, cy + 110 + mo), fill=(150, 40, 60, 255), outline=ink, width=8)
+    u = (t % 1.6) / 1.6
+    p0, p1, p2 = (cx + 70, cy + 124), (cx + r + 250, cy + 360), (cx + r + 52, cy + 6)   # Bogen: vom Mund außen herum zum rechten Ohr
+    air = [((1 - q) ** 2 * p0[0] + 2 * q * (1 - q) * p1[0] + q * q * p2[0], (1 - q) ** 2 * p0[1] + 2 * q * (1 - q) * p1[1] + q * q * p2[1]) for q in [i / 30 for i in range(31)]]
+    for i, (x, y) in enumerate(air):
+        ph = (u - i / 30) % 1.0
+        rr = 14 if ph < 0.16 else 7
+        d.ellipse((x - rr, y - rr, x + rr, y + rr), fill=ORANGE + (255 if ph < 0.16 else 150,))
+    if not only_air:
+        zig = [(cx - 64 - (r - 90) * i / 8, cy + 104 - 100 * i / 8 + (26 if i % 2 else -26) * (0 < i < 8)) for i in range(9)]   # innen: Zickzack durch den Knochen zum linken Ohr
+        d.line(zig, fill=(60, 130, 255, 255), width=12, joint="curve")
+        q = u * 8
+        i0 = min(7, int(q))
+        bx, by = zig[i0][0] + (zig[i0 + 1][0] - zig[i0][0]) * (q - i0), zig[i0][1] + (zig[i0 + 1][1] - zig[i0][1]) * (q - i0)
+        d.ellipse((bx - 20, by - 20, bx + 20, by + 20), fill=(190, 220, 255, 255), outline=(8, 8, 14, 255), width=5)
+    _kicker(d, 300, g.get("kicker"), t, 0.0)
+    f1 = _font(50, "Bold")
+    labs = [(str(g.get("right") or "LUFT").upper()[:12], cx + 330, cy + 330, ORANGE)]
+    if not only_air:
+        labs.append((str(g.get("left") or "KNOCHEN").upper()[:12], cx - 300, cy + 330, (120, 180, 255)))
+    for txt, x, y, col in labs:
+        tw = d.textlength(txt, font=f1)
+        d.text((x - tw / 2, y), txt, font=f1, fill=col + (255,), stroke_width=5, stroke_fill=ink)
+    lab = str(g.get("text") or "").upper()[:28]
+    if lab and t > 0.5:
+        _pill(d, W / 2, 1250, lab, _fit(d, lab, 64, 900, "Bold"), (40, 60, 130, 255), WHITE)
+
+
+DRAW["voice"] = _g_voice
+
+
 def clean(g):
     """Prüft eine Grafik-Beschreibung aus dem Drehbuch; gibt die saubere Fassung zurück oder None."""
     if not isinstance(g, dict) or str(g.get("type") or "").lower() not in TYPES:
@@ -1676,7 +1793,7 @@ def clean(g):
     out["dark"] = g.get("dark") is True
     need = {"number": "value", "timer": "value", "calendar": "value", "houses": "value", "badge": "text", "question": None,
             "map": None, "city": None, "versus": "left", "round": "text", "score": "value", "compare": "value", "podium": "text",
-            "share": "value", "news": "text", "pulse": "value", "radio": "text", "distance": "value", "days": "value", "phone": "text", "chart": None, "game": None, "radar": None, "size": "value", "message": None, "chapter": "value"}[out["type"]]
+            "share": "value", "news": "text", "pulse": "value", "radio": "text", "distance": "value", "days": "value", "phone": "text", "chart": None, "game": None, "radar": None, "size": "value", "message": None, "chapter": "value", "echo": None, "voice": None}[out["type"]]
     mode = str(g.get("mode") or "").lower()
     if out["type"] == "phone":
         out["mode"] = mode if mode in ("alert", "lock", "chat") else "alert"

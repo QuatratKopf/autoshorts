@@ -210,6 +210,10 @@ def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, 
         hud = None                             # nur eine Uhrzeit („03:14 UHR“), die das ganze Video stehen bleibt
     if hud and (len(huds) < 2 or not any(re.search(r"\buhr\b", str(sc.get("text") or "").lower()) for sc in scenes)):   # auch neben Szenen-Zeilen: „BEERDIGUNG · 11:00 UHR“, die niemand sagt (Video 168)
         hud = re.sub(r"\s*[·|,–-]\s*\d{1,2}[:.]\d{2}(?:\s*UHR?\w*)?\s*$", "", str(hud), flags=re.I).strip() or None   # eine Uhrzeit, die 80 Sekunden lang stehen bleibt, stimmt für fast keine Szene – das Datum bleibt
+        if hud and re.match(r"\s*\d{1,2}[:.]\d{2}(?:\s*UHR)?\s*[·|,–-]\s*", str(hud), flags=re.I):   # … auch wenn sie vorn steht („23:42 UHR · ANRUF LÄUFT“, Video 181)
+            hud = re.sub(r"^\s*\d{1,2}[:.]\d{2}(?:\s*UHR)?\s*[·|,–-]\s*", "", str(hud), flags=re.I).strip() or None
+            if hud and not re.search(r"\d|·|\bTAG\b|\bNACHT\b|\bJAHR", str(hud).upper()):
+                hud = None                         # übrig bleibt ein Zustand („ANRUF LÄUFT“), der nach dem Auflegen und über dem Rechenzentrum nicht mehr stimmt
     if hud:
         cur_hud, hud_i = hud, -9
         for n_h, (sc, (s, e)) in enumerate(zip(scenes, times)):

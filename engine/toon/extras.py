@@ -1950,7 +1950,7 @@ SKY += ("logs", "crates_sink")                              # schweben frei im W
 WATER_KINDS = ("submersible", "ping", "logs", "crates_sink", "cavitation")     # schweben unter Wasser frei im Bild
 LAKE_KINDS = ("crate", "crates", "cashcrate", "goldbars", "logs", "crates_sink", "rocketpart")
 
-HELD = {"phone": "phone", "handy": "phone", "smartphone": "phone", "flashlight": "flashlight", "taschenlampe": "flashlight",
+HELD = {"call": "call", "phone": "phone", "handy": "phone", "smartphone": "phone", "flashlight": "flashlight", "taschenlampe": "flashlight",
         "bag": "bag", "tasche": "bag", "einkaufstüte": "bag", "tüte": "bag", "bottle": "bottle", "flasche": "bottle",
         "wasserflasche": "bottle", "umbrella": "umbrella", "regenschirm": "umbrella", "schild": "sign", "sign": "sign",
         "map": "map", "karte": "map", "radio": "radio", "letter": "letter", "brief": "letter", "umschlag": "letter"}
@@ -2026,7 +2026,13 @@ def draw_held(layer, kind, x, y, facing, t, k=1.0, night=False):
     """Gegenstand in der Hand (x, y = Handpunkt)."""
     d = ImageDraw.Draw(layer, "RGBA")
     f = facing
-    if kind == "phone":
+    if kind == "call":                                    # Handy am Ohr (Telefonat): man sieht die Rückseite, die Hand hält es an die Wange
+        if night:
+            d.ellipse((x - 80 * k, y - 110 * k, x + 80 * k, y + 50 * k), fill=(150, 210, 255, 34))
+        d.rounded_rectangle((x - 17 * k, y - 58 * k, x + 17 * k, y + 14 * k), 7 * k, fill=(44, 48, 60), outline=INK, width=4)
+        d.ellipse((x - 9 * k, y - 50 * k, x + 1 * k, y - 40 * k), fill=(20, 22, 28), outline=(120, 130, 150), width=2)
+        d.rounded_rectangle((x - f * 19 * k - 3 * k, y - 30 * k, x - f * 19 * k + 3 * k, y - 8 * k), 2 * k, fill=(150, 210, 255))   # Displaykante leuchtet zum Gesicht hin
+    elif kind == "phone":
         d.rounded_rectangle((x - 20 * k, y - 62 * k, x + 20 * k, y + 8 * k), 7 * k, fill=(30, 32, 40), outline=INK, width=4)
         d.rounded_rectangle((x - 14 * k, y - 54 * k, x + 14 * k, y, ), 4 * k, fill=(150, 210, 255))
         if night:

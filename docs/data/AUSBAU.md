@@ -98,6 +98,17 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   Land im Satz (`GEO_RE`) entfällt. Grafik `radar` (Radarschirm, mit `"sub": "lost"` erlischt der Leuchtpunkt) – ab dem zweiten Satz automatisch bei
   „Radar“, „Funkkontakt“, „Transponder“. Bibliothek: `muschel`. Selbsttest: `_surface`.
 
+- Telefonat (`stage._call_story`, greift, wenn das Thema vom Telefonieren handelt und zwei Sätze, sonst wenn drei Sätze `CALL_RE` treffen –
+  Anruf, Telefon, „rufst … an“, auflegen, Freizeichen): Wer telefoniert, hält das Handy ans Ohr (Hand-Gegenstand `call`, Armhaltung
+  `stage.CALL_ARM`) und bleibt allein zu Hause – keine Stadtstraße, kein Rechenzentrum, niemand kommt zur Tür herein. Der Angerufene
+  („Er geht ran“, „bei ihm“, „sein Mikrofon“) ist allein in seinem eigenen Zimmer, nie im selben Raum. Nach dem Auflegen (`CALL_END_RE`) hält
+  die Figur das Handy vor sich; ein neuer Anruf beginnt erst wieder mit `CALL_START_RE`. Technik-Sätze über Echo, Leitung, Lautsprecher,
+  Mikrofon, Signal (`CALL_TECH_RE`) zeigen das Schaubild `echo` (`graphics._g_echo`: zwei Handys, die Stimme läuft oben hinüber und kommt unten
+  blasser zurück; `"sub": "filter"` – eine Sperre hält das Echo auf, automatisch bei „unterdrückt/filtert/verschwindet“) im Wechsel mit dem
+  Handy des Angerufenen auf laut. Sätze über Schädelknochen bzw. „so hören dich andere“ zeigen das Schaubild `voice` (`graphics._g_voice`: Kopf,
+  Schall außen durch die Luft und innen durch den Knochen; `"sub": "air"` nur der Luftweg). „Kopfhörer“ beim Freund: er trägt sie. Eine Ecken-Zeile mit vorangestellter Uhrzeit, die niemand sagt
+  („23:42 UHR · ANRUF LÄUFT“), entfällt samt Zustand (`render.build_ass`). Selbsttest: `_call`.
+
 - Raumsonde (`stage._probe_story`, greift bei `PROBE_RE` – Raumsonde, Weltraumsonde, Voyager – in Thema oder Sätzen): gezeichnete Sonde
   (`extras._probe`: Schüssel, Gerätekasten in Goldfolie, Ausleger, Gittermast; kein Schriftzug) als `probe` (groß), `probe_far` (klein, die Sonne
   nur noch ein Stern), `probe_signal` (funkt), `probe_uplink` (Befehl von der Erde, die Erde als blauer Punkt), `probe_glitch` (zerhackte rote
