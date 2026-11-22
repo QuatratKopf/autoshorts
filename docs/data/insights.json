@@ -1,5 +1,5 @@
 {
- "updated": 1795351099.0940797,
+ "updated": 1795352927.3911643,
  "enough": true,
  "counted": 34,
  "total": 36,
@@ -27,10 +27,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 3,
-   "avg_views": 1803,
+   "avg_views": 1804,
    "avg_likes": 43.3,
    "like_rate": 2.4,
-   "avg_score": 2486
+   "avg_score": 2487
   },
   {
    "slug": "storys",
@@ -113,10 +113,10 @@
   "vier"
  ],
  "words_bad": [
-  "remix",
+  "erkennst",
   "lied",
-  "bekanntes",
-  "erkennst"
+  "remix",
+  "bekanntes"
  ],
  "top": [
   {
