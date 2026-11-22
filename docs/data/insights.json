@@ -1,7 +1,7 @@
 {
- "updated": 1795361928.7126226,
+ "updated": 1795363618.3121402,
  "enough": true,
- "counted": 34,
+ "counted": 35,
  "total": 36,
  "needed": 6,
  "categories": [
@@ -33,15 +33,6 @@
    "avg_score": 2487
   },
   {
-   "slug": "storys",
-   "name": "🔥 Spannende Storys",
-   "n": 2,
-   "avg_views": 1659,
-   "avg_likes": 52.5,
-   "like_rate": 3.16,
-   "avg_score": 2446
-  },
-  {
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
@@ -66,7 +57,16 @@
    "avg_views": 1732,
    "avg_likes": 43.7,
    "like_rate": 2.52,
-   "avg_score": 2390
+   "avg_score": 2391
+  },
+  {
+   "slug": "storys",
+   "name": "🔥 Spannende Storys",
+   "n": 3,
+   "avg_views": 1346,
+   "avg_likes": 38.7,
+   "like_rate": 2.87,
+   "avg_score": 1926
   },
   {
    "slug": "musik",
@@ -88,14 +88,14 @@
   }
  ],
  "weights": {
-  "fakten": 0.99,
+  "fakten": 1.01,
   "grusel": 1.2,
-  "storys": 1.01,
-  "mysterien": 1.0,
-  "tiere": 1.03,
-  "whatif": 0.99,
-  "comedy": 1.26,
-  "musik": 0.72,
+  "storys": 0.81,
+  "mysterien": 1.02,
+  "tiere": 1.05,
+  "whatif": 1.01,
+  "comedy": 1.28,
+  "musik": 0.74,
   "vergleich": 1.2,
   "motivation": 1.2,
   "liebe": 1.2,
@@ -104,8 +104,8 @@
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2323 Aufrufe, 2.0 % Likes).",
   "Schwächste Kategorie: 🔥 Motivation (Ø 862 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2523 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2653 zu 2032 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2473 zu 706 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2573 zu 2032 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -172,14 +172,14 @@
  ],
  "flop": [
   {
-   "id": 176,
-   "title": "Bekanntes Lied als Trap-Remix – erkennst du es? 🎵",
-   "category": "musik",
-   "views": 923,
-   "likes": 7,
-   "comments": 2,
+   "id": 180,
+   "title": "Wie die NASA Voyager 1 aus 24 Milliarden Kilometern rettete",
+   "category": "storys",
+   "views": 721,
+   "likes": 11,
+   "comments": 0,
    "shares": 0,
-   "score": 1088
+   "score": 886
   },
   {
    "id": 58,
