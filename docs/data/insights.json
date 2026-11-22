@@ -1,5 +1,5 @@
 {
- "updated": 1795356537.2173328,
+ "updated": 1795358330.1161351,
  "enough": true,
  "counted": 34,
  "total": 36,
@@ -18,19 +18,19 @@
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 1,
-   "avg_views": 2327,
+   "avg_views": 2329,
    "avg_likes": 34.0,
    "like_rate": 1.46,
-   "avg_score": 2837
+   "avg_score": 2839
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 3,
-   "avg_views": 1804,
+   "avg_views": 1805,
    "avg_likes": 43.3,
    "like_rate": 2.4,
-   "avg_score": 2487
+   "avg_score": 2488
   },
   {
    "slug": "storys",
@@ -45,10 +45,10 @@
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
-   "avg_views": 1809,
+   "avg_views": 1810,
    "avg_likes": 39.0,
-   "like_rate": 2.16,
-   "avg_score": 2424
+   "like_rate": 2.15,
+   "avg_score": 2425
   },
   {
    "slug": "fakten",
@@ -63,19 +63,19 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 10,
-   "avg_views": 1731,
+   "avg_views": 1732,
    "avg_likes": 43.7,
    "like_rate": 2.52,
-   "avg_score": 2390
+   "avg_score": 2391
   },
   {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 4,
-   "avg_views": 1552,
+   "avg_views": 1556,
    "avg_likes": 10.2,
    "like_rate": 0.66,
-   "avg_score": 1751
+   "avg_score": 1754
   },
   {
    "slug": "motivation",
@@ -104,8 +104,8 @@
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2273 Aufrufe, 2.04 % Likes).",
   "Schwächste Kategorie: 🔥 Motivation (Ø 862 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2515 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2641 zu 2032 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2516 zu 706 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2642 zu 2033 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -113,8 +113,8 @@
   "vier"
  ],
  "words_bad": [
-  "bekanntes",
   "remix",
+  "bekanntes",
   "lied",
   "erkennst"
  ],
@@ -133,11 +133,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2572,
+   "views": 2574,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3412
+   "score": 3414
   },
   {
    "id": 77,
@@ -175,11 +175,11 @@
    "id": 176,
    "title": "Bekanntes Lied als Trap-Remix – erkennst du es? 🎵",
    "category": "musik",
-   "views": 923,
+   "views": 934,
    "likes": 7,
    "comments": 2,
    "shares": 0,
-   "score": 1088
+   "score": 1099
   },
   {
    "id": 58,
