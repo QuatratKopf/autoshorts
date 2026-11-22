@@ -1,0 +1,386 @@
+{
+ "title": "Smartphone im Jahr 1800: Was passiert wirklich?",
+ "scenes": [
+  {
+   "text": "Mit deinem Smartphone landest du plötzlich im Jahr achtzehnhundert.",
+   "see": "Du stehst mitten auf einer alten Straße des Jahres 1800 und starrst verwirrt auf dein Handy.",
+   "place": "street",
+   "backdrop": {
+    "ground": "road",
+    "elements": [
+     "city"
+    ]
+   },
+   "props": [
+    {
+     "type": "lightning"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense",
+   "hud": "JAHR 1800 · ANKUNFT"
+  },
+  {
+   "text": "Doch schon nach zwei Sekunden bemerkst du einen fatalen Fehler.",
+   "see": "Das Handy-Display hat kein Netz und zeigt Empfangssuche.",
+   "place": "street",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "graphic",
+   "graphic": {
+    "type": "number",
+    "kicker": "JAHR 1800 · ANKUNFT",
+    "value": "2",
+    "label": "SEKUNDEN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Du hast kein Netz, keine SIM-Funktion und natürlich kein WLAN.",
+   "see": "Grafik zeigt kein Netz und null Masten.",
+   "place": "street",
+   "crowd": "walk",
+   "overlay": {
+    "type": "card",
+    "text": "KEIN NETZ"
+   }
+  },
+  {
+   "text": "Denn im Jahr achtzehnhundert existiert weltweit noch kein einziger Mobilfunkmast.",
+   "see": "Kein einziger Masta existiert weit und breit.",
+   "place": "worldmap",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Nach fünf Minuten machst du ein Foto mit Blitz von den Passanten.",
+   "see": "Du fotografierst Passanten auf der Straße mit grellem Kamerablitz.",
+   "place": "street",
+   "backdrop": {
+    "ground": "road",
+    "elements": [
+     "city"
+    ]
+   },
+   "props": [
+    {
+     "type": "lightning"
+    }
+   ],
+   "shot": "event",
+   "overlay": {
+    "type": "tag",
+    "text": "5 MINUTEN"
+   }
+  },
+  {
+   "text": "Die Menschen halten das grelle Licht sofort für gefährliche Hexerei beziehungsweise Teufelswerk.",
+   "see": "Die Passanten weichen schockiert und verängstigt zurück.",
+   "place": "street",
+   "shot": "event",
+   "crowd": "worried",
+   "overlay": {
+    "type": "stamp",
+    "text": "HEXEREI",
+    "color": "red"
+   }
+  },
+  {
+   "text": "Die Stadtwachen werden gerufen und nehmen dich sofort in Ketten.",
+   "see": "Zwei Wachen stürmen auf dich zu und greifen dich.",
+   "place": "street",
+   "time": "day",
+   "actors": [
+    {
+     "id": "wache",
+     "speaks": true,
+     "action": "point",
+     "emotion": "angry",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "cower",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Nach zwei Stunden wirst du direkt dem Stadtrat und dem König vorgeführt.",
+   "see": "Du stehst im prunkvollen Thronsaal vor dem König.",
+   "place": "street",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "koenig",
+     "speaks": false,
+     "action": "talk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "overlay": {
+    "type": "tag",
+    "text": "2 STUNDEN"
+   },
+   "status": "STATUS: GEFANGEN"
+  },
+  {
+   "text": "Um deine Haut zu retten, schaltest du die helle Taschenlampe ein.",
+   "see": "Du machst die hell leuchtende Taschenlampe am Handy an.",
+   "place": "street",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "flashlight",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close"
+  },
+  {
+   "text": "Du rechnest mit dem Rechner riesige Zahlen in einer Sekunde aus.",
+   "see": "Du tippst blitzschnell riesige Zahlen im Offline-Rechner ein.",
+   "place": "street",
+   "shot": "event",
+   "crowd": "walk",
+   "overlay": {
+    "type": "card",
+    "text": "MATHE-MAGIE"
+   }
+  },
+  {
+   "text": "Danach spielst du Musik über den Lautsprecher ab und alle erstarren.",
+   "see": "Musik schallt aus dem Lautsprecher, der König staunt.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_bassbox"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "koenig",
+     "speaks": false,
+     "action": "freeze",
+     "emotion": "shocked",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Der Herrscher hält dich jetzt für einen mächtigen Zauberer aus der Zukunft.",
+   "see": "Der König deutet ehrfürchtig auf dich.",
+   "place": "street",
+   "shot": "event",
+   "crowd": "walk"
+  },
+  {
+   "text": "Aber nach zwei Tagen zeigt dein Akku plötzlich nur noch ein Prozent.",
+   "see": "Ein Prozent Akku blinkt rot auf dem Handy-Display.",
+   "place": "street",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "overlay": {
+    "type": "bar",
+    "label": "AKKU",
+    "value": 1
+   }
+  },
+  {
+   "text": "Das Display wird schwarz und dein Zaubergerät geht für immer aus.",
+   "see": "Das Handy-Display wird komplett schwarz.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "display"
+    }
+   ],
+   "shot": "insert",
+   "mood": "sad"
+  },
+  {
+   "text": "Du denkst, du kannst es einfach aufladen? Falsch, denn Steckdosen existieren schlichtweg nicht.",
+   "see": "Du suchst verzweifelt eine Steckdose an einer Steinwand, aber da ist keine.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_steckdose"
+    },
+    {
+     "type": "cans"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "sad",
+     "emote": "",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "sad"
+  },
+  {
+   "text": "Stromnetze werden nämlich erst fast hundert Jahre später erfunden.",
+   "see": "Grafik zeigt Stromnetz-Erfindung erst achtzig Jahre später.",
+   "place": "powerplant",
+   "shot": "graphic",
+   "graphic": {
+    "type": "calendar",
+    "kicker": "JAHR 1800 · ANKUNFT",
+    "value": "100",
+    "label": "JAHRE",
+    "dark": false
+   }
+  },
+  {
+   "text": "Dein teures Handy wird zum völlig nutzlosen Stück Glas und Metall.",
+   "see": "Das tote Handy liegt auf einem Samtkissen im Museum in einer Vitrine.",
+   "place": "powerplant",
+   "props": [
+    {
+     "type": "glass"
+    }
+   ],
+   "shot": "insert",
+   "overlay": {
+    "type": "tag",
+    "text": "MUSEUMSTÜCK"
+   }
+  },
+  {
+   "text": "Es landet auf ewig im königlichen Museum als rätselhaftes Artefakt.",
+   "see": "Besucher im Museum stauen vor der Glasvitrine mit dem Handy.",
+   "place": "powerplant",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Welche Offline-App hättest du im Jahr achtzehnhundert als Erstes gezeigt?",
+   "see": "Du schaust fragend in die Kamera.",
+   "place": "street",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "overlay": {
+    "type": "choice",
+    "a": "Kamera & Fotos",
+    "b": "Taschenrechner"
+   }
+  }
+ ]
+}
