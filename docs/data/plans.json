@@ -1,674 +1,4 @@
 {
- "2026-11-21 18:00": {
-  "category": "musik",
-  "topic": "Musik-Kugel",
-  "title": "Musik-Kugel",
-  "needs": [],
-  "created": 1795256311.6750634,
-  "special": "bounce"
- },
- "2026-11-21 21:00": {
-  "category": "storys",
-  "topic": "Wie NASA-Ingenieure die Raumsonde Voyager 1 aus 24 Milliarden Kilometern Entfernung retteten",
-  "trend": {
-   "title": "Voyager 1",
-   "source": "Wikipedia",
-   "news": [],
-   "summary": "Raumsonde der NASA und das am weitesten von der Erde entfernte von Menschen gebaute Objekt – Voyager 1 ist eine Raumsonde der US-amerikanischen Raumfahrtbehörde NASA zur Erforschung des äußeren Planetensystems und des interstellaren Raums im Rahmen des Voyager-Programms. Sie ist das am weitesten von der Erde entfernte von Menschen gebaute Objekt und wird diesen Status au"
-  },
-  "script": {
-   "title": "Voyager 1: Rettung aus 24 Milliarden Kilometern Entfernung",
-   "description": "Voyager 1 sendet nur noch Müll aus dem Weltall!",
-   "hashtags": [
-    "#shorts",
-    "#voyager1",
-    "#nasa",
-    "#weltall",
-    "#wissenschaft",
-    "#tech",
-    "#fyp",
-    "#viral"
-   ],
-   "tags": [
-    "voyager 1",
-    "nasa",
-    "weltall",
-    "raumsonde",
-    "rettung",
-    "technik",
-    "ingenieure",
-    "universum"
-   ],
-   "thumbnail": {
-    "image": "Close-up of a shocked scientist looking at a screen filled with glitching code matrix text, bright neon glow, high contrast",
-    "text": "RETTUNG IM ALL"
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "blau",
-     "hat": "",
-     "hair": "curly",
-     "hair_color": "dunkelbraun",
-     "gender": "w",
-     "glasses": true,
-     "skin": "hell"
-    }
-   },
-   "scenes": [
-    {
-     "see": "Voyager 1 treibt weit entfernt von der Erde im düsteren Weltall.",
-     "text": "NASA-Ingenieure mussten eine Raumsonde aus vierundzwanzig Milliarden Kilometern Entfernung retten.",
-     "place": "space",
-     "time": "night",
-     "weather": "",
-     "props": [
-      "satellite"
-     ],
-     "shot": "event",
-     "actors": [],
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "Müll"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "VOYAGER 1"
-     },
-     "mood": "tense",
-     "crowd": "",
-     "image": "NASA-Ingenieure mussten eine Raumsonde aus vierundzwanzig Milliarden Kilometern Entfernung retten.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Ingenieurin im NASA Lab starrt geschockt auf ihren Bildschirm voller Nullen.",
-     "text": "Ende zweitausenddreiundzwanzig verstummte Voyager eins nach über sechsundvierzig Jahren Reisezeit.",
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [
-      "computer"
-     ],
-     "shot": "wide",
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "verstummte"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "NOVEMBER 2023"
-     },
-     "mood": "tense",
-     "image": "Ende zweitausenddreiundzwanzig verstummte Voyager eins nach über sechsundvierzig Jahren Reisezeit.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Computergrafik zeigt den gewaltigen Abstand zwischen Erde und Raumsonde.",
-     "text": "Die Sonde war vierundzwanzig Milliarden Kilometer weit weg in der absoluten Dunkelheit.",
-     "place": "space",
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "shot": "graphic",
-     "graphic": {
-      "type": "distance",
-      "value": "24 MRD. KM",
-      "left": "ERDE",
-      "right": "VOYAGER"
-     },
-     "actors": [],
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "vierundzwanzig Milliarden"
-     ],
-     "overlay": null,
-     "mood": "calm",
-     "crowd": "",
-     "image": "Die Sonde war vierundzwanzig Milliarden Kilometer weit weg in der absoluten Dunkelheit.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Funksignal breitet sich langsam durch den Weltraum aus.",
-     "text": "Ein einziges Signal brauchte zweiundzwanzig und eine halbe Stunde für einen Weg.",
-     "place": "space",
-     "time": "night",
-     "weather": "",
-     "props": [
-      "satellite"
-     ],
-     "shot": "event",
-     "actors": [],
-     "camera": "pan_right",
-     "sfx": "tick",
-     "highlight": [
-      "zweiundzwanzig"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "22,5 STUNDEN"
-     },
-     "mood": "calm",
-     "crowd": "",
-     "image": "Ein einziges Signal brauchte zweiundzwanzig und eine halbe Stunde für einen Weg.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafik zur Übertragungsdauer einer Antwort.",
-     "text": "Wer eine Taste drückte, musste fast zwei Tage auf die Antwort warten.",
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "shot": "graphic",
-     "graphic": {
-      "type": "timer",
-      "value": "45:00:00",
-      "kicker": "SIGNAL-LAUFZEIT"
-     },
-     "actors": [],
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "zwei Tage"
-     ],
-     "overlay": null,
-     "mood": "calm",
-     "crowd": "",
-     "image": "Wer eine Taste drückte, musste fast zwei Tage auf die Antwort warten.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Ingenieurin sitzt im Labor und liest alte Papierdokumente durch.",
-     "text": "Aber das echte Problem lag tief im Speicher der alten Raumsonde vergraben.",
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [
-      "table",
-      "computer"
-     ],
-     "shot": "wide",
-     "actors": [
-      {
-       "id": "du",
-       "action": "think",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Speicher"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "SPURENSUCHE"
-     },
-     "mood": "tense",
-     "image": "Aber das echte Problem lag tief im Speicher der alten Raumsonde vergraben.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Große Grafik zeigt einen einzelnen defekten Speicherchip mit Warnzeichen.",
-     "text": "Ein einziger Computerchip mit drei Prozent des Hauptspeichers war komplett kaputtgegangen.",
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "shot": "graphic",
-     "graphic": {
-      "type": "number",
-      "kicker": "DEFEKTER SPEICHER",
-      "value": "3 %",
-      "label": "AUSFALL"
-     },
-     "actors": [],
-     "camera": "still",
-     "sfx": "boom",
-     "highlight": [
-      "kaputtgegangen"
-     ],
-     "overlay": null,
-     "mood": "tense",
-     "crowd": "",
-     "image": "Ein einziger Computerchip mit drei Prozent des Hauptspeichers war komplett kaputtgegangen.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Ingenieurin schüttelt verzweifelt den Kopf vor dem Computer.",
-     "text": "Ohne diesen Chip konnte die Sonde ihren eigenen Zustand nicht mehr senden.",
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [
-      "computer"
-     ],
-     "shot": "wide",
-     "actors": [
-      {
-       "id": "du",
-       "action": "cower",
-       "emotion": "sad",
-       "emote": "sweat",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Zustand"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "SPEICHERFEHLER",
-      "color": "red"
-     },
-     "mood": "sad",
-     "image": "Ohne diesen Chip konnte die Sonde ihren eigenen Zustand nicht mehr senden.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafische Darstellung des uralten Speicherbereichs von Voyager 1.",
-     "text": "Du denkst vielleicht, sie haben einfach ein neues Ersatzteil hochgeschickt.",
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "shot": "graphic",
-     "graphic": {
-      "type": "badge",
-      "kicker": "HARDWARE",
-      "text": "BAUJAHR 1977"
-     },
-     "actors": [],
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "Ersatzteil"
-     ],
-     "overlay": null,
-     "mood": "calm",
-     "crowd": "",
-     "image": "Du denkst vielleicht, sie haben einfach ein neues Ersatzteil hochgeschickt.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Ingenieurin winkt energisch ab.",
-     "text": "Falsch, da draußen fliegt Technik aus den siebziger Jahren ohne Internet.",
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [
-      "computer"
-     ],
-     "shot": "wide",
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "angry",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "camera": "shake",
-     "sfx": "pop",
-     "highlight": [
-      "Falsch"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "KEIN INTERNET"
-     },
-     "mood": "tense",
-     "image": "Falsch, da draußen fliegt Technik aus den siebziger Jahren ohne Internet.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Speicher der Sonde wird als Baustein-Grafik dargestellt.",
-     "text": "Der Speicher ist kleiner als das Bild eines modernen Smartphones.",
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "shot": "graphic",
-     "graphic": {
-      "type": "compare",
-      "left": "HANDYBILD",
-      "right": "VOYAGER",
-      "value": "3 MB",
-      "sub": "0,07 MB"
-     },
-     "actors": [],
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "kleiner"
-     ],
-     "overlay": null,
-     "mood": "calm",
-     "crowd": "",
-     "image": "Der Speicher ist kleiner als das Bild eines modernen Smartphones.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Ingenieurin arbeitet aufgeregt am Rechner.",
-     "text": "Also mussten die Ingenieure den kaputten Code in winzige Schnipsel zerlegen.",
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [
-      "computer"
-     ],
-     "shot": "wide",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "happy",
-       "emote": "idea",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "Schnipsel"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "DER PLAN"
-     },
-     "mood": "happy",
-     "image": "Also mussten die Ingenieure den kaputten Code in winzige Schnipsel zerlegen.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Nachricht wird zeilenweise aufgebaut.",
-     "text": "Sie verteilten den Programmcode auf verschiedene freie Stellen im Speicher.",
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "shot": "graphic",
-     "graphic": {
-      "type": "message",
-      "kicker": "CODE-UPDATE",
-      "lines": [
-       "Teil 1 versendet.",
-       "Teil 2 verteilt.",
-       "!Adresse angepasst."
-      ]
-     },
-     "actors": [],
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "verteilten"
-     ],
-     "overlay": null,
-     "mood": "calm",
-     "crowd": "",
-     "image": "Sie verteilten den Programmcode auf verschiedene freie Stellen im Speicher.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Voyager 1 im All empfängt Funkwellen von der Erde.",
-     "text": "Im April zweitausendvierundzwanzig schickten sie den gewagten Befehl ins All.",
-     "place": "space",
-     "time": "night",
-     "weather": "",
-     "props": [
-      "satellite"
-     ],
-     "shot": "event",
-     "actors": [],
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "gewagten Befehl"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "APRIL 2024"
-     },
-     "mood": "tense",
-     "crowd": "",
-     "image": "Im April zweitausendvierundzwanzig schickten sie den gewagten Befehl ins All.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Ingenieurin blickt angespannt auf die Uhr an der Wand.",
-     "text": "Danach begann das nervenaufreibende Warten auf ein Lebenszeichen der Sonde.",
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [
-      "clock"
-     ],
-     "shot": "wide",
-     "actors": [
-      {
-       "id": "du",
-       "action": "freeze",
-       "emotion": "worried",
-       "emote": "sweat",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "camera": "still",
-     "sfx": "tick",
-     "highlight": [
-      "Warten"
-     ],
-     "overlay": {
-      "type": "thermo",
-      "value": 20
-     },
-     "mood": "tense",
-     "image": "Danach begann das nervenaufreibende Warten auf ein Lebenszeichen der Sonde.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Herzschlag-Grafik pocht auf dem Schirm.",
-     "text": "Nach fünfundvierzig Stunden empfing die Erde plötzlich wieder klare Daten.",
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "shot": "graphic",
-     "graphic": {
-      "type": "pulse",
-      "value": "45",
-      "label": "STUNDEN SPÄTER"
-     },
-     "actors": [],
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "klare Daten"
-     ],
-     "overlay": null,
-     "mood": "happy",
-     "crowd": "",
-     "image": "Nach fünfundvierzig Stunden empfing die Erde plötzlich wieder klare Daten.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Ingenieurin jubelt freudig vor ihren Monitoren.",
-     "text": "Die Rettungsaktion aus unfassbarer Entfernung war ein kompletter Erfolg.",
-     "place": "lab",
-     "time": "day",
-     "weather": "",
-     "props": [
-      "computer"
-     ],
-     "shot": "wide",
-     "actors": [
-      {
-       "id": "du",
-       "action": "jump",
-       "emotion": "happy",
-       "emote": "heart",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "camera": "zoom_out",
-     "sfx": "pop",
-     "highlight": [
-      "Erfolg"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "GERETTET",
-      "color": "green"
-     },
-     "mood": "happy",
-     "image": "Die Rettungsaktion aus unfassbarer Entfernung war ein kompletter Erfolg.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Voyager 1 fliegt stolz weiter durch die Sterne.",
-     "text": "Damit reist Voyager eins weiter durch die unendliche Weite des Alls.",
-     "place": "space",
-     "time": "night",
-     "weather": "",
-     "props": [
-      "satellite"
-     ],
-     "shot": "event",
-     "actors": [],
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "unendliche Weite"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "INTERSTELLAR"
-     },
-     "mood": "calm",
-     "crowd": "",
-     "image": "Damit reist Voyager eins weiter durch die unendliche Weite des Alls.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Voyager 1 zieht einsam ihre Bahn durch den Kosmos.",
-     "text": "Und das, obwohl das weitest entfernte Objekt der Menschheit plötzlich nur noch unverständlichen Müll sendete.",
-     "place": "space",
-     "time": "night",
-     "weather": "",
-     "props": [
-      "satellite"
-     ],
-     "shot": "event",
-     "actors": [],
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "unverständlichen Müll"
-     ],
-     "overlay": {
-      "type": "choice",
-      "a": "Code retten",
-      "b": "Aufgeben"
-     },
-     "mood": "calm",
-     "crowd": "",
-     "image": "Und das, obwohl das weitest entfernte Objekt der Menschheit plötzlich nur noch unverständlichen Müll sendete.",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "24 MRD. KM VON DER ERDE",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [
-   "raumsonde"
-  ],
-  "title": "Voyager 1: Rettung aus 24 Milliarden Kilometern Entfernung",
-  "created": 1795274293.8068063
- },
  "2026-11-22 13:00": {
   "category": "grusel",
   "topic": "Das unheimliche Phänomen der 'Doppelgänger-Stimmen' beim Telefonieren: Warum hunderte Gen-Z-User schwören, sie hätten am Ende des Anrufs sich selbst antworten hören – und was die Forschung dazu sagt.",
@@ -1997,5 +1327,795 @@
   "needs": [],
   "created": 1795360721.7798014,
   "special": "bounce"
+ },
+ "2026-11-23 13:00": {
+  "category": "liebe",
+  "topic": "3 Zeichen, dass deine Situationship insgeheim längst in dich verliebt ist",
+  "trend": null,
+  "script": {
+   "title": "3 Zeichen, dass deine Situationship in dich verliebt ist",
+   "description": "3 Zeichen, dass deine Situationship in dich verliebt ist\nDrei klare Signale verraten, ob mehr hinter den Treffen steckt.\nSchreib es in die Kommentare: Bist du Team Situationship oder Beziehung?",
+   "hashtags": [
+    "#shorts",
+    "#fyp",
+    "#viral",
+    "#liebe",
+    "#relationship",
+    "#dating",
+    "#foryou",
+    "#crush"
+   ],
+   "tags": [
+    "situationship",
+    "liebe",
+    "Dating-Tipps",
+    "beziehung",
+    "verliebt",
+    "anzeichen",
+    "crush",
+    "partnerschaft"
+   ],
+   "thumbnail": {
+    "place": "restaurant",
+    "time": "day",
+    "actor": "crush",
+    "action": "laugh",
+    "emotion": "happy",
+    "props": [
+     "kaffeetasse"
+    ],
+    "weather": "",
+    "image": "Close-up of a young woman smiling shyly while looking at her phone on a cozy sofa, warm lighting, empty space in the upper third for text",
+    "text": "MEHR ALS NUR FRIENDS"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "lila",
+     "hat": "",
+     "hair": "ponytail",
+     "glasses": false,
+     "skin": "hell",
+     "hair_color": "blond",
+     "gender": "w"
+    },
+    "max": {
+     "shirt": "blau",
+     "hat": "",
+     "hair": "curly",
+     "glasses": false,
+     "skin": "mittel",
+     "hair_color": "braun",
+     "gender": "m"
+    }
+   },
+   "scenes": [
+    {
+     "text": "Drei versteckte Zeichen verraten, dass deine Situationship dich heimlich liebt.",
+     "image": "Close-up of two young people sitting close together on a sofa, looking at each other and smiling",
+     "who": [
+      "du",
+      "max"
+     ],
+     "place": "restaurant",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "versteckte Zeichen"
+     ],
+     "overlay": {
+      "type": "round",
+      "kicker": "LIEBE",
+      "text": "SITUATIONSHIP"
+     },
+     "see": "Ein vertrauter Moment im Café zwischen zwei Personen",
+     "time": "day",
+     "props": [
+      "kaffeetasse"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "max",
+       "action": "laugh",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "shot": "wide",
+     "mood": "love",
+     "crowd": "walk",
+     "who_desc": "; ",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Und das letzte Signal lässt sich absolut nicht mehr verbergen.",
+     "image": "Max laughing heartily while sitting next to you on the couch",
+     "who": [
+      "du",
+      "max"
+     ],
+     "place": "livingroom",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "letzte Signal"
+     ],
+     "overlay": null,
+     "see": "Das Handy zeigt eine verheißungsvolle Nachricht",
+     "time": "night",
+     "props": [
+      "display"
+     ],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "tense",
+     "graphic": {
+      "type": "phone",
+      "mode": "chat",
+      "kicker": "Situationship",
+      "text": "Bist du gut angekommen? ❤️",
+      "sub": "Ja, danke!"
+     },
+     "who_desc": "; ",
+     "place_desc": "A cozy modern living room with a comfortable sofa, soft lighting, and houseplants",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Nummer eins: Die kleinen Details.",
+     "image": "Max handing you your favorite snack without being asked",
+     "who": [
+      "du",
+      "max"
+     ],
+     "place": "livingroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "kleinen Details"
+     ],
+     "overlay": {
+      "type": "round",
+      "kicker": "ZEICHEN 1",
+      "text": "DETAILS"
+     },
+     "see": "Titelkarte für den ersten Punkt: Die kleinen Details",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "calm",
+     "graphic": {
+      "type": "round",
+      "kicker": "ZEICHEN 1",
+      "text": "DIE KLEINEN DETAILS"
+     },
+     "who_desc": "; ",
+     "place_desc": "A cozy modern living room with a comfortable sofa, soft lighting, and houseplants",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Wer sich merkt, welchen Kaffee du trinkst, achtet auch auf dein Herz.",
+     "image": "You looking surprised and touched as Max smiles warmly",
+     "who": [
+      "du",
+      "max"
+     ],
+     "place": "livingroom",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "Kaffee"
+     ],
+     "overlay": null,
+     "see": "Er bringt ihr aufmerksam ihren Lieblingskaffee ans Bett oder Tisch",
+     "time": "day",
+     "props": [
+      "kaffeetasse"
+     ],
+     "actors": [
+      {
+       "id": "max",
+       "action": "walk",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "offleft",
+       "to": "center",
+       "hold": "kaffeetasse",
+       "speaks": false
+      },
+      {
+       "id": "du",
+       "action": "sit",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "right",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "love",
+     "who_desc": "; ",
+     "place_desc": "A cozy modern living room with a comfortable sofa, soft lighting, and houseplants",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Plötzlich tauchen Dinge auf, von denen du vor Wochen mal erzählt hast.",
+     "image": "Max holding up a small book you mentioned in a previous conversation",
+     "who": [
+      "max"
+     ],
+     "place": "park",
+     "camera": "pan_right",
+     "sfx": "pop",
+     "highlight": [
+      "Dinge auf"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "ERINNERUNG"
+     },
+     "see": "Er überrascht sie mit einer bestimmten Kleinigkeit, von der sie mal erzählt hat",
+     "time": "day",
+     "props": [
+      "box"
+     ],
+     "actors": [
+      {
+       "id": "max",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "!",
+       "pos": "left",
+       "hold": "box",
+       "speaks": false
+      },
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "right",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "happy",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Das ist kein Zufall, das ist pure Aufmerksamkeit.",
+     "image": "You taking the book with a big happy smile",
+     "who": [
+      "du",
+      "max"
+     ],
+     "place": "livingroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "pure Aufmerksamkeit"
+     ],
+     "overlay": null,
+     "see": "Das Herz pocht stark vor lauter Aufmerksamkeit",
+     "time": "day",
+     "props": [
+      "herz"
+     ],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "love",
+     "graphic": {
+      "type": "pulse",
+      "value": "100%",
+      "label": "AUFMERKSAMKEIT"
+     },
+     "who_desc": "; ",
+     "place_desc": "A cozy modern living room with a comfortable sofa, soft lighting, and houseplants",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Bleibt die Frage, warum niemand von beiden den ersten Schritt macht.",
+     "image": "Both of you looking away shyly, blushing slightly",
+     "who": [
+      "du",
+      "max"
+     ],
+     "place": "park",
+     "camera": "shake",
+     "sfx": "none",
+     "highlight": [
+      "ersten Schritt"
+     ],
+     "overlay": {
+      "type": "question",
+      "text": "WARUM?"
+     },
+     "see": "Beide sitzen nachdenklich nebeneinander und trauen sich nicht",
+     "time": "sunset",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "max",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "; ",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Zweitens: Die Zukunft schleicht sich ein.",
+     "image": "Max pointing at a concert poster on the wall for next month",
+     "who": [
+      "max"
+     ],
+     "place": "livingroom",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Zukunft"
+     ],
+     "overlay": {
+      "type": "round",
+      "kicker": "ZEICHEN 2",
+      "text": "PLANUNG"
+     },
+     "see": "Titelkarte für Zeichen zwei: Die Zukunft",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "calm",
+     "graphic": {
+      "type": "round",
+      "kicker": "ZEICHEN 2",
+      "text": "DIE ZUKUNFT"
+     },
+     "who_desc": "",
+     "place_desc": "A cozy modern living room with a comfortable sofa, soft lighting, and houseplants",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Wer über nächste Woche redet, plant insgeheim sein Leben mit dir.",
+     "image": "You nodding happily and pointing at the calendar on your phone",
+     "who": [
+      "du",
+      "max"
+     ],
+     "place": "livingroom",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "nächste Woche"
+     ],
+     "overlay": null,
+     "see": "Ein Kalender wird gezeigt, wo pläne eingetragen sind",
+     "time": "day",
+     "props": [
+      "kalender"
+     ],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "calm",
+     "graphic": {
+      "type": "calendar",
+      "kicker": "NÄCHSTE WOCHE",
+      "value": "7",
+      "label": "TAGE ZUSAMMEN"
+     },
+     "who_desc": "; ",
+     "place_desc": "A cozy modern living room with a comfortable sofa, soft lighting, and houseplants",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Plötzlich heißt es nicht mehr ich, sondern wir.",
+     "image": "Max laughing and gesturing to both of you together",
+     "who": [
+      "max"
+     ],
+     "place": "street",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "sondern wir"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "GEMEINSAM"
+     },
+     "see": "Er gestikuliert freudig und redet von gemeinsamen Plänen",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "max",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "idea",
+       "pos": "left",
+       "speaks": false
+      },
+      {
+       "id": "du",
+       "action": "walk",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "right",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "happy",
+     "crowd": "walk",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Aus dem lockeren Treffen wird schleichend ein fester Platz im Kalender.",
+     "image": "A smartphone screen showing multiple planned dates",
+     "who": [],
+     "place": "livingroom",
+     "camera": "zoom_out",
+     "sfx": "ding",
+     "highlight": [
+      "fester Platz"
+     ],
+     "overlay": {
+      "type": "phone",
+      "mode": "lock",
+      "value": "20:00",
+      "kicker": "SAMSTAG",
+      "text": "Date Night"
+     },
+     "see": "Ein fester Termin im Smartphone-Kalender",
+     "time": "day",
+     "props": [
+      "display"
+     ],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "calm",
+     "graphic": {
+      "type": "phone",
+      "mode": "alert",
+      "kicker": "KALENDER",
+      "text": "Date Night",
+      "value": "JEDEN FREITAG",
+      "label": "Fest eingeplant"
+     },
+     "who_desc": "",
+     "place_desc": "A cozy modern living room with a comfortable sofa, soft lighting, and houseplants",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Nur was passiert, wenn plötzlich echte Eifersucht ins Spiel kommt?",
+     "image": "Max looking slightly worried while you check your phone",
+     "who": [
+      "max"
+     ],
+     "place": "restaurant",
+     "camera": "shake",
+     "sfx": "none",
+     "highlight": [
+      "Eifersucht"
+     ],
+     "overlay": null,
+     "see": "Er schaut eifersüchtig auf sein Handy oder zur Seite",
+     "time": "night",
+     "props": [],
+     "actors": [
+      {
+       "id": "max",
+       "action": "shocked",
+       "emotion": "angry",
+       "emote": "anger",
+       "pos": "left",
+       "speaks": false
+      },
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "right",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "crowd": "watch",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Drittens: Der Blick, der alles verrät.",
+     "image": "Max staring at you softly when you are not looking",
+     "who": [
+      "max"
+     ],
+     "place": "livingroom",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Blick"
+     ],
+     "overlay": {
+      "type": "round",
+      "kicker": "ZEICHEN 3",
+      "text": "DER BLICK"
+     },
+     "see": "Titelkarte für Zeichen drei: Der Blick",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "love",
+     "graphic": {
+      "type": "round",
+      "kicker": "ZEICHEN 3",
+      "text": "DER BLICK"
+     },
+     "who_desc": "",
+     "place_desc": "A cozy modern living room with a comfortable sofa, soft lighting, and houseplants",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Du ertappst ihn dabei, wie er dich ansieht, wenn du gerade lachst.",
+     "image": "You turning around and catching Max looking at you with a tender smile",
+     "who": [
+      "du",
+      "max"
+     ],
+     "place": "restaurant",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "ertappst ihn"
+     ],
+     "overlay": {
+      "type": "pulse",
+      "value": "1",
+      "label": "MOMENT"
+     },
+     "see": "Sie lacht herzlich im Restaurant und er sieht sie fasziniert an",
+     "time": "night",
+     "props": [
+      "glass"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "laugh",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "max",
+       "action": "think",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "shot": "wide",
+     "mood": "love",
+     "crowd": "walk",
+     "who_desc": "; ",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "In diesem Sekundenbruchteil schaut niemand einen bloßen Freund an.",
+     "image": "Close-up of Max eyes softening with deep affection",
+     "who": [
+      "max"
+     ],
+     "place": "restaurant",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "bloßen Freund"
+     ],
+     "overlay": null,
+     "see": "Nahaufnahme vom liebevollen Blick des Partners",
+     "time": "night",
+     "props": [],
+     "actors": [
+      {
+       "id": "max",
+       "action": "blink",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "close",
+     "mood": "love",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Die Augen suchen dich im Raum, ganz egal wie voll es ist.",
+     "image": "Max smiling warmly right into your eyes",
+     "who": [
+      "du",
+      "max"
+     ],
+     "place": "station",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "Augen suchen"
+     ],
+     "overlay": null,
+     "see": "In einem vollen Raum sucht sein Blick sofort sie",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "max",
+       "action": "look_around",
+       "emotion": "happy",
+       "emote": "!",
+       "pos": "left",
+       "speaks": false
+      },
+      {
+       "id": "du",
+       "action": "wave",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "right",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "happy",
+     "crowd": "walk",
+     "who_desc": "; ",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Wer so schaut, ist längst über alle Ohren verliebt.",
+     "image": "Both of you leaning closer together on the couch with a romantic atmosphere",
+     "who": [
+      "du",
+      "max"
+     ],
+     "place": "park",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "verliebt"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "ECHTE LIEBE"
+     },
+     "see": "Beide halten Händchen und schauen sich verliebt an",
+     "time": "sunset",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "walk",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "left",
+       "speaks": true
+      },
+      {
+       "id": "max",
+       "action": "walk",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "right",
+       "speaks": false
+      }
+     ],
+     "shot": "wide",
+     "mood": "love",
+     "who_desc": "; ",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Und genau deshalb fangen drei versteckte Zeichen bei dir von vorne an.",
+     "image": "Max laughing gently and sharing a blanket with you",
+     "who": [
+      "du",
+      "max"
+     ],
+     "place": "livingroom",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "von vorne an"
+     ],
+     "overlay": null,
+     "see": "Abschluss-Fragezeichen, ob alle 3 Zeichen zutreffen",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "happy",
+       "emote": "idea",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "happy",
+     "who_desc": "; ",
+     "place_desc": "A cozy modern living room with a comfortable sofa, soft lighting, and houseplants",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "raum"
+  ],
+  "title": "3 Zeichen, dass deine Situationship in dich verliebt ist",
+  "created": 1795371357.5313702
  }
 }
