@@ -7202,7 +7202,7 @@
   "id": 188,
   "category": "whatif",
   "topic": "Was wäre, wenn du ein Smartphone mit ins Jahr 1800 nimmst? – Titel: Smartphone im Jahr 1800: Was passiert wirklich? Titelbild-Text: HANDY IM JAHR 1800. Vorgaben: Erzähle in der Du-Form Schritt für Schritt von der Ankunft bis zum Schicksal des Handys. Reihenfolge einhalten, Punkte sind Stichpunkte, nicht wörtlich abschreiben, jeder Satz bringt etwas Neues: 1) Der erste Satz ist ein vollständiger Satz mit Verb, wörtlich: Du landest mit deinem Smartphone plötzlich im Jahr 1800. Du stehst mitten auf dem Marktplatz einer Stadt. 2) Zweiter Satz: Nach zwei Sekunden merkst du, dass du kein Netz, kein WLAN und kein GPS hast. Der dritte Satz beginnt mit Kein Wunder, denn: Es gibt keinen einzigen Mobilfunkmast und der erste Satellit startet erst 1957. 3) Nach fünf Minuten machst du ein Foto mit Blitz von den Passanten. Sie haben noch nie ein Foto gesehen, das erste Foto der Welt entsteht erst 1826. 4) Die Menschen erschrecken und rufen Hexerei, die Stadtwache führt dich ab. 5) Nach zwei Stunden wirst du dem König vorgeführt. Du schaltest die Taschenlampe ein, sie ist heller als jede Kerze im Saal. 6) Mit dem Rechner löst du riesige Zahlen in einer Sekunde, die Gelehrten des Königs brauchen dafür Stunden. 7) Du spielst Musik über den Lautsprecher, Musik ohne Musiker hat hier noch niemand gehört. 8) Der König hält dich für einen Zauberer. 9) Nach zwei Tagen zeigt der Akku ein Prozent, das Display wird schwarz, das Handy geht für immer aus. 10) Aufladen geht nicht: keine Steckdose, die ersten öffentlichen Kraftwerke gehen erst 1882 ans Netz, also 82 Jahre später. 11) Auflösung: Das teuerste Gerät der Welt ist nur noch ein nutzloses Stück Glas und Metall und landet in einer Vitrine im Museum des Königs. 12) Letzter Satz als Frage an die Zuschauer: Was hättest du dem König als Erstes gezeigt? Jahreszahlen nur 1800, 1826, 1882 und 1957. Keine anderen Jahreszahlen. Schlichte Sprache ohne Füll-Adjektive (nicht königlicher Herrscher, magischer Zauberer, staunen stark). Keine Namen von Personen, keine Marken, nicht das Wort beziehungsweise, kein Englisch.",
-  "status": "rendered",
+  "status": "published",
   "created": 1795366971.958625,
   "title": "Smartphone im Jahr 1800: Was passiert wirklich?",
   "description": "Du landest mit deinem Handy plötzlich im Jahr 1800!\nErlebe Schritt für Schritt, was mit deinem Smartphone in der Vergangenheit passiert.\nWas hättest du dem König als Erstes gezeigt?",
@@ -7237,6 +7237,12 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "zernio_id": "6b0322ebcb42c6b481b1baf9",
+  "yt_status": "Zernio: published",
+  "yt_id": "1umwFSIYZig",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6b0322ebcb42c6b481b1baf9",
+  "error": null
  }
 ]
