@@ -1,5 +1,5 @@
 {
- "updated": 1795387552.1806645,
+ "updated": 1795389360.2669895,
  "enough": true,
  "counted": 35,
  "total": 38,
@@ -9,19 +9,19 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 5,
-   "avg_views": 2283,
+   "avg_views": 2350,
    "avg_likes": 46.6,
-   "like_rate": 2.04,
-   "avg_score": 3002
+   "like_rate": 1.98,
+   "avg_score": 3069
   },
   {
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 1,
-   "avg_views": 2337,
+   "avg_views": 2338,
    "avg_likes": 34.0,
    "like_rate": 1.45,
-   "avg_score": 2847
+   "avg_score": 2848
   },
   {
    "slug": "tiere",
@@ -81,10 +81,10 @@
    "slug": "motivation",
    "name": "🔥 Motivation",
    "n": 1,
-   "avg_views": 902,
+   "avg_views": 903,
    "avg_likes": 48.0,
    "like_rate": 5.32,
-   "avg_score": 1662
+   "avg_score": 1663
   }
  ],
  "weights": {
@@ -92,9 +92,9 @@
   "grusel": 1.2,
   "storys": 0.81,
   "mysterien": 1.02,
-  "tiere": 1.05,
-  "whatif": 1.01,
-  "comedy": 1.26,
+  "tiere": 1.04,
+  "whatif": 1.0,
+  "comedy": 1.29,
   "musik": 0.75,
   "vergleich": 1.2,
   "motivation": 1.2,
@@ -102,19 +102,20 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2283 Aufrufe, 2.04 % Likes).",
-  "Schwächste Kategorie: 🔥 Motivation (Ø 902 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2474 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2581 zu 2022 Punkte).",
-  "Wörter in starken Titeln: gänsehaut."
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2350 Aufrufe, 1.98 % Likes).",
+  "Schwächste Kategorie: 🔥 Motivation (Ø 903 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2485 zu 706 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2581 zu 2048 Punkte).",
+  "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
-  "gänsehaut"
+  "gänsehaut",
+  "vier"
  ],
  "words_bad": [
   "lied",
-  "erkennst",
   "bekanntes",
+  "erkennst",
   "remix"
  ],
  "top": [
@@ -122,11 +123,11 @@
    "id": 168,
    "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
    "category": "comedy",
-   "views": 3960,
+   "views": 3964,
    "likes": 53,
    "comments": 1,
    "shares": 0,
-   "score": 4785
+   "score": 4789
   },
   {
    "id": 46,
