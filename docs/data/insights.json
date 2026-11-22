@@ -1,5 +1,5 @@
 {
- "updated": 1795304986.6158786,
+ "updated": 1795307372.0979774,
  "enough": true,
  "counted": 32,
  "total": 35,
@@ -9,27 +9,27 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 5,
-   "avg_views": 2158,
-   "avg_likes": 44.0,
+   "avg_views": 2162,
+   "avg_likes": 44.2,
    "like_rate": 2.04,
-   "avg_score": 2838
+   "avg_score": 2845
   },
   {
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 1,
-   "avg_views": 2198,
+   "avg_views": 2228,
    "avg_likes": 34.0,
-   "like_rate": 1.55,
-   "avg_score": 2708
+   "like_rate": 1.53,
+   "avg_score": 2738
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 3,
-   "avg_views": 1801,
+   "avg_views": 1802,
    "avg_likes": 43.3,
-   "like_rate": 2.41,
+   "like_rate": 2.4,
    "avg_score": 2485
   },
   {
@@ -65,8 +65,8 @@
    "n": 10,
    "avg_views": 1731,
    "avg_likes": 43.7,
-   "like_rate": 2.53,
-   "avg_score": 2389
+   "like_rate": 2.52,
+   "avg_score": 2390
   },
   {
    "slug": "musik",
@@ -93,9 +93,9 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2158 Aufrufe, 2.04 % Likes).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2162 Aufrufe, 2.04 % Likes).",
   "Schwächste Kategorie: 🎵 Musik-Kugel (Ø 1720 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2559 zu 706 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2561 zu 706 Punkte).",
   "Wörter in starken Titeln: gänsehaut, vier."
  ],
  "words_good": [
@@ -103,31 +103,31 @@
   "vier"
  ],
  "words_bad": [
-  "lied",
-  "remix",
   "erkennst",
-  "bekanntes"
+  "lied",
+  "bekanntes",
+  "remix"
  ],
  "top": [
   {
    "id": 168,
    "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
    "category": "comedy",
-   "views": 3021,
+   "views": 3035,
    "likes": 41,
    "comments": 1,
    "shares": 0,
-   "score": 3666
+   "score": 3680
   },
   {
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2569,
+   "views": 2571,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3409
+   "score": 3411
   },
   {
    "id": 77,
@@ -153,11 +153,11 @@
    "id": 139,
    "title": "Dieses winzige Tier ist zäher als ein Löwe",
    "category": "tiere",
-   "views": 2185,
+   "views": 2184,
    "likes": 55,
    "comments": 0,
    "shares": 1,
-   "score": 3050
+   "score": 3049
   }
  ],
  "flop": [
