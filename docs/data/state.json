@@ -52,20 +52,20 @@
   "qa5v1ywsb"
  ],
  "last_stats": 1795345515.8811972,
- "next_id": 183,
+ "next_id": 184,
  "connected": {
   "youtube": {
    "name": "Wissens Wert 💬",
    "since": "2026-11-10"
   }
  },
- "voice_wps": 2.621,
+ "voice_wps": 2.691,
  "last_trends": 1795340033.4574041,
  "tiktok_handle": "wissens..wert",
  "last_poster": {
   "hero": "ghost",
-  "palette": 3,
-  "video": 182
+  "palette": 0,
+  "video": 183
  },
  "cat_credit": {
   "fakten": 5.740000000000002,

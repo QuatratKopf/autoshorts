@@ -6980,5 +6980,45 @@
   "look": "cartoon",
   "mp4": true,
   "error": "Bei der Prüfung verworfen: Prüfung: Anruf wird nie erzählt (Doch plötzlich ohne Anfang), Echo-Schaubild über dem Geschichten-Satz und beim Kopfhörer-Tipp, Zeile TELEFONAT LÄUFT bis zum Schluss, Stempel doppelt"
+ },
+ {
+  "id": 183,
+  "category": "grusel",
+  "topic": "Warum dir am Telefon manchmal deine eigene Stimme antwortet – erst eine kurze Grusel-Szene in Du-Form, danach die echte Erklärung. Reihenfolge einhalten, Punkte als Stichpunkte, nicht wörtlich abschreiben: 1) Erster Satz als Aufhänger: Am Telefon antwortet dir plötzlich deine eigene Stimme. 2) Zweiter Satz erzählt den Anfang: Spät nachts rufst du deinen besten Freund an, er geht ran. 3) Dann hörst du deine eigene Stimme, sie wiederholt deine Worte einen Moment später. 4) Du erschrickst und legst auf. 5) Erst jetzt die Auflösung: kein Geist, sondern ein Echo. 6) Deine Stimme kommt beim Freund aus dem Lautsprecher, sein Mikrofon nimmt sie wieder auf und schickt sie zurück zu dir, vor allem wenn sein Handy auf laut gestellt ist. 7) Normalerweise rechnet die Echo-Unterdrückung im Handy dieses Echo heraus, bei lautem Lautsprecher oder schlechter Verbindung schafft sie es nicht. 8) Warum die Stimme fremd klingt: Beim Sprechen hörst du dich auch über deine Schädelknochen, dadurch klingt deine Stimme für dich tiefer und voller. 9) Aus dem Telefon kommt nur der Schall durch die Luft, genau so hören dich alle anderen; deshalb mögen die meisten ihre Stimme auf Aufnahmen nicht. 10) Telefone übertragen außerdem nur einen Teil der Tonhöhen, darum klingt die Stimme blechern. 11) Tipp: Bitte deinen Freund, Kopfhörer zu benutzen oder den Lautsprecher leiser zu stellen, dann verschwindet das Echo. Der Schlusssatz ist ein klarer, einfacher Satz und knüpft an den Anruf vom Anfang an. Keine Zahlen, keine Jahreszahlen, keine Studien, keine Experten, kein TikTok-Trend, keine hunderte Nutzer, keine Marken, keine Namen, kein Doppelgänger, nichts Übernatürliches als Tatsache, keine Zustands-Zeile wie TELEFONAT LÄUFT. Titel: Warum antwortet dir am Telefon deine eigene Stimme? Titelbild-Text: DEINE EIGENE STIMME",
+  "status": "rendered",
+  "created": 1795346812.829709,
+  "title": "Warum antwortet dir am Telefon deine eigene Stimme?",
+  "description": "Hörst du am Telefon manchmal deine eigene Stimme?\nWarum das passiert und wieso du dich auf Aufnahmen gar nicht magst.\nStörst du dich an deiner eigenen Stimme?",
+  "hashtags": [
+   "#shorts",
+   "#fyp",
+   "#viral",
+   "#wissen",
+   "#tech",
+   "#grusel",
+   "#erklärung",
+   "#handy"
+  ],
+  "tags": [
+   "telefon echo",
+   "eigene stimme am telefon",
+   "warum klingt stimme fremd",
+   "echo unterdrückung handy",
+   "handy echo",
+   "stimme auf aufnahme",
+   "grusel geschichte"
+  ],
+  "thumb_text": "DEINE EIGENE STIMME",
+  "missing": null,
+  "cover_ms": 68919,
+  "duration": 68.8,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]

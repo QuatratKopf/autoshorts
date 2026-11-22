@@ -1,0 +1,436 @@
+{
+ "title": "Warum antwortet dir am Telefon deine eigene Stimme?",
+ "scenes": [
+  {
+   "text": "Plötzlich hörst du am Telefon deine eigene Stimme sprechen.",
+   "see": "Du stehst nachts im dunklen Zimmer und hältst das Handy ans Ohr, während am Telefon deine eigene Stimme antwortet.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "table"
+    },
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "fall",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "right"
+    }
+   ],
+   "mood": "scary",
+   "hud": "NIGHT",
+   "status": "STIMME: DOPPELT"
+  },
+  {
+   "text": "Spät nachts rufst du deinen besten Freund an, er geht ran.",
+   "see": "Du rufst spät nachts deinen besten Freund an und er geht endlich ans Telefon.",
+   "place": "bedroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "freund",
+     "action": "talk",
+     "speaks": true,
+     "emotion": "",
+     "emote": "",
+     "hold": "call",
+     "pos": "center",
+     "facing": "",
+     "say": "",
+     "kind": "",
+     "keep": true
+    }
+   ],
+   "shot": "close",
+   "mood": "tense"
+  },
+  {
+   "text": "Doch ein paar Sekunden später wiederholt deine eigene Stimme jedes deiner Worte.",
+   "see": "Du erstarrst, weil deine eigene Stimme deine Worte kurz danach verzögert aus dem Hörer schallt.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "cower",
+     "emotion": "scared",
+     "emote": "?",
+     "kind": "",
+     "hold": "call",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary",
+   "overlay": {
+    "type": "card",
+    "text": "ECHO VERZÖGERT"
+   }
+  },
+  {
+   "text": "Du erschrickst und legst sofort auf.",
+   "see": "Du erschrickst zutiefst und legst das Handy sofort mit Panik auf den Tisch.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "table"
+    },
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "fall",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "right"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Dahinter steckt kein Geist, sondern schlichtes Echo.",
+   "see": "Eine bewegte Grafik erklärt ruhig, dass es kein Geist ist, sondern einfaches Echo.",
+   "place": "office",
+   "time": "night",
+   "shot": "graphic",
+   "mood": "scary",
+   "crowd": "walk",
+   "graphic": {
+    "type": "echo",
+    "sub": "",
+    "kicker": "SO ENTSTEHT DAS ECHO"
+   },
+   "status": "URSACHE: ECHO"
+  },
+  {
+   "text": "Deine Stimme kommt beim Freund laut aus dem Lautsprecher.",
+   "see": "Beim Freund drüben schallt deine Stimme laut aus dem Lautsprecher direkt zurück ins Mikrofon.",
+   "place": "bedroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "freund",
+     "action": "talk",
+     "speaks": true,
+     "emotion": "",
+     "emote": "",
+     "hold": "phone",
+     "pos": "center",
+     "facing": "",
+     "say": "",
+     "kind": "",
+     "keep": true
+    }
+   ],
+   "shot": "close",
+   "mood": "scary"
+  },
+  {
+   "text": "Sein Mikrofon fängt sie auf und schickt sie direkt zu dir zurück.",
+   "see": "Sein Mikrofon nimmt die Stimme auf und schickt das Signal sofort durch die Leitung zurück.",
+   "place": "bedroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "freund",
+     "action": "talk",
+     "speaks": true,
+     "emotion": "",
+     "emote": "",
+     "hold": "phone",
+     "pos": "center",
+     "facing": "",
+     "say": "",
+     "kind": "",
+     "keep": true
+    }
+   ],
+   "mood": "scary"
+  },
+  {
+   "text": "Das passiert vor allem, wenn sein Handy auf laut gestellt ist.",
+   "see": "Besonders wenn das Handy beim Freund voll auf Lautsprecher geschaltet ist, passiert dieser Effekt.",
+   "place": "office",
+   "time": "night",
+   "shot": "graphic",
+   "mood": "scary",
+   "crowd": "walk",
+   "graphic": {
+    "type": "echo",
+    "sub": "",
+    "kicker": "SO ENTSTEHT DAS ECHO"
+   }
+  },
+  {
+   "text": "Normalerweise filtert die Echo-Unterdrückung im Handy dieses Signal heraus.",
+   "see": "Eine animierte Filter-Grafik filtert normalerweise Echos im Handy heraus.",
+   "place": "office",
+   "time": "night",
+   "shot": "graphic",
+   "mood": "scary",
+   "crowd": "walk",
+   "graphic": {
+    "type": "echo",
+    "sub": "filter",
+    "kicker": "ECHO-UNTERDRÜCKUNG"
+   }
+  },
+  {
+   "text": "Bei schlechter Verbindung oder zu hoher Lautstärke schafft sie es aber nicht.",
+   "see": "Bei schlechter Internetverbindung versagt der Filter und lässt den Ton durch.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "phone",
+     "facing": "right",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Doch warum klingt die eigene Stimme dabei so fremd?",
+   "see": "Du schaust verwirrt, weil die Stimme im Hörer merkwürdig fremd und dünn klingt.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "scary",
+   "graphic": {
+    "type": "question",
+    "text": "WARUM?",
+    "dark": false
+   }
+  },
+  {
+   "text": "Beim Sprechen hörst du dich selbst auch über deine Schädelknochen.",
+   "see": "Grafik zeigt wie Schallwellen beim Sprechen innen durch die Schädelknochen zum Ohr wandern.",
+   "place": "lab",
+   "time": "night",
+   "props": [
+    {
+     "type": "schädel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "scared"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "scary",
+   "graphic": {
+    "type": "voice",
+    "kicker": "SO HÖRST DU DICH SELBST",
+    "dark": false
+   }
+  },
+  {
+   "text": "Dadurch wirkt deine eigene Stimme für dich tiefer und voller.",
+   "see": "Die Vibration im Kopf lässt deine eigene Stimme in deinem Kopf tiefer wirken.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "phone",
+     "facing": "left",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Aus dem Telefon kommt nur der Schall durch die Luft.",
+   "see": "Grafik zeigt Schallwellen, die diesmal nur außen durch die Luft fliegen.",
+   "place": "lab",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "scared"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "scary",
+   "graphic": {
+    "type": "voice",
+    "kicker": "LUFTÜBERTRAGUNG",
+    "sub": "air",
+    "dark": false
+   }
+  },
+  {
+   "text": "Genau so hören dich alle anderen Menschen.",
+   "see": "Genau diese reine Luftübertragung hören alle anderen Menschen in deiner Umgebung.",
+   "place": "livingroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "talk",
+     "speaks": true,
+     "emotion": "",
+     "emote": "",
+     "say": "",
+     "kind": "",
+     "facing": "",
+     "hold": "phone",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Deshalb mögen die meisten ihre Stimme auf Aufnahmen gar nicht.",
+   "see": "Du verziehst enttäuscht das Gesicht beim Hören deiner aufgenommenen Stimme.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "GEWOHNHEITSSCHOCK"
+   }
+  },
+  {
+   "text": "Telefone übertragen außerdem nur einen Teil der Tonhöhen.",
+   "see": "Ein Frequenzband zeigt, dass Mikrofone hohe und tiefste Töne einfach abschneiden.",
+   "place": "office",
+   "time": "night",
+   "shot": "graphic",
+   "mood": "scary",
+   "crowd": "walk",
+   "graphic": {
+    "type": "echo",
+    "sub": "",
+    "kicker": "SO ENTSTEHT DAS ECHO"
+   }
+  },
+  {
+   "text": "Darum klingt deine Stimme über die Leitung so blechern.",
+   "see": "Du hältst dir verärgert die Ohren zu, weil der Ton blechern schallt.",
+   "place": "bedroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "freund",
+     "action": "talk",
+     "speaks": true,
+     "emotion": "",
+     "emote": "",
+     "hold": "phone",
+     "pos": "center",
+     "facing": "",
+     "say": "",
+     "kind": "",
+     "keep": true
+    }
+   ],
+   "shot": "close",
+   "mood": "scary",
+   "overlay": {
+    "type": "note",
+    "title": "TIPP",
+    "text": "Kopfhörer benutzen!"
+   }
+  },
+  {
+   "text": "Sag deinem Freund einfach, er soll Kopfhörer nutzen, dann antwortet dir am Telefon nie wieder deine eigene Stimme.",
+   "see": "Du nimmst entspannt das Handy wieder ans Ohr und rufst beruhigt deinen Freund an.",
+   "place": "bedroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "freund",
+     "action": "talk",
+     "speaks": true,
+     "emotion": "",
+     "emote": "",
+     "hold": "phone",
+     "pos": "center",
+     "facing": "",
+     "say": "",
+     "kind": "",
+     "keep": true,
+     "wear": "headphones"
+    }
+   ],
+   "mood": "scary",
+   "status": "ECHO: BEHOBEN"
+  }
+ ]
+}
