@@ -1437,6 +1437,15 @@ def main():
         assert s6[2].get("shot") == "graphic" and s6[2]["graphic"].get("text") == "JAHR 1882", s6[2]          # das spätere Jahr als Plakette statt zweimal dieselbe Figur
         assert s6[3].get("shot") != "graphic" and s6[0].get("shot") != "graphic", "nie zwei Plaketten hintereinander, nie im ersten Bild"
         assert not any(sc.get("mood") for sc in s6 if sc.get("shot") != "graphic"), [sc.get("mood") for sc in s6]
+        s7 = stage.direct([{"text": t_, "place": "street", "actors": [{"id": "du", "action": "talk"}],
+                            **({"shot": "graphic", "graphic": {"type": "number", "value": "1882", "label": "82 JAHRE SPÄTER"}} if n_ == 3 else {})} for n_, t_ in enumerate(
+            ["Du landest mit deinem Handy im Jahr achtzehnhundert.", "Das Display wird schwarz, das Handy geht für immer aus.", "Die ersten Kraftwerke gehen erst 1882 ans Netz.",
+             "Erst zweiundachtzig Jahre später gibt es Strom.", "Es landet in einer Vitrine im Museum des Königs.", "Der König staunt täglich über das schwarze Wunderwerk.", "Was hättest du gezeigt?"])],
+                          [(n_ * 4, n_ * 4 + 4) for n_ in range(7)], "Was wäre, wenn du ein Handy mit ins Jahr 1800 nimmst?", "whatif", "")
+        assert s7[2].get("shot") != "graphic" and s7[3].get("shot") == "graphic", "nicht zwei Schaubilder zum selben Jahr hintereinander"
+        assert s7[5].get("place") == "royalmuseum" and [a.get("_outfit") for a in s7[5]["actors"]] == ["period", "king"], (s7[5].get("place"), s7[5]["actors"])
+        assert s7[6].get("place") == "oldtown", s7[6].get("place")
+        frame(s7[5], cast_p)
         hk = [{"text": "Du landest im Jahr 1800."}, {"text": "Du hast kein Netz."}, {"text": "Kein Wunder, denn der erste Satellit startet erst 1957."}, {"text": "Ende."}]
         assert _w.hook_drops(hk, "Dein Handy im Jahr 1800.", "Am Ende ist es ein Museumsstück."), "Satz 3 begründet Satz 2: er bleibt"
         sy = stage.direct([{"text": "Der erste Satellit startet 1957.", "place": "space", "overlay": {"type": "counter", "label": "START", "value": 1957}}], [(0, 4)], "Satelliten", "fakten", "")

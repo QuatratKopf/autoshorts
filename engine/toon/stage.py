@@ -2473,6 +2473,7 @@ def _past_story(scenes, topic="", main_id=""):
                 "pos": pos, "speaks": False, "hold": "", "kind": "", "facing": "", "say": ""}
 
     loc, dead, last_n, n_town, said_dead, last_sig = "town", False, len(scenes) - 1, 0, False, None
+    seen_museum = False
     head_years = set(_re.findall(r"\b\d{3,4}\b", topic_head(topic)))
     for n, sc in enumerate(scenes):
         if not isinstance(sc, dict):
@@ -2488,6 +2489,9 @@ def _past_story(scenes, topic="", main_id=""):
         elif _re.search(P_TOWN_RE, low) and not museum:
             loc = "town"
         here = "museum" if museum else loc
+        if seen_museum and dead and here == "throne" and not _re.search(P_PLUG_RE + "|" + P_BATT_RE, low):
+            here = "museum"                               # das Handy liegt schon in der Vitrine: „Der König staunt täglich über das schwarze Wunderwerk“ spielt dort – die Hauptfigur hielt es sonst wieder in der Hand (Video 188)
+        seen_museum = seen_museum or museum
         if n == last_n and "?" in text and n > 2:
             here = "town"                                 # die Schlussfrage an die Zuschauer: zurück auf den Platz
         dying = bool(_re.search(P_DEAD_RE, low)) and has_phone
@@ -2513,12 +2517,14 @@ def _past_story(scenes, topic="", main_id=""):
               "kind": "", "facing": "", "say": ""}
         yrs_p = [int(y) for y in _re.findall(r"\b(1[0-9]\d\d|20\d\d)\b", year_digits(text) + " " + text) if y not in head_years]   # ein anderes Jahr als das der Geschichte („erst 1826“, „erst 1882“)
         prev_p = scenes[n - 1] if n and isinstance(scenes[n - 1], dict) else {}
-        if yrs_p and n and prev_p.get("shot") != "graphic" and not _re.search(P_GUARD_RE + "|" + P_MUSEUM_RE, low) and not dying:
+        next_p = scenes[n + 1] if n + 1 < len(scenes) and isinstance(scenes[n + 1], dict) else {}
+        next_g = next_p.get("shot") == "graphic" and bool(graphics.clean(next_p.get("graphic"))) and bool(yrs_p) and str(yrs_p[0]) in " ".join(str(v) for v in (next_p.get("graphic") or {}).values())   # der Folgesatz zeigt das Jahr schon als Schaubild: nicht zweimal hintereinander „1882“ (Video 188: 13 Sekunden nur Plaketten)
+        if yrs_p and n and prev_p.get("shot") != "graphic" and not next_g and not _re.search(P_GUARD_RE + "|" + P_MUSEUM_RE, low) and not dying:
             sc["graphic"] = {"type": "badge", "kicker": "ERST SPÄTER", "text": "JAHR %d" % yrs_p[0]}   # „Die ersten Kraftwerke gehen erst 1882 ans Netz“: das Jahr groß als Plakette statt noch einmal dieselbe ratlose Figur (Video 187)
             sc["shot"], sc["overlay"], sc["actors"] = "graphic", None, []
             continue
         if here == "museum":                              # Vitrine in der Mitte, zwei staunende Besucher in der Kleidung der Zeit – die Hauptfigur ist nicht dabei
-            sc["actors"] = [citizen(n, 230, "think", "", "?"), citizen(n + 1, 850, "point", "shocked", "!")]
+            sc["actors"] = [citizen(n, 230, "think", "", "?"), king("point", "shocked", "!", 850) if (_re.search(P_THRONE_RE, low) and not museum) else citizen(n + 1, 850, "point", "shocked", "!")]
             sc["_no_cut"], sc["mood"] = True, ""          # hell: im Halbdunkel verschwand die Vitrine (Video 186)
         elif dying and not said_dead:                     # das Handy geht aus: groß und allein im Bild, der Schirm schwarz
             sc["actors"], sc["props"], sc["shot"], sc["mood"] = [], [{"type": "phone_dead"}], "insert", "sad"
