@@ -7077,7 +7077,7 @@
   "id": 185,
   "category": "whatif",
   "topic": "Was wäre, wenn du ein Smartphone mit ins Jahr 1800 nimmst? – Titel: Smartphone im Jahr 1800: Was passiert wirklich? Titelbild-Text: TIMETRAVEL SMARTPHONE. Vorgaben: Erzähle Schritt für Schritt in der Du-Form vom Moment der Ankunft bis zum Schicksal des Telefons. Erstes Ziel: Nach Sekunden schaust du auf das Display, aber du hast kein Netz, keine SIM-Funktion und kein WLAN, weil kein einziger Masten existiert. Zweitens nach fünf Minuten: Du machst ein Foto mit Blitz von den Menschen auf der Straße. Im Jahr 1800 halten sie das grelle Licht und das magische Bild für Hexerei oder Teufelswerk, die Wachen der Stadt werden gerufen. Drittens nach Stunden: Du wirst dem König oder dem Stadtrat vorgeführt. Du nutzt die Taschenlampen-Funktion, die Offline-Rechner-App und spielst Musik über die Lautsprecher ab, um deine Haut zu retten. Der Herrscher denkt, du bist ein mächtiger Zauberer oder ein Spion aus der Zukunft. Viertens nach zwei Tagen: Der Akku zeigt ein Prozent an und das Handy geht für immer aus. Da es im Jahr 1800 weder Steckdosen noch Stromnetze gibt (erst fast hundert Jahre später erfunden), kannst du es nie wieder aufladen. Twist/Auflösung: Du wirst nicht wegen der Technik berühmt, sondern das wertvollste Gerät der Welt wird zum nutzlosen Stück Glas und Metall im Museum des Königs. Allerletzter Satz als Frage an Gen Z: Welche Offline-App hättest du im Jahr 1800 als Erstes gezeigt?",
-  "status": "review",
+  "status": "discarded",
   "created": 1795360200.2701528,
   "title": "Smartphone im Jahr 1800: Was passiert wirklich?",
   "description": "Was passiert, wenn du mit deinem Smartphone im Jahr 1800 landest?\nDu zeigst dem König deine Apps, aber das größte Problem kommt nach zwei Tagen.",
@@ -7115,6 +7115,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-22 18:00",
-  "review_at": 1795360669.309967
+  "review_at": 1795360669.309967,
+  "error": "Bei der Prüfung verworfen: Jahr 1800 spielt in moderner Stadt: Passanten in Kapuzenpullis, Wache mit Bauhelm, König auf der Straße, Bassbox, Trinkglas, Kraftwerk statt Museum"
  }
 ]
