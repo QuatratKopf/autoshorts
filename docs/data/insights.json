@@ -1,5 +1,5 @@
 {
- "updated": 1795385750.9658048,
+ "updated": 1795387552.1806645,
  "enough": true,
  "counted": 35,
  "total": 38,
@@ -81,10 +81,10 @@
    "slug": "motivation",
    "name": "🔥 Motivation",
    "n": 1,
-   "avg_views": 899,
-   "avg_likes": 47.0,
-   "like_rate": 5.23,
-   "avg_score": 1644
+   "avg_views": 902,
+   "avg_likes": 48.0,
+   "like_rate": 5.32,
+   "avg_score": 1662
   }
  ],
  "weights": {
@@ -94,7 +94,7 @@
   "mysterien": 1.02,
   "tiere": 1.05,
   "whatif": 1.01,
-  "comedy": 1.27,
+  "comedy": 1.26,
   "musik": 0.75,
   "vergleich": 1.2,
   "motivation": 1.2,
@@ -103,19 +103,19 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2283 Aufrufe, 2.04 % Likes).",
-  "Schwächste Kategorie: 🔥 Motivation (Ø 899 Aufrufe) – kommt seltener dran.",
+  "Schwächste Kategorie: 🔥 Motivation (Ø 902 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2474 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2581 zu 2021 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2581 zu 2022 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
  ],
  "words_good": [
   "gänsehaut"
  ],
  "words_bad": [
-  "remix",
-  "bekanntes",
   "lied",
-  "erkennst"
+  "erkennst",
+  "bekanntes",
+  "remix"
  ],
  "top": [
   {
