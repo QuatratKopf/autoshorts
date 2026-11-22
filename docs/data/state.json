@@ -35,7 +35,8 @@
   "2026-11-21 18:00",
   "2026-11-21 21:00",
   "2026-11-22 13:00",
-  "2026-11-22 18:00"
+  "2026-11-22 18:00",
+  "2026-11-22 21:00"
  ],
  "used_queue": [
   "qkv0cbgez",
@@ -53,7 +54,7 @@
   "qa5v1ywsb"
  ],
  "last_stats": 1795369438.3201861,
- "next_id": 189,
+ "next_id": 190,
  "connected": {
   "youtube": {
    "name": "Wissens Wert 💬",
@@ -86,14 +87,16 @@
   "funkel",
   "saints",
   "bella_ciao",
-  "ode_freude"
+  "ode_freude",
+  "auld_lang_syne"
  ],
  "bounce_src": "remix",
- "last_musik": 1795273895.3091567,
+ "last_musik": 1795371118.4742074,
  "bounce_styles": [
   "phonk",
   "pop",
   "glas",
-  "trap"
+  "trap",
+  "glas"
  ]
 }
