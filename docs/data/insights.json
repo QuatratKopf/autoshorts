@@ -1,5 +1,5 @@
 {
- "updated": 1795347353.8987548,
+ "updated": 1795349277.0861645,
  "enough": true,
  "counted": 34,
  "total": 35,
@@ -9,10 +9,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 5,
-   "avg_views": 2271,
+   "avg_views": 2273,
    "avg_likes": 46.4,
    "like_rate": 2.04,
-   "avg_score": 2987
+   "avg_score": 2989
   },
   {
    "slug": "vergleich",
@@ -102,7 +102,7 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2271 Aufrufe, 2.04 % Likes).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2273 Aufrufe, 2.04 % Likes).",
   "Schwächste Kategorie: 🔥 Motivation (Ø 845 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2510 zu 706 Punkte).",
   "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2637 zu 2028 Punkte).",
@@ -113,21 +113,21 @@
   "vier"
  ],
  "words_bad": [
-  "remix",
-  "lied",
   "erkennst",
-  "bekanntes"
+  "lied",
+  "bekanntes",
+  "remix"
  ],
  "top": [
   {
    "id": 168,
    "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
    "category": "comedy",
-   "views": 3575,
+   "views": 3585,
    "likes": 52,
    "comments": 1,
    "shares": 0,
-   "score": 4385
+   "score": 4395
   },
   {
    "id": 46,
