@@ -7489,5 +7489,46 @@
   "thumb": true,
   "look": "noir",
   "mp4": true
+ },
+ {
+  "id": 196,
+  "category": "musik",
+  "topic": "Musik-Kugel: Greensleeves (Lo-Fi Remix)",
+  "status": "published",
+  "created": 1795464130.6949143,
+  "title": "Jede Scheibe ein Ton: Lo-Fi-Remix eines Klassikers",
+  "description": "Ein Lied, das jeder kennt – als Lo-Fi-Remix, jede Glasscheibe ist ein Ton. Erkennst du es? 🎵\nSchreib in die Kommentare, welches Lied es ist – und welches als Nächstes einen Remix bekommen soll!",
+  "hashtags": [
+   "#musik",
+   "#remix",
+   "#lofi",
+   "#satisfying",
+   "#erkennstdudaslied",
+   "#shorts"
+  ],
+  "tags": [
+   "musik",
+   "melodie",
+   "greensleeves (lo-fi remix)",
+   "satisfying"
+  ],
+  "thumb_text": "ERKENNST DU ES?",
+  "duration": 30.4,
+  "providers": {
+   "text": "Melodie",
+   "voice": "eigener Ton"
+  },
+  "thumb": true,
+  "look": "musik",
+  "mp4": true,
+  "zernio_id": "6b049c22fff318cdba6761ea",
+  "yt_status": "public",
+  "yt_id": "aPTvmkEuI9Q",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6b049c22fff318cdba6761ea",
+  "error": null,
+  "yt_thumb_at": 1795464540.700361,
+  "yt_thumb_tries": 1,
+  "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":"
  }
 ]
