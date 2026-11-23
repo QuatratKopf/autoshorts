@@ -1,7 +1,7 @@
 {
- "updated": 1795420145.3380177,
+ "updated": 1795421934.362034,
  "enough": true,
- "counted": 35,
+ "counted": 36,
  "total": 38,
  "needed": 6,
  "categories": [
@@ -9,10 +9,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 5,
-   "avg_views": 2285,
+   "avg_views": 2284,
    "avg_likes": 46.6,
    "like_rate": 2.04,
-   "avg_score": 3004
+   "avg_score": 3003
   },
   {
    "slug": "vergleich",
@@ -72,71 +72,79 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 4,
-   "avg_views": 1578,
+   "avg_views": 1579,
    "avg_likes": 11.0,
    "like_rate": 0.7,
-   "avg_score": 1788
+   "avg_score": 1789
   },
   {
    "slug": "motivation",
    "name": "🔥 Motivation",
    "n": 1,
-   "avg_views": 913,
-   "avg_likes": 48.0,
-   "like_rate": 5.26,
-   "avg_score": 1673
+   "avg_views": 916,
+   "avg_likes": 49.0,
+   "like_rate": 5.35,
+   "avg_score": 1691
+  },
+  {
+   "slug": "grusel",
+   "name": "👻 Grusel",
+   "n": 1,
+   "avg_views": 328,
+   "avg_likes": 17.0,
+   "like_rate": 5.18,
+   "avg_score": 583
   }
  ],
  "weights": {
-  "fakten": 1.01,
+  "fakten": 1.03,
   "grusel": 1.2,
-  "storys": 0.81,
-  "mysterien": 1.02,
-  "tiere": 1.05,
-  "whatif": 1.01,
-  "comedy": 1.26,
-  "musik": 0.75,
+  "storys": 0.83,
+  "mysterien": 1.04,
+  "tiere": 1.07,
+  "whatif": 1.03,
+  "comedy": 1.29,
+  "musik": 0.77,
   "vergleich": 1.2,
   "motivation": 1.2,
   "liebe": 1.2,
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2285 Aufrufe, 2.04 % Likes).",
-  "Schwächste Kategorie: 🔥 Motivation (Ø 913 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2476 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2581 zu 2026 Punkte).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2284 Aufrufe, 2.04 % Likes).",
+  "Schwächste Kategorie: 👻 Grusel (Ø 328 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2421 zu 706 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
  ],
  "words_good": [
   "gänsehaut"
  ],
  "words_bad": [
-  "erkennst",
   "lied",
+  "remix",
   "bekanntes",
-  "remix"
+  "erkennst"
  ],
  "top": [
   {
    "id": 168,
    "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
    "category": "comedy",
-   "views": 3968,
+   "views": 3966,
    "likes": 53,
    "comments": 1,
    "shares": 0,
-   "score": 4793
+   "score": 4791
   },
   {
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2578,
+   "views": 2579,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3418
+   "score": 3419
   },
   {
    "id": 77,
@@ -171,16 +179,6 @@
  ],
  "flop": [
   {
-   "id": 180,
-   "title": "Wie die NASA Voyager 1 aus 24 Milliarden Kilometern rettete",
-   "category": "storys",
-   "views": 727,
-   "likes": 11,
-   "comments": 0,
-   "shares": 0,
-   "score": 892
-  },
-  {
    "id": 58,
    "title": "Wie aus einer Gaming-Bude der wertvollste Tech-Gigant wurde",
    "category": "fakten",
@@ -189,6 +187,16 @@
    "comments": 0,
    "shares": 0,
    "score": 853
+  },
+  {
+   "id": 184,
+   "title": "Warum antwortet dir am Telefon deine eigene Stimme?",
+   "category": "grusel",
+   "views": 328,
+   "likes": 17,
+   "comments": 0,
+   "shares": 0,
+   "score": 583
   },
   {
    "id": 44,
