@@ -1,5 +1,5 @@
 {
- "updated": 1795396556.435725,
+ "updated": 1795398354.087878,
  "enough": true,
  "counted": 35,
  "total": 38,
@@ -72,19 +72,19 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 4,
-   "avg_views": 1575,
+   "avg_views": 1578,
    "avg_likes": 11.0,
    "like_rate": 0.7,
-   "avg_score": 1785
+   "avg_score": 1788
   },
   {
    "slug": "motivation",
    "name": "🔥 Motivation",
    "n": 1,
-   "avg_views": 902,
+   "avg_views": 903,
    "avg_likes": 48.0,
    "like_rate": 5.32,
-   "avg_score": 1662
+   "avg_score": 1663
   }
  ],
  "weights": {
@@ -103,30 +103,30 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2284 Aufrufe, 2.04 % Likes).",
-  "Schwächste Kategorie: 🔥 Motivation (Ø 902 Aufrufe) – kommt seltener dran.",
+  "Schwächste Kategorie: 🔥 Motivation (Ø 903 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2475 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2581 zu 2024 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2581 zu 2025 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
  ],
  "words_good": [
   "gänsehaut"
  ],
  "words_bad": [
-  "remix",
-  "erkennst",
   "bekanntes",
-  "lied"
+  "remix",
+  "lied",
+  "erkennst"
  ],
  "top": [
   {
    "id": 168,
    "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
    "category": "comedy",
-   "views": 3965,
+   "views": 3964,
    "likes": 53,
    "comments": 1,
    "shares": 0,
-   "score": 4790
+   "score": 4789
   },
   {
    "id": 46,
