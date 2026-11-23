@@ -1,5 +1,5 @@
 {
- "updated": 1795414733.5049555,
+ "updated": 1795416535.1814055,
  "enough": true,
  "counted": 35,
  "total": 38,
@@ -112,10 +112,10 @@
   "gänsehaut"
  ],
  "words_bad": [
-  "bekanntes",
-  "lied",
+  "erkennst",
   "remix",
-  "erkennst"
+  "lied",
+  "bekanntes"
  ],
  "top": [
   {
@@ -132,11 +132,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2578,
+   "views": 2577,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3418
+   "score": 3417
   },
   {
    "id": 77,
