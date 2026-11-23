@@ -7390,5 +7390,48 @@
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7711324046012484897?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
+ },
+ {
+  "id": 192,
+  "category": "nachricht",
+  "topic": "Eine unbekannte Nummer schickt dir einen Countdown – und zwingt dich, eine verschlossene Tür auf deinem Dachboden zu suchen, von der du noch nie gehört hast.",
+  "status": "review",
+  "created": 1795446776.7935004,
+  "title": "Das Rätsel der verschlossenen Tür auf dem Dachboden",
+  "description": "Ein Countdown per SMS zwingt dich zu einer unheimlichen Suche.\nEine unbekannte Nummer schickt dir Anweisungen, die du befolgen musst. Was befindet sich hinter der Tür?\nWürdest du die geheimnisvolle Tür auf dem Dachboden öffnen?",
+  "hashtags": [
+   "#shorts",
+   "#mystery",
+   "#grusel",
+   "#storytime",
+   "#creepy",
+   "#fyp",
+   "#viral"
+  ],
+  "tags": [
+   "unbekannte nummer",
+   "mystery story",
+   "gruselgeschichte",
+   "spannung",
+   "countdown",
+   "dachboden",
+   "geheimnis"
+  ],
+  "thumb_text": "ÖFFNE DIE TÜR",
+  "missing": [
+   "countdown"
+  ],
+  "cover_ms": 69079,
+  "duration": 69.0,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "noir",
+  "mp4": true,
+  "slot": "2026-11-23 18:00",
+  "review_at": 1795447185.934194
  }
 ]

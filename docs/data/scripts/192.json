@@ -1,0 +1,529 @@
+{
+ "title": "Das Rätsel der verschlossenen Tür auf dem Dachboden",
+ "scenes": [
+  {
+   "text": "Eine unbekannte Nummer schickt dir einen Countdown zu deiner Dachbodentür.",
+   "see": "Die Hauptfigur schläft nachts im dunklen Schlafzimmer, während das Handy aufleuchtet.",
+   "place": "attic",
+   "time": "night",
+   "props": [
+    {
+     "type": "clock"
+    },
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "sleep",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary"
+  },
+  {
+   "text": "Doch was hinter dem Schloss wartet, verändert alles.",
+   "see": "Eine Nachricht erscheint auf dem Handy-Bildschirm mit unheimlichen Zeilen.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "message",
+    "kicker": "UNBEKANNT",
+    "dark": false,
+    "lines": [
+     "In sieben Tagen",
+     "beginnt es.",
+     "Finde die Tür.",
+     "!Öffne niemals die Tür."
+    ]
+   }
+  },
+  {
+   "text": "Du hältst das Ganze für einen schlechten Scherz.",
+   "see": "Die Hauptfigur greift überrascht nach dem Handy.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Doch dann schreibt die Nummer etwas, das niemand wissen kann.",
+   "see": "Eine zweite Nachricht trifft auf dem Bildschirm ein.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "phone",
+    "kicker": "UNBEKANNT",
+    "sub": "Wer bist du?",
+    "text": "In deinem Kühlschrank liegt eine halbe Pizza",
+    "dark": false,
+    "mode": "chat"
+   }
+  },
+  {
+   "text": "In deinem Kühlschrank liegen eine halbe Pizza und ein kaputter Regenschirm.",
+   "see": "Die Hauptfigur öffnet in der dunklen Küche den Kühlschrank und ist schockiert.",
+   "place": "kitchen",
+   "time": "night",
+   "props": [
+    {
+     "type": "fridge"
+    },
+    {
+     "type": "pizza"
+    },
+    {
+     "type": "regenschirm"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "umbrella",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary",
+   "overlay": {
+    "type": "card",
+    "text": "ES STIMMT"
+   }
+  },
+  {
+   "text": "Der Countdown beginnt zu laufen.",
+   "see": "Ein Kapitel-Countdown wird eingeblendet: Noch 7 Tage.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "scared"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "scary",
+   "graphic": {
+    "type": "chapter",
+    "value": "7",
+    "text": "ZEIT LÄUFT",
+    "dark": false
+   }
+  },
+  {
+   "text": "Am ersten Tag sollst du dreihundert Konservendosen kaufen.",
+   "see": "Ein Anweisungsschild fordert auf, Vorräte zu kaufen.",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "cart"
+    },
+    {
+     "type": "cans"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "center"
+    }
+   ],
+   "mood": "calm",
+   "crowd": "walk",
+   "overlay": {
+    "type": "note",
+    "title": "ANWEISUNG 1",
+    "text": "Kaufe 300 Dosen"
+   },
+   "status": "DOSEN: 300 STÜCK"
+  },
+  {
+   "text": "Am dritten Tag musst du die alte Dachbodentür suchen, doch existiert sie überhaupt?",
+   "see": "Die Hauptfigur steht verängstigt auf dem Dachboden vor einer geheimnisvollen Tür.",
+   "place": "attic",
+   "time": "night",
+   "props": [
+    {
+     "type": "door"
+    },
+    {
+     "type": "flashlight"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "flashlight",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary",
+   "status": "TÜR: GEFUNDEN"
+  },
+  {
+   "text": "Aber du hast dort oben noch nie eine Tür gesehen.",
+   "see": "Die Hauptfigur betrachtet eine schwere Eisenkette mit Schloss an der Dachbodentür.",
+   "place": "attic",
+   "time": "night",
+   "props": [
+    {
+     "type": "door"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "flashlight",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary"
+  },
+  {
+   "text": "Der letzte Tag bricht an.",
+   "see": "Ein Kapitel-Countdown wird eingeblendet: Noch 1 Tag.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "scared"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "scary",
+   "graphic": {
+    "type": "chapter",
+    "value": "1",
+    "text": "FINALE",
+    "dark": false
+   }
+  },
+  {
+   "text": "Die Nachricht warnt dich vor allen Menschen in deiner Nähe.",
+   "see": "Eine Nachricht fordert absolutes Schweigen gegenüber allen Nachbarn.",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "scared"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "scary",
+   "graphic": {
+    "type": "message",
+    "kicker": "UNBEKANNT",
+    "dark": false,
+    "lines": [
+     "Sprich mit niemandem.",
+     "!Besonders nicht mit dem Nachbarn."
+    ]
+   }
+  },
+  {
+   "text": "Dein Nachbar schleicht bereits misstrauisch durch das Treppenhaus.",
+   "see": "Die Hauptfigur späht ängstlich durch den Türspion im Flur.",
+   "place": "hallway",
+   "time": "day",
+   "props": [
+    {
+     "type": "door"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "cower",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary",
+   "status": "NACHBAR: VOR DER TÜR"
+  },
+  {
+   "text": "Im Fernsehen läuft plötzlich eine merkwürdige Eilmeldung.",
+   "see": "Eine Fernsehmeldung warnt vor seltsamen Signalen im ganzen Land.",
+   "place": "livingroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "tv"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "scared"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "scary",
+   "graphic": {
+    "type": "news",
+    "kicker": "EILMELDUNG",
+    "sub": "Bundesweite Warnung vor Signalen",
+    "text": "RÄTSELHAFTE NACHRICHTEN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Alle Mobiltelefone im Land erhalten dieselbe Anweisung.",
+   "see": "Die Hauptfigur sitzt verzweifelt im Wohnzimmer vor dem Fernseher.",
+   "place": "livingroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "tv"
+    },
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "ALLE HANDYS"
+   }
+  },
+  {
+   "text": "Die Zeit läuft ab und der Countdown erreicht null.",
+   "see": "Ein Herzschlag-Puls flackert als Grafik auf – Nullstunde rückt näher.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "door"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Plötzlich springt das Schloss der hölzernen Dachbodentür von alleine auf.",
+   "see": "Die Hauptfigur weicht erschrocken zurück, als die Dachbodentür von selbst aufbricht.",
+   "place": "attic",
+   "time": "night",
+   "props": [
+    {
+     "type": "door"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "fall",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "status": "TÜR: OFFEN"
+  },
+  {
+   "text": "Ein letzter Blick auf dein Handy verrät den Absender.",
+   "see": "Das Display zeigt eine Enthüllungsnachricht der unbekannten Nummer.",
+   "place": "attic",
+   "time": "night",
+   "props": [
+    {
+     "type": "door"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "scared"
+    }
+   ],
+   "mood": "scary"
+  },
+  {
+   "text": "Die Nachricht stammt von dir selbst aus der Zukunft.",
+   "see": "Die Hauptfigur blickt völlig fassungslos in das helle Licht der offenen Tür.",
+   "place": "attic",
+   "time": "night",
+   "props": [
+    {
+     "type": "door"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "freeze",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "scary"
+  },
+  {
+   "text": "Drei Uhr zwölf. Dein Handy vibriert auf dem Nachttisch.",
+   "see": "Die Hauptfigur schläft im Bett – doch das Handy vibriert erneut.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "clock"
+    },
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "idle",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary"
+  }
+ ]
+}
