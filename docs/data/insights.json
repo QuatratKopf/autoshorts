@@ -1,5 +1,5 @@
 {
- "updated": 1795456898.7862582,
+ "updated": 1795458674.757214,
  "enough": true,
  "counted": 38,
  "total": 39,
@@ -9,19 +9,19 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 5,
-   "avg_views": 2286,
+   "avg_views": 2287,
    "avg_likes": 46.6,
    "like_rate": 2.04,
-   "avg_score": 3005
+   "avg_score": 3006
   },
   {
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 1,
-   "avg_views": 2344,
+   "avg_views": 2347,
    "avg_likes": 34.0,
    "like_rate": 1.45,
-   "avg_score": 2854
+   "avg_score": 2857
   },
   {
    "slug": "tiere",
@@ -45,10 +45,10 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 11,
-   "avg_views": 1717,
+   "avg_views": 1718,
    "avg_likes": 46.6,
-   "like_rate": 2.72,
-   "avg_score": 2419
+   "like_rate": 2.71,
+   "avg_score": 2421
   },
   {
    "slug": "fakten",
@@ -90,10 +90,10 @@
    "slug": "grusel",
    "name": "👻 Grusel",
    "n": 1,
-   "avg_views": 397,
+   "avg_views": 392,
    "avg_likes": 19.0,
-   "like_rate": 4.79,
-   "avg_score": 682
+   "like_rate": 4.85,
+   "avg_score": 677
   }
  ],
  "weights": {
@@ -111,9 +111,9 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2286 Aufrufe, 2.04 % Likes).",
-  "Schwächste Kategorie: 👻 Grusel (Ø 397 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2389 zu 706 Punkte).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2287 Aufrufe, 2.04 % Likes).",
+  "Schwächste Kategorie: 👻 Grusel (Ø 392 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2390 zu 706 Punkte).",
   "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2508 zu 1946 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
@@ -123,9 +123,9 @@
  ],
  "words_bad": [
   "remix",
-  "lied",
-  "erkennst",
   "bekanntes",
+  "erkennst",
+  "lied",
   "glas"
  ],
  "top": [
@@ -143,11 +143,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2582,
+   "views": 2584,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3422
+   "score": 3424
   },
   {
    "id": 77,
@@ -185,21 +185,21 @@
    "id": 189,
    "title": "Jede Scheibe ein Ton: Glas-Remix eines Klassikers",
    "category": "musik",
-   "views": 535,
+   "views": 539,
    "likes": 10,
    "comments": 1,
    "shares": 0,
-   "score": 715
+   "score": 719
   },
   {
    "id": 184,
    "title": "Warum antwortet dir am Telefon deine eigene Stimme?",
    "category": "grusel",
-   "views": 397,
+   "views": 392,
    "likes": 19,
    "comments": 0,
    "shares": 0,
-   "score": 682
+   "score": 677
   },
   {
    "id": 44,
