@@ -1,645 +1,4 @@
 {
- "2026-11-22 13:00": {
-  "category": "grusel",
-  "topic": "Das unheimliche Phänomen der 'Doppelgänger-Stimmen' beim Telefonieren: Warum hunderte Gen-Z-User schwören, sie hätten am Ende des Anrufs sich selbst antworten hören – und was die Forschung dazu sagt.",
-  "trend": null,
-  "script": {
-   "title": "Doppelgänger am Telefon: Hörst du dich selbst?",
-   "description": "Was passiert, wenn dein eigener Doppelgänger am Telefon mit dir spricht?\nHunderte Gen-Z-User berichten von unheimlichen Anrufen auf TikTok.\nWürdest du sofort auflegen oder weiterreden?",
-   "hashtags": [
-    "#shorts",
-    "#doppelgänger",
-    "#grusel",
-    "#creepypasta",
-    "#mystery",
-    "#phenomenon",
-    "#genz",
-    "#viral"
-   ],
-   "tags": [
-    "doppelgänger am telefon",
-    "unheimliche anrufe",
-    "gruselgeschichte deutsch",
-    "tiktok trend",
-    "stimme gedoppelt",
-    "mystery story",
-    "ki stimme am telefon",
-    "netzwerk verzögerung"
-   ],
-   "thumbnail": {
-    "image": "Close-up of a young person holding a smartphone to their ear in a dark room, eyes wide with horror, dramatic lighting from the phone screen",
-    "text": "STIMME AUS DER ZUKUNFT"
-   },
-   "wishes": [
-    "audiolog"
-   ],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "lila",
-     "hat": "",
-     "hair": "ponytail",
-     "gender": "w",
-     "hair_color": "blond",
-     "skin": "weiß"
-    },
-    "freund": {
-     "shirt": "schwarz",
-     "hat": "beanie",
-     "hair": "",
-     "gender": "m",
-     "hair_color": "dunkelbraun",
-     "skin": "weiß"
-    }
-   },
-   "scenes": [
-    {
-     "see": "Ein Mädchen telefoniert spät nachts in ihrem dunklen Zimmer.",
-     "text": "Hunderte Gen-Z-User hören am Telefon ihre eigene Stimme.",
-     "image": "Girl holding phone near ear late at night, whispering in shock, room is dark",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      " TikTok",
-      "sich selbst"
-     ],
-     "hud": "23:42 UHR · DEUTSCHLAND",
-     "status": "SIGNAL: AKTIV",
-     "overlay": {
-      "type": "card",
-      "text": "VIRALER ANRUF"
-     },
-     "time": "night",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "worried",
-       "hold": "phone",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "crowd": "",
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "see": "Das Mädchen zuckt zusammen, weil das Handy ein Wort nachspricht.",
-     "text": "Und das Verstörendste daran geschieht erst nach genau drei Sekunden Schweigen.",
-     "image": "Girl cowering in fear while holding glowing phone, eyes wide open",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "still",
-     "sfx": "tick",
-     "highlight": [
-      "drei Sekunden"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "3 SEKUNDEN PAUSE"
-     },
-     "who_desc": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "speaks": true,
-       "pos": "center"
-      }
-     ],
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein verschwommener Schatten hinter dem Vorhang.",
-     "text": "Stell dir vor, du rufst spät nachts deinen besten Kumpel an.",
-     "image": "Girl looking at phone screen with confusion in dimmed room",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "besten Kumpel"
-     ],
-     "overlay": null,
-     "time": "night",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "happy",
-       "hold": "phone",
-       "speaks": true
-      },
-      {
-       "id": "freund",
-       "action": "sit",
-       "emotion": "calm"
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "crowd": "",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Freund nimmt am anderen Ende den Hörer ab.",
-     "text": "Er antwortet ganz normal, aber seine Stimme klingt irgendwie mechanisch und fremd.",
-     "image": "Boy with headphones talking on phone, dark lighting, serious look",
-     "who": [
-      "freund"
-     ],
-     "place": "zimmer",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "mechanisch"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "ANRUF VERBUNDEN"
-     },
-     "who_desc": "",
-     "actors": [
-      {
-       "id": "freund",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "speaks": true,
-       "pos": "center"
-      }
-     ],
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Mädchen spricht ein Wort in ihr Handy.",
-     "text": "Du fragst, wo er bleibt, aber warum antwortet dir plötzlich genau deine eigene Stimme?",
-     "image": "Girl speaking nervously into glowing smartphone",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "eigene Stimme"
-     ],
-     "overlay": null,
-     "time": "night",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "?",
-       "hold": "phone",
-       "speaks": true
-      }
-     ],
-     "shot": "close",
-     "mood": "scary",
-     "crowd": "",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Hauptfigur erstarrt mit aufgerissenen Augen.",
-     "text": "Sie wiederholt deinen letzten Satz Wort für Wort, aber lacht plötzlich ganz leise.",
-     "image": "Girl freezing in horror, eyes wide open, hand over mouth",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "lacht plötzlich"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "DOPPELGÄNGER",
-      "color": "red"
-     },
-     "who_desc": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "speaks": true,
-       "pos": "center"
-      }
-     ],
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Welle von Panik breitet sich auf einer Karte aus.",
-     "text": "Du denkst natürlich sofort an einen fiesen KI-Stimmen-Prank deines Kumpels.",
-     "image": "Girl shaking head in disbelief while looking at phone",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "KI-Stimmen-Prank"
-     ],
-     "overlay": {
-      "type": "choice",
-      "a": "Auflegen",
-      "b": "Weiterhören"
-     },
-     "who_desc": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "speaks": true,
-       "pos": "center"
-      }
-     ],
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Freund schüttelt den Kopf, hat das Handy gar nicht in der Hand.",
-     "text": "Falsch, denn sein Handy lag zu diesem Zeitpunkt ausgeschaltet auf dem Tisch.",
-     "image": "Boy sitting at table, phone lying off on desk far away",
-     "who": [
-      "freund"
-     ],
-     "place": "zimmer",
-     "camera": "pan_right",
-     "sfx": "ding",
-     "highlight": [
-      "ausgeschaltet"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "HANDY AUS",
-      "color": "purple"
-     },
-     "who_desc": "",
-     "actors": [
-      {
-       "id": "freund",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "speaks": true,
-       "pos": "center"
-      }
-     ],
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein großer Serverschrank mit blinkenden Notlichtern.",
-     "text": "Netzwerk-Experten vermuten, dass solche Effekte durch Verzögerungen und Echos in der Leitung entstehen.",
-     "image": "Blinking lights inside a futuristic dark server room, no actors",
-     "who": [],
-     "place": "server",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Fünf-G-Netz"
-     ],
-     "shot": "event",
-     "overlay": {
-      "type": "card",
-      "text": "TECHNIK-ECHO"
-     },
-     "who_desc": "",
-     "place_desc": "serverroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafik zeigt das Signal, das im Kreis läuft.",
-     "text": "Die digitale Sprachleitung spiegelt dein Audiosignal wie ein alter Wand-Spiegel im Raum.",
-     "image": "Graphic pulse line going in circles with red warning glow",
-     "who": [],
-     "place": "server",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "spiegelt"
-     ],
-     "shot": "graphic",
-     "graphic": {
-      "type": "pulse",
-      "value": "5G",
-      "label": "ECHO-PROTKOLL"
-     },
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "serverroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Hauptfigur sieht wieder besorgt aus.",
-     "text": "Aber das erklärt noch lange nicht die vielen gruseligen Abweichungen in den Aufnahmen.",
-     "image": "Girl looking worriedly at screen showing audio waveform",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Abweichungen"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "RÄTSELHAFT"
-     },
-     "who_desc": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "speaks": true,
-       "pos": "center"
-      }
-     ],
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Zwei Audiowellen im Vergleich untereinander.",
-     "text": "Audio-Analysen zeigen bei manchen dieser Aufnahmen leicht veränderte Tonhöhen.",
-     "image": "Graphic comparing two soundwaves on black background",
-     "who": [],
-     "place": "zimmer",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "sechzig Prozent"
-     ],
-     "shot": "graphic",
-     "graphic": {
-      "type": "compare",
-      "left": "DU",
-      "right": "ECHO",
-      "value": "440 Hz",
-      "sub": "410 Hz"
-     },
-     "overlay": {
-      "type": "counter",
-      "label": "ANALYSE",
-      "value": 60,
-      "unit": "AUDIO"
-     },
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Hauptfigur hält das Handy mit zitternden Händen.",
-     "text": "Der Doppelgänger antwortet manchmal Dinge, die du selbst nie laut ausgesprochen hast.",
-     "image": "Girl trembling while holding phone close to her face, scared emotion",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "shake",
-     "sfx": "whoosh",
-     "highlight": [
-      "nie laut ausgesprochen"
-     ],
-     "status": "PANIK: HOCH",
-     "overlay": null,
-     "who_desc": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "speaks": true,
-       "pos": "center"
-      }
-     ],
-     "place_desc": "bedroom",
-     "hud": ""
-    },
-    {
-     "see": "Ein Handybildschirm zeigt eine unheimliche SMS.",
-     "text": "Manche Nutzer berichten sogar von angeblichen Antworten auf Fragen, die sie kurz zuvor gestellt hatten.",
-     "image": "Dark screen showing incoming voice message from unknown contact",
-     "who": [],
-     "place": "zimmer",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "nur gedacht"
-     ],
-     "shot": "graphic",
-     "graphic": {
-      "type": "phone",
-      "mode": "lock",
-      "value": "23:45",
-      "kicker": "DOPPELGÄNGER",
-      "text": "Ich höre dich."
-     },
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine schwarze Welle mit rotem Ausrufezeichen.",
-     "text": "Vermutlich stecken dahinter aber einfach nur technische Störungen oder geschickte Online-Pranks.",
-     "image": "Warning badge with exclamation mark glowing red",
-     "who": [],
-     "place": "server",
-     "camera": "zoom_out",
-     "sfx": "none",
-     "highlight": [
-      "KI-Bots"
-     ],
-     "shot": "graphic",
-     "graphic": {
-      "type": "question",
-      "text": "KI TEST?"
-     },
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "serverroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Mädchen drückt verzweifelt auf den roten Auflegen-Knopf.",
-     "text": "Du willst panisch auflegen, aber das Gespräch lässt sich nicht mehr beenden.",
-     "image": "Girl pressing phone red button frantically, sweat emote",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "nicht mehr beenden"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "FEHLER",
-      "color": "red"
-     },
-     "who_desc": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "speaks": true,
-       "pos": "center"
-      }
-     ],
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Handybildschirm leuchtet dunkelrot auf.",
-     "text": "Das Display flackert kurz auf, während die Verbindung in diesem Moment plötzlich von alleine abbricht.",
-     "image": "Smartphone sitting on floor in darkness with screen dimly flickering red",
-     "who": [],
-     "place": "zimmer",
-     "camera": "zoom_in",
-     "sfx": "boom",
-     "highlight": [
-      "deinen Namen"
-     ],
-     "shot": "insert",
-     "props": [
-      "phone"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "VERBINDUNG WEG"
-     },
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Mädchen zieht sich erschrocken unter die Bettdecke.",
-     "text": "Erst nach einem kurzen Schreck hörst du beim erneuten Abheben wieder das ganz normale Freizeichen.",
-     "image": "Girl freezing under bed covers, looking terrified into the darkness",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "still",
-     "sfx": "tick",
-     "highlight": [
-      "Freizeichen"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "speaks": true,
-       "pos": "center"
-      }
-     ],
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Mädchen hebt erneut vorsichtig das Handy ans Ohr.",
-     "text": "Ob technischer Fehler oder viraler Trend: Es bleibt unheimlich, wenn du plötzlich deine eigene Stimme hörst.",
-     "image": "Girl holding phone back up to her ear with shocked expression",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "sich selbst"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "speaks": true,
-       "pos": "center"
-      }
-     ],
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "23:42 UHR · ANRUF LÄUFT",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [
-   "display"
-  ],
-  "title": "Doppelgänger am Telefon: Hörst du dich selbst?",
-  "created": 1795285361.1395626
- },
  "2026-11-22 18:00": {
   "category": "whatif",
   "topic": "Was wäre, wenn du ein Smartphone mit ins Jahr 1800 nimmst? – Titel: Smartphone im Jahr 1800: Was passiert wirklich? Titelbild-Text: TIMETRAVEL SMARTPHONE. Vorgaben: Erzähle Schritt für Schritt in der Du-Form vom Moment der Ankunft bis zum Schicksal des Telefons. Erstes Ziel: Nach Sekunden schaust du auf das Display, aber du hast kein Netz, keine SIM-Funktion und kein WLAN, weil kein einziger Masten existiert. Zweitens nach fünf Minuten: Du machst ein Foto mit Blitz von den Menschen auf der Straße. Im Jahr 1800 halten sie das grelle Licht und das magische Bild für Hexerei oder Teufelswerk, die Wachen der Stadt werden gerufen. Drittens nach Stunden: Du wirst dem König oder dem Stadtrat vorgeführt. Du nutzt die Taschenlampen-Funktion, die Offline-Rechner-App und spielst Musik über die Lautsprecher ab, um deine Haut zu retten. Der Herrscher denkt, du bist ein mächtiger Zauberer oder ein Spion aus der Zukunft. Viertens nach zwei Tagen: Der Akku zeigt ein Prozent an und das Handy geht für immer aus. Da es im Jahr 1800 weder Steckdosen noch Stromnetze gibt (erst fast hundert Jahre später erfunden), kannst du es nie wieder aufladen. Twist/Auflösung: Du wirst nicht wegen der Technik berühmt, sondern das wertvollste Gerät der Welt wird zum nutzlosen Stück Glas und Metall im Museum des Königs. Allerletzter Satz als Frage an Gen Z: Welche Offline-App hättest du im Jahr 1800 als Erstes gezeigt?",
@@ -2117,5 +1476,755 @@
   ],
   "title": "3 Zeichen, dass deine Situationship in dich verliebt ist",
   "created": 1795371357.5313702
+ },
+ "2026-11-23 18:00": {
+  "category": "nachricht",
+  "topic": "Eine unbekannte Nummer schickt dir einen Countdown – und zwingt dich, eine verschlossene Tür auf deinem Dachboden zu suchen, von der du noch nie gehört hast.",
+  "trend": null,
+  "script": {
+   "title": "Das Rätsel der verschlossenen Tür auf dem Dachboden",
+   "description": "Ein Countdown per SMS zwingt dich zu einer unheimlichen Suche.\nEine unbekannte Nummer schickt dir Anweisungen, die du befolgen musst. Was befindet sich hinter der Tür?\nWürdest du die geheimnisvolle Tür auf dem Dachboden öffnen?",
+   "hashtags": [
+    "#shorts",
+    "#mystery",
+    "#grusel",
+    "#storytime",
+    "#creepy",
+    "#fyp",
+    "#viral"
+   ],
+   "tags": [
+    "unbekannte nummer",
+    "mystery story",
+    "gruselgeschichte",
+    "spannung",
+    "countdown",
+    "dachboden",
+    "geheimnis"
+   ],
+   "thumbnail": {
+    "image": "Close-up of a terrified young man holding a glowing smartphone in a dark bedroom, shadow looming over a mysterious attic door in the background, dramatic cinematic lighting.",
+    "text": "ÖFFNE DIE TÜR"
+   },
+   "wishes": [
+    "pizza",
+    "regenschirm"
+   ],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "grau",
+     "hat": "",
+     "hair": "kurz",
+     "gender": "m",
+     "hair_color": "dunkelbraun",
+     "skin": "hell"
+    }
+   },
+   "scenes": [
+    {
+     "see": "Die Hauptfigur schläft nachts im dunklen Schlafzimmer, während das Handy aufleuchtet.",
+     "text": "Eine unbekannte Nummer schickt dir einen Countdown zu deiner Dachbodentür.",
+     "image": "Young man sleeping in bed, smartphone lights up brightly on nightstand in dark room.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "clock",
+      "phone"
+     ],
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "vibriert"
+     ],
+     "hud": "3:12 UHR",
+     "status": "",
+     "overlay": {
+      "type": "tag",
+      "text": "UNBEKANNTE NUMMER"
+     },
+     "actors": [
+      {
+       "id": "du",
+       "action": "sleep",
+       "emotion": "",
+       "emote": "",
+       "pos": "center",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": "dark bedroom at night, single bed, glowing smartphone on nightstand"
+    },
+    {
+     "see": "Eine Nachricht erscheint auf dem Handy-Bildschirm mit unheimlichen Zeilen.",
+     "text": "Doch was hinter dem Schloss wartet, verändert alles.",
+     "image": "Dark text message screen with typing lines and a red warning at the end.",
+     "who": [],
+     "place": "zimmer",
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "shot": "graphic",
+     "graphic": {
+      "type": "message",
+      "kicker": "UNBEKANNT",
+      "lines": [
+       "In sieben Tagen",
+       "beginnt es.",
+       "Finde die Tür.",
+       "!Öffne niemals die Tür."
+      ]
+     },
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Nachricht"
+     ],
+     "overlay": null,
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "dark bedroom at night, single bed, glowing smartphone on nightstand",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Hauptfigur greift überrascht nach dem Handy.",
+     "text": "Du hältst das Ganze für einen schlechten Scherz.",
+     "image": "Young man sits up in bed holding his phone with a skeptical expression.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "shot": "close",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Scherz"
+     ],
+     "overlay": null,
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "?",
+       "hold": "phone",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "dark bedroom at night, single bed, glowing smartphone on nightstand",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine zweite Nachricht trifft auf dem Bildschirm ein.",
+     "text": "Doch dann schreibt die Nummer etwas, das niemand wissen kann.",
+     "image": "Handy screen displaying a very specific note about the contents of the fridge.",
+     "who": [],
+     "place": "zimmer",
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "shot": "graphic",
+     "graphic": {
+      "type": "phone",
+      "mode": "chat",
+      "kicker": "UNBEKANNT",
+      "text": "In deinem Kühlschrank liegt eine halbe Pizza.",
+      "sub": "Wer bist du?"
+     },
+     "camera": "still",
+     "sfx": "whoosh",
+     "highlight": [
+      "wissen"
+     ],
+     "overlay": null,
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "dark bedroom at night, single bed, glowing smartphone on nightstand",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Hauptfigur öffnet in der dunklen Küche den Kühlschrank und ist schockiert.",
+     "text": "In deinem Kühlschrank liegen eine halbe Pizza und ein kaputter Regenschirm.",
+     "image": "Young man opens fridge door in dark kitchen, wide-eyed in shock, seeing pizza and umbrella inside.",
+     "who": [
+      "du"
+     ],
+     "place": "kitchen",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "fridge",
+      "pizza",
+      "regenschirm"
+     ],
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "boom",
+     "highlight": [
+      "Kühlschrank"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "ES STIMMT"
+     },
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Kapitel-Countdown wird eingeblendet: Noch 7 Tage.",
+     "text": "Der Countdown beginnt zu laufen.",
+     "image": "Chapter card on black background showing 7 days remaining.",
+     "who": [],
+     "place": "zimmer",
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "shot": "graphic",
+     "graphic": {
+      "type": "chapter",
+      "value": "7",
+      "text": "ZEIT LÄUFT"
+     },
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "Countdown"
+     ],
+     "overlay": null,
+     "actors": [],
+     "crowd": "",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": "dark bedroom at night, single bed, glowing smartphone on nightstand",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Anweisungsschild fordert auf, Vorräte zu kaufen.",
+     "text": "Am ersten Tag sollst du dreihundert Konservendosen kaufen.",
+     "image": "Shopping cart overflowing with tin cans in a supermarket aisle.",
+     "who": [
+      "du"
+     ],
+     "place": "supermarket",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "cart",
+      "cans"
+     ],
+     "shot": "wide",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "Konservendosen"
+     ],
+     "status": "DOSEN: 300 STÜCK",
+     "overlay": {
+      "type": "note",
+      "title": "ANWEISUNG 1",
+      "text": "Kaufe 300 Dosen"
+     },
+     "actors": [
+      {
+       "id": "du",
+       "action": "walk",
+       "emotion": "worried",
+       "emote": "",
+       "pos": "left",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "walk",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": ""
+    },
+    {
+     "see": "Die Hauptfigur steht verängstigt auf dem Dachboden vor einer geheimnisvollen Tür.",
+     "text": "Am dritten Tag musst du die alte Dachbodentür suchen, doch existiert sie überhaupt?",
+     "image": "Young man with flashlight pointing at a heavy locked wooden door in dusty attic.",
+     "who": [
+      "du"
+     ],
+     "place": "attic",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "door",
+      "flashlight"
+     ],
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "Dachboden"
+     ],
+     "status": "TÜR: GEFUNDEN",
+     "overlay": {
+      "type": "tag",
+      "text": "VERSTECKTE TÜR"
+     },
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "scared",
+       "emote": "!",
+       "hold": "flashlight",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": "dusty dark attic, wooden beams, old boxes, spiderwebs, single mysterious locked wooden door",
+     "hud": ""
+    },
+    {
+     "see": "Die Hauptfigur betrachtet eine schwere Eisenkette mit Schloss an der Dachbodentür.",
+     "text": "Aber du hast dort oben noch nie eine Tür gesehen.",
+     "image": "Close-up of heavy chains wrapped around the wooden door handle in attic.",
+     "who": [
+      "du"
+     ],
+     "place": "attic",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "flashlight"
+     ],
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "nie"
+     ],
+     "overlay": null,
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "worried",
+       "emote": "?",
+       "hold": "flashlight",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": "dusty dark attic, wooden beams, old boxes, spiderwebs, single mysterious locked wooden door",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Kapitel-Countdown wird eingeblendet: Noch 1 Tag.",
+     "text": "Der letzte Tag bricht an.",
+     "image": "Chapter card showing 1 day remaining.",
+     "who": [],
+     "place": "zimmer",
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "shot": "graphic",
+     "graphic": {
+      "type": "chapter",
+      "value": "1",
+      "text": "FINALE"
+     },
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "letzte"
+     ],
+     "overlay": null,
+     "actors": [],
+     "crowd": "",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": "dark bedroom at night, single bed, glowing smartphone on nightstand",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Nachricht fordert absolutes Schweigen gegenüber allen Nachbarn.",
+     "text": "Die Nachricht warnt dich vor allen Menschen in deiner Nähe.",
+     "image": "Message interface displaying strict instruction not to speak to neighbors.",
+     "who": [],
+     "place": "zimmer",
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "shot": "graphic",
+     "graphic": {
+      "type": "message",
+      "kicker": "UNBEKANNT",
+      "lines": [
+       "Sprich mit niemandem.",
+       "!Besonders nicht mit dem Nachbarn."
+      ]
+     },
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "warnt"
+     ],
+     "overlay": null,
+     "actors": [],
+     "crowd": "",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": "dark bedroom at night, single bed, glowing smartphone on nightstand",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Hauptfigur späht ängstlich durch den Türspion im Flur.",
+     "text": "Dein Nachbar schleicht bereits misstrauisch durch das Treppenhaus.",
+     "image": "Young man peering through peephole in hallway door, nervous face visible.",
+     "who": [
+      "du"
+     ],
+     "place": "hallway",
+     "time": "day",
+     "weather": "",
+     "props": [
+      "door"
+     ],
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Nachbar"
+     ],
+     "status": "NACHBAR: VOR DER TÜR",
+     "overlay": {
+      "type": "stamp",
+      "text": "GEFAHR",
+      "color": "red"
+     },
+     "actors": [
+      {
+       "id": "du",
+       "action": "cower",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": ""
+    },
+    {
+     "see": "Eine Fernsehmeldung warnt vor seltsamen Signalen im ganzen Land.",
+     "text": "Im Fernsehen läuft plötzlich eine merkwürdige Eilmeldung.",
+     "image": "Breaking news graphic on TV screen with flickering emergency broadcast layout.",
+     "who": [],
+     "place": "livingroom",
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "shot": "graphic",
+     "graphic": {
+      "type": "news",
+      "kicker": "EILMELDUNG",
+      "text": "RÄTSELHAFTE NACHRICHTEN",
+      "sub": "Bundesweite Warnung vor Signalen"
+     },
+     "camera": "still",
+     "sfx": "boom",
+     "highlight": [
+      "Eilmeldung"
+     ],
+     "overlay": null,
+     "actors": [],
+     "crowd": "",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Hauptfigur sitzt verzweifelt im Wohnzimmer vor dem Fernseher.",
+     "text": "Alle Mobiltelefone im Land erhalten dieselbe Anweisung.",
+     "image": "Young man sitting on couch, holding glowing phone, staring at television screen in panic.",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "tv",
+      "phone"
+     ],
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Anweisung"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "ALLE HANDYS"
+     },
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "hold": "phone",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Herzschlag-Puls flackert als Grafik auf – Nullstunde rückt näher.",
+     "text": "Die Zeit läuft ab und der Countdown erreicht null.",
+     "image": "Pulse line graphic throbbing red with time counter hitting zero.",
+     "who": [],
+     "place": "zimmer",
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "shot": "graphic",
+     "graphic": {
+      "type": "pulse",
+      "value": "0",
+      "label": "COUNTDOWN ABGELAUFEN"
+     },
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "null"
+     ],
+     "overlay": null,
+     "actors": [],
+     "crowd": "",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": "dark bedroom at night, single bed, glowing smartphone on nightstand",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Hauptfigur weicht erschrocken zurück, als die Dachbodentür von selbst aufbricht.",
+     "text": "Plötzlich springt das Schloss der hölzernen Dachbodentür von alleine auf.",
+     "image": "Attic door creaks open violently, revealing intense mysterious white light from behind.",
+     "who": [
+      "du"
+     ],
+     "place": "attic",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "door"
+     ],
+     "shot": "wide",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "auf"
+     ],
+     "status": "TÜR: OFFEN",
+     "overlay": null,
+     "actors": [
+      {
+       "id": "du",
+       "action": "fall",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": "dusty dark attic, wooden beams, old boxes, spiderwebs, single mysterious locked wooden door",
+     "hud": ""
+    },
+    {
+     "see": "Das Display zeigt eine Enthüllungsnachricht der unbekannten Nummer.",
+     "text": "Ein letzter Blick auf dein Handy verrät den Absender.",
+     "image": "Smartphone displaying a shocking final message revealed on the lock screen.",
+     "who": [],
+     "place": "attic",
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "shot": "graphic",
+     "graphic": {
+      "type": "phone",
+      "mode": "lock",
+      "value": "03:12",
+      "kicker": "ABSENDER",
+      "text": "Du hast die Nachricht selbst gesendet. Aus dem Jahr 2035."
+     },
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Absender"
+     ],
+     "overlay": null,
+     "actors": [],
+     "crowd": "",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": "dusty dark attic, wooden beams, old boxes, spiderwebs, single mysterious locked wooden door",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Hauptfigur blickt völlig fassungslos in das helle Licht der offenen Tür.",
+     "text": "Die Nachricht stammt von dir selbst aus der Zukunft.",
+     "image": "Young man standing paralyzed in front of the blinding portal behind the attic door.",
+     "who": [
+      "du"
+     ],
+     "place": "attic",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "door"
+     ],
+     "shot": "close",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Zukunft"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "ZEITREISE",
+      "color": "purple"
+     },
+     "actors": [
+      {
+       "id": "du",
+       "action": "freeze",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": "dusty dark attic, wooden beams, old boxes, spiderwebs, single mysterious locked wooden door",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Hauptfigur schläft im Bett – doch das Handy vibriert erneut.",
+     "text": "Drei Uhr zwölf. Dein Handy vibriert auf dem Nachttisch.",
+     "image": "Young man sleeping in bed, smartphone lights up brightly on nightstand in dark room.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "time": "night",
+     "weather": "",
+     "props": [
+      "clock",
+      "phone"
+     ],
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "vibriert"
+     ],
+     "status": "",
+     "overlay": {
+      "type": "choice",
+      "a": "Tür öffnen",
+      "b": "Handy zerstören"
+     },
+     "actors": [
+      {
+       "id": "du",
+       "action": "sleep",
+       "emotion": "",
+       "emote": "",
+       "pos": "center",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": "dark bedroom at night, single bed, glowing smartphone on nightstand",
+     "hud": ""
+    }
+   ],
+   "hud": "3:12 UHR",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "pizza",
+   "countdown"
+  ],
+  "title": "Das Rätsel der verschlossenen Tür auf dem Dachboden",
+  "created": 1795429624.4679983
  }
 }
