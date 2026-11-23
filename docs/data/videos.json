@@ -7450,5 +7450,44 @@
   "status": "error",
   "created": 1795452560.185684,
   "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-3.6-flash: HTTP 429 | pollinations: Antwort enthält kein JSON"
+ },
+ {
+  "id": 195,
+  "category": "nachricht",
+  "topic": "Eine unbekannte Nummer schickt dir einen Countdown – und zwingt dich, eine verschlossene Tür auf deinem Dachboden zu suchen, von der du noch nie gehört hast.",
+  "status": "rendered",
+  "created": 1795453485.5010383,
+  "title": "Das Rätsel der verschlossenen Tür auf dem Dachboden",
+  "description": "Ein Countdown per SMS zwingt dich zu einer unheimlichen Suche.\nEine unbekannte Nummer schickt dir Anweisungen, die du befolgen musst. Was wartet hinter der Tür?\nWürdest du durch die Tür auf dem Dachboden gehen?",
+  "hashtags": [
+   "#shorts",
+   "#mystery",
+   "#grusel",
+   "#storytime",
+   "#creepy",
+   "#fyp",
+   "#viral"
+  ],
+  "tags": [
+   "unbekannte nummer",
+   "mystery story",
+   "gruselgeschichte",
+   "spannung",
+   "countdown",
+   "dachboden",
+   "geheimnis"
+  ],
+  "thumb_text": "ÖFFNE DIE TÜR",
+  "missing": null,
+  "cover_ms": 89378,
+  "duration": 89.3,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "noir",
+  "mp4": true
  }
 ]
