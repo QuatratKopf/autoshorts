@@ -719,6 +719,8 @@ def _g_news(frame, g, t, dur):
     k = _pop(t, 0.0, 0.45)
     if k <= 0:
         return
+    if g.get("tv"):
+        return _news_tv(frame, g, t, k)
     pw, ph = 860, 1080
     paper = Image.new("RGBA", (pw, ph), (236, 224, 196, 255))
     d = ImageDraw.Draw(paper)
@@ -764,6 +766,53 @@ def _g_news(frame, g, t, dur):
     sh = Image.new("RGBA", im.size, (0, 0, 0, 0))
     sh.paste((0, 0, 0, 120), (0, 0), im.split()[3])
     frame.paste(sh, (int(W / 2 - im.width / 2 + 14), int(800 - im.height / 2 + 20)), sh)
+    frame.paste(im, (int(W / 2 - im.width / 2), int(800 - im.height / 2)), im)
+
+
+def _news_tv(frame, g, t, k):
+    """Eilmeldung im Fernsehen (der Satz sagt „Im Fernsehen läuft …“): Fernseher mit Sendebild, rotes Band, Schlagzeile, Laufband –
+    keine Zeitungsseite (Video 192). Fantasie-Sender, kein echtes Logo."""
+    tw, th = 960, 700
+    tv = Image.new("RGBA", (tw, th + 90), (0, 0, 0, 0))
+    d = ImageDraw.Draw(tv)
+    d.polygon([(tw / 2 - 150, th - 6), (tw / 2 + 150, th - 6), (tw / 2 + 210, th + 70), (tw / 2 - 210, th + 70)], fill=(26, 28, 36, 255), outline=INK)   # Fuß
+    d.rounded_rectangle((0, 0, tw - 1, th - 1), 36, fill=(20, 22, 30, 255), outline=INK, width=8)
+    sx0, sy0, sx1, sy1 = 30, 30, tw - 30, th - 46
+    d.rounded_rectangle((sx0, sy0, sx1, sy1), 16, fill=(22, 40, 84, 255))
+    for i in range(7):                                                       # Studio-Hintergrund: schräge Lichtbahnen
+        d.polygon([(sx0 + i * 150 - 60, sy1), (sx0 + i * 150 + 30, sy1), (sx0 + i * 150 + 210, sy0), (sx0 + i * 150 + 120, sy0)], fill=(30, 54, 110, 255))
+    d.rectangle((sx0, sy0, sx0 + 12, sy1), fill=(22, 40, 84, 255))
+    d.rectangle((sx1 - 12, sy0, sx1, sy1), fill=(22, 40, 84, 255))
+    kick = str(g.get("kicker") or "EILMELDUNG").upper()[:18]
+    fk = _fit(d, kick, 64, 420, "Bold")
+    blink = (t * 2) % 1 < 0.6
+    d.rounded_rectangle((sx0 + 30, sy0 + 34, sx0 + 30 + d.textlength(kick, font=fk) + 96, sy0 + 34 + fk.size + 30), 12, fill=(206, 36, 46, 255))
+    d.ellipse((sx0 + 52, sy0 + 34 + fk.size / 2 + 2, sx0 + 78, sy0 + 34 + fk.size / 2 + 28), fill=(255, 255, 255, 255) if blink else (206, 36, 46, 255))
+    d.text((sx0 + 96, sy0 + 44), kick, font=fk, fill=WHITE)
+    head = str(g.get("text") or "").upper()[:40]
+    rows, cur = [], ""
+    for w in head.split():
+        if cur and len(cur) + len(w) + 1 > 16:
+            rows.append(cur); cur = w
+        else:
+            cur = (cur + " " + w).strip()
+    rows = (rows + [cur])[:3]
+    y = sy0 + 170
+    for r in rows:
+        fr = _fit(d, r, 112, sx1 - sx0 - 80)
+        d.text((sx0 + 40, y), r, font=fr, fill=WHITE, stroke_width=4, stroke_fill=(10, 16, 40, 255))
+        y += fr.size + 14
+    d.rectangle((sx0, sy1 - 96, sx1, sy1), fill=(240, 240, 244, 255))       # Laufband unten
+    sub = str(g.get("sub") or "")[:44]
+    if sub:
+        fs = _fit(d, sub, 48, sx1 - sx0 - 60, "SemiBold")
+        d.text((sx0 + 30, sy1 - 96 + (96 - fs.size) / 2 - 6), sub, font=fs, fill=(20, 24, 40, 255))
+    d.ellipse((tw - 70, th - 34, tw - 50, th - 14), fill=(220, 60, 50, 255))
+    scale = 0.6 + 0.4 * min(1.0, k)
+    im = tv.resize((int(tv.width * scale), int(tv.height * scale)), Image.LANCZOS)
+    glow = Image.new("RGBA", frame.size, (0, 0, 0, 0))
+    ImageDraw.Draw(glow).ellipse((W / 2 - 620, 800 - 520, W / 2 + 620, 800 + 520), fill=(70, 110, 220, 46))
+    frame.paste(glow.filter(ImageFilter.GaussianBlur(90)), (0, 0), glow.filter(ImageFilter.GaussianBlur(90)))
     frame.paste(im, (int(W / 2 - im.width / 2), int(800 - im.height / 2)), im)
 
 
@@ -961,10 +1010,18 @@ def _g_phone(frame, g, t, dur):
             d.ellipse((sx0 + 48, y + 26, sx0 + 108, y + 86), fill=GREEN, outline=INK, width=4)
             fk = _fit(d, kick or "NACHRICHT", 44, sw - 130, "Bold")
             d.text((sx0 + 124, y + 30), kick or "NACHRICHT", font=fk, fill=INK)
-            msg = str(g.get("text") or "")[:44]
-            lines = _lines(d, msg, _font(44, "SemiBold"), sw - 40)[:2]
+            msg = _short_msg(g.get("text"), 96)
+            fm = _font(44, "SemiBold")
+            lines = _lines(d, msg, fm, sw - 40)
+            if len(lines) > 2:                                          # längere Nachricht („Du hast die Nachricht selbst gesendet. Aus dem Jahr 2035.“): kleiner und bis zu vier Zeilen – nie mitten im Satz abgeschnitten (Video 192)
+                fm = _font(38, "SemiBold")
+                lines = _lines(d, msg, fm, sw - 40)[:4]
+            if len(lines) > 2:
+                d.rounded_rectangle((sx0 + 24, y, sx1 - 24, y + 230 + (len(lines) - 2) * 50), 36, fill=(250, 248, 244), outline=INK, width=5)
+                d.ellipse((sx0 + 48, y + 26, sx0 + 108, y + 86), fill=GREEN, outline=INK, width=4)
+                d.text((sx0 + 124, y + 30), kick or "NACHRICHT", font=fk, fill=INK)
             for i, ln in enumerate(lines):
-                d.text((sx0 + 48, y + 104 + i * 54), ln, font=_font(44, "SemiBold"), fill=(50, 50, 60))
+                d.text((sx0 + 48, y + 104 + i * (54 if len(lines) <= 2 else 50)), ln, font=fm, fill=(50, 50, 60))
     elif mode == "chat":
         d.rounded_rectangle((sx0, sy0, sx1, sy0 + 190), 58, fill=(250, 248, 244))
         d.rectangle((sx0, sy0 + 120, sx1, sy0 + 190), fill=(250, 248, 244))
@@ -973,12 +1030,12 @@ def _g_phone(frame, g, t, dur):
         d.text((sx0 + 134, sy0 + 100), name, font=_fit(d, name, 54, sw - 130, "Bold"), fill=INK)
         y = sy0 + 240
         for i, (key, mine) in enumerate((("text", False), ("sub", True), ("label", False))):
-            msg = str(g.get(key) or "")[:44]
+            msg = _short_msg(g.get(key), 90)
             kk = _pop(t, 0.4 + i * 0.7, 0.3)
             if not msg or kk <= 0:
                 continue
             f = _font(46, "SemiBold")
-            lines = _lines(d, msg, f, sw - 150)[:3]
+            lines = _lines(d, msg, f, sw - 150)[:5]               # ganze Nachricht: „… liegt eine halbe Pizza“ brach nach drei Zeilen mitten im Satz ab (Video 192)
             bw = max(d.textlength(ln, font=f) for ln in lines) + 56
             bh = len(lines) * 58 + 40
             bx = (sx1 - 30 - bw) if mine else sx0 + 30
@@ -1573,8 +1630,31 @@ def _dark_bg():
 def msg_lines(g):
     """Zeilen der Nachricht: "lines" (Liste) oder "text" mit „/“ getrennt. Eine Zeile mit „!“ davor ist die rote Warnung."""
     raw = g.get("lines") if isinstance(g.get("lines"), list) else str(g.get("text") or "").split("/")
-    out = [" ".join(str(x).split())[:42] for x in raw if str(x).strip()]
-    return out[:6]
+    out = []
+    for x in raw:
+        ln = " ".join(str(x).split())
+        if not ln:
+            continue
+        warn = ln.startswith("!")
+        words, cur = ln.lstrip("! ").split(), ""
+        for w in words:                                   # lange Zeile („Besonders nicht mit dem Nachbarn.“) lief rechts aus dem Bild: umbrechen statt abschneiden (Video 192)
+            if cur and len(cur) + 1 + len(w) > 21:
+                out.append(("!" if warn else "") + cur)
+                cur = w
+            else:
+                cur = (cur + " " + w).strip()
+        if cur:
+            out.append(("!" if warn else "") + cur[:30])
+    return out[:7]
+
+
+def _short_msg(text, limit):
+    """Nachrichtentext für ein Handy: höchstens `limit` Zeichen, am Wortende gekürzt – nie mitten im Wort."""
+    msg = " ".join(str(text or "").split())
+    if len(msg) <= limit:
+        return msg
+    cut = msg[:limit + 1].rsplit(" ", 1)[0].rstrip(" ,;:–-")
+    return cut + " …"
 
 
 def _g_message(frame, g, t, dur):
@@ -1794,10 +1874,12 @@ def clean(g):
         if isinstance(v, (str, int, float)) and not isinstance(v, bool) and str(v).strip():
             v = " ".join(_EMOJI_RE.sub(" ", str(v)).split())      # Emojis kennt die Schrift nicht: „Bist du gut angekommen? ❤️“ zeigte ein leeres Kästchen (Video 190)
             if v:
-                out[k] = v[:44]
+                out[k] = _short_msg(v, 96) if out["type"] == "phone" and k in ("text", "sub", "label") else v[:44]   # Nachricht auf dem Handy: ganzer Satz
     if out.get("kicker") and out.get("text") and out["kicker"].strip().lower() == out["text"].strip().lower():
         out.pop("kicker")                         # „DER BLICK“ klein über „DER BLICK“ groß (Video 191): dieselbe Zeile nicht zweimal
     out["dark"] = g.get("dark") is True
+    if out["type"] == "news" and g.get("tv") is True:
+        out["tv"] = True                          # Eilmeldung im Fernsehen statt auf der Zeitungsseite
     need = {"number": "value", "timer": "value", "calendar": "value", "houses": "value", "badge": "text", "question": None,
             "map": None, "city": None, "versus": "left", "round": "text", "score": "value", "compare": "value", "podium": "text",
             "share": "value", "news": "text", "pulse": "value", "radio": "text", "distance": "value", "days": "value", "phone": "text", "chart": None, "game": None, "radar": None, "size": "value", "message": None, "chapter": "value", "echo": None, "voice": None}[out["type"]]

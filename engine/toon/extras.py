@@ -1234,7 +1234,20 @@ def p_fabric(d, x, t, s=1.0):
         d.ellipse((cx + 132, cy - 20, cx + 168, cy + 20), fill=(120, 96, 70), outline=INK, width=4)
 
 
+DOOR_OPEN = [False]                                          # die Tür der Szene steht offen (stage._door_story)
+
+
 def p_door(d, x, t, s=1.0):
+    if DOOR_OPEN[0]:                                         # aufgesprungen: Rahmen, dahinter helles Licht, das Türblatt steht schmal nach innen – Licht fällt auf den Boden
+        k = _pop(t, 0.0, 0.5)
+        _r(d, (x - 130, GROUND - 500, x + 130, GROUND), (96, 66, 46), 6)
+        d.rectangle((x - 108, GROUND - 478, x + 108, GROUND), fill=(255, 244, 200))
+        d.rectangle((x - 108, GROUND - 478, x + 108, GROUND - 300), fill=(255, 250, 224))
+        w = 216 - 150 * min(1.0, k)                          # Türblatt schwingt auf
+        _poly(d, [(x - 108, GROUND - 478), (x - 108 + w, GROUND - 478 + (216 - w) * 0.18), (x - 108 + w, GROUND - (216 - w) * 0.05), (x - 108, GROUND)], (150, 100, 64))
+        _o(d, (x - 108 + w - 30, GROUND - 250, x - 108 + w - 6, GROUND - 226), (240, 200, 90), 4)
+        d.polygon([(x - 110, GROUND), (x + 110, GROUND), (x + 330, GROUND + 150), (x - 250, GROUND + 150)], fill=(255, 236, 170, 110))
+        return
     _r(d, (x - 130, GROUND - 500, x + 130, GROUND), (96, 66, 46), 6)
     _r(d, (x - 110, GROUND - 480, x + 110, GROUND), (150, 100, 64), 4, 5)
     for y0, y1 in ((-450, -270), (-240, -40)):
@@ -1243,14 +1256,20 @@ def p_door(d, x, t, s=1.0):
     d.polygon([(x - 120, GROUND), (x + 120, GROUND), (x + 190, GROUND + 60), (x - 190, GROUND + 60)], fill=(255, 210, 120, 70))
 
 
+CLOCK_AT = [None]                                            # (Stunde, Minute) der Szene – setzt stage._prepare aus dem Satz
+
+
 def p_clock(d, x, t, s=1.0):
     cy = GROUND - 200
     _o(d, (x - 190, cy - 190, x + 190, cy + 190), (250, 250, 246))
     for i in range(12):
         a = i / 12 * math.tau
         d.line((x + math.cos(a) * 150, cy + math.sin(a) * 150, x + math.cos(a) * 172, cy + math.sin(a) * 172), fill=INK, width=8)
+    at = CLOCK_AT[0]                                         # nennt der Satz eine Uhrzeit („Drei Uhr zwölf“), zeigt die Uhr genau die (Video 192: stand auf zwölf)
     for spd, ln, wd, col in ((0.9, 150, 8, (220, 60, 50)), (0.075, 130, 12, INK), (0.00625, 90, 16, INK)):
         a = t * spd * math.tau - math.pi / 2
+        if at and col == INK:
+            a = ((at[1] / 60) if ln == 130 else ((at[0] % 12 + at[1] / 60) / 12)) * math.tau - math.pi / 2
         d.line((x, cy, x + math.cos(a) * ln, cy + math.sin(a) * ln), fill=col, width=wd)
     _o(d, (x - 14, cy - 14, x + 14, cy + 14), INK, 2)
 

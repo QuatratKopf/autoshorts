@@ -727,3 +727,18 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   (Körperteil allein im Bild). Offene Wünsche ohne Zeichnung: polyp, knie, anwaltstitel, toplitzsee, miete, algorithmus, statistik, musik, knall,
   friteuse, dach, hand, handfläche, steuererklärung (greifbar davon: polyp, friteuse, dach, steuererklärung). Aus dem 1800-Video fehlen weiter
   Kerker, Marktstände und eine Kirche der Zeit; das Pferd gibt es bisher nur an der Kutsche, nicht als eigenes Wesen.
+- Prüfung 23.11.2026, 18-Uhr-Termin (Video 192 „Das Rätsel der verschlossenen Tür auf dem Dachboden“, Kategorie `nachricht`):
+  - Ort aus einem zusammengesetzten Ding-Wort („Countdown zu deiner Dachbodentür“, `COMPOUND_THING_RE`) gilt nicht, wenn die Bildbeschreibung
+    (`see`) ausdrücklich einen anderen Ort nennt – die Figur schlief auf dem Dachboden-Fußboden. „Zimmer“ mit schlafender Figur oder
+    Nachttisch/Bett im Satz ist das Schlafzimmer (`bedroom`), nicht das Wohnzimmer.
+  - Nachrichten im Bild werden nie abgeschnitten: `graphics.msg_lines` bricht lange Zeilen um (bis sieben Zeilen), Handy-Chat bis fünf, Sperrbildschirm
+    bis vier Zeilen, Text bis 96 Zeichen am Wortende gekürzt (`_short_msg`). In Geschichten (`stage.STORY_STYLES`) ist der Wortlaut einer
+    Handy-Nachricht Handlung – Zahlen darin gelten nicht als „erfunden“, die Uhr des Sperrbildschirms auch nicht.
+  - Herzschlag-Kurve zu „Der Countdown erreicht null“: wird zur großen Zahl (Kategorie `nachricht`: Kapitelkarte), wenn Zahl und Wort im Satz fallen.
+  - `news` mit `tv: true` (setzt die Regie, wenn der Satz vom Fernsehen spricht): Fernseher mit Sendebild und Laufband statt Zeitungsseite (`_news_tv`).
+  - Tür steht offen, wenn sie laut Satz aufspringt/aufgeht (`stage._door_story`, `extras.DOOR_OPEN`) – auch in den Folgesätzen am selben Ort, bis sie
+    jemand schließt; Verneinung und Frage zählen nicht.
+  - Die Uhr zeigt die Uhrzeit, die der Satz nennt (`stage.clock_time`, `extras.CLOCK_AT`).
+  - Was laut Satz irgendwo liegt/steht („im Kühlschrank liegt … ein Regenschirm“, „Handy vibriert auf dem Nachttisch“), hält niemand in der Hand.
+  - Aktion `fall` ohne Sturz im Satz oder in der Bildbeschreibung (`FALL_SAID_RE`) wird `shocked` – die Figur lag sonst reglos am Boden.
+  - Selbsttest: `_msg192`.

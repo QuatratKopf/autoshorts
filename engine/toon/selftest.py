@@ -199,7 +199,7 @@ def main():
     def _unspoken():                                             # erfundene Zahlen in Grafik/Einblendung fliegen raus, gesprochene bleiben; liegende Figur ohne Großaufnahme
         scs = [{"text": "Dazu kommt der berühmte digitale Kartenregen.", "place": "office", "shot": "graphic",
                 "graphic": {"type": "number", "value": "1.000.000", "label": "DIGITALE KARTEN"}},
-               {"text": "Aber im echten Leben scheitert fast jeder davon.", "place": "livingroom", "mood": "tense", "overlay": {"type": "card", "text": "NULL PROZENT"},
+               {"text": "Aber im echten Leben stürzt fast jeder dabei.", "place": "livingroom", "mood": "tense", "overlay": {"type": "card", "text": "NULL PROZENT"},   # „stürzt“: seit Video 192 liegt nur am Boden, wer laut Satz fällt
                 "actors": [{"id": "du", "action": "fall", "emotion": "scared", "speaks": True}]},
                {"text": "Du bist zweiundsiebzig Stunden auf dich allein gestellt.", "place": "livingroom", "shot": "graphic",
                 "graphic": {"type": "badge", "kicker": "MIND.", "text": "72 STUNDEN"}},
@@ -426,6 +426,44 @@ def main():
         for sc in scs + sc2:
             frame(sc, cast_p)
     check("Paar-Video (kein Tauchgang bei „auftauchen“, kein loses Ohr, keine Menge am Tisch, Mann mit Locken)", _pair)
+
+    def _msg192():                                               # Video 192 „Unbekannte Nachricht“: Schlafzimmer statt Dachboden, Nachricht bleibt, Tür springt auf, Uhr zeigt 3:12
+        du = lambda act, **kw: [{"id": "du", "action": act, "pos": "center", **kw}]      # noqa: E731
+        T = [{"text": "Eine unbekannte Nummer schickt dir einen Countdown zu deiner Dachbodentür.", "see": "Die Hauptfigur schläft nachts im dunklen Schlafzimmer.",
+              "place": "zimmer", "time": "night", "props": ["clock", "phone"], "actors": du("sleep")},
+             {"text": "Die Nachricht warnt dich vor allen Menschen in deiner Nähe.", "place": "zimmer", "shot": "graphic",
+              "graphic": {"type": "message", "kicker": "UNBEKANNT", "lines": ["Sprich mit niemandem.", "!Besonders nicht mit dem Nachbarn."]}},
+             {"text": "In deinem Kühlschrank liegen eine halbe Pizza und ein kaputter Regenschirm.", "place": "kitchen", "time": "night",
+              "props": ["fridge", "regenschirm"], "actors": du("shocked")},
+             {"text": "Im Fernsehen läuft plötzlich eine merkwürdige Eilmeldung.", "place": "livingroom", "shot": "graphic",
+              "graphic": {"type": "news", "kicker": "EILMELDUNG", "text": "RÄTSELHAFTE NACHRICHTEN"}},
+             {"text": "Die Zeit läuft ab und der Countdown erreicht null.", "place": "zimmer", "shot": "graphic",
+              "graphic": {"type": "pulse", "value": "0", "label": "COUNTDOWN ABGELAUFEN"}},
+             {"text": "Plötzlich springt das Schloss der hölzernen Dachbodentür von alleine auf.", "see": "Die Hauptfigur weicht erschrocken zurück.",
+              "place": "attic", "time": "night", "props": ["door"], "actors": du("fall")},
+             {"text": "Ein letzter Blick auf dein Handy verrät den Absender.", "place": "attic", "shot": "graphic",
+              "graphic": {"type": "phone", "mode": "lock", "value": "03:12", "kicker": "ABSENDER", "text": "Du hast die Nachricht selbst gesendet. Aus dem Jahr 2035."}},
+             {"text": "Die Nachricht stammt von dir selbst aus der Zukunft.", "place": "attic", "time": "night", "props": ["door"], "actors": du("freeze")},
+             {"text": "Drei Uhr zwölf. Dein Handy vibriert auf dem Nachttisch.", "place": "zimmer", "time": "night", "props": ["clock", "phone"], "actors": du("sleep")}]
+        scs = stage.direct(T, [(n_ * 3.5, n_ * 3.5 + 3.5) for n_ in range(len(T))], "Eine unbekannte Nummer schickt dir einen Countdown Das Rätsel der Tür", "nachricht", "noir") or T
+        res = lambda n_: stage.places.resolve(stage.backdrop(scs[n_]))      # noqa: E731
+        assert res(0) == "bedroom" and res(8) == "bedroom", "geschlafen wird im Schlafzimmer – „Dachbodentür“ ist kein Ort, „Nachttisch“ steht im Schlafzimmer"
+        assert scs[8]["actors"][0]["action"] == "sleep" and not scs[8]["actors"][0].get("hold"), "Handy vibriert auf dem Nachttisch: die Figur schläft und hält nichts"
+        ln = graphics.clean(scs[1]["graphic"])["lines"]
+        assert " ".join(x.lstrip("!") for x in ln).endswith("Nachbarn.") and max(len(x) for x in ln) <= 31, "lange Nachrichtenzeile wird umbrochen, nicht abgeschnitten"
+        assert not scs[2]["actors"][0].get("hold") and not any(str(q.get("type")) == "regenschirm" for q in scs[2]["props"]), "Schirm liegt im Kühlschrank – niemand spannt ihn in der Küche auf"
+        assert scs[3]["graphic"].get("tv") is True and graphics.clean(scs[3]["graphic"]).get("tv") is True, "Eilmeldung im Fernsehen: Fernsehbild"
+        assert scs[4].get("shot") == "graphic" and scs[4]["graphic"]["type"] == "chapter" and scs[4]["graphic"]["value"] == "0", "Countdown erreicht null: große Null statt gestrichener Grafik"
+        assert scs[5]["actors"][0]["action"] == "shocked" and scs[5].get("_door_open") and scs[7].get("_door_open"), "niemand stürzt; die Tür steht offen und bleibt es"
+        g6 = graphics.clean(scs[6].get("graphic"))
+        assert scs[6].get("shot") == "graphic" and g6 and g6["text"].endswith("2035."), "die Auflösung auf dem Handy bleibt und wird nicht abgeschnitten"
+        assert stage.clock_time(scs[8]["text"]) == (3, 12) and stage.clock_time("Die Uhr tickt.") is None and stage.clock_time("um 3:12 Uhr") == (3, 12)
+        assert not stage.direct([{"text": "Öffne niemals die Tür.", "place": "attic", "props": ["door"], "actors": du("idle")}], [(0, 3)], "Tür", "nachricht", "noir")[0].get("_door_open")
+        for n_ in (0, 3, 5, 6, 8):
+            for t_ in (0.2, 1.6):
+                frame(scs[n_], {"du": {"shirt": "grau"}}, t_)
+        assert graphics.clean({"type": "phone", "mode": "chat", "text": "In deinem Kühlschrank liegt eine halbe Pizza und daneben ein Schirm, den du nie gekauft hast, wirklich niemals"})["text"].endswith("…")
+    check("Video 192: Schlafzimmer, Nachrichten ganz, Tür offen, Uhrzeit, Fernseh-Eilmeldung", _msg192)
     check("Musik-Video (Kopfhörer, Gänsehaut-Schaubild, Lautsprecher) und Hafen", _music)
 
     def _sleep():                                                # Schlaf-Video (Prüfung 16.11.2026, Video 121): keine Regie-Wörter im Bild, Nacht bleibt Nacht, keine Passanten im Büro, Schlafende zugedeckt im Bett
@@ -1872,7 +1910,7 @@ def main():
         for t_m in (0.0, 0.5, 2.0, 4.9):
             check(f"Grafik {g_m['type']} t={t_m}", lambda: graphics.frame(graphics.clean(g_m), t_m, 5.0))
     assert graphics.clean({"type": "message"}) is None and graphics.clean({"type": "chapter", "text": "x"}) is None
-    assert len(graphics.clean({"type": "message", "lines": ["a"] * 9})["lines"]) == 6
+    assert len(graphics.clean({"type": "message", "lines": ["a"] * 9})["lines"]) == 7   # seit Video 192 sieben: lange Zeilen werden umbrochen
 
     def _noir():                                                 # Rubrik „Unbekannte Nachricht“: düsterer Look, Nachricht, Kapitelkarte
         import json

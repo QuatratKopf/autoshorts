@@ -216,11 +216,32 @@ def sanitize(sc):
     return sc
 
 
+def clock_time(text):
+    """Uhrzeit, die der Satz nennt („Drei Uhr zwölf“, „um 3:12 Uhr“, „kurz nach vier Uhr“) als (Stunde, Minute) – sonst None."""
+    import re as _re
+    low = str(text or "").lower()
+    m = _re.search(r"\b(\d{1,2})[:.](\d{2})\s*uhr\b", low)
+    if m and int(m.group(1)) < 24 and int(m.group(2)) < 60:
+        return int(m.group(1)), int(m.group(2))
+    if _re.search(r"mitternacht", low):
+        return 0, 0
+    m = _re.search(r"\b([a-zäöüß]+|\d{1,2})\s+uhr\b(?:\s+([a-zäöüß]+|\d{1,2})\b)?", low)
+    if not m:
+        return None
+    hh = _number(m.group(1))
+    if hh is None or hh != int(hh) or not 0 <= hh < 24:
+        return None
+    mm = _number(m.group(2)) if m.group(2) and m.group(2) not in ("ein", "eine", "einen", "nachts", "morgens", "früh") else None
+    return int(hh), int(mm) if mm is not None and mm == int(mm) and 0 <= mm < 60 else 0
+
+
 def _prepare(scene, cast):
     scene = sanitize(scene)
     cast = cast if isinstance(cast, dict) else {}
     place = places.resolve(backdrop(scene))
     _PROP_MIN[0] = 300 if scene.get("_near") else MIN_PROP_PX
+    extras.CLOCK_AT[0] = clock_time(scene.get("text"))
+    extras.DOOR_OPEN[0] = bool(scene.get("_door_open"))
     MOURN[0] = bool(scene.get("_mourn"))                  # Beerdigung: Trauergäste und Verwandte tragen Schwarz (stage._funeral_story)
     ERA[0] = bool(scene.get("_era"))                      # Geschichte spielt um 1800 oder früher: Passanten tragen die Kleidung der Zeit (stage._past_story)
     places.XMAS[0] = bool(scene.get("_xmas"))             # Weihnachts-Video: Wohn- und Esszimmer sind geschmückt (stage._feast_story)
@@ -1088,6 +1109,7 @@ def spoken_number(value, text):
     return any(abs(n - v) < 1e-6 or abs(n * 1000 - v) < 1e-6 or abs(n * 1e6 - v) < 1e-3 or abs(n * 1e9 - v) < 1 for n in nums)
 
 
+STORY_STYLES = ("nachricht", "storys", "grusel", "mysterien", "horror", "liebe")   # erzählte Geschichten: Nachrichten im Bild gehören zur Handlung
 FIGURE_GFX = ("number", "badge", "houses", "share", "compare", "distance", "days", "pulse", "calendar", "timer", "phone")
 _FIG_WORDS = set(_SCALE) | {"prozent", "hundert", "tausend"}
 
@@ -1407,9 +1429,23 @@ def direct(scenes, times, topic="", style="", look=""):
             sc["graphic"] = g0 = {"type": "number", "kicker": str(g0.get("left") or ""), "value": str(g0.get("value")),   # „Vergleich“ mit zweimal derselben
                                   "label": ""}                                                                             # Zahl: als eine große Zahl zeigen
         said_c = sc["text"] + " " + (str(scenes[i - 1].get("text") or "") if i and isinstance(scenes[i - 1], dict) else "")
-        if g0 and g0.get("type") in FIGURE_GFX and unspoken_figures(g0, said_c):
+        if g0 and g0.get("type") == "news" and _re0.search(r"fernseh|\btv\b|nachrichtensend|sondersendung|im radio und|bildschirm", sc["text"].lower()) \
+                and not _re0.search(r"zeitung|schlagzeile|titelseite|\bblatt\b", sc["text"].lower()):
+            g0["tv"] = True                               # „Im Fernsehen läuft eine Eilmeldung“: Fernsehbild, keine Zeitungsseite (Video 192)
+        g_chk = g0
+        if g0 and g0.get("type") == "phone" and str(style or "").lower() in STORY_STYLES:
+            # Nachricht auf dem Handy in einer Geschichte: ihr Wortlaut ist Teil der Handlung („Du hast die Nachricht selbst gesendet. Aus dem
+            # Jahr 2035.“), keine erfundene Zahl – und die Uhr des Sperrbildschirms ist keine Behauptung (Video 192: die Auflösung fehlte im Bild)
+            g_chk = {k_: v_ for k_, v_ in g0.items() if k_ not in ("text", "sub", "label")
+                     and not (k_ == "value" and _re0.fullmatch(r"\s*\d{1,2}[:.]\d{2}\s*(?:uhr)?\s*", str(v_).lower()))}
+        if g0 and g0.get("type") in FIGURE_GFX and unspoken_figures(g_chk, said_c):
             sc["graphic"], g0 = None, None                # Grafik mit einer Zahl, die niemand sagt („1.000.000 KARTEN“, „100 % KONTROLLE“): erfunden – weg
             sc["shot"] = "" if sc.get("shot") == "graphic" else sc.get("shot")
+        if g0 and g0.get("type") == "pulse" and not _re0.search(r"puls|herz|schläge pro|\bbpm\b|adrenalin|blutdruck", sc["text"].lower()) \
+                and graphics._num(g0.get("value")) is not None and (_stems(g0.get("label")) & _stems(sc["text"])):
+            # „Der Countdown erreicht null“ mit Herzschlag-Kurve „0 · COUNTDOWN ABGELAUFEN“: Zahl und Wort stimmen, nur die Kurve nicht – als große Zahl zeigen (Video 192)
+            sc["graphic"] = g0 = {"type": "chapter" if str(style or "").lower() == "nachricht" else "number", "value": str(g0.get("value")),
+                                  "label": str(g0.get("label") or ""), "text": str(g0.get("label") or ""), "kicker": str(g0.get("kicker") or "")}
         if g0 and g0.get("type") == "pulse" and not _re0.search(r"puls|herz|schläge pro|\bbpm\b|adrenalin|blutdruck", sc["text"].lower()):
             sc["graphic"], g0 = None, None                # Herzschlag-Kurve mit „1 · MOMENT DER STILLE“ zu einem Satz, der von keinem Herzschlag spricht (Video 168)
             sc["shot"] = "" if sc.get("shot") == "graphic" else sc.get("shot")
@@ -1428,6 +1464,15 @@ def direct(scenes, times, topic="", style="", look=""):
             has_bd = True
         hint = None if has_bd or deep_f else _hint(sc.get("text"))
         said = None if has_bd or place in MAPS or deep_f else _said_place(sc.get("text"))
+        if isinstance(hint, str) and not said and not has_bd:
+            # „… schickt dir einen Countdown zu deiner Dachbodentür“: der Ort steckt nur in einem zusammengesetzten Ding-Wort – nennt die
+            # Bildbeschreibung ausdrücklich einen anderen Ort („schläft im dunklen Schlafzimmer“), gilt der (Video 192: schlief auf dem Dachboden)
+            see_pl = _said_place(sc.get("see"))
+            if see_pl and places.resolve(see_pl) != places.resolve(hint) \
+                    and _hint(_re0.sub(COMPOUND_THING_RE, " ", str(sc.get("text") or "").lower())) != hint:
+                hint = None
+                if places.resolve(see_pl) != places.resolve(place) and place in GENERIC:
+                    sc["place"] = place = see_pl
         if not said and hint is None and topic_place and place == "livingroom" and not sc.get("props") and topic_place != place \
                 and not (i and isinstance(scenes[i - 1], dict) and places.resolve(scenes[i - 1].get("place")) == topic_place):
             said = topic_place                            # ortlose Szene im Allerwelts-Wohnzimmer: dort spielen, wovon das Video handelt (Hollywood → Kino)
@@ -1504,6 +1549,10 @@ def direct(scenes, times, topic="", style="", look=""):
         for pat, item in ((r"handy|smartphone|display|bildschirm leuchtet|nachricht", "phone"), (r"taschenlampe", "flashlight"), (r"regenschirm", "umbrella"),
                           (r"landkarte|stadtplan", "map"), (r"\bradio\b|funkgerät", "radio"), (r"einkaufstüte|\btasche\b|rucksack", "bag")):
             if _re0.search(pat, txt0):                   # was die Figur laut Satz in der Hand hat
+                if _re0.search(r"\b(?:lieg\w*|steh\w*|steck\w*|häng\w*|lehnt|lag|stand)\b", txt0) and _re0.search(r"\b(?:im|in|auf|unter|neben|hinter|an) ", txt0) \
+                        or _re0.search(r"nachttisch|vibriert|klingelt|brummt", txt0) and item == "phone":
+                    sc["props"] = [q for q in (sc.get("props") or []) if not (isinstance(q, dict) and extras.HELD.get(str(q.get("type") or "").lower().strip()) == item)]
+                    break                                 # „In deinem Kühlschrank liegen … und ein kaputter Regenschirm“, „Dein Handy vibriert auf dem Nachttisch“: liegt dort, niemand hält es (Video 192: aufgespannter Schirm in der Küche)
                 for a in acts:
                     if not a.get("kind") and not a.get("hold"):
                         a["hold"] = item
@@ -1679,6 +1728,11 @@ def direct(scenes, times, topic="", style="", look=""):
                         q["pos"] = 860
                 sc["shot"] = "" if shot_s in ("event", "insert", "close") else sc.get("shot")
                 sc["crowd"] = ""
+        if not has_bd and places.resolve(backdrop(sc)) == "livingroom" and str(sc.get("shot") or "") != "graphic" \
+                and (_re0.search(r"nachttisch|schlafzimmer|\bim bett\b|\bins bett\b|bettdecke|kopfkissen", (str(sc.get("text") or "") + " " + str(sc.get("see") or "")).lower())
+                     or (len(acts) == 1 and str(acts[0].get("action") or "").lower() == "sleep" and not _re0.search(r"sofa|couch|sessel", (str(sc.get("text") or "") + " " + str(sc.get("see") or "")).lower()))):
+            sc["place"] = place = "bedroom"               # „Dein Handy vibriert auf dem Nachttisch“, Ort „Zimmer“: das ist das Schlafzimmer, nicht das Wohnzimmer (Video 192)
+            sc["backdrop"] = None
         for a in acts:                                    # geschlafen wird im Bett oder auf dem Sofa, nicht auf der Straße
             if str(a.get("action") or "").lower() == "sleep" and places.resolve(backdrop(sc)) not in ("bedroom", "livingroom", "hospital", "camp", "attic"):
                 if len(acts) == 1 and not has_bd and (place in GENERIC or places.resolve(backdrop(sc)) in places.OUTDOOR):
@@ -2387,6 +2441,7 @@ def direct(scenes, times, topic="", style="", look=""):
             o_k["unit"] = "KM/H"
     _devices(scenes)
     _last_look(scenes, topic)
+    _door_story(scenes)
     _jogging(scenes)
     _speech(scenes, style)
     _call_story(scenes, topic, main_id)
@@ -2827,9 +2882,12 @@ def _speech(scenes, style=""):
             continue
         low = str(sc.get("text") or "").lower()
         acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        for a in acts:                                    # „weicht erschrocken zurück“ kam als „fall“: die Figur lag reglos am Boden, obwohl niemand stürzt (Video 192)
+            if not a.get("kind") and str(a.get("action") or "") == "fall" and not re.search(FALL_SAID_RE, low + " " + str(sc.get("see") or "").lower()):
+                a["action"] = "shocked"
         for a in acts:
             if not a.get("kind") and str(a.get("action") or "") == "sleep" and re.search(r"scroll|handy|smartphone|bildschirm|\bfeed\b|wach\b|nicht schlafen|tippst|chattest", low) \
-                    and not re.search(r"schläfst|eingeschlafen|schlummer", low):
+                    and not re.search(r"schläfst|eingeschlafen|schlummer|nachttisch|vibriert|klingelt|brummt|summt|leuchtet auf", low):   # „Dein Handy vibriert auf dem Nachttisch“: es liegt dort, die Figur schläft (Video 192)
                 a.update(action="idle", hold="phone", emote="")       # liegt wach am Handy: kein „zzz“ unter der Decke
         if isinstance(sc.get("props"), list) and not re.search(r"\buhr|wecker|\bzeit|spät|stunde|minute|sekunde|tick|pünktlich|countdown|frist", low):
             sc["props"] = [q for q in sc["props"] if str((q.get("type") if isinstance(q, dict) else q) or "").lower() not in ("clock", "uhr", "wanduhr")]
@@ -3008,6 +3066,32 @@ def _hybrid_story(scenes, topic="", main_id="du"):
             sc["mood"] = "tense"
         n_lab += 1
     return scenes
+
+
+FALL_SAID_RE = (r"\b(?:hin|um|herunter|hinunter|runter|ab|herab)?f[aä]ll(?:t|st|en)\b|\b(?:hin|um|herunter|runter|ab)gefallen|stürz|sturz|stolper|kipp|ohnmächt|ohnmacht|bewusstlos|\bboden\b|rutsch|zusammenbr|zusammensack|sackst|taumel|schleuder|umgeworfen|umgehauen|"
+                r"wirft|geworfen|purzel|plumps|landest|landet|auf die knie|k\.o\.|umgekippt|hinunter|herunter|in die tiefe|abgrund|schwerelos|erdbeben|explo|druckwelle")
+DOOR_OPEN_RE = (r"tür\w*\b[^.!?]{0,60}\b(?:springt|geht|gehen|schwingt|fliegt|kracht|bricht|reißt|steht|stand|öffnet|öffnen)\b[^.!?]{0,40}\b(?:auf|offen|sich)\b|"
+                r"(?:springt|schwingt|fliegt|bricht)\b[^.!?]{0,60}tür\w*\b[^.!?]{0,40}\bauf\b|öffne\w*\b[^.!?]{0,30}\btür|\boffene\w* \w*tür|tür\w* (?:ist|steht|bleibt) (?:weit )?offen|"
+                r"tür\w* öffnet sich|hinter der \w*tür\w* (?:ist|liegt|wartet|steht|leuchtet|strahlt)")
+DOOR_SHUT_RE = r"schließ|zugeschlagen|schlägt zu|fällt (?:\w+ )?zu\b|fällt ins schloss|verriegel|verschließ|wieder zu\b"
+
+
+def _door_story(scenes):
+    """Springt eine Tür auf, steht sie offen – auch in den folgenden Sätzen am selben Ort, bis sie jemand schließt (Video 192: „Das Schloss der
+    Dachbodentür springt von alleine auf“ zeigte eine geschlossene Tür). Verneint („öffne niemals die Tür“) zählt nicht."""
+    import re as _re
+    open_at = None
+    for sc in scenes:
+        if not isinstance(sc, dict):
+            continue
+        low = str(sc.get("text") or "").lower()
+        pl = places.resolve(backdrop(sc))
+        if _re.search(DOOR_SHUT_RE, low) or (open_at is not None and pl != open_at):
+            open_at = None
+        if _re.search(DOOR_OPEN_RE, low) and not _re.search(r"\bnie\b|niemals|\bnicht\b|\bkein|\bob\b|würdest|\?|verschlossen|lässt sich nicht", low):
+            open_at = pl
+        if open_at is not None and any(extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) == "door" for q in (sc.get("props") or []) if isinstance(q, dict)):
+            sc["_door_open"] = True
 
 
 def _stems(text):
@@ -5773,6 +5857,9 @@ SAID_SKIP = {"gang", "welt", "world", "karte", "map", "deutschland", "deutschlan
              "natur", "laden", "geschäft", "firma", "konzern", "stadt", "city"}
 SAID_RE = (r"\b(?:im|ins|am|zum|zur|beim|vom|aus dem|aus der|auf dem|auf der|in (?:der|die|den|dem|das|einem|einer|einen|deinen|deinem|deiner|"
            r"deine|eurem|eurer|unserem|unserer|seinem|seiner|ihrem|ihrer))\s+(?:[a-zäöüß]+(?:e|en|er|es|em)\s+)?([a-zäöüß-]+)")
+
+
+COMPOUND_THING_RE = r"[a-zäöüß]{4,}(?:tür|türe|türen|luke|treppe|fenster|schlüssel|schloss|klappe|leiter)\b"   # „Dachbodentür“, „Kellerfenster“: ein Ding, kein Ort
 
 
 def _said_place(text):
