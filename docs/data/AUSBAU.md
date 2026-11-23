@@ -197,6 +197,8 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   Bild, entfällt eine erschrockene/gaffende Menge, wenn der Satz nicht von Leuten oder Panik spricht (`PAIR_CROWD_RE`), im Restaurant/Büro auch Passanten;
   in der Kategorie `liebe` stehen in Sätzen ohne Figuren beide Figuren des Paars im Zimmer statt einer einzelnen, die hereinläuft. `rig.Look.male`
   (`gender: "m"`): nie Frauen-Gesicht, Locken nur als kurzer Schopf. `graphics.clean` streicht Emojis (leeres Kästchen im Chat). Selftest: `_pair`.
+  Nach Video 191: „überrascht dich mit etwas“ ohne genanntes Ding → er hält ein Päckchen (`SURPRISE_RE`, `lib_geschenk`); im Restaurant/Café stellt ein
+  allgemeines „Menschen“ keine Fremden an den Tisch des Paars (nur `PAIR_FULL_RE`: voll, Gäste, Kellner …); Titelkarte ohne doppelte Zeile (Kicker = Text).
   Offen: Händchenhalten, Umarmen, gemeinsam am Tisch sitzen gibt es nicht als Haltung; das Handy als Requisite steht kindsgroß auf dem Boden.
 
 ## Was zu tun ist

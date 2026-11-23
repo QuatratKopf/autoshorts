@@ -411,7 +411,19 @@ def main():
         assert rig.Look.from_spec({"hair": "curly"}, "x").fem and rig.Look.from_spec(cast_p["du"], "du").fem
         g_p = graphics.clean({"type": "phone", "mode": "chat", "text": "Bist du gut angekommen? ❤️", "sub": "Ja 😊"})
         assert g_p and g_p["text"] == "Bist du gut angekommen?" and g_p.get("sub") == "Ja", f"Emoji bleibt in der Grafik: {g_p}"
-        for sc in scs:
+        T2 = [{"text": "Er merkt sich deinen Lieblingskaffee.", "place": "cafe", "actors": two("sit", "sit")},
+              {"text": "Oder er überrascht dich mit etwas, das du vor Wochen erwähnt hast.", "place": "cafe", "actors": two("shocked", "point")},
+              {"text": "Und die schenkt man nur Menschen, die einem wirklich wichtig sind.", "place": "cafe", "crowd": "walk", "actors": two("sit", "sit")},
+              {"text": "Das Café ist heute richtig voll.", "place": "cafe", "crowd": "walk", "actors": two("sit", "sit")},
+              {"text": "Zeichen drei ist der Blick.", "place": "livingroom", "shot": "graphic", "graphic": {"type": "round", "kicker": "DER BLICK", "text": "DER BLICK"}},
+              {"text": "Schreib es in die Kommentare.", "place": "livingroom", "actors": [{"id": "du", "action": "talk"}]}]
+        sc2 = stage.direct(T2, [(n_ * 3, n_ * 3 + 3) for n_ in range(len(T2))], "3 Zeichen, dass deine Situationship in dich verliebt ist", "liebe", "")
+        if stage.extras.held_key("lib_geschenk"):
+            assert next((a for a in sc2[1]["actors"] if a.get("id") == "max"), {}).get("hold") == "lib_geschenk", f"Überraschung ohne Päckchen: {sc2[1]['actors']}"
+        assert not sc2[2].get("crowd"), "allgemeines „Menschen“ stellt Fremde an den Tisch des Paars"
+        assert sc2[3].get("crowd"), "volles Café ohne Gäste"
+        assert "kicker" not in (sc2[4].get("graphic") or {"kicker": 1}), f"Titelkarte nennt dieselbe Zeile zweimal: {sc2[4].get('graphic')}"
+        for sc in scs + sc2:
             frame(sc, cast_p)
     check("Paar-Video (kein Tauchgang bei „auftauchen“, kein loses Ohr, keine Menge am Tisch, Mann mit Locken)", _pair)
     check("Musik-Video (Kopfhörer, Gänsehaut-Schaubild, Lautsprecher) und Hafen", _music)

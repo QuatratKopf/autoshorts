@@ -1512,10 +1512,16 @@ def direct(scenes, times, topic="", style="", look=""):
         kinds_now = [extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) for p in (sc.get("props") or []) if isinstance(p, dict)]
         if ("ambulance" in kinds_now or "police" in kinds_now) and "car" in kinds_now and not _re0.search(r"\bautos?\b|autofahrer|\bstau", txt0):
             sc["props"] = [p for p in sc["props"] if not (isinstance(p, dict) and extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) == "car")]
-        if _re0.search(GIVE_RE + "|" + TAKE_RE, txt0) and str(sc.get("shot") or "") not in ("insert", "event", "graphic"):   # „teilt sein Stück Kuchen“: jemand hält es in der Hand
+        surprise_g = bool(_re0.search(SURPRISE_RE, txt0)) and len([a for a in acts if not a.get("kind")]) >= 2 and bool(extras.held_key("lib_geschenk"))
+        if (_re0.search(GIVE_RE + "|" + TAKE_RE, txt0) or surprise_g) and str(sc.get("shot") or "") not in ("insert", "event", "graphic"):   # „teilt sein Stück Kuchen“: jemand hält es in der Hand
             things_g = [k for pat, k in _lib_props() + TEXT_PROPS if _re0.search(pat, txt0)]
             thing_g = next((str(x) for x in things_g if extras.held_key(x).startswith("prop:")), "")
             humans_g = [a for a in acts if not a.get("kind")]
+            if surprise_g and not thing_g:                # „Er überrascht dich mit etwas, das du vor Wochen erwähnt hast“: er hält ein Päckchen hin, statt nur zu zeigen (Video 191)
+                thing_g = "lib_geschenk"
+                if not any(a.get("hold") for a in humans_g):
+                    humans_g = [a for a in humans_g if str(a.get("action") or "") != "shocked"] or humans_g   # der Überraschte hält es nicht
+                    humans_g = humans_g + humans_g[:1] if len(humans_g) == 1 else humans_g
             if thing_g and humans_g and not any(a.get("hold") for a in humans_g):
                 giver = humans_g[-1] if len(humans_g) > 1 and _re0.search(GIVE_RE, txt0) else humans_g[0]   # geben: der andere („der Kollege“); essen/nehmen: die Hauptfigur
                 giver["hold"] = thing_g
@@ -3090,6 +3096,7 @@ BODY_IDIOM_RE = (r"über (?:beide|alle) ohren|ganz ohr\b|ohren spitz|übers ohr|
                  r"aus den augen|im auge behalt|ein auge auf|augen auf\b|auf den zahn|zahn der zeit|nase voll|an der nase|nase vorn|der nase nach|finger weg|um den finger|"
                  r"keinen finger|finger im spiel|muskeln spielen")
 PAIR_CROWD_RE = r"\balle\b|\bleute|menschen|\bmenge\b|publikum|zuschauer|gäste|passanten|\bvoll\b|überfüllt|gedränge|fremde|kellner|\bjeder\b|andere[nr]?\b"
+PAIR_FULL_RE = r"\bvoll(?:e[nrs]?)?\b|überfüllt|gedränge|\bgäste|kellner|publikum|zuschauer|\bmenge\b|alle (?:schauen|starren|gucken|sehen|drehen)|leute (?:schauen|starren|gucken|drehen)"
 PAIR_QUIET = ("restaurant", "office", "classroom", "hospital", "chapel")
 
 
@@ -3133,6 +3140,8 @@ def _pair_sense(scenes, style=""):
                 sc["crowd"] = ""
             elif rp in PAIR_QUIET:
                 sc["crowd"] = ""
+        elif len(humans) >= 2 and crowd and rp in PAIR_QUIET and not re.search(PAIR_FULL_RE, low) and not re.search(PANIC_RE, low):
+            sc["crowd"] = ""                              # „… schenkt man nur Menschen, die einem wichtig sind“: allgemeines „Menschen“ stellt keine Fremden an den Tisch des Paars (Video 191)
         if pair and len(humans) == 1 and len(sc.get("actors") or []) == 1 and rp in ROOMS and shot == "" and not sc.get("crowd") \
                 and str(humans[0].get("action") or "") == "walk" and str(humans[0].get("pos") or "") in ("offleft", "offright") and not humans[0].get("hold") \
                 and not humans[0].get("say"):
@@ -4538,6 +4547,7 @@ def _topic_creature(scenes, topic):
 
 
 PARTY_RE = r"feier|\bparty|jubel|hurra|gewinn|gewonnen|\bsieg|glückwunsch|gratul|geburtstag|silvester|konfetti|geschafft|rekord|weltmeister|applaus"
+SURPRISE_RE = r"überrasch\w* (?:dich|mich|dir|sie|ihn|euch) (?:\w+ ){0,2}mit (?:etwas|was\b|einer kleinigkeit|einem kleinen)|mitbringsel|(?:bringt|schenkt) (?:dir|mir|ihr|ihm) (?:\w+ ){0,2}(?:etwas|eine kleinigkeit) mit"
 GIVE_RE = r"\bteil\w*\b|schenk|überreich|\breicht\b|\bgibt\b.{0,40}\b(ab|weiter|her)\b|bringt .{0,40}\bmit\b|bietet .{0,40}\ban\b|spendier"
 TAKE_RE = r"\bisst\b|\bisse?t\b|\besse\b|bei(ß|ss)t|\bnasch|\bhältst\b|\bhält\b|\bnimmst\b|\bnimmt\b|\bgreifst\b|\bgreift\b|\bhebst\b|in der hand|\bträgst\b"
 LYING_RE = r"\b(liegst|liegt|liegen)\b.{0,40}\b(platt|flach|am boden|auf dem boden|auf der straße|auf dem asphalt|auf dem gehweg)\b"

@@ -1795,6 +1795,8 @@ def clean(g):
             v = " ".join(_EMOJI_RE.sub(" ", str(v)).split())      # Emojis kennt die Schrift nicht: „Bist du gut angekommen? ❤️“ zeigte ein leeres Kästchen (Video 190)
             if v:
                 out[k] = v[:44]
+    if out.get("kicker") and out.get("text") and out["kicker"].strip().lower() == out["text"].strip().lower():
+        out.pop("kicker")                         # „DER BLICK“ klein über „DER BLICK“ groß (Video 191): dieselbe Zeile nicht zweimal
     out["dark"] = g.get("dark") is True
     need = {"number": "value", "timer": "value", "calendar": "value", "houses": "value", "badge": "text", "question": None,
             "map": None, "city": None, "versus": "left", "round": "text", "score": "value", "compare": "value", "podium": "text",
