@@ -7337,5 +7337,48 @@
   "slot": "2026-11-23 13:00",
   "review_at": 1795429443.5237653,
   "error": "Bei der Prüfung verworfen: Goldfische statt Paar (tauchen auf), Ohr auf der Wiese, Menge beim Eifersuchts-Satz, Max als Frau gezeichnet"
+ },
+ {
+  "id": 191,
+  "category": "liebe",
+  "topic": "3 Zeichen, dass deine Situationship insgeheim längst in dich verliebt ist – Titel: 3 Zeichen, dass deine Situationship in dich verliebt ist. Titelbild-Text: MEHR ALS NUR FREUNDE. Vorgaben: Du-Form, zwei Figuren (du und er, ohne Namen im Sprechertext), Reihenfolge einhalten, Punkte sind Stichpunkte, nicht wörtlich abschreiben, jeder Satz bringt etwas Neues, jede Szene zeigt die beiden bei genau dem, wovon der Satz spricht: 1) Aufhänger in einem vollständigen Satz: drei kleine Zeichen verraten es, und das dritte lässt sich nicht verstecken; die beiden sitzen im Café. 2) Zeichen eins, die kleinen Details: er merkt sich, welchen Kaffee du trinkst, und bringt ihn dir mit. 3) Er schenkt dir eine Kleinigkeit, von der du vor Wochen nur nebenbei erzählt hast. 4) Warum das zählt: Merken kostet Aufmerksamkeit, und die schenkt man nur jemandem, der einem wichtig ist. 5) Zeichen zwei, die Zukunft: er redet von nächster Woche und vom Sommer, aus ich wird wir. 6) Der Samstagabend ist stillschweigend für dich reserviert, ohne dass ihr es je abgesprochen habt. 7) Zeichen drei, der Blick: er sieht dich an, wenn du lachst, und schaut schnell weg, wenn du es merkst. 8) In einem vollen Raum sucht sein Blick zuerst dich. 9) Warum sagt es dann keiner? Aus Angst, das Lockere kaputt zu machen. 10) Ehrlich bleiben: Zeichen sind keine Garantie, Gewissheit bringt nur ein offenes Gespräch. 11) Schluss mit einer Frage an die Zuschauer: Welches der drei Zeichen hast du schon bemerkt? Einzige Zahl: drei. Keine Studien, keine Prozentzahlen, keine Statistiken, keine Namen, keine Redensarten mit Körperteilen, keine englischen Wörter außer Situationship. Beschreibung: beginnt nicht mit dem Titel.",
+  "status": "rendered",
+  "created": 1795431332.7435558,
+  "title": "3 Zeichen, dass deine Situationship in dich verliebt ist",
+  "description": "Erkennt man echte Gefühle im Alltag?\nWelches der drei Zeichen hast du schon bemerkt?",
+  "hashtags": [
+   "#shorts",
+   "#liebe",
+   "#relationship",
+   "#situationship",
+   "#dating",
+   "#beziehungstipps",
+   "#fyp",
+   "#viral"
+  ],
+  "tags": [
+   "situationship",
+   "verliebt",
+   "Dating-Tipps",
+   "beziehung",
+   "anzeichen verliebt",
+   "liebe erkennen",
+   "Gen Z Dating",
+   "crush"
+  ],
+  "thumb_text": "MEHR ALS NUR FREUNDE",
+  "missing": [
+   "blick"
+  ],
+  "cover_ms": 76100,
+  "duration": 76.0,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
