@@ -1,5 +1,5 @@
 {
- "updated": 1795472224.8363945,
+ "updated": 1795474040.3108141,
  "enough": true,
  "counted": 38,
  "total": 40,
@@ -18,10 +18,10 @@
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 1,
-   "avg_views": 2357,
+   "avg_views": 2349,
    "avg_likes": 34.0,
-   "like_rate": 1.44,
-   "avg_score": 2867
+   "like_rate": 1.45,
+   "avg_score": 2859
   },
   {
    "slug": "tiere",
@@ -63,10 +63,10 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 3,
-   "avg_views": 1349,
+   "avg_views": 1350,
    "avg_likes": 38.7,
-   "like_rate": 2.87,
-   "avg_score": 1929
+   "like_rate": 2.86,
+   "avg_score": 1930
   },
   {
    "slug": "motivation",
@@ -90,10 +90,10 @@
    "slug": "grusel",
    "name": "👻 Grusel",
    "n": 1,
-   "avg_views": 430,
+   "avg_views": 471,
    "avg_likes": 21.0,
-   "like_rate": 4.88,
-   "avg_score": 745
+   "like_rate": 4.46,
+   "avg_score": 786
   }
  ],
  "weights": {
@@ -112,9 +112,9 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2289 Aufrufe, 2.04 % Likes).",
-  "Schwächste Kategorie: 👻 Grusel (Ø 430 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2394 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2514 zu 1947 Punkte).",
+  "Schwächste Kategorie: 👻 Grusel (Ø 471 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2395 zu 706 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2515 zu 1948 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -123,9 +123,9 @@
  ],
  "words_bad": [
   "remix",
-  "lied",
-  "bekanntes",
   "erkennst",
+  "bekanntes",
+  "lied",
   "glas"
  ],
  "top": [
@@ -185,11 +185,11 @@
    "id": 184,
    "title": "Warum antwortet dir am Telefon deine eigene Stimme?",
    "category": "grusel",
-   "views": 430,
+   "views": 471,
    "likes": 21,
    "comments": 0,
    "shares": 0,
-   "score": 745
+   "score": 786
   },
   {
    "id": 189,
