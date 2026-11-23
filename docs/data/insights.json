@@ -1,5 +1,5 @@
 {
- "updated": 1795391169.054638,
+ "updated": 1795392960.0744135,
  "enough": true,
  "counted": 35,
  "total": 38,
@@ -9,28 +9,28 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 5,
-   "avg_views": 2284,
+   "avg_views": 2283,
    "avg_likes": 46.6,
    "like_rate": 2.04,
-   "avg_score": 3003
+   "avg_score": 3002
   },
   {
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 1,
-   "avg_views": 2338,
+   "avg_views": 2332,
    "avg_likes": 34.0,
-   "like_rate": 1.45,
-   "avg_score": 2848
+   "like_rate": 1.46,
+   "avg_score": 2842
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 3,
-   "avg_views": 1801,
+   "avg_views": 1806,
    "avg_likes": 43.3,
-   "like_rate": 2.41,
-   "avg_score": 2484
+   "like_rate": 2.4,
+   "avg_score": 2489
   },
   {
    "slug": "mysterien",
@@ -45,10 +45,10 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
-   "avg_views": 1725,
+   "avg_views": 1726,
    "avg_likes": 44.5,
    "like_rate": 2.58,
-   "avg_score": 2403
+   "avg_score": 2404
   },
   {
    "slug": "whatif",
@@ -72,10 +72,10 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 4,
-   "avg_views": 1574,
-   "avg_likes": 10.8,
-   "like_rate": 0.68,
-   "avg_score": 1780
+   "avg_views": 1575,
+   "avg_likes": 11.0,
+   "like_rate": 0.7,
+   "avg_score": 1785
   },
   {
    "slug": "motivation",
@@ -94,7 +94,7 @@
   "mysterien": 1.02,
   "tiere": 1.05,
   "whatif": 1.01,
-  "comedy": 1.27,
+  "comedy": 1.26,
   "musik": 0.75,
   "vergleich": 1.2,
   "motivation": 1.2,
@@ -102,31 +102,31 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2284 Aufrufe, 2.04 % Likes).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2283 Aufrufe, 2.04 % Likes).",
   "Schwächste Kategorie: 🔥 Motivation (Ø 903 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2475 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2581 zu 2022 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2581 zu 2024 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
  ],
  "words_good": [
   "gänsehaut"
  ],
  "words_bad": [
-  "bekanntes",
-  "lied",
   "remix",
-  "erkennst"
+  "erkennst",
+  "bekanntes",
+  "lied"
  ],
  "top": [
   {
    "id": 168,
    "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
    "category": "comedy",
-   "views": 3964,
+   "views": 3960,
    "likes": 53,
    "comments": 1,
    "shares": 0,
-   "score": 4789
+   "score": 4785
   },
   {
    "id": 46,
