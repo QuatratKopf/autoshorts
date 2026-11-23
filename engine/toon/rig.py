@@ -28,6 +28,7 @@ def color(name, default):
 
 
 FEM_HAIR = ("long", "bun", "ponytail", "bob", "curly")
+MALE_WORDS = ("m", "male", "mann", "männlich", "boy", "junge")
 
 
 def _smooth(pts, n=6):
@@ -124,6 +125,7 @@ class Look:
     size: float = 1.0
     hair_color: tuple = None
     fem: bool = False        # weibliches Gesicht: Wimpern, feinere Brauen, Lippenfarbe, eigener Pony (automatisch bei Frauen-Frisuren)
+    male: bool = False       # ausdrücklich ein Mann (gender "m"): nie Wimpern/Lippen, Locken nur als kurzer Schopf (Video 190: „Max“ mit Lockenwolke sah aus wie eine Frau)
     outfit: str = ""         # "" Kapuzenpulli | period (Bürger um 1800: Rock mit Knöpfen bzw. langes Kleid mit Schürze) | king (Mantel mit Hermelin) | guard (Uniformrock mit weißen Gurten)
 
     @staticmethod
@@ -138,7 +140,8 @@ class Look:
                     or (HAIRS[_HAIR_AUTO[(nth if nth is not None else sum(ord(c) for c in str(name))) % len(_HAIR_AUTO)]] if (name or nth is not None) else None),
                     size=max(0.6, min(1.3, float(spec.get("size") or 1.0))),
                     fem=str(spec.get("gender") or "").lower() in ("w", "f", "female", "frau", "weiblich", "girl", "mädchen")
-                    or str(spec.get("hair") or "").lower() in FEM_HAIR,
+                    or (str(spec.get("hair") or "").lower() in FEM_HAIR and str(spec.get("gender") or "").lower() not in MALE_WORDS),
+                    male=str(spec.get("gender") or "").lower() in MALE_WORDS,
                     outfit=str(spec.get("outfit") or "").lower() if str(spec.get("outfit") or "").lower() in ("period", "king", "guard") else "")
 
 
@@ -300,7 +303,7 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
         pants = (236, 230, 216) if outfit == "guard" else (104, 86, 70) if look.pants == (40, 40, 48) else look.pants
         pants_d = _dark(pants, 0.3)
     # Haar hinten (lang, Bob, Pferdeschwanz, Locken): VOR dem Körper gezeichnet, liegt also hinter Hals, Kapuze und Schultern
-    if not mask and look.hat not in ("helmet", "army", "chef") and look.hair in ("long", "bob", "ponytail", "curly"):
+    if not mask and look.hat not in ("helmet", "army", "chef") and look.hair in ("long", "bob", "ponytail", "curly") and not (look.male and look.hair == "curly"):   # Mann mit Locken: kurzer Schopf, keine Wolke hinter dem Kopf
         _hr = 80 * k
         _hc = _pt(top, 180 - (pose.head * f + lean), _hr * 0.86)
         _back_hair(d, look, _hc, _hr * 1.04, _hr * 0.96, _hr, k, f, o, hair, hair_d, hair_l, pose)

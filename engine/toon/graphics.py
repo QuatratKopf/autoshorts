@@ -1778,6 +1778,9 @@ def _g_voice(frame, g, t, dur):
 DRAW["voice"] = _g_voice
 
 
+_EMOJI_RE = re.compile("[\U0001F000-\U0001FAFF\u2300-\u23FF\u2600-\u27BF\u2B00-\u2BFF\uFE0E\uFE0F\u200D\u20E3]")
+
+
 def clean(g):
     """Prüft eine Grafik-Beschreibung aus dem Drehbuch; gibt die saubere Fassung zurück oder None."""
     if not isinstance(g, dict) or str(g.get("type") or "").lower() not in TYPES:
@@ -1789,7 +1792,9 @@ def clean(g):
     for k in ("kicker", "value", "label", "sub", "text", "left", "right"):
         v = g.get(k)
         if isinstance(v, (str, int, float)) and not isinstance(v, bool) and str(v).strip():
-            out[k] = str(v).strip()[:44]
+            v = " ".join(_EMOJI_RE.sub(" ", str(v)).split())      # Emojis kennt die Schrift nicht: „Bist du gut angekommen? ❤️“ zeigte ein leeres Kästchen (Video 190)
+            if v:
+                out[k] = v[:44]
     out["dark"] = g.get("dark") is True
     need = {"number": "value", "timer": "value", "calendar": "value", "houses": "value", "badge": "text", "question": None,
             "map": None, "city": None, "versus": "left", "round": "text", "score": "value", "compare": "value", "podium": "text",

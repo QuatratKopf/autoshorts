@@ -1356,8 +1356,11 @@ def direct(scenes, times, topic="", style="", look=""):
                 sc["place"] = place = "livingroom"        # die Hauptfigur erlebt den Satz (leere Szene wird unten gefüllt)
         ov_c = sc.get("overlay") if isinstance(sc.get("overlay"), dict) else None
         if ov_c and str(ov_c.get("type") or "").lower() in graphics.TYPES and str(ov_c.get("type") or "").lower() != "phone":
-            if not sc.get("graphic") and graphics.clean(ov_c):   # Grafik stand versehentlich als Einblendung im Drehbuch: als Grafik zeigen
-                sc["graphic"], sc["shot"] = graphics.clean(ov_c), "graphic"
+            if not sc.get("graphic") and graphics.clean(ov_c) and not (i == 0 and str(ov_c.get("type") or "").lower() == "round"
+                                                                        and any(isinstance(a_, dict) for a_ in sc.get("actors") or [])):
+                sc["graphic"], sc["shot"] = graphics.clean(ov_c), "graphic"   # Grafik stand versehentlich als Einblendung im Drehbuch: als Grafik zeigen – außer im
+                # ersten Bild mit Figuren: dort bleibt die Szene (das Paar im Café), der Hook-Titel steht ohnehin oben; eine Titelkarte „LIEBE / SITUATIONSHIP“ statt des Bildes
+                # ergab mit Handy-Grafik und „ZEICHEN 1“ drei Tafeln am Stück zum Einstieg (Video 190)
             sc["overlay"] = ov_c = None
         g0 = sc.get("graphic") if isinstance(sc.get("graphic"), dict) else None
         if g0 and g0.get("type") == "map" and not _re0.search(GEO_RE, low0):
@@ -2344,6 +2347,7 @@ def direct(scenes, times, topic="", style="", look=""):
     _fur_ancestor(scenes)
     _fur_story(scenes)
     _indoor_sense(scenes)
+    _pair_sense(scenes, style)
     _sleep_story(scenes, topic)
     _body_story(scenes)
     _game_story(scenes, topic, next((str(a.get("id")) for sc in scenes if isinstance(sc, dict) for a in (sc.get("actors") or [])
@@ -3077,6 +3081,67 @@ def _indoor_sense(scenes):
             sc["props"] = keep
             if str(sc.get("shot") or "") == "insert" and not keep:
                 sc["shot"] = ""
+
+
+# Paar-Videos (Prüfung 23.11.2026, 13-Uhr-Termin, „3 Zeichen, dass deine Situationship in dich verliebt ist“ – Video 190): zur Redensart „über alle Ohren
+# verliebt“ lag ein einzelnes Ohr auf der Wiese zwischen den beiden; zum Satz über Eifersucht drängten sich drei erschrockene Fremde mit Ausrufezeichen zwischen
+# das Paar im Restaurant; Sätze ohne Figuren im Drehbuch zeigten eine einzelne Figur, die ins leere Wohnzimmer läuft, obwohl es um die beiden geht.
+BODY_IDIOM_RE = (r"über (?:beide|alle) ohren|ganz ohr\b|ohren spitz|übers ohr|aufs ohr|hinter die ohren|ins auge (?:fass|stech|spring|fall)|auge zudrück|unter vier augen|"
+                 r"aus den augen|im auge behalt|ein auge auf|augen auf\b|auf den zahn|zahn der zeit|nase voll|an der nase|nase vorn|der nase nach|finger weg|um den finger|"
+                 r"keinen finger|finger im spiel|muskeln spielen")
+PAIR_CROWD_RE = r"\balle\b|\bleute|menschen|\bmenge\b|publikum|zuschauer|gäste|passanten|\bvoll\b|überfüllt|gedränge|fremde|kellner|\bjeder\b|andere[nr]?\b"
+PAIR_QUIET = ("restaurant", "office", "classroom", "hospital", "chapel")
+
+
+def _pair_sense(scenes, style=""):
+    """Schlussdurchgang für Szenen mit Menschen: (1) Ein loses Körperteil aus der Bibliothek (Ohr, Auge, Nase, Zahn, Finger) liegt nie neben einer Figur –
+    sie hat selbst Ohren; bei einer Redensart („über alle Ohren verliebt“) auch nicht allein im Bild. (2) Stehen zwei benannte Figuren im Bild, drängt sich
+    keine erschrockene oder gaffende Menge dazu, wenn der Satz weder von Leuten noch von Panik spricht; im Restaurant, Büro, Klassenzimmer laufen auch keine
+    Fremden zwischen den beiden durch. (3) Liebes-Videos handeln vom Paar: Läuft in einem Satz ohne Figuren nur eine Figur ins Zimmer, stehen beide da und
+    reden miteinander."""
+    pair = []
+    if str(style or "") == "liebe":
+        seen = {}
+        for sc in scenes:
+            if isinstance(sc, dict) and str(sc.get("shot") or "") not in ("graphic", "insert"):
+                ids = [str(a.get("id")) for a in sc.get("actors") or [] if isinstance(a, dict) and a.get("id") and not a.get("kind")]
+                if len(ids) == 2 and ids[0] != ids[1]:
+                    seen[tuple(ids)] = seen.get(tuple(ids), 0) + 1
+        if seen:
+            pair = list(max(seen, key=lambda k_: seen[k_]))
+            pair = pair if seen[tuple(pair)] + seen.get((pair[1], pair[0]), 0) >= 2 else []
+    n_fill = 0
+    for sc in scenes:
+        if not isinstance(sc, dict):
+            continue
+        shot = str(sc.get("shot") or "")
+        low = str(sc.get("text") or "").lower()
+        humans = [a for a in sc.get("actors") or [] if isinstance(a, dict) and not a.get("kind") and not re.search(r"gehirn|hirn|brain", str(a.get("id") or "").lower())]
+        idiom = bool(re.search(BODY_IDIOM_RE, low))
+        if (humans and shot not in ("insert", "graphic")) or idiom:
+            keep = [q for q in sc.get("props") or [] if str((q.get("type") if isinstance(q, dict) else q) or "").lower().replace("lib_", "") not in BODY_PROPS]
+            if len(keep) != len(sc.get("props") or []):
+                sc["props"] = keep
+                if shot == "insert" and not keep:
+                    sc["shot"] = shot = ""
+        if shot in ("graphic", "insert") or isinstance(backdrop(sc), dict):
+            continue
+        rp = places.resolve(backdrop(sc))
+        crowd = str(sc.get("crowd") or "")
+        if len(humans) >= 2 and crowd and not re.search(PAIR_CROWD_RE, low):
+            if crowd in ("worried", "panic", "watch", "sad") and not re.search(PANIC_RE, low):
+                sc["crowd"] = ""
+            elif rp in PAIR_QUIET:
+                sc["crowd"] = ""
+        if pair and len(humans) == 1 and len(sc.get("actors") or []) == 1 and rp in ROOMS and shot == "" and not sc.get("crowd") \
+                and str(humans[0].get("action") or "") == "walk" and str(humans[0].get("pos") or "") in ("offleft", "offright") and not humans[0].get("hold") \
+                and not humans[0].get("say"):
+            emo = MOOD_EMOTION.get(str(sc.get("mood") or ""), "") or "happy"
+            a_id, b_id = (pair if n_fill % 2 == 0 else pair[::-1])
+            sc["actors"] = [{"id": a_id, "action": "talk", "pos": "left", "facing": "right", "emotion": emo, "emote": "", "speaks": False},
+                            {"id": b_id, "action": "think" if emo != "happy" else "idle", "pos": "right", "facing": "left", "emotion": emo,
+                             "emote": "heart" if str(sc.get("mood") or "") == "love" and n_fill % 2 == 0 else "", "speaks": False}]
+            n_fill += 1
 
 
 # Körper-Sätze (Prüfung 16.11.2026, 21-Uhr-Termin, „Was in deinem Körper passiert, wenn du dich erschrickst“ – Video 126: vierzehn von neunzehn
@@ -5533,7 +5598,7 @@ HINTS = [
     (r"gletscher|eiszeit|arktis|antarktis|polkappe|\beis\b", {"ground": "snow", "elements": ["glacier", "mountains"]}),
     (r"\bschnee|\bwinter", "snow"),
     (r"\bmeer|ozean|küste|strand|meereswelle|brandung|\bwellen? (?:schlagen|schlägt|rauschen|rauscht|brechen|bricht|rollen|rollt)", "beach"),   # ein bloßes „die Welle läuft von oben nach unten“ (Schreckreflex) ist kein Strand
-    (r"tiefsee|unter wasser|meeresgrund|meeresboden|korallen|\bfisch|unter der oberfläche|im wasser leb|\btauch(?!t (plötzlich )?auf)|taucher", "underwater"),
+    (r"tiefsee|unter wasser|meeresgrund|meeresboden|korallen|\bfisch|unter der oberfläche|im wasser leb|\btauch(?!\w* (?:[\wäöüß]+ ){0,6}auf\b(?! (?:de[nmr]|die|das|eine[nmr]?|ihre[nm]?|seine[nm]?)\b))|taucher", "underwater"),   # „Plötzlich tauchen Dinge auf, von denen du erzählt hast“ (Video 190: zwei Goldfische im Liebes-Video) – auftauchen ist kein Tauchgang
     (r"wüste|sahara|sanddüne", "desert"),
     (r"vulkan|gebirge|\bberg|gipfel", "mountain"),
     (r"weltall|weltraum|galaxie|planet|umlaufbahn|astronaut|\bmond\b|sonnensystem|satellit", "space"),

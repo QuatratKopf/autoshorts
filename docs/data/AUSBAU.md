@@ -190,6 +190,14 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   Satz kein Wort mehr gemeinsam hat („KEIN EMPFANG“ über dem Museum). Nach Video 188: zeigt der Folgesatz dasselbe Jahr schon als Schaubild, entfällt die
   Plakette davor (13 Sekunden nur „1882“); liegt das Handy schon in der Vitrine, spielen spätere König-Sätze dort (König staunt neben einem Besucher) –
   die Hauptfigur hält es nicht wieder in der Hand. Offen: die Ecken-Zeile „1800 · MARKTPLATZ“ steht auch über Thronsaal-Szenen. Selftest: `_past`. Fehlt noch: Kutsche, Pferd, Kerker, Marktstände, Kirche der Zeit.
+- Paar- und Liebes-Videos (Prüfung 23.11.2026, Video 190 „3 Zeichen, dass deine Situationship in dich verliebt ist“): „Plötzlich tauchen Dinge auf“
+  ist kein Tauchgang (`HINTS`: `tauch… auf` ohne Ziel zählt nicht als `underwater` – vorher zwei Goldfische statt des Paars, auch im ersten Bild). Eine als
+  `overlay` gelieferte Titelkarte (`round`) ersetzt das erste Bild nicht, wenn dort Figuren stehen. `stage._pair_sense` (Schlussdurchgang): kein loses
+  Körperteil aus der Bibliothek neben einer Figur oder bei einer Redensart (`BODY_IDIOM_RE`, „über alle Ohren verliebt“); stehen zwei benannte Figuren im
+  Bild, entfällt eine erschrockene/gaffende Menge, wenn der Satz nicht von Leuten oder Panik spricht (`PAIR_CROWD_RE`), im Restaurant/Büro auch Passanten;
+  in der Kategorie `liebe` stehen in Sätzen ohne Figuren beide Figuren des Paars im Zimmer statt einer einzelnen, die hereinläuft. `rig.Look.male`
+  (`gender: "m"`): nie Frauen-Gesicht, Locken nur als kurzer Schopf. `graphics.clean` streicht Emojis (leeres Kästchen im Chat). Selftest: `_pair`.
+  Offen: Händchenhalten, Umarmen, gemeinsam am Tisch sitzen gibt es nicht als Haltung; das Handy als Requisite steht kindsgroß auf dem Boden.
 
 ## Was zu tun ist
 1. Offene Wünsche (ohne `"done": true`) und `"auto": true`-Einträge durchgehen, höchstens 8 pro Sitzung, häufigste zuerst.

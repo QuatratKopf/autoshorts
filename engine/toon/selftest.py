@@ -386,6 +386,34 @@ def main():
             for ac_ in ("idle", "point", "shake", "walk"):
                 extras.creature("fridge", 0.7, 1, 0.5, em_, 1.0, ac_)
     check("Alltags-Geschichte (Kühlschrank als Figur, Haustier, Brief)", _household)
+
+    def _pair():                                                 # Paar-Video (Video 190): keine Fische bei „tauchen … auf“, kein loses Ohr, keine Menge zwischen dem Paar, Mann bleibt Mann
+        cast_p = {"du": {"shirt": "lila", "hair": "ponytail", "gender": "w"}, "max": {"shirt": "blau", "hair": "curly", "gender": "m"}}
+        two = lambda a1, a2: [{"id": "du", "action": a1, "pos": "left"}, {"id": "max", "action": a2, "pos": "right"}]      # noqa: E731
+        T = [{"text": "Drei versteckte Zeichen verraten, dass deine Situationship dich heimlich liebt.", "place": "restaurant", "actors": two("talk", "laugh"),
+              "overlay": {"type": "round", "kicker": "LIEBE", "text": "SITUATIONSHIP"}},
+             {"text": "Plötzlich tauchen Dinge auf, von denen du vor Wochen mal erzählt hast.", "place": "park", "actors": two("shocked", "point"), "props": ["box"]},
+             {"text": "Das ist kein Zufall, das ist pure Aufmerksamkeit.", "place": "livingroom", "actors": []},
+             {"text": "Nur was passiert, wenn plötzlich echte Eifersucht ins Spiel kommt?", "place": "restaurant", "time": "night", "mood": "tense", "crowd": "watch",
+              "actors": two("look_around", "shocked")},
+             {"text": "Wer so schaut, ist längst über alle Ohren verliebt.", "place": "park", "actors": two("walk", "walk"), "mood": "love"},
+             {"text": "Schreib es in die Kommentare.", "place": "livingroom", "actors": [{"id": "du", "action": "talk"}]}]
+        scs = stage.direct(T, [(n_ * 3, n_ * 3 + 3) for n_ in range(len(T))], "3 Zeichen, dass deine Situationship in dich verliebt ist", "liebe", "")
+        assert all(stage.places.resolve(stage.backdrop(sc)) != "underwater" and not any(a.get("kind") for a in sc.get("actors") or []) for sc in scs), \
+            "„tauchen … auf“ spielt unter Wasser / Fische statt des Paars"
+        assert scs[0].get("shot") != "graphic" and len(scs[0].get("actors") or []) == 2, f"erstes Bild ist eine Titelkarte statt des Paars: {scs[0].get('shot')}"
+        assert len(scs[2].get("actors") or []) == 2, f"Satz ohne Figuren im Liebes-Video: nicht beide im Bild ({scs[2].get('actors')})"
+        assert not scs[3].get("crowd"), f"Menge drängt sich zwischen das Paar: {scs[3].get('crowd')}"
+        assert not any("ohr" in str(q.get("type") if isinstance(q, dict) else q) for q in scs[4].get("props") or []), "loses Ohr bei „über alle Ohren verliebt“"
+        assert stage._hint("Die Taucher tauchen in die Tiefe.") == "underwater" and stage._hint("Dann taucht er plötzlich wieder auf.") != "underwater"
+        lk = rig.Look.from_spec(cast_p["max"], "max")
+        assert lk.male and not lk.fem, "Mann mit Locken wird als Frau gezeichnet"
+        assert rig.Look.from_spec({"hair": "curly"}, "x").fem and rig.Look.from_spec(cast_p["du"], "du").fem
+        g_p = graphics.clean({"type": "phone", "mode": "chat", "text": "Bist du gut angekommen? ❤️", "sub": "Ja 😊"})
+        assert g_p and g_p["text"] == "Bist du gut angekommen?" and g_p.get("sub") == "Ja", f"Emoji bleibt in der Grafik: {g_p}"
+        for sc in scs:
+            frame(sc, cast_p)
+    check("Paar-Video (kein Tauchgang bei „auftauchen“, kein loses Ohr, keine Menge am Tisch, Mann mit Locken)", _pair)
     check("Musik-Video (Kopfhörer, Gänsehaut-Schaubild, Lautsprecher) und Hafen", _music)
 
     def _sleep():                                                # Schlaf-Video (Prüfung 16.11.2026, Video 121): keine Regie-Wörter im Bild, Nacht bleibt Nacht, keine Passanten im Büro, Schlafende zugedeckt im Bett
