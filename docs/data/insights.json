@@ -1,5 +1,5 @@
 {
- "updated": 1795403754.0368726,
+ "updated": 1795405549.2246616,
  "enough": true,
  "counted": 35,
  "total": 38,
@@ -113,20 +113,20 @@
  ],
  "words_bad": [
   "remix",
-  "lied",
+  "bekanntes",
   "erkennst",
-  "bekanntes"
+  "lied"
  ],
  "top": [
   {
    "id": 168,
    "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
    "category": "comedy",
-   "views": 3965,
+   "views": 3964,
    "likes": 53,
    "comments": 1,
    "shares": 0,
-   "score": 4790
+   "score": 4789
   },
   {
    "id": 46,
