@@ -1,5 +1,5 @@
 {
- "updated": 1795447264.0529408,
+ "updated": 1795449071.638663,
  "enough": true,
  "counted": 38,
  "total": 39,
@@ -63,10 +63,10 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 3,
-   "avg_views": 1348,
+   "avg_views": 1349,
    "avg_likes": 38.7,
    "like_rate": 2.87,
-   "avg_score": 1928
+   "avg_score": 1929
   },
   {
    "slug": "motivation",
@@ -90,10 +90,10 @@
    "slug": "grusel",
    "name": "👻 Grusel",
    "n": 1,
-   "avg_views": 340,
+   "avg_views": 360,
    "avg_likes": 17.0,
-   "like_rate": 5.0,
-   "avg_score": 595
+   "like_rate": 4.72,
+   "avg_score": 615
   }
  ],
  "weights": {
@@ -112,9 +112,9 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2286 Aufrufe, 2.04 % Likes).",
-  "Schwächste Kategorie: 👻 Grusel (Ø 340 Aufrufe) – kommt seltener dran.",
+  "Schwächste Kategorie: 👻 Grusel (Ø 360 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2384 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2503 zu 1939 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2504 zu 1939 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -124,8 +124,8 @@
  "words_bad": [
   "remix",
   "erkennst",
-  "bekanntes",
   "lied",
+  "bekanntes",
   "glas"
  ],
  "top": [
@@ -153,11 +153,11 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2265,
+   "views": 2266,
    "likes": 62,
    "comments": 0,
    "shares": 0,
-   "score": 3195
+   "score": 3196
   },
   {
    "id": 124,
@@ -195,11 +195,11 @@
    "id": 184,
    "title": "Warum antwortet dir am Telefon deine eigene Stimme?",
    "category": "grusel",
-   "views": 340,
+   "views": 360,
    "likes": 17,
    "comments": 0,
    "shares": 0,
-   "score": 595
+   "score": 615
   },
   {
    "id": 44,
