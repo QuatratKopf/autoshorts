@@ -702,3 +702,18 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   kunststoffbecken (Alias „becken“ zu weit), nachricht (Briefumschlag bei jedem „Nachricht“), zigarette, ohr (Körperteil allein im Bild).
   Offene Wünsche ohne Zeichnung: raum, polyp, knie, anwaltstitel, toplitzsee, miete, algorithmus, statistik, musik, knall, friteuse, dach, hand,
   handfläche, steuererklärung (greifbar davon: polyp, friteuse, dach, steuererklärung).
+
+- Ausbau 23.11.2026 (13-Uhr-Termin „3 Zeichen, dass deine Situationship in dich verliebt ist“: raum; dazu die vorläufigen Zeichnungen aus dem
+  Smartphone-1800- und dem Telefon-Video): „Raum“ ist kein Ding (`main.NO_THINGS`: raum, räume) – jede Szene spielt in einem Raum, „Die Augen
+  suchen dich im Raum“ braucht keine Zeichnung; der Plan ist damit nicht mehr blockiert.
+  Bibliothek von Hand neu gezeichnet statt der vorläufigen Fassung: `kutsche` (rote Reisekutsche mit Speichenrädern, Kutschbock, Laterne und einem
+  braunen Pferd an der Deichsel; auch Pferdekutsche, Postkutsche, Droschke – der Alias „wagen“ ist weg: „der Wagen bremst“ meint ein Auto),
+  `funkmast` (rot-weißer Gittermast mit drei Sektor-Antennen, Richtfunk-Schüssel und Funkwellen; als Bild 15 m, damit die Spitze im Bild bleibt;
+  auch Mobilfunkmast, Sendemast, Antennenmast), `steckdose` (weiße Wandsteckdose von vorn), `mikrofon` (Studiomikrofon mit Korb und Bügel auf
+  Tischfuß; ohne den englischen Alias „mic“), `schädel` (Schädel von vorn; Totenkopf, Totenschädel – „Schädelknochen“ bleibt beim Schaubild
+  `voice`), `fotoapparat` (Kamera von vorn mit großem Objektiv, ohne Vorbild-Modell; auch Kamera, Spiegelreflexkamera), `erdloch` (Loch im Boden
+  mit Aushub-Hügel und Spaten; Grube – der Alias „loch“ ist weg). Selbsttest: `_ausbau2311`.
+  Noch offen (vorläufige Zeichnungen der Text-KI): kunststoffbecken (Alias „becken“ zu weit; für den Krebs gibt es das Becken `tank`), ohr
+  (Körperteil allein im Bild). Offene Wünsche ohne Zeichnung: polyp, knie, anwaltstitel, toplitzsee, miete, algorithmus, statistik, musik, knall,
+  friteuse, dach, hand, handfläche, steuererklärung (greifbar davon: polyp, friteuse, dach, steuererklärung). Aus dem 1800-Video fehlen weiter
+  Kerker, Marktstände und eine Kirche der Zeit; das Pferd gibt es bisher nur an der Kutsche, nicht als eigenes Wesen.

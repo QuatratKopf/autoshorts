@@ -2309,6 +2309,25 @@ def main():
             frame({"place": "livingroom", "actors": [{"id": "du"}], "props": [{"type": k_}]})
             frame({"shot": "insert", "props": [{"type": k_}]})
     check("Ausbau 22.11.: Handy-Display, Kontrollraum, Bibliothek aufgeräumt", _ausbau2211)
+    def _ausbau2311():                                           # Ausbau 23.11.2026: Kutsche, Funkmast, Steckdose, Mikrofon, Schädel, Fotoapparat, Erdloch; „Raum“
+        import re
+        from engine import main as _main
+        from . import library  # noqa: F401
+        assert _main.known_thing("raum") and _main.known_thing("Räume"), "„Raum“ ist kein Ding, das fehlen kann"
+        tp = stage._lib_props()
+        hit = lambda txt: [k_ for pat_, k_ in tp if re.search(pat_, txt)]
+        for txt_, k_ in (("eine kutsche rollt vorbei", "lib_kutsche"), ("zwei postkutschen", "lib_kutsche"), ("kein einziger funkmast", "lib_funkmast"),
+                         ("die mobilfunkmasten", "lib_funkmast"), ("du suchst eine steckdose", "lib_steckdose"), ("sein mikrofon", "lib_mikrofon"),
+                         ("ein totenkopf", "lib_schaedel"), ("mit dem fotoapparat", "lib_fotoapparat"), ("eine kamera", "lib_fotoapparat"),
+                         ("ein erdloch", "lib_erdloch"), ("in der grube", "lib_erdloch")):
+            assert hit(txt_) == [k_], f"{txt_}: {hit(txt_)}"
+        for txt_ in ("ein loch im zaun", "der wagen bremst", "die überwachungskamera", "durch den schädelknochen", "dein mic ist an"):
+            assert hit(txt_) == [], f"zu weiter Alias: {txt_}: {hit(txt_)}"
+        for k_ in ("lib_kutsche", "lib_funkmast", "lib_steckdose", "lib_mikrofon", "lib_schaedel", "lib_fotoapparat", "lib_erdloch"):
+            assert k_ in extras.PROPS and extras.prop_fit(k_), f"{k_} fehlt in der Bibliothek"
+            frame({"place": "park", "actors": [{"id": "du"}], "props": [{"type": k_}]})
+            frame({"shot": "insert", "props": [{"type": k_}]})
+    check("Ausbau 23.11.: Kutsche, Funkmast, Steckdose, Mikrofon, Schädel, Fotoapparat, Erdloch", _ausbau2311)
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")
     import collections
     for line, n in collections.Counter(e.strip().splitlines()[-1] + "  @ " + e.strip().splitlines()[-3].strip()[:90] for e in errors).most_common(30):

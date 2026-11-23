@@ -142,6 +142,7 @@ NO_THINGS = {"bug", "bugs", "glitch", "glitches", "fehler", "regel", "regeln", "
              "haar", "haare", "härchen", "haarwurzel", "haarwurzeln", "haut", "körper", "kopf",
              "tönnchen", "tönnchenform", "tönnchenstadium", "tonnenstadium", "eiweiß", "schutz-eiweiß", "schutzeiweiß", "erbgut", "stoffwechsel", "strahlung",
              "wand", "wände", "zimmerwand", "punkt", "punkte",
+             "raum", "räume", "raumes", "räumen",     # jede Szene spielt in einem Raum – „suchen dich im Raum“ ist kein Ding (Ausbau 23.11.2026)
              "nachricht", "nachrichten",      # „Nachricht“ ist meist eine Textnachricht oder Meldung – die gelernte Zeichnung stellte bei jedem Satz einen Briefumschlag ins Bild (Ausbau 22.11.2026)
              "gel", "gameboy", "game boy", "playstation", "xbox", "nintendo", "iphone", "ipad"}       # Körperteile allein im Bild (ein Haarschopf ohne Gesicht auf dem Tisch) sehen befremdlich aus
 
