@@ -1,5 +1,5 @@
 {
- "updated": 1795411111.4529674,
+ "updated": 1795412945.4687936,
  "enough": true,
  "counted": 35,
  "total": 38,
@@ -54,7 +54,7 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 10,
-   "avg_views": 1734,
+   "avg_views": 1733,
    "avg_likes": 43.7,
    "like_rate": 2.52,
    "avg_score": 2392
@@ -112,10 +112,10 @@
   "gänsehaut"
  ],
  "words_bad": [
-  "remix",
-  "erkennst",
+  "bekanntes",
   "lied",
-  "bekanntes"
+  "remix",
+  "erkennst"
  ],
  "top": [
   {
@@ -132,11 +132,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2577,
+   "views": 2572,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3417
+   "score": 3412
   },
   {
    "id": 77,
