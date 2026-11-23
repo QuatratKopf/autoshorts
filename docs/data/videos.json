@@ -7434,5 +7434,13 @@
   "slot": "2026-11-23 18:00",
   "review_at": 1795447185.934194,
   "error": "Bei der Prüfung verworfen: Prüfung: schläft auf dem Dachboden, Nachrichten abgeschnitten, Auflösung fehlt im Bild, Tür bleibt zu"
+ },
+ {
+  "id": 193,
+  "category": "nachricht",
+  "topic": "Eine unbekannte Nummer schickt dir einen Countdown und du sollst eine verschlossene Tür auf deinem Dachboden finden – Titel: Das Rätsel der verschlossenen Tür auf dem Dachboden. Titelbild-Text: ÖFFNE DIE TÜR. Vorgaben: Du-Form, Reihenfolge einhalten, die Punkte sind Stichpunkte, jeder Satz bringt etwas Neues, kein Füllsatz. Der Sprecher liest jede Nachricht wörtlich vor: Was als Nachricht im Bild steht, wird im selben Satz auch gesagt. 1) Drei Uhr zwölf nachts, du schläfst im Schlafzimmer, dein Handy vibriert auf dem Nachttisch: unbekannte Nummer. 2) Die Nachricht lautet: In sieben Tagen beginnt es. Finde die Tür auf deinem Dachboden. 3) Du hältst es für einen schlechten Scherz und löschst die Nachricht. 4) Zweite Nachricht als Beweis: In deinem Kühlschrank liegt eine halbe Pizza. Du gehst in die Küche, öffnest den Kühlschrank, es stimmt. 5) Kapitelkarte: noch sieben Tage. 6) Tag fünf: Du sollst dreihundert Konservendosen kaufen und schiebst den vollen Einkaufswagen durch den Supermarkt. 7) Tag drei: Du steigst mit der Taschenlampe auf den Dachboden, hinter alten Kisten ist eine Tür mit schwerem Schloss, die du noch nie gesehen hast. 8) Tag eins, neue Nachricht: Sprich mit niemandem. Besonders nicht mit dem Nachbarn. Genau in dem Moment klopft dein Nachbar an die Wohnungstür. 9) Im Fernsehen läuft eine Eilmeldung: Tausende Menschen im Land haben dieselbe Nachricht bekommen. 10) Der Countdown erreicht null, das Schloss der Dachbodentür springt von alleine auf, helles Licht fällt heraus. 11) Letzte Nachricht auf dem Handy: Du hast dir das selbst geschickt. Aus der Zukunft. 12) Allerletzter Satz als Frage an die Zuschauer: Würdest du durch die Tür gehen? Kein Regenschirm, keine Jahreszahlen, keine anderen Zahlen als die genannten, niemand stürzt oder fällt hin.",
+  "status": "error",
+  "created": 1795451763.5854158,
+  "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-3.6-flash: HTTP 429 | pollinations: Antwort enthält kein JSON"
  }
 ]
