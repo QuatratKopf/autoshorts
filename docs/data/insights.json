@@ -1,5 +1,5 @@
 {
- "updated": 1795449071.638663,
+ "updated": 1795450858.9605916,
  "enough": true,
  "counted": 38,
  "total": 39,
@@ -18,10 +18,10 @@
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 1,
-   "avg_views": 2344,
+   "avg_views": 2347,
    "avg_likes": 34.0,
    "like_rate": 1.45,
-   "avg_score": 2854
+   "avg_score": 2857
   },
   {
    "slug": "tiere",
@@ -45,10 +45,10 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 11,
-   "avg_views": 1716,
+   "avg_views": 1717,
    "avg_likes": 46.6,
    "like_rate": 2.72,
-   "avg_score": 2418
+   "avg_score": 2419
   },
   {
    "slug": "fakten",
@@ -72,28 +72,28 @@
    "slug": "motivation",
    "name": "🔥 Motivation",
    "n": 1,
-   "avg_views": 919,
+   "avg_views": 920,
    "avg_likes": 49.0,
    "like_rate": 5.33,
-   "avg_score": 1694
+   "avg_score": 1695
   },
   {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 5,
-   "avg_views": 1369,
+   "avg_views": 1366,
    "avg_likes": 11.8,
    "like_rate": 0.86,
-   "avg_score": 1588
+   "avg_score": 1585
   },
   {
    "slug": "grusel",
    "name": "👻 Grusel",
    "n": 1,
-   "avg_views": 360,
+   "avg_views": 340,
    "avg_likes": 17.0,
-   "like_rate": 4.72,
-   "avg_score": 615
+   "like_rate": 5.0,
+   "avg_score": 595
   }
  ],
  "weights": {
@@ -112,9 +112,9 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2286 Aufrufe, 2.04 % Likes).",
-  "Schwächste Kategorie: 👻 Grusel (Ø 360 Aufrufe) – kommt seltener dran.",
+  "Schwächste Kategorie: 👻 Grusel (Ø 340 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2384 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2504 zu 1939 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2504 zu 1938 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -123,9 +123,9 @@
  ],
  "words_bad": [
   "remix",
-  "erkennst",
   "lied",
   "bekanntes",
+  "erkennst",
   "glas"
  ],
  "top": [
@@ -185,21 +185,21 @@
    "id": 189,
    "title": "Jede Scheibe ein Ton: Glas-Remix eines Klassikers",
    "category": "musik",
-   "views": 493,
+   "views": 483,
    "likes": 9,
    "comments": 1,
    "shares": 0,
-   "score": 658
+   "score": 648
   },
   {
    "id": 184,
    "title": "Warum antwortet dir am Telefon deine eigene Stimme?",
    "category": "grusel",
-   "views": 360,
+   "views": 340,
    "likes": 17,
    "comments": 0,
    "shares": 0,
-   "score": 615
+   "score": 595
   },
   {
    "id": 44,
