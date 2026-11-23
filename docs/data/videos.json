@@ -7293,5 +7293,48 @@
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7711061532058127649?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
+ },
+ {
+  "id": 190,
+  "category": "liebe",
+  "topic": "3 Zeichen, dass deine Situationship insgeheim längst in dich verliebt ist",
+  "status": "review",
+  "created": 1795428778.9970853,
+  "title": "3 Zeichen, dass deine Situationship in dich verliebt ist",
+  "description": "3 Zeichen, dass deine Situationship in dich verliebt ist\nDrei klare Signale verraten, ob mehr hinter den Treffen steckt.\nSchreib es in die Kommentare: Bist du Team Situationship oder Beziehung?",
+  "hashtags": [
+   "#shorts",
+   "#fyp",
+   "#viral",
+   "#liebe",
+   "#relationship",
+   "#dating",
+   "#foryou",
+   "#crush"
+  ],
+  "tags": [
+   "situationship",
+   "liebe",
+   "Dating-Tipps",
+   "beziehung",
+   "verliebt",
+   "anzeichen",
+   "crush",
+   "partnerschaft"
+  ],
+  "thumb_text": "MEHR ALS NUR FRIENDS",
+  "missing": null,
+  "cover_ms": 69499,
+  "duration": 69.4,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-23 13:00",
+  "review_at": 1795429443.5237653
  }
 ]
