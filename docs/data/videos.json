@@ -7395,7 +7395,7 @@
   "id": 192,
   "category": "nachricht",
   "topic": "Eine unbekannte Nummer schickt dir einen Countdown – und zwingt dich, eine verschlossene Tür auf deinem Dachboden zu suchen, von der du noch nie gehört hast.",
-  "status": "review",
+  "status": "discarded",
   "created": 1795446776.7935004,
   "title": "Das Rätsel der verschlossenen Tür auf dem Dachboden",
   "description": "Ein Countdown per SMS zwingt dich zu einer unheimlichen Suche.\nEine unbekannte Nummer schickt dir Anweisungen, die du befolgen musst. Was befindet sich hinter der Tür?\nWürdest du die geheimnisvolle Tür auf dem Dachboden öffnen?",
@@ -7432,6 +7432,7 @@
   "look": "noir",
   "mp4": true,
   "slot": "2026-11-23 18:00",
-  "review_at": 1795447185.934194
+  "review_at": 1795447185.934194,
+  "error": "Bei der Prüfung verworfen: Prüfung: schläft auf dem Dachboden, Nachrichten abgeschnitten, Auflösung fehlt im Bild, Tür bleibt zu"
  }
 ]
