@@ -1,5 +1,5 @@
 {
- "updated": 1795400156.7249496,
+ "updated": 1795401948.0959096,
  "enough": true,
  "counted": 35,
  "total": 38,
@@ -18,10 +18,10 @@
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 1,
-   "avg_views": 2338,
+   "avg_views": 2339,
    "avg_likes": 34.0,
    "like_rate": 1.45,
-   "avg_score": 2848
+   "avg_score": 2849
   },
   {
    "slug": "tiere",
@@ -81,10 +81,10 @@
    "slug": "motivation",
    "name": "🔥 Motivation",
    "n": 1,
-   "avg_views": 902,
+   "avg_views": 907,
    "avg_likes": 48.0,
-   "like_rate": 5.32,
-   "avg_score": 1662
+   "like_rate": 5.29,
+   "avg_score": 1667
   }
  ],
  "weights": {
@@ -103,7 +103,7 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2284 Aufrufe, 2.04 % Likes).",
-  "Schwächste Kategorie: 🔥 Motivation (Ø 902 Aufrufe) – kommt seltener dran.",
+  "Schwächste Kategorie: 🔥 Motivation (Ø 907 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2476 zu 706 Punkte).",
   "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2581 zu 2025 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
@@ -112,10 +112,10 @@
   "gänsehaut"
  ],
  "words_bad": [
-  "erkennst",
   "lied",
+  "bekanntes",
   "remix",
-  "bekanntes"
+  "erkennst"
  ],
  "top": [
   {
