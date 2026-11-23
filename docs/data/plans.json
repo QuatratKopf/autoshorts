@@ -1483,7 +1483,7 @@
   "trend": null,
   "script": {
    "title": "Das Rätsel der verschlossenen Tür auf dem Dachboden",
-   "description": "Ein Countdown per SMS zwingt dich zu einer unheimlichen Suche.\nEine unbekannte Nummer schickt dir Anweisungen, die du befolgen musst. Was befindet sich hinter der Tür?\nWürdest du die geheimnisvolle Tür auf dem Dachboden öffnen?",
+   "description": "Ein Countdown per SMS zwingt dich zu einer unheimlichen Suche.\nEine unbekannte Nummer schickt dir Anweisungen, die du befolgen musst. Was wartet hinter der Tür?\nWürdest du durch die Tür auf dem Dachboden gehen?",
    "hashtags": [
     "#shorts",
     "#mystery",
@@ -1506,10 +1506,7 @@
     "image": "Close-up of a terrified young man holding a glowing smartphone in a dark bedroom, shadow looming over a mysterious attic door in the background, dramatic cinematic lighting.",
     "text": "ÖFFNE DIE TÜR"
    },
-   "wishes": [
-    "pizza",
-    "regenschirm"
-   ],
+   "wishes": [],
    "toon": true,
    "cast": {
     "du": {
@@ -1523,13 +1520,13 @@
    },
    "scenes": [
     {
-     "see": "Die Hauptfigur schläft nachts im dunklen Schlafzimmer, während das Handy aufleuchtet.",
-     "text": "Eine unbekannte Nummer schickt dir einen Countdown zu deiner Dachbodentür.",
-     "image": "Young man sleeping in bed, smartphone lights up brightly on nightstand in dark room.",
+     "see": "Die Hauptfigur schläft nachts im dunklen Schlafzimmer, während das Handy auf dem Nachttisch aufleuchtet.",
+     "text": "Drei Uhr zwölf. Dein Handy vibriert auf dem Nachttisch. Unbekannte Nummer.",
+     "image": "",
      "who": [
       "du"
      ],
-     "place": "zimmer",
+     "place": "bedroom",
      "time": "night",
      "weather": "",
      "props": [
@@ -1542,8 +1539,6 @@
      "highlight": [
       "vibriert"
      ],
-     "hud": "3:12 UHR",
-     "status": "",
      "overlay": {
       "type": "tag",
       "text": "UNBEKANNTE NUMMER"
@@ -1561,32 +1556,24 @@
      "crowd": "",
      "mood": "scary",
      "who_desc": "",
-     "place_desc": "dark bedroom at night, single bed, glowing smartphone on nightstand"
+     "place_desc": "dark bedroom at night, single bed, glowing smartphone on nightstand",
+     "hud": "3:12 UHR",
+     "status": ""
     },
     {
      "see": "Eine Nachricht erscheint auf dem Handy-Bildschirm mit unheimlichen Zeilen.",
-     "text": "Doch was hinter dem Schloss wartet, verändert alles.",
-     "image": "Dark text message screen with typing lines and a red warning at the end.",
+     "text": "Die Nachricht lautet: In sieben Tagen beginnt es. Finde die Tür auf deinem Dachboden.",
+     "image": "",
      "who": [],
-     "place": "zimmer",
+     "place": "bedroom",
      "time": "night",
      "weather": "",
      "props": [],
      "shot": "graphic",
-     "graphic": {
-      "type": "message",
-      "kicker": "UNBEKANNT",
-      "lines": [
-       "In sieben Tagen",
-       "beginnt es.",
-       "Finde die Tür.",
-       "!Öffne niemals die Tür."
-      ]
-     },
      "camera": "still",
      "sfx": "none",
      "highlight": [
-      "Nachricht"
+      "Tür"
      ],
      "overlay": null,
      "actors": [],
@@ -1595,16 +1582,25 @@
      "who_desc": "",
      "place_desc": "dark bedroom at night, single bed, glowing smartphone on nightstand",
      "hud": "",
-     "status": ""
+     "status": "",
+     "graphic": {
+      "type": "message",
+      "kicker": "UNBEKANNT",
+      "lines": [
+       "In sieben Tagen",
+       "beginnt es.",
+       "!Finde die Tür auf deinem Dachboden."
+      ]
+     }
     },
     {
-     "see": "Die Hauptfigur greift überrascht nach dem Handy.",
+     "see": "Die Hauptfigur sitzt wach im Schlafzimmer und schaut skeptisch auf das Handy.",
      "text": "Du hältst das Ganze für einen schlechten Scherz.",
-     "image": "Young man sits up in bed holding his phone with a skeptical expression.",
+     "image": "",
      "who": [
       "du"
      ],
-     "place": "zimmer",
+     "place": "bedroom",
      "time": "night",
      "weather": "",
      "props": [
@@ -1623,9 +1619,9 @@
        "action": "talk",
        "emotion": "",
        "emote": "?",
-       "hold": "phone",
        "pos": "center",
-       "speaks": true
+       "speaks": false,
+       "hold": "phone"
       }
      ],
      "crowd": "",
@@ -1637,25 +1633,18 @@
     },
     {
      "see": "Eine zweite Nachricht trifft auf dem Bildschirm ein.",
-     "text": "Doch dann schreibt die Nummer etwas, das niemand wissen kann.",
-     "image": "Handy screen displaying a very specific note about the contents of the fridge.",
+     "text": "Doch dann schreibt die Nummer: In deinem Kühlschrank liegt eine halbe Pizza.",
+     "image": "",
      "who": [],
-     "place": "zimmer",
+     "place": "bedroom",
      "time": "night",
      "weather": "",
      "props": [],
      "shot": "graphic",
-     "graphic": {
-      "type": "phone",
-      "mode": "chat",
-      "kicker": "UNBEKANNT",
-      "text": "In deinem Kühlschrank liegt eine halbe Pizza.",
-      "sub": "Wer bist du?"
-     },
      "camera": "still",
      "sfx": "whoosh",
      "highlight": [
-      "wissen"
+      "Pizza"
      ],
      "overlay": null,
      "actors": [],
@@ -1664,12 +1653,18 @@
      "who_desc": "",
      "place_desc": "dark bedroom at night, single bed, glowing smartphone on nightstand",
      "hud": "",
-     "status": ""
+     "status": "",
+     "graphic": {
+      "type": "phone",
+      "mode": "chat",
+      "kicker": "UNBEKANNT",
+      "text": "In deinem Kühlschrank liegt eine halbe Pizza."
+     }
     },
     {
-     "see": "Die Hauptfigur öffnet in der dunklen Küche den Kühlschrank und ist schockiert.",
-     "text": "In deinem Kühlschrank liegen eine halbe Pizza und ein kaputter Regenschirm.",
-     "image": "Young man opens fridge door in dark kitchen, wide-eyed in shock, seeing pizza and umbrella inside.",
+     "see": "Die Hauptfigur steht nachts in der dunklen Küche vor dem Kühlschrank und ist schockiert.",
+     "text": "Du schleichst in die Küche und siehst nach. Es stimmt: Da liegt die halbe Pizza.",
+     "image": "",
      "who": [
       "du"
      ],
@@ -1678,14 +1673,13 @@
      "weather": "",
      "props": [
       "fridge",
-      "pizza",
-      "regenschirm"
+      "pizza"
      ],
      "shot": "wide",
      "camera": "zoom_in",
      "sfx": "boom",
      "highlight": [
-      "Kühlschrank"
+      "stimmt"
      ],
      "overlay": {
       "type": "card",
@@ -1698,7 +1692,7 @@
        "emotion": "shocked",
        "emote": "!",
        "pos": "center",
-       "speaks": true
+       "speaks": false
       }
      ],
      "crowd": "",
@@ -1710,37 +1704,37 @@
     },
     {
      "see": "Ein Kapitel-Countdown wird eingeblendet: Noch 7 Tage.",
-     "text": "Der Countdown beginnt zu laufen.",
-     "image": "Chapter card on black background showing 7 days remaining.",
+     "text": "Noch sieben Tage. Der Countdown läuft.",
+     "image": "",
      "who": [],
-     "place": "zimmer",
+     "place": "bedroom",
      "time": "night",
      "weather": "",
      "props": [],
      "shot": "graphic",
-     "graphic": {
-      "type": "chapter",
-      "value": "7",
-      "text": "ZEIT LÄUFT"
-     },
      "camera": "still",
      "sfx": "tick",
      "highlight": [
-      "Countdown"
+      "sieben"
      ],
      "overlay": null,
      "actors": [],
      "crowd": "",
      "mood": "scary",
      "who_desc": "",
-     "place_desc": "dark bedroom at night, single bed, glowing smartphone on nightstand",
+     "place_desc": "",
      "hud": "",
-     "status": ""
+     "status": "",
+     "graphic": {
+      "type": "chapter",
+      "value": "7",
+      "text": "TAGE ÜBRIG"
+     }
     },
     {
-     "see": "Ein Anweisungsschild fordert auf, Vorräte zu kaufen.",
-     "text": "Am ersten Tag sollst du dreihundert Konservendosen kaufen.",
-     "image": "Shopping cart overflowing with tin cans in a supermarket aisle.",
+     "see": "Die Hauptfigur schiebt einen Einkaufswagen voller Konservendosen durch den Supermarkt.",
+     "text": "Am nächsten Morgen kommt die erste Anweisung: Kaufe dreihundert Konservendosen.",
+     "image": "",
      "who": [
       "du"
      ],
@@ -1757,7 +1751,6 @@
      "highlight": [
       "Konservendosen"
      ],
-     "status": "DOSEN: 300 STÜCK",
      "overlay": {
       "type": "note",
       "title": "ANWEISUNG 1",
@@ -1771,19 +1764,20 @@
        "emote": "",
        "pos": "left",
        "to": "center",
-       "speaks": true
+       "speaks": false
       }
      ],
-     "crowd": "walk",
+     "crowd": "",
      "mood": "calm",
      "who_desc": "",
      "place_desc": "",
-     "hud": ""
+     "hud": "",
+     "status": "DOSEN: 300"
     },
     {
-     "see": "Die Hauptfigur steht verängstigt auf dem Dachboden vor einer geheimnisvollen Tür.",
-     "text": "Am dritten Tag musst du die alte Dachbodentür suchen, doch existiert sie überhaupt?",
-     "image": "Young man with flashlight pointing at a heavy locked wooden door in dusty attic.",
+     "see": "Die Hauptfigur leuchtet mit der Taschenlampe über den dunklen, staubigen Dachboden.",
+     "text": "Am dritten Tag steigst du mit der Taschenlampe auf den Dachboden.",
+     "image": "",
      "who": [
       "du"
      ],
@@ -1791,7 +1785,7 @@
      "time": "night",
      "weather": "",
      "props": [
-      "door",
+      "box",
       "flashlight"
      ],
      "shot": "wide",
@@ -1800,32 +1794,29 @@
      "highlight": [
       "Dachboden"
      ],
-     "status": "TÜR: GEFUNDEN",
-     "overlay": {
-      "type": "tag",
-      "text": "VERSTECKTE TÜR"
-     },
+     "overlay": null,
      "actors": [
       {
        "id": "du",
-       "action": "point",
+       "action": "look_around",
        "emotion": "scared",
-       "emote": "!",
-       "hold": "flashlight",
+       "emote": "",
        "pos": "center",
-       "speaks": true
+       "speaks": false,
+       "hold": "flashlight"
       }
      ],
      "crowd": "",
      "mood": "scary",
      "who_desc": "",
      "place_desc": "dusty dark attic, wooden beams, old boxes, spiderwebs, single mysterious locked wooden door",
-     "hud": ""
+     "hud": "",
+     "status": ""
     },
     {
-     "see": "Die Hauptfigur betrachtet eine schwere Eisenkette mit Schloss an der Dachbodentür.",
-     "text": "Aber du hast dort oben noch nie eine Tür gesehen.",
-     "image": "Close-up of heavy chains wrapped around the wooden door handle in attic.",
+     "see": "Die Hauptfigur zeigt mit der Taschenlampe verängstigt auf eine geheimnisvolle Tür auf dem Dachboden.",
+     "text": "Hinter alten Kisten steht eine Tür mit schwerem Schloss, die du noch nie gesehen hast.",
+     "image": "",
      "who": [
       "du"
      ],
@@ -1833,24 +1824,25 @@
      "time": "night",
      "weather": "",
      "props": [
-      "flashlight"
+      "door",
+      "box"
      ],
      "shot": "wide",
      "camera": "still",
      "sfx": "none",
      "highlight": [
-      "nie"
+      "Tür"
      ],
      "overlay": null,
      "actors": [
       {
        "id": "du",
-       "action": "look_around",
-       "emotion": "worried",
-       "emote": "?",
-       "hold": "flashlight",
+       "action": "point",
+       "emotion": "scared",
+       "emote": "!",
        "pos": "center",
-       "speaks": true
+       "speaks": false,
+       "hold": "flashlight"
       }
      ],
      "crowd": "",
@@ -1858,47 +1850,60 @@
      "who_desc": "",
      "place_desc": "dusty dark attic, wooden beams, old boxes, spiderwebs, single mysterious locked wooden door",
      "hud": "",
-     "status": ""
+     "status": "TÜR: GEFUNDEN"
     },
     {
      "see": "Ein Kapitel-Countdown wird eingeblendet: Noch 1 Tag.",
-     "text": "Der letzte Tag bricht an.",
-     "image": "Chapter card showing 1 day remaining.",
+     "text": "Noch ein Tag. Dann endet der Countdown.",
+     "image": "",
      "who": [],
-     "place": "zimmer",
+     "place": "bedroom",
      "time": "night",
      "weather": "",
      "props": [],
      "shot": "graphic",
-     "graphic": {
-      "type": "chapter",
-      "value": "1",
-      "text": "FINALE"
-     },
      "camera": "still",
      "sfx": "tick",
      "highlight": [
-      "letzte"
+      "ein"
      ],
      "overlay": null,
      "actors": [],
      "crowd": "",
      "mood": "scary",
      "who_desc": "",
-     "place_desc": "dark bedroom at night, single bed, glowing smartphone on nightstand",
+     "place_desc": "",
      "hud": "",
-     "status": ""
+     "status": "",
+     "graphic": {
+      "type": "chapter",
+      "value": "1",
+      "text": "TAG ÜBRIG"
+     }
     },
     {
-     "see": "Eine Nachricht fordert absolutes Schweigen gegenüber allen Nachbarn.",
-     "text": "Die Nachricht warnt dich vor allen Menschen in deiner Nähe.",
-     "image": "Message interface displaying strict instruction not to speak to neighbors.",
+     "see": "Eine Nachricht fordert absolutes Schweigen gegenüber dem Nachbarn.",
+     "text": "Die nächste Nachricht warnt dich: Sprich mit niemandem. Besonders nicht mit dem Nachbarn.",
+     "image": "",
      "who": [],
-     "place": "zimmer",
+     "place": "bedroom",
      "time": "night",
      "weather": "",
      "props": [],
      "shot": "graphic",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Nachbarn"
+     ],
+     "overlay": null,
+     "actors": [],
+     "crowd": "",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
      "graphic": {
       "type": "message",
       "kicker": "UNBEKANNT",
@@ -1906,46 +1911,28 @@
        "Sprich mit niemandem.",
        "!Besonders nicht mit dem Nachbarn."
       ]
-     },
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "warnt"
-     ],
-     "overlay": null,
-     "actors": [],
-     "crowd": "",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "dark bedroom at night, single bed, glowing smartphone on nightstand",
-     "hud": "",
-     "status": ""
+     }
     },
     {
-     "see": "Die Hauptfigur späht ängstlich durch den Türspion im Flur.",
-     "text": "Dein Nachbar schleicht bereits misstrauisch durch das Treppenhaus.",
-     "image": "Young man peering through peephole in hallway door, nervous face visible.",
+     "see": "Die Hauptfigur kauert ängstlich im Flur vor der Wohnungstür.",
+     "text": "Genau in diesem Moment klopft dein Nachbar an die Wohnungstür.",
+     "image": "",
      "who": [
       "du"
      ],
      "place": "hallway",
-     "time": "day",
+     "time": "night",
      "weather": "",
      "props": [
       "door"
      ],
      "shot": "wide",
      "camera": "still",
-     "sfx": "none",
+     "sfx": "boom",
      "highlight": [
-      "Nachbar"
+      "klopft"
      ],
-     "status": "NACHBAR: VOR DER TÜR",
-     "overlay": {
-      "type": "stamp",
-      "text": "GEFAHR",
-      "color": "red"
-     },
+     "overlay": null,
      "actors": [
       {
        "id": "du",
@@ -1953,31 +1940,26 @@
        "emotion": "scared",
        "emote": "!",
        "pos": "center",
-       "speaks": true
+       "speaks": false
       }
      ],
      "crowd": "",
      "mood": "scary",
      "who_desc": "",
      "place_desc": "",
-     "hud": ""
+     "hud": "",
+     "status": "NACHBAR: VOR DER TÜR"
     },
     {
-     "see": "Eine Fernsehmeldung warnt vor seltsamen Signalen im ganzen Land.",
-     "text": "Im Fernsehen läuft plötzlich eine merkwürdige Eilmeldung.",
-     "image": "Breaking news graphic on TV screen with flickering emergency broadcast layout.",
+     "see": "Eine Fernsehmeldung warnt vor rätselhaften Nachrichten im ganzen Land.",
+     "text": "Im Fernsehen läuft plötzlich eine Eilmeldung.",
+     "image": "",
      "who": [],
      "place": "livingroom",
      "time": "night",
      "weather": "",
      "props": [],
      "shot": "graphic",
-     "graphic": {
-      "type": "news",
-      "kicker": "EILMELDUNG",
-      "text": "RÄTSELHAFTE NACHRICHTEN",
-      "sub": "Bundesweite Warnung vor Signalen"
-     },
      "camera": "still",
      "sfx": "boom",
      "highlight": [
@@ -1990,12 +1972,18 @@
      "who_desc": "",
      "place_desc": "",
      "hud": "",
-     "status": ""
+     "status": "",
+     "graphic": {
+      "type": "news",
+      "kicker": "EILMELDUNG",
+      "text": "RÄTSELHAFTE NACHRICHTEN",
+      "sub": "Im ganzen Land"
+     }
     },
     {
-     "see": "Die Hauptfigur sitzt verzweifelt im Wohnzimmer vor dem Fernseher.",
-     "text": "Alle Mobiltelefone im Land erhalten dieselbe Anweisung.",
-     "image": "Young man sitting on couch, holding glowing phone, staring at television screen in panic.",
+     "see": "Die Hauptfigur steht fassungslos im Wohnzimmer vor dem Fernseher, das Handy in der Hand.",
+     "text": "Tausende Menschen im ganzen Land haben dieselbe Nachricht bekommen.",
+     "image": "",
      "who": [
       "du"
      ],
@@ -2010,11 +1998,11 @@
      "camera": "zoom_in",
      "sfx": "none",
      "highlight": [
-      "Anweisung"
+      "Tausende"
      ],
      "overlay": {
       "type": "card",
-      "text": "ALLE HANDYS"
+      "text": "IM GANZEN LAND"
      },
      "actors": [
       {
@@ -2022,33 +2010,28 @@
        "action": "shocked",
        "emotion": "shocked",
        "emote": "!",
-       "hold": "phone",
        "pos": "center",
-       "speaks": true
+       "speaks": false,
+       "hold": "phone"
       }
      ],
      "crowd": "",
-     "mood": "panic",
+     "mood": "tense",
      "who_desc": "",
      "place_desc": "",
      "hud": "",
      "status": ""
     },
     {
-     "see": "Ein Herzschlag-Puls flackert als Grafik auf – Nullstunde rückt näher.",
-     "text": "Die Zeit läuft ab und der Countdown erreicht null.",
-     "image": "Pulse line graphic throbbing red with time counter hitting zero.",
+     "see": "Eine große Null wird eingeblendet.",
+     "text": "Dann läuft die Zeit ab. Der Countdown erreicht null.",
+     "image": "",
      "who": [],
-     "place": "zimmer",
+     "place": "bedroom",
      "time": "night",
      "weather": "",
      "props": [],
      "shot": "graphic",
-     "graphic": {
-      "type": "pulse",
-      "value": "0",
-      "label": "COUNTDOWN ABGELAUFEN"
-     },
      "camera": "still",
      "sfx": "tick",
      "highlight": [
@@ -2057,16 +2040,21 @@
      "overlay": null,
      "actors": [],
      "crowd": "",
-     "mood": "panic",
+     "mood": "tense",
      "who_desc": "",
-     "place_desc": "dark bedroom at night, single bed, glowing smartphone on nightstand",
+     "place_desc": "",
      "hud": "",
-     "status": ""
+     "status": "",
+     "graphic": {
+      "type": "chapter",
+      "value": "0",
+      "text": "COUNTDOWN ABGELAUFEN"
+     }
     },
     {
-     "see": "Die Hauptfigur weicht erschrocken zurück, als die Dachbodentür von selbst aufbricht.",
-     "text": "Plötzlich springt das Schloss der hölzernen Dachbodentür von alleine auf.",
-     "image": "Attic door creaks open violently, revealing intense mysterious white light from behind.",
+     "see": "Die Hauptfigur weicht erschrocken zurück, als die Dachbodentür von selbst aufgeht und helles Licht herausfällt.",
+     "text": "Oben auf dem Dachboden springt das Schloss der Tür von alleine auf.",
+     "image": "",
      "who": [
       "du"
      ],
@@ -2082,48 +2070,55 @@
      "highlight": [
       "auf"
      ],
-     "status": "TÜR: OFFEN",
      "overlay": null,
      "actors": [
       {
        "id": "du",
-       "action": "fall",
+       "action": "shocked",
        "emotion": "shocked",
        "emote": "!",
        "pos": "center",
-       "speaks": true
+       "speaks": false
       }
      ],
      "crowd": "",
-     "mood": "panic",
+     "mood": "tense",
      "who_desc": "",
      "place_desc": "dusty dark attic, wooden beams, old boxes, spiderwebs, single mysterious locked wooden door",
-     "hud": ""
+     "hud": "",
+     "status": "TÜR: OFFEN"
     },
     {
-     "see": "Das Display zeigt eine Enthüllungsnachricht der unbekannten Nummer.",
-     "text": "Ein letzter Blick auf dein Handy verrät den Absender.",
-     "image": "Smartphone displaying a shocking final message revealed on the lock screen.",
-     "who": [],
+     "see": "Die Hauptfigur steht wie erstarrt vor der offenen, hell leuchtenden Tür und hält das Handy in der Hand.",
+     "text": "Helles Licht strahlt heraus, und dein Handy meldet sich ein letztes Mal.",
+     "image": "",
+     "who": [
+      "du"
+     ],
      "place": "attic",
      "time": "night",
      "weather": "",
-     "props": [],
-     "shot": "graphic",
-     "graphic": {
-      "type": "phone",
-      "mode": "lock",
-      "value": "03:12",
-      "kicker": "ABSENDER",
-      "text": "Du hast die Nachricht selbst gesendet. Aus dem Jahr 2035."
-     },
+     "props": [
+      "door"
+     ],
+     "shot": "wide",
      "camera": "still",
-     "sfx": "ding",
+     "sfx": "none",
      "highlight": [
-      "Absender"
+      "Licht"
      ],
      "overlay": null,
-     "actors": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "freeze",
+       "emotion": "scared",
+       "emote": "",
+       "pos": "center",
+       "speaks": false,
+       "hold": "phone"
+      }
+     ],
      "crowd": "",
      "mood": "scary",
      "who_desc": "",
@@ -2132,9 +2127,40 @@
      "status": ""
     },
     {
+     "see": "Das Display zeigt die Enthüllungsnachricht der unbekannten Nummer.",
+     "text": "Die letzte Nachricht lautet: Du hast dir das selbst geschickt. Aus der Zukunft.",
+     "image": "",
+     "who": [],
+     "place": "attic",
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "shot": "graphic",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Zukunft"
+     ],
+     "overlay": null,
+     "actors": [],
+     "crowd": "",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": "dusty dark attic, wooden beams, old boxes, spiderwebs, single mysterious locked wooden door",
+     "hud": "",
+     "status": "",
+     "graphic": {
+      "type": "phone",
+      "mode": "lock",
+      "value": "03:12",
+      "kicker": "UNBEKANNT",
+      "text": "Du hast dir das selbst geschickt. Aus der Zukunft."
+     }
+    },
+    {
      "see": "Die Hauptfigur blickt völlig fassungslos in das helle Licht der offenen Tür.",
-     "text": "Die Nachricht stammt von dir selbst aus der Zukunft.",
-     "image": "Young man standing paralyzed in front of the blinding portal behind the attic door.",
+     "text": "Dein Ich aus der Zukunft hat dich zu dieser Tür geführt.",
+     "image": "",
      "who": [
       "du"
      ],
@@ -2152,7 +2178,7 @@
      ],
      "overlay": {
       "type": "stamp",
-      "text": "ZEITREISE",
+      "text": "ZUKUNFT",
       "color": "purple"
      },
      "actors": [
@@ -2162,7 +2188,7 @@
        "emotion": "shocked",
        "emote": "!",
        "pos": "center",
-       "speaks": true
+       "speaks": false
       }
      ],
      "crowd": "",
@@ -2173,37 +2199,35 @@
      "status": ""
     },
     {
-     "see": "Die Hauptfigur schläft im Bett – doch das Handy vibriert erneut.",
-     "text": "Drei Uhr zwölf. Dein Handy vibriert auf dem Nachttisch.",
-     "image": "Young man sleeping in bed, smartphone lights up brightly on nightstand in dark room.",
+     "see": "Die Hauptfigur steht nachdenklich vor der offenen, leuchtenden Tür auf dem Dachboden.",
+     "text": "Würdest du durch die Tür gehen oder weglaufen?",
+     "image": "",
      "who": [
       "du"
      ],
-     "place": "zimmer",
+     "place": "attic",
      "time": "night",
      "weather": "",
      "props": [
-      "clock",
-      "phone"
+      "door"
      ],
      "shot": "wide",
      "camera": "still",
-     "sfx": "ding",
+     "sfx": "none",
      "highlight": [
-      "vibriert"
+      "Tür"
      ],
-     "status": "",
      "overlay": {
       "type": "choice",
-      "a": "Tür öffnen",
-      "b": "Handy zerstören"
+      "a": "Durchgehen",
+      "b": "Weglaufen"
      },
      "actors": [
       {
        "id": "du",
-       "action": "sleep",
-       "emotion": "",
-       "emote": "",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "?",
        "pos": "center",
        "speaks": false
       }
@@ -2211,8 +2235,9 @@
      "crowd": "",
      "mood": "scary",
      "who_desc": "",
-     "place_desc": "dark bedroom at night, single bed, glowing smartphone on nightstand",
-     "hud": ""
+     "place_desc": "dusty dark attic, wooden beams, old boxes, spiderwebs, single mysterious locked wooden door",
+     "hud": "",
+     "status": ""
     }
    ],
    "hud": "3:12 UHR",
@@ -2220,10 +2245,7 @@
   },
   "provider": "gemini",
   "remake": false,
-  "needs": [
-   "pizza",
-   "countdown"
-  ],
+  "needs": [],
   "title": "Das Rätsel der verschlossenen Tür auf dem Dachboden",
   "created": 1795429624.4679983
  },

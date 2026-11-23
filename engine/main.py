@@ -780,6 +780,14 @@ def main(argv=None):
                         trends.refresh()
                 except Exception as e:  # noqa: BLE001
                     log(f"Trends: {e}")
+        elif a.action == "make" and a.topic.strip().lower().startswith("plan:"):
+            # Prüfung: dasselbe vorbereitete Drehbuch noch einmal rendern (Thema „plan:2026-11-23 18:00“) – z. B. nach einer Korrektur an der
+            # Engine oder am Plan, oder wenn kein Text-Anbieter erreichbar ist. Ohne Plan zu diesem Termin passiert nichts.
+            pl_r = load("plans.json", {}).get(a.topic.strip()[5:].strip())
+            if isinstance(pl_r, dict) and pl_r.get("script"):
+                make(plan=pl_r, upload=a.upload != "0")
+            else:
+                log("Kein vorbereitetes Drehbuch für „" + a.topic.strip()[5:].strip() + "“ – nichts gebaut")
         elif a.action == "make":
             make(a.category.strip() or None, a.topic.strip() or None, a.upload != "0", a.trend.strip() or None)
         elif a.action == "review_make":  # Video für den nächsten Termin bauen, aber erst nach der Prüfung hochladen

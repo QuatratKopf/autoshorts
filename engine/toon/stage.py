@@ -5331,6 +5331,10 @@ def _cold_open(scenes):
     words0 = re.findall(r"[a-zäöüß]{4,}", str(scenes[0].get("text") or "").lower())
     if rp0 and rp0 not in GENERIC and any(places.ALIASES.get(f_) == rp0 or f_ == rp0 for w_ in words0 for f_ in (w_, w_[:-1], w_[:-2]) if f_ not in SAID_SKIP):
         return                                            # „Ich stand auf einer Beerdigung …“: der Satz nennt seinen Ort und spielt dort – kein Vorgriff aufs Wohnzimmer (Video 167)
+    low0 = str(scenes[0].get("text") or "").lower()
+    if clock_time(low0) or (re.search(r"nachttisch|\bbett\b|schlafzimmer|schläfst|schlafe\b|wach\w*\b", low0)
+                             and any(isinstance(a, dict) and str(a.get("action") or "") == "sleep" for a in scenes[0].get("actors") or [])):
+        return                                            # „Drei Uhr zwölf. Dein Handy vibriert auf dem Nachttisch.“: der Satz beschreibt genau diesen Augenblick – kein Vorgriff auf die Küche (Prüfung Video 192)
     g_first = graphics.clean(scenes[0].get("graphic")) if scenes[0].get("shot") == "graphic" else None
     if g_first and g_first.get("type") in ("radar", "news", "radio", "phone", "chart", "pulse"):
         return                                            # das erste Bild ist schon ein bewegtes Schaubild zum Satz (Radarschirm, Eilmeldung): kein fremdes Bild davor

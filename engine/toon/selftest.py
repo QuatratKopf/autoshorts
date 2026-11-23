@@ -429,7 +429,7 @@ def main():
 
     def _msg192():                                               # Video 192 „Unbekannte Nachricht“: Schlafzimmer statt Dachboden, Nachricht bleibt, Tür springt auf, Uhr zeigt 3:12
         du = lambda act, **kw: [{"id": "du", "action": act, "pos": "center", **kw}]      # noqa: E731
-        T = [{"text": "Eine unbekannte Nummer schickt dir einen Countdown zu deiner Dachbodentür.", "see": "Die Hauptfigur schläft nachts im dunklen Schlafzimmer.",
+        T = [{"text": "Drei Uhr zwölf. Eine unbekannte Nummer schickt dir einen Countdown zu deiner Dachbodentür.", "see": "Die Hauptfigur schläft nachts im dunklen Schlafzimmer.",
               "place": "zimmer", "time": "night", "props": ["clock", "phone"], "actors": du("sleep")},
              {"text": "Die Nachricht warnt dich vor allen Menschen in deiner Nähe.", "place": "zimmer", "shot": "graphic",
               "graphic": {"type": "message", "kicker": "UNBEKANNT", "lines": ["Sprich mit niemandem.", "!Besonders nicht mit dem Nachbarn."]}},
@@ -447,6 +447,7 @@ def main():
              {"text": "Drei Uhr zwölf. Dein Handy vibriert auf dem Nachttisch.", "place": "zimmer", "time": "night", "props": ["clock", "phone"], "actors": du("sleep")}]
         scs = stage.direct(T, [(n_ * 3.5, n_ * 3.5 + 3.5) for n_ in range(len(T))], "Eine unbekannte Nummer schickt dir einen Countdown Das Rätsel der Tür", "nachricht", "noir") or T
         res = lambda n_: stage.places.resolve(stage.backdrop(scs[n_]))      # noqa: E731
+        assert scs[0]["actors"][0]["action"] == "sleep" and not scs[0].get("_cold_open"), "„Drei Uhr zwölf“/Schlafzimmer-Einstieg: kein Vorgriff auf ein anderes Bild"
         assert res(0) == "bedroom" and res(8) == "bedroom", "geschlafen wird im Schlafzimmer – „Dachbodentür“ ist kein Ort, „Nachttisch“ steht im Schlafzimmer"
         assert scs[8]["actors"][0]["action"] == "sleep" and not scs[8]["actors"][0].get("hold"), "Handy vibriert auf dem Nachttisch: die Figur schläft und hält nichts"
         ln = graphics.clean(scs[1]["graphic"])["lines"]
