@@ -1,7 +1,7 @@
 {
- "updated": 1795437907.6576657,
+ "updated": 1795439718.4418468,
  "enough": true,
- "counted": 36,
+ "counted": 37,
  "total": 39,
  "needed": 6,
  "categories": [
@@ -9,10 +9,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 5,
-   "avg_views": 2285,
+   "avg_views": 2286,
    "avg_likes": 46.6,
    "like_rate": 2.04,
-   "avg_score": 3004
+   "avg_score": 3005
   },
   {
    "slug": "vergleich",
@@ -42,6 +42,15 @@
    "avg_score": 2426
   },
   {
+   "slug": "whatif",
+   "name": "🤯 What If",
+   "n": 11,
+   "avg_views": 1715,
+   "avg_likes": 46.5,
+   "like_rate": 2.71,
+   "avg_score": 2416
+  },
+  {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 6,
@@ -49,15 +58,6 @@
    "avg_likes": 44.5,
    "like_rate": 2.58,
    "avg_score": 2403
-  },
-  {
-   "slug": "whatif",
-   "name": "🤯 What If",
-   "n": 10,
-   "avg_views": 1734,
-   "avg_likes": 43.7,
-   "like_rate": 2.52,
-   "avg_score": 2393
   },
   {
    "slug": "storys",
@@ -101,7 +101,7 @@
   "grusel": 1.2,
   "storys": 0.83,
   "mysterien": 1.04,
-  "tiere": 1.07,
+  "tiere": 1.06,
   "whatif": 1.03,
   "comedy": 1.29,
   "musik": 0.77,
@@ -111,30 +111,30 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2285 Aufrufe, 2.04 % Likes).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2286 Aufrufe, 2.04 % Likes).",
   "Schwächste Kategorie: 👻 Grusel (Ø 340 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2423 zu 706 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2429 zu 706 Punkte).",
   "Wörter in starken Titeln: gänsehaut."
  ],
  "words_good": [
   "gänsehaut"
  ],
  "words_bad": [
-  "bekanntes",
-  "remix",
   "lied",
-  "erkennst"
+  "erkennst",
+  "bekanntes",
+  "remix"
  ],
  "top": [
   {
    "id": 168,
    "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
    "category": "comedy",
-   "views": 3970,
+   "views": 3972,
    "likes": 53,
    "comments": 1,
    "shares": 0,
-   "score": 4795
+   "score": 4797
   },
   {
    "id": 46,
