@@ -1,776 +1,4 @@
 {
- "2026-11-23 18:00": {
-  "category": "nachricht",
-  "topic": "Eine unbekannte Nummer schickt dir einen Countdown – und zwingt dich, eine verschlossene Tür auf deinem Dachboden zu suchen, von der du noch nie gehört hast.",
-  "trend": null,
-  "script": {
-   "title": "Das Rätsel der verschlossenen Tür auf dem Dachboden",
-   "description": "Ein Countdown per SMS zwingt dich zu einer unheimlichen Suche.\nEine unbekannte Nummer schickt dir Anweisungen, die du befolgen musst. Was wartet hinter der Tür?\nWürdest du durch die Tür auf dem Dachboden gehen?",
-   "hashtags": [
-    "#shorts",
-    "#mystery",
-    "#grusel",
-    "#storytime",
-    "#creepy",
-    "#fyp",
-    "#viral"
-   ],
-   "tags": [
-    "unbekannte nummer",
-    "mystery story",
-    "gruselgeschichte",
-    "spannung",
-    "countdown",
-    "dachboden",
-    "geheimnis"
-   ],
-   "thumbnail": {
-    "image": "Close-up of a terrified young man holding a glowing smartphone in a dark bedroom, shadow looming over a mysterious attic door in the background, dramatic cinematic lighting.",
-    "text": "ÖFFNE DIE TÜR"
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "grau",
-     "hat": "",
-     "hair": "kurz",
-     "gender": "m",
-     "hair_color": "dunkelbraun",
-     "skin": "hell"
-    }
-   },
-   "scenes": [
-    {
-     "see": "Die Hauptfigur schläft nachts im dunklen Schlafzimmer, während das Handy auf dem Nachttisch aufleuchtet.",
-     "text": "Drei Uhr zwölf. Dein Handy vibriert auf dem Nachttisch. Unbekannte Nummer.",
-     "image": "",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "time": "night",
-     "weather": "",
-     "props": [
-      "clock",
-      "phone"
-     ],
-     "shot": "wide",
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "vibriert"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "UNBEKANNTE NUMMER"
-     },
-     "actors": [
-      {
-       "id": "du",
-       "action": "sleep",
-       "emotion": "",
-       "emote": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "dark bedroom at night, single bed, glowing smartphone on nightstand",
-     "hud": "3:12 UHR",
-     "status": ""
-    },
-    {
-     "see": "Eine Nachricht erscheint auf dem Handy-Bildschirm mit unheimlichen Zeilen.",
-     "text": "Die Nachricht lautet: In sieben Tagen beginnt es. Finde die Tür auf deinem Dachboden.",
-     "image": "",
-     "who": [],
-     "place": "bedroom",
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Tür"
-     ],
-     "overlay": null,
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "dark bedroom at night, single bed, glowing smartphone on nightstand",
-     "hud": "",
-     "status": "",
-     "graphic": {
-      "type": "message",
-      "kicker": "UNBEKANNT",
-      "lines": [
-       "In sieben Tagen",
-       "beginnt es.",
-       "!Finde die Tür auf deinem Dachboden."
-      ]
-     }
-    },
-    {
-     "see": "Die Hauptfigur sitzt wach im Schlafzimmer und schaut skeptisch auf das Handy.",
-     "text": "Du hältst das Ganze für einen schlechten Scherz.",
-     "image": "",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "time": "night",
-     "weather": "",
-     "props": [
-      "phone"
-     ],
-     "shot": "close",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Scherz"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "?",
-       "pos": "center",
-       "speaks": false,
-       "hold": "phone"
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "dark bedroom at night, single bed, glowing smartphone on nightstand",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine zweite Nachricht trifft auf dem Bildschirm ein.",
-     "text": "Doch dann schreibt die Nummer: In deinem Kühlschrank liegt eine halbe Pizza.",
-     "image": "",
-     "who": [],
-     "place": "bedroom",
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "Pizza"
-     ],
-     "overlay": null,
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "dark bedroom at night, single bed, glowing smartphone on nightstand",
-     "hud": "",
-     "status": "",
-     "graphic": {
-      "type": "phone",
-      "mode": "chat",
-      "kicker": "UNBEKANNT",
-      "text": "In deinem Kühlschrank liegt eine halbe Pizza."
-     }
-    },
-    {
-     "see": "Die Hauptfigur steht nachts in der dunklen Küche vor dem Kühlschrank und ist schockiert.",
-     "text": "Du schleichst in die Küche und siehst nach. Es stimmt: Da liegt die halbe Pizza.",
-     "image": "",
-     "who": [
-      "du"
-     ],
-     "place": "kitchen",
-     "time": "night",
-     "weather": "",
-     "props": [
-      "fridge",
-      "pizza"
-     ],
-     "shot": "wide",
-     "camera": "zoom_in",
-     "sfx": "boom",
-     "highlight": [
-      "stimmt"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "ES STIMMT"
-     },
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Kapitel-Countdown wird eingeblendet: Noch 7 Tage.",
-     "text": "Noch sieben Tage. Der Countdown läuft.",
-     "image": "",
-     "who": [],
-     "place": "bedroom",
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "tick",
-     "highlight": [
-      "sieben"
-     ],
-     "overlay": null,
-     "actors": [],
-     "crowd": "",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": "",
-     "graphic": {
-      "type": "chapter",
-      "value": "7",
-      "text": "TAGE ÜBRIG"
-     }
-    },
-    {
-     "see": "Die Hauptfigur schiebt einen Einkaufswagen voller Konservendosen durch den Supermarkt.",
-     "text": "Am nächsten Morgen kommt die erste Anweisung: Kaufe dreihundert Konservendosen.",
-     "image": "",
-     "who": [
-      "du"
-     ],
-     "place": "supermarket",
-     "time": "day",
-     "weather": "",
-     "props": [
-      "cart",
-      "cans"
-     ],
-     "shot": "wide",
-     "camera": "pan_right",
-     "sfx": "none",
-     "highlight": [
-      "Konservendosen"
-     ],
-     "overlay": {
-      "type": "note",
-      "title": "ANWEISUNG 1",
-      "text": "Kaufe 300 Dosen"
-     },
-     "actors": [
-      {
-       "id": "du",
-       "action": "walk",
-       "emotion": "worried",
-       "emote": "",
-       "pos": "left",
-       "to": "center",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": "DOSEN: 300"
-    },
-    {
-     "see": "Die Hauptfigur leuchtet mit der Taschenlampe über den dunklen, staubigen Dachboden.",
-     "text": "Am dritten Tag steigst du mit der Taschenlampe auf den Dachboden.",
-     "image": "",
-     "who": [
-      "du"
-     ],
-     "place": "attic",
-     "time": "night",
-     "weather": "",
-     "props": [
-      "box",
-      "flashlight"
-     ],
-     "shot": "wide",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "Dachboden"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "look_around",
-       "emotion": "scared",
-       "emote": "",
-       "pos": "center",
-       "speaks": false,
-       "hold": "flashlight"
-      }
-     ],
-     "crowd": "",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "dusty dark attic, wooden beams, old boxes, spiderwebs, single mysterious locked wooden door",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Hauptfigur zeigt mit der Taschenlampe verängstigt auf eine geheimnisvolle Tür auf dem Dachboden.",
-     "text": "Hinter alten Kisten steht eine Tür mit schwerem Schloss, die du noch nie gesehen hast.",
-     "image": "",
-     "who": [
-      "du"
-     ],
-     "place": "attic",
-     "time": "night",
-     "weather": "",
-     "props": [
-      "door",
-      "box"
-     ],
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Tür"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": false,
-       "hold": "flashlight"
-      }
-     ],
-     "crowd": "",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "dusty dark attic, wooden beams, old boxes, spiderwebs, single mysterious locked wooden door",
-     "hud": "",
-     "status": "TÜR: GEFUNDEN"
-    },
-    {
-     "see": "Ein Kapitel-Countdown wird eingeblendet: Noch 1 Tag.",
-     "text": "Noch ein Tag. Dann endet der Countdown.",
-     "image": "",
-     "who": [],
-     "place": "bedroom",
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "tick",
-     "highlight": [
-      "ein"
-     ],
-     "overlay": null,
-     "actors": [],
-     "crowd": "",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": "",
-     "graphic": {
-      "type": "chapter",
-      "value": "1",
-      "text": "TAG ÜBRIG"
-     }
-    },
-    {
-     "see": "Eine Nachricht fordert absolutes Schweigen gegenüber dem Nachbarn.",
-     "text": "Die nächste Nachricht warnt dich: Sprich mit niemandem. Besonders nicht mit dem Nachbarn.",
-     "image": "",
-     "who": [],
-     "place": "bedroom",
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Nachbarn"
-     ],
-     "overlay": null,
-     "actors": [],
-     "crowd": "",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": "",
-     "graphic": {
-      "type": "message",
-      "kicker": "UNBEKANNT",
-      "lines": [
-       "Sprich mit niemandem.",
-       "!Besonders nicht mit dem Nachbarn."
-      ]
-     }
-    },
-    {
-     "see": "Die Hauptfigur kauert ängstlich im Flur vor der Wohnungstür.",
-     "text": "Genau in diesem Moment klopft dein Nachbar an die Wohnungstür.",
-     "image": "",
-     "who": [
-      "du"
-     ],
-     "place": "hallway",
-     "time": "night",
-     "weather": "",
-     "props": [
-      "door"
-     ],
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "boom",
-     "highlight": [
-      "klopft"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "cower",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": "NACHBAR: VOR DER TÜR"
-    },
-    {
-     "see": "Eine Fernsehmeldung warnt vor rätselhaften Nachrichten im ganzen Land.",
-     "text": "Im Fernsehen läuft plötzlich eine Eilmeldung.",
-     "image": "",
-     "who": [],
-     "place": "livingroom",
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "boom",
-     "highlight": [
-      "Eilmeldung"
-     ],
-     "overlay": null,
-     "actors": [],
-     "crowd": "",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": "",
-     "graphic": {
-      "type": "news",
-      "kicker": "EILMELDUNG",
-      "text": "RÄTSELHAFTE NACHRICHTEN",
-      "sub": "Im ganzen Land"
-     }
-    },
-    {
-     "see": "Die Hauptfigur steht fassungslos im Wohnzimmer vor dem Fernseher, das Handy in der Hand.",
-     "text": "Tausende Menschen im ganzen Land haben dieselbe Nachricht bekommen.",
-     "image": "",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "time": "night",
-     "weather": "",
-     "props": [
-      "tv",
-      "phone"
-     ],
-     "shot": "wide",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Tausende"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "IM GANZEN LAND"
-     },
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": false,
-       "hold": "phone"
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine große Null wird eingeblendet.",
-     "text": "Dann läuft die Zeit ab. Der Countdown erreicht null.",
-     "image": "",
-     "who": [],
-     "place": "bedroom",
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "tick",
-     "highlight": [
-      "null"
-     ],
-     "overlay": null,
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": "",
-     "graphic": {
-      "type": "chapter",
-      "value": "0",
-      "text": "COUNTDOWN ABGELAUFEN"
-     }
-    },
-    {
-     "see": "Die Hauptfigur weicht erschrocken zurück, als die Dachbodentür von selbst aufgeht und helles Licht herausfällt.",
-     "text": "Oben auf dem Dachboden springt das Schloss der Tür von alleine auf.",
-     "image": "",
-     "who": [
-      "du"
-     ],
-     "place": "attic",
-     "time": "night",
-     "weather": "",
-     "props": [
-      "door"
-     ],
-     "shot": "wide",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "auf"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "dusty dark attic, wooden beams, old boxes, spiderwebs, single mysterious locked wooden door",
-     "hud": "",
-     "status": "TÜR: OFFEN"
-    },
-    {
-     "see": "Die Hauptfigur steht wie erstarrt vor der offenen, hell leuchtenden Tür und hält das Handy in der Hand.",
-     "text": "Helles Licht strahlt heraus, und dein Handy meldet sich ein letztes Mal.",
-     "image": "",
-     "who": [
-      "du"
-     ],
-     "place": "attic",
-     "time": "night",
-     "weather": "",
-     "props": [
-      "door"
-     ],
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Licht"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "freeze",
-       "emotion": "scared",
-       "emote": "",
-       "pos": "center",
-       "speaks": false,
-       "hold": "phone"
-      }
-     ],
-     "crowd": "",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "dusty dark attic, wooden beams, old boxes, spiderwebs, single mysterious locked wooden door",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Display zeigt die Enthüllungsnachricht der unbekannten Nummer.",
-     "text": "Die letzte Nachricht lautet: Du hast dir das selbst geschickt. Aus der Zukunft.",
-     "image": "",
-     "who": [],
-     "place": "attic",
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Zukunft"
-     ],
-     "overlay": null,
-     "actors": [],
-     "crowd": "",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "dusty dark attic, wooden beams, old boxes, spiderwebs, single mysterious locked wooden door",
-     "hud": "",
-     "status": "",
-     "graphic": {
-      "type": "phone",
-      "mode": "lock",
-      "value": "03:12",
-      "kicker": "UNBEKANNT",
-      "text": "Du hast dir das selbst geschickt. Aus der Zukunft."
-     }
-    },
-    {
-     "see": "Die Hauptfigur blickt völlig fassungslos in das helle Licht der offenen Tür.",
-     "text": "Dein Ich aus der Zukunft hat dich zu dieser Tür geführt.",
-     "image": "",
-     "who": [
-      "du"
-     ],
-     "place": "attic",
-     "time": "night",
-     "weather": "",
-     "props": [
-      "door"
-     ],
-     "shot": "close",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Zukunft"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "ZUKUNFT",
-      "color": "purple"
-     },
-     "actors": [
-      {
-       "id": "du",
-       "action": "freeze",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "dusty dark attic, wooden beams, old boxes, spiderwebs, single mysterious locked wooden door",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Hauptfigur steht nachdenklich vor der offenen, leuchtenden Tür auf dem Dachboden.",
-     "text": "Würdest du durch die Tür gehen oder weglaufen?",
-     "image": "",
-     "who": [
-      "du"
-     ],
-     "place": "attic",
-     "time": "night",
-     "weather": "",
-     "props": [
-      "door"
-     ],
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Tür"
-     ],
-     "overlay": {
-      "type": "choice",
-      "a": "Durchgehen",
-      "b": "Weglaufen"
-     },
-     "actors": [
-      {
-       "id": "du",
-       "action": "think",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "dusty dark attic, wooden beams, old boxes, spiderwebs, single mysterious locked wooden door",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "3:12 UHR",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [],
-  "title": "Das Rätsel der verschlossenen Tür auf dem Dachboden",
-  "created": 1795429624.4679983
- },
  "2026-11-23 21:00": {
   "category": "musik",
   "topic": "Musik-Kugel",
@@ -2202,5 +1430,626 @@
   ],
   "title": "Der Waldfrosch: Der Zombie der Tierwelt friert einfach ein",
   "created": 1795515773.972188
+ },
+ "2026-11-24 21:00": {
+  "category": "grusel",
+  "topic": "Was dein Gehirn tut, wenn du im Spiegel an die falsche Stelle starrst",
+  "trend": null,
+  "script": {
+   "title": "Starre nie im Dunkeln in den Spiegel",
+   "description": "Starre im Dunkeln in deinen Spiegel und dein Gehirn verliert die Kontrolle.\nWas nach zehn Sekunden passiert, ist kein Geisterglaube, sondern ein echter optischer Trick deiner Nerven.\nHast du Mut, das heute Nacht selbst zu testen?",
+   "hashtags": [
+    "#shorts",
+    "#grusel",
+    "#spiegel",
+    "#psychologie",
+    "#fakten",
+    "#viral",
+    "#fyp"
+   ],
+   "tags": [
+    "spiegel phänomen",
+    "troxler effekt",
+    "gruselige fakten",
+    "gehirn illusionen",
+    "spiegel nachts",
+    "psychologie fakten",
+    "gruselgeschichten"
+   ],
+   "thumbnail": {
+    "image": "Close-up of a young person staring into a dark mirror in a dimly lit bathroom, face distorting into a strange shadowy shape, extreme shock facial expression, atmospheric blue lighting",
+    "text": "SCHAU NICHT REIN",
+    "place": "bathroom",
+    "time": "night",
+    "actor": "du",
+    "action": "shocked",
+    "emotion": "shocked",
+    "props": [
+     "candle"
+    ],
+    "weather": "dark"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "grau",
+     "hat": "",
+     "hair": "curly",
+     "hair_color": "dunkelbraun",
+     "skin": "hell",
+     "gender": "w"
+    },
+    "gehirn": {
+     "kind": "brain"
+    }
+   },
+   "scenes": [
+    {
+     "see": "Ein Mädchen steht im dunklen Badezimmer vor einem beleuchteten Spiegel.",
+     "text": "Das passiert, wenn du im Dunkeln in den Spiegel starrst.",
+     "image": "Young girl standing in front of a mirror in a dark bathroom illuminated by a tiny light source",
+     "who": [
+      "du"
+     ],
+     "place": "bathroom",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "Spiegel starrst"
+     ],
+     "hud": "0:00 UHR",
+     "status": "MUT: 100%",
+     "overlay": null,
+     "time": "night",
+     "weather": "dark",
+     "props": [
+      "mirror"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "curious",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "see": "Das Mädchen fixiert die Nasenspitze ihres Spiegelbildes.",
+     "text": "Und nach zehn Sekunden verändert sich dein Gesicht völlig.",
+     "image": "Girl staring fixedly into the mirror in a dimly lit bathroom",
+     "who": [
+      "du"
+     ],
+     "place": "bathroom",
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "zehn Sekunden"
+     ],
+     "status": "MUT: 80%",
+     "overlay": {
+      "type": "card",
+      "text": "10 SEKUNDEN"
+     },
+     "time": "night",
+     "weather": "dark",
+     "props": [
+      "mirror"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "watch",
+       "emotion": "surprised",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": ""
+    },
+    {
+     "see": "Grafik zeigt das Gehirn, wie es langweilige Signale filtert.",
+     "text": "Starrst du bei schwachem Licht unbeweglich auf deine eigene Nase, ermüden die Augen.",
+     "image": "Brain character wearing glasses getting tired looking at repetitive visual signals",
+     "who": [
+      "gehirn"
+     ],
+     "place": "bad",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Augen"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bathroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn schaltet die äußeren Bereiche des Bildes stumm.",
+     "text": "Wissenschaftler nennen diese Täuschung den Troxler-Effekt.",
+     "image": "Brain character pointing at a blackboard displaying optical illusion diagrams",
+     "who": [
+      "gehirn"
+     ],
+     "place": "bad",
+     "camera": "pan_right",
+     "sfx": "ding",
+     "highlight": [
+      "Troxler-Effekt"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "TROXLER-EFFEKT"
+     },
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bathroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gesicht im Spiegel verliert am Rand langsam die Konturen.",
+     "text": "Dein Gehirn löscht unbewusst alle Reize am äußeren Rand des Sichtfeldes.",
+     "image": "Close-up of a face in mirror fading into blurry dark shadows around the edges",
+     "who": [
+      "du"
+     ],
+     "place": "bad",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "löscht"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bathroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Mädchen schaut schockiert auf die verblassenden Haare.",
+     "text": "Deine Haare versinken plötzlich in tiefer Dunkelheit.",
+     "image": "Girl reacting with widened eyes as hair shadows blur into background darkness",
+     "who": [
+      "du"
+     ],
+     "place": "bad",
+     "camera": "still",
+     "sfx": "whoosh",
+     "highlight": [
+      "Dunkelheit"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bathroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik: Zähler für Herzfrequenz schießt nach oben.",
+     "text": "Nur: Wie füllt dein Kopf diesen plötzlichen Hohlraum wieder aus?",
+     "image": "Graphic pulse line beating rapidly showing sudden spike in heart rate",
+     "who": [],
+     "place": "bad",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Hohlraum"
+     ],
+     "overlay": {
+      "type": "question",
+      "text": "WARUM?"
+     },
+     "who_desc": "",
+     "place_desc": "bathroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn zeichnet mit Stift ein Monstergesicht.",
+     "text": "Er erfindet einfach Schatten und fremde Konturen hinzu.",
+     "image": "Brain character rapidly drawing weird creepy monster facial features on a pad",
+     "who": [
+      "gehirn"
+     ],
+     "place": "bad",
+     "camera": "pan_left",
+     "sfx": "pop",
+     "highlight": [
+      "erfindet"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bathroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Spiegelbild bekommt verzerrte, riesige Augen.",
+     "text": "Du siehst deine Augen auf einmal riesig und pechschwarz werden.",
+     "image": "Mirror reflection showing eyes expanding into dark voids with scared facial expression",
+     "who": [
+      "du"
+     ],
+     "place": "bad",
+     "camera": "zoom_in",
+     "sfx": "boom",
+     "highlight": [
+      "pechschwarz"
+     ],
+     "status": "MUT: 40%",
+     "overlay": {
+      "type": "card",
+      "text": "VERZERRUNG"
+     },
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bathroom",
+     "hud": ""
+    },
+    {
+     "see": "Das Spiegelbild hat ein verzehrtes gruseliges Lächeln.",
+     "text": "Viele Menschen erkennen darin eine unheimliche Fratze oder ein Monster.",
+     "image": "Creepy distorted shadow reflection in mirror with unnatural wide grin",
+     "who": [
+      "du"
+     ],
+     "place": "bad",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Monster"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bathroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik: Studie zeigt achtzig Prozent der Tester hatten Angst.",
+     "text": "Viele Menschen erleben dabei sogar plötzliche Angstgefühle.",
+     "image": "Graphic displaying eighty percent statistic with alarming visuals",
+     "who": [],
+     "place": "bad",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "achtzig Prozent"
+     ],
+     "overlay": {
+      "type": "counter",
+      "label": "ANGST-QUOTE",
+      "value": 80,
+      "unit": "PROZENT"
+     },
+     "who_desc": "",
+     "place_desc": "bathroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Mädchen drückt vor Angst die Hände an die Brust.",
+     "text": "Aber das ist keine echte Magie oder ein böser Geist.",
+     "image": "Girl holding hands to chest panting heavily in terrified pose",
+     "who": [
+      "du"
+     ],
+     "place": "bad",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "kein Geist"
+     ],
+     "status": "MUT: 10%",
+     "overlay": {
+      "type": "stamp",
+      "text": "KEIN GEIST",
+      "color": "green"
+     },
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bathroom",
+     "hud": ""
+    },
+    {
+     "see": "Das Gehirn sendet Fehler-Meldungen.",
+     "text": "Es ist ein kurzzeitiger Systemfehler in deiner eigenen Wahrnehmung.",
+     "image": "Brain character holding red glowing warning sign while sweating",
+     "who": [
+      "gehirn"
+     ],
+     "place": "bad",
+     "camera": "zoom_out",
+     "sfx": "whoosh",
+     "highlight": [
+      "Systemfehler"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bathroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Mädchen zuckt zusammen, als das Spiegelbild blinzelt.",
+     "text": "Du denkst, dein Spiegelbild bewegt sich plötzlich völlig unabhängig von dir. Falsch.",
+     "image": "Girl in mirror blinks with delay while real girl stares wide-eyed in horror",
+     "who": [
+      "du"
+     ],
+     "place": "bad",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Falsch"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "FINTE"
+     },
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bathroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik: Uhr zeigt Mikroskunden Verzögerung an.",
+     "text": "Dein Gehirn verarbeitet Bilder nur mit einer minimalen Verzögerung.",
+     "image": "Digital timer displaying microseconds speed count",
+     "who": [],
+     "place": "bad",
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "Verzögerung"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "bathroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Mädchen hält die Luft an vor dem Spiegel.",
+     "text": "Sobald du deine Augen auch nur einen Millimeter bewegst, bricht alles zusammen.",
+     "image": "Girl holding breath tensely in front of mirror staring sharp",
+     "who": [
+      "du"
+     ],
+     "place": "bad",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Millimeter"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bathroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gesicht im Spiegel wird sofort wieder normal.",
+     "text": "Das schreckliche Monster verschwindet sofort und dein echtes Gesicht erscheint.",
+     "image": "Reflecting mirror returning to normal clear view of calm girl face",
+     "who": [
+      "du"
+     ],
+     "place": "bad",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "verschwindet"
+     ],
+     "status": "MUT: 100%",
+     "overlay": {
+      "type": "stamp",
+      "text": "NORMAL",
+      "color": "purple"
+     },
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bathroom",
+     "hud": ""
+    },
+    {
+     "see": "Das Mädchen dreht sich um und geht zum Türrahmen.",
+     "text": "Du machst das Licht an und gehst erleichtert ins Bett.",
+     "image": "Girl turning away from mirror toward doorway in bathroom",
+     "who": [
+      "du"
+     ],
+     "place": "bad",
+     "camera": "pan_left",
+     "sfx": "whoosh",
+     "highlight": [
+      "Licht an"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bathroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Mädchen blickt noch einmal zurück zum dunklen Spiegel.",
+     "text": "Trotzdem fragst du dich wieder, was eigentlich passiert, wenn du zu lange in den Spiegel starrst.",
+     "image": "Girl glancing back nervously at the mirror before stepping out into hallway",
+     "who": [
+      "du"
+     ],
+     "place": "flur",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Spiegel starrst"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "hallway",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "nase"
+  ],
+  "title": "Starre nie im Dunkeln in den Spiegel",
+  "created": 1795545718.8601458
  }
 }

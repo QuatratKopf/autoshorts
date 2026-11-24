@@ -1,5 +1,5 @@
 {
- "last_category": "tiere",
+ "last_category": "grusel",
  "done_slots": [
   "2026-11-08 18:00",
   "2026-11-11 18:00",
@@ -58,7 +58,7 @@
   "qrsauuc3k",
   "qa5v1ywsb"
  ],
- "last_stats": 1795543419.9720623,
+ "last_stats": 1795545740.0928044,
  "next_id": 204,
  "connected": {
   "youtube": {
@@ -67,7 +67,7 @@
   }
  },
  "voice_wps": 2.386,
- "last_trends": 1795534328.6898997,
+ "last_trends": 1795545740.0939224,
  "tiktok_handle": "wissens..wert",
  "last_poster": {
   "hero": "frog",
@@ -75,14 +75,14 @@
   "video": 199
  },
  "cat_credit": {
-  "fakten": -1.3399999999999976,
-  "tiere": 3.0700000000000016,
-  "whatif": 1.2400000000000038,
-  "comedy": -2.8999999999999995,
-  "vergleich": -4.349999999999997,
-  "motivation": -4.349999999999997,
-  "grusel": 3.700000000000001,
-  "nachricht": 2.3500000000000014
+  "fakten": -0.2799999999999976,
+  "tiere": 4.170000000000002,
+  "whatif": 2.310000000000004,
+  "comedy": -1.5699999999999994,
+  "vergleich": -3.149999999999997,
+  "motivation": -3.149999999999997,
+  "grusel": -4.459999999999998,
+  "nachricht": 3.5500000000000016
  },
  "bounce_songs": [
   "cc:a0374037-c7fc-4467-94de-28d2e36fc183",
