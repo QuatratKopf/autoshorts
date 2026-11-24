@@ -44,6 +44,43 @@ texts_gfx = ["Warum ist das so?", "Fünf Millionen Haushalte bekommen Post.", "D
              "Einer von sieben Menschen träumt davon.", "Jeder dritte Deutsche kennt das.", "Runde eins: Koffein.", "Drei von zehn Leuten.", "Runde x"]
 
 
+def _math():
+    """Prüfung 24.11.2026 (Video 197 „Riemann-Vermutung“): Mathe-Schaubilder, Mathe-Tafel, Stift in der Hand, kein Namensschild einer echten Person."""
+    T = [("Ein einziges Mathe-Rätsel bringt dir eine Million Dollar.", "livingroom", [{"id": "du"}], None),
+         ("Im Jahr 1859 stellte der deutsche Mathematiker Bernhard Riemann eine Vermutung auf.", "classroom", [{"id": "prof"}], {"type": "tag", "text": "BERNHARD RIEMANN"}),
+         ("Die Tafel füllt sich mit Zeichen.", "classroom", [], None),
+         ("Es geht um die Nullstellen einer besonderen Funktion.", "classroom", [], None),
+         ("Computer haben über zehn Billionen dieser Nullstellen geprüft.", "serverroom", [], {"type": "counter", "label": "GEPRÜFT", "value": 10, "unit": "BIO."}),
+         ("Und wirklich jede einzelne liegt exakt auf einer Linie.", "classroom", [], None),
+         ("Dahinter steckt das Geheimnis der Primzahlen.", "classroom", [{"id": "prof"}], {"type": "card", "text": "PRIMZAHLEN"}),
+         ("Schnapp dir also einen Stift und versuch es selbst.", "livingroom", [{"id": "du"}], None)]
+    sd = stage.direct([{"text": t_, "place": p_, "actors": [dict(a_) for a_ in ac_], "overlay": ov_, "props": []} for t_, p_, ac_, ov_ in T],
+                      [(k * 4.0, k * 4.0 + 4.0) for k in range(len(T))], "Das Mathe-Rätsel um eine Million Dollar", "fakten")
+    cast_m = {"du": {"shirt": "blau"}, "prof": {"shirt": "grau", "hair_color": "grau"}}
+    assert "RIEMANN" not in str(sd[1].get("overlay") or "").upper(), f"Namensschild einer echten Person bleibt: {sd[1].get('overlay')}"
+    assert sd[1].get("place") == "mathroom", f"Mathe-Tafel erwartet: {sd[1].get('place')}"
+    assert not sd[2].get("crowd") and [a for a in sd[2].get("actors") or [] if a.get("id") == "prof" and a.get("action") != "walk"] and sd[2].get("place") == "mathroom", \
+        f"Professor bleibt an der Tafel, keine Fremden: {sd[2].get('crowd')} {sd[2].get('actors')}"
+    assert (sd[3].get("graphic") or {}).get("type") == "zeros" and sd[3].get("shot") == "graphic", f"Nullstellen-Schaubild: {sd[3].get('shot')} {sd[3].get('graphic')}"
+    assert (sd[4].get("overlay") or {}).get("type") == "counter" and sd[4].get("shot") != "graphic", f"Zähler bleibt: {sd[4].get('overlay')}"
+    assert (sd[5].get("graphic") or {}).get("type") == "zeros" and "LINIE" in str(sd[5]["graphic"].get("text")), f"Linie: {sd[5].get('graphic')}"
+    assert sd[6].get("shot") != "graphic" or (sd[6].get("graphic") or {}).get("type") != "zeros", f"nicht zweimal Nullstellen: {sd[6].get('graphic')}"
+    assert any(a.get("hold") == "lib_stift" for a in sd[7].get("actors") or []) and sd[7].get("shot") != "insert", f"Stift in der Hand: {sd[7].get('shot')} {sd[7].get('actors')}"
+    for sc_ in sd:
+        for t_ in (0.4, 2.2):
+            frame(sc_, cast_m, t=t_)
+    s2 = stage.direct([{"text": "Die Schüler lernen heute Erdkunde.", "place": "classroom", "actors": [{"id": "du"}], "props": []}], [(0, 4)], "Schule früher", "fakten")
+    assert s2[0].get("place") == "classroom", f"Tafel ohne Mathe bleibt: {s2[0].get('place')}"
+    for night in (False, True):
+        places.background("mathroom", night)
+    g = graphics.clean({"type": "calendar", "value": "165", "label": "JAHREN UNGELÖST"})
+    assert graphics.clean({"type": "number", "value": "10 BII."})["value"] == "10 BIO.", "BII."
+    for t_ in (0.0, 0.3, 0.9, 2.0, 3.5):
+        graphics.frame(g, t_, 4.0)
+        for g_ in ({"type": "primes"}, {"type": "primes", "sub": "100"}, {"type": "zeros"}, {"type": "zeros", "sub": "doubt", "text": "Gibt es eine Ausnahme?"}):
+            graphics.frame(graphics.clean(g_), t_, 4.0)
+
+
 def main():
     try:                                                       # gelernte Gegenstände mitprüfen
         import json
@@ -54,6 +91,7 @@ def main():
             print("Bibliothek:", library.load_all(json.loads(f.read_text(encoding="utf-8"))), "Gegenstände")
     except Exception as e:  # noqa: BLE001
         errors.append(f"Bibliothek laden: {e}")
+    check("Mathe-Schaubilder", _math)
     all_places = sorted(set(places.PLACES) | set(places.OUTDOOR_SPECS))
     for pl in all_places:
         for night, dark in ((False, False), (True, False), (True, True)):
@@ -130,7 +168,7 @@ def main():
           {"type": "compare", "value": "viel", "sub": "3"}, {"type": "podium", "kicker": "Körperteile", "text": "Fuß", "left": "Hand", "right": "Bein"}, {"type": "podium", "text": "x"},
           {"type": "share", "value": "1 von 7", "label": "träumt davon"}, {"type": "share", "value": "12 von 12"}, {"type": "share", "value": "9 von 3"}, {"type": "share", "value": "x"},
           {"type": "news", "kicker": "Talblatt", "text": "Gondel 7 abgestürzt", "sub": "Unglück im Nebel"}, {"type": "news", "text": "Donaudampfschifffahrtsgesellschaft " * 3},
-          {"type": "news"}, {"type": "pulse", "value": "1", "label": "Eine Sekunde"}, {"type": "pulse", "value": "x" * 30}, {"type": "radar"}, {"type": "radar", "kicker": "Flugsicherung", "text": "Signal verloren", "sub": "lost"}, {"type": "radio", "kicker": "Funk · Kanal 4", "text": "Bergwacht"},
+          {"type": "news"}, {"type": "pulse", "value": "1", "label": "Eine Sekunde"}, {"type": "pulse", "value": "x" * 30}, {"type": "radar"}, {"type": "radar", "kicker": "Flugsicherung", "text": "Signal verloren", "sub": "lost"}, {"type": "primes"}, {"type": "primes", "sub": "100", "label": "Wo ist das Muster?"}, {"type": "zeros", "text": "Alle auf einer Linie"}, {"type": "zeros", "sub": "doubt", "text": "x" * 60}, {"type": "radio", "kicker": "Funk · Kanal 4", "text": "Bergwacht"},
           {"type": "radio", "text": "x", "sub": "y" * 80}, {"type": "distance", "value": "100 m", "left": "Ihr", "right": "Ziel"}, {"type": "distance", "value": "weit"},
           {"type": "days", "text": "30 Tage überleben", "value": "1", "sub": "30", "label": "Noch 2 Min"}, {"type": "days", "value": "99", "sub": "999"}, {"type": "days", "value": "x"},
           {"type": "days", "value": "7", "sub": "7"}, {"type": "phone", "mode": "alert", "kicker": "Live", "text": "Fang ihn", "value": "10.000.000 €", "label": "Ich hab ihn gesehen"},

@@ -158,7 +158,7 @@ def ambience_for(scene):
                        ((r"forest|wald|park|garden|garten|meadow|wiese|jungle|camp"), "forest"),
                        ((r"beach|strand|ocean|sea|meer|harbor|ship|island"), "ocean"),
                        ((r"underwater|reef|deep_sea"), "underwater"), ((r"cave|höhle|mine"), "cave"),
-                       ((r"space|weltall|moon|planet"), "space"), ((r"office|büro|classroom|lab"), "office"),
+                       ((r"space|weltall|moon|planet"), "space"), ((r"office|büro|classroom|mathroom|lab"), "office"),
                        ((r"stadium|concert|crowd|mall"), "crowd")):
         if re.search(keys, place or ""):
             if night and role in ("forest", "city") and not indoor:

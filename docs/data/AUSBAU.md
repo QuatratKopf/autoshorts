@@ -98,6 +98,14 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   Land im Satz (`GEO_RE`) entfällt. Grafik `radar` (Radarschirm, mit `"sub": "lost"` erlischt der Leuchtpunkt) – ab dem zweiten Satz automatisch bei
   „Radar“, „Funkkontakt“, „Transponder“. Bibliothek: `muschel`. Selbsttest: `_surface`.
 
+- Mathe-Themen (Prüfung 24.11.2026, Video 197 „Riemann-Vermutung“): Grafiken `primes` (Zahlenfeld 1–30, Primzahlen leuchten nacheinander auf; `"sub": "100"` = Feld bis 100)
+  und `zeros` (Nullstellen erscheinen auf einer leuchtenden Linie; `"sub": "doubt"` = Fragezeichen daneben). Die Regie setzt sie ab dem zweiten Satz selbst: `zeros` bei
+  „Nullstellen“ und bei „liegt auf einer Linie“ kurz danach, mit „Ausnahme/Gegenbeispiel“ die Zweifel-Fassung, `primes` bei „Primzahl“ (höchstens zweimal, nicht bei
+  Verschlüsselung/Konto); ein Zähler des Drehbuchs bleibt, nach einem Schaubild folgt nur die Kernaussage „auf einer Linie“ als weiteres. Ort `mathroom` = Klassenzimmer mit
+  Mathe-Tafel (Zahlenstrahl mit eingekreisten Primzahlen, Kurve mit Nullstellen) – die Regie tauscht `classroom` am Schluss dagegen, wenn Thema oder Satz von Mathe handeln
+  (`stage.MATH_RE`). `stage._stay`: stand dieselbe Figur im Bild davor schon am selben Ort, kommt sie nicht noch einmal herein, sondern zeigt/überlegt/redet an wechselnden
+  Plätzen; im Klassenzimmer bleibt der Lehrer, statt dass Fremde durchlaufen. Ein Schild mit dem Namen einer echten Person nach einer Berufsangabe („der Mathematiker …“)
+  entfällt. „Schnapp dir/nimm dir/hol dir einen Stift“: die Figur hält das Ding (`TAKE_RE`). Kalender-Beschriftung wird am Wortende gekürzt; „10 BII.“ wird „10 BIO.“.
 - Telefonat (`stage._call_story`, greift, wenn das Thema vom Telefonieren handelt und zwei Sätze, sonst wenn drei Sätze `CALL_RE` treffen –
   Anruf, Telefon, „rufst … an“, auflegen, Freizeichen): Wer telefoniert, hält das Handy ans Ohr (Hand-Gegenstand `call`, Armhaltung
   `stage.CALL_ARM`) und bleibt allein zu Hause – keine Stadtstraße, kein Rechenzentrum, niemand kommt zur Tür herein. Der Angerufene

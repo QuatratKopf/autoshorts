@@ -41,7 +41,7 @@ ORANGE = (255, 138, 31)
 THEMES = {"": ((58, 40, 150), (14, 10, 46)), "scary": ((40, 30, 96), (6, 6, 22)), "panic": ((120, 34, 70), (26, 8, 30)),
           "tense": ((110, 60, 120), (22, 10, 40)), "sad": ((40, 60, 130), (10, 14, 40)), "happy": ((90, 70, 190), (30, 16, 80)),
           "calm": ((58, 40, 150), (14, 10, 46))}
-TYPES = ("number", "timer", "calendar", "question", "houses", "badge", "map", "city", "versus", "round", "score", "compare", "podium", "share", "news", "pulse", "radio", "distance", "days", "phone", "game", "chart", "radar", "size", "message", "chapter", "echo", "voice")
+TYPES = ("number", "timer", "calendar", "question", "houses", "badge", "map", "city", "versus", "round", "score", "compare", "podium", "share", "news", "pulse", "radio", "distance", "days", "phone", "game", "chart", "radar", "size", "message", "chapter", "echo", "voice", "primes", "zeros")
 LEFT, RIGHT = (150, 110, 255), (255, 150, 40)                # Farben der beiden Seiten im Duell
 GREEN = (120, 230, 90)
 
@@ -275,7 +275,9 @@ def _g_calendar(frame, g, t, dur):
         fk = _fit(d, kick, 36, w - 60, "Bold")
         d.text((cx - d.textlength(kick, font=fk) / 2, cy - h / 2 + 34), kick, font=fk, fill=WHITE)
     val = _count(str(g.get("value", "")), t, 0.3, 0.8)
-    lab = str(g.get("label") or "").upper()[:14]
+    lab = str(g.get("label") or "").upper()
+    if len(lab) > 14:                                           # am Wortende kürzen: „JAHREN UNGELÖST“ stand als „JAHREN UNGELÖS“ auf dem Blatt (Video 197)
+        lab = lab[:15].rsplit(" ", 1)[0] if " " in lab[:15] else lab[:14]
     fv = _fit(d, str(g.get("value", "")), 270 if lab else 300, w - 80)
     bb = d.textbbox((0, 0), str(g.get("value", "")) or "0", font=fv)          # Unterkante der Ziffern messen: die Zahl endet über der Beschriftung
     d.text((cx - d.textlength(val, font=fv) / 2, cy + (128 if lab else 190) - bb[3]), val, font=fv, fill=(40, 30, 60))
@@ -1182,6 +1184,98 @@ def _g_radar(frame, g, t, dur):
         _pill(d, W / 2, 1196, lab, _fit(d, lab, 64, 860, "Bold"), ((230, 50, 70, 255) if lost else (30, 150, 100, 255)), WHITE)
 
 
+def _g_primes(frame, g, t, dur):
+    """Zahlenfeld: 1 bis 30 (mit sub="100" bis 100), die Primzahlen leuchten nacheinander auf – man sieht, dass sie ohne Muster verteilt sind.
+    Für Mathe-Themen (Prüfung 24.11.2026, Video 197: zu „Geheimnis der Primzahlen“ stand eine Figur vor einer leeren Tafel)."""
+    d = ImageDraw.Draw(frame, "RGBA")
+    big = str(g.get("sub") or "").strip() == "100"
+    n, cols = (100, 10) if big else (30, 6)
+    cell, gap = (84, 8) if big else (140, 16)
+    rows = n // cols
+    x0 = (W - cols * cell - (cols - 1) * gap) / 2
+    y0 = 400 if not big else 380
+    _kicker(d, 300, g.get("kicker") or "Primzahlen", t, 0.0)
+    primes = [q for q in range(2, n + 1) if all(q % r for r in range(2, int(q ** 0.5) + 1))]
+    span = min(2.8, max(1.2, dur * 0.55))                      # so lange dauert es, bis alle Primzahlen leuchten
+    fn = _font(40 if big else 70)
+    for q in range(1, n + 1):
+        r_, c_ = divmod(q - 1, cols)
+        k = _pop(t, 0.02 * (r_ + c_), 0.3)
+        if k <= 0:
+            continue
+        cx, cy = x0 + c_ * (cell + gap) + cell / 2, y0 + r_ * (cell + gap) + cell / 2
+        lit = q in primes and t >= 0.5 + span * primes.index(q) / len(primes)
+        kk = _pop(t, 0.5 + span * primes.index(q) / len(primes), 0.35) if lit else 1.0
+        h_ = cell / 2 * min(1.0, k) * (max(0.86, min(1.12, kk)) if lit else 1.0)
+        rad = 12 if big else 22
+        if lit:
+            d.rounded_rectangle((cx - h_ + 4, cy - h_ + 6, cx + h_ + 4, cy + h_ + 6), rad, fill=(0, 0, 0, 90))
+            d.rounded_rectangle((cx - h_, cy - h_, cx + h_, cy + h_), rad, fill=GOLD + (255,), outline=INK + (255,), width=4 if big else 6)
+        else:
+            d.rounded_rectangle((cx - h_, cy - h_, cx + h_, cy + h_), rad, fill=(24, 18, 70, 190), outline=(255, 255, 255, 40), width=3)
+        txt = str(q)
+        bb = d.textbbox((0, 0), txt, font=fn)
+        d.text((cx - (bb[0] + bb[2]) / 2, cy - (bb[1] + bb[3]) / 2), txt, font=fn, fill=INK + (255,) if lit else (200, 196, 240, 120))
+    lab = str(g.get("label") or g.get("text") or "").upper()[:30]
+    if lab and t > 0.5 + span * 0.6:
+        _pill(d, W / 2, y0 + rows * (cell + gap) + 30, lab, _fit(d, lab, 58, 860, "Bold"), GOLD + (255,), INK)
+
+
+_ZEROS = (14.13, 21.02, 25.01, 30.42, 32.94, 37.59, 40.92, 43.33, 48.01, 49.77)   # Höhen der ersten zehn Nullstellen (echte Werte, gerundet)
+
+
+def _g_zeros(frame, g, t, dur):
+    """Nullstellen auf einer Linie: Zahlenebene mit einer senkrechten leuchtenden Linie, die Punkte erscheinen nacheinander und sitzen alle genau darauf.
+    sub="doubt": weit oben blinkt daneben ein Fragezeichen – irgendwo könnte eine Ausnahme liegen. Abstände wie bei den ersten zehn echten Nullstellen."""
+    d = ImageDraw.Draw(frame, "RGBA")
+    doubt = str(g.get("sub") or "").lower()[:5] in ("doubt", "zweif", "ausna")
+    _kicker(d, 300, g.get("kicker") or "Nullstellen", t, 0.0)
+    x0, x1, y0, y1 = 110, 970, 390, 1150
+    d.rounded_rectangle((x0 - 30, y0 - 30, x1 + 30, y1 + 30), 34, fill=(10, 8, 34, 160), outline=(255, 255, 255, 46), width=4)
+    for i in range(1, 8):                                       # Gitter der Zahlenebene
+        y = y0 + (y1 - y0) * i / 8
+        d.line((x0, y, x1, y), fill=(255, 255, 255, 20), width=3)
+    for i in range(1, 6):
+        x = x0 + (x1 - x0) * i / 6
+        d.line((x, y0, x, y1), fill=(255, 255, 255, 20), width=3)
+    ax = x0 + (x1 - x0) / 3                                     # Achsen: die Linie liegt rechts der senkrechten Achse
+    d.line((x0, y1 - 60, x1, y1 - 60), fill=(255, 255, 255, 130), width=5)
+    d.line((ax, y0, ax, y1), fill=(255, 255, 255, 130), width=5)
+    lx = x0 + (x1 - x0) * 0.6
+    grow = min(1.0, max(0.0, (t - 0.1) / 0.5))
+    top = y1 - (y1 - y0) * grow
+    glow = int(70 + 30 * math.sin(t * 4))
+    d.line((lx, y1, lx, top), fill=GOLD + (glow,), width=26)
+    for yy in range(int(y1), int(top), -34):                    # gestrichelte Linie
+        d.line((lx, yy, lx, max(top, yy - 20)), fill=GOLD + (255,), width=8)
+    span = min(2.6, max(1.2, dur * 0.5))
+    for j, z in enumerate(_ZEROS):
+        st = 0.55 + span * j / len(_ZEROS)
+        k = _pop(t, st, 0.3)
+        if k <= 0:
+            continue
+        cy = y1 - 60 - (y1 - 60 - y0 - 40) * (z - 8) / 44
+        r = 19 * min(1.15, k)
+        ph = min(1.0, (t - st) / 0.6)
+        if ph < 1:
+            d.ellipse((lx - r - 40 * ph, cy - r - 40 * ph, lx + r + 40 * ph, cy + r + 40 * ph), outline=GREEN + (int(200 * (1 - ph)),), width=5)
+        d.ellipse((lx - r, cy - r, lx + r, cy + r), fill=GREEN + (255,), outline=INK + (255,), width=6)
+    end = 0.55 + span
+    if doubt and t > end:
+        k = _pop(t, end, 0.35)
+        qx, qy = lx + 190, y0 + 74
+        blink = 0.55 + 0.45 * math.sin(t * 7)
+        r = 46 * min(1.1, k)
+        d.ellipse((qx - r - 14, qy - r - 14, qx + r + 14, qy + r + 14), outline=(255, 96, 86, int(200 * blink)), width=6)
+        d.ellipse((qx - r, qy - r, qx + r, qy + r), fill=(255, 96, 86, 255), outline=INK + (255,), width=6)
+        fq = _font(int(64 * min(1.1, k)))
+        bb = d.textbbox((0, 0), "?", font=fq)
+        d.text((qx - (bb[0] + bb[2]) / 2, qy - (bb[1] + bb[3]) / 2), "?", font=fq, fill=WHITE + (255,))
+    lab = str(g.get("text") or g.get("label") or "").upper()[:30]
+    if lab and t > (end if doubt else 0.55 + span * 0.5):
+        _pill(d, W / 2, 1196, lab, _fit(d, lab, 58, 860, "Bold"), ((255, 96, 86, 255) if doubt else GOLD + (255,)), WHITE if doubt else INK)
+
+
 def _lines(d, text, f, max_w):
     out, cur = [], ""
     for w in str(text).split():
@@ -1735,7 +1829,7 @@ def _g_chapter(frame, g, t, dur):
         d.text((W / 2 - d.textlength(" ".join(head), font=fh) / 2, 420), " ".join(head), font=fh, fill=(150, 150, 160))
 
 
-DRAW = {"message": _g_message, "chapter": _g_chapter, "game": _g_game, "radar": _g_radar, "size": _g_size, "days": _g_days, "phone": _g_phone, "chart": _g_chart,
+DRAW = {"primes": _g_primes, "zeros": _g_zeros, "message": _g_message, "chapter": _g_chapter, "game": _g_game, "radar": _g_radar, "size": _g_size, "days": _g_days, "phone": _g_phone, "chart": _g_chart,
         "news": _g_news, "pulse": _g_pulse, "radio": _g_radio, "distance": _g_distance,
         "versus": _g_versus, "round": _g_round, "score": _g_score, "compare": _g_compare, "podium": _g_podium, "share": _g_share,
         "map": _g_map, "city": _g_city, "number": _g_number, "timer": _g_timer, "calendar": _g_calendar, "question": _g_question, "houses": _g_houses, "badge": _g_badge}
@@ -1872,7 +1966,8 @@ def clean(g):
     for k in ("kicker", "value", "label", "sub", "text", "left", "right"):
         v = g.get(k)
         if isinstance(v, (str, int, float)) and not isinstance(v, bool) and str(v).strip():
-            v = " ".join(_EMOJI_RE.sub(" ", str(v)).split())      # Emojis kennt die Schrift nicht: „Bist du gut angekommen? ❤️“ zeigte ein leeres Kästchen (Video 190)
+            v = " ".join(_EMOJI_RE.sub(" ", str(v)).split())
+            v = re.sub(r"(?<=\d )B[Il1]{2}\b\.?", "BIO.", v)    # „10 BII.“ statt „10 BIO.“ groß im Bild (Video 197)      # Emojis kennt die Schrift nicht: „Bist du gut angekommen? ❤️“ zeigte ein leeres Kästchen (Video 190)
             if v:
                 out[k] = _short_msg(v, 96) if out["type"] == "phone" and k in ("text", "sub", "label") else v[:44]   # Nachricht auf dem Handy: ganzer Satz
     if out.get("kicker") and out.get("text") and out["kicker"].strip().lower() == out["text"].strip().lower():
@@ -1882,7 +1977,7 @@ def clean(g):
         out["tv"] = True                          # Eilmeldung im Fernsehen statt auf der Zeitungsseite
     need = {"number": "value", "timer": "value", "calendar": "value", "houses": "value", "badge": "text", "question": None,
             "map": None, "city": None, "versus": "left", "round": "text", "score": "value", "compare": "value", "podium": "text",
-            "share": "value", "news": "text", "pulse": "value", "radio": "text", "distance": "value", "days": "value", "phone": "text", "chart": None, "game": None, "radar": None, "size": "value", "message": None, "chapter": "value", "echo": None, "voice": None}[out["type"]]
+            "share": "value", "news": "text", "pulse": "value", "radio": "text", "distance": "value", "days": "value", "phone": "text", "chart": None, "game": None, "radar": None, "size": "value", "message": None, "chapter": "value", "echo": None, "voice": None, "primes": None, "zeros": None}[out["type"]]
     mode = str(g.get("mode") or "").lower()
     if out["type"] == "phone":
         out["mode"] = mode if mode in ("alert", "lock", "chat") else "alert"

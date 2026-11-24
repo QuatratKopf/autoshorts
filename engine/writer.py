@@ -308,6 +308,9 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
     {"type": "radio", "kicker": "FUNK · KANAL 4", "text": "BERGWACHT"}                               Funkspruch oder Durchsage mit Wellenform
     {"type": "radar", "kicker": "FLUGSICHERUNG", "text": "SIGNAL VERLOREN", "sub": "lost"}           Radarschirm mit umlaufendem Suchstrahl und Leuchtpunkt; "sub": "lost" = der Punkt
                                                                                                      blinkt und erlischt (Flugzeug/Schiff verschwindet vom Radar), ohne "sub" bleibt er
+    {"type": "primes", "label": "KEIN MUSTER"}                                                      Mathe: Zahlenfeld 1–30, die Primzahlen leuchten nacheinander auf ("sub": "100" = Feld bis 100)
+    {"type": "zeros", "text": "ALLE AUF EINER LINIE"}                                               Mathe: Nullstellen erscheinen nacheinander genau auf einer leuchtenden Linie; "sub": "doubt" =
+                                                                                                     daneben blinkt ein Fragezeichen (irgendwo könnte eine Ausnahme liegen). Setzt die Regie auch selbst.
     {"type": "game", "sub": "room"}                                                                   Blick in eine Spielwelt als Pixel-Bild (nur bei Videospiel-Themen): "sub" = "world" (Landschaft mit
                                                                                                      verborgener Tür), "room" (Labyrinth mit geheimem Raum hinter der Wand), "minus" (endloses
                                                                                                      Unterwasser-Level), "far" (Blocklandschaft zerbricht am Rand der Welt). Setzt die Regie auch selbst.
@@ -341,6 +344,10 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
   das Geschehen ("shot": "event", actors []), einen Gegenstand groß ("shot": "insert" mit einem Ding aus "props") oder eine
   Zahl als Zähler (overlay "counter"). Das Ding, um das sich das Video dreht, ist mindestens zweimal groß im Bild.
   Für „in ganz Deutschland“ gibt es den Ort "germany" (Karte mit aufleuchtenden Punkten), für „weltweit“ den Ort "worldmap".
+- MATHE-THEMEN: Erklär es an Beispielen, die man sehen kann (2, 3, 5, 7, 11 sind Primzahlen), nicht mit Fachwörtern ohne Bild. Für Primzahlen gibt es
+  die Grafik "primes", für Nullstellen auf einer Linie "zeros"; im Ort "classroom" steht bei Mathe-Themen eine Tafel mit Zahlenstrahl. Nenne Forscher
+  nicht beim Namen („ein deutscher Mathematiker“) und setz keinen Personennamen als Schild über eine Figur – feste Fachbegriffe mit Namen
+  („Riemannsche Vermutung“) darfst du sagen. Zehn Billionen Beispiele sind kein Beweis: Behaupte nicht, ein Beweis würde Verschlüsselung knacken.
 - FIRMEN- UND TECHNIK-GESCHICHTEN: Zeig die Stationen der Geschichte, nicht fünfmal dasselbe Büro: Anfang im Zimmer oder Restaurant,
   Firmensitz ("headquarters"), Rechenzentrum ("serverroom"), Kurs oder Wachstum als Grafik ("chart"), das Produkt groß ("shot": "insert").
   Spricht der Satz von mehreren Menschen („drei Gründer“, „zwei Freunde“), stehen so viele Figuren in "actors". Der Weltraum ("space")

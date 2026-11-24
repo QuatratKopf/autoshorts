@@ -542,14 +542,42 @@ def lab(night):
     return p.vignette()
 
 
-def classroom(night):
+def _math_board(p):
+    """Tafelbild für Mathe-Themen: Zahlenstrahl 1–12 mit eingekreisten Primzahlen, darunter eine Kurve, deren Nullstellen markiert sind."""
+    from .. import overlays
+    chalk, yel = p.c((240, 240, 230)), p.c((250, 214, 110))
+    f = overlays.font(34, "SemiBold")
+    y = 520
+    p.d.line((170, y, 915, y), fill=chalk, width=6)
+    p.d.polygon([(915, y - 12), (940, y), (915, y + 12)], fill=chalk)
+    for n in range(1, 13):
+        x = 190 + (n - 1) * 62
+        p.d.line((x, y - 12, x, y + 12), fill=chalk, width=5)
+        t = str(n)
+        p.d.text((x - p.d.textlength(t, font=f) / 2, y + 22), t, font=f, fill=chalk)
+        if n in (2, 3, 5, 7, 11):
+            p.d.ellipse((x - 30, y + 14, x + 30, y + 74), outline=yel, width=5)
+    y2 = 700
+    p.d.line((170, y2, 915, y2), fill=chalk, width=4)
+    pts = [(190 + k * 6, y2 - 50 * math.sin(k * 6 / 62.0) * (0.55 + 0.45 * math.cos(k * 6 / 190.0))) for k in range(0, 118)]
+    p.d.line(pts, fill=yel, width=6, joint="curve")
+    for k in range(1, 4):
+        x = 190 + k * math.pi * 62
+        if x < 900:
+            p.d.ellipse((x - 11, y2 - 11, x + 11, y2 + 11), fill=chalk)
+
+
+def classroom(night, board=""):
     p = P(night)
     p.room((250, 236, 196), (190, 150, 110))
     p.rect((120, 420, 960, 800), (56, 96, 76), r=10, o=14)                      # Tafel
     p.d.rounded_rectangle((120, 420, 960, 800), 10, outline=(150, 96, 60), width=14)
-    p.line((200, 520, 420, 520), (240, 240, 230), 6)
-    p.line((200, 580, 560, 580), (240, 240, 230), 6)
-    p.d.ellipse((680, 500, 860, 680), outline=(240, 240, 230), width=6)
+    if board == "math":
+        _math_board(p)
+    else:
+        p.line((200, 520, 420, 520), (240, 240, 230), 6)
+        p.line((200, 580, 560, 580), (240, 240, 230), 6)
+        p.d.ellipse((680, 500, 860, 680), outline=(240, 240, 230), width=6)
     p.rect((120, 800, 960, 830), (150, 96, 60), r=4, o=5)
     p.rect((180, 806, 250, 822), (250, 250, 246), r=4, o=3)                     # Kreide und Schwamm
     p.rect((300, 800, 380, 824), (236, 200, 90), r=6, o=4)
@@ -565,6 +593,11 @@ def classroom(night):
         p.rect((x + 20, 1130, x + 44, 1250), (110, 110, 118), o=5)
         p.rect((x + 206, 1130, x + 230, 1250), (110, 110, 118), o=5)
     return p.vignette()
+
+
+def mathroom(night):
+    """Klassenzimmer mit Mathe-Tafel (setzt die Regie bei Mathe-Themen statt „classroom“)."""
+    return classroom(night, "math")
 
 
 def kitchen(night):
@@ -2645,7 +2678,7 @@ def royalmuseum(night):
 
 
 PLACES = {"bedroom": bedroom, "livingroom": livingroom, "street": street, "basement": basement, "park": park,
-          "space": space, "lab": lab, "classroom": classroom, "plain": plain, "kitchen": kitchen, "office": office,
+          "space": space, "lab": lab, "classroom": classroom, "mathroom": mathroom, "plain": plain, "kitchen": kitchen, "office": office,
           "beach": beach, "desert": desert, "snow": snow, "forest": forest, "underwater": underwater,
           "mountain": mountain, "hospital": hospital, "cave": cave, "supermarket": supermarket,
           "supermarket_empty": supermarket_empty, "bathroom": bathroom, "station": station, "restaurant": restaurant, "germany": germany, "worldmap": worldmap, "hallway": hallway, "attic": attic,

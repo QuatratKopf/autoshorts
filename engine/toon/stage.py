@@ -1194,6 +1194,29 @@ def numbered_label_wrong(box, text):
     return bool(pat) and not _re.search(r"\b(?:" + pat + r")[rsnm]?\b", str(text or "").lower())
 
 
+MATH_RE = r"\bmathe|primzahl|nullstelle|\bformel|gleichung|\bbeweis\w*|vermutung|geometrie|algebra|\brechenweg|zahlentheorie"
+
+
+def _stay(scenes):
+    """Schlussdurchgang: Dieselbe Figur stand im Bild davor schon am selben Ort – dann kommt sie nicht noch einmal von der Seite herein (Video 197: viermal
+    hintereinander lief der Professor ins Klassenzimmer), sondern bleibt, zeigt, überlegt oder redet, jedes Mal anders als im Bild davor."""
+    for i in range(1, len(scenes)):
+        sc, prev = scenes[i], scenes[i - 1]
+        if not isinstance(sc, dict) or not isinstance(prev, dict) or sc.get("shot") in ("graphic", "insert", "event") or prev.get("shot") in ("graphic", "insert", "event"):
+            continue
+        acts = [a for a in sc.get("actors") or [] if isinstance(a, dict)]
+        if len(acts) != 1 or acts[0].get("kind") or str(acts[0].get("action") or "") != "walk" or not str(acts[0].get("pos") or "").startswith("off") or not acts[0].get("to"):
+            continue
+        if isinstance(backdrop(sc), dict) or isinstance(backdrop(prev), dict) or places.resolve(backdrop(sc)) != places.resolve(backdrop(prev)):
+            continue
+        was = next((a for a in prev.get("actors") or [] if isinstance(a, dict) and a.get("id") == acts[0].get("id")), None)
+        if was is None or len([a for a in prev.get("actors") or [] if isinstance(a, dict)]) != 1:
+            continue
+        acts[0]["action"] = next(x for x in (("point", "think", "talk") * 2)[i % 3:] if x != str(was.get("action") or ""))
+        acts[0]["pos"] = next(x for x in ((330, "center", 750) * 2)[i % 3:] if x != (was.get("to") or was.get("pos")))
+        acts[0].pop("to", None)
+
+
 def direct(scenes, times, topic="", style="", look=""):
     """Kleine Regie über das ganze Video: sorgt für Abwechslung, wenn das Drehbuch mehrmals hintereinander dieselbe
     Einstellung vorgibt (gleicher Ort, gleiche Figur, nur Reden) – andere Position, Nahaufnahme oder Hereinkommen."""
@@ -1293,6 +1316,7 @@ def direct(scenes, times, topic="", style="", look=""):
             sc["overlay"] = None                          # Auswahl „A/B“ an einem Satz, der gar keine Frage stellt
     power_out = False
     last_id = None
+    math_zero, math_n = None, {"zeros": 0, "primes": 0}     # Mathe-Schaubilder: letzter Satz mit „Nullstellen“, Anzahl je Art
     maps_used = 0
     spooky = str(style or "").lower() in ("grusel", "mysterien", "horror")
     used = {}
@@ -1402,6 +1426,34 @@ def direct(scenes, times, topic="", style="", look=""):
             sc["graphic"] = g0 = {"type": "radar", "text": "KEIN RADAR" if none_r else "SIGNAL VERLOREN" if lost_r else "RADAR", "sub": "lost" if lost_r else ""}
             sc["shot"], sc["overlay"] = "graphic", None
             ov_c = None
+        # Mathe-Themen (Prüfung 24.11.2026, Video 197 „Riemann-Vermutung“): zu „Nullstellen … liegen auf einer Linie“ und „Geheimnis der Primzahlen“ lief eine Figur
+        # vor einer leeren Tafel auf und ab – das Schaubild zeigt, wovon der Satz spricht
+        if _re0.search(ZEROS_RE, low0):
+            math_zero = i
+        cnt_m = bool(ov_c and str(ov_c.get("type") or "") == "counter")
+        g_m = bool(g0 and graphics.clean(g0))
+        prev_m = scenes[i - 1] if i and isinstance(scenes[i - 1], dict) else {}
+        prev_gm = str((prev_m.get("graphic") or {}).get("type") or "") if prev_m.get("shot") == "graphic" and isinstance(prev_m.get("graphic"), dict) else ""
+        if i and not g_m and not cnt_m and not deep_f:
+            line_m = bool(_re0.search(ZLINE_RE, low0))
+            near_m = math_zero is not None and i - math_zero <= 6
+            new_m = None
+            after_g = prev_m.get("shot") == "graphic"         # nicht Tafel auf Tafel: nach einem Schaubild nur die Kernaussage „alle auf einer Linie“ – sonst steht die Figur vor der Mathe-Tafel
+            if (math_zero == i or (line_m and near_m)) and math_n["zeros"] < 3 and prev_gm != "zeros" and (line_m or not after_g):
+                new_m = {"type": "zeros", "text": "ALLE AUF EINER LINIE" if line_m else ""}
+            elif near_m and math_n["zeros"] and math_n["zeros"] < 3 and prev_gm != "zeros" and not after_g and _re0.search(r"\bausnahme|gegenbeispiel|\babweich|aus der reihe", low0):
+                new_m = {"type": "zeros", "sub": "doubt", "text": "GIBT ES EINE AUSNAHME?"}
+            elif _re0.search(PRIMES_RE, low0) and math_n["primes"] < 2 and not after_g and not _re0.search(r"verschlüssel|passw|sicherheit|\bbank|konto", low0):
+                new_m = {"type": "primes", "sub": "100" if math_n["primes"] else "", "kicker": "PRIMZAHLEN BIS 100" if math_n["primes"] else "PRIMZAHLEN"}
+            if new_m:
+                math_n[new_m["type"]] += 1
+                sc["graphic"] = g0 = new_m
+                sc["shot"], sc["overlay"] = "graphic", None
+                ov_c = None
+        if ov_c and str(ov_c.get("type") or "") == "tag":      # Schild mit dem Namen einer echten Person über einer Figur („BERNHARD RIEMANN“, Video 197): die Figur ist nicht diese Person
+            m_p = _re0.search(PERSON_JOB_RE + r"(?:in)? ((?:[A-ZÄÖÜ][\w-]+ ){0,2}[A-ZÄÖÜ][\w-]+)", str(sc.get("text") or ""))
+            if m_p and any(w_.lower() in str(ov_c.get("text") or "").lower() for w_ in m_p.group(1).split() if len(w_) > 3):
+                sc["overlay"] = ov_c = None
         if g0 and g0.get("type") == "chart" and g0.get("value") and not spoken_number(_lead_number(g0["value"]), sc["text"]):
             g0.pop("value", None)                         # Kurve ja – aber keine Zahl, die der Sprecher nicht nennt
             if _re0.search(r"dollar|euro|%|prozent|mio|mrd|bio", str(g0.get("label") or "").lower()):
@@ -1870,7 +1922,13 @@ def direct(scenes, times, topic="", style="", look=""):
         if not outdoor and "actors" in sc and not acts_now and str(sc.get("shot") or "") != "insert":
             solo = bool(last_id) and not sc.get("crowd") and (str(style or "") == "motivation" or bool(_re.search(SELF_RE, txt))) \
                 and not _re.search(r"\balle\b|\bleute|menschen|\bmenge\b|publikum|kolleg|\bteam\b|zuschauer", txt)
-            if public and not sc.get("crowd") and not solo:   # leerer öffentlicher Raum: Menschen passend zur Stimmung
+            prev_p = scenes[i - 1] if i and isinstance(scenes[i - 1], dict) else {}
+            same_fig = rp == "classroom" and bool(last_id) and not sc.get("crowd") and bool(prev_p) and places.resolve(backdrop(prev_p)) == rp and prev_p.get("shot") != "graphic" \
+                and any(isinstance(a_, dict) and a_.get("id") == last_id for a_ in prev_p.get("actors") or []) \
+                and not _re.search(r"\balle\b|\bleute|menschen|\bmenge\b|publikum|kolleg|\bteam\b|zuschauer|schüler|\bklasse\b|kinder|studenten|gäste|patienten|kunden", txt)
+            if public and same_fig and not solo:          # eben stand der Lehrer an der Tafel, der nächste Satz nennt niemanden: er bleibt – keine fremden Leute, die durchs Klassenzimmer laufen (Video 197)
+                sc["actors"] = acts = [{"id": last_id, "action": ("point", "think")[i % 2], "pos": (330, 750)[i % 2], "emotion": MOOD_EMOTION.get(mood, ""), "stay": True}]
+            elif public and not sc.get("crowd") and not solo:   # leerer öffentlicher Raum: Menschen passend zur Stimmung
                 sc["crowd"] = {"panic": "panic", "tense": "worried", "sad": "sad", "happy": "cheer"}.get(mood, "walk")
             elif public and solo:                         # „Fang genau jetzt an.“ spricht zu dir: die Hauptfigur steht da – keine drei jubelnden Fremden im Konfetti (Video 173)
                 sc["actors"] = acts = [{"id": last_id, "action": "cheer" if mood == "happy" else "talk", "pos": "center",
@@ -1997,7 +2055,7 @@ def direct(scenes, times, topic="", style="", look=""):
                 sc["actors"], sc["shot"] = [], "event"
                 if not sc.get("crowd") and not sc.get("props") and not sc.get("weather"):
                     sc["crowd"] = {"panic": "panic", "tense": "worried", "sad": "sad", "happy": "cheer", "scary": ""}.get(str(sc.get("mood") or ""), "walk")
-            elif rp2 in PUBLIC_INDOOR:
+            elif rp2 in PUBLIC_INDOOR and not any(isinstance(a_, dict) and a_.get("stay") for a_ in sc.get("actors") or []):   # der Lehrer, der an der Tafel bleibt, wird nicht gegen Fremde getauscht
                 sc["actors"] = []
                 sc["crowd"] = sc.get("crowd") or {"panic": "panic", "tense": "worried", "sad": "sad", "happy": "cheer"}.get(str(sc.get("mood") or ""), "walk")
             elif spooky and not (i and scenes[i - 1].get("shot") == "close"):
@@ -2468,6 +2526,11 @@ def direct(scenes, times, topic="", style="", look=""):
                                                                              str((q.get("type") if isinstance(q, dict) else q) or "").lower()) not in deny_k]
                 if str(sc.get("shot") or "") == "insert" and not sc["props"]:
                     sc["shot"] = ""
+    _stay(scenes)
+    for sc in scenes:                                     # Mathe-Thema im Klassenzimmer: an der Tafel stehen Zahlenstrahl mit eingekreisten Primzahlen und eine Kurve statt zweier Striche (Video 197)
+        if isinstance(sc, dict) and not isinstance(sc.get("backdrop"), dict) and places.resolve(sc.get("place")) == "classroom" \
+                and _re0.search(MATH_RE, (str(topic or "") + " " + str(sc.get("text") or "")).lower()):
+            sc["place"] = "mathroom"
     return scenes
 
 
@@ -3145,7 +3208,7 @@ def _last_look(scenes, topic=""):
                         sc["actors"] = [{"id": main, "action": "point", "pos": "left", "speaks": True}]
 
 
-ROOMS = ("bedroom", "livingroom", "diningroom", "kitchen", "office", "classroom", "lab", "bathroom", "hallway", "basement", "attic")
+ROOMS = ("bedroom", "livingroom", "diningroom", "kitchen", "office", "classroom", "mathroom", "lab", "bathroom", "hallway", "basement", "attic")
 OUTSIDE_RE = r"bauernhof|\bhof\b|\bfeld|wiese|draußen|\bgarten|\bwald|strand|straße|\bstadt|\bdorf|\bpark\b|\bberg|\bmeer|\bsee\b|himmel|wüste|\bland\b"
 BODY_PROPS = ("auge", "augen", "ohr", "ohren", "nase", "zahn", "zähne", "finger", "muskel", "muskeln")
 BIG_M = 4.0                                               # Bibliotheks-Dinge ab dieser echten Höhe (Schloss, Wasserturm, Gebäude, Achterbahn) stehen in keinem Zimmer
@@ -4230,7 +4293,7 @@ LAKE_SOLDIER_RE = r"soldaten|truppen|offizier|wehrmacht|\bss-|lastwagen|\blkws?\
 LAKE_SHORE_RE = r"\bufer\b|an den see|an land|verboten|\bverbot\b|tauchverbot|gesperrt|aus dem wasser (?:gezogen|geholt)|an die oberfläche|ans licht"
 LAKE_SCARE_RE = r"ertrank|ertrink|ertrunken|starb|stirbt|\btod\b|\btot\b|tödlich|gefahr|gefährlich|riskier|verunglück|lebensgefahr|verfangen|kein sauerstoff"
 LAKE_INDOOR_OK_RE = r"büro|labor|museum|archiv|\bbank\b|keller|zimmer|werkstatt|druckerei|baracke|fabrik|\blager\b|zeitung|redaktion|gericht"
-LAKE_PLAIN = ("office", "livingroom", "bedroom", "kitchen", "lab", "plain", "basement", "classroom", "serverroom", "street", "park", "headquarters", "hospital",
+LAKE_PLAIN = ("office", "livingroom", "bedroom", "kitchen", "lab", "plain", "basement", "classroom", "mathroom", "serverroom", "street", "park", "headquarters", "hospital",
               "supermarket", "cinema", "restaurant", "beach", "desert", "space", "hallway", "attic", "station")
 LAKE_SHORE = {"sky": "", "ground": "grass", "elements": ["mountains", "lake"]}
 SOLDIER_LOOKS = ({"shirt": "grau", "hat": "army", "hair": "kurz", "hair_color": "braun"}, {"shirt": "grau", "hat": "army", "hair": "kurz", "hair_color": "blond", "size": 0.95})
@@ -4527,6 +4590,10 @@ GEO_RE = (r"europ|deutsch|länder|\bland\b|\blandes\b|staat|kontinent|\bkarte|gr
           r"frankreich|spanien|italien|polen|österreich|schweiz|skandinav|schweden|norwegen|finnland|dänemark|russland|ukraine|türkei|niederlande|holland|belgien|"
           r"griechenland|portugal|irland|\beu\b|bundesl")
 RADAR_RE = r"\bradar(?!falle|kontroll)|radarschirm|funkkontakt|transponder"
+ZEROS_RE = r"nullstelle"                                 # Mathe: Nullstellen einer Funktion → Schaubild „zeros“
+ZLINE_RE = r"auf (?:einer|derselben|der gleichen|dieser|genau einer|exakt einer|ein und derselben) (?:\w+ )?(?:linie|geraden)\b"
+PRIMES_RE = r"primzahl"
+PERSON_JOB_RE = r"\b(?:[Mm]athematiker|[Pp]hysiker|[Cc]hemiker|[Ff]orscher|[Ww]issenschaftler|[Ee]rfinder|[Ii]ngenieur|[Aa]stronom|[Pp]hilosoph|[Gg]ründer|[Pp]rofessor|[Aa]rzt|[Bb]iologe)"
 RADAR_LOST_RE = r"verschwind|verschwund|verlier|verlor|bricht ab|abbrich|abgebrochen|reißt ab|abreiß|erlisch|erlosch|kein signal|spurlos|\bweg\b"
 DEEP_RE = r"meeresboden|meeresgrund|\btiefsee|\b(?:meter|metern|kilometer|kilometern) tiefe\b|am grund des (?:meeres|ozeans)|auf dem grund des (?:meeres|ozeans)"
 DEEP_DARK_RE = r"\btiefsee|\b(?:meter|metern|kilometer|kilometern) tiefe\b|tiefseegraben|abgrund"
@@ -4633,7 +4700,7 @@ def _topic_creature(scenes, topic):
 PARTY_RE = r"feier|\bparty|jubel|hurra|gewinn|gewonnen|\bsieg|glückwunsch|gratul|geburtstag|silvester|konfetti|geschafft|rekord|weltmeister|applaus"
 SURPRISE_RE = r"überrasch\w* (?:dich|mich|dir|sie|ihn|euch) (?:\w+ ){0,2}mit (?:etwas|was\b|einer kleinigkeit|einem kleinen)|mitbringsel|(?:bringt|schenkt) (?:dir|mir|ihr|ihm) (?:\w+ ){0,2}(?:etwas|eine kleinigkeit) mit"
 GIVE_RE = r"\bteil\w*\b|schenk|überreich|\breicht\b|\bgibt\b.{0,40}\b(ab|weiter|her)\b|bringt .{0,40}\bmit\b|bietet .{0,40}\ban\b|spendier"
-TAKE_RE = r"\bisst\b|\bisse?t\b|\besse\b|bei(ß|ss)t|\bnasch|\bhältst\b|\bhält\b|\bnimmst\b|\bnimmt\b|\bgreifst\b|\bgreift\b|\bhebst\b|in der hand|\bträgst\b"
+TAKE_RE = r"\bschnapp\w* dir\b|\bnimm dir\b|\bgreif (?:dir|zu|nach)\b|\bhol dir\b|\bisst\b|\bisse?t\b|\besse\b|bei(ß|ss)t|\bnasch|\bhältst\b|\bhält\b|\bnimmst\b|\bnimmt\b|\bgreifst\b|\bgreift\b|\bhebst\b|in der hand|\bträgst\b"
 LYING_RE = r"\b(liegst|liegt|liegen)\b.{0,40}\b(platt|flach|am boden|auf dem boden|auf der straße|auf dem asphalt|auf dem gehweg)\b"
 CARRY_RE = r"\b(diese[rnms]?|davon|damit|zusammen|sie alle|alle zusammen)\b"
 # „diese positive Energie“, „diese Wirkung“ meinen kein Ding – sonst läge der Kuchen aus dem Büro im nächsten Satz auf der Straße
@@ -5789,7 +5856,7 @@ MOOD_HINTS = [
     (r"menschen|leute|bevölkerung|einwohner|millionen|milliarden|gesellschaft", ("", "walk")),
     (r"staunen|beobachten|schauen zu|zuschauer", ("", "watch")),
 ]
-INDOOR = ("bedroom", "livingroom", "diningroom", "kitchen", "transit", "office", "classroom", "lab", "hospital", "basement", "cave", "underwater", "space", "cinema", "chapel", "tattoostudio", "nailstudio", "controlroom", "throneroom", "royalmuseum")
+INDOOR = ("bedroom", "livingroom", "diningroom", "kitchen", "transit", "office", "classroom", "mathroom", "lab", "hospital", "basement", "cave", "underwater", "space", "cinema", "chapel", "tattoostudio", "nailstudio", "controlroom", "throneroom", "royalmuseum")
 MAPS = ("germany", "worldmap")
 GARAGES = ("garage",)                                           # in der Werkstatt stehen Autos (drinnen sonst nie)
 GARAGE_VEHICLES = ("car", "police", "ambulance", "truck", "bike")
