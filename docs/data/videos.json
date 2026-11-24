@@ -7632,5 +7632,50 @@
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7711704812257152289?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
+ },
+ {
+  "id": 199,
+  "category": "tiere",
+  "topic": "Der Waldfrosch: Das Tier, das im Winter komplett einfriert, sein Herz anhält und im Frühling einfach wieder aufwacht",
+  "status": "review",
+  "created": 1795533093.5413113,
+  "title": "Der Waldfrosch: Der Zombie der Tierwelt friert einfach ein",
+  "description": "Er friert im Winter komplett ein und wacht im Frühling auf.\nDas Geheimnis des Waldfroschs ist der absolut verrückteste Überlebenstrick der Natur.\nWürdest du lieber einen Winterschlaf machen oder durchschlafen?",
+  "hashtags": [
+   "#shorts",
+   "#tierfakten",
+   "#biologie",
+   "#wissen",
+   "#fyp",
+   "#viral",
+   "#lernen"
+  ],
+  "tags": [
+   "waldfrosch",
+   "tierfakten",
+   "einfrieren",
+   "zombie",
+   "winterschlaf",
+   "biologie",
+   "natur",
+   "frosch"
+  ],
+  "thumb_text": "HERZ STEHT STILL",
+  "missing": [
+   "eiskristall",
+   "blut"
+  ],
+  "cover_ms": 77847,
+  "duration": 77.7,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-24 18:00",
+  "review_at": 1795533753.149984
  }
 ]

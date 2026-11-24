@@ -1,0 +1,531 @@
+{
+ "title": "Der Waldfrosch: Der Zombie der Tierwelt friert einfach ein",
+ "scenes": [
+  {
+   "text": "Dieser Frosch friert im Winter komplett ein.",
+   "see": "Der Waldfrosch sitzt im eisigen Winterwald und sieht völlig gefroren aus.",
+   "place": "wald_winter",
+   "backdrop": {
+    "sky": "day",
+    "ground": "snow",
+    "elements": [
+     "forest"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "frog",
+     "hero": true,
+     "pos": "center",
+     "action": "idle",
+     "emotion": "",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "speaks": false
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Und seine Überlebensfähigkeit lässt ihn wie einen Zombie auferstehen.",
+   "see": "Die Hauptfigur friert im Wald und schaut ungläubig auf den Frosch.",
+   "place": "wald_winter",
+   "time": "day",
+   "weather": "cold",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shiver",
+     "emotion": "shocked",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "frosch",
+     "speaks": false,
+     "action": "freeze",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Wenn die Temperaturen auf minus sechzehn Grad fallen, passiert etwas Verrücktes.",
+   "see": "Ein Thermometer zeigt minus sechzehn Grad Celsius im frostigen Wald.",
+   "place": "wald_winter",
+   "time": "day",
+   "weather": "cold",
+   "props": [
+    {
+     "type": "ice"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "thermo",
+    "value": -16.0
+   }
+  },
+  {
+   "text": "Nummer eins: Sein Herz hört auf zu schlagen.",
+   "see": "Grafik eines stehenden Herzens mit Null Schlägen pro Minute.",
+   "place": "wald_winter",
+   "backdrop": {
+    "sky": "day",
+    "ground": "snow",
+    "elements": [
+     "forest"
+    ]
+   },
+   "time": "day",
+   "weather": "cold",
+   "props": [
+    {
+     "type": "lib_herz"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Kein Atemzug, keine Gehirnaktivität, das Blut steht vollständig still.",
+   "see": "Der Frosch erstarrt mitten auf dem Schnee wie eine Statue.",
+   "place": "wald_winter",
+   "backdrop": {
+    "sky": "day",
+    "ground": "snow",
+    "elements": [
+     "forest"
+    ]
+   },
+   "time": "day",
+   "weather": "cold",
+   "actors": [
+    {
+     "id": "frosch",
+     "speaks": false,
+     "action": "freeze",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 300
+    },
+    {
+     "id": "_hirn",
+     "kind": "brain",
+     "hero": false,
+     "pos": 770,
+     "action": "talk",
+     "emotion": "",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "left",
+     "speaks": false
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "MEDIZINISCH TOT"
+   }
+  },
+  {
+   "text": "Medizinisch gesehen ist dieser Frosch jetzt komplett tot.",
+   "see": "Die Hauptfigur kratzt sich verwirrt am Kopf.",
+   "place": "wald_winter",
+   "backdrop": {
+    "sky": "day",
+    "ground": "snow",
+    "elements": [
+     "forest"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "frog",
+     "hero": true,
+     "pos": "center",
+     "action": "idle",
+     "emotion": "",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "speaks": false
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "stamp",
+    "text": "TOT",
+    "color": "red"
+   }
+  },
+  {
+   "text": "Zweitens: Zwei Drittel seines gesamten Körperwassers frieren zu festem Eis.",
+   "see": "Infografik zeigt zwei Drittel gefrorenes Wasser im Froschkörper.",
+   "place": "wald_winter",
+   "backdrop": {
+    "sky": "day",
+    "ground": "snow",
+    "elements": [
+     "forest"
+    ]
+   },
+   "time": "day",
+   "weather": "cold",
+   "props": [
+    {
+     "type": "ice"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Du würdest daran sterben, weil Eiskristalle deine Gewebezellen zerstören.",
+   "see": "Menschlicher Arm friert ein und zerbricht symbolisch.",
+   "place": "wald_winter",
+   "backdrop": {
+    "sky": "day",
+    "ground": "snow",
+    "elements": [
+     "forest"
+    ]
+   },
+   "time": "day",
+   "weather": "cold",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "cower",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Aber der Frosch flutet sein Blut mit gigantischen Mengen Glukose.",
+   "see": "Eine große Menge Zucker steigt als Grafik auf.",
+   "place": "wald_winter",
+   "backdrop": {
+    "sky": "day",
+    "ground": "snow",
+    "elements": [
+     "forest"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "frog",
+     "hero": true,
+     "pos": "center",
+     "action": "idle",
+     "emotion": "",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "speaks": false
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Dieser extreme Zucker wirkt wie ein natürliches Frostschutzmittel in den Organen.",
+   "see": "Ein Haufen Zucker schützt eine Zelle vor Kälte.",
+   "place": "wald_winter",
+   "backdrop": {
+    "sky": "day",
+    "ground": "snow",
+    "elements": [
+     "forest"
+    ]
+   },
+   "time": "day",
+   "weather": "cold",
+   "props": [
+    {
+     "type": "zucker"
+    }
+   ],
+   "shot": "insert",
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "FROSTSCHUTZ"
+   }
+  },
+  {
+   "text": "Du denkst, er bleibt für immer starr.",
+   "see": "Die Hauptfigur staunt über den gefrorenen Frosch im Eis.",
+   "place": "wald_winter",
+   "backdrop": {
+    "sky": "day",
+    "ground": "snow",
+    "elements": [
+     "forest"
+    ]
+   },
+   "time": "day",
+   "weather": "cold",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "frosch",
+     "speaks": false,
+     "action": "freeze",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Falsch: Er wartet einfach auf die Frühlingssonne.",
+   "see": "Ein großes Stempel-Symbol knallt mit FALSCH ins Bild.",
+   "place": "wald_fruehling",
+   "backdrop": {
+    "sky": "sunset",
+    "ground": "grass",
+    "elements": [
+     "forest"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "sun"
+    }
+   ],
+   "shot": "event",
+   "mood": "happy",
+   "overlay": {
+    "type": "stamp",
+    "text": "FALSCH",
+    "color": "orange"
+   }
+  },
+  {
+   "text": "Drittens: Sobald es wärmer wird, taut sein Körper von innen nach außen auf.",
+   "see": "Die Frühlingssonne schmilzt das Eis im Wald langsam weg.",
+   "place": "wald_fruehling",
+   "time": "day",
+   "props": [
+    {
+     "type": "sun"
+    }
+   ],
+   "shot": "event",
+   "mood": "happy"
+  },
+  {
+   "text": "Das Herz fängt ganz ohne fremde Hilfe wieder an zu schlagen.",
+   "see": "Grafik zeigt das schlagende Herz des Frosches mit steigendem Puls.",
+   "place": "wald_fruehling",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "forest"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_herz"
+    }
+   ],
+   "actors": [
+    {
+     "id": "frosch",
+     "action": "wave",
+     "emotion": "happy",
+     "pos": "left",
+     "emote": ""
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Nach wenigen Stunden hüpft er herum, aber was bringt uns das in der Medizin?",
+   "see": "Der Frosch blinzelt leicht und bewegt seine Beine auf dem Moos.",
+   "place": "wald_fruehling",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "forest"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "frosch",
+     "speaks": false,
+     "action": "hop",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Forscher versuchen jetzt, diese Technik für menschliche Organtransplantationen zu nutzen.",
+   "see": "Wissenschaftler untersuchen die Frost-Technik an einer Tafel.",
+   "place": "wald_fruehling",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "forest"
+    ]
+   },
+   "time": "day",
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "badge",
+    "kicker": "FORSCHUNG",
+    "text": "MEDIZIN REVOLUTION",
+    "dark": false
+   }
+  },
+  {
+   "text": "Der Frosch übersteht monatelanges Einfrieren ohne jeden dauerhaften Schaden.",
+   "see": "Grafik vergleicht Monatelanges Einfrieren mit Null Schäden.",
+   "place": "wald_winter",
+   "backdrop": {
+    "sky": "day",
+    "ground": "snow",
+    "elements": [
+     "forest"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "frog",
+     "hero": true,
+     "pos": "center",
+     "action": "idle",
+     "emotion": "",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "speaks": false
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Damit ist dieser Frosch der wahre Meister im Überleben.",
+   "see": "Der Frosch setzt sich stolz eine kleine Krone auf.",
+   "place": "wald_fruehling",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "forest"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "frog",
+     "hero": true,
+     "pos": "center",
+     "action": "idle",
+     "emotion": "",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "right",
+     "speaks": false
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Denn drei Dinge beim Waldfrosch sind absolut unmöglich.",
+   "see": "Der Frosch sitzt auf einem gefrorenen Stein und winkt schlau.",
+   "place": "wald_winter",
+   "backdrop": {
+    "sky": "day",
+    "ground": "snow",
+    "elements": [
+     "forest"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "_tier",
+     "kind": "frog",
+     "hero": true,
+     "pos": "center",
+     "action": "hop",
+     "emotion": "",
+     "emote": "",
+     "say": "",
+     "hold": "",
+     "facing": "left",
+     "speaks": false
+    }
+   ],
+   "mood": "calm"
+  }
+ ]
+}
