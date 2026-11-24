@@ -1,12 +1,4 @@
 {
- "2026-11-23 21:00": {
-  "category": "musik",
-  "topic": "Musik-Kugel",
-  "title": "Musik-Kugel",
-  "needs": [],
-  "created": 1795447237.4830303,
-  "special": "bounce"
- },
  "2026-11-24 13:00": {
   "category": "fakten",
   "topic": "Das 1-Million-Dollar-Rätsel der Mathematik, das seit 160 Jahren niemand lösen kann",
@@ -2108,5 +2100,797 @@
   "title": "Starre nie im Dunkeln in den Spiegel",
   "created": 1795545718.8601458,
   "checked": "Prüfung 24.11.2026: Drehbuch von Hand berichtigt (eine Minute statt zehn Sekunden, erfundene Verzögerungs-Erklärung gestrichen)"
+ },
+ "2026-11-25 13:00": {
+  "category": "whatif",
+  "topic": "Was wäre, wenn du die Karte eines Open-World-Spiels in der echten Welt erkunden müsstest?",
+  "trend": {
+   "title": "state of leonida",
+   "source": "Google Trends",
+   "news": [
+    {
+     "title": "GTA 6 interactive map already has more than 6,800 points of interest as fans discover Leonida",
+     "url": "https://www.pcguide.com/news/gta-6-interactive-map-already-has-more-than-6800-points-of-interest-as-fans-discover-leonida/",
+     "source": "PC Guide"
+    },
+    {
+     "title": "IGN has teamed up with Rockstar to present the Official Strategy Guide for GTA 6",
+     "url": "https://wnhub.io/news/other/item-52771",
+     "source": "WN Hub"
+    },
+    {
+     "title": "Grand Theft Auto 6 interactive map - Shackmaps",
+     "url": "http://www.shacknews.com/article/151428/gta6-interactive-map-shackmaps",
+     "source": "Shacknews"
+    }
+   ],
+   "summary": ""
+  },
+  "script": {
+   "title": "State of Leonida im echten Leben: Was wäre, wenn?",
+   "description": "Was passieren würde, wenn tausende Orte auf einer echten Karte auftauchen!\nDu erfährst, wie grausam das Leben in einer Open World wäre.\nWürdest du lieber einen Checkpoint haben oder unendlich Ausdauer?",
+   "hashtags": [
+    "#shorts",
+    "#stateofleonida",
+    "#gta6",
+    "#gaming",
+    "#whatif",
+    "#fakten",
+    "#gamingdeutschland",
+    "#viral"
+   ],
+   "tags": [
+    "state of leonida",
+    "gta 6 karte",
+    "open world echtes leben",
+    "what if gaming",
+    "gta in echt",
+    "gaming fakten"
+   ],
+   "thumbnail": {
+    "image": "Close-up of a terrified gamer holding a glowing map, floating quest markers and thousands of icons filling the sky behind him, high contrast, dramatic light",
+    "text": "OPEN WORLD ECHT",
+    "place": "street",
+    "time": "day",
+    "actor": "du",
+    "action": "shocked",
+    "emotion": "shocked",
+    "props": [
+     "map"
+    ],
+    "weather": ""
+   },
+   "wishes": [
+    "minimap",
+    "inventar",
+    "markierung"
+   ],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "lila",
+     "hat": "",
+     "hair": "curly",
+     "hair_color": "dunkelbraun",
+     "gender": "w",
+     "skin": "mittel"
+    }
+   },
+   "scenes": [
+    {
+     "see": "Eine Spielerin am PC entdeckt schockiert die riesige Karte von State of Leonida.",
+     "text": "Sechstausendachthundert Orte auf einer echten Open-World-Karte sind purer Wahnsinn.",
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "computer"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "sechstausendachthundert Orte"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "6.800 ORTE"
+     },
+     "image": "Sechstausendachthundert Orte auf einer echten Open-World-Karte sind purer Wahnsinn.",
+     "who_desc": "",
+     "place_desc": "A messy gamer bedroom with glowing blue light, PC setup, posters on wall",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Spielerin blickt verängstigt auf die Straße, wo überall Symbole in der Luft schweben.",
+     "text": "Und der letzte Ort auf dieser Liste wird dein Gehirn komplett zerstören.",
+     "place": "stadt",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "markierung"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "panic",
+     "mood": "scary",
+     "shot": "wide",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Albtraum"
+     ],
+     "overlay": null,
+     "image": "Und der letzte Ort auf dieser Liste wird dein Gehirn komplett zerstören.",
+     "who_desc": "",
+     "place_desc": "A busy city street with hundreds of glowing icons hovering above buildings",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Mini-Radar poppt vor den Augen der Spielerin auf und blockiert die Sicht.",
+     "text": "In den ersten Sekunden ploppen Tausende Symbole direkt in deinem Sichtfeld auf.",
+     "place": "stadt",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "minimap"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "cower",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "Tausende Symbole"
+     ],
+     "overlay": null,
+     "image": "In den ersten Sekunden ploppen Tausende Symbole direkt in deinem Sichtfeld auf.",
+     "who_desc": "",
+     "place_desc": "A busy city street with hundreds of glowing icons hovering above buildings",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik zeigt das Gehirn, das unter Datenmüll zu glühen beginnt.",
+     "text": "Dein Gehirn muss dreihundert Reize pro Minute verarbeiten statt der normalen fünf.",
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "graphic",
+     "graphic": {
+      "type": "compare",
+      "left": "NORMAL",
+      "right": "OPEN WORLD",
+      "value": "5 Reize",
+      "sub": "300 Reize"
+     },
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "dreihundert Reize"
+     ],
+     "overlay": null,
+     "image": "Dein Gehirn muss dreihundert Reize pro Minute verarbeiten statt der normalen fünf.",
+     "who_desc": "",
+     "place_desc": "A messy gamer bedroom with glowing blue light, PC setup, posters on wall",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Nach drei Tagen bricht die Spielerin erschöpft mitten auf der Straße zusammen.",
+     "text": "Nach drei Tagen bricht das gesamte Verkehrssystem zusammen.",
+     "place": "stadt",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "car"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "fall",
+       "emotion": "sad",
+       "emote": "",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "worried",
+     "mood": "panic",
+     "shot": "event",
+     "camera": "pan_left",
+     "sfx": "whoosh",
+     "highlight": [
+      "Verkehrssystem"
+     ],
+     "status": "TAG 3: CHAOS",
+     "overlay": {
+      "type": "tag",
+      "text": "TAG 3"
+     },
+     "image": "Nach drei Tagen bricht das gesamte Verkehrssystem zusammen.",
+     "who_desc": "",
+     "place_desc": "A busy city street with hundreds of glowing icons hovering above buildings",
+     "hud": ""
+    },
+    {
+     "see": "Menschen rennen mit Rucksäcken gegen unsichtbare Wände.",
+     "text": "Alle rennen zu denselben Symbolen, aber wer kriegt zuerst die Beute?",
+     "place": "stadt",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "box"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "run",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "left",
+       "to": "right",
+       "speaks": true
+      }
+     ],
+     "crowd": "panic",
+     "mood": "panic",
+     "shot": "wide",
+     "camera": "shake",
+     "sfx": "none",
+     "highlight": [
+      "Beute"
+     ],
+     "overlay": null,
+     "image": "Alle rennen zu denselben Symbolen, aber wer kriegt zuerst die Beute?",
+     "who_desc": "",
+     "place_desc": "A busy city street with hundreds of glowing icons hovering above buildings",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik zeigt das volle Inventar mit viel zu vielen Gegenständen.",
+     "text": "Du denkst, du kannst endlos Gegenstände tragen.",
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "graphic": {
+      "type": "number",
+      "kicker": "INVENTAR",
+      "value": "300 KG",
+      "label": "GEWICHT"
+     },
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "endlos Gegenstände"
+     ],
+     "overlay": null,
+     "image": "Du denkst, du kannst endlos Gegenstände tragen.",
+     "who_desc": "",
+     "place_desc": "A messy gamer bedroom with glowing blue light, PC setup, posters on wall",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Spielerin bricht unter drei riesigen Rucksäcken sofort zusammen.",
+     "text": "Falsch, ohne echte Rucksäcke brichst du nach dreißig Kilo zusammen.",
+     "place": "stadt",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "bag"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "cower",
+       "emotion": "sad",
+       "emote": "sweat",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "boom",
+     "highlight": [
+      "dreißig Kilo"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "FEHLER",
+      "color": "red"
+     },
+     "image": "Falsch, ohne echte Rucksäcke brichst du nach dreißig Kilo zusammen.",
+     "who_desc": "",
+     "place_desc": "A busy city street with hundreds of glowing icons hovering above buildings",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Rehook: Die Spielerin steht vor einem verschlossenen Tor.",
+     "text": "Bleibt die Frage, wie man ohne Ausdauerbalken steile Berge hochkommt.",
+     "place": "berge",
+     "backdrop": {
+      "sky": "day",
+      "ground": "rock",
+      "elements": [
+       "mountains"
+      ]
+     },
+     "time": "day",
+     "weather": "wind",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "Ausdauerbalken"
+     ],
+     "overlay": null,
+     "image": "Bleibt die Frage, wie man ohne Ausdauerbalken steile Berge hochkommt.",
+     "who_desc": "",
+     "place_desc": "High mountain peak overlooking a massive landscape with floating markers",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Spielerin keucht schwer und fasst sich an die Brust.",
+     "text": "Nach zwanzig Metern steilem Aufstieg rätst du deinem Körper ab.",
+     "place": "berge",
+     "backdrop": {
+      "sky": "day",
+      "ground": "rock",
+      "elements": [
+       "mountains"
+      ]
+     },
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "pant",
+       "emotion": "sad",
+       "emote": "sweat",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "zwanzig Metern"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "PULS 180"
+     },
+     "image": "Nach zwanzig Metern steilem Aufstieg rätst du deinem Körper ab.",
+     "who_desc": "",
+     "place_desc": "High mountain peak overlooking a massive landscape with floating markers",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Höhepunkt: Grafik zeigt den Kalender, der auf Woche vier springt.",
+     "text": "Nach einem Monat sind achtzig Prozent aller Geschäfte komplett leergekauft.",
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "panic",
+     "shot": "graphic",
+     "graphic": {
+      "type": "days",
+      "text": "TAG 30 IN DER OPEN WORLD",
+      "value": 30,
+      "sub": 30,
+      "label": "LEERGEKAUFT"
+     },
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "achtzig Prozent"
+     ],
+     "status": "TAG 30: KRACK",
+     "overlay": null,
+     "image": "Nach einem Monat sind achtzig Prozent aller Geschäfte komplett leergekauft.",
+     "who_desc": "",
+     "place_desc": "A messy gamer bedroom with glowing blue light, PC setup, posters on wall",
+     "hud": ""
+    },
+    {
+     "see": "Leergefegter Supermarkt mit offenen, staubigen Regalen.",
+     "text": "Niemand füllt Regale nach, während alle nur rasch Nebenquests erledigen?",
+     "place": "supermarket_empty",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "cart"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "sad",
+     "shot": "event",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "Nebenquests"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "LEER",
+      "color": "orange"
+     },
+     "image": "Niemand füllt Regale nach, während alle nur rasch Nebenquests erledigen?",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Spielerin stolpert über einen winzigen Stein und fällt hin.",
+     "text": "Sogar einfache Schritte werden gefährlich, wenn es keine Speicherpunkte gibt.",
+     "place": "stadt",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "rock"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "fall",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "keine Speicherpunkte"
+     ],
+     "overlay": null,
+     "image": "Sogar einfache Schritte werden gefährlich, wenn es keine Speicherpunkte gibt.",
+     "who_desc": "",
+     "place_desc": "A busy city street with hundreds of glowing icons hovering above buildings",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik zeigt ein rotes Herz mit nur noch wenig Energie.",
+     "text": "Ein einziger Sturz zieht dir dauerhaft deine Lebensenergie ab.",
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "graphic",
+     "graphic": {
+      "type": "pulse",
+      "value": "10 HP",
+      "label": "RESTLICHE ENERGIE"
+     },
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "Lebensenergie"
+     ],
+     "overlay": null,
+     "image": "Ein einziger Sturz zieht dir dauerhaft deine Lebensenergie ab.",
+     "who_desc": "",
+     "place_desc": "A messy gamer bedroom with glowing blue light, PC setup, posters on wall",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Spielerin versucht verzweifelt ein Menü in der Luft anzuwählen.",
+     "text": "Nach einem Jahr existieren keine echten Berufe mehr auf der Erde.",
+     "place": "stadt",
+     "backdrop": null,
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "worried",
+     "mood": "sad",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "keine echten Berufe"
+     ],
+     "status": "JAHR 1: ENDZEIT",
+     "overlay": {
+      "type": "tag",
+      "text": "JAHR 1"
+     },
+     "image": "Nach einem Jahr existieren keine echten Berufe mehr auf der Erde.",
+     "who_desc": "",
+     "place_desc": "A busy city street with hundreds of glowing icons hovering above buildings",
+     "hud": ""
+    },
+    {
+     "see": "Grafik zeigt das weltweite Chaos auf einer Karte.",
+     "text": "Die Menschheit verbringt den Tag nur noch mit Suchen und Sammeln.",
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "graphic",
+     "graphic": {
+      "type": "map",
+      "text": "ALLE SUCHEN BEUTE",
+      "value": "germany,france"
+     },
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Suchen und Sammeln"
+     ],
+     "overlay": null,
+     "image": "Die Menschheit verbringt den Tag nur noch mit Suchen und Sammeln.",
+     "who_desc": "",
+     "place_desc": "A messy gamer bedroom with glowing blue light, PC setup, posters on wall",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Spielerin findet eine kleine Kiste im Wald und jubelt.",
+     "text": "Das einzige Gute ist, dass du überall kleine Schätze finden kannst.",
+     "place": "stadt",
+     "backdrop": {
+      "sky": "day",
+      "ground": "grass",
+      "elements": [
+       "forest"
+      ]
+     },
+     "time": "day",
+     "weather": "",
+     "props": [
+      "box"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "jump",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "happy",
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "kleine Schätze"
+     ],
+     "overlay": null,
+     "image": "Das einzige Gute ist, dass du überall kleine Schätze finden kannst.",
+     "who_desc": "",
+     "place_desc": "A busy city street with hundreds of glowing icons hovering above buildings",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Auflösung: Die Spielerin öffnet die Kiste und findet nur alte Socken.",
+     "text": "Meistens liegt darin aber nur ein altes Paar gebrauchte Socken.",
+     "place": "stadt",
+     "backdrop": {
+      "sky": "day",
+      "ground": "grass",
+      "elements": [
+       "forest"
+      ]
+     },
+     "time": "day",
+     "weather": "",
+     "props": [
+      "schuh"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "sad",
+       "emote": "sweat",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "gebrauchte Socken"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "NIX WERT",
+      "color": "red"
+     },
+     "image": "Meistens liegt darin aber nur ein altes Paar gebrauchte Socken.",
+     "who_desc": "",
+     "place_desc": "A busy city street with hundreds of glowing icons hovering above buildings",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Pointe: Spielerin schaut fragend auf den Monitor im Zimmer zurück.",
+     "text": "Über sechstausendachthundert Orte auf einer Karte klingen im Spiel genial.",
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "computer"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "klingen im Spiel genial"
+     ],
+     "overlay": {
+      "type": "choice",
+      "a": "Checkpoint",
+      "b": "Endlos Ausdauer"
+     },
+     "image": "Über sechstausendachthundert Orte auf einer Karte klingen im Spiel genial.",
+     "who_desc": "",
+     "place_desc": "A messy gamer bedroom with glowing blue light, PC setup, posters on wall",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "OPEN WORLD · TAG 1",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "minimap",
+   "markierung",
+   "symbol",
+   "rucksack",
+   "socke"
+  ],
+  "title": "State of Leonida im echten Leben: Was wäre, wenn?",
+  "created": 1795548963.1905427
  }
 }
