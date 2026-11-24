@@ -6278,7 +6278,7 @@ def mirror_glass(look, state, t, dur, size=(844, 1050), seed=3):
         hc = (hc[0] * wob, hc[1] * (2 - wob), hc[2])
         r_, g_, b_, a_ = im2.split()
         im = Image.merge("RGBA", (r_.point(lambda v: int(v * 0.8)), g_.point(lambda v: int(v * 0.9)), b_.point(lambda v: int(v * 0.86)), a_))
-    cx, cy = gw / 2, gh * 0.44
+    cx, cy = gw / 2, gh * 0.52                             # Kopf unter der Zone für Titel, Karte und Schild (in Video 205 lag „EINE MINUTE“ auf dem Haaransatz)
     g.paste(im, (int(cx - hc[0]), int(cy - hc[1])), im)
     if not lit:                                            # schwaches Licht: alles etwas blau und dunkel
         g = Image.blend(g, Image.new("RGB", size, (16, 22, 40)), 0.26)
