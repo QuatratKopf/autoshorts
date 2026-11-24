@@ -7637,7 +7637,7 @@
   "id": 199,
   "category": "tiere",
   "topic": "Der Waldfrosch: Das Tier, das im Winter komplett einfriert, sein Herz anhält und im Frühling einfach wieder aufwacht",
-  "status": "review",
+  "status": "discarded",
   "created": 1795533093.5413113,
   "title": "Der Waldfrosch: Der Zombie der Tierwelt friert einfach ein",
   "description": "Er friert im Winter komplett ein und wacht im Frühling auf.\nDas Geheimnis des Waldfroschs ist der absolut verrückteste Überlebenstrick der Natur.\nWürdest du lieber einen Winterschlaf machen oder durchschlafen?",
@@ -7676,6 +7676,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-24 18:00",
-  "review_at": 1795533753.149984
+  "review_at": 1795533753.149984,
+  "error": "Bei der Prüfung verworfen: Prüfung: gelber, lächelnder Pfeilgiftfrosch statt gefrorenem Waldfrosch, Gehirn auf Beinen, leerer Wald mit Sonne, Eisbrocken ohne Tier"
  }
 ]
