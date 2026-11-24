@@ -1,5 +1,5 @@
 {
- "updated": 1795557135.3741152,
+ "updated": 1795558965.3476267,
  "enough": true,
  "counted": 40,
  "total": 42,
@@ -90,10 +90,10 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 6,
-   "avg_views": 1216,
+   "avg_views": 1218,
    "avg_likes": 10.2,
-   "like_rate": 0.84,
-   "avg_score": 1404
+   "like_rate": 0.83,
+   "avg_score": 1405
   },
   {
    "slug": "grusel",
@@ -119,7 +119,7 @@
   "Stärkste Kategorie: 🤪 Comedy (Ø 2291 Aufrufe, 2.03 % Likes).",
   "Schwächste Kategorie: 👻 Grusel (Ø 492 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2344 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2513 zu 1843 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2513 zu 1844 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -132,8 +132,8 @@
   "bekanntes",
   "erkennst",
   "glas",
-  "jede",
   "klassikers",
+  "jede",
   "eines"
  ],
  "top": [
@@ -203,11 +203,11 @@
    "id": 196,
    "title": "Jede Scheibe ein Ton: Lo-Fi-Remix eines Klassikers",
    "category": "musik",
-   "views": 289,
+   "views": 297,
    "likes": 0,
    "comments": 0,
    "shares": 0,
-   "score": 289
+   "score": 297
   },
   {
    "id": 44,
