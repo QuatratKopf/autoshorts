@@ -7702,5 +7702,13 @@
   "status": "error",
   "created": 1795540301.7195964,
   "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-3.6-flash: HTTP 429 | pollinations: Antwort enthält kein JSON"
+ },
+ {
+  "id": 203,
+  "category": "tiere",
+  "topic": "Der Waldfrosch friert im Winter komplett ein und hüpft im Frühling einfach weiter – Titel: „Dieser Frosch friert ein und hüpft im Frühling weiter“. Titelbild-Text: HERZ STEHT STILL. Vorgaben: Du-Form, lebendige eigene Sätze, Reihenfolge einhalten, die Punkte sind Stichpunkte, jeder Satz bringt etwas Neues, kein Füllsatz, keine Aufzählung mit „Nummer eins“ oder „Zweitens“. Nur diese geprüften Fakten und Zahlen, keine Jahreszahlen, keine Forschernamen. Nicht behaupten, der Frosch sei tot – er wirkt nur wie tot. Kein Wort wie „Revolution“ oder „Wunder der Medizin“. 1) Einstieg: Dieser Frosch friert jeden Winter zu einem Eisklumpen und hüpft im Frühling einfach weiter. 2) Er heißt Waldfrosch, ist kaum länger als ein Finger und lebt in Nordamerika bis hinauf nach Alaska. 3) Er gräbt sich nicht tief ein, sondern liegt nur flach am Waldboden – der Frost erreicht ihn. 4) Bis zu zwei Drittel seines Körperwassers gefrieren zu Eis. 5) Sein Herz hört auf zu schlagen, er atmet nicht mehr, das Blut steht still. 6) Dich würde das töten: Eiskristalle zerreißen deine Zellen. 7) Sein Trick: Sein Körper flutet das Blut mit riesigen Mengen Traubenzucker; der Zucker wirkt in den Zellen wie ein Frostschutzmittel, das Eis bildet sich nur zwischen den Zellen. 8) In Alaska blieben Waldfrösche über sechs Monate am Stück gefroren, bei bis zu minus 18 Grad – und alle überlebten. 9) Wird es wärmer, taut der Frosch auf, und sein Herz schlägt von selbst wieder. 10) Nach wenigen Stunden bewegt er sich, bald darauf hüpft er davon. 11) Forscher untersuchen den Trick, um Spenderorgane länger haltbar zu machen – bisher ist das nur Forschung. Beschreibung: zwei Sätze über den Waldfrosch und die Frage „Würdest du den Winter einfach verschlafen wollen?“",
+  "status": "error",
+  "created": 1795544264.087668,
+  "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-3.6-flash: HTTP 429 | pollinations: Antwort enthält kein JSON"
  }
 ]
