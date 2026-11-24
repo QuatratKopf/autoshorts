@@ -1,5 +1,5 @@
 {
- "updated": 1795538704.9550962,
+ "updated": 1795541355.6045945,
  "enough": true,
  "counted": 40,
  "total": 41,
@@ -64,9 +64,9 @@
    "name": "💕 Liebe",
    "n": 1,
    "avg_views": 1450,
-   "avg_likes": 59.0,
-   "like_rate": 4.07,
-   "avg_score": 2335
+   "avg_likes": 61.0,
+   "like_rate": 4.21,
+   "avg_score": 2365
   },
   {
    "slug": "storys",
@@ -90,10 +90,10 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 6,
-   "avg_views": 1208,
-   "avg_likes": 10.0,
-   "like_rate": 0.83,
-   "avg_score": 1393
+   "avg_views": 1209,
+   "avg_likes": 10.2,
+   "like_rate": 0.84,
+   "avg_score": 1396
   },
   {
    "slug": "grusel",
@@ -118,8 +118,8 @@
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2290 Aufrufe, 2.03 % Likes).",
   "Schwächste Kategorie: 👻 Grusel (Ø 491 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2340 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2511 zu 1839 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2342 zu 706 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2512 zu 1840 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -133,8 +133,8 @@
   "lied",
   "glas",
   "eines",
-  "scheibe",
-  "jede"
+  "klassikers",
+  "scheibe"
  ],
  "top": [
   {
@@ -193,11 +193,11 @@
    "id": 189,
    "title": "Jede Scheibe ein Ton: Glas-Remix eines Klassikers",
    "category": "musik",
-   "views": 576,
-   "likes": 10,
+   "views": 583,
+   "likes": 11,
    "comments": 1,
    "shares": 0,
-   "score": 756
+   "score": 778
   },
   {
    "id": 196,
