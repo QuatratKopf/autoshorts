@@ -1,5 +1,5 @@
 {
- "updated": 1795526542.4162278,
+ "updated": 1795528378.5400314,
  "enough": true,
  "counted": 39,
  "total": 41,
@@ -27,7 +27,7 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 3,
-   "avg_views": 1804,
+   "avg_views": 1803,
    "avg_likes": 43.3,
    "like_rate": 2.4,
    "avg_score": 2487
@@ -127,8 +127,8 @@
  ],
  "words_bad": [
   "remix",
-  "erkennst",
   "lied",
+  "erkennst",
   "bekanntes",
   "glas"
  ],
@@ -157,11 +157,11 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2269,
+   "views": 2268,
    "likes": 62,
    "comments": 0,
    "shares": 0,
-   "score": 3199
+   "score": 3198
   },
   {
    "id": 124,
