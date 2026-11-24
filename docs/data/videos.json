@@ -7536,7 +7536,7 @@
   "id": 197,
   "category": "fakten",
   "topic": "Das 1-Million-Dollar-Rätsel der Mathematik, das seit 160 Jahren niemand lösen kann",
-  "status": "review",
+  "status": "discarded",
   "created": 1795515013.2761517,
   "trend": {
    "title": "Riemann hypothesis",
@@ -7578,6 +7578,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-24 13:00",
-  "review_at": 1795515442.8103273
+  "review_at": 1795515442.8103273,
+  "error": "Bei der Prüfung verworfen: Prüfung: falsche Jahreszahl (1850 statt 1859), echte Person als Figur mit Namensschild, leere Tafel statt Mathe-Bild, Tippfehler 10 BII., Schluss nur ein Stift"
  }
 ]
