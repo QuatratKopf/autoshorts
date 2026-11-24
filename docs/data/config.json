@@ -116,7 +116,7 @@
    "voice_rate": "+0%",
    "voice_pitch": "-2Hz",
    "voice_instructions": "Ruhig, geheimnisvoll, neugierig.",
-   "enabled": true,
+   "enabled": false,
    "trends": true
   },
   {
