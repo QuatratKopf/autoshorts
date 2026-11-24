@@ -7759,7 +7759,7 @@
   "id": 205,
   "category": "grusel",
   "topic": "Was dein Gehirn tut, wenn du im Spiegel an die falsche Stelle starrst",
-  "status": "rendered",
+  "status": "published",
   "created": 1795548328.8486297,
   "title": "Starre nie im Dunkeln in den Spiegel",
   "description": "Starre im Halbdunkel in den Spiegel, und nach etwa einer Minute verändert sich dein Gesicht.\nDahinter steckt kein Spuk, sondern der Troxler-Effekt: Dein Gehirn blendet Gleichbleibendes aus und füllt die Lücken selbst.\nTraust du dich, das heute Abend zu testen?",
@@ -7792,6 +7792,12 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "zernio_id": "6b05e8cdbbd3d8f323ac4d85",
+  "yt_status": "Zernio: published",
+  "yt_id": "5ODwYQRLmjE",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6b05e8cdbbd3d8f323ac4d85",
+  "error": null
  }
 ]
