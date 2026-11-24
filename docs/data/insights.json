@@ -1,5 +1,5 @@
 {
- "updated": 1795549817.4162943,
+ "updated": 1795551598.3345892,
  "enough": true,
  "counted": 40,
  "total": 42,
@@ -18,10 +18,10 @@
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 1,
-   "avg_views": 2371,
+   "avg_views": 2370,
    "avg_likes": 34.0,
    "like_rate": 1.43,
-   "avg_score": 2881
+   "avg_score": 2880
   },
   {
    "slug": "tiere",
@@ -63,10 +63,10 @@
    "slug": "liebe",
    "name": "💕 Liebe",
    "n": 1,
-   "avg_views": 1462,
-   "avg_likes": 62.0,
-   "like_rate": 4.24,
-   "avg_score": 2392
+   "avg_views": 1463,
+   "avg_likes": 61.0,
+   "like_rate": 4.17,
+   "avg_score": 2378
   },
   {
    "slug": "storys",
@@ -90,19 +90,19 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 6,
-   "avg_views": 1214,
+   "avg_views": 1211,
    "avg_likes": 10.2,
    "like_rate": 0.84,
-   "avg_score": 1402
+   "avg_score": 1398
   },
   {
    "slug": "grusel",
    "name": "👻 Grusel",
    "n": 1,
-   "avg_views": 492,
+   "avg_views": 491,
    "avg_likes": 21.0,
-   "like_rate": 4.27,
-   "avg_score": 807
+   "like_rate": 4.28,
+   "avg_score": 806
   }
  ],
  "weights": {
@@ -117,9 +117,9 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2291 Aufrufe, 2.03 % Likes).",
-  "Schwächste Kategorie: 👻 Grusel (Ø 492 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2344 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2513 zu 1842 Punkte).",
+  "Schwächste Kategorie: 👻 Grusel (Ø 491 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2343 zu 706 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2513 zu 1841 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -129,12 +129,12 @@
  "words_bad": [
   "remix",
   "lied",
-  "erkennst",
   "bekanntes",
+  "erkennst",
   "glas",
   "klassikers",
-  "scheibe",
-  "eines"
+  "jede",
+  "scheibe"
  ],
  "top": [
   {
@@ -193,21 +193,21 @@
    "id": 189,
    "title": "Jede Scheibe ein Ton: Glas-Remix eines Klassikers",
    "category": "musik",
-   "views": 596,
+   "views": 588,
    "likes": 11,
    "comments": 1,
    "shares": 0,
-   "score": 791
+   "score": 783
   },
   {
    "id": 196,
    "title": "Jede Scheibe ein Ton: Lo-Fi-Remix eines Klassikers",
    "category": "musik",
-   "views": 286,
+   "views": 272,
    "likes": 0,
    "comments": 0,
    "shares": 0,
-   "score": 286
+   "score": 272
   },
   {
    "id": 44,
