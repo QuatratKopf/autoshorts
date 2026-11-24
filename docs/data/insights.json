@@ -1,5 +1,5 @@
 {
- "updated": 1795560777.9072983,
+ "updated": 1795562572.6079721,
  "enough": true,
  "counted": 40,
  "total": 42,
@@ -63,10 +63,10 @@
    "slug": "liebe",
    "name": "💕 Liebe",
    "n": 1,
-   "avg_views": 1474,
+   "avg_views": 1469,
    "avg_likes": 61.0,
-   "like_rate": 4.14,
-   "avg_score": 2389
+   "like_rate": 4.15,
+   "avg_score": 2384
   },
   {
    "slug": "storys",
@@ -128,12 +128,12 @@
  ],
  "words_bad": [
   "remix",
-  "lied",
   "bekanntes",
+  "lied",
   "erkennst",
   "glas",
-  "scheibe",
   "eines",
+  "jede",
   "klassikers"
  ],
  "top": [
