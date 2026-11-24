@@ -58,7 +58,7 @@
   "qrsauuc3k",
   "qa5v1ywsb"
  ],
- "last_stats": 1795531973.82589,
+ "last_stats": 1795534328.6887617,
  "next_id": 200,
  "connected": {
   "youtube": {
@@ -67,7 +67,7 @@
   }
  },
  "voice_wps": 2.386,
- "last_trends": 1795522881.6164198,
+ "last_trends": 1795534328.6898997,
  "tiktok_handle": "wissens..wert",
  "last_poster": {
   "hero": "frog",
@@ -75,17 +75,14 @@
   "video": 199
  },
  "cat_credit": {
-  "fakten": -2.5199999999999987,
-  "storys": -0.23999999999999877,
-  "mysterien": 3.000000000000001,
-  "tiere": -7.869999999999999,
-  "whatif": -0.039999999999997815,
-  "comedy": 2.5199999999999996,
-  "vergleich": 2.280000000000001,
-  "motivation": 2.280000000000001,
-  "grusel": 1.0599999999999998,
-  "liebe": -0.17999999999999927,
-  "nachricht": -0.2899999999999996
+  "fakten": -1.4799999999999986,
+  "tiere": -6.789999999999999,
+  "whatif": 1.0100000000000022,
+  "comedy": -5.45,
+  "vergleich": 3.4800000000000013,
+  "motivation": 3.4800000000000013,
+  "grusel": 2.26,
+  "nachricht": 0.9100000000000004
  },
  "bounce_songs": [
   "cc:a0374037-c7fc-4467-94de-28d2e36fc183",
