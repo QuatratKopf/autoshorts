@@ -1,5 +1,5 @@
 {
- "updated": 1795497477.293442,
+ "updated": 1795499278.3646953,
  "enough": true,
  "counted": 38,
  "total": 40,
@@ -11,7 +11,7 @@
    "n": 5,
    "avg_views": 2290,
    "avg_likes": 46.6,
-   "like_rate": 2.04,
+   "like_rate": 2.03,
    "avg_score": 3009
   },
   {
@@ -111,7 +111,7 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2290 Aufrufe, 2.04 % Likes).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2290 Aufrufe, 2.03 % Likes).",
   "Schwächste Kategorie: 👻 Grusel (Ø 485 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2397 zu 706 Punkte).",
   "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2517 zu 1949 Punkte).",
@@ -124,8 +124,8 @@
  "words_bad": [
   "remix",
   "lied",
-  "erkennst",
   "bekanntes",
+  "erkennst",
   "glas"
  ],
  "top": [
