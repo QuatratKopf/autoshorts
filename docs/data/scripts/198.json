@@ -1,0 +1,394 @@
+{
+ "title": "Dieses Mathe-Rätsel ist eine Million Dollar wert",
+ "scenes": [
+  {
+   "text": "Für ein einziges Mathe-Rätsel winken seit über einhundertsechzig Jahren eine Million Dollar.",
+   "see": "Du sitzt geschockt auf der Couch und starrst auf einen Stapel Geldscheine in deiner Hand.",
+   "place": "wohnzimmer",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "1.000.000 $"
+   }
+  },
+  {
+   "text": "Und das Beste daran: Die richtige Antwort schlummerte extrem lange ungeknackt vor sich hin.",
+   "see": "Du hältst überrascht ein dickes Buch in den Händen und blickst fragend nach oben.",
+   "place": "wohnzimmer",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Im Jahr achtzehnhundertneunundfünfzig verfasste ein deutscher Mathematiker einen extrem kurzen Aufsatz.",
+   "see": "Ein älterer Mathematiker im historischen Klassenzimmer schreibt auf wenigen Seiten Papier an einem Pult.",
+   "place": "mathroom",
+   "actors": [
+    {
+     "id": "forscher",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "1859"
+   },
+   "hud": "1859"
+  },
+  {
+   "text": "Darin stellte er eine Behauptung auf, die als Riemannsche Vermutung bekannt wurde.",
+   "see": "Der Mathematiker tippt stolz auf die grüne Tafel, auf der in großer Schrift Riemannsche Vermutung steht.",
+   "place": "mathroom",
+   "actors": [
+    {
+     "id": "forscher",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "note",
+    "title": "UNGELÖST",
+    "text": "Riemannsche Vermutung"
+   }
+  },
+  {
+   "text": "Im Kern geht es dabei um Primzahlen wie zwei, drei, fünf oder sieben.",
+   "see": "Eine bewegte Grafik zeigt die Zahlen zwei, drei, fünf, sieben, elf und dreizehn nacheinander aufleuchten.",
+   "place": "mathroom",
+   "shot": "graphic",
+   "graphic": {
+    "type": "primes",
+    "label": "2, 3, 5, 7, 11, 13",
+    "dark": false
+   }
+  },
+  {
+   "text": "Das sind Zahlen, die man nur durch eins und sich selbst ohne Rest teilen kann.",
+   "see": "Du zählst an deinen Fingern nach und schaust skeptisch auf die Tafel.",
+   "place": "mathroom",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Sie tauchten in den mathematischen Tabellen scheinbar völlig ohne jedes Muster auf.",
+   "see": "Eine Grafik zeigt Zahlenreihen, die ohne erkennbare Abstände kreuz und quer aufflackern.",
+   "place": "underwater",
+   "shot": "graphic",
+   "graphic": {
+    "type": "primes",
+    "label": "KEIN MUSTER",
+    "sub": "100",
+    "dark": false
+   }
+  },
+  {
+   "text": "Manchmal stehen zwei direkt nebeneinander und dann kommen wieder riesige Lücken.",
+   "see": "Du hältst dir überrascht die Hände an den Kopf und machst riesige Augen vor der Tafel.",
+   "place": "mathroom",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "CHAOS IN DER REIHE"
+   }
+  },
+  {
+   "text": "Du denkst, Primzahlen sind reines Chaos? Falsch – hinter ihnen steckt eine verborgene Ordnung.",
+   "see": "Grafik zeigt Nullstellen, die exakt auf einer geraden, rot leuchtenden Linie erscheinen.",
+   "place": "rechenzentrum",
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "zeros",
+    "text": "ALLE AUF EINER LINIE",
+    "dark": false
+   }
+  },
+  {
+   "text": "Eine spezielle mathematische Funktion soll all ihre Nullstellen exakt auf einer Linie haben.",
+   "see": "Du schaust fasziniert auf eine Schautafel mit der geraden Linie der Nullstellen.",
+   "place": "rechenzentrum",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Supercomputer haben mittlerweile mehr als zehn Billionen dieser Nullstellen im Detail geprüft.",
+   "see": "Im Rechenzentrum blinken riesige Rechnerwände, während Lichter schnell flackern.",
+   "place": "rechenzentrum",
+   "shot": "graphic",
+   "graphic": {
+    "type": "number",
+    "kicker": "1859",
+    "value": "10 BIO.",
+    "dark": false
+   }
+  },
+  {
+   "text": "Jede einzelne davon lag perfekt auf der Linie, ohne jede einzige Ausnahme.",
+   "see": "Du stehst erschöpft vor den blinkenden Servern und wischst dir Schweiß von der Stirn.",
+   "place": "rechenzentrum",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Aber zehn Billionen Treffer sind in der Mathematik noch lange kein echter Beweis.",
+   "see": "Grafik zeigt die Linie der Nullstellen, an deren Rand plötzlich ein rotes Fragezeichen blinkt.",
+   "place": "rechenzentrum",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "zeros",
+    "sub": "ZWEIFEL",
+    "text": "KEIN BEWEIS",
+    "dark": false
+   }
+  },
+  {
+   "text": "Weil es unendlich viele Zahlen gibt, könnte irgendwo doch eine Abweichung lauern.",
+   "see": "Du schüttelst nachdenklich den Kopf und blickst in ein aufgeschlagenes Lehrbuch.",
+   "place": "wohnzimmer",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "tag",
+    "text": "UNENDLICH VIELE"
+   }
+  },
+  {
+   "text": "Im Jahr zweitausend wählte ein US-Institut genau sieben ungelöste Millennium-Probleme aus.",
+   "see": "Du schaust verwundert auf dein Handy, das eine Eilmeldung über Preisgelder anzeigt.",
+   "place": "wohnzimmer",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "badge",
+    "kicker": "JAHR 2000",
+    "text": "7 RÄTSEL",
+    "dark": false
+   },
+   "hud": "2000"
+  },
+  {
+   "text": "Für die richtige Lösung jedes einzelnen Rätsels gibt es genau eine Million Dollar.",
+   "see": "Eine große Grafik zeigt den Siegerpreis von einer Million Dollar neben einer großen Sieben.",
+   "place": "wohnzimmer",
+   "shot": "graphic",
+   "graphic": {
+    "type": "number",
+    "kicker": "PREISGELD JE RÄTSEL",
+    "value": "1 MIO.",
+    "label": "DOLLAR",
+    "dark": false
+   }
+  },
+  {
+   "text": "Bisher wurde erst eines gelöst und der Forscher lehnte das Geld einfach ab.",
+   "see": "Du winkst ungläubig ab und lachst laut auf über die Nachricht auf deinem Handy.",
+   "place": "lab",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "forscher",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Tausende Formeln beruhen auf der Annahme, dass diese mathematische Vermutung wirklich stimmt.",
+   "see": "Ein riesiger Stapel Dokumente und Lehrbücher liegt auf dem Tisch vor dir.",
+   "place": "wohnzimmer",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Würdest du jahrelang an einer einzigen Matheaufgabe sitzen für eine Million Dollar?",
+   "see": "Du sitzt grübelnd am Tisch über einem leeren Blatt Papier mit einem Stift in der Hand.",
+   "place": "wohnzimmer",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  }
+ ]
+}

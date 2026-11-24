@@ -7580,5 +7580,47 @@
   "slot": "2026-11-24 13:00",
   "review_at": 1795515442.8103273,
   "error": "Bei der Prüfung verworfen: Prüfung: falsche Jahreszahl (1850 statt 1859), echte Person als Figur mit Namensschild, leere Tafel statt Mathe-Bild, Tippfehler 10 BII., Schluss nur ein Stift"
+ },
+ {
+  "id": 198,
+  "category": "fakten",
+  "topic": "Das Mathe-Rätsel um eine Million Dollar, das seit über 160 Jahren niemand lösen kann – die Riemannsche Vermutung. Titel: „Dieses Mathe-Rätsel ist eine Million Dollar wert“. Stichpunkte, nicht wörtlich abschreiben, in eigenen lebendigen Sätzen mit Du-Ansprache: 1) Einstieg: eine Million Dollar für ein einziges Rätsel, seit 1859 ungelöst. 2) 1859 stellt ein deutscher Mathematiker die Vermutung in einem Aufsatz von nur wenigen Seiten auf (Forscher nie beim Namen nennen; nur der Fachbegriff „Riemannsche Vermutung“ fällt genau einmal). 3) Es geht um Primzahlen – nur durch eins und sich selbst teilbar: 2, 3, 5, 7, 11, 13. 4) Sie tauchen scheinbar ohne Muster auf, mal dicht beieinander, mal mit großen Lücken; niemand kann die nächste einfach vorhersagen. 5) Die Vermutung: hinter dem Chaos steckt eine verborgene Ordnung – beschrieben durch eine besondere Funktion, deren Nullstellen alle exakt auf einer Linie liegen sollen. 6) Computer haben zehn Billionen dieser Nullstellen geprüft, jede liegt auf der Linie. 7) Trotzdem ungelöst: zehn Billionen Beispiele sind kein Beweis, es gibt unendlich viele Nullstellen, irgendwo könnte eine Ausnahme liegen. 8) Im Jahr 2000 wählt das Clay Mathematics Institute in den USA sieben große Rätsel aus, die Millennium-Probleme, je eine Million Dollar Preisgeld. 9) Erst eines der sieben ist gelöst – der Mathematiker lehnte das Preisgeld ab. 10) Hunderte mathematische Ergebnisse beginnen mit „Angenommen, die Vermutung stimmt“ – ein Beweis würde sie alle auf einen Schlag absichern. 11) Schluss: Frage an die Zuschauer, ob sie für eine Million jahrelang an einem einzigen Rätsel sitzen würden. Geprüfte Jahreszahlen: 1859 und 2000. Keine anderen Jahreszahlen. Weitere Zahlen nur: eine Million Dollar, sieben Rätsel, zehn Billionen, über 160 Jahre. Nicht behaupten, ein Beweis knacke Verschlüsselung oder Passwörter. Verbotene Wörter: Zeta, Kryptografie, Hacker. Bild: Klassenzimmer mit Tafel für Geschichte und Primzahlen, Rechenzentrum für die Computer, Wohnzimmer für die Du-Szenen; Figuren zeigen, staunen, grübeln; höchstens jede dritte Szene eine Grafik, nie zwei Grafiken hintereinander. Titelbild-Text: 1 MILLION FÜR EIN RÄTSEL. Beschreibung: zwei Sätze über Primzahlen und die Riemannsche Vermutung, dann die Frage.",
+  "status": "rendered",
+  "created": 1795520347.051615,
+  "title": "Dieses Mathe-Rätsel ist eine Million Dollar wert",
+  "description": "Ein ungelöstes Rätsel seit 1859 bringt dir eine Million Dollar.\nEin deutscher Mathematiker fand ein Muster bei den Primzahlen, das bis heute niemanden schlafen lässt.\nWürdest du jahrelang an einer Matheaufgabe sitzen?",
+  "hashtags": [
+   "#shorts",
+   "#mathe",
+   "#wissen",
+   "#fakten",
+   "#rätsel",
+   "#geheimnis",
+   "#fyp",
+   "#viral"
+  ],
+  "tags": [
+   "mathe rätsel",
+   "riemannsche vermutung",
+   "ein million dollar rätsel",
+   "primzahlen muster",
+   "millennium probleme",
+   "ungelöste rätsel",
+   "mathe fakten"
+  ],
+  "thumb_text": "1 MILLION FÜR EIN RÄTSEL",
+  "missing": [
+   "primzahl"
+  ],
+  "cover_ms": 95829,
+  "duration": 95.7,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
