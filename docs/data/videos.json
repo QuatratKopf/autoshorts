@@ -7710,5 +7710,48 @@
   "status": "error",
   "created": 1795544264.087668,
   "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-3.6-flash: HTTP 429 | pollinations: Antwort enthält kein JSON"
+ },
+ {
+  "id": 204,
+  "category": "grusel",
+  "topic": "Was dein Gehirn tut, wenn du im Spiegel an die falsche Stelle starrst",
+  "status": "review",
+  "created": 1795545857.7369182,
+  "title": "Starre nie im Dunkeln in den Spiegel",
+  "description": "Starre im Dunkeln in deinen Spiegel und dein Gehirn verliert die Kontrolle.\nWas nach zehn Sekunden passiert, ist kein Geisterglaube, sondern ein echter optischer Trick deiner Nerven.\nHast du Mut, das heute Nacht selbst zu testen?",
+  "hashtags": [
+   "#shorts",
+   "#grusel",
+   "#spiegel",
+   "#psychologie",
+   "#fakten",
+   "#viral",
+   "#fyp"
+  ],
+  "tags": [
+   "spiegel phänomen",
+   "troxler effekt",
+   "gruselige fakten",
+   "gehirn illusionen",
+   "spiegel nachts",
+   "psychologie fakten",
+   "gruselgeschichten"
+  ],
+  "thumb_text": "SCHAU NICHT REIN",
+  "missing": [
+   "nase"
+  ],
+  "cover_ms": 74009,
+  "duration": 73.9,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-24 21:00",
+  "review_at": 1795546439.6939223
  }
 ]
