@@ -7715,7 +7715,7 @@
   "id": 204,
   "category": "grusel",
   "topic": "Was dein Gehirn tut, wenn du im Spiegel an die falsche Stelle starrst",
-  "status": "review",
+  "status": "discarded",
   "created": 1795545857.7369182,
   "title": "Starre nie im Dunkeln in den Spiegel",
   "description": "Starre im Dunkeln in deinen Spiegel und dein Gehirn verliert die Kontrolle.\nWas nach zehn Sekunden passiert, ist kein Geisterglaube, sondern ein echter optischer Trick deiner Nerven.\nHast du Mut, das heute Nacht selbst zu testen?",
@@ -7752,6 +7752,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-24 21:00",
-  "review_at": 1795546439.6939223
+  "review_at": 1795546439.6939223,
+  "error": "Bei der Prüfung verworfen: Prüfung: Spiegel-Video ohne Spiegelbild – die Figur steht nur erschrocken im dunklen Bad, kein verzerrtes Gesicht; Gehirn verdeckt die Figur; Schluss ängstlich statt erleichtert"
  }
 ]
