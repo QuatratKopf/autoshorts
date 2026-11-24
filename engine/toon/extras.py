@@ -3831,14 +3831,20 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
         brow(hx + 2, hy - 44, 14, 1)
         brow(hx + 46, hy - 44, 14, -1)
         cheek(hx - 26, hy + 22, 13)
-    elif kind == "frog":
+    elif kind in ("frog", "woodfrog"):
         # Pfeilgiftfrosch (Prüfung 19.11.2026): winziger, knallgelber Frosch mit dunklen Zehenspitzen und großen dunklen Augen; sitzt, die Kehle pulsiert.
         # action „hop“: er hüpft auf der Stelle.
+        # Waldfrosch (`woodfrog`, Prüfung 24.11.2026): braun mit dunkler Augenmaske. action „frozen“: steif, blaugrau, Augen zu, in einem Eisblock mit Reif;
+        # „thaw“: das Eis ist bis auf einen Rest geschmolzen, Tropfen und Pfütze, er blinzelt.
+        wood = kind == "woodfrog"
+        frozen, thaw = wood and action == "frozen", wood and action == "thaw"
         col = (250, 208, 40)
         dk = (60, 54, 60)
+        if wood:
+            col, dk = ((132, 118, 110) if frozen else (176, 138, 104) if thaw else (184, 132, 80)), (84, 58, 44)
         hop = abs(math.sin(t * 5)) * 60 if action in ("hop", "walk", "run") else 0
         oy = -hop
-        pulse = math.sin(t * 6) * 6
+        pulse = 0 if frozen else math.sin(t * (3 if thaw else 6)) * 6
         stroke([(-96, -96 + oy), (-150, -60 + oy * 0.5), (-70, -22 + oy * 0.2)], 34, _dark(col, 0.16))      # Hinterbein der abgewandten Seite
         ell(-160, -196 + oy, 30, -58 + oy, col)                                                              # Rumpf: hinten flach …
         ell(-50, -252 + oy, 160, -62 + oy, col)                                                              # … vorn hoch aufgerichtet
@@ -3847,26 +3853,61 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
         stroke([(-80, -150 + oy), (-170, -110 + oy * 0.6), (-110, -30 + oy * 0.2), (-30, -16)], 40, col)   # gefaltetes Hinterbein
         for tz in (-14, 6, 26):                                                                             # lange Zehen mit dunklen Haftscheiben
             stroke([(-34, -16), (20 + tz, -8 + abs(tz) * 0.2)], 10, col)
-            ell(14 + tz, -18 + abs(tz) * 0.2, 34 + tz, 2 + abs(tz) * 0.2, dk, shade=0)
+            if not wood:
+                ell(14 + tz, -18 + abs(tz) * 0.2, 34 + tz, 2 + abs(tz) * 0.2, dk, shade=0)
         stroke([(96, -110 + oy), (110, -50 + oy * 0.4), (140, -14)], 26, col)                               # Vorderbein
         for tz in (-16, 4, 24):
             stroke([(140, -14), (160 + tz, -8)], 9, col)
-            ell(154 + tz, -18, 172 + tz, 0, dk, shade=0)
+            if not wood:
+                ell(154 + tz, -18, 172 + tz, 0, dk, shade=0)
         for sx_, sy_, r_ in ((-70, -170, 16), (-20, -200, 12), (-110, -120, 11)):                           # ein paar dunkle Flecken
             ell(sx_ - r_, sy_ + oy - r_ * 0.8, sx_ + r_, sy_ + oy + r_ * 0.8, _dark(col, 0.3), shade=0, line=False)
         hx, hy = 120, -210 + oy
         ell(hx - 90, hy - 56, hx + 86, hy + 66, col)                                                         # breiter Kopf
+        if wood:                                                                                            # dunkle Maske vom Maul über das Auge nach hinten
+            _stroke(d, [P(hx + 78, hy - 6), P(hx + 10, hy - 22), P(hx - 70, hy - 4)], 26 * k, _dark(col, 0.42) if frozen else dk)
         for ex_ in (-34, 44):                                                                               # Augenhügel obenauf
             ell(hx + ex_ - 34, hy - 92, hx + ex_ + 34, hy - 24, col, shade=0)
-            eye(hx + ex_ + 2, hy - 56, 23)
+            eye(hx + ex_ + 2, hy - 56, 23, "closed" if frozen or (thaw and (t % 1.6) < 0.5) else None)
         brow(hx - 32, hy - 96, 18, 1)
         brow(hx + 46, hy - 96, 18, -1)
-        cheek(hx - 52, hy + 14, 14)
-        cheek(hx + 66, hy + 12, 12)
-        if mouth > 0.1 or wide:
+        if not frozen:
+            cheek(hx - 52, hy + 14, 14)
+            cheek(hx + 66, hy + 12, 12)
+        if frozen or thaw:
+            d.line((*P(hx - 30, hy + 30), *P(hx + 62, hy + 30)), fill=INK, width=max(2, int(6 * k)))         # Mund ein gerader Strich
+        elif mouth > 0.1 or wide:
             mouthf(hx + 14, hy + 16, 16)
         else:
             d.arc(B(hx - 50, hy - 30, hx + 78, hy + 36), *((20, 160) if mood not in ("sad", "worried") else (200, 340)), fill=INK, width=max(2, int(6 * k)))
+        if frozen or thaw:
+            ice, rim = (170, 214, 246), (120, 184, 236)
+            lay = Image.new("RGBA", im.size, (0, 0, 0, 0))                                                 # Eis halb durchsichtig über dem Frosch
+            ld = ImageDraw.Draw(lay)
+            top = -350 if frozen else -96 - 14 * math.sin(t * 0.9)
+            if frozen:
+                blk = [(-232, 8), (-250, -150), (-206, -292), (-70, top), (150, top - 6), (246, -300), (262, -120), (240, 8)]
+            else:                                                                                          # Rest-Eis um die Beine, oben wellig weggeschmolzen
+                blk = [(-232, 8), (-244, -60), (-190, top), (-90, top + 26), (10, top - 8), (110, top + 30), (200, top + 4), (252, -50), (240, 8)]
+                ld.ellipse(B(-290, -8, 300, 26), fill=(150, 200, 240, 150))                                  # Pfütze
+            ld.polygon([P(x, y) for x, y in blk], fill=ice + ((92,) if frozen else (150,)))
+            ld.line([P(x, y) for x, y in blk + blk[:1]], fill=rim + (255,), width=max(2, int(8 * k)), joint="curve")
+            if frozen:
+                ld.polygon([P(-206, -292), P(-70, top), P(-110, -250), P(-196, -170)], fill=(255, 255, 255, 70))   # Facetten und Glanzkanten
+                ld.polygon([P(150, top - 6), P(246, -300), P(262, -120), P(200, -200)], fill=(120, 170, 220, 60))
+                for (x0_, y0_), (x1_, y1_) in (((-196, -250), (-150, -310)), ((-176, -224), (-150, -258)), ((176, -70), (224, -150)), ((-214, -60), (-200, -120))):
+                    ld.line((*P(x0_, y0_), *P(x1_, y1_)), fill=(255, 255, 255, 210), width=max(2, int(8 * k)))
+                for n_, (sx_, sy_) in enumerate(((-150, -120), (60, -300), (200, -240), (-40, -40), (150, -30), (-226, -200))):   # Reif-Sterne, funkeln abwechselnd
+                    r_ = 13 + 7 * math.sin(t * 2.2 + n_ * 1.7)
+                    for an_ in (0, 60, 120):
+                        dx_, dy_ = math.cos(math.radians(an_)) * r_, math.sin(math.radians(an_)) * r_
+                        ld.line((*P(sx_ - dx_, sy_ - dy_), *P(sx_ + dx_, sy_ + dy_)), fill=(255, 255, 255, 235), width=max(2, int(4 * k)))
+            else:
+                for n_, sx_ in enumerate((-150, -20, 120, 214)):                                            # Tropfen laufen ab
+                    ph_ = (t * 0.9 + n_ * 0.37) % 1.0
+                    dy_ = top + 20 + ph_ * 70
+                    ld.ellipse(B(sx_ - 7, dy_ - 10, sx_ + 7, dy_ + 10), fill=(214, 238, 255, int(230 * (1 - ph_))))
+            im.alpha_composite(lay)
     elif kind == "platypus":
         # Schnabeltier (Prüfung 19.11.2026): brauner, flacher Pelzkörper, breiter Biberschwanz, dunkler Entenschnabel, Schwimmfüße; am Hinterbein der Giftsporn.
         # action „spur“: das Hinterbein ist angehoben, der Sporn steht groß und hell hervor (mit Warn-Ring).
@@ -3955,7 +3996,7 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
     return out, ax / S, gy / S, fly
 
 
-CREATURES = ("cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly", "axolotl", "tardigrade", "cheetah", "eagle", "flea", "diver", "fridge", "cow", "pig", "chimp", "mosquito", "fly", "dolphin", "lion", "whale", "chimera", "frog", "platypus", "puffer")
+CREATURES = ("woodfrog", "cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly", "axolotl", "tardigrade", "cheetah", "eagle", "flea", "diver", "fridge", "cow", "pig", "chimp", "mosquito", "fly", "dolphin", "lion", "whale", "chimera", "frog", "platypus", "puffer")
 
 
 # ------------------------------------------------------------------ Werkstatt & Technik (Motor, Kran, Reifen, Getriebe …)

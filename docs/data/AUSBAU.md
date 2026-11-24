@@ -109,6 +109,16 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   Nach Video 198: Im Feld bis 100 steht das Schild über dem Feld (darunter lag es auf den Untertiteln); eine Jahreszahl als kleine Überschrift einer Grafik entfällt, wenn der
   Satz sie nicht nennt („1859“ über „10 BIO.“); „tauchten … auf“ mit bis zu zwölf Wörtern dazwischen ist kein Tauchgang; bei Mathe-Themen wird auch `lab` zur Mathe-Tafel,
   wenn der Satz weder Labor noch Experiment nennt. Selbsttest: `_math`.
+- Waldfrosch (Prüfung 24.11.2026, Video 199 „Der Waldfrosch: Der Zombie der Tierwelt friert einfach ein“ – gezeigt wurde ein knallgelber, lächelnder Pfeilgiftfrosch
+  im Schnee, ein Gehirn auf Beinen, ein Eisbrocken ohne Tier, sechs Sekunden leerer Wald mit Sonne): Wesen `woodfrog` (`extras.creature`: braun mit dunkler Augenmaske;
+  action `frozen` = blaugrau, Augen zu, im halb durchsichtigen Eisblock mit Reif-Sternen; `thaw` = Rest-Eis, Tropfen, Pfütze, blinzelt; `hop`). `stage._frost_frog`
+  (ganz am Schluss von `direct`, greift bei „Waldfrosch“ plus Einfrier-Wort in Thema oder Sätzen – `stage.frost_frog`) führt Buch über den Zustand: Kälte-Wörter
+  (`FF_COLD_RE`) und der Schlusssatz → gefroren im Schneewald, Auftau-Wörter (`FF_THAW_RE`) → auftauend im Frühlingswald mit Sonne, danach bzw. bei `FF_LIVE_RE`
+  lebendig (hüpft bei „hüpft/springt“). In jedem Bild ohne Schaubild steht der Frosch groß (wechselnd Mitte/seitlich, gespiegelt); ein Mensch nur in Sätzen mit
+  du/Forscher/Mensch (`FF_YOU_RE`), der Frosch dann klein daneben. Alle übrigen Wesen und Requisiten des Drehbuchs entfallen (kein Gehirn, kein loses Herz, kein
+  Eisbrocken), nur ein groß gezeigter Gegenstand (`insert`, z. B. Zuckerhaufen) bleibt. Herz-Sätze bekommen das Schild „KEIN HERZSCHLAG“ bzw. „HERZ SCHLÄGT WIEDER“.
+  Titelbild: der Frosch im Eisblock (`poster_hero`, `poster`). Der Pfeilgiftfrosch (`frog`) bleibt gelb. Selbsttest: `_frostfrog`.
+  Offen: das Herz-Schaubild `pulse` zeigt auch bei „0“ Ausschläge (eine Nulllinie fehlt); andere einfrierende Tiere (Schildkröte, Insekten) kennt die Regie nicht.
 - Telefonat (`stage._call_story`, greift, wenn das Thema vom Telefonieren handelt und zwei Sätze, sonst wenn drei Sätze `CALL_RE` treffen –
   Anruf, Telefon, „rufst … an“, auflegen, Freizeichen): Wer telefoniert, hält das Handy ans Ohr (Hand-Gegenstand `call`, Armhaltung
   `stage.CALL_ARM`) und bleibt allein zu Hause – keine Stadtstraße, kein Rechenzentrum, niemand kommt zur Tür herein. Der Angerufene

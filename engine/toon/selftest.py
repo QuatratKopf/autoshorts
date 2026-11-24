@@ -44,6 +44,49 @@ texts_gfx = ["Warum ist das so?", "Fünf Millionen Haushalte bekommen Post.", "D
              "Einer von sieben Menschen träumt davon.", "Jeder dritte Deutsche kennt das.", "Runde eins: Koffein.", "Drei von zehn Leuten.", "Runde x"]
 
 
+def _frostfrog():
+    """Prüfung 24.11.2026 (Video 199 „Der Waldfrosch“): der Frosch ist braun und in jedem Bild so, wie der Satz ihn beschreibt – gefroren im Eis, auftauend, lebendig."""
+    T = [("Dieser Frosch friert im Winter komplett ein.", [{"id": "frosch", "action": "freeze"}], [{"type": "ice"}], ""),
+         ("Kein Atemzug, keine Gehirnaktivität, das Blut steht vollständig still.", [{"id": "frosch", "action": "freeze"}], [], ""),
+         ("Sein Herz hört auf zu schlagen.", [], [{"type": "lib_herz"}], ""),
+         ("Du würdest daran sterben, weil Eiskristalle deine Zellen zerstören.", [{"id": "du", "action": "cower"}], [], ""),
+         ("Du denkst, er bleibt für immer starr.", [{"id": "du", "action": "point"}, {"id": "frosch", "action": "freeze"}], [], ""),
+         ("Sobald es wärmer wird, taut sein Körper von innen nach außen auf.", [], [{"type": "sun"}], "event"),
+         ("Das Herz fängt ganz von selbst wieder an zu schlagen.", [{"id": "frosch", "action": "wave"}], [{"type": "lib_herz"}], ""),
+         ("Nach wenigen Stunden hüpft er herum.", [{"id": "frosch", "action": "hop"}], [], ""),
+         ("Denn dieser Waldfrosch kann etwas, das unmöglich klingt.", [{"id": "frosch", "action": "wave"}], [], "")]
+    sd = stage.direct([{"text": t_, "place": "forest", "actors": [dict(a_) for a_ in ac_], "props": [dict(q_) for q_ in pr_], "shot": sh_, "overlay": None} for t_, ac_, pr_, sh_ in T],
+                      [(k * 4.0, k * 4.0 + 4.0) for k in range(len(T))], "Der Waldfrosch: Das Tier, das im Winter komplett einfriert", "tiere")
+    cast_f = {"du": {"shirt": "grün"}, "frosch": {"kind": "frog"}}
+    fr = [next((a for a in sc_.get("actors") or [] if a.get("kind") == "woodfrog"), None) for sc_ in sd]
+    kinds = [[str(a.get("kind") or "") for a in sc_.get("actors") or []] for sc_ in sd]
+    assert all(k_ in ("", "woodfrog") for ks_ in kinds for k_ in ks_), f"nur Waldfrosch und Mensch im Bild (kein gelber Frosch, kein Gehirn): {kinds}"
+    assert [f_ and f_.get("action") for f_ in fr[:3]] == ["frozen"] * 3, f"gefroren im Eis: {[f_ and f_.get('action') for f_ in fr[:3]]}"
+    assert kinds[3] == [""] and kinds[4] == ["", "woodfrog"] and fr[4].get("action") == "frozen", f"Mensch allein bzw. neben dem Frosch: {kinds[3]} {kinds[4]}"
+    assert fr[5] and fr[5].get("action") == "thaw" and sd[5].get("shot") != "event", f"taut auf, kein leerer Wald mit Sonne: {sd[5].get('actors')}"
+    assert fr[6] and fr[6].get("action") == "idle" and fr[7].get("action") == "hop" and fr[8].get("action") == "frozen", f"lebendig, hüpft, Schleife: {[f_ and f_.get('action') for f_ in fr[6:]]}"
+    assert all(str((sc_.get("backdrop") or {}).get("ground")) == ("snow" if n_ in (0, 1, 2, 3, 4, 8) else "grass") for n_, sc_ in enumerate(sd)), "Schnee im Winter, Gras im Frühling"
+    assert not any(str(q_.get("type")) in ("lib_herz", "ice") for sc_ in sd for q_ in sc_.get("props") or [] if isinstance(q_, dict)), "kein loses Herz, kein Eisbrocken ohne Tier"
+    assert "HERZ" in str(sd[2].get("overlay")) and "WIEDER" in str(sd[6].get("overlay")), f"Herz-Schilder: {sd[2].get('overlay')} {sd[6].get('overlay')}"
+    for sc_ in sd:
+        for t_ in (0.4, 2.2):
+            frame(sc_, cast_f, t_)
+    for a_ in ("", "hop", "frozen", "thaw"):
+        im_, _, _, _ = extras.creature("woodfrog", 0.7, 1, 0.0, "", 1.0, a_)
+        assert im_.getbbox(), f"Waldfrosch {a_} leer"
+    assert stage.poster_hero("Der Waldfrosch: Der Zombie der Tierwelt friert einfach ein", sd, cast_f) == "woodfrog", "Titelbild: der Waldfrosch"
+    import tempfile
+    from pathlib import Path
+    with tempfile.TemporaryDirectory() as td_:
+        stage.poster({"text": "HERZ STEHT STILL", "props": ["ice"], "actor": "frosch", "palette": 1}, cast_f, Path(td_) / "p.jpg", "Der Waldfrosch: Der Zombie der Tierwelt friert einfach ein")
+    sd3 = stage.direct([{"text": "Seit Tagen ist es bitterkalt.", "see": "Die Hauptfigur steht im Wald und friert.", "place": "wald_winter", "actors": [{"id": "du", "action": "shiver"}], "props": [],
+                         "backdrop": {"sky": "day", "ground": "snow", "elements": ["forest"]}}], [(0, 4)], "Der kälteste Winter", "fakten")
+    assert str((sd3[0].get("backdrop") or {}).get("ground")) == "snow", f"Winterwald bleibt verschneit: {sd3[0].get('place')} {sd3[0].get('backdrop')}"
+    sd2 = stage.direct([{"text": "Der Pfeilgiftfrosch ist knallgelb.", "place": "forest", "actors": [], "props": []},
+                        {"text": "Sein Hautgift reicht für zehn Menschen.", "place": "forest", "actors": [], "props": []}], [(0, 4), (4, 8)], "Tödlich niedlich: der Pfeilgiftfrosch", "tiere")
+    assert all(a.get("kind") == "frog" for sc_ in sd2 for a in sc_.get("actors") or [] if a.get("kind")), "der Pfeilgiftfrosch bleibt gelb"
+
+
 def _math():
     """Prüfung 24.11.2026 (Video 197 „Riemann-Vermutung“): Mathe-Schaubilder, Mathe-Tafel, Stift in der Hand, kein Namensschild einer echten Person."""
     T = [("Ein einziges Mathe-Rätsel bringt dir eine Million Dollar.", "livingroom", [{"id": "du"}], None),
@@ -102,6 +145,7 @@ def main():
     except Exception as e:  # noqa: BLE001
         errors.append(f"Bibliothek laden: {e}")
     check("Mathe-Schaubilder", _math)
+    check("Waldfrosch: gefroren, auftauend, lebendig", _frostfrog)
     all_places = sorted(set(places.PLACES) | set(places.OUTDOOR_SPECS))
     for pl in all_places:
         for night, dark in ((False, False), (True, False), (True, True)):
@@ -1818,7 +1862,7 @@ def main():
         import json
         cats = {c["slug"]: c for c in json.loads((Path(__file__).resolve().parents[2] / "docs" / "data" / "config.json").read_text(encoding="utf-8"))["categories"]}
         assert cats["motivation"]["enabled"] and cats["motivation"]["caption_style"] == "word" and cats["vergleich"]["enabled"]
-        assert cats["liebe"]["enabled"] and cats["liebe"]["own_voice"] and cats["liebe"]["gemini_voice"] == "Despina"
+        assert cats["liebe"]["own_voice"] and cats["liebe"]["gemini_voice"] == "Despina"   # ob die Rubrik eingeschaltet ist, entscheidet der Inhaber in der App (24.11.2026: aus)
         from .. import sound
         assert sound.MOOD_OF["liebe"] == "romantisch" and sound.MUSIC["romantisch"]
         sc_ = stage.direct([{"text": "Sie sahen sich an.", "place": "beach", "actors": [{"id": "lena"}], "mood": "calm"},
@@ -1829,7 +1873,8 @@ def main():
         fresh.save = lambda *a, **k: None
         try:
             fresh.sync_admin_settings(json.loads(json.dumps(keep)), {"rubriken": True}, ["liebe", "tiere"])
-            assert sorted(c["slug"] for c in st_.CONFIG["categories"] if c.get("enabled")) == ["liebe", "tiere"]
+            want_ = sorted(c["slug"] for c in keep["categories"] if c["slug"] in ("liebe", "tiere") and c.get("enabled"))   # was der Inhaber in der App ausgeschaltet hat (Liebe, 24.11.2026), bleibt aus
+            assert sorted(c["slug"] for c in st_.CONFIG["categories"] if c.get("enabled")) == want_, (want_, sorted(c["slug"] for c in st_.CONFIG["categories"] if c.get("enabled")))
         finally:
             st_.CONFIG.clear(); st_.CONFIG.update(keep); fresh.save = sv
     check("Motivation: Wort für Wort, Rubriken da (auch Liebe), freigegebene Rubriken je Zugang", _word_caps)

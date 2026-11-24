@@ -1226,8 +1226,9 @@ def direct(scenes, times, topic="", style="", look=""):
     for sc in scenes:                                     # Bildplan sagt „Du rennst im Park“ und Ort park, die Baukasten-Landschaft daneben ist aber eine Straße: der genannte Ort gilt (Video 173)
         if isinstance(sc, dict) and isinstance(sc.get("backdrop"), dict) and isinstance(sc.get("place"), str) and sc["place"].strip():
             said_pl = _said_place(sc.get("see")) or _said_place(sc.get("text"))
-            if said_pl and places.resolve(said_pl) == places.resolve(sc["place"]) and places.resolve(sc["place"]) in places.PLACES:
-                sc["backdrop"] = None
+            if said_pl and places.resolve(said_pl) == places.resolve(sc["place"]) and places.resolve(sc["place"]) in places.PLACES \
+                    and places.resolve(sc["place"]) not in [places.EL_ALIASES.get(str(e_).lower(), str(e_).lower()) for e_ in sc["backdrop"].get("elements") or []]:
+                sc["backdrop"] = None                     # enthält die Landschaft den Ort selbst (Wald mit Schneeboden), ist sie kein Widerspruch: der Winterwald bleibt verschneit (Video 199)
     for sc in scenes:                                     # erfundene Uhrzeit („02:00 UHR · WALD“) in der Ecke oder über einer Zahl: sagt der Satz keine Uhrzeit, entfällt sie
         if not isinstance(sc, dict) or _re0.search(r"\buhr\b", str(sc.get("text") or "").lower()):
             continue
@@ -2539,6 +2540,7 @@ def direct(scenes, times, topic="", style="", look=""):
         elif isinstance(sc, dict) and not isinstance(sc.get("backdrop"), dict) and places.resolve(sc.get("place")) == "lab" and _re0.search(MATH_RE, str(topic or "").lower()) \
                 and not _re0.search(r"\blabor|experiment|chemi|reagenz|mikroskop|versuch", str(sc.get("text") or "").lower()):
             sc["place"] = "mathroom"                      # Mathe-Thema: der Forscher steht vor der Tafel, nicht zwischen Kolben und Reagenzgläsern (Video 198)
+    _frost_frog(scenes, topic, main_id)
     return scenes
 
 
@@ -3980,6 +3982,106 @@ ICE_HARBOR = {"sky": "", "ground": "quay", "elements": ["packice", "harbor"]}
 ICE_ARMY_RE = r"armee|soldaten|truppen|\bheer\b|marschier|regiment"
 
 
+# Waldfrosch (Prüfung 24.11.2026, Plan „Der Waldfrosch: Der Zombie der Tierwelt friert einfach ein“): Das Video handelt von einem Frosch, der einfriert und
+# wieder auftaut – gezeigt wurde ein knallgelber, lächelnder Pfeilgiftfrosch im Schnee, ein Gehirn auf Beinen neben ihm („keine Gehirnaktivität“), leerer Wald
+# mit Sonne und ein Eisbrocken ohne Tier. Die Regie führt Buch über seinen Zustand und zeigt ihn in jedem Bild so, wie der Satz ihn beschreibt:
+# gefroren im Eisblock im Schneewald (`woodfrog`, action `frozen`), beim Auftauen mit Rest-Eis und Pfütze im Frühlingswald (`thaw`), danach lebendig.
+FROSTFROG_RE = r"waldfr[oö]sch"
+FF_FREEZE_RE = r"fr[oö]sch\w* (?:\w+ ){0,4}(?:friert|gefriert|erstarrt)|friert (?:\w+ ){0,5}ein\b|einfrier|eingefror|gefrier|gefror|eis(?:block|klotz|klumpen|würfel)"
+FF_COLD_RE = (r"friert|frier|gefror|gefrier|eingefror|erstarr|\bstarr\b|\bsteif|\beis\b|eiskristall|\bminus\b|\bfrost\b|winter|\btot\b|atemzug|atmet nicht|"
+              r"hört auf zu schlagen|steht (?:\w+ )?still|bleibt (?:\w+ )?stehen|\bwartet\b|kälte|\bkalt")
+FF_THAW_RE = r"\btaut\b|auftau|aufgetaut|schmilz|schmelz|wärmer|\bwarm\b"
+FF_LIVE_RE = r"hüpf|\bspring|wacht (?:\w+ ){0,5}auf\b|aufwach|aufgewacht|lebendig|quak|schlägt wieder|wieder (?:\w+ ){0,4}schlagen|\bmeister\b|als wäre nichts"
+FF_YOU_RE = r"\b(du|dein\w*|dir|dich|ich|mein\w*|mir|mich|forscher\w*|wissenschaftler\w*|ärzt\w*|arzt|mensch\w*)\b"
+FF_LAB_RE = r"forscher|wissenschaftler|\blabor|spenderorgan|transplant|\bmedizin|\bärzt|\barzt|\bklinik|krankenhaus"
+FF_INSERTS = ("zucker", "sugar", "traubenzucker", "zuckerwürfel", "glukose", "glucose")   # nur der Zucker bleibt groß im Bild – kein loses Herz, kein Eisbrocken
+FF_WINTER = {"sky": "day", "ground": "snow", "elements": ["forest"]}
+FF_SPRING = {"sky": "day", "ground": "grass", "elements": ["forest"]}
+
+
+def frost_frog(scenes, topic=""):
+    low_t = str(topic or "").lower()
+    texts = " ".join(str(sc.get("text") or "").lower() for sc in scenes if isinstance(sc, dict))
+    return bool(re.search(FROSTFROG_RE, low_t + " " + texts) and re.search(FF_FREEZE_RE, low_t + " " + texts)) or \
+        bool(re.search(r"fr[oö]sch", low_t) and re.search(FF_FREEZE_RE, low_t))
+
+
+def _frost_frog(scenes, topic="", main_id="du"):
+    if not frost_frog(scenes, topic):
+        return scenes
+    state, run, last_i = "frozen", 0, len(scenes) - 1
+    for i, sc in enumerate(scenes):
+        if not isinstance(sc, dict):
+            continue
+        low = str(sc.get("text") or "").lower()
+        if re.search(FF_THAW_RE, low):
+            state = "thaw"
+        elif re.search(FF_LIVE_RE, low):
+            state = "live"
+        elif re.search(FF_COLD_RE, low) or i == last_i:   # der Schlusssatz führt als Schleife zurück zum ersten Bild
+            state = "frozen"
+        elif state == "thaw":
+            state = "live"
+        shot = str(sc.get("shot") or "")
+        if shot == "graphic" and graphics.clean(sc.get("graphic")):
+            run = 0
+            continue
+        if shot == "insert" and any(isinstance(q, dict) and str(q.get("type") or "").lower().replace("lib_", "") in FF_INSERTS for q in sc.get("props") or []):
+            run = 0
+            continue                                      # der Zuckerhaufen groß im Bild bleibt
+        acts_in = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        frog_in = any(str(a.get("kind") or "").lower() in ("frog", "woodfrog") or re.search(r"fr[oö]sch|frog|^_tier", str(a.get("id") or "").lower()) for a in acts_in)
+        human = next((a for a in acts_in if not a.get("kind") and not str(a.get("id") or "").startswith("_")
+                      and not re.search(r"fr[oö]sch|frog|tier", str(a.get("id") or "").lower())), None)
+        if human is not None and not re.search(FF_YOU_RE, low):
+            human = None                                  # „Medizinisch gesehen ist dieser Frosch tot“: der Frosch, kein Mensch, der sich am Kopf kratzt
+        if re.search(FF_LAB_RE, low) and not re.search(r"fr[oö]sch|hüpf|\bspring|\btaut\b|auftau|friert|gefrier|gefror", low):
+            humans = [a for a in acts_in if not a.get("kind") and not str(a.get("id") or "").startswith("_") and not re.search(r"fr[oö]sch|frog|tier", str(a.get("id") or "").lower())]
+            humans = humans or [{"id": "_forscher", "action": "think", "emotion": "", "emote": "", "pos": "center", "facing": "right", "speaks": False, "say": "", "hold": "",
+                                 "look": {"shirt": "weiß", "hair": "kurz", "hair_color": "braun"}}]
+            rp_f = places.resolve(backdrop(sc)) if not isinstance(backdrop(sc), dict) else "custom"
+            if rp_f not in places.PLACES or rp_f in places.OUTDOOR or rp_f == "custom":
+                sc.update(place="lab", backdrop=None, time="day", weather="")
+            sc.update(actors=humans, crowd="", float="", props=[])   # „Forscher untersuchen den Trick für Spenderorgane“: im Labor, ohne Frosch – nicht im Wald
+            run = 0
+            continue
+        frog = {"id": "_tier", "kind": "woodfrog", "hero": True, "pos": "center", "emotion": "happy" if state == "live" else "", "emote": "", "say": "", "hold": "",
+                "action": "frozen" if state == "frozen" else "thaw" if state == "thaw" else "hop" if re.search(r"hüpf|\bspring", low) else "idle",
+                "facing": "left" if run % 2 else "right", "speaks": False}
+        if human is not None:
+            human = dict(human)
+            human.pop("to", None)
+            human.update(pos=300, facing="right")
+            if str(human.get("action") or "").lower() in ("walk", "run", ""):
+                human["action"] = "idle"
+            acts = [human]
+            if frog_in or re.search(r"fr[oö]sch|\b(?:er|ihn|ihm)\b", low):
+                frog.update(pos=770, facing="left", _ksz=0.62)
+                acts.append(frog)
+            run = 0
+        else:
+            if run % 3 == 1:
+                frog.update(pos=420, _ksz=0.82)           # nie dreimal dasselbe Bild: mal seitlich und etwas kleiner
+            elif run % 3 == 2:
+                frog.update(pos=640, _ksz=0.92)
+            acts = [frog]
+            run += 1
+        winter = state == "frozen"
+        sun = bool(re.search(r"sonne|sonnenstrahl", low)) or state == "thaw"
+        sc.update(actors=acts, crowd="", float="", place="forest", backdrop=dict(FF_WINTER if winter else FF_SPRING), time="day", weather="cold" if winter else "",
+                  props=[{"type": "sun"}] if sun else [], mood="")
+        if shot in ("event", "insert", "close"):
+            sc["shot"] = ""
+        if not isinstance(sc.get("overlay"), dict) and human is None and re.search(r"\bherz", low):   # das Herz: am Frosch gezeigt, nicht als loses Herz vor leerem Grund
+            if state == "frozen" and re.search(r"hört (?:\w+ ){0,3}auf|steht (?:\w+ ){0,2}still|bleibt (?:\w+ ){0,2}stehen|stoppt|schlägt nicht|kein herzschlag|setzt aus", low):
+                sc["overlay"] = {"type": "tag", "text": "KEIN HERZSCHLAG"}
+            elif state != "frozen" and re.search(r"wieder|von selbst|von allein|springt (?:\w+ ){0,2}an", low):
+                sc["overlay"] = {"type": "tag", "text": "HERZ SCHLÄGT WIEDER"}
+        sc["_cute"] = "woodfrog"
+    return scenes
+
+
+
 def _ice_story(scenes, topic):
     low_t = str(topic or "").lower()
     texts = [str(sc.get("text") or "").lower() for sc in scenes if isinstance(sc, dict)]
@@ -4616,7 +4718,7 @@ SEA_HUMAN_RE = r"\bmensch\w*|\bforscher\w*|wissenschaftler\w*|\bdein\w*|\bdu\b|\
 SEA_PEOPLE_RE = r"^(?:wir )?menschen (?:haben|besitzen|sehen|können|brauchen|schaffen)\b|ein(?:es)? menschliche[rsn]? (?:wimpernschlag|auge|hand)|\bals ein wimpernschlag"   # der Satz handelt von Menschen – auch wenn das Drehbuch dort das Tier hinstellt
 TANK_RE = r"\bbecken\b|plastikbecken|kunststoffbecken|acrylbecken|acrylglas|aquarium\b|aquarien\b"
 CAVI_RE = r"dampfblase|gasblase|kavitation|blasen? (?:kollabier|implodier|platz|fall\w* zusammen)|(?:kollabier|implodier|platz)\w* (?:die|diese) blase|druckwelle"
-LONG_KINDS = ("shrimp", "mantis", "axolotl", "tardigrade", "jelly", "cheetah", "eagle", "flea", "dolphin", "cow", "pig", "lion", "whale", "chimera", "frog", "platypus", "puffer")          # breiter als hoch: keine Großaufnahme, Kamera lässt sie ganz im Bild
+LONG_KINDS = ("shrimp", "mantis", "axolotl", "tardigrade", "jelly", "cheetah", "eagle", "flea", "dolphin", "cow", "pig", "lion", "whale", "chimera", "frog", "woodfrog", "platypus", "puffer")          # breiter als hoch: keine Großaufnahme, Kamera lässt sie ganz im Bild
 # Winzlinge, die überall vorkommen (Moos, Eis, Weltall): als Figur an dem Ort, von dem der Satz spricht
 ANY_CREATURES = [(r"bärtierchen|wasserbär|tardigrad", "tardigrade"), (r"\bgepard", "cheetah"), (r"\badler|greifvogel|greifvögel", "eagle"), (r"\bfloh|\bflöhe", "flea")]
 # Landtiere und Vögel als Figur der Szene: bleiben nur einen Folgesatz, und nur, wenn er sichtbar weiter vom Tier handelt
@@ -4659,7 +4761,7 @@ def _sea_default(scenes, topic):
     return next(iter(kinds)) if len(kinds) == 1 else None
 
 
-HERO_SIZE = {"cheetah": 1.45, "eagle": 1.5, "flea": 1.35, "shrimp": 1.6, "mantis": 1.6, "jelly": 1.4, "axolotl": 1.6, "tardigrade": 1.5, "agent": 0.8, "brain": 1.6, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9, "diver": 1.3, "dolphin": 1.5, "cow": 1.25, "pig": 1.1, "chimp": 1.2, "mosquito": 1.0, "fly": 1.0, "lion": 1.3, "whale": 1.75, "chimera": 1.35, "frog": 1.25, "platypus": 1.45, "puffer": 1.35}   # Hauptfigur: etwa halb so hoch wie ein Mensch
+HERO_SIZE = {"cheetah": 1.45, "eagle": 1.5, "flea": 1.35, "shrimp": 1.6, "mantis": 1.6, "jelly": 1.4, "axolotl": 1.6, "tardigrade": 1.5, "agent": 0.8, "brain": 1.6, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9, "diver": 1.3, "dolphin": 1.5, "cow": 1.25, "pig": 1.1, "chimp": 1.2, "mosquito": 1.0, "fly": 1.0, "lion": 1.3, "whale": 1.75, "chimera": 1.35, "frog": 1.25, "woodfrog": 1.25, "platypus": 1.45, "puffer": 1.35}   # Hauptfigur: etwa halb so hoch wie ein Mensch
 
 
 def _topic_creature(scenes, topic):
@@ -5895,7 +5997,7 @@ TEXT_PROPS = [(r"staubsauger", "vacuum"), (r"\bdisplays?\b|handydisplay|handy-di
 MAP_HINTS = ((r"ganz deutschland|in deutschland|deutschlandweit|bundesweit|bundesländer|jeder deutsche|alle deutschen", "germany"),
              (r"weltweit|auf der ganzen welt|alle länder|rund um den globus|weltbevölkerung|alle kontinente|die ganze erde|die ganze welt", "worldmap"))
 # Tiere neben Menschen: Größe im Verhältnis zur Figur (1.0 = menschengroß). „Riesen…“-Themen heben das auf (giant).
-CREATURE_SIZE = {"cheetah": 1.0, "eagle": 0.8, "flea": 0.4, "shrimp": 0.5, "mantis": 0.5, "jelly": 0.6, "axolotl": 0.5, "tardigrade": 0.5, "brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45, "diver": 1.1, "dolphin": 1.0, "cow": 0.9, "pig": 0.6, "chimp": 0.75, "mosquito": 0.45, "fly": 0.45, "lion": 1.15, "whale": 1.4, "chimera": 1.05, "frog": 0.34, "platypus": 0.55, "puffer": 0.6}
+CREATURE_SIZE = {"cheetah": 1.0, "eagle": 0.8, "flea": 0.4, "shrimp": 0.5, "mantis": 0.5, "jelly": 0.6, "axolotl": 0.5, "tardigrade": 0.5, "brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45, "diver": 1.1, "dolphin": 1.0, "cow": 0.9, "pig": 0.6, "chimp": 0.75, "mosquito": 0.45, "fly": 0.45, "lion": 1.15, "whale": 1.4, "chimera": 1.05, "frog": 0.34, "woodfrog": 0.34, "platypus": 0.55, "puffer": 0.6}
 GIANT_RE = r"riesen|riesig|gigant|monströs|so groß wie|meterhoh|haushoh|mutier"
 # Nur hier laufen Passanten durchs Bild – auf dem Feld, im Wald, im Keller ist niemand unterwegs
 CROWD_PLACES = ("headquarters", "street", "park", "village", "beach", "icesea", "harbor", "gasstation", "station", "transit", "supermarket", "supermarket_empty", "hospital", "office",
@@ -6268,6 +6370,8 @@ def poster_hero(topic, scenes, cast=None, avoid=()):
     low = str(topic or "").lower()
     if _re.search(HYBRID_RE, topic_head(low)):
         return "chimera"                                  # Misch-Wesen-Video: das gebaute Wesen ist das Gesicht des Videos
+    if _re.search(FROSTFROG_RE, low):
+        return "woodfrog"
     named = [k for pat, k in TOPIC_CREATURES if _re.search(pat, low)]
     sk = _sea_kind(low, bool(_re.search(SEA_TOPIC_RE, low)))
     named += [sk] if sk else []
@@ -6359,6 +6463,10 @@ def poster(spec: dict, cast: dict, out: Path, topic=""):
     if _re.search(HYBRID_RE, low):
         keys, hk = [], "chimera"                          # Misch-Wesen-Video: das gebaute Wesen aufs Titelbild – nicht ein Herz aus den Requisiten (Video 153)
         spec["hero_kind"] = "chimera"
+    frost_f = bool(_re.search(FROSTFROG_RE, str(topic or "").lower()) or (_re.search(r"fr[oö]sch", low) and _re.search(FF_FREEZE_RE, low)))
+    if frost_f:
+        keys, hk = [], "woodfrog"                         # Waldfrosch-Video: der Frosch im Eisblock aufs Titelbild – nicht ein Eisbrocken ohne Tier (Video 199)
+        spec["hero_kind"] = "woodfrog"
     for k in keys:
         if k in extras.PROPS:
             lay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
@@ -6370,9 +6478,14 @@ def poster(spec: dict, cast: dict, out: Path, topic=""):
     if spec.get("hero_kind") is not None:                # von poster_hero gewählt (Titel/Szenen) – nicht blind die Besetzungsliste
         cast_kind = str(spec.get("hero_kind") or "")
     if hero is None and (kind in extras.CREATURES or cast_kind in extras.CREATURES):
-        res = extras.creature(kind if kind in extras.CREATURES else cast_kind, 0.4, 1, 0.6, "", 1.6)
+        res = extras.creature(kind if kind in extras.CREATURES else cast_kind, 0.4, 1, 0.0 if frost_f else 0.6, "", 1.6, "frozen" if frost_f else "")
         if res and res[0].getbbox():
             hero = res[0].crop(res[0].getbbox())
+            if frost_f:                                   # halb durchsichtiges Eis wird auf dem weißen Aufkleber-Grund grau: deckend auf Eisblau legen
+                base_f = Image.new("RGBA", hero.size, (0, 0, 0, 0))
+                base_f.paste((204, 232, 250, 255), (0, 0), hero.split()[3].point(lambda a_: 255 if a_ > 20 else 0))
+                base_f.alpha_composite(hero)
+                hero = base_f
     if hero is None and _re.search(r"smartphone|\bhandy", low):   # Handy-Thema ohne Motiv (Video 185: nur die Figur vor Strahlen): das leuchtende Handy als Aufkleber
         lay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
         extras.draw_prop(lay, "display", 540, 1.2)

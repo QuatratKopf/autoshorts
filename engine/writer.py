@@ -172,6 +172,8 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
   Nennt der Satz Gepard, Adler oder Floh, zeigt die Regie das Tier von selbst groß und allein im Bild.
   lion (Löwe mit Mähne – action "roar" = brüllt; Ort "savannah" = Savanne mit Schirmakazien). Bärtierchen: action "tun" = eingerolltes, ausgetrocknetes
   Tönnchen. In einem Video über das Bärtierchen zeigt die Regie das Tier von selbst in jedem Satz, der von ihm handelt; Moos heißt "moss".
+  woodfrog (Waldfrosch – braun mit dunkler Augenmaske; action "frozen" = steif im Eisblock, "thaw" = taut auf, "hop"; in einem Video über den
+  einfrierenden Waldfrosch zeigt die Regie ihn von selbst in jedem Satz im passenden Zustand – Schneewald beim Einfrieren, Frühlingswald beim Auftauen),
   frog (Pfeilgiftfrosch – knallgelb, action "hop"), platypus (Schnabeltier – action "spur" zeigt den Giftsporn am Hinterbein; Ort "river"),
   puffer (Kugelfisch – action "puff" = bläst sich zur Stachelkugel auf; Ort underwater). Nennt der Satz eines dieser Tiere, zeigt die Regie es von selbst.
   Sie spielen am Ort underwater; nie monster oder fish als Ersatz für ein Tier nehmen, das es hier gibt.
