@@ -1,5 +1,5 @@
 {
- "updated": 1795515479.1734312,
+ "updated": 1795517445.451497,
  "enough": true,
  "counted": 39,
  "total": 40,
@@ -131,9 +131,9 @@
  ],
  "words_bad": [
   "remix",
-  "erkennst",
-  "lied",
   "bekanntes",
+  "lied",
+  "erkennst",
   "glas"
  ],
  "top": [
@@ -203,11 +203,11 @@
    "id": 189,
    "title": "Jede Scheibe ein Ton: Glas-Remix eines Klassikers",
    "category": "musik",
-   "views": 559,
+   "views": 562,
    "likes": 10,
    "comments": 1,
    "shares": 0,
-   "score": 739
+   "score": 742
   },
   {
    "id": 44,
