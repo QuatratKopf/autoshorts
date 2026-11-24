@@ -1,5 +1,5 @@
 {
- "updated": 1795483069.4020452,
+ "updated": 1795484872.8886807,
  "enough": true,
  "counted": 38,
  "total": 40,
@@ -9,19 +9,19 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 5,
-   "avg_views": 2289,
+   "avg_views": 2290,
    "avg_likes": 46.6,
    "like_rate": 2.04,
-   "avg_score": 3008
+   "avg_score": 3009
   },
   {
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 1,
-   "avg_views": 2368,
+   "avg_views": 2369,
    "avg_likes": 34.0,
    "like_rate": 1.44,
-   "avg_score": 2878
+   "avg_score": 2879
   },
   {
    "slug": "tiere",
@@ -63,37 +63,37 @@
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 3,
-   "avg_views": 1349,
+   "avg_views": 1350,
    "avg_likes": 38.7,
-   "like_rate": 2.87,
-   "avg_score": 1929
+   "like_rate": 2.86,
+   "avg_score": 1930
   },
   {
    "slug": "motivation",
    "name": "🔥 Motivation",
    "n": 1,
-   "avg_views": 920,
+   "avg_views": 921,
    "avg_likes": 49.0,
-   "like_rate": 5.33,
-   "avg_score": 1695
+   "like_rate": 5.32,
+   "avg_score": 1696
   },
   {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 5,
-   "avg_views": 1390,
+   "avg_views": 1391,
    "avg_likes": 12.0,
    "like_rate": 0.86,
-   "avg_score": 1612
+   "avg_score": 1613
   },
   {
    "slug": "grusel",
    "name": "👻 Grusel",
    "n": 1,
-   "avg_views": 481,
+   "avg_views": 484,
    "avg_likes": 21.0,
-   "like_rate": 4.37,
-   "avg_score": 796
+   "like_rate": 4.34,
+   "avg_score": 799
   }
  ],
  "weights": {
@@ -111,10 +111,10 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2289 Aufrufe, 2.04 % Likes).",
-  "Schwächste Kategorie: 👻 Grusel (Ø 481 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2396 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2517 zu 1948 Punkte).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2290 Aufrufe, 2.04 % Likes).",
+  "Schwächste Kategorie: 👻 Grusel (Ø 484 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2397 zu 706 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2517 zu 1949 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -124,8 +124,8 @@
  "words_bad": [
   "remix",
   "erkennst",
-  "bekanntes",
   "lied",
+  "bekanntes",
   "glas"
  ],
  "top": [
@@ -153,11 +153,11 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2266,
+   "views": 2268,
    "likes": 62,
    "comments": 0,
    "shares": 0,
-   "score": 3196
+   "score": 3198
   },
   {
    "id": 124,
@@ -173,11 +173,11 @@
    "id": 139,
    "title": "Dieses winzige Tier ist zäher als ein Löwe",
    "category": "tiere",
-   "views": 2184,
+   "views": 2185,
    "likes": 55,
    "comments": 0,
    "shares": 1,
-   "score": 3049
+   "score": 3050
   }
  ],
  "flop": [
@@ -185,11 +185,11 @@
    "id": 184,
    "title": "Warum antwortet dir am Telefon deine eigene Stimme?",
    "category": "grusel",
-   "views": 481,
+   "views": 484,
    "likes": 21,
    "comments": 0,
    "shares": 0,
-   "score": 796
+   "score": 799
   },
   {
    "id": 189,
