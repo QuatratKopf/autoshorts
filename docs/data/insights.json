@@ -1,5 +1,5 @@
 {
- "updated": 1795490271.1293583,
+ "updated": 1795492079.9417527,
  "enough": true,
  "counted": 38,
  "total": 40,
@@ -18,10 +18,10 @@
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 1,
-   "avg_views": 2368,
+   "avg_views": 2369,
    "avg_likes": 34.0,
    "like_rate": 1.44,
-   "avg_score": 2878
+   "avg_score": 2879
   },
   {
    "slug": "tiere",
@@ -45,10 +45,10 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 11,
-   "avg_views": 1720,
+   "avg_views": 1721,
    "avg_likes": 46.8,
    "like_rate": 2.72,
-   "avg_score": 2425
+   "avg_score": 2426
   },
   {
    "slug": "fakten",
@@ -123,8 +123,8 @@
  ],
  "words_bad": [
   "remix",
-  "erkennst",
   "bekanntes",
+  "erkennst",
   "lied",
   "glas"
  ],
