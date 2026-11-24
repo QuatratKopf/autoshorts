@@ -1235,6 +1235,11 @@ def direct(scenes, times, topic="", style="", look=""):
             if isinstance(box.get(key), str) and _re0.search(_clock, box[key].upper()):
                 parts = [x.strip() for x in _re0.split(r"\s*[·|•]\s*|\s+[–-]\s+", box[key]) if x.strip() and not _re0.fullmatch(_clock, x.strip().upper())]
                 box[key] = " · ".join(parts) if key == "hud" else ""
+        g_y = sc.get("graphic") if isinstance(sc.get("graphic"), dict) else None
+        if g_y and isinstance(g_y.get("kicker"), str):    # Jahreszahl als kleine Überschrift über einer Zahl, die der Satz gar nicht nennt („1859“ über „10 BIO.“, Video 198)
+            yrs_y = _re0.findall(r"(?<![\d.,])(1[0-9]{3}|20[0-9]{2})(?![\d.,])", g_y["kicker"])
+            if yrs_y and not any(spoken_number(int(y_), str(sc.get("text") or "")) for y_ in yrs_y):
+                g_y["kicker"] = ""
         low_c0 = str(sc.get("text") or "").lower()
         for pre_c in ("quadrat", "kubik"):                # „über tausend Quadratmeter Stoff“ → Schild „1000 METER STOFF“: die Einheit stimmt nicht
             if pre_c + "meter" in low_c0 and not _re0.search(r"(?<![a-zäöü])(?:kilo)?meter", low_c0):
@@ -2531,6 +2536,9 @@ def direct(scenes, times, topic="", style="", look=""):
         if isinstance(sc, dict) and not isinstance(sc.get("backdrop"), dict) and places.resolve(sc.get("place")) == "classroom" \
                 and _re0.search(MATH_RE, (str(topic or "") + " " + str(sc.get("text") or "")).lower()):
             sc["place"] = "mathroom"
+        elif isinstance(sc, dict) and not isinstance(sc.get("backdrop"), dict) and places.resolve(sc.get("place")) == "lab" and _re0.search(MATH_RE, str(topic or "").lower()) \
+                and not _re0.search(r"\blabor|experiment|chemi|reagenz|mikroskop|versuch", str(sc.get("text") or "").lower()):
+            sc["place"] = "mathroom"                      # Mathe-Thema: der Forscher steht vor der Tafel, nicht zwischen Kolben und Reagenzgläsern (Video 198)
     return scenes
 
 
@@ -5763,7 +5771,7 @@ HINTS = [
     (r"gletscher|eiszeit|arktis|antarktis|polkappe|\beis\b", {"ground": "snow", "elements": ["glacier", "mountains"]}),
     (r"\bschnee|\bwinter", "snow"),
     (r"\bmeer|ozean|küste|strand|meereswelle|brandung|\bwellen? (?:schlagen|schlägt|rauschen|rauscht|brechen|bricht|rollen|rollt)", "beach"),   # ein bloßes „die Welle läuft von oben nach unten“ (Schreckreflex) ist kein Strand
-    (r"tiefsee|unter wasser|meeresgrund|meeresboden|korallen|\bfisch|unter der oberfläche|im wasser leb|\btauch(?!\w* (?:[\wäöüß]+ ){0,6}auf\b(?! (?:de[nmr]|die|das|eine[nmr]?|ihre[nm]?|seine[nm]?)\b))|taucher", "underwater"),   # „Plötzlich tauchen Dinge auf, von denen du erzählt hast“ (Video 190: zwei Goldfische im Liebes-Video) – auftauchen ist kein Tauchgang
+    (r"tiefsee|unter wasser|meeresgrund|meeresboden|korallen|\bfisch|unter der oberfläche|im wasser leb|\btauch(?!\w* (?:[\wäöüß-]+ ){0,12}auf\b(?! (?:de[nmr]|die|das|eine[nmr]?|ihre[nm]?|seine[nm]?)\b))|taucher", "underwater"),   # „Plötzlich tauchen Dinge auf, von denen du erzählt hast“ (Video 190: zwei Goldfische im Liebes-Video) – auftauchen ist kein Tauchgang
     (r"wüste|sahara|sanddüne", "desert"),
     (r"vulkan|gebirge|\bberg|gipfel", "mountain"),
     (r"weltall|weltraum|galaxie|planet|umlaufbahn|astronaut|\bmond\b|sonnensystem|satellit", "space"),

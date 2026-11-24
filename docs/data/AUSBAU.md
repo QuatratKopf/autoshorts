@@ -106,6 +106,9 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   (`stage.MATH_RE`). `stage._stay`: stand dieselbe Figur im Bild davor schon am selben Ort, kommt sie nicht noch einmal herein, sondern zeigt/überlegt/redet an wechselnden
   Plätzen; im Klassenzimmer bleibt der Lehrer, statt dass Fremde durchlaufen. Ein Schild mit dem Namen einer echten Person nach einer Berufsangabe („der Mathematiker …“)
   entfällt. „Schnapp dir/nimm dir/hol dir einen Stift“: die Figur hält das Ding (`TAKE_RE`). Kalender-Beschriftung wird am Wortende gekürzt; „10 BII.“ wird „10 BIO.“.
+  Nach Video 198: Im Feld bis 100 steht das Schild über dem Feld (darunter lag es auf den Untertiteln); eine Jahreszahl als kleine Überschrift einer Grafik entfällt, wenn der
+  Satz sie nicht nennt („1859“ über „10 BIO.“); „tauchten … auf“ mit bis zu zwölf Wörtern dazwischen ist kein Tauchgang; bei Mathe-Themen wird auch `lab` zur Mathe-Tafel,
+  wenn der Satz weder Labor noch Experiment nennt. Selbsttest: `_math`.
 - Telefonat (`stage._call_story`, greift, wenn das Thema vom Telefonieren handelt und zwei Sätze, sonst wenn drei Sätze `CALL_RE` treffen –
   Anruf, Telefon, „rufst … an“, auflegen, Freizeichen): Wer telefoniert, hält das Handy ans Ohr (Hand-Gegenstand `call`, Armhaltung
   `stage.CALL_ARM`) und bleibt allein zu Hause – keine Stadtstraße, kein Rechenzentrum, niemand kommt zur Tür herein. Der Angerufene

@@ -69,6 +69,16 @@ def _math():
     for sc_ in sd:
         for t_ in (0.4, 2.2):
             frame(sc_, cast_m, t=t_)
+    s3 = stage.direct([{"text": "Sie tauchten in den mathematischen Tabellen scheinbar völlig ohne jedes Muster auf.", "actors": [{"id": "du"}], "props": []},
+                       {"text": "Supercomputer haben mehr als zehn Billionen dieser Nullstellen geprüft.", "place": "serverroom", "shot": "graphic", "actors": [],
+                        "graphic": {"type": "number", "kicker": "1859", "value": "10 BIO."}},
+                       {"text": "Der Forscher lehnte das Geld einfach ab.", "place": "lab", "actors": [{"id": "prof"}], "props": []},
+                       {"text": "Im Jahr 1859 begann alles.", "place": "livingroom", "shot": "graphic", "actors": [], "graphic": {"type": "number", "kicker": "JAHR 1859", "value": "1859"}}],
+                      [(k * 4.0, k * 4.0 + 4.0) for k in range(4)], "Das Mathe-Rätsel um eine Million Dollar", "fakten")
+    assert places.resolve(stage.backdrop(s3[0])) != "underwater", f"„tauchten … auf“ ist kein Tauchgang: {s3[0].get('place')}"
+    assert not (s3[1].get("graphic") or {}).get("kicker"), f"Jahreszahl über fremder Zahl: {s3[1].get('graphic')}"
+    assert s3[2].get("place") == "mathroom", f"Mathematiker nicht im Chemielabor: {s3[2].get('place')}"
+    assert "1859" in str((s3[3].get("graphic") or {}).get("kicker") or "1859"), f"gesprochene Jahreszahl bleibt: {s3[3].get('graphic')}"
     s2 = stage.direct([{"text": "Die Schüler lernen heute Erdkunde.", "place": "classroom", "actors": [{"id": "du"}], "props": []}], [(0, 4)], "Schule früher", "fakten")
     assert s2[0].get("place") == "classroom", f"Tafel ohne Mathe bleibt: {s2[0].get('place')}"
     for night in (False, True):

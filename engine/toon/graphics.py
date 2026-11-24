@@ -1190,11 +1190,11 @@ def _g_primes(frame, g, t, dur):
     d = ImageDraw.Draw(frame, "RGBA")
     big = str(g.get("sub") or "").strip() == "100"
     n, cols = (100, 10) if big else (30, 6)
-    cell, gap = (84, 8) if big else (140, 16)
+    cell, gap = (80, 7) if big else (140, 16)
     rows = n // cols
     x0 = (W - cols * cell - (cols - 1) * gap) / 2
-    y0 = 400 if not big else 380
-    _kicker(d, 300, g.get("kicker") or "Primzahlen", t, 0.0)
+    y0 = 400 if not big else 404                              # großes Feld: endet bei 1267, das Schild steht darüber – unter dem Feld läge es auf den Untertiteln (Video 198)
+    _kicker(d, 300 if not big else 250, g.get("kicker") or "Primzahlen", t, 0.0)
     primes = [q for q in range(2, n + 1) if all(q % r for r in range(2, int(q ** 0.5) + 1))]
     span = min(2.8, max(1.2, dur * 0.55))                      # so lange dauert es, bis alle Primzahlen leuchten
     fn = _font(40 if big else 70)
@@ -1218,7 +1218,7 @@ def _g_primes(frame, g, t, dur):
         d.text((cx - (bb[0] + bb[2]) / 2, cy - (bb[1] + bb[3]) / 2), txt, font=fn, fill=INK + (255,) if lit else (200, 196, 240, 120))
     lab = str(g.get("label") or g.get("text") or "").upper()[:30]
     if lab and t > 0.5 + span * 0.6:
-        _pill(d, W / 2, y0 + rows * (cell + gap) + 30, lab, _fit(d, lab, 58, 860, "Bold"), GOLD + (255,), INK)
+        _pill(d, W / 2, 304 if big else y0 + rows * (cell + gap) + 30, lab, _fit(d, lab, 52 if big else 58, 860, "Bold"), GOLD + (255,), INK)
 
 
 _ZEROS = (14.13, 21.02, 25.01, 30.42, 32.94, 37.59, 40.92, 43.33, 48.01, 49.77)   # Höhen der ersten zehn Nullstellen (echte Werte, gerundet)
