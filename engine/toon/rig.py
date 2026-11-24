@@ -399,6 +399,7 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
     hr = 80 * k
     ha = pose.head * f + lean
     hc = _pt(top, 180 - ha, hr * 0.86)
+    pose.extra["hc"] = (hc[0] / SS, hc[1] / SS, hr / SS)   # Kopfmitte und -radius im fertigen Bild (Spiegelbild: stage.mirror_glass)
     rx, ry = hr * 1.04, hr * 0.96
     hairy = not mask and look.hat not in ("helmet", "army")
     fem = look.fem and not mask
@@ -452,6 +453,12 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
             d.ellipse((cxk - 17 * u, ey + 24 * u, cxk + 17 * u, ey + 44 * u), fill=_mix(skin, CHEEK, 0.55))
     for sgn in (-1, 1):
         _eye(d, ex + sgn * 37 * u, ey, er, pose.eyes, lk, pupil=pose.extra.get("pupil"))
+    void = float(pose.extra.get("void") or 0)             # Spiegel-Täuschung („deine Augen werden riesig und pechschwarz“): die Augen wachsen zu schwarzen Höhlen
+    if void > 0.02:
+        for sgn in (-1, 1):
+            vr = er * (1.15 + 0.6 * min(1.0, void))
+            cxv = ex + sgn * 37 * u
+            d.ellipse((cxv - vr, ey - vr * 1.22, cxv + vr, ey + vr * 1.22), fill=(8, 8, 12))
     if fem and pose.eyes not in ("closed",):              # Wimpern: zwei kleine Striche am äußeren oberen Augenrand
         for sgn in (-1, 1):
             exx = ex + sgn * 37 * u
@@ -472,7 +479,15 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
     if not mask:                                          # Nase: kleiner Haken in Blickrichtung
         d.arc((ex + 2 * u * f - 9 * u, ey + 12 * u, ex + 2 * u * f + 9 * u, ey + 30 * u), 300 if f > 0 else 150, 90 if f > 0 else 240, fill=_dark(skin, 0.35), width=max(2, int(5 * u)))
     mx, my = ex, ey + 50 * u
-    if pose.mouth > 0.08:                                 # offener Mund mit Zähnen und Zunge; Form nach dem gesprochenen Vokal
+    if pose.extra.get("grin"):                            # Fratze im Spiegel: breites, starres Grinsen mit Zahnreihe
+        gw_, gh_ = 60 * u, 40 * u
+        d.chord((mx - gw_ - 4 * u, my - gh_ - 4 * u, mx + gw_ + 4 * u, my + gh_ + 4 * u), 0, 180, fill=INK)
+        d.chord((mx - gw_, my - gh_, mx + gw_, my + gh_), 0, 180, fill=(40, 12, 22))
+        d.rectangle((mx - gw_ * 0.88, my, mx + gw_ * 0.88, my + 14 * u), fill=(236, 236, 226))
+        for q in range(-3, 4):
+            d.line((mx + q * gw_ * 0.24, my, mx + q * gw_ * 0.24, my + 14 * u), fill=INK, width=max(1, int(2 * u)))
+        d.line((mx - gw_ - 4 * u, my, mx + gw_ + 4 * u, my), fill=INK, width=max(2, int(5 * u)))
+    elif pose.mouth > 0.08:                               # offener Mund mit Zähnen und Zunge; Form nach dem gesprochenen Vokal
         mh = 10 * u + pose.mouth * 30 * u
         mw = (19 - 4 * pose.mouth) * u if pose.eyes == "wide" else 19 * u
         if pose.shape == "o":                             # o/u: kleiner runder Mund

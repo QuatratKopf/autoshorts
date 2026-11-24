@@ -291,6 +291,10 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
   und Ort (z. B. Vulkanausbruch: place mountain, props ["volcano","smoke"], weather "ash", actors []). Bei Natur-,
   Wissens- und What-If-Themen ist mindestens jede zweite Szene eine Ereignis-Einstellung. Figuren zeigen nur kurz die
   Reaktion oder die Folgen für Menschen.
+- SPIEGELBILD: Handelt das Video davon, was man im Spiegel sieht (in den Spiegel starren, das Gesicht verändert sich), zeigt die Regie in
+  Sätzen über das Spiegelbild von selbst den Blick in den Badezimmerspiegel. Sag deshalb in jedem dieser Sätze genau, was mit dem Spiegelbild
+  geschieht (der Rand verblasst, die Augen wirken schwarz, eine Fratze, sie verschwindet wieder) – ein Satz, ein Zustand. Erklär-Sätze dazwischen
+  spricht das Gehirn oder die Figur im Bad. Keine erfundenen Zeiten und Prozentzahlen: belegt ist „nach etwa einer Minute“ bei schwachem Licht.
 - BEWEGTE GRAFIKEN ("shot": "graphic" plus "graphic": {...}, ohne Figuren) für Zahlen, Fristen und Fragen – 2 bis 4 pro Video:
     {"type": "number", "kicker": "SCHWEDEN · NOV. 2024", "value": "5 MIO.", "label": "HAUSHALTE"}   große Zahl läuft hoch
     {"type": "timer", "value": "72:00:00", "kicker": "SO LANGE BIST DU ALLEIN"}                      Countdown läuft herunter

@@ -164,7 +164,9 @@ def sanitize(sc):
     sc["graphic"] = graphics.clean(sc.get("graphic"))
     if sc["shot"] == "graphic" and not sc["graphic"]:
         sc["shot"] = ""
-    if sc["shot"] not in ("event", "close", "insert", "graphic"):
+    if sc["shot"] == "mirror" and str(sc.get("mirror") or "") not in MIRROR_STATES:
+        sc["shot"] = ""
+    if sc["shot"] not in ("event", "close", "insert", "graphic", "mirror"):
         sc["shot"] = ""                                   # "wide" und Unbekanntes = normale Einstellung
     if not isinstance(sc.get("place"), str):
         sc["place"] = ""
@@ -313,7 +315,7 @@ def _prepare(scene, cast):
             look_a = dataclasses.replace(look_a, hat="headphones")
         actors.append({"look": look_a, "kind": kind if kind in extras.CREATURES else "",
                        "hold": extras.held_key(a.get("hold")),
-                       "action": action, "emotion": str(a.get("emotion") or "").lower(), "emote": a.get("emote") or "", "giant": bool(scene.get("giant")), "small": bool(scene.get("_beside_bed")), "hero": bool(a.get("hero")), "ksz": float(a["_ksz"]) if isinstance(a.get("_ksz"), (int, float)) and not isinstance(a.get("_ksz"), bool) and 0.2 <= a["_ksz"] <= 2.0 else 0.0, "say": str(a.get("say") or "") if isinstance(a.get("say"), str) else "",
+                       "action": action, "emotion": str(a.get("emotion") or "").lower(), "emote": a.get("emote") or "", "giant": bool(scene.get("giant")), "small": bool(scene.get("_beside_bed") or a.get("small")), "hero": bool(a.get("hero")), "ksz": float(a["_ksz"]) if isinstance(a.get("_ksz"), (int, float)) and not isinstance(a.get("_ksz"), bool) and 0.2 <= a["_ksz"] <= 2.0 else 0.0, "say": str(a.get("say") or "") if isinstance(a.get("say"), str) else "",
                        "x0": x0, "x1": x1, "speaks": bool(a.get("speaks")), "seed": i * 5 + len(aid), "face": a.get("facing"), "jog": bool(a.get("_jog")) and action == "run",
                        "teeth": TEETH_COLORS.get(str(a.get("teeth") or "").lower())})
     for i, a in enumerate(actors):     # zwei Figuren nie auf derselben Stelle
@@ -795,7 +797,7 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
     if close:              # Großaufnahme: Kulisse vergrößert und leicht unscharf (Tiefenschärfe), die Figur scharf und groß davor
         lead = next((a for a in actors if a["speaks"]), actors[0])
         hw = CLOSE_BG / 2
-        c_off = ((110 if lead["x1"] < 600 else -110) if lead["kind"] else 0)   # Tier: der Kopf (vorn) kommt in die Bildmitte, nicht der Bauch
+        c_off = ((110 if lead["x1"] < 600 else -110) if lead["kind"] and lead["kind"] != "brain" else 0)   # das Gehirn ist rund und steht mittig – verschoben war es links angeschnitten (Video 204)   # Tier: der Kopf (vorn) kommt in die Bildmitte, nicht der Bauch
         c_x = max(hw, min(W - hw, lead["x1"] + c_off))
         top = places.GROUND - 780
         frame = frame.crop((int(c_x - hw), top, int(c_x + hw), top + int(CLOSE_BG * H / W))).resize((W, H), Image.BILINEAR)
@@ -2541,6 +2543,87 @@ def direct(scenes, times, topic="", style="", look=""):
                 and not _re0.search(r"\blabor|experiment|chemi|reagenz|mikroskop|versuch", str(sc.get("text") or "").lower()):
             sc["place"] = "mathroom"                      # Mathe-Thema: der Forscher steht vor der Tafel, nicht zwischen Kolben und Reagenzgläsern (Video 198)
     _frost_frog(scenes, topic, main_id)
+    _mirror_story(scenes, topic, main_id)
+    return scenes
+
+
+# Spiegel-Video (Video 204): Sätze über das eigene Spiegelbild zeigen den Blick in den Spiegel (Einstellung „mirror“, `_mirror_frame`) im Zustand,
+# den der Satz beschreibt; die Regie führt Buch (normal → Rand versinkt → schwarze Augen → Fratze → wieder normal). Höchstens zwei Spiegel-Bilder
+# hintereinander, dazwischen die Figur im Bad oder das Gehirn als Erklärer – das erklärt ruhig, nicht ängstlich. Erleichterte Sätze sind hell und froh.
+MIRROR_TOPIC_RE = r"spiegel"
+MIRROR_GAZE_RE = r"starr|troxler|spiegelbild|im dunkeln|in den spiegel (?:schau|blick|seh|guck)|gesicht"
+MIRROR_BACK_RE = r"verschwindet|verschwunden|echtes gesicht|wieder normal|bricht\b.{0,30}zusammen|alles wie vorher|ist der spuk vorbei"
+MIRROR_MON_RE = r"fratze|monster|fremde[sn]? gesicht|grimasse|dämon|ungeheuer|fremde person|jemand anderes"
+MIRROR_VOID_RE = r"augen\b.{0,60}(?:riesig|schwarz|höhle|löcher)|pechschwarz|schwarze augen|augenhöhlen"
+MIRROR_FADE_RE = r"löscht|blendet\b.{0,40}aus|verblass|verschwimm|versink|rand de[sr]|sichtfeld|verändert sich|verzerr|kontur|verformt|zerfließ|schmilz|unscharf"
+MIRROR_SELF_RE = r"spiegel|starr|gesicht|deine (?:nase|augen|haare|stirn|wangen)|dein(?:en)? (?:mund|kopf)\b"
+MIRROR_CALM_RE = r"erleichtert|beruhigt|atmest (?:tief )?(?:durch|auf)|aufatmen|licht an|entspann|keine angst"
+BRAIN_IDS = ("gehirn", "hirn", "brain", "_hirn")
+
+
+def mirror_story(scenes, topic=""):
+    head = str(topic or "").lower()
+    return bool(re.search(MIRROR_TOPIC_RE, head) and re.search(MIRROR_GAZE_RE, head))
+
+
+def _mirror_story(scenes, topic="", main_id="du"):
+    if not mirror_story(scenes, topic):
+        return scenes
+    cur, run, lit = "normal", 0, False
+    for i, sc in enumerate(scenes):
+        if not isinstance(sc, dict):
+            continue
+        low = str(sc.get("text") or "").lower()
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        if re.search(r"licht\b.{0,12}\ban\b|licht ein|lichtschalter", low):
+            lit = True                                    # „Du machst das Licht an“: ab hier ist das Bad hell
+        elif re.search(r"licht\b.{0,12}\baus\b|heute (?:abend|nacht)|im dunkeln|halbdunkel", low):
+            lit = False
+        if lit and places.resolve(backdrop(sc)) == "bathroom":
+            sc["time"], sc["weather"] = "day", ""
+            if str(sc.get("mood") or "") in ("scary", "tense", "panic", "sad"):
+                sc["mood"] = "calm"
+        brain = [a for a in acts if str(a.get("kind") or "").lower() == "brain" or str(a.get("id") or "").lower() in BRAIN_IDS]
+        for a in brain:                                   # das Gehirn erklärt: sachlich, kein Angstgesicht mit Schweißtropfen
+            a["emotion"], a["emote"] = "", ""
+            if str(a.get("action") or "") in ("shocked", "scared"):
+                a["action"] = "talk"
+        shot = str(sc.get("shot") or "")
+        if shot == "graphic" and graphics.clean(sc.get("graphic")):
+            run = 0
+            continue
+        if re.search(MIRROR_CALM_RE, low) and not re.search(MIRROR_SELF_RE, low):     # „Du machst das Licht an und gehst erleichtert ins Bett“: hell und froh
+            sc["mood"] = "happy"
+            for a in acts:
+                if a not in brain:
+                    a["emotion"], a["emote"] = "happy", ""
+            run = 0
+            continue
+        state = None
+        if re.search(MIRROR_BACK_RE, low):
+            state = "snap" if cur in ("fade", "void", "monster") else "clear" if lit else "normal"
+            cur = "normal"
+        elif re.search(MIRROR_MON_RE, low):
+            state = cur = "monster"
+        elif re.search(MIRROR_VOID_RE, low):
+            state = cur = "void"
+        elif re.search(MIRROR_FADE_RE, low) and (re.search(MIRROR_SELF_RE, low) or cur != "normal" or not brain):
+            state = cur = "fade"
+        elif re.search(MIRROR_SELF_RE, low) and (not (brain and len(brain) == len(acts)) or re.search(r"\bstarr|\bfixier", low)):
+            state = cur if cur != "normal" else "clear" if lit else "stare"
+        if i == 0 and state:                              # erstes Bild: gleich das, worum es geht – die schwarzen Augen im Spiegel
+            state, cur = "void", "normal"                 # nur der Vorgriff – danach beginnt die Geschichte beim unveränderten Spiegelbild
+        if not state or (run >= 2 and state not in ("snap", "monster")):
+            run = 0
+            continue
+        sc["shot"], sc["mirror"] = "mirror", state
+        sc["actors"] = [{"id": main_id, "action": "idle", "emotion": "", "emote": "", "pos": "center", "speaks": False, "say": "", "hold": "", "facing": "", "kind": ""}]
+        sc["props"], sc["crowd"], sc["graphic"] = [], "", None
+        sc["place"], sc["backdrop"] = "bathroom", None
+        sc["_no_cut"] = True
+        if isinstance(sc.get("overlay"), dict) and str(sc["overlay"].get("type") or "") not in ("card", "tag", "stamp"):
+            sc["overlay"] = None                          # Liste, Zähler, Handy lägen über dem Spiegelbild
+        run += 1
     return scenes
 
 
@@ -3378,12 +3461,12 @@ def _body_story(scenes):
             if rp in ("street", "park", "plain") and not re.search(OUTSIDE_RE, low):
                 sc["place"], sc["backdrop"] = prev_room or "livingroom", None    # ein Gedanken-Satz spielt nicht plötzlich auf der Straße
             sc["crowd"] = ""
-            h["pos"] = 300
+            h["pos"] = 250                                # weit genug auseinander: das Gehirn stand halb vor der Figur (Video 204)
             h.pop("to", None)
             if str(h.get("action") or "").lower() in ("walk", "run"):
                 h["action"] = "idle"
             busy = bool(re.search(r"prüf|bewert|entscheid|überleg|rechne|sortier|vergleich", low))
-            sc["actors"] = [h, {"id": "_hirn", "kind": "brain", "hero": False, "pos": 770, "action": "think" if busy else "talk", "emotion": "", "emote": "?" if busy else "",
+            sc["actors"] = [h, {"id": "_hirn", "kind": "brain", "hero": False, "small": True, "pos": 800, "action": "think" if busy else "talk", "emotion": "", "emote": "?" if busy else "",
                                 "say": "", "hold": "", "facing": "left", "speaks": False}]
             sc["props"] = [q for q in (sc.get("props") or []) if not isinstance(q, dict) or q.get("pos") in (None, "")][:1]
             if str(sc.get("shot") or "") == "event":
@@ -6117,6 +6200,209 @@ def _insert_frame(kinds, t, dur, mood, low=False, neon=False):
     return frame
 
 
+# Blick in den Spiegel (Prüfung 24.11.2026, Video 204 „Starre nie im Dunkeln in den Spiegel“): Das ganze Video handelte davon, wie sich das eigene
+# Spiegelbild im Halbdunkel verändert – zu sehen war 74 Sekunden lang nur die erschrockene Figur von vorn im dunklen Bad, kein Spiegelbild, kein
+# verzerrtes Gesicht. Einstellung „mirror“: Blick über die Schulter in den Badezimmerspiegel; im Glas das Spiegelbild der Figur im Zustand, den der
+# Satz beschreibt (`scene["mirror"]`): normal | stare (starrt reglos) | fade (der Rand versinkt im Dunkeln) | void (Augen riesig und schwarz) |
+# monster (Fratze mit starrem Grinsen) | snap (Fratze, dann schlagartig wieder das echte Gesicht) | clear (erleichtert, hell).
+MIRROR_STATES = ("normal", "stare", "fade", "void", "monster", "snap", "clear")
+MIRROR_BOX = (118, 250, 962, 1300)       # Glas im Bild; darunter Ablage und Waschbecken, unten angeschnitten der Hinterkopf der Figur
+_mir_cache = {}
+
+
+def _mirror_params(state, t, dur):
+    """(Dunkel-Anteil 0..1, schwarze Augen 0..1, Fratze, heller Blitz 0..1, Ausdruck) für den Zustand zum Zeitpunkt t."""
+    x = _ease(min(1.0, t / max(0.6, dur * 0.8)))
+    if state == "snap":
+        ts = min(1.1, dur * 0.35)
+        if t < ts:
+            return 0.7, 1.0, True, 0.0, "monster"
+        return 0.08, 0.0, False, max(0.0, 1 - (t - ts) / 0.3), "clear"
+    if state == "monster":
+        return 0.7, 1.0, True, 0.0, "monster"
+    if state == "void":
+        return 0.82, _ease(min(1.0, t / max(0.5, dur * 0.55))), False, 0.0, "wide"
+    if state == "fade":
+        return 0.3 + 0.58 * x, 0.0, False, 0.0, "worried"
+    if state == "stare":
+        return 0.12 + 0.22 * x, 0.0, False, 0.0, "normal"
+    if state == "clear":
+        return 0.0, 0.0, False, 0.0, "clear"
+    return 0.12, 0.0, False, 0.0, "normal"
+
+
+def mirror_glass(look, state, t, dur, size=(844, 1050), seed=3):
+    """Das Spiegelbild: gespiegelte Badezimmerwand, davor die Figur groß von vorn. Je nach Zustand versinkt der Rand des Bildes im Dunkeln
+    (Troxler-Effekt), die Augen werden zu schwarzen Höhlen, das Gesicht zur Fratze."""
+    gw, gh = size
+    state = state if state in MIRROR_STATES else "normal"
+    dark, void, grin, flash, face = _mirror_params(state, t, dur)
+    lit = state == "clear"                                 # nur wenn das Licht an ist – nach dem Verschwinden der Fratze bleibt es Kerzenlicht
+    key = ("glassbg", size, lit)
+    if key not in _mir_cache:
+        c0, c1 = ((120, 150, 170), (86, 112, 134)) if lit else ((44, 60, 82), (24, 32, 48))
+        g = Image.new("RGB", size, c1)
+        d = ImageDraw.Draw(g)
+        for y in range(gh):
+            f = y / gh
+            d.line((0, y, gw, y), fill=tuple(int(c0[i] + (c1[i] - c0[i]) * f) for i in range(3)))
+        ln = tuple(int(c * 0.82) for c in c1)
+        for y in range(40, gh, 130):
+            d.line((0, y, gw, y), fill=ln, width=4)
+        for x in range(30, gw, 130):
+            d.line((x, 0, x, gh), fill=ln, width=4)
+        d.rounded_rectangle((gw * 0.66, gh * 0.1, gw * 1.1, gh * 1.2), 14, fill=tuple(int(c * 0.78) for c in c1), outline=tuple(int(c * 0.55) for c in c1), width=10)   # Tür im Rücken der Figur
+        d.ellipse((gw * 0.7, gh * 0.56, gw * 0.7 + 26, gh * 0.56 + 26), fill=tuple(int(c * 1.5) for c in c1))
+        _mir_cache[key] = g.filter(ImageFilter.GaussianBlur(6))
+    g = _mir_cache[key].copy()
+    emo = {"monster": "angry", "wide": "scared", "worried": "worried", "clear": "happy"}.get(face, "")
+    pose, _ = rig.pose_at("idle", t, dur, emo, 0.0, seed)
+    pose.look = 0.02                                       # blickt sich selbst in die Augen
+    pose.lift = 0
+    pose.arm_l, pose.fore_l, pose.arm_r, pose.fore_r = -10, -6, 10, 6
+    pose.eyes = {"monster": "angry", "wide": "wide", "worried": "worried", "clear": "happy"}.get(face, "normal")
+    pose.smile = 0.8 if face == "clear" else -0.3 if face == "worried" else 0.0
+    pose.mouth = 0.0
+    if state == "stare":
+        pose.extra["pupil"] = 0.8                          # im Halbdunkel geweitete Pupillen
+    if void > 0.02:
+        pose.extra["void"] = void
+    if grin:
+        pose.extra["grin"] = True
+        pose.head = 5 * math.sin(t * 1.3)
+    im, fx, fy = rig.draw(look, pose, 1, 2.55 / max(0.6, look.size), ss=1)
+    hc = pose.extra.get("hc") or (im.width / 2, im.height * 0.3, 200)
+    if grin:                                               # Fratze: das Gesicht zieht sich langsam in die Breite und Länge, fahle Farbe
+        wob = 1 + 0.05 * math.sin(t * 2.1)
+        im2 = im.resize((int(im.width * wob), int(im.height * (2 - wob))), Image.BILINEAR)
+        hc = (hc[0] * wob, hc[1] * (2 - wob), hc[2])
+        r_, g_, b_, a_ = im2.split()
+        im = Image.merge("RGBA", (r_.point(lambda v: int(v * 0.8)), g_.point(lambda v: int(v * 0.9)), b_.point(lambda v: int(v * 0.86)), a_))
+    cx, cy = gw / 2, gh * 0.44
+    g.paste(im, (int(cx - hc[0]), int(cy - hc[1])), im)
+    if not lit:                                            # schwaches Licht: alles etwas blau und dunkel
+        g = Image.blend(g, Image.new("RGB", size, (16, 22, 40)), 0.26)
+    if dark > 0.01:                                        # der Rand des Sichtfeldes versinkt: nur die Mitte des Gesichts bleibt
+        m = Image.new("L", (gw // 8, gh // 8), int(250 * min(1.0, dark * 1.25)))
+        r0 = (620 - 470 * dark) / 8
+        ImageDraw.Draw(m).ellipse((cx / 8 - r0, (cy + 18) / 8 - r0 * 1.08, cx / 8 + r0, (cy + 18) / 8 + r0 * 1.08), fill=0)
+        m = m.filter(ImageFilter.GaussianBlur(5 + 7 * (1 - dark))).resize(size, Image.BILINEAR)
+        g = Image.composite(Image.new("RGB", size, (5, 7, 13)), g, m)
+    if flash > 0.01:
+        g = Image.blend(g, Image.new("RGB", size, (255, 255, 255)), min(0.85, flash))
+    sh = Image.new("RGBA", size, (0, 0, 0, 0))             # Glanz auf dem Glas
+    ds = ImageDraw.Draw(sh)
+    a_s = 34 if lit else 16
+    ds.polygon([(gw * 0.06, gh * 0.02), (gw * 0.2, gh * 0.02), (gw * 0.04, gh * 0.3), (gw * 0.0, gh * 0.22)], fill=(255, 255, 255, a_s))
+    ds.polygon([(gw * 0.25, gh * 0.02), (gw * 0.3, gh * 0.02), (gw * 0.02, gh * 0.48), (gw * 0.02, gh * 0.4)], fill=(255, 255, 255, a_s))
+    g.paste(sh, (0, 0), sh)
+    return g
+
+
+def mirror_sticker(look, state="monster", w=620):
+    """Gerahmter Spiegel mit Spiegelbild als freigestelltes Motiv (Titelbild)."""
+    gl = mirror_glass(look, state, 1.2, 3.0)
+    gl = gl.resize((w, int(w * gl.height / gl.width)), Image.LANCZOS)
+    b = 26
+    out = Image.new("RGBA", (gl.width + 2 * b, gl.height + 2 * b), (0, 0, 0, 0))
+    d = ImageDraw.Draw(out)
+    d.rounded_rectangle((0, 0, out.width - 1, out.height - 1), 56, fill=INK)
+    d.rounded_rectangle((7, 7, out.width - 8, out.height - 8), 50, fill=(202, 164, 110))
+    d.rounded_rectangle((b - 5, b - 5, out.width - b + 4, out.height - b + 4), 36, fill=INK)
+    mk = Image.new("L", gl.size, 0)
+    ImageDraw.Draw(mk).rounded_rectangle((0, 0, gl.width - 1, gl.height - 1), 32, fill=255)
+    out.paste(gl, (b, b), mk)
+    return out
+
+
+def _mirror_frame(scene, cast, t, dur):
+    """Blick über die Schulter in den Badezimmerspiegel."""
+    state = str(scene.get("mirror") or "normal")
+    acts = [a for a in (scene.get("actors") or []) if isinstance(a, dict) and not a.get("kind")]
+    aid = next((str(a.get("id")) for a in acts if isinstance((cast or {}).get(str(a.get("id"))), dict) and not cast[str(a.get("id"))].get("kind")), None) \
+        or next((k for k, v in (cast or {}).items() if isinstance(v, dict) and not v.get("kind")), None)
+    look = rig.Look.from_spec((cast or {}).get(aid) if aid else {}, aid or "", list(cast).index(aid) if aid and aid in (cast or {}) else None)
+    lit = state == "clear"
+    x0, y0, x1, y1 = MIRROR_BOX
+    key = ("wall", lit)
+    if key not in _mir_cache:
+        c0, c1 = ((150, 176, 190), (104, 128, 148)) if lit else ((30, 40, 60), (12, 16, 28))
+        fr = Image.new("RGB", (W, H), c1)
+        d = ImageDraw.Draw(fr)
+        for y in range(H):
+            f = y / H
+            d.line((0, y, W, y), fill=tuple(int(c0[i] + (c1[i] - c0[i]) * f) for i in range(3)))
+        ln = tuple(int(c * 0.8) for c in c1)
+        for y in range(90, 1340, 150):
+            d.line((0, y, W, y), fill=ln, width=5)
+        for x in range(60, W, 150):
+            d.line((x, 0, x, 1340), fill=ln, width=5)
+        wood = (202, 164, 110) if lit else (112, 92, 78)
+        d.rounded_rectangle((x0 - 34, y0 - 34, x1 + 34, y1 + 34), 62, fill=INK)                       # Rahmen
+        d.rounded_rectangle((x0 - 26, y0 - 26, x1 + 26, y1 + 26), 56, fill=wood)
+        d.rounded_rectangle((x0 - 26, y1 - 4, x1 + 26, y1 + 26), 20, fill=tuple(int(c * 0.78) for c in wood))
+        d.rounded_rectangle((x0 - 7, y0 - 7, x1 + 7, y1 + 7), 40, fill=INK)
+        shelf = (226, 230, 236) if lit else (92, 100, 122)
+        d.rounded_rectangle((40, 1372, W - 40, 1420), 18, fill=shelf, outline=INK, width=7)           # Ablage
+        basin = (240, 244, 248) if lit else (104, 114, 138)
+        d.rounded_rectangle((170, 1470, W - 170, 2050), 120, fill=basin, outline=INK, width=8)        # Waschbecken (angeschnitten)
+        d.rounded_rectangle((500, 1400, 580, 1500), 22, fill=(190, 196, 206) if lit else (120, 128, 148), outline=INK, width=7)   # Wasserhahn
+        d.rounded_rectangle((150, 1290, 226, 1376), 14, fill=(120, 190, 220) if lit else (60, 96, 124), outline=INK, width=6)     # Zahnputzbecher
+        d.line((176, 1296, 160, 1210), fill=INK, width=18)
+        d.line((176, 1296, 160, 1210), fill=(240, 110, 110) if lit else (130, 70, 84), width=9)
+        d.line((204, 1296, 222, 1220), fill=INK, width=18)
+        d.line((204, 1296, 222, 1220), fill=(250, 220, 90) if lit else (132, 120, 70), width=9)
+        _mir_cache[key] = fr
+    frame = _mir_cache[key].copy()
+    gl = mirror_glass(look, state, t, dur, (x1 - x0, y1 - y0))
+    mk = _mir_cache.setdefault("mask", Image.new("L", (x1 - x0, y1 - y0), 0))
+    if not mk.getbbox():
+        ImageDraw.Draw(mk).rounded_rectangle((0, 0, x1 - x0 - 1, y1 - y0 - 1), 34, fill=255)
+    frame.paste(gl, (x0, y0), mk)
+    if not lit:                                            # Kerze auf der Ablage: das einzige, schwache Licht
+        fl = 0.86 + 0.14 * math.sin(t * 13) * math.sin(t * 7.3 + 1)
+        glow = _mir_cache.get("glow")
+        if glow is None:
+            gm = Image.new("L", (W // 8, H // 8), 0)
+            ImageDraw.Draw(gm).ellipse((880 / 8 - 22, 1270 / 8 - 22, 880 / 8 + 22, 1270 / 8 + 22), fill=255)
+            glow = _mir_cache["glow"] = gm.filter(ImageFilter.GaussianBlur(11)).resize((W, H), Image.BILINEAR)
+        frame = Image.composite(Image.blend(frame, Image.new("RGB", (W, H), (255, 190, 110)), 0.3 * fl), frame, glow)
+        d = ImageDraw.Draw(frame, "RGBA")
+        d.rounded_rectangle((852, 1280, 908, 1378), 10, fill=(236, 226, 204), outline=INK, width=6)
+        d.line((880, 1280, 880, 1262), fill=INK, width=5)
+        fh = 52 * fl
+        d.polygon([(880, 1262 - fh - 8), (862, 1250), (880, 1272), (898, 1250)], fill=INK)
+        d.polygon([(880, 1262 - fh), (868, 1250), (880, 1266), (892, 1250)], fill=(255, 190, 70))
+        d.polygon([(880, 1262 - fh * 0.5), (874, 1252), (880, 1262), (886, 1252)], fill=(255, 244, 190))
+    hk = ("back", look.hair, look.hair_color, look.shirt, lit)
+    if hk not in _mir_cache:                               # Hinterkopf und Schultern der Figur, unscharf im Vordergrund
+        lay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        d = ImageDraw.Draw(lay)
+        dim = 0.9 if lit else 0.42
+        hair = tuple(int(c * dim) for c in rig.hair_color(look))
+        shirt = tuple(int(c * dim) for c in look.shirt)
+        d.rounded_rectangle((60, 1790, W - 60, 2100), 150, fill=INK)
+        d.rounded_rectangle((72, 1802, W - 72, 2100), 140, fill=shirt)
+        d.ellipse((540 - 300, 1470, 540 + 300, 1990), fill=INK)
+        d.ellipse((540 - 288, 1482, 540 + 288, 1978), fill=hair)
+        if look.hair == "curly":
+            for i in range(11):
+                a = math.radians(-190 + i * 20)
+                bx, by = 540 + math.cos(a) * 280, 1730 + math.sin(a) * 250
+                d.ellipse((bx - 92, by - 92, bx + 92, by + 92), fill=INK)
+            for i in range(11):
+                a = math.radians(-190 + i * 20)
+                bx, by = 540 + math.cos(a) * 280, 1730 + math.sin(a) * 250
+                d.ellipse((bx - 80, by - 80, bx + 80, by + 80), fill=hair)
+        elif look.hair in ("long", "bob", "ponytail", "bun"):
+            d.rounded_rectangle((540 - 300, 1720, 540 + 300, 2100), 120, fill=INK)
+            d.rounded_rectangle((540 - 288, 1720, 540 + 288, 2100), 110, fill=hair)
+        _mir_cache[hk] = lay.filter(ImageFilter.GaussianBlur(7))
+    bob = int(4 * math.sin(t * 1.4))
+    frame.paste(_mir_cache[hk], (0, bob), _mir_cache[hk])
+    return frame
+
+
 TIGHT_Z, TIGHT_AY = 1.3, 300.0            # Halbnahe: Zoom und Fixpunkt (oben) – wie in Erklär-Shorts füllen die Figuren das Bild
 
 
@@ -6222,6 +6508,7 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     big = 1.5 if shot == "event" else 1.15
     ins = [k for k, _ in props if extras.PROP_ALIASES.get(k, k) in extras.PROPS][:2] if shot == "insert" else []
     gfx = graphics.clean(scene.get("graphic")) if shot == "graphic" else None
+    mir = str(scene.get("mirror") or "") if shot == "mirror" and str(scene.get("mirror") or "") in MIRROR_STATES else ""   # Blick in den Spiegel: eigenes Bild (_mirror_frame)
     if gfx and hyper.handles(gfx) and hyper.render(gfx, dur, out, str(scene.get("mood") or "").lower(), still):
         return                                # Grafik von HyperFrames (HTML/GSAP) gerendert – sonst zeichnet graphics.py sie unten wie bisher
     neon_look = str(scene.get("look") or "") == "neon"
@@ -6289,9 +6576,14 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     if moving or str(scene.get("shot") or "") == "close":
         cam["move"] = "push" if index % 2 else "pull"     # wer durchs Bild läuft oder groß im Bild ist: kein zusätzlicher Schwenk
     cam_flat = {"flat": True, "dir": cam["dir"], "drift": cam["drift"], "opener": index == 0, "move": "push" if index % 2 else "pull"}
-    cut_t, cut_kind, named = _cut_plan(scene, shot, gfx or ins, moving, ov_tall or ov_kind == "counter", place, actors, props, dur, cam, index)   # großer Zähler mitten im Bild: kein Schnitt auf die Großaufnahme – die Zahl läge auf dem Gesicht (Video 186)
+    cut_t, cut_kind, named = _cut_plan(scene, shot, gfx or ins or mir, moving, ov_tall or ov_kind == "counter", place, actors, props, dur, cam, index)   # großer Zähler mitten im Bild: kein Schnitt auf die Großaufnahme – die Zahl läge auf dem Gesicht (Video 186)
     sfx = []                                  # Ton-Ereignisse dieser Szene (Sekunden ab Szenenbeginn) für render.py / sound.py
-    if not (gfx or ins):
+    if mir:
+        if mir in ("monster", "void"):
+            sfx.append((0.1, "hit"))
+        elif mir == "snap":
+            sfx.append((min(1.1, dur * 0.35), "swish"))
+    elif not (gfx or ins):
         for pi, (k_p, _) in enumerate([p for p in props if extras.PROP_ALIASES.get(p[0], p[0]) not in extras.FRONT][:3]):
             sfx.append((0.06 + 0.12 * pi, "pop"))           # Dinge springen ins Bild
         for a_s in actors:
@@ -6325,6 +6617,12 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     try:
         for fidx in range(n_frames):
             t = fidx / FPS
+            if mir:
+                frame = _mirror_frame(scene, cast, t, dur)
+                if still is not None and fidx == min(n_frames - 1, FPS):
+                    frame.save(still, quality=92)
+                ff.stdin.write(_camera(frame.convert("RGB"), t, dur, cam_flat).tobytes())
+                continue
             if gfx or ins:
                 frame = (graphics.frame(gfx, t, dur, str(scene.get("mood") or "").lower()) if gfx
                          else _insert_frame(ins, t, dur, str(scene.get("mood") or "").lower(), bool(has_ov), neon_look))
@@ -6486,6 +6784,9 @@ def poster(spec: dict, cast: dict, out: Path, topic=""):
                 base_f.paste((204, 232, 250, 255), (0, 0), hero.split()[3].point(lambda a_: 255 if a_ > 20 else 0))
                 base_f.alpha_composite(hero)
                 hero = base_f
+    if mirror_story([], str(topic or "")):                # Spiegel-Video: der Spiegel mit der Fratze aufs Titelbild – nicht eine Kerze aus den Requisiten (Video 204)
+        aid_m = next((k for k, v in (cast or {}).items() if isinstance(v, dict) and not v.get("kind")), None)
+        hero = mirror_sticker(rig.Look.from_spec((cast or {}).get(aid_m) if aid_m else {}, aid_m or "", list(cast).index(aid_m) if aid_m else None))
     if hero is None and _re.search(r"smartphone|\bhandy", low):   # Handy-Thema ohne Motiv (Video 185: nur die Figur vor Strahlen): das leuchtende Handy als Aufkleber
         lay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
         extras.draw_prop(lay, "display", 540, 1.2)

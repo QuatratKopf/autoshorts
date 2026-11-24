@@ -32,6 +32,8 @@ def frame(scene, cast=None, t=1.3):
     shot = str(scene.get("shot") or "")
     if shot == "graphic" and graphics.clean(scene.get("graphic")):
         return graphics.frame(graphics.clean(scene["graphic"]), t, 3.0, opt["mood"])
+    if shot == "mirror":
+        return stage._mirror_frame(scene, cast, t, 3.0)
     if shot == "insert":
         return stage._insert_frame([k for k, _ in props][:2], t, 3.0, opt["mood"])
     return stage._frame(bg, place, night, scale, actors, props, weather, t, 3.0, (), 0.0, place == "bedroom",
@@ -42,6 +44,39 @@ texts_gfx = ["Warum ist das so?", "Fünf Millionen Haushalte bekommen Post.", "D
              "Vorrat für drei Tage.", "Fünfundvierzigtausend Haushalte ohne Strom.", "Neunzig Prozent fallen aus.", "Und jetzt?", "", None, 5,
              "Ein Hund läuft.", "Achtzig Milliarden Liter Wasser.", "Ganz Europa warnt, auch Schweden.", "Die ganze Stadt ist ohne Strom.",
              "Einer von sieben Menschen träumt davon.", "Jeder dritte Deutsche kennt das.", "Runde eins: Koffein.", "Drei von zehn Leuten.", "Runde x"]
+
+
+def _mirror():
+    """Prüfung 24.11.2026 (Video 204 „Starre nie im Dunkeln in den Spiegel“): Sätze über das Spiegelbild zeigen den Blick in den Spiegel im passenden Zustand."""
+    T = [("Starre eine Minute im Halbdunkel in den Spiegel, und dein Gesicht wird zum Monster.", "du", "void"),
+         ("Du brauchst dafür nur ein dunkles Bad und etwas Geduld.", "du", ""),
+         ("Dann starrst du dir im Spiegel reglos in die Augen.", "du", "stare"),
+         ("Nach etwa einer Minute verblasst der Rand deines Gesichts.", "du", "fade"),
+         ("Schuld ist dein Gehirn: Was sich nicht verändert, hält es für unwichtig.", "gehirn", ""),
+         ("Plötzlich wirken deine Augen riesig und pechschwarz.", "du", "void"),
+         ("Dein Mund verzieht sich zu einer fremden Fratze.", "du", "monster"),
+         ("Das ist kein Geist und kein Fluch.", "gehirn", ""),
+         ("Sofort verschwindet die Fratze, und dein echtes Gesicht ist wieder da.", "du", "snap"),
+         ("Du machst das Licht an und atmest erleichtert durch.", "du", "")]
+    mk = lambda: [{"text": t_, "place": "bathroom", "time": "night", "mood": "scary", "actors": [{"id": w_, "action": "talk", "emotion": "scared"}], "props": [], "overlay": None} for t_, w_, _ in T]
+    sd = stage.direct(mk(), [(k * 4.0, k * 4.0 + 4.0) for k in range(len(T))], "Starre nie im Dunkeln in den Spiegel", "grusel")
+    cast_m = {"du": {"shirt": "grau", "hair": "curly", "gender": "w"}, "gehirn": {"kind": "brain"}}
+    for sc_, (t_, w_, st_) in zip(sd, T):
+        assert (sc_.get("mirror") or "") == st_ and (sc_.get("shot") == "mirror") == bool(st_), ("Spiegel-Zustand", t_, sc_.get("shot"), sc_.get("mirror"))
+        if w_ == "gehirn":
+            assert not any(a_.get("emotion") for a_ in sc_["actors"]), ("Gehirn erklärt sachlich", t_)
+        frame(dict(sc_), cast_m, 0.4)
+        frame(dict(sc_), cast_m, 2.4)
+    assert sd[-1]["time"] == "day" and sd[-1]["actors"][0]["emotion"] == "happy", ("Licht an: hell und froh", sd[-1].get("time"))
+    dk = stage._mirror_frame({"mirror": "monster", "actors": [{"id": "du"}]}, cast_m, 1.5, 3.0).convert("L")
+    nm = stage._mirror_frame({"mirror": "normal", "actors": [{"id": "du"}]}, cast_m, 1.5, 3.0).convert("L")
+    box_ = stage.MIRROR_BOX
+    s_d, s_n = sum(dk.crop(box_).resize((40, 50)).getdata()), sum(nm.crop(box_).resize((40, 50)).getdata())
+    assert s_d < s_n * 0.75, ("Fratze: das Spiegelbild ist deutlich dunkler", s_d, s_n)
+    assert stage.sanitize({"shot": "mirror", "mirror": "quatsch"})["shot"] == "", "unbekannter Spiegel-Zustand"
+    sd2 = stage.direct([{"text": "Der Spiegel im Flur hängt schief.", "place": "hallway", "actors": [{"id": "du"}], "props": []}], [(0, 4)], "Zehn Tipps für die Wohnung", "fakten")
+    assert sd2[0].get("shot") != "mirror", "ein Spiegel im Satz allein macht kein Spiegel-Video"
+    assert stage.mirror_sticker(rig.Look.from_spec(cast_m["du"], "du", 0)).getbbox(), "Titelbild-Motiv"
 
 
 def _frostfrog():
@@ -146,6 +181,7 @@ def main():
         errors.append(f"Bibliothek laden: {e}")
     check("Mathe-Schaubilder", _math)
     check("Waldfrosch: gefroren, auftauend, lebendig", _frostfrog)
+    check("Spiegel-Video: Blick in den Spiegel", _mirror)
     all_places = sorted(set(places.PLACES) | set(places.OUTDOOR_SPECS))
     for pl in all_places:
         for night, dark in ((False, False), (True, False), (True, True)):

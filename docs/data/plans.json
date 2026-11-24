@@ -1437,7 +1437,7 @@
   "trend": null,
   "script": {
    "title": "Starre nie im Dunkeln in den Spiegel",
-   "description": "Starre im Dunkeln in deinen Spiegel und dein Gehirn verliert die Kontrolle.\nWas nach zehn Sekunden passiert, ist kein Geisterglaube, sondern ein echter optischer Trick deiner Nerven.\nHast du Mut, das heute Nacht selbst zu testen?",
+   "description": "Starre im Halbdunkel in den Spiegel, und nach etwa einer Minute verändert sich dein Gesicht.\nDahinter steckt kein Spuk, sondern der Troxler-Effekt: Dein Gehirn blendet Gleichbleibendes aus und füllt die Lücken selbst.\nTraust du dich, das heute Abend zu testen?",
    "hashtags": [
     "#shorts",
     "#grusel",
@@ -1457,16 +1457,14 @@
     "gruselgeschichten"
    ],
    "thumbnail": {
-    "image": "Close-up of a young person staring into a dark mirror in a dimly lit bathroom, face distorting into a strange shadowy shape, extreme shock facial expression, atmospheric blue lighting",
+    "image": "Mirror in a dark bathroom showing a distorted reflection",
     "text": "SCHAU NICHT REIN",
     "place": "bathroom",
     "time": "night",
     "actor": "du",
     "action": "shocked",
     "emotion": "shocked",
-    "props": [
-     "candle"
-    ],
+    "props": [],
     "weather": "dark"
    },
    "wishes": [],
@@ -1486,116 +1484,189 @@
    },
    "scenes": [
     {
-     "see": "Ein Mädchen steht im dunklen Badezimmer vor einem beleuchteten Spiegel.",
-     "text": "Das passiert, wenn du im Dunkeln in den Spiegel starrst.",
-     "image": "Young girl standing in front of a mirror in a dark bathroom illuminated by a tiny light source",
+     "see": "Im Badezimmerspiegel hat das Spiegelbild riesige schwarze Augen.",
+     "text": "Starre eine Minute im Halbdunkel in den Spiegel, und dein Gesicht wird zum Monster.",
+     "image": "Im Badezimmerspiegel hat das Spiegelbild riesige schwarze Augen.",
      "who": [
       "du"
      ],
      "place": "bathroom",
      "camera": "zoom_in",
-     "sfx": "whoosh",
+     "sfx": "boom",
      "highlight": [
-      "Spiegel starrst"
+      "Monster"
      ],
-     "hud": "0:00 UHR",
-     "status": "MUT: 100%",
      "overlay": null,
      "time": "night",
      "weather": "dark",
-     "props": [
-      "mirror"
-     ],
+     "props": [],
+     "shot": "wide",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
      "actors": [
       {
        "id": "du",
-       "action": "look_around",
-       "emotion": "curious",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
        "pos": "center",
-       "speaks": true
+       "speaks": false
       }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": ""
+     ]
     },
     {
-     "see": "Das Mädchen fixiert die Nasenspitze ihres Spiegelbildes.",
-     "text": "Und nach zehn Sekunden verändert sich dein Gesicht völlig.",
-     "image": "Girl staring fixedly into the mirror in a dimly lit bathroom",
+     "see": "Die Figur steht im dunklen Badezimmer, eine Kerze brennt.",
+     "text": "Du brauchst dafür nur ein dunkles Bad und eine einzige Kerze.",
+     "image": "Die Figur steht im dunklen Badezimmer, eine Kerze brennt.",
      "who": [
       "du"
      ],
      "place": "bathroom",
      "camera": "still",
-     "sfx": "tick",
+     "sfx": "pop",
      "highlight": [
-      "zehn Sekunden"
+      "Kerze"
      ],
-     "status": "MUT: 80%",
-     "overlay": {
-      "type": "card",
-      "text": "10 SEKUNDEN"
-     },
+     "overlay": null,
      "time": "night",
      "weather": "dark",
      "props": [
-      "mirror"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "watch",
-       "emotion": "surprised",
-       "pos": "center",
-       "speaks": true
-      }
+      "candle"
      ],
      "shot": "wide",
      "mood": "tense",
      "who_desc": "",
      "place_desc": "",
-     "hud": ""
+     "hud": "",
+     "status": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "curious",
+       "emote": "",
+       "pos": "center",
+       "speaks": false
+      }
+     ]
     },
     {
-     "see": "Grafik zeigt das Gehirn, wie es langweilige Signale filtert.",
-     "text": "Starrst du bei schwachem Licht unbeweglich auf deine eigene Nase, ermüden die Augen.",
-     "image": "Brain character wearing glasses getting tired looking at repetitive visual signals",
+     "see": "Die Figur starrt reglos in den Spiegel.",
+     "text": "Dann starrst du dir im Spiegel reglos in die Augen.",
+     "image": "Die Figur starrt reglos in den Spiegel.",
      "who": [
-      "gehirn"
+      "du"
      ],
-     "place": "bad",
+     "place": "bathroom",
      "camera": "still",
      "sfx": "none",
      "highlight": [
-      "Augen"
+      "reglos"
      ],
      "overlay": null,
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "shot": "wide",
+     "mood": "tense",
      "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "watch",
+       "emotion": "",
+       "emote": "",
+       "pos": "center",
+       "speaks": false
+      }
+     ]
+    },
+    {
+     "see": "Im Spiegel versinkt der Rand des Gesichts im Dunkeln.",
+     "text": "Nach etwa einer Minute verblasst der Rand deines Gesichts, und deine Haare versinken im Dunkeln.",
+     "image": "Im Spiegel versinkt der Rand des Gesichts im Dunkeln.",
+     "who": [
+      "du"
+     ],
+     "place": "bathroom",
+     "camera": "still",
+     "sfx": "whoosh",
+     "highlight": [
+      "verblasst"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "EINE MINUTE"
+     },
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "shot": "wide",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "pos": "center",
+       "speaks": false
+      }
+     ]
+    },
+    {
+     "see": "Das Gehirn erklärt und winkt ab.",
+     "text": "Schuld ist dein Gehirn: Was sich nicht verändert, hält es für unwichtig.",
+     "image": "Das Gehirn erklärt und winkt ab.",
+     "who": [
+      "gehirn"
+     ],
+     "place": "bathroom",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "Gehirn"
+     ],
+     "overlay": null,
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
      "actors": [
       {
        "id": "gehirn",
        "action": "talk",
        "emotion": "",
        "emote": "",
-       "speaks": true,
-       "pos": "center"
+       "pos": "center",
+       "speaks": false
       }
-     ],
-     "place_desc": "bathroom",
-     "hud": "",
-     "status": ""
+     ]
     },
     {
-     "see": "Das Gehirn schaltet die äußeren Bereiche des Bildes stumm.",
-     "text": "Wissenschaftler nennen diese Täuschung den Troxler-Effekt.",
-     "image": "Brain character pointing at a blackboard displaying optical illusion diagrams",
+     "see": "Im Spiegel ist nur noch die Mitte des Gesichts zu sehen.",
+     "text": "Es blendet gleichbleibende Reize einfach aus. Forscher nennen das den Troxler-Effekt.",
+     "image": "Im Spiegel ist nur noch die Mitte des Gesichts zu sehen.",
      "who": [
       "gehirn"
      ],
-     "place": "bad",
-     "camera": "pan_right",
+     "place": "bathroom",
+     "camera": "still",
      "sfx": "ding",
      "highlight": [
       "Troxler-Effekt"
@@ -1604,441 +1675,428 @@
       "type": "tag",
       "text": "TROXLER-EFFEKT"
      },
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "shot": "wide",
+     "mood": "scary",
      "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
      "actors": [
       {
        "id": "gehirn",
        "action": "talk",
        "emotion": "",
        "emote": "",
-       "speaks": true,
-       "pos": "center"
+       "pos": "center",
+       "speaks": false
       }
-     ],
-     "place_desc": "bathroom",
-     "hud": "",
-     "status": ""
+     ]
     },
     {
-     "see": "Das Gesicht im Spiegel verliert am Rand langsam die Konturen.",
-     "text": "Dein Gehirn löscht unbewusst alle Reize am äußeren Rand des Sichtfeldes.",
-     "image": "Close-up of a face in mirror fading into blurry dark shadows around the edges",
-     "who": [
-      "du"
-     ],
-     "place": "bad",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "löscht"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "speaks": true,
-       "pos": "center"
-      }
-     ],
-     "place_desc": "bathroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Mädchen schaut schockiert auf die verblassenden Haare.",
-     "text": "Deine Haare versinken plötzlich in tiefer Dunkelheit.",
-     "image": "Girl reacting with widened eyes as hair shadows blur into background darkness",
-     "who": [
-      "du"
-     ],
-     "place": "bad",
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "Dunkelheit"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "speaks": true,
-       "pos": "center"
-      }
-     ],
-     "place_desc": "bathroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafik: Zähler für Herzfrequenz schießt nach oben.",
-     "text": "Nur: Wie füllt dein Kopf diesen plötzlichen Hohlraum wieder aus?",
-     "image": "Graphic pulse line beating rapidly showing sudden spike in heart rate",
+     "see": "Großes Fragezeichen.",
+     "text": "Aber womit füllt dein Kopf die leeren Stellen?",
+     "image": "Großes Fragezeichen.",
      "who": [],
-     "place": "bad",
+     "place": "bathroom",
      "camera": "still",
      "sfx": "none",
      "highlight": [
-      "Hohlraum"
+      "leeren Stellen"
      ],
      "overlay": {
       "type": "question",
-      "text": "WARUM?"
+      "text": "UND DANN?"
      },
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "shot": "wide",
+     "mood": "scary",
      "who_desc": "",
-     "place_desc": "bathroom",
+     "place_desc": "",
      "hud": "",
      "status": ""
     },
     {
-     "see": "Das Gehirn zeichnet mit Stift ein Monstergesicht.",
-     "text": "Er erfindet einfach Schatten und fremde Konturen hinzu.",
-     "image": "Brain character rapidly drawing weird creepy monster facial features on a pad",
+     "see": "Das Gehirn überlegt und bastelt.",
+     "text": "Er rät einfach und bastelt aus Schatten und Erinnerungen etwas Neues.",
+     "image": "Das Gehirn überlegt und bastelt.",
      "who": [
       "gehirn"
      ],
-     "place": "bad",
-     "camera": "pan_left",
+     "place": "bathroom",
+     "camera": "still",
      "sfx": "pop",
      "highlight": [
-      "erfindet"
+      "rät"
      ],
      "overlay": null,
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "shot": "wide",
+     "mood": "calm",
      "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
      "actors": [
       {
        "id": "gehirn",
-       "action": "talk",
+       "action": "think",
        "emotion": "",
        "emote": "",
-       "speaks": true,
-       "pos": "center"
+       "pos": "center",
+       "speaks": false
       }
-     ],
-     "place_desc": "bathroom",
-     "hud": "",
-     "status": ""
+     ]
     },
     {
-     "see": "Das Spiegelbild bekommt verzerrte, riesige Augen.",
-     "text": "Du siehst deine Augen auf einmal riesig und pechschwarz werden.",
-     "image": "Mirror reflection showing eyes expanding into dark voids with scared facial expression",
+     "see": "Im Spiegel werden die Augen riesig und schwarz.",
+     "text": "Plötzlich wirken deine Augen riesig und pechschwarz.",
+     "image": "Im Spiegel werden die Augen riesig und schwarz.",
      "who": [
       "du"
      ],
-     "place": "bad",
-     "camera": "zoom_in",
+     "place": "bathroom",
+     "camera": "still",
      "sfx": "boom",
      "highlight": [
       "pechschwarz"
      ],
-     "status": "MUT: 40%",
-     "overlay": {
-      "type": "card",
-      "text": "VERZERRUNG"
-     },
+     "overlay": null,
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "shot": "wide",
+     "mood": "scary",
      "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
      "actors": [
       {
        "id": "du",
        "action": "talk",
        "emotion": "",
        "emote": "",
-       "speaks": true,
-       "pos": "center"
+       "pos": "center",
+       "speaks": false
       }
-     ],
-     "place_desc": "bathroom",
-     "hud": ""
+     ]
     },
     {
-     "see": "Das Spiegelbild hat ein verzehrtes gruseliges Lächeln.",
-     "text": "Viele Menschen erkennen darin eine unheimliche Fratze oder ein Monster.",
-     "image": "Creepy distorted shadow reflection in mirror with unnatural wide grin",
+     "see": "Im Spiegel grinst eine Fratze.",
+     "text": "Dein Mund verzieht sich zu einer fremden Fratze.",
+     "image": "Im Spiegel grinst eine Fratze.",
      "who": [
       "du"
      ],
-     "place": "bad",
+     "place": "bathroom",
      "camera": "still",
-     "sfx": "none",
+     "sfx": "boom",
      "highlight": [
-      "Monster"
+      "Fratze"
      ],
      "overlay": null,
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "shot": "wide",
+     "mood": "scary",
      "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
      "actors": [
       {
        "id": "du",
        "action": "talk",
        "emotion": "",
        "emote": "",
-       "speaks": true,
-       "pos": "center"
+       "pos": "center",
+       "speaks": false
       }
-     ],
-     "place_desc": "bathroom",
-     "hud": "",
-     "status": ""
+     ]
     },
     {
-     "see": "Grafik: Studie zeigt achtzig Prozent der Tester hatten Angst.",
-     "text": "Viele Menschen erleben dabei sogar plötzliche Angstgefühle.",
-     "image": "Graphic displaying eighty percent statistic with alarming visuals",
-     "who": [],
-     "place": "bad",
+     "see": "Die Figur weicht erschrocken vom Spiegel zurück.",
+     "text": "In einem Experiment sah fast jede zweite Testperson unheimliche Fantasiewesen.",
+     "image": "Die Figur weicht erschrocken vom Spiegel zurück.",
+     "who": [
+      "du"
+     ],
+     "place": "bathroom",
+     "camera": "still",
+     "sfx": "whoosh",
+     "highlight": [
+      "jede zweite"
+     ],
+     "overlay": null,
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "shot": "wide",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "scared",
+       "emote": "",
+       "pos": "center",
+       "speaks": false
+      }
+     ]
+    },
+    {
+     "see": "Die Figur schaut ungläubig.",
+     "text": "Manche erkannten statt sich selbst einen Elternteil oder einen völlig Fremden.",
+     "image": "Die Figur schaut ungläubig.",
+     "who": [
+      "du"
+     ],
+     "place": "bathroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Fremden"
+     ],
+     "overlay": null,
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "",
+       "pos": "center",
+       "speaks": false
+      }
+     ]
+    },
+    {
+     "see": "Das Gehirn beruhigt.",
+     "text": "Das ist kein Geist und kein Fluch, sondern dein Gehirn, das Lücken füllt.",
+     "image": "Das Gehirn beruhigt.",
+     "who": [
+      "gehirn"
+     ],
+     "place": "bathroom",
      "camera": "still",
      "sfx": "ding",
      "highlight": [
-      "achtzig Prozent"
-     ],
-     "overlay": {
-      "type": "counter",
-      "label": "ANGST-QUOTE",
-      "value": 80,
-      "unit": "PROZENT"
-     },
-     "who_desc": "",
-     "place_desc": "bathroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Mädchen drückt vor Angst die Hände an die Brust.",
-     "text": "Aber das ist keine echte Magie oder ein böser Geist.",
-     "image": "Girl holding hands to chest panting heavily in terrified pose",
-     "who": [
-      "du"
-     ],
-     "place": "bad",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
       "kein Geist"
      ],
-     "status": "MUT: 10%",
      "overlay": {
       "type": "stamp",
       "text": "KEIN GEIST",
       "color": "green"
      },
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "shot": "wide",
+     "mood": "calm",
      "who_desc": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "speaks": true,
-       "pos": "center"
-      }
-     ],
-     "place_desc": "bathroom",
-     "hud": ""
-    },
-    {
-     "see": "Das Gehirn sendet Fehler-Meldungen.",
-     "text": "Es ist ein kurzzeitiger Systemfehler in deiner eigenen Wahrnehmung.",
-     "image": "Brain character holding red glowing warning sign while sweating",
-     "who": [
-      "gehirn"
-     ],
-     "place": "bad",
-     "camera": "zoom_out",
-     "sfx": "whoosh",
-     "highlight": [
-      "Systemfehler"
-     ],
-     "overlay": null,
-     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
      "actors": [
       {
        "id": "gehirn",
        "action": "talk",
        "emotion": "",
        "emote": "",
-       "speaks": true,
-       "pos": "center"
+       "pos": "center",
+       "speaks": false
       }
-     ],
-     "place_desc": "bathroom",
-     "hud": "",
-     "status": ""
+     ]
     },
     {
-     "see": "Das Mädchen zuckt zusammen, als das Spiegelbild blinzelt.",
-     "text": "Du denkst, dein Spiegelbild bewegt sich plötzlich völlig unabhängig von dir. Falsch.",
-     "image": "Girl in mirror blinks with delay while real girl stares wide-eyed in horror",
+     "see": "Die Figur blinzelt im dunklen Bad.",
+     "text": "Und der Spuk ist empfindlich: Eine winzige Bewegung deiner Augen genügt.",
+     "image": "Die Figur blinzelt im dunklen Bad.",
      "who": [
       "du"
      ],
-     "place": "bad",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "Falsch"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "FINTE"
-     },
-     "who_desc": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "speaks": true,
-       "pos": "center"
-      }
-     ],
-     "place_desc": "bathroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafik: Uhr zeigt Mikroskunden Verzögerung an.",
-     "text": "Dein Gehirn verarbeitet Bilder nur mit einer minimalen Verzögerung.",
-     "image": "Digital timer displaying microseconds speed count",
-     "who": [],
-     "place": "bad",
+     "place": "bathroom",
      "camera": "still",
-     "sfx": "tick",
-     "highlight": [
-      "Verzögerung"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "bathroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Mädchen hält die Luft an vor dem Spiegel.",
-     "text": "Sobald du deine Augen auch nur einen Millimeter bewegst, bricht alles zusammen.",
-     "image": "Girl holding breath tensely in front of mirror staring sharp",
-     "who": [
-      "du"
-     ],
-     "place": "bad",
-     "camera": "zoom_in",
      "sfx": "none",
      "highlight": [
-      "Millimeter"
+      "winzige Bewegung"
      ],
      "overlay": null,
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "shot": "wide",
+     "mood": "tense",
      "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
      "actors": [
       {
        "id": "du",
-       "action": "talk",
-       "emotion": "",
+       "action": "watch",
+       "emotion": "worried",
        "emote": "",
-       "speaks": true,
-       "pos": "center"
+       "pos": "center",
+       "speaks": false
       }
-     ],
-     "place_desc": "bathroom",
-     "hud": "",
-     "status": ""
+     ]
     },
     {
-     "see": "Das Gesicht im Spiegel wird sofort wieder normal.",
-     "text": "Das schreckliche Monster verschwindet sofort und dein echtes Gesicht erscheint.",
-     "image": "Reflecting mirror returning to normal clear view of calm girl face",
+     "see": "Im Spiegel verschwindet die Fratze, das normale Gesicht ist zurück.",
+     "text": "Sofort verschwindet die Fratze, und dein echtes Gesicht ist wieder da.",
+     "image": "Im Spiegel verschwindet die Fratze, das normale Gesicht ist zurück.",
      "who": [
       "du"
      ],
-     "place": "bad",
+     "place": "bathroom",
      "camera": "still",
      "sfx": "pop",
      "highlight": [
       "verschwindet"
      ],
-     "status": "MUT: 100%",
-     "overlay": {
-      "type": "stamp",
-      "text": "NORMAL",
-      "color": "purple"
-     },
+     "overlay": null,
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "shot": "wide",
+     "mood": "scary",
      "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
      "actors": [
       {
        "id": "du",
        "action": "talk",
        "emotion": "",
        "emote": "",
-       "speaks": true,
-       "pos": "center"
+       "pos": "center",
+       "speaks": false
       }
-     ],
-     "place_desc": "bathroom",
-     "hud": ""
+     ]
     },
     {
-     "see": "Das Mädchen dreht sich um und geht zum Türrahmen.",
-     "text": "Du machst das Licht an und gehst erleichtert ins Bett.",
-     "image": "Girl turning away from mirror toward doorway in bathroom",
+     "see": "Das Bad ist hell, die Figur atmet erleichtert auf.",
+     "text": "Du machst das Licht an und atmest erleichtert durch.",
+     "image": "Das Bad ist hell, die Figur atmet erleichtert auf.",
      "who": [
       "du"
      ],
-     "place": "bad",
-     "camera": "pan_left",
-     "sfx": "whoosh",
+     "place": "bathroom",
+     "camera": "still",
+     "sfx": "pop",
      "highlight": [
       "Licht an"
      ],
      "overlay": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "shot": "wide",
+     "mood": "happy",
      "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
      "actors": [
       {
        "id": "du",
-       "action": "talk",
-       "emotion": "",
+       "action": "happy",
+       "emotion": "happy",
        "emote": "",
-       "speaks": true,
-       "pos": "center"
+       "pos": "center",
+       "speaks": false
       }
-     ],
-     "place_desc": "bathroom",
-     "hud": "",
-     "status": ""
+     ]
     },
     {
-     "see": "Das Mädchen blickt noch einmal zurück zum dunklen Spiegel.",
-     "text": "Trotzdem fragst du dich wieder, was eigentlich passiert, wenn du zu lange in den Spiegel starrst.",
-     "image": "Girl glancing back nervously at the mirror before stepping out into hallway",
+     "see": "Das Gehirn erklärt stolz.",
+     "text": "Der Effekt zeigt nur, wie viel von deiner Welt dein Gehirn in Wahrheit dazuerfindet.",
+     "image": "Das Gehirn erklärt stolz.",
      "who": [
-      "du"
+      "gehirn"
      ],
-     "place": "flur",
+     "place": "bathroom",
      "camera": "still",
      "sfx": "none",
      "highlight": [
-      "Spiegel starrst"
+      "dazuerfindet"
      ],
      "overlay": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "shot": "wide",
+     "mood": "calm",
      "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "pos": "center",
+       "speaks": false
+      }
+     ]
+    },
+    {
+     "see": "Die Figur starrt wieder in den Spiegel.",
+     "text": "Traust du dich heute Abend, eine Minute lang in den Spiegel zu starren?",
+     "image": "Die Figur starrt wieder in den Spiegel.",
+     "who": [
+      "du"
+     ],
+     "place": "bathroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Traust du dich"
+     ],
+     "overlay": null,
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
      "actors": [
       {
        "id": "du",
        "action": "talk",
        "emotion": "",
        "emote": "",
-       "speaks": true,
-       "pos": "center"
+       "pos": "center",
+       "speaks": false
       }
-     ],
-     "place_desc": "hallway",
-     "hud": "",
-     "status": ""
+     ]
     }
    ],
    "hud": "",
@@ -2046,10 +2104,9 @@
   },
   "provider": "gemini",
   "remake": false,
-  "needs": [
-   "nase"
-  ],
+  "needs": [],
   "title": "Starre nie im Dunkeln in den Spiegel",
-  "created": 1795545718.8601458
+  "created": 1795545718.8601458,
+  "checked": "Prüfung 24.11.2026: Drehbuch von Hand berichtigt (eine Minute statt zehn Sekunden, erfundene Verzögerungs-Erklärung gestrichen)"
  }
 }

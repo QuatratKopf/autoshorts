@@ -109,6 +109,17 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   Nach Video 198: Im Feld bis 100 steht das Schild über dem Feld (darunter lag es auf den Untertiteln); eine Jahreszahl als kleine Überschrift einer Grafik entfällt, wenn der
   Satz sie nicht nennt („1859“ über „10 BIO.“); „tauchten … auf“ mit bis zu zwölf Wörtern dazwischen ist kein Tauchgang; bei Mathe-Themen wird auch `lab` zur Mathe-Tafel,
   wenn der Satz weder Labor noch Experiment nennt. Selbsttest: `_math`.
+- Spiegel-Video (Prüfung 24.11.2026, Video 204 „Starre nie im Dunkeln in den Spiegel“ – 74 Sekunden lang stand nur die erschrockene Figur von vorn im dunklen
+  Bad, kein Spiegelbild, keine Fratze; das Gehirn verdeckte die Figur; der Schluss „erleichtert ins Bett“ war ängstlich und dunkel; Titelbild: eine Kerze):
+  Einstellung `"shot": "mirror"` mit `"mirror": normal | stare | fade | void | monster | snap | clear` (`stage._mirror_frame`, `stage.mirror_glass`): Blick über
+  die Schulter in den Badezimmerspiegel (Rahmen, Ablage, Kerze, unscharfer Hinterkopf); im Glas die Figur von vorn – der Rand versinkt im Dunkeln (fade), die
+  Augen werden zu schwarzen Höhlen (`pose.extra["void"]`), Fratze mit starrem Grinsen (`pose.extra["grin"]`), bei snap erst die Fratze, dann mit einem Blitz
+  wieder das echte Gesicht; clear = Licht an. Regie `stage._mirror_story` (ganz am Schluss von `direct`; greift, wenn Thema/Titel „Spiegel“ plus Starren,
+  Dunkel, Gesicht oder Troxler nennen – `mirror_story`): führt Buch über den Zustand (Wortlisten `MIRROR_FADE_RE`, `MIRROR_VOID_RE`, `MIRROR_MON_RE`,
+  `MIRROR_BACK_RE`), erstes Bild = schwarze Augen als Vorgriff, höchstens zwei Spiegel-Bilder hintereinander (Fratze und Auflösung immer). Das Gehirn erklärt
+  ohne Angstgesicht; „Licht an“ macht das Bad hell, erleichterte Sätze sind froh. Titelbild: `stage.mirror_sticker` (Spiegel mit Fratze).
+  Für alle Videos: Die Großaufnahme des Gehirns steht mittig (war links angeschnitten); stellt die Regie das Gehirn neben die Figur (`BODY_BRAIN_RE`), ist es
+  kleiner und steht weiter rechts (stand halb vor ihr). Selbsttest: `_mirror`.
 - Waldfrosch (Prüfung 24.11.2026, Video 199 „Der Waldfrosch: Der Zombie der Tierwelt friert einfach ein“ – gezeigt wurde ein knallgelber, lächelnder Pfeilgiftfrosch
   im Schnee, ein Gehirn auf Beinen, ein Eisbrocken ohne Tier, sechs Sekunden leerer Wald mit Sonne): Wesen `woodfrog` (`extras.creature`: braun mit dunkler Augenmaske;
   action `frozen` = blaugrau, Augen zu, im halb durchsichtigen Eisblock mit Reif-Sternen; `thaw` = Rest-Eis, Tropfen, Pfütze, blinzelt; `hop`). `stage._frost_frog`
