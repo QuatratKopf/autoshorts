@@ -7623,10 +7623,13 @@
   "look": "cartoon",
   "mp4": true,
   "zernio_id": "6b057a9f471bb6b8af486301",
-  "yt_status": "Zernio: published",
+  "yt_status": "public",
   "yt_id": "WwTi_Agf_v0",
   "tt_status": "Zernio: published",
   "tt_publish_id": "zernio:6b057a9f471bb6b8af486301",
-  "error": null
+  "error": null,
+  "yt_thumb_at": 1795522877.9047482,
+  "yt_thumb_tries": 1,
+  "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":"
  }
 ]
