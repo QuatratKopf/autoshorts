@@ -1,5 +1,5 @@
 {
- "updated": 1795486671.8893416,
+ "updated": 1795488480.8644695,
  "enough": true,
  "counted": 38,
  "total": 40,
@@ -81,10 +81,10 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 5,
-   "avg_views": 1390,
+   "avg_views": 1391,
    "avg_likes": 12.0,
    "like_rate": 0.86,
-   "avg_score": 1612
+   "avg_score": 1613
   },
   {
    "slug": "grusel",
@@ -123,9 +123,9 @@
  ],
  "words_bad": [
   "remix",
-  "bekanntes",
   "erkennst",
   "lied",
+  "bekanntes",
   "glas"
  ],
  "top": [
@@ -195,11 +195,11 @@
    "id": 189,
    "title": "Jede Scheibe ein Ton: Glas-Remix eines Klassikers",
    "category": "musik",
-   "views": 550,
+   "views": 554,
    "likes": 10,
    "comments": 1,
    "shares": 0,
-   "score": 730
+   "score": 734
   },
   {
    "id": 44,
