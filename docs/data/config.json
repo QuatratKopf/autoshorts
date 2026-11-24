@@ -251,7 +251,7 @@
    ],
    "trends": false,
    "topic_rules": "Es geht um Liebe, Verliebtsein, Romantik, große Gesten, Wiedersehen, erste Liebe, Herzklopfen – als Liebesgeschichte ODER als Liste ('3 Zeichen für echte Liebe', 'Woran du merkst …', 'Gesten, die …'); wechsle zwischen beiden ab. Nichts Gruseliges, keine Trennungs-Dramen mit Streit oder Gewalt, nichts Anzügliches, keine Promi-Beziehungen, keine echten Privatpersonen.",
-   "enabled": true
+   "enabled": false
   },
   {
    "slug": "nachricht",
@@ -281,36 +281,5 @@
    "enabled": true
   }
  ],
- "queue": [
-  {
-   "id": "qb4ddjhrf",
-   "category": "comedy",
-   "text": "Typische nervige Nachbarn, die wirklich jeder kennt",
-   "created": 1794956617.472
-  },
-  {
-   "id": "qzcscan52",
-   "category": "comedy",
-   "text": "Besondere familiäre Momente an großen Feiertagen",
-   "created": 1794956624.401
-  },
-  {
-   "id": "q3tsxaysj",
-   "category": "whatif",
-   "text": "Was wäre, wenn man ein Wesen aus verschiedenen Tierarten erschafft?",
-   "created": 1794956634.711
-  },
-  {
-   "id": "qrsauuc3k",
-   "category": "whatif",
-   "text": "Absurde Alltagssituationen, in denen Technologie völlig verrückt spielt",
-   "created": 1794956639.931
-  },
-  {
-   "id": "qa5v1ywsb",
-   "category": "tiere",
-   "text": "Tiere, die extrem niedlich aussehen, aber tödlich gefährlich sind",
-   "created": 1794956650.083
-  }
- ]
+ "queue": []
 }
