@@ -7754,5 +7754,44 @@
   "slot": "2026-11-24 21:00",
   "review_at": 1795546439.6939223,
   "error": "Bei der Prüfung verworfen: Prüfung: Spiegel-Video ohne Spiegelbild – die Figur steht nur erschrocken im dunklen Bad, kein verzerrtes Gesicht; Gehirn verdeckt die Figur; Schluss ängstlich statt erleichtert"
+ },
+ {
+  "id": 205,
+  "category": "grusel",
+  "topic": "Was dein Gehirn tut, wenn du im Spiegel an die falsche Stelle starrst",
+  "status": "rendered",
+  "created": 1795548328.8486297,
+  "title": "Starre nie im Dunkeln in den Spiegel",
+  "description": "Starre im Halbdunkel in den Spiegel, und nach etwa einer Minute verändert sich dein Gesicht.\nDahinter steckt kein Spuk, sondern der Troxler-Effekt: Dein Gehirn blendet Gleichbleibendes aus und füllt die Lücken selbst.\nTraust du dich, das heute Abend zu testen?",
+  "hashtags": [
+   "#shorts",
+   "#grusel",
+   "#spiegel",
+   "#psychologie",
+   "#fakten",
+   "#viral",
+   "#fyp"
+  ],
+  "tags": [
+   "spiegel phänomen",
+   "troxler effekt",
+   "gruselige fakten",
+   "gehirn illusionen",
+   "spiegel nachts",
+   "psychologie fakten",
+   "gruselgeschichten"
+  ],
+  "thumb_text": "SCHAU NICHT REIN",
+  "missing": null,
+  "cover_ms": 73296,
+  "duration": 73.2,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]

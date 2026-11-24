@@ -1,0 +1,408 @@
+{
+ "title": "Starre nie im Dunkeln in den Spiegel",
+ "scenes": [
+  {
+   "text": "Starre eine Minute im Halbdunkel in den Spiegel, und dein Gesicht wird zum Monster.",
+   "see": "Im Badezimmerspiegel hat das Spiegelbild riesige schwarze Augen.",
+   "place": "bathroom",
+   "time": "night",
+   "weather": "dark",
+   "actors": [
+    {
+     "id": "du",
+     "action": "idle",
+     "emotion": "",
+     "emote": "",
+     "pos": "center",
+     "speaks": false,
+     "say": "",
+     "hold": "",
+     "facing": "",
+     "kind": ""
+    }
+   ],
+   "shot": "mirror",
+   "mood": "scary"
+  },
+  {
+   "text": "Du brauchst dafür nur ein dunkles Bad und eine einzige Kerze.",
+   "see": "Die Figur steht im dunklen Badezimmer, eine Kerze brennt.",
+   "place": "bathroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "candle"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "look_around",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "insert",
+   "mood": "tense"
+  },
+  {
+   "text": "Dann starrst du dir im Spiegel reglos in die Augen.",
+   "see": "Die Figur starrt reglos in den Spiegel.",
+   "place": "bathroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "idle",
+     "emotion": "",
+     "emote": "",
+     "pos": "center",
+     "speaks": false,
+     "say": "",
+     "hold": "",
+     "facing": "",
+     "kind": ""
+    }
+   ],
+   "shot": "mirror",
+   "mood": "tense"
+  },
+  {
+   "text": "Nach etwa einer Minute verblasst der Rand deines Gesichts, und deine Haare versinken im Dunkeln.",
+   "see": "Im Spiegel versinkt der Rand des Gesichts im Dunkeln.",
+   "place": "bathroom",
+   "time": "night",
+   "weather": "dark",
+   "actors": [
+    {
+     "id": "du",
+     "action": "idle",
+     "emotion": "",
+     "emote": "",
+     "pos": "center",
+     "speaks": false,
+     "say": "",
+     "hold": "",
+     "facing": "",
+     "kind": ""
+    }
+   ],
+   "shot": "mirror",
+   "mood": "scary",
+   "overlay": {
+    "type": "card",
+    "text": "EINE MINUTE"
+   }
+  },
+  {
+   "text": "Schuld ist dein Gehirn: Was sich nicht verändert, hält es für unwichtig.",
+   "see": "Das Gehirn erklärt und winkt ab.",
+   "place": "bathroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": false,
+     "action": "walk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "center"
+    }
+   ],
+   "mood": "scary"
+  },
+  {
+   "text": "Es blendet gleichbleibende Reize einfach aus. Forscher nennen das den Troxler-Effekt.",
+   "see": "Im Spiegel ist nur noch die Mitte des Gesichts zu sehen.",
+   "place": "bathroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "idle",
+     "emotion": "",
+     "emote": "",
+     "pos": "center",
+     "speaks": false,
+     "say": "",
+     "hold": "",
+     "facing": "",
+     "kind": ""
+    }
+   ],
+   "shot": "mirror",
+   "mood": "scary",
+   "overlay": {
+    "type": "tag",
+    "text": "TROXLER-EFFEKT"
+   }
+  },
+  {
+   "text": "Aber womit füllt dein Kopf die leeren Stellen?",
+   "see": "Großes Fragezeichen.",
+   "place": "bathroom",
+   "time": "night",
+   "shot": "graphic",
+   "mood": "scary",
+   "graphic": {
+    "type": "question",
+    "text": "UND DANN?",
+    "dark": false
+   }
+  },
+  {
+   "text": "Er rät einfach und bastelt aus Schatten und Erinnerungen etwas Neues.",
+   "see": "Das Gehirn überlegt und bastelt.",
+   "place": "bathroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": false,
+     "action": "think",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary"
+  },
+  {
+   "text": "Plötzlich wirken deine Augen riesig und pechschwarz.",
+   "see": "Im Spiegel werden die Augen riesig und schwarz.",
+   "place": "bathroom",
+   "time": "night",
+   "weather": "dark",
+   "actors": [
+    {
+     "id": "du",
+     "action": "idle",
+     "emotion": "",
+     "emote": "",
+     "pos": "center",
+     "speaks": false,
+     "say": "",
+     "hold": "",
+     "facing": "",
+     "kind": ""
+    }
+   ],
+   "shot": "mirror",
+   "mood": "scary"
+  },
+  {
+   "text": "Dein Mund verzieht sich zu einer fremden Fratze.",
+   "see": "Im Spiegel grinst eine Fratze.",
+   "place": "bathroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "idle",
+     "emotion": "",
+     "emote": "",
+     "pos": "center",
+     "speaks": false,
+     "say": "",
+     "hold": "",
+     "facing": "",
+     "kind": ""
+    }
+   ],
+   "shot": "mirror",
+   "mood": "scary"
+  },
+  {
+   "text": "In einem Experiment sah fast jede zweite Testperson unheimliche Fantasiewesen.",
+   "see": "Die Figur weicht erschrocken vom Spiegel zurück.",
+   "place": "lab",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary"
+  },
+  {
+   "text": "Manche erkannten statt sich selbst einen Elternteil oder einen völlig Fremden.",
+   "see": "Die Figur schaut ungläubig.",
+   "place": "bathroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Das ist kein Geist und kein Fluch, sondern dein Gehirn, das Lücken füllt.",
+   "see": "Das Gehirn beruhigt.",
+   "place": "bathroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": false,
+     "action": "talk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "scary",
+   "overlay": {
+    "type": "stamp",
+    "text": "KEIN GEIST",
+    "color": "green"
+   }
+  },
+  {
+   "text": "Und der Spuk ist empfindlich: Eine winzige Bewegung deiner Augen genügt.",
+   "see": "Die Figur blinzelt im dunklen Bad.",
+   "place": "bathroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "watch",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Sofort verschwindet die Fratze, und dein echtes Gesicht ist wieder da.",
+   "see": "Im Spiegel verschwindet die Fratze, das normale Gesicht ist zurück.",
+   "place": "bathroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "idle",
+     "emotion": "",
+     "emote": "",
+     "pos": "center",
+     "speaks": false,
+     "say": "",
+     "hold": "",
+     "facing": "",
+     "kind": ""
+    }
+   ],
+   "shot": "mirror",
+   "mood": "scary"
+  },
+  {
+   "text": "Du machst das Licht an und atmest erleichtert durch.",
+   "see": "Das Bad ist hell, die Figur atmet erleichtert auf.",
+   "place": "bathroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "happy",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Der Effekt zeigt nur, wie viel von deiner Welt dein Gehirn in Wahrheit dazuerfindet.",
+   "see": "Das Gehirn erklärt stolz.",
+   "place": "bathroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": false,
+     "action": "talk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Traust du dich heute Abend, eine Minute lang in den Spiegel zu starren?",
+   "see": "Die Figur starrt wieder in den Spiegel.",
+   "place": "bathroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "action": "idle",
+     "emotion": "",
+     "emote": "",
+     "pos": "center",
+     "speaks": false,
+     "say": "",
+     "hold": "",
+     "facing": "",
+     "kind": ""
+    }
+   ],
+   "shot": "mirror",
+   "mood": "tense"
+  }
+ ]
+}
