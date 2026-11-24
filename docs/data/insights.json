@@ -1,5 +1,5 @@
 {
- "updated": 1795517445.451497,
+ "updated": 1795519252.5360785,
  "enough": true,
  "counted": 39,
  "total": 40,
@@ -27,10 +27,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 3,
-   "avg_views": 1803,
+   "avg_views": 1804,
    "avg_likes": 43.3,
    "like_rate": 2.4,
-   "avg_score": 2486
+   "avg_score": 2487
   },
   {
    "slug": "mysterien",
@@ -132,8 +132,8 @@
  "words_bad": [
   "remix",
   "bekanntes",
-  "lied",
   "erkennst",
+  "lied",
   "glas"
  ],
  "top": [
