@@ -1,5 +1,5 @@
 {
- "updated": 1795638430.8627822,
+ "updated": 1795640276.4600174,
  "enough": true,
  "counted": 42,
  "total": 45,
@@ -10,27 +10,36 @@
    "name": "🤪 Comedy",
    "n": 5,
    "avg_views": 2284,
-   "avg_likes": 46.6,
-   "like_rate": 2.04,
-   "avg_score": 3003
+   "avg_likes": 46.8,
+   "like_rate": 2.05,
+   "avg_score": 3006
   },
   {
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 1,
-   "avg_views": 2372,
+   "avg_views": 2373,
    "avg_likes": 34.0,
    "like_rate": 1.43,
-   "avg_score": 2882
+   "avg_score": 2883
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 3,
    "avg_views": 1804,
-   "avg_likes": 43.3,
-   "like_rate": 2.4,
-   "avg_score": 2487
+   "avg_likes": 43.7,
+   "like_rate": 2.42,
+   "avg_score": 2493
+  },
+  {
+   "slug": "liebe",
+   "name": "💕 Liebe",
+   "n": 1,
+   "avg_views": 1504,
+   "avg_likes": 63.0,
+   "like_rate": 4.19,
+   "avg_score": 2449
   },
   {
    "slug": "mysterien",
@@ -42,22 +51,13 @@
    "avg_score": 2434
   },
   {
-   "slug": "liebe",
-   "name": "💕 Liebe",
-   "n": 1,
-   "avg_views": 1502,
-   "avg_likes": 62.0,
-   "like_rate": 4.13,
-   "avg_score": 2432
-  },
-  {
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 11,
-   "avg_views": 1723,
+   "avg_views": 1724,
    "avg_likes": 46.8,
    "like_rate": 2.72,
-   "avg_score": 2428
+   "avg_score": 2429
   },
   {
    "slug": "fakten",
@@ -66,43 +66,43 @@
    "avg_views": 1700,
    "avg_likes": 44.1,
    "like_rate": 2.6,
-   "avg_score": 2370
+   "avg_score": 2371
   },
   {
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 3,
-   "avg_views": 1350,
+   "avg_views": 1352,
    "avg_likes": 38.7,
    "like_rate": 2.86,
-   "avg_score": 1930
+   "avg_score": 1932
   },
   {
    "slug": "motivation",
    "name": "🔥 Motivation",
    "n": 1,
-   "avg_views": 921,
+   "avg_views": 922,
    "avg_likes": 49.0,
-   "like_rate": 5.32,
-   "avg_score": 1696
+   "like_rate": 5.31,
+   "avg_score": 1697
   },
   {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 6,
    "avg_views": 1226,
-   "avg_likes": 10.3,
-   "like_rate": 0.84,
-   "avg_score": 1416
+   "avg_likes": 10.5,
+   "like_rate": 0.86,
+   "avg_score": 1419
   },
   {
    "slug": "grusel",
    "name": "👻 Grusel",
    "n": 2,
-   "avg_views": 396,
+   "avg_views": 398,
    "avg_likes": 17.5,
-   "like_rate": 4.42,
-   "avg_score": 688
+   "like_rate": 4.39,
+   "avg_score": 691
   }
  ],
  "weights": {
@@ -116,10 +116,10 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2284 Aufrufe, 2.04 % Likes).",
-  "Schwächste Kategorie: 👻 Grusel (Ø 396 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2298 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2429 zu 1849 Punkte).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2284 Aufrufe, 2.05 % Likes).",
+  "Schwächste Kategorie: 👻 Grusel (Ø 398 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2300 zu 706 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2432 zu 1850 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -128,24 +128,24 @@
  ],
  "words_bad": [
   "remix",
-  "bekanntes",
   "lied",
   "erkennst",
+  "bekanntes",
   "glas",
-  "scheibe",
-  "klassikers",
-  "jede"
+  "jede",
+  "eines",
+  "klassikers"
  ],
  "top": [
   {
    "id": 168,
    "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
    "category": "comedy",
-   "views": 3947,
-   "likes": 53,
+   "views": 3948,
+   "likes": 54,
    "comments": 1,
    "shares": 0,
-   "score": 4772
+   "score": 4788
   },
   {
    "id": 46,
@@ -171,11 +171,11 @@
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 2061,
+   "views": 2062,
    "likes": 68,
    "comments": 0,
    "shares": 0,
-   "score": 3081
+   "score": 3082
   },
   {
    "id": 139,
@@ -193,21 +193,21 @@
    "id": 205,
    "title": "Starre nie im Dunkeln in den Spiegel",
    "category": "grusel",
-   "views": 300,
+   "views": 304,
    "likes": 14,
    "comments": 2,
    "shares": 0,
-   "score": 570
+   "score": 574
   },
   {
    "id": 196,
    "title": "Jede Scheibe ein Ton: Lo-Fi-Remix eines Klassikers",
    "category": "musik",
-   "views": 343,
-   "likes": 1,
+   "views": 345,
+   "likes": 2,
    "comments": 0,
    "shares": 0,
-   "score": 358
+   "score": 375
   },
   {
    "id": 44,
