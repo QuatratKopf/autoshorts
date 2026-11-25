@@ -1,5 +1,5 @@
 {
- "updated": 1795573434.7177196,
+ "updated": 1795575243.294465,
  "enough": true,
  "counted": 40,
  "total": 42,
@@ -63,10 +63,10 @@
    "slug": "liebe",
    "name": "💕 Liebe",
    "n": 1,
-   "avg_views": 1483,
+   "avg_views": 1484,
    "avg_likes": 61.0,
    "like_rate": 4.11,
-   "avg_score": 2398
+   "avg_score": 2399
   },
   {
    "slug": "storys",
@@ -118,7 +118,7 @@
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2283 Aufrufe, 2.04 % Likes).",
   "Schwächste Kategorie: 👻 Grusel (Ø 492 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2343 zu 706 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2344 zu 706 Punkte).",
   "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2512 zu 1844 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
@@ -132,20 +132,20 @@
   "erkennst",
   "bekanntes",
   "glas",
+  "scheibe",
   "jede",
-  "klassikers",
-  "eines"
+  "klassikers"
  ],
  "top": [
   {
    "id": 168,
    "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
    "category": "comedy",
-   "views": 3945,
+   "views": 3946,
    "likes": 53,
    "comments": 1,
    "shares": 0,
-   "score": 4770
+   "score": 4771
   },
   {
    "id": 46,
