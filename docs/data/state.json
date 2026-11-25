@@ -1,5 +1,5 @@
 {
- "last_category": "fakten",
+ "last_category": "vergleich",
  "done_slots": [
   "2026-11-08 18:00",
   "2026-11-11 18:00",
@@ -44,7 +44,8 @@
   "2026-11-24 18:00",
   "2026-11-24 21:00",
   "2026-11-25 13:00",
-  "2026-11-25 18:00"
+  "2026-11-25 18:00",
+  "2026-11-25 21:00"
  ],
  "used_queue": [
   "qkv0cbgez",
@@ -62,30 +63,30 @@
   "qa5v1ywsb"
  ],
  "last_stats": 1795629890.86561,
- "next_id": 213,
+ "next_id": 214,
  "connected": {
   "youtube": {
    "name": "Wissens Wert 💬",
    "since": "2026-11-10"
   }
  },
- "voice_wps": 2.799,
+ "voice_wps": 2.964,
  "last_trends": 1795624519.6399674,
  "tiktok_handle": "wissens..wert",
  "last_poster": {
   "hero": "",
-  "palette": 0,
-  "video": 212
+  "palette": 2,
+  "video": 213
  },
  "cat_credit": {
-  "fakten": -4.569999999999997,
-  "tiere": 0.5300000000000029,
-  "whatif": -1.6599999999999946,
-  "comedy": -2.159999999999999,
-  "vergleich": 3.7100000000000035,
-  "motivation": 3.7100000000000035,
-  "grusel": -3.1899999999999986,
-  "nachricht": 1.0500000000000027
+  "fakten": -3.4999999999999964,
+  "tiere": 1.650000000000003,
+  "whatif": -0.5699999999999945,
+  "comedy": -0.8099999999999987,
+  "vergleich": -3.8199999999999967,
+  "motivation": 4.910000000000004,
+  "grusel": -2.6899999999999986,
+  "nachricht": 2.2500000000000027
  },
  "bounce_songs": [
   "cc:a0374037-c7fc-4467-94de-28d2e36fc183",

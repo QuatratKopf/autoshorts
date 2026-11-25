@@ -8090,5 +8090,48 @@
   "look": "cartoon",
   "mp4": true,
   "error": "Bei der Prüfung verworfen: Prüfung: versehentlicher Doppelbau desselben Drehbuchs wie Video 211 (Auslöser wurde nach einem GitHub-Fehler zweimal angenommen)"
+ },
+ {
+  "id": 213,
+  "category": "vergleich",
+  "topic": "Spätkauf gegen Supermarkt – wer verdient mehr?",
+  "status": "review",
+  "created": 1795630197.895404,
+  "title": "Spätkauf gegen Supermarkt: Wer verdient mehr?",
+  "description": "Spätkauf oder Supermarkt - wer macht das echte Geld?\nHier siehst du die Einnahmen und die echten Kosten von beiden Läden.\nGehst du lieber nachts zum Späti oder groß einkaufen?",
+  "hashtags": [
+   "#shorts",
+   "#späti",
+   "#supermarkt",
+   "#geldverdienen",
+   "#business",
+   "#vergleich",
+   "#deutschland",
+   "#fyp"
+  ],
+  "tags": [
+   "spätkauf",
+   "supermarkt",
+   "wer verdient mehr",
+   "kiosk",
+   "einnahmen",
+   "kosten",
+   "business vergleich",
+   "gewinn"
+  ],
+  "thumb_text": "WER GEWINNT?",
+  "missing": null,
+  "cover_ms": 69469,
+  "duration": 69.4,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-25 21:00",
+  "review_at": 1795631140.5173454
  }
 ]

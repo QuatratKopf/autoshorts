@@ -1,0 +1,494 @@
+{
+ "title": "Spätkauf gegen Supermarkt: Wer verdient mehr?",
+ "scenes": [
+  {
+   "text": "Spätkauf gegen Supermarkt: Wer macht eigentlich mehr Gewinn?",
+   "see": "Grafik zeigt das Duell Spätkauf gegen Supermarkt",
+   "place": "supermarket",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "happy",
+   "crowd": "cheer",
+   "graphic": {
+    "type": "versus",
+    "kicker": "GEWINN-CHECK",
+    "left": "SPÄTI",
+    "right": "SUPERMARKT",
+    "dark": false
+   }
+  },
+  {
+   "text": "Und die letzte Zahl zeigt, wer am Ende wirklich reich wird.",
+   "see": "Du stehst nachdenklich im Laden und blickst auf eine Zahl",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Nachts um zwei läuft das Geschäft mit Bier und Chips auf Hochtouren.",
+   "see": "Im Späti brennt nachts Licht, Bier und Chips stehen im Regal",
+   "place": "supermarket",
+   "time": "night",
+   "actors": [
+    {
+     "id": "murat",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "crowd": "walk",
+   "overlay": {
+    "type": "tag",
+    "text": "NACHTSCHICHT"
+   }
+  },
+  {
+   "text": "Nach Miete und Strom bleiben dem Späti vier Euro Gewinn, aber wer zahlt den Rest?",
+   "see": "Rechner und Geldscheine liegen auf dem Tresen im Späti",
+   "place": "office",
+   "time": "night",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "shot": "insert",
+   "mood": "happy",
+   "crowd": "cheer",
+   "overlay": {
+    "type": "card",
+    "text": "4 EURO GEWINN"
+   }
+  },
+  {
+   "text": "Dazu kommt der Besitzer Murat mit seinem legendären Spruch. Kein Pfand, kein Plausch.",
+   "see": "Murat steht hinter der Kasse und winkt ab",
+   "place": "street",
+   "time": "night",
+   "props": [
+    {
+     "type": "door"
+    }
+   ],
+   "actors": [
+    {
+     "id": "murat",
+     "speaks": true,
+     "action": "point",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Runde zwei. Der Supermarkt holt pro Einkauf stolze fünfundvierzig Euro rein.",
+   "see": "Grafik kündigt die zweite Runde an",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "crowd": "walk",
+   "graphic": {
+    "type": "round",
+    "kicker": "RUNDE 2",
+    "text": "SUPERMARKT",
+    "dark": false
+   }
+  },
+  {
+   "text": "Hier regiert Filialleiterin Sandra mit strengem Blick und Excel-Tabelle.",
+   "see": "Sandra steht streng im Supermarkt vor den Regalen",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "shelf"
+    },
+    {
+     "type": "lib_tabellendokument"
+    }
+   ],
+   "actors": [
+    {
+     "id": "sandra",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "angry",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "crowd": "worried"
+  },
+  {
+   "text": "Nach Abzügen für Logistik und Personal bleiben pro Korb etwa neun Euro hängen.",
+   "see": "Ein Einkaufswagen voll mit Waren rollt durch den Gang",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "point",
+     "emotion": "",
+     "pos": "left",
+     "speaks": true
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "9 EURO GEWINN"
+   }
+  },
+  {
+   "text": "Zwischenstand im Duell. Der Supermarkt liegt vorn.",
+   "see": "Grafik zeigt den Zwischenstand des Duells",
+   "place": "supermarket",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "calm",
+   "crowd": "walk",
+   "graphic": {
+    "type": "score",
+    "kicker": "ZWISCHENSTAND",
+    "value": "0:1",
+    "left": "SPÄTI",
+    "right": "SUPERMARKT",
+    "dark": false
+   }
+  },
+  {
+   "text": "Kommen wir zu den Fixkosten und den harten Zahlen pro Monat.",
+   "see": "Rechner zeigt eine lange Liste mit Fixkosten",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    },
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Der Späti hat jeden Tag zweihundert Kunden und knackt so sechstausend Euro im Monat.",
+   "see": "Viele Kunden stehen im Späti an der Kasse",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "shelf"
+    },
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "murat",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "mood": "calm",
+   "crowd": "walk",
+   "overlay": {
+    "type": "counter",
+    "label": "SPÄTI GEWINN",
+    "value": 6000,
+    "unit": "EURO"
+   }
+  },
+  {
+   "text": "Dazu fährt Murat stolz seinen alten Lieferwagen als Statussymbol vor den Laden.",
+   "see": "Ein alter Lieferwagen parkt vor dem Späti",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "truck"
+    },
+    {
+     "type": "lib_lieferwagen"
+    }
+   ],
+   "actors": [
+    {
+     "id": "murat",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "crowd": "walk"
+  },
+  {
+   "text": "Der Supermarkt bedient täglich tausend Kunden und kommt auf zehntausend Euro Gewinn.",
+   "see": "Grafik zeigt den monatlichen Gewinn des Supermarkts",
+   "place": "supermarket",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "happy",
+   "graphic": {
+    "type": "chart",
+    "kicker": "GEWINN",
+    "value": "10.000 €",
+    "label": "SUPERMARKT",
+    "dark": false
+   }
+  },
+  {
+   "text": "Sandra parkt draußen ihren schicken Firmenwagen. Ein klarer Punkt für sie.",
+   "see": "Ein schicker Firmenwagen steht vor dem Supermarkt",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "car"
+    }
+   ],
+   "actors": [
+    {
+     "id": "sandra",
+     "speaks": true,
+     "action": "smile",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "crowd": "walk"
+  },
+  {
+   "text": "Aber jetzt kommt der Haken, der alles verändert.",
+   "see": "Ein rotes Fragezeichen ploppt im Raum auf",
+   "place": "office",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "badge",
+    "text": "DER HAKEN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Murat steht sieben Tage die Woche selbst hinter der Kasse und schuftet achtzig Stunden.",
+   "see": "Murat schuftet erschöpft hinter der Späti-Kasse",
+   "place": "supermarket",
+   "time": "night",
+   "props": [
+    {
+     "type": "shelf"
+    },
+    {
+     "type": "lib_kasse"
+    }
+   ],
+   "actors": [
+    {
+     "id": "murat",
+     "speaks": true,
+     "action": "cower",
+     "emotion": "sad",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "sad",
+   "overlay": {
+    "type": "card",
+    "text": "80 STUNDEN"
+   }
+  },
+  {
+   "text": "Sein echter Stundenlohn ist am Ende niedriger als der Mindestlohnsatz.",
+   "see": "Ein Stempel drückt ein rotes Minus ins Bild",
+   "place": "office",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "sad",
+   "crowd": "sad",
+   "graphic": {
+    "type": "badge",
+    "kicker": "WARNUNG",
+    "text": "WENIGER ALS MINDESTLOHN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Sandra hingegen delegiert alles und hat nach vierzig Stunden Feierabend.",
+   "see": "Sandra schließt zufrieden die Bürotür nach der Arbeit",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "door"
+    }
+   ],
+   "actors": [
+    {
+     "id": "sandra",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "card",
+    "text": "40 STUNDEN"
+   }
+  },
+  {
+   "text": "Der Supermarkt gewinnt das Duell durch bessere Arbeitszeiten.",
+   "see": "Grafik zeigt den Gewinner des Duells",
+   "place": "supermarket",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "happy",
+   "crowd": "cheer",
+   "graphic": {
+    "type": "badge",
+    "kicker": "SIEGER",
+    "text": "SUPERMARKT GEWINNT",
+    "dark": false
+   },
+   "overlay": {
+    "type": "stamp",
+    "text": "GEWINNER",
+    "color": "green"
+   }
+  },
+  {
+   "text": "Spätkauf gegen Supermarkt. Wer ist eigentlich erfolgreicher?",
+   "see": "Du stehst ratlos zwischen Späti und Supermarkt",
+   "place": "supermarket",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "crowd": "walk"
+  }
+ ]
+}
