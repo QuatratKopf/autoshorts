@@ -2653,6 +2653,24 @@ def main():
         for sc_ in sc:
             frame(sc_, {"du": {"shirt": "lila", "gender": "w", "hair": "ponytail"}, "gehirn": {"kind": "brain"}})
     check("Prüfung 25.11.: Prozent-Zahl bleibt, getragene Hose ist kein Ding, leeres Display ohne Anruf-Großbild", _pruef2511c)
+
+    def _pruef2511d():                                           # Prüfung 25.11.2026 (Video 213, Spätkauf gegen Supermarkt): Murat und Sandra als Zwillinge im blauen Pulli, Plakette „WENIGER ALS MINDESTL“
+        sc = [{"text": "Dazu kommt der Besitzer Murat mit seinem Spruch.", "place": "street", "actors": [{"id": "murat", "action": "point", "pos": "center"}]},
+              {"text": "Hier regiert Filialleiterin Sandra mit strengem Blick.", "place": "supermarket", "actors": [{"id": "sandra", "action": "talk", "pos": "center"}]},
+              {"text": "Die Ärztin Kim hilft dem Forscher und dem Vogel.", "place": "labor", "actors": [{"id": "kim"}, {"id": "forscher"}, {"id": "vogel"}]}]
+        cast = stage.name_cast({"du": {"shirt": "blau", "hair_color": "blond"}}, sc)
+        assert rig.Look.from_spec(cast.get("sandra")).fem and rig.Look.from_spec(cast.get("kim")).fem, f"Frauennamen und „Ärztin Kim“ sind Frauen: {cast}"
+        assert cast.get("murat") and not rig.Look.from_spec(cast["murat"]).fem, f"Murat ist ein Mann mit eigenem Aussehen: {cast}"
+        shirts = [str(v.get("shirt") or "blau") for v in cast.values()]
+        assert len(set(shirts)) == len(shirts), f"keine zwei Figuren im selben Pulli: {shirts}"
+        assert "forscher" not in cast and "vogel" not in cast, f"Rollen und Tiere bekommen kein erfundenes Aussehen: {cast}"
+        c2 = stage.name_cast({"du": {}, "sandra": {"shirt": "grün"}, "tom": {"shirt": "rot", "hat": "cap"}}, sc)
+        assert rig.Look.from_spec(c2["sandra"]).fem and c2["tom"] == {"shirt": "rot", "hat": "cap"}, f"besetzte Sandra ohne Frisur ist eine Frau, andere Besetzung bleibt: {c2}"
+        for sc_ in sc[:2]:
+            frame(sc_, cast)
+        px = lambda txt: sum(1 for v in frame({"shot": "graphic", "text": "x", "graphic": {"type": "badge", "kicker": "WARNUNG", "text": txt}}, t=2.0).convert("L").crop((150, 600, 930, 900)).getdata() if v < 70)   # noqa: E731
+        assert px("WENIGER ALS MINDESTLOHN") != px("WENIGER ALS MINDESTL"), "lange Plakette zeigt den ganzen Text zweizeilig, nicht nach 20 Zeichen abgeschnitten"
+    check("Prüfung 25.11.: unbesetzte Vornamen mit eigenem Aussehen (Frauen als Frauen), lange Plakette zweizeilig", _pruef2511d)
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")
     import collections
     for line, n in collections.Counter(e.strip().splitlines()[-1] + "  @ " + e.strip().splitlines()[-3].strip()[:90] for e in errors).most_common(30):

@@ -6080,6 +6080,56 @@ def balance_cast(cast, seed=0, scenes=None):
     return cast
 
 
+# Figuren, die das Drehbuch beim Vornamen nennt, aber nicht besetzt („murat“, „sandra“ ohne Eintrag in "cast" – Video 213: beide im selben
+# blauen Pulli mit braunem Kurzhaar, die Filialleiterin Sandra als Mann): jede bekommt ihr eigenes Aussehen, Frauen sehen aus wie Frauen.
+FEM_NAMES = set("""anna lena lea mia emma sophie sofia sophia marie maria laura julia lisa sarah sara hannah hanna leonie lina emily emilia clara klara
+nina paula johanna charlotte lotte luisa louisa amelie mila ella ida frieda greta marta martha helga inge ingrid ursula uschi renate monika petra sabine
+susanne sandra andrea claudia nicole stefanie steffi katrin kathrin karin birgit heike silke anja tanja katja nadine melanie jessica jenny jana
+franziska vanessa michelle kim eva ute gisela erika christa elke gabi gabriele brigitte angelika martina kerstin simone daniela christina christine tina
+bettina yvonne ines iris doris antje maren svenja carina karina miriam mirjam judith ruth esther elif ayse aylin fatma zeynep leyla emine selin olga
+natascha elena irina svetlana oma mama tante schwester mutter chefin""".split())
+MALE_NAMES = set("""max paul ben jonas leon finn felix lukas luca noah elias tim tom jan lars sven nils ole moritz david daniel michael thomas andreas stefan
+stephan peter klaus hans karl otto fritz heinz kurt uwe jürgen dieter wolfgang bernd frank ralf rolf markus marcus martin matthias christian tobias
+sebastian florian alexander alex philipp patrick dennis kevin marcel marco mario murat ali mehmet mustafa emre can cem deniz yusuf ahmet hasan ibrahim
+omar jonathan julian niklas nico simon fabian robin erik eric oskar oscar emil anton theo jakob jacob henry henri karim sergej igor dimitri piotr
+opa papa onkel bruder vater chef joshua jona mika elia""".split())
+MALE_LOOKS = ({"shirt": "grün", "hair_color": "schwarz", "gender": "m"}, {"shirt": "rot", "hair_color": "dunkelbraun", "gender": "m"},
+              {"shirt": "orange", "hair_color": "blond", "gender": "m"}, {"shirt": "türkis", "hair_color": "braun", "glasses": True, "gender": "m"},
+              {"shirt": "grau", "hair_color": "rot", "gender": "m"}, {"shirt": "gelb", "hair_color": "schwarz", "skin": "mittel", "gender": "m"})
+
+
+def name_cast(cast, scenes):
+    """Vornamen im Bildplan ohne Besetzung bekommen ein eigenes Aussehen: Frauennamen (Liste, „Filialleiterin Sandra“, „Frau …“) eine
+    Frauenfigur, Männernamen eine Männerfigur – keine zwei im selben Pulli, keiner im Pulli der Hauptfigur. Tiere, Rollen und Wesen
+    („vogel“, „gehirn“, „forscher“) bleiben, wie die Regie sie ohnehin behandelt."""
+    if not isinstance(cast, dict):
+        return cast
+    text_n = " ".join(str(sc.get("text") or "") for sc in (scenes or []) if isinstance(sc, dict))
+    ids_n = []
+    for sc in (scenes or []):
+        for a in ((sc.get("actors") or []) if isinstance(sc, dict) else []):
+            aid = str(a.get("id") or "").strip() if isinstance(a, dict) else ""
+            if aid and aid not in ids_n and not a.get("kind") and not isinstance(a.get("look"), dict):
+                ids_n.append(aid)
+    used_n = {str(v.get("shirt") or "blau").lower() for v in cast.values() if isinstance(v, dict) and not v.get("kind")}
+    for aid in ids_n:
+        low_n = aid.lower()
+        if isinstance(cast.get(aid), dict) and cast[aid] and not cast[aid].get("kind") and low_n in FEM_NAMES and low_n not in MAIN_IDS \
+                and not str(cast[aid].get("gender") or "").strip() and str(cast[aid].get("hair") or "").lower() not in rig.FEM_HAIR:
+            cast[aid] = dict(cast[aid], gender="w", hair="bob")   # besetzt, aber ohne Frisur und Geschlecht: „Sandra“ ist trotzdem eine Frau
+        if low_n in MAIN_IDS or (isinstance(cast.get(aid), dict) and cast[aid]) or not re.fullmatch(r"[a-zäöüß]{2,14}", low_n):
+            continue
+        fem_n = low_n in FEM_NAMES or bool(re.search(r"(?i)\b(?:frau|\w{4,}in)\s+" + re.escape(aid) + r"\b", text_n))
+        if not fem_n and low_n not in MALE_NAMES:
+            continue                                      # kein bekannter Vorname: Rolle, Tier oder Wesen – nichts erfinden
+        pool_n = FEM_LOOKS if fem_n else MALE_LOOKS
+        start_n = sum(map(ord, low_n)) % len(pool_n)
+        look_n = next((pool_n[(start_n + j) % len(pool_n)] for j in range(len(pool_n)) if pool_n[(start_n + j) % len(pool_n)]["shirt"] not in used_n), pool_n[start_n])
+        cast[aid] = dict(look_n)
+        used_n.add(look_n["shirt"])
+    return cast
+
+
 # Sätze über Kurse, Umsatz, Marktwert → Kurve als bewegte Grafik (steigt oder stürzt ab)
 CHART_RE = (r"aktienkurs|börsenkurs|börsenwert|marktwert|börsengang|aktie\w*\b.{0,50}(steig|stieg|explod|schieß|schoss|kletter|verdoppel|verzehnfach|fiel|fällt|stürz|brach|bricht|crash|rakete|durch die decke)|"
             r"\bkurs\w*\b.{0,30}(steig|stieg|explod|schieß|schoss|fällt|fiel|stürz|brach|bricht|durch die decke)|"

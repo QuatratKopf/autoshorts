@@ -344,7 +344,10 @@ def counter(label, value, unit, shown=None, sub=""):
         lab = label.upper()
         while dr.textlength(lab, font=fl) > w - 40 and fl.size > 20:
             fl = font(fl.size - 2, "Bold")
-    dr.text(((w - dr.textlength(lab, font=fl)) / 2, 6), lab, font=fl, fill=(235, 235, 235), stroke_width=5, stroke_fill=INK)
+    lw = dr.textlength(lab, font=fl)
+    if lab.strip():                                       # kleine Zeile auf dunklem Schildchen: mit Umriss allein war sie über Regalen und Lampen nicht zu lesen (Video 213, „SPÄTI GEWINN“)
+        dr.rounded_rectangle(((w - lw) / 2 - 22, 0, (w + lw) / 2 + 22, 54), 14, fill=(20, 20, 28, 215))
+        dr.text(((w - lw) / 2, 6), lab, font=fl, fill=(245, 245, 245))
     tw = dr.textlength(txt, font=fn)
     dr.text(((w - tw) / 2 + 6, 62 + 8), txt, font=fn, fill=(0, 0, 0, 150))
     dr.text(((w - tw) / 2, 62), txt, font=fn, fill=WHITE, stroke_width=7, stroke_fill=INK)

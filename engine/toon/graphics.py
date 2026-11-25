@@ -342,7 +342,14 @@ def _g_badge(frame, g, t, dur):
     k = _pop(t, 0.15, 0.45)
     if k <= 0:
         return
-    txt = str(g.get("text") or "").upper()[:20]
+    txt = " ".join(str(g.get("text") or "").upper().split())
+    if len(txt) > 34:                                           # sehr langer Text: an der Wortgrenze kürzen, nie mitten im Wort („WENIGER ALS MINDESTL“, Video 213)
+        txt = txt[:35].rsplit(" ", 1)[0] if " " in txt[:35] else txt[:34]
+    lines = [txt]
+    if len(txt) > 14 and " " in txt:                            # ab 15 Zeichen zweizeilig, möglichst gleich lange Zeilen
+        ws_b = txt.split(" ")
+        cut_b = min(range(1, len(ws_b)), key=lambda j: abs(len(" ".join(ws_b[:j])) - len(" ".join(ws_b[j:]))))
+        lines = [" ".join(ws_b[:cut_b]), " ".join(ws_b[cut_b:])]
     lay = Image.new("RGBA", (900, 420), (0, 0, 0, 0))
     ld = ImageDraw.Draw(lay)
     ld.rounded_rectangle((34, 54, 884, 404), 30, fill=(0, 0, 0, 90))
@@ -352,8 +359,14 @@ def _g_badge(frame, g, t, dur):
     if kick:
         fk = _fit(ld, " ".join(kick), 40, 760, "Bold")
         ld.text(((890 - ld.textlength(" ".join(kick), font=fk)) / 2, 84), " ".join(kick), font=fk, fill=(90, 60, 20))
-    f = _fit(ld, txt, 190, 760)
-    ld.text(((890 - ld.textlength(txt, font=f)) / 2, 150 + (190 - f.size) / 2), txt, font=f, fill=(50, 34, 10))
+    if len(lines) == 1:
+        f = _fit(ld, txt, 190, 760)
+        ld.text(((890 - ld.textlength(txt, font=f)) / 2, 150 + (190 - f.size) / 2), txt, font=f, fill=(50, 34, 10))
+    else:
+        f = min((_fit(ld, ln_b, 112, 760) for ln_b in lines), key=lambda f_b: f_b.size)   # beide Zeilen in derselben Schriftgröße
+        y_b = 136 + (224 - 2 * f.size - 8) / 2
+        for j_b, ln_b in enumerate(lines):
+            ld.text(((890 - ld.textlength(ln_b, font=f)) / 2, y_b + j_b * (f.size + 8)), ln_b, font=f, fill=(50, 34, 10))
     lay = lay.rotate(-5 + math.sin(t * 1.6) * 1.5, resample=Image.BICUBIC, expand=True)
     s = min(1.06, k)
     lay = lay.resize((max(1, int(lay.width * s)), max(1, int(lay.height * s))), Image.BILINEAR)

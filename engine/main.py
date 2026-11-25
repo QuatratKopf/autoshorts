@@ -441,6 +441,7 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, 
                 script["cast"]["du"] = {**script["cast"]["du"], "shirt": rnd_c.choice(["rot", "grün", "gelb", "lila", "orange", "türkis", "pink", "blau"]),
                                         "hair_color": rnd_c.choice(["schwarz", "braun", "blond", "rot"]), "glasses": rnd_c.random() < 0.3}
             script["cast"] = stage.balance_cast(script["cast"], v["id"] + (sum(map(ord, channel_seed())) % 2 if channel_seed() else 0), scenes)   # „du“ ist in jedem zweiten Video eine Frau
+            script["cast"] = stage.name_cast(script["cast"], scenes)   # „murat“, „sandra“ ohne Besetzung: jede Figur ihr eigenes Aussehen, Frauen als Frauen (Video 213)
             word_caps = str(cat.get("caption_style") or "") == "word"   # Motivation: das große Wort ist die Einblendung – keine Schilder, Karten, Grafiken
 
             def _no_overlays(graphics=True):

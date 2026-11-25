@@ -59,6 +59,10 @@ Regeln für die Sprechertexte:
   wirklich ergeben, in der richtigen Größenordnung und im genannten Zeitraum (in fünf Sekunden kocht kein Ozean und zerbricht keine
   Erdkruste). Lieber wenige, richtig erklärte und überraschende Folgen mit Ursache („weil …“) als erfundenes Weltuntergangs-Spektakel.
   Keine ausgedachten Zahlen: Nenne eine Zahl nur, wenn sie stimmt oder sich einfach nachrechnen lässt – auch in Einblendungen und Zählern.
+  Zahlen müssen zueinander passen: Wer „zweihundert Kunden am Tag“ und „vier Euro Gewinn pro Kunde“ nennt, kommt im Monat auf rund
+  vierundzwanzigtausend Euro – nicht auf sechstausend. Rechne jede Summe, jeden Monats- und Stundenwert aus den vorher genannten Zahlen nach
+  und sag bei Geld immer dazu, ob Umsatz oder Gewinn gemeint ist und worauf es sich bezieht (pro Einkauf, pro Tag, pro Monat). Eine
+  Beispielrechnung mit Schätzwerten heißt im Text auch so („angenommen“, „grob gerechnet“).
   Ist etwas unsicher, sag das offen („vermutlich“, „wahrscheinlich“). Erfinde keine Studien, Forscher-Aussagen, Schadenssummen oder Opferzahlen.
   Bei Gedankenspielen über Menschen und Gesellschaft (alle sind nett, niemand lügt, keiner schläft) gilt dasselbe: keine erfundenen Statistiken
   (Zahl der Kriege, Nachrichten, Straftaten, gesparte Milliarden). Erkläre lieber, was Psychologie und Biologie dazu wirklich wissen
@@ -877,6 +881,8 @@ Texte der Einblendungen und Grafiken ("labels"). Prüfe streng und verbessere NU
    Es gibt keine „sechzigtausend laufenden Kriege“ und niemand zählt „zehn Milliarden Nachrichten an Ex-Partner“. Ist eine solche Zahl nicht
    allgemein bekannt und belegt, streiche sie und sag es ohne Zahl („fast alle Streitereien“, „unzählige Nachrichten“).
    Ein Satz, der in sich keinen Sinn ergibt oder sich selbst widerspricht, wird durch eine klare, richtige Aussage zum selben Punkt ersetzt.
+   Rechne Zahlen nach, die aufeinander aufbauen (Kunden mal Betrag mal Tage, Stunden mal Lohn): Passt eine Summe nicht zu den vorher genannten
+   Zahlen („zweihundert Kunden am Tag, vier Euro Gewinn pro Kunde, sechstausend Euro im Monat“), berichtige die Summe oder streiche sie.
 4. Einblendung oder Grafik passt nicht zum Satz (andere Zahl, anderes Thema, sinnloses Wort): korrigiere ihren Text.
 5. Es ist ein Video: Der Zuschauer schaut zu, er „liest“ nicht.
 Jeder verbesserte Satz bleibt etwa gleich lang (höchstens 20 % kürzer oder länger), im selben lockeren Ton, Zahlen ausgeschrieben, Firmen- und Spielnamen bleiben stehen,

@@ -243,6 +243,12 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   Füllstand ersetzt, wenn wirklich einer entsteht (`stage._gauge_for`) – sonst bleibt die Zahl, statt dass die Figur bloß redet. Kleidung, die die Figur
   anhat („das Reiben deiner Hose“, `stage.WORN_THINGS`), und Körperteile („ein Muskel zuckt“) kommen weder in die Hand noch als Ding ins Bild. „auf dem Display steht rein gar nichts“
   (`stage.BLANK_DISPLAY_RE`) stellt kein Handy-Großbild mit eingehendem Anruf ins Bild. Ort „strasse“ (ohne ß) ist die Straße. Selbsttest `_pruef2511c`.
+- Prüfung 25.11.2026 (Video 213, Spätkauf gegen Supermarkt): Vornamen im Bildplan ohne Eintrag in `cast` („murat“, „sandra“) bekommen über
+  `stage.name_cast` (Aufruf in `main.make` nach `balance_cast`) ein eigenes Aussehen – Frauennamen (`FEM_NAMES`, „Filialleiterin Sandra“, „Frau …“)
+  aus `FEM_LOOKS`, Männernamen (`MALE_NAMES`) aus `MALE_LOOKS`, keine zwei im selben Pulli; Rollen und Tiere bleiben unberührt. Plakette (`badge`):
+  Text nicht mehr nach 20 Zeichen abgeschnitten, ab 15 Zeichen zweizeilig. Zähler (`overlays.counter`): kleine Zeile auf dunklem Schildchen.
+  Supermarkt: roter Wandstreifen statt des leeren Schilds in der Bildmitte (Karten lagen halb darüber). Drehbuch-Vorgaben und Faktenprüfung
+  (`writer.py`): Zahlen, die aufeinander aufbauen, müssen nachgerechnet zusammenpassen; Umsatz und Gewinn auseinanderhalten. Selbsttest `_pruef2511d`.
 
 ## Was zu tun ist
 1. Offene Wünsche (ohne `"done": true`) und `"auto": true`-Einträge durchgehen, höchstens 8 pro Sitzung, häufigste zuerst.

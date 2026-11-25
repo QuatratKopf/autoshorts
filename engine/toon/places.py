@@ -1831,8 +1831,7 @@ def _supermarket(night, full):
     rnd = random.Random(5)
     for x in range(120, W, 300):                                                # Deckenlampen
         p.rect((x, 300, x + 180, 326), (255, 250, 220) if (full or not night) else (120, 120, 130), r=8, o=5, glow=not night)
-    p.rect((300, 420, 780, 520), (214, 70, 60), r=14)                           # Schild
-    p.rect((340, 452, 740, 488), (250, 250, 246), r=8, o=0)
+    p.rect((-30, 436, W + 30, 474), (214, 70, 60), r=0)                         # roter Wandstreifen statt des leeren Schilds in der Mitte: Karten und Zähler lagen halb darüber (Video 213)
     _shelf(p, 20, 500, 760, 1225, full, rnd)
     _shelf(p, 580, 1060, 760, 1225, full, rnd)
     if not full:
