@@ -7944,5 +7944,51 @@
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7712066947868806439?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
+ },
+ {
+  "id": 209,
+  "category": "fakten",
+  "topic": "Warum du den 'Phantom-Vibrations-Effekt' hast: Warum dein Gehirn dir ein Handy-Brummen vorgaukelt, das gar nicht existiert",
+  "status": "review",
+  "created": 1795619445.7673826,
+  "title": "Phantom-Vibration: Warum dein Handy vibriert, obwohl es schweigt",
+  "description": "Spürst du auch ein Summen, das gar nicht existiert?\nDein Gehirn spielt dir bei der Wahrnehmung einen Streich.\nTritt dieses Phänomen bei dir täglich auf?",
+  "hashtags": [
+   "#shorts",
+   "#psychologie",
+   "#techfakt",
+   "#fyp",
+   "#viral",
+   "#wissen",
+   "#gehirn",
+   "#handy"
+  ],
+  "tags": [
+   "phantom vibration",
+   "handy vibrieren",
+   "psychologie fakten",
+   "gehirn tricks",
+   "tech fakten",
+   "handy brummt",
+   "täuschen",
+   "phantom vibrations syndrom"
+  ],
+  "thumb_text": "HANDY VIBRIERT GAR NICHT",
+  "missing": [
+   "nerv",
+   "oberschenkel"
+  ],
+  "cover_ms": 90909,
+  "duration": 90.8,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-25 18:00",
+  "review_at": 1795620173.5757446
  }
 ]

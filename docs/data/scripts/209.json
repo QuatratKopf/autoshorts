@@ -1,0 +1,484 @@
+{
+ "title": "Phantom-Vibration: Warum dein Handy vibriert, obwohl es schweigt",
+ "scenes": [
+  {
+   "text": "Dein Handy vibriert, obwohl niemand anruft oder schreibt.",
+   "see": "Ein Mädchen greift erschrocken an ihre Hose, aber das Handy liegt friedlich auf dem Tisch.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "PHANTOM-VIBRATION"
+   }
+  },
+  {
+   "text": "Dieses mysteriöse Summen ist kein technischer Fehler, sondern ein echter Trick deiner Nerven.",
+   "see": "Das Mädchen schaut völlig ungläubig auf das dunkle Handy-Display.",
+   "place": "zimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Über neunzig Prozent aller Smartphone-Nutzer kennen dieses seltsame Phänomen im Alltag.",
+   "see": "Grafik zeigt an, dass fast alle Menschen diesen Effekt kennen.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "talk",
+     "pos": 750,
+     "emotion": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Dein Gehirn interpretiert Reize falsch, aber welchen Reizen fällt es dabei genau zum Opfer?",
+   "see": "Das Gehirn als kleine rosafarbene Figur steht da mit Lupe.",
+   "place": "labor",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Schon das leichte Reiben deiner Hose löst winzige Signale auf der Haut aus.",
+   "see": "Ein Stoff reibt an der Hose und erzeugt eine leichte Vibration.",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "walk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "lib_hose",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "right"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "HAUT-REIZUNG"
+   }
+  },
+  {
+   "text": "Dein Körper hält Muskelzucken oder Kleidungsbewegungen sofort für eine eingehende Nachricht.",
+   "see": "Schautafel zum Nervensystem mit kleinen Elektro-Blitzen.",
+   "place": "zimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "cower",
+     "emotion": "worried",
+     "emote": "!",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Aber wieso ist dein Kopf eigentlich so unglaublich vorschnell bei diesem Thema?",
+   "see": "Das Mädchen erschrickt bei einer leichten Bewegung der Tasche.",
+   "place": "zimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "cower",
+     "emotion": "scared",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Neurowissenschaftler nennen das eine fehlerhafte Signalerkennung im Nervensystem.",
+   "see": "Grafik zur Signal-Erkennung im Hirn mit einem Schalter.",
+   "place": "labor",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "point",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "calm",
+   "graphic": {
+    "type": "badge",
+    "text": "SIGNAL-FEHLER",
+    "dark": false
+   },
+   "overlay": {
+    "type": "card",
+    "text": "FEHLER IM SYSTEM"
+   }
+  },
+  {
+   "text": "Lieber meldet dein Gehirn zehn Fehlalarme, aber welches Hormon treibt diese ständige Erwartungshaltung eigentlich an?",
+   "see": "Das Gehirn schüttet stolz kleine Dopamin-Tropfen aus.",
+   "place": "labor",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "worried",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Du denkst vielleicht, das passiert nur bei eingeschaltetem Vibrationsalarm deines Smartphones.",
+   "see": "Mädchen denkt, der Akku sei leer, aber das stimmt nicht.",
+   "place": "zimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Falsch, der Effekt tritt selbst dann auf, wenn das Handy weit entfernt liegt.",
+   "see": "Stempel VERSTECKT schlägt ins Bild.",
+   "place": "zimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "table"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "stamp",
+    "text": "FALSCH",
+    "color": "red"
+   }
+  },
+  {
+   "text": "Jedes Mal schüttet dein Körper bei Erwartung einer Nachricht sofort etwas Dopamin aus.",
+   "see": "Grafik über Dopamin-Ausstoß beim Smartphone-Blick.",
+   "place": "labor",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "badge",
+    "kicker": "HORMON",
+    "text": "DOPAMIN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Das Handy hat deine Wahrnehmung nach Jahren der Nutzung quasi fest neu verdrahtet.",
+   "see": "Das Mädchen starrt gebannt auf die Hülle in ihrer Hand.",
+   "place": "zimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "blink",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Manche spüren das Summen sogar noch Stunden nach dem Ausschalten des Handys.",
+   "see": "Das Gehirn schläft fast ein, wacht aber sofort schockiert auf.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "freeze",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Es ist sozusagen eine digitale Prothese, die sich tief in dein Hirn eingebrannt hat.",
+   "see": "Grafik zeigt das Gehirn und eine Frequenzwelle.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "idle",
+     "pos": "center",
+     "emotion": "",
+     "emote": ""
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Also wunder dich nicht, wenn du dir genau jetzt wieder an die Oberschenkel fasst.",
+   "see": "Das Mädchen zuckt schon wieder an der Hosentasche.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "cower",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Dein Körper will eben einfach nur absolut sichergehen, dass du absolut nichts verpasst.",
+   "see": "Sie zieht das Handy aus der Tasche und lacht verlegen.",
+   "place": "zimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "laugh",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "note",
+    "title": "FAZIT",
+    "text": "Dein Gehirn passt nur auf dich auf."
+   }
+  },
+  {
+   "text": "Und dieses Phänomen erklärt auch perfekt, warum du diese Täuschung gleich wieder spürst.",
+   "see": "Das Handy liegt stumm da, während sie entspannt lächelt.",
+   "place": "zimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Denn du könntest schwören: Dein Handy vibriert in der Hosentasche, aber auf dem Display steht rein gar nichts.",
+   "see": "Das Mädchen blickt plötzlich wieder überrascht auf ihre Tasche, die Nahtlos-Schleife schließt sich.",
+   "place": "zimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "display"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "tense"
+  }
+ ]
+}
