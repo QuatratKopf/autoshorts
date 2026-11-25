@@ -1,7 +1,7 @@
 {
- "updated": 1795591450.2010844,
+ "updated": 1795593252.231944,
  "enough": true,
- "counted": 40,
+ "counted": 41,
  "total": 42,
  "needed": 6,
  "categories": [
@@ -62,11 +62,11 @@
   {
    "slug": "fakten",
    "name": "💡 Fakten",
-   "n": 6,
-   "avg_views": 1726,
-   "avg_likes": 44.5,
-   "like_rate": 2.58,
-   "avg_score": 2404
+   "n": 7,
+   "avg_views": 1682,
+   "avg_likes": 43.7,
+   "like_rate": 2.6,
+   "avg_score": 2346
   },
   {
    "slug": "storys",
@@ -106,10 +106,10 @@
   }
  ],
  "weights": {
-  "fakten": 1.06,
+  "fakten": 1.04,
   "grusel": 1.2,
   "tiere": 1.1,
-  "whatif": 1.07,
+  "whatif": 1.08,
   "comedy": 1.33,
   "vergleich": 1.2,
   "motivation": 1.2,
@@ -118,8 +118,8 @@
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2283 Aufrufe, 2.04 % Likes).",
   "Schwächste Kategorie: 👻 Grusel (Ø 492 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2344 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2513 zu 1844 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2335 zu 706 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2493 zu 1844 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -128,13 +128,13 @@
  ],
  "words_bad": [
   "remix",
-  "erkennst",
-  "lied",
   "bekanntes",
+  "lied",
+  "erkennst",
   "glas",
-  "scheibe",
-  "eines",
-  "jede"
+  "klassikers",
+  "jede",
+  "eines"
  ],
  "top": [
   {
