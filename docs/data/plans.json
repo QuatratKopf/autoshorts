@@ -2183,30 +2183,29 @@
   "topic": "Warum du den 'Phantom-Vibrations-Effekt' hast: Warum dein Gehirn dir ein Handy-Brummen vorgaukelt, das gar nicht existiert",
   "trend": null,
   "script": {
-   "title": "Phantom-Vibration: Warum dein Handy vibriert, obwohl es schweigt",
-   "description": "Spürst du auch ein Summen, das gar nicht existiert?\nDein Gehirn spielt dir bei der Wahrnehmung einen Streich.\nTritt dieses Phänomen bei dir täglich auf?",
+   "title": "Phantom-Vibration: Warum dein Bein brummt, obwohl niemand schreibt",
+   "description": "Dein Handy vibriert in der Hosentasche – aber da ist keine Nachricht.\nDahinter steckt die Phantom-Vibration: Dein Gehirn deutet winzige Reize auf der Haut als Brummen.\nWann ist dir das zuletzt passiert?",
    "hashtags": [
     "#shorts",
     "#psychologie",
-    "#techfakt",
-    "#fyp",
-    "#viral",
-    "#wissen",
     "#gehirn",
-    "#handy"
+    "#handy",
+    "#wissen",
+    "#fakten",
+    "#fyp"
    ],
    "tags": [
     "phantom vibration",
-    "handy vibrieren",
-    "psychologie fakten",
+    "handy vibriert",
+    "phantom vibration erklärt",
     "gehirn tricks",
-    "tech fakten",
+    "psychologie fakten",
     "handy brummt",
-    "täuschen",
-    "phantom vibrations syndrom"
+    "wahrnehmung",
+    "smartphone"
    ],
    "thumbnail": {
-    "image": "Close-up of a young person staring in utter disbelief at a smartphone in their hand, which is completely blank and silent, while background depicts subtle electric brain pulses, sharp focus, vibrant vivid colors",
+    "image": "Close-up of a young person staring in disbelief at a silent smartphone in their hand, vivid colors",
     "text": "HANDY VIBRIERT GAR NICHT"
    },
    "wishes": [],
@@ -2223,27 +2222,33 @@
     },
     "gehirn": {
      "kind": "brain"
+    },
+    "arzt": {
+     "shirt": "weiß",
+     "hair_color": "braun",
+     "gender": "m",
+     "glasses": true,
+     "hat": ""
     }
    },
+   "hud": "",
+   "countdown": null,
    "scenes": [
     {
-     "see": "Ein Mädchen greift erschrocken an ihre Hose, aber das Handy liegt friedlich auf dem Tisch.",
-     "text": "Dein Handy vibriert, obwohl niemand anruft oder schreibt.",
-     "image": "Dein Handy vibriert, obwohl niemand anruft oder schreibt.",
+     "see": "Die Hauptfigur bleibt auf dem Gehweg stehen und starrt erschrocken auf ihr Handy.",
+     "text": "Dein Bein brummt, du greifst zum Handy, und da ist absolut nichts.",
+     "image": "Dein Bein brummt, du greifst zum Handy, und da ist absolut nichts.",
      "who": [
       "du"
      ],
-     "place": "zimmer",
+     "place": "strasse",
      "camera": "zoom_in",
      "sfx": "pop",
      "highlight": [
-      "vibriert",
-      "gar nichts"
+      "brummt",
+      "nichts"
      ],
-     "overlay": {
-      "type": "card",
-      "text": "PHANTOM-VIBRATION"
-     },
+     "overlay": null,
      "backdrop": null,
      "time": "day",
      "weather": "",
@@ -2266,22 +2271,22 @@
      "mood": "tense",
      "shot": "wide",
      "who_desc": "",
-     "place_desc": "bedroom",
+     "place_desc": "street",
      "hud": "",
      "status": ""
     },
     {
-     "see": "Das Mädchen schaut völlig ungläubig auf das dunkle Handy-Display.",
-     "text": "Dieses mysteriöse Summen ist kein technischer Fehler, sondern ein echter Trick deiner Nerven.",
-     "image": "Dieses mysteriöse Summen ist kein technischer Fehler, sondern ein echter Trick deiner Nerven.",
+     "see": "Sie schaut ratlos auf das Handy in ihrer Hand.",
+     "text": "Keine Nachricht, kein Anruf, trotzdem hast du es genau gespürt.",
+     "image": "Keine Nachricht, kein Anruf, trotzdem hast du es genau gespürt.",
      "who": [
       "du"
      ],
-     "place": "zimmer",
+     "place": "strasse",
      "camera": "still",
      "sfx": "none",
      "highlight": [
-      "Trick deiner Nerven"
+      "genau gespürt"
      ],
      "overlay": null,
      "backdrop": null,
@@ -2304,27 +2309,64 @@
      ],
      "crowd": "",
      "mood": "calm",
-     "shot": "wide",
+     "shot": "close",
      "who_desc": "",
-     "place_desc": "bedroom",
+     "place_desc": "street",
      "hud": "",
      "status": ""
     },
     {
-     "see": "Grafik zeigt an, dass fast alle Menschen diesen Effekt kennen.",
-     "text": "Über neunzig Prozent aller Smartphone-Nutzer kennen dieses seltsame Phänomen im Alltag.",
-     "image": "Über neunzig Prozent aller Smartphone-Nutzer kennen dieses seltsame Phänomen im Alltag.",
-     "who": [],
-     "place": "zimmer",
+     "see": "Das Gehirn als Figur im Labor zeigt nach oben auf den Fachbegriff.",
+     "text": "Forscher haben dafür einen Namen: Phantom-Vibration.",
+     "image": "Forscher haben dafür einen Namen: Phantom-Vibration.",
+     "who": [
+      "gehirn"
+     ],
+     "place": "labor",
      "camera": "still",
      "sfx": "ding",
      "highlight": [
-      "neunzig Prozent"
+      "Phantom-Vibration"
      ],
      "overlay": {
       "type": "card",
-      "text": "90 % BETROFFEN"
+      "text": "PHANTOM-VIBRATION"
      },
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "!",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "lab",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Große Zahl: neun von zehn.",
+     "text": "In einer amerikanischen Studie von 2012 kannten das neun von zehn Studierenden.",
+     "image": "In einer amerikanischen Studie von 2012 kannten das neun von zehn Studierenden.",
+     "who": [],
+     "place": "klassenzimmer",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "neun von zehn"
+     ],
+     "overlay": null,
      "backdrop": null,
      "time": "day",
      "weather": "",
@@ -2333,21 +2375,107 @@
      "crowd": "",
      "mood": "calm",
      "shot": "graphic",
-     "graphic": {
-      "type": "number",
-      "kicker": "STUDIENERGEBNIS",
-      "value": "90 %",
-      "label": "ALLER NUTZER"
-     },
      "who_desc": "",
-     "place_desc": "bedroom",
+     "place_desc": "classroom",
+     "hud": "",
+     "status": "",
+     "graphic": {
+      "type": "share",
+      "kicker": "STUDIE 2012",
+      "value": "9 von 10",
+      "label": "KENNEN DAS"
+     }
+    },
+    {
+     "see": "Die Hauptfigur sitzt im Klassenzimmer und greift verwundert nach ihrem Handy.",
+     "text": "Im Schnitt passierte es ihnen etwa alle zwei Wochen.",
+     "image": "Im Schnitt passierte es ihnen etwa alle zwei Wochen.",
+     "who": [
+      "du"
+     ],
+     "place": "klassenzimmer",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "alle zwei Wochen"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "ALLE ZWEI WOCHEN"
+     },
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "right",
+       "to": "right",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "classroom",
      "hud": "",
      "status": ""
     },
     {
-     "see": "Das Gehirn als kleine rosafarbene Figur steht da mit Lupe.",
-     "text": "Dein Gehirn interpretiert Reize falsch, aber welchen Reizen fällt es dabei genau zum Opfer?",
-     "image": "Dein Gehirn interpretiert Reize falsch, aber welchen Reizen fällt es dabei genau zum Opfer?",
+     "see": "Ein Arzt im Krankenhausflur schaut verdutzt auf sein Handy.",
+     "text": "Und in einer Klinik berichteten sogar zwei Drittel des Personals davon.",
+     "image": "Und in einer Klinik berichteten sogar zwei Drittel des Personals davon.",
+     "who": [
+      "arzt"
+     ],
+     "place": "krankenhaus",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "zwei Drittel"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "ZWEI DRITTEL"
+     },
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "arzt",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "to": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "hospital",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn kratzt sich ratlos am Kopf.",
+     "text": "Aber warum fällt dein Kopf immer wieder darauf herein?",
+     "image": "Aber warum fällt dein Kopf immer wieder darauf herein?",
      "who": [
       "gehirn"
      ],
@@ -2355,8 +2483,7 @@
      "camera": "zoom_in",
      "sfx": "none",
      "highlight": [
-      "permanent",
-      "wartet"
+      "warum"
      ],
      "overlay": null,
      "backdrop": null,
@@ -2383,22 +2510,19 @@
      "status": ""
     },
     {
-     "see": "Ein Stoff reibt an der Hose und erzeugt eine leichte Vibration.",
-     "text": "Schon das leichte Reiben deiner Hose löst winzige Signale auf der Haut aus.",
-     "image": "Schon das leichte Reiben deiner Hose löst winzige Signale auf der Haut aus.",
+     "see": "Die Hauptfigur läuft durch den Park.",
+     "text": "Deine Haut meldet ihm ununterbrochen winzige Reize.",
+     "image": "Deine Haut meldet ihm ununterbrochen winzige Reize.",
      "who": [
       "du"
      ],
-     "place": "strasse",
+     "place": "park",
      "camera": "still",
      "sfx": "whoosh",
      "highlight": [
-      "winzige Signale"
+      "winzige Reize"
      ],
-     "overlay": {
-      "type": "tag",
-      "text": "HAUT-REIZUNG"
-     },
+     "overlay": null,
      "backdrop": null,
      "time": "day",
      "weather": "",
@@ -2414,104 +2538,30 @@
        "speaks": false
       }
      ],
-     "crowd": "walk",
+     "crowd": "",
      "mood": "calm",
      "shot": "wide",
      "who_desc": "",
-     "place_desc": "street",
+     "place_desc": "park",
      "hud": "",
      "status": ""
     },
     {
-     "see": "Schautafel zum Nervensystem mit kleinen Elektro-Blitzen.",
-     "text": "Dein Körper hält Muskelzucken oder Kleidungsbewegungen sofort für eine eingehende Nachricht.",
-     "image": "Dein Körper hält Muskelzucken oder Kleidungsbewegungen sofort für eine eingehende Nachricht.",
-     "who": [],
-     "place": "zimmer",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Muskelzucken"
-     ],
-     "overlay": null,
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "cower",
-       "emotion": "worried",
-       "emote": "!",
-       "pos": "center",
-       "to": "center",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Mädchen erschrickt bei einer leichten Bewegung der Tasche.",
-     "text": "Aber wieso ist dein Kopf eigentlich so unglaublich vorschnell bei diesem Thema?",
-     "image": "Aber wieso ist dein Kopf eigentlich so unglaublich vorschnell bei diesem Thema?",
+     "see": "Sie bleibt stehen und schaut verwundert an ihrem Bein hinunter.",
+     "text": "Der Stoff deiner Hose streift dein Bein, ein Muskel zuckt kurz.",
+     "image": "Der Stoff deiner Hose streift dein Bein, ein Muskel zuckt kurz.",
      "who": [
       "du"
      ],
-     "place": "zimmer",
-     "camera": "zoom_in",
+     "place": "park",
+     "camera": "still",
      "sfx": "none",
      "highlight": [
-      "vorschnell"
-     ],
-     "overlay": null,
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "cower",
-       "emotion": "scared",
-       "emote": "?",
-       "pos": "center",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafik zur Signal-Erkennung im Hirn mit einem Schalter.",
-     "text": "Neurowissenschaftler nennen das eine fehlerhafte Signalerkennung im Nervensystem.",
-     "image": "Neurowissenschaftler nennen das eine fehlerhafte Signalerkennung im Nervensystem.",
-     "who": [],
-     "place": "labor",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Fehleinschätzung"
+      "Muskel zuckt"
      ],
      "overlay": {
-      "type": "card",
-      "text": "FEHLER IM SYSTEM"
+      "type": "tag",
+      "text": "HAUT-REIZ"
      },
      "backdrop": null,
      "time": "day",
@@ -2519,10 +2569,10 @@
      "props": [],
      "actors": [
       {
-       "id": "gehirn",
-       "action": "point",
+       "id": "du",
+       "action": "look_around",
        "emotion": "worried",
-       "emote": "!",
+       "emote": "?",
        "pos": "center",
        "to": "center",
        "speaks": true
@@ -2530,20 +2580,16 @@
      ],
      "crowd": "",
      "mood": "calm",
-     "shot": "wide",
-     "graphic": {
-      "type": "question",
-      "text": "SIGNAL-FEHLER"
-     },
+     "shot": "close",
      "who_desc": "",
-     "place_desc": "lab",
+     "place_desc": "park",
      "hud": "",
      "status": ""
     },
     {
-     "see": "Das Gehirn schüttet stolz kleine Dopamin-Tropfen aus.",
-     "text": "Lieber meldet dein Gehirn zehn Fehlalarme, aber welches Hormon treibt diese ständige Erwartungshaltung eigentlich an?",
-     "image": "Lieber meldet dein Gehirn zehn Fehlalarme, aber welches Hormon treibt diese ständige Erwartungshaltung eigentlich an?",
+     "see": "Das Gehirn winkt gelassen ab.",
+     "text": "Normalerweise sortiert dein Gehirn so etwas einfach aus.",
+     "image": "Normalerweise sortiert dein Gehirn so etwas einfach aus.",
      "who": [
       "gehirn"
      ],
@@ -2551,23 +2597,22 @@
      "camera": "still",
      "sfx": "none",
      "highlight": [
-      "zehn Fehlalarme"
+      "sortiert",
+      "aus"
      ],
      "overlay": null,
      "backdrop": null,
      "time": "day",
      "weather": "",
-     "props": [
-      "adrenaline"
-     ],
+     "props": [],
      "actors": [
       {
        "id": "gehirn",
        "action": "talk",
        "emotion": "happy",
-       "emote": "!",
-       "pos": "center",
-       "to": "center",
+       "emote": "",
+       "pos": "left",
+       "to": "left",
        "speaks": true
       }
      ],
@@ -2580,9 +2625,9 @@
      "status": ""
     },
     {
-     "see": "Mädchen denkt, der Akku sei leer, aber das stimmt nicht.",
-     "text": "Du denkst vielleicht, das passiert nur bei eingeschaltetem Vibrationsalarm deines Smartphones.",
-     "image": "Du denkst vielleicht, das passiert nur bei eingeschaltetem Vibrationsalarm deines Smartphones.",
+     "see": "Die Hauptfigur sitzt auf dem Sofa und starrt gebannt auf ihr Handy.",
+     "text": "Doch es wartet jede Sekunde auf die nächste Nachricht.",
+     "image": "Doch es wartet jede Sekunde auf die nächste Nachricht.",
      "who": [
       "du"
      ],
@@ -2590,7 +2635,7 @@
      "camera": "still",
      "sfx": "none",
      "highlight": [
-      "Vibrationsalarm"
+      "nächste Nachricht"
      ],
      "overlay": null,
      "backdrop": null,
@@ -2602,123 +2647,7 @@
      "actors": [
       {
        "id": "du",
-       "action": "think",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "to": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Stempel VERSTECKT schlägt ins Bild.",
-     "text": "Falsch, der Effekt tritt selbst dann auf, wenn das Handy weit entfernt liegt.",
-     "image": "Falsch, der Effekt tritt selbst dann auf, wenn das Handy weit entfernt liegt.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "weit entfernt"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "FALSCH",
-      "color": "red"
-     },
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "table"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafik über Dopamin-Ausstoß beim Smartphone-Blick.",
-     "text": "Jedes Mal schüttet dein Körper bei Erwartung einer Nachricht sofort etwas Dopamin aus.",
-     "image": "Jedes Mal schüttet dein Körper bei Erwartung einer Nachricht sofort etwas Dopamin aus.",
-     "who": [],
-     "place": "labor",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "Dopamin"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "DOPAMIN-KICK"
-     },
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "graphic": {
-      "type": "badge",
-      "kicker": "HORMON",
-      "text": "DOPAMIN"
-     },
-     "who_desc": "",
-     "place_desc": "lab",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Mädchen starrt gebannt auf die Hülle in ihrer Hand.",
-     "text": "Das Handy hat deine Wahrnehmung nach Jahren der Nutzung quasi fest neu verdrahtet.",
-     "image": "Das Handy hat deine Wahrnehmung nach Jahren der Nutzung quasi fest neu verdrahtet.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "neu verdrahtet"
-     ],
-     "overlay": null,
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "blink",
+       "action": "sit",
        "emotion": "",
        "emote": "",
        "pos": "center",
@@ -2731,214 +2660,22 @@
      "mood": "tense",
      "shot": "wide",
      "who_desc": "",
-     "place_desc": "bedroom",
+     "place_desc": "living room",
      "hud": "",
      "status": ""
     },
     {
-     "see": "Das Gehirn schläft fast ein, wacht aber sofort schockiert auf.",
-     "text": "Manche spüren das Summen sogar noch Stunden nach dem Ausschalten des Handys.",
-     "image": "Manche spüren das Summen sogar noch Stunden nach dem Ausschalten des Handys.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "zimmer",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "nach dem Ausschalten"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "OFFLINE"
-     },
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "freeze",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafik zeigt das Gehirn und eine Frequenzwelle.",
-     "text": "Es ist sozusagen eine digitale Prothese, die sich tief in dein Hirn eingebrannt hat.",
-     "image": "Es ist sozusagen eine digitale Prothese, die sich tief in dein Hirn eingebrannt hat.",
-     "who": [],
-     "place": "zimmer",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "digitale Prothese"
-     ],
-     "overlay": null,
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "graphic": {
-      "type": "pulse",
-      "value": "1",
-      "label": "FEHL-SIGNAL"
-     },
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Mädchen zuckt schon wieder an der Hosentasche.",
-     "text": "Also wunder dich nicht, wenn du dir genau jetzt wieder an die Oberschenkel fasst.",
-     "image": "Also wunder dich nicht, wenn du dir genau jetzt wieder an die Oberschenkel fasst.",
+     "see": "Sie zuckt zusammen und schaut erschrocken auf das Handy.",
+     "text": "Also deutet es das harmlose Zucken kurzerhand als Vibration.",
+     "image": "Also deutet es das harmlose Zucken kurzerhand als Vibration.",
      "who": [
       "du"
      ],
      "place": "zimmer",
-     "camera": "zoom_in",
-     "sfx": "pop",
+     "camera": "shake",
+     "sfx": "boom",
      "highlight": [
-      "genau jetzt"
-     ],
-     "overlay": null,
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "cower",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Sie zieht das Handy aus der Tasche und lacht verlegen.",
-     "text": "Dein Körper will eben einfach nur absolut sichergehen, dass du absolut nichts verpasst.",
-     "image": "Dein Körper will eben einfach nur absolut sichergehen, dass du absolut nichts verpasst.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "nichts verpasst"
-     ],
-     "overlay": {
-      "type": "note",
-      "title": "FAZIT",
-      "text": "Dein Gehirn passt nur auf dich auf."
-     },
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "laugh",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "to": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Handy liegt stumm da, während sie entspannt lächelt.",
-     "text": "Und dieses Phänomen erklärt auch perfekt, warum du diese Täuschung gleich wieder spürst.",
-     "image": "Und dieses Phänomen erklärt auch perfekt, warum du diese Täuschung gleich wieder spürst.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "wieder spürst"
-     ],
-     "overlay": null,
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "happy",
-       "emote": "!",
-       "pos": "center",
-       "to": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Mädchen blickt plötzlich wieder überrascht auf ihre Tasche, die Nahtlos-Schleife schließt sich.",
-     "text": "Denn du könntest schwören: Dein Handy vibriert in der Hosentasche, aber auf dem Display steht rein gar nichts.",
-     "image": "Denn du könntest schwören: Dein Handy vibriert in der Hosentasche, aber auf dem Display steht rein gar nichts.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "vibriert",
-      "gar nichts"
+      "als Vibration"
      ],
      "overlay": null,
      "backdrop": null,
@@ -2961,24 +2698,346 @@
      ],
      "crowd": "",
      "mood": "tense",
+     "shot": "close",
+     "who_desc": "",
+     "place_desc": "living room",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn schlägt Alarm, der Stempel FEHLALARM knallt ins Bild.",
+     "text": "Ein Fehlalarm ist deinem Gehirn nämlich lieber als eine verpasste Nachricht.",
+     "image": "Ein Fehlalarm ist deinem Gehirn nämlich lieber als eine verpasste Nachricht.",
+     "who": [
+      "gehirn"
+     ],
+     "place": "labor",
+     "camera": "still",
+     "sfx": "boom",
+     "highlight": [
+      "Fehlalarm"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "FEHLALARM",
+      "color": "red"
+     },
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "lab",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Hauptfigur tippt im Bus auf ihrem Handy.",
+     "text": "Wer sein Handy ständig nutzt, spürt das Phantom deshalb deutlich häufiger.",
+     "image": "Wer sein Handy ständig nutzt, spürt das Phantom deshalb deutlich häufiger.",
+     "who": [
+      "du"
+     ],
+     "place": "bus",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "deutlich häufiger"
+     ],
+     "overlay": null,
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "to": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "bus",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Sie läuft im Schlafzimmer nervös hin und her, das Handy in der Hand.",
+     "text": "Genauso geht es jedem, der ungeduldig auf eine Antwort wartet.",
+     "image": "Genauso geht es jedem, der ungeduldig auf eine Antwort wartet.",
+     "who": [
+      "du"
+     ],
+     "place": "schlafzimmer",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "ungeduldig"
+     ],
+     "overlay": null,
+     "backdrop": null,
+     "time": "night",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "walk",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "left",
+       "to": "right",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
      "shot": "wide",
      "who_desc": "",
      "place_desc": "bedroom",
      "hud": "",
      "status": ""
+    },
+    {
+     "see": "Sie atmet auf und lacht erleichtert.",
+     "text": "Die gute Nachricht: Das Ganze ist völlig harmlos.",
+     "image": "Die gute Nachricht: Das Ganze ist völlig harmlos.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "völlig harmlos"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "HARMLOS",
+      "color": "green"
+     },
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "laugh",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "living room",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Sie zeigt das Handy in der anderen Hand.",
+     "text": "Willst du es trotzdem loswerden, trag dein Handy einfach auf der anderen Seite.",
+     "image": "Willst du es trotzdem loswerden, trag dein Handy einfach auf der anderen Seite.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "anderen Seite"
+     ],
+     "overlay": {
+      "type": "note",
+      "title": "TIPP",
+      "text": "Handy auf die andere Seite"
+     },
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "right",
+       "to": "right",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "living room",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Sie tippt entschlossen auf das Handy.",
+     "text": "Oder schalte die Vibration für ein paar Tage komplett aus.",
+     "image": "Oder schalte die Vibration für ein paar Tage komplett aus.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Vibration",
+      "aus"
+     ],
+     "overlay": {
+      "type": "note",
+      "title": "TIPP",
+      "text": "Vibration ausschalten"
+     },
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "left",
+       "to": "left",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "close",
+     "who_desc": "",
+     "place_desc": "living room",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn lehnt sich entspannt zurück.",
+     "text": "Dann merkt dein Gehirn schnell, dass am Bein gar nichts mehr zu erwarten ist.",
+     "image": "Dann merkt dein Gehirn schnell, dass am Bein gar nichts mehr zu erwarten ist.",
+     "who": [
+      "gehirn"
+     ],
+     "place": "labor",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "gar nichts"
+     ],
+     "overlay": null,
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "lab",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Die Hauptfigur zeigt fragend auf die Zuschauer.",
+     "text": "Und jetzt ehrlich: Wann hat dein Bein zuletzt gebrummt, obwohl niemand geschrieben hat?",
+     "image": "Und jetzt ehrlich: Wann hat dein Bein zuletzt gebrummt, obwohl niemand geschrieben hat?",
+     "who": [
+      "du"
+     ],
+     "place": "strasse",
+     "camera": "zoom_in",
+     "sfx": "pop",
+     "highlight": [
+      "zuletzt gebrummt"
+     ],
+     "overlay": null,
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "?",
+       "pos": "center",
+       "to": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "street",
+     "hud": "",
+     "status": ""
     }
-   ],
-   "hud": "",
-   "countdown": null
+   ]
   },
-  "provider": "gemini",
+  "provider": "Plan",
   "remake": false,
-  "needs": [
-   "hose",
-   "nerv",
-   "oberschenkel"
-  ],
-  "title": "Phantom-Vibration: Warum dein Handy vibriert, obwohl es schweigt",
+  "needs": [],
+  "title": "Phantom-Vibration: Warum dein Bein brummt, obwohl niemand schreibt",
   "created": 1795602057.4272268
  }
 }
