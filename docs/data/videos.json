@@ -8134,5 +8134,45 @@
   "slot": "2026-11-25 21:00",
   "review_at": 1795631140.5173454,
   "error": "Bei der Prüfung verworfen: Prüfung: Zahlen passen nicht zusammen (200 Kunden x 4 Euro ergeben nicht 6000 Euro im Monat), Sandra als Mann und Zwilling von Murat gezeichnet, Plakette abgeschnitten"
+ },
+ {
+  "id": 214,
+  "category": "vergleich",
+  "topic": "Spätkauf gegen Supermarkt: Wer verdient mehr? – Vorgaben: Beispielrechnung mit grob geschätzten Zahlen für Deutschland; das im Video auch so sagen („grob gerechnet“, „angenommen“). Stichpunkte, nicht wörtlich abschreiben; jeder Satz bringt etwas Neues, kein Füllsatz, der letzte Satz wiederholt nicht den ersten. Die zwei Figuren: Tom, Inhaber eines Spätkaufs (kennt jeden Stammkunden beim Namen), und Sandra, selbstständige Kauffrau mit eigenem Supermarkt (liebt ihre Excel-Tabelle). Genau diese Zahlen, keine anderen: Späti: 200 Kunden am Tag, jeder lässt rund 6 Euro da, macht 1.200 Euro Umsatz am Tag und bei 30 offenen Tagen 36.000 Euro Umsatz im Monat. Supermarkt: 1.000 Kunden am Tag, jeder Einkauf rund 25 Euro, macht 25.000 Euro Umsatz am Tag und bei 26 offenen Tagen 650.000 Euro Umsatz im Monat. Runde 1, Gewinn pro Euro Umsatz: Im Späti bleiben nach Wareneinkauf, Miete und Strom grob 10 Cent von jedem Euro, im Supermarkt nach Ware, Personal und Logistik nur etwa 2 Cent, weil der Lebensmittelhandel mit sehr kleinen Margen arbeitet – Punkt für den Späti, Stand 1:0. Runde 2, Umsatz im Monat: 36.000 gegen 650.000 Euro – Punkt für den Supermarkt, Stand 1:1. Runde 3, Gewinn im Monat: Späti 3.600 Euro, Supermarkt 13.000 Euro (jeweils vor Steuern) – Punkt für den Supermarkt, Stand 1:2. Der Haken: Tom steht rund 80 Stunden pro Woche selbst hinter der Kasse, das sind etwa 350 Stunden im Monat und damit nur gut 10 Euro pro Stunde – weniger als der gesetzliche Mindestlohn von 13,90 Euro. Sandra verdient mehr, trägt aber die Verantwortung für rund 40 Angestellte. Fazit: Der Supermarkt gewinnt über die Menge, nicht über die Marge. Schluss: Frage an die Zuschauer, zu wem sie abends eher gehen. Umsatz und Gewinn nie verwechseln, bei jeder Zahl sagen, worauf sie sich bezieht. Nicht „reich“ sagen, keine weiteren Namen, keine Marken. Die Späti-Szenen spielen abends oder nachts im Laden, die Supermarkt-Szenen am Tag. Titelbild-Text: WER VERDIENT MEHR?",
+  "status": "rendered",
+  "created": 1795632552.161186,
+  "title": "Spätkauf gegen Supermarkt: Wer verdient mehr?",
+  "description": "Tom oder Sandra: Wer holt mehr Gewinn heraus?\nVergleiche Einnahmen, Fixkosten und Arbeitszeiten.\nZu wem gehst du abends eher einkaufen?",
+  "hashtags": [
+   "#shorts",
+   "#vergleich",
+   "#business",
+   "#geld",
+   "#späti",
+   "#supermarkt",
+   "#startup",
+   "#viral"
+  ],
+  "tags": [
+   "spätkauf",
+   "supermarkt",
+   "einnahmen",
+   "gewinn",
+   "gewerbe",
+   "vergleich",
+   "kosten"
+  ],
+  "thumb_text": "WER VERDIENT MEHR?",
+  "missing": null,
+  "cover_ms": 86927,
+  "duration": 86.8,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
