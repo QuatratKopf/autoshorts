@@ -7808,7 +7808,7 @@
   "id": 206,
   "category": "whatif",
   "topic": "Was wäre, wenn du die Karte eines Open-World-Spiels in der echten Welt erkunden müsstest?",
-  "status": "review",
+  "status": "discarded",
   "created": 1795601388.9111063,
   "trend": {
    "title": "state of leonida",
@@ -7847,6 +7847,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-25 13:00",
-  "review_at": 1795601869.1356921
+  "review_at": 1795601869.1356921,
+  "error": "Bei der Prüfung verworfen: Prüfung: erfundene Zahlen (300 Reize, 80 Prozent), Unsinn-Satz, drei Verlegenheitsbilder im Wohnzimmer, TAG 1 in der Ecke bis zum Schluss, Spiel nie genannt"
  }
 ]
