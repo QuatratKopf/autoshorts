@@ -1,5 +1,5 @@
 {
- "updated": 1795602840.4393992,
+ "updated": 1795604704.0064719,
  "enough": true,
  "counted": 41,
  "total": 42,
@@ -54,19 +54,19 @@
    "slug": "liebe",
    "name": "💕 Liebe",
    "n": 1,
-   "avg_views": 1488,
+   "avg_views": 1485,
    "avg_likes": 62.0,
-   "like_rate": 4.17,
-   "avg_score": 2418
+   "like_rate": 4.18,
+   "avg_score": 2415
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 7,
-   "avg_views": 1685,
+   "avg_views": 1683,
    "avg_likes": 43.9,
-   "like_rate": 2.6,
-   "avg_score": 2351
+   "like_rate": 2.61,
+   "avg_score": 2349
   },
   {
    "slug": "storys",
@@ -119,7 +119,7 @@
   "Stärkste Kategorie: 🤪 Comedy (Ø 2283 Aufrufe, 2.04 % Likes).",
   "Schwächste Kategorie: 👻 Grusel (Ø 492 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2336 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2495 zu 1844 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2494 zu 1844 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -128,13 +128,13 @@
  ],
  "words_bad": [
   "remix",
+  "bekanntes",
   "lied",
   "erkennst",
-  "bekanntes",
   "glas",
-  "jede",
-  "scheibe",
-  "eines"
+  "eines",
+  "klassikers",
+  "scheibe"
  ],
  "top": [
   {
@@ -151,11 +151,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2590,
+   "views": 2591,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3430
+   "score": 3431
   },
   {
    "id": 77,
@@ -203,11 +203,11 @@
    "id": 196,
    "title": "Jede Scheibe ein Ton: Lo-Fi-Remix eines Klassikers",
    "category": "musik",
-   "views": 300,
+   "views": 299,
    "likes": 0,
    "comments": 0,
    "shares": 0,
-   "score": 300
+   "score": 299
   },
   {
    "id": 44,
