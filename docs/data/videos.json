@@ -8095,7 +8095,7 @@
   "id": 213,
   "category": "vergleich",
   "topic": "Spätkauf gegen Supermarkt – wer verdient mehr?",
-  "status": "review",
+  "status": "discarded",
   "created": 1795630197.895404,
   "title": "Spätkauf gegen Supermarkt: Wer verdient mehr?",
   "description": "Spätkauf oder Supermarkt - wer macht das echte Geld?\nHier siehst du die Einnahmen und die echten Kosten von beiden Läden.\nGehst du lieber nachts zum Späti oder groß einkaufen?",
@@ -8132,6 +8132,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-25 21:00",
-  "review_at": 1795631140.5173454
+  "review_at": 1795631140.5173454,
+  "error": "Bei der Prüfung verworfen: Prüfung: Zahlen passen nicht zusammen (200 Kunden x 4 Euro ergeben nicht 6000 Euro im Monat), Sandra als Mann und Zwilling von Murat gezeichnet, Plakette abgeschnitten"
  }
 ]
