@@ -1,5 +1,5 @@
 {
- "updated": 1795645762.6299486,
+ "updated": 1795647593.9265761,
  "enough": true,
  "counted": 42,
  "total": 45,
@@ -36,10 +36,10 @@
    "slug": "liebe",
    "name": "💕 Liebe",
    "n": 1,
-   "avg_views": 1507,
+   "avg_views": 1504,
    "avg_likes": 63.0,
-   "like_rate": 4.18,
-   "avg_score": 2452
+   "like_rate": 4.19,
+   "avg_score": 2449
   },
   {
    "slug": "mysterien",
@@ -63,10 +63,10 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 7,
-   "avg_views": 1700,
-   "avg_likes": 44.1,
+   "avg_views": 1705,
+   "avg_likes": 44.3,
    "like_rate": 2.6,
-   "avg_score": 2371
+   "avg_score": 2378
   },
   {
    "slug": "storys",
@@ -90,19 +90,19 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 6,
-   "avg_views": 1226,
+   "avg_views": 1229,
    "avg_likes": 10.5,
-   "like_rate": 0.86,
-   "avg_score": 1419
+   "like_rate": 0.85,
+   "avg_score": 1422
   },
   {
    "slug": "grusel",
    "name": "👻 Grusel",
    "n": 2,
-   "avg_views": 418,
+   "avg_views": 415,
    "avg_likes": 17.5,
-   "like_rate": 4.19,
-   "avg_score": 710
+   "like_rate": 4.22,
+   "avg_score": 708
   }
  ],
  "weights": {
@@ -117,9 +117,9 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2284 Aufrufe, 2.05 % Likes).",
-  "Schwächste Kategorie: 👻 Grusel (Ø 418 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2301 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2433 zu 1851 Punkte).",
+  "Schwächste Kategorie: 👻 Grusel (Ø 415 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2302 zu 706 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2435 zu 1852 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -128,13 +128,13 @@
  ],
  "words_bad": [
   "remix",
-  "erkennst",
-  "lied",
   "bekanntes",
+  "lied",
+  "erkennst",
   "glas",
-  "scheibe",
   "klassikers",
-  "eines"
+  "eines",
+  "scheibe"
  ],
  "top": [
   {
@@ -161,11 +161,11 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2272,
+   "views": 2274,
    "likes": 62,
    "comments": 0,
    "shares": 0,
-   "score": 3202
+   "score": 3204
   },
   {
    "id": 124,
@@ -193,21 +193,21 @@
    "id": 205,
    "title": "Starre nie im Dunkeln in den Spiegel",
    "category": "grusel",
-   "views": 342,
+   "views": 337,
    "likes": 14,
    "comments": 2,
    "shares": 0,
-   "score": 612
+   "score": 607
   },
   {
    "id": 196,
    "title": "Jede Scheibe ein Ton: Lo-Fi-Remix eines Klassikers",
    "category": "musik",
-   "views": 345,
+   "views": 354,
    "likes": 2,
    "comments": 0,
    "shares": 0,
-   "score": 375
+   "score": 384
   },
   {
    "id": 44,
