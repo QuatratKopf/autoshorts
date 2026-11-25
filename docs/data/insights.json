@@ -1,5 +1,5 @@
 {
- "updated": 1795636682.1868885,
+ "updated": 1795638430.8627822,
  "enough": true,
  "counted": 42,
  "total": 45,
@@ -33,15 +33,6 @@
    "avg_score": 2487
   },
   {
-   "slug": "liebe",
-   "name": "💕 Liebe",
-   "n": 1,
-   "avg_views": 1501,
-   "avg_likes": 63.0,
-   "like_rate": 4.2,
-   "avg_score": 2446
-  },
-  {
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
@@ -49,6 +40,15 @@
    "avg_likes": 39.5,
    "like_rate": 2.18,
    "avg_score": 2434
+  },
+  {
+   "slug": "liebe",
+   "name": "💕 Liebe",
+   "n": 1,
+   "avg_views": 1502,
+   "avg_likes": 62.0,
+   "like_rate": 4.13,
+   "avg_score": 2432
   },
   {
    "slug": "whatif",
@@ -63,10 +63,10 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 7,
-   "avg_views": 1699,
-   "avg_likes": 44.0,
-   "like_rate": 2.59,
-   "avg_score": 2368
+   "avg_views": 1700,
+   "avg_likes": 44.1,
+   "like_rate": 2.6,
+   "avg_score": 2370
   },
   {
    "slug": "storys",
@@ -99,9 +99,9 @@
    "slug": "grusel",
    "name": "👻 Grusel",
    "n": 2,
-   "avg_views": 395,
+   "avg_views": 396,
    "avg_likes": 17.5,
-   "like_rate": 4.43,
+   "like_rate": 4.42,
    "avg_score": 688
   }
  ],
@@ -117,7 +117,7 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2284 Aufrufe, 2.04 % Likes).",
-  "Schwächste Kategorie: 👻 Grusel (Ø 395 Aufrufe) – kommt seltener dran.",
+  "Schwächste Kategorie: 👻 Grusel (Ø 396 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2298 zu 706 Punkte).",
   "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2429 zu 1849 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
@@ -132,8 +132,8 @@
   "lied",
   "erkennst",
   "glas",
-  "klassikers",
   "scheibe",
+  "klassikers",
   "jede"
  ],
  "top": [
@@ -193,11 +193,11 @@
    "id": 205,
    "title": "Starre nie im Dunkeln in den Spiegel",
    "category": "grusel",
-   "views": 298,
+   "views": 300,
    "likes": 14,
    "comments": 2,
    "shares": 0,
-   "score": 568
+   "score": 570
   },
   {
    "id": 196,
