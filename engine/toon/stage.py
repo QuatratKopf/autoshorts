@@ -1417,6 +1417,7 @@ def direct(scenes, times, topic="", style="", look=""):
                 # ergab mit Handy-Grafik und „ZEICHEN 1“ drei Tafeln am Stück zum Einstieg (Video 190)
             sc["overlay"] = ov_c = None
         g0 = sc.get("graphic") if isinstance(sc.get("graphic"), dict) else None
+        was_gfx = bool(g0) and str(sc.get("shot") or "") == "graphic"
         if g0 and g0.get("type") == "map" and not _re0.search(GEO_RE, low0):
             sc["graphic"], g0 = None, None                # Europakarte mit leuchtenden Ländern zu einem Satz, der kein Land und keine Karte nennt (Satelliten-Pings)
             sc["shot"] = "" if sc.get("shot") == "graphic" else sc.get("shot")
@@ -1514,6 +1515,19 @@ def direct(scenes, times, topic="", style="", look=""):
         if ov_c and sc.get("overlay") and str(ov_c.get("type") or "") == "tag" and not _re0.search(r"\b(1[0-9]|20)\d{2}\b", str(ov_c.get("text") or "")) \
                 and unspoken_figures(ov_c, sc["text"]):
             sc["overlay"] = None                          # Schild „SEKUNDE 10“ an einem Satz, der die Zahl nicht nennt (sie fällt erst im nächsten); Jahreszahlen bleiben
+        if was_gfx and not isinstance(sc.get("graphic"), dict) and not acts and not sc.get("props") and not sc.get("crowd") and i:
+            # Grafik mit erfundener Zahl ist entfallen („300 KG“, „10 HP“): Der Satz spielt dort weiter, wo die Geschichte gerade ist – mit der Figur von eben.
+            # Bisher blieb der Platzhalter-Ort der Grafik („zimmer“) stehen, und die Figur lief dreimal durchs leere Wohnzimmer (Video 206)
+            for back_g in scenes[max(0, i - 3):i][::-1]:
+                hum_g = [a_ for a_ in (back_g.get("actors") or []) if isinstance(a_, dict) and not a_.get("kind") and a_.get("id")] if isinstance(back_g, dict) else []
+                if hum_g and str(back_g.get("shot") or "") not in ("graphic", "insert", "mirror") and places.resolve(backdrop(back_g)) not in MAPS:
+                    sc["place"], sc["time"] = back_g.get("place"), back_g.get("time") or sc.get("time")
+                    sc["backdrop"] = dict(back_g["backdrop"]) if isinstance(back_g.get("backdrop"), dict) else None
+                    ask_g = bool(_re0.search(r"\?\s*$|\bdu denkst\b|\bdu glaubst\b|\bfrag", sc["text"].lower()))
+                    sc["actors"] = acts = [{"id": hum_g[0]["id"], "action": "think" if ask_g else "idle", "pos": "center",
+                                            "emotion": MOOD_EMOTION.get(str(sc.get("mood") or "").lower(), ""), "emote": "?" if ask_g else ""}]
+                    place = places.resolve(sc.get("place"))
+                    break
         has_bd = isinstance(sc.get("backdrop"), dict) and (sc["backdrop"].get("elements") or sc["backdrop"].get("ground"))
         if not has_bd and not deep_f and not (sc.get("shot") == "graphic" and graphics.clean(sc.get("graphic"))) and not _re0.search(r"unter wasser|taucht|tauchen|versink|versunk|\bsinkt|gesunken", low0) \
                 and (_re0.search(SURFACE_RE, low0) or (_re0.search(DEBRIS_RE, low0) and _re0.search(r"treib(?!gut)|schwimm|strömung|\bmeer|ozean", low0)
@@ -3422,6 +3436,8 @@ BODY_ACTS = ((r"zuck\w* (?:\w+ ){0,3}zusammen|zusammenzuck|zusammengezuckt|kopf 
              (r"atmest (?:\w+ ){0,3}(?:schneller|flach|hektisch)|atmung (?:\w+ ){0,3}(?:schneller|beschleunig|flach|rast)|schnappst nach luft|außer atem|keuch", "pant", ""),
              (r"herz (?:\w+ ){0,3}(?:schlägt|rast|klopft|pocht|hämmert|pumpt)|herzschlag (?:\w+ ){0,3}(?:schneller|beschleunig|rast)|puls (?:\w+ ){0,3}(?:steigt|rast|schnellt|jagt)", "pant", "wide"))
 BODY_BRAIN_RE = r"\bgehirn|\bhirn\b|hirnstamm|mandelkern|amygdala|großhirn|kleinhirn|denkzentrale"
+BRAIN_IDIOM_RE = (r"(?:dein|euer|mein|das) (?:ge)?hirn (?:\w+ ){0,3}(?:zerstör|spreng|explodier|schmelz|platz|wegblas|umhau|durchbrenn|überforder|brechen|kaputt)"   # „wird dein Gehirn komplett
+                  r"|(?:zerstör|spreng|schmilz|überforder)\w* (?:\w+ ){0,2}(?:dein|euer|mein) (?:ge)?hirn")    # zerstören“ ist eine Redewendung des Einstiegs – kein Gehirn, das neben der Figur auf der Straße steht (Video 206)
 BODY_PARTS_RE = (r"\bkörper|\bbeine?n?\b|\bfüßen?\b|\bknien?\b|\bhänden?\b|\bhand\b|\barmen?\b|\baugen?\b|pupille|\bohr(?:en)?\b|\bherz|\bpuls\b|muskel|\bnacken|schulter|"
                  r"\bkopf\b|\bhaut\b|\batem|atmung|\bblut\b|\bmagen|verdauung|\bnerven?\b|reflex|adrenalin|hormon")   # Sätze über den Körper zeigen die Figur, nie Passanten auf der Straße (Video 128: „Die Beine reagieren zuletzt“)
 BODY_LEGS_RE = r"\bbeine?n?\b|\bfüßen?\b|\bknien?\b"
@@ -3472,7 +3488,7 @@ def _body_story(scenes):
             sc["_no_cut"] = True                          # kein Gegenschnitt mitten in der Geste
         elif shot == "close" and re.search(BODY_LEGS_RE, low):
             sc["shot"] = ""                               # „die Beine reagieren zuletzt“: die ganze Figur, nicht nur das Gesicht
-        if re.search(BODY_BRAIN_RE, low) and len(acts) == 1 and not (hit and hit[1] == "close") and str(sc.get("shot") or "") != "close" and not h.get("hold") \
+        if re.search(BODY_BRAIN_RE, low) and not re.search(BRAIN_IDIOM_RE, low) and len(acts) == 1 and not (hit and hit[1] == "close") and str(sc.get("shot") or "") != "close" and not h.get("hold") \
                 and str(h.get("action") or "").lower() not in ("dance", "sit", "sleep", "fall", "float", "jump") and not sc.get("_beside_bed") \
                 and not re.search(r"im kopf\b.{0,12}$", low):
             if rp in ("street", "park", "plain") and not re.search(OUTSIDE_RE, low):

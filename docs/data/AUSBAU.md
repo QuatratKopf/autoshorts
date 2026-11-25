@@ -232,6 +232,11 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   Nach Video 191: „überrascht dich mit etwas“ ohne genanntes Ding → er hält ein Päckchen (`SURPRISE_RE`, `lib_geschenk`); im Restaurant/Café stellt ein
   allgemeines „Menschen“ keine Fremden an den Tisch des Paars (nur `PAIR_FULL_RE`: voll, Gäste, Kellner …); Titelkarte ohne doppelte Zeile (Kicker = Text).
   Offen: Händchenhalten, Umarmen, gemeinsam am Tisch sitzen gibt es nicht als Haltung; das Handy als Requisite steht kindsgroß auf dem Boden.
+- Prüfung 25.11.2026 (Video 206, Open-World-Karte): Entfällt eine Grafik des Drehbuchs, weil sie eine nicht gesprochene Zahl zeigt, spielt der Satz
+  am Ort der Szene davor mit der Figur von eben weiter (`stage.direct`, `was_gfx`) – nicht mehr im Platzhalter-Ort „zimmer“ der Grafik, durch den die
+  Figur nur hereinlief. Redewendungen wie „wird dein Gehirn zerstören/sprengen“ (`stage.BRAIN_IDIOM_RE`) stellen kein Gehirn neben die Figur.
+  Ecken-Zeile mit stehendem Zähler („OPEN WORLD · TAG 1“): springt die Geschichte in der Zeit („nach drei Tagen“, Zustands-Zeile „TAG 3“), entfällt
+  der Zähler (`render.build_ass`); der Rest der Zeile bleibt nur, wenn er noch einen Ort nennt. Selbsttest-Fall `_pruef2511`.
 
 ## Was zu tun ist
 1. Offene Wünsche (ohne `"done": true`) und `"auto": true`-Einträge durchgehen, höchstens 8 pro Sitzung, häufigste zuerst.

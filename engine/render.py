@@ -214,6 +214,16 @@ def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, 
             hud = re.sub(r"^\s*\d{1,2}[:.]\d{2}(?:\s*UHR)?\s*[·|,–-]\s*", "", str(hud), flags=re.I).strip() or None
             if hud and not re.search(r"\d|·|\bTAG\b|\bNACHT\b|\bJAHR", str(hud).upper()):
                 hud = None                         # übrig bleibt ein Zustand („ANRUF LÄUFT“), der nach dem Auflegen und über dem Rechenzentrum nicht mehr stimmt
+    _span = r"(?:TAG|WOCHE|MONAT|JAHR|STUNDE|MINUTE|SEKUNDE)\s*\d+"
+    if hud and len(huds) < 2 and re.search(r"\b" + _span + r"\b", str(hud).upper()) and (
+            any(re.search(r"\bnach (?:\w+ ){1,2}(?:sekunden?|minuten?|stunden?|tag|tagen|wochen?|monat|monaten|jahr|jahren)\b|\b(?:tag|woche|monat|jahr) (?:\d+|zwei|drei|vier|fünf|sechs|sieben|zehn|dreißig)\b|"
+                          r"\bam (?:nächsten|zweiten|dritten) (?:tag|morgen)\b|\b(?:tage|wochen|monate|jahre) später\b", str(sc.get("text") or "").lower()) for sc in scenes)
+            or any(isinstance(sc.get("status"), str) and re.search(r"\b" + _span + r"\b", sc["status"].upper()) for sc in scenes)):
+        # „OPEN WORLD · TAG 1“ blieb 67 Sekunden stehen, während der Text „nach drei Tagen“, „nach einem Monat“, „nach einem Jahr“ sagte und rechts „TAG 3“ stand (Video 206):
+        # ein Zähler, der nie weiterzählt, obwohl die Geschichte in der Zeit springt, entfällt – der Rest bleibt nur, wenn er noch einen Ort nennt
+        hud = re.sub(r"\s*[·|,–-]?\s*\b" + _span + r"\b\s*[·|,–-]?\s*", " ", str(hud), flags=re.I).strip(" ·|,–-") or None
+        if hud and not re.search(r"\d|·|\bUHR\b|\bNACHT\b", str(hud).upper()):
+            hud = None
     if hud:
         cur_hud, hud_i = hud, -9
         for n_h, (sc, (s, e)) in enumerate(zip(scenes, times)):

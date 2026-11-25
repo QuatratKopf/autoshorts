@@ -2572,6 +2572,40 @@ def main():
             frame({"shot": "insert", "props": [{"type": k_}]})
         assert extras.held_key("lib_geschenk"), "das Päckchen lässt sich in der Hand halten (Überraschung im Paar-Video)"
     check("Ausbau 25.11.: Karten-Markierungen, Mini-Karte, Rucksack, Socke, Stift, Geschenk, Pizza, Eiskristall", _ausbau2511)
+
+    def _pruef2511():                                            # Prüfung 25.11.2026 (Video 206, Open-World-Karte)
+        import tempfile
+        from pathlib import Path
+        from .. import render
+        mk = lambda: [  # noqa: E731
+            {"text": "Du stehst mitten auf der Straße.", "place": "stadt", "actors": [{"id": "du", "action": "idle", "pos": "center"}]},
+            {"text": "Und der letzte Punkt wird dein Gehirn komplett zerstören.", "place": "stadt", "actors": [{"id": "du", "action": "look_around", "pos": "center"}]},
+            {"text": "Du denkst, du kannst endlos Gegenstände tragen.", "place": "zimmer", "actors": [], "props": [], "shot": "graphic",
+             "graphic": {"type": "number", "kicker": "INVENTAR", "value": "300 KG", "label": "GEWICHT"}},
+            {"text": "Nach drei Tagen ist die Stadt leer.", "place": "stadt", "actors": [{"id": "du", "action": "idle", "pos": "center"}], "status": "TAG 3: CHAOS"}]
+        sc = mk()
+        stage.direct(sc, [(k * 3.0, k * 3.0 + 3.0) for k in range(len(sc))], "Was wäre, wenn die Welt ein Spiel wäre", "whatif")
+        assert not any(isinstance(a_, dict) and a_.get("kind") == "brain" for a_ in sc[1].get("actors") or []), "Redewendung „Gehirn zerstören“ stellt kein Gehirn auf die Straße"
+        assert sc[2].get("shot") != "graphic" and places.resolve(stage.backdrop(sc[2])) == places.resolve(stage.backdrop(sc[1])), \
+            f"entfallene Grafik spielt am Ort der Szene davor, nicht im Platzhalter-Zimmer: {sc[2].get('place')}"
+        assert [a_.get("id") for a_ in sc[2].get("actors") or []] == ["du"] and sc[2]["actors"][0].get("action") != "walk", sc[2].get("actors")
+        frame(sc[2], {"du": {"shirt": "lila"}})
+        sc2 = [{"text": "Dein Gehirn prüft jede Bewegung.", "place": "zimmer", "actors": [{"id": "du", "action": "idle", "pos": "center"}]}]
+        stage.direct(sc2, [(0.0, 3.0)], "Was dein Gehirn im Schlaf tut", "fakten")
+        assert any(isinstance(a_, dict) and a_.get("kind") == "brain" for a_ in sc2[0].get("actors") or []), "ein echter Gehirn-Satz zeigt das Gehirn weiterhin"
+        with tempfile.TemporaryDirectory() as td:
+            f = Path(td) / "h.ass"
+            sc3, tm = mk(), [(k * 3.0, k * 3.0 + 3.0) for k in range(4)]
+            render.build_ass([("Du", 0.2, 0.8)], sc3, tm, f, hud="OPEN WORLD · TAG 1")
+            assert "TAG 1" not in f.read_text(encoding="utf-8") and ",Hud," not in f.read_text(encoding="utf-8"), "stehender Zähler „TAG 1“ entfällt, wenn die Geschichte in der Zeit springt"
+            sc4 = [{"text": "Du wachst auf."}, {"text": "Es ist still."}]
+            render.build_ass([("Du", 0.2, 0.8)], sc4, tm[:2], f, hud="WALDHÜTTE · TAG 1")
+            assert "TAG 1" in f.read_text(encoding="utf-8"), "ohne Zeitsprung bleibt die Angabe"
+            sc5 = [{"text": "Du wachst auf."}, {"text": "Nach zwei Wochen bist du allein."}]
+            render.build_ass([("Du", 0.2, 0.8)], sc5, tm[:2], f, hud="STATION 7 · TAG 1")
+            t5 = f.read_text(encoding="utf-8")
+            assert "TAG 1" not in t5 and "STATION 7" in t5, "der Ort der Zeile bleibt, nur der stehende Zähler entfällt"
+    check("Prüfung 25.11.: Redewendung Gehirn, entfallene Grafik am Ort der Geschichte, stehender Tages-Zähler", _pruef2511)
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")
     import collections
     for line, n in collections.Counter(e.strip().splitlines()[-1] + "  @ " + e.strip().splitlines()[-3].strip()[:90] for e in errors).most_common(30):
