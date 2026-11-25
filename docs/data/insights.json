@@ -1,5 +1,5 @@
 {
- "updated": 1795587834.8359993,
+ "updated": 1795589642.8137715,
  "enough": true,
  "counted": 40,
  "total": 42,
@@ -128,24 +128,24 @@
  ],
  "words_bad": [
   "remix",
-  "bekanntes",
-  "lied",
   "erkennst",
+  "lied",
+  "bekanntes",
   "glas",
-  "eines",
+  "jede",
   "scheibe",
-  "jede"
+  "eines"
  ],
  "top": [
   {
    "id": 168,
    "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
    "category": "comedy",
-   "views": 3947,
+   "views": 3946,
    "likes": 53,
    "comments": 1,
    "shares": 0,
-   "score": 4772
+   "score": 4771
   },
   {
    "id": 46,
