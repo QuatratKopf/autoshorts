@@ -2606,6 +2606,23 @@ def main():
             t5 = f.read_text(encoding="utf-8")
             assert "TAG 1" not in t5 and "STATION 7" in t5, "der Ort der Zeile bleibt, nur der stehende Zähler entfällt"
     check("Prüfung 25.11.: Redewendung Gehirn, entfallene Grafik am Ort der Geschichte, stehender Tages-Zähler", _pruef2511)
+
+    def _pruef2511b():                                           # Prüfung 25.11.2026 (Video 207): leerer Wald statt Landkarte, Einkaufstüte statt Rucksack
+        sc = [{"text": "Du läufst los.", "place": "park", "actors": [{"id": "du", "action": "walk", "pos": "center"}]},
+              {"text": "Ohne Mini-Karte im Blickfeld musst du auf Papier schauen.", "place": "wald", "props": ["map"], "actors": [], "shot": "event"},
+              {"text": "Dein Rucksack darf höchstens zwanzig Prozent deines Körpergewichts wiegen.", "place": "park", "props": ["rucksack"],
+               "actors": [{"id": "du", "action": "cower", "hold": "bag", "pos": "center"}]},
+              {"text": "Ein Auto steht am Straßenrand.", "place": "stadt", "props": ["car"], "actors": [], "shot": "event"}]
+        stage.direct(sc, [(k * 3.0, k * 3.0 + 3.0) for k in range(len(sc))], "Was wäre, wenn du eine Spielkarte zu Fuß erkunden müsstest", "whatif")
+        a1 = [a_ for a_ in sc[1].get("actors") or [] if isinstance(a_, dict)]
+        assert a1 and a1[0].get("id") == "du" and a1[0].get("hold") == "map", f"Landkarte ohne Figur: die Hauptfigur hält sie – kein leerer Wald: {a1}"
+        a2 = [a_ for a_ in sc[2].get("actors") or [] if isinstance(a_, dict)]
+        if extras.held_key("lib_rucksack"):
+            assert a2 and a2[0].get("hold") == "lib_rucksack", f"Rucksack-Satz: die Figur hält den Rucksack, keine Einkaufstüte: {a2}"
+        assert not [a_ for a_ in sc[3].get("actors") or [] if isinstance(a_, dict) and a_.get("hold")], "ein Auto nimmt niemand in die Hand"
+        for sc_ in sc[1:3]:
+            frame(sc_, {"du": {"shirt": "gelb", "hat": "cap"}})
+    check("Prüfung 25.11.: Landkarte in der Hand statt leerem Wald, Rucksack statt Einkaufstüte", _pruef2511b)
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")
     import collections
     for line, n in collections.Counter(e.strip().splitlines()[-1] + "  @ " + e.strip().splitlines()[-3].strip()[:90] for e in errors).most_common(30):

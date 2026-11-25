@@ -1632,6 +1632,13 @@ def direct(scenes, times, topic="", style="", look=""):
                         a["hold"] = item
                         break
                 break
+        if _re0.search(r"(?<!ohne )(?<!kein )(?<!keinen )(?<!keine )\b(?:rucksack|rucksäcke|schulranzen|ranzen)\b", txt0) and extras.held_key("lib_rucksack"):
+            for a in acts:                                # „Dein Rucksack darf höchstens …“: die Figur hält den Rucksack – nicht die Einkaufstüte mit Obst, während der Rucksack klein am Bildrand steht (Video 207)
+                if not a.get("kind") and str(a.get("hold") or "").lower() in ("bag", "tasche", "rucksack", "backpack"):
+                    a["hold"] = "lib_rucksack"
+                    sc["props"] = [q for q in (sc.get("props") or []) if not (isinstance(q, dict) and extras.PROP_ALIASES.get(str(q.get("type") or "").lower(), str(q.get("type") or "").lower())
+                                                                              in ("lib_rucksack", "rucksack", "bag"))]
+                    break
         kinds_now = [extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) for p in (sc.get("props") or []) if isinstance(p, dict)]
         if ("ambulance" in kinds_now or "police" in kinds_now) and "car" in kinds_now and not _re0.search(r"\bautos?\b|autofahrer|\bstau", txt0):
             sc["props"] = [p for p in sc["props"] if not (isinstance(p, dict) and extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) == "car")]
@@ -2107,6 +2114,14 @@ def direct(scenes, times, topic="", style="", look=""):
             sc["props"] = [{"type": (named or topic_out)[0]}]        # das Thema bleibt im Bild (die Drohne über der Straße, die Spinne im Zimmer)
         fig_prev = bool([a for a in (sc.get("actors") or []) if isinstance(a, dict)]) and sc.get("shot") not in ("insert", "graphic")
         # --- beeindruckende Zahl im Satz → Zähler, wenn das Drehbuch keine Einblendung vorsieht
+        hand_p = [str(q.get("type") if isinstance(q, dict) else q).lower() for q in (sc.get("props") or [])]
+        if last_id and not [a for a in (sc.get("actors") or []) if isinstance(a, dict)] and not sc.get("crowd") and hand_p and sc.get("shot") not in ("graphic", "insert") \
+                and places.resolve(backdrop(sc)) not in MAPS + ("space", "underwater", "moon", "highsky") and all(extras.held_key(k_) for k_ in hand_p) \
+                and _re0.search(r"\b(?:du|dich|dir|dein\w*|man|wir|ich)\b", str(sc.get("text") or "").lower()):
+            # „Ohne Mini-Karte musst du auf Papier schauen“ mit Landkarte als einzigem Ding und ohne Figur: dreieinhalb Sekunden leerer Wald, die Karte war nicht zu sehen
+            # (Video 207). Ein Ding, das man in die Hand nimmt, und ein Satz über „du“: die Hauptfigur hält es und sieht darauf
+            sc["actors"] = [{"id": last_id, "action": "think", "pos": "center", "hold": hand_p[0], "emotion": MOOD_EMOTION.get(str(sc.get("mood") or ""), "")}]
+            sc["shot"] = "" if sc.get("shot") == "event" else sc.get("shot")
         if not [a for a in (sc.get("actors") or []) if isinstance(a, dict)] and not sc.get("crowd") and not sc.get("props") and not sc.get("weather") \
                 and sc.get("shot") not in ("graphic", "insert") and places.resolve(backdrop(sc)) not in MAPS:
             if last_id:                                   # nie ein leeres Bild: die Figur kommt herein und sieht sich um

@@ -237,6 +237,8 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   Figur nur hereinlief. Redewendungen wie „wird dein Gehirn zerstören/sprengen“ (`stage.BRAIN_IDIOM_RE`) stellen kein Gehirn neben die Figur.
   Ecken-Zeile mit stehendem Zähler („OPEN WORLD · TAG 1“): springt die Geschichte in der Zeit („nach drei Tagen“, Zustands-Zeile „TAG 3“), entfällt
   der Zähler (`render.build_ass`); der Rest der Zeile bleibt nur, wenn er noch einen Ort nennt. Selbsttest-Fall `_pruef2511`.
+  Video 207: Szene ohne Figur, deren einziges Ding man in die Hand nimmt (Landkarte, Handy – `extras.held_key`), und ein Satz über „du“: die Hauptfigur
+  hält es (vorher 3,5 s leerer Wald). Nennt der Satz den Rucksack, hält die Figur `lib_rucksack` statt der Einkaufstüte (`hold: bag`). Fall `_pruef2511b`.
 
 ## Was zu tun ist
 1. Offene Wünsche (ohne `"done": true`) und `"auto": true`-Einträge durchgehen, höchstens 8 pro Sitzung, häufigste zuerst.
