@@ -8175,5 +8175,46 @@
   "look": "cartoon",
   "mp4": true,
   "error": "Bei der Prüfung verworfen: Prüfung: Uhr-Grafik zeigt 72:00:00 statt der gesprochenen 80 Stunden, fünf Figuren als Knäuel bei der Gewinn-Szene, 3.600 Euro nicht im Bild"
+ },
+ {
+  "id": 215,
+  "category": "vergleich",
+  "topic": "Spätkauf gegen Supermarkt – wer verdient mehr?",
+  "status": "rendered",
+  "created": 1795635872.4294586,
+  "title": "Spätkauf gegen Supermarkt: Wer verdient mehr?",
+  "description": "Tom oder Sandra: Wer holt mehr Gewinn heraus?\nEine Beispielrechnung mit grob geschätzten Zahlen: Umsatz, Marge, Gewinn und Arbeitszeit im Vergleich.\nZu wem gehst du abends eher einkaufen?",
+  "hashtags": [
+   "#shorts",
+   "#späti",
+   "#supermarkt",
+   "#vergleich",
+   "#geld",
+   "#business",
+   "#wissen",
+   "#fyp"
+  ],
+  "tags": [
+   "spätkauf",
+   "supermarkt",
+   "wer verdient mehr",
+   "umsatz",
+   "gewinn",
+   "marge",
+   "vergleich",
+   "beispielrechnung"
+  ],
+  "thumb_text": "WER VERDIENT MEHR?",
+  "missing": null,
+  "cover_ms": 94585,
+  "duration": 94.5,
+  "providers": {
+   "text": "Plan",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
