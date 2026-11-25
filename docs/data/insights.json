@@ -1,5 +1,5 @@
 {
- "updated": 1795613701.776046,
+ "updated": 1795615517.967812,
  "enough": true,
  "counted": 41,
  "total": 43,
@@ -18,10 +18,10 @@
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 1,
-   "avg_views": 2371,
+   "avg_views": 2372,
    "avg_likes": 34.0,
    "like_rate": 1.43,
-   "avg_score": 2881
+   "avg_score": 2882
   },
   {
    "slug": "tiere",
@@ -54,19 +54,19 @@
    "slug": "liebe",
    "name": "💕 Liebe",
    "n": 1,
-   "avg_views": 1489,
+   "avg_views": 1488,
    "avg_likes": 62.0,
-   "like_rate": 4.16,
-   "avg_score": 2419
+   "like_rate": 4.17,
+   "avg_score": 2418
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 7,
-   "avg_views": 1688,
-   "avg_likes": 43.9,
+   "avg_views": 1690,
+   "avg_likes": 44.0,
    "like_rate": 2.6,
-   "avg_score": 2355
+   "avg_score": 2358
   },
   {
    "slug": "storys",
@@ -90,10 +90,10 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 6,
-   "avg_views": 1219,
-   "avg_likes": 10.3,
-   "like_rate": 0.85,
-   "avg_score": 1409
+   "avg_views": 1220,
+   "avg_likes": 10.5,
+   "like_rate": 0.86,
+   "avg_score": 1412
   },
   {
    "slug": "grusel",
@@ -118,8 +118,8 @@
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2283 Aufrufe, 2.04 % Likes).",
   "Schwächste Kategorie: 👻 Grusel (Ø 492 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2337 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2496 zu 1846 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2339 zu 706 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2497 zu 1847 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -132,9 +132,9 @@
   "lied",
   "bekanntes",
   "glas",
-  "klassikers",
   "eines",
-  "jede"
+  "scheibe",
+  "klassikers"
  ],
  "top": [
   {
@@ -151,11 +151,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2592,
+   "views": 2593,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3432
+   "score": 3433
   },
   {
    "id": 77,
@@ -203,11 +203,11 @@
    "id": 196,
    "title": "Jede Scheibe ein Ton: Lo-Fi-Remix eines Klassikers",
    "category": "musik",
-   "views": 304,
-   "likes": 1,
+   "views": 308,
+   "likes": 2,
    "comments": 0,
    "shares": 0,
-   "score": 319
+   "score": 338
   },
   {
    "id": 44,
