@@ -7803,5 +7803,50 @@
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7711825996055399719?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
+ },
+ {
+  "id": 206,
+  "category": "whatif",
+  "topic": "Was wäre, wenn du die Karte eines Open-World-Spiels in der echten Welt erkunden müsstest?",
+  "status": "review",
+  "created": 1795601388.9111063,
+  "trend": {
+   "title": "state of leonida",
+   "source": "Google Trends"
+  },
+  "title": "State of Leonida im echten Leben: Was wäre, wenn?",
+  "description": "Was passieren würde, wenn tausende Orte auf einer echten Karte auftauchen!\nDu erfährst, wie grausam das Leben in einer Open World wäre.\nWürdest du lieber einen Checkpoint haben oder unendlich Ausdauer?",
+  "hashtags": [
+   "#shorts",
+   "#stateofleonida",
+   "#gta6",
+   "#gaming",
+   "#whatif",
+   "#fakten",
+   "#gamingdeutschland",
+   "#viral"
+  ],
+  "tags": [
+   "state of leonida",
+   "gta 6 karte",
+   "open world echtes leben",
+   "what if gaming",
+   "gta in echt",
+   "gaming fakten"
+  ],
+  "thumb_text": "OPEN WORLD ECHT",
+  "missing": null,
+  "cover_ms": 67545,
+  "duration": 67.4,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-25 13:00",
+  "review_at": 1795601869.1356921
  }
 ]
