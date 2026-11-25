@@ -1,0 +1,528 @@
+{
+ "title": "Phantom-Vibration: Warum dein Bein brummt, obwohl niemand schreibt",
+ "scenes": [
+  {
+   "text": "Dein Bein brummt, du greifst zum Handy, und da ist absolut nichts.",
+   "see": "Die Hauptfigur bleibt auf dem Gehweg stehen und starrt erschrocken auf ihr Handy.",
+   "place": "strasse",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Keine Nachricht, kein Anruf, trotzdem hast du es genau gespürt.",
+   "see": "Sie schaut ratlos auf das Handy in ihrer Hand.",
+   "place": "strasse",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Forscher haben dafür einen Namen: Phantom-Vibration.",
+   "see": "Das Gehirn als Figur im Labor zeigt nach oben auf den Fachbegriff.",
+   "place": "labor",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "PHANTOM-VIBRATION"
+   }
+  },
+  {
+   "text": "In einer amerikanischen Studie von 2012 kannten das neun von zehn Studierenden.",
+   "see": "Große Zahl: neun von zehn.",
+   "place": "klassenzimmer",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "calm",
+   "crowd": "walk",
+   "graphic": {
+    "type": "share",
+    "kicker": "STUDIE 2012",
+    "value": "9 von 10",
+    "label": "KENNEN DAS",
+    "dark": false
+   }
+  },
+  {
+   "text": "Im Schnitt passierte es ihnen etwa alle zwei Wochen.",
+   "see": "Die Hauptfigur sitzt im Klassenzimmer und greift verwundert nach ihrem Handy.",
+   "place": "klassenzimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "right",
+     "to": "right"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "ALLE ZWEI WOCHEN"
+   }
+  },
+  {
+   "text": "Und in einer Klinik berichteten sogar zwei Drittel des Personals davon.",
+   "see": "Ein Arzt im Krankenhausflur schaut verdutzt auf sein Handy.",
+   "place": "krankenhaus",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "arzt",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "ZWEI DRITTEL"
+   }
+  },
+  {
+   "text": "Aber warum fällt dein Kopf immer wieder darauf herein?",
+   "see": "Das Gehirn kratzt sich ratlos am Kopf.",
+   "place": "labor",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Deine Haut meldet ihm ununterbrochen winzige Reize.",
+   "see": "Die Hauptfigur läuft durch den Park.",
+   "place": "park",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "walk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "right"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Der Stoff deiner Hose streift dein Bein, ein Muskel zuckt kurz.",
+   "see": "Sie bleibt stehen und schaut verwundert an ihrem Bein hinunter.",
+   "place": "park",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "HAUT-REIZ"
+   }
+  },
+  {
+   "text": "Normalerweise sortiert dein Gehirn so etwas einfach aus.",
+   "see": "Das Gehirn winkt gelassen ab.",
+   "place": "labor",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "left"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Doch es wartet jede Sekunde auf die nächste Nachricht.",
+   "see": "Die Hauptfigur sitzt auf dem Sofa und starrt gebannt auf ihr Handy.",
+   "place": "zimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Also deutet es das harmlose Zucken kurzerhand als Vibration.",
+   "see": "Sie zuckt zusammen und schaut erschrocken auf das Handy.",
+   "place": "zimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense"
+  },
+  {
+   "text": "Ein Fehlalarm ist deinem Gehirn nämlich lieber als eine verpasste Nachricht.",
+   "see": "Das Gehirn schlägt Alarm, der Stempel FEHLALARM knallt ins Bild.",
+   "place": "labor",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "stamp",
+    "text": "FEHLALARM",
+    "color": "red"
+   }
+  },
+  {
+   "text": "Wer sein Handy ständig nutzt, spürt das Phantom deshalb deutlich häufiger.",
+   "see": "Die Hauptfigur tippt im Bus auf ihrem Handy.",
+   "place": "bus",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Genauso geht es jedem, der ungeduldig auf eine Antwort wartet.",
+   "see": "Sie läuft im Schlafzimmer nervös hin und her, das Handy in der Hand.",
+   "place": "schlafzimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "right"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Die gute Nachricht: Das Ganze ist völlig harmlos.",
+   "see": "Sie atmet auf und lacht erleichtert.",
+   "place": "zimmer",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "laugh",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "stamp",
+    "text": "HARMLOS",
+    "color": "green"
+   }
+  },
+  {
+   "text": "Willst du es trotzdem loswerden, trag dein Handy einfach auf der anderen Seite.",
+   "see": "Sie zeigt das Handy in der anderen Hand.",
+   "place": "zimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "right",
+     "to": "right"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "note",
+    "title": "TIPP",
+    "text": "Handy auf die andere Seite"
+   }
+  },
+  {
+   "text": "Oder schalte die Vibration für ein paar Tage komplett aus.",
+   "see": "Sie tippt entschlossen auf das Handy.",
+   "place": "zimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "left"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm",
+   "overlay": {
+    "type": "note",
+    "title": "TIPP",
+    "text": "Vibration ausschalten"
+   }
+  },
+  {
+   "text": "Dann merkt dein Gehirn schnell, dass am Bein gar nichts mehr zu erwarten ist.",
+   "see": "Das Gehirn lehnt sich entspannt zurück.",
+   "place": "labor",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Und jetzt ehrlich: Wann hat dein Bein zuletzt gebrummt, obwohl niemand geschrieben hat?",
+   "see": "Die Hauptfigur zeigt fragend auf die Zuschauer.",
+   "place": "strasse",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "?",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "center"
+    }
+   ],
+   "mood": "calm"
+  }
+ ]
+}
