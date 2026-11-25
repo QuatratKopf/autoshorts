@@ -1,18 +1,18 @@
 {
- "updated": 1795620755.1939263,
+ "updated": 1795624519.638447,
  "enough": true,
  "counted": 42,
- "total": 43,
+ "total": 44,
  "needed": 6,
  "categories": [
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 5,
-   "avg_views": 2283,
+   "avg_views": 2284,
    "avg_likes": 46.6,
    "like_rate": 2.04,
-   "avg_score": 3002
+   "avg_score": 3003
   },
   {
    "slug": "vergleich",
@@ -54,19 +54,19 @@
    "slug": "liebe",
    "name": "💕 Liebe",
    "n": 1,
-   "avg_views": 1488,
+   "avg_views": 1490,
    "avg_likes": 62.0,
-   "like_rate": 4.17,
-   "avg_score": 2418
+   "like_rate": 4.16,
+   "avg_score": 2420
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 7,
-   "avg_views": 1692,
+   "avg_views": 1690,
    "avg_likes": 44.0,
    "like_rate": 2.6,
-   "avg_score": 2361
+   "avg_score": 2359
   },
   {
    "slug": "storys",
@@ -90,34 +90,34 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 6,
-   "avg_views": 1221,
-   "avg_likes": 10.3,
-   "like_rate": 0.85,
-   "avg_score": 1411
+   "avg_views": 1220,
+   "avg_likes": 10.5,
+   "like_rate": 0.86,
+   "avg_score": 1412
   },
   {
    "slug": "grusel",
    "name": "👻 Grusel",
    "n": 2,
-   "avg_views": 362,
+   "avg_views": 367,
    "avg_likes": 15.5,
-   "like_rate": 4.28,
-   "avg_score": 625
+   "like_rate": 4.22,
+   "avg_score": 630
   }
  ],
  "weights": {
-  "fakten": 1.07,
+  "fakten": 1.06,
   "grusel": 0.5,
   "tiere": 1.12,
   "whatif": 1.1,
-  "comedy": 1.35,
+  "comedy": 1.36,
   "vergleich": 1.2,
   "motivation": 1.2,
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2283 Aufrufe, 2.04 % Likes).",
-  "Schwächste Kategorie: 👻 Grusel (Ø 362 Aufrufe) – kommt seltener dran.",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2284 Aufrufe, 2.04 % Likes).",
+  "Schwächste Kategorie: 👻 Grusel (Ø 367 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2292 zu 706 Punkte).",
   "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2421 zu 1847 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
@@ -128,12 +128,12 @@
  ],
  "words_bad": [
   "remix",
-  "lied",
   "erkennst",
   "bekanntes",
+  "lied",
   "glas",
   "eines",
-  "jede",
+  "scheibe",
   "klassikers"
  ],
  "top": [
@@ -141,11 +141,11 @@
    "id": 168,
    "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
    "category": "comedy",
-   "views": 3948,
+   "views": 3947,
    "likes": 53,
    "comments": 1,
    "shares": 0,
-   "score": 4773
+   "score": 4772
   },
   {
    "id": 46,
@@ -193,21 +193,21 @@
    "id": 205,
    "title": "Starre nie im Dunkeln in den Spiegel",
    "category": "grusel",
-   "views": 233,
+   "views": 242,
    "likes": 10,
    "comments": 2,
    "shares": 0,
-   "score": 443
+   "score": 452
   },
   {
    "id": 196,
    "title": "Jede Scheibe ein Ton: Lo-Fi-Remix eines Klassikers",
    "category": "musik",
-   "views": 316,
-   "likes": 1,
+   "views": 308,
+   "likes": 2,
    "comments": 0,
    "shares": 0,
-   "score": 331
+   "score": 338
   },
   {
    "id": 44,
