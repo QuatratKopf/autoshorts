@@ -1,8 +1,8 @@
 {
- "updated": 1795634342.8221424,
+ "updated": 1795636682.1868885,
  "enough": true,
  "counted": 42,
- "total": 44,
+ "total": 45,
  "needed": 6,
  "categories": [
   {
@@ -33,6 +33,15 @@
    "avg_score": 2487
   },
   {
+   "slug": "liebe",
+   "name": "💕 Liebe",
+   "n": 1,
+   "avg_views": 1501,
+   "avg_likes": 63.0,
+   "like_rate": 4.2,
+   "avg_score": 2446
+  },
+  {
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
@@ -45,28 +54,19 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 11,
-   "avg_views": 1722,
+   "avg_views": 1723,
    "avg_likes": 46.8,
    "like_rate": 2.72,
-   "avg_score": 2427
-  },
-  {
-   "slug": "liebe",
-   "name": "💕 Liebe",
-   "n": 1,
-   "avg_views": 1494,
-   "avg_likes": 62.0,
-   "like_rate": 4.15,
-   "avg_score": 2424
+   "avg_score": 2428
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 7,
-   "avg_views": 1693,
+   "avg_views": 1699,
    "avg_likes": 44.0,
-   "like_rate": 2.6,
-   "avg_score": 2362
+   "like_rate": 2.59,
+   "avg_score": 2368
   },
   {
    "slug": "storys",
@@ -90,23 +90,23 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 6,
-   "avg_views": 1222,
+   "avg_views": 1226,
    "avg_likes": 10.3,
-   "like_rate": 0.85,
-   "avg_score": 1412
+   "like_rate": 0.84,
+   "avg_score": 1416
   },
   {
    "slug": "grusel",
    "name": "👻 Grusel",
    "n": 2,
-   "avg_views": 388,
+   "avg_views": 395,
    "avg_likes": 17.5,
-   "like_rate": 4.51,
-   "avg_score": 680
+   "like_rate": 4.43,
+   "avg_score": 688
   }
  ],
  "weights": {
-  "fakten": 1.06,
+  "fakten": 1.07,
   "grusel": 0.5,
   "tiere": 1.12,
   "whatif": 1.09,
@@ -117,9 +117,9 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2284 Aufrufe, 2.04 % Likes).",
-  "Schwächste Kategorie: 👻 Grusel (Ø 388 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2295 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2426 zu 1847 Punkte).",
+  "Schwächste Kategorie: 👻 Grusel (Ø 395 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2298 zu 706 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2429 zu 1849 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -133,8 +133,8 @@
   "erkennst",
   "glas",
   "klassikers",
-  "jede",
-  "eines"
+  "scheibe",
+  "jede"
  ],
  "top": [
   {
@@ -151,21 +151,21 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2596,
+   "views": 2600,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3436
+   "score": 3440
   },
   {
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2270,
+   "views": 2272,
    "likes": 62,
    "comments": 0,
    "shares": 0,
-   "score": 3200
+   "score": 3202
   },
   {
    "id": 124,
@@ -193,21 +193,21 @@
    "id": 205,
    "title": "Starre nie im Dunkeln in den Spiegel",
    "category": "grusel",
-   "views": 284,
+   "views": 298,
    "likes": 14,
    "comments": 2,
    "shares": 0,
-   "score": 554
+   "score": 568
   },
   {
    "id": 196,
    "title": "Jede Scheibe ein Ton: Lo-Fi-Remix eines Klassikers",
    "category": "musik",
-   "views": 325,
+   "views": 343,
    "likes": 1,
    "comments": 0,
    "shares": 0,
-   "score": 340
+   "score": 358
   },
   {
    "id": 44,
