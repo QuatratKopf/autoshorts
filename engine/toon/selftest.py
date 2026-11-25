@@ -2623,6 +2623,32 @@ def main():
         for sc_ in sc[1:3]:
             frame(sc_, {"du": {"shirt": "gelb", "hat": "cap"}})
     check("Prüfung 25.11.: Landkarte in der Hand statt leerem Wald, Rucksack statt Einkaufstüte", _pruef2511b)
+
+    def _pruef2511c():                                           # Prüfung 25.11.2026 (Video 209, Phantom-Vibration): Hose durchs Labor getragen, Prozent-Zahl verschwunden, Anruf-Display bei „steht rein gar nichts“
+        du = lambda act, **kw: [{"id": "du", "action": act, "pos": "center", **kw}]   # noqa: E731
+        sc = [{"text": "Dein Handy vibriert, obwohl niemand anruft oder schreibt.", "place": "zimmer", "props": ["phone"], "actors": du("shocked", hold="phone")},
+              {"text": "Über neunzig Prozent aller Smartphone-Nutzer kennen dieses seltsame Phänomen im Alltag.", "place": "zimmer", "actors": [], "shot": "graphic",
+               "overlay": {"type": "card", "text": "90 % BETROFFEN"}, "graphic": {"type": "number", "kicker": "STUDIENERGEBNIS", "value": "90 %", "label": "ALLER NUTZER"}},
+              {"text": "Dein Gehirn deutet Reize falsch.", "place": "labor", "actors": [{"id": "gehirn", "action": "think", "pos": "center"}]},
+              {"text": "Schon das leichte Reiben deiner Hose löst winzige Signale auf der Haut aus.", "place": "strasse", "actors": du("walk", pos="left", to="right")},
+              {"text": "Denn du könntest schwören: Dein Handy vibriert in der Hosentasche, aber auf dem Display steht rein gar nichts.", "place": "zimmer", "props": ["phone"],
+               "actors": du("shocked", hold="phone")}]
+        stage.direct(sc, [(k * 4.5, k * 4.5 + 4.5) for k in range(len(sc))], "Warum du den Phantom-Vibrations-Effekt hast", "fakten")
+        assert sc[1].get("shot") == "graphic" and isinstance(sc[1].get("graphic"), dict) and "90" in str(sc[1]["graphic"].get("value")), \
+            f"gesprochene Prozent-Zahl ohne Füllstand: die große Zahl bleibt: {sc[1].get('shot')!r} {sc[1].get('graphic')}"
+        assert places.resolve(sc[3].get("place")) == "street", f"„strasse“ ist die Straße, nicht der Ort der Szene davor: {sc[3].get('place')}"
+        worn = [str(q.get("type") if isinstance(q, dict) else q) for q in sc[3].get("props") or []] + [str(a_.get("hold") or "") for a_ in sc[3].get("actors") or [] if isinstance(a_, dict)]
+        assert not [w_ for w_ in worn if "hose" in w_ or "jeans" in w_], f"die Hose hat die Figur an – keine zweite in der Hand oder am Boden: {worn}"
+        assert not [q for q in sc[4].get("props") or [] if "display" in str(q)] and str(sc[4].get("shot") or "") != "insert", f"leeres Display: kein Großbild mit Anruf: {sc[4]}"
+        sc2 = [{"text": "Das Display flackert kurz auf.", "place": "bedroom", "time": "night", "actors": du("shocked")}]
+        stage.direct(sc2, [(0.0, 4.0)], "Die Nachricht um Mitternacht", "grusel")
+        assert [q for q in sc2[0].get("props") or [] if "display" in str(q)], f"ein Display, das etwas zeigt, bleibt im Bild: {sc2[0]}"
+        g2 = [{"text": "Der Akku hat noch elf Prozent.", "place": "zimmer", "actors": du("talk"), "shot": "graphic", "graphic": {"type": "number", "value": "11 %", "label": "AKKU"}}]
+        stage.direct(g2, [(0.0, 4.0)], "Dein Handy", "fakten")
+        assert g2[0].get("shot") != "graphic", f"Prozent mit Bezug bleibt ein Füllstand über der Szene: {g2[0]}"
+        for sc_ in sc:
+            frame(sc_, {"du": {"shirt": "lila", "gender": "w", "hair": "ponytail"}, "gehirn": {"kind": "brain"}})
+    check("Prüfung 25.11.: Prozent-Zahl bleibt, getragene Hose ist kein Ding, leeres Display ohne Anruf-Großbild", _pruef2511c)
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")
     import collections
     for line, n in collections.Counter(e.strip().splitlines()[-1] + "  @ " + e.strip().splitlines()[-3].strip()[:90] for e in errors).most_common(30):

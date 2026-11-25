@@ -2690,7 +2690,7 @@ ALIASES = {"thronsaal": "throneroom", "thron": "throneroom", "palast": "thronero
            "altstadt": "oldtown", "old town": "oldtown", "old_town": "oldtown", "gasse": "oldtown", "marktplatz": "oldtown", "fachwerk": "oldtown",
            "savanne": "savannah", "steppe": "savannah", "savanna": "savannah", "serengeti": "savannah", "asphalt": "street", "werkstatt": "garage", "autowerkstatt": "garage", "kfz-werkstatt": "garage", "workshop": "garage",
            "boxengasse": "garage", "tuning": "garage", "tuningwerkstatt": "garage", "schrauberhalle": "garage", "carport": "garage", "kino": "cinema", "kinosaal": "cinema", "kinos": "cinema", "leinwand": "cinema", "kinoleinwand": "cinema",
-           "lichtspielhaus": "cinema", "filmpalast": "cinema", "schlafzimmer": "bedroom", "zimmer": "livingroom", "wohnzimmer": "livingroom", "straße": "street", "stadt": "street",
+           "lichtspielhaus": "cinema", "filmpalast": "cinema", "schlafzimmer": "bedroom", "zimmer": "livingroom", "wohnzimmer": "livingroom", "straße": "street", "strasse": "street", "stadt": "street",
            "city": "street", "keller": "basement", "bunker": "basement", "wald": "forest", "natur": "park", "garten": "park",
            "küche": "kitchen", "büro": "office", "strand": "beach", "meer": "beach", "wüste": "desert", "schnee": "snow",
            "arktis": "snow", "eis": "snow", "ozean": "underwater", "unterwasser": "underwater", "ocean": "underwater",

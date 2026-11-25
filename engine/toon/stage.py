@@ -1594,6 +1594,11 @@ def direct(scenes, times, topic="", style="", look=""):
                 if kind not in have and kind not in simile and _re0.search(pat, txt0):
                     if kind == "engine" and have & {"enginehoist", "enginestand"}:
                         continue                           # der Motor hängt schon am Kran / steht auf dem Ständer
+                    if str(kind).lower().replace("lib_", "") in WORN_THINGS and any(not a_.get("kind") for a_ in acts) \
+                            and _re0.search(r"\b(?:dein|sein|ihr|mein|unser|eur)\w* (?:[a-zäöüß]+ )?(?:" + "|".join(WORN_THINGS) + r")\w*", txt0):
+                        continue                           # „das Reiben deiner Hose“: Kleidung, die die Figur anhat, liegt nicht zusätzlich als Ding im Bild (Video 209)
+                    if kind == "display" and _re0.search(BLANK_DISPLAY_RE, txt0):
+                        continue                           # „auf dem Display steht rein gar nichts“: kein Großbild eines Handys, auf dem gerade ein Anruf eingeht (Video 209)
                     if kind in OUTDOOR_THINGS and places.resolve(backdrop(sc)) not in places.OUTDOOR and not (
                             places.resolve(backdrop(sc)) in GARAGES and kind in GARAGE_VEHICLES) and not (
                             kind in extras.SKY and places.resolve(backdrop(sc)) in places.WINDOWS) and not (
@@ -4301,6 +4306,8 @@ LETTER_RE = r"abmahnung|\bbrief\b|\bbriefe\b|einschreiben|\bmahnung|umschlag|kü
 RADIO_RE = r"radio|funk|durchsage|sender|empfang|lautsprecher"
 TEETH_RE = r"(?:zähne\w*|zahn|gebiss|lächeln)\b[^.!?]{0,60}\b(grün|gelb|schwarz|braun|blau)|\b(grün|gelb|schwarz|braun|blau)e[nrs]? (?:zähne|gebiss|lächeln)"
 TEETH_COLORS = {"grün": (96, 190, 90), "gelb": (236, 208, 80), "schwarz": (58, 56, 62), "braun": (150, 104, 66), "blau": (90, 150, 230)}
+BLANK_DISPLAY_RE = r"display\w* (?:steht|ist|zeigt|bleibt|erscheint)\b.{0,25}\b(?:nichts|leer|dunkel|schwarz|stumm|keine)|(?:nichts|keine \w+) (?:auf|in) (?:dem|deinem|ihrem|seinem) display|(?:leere[sn]?|dunkle[sn]?|schwarze[sn]?) display"
+WORN_THINGS = ("hose", "jeans", "jacke", "hemd", "pullover", "pulli", "t-shirt", "shirt", "kleid", "rock", "mantel", "socke", "socken", "schuh", "schuhe", "kleidung", "stoff")
 SCRUB_RE = r"schrubb|\bputz(?:t|e|en|st|te)\b|\breib(?:t|e|en|st)\b|\bkau(?:t|e|en|st)\b"
 
 
@@ -4491,7 +4498,8 @@ def _household(scenes):
                 if len(acts) == 1 and not sc.get("props") and not isinstance(sc.get("overlay"), dict):
                     sc["shot"] = shot = "close"
         if re.search(SCRUB_RE, low) and shot not in ("graphic", "insert", "event"):   # „Zähne schrubben mit Salbeiblättern“: das genannte kleine Ding in der Hand
-            thing_s = next((str(x) for x in [k for pat, k in _lib_props() + TEXT_PROPS if re.search(pat, low)] if extras.held_key(x).startswith("prop:")), "")
+            thing_s = next((str(x) for x in [k for pat, k in _lib_props() + TEXT_PROPS if re.search(pat, low)] if extras.held_key(x).startswith("prop:")
+                            and str(x).lower().replace("lib_", "") not in WORN_THINGS), "")   # „das Reiben deiner Hose“: die Hose hat man an – niemand trägt eine zweite durchs Bild (Video 209)
             who_s = next((a for a in acts if not a.get("kind") and not a.get("hold")), None)
             if thing_s and who_s is not None:
                 who_s["hold"] = thing_s
@@ -5818,6 +5826,16 @@ def _stamp_for(low, prev=""):
     return None
 
 
+def _gauge_for(sc):
+    """Würde `_auto_explain` für diesen Satz ein Thermometer oder einen Füllstand über die Szene legen? Probelauf an einer Kopie."""
+    probe = {k: v for k, v in sc.items() if k not in ("graphic",)}
+    probe["shot"] = ""
+    if isinstance(probe.get("overlay"), dict) and probe["overlay"].get("type") != "counter":
+        return False
+    _auto_explain([probe])
+    return isinstance(probe.get("overlay"), dict) and probe["overlay"].get("type") in ("thermo", "bar")
+
+
 def _auto_explain(scenes):
     """Ohne Einblendung im Drehbuch erklärt ein einfaches Bild den Satz: Aufzählung → Liste mit Haken (bei Fressen „Speisekarte“),
     Temperatur → Thermometer, Prozent mit Bezug → Füllstand, Signalwort → Stempel. Aus einem nackten Grad- oder Prozent-Zähler wird
@@ -5831,7 +5849,11 @@ def _auto_explain(scenes):
         g = sc.get("graphic") if isinstance(sc.get("graphic"), dict) else {}
         if sc.get("shot") == "graphic" and g.get("type") == "number" and (str(g.get("label") or "").upper() == "GRAD" or "%" in str(g.get("value") or "")) \
                 and (sc.get("actors") or sc.get("props") or sc.get("place")):
+            g_keep, ov_keep = sc.get("graphic"), sc.get("overlay")
             sc["shot"], sc["graphic"] = "", None           # Temperatur/Anteil: lieber Thermometer bzw. Füllstand über der Szene als eine nackte Zahl
+            if not _gauge_for(sc):                         # „Über neunzig Prozent aller Smartphone-Nutzer“: daraus wird kein Füllstand – dann bleibt die große Zahl, statt dass die Figur bloß redet (Video 209)
+                sc["shot"], sc["graphic"] = "graphic", g_keep
+            sc["overlay"] = ov_keep
         if sc.get("shot") == "graphic" or (sc.get("shot") == "insert" and not _stamp_for(str(sc.get("text") or "").lower(), prev_stamp)):
             prev_stamp = ""
             continue
