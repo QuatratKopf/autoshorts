@@ -7889,5 +7889,49 @@
   "thumb": true,
   "look": "cartoon",
   "mp4": true
+ },
+ {
+  "id": 208,
+  "category": "whatif",
+  "topic": "Was wäre, wenn die Karte von GTA 6 echt wäre und du sie zu Fuß erkunden müsstest?",
+  "status": "rendered",
+  "created": 1795604946.6514134,
+  "trend": {
+   "title": "state of leonida",
+   "source": "Google Trends"
+  },
+  "title": "GTA 6 in echt durchqueren: So heftig wäre es!",
+  "description": "Was wäre, wenn die Karte von GTA 6 echt wäre und du laufen müsstest?\nSo extrem wäre ein Fußmarsch durch die riesige Welt von Leonida in der Realität.\nWürdest du diesen Gewaltmarsch wagen oder lieber das Auto nehmen?",
+  "hashtags": [
+   "#shorts",
+   "#gta6",
+   "#gaming",
+   "#whatif",
+   "#gtavi",
+   "#vicecity",
+   "#fakten"
+  ],
+  "tags": [
+   "gta 6",
+   "gta vi",
+   "gta 6 karte",
+   "vice city",
+   "leonida",
+   "what if",
+   "gaming fakten",
+   "gta in echt"
+  ],
+  "thumb_text": "GTA 6 IN ECHT",
+  "missing": null,
+  "cover_ms": 71369,
+  "duration": 71.3,
+  "providers": {
+   "text": "Plan",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
