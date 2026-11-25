@@ -7991,5 +7991,13 @@
   "slot": "2026-11-25 18:00",
   "review_at": 1795620173.5757446,
   "error": "Bei der Prüfung verworfen: Prüfung: Hose durchs Labor getragen, Anruf-Display trotz leerem Display, Prozent-Zahl fehlt, Text mit Dopamin-Behauptung"
+ },
+ {
+  "id": 210,
+  "category": "fakten",
+  "topic": "Warum dein Handy in der Hosentasche vibriert, obwohl niemand schreibt: die Phantom-Vibration – Vorgaben: Stichpunkte, nicht wörtlich abschreiben; jeder Satz bringt etwas Neues, keine Füllsätze, kein Satz, der den ersten wiederholt. Einstieg: Du spürst das Brummen am Bein, greifst zum Handy – keine Nachricht, kein Anruf. Fachleute nennen das Phantom-Vibration. In einer US-Studie von 2012 kannten das rund neun von zehn Studierenden, im Schnitt etwa alle zwei Wochen. In einer Befragung in einer Klinik berichteten rund zwei Drittel des Personals davon. Ursache: Deine Haut meldet ständig winzige Reize – der Stoff der Hose reibt am Bein, ein Muskel zuckt. Dein Gehirn sortiert diese Reize nach bekannten Mustern; weil es jederzeit eine Nachricht erwartet, deutet es das Zucken als Vibration. Für das Gehirn ist ein Fehlalarm besser als eine verpasste Nachricht. Wer das Handy viel nutzt, es mit Vibration in der Hosentasche trägt oder ungeduldig auf eine Antwort wartet, erlebt es häufiger. Es ist harmlos, die meisten stört es nicht. Was hilft: das Handy in eine andere Tasche stecken, die Vibration ausschalten oder es eine Weile weglegen. Schluss mit einer Frage an die Zuschauer. Einzige Zahlen: 2012, neun von zehn, alle zwei Wochen, zwei Drittel. Keine anderen Jahreszahlen, keine Prozentzahlen, keine anderen Zahlen. Verbotene Wörter: Dopamin, Hormon, Prothese, verdrahtet, Syndrom, Krankheit, Sucht. Keine Personennamen. Titelbild-Text: HANDY VIBRIERT GAR NICHT",
+  "status": "error",
+  "created": 1795622011.7590828,
+  "error": "Kein Text-Anbieter erreichbar. gemini: Gemini: gemini-3.6-flash: HTTP 429 | pollinations: Antwort enthält kein JSON"
  }
 ]
