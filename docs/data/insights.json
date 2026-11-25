@@ -1,5 +1,5 @@
 {
- "updated": 1795610101.8738654,
+ "updated": 1795611898.457771,
  "enough": true,
  "counted": 41,
  "total": 43,
@@ -63,10 +63,10 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 7,
-   "avg_views": 1688,
+   "avg_views": 1686,
    "avg_likes": 43.9,
    "like_rate": 2.6,
-   "avg_score": 2355
+   "avg_score": 2353
   },
   {
    "slug": "storys",
@@ -109,7 +109,7 @@
   "fakten": 1.04,
   "grusel": 1.2,
   "tiere": 1.1,
-  "whatif": 1.07,
+  "whatif": 1.08,
   "comedy": 1.33,
   "vergleich": 1.2,
   "motivation": 1.2,
@@ -119,7 +119,7 @@
   "Stärkste Kategorie: 🤪 Comedy (Ø 2283 Aufrufe, 2.04 % Likes).",
   "Schwächste Kategorie: 👻 Grusel (Ø 492 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2337 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2496 zu 1846 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2495 zu 1845 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -132,8 +132,8 @@
   "erkennst",
   "bekanntes",
   "glas",
-  "eines",
   "jede",
+  "scheibe",
   "klassikers"
  ],
  "top": [
@@ -151,11 +151,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2592,
+   "views": 2591,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3432
+   "score": 3431
   },
   {
    "id": 77,
