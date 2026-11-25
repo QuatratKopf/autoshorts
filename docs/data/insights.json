@@ -1,8 +1,8 @@
 {
- "updated": 1795604704.0064719,
+ "updated": 1795606520.398836,
  "enough": true,
  "counted": 41,
- "total": 42,
+ "total": 43,
  "needed": 6,
  "categories": [
   {
@@ -54,19 +54,19 @@
    "slug": "liebe",
    "name": "💕 Liebe",
    "n": 1,
-   "avg_views": 1485,
+   "avg_views": 1488,
    "avg_likes": 62.0,
-   "like_rate": 4.18,
-   "avg_score": 2415
+   "like_rate": 4.17,
+   "avg_score": 2418
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 7,
-   "avg_views": 1683,
+   "avg_views": 1686,
    "avg_likes": 43.9,
-   "like_rate": 2.61,
-   "avg_score": 2349
+   "like_rate": 2.6,
+   "avg_score": 2352
   },
   {
    "slug": "storys",
@@ -90,7 +90,7 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 6,
-   "avg_views": 1218,
+   "avg_views": 1219,
    "avg_likes": 10.2,
    "like_rate": 0.83,
    "avg_score": 1406
@@ -118,8 +118,8 @@
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2283 Aufrufe, 2.04 % Likes).",
   "Schwächste Kategorie: 👻 Grusel (Ø 492 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2336 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2494 zu 1844 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2337 zu 706 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2495 zu 1844 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -129,10 +129,10 @@
  "words_bad": [
   "remix",
   "bekanntes",
-  "lied",
   "erkennst",
+  "lied",
   "glas",
-  "eines",
+  "jede",
   "klassikers",
   "scheibe"
  ],
@@ -203,11 +203,11 @@
    "id": 196,
    "title": "Jede Scheibe ein Ton: Lo-Fi-Remix eines Klassikers",
    "category": "musik",
-   "views": 299,
+   "views": 304,
    "likes": 0,
    "comments": 0,
    "shares": 0,
-   "score": 299
+   "score": 304
   },
   {
    "id": 44,
