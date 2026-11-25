@@ -1,0 +1,577 @@
+{
+ "title": "GTA 6 in echt durchqueren: So heftig wäre es!",
+ "scenes": [
+  {
+   "text": "So heftig wäre eine Fußreise durch die echte GTA-Sechs-Karte.",
+   "see": "Ein Gamer steht auf einer Straße an der Küste und schaut ungläubig auf eine große Papierkarte.",
+   "place": "küste",
+   "backdrop": {
+    "sky": "day",
+    "ground": "road",
+    "elements": [
+     "palms",
+     "sea",
+     "city"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "map"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "map",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "GTA 6 IN ECHT"
+   }
+  },
+  {
+   "text": "Der Bundesstaat Leonida ist riesig und das Abenteuer würde dein absoluter Albtraum werden.",
+   "see": "Die Hauptfigur marschiert entschlossen los, hat aber mächtig Respekt vor dem Weg.",
+   "place": "straße",
+   "backdrop": {
+    "sky": "day",
+    "ground": "road",
+    "elements": [
+     "palms",
+     "city"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "center"
+    }
+   ],
+   "mood": "tense",
+   "crowd": "worried"
+  },
+  {
+   "text": "Leonida basiert auf Florida und Fans haben aus Trailern eine gewaltige Karte nachgebaut.",
+   "see": "Eine digitale Weltkarte zeigt die Ausmaße der Spielwelt im Vergleich zur echten Welt.",
+   "place": "küste",
+   "backdrop": {
+    "sky": "day",
+    "ground": "sand",
+    "elements": [
+     "sea",
+     "city"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "map"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "idea",
+     "kind": "",
+     "hold": "map",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "graphic": {
+    "type": "badge",
+    "kicker": "INSPIRATION",
+    "text": "FLORIDA",
+    "dark": false
+   },
+   "overlay": {
+    "type": "tag",
+    "text": "LEONIDA"
+   }
+  },
+  {
+   "text": "Im Spiel fährst du durch Vice City in Minuten.",
+   "see": "Im Videospiel saust ein Sportwagen in wenigen Sekunden durch die Stadt Vice City.",
+   "place": "küste",
+   "backdrop": {
+    "sky": "day",
+    "ground": "road",
+    "elements": [
+     "city"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Aber das reale Vorbild misst einhundertsiebzigtausend Quadratkilometer.",
+   "see": "Eine große Deutschland- und Europakarte zeigt die enorme Fläche von echten 170.000 Quadratkilometern.",
+   "place": "germany",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "number",
+    "kicker": "GESAMTFLÄCHE",
+    "value": "170.000",
+    "label": "QUADRATKILOMETER",
+    "dark": false
+   }
+  },
+  {
+   "text": "Von Norden nach Süden sind das rund siebenhundert Kilometer Strecke.",
+   "see": "Eine Straße erstreckt sich scheinbar endlos bis zum Horizont.",
+   "place": "straße",
+   "backdrop": {
+    "sky": "day",
+    "ground": "road",
+    "elements": [
+     "powerlines"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "worried",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "700 KILOMETER"
+   }
+  },
+  {
+   "text": "Wanderst du mit gemütlichen fünf Kilometern pro Stunde, kommst du nur langsam voran.",
+   "see": "Die Hauptfigur läuft erschöpft mit verlangsamtem Schritt an der Straße entlang.",
+   "place": "straße",
+   "backdrop": {
+    "sky": "day",
+    "ground": "road",
+    "elements": [
+     "trees"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "sad",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "overlay": {
+    "type": "tag",
+    "text": "5 KM/H"
+   }
+  },
+  {
+   "text": "Bei acht Stunden Marsch jeden Tag bist du ganze achtzehn Tage unterwegs.",
+   "see": "Ein Kalenderblatt wird abgehakt, während die Figur schläft.",
+   "place": "natur",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "tense",
+   "crowd": "worried",
+   "graphic": {
+    "type": "days",
+    "value": "18",
+    "label": "TAGE MARSCH",
+    "sub": "18",
+    "text": "DAUER ZU FUSS",
+    "dark": false
+   }
+  },
+  {
+   "text": "Keine Schnellreise befördert dich spontan an dein Ziel.",
+   "see": "Die Hauptfigur schaut verzweifelt auf ihr Handy, aber da ist kein Schnellreise-Knopf.",
+   "place": "natur",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "hills"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Du denkst, du kannst einfach durchrennen? Falsch gedacht!",
+   "see": "Die Hauptfigur bricht nach einem kurzen Sprint keuchend zusammen.",
+   "place": "straße",
+   "backdrop": {
+    "sky": "day",
+    "ground": "road",
+    "elements": [
+     "trees"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "pant",
+     "emotion": "scared",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Ein Mensch hält einen vollen Sprint nur etwa dreißig Sekunden durch.",
+   "see": "Eine Ausdaueranzeige leert sich rasend schnell auf Null.",
+   "place": "straße",
+   "backdrop": {
+    "sky": "day",
+    "ground": "road",
+    "elements": [
+     "trees"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "look_around",
+     "pos": "center",
+     "emotion": "worried",
+     "emote": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "graphic": {
+    "type": "number",
+    "value": "30",
+    "label": "SEKUNDEN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Dein Rucksack darf höchstens zwanzig Prozent deines Körpergewichts wiegen.",
+   "see": "Die Hauptfigur knickt unter einem riesigen Wanderrucksack fast ein.",
+   "place": "natur",
+   "backdrop": {
+    "sky": "day",
+    "ground": "soil",
+    "elements": [
+     "trees"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "rucksack"
+    },
+    {
+     "type": "scale"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "cower",
+     "emotion": "worried",
+     "emote": "!",
+     "kind": "",
+     "hold": "bag",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "MAX 20%"
+   }
+  },
+  {
+   "text": "Ohne Mini-Karte im Blickfeld musst du auf Papier schauen, doch wie schrecklich wird das Wetter?",
+   "see": "Die Hauptfigur dreht eine große Papierkarte im Kreis, weil sie sich völlig verlaufen hat.",
+   "place": "natur",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "forest"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "map"
+    }
+   ],
+   "shot": "event",
+   "mood": "tense"
+  },
+  {
+   "text": "Dazu kommt schwüle Hitze von über dreißig Grad.",
+   "see": "Die Sonne brennt heiß vom Himmel und ein Thermometer zeigt über 30 Grad an.",
+   "place": "straße",
+   "backdrop": {
+    "sky": "day",
+    "ground": "road",
+    "elements": [
+     "palms"
+    ]
+   },
+   "time": "day",
+   "weather": "heat",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shiver",
+     "emotion": "worried",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "thermo",
+    "value": 30.0
+   }
+  },
+  {
+   "text": "Im Sommer überrascht dich nachmittags ein Gewitter, aber was passiert bei einem einzigen Fehler?",
+   "see": "Dunkle Gewitterwolken ziehen auf und harter Regen prasselt herab.",
+   "place": "natur",
+   "backdrop": {
+    "sky": "storm",
+    "ground": "soil",
+    "elements": [
+     "trees"
+    ]
+   },
+   "time": "day",
+   "weather": "rain",
+   "props": [
+    {
+     "type": "lightning"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "cower",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Ein einziger Sturz auf den Asphalt bleibt hier dauerhaft schmerzhaft.",
+   "see": "Die Hauptfigur stolpert über einen Stein und fällt auf den Boden.",
+   "place": "straße",
+   "backdrop": {
+    "sky": "day",
+    "ground": "road",
+    "elements": [
+     "trees"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "rock"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "fall",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Es gibt keinen Speicherpunkt und keinen Neustart bei Verletzungen.",
+   "see": "Ein roter Notizhefteintrag zeigt, dass es keine Speicherpunkte gibt.",
+   "place": "straße",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "tense",
+   "crowd": "worried",
+   "graphic": {
+    "type": "badge",
+    "kicker": "REALITÄT",
+    "text": "KEIN RESTART",
+    "dark": false
+   },
+   "overlay": {
+    "type": "stamp",
+    "text": "KEIN SAVE",
+    "color": "red"
+   }
+  },
+  {
+   "text": "Im Spiel ist diese Karte ein fantastisches Abenteuer.",
+   "see": "Die Hauptfigur sitzt völlig fertig am Straßenrand und starrt nach vorne.",
+   "place": "küste",
+   "backdrop": {
+    "sky": "day",
+    "ground": "road",
+    "elements": [
+     "palms",
+     "city"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "In der echten Welt wird daraus schnell ein knallharter Gewaltmarsch.",
+   "see": "Die Hauptfigur blickt überrascht in die Kamera, während sich der Kreis zum Anfang schließt.",
+   "place": "küste",
+   "backdrop": {
+    "sky": "day",
+    "ground": "road",
+    "elements": [
+     "palms",
+     "sea"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense"
+  }
+ ]
+}

@@ -7849,5 +7849,45 @@
   "slot": "2026-11-25 13:00",
   "review_at": 1795601869.1356921,
   "error": "Bei der Prüfung verworfen: Prüfung: erfundene Zahlen (300 Reize, 80 Prozent), Unsinn-Satz, drei Verlegenheitsbilder im Wohnzimmer, TAG 1 in der Ecke bis zum Schluss, Spiel nie genannt"
+ },
+ {
+  "id": 207,
+  "category": "whatif",
+  "topic": "Was wäre, wenn die Karte von GTA 6 echt wäre und du sie zu Fuß erkunden müsstest? – Vorgaben: Das Spiel beim Namen nennen (GTA 6, der erfundene Bundesstaat Leonida, die Stadt Vice City), aber kein Erscheinungsdatum und keine Aussage, ob es schon erschienen ist. Stichpunkte, nicht wörtlich abschreiben, jeder Punkt ein eigenes Bild mit der Hauptfigur draußen: 1) Leonida ist dem US-Bundesstaat Florida nachempfunden, Fans haben daraus schon eine Karte mit tausenden Orten gebaut. 2) Im Spiel durchquerst du die Karte in Minuten – das echte Florida ist rund 170.000 Quadratkilometer groß und rund 700 Kilometer lang. 3) Zu Fuß mit 5 Kilometern pro Stunde und acht Stunden am Tag brauchst du dafür etwa 18 Tage. 4) Keine Schnellreise: jeder Weg muss wirklich gelaufen werden. 5) Kein Ausdauerbalken: ein Mensch hält einen vollen Sprint nur etwa 30 Sekunden durch. 6) Kein endloses Inventar: Wanderer sollen höchstens rund 20 Prozent ihres Körpergewichts im Rucksack tragen. 7) Keine Mini-Karte im Sichtfeld: du brauchst eine Landkarte aus Papier oder das Handy. 8) Wetter wie in Florida: schwüle Hitze über 30 Grad und im Sommer fast jeden Nachmittag ein Gewitter. 9) Kein Speicherpunkt und kein Neustart: ein Sturz bleibt ein Sturz. 10) Schluss: Im Spiel ist es ein Abenteuer, in echt ein Gewaltmarsch – mit einer Frage an die Zuschauer. Einzige Zahlen: 170.000, 700, 5, acht, 18, 30, 20 Prozent. Keine anderen Zahlen, keine Jahreszahlen, keine erfundenen Statistiken, keine Personennamen, keine Liste ankündigen, keine Zeitsprünge wie nach einem Monat, keine Tiere. Verbotene Wörter: Gehirn, Wahnsinn, Reize. Titelbild-Text: GTA 6 IN ECHT. Keine Logos und keine Spielfiguren im Bild.",
+  "status": "rendered",
+  "created": 1795603235.0793679,
+  "title": "GTA 6 in echt durchqueren: So heftig wäre es!",
+  "description": "Was wäre, wenn die Karte von GTA 6 echt wäre und du laufen müsstest?\nSo extrem wäre ein Fußmarsch durch die riesige Welt von Leonida in der Realität.\nWürdest du diesen Gewaltmarsch wagen oder lieber das Auto nehmen?",
+  "hashtags": [
+   "#shorts",
+   "#gta6",
+   "#gaming",
+   "#whatif",
+   "#gtavi",
+   "#vicecity",
+   "#fakten"
+  ],
+  "tags": [
+   "gta 6",
+   "gta vi",
+   "gta 6 karte",
+   "vice city",
+   "leonida",
+   "what if",
+   "gaming fakten",
+   "gta in echt"
+  ],
+  "thumb_text": "GTA 6 IN ECHT",
+  "missing": null,
+  "cover_ms": 75396,
+  "duration": 75.3,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
