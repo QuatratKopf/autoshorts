@@ -1,7 +1,7 @@
 {
- "updated": 1795619113.1746354,
+ "updated": 1795620755.1939263,
  "enough": true,
- "counted": 41,
+ "counted": 42,
  "total": 43,
  "needed": 6,
  "categories": [
@@ -63,10 +63,10 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 7,
-   "avg_views": 1690,
+   "avg_views": 1692,
    "avg_likes": 44.0,
    "like_rate": 2.6,
-   "avg_score": 2358
+   "avg_score": 2361
   },
   {
    "slug": "storys",
@@ -90,36 +90,36 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 6,
-   "avg_views": 1220,
-   "avg_likes": 10.5,
-   "like_rate": 0.86,
-   "avg_score": 1412
+   "avg_views": 1221,
+   "avg_likes": 10.3,
+   "like_rate": 0.85,
+   "avg_score": 1411
   },
   {
    "slug": "grusel",
    "name": "👻 Grusel",
-   "n": 1,
-   "avg_views": 492,
-   "avg_likes": 21.0,
-   "like_rate": 4.27,
-   "avg_score": 807
+   "n": 2,
+   "avg_views": 362,
+   "avg_likes": 15.5,
+   "like_rate": 4.28,
+   "avg_score": 625
   }
  ],
  "weights": {
-  "fakten": 1.04,
-  "grusel": 1.2,
-  "tiere": 1.1,
-  "whatif": 1.07,
-  "comedy": 1.33,
+  "fakten": 1.07,
+  "grusel": 0.5,
+  "tiere": 1.12,
+  "whatif": 1.1,
+  "comedy": 1.35,
   "vergleich": 1.2,
   "motivation": 1.2,
   "nachricht": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2283 Aufrufe, 2.04 % Likes).",
-  "Schwächste Kategorie: 👻 Grusel (Ø 492 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2339 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2497 zu 1847 Punkte).",
+  "Schwächste Kategorie: 👻 Grusel (Ø 362 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2292 zu 706 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2421 zu 1847 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -128,13 +128,13 @@
  ],
  "words_bad": [
   "remix",
+  "lied",
   "erkennst",
   "bekanntes",
-  "lied",
   "glas",
-  "klassikers",
-  "scheibe",
-  "eines"
+  "eines",
+  "jede",
+  "klassikers"
  ],
  "top": [
   {
@@ -151,11 +151,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2593,
+   "views": 2596,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3433
+   "score": 3436
   },
   {
    "id": 77,
@@ -190,24 +190,24 @@
  ],
  "flop": [
   {
-   "id": 189,
-   "title": "Jede Scheibe ein Ton: Glas-Remix eines Klassikers",
-   "category": "musik",
-   "views": 605,
-   "likes": 11,
-   "comments": 1,
+   "id": 205,
+   "title": "Starre nie im Dunkeln in den Spiegel",
+   "category": "grusel",
+   "views": 233,
+   "likes": 10,
+   "comments": 2,
    "shares": 0,
-   "score": 800
+   "score": 443
   },
   {
    "id": 196,
    "title": "Jede Scheibe ein Ton: Lo-Fi-Remix eines Klassikers",
    "category": "musik",
-   "views": 308,
-   "likes": 2,
+   "views": 316,
+   "likes": 1,
    "comments": 0,
    "shares": 0,
-   "score": 338
+   "score": 331
   },
   {
    "id": 44,
