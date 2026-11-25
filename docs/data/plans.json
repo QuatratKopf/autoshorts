@@ -1,573 +1,4 @@
 {
- "2026-11-24 13:00": {
-  "category": "fakten",
-  "topic": "Das 1-Million-Dollar-Rätsel der Mathematik, das seit 160 Jahren niemand lösen kann",
-  "trend": {
-   "title": "Riemann hypothesis",
-   "source": "Wikipedia",
-   "news": [],
-   "summary": "Statement about zeros of the zeta function – In mathematics, the Riemann hypothesis asserts that the Riemann zeta function has its zeros only at the negative even integers and at complex numbers with real part. First posed in 1859 by Bernhard Riemann, it is considered by pure mathematicians to be one of the most important p"
-  },
-  "script": {
-   "title": "Riemann-Vermutung: Das 1-Million-Dollar-Rätsel der Mathematik",
-   "description": "Kannst du das schwerste Mathe-Rätsel der Welt lösen?\nWürdest du das Preisgeld behalten oder spenden?",
-   "hashtags": [
-    "#shorts",
-    "#fyp",
-    "#viral",
-    "#wissen",
-    "#mathe",
-    "#wissenschaft",
-    "#lernen",
-    "#fakten"
-   ],
-   "tags": [
-    "riemann vermutung",
-    "mathe rätsel",
-    "1 million dollar",
-    "maths",
-    "wissenschaft fakten",
-    "mathe genie",
-    "unlösbare rätsel"
-   ],
-   "thumbnail": {
-    "image": "Close-up cartoon illustration of a shocked young mathematician staring at a floating glowing math equation, background filled with complex chalkboard formulas, dramatic high-contrast lighting",
-    "text": "1 MILLION DOLLAR MATHE-RÄTSEL"
-   },
-   "wishes": [
-    "tafel"
-   ],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "blau",
-     "hat": "",
-     "hair": "curly",
-     "gender": "w",
-     "hair_color": "braun",
-     "skin": "hell"
-    },
-    "mathe_prof": {
-     "shirt": "grau",
-     "hat": "",
-     "hair": "grau",
-     "gender": "m",
-     "hair_color": "grau",
-     "skin": "weiß"
-    }
-   },
-   "scenes": [
-    {
-     "see": "Die Hauptfigur blickt ungläubig auf einen fliegenden Schein mit einer Million Dollar.",
-     "text": "Ein einziges Mathe-Rätsel bringt dir auf einen Schlag eine Million Dollar.",
-     "image": "A young female student looks amazed at a giant golden one million dollar bill floating in the air.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "reich machen"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "1.000.000 $"
-     },
-     "who_desc": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "speaks": true,
-       "pos": "center"
-      }
-     ],
-     "place_desc": "A modern teenager room with posters of space and numbers, a neat desk with a laptop",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Preisgeld-Schild leuchtet vor einem düsteren Hintergrund auf.",
-     "text": "Seit einhundertsechzig Jahren scheitern alle daran – doch die Lösung verändert alles.",
-     "image": "A close up of a glowing paper sheet on a desk with a simple single line formula.",
-     "who": [],
-     "place": "zimmer",
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "einzigen Zettel"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "A modern teenager room with posters of space and numbers, a neat desk with a laptop",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Bernhard Riemann als Gelehrter aus dem Jahr 1859 zeichnet eine Formel an die Tafel.",
-     "text": "Im Jahr achtzehnhundertfünfzig stellte der deutsche Mathematiker Bernhard Riemann eine Vermutung auf.",
-     "image": "In an old-fashioned lecture hall from 1859, a bearded mathematician writes formulas on a blackboard.",
-     "who": [
-      "mathe_prof"
-     ],
-     "place": "classroom",
-     "camera": "pan_right",
-     "sfx": "none",
-     "highlight": [
-      "Bernhard Riemann"
-     ],
-     "hud": "JAHR 1859",
-     "overlay": {
-      "type": "tag",
-      "text": "BERNHARD RIEMANN"
-     },
-     "who_desc": "",
-     "actors": [
-      {
-       "id": "mathe_prof",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "speaks": true,
-       "pos": "center"
-      }
-     ],
-     "place_desc": "A classic lecture hall with a massive chalkboard filled with endless mathematical equations",
-     "status": ""
-    },
-    {
-     "see": "Der Professor tippt auf die Nullstellen der Zeta-Funktion.",
-     "text": "Es geht um die Nullstellen der sogenannten Riemannschen Zeta-Funktion.",
-     "image": "The professor points enthusiastically at a graph showing a glowing sine wave intersecting a line.",
-     "who": [
-      "mathe_prof"
-     ],
-     "place": "classroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Zeta-Funktion"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "actors": [
-      {
-       "id": "mathe_prof",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "speaks": true,
-       "pos": "center"
-      }
-     ],
-     "place_desc": "A classic lecture hall with a massive chalkboard filled with endless mathematical equations",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Grafik zeigt Primzahlen auf einer langen Zahlenleiste.",
-     "text": "Klingt trocken, doch welches tiefste Geheimnis der Primzahlen verbirgt sich wirklich dahinter?",
-     "image": "Graphic of a number line where prime numbers 2, 3, 5, 7, 11 light up brightly like stars.",
-     "who": [],
-     "place": "classroom",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "Primzahlen"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "PRIMZAHLEN"
-     },
-     "who_desc": "",
-     "place_desc": "A classic lecture hall with a massive chalkboard filled with endless mathematical equations",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein riesiger Zähler zählt bis zehn Billionen Nullstellen hoch.",
-     "text": "Computer haben bereits über zehn Billionen dieser Nullstellen geprüft.",
-     "image": "A futuristic server rack with glowing screens calculating complex mathematical zero points.",
-     "who": [],
-     "place": "serverroom",
-     "camera": "zoom_in",
-     "sfx": "tick",
-     "highlight": [
-      "zehn Billionen"
-     ],
-     "overlay": {
-      "type": "counter",
-      "label": "GEPRÜFTE NULLSTELLEN",
-      "value": 10000000000000,
-      "sub": "ALLE BESTÄTIGT"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Alle geprüften Stellen stimmen exakt mit Riemanns Vorhersage überein.",
-     "text": "Und wirklich jede einzelne liegt exakt auf einer Linie, aber warum genau dort?",
-     "image": "A bright green vertical line where glowing points snap into perfect alignment.",
-     "who": [],
-     "place": "classroom",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "bestimmten Linie"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "A classic lecture hall with a massive chalkboard filled with endless mathematical equations",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Mathematiker grübelt verzweifelt am Schreibtisch.",
-     "text": "Also ist das Rätsel gelöst? Nein, eben nicht.",
-     "image": "A scientist sitting at a desk surrounded by crumpled paper balls, looking confused.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "eben nicht"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "NICHT GELÖST",
-      "color": "red"
-     },
-     "who_desc": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "speaks": true,
-       "pos": "center"
-      }
-     ],
-     "place_desc": "A modern teenager room with posters of space and numbers, a neat desk with a laptop",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Rechner-Grafik zeigt unendlich viele Zahlen am Horizont.",
-     "text": "In der Mathematik reichen zehn Billionen Beispiele nämlich nicht als Beweis aus.",
-     "image": "An endless digital stream of numbers fading into infinite space.",
-     "who": [],
-     "place": "classroom",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "nicht als Beweis"
-     ],
-     "overlay": {
-      "type": "number",
-      "kicker": "BEISPIELE SIND KEIN BEWEIS",
-      "value": "10 BII.",
-      "label": "REICHEN NICHT"
-     },
-     "actors": [
-      {
-       "id": "du",
-       "action": "think",
-       "emotion": "worried",
-       "pos": "center"
-      }
-     ],
-     "who_desc": "",
-     "place_desc": "A classic lecture hall with a massive chalkboard filled with endless mathematical equations",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Hauptfigur zuckt verunsichert mit den Schultern.",
-     "text": "Weil es unendlich viele Zahlen gibt, könnte irgendwo eine Ausnahme lauern.",
-     "image": "The female main character stands in a dark room holding a flashlight into the void.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Ausnahme lauern"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "speaks": true,
-       "pos": "center"
-      }
-     ],
-     "place_desc": "A modern teenager room with posters of space and numbers, a neat desk with a laptop",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Stiftungs-Institut ruft das Million-Dollar-Preisgeld aus.",
-     "text": "Ein US-Institut hat deshalb im Jahr zweitausend eine Million Dollar ausgelobt.",
-     "image": "A close up on a formal document with a shiny gold wax seal and dollar sign.",
-     "who": [],
-     "place": "office",
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "eine Million Dollar"
-     ],
-     "hud": "JAHR 2000",
-     "overlay": {
-      "type": "card",
-      "text": "1.000.000 $ PREIS"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "status": ""
-    },
-    {
-     "see": "Du denkst, mit einem schnellen Computer kann man das Geld gewinnen.",
-     "text": "Du denkst, man muss nur einen schnellen Rechner programmieren.",
-     "image": "The main character sits confidently in front of a high-tech glowing computer monitor.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "schnellen Rechner"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "speaks": true,
-       "pos": "center"
-      }
-     ],
-     "place_desc": "A modern teenager room with posters of space and numbers, a neat desk with a laptop",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Falsch-Stempel knallt ins Bild.",
-     "text": "Falsch: Ein Computer kann unendlich viele Zahlen gar nicht durchrechnen.",
-     "image": "The computer screen suddenly displays a large warning symbol as the main character panics.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "Falsch"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "FALSCH",
-      "color": "red"
-     },
-     "who_desc": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "speaks": true,
-       "pos": "center"
-      }
-     ],
-     "place_desc": "A modern teenager room with posters of space and numbers, a neat desk with a laptop",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein mathematischer Beweis schützt moderne Online-Verschlüsselungen.",
-     "text": "Ein echter logischer Beweis ist nötig, und der würde alles verändern.",
-     "image": "A giant glowing digital padlock representing online security and cryptography.",
-     "who": [],
-     "place": "serverroom",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "alles verändern"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "KRYPTOGRAFIE"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Schloss an einer Datenleitung bricht auf.",
-     "text": "Unsere gesamte Online-Verschlüsselung baut nämlich auf der Härte von Primzahlen auf.",
-     "image": "A digital lock glowing on top of credit card icons and password fields.",
-     "who": [],
-     "place": "serverroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Online-Verschlüsselung"
-     ],
-     "overlay": {
-      "type": "note",
-      "title": "SICHERHEIT",
-      "text": "Basiert auf Primzahlen"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Wissenschaftler kratzt sich verwirrt am Kopf.",
-     "text": "Wer das Rätsel knackt, versteht Primzahlen schlagartig perfekt.",
-     "image": "A genius scientist looking at glowing equations with wide glowing eyes of realization.",
-     "who": [
-      "mathe_prof"
-     ],
-     "place": "classroom",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "schlagartig perfekt"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "actors": [
-      {
-       "id": "mathe_prof",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "speaks": true,
-       "pos": "center"
-      }
-     ],
-     "place_desc": "A classic lecture hall with a massive chalkboard filled with endless mathematical equations",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Bankkonto schießt ins Unendliche.",
-     "text": "Das würde nicht nur die Mathematik revolutionieren, sondern dein Konto spürbar füllen.",
-     "image": "The female character jumping with joy as gold coins shower down from above.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "jump",
-     "sfx": "pop",
-     "highlight": [
-      "Konto spürbar füllen"
-     ],
-     "overlay": {
-      "type": "chart",
-      "kicker": "BANKKONTO",
-      "value": "1 MIO.",
-      "label": "DOLLAR"
-     },
-     "who_desc": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "speaks": true,
-       "pos": "center"
-      }
-     ],
-     "place_desc": "A modern teenager room with posters of space and numbers, a neat desk with a laptop",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Kalenderblatt vergilbt, 165 Jahre vergehen.",
-     "text": "Seit über einhundertfünfundsechzig Jahren scheitern die genialsten Köpfe der Welt daran.",
-     "image": "A fast spinning calendar where pages fly off showing the passage of time.",
-     "who": [],
-     "place": "classroom",
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "genialsten Köpfe"
-     ],
-     "overlay": {
-      "type": "calendar",
-      "kicker": "SEIT FAST",
-      "value": "165",
-      "label": "JAHREN UNGELÖST"
-     },
-     "who_desc": "",
-     "place_desc": "A classic lecture hall with a massive chalkboard filled with endless mathematical equations",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Hauptfigur sieht motiviert auf ein leeres Papier und greift zum Stift.",
-     "text": "Schnapp dir also einen Stift, denn ein einziges Mathe-Rätsel kann dich heute auf einen Schlag reich machen.",
-     "image": "The main character sitting back at her desk with a pen ready, looking directly at the camera with a confident smile.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "reich machen"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "speaks": true,
-       "pos": "center"
-      }
-     ],
-     "place_desc": "A modern teenager room with posters of space and numbers, a neat desk with a laptop",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [
-   "stift",
-   "zahl"
-  ],
-  "title": "Riemann-Vermutung: Das 1-Million-Dollar-Rätsel der Mathematik",
-  "created": 1795464525.3169913
- },
  "2026-11-24 18:00": {
   "category": "tiere",
   "topic": "Der Waldfrosch: Das Tier, das im Winter komplett einfriert, sein Herz anhält und im Frühling einfach wieder aufwacht",
@@ -2892,5 +2323,808 @@
   ],
   "title": "State of Leonida im echten Leben: Was wäre, wenn?",
   "created": 1795548963.1905427
+ },
+ "2026-11-25 18:00": {
+  "category": "fakten",
+  "topic": "Warum du den 'Phantom-Vibrations-Effekt' hast: Warum dein Gehirn dir ein Handy-Brummen vorgaukelt, das gar nicht existiert",
+  "trend": null,
+  "script": {
+   "title": "Phantom-Vibration: Warum dein Handy vibriert, obwohl es schweigt",
+   "description": "Spürst du auch ein Summen, das gar nicht existiert?\nDein Gehirn spielt dir bei der Wahrnehmung einen Streich.\nTritt dieses Phänomen bei dir täglich auf?",
+   "hashtags": [
+    "#shorts",
+    "#psychologie",
+    "#techfakt",
+    "#fyp",
+    "#viral",
+    "#wissen",
+    "#gehirn",
+    "#handy"
+   ],
+   "tags": [
+    "phantom vibration",
+    "handy vibrieren",
+    "psychologie fakten",
+    "gehirn tricks",
+    "tech fakten",
+    "handy brummt",
+    "täuschen",
+    "phantom vibrations syndrom"
+   ],
+   "thumbnail": {
+    "image": "Close-up of a young person staring in utter disbelief at a smartphone in their hand, which is completely blank and silent, while background depicts subtle electric brain pulses, sharp focus, vibrant vivid colors",
+    "text": "HANDY VIBRIERT GAR NICHT"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "lila",
+     "hair": "ponytail",
+     "hair_color": "blond",
+     "gender": "w",
+     "skin": "weiß",
+     "glasses": false,
+     "hat": ""
+    },
+    "gehirn": {
+     "kind": "brain"
+    }
+   },
+   "scenes": [
+    {
+     "see": "Ein Mädchen greift erschrocken an ihre Hose, aber das Handy liegt friedlich auf dem Tisch.",
+     "text": "Dein Handy vibriert, obwohl niemand anruft oder schreibt.",
+     "image": "Dein Handy vibriert, obwohl niemand anruft oder schreibt.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "zoom_in",
+     "sfx": "pop",
+     "highlight": [
+      "vibriert",
+      "gar nichts"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "PHANTOM-VIBRATION"
+     },
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "to": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Mädchen schaut völlig ungläubig auf das dunkle Handy-Display.",
+     "text": "Dieses mysteriöse Summen ist kein technischer Fehler, sondern ein echter Trick deiner Nerven.",
+     "image": "Dieses mysteriöse Summen ist kein technischer Fehler, sondern ein echter Trick deiner Nerven.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Trick deiner Nerven"
+     ],
+     "overlay": null,
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "to": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik zeigt an, dass fast alle Menschen diesen Effekt kennen.",
+     "text": "Über neunzig Prozent aller Smartphone-Nutzer kennen dieses seltsame Phänomen im Alltag.",
+     "image": "Über neunzig Prozent aller Smartphone-Nutzer kennen dieses seltsame Phänomen im Alltag.",
+     "who": [],
+     "place": "zimmer",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "neunzig Prozent"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "90 % BETROFFEN"
+     },
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "graphic": {
+      "type": "number",
+      "kicker": "STUDIENERGEBNIS",
+      "value": "90 %",
+      "label": "ALLER NUTZER"
+     },
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn als kleine rosafarbene Figur steht da mit Lupe.",
+     "text": "Dein Gehirn interpretiert Reize falsch, aber welchen Reizen fällt es dabei genau zum Opfer?",
+     "image": "Dein Gehirn interpretiert Reize falsch, aber welchen Reizen fällt es dabei genau zum Opfer?",
+     "who": [
+      "gehirn"
+     ],
+     "place": "labor",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "permanent",
+      "wartet"
+     ],
+     "overlay": null,
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "lab",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Stoff reibt an der Hose und erzeugt eine leichte Vibration.",
+     "text": "Schon das leichte Reiben deiner Hose löst winzige Signale auf der Haut aus.",
+     "image": "Schon das leichte Reiben deiner Hose löst winzige Signale auf der Haut aus.",
+     "who": [
+      "du"
+     ],
+     "place": "strasse",
+     "camera": "still",
+     "sfx": "whoosh",
+     "highlight": [
+      "winzige Signale"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "HAUT-REIZUNG"
+     },
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "walk",
+       "emotion": "",
+       "emote": "",
+       "pos": "left",
+       "to": "right",
+       "speaks": false
+      }
+     ],
+     "crowd": "walk",
+     "mood": "calm",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "street",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Schautafel zum Nervensystem mit kleinen Elektro-Blitzen.",
+     "text": "Dein Körper hält Muskelzucken oder Kleidungsbewegungen sofort für eine eingehende Nachricht.",
+     "image": "Dein Körper hält Muskelzucken oder Kleidungsbewegungen sofort für eine eingehende Nachricht.",
+     "who": [],
+     "place": "zimmer",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Muskelzucken"
+     ],
+     "overlay": null,
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "cower",
+       "emotion": "worried",
+       "emote": "!",
+       "pos": "center",
+       "to": "center",
+       "speaks": false
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Mädchen erschrickt bei einer leichten Bewegung der Tasche.",
+     "text": "Aber wieso ist dein Kopf eigentlich so unglaublich vorschnell bei diesem Thema?",
+     "image": "Aber wieso ist dein Kopf eigentlich so unglaublich vorschnell bei diesem Thema?",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "vorschnell"
+     ],
+     "overlay": null,
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "cower",
+       "emotion": "scared",
+       "emote": "?",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik zur Signal-Erkennung im Hirn mit einem Schalter.",
+     "text": "Neurowissenschaftler nennen das eine fehlerhafte Signalerkennung im Nervensystem.",
+     "image": "Neurowissenschaftler nennen das eine fehlerhafte Signalerkennung im Nervensystem.",
+     "who": [],
+     "place": "labor",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Fehleinschätzung"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "FEHLER IM SYSTEM"
+     },
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "point",
+       "emotion": "worried",
+       "emote": "!",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "graphic": {
+      "type": "question",
+      "text": "SIGNAL-FEHLER"
+     },
+     "who_desc": "",
+     "place_desc": "lab",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn schüttet stolz kleine Dopamin-Tropfen aus.",
+     "text": "Lieber meldet dein Gehirn zehn Fehlalarme, aber welches Hormon treibt diese ständige Erwartungshaltung eigentlich an?",
+     "image": "Lieber meldet dein Gehirn zehn Fehlalarme, aber welches Hormon treibt diese ständige Erwartungshaltung eigentlich an?",
+     "who": [
+      "gehirn"
+     ],
+     "place": "labor",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "zehn Fehlalarme"
+     ],
+     "overlay": null,
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "adrenaline"
+     ],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "!",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "lab",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Mädchen denkt, der Akku sei leer, aber das stimmt nicht.",
+     "text": "Du denkst vielleicht, das passiert nur bei eingeschaltetem Vibrationsalarm deines Smartphones.",
+     "image": "Du denkst vielleicht, das passiert nur bei eingeschaltetem Vibrationsalarm deines Smartphones.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Vibrationsalarm"
+     ],
+     "overlay": null,
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "to": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Stempel VERSTECKT schlägt ins Bild.",
+     "text": "Falsch, der Effekt tritt selbst dann auf, wenn das Handy weit entfernt liegt.",
+     "image": "Falsch, der Effekt tritt selbst dann auf, wenn das Handy weit entfernt liegt.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "weit entfernt"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "FALSCH",
+      "color": "red"
+     },
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "table"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik über Dopamin-Ausstoß beim Smartphone-Blick.",
+     "text": "Jedes Mal schüttet dein Körper bei Erwartung einer Nachricht sofort etwas Dopamin aus.",
+     "image": "Jedes Mal schüttet dein Körper bei Erwartung einer Nachricht sofort etwas Dopamin aus.",
+     "who": [],
+     "place": "labor",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "Dopamin"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "DOPAMIN-KICK"
+     },
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "graphic": {
+      "type": "badge",
+      "kicker": "HORMON",
+      "text": "DOPAMIN"
+     },
+     "who_desc": "",
+     "place_desc": "lab",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Mädchen starrt gebannt auf die Hülle in ihrer Hand.",
+     "text": "Das Handy hat deine Wahrnehmung nach Jahren der Nutzung quasi fest neu verdrahtet.",
+     "image": "Das Handy hat deine Wahrnehmung nach Jahren der Nutzung quasi fest neu verdrahtet.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "neu verdrahtet"
+     ],
+     "overlay": null,
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "blink",
+       "emotion": "",
+       "emote": "",
+       "pos": "center",
+       "to": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn schläft fast ein, wacht aber sofort schockiert auf.",
+     "text": "Manche spüren das Summen sogar noch Stunden nach dem Ausschalten des Handys.",
+     "image": "Manche spüren das Summen sogar noch Stunden nach dem Ausschalten des Handys.",
+     "who": [
+      "gehirn"
+     ],
+     "place": "zimmer",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "nach dem Ausschalten"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "OFFLINE"
+     },
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "freeze",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik zeigt das Gehirn und eine Frequenzwelle.",
+     "text": "Es ist sozusagen eine digitale Prothese, die sich tief in dein Hirn eingebrannt hat.",
+     "image": "Es ist sozusagen eine digitale Prothese, die sich tief in dein Hirn eingebrannt hat.",
+     "who": [],
+     "place": "zimmer",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "digitale Prothese"
+     ],
+     "overlay": null,
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "graphic": {
+      "type": "pulse",
+      "value": "1",
+      "label": "FEHL-SIGNAL"
+     },
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Mädchen zuckt schon wieder an der Hosentasche.",
+     "text": "Also wunder dich nicht, wenn du dir genau jetzt wieder an die Oberschenkel fasst.",
+     "image": "Also wunder dich nicht, wenn du dir genau jetzt wieder an die Oberschenkel fasst.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "zoom_in",
+     "sfx": "pop",
+     "highlight": [
+      "genau jetzt"
+     ],
+     "overlay": null,
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "cower",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Sie zieht das Handy aus der Tasche und lacht verlegen.",
+     "text": "Dein Körper will eben einfach nur absolut sichergehen, dass du absolut nichts verpasst.",
+     "image": "Dein Körper will eben einfach nur absolut sichergehen, dass du absolut nichts verpasst.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "nichts verpasst"
+     ],
+     "overlay": {
+      "type": "note",
+      "title": "FAZIT",
+      "text": "Dein Gehirn passt nur auf dich auf."
+     },
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "laugh",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "to": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Handy liegt stumm da, während sie entspannt lächelt.",
+     "text": "Und dieses Phänomen erklärt auch perfekt, warum du diese Täuschung gleich wieder spürst.",
+     "image": "Und dieses Phänomen erklärt auch perfekt, warum du diese Täuschung gleich wieder spürst.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "wieder spürst"
+     ],
+     "overlay": null,
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "!",
+       "pos": "center",
+       "to": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Mädchen blickt plötzlich wieder überrascht auf ihre Tasche, die Nahtlos-Schleife schließt sich.",
+     "text": "Denn du könntest schwören: Dein Handy vibriert in der Hosentasche, aber auf dem Display steht rein gar nichts.",
+     "image": "Denn du könntest schwören: Dein Handy vibriert in der Hosentasche, aber auf dem Display steht rein gar nichts.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "vibriert",
+      "gar nichts"
+     ],
+     "overlay": null,
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "to": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "hose",
+   "nerv",
+   "oberschenkel"
+  ],
+  "title": "Phantom-Vibration: Warum dein Handy vibriert, obwohl es schweigt",
+  "created": 1795602057.4272268
  }
 }
