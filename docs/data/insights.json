@@ -1,5 +1,5 @@
 {
- "updated": 1795624519.638447,
+ "updated": 1795626409.0895677,
  "enough": true,
  "counted": 42,
  "total": 44,
@@ -54,19 +54,19 @@
    "slug": "liebe",
    "name": "💕 Liebe",
    "n": 1,
-   "avg_views": 1490,
+   "avg_views": 1494,
    "avg_likes": 62.0,
-   "like_rate": 4.16,
-   "avg_score": 2420
+   "like_rate": 4.15,
+   "avg_score": 2424
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 7,
-   "avg_views": 1690,
+   "avg_views": 1693,
    "avg_likes": 44.0,
    "like_rate": 2.6,
-   "avg_score": 2359
+   "avg_score": 2362
   },
   {
    "slug": "storys",
@@ -90,36 +90,36 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 6,
-   "avg_views": 1220,
-   "avg_likes": 10.5,
-   "like_rate": 0.86,
+   "avg_views": 1222,
+   "avg_likes": 10.3,
+   "like_rate": 0.85,
    "avg_score": 1412
   },
   {
    "slug": "grusel",
    "name": "👻 Grusel",
    "n": 2,
-   "avg_views": 367,
-   "avg_likes": 15.5,
-   "like_rate": 4.22,
-   "avg_score": 630
+   "avg_views": 372,
+   "avg_likes": 16.0,
+   "like_rate": 4.31,
+   "avg_score": 642
   }
  ],
  "weights": {
-  "fakten": 1.06,
+  "fakten": 1.07,
   "grusel": 0.5,
   "tiere": 1.12,
-  "whatif": 1.1,
-  "comedy": 1.36,
+  "whatif": 1.09,
+  "comedy": 1.35,
   "vergleich": 1.2,
   "motivation": 1.2,
   "nachricht": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2284 Aufrufe, 2.04 % Likes).",
-  "Schwächste Kategorie: 👻 Grusel (Ø 367 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2292 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2421 zu 1847 Punkte).",
+  "Schwächste Kategorie: 👻 Grusel (Ø 372 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2293 zu 706 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2423 zu 1847 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -128,13 +128,13 @@
  ],
  "words_bad": [
   "remix",
-  "erkennst",
-  "bekanntes",
   "lied",
+  "bekanntes",
+  "erkennst",
   "glas",
+  "klassikers",
   "eines",
-  "scheibe",
-  "klassikers"
+  "jede"
  ],
  "top": [
   {
@@ -193,21 +193,21 @@
    "id": 205,
    "title": "Starre nie im Dunkeln in den Spiegel",
    "category": "grusel",
-   "views": 242,
-   "likes": 10,
+   "views": 251,
+   "likes": 11,
    "comments": 2,
    "shares": 0,
-   "score": 452
+   "score": 476
   },
   {
    "id": 196,
    "title": "Jede Scheibe ein Ton: Lo-Fi-Remix eines Klassikers",
    "category": "musik",
-   "views": 308,
-   "likes": 2,
+   "views": 325,
+   "likes": 1,
    "comments": 0,
    "shares": 0,
-   "score": 338
+   "score": 340
   },
   {
    "id": 44,
