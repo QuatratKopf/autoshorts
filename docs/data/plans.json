@@ -2972,5 +2972,998 @@
   ],
   "title": "Motivation: Fang einfach an, bevor du bereit bist",
   "created": 1795631367.4808462
+ },
+ "2026-11-25 21:00": {
+  "category": "vergleich",
+  "topic": "Spätkauf gegen Supermarkt – wer verdient mehr?",
+  "trend": null,
+  "script": {
+   "title": "Spätkauf gegen Supermarkt: Wer verdient mehr?",
+   "description": "Tom oder Sandra: Wer holt mehr Gewinn heraus?\nEine Beispielrechnung mit grob geschätzten Zahlen: Umsatz, Marge, Gewinn und Arbeitszeit im Vergleich.\nZu wem gehst du abends eher einkaufen?",
+   "hashtags": [
+    "#shorts",
+    "#späti",
+    "#supermarkt",
+    "#vergleich",
+    "#geld",
+    "#business",
+    "#wissen",
+    "#fyp"
+   ],
+   "tags": [
+    "spätkauf",
+    "supermarkt",
+    "wer verdient mehr",
+    "umsatz",
+    "gewinn",
+    "marge",
+    "vergleich",
+    "beispielrechnung"
+   ],
+   "thumbnail": {
+    "image": "A small late-night corner shop next to a big supermarket, bold money numbers, vivid colors",
+    "text": "WER VERDIENT MEHR?"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "tom": {
+     "shirt": "blau",
+     "hat": "cap",
+     "hat_color": "rot",
+     "hair": "",
+     "hair_color": "dunkelbraun",
+     "skin": "mittel",
+     "gender": "m",
+     "glasses": false
+    },
+    "sandra": {
+     "shirt": "rot",
+     "hair": "bob",
+     "hair_color": "blond",
+     "skin": "hell",
+     "gender": "w",
+     "glasses": false,
+     "hat": ""
+    }
+   },
+   "hud": "",
+   "countdown": null,
+   "scenes": [
+    {
+     "text": "Späti gegen Supermarkt: Wer verdient wirklich mehr?",
+     "see": "Ein Duell-Bild mit der Aufschrift versus",
+     "place": "supermarket",
+     "time": "day",
+     "props": [
+      {
+       "type": "lib_spaetkauf"
+      }
+     ],
+     "shot": "graphic",
+     "mood": "calm",
+     "crowd": "walk",
+     "graphic": {
+      "type": "versus",
+      "kicker": "VERGLEICH",
+      "left": "SPÄTI",
+      "right": "SUPERMARKT",
+      "dark": false
+     },
+     "actors": [],
+     "overlay": null,
+     "image": "Späti gegen Supermarkt: Wer verdient wirklich mehr?",
+     "who": [],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "backdrop": null,
+     "weather": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Hier ist Tom, der Inhaber eines Spätkaufs, der jeden Stammkunden beim Namen kennt.",
+     "see": "Tom steht im Späti und winkt einem Kunden zu",
+     "place": "supermarket_empty",
+     "time": "night",
+     "props": [
+      {
+       "type": "kasse"
+      },
+      {
+       "type": "lib_spaetkauf"
+      }
+     ],
+     "actors": [
+      {
+       "id": "tom",
+       "speaks": true,
+       "action": "wave",
+       "emotion": "happy",
+       "emote": "",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
+      }
+     ],
+     "mood": "happy",
+     "crowd": "walk",
+     "overlay": {
+      "type": "tag",
+      "text": "TOM · SPÄTI"
+     },
+     "image": "Hier ist Tom, der Inhaber eines Spätkaufs, der jeden Stammkunden beim Namen kennt.",
+     "who": [
+      "tom"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "backdrop": null,
+     "weather": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
+     "shot": "wide"
+    },
+    {
+     "text": "Und hier ist Sandra, eine selbstständige Kauffrau mit eigenem Supermarkt, die jede Excel-Tabelle liebt.",
+     "see": "Sandra steht im Supermarkt und tippt auf eine Tabelle",
+     "place": "supermarket",
+     "time": "day",
+     "props": [
+      {
+       "type": "tabellendokument"
+      }
+     ],
+     "actors": [
+      {
+       "id": "sandra",
+       "speaks": true,
+       "action": "point",
+       "emotion": "happy",
+       "emote": "",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
+      }
+     ],
+     "mood": "happy",
+     "crowd": "walk",
+     "overlay": {
+      "type": "tag",
+      "text": "SANDRA · SUPERMARKT"
+     },
+     "image": "Und hier ist Sandra, eine selbstständige Kauffrau mit eigenem Supermarkt, die jede Excel-Tabelle liebt.",
+     "who": [
+      "sandra"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "backdrop": null,
+     "weather": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
+     "shot": "wide"
+    },
+    {
+     "text": "Runde eins, Gewinn pro Euro Umsatz.",
+     "see": "Eine Runde-1-Grafik erscheint",
+     "place": "germany",
+     "time": "day",
+     "actors": [
+      {
+       "id": "sandra",
+       "action": "walk",
+       "pos": "offleft",
+       "to": "center",
+       "emotion": "happy"
+      }
+     ],
+     "shot": "graphic",
+     "mood": "happy",
+     "graphic": {
+      "type": "round",
+      "kicker": "RUNDE 1",
+      "text": "GEWINN PRO EURO",
+      "dark": false
+     },
+     "props": [],
+     "crowd": "",
+     "overlay": null,
+     "image": "Runde eins, Gewinn pro Euro Umsatz.",
+     "who": [
+      "sandra"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "backdrop": null,
+     "weather": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Im Späti bleiben nach Wareneinkauf, Miete und Strom grob zehn Cent von jedem Euro.",
+     "see": "Tom zeigt auf Geldmünzen im Späti",
+     "place": "supermarket_empty",
+     "time": "night",
+     "props": [
+      {
+       "type": "money"
+      },
+      {
+       "type": "lib_spaetkauf"
+      }
+     ],
+     "actors": [
+      {
+       "id": "tom",
+       "speaks": true,
+       "action": "point",
+       "emotion": "happy",
+       "emote": "",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
+      }
+     ],
+     "mood": "calm",
+     "overlay": {
+      "type": "card",
+      "text": "10 CENT MARGE"
+     },
+     "crowd": "",
+     "image": "Im Späti bleiben nach Wareneinkauf, Miete und Strom grob zehn Cent von jedem Euro.",
+     "who": [
+      "tom"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "backdrop": null,
+     "weather": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
+     "shot": "wide"
+    },
+    {
+     "text": "Im Supermarkt bleiben nach Ware, Personal und Logistik nur etwa zwei Cent von jedem Euro.",
+     "see": "Sandra zeigt im Supermarkt auf die volle Regalwand",
+     "place": "supermarket",
+     "time": "day",
+     "props": [
+      "shelf"
+     ],
+     "actors": [
+      {
+       "id": "sandra",
+       "action": "point",
+       "emotion": "",
+       "emote": "",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "mood": "calm",
+     "overlay": {
+      "type": "card",
+      "text": "2 CENT MARGE"
+     },
+     "crowd": "",
+     "image": "Im Supermarkt bleiben nach Ware, Personal und Logistik nur etwa zwei Cent von jedem Euro.",
+     "who": [
+      "sandra"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "backdrop": null,
+     "weather": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
+     "shot": "wide"
+    },
+    {
+     "text": "Denn der Lebensmittelhandel arbeitet mit sehr kleinen Margen.",
+     "see": "Sandra schiebt nachdenklich einen vollen Einkaufswagen durch den Gang",
+     "place": "supermarket",
+     "time": "day",
+     "props": [
+      "cart"
+     ],
+     "actors": [
+      {
+       "id": "sandra",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "mood": "calm",
+     "crowd": "",
+     "overlay": null,
+     "image": "Denn der Lebensmittelhandel arbeitet mit sehr kleinen Margen.",
+     "who": [
+      "sandra"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "backdrop": null,
+     "weather": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
+     "shot": "wide"
+    },
+    {
+     "text": "Das ist der erste Punkt für den Späti und ein Zwischenstand von eins zu null.",
+     "see": "Ein Punktestand-Bild zeigt eins zu null für den Späti",
+     "place": "germany",
+     "time": "day",
+     "actors": [
+      {
+       "id": "sandra",
+       "action": "walk",
+       "pos": "offleft",
+       "to": "center",
+       "emotion": "happy"
+      }
+     ],
+     "shot": "graphic",
+     "mood": "happy",
+     "graphic": {
+      "type": "score",
+      "kicker": "ZWISCHENSTAND",
+      "value": "1:0",
+      "left": "SPÄTI",
+      "right": "SUPERMARKT",
+      "dark": false
+     },
+     "props": [],
+     "crowd": "",
+     "overlay": null,
+     "image": "Das ist der erste Punkt für den Späti und ein Zwischenstand von eins zu null.",
+     "who": [
+      "sandra"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "backdrop": null,
+     "weather": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Runde zwei, der Umsatz im Monat.",
+     "see": "Eine Runde-2-Grafik erscheint",
+     "place": "street",
+     "time": "day",
+     "shot": "graphic",
+     "mood": "calm",
+     "crowd": "walk",
+     "graphic": {
+      "type": "round",
+      "kicker": "RUNDE 2",
+      "text": "UMSATZ IM MONAT",
+      "dark": false
+     },
+     "props": [],
+     "actors": [],
+     "overlay": null,
+     "image": "Runde zwei, der Umsatz im Monat.",
+     "who": [],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "backdrop": null,
+     "weather": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Angenommen, Tom hat zweihundert Kunden am Tag, die jeweils rund sechs Euro da lassen.",
+     "see": "Tom zählt Kunden an seiner Kasse",
+     "place": "supermarket_empty",
+     "time": "night",
+     "props": [
+      {
+       "type": "kasse"
+      },
+      {
+       "type": "money"
+      }
+     ],
+     "actors": [
+      {
+       "id": "tom",
+       "speaks": true,
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
+      }
+     ],
+     "mood": "calm",
+     "crowd": "walk",
+     "overlay": {
+      "type": "counter",
+      "label": "KUNDEN AM TAG",
+      "value": 200,
+      "unit": "KUNDEN"
+     },
+     "image": "Angenommen, Tom hat zweihundert Kunden am Tag, die jeweils rund sechs Euro da lassen.",
+     "who": [
+      "tom"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "backdrop": null,
+     "weather": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
+     "shot": "wide"
+    },
+    {
+     "text": "Das macht im Späti bei dreißig offenen Tagen sechsunddreißigtausend Euro Umsatz im Monat.",
+     "see": "Ein Kassen-Display zeigt den Monatsumsatz des Spätis",
+     "place": "supermarket_empty",
+     "time": "night",
+     "shot": "graphic",
+     "mood": "calm",
+     "graphic": {
+      "type": "chart",
+      "kicker": "SPÄTI",
+      "value": "36.000 €",
+      "label": "UMSATZ IM MONAT",
+      "dark": false
+     },
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "overlay": null,
+     "image": "Das macht im Späti bei dreißig offenen Tagen sechsunddreißigtausend Euro Umsatz im Monat.",
+     "who": [],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "backdrop": null,
+     "weather": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Sandra zählt dagegen tausend Kunden am Tag mit einem Einkauf von rund fünfundzwanzig Euro.",
+     "see": "Sandra schiebt einen Einkaufswagen im vollen Supermarkt",
+     "place": "supermarket",
+     "time": "day",
+     "props": [
+      {
+       "type": "cart"
+      },
+      {
+       "type": "money"
+      }
+     ],
+     "actors": [
+      {
+       "id": "sandra",
+       "speaks": true,
+       "action": "walk",
+       "emotion": "happy",
+       "emote": "",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
+      }
+     ],
+     "mood": "calm",
+     "crowd": "walk",
+     "overlay": {
+      "type": "counter",
+      "label": "KUNDEN AM TAG",
+      "value": 1000,
+      "unit": "KUNDEN"
+     },
+     "image": "Sandra zählt dagegen tausend Kunden am Tag mit einem Einkauf von rund fünfundzwanzig Euro.",
+     "who": [
+      "sandra"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "backdrop": null,
+     "weather": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
+     "shot": "wide"
+    },
+    {
+     "text": "Das ergibt bei sechsundzwanzig offenen Tagen saftige sechshundertfünfzigtausend Euro Umsatz im Monat.",
+     "see": "Ein Diagramm zeigt den großen Supermarkt-Umsatz",
+     "place": "street",
+     "time": "day",
+     "shot": "graphic",
+     "mood": "happy",
+     "graphic": {
+      "type": "chart",
+      "kicker": "SUPERMARKT",
+      "value": "650.000 €",
+      "label": "UMSATZ IM MONAT",
+      "dark": false
+     },
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "overlay": null,
+     "image": "Das ergibt bei sechsundzwanzig offenen Tagen saftige sechshundertfünfzigtausend Euro Umsatz im Monat.",
+     "who": [],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "backdrop": null,
+     "weather": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Punkt für den Supermarkt, Stand eins zu eins.",
+     "see": "Ein Punktestand-Bild zeigt eins zu eins",
+     "place": "supermarket",
+     "time": "day",
+     "shot": "graphic",
+     "mood": "calm",
+     "crowd": "walk",
+     "graphic": {
+      "type": "score",
+      "kicker": "ZWISCHENSTAND",
+      "value": "1:1",
+      "left": "SPÄTI",
+      "right": "SUPERMARKT",
+      "dark": false
+     },
+     "props": [],
+     "actors": [],
+     "overlay": null,
+     "image": "Punkt für den Supermarkt, Stand eins zu eins.",
+     "who": [],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "backdrop": null,
+     "weather": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Runde drei, der Gewinn im Monat vor Steuern.",
+     "see": "Eine Runde-3-Grafik erscheint",
+     "place": "street",
+     "time": "day",
+     "shot": "graphic",
+     "mood": "happy",
+     "crowd": "cheer",
+     "graphic": {
+      "type": "round",
+      "kicker": "RUNDE 3",
+      "text": "GEWINN IM MONAT",
+      "dark": false
+     },
+     "props": [],
+     "actors": [],
+     "overlay": null,
+     "image": "Runde drei, der Gewinn im Monat vor Steuern.",
+     "who": [],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "backdrop": null,
+     "weather": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Bei Tom bleiben grob gerechnet dreitausendsechshundert Euro im Monat.",
+     "see": "Tom zählt abends im Späti seine Geldscheine",
+     "place": "supermarket_empty",
+     "time": "night",
+     "props": [
+      "kasse"
+     ],
+     "actors": [
+      {
+       "id": "tom",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "mood": "calm",
+     "crowd": "",
+     "overlay": {
+      "type": "counter",
+      "label": "TOM · GEWINN IM MONAT",
+      "value": 3600,
+      "unit": "EURO"
+     },
+     "image": "Bei Tom bleiben grob gerechnet dreitausendsechshundert Euro im Monat.",
+     "who": [
+      "tom"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "backdrop": null,
+     "weather": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
+     "shot": "wide"
+    },
+    {
+     "text": "Sandra fährt dagegen rund dreizehntausend Euro Gewinn ein.",
+     "see": "Sandra steht stolz neben einem großen Geldstapel im Supermarkt",
+     "place": "supermarket",
+     "time": "day",
+     "props": [
+      "money"
+     ],
+     "actors": [
+      {
+       "id": "sandra",
+       "action": "cheer",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "mood": "happy",
+     "crowd": "",
+     "overlay": {
+      "type": "counter",
+      "label": "SANDRA · GEWINN IM MONAT",
+      "value": 13000,
+      "unit": "EURO"
+     },
+     "image": "Sandra fährt dagegen rund dreizehntausend Euro Gewinn ein.",
+     "who": [
+      "sandra"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "backdrop": null,
+     "weather": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
+     "shot": "wide"
+    },
+    {
+     "text": "Damit steht es eins zu zwei für den Supermarkt.",
+     "see": "Ein Punktestand-Bild zeigt eins zu zwei für den Supermarkt",
+     "place": "supermarket",
+     "time": "day",
+     "shot": "graphic",
+     "mood": "happy",
+     "crowd": "cheer",
+     "graphic": {
+      "type": "score",
+      "kicker": "STAND",
+      "value": "1:2",
+      "left": "SPÄTI",
+      "right": "SUPERMARKT",
+      "dark": false
+     },
+     "props": [],
+     "actors": [],
+     "overlay": null,
+     "image": "Damit steht es eins zu zwei für den Supermarkt.",
+     "who": [],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "backdrop": null,
+     "weather": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Doch jetzt kommt der Haken an der Sache.",
+     "see": "Tom blickt erschöpft auf eine Uhr",
+     "place": "supermarket_empty",
+     "time": "night",
+     "props": [
+      {
+       "type": "stoppuhr"
+      }
+     ],
+     "actors": [
+      {
+       "id": "tom",
+       "speaks": true,
+       "action": "shake",
+       "emotion": "worried",
+       "emote": "!",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
+      }
+     ],
+     "mood": "tense",
+     "overlay": {
+      "type": "card",
+      "text": "DER HAKEN"
+     },
+     "crowd": "",
+     "image": "Doch jetzt kommt der Haken an der Sache.",
+     "who": [
+      "tom"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "backdrop": null,
+     "weather": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
+     "shot": "wide"
+    },
+    {
+     "text": "Tom steht rund achtzig Stunden pro Woche selbst hinter der Kasse.",
+     "see": "Große Zahl: achtzig Stunden Arbeitszeit pro Woche",
+     "place": "supermarket_empty",
+     "time": "night",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "sad",
+     "crowd": "",
+     "graphic": {
+      "type": "number",
+      "kicker": "ARBEITSZEIT PRO WOCHE",
+      "value": "80",
+      "label": "STUNDEN",
+      "dark": false
+     },
+     "overlay": null,
+     "image": "Tom steht rund achtzig Stunden pro Woche selbst hinter der Kasse.",
+     "who": [],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "backdrop": null,
+     "weather": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Das sind nur gut zehn Euro pro Stunde, weniger als der Mindestlohn von dreizehn Euro neunzig.",
+     "see": "Tom steht müde nachts hinter seiner Kasse",
+     "place": "supermarket_empty",
+     "time": "night",
+     "props": [
+      "kasse"
+     ],
+     "actors": [
+      {
+       "id": "tom",
+       "action": "sad",
+       "emotion": "sad",
+       "emote": "",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "mood": "sad",
+     "crowd": "",
+     "overlay": {
+      "type": "card",
+      "text": "UNTER MINDESTLOHN"
+     },
+     "image": "Das sind nur gut zehn Euro pro Stunde, weniger als der Mindestlohn von dreizehn Euro neunzig.",
+     "who": [
+      "tom"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "backdrop": null,
+     "weather": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
+     "shot": "wide"
+    },
+    {
+     "text": "Sandra verdient zwar mehr, trägt dafür aber die Verantwortung für rund vierzig Angestellte.",
+     "see": "Sandra steht im Supermarkt und leitet viele Angestellte",
+     "place": "supermarket",
+     "time": "day",
+     "props": [
+      "shelf"
+     ],
+     "actors": [
+      {
+       "id": "sandra",
+       "action": "talk",
+       "emotion": "worried",
+       "emote": "",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "mood": "calm",
+     "crowd": "",
+     "overlay": {
+      "type": "card",
+      "text": "40 ANGESTELLTE"
+     },
+     "image": "Sandra verdient zwar mehr, trägt dafür aber die Verantwortung für rund vierzig Angestellte.",
+     "who": [
+      "sandra"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "backdrop": null,
+     "weather": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
+     "shot": "wide"
+    },
+    {
+     "text": "Der Supermarkt gewinnt am Ende über die Menge, nicht über die Marge.",
+     "see": "Ein finaler Stempel verkündet den Sieger",
+     "place": "supermarket",
+     "time": "day",
+     "shot": "graphic",
+     "mood": "happy",
+     "crowd": "cheer",
+     "graphic": {
+      "type": "badge",
+      "text": "MENGE GEWINNT",
+      "dark": false
+     },
+     "overlay": {
+      "type": "stamp",
+      "text": "GEWINNER",
+      "color": "green"
+     },
+     "props": [],
+     "actors": [],
+     "image": "Der Supermarkt gewinnt am Ende über die Menge, nicht über die Marge.",
+     "who": [],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "backdrop": null,
+     "weather": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Und du: Zu wem gehst du abends eher? Schreib es in die Kommentare.",
+     "see": "Tom und Sandra winken nebeneinander in die Kamera",
+     "place": "street",
+     "time": "night",
+     "props": [],
+     "actors": [
+      {
+       "id": "tom",
+       "action": "wave",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "left",
+       "to": "left",
+       "speaks": true
+      },
+      {
+       "id": "sandra",
+       "action": "wave",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "right",
+       "to": "right",
+       "speaks": false
+      }
+     ],
+     "mood": "happy",
+     "crowd": "",
+     "overlay": null,
+     "image": "Und du: Zu wem gehst du abends eher? Schreib es in die Kommentare.",
+     "who": [
+      "tom",
+      "sandra"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "backdrop": null,
+     "weather": "",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": "",
+     "shot": "wide"
+    }
+   ]
+  },
+  "provider": "Plan",
+  "remake": false,
+  "needs": [],
+  "title": "Spätkauf gegen Supermarkt: Wer verdient mehr?",
+  "created": 1795633613.641933
  }
 }
