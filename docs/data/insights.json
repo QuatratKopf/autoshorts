@@ -1,5 +1,5 @@
 {
- "updated": 1795626409.0895677,
+ "updated": 1795628102.7520826,
  "enough": true,
  "counted": 42,
  "total": 44,
@@ -54,19 +54,19 @@
    "slug": "liebe",
    "name": "💕 Liebe",
    "n": 1,
-   "avg_views": 1494,
+   "avg_views": 1490,
    "avg_likes": 62.0,
-   "like_rate": 4.15,
-   "avg_score": 2424
+   "like_rate": 4.16,
+   "avg_score": 2420
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 7,
-   "avg_views": 1693,
+   "avg_views": 1690,
    "avg_likes": 44.0,
    "like_rate": 2.6,
-   "avg_score": 2362
+   "avg_score": 2359
   },
   {
    "slug": "storys",
@@ -90,23 +90,23 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 6,
-   "avg_views": 1222,
+   "avg_views": 1223,
    "avg_likes": 10.3,
-   "like_rate": 0.85,
-   "avg_score": 1412
+   "like_rate": 0.84,
+   "avg_score": 1413
   },
   {
    "slug": "grusel",
    "name": "👻 Grusel",
    "n": 2,
-   "avg_views": 372,
-   "avg_likes": 16.0,
-   "like_rate": 4.31,
-   "avg_score": 642
+   "avg_views": 374,
+   "avg_likes": 16.5,
+   "like_rate": 4.41,
+   "avg_score": 652
   }
  ],
  "weights": {
-  "fakten": 1.07,
+  "fakten": 1.06,
   "grusel": 0.5,
   "tiere": 1.12,
   "whatif": 1.09,
@@ -117,9 +117,9 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2284 Aufrufe, 2.04 % Likes).",
-  "Schwächste Kategorie: 👻 Grusel (Ø 372 Aufrufe) – kommt seltener dran.",
+  "Schwächste Kategorie: 👻 Grusel (Ø 374 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2293 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2423 zu 1847 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2423 zu 1848 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -132,9 +132,9 @@
   "bekanntes",
   "erkennst",
   "glas",
-  "klassikers",
-  "eines",
-  "jede"
+  "scheibe",
+  "jede",
+  "eines"
  ],
  "top": [
   {
@@ -193,21 +193,21 @@
    "id": 205,
    "title": "Starre nie im Dunkeln in den Spiegel",
    "category": "grusel",
-   "views": 251,
-   "likes": 11,
+   "views": 256,
+   "likes": 12,
    "comments": 2,
    "shares": 0,
-   "score": 476
+   "score": 496
   },
   {
    "id": 196,
    "title": "Jede Scheibe ein Ton: Lo-Fi-Remix eines Klassikers",
    "category": "musik",
-   "views": 325,
+   "views": 330,
    "likes": 1,
    "comments": 0,
    "shares": 0,
-   "score": 340
+   "score": 345
   },
   {
    "id": 44,
