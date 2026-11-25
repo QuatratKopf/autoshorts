@@ -1,5 +1,5 @@
 {
- "updated": 1795647593.9265761,
+ "updated": 1795649398.469388,
  "enough": true,
  "counted": 42,
  "total": 45,
@@ -36,10 +36,10 @@
    "slug": "liebe",
    "name": "💕 Liebe",
    "n": 1,
-   "avg_views": 1504,
+   "avg_views": 1507,
    "avg_likes": 63.0,
-   "like_rate": 4.19,
-   "avg_score": 2449
+   "like_rate": 4.18,
+   "avg_score": 2452
   },
   {
    "slug": "mysterien",
@@ -99,10 +99,10 @@
    "slug": "grusel",
    "name": "👻 Grusel",
    "n": 2,
-   "avg_views": 415,
-   "avg_likes": 17.5,
-   "like_rate": 4.22,
-   "avg_score": 708
+   "avg_views": 420,
+   "avg_likes": 18.0,
+   "like_rate": 4.28,
+   "avg_score": 720
   }
  ],
  "weights": {
@@ -117,9 +117,9 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2284 Aufrufe, 2.05 % Likes).",
-  "Schwächste Kategorie: 👻 Grusel (Ø 415 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2302 zu 706 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2435 zu 1852 Punkte).",
+  "Schwächste Kategorie: 👻 Grusel (Ø 420 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2303 zu 706 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2436 zu 1852 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -128,12 +128,12 @@
  ],
  "words_bad": [
   "remix",
-  "bekanntes",
   "lied",
+  "bekanntes",
   "erkennst",
   "glas",
+  "jede",
   "klassikers",
-  "eines",
   "scheibe"
  ],
  "top": [
@@ -193,11 +193,11 @@
    "id": 205,
    "title": "Starre nie im Dunkeln in den Spiegel",
    "category": "grusel",
-   "views": 337,
-   "likes": 14,
+   "views": 348,
+   "likes": 15,
    "comments": 2,
    "shares": 0,
-   "score": 607
+   "score": 633
   },
   {
    "id": 196,
