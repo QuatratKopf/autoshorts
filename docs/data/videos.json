@@ -7949,7 +7949,7 @@
   "id": 209,
   "category": "fakten",
   "topic": "Warum du den 'Phantom-Vibrations-Effekt' hast: Warum dein Gehirn dir ein Handy-Brummen vorgaukelt, das gar nicht existiert",
-  "status": "review",
+  "status": "discarded",
   "created": 1795619445.7673826,
   "title": "Phantom-Vibration: Warum dein Handy vibriert, obwohl es schweigt",
   "description": "Spürst du auch ein Summen, das gar nicht existiert?\nDein Gehirn spielt dir bei der Wahrnehmung einen Streich.\nTritt dieses Phänomen bei dir täglich auf?",
@@ -7989,6 +7989,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-25 18:00",
-  "review_at": 1795620173.5757446
+  "review_at": 1795620173.5757446,
+  "error": "Bei der Prüfung verworfen: Prüfung: Hose durchs Labor getragen, Anruf-Display trotz leerem Display, Prozent-Zahl fehlt, Text mit Dopamin-Behauptung"
  }
 ]
