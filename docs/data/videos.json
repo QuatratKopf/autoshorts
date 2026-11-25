@@ -8050,7 +8050,7 @@
   "id": 212,
   "category": "fakten",
   "topic": "Warum du den 'Phantom-Vibrations-Effekt' hast: Warum dein Gehirn dir ein Handy-Brummen vorgaukelt, das gar nicht existiert",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1795623566.0274894,
   "title": "Phantom-Vibration: Warum dein Bein brummt, obwohl niemand schreibt",
   "description": "Dein Handy vibriert in der Hosentasche – aber da ist keine Nachricht.\nDahinter steckt die Phantom-Vibration: Dein Gehirn deutet winzige Reize auf der Haut als Brummen.\nWann ist dir das zuletzt passiert?",
@@ -8084,6 +8084,7 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Prüfung: versehentlicher Doppelbau desselben Drehbuchs wie Video 211 (Auslöser wurde nach einem GitHub-Fehler zweimal angenommen)"
  }
 ]
