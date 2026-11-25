@@ -1,859 +1,4 @@
 {
- "2026-11-24 18:00": {
-  "category": "tiere",
-  "topic": "Der Waldfrosch: Das Tier, das im Winter komplett einfriert, sein Herz anhält und im Frühling einfach wieder aufwacht",
-  "trend": null,
-  "script": {
-   "title": "Der Waldfrosch: Der Zombie der Tierwelt friert einfach ein",
-   "description": "Er friert im Winter komplett ein und wacht im Frühling auf.\nDas Geheimnis des Waldfroschs ist der absolut verrückteste Überlebenstrick der Natur.\nWürdest du lieber einen Winterschlaf machen oder durchschlafen?",
-   "hashtags": [
-    "#shorts",
-    "#tierfakten",
-    "#biologie",
-    "#wissen",
-    "#fyp",
-    "#viral",
-    "#lernen"
-   ],
-   "tags": [
-    "waldfrosch",
-    "tierfakten",
-    "einfrieren",
-    "zombie",
-    "winterschlaf",
-    "biologie",
-    "natur",
-    "frosch"
-   ],
-   "thumbnail": {
-    "image": "A frozen forest in winter, close-up shot of a small frog completely encased in clear ice, dramatic lighting, bright yellow frozen eyes, maximum contrast, text space at the top",
-    "text": "HERZ STEHT STILL",
-    "place": "forest",
-    "time": "day",
-    "actor": "frosch",
-    "action": "freeze",
-    "emotion": "",
-    "props": [
-     "ice"
-    ],
-    "weather": "cold"
-   },
-   "wishes": [
-    "zucker"
-   ],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "grün",
-     "hat": "",
-     "hair": "short",
-     "hair_color": "braun",
-     "gender": "m",
-     "skin": "weiß"
-    },
-    "frosch": {
-     "kind": "frog",
-     "speaks": true
-    }
-   },
-   "scenes": [
-    {
-     "see": "Der Waldfrosch sitzt im eisigen Winterwald und sieht völlig gefroren aus.",
-     "text": "Dieser Frosch friert im Winter komplett ein.",
-     "image": "A tiny frog sitting on frozen ground in a winter forest, covered in ice crystals.",
-     "who": [
-      "frosch"
-     ],
-     "place": "wald_winter",
-     "backdrop": {
-      "sky": "day",
-      "ground": "snow",
-      "elements": [
-       "forest"
-      ]
-     },
-     "time": "day",
-     "weather": "cold",
-     "props": [
-      "ice"
-     ],
-     "actors": [
-      {
-       "id": "frosch",
-       "action": "freeze",
-       "emotion": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "Waldfrosch",
-      "unmöglich"
-     ],
-     "shot": "wide",
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "forest",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Hauptfigur friert im Wald und schaut ungläubig auf den Frosch.",
-     "text": "Und seine Überlebensfähigkeit lässt ihn wie einen Zombie auferstehen.",
-     "image": "A person shivering violently in winter clothes looking shocked at a frozen frog.",
-     "who": [
-      "du",
-      "frosch"
-     ],
-     "place": "wald_winter",
-     "backdrop": {
-      "sky": "day",
-      "ground": "snow",
-      "elements": [
-       "forest"
-      ]
-     },
-     "time": "day",
-     "weather": "cold",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shiver",
-       "emotion": "shocked",
-       "pos": "left",
-       "speaks": true
-      },
-      {
-       "id": "frosch",
-       "action": "freeze",
-       "emotion": "",
-       "pos": "right",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Zombie",
-      "auferstehen"
-     ],
-     "shot": "wide",
-     "overlay": null,
-     "who_desc": "; ",
-     "place_desc": "forest",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Thermometer zeigt minus sechzehn Grad Celsius im frostigen Wald.",
-     "text": "Wenn die Temperaturen auf minus sechzehn Grad fallen, passiert etwas Verrücktes.",
-     "image": "Extreme winter cold in the forest with snow falling heavily.",
-     "who": [],
-     "place": "wald_winter",
-     "backdrop": {
-      "sky": "storm",
-      "ground": "snow",
-      "elements": [
-       "forest"
-      ]
-     },
-     "time": "day",
-     "weather": "cold",
-     "props": [
-      "ice"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "minus sechzehn Grad"
-     ],
-     "shot": "event",
-     "overlay": {
-      "type": "thermo",
-      "value": -16
-     },
-     "who_desc": "",
-     "place_desc": "forest",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafik eines stehenden Herzens mit Null Schlägen pro Minute.",
-     "text": "Nummer eins: Sein Herz hört auf zu schlagen.",
-     "image": "Flatline heart rate pulse graphic on a dark background.",
-     "who": [],
-     "place": "wald_winter",
-     "backdrop": {
-      "sky": "day",
-      "ground": "snow",
-      "elements": [
-       "forest"
-      ]
-     },
-     "time": "day",
-     "weather": "cold",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "camera": "still",
-     "sfx": "boom",
-     "highlight": [
-      "Herz",
-      "hört auf"
-     ],
-     "shot": "graphic",
-     "graphic": {
-      "type": "pulse",
-      "value": "0",
-      "label": "NULL SCHLÄGE"
-     },
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "forest",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Frosch erstarrt mitten auf dem Schnee wie eine Statue.",
-     "text": "Kein Atemzug, keine Gehirnaktivität, das Blut steht vollständig still.",
-     "image": "Close-up of frozen frog sitting motionless under ice.",
-     "who": [
-      "frosch"
-     ],
-     "place": "wald_winter",
-     "backdrop": {
-      "sky": "day",
-      "ground": "snow",
-      "elements": [
-       "forest"
-      ]
-     },
-     "time": "day",
-     "weather": "cold",
-     "props": [],
-     "actors": [
-      {
-       "id": "frosch",
-       "action": "freeze",
-       "emotion": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "keine Gehirnaktivität"
-     ],
-     "shot": "insert",
-     "overlay": {
-      "type": "card",
-      "text": "MEDIZINISCH TOT"
-     },
-     "who_desc": "",
-     "place_desc": "forest",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Hauptfigur kratzt sich verwirrt am Kopf.",
-     "text": "Medizinisch gesehen ist dieser Frosch jetzt komplett tot.",
-     "image": "Character scratching head in disbelief pointing at frozen frog.",
-     "who": [
-      "du"
-     ],
-     "place": "wald_winter",
-     "backdrop": {
-      "sky": "day",
-      "ground": "snow",
-      "elements": [
-       "forest"
-      ]
-     },
-     "time": "day",
-     "weather": "cold",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "think",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "komplett tot"
-     ],
-     "shot": "wide",
-     "overlay": {
-      "type": "stamp",
-      "text": "TOT",
-      "color": "red"
-     },
-     "who_desc": "",
-     "place_desc": "forest",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Infografik zeigt zwei Drittel gefrorenes Wasser im Froschkörper.",
-     "text": "Zweitens: Zwei Drittel seines gesamten Körperwassers frieren zu festem Eis.",
-     "image": "Graphic illustration of frog body showing ice ratio.",
-     "who": [],
-     "place": "wald_winter",
-     "backdrop": {
-      "sky": "day",
-      "ground": "snow",
-      "elements": [
-       "forest"
-      ]
-     },
-     "time": "day",
-     "weather": "cold",
-     "props": [
-      "ice"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Zwei Drittel",
-      "festem Eis"
-     ],
-     "shot": "graphic",
-     "graphic": {
-      "type": "number",
-      "kicker": "KÖRPERWASSER",
-      "value": "66 %",
-      "label": "GEFROREN"
-     },
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "forest",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Menschlicher Arm friert ein und zerbricht symbolisch.",
-     "text": "Du würdest daran sterben, weil Eiskristalle deine Gewebezellen zerstören.",
-     "image": "A person holding an ice cube looking alarmed at their frozen fingers.",
-     "who": [
-      "du"
-     ],
-     "place": "wald_winter",
-     "backdrop": {
-      "sky": "day",
-      "ground": "snow",
-      "elements": [
-       "forest"
-      ]
-     },
-     "time": "day",
-     "weather": "cold",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "cower",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "Gewebezellen zerstören"
-     ],
-     "shot": "wide",
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "forest",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine große Menge Zucker steigt als Grafik auf.",
-     "text": "Aber der Frosch flutet sein Blut mit gigantischen Mengen Glukose.",
-     "image": "Graphic showing sugar levels sky-rocketing in a meter.",
-     "who": [],
-     "place": "wald_winter",
-     "backdrop": {
-      "sky": "day",
-      "ground": "snow",
-      "elements": [
-       "forest"
-      ]
-     },
-     "time": "day",
-     "weather": "cold",
-     "props": [],
-     "actors": [
-      {
-       "id": "frosch",
-       "action": "freeze",
-       "emotion": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "Glukose"
-     ],
-     "shot": "insert",
-     "graphic": {
-      "type": "number",
-      "kicker": "ZUCKER-SPIEGEL",
-      "value": "100-FACH",
-      "label": "ERHÖHT"
-     },
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "forest",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Haufen Zucker schützt eine Zelle vor Kälte.",
-     "text": "Dieser extreme Zucker wirkt wie ein natürliches Frostschutzmittel in den Organen.",
-     "image": "Close-up of sugar crystals surrounding cells protecting them from frost.",
-     "who": [],
-     "place": "wald_winter",
-     "backdrop": {
-      "sky": "day",
-      "ground": "snow",
-      "elements": [
-       "forest"
-      ]
-     },
-     "time": "day",
-     "weather": "cold",
-     "props": [
-      "zucker"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Frostschutzmittel"
-     ],
-     "shot": "insert",
-     "overlay": {
-      "type": "tag",
-      "text": "FROSTSCHUTZ"
-     },
-     "who_desc": "",
-     "place_desc": "forest",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Hauptfigur staunt über den gefrorenen Frosch im Eis.",
-     "text": "Du denkst, er bleibt für immer starr.",
-     "image": "Person leaning down to look closely at the frozen frog.",
-     "who": [
-      "du",
-      "frosch"
-     ],
-     "place": "wald_winter",
-     "backdrop": {
-      "sky": "day",
-      "ground": "snow",
-      "elements": [
-       "forest"
-      ]
-     },
-     "time": "day",
-     "weather": "cold",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "",
-       "pos": "left",
-       "speaks": true
-      },
-      {
-       "id": "frosch",
-       "action": "freeze",
-       "emotion": "",
-       "pos": "right",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "für immer starr"
-     ],
-     "shot": "wide",
-     "overlay": null,
-     "who_desc": "; ",
-     "place_desc": "forest",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein großes Stempel-Symbol knallt mit FALSCH ins Bild.",
-     "text": "Falsch: Er wartet einfach auf die Frühlingssonne.",
-     "image": "Sun breaking through winter clouds shining warm light on the ground.",
-     "who": [],
-     "place": "wald_fruehling",
-     "backdrop": {
-      "sky": "sunset",
-      "ground": "grass",
-      "elements": [
-       "forest"
-      ]
-     },
-     "time": "day",
-     "weather": "",
-     "props": [
-      "sun"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "happy",
-     "camera": "still",
-     "sfx": "boom",
-     "highlight": [
-      "Frühlingssonne"
-     ],
-     "shot": "event",
-     "overlay": {
-      "type": "stamp",
-      "text": "FALSCH",
-      "color": "orange"
-     },
-     "who_desc": "",
-     "place_desc": "forest",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Frühlingssonne schmilzt das Eis im Wald langsam weg.",
-     "text": "Drittens: Sobald es wärmer wird, taut sein Körper von innen nach außen auf.",
-     "image": "Ice melting on green moss under warm sunlight in a forest.",
-     "who": [],
-     "place": "wald_fruehling",
-     "backdrop": {
-      "sky": "day",
-      "ground": "grass",
-      "elements": [
-       "forest",
-       "flowers"
-      ]
-     },
-     "time": "day",
-     "weather": "",
-     "props": [
-      "sun"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "happy",
-     "camera": "pan_up",
-     "sfx": "whoosh",
-     "highlight": [
-      "von innen nach außen"
-     ],
-     "shot": "event",
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "forest",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafik zeigt das schlagende Herz des Frosches mit steigendem Puls.",
-     "text": "Das Herz fängt ganz ohne fremde Hilfe wieder an zu schlagen.",
-     "image": "Heart pulse graphic starting to beat steadily again.",
-     "who": [],
-     "place": "wald_fruehling",
-     "backdrop": {
-      "sky": "day",
-      "ground": "grass",
-      "elements": [
-       "forest"
-      ]
-     },
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "happy",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "fängt wieder an"
-     ],
-     "shot": "graphic",
-     "graphic": {
-      "type": "pulse",
-      "value": "60",
-      "label": "HERZSCHLAG ZURÜCK"
-     },
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "forest",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Frosch blinzelt leicht und bewegt seine Beine auf dem Moos.",
-     "text": "Nach wenigen Stunden hüpft er herum, aber was bringt uns das in der Medizin?",
-     "image": "Frog stretching its legs on green forest grass under the sun.",
-     "who": [
-      "frosch"
-     ],
-     "place": "wald_fruehling",
-     "backdrop": {
-      "sky": "day",
-      "ground": "grass",
-      "elements": [
-       "forest"
-      ]
-     },
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "frosch",
-       "action": "hop",
-       "emotion": "happy",
-       "pos": "center",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "happy",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "hüpft er herum"
-     ],
-     "shot": "wide",
-     "overlay": {
-      "type": "tag",
-      "text": "AUFERSTANDEN"
-     },
-     "who_desc": "",
-     "place_desc": "forest",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Wissenschaftler untersuchen die Frost-Technik an einer Tafel.",
-     "text": "Forscher versuchen jetzt, diese Technik für menschliche Organtransplantationen zu nutzen.",
-     "image": "Scientific diagram showing frog tissue preservation concepts.",
-     "who": [],
-     "place": "wald_fruehling",
-     "backdrop": {
-      "sky": "day",
-      "ground": "grass",
-      "elements": [
-       "forest"
-      ]
-     },
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Organtransplantationen"
-     ],
-     "shot": "graphic",
-     "graphic": {
-      "type": "badge",
-      "kicker": "FORSCHUNG",
-      "text": "MEDIZIN REVOLUTION"
-     },
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "forest",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafik vergleicht Monatelanges Einfrieren mit Null Schäden.",
-     "text": "Der Frosch übersteht monatelanges Einfrieren ohne jeden dauerhaften Schaden.",
-     "image": "Calendar graphic ticking through cold months effortlessly.",
-     "who": [],
-     "place": "wald_winter",
-     "backdrop": {
-      "sky": "day",
-      "ground": "snow",
-      "elements": [
-       "forest"
-      ]
-     },
-     "time": "day",
-     "weather": "cold",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "camera": "still",
-     "sfx": "tick",
-     "highlight": [
-      "ohne jeden Schaden"
-     ],
-     "shot": "graphic",
-     "graphic": {
-      "type": "days",
-      "text": "EINFRIER-ZEIT",
-      "value": "7",
-      "sub": "7 MONATE",
-      "label": "MONATE ÜBERLEBT"
-     },
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "forest",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Frosch setzt sich stolz eine kleine Krone auf.",
-     "text": "Damit ist dieser Frosch der wahre Meister im Überleben.",
-     "image": "Frog standing tall with a small crown on its head in a lush forest.",
-     "who": [
-      "frosch"
-     ],
-     "place": "wald_fruehling",
-     "backdrop": {
-      "sky": "day",
-      "ground": "grass",
-      "elements": [
-       "forest"
-      ]
-     },
-     "time": "day",
-     "weather": "",
-     "props": [
-      "krone"
-     ],
-     "actors": [
-      {
-       "id": "frosch",
-       "action": "idle",
-       "emotion": "happy",
-       "emote": "music",
-       "pos": "center",
-       "speaks": true,
-       "say": "KING!"
-      }
-     ],
-     "crowd": "",
-     "mood": "happy",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "wahre Meister"
-     ],
-     "shot": "wide",
-     "overlay": {
-      "type": "stamp",
-      "text": "REKORD",
-      "color": "green"
-     },
-     "who_desc": "",
-     "place_desc": "forest",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Frosch sitzt auf einem gefrorenen Stein und winkt schlau.",
-     "text": "Denn drei Dinge beim Waldfrosch sind absolut unmöglich.",
-     "image": "Frog winking sitting on frozen moss in the forest.",
-     "who": [
-      "frosch"
-     ],
-     "place": "wald_winter",
-     "backdrop": {
-      "sky": "day",
-      "ground": "snow",
-      "elements": [
-       "forest"
-      ]
-     },
-     "time": "day",
-     "weather": "cold",
-     "props": [],
-     "actors": [
-      {
-       "id": "frosch",
-       "action": "wave",
-       "emotion": "happy",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "camera": "zoom_out",
-     "sfx": "whoosh",
-     "highlight": [
-      "absolut unmöglich"
-     ],
-     "shot": "wide",
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "forest",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [
-   "eiskristall",
-   "blut"
-  ],
-  "title": "Der Waldfrosch: Der Zombie der Tierwelt friert einfach ein",
-  "created": 1795515773.972188
- },
  "2026-11-24 21:00": {
   "category": "grusel",
   "topic": "Was dein Gehirn tut, wenn du im Spiegel an die falsche Stelle starrst",
@@ -3039,5 +2184,793 @@
   "needs": [],
   "title": "Phantom-Vibration: Warum dein Bein brummt, obwohl niemand schreibt",
   "created": 1795602057.4272268
+ },
+ "2026-11-26 13:00": {
+  "category": "motivation",
+  "topic": "Fang an, bevor du bereit bist",
+  "trend": null,
+  "script": {
+   "title": "Motivation: Fang einfach an, bevor du bereit bist",
+   "description": "Du bist nicht faul. Du bist einfach nur abgelenkt!\nWarum Perfektionismus dich blockiert und wie du sofort in die Umsetzung kommst.\nMachst du den ersten Schritt heute oder erst am Montag?",
+   "hashtags": [
+    "#shorts",
+    "#motivation",
+    "#mindset",
+    "#erfolg",
+    "#produktivität",
+    "#genz",
+    "#focus",
+    "#fyp"
+   ],
+   "tags": [
+    "motivation",
+    "aufschieben",
+    "prokrastination",
+    "disziplin",
+    "erfolg",
+    "fokus",
+    "mindset deutsch",
+    "ausreden stoppen"
+   ],
+   "thumbnail": {
+    "image": "Close-up of a young person in a hoodie standing at the edge of a high cliff, looking determined into the distance, sunrise background, dramatic lighting, empty space at the top.",
+    "text": "SCHLUSS MIT AUSREDEN",
+    "place": "mountain",
+    "time": "day",
+    "actor": "du",
+    "action": "point",
+    "emotion": "happy",
+    "props": [],
+    "weather": ""
+   },
+   "wishes": [
+    "handy",
+    "wecker",
+    "hantel"
+   ],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "schwarz",
+     "hat": "",
+     "hair": "curly",
+     "hair_color": "dunkelbraun",
+     "gender": "m",
+     "skin": "mittel"
+    }
+   },
+   "scenes": [
+    {
+     "see": "Du liegst nachts im Bett und starrst hypnotisiert auf dein Smartphone.",
+     "text": "Du bist nicht faul. Du bist einfach extrem abgelenkt.",
+     "image": "Young man lying in bed at night, dark room, holding a glowing smartphone over his face, trance-like expression.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "nicht faul",
+      "abgelenkt"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "03:14 UHR"
+     },
+     "actors": [
+      {
+       "id": "du",
+       "action": "sleep",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "time": "night",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "mood": "tense",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das handy zeigt endlose Kurzvideos, die Finger scrollen pausenlos.",
+     "text": "Und die wichtigste Entscheidung deines Tages triffst du meistens erst heute Nacht.",
+     "image": "Close-up of hands scrolling rapidly through endless glowing social media videos.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "Entscheidung",
+      "heute Nacht"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "ENDLOSES SCROLLEN"
+     },
+     "actors": [
+      {
+       "id": "du",
+       "action": "idle",
+       "emotion": "sad",
+       "emote": "",
+       "pos": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "time": "night",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "mood": "tense",
+     "shot": "close",
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik zeigt das Gehirn, das von Benachrichtigungen überschwemmt wird.",
+     "text": "Dein Kopf kriegt dauernd Billig-Dopamin, was echte Aufgaben sofort extrem langweilig wirken lässt.",
+     "image": "Abstract graphic representation of dopamine drops flooding a brain icon.",
+     "who": [],
+     "place": "schreibtisch",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "Billig-Dopamin",
+      "langweilen"
+     ],
+     "overlay": null,
+     "actors": [],
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "mood": "calm",
+     "shot": "graphic",
+     "graphic": {
+      "type": "compare",
+      "left": "HANDY",
+      "right": "ZOKKEN",
+      "value": "100%",
+      "sub": "10%"
+     },
+     "who_desc": "",
+     "place_desc": "office",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du schlägst den Wecker aus und drehst dich genervt zur Seite.",
+     "text": "Du sagst dir: Morgen starte ich durch. Aber morgen wiederholst du denselben Move.",
+     "image": "Young man aggressively slapping a ringing alarm clock on a nightstand.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Morgen",
+      "denselben Move"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "AUSREDE",
+      "color": "red"
+     },
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "angry",
+       "emote": "!",
+       "pos": "left",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "time": "day",
+     "weather": "",
+     "props": [
+      "wecker"
+     ],
+     "mood": "tense",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Wand voller Aufgaben-Post-its, vor der du überfordert stehst.",
+     "text": "Du wartest auf den perfekten Moment, auf den richtigen Plan oder mehr Motivation.",
+     "image": "Young man looking stressed while standing in front of a giant wall filled with yellow sticky notes.",
+     "who": [
+      "du"
+     ],
+     "place": "schreibtisch",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "perfekten Moment",
+      "Plan"
+     ],
+     "overlay": null,
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "time": "day",
+     "weather": "",
+     "props": [
+      "table"
+     ],
+     "mood": "tense",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "office",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik: Kalender verstreicht ohne abgehakte Tage.",
+     "text": "Die Wahrheit ist aber hart: Dieser perfekte Moment existiert überhaupt nicht.",
+     "image": "Calendar pages flipping rapidly away into nothingness.",
+     "who": [],
+     "place": "schreibtisch",
+     "camera": "still",
+     "sfx": "whoosh",
+     "highlight": [
+      "Wahrheit",
+      "existiert nicht"
+     ],
+     "overlay": null,
+     "actors": [],
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "mood": "calm",
+     "shot": "graphic",
+     "graphic": {
+      "type": "calendar",
+      "kicker": "WARTEZEIT",
+      "value": "0",
+      "label": "PERFEKTE TAGE"
+     },
+     "who_desc": "",
+     "place_desc": "office",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du stehst zögernd vor einer riesigen verschlossenen Holztür.",
+     "text": "Du denkst, erfolgreiche Leute fühlen sich bereit. Falsch, sie machen es einfach trotz Angst.",
+     "image": "Young man standing hesitantly in front of a massive wooden door.",
+     "who": [
+      "du"
+     ],
+     "place": "tuer",
+     "camera": "pan_up",
+     "sfx": "none",
+     "highlight": [
+      "Falsch",
+      "trotz Angst"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "MYTHOS BEREIT SEIN"
+     },
+     "actors": [
+      {
+       "id": "du",
+       "action": "cower",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "time": "day",
+     "weather": "",
+     "props": [
+      "door"
+     ],
+     "mood": "tense",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "hallway",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du blickst von einem steilen Berg in den Abgrund, willst springen.",
+     "text": "Warten macht dich nur unsicherer. Jeder Tag Vorbereitung ohne Handlung steigert deine Zweifel.",
+     "image": "Young man standing at the edge of a high mountain cliff looking down nervously.",
+     "who": [
+      "du"
+     ],
+     "place": "berg",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "Warten",
+      "Zweifel"
+     ],
+     "overlay": null,
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "worried",
+       "emote": "sweat",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "time": "day",
+     "weather": "wind",
+     "props": [],
+     "mood": "tense",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "mountain",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Höhepunkt: Du machst einen mutigen Schritt vorwärts über den Rand.",
+     "text": "Klarheit entsteht nie durch bloßes Nachdenken, sondern nur durch Taten und den ersten Schritt.",
+     "image": "Dynamic shot of a runner taking a powerful leap forward off a ledge.",
+     "who": [
+      "du"
+     ],
+     "place": "berg",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Klarheit",
+      "echtes Handeln"
+     ],
+     "overlay": {
+      "type": "note",
+      "title": "SCHRITT 1",
+      "text": "Einfach losgehen"
+     },
+     "actors": [
+      {
+       "id": "du",
+       "action": "jump",
+       "emotion": "happy",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "mood": "panic",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "mountain",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du sitzt energisch am Schreibtisch und klappst das Laptop auf.",
+     "text": "Stell dir dein Ziel nicht als Riesenberg vor. Das lähmt dich nur sofort.",
+     "image": "Young man aggressively opening a laptop on a clean desk, looking focused.",
+     "who": [
+      "du"
+     ],
+     "place": "schreibtisch",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "Riesenberg",
+      "lähmt dich"
+     ],
+     "overlay": null,
+     "actors": [
+      {
+       "id": "du",
+       "action": "sit",
+       "emotion": "angry",
+       "emote": "",
+       "pos": "center",
+       "speaks": true,
+       "hold": "computer"
+      }
+     ],
+     "time": "day",
+     "weather": "",
+     "props": [
+      "computer",
+      "table"
+     ],
+     "mood": "calm",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "office",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik: Zerlegung einer riesigen 100 in winzige Fünf-Prozent-Schritte.",
+     "text": "Zero-Percent-Rule: Mach die Aufgabe so lächerlich klein, dass du gar nicht nein sagen kannst.",
+     "image": "Graphic showing a huge task splitting into five tiny manageable puzzle pieces.",
+     "who": [],
+     "place": "schreibtisch",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "lächerlich klein",
+      "nicht nein sagen"
+     ],
+     "overlay": null,
+     "actors": [],
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "mood": "calm",
+     "shot": "graphic",
+     "graphic": {
+      "type": "number",
+      "kicker": "STRATEGIE",
+      "value": "5 MIN",
+      "label": "FOKUS FÜR DEN ANFANG"
+     },
+     "who_desc": "",
+     "place_desc": "office",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du schreibst konzentriert genau ein einziges Wort ins Notizbuch.",
+     "text": "Schreib nur einen einzigen Satz. Mach nur fünf Liegestütze. Lerne für zwei Minuten.",
+     "image": "Close-up of a hand writing clearly with a pen on a fresh white page.",
+     "who": [
+      "du"
+     ],
+     "place": "schreibtisch",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "einen Satz",
+      "zwei Minuten"
+     ],
+     "overlay": {
+      "type": "checklist",
+      "title": "MINIMAL-ZIEL",
+      "items": [
+       [
+        "1 Satz schreiben",
+        true
+       ],
+       [
+        "5 Liegestütze",
+        true
+       ],
+       [
+        "2 Minuten lernen",
+        true
+       ]
+      ]
+     },
+     "actors": [
+      {
+       "id": "du",
+       "action": "sit",
+       "emotion": "happy",
+       "emote": "idea",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "time": "day",
+     "weather": "",
+     "props": [
+      "table"
+     ],
+     "mood": "calm",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "office",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du wirfst das Smartphone entschlossen in eine Kiste weit weg.",
+     "text": "Sobald der Stein einmal rollt, übernimmt die Eigendynamik den Rest des Weges.",
+     "image": "Young man dramatically tossing his phone away onto a soft sofa.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "pan_right",
+     "sfx": "whoosh",
+     "highlight": [
+      "Stein rollt",
+      "Schwungmasse"
+     ],
+     "overlay": null,
+     "actors": [
+      {
+       "id": "du",
+       "action": "run",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "left",
+       "to": "right",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "time": "day",
+     "weather": "",
+     "props": [
+      "sofa"
+     ],
+     "mood": "happy",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du stemmst im Raum stolz eine schwere Hantel nach oben.",
+     "text": "Motivation kommt nämlich fast nie vor der Arbeit. Sie entsteht erst währenddessen.",
+     "image": "Young man lifting a heavy weight indoors, sweating, with a passionate expression.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "nie vor der Arbeit",
+      "währenddessen"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "MOTIVATION FOLGT"
+     },
+     "actors": [
+      {
+       "id": "du",
+       "action": "jump",
+       "emotion": "happy",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true,
+       "hold": "hantel"
+      }
+     ],
+     "time": "day",
+     "weather": "",
+     "props": [
+      "hantel"
+     ],
+     "mood": "happy",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik schießt in einer steilen Erfolgskurve rasant nach oben.",
+     "text": "Nach zehn Minuten bist du im Flow. Und dann zieht dich deine eigene Energie weiter.",
+     "image": "Line graph bursting upward with bright green neon sparks.",
+     "who": [],
+     "place": "schreibtisch",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "im Flow",
+      "eigene Energie"
+     ],
+     "overlay": null,
+     "actors": [],
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "mood": "happy",
+     "shot": "graphic",
+     "graphic": {
+      "type": "chart",
+      "kicker": "ENERGIE-LEVEL",
+      "value": "100%",
+      "label": "IM FLOW"
+     },
+     "who_desc": "",
+     "place_desc": "office",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du schubst entschlossen die riesige verschlossene Tür auf.",
+     "text": "Warte nicht, bis du dich bereit fühlst. Fang einfach an, bevor du bereit bist.",
+     "image": "Young man forcefully pushing open a heavy giant door to reveal glowing light behind it.",
+     "who": [
+      "du"
+     ],
+     "place": "tuer",
+     "camera": "zoom_in",
+     "sfx": "boom",
+     "highlight": [
+      "Fang einfach an",
+      "bevor du bereit bist"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "START JETZT",
+      "color": "green"
+     },
+     "actors": [
+      {
+       "id": "du",
+       "action": "walk",
+       "emotion": "happy",
+       "emote": "!",
+       "pos": "left",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "time": "day",
+     "weather": "",
+     "props": [
+      "door"
+     ],
+     "mood": "happy",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "hallway",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du stehst siegreich auf dem Gipfel des Berges im Sonnenlicht.",
+     "text": "Nicht morgen. Nicht nächste Woche. Genau jetzt in diesem Augenblick.",
+     "image": "Young man standing on a high mountain summit, arms raised in victory, golden sunlight.",
+     "who": [
+      "du"
+     ],
+     "place": "berg",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Nicht morgen",
+      "Jetzt"
+     ],
+     "overlay": null,
+     "actors": [
+      {
+       "id": "du",
+       "action": "wave",
+       "emotion": "happy",
+       "emote": "heart",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "mood": "happy",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "mountain",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Nahaufnahme von deinem entschlossenen Gesicht, Blick direkt in die Kamera.",
+     "text": "Speicher dir das für die harten Tage.",
+     "image": "Intense close-up of a young person looking directly into the camera with absolute focus.",
+     "who": [
+      "du"
+     ],
+     "place": "schreibtisch",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "Speicher dir das",
+      "harte Tage"
+     ],
+     "overlay": {
+      "type": "note",
+      "title": "FÜR DICH",
+      "text": "Speichern & umsetzen"
+     },
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "mood": "calm",
+     "shot": "close",
+     "who_desc": "",
+     "place_desc": "office",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du sitzt wieder im dunklen Zimmer, schaust kurz aufs Handy und legst es weg.",
+     "text": "Denn du weißt ganz genau:",
+     "image": "Young man sitting in a dark room, pausing, then putting the smartphone away decisively.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "zoom_out",
+     "sfx": "whoosh",
+     "highlight": [
+      "ganz genau"
+     ],
+     "overlay": null,
+     "actors": [
+      {
+       "id": "du",
+       "action": "sit",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "time": "night",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "mood": "calm",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "hantel"
+  ],
+  "title": "Motivation: Fang einfach an, bevor du bereit bist",
+  "created": 1795631367.4808462
  }
 }
