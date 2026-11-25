@@ -241,7 +241,7 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   hält es (vorher 3,5 s leerer Wald). Nennt der Satz den Rucksack, hält die Figur `lib_rucksack` statt der Einkaufstüte (`hold: bag`). Fall `_pruef2511b`.
 - Prüfung 25.11.2026 (Video 209, Phantom-Vibration): Eine gesprochene Prozent-Zahl als große Zahl (`number` mit „%“) wird nur noch dann durch einen
   Füllstand ersetzt, wenn wirklich einer entsteht (`stage._gauge_for`) – sonst bleibt die Zahl, statt dass die Figur bloß redet. Kleidung, die die Figur
-  anhat („das Reiben deiner Hose“, `stage.WORN_THINGS`), kommt weder in die Hand noch als Ding ins Bild. „auf dem Display steht rein gar nichts“
+  anhat („das Reiben deiner Hose“, `stage.WORN_THINGS`), und Körperteile („ein Muskel zuckt“) kommen weder in die Hand noch als Ding ins Bild. „auf dem Display steht rein gar nichts“
   (`stage.BLANK_DISPLAY_RE`) stellt kein Handy-Großbild mit eingehendem Anruf ins Bild. Ort „strasse“ (ohne ß) ist die Straße. Selbsttest `_pruef2511c`.
 
 ## Was zu tun ist

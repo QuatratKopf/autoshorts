@@ -4499,7 +4499,7 @@ def _household(scenes):
                     sc["shot"] = shot = "close"
         if re.search(SCRUB_RE, low) and shot not in ("graphic", "insert", "event"):   # „Zähne schrubben mit Salbeiblättern“: das genannte kleine Ding in der Hand
             thing_s = next((str(x) for x in [k for pat, k in _lib_props() + TEXT_PROPS if re.search(pat, low)] if extras.held_key(x).startswith("prop:")
-                            and str(x).lower().replace("lib_", "") not in WORN_THINGS), "")   # „das Reiben deiner Hose“: die Hose hat man an – niemand trägt eine zweite durchs Bild (Video 209)
+                            and str(x).lower().replace("lib_", "") not in WORN_THINGS + BODY_PROPS), "")   # „das Reiben deiner Hose“, „ein Muskel zuckt“: Hose und Muskel hat man am Leib – niemand trägt sie in der Hand durchs Bild (Video 209)
             who_s = next((a for a in acts if not a.get("kind") and not a.get("hold")), None)
             if thing_s and who_s is not None:
                 who_s["hold"] = thing_s

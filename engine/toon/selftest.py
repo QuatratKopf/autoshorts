@@ -2640,6 +2640,10 @@ def main():
         worn = [str(q.get("type") if isinstance(q, dict) else q) for q in sc[3].get("props") or []] + [str(a_.get("hold") or "") for a_ in sc[3].get("actors") or [] if isinstance(a_, dict)]
         assert not [w_ for w_ in worn if "hose" in w_ or "jeans" in w_], f"die Hose hat die Figur an – keine zweite in der Hand oder am Boden: {worn}"
         assert not [q for q in sc[4].get("props") or [] if "display" in str(q)] and str(sc[4].get("shot") or "") != "insert", f"leeres Display: kein Großbild mit Anruf: {sc[4]}"
+        sc3 = [{"text": "Der Stoff deiner Hose reibt am Bein, ein Muskel zuckt kurz.", "place": "park", "actors": du("look_around")}]
+        stage.direct(sc3, [(0.0, 4.0)], "Warum dein Handy vibriert", "fakten")
+        held3 = [str(a_.get("hold") or "") for a_ in sc3[0].get("actors") or [] if isinstance(a_, dict)] + [str(q.get("type") if isinstance(q, dict) else q) for q in sc3[0].get("props") or []]
+        assert not [h_ for h_ in held3 if "muskel" in h_ or "hose" in h_], f"zuckender Muskel und reibende Hose: nichts davon in der Hand oder am Boden: {held3}"
         sc2 = [{"text": "Das Display flackert kurz auf.", "place": "bedroom", "time": "night", "actors": du("shocked")}]
         stage.direct(sc2, [(0.0, 4.0)], "Die Nachricht um Mitternacht", "grusel")
         assert [q for q in sc2[0].get("props") or [] if "display" in str(q)], f"ein Display, das etwas zeigt, bleibt im Bild: {sc2[0]}"
