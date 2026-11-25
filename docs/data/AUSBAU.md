@@ -759,6 +759,24 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   (Körperteil allein im Bild). Offene Wünsche ohne Zeichnung: polyp, knie, anwaltstitel, toplitzsee, miete, algorithmus, statistik, musik, knall,
   friteuse, dach, hand, handfläche, steuererklärung (greifbar davon: polyp, friteuse, dach, steuererklärung). Aus dem 1800-Video fehlen weiter
   Kerker, Marktstände und eine Kirche der Zeit; das Pferd gibt es bisher nur an der Kutsche, nicht als eigenes Wesen.
+- Ausbau 25.11.2026 (13-Uhr-Termin „Was wäre, wenn du die Karte eines Open-World-Spiels in der echten Welt erkunden müsstest?“: minimap, markierung,
+  symbol, rucksack, socke; dazu stift und eiskristall aus den Plänen vom 24.11. und die vorläufigen Zeichnungen geschenk, pizza):
+  Neue Requisiten (`extras.py`, beide schweben frei im Bild – `extras.SKY` – und leuchten auch im Halbdunkel, `stage.GLOWS`): `markers`
+  (`p_markers`: sechs bunte Karten-Stecknadeln mit schlichten Zeichen – Ausrufezeichen, Stern, Fragezeichen, Haus, Raute, Punkt – ploppen nacheinander
+  über den Köpfen auf; Wörter Markierung, Kartensymbol, Questmarker, Wegpunkt) und `minimap` (`p_minimap`: runde Mini-Karte mit Straßen, Wasser,
+  Richtungspfeil und pulsierendem Ziel; Wörter Minimap, Mini-Karte, Mini-Radar). Beides frei erfunden – keine Karte, kein Zeichen eines echten Spiels.
+  `TEXT_PROPS`: „Symbole … im Sichtfeld/in der Luft/auf der Karte“, „zu denselben Symbolen“ → `markers`; ein bloßes „Symbol“ zeigt nichts
+  (`main.NO_THINGS`: symbol, zahl – dafür wird nichts gelernt). `stage._map_hud` (nach `_last_look`): stehen beide in einer Szene, bleibt die
+  Mini-Karte nur, wenn der Satz sie nennt, sonst die Markierungen (zusammen verdeckten sie einander). Die Text-KI darf beide setzen (`writer`).
+  Bibliothek von Hand gezeichnet: `rucksack` (blauer Rucksack mit Klappe, Riemen, Vortasche; auch Ranzen), `socke` (ein Paar Ringelsocken, eine mit
+  Flicken; auch Strumpf), `eiskristall` (sechsarmiger Kristall, pulsiert; auch Schneeflocke). Neu gezeichnet statt der vorläufigen Fassung: `stift`
+  (gelber Bleistift schräg mit Radiergummi – ohne die englischen Aliasse „pen“/„pencil“), `geschenk` (rote Schachtel mit gelber Schleife – ohne
+  „present“ und „pakete“; bleibt das Päckchen in der Hand bei `SURPRISE_RE`), `pizza` (Salamipizza auf dem Brett, ein Stück fehlt). Selbsttest: `_ausbau2511`.
+  Hinweis: Titel und Hashtags des 13-Uhr-Plans nennen eine echte Spielwelt und ein Marken-Spiel beim Namen – gezeichnet wurde nichts davon.
+  Noch offen (vorläufige Zeichnungen der Text-KI): kunststoffbecken (Alias „becken“ zu weit; für den Krebs gibt es `tank`), ohr (Körperteil allein
+  im Bild). Offene Wünsche ohne Zeichnung: polyp, knie, anwaltstitel, toplitzsee, kunststoffbecken, miete, algorithmus, statistik, musik, ohr, knall,
+  friteuse, dach, hand, handfläche, steuererklärung, countdown, blick, blut, primzahl, nase (greifbar davon: polyp, friteuse, dach, steuererklärung;
+  für `primzahl` gibt es die Grafik `primes`, für `countdown` den Zähler – beide Wörter kennt `main.known_thing` noch nicht).
 - Prüfung 23.11.2026, 18-Uhr-Termin (Video 192 „Das Rätsel der verschlossenen Tür auf dem Dachboden“, Kategorie `nachricht`):
   - Ort aus einem zusammengesetzten Ding-Wort („Countdown zu deiner Dachbodentür“, `COMPOUND_THING_RE`) gilt nicht, wenn die Bildbeschreibung
     (`see`) ausdrücklich einen anderen Ort nennt – die Figur schlief auf dem Dachboden-Fußboden. „Zimmer“ mit schlafender Figur oder

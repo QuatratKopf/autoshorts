@@ -2536,6 +2536,42 @@ def main():
             frame({"place": "park", "actors": [{"id": "du"}], "props": [{"type": k_}]})
             frame({"shot": "insert", "props": [{"type": k_}]})
     check("Ausbau 23.11.: Kutsche, Funkmast, Steckdose, Mikrofon, Schädel, Fotoapparat, Erdloch", _ausbau2311)
+    def _ausbau2511():                                           # Ausbau 25.11.2026: Karten-Markierungen, Mini-Karte, Rucksack, Socke, Stift, Geschenk, Pizza, Eiskristall
+        import re
+        from engine import main as _main
+        for w_ in ("minimap", "markierung", "symbol", "rucksack", "socke", "stift", "zahl", "eiskristall", "pizza", "geschenk"):
+            assert _main.known_thing(w_), f"{w_} ist der Engine bekannt"
+        assert "markers" in extras.SKY and "minimap" in extras.SKY and extras.PROP_ALIASES.get("markierung") == "markers"
+        sd = stage.direct([{"text": "Sechstausend Orte auf einer echten Karte sind purer Wahnsinn.", "place": "livingroom", "actors": [{"id": "du", "action": "shocked"}]},
+                           {"text": "In den ersten Sekunden ploppen Tausende Symbole direkt in deinem Sichtfeld auf.", "place": "street", "props": ["minimap"], "actors": [{"id": "du", "action": "cower"}]},
+                           {"text": "Unten links blinkt deine Minimap.", "place": "street", "props": ["markierung"], "actors": [{"id": "du", "action": "point"}]},
+                           {"text": "Das Herz ist ein Symbol der Liebe.", "place": "livingroom", "actors": [{"id": "du", "action": "talk"}]}],
+                          [(0, 4), (4, 8), (8, 12), (12, 16)], "Was wäre, wenn du die Karte eines Open-World-Spiels in der echten Welt erkunden müsstest?", "whatif", "")
+        kn = lambda sc_: [extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(), str(q.get("type") if isinstance(q, dict) else q).lower()) for q in sc_.get("props") or []]
+        assert "markers" in kn(sd[1]) and "minimap" not in kn(sd[1]), f"Symbole im Sichtfeld: Markierungen, nicht beides übereinander: {kn(sd[1])}"
+        assert "minimap" in kn(sd[2]) and "markers" not in kn(sd[2]), f"Minimap im Satz: die Mini-Karte: {kn(sd[2])}"
+        assert "markers" not in kn(sd[3]), f"ein bloßes „Symbol“ stellt keine Karten-Markierungen ins Bild: {kn(sd[3])}"
+        for k_ in ("markers", "minimap"):
+            for t_ in (0.05, 0.4, 1.3, 2.6):
+                assert frame({"shot": "insert", "props": [{"type": k_}]}, None, t_) is not None
+            frame({"place": "street", "actors": [{"id": "du", "action": "shocked"}], "props": [{"type": k_}]})
+            frame({"place": "street", "time": "night", "mood": "scary", "actors": [{"id": "du", "action": "shocked"}], "props": [{"type": k_}]})
+        tp = stage._lib_props()
+        hit = lambda txt: [k_ for pat_, k_ in tp if re.search(pat_, txt)]
+        for txt_, k_ in (("ohne echte rucksäcke", "lib_rucksack"), ("dein schulranzen", "lib_rucksack"), ("ein altes paar gebrauchte socken", "lib_socke"),
+                         ("schnapp dir einen stift", "lib_stift"), ("zwei bleistifte", "lib_stift"), ("ein geschenk für dich", "lib_geschenk"),
+                         ("viele geschenke", "lib_geschenk"), ("eine pizza", "lib_pizza"), ("winzige eiskristalle", "lib_eiskristall"), ("eine schneeflocke", "lib_eiskristall")):
+            assert hit(txt_) == [k_], f"{txt_}: {hit(txt_)}"
+        for txt_ in ("das ist geschenkt", "er stiftet unruhe", "die pakete kommen an", "ganz present sein"):
+            assert hit(txt_) == [], f"zu weiter Alias: {txt_}: {hit(txt_)}"
+        from .library import LIB
+        for n_ in ("rucksack", "socke", "stift", "geschenk", "pizza", "eiskristall"):
+            k_ = LIB[n_]["key"]
+            assert extras.prop_fit(k_), f"{k_} fehlt in der Bibliothek"
+            frame({"place": "park", "actors": [{"id": "du"}], "props": [{"type": k_}]})
+            frame({"shot": "insert", "props": [{"type": k_}]})
+        assert extras.held_key("lib_geschenk"), "das Päckchen lässt sich in der Hand halten (Überraschung im Paar-Video)"
+    check("Ausbau 25.11.: Karten-Markierungen, Mini-Karte, Rucksack, Socke, Stift, Geschenk, Pizza, Eiskristall", _ausbau2511)
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")
     import collections
     for line, n in collections.Counter(e.strip().splitlines()[-1] + "  @ " + e.strip().splitlines()[-3].strip()[:90] for e in errors).most_common(30):

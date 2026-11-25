@@ -810,7 +810,8 @@
  },
  "pizza": {
   "n": 1,
-  "last": "Das Rätsel der verschlossenen Tür auf dem Dachboden"
+  "last": "Das Rätsel der verschlossenen Tür auf dem Dachboden",
+  "done": true
  },
  "countdown": {
   "n": 1,
@@ -818,7 +819,8 @@
  },
  "geschenk": {
   "n": 1,
-  "last": "3 Zeichen, dass deine Situationship in dich verliebt ist"
+  "last": "3 Zeichen, dass deine Situationship in dich verliebt ist",
+  "done": true
  },
  "blick": {
   "n": 1,
@@ -826,15 +828,18 @@
  },
  "stift": {
   "n": 1,
-  "last": "Riemann-Vermutung: Das 1-Million-Dollar-Rätsel der Mathematik"
+  "last": "Riemann-Vermutung: Das 1-Million-Dollar-Rätsel der Mathematik",
+  "done": true
  },
  "zahl": {
   "n": 1,
-  "last": "Riemann-Vermutung: Das 1-Million-Dollar-Rätsel der Mathematik"
+  "last": "Riemann-Vermutung: Das 1-Million-Dollar-Rätsel der Mathematik",
+  "done": true
  },
  "eiskristall": {
   "n": 1,
-  "last": "Der Waldfrosch: Der Zombie der Tierwelt friert einfach ein"
+  "last": "Der Waldfrosch: Der Zombie der Tierwelt friert einfach ein",
+  "done": true
  },
  "blut": {
   "n": 1,
@@ -850,22 +855,27 @@
  },
  "minimap": {
   "n": 1,
-  "last": "State of Leonida im echten Leben: Was wäre, wenn?"
+  "last": "State of Leonida im echten Leben: Was wäre, wenn?",
+  "done": true
  },
  "markierung": {
   "n": 1,
-  "last": "State of Leonida im echten Leben: Was wäre, wenn?"
+  "last": "State of Leonida im echten Leben: Was wäre, wenn?",
+  "done": true
  },
  "symbol": {
   "n": 1,
-  "last": "State of Leonida im echten Leben: Was wäre, wenn?"
+  "last": "State of Leonida im echten Leben: Was wäre, wenn?",
+  "done": true
  },
  "rucksack": {
   "n": 1,
-  "last": "State of Leonida im echten Leben: Was wäre, wenn?"
+  "last": "State of Leonida im echten Leben: Was wäre, wenn?",
+  "done": true
  },
  "socke": {
   "n": 1,
-  "last": "State of Leonida im echten Leben: Was wäre, wenn?"
+  "last": "State of Leonida im echten Leben: Was wäre, wenn?",
+  "done": true
  }
 }

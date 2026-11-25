@@ -4429,3 +4429,125 @@ PROPS["display"] = p_display                              # Handy-Display, flack
 PROP_ALIASES.update({"handydisplay": "display", "handy-display": "display", "handybildschirm": "display", "touchscreen": "display", "sperrbildschirm": "display",
                      "phone screen": "display", "phone_screen": "display", "smartphone screen": "display"})
 SIZES["display"] = (0.8, 1262)                            # deutlich überzeichnet, damit man den Bildschirm neben der Figur erkennt
+
+
+# ------------------------------------------------------------------ Karten-Markierungen und Mini-Karte (Ausbau 25.11.2026)
+_PIN_COLS = ((226, 78, 66), (244, 190, 60), (78, 140, 226), (88, 176, 110), (158, 110, 204), (236, 138, 56))
+_PINS = ((-290, 560, 0, "!", 0.0, 1.0), (-130, 390, 1, "star", 0.14, 1.15), (70, 530, 2, "?", 0.28, 0.95),
+         (250, 380, 3, "house", 0.42, 1.1), (-20, 240, 4, "diamond", 0.56, 0.85), (300, 600, 5, "dot", 0.7, 0.8))
+
+
+def _pin(d, px_, py_, R, col, sym):
+    """Eine Karten-Stecknadel: Tropfenform mit heller Scheibe und einem schlichten Zeichen (kein Zeichen eines echten Spiels)."""
+    w = max(3, int(O * min(1.0, R / 60)))
+    _poly(d, [(px_ - R * 0.84, py_ + R * 0.5), (px_ + R * 0.84, py_ + R * 0.5), (px_, py_ + R * 2.15)], col, w, 0)
+    _o(d, (px_ - R, py_ - R, px_ + R, py_ + R), col, w)
+    r = R * 0.62
+    d.ellipse((px_ - r, py_ - r, px_ + r, py_ + r), fill=(250, 248, 242), outline=INK, width=max(2, w - 3))
+    dk = _dk(col, 0.3)
+    if sym == "!":
+        d.rounded_rectangle((px_ - r * 0.16, py_ - r * 0.62, px_ + r * 0.16, py_ + r * 0.14), max(1, int(r * 0.12)), fill=dk)
+        d.ellipse((px_ - r * 0.18, py_ + r * 0.3, px_ + r * 0.18, py_ + r * 0.66), fill=dk)
+    elif sym == "?":
+        d.arc((px_ - r * 0.42, py_ - r * 0.66, px_ + r * 0.42, py_ + r * 0.14), 180, 90, fill=dk, width=max(3, int(r * 0.26)))
+        d.line((px_, py_ + r * 0.02, px_, py_ + r * 0.22), fill=dk, width=max(3, int(r * 0.26)))
+        d.ellipse((px_ - r * 0.17, py_ + r * 0.36, px_ + r * 0.17, py_ + r * 0.7), fill=dk)
+    elif sym == "star":
+        pts = []
+        for i in range(10):
+            a = math.radians(-90 + i * 36)
+            rr = r * (0.72 if i % 2 == 0 else 0.3)
+            pts.append((px_ + math.cos(a) * rr, py_ + math.sin(a) * rr + r * 0.04))
+        d.polygon(pts, fill=dk)
+    elif sym == "house":
+        d.polygon([(px_ - r * 0.66, py_ - r * 0.02), (px_, py_ - r * 0.64), (px_ + r * 0.66, py_ - r * 0.02)], fill=dk)
+        d.rectangle((px_ - r * 0.44, py_ - r * 0.02, px_ + r * 0.44, py_ + r * 0.56), fill=dk)
+        d.rectangle((px_ - r * 0.12, py_ + r * 0.18, px_ + r * 0.12, py_ + r * 0.56), fill=(250, 248, 242))
+    elif sym == "diamond":
+        d.polygon([(px_, py_ - r * 0.68), (px_ + r * 0.5, py_), (px_, py_ + r * 0.68), (px_ - r * 0.5, py_)], fill=dk)
+    else:
+        d.ellipse((px_ - r * 0.4, py_ - r * 0.4, px_ + r * 0.4, py_ + r * 0.4), fill=dk)
+
+
+def p_markers(d, x, t, s=1.0):
+    """Karten-Markierungen in der Luft (Ausbau 25.11.2026, Plan „Open-World-Karte im echten Leben“: „ploppen Tausende Symbole direkt in deinem
+    Sichtfeld auf“ – „markierung“ und „symbol“ fehlten der Engine): sechs bunte Stecknadeln mit schlichten Zeichen (Ausrufezeichen, Stern,
+    Fragezeichen, Haus, Raute, Punkt) ploppen nacheinander über den Köpfen auf, wippen und werfen einen blassen Ring nach unten."""
+    for i, (dx, py_, ci, sym, at, sz) in enumerate(_PINS):
+        k = _pop(t, at, 0.3)
+        if k <= 0:
+            continue
+        R = 60 * sz * k
+        px_ = x + dx
+        yy = py_ + math.sin(t * 2.4 + i * 1.3) * 12
+        ph = (t * 0.9 + i * 0.37) % 1                                                    # blasser Ring unter der Spitze: „hier ist etwas“
+        rw = R * (0.5 + ph * 0.9)
+        d.ellipse((px_ - rw, yy + R * 2.3 - rw * 0.3, px_ + rw, yy + R * 2.3 + rw * 0.3), outline=_PIN_COLS[ci] + (int(190 * (1 - ph)),), width=max(3, int(R * 0.1)))
+        _pin(d, px_, yy, R, _PIN_COLS[ci], sym)
+
+
+def p_minimap(d, x, t, s=1.0):
+    """Mini-Karte wie am Bildrand eines Open-World-Spiels, hier frei in der Luft (Ausbau 25.11.2026, „minimap“ fehlte): runde Scheibe mit
+    dunklem Rand, darauf Land, Wasser, helle Straßen und Häuserblöcke, in der Mitte der weiße Richtungspfeil mit Sichtkegel; kleine bunte
+    Punkte ploppen nacheinander auf, das Ziel pulsiert. Frei erfunden – keine Karte, kein Zeichen eines echten Spiels."""
+    k = _pop(t, 0.0, 0.32)
+    if k <= 0:
+        return
+    cy = 500 + math.sin(t * 1.8) * 10
+    R = 214 * k
+    _o(d, (x - R - 24 * k, cy - R - 24 * k, x + R + 24 * k, cy + R + 24 * k), (52, 58, 78))                    # Rand
+    box = (x - R, cy - R, x + R, cy + R)
+    d.ellipse(box, fill=(94, 150, 112))                                                                       # Land
+    d.chord(box, 8, 96, fill=(78, 140, 204))                                                                  # Wasser unten rechts
+    d.chord((x - R, cy - R, x + R, cy + R), 200, 262, fill=(116, 170, 124))                                   # Park oben links
+
+    def chord_h(dy, wd, col):
+        hw = math.sqrt(max(0.0, R * R - (dy * k) ** 2)) - 4
+        d.line((x - hw, cy + dy * k, x + hw, cy + dy * k), fill=col, width=max(2, int(wd * k)))
+
+    def chord_v(dx, wd, col):
+        hh = math.sqrt(max(0.0, R * R - (dx * k) ** 2)) - 4
+        d.line((x + dx * k, cy - hh, x + dx * k, cy + hh), fill=col, width=max(2, int(wd * k)))
+    for bx, by, bw, bh, c in ((-150, -44, 62, 40, 0), (-58, -150, 54, 70, 1), (30, -140, 80, 52, 0), (34, -52, 64, 44, 1), (-150, 40, 60, 60, 1),
+                              (-56, 44, 70, 48, 0), (-52, 118, 62, 50, 1), (120, -60, 50, 50, 0)):             # Häuserblöcke
+        d.rounded_rectangle((x + bx * k, cy + by * k, x + (bx + bw) * k, cy + (by + bh) * k), max(1, int(8 * k)), fill=((70, 118, 92), (122, 168, 128))[c])
+    road = (232, 224, 196)
+    chord_h(-70, 20, road)
+    chord_h(20, 26, road)
+    chord_v(-76, 22, road)
+    chord_v(102, 18, road)
+    d.line((x - 76 * k, cy + 20 * k, x + 30 * k, cy + 150 * k), fill=road, width=max(2, int(16 * k)))        # schräge Nebenstraße
+    d.line((x - R * 0.6, cy + 20 * k, x + R * 0.6, cy + 20 * k), fill=(250, 204, 80), width=max(1, int(4 * k)))   # Mittelstreifen
+    pulse = (t * 1.2) % 1
+    for i, (dx, dy, ci, at) in enumerate(((-128, -104, 1, 0.35), (70, -92, 0, 0.5), (150, 2, 3, 0.65), (-24, 96, 4, 0.8), (-150, 82, 5, 0.95), (118, 110, 2, 1.1))):
+        kk = _pop(t, at, 0.25)
+        if kk <= 0:
+            continue
+        px_, py_ = x + dx * k, cy + dy * k
+        if i == 1:                                                                                             # das Ziel pulsiert
+            rr = (22 + pulse * 40) * k
+            d.ellipse((px_ - rr, py_ - rr, px_ + rr, py_ + rr), outline=_PIN_COLS[ci], width=max(1, int(9 * k * (1 - pulse))))     # deckend zeichnen: halb durchsichtige Farbe stanzt sonst ein Loch in die Karte
+        r = 19 * k * kk
+        d.ellipse((px_ - r, py_ - r, px_ + r, py_ + r), fill=_PIN_COLS[ci], outline=INK, width=max(2, int(5 * k)))
+        d.ellipse((px_ - r * 0.36, py_ - r * 0.36, px_ + r * 0.36, py_ + r * 0.36), fill=(250, 248, 242))
+    a = -90 + math.sin(t * 1.3) * 24                                                                           # Richtungspfeil dreht sich suchend
+    d.pieslice((x - 120 * k, cy - 120 * k, x + 120 * k, cy + 120 * k), a - 28, a + 28, fill=(168, 208, 176))
+    pts = []
+    for da, rr in ((0, 46), (140, 34), (180, 14), (220, 34)):
+        pts.append((x + math.cos(math.radians(a + da)) * rr * k, cy + math.sin(math.radians(a + da)) * rr * k))
+    d.polygon(pts, fill=(250, 250, 250), outline=INK, width=max(2, int(5 * k)))
+    d.ellipse(box, outline=INK, width=max(3, int(7 * k)))                                                      # Glasrand
+    d.arc((x - R + 12 * k, cy - R + 12 * k, x + R - 12 * k, cy + R - 12 * k), 196, 250, fill=(176, 212, 184), width=max(2, int(9 * k)))
+    ny = cy - R - 24 * k                                                                                       # Nord-Marke am Rand
+    _o(d, (x - 30 * k, ny - 30 * k, x + 30 * k, ny + 30 * k), (240, 236, 226), max(3, int(6 * k)))
+    d.polygon([(x, ny - 18 * k), (x + 12 * k, ny + 12 * k), (x - 12 * k, ny + 12 * k)], fill=(214, 70, 60))
+
+
+PROPS["markers"] = p_markers                              # schwebende Karten-Markierungen (Regie: TEXT_PROPS „Kartensymbol“, „Symbole … im Sichtfeld“, „Wegpunkt“)
+PROPS["minimap"] = p_minimap                              # runde Mini-Karte, schwebt frei (Regie: TEXT_PROPS „Minimap“, „Mini-Karte“)
+SKY += ("markers", "minimap")                             # schweben frei im Bild, vor Häusern und Bäumen
+PROP_ALIASES.update({"markierung": "markers", "markierungen": "markers", "kartenmarkierung": "markers", "kartenmarkierungen": "markers", "kartensymbol": "markers",
+                     "kartensymbole": "markers", "questmarker": "markers", "quest marker": "markers", "quest_marker": "markers", "map marker": "markers",
+                     "map_marker": "markers", "marker": "markers", "wegpunkt": "markers", "wegpunkte": "markers", "icons": "markers", "map icons": "markers",
+                     "mini-map": "minimap", "mini map": "minimap", "mini_map": "minimap", "minikarte": "minimap", "mini-karte": "minimap", "mini-radar": "minimap",
+                     "miniradar": "minimap", "radar-karte": "minimap"})

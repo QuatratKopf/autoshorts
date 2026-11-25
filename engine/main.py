@@ -144,6 +144,7 @@ NO_THINGS = {"bug", "bugs", "glitch", "glitches", "fehler", "regel", "regeln", "
              "wand", "wände", "zimmerwand", "punkt", "punkte",
              "raum", "räume", "raumes", "räumen",     # jede Szene spielt in einem Raum – „suchen dich im Raum“ ist kein Ding (Ausbau 23.11.2026)
              "nachricht", "nachrichten",      # „Nachricht“ ist meist eine Textnachricht oder Meldung – die gelernte Zeichnung stellte bei jedem Satz einen Briefumschlag ins Bild (Ausbau 22.11.2026)
+             "symbol", "symbole", "symbolen", "zahl", "zahlen",      # ein „Symbol“ kann alles sein, eine „Zahl“ zeigt die Zahl-Grafik – dafür wird nichts gelernt; Karten-Symbole sind die Requisite markers (Ausbau 25.11.2026)
              "gel", "gameboy", "game boy", "playstation", "xbox", "nintendo", "iphone", "ipad"}       # Körperteile allein im Bild (ein Haarschopf ohne Gesicht auf dem Tisch) sehen befremdlich aus
 
 

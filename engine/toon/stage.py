@@ -593,7 +593,7 @@ def _light_kind(place, night, mood, xs):
     return "floor"
 
 
-GLOWS = {"display": (0, places.GROUND - 150, 300), "cavitation": (0, 930, 330), "lib_glasscheibe": (0, places.GROUND - 280, 340), "lib_sprungfeder": (0, places.GROUND - 150, 260), "gondola_empty": (0, places.GROUND - 300, 460), "balloon": (0, 780, 400), "balloon_dark": (0, 780, 400), "balloon_out": (0, 800, 400), "balloon_fill": (-70, places.GROUND - 470, 430),
+GLOWS = {"markers": (0, 430, 430), "minimap": (0, 500, 330), "display": (0, places.GROUND - 150, 300), "cavitation": (0, 930, 330), "lib_glasscheibe": (0, places.GROUND - 280, 340), "lib_sprungfeder": (0, places.GROUND - 150, 260), "gondola_empty": (0, places.GROUND - 300, 460), "balloon": (0, 780, 400), "balloon_dark": (0, 780, 400), "balloon_out": (0, 800, 400), "balloon_fill": (-70, places.GROUND - 470, 430),
          "balloon_ground": (-80, places.GROUND - 130, 420), "balloon_down": (-60, places.GROUND - 150, 420)}   # leuchtet nachts selbst (Brenner) bzw. steht im Blick
 
 
@@ -2507,6 +2507,7 @@ def direct(scenes, times, topic="", style="", look=""):
             o_k["unit"] = "KM/H"
     _devices(scenes)
     _last_look(scenes, topic)
+    _map_hud(scenes)
     _door_story(scenes)
     _jogging(scenes)
     _speech(scenes, style)
@@ -3253,6 +3254,22 @@ def _door_story(scenes):
 def _stems(text):
     import re as _re
     return {w[:5] for w in _re.findall(r"[a-zäöüß]{4,}", str(text or "").lower())}
+
+
+MINIMAP_RE = r"\bmini-?maps?\b|\bmini-?karten?\b|\bmini-?radar\b"
+
+
+def _map_hud(scenes):
+    """Mini-Karte und Karten-Markierungen (Ausbau 25.11.2026) schweben beide mitten im Bild – zusammen verdecken sie einander, und die Karte
+    rutscht an den Rand. Stehen beide in einer Szene, bleibt nur eines: die Mini-Karte, wenn der Satz sie nennt, sonst die Markierungen."""
+    import re as _re
+    for sc in scenes:
+        if not isinstance(sc, dict):
+            continue
+        keys = [extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) for q in (sc.get("props") or []) if isinstance(q, dict)]
+        if "minimap" in keys and "markers" in keys:
+            drop = "markers" if _re.search(MINIMAP_RE, str(sc.get("text") or "").lower()) else "minimap"
+            sc["props"] = [q for q in sc["props"] if not (isinstance(q, dict) and extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) == drop)]
 
 
 def _last_look(scenes, topic=""):
@@ -6058,7 +6075,9 @@ OUTDOOR_THINGS = ("drone", "cctv", "fire", "smoke", "volcano", "meteor", "tornad
                   "pile", "sandpile", "trash", "barrel", "generator")
 DULL = ("table", "shelf", "streetlamp", "rock", "box")          # allein als Großaufnahme langweilig
 INDOOR_THINGS = ("faucet", "glass", "candle", "cans", "clock", "door", "fridge", "tv", "computer", "shelf", "cart", "table", "money", "aquarium")
-TEXT_PROPS = [(r"staubsauger", "vacuum"), (r"\bdisplays?\b|handydisplay|handy-display|handybildschirm|handy-bildschirm|touchscreen|sperrbildschirm", "display"), (r"motorkran|werkstattkran|bau\w* .{0,40}motor.{0,40}\bein\b|motor\w* (?:\w+ )?(?:ein|aus)ge?bau|(?:ein|aus)bau\w* .{0,30}motor|motortausch|motor\w* .{0,25}(?:hoch|heb|hängt)", "enginehoist"),
+TEXT_PROPS = [(r"\bmini-?maps?\b|\bmini-?karten?\b|\bmini-?radar\b", "minimap"),       # Ausbau 25.11.2026: Mini-Karte und Karten-Markierungen schweben frei im Bild
+              (r"kartensymbol|kartenmarkierung|quest-?marker|\bwegpunkt|symbole? .{0,40}(?:sichtfeld|in der luft|schweb|auf der karte)|zu (?:den|denselben|diesen|all den) symbolen", "markers"),
+              (r"staubsauger", "vacuum"), (r"\bdisplays?\b|handydisplay|handy-display|handybildschirm|handy-bildschirm|touchscreen|sperrbildschirm", "display"), (r"motorkran|werkstattkran|bau\w* .{0,40}motor.{0,40}\bein\b|motor\w* (?:\w+ )?(?:ein|aus)ge?bau|(?:ein|aus)bau\w* .{0,30}motor|motortausch|motor\w* .{0,25}(?:hoch|heb|hängt)", "enginehoist"),
               (r"motorständer|montageständer", "enginestand"), (r"\bv8\b|\bv12\b|\bw12\b|\bw16\b|\bmotor(?!rad|roller|säge|boot)\w*|motorblock|verbrenner|\bzylinder|\bps\b", "engine"),
               (r"kolben|pleuel|kurbelwelle", "piston"), (r"getriebe|kupplung|\bgänge?\b|schaltknauf", "gearbox"), (r"kühler\b|kühlwasser|überhitz", "radiator"),
               (r"(?<![a-zäöüß])(?:\w*?(?:auto|winter|sommer|ersatz|hinter|vorder|renn|gummi))?reifen\b|felge|\bräder\b", "tire"), (r"hebebühne", "carlift"), (r"werkzeug|schrauber|schraubt", "toolbox"), (r"schraubenschlüssel", "wrench"), (r"bohrmaschine|schlagbohrer|akkuschrauber|\bbohrt\b|\bbohren\b|\bbohrer\b", "drill"),
