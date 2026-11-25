@@ -1996,6 +1996,11 @@ def clean(g):
         out["mode"] = mode if mode in ("alert", "lock", "chat") else "alert"
     if need and need not in out:
         return None
+    if out["type"] == "timer" and not re.match(r"^\d{1,3}:\d{2}(?::\d{2})?$", out["value"]):
+        if re.search(r"\d", out["value"]):          # „80 STD“ ist eine Dauer, keine Uhr: als große Zahl zeigen – die Uhr lief sonst von erfundenen 72:00:00 herunter (Video 214)
+            out["type"] = "number"
+        else:
+            return None
     if out["type"] == "versus" and "right" not in out:
         return None
     if out["type"] == "compare" and (_num(out.get("value")) is None or _num(out.get("sub")) is None):

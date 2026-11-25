@@ -437,6 +437,7 @@ def _crowd(frame, kind, t, night, lo=0, hi=9999, road=False, traffic=True, indoo
             look = rig.Look.from_spec({"shirt": ERA_SHIRTS[(i * 3 + 1) % len(ERA_SHIRTS)], "outfit": "period", "hair": hair_e, "hat_color": ERA_SHIRTS[(i * 5) % len(ERA_SHIRTS)],
                                        "hat": ("bonnet" if i % 4 == 3 else "") if hair_e else ("tricorn" if i % 4 == 0 else ""), "skin": ("weiß", "hell", "weiß", "hell")[i % 4]})
         people.append((gy, look, rnd.random(), rnd.choice((-1, 1)), i))
+    stood = []
     for gy, look, ph, direction, i in sorted(people, key=lambda q: q[0]):
         if not (lo <= gy < hi):
             continue
@@ -463,6 +464,9 @@ def _crowd(frame, kind, t, night, lo=0, hi=9999, road=False, traffic=True, indoo
             for ax in avoid:                                   # nicht hinter einer Hauptfigur verstecken
                 if abs(x - ax) < 150:
                     x = ax + (170 if x >= ax else -170)
+            if any(abs(x - ax) < 150 for ax in avoid) or any(abs(x - px_) < 150 for px_ in stood) or (indoor and len(avoid) >= 2 and min(avoid) < x < max(avoid)):
+                continue                                       # zwischen zwei Hauptfiguren ist kein Platz: lieber einer weniger als ein Knäuel aus fünf Leuten (Video 214)
+            stood.append(x)
             facing = 1 if x < W / 2 else -1
             if kind == "cheer":
                 pose, _ = rig.pose_at("jump", t + ph, 9, "happy", 0.6, i)
@@ -981,6 +985,11 @@ def _number(word):
         return base * 1000 if base else None
     if w == "tausend":
         return 1000
+    if "tausend" in w:                                       # „dreitausendsechshundert“ in einem Wort (Video 214: die Einblendung „3.600 EURO“ fiel weg, weil die Zahl als nicht gesprochen galt)
+        head_n, tail_n = w.split("tausend", 1)
+        base_n = 1 if head_n in ("", "ein") else _number(head_n)
+        rest_n = _number(tail_n[3:] if tail_n.startswith("und") and len(tail_n) > 3 else tail_n)
+        return base_n * 1000 + rest_n if base_n and rest_n is not None and base_n < 1000 and 0 < rest_n < 1000 else None
     total = 0
     if "hundert" in w:
         h, w = w.split("hundert", 1)
@@ -1887,6 +1896,7 @@ def direct(scenes, times, topic="", style="", look=""):
         crowd_in = CROWD_KINDS.get(str(sc.get("crowd") or "").lower(), "")
         # Stimmung muss zum Satz passen: Panik nur, wenn der Text wirklich von Panik/Flucht redet – sonst Sorge statt Rennen
         if (mood == "panic" or crowd_in == "panic") and not _re.search(PANIC_RE, txt):
+            sc["_unpanic"] = mood == "panic"              # Panik im Drehbuch, die der Satz nicht hergibt: erzählte Videos nehmen unten auch den Schreck aus dem Gesicht
             mood = m_hint if m_hint and m_hint != "panic" else ("tense" if mood == "panic" else mood)
             crowd_in = "worried" if crowd_in == "panic" else crowd_in
         if _re.search(CALM_RE, txt) and not m_hint:
@@ -3104,8 +3114,8 @@ def _speech(scenes, style=""):
             continue
         if sc.get("crowd") and not re.search(PEOPLE_RE + r"|publikum|zuschauer|\bmenge\b", low):
             sc["crowd"] = ""
-        if str(sc.get("mood") or "") == "panic" and not re.search(SPEECH_PANIC_RE, low):
-            sc["mood"] = ""
+        if (str(sc.get("mood") or "") == "panic" or sc.get("_unpanic")) and not re.search(SPEECH_PANIC_RE, low):
+            sc["mood"] = "" if str(sc.get("mood") or "") == "panic" else sc.get("mood")
             for a in acts:
                 if str(a.get("emotion") or "") in ("scared", "shocked") or str(a.get("action") or "") in ("shocked", "scared", "shiver", "cower"):
                     a["emotion"] = ""
@@ -6156,7 +6166,7 @@ DISASTER_RE = (r"zerstör|vernicht|verwüst|reiß\w* .{0,40}\b(ab|auf|ein|mit|we
                r"tsunami|flutwelle|explodier|explosion|verglüh|tödlich|albtraum|weltuntergang|trümmer|kracht|krachen|aufprall|schleuder|druckwelle")
 WEATHER_HINTS = [(r"erdbeben|\bbebt\b|erschütter", "quake"), (r"orkan|hurrikan|sturmböe|\bsturm\b|stürmt|windböe|luftmassen|druckwelle", "wind"),
                  (r"\bkocht|zu kochen|brodel|verdampf|verdunste", "steam"), (r"ascheregen|\basche\b", "ash")]
-PANIC_RE = r"panik|flieh|flücht|rennen (weg|davon|los|um)|rennt (weg|davon|los)|schrei|stürmen|plünder|todesangst|rette sich"
+PANIC_RE = r"panik|flieh|flücht|rennen (weg|davon|los|um)|rennt (weg|davon|los)|schrei(?!b)|stürmen|plünder|todesangst|rette sich"
 CALM_RE = r"\bruhig|friedlich|entspannt|gemütlich|ganz normal|wie immer|alltag|idyll|\bstille\b"
 MOOD_HINTS = [
     (PANIC_RE, ("panic", "panic")),

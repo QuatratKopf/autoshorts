@@ -249,6 +249,11 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   Text nicht mehr nach 20 Zeichen abgeschnitten, ab 15 Zeichen zweizeilig. Zähler (`overlays.counter`): kleine Zeile auf dunklem Schildchen.
   Supermarkt: roter Wandstreifen statt des leeren Schilds in der Bildmitte (Karten lagen halb darüber). Drehbuch-Vorgaben und Faktenprüfung
   (`writer.py`): Zahlen, die aufeinander aufbauen, müssen nachgerechnet zusammenpassen; Umsatz und Gewinn auseinanderhalten. Selbsttest `_pruef2511d`.
+  Video 214 (Neubau): Uhr-Grafik (`timer`) mit einer Dauer statt Uhrzeit („80 STD“) wird in `graphics.clean` zur großen Zahl – die Uhr lief sonst von
+  erfundenen 72:00:00 herunter. Stehende Zuschauer (`stage._crowd`: Jubel, Trauer, Staunen) halten Abstand zu Hauptfiguren und zueinander, drinnen steht
+  niemand zwischen zwei Hauptfiguren. „Schreib es in die Kommentare“ löst keine Panik mehr aus (`PANIC_RE`: „schrei“ nicht in „schreib“).
+  `stage._number` liest zusammengeschriebene Zahlwörter über tausend („dreitausendsechshundert“ = 3600) – vorher galt die Zahl als nicht gesprochen und
+  ihre Einblendung fiel weg.
 
 ## Was zu tun ist
 1. Offene Wünsche (ohne `"done": true`) und `"auto": true`-Einträge durchgehen, höchstens 8 pro Sitzung, häufigste zuerst.

@@ -916,7 +916,7 @@ def main():
             assert places.resolve(stage.backdrop(scs[n_])) == "underwater", f"Meerestier Szene {n_} nicht unter Wasser"
             assert not any(q.get("type") in ("explosion", "wave") for q in scs[n_].get("props") or []), "Explosion/Welle unter Wasser"
             frame(scs[n_], {"du": {"shirt": "blau"}})
-        assert scs[0].get("overlay") is None, "Thermometer mit nicht gesprochener Zahl"
+        assert scs[0].get("overlay") is None or scs[0]["overlay"].get("value") == 4500, f"Thermometer mit nicht gesprochener Zahl (44000 statt der gesprochenen 4500): {scs[0].get('overlay')}"
         assert [q.get("type") for q in scs[7].get("props") or []] == ["aquarium"], "Goldfisch ohne Aquarium"
         assert not any(a.get("kind") for a in scs[8].get("actors") or []) and places.resolve(stage.backdrop(scs[8])) != "underwater", "Krankheit Krebs als Tier"
         g = stage.direct([{"text": "Sein Schlag erreicht achtzig Kilometer pro Stunde.", "place": "underwater", "shot": "graphic",
@@ -2670,6 +2670,19 @@ def main():
             frame(sc_, cast)
         px = lambda txt: sum(1 for v in frame({"shot": "graphic", "text": "x", "graphic": {"type": "badge", "kicker": "WARNUNG", "text": txt}}, t=2.0).convert("L").crop((150, 600, 930, 900)).getdata() if v < 70)   # noqa: E731
         assert px("WENIGER ALS MINDESTLOHN") != px("WENIGER ALS MINDESTL"), "lange Plakette zeigt den ganzen Text zweizeilig, nicht nach 20 Zeichen abgeschnitten"
+        g_t = graphics.clean({"type": "timer", "kicker": "ARBEITSZEIT PRO WOCHE", "value": "80 STD"})
+        assert g_t and g_t["type"] == "number" and g_t["value"] == "80 STD", f"Dauer „80 STD“ ist keine Uhr (lief von 72:00:00 herunter, Video 214): {g_t}"
+        assert graphics.clean({"type": "timer", "value": "48:00:00"})["type"] == "timer", "echte Uhrzeit bleibt eine Uhr"
+        frame({"text": "Bei Tom bleiben dreitausendsechshundert Euro, Sandra fährt dreizehntausend ein.", "place": "supermarket", "crowd": "cheer", "mood": "happy",
+               "actors": [{"id": "murat", "action": "talk", "pos": "left"}, {"id": "sandra", "action": "talk", "pos": "right"}]}, cast)
+        end = [{"text": "Und du: Zu wem gehst du abends eher? Schreib es in die Kommentare.", "place": "street", "actors": [{"id": "murat", "action": "wave", "pos": "left"}, {"id": "sandra", "action": "wave", "pos": "right"}]}]
+        stage.direct(end, [(0.0, 4.5)], "Spätkauf gegen Supermarkt", "vergleich")
+        assert str(end[0].get("crowd") or "") != "panic", f"„Schreib es in die Kommentare“ ist kein Schrei – keine Panik auf der Straße: {end[0].get('crowd')}"
+        for w_n, v_n in (("dreitausendsechshundert", 3600), ("eintausendzweihundert", 1200), ("viertausendsiebenhundertfünfzig", 4750), ("tausendeins", 1001),
+                         ("dreizehntausend", 13000), ("sechshundertfünfzigtausend", 650000), ("neunzehnhundertsiebenundachtzig", 1987)):
+            assert stage._number(w_n) == v_n, f"Zahlwort {w_n}: {stage._number(w_n)} statt {v_n}"
+        assert stage._number("tausendsassa") is None and stage._number("jahrtausendwende") is None, "Wörter mit „tausend“ sind keine Zahlen"
+        assert stage.spoken_number(3600, "Bei Tom bleiben grob gerechnet dreitausendsechshundert Euro im Monat."), "3.600 ist gesprochen – die Einblendung bleibt"
     check("Prüfung 25.11.: unbesetzte Vornamen mit eigenem Aussehen (Frauen als Frauen), lange Plakette zweizeilig", _pruef2511d)
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")
     import collections
