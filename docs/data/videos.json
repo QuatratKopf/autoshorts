@@ -8180,7 +8180,7 @@
   "id": 215,
   "category": "vergleich",
   "topic": "Spätkauf gegen Supermarkt – wer verdient mehr?",
-  "status": "rendered",
+  "status": "published",
   "created": 1795635872.4294586,
   "title": "Spätkauf gegen Supermarkt: Wer verdient mehr?",
   "description": "Tom oder Sandra: Wer holt mehr Gewinn heraus?\nEine Beispielrechnung mit grob geschätzten Zahlen: Umsatz, Marge, Gewinn und Arbeitszeit im Vergleich.\nZu wem gehst du abends eher einkaufen?",
@@ -8215,6 +8215,12 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "zernio_id": "6b073d656c734d60aab6b131",
+  "yt_status": "Zernio: published",
+  "yt_id": "aZ80q3Y6hfw",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6b073d656c734d60aab6b131",
+  "error": null
  }
 ]
