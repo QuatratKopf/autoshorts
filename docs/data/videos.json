@@ -7894,7 +7894,7 @@
   "id": 208,
   "category": "whatif",
   "topic": "Was wäre, wenn die Karte von GTA 6 echt wäre und du sie zu Fuß erkunden müsstest?",
-  "status": "rendered",
+  "status": "published",
   "created": 1795604946.6514134,
   "trend": {
    "title": "state of leonida",
@@ -7932,6 +7932,12 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "zernio_id": "6b06c3f6732439224b3ee51b",
+  "yt_status": "Zernio: published",
+  "yt_id": "Awju-oqi8Q0",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6b06c3f6732439224b3ee51b",
+  "error": null
  }
 ]
