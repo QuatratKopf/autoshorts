@@ -201,6 +201,11 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   in der Hand; „Speicher dir das“ ist kein Dachboden. `stage._jogging`: „Lauf eine Runde“, „du rennst“ → die Figur läuft die ganze Szene quer durchs helle Bild.
   `_carry_thing`: eine Uhrzeit ist keine Menge, und „diese Meile/Formel“ nennt etwas Neues (`_carry_other`) – der Wecker wandert nicht in die nächsten Szenen.
   Leerer öffentlicher Raum in einem Du-Satz zeigt die Hauptfigur statt jubelnder Fremder. Selbsttest: `_speech173`.
+  Prüfung 26.11.2026 (Videos 216/217): Liegt die Figur laut Satz oder Bildplan wach im Bett am Handy, bleibt sie im Bett liegen – Augen offen, kein „zzz“,
+  das leuchtende Handy über der Decke (`_awake` am Darsteller, gezeichnet in `stage._frame`); sie schläft nicht und läuft nicht durchs Zimmer. In
+  Motivationsreden gibt es keinen Vorgriff im ersten Bild (`_cold_open`) – das erste Bild zeigt den ersten Satz. Große Dinge (Fels, Tisch, Tür …) hält
+  die Figur nur, wenn der Satz davon spricht; Gehaltenes wird nicht über den Kopf gerissen (dort steht das Wort). `_jogging` greift auch nach „und“
+  („… und lauf zwei Minuten“; kein Schnitt mitten im Satz auf ein Ding allein – `_no_insert`) und wenn der Bildplan „Du rennst …“ sagt. `writer.polish`: Befehlsform „lese“ → „lies“. Selbsttest: `_speech216`.
 - Reise in die Vergangenheit (`stage._past_story`, greift, wenn der Kern des Themas ein Jahr bis 1849 oder das Mittelalter nennt – `PAST_TOPIC_RE`;
   Prüfung 22.11.2026, Video 185 „Smartphone im Jahr 1800“ spielte vor Läden mit Markisen, mit Passanten im Kapuzenpulli, Wache mit Bauhelm, Bassbox,
   Trinkglas und Kühltürmen): Orte `oldtown` (Baukasten `ground: cobble`, `elements: [oldtown]` – Fachwerkhäuser, Kopfsteinpflaster, Brunnen, Öllaterne),

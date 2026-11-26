@@ -194,6 +194,8 @@ def sanitize(sc):
                  "speaks": a.get("speaks") is True, **({"hero": True} if a.get("hero") is True else {})}
             if isinstance(a.get("_ksz"), (int, float)) and not isinstance(a.get("_ksz"), bool):
                 c["_ksz"] = float(a["_ksz"])               # Größe je Figur, von der Regie gesetzt (stage._tiny_story)
+            if a.get("_awake") is True:
+                c["_awake"] = True                         # liegt wach im Bett am Handy, von der Regie gesetzt (stage._speech)
             if a.get("_jog") is True:
                 c["_jog"] = True                           # Dauerlauf, von der Regie gesetzt (stage._jogging)
             if a.get("_outfit") in ("modern", "period", "king", "guard"):
@@ -316,7 +318,7 @@ def _prepare(scene, cast):
         actors.append({"look": look_a, "kind": kind if kind in extras.CREATURES else "",
                        "hold": extras.held_key(a.get("hold")),
                        "action": action, "emotion": str(a.get("emotion") or "").lower(), "emote": a.get("emote") or "", "giant": bool(scene.get("giant")), "small": bool(scene.get("_beside_bed") or a.get("small")), "hero": bool(a.get("hero")), "ksz": float(a["_ksz"]) if isinstance(a.get("_ksz"), (int, float)) and not isinstance(a.get("_ksz"), bool) and 0.2 <= a["_ksz"] <= 2.0 else 0.0, "say": str(a.get("say") or "") if isinstance(a.get("say"), str) else "",
-                       "x0": x0, "x1": x1, "speaks": bool(a.get("speaks")), "seed": i * 5 + len(aid), "face": a.get("facing"), "jog": bool(a.get("_jog")) and action == "run",
+                       "x0": x0, "x1": x1, "speaks": bool(a.get("speaks")), "awake": bool(a.get("_awake")), "seed": i * 5 + len(aid), "face": a.get("facing"), "jog": bool(a.get("_jog")) and action == "run",
                        "teeth": TEETH_COLORS.get(str(a.get("teeth") or "").lower())})
     for i, a in enumerate(actors):     # zwei Figuren nie auf derselben Stelle
         for b in actors[:i]:
@@ -876,6 +878,10 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                 action, tt = ("fall", a_hit) if a_hit is not None else ("float", t)
             pose, _ = rig.pose_at(action, tt, dur, a["emotion"], mouth, a["seed"],
                                   _gest_at(a.get("gplan"), t) if action in ("talk", "idle") and not a.get("hold") else None, shape)
+            bed_phone = bool(a.get("awake")) and action == "sleep" and in_bed and not close
+            if a.get("awake") and action == "sleep":          # liegt wach im Bett am Handy (Prüfung 26.11.2026, Video 216): Augen offen, kein „zzz“
+                pose.eyes, pose.squash = "normal", 1.0
+                pose.extra.pop("zzz", None)
             if a.get("teeth"):                                # verfärbte Zähne zeigen: Mund bleibt offen
                 pose.teeth = a["teeth"]
                 pose.mouth = max(pose.mouth, 0.75)
@@ -918,6 +924,15 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                 d_b.rounded_rectangle((360, 968 - br_b, places.BED_END, 1190), 34, fill=col_b, outline=INK, width=6)
                 d_b.rounded_rectangle((420, 982 - br_b, places.BED_END - 14, 1026 - br_b), 20, fill=lit_b)
                 d_b.rounded_rectangle((340, 964 - br_b, 400, 1190), 12, fill=fold_b, outline=INK, width=5)
+            if bed_phone:                                     # das Handy steht auf der Decke vor dem Gesicht, die Hand hält es, das Display leuchtet ins Gesicht
+                d_p = ImageDraw.Draw(frame, "RGBA")
+                px, py = 412, 962 + 3 * math.sin(t * 5.0)     # der Daumen wischt: das Handy wippt leicht
+                if night:
+                    d_p.ellipse((px - 250, py - 190, px + 70, py + 90), fill=(150, 210, 255, 46))
+                d_p.polygon([(px - 6, py + 8), (px + 26, py - 62), (px + 44, py - 54), (px + 14, py + 16)], fill=(30, 32, 40), outline=INK)
+                d_p.line((px - 6, py + 8, px + 26, py - 62), fill=(150, 210, 255), width=7)     # Displaykante leuchtet zum Gesicht hin
+                sk_p = rig._dark(a["look"].skin if a["look"].skin != rig.SKINS["schwarz"] else (250, 244, 232), 0.16)
+                d_p.ellipse((px + 2, py - 22, px + 40, py + 14), fill=sk_p, outline=INK, width=5)
             if a.get("hold") and not pose.lying and "hand" in pose.extra:
                 hx, hy = pose.extra["hand"]
                 if a["hold"].startswith("prop:"):
@@ -2344,7 +2359,8 @@ def direct(scenes, times, topic="", style="", look=""):
                 sc["_no_cut"] = True                       # kein harter Schnitt auf die Maschine allein vor leerem Grund: die Figur näht
                 if sc.get("shot") in ("close", "event"):
                     sc["shot"] = ""
-    _cold_open(scenes)
+    if str(style or "").lower() != "motivation":           # Motivationsrede: das erste Bild zeigt den ersten Satz – „Du bist nicht faul, du wartest …“ lief als fröhlicher Dauerlauf im Park (Video 217)
+        _cold_open(scenes)
     for sc in scenes:                                     # Tier als Figur der Szene: bleibt allein im Bild – spätere Regeln (Ereignis-Bild ohne
         if isinstance(sc, dict) and sc.get("_sea") and isinstance(sc.get("_keep"), dict):   # Figur, Hauptfigur dazustellen) gelten hier nicht
             kept = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and a.get("kind") == sc["_keep"].get("kind")][:1] or [dict(sc["_keep"])]
@@ -3064,7 +3080,7 @@ HYBRID_RUN_RE = r"\brenn|\bsprint|\brast\b|\bjagt\b|km/h|kilometer\w* pro stunde
 
 
 # „Lauf diese Runde“, „du rennst durch den Park“: die Figur läuft die ganze Szene – sie kommt nicht ins Bild und steht dann vier Sekunden da (Video 173)
-JOG_RE = r"(?:^|[.!?,:;] )\s*(?:lauf|laufe|renn|renne|jogg|jogge|sprinte)\b|\bdu (?:läufst|rennst|joggst|sprintest)\b|\b(?:läufst|rennst|joggst|sprintest) du\b"
+JOG_RE = r"(?:^|[.!?,:;] |\bund )\s*(?:lauf|laufe|renn|renne|jogg|jogge|sprinte)\b|\bdu (?:läufst|rennst|joggst|sprintest)\b|\b(?:läufst|rennst|joggst|sprintest) du\b"
 
 
 SPEECH_PANIC_RE = r"panik|\bangst|fürcht|erschr|schock|zitter|albtraum|gefahr|bedroh"
@@ -3087,9 +3103,21 @@ def _speech(scenes, style=""):
             if not a.get("kind") and str(a.get("action") or "") == "fall" and not re.search(FALL_SAID_RE, low + " " + str(sc.get("see") or "").lower()):
                 a["action"] = "shocked"
         for a in acts:
-            if not a.get("kind") and str(a.get("action") or "") == "sleep" and re.search(r"scroll|handy|smartphone|bildschirm|\bfeed\b|wach\b|nicht schlafen|tippst|chattest", low) \
+            see_low = str(sc.get("see") or "").lower()
+            awake_re = r"scroll|handy|smartphone|bildschirm|\bfeed\b|wach\b|nicht schlafen|tippst|chattest"
+            if not a.get("kind") and len(acts) == 1 and str(a.get("action") or "idle").lower() in ("", "idle", "talk", "walk", "sit", "think", "look_around") \
+                    and re.search(r"\blieg\w*\b.{0,40}\bim bett\b|\bim bett\b.{0,30}\blieg", low) and re.search(awake_re + r"|starrst", low) \
+                    and not re.search(r"schläfst|eingeschlafen|schlummer|\bnicht\b.{0,12}\bim bett\b|aufsteh|stehst auf", low) \
+                    and not isinstance(backdrop(sc), dict) and places.resolve(backdrop(sc)) == "bedroom" and str(sc.get("shot") or "") in ("", "wide"):
+                a.update(action="sleep", pos="center")    # „Nachts liegst du wach im Bett und starrst auf das Handy“: die Figur lief mit dem Handy durchs Schlafzimmer (Video 217)
+                a.pop("to", None)
+            if not a.get("kind") and str(a.get("action") or "") == "sleep" \
+                    and (re.search(awake_re, low) or (re.search(awake_re + r"|starrst", see_low) and not re.search(r"schläf|schlaf(?!zimmer)|träum", low + " " + see_low))) \
                     and not re.search(r"schläfst|eingeschlafen|schlummer|nachttisch|vibriert|klingelt|brummt|summt|leuchtet auf", low):   # „Dein Handy vibriert auf dem Nachttisch“: es liegt dort, die Figur schläft (Video 192)
-                a.update(action="idle", hold="phone", emote="")       # liegt wach am Handy: kein „zzz“ unter der Decke
+                if not isinstance(backdrop(sc), dict) and places.resolve(backdrop(sc)) == "bedroom":
+                    a.update(_awake=True, emote="", emotion="")       # liegt wach im Bett am Handy: Augen offen, Handy vor dem Gesicht, kein „zzz“ (Video 216: auch wenn nur der Bildplan das Handy nennt)
+                else:
+                    a.update(action="idle", hold="phone", emote="")   # nicht im Schlafzimmer: steht wach mit dem Handy da
         if isinstance(sc.get("props"), list) and not re.search(r"\buhr|wecker|\bzeit|spät|stunde|minute|sekunde|tick|pünktlich|countdown|frist", low):
             sc["props"] = [q for q in sc["props"] if str((q.get("type") if isinstance(q, dict) else q) or "").lower() not in ("clock", "uhr", "wanduhr")]
         if re.search(r"handy|smartphone|telefon", low) and re.search(r"bleibt\b.{0,40}\b(zimmer|draußen|liegen|weg|aus)\b|\bim (?:anderen|nächsten) zimmer|nebenzimmer|\bleg\w*\b.{0,30}\bweg\b|ohne (?:dein |das )?(?:handy|smartphone)|aus der hand", low):
@@ -3123,8 +3151,19 @@ def _speech(scenes, style=""):
         if not acts and str(sc.get("shot") or "") in ("", "event") and not sc.get("float"):
             sc["actors"] = acts = [{"id": main, "action": "idle", "pos": "left" if sc.get("props") else "center", "emotion": MOOD_EMOTION.get(str(sc.get("mood") or ""), "")}]
             sc["shot"] = ""
+        if acts:
+            sc["_no_insert"] = True                       # „Du stehst vor der Tür“: drei Sekunden nur die Tür vor braunem Grund (Video 217) – der Schnitt geht auf die Figur, nicht auf ein Ding allein
         for a in acts:
             a["emote"] = "none"                           # das große Wort steht über dem Kopf – dort kein Zeichen
+            if str(a.get("hold") or "").lower() in ("rock", "table", "shelf", "streetlamp", "box", "door", "sofa", "bed", "tree") \
+                    and not re.search(r"fels|stein|brocken|geröll|tisch|regal|laterne|karton|kiste|\btür|sofa|couch|bett|baum|heb|trag|stemm|schlepp", low):
+                held_s = str(a["hold"]).lower()           # „Der perfekte Moment kommt niemals“: die Figur hielt am Berg einen Felsbrocken in der Hand (Video 217)
+                a["hold"] = ""
+                if isinstance(sc.get("props"), list):
+                    sc["props"] = [q for q in sc["props"] if str((q.get("type") if isinstance(q, dict) else q) or "").lower() != held_s]
+            if not a.get("kind") and str(a.get("hold") or "") and str(a.get("action") or "").lower() in ("jump", "happy", "cheer", "dance", "wave"):
+                a["action"] = "idle"                      # beide Arme oben: die Hantel in der Hand lag quer über dem großen Wort (Video 216) – gehalten wird vor dem Körper
+                a["emotion"] = a.get("emotion") or "happy"
 
 
 def _jogging(scenes):
@@ -3133,7 +3172,9 @@ def _jogging(scenes):
             continue
         low = str(sc.get("text") or "").lower()
         acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
-        if len(acts) != 1 or acts[0].get("kind") or not re.search(JOG_RE, low) or re.search(r"\bnicht\b.{0,12}\b(lauf|renn)|davon|\bweg\b|läuft (?:gut|schlecht|schief|ab)", low):
+        see_jog = str(acts[0].get("action") or "").lower() == "run" and re.search(r"\bdu (?:läufst|rennst|joggst|sprintest)\b", str(sc.get("see") or "").lower()) if len(acts) == 1 else None
+        # „Zieh die Laufschuhe an und lauf zwei Minuten“ / Bildplan „Du rennst durch den Park“: die Figur kam hereingerannt und stand dann da (Video 217)
+        if len(acts) != 1 or acts[0].get("kind") or not (re.search(JOG_RE, low) or see_jog) or re.search(r"\bnicht\b.{0,12}\b(lauf|renn)|davon|\bweg\b|läuft (?:gut|schlecht|schief|ab)", low):
             continue
         bd = backdrop(sc)
         if not isinstance(bd, dict) and places.resolve(bd) not in places.OUTDOOR:

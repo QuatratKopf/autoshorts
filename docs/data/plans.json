@@ -866,31 +866,31 @@
   "topic": "Fang an, bevor du bereit bist",
   "trend": null,
   "script": {
-   "title": "Motivation: Fang einfach an, bevor du bereit bist",
-   "description": "Du bist nicht faul. Du bist einfach nur abgelenkt!\nWarum Perfektionismus dich blockiert und wie du sofort in die Umsetzung kommst.\nMachst du den ersten Schritt heute oder erst am Montag?",
+   "title": "Fang an, bevor du bereit bist",
+   "description": "Du bist nicht faul, du wartest nur auf den perfekten Moment.\nWarum Mut erst nach dem ersten Schritt kommt – und drei winzige Schritte, mit denen du heute anfängst.\nWas ist dein erster kleiner Schritt?",
    "hashtags": [
     "#shorts",
     "#motivation",
-    "#mindset",
+    "#anfangen",
+    "#disziplin",
+    "#mut",
+    "#selbstvertrauen",
     "#erfolg",
-    "#produktivität",
-    "#genz",
-    "#focus",
     "#fyp"
    ],
    "tags": [
     "motivation",
+    "anfangen",
     "aufschieben",
     "prokrastination",
+    "erster schritt",
+    "mut",
     "disziplin",
-    "erfolg",
-    "fokus",
-    "mindset deutsch",
-    "ausreden stoppen"
+    "motivation deutsch"
    ],
    "thumbnail": {
-    "image": "Close-up of a young person in a hoodie standing at the edge of a high cliff, looking determined into the distance, sunrise background, dramatic lighting, empty space at the top.",
-    "text": "SCHLUSS MIT AUSREDEN",
+    "image": "A determined young person standing at the foot of a mountain at sunrise, empty space at the top.",
+    "text": "FANG EINFACH AN",
     "place": "mountain",
     "time": "day",
     "actor": "du",
@@ -899,47 +899,76 @@
     "props": [],
     "weather": ""
    },
-   "wishes": [
-    "handy",
-    "wecker",
-    "hantel"
-   ],
+   "wishes": [],
    "toon": true,
    "cast": {
     "du": {
-     "shirt": "schwarz",
+     "shirt": "blau",
      "hat": "",
-     "hair": "curly",
-     "hair_color": "dunkelbraun",
+     "hair": "short",
+     "hair_color": "schwarz",
      "gender": "m",
-     "skin": "mittel"
+     "skin": "hell"
     }
    },
    "scenes": [
     {
-     "see": "Du liegst nachts im Bett und starrst hypnotisiert auf dein Smartphone.",
-     "text": "Du bist nicht faul. Du bist einfach extrem abgelenkt.",
-     "image": "Young man lying in bed at night, dark room, holding a glowing smartphone over his face, trance-like expression.",
+     "see": "Du stehst im Wohnzimmer und grübelst.",
+     "text": "Du bist nicht faul. Du wartest nur auf den perfekten Moment.",
+     "image": "Du stehst im Wohnzimmer und grübelst.",
      "who": [
       "du"
      ],
-     "place": "zimmer",
+     "place": "livingroom",
      "camera": "zoom_in",
      "sfx": "whoosh",
      "highlight": [
       "nicht faul",
-      "abgelenkt"
+      "perfekten Moment"
      ],
-     "overlay": {
-      "type": "tag",
-      "text": "03:14 UHR"
-     },
+     "overlay": null,
      "actors": [
       {
        "id": "du",
-       "action": "sleep",
-       "emotion": "shocked",
-       "emote": "!",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "",
+       "pos": "center",
+       "speaks": true,
+       "hold": ""
+      }
+     ],
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "mood": "tense",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du liegst nachts wach im Bett, das Handy leuchtet dir ins Gesicht.",
+     "text": "Nachts liegst du wach im Bett und starrst auf das Handy.",
+     "image": "Du liegst nachts wach im Bett, das Handy leuchtet dir ins Gesicht.",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "wach",
+      "Handy"
+     ],
+     "overlay": null,
+     "actors": [
+      {
+       "id": "du",
+       "action": "idle",
+       "emotion": "",
+       "emote": "",
        "pos": "center",
        "speaks": true,
        "hold": "phone"
@@ -953,110 +982,69 @@
      "mood": "tense",
      "shot": "wide",
      "who_desc": "",
-     "place_desc": "bedroom",
+     "place_desc": "",
      "hud": "",
      "status": ""
     },
     {
-     "see": "Das handy zeigt endlose Kurzvideos, die Finger scrollen pausenlos.",
-     "text": "Und die wichtigste Entscheidung deines Tages triffst du meistens erst heute Nacht.",
-     "image": "Close-up of hands scrolling rapidly through endless glowing social media videos.",
+     "see": "Du stehst im dunklen Schlafzimmer und nickst entschlossen.",
+     "text": "Du nimmst dir fest vor, morgen endlich anzufangen.",
+     "image": "Du stehst im dunklen Schlafzimmer und nickst entschlossen.",
      "who": [
       "du"
      ],
-     "place": "zimmer",
+     "place": "bedroom",
      "camera": "still",
-     "sfx": "tick",
+     "sfx": "none",
      "highlight": [
-      "Entscheidung",
-      "heute Nacht"
+      "morgen"
      ],
-     "overlay": {
-      "type": "card",
-      "text": "ENDLOSES SCROLLEN"
-     },
+     "overlay": null,
      "actors": [
       {
        "id": "du",
-       "action": "idle",
-       "emotion": "sad",
+       "action": "talk",
+       "emotion": "happy",
        "emote": "",
        "pos": "center",
        "speaks": true,
-       "hold": "phone"
+       "hold": ""
       }
      ],
      "time": "night",
      "weather": "",
-     "props": [
-      "phone"
-     ],
-     "mood": "tense",
-     "shot": "close",
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafik zeigt das Gehirn, das von Benachrichtigungen überschwemmt wird.",
-     "text": "Dein Kopf kriegt dauernd Billig-Dopamin, was echte Aufgaben sofort extrem langweilig wirken lässt.",
-     "image": "Abstract graphic representation of dopamine drops flooding a brain icon.",
-     "who": [],
-     "place": "schreibtisch",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "Billig-Dopamin",
-      "langweilen"
-     ],
-     "overlay": null,
-     "actors": [],
-     "time": "day",
-     "weather": "",
      "props": [],
      "mood": "calm",
-     "shot": "graphic",
-     "graphic": {
-      "type": "compare",
-      "left": "HANDY",
-      "right": "ZOKKEN",
-      "value": "100%",
-      "sub": "10%"
-     },
+     "shot": "close",
      "who_desc": "",
-     "place_desc": "office",
+     "place_desc": "",
      "hud": "",
      "status": ""
     },
     {
-     "see": "Du schlägst den Wecker aus und drehst dich genervt zur Seite.",
-     "text": "Du sagst dir: Morgen starte ich durch. Aber morgen wiederholst du denselben Move.",
-     "image": "Young man aggressively slapping a ringing alarm clock on a nightstand.",
+     "see": "Der Wecker klingelt, du schreckst hoch.",
+     "text": "Am Morgen klingelt der Wecker, und die alte Ausrede ist sofort wieder da.",
+     "image": "Der Wecker klingelt, du schreckst hoch.",
      "who": [
       "du"
      ],
-     "place": "zimmer",
-     "camera": "shake",
-     "sfx": "boom",
+     "place": "bedroom",
+     "camera": "still",
+     "sfx": "tick",
      "highlight": [
-      "Morgen",
-      "denselben Move"
+      "Wecker",
+      "Ausrede"
      ],
-     "overlay": {
-      "type": "stamp",
-      "text": "AUSREDE",
-      "color": "red"
-     },
+     "overlay": null,
      "actors": [
       {
        "id": "du",
        "action": "shocked",
-       "emotion": "angry",
-       "emote": "!",
-       "pos": "left",
-       "to": "center",
-       "speaks": true
+       "emotion": "scared",
+       "emote": "",
+       "pos": "center",
+       "speaks": true,
+       "hold": ""
       }
      ],
      "time": "day",
@@ -1067,103 +1055,33 @@
      "mood": "tense",
      "shot": "wide",
      "who_desc": "",
-     "place_desc": "bedroom",
+     "place_desc": "",
      "hud": "",
      "status": ""
     },
     {
-     "see": "Eine Wand voller Aufgaben-Post-its, vor der du überfordert stehst.",
-     "text": "Du wartest auf den perfekten Moment, auf den richtigen Plan oder mehr Motivation.",
-     "image": "Young man looking stressed while standing in front of a giant wall filled with yellow sticky notes.",
+     "see": "Du stehst zögernd vor der geschlossenen Tür im Wohnzimmer.",
+     "text": "Du stehst vor der Tür und traust dich nicht hindurch.",
+     "image": "Du stehst zögernd vor der geschlossenen Tür im Wohnzimmer.",
      "who": [
       "du"
      ],
-     "place": "schreibtisch",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "perfekten Moment",
-      "Plan"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "think",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "time": "day",
-     "weather": "",
-     "props": [
-      "table"
-     ],
-     "mood": "tense",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "office",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafik: Kalender verstreicht ohne abgehakte Tage.",
-     "text": "Die Wahrheit ist aber hart: Dieser perfekte Moment existiert überhaupt nicht.",
-     "image": "Calendar pages flipping rapidly away into nothingness.",
-     "who": [],
-     "place": "schreibtisch",
+     "place": "livingroom",
      "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "Wahrheit",
-      "existiert nicht"
-     ],
-     "overlay": null,
-     "actors": [],
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "mood": "calm",
-     "shot": "graphic",
-     "graphic": {
-      "type": "calendar",
-      "kicker": "WARTEZEIT",
-      "value": "0",
-      "label": "PERFEKTE TAGE"
-     },
-     "who_desc": "",
-     "place_desc": "office",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du stehst zögernd vor einer riesigen verschlossenen Holztür.",
-     "text": "Du denkst, erfolgreiche Leute fühlen sich bereit. Falsch, sie machen es einfach trotz Angst.",
-     "image": "Young man standing hesitantly in front of a massive wooden door.",
-     "who": [
-      "du"
-     ],
-     "place": "tuer",
-     "camera": "pan_up",
      "sfx": "none",
      "highlight": [
-      "Falsch",
-      "trotz Angst"
+      "Tür"
      ],
-     "overlay": {
-      "type": "card",
-      "text": "MYTHOS BEREIT SEIN"
-     },
+     "overlay": null,
      "actors": [
       {
        "id": "du",
        "action": "cower",
        "emotion": "scared",
-       "emote": "!",
+       "emote": "",
        "pos": "center",
-       "speaks": true
+       "speaks": true,
+       "hold": ""
       }
      ],
      "time": "day",
@@ -1174,23 +1092,59 @@
      "mood": "tense",
      "shot": "wide",
      "who_desc": "",
-     "place_desc": "hallway",
+     "place_desc": "",
      "hud": "",
      "status": ""
     },
     {
-     "see": "Du blickst von einem steilen Berg in den Abgrund, willst springen.",
-     "text": "Warten macht dich nur unsicherer. Jeder Tag Vorbereitung ohne Handlung steigert deine Zweifel.",
-     "image": "Young man standing at the edge of a high mountain cliff looking down nervously.",
+     "see": "Du stehst im Büro und grübelst.",
+     "text": "Du wartest auf mehr Mut, mehr Zeit und den besseren Plan.",
+     "image": "Du stehst im Büro und grübelst.",
      "who": [
       "du"
      ],
-     "place": "berg",
-     "camera": "zoom_out",
+     "place": "office",
+     "camera": "still",
      "sfx": "none",
      "highlight": [
-      "Warten",
-      "Zweifel"
+      "Mut",
+      "Zeit",
+      "Plan"
+     ],
+     "overlay": null,
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "",
+       "pos": "center",
+       "speaks": true,
+       "hold": ""
+      }
+     ],
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "mood": "calm",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du stehst am Fuß des Berges und schaust dich suchend um.",
+     "text": "Aber der perfekte Moment kommt nie von allein.",
+     "image": "Du stehst am Fuß des Berges und schaust dich suchend um.",
+     "who": [
+      "du"
+     ],
+     "place": "mountain",
+     "camera": "still",
+     "sfx": "whoosh",
+     "highlight": [
+      "nie"
      ],
      "overlay": null,
      "actors": [
@@ -1198,196 +1152,181 @@
        "id": "du",
        "action": "look_around",
        "emotion": "worried",
-       "emote": "sweat",
+       "emote": "",
        "pos": "center",
-       "speaks": true
+       "speaks": true,
+       "hold": ""
       }
      ],
      "time": "day",
-     "weather": "wind",
+     "weather": "",
      "props": [],
      "mood": "tense",
      "shot": "wide",
      "who_desc": "",
-     "place_desc": "mountain",
+     "place_desc": "",
      "hud": "",
      "status": ""
     },
     {
-     "see": "Höhepunkt: Du machst einen mutigen Schritt vorwärts über den Rand.",
-     "text": "Klarheit entsteht nie durch bloßes Nachdenken, sondern nur durch Taten und den ersten Schritt.",
-     "image": "Dynamic shot of a runner taking a powerful leap forward off a ledge.",
+     "see": "Du stehst am Berg, deine Hände zittern.",
+     "text": "Niemand fühlt sich wirklich bereit für den ersten Schritt.",
+     "image": "Du stehst am Berg, deine Hände zittern.",
      "who": [
       "du"
      ],
-     "place": "berg",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "Klarheit",
-      "echtes Handeln"
-     ],
-     "overlay": {
-      "type": "note",
-      "title": "SCHRITT 1",
-      "text": "Einfach losgehen"
-     },
-     "actors": [
-      {
-       "id": "du",
-       "action": "jump",
-       "emotion": "happy",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "mood": "panic",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "mountain",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du sitzt energisch am Schreibtisch und klappst das Laptop auf.",
-     "text": "Stell dir dein Ziel nicht als Riesenberg vor. Das lähmt dich nur sofort.",
-     "image": "Young man aggressively opening a laptop on a clean desk, looking focused.",
-     "who": [
-      "du"
-     ],
-     "place": "schreibtisch",
+     "place": "mountain",
      "camera": "still",
-     "sfx": "pop",
+     "sfx": "none",
      "highlight": [
-      "Riesenberg",
-      "lähmt dich"
+      "Niemand",
+      "bereit"
      ],
      "overlay": null,
      "actors": [
       {
        "id": "du",
-       "action": "sit",
-       "emotion": "angry",
+       "action": "tremble",
+       "emotion": "scared",
        "emote": "",
        "pos": "center",
        "speaks": true,
-       "hold": "computer"
+       "hold": ""
       }
      ],
      "time": "day",
      "weather": "",
-     "props": [
-      "computer",
-      "table"
-     ],
-     "mood": "calm",
-     "shot": "wide",
+     "props": [],
+     "mood": "tense",
+     "shot": "close",
      "who_desc": "",
-     "place_desc": "office",
+     "place_desc": "",
      "hud": "",
      "status": ""
     },
     {
-     "see": "Grafik: Zerlegung einer riesigen 100 in winzige Fünf-Prozent-Schritte.",
-     "text": "Zero-Percent-Rule: Mach die Aufgabe so lächerlich klein, dass du gar nicht nein sagen kannst.",
-     "image": "Graphic showing a huge task splitting into five tiny manageable puzzle pieces.",
-     "who": [],
-     "place": "schreibtisch",
+     "see": "Du gehst unsicher die Straße entlang.",
+     "text": "Die anderen gehen trotzdem los, auch mit weichen Knien.",
+     "image": "Du gehst unsicher die Straße entlang.",
+     "who": [
+      "du"
+     ],
+     "place": "street",
      "camera": "still",
-     "sfx": "ding",
+     "sfx": "none",
      "highlight": [
-      "lächerlich klein",
-      "nicht nein sagen"
+      "trotzdem",
+      "weichen Knien"
      ],
      "overlay": null,
-     "actors": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "walk",
+       "emotion": "worried",
+       "emote": "",
+       "pos": "left",
+       "speaks": true,
+       "hold": "",
+       "to": "right"
+      }
+     ],
      "time": "day",
      "weather": "",
      "props": [],
      "mood": "calm",
-     "shot": "graphic",
-     "graphic": {
-      "type": "number",
-      "kicker": "STRATEGIE",
-      "value": "5 MIN",
-      "label": "FOKUS FÜR DEN ANFANG"
-     },
+     "shot": "wide",
      "who_desc": "",
-     "place_desc": "office",
+     "place_desc": "",
      "hud": "",
      "status": ""
     },
     {
-     "see": "Du schreibst konzentriert genau ein einziges Wort ins Notizbuch.",
-     "text": "Schreib nur einen einzigen Satz. Mach nur fünf Liegestütze. Lerne für zwei Minuten.",
-     "image": "Close-up of a hand writing clearly with a pen on a fresh white page.",
+     "see": "Du gehst auf dem Bergweg los und lächelst.",
+     "text": "Mut kommt erst nach dem ersten Schritt, niemals davor.",
+     "image": "Du gehst auf dem Bergweg los und lächelst.",
      "who": [
       "du"
      ],
-     "place": "schreibtisch",
-     "camera": "zoom_in",
+     "place": "mountain",
+     "camera": "still",
      "sfx": "none",
      "highlight": [
-      "einen Satz",
-      "zwei Minuten"
+      "Mut",
+      "niemals davor"
      ],
-     "overlay": {
-      "type": "checklist",
-      "title": "MINIMAL-ZIEL",
-      "items": [
-       [
-        "1 Satz schreiben",
-        true
-       ],
-       [
-        "5 Liegestütze",
-        true
-       ],
-       [
-        "2 Minuten lernen",
-        true
-       ]
-      ]
-     },
+     "overlay": null,
      "actors": [
       {
        "id": "du",
-       "action": "sit",
+       "action": "walk",
        "emotion": "happy",
-       "emote": "idea",
-       "pos": "center",
-       "speaks": true
+       "emote": "",
+       "pos": "left",
+       "speaks": true,
+       "hold": "",
+       "to": "center"
       }
      ],
      "time": "day",
      "weather": "",
-     "props": [
-      "table"
-     ],
-     "mood": "calm",
+     "props": [],
+     "mood": "happy",
      "shot": "wide",
      "who_desc": "",
-     "place_desc": "office",
+     "place_desc": "",
      "hud": "",
      "status": ""
     },
     {
-     "see": "Du wirfst das Smartphone entschlossen in eine Kiste weit weg.",
-     "text": "Sobald der Stein einmal rollt, übernimmt die Eigendynamik den Rest des Weges.",
-     "image": "Young man dramatically tossing his phone away onto a soft sofa.",
+     "see": "Du stehst im Park und zeigst nach vorn.",
+     "text": "Hier sind drei winzige Schritte für deinen Anfang.",
+     "image": "Du stehst im Park und zeigst nach vorn.",
      "who": [
       "du"
      ],
-     "place": "zimmer",
-     "camera": "pan_right",
-     "sfx": "whoosh",
+     "place": "park",
+     "camera": "still",
+     "sfx": "pop",
      "highlight": [
-      "Stein rollt",
-      "Schwungmasse"
+      "drei",
+      "winzige"
+     ],
+     "overlay": null,
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true,
+       "hold": ""
+      }
+     ],
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "mood": "happy",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du rennst fröhlich durch den Park.",
+     "text": "Erstens: Zieh die Laufschuhe an und lauf nur zwei Minuten.",
+     "image": "Du rennst fröhlich durch den Park.",
+     "who": [
+      "du"
+     ],
+     "place": "park",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Laufschuhe",
+      "zwei Minuten"
      ],
      "overlay": null,
      "actors": [
@@ -1397,122 +1336,157 @@
        "emotion": "happy",
        "emote": "",
        "pos": "left",
-       "to": "right",
        "speaks": true,
-       "hold": "phone"
+       "hold": "",
+       "to": "right"
       }
      ],
-     "time": "day",
-     "weather": "",
-     "props": [
-      "sofa"
-     ],
-     "mood": "happy",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du stemmst im Raum stolz eine schwere Hantel nach oben.",
-     "text": "Motivation kommt nämlich fast nie vor der Arbeit. Sie entsteht erst währenddessen.",
-     "image": "Young man lifting a heavy weight indoors, sweating, with a passionate expression.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "nie vor der Arbeit",
-      "währenddessen"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "MOTIVATION FOLGT"
-     },
-     "actors": [
-      {
-       "id": "du",
-       "action": "jump",
-       "emotion": "happy",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true,
-       "hold": "hantel"
-      }
-     ],
-     "time": "day",
-     "weather": "",
-     "props": [
-      "hantel"
-     ],
-     "mood": "happy",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafik schießt in einer steilen Erfolgskurve rasant nach oben.",
-     "text": "Nach zehn Minuten bist du im Flow. Und dann zieht dich deine eigene Energie weiter.",
-     "image": "Line graph bursting upward with bright green neon sparks.",
-     "who": [],
-     "place": "schreibtisch",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "im Flow",
-      "eigene Energie"
-     ],
-     "overlay": null,
-     "actors": [],
      "time": "day",
      "weather": "",
      "props": [],
      "mood": "happy",
-     "shot": "graphic",
-     "graphic": {
-      "type": "chart",
-      "kicker": "ENERGIE-LEVEL",
-      "value": "100%",
-      "label": "IM FLOW"
-     },
+     "shot": "wide",
      "who_desc": "",
-     "place_desc": "office",
+     "place_desc": "",
      "hud": "",
      "status": ""
     },
     {
-     "see": "Du schubst entschlossen die riesige verschlossene Tür auf.",
-     "text": "Warte nicht, bis du dich bereit fühlst. Fang einfach an, bevor du bereit bist.",
-     "image": "Young man forcefully pushing open a heavy giant door to reveal glowing light behind it.",
+     "see": "Du stehst im Büro und hältst ein aufgeschlagenes Buch.",
+     "text": "Zweitens: Schlag das Buch auf und lies genau eine Seite.",
+     "image": "Du stehst im Büro und hältst ein aufgeschlagenes Buch.",
      "who": [
       "du"
      ],
-     "place": "tuer",
-     "camera": "zoom_in",
-     "sfx": "boom",
+     "place": "office",
+     "camera": "still",
+     "sfx": "pop",
      "highlight": [
-      "Fang einfach an",
-      "bevor du bereit bist"
+      "Buch",
+      "eine Seite"
      ],
-     "overlay": {
-      "type": "stamp",
-      "text": "START JETZT",
-      "color": "green"
-     },
+     "overlay": null,
+     "actors": [
+      {
+       "id": "du",
+       "action": "idle",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true,
+       "hold": "lehrbuch"
+      }
+     ],
+     "time": "day",
+     "weather": "",
+     "props": [
+      "lehrbuch"
+     ],
+     "mood": "calm",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du stehst im Wohnzimmer und telefonierst mit dem Handy am Ohr.",
+     "text": "Drittens: Mach den einen Anruf, vor dem du dich drückst.",
+     "image": "Du stehst im Wohnzimmer und telefonierst mit dem Handy am Ohr.",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "Anruf"
+     ],
+     "overlay": null,
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true,
+       "hold": "call"
+      }
+     ],
+     "time": "day",
+     "weather": "",
+     "props": [
+      "phone"
+     ],
+     "mood": "calm",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du rennst mit Schwung durch den Park.",
+     "text": "Wer einmal angefangen hat, will plötzlich weitermachen.",
+     "image": "Du rennst mit Schwung durch den Park.",
+     "who": [
+      "du"
+     ],
+     "place": "park",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "angefangen",
+      "weitermachen"
+     ],
+     "overlay": null,
+     "actors": [
+      {
+       "id": "du",
+       "action": "run",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "left",
+       "speaks": true,
+       "hold": "",
+       "to": "right"
+      }
+     ],
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "mood": "happy",
+     "shot": "wide",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du gehst im Wohnzimmer entschlossen auf die Tür zu.",
+     "text": "Dann gehst du entschlossen durch die Tür.",
+     "image": "Du gehst im Wohnzimmer entschlossen auf die Tür zu.",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Tür"
+     ],
+     "overlay": null,
      "actors": [
       {
        "id": "du",
        "action": "walk",
        "emotion": "happy",
-       "emote": "!",
+       "emote": "",
        "pos": "left",
-       "to": "center",
-       "speaks": true
+       "speaks": true,
+       "hold": "",
+       "to": "center"
       }
      ],
      "time": "day",
@@ -1523,23 +1497,22 @@
      "mood": "happy",
      "shot": "wide",
      "who_desc": "",
-     "place_desc": "hallway",
+     "place_desc": "",
      "hud": "",
      "status": ""
     },
     {
-     "see": "Du stehst siegreich auf dem Gipfel des Berges im Sonnenlicht.",
-     "text": "Nicht morgen. Nicht nächste Woche. Genau jetzt in diesem Augenblick.",
-     "image": "Young man standing on a high mountain summit, arms raised in victory, golden sunlight.",
+     "see": "Du stehst auf dem Berg und winkst.",
+     "text": "Und irgendwann stehst du dort, wo du immer hinwolltest.",
+     "image": "Du stehst auf dem Berg und winkst.",
      "who": [
       "du"
      ],
-     "place": "berg",
-     "camera": "still",
+     "place": "mountain",
+     "camera": "zoom_in",
      "sfx": "none",
      "highlight": [
-      "Nicht morgen",
-      "Jetzt"
+      "dort"
      ],
      "overlay": null,
      "actors": [
@@ -1547,9 +1520,10 @@
        "id": "du",
        "action": "wave",
        "emotion": "happy",
-       "emote": "heart",
+       "emote": "",
        "pos": "center",
-       "speaks": true
+       "speaks": true,
+       "hold": ""
       }
      ],
      "time": "day",
@@ -1558,96 +1532,89 @@
      "mood": "happy",
      "shot": "wide",
      "who_desc": "",
-     "place_desc": "mountain",
+     "place_desc": "",
      "hud": "",
      "status": ""
     },
     {
-     "see": "Nahaufnahme von deinem entschlossenen Gesicht, Blick direkt in die Kamera.",
-     "text": "Speicher dir das für die harten Tage.",
-     "image": "Intense close-up of a young person looking directly into the camera with absolute focus.",
+     "see": "Du springst auf dem Berg jubelnd in die Luft.",
+     "text": "Nicht morgen. Nicht nächste Woche. Fang jetzt an.",
+     "image": "Du springst auf dem Berg jubelnd in die Luft.",
      "who": [
       "du"
      ],
-     "place": "schreibtisch",
+     "place": "mountain",
      "camera": "still",
-     "sfx": "pop",
+     "sfx": "whoosh",
      "highlight": [
-      "Speicher dir das",
-      "harte Tage"
+      "Nicht morgen",
+      "jetzt"
      ],
-     "overlay": {
-      "type": "note",
-      "title": "FÜR DICH",
-      "text": "Speichern & umsetzen"
-     },
+     "overlay": null,
      "actors": [
       {
        "id": "du",
-       "action": "point",
+       "action": "jump",
        "emotion": "happy",
        "emote": "",
        "pos": "center",
-       "speaks": true
+       "speaks": true,
+       "hold": ""
+      }
+     ],
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "mood": "happy",
+     "shot": "close",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du stehst im Park, hältst das Handy hoch und lächelst.",
+     "text": "Speicher dir das für die harten Tage.",
+     "image": "Du stehst im Park, hältst das Handy hoch und lächelst.",
+     "who": [
+      "du"
+     ],
+     "place": "park",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Speicher",
+      "harten Tage"
+     ],
+     "overlay": null,
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true,
+       "hold": "phone"
       }
      ],
      "time": "day",
      "weather": "",
      "props": [],
      "mood": "calm",
-     "shot": "close",
-     "who_desc": "",
-     "place_desc": "office",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du sitzt wieder im dunklen Zimmer, schaust kurz aufs Handy und legst es weg.",
-     "text": "Denn du weißt ganz genau:",
-     "image": "Young man sitting in a dark room, pausing, then putting the smartphone away decisively.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "zoom_out",
-     "sfx": "whoosh",
-     "highlight": [
-      "ganz genau"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "sit",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "time": "night",
-     "weather": "",
-     "props": [
-      "phone"
-     ],
-     "mood": "calm",
      "shot": "wide",
      "who_desc": "",
-     "place_desc": "bedroom",
+     "place_desc": "",
      "hud": "",
      "status": ""
     }
-   ],
-   "hud": "",
-   "countdown": null
+   ]
   },
-  "provider": "gemini",
+  "provider": "Plan",
   "remake": false,
-  "needs": [
-   "hantel"
-  ],
-  "title": "Motivation: Fang einfach an, bevor du bereit bist",
-  "created": 1795631367.4808462
+  "needs": [],
+  "title": "Fang an, bevor du bereit bist",
+  "created": 1795690719.1469703
  },
  "2026-11-25 21:00": {
   "category": "vergleich",

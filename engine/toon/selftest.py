@@ -1948,7 +1948,7 @@ def main():
                             {"text": "Du stehst auf dem Gipfel und schaust ins Tal.", "place": "mountain", "time": "day", "props": ["rock"], "actors": [{"id": "du", "action": "talk"}]}],
                            [(0, 3), (3, 6), (6, 9), (9, 12)], "Niemand kommt, um dich zu retten", "motivation")
         assert not [q for q in sc3[0].get("props") or [] if "clock" in str(q)], sc3[0]["props"]
-        assert sc3[1]["actors"][0]["action"] != "sleep" and sc3[1]["actors"][0].get("hold") == "phone", sc3[1]["actors"]
+        assert sc3[1]["actors"][0].get("_awake") is True and sc3[1]["actors"][0].get("hold") == "phone", sc3[1]["actors"]   # liegt wach im Bett am Handy (seit Video 216: Augen offen, kein „zzz“)
         assert not sc3[2].get("crowd") and sc3[2].get("mood") != "panic" and sc3[2]["actors"][0].get("emotion") != "scared", sc3[2]
         assert [a.get("id") for a in sc3[3]["actors"]] == ["du"] and sc3[3].get("shot") != "event", sc3[3]
         assert all(a.get("emote") == "none" for x in sc3 for a in x["actors"]), sc3
@@ -1966,6 +1966,47 @@ def main():
         js = writer.polish({"title": "x", "description": "y", "scenes": [{"text": "Jeden Tagscrollst du stundenlang durch fremde Leben."}] + [{"text": f"Satz {i}."} for i in range(3)]})
         assert js["scenes"][0]["text"].startswith("Jeden Tag scrollst du"), js["scenes"][0]["text"]
     check("Motivation (Video 173): Wort unter dem Gesicht, Wecker bleibt im Schlafzimmer, Dauerlauf im Park, Hauptfigur statt Fremder", _speech173)
+
+    def _speech216():                                            # Prüfung 26.11.2026, Video 216 („Fang an, bevor du bereit bist“)
+        sc = stage.direct([{"text": "Du bist nicht faul. Du bist einfach extrem abgelenkt.", "see": "Du liegst nachts im Bett und starrst hypnotisiert auf dein Smartphone.",
+                            "place": "bedroom", "time": "night", "props": ["phone"], "actors": [{"id": "du", "action": "sleep", "emotion": "shocked", "hold": "phone"}], "mood": "tense"},
+                           {"text": "Motivation kommt nämlich fast nie vor der Arbeit.", "place": "zimmer", "time": "day",
+                            "actors": [{"id": "du", "action": "jump", "emotion": "happy", "hold": "hantel"}], "mood": "happy"},
+                           {"text": "Nachts schläfst du tief und fest.", "see": "Du schläfst, das Handy liegt daneben.", "place": "bedroom", "time": "night",
+                            "actors": [{"id": "du", "action": "sleep"}], "mood": "calm"}],
+                          [(0, 3), (3, 6), (6, 9)], "Fang an, bevor du bereit bist", "motivation")
+        a0 = sc[0]["actors"][0]                                  # nur der Bildplan nennt das Handy: die Figur liegt wach im Bett, kein „zzz“
+        assert a0.get("_awake") is True and a0["action"] == "sleep", a0
+        pa = stage._prepare(sc[0], {"du": {}})[3][0]
+        assert pa["awake"] and pa["action"] == "sleep", pa
+        im_a = frame(sc[0], {"du": {}}, 1.3).convert("RGB")
+        im_s = frame(sc[2], {"du": {}}, 1.3).convert("RGB")
+        assert not sc[2]["actors"][0].get("_awake"), sc[2]
+        box = (300, 760, 520, 1000)                              # über der Decke vor dem Gesicht: dort steht das leuchtende Handy
+        blue = lambda im: sum(1 for px in im.crop(box).getdata() if px[2] > 200 and px[0] < 190)
+        assert blue(im_a) > blue(im_s) + 40, (blue(im_a), blue(im_s))
+        assert sc[1]["actors"][0]["action"] not in ("jump", "cheer", "dance", "wave"), sc[1]["actors"][0]   # Hantel nicht über dem Kopf im großen Wort
+        sc7 = stage.direct([{"text": "Du bist nicht faul, du wartest nur auf den perfekten Moment.", "see": "Du stehst im Wohnzimmer und denkst nach.", "place": "livingroom", "time": "day",
+                             "actors": [{"id": "du", "action": "think"}], "mood": "calm"},
+                            {"text": "Nachts liegst du wach im Bett und starrst auf das Handy.", "place": "bedroom", "time": "night", "props": ["phone"],
+                             "actors": [{"id": "du", "action": "idle", "hold": "phone"}], "mood": "tense"},
+                            {"text": "Der perfekte Moment kommt niemals von allein zu dir.", "place": "mountain", "time": "day", "props": ["rock"], "actors": [], "mood": "calm"},
+                            {"text": "Erstens: Schnapp dir die Laufschuhe und laufe nur zwei Minuten.", "place": "park", "time": "day", "props": ["schuh"],
+                             "actors": [{"id": "du", "action": "run", "emotion": "happy"}], "mood": "happy"},
+                            {"text": "Wer einmal angefangen hat, will weitermachen.", "place": "park", "time": "day", "actors": [{"id": "du", "action": "run", "emotion": "happy"}], "mood": "happy"},
+                            {"text": "Speicher dir das für die harten Tage.", "place": "mountain", "time": "day", "actors": [{"id": "du", "action": "talk"}], "mood": "calm"}],
+                           [(0, 3), (3, 6), (6, 9), (9, 12), (12, 15), (15, 18)], "Fang an, bevor du bereit bist", "motivation")
+        assert places.resolve(stage.backdrop(sc7[0])) == "livingroom" and not sc7[0].get("_cold_open"), sc7[0]   # das erste Bild zeigt den ersten Satz, kein Dauerlauf im Park
+        a1 = sc7[1]["actors"][0]
+        assert a1["action"] == "sleep" and a1.get("_awake") is True and not a1.get("to"), a1                     # liegt wach im Bett, läuft nicht durchs Zimmer
+        assert sc7[2]["actors"] and not sc7[2]["actors"][0].get("hold"), sc7[2]                                  # kein Felsbrocken in der Hand
+        assert all(q.get("_no_insert") for q in sc7 if q.get("actors")), [q.get("_no_insert") for q in sc7]      # kein Schnitt auf ein Ding allein
+        assert sc7[3]["actors"][0].get("_jog") is True, sc7[3]                                                   # „… und laufe nur zwei Minuten“: läuft die ganze Szene durch
+        from .. import writer
+        js7 = writer.polish({"title": "x", "description": "y", "scenes": [{"text": "Zweitens: Schlage das Buch auf und lese genau eine Seite."}, {"text": "Ich lese jeden Abend."}]
+                             + [{"text": f"Satz {i}."} for i in range(3)]})
+        assert "lies genau eine Seite" in js7["scenes"][0]["text"] and js7["scenes"][1]["text"].startswith("Ich lese"), js7["scenes"][:2]
+    check("Motivation (Videos 216/217): liegt wach im Bett am Handy, erstes Bild zum ersten Satz, kein Felsbrocken in der Hand, Gehaltenes nicht im Wort", _speech216)
 
     def _hook_count():                                           # Hook-Titel im ersten Bild, Listen-Zähler „2/4“
         import tempfile

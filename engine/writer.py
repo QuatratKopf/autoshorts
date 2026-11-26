@@ -625,6 +625,8 @@ def polish(js):
             sc["text"] = re.sub(r"\b(Tag|Tage|Abend|Morgen|Nacht|Jahr|Mal|Woche|Stunde|Minute|Sekunde|Zeit)(scrollst|schaust|sitzt|liegst|wartest|machst|gehst|stehst|denkst|hast|bist|willst|"
                                 r"kannst|musst|wirst|sagst|siehst|greifst|checkst|tippst|wischst|starrst|scrollt|scrollen|verbringst|verschwendest|redest|hoffst|träumst)\b",
                                 r"\1 \2", sc["text"])   # „Jeden Tagscrollst du“ – zusammengeklebte Wörter (Video 173)
+            sc["text"] = re.sub(r"(?<![Ii]ch )(?<![Ii]ch dann )\b([Ll])ese(?= (?:nur|genau|einfach|jetzt|heute|täglich|jeden|eine|einen|ein|zwei|drei|fünf|zehn|das|die|den|dir|dein|deine|mal|bitte)\b)",
+                                lambda m_: ("L" if m_.group(1) == "L" else "l") + "ies", sc["text"])   # „Schlage das Buch auf und lese genau eine Seite.“ – Befehlsform heißt „lies“ (Video 217)
             sc["text"] = re.sub(r"\b([Ee])s war ((?:nämlich |eben |ja |wirklich )?nur du)\b", r"\1s warst \2", sc["text"])   # „Es war nämlich nur du.“ (Video 160)   # „viertausendviershundert“
             sc["text"] = re.sub(r"(?i)\b(zwanzig|dreißig|vierzig|fünfzig|sechzig|siebzig|achtzig|neunzig)[ -]und[ -](ein|eins|zwei|drei|vier|fünf|sechs|sieben|acht|neun)\b",
                                 lambda m: (m.group(2).lower().replace("eins", "ein") + "und" + m.group(1).lower()), sc["text"])   # „neunzig und drei Kilometer“ → „dreiundneunzig“ (Video 154: Zähler zeigte „3 KM“)
