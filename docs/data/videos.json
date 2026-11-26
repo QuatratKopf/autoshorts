@@ -8495,5 +8495,50 @@
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7712516862793354529?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
+ },
+ {
+  "id": 222,
+  "category": "tiere",
+  "topic": "Das Tier, das im dunklen Ozean leuchtet und mit einem eigenen Bio-Scheinwerfer seine Beute blendet",
+  "status": "review",
+  "created": 1795716552.3489811,
+  "title": "Tiefsee-Anglerfisch: Die gefährlichste Falle der Welt",
+  "description": "Dieses Tier jagt im Dunkeln mit einem eigenen Scheinwerfer!\nErfahre, wie der Anglerfisch seine Beute mit Biolumineszenz in die Falle lockt.\nWürdest du dich in die Tiefsee trauen?",
+  "hashtags": [
+   "#shorts",
+   "#tierfakten",
+   "#tiefsee",
+   "#wissenschaft",
+   "#tiere",
+   "#biologie",
+   "#viral"
+  ],
+  "tags": [
+   "anglerfisch",
+   "tiefsee",
+   "biolumineszenz",
+   "meeresbiologie",
+   "tierfakten",
+   "ozean",
+   "licht im meer",
+   "unterwasserwelt"
+  ],
+  "thumb_text": "LICHT AUS, MEER AN",
+  "missing": [
+   "bakteriendüse",
+   "magen"
+  ],
+  "cover_ms": 79680,
+  "duration": 79.6,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-26 21:00",
+  "review_at": 1795716915.570327
  }
 ]

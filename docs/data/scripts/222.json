@@ -1,0 +1,407 @@
+{
+ "title": "Tiefsee-Anglerfisch: Die gefährlichste Falle der Welt",
+ "scenes": [
+  {
+   "text": "Dieser Tiefseefisch blendet seine Beute mit einem Bio-Scheinwerfer.",
+   "see": "Eine Schwimmerin blickt schockiert in ein riesiges leuchtendes Anglerfisch-Gebiss im dunklen Wasser.",
+   "place": "underwater",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "fish",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "scary"
+  },
+  {
+   "text": "Und die letzte Jagdmethode ist absolut tödlich für kleine Fische.",
+   "see": "Ein Anglerfisch schwimmt nah ans Bild und stellt seine eigene Leuchtlaterne zur Schau.",
+   "place": "underwater",
+   "time": "night",
+   "actors": [
+    {
+     "id": "angler",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "worried",
+     "emote": "idea",
+     "kind": "fish",
+     "hold": "",
+     "facing": "",
+     "say": "HI!",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense",
+   "overlay": {
+    "type": "stamp",
+    "text": "TÖDLICH",
+    "color": "red"
+   }
+  },
+  {
+   "text": "Ab eintausend Metern Tiefe herrscht im Ozean absolute, eiskalte Finsternis.",
+   "see": "In absoluter Finsternis unter Wasser ist plötzlich nur ein kleiner Lichtpunkt zu erkennen.",
+   "place": "underwater",
+   "time": "night",
+   "actors": [
+    {
+     "id": "angler",
+     "action": "idle",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried",
+     "kind": "fish",
+     "hold": "",
+     "emote": ""
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "An einer Angel nutzt dieser Fisch Millionen leuchtende Bakterien als Scheinwerfer.",
+   "see": "Eine vergrößerte Schautafel zeigt leuchtende Bakterien in der Angel des Fisches.",
+   "place": "underwater",
+   "time": "night",
+   "actors": [
+    {
+     "id": "angler",
+     "action": "idle",
+     "pos": "center",
+     "emotion": "",
+     "emote": "",
+     "kind": "fish"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Er bewegt den Leuchtkörper direkt vor seinem Maul wie einen Wurm.",
+   "see": "Der Fisch bewegt seine Angel wie einen Wurm im dunklen Meerwasser hin und her.",
+   "place": "underwater",
+   "time": "night",
+   "actors": [
+    {
+     "id": "angler",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "worried",
+     "emote": "",
+     "kind": "fish",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "PERFEKTER KÖDER"
+   }
+  },
+  {
+   "text": "Kleine Fische denken an fette Beute und schwimmen direkt ins Licht.",
+   "see": "Ein kleiner Fisch schwimmt neugierig auf das helle Licht im tiefen Wasser zu.",
+   "place": "underwater",
+   "time": "night",
+   "weather": "dark",
+   "shot": "event",
+   "mood": "calm"
+  },
+  {
+   "text": "Doch sobald sie nah genug sind, reißt der Anglerfisch sein Riesenmaul auf.",
+   "see": "Ein Riesengebiss reißt blitzschnell auf und erzeugt einen enormen Wassersog.",
+   "place": "underwater",
+   "time": "night",
+   "actors": [
+    {
+     "id": "angler",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "angry",
+     "emote": "!",
+     "kind": "fish",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Seine Zähne stehen nach innen gebogen, sodass kein Opfer mehr entkommen kann.",
+   "see": "Eine Nahaufnahme zeigt die nach innen gebogenen, nadelscharfen Zähne des Fisches.",
+   "place": "underwater",
+   "time": "night",
+   "props": [
+    {
+     "type": "lib_gebiss"
+    }
+   ],
+   "shot": "insert",
+   "mood": "tense"
+  },
+  {
+   "text": "Sein Magen ist extrem dehnbar und verdaut Beute, die doppelt so groß ist.",
+   "see": "Eine Grafik vergleicht den Magen des Fisches mit doppelt so großer Beute.",
+   "place": "underwater",
+   "time": "night",
+   "actors": [
+    {
+     "id": "angler",
+     "action": "idle",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "",
+     "kind": "fish",
+     "hold": "",
+     "emote": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Das wäre, als würdest du ein Schnitzel essen, das doppelt so groß ist wie du.",
+   "see": "Eine Person blickt erstaunt auf zwei riesige Koffer auf einem Tisch.",
+   "place": "kitchen",
+   "time": "day",
+   "props": [
+    {
+     "type": "table"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Du denkst, das Männchen jagt genauso geschickt wie das Weibchen?",
+   "see": "Ein winziges Männchen schwimmt neben einem riesigen weiblichen Anglerfisch.",
+   "place": "underwater",
+   "time": "night",
+   "actors": [
+    {
+     "id": "angler",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "fish",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Falsch! Die Männchen sind winzig und haben überhaupt keine eigene Leuchte.",
+   "see": "Ein Stempel mit der Aufschrift FALSCH erscheint auf einer dunklen Meereskarte.",
+   "place": "underwater",
+   "time": "night",
+   "actors": [
+    {
+     "id": "angler",
+     "action": "idle",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "worried",
+     "kind": "fish",
+     "hold": "",
+     "emote": ""
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "stamp",
+    "text": "FALSCH",
+    "color": "red"
+   }
+  },
+  {
+   "text": "Stattdessen beißt sich das Männchen am Körper des Weibchens fest.",
+   "see": "Das kleine Männchen beißt sich fest an der Haut des Weibchens fest.",
+   "place": "underwater",
+   "time": "night",
+   "actors": [
+    {
+     "id": "angler",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "fish",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Mit der Zeit verwächst seine Haut vollständig mit ihrem Blutkreislauf.",
+   "see": "Eine Grafik zeigt zwei Gewebeschichten, die langsam miteinander verschmelzen.",
+   "place": "underwater",
+   "time": "night",
+   "actors": [
+    {
+     "id": "angler",
+     "action": "idle",
+     "pos": "center",
+     "emotion": "",
+     "emote": "",
+     "kind": "fish"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Am Ende schrumpft es zu einem dauerhaften Organ des Weibchens zusammen.",
+   "see": "Das Männchen verwandelt sich langsam in eine kleine Hautfalte an der Seite des Weibchens.",
+   "place": "underwater",
+   "time": "night",
+   "actors": [
+    {
+     "id": "angler",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "fish",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Sie teilen sich Nährstoffe und Energie für das restliche Leben.",
+   "see": "Ein Zähler tickt hoch auf mehrere Jahre Lebensdauer in Dunkelheit.",
+   "place": "underwater",
+   "time": "night",
+   "actors": [
+    {
+     "id": "angler",
+     "action": "idle",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "",
+     "kind": "fish",
+     "hold": "",
+     "emote": ""
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Bleibt nur die Frage, was sonst noch in der tiefen Finsternis lauert.",
+   "see": "Eine Taucherin leuchtet mit einer Taschenlampe erschrocken in die Dunkelheit.",
+   "place": "underwater",
+   "time": "night",
+   "weather": "dark",
+   "props": [
+    {
+     "type": "flashlight"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "fish",
+     "hold": "flashlight",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Sobald du das Licht in der Tiefsee siehst, ist es zu spät.",
+   "see": "Der Anglerfisch knipst seine Stirnlampe aus und verschwindet im Schatten.",
+   "place": "underwater",
+   "time": "night",
+   "actors": [
+    {
+     "id": "angler",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "fish",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "scary",
+   "overlay": {
+    "type": "card",
+    "text": "LICHT AUS"
+   }
+  },
+  {
+   "text": "Denn dort drüben wartet schon das nächste spitze Gebiss.",
+   "see": "Das Licht flammt plötzlich wieder auf und zeigt erneut das riesige Gebiss.",
+   "place": "underwater",
+   "time": "night",
+   "props": [
+    {
+     "type": "lib_gebiss"
+    }
+   ],
+   "actors": [
+    {
+     "id": "angler",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "fish",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "scary"
+  }
+ ]
+}
