@@ -8449,7 +8449,7 @@
   "id": 221,
   "category": "nachricht",
   "topic": "Eine unbekannte Nummer schickt dir einen Countdown und befiehlt dir, alle Spiegel in deiner Wohnung abzuhängen – bis du in einem Spiegel eine Bewegung siehst, die du nicht gemacht hast.",
-  "status": "rendered",
+  "status": "published",
   "created": 1795709852.054972,
   "title": "Unbekannte Nummer: Verhäng alle Spiegel",
   "description": "Drei Uhr zwölf: Eine unbekannte Nummer schickt dir einen Countdown und einen Befehl – verhäng jeden Spiegel in deiner Wohnung.\nDu gehorchst. Nur den Spiegel im Bad vergisst du.\nWürdest du dich umdrehen?",
@@ -8484,6 +8484,12 @@
   },
   "thumb": true,
   "look": "noir",
-  "mp4": true
+  "mp4": true,
+  "zernio_id": "6b085d2ac0ba46ab34d719e7",
+  "yt_status": "Zernio: published",
+  "yt_id": "lwFAn-ZQnH0",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6b085d2ac0ba46ab34d719e7",
+  "error": null
  }
 ]
