@@ -8363,7 +8363,7 @@
   "id": 219,
   "category": "nachricht",
   "topic": "Eine unbekannte Nummer schickt dir einen Countdown und befiehlt dir, alle Spiegel in deiner Wohnung abzuhängen – bis du in einem Spiegel eine Bewegung siehst, die du nicht gemacht hast.",
-  "status": "review",
+  "status": "discarded",
   "created": 1795705819.536761,
   "title": "Unbekannte Nachricht blockiert alle Spiegel im Haus",
   "description": "Drei Uhr zwölf und eine unheimliche Nachricht auf dem Handy!\nDu befolgst die mysteriösen Befehle, bis du im Spiegel eine Bewegung siehst, die du nicht gemacht hast.\nWelchen Spiegel würdest du zuerst abhängen?",
@@ -8400,6 +8400,7 @@
   "look": "noir",
   "mp4": true,
   "slot": "2026-11-26 18:00",
-  "review_at": 1795706135.2595787
+  "review_at": 1795706135.2595787,
+  "error": "Bei der Prüfung verworfen: Prüfung: Handy-Satz spielt auf der Straße mit Passanten, Schluss auf einem Bauernhof im Regen, kein Spiegel im Bild, Kapitel-Tafeln 5 s schwarz, Kühlschrank zu"
  }
 ]
