@@ -1,5 +1,5 @@
 {
- "last_category": "tiere",
+ "last_category": "nachricht",
  "done_slots": [
   "2026-11-08 18:00",
   "2026-11-11 18:00",
@@ -65,20 +65,20 @@
   "qa5v1ywsb"
  ],
  "last_stats": 1795706486.8959532,
- "next_id": 220,
+ "next_id": 221,
  "connected": {
   "youtube": {
    "name": "Wissens Wert 💬",
    "since": "2026-11-10"
   }
  },
- "voice_wps": 2.706,
+ "voice_wps": 2.645,
  "last_trends": 1795702243.8987563,
  "tiktok_handle": "wissens..wert",
  "last_poster": {
   "hero": "",
-  "palette": 1,
-  "video": 219
+  "palette": 2,
+  "video": 220
  },
  "cat_credit": {
   "fakten": -0.30999999999999606,
