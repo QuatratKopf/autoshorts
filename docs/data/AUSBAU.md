@@ -276,6 +276,7 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   ohne Schaubild den Fisch im Zustand des Satzes (Wortlisten `ANG_*_RE`), nie zweimal hintereinander dasselbe Bild (Seite wechselt, zweites Maul-Bild größer);
   Menschen, Taucher, Requisiten, Sprechblasen und Zeichen über dem Kopf entfallen, nur der Vergleich mit dir (`ANG_YOU_RE`, „als würdest du …“) spielt bei dir.
   Licht (`stage._frame`, `lures`): Der Köder ist die Lichtquelle – sein Schein liegt hell über dem dunklen Bild, bei `far`/`dark` bleibt der Fisch ein Schatten.
+  Einblendungen stehen ganz oben (`_ov_low` 3) – die Karte „PERFEKTER KÖDER“ lag im ersten Neubau (Video 223) genau auf Angel und Köder.
   Titelbild: der Anglerfisch (`poster_hero`). Selbsttest `_angler`. Offen: ein übergroßes Schnitzel für den Vergleich gibt es nicht; andere Tiefseefische
   (Vipernfisch, Pelikanaal) kennt die Regie nicht.
 

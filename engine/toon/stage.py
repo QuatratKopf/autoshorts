@@ -4417,6 +4417,8 @@ def _angler_story(scenes, topic=""):
                         a.update(action="shocked", emotion="shocked")
                     a.pop("to", None)
                 humans[0].update(pos="center", facing="")
+                if str(humans[0].get("emote") or "") == "?":
+                    humans[0]["emote"] = ""               # kein Fragezeichen über dem Kopf: der Satz ist ein Vergleich, keine Frage
                 sc["actors"] = humans[:1]
                 prev = None
                 continue
@@ -4461,7 +4463,7 @@ def _angler_story(scenes, topic=""):
             sc["overlay"] = None                          # kein Handy, kein Zettel in der Tiefsee
         elif isinstance(ov, dict) and re.search(ANG_OFF_RE, str(ov.get("text") or "").lower()) and act != "dark":
             sc["overlay"] = None                          # „LICHT AUS“ über einem leuchtenden Köder widerspricht dem Bild
-        sc.update(actors=[fish], crowd="", float="", place="underwater", backdrop=None, time="night", weather="", props=[], mood="", _no_cut=True, _cute="angler")
+        sc.update(actors=[fish], crowd="", float="", place="underwater", backdrop=None, time="night", weather="", props=[], mood="", _no_cut=True, _cute="angler", _ov_low=3)   # Einblendungen ganz oben: die Karte „PERFEKTER KÖDER“ lag sonst genau auf Angel und Köder
         if shot in ("event", "insert", "close", "mirror"):
             sc["shot"] = ""
     return scenes

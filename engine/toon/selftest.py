@@ -104,6 +104,7 @@ def _angler():
             assert [a for a in acts if not a.get("kind")] and not any(a.get("kind") for a in acts) and places.resolve(stage.backdrop(sc_)) != "underwater", f"Vergleich mit dir spielt bei dir: {acts}"
             continue
         assert len(acts) == 1 and acts[0].get("kind") == "angler" and acts[0].get("action") == w_, f"Satz {n_}: Anglerfisch „{w_}“ erwartet: {acts}"
+        assert sc_.get("_ov_low") == 3, f"Satz {n_}: Einblendung ganz oben, nicht auf Angel und Köder"
         assert not acts[0].get("say") and not sc_.get("props") and sc_.get("shot") in ("", None) and sc_.get("time") == "night", f"Satz {n_}: keine Sprechblase, kein Gebiss, Tiefsee: {sc_.get('props')} {sc_.get('shot')}"
     for sc_ in sd:
         for t_ in (0.3, 2.2):
