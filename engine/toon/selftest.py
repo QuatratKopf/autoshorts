@@ -627,6 +627,10 @@ def main():
                 frame(dict(scs[n_], look="noir"), {"du": {"shirt": "schwarz", "gender": "w"}}, t_)
         assert extras.prop_fit("mirror") and extras.prop_fit("mirror_covered"), "Spiegel haben eine echte Größe"
         assert stage.CHAPTER_MAX < 3
+        fo = stage.direct([{"text": "Du läufst in die Küche, reißt den Kühlschrank auf und erstarrst.", "place": "kitchen", "time": "night", "props": ["fridge"], "actors": du("freeze")},
+                           {"text": "Im Kühlschrank liegt noch Käse.", "place": "kitchen", "props": ["fridge"], "actors": du("idle")}], [(0, 4), (4, 7)], "Nachricht", "nachricht", "noir")
+        assert [stage._pkey(q) for q in fo[0]["props"]] == ["fridge_open"] and "fridge_open" not in [stage._pkey(q) for q in fo[1].get("props") or []], "Kühlschrank steht nur offen, wenn der Satz ihn öffnet"
+        frame(dict(fo[0], look="noir"), {"du": {"shirt": "schwarz"}}, 1.6)
     check("Video 219: Spiegel-Geschichte (Spiegelbild, verhängter Spiegel, Nacht, kein Acker bei „flackern“)", _msg219)
     check("Musik-Video (Kopfhörer, Gänsehaut-Schaubild, Lautsprecher) und Hafen", _music)
 

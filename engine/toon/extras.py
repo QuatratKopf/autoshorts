@@ -814,6 +814,24 @@ def p_fridge(d, x, t, s=1.0):
     _r(d, (x + 70, GROUND - 260, x + 88, GROUND - 150), (150, 156, 166), 6, 4)
 
 
+def p_fridge_open(d, x, t, s=1.0):
+    """Offener Kühlschrank (Prüfung 26.11.2026, Video 220 „reißt den Kühlschrank auf“): die Tür schwingt nach rechts auf, innen Licht, Fächer und Essen."""
+    k = min(1.0, _pop(t, 0.0, 0.4))
+    _r(d, (x - 110, GROUND - 440, x + 110, GROUND), (236, 240, 244), 16)
+    d.line((x - 110, GROUND - 150, x + 110, GROUND - 150), fill=INK, width=O)
+    _r(d, (x + 70, GROUND - 120, x + 88, GROUND - 40), (150, 156, 166), 6, 4)
+    d.rounded_rectangle((x - 92, GROUND - 422, x + 92, GROUND - 166), 8, fill=(255, 246, 204), outline=INK, width=5)   # heller Innenraum
+    for sy in (GROUND - 340, GROUND - 254):                                    # Fächer
+        d.line((x - 90, sy, x + 90, sy), fill=(176, 188, 198), width=6)
+    _r(d, (x - 70, GROUND - 284, x + 10, GROUND - 258), (208, 150, 92), 4, 4)  # Pizzakarton
+    _r(d, (x + 30, GROUND - 320, x + 56, GROUND - 258), (110, 170, 110), 6, 4)  # Flasche
+    _o(d, (x - 60, GROUND - 380, x - 20, GROUND - 344), (226, 96, 80), 4)       # Tomate
+    _r(d, (x + 4, GROUND - 376, x + 60, GROUND - 344), (244, 214, 110), 4, 4)   # Käse
+    w = 30 + 170 * k                                                            # Türblatt steht nach rechts offen
+    _poly(d, [(x + 110, GROUND - 436), (x + 110 + w, GROUND - 436 - 26 * k), (x + 110 + w, GROUND - 160 + 14 * k), (x + 110, GROUND - 160)], (214, 220, 226), shade=0.06)
+    d.polygon([(x - 100, GROUND), (x + 100, GROUND), (x + 40, GROUND + 130), (x - 330, GROUND + 130)], fill=(255, 240, 180, int(90 * k)))   # Lichtschein am Boden
+
+
 def p_tent(d, x, t, s=1.0):
     d.polygon([(x - 300, GROUND), (x, GROUND - 380), (x + 300, GROUND)], fill=(186, 112, 52), outline=INK, width=O)
     d.polygon([(x - 286, GROUND - 6), (x, GROUND - 368), (x + 40, GROUND - 6)], fill=(232, 152, 72))           # Licht auf der vorderen Bahn
@@ -4427,6 +4445,8 @@ def p_mirror_covered(d, x, t, s=1.0):
 
 
 PROPS["mirror"] = p_mirror
+PROPS["fridge_open"] = p_fridge_open
+SIZES["fridge_open"] = SIZES["fridge"]
 PROPS["mirror_covered"] = p_mirror_covered
 SIZES["mirror"] = (1.8, 1236)
 SIZES["mirror_covered"] = (1.85, 1236)

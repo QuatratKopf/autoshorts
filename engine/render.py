@@ -224,6 +224,9 @@ def build_ass(words, scenes, times, path, lower=True, hud=None, countdown=None, 
         hud = re.sub(r"\s*[·|,–-]?\s*\b" + _span + r"\b\s*[·|,–-]?\s*", " ", str(hud), flags=re.I).strip(" ·|,–-") or None
         if hud and not re.search(r"\d|·|\bUHR\b|\bNACHT\b", str(hud).upper()):
             hud = None
+    if hud and sum(1 for sc in scenes if str(sc.get("shot") or "") == "graphic" and isinstance(sc.get("graphic"), dict)
+                   and sc["graphic"].get("type") == "chapter") >= 2 and re.search(r"\bTAG\s*\d|\d{1,2}[:.]\d{2}", str(hud).upper()):
+        hud = None                             # Countdown-Geschichte: die Tage stehen auf den Kapitel-Tafeln – „TAG 1 · 3:12 UHR“ stand bis zum letzten Tag in der Ecke (Video 220)
     if hud:
         cur_hud, hud_i = hud, -9
         for n_h, (sc, (s, e)) in enumerate(zip(scenes, times)):

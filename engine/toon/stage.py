@@ -2606,6 +2606,7 @@ def direct(scenes, times, topic="", style="", look=""):
     _frost_frog(scenes, topic, main_id)
     _mirror_story(scenes, topic, main_id)
     _mirror_msg(scenes, topic, style, main_id)
+    _fridge_open(scenes)
     return scenes
 
 
@@ -2700,6 +2701,25 @@ MSG_MIRROR_MOVE_RE = r"beweg|wink|blinzel|hebt\b|dreht sich|von allein|von selbs
 MSG_COVER_RE = r"verh[äa]ng|verhüll|zugehängt|abgehängt|bedeck|hinter (?:\w+ ){0,2}(?:stoff|tuch|tüchern|decken|laken)|(?:tuch|decke|laken) über"
 MSG_CLOTH_RE = r"\btuch\b|\btücher|\bdecken\b|\blaken\b|\bstoff\b"
 MSG_COVER_NOT_RE = r"(?:nicht|kein\w*)\s+(?:\w+\s+){0,2}(?:verh[äa]ng|verhüll|bedeck|zugehängt)"
+
+
+FRIDGE_OPEN_RE = r"kühlschrank\w*\b.{0,25}\b(?:auf|offen)\b|(?:öffne|reißt|reisst|machst)\w*\b.{0,30}kühlschrank\w*\b(?:.{0,12}\bauf\b)?|kühlschranktür"
+
+
+def _fridge_open(scenes):
+    """„Du reißt den Kühlschrank auf“: ein Mensch steht davor, der Kühlschrank steht offen und leuchtet (Video 220: die Figur stand vor der geschlossenen Küchenzeile)."""
+    for sc in scenes:
+        if not isinstance(sc, dict) or sc.get("shot") in ("graphic", "mirror"):
+            continue
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        if len(acts) != 1 or acts[0].get("kind") or not re.search(FRIDGE_OPEN_RE, str(sc.get("text") or "").lower()):
+            continue
+        if isinstance(backdrop(sc), dict) or places.resolve(backdrop(sc)) != "kitchen":
+            sc["place"], sc["backdrop"] = "kitchen", None
+        sc["props"] = [{"type": "fridge_open", "pos": "right"}]
+        sc["shot"] = ""
+        acts[0]["pos"], acts[0]["to"], acts[0]["facing"] = "left", "", "right"
+        sc["_no_cut"] = True
 
 
 def _mirror_msg(scenes, topic="", style="", main_id="du"):

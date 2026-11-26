@@ -266,6 +266,8 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   genannter Spiegel den offenen (`p_mirror`); im Bad hängt er schon an der Wand. Kapitel-Tafeln stehen höchstens `CHAPTER_MAX` Sekunden allein im
   Bild, danach sieht man die Figur am Ort. In erzählten Geschichten gibt es keinen „Blick nach draußen“ auf Passanten, die Nacht aus dem
   Drehbuch bleibt (auch bei `nachricht`), und „flackern“ ist kein „Acker“ (`\backer`). Selbsttest-Fall `_msg219`.
+  „Reißt/öffnet den Kühlschrank (auf)“ zeigt den offenen, leuchtenden Kühlschrank neben der Figur (`stage._fridge_open`, `extras.p_fridge_open`).
+  Countdown-Geschichten mit Kapitel-Tafeln zeigen keine feste Ecken-Zeile „TAG 1 · 3:12 UHR“ mehr (`render.build_ass`).
 
 ## Was zu tun ist
 1. Offene Wünsche (ohne `"done": true`) und `"auto": true`-Einträge durchgehen, höchstens 8 pro Sitzung, häufigste zuerst.
