@@ -8407,7 +8407,7 @@
   "id": 220,
   "category": "nachricht",
   "topic": "Eine unbekannte Nummer schickt dir einen Countdown und befiehlt dir, alle Spiegel in deiner Wohnung abzuhängen – bis du in einem Spiegel eine Bewegung siehst, die du nicht gemacht hast.",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1795707999.417341,
   "title": "Unbekannte Nummer: Verhäng alle Spiegel",
   "description": "Drei Uhr zwölf: Eine unbekannte Nummer schickt dir einen Countdown und einen Befehl – verhäng jeden Spiegel in deiner Wohnung.\nDu gehorchst. Nur den Spiegel im Bad vergisst du.\nWürdest du dich umdrehen?",
@@ -8442,6 +8442,7 @@
   },
   "thumb": true,
   "look": "noir",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Prüfung: Ecken-Zeile „TAG 1 · 3:12 UHR“ steht bis zum letzten Tag, Kühlschrank bleibt zu"
  }
 ]
