@@ -8582,5 +8582,45 @@
   "look": "cartoon",
   "mp4": true,
   "error": "Bei der Prüfung verworfen: Karte PERFEKTER KÖDER verdeckt Angel und Köder"
+ },
+ {
+  "id": 224,
+  "category": "tiere",
+  "topic": "Das Tier, das im dunklen Ozean leuchtet und mit einem eigenen Bio-Scheinwerfer seine Beute blendet",
+  "status": "rendered",
+  "created": 1795721370.0053473,
+  "title": "Tiefsee-Anglerfisch: Die Falle aus Licht",
+  "description": "Dieses Tier jagt im Dunkeln mit einem eigenen Scheinwerfer!\nErfahre, wie der Anglerfisch seine Beute mit Biolumineszenz in die Falle lockt.\nWürdest du dich in die Tiefsee trauen?",
+  "hashtags": [
+   "#shorts",
+   "#tierfakten",
+   "#tiefsee",
+   "#wissenschaft",
+   "#tiere",
+   "#biologie",
+   "#viral"
+  ],
+  "tags": [
+   "anglerfisch",
+   "tiefsee",
+   "biolumineszenz",
+   "meeresbiologie",
+   "tierfakten",
+   "ozean",
+   "licht im meer",
+   "unterwasserwelt"
+  ],
+  "thumb_text": "FOLGE NIE DEM LICHT",
+  "missing": null,
+  "cover_ms": 72868,
+  "duration": 72.8,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
