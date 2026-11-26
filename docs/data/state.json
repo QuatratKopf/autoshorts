@@ -1,5 +1,5 @@
 {
- "last_category": "comedy",
+ "last_category": "tiere",
  "done_slots": [
   "2026-11-08 18:00",
   "2026-11-11 18:00",
@@ -66,20 +66,20 @@
   "qa5v1ywsb"
  ],
  "last_stats": 1795717897.1338127,
- "next_id": 223,
+ "next_id": 224,
  "connected": {
   "youtube": {
    "name": "Wissens Wert 💬",
    "since": "2026-11-10"
   }
  },
- "voice_wps": 2.578,
+ "voice_wps": 2.65,
  "last_trends": 1795714319.2710943,
  "tiktok_handle": "wissens..wert",
  "last_poster": {
-  "hero": "fish",
-  "palette": 0,
-  "video": 222
+  "hero": "angler",
+  "palette": 2,
+  "video": 223
  },
  "cat_credit": {
   "fakten": 0.750000000000004,
