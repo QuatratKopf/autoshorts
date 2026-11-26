@@ -362,7 +362,8 @@
  },
  "kunststoffbecken": {
   "n": 1,
-  "last": "Der Fangschreckenkrebs schlägt mit 80 km/h zu"
+  "last": "Der Fangschreckenkrebs schlägt mit 80 km/h zu",
+  "done": true
  },
  "schwein": {
   "n": 1,
@@ -550,7 +551,8 @@
  },
  "friteuse": {
   "n": 1,
-  "last": "Warum König Charles an Pommes stand"
+  "last": "Warum König Charles an Pommes stand",
+  "done": true
  },
  "gans": {
   "n": 1,
@@ -880,7 +882,8 @@
  },
  "hose": {
   "n": 1,
-  "last": "Phantom-Vibration: Warum dein Handy vibriert, obwohl es schweigt"
+  "last": "Phantom-Vibration: Warum dein Handy vibriert, obwohl es schweigt",
+  "done": true
  },
  "nerv": {
   "n": 1,
@@ -892,22 +895,27 @@
  },
  "kasse": {
   "n": 1,
-  "last": "Spätkauf gegen Supermarkt: Wer verdient mehr?"
+  "last": "Spätkauf gegen Supermarkt: Wer verdient mehr?",
+  "done": true
  },
  "lieferwagen": {
   "n": 1,
-  "last": "Spätkauf gegen Supermarkt: Wer verdient mehr?"
+  "last": "Spätkauf gegen Supermarkt: Wer verdient mehr?",
+  "done": true
  },
  "tabellendokument": {
   "n": 1,
-  "last": "Spätkauf gegen Supermarkt: Wer verdient mehr?"
+  "last": "Spätkauf gegen Supermarkt: Wer verdient mehr?",
+  "done": true
  },
  "hantel": {
   "n": 1,
-  "last": "Motivation: Fang einfach an, bevor du bereit bist"
+  "last": "Motivation: Fang einfach an, bevor du bereit bist",
+  "done": true
  },
  "spätkauf": {
   "n": 1,
-  "last": "Spätkauf gegen Supermarkt: Wer verdient mehr?"
+  "last": "Spätkauf gegen Supermarkt: Wer verdient mehr?",
+  "done": true
  }
 }

@@ -2573,6 +2573,37 @@ def main():
         assert extras.held_key("lib_geschenk"), "das Päckchen lässt sich in der Hand halten (Überraschung im Paar-Video)"
     check("Ausbau 25.11.: Karten-Markierungen, Mini-Karte, Rucksack, Socke, Stift, Geschenk, Pizza, Eiskristall", _ausbau2511)
 
+    def _ausbau2611():                                           # Ausbau 26.11.2026: Hantel, Kasse, Lieferwagen, Spätkauf, Tabellendokument, Hose, Fritteuse, Kunststoffbecken
+        import re
+        from .library import LIB
+        from .. import main
+        tp = stage._lib_props()
+        hit = lambda txt: [k_ for pat_, k_ in tp if re.search(pat_, txt)]  # noqa: E731
+        for txt_, k_ in (("du stemmst eine hantel", "lib_hantel"), ("zwei kurzhanteln", "lib_hantel"), ("an der kasse zahlst du", "lib_kasse"),
+                         ("der lieferwagen kommt", "lib_lieferwagen"), ("zwei transporter", "lib_lieferwagen"), ("im späti um die ecke", "lib_spaetkauf"),
+                         ("der kiosk nebenan", "lib_spaetkauf"), ("eine tabelle voller zahlen", "lib_tabellendokument"), ("eine alte jeans", "lib_hose"),
+                         ("ab in die fritteuse", "lib_friteuse"), ("ein plastikbecken", "lib_kunststoffbecken")):
+            assert hit(txt_) == [k_], f"{txt_}: {hit(txt_)}"
+        for txt_ in ("die krankenkasse zahlt", "das becken", "im schwimmbecken", "das dokument", "eine excel-datei", "handy in der hosentasche", "mach fünf liegestütze"):
+            assert hit(txt_) == [], f"zu weiter Alias: {txt_}: {hit(txt_)}"
+        for n_ in ("hantel", "kasse", "lieferwagen", "spätkauf", "tabellendokument", "hose", "friteuse", "kunststoffbecken"):
+            assert not LIB[n_].get("auto") and main.known_thing(n_), f"{n_}: von Hand gezeichnet und bekannt"
+            k_ = LIB[n_]["key"]
+            assert extras.prop_fit(k_), f"{k_} fehlt in der Bibliothek"
+            frame({"place": "street", "actors": [{"id": "du"}], "props": [{"type": k_}]})
+            frame({"shot": "insert", "props": [{"type": k_}]})
+        assert extras.held_key("hantel") == "prop:lib_hantel", "die Hantel lässt sich in der Hand halten"
+        sd = stage.direct([{"text": "Du bist nicht faul.", "place": "zimmer", "actors": [{"id": "du", "action": "idle"}]},
+                           {"text": "Motivation kommt nämlich fast nie vor der Arbeit. Sie entsteht erst währenddessen.", "place": "zimmer", "props": ["hantel"],
+                            "actors": [{"id": "du", "action": "jump", "emotion": "happy", "hold": "hantel"}]},
+                           {"text": "Bei der Arbeit sitzt du am Schreibtisch.", "place": "zimmer", "actors": [{"id": "du", "action": "idle"}]}],
+                          [(0, 4), (4, 8), (8, 12)], "Motivation: Fang einfach an, bevor du bereit bist", "motivation", "")
+        assert places.resolve(stage.backdrop(sd[1])) != "office", "„vor der Arbeit“ ist eine Zeitangabe – die Hantel-Szene spielt nicht im Büro"
+        assert places.resolve(stage.backdrop(sd[2])) == "office", f"„bei der Arbeit“ bleibt das Büro: {sd[2].get('place')}"
+        assert sd[1]["actors"] and sd[1]["actors"][0].get("hold") == "hantel", f"die Figur stemmt die Hantel: {sd[1].get('actors')}"
+        frame(sd[1])
+    check("Ausbau 26.11.: Hantel, Kasse, Lieferwagen, Spätkauf, Tabellendokument, Hose, Fritteuse, Kunststoffbecken", _ausbau2611)
+
     def _pruef2511():                                            # Prüfung 25.11.2026 (Video 206, Open-World-Karte)
         import tempfile
         from pathlib import Path

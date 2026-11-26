@@ -799,6 +799,19 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   im Bild). Offene Wünsche ohne Zeichnung: polyp, knie, anwaltstitel, toplitzsee, kunststoffbecken, miete, algorithmus, statistik, musik, ohr, knall,
   friteuse, dach, hand, handfläche, steuererklärung, countdown, blick, blut, primzahl, nase (greifbar davon: polyp, friteuse, dach, steuererklärung;
   für `primzahl` gibt es die Grafik `primes`, für `countdown` den Zähler – beide Wörter kennt `main.known_thing` noch nicht).
+- Ausbau 26.11.2026 (13-Uhr-Termin „Motivation: Fang einfach an, bevor du bereit bist“: hantel; dazu die vorläufigen Zeichnungen aus dem
+  Spätkauf-, Phantom-Vibrations- und Krebs-Video und der Wunsch friteuse): Bibliothek von Hand gezeichnet: `hantel` (Kurzhantel quer, zwei Scheiben
+  je Seite; auch Kurzhantel, Langhantel – die Figur hält sie über `hold: hantel` in der Hand). Neu gezeichnet statt der vorläufigen Fassung: `kasse`
+  (Registrierkasse mit Tasten, Anzeige, Bon und Schublade – nicht bei „Krankenkasse“), `lieferwagen` (heller Kastenwagen mit Paket-Zeichen, ohne
+  Schriftzug und ohne Farben eines Paketdienstes; auch Transporter, Kastenwagen), `spätkauf` (Ladenfront mit Markise, Regal im Schaufenster,
+  Getränkekisten, Leuchtschild mit Mond ohne Schrift; auch Späti, Kiosk – ohne „tante-emma-laden“), `tabellendokument` (Blatt mit Tabelle; auch
+  Tabelle, Tabellenblatt – ohne den Markennamen „excel“ und ohne das zu weite „dokument“), `hose` (Jeans – ohne die englischen Aliasse; am Leib
+  getragen bleibt sie über `stage.WORN_THINGS` aus dem Bild), `kunststoffbecken` (offene blaue Plastikwanne mit Wasser – ohne das zu weite „becken“).
+  Neu: `friteuse` (Tischgerät mit Korb voller Pommes; auch Fritteuse). `stage.HINTS`: „vor/nach/während der Arbeit“ ist eine Zeitangabe und kein
+  Büro mehr (die Hantel-Szene des 13-Uhr-Plans spielte im Büro). Selbsttest: `_ausbau2611`.
+  Noch offen (vorläufige Zeichnung der Text-KI): ohr (Körperteil allein im Bild). Offene Wünsche ohne Zeichnung: polyp, knie, anwaltstitel,
+  toplitzsee, miete, algorithmus, statistik, musik, knall, dach, hand, handfläche, steuererklärung, countdown, blick, blut, primzahl, nase, nerv,
+  oberschenkel (greifbar davon: polyp, dach, steuererklärung; Körperteile und Abstraktes gehören eher in `main.NO_THINGS`).
 - Prüfung 23.11.2026, 18-Uhr-Termin (Video 192 „Das Rätsel der verschlossenen Tür auf dem Dachboden“, Kategorie `nachricht`):
   - Ort aus einem zusammengesetzten Ding-Wort („Countdown zu deiner Dachbodentür“, `COMPOUND_THING_RE`) gilt nicht, wenn die Bildbeschreibung
     (`see`) ausdrücklich einen anderen Ort nennt – die Figur schlief auf dem Dachboden-Fußboden. „Zimmer“ mit schlafender Figur oder

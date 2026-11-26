@@ -6050,7 +6050,7 @@ HINTS = [
     (r"krankenh[aä]us|\barzt|ärzte|klinik|notaufnahme", "hospital"),
     (r"\bschule|unterricht|klasse", "classroom"),
     (r"\blabor|forscher|wissenschaftler|experiment", "lab"),
-    (r"\bbüro|\barbeit\b|\bchef", "office"),
+    (r"\bbüro|(?<!vor der )(?<!nach der )(?<!während der )\barbeit\b|\bchef", "office"),   # „Motivation kommt nie vor der Arbeit“ ist eine Zeitangabe, kein Büro (Plan 26.11.2026)
     (r"küche|kochen|kühlschrank", "kitchen"),
 ]
 GENERIC = ("street", "park", "plain", "livingroom")
