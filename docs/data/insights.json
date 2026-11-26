@@ -1,5 +1,5 @@
 {
- "updated": 1795702243.8973017,
+ "updated": 1795704038.4472814,
  "enough": true,
  "counted": 44,
  "total": 46,
@@ -36,10 +36,10 @@
    "slug": "liebe",
    "name": "💕 Liebe",
    "n": 1,
-   "avg_views": 1515,
+   "avg_views": 1516,
    "avg_likes": 64.0,
    "like_rate": 4.22,
-   "avg_score": 2475
+   "avg_score": 2476
   },
   {
    "slug": "mysterien",
@@ -93,16 +93,16 @@
    "avg_views": 1230,
    "avg_likes": 10.5,
    "like_rate": 0.85,
-   "avg_score": 1422
+   "avg_score": 1423
   },
   {
    "slug": "grusel",
    "name": "👻 Grusel",
    "n": 2,
-   "avg_views": 425,
-   "avg_likes": 18.5,
-   "like_rate": 4.35,
-   "avg_score": 732
+   "avg_views": 426,
+   "avg_likes": 19.0,
+   "like_rate": 4.47,
+   "avg_score": 740
   }
  ],
  "weights": {
@@ -117,9 +117,9 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2285 Aufrufe, 2.05 % Likes).",
-  "Schwächste Kategorie: 👻 Grusel (Ø 425 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2296 zu 1118 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2404 zu 1852 Punkte).",
+  "Schwächste Kategorie: 👻 Grusel (Ø 426 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2297 zu 1118 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2405 zu 1852 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -128,13 +128,13 @@
  ],
  "words_bad": [
   "remix",
-  "glas",
-  "erkennst",
   "lied",
+  "erkennst",
   "bekanntes",
+  "glas",
   "niemand",
-  "eines",
-  "klassikers"
+  "klassikers",
+  "scheibe"
  ],
  "top": [
   {
@@ -193,21 +193,21 @@
    "id": 205,
    "title": "Starre nie im Dunkeln in den Spiegel",
    "category": "grusel",
-   "views": 357,
-   "likes": 16,
+   "views": 358,
+   "likes": 17,
    "comments": 2,
    "shares": 0,
-   "score": 657
+   "score": 673
   },
   {
    "id": 196,
    "title": "Jede Scheibe ein Ton: Lo-Fi-Remix eines Klassikers",
    "category": "musik",
-   "views": 355,
+   "views": 356,
    "likes": 2,
    "comments": 0,
    "shares": 0,
-   "score": 385
+   "score": 386
   },
   {
    "id": 44,
