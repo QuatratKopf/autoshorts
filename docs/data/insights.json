@@ -1,8 +1,8 @@
 {
- "updated": 1795691325.1843827,
+ "updated": 1795693120.0440853,
  "enough": true,
  "counted": 43,
- "total": 45,
+ "total": 46,
  "needed": 6,
  "categories": [
   {
@@ -36,10 +36,10 @@
    "slug": "liebe",
    "name": "💕 Liebe",
    "n": 1,
-   "avg_views": 1514,
+   "avg_views": 1515,
    "avg_likes": 64.0,
-   "like_rate": 4.23,
-   "avg_score": 2474
+   "like_rate": 4.22,
+   "avg_score": 2475
   },
   {
    "slug": "mysterien",
@@ -57,16 +57,16 @@
    "avg_views": 1690,
    "avg_likes": 46.4,
    "like_rate": 2.75,
-   "avg_score": 2388
+   "avg_score": 2389
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 7,
-   "avg_views": 1709,
+   "avg_views": 1708,
    "avg_likes": 44.4,
    "like_rate": 2.6,
-   "avg_score": 2384
+   "avg_score": 2383
   },
   {
    "slug": "storys",
@@ -99,17 +99,17 @@
    "slug": "grusel",
    "name": "👻 Grusel",
    "n": 2,
-   "avg_views": 424,
+   "avg_views": 423,
    "avg_likes": 18.0,
-   "like_rate": 4.25,
-   "avg_score": 724
+   "like_rate": 4.26,
+   "avg_score": 723
   }
  ],
  "weights": {
   "fakten": 1.07,
   "grusel": 0.5,
   "tiere": 1.12,
-  "whatif": 1.07,
+  "whatif": 1.08,
   "comedy": 1.35,
   "vergleich": 1.2,
   "motivation": 1.2,
@@ -117,7 +117,7 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2285 Aufrufe, 2.05 % Likes).",
-  "Schwächste Kategorie: 👻 Grusel (Ø 424 Aufrufe) – kommt seltener dran.",
+  "Schwächste Kategorie: 👻 Grusel (Ø 423 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2305 zu 1118 Punkte).",
   "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2421 zu 1852 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
@@ -128,13 +128,13 @@
  ],
  "words_bad": [
   "remix",
-  "bekanntes",
   "lied",
+  "bekanntes",
   "erkennst",
   "glas",
-  "eines",
+  "jede",
   "scheibe",
-  "klassikers"
+  "eines"
  ],
  "top": [
   {
@@ -193,11 +193,11 @@
    "id": 205,
    "title": "Starre nie im Dunkeln in den Spiegel",
    "category": "grusel",
-   "views": 354,
+   "views": 353,
    "likes": 15,
    "comments": 2,
    "shares": 0,
-   "score": 639
+   "score": 638
   },
   {
    "id": 196,
