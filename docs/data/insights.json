@@ -1,5 +1,5 @@
 {
- "updated": 1795652994.9662306,
+ "updated": 1795654802.6833649,
  "enough": true,
  "counted": 42,
  "total": 45,
@@ -63,7 +63,7 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 7,
-   "avg_views": 1705,
+   "avg_views": 1706,
    "avg_likes": 44.3,
    "like_rate": 2.6,
    "avg_score": 2378
@@ -101,7 +101,7 @@
    "n": 2,
    "avg_views": 420,
    "avg_likes": 18.0,
-   "like_rate": 4.29,
+   "like_rate": 4.28,
    "avg_score": 720
   }
  ],
@@ -129,12 +129,12 @@
  "words_bad": [
   "remix",
   "bekanntes",
-  "erkennst",
   "lied",
+  "erkennst",
   "glas",
   "scheibe",
-  "eines",
-  "jede"
+  "klassikers",
+  "eines"
  ],
  "top": [
   {
@@ -193,11 +193,11 @@
    "id": 205,
    "title": "Starre nie im Dunkeln in den Spiegel",
    "category": "grusel",
-   "views": 346,
+   "views": 348,
    "likes": 15,
    "comments": 2,
    "shares": 0,
-   "score": 631
+   "score": 633
   },
   {
    "id": 196,
