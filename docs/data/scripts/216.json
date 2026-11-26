@@ -1,0 +1,444 @@
+{
+ "title": "Motivation: Fang einfach an, bevor du bereit bist",
+ "scenes": [
+  {
+   "text": "Du bist nicht faul. Du bist einfach extrem abgelenkt.",
+   "see": "Du liegst nachts im Bett und starrst hypnotisiert auf dein Smartphone.",
+   "place": "bedroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sleep",
+     "emotion": "shocked",
+     "emote": "none",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Und die wichtigste Entscheidung deines Tages triffst du meistens erst heute Nacht.",
+   "see": "Das handy zeigt endlose Kurzvideos, die Finger scrollen pausenlos.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "worried",
+     "emote": "none",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense"
+  },
+  {
+   "text": "Dein Kopf kriegt dauernd Billig-Dopamin, was echte Aufgaben sofort extrem langweilig wirken lässt.",
+   "see": "Grafik zeigt das Gehirn, das von Benachrichtigungen überschwemmt wird.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "talk",
+     "pos": 750,
+     "emotion": "",
+     "emote": "none"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Du sagst dir: Morgen starte ich durch. Aber morgen wiederholst du denselben Move.",
+   "see": "Du schlägst den Wecker aus und drehst dich genervt zur Seite.",
+   "place": "zimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "wecker"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "angry",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Du wartest auf den perfekten Moment, auf den richtigen Plan oder mehr Motivation.",
+   "see": "Eine Wand voller Aufgaben-Post-its, vor der du überfordert stehst.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "table"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Die Wahrheit ist aber hart: Dieser perfekte Moment existiert überhaupt nicht.",
+   "see": "Grafik: Kalender verstreicht ohne abgehakte Tage.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "talk",
+     "pos": 750,
+     "emotion": "",
+     "emote": "none"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Du denkst, erfolgreiche Leute fühlen sich bereit. Falsch, sie machen es einfach trotz Angst.",
+   "see": "Du stehst zögernd vor einer riesigen verschlossenen Holztür.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "door"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "cower",
+     "emotion": "scared",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Warten macht dich nur unsicherer. Jeder Tag Vorbereitung ohne Handlung steigert deine Zweifel.",
+   "see": "Du blickst von einem steilen Berg in den Abgrund, willst springen.",
+   "place": "berg",
+   "time": "day",
+   "weather": "wind",
+   "actors": [
+    {
+     "id": "du",
+     "action": "idle",
+     "pos": "center",
+     "emotion": "worried",
+     "emote": "none"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Klarheit entsteht nie durch bloßes Nachdenken, sondern nur durch Taten und den ersten Schritt.",
+   "see": "Höhepunkt: Du machst einen mutigen Schritt vorwärts über den Rand.",
+   "place": "berg",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "look_around",
+     "emotion": "worried",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Stell dir dein Ziel nicht als Riesenberg vor. Das lähmt dich nur sofort.",
+   "see": "Du sitzt energisch am Schreibtisch und klappst das Laptop auf.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    },
+    {
+     "type": "table"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "",
+     "emote": "none",
+     "kind": "",
+     "hold": "computer",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Zero-Percent-Rule: Mach die Aufgabe so lächerlich klein, dass du gar nicht nein sagen kannst.",
+   "see": "Grafik: Zerlegung einer riesigen 100 in winzige Fünf-Prozent-Schritte.",
+   "place": "office",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "idle",
+     "pos": "center",
+     "emotion": "",
+     "emote": "none"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Schreib nur einen einzigen Satz. Mach nur fünf Liegestütze. Lerne für zwei Minuten.",
+   "see": "Du schreibst konzentriert genau ein einziges Wort ins Notizbuch.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "table"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Sobald der Stein einmal rollt, übernimmt die Eigendynamik den Rest des Weges.",
+   "see": "Du wirfst das Smartphone entschlossen in eine Kiste weit weg.",
+   "place": "zimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "sofa"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "run",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "right"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Motivation kommt nämlich fast nie vor der Arbeit. Sie entsteht erst währenddessen.",
+   "see": "Du stemmst im Raum stolz eine schwere Hantel nach oben.",
+   "place": "zimmer",
+   "time": "day",
+   "props": [
+    {
+     "type": "hantel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "hantel",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Nach zehn Minuten bist du im Flow. Und dann zieht dich deine eigene Energie weiter.",
+   "see": "Grafik schießt in einer steilen Erfolgskurve rasant nach oben.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "action": "talk",
+     "pos": 750,
+     "emotion": "happy",
+     "emote": "none"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Warte nicht, bis du dich bereit fühlst. Fang einfach an, bevor du bereit bist.",
+   "see": "Du schubst entschlossen die riesige verschlossene Tür auf.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "door"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Nicht morgen. Nicht nächste Woche. Genau jetzt in diesem Augenblick.",
+   "see": "Du stehst siegreich auf dem Gipfel des Berges im Sonnenlicht.",
+   "place": "berg",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Speicher dir das für die harten Tage.",
+   "see": "Nahaufnahme von deinem entschlossenen Gesicht, Blick direkt in die Kamera.",
+   "place": "berg",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Denn du weißt ganz genau:",
+   "see": "Du sitzt wieder im dunklen Zimmer, schaust kurz aufs Handy und legst es weg.",
+   "place": "zimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  }
+ ]
+}

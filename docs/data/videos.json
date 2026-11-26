@@ -8226,5 +8226,48 @@
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7712200480667094305?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
+ },
+ {
+  "id": 216,
+  "category": "motivation",
+  "topic": "Fang an, bevor du bereit bist",
+  "status": "review",
+  "created": 1795687774.8961697,
+  "title": "Motivation: Fang einfach an, bevor du bereit bist",
+  "description": "Du bist nicht faul. Du bist einfach nur abgelenkt!\nWarum Perfektionismus dich blockiert und wie du sofort in die Umsetzung kommst.\nMachst du den ersten Schritt heute oder erst am Montag?",
+  "hashtags": [
+   "#shorts",
+   "#motivation",
+   "#mindset",
+   "#erfolg",
+   "#produktivität",
+   "#genz",
+   "#focus",
+   "#fyp"
+  ],
+  "tags": [
+   "motivation",
+   "aufschieben",
+   "prokrastination",
+   "disziplin",
+   "erfolg",
+   "fokus",
+   "mindset deutsch",
+   "ausreden stoppen"
+  ],
+  "thumb_text": "SCHLUSS MIT AUSREDEN",
+  "missing": null,
+  "cover_ms": 88438,
+  "duration": 88.3,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-26 13:00",
+  "review_at": 1795688152.064285
  }
 ]
