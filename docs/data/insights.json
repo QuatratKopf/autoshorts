@@ -1,5 +1,5 @@
 {
- "updated": 1795716088.7175324,
+ "updated": 1795717897.1369977,
  "enough": true,
  "counted": 45,
  "total": 47,
@@ -63,10 +63,10 @@
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 2,
-   "avg_views": 1576,
-   "avg_likes": 32.0,
-   "like_rate": 2.03,
-   "avg_score": 2056
+   "avg_views": 1590,
+   "avg_likes": 33.0,
+   "like_rate": 2.08,
+   "avg_score": 2085
   },
   {
    "slug": "storys",
@@ -99,27 +99,27 @@
    "slug": "grusel",
    "name": "👻 Grusel",
    "n": 2,
-   "avg_views": 441,
-   "avg_likes": 19.0,
-   "like_rate": 4.31,
-   "avg_score": 756
+   "avg_views": 443,
+   "avg_likes": 19.5,
+   "like_rate": 4.4,
+   "avg_score": 766
   }
  ],
  "weights": {
   "fakten": 1.06,
   "grusel": 0.5,
-  "tiere": 1.14,
+  "tiere": 1.13,
   "whatif": 1.09,
   "comedy": 1.37,
-  "vergleich": 0.94,
+  "vergleich": 0.95,
   "motivation": 1.2,
   "nachricht": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2285 Aufrufe, 2.05 % Likes).",
-  "Schwächste Kategorie: 👻 Grusel (Ø 441 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2273 zu 1119 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2368 zu 1853 Punkte).",
+  "Schwächste Kategorie: 👻 Grusel (Ø 443 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2275 zu 1119 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2370 zu 1853 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -128,13 +128,13 @@
  ],
  "words_bad": [
   "remix",
-  "bekanntes",
+  "lied",
   "erkennst",
   "glas",
-  "lied",
+  "bekanntes",
   "niemand",
   "klassikers",
-  "scheibe"
+  "eines"
  ],
  "top": [
   {
@@ -193,11 +193,11 @@
    "id": 205,
    "title": "Starre nie im Dunkeln in den Spiegel",
    "category": "grusel",
-   "views": 388,
-   "likes": 18,
+   "views": 392,
+   "likes": 19,
    "comments": 2,
    "shares": 0,
-   "score": 718
+   "score": 737
   },
   {
    "id": 196,
