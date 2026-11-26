@@ -1,8 +1,8 @@
 {
- "updated": 1795708553.04992,
+ "updated": 1795710701.1354105,
  "enough": true,
  "counted": 45,
- "total": 46,
+ "total": 47,
  "needed": 6,
  "categories": [
   {
@@ -27,10 +27,10 @@
    "slug": "liebe",
    "name": "💕 Liebe",
    "n": 1,
-   "avg_views": 1516,
+   "avg_views": 1518,
    "avg_likes": 64.0,
    "like_rate": 4.22,
-   "avg_score": 2476
+   "avg_score": 2478
   },
   {
    "slug": "mysterien",
@@ -45,7 +45,7 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 12,
-   "avg_views": 1690,
+   "avg_views": 1691,
    "avg_likes": 46.4,
    "like_rate": 2.75,
    "avg_score": 2389
@@ -63,10 +63,10 @@
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 2,
-   "avg_views": 1515,
-   "avg_likes": 31.5,
-   "like_rate": 2.08,
-   "avg_score": 1988
+   "avg_views": 1530,
+   "avg_likes": 32.0,
+   "like_rate": 2.09,
+   "avg_score": 2010
   },
   {
    "slug": "storys",
@@ -101,8 +101,8 @@
    "n": 2,
    "avg_views": 426,
    "avg_likes": 18.5,
-   "like_rate": 4.34,
-   "avg_score": 734
+   "like_rate": 4.35,
+   "avg_score": 733
   }
  ],
  "weights": {
@@ -111,15 +111,15 @@
   "tiere": 1.14,
   "whatif": 1.09,
   "comedy": 1.37,
-  "vergleich": 0.91,
+  "vergleich": 0.92,
   "motivation": 1.2,
   "nachricht": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2285 Aufrufe, 2.05 % Likes).",
   "Schwächste Kategorie: 👻 Grusel (Ø 426 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2268 zu 1118 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2361 zu 1852 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2269 zu 1119 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2363 zu 1852 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -128,12 +128,12 @@
  ],
  "words_bad": [
   "remix",
-  "erkennst",
-  "glas",
-  "bekanntes",
   "lied",
+  "erkennst",
+  "bekanntes",
+  "glas",
   "niemand",
-  "jede",
+  "klassikers",
   "scheibe"
  ],
  "top": [
@@ -141,11 +141,11 @@
    "id": 168,
    "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
    "category": "comedy",
-   "views": 3948,
+   "views": 3949,
    "likes": 54,
    "comments": 1,
    "shares": 0,
-   "score": 4788
+   "score": 4789
   },
   {
    "id": 46,
@@ -193,11 +193,11 @@
    "id": 205,
    "title": "Starre nie im Dunkeln in den Spiegel",
    "category": "grusel",
-   "views": 358,
+   "views": 357,
    "likes": 17,
    "comments": 2,
    "shares": 0,
-   "score": 673
+   "score": 672
   },
   {
    "id": 196,
