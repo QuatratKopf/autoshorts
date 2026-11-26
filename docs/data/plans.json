@@ -1,1328 +1,4 @@
 {
- "2026-11-24 21:00": {
-  "category": "grusel",
-  "topic": "Was dein Gehirn tut, wenn du im Spiegel an die falsche Stelle starrst",
-  "trend": null,
-  "script": {
-   "title": "Starre nie im Dunkeln in den Spiegel",
-   "description": "Starre im Halbdunkel in den Spiegel, und nach etwa einer Minute verändert sich dein Gesicht.\nDahinter steckt kein Spuk, sondern der Troxler-Effekt: Dein Gehirn blendet Gleichbleibendes aus und füllt die Lücken selbst.\nTraust du dich, das heute Abend zu testen?",
-   "hashtags": [
-    "#shorts",
-    "#grusel",
-    "#spiegel",
-    "#psychologie",
-    "#fakten",
-    "#viral",
-    "#fyp"
-   ],
-   "tags": [
-    "spiegel phänomen",
-    "troxler effekt",
-    "gruselige fakten",
-    "gehirn illusionen",
-    "spiegel nachts",
-    "psychologie fakten",
-    "gruselgeschichten"
-   ],
-   "thumbnail": {
-    "image": "Mirror in a dark bathroom showing a distorted reflection",
-    "text": "SCHAU NICHT REIN",
-    "place": "bathroom",
-    "time": "night",
-    "actor": "du",
-    "action": "shocked",
-    "emotion": "shocked",
-    "props": [],
-    "weather": "dark"
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "grau",
-     "hat": "",
-     "hair": "curly",
-     "hair_color": "dunkelbraun",
-     "skin": "hell",
-     "gender": "w"
-    },
-    "gehirn": {
-     "kind": "brain"
-    }
-   },
-   "scenes": [
-    {
-     "see": "Im Badezimmerspiegel hat das Spiegelbild riesige schwarze Augen.",
-     "text": "Starre eine Minute im Halbdunkel in den Spiegel, und dein Gesicht wird zum Monster.",
-     "image": "Im Badezimmerspiegel hat das Spiegelbild riesige schwarze Augen.",
-     "who": [
-      "du"
-     ],
-     "place": "bathroom",
-     "camera": "zoom_in",
-     "sfx": "boom",
-     "highlight": [
-      "Monster"
-     ],
-     "overlay": null,
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "shot": "wide",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ]
-    },
-    {
-     "see": "Die Figur steht im dunklen Badezimmer, eine Kerze brennt.",
-     "text": "Du brauchst dafür nur ein dunkles Bad und eine einzige Kerze.",
-     "image": "Die Figur steht im dunklen Badezimmer, eine Kerze brennt.",
-     "who": [
-      "du"
-     ],
-     "place": "bathroom",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "Kerze"
-     ],
-     "overlay": null,
-     "time": "night",
-     "weather": "dark",
-     "props": [
-      "candle"
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "look_around",
-       "emotion": "curious",
-       "emote": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ]
-    },
-    {
-     "see": "Die Figur starrt reglos in den Spiegel.",
-     "text": "Dann starrst du dir im Spiegel reglos in die Augen.",
-     "image": "Die Figur starrt reglos in den Spiegel.",
-     "who": [
-      "du"
-     ],
-     "place": "bathroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "reglos"
-     ],
-     "overlay": null,
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "watch",
-       "emotion": "",
-       "emote": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ]
-    },
-    {
-     "see": "Im Spiegel versinkt der Rand des Gesichts im Dunkeln.",
-     "text": "Nach etwa einer Minute verblasst der Rand deines Gesichts, und deine Haare versinken im Dunkeln.",
-     "image": "Im Spiegel versinkt der Rand des Gesichts im Dunkeln.",
-     "who": [
-      "du"
-     ],
-     "place": "bathroom",
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "verblasst"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "EINE MINUTE"
-     },
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "shot": "wide",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ]
-    },
-    {
-     "see": "Das Gehirn erklärt und winkt ab.",
-     "text": "Schuld ist dein Gehirn: Was sich nicht verändert, hält es für unwichtig.",
-     "image": "Das Gehirn erklärt und winkt ab.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "bathroom",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "Gehirn"
-     ],
-     "overlay": null,
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": "",
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ]
-    },
-    {
-     "see": "Im Spiegel ist nur noch die Mitte des Gesichts zu sehen.",
-     "text": "Es blendet gleichbleibende Reize einfach aus. Forscher nennen das den Troxler-Effekt.",
-     "image": "Im Spiegel ist nur noch die Mitte des Gesichts zu sehen.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "bathroom",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Troxler-Effekt"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "TROXLER-EFFEKT"
-     },
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "shot": "wide",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": "",
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ]
-    },
-    {
-     "see": "Großes Fragezeichen.",
-     "text": "Aber womit füllt dein Kopf die leeren Stellen?",
-     "image": "Großes Fragezeichen.",
-     "who": [],
-     "place": "bathroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "leeren Stellen"
-     ],
-     "overlay": {
-      "type": "question",
-      "text": "UND DANN?"
-     },
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "shot": "wide",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Gehirn überlegt und bastelt.",
-     "text": "Er rät einfach und bastelt aus Schatten und Erinnerungen etwas Neues.",
-     "image": "Das Gehirn überlegt und bastelt.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "bathroom",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "rät"
-     ],
-     "overlay": null,
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": "",
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "think",
-       "emotion": "",
-       "emote": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ]
-    },
-    {
-     "see": "Im Spiegel werden die Augen riesig und schwarz.",
-     "text": "Plötzlich wirken deine Augen riesig und pechschwarz.",
-     "image": "Im Spiegel werden die Augen riesig und schwarz.",
-     "who": [
-      "du"
-     ],
-     "place": "bathroom",
-     "camera": "still",
-     "sfx": "boom",
-     "highlight": [
-      "pechschwarz"
-     ],
-     "overlay": null,
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "shot": "wide",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ]
-    },
-    {
-     "see": "Im Spiegel grinst eine Fratze.",
-     "text": "Dein Mund verzieht sich zu einer fremden Fratze.",
-     "image": "Im Spiegel grinst eine Fratze.",
-     "who": [
-      "du"
-     ],
-     "place": "bathroom",
-     "camera": "still",
-     "sfx": "boom",
-     "highlight": [
-      "Fratze"
-     ],
-     "overlay": null,
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "shot": "wide",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ]
-    },
-    {
-     "see": "Die Figur weicht erschrocken vom Spiegel zurück.",
-     "text": "In einem Experiment sah fast jede zweite Testperson unheimliche Fantasiewesen.",
-     "image": "Die Figur weicht erschrocken vom Spiegel zurück.",
-     "who": [
-      "du"
-     ],
-     "place": "bathroom",
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "jede zweite"
-     ],
-     "overlay": null,
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "shot": "wide",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ]
-    },
-    {
-     "see": "Die Figur schaut ungläubig.",
-     "text": "Manche erkannten statt sich selbst einen Elternteil oder einen völlig Fremden.",
-     "image": "Die Figur schaut ungläubig.",
-     "who": [
-      "du"
-     ],
-     "place": "bathroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Fremden"
-     ],
-     "overlay": null,
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "think",
-       "emotion": "worried",
-       "emote": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ]
-    },
-    {
-     "see": "Das Gehirn beruhigt.",
-     "text": "Das ist kein Geist und kein Fluch, sondern dein Gehirn, das Lücken füllt.",
-     "image": "Das Gehirn beruhigt.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "bathroom",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "kein Geist"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "KEIN GEIST",
-      "color": "green"
-     },
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": "",
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ]
-    },
-    {
-     "see": "Die Figur blinzelt im dunklen Bad.",
-     "text": "Und der Spuk ist empfindlich: Eine winzige Bewegung deiner Augen genügt.",
-     "image": "Die Figur blinzelt im dunklen Bad.",
-     "who": [
-      "du"
-     ],
-     "place": "bathroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "winzige Bewegung"
-     ],
-     "overlay": null,
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "watch",
-       "emotion": "worried",
-       "emote": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ]
-    },
-    {
-     "see": "Im Spiegel verschwindet die Fratze, das normale Gesicht ist zurück.",
-     "text": "Sofort verschwindet die Fratze, und dein echtes Gesicht ist wieder da.",
-     "image": "Im Spiegel verschwindet die Fratze, das normale Gesicht ist zurück.",
-     "who": [
-      "du"
-     ],
-     "place": "bathroom",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "verschwindet"
-     ],
-     "overlay": null,
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "shot": "wide",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ]
-    },
-    {
-     "see": "Das Bad ist hell, die Figur atmet erleichtert auf.",
-     "text": "Du machst das Licht an und atmest erleichtert durch.",
-     "image": "Das Bad ist hell, die Figur atmet erleichtert auf.",
-     "who": [
-      "du"
-     ],
-     "place": "bathroom",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "Licht an"
-     ],
-     "overlay": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "shot": "wide",
-     "mood": "happy",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "happy",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ]
-    },
-    {
-     "see": "Das Gehirn erklärt stolz.",
-     "text": "Der Effekt zeigt nur, wie viel von deiner Welt dein Gehirn in Wahrheit dazuerfindet.",
-     "image": "Das Gehirn erklärt stolz.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "bathroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "dazuerfindet"
-     ],
-     "overlay": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": "",
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ]
-    },
-    {
-     "see": "Die Figur starrt wieder in den Spiegel.",
-     "text": "Traust du dich heute Abend, eine Minute lang in den Spiegel zu starren?",
-     "image": "Die Figur starrt wieder in den Spiegel.",
-     "who": [
-      "du"
-     ],
-     "place": "bathroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Traust du dich"
-     ],
-     "overlay": null,
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ]
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [],
-  "title": "Starre nie im Dunkeln in den Spiegel",
-  "created": 1795545718.8601458,
-  "checked": "Prüfung 24.11.2026: Drehbuch von Hand berichtigt (eine Minute statt zehn Sekunden, erfundene Verzögerungs-Erklärung gestrichen)"
- },
- "2026-11-25 13:00": {
-  "category": "whatif",
-  "topic": "Was wäre, wenn die Karte von GTA 6 echt wäre und du sie zu Fuß erkunden müsstest?",
-  "trend": {
-   "title": "state of leonida",
-   "source": "Google Trends",
-   "news": [
-    {
-     "title": "GTA 6 interactive map already has more than 6,800 points of interest as fans discover Leonida",
-     "url": "https://www.pcguide.com/news/gta-6-interactive-map-already-has-more-than-6800-points-of-interest-as-fans-discover-leonida/",
-     "source": "PC Guide"
-    },
-    {
-     "title": "IGN has teamed up with Rockstar to present the Official Strategy Guide for GTA 6",
-     "url": "https://wnhub.io/news/other/item-52771",
-     "source": "WN Hub"
-    },
-    {
-     "title": "Grand Theft Auto 6 interactive map - Shackmaps",
-     "url": "http://www.shacknews.com/article/151428/gta6-interactive-map-shackmaps",
-     "source": "Shacknews"
-    }
-   ],
-   "summary": ""
-  },
-  "script": {
-   "title": "GTA 6 in echt durchqueren: So heftig wäre es!",
-   "description": "Was wäre, wenn die Karte von GTA 6 echt wäre und du laufen müsstest?\nSo extrem wäre ein Fußmarsch durch die riesige Welt von Leonida in der Realität.\nWürdest du diesen Gewaltmarsch wagen oder lieber das Auto nehmen?",
-   "hashtags": [
-    "#shorts",
-    "#gta6",
-    "#gaming",
-    "#whatif",
-    "#gtavi",
-    "#vicecity",
-    "#fakten"
-   ],
-   "tags": [
-    "gta 6",
-    "gta vi",
-    "gta 6 karte",
-    "vice city",
-    "leonida",
-    "what if",
-    "gaming fakten",
-    "gta in echt"
-   ],
-   "thumbnail": {
-    "image": "Close-up of a terrified gamer holding a glowing map, floating quest markers and thousands of icons filling the sky behind him, high contrast, dramatic light",
-    "text": "GTA 6 IN ECHT",
-    "place": "street",
-    "time": "day",
-    "actor": "du",
-    "action": "shocked",
-    "emotion": "shocked",
-    "props": [
-     "map"
-    ],
-    "weather": ""
-   },
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "gelb",
-     "hat": "cap",
-     "hair": "short",
-     "hair_color": "braun",
-     "gender": "m",
-     "skin": "hell"
-    }
-   },
-   "hud": "",
-   "countdown": null,
-   "scenes": [
-    {
-     "text": "So heftig wäre eine Fußreise durch die echte GTA-Sechs-Karte.",
-     "see": "Ein Gamer steht auf einer Straße an der Küste und schaut ungläubig auf eine große Papierkarte.",
-     "place": "küste",
-     "backdrop": {
-      "sky": "day",
-      "ground": "road",
-      "elements": [
-       "palms",
-       "sea",
-       "city"
-      ]
-     },
-     "time": "day",
-     "props": [
-      "map"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "kind": "",
-       "hold": "map",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "tense",
-     "overlay": {
-      "type": "card",
-      "text": "GTA 6 IN ECHT"
-     }
-    },
-    {
-     "text": "Der Bundesstaat Leonida ist riesig und das Abenteuer würde dein absoluter Albtraum werden.",
-     "see": "Die Hauptfigur marschiert entschlossen los, hat aber mächtig Respekt vor dem Weg.",
-     "place": "straße",
-     "backdrop": {
-      "sky": "day",
-      "ground": "road",
-      "elements": [
-       "palms",
-       "city"
-      ]
-     },
-     "time": "day",
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "walk",
-       "emotion": "worried",
-       "emote": "",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "left",
-       "to": "center"
-      }
-     ],
-     "mood": "tense",
-     "crowd": "worried",
-     "props": []
-    },
-    {
-     "text": "Leonida basiert auf Florida und Fans haben aus Trailern eine gewaltige Karte nachgebaut.",
-     "see": "Eine digitale Weltkarte zeigt die Ausmaße der Spielwelt im Vergleich zur echten Welt.",
-     "place": "küste",
-     "backdrop": {
-      "sky": "day",
-      "ground": "sand",
-      "elements": [
-       "sea",
-       "city"
-      ]
-     },
-     "time": "day",
-     "props": [
-      "map"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "point",
-       "emotion": "happy",
-       "emote": "idea",
-       "kind": "",
-       "hold": "map",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "calm",
-     "graphic": {
-      "type": "badge",
-      "kicker": "INSPIRATION",
-      "text": "FLORIDA",
-      "dark": false
-     },
-     "overlay": {
-      "type": "tag",
-      "text": "LEONIDA"
-     }
-    },
-    {
-     "text": "Im Spiel fährst du durch Vice City in Minuten.",
-     "see": "Die Hauptfigur steht fröhlich auf der Straße von Vice City.",
-     "place": "küste",
-     "backdrop": {
-      "sky": "day",
-      "ground": "road",
-      "elements": [
-       "city"
-      ]
-     },
-     "time": "day",
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "cheer",
-       "emotion": "happy",
-       "pos": "center"
-      }
-     ],
-     "mood": "happy",
-     "props": []
-    },
-    {
-     "text": "Aber das reale Vorbild misst einhundertsiebzigtausend Quadratkilometer.",
-     "see": "Eine große Deutschland- und Europakarte zeigt die enorme Fläche von echten 170.000 Quadratkilometern.",
-     "place": "germany",
-     "time": "day",
-     "actors": [
-      {
-       "id": "du",
-       "action": "walk",
-       "pos": "offleft",
-       "to": "center",
-       "emotion": ""
-      }
-     ],
-     "shot": "graphic",
-     "mood": "calm",
-     "graphic": {
-      "type": "number",
-      "kicker": "GESAMTFLÄCHE",
-      "value": "170.000",
-      "label": "QUADRATKILOMETER",
-      "dark": false
-     },
-     "props": []
-    },
-    {
-     "text": "Von Norden nach Süden sind das rund siebenhundert Kilometer Strecke.",
-     "see": "Eine Straße erstreckt sich scheinbar endlos bis zum Horizont.",
-     "place": "straße",
-     "backdrop": {
-      "sky": "day",
-      "ground": "road",
-      "elements": [
-       "powerlines"
-      ]
-     },
-     "time": "day",
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "shocked",
-       "emotion": "worried",
-       "emote": "!",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "tense",
-     "overlay": {
-      "type": "card",
-      "text": "700 KILOMETER"
-     },
-     "props": []
-    },
-    {
-     "text": "Wanderst du mit gemütlichen fünf Kilometern pro Stunde, kommst du nur langsam voran.",
-     "see": "Die Hauptfigur läuft erschöpft mit verlangsamtem Schritt an der Straße entlang.",
-     "place": "straße",
-     "backdrop": {
-      "sky": "day",
-      "ground": "road",
-      "elements": [
-       "trees"
-      ]
-     },
-     "time": "day",
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "walk",
-       "emotion": "sad",
-       "emote": "sweat",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "5 KM/H"
-     },
-     "props": []
-    },
-    {
-     "text": "Bei acht Stunden Marsch jeden Tag bist du ganze achtzehn Tage unterwegs.",
-     "see": "Ein Kalenderblatt wird abgehakt, während die Figur schläft.",
-     "place": "natur",
-     "time": "day",
-     "shot": "graphic",
-     "mood": "tense",
-     "crowd": "worried",
-     "graphic": {
-      "type": "days",
-      "value": "18",
-      "label": "TAGE MARSCH",
-      "sub": "18",
-      "text": "DAUER ZU FUSS",
-      "dark": false
-     },
-     "props": [],
-     "actors": []
-    },
-    {
-     "text": "Keine Schnellreise befördert dich spontan an dein Ziel.",
-     "see": "Die Hauptfigur schaut verzweifelt auf ihr Handy, aber da ist kein Schnellreise-Knopf.",
-     "place": "natur",
-     "backdrop": {
-      "sky": "day",
-      "ground": "grass",
-      "elements": [
-       "hills"
-      ]
-     },
-     "time": "day",
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "think",
-       "emotion": "worried",
-       "emote": "?",
-       "kind": "",
-       "hold": "phone",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "tense",
-     "props": []
-    },
-    {
-     "text": "Du denkst, du kannst einfach durchrennen? Falsch gedacht!",
-     "see": "Die Hauptfigur bricht nach einem kurzen Sprint keuchend zusammen.",
-     "place": "straße",
-     "backdrop": {
-      "sky": "day",
-      "ground": "road",
-      "elements": [
-       "trees"
-      ]
-     },
-     "time": "day",
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "pant",
-       "emotion": "scared",
-       "emote": "sweat",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "tense",
-     "props": []
-    },
-    {
-     "text": "Ein Mensch hält einen vollen Sprint nur etwa dreißig Sekunden durch.",
-     "see": "Eine Ausdaueranzeige leert sich rasend schnell auf Null.",
-     "place": "straße",
-     "backdrop": {
-      "sky": "day",
-      "ground": "road",
-      "elements": [
-       "trees"
-      ]
-     },
-     "time": "day",
-     "actors": [
-      {
-       "id": "du",
-       "action": "look_around",
-       "pos": "center",
-       "emotion": "worried",
-       "emote": ""
-      }
-     ],
-     "shot": "graphic",
-     "mood": "tense",
-     "graphic": {
-      "type": "number",
-      "value": "30",
-      "label": "SEKUNDEN",
-      "dark": false
-     },
-     "props": []
-    },
-    {
-     "text": "Dein Rucksack darf höchstens zwanzig Prozent deines Körpergewichts wiegen.",
-     "see": "Die Hauptfigur knickt unter einem riesigen Wanderrucksack fast ein.",
-     "place": "natur",
-     "backdrop": {
-      "sky": "day",
-      "ground": "soil",
-      "elements": [
-       "trees"
-      ]
-     },
-     "time": "day",
-     "props": [
-      "rucksack",
-      "scale"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "cower",
-       "emotion": "worried",
-       "emote": "!",
-       "kind": "",
-       "hold": "bag",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "tense",
-     "overlay": {
-      "type": "card",
-      "text": "MAX 20%"
-     }
-    },
-    {
-     "text": "Ohne Mini-Karte im Blickfeld musst du auf Papier schauen, doch wie schrecklich wird das Wetter?",
-     "see": "Die Hauptfigur dreht eine große Papierkarte im Kreis, weil sie sich völlig verlaufen hat.",
-     "place": "natur",
-     "backdrop": {
-      "sky": "day",
-      "ground": "grass",
-      "elements": [
-       "forest"
-      ]
-     },
-     "time": "day",
-     "props": [
-      "map"
-     ],
-     "shot": "event",
-     "mood": "tense",
-     "actors": []
-    },
-    {
-     "text": "Dazu kommt schwüle Hitze von über dreißig Grad.",
-     "see": "Die Sonne brennt heiß vom Himmel und ein Thermometer zeigt über 30 Grad an.",
-     "place": "straße",
-     "backdrop": {
-      "sky": "day",
-      "ground": "road",
-      "elements": [
-       "palms"
-      ]
-     },
-     "time": "day",
-     "weather": "heat",
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "shiver",
-       "emotion": "worried",
-       "emote": "sweat",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "tense",
-     "overlay": {
-      "type": "thermo",
-      "value": 30.0
-     },
-     "props": []
-    },
-    {
-     "text": "Im Sommer überrascht dich nachmittags ein Gewitter, aber was passiert bei einem einzigen Fehler?",
-     "see": "Dunkle Gewitterwolken ziehen auf und harter Regen prasselt herab.",
-     "place": "natur",
-     "backdrop": {
-      "sky": "storm",
-      "ground": "soil",
-      "elements": [
-       "trees"
-      ]
-     },
-     "time": "day",
-     "weather": "rain",
-     "props": [
-      "lightning"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "cower",
-       "emotion": "scared",
-       "emote": "!",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "tense"
-    },
-    {
-     "text": "Ein einziger Sturz auf den Asphalt bleibt hier dauerhaft schmerzhaft.",
-     "see": "Die Hauptfigur stolpert über einen Stein und fällt auf den Boden.",
-     "place": "straße",
-     "backdrop": {
-      "sky": "day",
-      "ground": "road",
-      "elements": [
-       "trees"
-      ]
-     },
-     "time": "day",
-     "props": [
-      "rock"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "fall",
-       "emotion": "scared",
-       "emote": "!",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "tense"
-    },
-    {
-     "text": "Es gibt keinen Speicherpunkt und keinen Neustart bei Verletzungen.",
-     "see": "Ein roter Notizhefteintrag zeigt, dass es keine Speicherpunkte gibt.",
-     "place": "straße",
-     "time": "day",
-     "shot": "graphic",
-     "mood": "tense",
-     "crowd": "worried",
-     "graphic": {
-      "type": "badge",
-      "kicker": "REALITÄT",
-      "text": "KEIN RESTART",
-      "dark": false
-     },
-     "overlay": {
-      "type": "stamp",
-      "text": "KEIN SAVE",
-      "color": "red"
-     },
-     "props": [],
-     "actors": []
-    },
-    {
-     "text": "Im Spiel ist diese Karte ein fantastisches Abenteuer.",
-     "see": "Die Hauptfigur sitzt völlig fertig am Straßenrand und starrt nach vorne.",
-     "place": "küste",
-     "backdrop": {
-      "sky": "day",
-      "ground": "road",
-      "elements": [
-       "palms",
-       "city"
-      ]
-     },
-     "time": "day",
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "sit",
-       "emotion": "",
-       "emote": "",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "calm",
-     "props": []
-    },
-    {
-     "text": "In der echten Welt wird daraus schnell ein knallharter Gewaltmarsch.",
-     "see": "Die Hauptfigur blickt überrascht in die Kamera, während sich der Kreis zum Anfang schließt.",
-     "place": "küste",
-     "backdrop": {
-      "sky": "day",
-      "ground": "road",
-      "elements": [
-       "palms",
-       "sea"
-      ]
-     },
-     "time": "day",
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "walk",
-       "emotion": "shocked",
-       "emote": "!",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "offright",
-       "to": "center"
-      }
-     ],
-     "shot": "close",
-     "mood": "tense",
-     "props": []
-    }
-   ]
-  }
- },
  "2026-11-25 18:00": {
   "category": "fakten",
   "topic": "Warum du den 'Phantom-Vibrations-Effekt' hast: Warum dein Gehirn dir ein Handy-Brummen vorgaukelt, das gar nicht existiert",
@@ -3965,5 +2641,747 @@
   "needs": [],
   "title": "Spätkauf gegen Supermarkt: Wer verdient mehr?",
   "created": 1795633613.641933
+ },
+ "2026-11-26 18:00": {
+  "category": "nachricht",
+  "topic": "Eine unbekannte Nummer schickt dir einen Countdown und befiehlt dir, alle Spiegel in deiner Wohnung abzuhängen – bis du in einem Spiegel eine Bewegung siehst, die du nicht gemacht hast.",
+  "trend": null,
+  "script": {
+   "title": "Unbekannte Nachricht blockiert alle Spiegel im Haus",
+   "description": "Drei Uhr zwölf und eine unheimliche Nachricht auf dem Handy!\nDu befolgst die mysteriösen Befehle, bis du im Spiegel eine Bewegung siehst, die du nicht gemacht hast.\nWelchen Spiegel würdest du zuerst abhängen?",
+   "hashtags": [
+    "#shorts",
+    "#mystery",
+    "#countdown",
+    "#creepystory",
+    "#viral",
+    "#fyp",
+    "#spiegel",
+    "#geheimnis"
+   ],
+   "tags": [
+    "unbekannte nachricht",
+    "mystery geschichte",
+    "spiegel",
+    "countdown",
+    "grusel",
+    "thriller",
+    "handy nachricht",
+    "schlafzimmer"
+   ],
+   "thumbnail": {
+    "place": "bathroom",
+    "time": "night",
+    "actor": "du",
+    "action": "shocked",
+    "emotion": "shocked",
+    "props": [
+     "glass"
+    ],
+    "weather": "cold",
+    "image": "Close-up of a terrified person in a dark room looking at a glowing smartphone with a creepy reflection in a mirror behind them, dramatic lighting, high contrast",
+    "text": "SCHAU NICHT HIN"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "schwarz",
+     "hat": "",
+     "hair": "kurz",
+     "hair_color": "schwarz",
+     "gender": "w",
+     "skin": "hell"
+    }
+   },
+   "scenes": [
+    {
+     "text": "Eine unbekannte Nummer schickt dir einen tödlichen Countdown.",
+     "image": "Person lying in bed in a dark room while a smartphone screen lights up on the nightstand",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "Unbekannte Nummer"
+     ],
+     "hud": "TAG 1 · 3:12 UHR",
+     "status": "",
+     "overlay": null,
+     "see": "Eine unbekannte Nummer schickt eine Nachricht im dunklen Zimmer auf dem Handy.",
+     "time": "night",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "freeze",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "shot": "graphic",
+     "mood": "scary",
+     "graphic": {
+      "type": "message",
+      "kicker": "UNBEKANNT",
+      "lines": [
+       "In sieben Tagen",
+       "beginnt es.",
+       "Vertrau niemandem.",
+       "!Öffne nicht die Tür."
+      ]
+     },
+     "who_desc": "",
+     "place_desc": "dark bedroom with a bed and a large wall mirror under moonlight"
+    },
+    {
+     "text": "Und plötzlich siehst du im Spiegel eine Bewegung, die du nicht gemacht hast.",
+     "image": "Close-up of a person sitting up in bed and staring at a glowing phone screen with a shock expression",
+     "who": [
+      "du"
+     ],
+     "place": "bathroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Nachricht"
+     ],
+     "status": "",
+     "overlay": {
+      "type": "message",
+      "kicker": "UNBEKANNT",
+      "lines": [
+       "In sieben Tagen",
+       "beginnt es.",
+       "Vertau niemandem.",
+       "!Häng alle Spiegel auf."
+      ]
+     },
+     "see": "Du siehst im Badezimmerspiegel eine Bewegung, die du nicht gemacht hast.",
+     "time": "night",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "close",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": ""
+    },
+    {
+     "text": "Du hältst es für einen dummen Scherz und löschst den Chat.",
+     "image": "Person tapping the phone screen to delete a message with an annoyed facial expression",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "Scherz"
+     ],
+     "status": "",
+     "overlay": null,
+     "see": "Du hältst es für einen Scherz und löschst den Chat auf dem Handy.",
+     "time": "night",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "idle",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": ""
+    },
+    {
+     "text": "Dann kommt der Beweis. Eine Nachricht mit einer perfekten Kleinigkeit.",
+     "image": "Phone screen lighting up again with a new notification message on the nightstand",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "Beweis"
+     ],
+     "status": "",
+     "overlay": {
+      "type": "tag",
+      "text": "DER BEWEIS"
+     },
+     "see": "Eine neue Nachricht kommt auf dem Display mit einer perfekten Kleinigkeit.",
+     "time": "night",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "worried",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "shot": "insert",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": ""
+    },
+    {
+     "text": "In deinem Kühlschrank liegen eine halbe Pizza und ein kaputter Regenschirm.",
+     "image": "Open refrigerator in a dark kitchen showing half a pizza box and a broken umbrella inside",
+     "who": [],
+     "place": "kitchen",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Kühlschrank"
+     ],
+     "status": "",
+     "overlay": {
+      "type": "checklist",
+      "title": "KÜHLTEILE",
+      "items": [
+       [
+        "Pizza",
+        true
+       ],
+       [
+        "Regenschirm",
+        true
+       ]
+      ]
+     },
+     "see": "In deinem Kühlschrank liegen eine halbe Pizza und ein kaputter Regenschirm.",
+     "time": "night",
+     "props": [
+      "fridge",
+      "message"
+     ],
+     "actors": [],
+     "shot": "insert",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": ""
+    },
+    {
+     "text": "Du läufst zur Küche, öffnest die Tür und erstarrst vor Schreck.",
+     "image": "Person standing shocked in front of an open refrigerator with wide eyes",
+     "who": [
+      "du"
+     ],
+     "place": "kitchen",
+     "camera": "zoom_in",
+     "sfx": "boom",
+     "highlight": [
+      "Schreck"
+     ],
+     "status": "",
+     "overlay": null,
+     "see": "Du läufst zur Küche, öffnest die Tür und erstarrst vor Schreck.",
+     "time": "night",
+     "props": [
+      "fridge"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "freeze",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": ""
+    },
+    {
+     "text": "Es stimmt. Jedes einzelne Wort dieser völlig fremden Person.",
+     "image": "Close-up of the half pizza and broken umbrella inside the cold fridge light",
+     "who": [],
+     "place": "kitchen",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Es stimmt"
+     ],
+     "status": "",
+     "overlay": {
+      "type": "stamp",
+      "text": "WAHR",
+      "color": "red"
+     },
+     "see": "Es stimmt jedes einzelne Wort dieser völlig fremden Person.",
+     "time": "night",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "tremble",
+       "emotion": "scared",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "close",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": ""
+    },
+    {
+     "text": "Der Countdown läuft. Noch sieben Tage bis zu dem, was kommt.",
+     "image": "Digital countdown clock showing seven days left glowing in a dark room",
+     "who": [],
+     "place": "livingroom",
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "Countdown"
+     ],
+     "hud": "TAG 1",
+     "status": "",
+     "overlay": {
+      "type": "chapter",
+      "value": "7",
+      "text": "TAGE ÜBRIG"
+     },
+     "see": "Der Countdown läuft. Noch sieben Tage bis zu dem, was kommt.",
+     "time": "night",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "tense",
+     "graphic": {
+      "type": "chapter",
+      "value": "7",
+      "text": "TAGE ÜBRIG"
+     },
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Tag fünf. Der nächste Befehl lautet: Versteck alle Schlüssel.",
+     "image": "Person hiding house keys inside a dark kitchen drawer in a hurry",
+     "who": [
+      "du"
+     ],
+     "place": "hallway",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "Tag fünf"
+     ],
+     "hud": "TAG 5",
+     "status": "",
+     "overlay": {
+      "type": "chapter",
+      "value": "5",
+      "text": "TAGE ÜBRIG"
+     },
+     "see": "Tag fünf. Der nächste Befehl lautet: Versteck alle Schlüssel.",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "tense",
+     "graphic": {
+      "type": "chapter",
+      "value": "5",
+      "text": "TAG FÜNF"
+     },
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Du gehst in den Flur und tust genau das, was verlangt wird.",
+     "image": "Person locking the front door from the inside and looking nervously through the peephole",
+     "who": [
+      "du"
+     ],
+     "place": "hallway",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Flur"
+     ],
+     "status": "",
+     "overlay": null,
+     "see": "Du gehst in den Flur und tust genau das, was verlangt wird.",
+     "time": "day",
+     "props": [
+      "vorhängeschloss"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "walk",
+       "emotion": "worried",
+       "emote": "",
+       "pos": "left",
+       "to": "right",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": ""
+    },
+    {
+     "text": "Tag drei. Die Anweisung wird drastischer. Nimm ein Tuch und bedecke jeden Spiegel.",
+     "image": "Person standing on a chair in the hallway hanging a dark cloth over a large wall mirror",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "Tag drei"
+     ],
+     "hud": "TAG 3",
+     "status": "",
+     "overlay": {
+      "type": "chapter",
+      "value": "3",
+      "text": "TAGE ÜBRIG"
+     },
+     "see": "Tag drei. Die Anweisung wird drastischer. Nimm ein Tuch und bedecke jeden Spiegel.",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "tense",
+     "graphic": {
+      "type": "chapter",
+      "value": "3",
+      "text": "TAG DREI"
+     },
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Jeder einzelne Spiegel in der Wohnung verschwindet hinter dicken Decken.",
+     "image": "Living room with all mirrors and glass surfaces completely covered with dark blankets",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "Spiegel"
+     ],
+     "status": "",
+     "overlay": null,
+     "see": "Jeder einzelne Spiegel in der Wohnung verschwindet hinter dicken Decken.",
+     "time": "day",
+     "props": [
+      "tuch",
+      "mirror"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "worried",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": ""
+    },
+    {
+     "text": "Im Fernsehen läuft eine seltsame Eilmeldung über Stromausfälle im Viertel.",
+     "image": "Television screen showing a breaking news broadcast with red warning banners in a dark room",
+     "who": [],
+     "place": "livingroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Eilmeldung"
+     ],
+     "status": "",
+     "overlay": {
+      "type": "news",
+      "kicker": "NACHRICHTEN",
+      "text": "STROMAUSFALL",
+      "sub": "In ganz Berlin"
+     },
+     "see": "Im Fernsehen läuft eine seltsame Eilmeldung über Stromausfälle im Viertel.",
+     "time": "night",
+     "props": [
+      "tv"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "event",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": ""
+    },
+    {
+     "text": "Tag eins. Nur noch der alte Spiegel im Badezimmer ist nicht verhängt.",
+     "image": "Person standing in the dark bathroom looking nervously at the uncovered mirror on the wall",
+     "who": [
+      "du"
+     ],
+     "place": "bathroom",
+     "camera": "zoom_in",
+     "sfx": "tick",
+     "highlight": [
+      "Tag eins"
+     ],
+     "hud": "TAG 1",
+     "status": "",
+     "overlay": {
+      "type": "chapter",
+      "value": "1",
+      "text": "TAG ÜBRIG"
+     },
+     "see": "Tag eins. Nur noch der alte Spiegel im Badezimmer ist nicht verhängt.",
+     "time": "night",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "panic",
+     "graphic": {
+      "type": "chapter",
+      "value": "1",
+      "text": "TAG EINS"
+     },
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Du willst das Tuch holen und wirfst einen letzten Blick hinein.",
+     "image": "Close-up of a person staring directly into the bathroom mirror with wide, fearful eyes",
+     "who": [
+      "du"
+     ],
+     "place": "bathroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Blick"
+     ],
+     "status": "",
+     "overlay": null,
+     "see": "Du willst das Tuch holen und wirfst einen letzten Blick hinein.",
+     "time": "night",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "scared",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "close",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": ""
+    },
+    {
+     "text": "Dein Spiegelbild steht still, obwohl du deinen Kopf gedreht hast?",
+     "image": "Bathroom mirror showing a reflection that is looking straight ahead while the person outside has turned their head away in horror",
+     "who": [
+      "du"
+     ],
+     "place": "bathroom",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Spiegelbild"
+     ],
+     "status": "",
+     "overlay": {
+      "type": "stamp",
+      "text": "STOP",
+      "color": "red"
+     },
+     "see": "Dein Spiegelbild steht still, obwohl du deinen Kopf gedreht hast?",
+     "time": "night",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "freeze",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "close",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": ""
+    },
+    {
+     "text": "Das Handy vibriert auf der Waschmaschine. Eine neue Nachricht.",
+     "image": "Smartphone lying on the washing machine flashing with an incoming message notification",
+     "who": [],
+     "place": "bathroom",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "Nachricht"
+     ],
+     "status": "",
+     "overlay": null,
+     "see": "Das Handy vibriert auf der Waschmaschine. Eine neue Nachricht.",
+     "time": "night",
+     "props": [],
+     "actors": [],
+     "shot": "insert",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": ""
+    },
+    {
+     "text": "Du schaust auf das Display und liest die allerletzte Zeile.",
+     "image": "Close-up of the glowing smartphone screen in the dark bathroom with a short text message",
+     "who": [
+      "du"
+     ],
+     "place": "bathroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Display"
+     ],
+     "status": "",
+     "overlay": {
+      "type": "phone",
+      "mode": "lock",
+      "value": "03:12",
+      "kicker": "UNBEKANNT",
+      "text": "Danke fürs Aufmachen."
+     },
+     "see": "Du schaust auf das Display und liest die allerletzte Zeile.",
+     "time": "night",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "shot": "graphic",
+     "mood": "panic",
+     "graphic": {
+      "type": "phone",
+      "mode": "lock",
+      "value": "00:00",
+      "kicker": "UNBEKANNT",
+      "text": "Ich stehe hinter dir."
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": ""
+    },
+    {
+     "text": "Hinter dir im Raum fängt plötzlich das Licht an zu flackern.",
+     "image": "Bathroom light bulbs flickering wildly while a shadowy figure appears behind the person",
+     "who": [
+      "du"
+     ],
+     "place": "bathroom",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Licht"
+     ],
+     "status": "",
+     "overlay": null,
+     "see": "Hinter dir im Raum fängt plötzlich das Licht an zu flackern.",
+     "time": "night",
+     "weather": "storm",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "cower",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": ""
+    }
+   ],
+   "hud": "TAG 1 · 3:12 UHR",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [],
+  "title": "Unbekannte Nachricht blockiert alle Spiegel im Haus",
+  "created": 1795689471.5268664
  }
 }

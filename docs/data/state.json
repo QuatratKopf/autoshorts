@@ -1,5 +1,5 @@
 {
- "last_category": "motivation",
+ "last_category": "nachricht",
  "done_slots": [
   "2026-11-08 18:00",
   "2026-11-11 18:00",
@@ -63,7 +63,7 @@
   "qrsauuc3k",
   "qa5v1ywsb"
  ],
- "last_stats": 1795687718.6564841,
+ "last_stats": 1795689490.327047,
  "next_id": 218,
  "connected": {
   "youtube": {
@@ -80,14 +80,14 @@
   "video": 217
  },
  "cat_credit": {
-  "fakten": -2.429999999999996,
-  "tiere": 2.770000000000003,
-  "whatif": 0.5200000000000056,
-  "comedy": 0.5400000000000014,
-  "vergleich": -2.6199999999999966,
-  "motivation": -2.6199999999999966,
-  "grusel": -2.1899999999999986,
-  "nachricht": 3.450000000000003
+  "fakten": -1.359999999999996,
+  "tiere": 3.8900000000000032,
+  "whatif": 1.5900000000000056,
+  "comedy": 1.8900000000000015,
+  "vergleich": -1.4199999999999966,
+  "motivation": -1.4199999999999966,
+  "grusel": -1.6899999999999986,
+  "nachricht": -4.059999999999998
  },
  "bounce_songs": [
   "cc:a0374037-c7fc-4467-94de-28d2e36fc183",
