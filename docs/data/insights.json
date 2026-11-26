@@ -1,5 +1,5 @@
 {
- "updated": 1795698641.170259,
+ "updated": 1795700434.8614733,
  "enough": true,
  "counted": 44,
  "total": 46,
@@ -100,9 +100,9 @@
    "name": "👻 Grusel",
    "n": 2,
    "avg_views": 424,
-   "avg_likes": 18.0,
-   "like_rate": 4.25,
-   "avg_score": 724
+   "avg_likes": 18.5,
+   "like_rate": 4.37,
+   "avg_score": 731
   }
  ],
  "weights": {
@@ -128,13 +128,13 @@
  ],
  "words_bad": [
   "remix",
-  "erkennst",
   "lied",
-  "glas",
+  "erkennst",
   "bekanntes",
+  "glas",
   "niemand",
-  "eines",
-  "scheibe"
+  "klassikers",
+  "jede"
  ],
  "top": [
   {
@@ -194,10 +194,10 @@
    "title": "Starre nie im Dunkeln in den Spiegel",
    "category": "grusel",
    "views": 354,
-   "likes": 15,
+   "likes": 16,
    "comments": 2,
    "shares": 0,
-   "score": 639
+   "score": 654
   },
   {
    "id": 196,
