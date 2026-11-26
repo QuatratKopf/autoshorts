@@ -1,5 +1,5 @@
 {
- "updated": 1795700434.8614733,
+ "updated": 1795702243.8973017,
  "enough": true,
  "counted": 44,
  "total": 46,
@@ -63,10 +63,10 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 8,
-   "avg_views": 1648,
+   "avg_views": 1649,
    "avg_likes": 44.4,
    "like_rate": 2.69,
-   "avg_score": 2325
+   "avg_score": 2326
   },
   {
    "slug": "storys",
@@ -81,10 +81,10 @@
    "slug": "motivation",
    "name": "🔥 Motivation",
    "n": 1,
-   "avg_views": 922,
+   "avg_views": 923,
    "avg_likes": 49.0,
    "like_rate": 5.31,
-   "avg_score": 1697
+   "avg_score": 1698
   },
   {
    "slug": "musik",
@@ -99,16 +99,16 @@
    "slug": "grusel",
    "name": "👻 Grusel",
    "n": 2,
-   "avg_views": 424,
+   "avg_views": 425,
    "avg_likes": 18.5,
-   "like_rate": 4.37,
-   "avg_score": 731
+   "like_rate": 4.35,
+   "avg_score": 732
   }
  ],
  "weights": {
   "fakten": 1.05,
   "grusel": 0.5,
-  "tiere": 1.13,
+  "tiere": 1.12,
   "whatif": 1.08,
   "comedy": 1.36,
   "vergleich": 1.2,
@@ -117,7 +117,7 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2285 Aufrufe, 2.05 % Likes).",
-  "Schwächste Kategorie: 👻 Grusel (Ø 424 Aufrufe) – kommt seltener dran.",
+  "Schwächste Kategorie: 👻 Grusel (Ø 425 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2296 zu 1118 Punkte).",
   "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2404 zu 1852 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
@@ -128,13 +128,13 @@
  ],
  "words_bad": [
   "remix",
-  "lied",
-  "erkennst",
-  "bekanntes",
   "glas",
+  "erkennst",
+  "lied",
+  "bekanntes",
   "niemand",
-  "klassikers",
-  "jede"
+  "eines",
+  "klassikers"
  ],
  "top": [
   {
@@ -193,21 +193,21 @@
    "id": 205,
    "title": "Starre nie im Dunkeln in den Spiegel",
    "category": "grusel",
-   "views": 354,
+   "views": 357,
    "likes": 16,
    "comments": 2,
    "shares": 0,
-   "score": 654
+   "score": 657
   },
   {
    "id": 196,
    "title": "Jede Scheibe ein Ton: Lo-Fi-Remix eines Klassikers",
    "category": "musik",
-   "views": 354,
+   "views": 355,
    "likes": 2,
    "comments": 0,
    "shares": 0,
-   "score": 384
+   "score": 385
   },
   {
    "id": 44,
