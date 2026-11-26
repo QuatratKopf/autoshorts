@@ -8587,7 +8587,7 @@
   "id": 224,
   "category": "tiere",
   "topic": "Das Tier, das im dunklen Ozean leuchtet und mit einem eigenen Bio-Scheinwerfer seine Beute blendet",
-  "status": "rendered",
+  "status": "published",
   "created": 1795721370.0053473,
   "title": "Tiefsee-Anglerfisch: Die Falle aus Licht",
   "description": "Dieses Tier jagt im Dunkeln mit einem eigenen Scheinwerfer!\nErfahre, wie der Anglerfisch seine Beute mit Biolumineszenz in die Falle lockt.\nWürdest du dich in die Tiefsee trauen?",
@@ -8621,6 +8621,12 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "zernio_id": "6b088b06cf31105e529ba2ec",
+  "yt_status": "Zernio: published",
+  "yt_id": "OlgY6-ABN_k",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6b088b06cf31105e529ba2ec",
+  "error": null
  }
 ]
