@@ -1,5 +1,5 @@
 {
- "updated": 1795696787.1841595,
+ "updated": 1795698641.170259,
  "enough": true,
  "counted": 44,
  "total": 46,
@@ -36,10 +36,10 @@
    "slug": "liebe",
    "name": "💕 Liebe",
    "n": 1,
-   "avg_views": 1514,
+   "avg_views": 1515,
    "avg_likes": 64.0,
-   "like_rate": 4.23,
-   "avg_score": 2474
+   "like_rate": 4.22,
+   "avg_score": 2475
   },
   {
    "slug": "mysterien",
@@ -57,7 +57,7 @@
    "avg_views": 1690,
    "avg_likes": 46.4,
    "like_rate": 2.75,
-   "avg_score": 2388
+   "avg_score": 2389
   },
   {
    "slug": "fakten",
@@ -119,7 +119,7 @@
   "Stärkste Kategorie: 🤪 Comedy (Ø 2285 Aufrufe, 2.05 % Likes).",
   "Schwächste Kategorie: 👻 Grusel (Ø 424 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2296 zu 1118 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2403 zu 1852 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2404 zu 1852 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -128,13 +128,13 @@
  ],
  "words_bad": [
   "remix",
-  "bekanntes",
   "erkennst",
   "lied",
   "glas",
+  "bekanntes",
   "niemand",
-  "scheibe",
-  "eines"
+  "eines",
+  "scheibe"
  ],
  "top": [
   {
@@ -151,11 +151,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2601,
+   "views": 2602,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3441
+   "score": 3442
   },
   {
    "id": 77,
