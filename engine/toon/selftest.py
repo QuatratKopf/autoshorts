@@ -79,6 +79,44 @@ def _mirror():
     assert stage.mirror_sticker(rig.Look.from_spec(cast_m["du"], "du", 0)).getbbox(), "Titelbild-Motiv"
 
 
+def _angler():
+    """Prüfung 26.11.2026 (Video 222 „Tiefsee-Anglerfisch“): in jedem Satz der Anglerfisch im passenden Zustand – kein Clownfisch, kein Menschengebiss, kein leerer Grund."""
+    T = [("Dieser Tiefseefisch lockt seine Beute mit einem Bio-Scheinwerfer.", [{"id": "du", "action": "shocked"}], [], "", "lure"),
+         ("Ab eintausend Metern Tiefe herrscht im Ozean absolute, eiskalte Finsternis.", [], [], "event", "far"),
+         ("Er bewegt den Leuchtkörper direkt vor seinem Maul wie einen Wurm.", [{"id": "angler", "action": "walk"}], [], "", "lure"),
+         ("Kleine Fische denken an fette Beute und schwimmen direkt ins Licht.", [], [], "event", "prey"),
+         ("Doch sobald sie nah genug sind, reißt der Anglerfisch sein Riesenmaul auf.", [{"id": "angler", "action": "shocked", "say": "HI!"}], [], "", "gape"),
+         ("Seine Zähne stehen nach innen gebogen, sodass kein Opfer mehr entkommen kann.", [], [{"type": "lib_gebiss"}], "insert", "gape"),
+         ("Sein Magen ist extrem dehnbar und verdaut Beute, die doppelt so groß ist.", [{"id": "angler"}], [], "", "full"),
+         ("Das wäre, als würdest du ein Schnitzel essen, das doppelt so groß ist wie du.", [{"id": "du", "action": "walk"}], [{"type": "table"}], "", None),
+         ("Du denkst, das Männchen jagt genauso geschickt wie das Weibchen?", [{"id": "angler", "action": "think"}], [], "", "pair"),
+         ("Stattdessen beißt sich das Männchen am Körper des Weibchens fest.", [{"id": "angler"}], [], "close", "male"),
+         ("Mit der Zeit verwächst seine Haut vollständig mit ihrem Blutkreislauf.", [], [], "", "fuse"),
+         ("Am Ende schrumpft es zu einem dauerhaften Organ des Weibchens zusammen.", [{"id": "angler"}], [], "", "fused"),
+         ("Bleibt nur die Frage, was sonst noch in der tiefen Finsternis lauert.", [{"id": "du", "action": "look_around", "hold": "flashlight"}], [{"type": "flashlight"}], "", "far"),
+         ("Denn dort drüben wartet schon das nächste spitze Gebiss.", [{"id": "angler"}], [{"type": "lib_gebiss"}], "", "gape")]
+    sd = stage.direct([{"text": t_, "place": "kitchen" if w_ is None else "underwater", "time": "night", "actors": [dict(a_) for a_ in ac_], "props": [dict(q_) for q_ in pr_], "shot": sh_, "overlay": None}
+                       for t_, ac_, pr_, sh_, w_ in T], [(k * 4.0, k * 4.0 + 4.0) for k in range(len(T))], "Das Tier, das im dunklen Ozean leuchtet", "tiere")
+    cast_a = {"du": {"shirt": "blau", "gender": "w", "hair": "curly"}, "angler": {"kind": "fish", "speaks": True}}
+    for n_, (sc_, (_, _, _, _, w_)) in enumerate(zip(sd, T)):
+        acts = sc_.get("actors") or []
+        if w_ is None:
+            assert [a for a in acts if not a.get("kind")] and not any(a.get("kind") for a in acts) and places.resolve(stage.backdrop(sc_)) != "underwater", f"Vergleich mit dir spielt bei dir: {acts}"
+            continue
+        assert len(acts) == 1 and acts[0].get("kind") == "angler" and acts[0].get("action") == w_, f"Satz {n_}: Anglerfisch „{w_}“ erwartet: {acts}"
+        assert not acts[0].get("say") and not sc_.get("props") and sc_.get("shot") in ("", None) and sc_.get("time") == "night", f"Satz {n_}: keine Sprechblase, kein Gebiss, Tiefsee: {sc_.get('props')} {sc_.get('shot')}"
+    for sc_ in sd:
+        for t_ in (0.3, 2.2):
+            frame(sc_, cast_a, t_)
+    for a_ in ("", "lure", "prey", "gape", "full", "far", "dark", "pair", "male", "fuse", "fused"):
+        for f_ in (1, -1):
+            im_, _, _, _ = extras.creature("angler", 1.7, f_, 0.0, "", 1.0, a_)
+            assert im_.getbbox(), f"Anglerfisch {a_} leer"
+    assert stage.poster_hero("Tiefsee-Anglerfisch: Die Falle aus Licht", sd, cast_a) == "angler", "Titelbild: der Anglerfisch"
+    sd2 = stage.direct([{"text": "Der Clownfisch wohnt in einer Anemone.", "place": "underwater", "actors": [{"id": "fisch", "kind": "fish"}], "props": []}], [(0, 4)], "Der Clownfisch", "tiere")
+    assert not any(a.get("kind") == "angler" for a in sd2[0].get("actors") or []), "anderer Fisch bleibt, wie er ist"
+
+
 def _frostfrog():
     """Prüfung 24.11.2026 (Video 199 „Der Waldfrosch“): der Frosch ist braun und in jedem Bild so, wie der Satz ihn beschreibt – gefroren im Eis, auftauend, lebendig."""
     T = [("Dieser Frosch friert im Winter komplett ein.", [{"id": "frosch", "action": "freeze"}], [{"type": "ice"}], ""),
@@ -181,6 +219,7 @@ def main():
         errors.append(f"Bibliothek laden: {e}")
     check("Mathe-Schaubilder", _math)
     check("Waldfrosch: gefroren, auftauend, lebendig", _frostfrog)
+    check("Anglerfisch: Angel, Beute, Maul, Magen, Männchen", _angler)
     check("Spiegel-Video: Blick in den Spiegel", _mirror)
     all_places = sorted(set(places.PLACES) | set(places.OUTDOOR_SPECS))
     for pl in all_places:

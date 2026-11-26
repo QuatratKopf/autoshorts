@@ -40254,12 +40254,12 @@
    }
   ]
  },
- "gebiss": {
-  "name": "gebiss",
+ "zahnprothese": {
+  "name": "zahnprothese",
   "aliases": [
-   "zähne",
-   "artificial teeth",
-   "protehse"
+   "zahnprothesen",
+   "künstliches gebiss",
+   "dritte zähne"
   ],
   "height_m": 0.1,
   "sky": false,

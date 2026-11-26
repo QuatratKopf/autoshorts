@@ -4008,13 +4008,122 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
         mx_ = rx_ - 12
         ell(mx_ - 16, by + 4, mx_ + 20, by + 34, (240, 150, 140), shade=0)                                   # kleiner Schnabelmund
         d.line((*P(mx_ - 10, by + 19), *P(mx_ + 16, by + 19)), fill=INK, width=max(2, int(4 * k)))
+    elif kind == "angler":
+        # Tiefsee-Anglerfisch (Prüfung 26.11.2026, Video 222 – gezeigt wurde ein lächelnder orangefarbener Clownfisch): dunkler, kugeliger Körper, riesiges
+        # Maul mit langen, nach innen gebogenen Nadelzähnen, kleines blasses Auge, an der Stirn die „Angel“ mit leuchtendem Köder vor dem Maul.
+        # action: „lure“ Köder zappelt · „prey“ ein kleiner Fisch schwimmt ins Licht · „gape“ Maul reißt auf · „full“ Magen mit riesiger Beute gedehnt ·
+        # „far“ nur der Lichtpunkt, der Fisch fast unsichtbar · „dark“ Licht aus · „pair“ winziges Männchen daneben · „male“ Männchen beißt sich am Bauch
+        # fest · „fuse“ Adern wachsen zusammen · „fused“ das Männchen ist nur noch ein kleiner Anhang.
+        fly = True
+        k = k * 0.86
+        cx -= 46 * k * f
+        by = -300 + bob * 1.2
+        col, belly = (118, 86, 104), (164, 124, 128)
+        mcol = (176, 140, 150)
+        gape = action == "gape"
+        opn = min(1.0, max(0.0, t % 1000 / 0.22)) if gape else (0.16 + 0.1 * (math.sin(t * 2.2) * 0.5 + 0.5)) + mouth * 0.2
+        wag = math.sin(t * 5) * 20
+        rx_, ry_ = 150, 124
+        full = action == "full"
+        fg = min(1.0, max(0.0, t / 0.9)) if full else 0.0
+        poly([(-rx_ + 16, by - 16), (-rx_ - 84, by - 76 + wag), (-rx_ - 60, by + wag * 0.4), (-rx_ - 84, by + 76 + wag), (-rx_ + 16, by + 16)], _dark(col, 0.1))   # Schwanzflosse
+        for i_ in range(5):                                                                                 # stachelige Rückenflosse
+            sx_ = -96 + i_ * 26
+            poly([(sx_ - 12, by - ry_ * 0.86 + abs(sx_ + 40) * 0.12), (sx_ - 6, by - ry_ - 34 + i_ * 3), (sx_ + 14, by - ry_ * 0.86 + abs(sx_ + 40) * 0.12)], _dark(col, 0.12), shade=0)
+        if full:                                                                                            # gedehnter Magen: hängt als heller Sack unter dem Körper, darin der Umriss der Beute
+            ell(-128 - 22 * fg, by + 30, 64 + 22 * fg, by + 110 + 150 * fg, belly)
+            if fg > 0.5:
+                px_, py_ = -28, by + 100 + 88 * fg
+                d.polygon([P(px_ - 58, py_), P(px_ - 100, py_ - 30), P(px_ - 100, py_ + 30)], fill=_dark(belly, 0.42))
+                d.ellipse(B(px_ - 70, py_ - 36, px_ + 74, py_ + 36), fill=_dark(belly, 0.42))
+                d.ellipse(B(px_ + 36, py_ - 16, px_ + 50, py_ - 2), fill=_light(belly, 0.5))
+        au, al = math.radians(6 + opn * 30), math.radians(26 + opn * 34)
+        apex = (-34, by + 26)
+        up = (rx_ * math.cos(-au) + 4, by + ry_ * math.sin(-au))
+        lo_ = (rx_ * math.cos(al) + 22, by + ry_ * math.sin(al) + 8)
+        ell(-rx_, by - ry_, rx_, by + ry_, col)
+        d.chord(B(-rx_ + 8, by - ry_ * 0.3, rx_ - 20, by + ry_ - 4), 15, 165, fill=belly)                    # heller Bauch
+        for sx_, sy_, r_ in ((-90, -0.5, 10), (-40, -0.66, 12), (-70, -0.12, 9), (10, -0.7, 8), (-112, 0.1, 8)):   # Warzen
+            ell(sx_ - r_, by + sy_ * ry_ - r_ * 0.8, sx_ + r_, by + sy_ * ry_ + r_ * 0.8, _dark(col, 0.3), shade=0, line=False)
+        d.ellipse(B(-rx_, by - ry_, rx_, by + ry_), outline=INK, width=o)
+        arc = [(rx_ * math.cos(-au + (al + au) * i_ / 6) + 30, by + ry_ * math.sin(-au + (al + au) * i_ / 6)) for i_ in range(7)]
+        d.polygon([P(*apex), P(*up)] + [P(*q_) for q_ in arc] + [P(*lo_)], fill=(52, 14, 26))               # Maul: dunkler Schlund
+        d.polygon([P(*apex), P(apex[0] + 70, apex[1] - 4 - opn * 10), P(apex[0] + 92, apex[1] + 22), P(apex[0] + 60, apex[1] + 30 + opn * 14)], fill=(150, 50, 66))   # Zunge
+        stroke([lo_, ((apex[0] + lo_[0]) / 2, (apex[1] + lo_[1]) / 2 + 12), apex], 20, _dark(col, 0.08))    # Unterkiefer (steht vor)
+        stroke([up, ((apex[0] + up[0]) / 2, (apex[1] + up[1]) / 2 - 6), apex], 16, col)                     # Oberlippe
+        tooth = (250, 246, 228)
+        for i_ in range(6):                                                                                 # lange Nadelzähne, nach innen (hinten) gebogen
+            s_ = 0.26 + i_ * 0.135
+            ln = (40 + (i_ % 2) * 20 + opn * 22) * (0.7 + s_ * 0.5)
+            ux, uy = apex[0] + (up[0] - apex[0]) * s_, apex[1] + (up[1] - apex[1]) * s_ + 6
+            tp = [(ux - 9, uy), (ux - 18, uy + ln * 0.6), (ux - 24, uy + ln), (ux - 5, uy + ln * 0.55), (ux + 9, uy)]
+            d.polygon([P(*q_) for q_ in tp], fill=tooth, outline=INK, width=max(1, int(2 * k)))
+            lx_, ly_ = apex[0] + (lo_[0] - apex[0]) * s_, apex[1] + (lo_[1] - apex[1]) * s_ - 8
+            tp = [(lx_ - 9, ly_), (lx_ - 18, ly_ - ln * 0.6), (lx_ - 26, ly_ - ln * 1.05), (lx_ - 5, ly_ - ln * 0.55), (lx_ + 9, ly_)]
+            d.polygon([P(*q_) for q_ in tp], fill=tooth, outline=INK, width=max(1, int(2 * k)))
+        ell(34, by - 84, 66, by - 52, (226, 232, 214), shade=0)                                             # kleines, blasses Auge
+        d.ellipse(B(46, by - 74, 58, by - 62), fill=INK)
+        d.line((*P(22, by - 96), *P(74, by - 80)), fill=INK, width=max(2, int(8 * k)))                      # finstere Braue
+        fl = math.sin(t * 8) * 12
+        poly([(-30, by + 30), (-84, by + 74 + fl), (-10, by + 70)], _dark(col, 0.1))                        # Brustflosse
+        if action in ("male", "fuse", "fused"):                                                             # Zwergmännchen am Bauch des Weibchens
+            mx_, my_ = -70, by + ry_ * 0.86
+            if action == "fused":
+                ell(mx_ - 15, my_ - 6, mx_ + 15, my_ + 26, _dark(col, 0.05))                                # nur noch ein kleiner Anhang
+            else:
+                tw = math.sin(t * 11) * (10 if action == "male" else 3)
+                poly([(mx_ - 4, my_ + 54), (mx_ - 22 + tw, my_ + 88), (mx_ + 22 + tw, my_ + 88), (mx_ + 4, my_ + 54)], _dark(mcol, 0.1), shade=0)
+                ell(mx_ - 19, my_ - 6, mx_ + 19, my_ + 62, mcol)
+                d.ellipse(B(mx_ + 2, my_ + 10, mx_ + 13, my_ + 21), fill=(250, 250, 244), outline=INK, width=max(1, int(2 * k)))
+                d.ellipse(B(mx_ + 6, my_ + 13, mx_ + 11, my_ + 18), fill=INK)
+            if action == "fuse":                                                                            # gemeinsamer Blutkreislauf: Adern wachsen vom Männchen in ihren Körper
+                g_ = min(1.0, max(0.0, t / 1.6))
+                pw = max(2, int((5 + math.sin(t * 7) * 1.6) * k))
+                for vx, vy in ((-120, -40), (-70, -70), (-20, -34)):
+                    pts_ = [(mx_, my_ + 8), (mx_ + (vx - mx_) * 0.5 * g_ + 8, my_ + (by + vy - my_) * 0.5 * g_), (mx_ + (vx - mx_) * g_, my_ + (by + vy - my_) * g_)]
+                    d.line([P(*q_) for q_ in pts_], fill=(226, 70, 84), width=pw, joint="curve")
+        if action == "pair":                                                                                # winziges Männchen schwimmt neben dem Weibchen – ohne Angel, ohne Licht
+            mx_, my_ = 150 + math.sin(t * 2) * 14, by + 176 + math.cos(t * 3) * 8
+            tw = math.sin(t * 12) * 8
+            poly([(mx_ + 30, my_), (mx_ + 62, my_ - 18 + tw), (mx_ + 62, my_ + 18 + tw)], _dark(mcol, 0.1), shade=0)
+            ell(mx_ - 34, my_ - 18, mx_ + 34, my_ + 18, mcol)
+            d.ellipse(B(mx_ - 24, my_ - 10, mx_ - 13, my_ + 1), fill=(250, 250, 244), outline=INK, width=max(1, int(2 * k)))
+            d.ellipse(B(mx_ - 22, my_ - 7, mx_ - 17, my_ - 2), fill=INK)
+        if action in ("far", "dark"):                                                                       # in der Finsternis bleibt vom Fisch nur ein Schatten
+            r_, g_c, b_, a_ = im.split()
+            q_ = 0.2 if action == "far" else 0.36
+            im = Image.merge("RGBA", (r_.point(lambda v: int(v * q_)), g_c.point(lambda v: int(v * q_ * 1.05)), b_.point(lambda v: int(v * q_ * 1.3)), a_))
+            d = ImageDraw.Draw(im, "RGBA")
+        wig = math.sin(t * (9 if action == "lure" else 3)) * (30 if action == "lure" else 10)
+        wig2 = math.cos(t * (7 if action == "lure" else 2.3)) * (18 if action == "lure" else 6)
+        lxy = (246 + wig, by - 104 + wig2)
+        rod = [(40, by - ry_ + 6), (90, by - ry_ - 104), (190 + wig * 0.4, by - ry_ - 112), (lxy[0], lxy[1] - 22)]
+        stroke(rod, 9, _dark(col, 0.06) if action not in ("far", "dark") else (30, 26, 40))                 # die Angel
+        if action == "dark":
+            ell(lxy[0] - 17, lxy[1] - 17, lxy[0] + 17, lxy[1] + 17, (58, 70, 78), shade=0)
+        else:
+            pul = 1 + 0.08 * math.sin(t * 6)
+            for i_ in range(16):                                                                            # Leuchtkörper mit weichem Schein
+                r_ = (132 - i_ * 7) * pul
+                d.ellipse(B(lxy[0] - r_, lxy[1] - r_, lxy[0] + r_, lxy[1] + r_), fill=(150, 255, 226, 9 + i_))
+            ell(lxy[0] - 19, lxy[1] - 19, lxy[0] + 19, lxy[1] + 19, (190, 255, 232), shade=0)
+            d.ellipse(B(lxy[0] - 9, lxy[1] - 11, lxy[0] + 5, lxy[1] + 3), fill=(255, 255, 255))
+        if action == "prey":                                                                                # ein kleiner Fisch schwimmt neugierig auf das Licht zu
+            g_ = min(1.0, max(0.0, t / 2.6))
+            px_, py_ = 318 - 30 * g_ + math.sin(t * 5) * 4, lxy[1] + 96 - 40 * g_
+            tw = math.sin(t * 13) * 7
+            pc = (150, 196, 214)
+            poly([(px_ + 34, py_), (px_ + 70, py_ - 24 + tw), (px_ + 70, py_ + 24 + tw)], _dark(pc, 0.1), shade=0)
+            ell(px_ - 40, py_ - 24, px_ + 40, py_ + 24, pc)
+            d.ellipse(B(px_ - 30, py_ - 15, px_ - 12, py_ + 3), fill=(250, 250, 244), outline=INK, width=max(1, int(2 * k)))
+            d.ellipse(B(px_ - 27, py_ - 10, px_ - 19, py_ - 2), fill=INK)
     else:
         return None
     out = im.resize((im.width // S, im.height // S), Image.LANCZOS)
     return out, ax / S, gy / S, fly
 
 
-CREATURES = ("woodfrog", "cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly", "axolotl", "tardigrade", "cheetah", "eagle", "flea", "diver", "fridge", "cow", "pig", "chimp", "mosquito", "fly", "dolphin", "lion", "whale", "chimera", "frog", "platypus", "puffer")
+CREATURES = ("woodfrog", "cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly", "axolotl", "tardigrade", "cheetah", "eagle", "flea", "diver", "fridge", "cow", "pig", "chimp", "mosquito", "fly", "dolphin", "lion", "whale", "chimera", "frog", "platypus", "puffer", "angler")
 
 
 # ------------------------------------------------------------------ Werkstatt & Technik (Motor, Kran, Reifen, Getriebe …)

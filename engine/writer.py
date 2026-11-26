@@ -180,6 +180,10 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
   einfrierenden Waldfrosch zeigt die Regie ihn von selbst in jedem Satz im passenden Zustand – Schneewald beim Einfrieren, Frühlingswald beim Auftauen),
   frog (Pfeilgiftfrosch – knallgelb, action "hop"), platypus (Schnabeltier – action "spur" zeigt den Giftsporn am Hinterbein; Ort "river"),
   puffer (Kugelfisch – action "puff" = bläst sich zur Stachelkugel auf; Ort underwater). Nennt der Satz eines dieser Tiere, zeigt die Regie es von selbst.
+  angler (Tiefsee-Anglerfisch – dunkel, Nadelzähne, leuchtende Angel; action "lure" Köder zappelt, "prey" kleiner Fisch schwimmt ins Licht, "gape" Maul
+  reißt auf, "full" gedehnter Magen, "far" nur der Lichtpunkt, "pair"/"male"/"fuse"/"fused" Zwergmännchen daneben/festgebissen/verwachsen/nur noch Anhang).
+  In einem Video über den Anglerfisch zeigt die Regie ihn von selbst in jedem Satz im passenden Zustand – dort keine Menschen, Taucher oder Grafiken
+  mit erfundenen Zahlen einplanen; der Köder LOCKT die Beute an (er blendet sie nicht).
   Sie spielen am Ort underwater; nie monster oder fish als Ersatz für ein Tier nehmen, das es hier gibt.
   sowie Begriffe als Figur mit Gesicht: agent (KI, Bot, Assistent – oranges Kästchen), virus (Virus, Bakterie, Erreger), cell (Zelle),
   brain (das Gehirn als rosa Figur – für Sätze wie „dein Gehirn schlägt Alarm“; Kennung z. B. "gehirn").

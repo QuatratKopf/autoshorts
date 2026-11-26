@@ -140,6 +140,7 @@ def find_trend(trend_id):
 NO_THINGS = {"bug", "bugs", "glitch", "glitches", "fehler", "regel", "regeln", "spielregel", "spielregeln", "physik", "schwerkraft", "zeit",
              "idee", "problem", "trick", "system", "update", "spiel", "videospiel", "level", "leben", "alltag", "realität", "inventar",
              "haar", "haare", "härchen", "haarwurzel", "haarwurzeln", "haut", "körper", "kopf",
+             "gebiss", "zähne", "zahn", "maul", "magen", "bakteriendüse",   # Körperteile eines Tiers sind kein loser Gegenstand (Video 222: rosa Menschengebiss für die Zähne des Anglerfischs)
              "tönnchen", "tönnchenform", "tönnchenstadium", "tonnenstadium", "eiweiß", "schutz-eiweiß", "schutzeiweiß", "erbgut", "stoffwechsel", "strahlung",
              "wand", "wände", "zimmerwand", "punkt", "punkte",
              "raum", "räume", "raumes", "räumen",     # jede Szene spielt in einem Raum – „suchen dich im Raum“ ist kein Ding (Ausbau 23.11.2026)

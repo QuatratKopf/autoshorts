@@ -814,6 +814,7 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
     od = ImageDraw.Draw(frame, "RGBA")
     focus = 540.0
     xs_now = []
+    lures = []                                         # Anglerfisch: wo sein Köder leuchtet (x, y, Radius des Scheins, an/aus)
     for a in sorted(actors, key=lambda q: q["speaks"]):
         moving = a["x1"] != a["x0"]
         speed = 360 if a["action"] == "walk" else 680
@@ -838,7 +839,7 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
             facing = 1 if x < 600 else -1
         gy = ((H - 70 if a["kind"] else CLOSE_FOOT) if close else places.GROUND) + (18 if a["speaks"] and not close else 0)   # Tiere sind niedrig: ganz im Bild
         a_lift, a_hit = _float_lift(flo, t, a["seed"], 190.0, aloft) if flo else (0.0, None)
-        if a["kind"] in SEA_KINDS and a.get("hero") and not close and not props:
+        if a["kind"] in SEA_KINDS + ("angler",) and a.get("hero") and not close and not props:
             a_lift += (70 if a["kind"] == "jelly" else 150) * scale                          # Schwimmer treiben über dem Grund – frei von der Untertitel-Zeile
         if a["kind"] == "diver" and not close:
             a_lift += 150 * scale                                                             # der Taucher schwebt über Kisten und Stämmen, nicht darin
@@ -867,6 +868,12 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                     _shadow(frame, int(x), gy, int(120 * scale * ksz))
                 frame.paste(im, (int(x - fx), int(gy - fy - hop * ksz - a_lift)), im)
                 head_y = gy - 430 * scale * ksz - a_lift
+                if a["kind"] == "angler":                  # der Köder ist die einzige Lichtquelle: Er beleuchtet das Maul; in der Finsternis bleibt nur der Lichtpunkt
+                    sc_a = scale * 0.9 * ksz
+                    far_a = a["action"] in ("far", "dark")
+                    lures.append((x + facing * 172 * sc_a, gy - hop * ksz - a_lift - 347 * sc_a, (150 if far_a else 330) * sc_a, a["action"] != "dark"))
+                    if x in xs_now:
+                        xs_now.remove(x)
         else:
             action = a["action"]
             tt = t
@@ -962,8 +969,18 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
         extras.draw_mood(over, opt["mood"], t, opt.get("confetti", False))
     if not close:
         glows = [(x + GLOWS[extras.PROP_ALIASES.get(k_, k_)][0],) + GLOWS[extras.PROP_ALIASES.get(k_, k_)][1:] for k_, x in props if extras.PROP_ALIASES.get(k_, k_) in GLOWS]
-        frame = _light(frame, "night" if glows and night and place in places.OUTDOOR else
+        glows += [(lx_, ly_, lr_ if on_ else lr_ * 0.5) for lx_, ly_, lr_, on_ in lures]
+        frame = _light(frame, "spot" if lures else "night" if glows and night and place in places.OUTDOOR else
                        ("spot" if opt.get("noir") and xs_now else _light_kind(place, night, opt.get("mood"), xs_now)), xs_now, glows)
+        if any(on_ for _, _, _, on_ in lures):                # der Schein des Köders liegt hell über dem dunklen Bild
+            gl = Image.new("RGB", (W // 4, H // 4), (0, 0, 0))
+            gd = ImageDraw.Draw(gl)
+            pul_ = 1 + 0.07 * math.sin(t * 6)
+            for lx_, ly_, lr_, on_ in lures:
+                if on_:
+                    for r_, c_ in ((lr_ * 0.5 * pul_, (40, 96, 84)), (lr_ * 0.24 * pul_, (96, 190, 160)), (lr_ * 0.1, (200, 255, 236))):
+                        gd.ellipse(((lx_ - r_) / 4, (ly_ - r_) / 4, (lx_ + r_) / 4, (ly_ + r_) / 4), fill=c_)
+            frame = ImageChops.screen(frame.convert("RGB"), gl.filter(ImageFilter.GaussianBlur(7)).resize((W, H), Image.BILINEAR))
     if landed is not None and landed < 0.5:      # Aufschlag: das Bild wackelt kurz
         k = 1 - landed / 0.5
         dx, dy = int(math.sin(t * 61) * 22 * k), int(math.cos(t * 53) * 26 * k)
@@ -2604,6 +2621,7 @@ def direct(scenes, times, topic="", style="", look=""):
                 and not _re0.search(r"\blabor|experiment|chemi|reagenz|mikroskop|versuch", str(sc.get("text") or "").lower()):
             sc["place"] = "mathroom"                      # Mathe-Thema: der Forscher steht vor der Tafel, nicht zwischen Kolben und Reagenzgläsern (Video 198)
     _frost_frog(scenes, topic, main_id)
+    _angler_story(scenes, topic)
     _mirror_story(scenes, topic, main_id)
     _mirror_msg(scenes, topic, style, main_id)
     _fridge_open(scenes)
@@ -4354,6 +4372,101 @@ def _frost_frog(scenes, topic="", main_id="du"):
 
 
 
+# Tiefsee-Anglerfisch (Prüfung 26.11.2026, Video 222 „Tiefsee-Anglerfisch: Die gefährlichste Falle der Welt“): 80 Sekunden lang schwamm ein lächelnder
+# orangefarbener Clownfisch mit Sprechblase „HI!“ durchs Bild, die „nach innen gebogenen Zähne“ waren ein rosa Menschengebiss, bei „Kleine Fische schwimmen
+# ins Licht“ war der Meeresgrund leer. Die Regie zeigt in jedem Satz den Anglerfisch (`extras.creature("angler")`) so, wie der Satz ihn beschreibt.
+ANGLER_RE = r"anglerfisch|tiefsee-?angler|seeteufel|laternenfisch mit angel"
+ANG_MALE_RE = r"männchen|weibchen|verwächs|verwachs|verschmilz|verschmelz|blutkreislauf|\borgan\b|nährstoff|parasit|paarung|partner"
+ANG_FUSED_RE = r"schrumpf|\borgan\b|anhängsel|anhang|übrig bleibt|nur noch"
+ANG_FUSE_RE = r"verwächs|verwachs|verschmilz|verschmelz|blutkreislauf|nährstoff|teilen sich|versorgt"
+ANG_BITE_RE = r"beißt|beisst|festbeiß|verbeiß|klammert|heftet|dockt"
+ANG_FULL_RE = r"\bmagen|dehnbar|verdau|verschluckt|verschlingt (?:\w+ ){0,4}(?:doppelt|größer)|doppelt so groß"
+ANG_GAPE_RE = r"\bmaul|riesenmaul|gebiss|\bzähne|\bzahn|schnapp|verschling|saugt|sog\b|reißt (?:\w+ ){0,6}auf"
+ANG_WIGGLE_RE = r"beweg|wackel|zappel|\bwurm|schwenk|leuchtkörper|köder"
+ANG_LURE_RE = r"beweg|wackel|zappel|\bwurm|schwenk|\bangel\b|leuchtkörper|laterne|bakterien|scheinwerfer|köder|leuchtorgan"
+ANG_PREY_RE = r"\bbeute|kleine fische|\bopfer|ins licht|zum licht|angelockt|lockt|neugierig"
+ANG_FAR_RE = r"finsternis|dunkelheit|stockdunkel|pechschwarz|kein (?:\w+ )?licht|lichtpunkt|lauert|zu spät|metern tiefe|kilometer tiefe"
+ANG_OFF_RE = r"licht aus|knipst (?:\w+ ){0,4}aus|erlischt|schaltet (?:\w+ ){0,4}(?:ab|aus)"
+ANG_YOU_RE = r"als würdest du|als ob du|als müsstest du|stell dir vor,? du|\bdu (?:isst|müsstest|würdest|könntest)\b|so groß (?:ist )?wie du\b"
+ANG_SEA = {"lure": (540, 1.0), "": (500, 0.95), "prey": (430, 0.95), "gape": (520, 1.12), "full": (560, 1.0), "far": (600, 0.8), "dark": (540, 0.95),
+           "pair": (480, 0.95), "male": (560, 1.05), "fuse": (540, 1.1), "fused": (560, 1.05)}
+
+
+def angler_story(scenes, topic=""):
+    texts = " ".join(str(sc.get("text") or "").lower() for sc in scenes if isinstance(sc, dict))
+    return bool(re.search(ANGLER_RE, str(topic or "").lower() + " " + texts))
+
+
+def _angler_story(scenes, topic=""):
+    if not angler_story(scenes, topic):
+        return scenes
+    prev, run, last_i = None, 0, len(scenes) - 1
+    for i, sc in enumerate(scenes):
+        if not isinstance(sc, dict):
+            continue
+        low = str(sc.get("text") or "").lower()
+        shot = str(sc.get("shot") or "")
+        if shot == "graphic" and graphics.clean(sc.get("graphic")):
+            prev = None
+            continue
+        if re.search(ANG_YOU_RE, low):                    # der Vergleich mit dir („als würdest du ein Schnitzel essen …“) spielt bei dir, nicht in der Tiefsee
+            humans = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and not a.get("kind") and not str(a.get("id") or "").startswith("_")]
+            if humans and places.resolve(backdrop(sc)) != "underwater":
+                for a in humans:
+                    if str(a.get("action") or "").lower() in ("walk", "run", ""):
+                        a.update(action="shocked", emotion="shocked")
+                    a.pop("to", None)
+                humans[0].update(pos="center", facing="")
+                sc["actors"] = humans[:1]
+                prev = None
+                continue
+        if re.search(ANG_MALE_RE, low):
+            act = "fused" if re.search(ANG_FUSED_RE, low) else "male" if re.search(ANG_BITE_RE, low) else "fuse" if re.search(ANG_FUSE_RE, low) else "pair"
+        elif re.search(ANG_OFF_RE, low):
+            act = "dark"
+        elif re.search(ANG_FULL_RE, low):
+            act = "full"
+        elif re.search(ANG_WIGGLE_RE, low) and not re.search(r"reißt|schnapp|\bzähne|gebiss", low):
+            act = "lure"                                  # „bewegt den Leuchtkörper vor seinem Maul wie einen Wurm“: die Angel zappelt, das Maul bleibt zu
+        elif re.search(ANG_GAPE_RE, low):
+            act = "gape"
+        elif re.search(ANG_LURE_RE, low):
+            act = "lure"
+        elif re.search(ANG_PREY_RE, low):
+            act = "prey"
+        elif re.search(ANG_FAR_RE, low):
+            act = "far"
+        else:
+            act = "lure" if prev != "lure" else ""
+        if i == 0 and act in ("far", "dark", "", "pair", "male", "fuse", "fused"):
+            act = "lure"                                  # das erste Bild zeigt den Fisch mit seinem Licht
+        big = False
+        if act == prev:                                   # nie zweimal hintereinander dasselbe Bild
+            if act == "gape":
+                big = True
+            elif act in ("prey", "far"):
+                act = "lure"
+            elif act == "lure":
+                act = "prey" if re.search(ANG_PREY_RE, low) else ""
+            else:
+                run += 1
+        x, ksz = ANG_SEA.get(act, (540, 1.0))
+        flip = run % 2 == 1
+        fish = {"id": "_tier", "kind": "angler", "hero": True, "pos": (1080 - x) if flip else x, "_ksz": round(1.5 * ksz * (1.16 if big else 1.0), 2), "emotion": "", "emote": "", "say": "",
+                "hold": "", "action": act, "facing": "left" if flip else "right", "speaks": False}
+        run += 1
+        prev = act
+        ov = sc.get("overlay")
+        if isinstance(ov, dict) and str(ov.get("type") or "") in ("phone", "note", "chat", "list"):
+            sc["overlay"] = None                          # kein Handy, kein Zettel in der Tiefsee
+        elif isinstance(ov, dict) and re.search(ANG_OFF_RE, str(ov.get("text") or "").lower()) and act != "dark":
+            sc["overlay"] = None                          # „LICHT AUS“ über einem leuchtenden Köder widerspricht dem Bild
+        sc.update(actors=[fish], crowd="", float="", place="underwater", backdrop=None, time="night", weather="", props=[], mood="", _no_cut=True, _cute="angler")
+        if shot in ("event", "insert", "close", "mirror"):
+            sc["shot"] = ""
+    return scenes
+
+
 def _ice_story(scenes, topic):
     low_t = str(topic or "").lower()
     texts = [str(sc.get("text") or "").lower() for sc in scenes if isinstance(sc, dict)]
@@ -4993,7 +5106,7 @@ SEA_HUMAN_RE = r"\bmensch\w*|\bforscher\w*|wissenschaftler\w*|\bdein\w*|\bdu\b|\
 SEA_PEOPLE_RE = r"^(?:wir )?menschen (?:haben|besitzen|sehen|können|brauchen|schaffen)\b|ein(?:es)? menschliche[rsn]? (?:wimpernschlag|auge|hand)|\bals ein wimpernschlag"   # der Satz handelt von Menschen – auch wenn das Drehbuch dort das Tier hinstellt
 TANK_RE = r"\bbecken\b|plastikbecken|kunststoffbecken|acrylbecken|acrylglas|aquarium\b|aquarien\b"
 CAVI_RE = r"dampfblase|gasblase|kavitation|blasen? (?:kollabier|implodier|platz|fall\w* zusammen)|(?:kollabier|implodier|platz)\w* (?:die|diese) blase|druckwelle"
-LONG_KINDS = ("shrimp", "mantis", "axolotl", "tardigrade", "jelly", "cheetah", "eagle", "flea", "dolphin", "cow", "pig", "lion", "whale", "chimera", "frog", "woodfrog", "platypus", "puffer")          # breiter als hoch: keine Großaufnahme, Kamera lässt sie ganz im Bild
+LONG_KINDS = ("shrimp", "mantis", "axolotl", "tardigrade", "jelly", "cheetah", "eagle", "flea", "dolphin", "cow", "pig", "lion", "whale", "chimera", "frog", "woodfrog", "platypus", "puffer", "angler")          # breiter als hoch: keine Großaufnahme, Kamera lässt sie ganz im Bild
 # Winzlinge, die überall vorkommen (Moos, Eis, Weltall): als Figur an dem Ort, von dem der Satz spricht
 ANY_CREATURES = [(r"bärtierchen|wasserbär|tardigrad", "tardigrade"), (r"\bgepard", "cheetah"), (r"\badler|greifvogel|greifvögel", "eagle"), (r"\bfloh|\bflöhe", "flea")]
 # Landtiere und Vögel als Figur der Szene: bleiben nur einen Folgesatz, und nur, wenn er sichtbar weiter vom Tier handelt
@@ -5036,7 +5149,7 @@ def _sea_default(scenes, topic):
     return next(iter(kinds)) if len(kinds) == 1 else None
 
 
-HERO_SIZE = {"cheetah": 1.45, "eagle": 1.5, "flea": 1.35, "shrimp": 1.6, "mantis": 1.6, "jelly": 1.4, "axolotl": 1.6, "tardigrade": 1.5, "agent": 0.8, "brain": 1.6, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9, "diver": 1.3, "dolphin": 1.5, "cow": 1.25, "pig": 1.1, "chimp": 1.2, "mosquito": 1.0, "fly": 1.0, "lion": 1.3, "whale": 1.75, "chimera": 1.35, "frog": 1.25, "woodfrog": 1.25, "platypus": 1.45, "puffer": 1.35}   # Hauptfigur: etwa halb so hoch wie ein Mensch
+HERO_SIZE = {"cheetah": 1.45, "eagle": 1.5, "flea": 1.35, "shrimp": 1.6, "mantis": 1.6, "jelly": 1.4, "axolotl": 1.6, "tardigrade": 1.5, "agent": 0.8, "brain": 1.6, "virus": 0.75, "cell": 0.75, "spider": 1.15, "cat": 0.95, "dog": 1.0, "bee": 1.0, "wasp": 1.0, "bird": 1.0, "fish": 0.8, "shark": 0.9, "diver": 1.3, "dolphin": 1.5, "cow": 1.25, "pig": 1.1, "chimp": 1.2, "mosquito": 1.0, "fly": 1.0, "lion": 1.3, "whale": 1.75, "chimera": 1.35, "frog": 1.25, "woodfrog": 1.25, "platypus": 1.45, "puffer": 1.35, "angler": 1.5}   # Hauptfigur: etwa halb so hoch wie ein Mensch
 
 
 def _topic_creature(scenes, topic):
@@ -6338,7 +6451,7 @@ TEXT_PROPS = [(r"\bmini-?maps?\b|\bmini-?karten?\b|\bmini-?radar\b", "minimap"),
 MAP_HINTS = ((r"ganz deutschland|in deutschland|deutschlandweit|bundesweit|bundesländer|jeder deutsche|alle deutschen", "germany"),
              (r"weltweit|auf der ganzen welt|alle länder|rund um den globus|weltbevölkerung|alle kontinente|die ganze erde|die ganze welt", "worldmap"))
 # Tiere neben Menschen: Größe im Verhältnis zur Figur (1.0 = menschengroß). „Riesen…“-Themen heben das auf (giant).
-CREATURE_SIZE = {"cheetah": 1.0, "eagle": 0.8, "flea": 0.4, "shrimp": 0.5, "mantis": 0.5, "jelly": 0.6, "axolotl": 0.5, "tardigrade": 0.5, "brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45, "diver": 1.1, "dolphin": 1.0, "cow": 0.9, "pig": 0.6, "chimp": 0.75, "mosquito": 0.45, "fly": 0.45, "lion": 1.15, "whale": 1.4, "chimera": 1.05, "frog": 0.34, "woodfrog": 0.34, "platypus": 0.55, "puffer": 0.6}
+CREATURE_SIZE = {"cheetah": 1.0, "eagle": 0.8, "flea": 0.4, "shrimp": 0.5, "mantis": 0.5, "jelly": 0.6, "axolotl": 0.5, "tardigrade": 0.5, "brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45, "diver": 1.1, "dolphin": 1.0, "cow": 0.9, "pig": 0.6, "chimp": 0.75, "mosquito": 0.45, "fly": 0.45, "lion": 1.15, "whale": 1.4, "chimera": 1.05, "frog": 0.34, "woodfrog": 0.34, "platypus": 0.55, "puffer": 0.6, "angler": 0.9}
 GIANT_RE = r"riesen|riesig|gigant|monströs|so groß wie|meterhoh|haushoh|mutier"
 # Nur hier laufen Passanten durchs Bild – auf dem Feld, im Wald, im Keller ist niemand unterwegs
 CROWD_PLACES = ("headquarters", "street", "park", "village", "beach", "icesea", "harbor", "gasstation", "station", "transit", "supermarket", "supermarket_empty", "hospital", "office",
@@ -6934,6 +7047,8 @@ def poster_hero(topic, scenes, cast=None, avoid=()):
         return "chimera"                                  # Misch-Wesen-Video: das gebaute Wesen ist das Gesicht des Videos
     if _re.search(FROSTFROG_RE, low):
         return "woodfrog"
+    if _re.search(ANGLER_RE, low) or sum(1 for sc in scenes or [] if isinstance(sc, dict) and any(isinstance(a, dict) and a.get("kind") == "angler" for a in sc.get("actors") or [])) >= 3:
+        return "angler"                                   # Anglerfisch-Video: der Fisch mit der Leuchtangel aufs Titelbild – kein Goldfisch (Video 222)
     named = [k for pat, k in TOPIC_CREATURES if _re.search(pat, low)]
     sk = _sea_kind(low, bool(_re.search(SEA_TOPIC_RE, low)))
     named += [sk] if sk else []

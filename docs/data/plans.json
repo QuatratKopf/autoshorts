@@ -1563,7 +1563,7 @@
   "topic": "Das Tier, das im dunklen Ozean leuchtet und mit einem eigenen Bio-Scheinwerfer seine Beute blendet",
   "trend": null,
   "script": {
-   "title": "Tiefsee-Anglerfisch: Die gefährlichste Falle der Welt",
+   "title": "Tiefsee-Anglerfisch: Die Falle aus Licht",
    "description": "Dieses Tier jagt im Dunkeln mit einem eigenen Scheinwerfer!\nErfahre, wie der Anglerfisch seine Beute mit Biolumineszenz in die Falle lockt.\nWürdest du dich in die Tiefsee trauen?",
    "hashtags": [
     "#shorts",
@@ -1586,15 +1586,13 @@
    ],
    "thumbnail": {
     "image": "Close-up of a scary deep sea anglerfish with a glowing lamp on its head, sharp teeth open wide in dark ocean water, high contrast",
-    "text": "LICHT AUS, MEER AN",
+    "text": "FOLGE NIE DEM LICHT",
     "place": "underwater",
     "time": "night",
     "actor": "angler",
-    "action": "shocked",
-    "emotion": "shocked",
-    "props": [
-     "flashlight"
-    ],
+    "action": "idle",
+    "emotion": "",
+    "props": [],
     "weather": ""
    },
    "wishes": [],
@@ -1609,17 +1607,17 @@
      "skin": "hell"
     },
     "angler": {
-     "kind": "fish",
-     "speaks": true
+     "kind": "angler",
+     "speaks": false
     }
    },
    "scenes": [
     {
-     "see": "Eine Schwimmerin blickt schockiert in ein riesiges leuchtendes Anglerfisch-Gebiss im dunklen Wasser.",
-     "text": "Dieser Tiefseefisch blendet seine Beute mit einem Bio-Scheinwerfer.",
+     "see": "Ein Anglerfisch schwebt im dunklen Wasser, vor seinem Maul leuchtet der Köder an der Angel.",
+     "text": "Dieser Tiefseefisch lockt seine Beute mit einem Bio-Scheinwerfer.",
      "image": "A swimmer looks terrified at a large glowing creature in pitch black ocean water.",
      "who": [
-      "du"
+      "angler"
      ],
      "place": "underwater",
      "backdrop": {
@@ -1634,12 +1632,12 @@
      "props": [],
      "actors": [
       {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "left",
-       "speaks": true
+       "id": "angler",
+       "action": "lure",
+       "emotion": "",
+       "emote": "",
+       "pos": "center",
+       "speaks": false
       }
      ],
      "crowd": "",
@@ -1648,8 +1646,8 @@
      "camera": "zoom_in",
      "sfx": "whoosh",
      "highlight": [
-      "drei Meter",
-      "leuchtet"
+      "lockt",
+      "Bio-Scheinwerfer"
      ],
      "overlay": {
       "type": "tag",
@@ -1661,8 +1659,8 @@
      "status": ""
     },
     {
-     "see": "Ein Anglerfisch schwimmt nah ans Bild und stellt seine eigene Leuchtlaterne zur Schau.",
-     "text": "Und die letzte Jagdmethode ist absolut tödlich für kleine Fische.",
+     "see": "Neben dem großen Anglerfisch-Weibchen schwimmt ein winziges Männchen.",
+     "text": "Und was das Männchen dieser Art tut, ist noch viel verrückter.",
      "image": "Deep sea anglerfish swimming near camera showing its glowing head organ.",
      "who": [
       "angler"
@@ -1685,8 +1683,7 @@
        "emotion": "happy",
        "emote": "idea",
        "pos": "center",
-       "speaks": true,
-       "say": "HI!"
+       "speaks": true
       }
      ],
      "crowd": "",
@@ -1695,7 +1692,8 @@
      "camera": "still",
      "sfx": "none",
      "highlight": [
-      "verrückteste Jagdmethode"
+      "Männchen",
+      "verrückter"
      ],
      "overlay": null,
      "who_desc": "",
@@ -1738,7 +1736,7 @@
      "status": ""
     },
     {
-     "see": "Eine vergrößerte Schautafel zeigt leuchtende Bakterien in der Angel des Fisches.",
+     "see": "Der Anglerfisch zeigt seine Angel mit dem leuchtenden Köder.",
      "text": "An einer Angel nutzt dieser Fisch Millionen leuchtende Bakterien als Scheinwerfer.",
      "image": "Graphic showing bacteria glowing brightly inside a fish antenna lure.",
      "who": [],
@@ -1756,13 +1754,7 @@
      "actors": [],
      "crowd": "",
      "mood": "calm",
-     "shot": "graphic",
-     "graphic": {
-      "type": "number",
-      "kicker": "BAKTERIEN",
-      "value": "100 MIO.",
-      "label": "LEUCHTZONE"
-     },
+     "shot": "wide",
      "camera": "still",
      "sfx": "ding",
      "highlight": [
@@ -1930,7 +1922,7 @@
      "status": ""
     },
     {
-     "see": "Eine Grafik vergleicht den Magen des Fisches mit doppelt so großer Beute.",
+     "see": "Der Bauch des Anglerfischs ist prall gedehnt, darin der Umriss eines großen Fisches.",
      "text": "Sein Magen ist extrem dehnbar und verdaut Beute, die doppelt so groß ist.",
      "image": "Graphic comparison showing fish stomach expanding to twice its normal body size.",
      "who": [],
@@ -1948,14 +1940,7 @@
      "actors": [],
      "crowd": "",
      "mood": "calm",
-     "shot": "graphic",
-     "graphic": {
-      "type": "compare",
-      "left": "KÖRPER",
-      "right": "BEUTE",
-      "value": "100 %",
-      "sub": "200 %"
-     },
+     "shot": "wide",
      "camera": "still",
      "sfx": "ding",
      "highlight": [
@@ -1968,7 +1953,7 @@
      "status": ""
     },
     {
-     "see": "Eine Person blickt erstaunt auf zwei riesige Koffer auf einem Tisch.",
+     "see": "Du stehst erschrocken in der Küche.",
      "text": "Das wäre, als würdest du ein Schnitzel essen, das doppelt so groß ist wie du.",
      "image": "Character looking amazed next to a giant meal that is bigger than a human.",
      "who": [
@@ -1999,11 +1984,7 @@
      "highlight": [
       "doppelt so groß"
      ],
-     "overlay": {
-      "type": "note",
-      "title": "VERGLEICH",
-      "text": "200% EIGENGEWICHT"
-     },
+     "overlay": null,
      "who_desc": "",
      "place_desc": "",
      "hud": "",
@@ -2130,7 +2111,7 @@
      "status": ""
     },
     {
-     "see": "Eine Grafik zeigt zwei Gewebeschichten, die langsam miteinander verschmelzen.",
+     "see": "Vom festgebissenen Männchen wachsen Adern in den Körper des Weibchens.",
      "text": "Mit der Zeit verwächst seine Haut vollständig mit ihrem Blutkreislauf.",
      "image": "Graphic showing two tissues fusing together with blood vessels connecting.",
      "who": [],
@@ -2148,12 +2129,7 @@
      "actors": [],
      "crowd": "",
      "mood": "calm",
-     "shot": "graphic",
-     "graphic": {
-      "type": "pulse",
-      "value": "1",
-      "label": "VERWACHSEN"
-     },
+     "shot": "wide",
      "camera": "still",
      "sfx": "ding",
      "highlight": [
@@ -2201,17 +2177,14 @@
      "highlight": [
       "dauerhaften Organ"
      ],
-     "overlay": {
-      "type": "tag",
-      "text": "PARASITISMUS"
-     },
+     "overlay": null,
      "who_desc": "",
      "place_desc": "",
      "hud": "",
      "status": ""
     },
     {
-     "see": "Ein Zähler tickt hoch auf mehrere Jahre Lebensdauer in Dunkelheit.",
+     "see": "Das Männchen hängt verwachsen am Weibchen.",
      "text": "Sie teilen sich Nährstoffe und Energie für das restliche Leben.",
      "image": "A big counter graphics showing shared energy points ticking up fast.",
      "who": [],
@@ -2229,13 +2202,7 @@
      "actors": [],
      "crowd": "",
      "mood": "calm",
-     "shot": "graphic",
-     "graphic": {
-      "type": "counter",
-      "label": "GEMEINSAME ENERGIE",
-      "value": 100,
-      "unit": "SYMBIOSE"
-     },
+     "shot": "wide",
      "camera": "still",
      "sfx": "none",
      "highlight": [
@@ -2248,12 +2215,10 @@
      "status": ""
     },
     {
-     "see": "Eine Taucherin leuchtet mit einer Taschenlampe erschrocken in die Dunkelheit.",
+     "see": "In der Finsternis ist nur ein kleiner Lichtpunkt zu erkennen.",
      "text": "Bleibt nur die Frage, was sonst noch in der tiefen Finsternis lauert.",
      "image": "Diver pointing flashlight into pitch black deep sea water in confusion.",
-     "who": [
-      "du"
-     ],
+     "who": [],
      "place": "underwater",
      "backdrop": {
       "sky": "night",
@@ -2264,20 +2229,8 @@
      },
      "time": "night",
      "weather": "dark",
-     "props": [
-      "flashlight"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "look_around",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true,
-       "hold": "flashlight"
-      }
-     ],
+     "props": [],
+     "actors": [],
      "crowd": "",
      "mood": "tense",
      "shot": "wide",
@@ -2328,10 +2281,7 @@
      "highlight": [
       "zu spät"
      ],
-     "overlay": {
-      "type": "card",
-      "text": "LICHT AUS"
-     },
+     "overlay": null,
      "who_desc": "",
      "place_desc": "",
      "hud": "",
@@ -2371,7 +2321,7 @@
      "camera": "shake",
      "sfx": "ding",
      "highlight": [
-      "drei Meter große Zähne"
+      "spitze Gebiss"
      ],
      "overlay": null,
      "who_desc": "",
@@ -2385,12 +2335,8 @@
   },
   "provider": "gemini",
   "remake": false,
-  "needs": [
-   "bakteriendüse",
-   "magen",
-   "gebiss"
-  ],
-  "title": "Tiefsee-Anglerfisch: Die gefährlichste Falle der Welt",
+  "needs": [],
+  "title": "Tiefsee-Anglerfisch: Die Falle aus Licht",
   "created": 1795706469.3955913
  },
  "2026-11-27 13:00": {

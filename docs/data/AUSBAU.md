@@ -268,6 +268,16 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   Drehbuch bleibt (auch bei `nachricht`), und „flackern“ ist kein „Acker“ (`\backer`). Selbsttest-Fall `_msg219`.
   „Reißt/öffnet den Kühlschrank (auf)“ zeigt den offenen, leuchtenden Kühlschrank neben der Figur (`stage._fridge_open`, `extras.p_fridge_open`).
   Countdown-Geschichten mit Kapitel-Tafeln zeigen keine feste Ecken-Zeile „TAG 1 · 3:12 UHR“ mehr (`render.build_ass`).
+- Tiefsee-Anglerfisch (Prüfung 26.11.2026, Video 222 „Tiefsee-Anglerfisch“ – 80 Sekunden lang ein lächelnder orangefarbener Clownfisch mit Sprechblase „HI!“,
+  die „nach innen gebogenen Zähne“ ein rosa Menschengebiss, bei „Kleine Fische schwimmen ins Licht“ leerer Meeresgrund): Wesen `angler` (`extras.creature`:
+  dunkler Kugelkörper, Nadelzähne, Angel mit leuchtendem Köder; action `lure` Köder zappelt, `prey` kleiner Fisch schwimmt ins Licht, `gape` Maul reißt auf,
+  `full` gedehnter Magen mit Beute-Umriss, `far` nur der Lichtpunkt, `dark` Licht aus, `pair`/`male`/`fuse`/`fused` Zwergmännchen daneben / festgebissen /
+  Adern wachsen zusammen / nur noch Anhang). `stage._angler_story` (am Schluss von `direct`, greift bei `ANGLER_RE` in Thema oder Sätzen) zeigt in jedem Satz
+  ohne Schaubild den Fisch im Zustand des Satzes (Wortlisten `ANG_*_RE`), nie zweimal hintereinander dasselbe Bild (Seite wechselt, zweites Maul-Bild größer);
+  Menschen, Taucher, Requisiten, Sprechblasen und Zeichen über dem Kopf entfallen, nur der Vergleich mit dir (`ANG_YOU_RE`, „als würdest du …“) spielt bei dir.
+  Licht (`stage._frame`, `lures`): Der Köder ist die Lichtquelle – sein Schein liegt hell über dem dunklen Bild, bei `far`/`dark` bleibt der Fisch ein Schatten.
+  Titelbild: der Anglerfisch (`poster_hero`). Selbsttest `_angler`. Offen: ein übergroßes Schnitzel für den Vergleich gibt es nicht; andere Tiefseefische
+  (Vipernfisch, Pelikanaal) kennt die Regie nicht.
 
 ## Was zu tun ist
 1. Offene Wünsche (ohne `"done": true`) und `"auto": true`-Einträge durchgehen, höchstens 8 pro Sitzung, häufigste zuerst.
