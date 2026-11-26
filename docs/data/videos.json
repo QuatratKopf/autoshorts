@@ -8358,5 +8358,48 @@
   "yt_thumb_at": 1795693117.39459,
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":"
+ },
+ {
+  "id": 219,
+  "category": "nachricht",
+  "topic": "Eine unbekannte Nummer schickt dir einen Countdown und befiehlt dir, alle Spiegel in deiner Wohnung abzuhängen – bis du in einem Spiegel eine Bewegung siehst, die du nicht gemacht hast.",
+  "status": "review",
+  "created": 1795705819.536761,
+  "title": "Unbekannte Nachricht blockiert alle Spiegel im Haus",
+  "description": "Drei Uhr zwölf und eine unheimliche Nachricht auf dem Handy!\nDu befolgst die mysteriösen Befehle, bis du im Spiegel eine Bewegung siehst, die du nicht gemacht hast.\nWelchen Spiegel würdest du zuerst abhängen?",
+  "hashtags": [
+   "#shorts",
+   "#mystery",
+   "#countdown",
+   "#creepystory",
+   "#viral",
+   "#fyp",
+   "#spiegel",
+   "#geheimnis"
+  ],
+  "tags": [
+   "unbekannte nachricht",
+   "mystery geschichte",
+   "spiegel",
+   "countdown",
+   "grusel",
+   "thriller",
+   "handy nachricht",
+   "schlafzimmer"
+  ],
+  "thumb_text": "SCHAU NICHT HIN",
+  "missing": null,
+  "cover_ms": 77625,
+  "duration": 77.5,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "noir",
+  "mp4": true,
+  "slot": "2026-11-26 18:00",
+  "review_at": 1795706135.2595787
  }
 ]
