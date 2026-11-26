@@ -1,7 +1,7 @@
 {
- "updated": 1795706486.895963,
+ "updated": 1795708553.04992,
  "enough": true,
- "counted": 44,
+ "counted": 45,
  "total": 46,
  "needed": 6,
  "categories": [
@@ -13,15 +13,6 @@
    "avg_likes": 46.8,
    "like_rate": 2.05,
    "avg_score": 3007
-  },
-  {
-   "slug": "vergleich",
-   "name": "💰 Wer verdient mehr?",
-   "n": 1,
-   "avg_views": 2373,
-   "avg_likes": 34.0,
-   "like_rate": 1.43,
-   "avg_score": 2883
   },
   {
    "slug": "tiere",
@@ -36,10 +27,10 @@
    "slug": "liebe",
    "name": "💕 Liebe",
    "n": 1,
-   "avg_views": 1515,
+   "avg_views": 1516,
    "avg_likes": 64.0,
    "like_rate": 4.22,
-   "avg_score": 2475
+   "avg_score": 2476
   },
   {
    "slug": "mysterien",
@@ -66,7 +57,16 @@
    "avg_views": 1650,
    "avg_likes": 44.4,
    "like_rate": 2.69,
-   "avg_score": 2326
+   "avg_score": 2327
+  },
+  {
+   "slug": "vergleich",
+   "name": "💰 Wer verdient mehr?",
+   "n": 2,
+   "avg_views": 1515,
+   "avg_likes": 31.5,
+   "like_rate": 2.08,
+   "avg_score": 1988
   },
   {
    "slug": "storys",
@@ -93,33 +93,33 @@
    "avg_views": 1230,
    "avg_likes": 10.5,
    "like_rate": 0.85,
-   "avg_score": 1422
+   "avg_score": 1423
   },
   {
    "slug": "grusel",
    "name": "👻 Grusel",
    "n": 2,
    "avg_views": 426,
-   "avg_likes": 18.0,
-   "like_rate": 4.23,
-   "avg_score": 726
+   "avg_likes": 18.5,
+   "like_rate": 4.34,
+   "avg_score": 734
   }
  ],
  "weights": {
-  "fakten": 1.05,
+  "fakten": 1.06,
   "grusel": 0.5,
-  "tiere": 1.13,
-  "whatif": 1.08,
-  "comedy": 1.36,
-  "vergleich": 1.2,
+  "tiere": 1.14,
+  "whatif": 1.09,
+  "comedy": 1.37,
+  "vergleich": 0.91,
   "motivation": 1.2,
   "nachricht": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2285 Aufrufe, 2.05 % Likes).",
   "Schwächste Kategorie: 👻 Grusel (Ø 426 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2296 zu 1119 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2404 zu 1852 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2268 zu 1118 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2361 zu 1852 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -128,13 +128,13 @@
  ],
  "words_bad": [
   "remix",
-  "bekanntes",
-  "glas",
-  "lied",
   "erkennst",
+  "glas",
+  "bekanntes",
+  "lied",
   "niemand",
-  "eines",
-  "klassikers"
+  "jede",
+  "scheibe"
  ],
  "top": [
   {
@@ -193,21 +193,21 @@
    "id": 205,
    "title": "Starre nie im Dunkeln in den Spiegel",
    "category": "grusel",
-   "views": 357,
-   "likes": 16,
+   "views": 358,
+   "likes": 17,
    "comments": 2,
    "shares": 0,
-   "score": 657
+   "score": 673
   },
   {
    "id": 196,
    "title": "Jede Scheibe ein Ton: Lo-Fi-Remix eines Klassikers",
    "category": "musik",
-   "views": 355,
+   "views": 356,
    "likes": 2,
    "comments": 0,
    "shares": 0,
-   "score": 385
+   "score": 386
   },
   {
    "id": 44,
