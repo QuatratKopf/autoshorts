@@ -1,5 +1,5 @@
 {
- "updated": 1795704038.4472814,
+ "updated": 1795706486.895963,
  "enough": true,
  "counted": 44,
  "total": 46,
@@ -36,10 +36,10 @@
    "slug": "liebe",
    "name": "💕 Liebe",
    "n": 1,
-   "avg_views": 1516,
+   "avg_views": 1515,
    "avg_likes": 64.0,
    "like_rate": 4.22,
-   "avg_score": 2476
+   "avg_score": 2475
   },
   {
    "slug": "mysterien",
@@ -63,7 +63,7 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 8,
-   "avg_views": 1649,
+   "avg_views": 1650,
    "avg_likes": 44.4,
    "like_rate": 2.69,
    "avg_score": 2326
@@ -93,22 +93,22 @@
    "avg_views": 1230,
    "avg_likes": 10.5,
    "like_rate": 0.85,
-   "avg_score": 1423
+   "avg_score": 1422
   },
   {
    "slug": "grusel",
    "name": "👻 Grusel",
    "n": 2,
    "avg_views": 426,
-   "avg_likes": 19.0,
-   "like_rate": 4.47,
-   "avg_score": 740
+   "avg_likes": 18.0,
+   "like_rate": 4.23,
+   "avg_score": 726
   }
  ],
  "weights": {
   "fakten": 1.05,
   "grusel": 0.5,
-  "tiere": 1.12,
+  "tiere": 1.13,
   "whatif": 1.08,
   "comedy": 1.36,
   "vergleich": 1.2,
@@ -118,8 +118,8 @@
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2285 Aufrufe, 2.05 % Likes).",
   "Schwächste Kategorie: 👻 Grusel (Ø 426 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2297 zu 1118 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2405 zu 1852 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2296 zu 1119 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2404 zu 1852 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -128,13 +128,13 @@
  ],
  "words_bad": [
   "remix",
-  "lied",
-  "erkennst",
   "bekanntes",
   "glas",
+  "lied",
+  "erkennst",
   "niemand",
-  "klassikers",
-  "scheibe"
+  "eines",
+  "klassikers"
  ],
  "top": [
   {
@@ -193,21 +193,21 @@
    "id": 205,
    "title": "Starre nie im Dunkeln in den Spiegel",
    "category": "grusel",
-   "views": 358,
-   "likes": 17,
+   "views": 357,
+   "likes": 16,
    "comments": 2,
    "shares": 0,
-   "score": 673
+   "score": 657
   },
   {
    "id": 196,
    "title": "Jede Scheibe ein Ton: Lo-Fi-Remix eines Klassikers",
    "category": "musik",
-   "views": 356,
+   "views": 355,
    "likes": 2,
    "comments": 0,
    "shares": 0,
-   "score": 386
+   "score": 385
   },
   {
    "id": 44,

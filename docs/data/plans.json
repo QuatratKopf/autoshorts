@@ -1,866 +1,4 @@
 {
- "2026-11-25 18:00": {
-  "category": "fakten",
-  "topic": "Warum du den 'Phantom-Vibrations-Effekt' hast: Warum dein Gehirn dir ein Handy-Brummen vorgaukelt, das gar nicht existiert",
-  "trend": null,
-  "script": {
-   "title": "Phantom-Vibration: Warum dein Bein brummt, obwohl niemand schreibt",
-   "description": "Dein Handy vibriert in der Hosentasche – aber da ist keine Nachricht.\nDahinter steckt die Phantom-Vibration: Dein Gehirn deutet winzige Reize auf der Haut als Brummen.\nWann ist dir das zuletzt passiert?",
-   "hashtags": [
-    "#shorts",
-    "#psychologie",
-    "#gehirn",
-    "#handy",
-    "#wissen",
-    "#fakten",
-    "#fyp"
-   ],
-   "tags": [
-    "phantom vibration",
-    "handy vibriert",
-    "phantom vibration erklärt",
-    "gehirn tricks",
-    "psychologie fakten",
-    "handy brummt",
-    "wahrnehmung",
-    "smartphone"
-   ],
-   "thumbnail": {
-    "image": "Close-up of a young person staring in disbelief at a silent smartphone in their hand, vivid colors",
-    "text": "HANDY VIBRIERT GAR NICHT"
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "lila",
-     "hair": "ponytail",
-     "hair_color": "blond",
-     "gender": "w",
-     "skin": "weiß",
-     "glasses": false,
-     "hat": ""
-    },
-    "gehirn": {
-     "kind": "brain"
-    },
-    "arzt": {
-     "shirt": "weiß",
-     "hair_color": "braun",
-     "gender": "m",
-     "glasses": true,
-     "hat": ""
-    }
-   },
-   "hud": "",
-   "countdown": null,
-   "scenes": [
-    {
-     "see": "Die Hauptfigur bleibt auf dem Gehweg stehen und starrt erschrocken auf ihr Handy.",
-     "text": "Dein Bein brummt, du greifst zum Handy, und da ist absolut nichts.",
-     "image": "Dein Bein brummt, du greifst zum Handy, und da ist absolut nichts.",
-     "who": [
-      "du"
-     ],
-     "place": "strasse",
-     "camera": "zoom_in",
-     "sfx": "pop",
-     "highlight": [
-      "brummt",
-      "nichts"
-     ],
-     "overlay": null,
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "to": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "street",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Sie schaut ratlos auf das Handy in ihrer Hand.",
-     "text": "Keine Nachricht, kein Anruf, trotzdem hast du es genau gespürt.",
-     "image": "Keine Nachricht, kein Anruf, trotzdem hast du es genau gespürt.",
-     "who": [
-      "du"
-     ],
-     "place": "strasse",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "genau gespürt"
-     ],
-     "overlay": null,
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "think",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "to": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "close",
-     "who_desc": "",
-     "place_desc": "street",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Gehirn als Figur im Labor zeigt nach oben auf den Fachbegriff.",
-     "text": "Forscher haben dafür einen Namen: Phantom-Vibration.",
-     "image": "Forscher haben dafür einen Namen: Phantom-Vibration.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "labor",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Phantom-Vibration"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "PHANTOM-VIBRATION"
-     },
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "point",
-       "emotion": "happy",
-       "emote": "!",
-       "pos": "center",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "lab",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Große Zahl: neun von zehn.",
-     "text": "In einer amerikanischen Studie von 2012 kannten das neun von zehn Studierenden.",
-     "image": "In einer amerikanischen Studie von 2012 kannten das neun von zehn Studierenden.",
-     "who": [],
-     "place": "klassenzimmer",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "neun von zehn"
-     ],
-     "overlay": null,
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "who_desc": "",
-     "place_desc": "classroom",
-     "hud": "",
-     "status": "",
-     "graphic": {
-      "type": "share",
-      "kicker": "STUDIE 2012",
-      "value": "9 von 10",
-      "label": "KENNEN DAS"
-     }
-    },
-    {
-     "see": "Die Hauptfigur sitzt im Klassenzimmer und greift verwundert nach ihrem Handy.",
-     "text": "Im Schnitt passierte es ihnen etwa alle zwei Wochen.",
-     "image": "Im Schnitt passierte es ihnen etwa alle zwei Wochen.",
-     "who": [
-      "du"
-     ],
-     "place": "klassenzimmer",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "alle zwei Wochen"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "ALLE ZWEI WOCHEN"
-     },
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "look_around",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "right",
-       "to": "right",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "classroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Arzt im Krankenhausflur schaut verdutzt auf sein Handy.",
-     "text": "Und in einer Klinik berichteten sogar zwei Drittel des Personals davon.",
-     "image": "Und in einer Klinik berichteten sogar zwei Drittel des Personals davon.",
-     "who": [
-      "arzt"
-     ],
-     "place": "krankenhaus",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "zwei Drittel"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "ZWEI DRITTEL"
-     },
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "arzt",
-       "action": "think",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "to": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "hospital",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Gehirn kratzt sich ratlos am Kopf.",
-     "text": "Aber warum fällt dein Kopf immer wieder darauf herein?",
-     "image": "Aber warum fällt dein Kopf immer wieder darauf herein?",
-     "who": [
-      "gehirn"
-     ],
-     "place": "labor",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "warum"
-     ],
-     "overlay": null,
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "think",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "lab",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Hauptfigur läuft durch den Park.",
-     "text": "Deine Haut meldet ihm ununterbrochen winzige Reize.",
-     "image": "Deine Haut meldet ihm ununterbrochen winzige Reize.",
-     "who": [
-      "du"
-     ],
-     "place": "park",
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "winzige Reize"
-     ],
-     "overlay": null,
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "walk",
-       "emotion": "",
-       "emote": "",
-       "pos": "left",
-       "to": "right",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "park",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Sie bleibt stehen und schaut verwundert an ihrem Bein hinunter.",
-     "text": "Der Stoff deiner Hose streift dein Bein, ein Muskel zuckt kurz.",
-     "image": "Der Stoff deiner Hose streift dein Bein, ein Muskel zuckt kurz.",
-     "who": [
-      "du"
-     ],
-     "place": "park",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Muskel zuckt"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "HAUT-REIZ"
-     },
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "look_around",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "close",
-     "who_desc": "",
-     "place_desc": "park",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Gehirn winkt gelassen ab.",
-     "text": "Normalerweise sortiert dein Gehirn so etwas einfach aus.",
-     "image": "Normalerweise sortiert dein Gehirn so etwas einfach aus.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "labor",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "sortiert",
-      "aus"
-     ],
-     "overlay": null,
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "talk",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "left",
-       "to": "left",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "lab",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Hauptfigur sitzt auf dem Sofa und starrt gebannt auf ihr Handy.",
-     "text": "Doch es wartet jede Sekunde auf die nächste Nachricht.",
-     "image": "Doch es wartet jede Sekunde auf die nächste Nachricht.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "nächste Nachricht"
-     ],
-     "overlay": null,
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "sit",
-       "emotion": "",
-       "emote": "",
-       "pos": "center",
-       "to": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "living room",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Sie zuckt zusammen und schaut erschrocken auf das Handy.",
-     "text": "Also deutet es das harmlose Zucken kurzerhand als Vibration.",
-     "image": "Also deutet es das harmlose Zucken kurzerhand als Vibration.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "als Vibration"
-     ],
-     "overlay": null,
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "to": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "close",
-     "who_desc": "",
-     "place_desc": "living room",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Gehirn schlägt Alarm, der Stempel FEHLALARM knallt ins Bild.",
-     "text": "Ein Fehlalarm ist deinem Gehirn nämlich lieber als eine verpasste Nachricht.",
-     "image": "Ein Fehlalarm ist deinem Gehirn nämlich lieber als eine verpasste Nachricht.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "labor",
-     "camera": "still",
-     "sfx": "boom",
-     "highlight": [
-      "Fehlalarm"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "FEHLALARM",
-      "color": "red"
-     },
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "lab",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Hauptfigur tippt im Bus auf ihrem Handy.",
-     "text": "Wer sein Handy ständig nutzt, spürt das Phantom deshalb deutlich häufiger.",
-     "image": "Wer sein Handy ständig nutzt, spürt das Phantom deshalb deutlich häufiger.",
-     "who": [
-      "du"
-     ],
-     "place": "bus",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "deutlich häufiger"
-     ],
-     "overlay": null,
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "to": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "bus",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Sie läuft im Schlafzimmer nervös hin und her, das Handy in der Hand.",
-     "text": "Genauso geht es jedem, der ungeduldig auf eine Antwort wartet.",
-     "image": "Genauso geht es jedem, der ungeduldig auf eine Antwort wartet.",
-     "who": [
-      "du"
-     ],
-     "place": "schlafzimmer",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "ungeduldig"
-     ],
-     "overlay": null,
-     "backdrop": null,
-     "time": "night",
-     "weather": "",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "walk",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "left",
-       "to": "right",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Sie atmet auf und lacht erleichtert.",
-     "text": "Die gute Nachricht: Das Ganze ist völlig harmlos.",
-     "image": "Die gute Nachricht: Das Ganze ist völlig harmlos.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "völlig harmlos"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "HARMLOS",
-      "color": "green"
-     },
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "laugh",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "living room",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Sie zeigt das Handy in der anderen Hand.",
-     "text": "Willst du es trotzdem loswerden, trag dein Handy einfach auf der anderen Seite.",
-     "image": "Willst du es trotzdem loswerden, trag dein Handy einfach auf der anderen Seite.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "anderen Seite"
-     ],
-     "overlay": {
-      "type": "note",
-      "title": "TIPP",
-      "text": "Handy auf die andere Seite"
-     },
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "right",
-       "to": "right",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "living room",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Sie tippt entschlossen auf das Handy.",
-     "text": "Oder schalte die Vibration für ein paar Tage komplett aus.",
-     "image": "Oder schalte die Vibration für ein paar Tage komplett aus.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Vibration",
-      "aus"
-     ],
-     "overlay": {
-      "type": "note",
-      "title": "TIPP",
-      "text": "Vibration ausschalten"
-     },
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "left",
-       "to": "left",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "close",
-     "who_desc": "",
-     "place_desc": "living room",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Gehirn lehnt sich entspannt zurück.",
-     "text": "Dann merkt dein Gehirn schnell, dass am Bein gar nichts mehr zu erwarten ist.",
-     "image": "Dann merkt dein Gehirn schnell, dass am Bein gar nichts mehr zu erwarten ist.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "labor",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "gar nichts"
-     ],
-     "overlay": null,
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "talk",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "to": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "lab",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Die Hauptfigur zeigt fragend auf die Zuschauer.",
-     "text": "Und jetzt ehrlich: Wann hat dein Bein zuletzt gebrummt, obwohl niemand geschrieben hat?",
-     "image": "Und jetzt ehrlich: Wann hat dein Bein zuletzt gebrummt, obwohl niemand geschrieben hat?",
-     "who": [
-      "du"
-     ],
-     "place": "strasse",
-     "camera": "zoom_in",
-     "sfx": "pop",
-     "highlight": [
-      "zuletzt gebrummt"
-     ],
-     "overlay": null,
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "phone"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "happy",
-       "emote": "?",
-       "pos": "center",
-       "to": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "street",
-     "hud": "",
-     "status": ""
-    }
-   ]
-  },
-  "provider": "Plan",
-  "remake": false,
-  "needs": [],
-  "title": "Phantom-Vibration: Warum dein Bein brummt, obwohl niemand schreibt",
-  "created": 1795602057.4272268
- },
  "2026-11-26 13:00": {
   "category": "motivation",
   "topic": "Fang an, bevor du bereit bist",
@@ -3350,5 +2488,840 @@
   "needs": [],
   "title": "Unbekannte Nachricht blockiert alle Spiegel im Haus",
   "created": 1795689471.5268664
+ },
+ "2026-11-26 21:00": {
+  "category": "tiere",
+  "topic": "Das Tier, das im dunklen Ozean leuchtet und mit einem eigenen Bio-Scheinwerfer seine Beute blendet",
+  "trend": null,
+  "script": {
+   "title": "Tiefsee-Anglerfisch: Die gefährlichste Falle der Welt",
+   "description": "Dieses Tier jagt im Dunkeln mit einem eigenen Scheinwerfer!\nErfahre, wie der Anglerfisch seine Beute mit Biolumineszenz in die Falle lockt.\nWürdest du dich in die Tiefsee trauen?",
+   "hashtags": [
+    "#shorts",
+    "#tierfakten",
+    "#tiefsee",
+    "#wissenschaft",
+    "#tiere",
+    "#biologie",
+    "#viral"
+   ],
+   "tags": [
+    "anglerfisch",
+    "tiefsee",
+    "biolumineszenz",
+    "meeresbiologie",
+    "tierfakten",
+    "ozean",
+    "licht im meer",
+    "unterwasserwelt"
+   ],
+   "thumbnail": {
+    "image": "Close-up of a scary deep sea anglerfish with a glowing lamp on its head, sharp teeth open wide in dark ocean water, high contrast",
+    "text": "LICHT AUS, MEER AN",
+    "place": "underwater",
+    "time": "night",
+    "actor": "angler",
+    "action": "shocked",
+    "emotion": "shocked",
+    "props": [
+     "flashlight"
+    ],
+    "weather": ""
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "blau",
+     "hat": "",
+     "hair": "curly",
+     "hair_color": "dunkelbraun",
+     "gender": "w",
+     "skin": "hell"
+    },
+    "angler": {
+     "kind": "fish",
+     "speaks": true
+    }
+   },
+   "scenes": [
+    {
+     "see": "Eine Schwimmerin blickt schockiert in ein riesiges leuchtendes Anglerfisch-Gebiss im dunklen Wasser.",
+     "text": "Dieser Tiefseefisch blendet seine Beute mit einem Bio-Scheinwerfer.",
+     "image": "A swimmer looks terrified at a large glowing creature in pitch black ocean water.",
+     "who": [
+      "du"
+     ],
+     "place": "underwater",
+     "backdrop": {
+      "sky": "night",
+      "ground": "rock",
+      "elements": [
+       "sea"
+      ]
+     },
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "left",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "scary",
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "drei Meter",
+      "leuchtet"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "TIEFSEE"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Anglerfisch schwimmt nah ans Bild und stellt seine eigene Leuchtlaterne zur Schau.",
+     "text": "Und die letzte Jagdmethode ist absolut tödlich für kleine Fische.",
+     "image": "Deep sea anglerfish swimming near camera showing its glowing head organ.",
+     "who": [
+      "angler"
+     ],
+     "place": "underwater",
+     "backdrop": {
+      "sky": "night",
+      "ground": "rock",
+      "elements": [
+       "sea"
+      ]
+     },
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "actors": [
+      {
+       "id": "angler",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "idea",
+       "pos": "center",
+       "speaks": true,
+       "say": "HI!"
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "close",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "verrückteste Jagdmethode"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "In absoluter Finsternis unter Wasser ist plötzlich nur ein kleiner Lichtpunkt zu erkennen.",
+     "text": "Ab eintausend Metern Tiefe herrscht im Ozean absolute, eiskalte Finsternis.",
+     "image": "Pitch dark ocean depths at 1000 meters underwater with freezing darkness.",
+     "who": [],
+     "place": "underwater",
+     "backdrop": {
+      "sky": "night",
+      "ground": "rock",
+      "elements": [
+       "sea"
+      ]
+     },
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "event",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "eintausend Metern"
+     ],
+     "overlay": {
+      "type": "thermo",
+      "value": 2
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine vergrößerte Schautafel zeigt leuchtende Bakterien in der Angel des Fisches.",
+     "text": "An einer Angel nutzt dieser Fisch Millionen leuchtende Bakterien als Scheinwerfer.",
+     "image": "Graphic showing bacteria glowing brightly inside a fish antenna lure.",
+     "who": [],
+     "place": "underwater",
+     "backdrop": {
+      "sky": "night",
+      "ground": "rock",
+      "elements": [
+       "sea"
+      ]
+     },
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "graphic": {
+      "type": "number",
+      "kicker": "BAKTERIEN",
+      "value": "100 MIO.",
+      "label": "LEUCHTZONE"
+     },
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Bakterien"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Fisch bewegt seine Angel wie einen Wurm im dunklen Meerwasser hin und her.",
+     "text": "Er bewegt den Leuchtkörper direkt vor seinem Maul wie einen Wurm.",
+     "image": "Anglerfish wiggling its glowing lure in front of its massive mouth.",
+     "who": [
+      "angler"
+     ],
+     "place": "underwater",
+     "backdrop": {
+      "sky": "night",
+      "ground": "rock",
+      "elements": [
+       "sea"
+      ]
+     },
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "actors": [
+      {
+       "id": "angler",
+       "action": "walk",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Leuchtkörper"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "PERFEKTER KÖDER"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein kleiner Fisch schwimmt neugierig auf das helle Licht im tiefen Wasser zu.",
+     "text": "Kleine Fische denken an fette Beute und schwimmen direkt ins Licht.",
+     "image": "Small prey fish swimming straight toward a glowing light source.",
+     "who": [],
+     "place": "underwater",
+     "backdrop": {
+      "sky": "night",
+      "ground": "rock",
+      "elements": [
+       "sea"
+      ]
+     },
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "event",
+     "camera": "pan_right",
+     "sfx": "whoosh",
+     "highlight": [
+      "direkt ins Licht"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Riesengebiss reißt blitzschnell auf und erzeugt einen enormen Wassersog.",
+     "text": "Doch sobald sie nah genug sind, reißt der Anglerfisch sein Riesenmaul auf.",
+     "image": "Giant toothy mouth snapping open under water creating strong suction.",
+     "who": [
+      "angler"
+     ],
+     "place": "underwater",
+     "backdrop": {
+      "sky": "night",
+      "ground": "rock",
+      "elements": [
+       "sea"
+      ]
+     },
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "actors": [
+      {
+       "id": "angler",
+       "action": "shocked",
+       "emotion": "angry",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "panic",
+     "shot": "wide",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Riesenmaul"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "ZUSCHNAPPEN",
+      "color": "red"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Nahaufnahme zeigt die nach innen gebogenen, nadelscharfen Zähne des Fisches.",
+     "text": "Seine Zähne stehen nach innen gebogen, sodass kein Opfer mehr entkommen kann.",
+     "image": "Close-up of razor sharp inward-curved teeth inside the predator's mouth.",
+     "who": [],
+     "place": "underwater",
+     "backdrop": {
+      "sky": "night",
+      "ground": "rock",
+      "elements": [
+       "sea"
+      ]
+     },
+     "time": "night",
+     "weather": "dark",
+     "props": [
+      "fish"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "insert",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "nach innen gebogen"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Grafik vergleicht den Magen des Fisches mit doppelt so großer Beute.",
+     "text": "Sein Magen ist extrem dehnbar und verdaut Beute, die doppelt so groß ist.",
+     "image": "Graphic comparison showing fish stomach expanding to twice its normal body size.",
+     "who": [],
+     "place": "underwater",
+     "backdrop": {
+      "sky": "night",
+      "ground": "rock",
+      "elements": [
+       "sea"
+      ]
+     },
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "graphic": {
+      "type": "compare",
+      "left": "KÖRPER",
+      "right": "BEUTE",
+      "value": "100 %",
+      "sub": "200 %"
+     },
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "doppelt so groß"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Person blickt erstaunt auf zwei riesige Koffer auf einem Tisch.",
+     "text": "Das wäre, als würdest du ein Schnitzel essen, das doppelt so groß ist wie du.",
+     "image": "Character looking amazed next to a giant meal that is bigger than a human.",
+     "who": [
+      "du"
+     ],
+     "place": "kitchen",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "table"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "happy",
+     "shot": "wide",
+     "camera": "zoom_out",
+     "sfx": "pop",
+     "highlight": [
+      "doppelt so groß"
+     ],
+     "overlay": {
+      "type": "note",
+      "title": "VERGLEICH",
+      "text": "200% EIGENGEWICHT"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein winziges Männchen schwimmt neben einem riesigen weiblichen Anglerfisch.",
+     "text": "Du denkst, das Männchen jagt genauso geschickt wie das Weibchen?",
+     "image": "Tiny male fish swimming next to a massive female anglerfish.",
+     "who": [
+      "angler"
+     ],
+     "place": "underwater",
+     "backdrop": {
+      "sky": "night",
+      "ground": "rock",
+      "elements": [
+       "sea"
+      ]
+     },
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "actors": [
+      {
+       "id": "angler",
+       "action": "think",
+       "emotion": "happy",
+       "emote": "?",
+       "pos": "right",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Männchen jagt"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Stempel mit der Aufschrift FALSCH erscheint auf einer dunklen Meereskarte.",
+     "text": "Falsch! Die Männchen sind winzig und haben überhaupt keine eigene Leuchte.",
+     "image": "A massive RED stamp saying FALSCH over a underwater map.",
+     "who": [],
+     "place": "underwater",
+     "backdrop": {
+      "sky": "night",
+      "ground": "rock",
+      "elements": [
+       "sea"
+      ]
+     },
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "event",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Falsch",
+      "keine Leuchte"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "FALSCH",
+      "color": "red"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das kleine Männchen beißt sich fest an der Haut des Weibchens fest.",
+     "text": "Stattdessen beißt sich das Männchen am Körper des Weibchens fest.",
+     "image": "Tiny male fish biting and attaching to the skin of a large female fish.",
+     "who": [
+      "angler"
+     ],
+     "place": "underwater",
+     "backdrop": {
+      "sky": "night",
+      "ground": "rock",
+      "elements": [
+       "sea"
+      ]
+     },
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "actors": [
+      {
+       "id": "angler",
+       "action": "walk",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "close",
+     "camera": "zoom_in",
+     "sfx": "pop",
+     "highlight": [
+      "beißt sich fest"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Grafik zeigt zwei Gewebeschichten, die langsam miteinander verschmelzen.",
+     "text": "Mit der Zeit verwächst seine Haut vollständig mit ihrem Blutkreislauf.",
+     "image": "Graphic showing two tissues fusing together with blood vessels connecting.",
+     "who": [],
+     "place": "underwater",
+     "backdrop": {
+      "sky": "night",
+      "ground": "rock",
+      "elements": [
+       "sea"
+      ]
+     },
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "graphic": {
+      "type": "pulse",
+      "value": "1",
+      "label": "VERWACHSEN"
+     },
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Blutkreislauf"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Männchen verwandelt sich langsam in eine kleine Hautfalte an der Seite des Weibchens.",
+     "text": "Am Ende schrumpft es zu einem dauerhaften Organ des Weibchens zusammen.",
+     "image": "Small male fish shrinking into a small skin tissue appendage on female.",
+     "who": [
+      "angler"
+     ],
+     "place": "underwater",
+     "backdrop": {
+      "sky": "night",
+      "ground": "rock",
+      "elements": [
+       "sea"
+      ]
+     },
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "actors": [
+      {
+       "id": "angler",
+       "action": "idle",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "dauerhaften Organ"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "PARASITISMUS"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Zähler tickt hoch auf mehrere Jahre Lebensdauer in Dunkelheit.",
+     "text": "Sie teilen sich Nährstoffe und Energie für das restliche Leben.",
+     "image": "A big counter graphics showing shared energy points ticking up fast.",
+     "who": [],
+     "place": "underwater",
+     "backdrop": {
+      "sky": "night",
+      "ground": "rock",
+      "elements": [
+       "sea"
+      ]
+     },
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "graphic": {
+      "type": "counter",
+      "label": "GEMEINSAME ENERGIE",
+      "value": 100,
+      "unit": "SYMBIOSE"
+     },
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Nährstoffe und Energie"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Taucherin leuchtet mit einer Taschenlampe erschrocken in die Dunkelheit.",
+     "text": "Bleibt nur die Frage, was sonst noch in der tiefen Finsternis lauert.",
+     "image": "Diver pointing flashlight into pitch black deep sea water in confusion.",
+     "who": [
+      "du"
+     ],
+     "place": "underwater",
+     "backdrop": {
+      "sky": "night",
+      "ground": "rock",
+      "elements": [
+       "sea"
+      ]
+     },
+     "time": "night",
+     "weather": "dark",
+     "props": [
+      "flashlight"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true,
+       "hold": "flashlight"
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "Finsternis lauert"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Anglerfisch knipst seine Stirnlampe aus und verschwindet im Schatten.",
+     "text": "Sobald du das Licht in der Tiefsee siehst, ist es zu spät.",
+     "image": "Anglerfish turns off light and blends back into pitch black ocean water.",
+     "who": [
+      "angler"
+     ],
+     "place": "underwater",
+     "backdrop": {
+      "sky": "night",
+      "ground": "rock",
+      "elements": [
+       "sea"
+      ]
+     },
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "actors": [
+      {
+       "id": "angler",
+       "action": "talk",
+       "emotion": "angry",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "scary",
+     "shot": "close",
+     "camera": "zoom_in",
+     "sfx": "boom",
+     "highlight": [
+      "zu spät"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "LICHT AUS"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Licht flammt plötzlich wieder auf und zeigt erneut das riesige Gebiss.",
+     "text": "Denn dort drüben wartet schon das nächste spitze Gebiss.",
+     "image": "Glowing light flashes back on showing giant sharp teeth coming into view.",
+     "who": [
+      "angler"
+     ],
+     "place": "underwater",
+     "backdrop": {
+      "sky": "night",
+      "ground": "rock",
+      "elements": [
+       "sea"
+      ]
+     },
+     "time": "night",
+     "weather": "dark",
+     "props": [],
+     "actors": [
+      {
+       "id": "angler",
+       "action": "shocked",
+       "emotion": "happy",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "scary",
+     "shot": "wide",
+     "camera": "shake",
+     "sfx": "ding",
+     "highlight": [
+      "drei Meter große Zähne"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "bakteriendüse",
+   "magen",
+   "gebiss"
+  ],
+  "title": "Tiefsee-Anglerfisch: Die gefährlichste Falle der Welt",
+  "created": 1795706469.3955913
  }
 }
