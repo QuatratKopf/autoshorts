@@ -1,0 +1,441 @@
+{
+ "title": "Fang an, bevor du bereit bist",
+ "scenes": [
+  {
+   "text": "Du bist nicht faul, du wartest nur auf den perfekten Moment.",
+   "see": "Du stehst im Wohnzimmer und denkst nach.",
+   "place": "park",
+   "time": "day",
+   "props": [
+    {
+     "type": "schuh"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "run",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "right"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Nachts liegst du wach im Bett und starrst auf das Handy.",
+   "see": "Nachts liegst du im Schlafzimmer wach im Bett und starrst auf das Handy.",
+   "place": "bedroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "",
+     "emote": "none",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Du nimmst dir fest vor, morgen endlich anzufangen.",
+   "see": "Du nimmst dir im Schlafzimmer fest vor, morgen anzufangen.",
+   "place": "bedroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "calm"
+  },
+  {
+   "text": "Am Morgen klingelt der Wecker und die alte Ausrede ist sofort wieder da.",
+   "see": "Am Morgen klingelt der Wecker im Schlafzimmer.",
+   "place": "bedroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "wecker"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "scared",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Du stehst vor der geschlossenen Tür und traust dich nicht hindurch.",
+   "see": "Du stehst vor der geschlossenen Tür im Wohnzimmer und kauerst.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "door"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "cower",
+     "emotion": "scared",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Du wartest auf mehr Mut, mehr Zeit und den besseren Plan.",
+   "see": "Du wartest im Büro und denkst nach.",
+   "place": "office",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Der perfekte Moment kommt niemals von allein zu dir.",
+   "see": "Der perfekte Moment kommt niemals von allein.",
+   "place": "mountain",
+   "backdrop": {
+    "sky": "day",
+    "ground": "rock",
+    "elements": [
+     "mountains",
+     "rocks"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "rock"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "action": "think",
+     "pos": "center",
+     "hold": "rock",
+     "emotion": "",
+     "emote": "none"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Niemand fühlt sich wirklich bereit für den ersten Schritt.",
+   "see": "Niemand fühlt sich bereit, du stehst am Berg.",
+   "place": "mountain",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shake",
+     "emotion": "scared",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Die anderen gehen einfach los, auch mit weichen Knien.",
+   "see": "Du gehst mit weichen Knien den Weg entlang.",
+   "place": "street",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "scared",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "right"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Mut kommt erst nach dem ersten Schritt, niemals davor.",
+   "see": "Mut kommt erst nach dem ersten Schritt.",
+   "place": "street",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Jetzt kommen drei winzige Schritte für deinen Neuanfang.",
+   "see": "Jetzt kommen drei winzige Schritte für deinen Neuanfang.",
+   "place": "park",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Erstens: Schnapp dir die Laufschuhe und laufe nur zwei Minuten.",
+   "see": "Du ziehst die Laufschuhe an und rennst im Park.",
+   "place": "park",
+   "time": "day",
+   "props": [
+    {
+     "type": "schuh"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "run",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "right"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Zweitens: Schlage das Buch auf und lese genau eine Seite.",
+   "see": "Du schlägst im Büro ein Buch auf und liest.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "lehrbuch"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "idle",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "lehrbuch",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "insert",
+   "mood": "calm"
+  },
+  {
+   "text": "Drittens: Mach diesen einen Anruf, vor dem du dich drückst.",
+   "see": "Du machst im Wohnzimmer den Anruf mit dem Handy.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Wer einmal angefangen hat, will plötzlich freiwillig weitermachen.",
+   "see": "Du rennst fröhlich im Park weiter.",
+   "place": "park",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "run",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left",
+     "to": "right"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Jetzt gehst du endlich entschlossen durch die schwere Tür.",
+   "see": "Du gehst entschlossen durch die schwere Tür im Wohnzimmer.",
+   "place": "livingroom",
+   "time": "day",
+   "props": [
+    {
+     "type": "door"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "right"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Nicht morgen. Nicht nächste Woche. Fang jetzt an.",
+   "see": "Du stehst auf dem Berg und springst vor Freude.",
+   "place": "mountain",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Speicher dir das für die harten Tage.",
+   "see": "Du stehst im Wohnzimmer und hältst das Handy.",
+   "place": "mountain",
+   "time": "day",
+   "props": [
+    {
+     "type": "phone"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": 750
+    }
+   ],
+   "mood": "calm"
+  }
+ ]
+}
