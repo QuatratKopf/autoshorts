@@ -8312,7 +8312,7 @@
   "id": 218,
   "category": "motivation",
   "topic": "Fang an, bevor du bereit bist",
-  "status": "rendered",
+  "status": "published",
   "created": 1795690807.7562938,
   "title": "Fang an, bevor du bereit bist",
   "description": "Du bist nicht faul, du wartest nur auf den perfekten Moment.\nWarum Mut erst nach dem ersten Schritt kommt – und drei winzige Schritte, mit denen du heute anfängst.\nWas ist dein erster kleiner Schritt?",
@@ -8347,6 +8347,12 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "zernio_id": "6b0813732ae235cdb49618cb",
+  "yt_status": "Zernio: published",
+  "yt_id": "8mKM4M9ZsLo",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6b0813732ae235cdb49618cb",
+  "error": null
  }
 ]
