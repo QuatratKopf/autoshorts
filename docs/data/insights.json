@@ -1,5 +1,5 @@
 {
- "updated": 1795710701.1354105,
+ "updated": 1795712496.3947568,
  "enough": true,
  "counted": 45,
  "total": 47,
@@ -27,10 +27,10 @@
    "slug": "liebe",
    "name": "💕 Liebe",
    "n": 1,
-   "avg_views": 1518,
+   "avg_views": 1520,
    "avg_likes": 64.0,
-   "like_rate": 4.22,
-   "avg_score": 2478
+   "like_rate": 4.21,
+   "avg_score": 2480
   },
   {
    "slug": "mysterien",
@@ -47,26 +47,26 @@
    "n": 12,
    "avg_views": 1691,
    "avg_likes": 46.4,
-   "like_rate": 2.75,
-   "avg_score": 2389
+   "like_rate": 2.74,
+   "avg_score": 2390
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 8,
    "avg_views": 1650,
-   "avg_likes": 44.4,
-   "like_rate": 2.69,
-   "avg_score": 2327
+   "avg_likes": 44.5,
+   "like_rate": 2.7,
+   "avg_score": 2329
   },
   {
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 2,
-   "avg_views": 1530,
+   "avg_views": 1542,
    "avg_likes": 32.0,
-   "like_rate": 2.09,
-   "avg_score": 2010
+   "like_rate": 2.08,
+   "avg_score": 2022
   },
   {
    "slug": "storys",
@@ -99,10 +99,10 @@
    "slug": "grusel",
    "name": "👻 Grusel",
    "n": 2,
-   "avg_views": 426,
+   "avg_views": 434,
    "avg_likes": 18.5,
-   "like_rate": 4.35,
-   "avg_score": 733
+   "like_rate": 4.27,
+   "avg_score": 741
   }
  ],
  "weights": {
@@ -117,9 +117,9 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2285 Aufrufe, 2.05 % Likes).",
-  "Schwächste Kategorie: 👻 Grusel (Ø 426 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2269 zu 1119 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2363 zu 1852 Punkte).",
+  "Schwächste Kategorie: 👻 Grusel (Ø 434 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2271 zu 1119 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2365 zu 1852 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -128,13 +128,13 @@
  ],
  "words_bad": [
   "remix",
-  "lied",
-  "erkennst",
-  "bekanntes",
   "glas",
+  "erkennst",
+  "lied",
+  "bekanntes",
   "niemand",
-  "klassikers",
-  "scheibe"
+  "jede",
+  "eines"
  ],
  "top": [
   {
@@ -193,11 +193,11 @@
    "id": 205,
    "title": "Starre nie im Dunkeln in den Spiegel",
    "category": "grusel",
-   "views": 357,
+   "views": 373,
    "likes": 17,
    "comments": 2,
    "shares": 0,
-   "score": 672
+   "score": 688
   },
   {
    "id": 196,
