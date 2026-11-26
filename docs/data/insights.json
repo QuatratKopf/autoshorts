@@ -1,8 +1,8 @@
 {
- "updated": 1795720238.7213714,
+ "updated": 1795722091.6914153,
  "enough": true,
  "counted": 45,
- "total": 47,
+ "total": 48,
  "needed": 6,
  "categories": [
   {
@@ -54,19 +54,19 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 8,
-   "avg_views": 1652,
+   "avg_views": 1654,
    "avg_likes": 44.5,
    "like_rate": 2.69,
-   "avg_score": 2331
+   "avg_score": 2332
   },
   {
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 2,
-   "avg_views": 1600,
-   "avg_likes": 33.5,
-   "like_rate": 2.09,
-   "avg_score": 2102
+   "avg_views": 1602,
+   "avg_likes": 34.0,
+   "like_rate": 2.12,
+   "avg_score": 2112
   },
   {
    "slug": "storys",
@@ -93,16 +93,16 @@
    "avg_views": 1231,
    "avg_likes": 10.5,
    "like_rate": 0.85,
-   "avg_score": 1423
+   "avg_score": 1424
   },
   {
    "slug": "grusel",
    "name": "👻 Grusel",
    "n": 2,
-   "avg_views": 444,
+   "avg_views": 446,
    "avg_likes": 19.5,
-   "like_rate": 4.39,
-   "avg_score": 767
+   "like_rate": 4.38,
+   "avg_score": 768
   }
  ],
  "weights": {
@@ -117,9 +117,9 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2285 Aufrufe, 2.05 % Likes).",
-  "Schwächste Kategorie: 👻 Grusel (Ø 444 Aufrufe) – kommt seltener dran.",
+  "Schwächste Kategorie: 👻 Grusel (Ø 446 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2277 zu 1121 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2373 zu 1853 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2374 zu 1853 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -128,13 +128,13 @@
  ],
  "words_bad": [
   "remix",
+  "lied",
+  "glas",
   "erkennst",
   "bekanntes",
-  "glas",
-  "lied",
   "niemand",
-  "eines",
-  "klassikers"
+  "jede",
+  "scheibe"
  ],
  "top": [
   {
@@ -193,11 +193,11 @@
    "id": 205,
    "title": "Starre nie im Dunkeln in den Spiegel",
    "category": "grusel",
-   "views": 394,
+   "views": 396,
    "likes": 19,
    "comments": 2,
    "shares": 0,
-   "score": 739
+   "score": 741
   },
   {
    "id": 196,
