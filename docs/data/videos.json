@@ -8231,7 +8231,7 @@
   "id": 216,
   "category": "motivation",
   "topic": "Fang an, bevor du bereit bist",
-  "status": "review",
+  "status": "discarded",
   "created": 1795687774.8961697,
   "title": "Motivation: Fang einfach an, bevor du bereit bist",
   "description": "Du bist nicht faul. Du bist einfach nur abgelenkt!\nWarum Perfektionismus dich blockiert und wie du sofort in die Umsetzung kommst.\nMachst du den ersten Schritt heute oder erst am Montag?",
@@ -8268,6 +8268,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-26 13:00",
-  "review_at": 1795688152.064285
+  "review_at": 1795688152.064285,
+  "error": "Bei der Prüfung verworfen: Prüfung: Figur schläft beim Hook statt am Handy, sechs Szenen nur stehende Figur, Sitzen auf Kiste, Hantel über dem Wort, schiefe Sätze (Zero-Percent-Rule, Entscheidung heute Nacht)"
  }
 ]
