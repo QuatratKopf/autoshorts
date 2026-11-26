@@ -1,5 +1,5 @@
 {
- "updated": 1795723899.093802,
+ "updated": 1795725706.727586,
  "enough": true,
  "counted": 45,
  "total": 48,
@@ -27,10 +27,10 @@
    "slug": "liebe",
    "name": "💕 Liebe",
    "n": 1,
-   "avg_views": 1521,
+   "avg_views": 1522,
    "avg_likes": 64.0,
-   "like_rate": 4.21,
-   "avg_score": 2481
+   "like_rate": 4.2,
+   "avg_score": 2482
   },
   {
    "slug": "mysterien",
@@ -45,7 +45,7 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 12,
-   "avg_views": 1691,
+   "avg_views": 1692,
    "avg_likes": 46.4,
    "like_rate": 2.74,
    "avg_score": 2390
@@ -54,19 +54,19 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 8,
-   "avg_views": 1652,
+   "avg_views": 1655,
    "avg_likes": 44.5,
    "like_rate": 2.69,
-   "avg_score": 2330
+   "avg_score": 2334
   },
   {
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 2,
-   "avg_views": 1608,
-   "avg_likes": 34.0,
-   "like_rate": 2.11,
-   "avg_score": 2118
+   "avg_views": 1616,
+   "avg_likes": 34.5,
+   "like_rate": 2.13,
+   "avg_score": 2134
   },
   {
    "slug": "storys",
@@ -111,15 +111,15 @@
   "tiere": 1.13,
   "whatif": 1.09,
   "comedy": 1.37,
-  "vergleich": 0.96,
+  "vergleich": 0.97,
   "motivation": 1.2,
   "nachricht": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2285 Aufrufe, 2.05 % Likes).",
   "Schwächste Kategorie: 👻 Grusel (Ø 447 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2278 zu 1120 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2374 zu 1853 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2279 zu 1121 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2377 zu 1853 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -128,13 +128,13 @@
  ],
  "words_bad": [
   "remix",
-  "erkennst",
+  "bekanntes",
   "lied",
   "glas",
-  "bekanntes",
+  "erkennst",
   "niemand",
-  "klassikers",
-  "jede"
+  "jede",
+  "scheibe"
  ],
  "top": [
   {
