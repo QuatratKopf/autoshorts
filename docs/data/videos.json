@@ -8275,7 +8275,7 @@
   "id": 217,
   "category": "motivation",
   "topic": "Fang an, bevor du bereit bist – Vorgaben: Motivationsrede an \"du\", 20 bis 24 kurze Sätze, rund 75 Sekunden. In JEDER Szene steht die Figur \"du\" im Bild und TUT genau das, was der Satz sagt (actors nie leer, keine Fremden, keine Menschenmenge, keine Grafik-Szene, keine Einblendung). Jede Szene ein anderer Ort oder eine andere Handlung als die davor; die Figur steht, geht oder rennt (nicht sitzen, nicht schlafen). Stoff als Stichpunkte, nicht wörtlich abschreiben: Hook: Du bist nicht faul, du wartest nur auf den perfekten Moment. Alltag: nachts liegst du wach im Bett am Handy und nimmst dir vor, morgen anzufangen (Ort bedroom, Nacht, Figur wach, hält das Handy, action idle); am Morgen klingelt der Wecker und die Ausrede ist dieselbe (Ort bedroom, Tag, Wecker); du stehst vor der Tür und traust dich nicht hindurch (Ort livingroom, Tür, action cower); du wartest auf mehr Mut, mehr Zeit, den besseren Plan (action think). Wendepunkt am Fuß des Berges (Ort mountain, Tag): Der perfekte Moment kommt nie; niemand fühlt sich bereit, die anderen gehen trotzdem los, mit weichen Knien (action tremble); Mut kommt nach dem ersten Schritt, nicht davor (action walk). Dann drei winzige Schritte, jeder mit eigenem Bild: Laufschuhe an und zwei Minuten laufen (Ort park, Tag, action run); das Buch aufschlagen und nur eine Seite lesen (Ort office, Figur steht mit Buch in der Hand); den einen Anruf machen, vor dem du dich drückst (Ort livingroom, Handy in der Hand, action talk). Danach: Wer einmal angefangen hat, will weitermachen (Ort park, Figur rennt fröhlich). Du gehst durch die Tür (Ort livingroom, Tür, action walk). Schluss auf dem Berg (Ort mountain, Tag, Figur jubelt: action jump): Nicht morgen, nicht nächste Woche, jetzt; letzter Satz: Speicher dir das für die harten Tage. Der letzte Satz ist vollständig und endet mit einem Punkt, kein Doppelpunkt, kein Satz wiederholt den ersten. Verboten: englische Wörter und erfundene Regeln (Rule, Flow, Move, Mindset, Grind, Dopamin), Uhrzeiten und alle Zahlen außer \"zwei Minuten\" und \"eine Seite\", Hantel, Liegestütze, Versprechen von Reichtum oder schnellem Erfolg, Zitate, Namen. Jedes Wort einzeln und richtig schreiben. Beschreibung: worum es geht (anfangen, bevor man sich bereit fühlt, mit einem winzigen ersten Schritt), dazu eine Frage an die Zuschauer. Titel: Fang an, bevor du bereit bist. Titelbild-Text: FANG EINFACH AN",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1795688536.508375,
   "title": "Fang an, bevor du bereit bist",
   "description": "Du bist nicht faul, du wartest nur auf den perfekten Moment.\nErfahre, warum der erste kleine Schritt alles verändert und wie du deine Ausreden besiegst.\nWann fängst du endlich an?",
@@ -8305,6 +8305,7 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Prüfung: erstes Bild fröhlicher Dauerlauf statt Hook, Figur läuft durchs Schlafzimmer statt wach im Bett zu liegen, Felsbrocken in der Hand, drei Sekunden nur eine Tür, „lese“ statt „lies“"
  }
 ]
