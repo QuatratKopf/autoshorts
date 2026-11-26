@@ -1,5 +1,5 @@
 {
- "updated": 1795682324.9452965,
+ "updated": 1795684135.5499759,
  "enough": true,
  "counted": 43,
  "total": 45,
@@ -36,10 +36,10 @@
    "slug": "liebe",
    "name": "💕 Liebe",
    "n": 1,
-   "avg_views": 1514,
+   "avg_views": 1508,
    "avg_likes": 64.0,
-   "like_rate": 4.23,
-   "avg_score": 2474
+   "like_rate": 4.24,
+   "avg_score": 2468
   },
   {
    "slug": "mysterien",
@@ -63,10 +63,10 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 7,
-   "avg_views": 1708,
+   "avg_views": 1707,
    "avg_likes": 44.4,
    "like_rate": 2.6,
-   "avg_score": 2383
+   "avg_score": 2382
   },
   {
    "slug": "storys",
@@ -119,7 +119,7 @@
   "Stärkste Kategorie: 🤪 Comedy (Ø 2285 Aufrufe, 2.05 % Likes).",
   "Schwächste Kategorie: 👻 Grusel (Ø 423 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2305 zu 1118 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2421 zu 1852 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2420 zu 1852 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -128,13 +128,13 @@
  ],
  "words_bad": [
   "remix",
-  "lied",
-  "erkennst",
   "bekanntes",
+  "erkennst",
+  "lied",
   "glas",
-  "scheibe",
+  "klassikers",
   "eines",
-  "klassikers"
+  "jede"
  ],
  "top": [
   {
