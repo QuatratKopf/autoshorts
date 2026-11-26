@@ -1,5 +1,5 @@
 {
- "updated": 1795712496.3947568,
+ "updated": 1795714319.2699335,
  "enough": true,
  "counted": 45,
  "total": 47,
@@ -18,7 +18,7 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 3,
-   "avg_views": 1804,
+   "avg_views": 1805,
    "avg_likes": 43.7,
    "like_rate": 2.42,
    "avg_score": 2493
@@ -54,19 +54,19 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 8,
-   "avg_views": 1650,
+   "avg_views": 1651,
    "avg_likes": 44.5,
-   "like_rate": 2.7,
-   "avg_score": 2329
+   "like_rate": 2.69,
+   "avg_score": 2330
   },
   {
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 2,
-   "avg_views": 1542,
+   "avg_views": 1562,
    "avg_likes": 32.0,
-   "like_rate": 2.08,
-   "avg_score": 2022
+   "like_rate": 2.05,
+   "avg_score": 2042
   },
   {
    "slug": "storys",
@@ -90,7 +90,7 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 6,
-   "avg_views": 1230,
+   "avg_views": 1231,
    "avg_likes": 10.5,
    "like_rate": 0.85,
    "avg_score": 1423
@@ -99,10 +99,10 @@
    "slug": "grusel",
    "name": "👻 Grusel",
    "n": 2,
-   "avg_views": 434,
+   "avg_views": 439,
    "avg_likes": 18.5,
-   "like_rate": 4.27,
-   "avg_score": 741
+   "like_rate": 4.21,
+   "avg_score": 746
   }
  ],
  "weights": {
@@ -111,15 +111,15 @@
   "tiere": 1.14,
   "whatif": 1.09,
   "comedy": 1.37,
-  "vergleich": 0.92,
+  "vergleich": 0.93,
   "motivation": 1.2,
   "nachricht": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2285 Aufrufe, 2.05 % Likes).",
-  "Schwächste Kategorie: 👻 Grusel (Ø 434 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2271 zu 1119 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2365 zu 1852 Punkte).",
+  "Schwächste Kategorie: 👻 Grusel (Ø 439 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2272 zu 1120 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2367 zu 1853 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -129,12 +129,12 @@
  "words_bad": [
   "remix",
   "glas",
-  "erkennst",
-  "lied",
   "bekanntes",
+  "lied",
+  "erkennst",
   "niemand",
   "jede",
-  "eines"
+  "klassikers"
  ],
  "top": [
   {
@@ -181,11 +181,11 @@
    "id": 139,
    "title": "Dieses winzige Tier ist zäher als ein Löwe",
    "category": "tiere",
-   "views": 2185,
+   "views": 2186,
    "likes": 55,
    "comments": 0,
    "shares": 1,
-   "score": 3050
+   "score": 3051
   }
  ],
  "flop": [
@@ -193,11 +193,11 @@
    "id": 205,
    "title": "Starre nie im Dunkeln in den Spiegel",
    "category": "grusel",
-   "views": 373,
+   "views": 383,
    "likes": 17,
    "comments": 2,
    "shares": 0,
-   "score": 688
+   "score": 698
   },
   {
    "id": 196,
