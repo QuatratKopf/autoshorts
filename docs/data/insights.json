@@ -1,5 +1,5 @@
 {
- "updated": 1795714319.2699335,
+ "updated": 1795716088.7175324,
  "enough": true,
  "counted": 45,
  "total": 47,
@@ -27,10 +27,10 @@
    "slug": "liebe",
    "name": "💕 Liebe",
    "n": 1,
-   "avg_views": 1520,
+   "avg_views": 1518,
    "avg_likes": 64.0,
-   "like_rate": 4.21,
-   "avg_score": 2480
+   "like_rate": 4.22,
+   "avg_score": 2478
   },
   {
    "slug": "mysterien",
@@ -47,26 +47,26 @@
    "n": 12,
    "avg_views": 1691,
    "avg_likes": 46.4,
-   "like_rate": 2.74,
-   "avg_score": 2390
+   "like_rate": 2.75,
+   "avg_score": 2389
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 8,
-   "avg_views": 1651,
-   "avg_likes": 44.5,
+   "avg_views": 1650,
+   "avg_likes": 44.4,
    "like_rate": 2.69,
-   "avg_score": 2330
+   "avg_score": 2327
   },
   {
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 2,
-   "avg_views": 1562,
+   "avg_views": 1576,
    "avg_likes": 32.0,
-   "like_rate": 2.05,
-   "avg_score": 2042
+   "like_rate": 2.03,
+   "avg_score": 2056
   },
   {
    "slug": "storys",
@@ -99,10 +99,10 @@
    "slug": "grusel",
    "name": "👻 Grusel",
    "n": 2,
-   "avg_views": 439,
-   "avg_likes": 18.5,
-   "like_rate": 4.21,
-   "avg_score": 746
+   "avg_views": 441,
+   "avg_likes": 19.0,
+   "like_rate": 4.31,
+   "avg_score": 756
   }
  ],
  "weights": {
@@ -111,15 +111,15 @@
   "tiere": 1.14,
   "whatif": 1.09,
   "comedy": 1.37,
-  "vergleich": 0.93,
+  "vergleich": 0.94,
   "motivation": 1.2,
   "nachricht": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2285 Aufrufe, 2.05 % Likes).",
-  "Schwächste Kategorie: 👻 Grusel (Ø 439 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2272 zu 1120 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2367 zu 1853 Punkte).",
+  "Schwächste Kategorie: 👻 Grusel (Ø 441 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2273 zu 1119 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2368 zu 1853 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -128,13 +128,13 @@
  ],
  "words_bad": [
   "remix",
-  "glas",
   "bekanntes",
-  "lied",
   "erkennst",
+  "glas",
+  "lied",
   "niemand",
-  "jede",
-  "klassikers"
+  "klassikers",
+  "scheibe"
  ],
  "top": [
   {
@@ -193,11 +193,11 @@
    "id": 205,
    "title": "Starre nie im Dunkeln in den Spiegel",
    "category": "grusel",
-   "views": 383,
-   "likes": 17,
+   "views": 388,
+   "likes": 18,
    "comments": 2,
    "shares": 0,
-   "score": 698
+   "score": 718
   },
   {
    "id": 196,
