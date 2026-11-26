@@ -1,5 +1,5 @@
 {
- "updated": 1795727502.7547626,
+ "updated": 1795729287.836981,
  "enough": true,
  "counted": 45,
  "total": 48,
@@ -27,10 +27,10 @@
    "slug": "liebe",
    "name": "💕 Liebe",
    "n": 1,
-   "avg_views": 1521,
+   "avg_views": 1522,
    "avg_likes": 64.0,
-   "like_rate": 4.21,
-   "avg_score": 2481
+   "like_rate": 4.2,
+   "avg_score": 2482
   },
   {
    "slug": "mysterien",
@@ -63,10 +63,10 @@
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 2,
-   "avg_views": 1622,
+   "avg_views": 1629,
    "avg_likes": 34.5,
-   "like_rate": 2.13,
-   "avg_score": 2140
+   "like_rate": 2.12,
+   "avg_score": 2146
   },
   {
    "slug": "storys",
@@ -118,7 +118,7 @@
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2285 Aufrufe, 2.05 % Likes).",
   "Schwächste Kategorie: 👻 Grusel (Ø 447 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2279 zu 1121 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2280 zu 1121 Punkte).",
   "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2377 zu 1853 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
@@ -128,12 +128,12 @@
  ],
  "words_bad": [
   "remix",
-  "lied",
   "erkennst",
   "glas",
   "bekanntes",
+  "lied",
   "niemand",
-  "eines",
+  "jede",
   "klassikers"
  ],
  "top": [
