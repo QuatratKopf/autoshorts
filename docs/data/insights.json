@@ -1,5 +1,5 @@
 {
- "updated": 1795717897.1369977,
+ "updated": 1795720238.7213714,
  "enough": true,
  "counted": 45,
  "total": 47,
@@ -27,10 +27,10 @@
    "slug": "liebe",
    "name": "💕 Liebe",
    "n": 1,
-   "avg_views": 1518,
+   "avg_views": 1521,
    "avg_likes": 64.0,
-   "like_rate": 4.22,
-   "avg_score": 2478
+   "like_rate": 4.21,
+   "avg_score": 2481
   },
   {
    "slug": "mysterien",
@@ -45,28 +45,28 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 12,
-   "avg_views": 1691,
+   "avg_views": 1692,
    "avg_likes": 46.4,
-   "like_rate": 2.75,
-   "avg_score": 2389
+   "like_rate": 2.74,
+   "avg_score": 2390
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 8,
-   "avg_views": 1650,
-   "avg_likes": 44.4,
+   "avg_views": 1652,
+   "avg_likes": 44.5,
    "like_rate": 2.69,
-   "avg_score": 2327
+   "avg_score": 2331
   },
   {
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 2,
-   "avg_views": 1590,
-   "avg_likes": 33.0,
-   "like_rate": 2.08,
-   "avg_score": 2085
+   "avg_views": 1600,
+   "avg_likes": 33.5,
+   "like_rate": 2.09,
+   "avg_score": 2102
   },
   {
    "slug": "storys",
@@ -99,10 +99,10 @@
    "slug": "grusel",
    "name": "👻 Grusel",
    "n": 2,
-   "avg_views": 443,
+   "avg_views": 444,
    "avg_likes": 19.5,
-   "like_rate": 4.4,
-   "avg_score": 766
+   "like_rate": 4.39,
+   "avg_score": 767
   }
  ],
  "weights": {
@@ -111,15 +111,15 @@
   "tiere": 1.13,
   "whatif": 1.09,
   "comedy": 1.37,
-  "vergleich": 0.95,
+  "vergleich": 0.96,
   "motivation": 1.2,
   "nachricht": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2285 Aufrufe, 2.05 % Likes).",
-  "Schwächste Kategorie: 👻 Grusel (Ø 443 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2275 zu 1119 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2370 zu 1853 Punkte).",
+  "Schwächste Kategorie: 👻 Grusel (Ø 444 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2277 zu 1121 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2373 zu 1853 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -128,13 +128,13 @@
  ],
  "words_bad": [
   "remix",
-  "lied",
   "erkennst",
-  "glas",
   "bekanntes",
+  "glas",
+  "lied",
   "niemand",
-  "klassikers",
-  "eines"
+  "eines",
+  "klassikers"
  ],
  "top": [
   {
@@ -151,11 +151,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2602,
+   "views": 2603,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3442
+   "score": 3443
   },
   {
    "id": 77,
@@ -193,11 +193,11 @@
    "id": 205,
    "title": "Starre nie im Dunkeln in den Spiegel",
    "category": "grusel",
-   "views": 392,
+   "views": 394,
    "likes": 19,
    "comments": 2,
    "shares": 0,
-   "score": 737
+   "score": 739
   },
   {
    "id": 196,
