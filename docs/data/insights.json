@@ -1,5 +1,5 @@
 {
- "updated": 1795649398.469388,
+ "updated": 1795651269.5627453,
  "enough": true,
  "counted": 42,
  "total": 45,
@@ -9,10 +9,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 5,
-   "avg_views": 2284,
+   "avg_views": 2285,
    "avg_likes": 46.8,
    "like_rate": 2.05,
-   "avg_score": 3006
+   "avg_score": 3007
   },
   {
    "slug": "vergleich",
@@ -63,7 +63,7 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 7,
-   "avg_views": 1705,
+   "avg_views": 1706,
    "avg_likes": 44.3,
    "like_rate": 2.6,
    "avg_score": 2378
@@ -116,7 +116,7 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2284 Aufrufe, 2.05 % Likes).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2285 Aufrufe, 2.05 % Likes).",
   "Schwächste Kategorie: 👻 Grusel (Ø 420 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2303 zu 706 Punkte).",
   "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2436 zu 1852 Punkte).",
@@ -128,13 +128,13 @@
  ],
  "words_bad": [
   "remix",
-  "lied",
   "bekanntes",
   "erkennst",
+  "lied",
   "glas",
   "jede",
-  "klassikers",
-  "scheibe"
+  "scheibe",
+  "eines"
  ],
  "top": [
   {
