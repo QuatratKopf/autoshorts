@@ -1752,27 +1752,27 @@
   "topic": "Eine unbekannte Nummer schickt dir einen Countdown und befiehlt dir, alle Spiegel in deiner Wohnung abzuhängen – bis du in einem Spiegel eine Bewegung siehst, die du nicht gemacht hast.",
   "trend": null,
   "script": {
-   "title": "Unbekannte Nachricht blockiert alle Spiegel im Haus",
-   "description": "Drei Uhr zwölf und eine unheimliche Nachricht auf dem Handy!\nDu befolgst die mysteriösen Befehle, bis du im Spiegel eine Bewegung siehst, die du nicht gemacht hast.\nWelchen Spiegel würdest du zuerst abhängen?",
+   "title": "Unbekannte Nummer: Verhäng alle Spiegel",
+   "description": "Drei Uhr zwölf: Eine unbekannte Nummer schickt dir einen Countdown und einen Befehl – verhäng jeden Spiegel in deiner Wohnung.\nDu gehorchst. Nur den Spiegel im Bad vergisst du.\nWürdest du dich umdrehen?",
    "hashtags": [
     "#shorts",
     "#mystery",
-    "#countdown",
+    "#grusel",
     "#creepystory",
-    "#viral",
-    "#fyp",
+    "#unbekanntenummer",
     "#spiegel",
-    "#geheimnis"
+    "#countdown",
+    "#fyp"
    ],
    "tags": [
+    "unbekannte nummer",
     "unbekannte nachricht",
+    "gruselgeschichte",
     "mystery geschichte",
     "spiegel",
     "countdown",
-    "grusel",
-    "thriller",
-    "handy nachricht",
-    "schlafzimmer"
+    "creepy story deutsch",
+    "handy nachricht"
    ],
    "thumbnail": {
     "place": "bathroom",
@@ -1780,9 +1780,7 @@
     "actor": "du",
     "action": "shocked",
     "emotion": "shocked",
-    "props": [
-     "glass"
-    ],
+    "props": [],
     "weather": "cold",
     "image": "Close-up of a terrified person in a dark room looking at a glowing smartphone with a creepy reflection in a mirror behind them, dramatic lighting, high contrast",
     "text": "SCHAU NICHT HIN"
@@ -1801,21 +1799,21 @@
    },
    "scenes": [
     {
-     "text": "Eine unbekannte Nummer schickt dir einen tödlichen Countdown.",
-     "image": "Person lying in bed in a dark room while a smartphone screen lights up on the nightstand",
+     "text": "Drei Uhr zwölf. Eine unbekannte Nummer schickt dir einen Countdown.",
+     "image": "Nachts leuchtet das Handy im dunklen Schlafzimmer auf.",
      "who": [
       "du"
      ],
      "place": "bedroom",
-     "camera": "zoom_in",
+     "camera": "still",
      "sfx": "ding",
      "highlight": [
-      "Unbekannte Nummer"
+      "unbekannte Nummer"
      ],
-     "hud": "TAG 1 · 3:12 UHR",
+     "hud": "3:12 UHR",
      "status": "",
      "overlay": null,
-     "see": "Eine unbekannte Nummer schickt eine Nachricht im dunklen Zimmer auf dem Handy.",
+     "see": "Nachts leuchtet das Handy im dunklen Schlafzimmer auf.",
      "time": "night",
      "props": [],
      "actors": [
@@ -1837,16 +1835,15 @@
       "lines": [
        "In sieben Tagen",
        "beginnt es.",
-       "Vertrau niemandem.",
-       "!Öffne nicht die Tür."
+       "!Verhäng alle Spiegel."
       ]
      },
      "who_desc": "",
-     "place_desc": "dark bedroom with a bed and a large wall mirror under moonlight"
+     "place_desc": ""
     },
     {
-     "text": "Und plötzlich siehst du im Spiegel eine Bewegung, die du nicht gemacht hast.",
-     "image": "Close-up of a person sitting up in bed and staring at a glowing phone screen with a shock expression",
+     "text": "Und am Ende bewegt sich dein Spiegelbild, obwohl du ganz still stehst.",
+     "image": "Du stehst im Bad vor dem Spiegel, dein Spiegelbild bewegt sich von allein.",
      "who": [
       "du"
      ],
@@ -1854,20 +1851,12 @@
      "camera": "still",
      "sfx": "none",
      "highlight": [
-      "Nachricht"
+      "Spiegelbild"
      ],
+     "hud": "",
      "status": "",
-     "overlay": {
-      "type": "message",
-      "kicker": "UNBEKANNT",
-      "lines": [
-       "In sieben Tagen",
-       "beginnt es.",
-       "Vertau niemandem.",
-       "!Häng alle Spiegel auf."
-      ]
-     },
-     "see": "Du siehst im Badezimmerspiegel eine Bewegung, die du nicht gemacht hast.",
+     "overlay": null,
+     "see": "Du stehst im Bad vor dem Spiegel, dein Spiegelbild bewegt sich von allein.",
      "time": "night",
      "props": [],
      "actors": [
@@ -1877,30 +1866,32 @@
        "emotion": "shocked",
        "emote": "!",
        "pos": "center",
-       "speaks": true
+       "speaks": true,
+       "hold": ""
       }
      ],
      "shot": "close",
      "mood": "scary",
+     "graphic": null,
      "who_desc": "",
-     "place_desc": "",
-     "hud": ""
+     "place_desc": ""
     },
     {
      "text": "Du hältst es für einen dummen Scherz und löschst den Chat.",
-     "image": "Person tapping the phone screen to delete a message with an annoyed facial expression",
+     "image": "Du tippst nachts im Schlafzimmer genervt auf dem Handy und löschst den Chat.",
      "who": [
       "du"
      ],
-     "place": "livingroom",
-     "camera": "pan_right",
+     "place": "bedroom",
+     "camera": "still",
      "sfx": "none",
      "highlight": [
       "Scherz"
      ],
+     "hud": "",
      "status": "",
      "overlay": null,
-     "see": "Du hältst es für einen Scherz und löschst den Chat auf dem Handy.",
+     "see": "Du tippst nachts im Schlafzimmer genervt auf dem Handy und löschst den Chat.",
      "time": "night",
      "props": [],
      "actors": [
@@ -1914,30 +1905,31 @@
        "hold": "phone"
       }
      ],
-     "shot": "wide",
+     "shot": "",
      "mood": "calm",
+     "graphic": null,
      "who_desc": "",
-     "place_desc": "",
-     "hud": ""
+     "place_desc": ""
     },
     {
-     "text": "Dann kommt der Beweis. Eine Nachricht mit einer perfekten Kleinigkeit.",
-     "image": "Phone screen lighting up again with a new notification message on the nightstand",
+     "text": "Dann kommt der Beweis. Eine zweite Nachricht.",
+     "image": "Das Handy in deiner Hand leuchtet wieder auf, du erschrickst.",
      "who": [
       "du"
      ],
-     "place": "livingroom",
-     "camera": "zoom_in",
+     "place": "bedroom",
+     "camera": "still",
      "sfx": "ding",
      "highlight": [
       "Beweis"
      ],
+     "hud": "",
      "status": "",
      "overlay": {
       "type": "tag",
       "text": "DER BEWEIS"
      },
-     "see": "Eine neue Nachricht kommt auf dem Display mit einer perfekten Kleinigkeit.",
+     "see": "Das Handy in deiner Hand leuchtet wieder auf, du erschrickst.",
      "time": "night",
      "props": [],
      "actors": [
@@ -1951,65 +1943,59 @@
        "hold": "phone"
       }
      ],
-     "shot": "insert",
+     "shot": "",
      "mood": "tense",
+     "graphic": null,
      "who_desc": "",
-     "place_desc": "",
-     "hud": ""
+     "place_desc": ""
     },
     {
      "text": "In deinem Kühlschrank liegen eine halbe Pizza und ein kaputter Regenschirm.",
-     "image": "Open refrigerator in a dark kitchen showing half a pizza box and a broken umbrella inside",
+     "image": "Die Nachricht auf dem Handy.",
      "who": [],
-     "place": "kitchen",
+     "place": "bedroom",
      "camera": "still",
      "sfx": "none",
      "highlight": [
       "Kühlschrank"
      ],
+     "hud": "",
      "status": "",
-     "overlay": {
-      "type": "checklist",
-      "title": "KÜHLTEILE",
-      "items": [
-       [
-        "Pizza",
-        true
-       ],
-       [
-        "Regenschirm",
-        true
-       ]
+     "overlay": null,
+     "see": "Die Nachricht auf dem Handy.",
+     "time": "night",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "tense",
+     "graphic": {
+      "type": "message",
+      "kicker": "UNBEKANNT",
+      "lines": [
+       "In deinem Kühlschrank:",
+       "eine halbe Pizza",
+       "!und ein kaputter Regenschirm."
       ]
      },
-     "see": "In deinem Kühlschrank liegen eine halbe Pizza und ein kaputter Regenschirm.",
-     "time": "night",
-     "props": [
-      "fridge",
-      "message"
-     ],
-     "actors": [],
-     "shot": "insert",
-     "mood": "tense",
      "who_desc": "",
-     "place_desc": "",
-     "hud": ""
+     "place_desc": ""
     },
     {
-     "text": "Du läufst zur Küche, öffnest die Tür und erstarrst vor Schreck.",
-     "image": "Person standing shocked in front of an open refrigerator with wide eyes",
+     "text": "Du läufst in die Küche, reißt den Kühlschrank auf und erstarrst.",
+     "image": "Du stehst nachts erschrocken vor dem offenen Kühlschrank.",
      "who": [
       "du"
      ],
      "place": "kitchen",
-     "camera": "zoom_in",
+     "camera": "still",
      "sfx": "boom",
      "highlight": [
-      "Schreck"
+      "erstarrst"
      ],
+     "hud": "",
      "status": "",
      "overlay": null,
-     "see": "Du läufst zur Küche, öffnest die Tür und erstarrst vor Schreck.",
+     "see": "Du stehst nachts erschrocken vor dem offenen Kühlschrank.",
      "time": "night",
      "props": [
       "fridge"
@@ -2021,33 +2007,32 @@
        "emotion": "scared",
        "emote": "!",
        "pos": "center",
-       "to": "center",
-       "speaks": true
+       "speaks": true,
+       "hold": ""
       }
      ],
-     "shot": "wide",
-     "mood": "panic",
+     "shot": "",
+     "mood": "scary",
+     "graphic": null,
      "who_desc": "",
-     "place_desc": "",
-     "hud": ""
+     "place_desc": ""
     },
     {
-     "text": "Es stimmt. Jedes einzelne Wort dieser völlig fremden Person.",
-     "image": "Close-up of the half pizza and broken umbrella inside the cold fridge light",
-     "who": [],
+     "text": "Es stimmt. Jedes einzelne Wort.",
+     "image": "Großaufnahme: dein erschrockenes Gesicht in der dunklen Küche.",
+     "who": [
+      "du"
+     ],
      "place": "kitchen",
      "camera": "still",
      "sfx": "none",
      "highlight": [
       "Es stimmt"
      ],
+     "hud": "",
      "status": "",
-     "overlay": {
-      "type": "stamp",
-      "text": "WAHR",
-      "color": "red"
-     },
-     "see": "Es stimmt jedes einzelne Wort dieser völlig fremden Person.",
+     "overlay": null,
+     "see": "Großaufnahme: dein erschrockenes Gesicht in der dunklen Küche.",
      "time": "night",
      "props": [],
      "actors": [
@@ -2057,33 +2042,30 @@
        "emotion": "scared",
        "emote": "",
        "pos": "center",
-       "speaks": true
+       "speaks": true,
+       "hold": ""
       }
      ],
      "shot": "close",
      "mood": "tense",
+     "graphic": null,
      "who_desc": "",
-     "place_desc": "",
-     "hud": ""
+     "place_desc": ""
     },
     {
-     "text": "Der Countdown läuft. Noch sieben Tage bis zu dem, was kommt.",
-     "image": "Digital countdown clock showing seven days left glowing in a dark room",
+     "text": "Der Countdown läuft. Noch sieben Tage.",
+     "image": "",
      "who": [],
      "place": "livingroom",
      "camera": "still",
-     "sfx": "tick",
+     "sfx": "none",
      "highlight": [
-      "Countdown"
+      "sieben Tage"
      ],
-     "hud": "TAG 1",
+     "hud": "",
      "status": "",
-     "overlay": {
-      "type": "chapter",
-      "value": "7",
-      "text": "TAGE ÜBRIG"
-     },
-     "see": "Der Countdown läuft. Noch sieben Tage bis zu dem, was kommt.",
+     "overlay": null,
+     "see": "",
      "time": "night",
      "props": [],
      "actors": [],
@@ -2098,41 +2080,38 @@
      "place_desc": ""
     },
     {
-     "text": "Tag fünf. Der nächste Befehl lautet: Versteck alle Schlüssel.",
-     "image": "Person hiding house keys inside a dark kitchen drawer in a hurry",
-     "who": [
-      "du"
-     ],
-     "place": "hallway",
-     "camera": "pan_left",
-     "sfx": "none",
+     "text": "Am nächsten Morgen wiederholt die Nummer ihren Befehl. Verhäng jeden Spiegel in deiner Wohnung.",
+     "image": "Die Nachricht auf dem Handy.",
+     "who": [],
+     "place": "livingroom",
+     "camera": "still",
+     "sfx": "ding",
      "highlight": [
-      "Tag fünf"
+      "Befehl"
      ],
-     "hud": "TAG 5",
+     "hud": "",
      "status": "",
-     "overlay": {
-      "type": "chapter",
-      "value": "5",
-      "text": "TAGE ÜBRIG"
-     },
-     "see": "Tag fünf. Der nächste Befehl lautet: Versteck alle Schlüssel.",
-     "time": "day",
+     "overlay": null,
+     "see": "Die Nachricht auf dem Handy.",
+     "time": "night",
      "props": [],
      "actors": [],
      "shot": "graphic",
      "mood": "tense",
      "graphic": {
-      "type": "chapter",
-      "value": "5",
-      "text": "TAG FÜNF"
+      "type": "message",
+      "kicker": "UNBEKANNT",
+      "lines": [
+       "Verhäng jeden Spiegel",
+       "!in deiner Wohnung."
+      ]
      },
      "who_desc": "",
      "place_desc": ""
     },
     {
-     "text": "Du gehst in den Flur und tust genau das, was verlangt wird.",
-     "image": "Person locking the front door from the inside and looking nervously through the peephole",
+     "text": "Du holst Decken und Tücher und tust genau das, was verlangt wird.",
+     "image": "Du hängst im Flur ein Tuch über den Wandspiegel.",
      "who": [
       "du"
      ],
@@ -2140,14 +2119,15 @@
      "camera": "still",
      "sfx": "none",
      "highlight": [
-      "Flur"
+      "Decken"
      ],
+     "hud": "",
      "status": "",
      "overlay": null,
-     "see": "Du gehst in den Flur und tust genau das, was verlangt wird.",
-     "time": "day",
+     "see": "Du hängst im Flur ein Tuch über den Wandspiegel.",
+     "time": "night",
      "props": [
-      "vorhängeschloss"
+      "mirror_covered"
      ],
      "actors": [
       {
@@ -2155,69 +2135,36 @@
        "action": "walk",
        "emotion": "worried",
        "emote": "",
-       "pos": "left",
-       "to": "right",
-       "speaks": true
+       "pos": "center",
+       "speaks": true,
+       "hold": ""
       }
      ],
-     "shot": "wide",
+     "shot": "",
      "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": ""
-    },
-    {
-     "text": "Tag drei. Die Anweisung wird drastischer. Nimm ein Tuch und bedecke jeden Spiegel.",
-     "image": "Person standing on a chair in the hallway hanging a dark cloth over a large wall mirror",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "zoom_out",
-     "sfx": "none",
-     "highlight": [
-      "Tag drei"
-     ],
-     "hud": "TAG 3",
-     "status": "",
-     "overlay": {
-      "type": "chapter",
-      "value": "3",
-      "text": "TAGE ÜBRIG"
-     },
-     "see": "Tag drei. Die Anweisung wird drastischer. Nimm ein Tuch und bedecke jeden Spiegel.",
-     "time": "day",
-     "props": [],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "tense",
-     "graphic": {
-      "type": "chapter",
-      "value": "3",
-      "text": "TAG DREI"
-     },
+     "graphic": null,
      "who_desc": "",
      "place_desc": ""
     },
     {
-     "text": "Jeder einzelne Spiegel in der Wohnung verschwindet hinter dicken Decken.",
-     "image": "Living room with all mirrors and glass surfaces completely covered with dark blankets",
+     "text": "Ein Spiegel nach dem anderen verschwindet hinter dickem Stoff.",
+     "image": "Im Wohnzimmer hängt ein dickes Tuch über dem Spiegel, du zeigst darauf.",
      "who": [
       "du"
      ],
      "place": "livingroom",
-     "camera": "pan_right",
+     "camera": "still",
      "sfx": "none",
      "highlight": [
       "Spiegel"
      ],
+     "hud": "",
      "status": "",
      "overlay": null,
-     "see": "Jeder einzelne Spiegel in der Wohnung verschwindet hinter dicken Decken.",
-     "time": "day",
+     "see": "Im Wohnzimmer hängt ein dickes Tuch über dem Spiegel, du zeigst darauf.",
+     "time": "night",
      "props": [
-      "tuch",
-      "mirror"
+      "mirror_covered"
      ],
      "actors": [
       {
@@ -2226,18 +2173,46 @@
        "emotion": "worried",
        "emote": "",
        "pos": "center",
-       "speaks": true
+       "speaks": true,
+       "hold": ""
       }
      ],
-     "shot": "wide",
+     "shot": "",
      "mood": "tense",
+     "graphic": null,
      "who_desc": "",
-     "place_desc": "",
-     "hud": ""
+     "place_desc": ""
     },
     {
-     "text": "Im Fernsehen läuft eine seltsame Eilmeldung über Stromausfälle im Viertel.",
-     "image": "Television screen showing a breaking news broadcast with red warning banners in a dark room",
+     "text": "Noch drei Tage.",
+     "image": "",
+     "who": [],
+     "place": "livingroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "drei Tage"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": null,
+     "see": "",
+     "time": "night",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "tense",
+     "graphic": {
+      "type": "chapter",
+      "value": "3",
+      "text": "TAGE ÜBRIG"
+     },
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Im Fernsehen läuft eine seltsame Eilmeldung über Stromausfälle im ganzen Viertel.",
+     "image": "",
      "who": [],
      "place": "livingroom",
      "camera": "still",
@@ -2245,70 +2220,91 @@
      "highlight": [
       "Eilmeldung"
      ],
+     "hud": "",
      "status": "",
-     "overlay": {
-      "type": "news",
-      "kicker": "NACHRICHTEN",
-      "text": "STROMAUSFALL",
-      "sub": "In ganz Berlin"
-     },
-     "see": "Im Fernsehen läuft eine seltsame Eilmeldung über Stromausfälle im Viertel.",
-     "time": "night",
-     "props": [
-      "tv"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "event",
-     "mood": "panic",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": ""
-    },
-    {
-     "text": "Tag eins. Nur noch der alte Spiegel im Badezimmer ist nicht verhängt.",
-     "image": "Person standing in the dark bathroom looking nervously at the uncovered mirror on the wall",
-     "who": [
-      "du"
-     ],
-     "place": "bathroom",
-     "camera": "zoom_in",
-     "sfx": "tick",
-     "highlight": [
-      "Tag eins"
-     ],
-     "hud": "TAG 1",
-     "status": "",
-     "overlay": {
-      "type": "chapter",
-      "value": "1",
-      "text": "TAG ÜBRIG"
-     },
-     "see": "Tag eins. Nur noch der alte Spiegel im Badezimmer ist nicht verhängt.",
+     "overlay": null,
+     "see": "",
      "time": "night",
      "props": [],
      "actors": [],
      "shot": "graphic",
-     "mood": "panic",
+     "mood": "tense",
      "graphic": {
-      "type": "chapter",
-      "value": "1",
-      "text": "TAG EINS"
+      "type": "news",
+      "kicker": "EILMELDUNG",
+      "text": "STROMAUSFALL",
+      "sub": "Im ganzen Viertel"
      },
      "who_desc": "",
      "place_desc": ""
     },
     {
-     "text": "Du willst das Tuch holen und wirfst einen letzten Blick hinein.",
-     "image": "Close-up of a person staring directly into the bathroom mirror with wide, fearful eyes",
+     "text": "Und nachts hörst du es hinter den Tüchern leise klopfen.",
+     "image": "Du stehst nachts im Flur und lauschst ängstlich am verhängten Spiegel.",
+     "who": [
+      "du"
+     ],
+     "place": "hallway",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "klopfen"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": null,
+     "see": "Du stehst nachts im Flur und lauschst ängstlich am verhängten Spiegel.",
+     "time": "night",
+     "props": [
+      "mirror_covered"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "scared",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true,
+       "hold": ""
+      }
+     ],
+     "shot": "",
+     "mood": "scary",
+     "graphic": null,
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Noch ein Tag.",
+     "image": "",
+     "who": [],
+     "place": "bathroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "ein Tag"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": null,
+     "see": "",
+     "time": "night",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "tense",
+     "graphic": {
+      "type": "chapter",
+      "value": "1",
+      "text": "TAG ÜBRIG"
+     },
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Nur der alte Spiegel im Badezimmer ist noch nicht verhängt.",
+     "image": "Du stehst nachts im Bad vor dem Wandspiegel.",
      "who": [
       "du"
      ],
@@ -2316,11 +2312,47 @@
      "camera": "still",
      "sfx": "none",
      "highlight": [
-      "Blick"
+      "Badezimmer"
      ],
+     "hud": "",
      "status": "",
      "overlay": null,
-     "see": "Du willst das Tuch holen und wirfst einen letzten Blick hinein.",
+     "see": "Du stehst nachts im Bad vor dem Wandspiegel.",
+     "time": "night",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "idle",
+       "emotion": "worried",
+       "emote": "",
+       "pos": "center",
+       "speaks": true,
+       "hold": ""
+      }
+     ],
+     "shot": "",
+     "mood": "tense",
+     "graphic": null,
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Du greifst nach dem Tuch und wirfst einen letzten Blick hinein.",
+     "image": "Großaufnahme: du schaust ängstlich in den Spiegel.",
+     "who": [
+      "du"
+     ],
+     "place": "bathroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "letzten Blick"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": null,
+     "see": "Großaufnahme: du schaust ängstlich in den Spiegel.",
      "time": "night",
      "props": [],
      "actors": [
@@ -2330,34 +2362,32 @@
        "emotion": "scared",
        "emote": "",
        "pos": "center",
-       "speaks": true
+       "speaks": true,
+       "hold": ""
       }
      ],
      "shot": "close",
      "mood": "tense",
+     "graphic": null,
      "who_desc": "",
-     "place_desc": "",
-     "hud": ""
+     "place_desc": ""
     },
     {
-     "text": "Dein Spiegelbild steht still, obwohl du deinen Kopf gedreht hast?",
-     "image": "Bathroom mirror showing a reflection that is looking straight ahead while the person outside has turned their head away in horror",
+     "text": "Dein Spiegelbild steht still, obwohl du den Kopf gedreht hast.",
+     "image": "Dein Spiegelbild starrt dich reglos aus dem Spiegel an.",
      "who": [
       "du"
      ],
      "place": "bathroom",
-     "camera": "shake",
-     "sfx": "boom",
+     "camera": "still",
+     "sfx": "none",
      "highlight": [
-      "Spiegelbild"
+      "steht still"
      ],
+     "hud": "",
      "status": "",
-     "overlay": {
-      "type": "stamp",
-      "text": "STOP",
-      "color": "red"
-     },
-     "see": "Dein Spiegelbild steht still, obwohl du deinen Kopf gedreht hast?",
+     "overlay": null,
+     "see": "Dein Spiegelbild starrt dich reglos aus dem Spiegel an.",
      "time": "night",
      "props": [],
      "actors": [
@@ -2367,58 +2397,67 @@
        "emotion": "shocked",
        "emote": "!",
        "pos": "center",
-       "speaks": true
+       "speaks": true,
+       "hold": ""
       }
      ],
-     "shot": "close",
-     "mood": "panic",
+     "shot": "",
+     "mood": "scary",
+     "graphic": null,
      "who_desc": "",
-     "place_desc": "",
-     "hud": ""
+     "place_desc": ""
     },
     {
-     "text": "Das Handy vibriert auf der Waschmaschine. Eine neue Nachricht.",
-     "image": "Smartphone lying on the washing machine flashing with an incoming message notification",
-     "who": [],
-     "place": "bathroom",
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "Nachricht"
-     ],
-     "status": "",
-     "overlay": null,
-     "see": "Das Handy vibriert auf der Waschmaschine. Eine neue Nachricht.",
-     "time": "night",
-     "props": [],
-     "actors": [],
-     "shot": "insert",
-     "mood": "panic",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": ""
-    },
-    {
-     "text": "Du schaust auf das Display und liest die allerletzte Zeile.",
-     "image": "Close-up of the glowing smartphone screen in the dark bathroom with a short text message",
+     "text": "Dann lächelt es dich aus dem Spiegel an. Du lächelst nicht.",
+     "image": "Dein Spiegelbild grinst mit fremdem Gesicht aus dem Spiegel.",
      "who": [
       "du"
      ],
      "place": "bathroom",
      "camera": "still",
-     "sfx": "none",
+     "sfx": "boom",
      "highlight": [
-      "Display"
+      "lächelt"
      ],
+     "hud": "",
      "status": "",
-     "overlay": {
-      "type": "phone",
-      "mode": "lock",
-      "value": "03:12",
-      "kicker": "UNBEKANNT",
-      "text": "Danke fürs Aufmachen."
-     },
-     "see": "Du schaust auf das Display und liest die allerletzte Zeile.",
+     "overlay": null,
+     "see": "Dein Spiegelbild grinst mit fremdem Gesicht aus dem Spiegel.",
+     "time": "night",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "freeze",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true,
+       "hold": ""
+      }
+     ],
+     "shot": "",
+     "mood": "scary",
+     "graphic": null,
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Dein Handy vibriert. Eine letzte Nachricht.",
+     "image": "Du hältst im Bad zitternd das leuchtende Handy.",
+     "who": [
+      "du"
+     ],
+     "place": "bathroom",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Handy"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": null,
+     "see": "Du hältst im Bad zitternd das leuchtende Handy.",
      "time": "night",
      "props": [],
      "actors": [
@@ -2432,36 +2471,58 @@
        "hold": "phone"
       }
      ],
+     "shot": "",
+     "mood": "tense",
+     "graphic": null,
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Auf dem Display steht nur: Zu spät. Ich bin schon draußen.",
+     "image": "",
+     "who": [],
+     "place": "bathroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Zu spät"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": null,
+     "see": "",
+     "time": "night",
+     "props": [],
+     "actors": [],
      "shot": "graphic",
-     "mood": "panic",
+     "mood": "scary",
      "graphic": {
       "type": "phone",
       "mode": "lock",
-      "value": "00:00",
+      "value": "03:12",
       "kicker": "UNBEKANNT",
-      "text": "Ich stehe hinter dir."
+      "text": "Zu spät. Ich bin schon draußen."
      },
      "who_desc": "",
-     "place_desc": "",
-     "hud": ""
+     "place_desc": ""
     },
     {
-     "text": "Hinter dir im Raum fängt plötzlich das Licht an zu flackern.",
-     "image": "Bathroom light bulbs flickering wildly while a shadowy figure appears behind the person",
+     "text": "Hinter dir im Flur geht das Licht aus. Würdest du dich umdrehen?",
+     "image": "Du stehst geduckt im dunklen Flur und traust dich nicht, dich umzudrehen.",
      "who": [
       "du"
      ],
-     "place": "bathroom",
-     "camera": "shake",
-     "sfx": "boom",
+     "place": "hallway",
+     "camera": "still",
+     "sfx": "none",
      "highlight": [
-      "Licht"
+      "umdrehen"
      ],
+     "hud": "",
      "status": "",
      "overlay": null,
-     "see": "Hinter dir im Raum fängt plötzlich das Licht an zu flackern.",
+     "see": "Du stehst geduckt im dunklen Flur und traust dich nicht, dich umzudrehen.",
      "time": "night",
-     "weather": "storm",
      "props": [],
      "actors": [
       {
@@ -2470,23 +2531,24 @@
        "emotion": "shocked",
        "emote": "!",
        "pos": "center",
-       "speaks": true
+       "speaks": true,
+       "hold": ""
       }
      ],
-     "shot": "wide",
-     "mood": "panic",
+     "shot": "",
+     "mood": "scary",
+     "graphic": null,
      "who_desc": "",
-     "place_desc": "",
-     "hud": ""
+     "place_desc": ""
     }
    ],
    "hud": "TAG 1 · 3:12 UHR",
    "countdown": null
   },
-  "provider": "gemini",
+  "provider": "Plan",
   "remake": false,
   "needs": [],
-  "title": "Unbekannte Nachricht blockiert alle Spiegel im Haus",
+  "title": "Unbekannte Nummer: Verhäng alle Spiegel",
   "created": 1795689471.5268664
  },
  "2026-11-26 21:00": {

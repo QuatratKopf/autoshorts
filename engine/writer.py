@@ -343,6 +343,8 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
                                                                                                      Nachricht von unbekannter Nummer im dunklen Zimmer: die Zeilen tippen sich
                                                                                                      nacheinander (je höchstens 40 Zeichen, bis 6 Zeilen), eine Zeile mit „!“ davor
                                                                                                      leuchtet rot – der Sprecher liest die Nachricht dabei vor
+                                                                                                     (die Zeilen sind nur ein Muster: schreib den Wortlaut DIESER Geschichte –
+                                                                                                     dieselben Befehle, die der Sprecher im selben Satz sagt, in jeder Szene gleich)
     {"type": "chapter", "value": "7", "text": "TAGE ÜBRIG"}                                          Kapitelkarte auf Schwarz: große Zahl, darunter die Zeile – für Countdown-
                                                                                                      Geschichten („NOCH 7 TAGE“, „TAG 3“), der Sprecher sagt sie dabei
     {"type": "versus", "left": "ENERGY", "right": "KAFFEE", "kicker": "5 RUNDEN"}                    Duell-Bild mit großem VS

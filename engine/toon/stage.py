@@ -2126,7 +2126,7 @@ def direct(scenes, times, topic="", style="", look=""):
                 if step == 1 and topic_any and topic_ins < 2:                 # das Ding, um das sich das Video dreht, groß im Bild
                     sc["props"] = [{"type": topic_any[topic_ins % len(topic_any)]}]
                     sc["shot"], topic_ins = "insert", topic_ins + 1
-                elif step == 2 and not _re0.search(r"\b(?:du|dich|dir|dein\w*|ich|mich|mir|mein\w*)\b|" + BODY_BRAIN_RE + "|" + BODY_PARTS_RE, str(sc.get("text") or "").lower()):   # Blick nach draußen: Straße, Menschen, das Thema am Himmel – nicht, wenn der Satz von „dir“, deinem Körper oder dem Gehirn spricht („Dann ziehst du den Kopf ein“ zeigte Passanten)
+                elif step == 2 and str(style or "").lower() not in STORY_STYLES and not _re0.search(r"\b(?:du|dich|dir|dein\w*|ich|mich|mir|mein\w*)\b|" + BODY_BRAIN_RE + "|" + BODY_PARTS_RE, str(sc.get("text") or "").lower()):   # Blick nach draußen: Straße, Menschen, das Thema am Himmel – nicht, wenn der Satz von „dir“, deinem Körper oder dem Gehirn spricht („Dann ziehst du den Kopf ein“ zeigte Passanten)
                     sc["place"], sc["backdrop"] = "street", None
                     sc["actors"], sc["shot"] = [], "event"
                     sc["props"] = [{"type": k} for k in topic_any[:1]]
@@ -2605,6 +2605,7 @@ def direct(scenes, times, topic="", style="", look=""):
             sc["place"] = "mathroom"                      # Mathe-Thema: der Forscher steht vor der Tafel, nicht zwischen Kolben und Reagenzgläsern (Video 198)
     _frost_frog(scenes, topic, main_id)
     _mirror_story(scenes, topic, main_id)
+    _mirror_msg(scenes, topic, style, main_id)
     return scenes
 
 
@@ -2685,6 +2686,70 @@ def _mirror_story(scenes, topic="", main_id="du"):
         if isinstance(sc.get("overlay"), dict) and str(sc["overlay"].get("type") or "") not in ("card", "tag", "stamp"):
             sc["overlay"] = None                          # Liste, Zähler, Handy lägen über dem Spiegelbild
         run += 1
+    return scenes
+
+
+# Erzählte Geschichte mit Spiegeln (Prüfung 26.11.2026, Video 219 „Unbekannte Nummer: Verhäng alle Spiegel“): Die Geschichte handelte davon, alle
+# Spiegel zu verhängen, bis sich das Spiegelbild von allein bewegt – im Bild war kein einziger Spiegel, die Figur zeigte ins Leere. Jetzt: Spricht
+# der Satz vom Spiegelbild, sieht man den Blick in den Spiegel (Einstellung „mirror“: reglos → „stare“, bewegt sich von allein → „void“, lächelt
+# fremd → „monster“). Spricht er vom Verhängen oder von Tüchern, steht der verhängte Spiegel neben der Figur; nennt er sonst einen Spiegel, der
+# offene. Im Bad hängt der Spiegel schon an der Wand.
+MSG_MIRROR_RE = r"spiegelbild|aus dem spiegel|im spiegel\b.{0,60}(?:beweg|lächel|grins|wink|starr|blinzel|steht)|(?:beweg|lächel|grins|wink|starr|blinzel)\w*\b.{0,40}im spiegel"
+MSG_MIRROR_MON_RE = r"lächel|grins|fratze|fremde[sn]? gesicht|lacht"
+MSG_MIRROR_MOVE_RE = r"beweg|wink|blinzel|hebt\b|dreht sich|von allein|von selbst"
+MSG_COVER_RE = r"verh[äa]ng|verhüll|zugehängt|abgehängt|bedeck|hinter (?:\w+ ){0,2}(?:stoff|tuch|tüchern|decken|laken)|(?:tuch|decke|laken) über"
+MSG_CLOTH_RE = r"\btuch\b|\btücher|\bdecken\b|\blaken\b|\bstoff\b"
+MSG_COVER_NOT_RE = r"(?:nicht|kein\w*)\s+(?:\w+\s+){0,2}(?:verh[äa]ng|verhüll|bedeck|zugehängt)"
+
+
+def _mirror_msg(scenes, topic="", style="", main_id="du"):
+    if str(style or "").lower() not in STORY_STYLES or mirror_story(scenes, topic):
+        return scenes
+    if "spiegel" not in " ".join(str(sc.get("text") or "") for sc in scenes if isinstance(sc, dict)).lower():
+        return scenes
+    ordered, run, rooms, n_cov = False, 0, ("hallway", "livingroom", "bedroom"), 0
+    for sc in scenes:
+        if not isinstance(sc, dict):
+            continue
+        low = str(sc.get("text") or "").lower()
+        cover = bool(re.search(MSG_COVER_RE, low)) and not re.search(MSG_COVER_NOT_RE, low)
+        if cover:
+            ordered = True
+        card = sc.get("shot") == "graphic" and bool(graphics.clean(sc.get("graphic")))
+        if card and str(sc["graphic"].get("type")) != "chapter":
+            run = 0
+            continue                                      # Kapitel-Tafel: nach CHAPTER_MAX Sekunden sieht man die Figur am Ort – auch dort steht der Spiegel
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        if re.search(MSG_MIRROR_RE, low) and run < 2 and not card:
+            sc["shot"] = "mirror"
+            sc["mirror"] = "monster" if re.search(MSG_MIRROR_MON_RE, low) else "void" if re.search(MSG_MIRROR_MOVE_RE, low) else "stare"
+            sc["actors"] = [{"id": main_id, "action": "idle", "emotion": "", "emote": "", "pos": "center", "speaks": False, "say": "", "hold": "", "facing": "", "kind": ""}]
+            sc["props"], sc["crowd"], sc["graphic"], sc["overlay"] = [], "", None, None
+            sc["place"], sc["backdrop"], sc["time"], sc["weather"] = "bathroom", None, "night", ""
+            sc["_no_cut"] = True
+            run += 1
+            continue
+        run = 0
+        in_bath = bool(re.search(r"\bbad\b|badezimmer", low)) or (not cover and "spiegel" not in low and not isinstance(backdrop(sc), dict)
+                                                                  and places.resolve(backdrop(sc)) == "bathroom")   # „Du greifst nach dem Tuch“ im Bad: dort hängt der Spiegel offen an der Wand
+        kind = "mirror_covered" if (cover or (ordered and re.search(MSG_CLOTH_RE, low))) and not in_bath else \
+            "mirror" if "spiegel" in low and not in_bath and not re.search(MSG_COVER_NOT_RE, low) else ""
+        if in_bath and "spiegel" in low:                    # der Spiegel hängt im Bad an der Wand: die Figur steht ganz davor, keine Großaufnahme ohne Spiegel
+            sc["place"], sc["backdrop"] = "bathroom", None
+            sc["shot"] = "" if str(sc.get("shot") or "") in ("close", "insert", "event") else sc.get("shot")
+        if not kind or not acts:
+            continue
+        if isinstance(backdrop(sc), dict) or places.resolve(backdrop(sc)) not in ("hallway", "livingroom", "bedroom"):
+            sc["place"], sc["backdrop"] = rooms[n_cov % len(rooms)], None
+        n_cov += 1
+        sc["props"] = [{"type": kind, "pos": "right"}]
+        sc["shot"], sc["weather"], sc["crowd"] = "graphic" if card else "", "", ""
+        for a in acts[:1]:
+            a["pos"], a["to"], a["facing"] = "left", "", "right"
+            if str(a.get("action") or "") in ("walk", "run", "idle", ""):
+                a["action"] = "point" if kind == "mirror_covered" and cover else "look_around" if str(a.get("emotion") or "") == "scared" else "idle"
+        sc["actors"] = acts[:1]
+        sc["_no_cut"] = True
     return scenes
 
 
@@ -5773,7 +5838,7 @@ def _time_weather(scenes, topic="", style=""):
     import re as _re
     dark_n = [sc for sc in scenes if isinstance(sc, dict) and str(sc.get("time") or "") == "night"]
     all_n = " ".join(str(sc.get("text") or "") for sc in scenes if isinstance(sc, dict)).lower() + " " + str(topic or "").lower()
-    if len(dark_n) * 2 > len(scenes) and str(style or "").lower() not in ("grusel", "mysterien", "horror") and not _re.search(NIGHT_RE + "|" + NIGHT_WHY_RE, all_n):
+    if len(dark_n) * 2 > len(scenes) and str(style or "").lower() not in ("grusel", "mysterien", "horror", "nachricht") and not _re.search(NIGHT_RE + "|" + NIGHT_WHY_RE, all_n):
         for sc in dark_n:                                 # die Text-KI legt das ganze Video in die Nacht, obwohl kein Satz von Nacht, Schlaf oder Dunkelheit spricht: bei Tag (ein fröhliches Thema im Halbdunkel wirkt düster)
             sc["time"] = "day"
     for sc in scenes:
@@ -6072,7 +6137,7 @@ HINTS = [
     (r"ausgetrocknet|dürre|vertrocknet|trocknen aus|staubtrocken", {"ground": "dry", "sky": "haze", "elements": ["deadtrees", "dryriver"]}),
     (r"\bfluss|flüsse|\bbach|strom fließt", {"elements": ["hills", "river"]}),
     (r"\bsee\b|\bseen\b|teich", {"elements": ["hills", "lake"]}),
-    (r"\bernte|missernte|weinernte|landwirt|bauern|\bfeld|felder|acker|getreide", {"elements": ["farm", "fields"]}),   # „ernte“ nur am Wortanfang: „Gelernte Vokabeln“ spielte auf dem Bauernhof
+    (r"\bernte|missernte|weinernte|landwirt|bauern|\bfeld|felder|\backer|getreide", {"elements": ["farm", "fields"]}),   # „ernte“ nur am Wortanfang: „Gelernte Vokabeln“ spielte auf dem Bauernhof
     (r"\bgarten|gärten|\bwiese|\brasen\b|käfer|insekten|maulwurf|regenwurm|schnecken", "park"),
     (r"gletscher|eiszeit|arktis|antarktis|polkappe|\beis\b", {"ground": "snow", "elements": ["glacier", "mountains"]}),
     (r"\bschnee|\bwinter", "snow"),
@@ -6668,6 +6733,9 @@ def _cut_plan(scene, shot, special, moving, ov_tall, place, actors, props, dur, 
     return cut, kind, named
 
 
+CHAPTER_MAX = 2.2                                            # so lange steht eine Kapitel-Tafel höchstens allein im Bild
+
+
 def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.0, still: Path = None, index=0):
     """scene: {"place", "time", "weather", "props", "actors": [{"id", "action", "emotion", "emote", "pos", "to", "speaks"}]}.
     words: [(wort, start, ende)] der ganzen Sprecherspur; t0 = Startzeit der Szene darin."""
@@ -6784,6 +6852,9 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
               "win": scene.get("_win"), "count": scene.get("_count"), "neon": neon_look, "float": str(scene.get("float") or ""),
               "noir": str(scene.get("look") or "") == "noir",
               "aloft": bool(scene.get("aloft")), "low": bool(scene.get("low")), "no_traffic": bool(scene.get("no_traffic") or scene.get("dark_city"))}
+    gfx_cut = CHAPTER_MAX if gfx and str(gfx.get("type")) == "chapter" and dur > CHAPTER_MAX + 1.2 and actors and not hyper.handles(gfx) else 0.0   # Kapitel-Tafel („3 · TAG DREI“) über einem langen Satz: nach gut zwei Sekunden weiter mit der Figur am Ort – vorher stand die Zahl fünf Sekunden vor Schwarz (Video 219)
+    if gfx_cut:
+        scene["_sfx"] = scene["_sfx"] + [(round(gfx_cut, 3), "swish")]
     ff = subprocess.Popen(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24",
                            "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-c:v", "libx264", "-preset", "veryfast",
                            "-crf", "17", "-pix_fmt", "yuv420p", str(out)], stdin=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -6796,8 +6867,8 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
                     frame.save(still, quality=92)
                 ff.stdin.write(_camera(frame.convert("RGB"), t, dur, cam_flat).tobytes())
                 continue
-            if gfx or ins:
-                frame = (graphics.frame(gfx, t, dur, str(scene.get("mood") or "").lower()) if gfx
+            if (gfx and not (gfx_cut and t >= gfx_cut)) or ins:
+                frame = (graphics.frame(gfx, t, min(dur, gfx_cut) if gfx_cut else dur, str(scene.get("mood") or "").lower()) if gfx
                          else _insert_frame(ins, t, dur, str(scene.get("mood") or "").lower(), bool(has_ov), neon_look))
                 if still is not None and fidx == min(n_frames - 1, FPS):
                     frame.save(still, quality=92)

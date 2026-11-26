@@ -260,6 +260,13 @@ für Code-Requisiten einen Eintrag in `TEXT_PROPS` (engine/toon/stage.py) ergän
   `stage._number` liest zusammengeschriebene Zahlwörter über tausend („dreitausendsechshundert“ = 3600) – vorher galt die Zahl als nicht gesprochen und
   ihre Einblendung fiel weg.
 
+- Erzählte Geschichte mit Spiegeln (Prüfung 26.11.2026, Video 219 „Unbekannte Nummer: Verhäng alle Spiegel“, `stage._mirror_msg`): In den
+  erzählten Video-Arten (`STORY_STYLES`) zeigt ein Satz über das Spiegelbild den Blick in den Spiegel (reglos → `stare`, bewegt sich von allein →
+  `void`, lächelt fremd → `monster`), „verhängen/hinter Tüchern“ den verhängten Standspiegel (`extras.p_mirror_covered`) neben der Figur, ein sonst
+  genannter Spiegel den offenen (`p_mirror`); im Bad hängt er schon an der Wand. Kapitel-Tafeln stehen höchstens `CHAPTER_MAX` Sekunden allein im
+  Bild, danach sieht man die Figur am Ort. In erzählten Geschichten gibt es keinen „Blick nach draußen“ auf Passanten, die Nacht aus dem
+  Drehbuch bleibt (auch bei `nachricht`), und „flackern“ ist kein „Acker“ (`\backer`). Selbsttest-Fall `_msg219`.
+
 ## Was zu tun ist
 1. Offene Wünsche (ohne `"done": true`) und `"auto": true`-Einträge durchgehen, höchstens 8 pro Sitzung, häufigste zuerst.
 2. Einzelne Gegenstände: sauber als Eintrag in `docs/data/shapes.json` zeichnen (Format siehe Kopf von `engine/toon/library.py`:

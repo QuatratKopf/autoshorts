@@ -593,6 +593,41 @@ def main():
                 frame(scs[n_], {"du": {"shirt": "grau"}}, t_)
         assert graphics.clean({"type": "phone", "mode": "chat", "text": "In deinem Kühlschrank liegt eine halbe Pizza und daneben ein Schirm, den du nie gekauft hast, wirklich niemals"})["text"].endswith("…")
     check("Video 192: Schlafzimmer, Nachrichten ganz, Tür offen, Uhrzeit, Fernseh-Eilmeldung", _msg192)
+
+    def _msg219():                                               # Prüfung 26.11.2026, Video 219 „Verhäng alle Spiegel“: Spiegel im Bild, kein Bauernhof bei „flackern“, keine Passanten, Nacht bleibt Nacht
+        du = lambda act, **kw: [{"id": "du", "action": act, "emotion": "scared", "pos": "center", **kw}]      # noqa: E731
+        T = [{"text": "Eine unbekannte Nummer schickt dir einen Countdown.", "place": "bedroom", "time": "night", "shot": "graphic", "actors": du("freeze"),
+              "graphic": {"type": "message", "kicker": "UNBEKANNT", "lines": ["In sieben Tagen", "beginnt es."]}},
+             {"text": "Und am Ende bewegt sich dein Spiegelbild, obwohl du ganz still stehst.", "place": "bathroom", "time": "night", "shot": "close", "actors": du("shocked")},
+             {"text": "Du hältst es für einen dummen Scherz und löschst den Chat.", "place": "livingroom", "time": "night", "actors": du("idle", hold="phone")},
+             {"text": "Tag drei. Die Anweisung wird drastischer. Nimm ein Tuch und bedecke jeden Spiegel.", "place": "livingroom", "time": "night", "shot": "graphic",
+              "graphic": {"type": "chapter", "value": "3", "text": "TAG DREI"}},
+             {"text": "Jeder einzelne Spiegel in der Wohnung verschwindet hinter dicken Decken.", "place": "livingroom", "time": "night", "actors": du("point")},
+             {"text": "Nur noch der alte Spiegel im Badezimmer ist nicht verhängt.", "place": "bathroom", "time": "night", "shot": "close", "actors": du("idle")},
+             {"text": "Du willst das Tuch holen und wirfst einen letzten Blick hinein.", "place": "bathroom", "time": "night", "shot": "close", "actors": du("look_around")},
+             {"text": "Dein Spiegelbild steht still, obwohl du deinen Kopf gedreht hast.", "place": "bathroom", "time": "night", "actors": du("freeze")},
+             {"text": "Dann lächelt es dich aus dem Spiegel an.", "place": "bathroom", "time": "night", "actors": du("freeze")},
+             {"text": "Das Handy vibriert auf der Waschmaschine. Eine neue Nachricht.", "place": "bathroom", "time": "night", "shot": "insert", "actors": []},
+             {"text": "Du schaust auf das Handy und liest die allerletzte Zeile.", "place": "bathroom", "time": "night", "actors": du("shocked", hold="phone")},
+             {"text": "Hinter dir im Raum fängt plötzlich das Licht an zu flackern.", "place": "bathroom", "time": "night", "actors": du("cower")}]
+        scs = stage.direct(T, [(n_ * 3.5, n_ * 3.5 + 3.5) for n_ in range(len(T))], "Eine unbekannte Nummer befiehlt dir, alle Spiegel abzuhängen Verhäng alle Spiegel", "nachricht", "noir") or T
+        res = lambda n_: stage.places.resolve(stage.backdrop(scs[n_])) if not isinstance(stage.backdrop(scs[n_]), dict) else "custom"      # noqa: E731
+        keys = lambda n_: [stage._pkey(q) for q in scs[n_].get("props") or []]      # noqa: E731
+        assert all(sc_.get("time") == "night" for sc_ in scs if sc_.get("shot") != "graphic"), "Nachricht-Geschichte: die Nacht aus dem Drehbuch bleibt Nacht"
+        assert [(scs[n_].get("shot"), scs[n_].get("mirror")) for n_ in (1, 7, 8)] == [("mirror", "void"), ("mirror", "stare"), ("mirror", "monster")], "Spiegelbild-Sätze zeigen den Blick in den Spiegel"
+        assert keys(4) == ["mirror_covered"] and res(4) in ("hallway", "livingroom", "bedroom") and scs[4]["actors"], "verhängter Spiegel steht neben der Figur"
+        assert res(5) == "bathroom" and scs[5].get("shot") != "close" and "mirror_covered" not in keys(5), "„nicht verhängt“ im Bad: offener Wandspiegel, Figur ganz im Bild"
+        assert res(6) == "bathroom" and "mirror_covered" not in keys(6), "Tuch holen im Bad: kein verhängter Spiegel im Flur"
+        assert all(res(n_) not in ("street", "farm", "fields", "custom") and not scs[n_].get("crowd") and not scs[n_].get("weather") for n_ in range(len(T))), \
+            "„flackern“ ist kein Acker, kein Blick auf Passanten in einer Geschichte, kein Wetter im Bad"
+        assert stage.direct([{"text": "Der Bauer pflügt den Acker.", "place": "zimmer", "actors": du("idle")}], [(0, 3)], "Landwirtschaft", "fakten")[0].get("backdrop"), "der Acker bleibt ein Feld"
+        assert not stage._mirror_msg([{"text": "Der Spiegel hängt schief.", "actors": du("idle")}], "", "fakten")[0].get("props"), "nur in erzählten Geschichten"
+        for n_ in (1, 4, 5, 7, 8, 11):
+            for t_ in (0.2, 1.6):
+                frame(dict(scs[n_], look="noir"), {"du": {"shirt": "schwarz", "gender": "w"}}, t_)
+        assert extras.prop_fit("mirror") and extras.prop_fit("mirror_covered"), "Spiegel haben eine echte Größe"
+        assert stage.CHAPTER_MAX < 3
+    check("Video 219: Spiegel-Geschichte (Spiegelbild, verhängter Spiegel, Nacht, kein Acker bei „flackern“)", _msg219)
     check("Musik-Video (Kopfhörer, Gänsehaut-Schaubild, Lautsprecher) und Hafen", _music)
 
     def _sleep():                                                # Schlaf-Video (Prüfung 16.11.2026, Video 121): keine Regie-Wörter im Bild, Nacht bleibt Nacht, keine Passanten im Büro, Schlafende zugedeckt im Bett

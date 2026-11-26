@@ -4403,6 +4403,35 @@ def p_display(d, x, t, s=1.0):
             cx, cy = x + ca * 190, top + 190 + sa * 250
             d.line((cx, cy, cx + ca * 44, cy + sa * 44), fill=(255, 236, 150), width=9)
 
+# Prüfung 26.11.2026 (Video 219 „Unbekannte Nummer: Verhäng alle Spiegel“): Standspiegel und derselbe Spiegel unter einem dicken Tuch.
+# Die Regie setzt beide (stage._mirror_msg): „Spiegel“ in einer erzählten Geschichte zeigt den Spiegel, „verhängt/hinter Tüchern“ den verhängten.
+def p_mirror(d, x, t, s=1.0):
+    for fx in (x - 104, x + 64):                                             # Füße
+        _r(d, (fx, GROUND - 30, fx + 40, GROUND), (96, 66, 46), 6, 5)
+    _r(d, (x - 124, GROUND - 480, x + 124, GROUND - 22), (124, 86, 56), 18)
+    d.rounded_rectangle((x - 98, GROUND - 454, x + 98, GROUND - 50), 10, fill=(168, 200, 218), outline=INK, width=5)
+    d.polygon([(x - 80, GROUND - 300), (x - 20, GROUND - 440), (x + 20, GROUND - 440), (x - 80, GROUND - 210)], fill=(214, 232, 242))
+    d.polygon([(x + 30, GROUND - 70), (x + 84, GROUND - 200), (x + 84, GROUND - 150), (x + 52, GROUND - 70)], fill=(196, 220, 234))
+
+
+def p_mirror_covered(d, x, t, s=1.0):
+    p_mirror(d, x, t, s)
+    k = _pop(t, 0.0, 0.45)                                                   # das Tuch fällt von oben über den Spiegel
+    top, low = GROUND - 500, GROUND - 500 + 452 * min(1.0, k)
+    if low - top < 40:
+        return
+    hem = [(x + 158, low - 30), (x + 110, low + 6), (x + 56, low - 26), (x, low + 14), (x - 62, low - 30), (x - 118, low + 8), (x - 160, low - 26)]
+    _poly(d, [(x - 140, top + 16), (x - 96, top - 6), (x + 96, top - 6), (x + 140, top + 16)] + hem, (146, 56, 62), shade=0.08)
+    for fx, dy in ((x - 78, 0), (x - 8, 18), (x + 70, 6)):                   # Falten
+        d.line([(fx, top + 40), (fx - 10, low - 40 + dy * 0.2)], fill=(104, 36, 44), width=6)
+
+
+PROPS["mirror"] = p_mirror
+PROPS["mirror_covered"] = p_mirror_covered
+SIZES["mirror"] = (1.8, 1236)
+SIZES["mirror_covered"] = (1.85, 1236)
+
+
 
 def p_phone_dead(d, x, t, s=1.0):
     """Erloschenes Handy groß im Bild (Prüfung 22.11.2026, Video 185: bei „Das Display wird schwarz und dein Zaubergerät geht für immer
