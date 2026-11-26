@@ -8500,7 +8500,7 @@
   "id": 222,
   "category": "tiere",
   "topic": "Das Tier, das im dunklen Ozean leuchtet und mit einem eigenen Bio-Scheinwerfer seine Beute blendet",
-  "status": "review",
+  "status": "discarded",
   "created": 1795716552.3489811,
   "title": "Tiefsee-Anglerfisch: Die gefährlichste Falle der Welt",
   "description": "Dieses Tier jagt im Dunkeln mit einem eigenen Scheinwerfer!\nErfahre, wie der Anglerfisch seine Beute mit Biolumineszenz in die Falle lockt.\nWürdest du dich in die Tiefsee trauen?",
@@ -8539,6 +8539,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-26 21:00",
-  "review_at": 1795716915.570327
+  "review_at": 1795716915.570327,
+  "error": "Bei der Prüfung verworfen: Clownfisch statt Anglerfisch, Menschengebiss, leere Bilder"
  }
 ]
