@@ -8818,7 +8818,7 @@
   "id": 229,
   "category": "whatif",
   "topic": "Was wäre, wenn du mit einem Exoskelett im Alltag Superkräfte hättest? – Vorgaben als Stichpunkte, nicht wörtlich abschreiben, in Du-Form erzählen, jeder Satz mit neuem Inhalt. Nur diese geprüften Fakten in dieser Reihenfolge: 1) Einstieg: Du schnallst dir ein Exoskelett um und stemmst eine Langhantel. 2) Das Ganzkörper-Exoskelett Guardian XO der Firma Sarcos: Du hebst neunzig Kilo, und sie fühlen sich an wie viereinhalb Kilo. 3) Elektromotoren an deinen Gelenken tragen die Last. 4) Aber rennen kannst du damit nicht, der Anzug schafft nur Schritttempo, rund fünf Kilometer pro Stunde. 5) Der Anzug selbst wiegt rund achtundsechzig Kilo. 6) Nach rund zwei Stunden ist der Akku leer, dann müssen frische Akkus eingesetzt werden. 7) Ohne Strom drückt dich der schwere Anzug zu Boden. 8) Schon heute im Einsatz: In Fabriken stützen leichte Exoskelette ohne Motor die Arme bei Arbeit über dem Kopf; laut einer Studie der TU Graz von 2024 kosten sie rund zweitausend bis viertausend Euro. 9) Forscher der Universität Stanford bauten 2022 einen motorisierten Stiefel: Damit gehst du neun Prozent schneller und verbrauchst siebzehn Prozent weniger Energie, so als würdest du einen vierzehn Kilo schweren Rucksack absetzen. 10) In Reha-Kliniken helfen Exoskelette gelähmten Menschen, wieder Schritte zu gehen. 11) Fazit: keine Superkräfte, aber ein geschonter Rücken. Schlussfrage an die Zuschauer: Wofür würdest du eins anziehen? Keine anderen Zahlen. Jahreszahlen nur 2022 und 2024, keine anderen Jahreszahlen. Verboten: fünfzig Kilometer pro Stunde, über Autos springen, Zehnfache, Stromnetz, Muskeln schrumpfen, Gehirn verlernt, Türklinke, Roboter, Personennamen. Titel: Exoskelett im Alltag: Was passiert wirklich? Titelbild-Text: SUPERKRÄFTE IM ALLTAG?",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1795795940.6376336,
   "title": "Exoskelett im Alltag: Was passiert wirklich?",
   "description": "Erlebe den Alltag mit einem Exoskelett.\nErfahre die echten Grenzen der Technik.\nWofür würdest du eins anziehen?",
@@ -8852,7 +8852,8 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Prüfung: Zwischenfassung, ersetzt durch Video 230"
  },
  {
   "id": 230,
