@@ -1,7 +1,7 @@
 {
- "updated": 1795761759.1282275,
+ "updated": 1795763671.4971006,
  "enough": true,
- "counted": 45,
+ "counted": 46,
  "total": 48,
  "needed": 6,
  "categories": [
@@ -80,11 +80,11 @@
   {
    "slug": "motivation",
    "name": "🔥 Motivation",
-   "n": 1,
-   "avg_views": 923,
-   "avg_likes": 49.0,
-   "like_rate": 5.31,
-   "avg_score": 1698
+   "n": 2,
+   "avg_views": 1044,
+   "avg_likes": 35.0,
+   "like_rate": 3.35,
+   "avg_score": 1589
   },
   {
    "slug": "musik",
@@ -106,20 +106,20 @@
   }
  ],
  "weights": {
-  "fakten": 1.06,
+  "fakten": 1.07,
   "grusel": 0.5,
-  "tiere": 1.13,
-  "whatif": 1.08,
-  "comedy": 1.36,
-  "vergleich": 0.99,
-  "motivation": 1.2,
+  "tiere": 1.14,
+  "whatif": 1.09,
+  "comedy": 1.37,
+  "vergleich": 1.0,
+  "motivation": 0.73,
   "nachricht": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2286 Aufrufe, 2.05 % Likes).",
   "Schwächste Kategorie: 👻 Grusel (Ø 449 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2283 zu 1122 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2382 zu 1853 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2264 zu 1122 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2382 zu 1830 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -128,13 +128,13 @@
  ],
  "words_bad": [
   "remix",
-  "niemand",
-  "glas",
-  "bekanntes",
-  "erkennst",
   "lied",
-  "jede",
-  "klassikers"
+  "erkennst",
+  "bekanntes",
+  "glas",
+  "eines",
+  "scheibe",
+  "jede"
  ],
  "top": [
   {
