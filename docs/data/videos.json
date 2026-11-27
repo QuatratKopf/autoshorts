@@ -8637,7 +8637,7 @@
   "id": 225,
   "category": "comedy",
   "topic": "Ich habe mir einen intelligenten Wecker gekauft, der mich erst motiviert und dann komplett terrorisiert",
-  "status": "review",
+  "status": "discarded",
   "created": 1795774191.080311,
   "title": "Mein Wecker terrorisiert mich jeden Tag",
   "description": "Mein Wecker terrorisiert mich jeden Tag\nJetzt bestimmt eine kleine Kiste mein ganzes Leben.\nWürdest du ihn behalten oder aus dem Fenster werfen?",
@@ -8675,6 +8675,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-27 13:00",
-  "review_at": 1795774503.5974898
+  "review_at": 1795774503.5974898,
+  "error": "Bei der Prüfung verworfen: Prüfung: stummer Wecker, keine Nachbarn, Schlusssatz ohne Pointe, 4 s Standbild"
  }
 ]
