@@ -1,5 +1,5 @@
 {
- "updated": 1795784015.3230233,
+ "updated": 1795785819.1314769,
  "enough": true,
  "counted": 47,
  "total": 49,
@@ -45,10 +45,10 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 12,
-   "avg_views": 1692,
+   "avg_views": 1693,
    "avg_likes": 46.5,
    "like_rate": 2.75,
-   "avg_score": 2392
+   "avg_score": 2393
   },
   {
    "slug": "fakten",
@@ -63,10 +63,10 @@
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 2,
-   "avg_views": 1666,
-   "avg_likes": 35.0,
-   "like_rate": 2.1,
-   "avg_score": 2206
+   "avg_views": 1672,
+   "avg_likes": 35.5,
+   "like_rate": 2.12,
+   "avg_score": 2220
   },
   {
    "slug": "storys",
@@ -120,7 +120,7 @@
   "tiere": 1.16,
   "whatif": 1.11,
   "comedy": 1.39,
-  "vergleich": 1.02,
+  "vergleich": 1.03,
   "motivation": 0.74,
   "nachricht": 1.2
  },
@@ -128,7 +128,7 @@
   "Stärkste Kategorie: 🤪 Comedy (Ø 2286 Aufrufe, 2.05 % Likes).",
   "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 464 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2229 zu 1128 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2328 zu 1830 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2329 zu 1830 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -137,13 +137,13 @@
  ],
  "words_bad": [
   "remix",
-  "erkennst",
-  "bekanntes",
   "glas",
   "lied",
-  "eines",
+  "bekanntes",
+  "erkennst",
+  "scheibe",
   "jede",
-  "klassikers"
+  "eines"
  ],
  "top": [
   {
