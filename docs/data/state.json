@@ -1,5 +1,5 @@
 {
- "last_category": "fakten",
+ "last_category": "vergleich",
  "done_slots": [
   "2026-11-08 18:00",
   "2026-11-11 18:00",
@@ -68,7 +68,7 @@
   "qrsauuc3k",
   "qa5v1ywsb"
  ],
- "last_stats": 1795801652.9578316,
+ "last_stats": 1795803610.72676,
  "next_id": 232,
  "connected": {
   "youtube": {
@@ -85,14 +85,14 @@
   "video": 231
  },
  "cat_credit": {
-  "fakten": -5.299999999999997,
-  "tiere": -0.269999999999998,
-  "whatif": -2.1399999999999935,
-  "comedy": -1.119999999999998,
-  "vergleich": 2.7600000000000033,
-  "motivation": 2.440000000000003,
-  "grusel": 0.3100000000000014,
-  "nachricht": 0.7400000000000022
+  "fakten": -4.1999999999999975,
+  "tiere": 0.6700000000000019,
+  "whatif": -1.0099999999999936,
+  "comedy": 0.2900000000000018,
+  "vergleich": -4.269999999999996,
+  "motivation": 3.190000000000003,
+  "grusel": 0.8100000000000014,
+  "nachricht": 1.9400000000000022
  },
  "bounce_songs": [
   "cc:a0374037-c7fc-4467-94de-28d2e36fc183",

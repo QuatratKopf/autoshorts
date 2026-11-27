@@ -1,785 +1,4 @@
 {
- "2026-11-26 21:00": {
-  "category": "tiere",
-  "topic": "Das Tier, das im dunklen Ozean leuchtet und mit einem eigenen Bio-Scheinwerfer seine Beute blendet",
-  "trend": null,
-  "script": {
-   "title": "Tiefsee-Anglerfisch: Die Falle aus Licht",
-   "description": "Dieses Tier jagt im Dunkeln mit einem eigenen Scheinwerfer!\nErfahre, wie der Anglerfisch seine Beute mit Biolumineszenz in die Falle lockt.\nWürdest du dich in die Tiefsee trauen?",
-   "hashtags": [
-    "#shorts",
-    "#tierfakten",
-    "#tiefsee",
-    "#wissenschaft",
-    "#tiere",
-    "#biologie",
-    "#viral"
-   ],
-   "tags": [
-    "anglerfisch",
-    "tiefsee",
-    "biolumineszenz",
-    "meeresbiologie",
-    "tierfakten",
-    "ozean",
-    "licht im meer",
-    "unterwasserwelt"
-   ],
-   "thumbnail": {
-    "image": "Close-up of a scary deep sea anglerfish with a glowing lamp on its head, sharp teeth open wide in dark ocean water, high contrast",
-    "text": "FOLGE NIE DEM LICHT",
-    "place": "underwater",
-    "time": "night",
-    "actor": "angler",
-    "action": "idle",
-    "emotion": "",
-    "props": [],
-    "weather": ""
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "blau",
-     "hat": "",
-     "hair": "curly",
-     "hair_color": "dunkelbraun",
-     "gender": "w",
-     "skin": "hell"
-    },
-    "angler": {
-     "kind": "angler",
-     "speaks": false
-    }
-   },
-   "scenes": [
-    {
-     "see": "Ein Anglerfisch schwebt im dunklen Wasser, vor seinem Maul leuchtet der Köder an der Angel.",
-     "text": "Dieser Tiefseefisch lockt seine Beute mit einem Bio-Scheinwerfer.",
-     "image": "A swimmer looks terrified at a large glowing creature in pitch black ocean water.",
-     "who": [
-      "angler"
-     ],
-     "place": "underwater",
-     "backdrop": {
-      "sky": "night",
-      "ground": "rock",
-      "elements": [
-       "sea"
-      ]
-     },
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "actors": [
-      {
-       "id": "angler",
-       "action": "lure",
-       "emotion": "",
-       "emote": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ],
-     "crowd": "",
-     "mood": "scary",
-     "shot": "wide",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "lockt",
-      "Bio-Scheinwerfer"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "TIEFSEE"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Neben dem großen Anglerfisch-Weibchen schwimmt ein winziges Männchen.",
-     "text": "Und was das Männchen dieser Art tut, ist noch viel verrückter.",
-     "image": "Deep sea anglerfish swimming near camera showing its glowing head organ.",
-     "who": [
-      "angler"
-     ],
-     "place": "underwater",
-     "backdrop": {
-      "sky": "night",
-      "ground": "rock",
-      "elements": [
-       "sea"
-      ]
-     },
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "actors": [
-      {
-       "id": "angler",
-       "action": "talk",
-       "emotion": "happy",
-       "emote": "idea",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "close",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Männchen",
-      "verrückter"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "In absoluter Finsternis unter Wasser ist plötzlich nur ein kleiner Lichtpunkt zu erkennen.",
-     "text": "Ab eintausend Metern Tiefe herrscht im Ozean absolute, eiskalte Finsternis.",
-     "image": "Pitch dark ocean depths at 1000 meters underwater with freezing darkness.",
-     "who": [],
-     "place": "underwater",
-     "backdrop": {
-      "sky": "night",
-      "ground": "rock",
-      "elements": [
-       "sea"
-      ]
-     },
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "event",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "eintausend Metern"
-     ],
-     "overlay": {
-      "type": "thermo",
-      "value": 2
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Anglerfisch zeigt seine Angel mit dem leuchtenden Köder.",
-     "text": "An einer Angel nutzt dieser Fisch Millionen leuchtende Bakterien als Scheinwerfer.",
-     "image": "Graphic showing bacteria glowing brightly inside a fish antenna lure.",
-     "who": [],
-     "place": "underwater",
-     "backdrop": {
-      "sky": "night",
-      "ground": "rock",
-      "elements": [
-       "sea"
-      ]
-     },
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Bakterien"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Fisch bewegt seine Angel wie einen Wurm im dunklen Meerwasser hin und her.",
-     "text": "Er bewegt den Leuchtkörper direkt vor seinem Maul wie einen Wurm.",
-     "image": "Anglerfish wiggling its glowing lure in front of its massive mouth.",
-     "who": [
-      "angler"
-     ],
-     "place": "underwater",
-     "backdrop": {
-      "sky": "night",
-      "ground": "rock",
-      "elements": [
-       "sea"
-      ]
-     },
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "actors": [
-      {
-       "id": "angler",
-       "action": "walk",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Leuchtkörper"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "PERFEKTER KÖDER"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein kleiner Fisch schwimmt neugierig auf das helle Licht im tiefen Wasser zu.",
-     "text": "Kleine Fische denken an fette Beute und schwimmen direkt ins Licht.",
-     "image": "Small prey fish swimming straight toward a glowing light source.",
-     "who": [],
-     "place": "underwater",
-     "backdrop": {
-      "sky": "night",
-      "ground": "rock",
-      "elements": [
-       "sea"
-      ]
-     },
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "event",
-     "camera": "pan_right",
-     "sfx": "whoosh",
-     "highlight": [
-      "direkt ins Licht"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Riesengebiss reißt blitzschnell auf und erzeugt einen enormen Wassersog.",
-     "text": "Doch sobald sie nah genug sind, reißt der Anglerfisch sein Riesenmaul auf.",
-     "image": "Giant toothy mouth snapping open under water creating strong suction.",
-     "who": [
-      "angler"
-     ],
-     "place": "underwater",
-     "backdrop": {
-      "sky": "night",
-      "ground": "rock",
-      "elements": [
-       "sea"
-      ]
-     },
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "actors": [
-      {
-       "id": "angler",
-       "action": "shocked",
-       "emotion": "angry",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "panic",
-     "shot": "wide",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "Riesenmaul"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "ZUSCHNAPPEN",
-      "color": "red"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Nahaufnahme zeigt die nach innen gebogenen, nadelscharfen Zähne des Fisches.",
-     "text": "Seine Zähne stehen nach innen gebogen, sodass kein Opfer mehr entkommen kann.",
-     "image": "Close-up of razor sharp inward-curved teeth inside the predator's mouth.",
-     "who": [],
-     "place": "underwater",
-     "backdrop": {
-      "sky": "night",
-      "ground": "rock",
-      "elements": [
-       "sea"
-      ]
-     },
-     "time": "night",
-     "weather": "dark",
-     "props": [
-      "fish"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "insert",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "nach innen gebogen"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Bauch des Anglerfischs ist prall gedehnt, darin der Umriss eines großen Fisches.",
-     "text": "Sein Magen ist extrem dehnbar und verdaut Beute, die doppelt so groß ist.",
-     "image": "Graphic comparison showing fish stomach expanding to twice its normal body size.",
-     "who": [],
-     "place": "underwater",
-     "backdrop": {
-      "sky": "night",
-      "ground": "rock",
-      "elements": [
-       "sea"
-      ]
-     },
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "doppelt so groß"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du stehst erschrocken in der Küche.",
-     "text": "Das wäre, als würdest du ein Schnitzel essen, das doppelt so groß ist wie du.",
-     "image": "Character looking amazed next to a giant meal that is bigger than a human.",
-     "who": [
-      "du"
-     ],
-     "place": "kitchen",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "table"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "happy",
-     "shot": "wide",
-     "camera": "zoom_out",
-     "sfx": "pop",
-     "highlight": [
-      "doppelt so groß"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein winziges Männchen schwimmt neben einem riesigen weiblichen Anglerfisch.",
-     "text": "Du denkst, das Männchen jagt genauso geschickt wie das Weibchen?",
-     "image": "Tiny male fish swimming next to a massive female anglerfish.",
-     "who": [
-      "angler"
-     ],
-     "place": "underwater",
-     "backdrop": {
-      "sky": "night",
-      "ground": "rock",
-      "elements": [
-       "sea"
-      ]
-     },
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "actors": [
-      {
-       "id": "angler",
-       "action": "think",
-       "emotion": "happy",
-       "emote": "?",
-       "pos": "right",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Männchen jagt"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Ein Stempel mit der Aufschrift FALSCH erscheint auf einer dunklen Meereskarte.",
-     "text": "Falsch! Die Männchen sind winzig und haben überhaupt keine eigene Leuchte.",
-     "image": "A massive RED stamp saying FALSCH over a underwater map.",
-     "who": [],
-     "place": "underwater",
-     "backdrop": {
-      "sky": "night",
-      "ground": "rock",
-      "elements": [
-       "sea"
-      ]
-     },
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "event",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "Falsch",
-      "keine Leuchte"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "FALSCH",
-      "color": "red"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das kleine Männchen beißt sich fest an der Haut des Weibchens fest.",
-     "text": "Stattdessen beißt sich das Männchen am Körper des Weibchens fest.",
-     "image": "Tiny male fish biting and attaching to the skin of a large female fish.",
-     "who": [
-      "angler"
-     ],
-     "place": "underwater",
-     "backdrop": {
-      "sky": "night",
-      "ground": "rock",
-      "elements": [
-       "sea"
-      ]
-     },
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "actors": [
-      {
-       "id": "angler",
-       "action": "walk",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "close",
-     "camera": "zoom_in",
-     "sfx": "pop",
-     "highlight": [
-      "beißt sich fest"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Vom festgebissenen Männchen wachsen Adern in den Körper des Weibchens.",
-     "text": "Mit der Zeit verwächst seine Haut vollständig mit ihrem Blutkreislauf.",
-     "image": "Graphic showing two tissues fusing together with blood vessels connecting.",
-     "who": [],
-     "place": "underwater",
-     "backdrop": {
-      "sky": "night",
-      "ground": "rock",
-      "elements": [
-       "sea"
-      ]
-     },
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Blutkreislauf"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Männchen verwandelt sich langsam in eine kleine Hautfalte an der Seite des Weibchens.",
-     "text": "Am Ende schrumpft es zu einem dauerhaften Organ des Weibchens zusammen.",
-     "image": "Small male fish shrinking into a small skin tissue appendage on female.",
-     "who": [
-      "angler"
-     ],
-     "place": "underwater",
-     "backdrop": {
-      "sky": "night",
-      "ground": "rock",
-      "elements": [
-       "sea"
-      ]
-     },
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "actors": [
-      {
-       "id": "angler",
-       "action": "idle",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "dauerhaften Organ"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Männchen hängt verwachsen am Weibchen.",
-     "text": "Sie teilen sich Nährstoffe und Energie für das restliche Leben.",
-     "image": "A big counter graphics showing shared energy points ticking up fast.",
-     "who": [],
-     "place": "underwater",
-     "backdrop": {
-      "sky": "night",
-      "ground": "rock",
-      "elements": [
-       "sea"
-      ]
-     },
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Nährstoffe und Energie"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "In der Finsternis ist nur ein kleiner Lichtpunkt zu erkennen.",
-     "text": "Bleibt nur die Frage, was sonst noch in der tiefen Finsternis lauert.",
-     "image": "Diver pointing flashlight into pitch black deep sea water in confusion.",
-     "who": [],
-     "place": "underwater",
-     "backdrop": {
-      "sky": "night",
-      "ground": "rock",
-      "elements": [
-       "sea"
-      ]
-     },
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "Finsternis lauert"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Anglerfisch knipst seine Stirnlampe aus und verschwindet im Schatten.",
-     "text": "Sobald du das Licht in der Tiefsee siehst, ist es zu spät.",
-     "image": "Anglerfish turns off light and blends back into pitch black ocean water.",
-     "who": [
-      "angler"
-     ],
-     "place": "underwater",
-     "backdrop": {
-      "sky": "night",
-      "ground": "rock",
-      "elements": [
-       "sea"
-      ]
-     },
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "actors": [
-      {
-       "id": "angler",
-       "action": "talk",
-       "emotion": "angry",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "scary",
-     "shot": "close",
-     "camera": "zoom_in",
-     "sfx": "boom",
-     "highlight": [
-      "zu spät"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Licht flammt plötzlich wieder auf und zeigt erneut das riesige Gebiss.",
-     "text": "Denn dort drüben wartet schon das nächste spitze Gebiss.",
-     "image": "Glowing light flashes back on showing giant sharp teeth coming into view.",
-     "who": [
-      "angler"
-     ],
-     "place": "underwater",
-     "backdrop": {
-      "sky": "night",
-      "ground": "rock",
-      "elements": [
-       "sea"
-      ]
-     },
-     "time": "night",
-     "weather": "dark",
-     "props": [],
-     "actors": [
-      {
-       "id": "angler",
-       "action": "shocked",
-       "emotion": "happy",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "scary",
-     "shot": "wide",
-     "camera": "shake",
-     "sfx": "ding",
-     "highlight": [
-      "spitze Gebiss"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [],
-  "title": "Tiefsee-Anglerfisch: Die Falle aus Licht",
-  "created": 1795706469.3955913
- },
  "2026-11-27 13:00": {
   "category": "comedy",
   "topic": "Ich habe mir einen intelligenten Wecker gekauft, der mich erst motiviert und dann komplett terrorisiert",
@@ -2723,5 +1942,779 @@
   "needs": [],
   "title": "Warum du den Tetris-Effekt kennst und wie dein Gehirn dich austrickst",
   "created": 1795793321.5915947
+ },
+ "2026-11-28 13:00": {
+  "category": "vergleich",
+  "topic": "Barbershop gegen Friseursalon – wer verdient mehr?",
+  "trend": null,
+  "script": {
+   "title": "Barbershop gegen Friseursalon – wer verdient mehr?",
+   "description": "Vergleiche den klassischen Salon mit dem modernen Barbershop bei Preisen, Kosten und echtem Gewinn.\nZu wem würdest du gehen?",
+   "hashtags": [
+    "#shorts",
+    "#barbershop",
+    "#friseur",
+    "#vergleich",
+    "#geld",
+    "#business",
+    "#viral",
+    "#fyp"
+   ],
+   "tags": [
+    "barbershop",
+    "friseur",
+    "gehalt",
+    "vergleich",
+    "einnahmen",
+    "kosten",
+    "business",
+    "haare schneiden"
+   ],
+   "thumbnail": {
+    "place": "office",
+    "time": "day",
+    "actor": "leo",
+    "action": "talk",
+    "emotion": "happy",
+    "props": [
+     "money"
+    ],
+    "weather": "",
+    "image": "A close-up of a barber with scissors and a traditional hairdresser with a blowdryer standing back to back, exaggerated expressions, bright studio lighting, bold composition with empty space above",
+    "text": "WER GEWINNT"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "leo": {
+     "shirt": "schwarz",
+     "hat": "cap",
+     "hair": "kurz",
+     "hair_color": "schwarz",
+     "skin": "hell",
+     "gender": "m"
+    },
+    "mia": {
+     "shirt": "türkis",
+     "hat": "",
+     "hair": "bob",
+     "hair_color": "blond",
+     "skin": "hell",
+     "gender": "w"
+    }
+   },
+   "scenes": [
+    {
+     "text": "Barbershop oder Friseursalon: Wer macht wirklich mehr Gewinn?",
+     "image": "Barbershop oder Friseursalon: Wer macht wirklich mehr Gewinn?",
+     "who": [
+      "leo",
+      "mia"
+     ],
+     "place": "office",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Barbershop",
+      "Friseursalon"
+     ],
+     "overlay": {
+      "type": "versus",
+      "left": "BARBER",
+      "right": "SALON",
+      "kicker": "DUELL"
+     },
+     "see": "Ein versus Bild zeigt den direkten Vergleich zwischen Barbershop und Friseursalon",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "calm",
+     "graphic": {
+      "type": "versus",
+      "left": "BARBERSHOP",
+      "right": "FRISEURSALON",
+      "kicker": "VERGLEICH"
+     },
+     "who_desc": "; ",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Im Barbershop kostet der Haarschnitt plus Bartpflege meistens dreißig Euro.",
+     "image": "Im Barbershop kostet der Haarschnitt plus Bartpflege meistens dreißig Euro.",
+     "who": [
+      "leo"
+     ],
+     "place": "tattoostudio",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "dreißig Euro"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "30 EURO"
+     },
+     "see": "Im Barbershop bezahlt ein Kunde dreißig Euro für Haarschnitt und Bartpflege",
+     "time": "day",
+     "props": [
+      "money"
+     ],
+     "actors": [
+      {
+       "id": "leo",
+       "action": "point",
+       "emotion": "happy",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Leo schneidet am Tag zehn Kunden, das sind dreihundert Euro Umsatz.",
+     "image": "Leo schneidet am Tag zehn Kunden, das sind dreihundert Euro Umsatz.",
+     "who": [
+      "leo"
+     ],
+     "place": "tattoostudio",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "dreihundert Euro"
+     ],
+     "overlay": {
+      "type": "counter",
+      "label": "TAGESUMSATZ",
+      "value": 300,
+      "unit": "EURO"
+     },
+     "see": "Leo schneidet am Tag zehn Kunden und zählt das Geld auf dem Tisch",
+     "time": "day",
+     "props": [
+      "money"
+     ],
+     "actors": [
+      {
+       "id": "leo",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Nach Abzügen bleiben ihm rund zweihundert Euro Gewinn, aber lohnt sich das?",
+     "image": "Nach Abzügen bleiben ihm rund zweihundert Euro Gewinn, aber lohnt sich das?",
+     "who": [
+      "leo"
+     ],
+     "place": "tattoostudio",
+     "camera": "pan_right",
+     "sfx": "none",
+     "highlight": [
+      "zweihundert Euro"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "200 € GEWINN"
+     },
+     "see": "Leo schaut nachdenklich auf den verbleibenden Gewinn",
+     "time": "day",
+     "props": [
+      "money"
+     ],
+     "actors": [
+      {
+       "id": "leo",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Im Friseursalon nimmt Mia für Waschen und Schneiden fünfzig Euro.",
+     "image": "Im Friseursalon nimmt Mia für Waschen und Schneiden fünfzig Euro.",
+     "who": [
+      "mia"
+     ],
+     "place": "nailstudio",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "fünfzig Euro"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "50 EURO"
+     },
+     "see": "Im Friseursalon nimmt Mia fünfzig Euro für Waschen und Schneiden",
+     "time": "day",
+     "props": [
+      "money"
+     ],
+     "actors": [
+      {
+       "id": "mia",
+       "action": "talk",
+       "emotion": "happy",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Sie schafft acht Kunden täglich, was vierhundert Euro Umsatz ergibt.",
+     "image": "Sie schafft acht Kunden täglich, was vierhundert Euro Umsatz ergibt.",
+     "who": [
+      "mia"
+     ],
+     "place": "nailstudio",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "vierhundert Euro"
+     ],
+     "overlay": {
+      "type": "counter",
+      "label": "TAGESUMSATZ",
+      "value": 400,
+      "unit": "EURO"
+     },
+     "see": "Mia schafft acht Kunden täglich und rechnet den Umsatz zusammen",
+     "time": "day",
+     "props": [
+      "money"
+     ],
+     "actors": [
+      {
+       "id": "mia",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Wegen höherer Produktkosten bleiben ihr am Abend zweihundertfünfzig Euro Gewinn.",
+     "image": "Wegen höherer Produktkosten bleiben ihr am Abend zweihundertfünfzig Euro Gewinn.",
+     "who": [
+      "mia"
+     ],
+     "place": "nailstudio",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "zweihundertfünfzig Euro"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "250 € GEWINN"
+     },
+     "see": "Mia betrachtet die Einnahmen nach Abzug der Produktkosten",
+     "time": "day",
+     "props": [
+      "money"
+     ],
+     "actors": [
+      {
+       "id": "mia",
+       "action": "think",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Zwischenstand nach dem ersten Blick, der Salon führt knapp.",
+     "image": "Zwischenstand nach dem ersten Blick, der Salon führt knapp.",
+     "who": [
+      "leo",
+      "mia"
+     ],
+     "place": "office",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "Zwischenstand"
+     ],
+     "overlay": {
+      "type": "score",
+      "left": "BARBER",
+      "right": "SALON",
+      "value": "200:250",
+      "kicker": "TAGESGEWINN"
+     },
+     "see": "Ein Punktestand zeigt den Zwischenstand nach dem ersten Blick",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "calm",
+     "graphic": {
+      "type": "score",
+      "left": "BARBER",
+      "right": "SALON",
+      "value": "1:2",
+      "kicker": "ZWISCHENSTAND"
+     },
+     "who_desc": "; ",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Aber im Barbershop dauert ein kompletter Durchgang nur zwanzig Minuten.",
+     "image": "Aber im Barbershop dauert ein kompletter Durchgang nur zwanzig Minuten.",
+     "who": [
+      "leo"
+     ],
+     "place": "tattoostudio",
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "zwanzig Minuten"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "20 MINUTEN"
+     },
+     "see": "Im Barbershop läuft die Stoppuhr für einen schnellen Haarschnitt",
+     "time": "day",
+     "props": [
+      "stoppuhr"
+     ],
+     "actors": [
+      {
+       "id": "leo",
+       "action": "point",
+       "emotion": "happy",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Mia braucht für Schnitt und Styling locker das Doppelte an Zeit.",
+     "image": "Mia braucht für Schnitt und Styling locker das Doppelte an Zeit.",
+     "who": [
+      "mia"
+     ],
+     "place": "nailstudio",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Doppelte"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "40 MINUTEN"
+     },
+     "see": "Mia braucht deutlich länger für Schnitt und Styling im Friseursalon",
+     "time": "day",
+     "props": [
+      "stoppuhr"
+     ],
+     "actors": [
+      {
+       "id": "mia",
+       "action": "think",
+       "emotion": "worried",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Deshalb schiebt Leo pro Woche deutlich mehr zahlende Kunden durch.",
+     "image": "Deshalb schiebt Leo pro Woche deutlich mehr zahlende Kunden durch.",
+     "who": [
+      "leo"
+     ],
+     "place": "tattoostudio",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "mehr Kunden"
+     ],
+     "overlay": null,
+     "see": "Leo schiebt pro Woche deutlich mehr Kunden durch den Laden",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "leo",
+       "action": "walk",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "crowd": "walk",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Rechnen wir das auf den Monat hoch, ändert sich das Bild.",
+     "image": "Rechnen wir das auf den Monat hoch, ändert sich das Bild.",
+     "who": [
+      "leo",
+      "mia"
+     ],
+     "place": "office",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Monat"
+     ],
+     "overlay": {
+      "type": "calendar",
+      "kicker": "ZEITRAUM",
+      "value": "30",
+      "label": "TAGE"
+     },
+     "see": "Ein Kalenderblatt blättert zum Monatsvergleich weiter",
+     "time": "day",
+     "props": [
+      "kalender"
+     ],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "calm",
+     "graphic": {
+      "type": "calendar",
+      "kicker": "MONAT",
+      "value": "30",
+      "label": "TAGE"
+     },
+     "who_desc": "; ",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Leo landet bei monatlich viertausend Euro reinem Gewinn nach allen Abzügen.",
+     "image": "Leo landet bei monatlich viertausend Euro reinem Gewinn nach allen Abzügen.",
+     "who": [
+      "leo"
+     ],
+     "place": "tattoostudio",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "viertausend Euro"
+     ],
+     "overlay": {
+      "type": "counter",
+      "label": "BARBER GEWINN",
+      "value": 4000,
+      "unit": "EURO"
+     },
+     "see": "Leo zählt den monatlichen Gewinn nach allen Abzügen",
+     "time": "day",
+     "props": [
+      "money"
+     ],
+     "actors": [
+      {
+       "id": "leo",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Mia kommt durch teurere Extraleistungen auf viertausendfünfhundert Euro pro Monat.",
+     "image": "Mia kommt durch teurere Extraleistungen auf viertausendfünfhundert Euro pro Monat.",
+     "who": [
+      "mia"
+     ],
+     "place": "nailstudio",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "viertausendfünfhundert Euro"
+     ],
+     "overlay": {
+      "type": "counter",
+      "label": "SALON GEWINN",
+      "value": 4500,
+      "unit": "EURO"
+     },
+     "see": "Mia zeigt stolz auf ihren höheren Monatsgewinn durch Extraleistungen",
+     "time": "day",
+     "props": [
+      "money"
+     ],
+     "actors": [
+      {
+       "id": "mia",
+       "action": "point",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Der echte Haken liegt jedoch in der wöchentlichen Arbeitszeit.",
+     "image": "Der echte Haken liegt jedoch in der wöchentlichen Arbeitszeit.",
+     "who": [
+      "leo"
+     ],
+     "place": "office",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Arbeitszeit"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "DER HAKEN"
+     },
+     "see": "Ein Fragezeichen schwebt über dem echten Haken der wöchentlichen Arbeitszeit",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "tense",
+     "graphic": {
+      "type": "question",
+      "text": "DER HAKEN?"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Leo schuftet sechzig Stunden pro Woche im Laden ohne eine Pause.",
+     "image": "Leo schuftet sechzig Stunden pro Woche im Laden ohne eine Pause.",
+     "who": [
+      "leo"
+     ],
+     "place": "tattoostudio",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "sechzig Stunden"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "60 STUNDEN"
+     },
+     "see": "Leo schuftet erschöpft sechzig Stunden pro Woche ohne Pause im Laden",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "leo",
+       "action": "shiver",
+       "emotion": "tired",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Mia arbeitet dank festem Team nur vierzig Stunden in der Woche.",
+     "image": "Mia arbeitet dank festem Team nur vierzig Stunden in der Woche.",
+     "who": [
+      "mia"
+     ],
+     "place": "nailstudio",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "vierzig Stunden"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "40 STUNDEN"
+     },
+     "see": "Mia arbeitet dank ihrem festen Team entspannt nur vierzig Stunden",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "mia",
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Der Stundenlohn spricht damit eine ganz andere Sprache für beide.",
+     "image": "Der Stundenlohn spricht damit eine ganz andere Sprache für beide.",
+     "who": [
+      "leo",
+      "mia"
+     ],
+     "place": "office",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "Stundenlohn"
+     ],
+     "overlay": null,
+     "see": "Ein Vergleichsdiagramm zeigt den tatsächlichen Stundenlohn beider Seiten",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "calm",
+     "graphic": {
+      "type": "compare",
+      "left": "BARBER",
+      "right": "SALON",
+      "value": "16 €",
+      "sub": "28 €"
+     },
+     "who_desc": "; ",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "text": "Der Friseursalon gewinnt dieses Duell hauchdünn durch effizientere Arbeitszeiten.",
+     "image": "Der Friseursalon gewinnt dieses Duell hauchdünn durch effizientere Arbeitszeiten.",
+     "who": [
+      "mia"
+     ],
+     "place": "office",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "gewinnt"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "GEWINNER",
+      "color": "green"
+     },
+     "see": "Ein Stempel entscheidet das Duell zugunsten des Friseursalons",
+     "time": "day",
+     "props": [],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "happy",
+     "graphic": {
+      "type": "badge",
+      "kicker": "SIEGER",
+      "text": "FRISEURSALON"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "friseursalon",
+   "haarschnitt",
+   "bartpflege"
+  ],
+  "title": "Barbershop gegen Friseursalon – wer verdient mehr?",
+  "created": 1795803587.5270746
  }
 }
