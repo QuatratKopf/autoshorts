@@ -1,5 +1,5 @@
 {
- "updated": 1795756369.3336506,
+ "updated": 1795758150.7924254,
  "enough": true,
  "counted": 45,
  "total": 48,
@@ -63,10 +63,10 @@
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 2,
-   "avg_views": 1652,
+   "avg_views": 1650,
    "avg_likes": 35.0,
    "like_rate": 2.12,
-   "avg_score": 2176
+   "avg_score": 2175
   },
   {
    "slug": "storys",
@@ -128,13 +128,13 @@
  ],
  "words_bad": [
   "remix",
-  "bekanntes",
   "lied",
   "glas",
+  "bekanntes",
   "erkennst",
   "niemand",
   "klassikers",
-  "jede"
+  "eines"
  ],
  "top": [
   {
