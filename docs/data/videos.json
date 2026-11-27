@@ -8682,7 +8682,7 @@
   "id": 226,
   "category": "comedy",
   "topic": "Ich habe mir einen intelligenten Wecker gekauft, der mich erst motiviert und dann komplett terrorisiert",
-  "status": "rendered",
+  "status": "published",
   "created": 1795776199.1388454,
   "title": "Mein Wecker terrorisiert mich jeden Tag",
   "description": "Erst lobt er mein Lächeln, dann verriegelt er meine Tür.\nJetzt bestimmt eine kleine Kiste mein ganzes Leben.\nWürdest du ihn behalten oder aus dem Fenster werfen?",
@@ -8718,6 +8718,12 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "zernio_id": "6b09610ca7efa1d4ae482a22",
+  "yt_status": "Zernio: published",
+  "yt_id": "ZTdo4shJXi4",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6b09610ca7efa1d4ae482a22",
+  "error": null
  }
 ]
