@@ -1,5 +1,5 @@
 {
- "updated": 1795817971.134521,
+ "updated": 1795819772.9294903,
  "enough": true,
  "counted": 48,
  "total": 51,
@@ -45,25 +45,25 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 8,
-   "avg_views": 1671,
+   "avg_views": 1669,
    "avg_likes": 44.6,
    "like_rate": 2.67,
-   "avg_score": 2351
+   "avg_score": 2350
   },
   {
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 2,
-   "avg_views": 1714,
+   "avg_views": 1722,
    "avg_likes": 36.0,
-   "like_rate": 2.1,
-   "avg_score": 2269
+   "like_rate": 2.09,
+   "avg_score": 2277
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 4,
-   "avg_views": 1446,
+   "avg_views": 1447,
    "avg_likes": 35.8,
    "like_rate": 2.47,
    "avg_score": 2008
@@ -81,10 +81,10 @@
    "slug": "motivation",
    "name": "🔥 Motivation",
    "n": 2,
-   "avg_views": 1060,
+   "avg_views": 1056,
    "avg_likes": 35.0,
-   "like_rate": 3.3,
-   "avg_score": 1604
+   "like_rate": 3.31,
+   "avg_score": 1602
   },
   {
    "slug": "musik",
@@ -108,10 +108,10 @@
    "slug": "nachricht",
    "name": "📱 Unbekannte Nachricht",
    "n": 1,
-   "avg_views": 556,
+   "avg_views": 561,
    "avg_likes": 8.0,
-   "like_rate": 1.44,
-   "avg_score": 676
+   "like_rate": 1.43,
+   "avg_score": 681
   }
  ],
  "weights": {
@@ -120,13 +120,13 @@
   "tiere": 0.94,
   "whatif": 1.12,
   "comedy": 1.41,
-  "vergleich": 1.06,
+  "vergleich": 1.07,
   "motivation": 0.75,
   "nachricht": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2286 Aufrufe, 2.05 % Likes).",
-  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 556 Aufrufe) – kommt seltener dran.",
+  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 561 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2198 zu 1144 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut, vier."
  ],
@@ -137,13 +137,13 @@
  ],
  "words_bad": [
   "remix",
-  "erkennst",
-  "bekanntes",
-  "glas",
   "lied",
-  "scheibe",
+  "bekanntes",
+  "erkennst",
+  "glas",
   "klassikers",
-  "jede"
+  "eines",
+  "scheibe"
  ],
  "top": [
   {
@@ -160,11 +160,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2604,
+   "views": 2605,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3444
+   "score": 3445
   },
   {
    "id": 77,
@@ -202,21 +202,21 @@
    "id": 224,
    "title": "Tiefsee-Anglerfisch: Die Falle aus Licht",
    "category": "tiere",
-   "views": 370,
+   "views": 373,
    "likes": 12,
    "comments": 0,
    "shares": 0,
-   "score": 550
+   "score": 553
   },
   {
    "id": 196,
    "title": "Jede Scheibe ein Ton: Lo-Fi-Remix eines Klassikers",
    "category": "musik",
-   "views": 357,
+   "views": 358,
    "likes": 2,
    "comments": 0,
    "shares": 0,
-   "score": 387
+   "score": 388
   },
   {
    "id": 44,
