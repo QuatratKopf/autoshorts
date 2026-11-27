@@ -894,3 +894,15 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
 - `main.NO_THINGS`: Für „Exoskelett“ wird nichts gelernt (gelernt wurde ein blauer Roboter, der neben der Figur stand); die vorläufige Zeichnung ist
   aus `shapes.json` entfernt.
 - Selbsttest: `_pruef2711b`.
+
+## Tetris-Effekt: Bausteine fallen durchs Bild (Prüfung 27.11.2026, Video 231)
+- `extras.fallblocks(img, t)`: halb durchsichtige Bausteine aus zwei bis vier Quadraten fallen ruckweise von oben durchs Bild und lösen sich über dem
+  Boden auf. Frei erfundene Formen und Farben – kein Spielfeld, keine Punkteanzeige, kein Schriftzug des echten Spiels. Gezeichnet wird hinter den Figuren
+  (`stage._frame`, Schalter `fx["blocks"]` aus dem Szenen-Feld `_blocks`).
+- Regie `stage._tetris_story` (wenn `tetris_story`: Kern des Themas nennt Tetris/Blockspiel oder zwei Sätze tun es): Sätze über fallende Blöcke, Steine,
+  Bausteine, Formen, das innere Auge, Einschlafen und Träumen (`TETRIS_BLOCK_RE`) bekommen `_blocks`; eine Großaufnahme eines Gegenstands entfällt dort.
+  „Tetris spielen / zocken“ (`TETRIS_PLAY_RE`) mit Mensch im Bild: keine Großaufnahme des leeren Bildschirms; steht kein Rechner im Bild
+  (Notaufnahme), hält die Figur das Handy.
+- Schwerelosigkeit: „Symbole/Anzeigen/Pfeile/Bausteine schweben in der Luft“ (`HUD_AIR_RE`) hebt weder Figur noch Autos an – vorher flogen Figur und
+  Autos durch die Luft, sobald im Satz Symbole „schwebten“.
+- Selbsttest: `_pruef2711c`.

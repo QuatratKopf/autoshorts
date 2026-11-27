@@ -4800,3 +4800,42 @@ PROP_ALIASES.update({"markierung": "markers", "markierungen": "markers", "karten
                      "map_marker": "markers", "marker": "markers", "wegpunkt": "markers", "wegpunkte": "markers", "icons": "markers", "map icons": "markers",
                      "mini-map": "minimap", "mini map": "minimap", "mini_map": "minimap", "minikarte": "minimap", "mini-karte": "minimap", "mini-radar": "minimap",
                      "miniradar": "minimap", "radar-karte": "minimap"})
+
+# ------------------------------------------------------------------ Tetris-Effekt: gedachte Bausteine fallen durchs Bild (Prüfung 27.11.2026, Video 231)
+_FB_SHAPES = (((0, 0), (1, 0)), ((0, 0), (1, 0), (2, 0)), ((0, 0), (0, 1), (1, 1)), ((0, 0), (1, 0), (0, 1), (1, 1)), ((0, 0), (0, 1), (0, 2), (1, 2)),
+              ((0, 0), (1, 0), (2, 0), (1, 1)), ((1, 0), (2, 0), (0, 1), (1, 1)), ((0, 0), (0, 1), (0, 2)))
+_FB_COLS = ((250, 128, 112), (255, 210, 96), (120, 214, 168), (122, 182, 250), (190, 152, 244), (252, 168, 206), (136, 222, 232))
+_FB_LANES = ((60, 0.0, 250, 0), (800, 0.9, 290, 3), (250, 1.9, 215, 5), (660, 2.6, 265, 1), (440, 3.5, 235, 6), (880, 4.3, 225, 2), (540, 5.2, 280, 4),
+             (20, 6.0, 240, 7), (330, 6.9, 300, 2))
+
+
+def fallblocks(img, t, floor=1240, cell=70):
+    """Bausteine aus zwei bis vier Quadraten fallen halb durchsichtig von oben durchs Bild und lösen sich über dem Boden auf – das, was jemand nach
+    Stunden am Blockspiel „überall“ sieht. Frei erfundene Formen und Farben, kein Spielfeld, keine Spielfigur, kein Schriftzug eines echten Spiels.
+    Die Regie setzt es über `_blocks` (stage._tetris_story); gezeichnet wird hinter den Figuren."""
+    from PIL import Image as _Im, ImageDraw as _ID
+    layer = _Im.new("RGBA", img.size, (0, 0, 0, 0))
+    d = _ID.Draw(layer)
+    span = floor + 420.0
+    for i, (lx, ph, sp, si) in enumerate(_FB_LANES):
+        prog = t * sp + ph * 190.0
+        turn = int(prog // span)
+        y = -300.0 + prog % span
+        shape = _FB_SHAPES[(si + turn * 3) % len(_FB_SHAPES)]
+        col = _FB_COLS[(i + turn * 2) % len(_FB_COLS)]
+        step = int(y // (cell * 0.5)) * cell * 0.5                                      # ruckweise wie im Blockspiel, nicht gleitend
+        fade = max(0.0, min(1.0, (floor - step - cell * 2) / 260.0)) * min(1.0, max(0.0, (step + 300) / 120.0))
+        if fade <= 0.02:
+            continue
+        a = int(240 * fade)
+        for cx, cy in shape:
+            x0, y0 = lx + cx * cell, step + cy * cell
+            d.rounded_rectangle((x0 - 5, y0 - 5, x0 + cell + 5, y0 + cell + 5), 14, fill=col + (int(a * 0.22),))          # Schein
+        for cx, cy in shape:
+            x0, y0 = lx + cx * cell, step + cy * cell
+            d.rounded_rectangle((x0, y0, x0 + cell, y0 + cell), 9, fill=col + (a,), outline=INK + (a,), width=5)
+            d.rounded_rectangle((x0 + 10, y0 + 9, x0 + cell - 22, y0 + 20), 5, fill=(255, 255, 255, int(a * 0.55)))       # Glanz
+    if img.mode == "RGBA":
+        img.alpha_composite(layer)
+    else:
+        img.paste(layer, (0, 0), layer)

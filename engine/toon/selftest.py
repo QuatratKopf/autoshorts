@@ -27,7 +27,7 @@ def frame(scene, cast=None, t=1.3):
     bg = places.background(bd, night, bool(scene.get("dark_city")))
     opt = {"crowd": scene.get("crowd"), "mood": str(scene.get("mood") or "").lower(), "spec": places.spec_of(bd),
            "sky": places.sky_mask(bd, night, bool(scene.get("dark_city"))), "no_traffic": bool(scene.get("no_traffic")),
-           "win": scene.get("_win"), "count": scene.get("_count"), "neon": scene.get("look") == "neon",
+           "win": scene.get("_win"), "count": scene.get("_count"), "neon": scene.get("look") == "neon", "blocks": bool(scene.get("_blocks")),
            "float": str(scene.get("float") or ""), "aloft": bool(scene.get("aloft")), "low": bool(scene.get("low"))}
     shot = str(scene.get("shot") or "")
     if shot == "graphic" and graphics.clean(scene.get("graphic")):
@@ -2848,6 +2848,30 @@ def main():
         from .. import main as main_
         assert main_.known_thing("exoskelett"), "für das Exoskelett wird nichts gelernt"
     check("Prüfung 27.11. (Video 227): Exoskelett wird getragen, Akku leer, Langhantel, kein loser Roboter", _pruef2711b)
+
+    def _pruef2711c():                                           # Prüfung 27.11.2026 (Video 231 „Tetris-Effekt“): die Bausteine fallen wirklich durchs Bild
+        cast_t = {"du": {"shirt": "lila"}, "gehirn": {"kind": "brain"}}
+        mk = lambda: [{"text": "Überall fallen plötzlich Blöcke, wenn du stundenlang Tetris zockst.", "place": "zimmer", "time": "night", "props": ["computer"], "actors": [{"id": "du", "action": "shocked"}]},
+                      {"text": "Du liegst im Bett und vor deinem inneren Auge fallen weiter Steine.", "place": "zimmer", "time": "night", "actors": [{"id": "du", "action": "sleep"}]},
+                      {"text": "Forscher ließen Unfallopfer in der Notaufnahme Tetris spielen.", "place": "hospital", "actors": [{"id": "du", "action": "talk"}]},
+                      {"text": "Schon neunzehnhundertvierundneunzig bekam das Ganze seinen Namen.", "place": "office", "shot": "graphic", "graphic": {"type": "number", "value": "1994", "label": "NAME"}}]
+        sd = stage.direct(mk(), [(0, 4), (4, 8), (8, 12), (12, 16)], topic="Der Tetris-Effekt – warum dein Gehirn weiterspielt")
+        assert sd[0].get("_blocks") and sd[1].get("_blocks"), "fallende Blöcke/Steine im Satz: Bausteine im Bild"
+        assert not sd[2].get("_blocks") and not sd[3].get("_blocks"), "kein Baustein-Regen ohne Bausteine im Satz bzw. über einer Zahlen-Tafel"
+        a_ = frame(dict(sd[0], _blocks=False), cast_t, 1.6).convert("RGB")
+        b_ = frame(sd[0], cast_t, 1.6).convert("RGB")
+        from PIL import ImageChops
+        box = ImageChops.difference(a_, b_).getbbox()
+        assert box and (box[2] - box[0]) > 500, f"die Bausteine sind über die Bildbreite zu sehen: {box}"
+        so = stage.direct([{"text": "Am Hang fallen plötzlich Steine auf die Straße.", "place": "mountain", "actors": [{"id": "du", "action": "shocked"}]},
+                           {"text": "Die Blöcke aus Eis sind riesig.", "place": "mountain", "actors": [{"id": "du", "action": "talk"}]}], [(0, 4), (4, 8)], topic="Steinschlag in den Alpen")
+        assert not any(x.get("_blocks") for x in so), "Steinschlag ist kein Tetris-Effekt"
+        sf = stage.direct([{"text": "Auf der Straße schweben plötzlich Symbole in der Luft über Türen und Autos.", "place": "street", "actors": [{"id": "du", "action": "point"}]},
+                           {"text": "Forscher ließen Unfallopfer in der Notaufnahme Tetris spielen.", "place": "hospital", "shot": "insert", "props": ["bed"], "actors": [{"id": "du", "action": "sit"}]}],
+                          [(0, 4), (4, 8)], topic="Der Tetris-Effekt – warum dein Gehirn weiterspielt")
+        assert not sf[0].get("float") and not any(a.get("action") == "float" for a in sf[0]["actors"]), f"schwebende Symbole heben weder Figur noch Autos an: {sf[0].get('float')}"
+        assert sf[1].get("shot") != "insert" and sf[1]["actors"][0].get("hold") == "phone", "Tetris spielen in der Notaufnahme: die Figur spielt auf dem Handy"
+    check("Prüfung 27.11. (Video 231): Tetris-Effekt – Bausteine fallen durchs Bild", _pruef2711c)
 
     def _pruef2511():                                            # Prüfung 25.11.2026 (Video 206, Open-World-Karte)
         import tempfile

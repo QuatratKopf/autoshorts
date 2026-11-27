@@ -315,7 +315,7 @@ def _prepare(scene, cast):
         if action in ("walk", "run") and x1 == x0:       # ohne Ziel: von außen hereinkommen
             x0 = -260 if x0 <= 540 else 1340
         look_a = rig.Look.from_spec(spec, aid, list(cast).index(aid) if aid in cast else None)
-        if scene.get("_no_headphones") and look_a.hat == "headphones":
+        if (scene.get("_no_headphones") or action in ("sleep", "schlafen")) and look_a.hat == "headphones":   # im Bett liegt niemand mit Kopfhörern auf den Ohren (Prüfung 27.11.2026, Video 231)
             import dataclasses
             look_a = dataclasses.replace(look_a, hat="")   # Telefonat: der Freund hat das Handy auf laut – trüge er laut Besetzung schon Kopfhörer, widerspräche das Bild dem Satz (Video 184)
         if a.get("wear") == "headphones" and not look_a.hat and kind not in extras.CREATURES:
@@ -805,6 +805,8 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                        grow=max(0.02, extras._pop(t, 0.06 + 0.12 * pi, 0.32)) if opt.get("pop_in", True) else 1.0)
     if opt.get("crowd"):
         _crowd(frame, opt["crowd"], t, night, 1090, 9999, **ckw)
+    if opt.get("blocks"):                     # Tetris-Effekt: gedachte Bausteine fallen durchs Bild, hinter den Figuren (Video 231)
+        extras.fallblocks(frame, t)
     close = shot == "close" and bool(actors)
     if close:              # Großaufnahme: Kulisse vergrößert und leicht unscharf (Tiefenschärfe), die Figur scharf und groß davor
         lead = next((a for a in actors if a["speaks"]), actors[0])
@@ -2228,6 +2230,8 @@ def direct(scenes, times, topic="", style="", look=""):
             if m_fl and m_fl.group(0) in ("durch die luft", "in der luft") and _re0.search(NOT_BODIES_RE, txt_f) \
                     and not _re0.search(FLOAT_RE, txt_f.replace("durch die luft", " ").replace("in der luft", " ")):
                 m_fl = None                               # Laser, Licht, Rauch, Schall „durch die Luft“: da schwebt kein Mensch und kein Möbel
+            if m_fl and _re0.search(HUD_AIR_RE, txt_f) and not _re0.search(r"schwerelos|schwerkraft|hebs?t .{0,40}\bab\b", txt_f):
+                m_fl = None                               # „Symbole schweben in der Luft“: Einblendungen wie im Spiel – Figur und Autos bleiben am Boden (Prüfung 27.11.2026, Video 231)
             floats_now = bool(m_fl)
             if _re0.search(DROP_RE, _re0.sub(SOFT_CRASH_RE, " ", txt_f)) and (_re0.search(GRAVITY_BACK_RE, txt_f) or (float_seen and not floats_now)):
                 fl = "drop"                               # „… während Möbel schwerelos durcheinanderfliegen“ ist noch kein Absturz
@@ -2644,6 +2648,7 @@ def direct(scenes, times, topic="", style="", look=""):
     _door_people(scenes, main_id)
     _wecker_story(scenes, topic, main_id)
     _exo_story(scenes, topic, main_id)
+    _tetris_story(scenes, topic)
     _mirror_story(scenes, topic, main_id)
     _mirror_msg(scenes, topic, style, main_id)
     _fridge_open(scenes)
@@ -2663,6 +2668,41 @@ MIRROR_SELF_RE = r"spiegel|starr|gesicht|deine (?:nase|augen|haare|stirn|wangen)
 MIRROR_CALM_RE = r"erleichtert|beruhigt|atmest (?:tief )?(?:durch|auf)|aufatmen|licht an|entspann|keine angst"
 BRAIN_IDS = ("gehirn", "hirn", "brain", "_hirn")
 
+
+# ------------------------------------------------------------------ Tetris-Effekt: die Bausteine fallen wirklich durchs Bild
+# Prüfung 27.11.2026 (Video 231, „Tetris-Effekt“): „Überall fallen plötzlich Blöcke“ und „vor deinem inneren Auge fallen weiter Steine“ – zu sehen war
+# kein einziger Baustein, nur die erschrockene Figur im Zimmer und im Bett. Jetzt fallen in solchen Sätzen halb durchsichtige Bausteine durchs Bild
+# (extras.fallblocks, frei erfundene Formen – kein Spielfeld, kein Zeichen des echten Spiels).
+TETRIS_RE = r"tetris|blockspiel|klötzchenspiel"
+TETRIS_PLAY_RE = r"tetris (?:\w+ ){0,4}(?:spiel|zock|gespielt|gezockt)|(?:spiel|zock)\w* (?:\w+ ){0,5}tetris|\bzocks?t\b|\bzocken\b|\bgezockt\b"
+TETRIS_BLOCK_RE = (r"bl[oö]cke?n?\b|\bsteine?n?\b|bausteine?n?\b|klötz|\bformen\b|puzzleteil|tetris-?effekt|\bstapel|einsortier|\blücken?\b|\braster\b|"
+                   r"inner\w* auge|geschlossen\w* augen|beim einschlafen|schläfst du ein|im traum|träum")
+
+
+def tetris_story(scenes, topic=""):
+    import re as _re
+    return bool(_re.search(TETRIS_RE, topic_head(topic).lower())) or \
+        sum(1 for sc in scenes if isinstance(sc, dict) and _re.search(TETRIS_RE, str(sc.get("text") or "").lower())) >= 2
+
+
+def _tetris_story(scenes, topic=""):
+    import re as _re
+    if not tetris_story(scenes, topic):
+        return
+    for sc in scenes:
+        if not isinstance(sc, dict) or (str(sc.get("shot") or "") == "graphic" and sc.get("graphic")):
+            continue
+        if _re.search(TETRIS_BLOCK_RE, str(sc.get("text") or "").lower()):
+            sc["_blocks"] = True
+            if str(sc.get("shot") or "") == "insert":
+                sc["shot"] = ""                       # die Bausteine fallen im Raum um die Figur – keine Großaufnahme eines einzelnen Gegenstands
+        low_t = str(sc.get("text") or "").lower()
+        humans = [a_ for a_ in (sc.get("actors") or []) if isinstance(a_, dict) and not a_.get("kind") and str(a_.get("id")) != "gehirn"]
+        if humans and _re.search(TETRIS_PLAY_RE, low_t):
+            if str(sc.get("shot") or "") == "insert":
+                sc["shot"] = ""                       # „… ließen Testpersonen Tetris spielen“: die Figur spielt – kein leerer Bildschirm auf einem Tisch als Großaufnahme
+            if not any(isinstance(q, dict) and str(q.get("type")).lower() in ("computer", "tv", "konsole", "console") for q in (sc.get("props") or [])) and not humans[0].get("hold"):
+                humans[0]["hold"] = "phone"           # ohne Rechner im Bild (Notaufnahme, Bahn): gespielt wird auf dem Handy in der Hand
 
 def mirror_story(scenes, topic=""):
     head = str(topic or "").lower()
@@ -6666,6 +6706,7 @@ GRAPHIC_WORDS = [(r"aktien|börse|kurve|chart|diagramm|kursverlauf|wachstumskurv
 FLOAT_RE = (r"schwerelos|(ohne|keine|null) (schwerkraft|gravitation|erdanziehung)|(schwerkraft|gravitation|erdanziehung\w*)\w* .{0,60}(\bweg\b|null|verschw|\baus\b|\bab\b|fehlt|abgeschaltet|nicht mehr|pause|verlier|verlor)|verlier\w* .{0,40}(schwerkraft|gravitation|erdanziehung)|"
             r"schweb(?!\w* in (lebens|großer )?gefahr)|hebs?t [^,.;:!?]{0,60}\bab\b|heben [^,.;:!?]{0,60}\bab\b|durch die luft|in der luft (treib|häng|schweb|steh)|"
             r"treib\w* .{0,24}(durch den raum|im raum|zur decke|nach oben)|flieg\w* (\w+ )?(los|davon|nach oben)\b|steig\w* .{0,30}(in den himmel|in die luft|nach oben)|\bdrifte|verlier\w* (\w+ )?den halt|verlier\w* (\w+ )?die bodenhaftung")
+HUD_AIR_RE = r"symbole?n?\b|markierung|\bicons?\b|lebensbalken|\banzeigen?\b|\bpfeile?n?\b|bausteine?n?\b|bl[oö]cke?n?\b|hologramm|schriftz|\bmenüs?\b|wegpunkt"
 NOT_BODIES_RE = r"laser|\blicht|strahl|leucht|schall|geräusch|\bton\b|töne|geruch|\bduft|rauch|qualm|staub|funk|signal|viren|virus|keime|pollen|wellen\b"
 DROP_RE = (r"kracht|krachen|aufprall|prall\w* .{0,70}(boden|erde|asphalt|straße|\bauf\b)|knall\w* .{0,70}(boden|erde|asphalt|straße|pflaster)|"
            r"\b(schlägt|schlagen) .{0,30}(boden|asphalt|\bauf\b)|(fällt|fällst|fallen|stürzt|stürzen) .{0,50}(boden|herunter|herab|hinab|zurück|\bab\b)|plumps")
@@ -7259,7 +7300,7 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     mood_s = str(scene.get("mood") or "").lower()
     party = bool(re.search(PARTY_RE, str(scene.get("text") or "").lower())) or (str(scene.get("crowd") or "") == "cheer" and crowd_ok(scene))
     fx_opt = {"crowd": scene.get("crowd") if crowd_ok(scene) else "", "mood": mood_s, "confetti": party,   # Konfetti nur, wenn gefeiert wird – nicht in jeder fröhlichen Szene (Klinik, Büro) "spec": places.spec_of(backdrop(scene)), "sky": sky_m,
-              "win": scene.get("_win"), "count": scene.get("_count"), "neon": neon_look, "float": str(scene.get("float") or ""),
+              "win": scene.get("_win"), "count": scene.get("_count"), "neon": neon_look, "float": str(scene.get("float") or ""), "blocks": bool(scene.get("_blocks")),
               "noir": str(scene.get("look") or "") == "noir",
               "aloft": bool(scene.get("aloft")), "low": bool(scene.get("low")), "no_traffic": bool(scene.get("no_traffic") or scene.get("dark_city"))}
     gfx_cut = CHAPTER_MAX if gfx and str(gfx.get("type")) == "chapter" and dur > CHAPTER_MAX + 1.2 and actors and not hyper.handles(gfx) else 0.0   # Kapitel-Tafel („3 · TAG DREI“) über einem langen Satz: nach gut zwei Sekunden weiter mit der Figur am Ort – vorher stand die Zahl fünf Sekunden vor Schwarz (Video 219)
