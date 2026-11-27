@@ -9030,10 +9030,13 @@
   "look": "cartoon",
   "mp4": true,
   "zernio_id": "6b09e21f7cefb7ef8bca8fc4",
-  "yt_status": "Zernio: published",
+  "yt_status": "public",
   "yt_id": "wcHxMY9hpj8",
   "tt_status": "Zernio: published",
   "tt_publish_id": "zernio:6b09e21f7cefb7ef8bca8fc4",
-  "error": null
+  "error": null,
+  "yt_thumb_at": 1795810713.4619856,
+  "yt_thumb_tries": 1,
+  "yt_thumb": "('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))"
  }
 ]
