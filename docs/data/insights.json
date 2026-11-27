@@ -1,5 +1,5 @@
 {
- "updated": 1795782223.837835,
+ "updated": 1795784015.3230233,
  "enough": true,
  "counted": 47,
  "total": 49,
@@ -63,10 +63,10 @@
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 2,
-   "avg_views": 1672,
+   "avg_views": 1666,
    "avg_likes": 35.0,
-   "like_rate": 2.09,
-   "avg_score": 2212
+   "like_rate": 2.1,
+   "avg_score": 2206
   },
   {
    "slug": "storys",
@@ -81,7 +81,7 @@
    "slug": "motivation",
    "name": "🔥 Motivation",
    "n": 2,
-   "avg_views": 1047,
+   "avg_views": 1046,
    "avg_likes": 35.0,
    "like_rate": 3.34,
    "avg_score": 1592
@@ -137,13 +137,13 @@
  ],
  "words_bad": [
   "remix",
-  "lied",
   "erkennst",
-  "glas",
   "bekanntes",
-  "klassikers",
+  "glas",
+  "lied",
   "eines",
-  "jede"
+  "jede",
+  "klassikers"
  ],
  "top": [
   {
