@@ -8734,7 +8734,7 @@
   "id": 227,
   "category": "whatif",
   "topic": "Was wäre, wenn du mit einem Exoskelett im Alltag Superkräfte hättest?",
-  "status": "review",
+  "status": "discarded",
   "created": 1795792216.9679437,
   "title": "Exoskelett im Alltag: Was passiert wirklich?",
   "description": "Was wäre, wenn du mit einem Exoskelett Superkräfte hättest?\nErlebe die krassen Folgen für deinen Körper und den Alltag.\nWürdest du mit dem Exoskelett zur Schule oder Arbeit pendeln?",
@@ -8769,6 +8769,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-27 18:00",
-  "review_at": 1795792715.0051248
+  "review_at": 1795792715.0051248,
+  "error": "Bei der Prüfung verworfen: Prüfung: Figur trägt das Exoskelett nie (blauer Roboter daneben), Automotor statt Gelenkmotoren, erfundene Zahlen, Füllsatz am Schluss"
  }
 ]
