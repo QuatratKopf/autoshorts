@@ -8905,5 +8905,47 @@
   "yt_thumb_tries": 2,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7712890133267172647?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
+ },
+ {
+  "id": 231,
+  "category": "fakten",
+  "topic": "Warum du den Tetris-Effekt kennst: Warum dein Gehirn nach stundenlangem Gaming die Welt im Raster sieht",
+  "status": "review",
+  "created": 1795802924.4779541,
+  "title": "Warum du den Tetris-Effekt kennst und wie dein Gehirn dich austrickst",
+  "description": "Siehst du nach stundenlangem Zocken überall nur noch Raster?\nWarum dein Gehirn nach Tetris und Co. plötzlich auch die echte Welt einsortieren will.\nWarst du schon mal so tief in einem Spiel gefangen?",
+  "hashtags": [
+   "#shorts",
+   "#gaming",
+   "#tetris",
+   "#gehirn",
+   "#psychologie",
+   "#fakten",
+   "#fyp",
+   "#viral"
+  ],
+  "tags": [
+   "tetris effekt",
+   "gaming fakten",
+   "gehirn psychologie",
+   "zocken folgen",
+   "warum sehe ich blöcke",
+   "psychologie fakten",
+   "gehirn muster"
+  ],
+  "thumb_text": "GEHIRN SPIELT WEITER",
+  "missing": null,
+  "cover_ms": 76749,
+  "duration": 76.6,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-27 21:00",
+  "review_at": 1795803263.6305008
  }
 ]
