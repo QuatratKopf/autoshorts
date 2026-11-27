@@ -2809,6 +2809,42 @@ def main():
         assert len(js["scenes"]) == 10 and js["description"] == "B\nC\nD", "ein echter Schlusssatz bleibt"
     check("Prüfung 27.11. (Video 225): Wecker als Figur, Nachbarn an der Tür, verriegelte Tür, blockierte Mutter, Schlusssatz", _pruef2711)
 
+    def _pruef2711b():                                           # Prüfung 27.11.2026 (Video 227 „Exoskelett im Alltag“): die Figur TRÄGT das Exoskelett
+        T = [("Was wäre, wenn du ein Exoskelett im Alltag tragen würdest?", "street", ["car"], "run", ""),
+             ("Du hebst neunzig Kilo, und sie fühlen sich an wie viereinhalb.", "street", ["lib_exoskelett"], "jump", ""),
+             ("Die Motoren an deinen Gelenken nehmen dir die Last ab.", "street", ["lib_muskel", "engine"], "idle", "insert"),
+             ("Rennen kannst du damit nicht, der Anzug schafft nur Schritttempo.", "street", ["car"], "run", ""),
+             ("Nach rund zwei Stunden ist der Akku leer.", "livingroom", [], "walk", ""),
+             ("Ohne Strom drückt dich der Anzug zu Boden.", "street", ["scale"], "cower", ""),
+             ("In Fabriken stützen leichte Exoskelette die Arme bei Arbeit über dem Kopf.", "factory", ["car"], "talk", "event"),
+             ("In Reha-Kliniken helfen sie gelähmten Menschen, wieder Schritte zu gehen.", "street", [], "walk", "")]
+        scs = [{"text": t_, "place": pl_, "time": "day", "props": [{"type": x_} for x_ in pr_], "shot": sh_,
+                "actors": [{"id": "du", "action": a_, "emotion": "", "pos": "center", "speaks": False}]} for t_, pl_, pr_, a_, sh_ in T]
+        topic_x = "Was wäre, wenn du mit einem Exoskelett im Alltag Superkräfte hättest? – Vorgaben: kein Roboter"
+        sb = stage.direct(scs, [(i * 4.0, i * 4.0 + 4.0) for i in range(len(scs))], topic_x)
+        me = [next(a for a in sc["actors"] if a.get("id") == "du") for sc in sb]
+        assert [a.get("_outfit") for a in me] == ["exo", "exo", "exo", "exo", "exo_off", "exo_off", "exo", "exo"], [a.get("_outfit") for a in me]
+        assert places.resolve(sb[6].get("place")) == "garage" and places.resolve(sb[7].get("place")) == "hospital", (sb[6].get("place"), sb[7].get("place"))
+        assert me[1].get("_lift") == "barbell" and not any(a.get("_lift") for a in me[2:]), "Langhantel nur beim Heben"
+        assert me[3]["action"] == "walk" and me[4]["action"] == "sad" and me[5]["action"] == "sad", [a["action"] for a in me]
+        assert sb[2].get("shot") != "insert" and not any(stage._pkey(q) in stage.EXO_JUNK for sc in sb for q in (sc.get("props") or [])), "kein loser Roboter/Motor/Waage"
+        cast_x = {"du": {"shirt": "rot", "hair": "curly", "gender": "m", "skin": "mittel"}}
+        acts_x = stage._prepare(sb[1], cast_x)[3]
+        assert acts_x[0]["look"].outfit == "exo" and acts_x[0]["lift"], acts_x[0]
+        assert stage._prepare(sb[4], cast_x)[3][0]["look"].outfit == "exo_off"
+        plain = frame(dict(sb[1], actors=[dict(me[1], _outfit="", _lift="")]), cast_x)
+        for sc in sb:
+            assert frame(sc, cast_x).size == (1080, 1920)
+        assert __import__("PIL.ImageChops", fromlist=["x"]).difference(frame(sb[1], cast_x).convert("RGB"), plain.convert("RGB")).getbbox(), "Exoskelett und Hantel sind zu sehen"
+        for fit_ in ("exo", "exo_off"):
+            for f_ in (1, -1):
+                for ly_ in (False, True):
+                    assert rig.draw(rig.Look.from_spec(dict(cast_x["du"], outfit=fit_), "du", 0), rig.Pose(lying=ly_), f_, 1.0)[0].getbbox()
+        assert not stage.exo_story([{"text": "Ein Roboter kommt."}], "Was wäre, wenn Roboter kochen?")
+        from .. import main as main_
+        assert main_.known_thing("exoskelett"), "für das Exoskelett wird nichts gelernt"
+    check("Prüfung 27.11. (Video 227): Exoskelett wird getragen, Akku leer, Langhantel, kein loser Roboter", _pruef2711b)
+
     def _pruef2511():                                            # Prüfung 25.11.2026 (Video 206, Open-World-Karte)
         import tempfile
         from pathlib import Path

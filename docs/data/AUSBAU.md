@@ -882,3 +882,15 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   doppelte Zeile. `main.make`: Ein vorbereitetes Drehbuch gilt schon als zu kurz, wenn es mehr als 2 s (vorher 5 s) unter der Mindestlänge liegt –
   sonst endet das Video mit Sekunden stummem Standbild.
 - Selbsttest: `_pruef2711`.
+
+## Exoskelett wird getragen (Prüfung 27.11.2026, Video 227)
+- `rig.Look.outfit`: `exo` (Metallschienen an Armen und Beinen, Gelenkmotoren, Brustgurt mit Leuchtkern, Akku-Tornister mit drei Ladebalken über der
+  Alltagskleidung) und `exo_off` (Akku leer: nichts leuchtet, ein roter Restbalken). Die Regie setzt es je Figur über `_outfit`.
+- Regie `stage._exo_story` (wenn `exo_story`: Kern des Themas nennt das Exoskelett oder drei Sätze tun es): Die Hauptfigur trägt das Exoskelett in
+  jeder Szene. Akku leer / ohne Strom (`EXO_OFF_RE`) → `exo_off`, gebeugt und erschöpft; „drückt dich zu Boden“ (`EXO_HEAVY_RE`) ebenso gebeugt;
+  „hebst/stemmst … Kilo“ (`EXO_LIFT_RE`) → Langhantel über dem Kopf (`_lift: barbell`, `stage._barbell`, gestreckte Arme über `pose.extra["reach"]`);
+  „Schritttempo“/verneintes Rennen → gehen statt rennen. Lose Dinge daneben entfallen (`EXO_JUNK`: gelernter Roboter, Automotor, Bizeps, Wippe),
+  ebenso der harte Schnitt auf sie. Titelbild (`stage.poster`): Figur im Exoskelett.
+- `main.NO_THINGS`: Für „Exoskelett“ wird nichts gelernt (gelernt wurde ein blauer Roboter, der neben der Figur stand); die vorläufige Zeichnung ist
+  aus `shapes.json` entfernt.
+- Selbsttest: `_pruef2711b`.

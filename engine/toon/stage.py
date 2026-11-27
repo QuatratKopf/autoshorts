@@ -198,8 +198,10 @@ def sanitize(sc):
                 c["_awake"] = True                         # liegt wach im Bett am Handy, von der Regie gesetzt (stage._speech)
             if a.get("_jog") is True:
                 c["_jog"] = True                           # Dauerlauf, von der Regie gesetzt (stage._jogging)
-            if a.get("_outfit") in ("modern", "period", "king", "guard"):
-                c["_outfit"] = a["_outfit"]                # Kleidung der Zeit, von der Regie gesetzt (stage._past_story)
+            if a.get("_outfit") in ("modern", "period", "king", "guard", "exo", "exo_off"):
+                c["_outfit"] = a["_outfit"]                # Kleidung der Zeit, von der Regie gesetzt (stage._past_story); exo = Exoskelett (stage._exo_story)
+            if a.get("_lift") == "barbell":
+                c["_lift"] = "barbell"                     # stemmt eine Langhantel über den Kopf, von der Regie gesetzt (stage._exo_story)
             for k in ("action", "emotion", "emote", "kind", "hold", "facing"):
                 c[k] = word(a.get(k)) if k == "emote" else word(a.get(k)).lower()
             if isinstance(a.get("look"), dict):               # Nebenfiguren der Regie bringen ihr Aussehen mit
@@ -292,6 +294,8 @@ def _prepare(scene, cast):
             else:
                 hat_a = str(spec.get("hat") or "").lower()
                 spec = dict(spec, outfit="period", hat=("bonnet" if fem_a else "tricorn") if hat_a in ("cap", "beanie", "helmet", "headphones", "army", "chef") else hat_a)
+        if fit_a in ("exo", "exo_off") and not kind:         # Exoskelett über der Alltagskleidung (stage._exo_story)
+            spec = dict(spec, outfit=fit_a)
         if not kind and not spec and aid.lower() not in MAIN_IDS:   # „vogel“ im Bildplan, in der Besetzung heißt er „truthahn“ (kind bird): das Tier, kein Mensch im Pulli (Video 148)
             kind = next((k for pat, k in TOPIC_CREATURES if k not in ("agent", "virus", "cell") and re.search(pat, aid.lower())), "")
             if not kind:
@@ -320,7 +324,7 @@ def _prepare(scene, cast):
         actors.append({"look": look_a, "kind": kind if kind in extras.CREATURES else "",
                        "hold": extras.held_key(a.get("hold")),
                        "action": action, "emotion": str(a.get("emotion") or "").lower(), "emote": a.get("emote") or "", "giant": bool(scene.get("giant")), "small": bool(scene.get("_beside_bed") or a.get("small")), "hero": bool(a.get("hero")), "ksz": float(a["_ksz"]) if isinstance(a.get("_ksz"), (int, float)) and not isinstance(a.get("_ksz"), bool) and 0.2 <= a["_ksz"] <= 2.0 else 0.0, "say": str(a.get("say") or "") if isinstance(a.get("say"), str) else "",
-                       "x0": x0, "x1": x1, "speaks": bool(a.get("speaks")), "awake": bool(a.get("_awake")), "seed": i * 5 + len(aid), "face": a.get("facing"), "jog": bool(a.get("_jog")) and action == "run",
+                       "x0": x0, "x1": x1, "speaks": bool(a.get("speaks")), "awake": bool(a.get("_awake")), "seed": i * 5 + len(aid), "face": a.get("facing"), "jog": bool(a.get("_jog")) and action == "run", "lift": a.get("_lift") == "barbell" and not kind,
                        "teeth": TEETH_COLORS.get(str(a.get("teeth") or "").lower())})
     for i, a in enumerate(actors):     # zwei Figuren nie auf derselben Stelle
         for b in actors[:i]:
@@ -887,6 +891,13 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                 action, tt = ("fall", a_hit) if a_hit is not None else ("float", t)
             pose, _ = rig.pose_at(action, tt, dur, a["emotion"], mouth, a["seed"],
                                   _gest_at(a.get("gplan"), t) if action in ("talk", "idle") and not a.get("hold") else None, shape)
+            if a.get("lift"):                                 # stemmt die Langhantel: beide Arme gestreckt nach oben, federt leicht in den Knien
+                bob_l = math.sin(t * 2.4)
+                pose.arm_l, pose.fore_l, pose.arm_r, pose.fore_r = -162, -6, 162, 6
+                pose.lift, pose.lean, pose.head, pose.squash = 0, 0, 0, 1.0 - 0.02 * (bob_l + 1)
+                pose.leg_l, pose.leg_r, pose.knee_l, pose.knee_r = -14, 14, 0, 0
+                pose.extra["reach"] = 1.7
+                pose.extra.pop("dots", None)
             bed_phone = bool(a.get("awake")) and action == "sleep" and in_bed and not close
             if a.get("awake") and action == "sleep":          # liegt wach im Bett am Handy (Prüfung 26.11.2026, Video 216): Augen offen, kein „zzz“
                 pose.eyes, pose.squash = "normal", 1.0
@@ -942,6 +953,8 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
                 d_p.line((px - 6, py + 8, px + 26, py - 62), fill=(150, 210, 255), width=7)     # Displaykante leuchtet zum Gesicht hin
                 sk_p = rig._dark(a["look"].skin if a["look"].skin != rig.SKINS["schwarz"] else (250, 244, 232), 0.16)
                 d_p.ellipse((px + 2, py - 22, px + 40, py + 14), fill=sk_p, outline=INK, width=5)
+            if a.get("lift") and not pose.lying and "hand" in pose.extra:
+                _barbell(frame, x, gy - fy + pose.extra["hand"][1] - 6 * scale, scale * a["look"].size)
             if a.get("hold") and not pose.lying and "hand" in pose.extra:
                 hx, hy = pose.extra["hand"]
                 if a["hold"].startswith("prop:"):
@@ -2628,6 +2641,7 @@ def direct(scenes, times, topic="", style="", look=""):
     _angler_story(scenes, topic)
     _door_people(scenes, main_id)
     _wecker_story(scenes, topic, main_id)
+    _exo_story(scenes, topic, main_id)
     _mirror_story(scenes, topic, main_id)
     _mirror_msg(scenes, topic, style, main_id)
     _fridge_open(scenes)
@@ -4413,6 +4427,116 @@ WECKER_ANGRY_RE = (r"schrie|schrei|brüll|droh|terror|befahl|befiehl|zwing|bestr
 WECKER_HAPPY_RE = r"\blob|motivier|lieblings|kompliment|freundlich|fröhlich|gratulier|nett\b|charmant|lächel|summt"
 WECKER_SOFT_RE = r"sanft|leise|flüster|säusel|zuckersüß|ganz ruhig|ruhiger stimme"
 WECKER_REF_RE = r"wecker|\b(?:er|ihm|ihn)\b|\bgerät|\bkiste\b|\bding\b|snooze|schlummer"
+
+
+# Exoskelett-Video (Prüfung 27.11.2026, Video 227): Im ganzen Video trug die Figur ihren Pulli – das Exoskelett stand als blauer Roboter daneben,
+# „Motoren an den Gelenken“ zeigte einen Automotor neben einem Bizeps, „drückt dich zu Boden“ eine Wippe. Jetzt TRÄGT die Hauptfigur das Exoskelett
+# (rig: outfit exo) in jeder Szene; Akku leer → nichts leuchtet, die Figur hängt gebeugt im Anzug; „hebst/stemmst“ → Langhantel über dem Kopf;
+# kein loser Roboter, kein Automotor, keine Waage daneben.
+EXO_RE = r"exoskelett|exo-?anzug|roboteranzug|kraftanzug|exosuit"
+EXO_OFF_RE = (r"akku\w*\b[^.!?]{0,40}\b(?:leer|am ende|schlapp|aufgebraucht)|leere\w* akku|ohne strom|kein\w* strom|strom (?:ist )?(?:weg|aus|alle)\b|"
+              r"(?:anzug|exoskelett|motor\w*)\b[^.!?]{0,30}\b(?:geht aus|schaltet\w* (?:sich )?ab|fällt aus|streikt|bleibt stehen)|saft aus")
+EXO_HEAVY_RE = r"zu boden|in die knie|drückt dich|zieht dich (?:nach unten|runter)|lastet|schleppst du|wiegt (?:er|der anzug|das exoskelett|es)\b[^.!?]{0,30}kilo"
+EXO_LIFT_RE = r"\b(?:heb|stemm|wuchte|hochheb|hebst|hebt)\w*|\bhoch\b[^.!?]{0,20}\bkilo|kilo\w*\b[^.!?]{0,30}\bfühl\w* sich"
+EXO_SLOW_RE = r"schritttempo|schrittgeschwindigkeit|\bgehst|\bläufst|\bstapfst|\bmarschierst|\bgehen\b|\bspazier"
+EXO_WORK_RE = r"\bfabrik|werkhalle|montage|fließband|\bwerk\b|über dem kopf|überkopf|autowerk"
+EXO_REHA_RE = r"\breha\b|reha-|rehaklinik|\bklinik|gelähmt|querschnitt|therapie"
+EXO_JUNK = ("lib_exoskelett", "engine", "lib_muskel", "robot", "scale", "lib_motor", "lib_roboter", "lib_roboteranzug")
+
+
+def exo_story(scenes, topic=""):
+    if re.search(EXO_RE, topic_head(str(topic or "").lower())):
+        return True
+    return sum(1 for sc in scenes if isinstance(sc, dict) and re.search(EXO_RE, str(sc.get("text") or "").lower())) >= 3
+
+
+def _exo_story(scenes, topic="", main_id="du"):
+    if not exo_story(scenes, topic):
+        return scenes
+    mains = MAIN_IDS + (str(main_id).lower(),)
+    prev_sig = None
+    for i, sc in enumerate(scenes):
+        if not isinstance(sc, dict):
+            continue
+        low = str(sc.get("text") or "").lower()
+        shot = str(sc.get("shot") or "")
+        if shot in ("graphic", "mirror") and (shot == "mirror" or graphics.clean(sc.get("graphic")) or isinstance(sc.get("overlay"), dict)):
+            prev_sig = None
+            continue
+        junk = [q for q in (sc.get("props") or []) if _pkey(q) in EXO_JUNK] if isinstance(sc.get("props"), list) else []
+        if junk:
+            sc["props"] = [q for q in sc["props"] if _pkey(q) not in EXO_JUNK]
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        acts = [a for a in acts if str(a.get("kind") or "").lower() not in ("robot", "agent")
+                and not (str(a.get("kind") or "").lower() == "brain" and not re.search(r"gehirn|\bhirn", low))]
+        me = next((a for a in acts if not a.get("kind") and str(a.get("id") or "").lower() in mains), None) or next((a for a in acts if not a.get("kind")), None)
+        if me is None:
+            if places.resolve(backdrop(sc)) in ("germany", "worldmap"):
+                prev_sig = None
+                continue
+            me = {"id": main_id, "action": "idle", "emotion": "", "emote": "", "say": "", "hold": "", "pos": "center", "speaks": False}
+            acts.insert(0, me)
+        sc["actors"] = acts
+        if shot in ("insert", "graphic") or (shot == "event" and junk):
+            sc["shot"] = shot = ""                        # der Schnitt auf ein loses Ding (Motor, Roboter) entfällt: gezeigt wird die Figur im Anzug
+        if True:                                          # Fabrik = Werkhalle (drinnen, ohne Passanten und Autos), Reha = Klinik
+            to_pl = "garage" if re.search(EXO_WORK_RE, low) else "hospital" if re.search(EXO_REHA_RE, low) else ""
+            if to_pl and (isinstance(sc.get("backdrop"), dict) or places.resolve(sc.get("place")) != to_pl):
+                sc["place"], sc["crowd"] = to_pl, ""
+                sc.pop("backdrop", None)
+                sc["props"] = [q for q in (sc.get("props") or []) if _pkey(q) not in ("car", "police", "ambulance", "bike")]
+                if shot == "event":
+                    sc["shot"] = shot = ""
+        off = bool(re.search(EXO_OFF_RE, low))
+        heavy = bool(re.search(EXO_HEAVY_RE, low))
+        lift = bool(re.search(EXO_LIFT_RE, low)) and not denied(EXO_LIFT_RE, low) and not off and not heavy
+        slow = bool(re.search(EXO_SLOW_RE, low)) or (bool(re.search(HYBRID_RUN_RE, low)) and denied(r"\brenn\w*|\bsprint\w*", low))
+        me["_outfit"] = "exo_off" if off else "exo"
+        act = str(me.get("action") or "").lower()
+        if off or heavy:                                  # Akku leer / der Anzug drückt: gebeugt, erschöpft – nicht fröhlich, nicht im Lauf
+            me.update(action="sad", emotion="sad", emote="")
+            me.pop("to", None)
+            me.pop("_jog", None)
+            if not isinstance(me.get("pos"), (int, float)) and str(me.get("pos") or "") in ("offleft", "offright", ""):
+                me["pos"] = "center"
+            sc["_no_cut"] = True
+        elif lift:                                        # „hebst neunzig Kilo“: Langhantel über dem Kopf
+            me.update(action="idle", emotion="happy", emote="", hold="", pos="center", _lift="barbell")
+            me.pop("to", None)
+            me.pop("_jog", None)
+            sc["_no_cut"] = True
+            if shot == "close":
+                sc["shot"] = ""
+            if isinstance(sc.get("props"), list):
+                sc["props"] = [q for q in sc["props"] if _pkey(q) in ("lib_hantel", "lib_gewicht") or isinstance(q, dict) and isinstance(q.get("x"), (int, float)) and abs(q["x"] - 540) > 300]
+        elif slow and act in ("run", "jump", "dance", "float", "fall"):
+            me["action"] = "walk"                         # ein Exoskelett geht – es sprintet nicht
+            me.pop("_jog", None)
+        elif act in ("float", "fall", "sleep") and not re.search(r"schweb|flieg|stürz|fäll|fall|schl[aä]f|lieg", low):
+            me["action"] = "idle"
+        sig = (me.get("action"), me.get("_outfit"), bool(me.get("_lift")), places.resolve(backdrop(sc)))
+        if sig == prev_sig and not me.get("_lift") and me.get("action") in ("idle", "talk", "sad", "think"):
+            me["facing"] = "left" if str(me.get("facing") or "right") != "left" else "right"   # zweimal derselbe Aufbau hintereinander: gespiegelt
+        prev_sig = sig
+    return scenes
+
+
+def _barbell(frame, cx, y, k):
+    """Langhantel quer über den Händen (stage._exo_story: „hebst neunzig Kilo“): Stange, je zwei Scheiben, Verschlüsse."""
+    d = ImageDraw.Draw(frame, "RGBA")
+    half = 330 * k
+    d.rounded_rectangle((cx - half, y - 11 * k, cx + half, y + 11 * k), 8 * k, fill=INK)
+    d.rounded_rectangle((cx - half + 4 * k, y - 7 * k, cx + half - 4 * k, y + 5 * k), 6 * k, fill=(196, 204, 216))
+    for sgn in (-1, 1):
+        for j, (off_, h_, col) in enumerate(((250, 118, (58, 62, 78)), (292, 92, (214, 70, 60)))):
+            px = cx + sgn * off_ * k
+            d.rounded_rectangle((px - 22 * k, y - h_ * k - 5 * k, px + 22 * k, y + h_ * k + 5 * k), 14 * k, fill=INK)
+            d.rounded_rectangle((px - 17 * k, y - h_ * k, px + 17 * k, y + h_ * k), 11 * k, fill=rig._dark(col, 0.25))
+            d.rounded_rectangle((px - 17 * k, y - h_ * k, px + 9 * k, y + h_ * k - 10 * k), 11 * k, fill=col)
+            d.rounded_rectangle((px - 11 * k, y - h_ * k + 12 * k, px - 5 * k, y - h_ * k * 0.2), 3 * k, fill=rig._light(col, 0.35))
+        px = cx + sgn * 214 * k
+        d.rounded_rectangle((px - 12 * k, y - 24 * k, px + 12 * k, y + 24 * k), 6 * k, fill=INK)
+        d.rounded_rectangle((px - 8 * k, y - 20 * k, px + 8 * k, y + 20 * k), 5 * k, fill=(150, 158, 174))
 
 
 def wecker_story(scenes, topic=""):
@@ -7320,6 +7444,9 @@ def poster(spec: dict, cast: dict, out: Path, topic=""):
     aid = spec.get("actor") if isinstance((cast or {}).get(spec.get("actor")), dict) and not cast[spec.get("actor")].get("kind") else \
         next((k for k, v in (cast or {}).items() if isinstance(v, dict) and not v.get("kind")), None)
     look = rig.Look.from_spec((cast or {}).get(aid) if aid else {}, aid or "", list(cast).index(aid) if aid and aid in (cast or {}) else None)
+    if re.search(EXO_RE, topic_head(low)):                # Exoskelett-Video: die Figur trägt es auch auf dem Titelbild
+        import dataclasses
+        look = dataclasses.replace(look, outfit="exo")
     pose, _ = rig.pose_at("shocked", 1.0, 3.0, str(spec.get("emotion") or "shocked"), 0.8, 3)
     pose.lift = 0
     side = -1 if pal % 2 else 1                           # jedes zweite Titelbild gespiegelt: Figur rechts, Motiv links

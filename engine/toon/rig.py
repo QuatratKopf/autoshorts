@@ -127,6 +127,7 @@ class Look:
     fem: bool = False        # weibliches Gesicht: Wimpern, feinere Brauen, Lippenfarbe, eigener Pony (automatisch bei Frauen-Frisuren)
     male: bool = False       # ausdrücklich ein Mann (gender "m"): nie Wimpern/Lippen, Locken nur als kurzer Schopf (Video 190: „Max“ mit Lockenwolke sah aus wie eine Frau)
     outfit: str = ""         # "" Kapuzenpulli | period (Bürger um 1800: Rock mit Knöpfen bzw. langes Kleid mit Schürze) | king (Mantel mit Hermelin) | guard (Uniformrock mit weißen Gurten)
+                             # exo | exo_off (Exoskelett über dem Pulli: Metallschienen an Armen und Beinen, Gelenkmotoren, Brustgurt mit Leuchtkern, Akku auf dem Rücken; _off = Akku leer, nichts leuchtet)
 
     @staticmethod
     def from_spec(spec: dict, name: str = "", nth: int = None):
@@ -142,7 +143,7 @@ class Look:
                     fem=str(spec.get("gender") or "").lower() in ("w", "f", "female", "frau", "weiblich", "girl", "mädchen")
                     or (str(spec.get("hair") or "").lower() in FEM_HAIR and str(spec.get("gender") or "").lower() not in MALE_WORDS),
                     male=str(spec.get("gender") or "").lower() in MALE_WORDS,
-                    outfit=str(spec.get("outfit") or "").lower() if str(spec.get("outfit") or "").lower() in ("period", "king", "guard") else "")
+                    outfit=str(spec.get("outfit") or "").lower() if str(spec.get("outfit") or "").lower() in ("period", "king", "guard", "exo", "exo_off") else "")
 
 
 @dataclass
@@ -257,6 +258,8 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
     f, o = facing, OUT * k
     foot_x, foot_y = W / 2, H - 36 * k
     leg1, leg2, arm1, arm2 = 80 * k, 78 * k, 66 * k, 60 * k
+    reach = max(1.0, min(2.0, float(pose.extra.get("reach") or 1.0)))   # gestreckte Arme über dem großen Kopf (Langhantel stemmen, stage._exo_story): sonst enden die Hände an der Stirn
+    arm1, arm2 = arm1 * reach, arm2 * reach
     lw, aw = 27 * k, 23 * k
     hip = (foot_x, foot_y - (leg1 + leg2) * pose.squash - pose.lift * k)
     lean = pose.lean * f
@@ -273,11 +276,32 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
     hair_d, hair_l = _dark(hair, 0.3), _light(hair, 0.22)
     sole = (244, 242, 236)
 
-    def limb(p0, a1, l1, a2, l2, w, col, hand=None, shoe=None, cuff=None):
+    exo = look.outfit if (look.outfit in ("exo", "exo_off") and look.skin != SKINS["schwarz"]) else ""
+    metal, metal_d = (186, 196, 210), (118, 128, 148)
+    glow = (96, 226, 255) if exo == "exo" else (84, 88, 100)
+
+    def motor(p, r, back=False):                          # Gelenkmotor: Metallscheibe mit Leuchtkern
+        d.ellipse((p[0] - r - o * 0.7, p[1] - r - o * 0.7, p[0] + r + o * 0.7, p[1] + r + o * 0.7), fill=INK)
+        d.ellipse((p[0] - r, p[1] - r, p[0] + r, p[1] + r), fill=metal_d)
+        if not back:
+            d.ellipse((p[0] - r, p[1] - r, p[0] + r * 0.72, p[1] + r * 0.72), fill=metal)
+        d.ellipse((p[0] - r * 0.42, p[1] - r * 0.42, p[0] + r * 0.42, p[1] + r * 0.42), fill=_dark(glow, 0.3) if back else glow)
+
+    def limb(p0, a1, l1, a2, l2, w, col, hand=None, shoe=None, cuff=None, rail=0):
         p1 = _pt(p0, a1, l1)
         p2 = _pt(p1, a1 + a2, l2)
         _stroke(d, [p0, p1, p2], w + 2 * o, INK)
         _stroke(d, [p0, p1, p2], w, col)
+        if exo and rail:                                  # Exoskelett: Schiene längs über dem Glied, Manschette davor, Motor am Gelenk
+            back = rail < 0
+            e2 = _pt(p1, a1 + a2, l2 * (0.8 if hand else 0.86))
+            _stroke(d, [p0, p1, e2], 13 * k, INK)
+            _stroke(d, [p0, p1, e2], 7 * k, metal_d if back else metal)
+            for q0, ang in ((_pt(p0, a1, l1 * 0.5), a1), (e2, a1 + a2)):
+                c0, c1 = _pt(q0, ang + 90, w * 0.5), _pt(q0, ang - 90, w * 0.5)
+                d.line((c0, c1), fill=INK, width=max(3, int(15 * k)))
+                d.line((c0, c1), fill=metal_d if back else metal, width=max(2, int(9 * k)))
+            motor(p1, 14 * k, back)
         if cuff:                                          # Bündchen am Handgelenk / Hosensaum
             c0 = _pt(p1, a1 + a2, l2 * 0.74)
             _stroke(d, [c0, p2], w, cuff)
@@ -297,7 +321,7 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
         return p2
 
     shoe_col = _mix(shirt, (250, 250, 250), 0.12) if not mask else (60, 60, 70)
-    outfit = look.outfit if not mask else ""
+    outfit = look.outfit if not mask and not exo else ""
     if outfit:                                           # Kleidung um 1800: dunkle Lederschuhe, gedeckte Hose – keine Turnschuhe, keine Jeans
         shoe_col, sole = (70, 54, 44), (44, 36, 32)
         pants = (236, 230, 216) if outfit == "guard" else (104, 86, 70) if look.pants == (40, 40, 48) else look.pants
@@ -310,11 +334,20 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
     # hinterer Arm, Beine
     sh_b = (shoulder[0] - 36 * k * f, shoulder[1] + 6 * k)      # hintere / vordere Schulter (leicht frontal gezeichnet)
     sh_f = (shoulder[0] + 36 * k * f, shoulder[1] + 6 * k)
-    limb(sh_b, pose.arm_l * f + lean, arm1, pose.fore_l * f, arm2, aw, shirt_d, hand=skin_d, cuff=_dark(shirt_d, 0.2))
+    limb(sh_b, pose.arm_l * f + lean, arm1, pose.fore_l * f, arm2, aw, shirt_d, hand=skin_d, cuff=_dark(shirt_d, 0.2), rail=-1)
     hl = (hip[0] - 20 * k * f, hip[1] - 8 * k)
     hr_ = (hip[0] + 20 * k * f, hip[1] - 8 * k)
-    limb(hl, pose.leg_l * f, leg1, -pose.knee_l * f, leg2, lw, pants_d, shoe=_dark(shoe_col, 0.25))
-    limb(hr_, pose.leg_r * f, leg1, -pose.knee_r * f, leg2, lw, pants, shoe=shoe_col)
+    if exo:                                               # Akku-Tornister auf dem Rücken: ragt hinter dem Rumpf hervor
+        bp = _pt(hip, 180 - lean, bh * 0.52)
+        bx0 = bp[0] - f * (bw * 0.5 + 30 * k)
+        d.rounded_rectangle((bx0 - 30 * k - o, bp[1] - 58 * k - o, bx0 + 36 * k + o, bp[1] + 50 * k + o), 16 * k, fill=INK)
+        d.rounded_rectangle((bx0 - 30 * k, bp[1] - 58 * k, bx0 + 36 * k, bp[1] + 50 * k), 14 * k, fill=metal_d)
+        d.rounded_rectangle((bx0 - 30 * k, bp[1] - 58 * k, bx0 + 26 * k, bp[1] + 38 * k), 14 * k, fill=metal)
+        for j in range(3):                                # Ladestand: drei Balken (leer = dunkel, unten ein roter Rest)
+            yy = bp[1] - 40 * k + j * 26 * k
+            d.rounded_rectangle((bx0 - 18 * k, yy, bx0 + 16 * k, yy + 15 * k), 5 * k, fill=glow if exo == "exo" else ((214, 70, 60) if j == 2 else (70, 74, 86)))
+    limb(hl, pose.leg_l * f, leg1, -pose.knee_l * f, leg2, lw, pants_d, shoe=_dark(shoe_col, 0.25), rail=-1)
+    limb(hr_, pose.leg_r * f, leg1, -pose.knee_r * f, leg2, lw, pants, shoe=shoe_col, rail=1)
 
     long_robe = outfit == "king" or (outfit == "period" and look.fem)
     if outfit:                                                                # langes Kleid / Königsmantel bis zu den Knöcheln bzw. Rockschöße – über den Beinen, unter dem Rumpf
@@ -390,6 +423,27 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
             d.line((c0[0] + ox, c0[1], c1[0] + ox + sgn * 2 * k, c1[1]), fill=shirt_l, width=max(2, int(5 * k)))
             d.ellipse((c1[0] + ox + sgn * 2 * k - 5 * k, c1[1] - 2 * k, c1[0] + ox + sgn * 2 * k + 5 * k, c1[1] + 8 * k), fill=shirt_l)
 
+    if exo:                                               # Brustgeschirr: zwei Schultergurte, Hüftring mit Motoren, Leuchtkern auf der Brust
+        c_top, c_mid, c_low = _pt(hip, 180 - lean, bh - 30 * k), _pt(hip, 180 - lean, bh * 0.56), _pt(hip, 180 - lean, bw * 0.16)
+        fx_ = 6 * k * f
+        for sgn in (-1, 1):
+            a_, b_ = (c_top[0] + sgn * 36 * k, c_top[1]), (c_mid[0] + fx_, c_mid[1] + 4 * k)
+            d.line((a_, b_), fill=INK, width=max(3, int(17 * k)))
+            d.line((a_, b_), fill=metal if sgn == f else metal_d, width=max(2, int(10 * k)))
+        d.line(((c_mid[0] + fx_, c_mid[1]), (c_low[0] + fx_, c_low[1])), fill=INK, width=max(3, int(17 * k)))
+        d.line(((c_mid[0] + fx_, c_mid[1]), (c_low[0] + fx_, c_low[1])), fill=metal, width=max(2, int(10 * k)))
+        d.rounded_rectangle((c_low[0] - bw * 0.5 - 4 * k - o, c_low[1] - 13 * k - o, c_low[0] + bw * 0.5 + 4 * k + o, c_low[1] + 13 * k + o), 10 * k, fill=INK)
+        d.rounded_rectangle((c_low[0] - bw * 0.5 - 4 * k, c_low[1] - 13 * k, c_low[0] + bw * 0.5 + 4 * k, c_low[1] + 13 * k), 9 * k, fill=metal_d)
+        d.rounded_rectangle((c_low[0] - bw * 0.5 - 4 * k, c_low[1] - 13 * k, c_low[0] + bw * 0.5 - 6 * k, c_low[1] + 5 * k), 9 * k, fill=metal)
+        motor((hip[0] - 20 * k * f, c_low[1] + 2 * k), 15 * k, True)
+        motor((hip[0] + 24 * k * f, c_low[1] + 2 * k), 17 * k)
+        cc = (c_mid[0] + fx_, c_mid[1])
+        d.ellipse((cc[0] - 25 * k - o, cc[1] - 25 * k - o, cc[0] + 25 * k + o, cc[1] + 25 * k + o), fill=INK)
+        d.ellipse((cc[0] - 25 * k, cc[1] - 25 * k, cc[0] + 25 * k, cc[1] + 25 * k), fill=metal_d)
+        d.ellipse((cc[0] - 25 * k, cc[1] - 25 * k, cc[0] + 19 * k, cc[1] + 19 * k), fill=metal)
+        d.ellipse((cc[0] - 13 * k, cc[1] - 13 * k, cc[0] + 13 * k, cc[1] + 13 * k), fill=glow)
+        if exo == "exo":
+            d.ellipse((cc[0] - 7 * k, cc[1] - 9 * k, cc[0] + 1 * k, cc[1] - 1 * k), fill=(236, 252, 255))
     # Hals
     nk0, nk1 = _pt(top, 180 - lean, -16 * k), _pt(top, 180 - lean, 14 * k)
     _stroke(d, [nk0, nk1], 30 * k + 2 * o, INK)
@@ -611,7 +665,9 @@ def draw(look: Look, pose: Pose, facing=1, scale=1.0, ss=None):
             d.ellipse((hcx + gx * u - 7 * u, y0 - 18 * u, hcx + gx * u + 7 * u, y0 - 4 * u), fill=gc)
 
     # vorderer Arm
-    hp = limb(sh_f, pose.arm_r * f + lean, arm1, pose.fore_r * f, arm2, aw, shirt, hand=skin, cuff=shirt_d)
+    hp = limb(sh_f, pose.arm_r * f + lean, arm1, pose.fore_r * f, arm2, aw, shirt, hand=skin, cuff=shirt_d, rail=1)
+    if exo:
+        motor(sh_f, 16 * k)
     pose.extra["hand"] = (hp[0] / SS, hp[1] / SS)          # Handpunkt im fertigen Bild (für Gegenstände in der Hand)
 
     if pose.lying:

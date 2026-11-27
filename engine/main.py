@@ -148,6 +148,7 @@ NO_THINGS = {"bug", "bugs", "glitch", "glitches", "fehler", "regel", "regeln", "
              "symbol", "symbole", "symbolen", "zahl", "zahlen",      # ein „Symbol“ kann alles sein, eine „Zahl“ zeigt die Zahl-Grafik – dafür wird nichts gelernt; Karten-Symbole sind die Requisite markers (Ausbau 25.11.2026)
              "ohr", "ohren", "nase", "knie", "hand", "hände", "handfläche", "handflächen", "oberschenkel", "nerv", "nerven", "blut", "blick", "blicke",   # Körperteile und Körpereigenes: nie als loses Ding (die vorläufige Zeichnung „ohr“ ist entfernt – Ausbau 27.11.2026)
              "miete", "mieten", "algorithmus", "algorithmen", "statistik", "statistiken", "knall", "anwaltstitel", "toplitzsee",   # Abstraktes, ein Geräusch, ein Ortsname: kein Gegenstand
+             "exoskelett", "exoskelette", "exoskeleton", "roboteranzug", "exo-anzug",   # das Exoskelett TRÄGT die Figur (rig: outfit exo, stage._exo_story) – gelernt wurde ein blauer Roboter, der daneben stand (Video 227)
              "countdown", "primzahl", "primzahlen",    # dafür gibt es den Zähler bzw. die Grafik primes
              "gel", "gameboy", "game boy", "playstation", "xbox", "nintendo", "iphone", "ipad"}       # Körperteile allein im Bild (ein Haarschopf ohne Gesicht auf dem Tisch) sehen befremdlich aus
 
