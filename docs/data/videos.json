@@ -8852,5 +8852,46 @@
   "thumb": true,
   "look": "cartoon",
   "mp4": true
+ },
+ {
+  "id": 230,
+  "category": "whatif",
+  "topic": "Was wäre, wenn du mit einem Exoskelett im Alltag Superkräfte hättest?",
+  "status": "rendered",
+  "created": 1795796554.301535,
+  "title": "Exoskelett im Alltag: Was passiert wirklich?",
+  "description": "Was passiert wirklich, wenn du ein Exoskelett trägst?\nErfahre die echten Fakten zu Technik und Alltag.\nWürdest du so einen Anzug anziehen?",
+  "hashtags": [
+   "#shorts",
+   "#tech",
+   "#wissenschaft",
+   "#zukunft",
+   "#exoskelett",
+   "#technik",
+   "#fyp",
+   "#viral"
+  ],
+  "tags": [
+   "exoskelett",
+   "sarcos guardian xo",
+   "superkräfte",
+   "Exoskelett",
+   "stanford stiefel",
+   "tu graz",
+   "technik zukunft",
+   "what if deutsch"
+  ],
+  "thumb_text": "SUPERKRÄFTE IM ALLTAG?",
+  "missing": null,
+  "cover_ms": 81600,
+  "duration": 81.5,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
