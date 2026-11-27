@@ -1,5 +1,5 @@
 {
- "updated": 1795814317.4801679,
+ "updated": 1795816186.5309412,
  "enough": true,
  "counted": 48,
  "total": 51,
@@ -39,34 +39,34 @@
    "avg_views": 1694,
    "avg_likes": 46.7,
    "like_rate": 2.75,
-   "avg_score": 2396
+   "avg_score": 2397
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 8,
-   "avg_views": 1669,
+   "avg_views": 1671,
    "avg_likes": 44.6,
    "like_rate": 2.67,
-   "avg_score": 2350
+   "avg_score": 2351
   },
   {
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 2,
-   "avg_views": 1722,
+   "avg_views": 1714,
    "avg_likes": 36.0,
-   "like_rate": 2.09,
-   "avg_score": 2277
+   "like_rate": 2.1,
+   "avg_score": 2269
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 4,
-   "avg_views": 1443,
+   "avg_views": 1446,
    "avg_likes": 35.8,
-   "like_rate": 2.48,
-   "avg_score": 2004
+   "like_rate": 2.47,
+   "avg_score": 2008
   },
   {
    "slug": "storys",
@@ -81,10 +81,10 @@
    "slug": "motivation",
    "name": "🔥 Motivation",
    "n": 2,
-   "avg_views": 1056,
+   "avg_views": 1060,
    "avg_likes": 35.0,
-   "like_rate": 3.31,
-   "avg_score": 1602
+   "like_rate": 3.3,
+   "avg_score": 1604
   },
   {
    "slug": "musik",
@@ -101,17 +101,17 @@
    "n": 2,
    "avg_views": 450,
    "avg_likes": 20.0,
-   "like_rate": 4.45,
+   "like_rate": 4.44,
    "avg_score": 780
   },
   {
    "slug": "nachricht",
    "name": "📱 Unbekannte Nachricht",
    "n": 1,
-   "avg_views": 546,
+   "avg_views": 556,
    "avg_likes": 8.0,
-   "like_rate": 1.47,
-   "avg_score": 666
+   "like_rate": 1.44,
+   "avg_score": 676
   }
  ],
  "weights": {
@@ -120,14 +120,14 @@
   "tiere": 0.94,
   "whatif": 1.12,
   "comedy": 1.41,
-  "vergleich": 1.07,
+  "vergleich": 1.06,
   "motivation": 0.75,
   "nachricht": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2286 Aufrufe, 2.05 % Likes).",
-  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 546 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2197 zu 1143 Punkte).",
+  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 556 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2198 zu 1144 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut, vier."
  ],
  "words_good": [
@@ -137,13 +137,13 @@
  ],
  "words_bad": [
   "remix",
+  "glas",
   "bekanntes",
   "lied",
-  "glas",
   "erkennst",
-  "jede",
   "eines",
-  "scheibe"
+  "scheibe",
+  "klassikers"
  ],
  "top": [
   {
@@ -202,11 +202,11 @@
    "id": 224,
    "title": "Tiefsee-Anglerfisch: Die Falle aus Licht",
    "category": "tiere",
-   "views": 356,
+   "views": 370,
    "likes": 12,
    "comments": 0,
    "shares": 0,
-   "score": 536
+   "score": 550
   },
   {
    "id": 196,
