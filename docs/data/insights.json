@@ -1,5 +1,5 @@
 {
- "updated": 1795741949.4685085,
+ "updated": 1795743749.898748,
  "enough": true,
  "counted": 45,
  "total": 48,
@@ -27,10 +27,10 @@
    "slug": "liebe",
    "name": "💕 Liebe",
    "n": 1,
-   "avg_views": 1524,
+   "avg_views": 1523,
    "avg_likes": 64.0,
    "like_rate": 4.2,
-   "avg_score": 2484
+   "avg_score": 2483
   },
   {
    "slug": "mysterien",
@@ -54,19 +54,19 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 8,
-   "avg_views": 1656,
+   "avg_views": 1657,
    "avg_likes": 44.5,
    "like_rate": 2.69,
-   "avg_score": 2335
+   "avg_score": 2336
   },
   {
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 2,
-   "avg_views": 1647,
+   "avg_views": 1632,
    "avg_likes": 35.0,
-   "like_rate": 2.13,
-   "avg_score": 2172
+   "like_rate": 2.14,
+   "avg_score": 2157
   },
   {
    "slug": "storys",
@@ -111,15 +111,15 @@
   "tiere": 1.13,
   "whatif": 1.08,
   "comedy": 1.36,
-  "vergleich": 0.99,
+  "vergleich": 0.98,
   "motivation": 1.2,
   "nachricht": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2286 Aufrufe, 2.05 % Likes).",
   "Schwächste Kategorie: 👻 Grusel (Ø 449 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2282 zu 1122 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2380 zu 1853 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2281 zu 1122 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2379 zu 1853 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -128,13 +128,13 @@
  ],
  "words_bad": [
   "remix",
-  "erkennst",
   "bekanntes",
-  "lied",
   "glas",
+  "erkennst",
+  "lied",
   "niemand",
   "jede",
-  "eines"
+  "klassikers"
  ],
  "top": [
   {
