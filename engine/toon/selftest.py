@@ -2724,6 +2724,42 @@ def main():
         frame(sd[1])
     check("Ausbau 26.11.: Hantel, Kasse, Lieferwagen, Spätkauf, Tabellendokument, Hose, Fritteuse, Kunststoffbecken", _ausbau2611)
 
+    def _ausbau2711():                                           # Ausbau 27.11.2026: Haferbrei, Sirene, Zahnprothese, Dach, Polyp, Steuererklärung; Ohr entfernt
+        import re
+        from .library import LIB
+        from .. import main
+        tp = stage._lib_props()
+        hit = lambda txt: [k_ for pat_, k_ in tp if re.search(pat_, txt)]  # noqa: E731
+        for txt_, k_ in (("frischen haferbrei", "lib_haferbrei"), ("eine schüssel porridge", "lib_haferbrei"), ("der wecker spielte sirenen ab", "lib_wecker lib_sirene"),
+                         ("eine sirene heult", "lib_sirene"), ("opas zahnprothese", "lib_zahnprothese"), ("seine dritten zähne", "lib_zahnprothese"),
+                         ("auf dächern wächst moos", "lib_dach"), ("ein winziger polyp", "lib_polyp"), ("zwei korallenpolypen", "lib_polyp"),
+                         ("die steuererklärung ist fällig", "lib_steuererklaerung"), ("ein steuerformular", "lib_steuererklaerung")):
+            assert sorted(hit(txt_)) == sorted(k_.split()), f"{txt_}: {hit(txt_)}"
+        for txt_ in ("ich dachte nach", "auf dem dachboden", "das gebiss des hais", "über alle ohren verliebt", "die steuer steigt", "ein brei aus zellen"):
+            assert hit(txt_) == [], f"zu weiter Alias: {txt_}: {hit(txt_)}"
+        for n_ in ("haferbrei", "sirene", "zahnprothese", "dach", "polyp", "steuererklärung"):
+            assert not LIB[n_].get("auto") and main.known_thing(n_), f"{n_}: von Hand gezeichnet und bekannt"
+            k_ = LIB[n_]["key"]
+            assert extras.prop_fit(k_), f"{k_} fehlt in der Bibliothek"
+            frame({"place": "street", "actors": [{"id": "du"}], "props": [{"type": k_}]})
+            frame({"shot": "insert", "props": [{"type": k_}]})
+        assert "ohr" not in LIB, "die vorläufige Zeichnung „ohr“ ist entfernt (Körperteil allein im Bild)"
+        for w_ in ("ohr", "nase", "knie", "handfläche", "nerv", "miete", "algorithmus", "statistik", "knall", "countdown", "primzahl"):
+            assert main.known_thing(w_), f"„{w_}“ ist kein Gegenstand – dafür wird nichts gelernt"
+        sd = stage.direct([{"text": "Ich drückte auf Snooze.", "place": "bedroom", "props": ["wecker"], "actors": [{"id": "du", "action": "shake"}]},
+                           {"text": "Der Wecker spielte Sirenen ab und drohte lautstark mit Ruhestörung.", "place": "bedroom", "props": ["wecker"],
+                            "actors": [{"id": "du", "action": "cower", "emotion": "scared"}]},
+                           {"text": "Mittlerweile koche ich ihm morgens sogar frischen Haferbrei.", "place": "kitchen", "props": ["suppe"],
+                            "actors": [{"id": "du", "action": "talk"}]}],
+                          [(0, 4), (4, 8), (8, 12)], "Mein Wecker terrorisiert mich jeden Tag", "comedy", "")
+        k1 = [stage._pkey(p_) for p_ in sd[1].get("props") or []]
+        assert "lib_sirene" in k1 and "lib_wecker" in k1, f"die Sirene steht neben dem Wecker im Schlafzimmer: {k1}"
+        k2 = [stage._pkey(p_) for p_ in sd[2].get("props") or []] + [extras.held_key(str(a_.get("hold") or "")) for a_ in sd[2].get("actors") or []]
+        assert any("haferbrei" in str(x_) for x_ in k2) and "lib_suppe" not in k2, f"Haferbrei statt der Suppenschüssel des Drehbuchs: {k2}"
+        frame(sd[1])
+        frame(sd[2])
+    check("Ausbau 27.11.: Haferbrei, Sirene, Zahnprothese, Dach, Polyp, Steuererklärung", _ausbau2711)
+
     def _pruef2511():                                            # Prüfung 25.11.2026 (Video 206, Open-World-Karte)
         import tempfile
         from pathlib import Path

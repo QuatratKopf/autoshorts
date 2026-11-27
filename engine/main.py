@@ -146,6 +146,9 @@ NO_THINGS = {"bug", "bugs", "glitch", "glitches", "fehler", "regel", "regeln", "
              "raum", "räume", "raumes", "räumen",     # jede Szene spielt in einem Raum – „suchen dich im Raum“ ist kein Ding (Ausbau 23.11.2026)
              "nachricht", "nachrichten",      # „Nachricht“ ist meist eine Textnachricht oder Meldung – die gelernte Zeichnung stellte bei jedem Satz einen Briefumschlag ins Bild (Ausbau 22.11.2026)
              "symbol", "symbole", "symbolen", "zahl", "zahlen",      # ein „Symbol“ kann alles sein, eine „Zahl“ zeigt die Zahl-Grafik – dafür wird nichts gelernt; Karten-Symbole sind die Requisite markers (Ausbau 25.11.2026)
+             "ohr", "ohren", "nase", "knie", "hand", "hände", "handfläche", "handflächen", "oberschenkel", "nerv", "nerven", "blut", "blick", "blicke",   # Körperteile und Körpereigenes: nie als loses Ding (die vorläufige Zeichnung „ohr“ ist entfernt – Ausbau 27.11.2026)
+             "miete", "mieten", "algorithmus", "algorithmen", "statistik", "statistiken", "knall", "anwaltstitel", "toplitzsee",   # Abstraktes, ein Geräusch, ein Ortsname: kein Gegenstand
+             "countdown", "primzahl", "primzahlen",    # dafür gibt es den Zähler bzw. die Grafik primes
              "gel", "gameboy", "game boy", "playstation", "xbox", "nintendo", "iphone", "ipad"}       # Körperteile allein im Bild (ein Haarschopf ohne Gesicht auf dem Tisch) sehen befremdlich aus
 
 

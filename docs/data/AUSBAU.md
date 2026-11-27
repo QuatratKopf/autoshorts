@@ -837,6 +837,20 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Noch offen (vorläufige Zeichnung der Text-KI): ohr (Körperteil allein im Bild). Offene Wünsche ohne Zeichnung: polyp, knie, anwaltstitel,
   toplitzsee, miete, algorithmus, statistik, musik, knall, dach, hand, handfläche, steuererklärung, countdown, blick, blut, primzahl, nase, nerv,
   oberschenkel (greifbar davon: polyp, dach, steuererklärung; Körperteile und Abstraktes gehören eher in `main.NO_THINGS`).
+- Ausbau 27.11.2026 (13-Uhr-Termin „Mein Wecker terrorisiert mich jeden Tag“: haferbrei, sirene; dazu die letzten vorläufigen Zeichnungen und die
+  greifbaren Wünsche): Bibliothek von Hand gezeichnet: `haferbrei` (Schüssel mit Brei, Blaubeeren, Bananenscheiben, Holzlöffel, Dampf; auch Porridge,
+  Haferschleim), `sirene` (rote Rundumleuchte auf dunklem Sockel mit Lichtkegeln – pulsiert; auch Alarmsirene, Warnleuchte, Rundumleuchte), `dach`
+  (rotes Ziegeldach mit Gaube, Schornstein und Regenrinne über einem Streifen Hauswand; als Bild 4,5 m, steht damit in keinem Zimmer; auch Dächer,
+  Hausdach, Dachziegel – „dachte“ und „Dachboden“ zählen nicht), `polyp` (Polyp auf einem Stein mit acht Fangarmen und einer Knospe – pulsiert; auch
+  Korallenpolyp, Hydra), `steuererklärung` (grünes Formular mit Feldern, Büroklammer und Stift, ohne Schrift; auch Steuerformular, Steuerbescheid).
+  Neu gezeichnet statt der vorläufigen Fassung: `zahnprothese` (obere und untere Prothese, leicht geöffnet; „Gebiss“ allein bleibt in `main.NO_THINGS`).
+  Entfernt: die vorläufige Zeichnung `ohr` – Körperteile allein im Bild gibt es nicht. `main.NO_THINGS` kennt jetzt Ohr, Nase, Knie, Hand, Handfläche,
+  Oberschenkel, Nerv, Blut, Blick sowie Miete, Algorithmus, Statistik, Knall, Anwaltstitel, Toplitzsee, Countdown, Primzahl – dafür wird nichts mehr
+  gelernt, die Wünsche sind damit erledigt (für Countdown/Primzahl gibt es Zähler und die Grafik `primes`, für den Toplitzsee `_lake_story`).
+  Regie (`stage.direct`): Im Schlafzimmer darf die Sirene als zweites Ding neben dem Wecker stehen („Der Wecker spielte Sirenen ab“ – sonst ist dort
+  nur Platz für ein Ding); nennt der Satz Haferbrei, fliegt die Suppenschüssel raus, die das Drehbuch als Notbehelf gesetzt hat. Selbsttest: `_ausbau2711`.
+  Noch offen: keine vorläufigen Zeichnungen, keine offenen Wünsche. Der Polyp ist ein Bibliotheks-Gegenstand, kein Wesen – unter Wasser neben einem
+  groß gezeichneten Tier erscheint er nur, wenn `SEA_TARGETS` ihn zulässt.
 - Prüfung 23.11.2026, 18-Uhr-Termin (Video 192 „Das Rätsel der verschlossenen Tür auf dem Dachboden“, Kategorie `nachricht`):
   - Ort aus einem zusammengesetzten Ding-Wort („Countdown zu deiner Dachbodentür“, `COMPOUND_THING_RE`) gilt nicht, wenn die Bildbeschreibung
     (`see`) ausdrücklich einen anderen Ort nennt – die Figur schlief auf dem Dachboden-Fußboden. „Zimmer“ mit schlafender Figur oder

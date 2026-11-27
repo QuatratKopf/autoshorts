@@ -1629,6 +1629,8 @@ def direct(scenes, times, topic="", style="", look=""):
             sc["props"] = [p for p in (sc.get("props") or [])     # (Karton, Trinkglas) fliegt raus, wenn der Satz nicht auch davon spricht
                            if not (isinstance(p, dict) and extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) in ("box", "glass")
                                    and not any(k2 == extras.PROP_ALIASES.get(str(p.get("type")).lower(), str(p.get("type")).lower()) and _re0.search(pat, txt0) for pat, k2 in TEXT_PROPS))]
+        if _re0.search(r"haferbrei|porridge|haferschleim|frühstücksbrei", txt0) and not _re0.search(r"suppe|eintopf|brühe", txt0) and "lib_haferbrei" in extras.PROPS:
+            sc["props"] = [p for p in (sc.get("props") or []) if _pkey(p) != "lib_suppe"]   # die Suppenschüssel war der Notbehelf des Drehbuchs für den Haferbrei (Ausbau 27.11.2026)
         if len(sc.get("props") or []) < 2 and str(sc.get("shot") or "") != "close" and places.resolve(sc.get("place")) not in MAPS:       # was der Satz nennt, ist auch zu sehen
             have = {extras.PROP_ALIASES.get(str(q.get("type")).lower(), str(q.get("type")).lower()) for q in (sc.get("props") or [])}
             for pat, kind in _lib_props() + TEXT_PROPS:
@@ -1647,7 +1649,7 @@ def direct(scenes, times, topic="", style="", look=""):
                         continue                           # Feuer, Autos, Naturgewalten erscheinen nicht im Zimmer (Himmelsdinge: im Fenster)
                     if kind in ("computer", "tv", "fridge", "shelf", "cart") and places.resolve(backdrop(sc)) in NO_FURNITURE:
                         continue                           # „zocken“ im Diner stellt keinen Schreibtisch ins Restaurant
-                    if places.resolve(backdrop(sc)) == "bedroom" and have & set(extras.PROPS):
+                    if places.resolve(backdrop(sc)) == "bedroom" and have & set(extras.PROPS) and not (kind == "lib_sirene" and have == {"lib_wecker"}):
                         break                              # im Schlafzimmer ist neben Bett und Tisch nur Platz für ein Ding (ein „phone“ aus dem Drehbuch zählt nicht: das gibt es nur in der Hand)
                     if kind in INDOOR_THINGS and places.resolve(backdrop(sc)) in ("space", "underwater", "cave"):
                         continue                           # kein Schreibtisch im All, kein Kühlschrank am Meeresgrund

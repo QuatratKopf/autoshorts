@@ -251,7 +251,8 @@
  },
  "polyp": {
   "n": 1,
-  "last": "3 Tier-Superkräfte, die unmöglich wirken!"
+  "last": "3 Tier-Superkräfte, die unmöglich wirken!",
+  "done": true
  },
  "einkaufsbeutel": {
   "n": 1,
@@ -280,11 +281,13 @@
  },
  "knie": {
   "n": 1,
-  "last": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?"
+  "last": "Was wäre, wenn Videospiel-Regeln im Alltag gelten?",
+  "done": true
  },
  "anwaltstitel": {
   "n": 1,
-  "last": "Als meine KI-Agenten die Kontrolle übernahmen"
+  "last": "Als meine KI-Agenten die Kontrolle übernahmen",
+  "done": true
  },
  "sonar": {
   "n": 1,
@@ -338,7 +341,8 @@
  },
  "toplitzsee": {
   "n": 1,
-  "last": "Das dunkle Geheimnis des Toplitzsees"
+  "last": "Das dunkle Geheimnis des Toplitzsees",
+  "done": true
  },
  "knoblauch": {
   "n": 1,
@@ -427,7 +431,8 @@
  },
  "miete": {
   "n": 1,
-  "last": "Dönerladen gegen Burgerladen: Wer verdient wirklich mehr?"
+  "last": "Dönerladen gegen Burgerladen: Wer verdient wirklich mehr?",
+  "done": true
  },
  "nachricht": {
   "n": 1,
@@ -441,15 +446,18 @@
  },
  "algorithmus": {
   "n": 1,
-  "last": "Dein Algorithmus weiß mehr über deine Träume als du selbst"
+  "last": "Dein Algorithmus weiß mehr über deine Träume als du selbst",
+  "done": true
  },
  "statistik": {
   "n": 1,
-  "last": "Dein Algorithmus weiß mehr über deine Träume als du selbst"
+  "last": "Dein Algorithmus weiß mehr über deine Träume als du selbst",
+  "done": true
  },
  "musik": {
   "n": 1,
-  "last": "Dein Algorithmus weiß mehr über deine Träume als du selbst"
+  "last": "Dein Algorithmus weiß mehr über deine Träume als du selbst",
+  "done": true
  },
  "kompass": {
   "n": 1,
@@ -528,11 +536,13 @@
  },
  "ohr": {
   "n": 1,
-  "last": "Was in deinem Körper passiert, wenn du dich erschrickst"
+  "last": "Was in deinem Körper passiert, wenn du dich erschrickst",
+  "done": true
  },
  "knall": {
   "n": 1,
-  "last": "Was in deinem Körper passiert, wenn du dich erschrickst"
+  "last": "Was in deinem Körper passiert, wenn du dich erschrickst",
+  "done": true
  },
  "kartoffel": {
   "n": 1,
@@ -611,7 +621,8 @@
  },
  "dach": {
   "n": 1,
-  "last": "Dieses winzige Tier ist zäher als ein Löwe"
+  "last": "Dieses winzige Tier ist zäher als ein Löwe",
+  "done": true
  },
  "post-it": {
   "n": 1,
@@ -705,7 +716,8 @@
  },
  "hand": {
   "n": 1,
-  "last": "Süß, aber giftig: Diese 3 Tiere fasst du besser nie an"
+  "last": "Süß, aber giftig: Diese 3 Tiere fasst du besser nie an",
+  "done": true
  },
  "kalender": {
   "n": 1,
@@ -714,7 +726,8 @@
  },
  "handfläche": {
   "n": 1,
-  "last": "Süß, aber giftig: Diese 3 Tiere fasst du besser nie an"
+  "last": "Süß, aber giftig: Diese 3 Tiere fasst du besser nie an",
+  "done": true
  },
  "beerdigung": {
   "n": 1,
@@ -748,7 +761,8 @@
  },
  "steuererklärung": {
   "n": 1,
-  "last": "Warum du ausgerechnet auf Beerdigungen lachen musst"
+  "last": "Warum du ausgerechnet auf Beerdigungen lachen musst",
+  "done": true
  },
  "gelnagel": {
   "n": 1,
@@ -817,7 +831,8 @@
  },
  "countdown": {
   "n": 1,
-  "last": "Das Rätsel der verschlossenen Tür auf dem Dachboden"
+  "last": "Das Rätsel der verschlossenen Tür auf dem Dachboden",
+  "done": true
  },
  "geschenk": {
   "n": 1,
@@ -826,7 +841,8 @@
  },
  "blick": {
   "n": 1,
-  "last": "3 Zeichen, dass deine Situationship in dich verliebt ist"
+  "last": "3 Zeichen, dass deine Situationship in dich verliebt ist",
+  "done": true
  },
  "stift": {
   "n": 1,
@@ -845,15 +861,18 @@
  },
  "blut": {
   "n": 1,
-  "last": "Der Waldfrosch: Der Zombie der Tierwelt friert einfach ein"
+  "last": "Der Waldfrosch: Der Zombie der Tierwelt friert einfach ein",
+  "done": true
  },
  "primzahl": {
   "n": 1,
-  "last": "Dieses Mathe-Rätsel ist eine Million Dollar wert"
+  "last": "Dieses Mathe-Rätsel ist eine Million Dollar wert",
+  "done": true
  },
  "nase": {
   "n": 1,
-  "last": "Starre nie im Dunkeln in den Spiegel"
+  "last": "Starre nie im Dunkeln in den Spiegel",
+  "done": true
  },
  "minimap": {
   "n": 1,
@@ -887,11 +906,13 @@
  },
  "nerv": {
   "n": 1,
-  "last": "Phantom-Vibration: Warum dein Handy vibriert, obwohl es schweigt"
+  "last": "Phantom-Vibration: Warum dein Handy vibriert, obwohl es schweigt",
+  "done": true
  },
  "oberschenkel": {
   "n": 1,
-  "last": "Phantom-Vibration: Warum dein Handy vibriert, obwohl es schweigt"
+  "last": "Phantom-Vibration: Warum dein Handy vibriert, obwohl es schweigt",
+  "done": true
  },
  "kasse": {
   "n": 1,
@@ -935,10 +956,12 @@
  },
  "haferbrei": {
   "n": 1,
-  "last": "Mein Wecker terrorisiert mich jeden Tag"
+  "last": "Mein Wecker terrorisiert mich jeden Tag",
+  "done": true
  },
  "sirene": {
   "n": 1,
-  "last": "Mein Wecker terrorisiert mich jeden Tag"
+  "last": "Mein Wecker terrorisiert mich jeden Tag",
+  "done": true
  }
 }
