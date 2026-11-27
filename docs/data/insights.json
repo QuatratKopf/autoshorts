@@ -1,5 +1,5 @@
 {
- "updated": 1795787620.8414354,
+ "updated": 1795789428.0326164,
  "enough": true,
  "counted": 47,
  "total": 49,
@@ -63,10 +63,10 @@
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 2,
-   "avg_views": 1672,
+   "avg_views": 1674,
    "avg_likes": 35.5,
    "like_rate": 2.12,
-   "avg_score": 2220
+   "avg_score": 2222
   },
   {
    "slug": "storys",
@@ -81,16 +81,16 @@
    "slug": "motivation",
    "name": "🔥 Motivation",
    "n": 2,
-   "avg_views": 1046,
+   "avg_views": 1048,
    "avg_likes": 35.0,
    "like_rate": 3.34,
-   "avg_score": 1592
+   "avg_score": 1594
   },
   {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 6,
-   "avg_views": 1231,
+   "avg_views": 1232,
    "avg_likes": 10.5,
    "like_rate": 0.85,
    "avg_score": 1424
@@ -108,16 +108,16 @@
    "slug": "nachricht",
    "name": "📱 Unbekannte Nachricht",
    "n": 1,
-   "avg_views": 464,
+   "avg_views": 468,
    "avg_likes": 8.0,
-   "like_rate": 1.72,
-   "avg_score": 584
+   "like_rate": 1.71,
+   "avg_score": 588
   }
  ],
  "weights": {
   "fakten": 1.09,
   "grusel": 0.5,
-  "tiere": 1.16,
+  "tiere": 1.15,
   "whatif": 1.11,
   "comedy": 1.39,
   "vergleich": 1.03,
@@ -126,8 +126,8 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2286 Aufrufe, 2.05 % Likes).",
-  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 464 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2229 zu 1128 Punkte).",
+  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 468 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2230 zu 1129 Punkte).",
   "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2329 zu 1830 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
@@ -137,12 +137,12 @@
  ],
  "words_bad": [
   "remix",
-  "glas",
   "lied",
   "bekanntes",
   "erkennst",
-  "scheibe",
+  "glas",
   "eines",
+  "jede",
   "klassikers"
  ],
  "top": [
@@ -202,21 +202,21 @@
    "id": 221,
    "title": "Unbekannte Nummer: Verhäng alle Spiegel",
    "category": "nachricht",
-   "views": 464,
+   "views": 468,
    "likes": 8,
    "comments": 0,
    "shares": 0,
-   "score": 584
+   "score": 588
   },
   {
    "id": 196,
    "title": "Jede Scheibe ein Ton: Lo-Fi-Remix eines Klassikers",
    "category": "musik",
-   "views": 356,
+   "views": 357,
    "likes": 2,
    "comments": 0,
    "shares": 0,
-   "score": 386
+   "score": 387
   },
   {
    "id": 44,
