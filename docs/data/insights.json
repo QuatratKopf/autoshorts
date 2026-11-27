@@ -1,5 +1,5 @@
 {
- "updated": 1795789428.0326164,
+ "updated": 1795791219.7111852,
  "enough": true,
  "counted": 47,
  "total": 49,
@@ -81,10 +81,10 @@
    "slug": "motivation",
    "name": "🔥 Motivation",
    "n": 2,
-   "avg_views": 1048,
+   "avg_views": 1046,
    "avg_likes": 35.0,
    "like_rate": 3.34,
-   "avg_score": 1594
+   "avg_score": 1592
   },
   {
    "slug": "musik",
@@ -99,19 +99,19 @@
    "slug": "grusel",
    "name": "👻 Grusel",
    "n": 2,
-   "avg_views": 449,
+   "avg_views": 450,
    "avg_likes": 20.0,
    "like_rate": 4.45,
-   "avg_score": 779
+   "avg_score": 780
   },
   {
    "slug": "nachricht",
    "name": "📱 Unbekannte Nachricht",
    "n": 1,
-   "avg_views": 468,
+   "avg_views": 473,
    "avg_likes": 8.0,
-   "like_rate": 1.71,
-   "avg_score": 588
+   "like_rate": 1.69,
+   "avg_score": 593
   }
  ],
  "weights": {
@@ -126,7 +126,7 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2286 Aufrufe, 2.05 % Likes).",
-  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 468 Aufrufe) – kommt seltener dran.",
+  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 473 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2230 zu 1129 Punkte).",
   "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2329 zu 1830 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
@@ -139,11 +139,11 @@
   "remix",
   "lied",
   "bekanntes",
-  "erkennst",
   "glas",
-  "eines",
+  "erkennst",
   "jede",
-  "klassikers"
+  "eines",
+  "scheibe"
  ],
  "top": [
   {
@@ -202,11 +202,11 @@
    "id": 221,
    "title": "Unbekannte Nummer: Verhäng alle Spiegel",
    "category": "nachricht",
-   "views": 468,
+   "views": 473,
    "likes": 8,
    "comments": 0,
    "shares": 0,
-   "score": 588
+   "score": 593
   },
   {
    "id": 196,
