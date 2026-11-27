@@ -1196,29 +1196,29 @@
  },
  "2026-11-27 21:00": {
   "category": "fakten",
-  "topic": "Warum du den Tetris-Effekt kennst: Warum dein Gehirn nach stundenlangem Gaming die Welt im Raster sieht",
+  "topic": "Der Tetris-Effekt: Warum dein Gehirn nach dem Zocken einfach weiterspielt – Vorgaben als Stichpunkte, nicht wörtlich abschreiben, in Du-Form erzählen, jeder Satz mit neuem Inhalt, in jeder Szene tut die Figur etwas. Nur diese geprüften Fakten in dieser Reihenfolge: 1) Einstieg: Du schließt nach Stunden Tetris die Augen, und vor deinem inneren Auge fallen weiter bunte Blöcke. 2) Das hat einen Namen: Tetris-Effekt. 3) Am Tag danach überlegst du im Supermarkt, wie die Kartons lückenlos ins Regal passen. 4) Der früheste bekannte Beleg für den Namen ist ein Artikel im Magazin Wired vom Mai 1994. 5) Im Jahr 2000 berichteten Schlafforscher im Fachblatt Science: Wer tagsüber Tetris gespielt hatte, sah beim Einschlafen fallende Steine. 6) Das Verblüffende daran: Sogar Menschen mit schwerem Gedächtnisverlust sahen die Steine, obwohl sie sich gar nicht erinnern konnten, das Spiel gespielt zu haben. 7) Erklärung der Forscher: Dein Gehirn übt Gelerntes beim Einschlafen weiter, vermutlich über das Gedächtnis für Abläufe und Können, nicht über bewusste Erinnerung. 8) Eine weitere Studie: Nach drei Monaten Tetris war die Hirnrinde der Testpersonen an einer Stelle messbar dicker. 9) Das gibt es auch bei anderen Spielen, Forscher nennen es Game Transfer Phenomena: Spieler berichten, dass sie die Musik des Spiels noch im Kopf hören und auf der Straße kurz Symbole aus dem Spiel in der Luft schweben sehen. 10) Der Effekt lässt sich sogar nutzen: In einer Studie des Karolinska-Instituts und der Universität Oxford mit einundsiebzig Unfallopfern spielte die Hälfte in der Notaufnahme innerhalb von sechs Stunden nach dem Unfall Tetris. 11) Ergebnis: Wer gespielt hatte, hatte in der Woche danach weniger belastende Erinnerungsbilder an den Unfall als die Vergleichsgruppe. 12) Fazit: Die fallenden Blöcke sind kein Schaden, sondern ein Zeichen dafür, dass dein Gehirn lernt. Schlussfrage an die Zuschauer: Welches Spiel hat dich schon mal bis in den Schlaf verfolgt? Keine anderen Zahlen und keine Prozentangaben. Jahreszahlen nur 1994 und 2000, keine anderen Jahreszahlen. Verboten: achtzig Prozent, Zwei-Stunden-Regel, Pausenregel, Blick ins Grüne, Dauerfeuer, Denkorgan, Lebensbalken, Minimap, Personennamen, Sätze ohne Inhalt wie „genau deshalb schaust du wieder hin“. Das Gehirn als eigene Figur höchstens in zwei Szenen. Titel: Tetris-Effekt: Warum dein Gehirn weiterspielt. Titelbild-Text: GEHIRN SPIELT WEITER",
   "trend": null,
   "script": {
-   "title": "Warum du den Tetris-Effekt kennst und wie dein Gehirn dich austrickst",
-   "description": "Siehst du nach stundenlangem Zocken überall nur noch Raster?\nWarum dein Gehirn nach Tetris und Co. plötzlich auch die echte Welt einsortieren will.\nWarst du schon mal so tief in einem Spiel gefangen?",
+   "title": "Tetris-Effekt: Warum dein Gehirn weiterspielt",
+   "description": "Zockst du abends so lange, bis du die Steine im Schlaf siehst?\nDas Phänomen ist wissenschaftlich erforscht und verändert dein Gehirn messbar.\nWelches Spiel hat dich schon mal bis in den Schlaf verfolgt?",
    "hashtags": [
     "#shorts",
     "#gaming",
     "#tetris",
+    "#fakten",
+    "#wissenschaft",
     "#gehirn",
     "#psychologie",
-    "#fakten",
-    "#fyp",
     "#viral"
    ],
    "tags": [
     "tetris effekt",
     "gaming fakten",
-    "gehirn psychologie",
-    "zocken folgen",
-    "warum sehe ich blöcke",
-    "psychologie fakten",
-    "gehirn muster"
+    "gehirn spiel",
+    "schlafforschung",
+    "game transfer phenomena",
+    "tetris",
+    "traum gaming"
    ],
    "thumbnail": {
     "image": "Close-up of a gamer staring with wide open eyes into thin air, illuminated by screen light, overlaid with glowing colorful falling puzzle blocks grid, dramatic lighting, upper third clear",
@@ -1241,697 +1241,504 @@
    },
    "scenes": [
     {
-     "see": "Du sitzt vorm Monitor und siehst verschwommen überall schwebende Bausteine.",
-     "text": "Überall fallen plötzlich Blöcke, wenn du stundenlang Tetris zockst.",
-     "image": "Überall fallen plötzlich Blöcke, wenn du stundenlang Tetris zockst.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "backdrop": null,
+     "text": "Du schließt nach Stunden Tetris die Augen und siehst weiter fallende Blöcke.",
+     "see": "Du liegst im Bett und siehst fallende Blöcke",
+     "place": "bedroom",
      "time": "night",
-     "weather": "",
      "props": [
-      "konsole",
-      "computer"
+      {
+       "type": "konsole"
+      }
      ],
      "actors": [
       {
        "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
+       "speaks": true,
+       "action": "sleep",
+       "emotion": "",
+       "emote": "?",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
+      }
+     ],
+     "mood": "tense",
+     "overlay": {
+      "type": "card",
+      "text": "TETRIS IM KOPF"
+     }
+    },
+    {
+     "text": "Dieses schräge Phänomen hat sogar einen wissenschaftlichen Namen: Der Tetris-Effekt.",
+     "see": "Grafik zeigt den Namen des Phänomens",
+     "place": "zimmer",
+     "time": "night",
+     "props": [
+      {
+       "type": "lib_tetrisblock"
+      }
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "walk",
+       "pos": "offleft",
+       "to": "center",
+       "emotion": "",
        "speaks": true
       }
      ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "fallende Blöcke"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "TETRIS-EFFEKT"
-     },
-     "who_desc": "",
-     "place_desc": "cozy gaming bedroom with LED lights, desk, display, dark blue walls",
-     "hud": "",
-     "status": ""
+     "shot": "graphic",
+     "mood": "calm",
+     "graphic": {
+      "type": "badge",
+      "kicker": "PHÄNOMEN",
+      "text": "TETRIS-EFFEKT",
+      "dark": false
+     }
     },
     {
-     "see": "Ein grinsendes Gehirn läuft auf dem Bildschirm weiter, obwohl das Spiel aus ist.",
-     "text": "Das ist keine Einbildung, sondern ein reales Phänomen namens Tetris-Effekt.",
-     "image": "Das ist keine Einbildung, sondern ein reales Phänomen namens Tetris-Effekt.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "zimmer",
-     "backdrop": null,
-     "time": "night",
-     "weather": "",
+     "text": "Am Tag danach räumst du Kartons ein und fragst dich sofort, wie sie ins Supermarktregal passen.",
+     "see": "Du ordnest Kartons im Supermarkt gedanklich ein",
+     "place": "supermarket",
+     "time": "day",
      "props": [
-      "computer"
+      {
+       "type": "shelf"
+      },
+      {
+       "type": "box"
+      }
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "speaks": true,
+       "action": "think",
+       "emotion": "",
+       "emote": "idea",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
+      }
+     ],
+     "mood": "calm",
+     "crowd": "walk"
+    },
+    {
+     "text": "Der früheste bekannte Beleg für diesen Namen ist ein Artikel im Magazin Wired vom Mai 1994.",
+     "see": "Zeitungsausschnitt aus dem Jahr 1994",
+     "place": "office",
+     "time": "day",
+     "props": [
+      {
+       "type": "lib_magazin"
+      }
+     ],
+     "shot": "graphic",
+     "mood": "calm",
+     "crowd": "walk",
+     "graphic": {
+      "type": "news",
+      "kicker": "WIRED-MAGAZIN",
+      "sub": "Erste Erwähnung des Phänomens",
+      "text": "MAI 1994",
+      "dark": false
+     }
+    },
+    {
+     "text": "Im Jahr 2000 berichteten Schlafforscher im Fachblatt Science über dieses Thema.",
+     "see": "Fachjournal Science mit der Forschungsarbeit",
+     "place": "labor",
+     "time": "day",
+     "actors": [
+      {
+       "id": "du",
+       "action": "walk",
+       "pos": "offleft",
+       "to": "center",
+       "emotion": "",
+       "speaks": true
+      }
+     ],
+     "shot": "graphic",
+     "mood": "calm",
+     "graphic": {
+      "type": "badge",
+      "kicker": "WIßENSCHAFT 2000",
+      "text": "SCHLAFFORSCHUNG",
+      "dark": false
+     }
+    },
+    {
+     "text": "Wer tagsüber Tetris gespielt hatte, sah beim Einschlafen wieder fallende Steine.",
+     "see": "Du schläfst und siehst Steine vor Augen",
+     "place": "bedroom",
+     "time": "day",
+     "props": [
+      {
+       "type": "lib_tetrisblock"
+      }
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "speaks": true,
+       "action": "sleep",
+       "emotion": "",
+       "emote": "music",
+       "kind": "",
+       "hold": "phone",
+       "facing": "",
+       "say": "",
+       "pos": "center"
+      }
+     ],
+     "mood": "calm"
+    },
+    {
+     "text": "Sogar Menschen mit schwerem Gedächtnisverlust sahen die Steine.",
+     "see": "Erstaunter Patient mit Gedächtnisverlust",
+     "place": "labor",
+     "time": "day",
+     "actors": [
+      {
+       "id": "du",
+       "speaks": true,
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "?",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
+      }
+     ],
+     "shot": "close",
+     "mood": "tense"
+    },
+    {
+     "text": "Obwohl sie sich gar nicht erinnern konnten, das Spiel jemals gespielt zu haben.",
+     "see": "Du schüttelst ratlos den Kopf vor der Konsole",
+     "place": "lab",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "speaks": true,
+       "action": "think",
+       "emotion": "",
+       "emote": "?",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
+      }
+     ],
+     "mood": "calm"
+    },
+    {
+     "text": "Dein Gehirn übt Gelerntes beim Einschlafen einfach unbewusst weiter.",
+     "see": "Das Gehirn trainiert fleißig im Schlaf",
+     "place": "bedroom",
+     "time": "night",
+     "props": [
+      {
+       "type": "lib_tetrisblock"
+      }
+     ],
+     "actors": [
+      {
+       "id": "gehirn",
+       "speaks": true,
+       "action": "run",
+       "emotion": "happy",
+       "emote": "!",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
+      }
+     ],
+     "mood": "happy",
+     "overlay": {
+      "type": "note",
+      "title": "GEHIRN-UPDATE",
+      "text": "Übt automatisch im Schlaf"
+     }
+    },
+    {
+     "text": "Es nutzt dafür das Gedächtnis für Abläufe, nicht die bewusste Erinnerung.",
+     "see": "Das Gehirn verarbeitet Abläufe",
+     "place": "lab",
+     "time": "day",
+     "actors": [
+      {
+       "id": "gehirn",
+       "speaks": true,
+       "action": "point",
+       "emotion": "",
+       "emote": "idea",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
+      }
+     ],
+     "mood": "calm"
+    },
+    {
+     "text": "Nach drei Monaten Tetris war die Hirnrinde der Testpersonen messbar dicker.",
+     "see": "Zähler zeigt drei Monate Training",
+     "place": "labor",
+     "time": "day",
+     "props": [
+      {
+       "type": "lib_tetrisblock"
+      }
      ],
      "actors": [
       {
        "id": "gehirn",
        "action": "walk",
-       "emotion": "happy",
+       "pos": "offleft",
+       "to": "center",
+       "emotion": "",
+       "speaks": true
+      }
+     ],
+     "shot": "graphic",
+     "mood": "calm",
+     "graphic": {
+      "type": "number",
+      "kicker": "STUDIEN-ERGEBNIS",
+      "value": "3 MONATE",
+      "label": "HIRNRINDE MESSBAR DICKER",
+      "dark": false
+     }
+    },
+    {
+     "text": "Forscher nennen solche Effekte heute ganz offiziell Game Transfer Phenomena.",
+     "see": "Einblenden des Fachbegriffs",
+     "place": "lab",
+     "time": "day",
+     "props": [
+      {
+       "type": "computer"
+      }
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
        "emote": "",
        "pos": "center",
        "speaks": true
       }
      ],
-     "crowd": "",
+     "shot": "",
      "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "reales Phänomen"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "cozy gaming bedroom with LED lights, desk, display, dark blue walls",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafik zeigt das Jahr 1994, in dem Forscher das Phänomen erstmals beschrieben.",
-     "text": "Schon neunzehnhundertvierundneunzig dokumentierten Forscher das Muster, aber wie entsteht es überhaupt?",
-     "image": "Schon neunzehnhundertvierundneunzig dokumentierten Forscher das Muster, aber wie entsteht es überhaupt?",
-     "who": [],
-     "place": "office",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "neunzehnhundertvierundneunzig"
-     ],
-     "graphic": {
-      "type": "number",
-      "kicker": "STUDIE",
-      "value": "1994",
-      "label": "ENTDECKT"
-     },
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du stehst im Supermarkt und versuchst Konservendosen perfekt in den Wagen zu stapeln.",
-     "text": "Wenn du Stunden am Stück dasselbe tust, schaltet dein Kopf auf Dauerfeuer.",
-     "image": "Wenn du Stunden am Stück dasselbe tust, schaltet dein Kopf auf Dauerfeuer.",
-     "who": [
-      "du"
-     ],
-     "place": "supermarkt",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "cart",
-      "cans"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "walk",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "pan_left",
-     "sfx": "pop",
-     "highlight": [
-      "Dauerfeuer"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "DAUERFEUER"
-     },
-     "who_desc": "",
-     "place_desc": "supermarket aisle with colorful products on shelves",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Schautafel im Gehirn mit leuchtenden Neuronen-Verbindungen.",
-     "text": "Deine Synapsen bauen extrem schnell neue Pfade für genau diese Bewegung auf.",
-     "image": "Deine Synapsen bauen extrem schnell neue Pfade für genau diese Bewegung auf.",
-     "who": [],
-     "place": "lab",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "synapse"
-     ],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "insert",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Synapsen"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Gehirn tippt fleißig Überstunden auf einer kleinen Tastatur.",
-     "text": "Das Gehirn übt den Bewegungsablauf einfach weiter, selbst wenn der Bildschirm aus ist.",
-     "image": "Das Gehirn übt den Bewegungsablauf einfach weiter, selbst wenn der Bildschirm aus ist.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "zimmer",
-     "backdrop": null,
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "run",
-       "emotion": "happy",
-       "emote": "sweat",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "tick",
-     "highlight": [
-      "weiter"
-     ],
+     "graphic": null,
      "overlay": {
       "type": "card",
-      "text": "ÜBERSTUNDEN"
-     },
-     "who_desc": "",
-     "place_desc": "cozy gaming bedroom with LED lights, desk, display, dark blue walls",
-     "hud": "",
-     "status": ""
+      "text": "GAME TRANSFER"
+     }
     },
     {
-     "see": "Du liegst im Bett mit weit geöffneten Augen und starrst an die Decke.",
-     "text": "Du liegst im Bett und vor deinem inneren Auge fallen weiter Steine.",
-     "image": "Du liegst im Bett und vor deinem inneren Auge fallen weiter Steine.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "backdrop": null,
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "sleep",
-       "emotion": "worried",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "inneren Auge"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "cozy gaming bedroom with LED lights, desk, display, dark blue walls",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du stehst im Supermarkt und lachst entgeistert über die perfekt sortierten Regale.",
-     "text": "Du denkst, du bist allein damit? Falsch, fast jeder Gamer kennt dieses Gefühl.",
-     "image": "Du denkst, du bist allein damit? Falsch, fast jeder Gamer kennt dieses Gefühl.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "camera": "pan_right",
-     "sfx": "pop",
-     "highlight": [
-      "Falsch"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "cozy gaming bedroom with LED lights, desk, display, dark blue walls",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Zähler zeigt achtzig Prozent aller Vielzocker an.",
-     "text": "Viele Zocker berichten von genau solchen Nachwirkungen.",
-     "image": "Viele Zocker berichten von genau solchen Nachwirkungen.",
-     "who": [],
-     "place": "office",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "achtzig Prozent"
-     ],
-     "graphic": {
-      "type": "number",
-      "kicker": "NACHWIRKUNGEN",
-      "value": "80 %",
-      "label": "GAMER"
-     },
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Blick auf das Handy mit Navigations-Pfeilen im Raum.",
-     "text": "Nach langen Runden Open-World-Games suchst du plötzlich im echten Leben nach einer Minimap.",
-     "image": "Nach langen Runden Open-World-Games suchst du plötzlich im echten Leben nach einer Minimap.",
-     "who": [
-      "du"
-     ],
+     "text": "Spieler hören plötzlich Musik im Kopf oder sehen Symbole in der Luft schweben.",
+     "see": "Du gehst auf der Straße und siehst schwebende Spiel-Symbole",
      "place": "street",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "minimap"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "look_around",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "walk",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "Minimap"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Schweben von bunten Symbolen in der Luft im Flur.",
-     "text": "Oder du erwartest, dass Interaktions-Symbole über Gegenständen auftauchen.",
-     "image": "Oder du erwartest, dass Interaktions-Symbole über Gegenständen auftauchen.",
-     "who": [
-      "du"
-     ],
-     "place": "hallway",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "markers"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "zoom_in",
-     "sfx": "pop",
-     "highlight": [
-      "Interaktions-Symbole"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "SYMBOL-EFFEKT"
-     },
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Gehirn wischt Schmutz vom Tisch weg wie auf einem Touchscreen.",
-     "text": "Das Gehirn versucht schlichtweg, gesehene Logik auf die echte Welt zu übertragen.",
-     "image": "Das Gehirn versucht schlichtweg, gesehene Logik auf die echte Welt zu übertragen.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "livingroom",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [
-      "table"
-     ],
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "shake",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "übertragen"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Große Infokarte mit der Aufschrift HARMLOS.",
-     "text": "Aber keine Sorge, das Ganze ist absolut harmlos und geht schnell vorbei.",
-     "image": "Aber keine Sorge, das Ganze ist absolut harmlos und geht schnell vorbei.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "wave",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "absolut harmlos"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "HARMLOS",
-      "color": "green"
-     },
-     "who_desc": "",
-     "place_desc": "cozy gaming bedroom with LED lights, desk, display, dark blue walls",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafik zeigt eine Hirnkapazität von hundert Prozent Flexibilität.",
-     "text": "Es beweist nur, wie extrem anpassungsfähig dein Denkorgan eigentlich ist.",
-     "image": "Es beweist nur, wie extrem anpassungsfähig dein Denkorgan eigentlich ist.",
-     "who": [],
-     "place": "lab",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "graphic",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "anpassungsfähig"
-     ],
-     "graphic": {
-      "type": "badge",
-      "kicker": "GEHIRN",
-      "text": "SUPER ANPASSUNG"
-     },
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Das Gehirn stemmt Hanteln im Fitness-Studio.",
-     "text": "Wissenschaftler nutzen diesen Effekt heute sogar, um Trauma-Patienten gezielt abzulenken.",
-     "image": "Wissenschaftler nutzen diesen Effekt heute sogar, um Trauma-Patienten gezielt abzulenken.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "hospital",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "gehirn",
-       "action": "think",
-       "emotion": "happy",
-       "emote": "idea",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "zoom_out",
-     "sfx": "pop",
-     "highlight": [
-      "abzulenken"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Notizzettel mit der Regel: Nach zwei Stunden Pause machen.",
-     "text": "Nur eine Regel solltest du beachten, damit dein Kopf mal durchatmen kann.",
-     "image": "Nur eine Regel solltest du beachten, damit dein Kopf mal durchatmen kann.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "backdrop": null,
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "think",
-       "emotion": "worried",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "durchatmen"
-     ],
-     "overlay": {
-      "type": "note",
-      "title": "REGEL #1",
-      "text": "Regelmäßige Pausen einlegen"
-     },
-     "who_desc": "",
-     "place_desc": "cozy gaming bedroom with LED lights, desk, display, dark blue walls",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Eine Uhr tickt schnell abwärts, während der Monitor blinkt.",
-     "text": "Spätestens nach zwei Stunden Gaming solltest du den Blick ins Grüne richten.",
-     "image": "Spätestens nach zwei Stunden Gaming solltest du den Blick ins Grüne richten.",
-     "who": [],
-     "place": "park",
      "backdrop": {
-      "sky": "day",
-      "ground": "grass",
+      "ground": "road",
       "elements": [
-       "trees",
-       "flowers"
+       "city"
       ]
      },
      "time": "day",
-     "weather": "",
+     "props": [
+      {
+       "type": "markers"
+      }
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "speaks": true,
+       "action": "point",
+       "emotion": "shocked",
+       "emote": "music",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
+      }
+     ],
+     "mood": "tense",
+     "crowd": "worried"
+    },
+    {
+     "text": "Du denkst, das ist nur eine Spielerei? Falsch, man kann es medizinisch nutzen.",
+     "see": "Du schüttelst den Kopf zur Überraschung",
+     "place": "labor",
+     "time": "day",
+     "actors": [
+      {
+       "id": "du",
+       "speaks": true,
+       "action": "wave",
+       "emotion": "worried",
+       "emote": "!",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
+      }
+     ],
+     "shot": "close",
+     "mood": "tense",
+     "overlay": {
+      "type": "stamp",
+      "text": "FALSCH",
+      "color": "red"
+     }
+    },
+    {
+     "text": "In einer Studie mit einundsiebzig Unfallopfern spielte die Hälfte direkt in der Notaufnahme Tetris.",
+     "see": "Du sitzt in der Notaufnahme und spielst auf der Konsole",
+     "place": "hospital",
+     "time": "day",
+     "props": [
+      {
+       "type": "konsole"
+      },
+      {
+       "type": "lib_tetrisblock"
+      }
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "speaks": true,
+       "action": "sit",
+       "emotion": "",
+       "emote": "",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
+      }
+     ],
+     "mood": "calm",
+     "crowd": "worried",
+     "overlay": {
+      "type": "card",
+      "text": "71 UNFALLOPFER"
+     }
+    },
+    {
+     "text": "Das Spiel musste innerhalb von sechs Stunden nach dem Unfall gestartet werden.",
+     "see": "Ein Countdown zeigt sechs Stunden",
+     "place": "hospital",
+     "time": "day",
+     "props": [
+      {
+       "type": "clock"
+      }
+     ],
+     "mood": "tense",
+     "crowd": "worried",
+     "overlay": {
+      "type": "counter",
+      "label": "ZEITFENSTER",
+      "value": 6,
+      "unit": "STUNDEN"
+     }
+    },
+    {
+     "text": "Wer spielte, hatte danach messbar weniger belastende Erinnerungsbilder an das Ereignis.",
+     "see": "Vergleichsdiagramm zeigt weniger belastende Erinnerungen",
+     "place": "hospital",
+     "time": "day",
      "props": [],
      "actors": [
       {
        "id": "du",
-       "action": "look_around",
+       "action": "talk",
        "emotion": "happy",
        "emote": "",
        "pos": "center",
        "speaks": true
       }
      ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "tick",
-     "highlight": [
-      "zwei Stunden"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
+     "mood": "calm"
     },
     {
-     "see": "Das Gehirn schläft friedlich auf dem Sofa im Wohnzimmer.",
-     "text": "Sonst baut dein Gehirn in Gedanken einfach weiter.",
-     "image": "Sonst baut dein Gehirn in Gedanken einfach weiter.",
-     "who": [
-      "gehirn"
-     ],
-     "place": "livingroom",
-     "backdrop": null,
-     "time": "night",
-     "weather": "",
-     "props": [
-      "sofa"
-     ],
+     "text": "Die fallenden Blöcke sind also kein Schaden, sondern ein klares Zeichen für ein lernendes Gehirn.",
+     "see": "Das Gehirn freut sich über den Lernerfolg",
+     "place": "bedroom",
+     "time": "day",
      "actors": [
       {
        "id": "gehirn",
-       "action": "sleep",
+       "speaks": true,
+       "action": "jump",
        "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
+       "emote": "!",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
       }
      ],
-     "crowd": "",
-     "mood": "calm",
-     "shot": "wide",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "weiter"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
+     "mood": "happy",
+     "overlay": {
+      "type": "stamp",
+      "text": "GEHIRN LERNT",
+      "color": "green"
+     }
     },
     {
-     "see": "Du schreckst wieder auf, während um dich herum Bausteine ins Raster fallen.",
-     "text": "Und genau deshalb schaust du wieder hin, wenn du stundenlang gezockt hast.",
-     "image": "Und genau deshalb schaust du wieder hin, wenn du stundenlang gezockt hast.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "backdrop": null,
+     "text": "Welches Spiel hat dich schon mal bis in den Schlaf verfolgt?",
+     "see": "Du sitzt zufrieden im Bett und zockst weiter",
+     "place": "bedroom",
      "time": "night",
-     "weather": "",
      "props": [
-      "computer"
+      {
+       "type": "konsole"
+      },
+      {
+       "type": "computer"
+      }
      ],
      "actors": [
       {
        "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
+       "speaks": true,
+       "action": "sit",
+       "emotion": "happy",
+       "emote": "heart",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
       }
      ],
-     "crowd": "",
-     "mood": "tense",
-     "shot": "wide",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "gezockt hast"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "cozy gaming bedroom with LED lights, desk, display, dark blue walls",
-     "hud": "",
-     "status": ""
+     "mood": "happy"
     }
    ],
    "hud": "",
@@ -1940,7 +1747,7 @@
   "provider": "gemini",
   "remake": false,
   "needs": [],
-  "title": "Warum du den Tetris-Effekt kennst und wie dein Gehirn dich austrickst",
+  "title": "Tetris-Effekt: Warum dein Gehirn weiterspielt",
   "created": 1795793321.5915947
  },
  "2026-11-28 13:00": {

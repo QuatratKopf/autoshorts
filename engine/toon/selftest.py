@@ -2871,6 +2871,15 @@ def main():
                           [(0, 4), (4, 8)], topic="Der Tetris-Effekt – warum dein Gehirn weiterspielt")
         assert not sf[0].get("float") and not any(a.get("action") == "float" for a in sf[0]["actors"]), f"schwebende Symbole heben weder Figur noch Autos an: {sf[0].get('float')}"
         assert sf[1].get("shot") != "insert" and sf[1]["actors"][0].get("hold") == "phone", "Tetris spielen in der Notaufnahme: die Figur spielt auf dem Handy"
+        sg = stage.direct([{"text": "Der früheste Beleg ist ein Artikel im Magazin Wired vom Mai 1994.", "place": "office", "shot": "graphic", "graphic": {"type": "news", "kicker": "WIRED-MAGAZIN", "text": "MAI 1994"}},
+                           {"text": "Im Jahr 2000 berichteten Schlafforscher im Fachblatt Science darüber.", "place": "lab", "shot": "graphic", "graphic": {"type": "badge", "kicker": "2000", "text": "SCHLAFFORSCHUNG"}, "actors": [{"id": "du", "action": "walk"}]},
+                           {"text": "Wer tagsüber Tetris gespielt hatte, sah beim Einschlafen wieder fallende Steine.", "place": "bedroom", "time": "day", "props": ["tetrisblock"], "actors": [{"id": "du", "action": "sleep", "emote": "music"}]},
+                           {"text": "Dein Gehirn übt Gelerntes beim Einschlafen weiter.", "place": "bedroom", "time": "night", "overlay": {"type": "note", "title": "GEHIRN", "text": "Übt im Schlaf"}, "actors": [{"id": "gehirn", "action": "run"}]}],
+                          [(0, 4), (4, 8), (8, 12), (12, 16)], topic="Der Tetris-Effekt – warum dein Gehirn weiterspielt")
+        assert sg[2].get("time") == "night" and sg[2].get("_blocks") and not sg[2]["actors"][0].get("hold") and not any("tetris" in str(q.get("type")) for q in sg[2].get("props") or []), "Einschlafen: Nacht, kein Handy, kein gelernter Tetris-Klotz"
+        assert sg[3]["actors"][0].get("small"), "Gehirn unter dem Notizzettel: klein"
+        from engine import main as _m
+        assert _m.known_thing("tetrisblock") and "lib_tetrisblock" not in extras.PROPS, "für Tetris-Steine wird nichts gelernt"
     check("Prüfung 27.11. (Video 231): Tetris-Effekt – Bausteine fallen durchs Bild", _pruef2711c)
 
     def _pruef2511():                                            # Prüfung 25.11.2026 (Video 206, Open-World-Karte)

@@ -906,3 +906,7 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
 - Schwerelosigkeit: „Symbole/Anzeigen/Pfeile/Bausteine schweben in der Luft“ (`HUD_AIR_RE`) hebt weder Figur noch Autos an – vorher flogen Figur und
   Autos durch die Luft, sobald im Satz Symbole „schwebten“.
 - Selbsttest: `_pruef2711c`.
+- Nachtrag Video 232: Für „Tetris-Block/-Stein“ wird nichts mehr gelernt (`main.NO_THINGS`; der gelernte lila Klotz stand in fünf Szenen am Boden und
+  füllte vier Sekunden allein das Bild), die Zeichnung ist aus `shapes.json` entfernt, die Regie wirft solche Requisiten heraus. „Tetris spielen“ setzt
+  `_no_insert`. Wer in einer Baustein-Szene schläft, schläft nachts, ohne Handy und Musiknoten. `stage._plates_apart`: Das Gehirn wird unter einem
+  Notizzettel klein gezeichnet, damit der Zettel nicht auf seinem Kopf klebt.

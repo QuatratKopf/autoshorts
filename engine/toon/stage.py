@@ -2649,6 +2649,7 @@ def direct(scenes, times, topic="", style="", look=""):
     _wecker_story(scenes, topic, main_id)
     _exo_story(scenes, topic, main_id)
     _tetris_story(scenes, topic)
+    _plates_apart(scenes, main_id)
     _mirror_story(scenes, topic, main_id)
     _mirror_msg(scenes, topic, style, main_id)
     _fridge_open(scenes)
@@ -2669,12 +2670,22 @@ MIRROR_CALM_RE = r"erleichtert|beruhigt|atmest (?:tief )?(?:durch|auf)|aufatmen|
 BRAIN_IDS = ("gehirn", "hirn", "brain", "_hirn")
 
 
+def _plates_apart(scenes, main_id="du"):
+    """Das Gehirn als Figur ist hoch – unter einem Notizzettel (und anderen hohen Einblendungen) wird es kleiner gezeichnet, damit der Zettel nicht
+    auf seinem Kopf klebt (Prüfung 27.11.2026, Video 232: „GEHIRN-UPDATE“ verdeckte die obere Hälfte des Gehirns)."""
+    for sc in scenes:
+        if isinstance(sc, dict) and isinstance(sc.get("overlay"), dict) and str(sc["overlay"].get("type") or "") in TALL_OV:
+            for a in (sc.get("actors") or []):
+                if isinstance(a, dict) and (a.get("kind") == "brain" or str(a.get("id")) == "gehirn"):
+                    a["small"] = True
+
+
 # ------------------------------------------------------------------ Tetris-Effekt: die Bausteine fallen wirklich durchs Bild
 # Prüfung 27.11.2026 (Video 231, „Tetris-Effekt“): „Überall fallen plötzlich Blöcke“ und „vor deinem inneren Auge fallen weiter Steine“ – zu sehen war
 # kein einziger Baustein, nur die erschrockene Figur im Zimmer und im Bett. Jetzt fallen in solchen Sätzen halb durchsichtige Bausteine durchs Bild
 # (extras.fallblocks, frei erfundene Formen – kein Spielfeld, kein Zeichen des echten Spiels).
 TETRIS_RE = r"tetris|blockspiel|klötzchenspiel"
-TETRIS_PLAY_RE = r"tetris (?:\w+ ){0,4}(?:spiel|zock|gespielt|gezockt)|(?:spiel|zock)\w* (?:\w+ ){0,5}tetris|\bzocks?t\b|\bzocken\b|\bgezockt\b"
+TETRIS_PLAY_RE = r"tetris (?:\w+ ){0,4}(?:spiel|zock|gespielt|gezockt)|(?:spiel|zock)\w* (?:\w+ ){0,8}tetris|\bzocks?t\b|\bzocken\b|\bgezockt\b"
 TETRIS_BLOCK_RE = (r"bl[oö]cke?n?\b|\bsteine?n?\b|bausteine?n?\b|klötz|\bformen\b|puzzleteil|tetris-?effekt|\bstapel|einsortier|\blücken?\b|\braster\b|"
                    r"inner\w* auge|geschlossen\w* augen|beim einschlafen|schläfst du ein|im traum|träum")
 
@@ -2698,10 +2709,22 @@ def _tetris_story(scenes, topic=""):
                 sc["shot"] = ""                       # die Bausteine fallen im Raum um die Figur – keine Großaufnahme eines einzelnen Gegenstands
         low_t = str(sc.get("text") or "").lower()
         humans = [a_ for a_ in (sc.get("actors") or []) if isinstance(a_, dict) and not a_.get("kind") and str(a_.get("id")) != "gehirn"]
+        if isinstance(sc.get("props"), list):             # der einzelne lila „Tetris-Block“ am Boden (von der Text-KI gelernt) stand in fünf Szenen herum und füllte vier Sekunden lang allein das Bild (Video 232)
+            sc["props"] = [q for q in sc["props"] if "tetris" not in str(q.get("type") if isinstance(q, dict) else q).lower()]
+        if sc.get("_blocks"):
+            for a_ in humans:
+                if str(a_.get("action") or "") in ("sleep", "schlafen"):
+                    sc["time"] = "night"                  # „sah beim Einschlafen fallende Steine“: geschlafen wird nachts, ohne Handy in der Hand und ohne Musiknoten
+                    a_["hold"] = ""
+                    if str(a_.get("emote") or "") == "music":
+                        a_["emote"] = ""
+        if _re.search(TETRIS_PLAY_RE, low_t):
+            sc["_no_insert"] = True                       # kein harter Schnitt auf einen Gegenstand, während erzählt wird, wer spielt
         if humans and _re.search(TETRIS_PLAY_RE, low_t):
             if str(sc.get("shot") or "") == "insert":
                 sc["shot"] = ""                       # „… ließen Testpersonen Tetris spielen“: die Figur spielt – kein leerer Bildschirm auf einem Tisch als Großaufnahme
-            if not any(isinstance(q, dict) and str(q.get("type")).lower() in ("computer", "tv", "konsole", "console") for q in (sc.get("props") or [])) and not humans[0].get("hold"):
+            if not any(isinstance(q, dict) and str(q.get("type")).lower() in ("computer", "tv", "konsole", "console") for q in (sc.get("props") or [])) and not humans[0].get("hold") \
+                    and str(humans[0].get("action") or "") not in ("sleep", "schlafen"):
                 humans[0]["hold"] = "phone"           # ohne Rechner im Bild (Notaufnahme, Bahn): gespielt wird auf dem Handy in der Hand
 
 def mirror_story(scenes, topic=""):

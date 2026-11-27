@@ -137,7 +137,8 @@ def find_trend(trend_id):
 
 
 # Begriffe, die kein Gegenstand sind: Dafür wird nichts „gelernt“ (aus „Bug“ wurde sonst ein Käfer in jeder Szene).
-NO_THINGS = {"bug", "bugs", "glitch", "glitches", "fehler", "regel", "regeln", "spielregel", "spielregeln", "physik", "schwerkraft", "zeit",
+NO_THINGS = {"tetris", "tetrisblock", "tetrisblöcke", "tetris-block", "tetris-blöcke", "tetrisstein", "tetrissteine", "tetris-stein", "tetris-steine",   # die Bausteine fallen als Effekt durchs Bild (extras.fallblocks) – kein einzelner gelernter Klotz am Boden (Video 232)
+             "bug", "bugs", "glitch", "glitches", "fehler", "regel", "regeln", "spielregel", "spielregeln", "physik", "schwerkraft", "zeit",
              "idee", "problem", "trick", "system", "update", "spiel", "videospiel", "level", "leben", "alltag", "realität", "inventar",
              "haar", "haare", "härchen", "haarwurzel", "haarwurzeln", "haut", "körper", "kopf",
              "gebiss", "zähne", "zahn", "maul", "magen", "bakteriendüse",   # Körperteile eines Tiers sind kein loser Gegenstand (Video 222: rosa Menschengebiss für die Zähne des Anglerfischs)
