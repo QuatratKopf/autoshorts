@@ -1429,6 +1429,8 @@ def direct(scenes, times, topic="", style="", look=""):
         ov_n = sc.get("overlay") if isinstance(sc.get("overlay"), dict) else None
         if ov_n and str(ov_n.get("type") or "").lower() in ("tag", "card", "note", "stamp") and numbered_label_wrong(ov_n, sc["text"]):
             sc["overlay"] = None                          # „REGEL NUMMER EINS“ über einem Satz, der die Nummer nicht nennt
+        elif ov_n and str(ov_n.get("type") or "").lower() == "stamp" and len(str(ov_n.get("text") or "").strip()) > 16:
+            ov_n["type"] = "card"                         # ein Stempel fasst 16 Zeichen: „GESCHONTER RÜCKEN“ wurde zu „GESCHONTER“ gekürzt (Video 228) – längere Urteile stehen als Karte da
         elif ov_n and str(ov_n.get("type") or "").lower() == "stamp":
             st_w = [w for w in _re0.findall(r"[a-zäöüß]{4,}", str(ov_n.get("text") or "").lower())]
             if st_w and not any(w[:5] in low0 for w in st_w) and not any(_re0.search(p_, low0) and lab_ == str(ov_n.get("text") or "").upper() for p_, lab_, _c in STAMPS):
@@ -4477,8 +4479,10 @@ def _exo_story(scenes, topic="", main_id="du"):
             me = {"id": main_id, "action": "idle", "emotion": "", "emote": "", "say": "", "hold": "", "pos": "center", "speaks": False}
             acts.insert(0, me)
         sc["actors"] = acts
-        if shot in ("insert", "graphic") or (shot == "event" and junk):
-            sc["shot"] = shot = ""                        # der Schnitt auf ein loses Ding (Motor, Roboter) entfällt: gezeigt wird die Figur im Anzug
+        if shot in ("insert", "graphic", "event"):
+            sc["shot"] = shot = ""                        # der Schnitt auf ein loses Ding (Motor, Roboter) entfällt, ebenso die Totale mit winziger Figur: gezeigt wird die Figur im Anzug
+        if "?" in str(me.get("emote") or "") and "?" not in str(sc.get("text") or ""):
+            me["emote"] = ""                              # Fragezeichen über dem Kopf nur an einer Frage
         if True:                                          # Fabrik = Werkhalle (drinnen, ohne Passanten und Autos), Reha = Klinik
             to_pl = "garage" if re.search(EXO_WORK_RE, low) else "hospital" if re.search(EXO_REHA_RE, low) else ""
             if to_pl and (isinstance(sc.get("backdrop"), dict) or places.resolve(sc.get("place")) != to_pl):
@@ -4508,7 +4512,7 @@ def _exo_story(scenes, topic="", main_id="du"):
             if shot == "close":
                 sc["shot"] = ""
             if isinstance(sc.get("props"), list):
-                sc["props"] = [q for q in sc["props"] if _pkey(q) in ("lib_hantel", "lib_gewicht") or isinstance(q, dict) and isinstance(q.get("x"), (int, float)) and abs(q["x"] - 540) > 300]
+                sc["props"] = []                          # die Hantel ist über dem Kopf – keine zweite (gelernte) auf dem Tisch, nichts, was die Scheiben verdeckt
         elif slow and act in ("run", "jump", "dance", "float", "fall"):
             me["action"] = "walk"                         # ein Exoskelett geht – es sprintet nicht
             me.pop("_jog", None)
@@ -4524,17 +4528,17 @@ def _exo_story(scenes, topic="", main_id="du"):
 def _barbell(frame, cx, y, k):
     """Langhantel quer über den Händen (stage._exo_story: „hebst neunzig Kilo“): Stange, je zwei Scheiben, Verschlüsse."""
     d = ImageDraw.Draw(frame, "RGBA")
-    half = 330 * k
+    half = 300 * k
     d.rounded_rectangle((cx - half, y - 11 * k, cx + half, y + 11 * k), 8 * k, fill=INK)
     d.rounded_rectangle((cx - half + 4 * k, y - 7 * k, cx + half - 4 * k, y + 5 * k), 6 * k, fill=(196, 204, 216))
     for sgn in (-1, 1):
-        for j, (off_, h_, col) in enumerate(((250, 118, (58, 62, 78)), (292, 92, (214, 70, 60)))):
+        for j, (off_, h_, col) in enumerate(((226, 112, (58, 62, 78)), (268, 88, (214, 70, 60)))):
             px = cx + sgn * off_ * k
             d.rounded_rectangle((px - 22 * k, y - h_ * k - 5 * k, px + 22 * k, y + h_ * k + 5 * k), 14 * k, fill=INK)
             d.rounded_rectangle((px - 17 * k, y - h_ * k, px + 17 * k, y + h_ * k), 11 * k, fill=rig._dark(col, 0.25))
             d.rounded_rectangle((px - 17 * k, y - h_ * k, px + 9 * k, y + h_ * k - 10 * k), 11 * k, fill=col)
             d.rounded_rectangle((px - 11 * k, y - h_ * k + 12 * k, px - 5 * k, y - h_ * k * 0.2), 3 * k, fill=rig._light(col, 0.35))
-        px = cx + sgn * 214 * k
+        px = cx + sgn * 190 * k
         d.rounded_rectangle((px - 12 * k, y - 24 * k, px + 12 * k, y + 24 * k), 6 * k, fill=INK)
         d.rounded_rectangle((px - 8 * k, y - 20 * k, px + 8 * k, y + 20 * k), 5 * k, fill=(150, 158, 174))
 
@@ -7203,6 +7207,10 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
                 if a_l.get("action") == "sleep" and place == "bedroom":    # im Bett liegt die Figur fest bei x=300 (Kopf links am Kissen), egal wo sie laut Drehbuch steht: Bett samt Kopf im Bild
                     xs = [x_s for x_s in xs if x_s not in (a_l["x1"], a_l["x0"], a_l["x1"] - 200, a_l["x1"] + 60)] + [BED_SPAN[0], BED_SPAN[1]]
                     scene["_no_cut"] = True                                 # kein Gegenschnitt: gespiegelt und näher schnitt er die Liegende am Rand ab
+        for a_l in actors:                                              # Langhantel über dem Kopf (stage._exo_story): samt Scheiben im Bild, kein Sprung auf den Kopf
+            if a_l.get("lift"):
+                xs += [a_l["x1"] - 170, a_l["x1"] + 170]
+                cam["punch"] = None
         for k_b, x_b in props:                                          # Ballon am Boden (Stoffberg, Gondel): ganz im Bild lassen, kein Sprung auf den Kopf
             if extras.PROP_ALIASES.get(k_b, k_b) in extras.BALLOON_KINDS:
                 xs += [max(210, x_b - 260), min(W - 210, x_b + 190)]

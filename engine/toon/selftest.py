@@ -2828,6 +2828,10 @@ def main():
         assert me[1].get("_lift") == "barbell" and not any(a.get("_lift") for a in me[2:]), "Langhantel nur beim Heben"
         assert me[3]["action"] == "walk" and me[4]["action"] == "sad" and me[5]["action"] == "sad", [a["action"] for a in me]
         assert sb[2].get("shot") != "insert" and not any(stage._pkey(q) in stage.EXO_JUNK for sc in sb for q in (sc.get("props") or [])), "kein loser Roboter/Motor/Waage"
+        assert not sb[1].get("props") and not any(str(sc.get("shot") or "") == "event" for sc in sb), "keine zweite Hantel, keine Totale mit winziger Figur"
+        st_ = stage.direct([{"text": "Fazit: keine Superkräfte, aber ein geschonter Rücken.", "place": "lab", "overlay": {"type": "stamp", "text": "GESCHONTER RÜCKEN", "color": "green"},
+                             "actors": [{"id": "du", "action": "talk"}]}], [(0.0, 4.0)], topic_x)
+        assert (st_[0].get("overlay") or {}).get("type") != "stamp", st_[0].get("overlay")
         cast_x = {"du": {"shirt": "rot", "hair": "curly", "gender": "m", "skin": "mittel"}}
         acts_x = stage._prepare(sb[1], cast_x)[3]
         assert acts_x[0]["look"].outfit == "exo" and acts_x[0]["lift"], acts_x[0]
