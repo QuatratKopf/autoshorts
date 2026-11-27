@@ -1,7 +1,7 @@
 {
- "updated": 1795780353.893411,
+ "updated": 1795782223.837835,
  "enough": true,
- "counted": 46,
+ "counted": 47,
  "total": 49,
  "needed": 6,
  "categories": [
@@ -46,9 +46,9 @@
    "name": "🤯 What If",
    "n": 12,
    "avg_views": 1692,
-   "avg_likes": 46.4,
-   "like_rate": 2.74,
-   "avg_score": 2391
+   "avg_likes": 46.5,
+   "like_rate": 2.75,
+   "avg_score": 2392
   },
   {
    "slug": "fakten",
@@ -63,10 +63,10 @@
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 2,
-   "avg_views": 1666,
+   "avg_views": 1672,
    "avg_likes": 35.0,
-   "like_rate": 2.1,
-   "avg_score": 2206
+   "like_rate": 2.09,
+   "avg_score": 2212
   },
   {
    "slug": "storys",
@@ -81,7 +81,7 @@
    "slug": "motivation",
    "name": "🔥 Motivation",
    "n": 2,
-   "avg_views": 1046,
+   "avg_views": 1047,
    "avg_likes": 35.0,
    "like_rate": 3.34,
    "avg_score": 1592
@@ -103,23 +103,32 @@
    "avg_likes": 20.0,
    "like_rate": 4.45,
    "avg_score": 779
+  },
+  {
+   "slug": "nachricht",
+   "name": "📱 Unbekannte Nachricht",
+   "n": 1,
+   "avg_views": 464,
+   "avg_likes": 8.0,
+   "like_rate": 1.72,
+   "avg_score": 584
   }
  ],
  "weights": {
-  "fakten": 1.07,
+  "fakten": 1.09,
   "grusel": 0.5,
-  "tiere": 1.14,
-  "whatif": 1.09,
-  "comedy": 1.37,
-  "vergleich": 1.01,
-  "motivation": 0.73,
+  "tiere": 1.16,
+  "whatif": 1.11,
+  "comedy": 1.39,
+  "vergleich": 1.02,
+  "motivation": 0.74,
   "nachricht": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2286 Aufrufe, 2.05 % Likes).",
-  "Schwächste Kategorie: 👻 Grusel (Ø 449 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2267 zu 1123 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2386 zu 1830 Punkte).",
+  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 464 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2229 zu 1128 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2328 zu 1830 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -128,13 +137,13 @@
  ],
  "words_bad": [
   "remix",
-  "glas",
-  "erkennst",
-  "bekanntes",
   "lied",
+  "erkennst",
+  "glas",
+  "bekanntes",
   "klassikers",
-  "jede",
-  "scheibe"
+  "eines",
+  "jede"
  ],
  "top": [
   {
@@ -190,14 +199,14 @@
  ],
  "flop": [
   {
-   "id": 205,
-   "title": "Starre nie im Dunkeln in den Spiegel",
-   "category": "grusel",
-   "views": 403,
-   "likes": 20,
-   "comments": 2,
+   "id": 221,
+   "title": "Unbekannte Nummer: Verhäng alle Spiegel",
+   "category": "nachricht",
+   "views": 464,
+   "likes": 8,
+   "comments": 0,
    "shares": 0,
-   "score": 763
+   "score": 584
   },
   {
    "id": 196,
