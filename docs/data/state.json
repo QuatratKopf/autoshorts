@@ -1,5 +1,5 @@
 {
- "last_category": "fakten",
+ "last_category": "whatif",
  "done_slots": [
   "2026-11-08 18:00",
   "2026-11-11 18:00",
@@ -68,20 +68,20 @@
   "qa5v1ywsb"
  ],
  "last_stats": 1795793339.7803435,
- "next_id": 228,
+ "next_id": 229,
  "connected": {
   "youtube": {
    "name": "Wissens Wert 💬",
    "since": "2026-11-10"
   }
  },
- "voice_wps": 2.868,
+ "voice_wps": 2.648,
  "last_trends": 1795784015.3242073,
  "tiktok_handle": "wissens..wert",
  "last_poster": {
-  "hero": "",
-  "palette": 3,
-  "video": 227
+  "hero": "robot",
+  "palette": 4,
+  "video": 228
  },
  "cat_credit": {
   "fakten": -5.299999999999997,
