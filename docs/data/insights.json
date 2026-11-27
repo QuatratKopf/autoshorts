@@ -1,5 +1,5 @@
 {
- "updated": 1795803610.7267673,
+ "updated": 1795806582.7080789,
  "enough": true,
  "counted": 48,
  "total": 50,
@@ -81,10 +81,10 @@
    "slug": "motivation",
    "name": "🔥 Motivation",
    "n": 2,
-   "avg_views": 1050,
+   "avg_views": 1054,
    "avg_likes": 35.0,
-   "like_rate": 3.33,
-   "avg_score": 1595
+   "like_rate": 3.32,
+   "avg_score": 1600
   },
   {
    "slug": "musik",
@@ -137,13 +137,13 @@
  ],
  "words_bad": [
   "remix",
+  "glas",
+  "bekanntes",
   "erkennst",
   "lied",
-  "bekanntes",
-  "glas",
-  "scheibe",
-  "klassikers",
-  "jede"
+  "jede",
+  "eines",
+  "scheibe"
  ],
  "top": [
   {
