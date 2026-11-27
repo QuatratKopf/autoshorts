@@ -1,5 +1,5 @@
 {
- "updated": 1795810715.5790658,
+ "updated": 1795812516.3805075,
  "enough": true,
  "counted": 48,
  "total": 51,
@@ -63,10 +63,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 4,
-   "avg_views": 1435,
+   "avg_views": 1443,
    "avg_likes": 35.8,
-   "like_rate": 2.49,
-   "avg_score": 1996
+   "like_rate": 2.48,
+   "avg_score": 2004
   },
   {
    "slug": "storys",
@@ -127,7 +127,7 @@
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2286 Aufrufe, 2.05 % Likes).",
   "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 510 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2194 zu 1140 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2195 zu 1140 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut, vier."
  ],
  "words_good": [
@@ -138,11 +138,11 @@
  "words_bad": [
   "remix",
   "glas",
-  "bekanntes",
   "erkennst",
   "lied",
+  "bekanntes",
+  "jede",
   "scheibe",
-  "eines",
   "klassikers"
  ],
  "top": [
@@ -202,11 +202,11 @@
    "id": 224,
    "title": "Tiefsee-Anglerfisch: Die Falle aus Licht",
    "category": "tiere",
-   "views": 325,
+   "views": 357,
    "likes": 12,
    "comments": 0,
    "shares": 0,
-   "score": 505
+   "score": 537
   },
   {
    "id": 196,
