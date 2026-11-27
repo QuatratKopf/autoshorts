@@ -8729,5 +8729,46 @@
   "yt_thumb_tries": 3,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7712802608406170919?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
+ },
+ {
+  "id": 227,
+  "category": "whatif",
+  "topic": "Was wäre, wenn du mit einem Exoskelett im Alltag Superkräfte hättest?",
+  "status": "review",
+  "created": 1795792216.9679437,
+  "title": "Exoskelett im Alltag: Was passiert wirklich?",
+  "description": "Was wäre, wenn du mit einem Exoskelett Superkräfte hättest?\nErlebe die krassen Folgen für deinen Körper und den Alltag.\nWürdest du mit dem Exoskelett zur Schule oder Arbeit pendeln?",
+  "hashtags": [
+   "#shorts",
+   "#whatif",
+   "#technik",
+   "#wissen",
+   "#zukunft",
+   "#viral",
+   "#fyp"
+  ],
+  "tags": [
+   "exoskelett",
+   "what if deutsch",
+   "superkräfte im alltag",
+   "technik der zukunft",
+   "physik erklärt",
+   "zukunfts-tech",
+   "robotik"
+  ],
+  "thumb_text": "SUPERKRÄFTE IM ALLTAG?",
+  "missing": null,
+  "cover_ms": 74335,
+  "duration": 74.2,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-27 18:00",
+  "review_at": 1795792715.0051248
  }
 ]
