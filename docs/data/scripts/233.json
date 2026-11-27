@@ -1,0 +1,501 @@
+{
+ "title": "Tetris-Effekt: Warum dein Gehirn weiterspielt",
+ "scenes": [
+  {
+   "text": "Du schließt nach Stunden Tetris die Augen und siehst weiter fallende Blöcke.",
+   "see": "Du liegst im Bett und siehst fallende Blöcke",
+   "place": "bedroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "konsole"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sleep",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "TETRIS IM KOPF"
+   }
+  },
+  {
+   "text": "Dieses schräge Phänomen hat sogar einen wissenschaftlichen Namen: Der Tetris-Effekt.",
+   "see": "Grafik zeigt den Namen des Phänomens",
+   "place": "zimmer",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "badge",
+    "kicker": "PHÄNOMEN",
+    "text": "TETRIS-EFFEKT",
+    "dark": false
+   }
+  },
+  {
+   "text": "Am Tag danach räumst du Kartons ein und fragst dich sofort, wie sie ins Supermarktregal passen.",
+   "see": "Du ordnest Kartons im Supermarkt gedanklich ein",
+   "place": "supermarket",
+   "time": "day",
+   "props": [
+    {
+     "type": "shelf"
+    },
+    {
+     "type": "box"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "crowd": "walk"
+  },
+  {
+   "text": "Der früheste bekannte Beleg für diesen Namen ist ein Artikel im Magazin Wired vom Mai 1994.",
+   "see": "Zeitungsausschnitt aus dem Jahr 1994",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "lib_magazin"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "crowd": "walk",
+   "graphic": {
+    "type": "news",
+    "kicker": "WIRED-MAGAZIN",
+    "sub": "Erste Erwähnung des Phänomens",
+    "text": "MAI 1994",
+    "dark": false
+   }
+  },
+  {
+   "text": "Im Jahr 2000 berichteten Schlafforscher im Fachblatt Science über dieses Thema.",
+   "see": "Fachjournal Science mit der Forschungsarbeit",
+   "place": "labor",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "tag",
+    "text": "2000"
+   }
+  },
+  {
+   "text": "Wer tagsüber Tetris gespielt hatte, sah beim Einschlafen wieder fallende Steine.",
+   "see": "Du schläfst und siehst Steine vor Augen",
+   "place": "bedroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sleep",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Sogar Menschen mit schwerem Gedächtnisverlust sahen die Steine.",
+   "see": "Erstaunter Patient mit Gedächtnisverlust",
+   "place": "labor",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense"
+  },
+  {
+   "text": "Obwohl sie sich gar nicht erinnern konnten, das Spiel jemals gespielt zu haben.",
+   "see": "Du schüttelst ratlos den Kopf vor der Konsole",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Dein Gehirn übt Gelerntes beim Einschlafen einfach unbewusst weiter.",
+   "see": "Das Gehirn trainiert fleißig im Schlaf",
+   "place": "bedroom",
+   "time": "night",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "run",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "small": true
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "note",
+    "title": "GEHIRN-UPDATE",
+    "text": "Übt automatisch im Schlaf"
+   }
+  },
+  {
+   "text": "Es nutzt dafür das Gedächtnis für Abläufe, nicht die bewusste Erinnerung.",
+   "see": "Das Gehirn verarbeitet Abläufe",
+   "place": "lab",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "point",
+     "emotion": "",
+     "emote": "idea",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Nach drei Monaten Tetris war die Hirnrinde der Testpersonen messbar dicker.",
+   "see": "Zähler zeigt drei Monate Training",
+   "place": "labor",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "number",
+    "kicker": "STUDIEN-ERGEBNIS",
+    "value": "3 MONATE",
+    "label": "HIRNRINDE MESSBAR DICKER",
+    "dark": false
+   }
+  },
+  {
+   "text": "Forscher nennen solche Effekte heute ganz offiziell Game Transfer Phenomena.",
+   "see": "Einblenden des Fachbegriffs",
+   "place": "lab",
+   "time": "day",
+   "props": [
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "GAME TRANSFER"
+   }
+  },
+  {
+   "text": "Spieler hören plötzlich Musik im Kopf oder sehen Symbole in der Luft schweben.",
+   "see": "Du gehst auf der Straße und siehst schwebende Spiel-Symbole",
+   "place": "street",
+   "backdrop": {
+    "sky": "",
+    "ground": "road",
+    "elements": [
+     "city"
+    ]
+   },
+   "time": "day",
+   "props": [
+    {
+     "type": "markers"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "point",
+     "emotion": "shocked",
+     "emote": "music",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "crowd": "worried"
+  },
+  {
+   "text": "Du denkst, das ist nur eine Spielerei? Falsch, man kann es medizinisch nutzen.",
+   "see": "Du schüttelst den Kopf zur Überraschung",
+   "place": "labor",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "worried",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense",
+   "overlay": {
+    "type": "stamp",
+    "text": "FALSCH",
+    "color": "red"
+   }
+  },
+  {
+   "text": "In einer Studie mit einundsiebzig Unfallopfern spielte die Hälfte direkt in der Notaufnahme Tetris.",
+   "see": "Du sitzt in der Notaufnahme und spielst auf der Konsole",
+   "place": "hospital",
+   "time": "day",
+   "props": [
+    {
+     "type": "konsole"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "crowd": "worried",
+   "overlay": {
+    "type": "card",
+    "text": "71 UNFALLOPFER"
+   }
+  },
+  {
+   "text": "Das Spiel musste innerhalb von sechs Stunden nach dem Unfall gestartet werden.",
+   "see": "Ein Countdown zeigt sechs Stunden",
+   "place": "hospital",
+   "time": "day",
+   "props": [
+    {
+     "type": "clock"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "crowd": "worried",
+   "graphic": {
+    "type": "number",
+    "value": "6",
+    "label": "STUNDEN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Wer spielte, hatte danach messbar weniger belastende Erinnerungsbilder an das Ereignis.",
+   "see": "Vergleichsdiagramm zeigt weniger belastende Erinnerungen",
+   "place": "hospital",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Die fallenden Blöcke sind also kein Schaden, sondern ein klares Zeichen für ein lernendes Gehirn.",
+   "see": "Das Gehirn freut sich über den Lernerfolg",
+   "place": "bedroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "gehirn",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "stamp",
+    "text": "GEHIRN LERNT",
+    "color": "green"
+   }
+  },
+  {
+   "text": "Welches Spiel hat dich schon mal bis in den Schlaf verfolgt?",
+   "see": "Du sitzt zufrieden im Bett und zockst weiter",
+   "place": "bedroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "konsole"
+    },
+    {
+     "type": "computer"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "sit",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  }
+ ]
+}
