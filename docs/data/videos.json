@@ -8725,8 +8725,9 @@
   "tt_status": "Zernio: published",
   "tt_publish_id": "zernio:6b09610ca7efa1d4ae482a22",
   "error": null,
-  "yt_thumb_at": 1795778549.8321874,
-  "yt_thumb_tries": 1,
-  "yt_thumb": "('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))"
+  "yt_thumb_at": 1795780352.289677,
+  "yt_thumb_tries": 2,
+  "yt_thumb": "('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))",
+  "tt_url": "https://www.tiktok.com/@wissens..wert/video/7712802608406170919?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
  }
 ]
