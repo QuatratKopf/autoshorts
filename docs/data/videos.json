@@ -8948,5 +8948,45 @@
   "slot": "2026-11-27 21:00",
   "review_at": 1795803263.6305008,
   "error": "Bei der Prüfung verworfen: Thema nie im Bild (keine fallenden Bausteine), Drehbuch mit unbelegten Angaben (Forscher 1994, Zwei-Stunden-Regel), leerer Schlusssatz"
+ },
+ {
+  "id": 232,
+  "category": "fakten",
+  "topic": "Der Tetris-Effekt: Warum dein Gehirn nach dem Zocken einfach weiterspielt – Vorgaben als Stichpunkte, nicht wörtlich abschreiben, in Du-Form erzählen, jeder Satz mit neuem Inhalt, in jeder Szene tut die Figur etwas. Nur diese geprüften Fakten in dieser Reihenfolge: 1) Einstieg: Du schließt nach Stunden Tetris die Augen, und vor deinem inneren Auge fallen weiter bunte Blöcke. 2) Das hat einen Namen: Tetris-Effekt. 3) Am Tag danach überlegst du im Supermarkt, wie die Kartons lückenlos ins Regal passen. 4) Der früheste bekannte Beleg für den Namen ist ein Artikel im Magazin Wired vom Mai 1994. 5) Im Jahr 2000 berichteten Schlafforscher im Fachblatt Science: Wer tagsüber Tetris gespielt hatte, sah beim Einschlafen fallende Steine. 6) Das Verblüffende daran: Sogar Menschen mit schwerem Gedächtnisverlust sahen die Steine, obwohl sie sich gar nicht erinnern konnten, das Spiel gespielt zu haben. 7) Erklärung der Forscher: Dein Gehirn übt Gelerntes beim Einschlafen weiter, vermutlich über das Gedächtnis für Abläufe und Können, nicht über bewusste Erinnerung. 8) Eine weitere Studie: Nach drei Monaten Tetris war die Hirnrinde der Testpersonen an einer Stelle messbar dicker. 9) Das gibt es auch bei anderen Spielen, Forscher nennen es Game Transfer Phenomena: Spieler berichten, dass sie die Musik des Spiels noch im Kopf hören und auf der Straße kurz Symbole aus dem Spiel in der Luft schweben sehen. 10) Der Effekt lässt sich sogar nutzen: In einer Studie des Karolinska-Instituts und der Universität Oxford mit einundsiebzig Unfallopfern spielte die Hälfte in der Notaufnahme innerhalb von sechs Stunden nach dem Unfall Tetris. 11) Ergebnis: Wer gespielt hatte, hatte in der Woche danach weniger belastende Erinnerungsbilder an den Unfall als die Vergleichsgruppe. 12) Fazit: Die fallenden Blöcke sind kein Schaden, sondern ein Zeichen dafür, dass dein Gehirn lernt. Schlussfrage an die Zuschauer: Welches Spiel hat dich schon mal bis in den Schlaf verfolgt? Keine anderen Zahlen und keine Prozentangaben. Jahreszahlen nur 1994 und 2000, keine anderen Jahreszahlen. Verboten: achtzig Prozent, Zwei-Stunden-Regel, Pausenregel, Blick ins Grüne, Dauerfeuer, Denkorgan, Lebensbalken, Minimap, Personennamen, Sätze ohne Inhalt wie „genau deshalb schaust du wieder hin“. Das Gehirn als eigene Figur höchstens in zwei Szenen. Titel: Tetris-Effekt: Warum dein Gehirn weiterspielt. Titelbild-Text: GEHIRN SPIELT WEITER",
+  "status": "rendered",
+  "created": 1795805976.770619,
+  "title": "Tetris-Effekt: Warum dein Gehirn weiterspielt",
+  "description": "Zockst du abends so lange, bis du die Steine im Schlaf siehst?\nDas Phänomen ist wissenschaftlich erforscht und verändert dein Gehirn messbar.\nWelches Spiel hat dich schon mal bis in den Schlaf verfolgt?",
+  "hashtags": [
+   "#shorts",
+   "#gaming",
+   "#tetris",
+   "#fakten",
+   "#wissenschaft",
+   "#gehirn",
+   "#psychologie",
+   "#viral"
+  ],
+  "tags": [
+   "tetris effekt",
+   "gaming fakten",
+   "gehirn spiel",
+   "schlafforschung",
+   "game transfer phenomena",
+   "tetris",
+   "traum gaming"
+  ],
+  "thumb_text": "GEHIRN SPIELT WEITER",
+  "missing": null,
+  "cover_ms": 82199,
+  "duration": 82.1,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
