@@ -1,759 +1,4 @@
 {
- "2026-11-26 13:00": {
-  "category": "motivation",
-  "topic": "Fang an, bevor du bereit bist",
-  "trend": null,
-  "script": {
-   "title": "Fang an, bevor du bereit bist",
-   "description": "Du bist nicht faul, du wartest nur auf den perfekten Moment.\nWarum Mut erst nach dem ersten Schritt kommt – und drei winzige Schritte, mit denen du heute anfängst.\nWas ist dein erster kleiner Schritt?",
-   "hashtags": [
-    "#shorts",
-    "#motivation",
-    "#anfangen",
-    "#disziplin",
-    "#mut",
-    "#selbstvertrauen",
-    "#erfolg",
-    "#fyp"
-   ],
-   "tags": [
-    "motivation",
-    "anfangen",
-    "aufschieben",
-    "prokrastination",
-    "erster schritt",
-    "mut",
-    "disziplin",
-    "motivation deutsch"
-   ],
-   "thumbnail": {
-    "image": "A determined young person standing at the foot of a mountain at sunrise, empty space at the top.",
-    "text": "FANG EINFACH AN",
-    "place": "mountain",
-    "time": "day",
-    "actor": "du",
-    "action": "point",
-    "emotion": "happy",
-    "props": [],
-    "weather": ""
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "blau",
-     "hat": "",
-     "hair": "short",
-     "hair_color": "schwarz",
-     "gender": "m",
-     "skin": "hell"
-    }
-   },
-   "scenes": [
-    {
-     "see": "Du stehst im Wohnzimmer und grübelst.",
-     "text": "Du bist nicht faul. Du wartest nur auf den perfekten Moment.",
-     "image": "Du stehst im Wohnzimmer und grübelst.",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "nicht faul",
-      "perfekten Moment"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "think",
-       "emotion": "worried",
-       "emote": "",
-       "pos": "center",
-       "speaks": true,
-       "hold": ""
-      }
-     ],
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "mood": "tense",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du liegst nachts wach im Bett, das Handy leuchtet dir ins Gesicht.",
-     "text": "Nachts liegst du wach im Bett und starrst auf das Handy.",
-     "image": "Du liegst nachts wach im Bett, das Handy leuchtet dir ins Gesicht.",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "wach",
-      "Handy"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "idle",
-       "emotion": "",
-       "emote": "",
-       "pos": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "time": "night",
-     "weather": "",
-     "props": [
-      "phone"
-     ],
-     "mood": "tense",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du stehst im dunklen Schlafzimmer und nickst entschlossen.",
-     "text": "Du nimmst dir fest vor, morgen endlich anzufangen.",
-     "image": "Du stehst im dunklen Schlafzimmer und nickst entschlossen.",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "morgen"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true,
-       "hold": ""
-      }
-     ],
-     "time": "night",
-     "weather": "",
-     "props": [],
-     "mood": "calm",
-     "shot": "close",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Wecker klingelt, du schreckst hoch.",
-     "text": "Am Morgen klingelt der Wecker, und die alte Ausrede ist sofort wieder da.",
-     "image": "Der Wecker klingelt, du schreckst hoch.",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "camera": "still",
-     "sfx": "tick",
-     "highlight": [
-      "Wecker",
-      "Ausrede"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "",
-       "pos": "center",
-       "speaks": true,
-       "hold": ""
-      }
-     ],
-     "time": "day",
-     "weather": "",
-     "props": [
-      "wecker"
-     ],
-     "mood": "tense",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du stehst zögernd vor der geschlossenen Tür im Wohnzimmer.",
-     "text": "Du stehst vor der Tür und traust dich nicht hindurch.",
-     "image": "Du stehst zögernd vor der geschlossenen Tür im Wohnzimmer.",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Tür"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "cower",
-       "emotion": "scared",
-       "emote": "",
-       "pos": "center",
-       "speaks": true,
-       "hold": ""
-      }
-     ],
-     "time": "day",
-     "weather": "",
-     "props": [
-      "door"
-     ],
-     "mood": "tense",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du stehst im Büro und grübelst.",
-     "text": "Du wartest auf mehr Mut, mehr Zeit und den besseren Plan.",
-     "image": "Du stehst im Büro und grübelst.",
-     "who": [
-      "du"
-     ],
-     "place": "office",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Mut",
-      "Zeit",
-      "Plan"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "think",
-       "emotion": "worried",
-       "emote": "",
-       "pos": "center",
-       "speaks": true,
-       "hold": ""
-      }
-     ],
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "mood": "calm",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du stehst am Fuß des Berges und schaust dich suchend um.",
-     "text": "Aber der perfekte Moment kommt nie von allein.",
-     "image": "Du stehst am Fuß des Berges und schaust dich suchend um.",
-     "who": [
-      "du"
-     ],
-     "place": "mountain",
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "nie"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "look_around",
-       "emotion": "worried",
-       "emote": "",
-       "pos": "center",
-       "speaks": true,
-       "hold": ""
-      }
-     ],
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "mood": "tense",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du stehst am Berg, deine Hände zittern.",
-     "text": "Niemand fühlt sich wirklich bereit für den ersten Schritt.",
-     "image": "Du stehst am Berg, deine Hände zittern.",
-     "who": [
-      "du"
-     ],
-     "place": "mountain",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Niemand",
-      "bereit"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "tremble",
-       "emotion": "scared",
-       "emote": "",
-       "pos": "center",
-       "speaks": true,
-       "hold": ""
-      }
-     ],
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "mood": "tense",
-     "shot": "close",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du gehst unsicher die Straße entlang.",
-     "text": "Die anderen gehen trotzdem los, auch mit weichen Knien.",
-     "image": "Du gehst unsicher die Straße entlang.",
-     "who": [
-      "du"
-     ],
-     "place": "street",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "trotzdem",
-      "weichen Knien"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "walk",
-       "emotion": "worried",
-       "emote": "",
-       "pos": "left",
-       "speaks": true,
-       "hold": "",
-       "to": "right"
-      }
-     ],
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "mood": "calm",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du gehst auf dem Bergweg los und lächelst.",
-     "text": "Mut kommt erst nach dem ersten Schritt, niemals davor.",
-     "image": "Du gehst auf dem Bergweg los und lächelst.",
-     "who": [
-      "du"
-     ],
-     "place": "mountain",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Mut",
-      "niemals davor"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "walk",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "left",
-       "speaks": true,
-       "hold": "",
-       "to": "center"
-      }
-     ],
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "mood": "happy",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du stehst im Park und zeigst nach vorn.",
-     "text": "Hier sind drei winzige Schritte für deinen Anfang.",
-     "image": "Du stehst im Park und zeigst nach vorn.",
-     "who": [
-      "du"
-     ],
-     "place": "park",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "drei",
-      "winzige"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true,
-       "hold": ""
-      }
-     ],
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "mood": "happy",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du rennst fröhlich durch den Park.",
-     "text": "Erstens: Zieh die Laufschuhe an und lauf nur zwei Minuten.",
-     "image": "Du rennst fröhlich durch den Park.",
-     "who": [
-      "du"
-     ],
-     "place": "park",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Laufschuhe",
-      "zwei Minuten"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "run",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "left",
-       "speaks": true,
-       "hold": "",
-       "to": "right"
-      }
-     ],
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "mood": "happy",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du stehst im Büro und hältst ein aufgeschlagenes Buch.",
-     "text": "Zweitens: Schlag das Buch auf und lies genau eine Seite.",
-     "image": "Du stehst im Büro und hältst ein aufgeschlagenes Buch.",
-     "who": [
-      "du"
-     ],
-     "place": "office",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "Buch",
-      "eine Seite"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "idle",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true,
-       "hold": "lehrbuch"
-      }
-     ],
-     "time": "day",
-     "weather": "",
-     "props": [
-      "lehrbuch"
-     ],
-     "mood": "calm",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du stehst im Wohnzimmer und telefonierst mit dem Handy am Ohr.",
-     "text": "Drittens: Mach den einen Anruf, vor dem du dich drückst.",
-     "image": "Du stehst im Wohnzimmer und telefonierst mit dem Handy am Ohr.",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "Anruf"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true,
-       "hold": "call"
-      }
-     ],
-     "time": "day",
-     "weather": "",
-     "props": [
-      "phone"
-     ],
-     "mood": "calm",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du rennst mit Schwung durch den Park.",
-     "text": "Wer einmal angefangen hat, will plötzlich weitermachen.",
-     "image": "Du rennst mit Schwung durch den Park.",
-     "who": [
-      "du"
-     ],
-     "place": "park",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "angefangen",
-      "weitermachen"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "run",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "left",
-       "speaks": true,
-       "hold": "",
-       "to": "right"
-      }
-     ],
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "mood": "happy",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du gehst im Wohnzimmer entschlossen auf die Tür zu.",
-     "text": "Dann gehst du entschlossen durch die Tür.",
-     "image": "Du gehst im Wohnzimmer entschlossen auf die Tür zu.",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Tür"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "walk",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "left",
-       "speaks": true,
-       "hold": "",
-       "to": "center"
-      }
-     ],
-     "time": "day",
-     "weather": "",
-     "props": [
-      "door"
-     ],
-     "mood": "happy",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du stehst auf dem Berg und winkst.",
-     "text": "Und irgendwann stehst du dort, wo du immer hinwolltest.",
-     "image": "Du stehst auf dem Berg und winkst.",
-     "who": [
-      "du"
-     ],
-     "place": "mountain",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "dort"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "wave",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true,
-       "hold": ""
-      }
-     ],
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "mood": "happy",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du springst auf dem Berg jubelnd in die Luft.",
-     "text": "Nicht morgen. Nicht nächste Woche. Fang jetzt an.",
-     "image": "Du springst auf dem Berg jubelnd in die Luft.",
-     "who": [
-      "du"
-     ],
-     "place": "mountain",
-     "camera": "still",
-     "sfx": "whoosh",
-     "highlight": [
-      "Nicht morgen",
-      "jetzt"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "jump",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true,
-       "hold": ""
-      }
-     ],
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "mood": "happy",
-     "shot": "close",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du stehst im Park, hältst das Handy hoch und lächelst.",
-     "text": "Speicher dir das für die harten Tage.",
-     "image": "Du stehst im Park, hältst das Handy hoch und lächelst.",
-     "who": [
-      "du"
-     ],
-     "place": "park",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Speicher",
-      "harten Tage"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "time": "day",
-     "weather": "",
-     "props": [],
-     "mood": "calm",
-     "shot": "wide",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    }
-   ]
-  },
-  "provider": "Plan",
-  "remake": false,
-  "needs": [],
-  "title": "Fang an, bevor du bereit bist",
-  "created": 1795690719.1469703
- },
  "2026-11-26 18:00": {
   "category": "nachricht",
   "topic": "Eine unbekannte Nummer schickt dir einen Countdown und befiehlt dir, alle Spiegel in deiner Wohnung abzuhängen – bis du in einem Spiegel eine Bewegung siehst, die du nicht gemacht hast.",
@@ -3112,5 +2357,663 @@
   ],
   "title": "Mein Wecker terrorisiert mich jeden Tag",
   "created": 1795717195.6586645
+ },
+ "2026-11-27 18:00": {
+  "category": "whatif",
+  "topic": "Was wäre, wenn du mit einem Exoskelett im Alltag Superkräfte hättest?",
+  "trend": null,
+  "script": {
+   "title": "Exoskelett im Alltag: Was passiert wirklich?",
+   "description": "Was wäre, wenn du mit einem Exoskelett Superkräfte hättest?\nErlebe die krassen Folgen für deinen Körper und den Alltag.\nWürdest du mit dem Exoskelett zur Schule oder Arbeit pendeln?",
+   "hashtags": [
+    "#shorts",
+    "#whatif",
+    "#technik",
+    "#wissen",
+    "#zukunft",
+    "#viral",
+    "#fyp"
+   ],
+   "tags": [
+    "exoskelett",
+    "what if deutsch",
+    "superkräfte im alltag",
+    "technik der zukunft",
+    "physik erklärt",
+    "zukunfts-tech",
+    "robotik"
+   ],
+   "thumbnail": {
+    "image": "Close-up of a young person in a high-tech robotic suit easily lifting a car above their head in a city street, wide eyes, super cool dramatic look, dynamic pose.",
+    "text": "SUPERKRÄFTE IM ALLTAG?"
+   },
+   "wishes": [
+    "autoschlüssel"
+   ],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "rot",
+     "hair": "curly",
+     "hair_color": "dunkelbraun",
+     "gender": "m",
+     "skin": "mittel"
+    }
+   },
+   "scenes": [
+    {
+     "see": "Du ziehst das Exoskelett im Zimmer an.",
+     "text": "Ein Exoskelett im Alltag verleiht dir sofort echte Superkräfte.",
+     "image": "Young man putting on a metallic robotic suit in his bedroom, looking excited.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "Exoskelett",
+      "Superkräfte"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "TAG 1"
+     },
+     "actors": [
+      {
+       "id": "du",
+       "action": "float",
+       "emotion": "happy",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "happy",
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Versprechen, dass der Alltag komplett ins Chaos kippt.",
+     "text": "Doch schon nach wenigen Stunden verwandelt sich deine neue Macht in ein absolutes Chaos.",
+     "image": "Young man in robotic suit looking shocked in his room as light flashes.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Chaos"
+     ],
+     "overlay": null,
+     "props": [
+      "box",
+      "chair"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "In den ersten Sekunden sprintest du unfassbar schnell auf der Straße.",
+     "text": "In den ersten Sekunden rennst du locker fünfzig Kilometer pro Stunde schnell.",
+     "image": "Man in suit sprinting extremely fast down a city street, motion blur.",
+     "who": [
+      "du"
+     ],
+     "place": "street",
+     "camera": "pan_right",
+     "sfx": "whoosh",
+     "highlight": [
+      "fünfzig Kilometer"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "50 KM/H"
+     },
+     "props": [
+      "car"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "run",
+       "emotion": "happy",
+       "pos": "left",
+       "to": "right",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "happy",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du springst ohne Mühe über ein parkendes Auto.",
+     "text": "Ein Sprung über ein stehendes Auto fühlt sich an wie ein kleiner Hüpfer.",
+     "image": "Man in suit jumping high over a car on the street.",
+     "who": [
+      "du"
+     ],
+     "place": "street",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "Auto"
+     ],
+     "overlay": null,
+     "props": [
+      "car"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "jump",
+       "emotion": "happy",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "happy",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik zeigt die immense Motorleistung der Roboter-Gelenke.",
+     "text": "Die Motoren an deinen Gelenken verstärken deine Muskelkraft um das Zehnfache.",
+     "image": "Graphic showing robotic joint motors amplifying force vector.",
+     "who": [],
+     "place": "lab",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Zehnfache"
+     ],
+     "overlay": {
+      "type": "compare",
+      "left": "NORMAL",
+      "right": "SUIT",
+      "value": "100%",
+      "sub": "1000%"
+     },
+     "actors": [],
+     "shot": "graphic",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Im Supermarkt hebst du versehentlich ein ganzes Regal an.",
+     "text": "Aber im Supermarkt drückst du eine Türklinke mit so viel Kraft ab, dass sie abbricht.",
+     "image": "Man holding a broken door handle in a supermarket, looking panicked.",
+     "who": [
+      "du"
+     ],
+     "place": "supermarket",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "abbricht"
+     ],
+     "overlay": null,
+     "props": [
+      "door"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik zur extrem schockierenden Schmerz-Reaktion des Gehirns.",
+     "text": "Nach wenigen Stunden spürst du schwere Rückenschmerzen trotz der Unterstützung.",
+     "image": "Diagram of a human spine glowing red from heavy stress.",
+     "who": [],
+     "place": "bedroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Schmerzen"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "RÜCKEN-BELASTUNG"
+     },
+     "actors": [
+      {
+       "id": "du",
+       "action": "cower",
+       "emotion": "sad",
+       "emote": "sweat",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "sad",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du denkst, das Exoskelett trägt dein gesamtes Gewicht von alleine.",
+     "text": "Du denkst, die Maschine nimmt deinem Körper die ganze Arbeit ab.",
+     "image": "Man standing comfortably inside suit looking confident.",
+     "who": [
+      "du"
+     ],
+     "place": "street",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Arbeit"
+     ],
+     "overlay": null,
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Finte: Die Sehnen und Knochen tragen die Quetschung troztdem.",
+     "text": "Falsch, deine Knochen tragen die Last am Ende trotzdem mit.",
+     "image": "X-ray view of bones under pressure inside the suit.",
+     "who": [],
+     "place": "lab",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "Knochen"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "FALSCH",
+      "color": "red"
+     },
+     "actors": [
+      {
+       "id": "du",
+       "action": "fall",
+       "emotion": "scared",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Akku-Stand der Rüstung fällt im Sturzflug ab.",
+     "text": "Nach drei Tagen ist der riesige Akku dauerhaft komplett leer.",
+     "image": "Close up on a battery indicator flashing red at zero percent.",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "camera": "still",
+     "sfx": "beep",
+     "highlight": [
+      "leer"
+     ],
+     "overlay": {
+      "type": "bar",
+      "label": "AKKU",
+      "value": 0
+     },
+     "actors": [],
+     "shot": "graphic",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du bleibst mitten auf der Straße wie gelähmt stehen.",
+     "text": "Ohne Strom wiegt der Anzug achtzig Kilo und drückt dich gnadenlos zu Boden.",
+     "image": "Man stuck frozen under heavy iron suit on sidewalk, unable to move.",
+     "who": [
+      "du"
+     ],
+     "place": "street",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "achtzig Kilo"
+     ],
+     "overlay": {
+      "type": "counter",
+      "label": "GEWICHT",
+      "value": 80,
+      "unit": "KG"
+     },
+     "actors": [
+      {
+       "id": "du",
+       "action": "cower",
+       "emotion": "sad",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "sad",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik zur weltweiten Stromversorgungs-Krise durch Roboter-Anzüge.",
+     "text": "Wenn alle Menschen ein Exoskelett nutzen, bricht das Stromnetz weltweit zusammen.",
+     "image": "World map with power grids turning off into darkness.",
+     "who": [],
+     "place": "worldmap",
+     "camera": "still",
+     "sfx": "boom",
+     "highlight": [
+      "Stromnetz"
+     ],
+     "overlay": {
+      "type": "city",
+      "kicker": "BLACKOUT",
+      "text": "STROMNETZ ÜBERLASTET",
+      "dark": true
+     },
+     "actors": [],
+     "shot": "graphic",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Nach Wochen haben sich deine eigenen Muskeln abgebaut.",
+     "text": "Nach wenigen Wochen schrumpfen deine eigenen Muskeln dramatisch zusammen.",
+     "image": "Man looking thin and weak while taking off suit.",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Muskeln"
+     ],
+     "overlay": {
+      "type": "days",
+      "text": "MUSKEL-ABBAU",
+      "value": 30,
+      "sub": 30,
+      "label": "TAG 30"
+     },
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "worried",
+       "emote": "sweat",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "sad",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn hat das Gefühl für normale Kraft verlernt.",
+     "text": "Weil du dich nicht mehr anstrengst, verlernt dein Gehirn die Muskelsteuerung.",
+     "image": "Brain character looking confused with loose electrical wires.",
+     "who": [],
+     "place": "lab",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Muskelsteuerung"
+     ],
+     "overlay": null,
+     "actors": [
+      {
+       "id": "du",
+       "action": "freeze",
+       "emotion": "shocked",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Rehook: Eine ungeklärte Frage zur Haltbarkeit der Gelenke.",
+     "text": "Bleibt die Frage, wie man die schwere Rüstung überhaupt aufladen soll.",
+     "image": "Man holding a tiny charging cable next to huge suit socket.",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "aufladen"
+     ],
+     "overlay": {
+      "type": "question",
+      "text": "WIE AUFLADEN?"
+     },
+     "actors": [],
+     "shot": "graphic",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Der Stromverbrauch entspricht einem ganzen Haushalts-Monat.",
+     "text": "Ein einziger Ladevorgang frisst extrem viel Strom und braucht Stunden.",
+     "image": "Electricity meter spinning extremely fast with red warning lights.",
+     "who": [],
+     "place": "lab",
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "Haushalts-Monat"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "HOHER STROMVERBRAUCH"
+     },
+     "props": [
+      "generator"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "worried",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du schaffst es kaum noch, ein normales Glas Wasser zu heben.",
+     "text": "Ohne die Hilfe der Hydraulik kannst du nicht mal eine Sprudelflasche öffnen.",
+     "image": "Man struggling weakness to open a simple water bottle.",
+     "who": [
+      "du"
+     ],
+     "place": "kitchen",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Sprudelflasche"
+     ],
+     "overlay": null,
+     "actors": [
+      {
+       "id": "du",
+       "action": "tremble",
+       "hold": "bottle",
+       "emotion": "sad",
+       "emote": "sweat",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "sad",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du stehst erschöpft vor deinem Anzug im Zimmer.",
+     "text": "Die vermeintliche Superkraft macht deinen eigenen Körper also absolut hilflos.",
+     "image": "Man looking exhausted next to standing exoskeleton suit.",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "hilflos"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "FAZIT",
+      "color": "orange"
+     },
+     "actors": [
+      {
+       "id": "du",
+       "action": "fall",
+       "emotion": "sad",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "sad",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Schluss-Satz führt direkt wieder nahtlos zum Hook-Anfang.",
+     "text": "Genau deshalb fragst du dich wieder von vorne.",
+     "image": "Man looking thoughtfully directly into camera lens.",
+     "who": [
+      "du"
+     ],
+     "place": "bedroom",
+     "camera": "zoom_out",
+     "sfx": "whoosh",
+     "highlight": [
+      "vorne"
+     ],
+     "overlay": null,
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "exoskelett",
+   "akku"
+  ],
+  "title": "Exoskelett im Alltag: Was passiert wirklich?",
+  "created": 1795774813.3757632
  }
 }
