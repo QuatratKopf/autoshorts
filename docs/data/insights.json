@@ -1,5 +1,5 @@
 {
- "updated": 1795806582.7080789,
+ "updated": 1795808737.4725997,
  "enough": true,
  "counted": 48,
  "total": 50,
@@ -36,37 +36,37 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 12,
-   "avg_views": 1693,
-   "avg_likes": 46.8,
-   "like_rate": 2.76,
-   "avg_score": 2397
+   "avg_views": 1694,
+   "avg_likes": 46.7,
+   "like_rate": 2.75,
+   "avg_score": 2396
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 8,
-   "avg_views": 1668,
+   "avg_views": 1670,
    "avg_likes": 44.6,
-   "like_rate": 2.68,
-   "avg_score": 2349
+   "like_rate": 2.67,
+   "avg_score": 2350
   },
   {
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 2,
-   "avg_views": 1684,
-   "avg_likes": 35.5,
-   "like_rate": 2.11,
-   "avg_score": 2232
+   "avg_views": 1714,
+   "avg_likes": 36.0,
+   "like_rate": 2.1,
+   "avg_score": 2269
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 4,
-   "avg_views": 1436,
+   "avg_views": 1442,
    "avg_likes": 35.8,
-   "like_rate": 2.49,
-   "avg_score": 1998
+   "like_rate": 2.48,
+   "avg_score": 2004
   },
   {
    "slug": "storys",
@@ -108,26 +108,26 @@
    "slug": "nachricht",
    "name": "📱 Unbekannte Nachricht",
    "n": 1,
-   "avg_views": 485,
+   "avg_views": 528,
    "avg_likes": 8.0,
-   "like_rate": 1.65,
-   "avg_score": 605
+   "like_rate": 1.52,
+   "avg_score": 648
   }
  ],
  "weights": {
   "fakten": 1.1,
   "grusel": 0.5,
   "tiere": 0.94,
-  "whatif": 1.13,
+  "whatif": 1.12,
   "comedy": 1.41,
-  "vergleich": 1.05,
+  "vergleich": 1.07,
   "motivation": 0.75,
   "nachricht": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2286 Aufrufe, 2.05 % Likes).",
-  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 485 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2193 zu 1145 Punkte).",
+  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 528 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2196 zu 1142 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut, vier."
  ],
  "words_good": [
@@ -139,11 +139,11 @@
   "remix",
   "glas",
   "bekanntes",
-  "erkennst",
   "lied",
-  "jede",
+  "erkennst",
   "eines",
-  "scheibe"
+  "klassikers",
+  "jede"
  ],
  "top": [
   {
@@ -202,11 +202,11 @@
    "id": 224,
    "title": "Tiefsee-Anglerfisch: Die Falle aus Licht",
    "category": "tiere",
-   "views": 330,
+   "views": 354,
    "likes": 12,
    "comments": 0,
    "shares": 0,
-   "score": 510
+   "score": 534
   },
   {
    "id": 196,
