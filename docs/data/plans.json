@@ -1456,644 +1456,514 @@
   "trend": null,
   "script": {
    "title": "Exoskelett im Alltag: Was passiert wirklich?",
-   "description": "Was wäre, wenn du mit einem Exoskelett Superkräfte hättest?\nErlebe die krassen Folgen für deinen Körper und den Alltag.\nWürdest du mit dem Exoskelett zur Schule oder Arbeit pendeln?",
+   "description": "Was passiert wirklich, wenn du ein Exoskelett trägst?\nErfahre die echten Fakten zu Technik und Alltag.\nWürdest du so einen Anzug anziehen?",
    "hashtags": [
     "#shorts",
-    "#whatif",
-    "#technik",
-    "#wissen",
+    "#tech",
+    "#wissenschaft",
     "#zukunft",
-    "#viral",
-    "#fyp"
+    "#exoskelett",
+    "#technik",
+    "#fyp",
+    "#viral"
    ],
    "tags": [
     "exoskelett",
-    "what if deutsch",
-    "superkräfte im alltag",
-    "technik der zukunft",
-    "physik erklärt",
-    "zukunfts-tech",
-    "robotik"
+    "sarcos guardian xo",
+    "superkräfte",
+    "Exoskelett",
+    "stanford stiefel",
+    "tu graz",
+    "technik zukunft",
+    "what if deutsch"
    ],
    "thumbnail": {
     "image": "Close-up of a young person in a high-tech robotic suit easily lifting a car above their head in a city street, wide eyes, super cool dramatic look, dynamic pose.",
     "text": "SUPERKRÄFTE IM ALLTAG?"
    },
-   "wishes": [
-    "autoschlüssel"
-   ],
+   "wishes": [],
    "toon": true,
    "cast": {
     "du": {
-     "shirt": "rot",
-     "hair": "curly",
-     "hair_color": "dunkelbraun",
-     "gender": "m",
+     "shirt": "gelb",
+     "hair": "long",
+     "hair_color": "schwarz",
+     "gender": "w",
      "skin": "mittel"
     }
    },
    "scenes": [
     {
-     "see": "Du ziehst das Exoskelett im Zimmer an.",
-     "text": "Ein Exoskelett im Alltag verleiht dir sofort echte Superkräfte.",
-     "image": "Young man putting on a metallic robotic suit in his bedroom, looking excited.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "Exoskelett",
-      "Superkräfte"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "TAG 1"
-     },
+     "text": "Mit diesem Exoskelett stemmst du spielend eine schwere Langhantel.",
+     "see": "Du schnallst dir ein Exoskelett um und hebst mühelos eine schwere Hantel.",
+     "place": "labor",
+     "time": "day",
+     "props": [],
      "actors": [
       {
        "id": "du",
-       "action": "float",
+       "speaks": true,
+       "action": "idle",
        "emotion": "happy",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
+       "emote": "",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
       }
      ],
-     "shot": "wide",
-     "mood": "happy",
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
+     "mood": "happy"
     },
     {
-     "see": "Ein Versprechen, dass der Alltag komplett ins Chaos kippt.",
-     "text": "Doch schon nach wenigen Stunden verwandelt sich deine neue Macht in ein absolutes Chaos.",
-     "image": "Young man in robotic suit looking shocked in his room as light flashes.",
-     "who": [
-      "du"
-     ],
-     "place": "zimmer",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Chaos"
-     ],
-     "overlay": null,
-     "props": [
-      "box",
-      "chair"
-     ],
+     "text": "Aber verleiht dir die Technik wirklich echte Superkräfte für deinen Alltag?",
+     "see": "Das riesige Exoskelett Sarcos Guardian XO steht im Testraum.",
+     "place": "labor",
+     "time": "day",
      "actors": [
       {
        "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "panic",
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "In den ersten Sekunden sprintest du unfassbar schnell auf der Straße.",
-     "text": "In den ersten Sekunden rennst du locker fünfzig Kilometer pro Stunde schnell.",
-     "image": "Man in suit sprinting extremely fast down a city street, motion blur.",
-     "who": [
-      "du"
-     ],
-     "place": "street",
-     "camera": "pan_right",
-     "sfx": "whoosh",
-     "highlight": [
-      "fünfzig Kilometer"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "50 KM/H"
-     },
-     "props": [
-      "car"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "run",
-       "emotion": "happy",
-       "pos": "left",
-       "to": "right",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "happy",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du springst ohne Mühe über ein parkendes Auto.",
-     "text": "Ein Sprung über ein stehendes Auto fühlt sich an wie ein kleiner Hüpfer.",
-     "image": "Man in suit jumping high over a car on the street.",
-     "who": [
-      "du"
-     ],
-     "place": "street",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "Auto"
-     ],
-     "overlay": null,
-     "props": [
-      "car"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "jump",
-       "emotion": "happy",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "happy",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafik zeigt die immense Motorleistung der Roboter-Gelenke.",
-     "text": "Die Motoren an deinen Gelenken verstärken deine Muskelkraft um das Zehnfache.",
-     "image": "Graphic showing robotic joint motors amplifying force vector.",
-     "who": [],
-     "place": "lab",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Zehnfache"
-     ],
-     "overlay": {
-      "type": "compare",
-      "left": "NORMAL",
-      "right": "SUIT",
-      "value": "100%",
-      "sub": "1000%"
-     },
-     "actors": [],
-     "shot": "graphic",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Im Supermarkt hebst du versehentlich ein ganzes Regal an.",
-     "text": "Aber im Supermarkt drückst du eine Türklinke mit so viel Kraft ab, dass sie abbricht.",
-     "image": "Man holding a broken door handle in a supermarket, looking panicked.",
-     "who": [
-      "du"
-     ],
-     "place": "supermarket",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "abbricht"
-     ],
-     "overlay": null,
-     "props": [
-      "door"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafik zur extrem schockierenden Schmerz-Reaktion des Gehirns.",
-     "text": "Nach wenigen Stunden spürst du schwere Rückenschmerzen trotz der Unterstützung.",
-     "image": "Diagram of a human spine glowing red from heavy stress.",
-     "who": [],
-     "place": "bedroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Schmerzen"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "RÜCKEN-BELASTUNG"
-     },
-     "actors": [
-      {
-       "id": "du",
-       "action": "cower",
-       "emotion": "sad",
-       "emote": "sweat",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "sad",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du denkst, das Exoskelett trägt dein gesamtes Gewicht von alleine.",
-     "text": "Du denkst, die Maschine nimmt deinem Körper die ganze Arbeit ab.",
-     "image": "Man standing comfortably inside suit looking confident.",
-     "who": [
-      "du"
-     ],
-     "place": "street",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Arbeit"
-     ],
-     "overlay": null,
-     "actors": [
-      {
-       "id": "du",
+       "speaks": true,
        "action": "think",
-       "emotion": "",
+       "emotion": "worried",
        "emote": "?",
-       "pos": "center",
-       "speaks": true
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "left"
       }
      ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
+     "overlay": {
+      "type": "card",
+      "text": "SUPERKRÄFTE?"
+     }
     },
     {
-     "see": "Finte: Die Sehnen und Knochen tragen die Quetschung troztdem.",
-     "text": "Falsch, deine Knochen tragen die Last am Ende trotzdem mit.",
-     "image": "X-ray view of bones under pressure inside the suit.",
-     "who": [],
-     "place": "lab",
-     "camera": "zoom_in",
-     "sfx": "ding",
-     "highlight": [
-      "Knochen"
+     "text": "Das Ganzkörper-Exoskelett Guardian XO der Firma Sarcos lässt dich neunzig Kilo heben.",
+     "see": "Ein schwerer Kasten fühlt sich dank des Anzugs Federleicht an.",
+     "place": "labor",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "speaks": true,
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
+      }
      ],
+     "shot": "graphic",
+     "mood": "happy",
+     "graphic": {
+      "type": "number",
+      "value": "90",
+      "label": "KILO",
+      "dark": false
+     }
+    },
+    {
+     "text": "Diese riesige Last fühlt sich für deinen Körper wie viereinhalb Kilo an.",
+     "see": "Grafischer Vergleich zeigt 90 Kilo zu 4,5 Kilo Gefühlsgewicht.",
+     "place": "labor",
+     "time": "day",
+     "actors": [
+      {
+       "id": "du",
+       "action": "idle",
+       "pos": "center",
+       "emotion": "",
+       "emote": ""
+      }
+     ],
+     "shot": "close",
+     "mood": "calm"
+    },
+    {
+     "text": "Starke Elektromotoren direkt an deinen Gelenken tragen dabei die gesamte schwere Last.",
+     "see": "Nahaufnahme der leuchtenden Elektromotoren an den Anzugs-Gelenken.",
+     "place": "labor",
+     "time": "day",
+     "actors": [
+      {
+       "id": "du",
+       "speaks": true,
+       "action": "point",
+       "emotion": "happy",
+       "emote": "",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
+      }
+     ],
+     "mood": "calm"
+    },
+    {
+     "text": "Aber rennen kannst du mit diesem Anzug leider überhaupt nicht.",
+     "see": "Du versuchst zu rennen, kommst aber nur sehr langsam voran.",
+     "place": "strasse",
+     "time": "day",
+     "actors": [
+      {
+       "id": "du",
+       "speaks": true,
+       "action": "run",
+       "emotion": "worried",
+       "emote": "sweat",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "left",
+       "to": "center"
+      }
+     ],
+     "mood": "tense",
+     "crowd": "worried",
      "overlay": {
       "type": "stamp",
-      "text": "FALSCH",
+      "text": "KEIN RENNEN",
       "color": "red"
-     },
+     }
+    },
+    {
+     "text": "Der Anzug schafft nur gemütliches Schritttempo von rund fünf Kilometern pro Stunde.",
+     "see": "Ein digitales Tacho zeigt genau 5 Kilometer pro Stunde an.",
+     "place": "strasse",
+     "time": "day",
+     "shot": "graphic",
+     "mood": "calm",
+     "crowd": "walk",
+     "graphic": {
+      "type": "number",
+      "kicker": "MAXIMALES TEMPO",
+      "value": "5 KM/H",
+      "label": "SCHRITTTEMPO",
+      "dark": false
+     }
+    },
+    {
+     "text": "Zudem wiegt der massive Anzug selbst bereits rund achtundsechzig Kilo.",
+     "see": "Eine Waage zeigt das massive Gewicht des Anzugs an.",
+     "place": "labor",
+     "time": "day",
      "actors": [
       {
        "id": "du",
-       "action": "fall",
-       "emotion": "scared",
-       "pos": "center",
-       "speaks": true
+       "speaks": true,
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "right"
       }
      ],
-     "shot": "wide",
      "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Der Akku-Stand der Rüstung fällt im Sturzflug ab.",
-     "text": "Nach drei Tagen ist der riesige Akku dauerhaft komplett leer.",
-     "image": "Close up on a battery indicator flashing red at zero percent.",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "camera": "still",
-     "sfx": "beep",
-     "highlight": [
-      "leer"
-     ],
      "overlay": {
-      "type": "bar",
-      "label": "AKKU",
-      "value": 0
-     },
-     "actors": [],
-     "shot": "graphic",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
+      "type": "card",
+      "text": "EIGENGEWICHT: 68 KG"
+     }
     },
     {
-     "see": "Du bleibst mitten auf der Straße wie gelähmt stehen.",
-     "text": "Ohne Strom wiegt der Anzug achtzig Kilo und drückt dich gnadenlos zu Boden.",
-     "image": "Man stuck frozen under heavy iron suit on sidewalk, unable to move.",
-     "who": [
-      "du"
+     "text": "Bereits nach rund zwei Stunden Dauerbetrieb ist der Akku komplett leer.",
+     "see": "Ein Batteriestandsanzeiger fällt rapidly auf null Prozent.",
+     "place": "labor",
+     "time": "day",
+     "props": [
+      {
+       "type": "akku"
+      }
      ],
-     "place": "street",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "achtzig Kilo"
+     "actors": [
+      {
+       "id": "du",
+       "speaks": true,
+       "action": "sad",
+       "emotion": "sad",
+       "emote": "",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
+      }
      ],
+     "mood": "tense",
      "overlay": {
       "type": "counter",
-      "label": "GEWICHT",
-      "value": 80,
-      "unit": "KG"
-     },
+      "label": "",
+      "value": 2,
+      "unit": "STUNDEN"
+     }
+    },
+    {
+     "text": "Dann müssen sofort frische Akkus per Hand neu eingesetzt werden.",
+     "see": "Akkus werden an der Seite des Anzugs frisch ausgetauscht.",
+     "place": "labor",
+     "time": "day",
+     "props": [
+      {
+       "type": "akku"
+      }
+     ],
      "actors": [
       {
        "id": "du",
-       "action": "cower",
-       "emotion": "sad",
-       "pos": "center",
-       "speaks": true
+       "speaks": true,
+       "action": "walk",
+       "emotion": "happy",
+       "emote": "",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
       }
      ],
-     "shot": "wide",
-     "mood": "sad",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
+     "mood": "calm"
     },
     {
-     "see": "Grafik zur weltweiten Stromversorgungs-Krise durch Roboter-Anzüge.",
-     "text": "Wenn alle Menschen ein Exoskelett nutzen, bricht das Stromnetz weltweit zusammen.",
-     "image": "World map with power grids turning off into darkness.",
-     "who": [],
-     "place": "worldmap",
-     "camera": "still",
-     "sfx": "boom",
-     "highlight": [
-      "Stromnetz"
+     "text": "Ganz ohne Strom drückt dich der schwere Anzug gnadenlos zu Boden.",
+     "see": "Der Anzug schaltet ab und fällt steif zu Boden.",
+     "place": "labor",
+     "time": "night",
+     "actors": [
+      {
+       "id": "du",
+       "speaks": true,
+       "action": "sad",
+       "emotion": "sad",
+       "emote": "",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
+      }
      ],
+     "mood": "tense",
      "overlay": {
-      "type": "city",
-      "kicker": "BLACKOUT",
-      "text": "STROMNETZ ÜBERLASTET",
-      "dark": true
-     },
-     "actors": [],
-     "shot": "graphic",
-     "mood": "panic",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
+      "type": "stamp",
+      "text": "STROM AUS",
+      "color": "red"
+     }
     },
     {
-     "see": "Nach Wochen haben sich deine eigenen Muskeln abgebaut.",
-     "text": "Nach wenigen Wochen schrumpfen deine eigenen Muskeln dramatisch zusammen.",
-     "image": "Man looking thin and weak while taking off suit.",
-     "who": [
-      "du"
+     "text": "Schon heute im Einsatz sind leichte Exoskelette ohne Motor in Fabriken.",
+     "see": "Ein Arbeiter in einer Werkshalle hebt die Arme über den Kopf mit mechanischer Stütze.",
+     "place": "garage",
+     "time": "day",
+     "actors": [
+      {
+       "id": "du",
+       "action": "idle",
+       "emotion": "",
+       "emote": "",
+       "say": "",
+       "hold": "",
+       "pos": "center",
+       "speaks": false
+      }
      ],
-     "place": "bedroom",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Muskeln"
+     "mood": "calm"
+    },
+    {
+     "text": "Sie stützen die Arme bei Arbeit über dem Kopf und kosten laut TU Graz zweitausend bis viertausend Euro.",
+     "see": "Eine Notiz zeigt die Forschungsdaten der TU Graz von 2024.",
+     "place": "garage",
+     "time": "day",
+     "props": [
+      {
+       "type": "money"
+      }
      ],
-     "overlay": {
-      "type": "days",
-      "text": "MUSKEL-ABBAU",
-      "value": 30,
-      "sub": 30,
-      "label": "TAG 30"
-     },
      "actors": [
       {
        "id": "du",
        "action": "look_around",
-       "emotion": "worried",
-       "emote": "sweat",
-       "pos": "center",
-       "speaks": true
+       "emotion": "",
+       "pos": "left",
+       "emote": "?"
       }
      ],
-     "shot": "wide",
-     "mood": "sad",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
+     "mood": "calm",
+     "overlay": {
+      "type": "note",
+      "title": "TU GRAZ (2024)",
+      "text": "Preis: 2.000 - 4.000 €"
+     }
     },
     {
-     "see": "Das Gehirn hat das Gefühl für normale Kraft verlernt.",
-     "text": "Weil du dich nicht mehr anstrengst, verlernt dein Gehirn die Muskelsteuerung.",
-     "image": "Brain character looking confused with loose electrical wires.",
-     "who": [],
-     "place": "lab",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Muskelsteuerung"
+     "text": "Forscher der Universität Stanford bauten zweitausendzweiundzwanzig einen motorisierten Stiefel.",
+     "see": "Forscher testen einen motorisierten Stiefel auf dem Laufband.",
+     "place": "labor",
+     "time": "day",
+     "props": [
+      {
+       "type": "lib_schuh"
+      }
      ],
-     "overlay": null,
      "actors": [
       {
        "id": "du",
-       "action": "freeze",
-       "emotion": "shocked",
-       "pos": "center",
-       "speaks": true
+       "speaks": true,
+       "action": "walk",
+       "emotion": "happy",
+       "emote": "",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
       }
      ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
+     "mood": "calm",
+     "overlay": {
+      "type": "tag",
+      "text": "STANFORD 2022"
+     }
     },
     {
-     "see": "Rehook: Eine ungeklärte Frage zur Haltbarkeit der Gelenke.",
-     "text": "Bleibt die Frage, wie man die schwere Rüstung überhaupt aufladen soll.",
-     "image": "Man holding a tiny charging cable next to huge suit socket.",
-     "who": [
-      "du"
+     "text": "Damit gehst du neun Prozent schneller und verbrauchst siebzehn Prozent weniger Energie.",
+     "see": "Statistik zeigt 9 Prozent schnelleres Gehen und 17 Prozent gesparte Energie.",
+     "place": "labor",
+     "time": "day",
+     "actors": [
+      {
+       "id": "du",
+       "action": "walk",
+       "pos": "offleft",
+       "to": "center",
+       "emotion": ""
+      }
      ],
-     "place": "bedroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "aufladen"
-     ],
-     "overlay": {
-      "type": "question",
-      "text": "WIE AUFLADEN?"
-     },
-     "actors": [],
      "shot": "graphic",
      "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
+     "graphic": {
+      "type": "compare",
+      "value": "+9 %",
+      "sub": "-17 %",
+      "left": "TEMPO",
+      "right": "ENERGIE",
+      "dark": false
+     }
     },
     {
-     "see": "Der Stromverbrauch entspricht einem ganzen Haushalts-Monat.",
-     "text": "Ein einziger Ladevorgang frisst extrem viel Strom und braucht Stunden.",
-     "image": "Electricity meter spinning extremely fast with red warning lights.",
-     "who": [],
-     "place": "lab",
-     "camera": "still",
-     "sfx": "tick",
-     "highlight": [
-      "Haushalts-Monat"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "HOHER STROMVERBRAUCH"
-     },
+     "text": "Das Gefühl entspricht genau dem Absetzen eines vierzehn Kilo schweren Rucksacks.",
+     "see": "Eine Person setzt einen schweren vierzehn Kilo Rucksack ab.",
+     "place": "strasse",
+     "time": "day",
      "props": [
-      "generator"
+      {
+       "type": "rucksack"
+      }
      ],
      "actors": [
       {
        "id": "du",
-       "action": "point",
-       "emotion": "worried",
+       "action": "idle",
+       "emotion": "",
+       "emote": "",
+       "say": "",
+       "hold": "",
        "pos": "center",
-       "speaks": true
+       "speaks": false
       }
      ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
+     "mood": "happy",
+     "overlay": {
+      "type": "tag",
+      "text": "14 KILO RUCKSACK"
+     }
     },
     {
-     "see": "Du schaffst es kaum noch, ein normales Glas Wasser zu heben.",
-     "text": "Ohne die Hilfe der Hydraulik kannst du nicht mal eine Sprudelflasche öffnen.",
-     "image": "Man struggling weakness to open a simple water bottle.",
-     "who": [
-      "du"
-     ],
-     "place": "kitchen",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Sprudelflasche"
-     ],
-     "overlay": null,
+     "text": "In Reha-Kliniken helfen moderne Exoskelette gelähmten Menschen, wieder echte Schritte zu gehen.",
+     "see": "In einer Reha-Klinik macht ein Patient mit Hilfe eines Rahmens Gehübungen.",
+     "place": "hospital",
+     "time": "day",
      "actors": [
       {
        "id": "du",
-       "action": "tremble",
-       "hold": "bottle",
-       "emotion": "sad",
-       "emote": "sweat",
+       "action": "idle",
+       "emotion": "",
+       "emote": "",
+       "say": "",
+       "hold": "",
        "pos": "center",
-       "speaks": true
+       "speaks": false
       }
      ],
-     "shot": "wide",
-     "mood": "sad",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
+     "shot": "event",
+     "mood": "calm",
+     "crowd": "walk",
+     "overlay": {
+      "type": "tag",
+      "text": "REHA-MEDIZIN"
+     }
     },
     {
-     "see": "Du stehst erschöpft vor deinem Anzug im Zimmer.",
-     "text": "Die vermeintliche Superkraft macht deinen eigenen Körper also absolut hilflos.",
-     "image": "Man looking exhausted next to standing exoskeleton suit.",
-     "who": [
-      "du"
+     "text": "Fazit: Du bekommst im Alltag keine echten Superkräfte, aber immerhin einen geschonten Rücken.",
+     "see": "Du schüttelst den Kopf, aber greifst dir entspannt an den Rücken.",
+     "place": "labor",
+     "time": "day",
+     "actors": [
+      {
+       "id": "du",
+       "speaks": true,
+       "action": "walk",
+       "emotion": "happy",
+       "emote": "",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "offright",
+       "to": "center"
+      }
      ],
-     "place": "livingroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "hilflos"
-     ],
+     "mood": "happy",
      "overlay": {
       "type": "stamp",
-      "text": "FAZIT",
-      "color": "orange"
-     },
-     "actors": [
-      {
-       "id": "du",
-       "action": "fall",
-       "emotion": "sad",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "sad",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
+      "text": "GESCHONTER RÜCKEN",
+      "color": "green"
+     }
     },
     {
-     "see": "Schluss-Satz führt direkt wieder nahtlos zum Hook-Anfang.",
-     "text": "Genau deshalb fragst du dich wieder von vorne.",
-     "image": "Man looking thoughtfully directly into camera lens.",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "camera": "zoom_out",
-     "sfx": "whoosh",
-     "highlight": [
-      "vorne"
-     ],
-     "overlay": null,
+     "text": "Wofür würdest du ein Exoskelett anziehen?",
+     "see": "Du stehst fragend da und hältst ein Exoskelett in der Hand.",
+     "place": "labor",
+     "time": "day",
      "actors": [
       {
        "id": "du",
-       "action": "think",
-       "emotion": "",
+       "speaks": true,
+       "action": "point",
+       "emotion": "happy",
        "emote": "?",
-       "pos": "center",
-       "speaks": true
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
       }
      ],
-     "shot": "wide",
      "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
+     "overlay": {
+      "type": "choice",
+      "a": "Für schwere Arbeit",
+      "b": "Für entspanntes Gehen"
+     }
     }
    ],
    "hud": "",
@@ -2101,10 +1971,7 @@
   },
   "provider": "gemini",
   "remake": false,
-  "needs": [
-   "exoskelett",
-   "akku"
-  ],
+  "needs": [],
   "title": "Exoskelett im Alltag: Was passiert wirklich?",
   "created": 1795774813.3757632
  },
