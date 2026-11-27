@@ -8910,7 +8910,7 @@
   "id": 231,
   "category": "fakten",
   "topic": "Warum du den Tetris-Effekt kennst: Warum dein Gehirn nach stundenlangem Gaming die Welt im Raster sieht",
-  "status": "review",
+  "status": "discarded",
   "created": 1795802924.4779541,
   "title": "Warum du den Tetris-Effekt kennst und wie dein Gehirn dich austrickst",
   "description": "Siehst du nach stundenlangem Zocken überall nur noch Raster?\nWarum dein Gehirn nach Tetris und Co. plötzlich auch die echte Welt einsortieren will.\nWarst du schon mal so tief in einem Spiel gefangen?",
@@ -8946,6 +8946,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-27 21:00",
-  "review_at": 1795803263.6305008
+  "review_at": 1795803263.6305008,
+  "error": "Bei der Prüfung verworfen: Thema nie im Bild (keine fallenden Bausteine), Drehbuch mit unbelegten Angaben (Forscher 1994, Zwei-Stunden-Regel), leerer Schlusssatz"
  }
 ]
