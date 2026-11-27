@@ -1,5 +1,5 @@
 {
- "updated": 1795743749.898748,
+ "updated": 1795745554.6799483,
  "enough": true,
  "counted": 45,
  "total": 48,
@@ -63,10 +63,10 @@
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 2,
-   "avg_views": 1632,
+   "avg_views": 1650,
    "avg_likes": 35.0,
-   "like_rate": 2.14,
-   "avg_score": 2157
+   "like_rate": 2.12,
+   "avg_score": 2175
   },
   {
    "slug": "storys",
@@ -111,15 +111,15 @@
   "tiere": 1.13,
   "whatif": 1.08,
   "comedy": 1.36,
-  "vergleich": 0.98,
+  "vergleich": 0.99,
   "motivation": 1.2,
   "nachricht": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2286 Aufrufe, 2.05 % Likes).",
   "Schwächste Kategorie: 👻 Grusel (Ø 449 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2281 zu 1122 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2379 zu 1853 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2282 zu 1122 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2380 zu 1853 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -128,13 +128,13 @@
  ],
  "words_bad": [
   "remix",
+  "lied",
+  "erkennst",
   "bekanntes",
   "glas",
-  "erkennst",
-  "lied",
   "niemand",
-  "jede",
-  "klassikers"
+  "klassikers",
+  "jede"
  ],
  "top": [
   {
