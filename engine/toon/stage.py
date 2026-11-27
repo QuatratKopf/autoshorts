@@ -299,6 +299,8 @@ def _prepare(scene, cast):
                 kind = str(near[0].get("kind")).lower() if near else ""
         if re.search(r"gehirn|hirn|brain", aid.lower()) and kind in ("", "agent", "robot", "cell"):
             kind = "brain"                                # „gehirn_bot“, „dein_gehirn“: das Gehirn selbst als Figur, kein oranges KI-Kästchen
+        if re.search(r"wecker", aid.lower()) and kind in ("", "agent", "robot"):
+            kind = "wecker"                               # „wecker“ als Figur: der Wecker selbst mit Gesicht, kein Roboter (Video 225)
         if re.search(FRIDGE_ID_RE, aid.lower()) and kind in ("", "agent", "robot"):
             kind = "fridge"                               # „kuehlschrank“ als Figur: der Kühlschrank selbst mit Gesicht – kein Roboter neben einem Kühlschrank
         x0 = _x(a.get("pos"), default_x[i])
@@ -332,7 +334,7 @@ def _prepare(scene, cast):
     for a in actors:                  # Lippen nur, wenn die Figur selbst spricht – sonst hört sie zu und reagiert
         a["lips"] = a["speaks"] and talk
     for a in actors:   # passende Symbole automatisch, wenn das Drehbuch keine nennt
-        if not a["emote"] and a["kind"] not in SEA_KINDS:
+        if not a["emote"] and a["kind"] not in SEA_KINDS + ("wecker",):
             a["emote"] = {"shocked": "!", "scared": "!", "think": "" if a["emotion"] == "happy" else "?", "angry": "anger"}.get(a["action"]) or \
                          {"angry": "anger", "scared": "sweat", "worried": "sweat"}.get(a["emotion"], "")
     props, p_given = [], []
@@ -2624,6 +2626,8 @@ def direct(scenes, times, topic="", style="", look=""):
             sc["place"] = "mathroom"                      # Mathe-Thema: der Forscher steht vor der Tafel, nicht zwischen Kolben und Reagenzgläsern (Video 198)
     _frost_frog(scenes, topic, main_id)
     _angler_story(scenes, topic)
+    _door_people(scenes, main_id)
+    _wecker_story(scenes, topic, main_id)
     _mirror_story(scenes, topic, main_id)
     _mirror_msg(scenes, topic, style, main_id)
     _fridge_open(scenes)
@@ -4397,6 +4401,143 @@ ANG_SEA = {"lure": (540, 1.0), "": (500, 0.95), "prey": (430, 0.95), "gape": (52
 def angler_story(scenes, topic=""):
     texts = " ".join(str(sc.get("text") or "").lower() for sc in scenes if isinstance(sc, dict))
     return bool(re.search(ANGLER_RE, str(topic or "").lower() + " " + texts))
+
+
+# Sprechender Wecker (Prüfung 27.11.2026, Video 225 „Mein Wecker terrorisiert mich“): Handelt das Video von einem Wecker, der selbst etwas tut
+# (lobt, schreit, droht, lacht, hackt das WLAN), steht er in jedem Satz, der von ihm spricht, als Figur mit Gesicht neben dem Menschen – im Zustand
+# des Satzes (freundlich, klingelnd/brüllend, lachend, unheimlich sanft). Vorher: ein winziger stummer Wecker auf dem Nachttisch, die Figur allein.
+WECKER_ACT_RE = (r"lob|schrie|schrei|brüll|droh|terror|befahl|befiehl|zwing|bestraf|bestimm|hack|blockier|sperr|verriegel|klingel|schrill|antwort|lach|sagt|"
+                 r"flüster|spielt|motivier|weck|verlang|forder|kommandier|verbiet|verbot|übern[ia]mm|zählt|meldet|ruft|rief|kichert|summt|piept|heult|meint|stornier|bestell|nett\b")
+WECKER_ANGRY_RE = (r"schrie|schrei|brüll|droh|terror|befahl|befiehl|zwing|bestraf|bestimm|hack|blockier|sperr|verriegel|klingel|schrill|sirene|alarm|"
+                   r"kommandier|verbiet|verbot|verlang|forder|snooze|schlummer|heult|piept|gnade")
+WECKER_HAPPY_RE = r"\blob|motivier|lieblings|kompliment|freundlich|fröhlich|gratulier|nett\b|charmant|lächel|summt"
+WECKER_SOFT_RE = r"sanft|leise|flüster|säusel|zuckersüß|ganz ruhig|ruhiger stimme"
+WECKER_REF_RE = r"wecker|\b(?:er|ihm|ihn)\b|\bgerät|\bkiste\b|\bding\b|snooze|schlummer"
+
+
+def wecker_story(scenes, topic=""):
+    texts = [str(sc.get("text") or "").lower() for sc in scenes if isinstance(sc, dict)]
+    if "wecker" not in str(topic or "").lower() and sum("wecker" in x for x in texts) < 3:
+        return False
+    return sum(1 for x in texts if re.search(WECKER_REF_RE, x) and re.search(WECKER_ACT_RE, x)) >= 2
+
+
+def _wecker_story(scenes, topic="", main_id="du"):
+    if not wecker_story(scenes, topic):
+        return scenes
+    n_side, prev_solo = 0, False
+    for i, sc in enumerate(scenes):
+        if not isinstance(sc, dict):
+            continue
+        low = str(sc.get("text") or "").lower()
+        shot = str(sc.get("shot") or "")
+        if shot in ("graphic", "mirror") or not re.search(WECKER_REF_RE, low):
+            prev_solo = False
+            continue
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        if any(not a.get("kind") and str(a.get("id") or "").lower() not in MAIN_IDS + (str(main_id).lower(),) and not str(a.get("id") or "").startswith("_")
+               for a in acts) and "wecker" not in low:
+            prev_solo = False
+            continue                                      # ein anderer Mensch im Bild: „er“ kann auch er sein
+        acts = [a for a in acts if str(a.get("kind") or "").lower() not in ("robot", "agent", "wecker")]
+        human = next((a for a in acts if not a.get("kind")), None)
+        lol = bool(re.search(r"lach|kicher|stornier|schadenfroh|grinst", low))
+        soft = bool(re.search(WECKER_SOFT_RE, low))
+        angry = bool(re.search(WECKER_ANGRY_RE, low)) and not soft and not lol
+        happy = bool(re.search(WECKER_HAPPY_RE, low)) and not angry and not soft and not lol
+        press = bool(re.search(r"drück\w* (?:\w+ ){0,3}(?:snooze|schlummer|den wecker|die taste|den knopf)|(?:snooze|schlummer)\w*[- ]?(?:taste|knopf)?\w* (?:\w+ ){0,2}(?:gedrückt|drück)", low))
+        w = {"id": "_wecker", "kind": "wecker", "action": "laugh" if lol else "soft" if soft else "ring" if angry else "idle",
+             "emotion": "angry" if angry else "happy" if (happy or lol) else "", "emote": "", "say": "", "hold": "", "speaks": False}
+        solo = lol and not prev_solo and bool(re.search(r"lach|kicher", low)) and not isinstance(sc.get("overlay"), dict)   # „antwortete mit einem eiskalten Roboterlachen“: der Wecker allein, groß, lacht
+        if isinstance(sc.get("props"), list):
+            sc["props"] = [q for q in sc["props"] if _pkey(q) not in ("lib_wecker", "clock", "lib_stoppuhr")]
+        if shot in ("insert", "close", "event"):
+            sc["shot"] = ""
+        sc["_no_cut"] = True
+        if solo or human is None:
+            w.update(pos="center", facing="right", _ksz=1.25 if solo else 1.0)
+            sc["actors"] = [w]
+            prev_solo = True
+            continue
+        prev_solo = False
+        flip = n_side % 3 == 2                            # meist steht der Wecker rechts; jedes dritte Mal gespiegelt, damit nicht jedes Bild gleich aufgebaut ist
+        n_side += 1
+        hx, wx = (330, 770) if not flip else (750, 310)
+        if any(_pkey(q) == "door_locked" for q in (sc.get("props") or [])):               # vor der verriegelten Tür: Mensch, Wecker, Tür nebeneinander – das Schloss bleibt sichtbar
+            flip, (hx, wx) = False, (230, 520)
+        if press:                                         # „Ich drückte auf Snooze“: die Hand liegt auf dem Wecker
+            hx, wx = (410, 690) if not flip else (670, 390)
+            human.update(action="point", emotion=str(human.get("emotion") or "angry"), emote="")
+        elif str(human.get("action") or "").lower() in ("walk", "run") and human.get("to"):
+            human.update(pos=("offleft" if not flip else "offright"), to=hx)          # läuft herein und bleibt vor dem Wecker stehen – nicht durch ihn hindurch
+        if not (str(human.get("action") or "").lower() in ("walk", "run") and human.get("to")):
+            human["pos"] = hx
+            human.pop("to", None)
+        human["facing"] = "right" if not flip else "left"
+        if str(human.get("emote") or "") == "?" and (angry or lol or soft):
+            human["emote"] = ""
+        if soft and str(human.get("action") or "").lower() in ("", "idle", "talk", "shocked"):
+            human["action"] = "shiver"
+        if re.search(r"\bkoch", low) and isinstance(sc.get("props"), list):               # „koche ich ihm Haferbrei“: die Schüssel in der Hand, dem Wecker hingehalten
+            dish = next((q for q in sc["props"] if extras.held_key(_pkey(q)).startswith("prop:")), None)
+            if dish is not None and not human.get("hold"):
+                human["hold"] = _pkey(dish)
+                sc["props"] = [q for q in sc["props"] if q is not dish]
+                human["action"] = "talk"
+        w.update(pos=wx, facing="left" if not flip else "right")
+        sc["actors"] = [human, w]
+    return scenes
+
+
+# Leute an der Tür (Prüfung 27.11.2026, Video 225): „Die Nachbarn klopften genervt an meine Tür“ zeigte die Hauptfigur allein im Flur – kein Nachbar.
+# Jetzt stehen zwei verärgerte Nachbarn im Hausflur vor der Tür. „… verriegelte die Tür“ zeigt eine Tür mit Riegel und Schloss, kein loses Schloss
+# auf dem Tisch. „… hat meine Mutter blockiert“: die Blockierte steht nicht fröhlich im selben Zimmer.
+KNOCK_RE = r"(nachbar\w*|vermieter\w*|hausmeister\w*)\b[^.!?]{0,60}\b(?:klopf|hämmer|poch|klingel|trommel)\w*[^.!?]{0,40}\btür|\b(?:klopf|hämmer|poch|klingel|trommel)\w*[^.!?]{0,40}\b(nachbar\w*|vermieter\w*|hausmeister\w*)"
+LOCKED_RE = r"(?:verriegel|verschl[oö]ss|versperr|abgesperr|abgeschlossen|sperrt\w* (?:\w+ ){0,3}die)\w*[^.!?]{0,40}\btür|\btür\w*\b[^.!?]{0,40}(?:verriegel|verschlossen|versperr|abgesperr|abgeschlossen|lässt sich nicht (?:mehr )?öffnen)"
+BLOCKED_RE = r"\b(mutter|mama|mutti|vater|papa|oma|opa|freundin|freund|schwester|bruder|chef|chefin|partner|partnerin)\b[^.!?]{0,20}\b(?:blockiert|geblockt|gesperrt|gelöscht)"
+
+
+def _door_people(scenes, main_id="du"):
+    for sc in scenes:
+        if not isinstance(sc, dict) or str(sc.get("shot") or "") in ("graphic", "mirror"):
+            continue
+        low = str(sc.get("text") or "").lower()
+        acts = [a for a in (sc.get("actors") or []) if isinstance(a, dict)]
+        m = re.search(KNOCK_RE, low)
+        if m and not denied(r"klopf|hämmer|poch|klingel|trommel", low):
+            many = (m.group(1) or m.group(2) or "").endswith(("n", "s"))
+            angry = "angry" if re.search(r"genervt|wütend|sauer|verärgert|zornig|empört|beschwer|ruhestörung|hämmer|trommel", low) else "worried"
+            people = [{"id": "_nachbar1", "look": {"hair": "short", "hair_color": "grau", "shirt": "grün", "gender": "m"}, "action": "point", "emotion": angry,
+                       "emote": "!", "say": "", "hold": "", "pos": 470, "facing": "right", "speaks": False}]
+            if many:
+                people.insert(0, {"id": "_nachbar2", "look": {"hair": "bun", "hair_color": "rot", "shirt": "lila", "gender": "w"}, "action": "talk", "emotion": angry,
+                                  "emote": "", "say": "", "hold": "", "pos": 230, "facing": "right", "speaks": False})
+            sc["actors"] = people                         # gezeigt wird die Seite der Nachbarn: sie stehen im Hausflur vor der Tür
+            sc["place"], sc["crowd"], sc["_no_cut"] = "hallway", "", True
+            sc.pop("backdrop", None)
+            sc["props"] = [{"type": "door", "x": 800}]
+            if str(sc.get("shot") or "") in ("insert", "close", "event"):
+                sc["shot"] = ""
+            continue
+        if re.search(LOCKED_RE, low) and not denied(r"verriegel|verschl[oö]ss|versperr|abgesperr|abgeschlossen", low) and isinstance(sc.get("props"), list):
+            sc["props"] = [q for q in sc["props"] if _pkey(q) not in ("door", "lib_vorhaengeschloss", "lib_schloss", "lib_tuerrahmen")] + [{"type": "door_locked", "x": 906}]
+            sc["_no_cut"] = True
+            if str(sc.get("shot") or "") in ("insert", "close", "event"):
+                sc["shot"] = ""
+            me = next((a for a in acts if not a.get("kind")), None)
+            if me is not None:
+                me.update(pos=330, facing="right")
+                me.pop("to", None)
+                if str(me.get("action") or "").lower() in ("walk", "run", "shake", "dance", ""):
+                    me["action"] = "shocked"
+        m_b = re.search(BLOCKED_RE, low)
+        if m_b and len([a for a in acts if not a.get("kind")]) > 1:
+            keep = [a for a in acts if a.get("kind") or str(a.get("id") or "").lower() in MAIN_IDS + (str(main_id).lower(),)]
+            if keep:
+                sc["actors"] = keep
+                for a in keep:
+                    if not a.get("kind") and isinstance(a.get("pos"), (int, float)):
+                        a["pos"] = "center"
 
 
 def _angler_story(scenes, topic=""):
@@ -6455,7 +6596,7 @@ TEXT_PROPS = [(r"\bmini-?maps?\b|\bmini-?karten?\b|\bmini-?radar\b", "minimap"),
 MAP_HINTS = ((r"ganz deutschland|in deutschland|deutschlandweit|bundesweit|bundesländer|jeder deutsche|alle deutschen", "germany"),
              (r"weltweit|auf der ganzen welt|alle länder|rund um den globus|weltbevölkerung|alle kontinente|die ganze erde|die ganze welt", "worldmap"))
 # Tiere neben Menschen: Größe im Verhältnis zur Figur (1.0 = menschengroß). „Riesen…“-Themen heben das auf (giant).
-CREATURE_SIZE = {"cheetah": 1.0, "eagle": 0.8, "flea": 0.4, "shrimp": 0.5, "mantis": 0.5, "jelly": 0.6, "axolotl": 0.5, "tardigrade": 0.5, "brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45, "diver": 1.1, "dolphin": 1.0, "cow": 0.9, "pig": 0.6, "chimp": 0.75, "mosquito": 0.45, "fly": 0.45, "lion": 1.15, "whale": 1.4, "chimera": 1.05, "frog": 0.34, "woodfrog": 0.34, "platypus": 0.55, "puffer": 0.6, "angler": 0.9}
+CREATURE_SIZE = {"cheetah": 1.0, "eagle": 0.8, "flea": 0.4, "shrimp": 0.5, "mantis": 0.5, "jelly": 0.6, "axolotl": 0.5, "tardigrade": 0.5, "brain": 1.6, "spider": 0.38, "cat": 0.42, "dog": 0.55, "bird": 0.45, "bee": 0.45, "wasp": 0.45, "diver": 1.1, "dolphin": 1.0, "cow": 0.9, "pig": 0.6, "chimp": 0.75, "mosquito": 0.45, "fly": 0.45, "lion": 1.15, "whale": 1.4, "chimera": 1.05, "frog": 0.34, "woodfrog": 0.34, "platypus": 0.55, "puffer": 0.6, "angler": 0.9, "wecker": 0.72}
 GIANT_RE = r"riesen|riesig|gigant|monströs|so groß wie|meterhoh|haushoh|mutier"
 # Nur hier laufen Passanten durchs Bild – auf dem Feld, im Wald, im Keller ist niemand unterwegs
 CROWD_PLACES = ("headquarters", "street", "park", "village", "beach", "icesea", "harbor", "gasstation", "station", "transit", "supermarket", "supermarket_empty", "hospital", "office",

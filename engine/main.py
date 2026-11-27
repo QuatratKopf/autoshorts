@@ -355,7 +355,7 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, 
             n_plan = writer.spoken_words(plan["script"])
             min_p = float(cfg("min_seconds") or 0)
             trouble_p = writer.list_trouble(plan["script"])
-            if trouble_p or (min_p and n_plan / wps_p < min_p - 5):   # viel zu kurz (sonst stummes Standbild am Ende) oder Strichliste statt Geschichte
+            if trouble_p or (min_p and n_plan / wps_p < min_p - 2):   # zu kurz (Video 225: 166 Wörter ≈ 60 s galten noch als lang genug – vier Sekunden stummes Standbild am Schluss) (sonst stummes Standbild am Ende) oder Strichliste statt Geschichte
                 log((f"Vorbereitetes Drehbuch ist eine Strichliste ({trouble_p})" if trouble_p else
                      f"Vorbereitetes Drehbuch ist zu kurz ({n_plan} Wörter ≈ {n_plan / wps_p:.0f} s)") + " – schreibe es zum selben Thema neu")
                 try:
@@ -366,7 +366,7 @@ def make(category_slug=None, topic=None, upload=True, trend_id=None, plan=None, 
                     log(f"Neu schreiben nicht möglich ({e}) – nehme das vorbereitete Drehbuch")
             else:
                 try:
-                    plan["script"] = writer.polish(plan["script"])       # ß und deutsche Einblendungen auch bei älteren Plänen
+                    plan["script"] = writer.polish(plan["script"], topic or plan.get("topic") or "")       # ß und deutsche Einblendungen auch bei älteren Plänen
                 except Exception:  # noqa: BLE001
                     pass
         if plan.get("script"):                           # vorbereitetes Drehbuch (am Vortag geplant, Fehlendes inzwischen nachgebaut)

@@ -1274,6 +1274,30 @@ def p_door(d, x, t, s=1.0):
     d.polygon([(x - 120, GROUND), (x + 120, GROUND), (x + 190, GROUND + 60), (x - 190, GROUND + 60)], fill=(255, 210, 120, 70))
 
 
+def p_door_locked(d, x, t, s=1.0):
+    """Verriegelte Tür (Prüfung 27.11.2026, Video 225: „verriegelte die Smarthome-App die Tür“ zeigte eine gewöhnliche Tür und ein loses Schloss auf dem
+    Tisch): geschlossenes Türblatt, quer davor ein Riegel, darauf ein großes Vorhängeschloss, über der Klinke blinkt ein rotes Lämpchen."""
+    _r(d, (x - 130, GROUND - 500, x + 130, GROUND), (96, 66, 46), 6)
+    _r(d, (x - 110, GROUND - 480, x + 110, GROUND), (150, 100, 64), 4, 5)
+    for y0, y1 in ((-450, -300), (-200, -40)):
+        d.rounded_rectangle((x - 80, GROUND + y0, x + 80, GROUND + y1), 6, outline=(110, 72, 46), width=6)
+    k = _pop(t, 0.15, 0.35)
+    drop = int((1 - min(1.0, k)) * -60)
+    _r(d, (x - 150, GROUND - 284 + drop, x + 150, GROUND - 236 + drop), (120, 128, 142), 8)          # Riegel quer über die Tür
+    for bx in (-132, 132):
+        d.ellipse((x + bx - 9, GROUND - 269 + drop, x + bx + 9, GROUND - 251 + drop), fill=(70, 76, 92))
+    cy = GROUND - 232 + drop
+    d.arc((x - 40, cy - 78, x + 40, cy + 22), 180, 360, fill=INK, width=30)                         # Bügel
+    d.arc((x - 40, cy - 78, x + 40, cy + 22), 180, 360, fill=(176, 184, 198), width=18)
+    _r(d, (x - 62, cy - 30, x + 62, cy + 76), (240, 196, 70), 12)                                    # Schlosskörper
+    d.ellipse((x - 13, cy + 4, x + 13, cy + 30), fill=INK)
+    d.polygon([(x - 7, cy + 22), (x + 7, cy + 22), (x + 11, cy + 54), (x - 11, cy + 54)], fill=INK)
+    on = int(t * 3) % 2 == 0
+    d.ellipse((x + 52, GROUND - 392, x + 104, GROUND - 340), fill=(255, 70, 50, 90 if on else 0))
+    _o(d, (x + 64, GROUND - 380, x + 92, GROUND - 352), (255, 80, 60) if on else (150, 60, 54), 4)
+    d.polygon([(x - 120, GROUND), (x + 120, GROUND), (x + 190, GROUND + 60), (x - 190, GROUND + 60)], fill=(255, 120, 100, 50))
+
+
 CLOCK_AT = [None]                                            # (Stunde, Minute) der Szene – setzt stage._prepare aus dem Satz
 
 
@@ -2887,6 +2911,70 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
             ell(114, y0 - 162, 142, y0 - 134, (236, 240, 244), shade=0)
         for i_, (mx_, my_, mc_) in enumerate(((-60, -250, (240, 90, 80)), (-30, -206, (250, 200, 70)), (-66, -168, (90, 170, 240)))):   # Magnete an der Tür
             rr(mx_, y0 + my_, mx_ + 24, y0 + my_ + 18, 4, mc_, shade=0)
+    elif kind in ("wecker", "alarmclock"):                                           # sprechender Wecker als Figur (Prüfung 27.11.2026, Video 225: der Wecker „lobt“, „schreit“, „lacht“ – im Bild stand nur ein winziger stummer Wecker auf dem Nachttisch)
+        ring = mood == "angry" or action in ("ring", "shout")
+        lol = action == "laugh"
+        soft = action == "soft"
+        jit = math.sin(t * 46) * (7 if ring else 0)
+        hop = abs(math.sin(t * (9 if lol else 6))) * (16 if lol else 9 if ring else 3)
+        y0 = -hop
+        col = (226, 62, 52) if ring else (232, 84, 70)
+        dial = (255, 226, 214) if ring else (214, 226, 250) if soft else (252, 246, 228)
+        if ring:                                                                     # roter Schein und Schall-Bögen: er ist laut
+            d.ellipse(B(-250, y0 - 470, 250, y0 + 20), fill=(255, 60, 40, 46))
+            for s_ in (-1, 1):
+                for j_ in range(3):
+                    q_ = (t * 2.2 + j_ / 3) % 1
+                    r_ = 205 + q_ * 80
+                    d.arc(B(s_ * 30 - r_, y0 - 225 - r_, s_ * 30 + r_, y0 - 225 + r_), (-28 if s_ > 0 else 152), (28 if s_ > 0 else 208),
+                          fill=(255, 200, 70, int(230 * (1 - q_))), width=max(2, int(10 * k)))
+        for lx in (-78, 44):                                                         # kurze Beine mit Schuhen
+            rr(lx + 6, y0 - 74, lx + 30, y0 - 14, 6, (96, 102, 118), shade=0.2)
+            rr(lx - 10, y0 - 24, lx + 48, y0, 10, (70, 76, 92), shade=0.15)
+        av = math.sin(t * (11 if ring or lol else 3)) * 12
+        stroke([(-128, y0 - 215), (-176, y0 - 170 + av * 0.5), (-168, y0 - 120)], 16, (96, 102, 118))   # Arm hinten
+        ell(-184, y0 - 132, -152, y0 - 100, (250, 250, 250), shade=0)
+        for s_ in (-1, 1):                                                           # Glocken (schlagen beim Klingeln) und Hammer
+            bx_ = s_ * 92 + (jit if ring else 0) * s_
+            poly([(bx_ - 62, y0 - 352), (bx_ + 62, y0 - 352), (bx_ + 34, y0 - 430), (bx_ - 34, y0 - 430)], (244, 204, 70))
+            ell(bx_ - 10, y0 - 452, bx_ + 10, y0 - 428, (120, 128, 142), shade=0)
+        stroke([(0, y0 - 372), (jit * 3.2, y0 - 440)], 10, (96, 102, 118))
+        ell(jit * 3.2 - 16, y0 - 462, jit * 3.2 + 16, y0 - 430, (120, 128, 142), shade=0.2)
+        ell(-150, y0 - 370, 150, y0 - 70, col)                                       # Gehäuse
+        ell(-120, y0 - 340, 120, y0 - 100, dial, shade=0, line=True)                 # Zifferblatt = Gesicht
+        for i_ in range(12):                                                         # Stundenstriche am Rand
+            an_ = math.radians(i_ * 30)
+            x_a, y_a = math.sin(an_), -math.cos(an_)
+            d.line((*P(x_a * 100, y0 - 220 + y_a * 100), *P(x_a * 112, y0 - 220 + y_a * 112)), fill=INK, width=max(2, int((7 if i_ % 3 == 0 else 4) * k)))
+        fy_ = y0 - 240
+        ek_ = "happy" if (lol or (mood == "happy" and not blink)) else "tired" if soft else None
+        for s_ in (-1, 1):
+            eye(s_ * 46, fy_, 24, ek_)
+            if ring:
+                d.line((*P(s_ * 46 - 26, fy_ - 44 + 12 * s_), *P(s_ * 46 + 26, fy_ - 44 - 12 * s_)), fill=INK, width=max(2, int(9 * k)))
+            cheek(s_ * 84, fy_ + 40, 15)
+        my_ = y0 - 176
+        if lol or ring or mouth > 0.1:                                               # lacht / brüllt / spricht: offener Mund
+            mh_ = (34 + 8 * math.sin(t * 14)) if lol else (30 + 6 * math.sin(t * 18)) if ring else 10 + mouth * 22
+            mw_ = 44 if (lol or ring) else 26
+            d.chord(B(-mw_, my_ - mh_ * 0.5, mw_, my_ + mh_), 0, 180, fill=(110, 36, 46), outline=INK, width=max(2, int(5 * k))) if lol else \
+                d.ellipse(B(-mw_, my_ - mh_ * 0.3, mw_, my_ + mh_), fill=(110, 36, 46), outline=INK, width=max(2, int(5 * k)))
+            d.chord(B(-mw_ * 0.5, my_ + mh_ * 0.45, mw_ * 0.5, my_ + mh_ * 1.05), 180, 360, fill=(240, 120, 130))
+        elif soft:                                                                   # sanft und unheimlich: schmales, breites Lächeln
+            d.arc(B(-52, my_ - 30, 52, my_ + 16), 20, 160, fill=INK, width=max(2, int(7 * k)))
+        elif mood in ("sad", "worried"):
+            d.arc(B(-30, my_ + 2, 30, my_ + 26), 205, 335, fill=INK, width=max(2, int(7 * k)))
+        else:
+            d.arc(B(-38, my_ - 24, 38, my_ + 12), 25, 155, fill=INK, width=max(2, int(7 * k)))
+        if ring or action == "point":                                                # Arm vorn: erhoben (schimpft / zeigt)
+            stroke([(128, y0 - 215), (182, y0 - 262 - av), (206, y0 - 312 - av)], 16, (120, 128, 142))
+            ell(190, y0 - 336 - av, 224, y0 - 302 - av, (250, 250, 250), shade=0)
+        elif lol:                                                                    # hält sich den Bauch
+            stroke([(128, y0 - 215), (150, y0 - 150), (86, y0 - 120 + av * 0.3)], 16, (120, 128, 142))
+            ell(66, y0 - 138 + av * 0.3, 100, y0 - 104 + av * 0.3, (250, 250, 250), shade=0)
+        else:
+            stroke([(128, y0 - 215), (174, y0 - 170 - av * 0.5), (166, y0 - 120)], 16, (120, 128, 142))
+            ell(150, y0 - 132, 182, y0 - 100, (250, 250, 250), shade=0)
     elif kind in ("robot", "roboter"):
         col = (176, 186, 202)
         for lx in (-52, 22):
@@ -4123,7 +4211,7 @@ def creature(kind, t, facing=1, mouth=0.0, mood="", scale=1.0, action=""):
     return out, ax / S, gy / S, fly
 
 
-CREATURES = ("woodfrog", "cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly", "axolotl", "tardigrade", "cheetah", "eagle", "flea", "diver", "fridge", "cow", "pig", "chimp", "mosquito", "fly", "dolphin", "lion", "whale", "chimera", "frog", "platypus", "puffer", "angler")
+CREATURES = ("woodfrog", "cat", "dog", "spider", "ghost", "alien", "robot", "bird", "dino", "monster", "fish", "shark", "bee", "wasp", "agent", "virus", "cell", "brain", "shrimp", "mantis", "jelly", "axolotl", "tardigrade", "cheetah", "eagle", "flea", "diver", "fridge", "cow", "pig", "chimp", "mosquito", "fly", "dolphin", "lion", "whale", "chimera", "frog", "platypus", "puffer", "angler", "wecker")
 
 
 # ------------------------------------------------------------------ Werkstatt & Technik (Motor, Kran, Reifen, Getriebe …)
@@ -4470,6 +4558,9 @@ def p_vacuum_broken(d, x, t, s=1.0):
 
 PROPS["vacuum"] = p_vacuum
 PROPS["vacuum_broken"] = p_vacuum_broken
+PROPS["door_locked"] = p_door_locked
+SIZES["door_locked"] = SIZES["door"]
+PROP_ALIASES.update({"verriegelte tür": "door_locked", "locked door": "door_locked"})
 PROP_ALIASES.update({"staubsauger": "vacuum", "sauger": "vacuum", "vacuum cleaner": "vacuum", "bodenstaubsauger": "vacuum", "kaputter staubsauger": "vacuum_broken", "broken vacuum": "vacuum_broken"})
 SIZES["vacuum"] = (0.8, 1262)
 SIZES["vacuum_broken"] = (1.7, 1262)

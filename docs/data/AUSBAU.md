@@ -866,3 +866,19 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   - Was laut Satz irgendwo liegt/steht („im Kühlschrank liegt … ein Regenschirm“, „Handy vibriert auf dem Nachttisch“), hält niemand in der Hand.
   - Aktion `fall` ohne Sturz im Satz oder in der Bildbeschreibung (`FALL_SAID_RE`) wird `shocked` – die Figur lag sonst reglos am Boden.
   - Selbsttest: `_msg192`.
+
+## Sprechender Wecker, Leute an der Tür (Prüfung 27.11.2026, Video 225)
+- Wesen `wecker` (`extras.creature`): Wecker mit Gesicht auf dem Zifferblatt, Glocken, Armen und Beinen. Zustände: freundlich (`emotion happy`),
+  klingelt/brüllt (`action ring` oder `emotion angry`: roter Schein, Schall-Bögen, Glocken schlagen), lacht (`action laugh`), sanft-unheimlich
+  (`action soft`). Größe `CREATURE_SIZE["wecker"]`. Heißt eine Figur der Besetzung „wecker“ (kind robot/agent), wird sie dieses Wesen.
+- Regie `stage._wecker_story` (nur wenn `wecker_story`: Thema nennt den Wecker und er tut in mindestens zwei Sätzen selbst etwas): Jeder Satz, der
+  vom Wecker spricht („Wecker“, „er/ihm/ihn“, „Gerät“, „Snooze“), zeigt die Figur neben dem Menschen im Zustand des Satzes – kein loser kleiner
+  Wecker, keine Großaufnahme eines stummen Weckers. „Roboterlachen“: der Wecker allein und groß. „drückte auf Snooze“: die Hand liegt auf dem Wecker.
+  „koche ich ihm Haferbrei“: Schüssel in der Hand. Jedes dritte Bild gespiegelt.
+- Regie `stage._door_people`: „Die Nachbarn klopften … an meine Tür“ (`KNOCK_RE`) zeigt zwei verärgerte Nachbarn im Hausflur statt der Hauptfigur;
+  „verriegelte … die Tür“ (`LOCKED_RE`) zeigt die Requisite `door_locked` (Riegel, Vorhängeschloss, rotes Lämpchen) statt Tür + losem Schloss;
+  „hat meine Mutter blockiert“ (`BLOCKED_RE`): die Blockierte steht nicht im Zimmer.
+- Drehbuch (`writer.polish(js, topic)`): Ein Schlusssatz, der nur das Thema abschreibt, entfällt; beginnt die Beschreibung mit dem Titel, entfällt die
+  doppelte Zeile. `main.make`: Ein vorbereitetes Drehbuch gilt schon als zu kurz, wenn es mehr als 2 s (vorher 5 s) unter der Mindestlänge liegt –
+  sonst endet das Video mit Sekunden stummem Standbild.
+- Selbsttest: `_pruef2711`.

@@ -34,6 +34,9 @@ Regeln für die Sprechertexte:
   4. Schluss löst das Versprechen aus dem Hook ein (Auflösung, Pointe) – kurz, ohne Zusammenfassung und ohne Aufforderung.
      Der letzte Satz ist ein VOLLSTÄNDIGER Satz mit Punkt, nach dem der erste Satz wieder passt (Schleife) – nie ein abgebrochener
      Halbsatz, nie ein Gedankenstrich oder „…“ am Ende, kein Füllsatz wie „Und genau deshalb fasziniert dich die Frage …“.
+     Der letzte Satz ist NIE das abgeschriebene Thema („Ich habe mir einen intelligenten Wecker gekauft, der mich erst motiviert.“)
+     und keine Kalenderweisheit ohne Sprecher („Wer zu spät kommt, den bestraft das digitale Leben.“) – solche Sätze erzählen nichts.
+     Sagt ein Gerät oder eine Figur einen Spruch, steht dabei, WER ihn sagt („Der Wecker meinte nur: …“).
 - LISTEN („Drei Dinge, die …“): genau so viele Punkte wie im ersten Satz angekündigt, höchstens fünf. Jeder Punkt bekommt zwei bis
   vier Sätze: was passiert, warum, welche Folge oder welcher Witz daraus entsteht. Niemals zehn oder zwanzig Punkte mit je einem Satz
   herunterzählen. Nur der erste Satz eines Punkts darf mit „Nummer zwei“/„Zweitens“ beginnen – nicht jeder Satz mit „Erster …:“, „Zweiter …:“.
@@ -563,11 +566,21 @@ _UML = {"geraet": "gerät", "kuehlschrank": "kühlschrank", "waswaerewenn": "was
 _UML_RE = r"(?i)" + "|".join(sorted(_UML, key=len, reverse=True))
 
 
-def polish(js):
+def polish(js, topic=""):
     """Letzter Schliff ohne Text-KI: ß in Sprechertext, Titel und Beschreibung; englische Wörter in Einblendungen und Grafiken
     („GEHIRN-EFFECT“) werden deutsch."""
     import re as _re_p
     scs_p = [x for x in js.get("scenes") or [] if isinstance(x, dict)]
+    if len(scs_p) >= 8 and str(topic or "").strip():      # Schlusssatz ist das abgeschriebene Thema („Ich habe mir einen intelligenten Wecker gekauft, der mich erst motiviert.“ – Video 225): keine Pointe, also weg damit
+        norm_t = lambda x: _re_p.sub(r"[^a-zäöüß0-9 ]", "", str(x or "").lower()).split()  # noqa: E731
+        w_l, w_t = norm_t(scs_p[-1].get("text")), norm_t(str(topic).split(" – ")[0])
+        if len(w_l) >= 6 and (w_t[:len(w_l)] == w_l or (len(set(w_l) & set(w_t)) / len(set(w_l)) >= 0.9 and len(w_l) >= 0.5 * len(w_t))):
+            js["scenes"] = [x for x in js["scenes"] if x is not scs_p[-1]]
+            scs_p = [x for x in js.get("scenes") or [] if isinstance(x, dict)]
+    if len(scs_p) >= 2:                                   # Beschreibung beginnt mit dem Titel (Video 225): die doppelte Zeile entfällt
+        d_l = [x for x in str(js.get("description") or "").split("\n")]
+        if len(d_l) >= 3 and d_l[0].strip().lower().rstrip(".!") == str(js.get("title") or "").strip().lower().rstrip(".!"):
+            js["description"] = "\n".join(d_l[1:])
     if len(scs_p) >= 8:                                   # „Schleife“ wörtlich genommen: der letzte Satz wiederholt den ersten – niemand will denselben Satz zweimal hören
         w_a, w_b = (set(_re_p.sub(r"[^a-zäöüß0-9 ]", "", str(x.get("text") or "").lower()).split()) for x in (scs_p[0], scs_p[-1]))
         if w_a and len(w_b) >= 4 and (len(w_a & w_b) / max(len(w_a), len(w_b)) >= 0.8 or        # auch mit Vorspann („Und hier kommen drei Fakten …“)
@@ -1495,7 +1508,7 @@ def write_script(cat: dict, topic: str, trend=None, source=None) -> tuple[dict, 
         except Exception as e:  # noqa: BLE001
             ai.log(f"Schlusskorrektur nicht möglich ({e})")
     try:
-        js = polish(js)
+        js = polish(js, topic)
     except Exception:  # noqa: BLE001
         pass
     try:
@@ -1519,7 +1532,7 @@ def write_script(cat: dict, topic: str, trend=None, source=None) -> tuple[dict, 
         except Exception as e:  # noqa: BLE001
             ai.log(f"Regie-Prüfung nicht möglich ({e}) – nehme den Bildplan, wie er ist")
     try:
-        js = polish(js)                                  # noch einmal: Bildplan und Regie-Prüfung können neue Einblendungen gebracht haben
+        js = polish(js, topic)                           # noch einmal: Bildplan und Regie-Prüfung können neue Einblendungen gebracht haben
     except Exception:  # noqa: BLE001
         pass
     try:

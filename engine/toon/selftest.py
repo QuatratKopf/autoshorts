@@ -2753,12 +2753,61 @@ def main():
                             "actors": [{"id": "du", "action": "talk"}]}],
                           [(0, 4), (4, 8), (8, 12)], "Mein Wecker terrorisiert mich jeden Tag", "comedy", "")
         k1 = [stage._pkey(p_) for p_ in sd[1].get("props") or []]
-        assert "lib_sirene" in k1 and "lib_wecker" in k1, f"die Sirene steht neben dem Wecker im Schlafzimmer: {k1}"
+        assert "lib_sirene" in k1 and ("lib_wecker" in k1 or any(a_.get("kind") == "wecker" for a_ in sd[1].get("actors") or [])), f"die Sirene steht neben dem Wecker im Schlafzimmer: {k1}"
         k2 = [stage._pkey(p_) for p_ in sd[2].get("props") or []] + [extras.held_key(str(a_.get("hold") or "")) for a_ in sd[2].get("actors") or []]
         assert any("haferbrei" in str(x_) for x_ in k2) and "lib_suppe" not in k2, f"Haferbrei statt der Suppenschüssel des Drehbuchs: {k2}"
         frame(sd[1])
         frame(sd[2])
     check("Ausbau 27.11.: Haferbrei, Sirene, Zahnprothese, Dach, Polyp, Steuererklärung", _ausbau2711)
+
+    def _pruef2711():                                            # Prüfung 27.11.2026 (Video 225 „Mein Wecker terrorisiert mich jeden Tag“)
+        from .. import writer
+        T = [("Mein neuer Wecker hat mich heute komplett terrorisiert.", "bedroom", ["wecker"], "shocked"),
+             ("Er lobte mein Lächeln und spielte meine Lieblingsmusik.", "bedroom", ["wecker"], "dance"),
+             ("Doch ab Tag zwei änderte sich der Ton komplett.", "bedroom", ["wecker"], "cower"),
+             ("Ich drückte auf Snooze und das Drama nahm seinen Lauf.", "bedroom", ["wecker"], "shake"),
+             ("Die Nachbarn klopften schon genervt an meine Tür.", "hallway", ["door"], "shocked"),
+             ("Am dritten Tag verriegelte er per Smarthome-App meine Tür.", "hallway", ["vorhängeschloss", "door"], "shake"),
+             ("Der Wecker antwortete nur mit einem eiskalten Roboterlachen.", "livingroom", ["wecker"], "cower"),
+             ("Mittlerweile koche ich ihm morgens sogar frischen Haferbrei.", "kitchen", ["lib_haferbrei"], "talk"),
+             ("Gestern hat er sogar mein WLAN gehackt und meine Mutter blockiert.", "livingroom", ["router"], "shocked"),
+             ("Er sagte mir mit sanfter Stimme, dass mein neues Leben beginnt.", "bedroom", ["wecker"], "shiver")]
+        scs = [{"text": t_, "place": pl_, "time": "day", "props": [{"type": x_} for x_ in pr_], "shot": "insert" if i_ == 6 else "close" if i_ == 9 else "",
+                "actors": [{"id": "du", "action": ac_, "emotion": "scared", "pos": "center"}]} for i_, (t_, pl_, pr_, ac_) in enumerate(T)]
+        scs[8]["actors"].append({"id": "mama", "look": {"hair": "long", "gender": "w"}, "action": "talk", "emotion": "happy", "pos": 780})
+        sd = stage.direct(scs, [(i_ * 3.5, i_ * 3.5 + 3.5) for i_ in range(len(scs))], "Ich habe mir einen intelligenten Wecker gekauft, der mich erst motiviert und dann komplett terrorisiert", "comedy", "")
+        wk = lambda i_: next((a_ for a_ in sd[i_].get("actors") or [] if a_.get("kind") == "wecker"), None)  # noqa: E731
+        keys = [[stage._pkey(p_) for p_ in s_.get("props") or []] for s_ in sd]
+        for i_ in (0, 1, 3, 5, 6, 7, 8, 9):
+            assert wk(i_) and "lib_wecker" not in keys[i_] and sd[i_].get("shot") not in ("insert", "close"), f"Satz {i_ + 1}: der Wecker steht als Figur im Bild ({sd[i_].get('actors')}, {keys[i_]}, {sd[i_].get('shot')})"
+        assert wk(0)["emotion"] == "angry" and wk(1)["emotion"] == "happy" and wk(6)["action"] == "laugh" and wk(9)["action"] == "soft", "Zustand des Weckers folgt dem Satz"
+        assert not wk(2) and not wk(4), "ohne Bezug auf den Wecker steht keine Wecker-Figur im Bild"
+        me3 = next(a_ for a_ in sd[3]["actors"] if not a_.get("kind"))
+        assert me3["action"] == "point" and abs(float(me3["pos"]) - float(wk(3)["pos"])) <= 300, f"Snooze: die Figur drückt auf den Wecker ({me3})"
+        assert len(sd[4]["actors"]) == 2 and all(str(a_.get("id")).startswith("_nachbar") for a_ in sd[4]["actors"]) and "door" in keys[4], f"Nachbarn stehen vor der Tür: {sd[4]['actors']}"
+        assert "door_locked" in keys[5] and "lib_vorhaengeschloss" not in keys[5] and "door" not in keys[5], f"verriegelte Tür statt losem Schloss: {keys[5]}"
+        assert len(sd[6]["actors"]) == 1, "Roboterlachen: der Wecker allein und groß"
+        assert not any(str(a_.get("id")) == "mama" for a_ in sd[8]["actors"]), "die blockierte Mutter steht nicht fröhlich im Zimmer"
+        assert any("haferbrei" in str(a_.get("hold") or "") for a_ in sd[7]["actors"]), f"Haferbrei in der Hand: {sd[7]['actors']}"
+        for s_ in sd:
+            frame(s_)
+        for act_, mood_ in (("idle", "happy"), ("ring", "angry"), ("laugh", "happy"), ("soft", ""), ("idle", "")):
+            for t_ in (0.2, 1.1):
+                assert extras.creature("wecker", t_, 1, 0.5, mood_, 1.0, act_)[0].getbbox(), "Wecker-Figur leer"
+        frame({"place": "hallway", "actors": [{"id": "du"}], "props": [{"type": "door_locked"}]})
+        sd2 = stage.direct([{"text": "Morgens verkündet der Wecker laut, dass du neunmal auf Schlummern gedrückt hast.", "place": "bedroom", "props": ["wecker"], "actors": [{"id": "du", "action": "talk"}]},
+                            {"text": "Dein Kühlschrank meldet, was du nachts gegessen hast.", "place": "kitchen", "props": [], "actors": [{"id": "du", "action": "talk"}]},
+                            {"text": "Die Nachbarn feiern laut.", "place": "hallway", "props": [], "actors": [{"id": "du", "action": "talk"}]}],
+                           [(0, 4), (4, 8), (8, 12)], "Deine Geräte packen aus", "comedy", "")
+        assert not any(a_.get("kind") == "wecker" for s_ in sd2 for a_ in s_.get("actors") or []), "ein einzelner Wecker-Satz macht noch kein Wecker-Video"
+        assert not any(str(a_.get("id")).startswith("_nachbar") for a_ in sd2[2].get("actors") or []), "feiernde Nachbarn klopfen nicht"
+        js = {"title": "Mein Wecker terrorisiert mich jeden Tag", "description": "Mein Wecker terrorisiert mich jeden Tag\nZeile zwei.\nFrage?",
+              "scenes": [{"text": t_} for t_ in ("Mein Wecker war am Anfang nett.", "Dann wurde er laut.", "Die Nachbarn kamen vorbei.", "Der Hund bellte dazu.", "Meine Tür blieb zu.", "Im Flur brannte Licht.", "Der Kaffee wurde kalt.", "Draußen regnete es stark.", "Am Abend gab ich auf.")] + [{"text": "Ich habe mir einen intelligenten Wecker gekauft, der mich erst motiviert."}]}
+        js = writer.polish(js, "Ich habe mir einen intelligenten Wecker gekauft, der mich erst motiviert und dann komplett terrorisiert")
+        assert len(js["scenes"]) == 9 and js["description"].startswith("Zeile zwei"), "abgeschriebenes Thema als Schlusssatz / Titel als erste Beschreibungszeile entfallen"
+        js = writer.polish({"title": "A", "description": "B\nC\nD", "scenes": [{"text": t_} for t_ in ("Mein Wecker war am Anfang nett.", "Dann wurde er laut.", "Die Nachbarn kamen vorbei.", "Der Hund bellte dazu.", "Meine Tür blieb zu.", "Im Flur brannte Licht.", "Der Kaffee wurde kalt.", "Draußen regnete es stark.", "Am Abend gab ich auf.")] + [{"text": "Und am Ende lachte der Wecker ganz allein weiter."}]}, "Ich habe mir einen Wecker gekauft")
+        assert len(js["scenes"]) == 10 and js["description"] == "B\nC\nD", "ein echter Schlusssatz bleibt"
+    check("Prüfung 27.11. (Video 225): Wecker als Figur, Nachbarn an der Tür, verriegelte Tür, blockierte Mutter, Schlusssatz", _pruef2711)
 
     def _pruef2511():                                            # Prüfung 25.11.2026 (Video 206, Open-World-Karte)
         import tempfile
