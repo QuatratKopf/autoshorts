@@ -8857,7 +8857,7 @@
   "id": 230,
   "category": "whatif",
   "topic": "Was wäre, wenn du mit einem Exoskelett im Alltag Superkräfte hättest?",
-  "status": "rendered",
+  "status": "published",
   "created": 1795796554.301535,
   "title": "Exoskelett im Alltag: Was passiert wirklich?",
   "description": "Was passiert wirklich, wenn du ein Exoskelett trägst?\nErfahre die echten Fakten zu Technik und Alltag.\nWürdest du so einen Anzug anziehen?",
@@ -8892,6 +8892,12 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "zernio_id": "6b09b09dbc1bd3fc9e3f24f9",
+  "yt_status": "Zernio: published",
+  "yt_id": "igvRam6LI4g",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6b09b09dbc1bd3fc9e3f24f9",
+  "error": null
  }
 ]
