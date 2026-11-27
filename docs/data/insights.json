@@ -1,7 +1,7 @@
 {
- "updated": 1795793339.7803562,
+ "updated": 1795795719.9644964,
  "enough": true,
- "counted": 47,
+ "counted": 48,
  "total": 49,
  "needed": 6,
  "categories": [
@@ -13,15 +13,6 @@
    "avg_likes": 46.8,
    "like_rate": 2.05,
    "avg_score": 3008
-  },
-  {
-   "slug": "tiere",
-   "name": "🐾 Tierwelt",
-   "n": 3,
-   "avg_views": 1805,
-   "avg_likes": 43.7,
-   "like_rate": 2.42,
-   "avg_score": 2494
   },
   {
    "slug": "liebe",
@@ -46,9 +37,9 @@
    "name": "🤯 What If",
    "n": 12,
    "avg_views": 1693,
-   "avg_likes": 46.5,
+   "avg_likes": 46.6,
    "like_rate": 2.75,
-   "avg_score": 2393
+   "avg_score": 2394
   },
   {
    "slug": "fakten",
@@ -57,16 +48,25 @@
    "avg_views": 1668,
    "avg_likes": 44.6,
    "like_rate": 2.68,
-   "avg_score": 2348
+   "avg_score": 2349
   },
   {
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 2,
-   "avg_views": 1674,
-   "avg_likes": 35.5,
-   "like_rate": 2.12,
-   "avg_score": 2222
+   "avg_views": 1686,
+   "avg_likes": 36.0,
+   "like_rate": 2.14,
+   "avg_score": 2241
+  },
+  {
+   "slug": "tiere",
+   "name": "🐾 Tierwelt",
+   "n": 4,
+   "avg_views": 1436,
+   "avg_likes": 35.8,
+   "like_rate": 2.49,
+   "avg_score": 1997
   },
   {
    "slug": "storys",
@@ -81,10 +81,10 @@
    "slug": "motivation",
    "name": "🔥 Motivation",
    "n": 2,
-   "avg_views": 1048,
+   "avg_views": 1050,
    "avg_likes": 35.0,
-   "like_rate": 3.34,
-   "avg_score": 1594
+   "like_rate": 3.33,
+   "avg_score": 1595
   },
   {
    "slug": "musik",
@@ -108,41 +108,41 @@
    "slug": "nachricht",
    "name": "📱 Unbekannte Nachricht",
    "n": 1,
-   "avg_views": 473,
+   "avg_views": 485,
    "avg_likes": 8.0,
-   "like_rate": 1.69,
-   "avg_score": 593
+   "like_rate": 1.65,
+   "avg_score": 605
   }
  ],
  "weights": {
-  "fakten": 1.09,
+  "fakten": 1.1,
   "grusel": 0.5,
-  "tiere": 1.15,
-  "whatif": 1.11,
-  "comedy": 1.39,
-  "vergleich": 1.03,
-  "motivation": 0.74,
+  "tiere": 0.94,
+  "whatif": 1.13,
+  "comedy": 1.41,
+  "vergleich": 1.05,
+  "motivation": 0.75,
   "nachricht": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2286 Aufrufe, 2.05 % Likes).",
-  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 473 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2230 zu 1129 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2330 zu 1830 Punkte).",
-  "Wörter in starken Titeln: tier, gänsehaut."
+  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 485 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2193 zu 1135 Punkte).",
+  "Wörter in starken Titeln: tier, gänsehaut, vier."
  ],
  "words_good": [
   "tier",
-  "gänsehaut"
+  "gänsehaut",
+  "vier"
  ],
  "words_bad": [
   "remix",
+  "glas",
   "lied",
   "bekanntes",
-  "glas",
   "erkennst",
+  "scheibe",
   "jede",
-  "klassikers",
   "eines"
  ],
  "top": [
@@ -160,11 +160,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2603,
+   "views": 2604,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3443
+   "score": 3444
   },
   {
    "id": 77,
@@ -199,14 +199,14 @@
  ],
  "flop": [
   {
-   "id": 221,
-   "title": "Unbekannte Nummer: Verhäng alle Spiegel",
-   "category": "nachricht",
-   "views": 473,
-   "likes": 8,
+   "id": 224,
+   "title": "Tiefsee-Anglerfisch: Die Falle aus Licht",
+   "category": "tiere",
+   "views": 328,
+   "likes": 12,
    "comments": 0,
    "shares": 0,
-   "score": 593
+   "score": 508
   },
   {
    "id": 196,
