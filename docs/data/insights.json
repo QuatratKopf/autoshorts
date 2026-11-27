@@ -1,5 +1,5 @@
 {
- "updated": 1795791219.7111852,
+ "updated": 1795793339.7803562,
  "enough": true,
  "counted": 47,
  "total": 49,
@@ -54,7 +54,7 @@
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 8,
-   "avg_views": 1667,
+   "avg_views": 1668,
    "avg_likes": 44.6,
    "like_rate": 2.68,
    "avg_score": 2348
@@ -81,10 +81,10 @@
    "slug": "motivation",
    "name": "🔥 Motivation",
    "n": 2,
-   "avg_views": 1046,
+   "avg_views": 1048,
    "avg_likes": 35.0,
    "like_rate": 3.34,
-   "avg_score": 1592
+   "avg_score": 1594
   },
   {
    "slug": "musik",
@@ -128,7 +128,7 @@
   "Stärkste Kategorie: 🤪 Comedy (Ø 2286 Aufrufe, 2.05 % Likes).",
   "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 473 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2230 zu 1129 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2329 zu 1830 Punkte).",
+  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2330 zu 1830 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut."
  ],
  "words_good": [
@@ -142,8 +142,8 @@
   "glas",
   "erkennst",
   "jede",
-  "eines",
-  "scheibe"
+  "klassikers",
+  "eines"
  ],
  "top": [
   {

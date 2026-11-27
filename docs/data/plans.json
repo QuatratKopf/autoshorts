@@ -1,808 +1,4 @@
 {
- "2026-11-26 18:00": {
-  "category": "nachricht",
-  "topic": "Eine unbekannte Nummer schickt dir einen Countdown und befiehlt dir, alle Spiegel in deiner Wohnung abzuhängen – bis du in einem Spiegel eine Bewegung siehst, die du nicht gemacht hast.",
-  "trend": null,
-  "script": {
-   "title": "Unbekannte Nummer: Verhäng alle Spiegel",
-   "description": "Drei Uhr zwölf: Eine unbekannte Nummer schickt dir einen Countdown und einen Befehl – verhäng jeden Spiegel in deiner Wohnung.\nDu gehorchst. Nur den Spiegel im Bad vergisst du.\nWürdest du dich umdrehen?",
-   "hashtags": [
-    "#shorts",
-    "#mystery",
-    "#grusel",
-    "#creepystory",
-    "#unbekanntenummer",
-    "#spiegel",
-    "#countdown",
-    "#fyp"
-   ],
-   "tags": [
-    "unbekannte nummer",
-    "unbekannte nachricht",
-    "gruselgeschichte",
-    "mystery geschichte",
-    "spiegel",
-    "countdown",
-    "creepy story deutsch",
-    "handy nachricht"
-   ],
-   "thumbnail": {
-    "place": "bathroom",
-    "time": "night",
-    "actor": "du",
-    "action": "shocked",
-    "emotion": "shocked",
-    "props": [],
-    "weather": "cold",
-    "image": "Close-up of a terrified person in a dark room looking at a glowing smartphone with a creepy reflection in a mirror behind them, dramatic lighting, high contrast",
-    "text": "SCHAU NICHT HIN"
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "schwarz",
-     "hat": "",
-     "hair": "kurz",
-     "hair_color": "schwarz",
-     "gender": "w",
-     "skin": "hell"
-    }
-   },
-   "scenes": [
-    {
-     "text": "Drei Uhr zwölf. Eine unbekannte Nummer schickt dir einen Countdown.",
-     "image": "Nachts leuchtet das Handy im dunklen Schlafzimmer auf.",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "unbekannte Nummer"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Nachts leuchtet das Handy im dunklen Schlafzimmer auf.",
-     "time": "night",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "freeze",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "shot": "graphic",
-     "mood": "scary",
-     "graphic": {
-      "type": "message",
-      "kicker": "UNBEKANNT",
-      "lines": [
-       "In sieben Tagen",
-       "beginnt es.",
-       "!Verhäng alle Spiegel."
-      ]
-     },
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Und am Ende bewegt sich dein Spiegelbild, obwohl du ganz still stehst.",
-     "image": "Du stehst im Bad vor dem Spiegel, dein Spiegelbild bewegt sich von allein.",
-     "who": [
-      "du"
-     ],
-     "place": "bathroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Spiegelbild"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Du stehst im Bad vor dem Spiegel, dein Spiegelbild bewegt sich von allein.",
-     "time": "night",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true,
-       "hold": ""
-      }
-     ],
-     "shot": "close",
-     "mood": "scary",
-     "graphic": null,
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Du hältst es für einen dummen Scherz und löschst den Chat.",
-     "image": "Du tippst nachts im Schlafzimmer genervt auf dem Handy und löschst den Chat.",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Scherz"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Du tippst nachts im Schlafzimmer genervt auf dem Handy und löschst den Chat.",
-     "time": "night",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "idle",
-       "emotion": "happy",
-       "emote": "",
-       "pos": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "shot": "",
-     "mood": "calm",
-     "graphic": null,
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Dann kommt der Beweis. Eine zweite Nachricht.",
-     "image": "Das Handy in deiner Hand leuchtet wieder auf, du erschrickst.",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Beweis"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": {
-      "type": "tag",
-      "text": "DER BEWEIS"
-     },
-     "see": "Das Handy in deiner Hand leuchtet wieder auf, du erschrickst.",
-     "time": "night",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "worried",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "shot": "",
-     "mood": "tense",
-     "graphic": null,
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "In deinem Kühlschrank liegen eine halbe Pizza und ein kaputter Regenschirm.",
-     "image": "Die Nachricht auf dem Handy.",
-     "who": [],
-     "place": "bedroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Kühlschrank"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Die Nachricht auf dem Handy.",
-     "time": "night",
-     "props": [],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "tense",
-     "graphic": {
-      "type": "message",
-      "kicker": "UNBEKANNT",
-      "lines": [
-       "In deinem Kühlschrank:",
-       "eine halbe Pizza",
-       "!und ein kaputter Regenschirm."
-      ]
-     },
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Du läufst in die Küche, reißt den Kühlschrank auf und erstarrst.",
-     "image": "Du stehst nachts erschrocken vor dem offenen Kühlschrank.",
-     "who": [
-      "du"
-     ],
-     "place": "kitchen",
-     "camera": "still",
-     "sfx": "boom",
-     "highlight": [
-      "erstarrst"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Du stehst nachts erschrocken vor dem offenen Kühlschrank.",
-     "time": "night",
-     "props": [
-      "fridge"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "freeze",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true,
-       "hold": ""
-      }
-     ],
-     "shot": "",
-     "mood": "scary",
-     "graphic": null,
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Es stimmt. Jedes einzelne Wort.",
-     "image": "Großaufnahme: dein erschrockenes Gesicht in der dunklen Küche.",
-     "who": [
-      "du"
-     ],
-     "place": "kitchen",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Es stimmt"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Großaufnahme: dein erschrockenes Gesicht in der dunklen Küche.",
-     "time": "night",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "tremble",
-       "emotion": "scared",
-       "emote": "",
-       "pos": "center",
-       "speaks": true,
-       "hold": ""
-      }
-     ],
-     "shot": "close",
-     "mood": "tense",
-     "graphic": null,
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Der Countdown läuft. Noch sieben Tage.",
-     "image": "",
-     "who": [],
-     "place": "livingroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "sieben Tage"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "",
-     "time": "night",
-     "props": [],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "tense",
-     "graphic": {
-      "type": "chapter",
-      "value": "7",
-      "text": "TAGE ÜBRIG"
-     },
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Am nächsten Morgen wiederholt die Nummer ihren Befehl. Verhäng jeden Spiegel in deiner Wohnung.",
-     "image": "Die Nachricht auf dem Handy.",
-     "who": [],
-     "place": "livingroom",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Befehl"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Die Nachricht auf dem Handy.",
-     "time": "night",
-     "props": [],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "tense",
-     "graphic": {
-      "type": "message",
-      "kicker": "UNBEKANNT",
-      "lines": [
-       "Verhäng jeden Spiegel",
-       "!in deiner Wohnung."
-      ]
-     },
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Du holst Decken und Tücher und tust genau das, was verlangt wird.",
-     "image": "Du hängst im Flur ein Tuch über den Wandspiegel.",
-     "who": [
-      "du"
-     ],
-     "place": "hallway",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Decken"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Du hängst im Flur ein Tuch über den Wandspiegel.",
-     "time": "night",
-     "props": [
-      "mirror_covered"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "walk",
-       "emotion": "worried",
-       "emote": "",
-       "pos": "center",
-       "speaks": true,
-       "hold": ""
-      }
-     ],
-     "shot": "",
-     "mood": "tense",
-     "graphic": null,
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Ein Spiegel nach dem anderen verschwindet hinter dickem Stoff.",
-     "image": "Im Wohnzimmer hängt ein dickes Tuch über dem Spiegel, du zeigst darauf.",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Spiegel"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Im Wohnzimmer hängt ein dickes Tuch über dem Spiegel, du zeigst darauf.",
-     "time": "night",
-     "props": [
-      "mirror_covered"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "point",
-       "emotion": "worried",
-       "emote": "",
-       "pos": "center",
-       "speaks": true,
-       "hold": ""
-      }
-     ],
-     "shot": "",
-     "mood": "tense",
-     "graphic": null,
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Noch drei Tage.",
-     "image": "",
-     "who": [],
-     "place": "livingroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "drei Tage"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "",
-     "time": "night",
-     "props": [],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "tense",
-     "graphic": {
-      "type": "chapter",
-      "value": "3",
-      "text": "TAGE ÜBRIG"
-     },
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Im Fernsehen läuft eine seltsame Eilmeldung über Stromausfälle im ganzen Viertel.",
-     "image": "",
-     "who": [],
-     "place": "livingroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Eilmeldung"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "",
-     "time": "night",
-     "props": [],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "tense",
-     "graphic": {
-      "type": "news",
-      "kicker": "EILMELDUNG",
-      "text": "STROMAUSFALL",
-      "sub": "Im ganzen Viertel"
-     },
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Und nachts hörst du es hinter den Tüchern leise klopfen.",
-     "image": "Du stehst nachts im Flur und lauschst ängstlich am verhängten Spiegel.",
-     "who": [
-      "du"
-     ],
-     "place": "hallway",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "klopfen"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Du stehst nachts im Flur und lauschst ängstlich am verhängten Spiegel.",
-     "time": "night",
-     "props": [
-      "mirror_covered"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "look_around",
-       "emotion": "scared",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true,
-       "hold": ""
-      }
-     ],
-     "shot": "",
-     "mood": "scary",
-     "graphic": null,
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Noch ein Tag.",
-     "image": "",
-     "who": [],
-     "place": "bathroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "ein Tag"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "",
-     "time": "night",
-     "props": [],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "tense",
-     "graphic": {
-      "type": "chapter",
-      "value": "1",
-      "text": "TAG ÜBRIG"
-     },
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Nur der alte Spiegel im Badezimmer ist noch nicht verhängt.",
-     "image": "Du stehst nachts im Bad vor dem Wandspiegel.",
-     "who": [
-      "du"
-     ],
-     "place": "bathroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Badezimmer"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Du stehst nachts im Bad vor dem Wandspiegel.",
-     "time": "night",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "idle",
-       "emotion": "worried",
-       "emote": "",
-       "pos": "center",
-       "speaks": true,
-       "hold": ""
-      }
-     ],
-     "shot": "",
-     "mood": "tense",
-     "graphic": null,
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Du greifst nach dem Tuch und wirfst einen letzten Blick hinein.",
-     "image": "Großaufnahme: du schaust ängstlich in den Spiegel.",
-     "who": [
-      "du"
-     ],
-     "place": "bathroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "letzten Blick"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Großaufnahme: du schaust ängstlich in den Spiegel.",
-     "time": "night",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "look_around",
-       "emotion": "scared",
-       "emote": "",
-       "pos": "center",
-       "speaks": true,
-       "hold": ""
-      }
-     ],
-     "shot": "close",
-     "mood": "tense",
-     "graphic": null,
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Dein Spiegelbild steht still, obwohl du den Kopf gedreht hast.",
-     "image": "Dein Spiegelbild starrt dich reglos aus dem Spiegel an.",
-     "who": [
-      "du"
-     ],
-     "place": "bathroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "steht still"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Dein Spiegelbild starrt dich reglos aus dem Spiegel an.",
-     "time": "night",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "freeze",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true,
-       "hold": ""
-      }
-     ],
-     "shot": "",
-     "mood": "scary",
-     "graphic": null,
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Dann lächelt es dich aus dem Spiegel an. Du lächelst nicht.",
-     "image": "Dein Spiegelbild grinst mit fremdem Gesicht aus dem Spiegel.",
-     "who": [
-      "du"
-     ],
-     "place": "bathroom",
-     "camera": "still",
-     "sfx": "boom",
-     "highlight": [
-      "lächelt"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Dein Spiegelbild grinst mit fremdem Gesicht aus dem Spiegel.",
-     "time": "night",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "freeze",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true,
-       "hold": ""
-      }
-     ],
-     "shot": "",
-     "mood": "scary",
-     "graphic": null,
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Dein Handy vibriert. Eine letzte Nachricht.",
-     "image": "Du hältst im Bad zitternd das leuchtende Handy.",
-     "who": [
-      "du"
-     ],
-     "place": "bathroom",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "Handy"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Du hältst im Bad zitternd das leuchtende Handy.",
-     "time": "night",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true,
-       "hold": "phone"
-      }
-     ],
-     "shot": "",
-     "mood": "tense",
-     "graphic": null,
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Auf dem Display steht nur: Zu spät. Ich bin schon draußen.",
-     "image": "",
-     "who": [],
-     "place": "bathroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Zu spät"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "",
-     "time": "night",
-     "props": [],
-     "actors": [],
-     "shot": "graphic",
-     "mood": "scary",
-     "graphic": {
-      "type": "phone",
-      "mode": "lock",
-      "value": "03:12",
-      "kicker": "UNBEKANNT",
-      "text": "Zu spät. Ich bin schon draußen."
-     },
-     "who_desc": "",
-     "place_desc": ""
-    },
-    {
-     "text": "Hinter dir im Flur geht das Licht aus. Würdest du dich umdrehen?",
-     "image": "Du stehst geduckt im dunklen Flur und traust dich nicht, dich umzudrehen.",
-     "who": [
-      "du"
-     ],
-     "place": "hallway",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "umdrehen"
-     ],
-     "hud": "",
-     "status": "",
-     "overlay": null,
-     "see": "Du stehst geduckt im dunklen Flur und traust dich nicht, dich umzudrehen.",
-     "time": "night",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "action": "cower",
-       "emotion": "shocked",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true,
-       "hold": ""
-      }
-     ],
-     "shot": "",
-     "mood": "scary",
-     "graphic": null,
-     "who_desc": "",
-     "place_desc": ""
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "Plan",
-  "remake": false,
-  "needs": [],
-  "title": "Unbekannte Nummer: Verhäng alle Spiegel",
-  "created": 1795689471.5268664
- },
  "2026-11-26 21:00": {
   "category": "tiere",
   "topic": "Das Tier, das im dunklen Ozean leuchtet und mit einem eigenen Bio-Scheinwerfer seine Beute blendet",
@@ -2911,5 +2107,754 @@
   ],
   "title": "Exoskelett im Alltag: Was passiert wirklich?",
   "created": 1795774813.3757632
+ },
+ "2026-11-27 21:00": {
+  "category": "fakten",
+  "topic": "Warum du den Tetris-Effekt kennst: Warum dein Gehirn nach stundenlangem Gaming die Welt im Raster sieht",
+  "trend": null,
+  "script": {
+   "title": "Warum du den Tetris-Effekt kennst und wie dein Gehirn dich austrickst",
+   "description": "Siehst du nach stundenlangem Zocken überall nur noch Raster?\nWarum dein Gehirn nach Tetris und Co. plötzlich auch die echte Welt einsortieren will.\nWarst du schon mal so tief in einem Spiel gefangen?",
+   "hashtags": [
+    "#shorts",
+    "#gaming",
+    "#tetris",
+    "#gehirn",
+    "#psychologie",
+    "#fakten",
+    "#fyp",
+    "#viral"
+   ],
+   "tags": [
+    "tetris effekt",
+    "gaming fakten",
+    "gehirn psychologie",
+    "zocken folgen",
+    "warum sehe ich blöcke",
+    "psychologie fakten",
+    "gehirn muster"
+   ],
+   "thumbnail": {
+    "image": "Close-up of a gamer staring with wide open eyes into thin air, illuminated by screen light, overlaid with glowing colorful falling puzzle blocks grid, dramatic lighting, upper third clear",
+    "text": "GEHIRN SPIELT WEITER"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "lila",
+     "hat": "headphones",
+     "hair": "curly",
+     "hair_color": "dunkelbraun",
+     "gender": "w",
+     "skin": "weiß"
+    },
+    "gehirn": {
+     "kind": "brain"
+    }
+   },
+   "scenes": [
+    {
+     "see": "Du sitzt vorm Monitor und siehst verschwommen überall schwebende Bausteine.",
+     "text": "Überall fallen plötzlich Blöcke, wenn du stundenlang Tetris zockst.",
+     "image": "Überall fallen plötzlich Blöcke, wenn du stundenlang Tetris zockst.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "night",
+     "weather": "",
+     "props": [
+      "konsole",
+      "computer"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "fallende Blöcke"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "TETRIS-EFFEKT"
+     },
+     "who_desc": "",
+     "place_desc": "cozy gaming bedroom with LED lights, desk, display, dark blue walls",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein grinsendes Gehirn läuft auf dem Bildschirm weiter, obwohl das Spiel aus ist.",
+     "text": "Das ist keine Einbildung, sondern ein reales Phänomen namens Tetris-Effekt.",
+     "image": "Das ist keine Einbildung, sondern ein reales Phänomen namens Tetris-Effekt.",
+     "who": [
+      "gehirn"
+     ],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "night",
+     "weather": "",
+     "props": [
+      "computer"
+     ],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "walk",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "reales Phänomen"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "cozy gaming bedroom with LED lights, desk, display, dark blue walls",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik zeigt das Jahr 1994, in dem Forscher das Phänomen erstmals beschrieben.",
+     "text": "Schon neunzehnhundertvierundneunzig dokumentierten Forscher das Muster, aber wie entsteht es überhaupt?",
+     "image": "Schon neunzehnhundertvierundneunzig dokumentierten Forscher das Muster, aber wie entsteht es überhaupt?",
+     "who": [],
+     "place": "office",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "neunzehnhundertvierundneunzig"
+     ],
+     "graphic": {
+      "type": "number",
+      "kicker": "STUDIE",
+      "value": "1994",
+      "label": "ENTDECKT"
+     },
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du stehst im Supermarkt und versuchst Konservendosen perfekt in den Wagen zu stapeln.",
+     "text": "Wenn du Stunden am Stück dasselbe tust, schaltet dein Kopf auf Dauerfeuer.",
+     "image": "Wenn du Stunden am Stück dasselbe tust, schaltet dein Kopf auf Dauerfeuer.",
+     "who": [
+      "du"
+     ],
+     "place": "supermarkt",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "cart",
+      "cans"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "walk",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "pan_left",
+     "sfx": "pop",
+     "highlight": [
+      "Dauerfeuer"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "DAUERFEUER"
+     },
+     "who_desc": "",
+     "place_desc": "supermarket aisle with colorful products on shelves",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Schautafel im Gehirn mit leuchtenden Neuronen-Verbindungen.",
+     "text": "Deine Synapsen bauen extrem schnell neue Pfade für genau diese Bewegung auf.",
+     "image": "Deine Synapsen bauen extrem schnell neue Pfade für genau diese Bewegung auf.",
+     "who": [],
+     "place": "lab",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "synapse"
+     ],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "insert",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Synapsen"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn tippt fleißig Überstunden auf einer kleinen Tastatur.",
+     "text": "Das Gehirn übt den Bewegungsablauf einfach weiter, selbst wenn der Bildschirm aus ist.",
+     "image": "Das Gehirn übt den Bewegungsablauf einfach weiter, selbst wenn der Bildschirm aus ist.",
+     "who": [
+      "gehirn"
+     ],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "run",
+       "emotion": "happy",
+       "emote": "sweat",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "weiter"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "ÜBERSTUNDEN"
+     },
+     "who_desc": "",
+     "place_desc": "cozy gaming bedroom with LED lights, desk, display, dark blue walls",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du liegst im Bett mit weit geöffneten Augen und starrst an die Decke.",
+     "text": "Du liegst im Bett und vor deinem inneren Auge fallen weiter Steine.",
+     "image": "Du liegst im Bett und vor deinem inneren Auge fallen weiter Steine.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "night",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "sleep",
+       "emotion": "worried",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "inneren Auge"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "cozy gaming bedroom with LED lights, desk, display, dark blue walls",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du stehst im Supermarkt und lachst entgeistert über die perfekt sortierten Regale.",
+     "text": "Du denkst, du bist allein damit? Falsch, fast jeder Gamer kennt dieses Gefühl.",
+     "image": "Du denkst, du bist allein damit? Falsch, fast jeder Gamer kennt dieses Gefühl.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "camera": "pan_right",
+     "sfx": "pop",
+     "highlight": [
+      "Falsch"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "cozy gaming bedroom with LED lights, desk, display, dark blue walls",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Zähler zeigt achtzig Prozent aller Vielzocker an.",
+     "text": "Viele Zocker berichten von genau solchen Nachwirkungen.",
+     "image": "Viele Zocker berichten von genau solchen Nachwirkungen.",
+     "who": [],
+     "place": "office",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "achtzig Prozent"
+     ],
+     "graphic": {
+      "type": "number",
+      "kicker": "NACHWIRKUNGEN",
+      "value": "80 %",
+      "label": "GAMER"
+     },
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Blick auf das Handy mit Navigations-Pfeilen im Raum.",
+     "text": "Nach langen Runden Open-World-Games suchst du plötzlich im echten Leben nach einer Minimap.",
+     "image": "Nach langen Runden Open-World-Games suchst du plötzlich im echten Leben nach einer Minimap.",
+     "who": [
+      "du"
+     ],
+     "place": "street",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "minimap"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "worried",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "walk",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "whoosh",
+     "highlight": [
+      "Minimap"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Schweben von bunten Symbolen in der Luft im Flur.",
+     "text": "Oder du erwartest, dass Interaktions-Symbole über Gegenständen auftauchen.",
+     "image": "Oder du erwartest, dass Interaktions-Symbole über Gegenständen auftauchen.",
+     "who": [
+      "du"
+     ],
+     "place": "hallway",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "markers"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "pop",
+     "highlight": [
+      "Interaktions-Symbole"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "SYMBOL-EFFEKT"
+     },
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn wischt Schmutz vom Tisch weg wie auf einem Touchscreen.",
+     "text": "Das Gehirn versucht schlichtweg, gesehene Logik auf die echte Welt zu übertragen.",
+     "image": "Das Gehirn versucht schlichtweg, gesehene Logik auf die echte Welt zu übertragen.",
+     "who": [
+      "gehirn"
+     ],
+     "place": "livingroom",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [
+      "table"
+     ],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "shake",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "übertragen"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Große Infokarte mit der Aufschrift HARMLOS.",
+     "text": "Aber keine Sorge, das Ganze ist absolut harmlos und geht schnell vorbei.",
+     "image": "Aber keine Sorge, das Ganze ist absolut harmlos und geht schnell vorbei.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "wave",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "absolut harmlos"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "HARMLOS",
+      "color": "green"
+     },
+     "who_desc": "",
+     "place_desc": "cozy gaming bedroom with LED lights, desk, display, dark blue walls",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik zeigt eine Hirnkapazität von hundert Prozent Flexibilität.",
+     "text": "Es beweist nur, wie extrem anpassungsfähig dein Denkorgan eigentlich ist.",
+     "image": "Es beweist nur, wie extrem anpassungsfähig dein Denkorgan eigentlich ist.",
+     "who": [],
+     "place": "lab",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "graphic",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "anpassungsfähig"
+     ],
+     "graphic": {
+      "type": "badge",
+      "kicker": "GEHIRN",
+      "text": "SUPER ANPASSUNG"
+     },
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn stemmt Hanteln im Fitness-Studio.",
+     "text": "Wissenschaftler nutzen diesen Effekt heute sogar, um Trauma-Patienten gezielt abzulenken.",
+     "image": "Wissenschaftler nutzen diesen Effekt heute sogar, um Trauma-Patienten gezielt abzulenken.",
+     "who": [
+      "gehirn"
+     ],
+     "place": "hospital",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "think",
+       "emotion": "happy",
+       "emote": "idea",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "zoom_out",
+     "sfx": "pop",
+     "highlight": [
+      "abzulenken"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Notizzettel mit der Regel: Nach zwei Stunden Pause machen.",
+     "text": "Nur eine Regel solltest du beachten, damit dein Kopf mal durchatmen kann.",
+     "image": "Nur eine Regel solltest du beachten, damit dein Kopf mal durchatmen kann.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "think",
+       "emotion": "worried",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "durchatmen"
+     ],
+     "overlay": {
+      "type": "note",
+      "title": "REGEL #1",
+      "text": "Regelmäßige Pausen einlegen"
+     },
+     "who_desc": "",
+     "place_desc": "cozy gaming bedroom with LED lights, desk, display, dark blue walls",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Eine Uhr tickt schnell abwärts, während der Monitor blinkt.",
+     "text": "Spätestens nach zwei Stunden Gaming solltest du den Blick ins Grüne richten.",
+     "image": "Spätestens nach zwei Stunden Gaming solltest du den Blick ins Grüne richten.",
+     "who": [],
+     "place": "park",
+     "backdrop": {
+      "sky": "day",
+      "ground": "grass",
+      "elements": [
+       "trees",
+       "flowers"
+      ]
+     },
+     "time": "day",
+     "weather": "",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "zwei Stunden"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das Gehirn schläft friedlich auf dem Sofa im Wohnzimmer.",
+     "text": "Sonst baut dein Gehirn in Gedanken einfach weiter.",
+     "image": "Sonst baut dein Gehirn in Gedanken einfach weiter.",
+     "who": [
+      "gehirn"
+     ],
+     "place": "livingroom",
+     "backdrop": null,
+     "time": "night",
+     "weather": "",
+     "props": [
+      "sofa"
+     ],
+     "actors": [
+      {
+       "id": "gehirn",
+       "action": "sleep",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "calm",
+     "shot": "wide",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "weiter"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du schreckst wieder auf, während um dich herum Bausteine ins Raster fallen.",
+     "text": "Und genau deshalb schaust du wieder hin, wenn du stundenlang gezockt hast.",
+     "image": "Und genau deshalb schaust du wieder hin, wenn du stundenlang gezockt hast.",
+     "who": [
+      "du"
+     ],
+     "place": "zimmer",
+     "backdrop": null,
+     "time": "night",
+     "weather": "",
+     "props": [
+      "computer"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "crowd": "",
+     "mood": "tense",
+     "shot": "wide",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "gezockt hast"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "cozy gaming bedroom with LED lights, desk, display, dark blue walls",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [],
+  "title": "Warum du den Tetris-Effekt kennst und wie dein Gehirn dich austrickst",
+  "created": 1795793321.5915947
  }
 }
