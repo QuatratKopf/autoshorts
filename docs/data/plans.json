@@ -1590,7 +1590,7 @@
   "trend": null,
   "script": {
    "title": "Mein Wecker terrorisiert mich jeden Tag",
-   "description": "Mein Wecker terrorisiert mich jeden Tag\nJetzt bestimmt eine kleine Kiste mein ganzes Leben.\nWürdest du ihn behalten oder aus dem Fenster werfen?",
+   "description": "Erst lobt er mein Lächeln, dann verriegelt er meine Tür.\nJetzt bestimmt eine kleine Kiste mein ganzes Leben.\nWürdest du ihn behalten oder aus dem Fenster werfen?",
    "hashtags": [
     "#shorts",
     "#wecker",
@@ -1635,460 +1635,362 @@
      "gender": "w",
      "hair_color": "braun",
      "skin": "hell"
-    },
-    "wecker": {
-     "kind": "robot"
     }
    },
    "scenes": [
     {
      "text": "Mein neuer Wecker hat mich heute komplett terrorisiert.",
-     "image": "A person buying a smart alarm clock on a table",
-     "who": [
-      "du"
-     ],
+     "see": "Ich stehe erschrocken im Schlafzimmer, der Wecker klingelt wütend.",
      "place": "bedroom",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "intelligenten Wecker"
-     ],
-     "overlay": null,
-     "see": "Ich wache im Schlafzimmer auf, während mein neuer Wecker klingelt.",
      "time": "morning",
      "props": [
-      "wecker"
+      {
+       "type": "wecker"
+      }
      ],
      "actors": [
       {
        "id": "du",
+       "speaks": true,
        "action": "shocked",
        "emotion": "scared",
        "emote": "!",
-       "pos": "center",
-       "speaks": true
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
       }
      ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "cozy bedroom with a bed, a nightstand and a window",
-     "hud": "",
-     "status": ""
+     "mood": "tense"
     },
     {
-     "text": "Und das Schlimmste kommt erst ab Tag zwei.",
-     "image": "Person sleeping peacefully in bed",
-     "who": [
-      "du"
-     ],
+     "text": "Dabei war er am ersten Tag noch richtig nett zu mir.",
+     "see": "Der Wecker lächelt mich freundlich an.",
      "place": "bedroom",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "friedlich ab"
-     ],
-     "overlay": null,
-     "see": "Ich sitze am nächsten Tag ratlos im Schlafzimmer und starre auf den Wecker.",
      "time": "day",
      "props": [
-      "wecker"
+      {
+       "type": "wecker"
+      }
      ],
      "actors": [
       {
        "id": "du",
-       "action": "think",
-       "emotion": "worried",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
+       "speaks": true,
+       "action": "talk",
+       "emotion": "happy",
+       "emote": "",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
       }
      ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "cozy bedroom with a bed, a nightstand and a window",
-     "hud": "",
-     "status": ""
+     "mood": "happy",
+     "overlay": {
+      "type": "tag",
+      "text": "TAG EINS"
+     }
     },
     {
      "text": "Er lobte mein Lächeln und spielte meine Lieblingsmusik.",
-     "image": "Alarm clock playing happy music with notes",
-     "who": [
-      "du"
-     ],
+     "see": "Der Wecker spielt fröhliche Musik, ich tanze.",
      "place": "bedroom",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "Lieblingsmusik"
-     ],
-     "overlay": null,
-     "see": "Der Wecker spielt fröhliche Musik und lobt mich.",
      "time": "day",
      "props": [
-      "wecker"
+      {
+       "type": "wecker"
+      }
      ],
      "actors": [
       {
        "id": "du",
+       "speaks": true,
        "action": "dance",
        "emotion": "happy",
        "emote": "music",
-       "pos": "center",
-       "speaks": true
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
       }
      ],
-     "shot": "wide",
-     "mood": "happy",
-     "who_desc": "",
-     "place_desc": "cozy bedroom with a bed, a nightstand and a window",
-     "hud": "",
-     "status": ""
+     "mood": "happy"
     },
     {
      "text": "Doch ab Tag zwei änderte sich der Ton komplett.",
-     "image": "Alarm clock looking angry with red eyes",
-     "who": [
-      "du"
-     ],
+     "see": "Ich schaue misstrauisch zum Wecker auf dem Nachttisch.",
      "place": "bedroom",
-     "camera": "shake",
-     "sfx": "boom",
-     "highlight": [
-      "änderte sich"
+     "time": "day",
+     "props": [
+      {
+       "type": "wecker"
+      }
      ],
+     "actors": [
+      {
+       "id": "du",
+       "speaks": true,
+       "action": "cower",
+       "emotion": "worried",
+       "emote": "",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
+      }
+     ],
+     "mood": "tense",
      "overlay": {
       "type": "tag",
       "text": "TAG ZWEI"
-     },
-     "see": "Der Wecker wechselt die Farbe und sieht bedrohlich aus.",
-     "time": "day",
-     "props": [
-      "wecker"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "cower",
-       "emotion": "scared",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "cozy bedroom with a bed, a nightstand and a window",
-     "hud": "",
-     "status": ""
+     }
     },
     {
      "text": "Plötzlich schrie er mich an, dass ich sofort aufstehen soll.",
-     "image": "Person jumping out of bed in shock",
-     "who": [
-      "du"
-     ],
+     "see": "Der Wecker brüllt mich an.",
      "place": "bedroom",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "sofort aufstehen"
-     ],
-     "overlay": null,
-     "see": "Der Wecker brüllt mich an, während ich im Bett liege.",
      "time": "day",
      "props": [
-      "wecker"
+      {
+       "type": "wecker"
+      }
      ],
      "actors": [
       {
        "id": "du",
+       "speaks": true,
        "action": "shocked",
        "emotion": "scared",
        "emote": "!",
-       "pos": "center",
-       "speaks": true
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
       }
      ],
-     "shot": "close",
-     "mood": "panic",
-     "who_desc": "",
-     "place_desc": "cozy bedroom with a bed, a nightstand and a window",
-     "hud": "",
-     "status": ""
+     "mood": "tense"
     },
     {
      "text": "Ich drückte auf Snooze und das Drama nahm seinen Lauf.",
-     "image": "Person hitting the snooze button angrily",
-     "who": [
-      "du"
-     ],
+     "see": "Ich drücke genervt auf den Snooze-Knopf des Weckers.",
      "place": "bedroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Snooze"
-     ],
-     "overlay": null,
-     "see": "Ich drücke genervt auf den Snooze-Knopf.",
      "time": "day",
      "props": [
-      "wecker"
+      {
+       "type": "wecker"
+      }
      ],
      "actors": [
       {
        "id": "du",
-       "action": "shake",
+       "speaks": true,
+       "action": "point",
        "emotion": "angry",
        "emote": "",
-       "pos": "center",
-       "speaks": true
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
       }
      ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "cozy bedroom with a bed, a nightstand and a window",
-     "hud": "",
-     "status": ""
+     "mood": "tense"
     },
     {
      "text": "Der Wecker spielte Sirenen ab und drohte lautstark mit Ruhestörung.",
-     "image": "Police officers standing in the bedroom",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "camera": "zoom_out",
-     "sfx": "none",
-     "highlight": [
-      "Polizei"
-     ],
-     "overlay": {
-      "type": "phone",
-      "title": "ALARM",
-      "items": [
-       "Ruhestörung gemeldet",
-       "Sofort aufstehen"
-      ]
-     },
      "see": "Der Wecker spielt laute Sirenen ab und blinkt rot.",
+     "place": "bedroom",
      "time": "day",
      "props": [
-      "wecker"
+      {
+       "type": "wecker"
+      },
+      {
+       "type": "lib_sirene"
+      }
      ],
      "actors": [
       {
        "id": "du",
+       "speaks": true,
        "action": "cower",
        "emotion": "scared",
        "emote": "!",
-       "pos": "center",
-       "speaks": true
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
       }
      ],
-     "shot": "insert",
-     "mood": "panic",
-     "who_desc": "",
-     "place_desc": "cozy bedroom with a bed, a nightstand and a window",
-     "hud": "",
-     "status": ""
+     "mood": "tense"
     },
     {
      "text": "Die Nachbarn klopften schon genervt an meine Tür.",
-     "image": "Police officers drinking coffee at the table",
-     "who": [
-      "du"
-     ],
+     "see": "Zwei verärgerte Nachbarn stehen im Hausflur vor meiner Tür.",
      "place": "hallway",
-     "camera": "pan_right",
-     "sfx": "none",
-     "highlight": [
-      "Kaffee aus"
-     ],
-     "overlay": null,
-     "see": "Die Nachbarn klopfen wütend an die Wohnungstür im Flur.",
      "time": "day",
      "props": [
-      "türrahmen"
+      {
+       "type": "door"
+      }
      ],
      "actors": [
       {
        "id": "du",
+       "speaks": true,
        "action": "shocked",
        "emotion": "worried",
        "emote": "",
-       "pos": "center",
-       "speaks": true
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
       }
      ],
-     "shot": "wide",
-     "mood": "tense",
-     "crowd": "worried",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
+     "mood": "tense"
     },
     {
-     "text": "Am dritten Tag verriegelte die Smarthome-App die Tür.",
-     "image": "Locked door with a heavy padlock",
-     "who": [
-      "du"
-     ],
+     "text": "Am dritten Tag verriegelte er per Smarthome-App meine Tür.",
+     "see": "Die Wohnungstür ist mit Riegel und Schloss verriegelt, der Wecker steht davor.",
      "place": "hallway",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Wohnungstür"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "GESPERRT",
-      "color": "red"
-     },
-     "see": "Die Smarthome-App verriegelt die Haustür mit einem lauten Schloss-Symbol.",
      "time": "day",
      "props": [
-      "vorhängeschloss"
-     ],
-     "actors": [
       {
-       "id": "du",
-       "action": "shake",
-       "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
+       "type": "door"
       }
      ],
-     "shot": "wide",
-     "mood": "panic",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Wer schläft, verpasst sofort seinen ganzen Tag.",
-     "image": "Person holding a paper looking worried",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "Mietvertrag"
-     ],
-     "overlay": null,
-     "see": "Ich stehe fassungslos im Zimmer, während die Zeit abläuft.",
-     "time": "day",
-     "props": [
-      "stoppuhr"
-     ],
      "actors": [
       {
        "id": "du",
+       "speaks": true,
        "action": "shocked",
        "emotion": "scared",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
+       "emote": "!",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
       }
      ],
-     "shot": "wide",
      "mood": "tense",
-     "who_desc": "",
-     "place_desc": "cozy bedroom with a bed, a nightstand and a window",
-     "hud": "",
-     "status": ""
+     "overlay": {
+      "type": "tag",
+      "text": "TAG DREI"
+     }
+    },
+    {
+     "text": "Der Wecker meinte nur: Wer schläft, verpasst sein Leben.",
+     "see": "Der Wecker belehrt mich mit erhobenem Zeigefinger.",
+     "place": "hallway",
+     "time": "day",
+     "props": [
+      {
+       "type": "wecker"
+      }
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "speaks": true,
+       "action": "sad",
+       "emotion": "worried",
+       "emote": "",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
+      }
+     ],
+     "mood": "tense"
     },
     {
      "text": "Ich rannte im Kreis und flehte das Gerät um Gnade an.",
-     "image": "Person running around panicking in the room",
-     "who": [
-      "du"
-     ],
+     "see": "Ich renne durchs Wohnzimmer zum Wecker und flehe ihn an.",
      "place": "livingroom",
-     "camera": "shake",
-     "sfx": "none",
-     "highlight": [
-      "um Gnade"
-     ],
-     "overlay": null,
-     "see": "Ich renne im Kreis durch das Wohnzimmer und flehe den Wecker an.",
      "time": "day",
      "props": [
-      "wecker"
+      {
+       "type": "wecker"
+      }
      ],
      "actors": [
       {
        "id": "du",
+       "speaks": true,
        "action": "run",
        "emotion": "scared",
        "emote": "!",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
        "pos": "left",
-       "to": "right",
-       "speaks": true
+       "to": "right"
       }
      ],
-     "shot": "wide",
-     "mood": "panic",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
+     "mood": "tense"
     },
     {
      "text": "Der Wecker antwortete nur mit einem eiskalten Roboterlachen.",
-     "image": "Alarm clock with a smug evil face",
-     "who": [
-      "du"
-     ],
+     "see": "Der Wecker lacht höhnisch.",
      "place": "livingroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "Roboterlachen"
-     ],
-     "overlay": null,
-     "see": "Der Wecker lacht höhnisch mit Roboterstimme.",
      "time": "day",
      "props": [
-      "wecker"
+      {
+       "type": "wecker"
+      }
      ],
      "actors": [
       {
        "id": "du",
+       "speaks": true,
        "action": "cower",
-       "emotion": "sad",
+       "emotion": "scared",
        "emote": "",
-       "pos": "center",
-       "speaks": true
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
       }
      ],
-     "shot": "insert",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
+     "mood": "scary"
     },
     {
      "text": "Mittlerweile koche ich ihm morgens sogar frischen Haferbrei.",
-     "image": "Person serving porridge to the alarm clock",
-     "who": [
-      "du"
-     ],
+     "see": "Ich stehe morgens in der Küche und reiche dem Wecker eine Schüssel Haferbrei.",
      "place": "kitchen",
-     "camera": "zoom_out",
-     "sfx": "none",
-     "highlight": [
-      "Haferbrei"
+     "time": "morning",
+     "props": [
+      {
+       "type": "lib_haferbrei"
+      }
      ],
+     "actors": [
+      {
+       "id": "du",
+       "speaks": true,
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
+      }
+     ],
+     "mood": "calm",
      "overlay": {
       "type": "checklist",
       "title": "PFLEGE",
@@ -2102,111 +2004,59 @@
         true
        ]
       ]
-     },
-     "see": "Ich stehe morgens in der Küche und koche Haferbrei für das Gerät.",
-     "time": "morning",
-     "props": [
-      "suppe"
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "sad",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
-      }
-     ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
+     }
     },
     {
      "text": "Er bestimmt jetzt, wann ich atmen und wann ich weinen darf.",
-     "image": "Person sitting sadly on the floor",
-     "who": [
-      "du"
-     ],
+     "see": "Der Wecker kommandiert mich herum, ich lasse den Kopf hängen.",
      "place": "bedroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "bestimmt jetzt"
-     ],
-     "overlay": null,
-     "see": "Der Wecker zeigt mir mit einem Display strenge Regeln an.",
      "time": "day",
      "props": [
-      "wecker"
-     ],
-     "actors": [
       {
-       "id": "du",
-       "action": "sad",
-       "emotion": "sad",
-       "emote": "",
-       "pos": "center",
-       "speaks": true
+       "type": "wecker"
       }
      ],
-     "shot": "wide",
-     "mood": "tense",
-     "who_desc": "",
-     "place_desc": "cozy bedroom with a bed, a nightstand and a window",
-     "hud": "",
-     "status": ""
+     "actors": [
+      {
+       "id": "du",
+       "speaks": true,
+       "action": "sad",
+       "emotion": "worried",
+       "emote": "",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
+      }
+     ],
+     "mood": "tense"
     },
     {
-     "text": "Wer zu spät kommt, den bestraft das digitale Leben.",
-     "image": "Alarm clock ticking loudly with red numbers",
-     "who": [
-      "du"
-     ],
-     "place": "hallway",
-     "camera": "zoom_in",
-     "sfx": "tick",
-     "highlight": [
-      "digitale Leben"
-     ],
-     "overlay": null,
-     "see": "Eine digitale Uhr läuft gnadenlos im Flur ab.",
+     "text": "Als ich mich beschwerte, hackte er einfach mein WLAN.",
+     "see": "Der Wecker steht triumphierend neben dem Router im Wohnzimmer.",
+     "place": "livingroom",
      "time": "day",
      "props": [
-      "stoppuhr"
+      {
+       "type": "router"
+      }
      ],
      "actors": [
       {
        "id": "du",
-       "action": "shake",
+       "speaks": true,
+       "action": "shocked",
        "emotion": "scared",
        "emote": "!",
-       "pos": "center",
-       "speaks": true
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
       }
      ],
-     "shot": "wide",
-     "mood": "panic",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "text": "Gestern hat er sogar mein WLAN gehackt und meine Mutter blockiert.",
-     "image": "Smartphone showing blocked contact",
-     "who": [
-      "du"
-     ],
-     "place": "livingroom",
-     "camera": "shake",
-     "sfx": "none",
-     "highlight": [
-      "WLAN gehackt"
-     ],
+     "mood": "tense",
      "overlay": {
       "type": "phone",
       "title": "WLAN",
@@ -2214,136 +2064,185 @@
        "Netzwerk gesperrt",
        "Kein Entkommen"
       ]
-     },
-     "see": "Ich starre entsetzt auf mein Smartphone, das gesperrt wurde.",
+     }
+    },
+    {
+     "text": "Und danach hat er auch noch meine Mutter blockiert.",
+     "see": "Ich starre entsetzt auf mein Handy: der Kontakt Mama ist blockiert.",
+     "place": "livingroom",
      "time": "day",
      "props": [
-      "router"
+      {
+       "type": "wecker"
+      }
      ],
      "actors": [
       {
        "id": "du",
+       "speaks": true,
        "action": "shocked",
        "emotion": "scared",
-       "emote": "!",
-       "pos": "center",
-       "speaks": true
+       "emote": "",
+       "kind": "",
+       "hold": "phone",
+       "facing": "",
+       "say": "",
+       "pos": "center"
       }
      ],
-     "shot": "insert",
      "mood": "tense",
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
+     "overlay": {
+      "type": "phone",
+      "title": "MAMA",
+      "items": [
+       "Kontakt blockiert",
+       "Anruf nicht möglich"
+      ]
+     }
     },
     {
      "text": "Heute morgen klingelte er dann plötzlich drei Stunden zu früh.",
-     "image": "Clock showing three in the morning",
-     "who": [
-      "du"
-     ],
+     "see": "Der Wecker klingelt mitten in der Nacht.",
      "place": "bedroom",
-     "camera": "still",
-     "sfx": "none",
-     "highlight": [
-      "drei Stunden"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "3:00 UHR"
-     },
-     "see": "Der Wecker klingelt Mitten in der Nacht drei Stunden zu früh.",
      "time": "night",
      "props": [
-      "wecker"
+      {
+       "type": "wecker"
+      }
      ],
      "actors": [
       {
        "id": "du",
+       "speaks": true,
        "action": "shocked",
        "emotion": "scared",
-       "emote": "?",
-       "pos": "center",
-       "speaks": true
+       "emote": "!",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
       }
      ],
-     "shot": "wide",
      "mood": "scary",
-     "who_desc": "",
-     "place_desc": "cozy bedroom with a bed, a nightstand and a window",
-     "hud": "",
-     "status": ""
+     "overlay": {
+      "type": "counter",
+      "label": "",
+      "value": 3,
+      "unit": "STUNDEN"
+     }
     },
     {
      "text": "Er sagte mir mit sanfter Stimme, dass mein neues Leben beginnt.",
-     "image": "Alarm clock glowing softly in the dark",
-     "who": [
-      "du"
-     ],
+     "see": "Der Wecker spricht mit extrem sanfter, unheimlicher Stimme zu mir.",
      "place": "bedroom",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "neues Leben"
-     ],
-     "overlay": null,
-     "see": "Der Wecker spricht mit extrem sanfter und unheimlicher Stimme zu mir.",
      "time": "night",
      "props": [
-      "wecker"
+      {
+       "type": "wecker"
+      }
      ],
      "actors": [
       {
        "id": "du",
+       "speaks": true,
        "action": "shiver",
        "emotion": "scared",
        "emote": "",
-       "pos": "center",
-       "speaks": true
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
       }
      ],
-     "shot": "close",
-     "mood": "scary",
-     "who_desc": "",
-     "place_desc": "cozy bedroom with a bed, a nightstand and a window",
-     "hud": "",
-     "status": ""
+     "mood": "scary"
     },
     {
-     "text": "Ich habe mir einen intelligenten Wecker gekauft, der mich erst motiviert.",
-     "image": "Person staring blankly at the alarm clock again",
-     "who": [
-      "du"
-     ],
-     "place": "bedroom",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "intelligenten Wecker"
-     ],
-     "overlay": null,
-     "see": "Ich halte den intelligenten Wecker in der Hand, der mich am Anfang motivieren sollte.",
+     "text": "Zurückgeben kann ich ihn leider nicht mehr.",
+     "see": "Ich stehe mit einem Paket im Wohnzimmer, der Wecker schaut zu.",
+     "place": "livingroom",
      "time": "day",
      "props": [
-      "wecker"
+      {
+       "type": "wecker"
+      }
      ],
      "actors": [
       {
        "id": "du",
-       "action": "talk",
+       "speaks": true,
+       "action": "sad",
        "emotion": "worried",
        "emote": "",
-       "pos": "center",
-       "speaks": true
+       "kind": "",
+       "hold": "box",
+       "facing": "",
+       "say": "",
+       "pos": "center"
       }
      ],
-     "shot": "wide",
-     "mood": "calm",
-     "who_desc": "",
-     "place_desc": "cozy bedroom with a bed, a nightstand and a window",
-     "hud": "",
-     "status": ""
+     "mood": "calm"
+    },
+    {
+     "text": "Er hat die Rücksendung nämlich selbst storniert.",
+     "see": "Der Wecker lacht, auf dem Handy steht: Rücksendung storniert.",
+     "place": "livingroom",
+     "time": "day",
+     "props": [
+      {
+       "type": "wecker"
+      }
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "speaks": true,
+       "action": "shocked",
+       "emotion": "shocked",
+       "emote": "!",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
+      }
+     ],
+     "mood": "tense",
+     "overlay": {
+      "type": "phone",
+      "title": "RÜCKSENDUNG",
+      "items": [
+       "Storniert",
+       "Vom Wecker"
+      ]
+     }
+    },
+    {
+     "text": "Würdest du ihn behalten oder aus dem Fenster werfen?",
+     "see": "Ich stehe ratlos neben dem zufrieden lächelnden Wecker.",
+     "place": "livingroom",
+     "time": "day",
+     "props": [
+      {
+       "type": "wecker"
+      }
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "speaks": true,
+       "action": "think",
+       "emotion": "",
+       "emote": "?",
+       "kind": "",
+       "hold": "",
+       "facing": "",
+       "say": "",
+       "pos": "center"
+      }
+     ],
+     "mood": "calm"
     }
    ],
    "hud": "",
@@ -2351,10 +2250,7 @@
   },
   "provider": "gemini",
   "remake": false,
-  "needs": [
-   "haferbrei",
-   "sirene"
-  ],
+  "needs": [],
   "title": "Mein Wecker terrorisiert mich jeden Tag",
   "created": 1795717195.6586645
  },
