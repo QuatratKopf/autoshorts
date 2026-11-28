@@ -9258,5 +9258,45 @@
   "look": "cartoon",
   "mp4": true,
   "error": "Bei der Prüfung verworfen: Großes Wort lag im Spiegel-Bild auf der Stirn, Gehirn-Figur verdeckte die Hauptfigur"
+ },
+ {
+  "id": 239,
+  "category": "motivation",
+  "topic": "Dein größter Gegner schaut dich jeden Morgen im Spiegel an.",
+  "status": "rendered",
+  "created": 1795882559.8531296,
+  "title": "Dein größter Gegner schaut dich jeden Morgen im Spiegel an",
+  "description": "Warum du täglich wertvolle Zeit verlierst und wie du deinen Fokus zurückholst.\nWas ist dein größter Zeitfresser im Alltag?",
+  "hashtags": [
+   "#shorts",
+   "#motivation",
+   "#fokus",
+   "#mindset",
+   "#erfolg",
+   "#tiktokgermany",
+   "#viral"
+  ],
+  "tags": [
+   "motivation deutsch",
+   "fokus halten",
+   "disziplin lernen",
+   "ausreden stoppen",
+   "handysucht besiegen",
+   "mindset deutsch",
+   "produktivität",
+   "spiegelbild"
+  ],
+  "thumb_text": "BESIEGE DICH SELBST",
+  "missing": null,
+  "cover_ms": 75825,
+  "duration": 75.7,
+  "providers": {
+   "text": "Plan (Prüfung)",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]

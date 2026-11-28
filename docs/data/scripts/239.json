@@ -1,0 +1,451 @@
+{
+ "title": "Dein größter Gegner schaut dich jeden Morgen im Spiegel an",
+ "scenes": [
+  {
+   "text": "Du bist nicht faul. Du bist einfach nur extrem abgelenkt.",
+   "see": "Du sitzt am Schreibtisch vor dem aufgeschlagenen Buch und schaust aufs Handy.",
+   "place": "office",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "sit",
+     "emotion": "",
+     "emote": "none",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Dein größter Gegner schaut dich jeden Morgen im Spiegel an.",
+   "see": "Du stehst morgens im Bad vor dem Spiegel, dein Spiegelbild schaut dich an.",
+   "place": "bathroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "walk",
+     "emotion": "",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "shot": "mirror",
+   "mood": "tense"
+  },
+  {
+   "text": "Es ist drei Uhr nachts. Warum scrollst du schon wieder stundenlang durch wertlose Clips?",
+   "see": "Du liegst nachts wach im Bett und scrollst am leuchtenden Handy.",
+   "place": "bedroom",
+   "time": "night",
+   "props": [
+    {
+     "type": "phone"
+    },
+    {
+     "type": "lib_armbanduhr"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "sleep",
+     "emotion": "",
+     "emote": "none",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "_awake": true
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Stunde um Stunde verschwindet einfach im digitalen Nichts.",
+   "see": "Du stehst im Wohnzimmer und starrst aufs Handy.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "walk",
+     "emotion": "",
+     "emote": "none",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Jedes Mal, wenn es schwer wird, flüchtest du in schnelle Belohnung.",
+   "see": "Du stehst vom Schreibtisch auf und gehst mit dem Handy in der Hand weg.",
+   "place": "office",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "walk",
+     "emotion": "",
+     "emote": "none",
+     "kind": "",
+     "hold": "phone",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "offright"
+    }
+   ]
+  },
+  {
+   "text": "Morgen fange ich an. Das ist deine gefährlichste Ausrede überhaupt.",
+   "see": "Du liegst am hellen Tag faul im Bett.",
+   "place": "bedroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "sleep",
+     "emotion": "",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Du wartest auf Motivation. Aber Motivation kommt erst nach dem Handeln.",
+   "see": "Du stehst zögernd vor einer geschlossenen Tür im Flur.",
+   "place": "hallway",
+   "time": "day",
+   "props": [
+    {
+     "type": "door"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "think",
+     "emotion": "",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Du denkst, dir fehlt Talent. Falsch. Dir fehlt lediglich glasklarer Fokus.",
+   "see": "Du sitzt im Park und lässt traurig den Kopf hängen.",
+   "place": "park",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "sad",
+     "emotion": "sad",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "sad"
+  },
+  {
+   "text": "Dein Gehirn passt sich jeden Tag an das an, was du tust.",
+   "see": "Dein Gehirn steht als kleine Figur neben dir und macht jede deiner Bewegungen nach.",
+   "place": "park",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 250
+    },
+    {
+     "id": "gehirn",
+     "speaks": false,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "brain",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 790,
+     "_ksz": 0.8,
+     "hero": false
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Also leg den Schalter um. Nicht morgen. Nicht nächste Woche. Jetzt.",
+   "see": "Du springst entschlossen auf.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Schritt eins: Mach den Schreibtisch leer. Nur eine einzige Aufgabe bleibt liegen.",
+   "see": "Du stehst am aufgeräumten Schreibtisch, darauf liegt nur noch ein Buch.",
+   "place": "office",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Schritt zwei: Fünf Minuten arbeiten ohne Ablenkung. Mehr verlangst du nicht von dir.",
+   "see": "Du sitzt am Schreibtisch und arbeitest konzentriert, das Handy ist weg.",
+   "place": "office",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "sit",
+     "emotion": "",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Nach fünf Minuten bist du mittendrin. Und du willst gar nicht mehr aufhören.",
+   "see": "Du sitzt am Schreibtisch und arbeitest fröhlich weiter.",
+   "place": "office",
+   "time": "day",
+   "props": [
+    {
+     "type": "laptop"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "sit",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "happy"
+  },
+  {
+   "text": "Disziplin ist kein Schicksal, sondern eine Entscheidung, die du täglich triffst.",
+   "see": "Du stehst im Wohnzimmer und stemmst eine Hantel.",
+   "place": "livingroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "hantel",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "center"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Niemand kommt, um dich zu retten. Du musst es selbst tun.",
+   "see": "Du rennst kraftvoll durch die Straße.",
+   "place": "street",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "run",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": 190,
+     "to": 890,
+     "_jog": true
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Der Schmerz der Disziplin wiegt Gramm. Der Schmerz der Reue wiegt Tonnen.",
+   "see": "Du stehst am Berg neben einer Waage, die zu einer Seite kippt.",
+   "place": "mountain",
+   "time": "day",
+   "props": [
+    {
+     "type": "scale"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "point",
+     "emotion": "",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "calm"
+  },
+  {
+   "text": "Entscheide dich heute für den Schmerz, der dich stark macht.",
+   "see": "Du stehst oben auf dem Berg und reißt jubelnd die Arme hoch.",
+   "place": "mountain",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Erinnere dich daran: Der Mensch im Spiegel wartet auf deine Entscheidung.",
+   "see": "Du schaust im hellen Bad in den Spiegel, dein Spiegelbild lächelt.",
+   "place": "bathroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "shot": "mirror",
+   "mood": "happy"
+  },
+  {
+   "text": "Speicher dir das für die harten Tage. Du bist nicht faul.",
+   "see": "Du stehst im hellen Bad und winkst lächelnd.",
+   "place": "bathroom",
+   "time": "day",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  }
+ ]
+}
