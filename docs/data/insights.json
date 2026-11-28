@@ -1,5 +1,5 @@
 {
- "updated": 1795872349.2459369,
+ "updated": 1795874141.0360384,
  "enough": true,
  "counted": 50,
  "total": 52,
@@ -9,7 +9,7 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 6,
-   "avg_views": 2105,
+   "avg_views": 2106,
    "avg_likes": 46.2,
    "like_rate": 2.19,
    "avg_score": 2820
@@ -125,7 +125,7 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2105 Aufrufe, 2.19 % Likes).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2106 Aufrufe, 2.19 % Likes).",
   "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 620 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2181 zu 1157 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut, vier."
@@ -137,10 +137,10 @@
  ],
  "words_bad": [
   "remix",
-  "scheibe",
-  "jede",
   "eines",
+  "jede",
   "klassikers",
+  "scheibe",
   "spiegel"
  ],
  "top": [
