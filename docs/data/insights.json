@@ -1,18 +1,18 @@
 {
- "updated": 1795865138.042527,
+ "updated": 1795866934.2664392,
  "enough": true,
  "counted": 49,
- "total": 51,
+ "total": 52,
  "needed": 6,
  "categories": [
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 6,
-   "avg_views": 2105,
+   "avg_views": 2104,
    "avg_likes": 45.2,
    "like_rate": 2.15,
-   "avg_score": 2804
+   "avg_score": 2803
   },
   {
    "slug": "liebe",
@@ -63,10 +63,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 4,
-   "avg_views": 1453,
-   "avg_likes": 35.8,
-   "like_rate": 2.46,
-   "avg_score": 2014
+   "avg_views": 1454,
+   "avg_likes": 36.0,
+   "like_rate": 2.48,
+   "avg_score": 2019
   },
   {
    "slug": "storys",
@@ -108,10 +108,10 @@
    "slug": "nachricht",
    "name": "📱 Unbekannte Nachricht",
    "n": 1,
-   "avg_views": 589,
+   "avg_views": 578,
    "avg_likes": 10.0,
-   "like_rate": 1.7,
-   "avg_score": 739
+   "like_rate": 1.73,
+   "avg_score": 728
   }
  ],
  "weights": {
@@ -125,8 +125,8 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2105 Aufrufe, 2.15 % Likes).",
-  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 589 Aufrufe) – kommt seltener dran.",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2104 Aufrufe, 2.15 % Likes).",
+  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 578 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2193 zu 1146 Punkte).",
   "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2287 zu 1830 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut, vier."
@@ -139,9 +139,9 @@
  "words_bad": [
   "remix",
   "klassikers",
-  "eines",
-  "jede",
   "scheibe",
+  "jede",
+  "eines",
   "spiegel"
  ],
  "top": [
@@ -149,11 +149,11 @@
    "id": 168,
    "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
    "category": "comedy",
-   "views": 3951,
+   "views": 3950,
    "likes": 54,
    "comments": 1,
    "shares": 0,
-   "score": 4791
+   "score": 4790
   },
   {
    "id": 46,
@@ -201,11 +201,11 @@
    "id": 224,
    "title": "Tiefsee-Anglerfisch: Die Falle aus Licht",
    "category": "tiere",
-   "views": 397,
-   "likes": 12,
+   "views": 401,
+   "likes": 13,
    "comments": 0,
    "shares": 0,
-   "score": 577
+   "score": 596
   },
   {
    "id": 196,
