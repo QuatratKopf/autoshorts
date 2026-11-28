@@ -1,18 +1,18 @@
 {
- "updated": 1795846833.4058871,
+ "updated": 1795848639.8626723,
  "enough": true,
- "counted": 48,
+ "counted": 49,
  "total": 51,
  "needed": 6,
  "categories": [
   {
    "slug": "comedy",
    "name": "🤪 Comedy",
-   "n": 5,
-   "avg_views": 2287,
-   "avg_likes": 46.8,
-   "like_rate": 2.05,
-   "avg_score": 3009
+   "n": 6,
+   "avg_views": 2104,
+   "avg_likes": 45.0,
+   "like_rate": 2.14,
+   "avg_score": 2800
   },
   {
    "slug": "liebe",
@@ -115,19 +115,19 @@
   }
  ],
  "weights": {
-  "fakten": 1.1,
+  "fakten": 1.11,
   "grusel": 0.5,
-  "tiere": 0.94,
-  "whatif": 1.12,
-  "comedy": 1.41,
+  "tiere": 0.95,
+  "whatif": 1.13,
+  "comedy": 1.32,
   "vergleich": 1.08,
-  "motivation": 0.75,
+  "motivation": 0.76,
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2287 Aufrufe, 2.05 % Likes).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2104 Aufrufe, 2.14 % Likes).",
   "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 576 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2201 zu 1146 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2191 zu 1146 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut, vier."
  ],
  "words_good": [
@@ -137,13 +137,11 @@
  ],
  "words_bad": [
   "remix",
-  "lied",
-  "erkennst",
-  "bekanntes",
-  "glas",
-  "eines",
+  "jede",
   "klassikers",
-  "jede"
+  "eines",
+  "scheibe",
+  "spiegel"
  ],
  "top": [
   {
