@@ -1,7 +1,7 @@
 {
- "updated": 1795866934.2664392,
+ "updated": 1795868734.125125,
  "enough": true,
- "counted": 49,
+ "counted": 50,
  "total": 52,
  "needed": 6,
  "categories": [
@@ -9,10 +9,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 6,
-   "avg_views": 2104,
+   "avg_views": 2105,
    "avg_likes": 45.2,
    "like_rate": 2.15,
-   "avg_score": 2803
+   "avg_score": 2804
   },
   {
    "slug": "liebe",
@@ -33,19 +33,10 @@
    "avg_score": 2435
   },
   {
-   "slug": "whatif",
-   "name": "🤯 What If",
-   "n": 12,
-   "avg_views": 1695,
-   "avg_likes": 46.7,
-   "like_rate": 2.75,
-   "avg_score": 2398
-  },
-  {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 8,
-   "avg_views": 1672,
+   "avg_views": 1673,
    "avg_likes": 44.6,
    "like_rate": 2.67,
    "avg_score": 2353
@@ -60,13 +51,22 @@
    "avg_score": 2298
   },
   {
+   "slug": "whatif",
+   "name": "🤯 What If",
+   "n": 13,
+   "avg_views": 1614,
+   "avg_likes": 44.1,
+   "like_rate": 2.73,
+   "avg_score": 2277
+  },
+  {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 4,
-   "avg_views": 1454,
+   "avg_views": 1455,
    "avg_likes": 36.0,
-   "like_rate": 2.48,
-   "avg_score": 2019
+   "like_rate": 2.47,
+   "avg_score": 2020
   },
   {
    "slug": "storys",
@@ -81,10 +81,10 @@
    "slug": "motivation",
    "name": "🔥 Motivation",
    "n": 2,
-   "avg_views": 1064,
+   "avg_views": 1066,
    "avg_likes": 35.0,
-   "like_rate": 3.29,
-   "avg_score": 1608
+   "like_rate": 3.28,
+   "avg_score": 1612
   },
   {
    "slug": "musik",
@@ -108,27 +108,26 @@
    "slug": "nachricht",
    "name": "📱 Unbekannte Nachricht",
    "n": 1,
-   "avg_views": 578,
+   "avg_views": 611,
    "avg_likes": 10.0,
-   "like_rate": 1.73,
-   "avg_score": 728
+   "like_rate": 1.64,
+   "avg_score": 761
   }
  ],
  "weights": {
-  "fakten": 1.11,
+  "fakten": 1.12,
   "grusel": 0.5,
-  "tiere": 0.95,
-  "whatif": 1.13,
-  "comedy": 1.32,
-  "vergleich": 1.08,
-  "motivation": 0.76,
+  "tiere": 0.96,
+  "whatif": 1.08,
+  "comedy": 1.33,
+  "vergleich": 1.09,
+  "motivation": 0.77,
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2104 Aufrufe, 2.15 % Likes).",
-  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 578 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2193 zu 1146 Punkte).",
-  "Längere Videos (ab 70 s) laufen deutlich besser als kürzere Videos (Ø 2287 zu 1830 Punkte).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2105 Aufrufe, 2.15 % Likes).",
+  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 611 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2165 zu 1147 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut, vier."
  ],
  "words_good": [
@@ -138,10 +137,10 @@
  ],
  "words_bad": [
   "remix",
-  "klassikers",
   "scheibe",
-  "jede",
   "eines",
+  "jede",
+  "klassikers",
   "spiegel"
  ],
  "top": [
@@ -149,11 +148,11 @@
    "id": 168,
    "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
    "category": "comedy",
-   "views": 3950,
+   "views": 3951,
    "likes": 54,
    "comments": 1,
    "shares": 0,
-   "score": 4790
+   "score": 4791
   },
   {
    "id": 46,
@@ -201,11 +200,11 @@
    "id": 224,
    "title": "Tiefsee-Anglerfisch: Die Falle aus Licht",
    "category": "tiere",
-   "views": 401,
+   "views": 403,
    "likes": 13,
    "comments": 0,
    "shares": 0,
-   "score": 596
+   "score": 598
   },
   {
    "id": 196,
