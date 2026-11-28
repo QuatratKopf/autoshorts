@@ -971,19 +971,23 @@
  },
  "akku": {
   "n": 1,
-  "last": "Exoskelett im Alltag: Was passiert wirklich?"
+  "last": "Exoskelett im Alltag: Was passiert wirklich?",
+  "done": true
  },
  "friseursalon": {
   "n": 1,
-  "last": "Barbershop gegen Friseursalon – wer verdient mehr?"
+  "last": "Barbershop gegen Friseursalon – wer verdient mehr?",
+  "done": true
  },
  "haarschnitt": {
   "n": 1,
-  "last": "Barbershop gegen Friseursalon – wer verdient mehr?"
+  "last": "Barbershop gegen Friseursalon – wer verdient mehr?",
+  "done": true
  },
  "bartpflege": {
   "n": 1,
-  "last": "Barbershop gegen Friseursalon – wer verdient mehr?"
+  "last": "Barbershop gegen Friseursalon – wer verdient mehr?",
+  "done": true
  },
  "tetrisblock": {
   "n": 1,
@@ -992,6 +996,7 @@
  },
  "magazin": {
   "n": 1,
-  "last": "Tetris-Effekt: Warum dein Gehirn weiterspielt"
+  "last": "Tetris-Effekt: Warum dein Gehirn weiterspielt",
+  "done": true
  }
 }

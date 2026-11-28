@@ -2607,6 +2607,54 @@ def main():
             frame({"place": "plain", "props": [k_], "actors": [{"id": "du", "hold": k_}]}, None, 0.7)
     check("Tattoo-Studio und Nagelstudio: Orte, Werkzeug in der Hand (Prüfung 20.11., Plan 21 Uhr)", _studios)
 
+    def _ausbau2811():                                           # Ausbau 28.11.2026 (Plan „Barbershop gegen Friseursalon“): beide Läden, Werkzeug, Akku, Magazin
+        import json as json_
+        import os as os_
+        import re as re_
+        from engine import main as _main
+        from . import library
+        T = [("Im Barbershop kostet der Haarschnitt plus Bartpflege meistens dreißig Euro.", "tattoostudio", [{"id": "leo", "action": "point"}], ["money"]),
+             ("Leo schneidet am Tag zehn Kunden.", "tattoostudio", [{"id": "leo", "action": "point"}], ["car"]),
+             ("Im Friseursalon nimmt Mia für Waschen und Schneiden fünfzig Euro.", "nailstudio", [{"id": "mia", "action": "talk"}], []),
+             ("Sie schafft acht Kunden täglich.", "plain", [{"id": "mia", "action": "point"}], []),
+             ("Leo rasiert und stutzt den Bart seines Kunden.", "plain", [{"id": "leo", "action": "talk"}], []),
+             ("Mia föhnt und stylt in aller Ruhe.", "nailstudio", [{"id": "mia", "action": "talk"}], []),
+             ("Wer verdient am Ende mehr?", "plain", [{"id": "leo", "action": "think"}, {"id": "mia", "action": "think"}], [])]
+        sf = stage.direct([{"text": t_, "place": pl_, "actors": a_, "props": pr_} for t_, pl_, a_, pr_ in T],
+                          [(i_ * 4, i_ * 4 + 4) for i_ in range(len(T))], "Barbershop gegen Friseursalon – wer verdient mehr?", "vergleich")
+        pl = lambda i_: places.resolve(sf[i_]["place"])
+        kn = lambda i_: [extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q), str(q.get("type") if isinstance(q, dict) else q)) for q in sf[i_].get("props") or []]
+        hold = lambda i_: [extras.PROP_ALIASES.get(str(a.get("hold") or ""), str(a.get("hold") or "")) for a in sf[i_].get("actors") or [] if isinstance(a, dict)]
+        assert pl(0) == "barbershop" and pl(1) == "barbershop", f"Barbershop statt Tattoo-Studio, Leo bleibt dort: {pl(0)} {pl(1)}"
+        assert pl(2) == "hairsalon" and pl(3) == "hairsalon", f"Friseursalon statt Nagelstudio, Mia bleibt dort: {pl(2)} {pl(3)}"
+        assert hold(0)[0] in ("scissors", "clippers", "razor") and hold(1)[0] in ("scissors", "clippers"), f"Werkzeug in der Hand: {hold(0)} {hold(1)}"
+        assert "car" not in kn(1) and not set(kn(0) + kn(1)) & {"tattoomachine", "nailfile", "nailpolish"}, f"kein Auto, kein fremdes Werkzeug: {kn(0)} {kn(1)}"
+        assert pl(4) == "barbershop" and hold(4) == ["razor"], f"Bart: Rasiermesser im Barbershop: {pl(4)} {hold(4)}"
+        assert pl(5) == "hairsalon" and hold(5) == ["hairdryer"], f"Föhnen: Föhn im Friseursalon: {pl(5)} {hold(5)}"
+        assert pl(6) not in stage.STUDIOS, f"beide zusammen: neutraler Ort: {pl(6)}"
+        ns = stage.direct([{"text": "Nina feilt Nägel in ihrem Salon.", "place": "nail_salon", "actors": [{"id": "nina"}]}], [(0, 4)], "Nagelstudio: So viel bleibt übrig", "vergleich")
+        assert places.resolve(ns[0]["place"]) == "nailstudio", f"Nagelstudio bleibt Nagelstudio: {ns[0]['place']}"
+        assert not re_.search(dict((v, k) for k, v in stage.TEXT_PROPS)["scissors"], "die schere zwischen arm und reich"), "Redensart: keine Schere"
+        missing = [w_ for w_ in ("friseursalon", "haarschnitt", "bartpflege", "barbershop", "friseur", "föhn", "akku", "magazin") if not _main.known_thing(w_)]
+        assert not missing, f"Engine kennt: {missing}"
+        for al_, pl_ in (("friseursalon", "hairsalon"), ("Friseur", "hairsalon"), ("barber shop", "barbershop"), ("herrenfriseur", "barbershop"), ("nail salon", "nailstudio")):
+            assert places.resolve(al_) == pl_, f"{al_} → {places.resolve(al_)}"
+        cast_ = {"leo": {"shirt": "schwarz", "hat": "cap", "gender": "m"}, "mia": {"shirt": "türkis", "hair": "bob", "gender": "w"}}
+        for sc_ in sf:
+            frame(sc_, cast_)
+        for pl_ in ("barbershop", "hairsalon"):
+            assert pl_ in stage.INDOOR and pl_ in stage.NO_FURNITURE
+            frame({"place": pl_, "time": "night", "actors": [{"id": "du"}]})
+        for k_ in ("scissors", "clippers", "razor", "hairdryer"):
+            assert extras.held_key(k_) == "prop:" + k_
+            for t_ in (0.1, 0.7, 2.4):
+                frame({"place": "plain", "props": [k_], "actors": [{"id": "du", "hold": k_}]}, None, t_)
+            frame({"place": "plain", "shot": "insert", "props": [k_], "actors": []}, None, 0.7)
+        shp = json_.load(open(os_.path.join(os_.path.dirname(__file__), "..", "..", "docs", "data", "shapes.json"), encoding="utf-8"))
+        for k_ in ("akku", "magazin"):
+            assert not shp[k_].get("auto") and library.clean(shp[k_]) and len(shp[k_]["shapes"]) >= 8, k_
+    check("Barbershop und Friseursalon: Orte, Schere, Haarschneider, Rasiermesser, Föhn; Akku, Magazin (Ausbau 28.11.)", _ausbau2811)
+
     def _ausbau2211():                                           # Ausbau 22.11.2026: Handy-Display, Kontrollraum, aufgeräumte Bibliothek
         import re
         from engine import main as _main

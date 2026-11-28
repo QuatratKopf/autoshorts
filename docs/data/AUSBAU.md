@@ -910,3 +910,18 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   füllte vier Sekunden allein das Bild), die Zeichnung ist aus `shapes.json` entfernt, die Regie wirft solche Requisiten heraus. „Tetris spielen“ setzt
   `_no_insert`. Wer in einer Baustein-Szene schläft, schläft nachts, ohne Handy und Musiknoten. `stage._plates_apart`: Das Gehirn wird unter einem
   Notizzettel klein gezeichnet, damit der Zettel nicht auf seinem Kopf klebt.
+
+## Barbershop und Friseursalon (Ausbau 28.11.2026, Plan „Barbershop gegen Friseursalon – wer verdient mehr?“)
+- Orte `barbershop` (`places.barbershop`: dunkelgrüne Wand, Spiegel mit Glühbirnen-Leiste, Ablage mit Fläschchen und Rasierpinsel, roter Barbierstuhl,
+  gestreifte Barbier-Säule – kein Schriftzug) und `hairsalon` (`places.hairsalon`: heller Raum, Bogenspiegel mit Leuchtrand, Pflegeflaschen, Föhn im Halter,
+  Trockenhaube, Waschplatz). Alias: Friseur, Friseursalon, Frisör, Haarsalon → `hairsalon`; Barber, Barbier, Herrenfriseur → `barbershop`. Ein bloßes „Salon“
+  ist absichtlich kein Alias (Nagelsalon, Beauty-Salon).
+- Requisiten (`extras.py`, klein, für die Hand): `scissors` (Friseurschere, schnippt; Wunsch „Haarschnitt“), `clippers` (Haarschneidemaschine, surrt),
+  `razor` (Rasiermesser mit Pinsel; Wunsch „Bartpflege“), `hairdryer` (Föhn mit Luft-Strichen). Text-Hinweise in `stage.TEXT_PROPS`
+  („die Schere zwischen Arm und Reich“ zählt nicht).
+- Regie: `stage._studio_story` arbeitet jetzt mit der Tabelle `stage.STUDIOS` (Ort → Wörter für den Ort, Wörter für die Arbeit, Werkzeug) für Tattoo-Studio,
+  Nagelstudio, Barbershop und Friseursalon. Nennt der Satz den Barbershop bzw. Friseursalon, spielt er dort – auch wenn das Drehbuch mangels Ort
+  `tattoostudio`/`nailstudio` angibt (so steht es im vorbereiteten Plan). Beschreibt der Satz die Arbeit, hält die Figur das Werkzeug (Bart → Rasiermesser,
+  Föhnen/Styling → Föhn). Weitere Läden dieser Art: Ort zeichnen, Zeile in `STUDIOS`, Werkzeug in `STUDIO_TOOLS`.
+- Bibliothek: `akku` (Akkupack mit Ladebalken und Blitz) und `magazin` (Zeitschrift ohne Schrift) von Hand neu gezeichnet, `auto` entfernt.
+- Selbsttest: `_ausbau2811`. Offen: Kundschaft sitzt nicht im Stuhl (keine Sitz-Haltung im Barbierstuhl), Umhang und Haare-Schneiden als Bewegung fehlen.

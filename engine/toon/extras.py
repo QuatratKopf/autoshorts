@@ -4500,6 +4500,93 @@ SIZES["nailfile"] = (0.2, 1262)
 SIZES["nailpolish"] = (0.14, 1262)
 
 
+def p_scissors(d, x, t, s=1.0):
+    """Friseurschere (Ausbau 28.11.2026, Plan „Barbershop gegen Friseursalon“, Wunsch „Haarschnitt“): steht auf den Griffen, zwei
+    schlanke Stahlklingen nach oben, schwarze Griffringe, Schraube; sie schnippt (Klingen öffnen und schließen sich)."""
+    op = 30 + abs(math.sin(t * 5)) * 34
+    piv = (x, GROUND - 168)
+    for sg in (-1, 1):
+        ring = (x - sg * (36 + op * 0.5), GROUND - 50)
+        d.line([piv, (ring[0] + sg * 14, ring[1] - 40)], fill=INK, width=30)                                                    # Schenkel zum Griff
+        d.line([piv, (ring[0] + sg * 14, ring[1] - 40)], fill=BLACK_R, width=16)
+        d.ellipse((ring[0] - 46, ring[1] - 50, ring[0] + 46, ring[1] + 50), outline=INK, width=26)                              # Griffring
+        d.ellipse((ring[0] - 40, ring[1] - 44, ring[0] + 40, ring[1] + 44), outline=BLACK_R, width=14)
+    for sg in (-1, 1):
+        tip = (x + sg * op, GROUND - 352)
+        _poly(d, [(piv[0] - sg * 20, piv[1] + 26), (piv[0] + sg * 16, piv[1] + 30), (tip[0] + sg * 10, tip[1] + 40), tip], STEEL if sg < 0 else _lt(STEEL, 0.25))
+    d.ellipse((piv[0] - 13, piv[1] - 13, piv[0] + 13, piv[1] + 13), fill=(226, 190, 96), outline=INK, width=5)                  # Schraube
+    if int(t * 5 / math.pi) % 2 == 0:                                                                                           # Schnipp-Striche
+        for sg in (-1, 1):
+            d.line((x + sg * 70, GROUND - 330, x + sg * 104, GROUND - 350), fill=INK, width=7)
+
+
+def p_clippers(d, x, t, s=1.0):
+    """Haarschneidemaschine (Ausbau 28.11.2026, Wunsch „Haarschnitt“): schwarzer Griff mit rotem Schiebeschalter, Scherkopf aus Stahl mit
+    Zähnen oben, Kabel; sie surrt (zittert, Striche am Scherkopf)."""
+    j = int(math.sin(t * 47) * 3)
+    d.line([(x + j, GROUND - 30), (x + 6, GROUND - 6), (x + 70, GROUND - 8), (x + 110, GROUND - 40)], fill=INK, width=12, joint="curve")   # Kabel
+    _r(d, (x - 56 + j, GROUND - 262, x + 56 + j, GROUND - 22), BLACK_R, 34)                                                     # Griff
+    _r(d, (x - 24 + j, GROUND - 206, x + 24 + j, GROUND - 120), (90, 92, 104), 12, 5, shade=False)                              # Schalterbahn
+    _r(d, (x - 20 + j, GROUND - 204, x + 20 + j, GROUND - 164), RED, 8, 5, shade=False)
+    for k in range(7):                                                                                                          # Zähne
+        tx = x - 56 + k * 16 + j
+        d.polygon([(tx, GROUND - 300), (tx + 8, GROUND - 338), (tx + 16, GROUND - 300)], fill=_lt(STEEL, 0.3), outline=INK)
+    _r(d, (x - 64 + j, GROUND - 308, x + 64 + j, GROUND - 250), STEEL, 10)                                                      # Scherkopf
+    for k in range(3):                                                                                                          # Surr-Striche
+        a = math.radians(-130 + k * 40)
+        r0, r1 = 30 + (int(t * 12) % 3) * 5, 56 + (int(t * 12) % 3) * 5
+        d.line((x + j + math.cos(a) * r0, GROUND - 340 + math.sin(a) * r0, x + j + math.cos(a) * r1, GROUND - 340 + math.sin(a) * r1), fill=INK, width=7)
+
+
+def p_razor(d, x, t, s=1.0):
+    """Rasiermesser mit Rasierpinsel (Ausbau 28.11.2026, Wunsch „Bartpflege“): aufgeklapptes Messer mit Holzgriff und blanker Klinge,
+    daneben der Pinsel mit Schaumkrone; die Klinge blitzt."""
+    _r(d, (x + 44, GROUND - 96, x + 116, GROUND - 6), (104, 66, 44), 16)                                                        # Pinsel: Griff, Zwinge, Borsten, Schaum
+    _r(d, (x + 40, GROUND - 120, x + 120, GROUND - 88), (226, 190, 96), 8)
+    _poly(d, [(x + 46, GROUND - 118), (x + 114, GROUND - 118), (x + 132, GROUND - 216), (x + 28, GROUND - 216)], (224, 206, 176))
+    _blobs(d, [(x + 52, GROUND - 226, 30), (x + 84, GROUND - 244, 34), (x + 114, GROUND - 224, 28)], (252, 252, 250))
+    piv = (x - 30, GROUND - 150)
+    d.line([(x - 108, GROUND - 26), piv], fill=INK, width=58)                                                                   # Holzgriff
+    d.line([(x - 108, GROUND - 26), piv], fill=(132, 84, 52), width=42)
+    d.line([(x - 100, GROUND - 44), (x - 50, GROUND - 124)], fill=(170, 116, 76), width=10)
+    _poly(d, [(piv[0] - 16, piv[1] + 14), (piv[0] + 22, piv[1] - 6), (x - 92, GROUND - 332), (x - 128, GROUND - 318), (x - 132, GROUND - 286)], STEEL)   # Klinge
+    d.line([(piv[0] - 8, piv[1] - 12), (x - 112, GROUND - 300)], fill=_lt(STEEL, 0.5), width=9)
+    d.ellipse((piv[0] - 13, piv[1] - 13, piv[0] + 13, piv[1] + 13), fill=(226, 190, 96), outline=INK, width=5)
+    if int(t * 3) % 2 == 0:                                                                                                     # Blitzer an der Klinge
+        d.line((x - 150, GROUND - 372, x - 150, GROUND - 332), fill=(250, 206, 60), width=7)
+        d.line((x - 170, GROUND - 352, x - 130, GROUND - 352), fill=(250, 206, 60), width=7)
+
+
+def p_hairdryer(d, x, t, s=1.0):
+    """Föhn (Ausbau 28.11.2026, Friseursalon – „Waschen, Schneiden, Styling“): korallroter Föhn, Düse nach links, Griff nach unten,
+    Lüftungsgitter hinten, Kabel; Luft-Striche strömen aus der Düse."""
+    d.line([(x + 34, GROUND - 40), (x + 40, GROUND - 8), (x + 104, GROUND - 10), (x + 132, GROUND - 44)], fill=INK, width=12, joint="curve")   # Kabel
+    _poly(d, [(x + 4, GROUND - 186), (x + 76, GROUND - 186), (x + 62, GROUND - 30), (x + 6, GROUND - 30)], (236, 100, 110))     # Griff
+    _r(d, (x + 22, GROUND - 150, x + 52, GROUND - 110), (60, 62, 72), 6, 5, shade=False)                                        # Schalter
+    _poly(d, [(x - 150, GROUND - 292), (x - 60, GROUND - 318), (x - 60, GROUND - 188), (x - 150, GROUND - 214)], (60, 62, 72))  # Düse
+    _o(d, (x - 80, GROUND - 336, x + 110, GROUND - 170), (236, 100, 110))                                                       # Gehäuse
+    _o(d, (x + 44, GROUND - 300, x + 104, GROUND - 206), (60, 62, 72), 6, shade=False)                                          # Gitter
+    for k in range(3):
+        d.line((x + 56 + k * 16, GROUND - 284 + k * 4, x + 56 + k * 16, GROUND - 222 - k * 4), fill=(150, 154, 166), width=5)
+    ph = (t * 3) % 1.0
+    for k in range(3):                                                                                                          # Luft
+        ax = x - 176 - ph * 46 - k * 6
+        ay = GROUND - 288 + k * 34
+        d.line((ax, ay, ax - 54, ay), fill=(150, 200, 230), width=9)
+
+
+PROPS.update({"scissors": p_scissors, "clippers": p_clippers, "razor": p_razor, "hairdryer": p_hairdryer})
+PROP_ALIASES.update({"schere": "scissors", "scheren": "scissors", "friseurschere": "scissors", "haarschere": "scissors", "haarschnitt": "scissors", "haarschnitte": "scissors", "haircut": "scissors",
+                     "haarschneider": "clippers", "haarschneidemaschine": "clippers", "trimmer": "clippers", "barttrimmer": "clippers", "bartschneider": "clippers", "rasierer": "clippers",
+                     "hair clipper": "clippers", "clipper": "clippers", "maschinenschnitt": "clippers",
+                     "rasiermesser": "razor", "rasierpinsel": "razor", "bartpflege": "razor", "rasur": "razor", "nassrasur": "razor", "bartrasur": "razor", "straight razor": "razor", "beard care": "razor",
+                     "föhn": "hairdryer", "fön": "hairdryer", "foehn": "hairdryer", "haartrockner": "hairdryer", "hair dryer": "hairdryer", "blowdryer": "hairdryer", "blow dryer": "hairdryer"})
+SIZES["scissors"] = (0.22, 1262)
+SIZES["clippers"] = (0.22, 1262)
+SIZES["razor"] = (0.2, 1262)
+SIZES["hairdryer"] = (0.28, 1262)
+
+
 PROPS["drill"] = p_drill
 PROP_ALIASES.update({"bohrmaschine": "drill", "bohrer": "drill", "akkuschrauber": "drill", "schlagbohrer": "drill", "bohrhammer": "drill"})
 SIZES["drill"] = (0.45, 1262)

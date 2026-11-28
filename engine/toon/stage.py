@@ -17,7 +17,7 @@ POS = {"left": 250, "center": 540, "right": 830, "offleft": -260, "offright": 13
        "links": 250, "mitte": 540, "rechts": 830}
 CALL_ARM = (106, 70)    # Oberarm/Unterarm für „Handy am Ohr“
 TALL_OV = ("phone", "checklist", "note")
-NO_FURNITURE = ("restaurant", "diningroom", "bathroom", "hallway", "supermarket", "supermarket_empty", "station", "transit", "basement", "attic", "hospital", "serverroom", "chapel", "tattoostudio", "nailstudio", "controlroom", "throneroom", "royalmuseum")
+NO_FURNITURE = ("restaurant", "diningroom", "bathroom", "hallway", "supermarket", "supermarket_empty", "station", "transit", "basement", "attic", "hospital", "serverroom", "chapel", "tattoostudio", "nailstudio", "barbershop", "hairsalon", "controlroom", "throneroom", "royalmuseum")
 MAIN_IDS = ("du", "ich", "held", "hero", "main", "erzähler", "narrator", "a0")
 
 
@@ -5715,6 +5715,18 @@ TATTOO_RE = r"tattoo|tätowier|tatowier"
 NAILS_RE = r"nagelstudio|nageldesign|nagelsalon|manik[üu]re|neumodellage|gel-?nägel|kunstnägel|fingernägel|nagellack|\bnägel\b|nagelfeile|\bfeilt\b|\bfeile\b"
 TATTOO_DO_RE = r"\bsticht\b|\bstechen\b|\bgestochen|tätowiert|tätowieren|\bnadel|tattoo"
 NAILS_DO_RE = r"\bfeilt\b|\bfeilen\b|\bfeile\b|lackier|\bnägel\b|gel-?nägel|kunstnägel|modellage|manik[üu]re|auffüllen|aufgefüllt"
+# Ausbau 28.11.2026 (Plan „Barbershop gegen Friseursalon“): zwei weitere Läden nach demselben Muster. „Haarschnitt“ allein entscheidet
+# nicht, in welchem der beiden Läden der Satz spielt – das tun nur die Wörter unten.
+BARBER_RE = r"barber|barbier|herrenfriseur|herrensalon|bartpflege|bartschnitt|bartrasur|nassrasur|\brasur\b|\bbart\b|\bbärte\b"
+HAIRSALON_RE = r"(?<!herren)fris[eö]ur|coiffeur|haarsalon|haarstudio|damensalon|dauerwelle|strähnchen|waschen[ ,]+(?:und )?schneiden|\bföhn"
+BARBER_DO_RE = r"\bschneide[tn]?\b|\bschnitt\b|haarschnitt|\brasier|\brasur|\btrimm|\bstutz|\bbart|bartpflege|\bfade\b|maschinenschnitt"
+HAIR_DO_RE = r"\bschneide[tn]?\b|\bschnitt\b|haarschnitt|\bföhn|\bfärb|\bwäscht\b|waschen|\bstyl|strähnchen|dauerwelle|\bfrisier|\bfrisur"
+# Ort → (Wörter für den Ort, Wörter für die Arbeit, Werkzeug in der Hand bei der Arbeit, lose Werkzeuge, die in die Hand wandern)
+STUDIOS = {"tattoostudio": (TATTOO_RE, TATTOO_DO_RE, ("tattoomachine",), ()),
+           "nailstudio": (NAILS_RE, NAILS_DO_RE, ("nailfile", "nailpolish"), ("nailpolish",)),
+           "barbershop": (BARBER_RE, BARBER_DO_RE, ("clippers", "razor", "scissors"), ("clippers", "razor", "scissors")),
+           "hairsalon": (HAIRSALON_RE, HAIR_DO_RE, ("scissors", "hairdryer"), ("scissors", "hairdryer"))}
+STUDIO_TOOLS = ("tattoomachine", "nailfile", "nailpolish", "clippers", "razor", "scissors", "hairdryer")
 UNPAID_RE = r"unbezahlt|bezahlt \w+ (?:leider |aber |natürlich )?(?:niemand|keiner)|(?:niemand|keiner) bezahlt|bezahlt (?:leider |aber )?(?:niemand|keiner)|ohne bezahlung|\bkostenlos\b|\bumsonst\b|\bgratis\b|kein(?:en)? cent|kein geld"
 
 
@@ -5754,7 +5766,7 @@ def _studio_story(scenes, topic=""):
     import re as _re
     sc_l = [sc for sc in scenes if isinstance(sc, dict)]
     all_t = (str(topic or "") + " " + " ".join(str(sc.get("text") or "") for sc in sc_l)).lower()
-    if not _re.search(TATTOO_RE + "|" + NAILS_RE, all_t):
+    if not any(_re.search(v_[0], all_t) for v_ in STUDIOS.values()):
         return
     home = {}
     for sc in sc_l:
@@ -5763,12 +5775,16 @@ def _studio_story(scenes, topic=""):
         low = str(sc.get("text") or "").lower()
         rp = places.resolve(backdrop(sc))
         humans = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and a.get("id") and not a.get("kind")]
-        tat, nail = bool(_re.search(TATTOO_RE, low)), bool(_re.search(NAILS_RE, low))
-        if rp in GENERIC + ("plain", "office", "hospital", "lab", "supermarket"):
-            want = ""
-            if tat != nail:
-                want = "tattoostudio" if tat else "nailstudio"
-            elif not tat and len(humans) == 1 and str(humans[0]["id"]) in home and rp in ("plain", "livingroom", "street", "park") and not _said_place(low):
+        hit = [k_ for k_, v_ in STUDIOS.items() if _re.search(v_[0], low)]
+        said = _said_place(low)
+        if said in STUDIOS and said in hit:
+            hit = [said]                                  # „Im Barbershop kostet der Haarschnitt …“: der genannte Laden gilt
+        one = hit[0] if len(hit) == 1 else ""
+        if rp in GENERIC + ("plain", "office", "hospital", "lab", "supermarket") or (rp in STUDIOS and one in ("barbershop", "hairsalon") and one != rp):
+            want = ""                                     # … auch gegen ein Drehbuch, das mangels Ort aufs Tattoo- oder Nagelstudio auswich
+            if one:
+                want = one
+            elif not hit and len(humans) == 1 and str(humans[0]["id"]) in home and rp in ("plain", "livingroom", "street", "park") and not _said_place(low):
                 want = home[str(humans[0]["id"])]         # „Sie schafft acht Termine am Tag“: Nina steht in ihrem Nagelstudio
             if want:
                 sc["place"], rp = want, want
@@ -5781,36 +5797,36 @@ def _studio_story(scenes, topic=""):
             target = ""
             if len(named) == 1 and not _re.search(r"\b" + _re.escape(me.lower()) + r"s?\b", low):
                 target = named[0]
-            elif tat != nail and owner.get("tattoostudio" if tat else "nailstudio") not in (None, me) and home.get(me) not in (None, "tattoostudio" if tat else "nailstudio"):
-                target = owner["tattoostudio" if tat else "nailstudio"]
+            elif one and owner.get(one) not in (None, me) and home.get(me) not in (None, one):
+                target = owner[one]
             if target:
                 humans[0]["id"] = target
                 humans[0]["hold"] = ""
-                if rp in ("tattoostudio", "nailstudio", "plain") or rp in GENERIC:
+                if rp in STUDIOS or rp == "plain" or rp in GENERIC:
                     sc["place"] = rp = home[target]
-        if rp in ("tattoostudio", "nailstudio") and not (tat or nail) and humans:
+        if rp in STUDIOS and not hit and humans:
             hs = {home.get(str(a["id"])) for a in humans}
             if len(humans) == 1 and hs - {None, rp}:
                 sc["place"] = rp = hs.pop()               # der Ort blieb vom Satz davor stehen: Tobi steht nicht im Nagelstudio
             elif len(humans) > 1 and len(hs - {None}) > 1:
                 sc["place"] = rp = "plain"                # beide zusammen im Vergleich: neutraler Ort
-        if rp not in ("tattoostudio", "nailstudio"):
+        if rp not in STUDIOS:
             continue
         sc["weather"] = ""
         if str(sc.get("time") or "") == "night" and not _re.search(r"nacht|abend|mitternacht", low):
             sc["time"] = "day"
         sc["crowd"] = ""
-        tools = ("tattoomachine",) if rp == "tattoostudio" else ("nailfile", "nailpolish")
+        tools, keep = STUDIOS[rp][2], STUDIOS[rp][3]
         sc["props"] = [q for q in (sc.get("props") or []) if (extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(), str(q.get("type") if isinstance(q, dict) else q).lower())
-                                                           not in ("car", "bus", "truck", "police", "ambulance", "tree", "house", "tv", "computer", "fridge", "sofa", "table", "shelf", "tattoomachine", "nailfile") + (("nailpolish",) if rp == "tattoostudio" else ()))]
-        loose = [q for q in (sc.get("props") or []) if (extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(), str(q.get("type") if isinstance(q, dict) else q).lower())) in ("nailpolish", "nailfile", "tattoomachine")]
+                                                           not in ("car", "bus", "truck", "police", "ambulance", "tree", "house", "tv", "computer", "fridge", "sofa", "table", "shelf") + tuple(k_ for k_ in STUDIO_TOOLS if k_ not in keep))]
+        loose = [q for q in (sc.get("props") or []) if (extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(), str(q.get("type") if isinstance(q, dict) else q).lower())) in STUDIO_TOOLS]
         if loose:                                         # Fläschchen und Feile liegen nicht auf dem Fußboden: in die Hand oder weg
             sc["props"] = [q for q in sc["props"] if q not in loose]
             if humans and not str(humans[0].get("hold") or "") and str(humans[0].get("action") or "") not in ("run", "sleep", "fall", "jump", "dance", "wave", "shake", "lie"):
                 humans[0]["hold"] = str(loose[0].get("type") if isinstance(loose[0], dict) else loose[0])
         if len(humans) == 1:
             home.setdefault(str(humans[0]["id"]), rp)
-        do = _re.search(TATTOO_DO_RE if rp == "tattoostudio" else NAILS_DO_RE, low)
+        do = _re.search(STUDIOS[rp][1], low)
         for a in humans[:1]:
             if home.get(str(a["id"]), rp) != rp:
                 continue                                  # der Tätowierer hält im Nagelstudio keine Feile
@@ -5819,7 +5835,12 @@ def _studio_story(scenes, topic=""):
                 if sc.get("shot") == "insert":
                     sc["shot"] = "wide"
             if do and not str(a.get("hold") or "") and str(a.get("action") or "") not in ("run", "sleep", "fall", "jump", "dance", "wave", "shake", "lie"):
-                a["hold"] = tools[0]                      # das Werkzeug in der Hand statt am Boden
+                tool = tools[0]
+                if rp == "barbershop" and _re.search(r"\bbart|\brasier|\brasur", low) and not _re.search(r"haarschnitt|\bhaare\b", low):
+                    tool = "razor"                        # nur Bart: Rasiermesser statt Haarschneider
+                elif rp == "hairsalon" and _re.search(r"\bföhn|\bstyl", low) and not _re.search(r"\bschneide|\bschnitt\b|haarschnitt", low):
+                    tool = "hairdryer"
+                a["hold"] = tool                          # das Werkzeug in der Hand statt am Boden
 
 
 def _relatives(scenes):
@@ -6755,7 +6776,7 @@ MOOD_HINTS = [
     (r"menschen|leute|bevölkerung|einwohner|millionen|milliarden|gesellschaft", ("", "walk")),
     (r"staunen|beobachten|schauen zu|zuschauer", ("", "watch")),
 ]
-INDOOR = ("bedroom", "livingroom", "diningroom", "kitchen", "transit", "office", "classroom", "mathroom", "lab", "hospital", "basement", "cave", "underwater", "space", "cinema", "chapel", "tattoostudio", "nailstudio", "controlroom", "throneroom", "royalmuseum")
+INDOOR = ("bedroom", "livingroom", "diningroom", "kitchen", "transit", "office", "classroom", "mathroom", "lab", "hospital", "basement", "cave", "underwater", "space", "cinema", "chapel", "tattoostudio", "nailstudio", "barbershop", "hairsalon", "controlroom", "throneroom", "royalmuseum")
 MAPS = ("germany", "worldmap")
 GARAGES = ("garage",)                                           # in der Werkstatt stehen Autos (drinnen sonst nie)
 GARAGE_VEHICLES = ("car", "police", "ambulance", "truck", "bike")
@@ -6764,7 +6785,9 @@ OUTDOOR_THINGS = ("drone", "cctv", "fire", "smoke", "volcano", "meteor", "tornad
                   "pile", "sandpile", "trash", "barrel", "generator")
 DULL = ("table", "shelf", "streetlamp", "rock", "box")          # allein als Großaufnahme langweilig
 INDOOR_THINGS = ("faucet", "glass", "candle", "cans", "clock", "door", "fridge", "tv", "computer", "shelf", "cart", "table", "money", "aquarium")
-TEXT_PROPS = [(r"\bmini-?maps?\b|\bmini-?karten?\b|\bmini-?radar\b", "minimap"),       # Ausbau 25.11.2026: Mini-Karte und Karten-Markierungen schweben frei im Bild
+TEXT_PROPS = [(r"friseurschere|haarschere|\bscheren?\b(?! (?:zwischen|geht|öffnet|klafft|von))|haarschnitt|haare (?:\w+ ){0,3}schneiden", "scissors"), (r"haarschneider|haarschneidemaschine|barttrimmer|bartschneider|maschinenschnitt", "clippers"),   # Ausbau 28.11.2026: Friseur-Werkzeug
+              (r"rasiermesser|rasierpinsel|bartpflege|nassrasur|bartrasur", "razor"), (r"\bföhn|\bfön\b|haartrockner", "hairdryer"),
+              (r"\bmini-?maps?\b|\bmini-?karten?\b|\bmini-?radar\b", "minimap"),       # Ausbau 25.11.2026: Mini-Karte und Karten-Markierungen schweben frei im Bild
               (r"kartensymbol|kartenmarkierung|quest-?marker|\bwegpunkt|symbole? .{0,40}(?:sichtfeld|in der luft|schweb|auf der karte)|zu (?:den|denselben|diesen|all den) symbolen", "markers"),
               (r"staubsauger", "vacuum"), (r"\bdisplays?\b|handydisplay|handy-display|handybildschirm|handy-bildschirm|touchscreen|sperrbildschirm", "display"), (r"motorkran|werkstattkran|bau\w* .{0,40}motor.{0,40}\bein\b|motor\w* (?:\w+ )?(?:ein|aus)ge?bau|(?:ein|aus)bau\w* .{0,30}motor|motortausch|motor\w* .{0,25}(?:hoch|heb|hängt)", "enginehoist"),
               (r"motorständer|montageständer", "enginestand"), (r"\bv8\b|\bv12\b|\bw12\b|\bw16\b|\bmotor(?!rad|roller|säge|boot)\w*|motorblock|verbrenner|\bzylinder|\bps\b", "engine"),

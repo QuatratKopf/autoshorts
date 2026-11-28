@@ -2094,6 +2094,125 @@ def nailstudio(night):
     return p.vignette()
 
 
+def barbershop(night):
+    """Barbershop (Ausbau 28.11.2026, Plan „Barbershop gegen Friseursalon“ – der Ort fehlte, das Drehbuch wich auf das Tattoo-Studio aus):
+    dunkelgrüne Wand mit Holzsockel, großer Spiegel mit Glühbirnen-Leiste, Ablage mit Fläschchen und Rasierpinsel, roter Barbierstuhl
+    auf Chromfuß, gestreifte Barbier-Säule, Bilderrahmen mit Schnurrbart, Hängelampen. Kein Schriftzug, kein Firmenzeichen."""
+    p = P(night)
+    p.room((58, 92, 92), (124, 86, 62), stripe=False)
+    for lx in (300, 760):                                                       # Hängelampen
+        p.line((lx, 0, lx, 150), INK, 6)
+        p.poly([(lx - 70, 220), (lx + 70, 220), (lx + 34, 150), (lx - 34, 150)], (40, 40, 48))
+        p.oval((lx - 26, 206, lx + 26, 250), (255, 236, 170), o=5, glow=True)
+    p.rect((60, 330, 460, 800), (104, 66, 44), r=16)                            # Spiegel im Holzrahmen
+    p.rect((86, 356, 434, 774), (196, 224, 232), r=8, o=5)
+    p.poly([(120, 356), (210, 356), (110, 520), (86, 520), (86, 420)], (226, 242, 246), o=0)
+    p.poly([(250, 356), (290, 356), (130, 640), (106, 610)], (226, 242, 246), o=0)
+    p.rect((50, 270, 470, 322), (40, 40, 48), r=12)                             # Leiste mit Glühbirnen
+    for k in range(5):
+        p.oval((82 + k * 84, 276, 122 + k * 84, 316), (255, 240, 180), o=4, glow=True)
+    p.rect((40, 850, 480, 884), (130, 84, 54), r=8)                             # Ablage unter dem Spiegel
+    p.rect((70, 884, 96, 1010), (96, 60, 40), o=5)
+    p.rect((424, 884, 450, 1010), (96, 60, 40), o=5)
+    for bx, bh, col in ((84, 96, (40, 110, 120)), (136, 70, (214, 150, 60)), (184, 110, (150, 40, 44)), (238, 62, (236, 232, 220))):   # Fläschchen
+        p.rect((bx, 850 - bh, bx + 40, 850), col, r=8, o=5)
+        p.rect((bx + 11, 850 - bh - 22, bx + 29, 850 - bh + 2), (40, 40, 48), r=4, o=4)
+    p.rect((316, 800, 376, 850), (236, 232, 220), r=10, o=5)                    # Becher mit Rasierpinsel
+    p.rect((336, 752, 356, 806), (104, 66, 44), r=4, o=4)
+    p.oval((324, 712, 368, 766), (244, 240, 230), o=5)
+    p.rect((396, 826, 452, 850), (250, 250, 246), r=6, o=5)                     # gefaltetes Handtuch
+    fx, fy = 590, 420                                                           # Bild: Schnurrbart
+    p.rect((fx - 86, fy - 70, fx + 86, fy + 70), (36, 32, 40), r=8)
+    p.rect((fx - 70, fy - 54, fx + 70, fy + 54), (244, 236, 216), r=4, o=0)
+    for sg in (-1, 1):
+        p.oval((fx - 2 + sg * 28 - 30, fy - 20, fx - 2 + sg * 28 + 30, fy + 18), (40, 36, 40), o=0)
+        p.poly([(fx + sg * 40, fy + 12), (fx + sg * 62, fy - 24), (fx + sg * 52, fy + 16)], (40, 36, 40), o=0)
+    bx = 930                                                                    # Barbier-Säule: gestreifter Glaszylinder mit Kappen
+    p.rect((bx - 40, 300, bx + 40, 620), (250, 250, 246), r=10)
+    for k in range(6):
+        y = 300 + k * 60
+        col = (214, 60, 64) if k % 2 == 0 else (60, 100, 180)
+        pts = [(bx - 36, y + 34), (bx + 36, y - 6), (bx + 36, y + 22), (bx - 36, y + 62)]
+        pts = [(qx, max(306, min(614, qy))) for qx, qy in pts]
+        p.poly(pts, col, o=0)
+    p.rect((bx - 40, 300, bx - 22, 620), (255, 255, 255), r=6, o=0)
+    p.d.rounded_rectangle((bx - 40, 300, bx + 40, 620), 10, outline=INK, width=7)
+    for y0 in (256, 616):
+        p.rect((bx - 54, y0, bx + 54, y0 + 50), (176, 180, 192), r=14)
+    p.oval((bx - 30, 206, bx + 30, 262), (176, 180, 192))
+    p.rect((bx - 12, 664, bx + 12, 700), (120, 122, 134), o=5)
+    p.rect((690, 760, 980, 1010), (176, 44, 48), r=40)                          # Barbierstuhl: Lehne, Kopfstütze, Sitz, Armlehnen, Chromfuß
+    p.rect((726, 800, 944, 980), (206, 62, 62), r=26, o=0)
+    p.rect((770, 690, 900, 772), (176, 44, 48), r=22)
+    p.rect((676, 1004, 994, 1070), (176, 44, 48), r=24)
+    p.rect((700, 1016, 970, 1032), (220, 96, 90), r=6, o=0)
+    for ax in (650, 968):
+        p.rect((ax, 930, ax + 52, 962), (176, 180, 192), r=12)
+        p.rect((ax + 16, 962, ax + 36, 1030), (120, 122, 134), o=5)
+    p.rect((808, 1070, 862, 1190), (176, 180, 192), o=5)
+    p.rect((826, 1076, 838, 1184), (236, 238, 244), o=0)
+    p.oval((720, 1176, 950, 1240), (150, 154, 166))
+    p.rect((730, 1118, 820, 1140), (150, 154, 166), r=6, o=5)                   # Fußstütze am Fuß
+    p.rect((676, 1104, 748, 1154), (176, 180, 192), r=10)
+    p.lamp_glow(300, 420, 460)
+    return p.vignette()
+
+
+def hairsalon(night):
+    """Friseursalon (Ausbau 28.11.2026, Plan „Barbershop gegen Friseursalon“ – der Ort fehlte, das Drehbuch wich auf das Nagelstudio aus):
+    helle Wand, Frisierplatz mit rundem Leuchtspiegel und Ablage (Bürste, Flaschen, Föhn im Halter), Regal mit Pflegeflaschen,
+    Trockenhaube auf Ständer, Waschplatz mit Becken und Sessel, Pflanze."""
+    p = P(night)
+    p.room((236, 232, 218), (214, 184, 150))
+    p.rect((70, 250, 430, 800), (226, 190, 96), r=180)                          # Bogenspiegel mit Goldrand und Leuchtrand
+    p.rect((92, 272, 408, 778), (255, 246, 214), r=160, o=0, glow=True)
+    p.rect((112, 292, 388, 758), (206, 232, 240), r=140, o=5)
+    p.line([(170, 420), (250, 340)], (255, 255, 255), 14)
+    p.line([(160, 500), (210, 450)], (255, 255, 255), 10)
+    p.rect((40, 860, 470, 894), (250, 250, 248), r=8)                           # Ablage
+    p.rect((60, 894, 250, 990), (240, 226, 208), r=8, o=5)
+    p.oval((142, 928, 170, 956), (226, 190, 96), o=4)
+    for bx, bh, col in ((70, 104, (110, 190, 180)), (120, 76, (250, 170, 150)), (168, 120, (250, 250, 246)), (218, 64, (190, 140, 210))):   # Pflegeflaschen
+        p.rect((bx, 860 - bh, bx + 38, 860), col, r=10, o=5)
+        p.rect((bx + 11, 860 - bh - 24, bx + 27, 860 - bh + 2), (226, 190, 96), r=4, o=4)
+    p.rect((290, 800, 350, 860), (60, 62, 72), r=10, o=5)                       # Becher mit Bürste und Kamm
+    p.rect((300, 716, 316, 806), (236, 110, 120), r=4, o=4)
+    p.oval((290, 676, 328, 736), (236, 110, 120), o=5)
+    p.rect((328, 730, 344, 806), (60, 150, 160), r=3, o=4)
+    p.d.arc((384, 800, 444, 860), 0, 360, fill=INK, width=9)                    # Föhn im Ring-Halter
+    p.rect((372, 742, 462, 800), (236, 110, 120), r=20)
+    p.rect((402, 796, 428, 880), (236, 110, 120), r=8, o=5)
+    p.rect((356, 754, 380, 788), (60, 62, 72), r=4, o=4)
+    for y in (360, 520):                                                        # Wandregal mit Flaschen
+        p.rect((540, y, 800, y + 22), (250, 250, 248), r=6, o=5)
+        for k in range(5):
+            bx = 556 + k * 48
+            col = ((110, 190, 180), (250, 170, 150), (250, 250, 246), (190, 140, 210), (250, 206, 110))[(k + y // 100) % 5]
+            hh = 60 + (k * 23 + y) % 34
+            p.rect((bx, y - hh, bx + 34, y), col, r=9, o=5)
+            p.rect((bx + 9, y - hh - 20, bx + 25, y - hh + 2), (60, 62, 72), r=4, o=4)
+    hx = 930                                                                    # Trockenhaube auf Ständer
+    p.line([(hx, 1240), (hx, 560)], (150, 154, 166), 14)
+    p.line([(hx - 60, 1244), (hx, 1190), (hx + 60, 1244)], (150, 154, 166), 12)
+    p.poly([(hx - 110, 560), (hx - 96, 470), (hx - 40, 410), (hx + 40, 410), (hx + 96, 470), (hx + 110, 560)], (250, 250, 248))
+    p.poly([(hx - 84, 560), (hx - 72, 486), (hx - 30, 440), (hx + 30, 440), (hx + 72, 486), (hx + 84, 560)], (120, 150, 170), o=5)
+    p.rect((hx - 116, 548, hx + 116, 580), (226, 190, 96), r=10)
+    p.rect((640, 890, 800, 1010), (250, 250, 250), r=30)                        # Waschplatz: Becken mit Hahn, Sessel davor
+    p.oval((656, 876, 784, 930), (214, 232, 240), o=6)
+    p.d.arc((690, 800, 760, 880), 180, 360, fill=INK, width=16)
+    p.d.arc((690, 800, 760, 880), 180, 360, fill=p.c((176, 180, 192)), width=7)
+    p.rect((700, 1010, 740, 1236), (236, 236, 240), o=5)
+    p.rect((596, 940, 700, 1140), (60, 62, 72), r=26)                           # Sessel vor dem Becken
+    p.rect((614, 960, 682, 1100), (104, 106, 120), r=16, o=0)
+    p.rect((540, 1126, 720, 1176), (60, 62, 72), r=20)
+    p.rect((552, 1136, 708, 1150), (104, 106, 120), r=6, o=0)
+    p.rect((620, 1176, 644, 1232), (176, 180, 192), o=5)
+    p.oval((566, 1220, 698, 1252), (150, 154, 166), o=6)
+    p.plant(1010, 1250, 1.05, pot=(250, 250, 250))
+    p.lamp_glow(250, 520, 480)
+    return p.vignette()
+
+
 def restaurant(night):
     """Restaurant/Imbiss: Theke mit Kaffeemaschine, Menütafel mit Bildern, gedeckte Tische mit Essen, Stühle, Hängelampen."""
     p = P(night)
@@ -2681,7 +2800,7 @@ PLACES = {"bedroom": bedroom, "livingroom": livingroom, "street": street, "basem
           "beach": beach, "desert": desert, "snow": snow, "forest": forest, "underwater": underwater,
           "mountain": mountain, "hospital": hospital, "cave": cave, "supermarket": supermarket,
           "supermarket_empty": supermarket_empty, "bathroom": bathroom, "station": station, "restaurant": restaurant, "germany": germany, "worldmap": worldmap, "hallway": hallway, "attic": attic,
-          "serverroom": serverroom, "cinema": cinema, "diningroom": diningroom, "highsky": highsky, "garage": garage, "transit": transit, "chapel": chapel, "tattoostudio": tattoostudio, "nailstudio": nailstudio,
+          "serverroom": serverroom, "cinema": cinema, "diningroom": diningroom, "highsky": highsky, "garage": garage, "transit": transit, "chapel": chapel, "tattoostudio": tattoostudio, "nailstudio": nailstudio, "barbershop": barbershop, "hairsalon": hairsalon,
           "controlroom": controlroom, "throneroom": throneroom, "royalmuseum": royalmuseum}
 OUTDOOR = tuple(OUTDOOR_SPECS) + ("custom",)
 ALIASES = {"thronsaal": "throneroom", "thron": "throneroom", "palast": "throneroom", "königshof": "throneroom", "throne room": "throneroom", "throne_room": "throneroom",
@@ -2715,6 +2834,9 @@ ALIASES = {"thronsaal": "throneroom", "thron": "throneroom", "palast": "thronero
            "tattooladen": "tattoostudio", "tätowierstudio": "tattoostudio", "tattoo parlor": "tattoostudio", "tattoo": "tattoostudio",
            "nagelstudio": "nailstudio", "nail_salon": "nailstudio", "nail salon": "nailstudio", "nailsalon": "nailstudio", "nail_studio": "nailstudio", "nail studio": "nailstudio", "nagelsalon": "nailstudio",
            "nageldesign": "nailstudio", "maniküre": "nailstudio", "beauty salon": "nailstudio", "kosmetikstudio": "nailstudio",
+           "barber": "barbershop", "barber shop": "barbershop", "barber_shop": "barbershop", "barbier": "barbershop", "barbiersalon": "barbershop", "herrenfriseur": "barbershop", "herrensalon": "barbershop",
+           "friseursalon": "hairsalon", "frisörsalon": "hairsalon", "friseur": "hairsalon", "frisör": "hairsalon", "friseurladen": "hairsalon", "friseurgeschäft": "hairsalon", "haarsalon": "hairsalon", "haarstudio": "hairsalon",
+           "hair salon": "hairsalon", "hair_salon": "hairsalon", "hairdresser": "hairsalon", "coiffeur": "hairsalon", "damensalon": "hairsalon",
            "esszimmer": "diningroom", "esstisch": "diningroom", "dining room": "diningroom", "speisezimmer": "diningroom", "festtafel": "diningroom", "familientisch": "diningroom",
            "hafen": "harbor", "häfen": "harbor", "containerhafen": "harbor", "hafenbecken": "harbor", "frachthafen": "harbor", "seehafen": "harbor", "kai": "harbor",
            "containerterminal": "harbor", "port": "harbor", "harbour": "harbor"}

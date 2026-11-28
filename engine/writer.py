@@ -214,6 +214,8 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
            Kennung als Figur in "actors" setzen, sobald der Satz von ihnen spricht – sie bekommen ihr eigenes Aussehen.
            tattoostudio (Tattoo-Studio: dunkle Wand mit Motiv-Bögen, Liege, Farbfläschchen), nailstudio (Nagelstudio: Regal voller Nagellack,
            Arbeitstisch mit Lampe) – für Tätowierer, Nageldesign, Maniküre.
+           barbershop (Barbershop: dunkelgrüne Wand, Spiegel mit Glühbirnen, roter Barbierstuhl, gestreifte Säule), hairsalon (Friseursalon:
+           heller Raum, Leuchtspiegel, Pflegeflaschen, Trockenhaube, Waschplatz) – für Barbier, Friseur, Haarschnitt, Bartpflege, Styling.
            oldtown (Stadt um 1800 oder im Mittelalter: Fachwerkhäuser, Kopfsteinpflaster, Brunnen – ohne Autos, Läden, Strom),
            throneroom (Thronsaal eines Königs: Steinwand, Thron, Banner, Fackeln), royalmuseum (Kabinett/Museum des Königs mit Vitrine).
            Spielt die Geschichte in der Vergangenheit (Zeitreise, „im Jahr 1800“, Mittelalter), NUR diese drei Orte und village/forest/fields
@@ -246,7 +248,7 @@ Fülle deshalb zusätzlich aus und nutze NUR die genannten Werte:
                   solarpanel, cctv (Überwachungskamera am Mast)
            Werkstatt/Technik: engine (V8-Motor), enginehoist (Motorkran hebt Motor – Ein-/Ausbau), enginestand (Motor auf Montageständer),
                   crane (Motorkran leer), tire, tires (Reifenstapel), radiator (Kühler), gearbox (Getriebe), piston (Kolben, bewegt sich),
-                  toolbox (Werkzeugwagen), wrench, speedometer (Tacho, Zeiger steigt), scale (Waage, kippt), carlift (Hebebühne), oilcan, drill (Akku-Bohrmaschine, rattert), tattoomachine (Tätowiermaschine), nailfile (Nagelfeile), nailpolish (Nagellack-Fläschchen) – klein, am besten als "hold" in der Hand der Figur, vacuum (Staubsauger; vacuum_broken: Deckel aufgesprungen, Staubwolke), display (Handy-Display groß, flackert – für „das Display leuchtet/flackert“, am besten mit "shot": "insert"),
+                  toolbox (Werkzeugwagen), wrench, speedometer (Tacho, Zeiger steigt), scale (Waage, kippt), carlift (Hebebühne), oilcan, drill (Akku-Bohrmaschine, rattert), tattoomachine (Tätowiermaschine), nailfile (Nagelfeile), nailpolish (Nagellack-Fläschchen), scissors (Friseurschere), clippers (Haarschneidemaschine), razor (Rasiermesser mit Pinsel, Bartpflege), hairdryer (Föhn) – klein, am besten als "hold" in der Hand der Figur, vacuum (Staubsauger; vacuum_broken: Deckel aufgesprungen, Staubwolke), display (Handy-Display groß, flackert – für „das Display leuchtet/flackert“, am besten mit "shot": "insert"),
                   markers (bunte Karten-Markierungen/Stecknadeln schweben in der Luft – für „Symbole ploppen im Sichtfeld auf“, Wegpunkte, Kartensymbole), minimap (runde Mini-Karte mit Richtungspfeil, schwebt frei – für Minimap/Mini-Karte)
            Himmel/Natur (Schaubilder, groß): drone (Drohne mit Kamera), plane, satellite, ship, ufo, meteor, explosion, earth, sun, moon, tornado, wave,
                   flood, ice, volcano, cloud, stormcloud, lightning, crack, smoke, aurora, eclipse
