@@ -9217,5 +9217,45 @@
   "slot": "2026-11-28 18:00",
   "review_at": 1795878958.1977012,
   "error": "Bei der Prüfung verworfen: Schreibtisch-Szenen unter Wasser mit Goldfisch, leere Armbanduhr statt Handy im Bett, Schalter und Motor als Ding, kein Blick in den Spiegel"
+ },
+ {
+  "id": 238,
+  "category": "motivation",
+  "topic": "Dein größter Gegner schaut dich jeden Morgen im Spiegel an.",
+  "status": "rendered",
+  "created": 1795880786.0666955,
+  "title": "Dein größter Gegner schaut dich jeden Morgen im Spiegel an",
+  "description": "Warum du täglich wertvolle Zeit verlierst und wie du deinen Fokus zurückholst.\nWas ist dein größter Zeitfresser im Alltag?",
+  "hashtags": [
+   "#shorts",
+   "#motivation",
+   "#fokus",
+   "#mindset",
+   "#erfolg",
+   "#tiktokgermany",
+   "#viral"
+  ],
+  "tags": [
+   "motivation deutsch",
+   "fokus halten",
+   "disziplin lernen",
+   "ausreden stoppen",
+   "handysucht besiegen",
+   "mindset deutsch",
+   "produktivität",
+   "spiegelbild"
+  ],
+  "thumb_text": "BESIEGE DICH SELBST",
+  "missing": null,
+  "cover_ms": 75488,
+  "duration": 75.4,
+  "providers": {
+   "text": "Plan (Prüfung)",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
