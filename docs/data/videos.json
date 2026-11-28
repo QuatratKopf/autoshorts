@@ -9127,7 +9127,7 @@
   "id": 236,
   "category": "vergleich",
   "topic": "Barbershop gegen Friseursalon – wer verdient mehr?",
-  "status": "rendered",
+  "status": "published",
   "created": 1795864729.7884293,
   "title": "Barbershop gegen Friseursalon: Wer verdient mehr?",
   "description": "Barbershop oder Friseursalon – wer verdient wirklich mehr?\nEine Beispielrechnung mit Preisen, Kunden pro Tag und Arbeitszeit – der Stundenlohn dreht das Ergebnis.\nZu wem würdest du gehen: Barbershop oder Friseursalon?",
@@ -9163,6 +9163,12 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "zernio_id": "6b0ababd126c748f84ca8d4e",
+  "yt_status": "Zernio: published",
+  "yt_id": "cN4-P-MGGzM",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6b0ababd126c748f84ca8d4e",
+  "error": null
  }
 ]
