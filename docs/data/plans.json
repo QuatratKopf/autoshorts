@@ -1,529 +1,4 @@
 {
- "2026-11-27 18:00": {
-  "category": "whatif",
-  "topic": "Was wäre, wenn du mit einem Exoskelett im Alltag Superkräfte hättest?",
-  "trend": null,
-  "script": {
-   "title": "Exoskelett im Alltag: Was passiert wirklich?",
-   "description": "Was passiert wirklich, wenn du ein Exoskelett trägst?\nErfahre die echten Fakten zu Technik und Alltag.\nWürdest du so einen Anzug anziehen?",
-   "hashtags": [
-    "#shorts",
-    "#tech",
-    "#wissenschaft",
-    "#zukunft",
-    "#exoskelett",
-    "#technik",
-    "#fyp",
-    "#viral"
-   ],
-   "tags": [
-    "exoskelett",
-    "sarcos guardian xo",
-    "superkräfte",
-    "Exoskelett",
-    "stanford stiefel",
-    "tu graz",
-    "technik zukunft",
-    "what if deutsch"
-   ],
-   "thumbnail": {
-    "image": "Close-up of a young person in a high-tech robotic suit easily lifting a car above their head in a city street, wide eyes, super cool dramatic look, dynamic pose.",
-    "text": "SUPERKRÄFTE IM ALLTAG?"
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "gelb",
-     "hair": "long",
-     "hair_color": "schwarz",
-     "gender": "w",
-     "skin": "mittel"
-    }
-   },
-   "scenes": [
-    {
-     "text": "Mit diesem Exoskelett stemmst du spielend eine schwere Langhantel.",
-     "see": "Du schnallst dir ein Exoskelett um und hebst mühelos eine schwere Hantel.",
-     "place": "labor",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "idle",
-       "emotion": "happy",
-       "emote": "",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "happy"
-    },
-    {
-     "text": "Aber verleiht dir die Technik wirklich echte Superkräfte für deinen Alltag?",
-     "see": "Das riesige Exoskelett Sarcos Guardian XO steht im Testraum.",
-     "place": "labor",
-     "time": "day",
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "think",
-       "emotion": "worried",
-       "emote": "?",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "left"
-      }
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "SUPERKRÄFTE?"
-     }
-    },
-    {
-     "text": "Das Ganzkörper-Exoskelett Guardian XO der Firma Sarcos lässt dich neunzig Kilo heben.",
-     "see": "Ein schwerer Kasten fühlt sich dank des Anzugs Federleicht an.",
-     "place": "labor",
-     "time": "day",
-     "props": [],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "talk",
-       "emotion": "happy",
-       "emote": "",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "shot": "graphic",
-     "mood": "happy",
-     "graphic": {
-      "type": "number",
-      "value": "90",
-      "label": "KILO",
-      "dark": false
-     }
-    },
-    {
-     "text": "Diese riesige Last fühlt sich für deinen Körper wie viereinhalb Kilo an.",
-     "see": "Grafischer Vergleich zeigt 90 Kilo zu 4,5 Kilo Gefühlsgewicht.",
-     "place": "labor",
-     "time": "day",
-     "actors": [
-      {
-       "id": "du",
-       "action": "idle",
-       "pos": "center",
-       "emotion": "",
-       "emote": ""
-      }
-     ],
-     "shot": "close",
-     "mood": "calm"
-    },
-    {
-     "text": "Starke Elektromotoren direkt an deinen Gelenken tragen dabei die gesamte schwere Last.",
-     "see": "Nahaufnahme der leuchtenden Elektromotoren an den Anzugs-Gelenken.",
-     "place": "labor",
-     "time": "day",
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "point",
-       "emotion": "happy",
-       "emote": "",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "calm"
-    },
-    {
-     "text": "Aber rennen kannst du mit diesem Anzug leider überhaupt nicht.",
-     "see": "Du versuchst zu rennen, kommst aber nur sehr langsam voran.",
-     "place": "strasse",
-     "time": "day",
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "run",
-       "emotion": "worried",
-       "emote": "sweat",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "left",
-       "to": "center"
-      }
-     ],
-     "mood": "tense",
-     "crowd": "worried",
-     "overlay": {
-      "type": "stamp",
-      "text": "KEIN RENNEN",
-      "color": "red"
-     }
-    },
-    {
-     "text": "Der Anzug schafft nur gemütliches Schritttempo von rund fünf Kilometern pro Stunde.",
-     "see": "Ein digitales Tacho zeigt genau 5 Kilometer pro Stunde an.",
-     "place": "strasse",
-     "time": "day",
-     "shot": "graphic",
-     "mood": "calm",
-     "crowd": "walk",
-     "graphic": {
-      "type": "number",
-      "kicker": "MAXIMALES TEMPO",
-      "value": "5 KM/H",
-      "label": "SCHRITTTEMPO",
-      "dark": false
-     }
-    },
-    {
-     "text": "Zudem wiegt der massive Anzug selbst bereits rund achtundsechzig Kilo.",
-     "see": "Eine Waage zeigt das massive Gewicht des Anzugs an.",
-     "place": "labor",
-     "time": "day",
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "right"
-      }
-     ],
-     "mood": "tense",
-     "overlay": {
-      "type": "card",
-      "text": "EIGENGEWICHT: 68 KG"
-     }
-    },
-    {
-     "text": "Bereits nach rund zwei Stunden Dauerbetrieb ist der Akku komplett leer.",
-     "see": "Ein Batteriestandsanzeiger fällt rapidly auf null Prozent.",
-     "place": "labor",
-     "time": "day",
-     "props": [
-      {
-       "type": "akku"
-      }
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "sad",
-       "emotion": "sad",
-       "emote": "",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "tense",
-     "overlay": {
-      "type": "counter",
-      "label": "",
-      "value": 2,
-      "unit": "STUNDEN"
-     }
-    },
-    {
-     "text": "Dann müssen sofort frische Akkus per Hand neu eingesetzt werden.",
-     "see": "Akkus werden an der Seite des Anzugs frisch ausgetauscht.",
-     "place": "labor",
-     "time": "day",
-     "props": [
-      {
-       "type": "akku"
-      }
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "walk",
-       "emotion": "happy",
-       "emote": "",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "calm"
-    },
-    {
-     "text": "Ganz ohne Strom drückt dich der schwere Anzug gnadenlos zu Boden.",
-     "see": "Der Anzug schaltet ab und fällt steif zu Boden.",
-     "place": "labor",
-     "time": "night",
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "sad",
-       "emotion": "sad",
-       "emote": "",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "tense",
-     "overlay": {
-      "type": "stamp",
-      "text": "STROM AUS",
-      "color": "red"
-     }
-    },
-    {
-     "text": "Schon heute im Einsatz sind leichte Exoskelette ohne Motor in Fabriken.",
-     "see": "Ein Arbeiter in einer Werkshalle hebt die Arme über den Kopf mit mechanischer Stütze.",
-     "place": "garage",
-     "time": "day",
-     "actors": [
-      {
-       "id": "du",
-       "action": "idle",
-       "emotion": "",
-       "emote": "",
-       "say": "",
-       "hold": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ],
-     "mood": "calm"
-    },
-    {
-     "text": "Sie stützen die Arme bei Arbeit über dem Kopf und kosten laut TU Graz zweitausend bis viertausend Euro.",
-     "see": "Eine Notiz zeigt die Forschungsdaten der TU Graz von 2024.",
-     "place": "garage",
-     "time": "day",
-     "props": [
-      {
-       "type": "money"
-      }
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "look_around",
-       "emotion": "",
-       "pos": "left",
-       "emote": "?"
-      }
-     ],
-     "mood": "calm",
-     "overlay": {
-      "type": "note",
-      "title": "TU GRAZ (2024)",
-      "text": "Preis: 2.000 - 4.000 €"
-     }
-    },
-    {
-     "text": "Forscher der Universität Stanford bauten zweitausendzweiundzwanzig einen motorisierten Stiefel.",
-     "see": "Forscher testen einen motorisierten Stiefel auf dem Laufband.",
-     "place": "labor",
-     "time": "day",
-     "props": [
-      {
-       "type": "lib_schuh"
-      }
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "walk",
-       "emotion": "happy",
-       "emote": "",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "calm",
-     "overlay": {
-      "type": "tag",
-      "text": "STANFORD 2022"
-     }
-    },
-    {
-     "text": "Damit gehst du neun Prozent schneller und verbrauchst siebzehn Prozent weniger Energie.",
-     "see": "Statistik zeigt 9 Prozent schnelleres Gehen und 17 Prozent gesparte Energie.",
-     "place": "labor",
-     "time": "day",
-     "actors": [
-      {
-       "id": "du",
-       "action": "walk",
-       "pos": "offleft",
-       "to": "center",
-       "emotion": ""
-      }
-     ],
-     "shot": "graphic",
-     "mood": "calm",
-     "graphic": {
-      "type": "compare",
-      "value": "+9 %",
-      "sub": "-17 %",
-      "left": "TEMPO",
-      "right": "ENERGIE",
-      "dark": false
-     }
-    },
-    {
-     "text": "Das Gefühl entspricht genau dem Absetzen eines vierzehn Kilo schweren Rucksacks.",
-     "see": "Eine Person setzt einen schweren vierzehn Kilo Rucksack ab.",
-     "place": "strasse",
-     "time": "day",
-     "props": [
-      {
-       "type": "rucksack"
-      }
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "action": "idle",
-       "emotion": "",
-       "emote": "",
-       "say": "",
-       "hold": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ],
-     "mood": "happy",
-     "overlay": {
-      "type": "tag",
-      "text": "14 KILO RUCKSACK"
-     }
-    },
-    {
-     "text": "In Reha-Kliniken helfen moderne Exoskelette gelähmten Menschen, wieder echte Schritte zu gehen.",
-     "see": "In einer Reha-Klinik macht ein Patient mit Hilfe eines Rahmens Gehübungen.",
-     "place": "hospital",
-     "time": "day",
-     "actors": [
-      {
-       "id": "du",
-       "action": "idle",
-       "emotion": "",
-       "emote": "",
-       "say": "",
-       "hold": "",
-       "pos": "center",
-       "speaks": false
-      }
-     ],
-     "shot": "event",
-     "mood": "calm",
-     "crowd": "walk",
-     "overlay": {
-      "type": "tag",
-      "text": "REHA-MEDIZIN"
-     }
-    },
-    {
-     "text": "Fazit: Du bekommst im Alltag keine echten Superkräfte, aber immerhin einen geschonten Rücken.",
-     "see": "Du schüttelst den Kopf, aber greifst dir entspannt an den Rücken.",
-     "place": "labor",
-     "time": "day",
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "walk",
-       "emotion": "happy",
-       "emote": "",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "offright",
-       "to": "center"
-      }
-     ],
-     "mood": "happy",
-     "overlay": {
-      "type": "stamp",
-      "text": "GESCHONTER RÜCKEN",
-      "color": "green"
-     }
-    },
-    {
-     "text": "Wofür würdest du ein Exoskelett anziehen?",
-     "see": "Du stehst fragend da und hältst ein Exoskelett in der Hand.",
-     "place": "labor",
-     "time": "day",
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "point",
-       "emotion": "happy",
-       "emote": "?",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "calm",
-     "overlay": {
-      "type": "choice",
-      "a": "Für schwere Arbeit",
-      "b": "Für entspanntes Gehen"
-     }
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [],
-  "title": "Exoskelett im Alltag: Was passiert wirklich?",
-  "created": 1795774813.3757632
- },
  "2026-11-27 21:00": {
   "category": "fakten",
   "topic": "Der Tetris-Effekt: Warum dein Gehirn nach dem Zocken einfach weiterspielt – Vorgaben als Stichpunkte, nicht wörtlich abschreiben, in Du-Form erzählen, jeder Satz mit neuem Inhalt, in jeder Szene tut die Figur etwas. Nur diese geprüften Fakten in dieser Reihenfolge: 1) Einstieg: Du schließt nach Stunden Tetris die Augen, und vor deinem inneren Auge fallen weiter bunte Blöcke. 2) Das hat einen Namen: Tetris-Effekt. 3) Am Tag danach überlegst du im Supermarkt, wie die Kartons lückenlos ins Regal passen. 4) Der früheste bekannte Beleg für den Namen ist ein Artikel im Magazin Wired vom Mai 1994. 5) Im Jahr 2000 berichteten Schlafforscher im Fachblatt Science: Wer tagsüber Tetris gespielt hatte, sah beim Einschlafen fallende Steine. 6) Das Verblüffende daran: Sogar Menschen mit schwerem Gedächtnisverlust sahen die Steine, obwohl sie sich gar nicht erinnern konnten, das Spiel gespielt zu haben. 7) Erklärung der Forscher: Dein Gehirn übt Gelerntes beim Einschlafen weiter, vermutlich über das Gedächtnis für Abläufe und Können, nicht über bewusste Erinnerung. 8) Eine weitere Studie: Nach drei Monaten Tetris war die Hirnrinde der Testpersonen an einer Stelle messbar dicker. 9) Das gibt es auch bei anderen Spielen, Forscher nennen es Game Transfer Phenomena: Spieler berichten, dass sie die Musik des Spiels noch im Kopf hören und auf der Straße kurz Symbole aus dem Spiel in der Luft schweben sehen. 10) Der Effekt lässt sich sogar nutzen: In einer Studie des Karolinska-Instituts und der Universität Oxford mit einundsiebzig Unfallopfern spielte die Hälfte in der Notaufnahme innerhalb von sechs Stunden nach dem Unfall Tetris. 11) Ergebnis: Wer gespielt hatte, hatte in der Woche danach weniger belastende Erinnerungsbilder an den Unfall als die Vergleichsgruppe. 12) Fazit: Die fallenden Blöcke sind kein Schaden, sondern ein Zeichen dafür, dass dein Gehirn lernt. Schlussfrage an die Zuschauer: Welches Spiel hat dich schon mal bis in den Schlaf verfolgt? Keine anderen Zahlen und keine Prozentangaben. Jahreszahlen nur 1994 und 2000, keine anderen Jahreszahlen. Verboten: achtzig Prozent, Zwei-Stunden-Regel, Pausenregel, Blick ins Grüne, Dauerfeuer, Denkorgan, Lebensbalken, Minimap, Personennamen, Sätze ohne Inhalt wie „genau deshalb schaust du wieder hin“. Das Gehirn als eigene Figur höchstens in zwei Szenen. Titel: Tetris-Effekt: Warum dein Gehirn weiterspielt. Titelbild-Text: GEHIRN SPIELT WEITER",
@@ -2448,5 +1923,741 @@
   ],
   "title": "Dein größter Gegner schaut dich jeden Morgen im Spiegel an",
   "created": 1795861328.120646
+ },
+ "2026-11-28 21:00": {
+  "category": "nachricht",
+  "topic": "Eine unbekannte Nummer schickt dir einen Countdown und befiehlt dir, alle Smart-Home-Geräte im Haus auszuschalten – bis um drei Uhr nachts jedes Display im Wohnzimmer von alleine angeht und dein eigenes Gesicht aus der Zukunft zeigt.",
+  "trend": null,
+  "script": {
+   "title": "Unbekannte Nummer schickt Countdown und Smart-Home spinnt",
+   "description": "Dein Handy vibriert nachts mit einer unheimlichen Warnung\nPlötzlich schaltet sich im ganzen Haus die Technik von allein aus\nWürdest du alle Geräte sofort vom Strom trennen?",
+   "hashtags": [
+    "#shorts",
+    "#mystery",
+    "#smarthome",
+    "#countdown",
+    "#creepypasta",
+    "#unbekannt",
+    "#foryou",
+    "#viral"
+   ],
+   "tags": [
+    "unbekannte nummer",
+    "Smart-Home",
+    "countdown",
+    "mystery",
+    "gruselig",
+    "handy",
+    "zukunft",
+    "schlafzimmer",
+    "thriller",
+    "nachricht"
+   ],
+   "thumbnail": {
+    "place": "livingroom",
+    "time": "night",
+    "actor": "du",
+    "action": "shocked",
+    "emotion": "shocked",
+    "props": [
+     "phone",
+     "tv"
+    ],
+    "weather": "dark",
+    "image": "Close-up of a terrified person in a dark bedroom staring at glowing smartphone screens",
+    "text": "SCHALTER UMLEGEN"
+   },
+   "wishes": [
+    "pizza",
+    "schirm",
+    "router",
+    "stecker"
+   ],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "schwarz",
+     "hat": "",
+     "hair": "curly",
+     "hair_color": "schwarz",
+     "gender": "w",
+     "skin": "hell"
+    }
+   },
+   "scenes": [
+    {
+     "text": "Eine unbekannte Nummer schickt dir plötzlich einen unheimlichen Countdown.",
+     "image": "du liesst nachts im bett auf dem handy",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "time": "night",
+     "weather": "dark",
+     "camera": "zoom_in",
+     "sfx": "ding",
+     "highlight": [
+      "Handy"
+     ],
+     "hud": "3:12 UHR",
+     "status": "",
+     "overlay": {
+      "type": "message",
+      "kicker": "UNBEKANNT",
+      "lines": [
+       "Drei Uhr zwölf.",
+       "Schalte alles aus.",
+       "Niemand hilft dir.",
+       "!Öffne niemals die Tür."
+      ]
+     },
+     "see": "Eine unbekannte Nummer schickt dir plötzlich einen unheimlichen Countdown auf dem Handy.",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Du hältst es für einen schlechten Scherz und löschst die Nachricht sofort.",
+     "image": "du tippt genervt auf das smartphone",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "time": "night",
+     "weather": "dark",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Scherz"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": null,
+     "see": "Du hältst es für einen schlechten Scherz und löschst die Nachricht sofort.",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "point",
+       "emotion": "angry",
+       "emote": "",
+       "pos": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "shot": "close",
+     "mood": "calm",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Doch dann kommt der Beweis. Der Absender weiß genau, was du gestern getan hast.",
+     "image": "du blickt erschrocken auf den bildschirm",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "time": "night",
+     "weather": "dark",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Beweis"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": {
+      "type": "card",
+      "text": "ALLES BEKANNT"
+     },
+     "see": "Doch dann kommt der Beweis. Der Absender weiß genau, was du gestern getan hast.",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "cower",
+       "emotion": "scared",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "In deinem Kühlschrank liegen eine halbe Pizza und ein kaputter Regenschirm.",
+     "image": "offener kühlschrank mit pizza und schirm",
+     "who": [],
+     "place": "kitchen",
+     "time": "night",
+     "weather": "",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Kühlschrank"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": {
+      "type": "tag",
+      "text": "DER BEWEIS"
+     },
+     "see": "In deinem Kühlschrank liegen eine halbe Pizza und ein kaputter Regenschirm.",
+     "props": [
+      "fridge",
+      "pizza",
+      "umbrella"
+     ],
+     "actors": [],
+     "shot": "insert",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Du rennst in die Küche, öffnest die Tür und traust deinen Augen kaum.",
+     "image": "du steht fassungslos vor dem kühlschrank",
+     "who": [
+      "du"
+     ],
+     "place": "kitchen",
+     "time": "night",
+     "weather": "",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Küche"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": null,
+     "see": "Du rennst in die Küche, öffnest die Tür und traust deinen Augen kaum.",
+     "props": [
+      "fridge",
+      "door"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "run",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "offleft",
+       "to": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Genau diese Dinge liegen drinnen. Jemand beobachtet jede Sekunde dein Leben.",
+     "image": "nahaufnahme der halben pizza im kühlschrank",
+     "who": [],
+     "place": "kitchen",
+     "time": "night",
+     "weather": "",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "beobachtet"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": null,
+     "see": "Genau diese Dinge liegen drinnen. Jemand beobachtet jede Sekunde dein Leben.",
+     "props": [
+      "fridge",
+      "cctv"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "scared",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Auf dem Display erscheint ein neuer Countdown mit einer strengen Anweisung.",
+     "image": "smartphone zeigt roten timer",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "time": "night",
+     "weather": "",
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "Countdown"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": {
+      "type": "timer",
+      "value": "00:15:00"
+     },
+     "see": "Auf dem Display erscheint ein neuer Countdown mit einer strengen Anweisung.",
+     "props": [
+      "display"
+     ],
+     "actors": [],
+     "shot": "graphic",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Trenne alle Smart Home Geräte sofort vom Strom, bevor die Zeit abläuft.",
+     "image": "du zieht stecker aus der steckdose",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "time": "night",
+     "weather": "",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "Strom"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": {
+      "type": "note",
+      "title": "REGEL #1",
+      "text": "ALLES AUS"
+     },
+     "see": "Trenne alle Smart Home Geräte sofort vom Strom, bevor die Zeit abläuft.",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "scared",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Du ziehst die Stecker von Fernseher, Lautsprechern und der Heizung heraus.",
+     "image": "router und kabel liegen auf dem boden",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "time": "night",
+     "weather": "",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Fernseher"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": null,
+     "see": "Du ziehst die Stecker von Fernseher, Lautsprechern und der Heizung heraus.",
+     "props": [
+      "tv",
+      "cable"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shake",
+       "emotion": "worried",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Doch der Router blinkt weiter rot und sendet ein unbekanntes Signal.",
+     "image": "router blinkt rot im dunkeln",
+     "who": [],
+     "place": "livingroom",
+     "time": "night",
+     "weather": "",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Router"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": {
+      "type": "tag",
+      "text": "KEIN INTERNET"
+     },
+     "see": "Doch der Router blinkt weiter rot und sendet ein unbekanntes Signal.",
+     "props": [
+      "router"
+     ],
+     "actors": [],
+     "shot": "insert",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Im Fernsehen läuft plötzlich eine seltsame Eilmeldung ohne Ton.",
+     "image": "fernseher flimmert mit warnmeldung",
+     "who": [],
+     "place": "livingroom",
+     "time": "night",
+     "weather": "",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Eilmeldung"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": {
+      "type": "phone",
+      "mode": "alert",
+      "kicker": "EILMELDUNG",
+      "text": "SIGNAL GEORTET",
+      "value": "00:01",
+      "label": "ACHTUNG"
+     },
+     "see": "Im Fernsehen läuft plötzlich eine seltsame Eilmeldung ohne Ton.",
+     "props": [
+      "tv"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "shocked",
+       "emote": "?",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Die Nachricht war keine Drohung, sondern eine Warnung vor dir selbst.",
+     "image": "du schaut verwirrt auf den bildschirm",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "time": "night",
+     "weather": "",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Warnung"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": null,
+     "see": "Die Nachricht war keine Drohung, sondern eine Warnung vor dir selbst.",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "cower",
+       "emotion": "scared",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "close",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Um Punkt drei Uhr nachts gehen alle Displays im Wohnzimmer von alleine an.",
+     "image": "alle fernseher und displays leuchten auf",
+     "who": [],
+     "place": "livingroom",
+     "time": "night",
+     "weather": "",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "Displays"
+     ],
+     "hud": "3:00 UHR",
+     "status": "",
+     "overlay": {
+      "type": "pulse",
+      "value": "3",
+      "label": "UHR"
+     },
+     "see": "Um Punkt drei Uhr nachts gehen alle Displays im Wohnzimmer von alleine an.",
+     "props": [
+      "tv",
+      "display"
+     ],
+     "actors": [],
+     "shot": "event",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Jeder Bildschirm flackert in kaltem blauem Licht und zeigt ein Gesicht.",
+     "image": "blaue bildschirme zeigen gesichter",
+     "who": [],
+     "place": "livingroom",
+     "time": "night",
+     "weather": "",
+     "camera": "zoom_out",
+     "sfx": "none",
+     "highlight": [
+      "Gesicht"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": null,
+     "see": "Jeder Bildschirm flackert in kaltem blauem Licht und zeigt ein Gesicht.",
+     "props": [
+      "tv"
+     ],
+     "actors": [],
+     "shot": "insert",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Du starrst fassungslos auf den Monitor und erkennst die grausame Wahrheit.",
+     "image": "du blickt ängstlich auf den monitor",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "time": "night",
+     "weather": "",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Wahrheit"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": null,
+     "see": "Du starrst fassungslos auf den Monitor und erkennst die grausame Wahrheit.",
+     "props": [
+      "computer"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "freeze",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Auf dem Hauptbildschirm lächelt dich dein eigenes Gesicht aus der Zukunft an.",
+     "image": "bildschirm zeigt alterndes gesicht",
+     "who": [],
+     "place": "livingroom",
+     "time": "night",
+     "weather": "",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Zukunft"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": {
+      "type": "card",
+      "text": "DU BIST ES"
+     },
+     "see": "Auf dem Hauptbildschirm lächelt dich dein eigenes Gesicht aus der Zukunft an.",
+     "props": [
+      "tv"
+     ],
+     "actors": [],
+     "shot": "insert",
+     "mood": "scary",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Der Absender der Nachricht warst die ganze Zeit du selbst.",
+     "image": "du greift an den kopf vor schreck",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "time": "night",
+     "weather": "",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "selbst"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": null,
+     "see": "Der Absender der Nachricht warst die ganze Zeit du selbst.",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shocked",
+       "emotion": "scared",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Und das Handy in deiner Hand fängt plötzlich an extrem heiß zu werden.",
+     "image": "smartphone funkt funken in der hand",
+     "who": [
+      "du"
+     ],
+     "place": "livingroom",
+     "time": "night",
+     "weather": "heat",
+     "camera": "shake",
+     "sfx": "boom",
+     "highlight": [
+      "brennen"
+     ],
+     "hud": "",
+     "status": "",
+     "overlay": {
+      "type": "tag",
+      "text": "AKKU ÜBERLÄDT"
+     },
+     "see": "Und das Handy in deiner Hand fängt plötzlich an extrem heiß zu werden.",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "shake",
+       "emotion": "shocked",
+       "emote": "!",
+       "pos": "center",
+       "speaks": true,
+       "hold": "phone"
+      }
+     ],
+     "shot": "close",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": ""
+    },
+    {
+     "text": "Weil du den letzten Stecker nicht rechtzeitig gezogen hast.",
+     "image": "steckdose funkt im dunklen zimmer",
+     "who": [],
+     "place": "livingroom",
+     "time": "night",
+     "weather": "",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "Stecker"
+     ],
+     "hud": "3:12 UHR",
+     "status": "",
+     "overlay": null,
+     "see": "Weil du den letzten Stecker nicht rechtzeitig gezogen hast.",
+     "props": [
+      "phone"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "cower",
+       "emotion": "scared",
+       "emote": "",
+       "pos": "center",
+       "speaks": true
+      }
+     ],
+     "shot": "wide",
+     "mood": "panic",
+     "who_desc": "",
+     "place_desc": ""
+    }
+   ],
+   "hud": "3:12 UHR",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "stecker"
+  ],
+  "title": "Unbekannte Nummer schickt Countdown und Smart-Home spinnt",
+  "created": 1795879077.9650474
  }
 }

@@ -1010,5 +1010,9 @@
  "schalter": {
   "n": 1,
   "last": "Dein größter Gegner schaut dich jeden Morgen im Spiegel an"
+ },
+ "stecker": {
+  "n": 1,
+  "last": "Unbekannte Nummer schickt Countdown und Smart-Home spinnt"
  }
 }
