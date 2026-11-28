@@ -9222,7 +9222,7 @@
   "id": 238,
   "category": "motivation",
   "topic": "Dein größter Gegner schaut dich jeden Morgen im Spiegel an.",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1795880786.0666955,
   "title": "Dein größter Gegner schaut dich jeden Morgen im Spiegel an",
   "description": "Warum du täglich wertvolle Zeit verlierst und wie du deinen Fokus zurückholst.\nWas ist dein größter Zeitfresser im Alltag?",
@@ -9256,6 +9256,7 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Großes Wort lag im Spiegel-Bild auf der Stirn, Gehirn-Figur verdeckte die Hauptfigur"
  }
 ]
