@@ -1,5 +1,5 @@
 {
- "updated": 1795830639.7093484,
+ "updated": 1795832438.4256358,
  "enough": true,
  "counted": 48,
  "total": 51,
@@ -65,8 +65,8 @@
    "n": 4,
    "avg_views": 1450,
    "avg_likes": 35.8,
-   "like_rate": 2.47,
-   "avg_score": 2011
+   "like_rate": 2.46,
+   "avg_score": 2012
   },
   {
    "slug": "storys",
@@ -108,10 +108,10 @@
    "slug": "nachricht",
    "name": "📱 Unbekannte Nachricht",
    "n": 1,
-   "avg_views": 572,
+   "avg_views": 556,
    "avg_likes": 8.0,
-   "like_rate": 1.4,
-   "avg_score": 692
+   "like_rate": 1.44,
+   "avg_score": 676
   }
  ],
  "weights": {
@@ -126,7 +126,7 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2286 Aufrufe, 2.05 % Likes).",
-  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 572 Aufrufe) – kommt seltener dran.",
+  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 556 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2200 zu 1145 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut, vier."
  ],
@@ -137,13 +137,13 @@
  ],
  "words_bad": [
   "remix",
-  "bekanntes",
   "glas",
-  "erkennst",
   "lied",
-  "eines",
+  "erkennst",
+  "bekanntes",
   "klassikers",
-  "scheibe"
+  "scheibe",
+  "eines"
  ],
  "top": [
   {
@@ -170,11 +170,11 @@
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2275,
+   "views": 2276,
    "likes": 62,
    "comments": 0,
    "shares": 0,
-   "score": 3205
+   "score": 3206
   },
   {
    "id": 124,
@@ -202,11 +202,11 @@
    "id": 224,
    "title": "Tiefsee-Anglerfisch: Die Falle aus Licht",
    "category": "tiere",
-   "views": 383,
+   "views": 386,
    "likes": 12,
    "comments": 0,
    "shares": 0,
-   "score": 563
+   "score": 566
   },
   {
    "id": 196,
