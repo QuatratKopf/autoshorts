@@ -9079,5 +9079,47 @@
   "slot": "2026-11-28 13:00",
   "review_at": 1795861069.2701514,
   "error": "Bei der Prüfung verworfen: Prüfung: vorbereitetes Barbershop-Drehbuch fälschlich verworfen, Ersatz-Video spielt nur auf der Straße, Rechnung und Schluss ohne Sinn"
+ },
+ {
+  "id": 235,
+  "category": "vergleich",
+  "topic": "Barbershop gegen Friseursalon – wer verdient mehr?",
+  "status": "rendered",
+  "created": 1795862627.8643317,
+  "title": "Barbershop gegen Friseursalon: Wer verdient mehr?",
+  "description": "Barbershop oder Friseursalon – wer verdient wirklich mehr?\nEine Beispielrechnung mit Preisen, Kunden pro Tag und Arbeitszeit – der Stundenlohn dreht das Ergebnis.\nZu wem würdest du gehen: Barbershop oder Friseursalon?",
+  "hashtags": [
+   "#shorts",
+   "#barbershop",
+   "#friseur",
+   "#vergleich",
+   "#geld",
+   "#business",
+   "#viral",
+   "#fyp"
+  ],
+  "tags": [
+   "barbershop",
+   "friseur",
+   "friseursalon",
+   "wer verdient mehr",
+   "stundenlohn",
+   "umsatz",
+   "gewinn",
+   "haare schneiden",
+   "beispielrechnung"
+  ],
+  "thumb_text": "WER VERDIENT MEHR?",
+  "missing": null,
+  "cover_ms": 89709,
+  "duration": 89.6,
+  "providers": {
+   "text": "Plan (Prüfung)",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]

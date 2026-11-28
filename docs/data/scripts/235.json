@@ -1,0 +1,631 @@
+{
+ "title": "Barbershop gegen Friseursalon: Wer verdient mehr?",
+ "scenes": [
+  {
+   "text": "Barbershop gegen Friseursalon: Wer verdient am Ende wirklich mehr?",
+   "see": "Duell-Bild Barbershop gegen Friseursalon",
+   "place": "barbershop",
+   "time": "day",
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "versus",
+    "kicker": "DAS DUELL",
+    "left": "BARBERSHOP",
+    "right": "FRISEURSALON",
+    "dark": false
+   }
+  },
+  {
+   "text": "Die Antwort hängt an einer Zahl, die fast niemand nachrechnet.",
+   "see": "Leo steht im Barbershop mit der Schere in der Hand und grübelt",
+   "place": "barbershop",
+   "time": "day",
+   "actors": [
+    {
+     "id": "leo",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "scissors",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Laut einer Umfrage des Friseurverbands in Nordrhein-Westfalen zahlen Männer im Schnitt dreiunddreißig Euro.",
+   "see": "Große Zahl: 33 Euro kostet ein Herrenhaarschnitt im Schnitt",
+   "place": "barbershop",
+   "time": "day",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "leo",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "number",
+    "kicker": "HERRENSCHNITT IM SCHNITT",
+    "value": "33 €",
+    "label": "UMFRAGE IN NRW",
+    "dark": false
+   }
+  },
+  {
+   "text": "Frauen zahlen für Waschen, Schneiden und Föhnen gut vierundfünfzig Euro.",
+   "see": "Mia föhnt im Friseursalon, der Föhn bläst",
+   "place": "hairsalon",
+   "time": "day",
+   "actors": [
+    {
+     "id": "mia",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "hairdryer",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "54 EURO"
+   }
+  },
+  {
+   "text": "Rechnen wir ein Beispiel: Leo nimmt im Barbershop dreißig Euro für Schnitt und Bart.",
+   "see": "Leo hält im Barbershop das Rasiermesser hoch",
+   "place": "barbershop",
+   "time": "day",
+   "actors": [
+    {
+     "id": "leo",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "razor",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "30 EURO"
+   }
+  },
+  {
+   "text": "Nach zwanzig Minuten ist schon der nächste Kunde dran.",
+   "see": "Leo winkt im Barbershop mit der Haarschneidemaschine den nächsten Kunden heran",
+   "place": "barbershop",
+   "time": "day",
+   "actors": [
+    {
+     "id": "leo",
+     "speaks": true,
+     "action": "point",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "clippers",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "20 MINUTEN"
+   }
+  },
+  {
+   "text": "Zwölf Kunden am Tag bringen ihm dreihundertsechzig Euro Umsatz.",
+   "see": "Leo freut sich im Barbershop über den Geldstapel des Tages",
+   "place": "barbershop",
+   "time": "day",
+   "props": [
+    {
+     "type": "money",
+     "pos": 230
+    }
+   ],
+   "actors": [
+    {
+     "id": "leo",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "counter",
+    "label": "TAGESUMSATZ LEO",
+    "value": 360,
+    "unit": "EURO"
+   }
+  },
+  {
+   "text": "Mia nimmt im Friseursalon fünfundfünfzig Euro für Waschen, Schneiden, Föhnen.",
+   "see": "Mia steht im Friseursalon mit der Schere in der Hand",
+   "place": "hairsalon",
+   "time": "day",
+   "actors": [
+    {
+     "id": "mia",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "scissors",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "55 EURO"
+   }
+  },
+  {
+   "text": "Dafür braucht sie pro Kundin fünfundvierzig Minuten.",
+   "see": "Mia föhnt im Friseursalon geduldig und schaut dabei nachdenklich",
+   "place": "hairsalon",
+   "time": "day",
+   "actors": [
+    {
+     "id": "mia",
+     "speaks": true,
+     "action": "think",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "hairdryer",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "45 MINUTEN"
+   }
+  },
+  {
+   "text": "Acht Kundinnen am Tag ergeben vierhundertvierzig Euro Umsatz.",
+   "see": "Mia freut sich im Friseursalon über den Geldstapel des Tages",
+   "place": "hairsalon",
+   "time": "day",
+   "props": [
+    {
+     "type": "money",
+     "pos": 230
+    }
+   ],
+   "actors": [
+    {
+     "id": "mia",
+     "speaks": true,
+     "action": "jump",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "counter",
+    "label": "TAGESUMSATZ MIA",
+    "value": 440,
+    "unit": "EURO"
+   }
+  },
+  {
+   "text": "Dreihundertsechzig gegen vierhundertvierzig Euro: Beim Tagesumsatz liegt der Salon vorn.",
+   "see": "Zwei Balken wachsen um die Wette: 360 Euro gegen 440 Euro",
+   "place": "hairsalon",
+   "time": "day",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "mia",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "compare",
+    "value": "360 €",
+    "sub": "440 €",
+    "left": "BARBER",
+    "right": "SALON",
+    "dark": false
+   }
+  },
+  {
+   "text": "Aber Leo hat sechs Tage die Woche geöffnet, Mia nur fünf.",
+   "see": "Leo kommt gut gelaunt in seinen Barbershop gelaufen",
+   "place": "barbershop",
+   "time": "day",
+   "actors": [
+    {
+     "id": "leo",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "6 TAGE GEGEN 5"
+   }
+  },
+  {
+   "text": "Im Monat macht Leo so rund neuntausendvierhundert Euro Umsatz, Mia neuntausendsiebenhundert.",
+   "see": "Zwei Balken: 9.400 Euro gegen 9.700 Euro Monatsumsatz",
+   "place": "barbershop",
+   "time": "day",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "leo",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "compare",
+    "value": "9.400 €",
+    "sub": "9.700 €",
+    "left": "LEO",
+    "right": "MIA",
+    "dark": false
+   }
+  },
+  {
+   "text": "Davon gehen Miete, Material, Versicherungen und Steuern ab.",
+   "see": "Mia schaut im Friseursalon besorgt auf die Liste der Abzüge",
+   "place": "hairsalon",
+   "time": "day",
+   "props": [
+    {
+     "type": "money",
+     "pos": 230
+    }
+   ],
+   "actors": [
+    {
+     "id": "mia",
+     "speaks": true,
+     "action": "sad",
+     "emotion": "worried",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "checklist",
+    "title": "ABZÜGE",
+    "items": [
+     [
+      "Miete",
+      true
+     ],
+     [
+      "Material",
+      true
+     ],
+     [
+      "Versicherungen",
+      true
+     ],
+     [
+      "Steuern",
+      true
+     ]
+    ]
+   }
+  },
+  {
+   "text": "Angenommen, Leo bleibt die Hälfte: viertausendsiebenhundert Euro Gewinn.",
+   "see": "Leo tanzt im Barbershop neben seinem Geldstapel",
+   "place": "barbershop",
+   "time": "day",
+   "props": [
+    {
+     "type": "money",
+     "pos": 230
+    }
+   ],
+   "actors": [
+    {
+     "id": "leo",
+     "speaks": true,
+     "action": "dance",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "counter",
+    "label": "LEO GEWINN IM MONAT",
+    "value": 4700,
+    "unit": "EURO"
+   }
+  },
+  {
+   "text": "Mia zahlt mehr für Farbe, Pflege und den größeren Laden: viertausendvierhundert Euro.",
+   "see": "Mia zeigt im Friseursalon auf ihren etwas kleineren Geldstapel",
+   "place": "hairsalon",
+   "time": "day",
+   "props": [
+    {
+     "type": "money",
+     "pos": 230
+    }
+   ],
+   "actors": [
+    {
+     "id": "mia",
+     "speaks": true,
+     "action": "point",
+     "emotion": "",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "counter",
+    "label": "MIA GEWINN IM MONAT",
+    "value": 4400,
+    "unit": "EURO"
+   }
+  },
+  {
+   "text": "Du denkst, Leo gewinnt. Falsch, denn jetzt kommt der Haken.",
+   "see": "Leo erschrickt im Barbershop",
+   "place": "barbershop",
+   "time": "day",
+   "actors": [
+    {
+     "id": "leo",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "DER HAKEN"
+   }
+  },
+  {
+   "text": "Leo steht dafür sechzig Stunden pro Woche im Laden.",
+   "see": "Leo steht spät abends müde im Barbershop, die Haarschneidemaschine noch in der Hand",
+   "place": "barbershop",
+   "time": "day",
+   "actors": [
+    {
+     "id": "leo",
+     "speaks": true,
+     "action": "pant",
+     "emotion": "worried",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "clippers",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    }
+   ],
+   "mood": "tense",
+   "overlay": {
+    "type": "card",
+    "text": "60 STUNDEN"
+   }
+  },
+  {
+   "text": "Mia schließt nach vierzig Stunden ab und geht nach Hause.",
+   "see": "Mia winkt und verlässt gut gelaunt den Friseursalon",
+   "place": "hairsalon",
+   "time": "day",
+   "actors": [
+    {
+     "id": "mia",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center",
+     "to": "offright"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "card",
+    "text": "40 STUNDEN"
+   }
+  },
+  {
+   "text": "Pro Arbeitsstunde bleiben Leo grob gerechnet achtzehn Euro, Mia fünfundzwanzig.",
+   "see": "Zwei Balken: 18 Euro gegen 25 Euro pro Stunde",
+   "place": "hairsalon",
+   "time": "day",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "mia",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "compare",
+    "value": "18 €",
+    "sub": "25 €",
+    "left": "LEO",
+    "right": "MIA",
+    "dark": false
+   }
+  },
+  {
+   "text": "Leo hat am Monatsende mehr auf dem Konto, Mia mehr Feierabend.",
+   "see": "Leo hält im Barbershop sein Geld, Mia winkt entspannt daneben",
+   "place": "plain",
+   "time": "day",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "leo",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "left"
+    },
+    {
+     "id": "mia",
+     "speaks": false,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "right"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Zu wem würdest du gehen: Barbershop oder Friseursalon?",
+   "see": "Duell-Bild Barbershop gegen Friseursalon",
+   "place": "barbershop",
+   "time": "day",
+   "actors": [
+    {
+     "id": "leo",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": ""
+    }
+   ],
+   "shot": "graphic",
+   "mood": "calm",
+   "graphic": {
+    "type": "versus",
+    "kicker": "DEINE WAHL",
+    "left": "BARBERSHOP",
+    "right": "FRISEURSALON",
+    "dark": false
+   }
+  }
+ ]
+}
