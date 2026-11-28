@@ -955,6 +955,9 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Hauptfigur steht im Bild; Redewendungen (`SPEECH_IDIOM_RE`) bringen keinen Schalter/Motor/Anker mit. Sätze mit „Spiegel“ im Bad zeigen den Blick in
   den Spiegel (`shot: mirror`, höchstens drei, nie zwei hintereinander): neuer Zustand `day` (helles Bad am Morgen, ernster Blick, keine Kerze),
   `clear` wenn Bildplan oder Stimmung ein Lächeln nennen, `stare` nur nachts.
+- Nachtrag Video 238: Im Spiegel-Bild lag das große Wort auf Stirn und Haaren („MORGEN“). `_speech_final` setzt `_mirror_low`: `mirror_glass(low=True)`
+  zeichnet das Spiegelbild kleiner und tiefer – der Kopf bleibt ganz unter dem Wort. Das Gehirn als Figur neben EINEM Menschen (Motivationsrede) stand
+  größer als der Mensch mitten im Bild und verdeckte ihn halb: jetzt Mensch links (`pos` 250), Gehirn rechts (`pos` 790) und kleiner (`_ksz` 0.8), kein Zwischenschnitt.
 - Selbsttest: `_speech237`.
-- Noch offen: Die Figur „sitzt“ am Schreibtisch auf einem Hocker VOR dem Tisch (kein Stuhl am Tisch, kein Schreiben); das Gehirn als Figur ist größer als
-  der Mensch daneben; eine Wanduhr als Requisite steht im Zimmer auf dem Boden.
+- Noch offen: Die Figur „sitzt“ am Schreibtisch auf einem Hocker VOR dem Tisch (kein Stuhl am Tisch, kein Schreiben); eine Wanduhr als Requisite
+  steht im Zimmer auf dem Boden.

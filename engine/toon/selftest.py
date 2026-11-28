@@ -3089,6 +3089,15 @@ def main():
         dark = frame({"text": "x", "place": "bathroom", "shot": "mirror", "mirror": "stare", "actors": [{"id": "du"}]}, {"du": {}}, 1.2).convert("RGB")
         lum = lambda im: sum(sum(px) for px in im.resize((27, 48)).getdata())
         assert lum(day) > lum(dark) * 2, (lum(day), lum(dark))
+        assert sc[1].get("_mirror_low") is True, sc[1]
+        low_im = frame(dict(sc[1], time="day"), {"du": {"hair": "curly", "hair_color": "dunkelbraun"}}, 1.2).convert("RGB")
+        band = low_im.crop((300, 540, 780, 660))                 # hier steht das große Wort: dahinter nur die Wand im Spiegel, kein Haar und kein Gesicht
+        assert sum(1 for px in band.resize((48, 12)).getdata() if px[0] > px[2] + 12 and sum(px) < 420) < 8, "Kopf im Spiegel reicht ins große Wort"
+        sb = stage.direct([{"text": "Dein Gehirn passt sich jeden Tag an das an, was du tust.", "place": "park", "time": "day",
+                            "actors": [{"id": "du", "action": "wave", "pos": "left"}, {"id": "gehirn", "kind": "brain", "action": "wave", "pos": "right"}]}],
+                          [(0, 4)], "Dein größter Gegner schaut dich jeden Morgen im Spiegel an", "motivation")[0]
+        hb, bb = sb["actors"][0], sb["actors"][1]
+        assert hb["pos"] == 250 and bb["pos"] == 790 and bb.get("_ksz") == 0.8, sb["actors"]      # Gehirn kleiner und mit Abstand neben dem Menschen
         from .. import writer
         assert not writer.has_storyboard({"scenes": raw_plan}) and writer.has_storyboard({"scenes": [dict(q, props=["phone"]) for q in raw_plan]})
     raw_plan = [{"text": f"Satz {i}.", "see": "Du stehst da.", "place": "bad", "actors": [{"id": "du", "action": "talk", "speaks": True}]} for i in range(9)]

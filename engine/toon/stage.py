@@ -3356,7 +3356,16 @@ def _speech_final(scenes, style="", main_id="du"):
             sc["place"], sc["backdrop"], sc["props"], sc["crowd"] = "bathroom", None, [], ""
             sc["actors"] = [{"id": main_id, "action": "idle", "emotion": "happy" if happy else "", "emote": "none", "pos": "center", "speaks": False}]
             sc["_no_cut"] = True
+        hum_b = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and not a.get("kind")]
+        br_b = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and str(a.get("kind") or "") == "brain"]
+        if len(hum_b) == 1 and len(br_b) == 1 and str(sc.get("shot") or "") in ("", "wide"):
+            hum_b[0].update(pos=250)                      # das Gehirn als Figur stand größer als der Mensch mitten im Bild und verdeckte ihn halb (Video 238)
+            hum_b[0].pop("to", None)
+            br_b[0].update(pos=790, _ksz=0.8, hero=False)
+            br_b[0].pop("to", None)
+            sc["_no_cut"] = True
         if str(sc.get("shot") or "") == "mirror":
+            sc["_mirror_low"] = True                      # das große Wort steht über dem Kopf, nicht auf Stirn und Haaren
             if str(sc.get("mirror") or "") in ("", "normal", "stare") and str(sc.get("time") or "") == "day":
                 sc["mirror"] = "day"                      # „jeden Morgen im Spiegel“: helles Bad, kein Kerzenlicht
             n_mir, last_mir = n_mir + 1, i
@@ -7083,7 +7092,7 @@ def _mirror_params(state, t, dur):
     return 0.12, 0.0, False, 0.0, "normal"
 
 
-def mirror_glass(look, state, t, dur, size=(844, 1050), seed=3):
+def mirror_glass(look, state, t, dur, size=(844, 1050), seed=3, low=False):
     """Das Spiegelbild: gespiegelte Badezimmerwand, davor die Figur groß von vorn. Je nach Zustand versinkt der Rand des Bildes im Dunkeln
     (Troxler-Effekt), die Augen werden zu schwarzen Höhlen, das Gesicht zur Fratze."""
     gw, gh = size
@@ -7122,7 +7131,7 @@ def mirror_glass(look, state, t, dur, size=(844, 1050), seed=3):
     if grin:
         pose.extra["grin"] = True
         pose.head = 5 * math.sin(t * 1.3)
-    im, fx, fy = rig.draw(look, pose, 1, 2.55 / max(0.6, look.size), ss=1)
+    im, fx, fy = rig.draw(look, pose, 1, (2.2 if low else 2.55) / max(0.6, look.size), ss=1)
     hc = pose.extra.get("hc") or (im.width / 2, im.height * 0.3, 200)
     if grin:                                               # Fratze: das Gesicht zieht sich langsam in die Breite und Länge, fahle Farbe
         wob = 1 + 0.05 * math.sin(t * 2.1)
@@ -7130,7 +7139,7 @@ def mirror_glass(look, state, t, dur, size=(844, 1050), seed=3):
         hc = (hc[0] * wob, hc[1] * (2 - wob), hc[2])
         r_, g_, b_, a_ = im2.split()
         im = Image.merge("RGBA", (r_.point(lambda v: int(v * 0.8)), g_.point(lambda v: int(v * 0.9)), b_.point(lambda v: int(v * 0.86)), a_))
-    cx, cy = gw / 2, gh * 0.52                             # Kopf unter der Zone für Titel, Karte und Schild (in Video 205 lag „EINE MINUTE“ auf dem Haaransatz)
+    cx, cy = gw / 2, gh * (0.67 if low else 0.52)           # low: Motivationsrede – das große Wort steht bei y≈600, der Kopf bleibt ganz darunter (Video 238: „MORGEN“ lag auf der Stirn)   # Kopf unter der Zone für Titel, Karte und Schild (in Video 205 lag „EINE MINUTE“ auf dem Haaransatz)
     g.paste(im, (int(cx - hc[0]), int(cy - hc[1])), im)
     if not lit:                                            # schwaches Licht: alles etwas blau und dunkel
         g = Image.blend(g, Image.new("RGB", size, (16, 22, 40)), 0.26)
@@ -7206,7 +7215,7 @@ def _mirror_frame(scene, cast, t, dur):
         d.line((204, 1296, 222, 1220), fill=(250, 220, 90) if lit else (132, 120, 70), width=9)
         _mir_cache[key] = fr
     frame = _mir_cache[key].copy()
-    gl = mirror_glass(look, state, t, dur, (x1 - x0, y1 - y0))
+    gl = mirror_glass(look, state, t, dur, (x1 - x0, y1 - y0), low=bool(scene.get("_mirror_low")))
     mk = _mir_cache.setdefault("mask", Image.new("L", (x1 - x0, y1 - y0), 0))
     if not mk.getbbox():
         ImageDraw.Draw(mk).rounded_rectangle((0, 0, x1 - x0 - 1, y1 - y0 - 1), 34, fill=255)
