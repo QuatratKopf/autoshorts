@@ -1,5 +1,5 @@
 {
- "updated": 1795854039.312771,
+ "updated": 1795855835.9134455,
  "enough": true,
  "counted": 49,
  "total": 51,
@@ -109,9 +109,9 @@
    "name": "📱 Unbekannte Nachricht",
    "n": 1,
    "avg_views": 578,
-   "avg_likes": 8.0,
-   "like_rate": 1.38,
-   "avg_score": 698
+   "avg_likes": 9.0,
+   "like_rate": 1.56,
+   "avg_score": 713
   }
  ],
  "weights": {
@@ -127,7 +127,7 @@
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2104 Aufrufe, 2.15 % Likes).",
   "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 578 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2191 zu 1146 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2192 zu 1146 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut, vier."
  ],
  "words_good": [
@@ -138,8 +138,8 @@
  "words_bad": [
   "remix",
   "jede",
-  "scheibe",
   "eines",
+  "scheibe",
   "klassikers",
   "spiegel"
  ],
