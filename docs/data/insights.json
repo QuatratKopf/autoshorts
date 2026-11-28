@@ -1,5 +1,5 @@
 {
- "updated": 1795848639.8626723,
+ "updated": 1795850432.8507366,
  "enough": true,
  "counted": 49,
  "total": 51,
@@ -63,10 +63,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 4,
-   "avg_views": 1451,
+   "avg_views": 1452,
    "avg_likes": 35.8,
    "like_rate": 2.46,
-   "avg_score": 2012
+   "avg_score": 2013
   },
   {
    "slug": "storys",
@@ -137,8 +137,8 @@
  ],
  "words_bad": [
   "remix",
-  "jede",
   "klassikers",
+  "jede",
   "eines",
   "scheibe",
   "spiegel"
@@ -200,11 +200,11 @@
    "id": 224,
    "title": "Tiefsee-Anglerfisch: Die Falle aus Licht",
    "category": "tiere",
-   "views": 388,
+   "views": 390,
    "likes": 12,
    "comments": 0,
    "shares": 0,
-   "score": 568
+   "score": 570
   },
   {
    "id": 196,
