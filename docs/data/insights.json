@@ -1,5 +1,5 @@
 {
- "updated": 1795825237.3095596,
+ "updated": 1795827035.7714908,
  "enough": true,
  "counted": 48,
  "total": 51,
@@ -36,7 +36,7 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 12,
-   "avg_views": 1695,
+   "avg_views": 1694,
    "avg_likes": 46.7,
    "like_rate": 2.75,
    "avg_score": 2397
@@ -63,10 +63,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 4,
-   "avg_views": 1449,
+   "avg_views": 1450,
    "avg_likes": 35.8,
    "like_rate": 2.47,
-   "avg_score": 2010
+   "avg_score": 2011
   },
   {
    "slug": "storys",
@@ -81,10 +81,10 @@
    "slug": "motivation",
    "name": "🔥 Motivation",
    "n": 2,
-   "avg_views": 1063,
+   "avg_views": 1062,
    "avg_likes": 35.0,
-   "like_rate": 3.29,
-   "avg_score": 1608
+   "like_rate": 3.3,
+   "avg_score": 1607
   },
   {
    "slug": "musik",
@@ -127,7 +127,7 @@
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2286 Aufrufe, 2.05 % Likes).",
   "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 572 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2200 zu 1145 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2200 zu 1144 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut, vier."
  ],
  "words_good": [
@@ -138,12 +138,12 @@
  "words_bad": [
   "remix",
   "lied",
+  "bekanntes",
   "erkennst",
   "glas",
-  "bekanntes",
-  "jede",
   "eines",
-  "scheibe"
+  "jede",
+  "klassikers"
  ],
  "top": [
   {
@@ -202,11 +202,11 @@
    "id": 224,
    "title": "Tiefsee-Anglerfisch: Die Falle aus Licht",
    "category": "tiere",
-   "views": 381,
+   "views": 384,
    "likes": 12,
    "comments": 0,
    "shares": 0,
-   "score": 561
+   "score": 564
   },
   {
    "id": 196,
