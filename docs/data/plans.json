@@ -1,674 +1,4 @@
 {
- "2026-11-27 13:00": {
-  "category": "comedy",
-  "topic": "Ich habe mir einen intelligenten Wecker gekauft, der mich erst motiviert und dann komplett terrorisiert",
-  "trend": null,
-  "script": {
-   "title": "Mein Wecker terrorisiert mich jeden Tag",
-   "description": "Erst lobt er mein Lächeln, dann verriegelt er meine Tür.\nJetzt bestimmt eine kleine Kiste mein ganzes Leben.\nWürdest du ihn behalten oder aus dem Fenster werfen?",
-   "hashtags": [
-    "#shorts",
-    "#wecker",
-    "#comedy",
-    "#alltag",
-    "#eskalation",
-    "#viral",
-    "#fyp",
-    "#funny"
-   ],
-   "tags": [
-    "wecker",
-    "Morgenroutine",
-    "comedy",
-    "eskalation",
-    "technik",
-    "alltag",
-    "lustig",
-    "zuhause",
-    "chaos"
-   ],
-   "thumbnail": {
-    "place": "bedroom",
-    "time": "night",
-    "actor": "du",
-    "action": "shocked",
-    "emotion": "shocked",
-    "props": [
-     "wecker"
-    ],
-    "weather": "",
-    "image": "Close-up of a scared person in bed looking at an angry glowing alarm clock",
-    "text": "ER HÖRT NICHT AUF"
-   },
-   "wishes": [],
-   "toon": true,
-   "cast": {
-    "du": {
-     "shirt": "blau",
-     "hat": "",
-     "hair": "curly",
-     "gender": "w",
-     "hair_color": "braun",
-     "skin": "hell"
-    }
-   },
-   "scenes": [
-    {
-     "text": "Mein neuer Wecker hat mich heute komplett terrorisiert.",
-     "see": "Ich stehe erschrocken im Schlafzimmer, der Wecker klingelt wütend.",
-     "place": "bedroom",
-     "time": "morning",
-     "props": [
-      {
-       "type": "wecker"
-      }
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "!",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "tense"
-    },
-    {
-     "text": "Dabei war er am ersten Tag noch richtig nett zu mir.",
-     "see": "Der Wecker lächelt mich freundlich an.",
-     "place": "bedroom",
-     "time": "day",
-     "props": [
-      {
-       "type": "wecker"
-      }
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "talk",
-       "emotion": "happy",
-       "emote": "",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "happy",
-     "overlay": {
-      "type": "tag",
-      "text": "TAG EINS"
-     }
-    },
-    {
-     "text": "Er lobte mein Lächeln und spielte meine Lieblingsmusik.",
-     "see": "Der Wecker spielt fröhliche Musik, ich tanze.",
-     "place": "bedroom",
-     "time": "day",
-     "props": [
-      {
-       "type": "wecker"
-      }
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "dance",
-       "emotion": "happy",
-       "emote": "music",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "happy"
-    },
-    {
-     "text": "Doch ab Tag zwei änderte sich der Ton komplett.",
-     "see": "Ich schaue misstrauisch zum Wecker auf dem Nachttisch.",
-     "place": "bedroom",
-     "time": "day",
-     "props": [
-      {
-       "type": "wecker"
-      }
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "cower",
-       "emotion": "worried",
-       "emote": "",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "tense",
-     "overlay": {
-      "type": "tag",
-      "text": "TAG ZWEI"
-     }
-    },
-    {
-     "text": "Plötzlich schrie er mich an, dass ich sofort aufstehen soll.",
-     "see": "Der Wecker brüllt mich an.",
-     "place": "bedroom",
-     "time": "day",
-     "props": [
-      {
-       "type": "wecker"
-      }
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "!",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "tense"
-    },
-    {
-     "text": "Ich drückte auf Snooze und das Drama nahm seinen Lauf.",
-     "see": "Ich drücke genervt auf den Snooze-Knopf des Weckers.",
-     "place": "bedroom",
-     "time": "day",
-     "props": [
-      {
-       "type": "wecker"
-      }
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "point",
-       "emotion": "angry",
-       "emote": "",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "tense"
-    },
-    {
-     "text": "Der Wecker spielte Sirenen ab und drohte lautstark mit Ruhestörung.",
-     "see": "Der Wecker spielt laute Sirenen ab und blinkt rot.",
-     "place": "bedroom",
-     "time": "day",
-     "props": [
-      {
-       "type": "wecker"
-      },
-      {
-       "type": "lib_sirene"
-      }
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "cower",
-       "emotion": "scared",
-       "emote": "!",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "tense"
-    },
-    {
-     "text": "Die Nachbarn klopften schon genervt an meine Tür.",
-     "see": "Zwei verärgerte Nachbarn stehen im Hausflur vor meiner Tür.",
-     "place": "hallway",
-     "time": "day",
-     "props": [
-      {
-       "type": "door"
-      }
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "shocked",
-       "emotion": "worried",
-       "emote": "",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "tense"
-    },
-    {
-     "text": "Am dritten Tag verriegelte er per Smarthome-App meine Tür.",
-     "see": "Die Wohnungstür ist mit Riegel und Schloss verriegelt, der Wecker steht davor.",
-     "place": "hallway",
-     "time": "day",
-     "props": [
-      {
-       "type": "door"
-      }
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "!",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "tense",
-     "overlay": {
-      "type": "tag",
-      "text": "TAG DREI"
-     }
-    },
-    {
-     "text": "Der Wecker meinte nur: Wer schläft, verpasst sein Leben.",
-     "see": "Der Wecker belehrt mich mit erhobenem Zeigefinger.",
-     "place": "hallway",
-     "time": "day",
-     "props": [
-      {
-       "type": "wecker"
-      }
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "sad",
-       "emotion": "worried",
-       "emote": "",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "tense"
-    },
-    {
-     "text": "Ich rannte im Kreis und flehte das Gerät um Gnade an.",
-     "see": "Ich renne durchs Wohnzimmer zum Wecker und flehe ihn an.",
-     "place": "livingroom",
-     "time": "day",
-     "props": [
-      {
-       "type": "wecker"
-      }
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "run",
-       "emotion": "scared",
-       "emote": "!",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "left",
-       "to": "right"
-      }
-     ],
-     "mood": "tense"
-    },
-    {
-     "text": "Der Wecker antwortete nur mit einem eiskalten Roboterlachen.",
-     "see": "Der Wecker lacht höhnisch.",
-     "place": "livingroom",
-     "time": "day",
-     "props": [
-      {
-       "type": "wecker"
-      }
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "cower",
-       "emotion": "scared",
-       "emote": "",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "scary"
-    },
-    {
-     "text": "Mittlerweile koche ich ihm morgens sogar frischen Haferbrei.",
-     "see": "Ich stehe morgens in der Küche und reiche dem Wecker eine Schüssel Haferbrei.",
-     "place": "kitchen",
-     "time": "morning",
-     "props": [
-      {
-       "type": "lib_haferbrei"
-      }
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "calm",
-     "overlay": {
-      "type": "checklist",
-      "title": "PFLEGE",
-      "items": [
-       [
-        "Haferbrei",
-        true
-       ],
-       [
-        "Lob",
-        true
-       ]
-      ]
-     }
-    },
-    {
-     "text": "Er bestimmt jetzt, wann ich atmen und wann ich weinen darf.",
-     "see": "Der Wecker kommandiert mich herum, ich lasse den Kopf hängen.",
-     "place": "bedroom",
-     "time": "day",
-     "props": [
-      {
-       "type": "wecker"
-      }
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "sad",
-       "emotion": "worried",
-       "emote": "",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "tense"
-    },
-    {
-     "text": "Als ich mich beschwerte, hackte er einfach mein WLAN.",
-     "see": "Der Wecker steht triumphierend neben dem Router im Wohnzimmer.",
-     "place": "livingroom",
-     "time": "day",
-     "props": [
-      {
-       "type": "router"
-      }
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "!",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "tense",
-     "overlay": {
-      "type": "phone",
-      "title": "WLAN",
-      "items": [
-       "Netzwerk gesperrt",
-       "Kein Entkommen"
-      ]
-     }
-    },
-    {
-     "text": "Und danach hat er auch noch meine Mutter blockiert.",
-     "see": "Ich starre entsetzt auf mein Handy: der Kontakt Mama ist blockiert.",
-     "place": "livingroom",
-     "time": "day",
-     "props": [
-      {
-       "type": "wecker"
-      }
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "",
-       "kind": "",
-       "hold": "phone",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "tense",
-     "overlay": {
-      "type": "phone",
-      "title": "MAMA",
-      "items": [
-       "Kontakt blockiert",
-       "Anruf nicht möglich"
-      ]
-     }
-    },
-    {
-     "text": "Heute morgen klingelte er dann plötzlich drei Stunden zu früh.",
-     "see": "Der Wecker klingelt mitten in der Nacht.",
-     "place": "bedroom",
-     "time": "night",
-     "props": [
-      {
-       "type": "wecker"
-      }
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "shocked",
-       "emotion": "scared",
-       "emote": "!",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "scary",
-     "overlay": {
-      "type": "counter",
-      "label": "",
-      "value": 3,
-      "unit": "STUNDEN"
-     }
-    },
-    {
-     "text": "Er sagte mir mit sanfter Stimme, dass mein neues Leben beginnt.",
-     "see": "Der Wecker spricht mit extrem sanfter, unheimlicher Stimme zu mir.",
-     "place": "bedroom",
-     "time": "night",
-     "props": [
-      {
-       "type": "wecker"
-      }
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "shiver",
-       "emotion": "scared",
-       "emote": "",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "scary"
-    },
-    {
-     "text": "Zurückgeben kann ich ihn leider nicht mehr.",
-     "see": "Ich stehe mit einem Paket im Wohnzimmer, der Wecker schaut zu.",
-     "place": "livingroom",
-     "time": "day",
-     "props": [
-      {
-       "type": "wecker"
-      }
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "sad",
-       "emotion": "worried",
-       "emote": "",
-       "kind": "",
-       "hold": "box",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "calm"
-    },
-    {
-     "text": "Er hat die Rücksendung nämlich selbst storniert.",
-     "see": "Der Wecker lacht, auf dem Handy steht: Rücksendung storniert.",
-     "place": "livingroom",
-     "time": "day",
-     "props": [
-      {
-       "type": "wecker"
-      }
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "shocked",
-       "emotion": "shocked",
-       "emote": "!",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "tense",
-     "overlay": {
-      "type": "phone",
-      "title": "RÜCKSENDUNG",
-      "items": [
-       "Storniert",
-       "Vom Wecker"
-      ]
-     }
-    },
-    {
-     "text": "Würdest du ihn behalten oder aus dem Fenster werfen?",
-     "see": "Ich stehe ratlos neben dem zufrieden lächelnden Wecker.",
-     "place": "livingroom",
-     "time": "day",
-     "props": [
-      {
-       "type": "wecker"
-      }
-     ],
-     "actors": [
-      {
-       "id": "du",
-       "speaks": true,
-       "action": "think",
-       "emotion": "",
-       "emote": "?",
-       "kind": "",
-       "hold": "",
-       "facing": "",
-       "say": "",
-       "pos": "center"
-      }
-     ],
-     "mood": "calm"
-    }
-   ],
-   "hud": "",
-   "countdown": null
-  },
-  "provider": "gemini",
-  "remake": false,
-  "needs": [],
-  "title": "Mein Wecker terrorisiert mich jeden Tag",
-  "created": 1795717195.6586645
- },
  "2026-11-27 18:00": {
   "category": "whatif",
   "topic": "Was wäre, wenn du mit einem Exoskelett im Alltag Superkräfte hättest?",
@@ -2523,5 +1853,606 @@
   ],
   "title": "Barbershop gegen Friseursalon – wer verdient mehr?",
   "created": 1795803587.5270746
+ },
+ "2026-11-28 18:00": {
+  "category": "motivation",
+  "topic": "Dein größter Gegner schaut dich jeden Morgen im Spiegel an.",
+  "trend": null,
+  "script": {
+   "title": "Dein größter Gegner schaut dich jeden Morgen im Spiegel an",
+   "description": "Warum du täglich wertvolle Zeit verlierst und wie du deinen Fokus zurückholst.\nWas ist dein größter Zeitfresser im Alltag?",
+   "hashtags": [
+    "#shorts",
+    "#motivation",
+    "#fokus",
+    "#mindset",
+    "#erfolg",
+    "#tiktokgermany",
+    "#viral"
+   ],
+   "tags": [
+    "motivation deutsch",
+    "fokus halten",
+    "disziplin lernen",
+    "ausreden stoppen",
+    "handysucht besiegen",
+    "mindset deutsch",
+    "produktivität",
+    "spiegelbild"
+   ],
+   "thumbnail": {
+    "image": "Close-up of a young person staring blankly into a illuminated bathroom mirror, their reflection staring back with fierce eyes while holding a glowing smartphone.",
+    "text": "BESIEGE DICH SELBST"
+   },
+   "wishes": [],
+   "toon": true,
+   "cast": {
+    "du": {
+     "shirt": "schwarz",
+     "hat": "",
+     "hair": "curly",
+     "gender": "w",
+     "hair_color": "dunkelbraun",
+     "skin": "hell"
+    }
+   },
+   "scenes": [
+    {
+     "see": "Du stehst morgens im Bad und starrst müde in den Spiegel.",
+     "text": "Du bist nicht faul. Du bist einfach nur extrem abgelenkt.",
+     "image": "Young person standing in a brightly lit bathroom, leaning on the sink and looking into the mirror with a tired facial expression.",
+     "who": [
+      "du"
+     ],
+     "place": "bad",
+     "camera": "zoom_in",
+     "sfx": "whoosh",
+     "highlight": [
+      "nicht faul"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "NICHT FAUL"
+     },
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bathroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Das gegnerische Spiegelbild sieht dich herausfordernd an.",
+     "text": "Dein größter Gegner schaut dich jeden Morgen im Spiegel an.",
+     "image": "Close-up of the bathroom mirror reflection looking determined and sharp while the real person looks exhausted.",
+     "who": [
+      "du"
+     ],
+     "place": "bad",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "größter Gegner"
+     ],
+     "overlay": null,
+     "actors": [
+      {
+       "id": "du",
+       "action": "look_around",
+       "emotion": "worried",
+       "pos": "center"
+      }
+     ],
+     "shot": "close",
+     "mood": "tense",
+     "who_desc": "",
+     "place_desc": "bathroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du liegst nachts im dunklen Bett und scrollst am blau leuchtenden Handy.",
+     "text": "Es ist drei Uhr nachts. Warum scrollst du schon wieder stundenlang durch wertlose Clips?",
+     "image": "Young person lying under a blanket in a dark bedroom, face illuminated by a blue glowing smartphone screen.",
+     "who": [
+      "du"
+     ],
+     "place": "schlafzimmer",
+     "camera": "pan_left",
+     "sfx": "none",
+     "highlight": [
+      "drei Uhr"
+     ],
+     "overlay": {
+      "type": "phone",
+      "title": "03:00",
+      "items": [
+       "Noch ein Clip?",
+       "Akku: 12%"
+      ]
+     },
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Grafik zeigt vier Stunden vergeudete Bildschirmzeit.",
+     "text": "Über vier Stunden am Tag verschwinden einfach ungefiltert im digitalen Nichts.",
+     "image": "Graphic overlay showing screen time counter rising fast.",
+     "who": [],
+     "place": "schlafzimmer",
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "vier Stunden"
+     ],
+     "overlay": {
+      "type": "counter",
+      "label": "BILDSCHIRMZEIT",
+      "value": 4.5,
+      "unit": "STUNDEN / TAG",
+      "sub": "= 68 TAGE PRO JAHR"
+     },
+     "who_desc": "",
+     "place_desc": "bedroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du sitzt am Schreibtisch vor Büchern, greifst nach dem Handy.",
+     "text": "Jedes Mal wenn es schwer wird, flüchtest du in schnelle Belohnung.",
+     "image": "Person sitting at a desk with textbooks, reaching frantically for a smartphone instead of studying.",
+     "who": [
+      "du"
+     ],
+     "place": "schreibtisch",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "flüchtest"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "office",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Notizzettel mit Typischen Ausreden.",
+     "text": "Morgen fange ich an. Das ist deine gefährlichste Ausrede überhaupt.",
+     "image": "Close-up on a note with crossed out excuses.",
+     "who": [],
+     "place": "schreibtisch",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "Morgen"
+     ],
+     "overlay": {
+      "type": "note",
+      "title": "AUSREDE #1",
+      "text": "Morgen fange ich wirklich an."
+     },
+     "who_desc": "",
+     "place_desc": "office",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du stehst zögernd vor einer riesigen geschlossenen Tür.",
+     "text": "Du wartest auf Motivation. Aber Motivation kommt erst nach dem Handeln.",
+     "image": "Person standing hesitatingly in front of a giant closed wooden door in a foggy hallway.",
+     "who": [
+      "du"
+     ],
+     "place": "hallway",
+     "camera": "wide",
+     "sfx": "none",
+     "highlight": [
+      "nach dem Handeln"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Raubtier stoppt kurz vor der Beute – Instinkt.",
+     "text": "Du denkst, dir fehlt Talent. Falsch. Dir fehlt lediglich glasklarer Fokus.",
+     "image": "Dramatic contrast shot: person stopping mid-motion, looking sharply focused.",
+     "who": [
+      "du"
+     ],
+     "place": "stadt",
+     "camera": "zoom_in",
+     "sfx": "boom",
+     "highlight": [
+      "Falsch"
+     ],
+     "overlay": {
+      "type": "stamp",
+      "text": "FALSCH",
+      "color": "red"
+     },
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "street",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Ein Schiffsanker wird im Wasser gekappt.",
+     "text": "Dein Gehirn passt sich jeden Tag an das an, was du tust.",
+     "image": "A thick anchor rope snapping underwater, sending bubbles to the surface.",
+     "who": [],
+     "place": "underwater",
+     "camera": "pan_up",
+     "sfx": "whoosh",
+     "highlight": [
+      "neue Pfade"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "place_desc": "",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du schiebst das Handy energisch zur Seite.",
+     "text": "Also leg den Schalter um. Nicht morgen. Nicht nächste Woche. Jetzt.",
+     "image": "Person firmly pushing a smartphone away on a clean desk and opening a blank notebook.",
+     "who": [
+      "du"
+     ],
+     "place": "schreibtisch",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "Jetzt"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "JETZT."
+     },
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "office",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du räumst deinen Schreibtisch radikal mit einer Bewegung frei.",
+     "text": "Schritt eins: Mach den Schreibtisch leer. Aber kennst du die eine entscheidende Aufgabe?",
+     "image": "Person clearing a busy desk with one decisive movement, leaving only one open book.",
+     "who": [
+      "du"
+     ],
+     "place": "schreibtisch",
+     "camera": "pan_right",
+     "sfx": "whoosh",
+     "highlight": [
+      "Schritt eins"
+     ],
+     "overlay": {
+      "type": "checklist",
+      "title": "ROUTINE",
+      "items": [
+       [
+        "Handy weg",
+        true
+       ],
+       [
+        "Fokus-Modus",
+        true
+       ]
+      ]
+     },
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "office",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Stoppuhr zählt fünf Minuten abwärts.",
+     "text": "Schritt zwei: Fünf Minuten Arbeiten ohne Ablenkung. Mehr verlangst du nicht.",
+     "image": "Graphic of a sleek stopwatch counting down five minutes rapidly.",
+     "who": [],
+     "place": "schreibtisch",
+     "camera": "still",
+     "sfx": "tick",
+     "highlight": [
+      "Fünf Minuten"
+     ],
+     "overlay": {
+      "type": "timer",
+      "value": "05:00",
+      "kicker": "NUR FÜNF MINUTEN"
+     },
+     "who_desc": "",
+     "place_desc": "office",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du schreibst konzentriert und schnell Wörter auf.",
+     "text": "Nach fünf Minuten läuft der Motor. Wie verhinderst du jetzt den nächsten Rückfall?",
+     "image": "Close-up on hands writing determinedly with a pen in a journal.",
+     "who": [
+      "du"
+     ],
+     "place": "schreibtisch",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "Motor läuft"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "office",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du bindest draußen deine Sportschuhe fest zu.",
+     "text": "Disziplin ist kein Schicksal, sondern eine Entscheidung, die du täglich triffst.",
+     "image": "Person crouching on a running track, tying shoelaces with absolute determination.",
+     "who": [
+      "du"
+     ],
+     "place": "stadt",
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [
+      "Entscheidung"
+     ],
+     "overlay": {
+      "type": "tag",
+      "text": "DISZIPLIN"
+     },
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "street",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du rennst kraftvoll los über eine nasse Straße.",
+     "text": "Niemand kommt um dich zu retten. Du musst es selbst tun.",
+     "image": "Person sprinting fast down an empty street during a light rain shower.",
+     "who": [
+      "du"
+     ],
+     "place": "stadt",
+     "camera": "pan_left",
+     "sfx": "whoosh",
+     "highlight": [
+      "selbst tun"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "street",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du stehst auf einem Berg und blickst in die Weite.",
+     "text": "Der Schmerz der Disziplin wiegt Gramm. Der Schmerz der Reue wiegt Tonnen.",
+     "image": "Person standing atop a windy mountain peak looking out at a stunning sunrise landscape.",
+     "who": [
+      "du"
+     ],
+     "place": "berg",
+     "camera": "wide",
+     "sfx": "none",
+     "highlight": [
+      "Schmerz der Reue"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "mountain",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Vergleich zweier Wege als Balken.",
+     "text": "Entscheide dich heute für den Schmerz, der dich stark macht.",
+     "image": "Graphic comparison between momentary comfort vs long-term success.",
+     "who": [],
+     "place": "berg",
+     "camera": "still",
+     "sfx": "ding",
+     "highlight": [
+      "stark macht"
+     ],
+     "overlay": {
+      "type": "versus",
+      "left": "KOMFORT",
+      "right": "ERFOLG",
+      "kicker": "DEINE WAHL"
+     },
+     "who_desc": "",
+     "place_desc": "mountain",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du starrst wieder im Bad in den Spiegel, jetzt mit selbstbewusstem Lächeln.",
+     "text": "Erinnere dich daran: Der Typ im Spiegel wartet auf deine Entscheidung.",
+     "image": "Person back in the bathroom, smiling confidently at their reflection in the mirror.",
+     "who": [
+      "du"
+     ],
+     "place": "bad",
+     "camera": "zoom_in",
+     "sfx": "none",
+     "highlight": [
+      "deine Entscheidung"
+     ],
+     "overlay": null,
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bathroom",
+     "hud": "",
+     "status": ""
+    },
+    {
+     "see": "Du tippst auf das Smartphone im Display.",
+     "text": "Speicher dir das für die harten Tage. Du bist nicht faul.",
+     "image": "Close-up shot of a hand tapping a save icon on a smartphone screen.",
+     "who": [
+      "du"
+     ],
+     "place": "bad",
+     "camera": "still",
+     "sfx": "pop",
+     "highlight": [
+      "nicht faul"
+     ],
+     "overlay": {
+      "type": "card",
+      "text": "SPEICHERN"
+     },
+     "who_desc": "",
+     "actors": [
+      {
+       "id": "du",
+       "action": "talk",
+       "emotion": "",
+       "emote": "",
+       "speaks": true,
+       "pos": "center"
+      }
+     ],
+     "place_desc": "bathroom",
+     "hud": "",
+     "status": ""
+    }
+   ],
+   "hud": "",
+   "countdown": null
+  },
+  "provider": "gemini",
+  "remake": false,
+  "needs": [
+   "schalter"
+  ],
+  "title": "Dein größter Gegner schaut dich jeden Morgen im Spiegel an",
+  "created": 1795861328.120646
  }
 }

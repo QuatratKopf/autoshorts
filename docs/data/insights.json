@@ -1,5 +1,5 @@
 {
- "updated": 1795859435.7437413,
+ "updated": 1795861345.1339407,
  "enough": true,
  "counted": 49,
  "total": 51,
@@ -63,10 +63,10 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 4,
-   "avg_views": 1452,
+   "avg_views": 1453,
    "avg_likes": 35.8,
    "like_rate": 2.46,
-   "avg_score": 2013
+   "avg_score": 2014
   },
   {
    "slug": "storys",
@@ -81,7 +81,7 @@
    "slug": "motivation",
    "name": "🔥 Motivation",
    "n": 2,
-   "avg_views": 1063,
+   "avg_views": 1064,
    "avg_likes": 35.0,
    "like_rate": 3.29,
    "avg_score": 1608
@@ -137,10 +137,10 @@
  ],
  "words_bad": [
   "remix",
-  "klassikers",
   "scheibe",
-  "jede",
+  "klassikers",
   "eines",
+  "jede",
   "spiegel"
  ],
  "top": [
@@ -200,11 +200,11 @@
    "id": 224,
    "title": "Tiefsee-Anglerfisch: Die Falle aus Licht",
    "category": "tiere",
-   "views": 390,
+   "views": 396,
    "likes": 12,
    "comments": 0,
    "shares": 0,
-   "score": 570
+   "score": 576
   },
   {
    "id": 196,
