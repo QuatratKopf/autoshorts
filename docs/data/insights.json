@@ -1,5 +1,5 @@
 {
- "updated": 1795843234.0479443,
+ "updated": 1795845037.321206,
  "enough": true,
  "counted": 48,
  "total": 51,
@@ -137,13 +137,13 @@
  ],
  "words_bad": [
   "remix",
-  "erkennst",
-  "bekanntes",
-  "glas",
   "lied",
-  "scheibe",
+  "glas",
+  "bekanntes",
+  "erkennst",
+  "jede",
   "klassikers",
-  "jede"
+  "eines"
  ],
  "top": [
   {
@@ -202,11 +202,11 @@
    "id": 224,
    "title": "Tiefsee-Anglerfisch: Die Falle aus Licht",
    "category": "tiere",
-   "views": 388,
+   "views": 387,
    "likes": 12,
    "comments": 0,
    "shares": 0,
-   "score": 568
+   "score": 567
   },
   {
    "id": 196,
