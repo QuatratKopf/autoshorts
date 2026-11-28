@@ -9263,7 +9263,7 @@
   "id": 239,
   "category": "motivation",
   "topic": "Dein größter Gegner schaut dich jeden Morgen im Spiegel an.",
-  "status": "rendered",
+  "status": "published",
   "created": 1795882559.8531296,
   "title": "Dein größter Gegner schaut dich jeden Morgen im Spiegel an",
   "description": "Warum du täglich wertvolle Zeit verlierst und wie du deinen Fokus zurückholst.\nWas ist dein größter Zeitfresser im Alltag?",
@@ -9297,6 +9297,12 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "zernio_id": "6b0b002559c9da59bd95a6bf",
+  "yt_status": "Zernio: published",
+  "yt_id": "S0nFvLgpoTY",
+  "tt_status": "Zernio: published",
+  "tt_publish_id": "zernio:6b0b002559c9da59bd95a6bf",
+  "error": null
  }
 ]
