@@ -1,5 +1,5 @@
 {
- "updated": 1795885842.6523364,
+ "updated": 1795887697.598327,
  "enough": true,
  "counted": 51,
  "total": 53,
@@ -9,34 +9,34 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 6,
-   "avg_views": 2106,
+   "avg_views": 2107,
    "avg_likes": 46.2,
    "like_rate": 2.19,
-   "avg_score": 2820
+   "avg_score": 2821
   },
   {
    "slug": "liebe",
    "name": "💕 Liebe",
    "n": 1,
-   "avg_views": 1526,
+   "avg_views": 1527,
    "avg_likes": 65.0,
    "like_rate": 4.26,
-   "avg_score": 2501
+   "avg_score": 2502
   },
   {
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
-   "avg_views": 1813,
+   "avg_views": 1814,
    "avg_likes": 40.5,
    "like_rate": 2.23,
-   "avg_score": 2450
+   "avg_score": 2451
   },
   {
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 2,
-   "avg_views": 1736,
+   "avg_views": 1737,
    "avg_likes": 37.5,
    "like_rate": 2.16,
    "avg_score": 2314
@@ -45,73 +45,73 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 13,
-   "avg_views": 1618,
+   "avg_views": 1622,
    "avg_likes": 45.2,
-   "like_rate": 2.79,
-   "avg_score": 2297
+   "like_rate": 2.78,
+   "avg_score": 2302
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 9,
-   "avg_views": 1591,
+   "avg_views": 1594,
    "avg_likes": 43.6,
-   "like_rate": 2.74,
-   "avg_score": 2265
+   "like_rate": 2.73,
+   "avg_score": 2268
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 4,
-   "avg_views": 1456,
+   "avg_views": 1458,
    "avg_likes": 37.0,
    "like_rate": 2.54,
-   "avg_score": 2036
+   "avg_score": 2038
   },
   {
    "slug": "storys",
    "name": "🔥 Spannende Storys",
    "n": 3,
-   "avg_views": 1355,
+   "avg_views": 1356,
    "avg_likes": 39.7,
    "like_rate": 2.93,
-   "avg_score": 1950
+   "avg_score": 1951
   },
   {
    "slug": "motivation",
    "name": "🔥 Motivation",
    "n": 2,
-   "avg_views": 1067,
+   "avg_views": 1070,
    "avg_likes": 36.0,
-   "like_rate": 3.37,
-   "avg_score": 1627
+   "like_rate": 3.36,
+   "avg_score": 1630
   },
   {
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 6,
-   "avg_views": 1232,
+   "avg_views": 1233,
    "avg_likes": 11.5,
    "like_rate": 0.93,
-   "avg_score": 1440
-  },
-  {
-   "slug": "grusel",
-   "name": "👻 Grusel",
-   "n": 2,
-   "avg_views": 451,
-   "avg_likes": 21.0,
-   "like_rate": 4.66,
-   "avg_score": 796
+   "avg_score": 1441
   },
   {
    "slug": "nachricht",
    "name": "📱 Unbekannte Nachricht",
    "n": 1,
-   "avg_views": 620,
+   "avg_views": 660,
    "avg_likes": 11.0,
-   "like_rate": 1.77,
-   "avg_score": 785
+   "like_rate": 1.67,
+   "avg_score": 825
+  },
+  {
+   "slug": "grusel",
+   "name": "👻 Grusel",
+   "n": 2,
+   "avg_views": 452,
+   "avg_likes": 21.0,
+   "like_rate": 4.65,
+   "avg_score": 796
   }
  ],
  "weights": {
@@ -125,9 +125,9 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2106 Aufrufe, 2.19 % Likes).",
-  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 620 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2166 zu 1157 Punkte).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2107 Aufrufe, 2.19 % Likes).",
+  "Schwächste Kategorie: 👻 Grusel (Ø 452 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2170 zu 1157 Punkte).",
   "Wörter in starken Titeln: tier, vier, gänsehaut."
  ],
  "words_good": [
@@ -137,10 +137,10 @@
  ],
  "words_bad": [
   "remix",
-  "eines",
   "jede",
-  "klassikers",
   "scheibe",
+  "eines",
+  "klassikers",
   "spiegel"
  ],
  "top": [
@@ -158,21 +158,21 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2607,
+   "views": 2608,
    "likes": 57,
    "comments": 0,
    "shares": 0,
-   "score": 3462
+   "score": 3463
   },
   {
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
-   "views": 2276,
+   "views": 2277,
    "likes": 63,
    "comments": 0,
    "shares": 0,
-   "score": 3221
+   "score": 3222
   },
   {
    "id": 124,
@@ -188,11 +188,11 @@
    "id": 139,
    "title": "Dieses winzige Tier ist zäher als ein Löwe",
    "category": "tiere",
-   "views": 2186,
+   "views": 2187,
    "likes": 56,
    "comments": 0,
    "shares": 1,
-   "score": 3066
+   "score": 3067
   }
  ],
  "flop": [
@@ -200,21 +200,21 @@
    "id": 224,
    "title": "Tiefsee-Anglerfisch: Die Falle aus Licht",
    "category": "tiere",
-   "views": 407,
+   "views": 416,
    "likes": 14,
    "comments": 0,
    "shares": 0,
-   "score": 617
+   "score": 626
   },
   {
    "id": 196,
    "title": "Jede Scheibe ein Ton: Lo-Fi-Remix eines Klassikers",
    "category": "musik",
-   "views": 358,
+   "views": 359,
    "likes": 3,
    "comments": 0,
    "shares": 0,
-   "score": 403
+   "score": 404
   },
   {
    "id": 44,
