@@ -1,5 +1,5 @@
 {
- "updated": 1795845037.321206,
+ "updated": 1795846833.4058871,
  "enough": true,
  "counted": 48,
  "total": 51,
@@ -9,10 +9,10 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 5,
-   "avg_views": 2286,
+   "avg_views": 2287,
    "avg_likes": 46.8,
    "like_rate": 2.05,
-   "avg_score": 3008
+   "avg_score": 3009
   },
   {
    "slug": "liebe",
@@ -125,9 +125,9 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2286 Aufrufe, 2.05 % Likes).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2287 Aufrufe, 2.05 % Likes).",
   "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 576 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2200 zu 1146 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2201 zu 1146 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut, vier."
  ],
  "words_good": [
@@ -138,12 +138,12 @@
  "words_bad": [
   "remix",
   "lied",
-  "glas",
-  "bekanntes",
   "erkennst",
-  "jede",
+  "bekanntes",
+  "glas",
+  "eines",
   "klassikers",
-  "eines"
+  "jede"
  ],
  "top": [
   {
@@ -202,11 +202,11 @@
    "id": 224,
    "title": "Tiefsee-Anglerfisch: Die Falle aus Licht",
    "category": "tiere",
-   "views": 387,
+   "views": 388,
    "likes": 12,
    "comments": 0,
    "shares": 0,
-   "score": 567
+   "score": 568
   },
   {
    "id": 196,
