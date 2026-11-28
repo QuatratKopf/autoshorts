@@ -1,5 +1,5 @@
 {
- "updated": 1795855835.9134455,
+ "updated": 1795857641.3086212,
  "enough": true,
  "counted": 49,
  "total": 51,
@@ -93,7 +93,7 @@
    "avg_views": 1232,
    "avg_likes": 10.5,
    "like_rate": 0.85,
-   "avg_score": 1424
+   "avg_score": 1425
   },
   {
    "slug": "grusel",
@@ -109,9 +109,9 @@
    "name": "📱 Unbekannte Nachricht",
    "n": 1,
    "avg_views": 578,
-   "avg_likes": 9.0,
-   "like_rate": 1.56,
-   "avg_score": 713
+   "avg_likes": 10.0,
+   "like_rate": 1.73,
+   "avg_score": 728
   }
  ],
  "weights": {
@@ -138,9 +138,9 @@
  "words_bad": [
   "remix",
   "jede",
-  "eines",
   "scheibe",
   "klassikers",
+  "eines",
   "spiegel"
  ],
  "top": [
