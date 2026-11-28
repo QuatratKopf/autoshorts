@@ -1,5 +1,5 @@
 {
- "updated": 1795874141.0360384,
+ "updated": 1795875935.9852142,
  "enough": true,
  "counted": 50,
  "total": 52,
@@ -39,7 +39,7 @@
    "avg_views": 1673,
    "avg_likes": 45.5,
    "like_rate": 2.72,
-   "avg_score": 2366
+   "avg_score": 2367
   },
   {
    "slug": "vergleich",
@@ -54,10 +54,10 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 13,
-   "avg_views": 1616,
-   "avg_likes": 45.1,
+   "avg_views": 1618,
+   "avg_likes": 45.2,
    "like_rate": 2.79,
-   "avg_score": 2294
+   "avg_score": 2297
   },
   {
    "slug": "tiere",
@@ -127,7 +127,7 @@
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2106 Aufrufe, 2.19 % Likes).",
   "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 620 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2181 zu 1157 Punkte).",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2182 zu 1157 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut, vier."
  ],
  "words_good": [
@@ -138,9 +138,9 @@
  "words_bad": [
   "remix",
   "eines",
-  "jede",
   "klassikers",
   "scheibe",
+  "jede",
   "spiegel"
  ],
  "top": [
@@ -158,11 +158,11 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2606,
+   "views": 2607,
    "likes": 57,
    "comments": 0,
    "shares": 0,
-   "score": 3461
+   "score": 3462
   },
   {
    "id": 77,
