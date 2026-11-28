@@ -1,5 +1,5 @@
 {
- "updated": 1795834235.1836598,
+ "updated": 1795836030.6114583,
  "enough": true,
  "counted": 48,
  "total": 51,
@@ -39,7 +39,7 @@
    "avg_views": 1695,
    "avg_likes": 46.7,
    "like_rate": 2.75,
-   "avg_score": 2397
+   "avg_score": 2398
   },
   {
    "slug": "fakten",
@@ -63,7 +63,7 @@
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 4,
-   "avg_views": 1450,
+   "avg_views": 1451,
    "avg_likes": 35.8,
    "like_rate": 2.46,
    "avg_score": 2012
@@ -81,10 +81,10 @@
    "slug": "motivation",
    "name": "🔥 Motivation",
    "n": 2,
-   "avg_views": 1063,
+   "avg_views": 1062,
    "avg_likes": 35.0,
-   "like_rate": 3.29,
-   "avg_score": 1608
+   "like_rate": 3.3,
+   "avg_score": 1607
   },
   {
    "slug": "musik",
@@ -108,10 +108,10 @@
    "slug": "nachricht",
    "name": "📱 Unbekannte Nachricht",
    "n": 1,
-   "avg_views": 573,
+   "avg_views": 576,
    "avg_likes": 8.0,
-   "like_rate": 1.4,
-   "avg_score": 693
+   "like_rate": 1.39,
+   "avg_score": 696
   }
  ],
  "weights": {
@@ -126,8 +126,8 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2286 Aufrufe, 2.05 % Likes).",
-  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 573 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2200 zu 1145 Punkte).",
+  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 576 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2200 zu 1146 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut, vier."
  ],
  "words_good": [
@@ -137,34 +137,34 @@
  ],
  "words_bad": [
   "remix",
-  "erkennst",
   "lied",
   "bekanntes",
   "glas",
-  "jede",
-  "scheibe",
-  "klassikers"
+  "erkennst",
+  "klassikers",
+  "eines",
+  "scheibe"
  ],
  "top": [
   {
    "id": 168,
    "title": "Warum du ausgerechnet auf Beerdigungen lachen musst",
    "category": "comedy",
-   "views": 3949,
+   "views": 3950,
    "likes": 54,
    "comments": 1,
    "shares": 0,
-   "score": 4789
+   "score": 4790
   },
   {
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2605,
+   "views": 2606,
    "likes": 56,
    "comments": 0,
    "shares": 0,
-   "score": 3445
+   "score": 3446
   },
   {
    "id": 77,
@@ -202,11 +202,11 @@
    "id": 224,
    "title": "Tiefsee-Anglerfisch: Die Falle aus Licht",
    "category": "tiere",
-   "views": 386,
+   "views": 387,
    "likes": 12,
    "comments": 0,
    "shares": 0,
-   "score": 566
+   "score": 567
   },
   {
    "id": 196,
