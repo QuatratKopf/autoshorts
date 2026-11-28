@@ -1275,7 +1275,7 @@
      "actors": [
       {
        "id": "leo",
-       "action": "wave",
+       "action": "point",
        "emotion": "happy",
        "pos": "left",
        "speaks": true,
@@ -1309,7 +1309,7 @@
        "id": "leo",
        "action": "point",
        "emotion": "happy",
-       "pos": "right",
+       "pos": "center",
        "speaks": true,
        "hold": "clippers"
       }

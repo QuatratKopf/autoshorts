@@ -934,3 +934,8 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   steht deshalb links vor der Ablage (`pos` 230), die Figur rechts – vorher steckte der Tisch im Barbierstuhl bzw. Waschplatz, bei einem Folgesatz mit
   großer Zahl („Davon gehen Miete … ab“, `_carry_thing`) dreimal nebeneinander. Hält die Figur ihr Werkzeug, entfällt der Geldtisch (der Preis steht auf der Karte).
 - Selbsttest: `_pruef2811`.
+- Nachtrag Video 235: Abgang einer Figur (`"to": "offright"`/`"offleft"` von einer Stelle im Bild): Sie winkt und geht erst am Ende der Szene hinaus
+  (`stage._frame`, `t_mv`) – vorher war sie nach einer halben Sekunde weg und der Laden drei Sekunden leer; die Kamera bleibt bei der Figur statt beim
+  Ziel außerhalb des Bildes. Kamerasprung in der Halbnahen (`_camera`, `PUNCH_FACE_Y`): zoomt um das Gesicht, das auf seiner Höhe stehen bleibt – mit
+  dem Fixpunkt oben rutschten Mund und Kinn in die Untertitel-Zeile. Nahaufnahme einer Figur, die mit einem Werkzeug in der Hand zeigt: Bildausschnitt
+  rückt zur Hand (`c_off`), Rasiermesser und Haarschneider waren am Rand abgeschnitten.

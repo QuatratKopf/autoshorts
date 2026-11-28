@@ -812,6 +812,8 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
         lead = next((a for a in actors if a["speaks"]), actors[0])
         hw = CLOSE_BG / 2
         c_off = ((110 if lead["x1"] < 600 else -110) if lead["kind"] and lead["kind"] != "brain" else 0)   # das Gehirn ist rund und steht mittig – verschoben war es links angeschnitten (Video 204)   # Tier: der Kopf (vorn) kommt in die Bildmitte, nicht der Bauch
+        if not lead["kind"] and lead.get("hold") and lead["action"] == "point" and lead["x0"] == lead["x1"] and lead.get("face") not in ("left", "links"):
+            c_off = 95                                 # zeigt mit dem Werkzeug in der ausgestreckten Hand nach rechts: Hand und Werkzeug gehören ins Bild – Rasiermesser samt Pinsel war in der Nahaufnahme am Rand abgeschnitten (Prüfung 28.11.2026, Video 235)
         c_x = max(hw, min(W - hw, lead["x1"] + c_off))
         top = places.GROUND - 780
         frame = frame.crop((int(c_x - hw), top, int(c_x + hw), top + int(CLOSE_BG * H / W))).resize((W, H), Image.BILINEAR)
@@ -829,13 +831,19 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
         move_t = min(dur * 0.7, abs(a["x1"] - a["x0"]) / speed) if moving else 0
         if moving and a.get("jog"):                    # Dauerlauf: quer durchs Bild, die ganze Szene lang
             move_t = dur + 0.8
-        arrived = moving and t >= move_t
-        x = a["x1"] if arrived else (a["x0"] + (a["x1"] - a["x0"]) * (t / move_t if a.get("jog") else _ease(t / move_t)) if moving else a["x0"])
+        t_mv = t
+        if moving and not a.get("jog") and not (0 <= a["x1"] <= W) and 0 <= a["x0"] <= W:
+            # Abgang („… und geht nach Hause“): erst am Ende der Szene hinausgehen – vorher war die Figur nach einer halben Sekunde weg und der
+            # Laden drei Sekunden leer (Prüfung 28.11.2026, Video 235)
+            move_t = min(move_t, max(0.6, dur * 0.45))
+            t_mv = max(0.0, t - max(0.0, dur - move_t * 0.65))   # am Schnitt ist die Figur gerade am Bildrand
+        arrived = moving and t_mv >= move_t
+        x = a["x1"] if arrived else (a["x0"] + (a["x1"] - a["x0"]) * (t_mv / move_t if a.get("jog") else _ease(t_mv / move_t)) if moving else a["x0"])
         if close:                                      # die Hauptfigur steht mittig, andere im selben Abstand daneben
             x = 540 + (x - lead["x1"] - c_off) * W / CLOSE_BG
         xs_now.append(x)
         mouth, shape = _mouth(t0 + t, words) if a["speaks"] and a.get("lips", True) else (0.0, "a")
-        if moving and not arrived:
+        if moving and not arrived and t_mv > 0:
             facing = 1 if a["x1"] > a["x0"] else -1
         elif a["face"] in ("left", "links"):
             facing = -1
@@ -887,6 +895,8 @@ def _frame(bg, place, night, scale, actors, props, weather, t, dur, words, t0, i
             tt = t
             if arrived:
                 action, tt = ("talk" if a["speaks"] else "idle"), t - move_t
+            elif moving and t_mv <= 0 and action == "walk":   # wartet noch auf den Abgang: winkt zum Abschied, läuft nicht auf der Stelle
+                action = "wave"
             elif action == "idle" and a["speaks"]:
                 action = "talk"
             if flo:                                           # schwerelos treiben – nach dem Absturz liegt die Figur am Boden
@@ -7166,6 +7176,9 @@ def _mirror_frame(scene, cast, t, dur):
 TIGHT_Z, TIGHT_AY = 1.3, 300.0            # Halbnahe: Zoom und Fixpunkt (oben) – wie in Erklär-Shorts füllen die Figuren das Bild
 
 
+PUNCH_FACE_Y = 900.0                     # Höhe des Gesichts einer stehenden Figur im ungezoomten Bild
+
+
 def _camera(frame, t, dur, cam):
     """Lebendige Kamera für jede Szene: etwas näher an den Figuren, langsame Fahrt, ein kurzer Ruck beim Schnitt und – wenn
     das Schlüsselwort fällt – ein schneller Sprung auf die Hauptfigur (wie in geschnittenen Kurzvideos)."""
@@ -7187,9 +7200,15 @@ def _camera(frame, t, dur, cam):
     pt = cam.get("punch")
     if pt is not None and t >= pt:
         e = _ease(min(1.0, (t - pt) / 0.14))
+        z0_p = z
         z += 0.14 * e
         ax += (float(cam.get("fx", 540)) - 540) * e
-        ay -= 90 * e
+        if cam.get("tight") and not cam.get("ay") and z > 1.0:
+            # Halbnahe: Der Sprung zoomt um das Gesicht – es bleibt auf seiner Höhe stehen. Mit dem Fixpunkt oben rutschten Mund und Kinn beim Sprung
+            # in die Untertitel-Zeile („SECHZIG STUNDEN“ quer über dem Gesicht, Prüfung 28.11.2026, Video 235)
+            ay = (ay + (PUNCH_FACE_Y - ay) * z0_p - PUNCH_FACE_Y * z) / (1 - z)
+        else:
+            ay -= 90 * e
     if cam.get("opener") and t < 0.5:                     # allererstes Bild: kräftiger Ruck ins Bild – sofort Bewegung
         e = (1 - t / 0.5) ** 3
         z += 0.2 * e
@@ -7289,7 +7308,7 @@ def render_scene(scene: dict, cast: dict, dur: float, out: Path, words=(), t0=0.
     if lead and not lead["kind"]:     # Gesten der Hauptfigur passend zu den Wörtern dieser Szene
         lead["gplan"] = gesture_plan([w for w in words if t0 - 0.05 <= w[1] < t0 + dur], t0, lead.get("lips"))
     cam = {"dir": 1 if index % 2 == 0 else -1, "drift": 1 if index % 3 != 2 else -1,
-           "fx": (lead["x1"] if lead else (props[0][1] if props else 540)),
+           "fx": ((lead["x1"] if 0 <= lead["x1"] <= W or not (0 <= lead["x0"] <= W) else lead["x0"]) if lead else (props[0][1] if props else 540)),   # Abgang: die Kamera bleibt bei der Figur, nicht beim Ziel außerhalb des Bildes
            "punch": None if (shot == "close" or moving or ov_tall or ov_kind in ("counter", "bar", "thermo") or place in MAPS or not (actors or props)) else _punch_time(scene, words, t0, dur)}
     if actors and shot != "close" and not ov_tall and place not in MAPS and not scene.get("float") and str(scene.get("shot") or "") != "event":
         for a_w in actors:                                              # Tiere: echte Breite ins Bild nehmen und nicht an den Rand stellen
