@@ -1,0 +1,369 @@
+{
+ "title": "Dein größter Gegner schaut dich jeden Morgen im Spiegel an",
+ "scenes": [
+  {
+   "text": "Du bist nicht faul. Du bist einfach nur extrem abgelenkt.",
+   "see": "Du stehst morgens im Bad und starrst müde in den Spiegel.",
+   "place": "bad",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "shocked",
+     "emotion": "shocked",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ]
+  },
+  {
+   "text": "Dein größter Gegner schaut dich jeden Morgen im Spiegel an.",
+   "see": "Das gegnerische Spiegelbild sieht dich herausfordernd an.",
+   "place": "bad",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": false,
+     "action": "look_around",
+     "emotion": "worried",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close",
+   "mood": "tense"
+  },
+  {
+   "text": "Es ist drei Uhr nachts. Warum scrollst du schon wieder stundenlang durch wertlose Clips?",
+   "see": "Du liegst nachts im dunklen Bett und scrollst am blau leuchtenden Handy.",
+   "place": "schlafzimmer",
+   "time": "night",
+   "props": [
+    {
+     "type": "lib_armbanduhr"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ],
+   "shot": "insert"
+  },
+  {
+   "text": "Über vier Stunden am Tag verschwinden einfach ungefiltert im digitalen Nichts.",
+   "see": "Grafik zeigt vier Stunden vergeudete Bildschirmzeit.",
+   "place": "schlafzimmer",
+   "actors": [
+    {
+     "id": "du",
+     "action": "walk",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "",
+     "emote": "none"
+    }
+   ]
+  },
+  {
+   "text": "Jedes Mal wenn es schwer wird, flüchtest du in schnelle Belohnung.",
+   "see": "Du sitzt am Schreibtisch vor Büchern, greifst nach dem Handy.",
+   "place": "bedroom",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "close"
+  },
+  {
+   "text": "Morgen fange ich an. Das ist deine gefährlichste Ausrede überhaupt.",
+   "see": "Notizzettel mit Typischen Ausreden.",
+   "place": "bedroom",
+   "actors": [
+    {
+     "id": "du",
+     "action": "point",
+     "pos": 750,
+     "emotion": "",
+     "emote": "none"
+    }
+   ]
+  },
+  {
+   "text": "Du wartest auf Motivation. Aber Motivation kommt erst nach dem Handeln.",
+   "see": "Du stehst zögernd vor einer riesigen geschlossenen Tür.",
+   "place": "hallway",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ]
+  },
+  {
+   "text": "Du denkst, dir fehlt Talent. Falsch. Dir fehlt lediglich glasklarer Fokus.",
+   "see": "Ein Raubtier stoppt kurz vor der Beute – Instinkt.",
+   "place": "stadt",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "center"
+    }
+   ]
+  },
+  {
+   "text": "Dein Gehirn passt sich jeden Tag an das an, was du tust.",
+   "see": "Ein Schiffsanker wird im Wasser gekappt.",
+   "place": "underwater",
+   "actors": [
+    {
+     "id": "du",
+     "action": "idle",
+     "pos": "offleft",
+     "to": "center",
+     "emotion": "",
+     "kind": "fish",
+     "hold": "",
+     "emote": "none"
+    }
+   ]
+  },
+  {
+   "text": "Also leg den Schalter um. Nicht morgen. Nicht nächste Woche. Jetzt.",
+   "see": "Du schiebst das Handy energisch zur Seite.",
+   "place": "underwater",
+   "props": [
+    {
+     "type": "lib_schalter"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "",
+     "emote": "none",
+     "kind": "fish",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "insert"
+  },
+  {
+   "text": "Schritt eins: Mach den Schreibtisch leer. Aber kennst du die eine entscheidende Aufgabe?",
+   "see": "Du räumst deinen Schreibtisch radikal mit einer Bewegung frei.",
+   "place": "underwater",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "",
+     "emote": "none",
+     "kind": "fish",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ]
+  },
+  {
+   "text": "Schritt zwei: Fünf Minuten Arbeiten ohne Ablenkung. Mehr verlangst du nicht.",
+   "see": "Stoppuhr zählt fünf Minuten abwärts.",
+   "place": "underwater",
+   "shot": "graphic",
+   "graphic": {
+    "type": "number",
+    "value": "5",
+    "label": "MINUTEN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Nach fünf Minuten läuft der Motor. Wie verhinderst du jetzt den nächsten Rückfall?",
+   "see": "Du schreibst konzentriert und schnell Wörter auf.",
+   "place": "underwater",
+   "props": [
+    {
+     "type": "engine"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "",
+     "emote": "none",
+     "kind": "fish",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "shot": "insert"
+  },
+  {
+   "text": "Disziplin ist kein Schicksal, sondern eine Entscheidung, die du täglich triffst.",
+   "see": "Du bindest draußen deine Sportschuhe fest zu.",
+   "place": "stadt",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offleft",
+     "to": "center"
+    }
+   ]
+  },
+  {
+   "text": "Niemand kommt um dich zu retten. Du musst es selbst tun.",
+   "see": "Du rennst kraftvoll los über eine nasse Straße.",
+   "place": "stadt",
+   "actors": [
+    {
+     "id": "du",
+     "action": "idle",
+     "pos": "center",
+     "emotion": "",
+     "emote": "none"
+    }
+   ]
+  },
+  {
+   "text": "Der Schmerz der Disziplin wiegt Gramm. Der Schmerz der Reue wiegt Tonnen.",
+   "see": "Du stehst auf einem Berg und blickst in die Weite.",
+   "place": "berg",
+   "props": [
+    {
+     "type": "scale"
+    }
+   ],
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ]
+  },
+  {
+   "text": "Entscheide dich heute für den Schmerz, der dich stark macht.",
+   "see": "Vergleich zweier Wege als Balken.",
+   "place": "berg",
+   "actors": [
+    {
+     "id": "du",
+     "action": "sad",
+     "emotion": "sad",
+     "pos": "center",
+     "emote": "none"
+    }
+   ]
+  },
+  {
+   "text": "Erinnere dich daran: Der Typ im Spiegel wartet auf deine Entscheidung.",
+   "see": "Du starrst wieder im Bad in den Spiegel, jetzt mit selbstbewusstem Lächeln.",
+   "place": "bad",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "walk",
+     "emotion": "",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "offright",
+     "to": "center"
+    }
+   ]
+  },
+  {
+   "text": "Speicher dir das für die harten Tage. Du bist nicht faul.",
+   "see": "Du tippst auf das Smartphone im Display.",
+   "place": "bad",
+   "actors": [
+    {
+     "id": "du",
+     "speaks": true,
+     "action": "talk",
+     "emotion": "",
+     "emote": "none",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ]
+  }
+ ]
+}

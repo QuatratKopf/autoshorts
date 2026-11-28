@@ -9174,5 +9174,47 @@
   "yt_thumb_tries": 1,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7713182700848336161?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
+ },
+ {
+  "id": 237,
+  "category": "motivation",
+  "topic": "Dein größter Gegner schaut dich jeden Morgen im Spiegel an.",
+  "status": "review",
+  "created": 1795878525.3818073,
+  "title": "Dein größter Gegner schaut dich jeden Morgen im Spiegel an",
+  "description": "Warum du täglich wertvolle Zeit verlierst und wie du deinen Fokus zurückholst.\nWas ist dein größter Zeitfresser im Alltag?",
+  "hashtags": [
+   "#shorts",
+   "#motivation",
+   "#fokus",
+   "#mindset",
+   "#erfolg",
+   "#tiktokgermany",
+   "#viral"
+  ],
+  "tags": [
+   "motivation deutsch",
+   "fokus halten",
+   "disziplin lernen",
+   "ausreden stoppen",
+   "handysucht besiegen",
+   "mindset deutsch",
+   "produktivität",
+   "spiegelbild"
+  ],
+  "thumb_text": "BESIEGE DICH SELBST",
+  "missing": null,
+  "cover_ms": 82398,
+  "duration": 82.3,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-28 18:00",
+  "review_at": 1795878958.1977012
  }
 ]
