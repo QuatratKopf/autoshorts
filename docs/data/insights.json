@@ -1,7 +1,7 @@
 {
- "updated": 1795879967.6754835,
+ "updated": 1795882060.8976104,
  "enough": true,
- "counted": 50,
+ "counted": 51,
  "total": 52,
  "needed": 6,
  "categories": [
@@ -33,15 +33,6 @@
    "avg_score": 2450
   },
   {
-   "slug": "fakten",
-   "name": "💡 Fakten",
-   "n": 8,
-   "avg_views": 1673,
-   "avg_likes": 45.5,
-   "like_rate": 2.72,
-   "avg_score": 2367
-  },
-  {
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 2,
@@ -58,6 +49,15 @@
    "avg_likes": 45.2,
    "like_rate": 2.79,
    "avg_score": 2297
+  },
+  {
+   "slug": "fakten",
+   "name": "💡 Fakten",
+   "n": 9,
+   "avg_views": 1580,
+   "avg_likes": 43.6,
+   "like_rate": 2.76,
+   "avg_score": 2250
   },
   {
    "slug": "tiere",
@@ -115,31 +115,31 @@
   }
  ],
  "weights": {
-  "fakten": 1.12,
+  "fakten": 1.07,
   "grusel": 0.5,
-  "tiere": 0.96,
-  "whatif": 1.08,
-  "comedy": 1.33,
-  "vergleich": 1.09,
+  "tiere": 0.97,
+  "whatif": 1.09,
+  "comedy": 1.34,
+  "vergleich": 1.1,
   "motivation": 0.77,
   "nachricht": 1.2
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2106 Aufrufe, 2.19 % Likes).",
   "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 620 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2182 zu 1157 Punkte).",
-  "Wörter in starken Titeln: tier, gänsehaut, vier."
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2164 zu 1157 Punkte).",
+  "Wörter in starken Titeln: tier, vier, gänsehaut."
  ],
  "words_good": [
   "tier",
-  "gänsehaut",
-  "vier"
+  "vier",
+  "gänsehaut"
  ],
  "words_bad": [
   "remix",
   "jede",
-  "klassikers",
   "scheibe",
+  "klassikers",
   "eines",
   "spiegel"
  ],
