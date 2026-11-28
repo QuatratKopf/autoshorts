@@ -1350,8 +1350,14 @@
     "spiegelbild"
    ],
    "thumbnail": {
-    "image": "Close-up of a young person staring blankly into a illuminated bathroom mirror, their reflection staring back with fierce eyes while holding a glowing smartphone.",
-    "text": "BESIEGE DICH SELBST"
+    "image": "",
+    "text": "BESIEGE DICH SELBST",
+    "place": "bathroom",
+    "time": "day",
+    "actor": "du",
+    "action": "point",
+    "emotion": "happy",
+    "props": []
    },
    "wishes": [],
    "toon": true,
@@ -1367,560 +1373,561 @@
    },
    "scenes": [
     {
-     "see": "Du stehst morgens im Bad und starrst müde in den Spiegel.",
      "text": "Du bist nicht faul. Du bist einfach nur extrem abgelenkt.",
-     "image": "Young person standing in a brightly lit bathroom, leaning on the sink and looking into the mirror with a tired facial expression.",
-     "who": [
-      "du"
+     "see": "Du sitzt am Schreibtisch vor dem aufgeschlagenen Buch und schaust aufs Handy.",
+     "place": "office",
+     "time": "day",
+     "props": [
+      "book"
      ],
-     "place": "bad",
-     "camera": "zoom_in",
-     "sfx": "whoosh",
-     "highlight": [
-      "nicht faul"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "NICHT FAUL"
-     },
-     "who_desc": "",
      "actors": [
       {
        "id": "du",
-       "action": "talk",
+       "action": "sit",
        "emotion": "",
        "emote": "",
-       "speaks": true,
-       "pos": "center"
+       "pos": "center",
+       "speaks": false,
+       "hold": "phone"
       }
      ],
-     "place_desc": "bathroom",
-     "hud": "",
-     "status": ""
+     "mood": "calm",
+     "shot": "wide",
+     "image": "",
+     "who": [
+      "du"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "overlay": null
     },
     {
-     "see": "Das gegnerische Spiegelbild sieht dich herausfordernd an.",
      "text": "Dein größter Gegner schaut dich jeden Morgen im Spiegel an.",
-     "image": "Close-up of the bathroom mirror reflection looking determined and sharp while the real person looks exhausted.",
-     "who": [
-      "du"
-     ],
-     "place": "bad",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "größter Gegner"
-     ],
-     "overlay": null,
+     "see": "Du stehst morgens im Bad vor dem Spiegel, dein Spiegelbild schaut dich an.",
+     "place": "bathroom",
+     "time": "day",
+     "props": [],
      "actors": [
       {
        "id": "du",
-       "action": "look_around",
-       "emotion": "worried",
-       "pos": "center"
+       "action": "idle",
+       "emotion": "",
+       "emote": "",
+       "pos": "center",
+       "speaks": false
       }
      ],
-     "shot": "close",
      "mood": "tense",
-     "who_desc": "",
-     "place_desc": "bathroom",
-     "hud": "",
-     "status": ""
+     "shot": "mirror",
+     "mirror": "day",
+     "image": "",
+     "who": [
+      "du"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "overlay": null
     },
     {
-     "see": "Du liegst nachts im dunklen Bett und scrollst am blau leuchtenden Handy.",
      "text": "Es ist drei Uhr nachts. Warum scrollst du schon wieder stundenlang durch wertlose Clips?",
-     "image": "Young person lying under a blanket in a dark bedroom, face illuminated by a blue glowing smartphone screen.",
-     "who": [
-      "du"
+     "see": "Du liegst nachts wach im Bett und scrollst am leuchtenden Handy.",
+     "place": "bedroom",
+     "time": "night",
+     "props": [
+      "phone"
      ],
-     "place": "schlafzimmer",
-     "camera": "pan_left",
-     "sfx": "none",
-     "highlight": [
-      "drei Uhr"
-     ],
-     "overlay": {
-      "type": "phone",
-      "title": "03:00",
-      "items": [
-       "Noch ein Clip?",
-       "Akku: 12%"
-      ]
-     },
-     "who_desc": "",
      "actors": [
       {
        "id": "du",
-       "action": "talk",
+       "action": "sleep",
        "emotion": "",
        "emote": "",
-       "speaks": true,
-       "pos": "center"
+       "pos": "center",
+       "speaks": false,
+       "hold": "phone"
       }
      ],
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Grafik zeigt vier Stunden vergeudete Bildschirmzeit.",
-     "text": "Über vier Stunden am Tag verschwinden einfach ungefiltert im digitalen Nichts.",
-     "image": "Graphic overlay showing screen time counter rising fast.",
-     "who": [],
-     "place": "schlafzimmer",
+     "mood": "tense",
+     "shot": "wide",
+     "image": "",
+     "who": [
+      "du"
+     ],
      "camera": "still",
-     "sfx": "tick",
-     "highlight": [
-      "vier Stunden"
-     ],
-     "overlay": {
-      "type": "counter",
-      "label": "BILDSCHIRMZEIT",
-      "value": 4.5,
-      "unit": "STUNDEN / TAG",
-      "sub": "= 68 TAGE PRO JAHR"
-     },
-     "who_desc": "",
-     "place_desc": "bedroom",
-     "hud": "",
-     "status": ""
+     "sfx": "none",
+     "highlight": [],
+     "overlay": null
     },
     {
-     "see": "Du sitzt am Schreibtisch vor Büchern, greifst nach dem Handy.",
-     "text": "Jedes Mal wenn es schwer wird, flüchtest du in schnelle Belohnung.",
-     "image": "Person sitting at a desk with textbooks, reaching frantically for a smartphone instead of studying.",
-     "who": [
-      "du"
-     ],
-     "place": "schreibtisch",
-     "camera": "zoom_in",
-     "sfx": "none",
-     "highlight": [
-      "flüchtest"
-     ],
-     "overlay": null,
-     "who_desc": "",
+     "text": "Stunde um Stunde verschwindet einfach im digitalen Nichts.",
+     "see": "Du stehst im Wohnzimmer und starrst aufs Handy.",
+     "place": "livingroom",
+     "time": "day",
+     "props": [],
      "actors": [
       {
        "id": "du",
-       "action": "talk",
+       "action": "idle",
        "emotion": "",
        "emote": "",
-       "speaks": true,
-       "pos": "center"
+       "pos": "center",
+       "speaks": false,
+       "hold": "phone"
       }
      ],
-     "place_desc": "office",
-     "hud": "",
-     "status": ""
+     "mood": "calm",
+     "shot": "wide",
+     "image": "",
+     "who": [
+      "du"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "overlay": null
     },
     {
-     "see": "Notizzettel mit Typischen Ausreden.",
+     "text": "Jedes Mal, wenn es schwer wird, flüchtest du in schnelle Belohnung.",
+     "see": "Du stehst vom Schreibtisch auf und gehst mit dem Handy in der Hand weg.",
+     "place": "office",
+     "time": "day",
+     "props": [
+      "book"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "walk",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": false,
+       "to": "offright",
+       "hold": "phone"
+      }
+     ],
+     "mood": "calm",
+     "shot": "wide",
+     "image": "",
+     "who": [
+      "du"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "overlay": null
+    },
+    {
      "text": "Morgen fange ich an. Das ist deine gefährlichste Ausrede überhaupt.",
-     "image": "Close-up on a note with crossed out excuses.",
-     "who": [],
-     "place": "schreibtisch",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "Morgen"
+     "see": "Du liegst am hellen Tag faul im Bett.",
+     "place": "bedroom",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "sleep",
+       "emotion": "",
+       "emote": "",
+       "pos": "center",
+       "speaks": false
+      }
      ],
-     "overlay": {
-      "type": "note",
-      "title": "AUSREDE #1",
-      "text": "Morgen fange ich wirklich an."
-     },
-     "who_desc": "",
-     "place_desc": "office",
-     "hud": "",
-     "status": ""
+     "mood": "calm",
+     "shot": "wide",
+     "image": "",
+     "who": [
+      "du"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "overlay": null
     },
     {
-     "see": "Du stehst zögernd vor einer riesigen geschlossenen Tür.",
      "text": "Du wartest auf Motivation. Aber Motivation kommt erst nach dem Handeln.",
-     "image": "Person standing hesitatingly in front of a giant closed wooden door in a foggy hallway.",
-     "who": [
-      "du"
-     ],
+     "see": "Du stehst zögernd vor einer geschlossenen Tür im Flur.",
      "place": "hallway",
-     "camera": "wide",
-     "sfx": "none",
-     "highlight": [
-      "nach dem Handeln"
+     "time": "day",
+     "props": [
+      "door"
      ],
-     "overlay": null,
-     "who_desc": "",
      "actors": [
       {
        "id": "du",
-       "action": "talk",
-       "emotion": "",
+       "action": "think",
+       "emotion": "worried",
        "emote": "",
-       "speaks": true,
-       "pos": "center"
+       "pos": "center",
+       "speaks": false
       }
      ],
-     "place_desc": "",
-     "hud": "",
-     "status": ""
+     "mood": "calm",
+     "shot": "wide",
+     "image": "",
+     "who": [
+      "du"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "overlay": null
     },
     {
-     "see": "Ein Raubtier stoppt kurz vor der Beute – Instinkt.",
      "text": "Du denkst, dir fehlt Talent. Falsch. Dir fehlt lediglich glasklarer Fokus.",
-     "image": "Dramatic contrast shot: person stopping mid-motion, looking sharply focused.",
-     "who": [
-      "du"
-     ],
-     "place": "stadt",
-     "camera": "zoom_in",
-     "sfx": "boom",
-     "highlight": [
-      "Falsch"
-     ],
-     "overlay": {
-      "type": "stamp",
-      "text": "FALSCH",
-      "color": "red"
-     },
-     "who_desc": "",
+     "see": "Du sitzt im Park und lässt traurig den Kopf hängen.",
+     "place": "park",
+     "time": "day",
+     "props": [],
      "actors": [
       {
        "id": "du",
-       "action": "talk",
-       "emotion": "",
+       "action": "sad",
+       "emotion": "sad",
        "emote": "",
-       "speaks": true,
-       "pos": "center"
+       "pos": "center",
+       "speaks": false
       }
      ],
-     "place_desc": "street",
-     "hud": "",
-     "status": ""
+     "mood": "sad",
+     "shot": "wide",
+     "image": "",
+     "who": [
+      "du"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "overlay": null
     },
     {
-     "see": "Ein Schiffsanker wird im Wasser gekappt.",
      "text": "Dein Gehirn passt sich jeden Tag an das an, was du tust.",
-     "image": "A thick anchor rope snapping underwater, sending bubbles to the surface.",
-     "who": [],
-     "place": "underwater",
-     "camera": "pan_up",
-     "sfx": "whoosh",
-     "highlight": [
-      "neue Pfade"
+     "see": "Dein Gehirn steht als kleine Figur neben dir und macht jede deiner Bewegungen nach.",
+     "place": "park",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "wave",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "left",
+       "speaks": false
+      },
+      {
+       "id": "gehirn",
+       "kind": "brain",
+       "action": "wave",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "right",
+       "speaks": false,
+       "small": true,
+       "hero": false
+      }
      ],
-     "overlay": null,
-     "who_desc": "",
-     "place_desc": "",
-     "hud": "",
-     "status": ""
+     "mood": "happy",
+     "shot": "wide",
+     "image": "",
+     "who": [
+      "du"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "overlay": null
     },
     {
-     "see": "Du schiebst das Handy energisch zur Seite.",
      "text": "Also leg den Schalter um. Nicht morgen. Nicht nächste Woche. Jetzt.",
-     "image": "Person firmly pushing a smartphone away on a clean desk and opening a blank notebook.",
-     "who": [
-      "du"
-     ],
-     "place": "schreibtisch",
-     "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "Jetzt"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "JETZT."
-     },
-     "who_desc": "",
+     "see": "Du springst entschlossen auf.",
+     "place": "livingroom",
+     "time": "day",
+     "props": [],
      "actors": [
       {
        "id": "du",
-       "action": "talk",
-       "emotion": "",
+       "action": "jump",
+       "emotion": "happy",
        "emote": "",
-       "speaks": true,
-       "pos": "center"
+       "pos": "center",
+       "speaks": false
       }
      ],
-     "place_desc": "office",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du räumst deinen Schreibtisch radikal mit einer Bewegung frei.",
-     "text": "Schritt eins: Mach den Schreibtisch leer. Aber kennst du die eine entscheidende Aufgabe?",
-     "image": "Person clearing a busy desk with one decisive movement, leaving only one open book.",
+     "mood": "happy",
+     "shot": "wide",
+     "image": "",
      "who": [
       "du"
      ],
-     "place": "schreibtisch",
-     "camera": "pan_right",
-     "sfx": "whoosh",
-     "highlight": [
-      "Schritt eins"
-     ],
-     "overlay": {
-      "type": "checklist",
-      "title": "ROUTINE",
-      "items": [
-       [
-        "Handy weg",
-        true
-       ],
-       [
-        "Fokus-Modus",
-        true
-       ]
-      ]
-     },
-     "who_desc": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "speaks": true,
-       "pos": "center"
-      }
-     ],
-     "place_desc": "office",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Stoppuhr zählt fünf Minuten abwärts.",
-     "text": "Schritt zwei: Fünf Minuten Arbeiten ohne Ablenkung. Mehr verlangst du nicht.",
-     "image": "Graphic of a sleek stopwatch counting down five minutes rapidly.",
-     "who": [],
-     "place": "schreibtisch",
      "camera": "still",
-     "sfx": "tick",
-     "highlight": [
-      "Fünf Minuten"
-     ],
-     "overlay": {
-      "type": "timer",
-      "value": "05:00",
-      "kicker": "NUR FÜNF MINUTEN"
-     },
-     "who_desc": "",
-     "place_desc": "office",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du schreibst konzentriert und schnell Wörter auf.",
-     "text": "Nach fünf Minuten läuft der Motor. Wie verhinderst du jetzt den nächsten Rückfall?",
-     "image": "Close-up on hands writing determinedly with a pen in a journal.",
-     "who": [
-      "du"
-     ],
-     "place": "schreibtisch",
-     "camera": "zoom_in",
      "sfx": "none",
-     "highlight": [
-      "Motor läuft"
+     "highlight": [],
+     "overlay": null
+    },
+    {
+     "text": "Schritt eins: Mach den Schreibtisch leer. Nur eine einzige Aufgabe bleibt liegen.",
+     "see": "Du stehst am aufgeräumten Schreibtisch, darauf liegt nur noch ein Buch.",
+     "place": "office",
+     "time": "day",
+     "props": [
+      "book"
      ],
-     "overlay": null,
-     "who_desc": "",
      "actors": [
       {
        "id": "du",
-       "action": "talk",
-       "emotion": "",
+       "action": "point",
+       "emotion": "happy",
        "emote": "",
-       "speaks": true,
-       "pos": "center"
+       "pos": "center",
+       "speaks": false
       }
      ],
-     "place_desc": "office",
-     "hud": "",
-     "status": ""
+     "mood": "calm",
+     "shot": "wide",
+     "image": "",
+     "who": [
+      "du"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "overlay": null
     },
     {
-     "see": "Du bindest draußen deine Sportschuhe fest zu.",
+     "text": "Schritt zwei: Fünf Minuten arbeiten ohne Ablenkung. Mehr verlangst du nicht von dir.",
+     "see": "Du sitzt am Schreibtisch und arbeitest konzentriert, das Handy ist weg.",
+     "place": "office",
+     "time": "day",
+     "props": [
+      "book"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "sit",
+       "emotion": "",
+       "emote": "",
+       "pos": "center",
+       "speaks": false
+      }
+     ],
+     "mood": "calm",
+     "shot": "wide",
+     "image": "",
+     "who": [
+      "du"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "overlay": null
+    },
+    {
+     "text": "Nach fünf Minuten bist du mittendrin. Und du willst gar nicht mehr aufhören.",
+     "see": "Du sitzt am Schreibtisch und arbeitest fröhlich weiter.",
+     "place": "office",
+     "time": "day",
+     "props": [
+      "laptop"
+     ],
+     "actors": [
+      {
+       "id": "du",
+       "action": "sit",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": false
+      }
+     ],
+     "mood": "happy",
+     "shot": "close",
+     "image": "",
+     "who": [
+      "du"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "overlay": null
+    },
+    {
      "text": "Disziplin ist kein Schicksal, sondern eine Entscheidung, die du täglich triffst.",
-     "image": "Person crouching on a running track, tying shoelaces with absolute determination.",
+     "see": "Du stehst im Wohnzimmer und stemmst eine Hantel.",
+     "place": "livingroom",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "idle",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": false,
+       "hold": "hantel"
+      }
+     ],
+     "mood": "calm",
+     "shot": "wide",
+     "image": "",
      "who": [
       "du"
      ],
-     "place": "stadt",
      "camera": "still",
      "sfx": "none",
-     "highlight": [
-      "Entscheidung"
-     ],
-     "overlay": {
-      "type": "tag",
-      "text": "DISZIPLIN"
-     },
-     "who_desc": "",
+     "highlight": [],
+     "overlay": null
+    },
+    {
+     "text": "Niemand kommt, um dich zu retten. Du musst es selbst tun.",
+     "see": "Du rennst kraftvoll durch die Straße.",
+     "place": "street",
+     "time": "day",
+     "props": [],
      "actors": [
       {
        "id": "du",
-       "action": "talk",
-       "emotion": "",
+       "action": "run",
+       "emotion": "happy",
        "emote": "",
-       "speaks": true,
-       "pos": "center"
+       "pos": "offleft",
+       "speaks": false,
+       "to": "offright"
       }
      ],
-     "place_desc": "street",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du rennst kraftvoll los über eine nasse Straße.",
-     "text": "Niemand kommt um dich zu retten. Du musst es selbst tun.",
-     "image": "Person sprinting fast down an empty street during a light rain shower.",
+     "mood": "calm",
+     "shot": "wide",
+     "image": "",
      "who": [
       "du"
      ],
-     "place": "stadt",
-     "camera": "pan_left",
-     "sfx": "whoosh",
-     "highlight": [
-      "selbst tun"
-     ],
-     "overlay": null,
-     "who_desc": "",
-     "actors": [
-      {
-       "id": "du",
-       "action": "talk",
-       "emotion": "",
-       "emote": "",
-       "speaks": true,
-       "pos": "center"
-      }
-     ],
-     "place_desc": "street",
-     "hud": "",
-     "status": ""
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "overlay": null
     },
     {
-     "see": "Du stehst auf einem Berg und blickst in die Weite.",
      "text": "Der Schmerz der Disziplin wiegt Gramm. Der Schmerz der Reue wiegt Tonnen.",
-     "image": "Person standing atop a windy mountain peak looking out at a stunning sunrise landscape.",
-     "who": [
-      "du"
+     "see": "Du stehst am Berg neben einer Waage, die zu einer Seite kippt.",
+     "place": "mountain",
+     "time": "day",
+     "props": [
+      "scale"
      ],
-     "place": "berg",
-     "camera": "wide",
-     "sfx": "none",
-     "highlight": [
-      "Schmerz der Reue"
-     ],
-     "overlay": null,
-     "who_desc": "",
      "actors": [
       {
        "id": "du",
-       "action": "talk",
+       "action": "point",
        "emotion": "",
        "emote": "",
-       "speaks": true,
-       "pos": "center"
+       "pos": "left",
+       "speaks": false
       }
      ],
-     "place_desc": "mountain",
-     "hud": "",
-     "status": ""
+     "mood": "calm",
+     "shot": "wide",
+     "image": "",
+     "who": [
+      "du"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "overlay": null
     },
     {
-     "see": "Vergleich zweier Wege als Balken.",
      "text": "Entscheide dich heute für den Schmerz, der dich stark macht.",
-     "image": "Graphic comparison between momentary comfort vs long-term success.",
-     "who": [],
-     "place": "berg",
-     "camera": "still",
-     "sfx": "ding",
-     "highlight": [
-      "stark macht"
+     "see": "Du stehst oben auf dem Berg und reißt jubelnd die Arme hoch.",
+     "place": "mountain",
+     "time": "day",
+     "props": [],
+     "actors": [
+      {
+       "id": "du",
+       "action": "jump",
+       "emotion": "happy",
+       "emote": "",
+       "pos": "center",
+       "speaks": false
+      }
      ],
-     "overlay": {
-      "type": "versus",
-      "left": "KOMFORT",
-      "right": "ERFOLG",
-      "kicker": "DEINE WAHL"
-     },
-     "who_desc": "",
-     "place_desc": "mountain",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du starrst wieder im Bad in den Spiegel, jetzt mit selbstbewusstem Lächeln.",
-     "text": "Erinnere dich daran: Der Typ im Spiegel wartet auf deine Entscheidung.",
-     "image": "Person back in the bathroom, smiling confidently at their reflection in the mirror.",
+     "mood": "happy",
+     "shot": "wide",
+     "image": "",
      "who": [
       "du"
      ],
-     "place": "bad",
-     "camera": "zoom_in",
+     "camera": "still",
      "sfx": "none",
-     "highlight": [
-      "deine Entscheidung"
-     ],
-     "overlay": null,
-     "who_desc": "",
+     "highlight": [],
+     "overlay": null
+    },
+    {
+     "text": "Erinnere dich daran: Der Mensch im Spiegel wartet auf deine Entscheidung.",
+     "see": "Du schaust im hellen Bad in den Spiegel, dein Spiegelbild lächelt.",
+     "place": "bathroom",
+     "time": "day",
+     "props": [],
      "actors": [
       {
        "id": "du",
-       "action": "talk",
-       "emotion": "",
+       "action": "idle",
+       "emotion": "happy",
        "emote": "",
-       "speaks": true,
-       "pos": "center"
+       "pos": "center",
+       "speaks": false
       }
      ],
-     "place_desc": "bathroom",
-     "hud": "",
-     "status": ""
-    },
-    {
-     "see": "Du tippst auf das Smartphone im Display.",
-     "text": "Speicher dir das für die harten Tage. Du bist nicht faul.",
-     "image": "Close-up shot of a hand tapping a save icon on a smartphone screen.",
+     "mood": "happy",
+     "shot": "mirror",
+     "mirror": "clear",
+     "image": "",
      "who": [
       "du"
      ],
-     "place": "bad",
      "camera": "still",
-     "sfx": "pop",
-     "highlight": [
-      "nicht faul"
-     ],
-     "overlay": {
-      "type": "card",
-      "text": "SPEICHERN"
-     },
-     "who_desc": "",
+     "sfx": "none",
+     "highlight": [],
+     "overlay": null
+    },
+    {
+     "text": "Speicher dir das für die harten Tage. Du bist nicht faul.",
+     "see": "Du stehst im hellen Bad und winkst lächelnd.",
+     "place": "bathroom",
+     "time": "day",
+     "props": [],
      "actors": [
       {
        "id": "du",
-       "action": "talk",
-       "emotion": "",
+       "action": "wave",
+       "emotion": "happy",
        "emote": "",
-       "speaks": true,
-       "pos": "center"
+       "pos": "center",
+       "speaks": false
       }
      ],
-     "place_desc": "bathroom",
-     "hud": "",
-     "status": ""
+     "mood": "happy",
+     "shot": "wide",
+     "image": "",
+     "who": [
+      "du"
+     ],
+     "camera": "still",
+     "sfx": "none",
+     "highlight": [],
+     "overlay": null
     }
    ],
    "hud": "",
    "countdown": null
   },
-  "provider": "gemini",
+  "provider": "Plan (Prüfung)",
   "remake": false,
-  "needs": [
-   "schalter"
-  ],
+  "needs": [],
   "title": "Dein größter Gegner schaut dich jeden Morgen im Spiegel an",
   "created": 1795861328.120646
  },

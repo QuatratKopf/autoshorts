@@ -3064,6 +3064,35 @@ def main():
         for sc_ in sc:
             frame(sc_, cast)
     check("Prüfung 28.11.: Rubrik-Gerüst ist kein doppeltes Thema, Geldtisch im Barbershop/Friseursalon steht frei", _pruef2811)
+
+    def _speech237():                                            # Prüfung 28.11.2026, Video 237 („Dein größter Gegner schaut dich jeden Morgen im Spiegel an“)
+        def T(text, see, place, **kw):
+            return {"text": text, "see": see, "place": place, "actors": [{"id": "du", "action": "talk", "emotion": "", "emote": "", "speaks": True, "pos": "center"}], **kw}
+        raw = [T("Du bist nicht faul. Du bist einfach nur extrem abgelenkt.", "Du stehst morgens im Bad und starrst müde in den Spiegel.", "bad"),
+               T("Dein größter Gegner schaut dich jeden Morgen im Spiegel an.", "Das gegnerische Spiegelbild sieht dich herausfordernd an.", "bad"),
+               T("Es ist drei Uhr nachts. Warum scrollst du schon wieder stundenlang durch wertlose Clips?", "Du liegst nachts im dunklen Bett und scrollst am blau leuchtenden Handy.", "schlafzimmer"),
+               T("Jedes Mal wenn es schwer wird, flüchtest du in schnelle Belohnung.", "Du sitzt am Schreibtisch vor Büchern, greifst nach dem Handy.", "schreibtisch", place_desc="office"),
+               {"text": "Dein Gehirn passt sich jeden Tag an das an, was du tust.", "see": "Ein Schiffsanker wird im Wasser gekappt.", "place": "underwater", "actors": []},
+               T("Also leg den Schalter um. Nicht morgen. Nicht nächste Woche. Jetzt.", "Du schiebst das Handy energisch zur Seite.", "schreibtisch"),
+               {"text": "Schritt zwei: Fünf Minuten Arbeiten ohne Ablenkung. Mehr verlangst du nicht.", "see": "Stoppuhr zählt fünf Minuten abwärts.", "place": "schreibtisch", "actors": []},
+               T("Nach fünf Minuten läuft der Motor. Wie verhinderst du jetzt den nächsten Rückfall?", "Du schreibst konzentriert und schnell Wörter auf.", "schreibtisch"),
+               T("Erinnere dich daran: Der Mensch im Spiegel wartet auf deine Entscheidung.", "Du starrst wieder im Bad in den Spiegel, jetzt mit selbstbewusstem Lächeln.", "bad")]
+        sc = stage.direct(raw, [(i * 4, i * 4 + 4) for i in range(len(raw))], "Dein größter Gegner schaut dich jeden Morgen im Spiegel an", "motivation")
+        assert sc[1]["shot"] == "mirror" and sc[1]["mirror"] == "day", sc[1]                       # Blick in den Spiegel, helles Bad am Morgen
+        assert sc[8]["shot"] == "mirror" and sc[8]["mirror"] == "clear", sc[8]                     # am Schluss lächelt das Spiegelbild
+        a2 = sc[2]["actors"][0]
+        assert sc[2].get("shot") != "insert" and a2["action"] == "sleep" and a2.get("_awake") is True, sc[2]   # liegt wach im Bett am Handy – keine Armbanduhr allein
+        assert [places.resolve(stage.backdrop(q)) for q in sc[3:8]] == ["office"] * 5, [places.resolve(stage.backdrop(q)) for q in sc]   # Schreibtisch, nicht unter Wasser
+        assert all(q.get("shot") not in ("insert", "graphic") and any(a.get("id") == "du" for a in q["actors"]) for q in sc[3:8]), [(q.get("shot"), q.get("actors")) for q in sc[3:8]]
+        assert not any("schalter" in str(q) or "engine" in str(q) for q in (sc[5].get("props") or []) + (sc[7].get("props") or [])), (sc[5].get("props"), sc[7].get("props"))
+        day = frame({"text": "x", "place": "bathroom", "time": "day", "shot": "mirror", "mirror": "day", "actors": [{"id": "du"}]}, {"du": {}}, 1.2).convert("RGB")
+        dark = frame({"text": "x", "place": "bathroom", "shot": "mirror", "mirror": "stare", "actors": [{"id": "du"}]}, {"du": {}}, 1.2).convert("RGB")
+        lum = lambda im: sum(sum(px) for px in im.resize((27, 48)).getdata())
+        assert lum(day) > lum(dark) * 2, (lum(day), lum(dark))
+        from .. import writer
+        assert not writer.has_storyboard({"scenes": raw_plan}) and writer.has_storyboard({"scenes": [dict(q, props=["phone"]) for q in raw_plan]})
+    raw_plan = [{"text": f"Satz {i}.", "see": "Du stehst da.", "place": "bad", "actors": [{"id": "du", "action": "talk", "speaks": True}]} for i in range(9)]
+    check("Motivation (Video 237): Spiegel-Blick hell am Morgen, wach im Bett statt Armbanduhr, Schreibtisch nicht unter Wasser, Redewendung ohne Ding, „see“ allein ist kein Bildplan", _speech237)
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")
     import collections
     for line, n in collections.Counter(e.strip().splitlines()[-1] + "  @ " + e.strip().splitlines()[-3].strip()[:90] for e in errors).most_common(30):

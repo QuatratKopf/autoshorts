@@ -2810,7 +2810,7 @@ ALIASES = {"thronsaal": "throneroom", "thron": "throneroom", "palast": "thronero
            "boxengasse": "garage", "tuning": "garage", "tuningwerkstatt": "garage", "schrauberhalle": "garage", "carport": "garage", "kino": "cinema", "kinosaal": "cinema", "kinos": "cinema", "leinwand": "cinema", "kinoleinwand": "cinema",
            "lichtspielhaus": "cinema", "filmpalast": "cinema", "schlafzimmer": "bedroom", "zimmer": "livingroom", "wohnzimmer": "livingroom", "straße": "street", "strasse": "street", "stadt": "street",
            "city": "street", "keller": "basement", "bunker": "basement", "wald": "forest", "natur": "park", "garten": "park",
-           "küche": "kitchen", "büro": "office", "strand": "beach", "meer": "beach", "wüste": "desert", "schnee": "snow",
+           "küche": "kitchen", "büro": "office", "schreibtisch": "office", "arbeitsplatz": "office", "desk": "office", "strand": "beach", "meer": "beach", "wüste": "desert", "schnee": "snow",
            "arktis": "snow", "eis": "snow", "ozean": "underwater", "unterwasser": "underwater", "ocean": "underwater",
            "berg": "mountain", "berge": "mountain", "krankenhaus": "hospital", "höhle": "cave", "arctic": "snow",
            "weltraum": "space", "mond": "moon", "labor": "lab", "schule": "classroom", "klassenzimmer": "classroom",

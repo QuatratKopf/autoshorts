@@ -939,3 +939,22 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Ziel außerhalb des Bildes. Kamerasprung in der Halbnahen (`_camera`, `PUNCH_FACE_Y`): zoomt um das Gesicht, das auf seiner Höhe stehen bleibt – mit
   dem Fixpunkt oben rutschten Mund und Kinn in die Untertitel-Zeile. Nahaufnahme einer Figur, die mit einem Werkzeug in der Hand zeigt: Bildausschnitt
   rückt zur Hand (`c_off`), Rasiermesser und Haarschneider waren am Rand abgeschnitten.
+
+## Motivationsrede: Spiegel-Blick, Schreibtisch statt Meeresgrund, Redewendungen ohne Ding (Prüfung 28.11.2026, Video 237)
+- Auslöser: Der Plan „Dein größter Gegner schaut dich jeden Morgen im Spiegel an“ hatte nur `see` und deutsche Ortsnamen, überall dieselbe redende
+  Figur, keine Requisiten. Ergebnis: fünf Schreibtisch-Sätze unter Wasser neben einem Goldfisch (der Ort davor war ein „gekappter Anker“), fünf
+  Sekunden leere Armbanduhr zu „drei Uhr nachts“, Lichtschalter und Motorblock allein im Bild („leg den Schalter um“, „läuft der Motor“), die
+  Fünf-Minuten-Grafik unter dem großen Wort, niemand sah in den Spiegel.
+- `writer.has_storyboard`: `see` allein ist kein Bildplan – mindestens jede dritte Szene braucht Requisite, Landschaft, Grafik, eigene Einstellung
+  oder eine Figur, die mehr tut als reden/stehen. Sonst wird der Bildplan eigens ausgearbeitet (`writer.storyboard`).
+- `places.ALIASES`: „schreibtisch“, „arbeitsplatz“, „desk“ → `office`.
+- `stage._speech_places` (nur Rubrik `motivation`, vor `_speech`): unbekannter Ortsname → `place_desc` bzw. Ort aus dem Bildplan-Satz, sonst der Ort
+  davor; ferne Orte (`SPEECH_FAR`: unter Wasser, All, Höhle, Karte …), von denen der Satz nicht spricht, werden zum Ort davor, Tiere dort entfallen.
+- `stage._speech`: „liegst … im Bett“ + Handy zählt in Motivationsreden auch aus dem Bildplan-Satz; war die Szene ein Insert (Armbanduhr), wird sie zur Figur im Bett.
+- `stage._speech_final` (letzter Schritt von `direct`): keine Einstellung `insert`/`graphic` in Motivationsreden (das große Wort läge darauf) – die
+  Hauptfigur steht im Bild; Redewendungen (`SPEECH_IDIOM_RE`) bringen keinen Schalter/Motor/Anker mit. Sätze mit „Spiegel“ im Bad zeigen den Blick in
+  den Spiegel (`shot: mirror`, höchstens drei, nie zwei hintereinander): neuer Zustand `day` (helles Bad am Morgen, ernster Blick, keine Kerze),
+  `clear` wenn Bildplan oder Stimmung ein Lächeln nennen, `stare` nur nachts.
+- Selbsttest: `_speech237`.
+- Noch offen: Die Figur „sitzt“ am Schreibtisch auf einem Hocker VOR dem Tisch (kein Stuhl am Tisch, kein Schreiben); das Gehirn als Figur ist größer als
+  der Mensch daneben; eine Wanduhr als Requisite steht im Zimmer auf dem Boden.

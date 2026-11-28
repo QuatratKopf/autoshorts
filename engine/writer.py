@@ -1173,7 +1173,16 @@ def has_storyboard(js):
     """Hat die Text-KI den Bildplan ausgefüllt? (Mindestens jede zweite Szene nennt Figuren, Requisiten, Einstellung oder Landschaft.)"""
     scenes = [s for s in js.get("scenes", []) if isinstance(s, dict)]
     n = sum(1 for s in scenes if any(s.get(k) not in (None, "", [], {}) for k in ("actors", "props", "shot", "backdrop", "see", "graphic")))
-    return bool(scenes) and n * 2 >= len(scenes)
+    if not (bool(scenes) and n * 2 >= len(scenes)):
+        return False
+    # Nur „see“ ausgefüllt und in jeder Szene dieselbe redende Figur, keine Requisite, keine Tageszeit (Plan zu Video 237): Das ist kein Bildplan –
+    # der Satz „Du liegst nachts im Bett am Handy“ stand da, aber Ort, Dinge und Handlung fehlten. Mindestens jede dritte Szene muss etwas TUN oder zeigen.
+    def _real(s):
+        acts = [a for a in (s.get("actors") or []) if isinstance(a, dict)]
+        return bool(s.get("props")) or isinstance(s.get("backdrop"), dict) or isinstance(s.get("graphic"), dict) \
+            or str(s.get("shot") or "") in ("event", "insert", "graphic", "mirror") \
+            or any(str(a.get("action") or "talk").lower() not in ("", "talk", "idle") or a.get("hold") or a.get("kind") for a in acts)
+    return sum(1 for s in scenes if _real(s)) * 3 >= len(scenes)
 
 
 def storyboard(js, topic):

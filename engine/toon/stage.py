@@ -2620,6 +2620,7 @@ def direct(scenes, times, topic="", style="", look=""):
     _map_hud(scenes)
     _door_story(scenes)
     _jogging(scenes)
+    _speech_places(scenes, style)
     _speech(scenes, style)
     _call_story(scenes, topic, main_id)
     _past_story(scenes, topic, main_id)
@@ -2664,6 +2665,7 @@ def direct(scenes, times, topic="", style="", look=""):
     _mirror_msg(scenes, topic, style, main_id)
     _fridge_open(scenes)
     _studio_money(scenes)
+    _speech_final(scenes, style, main_id)
     return scenes
 
 
@@ -3285,6 +3287,82 @@ JOG_RE = r"(?:^|[.!?,:;] |\bund )\s*(?:lauf|laufe|renn|renne|jogg|jogge|sprinte)
 SPEECH_PANIC_RE = r"panik|\bangst|fürcht|erschr|schock|zitter|albtraum|gefahr|bedroh"
 
 
+# Motivationsrede „Dein größter Gegner schaut dich jeden Morgen im Spiegel an“ (Prüfung 28.11.2026, Video 237): Der Bildplan nannte nur deutsche
+# Ortsnamen („schreibtisch“) und einen Anker unter Wasser – fünf Sätze über den Schreibtisch spielten unter Wasser neben einem Goldfisch, „leg den
+# Schalter um“ und „läuft der Motor“ zeigten sekundenlang einen Lichtschalter und einen Motorblock, „drei Uhr nachts“ eine leere Armbanduhr, die
+# Fünf-Minuten-Grafik lag unter dem großen Wort, und in den Spiegel sah niemand.
+SPEECH_FAR = ("underwater", "space", "moon", "cave", "desert", "icesea", "worldmap", "germany", "highsky")
+SPEECH_FAR_RE = r"wasser|meer|ozean|tauch|schwimm|anker|weltall|weltraum|\ball\b|mond|stern|planet|höhle|wüste|sand|\beis|karte|deutschland|welt\b|himmel|wolke|flieg"
+SPEECH_IDIOM_RE = r"schalter\b.{0,12}\bum\b|leg\w* (?:den|einen) schalter|läuft der motor|motor (?:läuft|anspring|an)|gang höher|vollgas|akku\w* (?:leer|aufladen)|steuer in die hand|weichen stell|anker (?:lichten|werfen)"
+
+
+def _speech_places(scenes, style=""):
+    """Motivationsrede: unbekannter Ortsname → Ort aus `place_desc` oder aus dem Bildplan-Satz; ein ferner Ort (unter Wasser, Weltall), von dem der
+    Satz nicht spricht, wird zum Ort davor – die Rede geht an „du“, die Hauptfigur steht nicht plötzlich zwischen Fischen."""
+    if str(style or "").lower() != "motivation":
+        return scenes
+    prev = None
+    for sc in scenes:
+        if not isinstance(sc, dict):
+            continue
+        if isinstance(backdrop(sc), dict):
+            prev = None
+            continue
+        pl = places.resolve(backdrop(sc))
+        low = (str(sc.get("text") or "") + " " + str(sc.get("see") or "")).lower()
+        if pl == "plain" and str(sc.get("place") or "").strip().lower() != "plain":
+            alt = next((c for c in (sc.get("place_desc"), _said_place(sc.get("see")), _said_place(sc.get("text")))
+                        if isinstance(c, str) and c.strip() and places.resolve(c) not in ("plain",) + SPEECH_FAR), None)
+            if alt or prev:
+                sc["place"], sc["backdrop"] = alt or prev, None
+                pl = places.resolve(sc["place"])
+        if pl in SPEECH_FAR and not re.search(SPEECH_FAR_RE, str(sc.get("text") or "").lower()) and prev:
+            sc["place"], sc["backdrop"] = prev, None
+            sc["actors"] = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and not a.get("kind")]
+            pl = places.resolve(prev)
+        if pl not in SPEECH_FAR and pl != "plain":
+            prev = sc.get("place")
+    return scenes
+
+
+def _speech_final(scenes, style="", main_id="du"):
+    """Motivationsrede, letzter Durchgang der Regie: kein Bild nur mit einem Ding (Redewendung wörtlich genommen), keine Grafik unter dem großen
+    Wort; Sätze über den Blick in den Spiegel zeigen den Spiegel (`mirror`: „day“ hell am Morgen, „clear“ lächelnd)."""
+    if str(style or "").lower() != "motivation":
+        return scenes
+    n_mir, last_mir = 0, -9
+    for i, sc in enumerate(scenes):
+        if not isinstance(sc, dict):
+            continue
+        low = str(sc.get("text") or "").lower()
+        see = str(sc.get("see") or "").lower()
+        shot = str(sc.get("shot") or "")
+        idiom = bool(re.search(SPEECH_IDIOM_RE, low))
+        if shot in ("insert", "graphic") or idiom:
+            if isinstance(sc.get("props"), list) and (shot == "insert" or idiom):
+                sc["props"] = [q for q in sc["props"] if not re.search(r"schalter|switch|engine|motor|armbanduhr|anker|anchor|akku|battery",
+                                                                       str((q.get("type") if isinstance(q, dict) else q) or "").lower())] if not shot == "insert" or idiom else []
+            if shot in ("insert", "graphic"):
+                sc["shot"], sc["graphic"] = "", None
+                if not any(isinstance(a, dict) for a in sc.get("actors") or []):
+                    sc["actors"] = [{"id": main_id, "action": "idle", "emotion": "", "emote": "none", "pos": "center", "speaks": False}]
+                sc["_no_insert"] = True
+        if "spiegel" in low and str(sc.get("shot") or "") in ("", "wide", "close") and not isinstance(backdrop(sc), dict) \
+                and (places.resolve(backdrop(sc)) == "bathroom" or "spiegel" in see) and n_mir < 3 and i - last_mir > 1 \
+                and len([a for a in (sc.get("actors") or []) if isinstance(a, dict)]) <= 1:
+            happy = bool(re.search(r"läch|lach|stolz|selbstbewusst|froh|strahl", see + " " + low)) or str(sc.get("mood") or "") == "happy"
+            sc["shot"] = "mirror"
+            sc["mirror"] = "clear" if happy else "stare" if str(sc.get("time") or "") == "night" else "day"
+            sc["place"], sc["backdrop"], sc["props"], sc["crowd"] = "bathroom", None, [], ""
+            sc["actors"] = [{"id": main_id, "action": "idle", "emotion": "happy" if happy else "", "emote": "none", "pos": "center", "speaks": False}]
+            sc["_no_cut"] = True
+        if str(sc.get("shot") or "") == "mirror":
+            if str(sc.get("mirror") or "") in ("", "normal", "stare") and str(sc.get("time") or "") == "day":
+                sc["mirror"] = "day"                      # „jeden Morgen im Spiegel“: helles Bad, kein Kerzenlicht
+            n_mir, last_mir = n_mir + 1, i
+    return scenes
+
+
 def _speech(scenes, style=""):
     """Motivationsrede (Prüfung 21.11.2026, Videos 173/174): Die Rede geht an „du“ – in jedem Bild steht die Hauptfigur, keine Menschenmenge
     rennt durchs Büro, wenn der Satz vom konzentrierten Lernen spricht, kein leeres Bild mit einem Felsbrocken. Das große Wort steht über dem
@@ -3305,10 +3383,12 @@ def _speech(scenes, style=""):
             see_low = str(sc.get("see") or "").lower()
             awake_re = r"scroll|handy|smartphone|bildschirm|\bfeed\b|wach\b|nicht schlafen|tippst|chattest"
             if not a.get("kind") and len(acts) == 1 and str(a.get("action") or "idle").lower() in ("", "idle", "talk", "walk", "sit", "think", "look_around") \
-                    and re.search(r"\blieg\w*\b.{0,40}\bim bett\b|\bim bett\b.{0,30}\blieg", low) and re.search(awake_re + r"|starrst", low) \
+                    and re.search(r"\blieg\w*\b.{0,40}\bim (?:\w+ )?bett\b|\bim (?:\w+ )?bett\b.{0,30}\blieg", low + " " + (see_low if speech else "")) and re.search(awake_re + r"|starrst", low + " " + (see_low if speech else "")) \
                     and not re.search(r"schläfst|eingeschlafen|schlummer|\bnicht\b.{0,12}\bim bett\b|aufsteh|stehst auf", low) \
-                    and not isinstance(backdrop(sc), dict) and places.resolve(backdrop(sc)) == "bedroom" and str(sc.get("shot") or "") in ("", "wide"):
-                a.update(action="sleep", pos="center")    # „Nachts liegst du wach im Bett und starrst auf das Handy“: die Figur lief mit dem Handy durchs Schlafzimmer (Video 217)
+                    and not isinstance(backdrop(sc), dict) and places.resolve(backdrop(sc)) == "bedroom" and str(sc.get("shot") or "") in (("", "wide", "insert") if speech else ("", "wide")):
+                a.update(action="sleep", pos="center")
+                if str(sc.get("shot") or "") == "insert":  # Motivationsrede: „Es ist drei Uhr nachts. Warum scrollst du …“ zeigte fünf Sekunden eine leere Armbanduhr (Video 237)
+                    sc["shot"], sc["props"] = "", [q for q in (sc.get("props") or []) if "uhr" not in str((q.get("type") if isinstance(q, dict) else q) or "").lower()]    # „Nachts liegst du wach im Bett und starrst auf das Handy“: die Figur lief mit dem Handy durchs Schlafzimmer (Video 217)
                 a.pop("to", None)
             if not a.get("kind") and str(a.get("action") or "") == "sleep" \
                     and (re.search(awake_re, low) or (re.search(awake_re + r"|starrst", see_low) and not re.search(r"schläf|schlaf(?!zimmer)|träum", low + " " + see_low))) \
@@ -6975,7 +7055,7 @@ def _insert_frame(kinds, t, dur, mood, low=False, neon=False):
 # verzerrtes Gesicht. Einstellung „mirror“: Blick über die Schulter in den Badezimmerspiegel; im Glas das Spiegelbild der Figur im Zustand, den der
 # Satz beschreibt (`scene["mirror"]`): normal | stare (starrt reglos) | fade (der Rand versinkt im Dunkeln) | void (Augen riesig und schwarz) |
 # monster (Fratze mit starrem Grinsen) | snap (Fratze, dann schlagartig wieder das echte Gesicht) | clear (erleichtert, hell).
-MIRROR_STATES = ("normal", "stare", "fade", "void", "monster", "snap", "clear")
+MIRROR_STATES = ("normal", "stare", "fade", "void", "monster", "snap", "clear", "day")   # day: helles Bad am Morgen, ernster Blick (Motivationsrede, Video 237)
 MIRROR_BOX = (118, 250, 962, 1300)       # Glas im Bild; darunter Ablage und Waschbecken, unten angeschnitten der Hinterkopf der Figur
 _mir_cache = {}
 
@@ -6998,6 +7078,8 @@ def _mirror_params(state, t, dur):
         return 0.12 + 0.22 * x, 0.0, False, 0.0, "normal"
     if state == "clear":
         return 0.0, 0.0, False, 0.0, "clear"
+    if state == "day":
+        return 0.0, 0.0, False, 0.0, "normal"
     return 0.12, 0.0, False, 0.0, "normal"
 
 
@@ -7007,7 +7089,7 @@ def mirror_glass(look, state, t, dur, size=(844, 1050), seed=3):
     gw, gh = size
     state = state if state in MIRROR_STATES else "normal"
     dark, void, grin, flash, face = _mirror_params(state, t, dur)
-    lit = state == "clear"                                 # nur wenn das Licht an ist – nach dem Verschwinden der Fratze bleibt es Kerzenlicht
+    lit = state in ("clear", "day")                        # nur wenn das Licht an ist – nach dem Verschwinden der Fratze bleibt es Kerzenlicht
     key = ("glassbg", size, lit)
     if key not in _mir_cache:
         c0, c1 = ((120, 150, 170), (86, 112, 134)) if lit else ((44, 60, 82), (24, 32, 48))
@@ -7092,7 +7174,7 @@ def _mirror_frame(scene, cast, t, dur):
     aid = next((str(a.get("id")) for a in acts if isinstance((cast or {}).get(str(a.get("id"))), dict) and not cast[str(a.get("id"))].get("kind")), None) \
         or next((k for k, v in (cast or {}).items() if isinstance(v, dict) and not v.get("kind")), None)
     look = rig.Look.from_spec((cast or {}).get(aid) if aid else {}, aid or "", list(cast).index(aid) if aid and aid in (cast or {}) else None)
-    lit = state == "clear"
+    lit = state in ("clear", "day")
     x0, y0, x1, y1 = MIRROR_BOX
     key = ("wall", lit)
     if key not in _mir_cache:
