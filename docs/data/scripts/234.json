@@ -1,0 +1,368 @@
+{
+ "title": "Personal Trainer vs. Fahrlehrer: Wer verdient wirklich mehr?",
+ "scenes": [
+  {
+   "text": "Personal Trainer gegen Fahrlehrer: Das wahre Einkommen im direkten Vergleich.",
+   "see": "Grafik zeigt das Duell zwischen Personal Trainer Ben und Fahrlehrer Sami.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "canister"
+    },
+    {
+     "type": "car"
+    }
+   ],
+   "shot": "event",
+   "graphic": {
+    "type": "versus",
+    "kicker": "DAS DUELL",
+    "left": "TRAINER",
+    "right": "FAHRLEHRER",
+    "dark": false
+   }
+  },
+  {
+   "text": "Der Gewinner am Ende überrascht selbst echte Branchenkenner.",
+   "see": "Grafik zeigt den Stundensatz von Ben mit achtzig Euro.",
+   "place": "street",
+   "mood": "happy",
+   "crowd": "cheer"
+  },
+  {
+   "text": "Er schwitzt mit seinen Kunden und wirkt wie der absolute Spitzenverdiener.",
+   "see": "Ben hebt schwer schnaufend eine schwere Hantel im Studio.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "hantel"
+    }
+   ],
+   "actors": [
+    {
+     "id": "ben",
+     "speaks": true,
+     "action": "run",
+     "emotion": "worried",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense"
+  },
+  {
+   "text": "Aber nach Studiomiete, Steuern und Equipment bleiben ihm knapp vierzig Euro netto.",
+   "see": "Zähler zeigt die Abzüge für Ben durch Miete und Steuern.",
+   "place": "street",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "shot": "graphic",
+   "mood": "tense",
+   "crowd": "worried",
+   "graphic": {
+    "type": "number",
+    "kicker": "ABZÜGE INKLUSIVE",
+    "value": "40 €",
+    "label": "NETTO GEWINN",
+    "dark": false
+   }
+  },
+  {
+   "text": "Fahrlehrer Sami verlangt dagegen fünfundfünfzig Euro pro Fahrstunde.",
+   "see": "Grafik zeigt den Preis für eine Fahrstunde bei Sami.",
+   "place": "street",
+   "time": "day",
+   "actors": [
+    {
+     "id": "ben",
+     "action": "look_around",
+     "pos": "center",
+     "emotion": "",
+     "emote": ""
+    }
+   ],
+   "overlay": {
+    "type": "card",
+    "text": "55 € / FAHRSTUNDE"
+   }
+  },
+  {
+   "text": "Sami hat zwar dauernd Todesangst auf dem Beifahrersitz, arbeitet aber durch.",
+   "see": "Sami sitzt panisch auf dem Beifahrersitz im Auto und krallt sich fest.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "lenkrad"
+    }
+   ],
+   "actors": [
+    {
+     "id": "sami",
+     "speaks": true,
+     "action": "cower",
+     "emotion": "scared",
+     "emote": "!",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "panic",
+   "crowd": "panic"
+  },
+  {
+   "text": "Im direkten Vergleich führt Ben beim reinen Stundenlohn ganz klar.",
+   "see": "Balkendiagramm vergleicht den Umsatz pro Stunde beider Personen.",
+   "place": "street",
+   "time": "day",
+   "shot": "event",
+   "crowd": "walk"
+  },
+  {
+   "text": "Aber Sami hat hohe Spritkosten und Verschleiß am Auto zu zahlen.",
+   "see": "Grafik zeigt Spritkosten für das Fahrschulauto.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "canister"
+    },
+    {
+     "type": "car"
+    }
+   ],
+   "shot": "event",
+   "overlay": {
+    "type": "tag",
+    "text": "SPRIT & VERSCHLEISS"
+   }
+  },
+  {
+   "text": "Dafür schafft Ben höchstens vier Kunden am Tag, weil er ständig Akquise macht.",
+   "see": "Timer zeigt vierundvierzig Minuten Dauer für ein Training.",
+   "place": "street",
+   "time": "day",
+   "actors": [
+    {
+     "id": "sami",
+     "action": "idle",
+     "pos": "center",
+     "emotion": "",
+     "emote": ""
+    }
+   ],
+   "overlay": {
+    "type": "card",
+    "text": "MAX. 4 KUNDEN/TAG"
+   }
+  },
+  {
+   "text": "Du denkst, Ben gewinnt leicht. Falsch, denn wie viele Stunden sitzt Sami im Auto?",
+   "see": "Ben schaut besorgt auf sein Smartphone auf der Suche nach neuen Kunden.",
+   "place": "street",
+   "time": "day",
+   "actors": [
+    {
+     "id": "ben",
+     "speaks": true,
+     "action": "think",
+     "emotion": "worried",
+     "emote": "?",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "tense",
+   "crowd": "cheer"
+  },
+  {
+   "text": "Sami zieht durch und fährt locker zehn Stunden jeden einzelnen Tag.",
+   "see": "Grafik zeigt zehn Fahrstunden pro Tag für Sami.",
+   "place": "street",
+   "shot": "graphic",
+   "crowd": "walk",
+   "graphic": {
+    "type": "number",
+    "kicker": "SAMI VOLLGAS",
+    "value": "10",
+    "label": "STUNDEN TÄGLICH",
+    "dark": false
+   }
+  },
+  {
+   "text": "Ben kommt damit grob gerechnet auf etwa dreitausendzweihundert Euro Monatsgewinn.",
+   "see": "Monatszähler zeigt dreitausendzweihundert Euro Gewinn bei Ben.",
+   "place": "street",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "mood": "happy",
+   "crowd": "cheer",
+   "overlay": {
+    "type": "counter",
+    "label": "BEN GEWINN",
+    "value": 3200,
+    "unit": "EURO"
+   }
+  },
+  {
+   "text": "Sami streicht am Ende viertausendfünfhundert Euro ein, doch wer hat wirklich mehr vom Leben?",
+   "see": "Sami lächelt stolz und wischt sein Auto sauber.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "money"
+    }
+   ],
+   "actors": [
+    {
+     "id": "sami",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "heart",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy",
+   "overlay": {
+    "type": "counter",
+    "label": "SAMI GEWINN",
+    "value": 4500,
+    "unit": "EURO"
+   }
+  },
+  {
+   "text": "Du denkst, Sami ist der Gewinner. Falsch!",
+   "see": "Du denkst Sami ist reicher, aber der Text bringt die Finte.",
+   "place": "street",
+   "mood": "happy",
+   "crowd": "cheer",
+   "overlay": {
+    "type": "card",
+    "text": "DER HAKEN!"
+   }
+  },
+  {
+   "text": "Sami arbeitet sechzig Stunden die Woche und hat null Freizeit.",
+   "see": "Grafik zeigt sechzig Arbeitsstunden in der Woche für Sami.",
+   "place": "street",
+   "shot": "graphic",
+   "crowd": "walk",
+   "graphic": {
+    "type": "number",
+    "kicker": "ARBEITSZEIT SAMI",
+    "value": "60 Std",
+    "label": "PRO WOCHE",
+    "dark": false
+   }
+  },
+  {
+   "text": "Ben hat nach zwanzig Stunden Feierabend und trainiert entspannt selbst.",
+   "see": "Ben entspannt auf der Parkbank in der Sonne.",
+   "place": "street",
+   "backdrop": {
+    "sky": "day",
+    "ground": "grass",
+    "elements": [
+     "trees"
+    ]
+   },
+   "time": "day",
+   "actors": [
+    {
+     "id": "ben",
+     "action": "look_around",
+     "emotion": "",
+     "pos": "center",
+     "emote": "?"
+    }
+   ],
+   "mood": "calm",
+   "overlay": {
+    "type": "counter",
+    "label": "",
+    "value": 20,
+    "unit": "STUNDEN"
+   }
+  },
+  {
+   "text": "Beim echten Stundenlohn schlägt Ben ihn also um Längen.",
+   "see": "Grafik zeigt den echten Stundenlohn beider Personen im Vergleich.",
+   "place": "street",
+   "crowd": "walk"
+  },
+  {
+   "text": "Am Ende kauft Ben sich die teure Uhr.",
+   "see": "Ben stolziert selbstbewusst mit einer teuren Uhr vorüber.",
+   "place": "street",
+   "time": "day",
+   "props": [
+    {
+     "type": "clock"
+    },
+    {
+     "type": "lib_armbanduhr"
+    }
+   ],
+   "actors": [
+    {
+     "id": "ben",
+     "speaks": true,
+     "action": "wave",
+     "emotion": "happy",
+     "emote": "!",
+     "kind": "",
+     "hold": "clock",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "happy"
+  },
+  {
+   "text": "Sami meinte nur tränenreich, wer denn nun erfolgreicher ist.",
+   "see": "Ben schaut grinsend auf die Uhr und stellt die Einstiegsfrage.",
+   "place": "street",
+   "time": "day",
+   "actors": [
+    {
+     "id": "sami",
+     "speaks": true,
+     "action": "sad",
+     "emotion": "sad",
+     "emote": "sweat",
+     "kind": "",
+     "hold": "",
+     "facing": "",
+     "say": "",
+     "pos": "center"
+    }
+   ],
+   "mood": "sad"
+  }
+ ]
+}

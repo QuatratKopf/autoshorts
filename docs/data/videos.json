@@ -9039,5 +9039,44 @@
   "yt_thumb_tries": 2,
   "yt_thumb": "Zernio HTTP 400: The thumbnail could not be set: YouTube thumbnail upload failed: 403 {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"The authenticated user doesn't have permissions to upload and set custom video thumbnails.\",\n    \"errors\":",
   "tt_url": "https://www.tiktok.com/@wissens..wert/video/7712944548338552097?utm_campaign=tt4d_open_api&utm_source=7608030276714774544"
+ },
+ {
+  "id": 234,
+  "category": "vergleich",
+  "topic": "Personal Trainer gegen Fahrlehrer – Wer verdient wirklich mehr?",
+  "status": "review",
+  "created": 1795860527.6984968,
+  "title": "Personal Trainer vs. Fahrlehrer: Wer verdient wirklich mehr?",
+  "description": "Personal Trainer oder Fahrlehrer – wer scheffelt mehr Kohle?\nDu vergleichst Stundensätze, Abzüge und den echten Nettogewinn im Alltag.\nZu wem würdest du eher gehen?",
+  "hashtags": [
+   "#shorts",
+   "#finanzen",
+   "#gehalt",
+   "#business",
+   "#vergleich",
+   "#viral",
+   "#fyp"
+  ],
+  "tags": [
+   "personal trainer gehalt",
+   "fahrlehrer gehalt",
+   "wer verdient mehr",
+   "stundenlohn vergleich",
+   "finanzen gen z"
+  ],
+  "thumb_text": "WER VERDIENT MEHR?",
+  "missing": null,
+  "cover_ms": 72960,
+  "duration": 72.9,
+  "providers": {
+   "text": "gemini",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true,
+  "slot": "2026-11-28 13:00",
+  "review_at": 1795861069.2701514
  }
 ]
