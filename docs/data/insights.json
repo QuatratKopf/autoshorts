@@ -1,5 +1,5 @@
 {
- "updated": 1795832438.4256358,
+ "updated": 1795834235.1836598,
  "enough": true,
  "counted": 48,
  "total": 51,
@@ -108,10 +108,10 @@
    "slug": "nachricht",
    "name": "📱 Unbekannte Nachricht",
    "n": 1,
-   "avg_views": 556,
+   "avg_views": 573,
    "avg_likes": 8.0,
-   "like_rate": 1.44,
-   "avg_score": 676
+   "like_rate": 1.4,
+   "avg_score": 693
   }
  ],
  "weights": {
@@ -126,7 +126,7 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2286 Aufrufe, 2.05 % Likes).",
-  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 556 Aufrufe) – kommt seltener dran.",
+  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 573 Aufrufe) – kommt seltener dran.",
   "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2200 zu 1145 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut, vier."
  ],
@@ -137,13 +137,13 @@
  ],
  "words_bad": [
   "remix",
-  "glas",
-  "lied",
   "erkennst",
+  "lied",
   "bekanntes",
-  "klassikers",
+  "glas",
+  "jede",
   "scheibe",
-  "eines"
+  "klassikers"
  ],
  "top": [
   {
