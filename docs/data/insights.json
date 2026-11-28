@@ -1,5 +1,5 @@
 {
- "updated": 1795870535.4365678,
+ "updated": 1795872349.2459369,
  "enough": true,
  "counted": 50,
  "total": 52,
@@ -12,7 +12,7 @@
    "avg_views": 2105,
    "avg_likes": 46.2,
    "like_rate": 2.19,
-   "avg_score": 2819
+   "avg_score": 2820
   },
   {
    "slug": "liebe",
@@ -54,10 +54,10 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 13,
-   "avg_views": 1615,
+   "avg_views": 1616,
    "avg_likes": 45.1,
    "like_rate": 2.79,
-   "avg_score": 2293
+   "avg_score": 2294
   },
   {
    "slug": "tiere",
@@ -81,10 +81,10 @@
    "slug": "motivation",
    "name": "🔥 Motivation",
    "n": 2,
-   "avg_views": 1066,
+   "avg_views": 1067,
    "avg_likes": 36.0,
-   "like_rate": 3.38,
-   "avg_score": 1626
+   "like_rate": 3.37,
+   "avg_score": 1627
   },
   {
    "slug": "musik",
@@ -108,10 +108,10 @@
    "slug": "nachricht",
    "name": "📱 Unbekannte Nachricht",
    "n": 1,
-   "avg_views": 616,
+   "avg_views": 620,
    "avg_likes": 11.0,
-   "like_rate": 1.79,
-   "avg_score": 781
+   "like_rate": 1.77,
+   "avg_score": 785
   }
  ],
  "weights": {
@@ -126,8 +126,8 @@
  },
  "advice": [
   "Stärkste Kategorie: 🤪 Comedy (Ø 2105 Aufrufe, 2.19 % Likes).",
-  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 616 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2180 zu 1157 Punkte).",
+  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 620 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2181 zu 1157 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut, vier."
  ],
  "words_good": [
@@ -138,8 +138,8 @@
  "words_bad": [
   "remix",
   "scheibe",
-  "eines",
   "jede",
+  "eines",
   "klassikers",
   "spiegel"
  ],
@@ -200,11 +200,11 @@
    "id": 224,
    "title": "Tiefsee-Anglerfisch: Die Falle aus Licht",
    "category": "tiere",
-   "views": 406,
+   "views": 407,
    "likes": 14,
    "comments": 0,
    "shares": 0,
-   "score": 616
+   "score": 617
   },
   {
    "id": 196,
