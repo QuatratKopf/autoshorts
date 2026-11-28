@@ -3041,6 +3041,29 @@ def main():
         assert stage._number("tausendsassa") is None and stage._number("jahrtausendwende") is None, "Wörter mit „tausend“ sind keine Zahlen"
         assert stage.spoken_number(3600, "Bei Tom bleiben grob gerechnet dreitausendsechshundert Euro im Monat."), "3.600 ist gesprochen – die Einblendung bleibt"
     check("Prüfung 25.11.: unbesetzte Vornamen mit eigenem Aussehen (Frauen als Frauen), lange Plakette zweizeilig", _pruef2511d)
+
+    def _pruef2811():
+        from engine import main as main_
+        barber = "Barbershop gegen Friseursalon – wer verdient mehr? Barbershop gegen Friseursalon: Wer verdient mehr?"
+        assert not (main_._stems(barber) & main_._stems("Spätkauf gegen Supermarkt: Wer verdient mehr?")), \
+            "Gerüst der Rubrik („gegen“, „verdient“) ist kein gemeinsames Thema – das vorbereitete Drehbuch wurde deshalb verworfen (Video 234)"
+        assert len(main_._stems(barber) & main_._stems("Barbershop gegen Friseursalon: Wer verdient wirklich mehr?")) >= 2, "dasselbe Thema bleibt erkennbar"
+        cast = {"leo": {"shirt": "grau", "hat": "cap"}, "mia": {"shirt": "türkis", "hair": "bob", "gender": "w"}}
+        sc = [{"text": "Zwölf Kunden am Tag bringen ihm im Barbershop dreihundertsechzig Euro Umsatz.", "place": "barbershop", "props": ["money"],
+               "actors": [{"id": "leo", "action": "jump", "pos": "left"}]},
+              {"text": "Davon gehen Miete, Material, Versicherungen und Steuern ab.", "place": "barbershop", "props": [],
+               "actors": [{"id": "leo", "action": "sad", "pos": "center"}]},
+              {"text": "Im Friseursalon nimmt Mia fünfundfünfzig Euro für Waschen, Schneiden, Föhnen.", "place": "hairsalon", "props": ["money"],
+               "actors": [{"id": "mia", "action": "talk", "pos": "center", "hold": "scissors"}]}]
+        stage.direct(sc, [(0.0, 3.5), (3.5, 6.5), (6.5, 10.5)], "Barbershop gegen Friseursalon", "vergleich")
+        mon = lambda x: [q for q in (x.get("props") or []) if (q.get("type") if isinstance(q, dict) else q) == "money"]   # noqa: E731
+        assert len(mon(sc[0])) == 1 and mon(sc[0])[0].get("pos") == 230 and sc[0]["actors"][0]["pos"] == "right", \
+            f"Geldtisch links vor der Ablage, Figur rechts – nicht im Barbierstuhl: {sc[0].get('props')} {sc[0]['actors'][0].get('pos')}"
+        assert len(mon(sc[1])) <= 1, f"kein dreifacher Geldtisch im Laden: {sc[1].get('props')}"
+        assert not mon(sc[2]), f"Figur hält die Schere: kein Geldtisch daneben: {sc[2].get('props')}"
+        for sc_ in sc:
+            frame(sc_, cast)
+    check("Prüfung 28.11.: Rubrik-Gerüst ist kein doppeltes Thema, Geldtisch im Barbershop/Friseursalon steht frei", _pruef2811)
     print(f"{count[0]} Prüfungen, {len(errors)} Fehler")
     import collections
     for line, n in collections.Counter(e.strip().splitlines()[-1] + "  @ " + e.strip().splitlines()[-3].strip()[:90] for e in errors).most_common(30):

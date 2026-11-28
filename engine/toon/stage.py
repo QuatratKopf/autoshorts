@@ -2653,6 +2653,7 @@ def direct(scenes, times, topic="", style="", look=""):
     _mirror_story(scenes, topic, main_id)
     _mirror_msg(scenes, topic, style, main_id)
     _fridge_open(scenes)
+    _studio_money(scenes)
     return scenes
 
 
@@ -5841,6 +5842,34 @@ def _studio_story(scenes, topic=""):
                 elif rp == "hairsalon" and _re.search(r"\bföhn|\bstyl", low) and not _re.search(r"\bschneide|\bschnitt\b|haarschnitt", low):
                     tool = "hairdryer"
                 a["hold"] = tool                          # das Werkzeug in der Hand statt am Boden
+
+
+def _studio_money(scenes):
+    """Barbershop und Friseursalon (Prüfung 28.11.2026, Plan „Barbershop gegen Friseursalon“): Der Tisch mit dem Geldstapel stand mitten im
+    Barbierstuhl bzw. im Waschplatz, bei „Davon gehen Miete, Material … ab“ gleich dreimal nebeneinander. Die festen Möbel stehen dort rechts –
+    das Geld liegt deshalb links vor der Ablage, die Figur steht rechts daneben. Hält die Figur ihr Werkzeug (Schere, Föhn, Rasiermesser),
+    ist die Arbeit das Bild: kein Geldtisch daneben, der Preis steht auf der Karte."""
+    for sc in scenes:
+        if not isinstance(sc, dict) or sc.get("shot") in ("graphic", "insert") or isinstance(backdrop(sc), dict):
+            continue
+        if places.resolve(backdrop(sc)) not in ("barbershop", "hairsalon"):
+            continue
+        key = lambda q: extras.PROP_ALIASES.get(str(q.get("type") if isinstance(q, dict) else q).lower(), str(q.get("type") if isinstance(q, dict) else q).lower())   # noqa: E731
+        props = [q for q in (sc.get("props") or [])]
+        if not any(key(q) == "money" for q in props):
+            continue
+        humans = [a for a in (sc.get("actors") or []) if isinstance(a, dict) and a.get("id") and not a.get("kind")]
+        rest = [q for q in props if key(q) != "money"]
+        if any(extras.PROP_ALIASES.get(str(a.get("hold") or "").lower(), str(a.get("hold") or "").lower()) in STUDIO_TOOLS for a in humans):
+            sc["props"] = rest
+            continue
+        sc["props"] = rest + [{"type": "money", "pos": 230}]
+        for a in humans[:1]:
+            if a.get("to"):
+                if str(a.get("to")) in ("left", "center"):
+                    a["to"] = "right"
+            elif str(a.get("pos") or "center") in ("left", "center"):
+                a["pos"] = "right"
 
 
 def _relatives(scenes):

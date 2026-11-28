@@ -203,7 +203,10 @@ def _stems(text):
                          # Frage- und Fürwörter tragen kein Thema: „Warum dieses winzige Tier …“ galt sonst als dasselbe wie „Warum du bei Musik …“ (Prüfung 17.11.2026)
                          "warum", "wieso", "weshalb", "dieses", "diese", "dieser", "diesem", "diesen", "deine", "deinem", "deinen", "deiner", "wirst", "können",
                          "kannst", "macht", "machen", "eigentlich", "manche", "manchmal", "immer", "niemals", "genau", "darum",
-                         "deshalb", "welche", "welcher", "welches", "sogar", "nicht", "keine", "einen", "einem", "einer", "eines", "dinge", "fakten", "gründe")}
+                         "deshalb", "welche", "welcher", "welches", "sogar", "nicht", "keine", "einen", "einem", "einer", "eines", "dinge", "fakten", "gründe",
+                         # Gerüst der Rubrik „Wer verdient mehr?“ ist kein Thema: „Barbershop gegen Friseursalon – wer verdient mehr?“ galt als dasselbe wie
+                         # „Spätkauf gegen Supermarkt: Wer verdient mehr?“ – das vorbereitete Drehbuch wurde verworfen (Prüfung 28.11.2026, Video 234)
+                         "gegen", "verdient", "verdienen", "verdiene", "verdienst", "erfolgreich", "erfolgreicher", "duell", "vergleich")}
 
 
 def _topic_core(topic):

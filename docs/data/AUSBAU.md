@@ -925,3 +925,12 @@ Sätze um, übernommen wird nur, was die Information des alten Satzes behält (�
   Föhnen/Styling → Föhn). Weitere Läden dieser Art: Ort zeichnen, Zeile in `STUDIOS`, Werkzeug in `STUDIO_TOOLS`.
 - Bibliothek: `akku` (Akkupack mit Ladebalken und Blitz) und `magazin` (Zeitschrift ohne Schrift) von Hand neu gezeichnet, `auto` entfernt.
 - Selbsttest: `_ausbau2811`. Offen: Kundschaft sitzt nicht im Stuhl (keine Sitz-Haltung im Barbierstuhl), Umhang und Haare-Schneiden als Bewegung fehlen.
+
+## Rubrik „Wer verdient mehr?“: Thema nicht mehr als doppelt verworfen, Geld im Laden (Prüfung 28.11.2026, Video 234)
+- `main._stems`: Das Gerüst der Rubrik („gegen“, „verdient“, „Duell“, „Vergleich“, „erfolgreicher“) trägt kein Thema. Vorher galt „Barbershop gegen
+  Friseursalon – wer verdient mehr?“ als dasselbe wie das veröffentlichte „Spätkauf gegen Supermarkt: Wer verdient mehr?“ – das vorbereitete Drehbuch
+  wurde verworfen und stattdessen ein neues Thema geschrieben (Personal Trainer gegen Fahrlehrer, komplett auf der Straße).
+- `stage._studio_money` (läuft am Ende von `stage.direct`): Im Barbershop und Friseursalon stehen die festen Möbel rechts. Der Tisch mit dem Geldstapel
+  steht deshalb links vor der Ablage (`pos` 230), die Figur rechts – vorher steckte der Tisch im Barbierstuhl bzw. Waschplatz, bei einem Folgesatz mit
+  großer Zahl („Davon gehen Miete … ab“, `_carry_thing`) dreimal nebeneinander. Hält die Figur ihr Werkzeug, entfällt der Geldtisch (der Preis steht auf der Karte).
+- Selbsttest: `_pruef2811`.
