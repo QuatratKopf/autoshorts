@@ -9044,7 +9044,7 @@
   "id": 234,
   "category": "vergleich",
   "topic": "Personal Trainer gegen Fahrlehrer – Wer verdient wirklich mehr?",
-  "status": "review",
+  "status": "discarded",
   "created": 1795860527.6984968,
   "title": "Personal Trainer vs. Fahrlehrer: Wer verdient wirklich mehr?",
   "description": "Personal Trainer oder Fahrlehrer – wer scheffelt mehr Kohle?\nDu vergleichst Stundensätze, Abzüge und den echten Nettogewinn im Alltag.\nZu wem würdest du eher gehen?",
@@ -9077,6 +9077,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-28 13:00",
-  "review_at": 1795861069.2701514
+  "review_at": 1795861069.2701514,
+  "error": "Bei der Prüfung verworfen: Prüfung: vorbereitetes Barbershop-Drehbuch fälschlich verworfen, Ersatz-Video spielt nur auf der Straße, Rechnung und Schluss ohne Sinn"
  }
 ]
