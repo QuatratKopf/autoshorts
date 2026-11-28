@@ -9122,5 +9122,47 @@
   "look": "cartoon",
   "mp4": true,
   "error": "Bei der Prüfung verworfen: Prüfung: Figur verlässt den Salon sofort (leeres Bild), Untertitel über dem Gesicht, Werkzeug am Bildrand abgeschnitten"
+ },
+ {
+  "id": 236,
+  "category": "vergleich",
+  "topic": "Barbershop gegen Friseursalon – wer verdient mehr?",
+  "status": "rendered",
+  "created": 1795864729.7884293,
+  "title": "Barbershop gegen Friseursalon: Wer verdient mehr?",
+  "description": "Barbershop oder Friseursalon – wer verdient wirklich mehr?\nEine Beispielrechnung mit Preisen, Kunden pro Tag und Arbeitszeit – der Stundenlohn dreht das Ergebnis.\nZu wem würdest du gehen: Barbershop oder Friseursalon?",
+  "hashtags": [
+   "#shorts",
+   "#barbershop",
+   "#friseur",
+   "#vergleich",
+   "#geld",
+   "#business",
+   "#viral",
+   "#fyp"
+  ],
+  "tags": [
+   "barbershop",
+   "friseur",
+   "friseursalon",
+   "wer verdient mehr",
+   "stundenlohn",
+   "umsatz",
+   "gewinn",
+   "haare schneiden",
+   "beispielrechnung"
+  ],
+  "thumb_text": "WER VERDIENT MEHR?",
+  "missing": null,
+  "cover_ms": 88960,
+  "duration": 88.9,
+  "providers": {
+   "text": "Plan (Prüfung)",
+   "voice": "gemini",
+   "images": "toon"
+  },
+  "thumb": true,
+  "look": "cartoon",
+  "mp4": true
  }
 ]
