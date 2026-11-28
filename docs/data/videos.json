@@ -9179,7 +9179,7 @@
   "id": 237,
   "category": "motivation",
   "topic": "Dein größter Gegner schaut dich jeden Morgen im Spiegel an.",
-  "status": "review",
+  "status": "discarded",
   "created": 1795878525.3818073,
   "title": "Dein größter Gegner schaut dich jeden Morgen im Spiegel an",
   "description": "Warum du täglich wertvolle Zeit verlierst und wie du deinen Fokus zurückholst.\nWas ist dein größter Zeitfresser im Alltag?",
@@ -9215,6 +9215,7 @@
   "look": "cartoon",
   "mp4": true,
   "slot": "2026-11-28 18:00",
-  "review_at": 1795878958.1977012
+  "review_at": 1795878958.1977012,
+  "error": "Bei der Prüfung verworfen: Schreibtisch-Szenen unter Wasser mit Goldfisch, leere Armbanduhr statt Handy im Bett, Schalter und Motor als Ding, kein Blick in den Spiegel"
  }
 ]
