@@ -1,5 +1,5 @@
 {
- "updated": 1795877740.2604978,
+ "updated": 1795879967.6754835,
  "enough": true,
  "counted": 50,
  "total": 52,
@@ -9,43 +9,43 @@
    "slug": "comedy",
    "name": "🤪 Comedy",
    "n": 6,
-   "avg_views": 2105,
-   "avg_likes": 45.8,
-   "like_rate": 2.18,
-   "avg_score": 2814
+   "avg_views": 2106,
+   "avg_likes": 46.2,
+   "like_rate": 2.19,
+   "avg_score": 2820
   },
   {
    "slug": "liebe",
    "name": "💕 Liebe",
    "n": 1,
-   "avg_views": 1527,
+   "avg_views": 1526,
    "avg_likes": 65.0,
    "like_rate": 4.26,
-   "avg_score": 2502
+   "avg_score": 2501
   },
   {
    "slug": "mysterien",
    "name": "🕵️ Mysterien & Rätsel",
    "n": 2,
-   "avg_views": 1813,
-   "avg_likes": 40.0,
-   "like_rate": 2.21,
-   "avg_score": 2443
+   "avg_views": 1812,
+   "avg_likes": 40.5,
+   "like_rate": 2.23,
+   "avg_score": 2450
   },
   {
    "slug": "fakten",
    "name": "💡 Fakten",
    "n": 8,
    "avg_views": 1673,
-   "avg_likes": 45.2,
-   "like_rate": 2.7,
-   "avg_score": 2363
+   "avg_likes": 45.5,
+   "like_rate": 2.72,
+   "avg_score": 2367
   },
   {
    "slug": "vergleich",
    "name": "💰 Wer verdient mehr?",
    "n": 2,
-   "avg_views": 1737,
+   "avg_views": 1736,
    "avg_likes": 37.5,
    "like_rate": 2.16,
    "avg_score": 2314
@@ -54,19 +54,19 @@
    "slug": "whatif",
    "name": "🤯 What If",
    "n": 13,
-   "avg_views": 1619,
-   "avg_likes": 44.7,
-   "like_rate": 2.76,
-   "avg_score": 2291
+   "avg_views": 1618,
+   "avg_likes": 45.2,
+   "like_rate": 2.79,
+   "avg_score": 2297
   },
   {
    "slug": "tiere",
    "name": "🐾 Tierwelt",
    "n": 4,
    "avg_views": 1456,
-   "avg_likes": 36.8,
-   "like_rate": 2.52,
-   "avg_score": 2032
+   "avg_likes": 37.0,
+   "like_rate": 2.54,
+   "avg_score": 2036
   },
   {
    "slug": "storys",
@@ -90,10 +90,10 @@
    "slug": "musik",
    "name": "🎵 Musik-Kugel",
    "n": 6,
-   "avg_views": 1233,
-   "avg_likes": 11.3,
-   "like_rate": 0.92,
-   "avg_score": 1438
+   "avg_views": 1232,
+   "avg_likes": 11.5,
+   "like_rate": 0.93,
+   "avg_score": 1440
   },
   {
    "slug": "grusel",
@@ -108,10 +108,10 @@
    "slug": "nachricht",
    "name": "📱 Unbekannte Nachricht",
    "n": 1,
-   "avg_views": 614,
+   "avg_views": 620,
    "avg_likes": 11.0,
-   "like_rate": 1.79,
-   "avg_score": 779
+   "like_rate": 1.77,
+   "avg_score": 785
   }
  ],
  "weights": {
@@ -125,9 +125,9 @@
   "nachricht": 1.2
  },
  "advice": [
-  "Stärkste Kategorie: 🤪 Comedy (Ø 2105 Aufrufe, 2.18 % Likes).",
-  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 614 Aufrufe) – kommt seltener dran.",
-  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2178 zu 1152 Punkte).",
+  "Stärkste Kategorie: 🤪 Comedy (Ø 2106 Aufrufe, 2.19 % Likes).",
+  "Schwächste Kategorie: 📱 Unbekannte Nachricht (Ø 620 Aufrufe) – kommt seltener dran.",
+  "zeitlose Themen laufen deutlich besser als Trend-Themen (Ø 2182 zu 1157 Punkte).",
   "Wörter in starken Titeln: tier, gänsehaut, vier."
  ],
  "words_good": [
@@ -138,9 +138,9 @@
  "words_bad": [
   "remix",
   "jede",
+  "klassikers",
   "scheibe",
   "eines",
-  "klassikers",
   "spiegel"
  ],
  "top": [
@@ -158,31 +158,31 @@
    "id": 46,
    "title": "Südrussische Tarantel in Deutschland: Was passiert jetzt?",
    "category": "whatif",
-   "views": 2606,
-   "likes": 56,
+   "views": 2607,
+   "likes": 57,
    "comments": 0,
    "shares": 0,
-   "score": 3446
+   "score": 3462
   },
   {
    "id": 77,
    "title": "Was wenn wir Tier-Gene kreuzen könnten?",
    "category": "whatif",
    "views": 2276,
-   "likes": 62,
+   "likes": 63,
    "comments": 0,
    "shares": 0,
-   "score": 3206
+   "score": 3221
   },
   {
    "id": 124,
    "title": "5 Dinge, die dein Gehirn tut, während du schläfst",
    "category": "fakten",
-   "views": 2063,
+   "views": 2062,
    "likes": 69,
    "comments": 0,
    "shares": 0,
-   "score": 3098
+   "score": 3097
   },
   {
    "id": 139,
@@ -200,11 +200,11 @@
    "id": 224,
    "title": "Tiefsee-Anglerfisch: Die Falle aus Licht",
    "category": "tiere",
-   "views": 406,
+   "views": 407,
    "likes": 14,
    "comments": 0,
    "shares": 0,
-   "score": 616
+   "score": 617
   },
   {
    "id": 196,
