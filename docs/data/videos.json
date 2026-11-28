@@ -9084,7 +9084,7 @@
   "id": 235,
   "category": "vergleich",
   "topic": "Barbershop gegen Friseursalon – wer verdient mehr?",
-  "status": "rendered",
+  "status": "discarded",
   "created": 1795862627.8643317,
   "title": "Barbershop gegen Friseursalon: Wer verdient mehr?",
   "description": "Barbershop oder Friseursalon – wer verdient wirklich mehr?\nEine Beispielrechnung mit Preisen, Kunden pro Tag und Arbeitszeit – der Stundenlohn dreht das Ergebnis.\nZu wem würdest du gehen: Barbershop oder Friseursalon?",
@@ -9120,6 +9120,7 @@
   },
   "thumb": true,
   "look": "cartoon",
-  "mp4": true
+  "mp4": true,
+  "error": "Bei der Prüfung verworfen: Prüfung: Figur verlässt den Salon sofort (leeres Bild), Untertitel über dem Gesicht, Werkzeug am Bildrand abgeschnitten"
  }
 ]
